@@ -218,7 +218,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 odd.label = this.helperService.apostaTipoLabelCustom(
                     odd.chave,
                     this.jogo.time_a_nome,
-                    this.jogo.time_b_nome
+                    this.jogo.time_b_nome,
+                    this.jogo.sport_id
                 );
                 odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, null, true);
 

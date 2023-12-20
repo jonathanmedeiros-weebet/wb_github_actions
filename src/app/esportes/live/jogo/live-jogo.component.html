@@ -117,7 +117,7 @@
         </div>
     </div>
     <section class="jogo" *ngIf="!showLoadingIndicator">
-        <div *ngIf="!isMobile" [ngClass]="{'indentificacao-jogo-basquete': jogo?.sport_id == 18}" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
+        <div *ngIf="!isMobile" [ngClass]="{'indentificacao-jogo-basquete': jogo?.sport_id == 48242}" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
 
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
@@ -161,14 +161,14 @@
                 <div class="aovivo-tempo">
                     <div class="aovivo-label"><i class="fa fa-circle blink_me"></i> AO VIVO</div>
                     <div class="tempo" *ngIf="jogo?.info?.tempo != 0 && jogo.sport_id == 1">{{jogo.info?.tempo}}º {{jogo.info?.minutos}}'</div>
-                    <div class="tempo" *ngIf="jogo?.info?.tempo != 0 && jogo.sport_id == 18">Q{{jogo.info?.tempo}} {{jogo.info?.minutos}}'</div>
+                    <div class="tempo" *ngIf="jogo?.info?.tempo != 0 && jogo.sport_id == 48242">Q{{jogo.info?.tempo}} {{jogo.info?.minutos}}'</div>
                     <div class="tempo" *ngIf="jogo?.info?.tempo == 0">Intervalo</div>
                 </div>
             </div>
         </div>
     </section>
     <section class="content-sports inside-event">
-        <div *ngIf="loadedFrame && (isMobile && !theSportUrl)" [ngClass]="{'indentificacao-jogo-basquete': jogo?.sport_id == 18}" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
+        <div *ngIf="loadedFrame && (isMobile && !theSportUrl)" [ngClass]="{'indentificacao-jogo-basquete': jogo?.sport_id == 48242}" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
                 <div class="nome">

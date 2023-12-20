@@ -154,16 +154,16 @@
                             </span>
                     </ng-template>
                 </div>
-                <div class="campeonatos" [hidden]="!esporteAberto(18)">
+                <div class="campeonatos" [hidden]="!esporteAberto(48242)">
                     <ng-container
-                        [ngTemplateOutlet]="campeonatoTemplate" [ngTemplateOutletContext]="{sportId: 18}">
+                        [ngTemplateOutlet]="campeonatoTemplate" [ngTemplateOutletContext]="{sportId: 48242}">
                     </ng-container>
                 </div>
             </div>
 
             <ng-template #campeonatoTemplate let-sportId="sportId">
                 <div class="campeonato" *ngFor="let campeonato of campeonatos | keyvalue:reOrder; trackBy: trackById">
-                    <ng-container *ngIf="campeonatoPermitido(campeonato.value._id)">
+                    <ng-container *ngIf="campeonato.value.sport_id === sportId campeonatoPermitido(campeonato.value._id)">
                         <div class="campeonato-header" (click)="toggleCampeonato(campeonato.value._id)">
                         <span class="column-left">
                             <span
@@ -196,7 +196,7 @@
                                         <div class="tempo" *ngIf="jogo.value.info.tempo != 0">
                                             {{jogo.value.info.minutos}}"
                                         </div>
-                                        <div class="tempo" *ngIf="sportId == 18 && jogo.value.info.tempo != 0">
+                                        <div class="tempo" *ngIf="sportId == 48242 && jogo.value.info.tempo != 0">
                                             {{jogo.value.info.tempo}}ª Parte
                                         </div>
                                     </div>

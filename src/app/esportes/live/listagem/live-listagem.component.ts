@@ -370,7 +370,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             nome: this.helperService.apostaTipoLabelCustom(
                     this.chavesMercadosPrincipais[sportId]['casa'],
                 jogo.value.time_a_nome,
-                jogo.value.time_b_nome
+                jogo.value.time_b_nome,
+                jogo.value.sport_id
             ),
             lock: false
         });

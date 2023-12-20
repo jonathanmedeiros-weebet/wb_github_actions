@@ -1,3 +1,7 @@
+.esporte:first-of-type {
+    margin-bottom: 8px;
+}
+
 .esporte-header {
     display: flex;
     align-items: center;

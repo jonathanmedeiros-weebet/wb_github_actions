@@ -169,7 +169,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
             {
                 id: 'aovivo',
                 name: this.translate.instant('submenu.aoVivo'),
-                link: '/live/futebol',
+                link: '/live',
                 icon_class: 'fa fa-circle blink_me',
                 category: 'esporte',
                 active: this.isMobile ? false : this.paramsService.getOpcoes().aovivo
