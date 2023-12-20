@@ -3155,7 +3155,7 @@ gulp.task('starbetfc.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "starbetfc.com",
-        banca: "STAR BET FC",
+        banca: "Starbet FC",
         styles: "",
     });
 });
