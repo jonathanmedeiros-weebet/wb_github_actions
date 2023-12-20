@@ -3458,3 +3458,12 @@ gulp.task('betbolt.net', function (done) {
         styles: "",
     });
 });
+
+gulp.task('lovebetz.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "lovebetz.com",
+        banca: "LOVE BETZ",
+        styles: "",
+    });
+});

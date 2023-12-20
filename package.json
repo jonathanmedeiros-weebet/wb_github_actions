@@ -363,7 +363,8 @@
         "vyperbet.com": "gulp vyperbet.com",
         "chavesbets.com": "gulp chavesbets.com",
         "sortepix.io": "gulp sortepix.io",
-        "betbolt.net": "gulp betbolt.net"
+        "betbolt.net": "gulp betbolt.net",
+        "lovebetz.com": "gulp lovebetz.com"
     },
     "private": true,
     "dependencies": {
