@@ -3155,7 +3155,7 @@ gulp.task('starbetfc.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "starbetfc.com",
-        banca: "STAR BET FC",
+        banca: "Starbet FC",
         styles: "",
     });
 });
@@ -3455,6 +3455,15 @@ gulp.task('betbolt.net', function (done) {
         server: "front4.wee.bet",
         host: "betbolt.net",
         banca: "BET BOLT",
+        styles: "",
+    });
+});
+
+gulp.task('lovebetz.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "lovebetz.com",
+        banca: "LOVE BETZ",
         styles: "",
     });
 });
