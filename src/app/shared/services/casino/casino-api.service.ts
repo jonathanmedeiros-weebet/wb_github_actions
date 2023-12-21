@@ -59,6 +59,18 @@ export class CasinoApiService {
             );
     }
 
+    getJogosLiberadosBonus() {
+        return this.http.post(String(this.central_url+"/games/jogosLiberadosBonus"),{},this.header.getRequestOptions(true))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
 
     getGameUrl(gameId, gameMode, $gameFornecedor) {
         let requestOptions;
