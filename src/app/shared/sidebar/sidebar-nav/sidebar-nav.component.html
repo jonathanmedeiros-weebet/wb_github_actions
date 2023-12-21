@@ -251,7 +251,7 @@
                                 <span class="regiao-nome">{{'geral.dadosPessoais' | translate}}</span>
                             </a>
                         </li>
-                        <li class="cambista-subitem">
+                        <li class="cambista-subitem" *ngIf="permitirQualquerChavePix">
                             <a [routerLink]="['/clientes/perfil-pix']" routerLinkActive="router-link-active">
                                 <span class="regiao-nome">{{'geral.pix' | translate}}</span>
                             </a>

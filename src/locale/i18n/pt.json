@@ -205,7 +205,8 @@
         "linkCopiado": "Link copiado!",
         "indicar": "Indicar",
         "semPermissaoAcesso": "Sem permissão de acesso",
-        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos."
+        "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos.",
+        "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente."
     },
     "dias": {
         "ontem": "Ontem",
