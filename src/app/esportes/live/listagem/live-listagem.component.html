@@ -141,8 +141,8 @@
             <div class="esporte" *ngIf="qtdJogosBasquete > 0">
                 <div class="esporte-header" (click)="toggleEsporte(48242)">
                     <span class="column-left">
-                        <span class="wbicon icon-futebol"></span>
-                        <span class="campeonato-nome">{{'submenu.basquete' | translate}}</span>
+                        <span class="wbicon icon-basquete"></span>
+                        <span class="esporte-nome">{{'submenu.basquete' | translate}}</span>
                     </span>
 
                     <span *ngIf="esporteAberto(48242); else downIcon">
@@ -163,7 +163,7 @@
 
             <ng-template #campeonatoTemplate let-sportId="sportId">
                 <div class="campeonato" *ngFor="let campeonato of campeonatos | keyvalue:reOrder; trackBy: trackById">
-                    <ng-container *ngIf="campeonato.value.sport_id === sportId campeonatoPermitido(campeonato.value._id)">
+                    <ng-container *ngIf="campeonato.value.sport_id === sportId && campeonatoPermitido(campeonato.value._id)">
                         <div class="campeonato-header" (click)="toggleCampeonato(campeonato.value._id)">
                         <span class="column-left">
                             <span
