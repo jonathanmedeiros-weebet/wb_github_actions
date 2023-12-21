@@ -3467,3 +3467,12 @@ gulp.task('lovebetz.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('winbetcassino.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "winbetcassino.com",
+        banca: "WIN BET CASSINO",
+        styles: "",
+    });
+});
