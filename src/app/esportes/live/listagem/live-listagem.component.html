@@ -237,14 +237,14 @@
 
                                     <div class="cotacoes">
                                         <ng-container *ngFor="let cotacao of cotacoesPorTipo(jogo)">
-                                            <div class="cotacao disabled"
+                                            <div class="cotacao cotacao-basquete disabled"
                                                  *ngIf="cotacao.lock || !cotacaoPermitida(cotacao.valorFinal); else noLock">
                                                 <label>{{ cotacao.nome }}</label>
                                                 <span><i class="fa fa-lock"></i></span>
                                             </div>
 
                                             <ng-template #noLock>
-                                                <div class="cotacao"
+                                                <div class="cotacao cotacao-basquete"
                                                      (click)="addCotacao(jogo.value, cotacao); $event.stopPropagation()"
                                                      [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
                                                     <label>{{ cotacao.nome }}</label>
