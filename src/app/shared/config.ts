@@ -12,6 +12,7 @@ export const config: any = {
     TIMESTAMP: _timestamp,
     HOST: _host,
     BASE_URL: `${_host}/api`,
+    LOKI_URL: 'https://loki.wee.bet',
     SHARED_URL: '//weebet.local',
     CENTER_HOST: _center,
     LIVE_HOST: _live,
