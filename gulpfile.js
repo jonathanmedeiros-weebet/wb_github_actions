@@ -3476,3 +3476,12 @@ gulp.task('winbetcassino.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostacomboy.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "apostacomboy.bet",
+        banca: "APOSTA COM BOY",
+        styles: "",
+    });
+});
