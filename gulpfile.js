@@ -3490,7 +3490,7 @@ gulp.task('playnopix.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "playnopix.com",
-        banca: "APOSTA COM BOY",
+        banca: "Play no PIX",
         styles: "",
     });
 });
