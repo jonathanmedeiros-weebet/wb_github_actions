@@ -93,7 +93,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     firstLoggedIn;
     valorGanhoPorIndicacao;
     removendoIndiqueGanheCard = false;
-    showIndiqueGanheCard = false;
     messageConnection;
     isConnected = true;
     isDemo = location.host === 'demo.wee.bet';
@@ -255,9 +254,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             }
         });
 
-        this.showIndiqueGanheCard = this.indiqueGanheHabilitado && (!this.isLoggedIn || (this.isCliente)) && !this.activeGameCassinoMobile();
-
-        if (this.showIndiqueGanheCard) {
+        if (this.indiqueGanheHabilitado && (!this.isLoggedIn || this.isCliente) && !this.activeGameCassinoMobile()) {
             this.layoutService.changeIndiqueGanheCardHeight(37);
         }
     }
