@@ -3476,3 +3476,21 @@ gulp.task('winbetcassino.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostacomboy.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "apostacomboy.bet",
+        banca: "APOSTA COM BOY",
+        styles: "",
+    });
+});
+
+gulp.task('playnopix.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "playnopix.com",
+        banca: "Play no PIX",
+        styles: "",
+    });
+});

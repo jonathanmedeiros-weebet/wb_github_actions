@@ -365,7 +365,9 @@
         "sortepix.tv": "gulp sortepix.tv",
         "betbolt.net": "gulp betbolt.net",
         "lovebetz.com": "gulp lovebetz.com",
-        "winbetcassino.com": "gulp winbetcassino.com"
+        "winbetcassino.com": "gulp winbetcassino.com",
+        "apostacomboy.bet": "gulp apostacomboy.bet",
+        "playnopix.com": "gulp playnopix.com"
     },
     "private": true,
     "dependencies": {
