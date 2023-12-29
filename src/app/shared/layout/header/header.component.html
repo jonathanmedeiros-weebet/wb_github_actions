@@ -20,9 +20,9 @@
 <div class="indique-ganhe-card" #indiqueGanheCard *ngIf="showIndiqueGanheCard">
     <div class="indique-ganhe-card-content">
         {{'indique_ganhe.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
-        <a (click)="isConnected && redirectIndiqueGanhe()" 
-            (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()" 
-            (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()" 
+        <a (click)="isConnected && redirectIndiqueGanhe()"
+            (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()"
+            (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()"
             class="btn btn-indique-ganhe-card"
         >{{'indique_ganhe.indicar' | translate}}</a>
     </div>
@@ -70,7 +70,7 @@
                         <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
                         <span class="saldo-usuario">
                             <i class="fa olhinho" style="margin-right: 8px;" (click)="alternarExibirSaldo($event)" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
-                            <span id="olhinho" *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
+                            <span id="olhinho" *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldoMaisBonus | currency }}</span>
                             <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                         </span>
                     </div>
