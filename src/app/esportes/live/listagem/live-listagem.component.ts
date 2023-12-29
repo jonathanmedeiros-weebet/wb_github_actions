@@ -34,7 +34,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     mobileScreen = false;
     term = '';
     itens;
-    esportesAbertos = [1, 48242];
+    esportesAbertos = [48242];
     qtdJogosFutebol = 0;
     qtdJogosBasquete = 0;
 
@@ -222,7 +222,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     }
                 }
 
-                if (jogo.sport_id === 48242 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
+                if (jogo.sport_id === 48242 && jogo.info.minutos === 0 && jogo.info.tempo == 'fim de jogo') {
                     valido = false;
                 }
 
