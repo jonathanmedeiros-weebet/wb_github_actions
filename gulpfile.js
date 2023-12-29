@@ -3494,3 +3494,12 @@ gulp.task('playnopix.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('superesportiva.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "superesportiva.com",
+        banca: "SUPER ESPORTIVA",
+        styles: "",
+    });
+});
