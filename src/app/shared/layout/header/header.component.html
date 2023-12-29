@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div class="indique-ganhe-card" #indiqueGanheCard *ngIf="showIndiqueGanheCard">
+<div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente) && !activeGameCassinoMobile()">
     <div class="indique-ganhe-card-content">
         {{'geral.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
         <a (click)="isConnected && redirectIndiqueGanhe()"
