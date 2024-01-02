@@ -688,15 +688,6 @@ gulp.task('primesoccer.app', function (done) {
     });
 });
 
-gulp.task('betshow.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "betshow.wee.bet",
-        banca: "BET SHOW",
-        styles: "",
-    });
-});
-
 gulp.task('primosbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1740,15 +1731,6 @@ gulp.task('lfbets.io', function (done) {
     });
 });
 
-gulp.task('generalbet.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "generalbet.net",
-        banca: "GENERAL BET",
-        styles: "",
-    });
-});
-
 gulp.task('vemprabet.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2734,15 +2716,6 @@ gulp.task('jbnacional.bet', function (done) {
         server: "front5.wee.bet",
         host: "jbnacional.bet",
         banca: "JB NACIONAL",
-        styles: "",
-    });
-});
-
-gulp.task('leaoesporte.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "leaoesporte.bet",
-        banca: "LEÃO ESPORTE",
         styles: "",
     });
 });
