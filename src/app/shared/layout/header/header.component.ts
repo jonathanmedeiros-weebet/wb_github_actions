@@ -224,6 +224,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
+ 
+        if(this.mostrarSaldo == null){
+            localStorage.setItem('exibirSaldo', 'true');
+            this.mostrarSaldo = 'true';
+        }
 
         this.connectionCheck.onlineStatus$.subscribe((isOnline) => {
             let element = this.host.nativeElement.querySelector('.info-connection-card');
