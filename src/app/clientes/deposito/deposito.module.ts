@@ -8,16 +8,23 @@ import {DepositoPixComponent, NgbdModalContent} from './pix/deposito-pix.compone
 import {DepositoWhatsappComponent} from './whatsapp/deposito-whatsapp.component';
 import {NgxCurrencyModule} from 'ngx-currency';
 import { ClipboardModule } from 'ngx-clipboard';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 
 @NgModule({
-    declarations: [DepositoComponent, DepositoPixComponent, DepositoWhatsappComponent, NgbdModalContent],
+    declarations: [
+        DepositoComponent,
+        DepositoPixComponent,
+        DepositoWhatsappComponent,
+        NgbdModalContent
+    ],
     imports: [
         SharedModule,
         CommonModule,
         DepositoRoutingModule,
         NgxCurrencyModule,
-        ClipboardModule
+        ClipboardModule,
+        NgxQRCodeModule
     ]
 })
 export class DepositoModule {
