@@ -380,6 +380,7 @@
         "@ngx-translate/http-loader": "^7.0.0",
         "@popperjs/core": "^2.11.8",
         "@swimlane/ngx-charts": "^20.1.0",
+        "@techiediaries/ngx-qrcode": "^9.1.0",
         "angular-code-input": "^1.6.0",
         "angular-svg-icon": "^7.2.0",
         "bootstrap": "^5.2.3",
