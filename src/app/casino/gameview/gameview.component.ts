@@ -6,6 +6,9 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {AuthService, MenuFooterService, MessageService} from '../../services';
 import {interval} from 'rxjs';
+import {RolloverComponent} from "../../clientes/rollover/rollover.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
 
 
 @Component({
@@ -38,6 +41,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private auth: AuthService,
         private menuFooterService: MenuFooterService,
         private messageService: MessageService,
+        private modalService: NgbModal,
         @Inject(DOCUMENT) private document: any
     ) {
     }
@@ -106,7 +110,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
-            this.router.navigate(['casino/c/wall/live']);
+            this.router.navigate(['casino/cl/wall-live/todos']);
         } else if(this.gameFornecedor === 'galaxsys'){
             this.router.navigate(['casino/c/wall/todos']);
         }else{
@@ -177,7 +181,21 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     closeSessionGameTomHorn() {
-        this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {},error => {});
+        this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {
+        }, error => {
+        });
+    }
+
+    abrirRollovers() {
+        this.modalService.open(RolloverComponent);
+    }
+
+    exibirJogosLiberadosBonus() {
+        this.location.back();
+        this.modalService.open(JogosLiberadosBonusModalComponent, {
+            centered: true,
+            size: 'xl',
+        });
     }
 
     getMobileOperatingSystem() {

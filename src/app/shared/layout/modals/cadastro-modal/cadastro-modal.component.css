@@ -102,10 +102,6 @@ a.link-termos-politica {
     opacity: 65%;
 }
 
-img{
-    width:100%;
-}
-
 .content-modal-ativacao{
     display: flex;
     flex-direction: column;

@@ -7,6 +7,7 @@ import {
     AcumuladaoLayoutComponent,
     AuthLayoutComponent,
     CassinoLayoutComponent,
+    CassinoLiveLayoutComponent,
     DesafioLayoutComponent,
     EmptyLayoutComponent,
     LoteriaLayoutComponent,
@@ -37,6 +38,7 @@ import {
     RelatorioService,
     SorteioService
 } from '../../services';
+import { IndiqueGanheService } from '../services/clientes/indique-ganhe.service';
 import {
     ApostaEncerramentoModalComponent,
     ApostaModalComponent,
@@ -63,7 +65,8 @@ import {
     TabelaModalComponent,
     CarregamentoModalComponent,
     CompatilhamentoBilheteModal,
-    RegrasBonusModalComponent
+    RegrasBonusModalComponent,
+    JogosLiberadosBonusModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -85,6 +88,7 @@ import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SET
 import { InformativoModalComponent } from './modals/informativo-modal/informativo-modal.component';
 import { JogoService } from '../services/aposta-esportiva/jogo.service';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 @NgModule({
     imports: [
@@ -140,6 +144,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
         RegrasBonusModalComponent,
+        JogosLiberadosBonusModalComponent,
         BilheteCompartilhamentoComponent,
         AtivarCartaoModalComponent,
         ApostaEncerramentoModalComponent,
@@ -149,6 +154,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
         PagesLayoutComponent,
         PagesNoNavLayoutComponent,
         CassinoLayoutComponent,
+        CassinoLiveLayoutComponent,
         VirtuaisLayoutComponent,
         SubmenuComponent,
         LoteriaLayoutComponent,
@@ -171,7 +177,8 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
         ValidarEmailModalComponent,
         InformativoModalComponent,
         CarregamentoModalComponent,
-        CompatilhamentoBilheteModal
+        CompatilhamentoBilheteModal,
+        WelcomePageComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -186,7 +193,8 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
         BilheteAcumuladaoComponent,
         SpinnerComponent,
         BilheteEsportivoComponent,
-        BannersComponent
+        BannersComponent,
+        WelcomePageComponent
     ],
     providers: [
         ApostaEsportivaService,
@@ -200,6 +208,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
         RelatorioService,
         JogoService,
         AcumuladaoService,
+        IndiqueGanheService,
         {
             provide: RECAPTCHA_SETTINGS,
 

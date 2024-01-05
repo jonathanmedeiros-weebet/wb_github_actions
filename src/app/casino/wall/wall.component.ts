@@ -78,12 +78,12 @@ export class WallComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.blink = this.router.url.split('/')[2];
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
-        this.casinoApi.getGamesList().subscribe(response => {
+        this.casinoApi.getGamesList(false).subscribe(response => {
             this.gamesCassino = response.gameList.filter(function (game) {
                 return game.dataType !== 'VSB';
-            });;
+            });
             this.cassinoFornecedores = response.fornecedores;
-            this.gamesDestaque = this.filterDestaques(this.gamesCassino, 'populares');
+            this.gamesDestaque = response.populares;
             this.gamesSlot = this.filterDestaques(this.gamesCassino, 'slot');
             this.gamesCrash = this.filterDestaques(this.gamesCassino, 'crash');
             this.gamesRaspadinha = this.filterDestaques(this.gamesCassino, 'scratchcard');
@@ -141,10 +141,6 @@ export class WallComponent implements OnInit, AfterViewInit {
                         case 'bingo':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'bingo');
                             this.gameTitle = 'Bingo';
-                            break;
-                        case 'live':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'live');
-                            this.gameTitle = this.translate.instant('cassino.aoVivo');
                             break;
                     }
 
@@ -275,17 +271,17 @@ export class WallComponent implements OnInit, AfterViewInit {
 
             this.gamesCassinoFiltrados =  this.gameList.filter(jogo => {
                 if(this.term && this.termFornecedor){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())  && jogo.modalidade != 'populares') {
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
                         return true;
                     }
                     return false;
                 }else if(this.term){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.modalidade != 'populares') {
+                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase())) {
                         return true;
                     }
                     return false;
                 }else{
-                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase()) && jogo.modalidade != 'populares') {
+                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
                         return true;
                     }
                     return false;
@@ -366,7 +362,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
     filterModalidades(games, modalidade) {
         return games.filter(function (game) {
-            return game.category === modalidade && game.modalidade != 'populares';
+            return game.category === modalidade;
         });
     }
 

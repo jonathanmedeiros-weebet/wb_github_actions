@@ -20,7 +20,7 @@ import {
 import {NavigationExtras, Router} from '@angular/router';
 
 import {Campeonato, Jogo} from './../../../../models';
-import {BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService, JogoService} from './../../../../services';
+import {BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService, JogoService, LayoutService} from './../../../../services';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -76,6 +76,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     term = '';
     campeonatosTemp = [];
     campeonatosFiltrados = [];
+    headerHeight = 92;
 
     nomesCotacoes = [];
 
@@ -107,7 +108,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         private cd: ChangeDetectorRef,
         private jogoService: JogoService,
         private router: Router,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private layoutService: LayoutService
     ) {
     }
 
@@ -159,7 +161,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
-        this.definirAltura();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
@@ -204,6 +205,14 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             });
 
         this.getJogosDestaquesIds();
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
+            });
     }
 
     detectScrollOddsWidth() {
@@ -431,7 +440,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     definirAltura() {
-        const headerHeight = this.mobileScreen ? 161 : 132;
+        const headerHeight = this.mobileScreen ? 161 : this.headerHeight;
         const altura = window.innerHeight - headerHeight;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);

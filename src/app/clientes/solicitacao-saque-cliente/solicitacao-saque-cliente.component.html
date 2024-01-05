@@ -57,7 +57,7 @@
                             <div class="col col-sm-3 saque-pix">
                                 <div class="form-group group-buttons">
                                     <button type="submit" class="btn btn-custom solicitar-saque" [ngClass]="{'btn-block': isMobile}"
-                                            [disabled]="submitting">
+                                            [disabled]="submitting"  [disabled]="disableButtom">
                                         {{'geral.sacar' | translate}}
                                     </button>
                                 </div>
@@ -85,7 +85,7 @@
                     <th>{{'geral.detalhes' | translate}}</th>
                     <th>{{'geral.status' | translate}}</th>
                     <th>{{'geral.valor' | translate}}</th>
-                    <th></th>
+                    <!-- <th></th> -->
                 </tr>
                 </thead>
                 <tbody>
@@ -99,11 +99,11 @@
                           </a>
                         </td>
                         <td>{{ saque.valor | currency}}</td>
-                        <td>
+                        <!-- <td>
                             <a class="btn-cancelar" *ngIf="exibirCancelarSolicitacaoSaque(saque)" (click)="cancelarSolicitacaoSaque(saque.id)">
                                 <i class="fa fa-trash"></i>
                             </a>
-                        </td>
+                        </td> -->
                     </tr>
                 </tbody>
             </table>

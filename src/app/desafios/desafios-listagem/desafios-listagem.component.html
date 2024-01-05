@@ -98,7 +98,7 @@
                                              (click)="addCotacao(desafio, odd)">
                                             <div
                                                 class="inner-odd odd-enabled {{itensSelecionados[odd.id] ? 'selecionado' : ''}}">
-                                            <span class="nome">
+                                            <span class="nome" [ngStyle]="{'padding-right': '10px'}">
                                                 {{odd.nome}}
                                             </span>
                                                 <span class="valor">

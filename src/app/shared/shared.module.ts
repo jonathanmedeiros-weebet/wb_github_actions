@@ -15,7 +15,6 @@ import {TranslateModule} from '@ngx-translate/core';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-
         LayoutModule,
         UtilsModule,
         TranslateModule

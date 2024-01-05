@@ -50,8 +50,7 @@
                             <th style="width:20%">Progresso</th>
                             <th class="custom-td">Valor Gasto</th>
                             <th class="custom-td">Valor Meta</th>
-                            <th class="custom-td">Cotação Min. (Aposta Simples)</th>
-                            <th class="custom-td">Cotação Min. (Aposta Múltipla)</th>
+                            <th class="custom-td">Cotação Min. Aposta</th>
                             <th class="custom-td">Modalidade</th>
                             <th class="custom-td">Tipo</th>
                             <th class="custom-td">Vencimento</th>
@@ -99,10 +98,7 @@
                                     {{rollover.valorMeta | currency}}
                                 </td>
                                 <td class="custom-td">
-                                    {{rollover.cotacaoMinSimples}}
-                                </td>
-                                <td class="custom-td">
-                                    {{rollover.cotacaoMinMultipla}}
+                                    {{rollover.cotacaoMinSimples}} (Simples) / {{rollover.cotacaoMinMultipla}} (Múltipla)
                                 </td>
                                 <td class="custom-td">
                                     {{rollover.modalidade}}
