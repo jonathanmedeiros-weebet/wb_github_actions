@@ -89,6 +89,16 @@ export class FormatarFornecedoresPipe implements PipeTransform {
             case 'aviatrix':
                 fornecedorFormatado = 'Aviatrix';
                 break;
+            case 'vivogaming':
+                fornecedorFormatado = 'Vivo Gaming';
+                break;
+            case 'absolutelivegaming':
+                fornecedorFormatado = 'Absolute Live Gaming';
+                break;
+            case 'pascal':
+                fornecedorFormatado = 'Pascal';
+                break
+
         }
         return fornecedorFormatado;
     }
