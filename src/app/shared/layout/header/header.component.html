@@ -569,6 +569,14 @@
             </div>
         </ng-container>
         <ng-template #loggedOut>
+            <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo) && (!isLoggedIn || isCliente)">
+                <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
+                    <i class="fa-solid fa-headset"></i>
+                </a>
+                <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                    <i class="fa-solid fa-headset"></i>
+                </a>
+            </div>
             <div class="menu-conta dropdown">
                 <a class="btn btn-custom w-130 mr-4" (click)="abrirCadastro()" *ngIf="modoClienteAtivo">
                     {{'geral.registreSe' | translate | uppercase}}
