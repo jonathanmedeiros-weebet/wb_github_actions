@@ -306,25 +306,22 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     filtrarFornecedor() {
         if (this.termFornecedorMobile) {
-            if(!this.cassinoFornecedoresTemp.length){
+            if (!this.cassinoFornecedoresTemp.length) {
                 this.cassinoFornecedoresTemp = this.cassinoFornecedores;
-            }else{
+            } else {
                 this.cassinoFornecedores = this.cassinoFornecedoresTemp;
             }
 
-            this.cassinoFornecedoresFiltrados =  this.cassinoFornecedores.filter(fornecedor => {
-              if(this.termFornecedorMobile){
-                    if (fornecedor.gameFornecedor.includes(this.termFornecedorMobile)) {
-                        return true;
-                    }
-                    return false;
+            this.cassinoFornecedoresFiltrados = this.cassinoFornecedores.filter(fornecedor => {
+                if (this.termFornecedorMobile) {
+                    return fornecedor.gameFornecedor.includes(this.termFornecedorMobile.toLowerCase()) ||
+                        fornecedor.gameFornecedorExibicao.toLowerCase().includes(this.termFornecedorMobile.toLowerCase());
                 }
             }).map(fornecedor => Object.assign({}, fornecedor));
 
             this.cassinoFornecedores = this.cassinoFornecedoresFiltrados;
-
         } else {
-            if (this.cassinoFornecedoresTemp.length)   {
+            if (this.cassinoFornecedoresTemp.length) {
                 this.cassinoFornecedores = this.cassinoFornecedoresTemp;
                 this.cassinoFornecedoresTemp = [];
                 this.cassinoFornecedoresFiltrados = [];
@@ -345,7 +342,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     }
 
-    openFiltroFornecedores(){
+    openFiltroFornecedores() {
         this.modalFiltro = this.modalService.open(
             this.fornecedorModal,
             {
