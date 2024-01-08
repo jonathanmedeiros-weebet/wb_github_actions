@@ -29,6 +29,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
     showLoadingIndicator = true;
     isCliente;
     sessionId = '';
+    isMobile = 0;
+    removerBotaoFullscreen = false;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -45,6 +47,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        
+        if (window.innerWidth <= 1024) {
+            this.isMobile = 1;
+        }
+
+        if(this.getMobileOperatingSystem() == 'ios'){
+            this.removerBotaoFullscreen = true;
+        }
+
         this.elem = document.documentElement;
         this.mobileScreen = window.innerWidth <= 1024;
         this.fullscreen = false;
@@ -71,10 +82,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 });
         });
 
+        if(this.gameFornecedor === 'galaxsys'){
+            this.appendScriptGalaxsys();
+        }
     }
 
     loadGame() {
-        this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor)
+        this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
@@ -97,7 +111,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
             this.router.navigate(['casino/cl/wall-live/todos']);
-        } else if(this.gameFornecedor === 'pascal'){
+        } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){
             this.router.navigate(['casino/c/wall/todos']);
         }else{
             this.location.back();
@@ -117,6 +131,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(false);
         } else {
             this.menuFooterService.setIsPagina(true);
+        }
+
+        let scriptGalaxsys= document.getElementById("galaxsysScript");
+
+        if(scriptGalaxsys){
+            scriptGalaxsys.remove();
         }
     }
 
@@ -177,5 +197,28 @@ export class GameviewComponent implements OnInit, OnDestroy {
             centered: true,
             size: 'xl',
         });
+    }
+
+    getMobileOperatingSystem() {
+        let userAgent = navigator.userAgent ;
+        
+        if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ){
+            return 'ios';
+        }
+        else if( userAgent.match( /Android/i ) ){
+            return 'android';
+        }
+        else{
+            return 'unknown';
+        }
+    }
+
+    appendScriptGalaxsys(){
+        let body = document.getElementsByTagName('body')[0];
+        let bodyScript = document.createElement('script');
+
+        bodyScript.append('window.addEventListener("message",(e) => {const { type, mainDomain } = e.data; if(type === "rgs-backToHome") {window.location.href = mainDomain;}});');
+        bodyScript.id = 'galaxsysScript';
+        body.appendChild(bodyScript);
     }
 }
