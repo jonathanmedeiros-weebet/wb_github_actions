@@ -359,7 +359,8 @@
         "apostacomboy.bet": "gulp apostacomboy.bet",
         "playnopix.com": "gulp playnopix.com",
         "superesportiva.com": "gulp superesportiva.com",
-        "bet10.bet": "gulp bet10.bet"
+        "bet10.bet": "gulp bet10.bet",
+        "shotting.bet": "gulp shotting.bet"
     },
     "private": true,
     "dependencies": {

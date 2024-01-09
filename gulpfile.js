@@ -3421,3 +3421,12 @@ gulp.task('bet10.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('shotting.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "shotting.bet",
+        banca: "SHOTTING.BET",
+        styles: "",
+    });
+});
