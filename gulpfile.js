@@ -3412,3 +3412,21 @@ gulp.task('superesportiva.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet10.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "bet10.bet",
+        banca: "BET 10",
+        styles: "",
+    });
+});
+
+gulp.task('shotting.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "shotting.bet",
+        banca: "SHOTTING.BET",
+        styles: "",
+    });
+});
