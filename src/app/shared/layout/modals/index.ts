@@ -25,3 +25,4 @@ export { ValidarEmailModalComponent } from './validar-email-modal/validar-email-
 export { CarregamentoModalComponent } from './carregamento-modal/carregamento-modal.component';
 export { CompatilhamentoBilheteModal } from './compartilhamento-bilhete-modal/compartilhamento-bilhete-modal.component';
 export { RegrasBonusModalComponent } from './regras-bonus-modal/regras-bonus-modal.component';
+export { JogosLiberadosBonusModalComponent } from './jogos-liberados-bonus-modal/jogos-liberados-bonus-modal.component';

@@ -55,6 +55,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         saldo: 0,
         credito: 0,
         bonus: 0,
+        saldoMaisBonus: 0,
         bonusModalidade: 'nenhum'
     };
     usuario = new Usuario();
@@ -311,7 +312,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.auth.getPosicaoFinanceira()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                posicaoFinanceira => {
+                    this.posicaoFinanceira = posicaoFinanceira;
+                    this.posicaoFinanceira.saldoMaisBonus = posicaoFinanceira.saldo;
+                    if (this.isCliente) {
+                        this.posicaoFinanceira.saldoMaisBonus = Number(posicaoFinanceira.saldo) + Number(posicaoFinanceira.bonus);
+                    }
+                },
                 error => {
                     if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
                         this.auth.logout();
