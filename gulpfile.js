@@ -3430,3 +3430,12 @@ gulp.task('shotting.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('luckybets.vip', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "luckybets.vip",
+        banca: "LUCKYBETS",
+        styles: "",
+    });
+});

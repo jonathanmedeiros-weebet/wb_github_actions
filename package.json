@@ -360,7 +360,8 @@
         "playnopix.com": "gulp playnopix.com",
         "superesportiva.com": "gulp superesportiva.com",
         "bet10.bet": "gulp bet10.bet",
-        "shotting.bet": "gulp shotting.bet"
+        "shotting.bet": "gulp shotting.bet",
+        "luckybets.vip": "gulp luckybets.vip"
     },
     "private": true,
     "dependencies": {
