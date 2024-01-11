@@ -78,7 +78,7 @@ export class CasinoApiService {
         }
 
         if($gameFornecedor == 'parlaybay'){
-            return this.http.get(`${config.HOST}/api-cassino/parlaybay/loginGame`, requestOptions).pipe(
+            return this.http.get(`${config.HOST}/dcs/loginGame`, requestOptions).pipe(
                 map((res: any) => {
                     return res;
                 }),
