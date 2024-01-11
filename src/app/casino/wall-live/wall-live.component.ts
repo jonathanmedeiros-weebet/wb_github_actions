@@ -107,27 +107,27 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
                 switch (this.gameType) {
                     case 'blackjack':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'blackjack');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = "Blackjack";
                         break;
                     case 'baccarat':
                         this.gameList =this.filterModalidades(this.gamesCassino, 'baccarat');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = "Baccarat";
                         break;
                     case 'poker':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'poker');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = "Poker";
                         break;
                     case 'gameshow':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'gameshow');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = "Game Show";
                         break;
                     case 'roleta':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = this.translate.instant('cassino.roleta');
                         break;
                 }
@@ -357,8 +357,8 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
         this.qtdItens += 3;
     }
 
-    setFiltroFornecedores(games: any[], fornecedores: any[]) {
+    setFiltroFornecedores(games: any[]) {
         const fornecedoresSet = new Set(games.map(game => game.fornecedor));
-        return fornecedores.filter(fornecedor => fornecedoresSet.has(fornecedor.gameFornecedor));
+        return this.cassinoFornecedores.filter(fornecedor => fornecedoresSet.has(fornecedor.gameFornecedor));
     }
 }

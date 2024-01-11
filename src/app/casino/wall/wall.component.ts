@@ -122,32 +122,32 @@ export class WallComponent implements OnInit, AfterViewInit {
                     switch (this.gameType) {
                         case 'slot':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'slot');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.slot');
                             break;
                         case 'crash':
                             this.gameList =this.filterModalidades(this.gamesCassino, 'crash');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.crash');
                             break;
                         case 'roleta':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.roleta');
                             break;
                         case 'raspadinha':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'scratchcard');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.raspadinha');
                             break;
                         case 'mesa':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'table');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.mesa');
                             break;
                         case 'bingo':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'bingo');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
+                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = 'Bingo';
                             break;
                     }
@@ -376,8 +376,8 @@ export class WallComponent implements OnInit, AfterViewInit {
        this.qtdItens += 3;
     }
 
-    setFiltroFornecedores(games: any[], fornecedores: any[]) {
+    setFiltroFornecedores(games: any[]) {
         const fornecedoresSet = new Set(games.map(game => game.fornecedor));
-        return fornecedores.filter(fornecedor => fornecedoresSet.has(fornecedor.gameFornecedor));
+        return this.cassinoFornecedores.filter(fornecedor => fornecedoresSet.has(fornecedor.gameFornecedor));
     }
 }
