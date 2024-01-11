@@ -71,13 +71,21 @@ export class CasinoApiService {
         queryParams['lobbyUrl'] = `https://${config.SHARED_URL}/casino/wall`;
         queryParams['fornecedor'] = $gameFornecedor;
 
+        let isMobile = window.innerWidth < 1025;
+
+        if(isMobile){
+            queryParams['plataforma'] = 'mobile';
+        } else {
+            queryParams['plataforma'] = 'pc';
+        }
+
         if (queryParams) {
             requestOptions = this.header.getRequestOptions(true, queryParams);
         } else {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        if($gameFornecedor == 'parlaybay'){
+        if($gameFornecedor == 'parlaybay' || $gameFornecedor == 'evoplay'){
             return this.http.get(`${config.HOST}/dcs/loginGame`, requestOptions).pipe(
                 map((res: any) => {
                     return res;
