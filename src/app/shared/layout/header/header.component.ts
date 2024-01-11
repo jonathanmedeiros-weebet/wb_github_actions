@@ -511,4 +511,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     btnCardOnMouseOut() {
         this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
     }
+
+    iniciarParlaybay(){
+        if(this.isLoggedIn){
+            this.router.navigate(['/casino/pb/play/real/170000/parlaybay']);
+        } else {
+            this.abrirLogin();
+        }
+    }
 }
