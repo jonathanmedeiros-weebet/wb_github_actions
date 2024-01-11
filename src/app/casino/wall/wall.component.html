@@ -35,7 +35,7 @@
             <div class="search-box box-web">
                 <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
                     <option value="" selected>Todos os Provedores</option>
-                    <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of cassinoFornecedores">
+                    <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of filtroCassinoFornecedores">
                         {{fornecedor.gameFornecedorExibicao}}
                     </option>
                 </select>

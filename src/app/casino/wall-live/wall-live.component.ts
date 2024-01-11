@@ -32,6 +32,7 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
     isMobile = false;
     salsaCassino;
     cassinoFornecedores;
+    filtroCassinoFornecedores;
     isHomeCassino = true;
     gameList: GameCasino[];
     gameAllList: GameCasino[];
@@ -98,6 +99,7 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
                 if (this.isHomeCassino) {
                     this.gameList =  this.gamesCassino;
                     this.gameTitle = this.translate.instant('geral.todos');
+                    this.filtroCassinoFornecedores = this.cassinoFornecedores;
                 }else{
                     this.qtdItens = 20;
                 }
@@ -105,22 +107,27 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
                 switch (this.gameType) {
                     case 'blackjack':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'blackjack');
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
                         this.gameTitle = "Blackjack";
                         break;
                     case 'baccarat':
                         this.gameList =this.filterModalidades(this.gamesCassino, 'baccarat');
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
                         this.gameTitle = "Baccarat";
                         break;
                     case 'poker':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'poker');
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
                         this.gameTitle = "Poker";
                         break;
                     case 'gameshow':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'gameshow');
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
                         this.gameTitle = "Game Show";
                         break;
                     case 'roleta':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
+                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList, this.cassinoFornecedores);
                         this.gameTitle = this.translate.instant('cassino.roleta');
                         break;
                 }
@@ -348,5 +355,10 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
 
     exibirMais() {
         this.qtdItens += 3;
+    }
+
+    setFiltroFornecedores(games: any[], fornecedores: any[]) {
+        const fornecedoresSet = new Set(games.map(game => game.fornecedor));
+        return fornecedores.filter(fornecedor => fornecedoresSet.has(fornecedor.gameFornecedor));
     }
 }
