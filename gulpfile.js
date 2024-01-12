@@ -3442,7 +3442,7 @@ gulp.task('luckybets.vip', function (done) {
 
 gulp.task('decolar.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front2.wee.bet",
         host: "decolar.bet",
         banca: "DECOLAR.BET",
         styles: "",
