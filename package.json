@@ -361,7 +361,8 @@
         "superesportiva.com": "gulp superesportiva.com",
         "bet10.bet": "gulp bet10.bet",
         "shotting.bet": "gulp shotting.bet",
-        "luckybets.vip": "gulp luckybets.vip"
+        "luckybets.vip": "gulp luckybets.vip",
+        "decolar.bet": "gulp decolar.bet"
     },
     "private": true,
     "dependencies": {

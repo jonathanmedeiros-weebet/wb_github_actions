@@ -3439,3 +3439,12 @@ gulp.task('luckybets.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('decolar.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "decolar.bet",
+        banca: "DECOLAR.BET",
+        styles: "",
+    });
+});
