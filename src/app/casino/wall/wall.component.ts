@@ -114,44 +114,38 @@ export class WallComponent implements OnInit, AfterViewInit {
                     if (this.isHomeCassino) {
                         this.gameList =  this.gamesCassino;
                         this.gameTitle = this.translate.instant('geral.todos');
-                        this.filtroCassinoFornecedores = this.cassinoFornecedores;
-                    }else{
+                    } else {
                         this.qtdItens = 20;
                     }
                     this.listagemJogos.nativeElement.scrollTo( 0, 0 );
                     switch (this.gameType) {
                         case 'slot':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'slot');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.slot');
                             break;
                         case 'crash':
                             this.gameList =this.filterModalidades(this.gamesCassino, 'crash');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.crash');
                             break;
                         case 'roleta':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.roleta');
                             break;
                         case 'raspadinha':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'scratchcard');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.raspadinha');
                             break;
                         case 'mesa':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'table');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = this.translate.instant('cassino.mesa');
                             break;
                         case 'bingo':
                             this.gameList = this.filterModalidades(this.gamesCassino, 'bingo');
-                            this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                             this.gameTitle = 'Bingo';
                             break;
                     }
 
+                    this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                     this.gamesCassinoTemp = [];
                     this.gamesCassinoFiltrados = [];
                     this.term = '';

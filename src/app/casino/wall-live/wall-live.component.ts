@@ -99,39 +99,34 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
                 if (this.isHomeCassino) {
                     this.gameList =  this.gamesCassino;
                     this.gameTitle = this.translate.instant('geral.todos');
-                    this.filtroCassinoFornecedores = this.cassinoFornecedores;
-                }else{
+                } else {
                     this.qtdItens = 20;
                 }
                 this.listagemJogos.nativeElement.scrollTo( 0, 0 );
                 switch (this.gameType) {
                     case 'blackjack':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'blackjack');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = "Blackjack";
                         break;
                     case 'baccarat':
                         this.gameList =this.filterModalidades(this.gamesCassino, 'baccarat');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = "Baccarat";
                         break;
                     case 'poker':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'poker');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = "Poker";
                         break;
                     case 'gameshow':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'gameshow');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = "Game Show";
                         break;
                     case 'roleta':
                         this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
-                        this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                         this.gameTitle = this.translate.instant('cassino.roleta');
                         break;
                 }
 
+                this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                 this.gamesCassinoTemp = [];
                 this.gamesCassinoFiltrados = [];
                 this.term = '';
