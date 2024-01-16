@@ -3455,3 +3455,12 @@ gulp.task('brasilbet.store', function (done) {
         styles: "",
     });
 });
+
+gulp.task('betstar.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betstar.vip",
+        banca: "BETSTAR",
+        styles: "",
+    });
+});
