@@ -362,7 +362,8 @@
         "bet10.bet": "gulp bet10.bet",
         "shooting.bet": "gulp shooting.bet",
         "luckybets.vip": "gulp luckybets.vip",
-        "decolar.bet": "gulp decolar.bet"
+        "decolar.bet": "gulp decolar.bet",
+        "brasilbet.store": "gulp brasilbet.store"
     },
     "private": true,
     "dependencies": {

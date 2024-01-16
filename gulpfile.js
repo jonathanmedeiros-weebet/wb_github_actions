@@ -3446,3 +3446,12 @@ gulp.task('decolar.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('brasilbet.store', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "brasilbet.store",
+        banca: "BRASIL BET",
+        styles: "",
+    });
+});
