@@ -6,12 +6,10 @@
     position: absolute;
     min-height: 100vh;
 }
-
 .wrap-stick {
     padding: 20px 15px;
     margin: 0;
-}
-  
+} 
 #promocoes-listagem{
     height: calc(100vh - 92px);
     overflow: scroll;
@@ -19,7 +17,6 @@
     display: flex;
     flex-direction: column;
 }
-
 .loading-listagem .item-sample {
     border-radius: 5px;
     display: flex;
@@ -27,19 +24,16 @@
     flex-wrap: wrap;
     gap: 12px;
 }
-
 .item-sample-text{
     height: 15px;
     width: 400px; 
 }
-
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 16px;
 }
-
 .custom-card {
     width: 431px;
     height: 388px;
@@ -47,31 +41,26 @@
     margin-left: 16px;
     position: relative;
 }
-
 .custom-card img {
     width: 100%;
     height: auto;
     object-fit: cover;
-    max-height: 293px;
+    max-height: 205px;
     max-width: 100%;
 }
-
 .custom-card .card-body {
     padding: 18px;
     background-color: var(--header);
-    height: 45%;
+    height: 55%;
     display: flex;
     flex-direction: column;
 }
-
 .card-title {
     font-size: 18px;
 }
-
 .info-promotions {
-    margin: 32px auto 32px 16px;
+    margin: 32px auto 18px 16px;
 }
-
 .logo-game-background{
     position: absolute;
     width: 20%;
@@ -104,6 +93,7 @@
     .custom-card {
         width: 352px;
         height: 319px;
+        margin: 10px 16px 30px 16px;
     }
 }
 
@@ -111,15 +101,15 @@
     .custom-card {
         width: 352px;
         height: 325px;
-        margin-bottom: 12px;
+        margin-bottom: 6%;
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
     .custom-card {
         width: calc(100% - 20px);
         margin-left: 0;
-        margin: 10px 16px 16px 16px;
+        margin: 10px 16px 60px 16px;
     }
 
     .cards-container {
@@ -132,5 +122,12 @@
 
     .ssc-square {
         width: 400px;
+    }
+}
+
+@media (max-width: 360px) {
+    .custom-card img {
+        height: 180px;
+        max-height: 300px;
     }
 }

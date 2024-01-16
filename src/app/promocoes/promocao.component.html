@@ -13,7 +13,7 @@
         <h4><b>{{'menu.promocao' | translate}}</b></h4>
         <p>Aqui você encontrará todas as promoções ativas no momento em nossa plataforma</p>
     </div>
-    <div class="cards-container" style="margin-bottom: 30px;">
+    <div class="cards-container" style="height: -webkit-fill-available;">
         <ng-container *ngFor="let promocao of promocoes">
             <div class="custom-card" (click)="goToDetails(promocao.id, true)">
                 <div class="logo-game-background">

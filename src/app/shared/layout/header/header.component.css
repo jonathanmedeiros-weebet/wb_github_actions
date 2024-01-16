@@ -605,6 +605,18 @@ body .change-theme {
     }
 }
 
+@media only screen and (max-width: 1258px) {    
+    .w-130 {
+        width: 103px;
+    }
+    .side-left[_ngcontent-bjs-c100] {
+        padding-left: 0;
+    }
+    .side-right[_ngcontent-rfx-c100] {
+        padding-right: 0;
+    }
+}
+
 .info-connection-card {
     display: block;
     position: relative;
