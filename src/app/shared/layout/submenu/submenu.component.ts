@@ -1,15 +1,16 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LayoutService } from './../../../services';
 
 @Component({
     selector: 'app-submenu',
     templateUrl: './submenu.component.html',
     styleUrls: ['./submenu.component.css'],
 })
-export class SubmenuComponent implements OnInit, AfterViewInit {
+export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() active = true;
     @Input() category = 'esporte';
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
@@ -34,11 +35,14 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         public location: Location,
         private router: Router,
         private translate: TranslateService,
-        private el: ElementRef
+        private el: ElementRef,
+        private layoutService: LayoutService
     ) {
     }
 
     ngOnInit() {
+        this.layoutService.changeSubmenuHeight(40);
+
         if (window.innerWidth > 1024) {
             this.menuWidth = window.innerWidth - 270;
             this.isMobile = false;
@@ -61,6 +65,10 @@ export class SubmenuComponent implements OnInit, AfterViewInit {
         this.checkScrollWidth();
         this.checkScrollButtons();
         this.scrollToActiveButton();
+    }
+
+    ngOnDestroy(): void {
+        this.layoutService.changeSubmenuHeight(0);
     }
 
     checkScrollWidth() {

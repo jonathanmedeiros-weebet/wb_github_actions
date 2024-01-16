@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +10,7 @@ import {
     AuthService,
     DesafioApostaService,
     DesafioBilheteService,
-    DesafioPreApostaService, MenuFooterService,
+    DesafioPreApostaService, LayoutService, MenuFooterService,
     MessageService,
     ParametrosLocaisService
 } from '../../services';
@@ -40,6 +40,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     valorFocado = false;
     modoCambista = false;
     mobileScreen;
+    headerHeight = 92;
 
     constructor(
         private apostaService: DesafioApostaService,
@@ -52,7 +53,9 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private bilheteService: DesafioBilheteService,
         private paramsService: ParametrosLocaisService,
         private modalService: NgbModal,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private layoutService: LayoutService,
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -81,7 +84,6 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.opcoes = this.paramsService.getOpcoes();
         this.apostaMinima = this.opcoes.valor_min_aposta;
 
-        this.definirAltura();
         this.subcribeItens();
         this.subscribeValor();
         this.menuFooterService.setOutraModalidade(true);
@@ -91,14 +93,24 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
             .subscribe(
                 res => this.displayPreTicker = res
             );
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
+            });
     }
 
     ngOnDestroy() {
         this.menuFooterService.setOutraModalidade(false);
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     definirAltura() {
-        const altura = window.innerHeight - 92;
+        const altura = window.innerHeight - this.headerHeight;
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }

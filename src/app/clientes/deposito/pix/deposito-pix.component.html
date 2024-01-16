@@ -27,25 +27,49 @@
             </div>
         </div>
         <div class="row mt-3" *ngIf="permitirBonusPrimeiroDeposito">
-            <div class="col col-sm-6">
+            <div class="col col-sm-6 permitirBonusPrimeiroDeposito">
                 <label class="">{{'financeiro.desejaReceberBonusPrimeiroDeposito' | translate}}</label><br>
                 <a class="btn-regras-bonus" (click)="abrirRegrasBonus()">Regras do Bônus</a>
                 <div class="buttons-container mt-3">
-                    <a *ngIf="bonusEsportivo" class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'esportivo'}" (click)="selecionarOpcaoBonus('esportivo')">
-                        <i class="radio"></i>
-                        <i class="fa-solid fa-coins" style="font-size: 20px"></i>
-                        <span style="margin-left: 5px">{{'financeiro.receberBonus' | translate}}</span>
-                    </a>
-                    <a *ngIf="bonusCassino" class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'cassino'}" (click)="selecionarOpcaoBonus('cassino')">
-                        <i class="radio"></i>
-                        <i class="fa-solid fa-coins" style="font-size: 20px"></i>
-                        <span style="margin-left: 5px">{{'financeiro.receberBonusCassino' | translate}}</span>
-                    </a>
-                    <a  class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'nenhum'}" (click)="selecionarOpcaoBonus('nenhum')">
-                        <i class="radio"></i>
-                        <i class="fa-solid fa-square-xmark" style="font-size: 20px"></i>
-                        <span style="margin-left: 5px">{{'financeiro.naoQueroBonus' | translate}}</span>
-                    </a>
+                    <div class="links-bonus">
+                        <a *ngIf="bonusEsportivo" class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'esportivo'}" (click)="selecionarOpcaoBonus('esportivo')">
+                            <div class="bonus">
+                                <i class="radio"></i>
+                            </div>
+                            <div class="icone-bonus">
+                                <i class="fa-solid fa-coins" style="font-size: 20px"></i>
+                            </div>
+                            <div>
+                                <span style="margin-left: 5px">{{'financeiro.receberBonus' | translate}}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="links-bonus" *ngIf="bonusCassino" >
+                        <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'cassino'}" (click)="selecionarOpcaoBonus('cassino')">
+                            <div class="bonus">
+                                <i class="radio"></i>
+                            </div>
+                            <div class="icone-bonus">
+                                <i class="fa-solid fa-coins" style="font-size: 20px"></i>
+                            </div>
+                            <div>
+                                <span style="margin-left: 5px">{{'financeiro.receberBonusCassino' | translate}}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="links-bonus">
+                        <a  class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'nenhum'}" (click)="selecionarOpcaoBonus('nenhum')">
+                            <div class="bonus">
+                                <i class="radio"></i>
+                            </div>
+                            <div class="icone-bonus">
+                                <i class="fa-solid fa-square-xmark" style="font-size: 20px"></i>
+                            </div>
+                            <div>
+                                <span style="margin-left: 5px">{{'financeiro.naoQueroBonus' | translate}}</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
                 <app-error-msg [control]="form.get('bonus')"></app-error-msg>
             </div>
