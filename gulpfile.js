@@ -3464,3 +3464,12 @@ gulp.task('betstar.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bet263.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet263.online",
+        banca: "BET263",
+        styles: "",
+    });
+});
