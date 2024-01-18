@@ -195,11 +195,25 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
             );
     }
 
+    redeemCommission(commissionId) {
+        const queryParams: any = {
+            'commission-id': commissionId
+        };
+
+        this.indiqueGanheService.redeemCommission(queryParams)
+            .subscribe(
+                teste => console.log(teste),
+                error => this.handleError(error)
+            );
+
+    }
+
     setStatusIcon(status) {
         switch (status) {
             case 'pago':
                 return 'fa-solid fa-gift';
             case 'pendente':
+            case 'resgate':
                 return 'fa-regular fa-clock';
             case 'anulado':
                 return 'fa-regular fa-circle-xmark';
@@ -223,6 +237,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
             case 'pago':
                 return this.translateService.instant('geral.depositado');
             case 'pendente':
+            case 'resgate':
                 return this.translateService.instant('geral.pendente');
             case 'anulado':
                 return this.translateService.instant('geral.cancelado');
@@ -234,6 +249,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
             case 'pago':
                 return "#0C9F19";
             case 'pendente':
+            case 'resgate':
                 return "#6A6868";
             case 'anulado':
                 return "#E9283B";
@@ -272,7 +288,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         response.forEach(indicacao => {
             if (indicacao.status === "pago") {
                 this.total.recebido += indicacao.valor_comissao;
-            } else if (indicacao.status === "pendente") {
+            } else if (["pendente", "resgate"].includes(indicacao.status)) {
                 this.total.pendente += indicacao.valor_comissao;
             }
         });

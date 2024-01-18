@@ -169,7 +169,14 @@
                                         'color': setAmountColor(indicado.status)
                                     }"
                                 >{{ indicado.valor_comissao | currency }}</td>
-                                <td></td>
+                                <td [ngStyle]="{'text-align': 'center'}">
+                                    <button 
+                                        class="btn btn-custom" 
+                                        type="button" 
+                                        [disabled]="indicado.status != 'resgate'"
+                                        (click)="indicado.status == 'resgate' ? redeemCommission(indicado.comissao_id) : false"
+                                        >{{'indique_ganhe.resgatar' | translate}}</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
