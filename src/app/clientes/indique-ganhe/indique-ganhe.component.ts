@@ -26,6 +26,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     valorMinDepositado;
     valorMinApostado;
     qtdDiasRequisitos;
+    tipoSaldoGanho;
+    prazoResgateSaldo;
+    modalidadePromocao;
 
     nomeBanca;
 
@@ -94,6 +97,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         this.valorMinDepositado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_depositado;
         this.valorMinApostado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_apostado;
         this.qtdDiasRequisitos = this.paramsLocaisService.getOpcoes().indique_ganhe_qtd_dias_max;
+        this.tipoSaldoGanho = this.paramsLocaisService.getOpcoes().indique_ganhe_tipo_saldo_ganho == "bonus" ? "bônus" : "real";
+        this.prazoResgateSaldo = this.paramsLocaisService.getOpcoes().indique_ganhe_prazo_resgate_saldo;
+        this.modalidadePromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_modalidade_promocao;
         this.nomeBanca = this.paramsLocaisService.getOpcoes().banca_nome;
         this.mobileScreen = window.innerWidth <= 1024;
         this.isAppMobile = this.authService.isAppMobile();
@@ -196,16 +202,25 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     }
 
     redeemCommission(commissionId) {
-        const queryParams: any = {
-            'commission-id': commissionId
-        };
-
-        this.indiqueGanheService.redeemCommission(queryParams)
+        this.indiqueGanheService.redeemCommission(commissionId)
             .subscribe(
-                teste => console.log(teste),
+                response => this.handleRedeemCommission(response),
                 error => this.handleError(error)
             );
 
+    }
+
+    handleRedeemCommission(response) {
+        this.messageService.success(response.message);
+        this.indicados.forEach((currentIndicado, index, indicados) => {
+            if (currentIndicado.comissao_id == response.commissionId) {
+                indicados[index].status = 'pago';
+                indicados[index].comissionado_em.data_hora = response.commissioned_in;
+                this.total.recebido += currentIndicado.valor_comissao;
+                this.total.pendente -= currentIndicado.valor_comissao;
+                return;
+            }
+        })
     }
 
     setStatusIcon(status) {
@@ -236,8 +251,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         switch (status) {
             case 'pago':
                 return this.translateService.instant('geral.depositado');
-            case 'pendente':
             case 'resgate':
+                return this.translateService.instant('indique_ganhe.resgatar');
+            case 'pendente':
                 return this.translateService.instant('geral.pendente');
             case 'anulado':
                 return this.translateService.instant('geral.cancelado');
