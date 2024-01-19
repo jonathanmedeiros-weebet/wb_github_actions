@@ -55,6 +55,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         saldo: 0,
         credito: 0,
         bonus: 0,
+        saldoMaisBonus: 0,
         bonusModalidade: 'nenhum'
     };
     usuario = new Usuario();
@@ -94,7 +95,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     firstLoggedIn;
     valorGanhoPorIndicacao;
     removendoIndiqueGanheCard = false;
-    showIndiqueGanheCard = false;
     messageConnection;
     isConnected = true;
     isDemo = location.host === 'demo.wee.bet';
@@ -227,6 +227,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
+ 
+        if(this.mostrarSaldo == null){
+            localStorage.setItem('exibirSaldo', 'true');
+            this.mostrarSaldo = 'true';
+        }
 
         this.connectionCheck.onlineStatus$.subscribe((isOnline) => {
             let element = this.host.nativeElement.querySelector('.info-connection-card');
@@ -257,9 +262,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             }
         });
 
-        this.showIndiqueGanheCard = this.indiqueGanheHabilitado && (!this.isLoggedIn || (this.isCliente)) && !this.activeGameCassinoMobile();
-
-        if (this.showIndiqueGanheCard) {
+        if (this.indiqueGanheHabilitado && (!this.isLoggedIn || this.isCliente) && !this.activeGameCassinoMobile()) {
             this.layoutService.changeIndiqueGanheCardHeight(37);
         }
     }
@@ -311,7 +314,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.auth.getPosicaoFinanceira()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                posicaoFinanceira => {
+                    this.posicaoFinanceira = posicaoFinanceira;
+                    this.posicaoFinanceira.saldoMaisBonus = posicaoFinanceira.saldo;
+                    if (this.isCliente) {
+                        this.posicaoFinanceira.saldoMaisBonus = Number(posicaoFinanceira.saldo) + Number(posicaoFinanceira.bonus);
+                    }
+                },
                 error => {
                     if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
                         this.auth.logout();

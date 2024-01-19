@@ -17,14 +17,14 @@
     </div>
 </div>
 
-<div class="indique-ganhe-card" #indiqueGanheCard *ngIf="showIndiqueGanheCard">
+<div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente) && !activeGameCassinoMobile()">
     <div class="indique-ganhe-card-content">
-        {{'geral.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+        {{'indique_ganhe.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
         <a (click)="isConnected && redirectIndiqueGanhe()"
             (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()"
             (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()"
             class="btn btn-indique-ganhe-card"
-        >{{'geral.indicar' | translate}}</a>
+        >{{'indique_ganhe.indicar' | translate}}</a>
     </div>
     <a (click)="removerIndiqueGanheCard()" type="button" class="btn-close" aria-label="Close">
         <i class="fa fa-times"></i>
@@ -41,15 +41,15 @@
         <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
     </nav>
     <div class="side side-right">
+        <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo)">
+            <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
+                <i class="fa-solid fa-headset"></i>
+            </a>
+            <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                <i class="fa-solid fa-headset"></i>
+            </a>
+        </div>
         <ng-container *ngIf="isLoggedIn; else loggedOut">
-            <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo) && (!isLoggedIn || isCliente)">
-                <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
-                    <i class="fa-solid fa-headset"></i>
-                </a>
-                <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
-                    <i class="fa-solid fa-headset"></i>
-                </a>
-            </div>
             <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
                 <div *ngIf="isMobile; then depositShortCutMobile else depositShortCutDesktop"></div>
                 <ng-template #depositShortCutDesktop>
@@ -70,7 +70,7 @@
                         <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
                         <span class="saldo-usuario">
                             <i class="fa olhinho" style="margin-right: 8px;" (click)="alternarExibirSaldo($event)" [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
-                            <span id="olhinho" *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
+                            <span id="olhinho" *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldoMaisBonus | currency }}</span>
                             <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                         </span>
                     </div>
@@ -388,7 +388,7 @@
                                 <span>
                                     <i class="fa fa-solid fa-gift"></i>
                                 </span>
-                                {{'geral.indiqueGanhe' | translate}}
+                                {{'indique_ganhe.indiqueGanhe' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -503,7 +503,7 @@
                             routerLinkActive="router-link-active"
                             *ngIf="isCliente && indiqueGanheHabilitado">
                                 <i class="fa fa-solid fa-gift mb-2"></i>
-                                <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{'geral.indiqueGanhe' | translate}}</span>
+                                <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
                             </a>
 
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
