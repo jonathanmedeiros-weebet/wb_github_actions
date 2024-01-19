@@ -3473,3 +3473,12 @@ gulp.task('bet263.online', function (done) {
         styles: "",
     });
 });
+
+gulp.task('jaybet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jaybet.com",
+        banca: "JAYBET",
+        styles: "",
+    });
+});

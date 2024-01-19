@@ -365,7 +365,8 @@
         "decolar.bet": "gulp decolar.bet",
         "brasilbet.store": "gulp brasilbet.store",
         "betstar.vip": "gulp betstar.vip",
-        "bet263.online": "gulp bet263.online"
+        "bet263.online": "gulp bet263.online",
+        "jaybet.com": "gulp jaybet.com"
     },
     "private": true,
     "dependencies": {
