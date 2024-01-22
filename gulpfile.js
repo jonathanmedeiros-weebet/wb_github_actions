@@ -12,7 +12,7 @@ function tasks(done, config) {
     const defaultDescription = `${config.banca} é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website ${config.banca}, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. ${config.banca} apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.`;
 
     gulp.src(['base-build/config.ts'])
-        .pipe(replace('[HOST]', 'central.' + config.dominioTemp ? config.dominioTemp : config.host))
+        .pipe(replace('[HOST]', 'central.' + (config.dominioTemp ?? config.host)))
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[SHARED_URL]', sharedUrl))
         .pipe(replace('[BANCA]', config.banca))
