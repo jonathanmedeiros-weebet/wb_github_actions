@@ -459,7 +459,8 @@
         "indicadoRealizouDepsito": "Seu indicado realizou o primeiro depósito",
         "indicacaoRecebida": "Indicação recebida",
         "cadastroRealizado": "Cadastro foi realizado",
-        "resgatar": "Resgatar"
+        "resgatar": "Resgatar",
+        "limiteResgate": "Limite resgate"
     },
     "data":{
         "dataHora": "{{data}} às {{hora}}",

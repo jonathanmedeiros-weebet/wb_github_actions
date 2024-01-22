@@ -260,6 +260,17 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         }
     }
 
+    translateTipoSaldo(tipoSaldo) {
+        switch (tipoSaldo) {
+            case 'real':
+                return "Real";
+            case 'bonus':
+                return this.translateService.instant('geral.bonus');
+            default:
+                return "";
+        }
+    }
+
     setAmountColor(status) {
         switch (status) {
             case 'pago':

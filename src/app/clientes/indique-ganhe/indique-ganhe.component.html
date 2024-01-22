@@ -108,6 +108,7 @@
                         <select class="form-control inverted-out" formControlName="status">
                             <option value="">{{'geral.todos' | translate}}</option>
                             <option value="depositado">{{'geral.depositado' | translate}}</option>
+                            <option value="resgatar">{{'indique_ganhe.resgatar' | translate}}</option>
                             <option value="pendente">{{'geral.pendente' | translate}}</option>
                             <option value="cancelado">{{'geral.cancelado' | translate}}</option>
                         </select>
@@ -129,9 +130,9 @@
                                 <th width="50"></th>
                                 <th width="200">{{'indique_ganhe.indicacoes' | translate}}</th>
                                 <th width="200">{{'indique_ganhe.dataDeCadastro' | translate}}</th>
-                                <th width="200">{{'indique_ganhe.progresso' | translate}}</th>
-                                <th width="100">{{'geral.status' | translate}} </th>
-                                <th width="100" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
+                                <th width="180">{{'indique_ganhe.progresso' | translate}}</th>
+                                <th width="200">{{'geral.status' | translate}} </th>
+                                <th width="80" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
                                 <th width="30"></th>
                             </tr>
                         </thead>
@@ -162,15 +163,22 @@
                                         <span placement="bottom" ngbTooltip="{{'geral.aposta' | translate}}"></span>
                                     </div>
                                 </td>
-                                <td>{{ translateStatus(indicado.status) }}</td>
+                                <td>
+                                    {{ translateStatus(indicado.status) }}
+                                    <br>
+                                    <span [ngStyle]="{'color': '#6A6868'}" *ngIf="indicado.status == 'resgate'">
+                                        ({{ 'data.dataHora' | translate:{'data': indicado.prazo_resgate.data, 'hora': indicado.prazo_resgate.hora} }})
+                                    </span>
+                                </td>
                                 <td
                                     [ngStyle]="{
                                         'text-align': 'right',
                                         'color': setAmountColor(indicado.status)
                                     }"
-                                >{{ indicado.valor_comissao | currency }}</td>
-                                <td [ngStyle]="{'text-align': 'center'}">
+                                >{{ indicado.valor_comissao | currency }}<br><span [ngStyle]="{'color': '#6A6868'}">({{ translateTipoSaldo(indicado.tipo_saldo) }})</span></td>
+                                <td id="td-btn-redeem" [ngStyle]="{'text-align': 'center'}">
                                     <button 
+                                        id="btn-redeem"
                                         class="btn btn-custom" 
                                         type="button" 
                                         [disabled]="indicado.status != 'resgate'"
@@ -195,8 +203,16 @@
                         <div class="lista-indicados-info">
                             <p>{{ 'indique_ganhe.dataDeCadastro' | translate }} {{ 'data.dataHora' | translate:{'data': indicado.indicado_em.data, 'hora': indicado.indicado_em.hora} }}</p>
                             <p [ngStyle]="{'font-size': '14px'}">{{ 'indique_ganhe.voceIndicou' | translate }} {{ indicado.nome_indicado }}</p>
-                            <p [ngStyle]="{'color': setAmountColor(indicado.status)}">{{ indicado.valor_comissao | currency }}</p>
-                            <p>{{ translateStatus(indicado.status) }}</p>
+                            <p [ngStyle]="{'color': setAmountColor(indicado.status)}">
+                                {{ indicado.valor_comissao | currency }} 
+                                <span [ngStyle]="{'color': '#6A6868'}">({{ translateTipoSaldo(indicado.tipo_saldo) }})</span>
+                            </p>
+                            <p>
+                                {{ translateStatus(indicado.status) }}
+                                <span [ngStyle]="{'color': '#6A6868'}" *ngIf="indicado.status == 'resgate'">
+                                    ({{ 'indique_ganhe.limiteResgate' | translate }} {{ 'data.dataHora' | translate:{'data': indicado.prazo_resgate.data, 'hora': indicado.prazo_resgate.hora} }})
+                                </span>
+                            </p>
                         </div>
                         <div class="lista-indicados-arrow">
                             <i class="fa-solid fa-angle-right"></i>

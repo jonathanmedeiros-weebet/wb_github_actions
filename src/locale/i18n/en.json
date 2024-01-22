@@ -459,7 +459,8 @@
         "indicadoRealizouDepsito": "Your referral made the first deposit",
         "indicacaoRecebida": "Indication received",
         "cadastroRealizado": "Registration was completed",
-        "resgatar": "Redeem"
+        "resgatar": "Redeem",
+        "limiteResgate": "Redeem limit"
     },
     "data":{
         "dataHora": "{{data}} at {{hora}}",
