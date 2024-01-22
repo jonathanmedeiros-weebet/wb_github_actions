@@ -361,7 +361,8 @@
         "brasilbet.store": "gulp brasilbet.store",
         "betstar.vip": "gulp betstar.vip",
         "bet263.online": "gulp bet263.online",
-        "jaybet.com": "gulp jaybet.com"
+        "jaybet.com": "gulp jaybet.com",
+        "multisports.bet": "gulp multisports.bet"
     },
     "private": true,
     "dependencies": {
