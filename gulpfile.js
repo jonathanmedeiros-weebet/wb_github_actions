@@ -3449,7 +3449,7 @@ gulp.task('multisports.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "multisports.bet",
-        banca: "JAYBET",
+        banca: "MULTISPORTS",
         styles: "",
         dominioTemp: "multisports.wee.bet"
     });
