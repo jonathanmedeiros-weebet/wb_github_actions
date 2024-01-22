@@ -1587,15 +1587,6 @@ gulp.task('primeesportes.club', function (done) {
     });
 });
 
-gulp.task('winbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "winbet.wee.bet",
-        banca: "WINBET",
-        styles: "",
-    });
-});
-
 gulp.task('betsmilionaria.com.br', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1973,17 +1964,6 @@ gulp.task('lucromaster.net', function (done) {
     });
 });
 
-gulp.task('brasileiraobet.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "brasileiraobet.com",
-        banca: "BRASILEIRÃO.BET",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T23HZD3');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-T23HZD3'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('devconnection.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2002,15 +1982,6 @@ gulp.task('goltop.bet', function (done) {
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TBWH2RNR');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TBWH2RNR'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
         description: "Acesse a GolTop, Site de Apostas Esportivas, Bônus de Cadastro de R$ 5,00 reais, Bônus de deposito de 100%, Site de Cassino, Cassino Ao Vivo, Fortune Tiger, Fortune Ox, Fortune Rabbit, Fortune Mouse, Aviator, Mines e Spaceman - Jogue com Facilidade."
-    });
-});
-
-gulp.task('7pix.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "7pix.bet",
-        banca: "7PIX.BET",
-        styles: "",
     });
 });
 
@@ -2849,8 +2820,6 @@ gulp.task('fourbet.com', function (done) {
         host: "fourbet.com",
         banca: "FOURBET",
         styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TDX2BLKM');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TDX2BLKM'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
     });
 });
 
@@ -3314,15 +3283,6 @@ gulp.task('caminhobet.com', function (done) {
     });
 });
 
-gulp.task('dorebet.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "dorebet.net",
-        banca: "DORE BET",
-        styles: "",
-    });
-});
-
 gulp.task('mdsports.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -3422,11 +3382,11 @@ gulp.task('bet10.bet', function (done) {
     });
 });
 
-gulp.task('shotting.bet', function (done) {
+gulp.task('shooting.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "shotting.bet",
-        banca: "SHOTTING.BET",
+        host: "shooting.bet",
+        banca: "SHOOTING.BET",
         styles: "",
     });
 });
@@ -3445,6 +3405,42 @@ gulp.task('decolar.bet', function (done) {
         server: "front2.wee.bet",
         host: "decolar.bet",
         banca: "DECOLAR.BET",
+        styles: "",
+    });
+});
+
+gulp.task('brasilbet.store', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "brasilbet.store",
+        banca: "BRASIL BET",
+        styles: "",
+    });
+});
+
+gulp.task('betstar.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betstar.vip",
+        banca: "BETSTAR",
+        styles: "",
+    });
+});
+
+gulp.task('bet263.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet263.online",
+        banca: "BET263",
+        styles: "",
+    });
+});
+
+gulp.task('jaybet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jaybet.com",
+        banca: "JAYBET",
         styles: "",
     });
 });
