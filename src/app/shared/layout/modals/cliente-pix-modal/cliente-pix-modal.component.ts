@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ClienteService, MessageService, UtilsService} from 'src/app/services';
+import {ClienteService, MessageService, ParametrosLocaisService, UtilsService} from 'src/app/services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
 
 
@@ -13,12 +13,14 @@ import {BaseFormComponent} from '../../base-form/base-form.component';
 export class ClientePixModalComponent extends BaseFormComponent implements OnInit {
     showLoading = true;
     mostrarSenha = false;
+    metodoPagamento = '';
 
     constructor(
         private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private utilsService: UtilsService,
         private messageService: MessageService,
+        private paramsLocais: ParametrosLocaisService,
         public activeModal: NgbActiveModal
     ) {
         super();
@@ -27,6 +29,7 @@ export class ClientePixModalComponent extends BaseFormComponent implements OnIni
     ngOnInit() {
         this.createForm();
         this.loadCliente();
+        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
     }
 
     createForm() {
