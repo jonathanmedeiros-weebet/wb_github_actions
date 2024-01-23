@@ -319,7 +319,7 @@
         "paraProsseguirAtualizeChavePix": "To proceed, update your registration with your PIX key",
         "preenchaCadastroCompleto": "Please complete your registration completely to make the withdrawal request.",
         "alertaTitularChave": "Obs. ¹Looting will only be carried out on pix keys belonging to the account holder.",
-        "alertaChaveCelular": "²When registering the Phone Pix Key, use the pattern: Area code without the leading zero, followed by the number (ex.: 81998765432). Thank you for your attention.",
+        "alertaChaveCelular": "²When registering the Phone Pix Key, use the pattern: Area code without the leading zero, followed by the number (ex.: 81998765432).",
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Phone or Random",
         "pagamentoExclusivoChaveCPF": "We inform you that when requesting the withdrawal, it will be carried out exclusively for the account holder's pix CPF key.",
         "solicitacoesRecentes": "Recent withdrawal requests",
