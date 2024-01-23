@@ -17,6 +17,8 @@
                                 placeholder="{{'saques.cpfEmailTelefoneAleatoria' | translate}}">
                             <app-error-msg [control]="form.get('chave_pix')"></app-error-msg>
                             <small>{{'saques.alertaTitularChave' | translate}}</small>
+                            <br>
+                            <small *ngIf="metodoPagamento == 'pagfast'">{{'saques.alertaChaveCelular' | translate}}</small>
                         </div>
                     </div>
                 </div>
