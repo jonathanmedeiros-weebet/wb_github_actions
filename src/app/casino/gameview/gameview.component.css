@@ -145,6 +145,10 @@ iframe{
         margin-top: -157px;
     }
 
+    .game-view .header-game-view {
+        margin: 0;
+    }
+
     .game-frame {
         width: 100%;
         height: calc(100% - 50px);
@@ -165,12 +169,8 @@ iframe{
 }
 
 @media (min-width: 1025px) {
-    .game-view {
-        height: 100%;
-    }
-
     .game-frame {
-        height: calc(100vh - 195px);
+        height: calc(100vh - 234px);
     }
 
     iframe {
