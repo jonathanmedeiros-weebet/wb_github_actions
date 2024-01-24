@@ -435,6 +435,18 @@
     .buttons button {
         width: 100%;
     }
+
+    #td-btn-redeem {
+        display: flex;
+        justify-content: center;
+    }
+
+    #btn-redeem {
+        height: 36px !important;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+    }
 }
 
 @media only screen and (min-width: 1260px) {
