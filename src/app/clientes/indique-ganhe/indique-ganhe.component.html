@@ -233,37 +233,29 @@
     </div>
     <div class="modal-body" style="min-height: 80%">
         <p>
-            Indique seus amigos e ganhe R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho}}!!<br>
-            Ficou interessado? Então veja abaixo todas as regras e condições
+            {{'regras_indique_ganhe.primeiro_paragrafo_um' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao, 'tipoSaldoGanho': tipoSaldoGanhoModalRegras()} }}
+            <br>
+            {{'regras_indique_ganhe.primeiro_paragrafo_dois' | translate}}
         </p>
         <ul style="padding-left: 1.5rem;">
             <li>
-                <b>Elegibilidade:</b> Para participar do programa de Indique e Ganhe você deve ser um membro registrado do site. Ao indicar usuários,
-                você estará concordando com estes termos e condições.
+                <b>{{'regras_indique_ganhe.lista_elegibilidade' | translate}}:</b> {{'regras_indique_ganhe.lista_elegibilidade_text' | translate}}
             </li>
             <li>
-                <b>Como indicar:</b> Para indicar um novo usuário, você deverá compartilhar o link de indicação na seção "Indique e ganhe" da sua conta,
-                localizada no menu Promoções. O usuário indicado deverá se registrar usando seu link de indicação. O indicador terá um total de
-                {{limiteIndicacoes}} indicações ao qual serão legíveis de comissionamento as demais que ultrapassarem essa quantidade não serão comissionadas.
+                <b>{{'regras_indique_ganhe.lista_como_indicar' | translate}}:</b> {{'regras_indique_ganhe.lista_como_indicar_text' | translate:{'limiteIndicacoes': limiteIndicacoes} }}
             </li>
             <li>
-                <b>Bônus para o Indicador:</b> A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar apostas
-                de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dias, você ganhará R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho == 'real' ? 'real (sacável)' : 'bônus (' + modalidadePromocao + ')' }}. Este saldo será 
-                liberado para resgate na aba minhas indicações em até 24 horas após o INDICADO cumprir as regras da promoção, você terá um prazo de {{prazoResgateSaldo}} dias para resgatar.
+                <b>{{'regras_indique_ganhe.lista_bonus_indicador' | translate}}:</b> {{'regras_indique_ganhe.lista_bonus_indicador_text' | translate:{'valorMinDepositado': valorMinDepositado, 'valorMinApostado': valorMinApostado, 'qtdDiasRequisitos': qtdDiasRequisitos, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao, 'tipoSaldoGanho': tipoSaldoGanhoModalRegras(true), 'modalidadePromocao': modalidadePromocao, 'prazoResgateSaldo': prazoResgateSaldo} }}
             </li>
             <li>
-                <b>Depósito do Indicado:</b> O usuário indicado deve realizar um depósito de no mínimo R${{valorMinDepositado}} na sua conta e fazer
-                uma aposta de no mínimo R${{valorMinApostado}} para que o saldo de R${{valorGanhoPorIndicacao}} seja creditado na conta do indicador.
+                <b>{{'regras_indique_ganhe.lista_deposito_indicado' | translate}}:</b> {{'regras_indique_ganhe.lista_deposito_indicado_text' | translate:{'valorMinDepositado': valorMinDepositado, 'valorMinApostado': valorMinApostado, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
             </li>
             <li>
-                <b>Prevenção de fraudes:</b> A {{nomeBanca}} monitora ativamente o uso do sistema de Indique e Ganhe para prevenir fraudes. Qualquer tentativa
-                de fraude, como a criação de múltiplas contas a partir do mesmo endereço IP, será considerada apenas o primeiro cadastro legível para ganho
-                do saldo as demais serão desconsideradas.
+                <b>{{'regras_indique_ganhe.lista_prevencao_fraudes' | translate}}:</b> {{'regras_indique_ganhe.lista_prevencao_fraudes_text' | translate:{'nomeBanca': nomeBanca} }}
             </li>
         </ul>
         <p>
-            Ao participar do sistema de Indique e Ganhe, você concorda que leu, entendeu e concorda em cumprir estas regras. É responsabilidade do indicador
-            garantir que os usuários indicados estejam cientes e concordem com estas regras antes de se registrarem na {{nomeBanca}}.
+            {{'regras_indique_ganhe.ultimo_paragrafo' | translate:{'nomeBanca': nomeBanca} }}
         </p>
     </div>
 </ng-template>

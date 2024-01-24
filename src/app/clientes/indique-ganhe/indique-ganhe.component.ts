@@ -97,7 +97,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         this.valorMinDepositado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_depositado;
         this.valorMinApostado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_apostado;
         this.qtdDiasRequisitos = this.paramsLocaisService.getOpcoes().indique_ganhe_qtd_dias_max;
-        this.tipoSaldoGanho = this.paramsLocaisService.getOpcoes().indique_ganhe_tipo_saldo_ganho == "bonus" ? "bônus" : "real";
+        this.tipoSaldoGanho = this.paramsLocaisService.getOpcoes().indique_ganhe_tipo_saldo_ganho;
         this.prazoResgateSaldo = this.paramsLocaisService.getOpcoes().indique_ganhe_prazo_resgate_saldo;
         this.modalidadePromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_modalidade_promocao;
         this.nomeBanca = this.paramsLocaisService.getOpcoes().banca_nome;
@@ -144,6 +144,30 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
                 centered: true
             }
         );
+    }
+
+    tipoSaldoGanhoModalRegras(detalhado = false) {
+        if (detalhado) {
+            this.tipoSaldoGanho == 'real' ? 'real (sacável)' : 'bônus (' + this.modalidadePromocao + ')';
+            switch (this.tipoSaldoGanho) {
+                case 'real':
+                    return this.translateService.instant('regras_indique_ganhe.real_sacavel');
+                case 'bonus':
+                    return this.translateService.instant('geral.bonus').toLowerCase() +
+                        " (" + this.translateService.instant('geral.' + this.modalidadePromocao).toLowerCase() + ")";
+                default:
+                    return "";
+            }
+        } else {
+            switch (this.tipoSaldoGanho) {
+                case 'real':
+                    return "real";
+                case 'bonus':
+                    return this.translateService.instant('geral.bonus').toLowerCase();
+                default:
+                    return "";
+            }
+        }
     }
 
     abrirModalMinhasIndicacoes(indicadoSelecionado)
