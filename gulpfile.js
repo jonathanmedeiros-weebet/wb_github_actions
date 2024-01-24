@@ -3387,3 +3387,21 @@ gulp.task('multisports.bet', function (done) {
         dominioTemp: "multisports.wee.bet"
     });
 });
+
+gulp.task('alfa-bet.club', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "alfa-bet.club",
+        banca: "ALFA BET",
+        styles: ""
+    });
+});
+
+gulp.task('fezinhabet.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "fezinhabet.net",
+        banca: "FEZINHA BET",
+        styles: ""
+    });
+});
