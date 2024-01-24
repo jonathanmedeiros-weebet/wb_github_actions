@@ -32,6 +32,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     isMobile = false;
     salsaCassino;
     cassinoFornecedores;
+    filtroCassinoFornecedores;
     isHomeCassino = true;
     gameList: GameCasino[];
     gameAllList: GameCasino[];
@@ -113,7 +114,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                     if (this.isHomeCassino) {
                         this.gameList =  this.gamesCassino;
                         this.gameTitle = this.translate.instant('geral.todos');
-                    }else{
+                    } else {
                         this.qtdItens = 20;
                     }
                     this.listagemJogos.nativeElement.scrollTo( 0, 0 );
@@ -144,6 +145,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                             break;
                     }
 
+                    this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
                     this.gamesCassinoTemp = [];
                     this.gamesCassinoFiltrados = [];
                     this.term = '';
@@ -357,6 +359,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             return game.modalidade === modalidade;
         });
     }
+
     filterModalidades(games, modalidade) {
         return games.filter(function (game) {
             return game.category === modalidade;
@@ -365,5 +368,10 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     exibirMais() {
        this.qtdItens += 3;
+    }
+
+    setFiltroFornecedores(games: any[]) {
+        const fornecedoresSet = new Set(games.map(game => game.fornecedor));
+        return this.cassinoFornecedores.filter(fornecedor => fornecedoresSet.has(fornecedor.gameFornecedor));
     }
 }
