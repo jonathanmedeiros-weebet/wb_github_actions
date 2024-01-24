@@ -8,7 +8,7 @@
     </div>
 </div>
   
-<div id="promocoes-listagem" *ngIf="!isLoading">
+<div id="promocoes-listagem" *ngIf="!isLoading" [ngStyle]="{'height': currentHeight + 'px'}">
     <div class="info-promotions">
         <h4><b>{{'menu.promocao' | translate}}</b></h4>
         <p>Aqui você encontrará todas as promoções ativas no momento em nossa plataforma</p>
@@ -33,5 +33,5 @@
             </div>
         </ng-container>
     </div>
-    <app-footer></app-footer>
+    <app-footer style="margin-top: 32px;"></app-footer>
 </div>

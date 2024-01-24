@@ -1,7 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PromocoesService, MessageService } from '../../../services';
+import { PromocoesService, MessageService, LayoutService } from '../../../services';
 import { config } from '../../../shared/config';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-promocao-form',
@@ -16,11 +18,16 @@ export class PromocaoFormComponent implements OnInit {
     TIMESTAMP;
     SLUG;
     exibirImagem;
+    headerHeight = 92;
+    currentHeight = window.innerHeight - this.headerHeight;
+    unsub$ = new Subject();
 
     constructor(
         private route: ActivatedRoute,
         private promocoesService: PromocoesService,
         private messageService: MessageService,
+        private layoutService: LayoutService,
+        private cd: ChangeDetectorRef,
     ) {}
 
     ngOnInit() {
@@ -31,6 +38,14 @@ export class PromocaoFormComponent implements OnInit {
         this.TIMESTAMP = new Date().getTime();
         this.SLUG = config.SLUG;
         this.getPromocao(this.idPromocao);
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.currentHeight = window.innerHeight - this.headerHeight;
+                this.cd.detectChanges();
+            });
     }
 
     getPromocao(id){
