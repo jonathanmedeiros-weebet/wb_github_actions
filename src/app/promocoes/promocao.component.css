@@ -85,7 +85,7 @@
 }
 
 .ssc-square {
-    width: 435px;
+    width: 400px;
     height: 390px;
 }
 
@@ -94,6 +94,13 @@
         width: 352px;
         height: 319px;
         margin: 10px 16px 30px 16px;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .ssc-square {
+        width: 350px;
+        height: 390px;
     }
 }
 
@@ -121,7 +128,7 @@
     }
 
     .ssc-square {
-        width: 400px;
+        width: 385px;
     }
 }
 
@@ -131,3 +138,16 @@
         max-height: 300px;
     }
 }
+
+@media screen and (min-width: 1026px) {
+    .cards-container {
+        height: -webkit-fill-available;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .cards-container {
+        margin-bottom: 20px;
+    }
+}
+

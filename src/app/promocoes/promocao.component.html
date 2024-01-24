@@ -1,6 +1,6 @@
 <div class="loading-listagem" *ngIf="isLoading">
     <div class="ssc-square title m-3 mt-4" style="height: 25px; width: 120px;"></div>
-    <div class="ssc-square title m-3 mt-4" style="height: 15px; width: 400px;"></div>
+    <div class="ssc-square title m-3 mt-4" style="height: 15px; width: 350px;"></div>
     <div class="item-sample">
         <div *ngFor="let item of [1, 2, 3]" class="item-left">
             <div class="ssc-square"></div>
@@ -13,7 +13,7 @@
         <h4><b>{{'menu.promocao' | translate}}</b></h4>
         <p>Aqui você encontrará todas as promoções ativas no momento em nossa plataforma</p>
     </div>
-    <div class="cards-container" style="height: -webkit-fill-available;">
+    <div class="cards-container">
         <ng-container *ngFor="let promocao of promocoes">
             <div class="custom-card" (click)="goToDetails(promocao.id, true)">
                 <div class="logo-game-background">
