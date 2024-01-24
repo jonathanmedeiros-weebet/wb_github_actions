@@ -147,26 +147,20 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     }
 
     tipoSaldoGanhoModalRegras(detalhado = false) {
-        if (detalhado) {
-            this.tipoSaldoGanho == 'real' ? 'real (sacável)' : 'bônus (' + this.modalidadePromocao + ')';
-            switch (this.tipoSaldoGanho) {
-                case 'real':
+        switch (this.tipoSaldoGanho) {
+            case 'real':
+                if (detalhado) {
                     return this.translateService.instant('regras_indique_ganhe.real_sacavel');
-                case 'bonus':
+                }
+                return "real";
+            case 'bonus':
+                if (detalhado) {
                     return this.translateService.instant('geral.bonus').toLowerCase() +
                         " (" + this.translateService.instant('geral.' + this.modalidadePromocao).toLowerCase() + ")";
-                default:
-                    return "";
-            }
-        } else {
-            switch (this.tipoSaldoGanho) {
-                case 'real':
-                    return "real";
-                case 'bonus':
-                    return this.translateService.instant('geral.bonus').toLowerCase();
-                default:
-                    return "";
-            }
+                }
+                return this.translateService.instant('geral.bonus').toLowerCase();
+            default:
+                return "";
         }
     }
 
