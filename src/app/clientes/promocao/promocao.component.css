@@ -1,0 +1,30 @@
+.tabs {
+    border-bottom: 2px solid var(--foreground);
+    margin-bottom: 30px;
+}
+
+.tabs a {
+    font-size: 14px;
+    color: var(--foreground);
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 30px;
+
+    cursor: pointer;
+    margin-bottom: -2px;
+}
+
+.tabs a:hover {
+    color: var(--highlight);
+}
+
+.tabs a.active {
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
+}
+
+.acoes-aposta {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}

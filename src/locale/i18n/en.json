@@ -201,7 +201,8 @@
         "regrasCondicoes": "Rules and conditions",
         "semPermissaoAcesso": "No access permission",
         "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age.",
-        "cadastro": "Registration"
+        "cadastro": "Registration",
+        "rodadaGratis": "Free Spin"
     },
     "dias": {
         "ontem": "Yesterday",

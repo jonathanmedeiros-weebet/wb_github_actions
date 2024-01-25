@@ -1,0 +1,58 @@
+<div id="default-content">
+    <app-spinner *ngIf="showLoading"></app-spinner>
+    <ng-container *ngIf="!showLoading">
+        <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </a>
+
+        <div class="internal-container-out">
+            <div class="content-header">
+                <h2>Promoções</h2>
+            </div>
+
+            <div class="tabs">
+                <a [ngClass]="tabSelected == 'bonus' ? 'active' : ''" 
+					(click)="changeTab('bonus')">{{'geral.bonus' | translate}} </a>
+                <a [ngClass]="tabSelected == 'rodada-gratis' ? 'active' : ''"
+                	(click)="changeTab('rodada-gratis')">{{'geral.rodadaGratis' | translate}}</a>
+            </div>
+
+			<div class="content-body">
+				<form (ngSubmit)="onSubmit()" [formGroup]="form">
+                    <div class="filtros">
+                        <select class="inverted-out form-control" formControlName="status">
+                            <option value="">{{'geral.todos' | translate}}</option>
+                            <option value="ativo">{{'rollover.ativo' | translate}}</option>
+                            <option value="completado">{{'rollover.completado' | translate}}</option>
+                            <option value="cancelado">{{'rollover.cancelado' | translate}}</option>
+                            <option value="vencido">{{'rollover.vencido' | translate}}</option>
+                        </select>
+                        <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
+                        <a class="btn-regras-bonus" (click)="abrirRegrasBonus()">Regras do Bônus</a>
+                    </div>
+                </form>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+                        <tr>
+                            <th width="100">{{'geral.codigo' | translate}}</th>
+                            <th *ngIf="tabSelected == 'cassino'">{{'geral.nomeJogoCassino' | translate}}</th>
+                            <th>{{'geral.horario' | translate}}</th>
+                            <th>{{'geral.valor' | translate}}</th>
+                            <th>{{'geral.premio' | translate}} </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+					<tr *ngIf="loading">
+						<td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
+							{{'geral.carregando' | translate}}
+						</td>
+					</tr>
+
+				</table>
+			</div>
+        </div>
+    </ng-container>
+</div>

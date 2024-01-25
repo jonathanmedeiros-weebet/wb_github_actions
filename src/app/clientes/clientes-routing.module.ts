@@ -47,7 +47,7 @@ const routes: Routes = [{
         },
         {
             path: 'rollover',
-            loadChildren: () => import('./rollover/rollover.module').then(f => f.RolloverModule)
+            loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
         {
             path: 'indique-ganhe',
