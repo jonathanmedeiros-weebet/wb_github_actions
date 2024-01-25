@@ -12,7 +12,7 @@ function tasks(done, config) {
     const defaultDescription = `${config.banca} é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website ${config.banca}, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. ${config.banca} apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.`;
 
     gulp.src(['base-build/config.ts'])
-        .pipe(replace('[HOST]', 'central.' + config.host))
+        .pipe(replace('[HOST]', 'central.' + (config.dominioTemp ?? config.host)))
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[SHARED_URL]', sharedUrl))
         .pipe(replace('[BANCA]', config.banca))
@@ -3375,5 +3375,33 @@ gulp.task('jaybet.com', function (done) {
         host: "jaybet.com",
         banca: "JAYBET",
         styles: "",
+    });
+});
+
+gulp.task('multisports.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "multisports.bet",
+        banca: "MULTISPORTS",
+        styles: "",
+        dominioTemp: "multisports.wee.bet"
+    });
+});
+
+gulp.task('alfa-bet.club', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "alfa-bet.club",
+        banca: "ALFA BET",
+        styles: ""
+    });
+});
+
+gulp.task('fezinhabet.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "fezinhabet.net",
+        banca: "FEZINHA BET",
+        styles: ""
     });
 });
