@@ -3405,3 +3405,12 @@ gulp.task('fezinhabet.net', function (done) {
         styles: ""
     });
 });
+
+gulp.task('polarbet.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "polarbet.vip",
+        banca: "POLAR BET",
+        styles: ""
+    });
+});

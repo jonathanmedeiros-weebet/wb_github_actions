@@ -357,7 +357,8 @@
         "jaybet.com": "gulp jaybet.com",
         "multisports.bet": "gulp multisports.bet",
         "alfa-bet.club": "gulp alfa-bet.club",
-        "fezinhabet.net": "gulp fezinhabet.net"
+        "fezinhabet.net": "gulp fezinhabet.net",
+        "polarbet.vip": "gulp polarbet.vip"
     },
     "private": true,
     "dependencies": {
