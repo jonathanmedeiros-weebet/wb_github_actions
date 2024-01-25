@@ -1,6 +1,7 @@
 const _host = '//weebet.local';
 // const _host = '//central.demo.wee.bet';
 // const _center = '//localhost:3002';
+const _loki = 'localhost:8000'
 const _center = 'https://hermes.wee.bet';
 const _live = 'https://streaming.wee.bet';
 // const _live = '//localhost:3003';
@@ -12,7 +13,7 @@ export const config: any = {
     TIMESTAMP: _timestamp,
     HOST: _host,
     BASE_URL: `${_host}/api`,
-    LOKI_URL: 'https://loki.wee.bet',
+    LOKI_URL: _loki,
     SHARED_URL: '//weebet.local',
     CENTER_HOST: _center,
     LIVE_HOST: _live,
