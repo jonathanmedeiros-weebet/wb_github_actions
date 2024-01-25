@@ -59,7 +59,7 @@
     font-size: 18px;
 }
 .info-promotions {
-    margin: 32px auto 20px 16px;
+    margin: 32px auto 32px 16px;
 }
 .logo-game-background{
     position: absolute;
@@ -93,7 +93,7 @@
     .custom-card {
         width: 352px;
         height: 319px;
-        margin: 10px 16px 30px 16px;
+        margin: 0px 16px 30px 16px;
     }
 }
 
