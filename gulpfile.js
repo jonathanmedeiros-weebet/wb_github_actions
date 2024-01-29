@@ -3414,3 +3414,12 @@ gulp.task('polarbet.vip', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betcampea.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betcampea.com",
+        banca: "BET CAMPEÃ",
+        styles: ""
+    });
+});
