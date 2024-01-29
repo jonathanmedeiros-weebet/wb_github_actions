@@ -202,6 +202,7 @@
         "semPermissaoAcesso": "No access permission",
         "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age.",
         "cadastro": "Registration",
+        "alertaChavePixCpf": "When requesting the withdrawal, it will be processed through the Pix key associated with your CPF (Brazilian Tax ID). Ensure that your CPF is filled in correctly.",
         "esportivo": "sporty"
     },
     "dias": {

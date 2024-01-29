@@ -38,6 +38,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     qtdRolloverAtivos = 0;
     saldo = 0;
     saques = [];
+    permitirQualquerChavePix = false;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -71,6 +72,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.valorMaxSaqueMensal = this.paramsLocais.getOpcoes().valor_max_saque_mensal_cliente;
         this.apiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
         this.metodoPagamentoDesabilitado = this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado;
+        this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
         this.createForm();
         const user = JSON.parse(localStorage.getItem('user'));
 
@@ -97,17 +99,17 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.cliente = res;
-
-                    if (!this.cliente.endereco) {
-                        this.cadastroCompleto = false;
-                        this.rotaCompletarCadastro = '/clientes/perfil';
-                        this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
-                    }
-
-                    if (!this.cliente.chave_pix) {
-                        this.cadastroCompleto = false;
-                        this.rotaCompletarCadastro = '/clientes/perfil-pix';
-                        this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
+                    if (this.metodoPagamentoDesabilitado) {
+                        if (!this.cliente.endereco) {
+                            this.cadastroCompleto = false;
+                            this.rotaCompletarCadastro = '/clientes/perfil';
+                            this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
+                        }
+                        if (!this.cliente.chave_pix && this.permitirQualquerChavePix) {
+                            this.cadastroCompleto = false;
+                            this.rotaCompletarCadastro = '/clientes/perfil-pix';
+                            this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
+                        }
                     }
 
                     this.showLoading = false;
