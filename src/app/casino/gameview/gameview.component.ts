@@ -6,7 +6,6 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {AuthService, MenuFooterService, MessageService} from '../../services';
 import {interval} from 'rxjs';
-import {RolloverComponent} from "../../clientes/rollover/rollover.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
 
@@ -185,10 +184,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {
         }, error => {
         });
-    }
-
-    abrirRollovers() {
-        this.modalService.open(RolloverComponent);
     }
 
     exibirJogosLiberadosBonus() {

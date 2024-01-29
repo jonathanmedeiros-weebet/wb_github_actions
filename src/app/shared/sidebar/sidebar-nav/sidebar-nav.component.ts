@@ -89,10 +89,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
             this.subPerfil = true;
         }
 
-        if (this.router.url === '/clientes/rollover' || this.router.url === '/clientes/indique-ganhe') {
-            this.subPromocoes = true;
-        }
-
         this.auth.logado
             .subscribe(
                 logado => {
