@@ -67,6 +67,10 @@ const appRoutes: Routes = [
                 loadChildren: () => import('./informacoes/informacoes.module').then(m => m.InformacoesModule)
             },
             {
+                path: 'promocao',
+                loadChildren: () => import('./promocoes/promocoes.module').then(m => m.PromocoesModule)
+            },
+            {
                 path: 'loterias',
                 loadChildren: () => import('./loterias/loterias.module').then(m => m.LoteriasModule),
                 canActivate: [LoteriaGuard]

@@ -224,7 +224,8 @@
         "virtuais": "VIRTUAL",
         "desafio": "CHALLENGE",
         "acumuladao": "ACCUMULATED",
-        "loteria": "LOTERY"
+        "loteria": "LOTERY",
+        "promocao": "PROMOTIONS"
     },
     "submenu": {
         "copa22": "Cup 2022",
