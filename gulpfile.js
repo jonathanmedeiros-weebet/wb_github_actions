@@ -1657,7 +1657,7 @@ gulp.task('sportpix.vip', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "sportpix.vip",
-        banca: "SPORT PIX",
+        banca: "SPORTVIP",
         styles: "",
     });
 });
@@ -3402,6 +3402,24 @@ gulp.task('fezinhabet.net', function (done) {
         server: "front2.wee.bet",
         host: "fezinhabet.net",
         banca: "FEZINHA BET",
+        styles: ""
+    });
+});
+
+gulp.task('polarbet.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "polarbet.vip",
+        banca: "POLAR BET",
+        styles: ""
+    });
+});
+
+gulp.task('betcampea.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betcampea.com",
+        banca: "BET CAMPEÃ",
         styles: ""
     });
 });
