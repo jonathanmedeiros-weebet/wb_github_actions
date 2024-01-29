@@ -112,8 +112,7 @@
     width: 20px;
     height: 16px;
     border-radius: 42%;
-    /* background-color: var(--foreground-bottom-bar); */
-    background-color: rgb(89, 89, 89);
+    background-color: var(--game);
     color: var(--foreground);
     text-align: center;
     line-height: 16px;
@@ -214,5 +213,4 @@
         min-width: 100%; 
         margin-top: 10px;
     }
-
 }

@@ -2,7 +2,7 @@
     <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
         <i class="fa fa-arrow-left"></i>
     </a>
-    <div class="titulo">Promoções</div>
+    <div class="titulo">{{ 'geral.promocoes' | translate }}</div>
     <div class="botao-direito"></div>
 </div>
 
@@ -11,10 +11,10 @@
     <ng-container *ngIf="!showLoading">
         <div class="internal-container-out">
             <div class="content-header hide-mobile">
-                <h2>Promoções</h2>
+                <h2>{{ 'geral.promocoes' | translate }}</h2>
             </div>
             <div class="info-page-promotion">
-                <p>Selecione uma das opções para visualizar as promoções ativas</p>
+                <p>{{ 'geral.opcaoPromocao' | translate }}</p>
             </div>
             <div class="tabs">
                 <a [ngClass]="tabSelected == 'bonus' ? 'active' : ''" 
@@ -214,17 +214,17 @@
                         </form>
                     </div>
                     <div *ngIf="!rodadasListagem.length" class="alert alert-warning text-center" role="alert">
-                        Nenhuma Rodada Grátis Encontrada!!
+                        {{ 'geral.nenhumaRodadaGratis' | translate }}
                     </div>
                     <ng-container *ngIf="!mobileScreen">
                         <div class="table-responsive" *ngIf="rodadasListagem.length">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th data-field="termino" (click)="sortBy('termino')"><span style="cursor: pointer;">Data de vencimento &uarr;&darr;</span></th>
-                                        <th data-field="valor" (click)="sortBy('valor')"><span style="cursor: pointer;">Valor &uarr;&darr;</span></th>
-                                        <th data-field="quantidade" (click)="sortBy('quantidade')"><span style="cursor: pointer;">Quantidade &uarr;&darr;</span></th>
-                                        <th data-field="game" (click)="sortBy('game')"><span style="cursor: pointer;">Jogo &uarr;&darr;</span></th>
+                                        <th data-field="termino" (click)="sortBy('termino')"><span style="cursor: pointer;">{{ 'geral.dataVencimento' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="valor" (click)="sortBy('valor')"><span style="cursor: pointer;">{{ 'geral.valor' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="quantidade" (click)="sortBy('quantidade')"><span style="cursor: pointer;">{{ 'geral.quantidade' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="game" (click)="sortBy('game')"><span style="cursor: pointer;">{{ 'geral.jogo' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="status" (click)="sortBy('status')"><span style="cursor: pointer;">Status &uarr;&darr;</span></th>
                                         <th></th>
                                     </tr>
@@ -256,7 +256,7 @@
                                                 <ng-container>
                                                     <button class="btn btn-custom btn-jogar-rodada"
                                                         [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
-                                                        (click)="openGame(rodada.game, rodada.fornecedor)"> Jogar agora</button>
+                                                        (click)="openGame(rodada.game, rodada.fornecedor)">{{ 'geral.jogarAgora' | translate }}</button>
                                                 </ng-container>
                                             </td>
                                         </tr>
@@ -267,18 +267,18 @@
                     </ng-container>   
                     <ng-container *ngIf="mobileScreen">
                         <div class="count-rodadas-mobile" *ngIf="rodadasListagem.length">
-                            <p>Foram encontrados <span>{{ rodadasListagem.length }}</span> resultados</p>
+                            <p>{{ 'geral.resultadosEncontrados' | translate: {quantidade: rodadasListagem.length} }}</p>
                         </div>
                         <ng-container *ngFor="let rodada of rodadasListagem">
                             <div class="rodada-gratis-container">
-                                <p class="info-rodada">Rodada grátis: <span>Expira em {{ rodada.termino | moment: 'DD/MM/YYYY' }}</span></p>
-                                <p class="info-rodada">Valor: <span>R$ 20,00</span></p>
-                                <p class="info-rodada">Quantidade: <span>10</span></p>
-                                <p class="info-rodada">Jogo: <span>Aviator</span></p>
+                                <p class="info-rodada">{{ 'geral.rodadaGratis' | translate }}: <span>Expira em {{ rodada.termino | moment: 'DD/MM/YYYY' }}</span></p>
+                                <p class="info-rodada">{{ 'geral.valor' | translate }}: <span>{{ rodada.vlaor | currency }}</span></p>
+                                <p class="info-rodada">{{ 'geral.quantidade' | translate }}: <span>{{ rodada.quantidade }}</span></p>
+                                <p class="info-rodada">{{ 'geral.jogo' | translate }}: <span>{{ rodada.game }}</span></p>
                                 <div class="button-rodada">
                                     <button class="btn btn-custom btn-jogar-rodada" 
                                     [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
-                                    (click)="openGame(rodada.game, rodada.fornecedor)"> Jogar agora</button>
+                                    (click)="openGame(rodada.game, rodada.fornecedor)">{{ 'geral.jogarAgora' | translate }}</button>
                                 </div>
                             </div>
                         </ng-container>
