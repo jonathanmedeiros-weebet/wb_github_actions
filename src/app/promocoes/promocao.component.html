@@ -16,7 +16,7 @@
     <div class="cards-container">
         <ng-container *ngFor="let promocao of promocoes">
             <div class="custom-card" (click)="goToDetails(promocao.id, true)">
-                <div class="logo-game-background">
+                <div class="logo-game-background" *ngIf="promocao.modalidade">
                     <span>{{ promocao.modalidade == 'cassino' ? 'Cassino' : 'Esportivo' }}</span>
                 </div>
                 <div class="card-image" style="min-height: 180px;">
