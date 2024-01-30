@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { ClienteService, MenuFooterService, MessageService, SidebarService, AuthService } from 'src/app/services';
+import { ClienteService, MenuFooterService, MessageService, SidebarService, AuthService, ParametrosLocaisService } from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 
 @Component({
@@ -13,6 +13,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
     showLoading = true;
     mostrarSenha = false;
     googleLogin = false;
+    metodoPagamento = '';
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -20,6 +21,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
         private messageService: MessageService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
+        private paramsLocais: ParametrosLocaisService,
         private auth: AuthService
     ) {
         super();
@@ -30,6 +32,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
         this.googleLogin = user?.google_login ?? false;
 
         this.sidebarService.changeItens({contexto: 'cliente'});
+        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
 
         this.createForm();
         this.loadCliente();
