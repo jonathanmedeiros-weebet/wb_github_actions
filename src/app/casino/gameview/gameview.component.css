@@ -5,9 +5,55 @@
 
 }
 
+.aviso h4{
+    margin: 40px !important;
+}
+
 .game-frame {
     width: 94%;
     margin: 0 auto;
+}
+
+
+.aviso{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.aviso h4{
+    margin: 20px;
+}
+
+.acoes{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ver-bonus {
+    margin: 20px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    color: var(--header);
+    background-color: var(--highlight);
+    width: 150px;
+    height: 42px;
+}
+
+.ver-jogos {
+    margin: 20px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    border: var(--highlight);
+    color: var(--highlight);
+    border-style: solid;
+    border-width: 1px;
+    width: 150px;
+    height: 42px;
 }
 
 iframe{
@@ -88,6 +134,7 @@ iframe{
     margin: 0;
 }
 
+
 @media only screen and (max-width: 1024px) {
     .game-view {
         position: fixed;
@@ -96,6 +143,10 @@ iframe{
         height: 100%;
         z-index: 2147483647;
         margin-top: -157px;
+    }
+
+    .game-view .header-game-view {
+        margin: 2% 0 0 0 ;
     }
 
     .game-frame {
@@ -118,12 +169,8 @@ iframe{
 }
 
 @media (min-width: 1025px) {
-    .game-view {
-        height: 100%;
-    }
-
     .game-frame {
-        height: calc(100vh - 195px);
+        height: calc(100vh - 234px);
     }
 
     iframe {

@@ -6,7 +6,7 @@ import {UntypedFormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -55,6 +55,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         saldo: 0,
         credito: 0,
         bonus: 0,
+        saldoMaisBonus: 0,
         bonusModalidade: 'nenhum'
     };
     usuario = new Usuario();
@@ -126,7 +127,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private connectionCheck: ConnectionCheckService,
         private renderer: Renderer2,
         private host: ElementRef,
-        private clienteService: ClienteService
+        private clienteService: ClienteService,
+        private layoutService: LayoutService
     ) {
         super();
     }
@@ -225,6 +227,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
+ 
+        if(this.mostrarSaldo == null){
+            localStorage.setItem('exibirSaldo', 'true');
+            this.mostrarSaldo = 'true';
+        }
 
         this.connectionCheck.onlineStatus$.subscribe((isOnline) => {
             let element = this.host.nativeElement.querySelector('.info-connection-card');
@@ -254,6 +261,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 }, 1000);
             }
         });
+
+        if (this.indiqueGanheHabilitado && (!this.isLoggedIn || this.isCliente) && !this.activeGameCassinoMobile()) {
+            this.layoutService.changeIndiqueGanheCardHeight(37);
+        }
     }
 
     ngOnDestroy() {
@@ -303,7 +314,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.auth.getPosicaoFinanceira()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                posicaoFinanceira => this.posicaoFinanceira = posicaoFinanceira,
+                posicaoFinanceira => {
+                    this.posicaoFinanceira = posicaoFinanceira;
+                    this.posicaoFinanceira.saldoMaisBonus = posicaoFinanceira.saldo;
+                    if (this.isCliente) {
+                        this.posicaoFinanceira.saldoMaisBonus = Number(posicaoFinanceira.saldo) + Number(posicaoFinanceira.bonus);
+                    }
+                },
                 error => {
                     if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
                         this.auth.logout();
@@ -502,14 +519,17 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.renderer.setStyle(card, 'height', '0');
         this.renderer.setStyle(card, 'padding', '0 20px');
         setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
+        setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(0); }, 300);
     }
 
     btnCardOnMouseOver() {
         this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '45px');
+        this.layoutService.changeIndiqueGanheCardHeight(45);
     }
 
     btnCardOnMouseOut() {
         this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
+        setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(37); }, 300);
     }
 
     iniciarParlaybay(){
