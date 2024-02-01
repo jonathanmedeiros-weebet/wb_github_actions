@@ -438,7 +438,7 @@
     },
     "indique_ganhe":{
         "indiqueGanhe": "Refer and earn",
-        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}} balance in your account",
+        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}}",
         "indiqueGanheInfo1": "Refer friends and earn R${{valorGanhoPorIndicacao}} for each referral",
         "indiqueGanheInfo2": "Refer a friend through your referral link and receive R${{valorGanhoPorIndicacao}} for each referral in your account balance. Check out our ",
         "seuLinkIndicacao": "Your referral link:",

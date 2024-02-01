@@ -438,7 +438,7 @@
     },
     "indique_ganhe":{
         "indiqueGanhe": "Indique e ganhe",
-        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}} de saldo na sua conta",
+        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}}",
         "indiqueGanheInfo1": "Indique amigos e ganhe R${{valorGanhoPorIndicacao}} por cada indicado",
         "indiqueGanheInfo2": "Indique um amigo através do seu link de indicação e receba R${{valorGanhoPorIndicacao}} por cada indicação no saldo da sua conta. Confira nossas ",
         "seuLinkIndicacao": "Seu link de indicação:",
