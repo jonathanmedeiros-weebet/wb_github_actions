@@ -37,6 +37,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     esportesAbertos = [48242];
     qtdJogosFutebol = 0;
     qtdJogosBasquete = 0;
+    futebolAoVivohabilitado = false;
+    basqueteAoVivohabilitado = false;
 
     chavesMercadosPrincipais = {
         1: {
@@ -66,6 +68,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         this.mobileScreen = window.innerWidth <= 1024;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
+        this.futebolAoVivohabilitado = this.paramsService.futebolAoVivoAtivo();
+        this.basqueteAoVivohabilitado = this.paramsService.basqueteAoVivoAtivo();
+
         this.definindoAlturas();
 
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
@@ -76,7 +81,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe(itens => this.itens = itens);
 
 
-        this.liveService.entrarSalaEventos();
+        this.liveService.entrarSalaEventos();1
         this.getJogosAoVivo();
     }
 

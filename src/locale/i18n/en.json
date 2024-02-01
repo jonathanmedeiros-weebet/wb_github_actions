@@ -42,6 +42,7 @@
         "nenhumEventoDisponivelNesteDia": "No events available on this day",
         "nenhumJogoEncontrado": "No game found",
         "nenhumEventoAoVivoDisponivel": "No live events available at this time!",
+        "nenhumModalidadeAoVivoDisponivel": "No live modality enabled at the moment!",
         "saldo": "Balance",
         "minhaConta": "My Account",
         "salvar": "Save",

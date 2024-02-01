@@ -115,13 +115,12 @@
                 {{'geral.nenhumEventoAoVivoDisponivel' | translate}}
             </div>
 
-            <div class="esporte" *ngIf="qtdJogosFutebol > 0">
-                <div class="esporte-header" (click)="toggleEsporte(1)">
+            <div class="esporte" *ngIf="futebolAoVivohabilitado && qtdJogosFutebol > 0">
+                <div class="esporte-header" (click)="toggleEsporte(1)" [ngClass]="{'collapsed-header': !esporteAberto(1)}">
                     <span class="column-left">
                         <span class="wbicon icon-futebol"></span>
                         <span class="esporte-nome">{{'submenu.futebol' | translate}}</span>
                     </span>
-
                     <span *ngIf="esporteAberto(1); else downIcon">
                             <i class="fa fa-angle-up"></i>
                         </span>
@@ -138,13 +137,12 @@
                 </div>
             </div>
 
-            <div class="esporte" *ngIf="qtdJogosBasquete > 0">
-                <div class="esporte-header" (click)="toggleEsporte(48242)">
+            <div class="esporte" *ngIf="basqueteAoVivohabilitado && qtdJogosBasquete > 0">
+                <div class="esporte-header" (click)="toggleEsporte(48242)" [ngClass]="{'collapsed-header': !esporteAberto(48242)}">
                     <span class="column-left">
                         <span class="wbicon icon-basquete"></span>
                         <span class="esporte-nome">{{'submenu.basquete' | translate}}</span>
                     </span>
-
                     <span *ngIf="esporteAberto(48242); else downIcon">
                             <i class="fa fa-angle-up"></i>
                         </span>
