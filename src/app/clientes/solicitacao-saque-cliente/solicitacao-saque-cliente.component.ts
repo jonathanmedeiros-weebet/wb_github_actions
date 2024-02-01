@@ -99,7 +99,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.cliente = res;
-                    if (this.metodoPagamentoDesabilitado) {
+
+                    if (!this.metodoPagamentoDesabilitado) {
                         if (!this.cliente.endereco) {
                             this.cadastroCompleto = false;
                             this.rotaCompletarCadastro = '/clientes/perfil';
