@@ -100,17 +100,15 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 res => {
                     this.cliente = res;
 
-                    if (!this.metodoPagamentoDesabilitado) {
-                        if (!this.cliente.endereco) {
-                            this.cadastroCompleto = false;
-                            this.rotaCompletarCadastro = '/clientes/perfil';
-                            this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
-                        }
-                        if (!this.cliente.chave_pix && this.permitirQualquerChavePix) {
-                            this.cadastroCompleto = false;
-                            this.rotaCompletarCadastro = '/clientes/perfil-pix';
-                            this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
-                        }
+                    if (!this.cliente.endereco) {
+                        this.cadastroCompleto = false;
+                        this.rotaCompletarCadastro = '/clientes/perfil';
+                        this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
+                    }
+                    if (!this.cliente.chave_pix && this.permitirQualquerChavePix) {
+                        this.cadastroCompleto = false;
+                        this.rotaCompletarCadastro = '/clientes/perfil-pix';
+                        this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
                     }
 
                     this.showLoading = false;
