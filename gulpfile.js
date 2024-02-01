@@ -3423,3 +3423,21 @@ gulp.task('betcampea.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('brinksbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "brinksbet.com",
+        banca: "BRINKS BET",
+        styles: ""
+    });
+});
+
+gulp.task('riquinhobet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "riquinhobet.com",
+        banca: "RIQUINHO BET",
+        styles: ""
+    });
+});
