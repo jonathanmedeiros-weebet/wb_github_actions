@@ -359,7 +359,9 @@
         "alfa-bet.club": "gulp alfa-bet.club",
         "fezinhabet.net": "gulp fezinhabet.net",
         "polarbet.vip": "gulp polarbet.vip",
-        "betcampea.com": "gulp betcampea.com"
+        "betcampea.com": "gulp betcampea.com",
+        "brinksbet.com": "gulp brinksbet.com",
+        "riquinhobet.com": "gulp riquinhobet.com"
     },
     "private": true,
     "dependencies": {
