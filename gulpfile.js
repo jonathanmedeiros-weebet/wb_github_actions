@@ -3378,3 +3378,12 @@ gulp.task('riquinhobet.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('joguebet.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "joguebet.net",
+        banca: "JOGUE BET",
+        styles: ""
+    });
+});

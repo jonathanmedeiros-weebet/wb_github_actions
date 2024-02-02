@@ -354,7 +354,8 @@
         "polarbet.vip": "gulp polarbet.vip",
         "betcampea.com": "gulp betcampea.com",
         "brinksbet.com": "gulp brinksbet.com",
-        "riquinhobet.com": "gulp riquinhobet.com"
+        "riquinhobet.com": "gulp riquinhobet.com",
+        "joguebet.net": "gulp joguebet.net"
     },
     "private": true,
     "dependencies": {
