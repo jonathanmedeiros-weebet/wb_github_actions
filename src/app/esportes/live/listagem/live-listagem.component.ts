@@ -127,6 +127,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                                 valido = false;
                             }
 
+                            if (!jogo.cotacoes.length) {
+                                valido = false;                                
+                            }
+
                             jogo.cotacoes.map(cotacao => {
                                 cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                                 cotacao.valorFinal = this.helperService.calcularCotacao2String(

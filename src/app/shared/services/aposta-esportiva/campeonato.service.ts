@@ -54,6 +54,23 @@ export class CampeonatoService {
             );
     }
 
+    getCampeonatosPuro(queryParams?: any): Observable<Campeonato[]> {
+        let requestOptions;
+        const url = `${this.CampeonatoUrl}/puro`;
+
+        if (queryParams) {
+            requestOptions = this.header.getRequestOptions(true, queryParams);
+        } else {
+            requestOptions = this.header.getRequestOptions(true);
+        }
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getCampeonato(id: number, queryParams?: any): Observable<Campeonato> {
         const url = `${this.CampeonatoUrl}/${id}`;
 
