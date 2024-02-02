@@ -165,15 +165,6 @@ gulp.task('mjrsports.com', function (done) {
     });
 });
 
-gulp.task('oliverbet.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "oliverbet.com",
-        banca: "Oliver Bet",
-        styles: ""
-    });
-});
-
 gulp.task('sertaobets.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1616,15 +1607,6 @@ gulp.task('bet101.bet', function (done) {
     });
 });
 
-gulp.task('carajasbet.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "carajasbet.com",
-        banca: "CARAJÁS BET",
-        styles: "",
-    });
-});
-
 gulp.task('a2bet.top', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1657,7 +1639,7 @@ gulp.task('sportpix.vip', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "sportpix.vip",
-        banca: "SPORT PIX",
+        banca: "SPORTVIP",
         styles: "",
     });
 });
@@ -2328,15 +2310,6 @@ gulp.task('a7bet.fun', function (done) {
     });
 });
 
-gulp.task('doonebet.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "doonebet.com",
-        banca: "DO ONE BET",
-        styles: "",
-    });
-});
-
 gulp.task('winvegas.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2511,15 +2484,6 @@ gulp.task('valebets.bet', function (done) {
     });
 });
 
-gulp.task('betsortefacil.wee.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "betsortefacil.wee.bet",
-        banca: "BET SORTE FÁCIL",
-        styles: "",
-    });
-});
-
 gulp.task('jogateka.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2651,15 +2615,6 @@ gulp.task('vegaz.bet', function (done) {
         server: "front3.wee.bet",
         host: "vegaz.bet",
         banca: "VEGAZ.BET",
-        styles: "",
-    });
-});
-
-gulp.task('betpixmais.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betpixmais.bet",
-        banca: "BET PIX MAIS",
         styles: "",
     });
 });
@@ -2953,15 +2908,6 @@ gulp.task('bullbets.online', function (done) {
     });
 });
 
-gulp.task('passira.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "passira.bet",
-        banca: "PASSIRA.BET",
-        styles: "",
-    });
-});
-
 gulp.task('betganha.vip', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -3048,15 +2994,6 @@ gulp.task('bbwins.bet', function (done) {
         server: "front4.wee.bet",
         host: "bbwins.bet",
         banca: "BB WINS",
-        styles: "",
-    });
-});
-
-gulp.task('betsampa.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betsampa.wee.bet",
-        banca: "BET SAMPA",
         styles: "",
     });
 });
@@ -3402,6 +3339,42 @@ gulp.task('fezinhabet.net', function (done) {
         server: "front2.wee.bet",
         host: "fezinhabet.net",
         banca: "FEZINHA BET",
+        styles: ""
+    });
+});
+
+gulp.task('polarbet.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "polarbet.vip",
+        banca: "POLAR BET",
+        styles: ""
+    });
+});
+
+gulp.task('betcampea.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betcampea.com",
+        banca: "BET CAMPEÃ",
+        styles: ""
+    });
+});
+
+gulp.task('brinksbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "brinksbet.com",
+        banca: "BRINKS BET",
+        styles: ""
+    });
+});
+
+gulp.task('riquinhobet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "riquinhobet.com",
+        banca: "RIQUINHO BET",
         styles: ""
     });
 });
