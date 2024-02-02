@@ -126,8 +126,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                             if (this.jogoBloqueado(jogo.event_id)) {
                                 valido = false;
                             }
-
-                            if (!jogo.cotacoes.length) {
+                            
+                            if (jogo.cotacoes.length) {
                                 valido = false;                                
                             }
 
