@@ -38,6 +38,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     qtdRolloverAtivos = 0;
     saldo = 0;
     saques = [];
+    labelChavePix = '';
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -51,7 +52,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private auth: AuthService,
         public activeModal: NgbActiveModal,
         private translate: TranslateService,
-        private router: Router
+        private router: Router,
     ) {
         super();
     }
@@ -124,7 +125,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]]
+                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]],
+                tipoChavePix: ['0', Validators.required],
+                clienteChavePix: ['', Validators.required]
             }
         );
     }
@@ -225,5 +228,43 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             }
         );
 
+    }
+
+    onChavePixChange() {
+        const chavePixValue = this.form.get('tipoChavePix').value;
+        const clienteChavePixControle = this.form.get('clienteChavePix');
+
+        clienteChavePixControle.clearValidators();
+        this.form.get('clienteChavePix').setValue('');
+
+        clienteChavePixControle.markAsPristine();
+        clienteChavePixControle.markAsUntouched();
+
+        if (chavePixValue !== '0') {
+          switch (chavePixValue) {
+            case 'cpf':
+                this.form.get('clienteChavePix').setValue(this.cliente.cpf);
+                clienteChavePixControle.setValidators([Validators.required]);
+                this.labelChavePix = "CPF";
+                break;
+            case 'email':
+                clienteChavePixControle.setValidators([Validators.required, Validators.email]);
+                this.labelChavePix = "E-mail";
+                break;
+            case 'phone':
+                clienteChavePixControle.setValidators([Validators.required]);
+                this.labelChavePix = "Telefone";
+                break;
+            default:
+                this.labelChavePix = "Chave Pix";
+                break;
+          }
+        }
+        clienteChavePixControle.updateValueAndValidity();
+    }
+
+    getMask() {
+        let tipoChavePix = this.form.get('tipoChavePix').value;
+        return tipoChavePix === 'phone' ? '(00) 00000-0000' : '';
     }
 }

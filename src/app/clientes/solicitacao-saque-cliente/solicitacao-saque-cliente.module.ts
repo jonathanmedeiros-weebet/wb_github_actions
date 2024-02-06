@@ -6,6 +6,7 @@ import {SolicitacaoSaqueClienteComponent} from './solicitacao-saque-cliente.comp
 import {SharedModule} from '../../shared/shared.module';
 import {NgxCurrencyModule} from 'ngx-currency';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
         SolicitacaoSaqueClienteRoutingModule,
         NgxCurrencyModule,
         NgbModule,
+        NgxMaskModule.forRoot(),
     ],
 })
 export class SolicitacaoSaqueClienteModule {

@@ -27,22 +27,49 @@
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div class="row">
                             <div class="col col-sm-3 saque-pix">
-                                <div class="form-group required" [ngClass]="{'text-center': isMobile}">
-                                    <span class="alerta-saldo mt-3">
-                                        {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
-                                    <label class="label"
-                                           [ngClass]="{'label-input-valor': isMobile}">
-                                        <span *ngIf="isMobile">{{'saques.informeOValor' | translate}}</span>
-                                        <span *ngIf="!isMobile">{{'saques.informeValorDesejadoSaque' | translate}}</span>
-                                    </label>
-                                    <input currencyMask
-                                           [ngClass]="{'form-control inverted-out text-left mt-3': !isMobile, 'input-valor': isMobile}"
-                                           [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                           formControlName="valor">
-                                    <app-error-msg [control]="form.get('valor')"></app-error-msg>
-                                    <span
-                                        class="hide-mobile mt-3 d-block">
-                                        {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
+                                <div class="form-group required">
+                                    <div class="mt-3">
+                                        <label class="label text-left">Chave Pix</label>
+                                    </div>
+                                    <div class="mt-3">
+                                        <div class="form-group">
+                                            <select formControlName="tipoChavePix" class="form-control inverted-out" (change)="onChavePixChange()">
+                                                <option value="0" disabled>{{'geral.selecioneChavePix' | translate}}</option>
+                                                <option value="cpf">CPF</option>
+                                                <option value="email">E-mail</option>
+                                                <option value="phone">Telefone</option>
+                                            </select>
+                                            <app-error-msg [control]="form.get('tipoChavePix')"></app-error-msg>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3" *ngIf="form.get('tipoChavePix').value !== '0'">
+                                        <div class="form-group">
+                                            <label for="clienteChavePix" id="labelChavePix" class="text-left">{{ labelChavePix }}</label>
+                                            <input type="text" id="clienteChavePix" class="form-control inverted-out"
+                                                    [ngClass]="applyCssInputError('clienteChavePix')"
+                                                    formControlName="clienteChavePix"
+                                                    [mask]="getMask()"
+                                                    [readonly]="form.get('tipoChavePix').value == 'cpf'">
+                                            <app-error-msg [control]="form.get('clienteChavePix')"></app-error-msg>
+                                        </div>
+                                    </div>
+                                    <div [ngClass]="{'text-center': isMobile}">
+                                        <span class="alerta-saldo mt-3">
+                                            {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
+                                        <label class="label"
+                                               [ngClass]="{'label-input-valor': isMobile}">
+                                            <span *ngIf="isMobile">{{'saques.informeOValor' | translate}}</span>
+                                            <span *ngIf="!isMobile">{{'saques.informeValorDesejadoSaque' | translate}}</span>
+                                        </label>
+                                        <input currencyMask
+                                               [ngClass]="{'form-control inverted-out text-left mt-3': !isMobile, 'input-valor': isMobile}"
+                                               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                               formControlName="valor">
+                                        <app-error-msg [control]="form.get('valor')"></app-error-msg>
+                                        <span
+                                            class="hide-mobile mt-3 d-block">
+                                            {{'saques.saldoDisponivelParaSaque' | translate}}: {{ saldo | currency }}</span>
+                                    </div>
                                 </div>
                                 <div *ngIf="apiPagamentos == 'sauto_pay' && !metodoPagamentoDesabilitado"
                                      class="alert alert-info alert-dismissible fade show">
