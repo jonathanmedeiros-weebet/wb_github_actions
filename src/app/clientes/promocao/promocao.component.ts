@@ -104,15 +104,13 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
             response => {
                 this.rollovers = response.rollovers;
                 this.rodadas = response.rodadas.map(rodada => {
-                    const status = rodada.ativo ? (new Date(rodada.termino) > new Date() ? 'Ativo' : 'Expirado') : 'Cancelado';
+                    const status = rodada.ativo ? (new Date(rodada.expiraEm) > new Date() ? 'Ativo' : 'Expirado') : 'Cancelado';
                     return { ...rodada, status };
                 });
                 this.rodadas.sort((a, b) => {
                     const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3 };
                     return statusOrder[a.status] - statusOrder[b.status];
                 });
-                
-                console.log(this.rodadas);
 
                 this.rodadasListagem = this.rodadas;
                 this.rolloversListagem = this.rollovers;

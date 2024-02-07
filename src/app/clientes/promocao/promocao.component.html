@@ -14,7 +14,7 @@
                 <h2>{{ 'geral.promocoes' | translate }}</h2>
             </div>
             <div class="info-page-promotion">
-                <p>{{ 'geral.opcaoPromocao' | translate }}</p>
+                <p style="font-size: 12px; margin-bottom: 0;">{{ 'geral.opcaoPromocao' | translate }}</p>
             </div>
             <div class="tabs">
                 <a [ngClass]="tabSelected == 'bonus' ? 'active' : ''" 
@@ -238,7 +238,7 @@
                                     <ng-container *ngFor="let rodada of rodadasListagem">
                                         <tr>
                                             <td class="td-custom">
-                                                {{ rodada.termino | moment: 'DD/MM/YYYY' }}
+                                                {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}
                                             </td>
                                             <td class="td-custom">
                                                 {{ rodada.valor | currency }}
@@ -247,7 +247,7 @@
                                                 {{rodada.quantidade}}
                                             </td>
                                             <td class="td-custom">
-                                                {{rodada.game}}
+                                                {{rodada.gameName}}
                                             </td>
                                             <td class="td-custom">
                                                 {{rodada.status}}
@@ -271,14 +271,14 @@
                         </div>
                         <ng-container *ngFor="let rodada of rodadasListagem">
                             <div class="rodada-gratis-container">
-                                <p class="info-rodada">{{ 'geral.rodadaGratis' | translate }}: <span>Expira em {{ rodada.termino | moment: 'DD/MM/YYYY' }}</span></p>
-                                <p class="info-rodada">{{ 'geral.valor' | translate }}: <span>{{ rodada.vlaor | currency }}</span></p>
+                                <p class="info-rodada">{{ 'geral.rodadaGratis' | translate }}: <span>Expira em {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}</span></p>
+                                <p class="info-rodada">{{ 'geral.valor' | translate }}: <span>{{ rodada.valor | currency }}</span></p>
                                 <p class="info-rodada">{{ 'geral.quantidade' | translate }}: <span>{{ rodada.quantidade }}</span></p>
-                                <p class="info-rodada">{{ 'geral.jogo' | translate }}: <span>{{ rodada.game }}</span></p>
+                                <p class="info-rodada">{{ 'geral.jogo' | translate }}: <span>{{ rodada.gameName }}</span></p>
                                 <div class="button-rodada">
                                     <button class="btn btn-custom btn-jogar-rodada" 
-                                    [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
-                                    (click)="openGame(rodada.game, rodada.fornecedor)">{{ 'geral.jogarAgora' | translate }}</button>
+                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
+                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
                                 </div>
                             </div>
                         </ng-container>
