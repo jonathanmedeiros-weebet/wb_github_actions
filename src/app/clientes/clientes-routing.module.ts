@@ -17,10 +17,6 @@ const routes: Routes = [{
             loadChildren: () => import('./perfil/cliente-perfil.module').then(p => p.ClientePerfilModule)
         },
         {
-            path: 'perfil-pix',
-            loadChildren: () => import('./perfil-pix/perfil-pix.module').then(p => p.PerfilPixModule)
-        },
-        {
             path: 'configuracoes',
             loadChildren: () => import('./configuracoes/configuracoes.module').then(f => f.ConfiguracoesModule)
         },

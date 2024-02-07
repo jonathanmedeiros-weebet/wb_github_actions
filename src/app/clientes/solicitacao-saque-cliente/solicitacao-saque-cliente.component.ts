@@ -126,7 +126,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     createForm() {
         this.form = this.fb.group({
                 valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]],
-                tipoChavePix: ['0', Validators.required],
+                tipoChavePix: ['', Validators.required],
                 clienteChavePix: ['', Validators.required]
             }
         );
@@ -241,10 +241,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         clienteChavePixControle.markAsUntouched();
 
         if (chavePixValue !== '0') {
+            clienteChavePixControle.setValidators([Validators.required]);
+
           switch (chavePixValue) {
             case 'cpf':
                 this.form.get('clienteChavePix').setValue(this.cliente.cpf);
-                clienteChavePixControle.setValidators([Validators.required]);
                 this.labelChavePix = "CPF";
                 break;
             case 'email':
@@ -252,8 +253,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 this.labelChavePix = "E-mail";
                 break;
             case 'phone':
-                clienteChavePixControle.setValidators([Validators.required]);
                 this.labelChavePix = "Telefone";
+                break;
+            case 'aleatoria':
+                this.labelChavePix = "Chave aleatória";
                 break;
             default:
                 this.labelChavePix = "Chave Pix";
@@ -265,6 +268,14 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     getMask() {
         let tipoChavePix = this.form.get('tipoChavePix').value;
-        return tipoChavePix === 'phone' ? '(00) 00000-0000' : '';
+        let chaveComMascara = null;
+
+        if (tipoChavePix === 'phone') {
+            chaveComMascara = '(00) 00000-0000';
+        } else if (tipoChavePix === 'aleatoria') {
+            chaveComMascara = 'AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA';
+        }
+
+        return chaveComMascara;
     }
 }
