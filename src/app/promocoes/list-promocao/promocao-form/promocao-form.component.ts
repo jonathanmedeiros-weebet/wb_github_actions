@@ -68,7 +68,7 @@ export class PromocaoFormComponent implements OnInit {
     getTamanhoTela() {
         const width = window.innerWidth;
     
-        if (width <=  740) {
+        if (width <=  820) {
             this.exibirImagem = this.promocao.imagemMobile;
         } else {
             this.exibirImagem = this.promocao.imagemDesktop;
