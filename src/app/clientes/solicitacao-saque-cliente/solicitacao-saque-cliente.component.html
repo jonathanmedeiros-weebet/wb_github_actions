@@ -19,7 +19,8 @@
                     <strong>{{'geral.atencao' | translate}}!</strong> <br>
                     {{'financeiro.valorMinimoSaque' | translate}}: <strong>{{valorMinSaque | currency}}</strong><br>
                     {{'financeiro.valorMaximoSaqueDiario' | translate}}: <strong>{{valorMaxSaqueDiario | currency}}</strong><br>
-                    {{'financeiro.valorMaximoSaqueMensal' | translate}}: <strong> {{valorMaxSaqueMensal | currency}}</strong>
+                    {{'financeiro.valorMaximoSaqueMensal' | translate}}: <strong> {{valorMaxSaqueMensal | currency}}</strong><br>
+                    {{ 'geral.alertaSaque' | translate }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <div class="alert alert-secondary" *ngIf="!permitirQualquerChavePix">

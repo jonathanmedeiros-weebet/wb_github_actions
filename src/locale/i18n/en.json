@@ -204,7 +204,8 @@
         "cadastro": "Registration",
         "alertaChavePixCpf": "When requesting the withdrawal, it will be processed through the Pix key associated with your CPF (Brazilian Tax ID). Ensure that your CPF is filled in correctly.",
         "esportivo": "sporty",
-        "selecioneChavePix": "select your pix key"
+        "selecioneChavePix": "select your pix key",
+        "alertaSaque": "Only withdrawals to Pix keys linked to the account holder are allowed."
     },
     "dias": {
         "ontem": "Yesterday",

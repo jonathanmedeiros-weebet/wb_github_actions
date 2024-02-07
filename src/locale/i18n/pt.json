@@ -204,7 +204,8 @@
         "cadastro": "Cadastro",
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
         "esportivo": "esportivo",
-        "selecioneChavePix": "Selecione a chave pix"
+        "selecioneChavePix": "Selecione a chave pix",
+        "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos."
     },
     "dias": {
         "ontem": "Ontem",
