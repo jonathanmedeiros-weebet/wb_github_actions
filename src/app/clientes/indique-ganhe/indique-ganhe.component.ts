@@ -26,6 +26,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     valorMinDepositado;
     valorMinApostado;
     qtdDiasRequisitos;
+    tipoSaldoGanho;
+    prazoResgateSaldo;
+    modalidadePromocao;
 
     nomeBanca;
 
@@ -94,6 +97,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         this.valorMinDepositado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_depositado;
         this.valorMinApostado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_apostado;
         this.qtdDiasRequisitos = this.paramsLocaisService.getOpcoes().indique_ganhe_qtd_dias_max;
+        this.tipoSaldoGanho = this.paramsLocaisService.getOpcoes().indique_ganhe_tipo_saldo_ganho;
+        this.prazoResgateSaldo = this.paramsLocaisService.getOpcoes().indique_ganhe_prazo_resgate_saldo;
+        this.modalidadePromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_modalidade_promocao;
         this.nomeBanca = this.paramsLocaisService.getOpcoes().banca_nome;
         this.mobileScreen = window.innerWidth <= 1024;
         this.isAppMobile = this.authService.isAppMobile();
@@ -138,6 +144,24 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
                 centered: true
             }
         );
+    }
+
+    tipoSaldoGanhoModalRegras(detalhado = false) {
+        switch (this.tipoSaldoGanho) {
+            case 'real':
+                if (detalhado) {
+                    return this.translateService.instant('regras_indique_ganhe.real_sacavel');
+                }
+                return "real";
+            case 'bonus':
+                if (detalhado) {
+                    return this.translateService.instant('geral.bonus').toLowerCase() +
+                        " (" + this.translateService.instant('geral.' + this.modalidadePromocao).toLowerCase() + ")";
+                }
+                return this.translateService.instant('geral.bonus').toLowerCase();
+            default:
+                return "";
+        }
     }
 
     abrirModalMinhasIndicacoes(indicadoSelecionado)
@@ -195,11 +219,34 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
             );
     }
 
+    redeemCommission(commissionId) {
+        this.indiqueGanheService.redeemCommission(commissionId)
+            .subscribe(
+                response => this.handleRedeemCommission(response),
+                error => this.handleError(error)
+            );
+
+    }
+
+    handleRedeemCommission(response) {
+        this.messageService.success(response.message);
+        this.indicados.forEach((currentIndicado, index, indicados) => {
+            if (currentIndicado.comissao_id == response.commissionId) {
+                indicados[index].status = 'pago';
+                indicados[index].comissionado_em.data_hora = response.commissioned_in;
+                this.total.recebido += currentIndicado.valor_comissao;
+                this.total.pendente -= currentIndicado.valor_comissao;
+                return;
+            }
+        })
+    }
+
     setStatusIcon(status) {
         switch (status) {
             case 'pago':
                 return 'fa-solid fa-gift';
             case 'pendente':
+            case 'resgate':
                 return 'fa-regular fa-clock';
             case 'anulado':
                 return 'fa-regular fa-circle-xmark';
@@ -222,10 +269,23 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         switch (status) {
             case 'pago':
                 return this.translateService.instant('geral.depositado');
+            case 'resgate':
+                return this.translateService.instant('indique_ganhe.resgatar');
             case 'pendente':
                 return this.translateService.instant('geral.pendente');
             case 'anulado':
                 return this.translateService.instant('geral.cancelado');
+        }
+    }
+
+    translateTipoSaldo(tipoSaldo) {
+        switch (tipoSaldo) {
+            case 'real':
+                return "Real";
+            case 'bonus':
+                return this.translateService.instant('geral.bonus');
+            default:
+                return "";
         }
     }
 
@@ -234,6 +294,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
             case 'pago':
                 return "#0C9F19";
             case 'pendente':
+            case 'resgate':
                 return "#6A6868";
             case 'anulado':
                 return "#E9283B";
@@ -272,7 +333,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         response.forEach(indicacao => {
             if (indicacao.status === "pago") {
                 this.total.recebido += indicacao.valor_comissao;
-            } else if (indicacao.status === "pendente") {
+            } else if (["pendente", "resgate"].includes(indicacao.status)) {
                 this.total.pendente += indicacao.valor_comissao;
             }
         });
