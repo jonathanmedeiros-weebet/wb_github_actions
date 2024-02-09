@@ -1937,7 +1937,9 @@ label {
         margin: 0;
     }
 
-    body {
-        overflow-y: hidden;
+    @supports (-webkit-touch-callout: none) {
+        body {
+            overflow: hidden;
+        }
     }
 }

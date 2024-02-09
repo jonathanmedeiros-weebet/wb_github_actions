@@ -155,6 +155,17 @@ footer {
     margin-bottom: 4px;
 }
 
+@media only screen and (max-width: 480px) {
+    @supports (-webkit-touch-callout: none) {
+        .info.copyright {
+            margin-bottom: 35px !important;
+        }
+        footer {
+            margin-bottom: 38px;
+        }
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     footer {
         padding-bottom: 60px;
