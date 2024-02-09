@@ -31,6 +31,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     casinoHabilitado;
     loteriaPopularHabilitada;
     activeId = 'esporte';
+    paginaPrincipal: string;
 
     showLoading = true;
     showLoadingModal = true;
@@ -112,6 +113,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
         this.getApostas();
 
+        this.paginaPrincipal = this.params.getOpcoes().pagina_inicial;
+        this.tabSelected = this.paginaPrincipal == 'cassino_ao_vivo' ? 'cassino' : this.paginaPrincipal;
+
         this.isCliente = this.auth.isCliente();
         this.slug = config.SLUG;
 
@@ -123,6 +127,31 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.menuFooterService.setIsPagina(false);
     }
 
+    getTabs(): any[] {
+        const tabs: any[] = [
+            { id: 'esporte', label: 'geral.esporte', habilitado: this.esporteHabilitado },
+            { id: 'cassino', label: 'geral.cassino', habilitado: this.casinoHabilitado },
+            { id: 'acumuladao', label: 'geral.acumuladao', habilitado: this.acumuladaoHabilitado },
+            { id: 'desafio', label: 'geral.desafio', habilitado: this.desafioHabilitado },
+            { id: 'loteria', label: 'geral.loteria', habilitado: this.loteriasHabilitada },
+            { id: 'loteria-popular', label: 'submenu.loteriaPopular', habilitado: this.loteriaPopularHabilitada }
+        ];
+    
+        const sortedTabs = tabs.slice();
+        let principalIndex = sortedTabs.findIndex(tab => tab.id === this.paginaPrincipal);
+    
+        if (this.paginaPrincipal === 'cassino' || this.paginaPrincipal === 'cassino_ao_vivo') {
+            principalIndex = sortedTabs.findIndex(tab => tab.id === 'cassino');
+        }
+
+        if (principalIndex !== -1) {
+            const principalTab = sortedTabs.splice(principalIndex, 1)[0];
+            sortedTabs.unshift(principalTab);
+        }
+    
+        return sortedTabs.filter(tab => tab.habilitado);
+    }
+    
     getApostas() {
         this.loading = true;
 
