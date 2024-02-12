@@ -380,15 +380,6 @@ gulp.task('esportebetsvip.com', function (done) {
     });
 });
 
-gulp.task('betsgol.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betsgol.wee.bet",
-        banca: "BETS GOL",
-        styles: "--header:#ff0000; --foreground-header:#000; --sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;",
-    });
-});
-
 gulp.task('mastersports.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -970,15 +961,6 @@ gulp.task('rondobet.com', function (done) {
     });
 });
 
-gulp.task('goldavirada.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "goldavirada.bet",
-        banca: "GOL DA VIRADA",
-        styles: "",
-    });
-});
-
 gulp.task('bets60.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1433,15 +1415,6 @@ gulp.task('openbets.vip', function (done) {
         server: "front2.wee.bet",
         host: "openbets.vip",
         banca: "OPEN BETS",
-        styles: "",
-    });
-});
-
-gulp.task('r13.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "r13.bet",
-        banca: "R13.BET",
         styles: "",
     });
 });
@@ -2360,15 +2333,6 @@ gulp.task('veteranobet.com', function (done) {
     });
 });
 
-gulp.task('betfy.club', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "betfy.club",
-        banca: "BET FY",
-        styles: "",
-    });
-});
-
 gulp.task('condecassinos.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2994,15 +2958,6 @@ gulp.task('bbwins.bet', function (done) {
         server: "front4.wee.bet",
         host: "bbwins.bet",
         banca: "BB WINS",
-        styles: "",
-    });
-});
-
-gulp.task('reidocassino.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "reidocassino.net",
-        banca: "REI DO CASSINO",
         styles: "",
     });
 });
