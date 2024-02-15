@@ -3342,3 +3342,21 @@ gulp.task('joguebet.net', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betbastet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betbastet.com",
+        banca: "BET BASTET",
+        styles: ""
+    });
+});
+
+gulp.task('americanbet.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "americanbet.online",
+        banca: "AMERICAN BET",
+        styles: ""
+    });
+});
