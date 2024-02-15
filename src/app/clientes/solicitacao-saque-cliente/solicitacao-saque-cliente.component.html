@@ -22,6 +22,9 @@
                     {{'financeiro.valorMaximoSaqueMensal' | translate}}: <strong> {{valorMaxSaqueMensal | currency}}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                <div class="alert alert-secondary" *ngIf="!permitirQualquerChavePix">
+                    {{ 'geral.alertaChavePixCpf' | translate }}
+                </div>
                 <div *ngIf="cadastroCompleto && !respostaSolicitacao">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>

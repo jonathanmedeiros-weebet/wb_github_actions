@@ -32,4 +32,14 @@ export class IndiqueGanheService {
 				catchError(this.errorService.handleError)
 			);
 	}
+
+	redeemCommission(commissionId: number): Observable<any> {
+		return this.http.post(`${this.indiqueGanheUrl}/resgatar-saldo`,
+			{commissionId: commissionId},
+			this.header.getRequestOptions(true))
+			.pipe(
+				map((res: any) => res.results),
+				catchError(this.errorService.handleError)
+			);
+	}
 }
