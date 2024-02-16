@@ -224,6 +224,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         this.auth.setIsCliente(true);
 
                         localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
+                        localStorage.setItem('promocaoPrimeiroDepositoAtivo', res.dataUser.promocao_primeiro_deposito_ativa);
                         let nome = values.nome.split(" ")[0];
                         this.router.navigate(
                             ['/welcome'],

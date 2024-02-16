@@ -17,7 +17,7 @@ export class WelcomePageComponent {
     soCassino = false;
     validEmail;
     bancaNome;
-
+    booleanPromoPrimeiroDepositoAtivo;
 
     constructor(
         private route: ActivatedRoute,
@@ -36,6 +36,9 @@ export class WelcomePageComponent {
         if (localStorage.getItem('permissionWelcomePage') !== null ) {
             localStorage.removeItem('permissionWelcomePage');
         }
+
+        let promoPrimeiroDepositoAtivo = localStorage.getItem('promocaoPrimeiroDepositoAtivo'); 
+        this.booleanPromoPrimeiroDepositoAtivo = JSON.parse(promoPrimeiroDepositoAtivo);
 
         if (this.params.getOpcoes().casino && !this.params.getOpcoes().esporte) {
             this.soCassino = true;
