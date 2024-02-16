@@ -1612,7 +1612,7 @@ gulp.task('sportpix.vip', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "sportpix.vip",
-        banca: "SPORTVIP",
+        banca: "SPORTPIX",
         styles: "",
     });
 });
