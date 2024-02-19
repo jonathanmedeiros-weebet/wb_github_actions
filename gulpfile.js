@@ -380,15 +380,6 @@ gulp.task('esportebetsvip.com', function (done) {
     });
 });
 
-gulp.task('betsgol.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betsgol.wee.bet",
-        banca: "BETS GOL",
-        styles: "--header:#ff0000; --foreground-header:#000; --sidebar-left: #000; --sidebar-right: #000; --odds:#ff0000;",
-    });
-});
-
 gulp.task('mastersports.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -970,15 +961,6 @@ gulp.task('rondobet.com', function (done) {
     });
 });
 
-gulp.task('goldavirada.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "goldavirada.bet",
-        banca: "GOL DA VIRADA",
-        styles: "",
-    });
-});
-
 gulp.task('bets60.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1437,15 +1419,6 @@ gulp.task('openbets.vip', function (done) {
     });
 });
 
-gulp.task('r13.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "r13.bet",
-        banca: "R13.BET",
-        styles: "",
-    });
-});
-
 gulp.task('imperiopix.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1639,7 +1612,7 @@ gulp.task('sportpix.vip', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "sportpix.vip",
-        banca: "SPORTVIP",
+        banca: "SPORTPIX",
         styles: "",
     });
 });
@@ -1952,6 +1925,7 @@ gulp.task('goltop.bet', function (done) {
         host: "goltop.bet",
         banca: "GOL TOP",
         styles: "",
+        scripts: "<script>!function(e,t){'object'==typeof exports&&'object'==typeof module?module.exports=t():'function'==typeof define&&define.amd?define([],t):'object'==typeof exports?exports.install=t():e.install=t()}(window,(function(){return function(e){var t={};function n(o){if(t[o])return t[o].exports;var r=t[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,n),r.l=!0,r.exports}return n.m=e,n.c=t,n.d=function(e,t,o){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},n.r=function(e){'undefined'!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:'Module'}),Object.defineProperty(e,'__esModule',{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&'object'==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(n.r(o),Object.defineProperty(o,'default',{enumerable:!0,value:e}),2&t&&'string'!=typeof e)for(var r in e)n.d(o,r,function(t){return e[t]}.bind(null,r));return o},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,'a',t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p='',n(n.s=0)}([function(e,t,n){'use strict';var o=this&&this.__spreadArray||function(e,t,n){if(n||2===arguments.length)for(var o,r=0,i=t.length;r<i;r++)!o&&r in t||(o||(o=Array.prototype.slice.call(t,0,r)),o[r]=t[r]);return e.concat(o||Array.prototype.slice.call(t))};Object.defineProperty(t,'__esModule',{value:!0});var r=function(e,t,n){var o,i=e.createElement('script');i.type='text/javascript',i.async=!0,i.src=t,n&&(i.onerror=function(){r(e,n)});var a=e.getElementsByTagName('script')[0];null===(o=a.parentNode)||void 0===o||o.insertBefore(i,a)};!function(e,t,n){e.KwaiAnalyticsObject=n;var i=e[n]=e[n]||[];i.methods=['page','track','identify','instances','debug','on','off','once','ready','alias','group','enableCookie','disableCookie'];var a=function(e,t){e[t]=function(){for(var n=[],r=0;r<arguments.length;r++)n[r]=arguments[r];var i=o([t],n,!0);e.push(i)}};i.methods.forEach((function(e){a(i,e)})),i.instance=function(e){var t,n=(null===(t=i._i)||void 0===t?void 0:t[e])||[];return i.methods.forEach((function(e){a(n,e)})),n},i.load=function(e,o){var a='https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js';i._i=i._i||{},i._i[e]=[],i._i[e]._u=a,i._t=i._t||{},i._t[e]=+new Date,i._o=i._o||{},i._o[e]=o||{};var c='?sdkid='.concat(e,'&lib=').concat(n);r(t,a+c,'https://s16-11187.ap4r.com/kos/s101/nlav11187/pixel/events.js'+c)}}(window,document,'kwaiq')}])}));</script><script>kwaiq.load('584662125227278377');kwaiq.page();</script>",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TBWH2RNR');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TBWH2RNR'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
         description: "Acesse a GolTop, Site de Apostas Esportivas, Bônus de Cadastro de R$ 5,00 reais, Bônus de deposito de 100%, Site de Cassino, Cassino Ao Vivo, Fortune Tiger, Fortune Ox, Fortune Rabbit, Fortune Mouse, Aviator, Mines e Spaceman - Jogue com Facilidade."
@@ -2357,15 +2331,6 @@ gulp.task('veteranobet.com', function (done) {
         styles: "",
         pixel: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K5MCFHWK');</script><!-- End Google Tag Manager -->" +
         "<script> !function(e,t){'object'==typeof exports&&'object'==typeof module?module.exports=t():'function'==typeof define&&define.amd?define([],t):'object'==typeof exports?exports.install=t():e.install=t()}(window,(function(){return function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){'undefined'!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:'Module'}),Object.defineProperty(e,'__esModule',{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&'object'==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,'default',{enumerable:!0,value:e}),2&t&&'string'!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,'a',t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p='',n(n.s=0)}([function(e,t,n){'use strict';var r=this&&this.__spreadArray||function(e,t,n){if(n||2===arguments.length)for(var r,o=0,i=t.length;o<i;o++)!r&&o in t||(r||(r=Array.prototype.slice.call(t,0,o)),r[o]=t[o]);return e.concat(r||Array.prototype.slice.call(t))};!function(e){var t=window;t.KwaiAnalyticsObject=e,t[e]=t[e]||[];var n=t[e];n.methods=['page','track','identify','instances','debug','on','off','once','ready','alias','group','enableCookie','disableCookie'];var o=function(e,t){e[t]=function(){var n=Array.from(arguments),o=r([t],n,!0);e.push(o)}};n.methods.forEach((function(e){o(n,e)})),n.instance=function(e){var t=n._i[e]||[];return n.methods.forEach((function(e){o(t,e)})),t},n.load=function(t,r){n._i=n._i||{},n._i[t]=[],n._i[t]._u='https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js',n._t=n._t||{},n._t[t]=+new Date,n._o=n._o||{},n._o[t]=r||{};var o=document.createElement('script');o.type='text/javascript',o.async=!0,o.src='https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js?sdkid='+t+'&lib='+e;var i=document.getElementsByTagName('script')[0];i.parentNode.insertBefore(o,i)}}('kwaiq')}])})); </script> <script> kwaiq.load('526050931688611934'); kwaiq.page(); kwaiq.track('contentview'); </script>",
-    });
-});
-
-gulp.task('betfy.club', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "betfy.club",
-        banca: "BET FY",
-        styles: "",
     });
 });
 
@@ -2998,15 +2963,6 @@ gulp.task('bbwins.bet', function (done) {
     });
 });
 
-gulp.task('reidocassino.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "reidocassino.net",
-        banca: "REI DO CASSINO",
-        styles: "",
-    });
-});
-
 gulp.task('beton.club', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -3384,6 +3340,24 @@ gulp.task('joguebet.net', function (done) {
         server: "front3.wee.bet",
         host: "joguebet.net",
         banca: "JOGUE BET",
+        styles: ""
+    });
+});
+
+gulp.task('betbastet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betbastet.com",
+        banca: "BET BASTET",
+        styles: ""
+    });
+});
+
+gulp.task('americanbet.online', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "americanbet.online",
+        banca: "AMERICAN BET",
         styles: ""
     });
 });

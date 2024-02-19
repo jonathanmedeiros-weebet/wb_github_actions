@@ -90,19 +90,6 @@
         </div>
         <div class="row" *ngIf="!formSocial">
             <div class="col-md-12">
-                <div class="form-group mb-4">
-                    <div class="input-md">
-                        <input type="text" id="usuario" class="form-control inverted-out" formControlName="usuario"
-                               [ngClass]="applyCssInputError('usuario')" placeholder=" ">
-                        <label for="usuario">{{'geral.nomeDeUsuario' | translate}}</label>
-                    </div>
-
-                    <app-error-msg [control]="form.get('usuario')" label="{{'geral.nomeDeUsuario' | translate}}" class="text-left"></app-error-msg>
-                </div>
-            </div>
-        </div>
-        <div class="row" *ngIf="!formSocial">
-            <div class="col-md-12">
                 <div class="form-group" [ngClass]="applyCssDivError('senha')">
                     <div class="input-md">
                         <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
@@ -159,9 +146,9 @@
                         [routerLink]="['/informacoes/termos-condicoes']"
                         class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
                     {{'geral.deAcordoComOsTermos2' | translate}}
-                    <a id="linkPolitica" 
+                    <a id="linkPolitica"
                         target="_blank"
-                        [routerLink]="['/informacoes/politica-privacidade']" 
+                        [routerLink]="['/informacoes/politica-privacidade']"
                         class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
                 </label>
             </div>

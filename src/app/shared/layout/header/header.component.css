@@ -605,6 +605,43 @@ body .change-theme {
     }
 }
 
+@media only screen and (max-width: 1366px) and (min-width: 1280px){    
+    .w-130 {
+        width: 103px;
+    }
+    .side-left {
+        padding-left: 10px;
+        width: 600px;
+    }
+    .side-right {
+        padding-right: 0;
+        width: 600px;
+    }
+    .logo {
+        max-width: 215px;
+    }
+}
+
+@media screen and (max-width: 1280px) and (min-width: 1025px) {
+    .side-left {
+        padding-left: 7px;
+        width: 325px;
+    }
+    .side-right {
+        padding-right: 0;
+        width: 420px;
+    }
+}
+
+@media screen and (max-width: 1116px) and (min-width: 1025px) {
+    .logo {
+        max-width: 165px;
+    }
+    .side-left {
+        width: 270px;
+    }
+}
+
 .info-connection-card {
     display: block;
     position: relative;
