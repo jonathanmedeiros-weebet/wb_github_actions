@@ -10,7 +10,8 @@ import {
     MenuFooterService,
     MessageService,
     ParametrosLocaisService,
-    SidebarService
+    SidebarService,
+    LoteriaPopularService
 } from 'src/app/services';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -35,6 +36,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     acumuladaoHabilitado;
     desafioHabilitado;
     casinoHabilitado;
+    esporteHabilitado;
+    loteriaPopularHabilitada;
     activeId = 'esporte';
 
     showLoading = false;
@@ -50,7 +53,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     loading = false;
 
-    tabSelected = 'esporte';
+    tabSelected: string;
 
     hoveredDate: NgbDate | null = null;
     selectedDate: string = '';
@@ -67,6 +70,10 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     origin;
     appMobile;
+    paginaPrincipal: string;
+    selectedOption: string;
+
+    options: {value: string, label: string}[] = [];
 
     constructor(
         private messageService: MessageService,
@@ -85,6 +92,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         private desafioApostaService: DesafioApostaService,
         private cassinoService: CasinoApiService,
         private loteriaService: ApostaLoteriaService,
+        private loteriaPopularService: LoteriaPopularService,
         private translate: TranslateService,
         private auth: AuthService
     ) {
@@ -112,23 +120,50 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
-
+        this.esporteHabilitado = this.params.getOpcoes().esporte;
+        this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
         this.casinoHabilitado = this.params.getOpcoes().casino;
-
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
+        
+        this.paginaPrincipal = this.params.getOpcoes().pagina_inicial;
+        this.tabSelected = this.paginaPrincipal == 'cassino_ao_vivo' ? 'cassino' : this.paginaPrincipal;
+        
+        this.generateOptions();
         this.createForm();
-
-        this.getApostas();
-
+        
         this.pronomeCliente = this.pronomesCliente[this.translate.currentLang];
         this.translate.onLangChange.subscribe(change => this.pronomeCliente = this.pronomesCliente[change.lang]);
-
         this.appMobile = this.auth.isAppMobile();
         this.origin = this.appMobile ? '?origin=app':'';
     }
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
+    }    
+    
+    generateOptions() {
+        const habilitados = {
+            esporte: this.esporteHabilitado,
+            cassino: this.casinoHabilitado,
+            acumuladao: this.acumuladaoHabilitado,
+            desafio: this.desafioHabilitado,
+            loteria: this.loteriasHabilitada,
+            loteriaPopular: this.loteriaPopularHabilitada
+        };
+    
+        const chaves = Object.keys(habilitados);
+        const indicePaginaPrincipal = chaves.findIndex(key => key === this.paginaPrincipal);
+    
+        if (indicePaginaPrincipal !== -1) {
+            const elementoMovido = chaves.splice(indicePaginaPrincipal, 1);
+            chaves.unshift(...elementoMovido);
+        }
+    
+        chaves.forEach(key => {
+            if (habilitados[key]) {
+                this.options.push({ value: key, label: `geral.${key}` });
+            }
+        });
     }
 
     getApostas() {
@@ -142,7 +177,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             'otimizado': true
         };
 
-        switch (this.queryParams.tipo) {
+        switch (this.tabSelected) {
             case 'esporte':
                 this.apostaEsportivaService.getApostas(queryParams)
                 .subscribe(
@@ -178,6 +213,13 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
                         error => this.handleError(error)
                     );
                 break;
+            case 'loteria-popular':
+                this.loteriaPopularService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
+                break;
             default:
                 this.handleResponse([]);
                 break;
@@ -189,7 +231,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             dataInicial: [this.formatDate(this.fromDate, 'us'), Validators.required],
             dataFinal: [this.formatDate(this.toDate, 'us'), Validators.required],
             status: [''],
-            tipo: ['esporte'],
+            tipo: [this.tabSelected],
         });
 
         this.submit();
@@ -226,7 +268,6 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     changeTab(tab) {
         this.tabSelected = tab;
-        this.getApostas();
     }
 
     classNameAposta(aposta) {

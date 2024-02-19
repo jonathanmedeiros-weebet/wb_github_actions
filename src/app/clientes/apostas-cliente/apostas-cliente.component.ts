@@ -47,7 +47,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     loading = false;
 
-    tabSelected = 'esporte';
+    tabSelected: string;
 
     hoveredDate: NgbDate | null = null;
     selectedDate: string = '';
@@ -111,10 +111,10 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.createForm();
         this.menuFooterService.setIsPagina(true);
 
-        this.getApostas();
-
         this.paginaPrincipal = this.params.getOpcoes().pagina_inicial;
         this.tabSelected = this.paginaPrincipal == 'cassino_ao_vivo' ? 'cassino' : this.paginaPrincipal;
+
+        this.getApostas();
 
         this.isCliente = this.auth.isCliente();
         this.slug = config.SLUG;
