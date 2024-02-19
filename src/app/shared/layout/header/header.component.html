@@ -642,5 +642,10 @@
                 <span>{{'menu.loteria' | translate}}</span>
             </a>
         </div>
+        <div class="category" *ngIf="paginaPromocaoHabilitado">
+            <a [routerLink]="['/promocao']" routerLinkActive="active">
+                <span>{{'menu.promocao' | translate}}</span>
+            </a>
+        </div>
     </div>
 </ng-template>

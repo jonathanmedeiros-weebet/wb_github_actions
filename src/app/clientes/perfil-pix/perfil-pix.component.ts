@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ClienteService, MenuFooterService, MessageService, SidebarService, AuthService, ParametrosLocaisService } from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-pix',
@@ -21,8 +22,9 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
         private messageService: MessageService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
+        private auth: AuthService,
         private paramsLocais: ParametrosLocaisService,
-        private auth: AuthService
+        private router: Router,
     ) {
         super();
      }
@@ -38,6 +40,10 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
         this.loadCliente();
 
         this.menuFooterService.setIsPagina(true);
+
+        if (!this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix) {
+            this.router.navigate(['clientes/perfil']);
+        }
     }
 
     loadCliente() {

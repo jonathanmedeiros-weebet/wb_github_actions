@@ -52,8 +52,14 @@
                         Quaisquer ganhos provenientes de apostas com bônus serão contabilizados em seu saldo de bônus.
                     </li>
                     <li>
-                        O valor máximo de saldo bônus a ser convertido para saldo real é R${{promocao.maximoBonusConvertido}}
-                        , todo o valor restante será descartado.
+                        <span  *ngIf="promocao.tipoConversao === 'porcentagem'; else defaultTipoConversao">
+                            O valor máximo de saldo bônus a ser convertido para saldo real é {{promocao.maximoBonusConvertido | number: '1.0-0'}}% 
+                            do valor do bônus recebido, todo o valor restante será descartado.
+                        </span>
+                        <ng-template #defaultTipoConversao>
+                            O valor máximo de saldo bônus a ser convertido para saldo real é R${{promocao.maximoBonusConvertido}}, 
+                            todo o valor restante será descartado.
+                        </ng-template>
                     </li>
                    <ng-container *ngIf="promocao.bonusModalidade === 'esportivo'">
                     <li>

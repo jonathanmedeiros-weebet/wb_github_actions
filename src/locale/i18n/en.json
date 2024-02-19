@@ -202,6 +202,8 @@
         "semPermissaoAcesso": "No access permission",
         "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age.",
         "cadastro": "Registration",
+        "alertaChavePixCpf": "When requesting the withdrawal, it will be processed through the Pix key associated with your CPF (Brazilian Tax ID). Ensure that your CPF is filled in correctly.",
+        "esportivo": "sporty",
         "rodadaGratis": "Free Spin",
         "dataVencimento": "Expiration date",
         "quantidade": "Quantity",
@@ -230,7 +232,8 @@
         "virtuais": "VIRTUAL",
         "desafio": "CHALLENGE",
         "acumuladao": "ACCUMULATED",
-        "loteria": "LOTERY"
+        "loteria": "LOTERY",
+        "promocao": "PROMOTIONS"
     },
     "submenu": {
         "copa22": "Cup 2022",
@@ -442,7 +445,7 @@
     },
     "indique_ganhe":{
         "indiqueGanhe": "Refer and earn",
-        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}} balance in your account",
+        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}}",
         "indiqueGanheInfo1": "Refer friends and earn R${{valorGanhoPorIndicacao}} for each referral",
         "indiqueGanheInfo2": "Refer a friend through your referral link and receive R${{valorGanhoPorIndicacao}} for each referral in your account balance. Check out our ",
         "seuLinkIndicacao": "Your referral link:",
@@ -466,7 +469,25 @@
         "depositoRealizado": "Deposit made",
         "indicadoRealizouDepsito": "Your referral made the first deposit",
         "indicacaoRecebida": "Indication received",
-        "cadastroRealizado": "Registration was completed"
+        "cadastroRealizado": "Registration was completed",
+        "resgatar": "Redeem",
+        "limiteResgate": "Redeem limit"
+    },
+    "regras_indique_ganhe": {
+        "primeiro_paragrafo_um": "Refer your friends and earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance!",
+        "primeiro_paragrafo_dois": "Interested? Then check below for all the rules and conditions.",
+        "lista_elegibilidade": "Eligibility",
+        "lista_elegibilidade_text": "To participate in the Refer and Earn program, you must be a registered member of the website. By referring users, you agree to these terms and conditions.",
+        "lista_como_indicar": "How to refer",
+        "lista_como_indicar_text": "To refer a new user, you should share the referral link in the 'Refer and Earn' section of your account, located in the Promotions menu. The referred user must register using your referral link. The referrer will have a total of {{limiteIndicacoes}} eligible referrals for commissioning; any referrals exceeding this quantity will not be eligible for commission.",
+        "lista_bonus_indicador": "Referrer Bonus",
+        "lista_bonus_indicador_text": "For each user you refer who registers, makes a deposit of at least R${{valorMinDepositado}}, and places bets totaling at least R${{valorMinApostado}} within {{qtdDiasRequisitos}} days, you will earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance. This balance will be released for withdrawal in the 'My Referrals' section within 24 hours after the REFERRED user fulfills the promotion rules. You will have a period of {{prazoResgateSaldo}} days to redeem.",
+        "real_sacavel": "real (withdrawable)",
+        "lista_deposito_indicado": "Referee's Deposit",
+        "lista_deposito_indicado_text": "The referred user must make a minimum deposit of R${{valorMinDepositado}} into their account and place a minimum bet of R${{valorMinApostado}} for the balance of R${{valorGanhoPorIndicacao}} to be credited to the referrer's account.",
+        "lista_prevencao_fraudes": "Fraud Prevention",
+        "lista_prevencao_fraudes_text": "{{nomeBanca}} actively monitors the use of the Refer and Earn system to prevent fraud. Any attempt at fraud, such as creating multiple accounts from the same IP address, will only consider the first eligible registration for balance gain; any subsequent ones will be disregarded.",
+        "ultimo_paragrafo": "By participating in the Refer and Earn system, you agree that you have read, understood, and agreed to comply with these rules. It is the referrer's responsibility to ensure that the referred users are aware of and agree to these rules before registering with {{nomeBanca}}."
     },
     "data":{
         "dataHora": "{{data}} at {{hora}}",
