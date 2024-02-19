@@ -3361,3 +3361,21 @@ gulp.task('americanbet.online', function (done) {
         styles: ""
     });
 });
+
+gulp.task('probetx1.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "probetx1.com",
+        banca: "PROBET X1",
+        styles: ""
+    });
+});
+
+gulp.task('asortebets.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "asortebets.com",
+        banca: "A SORTE BETS",
+        styles: ""
+    });
+});

@@ -352,7 +352,9 @@
         "riquinhobet.com": "gulp riquinhobet.com",
         "joguebet.net": "gulp joguebet.net",
         "betbastet.com": "gulp betbastet.com",
-        "americanbet.online": "gulp americanbet.online"
+        "americanbet.online": "gulp americanbet.online",
+        "probetx1.com": "gulp probetx1.com",
+        "asortebets.com": "gulp asortebets.com"
     },
     "private": true,
     "dependencies": {
