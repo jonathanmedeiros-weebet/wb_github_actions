@@ -123,8 +123,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         this.auth.getCookie(this.usuario.cookie) === '' &&
                         this.usuario.login !== 'weebet') {
                         this.abrirModalAuthDoisFatores();
-                    } else if (res && res.migracao) {
-                        this.router.navigate([`/auth/resetar-senha/${res.migracao.token}/${res.migracao.codigo}`]);
+                    } else if (res && res.results && res.results.migracao) {
+                        this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
                         this.activeModal.dismiss();
                     } else {
                         this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
