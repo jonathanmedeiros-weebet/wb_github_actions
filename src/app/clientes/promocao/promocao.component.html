@@ -255,8 +255,8 @@
                                             <td style="text-align: center; max-width: 80px;">
                                                 <ng-container>
                                                     <button class="btn btn-custom btn-jogar-rodada"
-                                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
-                                                        (click)="openGame(rodada.game, rodada.fornecedor)">{{ 'geral.jogarAgora' | translate }}</button>
+                                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''" 
+                                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
                                                 </ng-container>
                                             </td>
                                         </tr>
@@ -278,7 +278,8 @@
                                 <div class="button-rodada">
                                     <button class="btn btn-custom btn-jogar-rodada" 
                                         [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
-                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
+                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
+                                    </button>
                                 </div>
                             </div>
                         </ng-container>

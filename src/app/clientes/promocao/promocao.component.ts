@@ -205,6 +205,6 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     }
 
     openGame(game: string, fornecedor: string){
-        this.router.navigate([`cassino/c/play/REAL/${game}/${fornecedor}`]);
+        this.router.navigate(['casino/c/play/REAL', game, fornecedor]);
     }
 }
