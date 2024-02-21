@@ -112,6 +112,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
                     }
 
+                    this.onChavePixChange();
                     this.showLoading = false;
                 },
                 error => {
@@ -127,7 +128,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     createForm() {
         this.form = this.fb.group({
                 valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]],
-                tipoChavePix: ['', Validators.required],
+                tipoChavePix: [!this.permitirQualquerChavePix ? 'cpf' : '', Validators.required],
                 clienteChavePix: ['', Validators.required]
             }
         );
@@ -241,27 +242,26 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         clienteChavePixControle.markAsPristine();
         clienteChavePixControle.markAsUntouched();
 
-        if (chavePixValue !== '0') {
+        if (chavePixValue !== '0' && chavePixValue !== '') {
             clienteChavePixControle.setValidators([Validators.required]);
-
-          switch (chavePixValue) {
-            case 'cpf':
-                this.form.get('clienteChavePix').setValue(this.cliente.cpf);
-                this.labelChavePix = "CPF";
-                break;
-            case 'email':
-                clienteChavePixControle.setValidators([Validators.required, Validators.email]);
-                this.labelChavePix = "E-mail";
-                break;
-            case 'phone':
-                this.labelChavePix = "Telefone";
-                break;
-            case 'aleatoria':
-                this.labelChavePix = "Chave aleatória";
-                break;
-            default:
-                this.labelChavePix = "Chave Pix";
-                break;
+            switch (chavePixValue) {
+                case 'cpf':
+                    this.form.get('clienteChavePix').setValue(this.cliente.cpf);
+                    this.labelChavePix = "CPF";
+                    break;
+                case 'email':
+                    clienteChavePixControle.setValidators([Validators.required, Validators.email]);
+                    this.labelChavePix = "E-mail";
+                    break;
+                case 'phone':
+                    this.labelChavePix = "Telefone";
+                    break;
+                case 'random':
+                    this.labelChavePix = "Chave aleatória";
+                    break;
+                default:
+                    this.labelChavePix = "Chave Pix";
+                    break;
           }
         }
         clienteChavePixControle.updateValueAndValidity();
@@ -273,7 +273,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         if (tipoChavePix === 'phone') {
             chaveComMascara = '(00) 00000-0000';
-        } else if (tipoChavePix === 'aleatoria') {
+        } else if (tipoChavePix === 'random') {
             chaveComMascara = 'AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA';
         }
 
