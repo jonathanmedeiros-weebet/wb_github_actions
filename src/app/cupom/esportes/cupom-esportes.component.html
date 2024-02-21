@@ -37,7 +37,7 @@
                 </div>
                 <div class="column-3">{{item.time_b_nome}}</div>
             </div>
-            <div class="div-2" *ngIf="(item.sport == 1) && stats[getIndex(item)] && (item.sport_nome === 'Futebol')">
+            <div class="div-2" *ngIf="(item.sport == 1) && stats[getIndex(item)]">
                 <div class="line line-1">
                     <div class="width-40">{{stats[getIndex(item)].time_a_resultado_1t}}</div>
                     <div class="width-20">Gols 1º Tempo</div>
