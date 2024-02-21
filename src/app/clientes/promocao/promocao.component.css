@@ -176,6 +176,14 @@
     }
 }
 
+@media only screen and (max-width: 1280px) {
+    .btn-jogar-rodada {
+        line-height: 23px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     .tabs {
         display: flex;

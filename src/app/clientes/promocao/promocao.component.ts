@@ -54,7 +54,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         }
 
         const url: string = window.location.href;
-        if (!url.includes("clientes/rollover")) {
+        if (!url.includes("clientes/rollover") && !this.mobileScreen) {
             this.tabSelected = 'rodada-gratis';
         }
 
