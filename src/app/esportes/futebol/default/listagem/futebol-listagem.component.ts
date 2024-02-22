@@ -305,7 +305,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     getJogosDestaquesIds() {
         this.jogoService.getJogosDestaque()
             .subscribe(jogos => {
-                this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi);
+                this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
                 this.mapJogosDestaque();
             });
     }
