@@ -3379,3 +3379,12 @@ gulp.task('asortebets.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('brazlotto.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "brazlotto.bet",
+        banca: "BRAZLOTTO",
+        styles: ""
+    });
+});
