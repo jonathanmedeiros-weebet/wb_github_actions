@@ -212,10 +212,10 @@ gulp.task('trevodasorte.me', function (done) {
     });
 });
 
-gulp.task('esportbets.biz', function (done) {
+gulp.task('esportbets.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "esportbets.biz",
+        host: "esportbets.wee.bet",
         banca: "Esport Bets",
         styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
         aditional_styles: ".sem-evento{color: #fff;}  #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
