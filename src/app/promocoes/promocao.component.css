@@ -1,0 +1,153 @@
+#default-content {
+    padding: 0;
+    margin: 0;
+    background-color: var(--background);
+    color: var(--foreground-header);
+    position: absolute;
+    min-height: 100vh;
+}
+.wrap-stick {
+    padding: 20px 15px;
+    margin: 0;
+} 
+#promocoes-listagem{
+    height: calc(100vh - 92px);
+    overflow: scroll;
+
+    display: flex;
+    flex-direction: column;
+}
+.loading-listagem .item-sample {
+    border-radius: 5px;
+    display: flex;
+    padding: 15px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.item-sample-text{
+    height: 15px;
+    width: 400px; 
+}
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+}
+.custom-card {
+    width: 431px;
+    height: 388px;
+    background: var(--background);
+    margin-left: 16px;
+    position: relative;
+}
+.custom-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 205px;
+    max-width: 100%;
+}
+.custom-card .card-body {
+    padding: 18px;
+    background-color: var(--header);
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+}
+.card-title {
+    font-size: 18px;
+}
+.info-promotions {
+    margin: 32px auto 32px 16px;
+}
+.logo-game-background{
+    position: absolute;
+    width: 20%;
+    height: 19px;
+    top: 20px;
+    right: 0;
+    background: var(--highlight);
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    text-align: center;
+}
+
+.logo-game-background span {
+    font-size: 11px;
+    color: black;
+    font-weight: 800;
+}
+  
+.item-left {
+    margin-bottom: 15px;
+    margin-left: 0;
+}
+
+.ssc-square {
+    width: 400px;
+    height: 390px;
+}
+
+@media  (min-width: 779px) and (max-width: 1395px) {
+    .custom-card {
+        width: 352px;
+        height: 319px;
+        margin: 0px 16px 30px 16px;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .ssc-square {
+        width: 350px;
+        height: 390px;
+    }
+}
+
+@media (max-width: 780px) {
+    .custom-card {
+        width: 352px;
+        height: 325px;
+        margin-bottom: 6%;
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-card {
+        width: calc(100% - 20px);
+        margin-left: 0;
+        margin: 10px 16px 60px 16px;
+    }
+
+    .cards-container {
+        justify-content: center;
+    }
+
+    .item-sample-text{
+        width: 270px; 
+    }
+
+    .ssc-square {
+        width: 385px;
+    }
+}
+
+@media (max-width: 360px) {
+    .custom-card img {
+        height: 180px;
+        max-height: 300px;
+    }
+}
+
+@media screen and (min-width: 1026px) {
+    .cards-container {
+        height: -webkit-fill-available;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .cards-container {
+        margin-bottom: 20px;
+    }
+}
+

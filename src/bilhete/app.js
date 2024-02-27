@@ -239,38 +239,39 @@ document.onreadystatechange = async function () {
                                         </div>
                                     </div>
                                 </div>
-                                <div id="first-half">
-                                    <div id="${ticketItem.jogo_api_id}_1half_time_a">
-                                        ${templateData.player_a_1half_result}
+                                <div id="soccer-info" ${ticketItem.sport_nome !== 'Futebol' ? ' style="display: none;"' : ''}>
+                                    <div id="first-half">
+                                        <div id="${ticketItem.jogo_api_id}_1half_time_a">
+                                            ${templateData.player_a_1half_result}
+                                        </div>
+                                        <div>
+                                            Gols 1º Tempo
+                                        </div>
+                                        <div id="${ticketItem.jogo_api_id}_1half_time_b">
+                                            ${templateData.player_b_1half_result}
+                                        </div>
                                     </div>
-                                    <div>
-                                        Gols 1º Tempo
+                                    <div id="second-half">
+                                        <div id="${ticketItem.jogo_api_id}_2half_time_a">
+                                            ${templateData.player_a_2half_result}
+                                        </div>
+                                        <div>
+                                            Gols 2º Tempo
+                                        </div>
+                                        <div id="${ticketItem.jogo_api_id}_2half_time_b">
+                                            ${templateData.player_b_2half_result}
+                                        </div>
                                     </div>
-                                    <div id="${ticketItem.jogo_api_id}_1half_time_b">
-                                        ${templateData.player_b_1half_result}
-                                    </div>
-                                </div>
-                                <div id="second-half">
-                                    <div id="${ticketItem.jogo_api_id}_2half_time_a">
-                                        ${templateData.player_a_2half_result}
-                                    </div>
-                                    <div>
-                                        Gols 2º Tempo
-                                    </div>
-                                    <div id="${ticketItem.jogo_api_id}_2half_time_b">
-                                        ${templateData.player_b_2half_result}
-                                    </div>
-                                </div>
-
-                                <div id="corner-kicks">
-                                    <div id="${ticketItem.jogo_api_id}_corner_time_a">
-                                        ${templateData.player_a_corner_kicks}
-                                    </div>
-                                    <div>
-                                        Escanteios
-                                    </div>
-                                    <div id="${ticketItem.jogo_api_id}_corner_time_b">
-                                        ${templateData.player_b_corner_kicks}
+                                    <div id="corner-kicks">
+                                        <div id="${ticketItem.jogo_api_id}_corner_time_a">
+                                            ${templateData.player_a_corner_kicks}
+                                        </div>
+                                        <div>
+                                            Escanteios
+                                        </div>
+                                        <div id="${ticketItem.jogo_api_id}_corner_time_b">
+                                            ${templateData.player_b_corner_kicks}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="dashed" id="final-resulst">${ticketItem.categoria_nome}: ${ticketItem.odd_nome} <strong>(${ticketItem.cotacao})</strong></div>

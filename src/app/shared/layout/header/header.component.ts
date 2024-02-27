@@ -47,6 +47,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
     @ViewChild('indiqueGanheCard', {read: ElementRef}) indiqueGanheCard: ElementRef;
+    paginaPromocaoHabilitado = false;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -201,6 +202,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
+        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao; 
 
         this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
 
