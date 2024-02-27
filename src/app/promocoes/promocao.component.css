@@ -48,7 +48,6 @@
 .custom-card .card-body {
     padding: 18px;
     background-color: var(--header);
-    color: ;
     height: 50%;
     display: flex;
     flex-direction: column;
