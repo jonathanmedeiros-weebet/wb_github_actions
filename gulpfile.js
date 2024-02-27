@@ -1550,6 +1550,7 @@ gulp.task('betsmilionaria.com.br', function (done) {
         styles: "",
         pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
         scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/ZJxAw9E4Ei' async></script>",
+        dominioTemp: "betsmilionaria.com"
     });
 });
 
