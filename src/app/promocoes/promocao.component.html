@@ -1,0 +1,37 @@
+<div class="loading-listagem" *ngIf="isLoading">
+    <div class="ssc-square title m-3 mt-4" style="height: 25px; width: 120px;"></div>
+    <div class="ssc-square title m-3 mt-4" style="height: 15px; width: 350px;"></div>
+    <div class="item-sample">
+        <div *ngFor="let item of [1, 2, 3]" class="item-left">
+            <div class="ssc-square"></div>
+        </div>
+    </div>
+</div>
+  
+<div id="promocoes-listagem" *ngIf="!isLoading" [ngStyle]="{'height': currentHeight + 'px'}">
+    <div class="info-promotions">
+        <h4><b>{{'menu.promocao' | translate}}</b></h4>
+        <p style="margin-bottom: 0px;">Aqui você encontrará todas as promoções ativas no momento em nossa plataforma</p>
+    </div>
+    <div class="cards-container">
+        <ng-container *ngFor="let promocao of promocoes">
+            <div class="custom-card" (click)="goToDetails(promocao.id, true)">
+                <div class="logo-game-background" *ngIf="promocao.modalidade">
+                    <span>{{ promocao.modalidade == 'cassino' ? 'Cassino' : 'Esportivo' }}</span>
+                </div>
+                <div class="card-image" style="min-height: 180px;">
+                    <img src="https://weebet.s3.amazonaws.com/{{ SLUG }}/paginaPromocao/{{ promocao.imagemCard }}" class="card-img-top" alt="Imagem do Card">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title"><b>{{ promocao.promocaoNome }}</b></h3>
+                    <br>
+                    <p class="card-text" style="flex-grow: 1;">{{ promocao.resumoDescricao }}</p>
+                    <div>
+                        <a style="color: var(--highlight); cursor: pointer; font-size: 12px;" (click)="goToDetails(promocao.id, false)">Ver mais informações</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <app-footer style="margin-top: 32px;"></app-footer>
+</div>

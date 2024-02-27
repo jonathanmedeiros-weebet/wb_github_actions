@@ -93,7 +93,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                     this.sessionId = response.sessionId;
-                    this.gameName = response.gameName || "";
+                    if((this.gameFornecedor == 'tomhorn')){
+                        this.gameName = response.gameName.split("- 9", 1) || "";
+                    }else{
+                        this.gameName = response.gameName || "";
+                    }
                 },
                 error => {
                     this.handleError(error);

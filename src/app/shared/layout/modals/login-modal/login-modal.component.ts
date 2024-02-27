@@ -120,8 +120,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     this.getUsuario();
                     if (this.usuario && this.usuario.tipo_usuario === 'cliente' &&
                         this.authDoisFatoresHabilitado &&
-                        this.auth.getCookie(this.usuario.cookie) === '' &&
-                        this.usuario.login !== 'weebet') {
+                        this.auth.getCookie(this.usuario.cookie) === '') {
                         this.abrirModalAuthDoisFatores();
                     } else if (res && res.results && res.results.migracao) {
                         this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
