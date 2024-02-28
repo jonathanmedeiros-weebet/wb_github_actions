@@ -47,13 +47,17 @@ const routes: Routes = [{
         },
         {
             path: 'rollover',
-            loadChildren: () => import('./rollover/rollover.module').then(f => f.RolloverModule)
+            loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
         {
             path: 'indique-ganhe',
             loadChildren: () => import('./indique-ganhe/indique-ganhe.module').then(i => i.IndiqueGanheModule),
             canActivate: [IndiqueGanheGuard]
-        }
+        },
+        {
+            path: 'rodada-gratis',
+            loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
+        },
     ]
 }];
 
