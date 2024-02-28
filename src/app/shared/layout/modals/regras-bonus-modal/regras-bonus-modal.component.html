@@ -43,11 +43,21 @@
                             , você deve cumprir as condições estabelecidas nos seguintes pontos:
                         </li>
                    </ng-container>
-                    <li>
-                        O valor total do bônus, somado ao valor do depósito deverá ser apostado {{promocao.multiplicador}}
-                        vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito com bônus de R$50, você terá que fazer R${{promocao.multiplicador * 100}}
-                        em apostas na modalidade {{promocao.bonusModalidade}}.
-                    </li>
+                   <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'; else regraPadrao">
+                        <li>
+                            O valor total do bônus, somado ao valor do depósito deverá ser apostado {{promocao.multiplicador}}
+                            vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito de R$50 com um bônus 
+                            de R$50, o valor total do bônus (R$50) somado ao valor do depósito (R$50) resulta em um total de R$100. Você terá que fazer R${{promocao.multiplicador * 100}} em apostas na modalidade esportiva, o que equivale a {{promocao.multiplicador}} vezes o valor total do depósito e 
+                            do bônus combinados.
+                        </li>
+                   </ng-container>
+                   <ng-template #regraPadrao>
+                        <li>
+                            O valor total de bônus deve ser apostado {{promocao.multiplicador}}
+                            vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito com bônus de R$50, você terá que fazer R${{promocao.multiplicador * 50}}
+                            em apostas na modalidade {{promocao.bonusModalidade}}.
+                        </li>
+                   </ng-template>
                     <li>
                         Quaisquer ganhos provenientes de apostas com bônus serão contabilizados em seu saldo de bônus.
                     </li>
