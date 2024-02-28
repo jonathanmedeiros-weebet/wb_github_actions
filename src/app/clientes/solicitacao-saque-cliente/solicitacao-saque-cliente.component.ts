@@ -279,4 +279,23 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         return chaveComMascara;
     }
+
+    formatarChavePix(chavePix: string, tipoChavePix: string): string {
+        let chavePixFormatada: any;
+        switch (tipoChavePix) {
+            case 'phone':
+                chavePixFormatada = chavePix.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                break;
+            case 'random':
+                chavePixFormatada = chavePix.replace(/^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})$/, "$1-$2-$3-$4-$5");
+                break;
+            case 'cpf':
+                chavePixFormatada = chavePix.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                break;
+            default:
+                chavePixFormatada = chavePix;
+                break;
+        }
+        return chavePixFormatada;
+    }
 }

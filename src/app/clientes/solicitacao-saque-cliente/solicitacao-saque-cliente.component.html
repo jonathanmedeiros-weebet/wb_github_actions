@@ -119,6 +119,7 @@
                 <tr>
                     <th></th>
                     <th>{{'geral.detalhes' | translate}}</th>
+                    <th>{{ 'geral.chavePix' | translate }}</th>
                     <th>{{'geral.status' | translate}}</th>
                     <th>{{'geral.valor' | translate}}</th>
                     <!-- <th></th> -->
@@ -128,6 +129,7 @@
                     <tr *ngFor="let saque of saques">
                         <td><img src="/assets/images/debito.svg" alt="image"></td>
                         <td>{{'saques.saqueERegistrado' | translate}} {{ saque.data }}</td>
+                        <td>{{ formatarChavePix(saque.chavePix, saque.tipoChavePix) }}</td>
                         <td>
                           {{ saque.status }}
                           <a class="info" *ngIf="saque.observacao" placement="top" [ngbPopover]="saque.observacao">
