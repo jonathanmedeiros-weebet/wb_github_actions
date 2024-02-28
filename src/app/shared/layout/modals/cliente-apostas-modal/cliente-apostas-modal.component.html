@@ -16,12 +16,10 @@
                 <div class="col-xs-12 col-md-12">
                     <form (ngSubmit)="onSubmit()" [formGroup]="form">
                         <div class="form-row">
-                            <select class="form-control inverted-out" formControlName="tipo">
-                                <option value="esporte">{{'geral.esportes' | translate}} </option>
-                                <option *ngIf="acumuladaoHabilitado" value="acumuladao">{{'geral.acumuladao' | translate}}</option>
-                                <option *ngIf="desafioHabilitado" value="desafio">{{'geral.desafio' | translate}}</option>
-                                <option *ngIf="casinoHabilitado" value="cassino">{{'geral.cassino' | translate}}</option>
-                                <option *ngIf="loteriasHabilitada" value="loteria">{{'geral.loteria' | translate}}</option>
+                            <select class="form-control inverted-out" formControlName="tipo" [(ngModel)]="paginaPrincipal">
+                                <option *ngFor="let option of options" [value]="option.value">
+                                  {{ option.label | translate }}
+                                </option>
                             </select>
                             <input
                                 name="datepicker"
