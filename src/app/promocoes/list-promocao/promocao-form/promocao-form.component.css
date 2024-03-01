@@ -40,12 +40,6 @@
         max-height: 60vh;
     }
 }
-@media only screen and (max-width: 600px) {
-    .desktop-image img {
-        max-height: 22vh;
-    }
-}
-
 @media (max-width: 821px) {
     .desktop-image {
         margin: 20px 8px 24px 8px;
@@ -63,7 +57,6 @@
         border-radius: 8px;
     }
 }
-
 @media (max-width: 485px) {
     .content,
     .content-header {
