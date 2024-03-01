@@ -80,8 +80,10 @@ export class PromocaoFormComponent implements OnInit {
       this.getTamanhoTela();
     }
 
-    removerCor(conteudo: string): string {
-        return conteudo.replace(/color: rgb\([^)]*\);/g, '');
+    removerCor(conteudo) {
+        var padrao = /style="color:\s*[^"]*"/g;
+        var conteudoModificado = conteudo.replace(padrao, 'style="color: var(--foreground-sidebars)"');
+        
+        return conteudoModificado;
     }
-
 }
