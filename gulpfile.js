@@ -3340,3 +3340,12 @@ gulp.task('brazlotto.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('ativabet.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "ativabet.bet",
+        banca: "ATIVA BET",
+        styles: ""
+    });
+});
