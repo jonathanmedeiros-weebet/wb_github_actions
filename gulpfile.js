@@ -1911,15 +1911,6 @@ gulp.task('lucromaster.net', function (done) {
     });
 });
 
-gulp.task('devconnection.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "devconnection.bet",
-        banca: "DEV CONNECTION",
-        styles: "",
-    });
-});
-
 gulp.task('favelabett.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
