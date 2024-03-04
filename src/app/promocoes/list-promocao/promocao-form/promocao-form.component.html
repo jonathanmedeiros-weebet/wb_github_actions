@@ -3,7 +3,7 @@
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div *ngIf="!showLoadingIndicator" style="height: -webkit-fill-available;">
             <div class="desktop-image">
-                <img style="width: 100%;" src="https://weebet.s3.amazonaws.com/{{ SLUG }}/paginaPromocao/{{ exibirImagem }}" alt="">
+                <img style="width: 100%;" src="https://weebet.s3.amazonaws.com/{{ SLUG }}/paginaPromocao/{{ promocao.imagemDesktop }}" alt="">
             </div>
             <div class="content-header">
                 <h2>{{ promocao.promocaoNome }}</h2>
