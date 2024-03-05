@@ -204,6 +204,13 @@
         "cadastro": "Registration",
         "alertaChavePixCpf": "When requesting the withdrawal, it will be processed through the Pix key associated with your CPF (Brazilian Tax ID). Ensure that your CPF is filled in correctly.",
         "esportivo": "sporty",
+        "rodadaGratis": "Free Spin",
+        "dataVencimento": "Expiration date",
+        "quantidade": "Quantity",
+        "jogarAgora": "Play now",
+        "nenhumaRodadaGratis": "No free spins found.",
+        "opcaoPromocao": "Select one of the options to view the current promotions.",
+        "resultadosEncontrados": "{{quantidade}} results were found.",
         "selecioneChavePix": "select your pix key",
         "alertaSaque": "Only withdrawals to Pix keys linked to the account holder are allowed."
     },

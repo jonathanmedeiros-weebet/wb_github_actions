@@ -6,7 +6,6 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {AuthService, MenuFooterService, MessageService} from '../../services';
 import {interval} from 'rxjs';
-import {RolloverComponent} from "../../clientes/rollover/rollover.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
 
@@ -93,7 +92,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                     this.sessionId = response.sessionId;
-                    this.gameName = response.gameName || "";
+                    if((this.gameFornecedor == 'tomhorn')){
+                        this.gameName = response.gameName.split("- 9", 1) || "";
+                    }else{
+                        this.gameName = response.gameName || "";
+                    }
                 },
                 error => {
                     this.handleError(error);
@@ -185,10 +188,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {
         }, error => {
         });
-    }
-
-    abrirRollovers() {
-        this.modalService.open(RolloverComponent);
     }
 
     exibirJogosLiberadosBonus() {

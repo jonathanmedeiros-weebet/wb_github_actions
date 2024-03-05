@@ -293,27 +293,17 @@
                     <span class="regiao-nome">{{'geral.apostas' | translate}}</span>
                 </a>
             </li>
-            <li class="cambista-item" routerLinkActive="router-link-active">
-                <a (click)="toogleSubPromocoes()">
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/rollover']" routerLinkActive="router-link-active" [ngClass]="rotaRodadaGratis ? 'router-link-active' : ''">
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'geral.promocoes' | translate}}</span>
-                    <i class="fa m-0" [ngClass]="{'fa-angle-up': subPromocoes, 'fa-angle-down': !subPromocoes}"></i>
                 </a>
-
-                <div class="sub-nav-container" *ngIf="subPromocoes">
-                    <ul>
-                        <li class="cambista-subitem">
-                            <a [routerLink]="['/clientes/rollover']" routerLinkActive="router-link-active">
-                                <span class="regiao-nome">{{'geral.rollover' | translate}}</span>
-                            </a>
-                        </li>
-                        <li class="cambista-subitem" *ngIf="indiqueGanheHabilitado">
-                            <a [routerLink]="['/clientes/indique-ganhe']" routerLinkActive="router-link-active">
-                                <span class="regiao-nome">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            </li>
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/indique-ganhe']" routerLinkActive="router-link-active">
+                    <i class="fa fa-gift icone-generico"></i>
+                    <span class="regiao-nome">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
+                </a>
             </li>
         </ul>
         <ul class="menu-middle" style="border-top: 0">

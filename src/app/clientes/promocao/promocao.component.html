@@ -1,0 +1,291 @@
+<div class="mobile-modal-header" *ngIf="mobileScreen">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <div class="titulo">{{ 'geral.promocoes' | translate }}</div>
+    <div class="botao-direito"></div>
+</div>
+
+<div id="default-content">
+    <app-spinner *ngIf="showLoading"></app-spinner>
+    <ng-container *ngIf="!showLoading">
+        <div class="internal-container-out">
+            <div class="content-header hide-mobile">
+                <h2>{{ 'geral.promocoes' | translate }}</h2>
+            </div>
+            <div class="info-page-promotion">
+                <p style="font-size: 12px; margin-bottom: 0;">{{ 'geral.opcaoPromocao' | translate }}</p>
+            </div>
+            <div class="tabs">
+                <a [ngClass]="tabSelected == 'bonus' ? 'active' : ''" 
+					(click)="changeTab('bonus')">{{'geral.bonus' | translate}} <span class="circle">{{ rollovers.length }}</span></a>
+                <a [ngClass]="tabSelected == 'rodada-gratis' ? 'active' : ''"
+                	(click)="changeTab('rodada-gratis')">{{'geral.rodadaGratis' | translate}} <span class="circle">{{ rodadas.length }}</span></a>
+            </div>
+
+            <div class="content-body">
+                <ng-container *ngIf="tabSelected == 'bonus'">
+                    <div>
+                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                            <div class="filtros">
+                                <select class="inverted-out form-control" style="min-height: 44px; min-width: 169px;" formControlName="statusRollover">
+                                    <option value="">{{'geral.todos' | translate}}</option>
+                                    <option value="ativo">{{'rollover.ativo' | translate}}</option>
+                                    <option value="completado">{{'rollover.completado' | translate}}</option>
+                                    <option value="cancelado">{{'rollover.cancelado' | translate}}</option>
+                                    <option value="vencido">{{'rollover.vencido' | translate}}</option>
+                                </select>
+                                <button class="btn btn-custom" style="min-height: 44px; min-width: 137px;" type="submit" (click)="filtarRolloverStatus()">{{'geral.filtrar' | translate}}</button>
+                                <a class="btn-regras-bonus" (click)="abrirRegrasBonus()">Regras do Bônus</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div *ngIf="!rolloversListagem.length" class="alert alert-warning text-center" role="alert">
+                        {{'rollover.nenhumBonus' | translate}}
+                    </div>
+
+                    <div class="table-responsive" *ngIf="rolloversListagem.length">
+                        <div>
+                            <p>
+                                <b>{{'rollover.qtdBonus' | translate}}
+                                    :</b> {{rollovers.length}}
+                            </p>
+                        </div>
+                        <ng-container *ngIf="!mobileScreen">
+                            <table class="table" >
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th style="width:20%">Progresso</th>
+                                        <th class="custom-td">Valor Gasto</th>
+                                        <th class="custom-td">Valor Meta</th>
+                                        <th class="custom-td">Cotação Min. Aposta</th>
+                                        <th class="custom-td">Modalidade</th>
+                                        <th class="custom-td">Tipo</th>
+                                        <th class="custom-td">Vencimento</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tr *ngIf="loading">
+                                    <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
+                                        {{'geral.carregando' | translate}}
+                                    </td>
+                                </tr>
+                                <tbody *ngIf="!showLoading && !loading">
+                                <ng-container *ngFor="let rollover of rolloversListagem">
+                                    <tr>
+                                        <td>
+                                            <i style="color:orange; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                            *ngIf="rollover.status === 'ativo'"></i>
+                                            <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                            *ngIf="rollover.status === 'completado'"></i>
+                                            <i style="color:red; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                            *ngIf="rollover.status === 'cancelado'"></i>
+                                            <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                            *ngIf="rollover.status === 'vencido'"></i>
+                                            <span
+                                                *ngIf="rollover.status === 'ativo'">
+                                            {{'rollover.ativo' | translate}}
+                                            </span>
+                                            <span
+                                                *ngIf="rollover.status === 'completado'">
+                                                {{'rollover.completado' | translate}}
+                                            </span>
+                                            <span
+                                                *ngIf="rollover.status === 'cancelado'">
+                                                {{'rollover.cancelado' | translate}}
+                                            </span>
+                                            <span
+                                                *ngIf="rollover.status === 'vencido'">
+                                                {{'rollover.vencido' | translate}}
+                                            </span>
+                                        </td>
+                                        <td class="custom-td">
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{'width.%': rollover.valorGasto*100/rollover.valorMeta}" aria-valuenow="{{rollover.valorGasto}}" aria-valuemin="0" aria-valuemax=" {{rollover.valorMeta}}"></div>
+                                            </div>
+                                        </td>
+                                        <td class="custom-td">
+                                            {{rollover.valorGasto | currency}}
+                                        </td>
+                                        <td class="custom-td">
+                                            {{rollover.valorMeta | currency}}
+                                        </td>
+                                        <td class="custom-td">
+                                            {{rollover.cotacaoMinSimples}} (Simples) / {{rollover.cotacaoMinMultipla}} (Múltipla)
+                                        </td>
+                                        <td class="custom-td">
+                                            {{rollover.modalidade}}
+                                        </td>
+                                        <td class="custom-td">
+                                            {{rollover.tipo | formatarPromocao}}
+                                        </td>
+                                        <td class="custom-td">
+                                            {{rollover.dataVencimento}}
+                                        </td>
+                                        <td class="custom-td">
+                                            <ng-container *ngIf="rollover.status == 'completado'  && !rollover.convertido">
+                                                <button class="btn btn-custom btn-converterBonus" (click)="converterBonus(rollover.id)"> Converter Bônus</button>
+                                            </ng-container>
+                                            <ng-container *ngIf="rollover.status == 'ativo'">
+                                                <button class="btn btn-custom btn-converterBonus" (click)="cancelarBonus(rollover.id)"> Cancelar Bônus</button>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                </tbody>
+                            </table>
+                        </ng-container>
+                        <ng-container *ngIf="mobileScreen">
+                            <table class="table" >
+                                <thead>
+                                <tr>
+        
+                                </tr>
+                                </thead>
+                                <tbody *ngIf="!showLoading">
+                                <ng-container *ngFor="let rollover of rolloversListagem">
+                                    <tr>
+                                        <td>
+                                            <i style="color:orange; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                            *ngIf="rollover.status === 'ativo'"></i>
+                                            <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                            *ngIf="rollover.status === 'completado'"></i>
+                                            <i style="color:red; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                            *ngIf="rollover.status === 'cancelado'"></i>
+                                            <i style="color:green; margin-right: 5px; margin-left: 5px;" class="fa fa-circle"
+                                            *ngIf="rollover.status === 'vencido'"></i>
+                                            <span
+                                                *ngIf="rollover.status === 'ativo'">
+                                            {{'rollover.ativo' | translate}}
+                                            </span>
+                                            <span
+                                                *ngIf="rollover.status === 'completado'">
+                                                {{'rollover.completado' | translate}}
+                                            </span>
+                                            <span
+                                                *ngIf="rollover.status === 'cancelado'">
+                                                {{'rollover.cancelado' | translate}}
+                                            </span>
+                                            <span
+                                                *ngIf="rollover.status === 'vencido'">
+                                                {{'rollover.vencido' | translate}}
+                                            </span>
+                                            <div class="progress" style="height: 20px; width: 100%">
+                                                <div class="progress-bar" role="progressbar" [ngStyle]="{'width.%': rollover.valorGasto*100/rollover.valorMeta}" aria-valuenow="{{rollover.valorGasto}}" aria-valuemin="0" aria-valuemax=" {{rollover.valorMeta}}"></div>
+                                                </div>
+                                            <br>
+                                            <span>
+                                            Valor Gasto: {{rollover.valorGasto | currency}}<br>
+                                            Valor Meta: {{rollover.valorMeta | currency}}<br>
+                                            Cotação Mín. (Aposta Simples): {{rollover.cotacaoMinSimples}}<br>
+                                            Cotação Mín. (Aposta Múltipla): {{rollover.cotacaoMinMultipla}}<br>
+                                            Modalidade: {{rollover.modalidade}}<br>
+                                            Data de Vencimento: {{rollover.dataVencimento}}
+                                            </span>
+                                            <br><br>
+                                            <ng-container *ngIf="rollover.status == 'completado'  && !rollover.convertido">
+                                                <button class="btn btn-custom btn-converterBonus" (click)="converterBonus(rollover.id)"> Converter Bônus</button>
+                                            </ng-container>
+                                            <ng-container *ngIf="rollover.status == 'ativo'">
+                                                <button class="btn btn-custom btn-converterBonus" (click)="cancelarBonus(rollover.id)"> Cancelar Bônus</button>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                </tbody>
+                            </table>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="tabSelected == 'rodada-gratis'">
+                    <div>
+                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                            <div class="filtros">
+                                <select class="inverted-out form-control" style="min-height: 44px; min-width: 169px;" formControlName="status">
+                                    <option value="">{{'geral.todos' | translate}}</option>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Expirado">Expirado</option>
+                                    <option value="Cancelado">Cancelado</option>
+                                </select>
+                                <button class="btn btn-custom" style="min-height: 44px; min-width: 137px;" type="submit" (click)="filtrarPorStatus()">{{'geral.filtrar' | translate}}</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div *ngIf="!rodadasListagem.length" class="alert alert-warning text-center" role="alert">
+                        {{ 'geral.nenhumaRodadaGratis' | translate }}
+                    </div>
+                    <ng-container *ngIf="!mobileScreen">
+                        <div class="table-responsive" *ngIf="rodadasListagem.length">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th data-field="termino" (click)="sortBy('termino')"><span style="cursor: pointer;">{{ 'geral.dataVencimento' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="valor" (click)="sortBy('valor')"><span style="cursor: pointer;">{{ 'geral.valor' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="quantidade" (click)="sortBy('quantidade')"><span style="cursor: pointer;">{{ 'geral.quantidade' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="game" (click)="sortBy('game')"><span style="cursor: pointer;">{{ 'geral.jogo' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="status" (click)="sortBy('status')"><span style="cursor: pointer;">Status &uarr;&darr;</span></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tr *ngIf="loading">
+                                    <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
+                                        {{'geral.carregando' | translate}}
+                                    </td>
+                                </tr>
+                                <tbody *ngIf="!showLoading">
+                                    <ng-container *ngFor="let rodada of rodadasListagem">
+                                        <tr>
+                                            <td class="td-custom">
+                                                {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}
+                                            </td>
+                                            <td class="td-custom">
+                                                {{ rodada.valor | currency }}
+                                            </td>
+                                            <td class="td-custom">
+                                                {{rodada.quantidade}}
+                                            </td>
+                                            <td class="td-custom">
+                                                {{rodada.gameName}}
+                                            </td>
+                                            <td class="td-custom">
+                                                {{rodada.status}}
+                                            </td>
+                                            <td style="text-align: center; max-width: 80px;">
+                                                <ng-container>
+                                                    <button class="btn btn-custom btn-jogar-rodada"
+                                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''" 
+                                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
+                                                </ng-container>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </ng-container>   
+                    <ng-container *ngIf="mobileScreen">
+                        <div class="count-rodadas-mobile" *ngIf="rodadasListagem.length">
+                            <p>{{ 'geral.resultadosEncontrados' | translate: {quantidade: rodadasListagem.length} }}</p>
+                        </div>
+                        <ng-container *ngFor="let rodada of rodadasListagem">
+                            <div class="rodada-gratis-container">
+                                <p class="info-rodada">{{ 'geral.rodadaGratis' | translate }}: <span>Expira em {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}</span></p>
+                                <p class="info-rodada">{{ 'geral.valor' | translate }}: <span>{{ rodada.valor | currency }}</span></p>
+                                <p class="info-rodada">{{ 'geral.quantidade' | translate }}: <span>{{ rodada.quantidade }}</span></p>
+                                <p class="info-rodada">{{ 'geral.jogo' | translate }}: <span>{{ rodada.gameName }}</span></p>
+                                <div class="button-rodada">
+                                    <button class="btn btn-custom btn-jogar-rodada" 
+                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
+                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>                 
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</div>
