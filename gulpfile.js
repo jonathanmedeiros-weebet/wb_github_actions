@@ -3349,3 +3349,12 @@ gulp.task('ativabet.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('proesporte.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "proesporte.net",
+        banca: "PRO ESPORTE",
+        styles: ""
+    });
+});

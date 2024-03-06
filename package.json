@@ -351,7 +351,8 @@
         "probetx1.com": "gulp probetx1.com",
         "asortebets.com": "gulp asortebets.com",
         "brazlotto.bet": "gulp brazlotto.bet",
-        "ativabet.bet": "gulp ativabet.bet"
+        "ativabet.bet": "gulp ativabet.bet",
+        "proesporte.net": "gulp proesporte.net"
     },
     "private": true,
     "dependencies": {
