@@ -1,5 +1,6 @@
 #default-content {
     padding: 25px 38px;
+    height: calc(100dvh - 98px);
 }
 
 .content-body, .content-body .content {
@@ -45,6 +46,10 @@ form .buttons {
     text-align: right;
 }
 
+.ajusta-botao-alterar-senha{
+    height: calc(100dvh - 135px) !important;
+}
+
 @media only screen and (max-width: 1024px) {
     h2 {
         font-size: 18px;
@@ -62,6 +67,7 @@ form .buttons {
 
     #default-content {
         padding: 10px;
+        height: calc(100dvh - 110px);
     }
 
     .form-group.text-right {
@@ -72,4 +78,7 @@ form .buttons {
         margin-bottom: 0;
     }
 
+    .ajusta-botao-alterar-senha{
+        height: calc(100dvh - 155px) !important;
+    }
 }
