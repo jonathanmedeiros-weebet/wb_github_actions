@@ -3358,3 +3358,12 @@ gulp.task('proesporte.net', function (done) {
         styles: ""
     });
 });
+
+gulp.task('unibets.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "unibets.com.br",
+        banca: "UNI BETS",
+        styles: ""
+    });
+});
