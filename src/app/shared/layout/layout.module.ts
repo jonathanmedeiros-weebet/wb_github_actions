@@ -89,6 +89,7 @@ import { InformativoModalComponent } from './modals/informativo-modal/informativ
 import { JogoService } from '../services/aposta-esportiva/jogo.service';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
 
 @NgModule({
     imports: [
@@ -178,7 +179,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         InformativoModalComponent,
         CarregamentoModalComponent,
         CompatilhamentoBilheteModal,
-        WelcomePageComponent
+        WelcomePageComponent,
+        ExibirBilheteRifaComponent
     ],
     exports: [
         MainLayoutComponent,

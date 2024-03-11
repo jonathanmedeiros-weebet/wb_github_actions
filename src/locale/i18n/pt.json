@@ -203,7 +203,8 @@
         "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos.",
         "cadastro": "Cadastro",
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
-        "esportivo": "esportivo"
+        "esportivo": "esportivo",
+        "rifa": "Rifa"
     },
     "dias": {
         "ontem": "Ontem",
@@ -226,7 +227,8 @@
         "desafio": "DESAFIO",
         "acumuladao": "ACUMULADÃO",
         "loteria": "LOTERIA",
-        "promocao": "PROMOÇÕES"
+        "promocao": "PROMOÇÕES",
+        "rifas": "RIFAS"
     },
     "submenu": {
         "copa22": "Copa 2022",

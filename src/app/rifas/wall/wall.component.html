@@ -1,0 +1,22 @@
+<div class="base-container">
+    <main style="width: 100%; overflow-y: scroll ">
+
+        <div class="col col-12">
+            <h1>Rifas Ativas</h1>
+
+            <div class="row">
+                <div class="col col-md-12 col-lg-6" *ngFor="let sorteio of sorteios" (click)="selecionar(sorteio)">
+                    <div class="row">
+
+
+                    <img class="rifa-banner" src="https://weebet.s3.amazonaws.com/{{SLUG}}/banners/{{sorteio.imagem}}" title="{{sorteio.nome}}">
+                </div>
+                </div>
+                </div>
+
+
+        </div>
+    </main>
+    <app-bilhete-rifa></app-bilhete-rifa>
+</div>
+

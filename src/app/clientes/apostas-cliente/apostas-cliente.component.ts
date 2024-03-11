@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../services'
 import { config } from '../../shared/config';
+import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -30,6 +31,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     desafioHabilitado;
     casinoHabilitado;
     loteriaPopularHabilitada;
+    rifaHabilitada;
     activeId = 'esporte';
     paginaPrincipal: string;
 
@@ -73,6 +75,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private acumuladaoService: AcumuladaoService,
         private cassinoService: CasinoApiService,
         private loteriaServie: ApostaLoteriaService,
+        private rifaApostaService: RifaApostaService,
         public desafioApostaService: DesafioApostaService,
         private loteriaPopularService: LoteriaPopularService,
         public formatter: NgbDateParserFormatter,
@@ -105,6 +108,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.desafioHabilitado = this.params.getOpcoes().desafio;
         this.casinoHabilitado = this.params.getOpcoes().casino;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
+        this.rifaHabilitada = this.params.getOpcoes().rifa;
 
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
 
@@ -134,12 +138,13 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             { id: 'acumuladao', label: 'geral.acumuladao', habilitado: this.acumuladaoHabilitado },
             { id: 'desafio', label: 'geral.desafio', habilitado: this.desafioHabilitado },
             { id: 'loteria', label: 'geral.loteria', habilitado: this.loteriasHabilitada },
-            { id: 'loteria-popular', label: 'submenu.loteriaPopular', habilitado: this.loteriaPopularHabilitada }
+            { id: 'loteria-popular', label: 'submenu.loteriaPopular', habilitado: this.loteriaPopularHabilitada },
+            { id: 'rifa', label: 'geral.rifa', habilitado: this.rifaHabilitada }
         ];
-    
+
         const sortedTabs = tabs.slice();
         let principalIndex = sortedTabs.findIndex(tab => tab.id === this.paginaPrincipal);
-    
+
         if (this.paginaPrincipal === 'cassino' || this.paginaPrincipal === 'cassino_ao_vivo') {
             principalIndex = sortedTabs.findIndex(tab => tab.id === 'cassino');
         }
@@ -148,10 +153,10 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             const principalTab = sortedTabs.splice(principalIndex, 1)[0];
             sortedTabs.unshift(principalTab);
         }
-    
+
         return sortedTabs.filter(tab => tab.habilitado);
     }
-    
+
     getApostas() {
         this.loading = true;
 
@@ -206,6 +211,14 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                         apostas => this.handleResponse(apostas),
                         error => this.handleError(error)
                     );
+                break;
+            case 'rifa':
+                this.rifaApostaService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
+                break;
             default:
                 this.handleResponse([]);
                 break;
@@ -335,7 +348,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             modalAposta = ApostaModalComponent;
         }
-        
+
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
         let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
 

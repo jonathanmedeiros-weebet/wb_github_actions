@@ -1,0 +1,271 @@
+.modal-header,
+.modal-body,
+.modal-footer {
+    font-family: 'Open Sans', sans-serif;
+}
+.modal-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.modal-body {
+    max-height: 400px;
+    overflow: auto;
+}
+.modal-header {
+    background-color: var(--game);
+    border: none;
+    color: var(--foreground-game);
+}
+#cupom{
+    padding: 0 1em;
+    background: var(--game);
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 7px 1em 7px 1em;
+}
+.cupom-header {
+    color: var(--foreground);
+    font-size: 12px;
+    margin-bottom: 13px;
+    max-height: 91px;
+    column-count: 3;
+}
+.cupom-header p {
+    font-size: 12px;
+    width: 100%;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+.cupom-header span {
+    margin-left: 3px;
+    font-weight: normal;
+}
+.cupom-ativo{
+    background: var(--background);
+    margin-bottom: 0;
+    color: var(--foreground-game);
+}
+.ganhou{
+    color: #0C9F19;
+    text-transform: uppercase;
+}
+.perdeu{
+    color: #E9283B;
+    text-transform: uppercase;
+}
+.cancelado{
+    text-decoration: line-through
+}
+.jogo-resultado{
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+}
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px dashed black;
+}
+.numero{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top:15px;
+}
+.item .campeonato{
+    margin: 1px;
+    font-size: 12px;
+}
+
+.item .horario{
+    margin: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+.item .jogo{
+    margin: 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+.item .nome{
+    margin: 1px;
+}
+.item .cotacao{
+    margin: 1px;
+    font-size: 12px;
+}
+.valores .aposta, .valores .ganho, .valores .cambista-paga, .valores .resultado {
+    margin: 4px 1px 1px 1px;
+    font-weight: bold;
+    font-size: 12px;
+    display: flex;
+}
+.total-jogos {
+    font-weight: bold;
+    font-size: 12px;
+    display: flex;
+    margin: 0;
+}
+.codigo-aposta, .aposta-horario {
+    display: none;
+}
+.modal-title-mobile {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 16px;
+    display: none;
+}
+.valores span {
+    font-weight: normal;
+}
+.encerrado {
+    text-decoration-line: line-through;
+}
+.dados-simulacao {
+    text-align: center;
+    color: #E9283B;
+}
+.btn-outline-custom:hover {
+    text-align: center;
+    color: var(--foreground-highlight);
+    background-color: var(--highlight);
+    border-color: var(--foreground-highlight);
+}
+.btn-outline-custom {
+    border-color: var(--highlight);
+    color: var(--highlight);
+}
+.info-horario {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.7;
+}
+.info-cupom {
+    font-size: 12px;
+    color: var(--foreground-game);
+}
+.info-priority-cupom {
+    color: var(--highlight);
+    font-size: 14px;
+    font-weight: 650;
+}
+.table {
+    color: var(--foreground-game);
+    margin-top: 10px;
+    margin-bottom: -11px;
+    border-collapse: collapse;
+    width: 100%;
+}
+.table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 3px solid var(--background);
+    padding: 8px;
+}
+.table tbody td {
+    background: var(--game);
+    border-top: 0;
+    border-bottom: 1px solid var(--background);
+}
+.table thead {
+    background-color: var(--game);
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+tbody tr:last-child td:last-child {
+    border-radius: 0 0 6px 0;
+}
+tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 3px;
+}
+
+table th:first-child,
+table tr td:first-child {
+    max-width: 45px;
+}
+table tr td:nth-child(2) {
+    word-wrap: break-word;
+    max-width: 50px;
+}
+table th:nth-child(3),
+table tr td:nth-child(3) {
+    max-width: 35px;
+}
+.modal-footer {
+    justify-content: center;
+    background: var(--background);
+    border-top: none;
+}
+.button-container {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    justify-content: center;
+}
+.cupom-container {
+    display: flex;
+    align-items: flex-start;
+    margin: 3px;
+}
+.cupom-container{
+    display: none;
+}
+@media only screen and (max-width: 532px) {
+    .cupom-container:last-of-type #cupom {
+        margin-bottom: 115px;
+    }
+    .cupom-header {
+        margin: 0 5px;
+        max-height: none;
+        column-count: 1;
+        margin-bottom: 15px;
+    }
+    .table-container,
+    .modal-header .info-horario {
+        display: none;
+    }
+    .cupom-container{
+        display: block;
+    }
+    .modal-body {
+        min-height: 100vh;
+        overflow: auto;
+    }
+    .total-jogos, .aposta, .ganho, .cambista-paga, .resultado {
+        display: flex;
+        justify-content: space-between;
+    }
+    .codigo-aposta, .aposta-horario {
+        display: flex;
+    }
+    .modal-title {
+        display: none;
+    }
+    .modal-title-mobile {
+        margin-left: 7px;
+        display: block;
+    }
+    .action-buttons button, .action-buttons a {
+        padding: 12px;
+    }
+    .informacoes .codigo-aposta span {
+        margin-left: 2px;
+    }
+    .modal-header {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    #cupom {
+        background-color: var(--game);
+    }
+}
+@media only screen and (min-width: 532px) and (max-width: 1024px) {
+    .modal-body {
+        max-height: 100vh;
+        height: 100vh;
+        overflow: auto;
+    }
+}
+
