@@ -64,7 +64,9 @@ export class PromocaoFormComponent implements OnInit {
     }
 
     removerCor(conteudo: string): string {
-        return conteudo.replace(/color: rgb\([^)]*\);/g, '');
+        let padrao = /style="color:\s*[^"]*"/g;
+        let conteudoModificado = conteudo.replace(padrao, 'style="color: var(--foreground-sidebars)"');
+        
+        return conteudoModificado;
     }
-
 }

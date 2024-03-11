@@ -13,7 +13,7 @@
     overflow: scroll;
     display: flex;
     flex-direction: column;
-    color: var(--foreground-inputs-odds);
+    color: var(--foreground-sidebars);
 }
 .loading-listagem .item-sample {
     border-radius: 5px;
