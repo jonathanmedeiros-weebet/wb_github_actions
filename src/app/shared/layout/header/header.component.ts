@@ -202,7 +202,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
-        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao; 
+        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
         this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
 
@@ -229,7 +229,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
- 
+
         if(this.mostrarSaldo == null){
             localStorage.setItem('exibirSaldo', 'true');
             this.mostrarSaldo = 'true';
@@ -532,13 +532,5 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     btnCardOnMouseOut() {
         this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
         setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(37); }, 300);
-    }
-
-    iniciarParlaybay(){
-        if(this.isLoggedIn){
-            this.router.navigate(['/casino/pb/play/real/170000/parlaybay']);
-        } else {
-            this.abrirLogin();
-        }
     }
 }

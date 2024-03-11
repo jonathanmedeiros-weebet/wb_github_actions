@@ -85,9 +85,6 @@ export class CasinoApiService {
         queryParams['fornecedor'] = $gameFornecedor;
         queryParams['isMobile'] = isMobile;
 
-
-        let isMobile = window.innerWidth < 1025;
-
         if(isMobile){
             queryParams['plataforma'] = 'mobile';
         } else {
