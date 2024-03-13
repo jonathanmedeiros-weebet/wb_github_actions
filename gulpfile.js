@@ -3367,3 +3367,12 @@ gulp.task('unibets.com.br', function (done) {
         styles: ""
     });
 });
+
+gulp.task('zilionz.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "zilionz.com",
+        banca: "ZILIONZ",
+        styles: ""
+    });
+});
