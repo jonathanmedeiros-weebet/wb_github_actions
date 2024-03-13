@@ -61,15 +61,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
         } else {
-            this.sidebarService.changeItens({contexto: 'cliente'});
+            this.sidebarService.changeItens({ contexto: 'cliente' });
             this.menuFooterService.setIsPagina(true);
         }
 
         this.getRollovers();
 
-        this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
-        this.valorMaxSaqueDiario = this.paramsLocais.getOpcoes().valor_max_saque_diario_cliente;
-        this.valorMaxSaqueMensal = this.paramsLocais.getOpcoes().valor_max_saque_mensal_cliente;
         this.apiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
         this.metodoPagamentoDesabilitado = this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado;
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
@@ -82,7 +79,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 posicaoFinanceira => {
                     this.saldo = posicaoFinanceira.saldo;
-                    if(posicaoFinanceira.saldo == 0){
+                    if (posicaoFinanceira.saldo == 0) {
                         this.disableButtom = true;
                     }
                 },
@@ -99,6 +96,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.cliente = res;
+
+                    this.valorMinSaque = res.valorMinSaque;
+                    this.valorMaxSaqueDiario = res.valorMaxSaqueDiario;
+                    this.valorMaxSaqueMensal = res.valorMaxSaqueMensal;
+
+                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
 
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
@@ -125,9 +128,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]]
-            }
-        );
+            valor: [0, [Validators.required]]
+        });
     }
 
     handleError(error: string) {
