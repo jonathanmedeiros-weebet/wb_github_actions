@@ -3368,9 +3368,18 @@ gulp.task('unibets.com.br', function (done) {
 
 gulp.task('zilionz.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front3.wee.bet",
         host: "zilionz.com",
         banca: "ZILIONZ",
+        styles: ""
+    });
+});
+
+gulp.task('newbets.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "newbets.com.br",
+        banca: "NEW BETS",
         styles: ""
     });
 });

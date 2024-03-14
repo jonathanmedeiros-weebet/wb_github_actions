@@ -354,7 +354,8 @@
         "ativabet.bet": "gulp ativabet.bet",
         "proesporte.net": "gulp proesporte.net",
         "unibets.com.br": "gulp unibets.com.br",
-        "zilionz.com": "gulp zilionz.com"
+        "zilionz.com": "gulp zilionz.com",
+        "newbets.com.br": "gulp newbets.com.br"
     },
     "private": true,
     "dependencies": {
