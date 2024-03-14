@@ -17,7 +17,6 @@ export class PromocaoFormComponent implements OnInit {
     showLoadingIndicator = true;
     TIMESTAMP;
     SLUG;
-    exibirImagem;
     headerHeight = 92;
     currentHeight = window.innerHeight - this.headerHeight;
     unsub$ = new Subject();
@@ -57,7 +56,6 @@ export class PromocaoFormComponent implements OnInit {
             }
 
             this.showLoadingIndicator = false;
-            this.getTamanhoTela()
         }, (error) => this.handleError(error))
     }
 
@@ -65,23 +63,10 @@ export class PromocaoFormComponent implements OnInit {
         this.messageService.error(msg);
     }
 
-    getTamanhoTela() {
-        const width = window.innerWidth;
-    
-        if (width <=  820) {
-            this.exibirImagem = this.promocao.imagemMobile;
-        } else {
-            this.exibirImagem = this.promocao.imagemDesktop;
-        }
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize(event: Event) {
-      this.getTamanhoTela();
-    }
-
     removerCor(conteudo: string): string {
-        return conteudo.replace(/color: rgb\([^)]*\);/g, '');
+        let padrao = /style="color:\s*[^"]*"/g;
+        let conteudoModificado = conteudo.replace(padrao, 'style="color: var(--foreground-sidebars)"');
+        
+        return conteudoModificado;
     }
-
 }
