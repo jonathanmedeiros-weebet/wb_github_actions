@@ -6,6 +6,9 @@ import { PasswordValidation } from '../../shared/utils';
 import { config } from '../../shared/config';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { MessageService } from '../../shared/services/utils/message.service';
+import { LayoutService } from '../../shared/services/utils/layout.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-resetar-senha',
@@ -19,13 +22,16 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
 
     mostrarSenha = false;
     mostrarSenhaConfirmar = false;
+    indiqueGanheRemovido = false;
+    unsub$ = new Subject();
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private fb: UntypedFormBuilder,
         private messageService: MessageService,
-        private authService: AuthService
+        private authService: AuthService,
+        private layout: LayoutService
     ) {
         super();
     }
@@ -41,6 +47,11 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
             } else {
                 this.router.navigate(['esportes/futebol/jogos']);
             }
+        });
+
+        this.layout.verificaRemocaoIndiqueGanhe.pipe(takeUntil(this.unsub$)).subscribe(
+            statusIndiqueGanhe => {
+                this.indiqueGanheRemovido = statusIndiqueGanhe;
         });
     }
 

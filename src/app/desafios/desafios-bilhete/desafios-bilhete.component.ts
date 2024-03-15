@@ -185,7 +185,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         });
 
         const premio = valor * cotacao;
-        this.possibilidadeGanho = premio < this.opcoes.valor_max_premio ? premio : this.opcoes.valor_max_premio;
+        this.possibilidadeGanho = premio < this.opcoes.valor_max_premio_desafio ? premio : this.opcoes.valor_max_premio_desafio;
     }
 
     submit() {
