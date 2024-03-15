@@ -97,9 +97,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 res => {
                     this.cliente = res;
 
-                    this.valorMinSaque = res.valorMinSaque;
-                    this.valorMaxSaqueDiario = res.valorMaxSaqueDiario;
-                    this.valorMaxSaqueMensal = res.valorMaxSaqueMensal;
+                    this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
+                    this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
+                    this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
 
                     this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
 
