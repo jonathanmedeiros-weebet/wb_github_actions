@@ -24,7 +24,7 @@
                 </p>
                 <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
                     Retorno 6: {{item.cotacao6 * item.valor | currency}}
-                </p>
+                </p>               
                 <p class="informacoes-item" *ngIf="item.cotacao5 > 0" [ngClass]="verificarStatus(item, 5)">
                     Retorno 5: {{item.cotacao5 * item.valor | currency}}
                 </p>
@@ -47,6 +47,9 @@
             </ng-container>
             <p class="valor-aposta">
                 VALOR TOTAL: {{aposta.valor | currency}}
+            </p>
+            <p *ngIf="aposta.passador.percentualPremio > 0" class="valor-aposta">
+                CAMBISTA PAGA: {{netPrize | currency}}
             </p>
             <p class="mensagem-rodape">
                 {{informativoRodape}}
