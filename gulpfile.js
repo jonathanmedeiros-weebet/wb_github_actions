@@ -650,15 +650,6 @@ gulp.task('tubaraobet.wee.bet', function (done) {
     });
 });
 
-gulp.task('primesoccer.app', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "primesoccer.app",
-        banca: "PRIME SOCCER",
-        styles: "",
-    });
-});
-
 gulp.task('primosbet.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1024,15 +1015,6 @@ gulp.task('visabet.wee.bet', function (done) {
     });
 });
 
-gulp.task('infinitybet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "infinitybet.wee.bet",
-        banca: "INFINITY BET",
-        styles: "",
-    });
-});
-
 gulp.task('futpix.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1114,15 +1096,6 @@ gulp.task('sportingol.bet', function (done) {
         server: "front3.wee.bet",
         host: "sportingol.bet",
         banca: "SPORTINGOL",
-        styles: "",
-    });
-});
-
-gulp.task('jaesporte.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "jaesporte.com",
-        banca: "JA ESPORTE",
         styles: "",
     });
 });
@@ -1985,17 +1958,6 @@ gulp.task('fortunebet.app', function (done) {
     });
 });
 
-gulp.task('26sports.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "26sports.bet",
-        banca: "26 SPORTS",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TDQTZKQJ');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-TDQTZKQJ'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('blubet.site', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2199,17 +2161,6 @@ gulp.task('capitalbets.bet', function (done) {
     });
 });
 
-gulp.task('77games.vip', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "77games.vip",
-        banca: "77 GAMES",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/aOGdmOhIno' async></script>",
-    });
-});
-
 gulp.task('seg.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2347,15 +2298,6 @@ gulp.task('betsnordeste.bet', function (done) {
     });
 });
 
-gulp.task('belogolsports.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "belogolsports.com",
-        banca: "BELO GOL SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('suasortebet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2465,24 +2407,6 @@ gulp.task('valebet.bet', function (done) {
         styles: "",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W2XCTBC6');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-W2XCTBC6'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
-gulp.task('wavebet.io', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "wavebet.io",
-        banca: "Wave Bet",
-        styles: "",
-    });
-});
-
-gulp.task('bet24horas.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bet24horas.com",
-        banca: "BET 24 HORAS",
-        styles: "",
     });
 });
 
@@ -2599,15 +2523,6 @@ gulp.task('crewbet.io', function (done) {
     });
 });
 
-gulp.task('zeuspay.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "zeuspay.bet",
-        banca: "ZEUS PAY",
-        styles: "",
-    });
-});
-
 gulp.task('betbetix.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2624,15 +2539,6 @@ gulp.task('pix777.bet', function (done) {
         server: "front3.wee.bet",
         host: "pix777.bet",
         banca: "PIX 777",
-        styles: "",
-    });
-});
-
-gulp.task('starplayer.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "starplayer.bet",
-        banca: "STAR PLAYER",
         styles: "",
     });
 });
@@ -2699,17 +2605,6 @@ gulp.task('bnrbet.com', function (done) {
         styles: "",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KVT8RKHH');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-KVT8RKHH'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
-gulp.task('camaraobet.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "camaraobet.com",
-        banca: "CAMARÃO BET",
-        styles: "",
-        google_tag_part_1:"<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KH545CZD');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2:"<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-KH545CZD'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
     });
 });
 
@@ -2814,15 +2709,6 @@ gulp.task('supertop3.bet', function (done) {
     });
 });
 
-gulp.task('r5sports.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "r5sports.bet",
-        banca: "R5 SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('fiel.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2873,15 +2759,6 @@ gulp.task('betypix.bet', function (done) {
         server: "front3.wee.bet",
         host: "betypix.bet",
         banca: "BETYPIX",
-        styles: "",
-    });
-});
-
-gulp.task('laelebet.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "laelebet.com",
-        banca: "LÁ ELE BET",
         styles: "",
     });
 });
@@ -3019,15 +2896,6 @@ gulp.task('spy.bet', function (done) {
         host: "spy.bet",
         banca: "SpyBet - Cassino Online e Apostas Esportivas",
         description: "Cassino SpyBet Oficial: Entre agora no Cassino SpyBet e comece agora mesmo a fazer as suas apostas em roletas, slots e vários outros jogos. Aproveite o nosso Super Bônus de Primeiro Depósito e se divirta!",
-        styles: "",
-    });
-});
-
-gulp.task('betagora.io', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betagora.io",
-        banca: "BET AGORA",
         styles: "",
     });
 });
