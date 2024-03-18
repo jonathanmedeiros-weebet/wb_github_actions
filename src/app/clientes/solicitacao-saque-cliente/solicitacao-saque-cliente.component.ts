@@ -242,20 +242,20 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             switch (chavePixValue) {
                 case 'cpf':
                     this.form.get('clienteChavePix').setValue(this.cliente.cpf);
-                    this.labelChavePix = "CPF";
+                    this.labelChavePix = this.translate.instant('geral.cpf');
                     break;
                 case 'email':
                     clienteChavePixControle.setValidators([Validators.required, Validators.email]);
-                    this.labelChavePix = "E-mail";
+                    this.labelChavePix = this.translate.instant('geral.email');
                     break;
                 case 'phone':
-                    this.labelChavePix = "Telefone";
+                    this.labelChavePix = this.translate.instant('geral.telefone');
                     break;
                 case 'random':
-                    this.labelChavePix = "Chave aleatória";
+                    this.labelChavePix = this.translate.instant('geral.chaveAleatoria');
                     break;
                 default:
-                    this.labelChavePix = "Chave Pix";
+                    this.labelChavePix = this.translate.instant('geral.chavePix');
                     break;
           }
         }

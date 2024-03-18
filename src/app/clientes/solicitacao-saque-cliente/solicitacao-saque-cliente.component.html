@@ -33,20 +33,20 @@
                             <div class="col col-sm-3 col-lg-4 col-xl-3 saque-pix">
                                 <div class="form-group required">
                                     <div class="mt-3">
-                                        <label class="label text-left">Chave Pix</label>
+                                        <label class="label text-left">{{'geral.chavePix' | translate}}</label>
                                     </div>
                                     <div class="mt-3">
                                         <div class="form-group">
                                             <select class="form-control inverted-out" formControlName="tipoChavePix" (change)="onChavePixChange()">
                                                 <ng-container *ngIf="!permitirQualquerChavePix; else optionsPix">
-                                                    <option value="cpf" selected>CPF</option>
+                                                    <option value="cpf" selected>{{'geral.cpf' | translate}}</option>
                                                 </ng-container>
                                                 <ng-template #optionsPix>
                                                     <option value="0" [selected]="true" disabled>{{'geral.selecioneChavePix' | translate}}</option>
-                                                    <option value="cpf">CPF</option>
-                                                    <option value="email">E-mail</option>
-                                                    <option value="phone">Telefone</option>
-                                                    <option value="random">Chave aleatória</option>
+                                                    <option value="cpf">{{'geral.cpf' | translate}}</option>
+                                                    <option value="email">{{'geral.email' | translate}}</option>
+                                                    <option value="phone">{{'geral.telefone' | translate}}</option>
+                                                    <option value="random">{{'geral.chaveAleatoria' | translate}}</option>
                                                 </ng-template>
                                             </select>
                                             <app-error-msg [control]="form.get('tipoChavePix')"></app-error-msg>
