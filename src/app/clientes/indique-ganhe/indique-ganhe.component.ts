@@ -311,7 +311,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
 
         return this.translateService.instant(`data.${days_of_week[date.getDay()]}`) +
             ", " +
-            this.translateService.instant('data.diaDeNomeMes', {'dia': date.getDate(), 'nomeMes': nomeMes}); 
+            this.translateService.instant('data.diaDeNomeMes', {'dia': date.getDate(), 'nomeMes': nomeMes});
     }
 
     createForm() {

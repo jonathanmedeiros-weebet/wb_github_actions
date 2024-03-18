@@ -265,6 +265,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         if (this.indiqueGanheHabilitado && (!this.isLoggedIn || this.isCliente) && !this.activeGameCassinoMobile()) {
             this.layoutService.changeIndiqueGanheCardHeight(37);
         }
+
+        if(!this.indiqueGanheHabilitado){
+            this.layoutService.indiqueGanheRemovido(true);
+        }  
     }
 
     ngOnDestroy() {
@@ -520,6 +524,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.renderer.setStyle(card, 'padding', '0 20px');
         setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
         setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(0); }, 300);
+        this.layoutService.indiqueGanheRemovido(true);
     }
 
     btnCardOnMouseOver() {

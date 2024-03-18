@@ -12,15 +12,18 @@ export class LayoutService {
 	private indiqueGanheCardHeightSub = new BehaviorSubject<number>(this.indiqueGanheCardHeight);
 	private submenuHeightSub = new BehaviorSubject<number>(this.submenuHeight);
 	private currentHeaderHeightSub = new BehaviorSubject<number>(this.defaultHeaderHeight);
+	private statusIndiqueGanheAtivo = new BehaviorSubject<boolean>(false);
 
 	currentIndiqueGanheCardHeight;
 	currentSubmenuHeight;
 	currentHeaderHeight;
+	verificaRemocaoIndiqueGanhe;
 
 	constructor() {
 		this.currentIndiqueGanheCardHeight = this.indiqueGanheCardHeightSub.asObservable();
 		this.currentSubmenuHeight = this.submenuHeightSub.asObservable();
 		this.currentHeaderHeight = this.currentHeaderHeightSub.asObservable();
+		this.verificaRemocaoIndiqueGanhe = this.statusIndiqueGanheAtivo.asObservable();
 	}
 
 	changeIndiqueGanheCardHeight(height: number): void {
@@ -49,5 +52,9 @@ export class LayoutService {
 			});
 
 		this.currentHeaderHeightSub.next(this.defaultHeaderHeight + this.indiqueGanheCardHeight + this.submenuHeight);
+	}
+
+	indiqueGanheRemovido(status: boolean): void {
+		this.statusIndiqueGanheAtivo.next(status);
 	}
 }
