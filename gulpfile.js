@@ -3242,3 +3242,12 @@ gulp.task('newbets.com.br', function (done) {
         styles: ""
     });
 });
+
+gulp.task('jupterbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jupterbet.com",
+        banca: "JUPTERBET",
+        styles: ""
+    });
+});
