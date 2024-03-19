@@ -210,7 +210,10 @@
         "jogarAgora": "Jogar Agora",
         "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
-        "resultadosEncontrados": "Foram encontrados {{quantidade}} resultados"
+        "resultadosEncontrados": "Foram encontrados {{quantidade}} resultados",
+        "selecioneChavePix": "Selecione a chave pix",
+        "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
+        "chaveAleatoria": "Chave aleatória"
     },
     "dias": {
         "ontem": "Ontem",
