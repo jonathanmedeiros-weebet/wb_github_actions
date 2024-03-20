@@ -1,17 +1,17 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
-import {ClienteService} from '../../shared/services/clientes/cliente.service';
-import {Cliente} from '../../shared/models/clientes/cliente';
-import {MessageService} from '../../shared/services/utils/message.service';
-import {FinanceiroService} from '../../shared/services/financeiro.service';
-import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
-import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {AuthService, SidebarService} from 'src/app/services';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ClientePerfilModalComponent, ClientePixModalComponent, ConfirmModalComponent} from 'src/app/shared/layout/modals';
-import {TranslateService} from '@ngx-translate/core';
-import {Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { ClienteService } from '../../shared/services/clientes/cliente.service';
+import { Cliente } from '../../shared/models/clientes/cliente';
+import { MessageService } from '../../shared/services/utils/message.service';
+import { FinanceiroService } from '../../shared/services/financeiro.service';
+import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
+import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
+import { AuthService, SidebarService } from 'src/app/services';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ClientePerfilModalComponent, ClientePixModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -39,6 +39,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     saldo = 0;
     saques = [];
     permitirQualquerChavePix = false;
+    labelChavePix = '';
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -52,7 +53,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private auth: AuthService,
         public activeModal: NgbActiveModal,
         private translate: TranslateService,
-        private router: Router
+        private router: Router,
     ) {
         super();
     }
@@ -108,12 +109,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.rotaCompletarCadastro = '/clientes/perfil';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
-                    if (!this.cliente.chave_pix && this.permitirQualquerChavePix) {
-                        this.cadastroCompleto = false;
-                        this.rotaCompletarCadastro = '/clientes/perfil-pix';
-                        this.errorMessage = this.translate.instant('saques.paraProsseguirAtualizeChavePix');
-                    }
 
+                    this.onChavePixChange();
                     this.showLoading = false;
                 },
                 error => {
@@ -128,7 +125,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-            valor: [0, [Validators.required]]
+            valor: [0, [Validators.required]],
+            tipoChavePix: [!this.permitirQualquerChavePix ? 'cpf' : '', Validators.required],
+            clienteChavePix: ['', Validators.required]
         });
     }
 
@@ -154,7 +153,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     cancelarSolicitacaoSaque(solicitacaoSaqueId) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Cancelamento';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a solicitação de saque?';
 
@@ -175,7 +174,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     exibirCancelarSolicitacaoSaque(depositoSaque) {
-        if (this.pspsSaqueAutomatico.includes(depositoSaque.psp)){
+        if (this.pspsSaqueAutomatico.includes(depositoSaque.psp)) {
             return false;
         }
 
@@ -219,14 +218,81 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             'status': 'ativo',
         };
         this.financeiroService.getRollovers(queryParams)
-        .subscribe(
-            response => {
-                this.qtdRolloverAtivos = response.length;
-            },
-            error => {
-                this.handleError(error);
-            }
-        );
+            .subscribe(
+                response => {
+                    this.qtdRolloverAtivos = response.length;
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
 
+    }
+
+    onChavePixChange() {
+        const chavePixValue = this.form.get('tipoChavePix').value;
+        const clienteChavePixControle = this.form.get('clienteChavePix');
+
+        clienteChavePixControle.clearValidators();
+        this.form.get('clienteChavePix').setValue('');
+
+        clienteChavePixControle.markAsPristine();
+        clienteChavePixControle.markAsUntouched();
+
+        if (chavePixValue !== '0' && chavePixValue !== '') {
+            clienteChavePixControle.setValidators([Validators.required]);
+            switch (chavePixValue) {
+                case 'cpf':
+                    this.form.get('clienteChavePix').setValue(this.cliente.cpf);
+                    this.labelChavePix = this.translate.instant('geral.cpf');
+                    break;
+                case 'email':
+                    clienteChavePixControle.setValidators([Validators.required, Validators.email]);
+                    this.labelChavePix = this.translate.instant('geral.email');
+                    break;
+                case 'phone':
+                    this.labelChavePix = this.translate.instant('geral.telefone');
+                    break;
+                case 'random':
+                    this.labelChavePix = this.translate.instant('geral.chaveAleatoria');
+                    break;
+                default:
+                    this.labelChavePix = this.translate.instant('geral.chavePix');
+                    break;
+            }
+        }
+        clienteChavePixControle.updateValueAndValidity();
+    }
+
+    getMask() {
+        let tipoChavePix = this.form.get('tipoChavePix').value;
+        let chaveComMascara = null;
+
+        if (tipoChavePix === 'phone') {
+            chaveComMascara = '(00) 00000-0000';
+        } else if (tipoChavePix === 'random') {
+            chaveComMascara = 'AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA';
+        }
+
+        return chaveComMascara;
+    }
+
+    formatarChavePix(chavePix: string, tipoChavePix: string): string {
+        let chavePixFormatada: any;
+        switch (tipoChavePix) {
+            case 'phone':
+                chavePixFormatada = chavePix.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                break;
+            case 'random':
+                chavePixFormatada = chavePix.replace(/^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})$/, "$1-$2-$3-$4-$5");
+                break;
+            case 'cpf':
+                chavePixFormatada = chavePix.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                break;
+            default:
+                chavePixFormatada = chavePix;
+                break;
+        }
+        return chavePixFormatada;
     }
 }
