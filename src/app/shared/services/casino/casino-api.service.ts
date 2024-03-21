@@ -13,6 +13,7 @@ import { UrlSerializer } from '@angular/router';
 export class CasinoApiService {
 
     private central_url = `${config.HOST}/casino`;
+    private loki_url = `${config.LOKI_URL}/casino`;
 
     constructor(
         private http: HttpClient,
@@ -43,10 +44,10 @@ export class CasinoApiService {
     }
 
     getGamesList(aoVivo: any) {
-        if(aoVivo){
-            var endpoint = this.central_url+"/games/gamesAoVivo";
-        }else{
-            var endpoint = this.central_url+"/games/";
+        if (aoVivo) {
+            var endpoint = this.loki_url+"/gamesAoVivo";
+        } else {
+            var endpoint = this.loki_url+"/games";
         }
         return this.http.post(String(endpoint),{},this.header.getRequestOptions(true))
             .pipe(
