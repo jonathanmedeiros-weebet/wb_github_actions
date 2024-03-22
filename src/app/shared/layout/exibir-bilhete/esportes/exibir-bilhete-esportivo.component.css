@@ -230,7 +230,7 @@ table tr td:nth-child(3) {
         display: block;
     }
     .modal-body {
-        min-height: 100vh;
+        min-height: calc(100svh - 240px);
         overflow: auto;
     }
     .total-jogos, .aposta, .ganho, .cambista-paga, .resultado {
@@ -263,7 +263,7 @@ table tr td:nth-child(3) {
  }
 @media only screen and (min-width: 532px) and (max-width: 1024px) {
     .modal-body {
-        max-height: 100vh;
+        max-height: calc(100svh - 245px);
         height: 100vh;
         overflow: auto;
     }
