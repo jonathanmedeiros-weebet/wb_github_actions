@@ -70,6 +70,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     esporteAtivo;
     cassinoAtivo;
     virtuaisAtivo;
+    parlaybayAtivo;
     LOGO = config.LOGO;
     appVersion;
     whatsapp;
@@ -199,8 +200,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.esporteAtivo = this.paramsService.getOpcoes().esporte;
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
+        this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
-        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao; 
+        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
         this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
 
@@ -227,7 +229,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
- 
+
         if(this.mostrarSaldo == null){
             localStorage.setItem('exibirSaldo', 'true');
             this.mostrarSaldo = 'true';

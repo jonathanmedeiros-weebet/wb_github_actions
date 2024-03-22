@@ -85,6 +85,11 @@ export class CasinoApiService {
         queryParams['fornecedor'] = $gameFornecedor;
         queryParams['isMobile'] = isMobile;
 
+        if(isMobile){
+            queryParams['plataforma'] = 'mobile';
+        } else {
+            queryParams['plataforma'] = 'pc';
+        }
 
         if (queryParams) {
             requestOptions = this.header.getRequestOptions(true, queryParams);
@@ -92,13 +97,21 @@ export class CasinoApiService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        return this.http.get(`${this.central_url}/games/url`, requestOptions).pipe(
-            map((res: any) => {
-                return res;
-            }),
-            catchError(this.errorService.handleError)
-        );
-
+        if($gameFornecedor == 'parlaybay' || $gameFornecedor == 'evoplay'){
+            return this.http.get(`${config.HOST}/dcs/loginGame`, requestOptions).pipe(
+                map((res: any) => {
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+        } else{
+            return this.http.get(`${this.central_url}/games/url`, requestOptions).pipe(
+                map((res: any) => {
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+        }
     }
 
     getCasinoLiveKey(){

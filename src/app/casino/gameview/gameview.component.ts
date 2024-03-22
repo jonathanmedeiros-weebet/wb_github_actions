@@ -46,7 +46,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        
+
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
         }
@@ -110,10 +110,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     back(): void {
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
-        }
-
-        if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
-            this.router.navigate(['casino/cl/wall-live/todos']);
+        } else if(this.gameFornecedor === 'parlaybay') {
+            this.router.navigate(['esportes/futebol']);
+        } else if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
+            this.router.navigate(['esportes/cl/wall-live/todos']);
         } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){
             this.router.navigate(['casino/c/wall/todos']);
         }else{
@@ -200,7 +200,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     getMobileOperatingSystem() {
         let userAgent = navigator.userAgent ;
-        
+
         if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ){
             return 'ios';
         }
