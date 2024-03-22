@@ -1543,15 +1543,6 @@ gulp.task('bet101.bet', function (done) {
     });
 });
 
-gulp.task('a2bet.top', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "a2bet.top",
-        banca: "A2 BET",
-        styles: "",
-    });
-});
-
 gulp.task('betbrazilian.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2390,17 +2381,6 @@ gulp.task('federalsports.bet', function (done) {
     });
 });
 
-gulp.task('valebet.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "valebet.bet",
-        banca: "VALE BET",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W2XCTBC6');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-W2XCTBC6'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('eskybet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2579,15 +2559,6 @@ gulp.task('fourbet.net', function (done) {
     });
 });
 
-gulp.task('betmidy.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betmidy.com",
-        banca: "BET MIDY",
-        styles: "",
-    });
-});
-
 gulp.task('bnrbet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2736,15 +2707,6 @@ gulp.task('starbetfc.com', function (done) {
     });
 });
 
-gulp.task('horadaaposta.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "horadaaposta.bet",
-        banca: "HORA DA APOSTA",
-        styles: "",
-    });
-});
-
 gulp.task('betypix.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2868,15 +2830,6 @@ gulp.task('x1esporte.com', function (done) {
         server: "front2.wee.bet",
         host: "x1esporte.com",
         banca: "X1 Esporte",
-        styles: "",
-    });
-});
-
-gulp.task('clarabet.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "clarabet.com",
-        banca: "CLARA BET",
         styles: "",
     });
 });
@@ -3239,6 +3192,15 @@ gulp.task('newbets.com.br', function (done) {
         server: "front2.wee.bet",
         host: "newbets.com.br",
         banca: "NEW BETS",
+        styles: ""
+    });
+});
+
+gulp.task('jupterbet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "jupterbet.com",
+        banca: "JUPTERBET",
         styles: ""
     });
 });
