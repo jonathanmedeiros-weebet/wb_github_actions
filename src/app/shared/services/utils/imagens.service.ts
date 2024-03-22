@@ -21,7 +21,7 @@ export class ImagensService {
         this.getLogo();
     }
 
-    readonly endpoint = `${config.BASE_URL}/img`;
+    readonly endpoint = `${config.LOKI_URL}`;
 
     buscarLogo() {
         return this.http.get(`${this.endpoint}/logo`, this.headers.getRequestOptions()).pipe(map((result: any) => {
@@ -31,7 +31,7 @@ export class ImagensService {
     }
 
     buscarLogoImpressao() {
-        return this.http.get(`${this.endpoint}/logobilhete`, this.headers.getRequestOptions()).pipe(map((result: any) => {
+        return this.http.get(`${this.endpoint}/ticket-logo`, this.headers.getRequestOptions()).pipe(map((result: any) => {
                 return result.results;
             }),
             catchError(this.errorService.handleError));
