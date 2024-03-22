@@ -1,17 +1,17 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
-import {ClienteService} from '../../shared/services/clientes/cliente.service';
-import {Cliente} from '../../shared/models/clientes/cliente';
-import {MessageService} from '../../shared/services/utils/message.service';
-import {FinanceiroService} from '../../shared/services/financeiro.service';
-import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
-import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {AuthService, SidebarService} from 'src/app/services';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ClientePerfilModalComponent, ClientePixModalComponent, ConfirmModalComponent} from 'src/app/shared/layout/modals';
-import {TranslateService} from '@ngx-translate/core';
-import {Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { ClienteService } from '../../shared/services/clientes/cliente.service';
+import { Cliente } from '../../shared/models/clientes/cliente';
+import { MessageService } from '../../shared/services/utils/message.service';
+import { FinanceiroService } from '../../shared/services/financeiro.service';
+import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
+import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
+import { AuthService, SidebarService } from 'src/app/services';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ClientePerfilModalComponent, ClientePixModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -62,15 +62,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
         } else {
-            this.sidebarService.changeItens({contexto: 'cliente'});
+            this.sidebarService.changeItens({ contexto: 'cliente' });
             this.menuFooterService.setIsPagina(true);
         }
 
         this.getRollovers();
 
-        this.valorMinSaque = this.paramsLocais.getOpcoes().valor_min_saque_cliente;
-        this.valorMaxSaqueDiario = this.paramsLocais.getOpcoes().valor_max_saque_diario_cliente;
-        this.valorMaxSaqueMensal = this.paramsLocais.getOpcoes().valor_max_saque_mensal_cliente;
         this.apiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
         this.metodoPagamentoDesabilitado = this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado;
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
@@ -83,7 +80,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 posicaoFinanceira => {
                     this.saldo = posicaoFinanceira.saldo;
-                    if(posicaoFinanceira.saldo == 0){
+                    if (posicaoFinanceira.saldo == 0) {
                         this.disableButtom = true;
                     }
                 },
@@ -100,6 +97,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.cliente = res;
+
+                    this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
+                    this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
+                    this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
+
+                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
 
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
@@ -122,11 +125,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-                valor: [0, [Validators.required, Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]],
-                tipoChavePix: [!this.permitirQualquerChavePix ? 'cpf' : '', Validators.required],
-                clienteChavePix: ['', Validators.required]
-            }
-        );
+            valor: [0, [Validators.required]],
+            tipoChavePix: [!this.permitirQualquerChavePix ? 'cpf' : '', Validators.required],
+            clienteChavePix: ['', Validators.required]
+        });
     }
 
     handleError(error: string) {
@@ -151,7 +153,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     cancelarSolicitacaoSaque(solicitacaoSaqueId) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Cancelamento';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a solicitação de saque?';
 
@@ -172,7 +174,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     exibirCancelarSolicitacaoSaque(depositoSaque) {
-        if (this.pspsSaqueAutomatico.includes(depositoSaque.psp)){
+        if (this.pspsSaqueAutomatico.includes(depositoSaque.psp)) {
             return false;
         }
 
@@ -216,14 +218,14 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             'status': 'ativo',
         };
         this.financeiroService.getRollovers(queryParams)
-        .subscribe(
-            response => {
-                this.qtdRolloverAtivos = response.length;
-            },
-            error => {
-                this.handleError(error);
-            }
-        );
+            .subscribe(
+                response => {
+                    this.qtdRolloverAtivos = response.length;
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
 
     }
 
@@ -257,7 +259,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 default:
                     this.labelChavePix = this.translate.instant('geral.chavePix');
                     break;
-          }
+            }
         }
         clienteChavePixControle.updateValueAndValidity();
     }
