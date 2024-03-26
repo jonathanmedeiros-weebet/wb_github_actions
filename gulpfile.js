@@ -1747,10 +1747,10 @@ gulp.task('sorteesportiva.app', function (done) {
     });
 });
 
-gulp.task('nacionalbet.online', function (done) {
+gulp.task('nacionalbet.club', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "nacionalbet.online",
+        host: "nacionalbet.club",
         banca: "NACIONAL BET",
         styles: "",
     });
