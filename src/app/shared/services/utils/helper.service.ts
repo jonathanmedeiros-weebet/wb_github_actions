@@ -338,6 +338,18 @@ export class HelperService {
         return this.moneyFormat(result);
     }
 
+    calcularPremioLiquidoLoteria(valor, cotacao, percentualPremio) {
+        let result = valor * cotacao;
+
+        if (result > this.opcoes.valor_max_premio_loterias) {
+            result = this.opcoes.valor_max_premio_loterias;
+        }
+
+        result = result * (100 - percentualPremio) / 100;
+
+        return this.moneyFormat(result);
+    }
+
     removerAcentos(stringToSanitize) {
         return stringToSanitize.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
