@@ -97,7 +97,7 @@ export class CasinoApiService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        if($gameFornecedor == 'parlaybay' || $gameFornecedor == 'evoplay'){
+        if($gameFornecedor == 'parlaybay'){
             return this.http.get(`${config.HOST}/dcs/loginGame`, requestOptions).pipe(
                 map((res: any) => {
                     return res;
