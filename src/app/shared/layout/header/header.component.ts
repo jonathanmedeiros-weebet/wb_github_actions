@@ -200,9 +200,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
-        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao; 
+        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
-        this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
+        this.valorGanhoPorIndicacao =  (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
@@ -227,7 +227,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
- 
+
         if(this.mostrarSaldo == null){
             localStorage.setItem('exibirSaldo', 'true');
             this.mostrarSaldo = 'true';
@@ -268,7 +268,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         if(!this.indiqueGanheHabilitado){
             this.layoutService.indiqueGanheRemovido(true);
-        }  
+        }
     }
 
     ngOnDestroy() {
