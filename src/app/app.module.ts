@@ -31,6 +31,13 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { HomeComponent } from './home/home.component';
+import { CardsModalidadeComponent } from './home/widgets/cards-modalidade/cards-modalidade.component';
+import { JogosDestaqueComponent } from './home/widgets/jogos-destaque/jogos-destaque.component';
+import { JogosAovivoComponent } from './home/widgets/jogos-aovivo/jogos-aovivo.component';
+import { CassinoComponent } from './home/widgets/cassino/cassino.component';
+import { CassinoAovivoComponent } from './home/widgets/cassino-aovivo/cassino-aovivo.component';
+import { CassinoPopularesComponent } from './home/widgets/cassino-populares/cassino-populares.component';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -73,7 +80,7 @@ export function googleFactory(service: ParametrosLocaisService) {
 }
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, HomeComponent, CardsModalidadeComponent, JogosDestaqueComponent, JogosAovivoComponent, CassinoComponent, CassinoAovivoComponent, CassinoPopularesComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
