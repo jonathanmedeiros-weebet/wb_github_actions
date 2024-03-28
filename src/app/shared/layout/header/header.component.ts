@@ -482,7 +482,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     activeMenuCassino() {
-        if (this.router.url.includes('/casino/c/')) {
+        if (this.router.url.includes('/casino')) {
             return 'active';
         }
 
@@ -490,7 +490,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     activeMenuCassinoLive() {
-        if (this.router.url.includes('/casino/cl/')) {
+        if (this.router.url.includes('/live-casino')) {
             return 'active';
         }
 
@@ -500,7 +500,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     activeGameCassinoMobile() {
         return (
             this.isMobile
-            && (this.router.url.includes('/casino/c/play') || this.router.url.includes('/casino/cl/play'))
+            && (this.router.url.includes('/casino') || this.router.url.includes('/live-casino'))
         );
     }
 

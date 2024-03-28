@@ -1,14 +1,14 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
-import {Location} from '@angular/common';
-import {AuthService, MenuFooterService, MessageService} from '../../services';
-import {interval} from 'rxjs';
-import {RolloverComponent} from "../../clientes/rollover/rollover.component";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Location } from '@angular/common';
+import { AuthService, MenuFooterService, MessageService } from '../../services';
+import { interval } from 'rxjs';
+import { RolloverComponent } from "../../clientes/rollover/rollover.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { JogosLiberadosBonusModalComponent, RegrasBonusModalComponent } from "../../shared/layout/modals";
 
 
 @Component({
@@ -47,12 +47,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        
+
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
         }
 
-        if(this.getMobileOperatingSystem() == 'ios'){
+        if (this.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
         }
 
@@ -63,8 +63,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.route.params.subscribe(params => {
             this.params = params;
             this.gameId = params['game_id'];
-            this.gameMode = params['game_mode'];
+            this.gameMode = params['game_mode'] ?? 'REAL';
             this.gameFornecedor = params['game_fornecedor'];
+
+
+
             this.auth.cliente
                 .subscribe(
                     isCliente => {
@@ -82,7 +85,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 });
         });
 
-        if(this.gameFornecedor === 'galaxsys'){
+        if (this.gameFornecedor === 'galaxsys') {
             this.appendScriptGalaxsys();
         }
     }
@@ -93,9 +96,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                     this.sessionId = response.sessionId;
-                    if((this.gameFornecedor == 'tomhorn')){
+                    if ((this.gameFornecedor == 'tomhorn')) {
                         this.gameName = response.gameName.split("- 9", 1) || "";
-                    }else{
+                    } else {
                         this.gameName = response.gameName || "";
                     }
                 },
@@ -115,9 +118,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
             this.router.navigate(['casino/cl/wall-live/todos']);
-        } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){
+        } else if (this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys') {
             this.router.navigate(['casino/c/wall/todos']);
-        }else{
+        } else {
             this.location.back();
         }
 
@@ -137,9 +140,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(true);
         }
 
-        let scriptGalaxsys= document.getElementById("galaxsysScript");
+        let scriptGalaxsys = document.getElementById("galaxsysScript");
 
-        if(scriptGalaxsys){
+        if (scriptGalaxsys) {
             scriptGalaxsys.remove();
         }
     }
@@ -204,20 +207,20 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     getMobileOperatingSystem() {
-        let userAgent = navigator.userAgent ;
-        
-        if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ){
+        let userAgent = navigator.userAgent;
+
+        if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
             return 'ios';
         }
-        else if( userAgent.match( /Android/i ) ){
+        else if (userAgent.match(/Android/i)) {
             return 'android';
         }
-        else{
+        else {
             return 'unknown';
         }
     }
 
-    appendScriptGalaxsys(){
+    appendScriptGalaxsys() {
         let body = document.getElementsByTagName('body')[0];
         let bodyScript = document.createElement('script');
 
