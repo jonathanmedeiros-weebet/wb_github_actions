@@ -1562,15 +1562,6 @@ gulp.task('alfasports.online', function (done) {
     });
 });
 
-gulp.task('uaibet.club', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "uaibet.club",
-        banca: "UAI BET",
-        styles: "",
-    });
-});
-
 gulp.task('novabet.site', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
