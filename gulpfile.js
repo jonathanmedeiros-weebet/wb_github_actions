@@ -3139,3 +3139,12 @@ gulp.task('jupterbet.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('jrsports.io', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "jrsports.io",
+        banca: "JR SPORTS",
+        styles: ""
+    });
+});
