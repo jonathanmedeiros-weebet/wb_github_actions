@@ -448,7 +448,22 @@ export class PrintService {
                     </div>
                 </div>
                 `;
+
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    content += `
+                    <div class="clearfix margin-bottom-5">
+                        <div style="float: left;">
+                            Retorno líquido 6
+                        </div>
+                        <div style="float: right;">
+                            ${this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao6, aposta.passador.percentualPremio)}
+                        </div>
+                    </div>
+                    `;
+                }
             }
+
+
 
             if (item.cotacao5 > 0) {
                 content += `
@@ -460,6 +475,19 @@ export class PrintService {
                         ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao5)}
                     </div>
                 </div>`;
+
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    content += `
+                    <div class="clearfix margin-bottom-5">
+                        <div style="float: left;">
+                            Retorno líquido 5
+                        </div>
+                        <div style="float: right;">
+                            ${this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao5, aposta.passador.percentualPremio)}
+                        </div>
+                    </div>
+                    `;
+                }
             }
 
             if (item.cotacao4 > 0) {
@@ -472,6 +500,19 @@ export class PrintService {
                         ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao4)}
                     </div>
                 </div>`;
+
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    content += `
+                    <div class="clearfix margin-bottom-5">
+                        <div style="float: left;">
+                            Retorno líquido 4
+                        </div>
+                        <div style="float: right;">
+                            ${this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao4, aposta.passador.percentualPremio)}
+                        </div>
+                    </div>
+                    `;
+                }
             }
             if (item.cotacao3 > 0) {
                 content += `
@@ -483,6 +524,19 @@ export class PrintService {
                         ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)}
                     </div>
                 </div>`;
+
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    content += `
+                    <div class="clearfix margin-bottom-5">
+                        <div style="float: left;">
+                            Retorno líquido 3
+                        </div>
+                        <div style="float: right;">
+                            ${this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao3, aposta.passador.percentualPremio)}
+                        </div>
+                    </div>
+                    `;
+                }
             }
 
             if (array.length > 1) {

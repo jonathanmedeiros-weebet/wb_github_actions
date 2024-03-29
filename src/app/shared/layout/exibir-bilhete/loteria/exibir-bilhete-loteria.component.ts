@@ -169,4 +169,26 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         this.netPrize = prizes * ((100 - this.aposta.passador.percentualPremio) / 100);
         this.aposta.netPrize;
     }
+
+    calcularPremioLoteria(valor, cotacao) {
+        let result = valor * cotacao;
+
+        if (result > this.paramsService.getOpcoes().valor_max_premio_loterias) {
+            result = this.paramsService.getOpcoes().valor_max_premio_loterias;
+        }
+
+        return result;
+    }
+
+    calcularPremioLiquidoLoteria(valor, cotacao, percentualPremio) {
+        let result = valor * cotacao;
+
+        if (result > this.paramsService.getOpcoes().valor_max_premio_loterias) {
+            result = this.paramsService.getOpcoes().valor_max_premio_loterias;
+        }
+
+        result = result * (100 - percentualPremio) / 100;
+
+        return result;
+    }
 }
