@@ -17,10 +17,6 @@ const routes: Routes = [{
             loadChildren: () => import('./perfil/cliente-perfil.module').then(p => p.ClientePerfilModule)
         },
         {
-            path: 'perfil-pix',
-            loadChildren: () => import('./perfil-pix/perfil-pix.module').then(p => p.PerfilPixModule)
-        },
-        {
             path: 'configuracoes',
             loadChildren: () => import('./configuracoes/configuracoes.module').then(f => f.ConfiguracoesModule)
         },
@@ -47,13 +43,17 @@ const routes: Routes = [{
         },
         {
             path: 'rollover',
-            loadChildren: () => import('./rollover/rollover.module').then(f => f.RolloverModule)
+            loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
         {
             path: 'indique-ganhe',
             loadChildren: () => import('./indique-ganhe/indique-ganhe.module').then(i => i.IndiqueGanheModule),
             canActivate: [IndiqueGanheGuard]
-        }
+        },
+        {
+            path: 'rodada-gratis',
+            loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
+        },
     ]
 }];
 
