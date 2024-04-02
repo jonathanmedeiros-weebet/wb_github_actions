@@ -117,9 +117,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
-            this.router.navigate(['casino/cl/wall-live/todos']);
+            this.router.navigate(['live-casino']);
         } else if (this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys') {
-            this.router.navigate(['casino/c/wall/todos']);
+            this.router.navigate(['casino']);
         } else {
             this.location.back();
         }

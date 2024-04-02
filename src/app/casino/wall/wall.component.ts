@@ -258,29 +258,35 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.selectedSubMenu = categoria;
         this.isHomeCassino = false;
 
+        if (this.gameFornecedor) {
+            this.filtrarJogos(this.gameFornecedor);
+        } else {
+            this.gameList = this.gamesCassino;
+        }
+
         switch (categoria) {
             case 'slot':
-                this.gameList = this.filterModalidades(this.gamesCassino, 'slot');
+                this.gameList = this.filterModalidades(this.gameList, 'slot');
                 this.gameTitle = this.translate.instant('cassino.slot');
                 break;
             case 'crash':
-                this.gameList = this.filterModalidades(this.gamesCassino, 'crash');
+                this.gameList = this.filterModalidades(this.gameList, 'crash');
                 this.gameTitle = this.translate.instant('cassino.crash');
                 break;
             case 'roleta':
-                this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
+                this.gameList = this.filterModalidades(this.gameList, 'roulette');
                 this.gameTitle = this.translate.instant('cassino.roleta');
                 break;
             case 'raspadinha':
-                this.gameList = this.filterModalidades(this.gamesCassino, 'scratchcard');
+                this.gameList = this.filterModalidades(this.gameList, 'scratchcard');
                 this.gameTitle = this.translate.instant('cassino.raspadinha');
                 break;
             case 'mesa':
-                this.gameList = this.filterModalidades(this.gamesCassino, 'table');
+                this.gameList = this.filterModalidades(this.gameList, 'table');
                 this.gameTitle = this.translate.instant('cassino.mesa');
                 break;
             case 'bingo':
-                this.gameList = this.filterModalidades(this.gamesCassino, 'bingo');
+                this.gameList = this.filterModalidades(this.gameList, 'bingo');
                 this.gameTitle = this.translate.instant('cassino.bingo');
                 break;
             default:
