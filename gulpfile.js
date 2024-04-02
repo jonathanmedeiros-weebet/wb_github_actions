@@ -3148,3 +3148,12 @@ gulp.task('jrsports.io', function (done) {
         styles: ""
     });
 });
+
+gulp.task('camaraobet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "camaraobet.com",
+        banca: "CAMARÃO BET",
+        styles: ""
+    });
+});

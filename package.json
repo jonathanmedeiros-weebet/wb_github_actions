@@ -330,7 +330,8 @@
         "zilionz.com": "gulp zilionz.com",
         "newbets.com.br": "gulp newbets.com.br",
         "jupterbet.com": "gulp jupterbet.com",
-        "jrsports.io": "gulp jrsports.io"
+        "jrsports.io": "gulp jrsports.io",
+        "camaraobet.com": "gulp camaraobet.com"
     },
     "private": true,
     "dependencies": {
