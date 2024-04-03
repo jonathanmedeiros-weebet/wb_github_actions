@@ -107,7 +107,12 @@ export class WallComponent implements OnInit, AfterViewInit {
         });
 
 
-        this.blink = this.router.url.split('/')[2];
+        if (this.isVirtual) {
+            this.blink = 'virtual-sports'
+        } else {
+            this.blink = 'casino'
+        }
+
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
         this.casinoApi.getGamesList(false).subscribe(response => {
             this.gamesCassino = response.gameList.filter(function(game) {
