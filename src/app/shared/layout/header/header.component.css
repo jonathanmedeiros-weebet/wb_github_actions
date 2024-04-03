@@ -100,7 +100,6 @@ nav a {
 .category a.active, .category a:hover {
     border-bottom: 2px solid var(--highlight);
     color: var(--highlight);
-    margin-bottom: -2px;
 }
 
 .category a span {
