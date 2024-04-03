@@ -99,6 +99,14 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.checkScrollWidth();
         this.computeResizeChanges();
 
+        this.translate.onLangChange.subscribe(() => {
+            this.atualizarSubmenu();
+            this.cd.detectChanges();
+            this.checkScrollWidth();
+            this.computeResizeChanges();
+        });
+
+
         this.blink = this.router.url.split('/')[2];
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
         this.casinoApi.getGamesList(false).subscribe(response => {

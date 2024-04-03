@@ -158,6 +158,14 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
 
         this.isMobile = window.innerWidth < 1025;
         this.atualizarSubmenu();
+
+        this.translate.onLangChange.subscribe(() => {
+            this.atualizarSubmenu();
+            this.cd.detectChanges();
+            this.checkScrollWidth();
+            this.computeResizeChanges();
+        });
+
     }
 
     search($event) {
