@@ -3149,6 +3149,15 @@ gulp.task('jrsports.io', function (done) {
     });
 });
 
+gulp.task('vembet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "vembet.com",
+        banca: "VEM BET",
+        styles: ""
+    });
+});
+
 gulp.task('camaraobet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
