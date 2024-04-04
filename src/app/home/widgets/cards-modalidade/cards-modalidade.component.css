@@ -1,0 +1,42 @@
+.list-modalidades {
+    margin: 30px 10px;
+}
+
+.list-modalidades ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+.list-modalidades ul li {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 24px;
+
+    height: 94px;
+    background: #000;
+}
+
+.list-modalidades ul li span {
+    font-size: 24px;
+    line-height: 22px;
+    padding: 5px 15px;
+
+    background: var(--highlight);
+    color: var(--foreground-highlight)
+}

@@ -1,0 +1,259 @@
+.campeonato-header {
+    height: 34px;
+    margin: 0;
+}
+
+owl-carousel-o {
+    width: 100%;
+}
+
+.back {
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+    color: initial;
+}
+
+.menu-camp-destaques {
+    display: flex;
+    align-items: center;
+    overflow-x: auto !important;
+    /* Hide scrollbar for IE and Edge */
+    -ms-overflow-style: none;
+    /* justify-content: center; */
+    /*background-color: #ffffff;*/
+    margin: 0;
+}
+
+.menu-camp-destaques::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-camp-destaques .campeonato {
+    margin: 0 5px;
+    padding: 15px 0 5px 0;
+    cursor: pointer;
+    ;
+}
+
+.menu-camp-destaques .campeonato a {
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.menu-camp-destaques .campeonato .campeonato-nome {
+    margin-top: 5px;
+}
+
+.menu-camp-destaques .campeonato .flag-icon {
+    background-color: #ffffff;
+    font-size: 5rem;
+    border-color: #e1e2e4;
+    border-style: solid;
+    border-width: 0.01rem;
+    border-radius: 10px;
+}
+
+.menu-camp-destaques .wbicon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.campeonato {
+    width: 75px;
+}
+
+.campeonato a {
+    text-transform: uppercase;
+}
+
+.campeonato span {
+    width: 75px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-normal {
+    justify-content: normal;
+}
+
+.jogos-destaque {
+    margin-top: 15px;
+    display: flex;
+    overflow-x: scroll;
+}
+
+.jogo-destaque {
+    cursor: pointer;
+    background: var(--game);
+    color: var(--foreground-game);
+    border: 1px solid var(--highlight);
+    width: 280px;
+    height: 135px;
+    border-radius: 5px;
+    padding: 10px 10px;
+
+    flex-basis: 280px;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+
+.jogo-destaque:first-child {
+    margin-left: 0;
+}
+
+.jogos-destaque .header {
+    display: flex;
+    font-size: 9px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.jogos-destaque .jogo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    /* ajuste fonte */
+}
+
+.jogos-destaque .jogo .time1 {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.jogos-destaque .jogo .time1 img {
+    margin-left: 10px;
+}
+
+.jogos-destaque .jogo .time1 .text-center {
+    flex: 1;
+}
+
+.jogos-destaque .jogo .time2 {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.jogos-destaque .jogo .time2 img {
+    margin-right: 10px;
+}
+
+.jogos-destaque .jogo .time2 .text-center {
+    flex: 1;
+}
+
+.separador-times {
+    font-size: 20px;
+
+    width: 6px;
+    margin: 0 10px;
+}
+
+.jogos-destaque .jogo-destaque-odds {
+    display: flex;
+}
+
+.jogos-destaque .jogo-destaque-odds .jogo-destaque-odd {
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    border-radius: 2px;
+    flex: 1;
+    font-size: 8px;
+    padding: 4.5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-left: 5px;
+}
+
+.jogos-destaque .jogo-destaque-odds .jogo-destaque-odd.selecionado {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.jogos-destaque .jogo-destaque-odds .jogo-destaque-odd:first-child {
+    margin-left: 0;
+}
+
+span.escudo img {
+    height: 20px;
+    width: 20px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .menu-camp-destaques {
+        font-size: 0.8rem;
+        padding: 0 5px;
+        margin: 0 auto;
+    }
+
+    .pull {
+        display: none;
+    }
+
+    .jogos-destaque {
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .scroll {
+        overflow: auto;
+        scroll-behavior: smooth;
+        width: 80%;
+    }
+
+    .visibility {
+        display: none !important;
+
+    }
+
+    .pull {
+        background: var(--foreground-header);
+        color: var(--header);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        position: absolute;
+        z-index: 50;
+    }
+
+    .pull .fa {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .fa-right {
+        padding-left: 4px;
+    }
+
+    .fa-left {
+        padding-right: 4px;
+    }
+
+    .pull-right {
+        right: 270px;
+    }
+}

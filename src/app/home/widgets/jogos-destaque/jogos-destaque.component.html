@@ -1,1 +1,59 @@
-<p>jogos-destaque works!</p>
+<div class="jogos-destaque" *ngIf="jogosDestaque.length > 0">
+    <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;">
+        <ng-container *ngFor="let jogoDestaque of jogosDestaque">
+            <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="280">
+                <div class="jogo-destaque" (click)="maisCotacoes(jogoDestaque.fi)" >
+                    <div class="header">
+                        <span>
+                            Pernambucano
+                        </span>
+                        <span>
+                            {{ jogoDestaque.horario | moment: 'DD/MM/YYYY - H:mm' }}
+                        </span>
+                    </div>
+
+                    <div class="jogo">
+                        <div class="time1">
+                            <span class="text-center">{{ jogoDestaque.time_a_nome }}</span>
+                            <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.time_a_img}}.png" size="s" class="escudo-img">
+                            </span>
+                            <ng-template #defaulImage>
+                                <span class="escudo">
+                                    <img src="https://cdn.wee.bet/img/times/m/default.png" size="s" class="escudo-img">
+                                </span>
+                            </ng-template>
+                        </div>
+                        <span class="separador-times">-</span>
+                        <div class="time2">
+                            <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.time_b_img}}.png" size="s" class="escudo-img">
+                            </span>
+                            <ng-template #defaulImage>
+                                <span class="escudo">
+                                    <img src="https://cdn.wee.bet/img/times/m/default.png" size="s" class="escudo-img">
+                                </span>
+                            </ng-template>
+                            <span class="text-center flex-grow-1">{{ jogoDestaque.time_b_nome }}</span>
+                        </div>
+                    </div>
+
+                    <div class="jogo-destaque-odds">
+                        <div *ngFor="let cotacao of jogoDestaque.cotacoes.slice(0, 3)"
+                        [ngClass]="{'odd-disabled': !cotacaoPermitida(cotacao.valorFinal)}"
+                        class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque.fi + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
+                        (click)="cotacaoPermitida(cotacao.valorFinal) && addCotacao($event, jogoDestaque, cotacao)">
+                            {{ helperService.apostaTipoLabel(cotacao.chave, 'sigla') }}
+                            <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
+                                <span class="cotacao" >{{ cotacao.valorFinal }}</span>
+                            </ng-container>
+                            <ng-template #cotacaoBloqueada>
+                                <span class="cotacao"><i class="fa fa-lock"></i></span>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+</div>
