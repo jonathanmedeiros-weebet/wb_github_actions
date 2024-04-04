@@ -213,7 +213,8 @@
         "resultadosEncontrados": "Foram encontrados {{quantidade}} resultados",
         "selecioneChavePix": "Selecione a chave pix",
         "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
-        "chaveAleatoria": "Chave aleatória"
+        "chaveAleatoria": "Chave aleatória",
+        "history": "Histórico"
     },
     "dias": {
         "ontem": "Ontem",
@@ -436,7 +437,8 @@
         "valorMinimoSaque": "Valor mínimo de saque",
         "valorMaximoSaqueDiario": "Valor máximo de saque diário",
         "valorMaximoSaqueMensal" : "Valor máximo de saque mensal",
-        "receberBonusCassino": "Receber Bônus - Cassino"
+        "receberBonusCassino": "Receber Bônus - Cassino",
+        "transactions": "Transações"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",

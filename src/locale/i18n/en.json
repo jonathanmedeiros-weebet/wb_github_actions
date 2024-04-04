@@ -213,7 +213,8 @@
         "resultadosEncontrados": "{{quantidade}} results were found.",
         "selecioneChavePix": "select your pix key",
         "alertaSaque": "Only withdrawals to Pix keys linked to the account holder are allowed.",
-        "chaveAleatoria": "Random key"
+        "chaveAleatoria": "Random key",
+        "history": "History"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -436,7 +437,8 @@
         "valorMinimoSaque": "Minimum withdrawal amount",
         "valorMaximoSaqueDiario": "Maximum daily withdrawal amount",
         "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
-        "receberBonusCassino": "Receive Bonus - Casino"
+        "receberBonusCassino": "Receive Bonus - Casino",
+        "transactions": "Transactions"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",

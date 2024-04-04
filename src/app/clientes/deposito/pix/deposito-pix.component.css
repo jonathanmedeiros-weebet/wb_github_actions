@@ -1,3 +1,35 @@
+#deposito-pix {
+    background-color: var(--sidebars);
+    padding: 30px;
+}
+
+#deposit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#deposit-container h3 {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 6px;
+    color: var(--foreground-sidebars);
+    border-bottom: 1px solid var(--foreground-sidebars);
+}
+
+#deposit-container #payment-gateway {
+    flex-grow: 2;
+}
+
+#deposit-container #payment-gateway h3 {
+    width: 75%;
+}
+
+#deposit-container #deposit-details {
+    flex-grow: 3;
+}
+
 .btn-close {
     position: absolute;
     top: -6px;
