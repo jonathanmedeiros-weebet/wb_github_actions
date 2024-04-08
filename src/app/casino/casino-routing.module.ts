@@ -103,6 +103,23 @@ const routes: Routes = [
                 ]
             }
         ]
+    },
+    {
+        path: 'pb',
+        component: VirtuaisLayoutComponent,
+        children: [
+            {
+                path: '',
+                component: CasinoWrapperComponent,
+                children: [
+                     {
+                        path: 'play/:game_mode/:game_id/:game_fornecedor',
+                        component: GameviewComponent,
+                        canActivate: [CasinoGuard]
+                    }
+                ]
+            }
+        ]
     }
 ];
 

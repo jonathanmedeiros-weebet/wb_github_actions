@@ -23,16 +23,32 @@
                     VALOR: {{item.valor | currency}}
                 </p>
                 <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
-                    Retorno 6: {{item.cotacao6 * item.valor | currency}}
-                </p>               
+                    Retorno 6: {{calcularPremioLoteria(item.valor, item.cotacao6) | currency}}
+                    <br>
+                    <span *ngIf="!aposta.is_cliente && aposta.passador.percentualPremio > 0">
+                        Retorno líquido 6: {{calcularPremioLiquidoLoteria(item.valor, item.cotacao6, aposta.passador.percentualPremio) | currency}}
+                    </span>
+                </p>
                 <p class="informacoes-item" *ngIf="item.cotacao5 > 0" [ngClass]="verificarStatus(item, 5)">
-                    Retorno 5: {{item.cotacao5 * item.valor | currency}}
+                    Retorno 5: {{calcularPremioLoteria(item.valor, item.cotacao5) | currency}}
+                    <br>
+                    <span *ngIf="!aposta.is_cliente && aposta.passador.percentualPremio > 0">
+                        Retorno líquido 5: {{calcularPremioLiquidoLoteria(item.valor, item.cotacao5, aposta.passador.percentualPremio) | currency}}
+                    </span>
                 </p>
                 <p class="informacoes-item" *ngIf="item.cotacao4 > 0" [ngClass]="verificarStatus(item, 4)">
-                    Retorno 4: {{item.cotacao4 * item.valor | currency}}
+                    Retorno 4: {{calcularPremioLoteria(item.valor, item.cotacao4) | currency}}
+                    <br>
+                    <span *ngIf="!aposta.is_cliente && aposta.passador.percentualPremio > 0">
+                        Retorno líquido 4: {{calcularPremioLiquidoLoteria(item.valor, item.cotacao4, aposta.passador.percentualPremio) | currency}}
+                    </span>
                 </p>
                 <p class="informacoes-item" *ngIf="item.cotacao3 > 0" [ngClass]="verificarStatus(item, 3)">
-                    Retorno 3: {{item.cotacao3 * item.valor | currency}}
+                    Retorno 3: {{calcularPremioLoteria(item.valor, item.cotacao3) | currency}}
+                    <br>
+                    <span *ngIf="!aposta.is_cliente && aposta.passador.percentualPremio > 0">
+                        Retorno líquido 3: {{calcularPremioLiquidoLoteria(item.valor, item.cotacao3, aposta.passador.percentualPremio) | currency}}
+                    </span>
                 </p>
                 <p class="informacoes-item">
                     DEZENAS: {{item.numeros}}
@@ -47,9 +63,6 @@
             </ng-container>
             <p class="valor-aposta">
                 VALOR TOTAL: {{aposta.valor | currency}}
-            </p>
-            <p *ngIf="aposta.passador.percentualPremio > 0" class="valor-aposta">
-                CAMBISTA PAGA: {{netPrize | currency}}
             </p>
             <p class="mensagem-rodape">
                 {{informativoRodape}}

@@ -319,15 +319,6 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
-                            <a (click)="abrirPix()">
-                                <span>
-                                     <i class="fa fa-brands fa-pix"></i>
-                                </span>
-                                Pix
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
                             <a (click)="abrirConfiguracoes()">
                                 <span>
                                      <i class="fa fa-cogs"></i>
@@ -379,7 +370,7 @@
                                 <span>
                                     <i class="fa fa-solid fa-gift"></i>
                                 </span>
-                                {{'geral.rollover' | translate}}
+                                {{'geral.promocoes' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -493,19 +484,24 @@
                                 <i class="fa fa-solid fa-gift mb-2"></i>
                                 {{'geral.bonus' | translate}}
                             </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/rodada-gratis']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente">
+                                <i class="fa fa-solid fa-gift mb-2"></i>
+                                <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{'geral.rodadaGratis' | translate}}</span>
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/indique-ganhe']"
+                            routerLinkActive="router-link-active"
+                            *ngIf="isCliente && indiqueGanheHabilitado">
+                                <i class="fa fa-solid fa-gift mb-2"></i>
+                                <span style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{'indique_ganhe.indiqueGanhe' | translate}}</span>
+                            </a>
                             <a class="dropdown-btn-filled" [routerLink]="['clientes/configuracoes']"
                             routerLinkActive="router-link-active"
                             *ngIf="isCliente">
                                 <i class="fa fa-solid fa-cogs mb-2"></i>
                                 {{'geral.configuracoes' | translate}}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/indique-ganhe']"
-                            routerLinkActive="router-link-active"
-                            *ngIf="isCliente && indiqueGanheHabilitado">
-                                <i class="fa fa-solid fa-gift mb-2"></i>
-                                <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
-                            </a>
-
                             <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']" routerLinkActive="router-link-active" *ngIf="!isCliente">
                                 <i class="fa fa-key mb-2"></i> {{'geral.alterarSenha' | translate}}
                             </a>
@@ -607,6 +603,21 @@
                 <span>{{'menu.esportes' | translate}}</span>
             </a>
         </div>
+        <ng-container *ngIf="isLoggedIn">
+            <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
+                <a [routerLink]="['/casino/pb/play/real/170000/parlaybay']" routerLinkActive="active">
+                    <span>PARLAYBAY</span>
+                </a>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!isLoggedIn">
+            <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
+                <a (click)="abrirLogin()" routerLinkActive="active">
+                    <span>PARLAYBAY</span>
+                </a>
+            </div>
+        </ng-container>
+
         <div class="category" *ngIf="cassinoAtivo">
             <a [routerLink]="['/casino']" routerLinkActive="active">
                 <span>{{'menu.cassino' | translate}}</span>
@@ -622,6 +633,7 @@
                 <span>{{'menu.virtuais' | translate}}</span>
             </a>
         </div>
+
         <div class="category" *ngIf="desafioHabilitado">
             <a [routerLink]="['/desafios']" routerLinkActive="active">
                 <span>{{'menu.desafio' | translate}}</span>

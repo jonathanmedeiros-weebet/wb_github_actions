@@ -1,4 +1,3 @@
-import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
 import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IsActiveMatchOptions, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
@@ -37,6 +36,7 @@ import {ConfiguracoesComponent} from '../../../clientes/configuracoes/configurac
 import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
+import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
 
 @Component({
     selector: 'app-header',
@@ -70,6 +70,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     esporteAtivo;
     cassinoAtivo;
     virtuaisAtivo;
+    parlaybayAtivo;
     LOGO = config.LOGO;
     appVersion;
     whatsapp;
@@ -199,6 +200,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.esporteAtivo = this.paramsService.getOpcoes().esporte;
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
+        this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
@@ -422,7 +424,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirRollovers() {
-        this.modalService.open(RolloverComponent);
+        this.modalService.open(PromocaoComponent);
     }
 
     abrirIndiqueGanhe() {
