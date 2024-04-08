@@ -3120,3 +3120,12 @@ gulp.task('camaraobet.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('7copas.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "7copas.bet",
+        banca: "7 COPAS",
+        styles: ""
+    });
+});
