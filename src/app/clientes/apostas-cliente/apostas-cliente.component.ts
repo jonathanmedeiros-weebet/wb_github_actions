@@ -136,10 +136,10 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             { id: 'loteria', label: 'geral.loteria', habilitado: this.loteriasHabilitada },
             { id: 'loteria-popular', label: 'submenu.loteriaPopular', habilitado: this.loteriaPopularHabilitada }
         ];
-    
+
         const sortedTabs = tabs.slice();
         let principalIndex = sortedTabs.findIndex(tab => tab.id === this.paginaPrincipal);
-    
+
         if (this.paginaPrincipal === 'cassino' || this.paginaPrincipal === 'cassino_ao_vivo') {
             principalIndex = sortedTabs.findIndex(tab => tab.id === 'cassino');
         }
@@ -148,10 +148,10 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             const principalTab = sortedTabs.splice(principalIndex, 1)[0];
             sortedTabs.unshift(principalTab);
         }
-    
+
         return sortedTabs.filter(tab => tab.habilitado);
     }
-    
+
     getApostas() {
         this.loading = true;
 
@@ -231,8 +231,16 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         response.forEach(aposta => {
             if (!aposta.cartao_aposta) {
                 this.totais.valor += aposta.valor;
-                if (aposta.resultado === 'ganhou') {
-                    this.totais.premio += aposta.premio;
+                if (aposta.tipo === 'loteria') {
+                    aposta.itens.forEach(lotteryItem => {
+                        if (lotteryItem.status === 'ganhou') {
+                            this.totais.premio += lotteryItem.premio;
+                        }
+                    });
+                } else {
+                    if (aposta.resultado === 'ganhou') {
+                        this.totais.premio += aposta.premio;
+                    }
                 }
             }
         });
@@ -335,7 +343,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             modalAposta = ApostaModalComponent;
         }
-        
+
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
         let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
 
