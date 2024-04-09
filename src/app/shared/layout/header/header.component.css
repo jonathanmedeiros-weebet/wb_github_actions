@@ -177,6 +177,10 @@ nav::-webkit-scrollbar {
     padding: 0;
 }
 
+.dropdown-menu-custom {
+    inset: 0px 0px auto auto !important;
+}
+
 .language-dropdown .flag-icon {
     font-size: 24px;
     clip-path: circle();
