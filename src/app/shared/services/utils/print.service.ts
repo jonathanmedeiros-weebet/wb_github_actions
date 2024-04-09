@@ -688,7 +688,7 @@ export class PrintService {
                     ticketEscPos
                         .newline()
                         .bold(true)
-                        .text('RETORNO LÍQUIDO 6: ')
+                        .text('RETORNO LIQUIDO 6: ')
                         .bold(false)
                         .text(this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao6, aposta.passador.percentualPremio));
                 }
@@ -704,7 +704,7 @@ export class PrintService {
                     ticketEscPos
                         .newline()
                         .bold(true)
-                        .text('RETORNO LÍQUIDO 5: ')
+                        .text('RETORNO LIQUIDO 5: ')
                         .bold(false)
                         .text(this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao5, aposta.passador.percentualPremio));
                 }
@@ -720,7 +720,7 @@ export class PrintService {
                     ticketEscPos
                         .newline()
                         .bold(true)
-                        .text('RETORNO LÍQUIDO 4: ')
+                        .text('RETORNO LIQUIDO 4: ')
                         .bold(false)
                         .text(this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao4, aposta.passador.percentualPremio));
                 }
@@ -736,7 +736,7 @@ export class PrintService {
                     ticketEscPos
                         .newline()
                         .bold(true)
-                        .text('RETORNO LÍQUIDO 3: ')
+                        .text('RETORNO LIQUIDO 3: ')
                         .bold(false)
                         .text(this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao3, aposta.passador.percentualPremio));
                 }
