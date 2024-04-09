@@ -214,7 +214,13 @@
         "selecioneChavePix": "Selecione a chave pix",
         "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
         "chaveAleatoria": "Chave aleatória",
-        "history": "Histórico"
+        "history": "Histórico",
+        "promoCode": "Código promocional",
+        "promoCodePlaceholder": "EX.: BONUSCADASTRO"
+    },
+    "bet": {
+        "sportsBetting": "Apostas esportivas",
+        "casinoBetting": "Apostas cassino"
     },
     "dias": {
         "ontem": "Ontem",
@@ -356,12 +362,14 @@
         "titulo": "Depósito",
         "selecioneUmaFormaDeDeposito": "Selecione uma forma de depósito",
         "informeOValor": "Informe o valor",
+        "enterAmount": "Informe o valor para depósito",
         "seuPixFoiCreditado": "Seu pix foi creditado com sucesso, seu novo saldo é: R$ {{novoSaldo}}",
-        "valorMinimo": "Valor mínimo para depósito",
+        "valorMinimo": "Valor Mínimo",
         "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com suporte.",
         "depositoRegistrado": "Depósito - Registrado",
         "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}",
-        "depositosRecentes": "Depósitos recentes"
+        "depositosRecentes": "Depósitos recentes",
+        "depositDetails": "Detalhes do depósito"
     },
     "footer": {
         "afiliados": "Afiliados",
@@ -431,14 +439,15 @@
         "qtdMovimentacoesNoPeriodo": "Qtd. Movimentações no Período de {{de}} - {{ate}}",
         "nenhumaMovimentacaoNoPeriodo": "Nenhuma movimentação realizada no período e/ou com filtro atual.",
         "natureza": "Natureza",
-        "desejaReceberBonusPrimeiroDeposito": "Deseja receber Bônus de primeiro depósito?",
+        "desejaReceberBonusPrimeiroDeposito": "Deseja receber o bônus de primeiro depósito?",
         "receberBonus": "Receber Bônus - Esporte",
         "naoQueroBonus": "Não quero Bônus",
         "valorMinimoSaque": "Valor mínimo de saque",
         "valorMaximoSaqueDiario": "Valor máximo de saque diário",
         "valorMaximoSaqueMensal" : "Valor máximo de saque mensal",
         "receberBonusCassino": "Receber Bônus - Cassino",
-        "transactions": "Transações"
+        "transactions": "Transações",
+        "paymentGateway": "Gateway de pagamento"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
@@ -446,7 +455,12 @@
         "ativo": "Ativo",
         "completado": "Completado",
         "cancelado": "Cancelado",
-        "vencido": "Vencido"
+        "vencido": "Vencido",
+        "bonusRules": "Regras do bônus",
+        "bonusForfeited": "Bônus descartado",
+        "noBonus": "Sem bônus",
+        "bonusWillBeForfeited": "Seu bônus será perdido",
+        "upTo": "até"
     },
     "indique_ganhe":{
         "indiqueGanhe": "Indique e ganhe",

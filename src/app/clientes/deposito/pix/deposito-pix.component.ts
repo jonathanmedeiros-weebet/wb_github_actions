@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild, Renderer2, ElementRef} from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
@@ -27,11 +27,11 @@ import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code" *ngIf="qrCodeBase64">
-            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag'].includes(metodoPagamento)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
-            <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
-            <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'sauto_pay'" [src]="sautoPayQr"/>
-            <img [ngStyle]="{'width': '170px'}" *ngIf="metodoPagamento === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
-            <img [ngStyle]="{'width': '170px', 'background-color':'#ffffff'}" *ngIf="metodoPagamento === 'paag'" src="{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag'].includes(paymentMethod)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="paymentMethod === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="paymentMethod === 'sauto_pay'" [src]="sautoPayQr"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="paymentMethod === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px', 'background-color':'#ffffff'}" *ngIf="paymentMethod === 'paag'" src="{{ qrCodeBase64 }}"/>
         </div>
         <div class="qr-code" *ngIf="!qrCodeBase64">
             <ngx-qrcode
@@ -53,7 +53,7 @@ export class NgbdModalContent {
     valorPix;
     qrCodeBase64;
     qrCode;
-    metodoPagamento;
+    paymentMethod;
     sautoPayQr;
     minute = 20;
     second = 0;
@@ -68,8 +68,8 @@ export class NgbdModalContent {
     ) {}
 
     ngOnInit() {
-        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
-        if (this.metodoPagamento === 'sauto_pay') {
+        this.paymentMethod = this.paramsLocais.getOpcoes().api_pagamentos;
+        if (this.paymentMethod === 'sauto_pay') {
             const SautoPayUrl = 'data:image/svg+xml;base64,' + this.qrCodeBase64;
             this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
         }
@@ -113,24 +113,30 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     verificacoes = 0;
     valorMinDeposito;
     valorPix = 0;
-    metodoPagamento;
+    paymentMethod;
     sautoPayQr;
     isMobile = false;
     permitirBonusPrimeiroDeposito = false;
     bonusEsportivo = false;
     bonusCassino = false;
-    opcaoBonus = '';
+    paymentMethodSelected = '';
+    bonusOption = '';
     rolloverAtivo: Rollover[] = [];
     modalPromocao;
 
+    droppedBonus = true;
+    droppedPromoCode = true;
+
     constructor(
+        private domSanitizer: DomSanitizer,
+        private el: ElementRef,
         private fb: UntypedFormBuilder,
         private financeiroService: FinanceiroService,
-        private messageService: MessageService,
-        private paramsLocais: ParametrosLocaisService,
-        private modalService: NgbModal,
         private helperService: HelperService,
-        private domSanitizer: DomSanitizer,
+        private messageService: MessageService,
+        private modalService: NgbModal,
+        private paramsLocais: ParametrosLocaisService,
+        private renderer: Renderer2
     ) {
         super();
     }
@@ -141,7 +147,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }
 
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
-        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.paymentMethod = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.paymentMethodSelected = this.paymentMethod;
         this.createForm();
         this.financeiroService.bonusPrimeiroDepositoPermitido()
             .subscribe(
@@ -151,7 +158,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                     this.bonusCassino = res.bonus_cassino;
                     if (!res.permitir_bonificacao) {
                         this.form.get('bonus').patchValue('nenhum');
-                        this.opcaoBonus = 'nenhum';
+                        this.bonusOption = 'nenhum';
                     } else {
                         this.getRollovers();
                     }
@@ -163,8 +170,38 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     createForm() {
         this.form = this.fb.group({
             valor: [0, [Validators.required, Validators.min(this.valorMinDeposito)]],
-            bonus: [this.opcaoBonus, Validators.required]
+            bonus: [this.bonusOption, Validators.required],
+            paymentMethod: [this.paymentMethodSelected, Validators.required],
+            promoCode: [""]
         });
+    }
+
+    changePaymentMethodOption(paymentMethod: string) {
+        this.paymentMethodSelected = paymentMethod;
+        this.form.get('paymentMethod').patchValue(paymentMethod);
+    }
+
+    changeAmount(amount) {
+        this.form.patchValue({ 'valor': amount });
+    }
+
+    changeBonusOption(bonusOption: string) {
+        this.bonusOption = bonusOption;
+        this.form.get('bonus').patchValue(bonusOption);
+    }
+
+    toggleBonusSection() {
+        this.droppedBonus = !this.droppedBonus;
+
+        const bonusWrapper = this.el.nativeElement.querySelector('#bonus-wrapper');
+        this.renderer.setStyle(bonusWrapper, 'display', this.droppedBonus ? 'block' : 'none');
+    }
+
+    togglePromoCodeSection() {
+        this.droppedPromoCode = !this.droppedPromoCode;
+
+        const promoCodeWrapper = this.el.nativeElement.querySelector('#promo-code-wrapper');
+        this.renderer.setStyle(promoCodeWrapper, 'display', this.droppedPromoCode ? 'block' : 'none');
     }
 
     handleError(error: string) {
@@ -172,7 +209,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     solicitarDeposito() {
-        if (this.rolloverAtivo.length > 0 && this.opcaoBonus !== 'nenhum') {
+        if (this.rolloverAtivo.length > 0 && this.bonusOption !== 'nenhum') {
             this.avisoPromocao();
         } else {
             this.onSubmit();
@@ -212,7 +249,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         modalRef.componentInstance.qrCode = res.qr_code;
 
                         this.pix = res;
-                        if (this.metodoPagamento === 'sauto_pay') {
+                        if (this.paymentMethod === 'sauto_pay') {
                             const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
                             this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
                         }
@@ -268,10 +305,10 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }
     }
 
-    selecionarOpcaoBonus(opcaoBonus) {
-        this.opcaoBonus = opcaoBonus;
-        this.form.get('bonus').patchValue(opcaoBonus);
-    }
+    // selecionarOpcaoBonus(opcaoBonus) {
+    //     this.opcaoBonus = opcaoBonus;
+    //     this.form.get('bonus').patchValue(opcaoBonus);
+    // }
 
     abrirRegrasBonus() {
         this.modalService.open(RegrasBonusModalComponent, {
