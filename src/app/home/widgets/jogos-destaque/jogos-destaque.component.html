@@ -1,5 +1,18 @@
 <div class="jogos-destaque" *ngIf="jogosDestaque.length > 0">
-    <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;">
+    <div class="slider-header">
+        Jogos Destaque
+        <nav>
+            <div class="scroll-button scroll-left disabled-scroll-button" id="cassino-left"
+                (click)="owlCar.prev()">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="scroll-button scroll-right enabled-scroll-button" id="cassino-right"
+                (click)="owlCar.next()">
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+        </nav>
+    </div>
+    <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;" #owlCar>
         <ng-container *ngFor="let jogoDestaque of jogosDestaque">
             <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="280">
                 <div class="jogo-destaque" (click)="maisCotacoes(jogoDestaque.fi)" >
@@ -8,7 +21,7 @@
                             Pernambucano
                         </span>
                         <span>
-                            {{ jogoDestaque.horario | moment: 'DD/MM/YYYY - H:mm' }}
+                            {{ jogoDestaque.horario }}
                         </span>
                     </div>
 
@@ -39,7 +52,7 @@
                     </div>
 
                     <div class="jogo-destaque-odds">
-                        <div *ngFor="let cotacao of jogoDestaque.cotacoes.slice(0, 3)"
+                        <div *ngFor="let cotacao of []"
                         [ngClass]="{'odd-disabled': !cotacaoPermitida(cotacao.valorFinal)}"
                         class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque.fi + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
                         (click)="cotacaoPermitida(cotacao.valorFinal) && addCotacao($event, jogoDestaque, cotacao)">

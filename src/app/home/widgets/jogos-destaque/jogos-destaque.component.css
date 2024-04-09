@@ -7,6 +7,24 @@ owl-carousel-o {
     width: 100%;
 }
 
+.slider-header {
+    display: flex;
+    font-weight: 600;
+    padding: 10px 0;
+    align-items: center;
+    text-align: left;
+    font-size: 18px;
+    color: var(--foreground-header);
+    flex-grow: 1;
+}
+
+.slider-header nav {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    gap: 15px;
+}
+
 .back {
     cursor: pointer;
     font-size: 18px;
@@ -89,7 +107,9 @@ owl-carousel-o {
 .jogos-destaque {
     margin-top: 15px;
     display: flex;
+    flex-direction: column;
     overflow-x: scroll;
+    padding: 0 15px;
 }
 
 .jogo-destaque {

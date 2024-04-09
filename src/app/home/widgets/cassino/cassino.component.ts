@@ -1,10 +1,6 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthService, ParametrosLocaisService, SidebarService } from 'src/app/services';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChildren, QueryList, Input } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from 'src/app/shared/layout/modals';
-import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 
 @Component({
     selector: 'app-cassino',
@@ -12,50 +8,36 @@ import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.serv
     styleUrls: ['./cassino.component.css']
 })
 export class CassinoComponent implements OnInit {
-    gamesCassino = [];
-    gamesDestaque = [];
+    @ViewChildren('scrollGames') gamesScroll: QueryList<ElementRef>;
+    @Input() games = [];
+    @Input() title: string;
+    @Input() linkAll: string;
 
     isMobile = false;
-    scrolls: ElementRef[];
-    qtdItens = 0;
-    modalRef;
+    modalRef: NgbModalRef;
 
     constructor(
-        private casinoApi: CasinoApiService,
-        private auth: AuthService,
-        private route: ActivatedRoute,
-        private router: Router,
         private modalService: NgbModal,
-        private sideBarService: SidebarService,
         private renderer: Renderer2,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
-        private translate: TranslateService,
-        private paramsService: ParametrosLocaisService
     ) { }
 
-    ngOnInit(): void {
-        this.casinoApi.getGamesList(false).subscribe(response => {
-            this.gamesCassino = response.gameList.filter(function(game) {
-                return game.dataType !== 'VSB';
-            });
-            this.gamesDestaque = response.populares;
-        }, erro => { });
-    }
+    ngOnInit(): void { }
 
-    scrollLeft(scrollId) {
-        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+    scrollLeft(scrollId: string) {
+        const scrollTemp = this.gamesScroll.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
         scrollTemp.nativeElement.scrollLeft -= 700;
     }
 
-    scrollRight(scrollId) {
-        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+    scrollRight(scrollId: string) {
+        const scrollTemp = this.gamesScroll.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
         scrollTemp.nativeElement.scrollLeft += 700;
     }
 
-    onScroll(scrollId) {
+    onScroll(scrollId: string) {
         this.cd.detectChanges();
-        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        const scrollTemp = this.gamesScroll.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
         const scrollLeft = scrollTemp.nativeElement.scrollLeft;
         const scrollWidth = scrollTemp.nativeElement.scrollWidth;
 
@@ -105,9 +87,7 @@ export class CassinoComponent implements OnInit {
                 centered: true,
             }
         );
-    }
 
-    exibirMais() {
-        this.qtdItens += 3;
+        console.log('Modal', this.modalRef);
     }
 }

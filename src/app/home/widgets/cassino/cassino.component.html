@@ -1,28 +1,28 @@
 <div class="bloco">
     <div class="bloco-header">
         <div class="titulo">
-            {{'geral.cassino' | translate}}
+            {{ title ? title : ('geral.cassino' | translate) }}
             <nav>
                 <div class="scroll-button scroll-left disabled-scroll-button" id="cassino-left"
-                    (click)="scrollLeft('crash')" *ngIf="gamesCassino.length > 5">
+                    (click)="scrollLeft('cassino')">
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
                 <div class="scroll-button scroll-right enabled-scroll-button" id="cassino-right"
-                    (click)="scrollRight('crash')" *ngIf="gamesCassino.length > 5">
+                    (click)="scrollRight('cassino')">
                     <i class="fa-solid fa-angle-right"></i>
                 </div>
             </nav>
         </div>
-        <div class="ver-todos" *ngIf="gamesCassino.length > 5">
-            <a [routerLink]="['/casino/c/wall/crash']">
+        <div class="ver-todos" *ngIf="games.length > 5">
+            <a [routerLink]="[linkAll]">
                 {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
             </a>
         </div>
     </div>
     <div class="games-container">
-        <div class="more-games-fade more-games-fade-left" id="crash-fade-left"></div>
+        <div class="more-games-fade more-games-fade-left" id="cassino-fade-left"></div>
         <div class="game-list game-list-inline" #scrollGames id="cassino-scroll" (scroll)="onScroll('cassino')">
-            <div class="game-tile game-tile-inline" *ngFor="let game of gamesCassino">
+            <div class="game-tile game-tile-inline" *ngFor="let game of games">
                 <ng-container>
                     <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                 </ng-container>
@@ -64,6 +64,6 @@
                 </div>
             </div>
         </div>
-        <div class="more-games-fade more-games-fade-right" id="crash-fade-right" *ngIf="gamesCassino.length > 2"></div>
+        <div class="more-games-fade more-games-fade-right" id="cassino-fade-right" *ngIf="games.length > 2"></div>
     </div>
 </div>

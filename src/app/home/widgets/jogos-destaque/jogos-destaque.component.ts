@@ -29,11 +29,9 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         autoplay: true,
         rewind: true,
         margin: 10,
-        nav: true,
         dots: false,
         autoHeight: true,
         autoWidth: true,
-        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
     };
 
     unsub$ = new Subject();

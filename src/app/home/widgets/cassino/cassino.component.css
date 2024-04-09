@@ -1,17 +1,6 @@
-.wall-container {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    scroll-behavior: smooth;
-
-    display: flex;
-    flex-direction: column;
-}
-
 .bloco {
     position: relative;
-    padding: 5px 120px;
-    max-width: 1910px;
+    padding: 5px 20px;
     margin: 0 auto;
     flex: 1;
     width: 100%;
@@ -24,6 +13,7 @@
 
 .bloco .titulo {
     display: flex;
+    align-items: center;
     text-align: left;
     font-size: 18px;
     color: var(--foreground-header);
@@ -32,6 +22,32 @@
 
 .bloco .titulo nav {
     display: flex;
+    align-items: center;
+    margin-left: 15px;
+    gap: 15px;
+}
+
+.scroll-button {
+    color: var(--foreground);
+    font-size: 22px;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+}
+
+.enabled-scroll-button {
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.enabled-scroll-button:hover {
+    color: var(--highlight);
+}
+
+.disabled-scroll-button {
+    opacity: 0.3;
+    cursor: auto;
+    transition: 500ms;
 }
 
 .ver-todos a {
@@ -65,41 +81,6 @@
     flex-wrap: nowrap;
     overflow: scroll;
     scroll-behavior: smooth;
-}
-
-.scroll-button {
-    width: 40px;
-    height: 50px;
-    background-color: #0A0A0A;
-    color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    z-index: 2;
-}
-
-.enabled-scroll-button {
-    background-color: var(--inputs-odds);
-    color: var(--foreground-inputs-odds);
-    cursor: pointer;
-    transition: 500ms;
-}
-
-.enabled-scroll-button:hover {
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
-}
-
-.disabled-scroll-button {
-    background-color: var(--background);
-    color: var(--background);
-    cursor: auto;
-    transition: 500ms;
 }
 
 .more-games-fade {
@@ -239,70 +220,6 @@
     }
 }
 
-.filter {
-    display: flex;
-    padding-top: 30px;
-    padding-right: 120px;
-    justify-content: flex-end;
-    margin: 0 auto;
-    max-width: 1910px;
-    width: 100%;
-}
-
-.filter .tabs {
-    background: var(--game);
-    border-radius: 5px;
-    margin-left: 10px;
-    padding: 0 10px;
-
-    display: flex;
-    align-items: center;
-}
-
-.filter .tabs .tab {
-    color: var(--foreground-game);
-    display: block;
-    padding: 10px 10px;
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-
-    border-bottom: 3px solid transparent;
-}
-
-.filter .tabs .tab.active {
-    border-color: var(--highlight);
-    font-weight: 600;
-}
-
-.search-box {
-    position: relative;
-    width: 300px;
-}
-
-.search-box input {
-    padding-left: 30px;
-}
-
-.box-web {
-    margin-left: 10px;
-}
-
-.search-box i.fa-search {
-    cursor: pointer;
-    position: absolute;
-    top: 13px;
-    left: 10px;
-    color: var(--foreground-inputs-odds);
-}
-
-.search-box i.fa-close {
-    cursor: pointer;
-    position: absolute;
-    top: 13px;
-    right: 10px;
-}
-
 .logo-game {
     position: absolute;
     width: 35px;
@@ -384,66 +301,12 @@
         width: 100%;
     }
 
-    .scroll-left {
-        top: calc(50% - 15px);
-        left: 0px;
-    }
-
-    .scroll-right {
-        top: calc(50% - 15px);
-        right: 0px;
-    }
-
-    .enabled-scroll-button {
-        background-color: var(--background);
-        color: var(--foreground-inputs-odds);
-        cursor: pointer;
-        transition: 500ms;
-        z-index: 1;
-        border-radius: 25px;
-        height: 40px;
-        margin-right: 1%;
-    }
-
-    .enabled-scroll-button:hover {
-        background-color: var(--highlight);
-    }
-
-    .disabled-scroll-button {
-        background-color: var(--highlight);
-        color: var(--background);
-        cursor: auto;
-        transition: 500ms;
-    }
-
-    .scroll-left {
-        border-radius: 25px;
-        height: 40px;
-        margin-left: 1%;
-    }
-
-    .scroll-right {
-        border-radius: 25px;
-        height: 40px;
-        margin-right: 1%;
-    }
-
-    .scroll-button {
-        display: none !important;
-    }
-
     .more-games-fade-right {
         background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
     }
 
     .more-games-fade-left {
         background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
-    }
-
-    .filter {
-        margin-top: 10px;
-        padding: 10px;
-        width: 100%;
     }
 
     h4 {
@@ -471,60 +334,6 @@
     .search-box i.fa-close {
         top: 14px;
         font-size: medium;
-    }
-
-    .fornecedores-menu {
-        margin: 20px;
-    }
-
-    .fornecedores-menu ul {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .fornecedores-menu li {
-        display: flex;
-        justify-content: left;
-        margin-bottom: 15px;
-    }
-
-    .fornecedores-menu a {
-        text-decoration: none;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-    }
-
-    .fornecedor span {
-        font-size: 14px;
-        color: var(--foreground-header);
-    }
-
-    .fornecedor-imagem {
-        width: 25px;
-        height: 25px;
-    }
-
-    .fornecedor-imagem img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .fornecedor-nome {
-        margin-left: 10px;
-        font-size: large;
-    }
-
-    .fornecedor-qtd {
-        width: 10%;
-        display: flex;
-        justify-content: flex-end;
-        opacity: 50%;
-    }
-
-    .search-fornecedores {
-        margin: 20px !important;
-        width: auto !important;
     }
 
     .more-games-fade {
