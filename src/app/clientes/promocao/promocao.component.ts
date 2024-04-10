@@ -146,8 +146,12 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     }
 
     cancelarBonus(rolloverId){
-        this.modalRef = this.modalService.open(CanceledBonusConfirmComponent, {centered: true, windowClass: 'custom-modal-size'});
-        this.modalRef.componentInstance.title = 'Você tem certeza que deseja cancelar o seu bônus?';
+        this.modalRef = this.modalService.open(CanceledBonusConfirmComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            size: 'md',
+            centered: true,
+            windowClass: 'modal-550 modal-cadastro-cliente'
+        });
 
         this.modalRef.result.then(
             () => {

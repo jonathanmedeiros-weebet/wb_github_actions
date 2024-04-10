@@ -32,7 +32,7 @@ button {
     opacity: 1;
 }
 
-@media only screen and (max-width: 835px) {
+@media only screen and (max-width: 440px) {
     .modal-footer {
         bottom: 0;
         position: fixed;
@@ -47,6 +47,14 @@ button {
 
     .modal-footer .btn {
         width: 48%; /* Cada botão ocupa 48% do espaço, deixando 2% para a margem */
+    }
+}
+
+
+@media only screen and (max-width: 430px) {
+    .modal-footer .btn-custom {
+        padding-left: 1px;
+        padding-right: 1px;
     }
 }
 
