@@ -4,7 +4,7 @@ import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.com
 import { UntypedFormBuilder } from '@angular/forms';
 import { Rollover, RodadaGratis } from '../../models';
 import { ActivatedRoute, Router } from '@angular/router';
-import {ConfirmModalComponent} from 'src/app/shared/layout/modals';
+import { ConfirmModalComponent, CanceledBonusConfirmComponent } from 'src/app/shared/layout/modals';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { RegrasBonusModalComponent } from './../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
@@ -146,9 +146,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     }
 
     cancelarBonus(rolloverId){
-        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
-        this.modalRef.componentInstance.title = 'Cancelar Bônus';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar seu bônus?';
+        this.modalRef = this.modalService.open(CanceledBonusConfirmComponent, {centered: true, windowClass: 'custom-modal-size'});
+        this.modalRef.componentInstance.title = 'Você tem certeza que deseja cancelar o seu bônus?';
 
         this.modalRef.result.then(
             () => {

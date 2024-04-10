@@ -1929,6 +1929,12 @@ label {
     width: 100%;
 }
 
+@media only screen and (min-width: 835px) {
+    .custom-modal-size .modal-dialog {
+        max-width: 537px;
+    }
+}
+
 @media only screen and (max-width: 480px) {
     .modal-cadastro-cliente .modal-dialog,
     .modal-login .modal-dialog {

@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('')">
+        <i class="fa fa-times"></i>
+    </a>
+</div>
+<div class="modal-body">
+    <div style="min-width: 143px;">
+        <div>
+            <p>Lembre-se, ao cancelar o bônus, você perderá todos os benefícios associados a ele. Esta ação é irreversível.</p>
+            <p>Se você tiver certeza de que deseja prosseguir, clique em 'Confirmar Cancelamento'. Caso contrário, clique em 'Voltar' para manter o seu bônus.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer" style="border-top: 1px solid var(--background);">
+    <div class="actions">
+        <button type="button" class="btn btn-custom2" (click)="activeModal.dismiss('')" data-dismiss="modal">Voltar</button>
+        <button type="button" class="btn btn-custom" (click)="activeModal.close('')">Confirmar cancelamento</button>
+    </div>
+</div>
