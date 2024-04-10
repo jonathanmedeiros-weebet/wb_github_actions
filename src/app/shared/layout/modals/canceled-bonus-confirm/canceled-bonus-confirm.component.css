@@ -4,7 +4,6 @@
 }
 
 .modal-body {
-    /* padding: 29px 22px 15px; */
     padding: 1em 22px 40px 22px;
     display: flex;
     flex-direction: row;
@@ -46,15 +45,16 @@ button {
     }
 
     .modal-footer .btn {
-        width: 48%; /* Cada botão ocupa 48% do espaço, deixando 2% para a margem */
+        width: 48%;
     }
-}
 
-
-@media only screen and (max-width: 430px) {
     .modal-footer .btn-custom {
         padding-left: 1px;
         padding-right: 1px;
     }
+
+    .modal-header .modal-title {
+        font-size: 15px;
+      }
 }
 
