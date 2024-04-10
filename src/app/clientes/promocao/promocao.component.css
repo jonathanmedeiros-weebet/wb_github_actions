@@ -161,10 +161,6 @@
     cursor: pointer;
 }
 
-.custom-modal-width .modal-dialog {
-    max-width: 514px;
-}
-
 @media only screen and (max-width: 834px) {
     .tabs a {
         width: 50%;

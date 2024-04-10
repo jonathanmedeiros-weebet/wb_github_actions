@@ -150,7 +150,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
             ariaLabelledBy: 'modal-basic-title',
             size: 'md',
             centered: true,
-            windowClass: 'modal-550 modal-cadastro-cliente'
+            windowClass: 'modal-537 modal-cadastro-cliente'
         });
 
         this.modalRef.result.then(
