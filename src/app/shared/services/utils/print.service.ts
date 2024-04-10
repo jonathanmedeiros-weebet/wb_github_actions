@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {AuthService} from './../auth/auth.service';
-import {HelperService} from './helper.service';
-import {ParametrosLocaisService} from './../parametros-locais.service';
+import { AuthService } from './../auth/auth.service';
+import { HelperService } from './helper.service';
+import { ParametrosLocaisService } from './../parametros-locais.service';
 
-import {config} from './../../config';
+import { config } from './../../config';
 import * as moment from 'moment';
 
 import EscPosEncoder from 'node_modules/esc-pos-encoder/dist/esc-pos-encoder.esm.js';
-import {ImagensService} from './imagens.service';
+import { ImagensService } from './imagens.service';
 
 declare var WeebetMessage: any;
 
@@ -31,10 +31,15 @@ export class PrintService {
         private imagensService: ImagensService
     ) {
         this.getPrinterSettings();
-        this.imagensService.buscarLogoImpressao()
-            .subscribe(
-                logoImpressao => this.LOGO_IMPRESSAO = `data:image/png;base64,${logoImpressao}`
-            );
+
+        const modoCambista = this.paramsService.getOpcoes().modo_cambista;
+
+        if (modoCambista) {
+            this.imagensService.buscarLogoImpressao()
+                .subscribe(
+                    logoImpressao => this.LOGO_IMPRESSAO = `data:image/png;base64,${logoImpressao}`
+                );
+        }
 
         if (this.auth.isAppMobile()) {
             this.sendFrontVersion();
@@ -294,7 +299,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
+        const dataToSend = { data: Array.from(jogosEscPos.encode()), action: 'printLottery' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -751,7 +756,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        const dataToSend = { data: Array.from(ticketEscPos.encode()), action: 'printLottery' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1127,7 +1132,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
+        const dataToSend = { data: Array.from(ticketEscPos.encode()), action: 'printLottery' }; // file://
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1249,7 +1254,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        const dataToSend = { data: Array.from(ticketEscPos.encode()), action: 'printLottery' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1791,7 +1796,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        const dataToSend = { data: Array.from(ticketEscPos.encode()), action: 'printLottery' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1863,7 +1868,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
+        const dataToSend = { data: Array.from(cardPrintEscPos.encode()), action: 'printCard' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -2033,7 +2038,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
+        const dataToSend = { data: Array.from(cardRecargaEscPos.encode()), action: 'printCard' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -2195,11 +2200,11 @@ export class PrintService {
     }
 
     private sendFrontVersion() {
-        const dataToSend = {data: 3, action: 'frontVersion'};
+        const dataToSend = { data: 3, action: 'frontVersion' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
     private getApkConfigs() {
-        const dataToSend = {data: true, action: 'getApkConfigs'};
+        const dataToSend = { data: true, action: 'getApkConfigs' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 }
