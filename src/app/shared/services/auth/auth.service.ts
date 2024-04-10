@@ -16,7 +16,6 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
     private AuthUrl = `${config.BASE_URL}/auth`; // URL to web api
-    private authLokiUrl = `${config.LOKI_URL}/auth`;
     logadoSource;
     logado;
     clienteSource;
@@ -36,13 +35,13 @@ export class AuthService {
     }
 
     verificaDadosLogin(data: any): Observable<any> {
-        return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.AuthUrl}/verificarDadosLogin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    if (res.results.migracao) {
-                        return res.results;
+                    if (res.migracao) {
+                        return res;
                     } else {
-                        localStorage.setItem('user', JSON.stringify(res.results.user));
+                        localStorage.setItem('user', JSON.stringify(res.user));
                     }
                 }),
                 catchError(this.errorService.handleErrorLogin),
@@ -80,19 +79,19 @@ export class AuthService {
     }
 
     loginAuthDoisFatores(data: any): Observable<any> {
-        return this.http.post<any>(`${this.authLokiUrl}/two-factor-auth-login`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.AuthUrl}/signinAuthDoisFatores`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    this.setCookie(res.results.user.cookie);
+                    this.setCookie(res.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
-                    localStorage.setItem('token', res.results.token);
-                    localStorage.setItem('user', JSON.stringify(res.results.user));
-                    if (res.results.user.tipo_usuario === 'cambista') {
-                        localStorage.setItem('tipos_aposta', JSON.stringify(res.results.tipos_aposta));
+                    localStorage.setItem('token', res.token);
+                    localStorage.setItem('user', JSON.stringify(res.user));
+                    if (res.user.tipo_usuario === 'cambista') {
+                        localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
                         this.setIsCliente(false);
                     } else {
-                        localStorage.setItem('tokenCassino', res.results.tokenCassino);
+                        localStorage.setItem('tokenCassino', res.tokenCassino);
                         this.setIsCliente(true);
                     }
                     this.logadoSource.next(true);
@@ -105,19 +104,19 @@ export class AuthService {
     }
 
     login(data: any): Observable<any> {
-        return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    this.setCookie(res.results.user.cookie);
+                    this.setCookie(res.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
-                    localStorage.setItem('token', res.results.token);
-                    localStorage.setItem('user', JSON.stringify(res.results.user));
-                    if (res.results.user.tipo_usuario === 'cambista') {
-                        localStorage.setItem('tipos_aposta', JSON.stringify(res.results.tipos_aposta));
+                    localStorage.setItem('token', res.token);
+                    localStorage.setItem('user', JSON.stringify(res.user));
+                    if (res.user.tipo_usuario === 'cambista') {
+                        localStorage.setItem('tipos_aposta', JSON.stringify(res.tipos_aposta));
                         this.setIsCliente(false);
                     } else {
-                        localStorage.setItem('tokenCassino', res.results.tokenCassino);
+                        localStorage.setItem('tokenCassino', res.tokenCassino);
                         this.setIsCliente(true);
                     }
                     this.logadoSource.next(true);
