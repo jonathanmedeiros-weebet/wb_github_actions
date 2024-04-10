@@ -13,7 +13,7 @@ import { config } from '../config';
     providedIn: 'root'
 })
 export class ImagemInicialService {
-    private ImagemInicialUrl = `${config.LOKI_URL}/splash-image`;
+    private ImagemInicialUrl = `${config.BASE_URL}/imagem-inicial`;
 
     constructor(
         private http: HttpClient,
@@ -22,7 +22,7 @@ export class ImagemInicialService {
     ) { }
 
     getImagens(): Observable<any> {
-        return this.http.get(this.ImagemInicialUrl, this.header.getRequestOptions())
+        return this.http.get(this.ImagemInicialUrl, this.header.getRequestOptions(true))
             .pipe(
                 take(1),
                 map((res: any) => res.results),
