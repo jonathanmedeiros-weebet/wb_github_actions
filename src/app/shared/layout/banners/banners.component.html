@@ -1,4 +1,4 @@
-<div *ngIf="banners.length > 0" class="banners" [ngClass]="pagina">
+<div *ngIf="banners.length > 0" class="banners" [ngClass]="pagina" [hidden]="showLoadingIndicator">
     <ngb-carousel [showNavigationArrows]="showNavigationArrows">
         <ng-template *ngFor="let banner of banners" ngbSlide>
             <div class="picsum-img-wrapper">

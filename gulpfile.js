@@ -1093,29 +1093,11 @@ gulp.task('deugreen.me', function (done) {
     });
 });
 
-gulp.task('i7esportes.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "i7esportes.bet",
-        banca: "I7 ESPORTES",
-        styles: "",
-    });
-});
-
 gulp.task('betsesporte.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "betsesporte.com",
         banca: "BETS ESPORTE",
-        styles: "",
-    });
-});
-
-gulp.task('primesport.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "primesport.bet",
-        banca: "PRIME SPORT",
         styles: "",
     });
 });
@@ -2283,15 +2265,6 @@ gulp.task('partida.bet', function (done) {
     });
 });
 
-gulp.task('bet77k.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bet77k.com",
-        banca: "BET 77K",
-        styles: "",
-    });
-});
-
 gulp.task('valebets.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2402,7 +2375,7 @@ gulp.task('lottomaster.bet', function (done) {
 
 gulp.task('jbnacional.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front1.wee.bet",
         host: "jbnacional.bet",
         banca: "JB NACIONAL",
         styles: "",
@@ -2425,15 +2398,6 @@ gulp.task('tenbet.wee.bet', function (done) {
         server: "front5.wee.bet",
         host: "tenbet.wee.bet",
         banca: "TEN BET",
-        styles: "",
-    });
-});
-
-gulp.task('crewbet.io', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "crewbet.io",
-        banca: "CREW BET",
         styles: "",
     });
 });
@@ -2774,16 +2738,6 @@ gulp.task('x1esporte.com', function (done) {
         server: "front2.wee.bet",
         host: "x1esporte.com",
         banca: "X1 Esporte",
-        styles: "",
-    });
-});
-
-gulp.task('spy.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "spy.bet",
-        banca: "SpyBet - Cassino Online e Apostas Esportivas",
-        description: "Cassino SpyBet Oficial: Entre agora no Cassino SpyBet e comece agora mesmo a fazer as suas apostas em roletas, slots e vários outros jogos. Aproveite o nosso Super Bônus de Primeiro Depósito e se divirta!",
         styles: "",
     });
 });
@@ -3145,6 +3099,33 @@ gulp.task('jrsports.io', function (done) {
         server: "front3.wee.bet",
         host: "jrsports.io",
         banca: "JR SPORTS",
+        styles: ""
+    });
+});
+
+gulp.task('vembet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "vembet.com",
+        banca: "VEM BET",
+        styles: ""
+    });
+});
+
+gulp.task('camaraobet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "camaraobet.com",
+        banca: "CAMARÃO BET",
+        styles: ""
+    });
+});
+
+gulp.task('7copas.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "7copas.bet",
+        banca: "7 COPAS",
         styles: ""
     });
 });

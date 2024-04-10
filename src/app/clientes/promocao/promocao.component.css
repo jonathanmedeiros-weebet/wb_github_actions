@@ -1,0 +1,239 @@
+.tabs {
+    border-bottom: 2px solid var(--foreground);
+    margin-bottom: 30px;
+}
+
+.tabs a {
+    font-size: 12px;
+    color: var(--foreground);
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 30px;
+
+    cursor: pointer;
+    margin-bottom: -2px;
+}
+
+.tabs a:hover {
+    color: var(--highlight);
+}
+
+.tabs a.active {
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
+}
+
+.tabs a:hover .circle,
+.tabs a.active .circle {
+    color: var(--highlight);
+}
+
+.acoes-aposta {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-jogar-rodada {
+    line-height: 23px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.filtros {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.filtros input, .filtros select {
+    margin-right: 20px;
+}
+
+.filtros > input, .filtros .datepicker-group {
+    max-width: 300px;
+}
+
+.filtros select {
+    max-width: 150px;
+}
+
+.table {
+    color: var(--foreground);
+}
+
+.table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+    padding: 15px 10px;
+}
+
+.table thead th:first-child {
+    border-left: 10px solid var(--game);
+}
+
+.table .right {
+    text-align: right;
+}
+
+.table tbody td {
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+}
+
+.table td.no-border{
+    border-left: 0 !important;
+}
+
+.tr-1 td {
+    padding: 5px 0;
+}
+
+.tr-2 td {
+    border-top: none !important;
+    padding: 0 0 5px 15px;
+}
+
+.custom-td {
+    min-width: 15%;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.td-custom {
+    padding: 15px 10px;
+}
+
+.circle {
+    display: inline-block;
+    width: 20px;
+    height: 16px;
+    border-radius: 42%;
+    background-color: var(--game);
+    color: var(--foreground);
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+}
+
+.btn-regras-bonus{
+    margin-left: 20px;
+    color: var(--highlight);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.info-page-promotion {
+    margin-top: 16px;
+    margin-bottom: 7px;
+}
+
+.rodada-gratis-container {
+    background-color: var(--header);
+    height: 220px;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.info-rodada {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.rodada-gratis-container .info-rodada span {
+    color: #B8B8B8;
+}
+
+.disabled-button {
+    background-color: grey;
+    pointer-events: none;
+}
+
+.count-rodadas-mobile {
+    font-size: 12px;
+    margin: 23px auto;
+}
+
+.icon-reorder {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 834px) {
+    .tabs a {
+        width: 50%;
+        text-align: center;
+    }
+
+    .filtros {
+        margin-bottom: 25px;
+    }
+
+    .info-page-promotion {
+        margin-top: 0;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    .btn-jogar-rodada {
+        line-height: 23px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .tabs {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid var(--foreground);
+    }
+
+    .tabs a.active {
+        border-bottom: 2px solid var(--highlight);
+    }
+
+    #default-content {
+        padding: 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .filtros select {
+        max-width: none;
+        margin: 0;
+    }
+
+    .btn-converterBonus{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 24px !important;
+        width: 150px;
+
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-regras-bonus{
+        margin-left: 0px;
+        color: var(--highlight);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-jogar-rodada {
+        min-width: 100%; 
+        margin-top: 10px;
+    }
+}

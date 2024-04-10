@@ -13,6 +13,7 @@ export class BannersComponent implements OnInit {
     isMobileView = false;
     showNavigationArrows = false;
     @Input() pagina = 'futebol';
+    @Input() showLoadingIndicator = true;
 
     constructor(
         private cd: ChangeDetectorRef,

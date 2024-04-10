@@ -17,17 +17,17 @@ import {
     ViewChildren
 } from '@angular/core';
 
-import {NavigationExtras, Router} from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
-import {Campeonato, Jogo} from './../../../../models';
-import {BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService, JogoService, LayoutService} from './../../../../services';
+import { Campeonato, Jogo } from './../../../../models';
+import { BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService, JogoService, LayoutService } from './../../../../services';
 
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 import 'moment/min/locales';
 
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -179,7 +179,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             this.nomesCotacoes.push(this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'));
         });
 
-        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+        this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({ 'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0 }), 'days');
 
         this.sidebarService.collapsedSource
             .subscribe(collapsed => {
@@ -203,8 +203,6 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
                 this.cd.markForCheck();
             });
-
-        this.getJogosDestaquesIds();
 
         this.layoutService.currentHeaderHeight
             .pipe(takeUntil(this.unsub$))
@@ -238,7 +236,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
         this.widthOddsScroll = this.maxOddsSize + this.nomesJogoWidth;
         if ((this.oddSize * this.qtdOddsPrincipais) - 28 > this.maxOddsSize) {
-                this.enableScrollButtons = true;
+            this.enableScrollButtons = true;
         } else {
             this.enableScrollButtons = false;
         }
@@ -250,7 +248,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         }
 
         if (changes['data'] && this.data) {
-            const diferencaDias = moment(this.data).diff(moment().set({'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0}), 'days');
+            const diferencaDias = moment(this.data).diff(moment().set({ 'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0 }), 'days');
 
             if (diferencaDias === 1) {
                 this.mudarData('amanha');
@@ -289,7 +287,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                 }, 1000);
             }
 
-            this.getJogosDestaquesIds();
+            if (moment().isSame(this.data, 'date')) {
+                this.getJogosDestaquesIds();
+            } else {
+                this.jogosDestaquesIds = [];
+                this.mapJogosDestaque();
+            }
         }
 
         if (changes['jogosDestaquesIds'] && this.jogosDestaquesIds) {
@@ -305,7 +308,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     getJogosDestaquesIds() {
         this.jogoService.getJogosDestaque()
             .subscribe(jogos => {
-                this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
+                this.jogosDestaquesIds = jogos.map(jogo => jogo.fi);
                 this.mapJogosDestaque();
             });
     }
@@ -628,7 +631,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         }
 
         const navigationExtras: NavigationExtras = {
-            queryParams: data ? {'data': data} : {}
+            queryParams: data ? { 'data': data } : {}
         };
         this.router.navigate(['/esportes/futebol'], navigationExtras);
     }
@@ -697,13 +700,13 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     atualizarDatasJogosFuturos(lang = 'pt') {
         switch (lang) {
             case 'pt':
-                moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                moment.updateLocale('pt-br', { parentLocale: 'pt-br' });
                 break;
             case 'en':
-                moment.updateLocale('en-gb', {parentLocale: 'en-gb'});
+                moment.updateLocale('en-gb', { parentLocale: 'en-gb' });
                 break;
             default:
-                moment.updateLocale('pt-br', {parentLocale: 'pt-br'});
+                moment.updateLocale('pt-br', { parentLocale: 'pt-br' });
         }
 
         this.diaHojeMaisDois = moment().add(2, 'd');
