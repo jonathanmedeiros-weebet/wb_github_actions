@@ -12,7 +12,7 @@ import { config } from '../../config';
 @Injectable()
 export class JogoService {
     private JogoUrl = `${config.CENTER_API}/jogos`;
-    private JogoCentralUrl = `${config.BASE_URL}/jogos`;
+    private JogosLokiUrl = `${config.LOKI_URL}/games`;
 
     constructor(
         private http: HttpClient,
@@ -65,7 +65,7 @@ export class JogoService {
     }
 
     getJogosDestaque() {
-        const url = `${this.JogoCentralUrl}/destaques`;
+        const url = `${this.JogosLokiUrl}/highlighted-games`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
