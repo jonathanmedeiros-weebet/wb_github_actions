@@ -1,5 +1,5 @@
 <div #listagem infiniteScroll (scrolled)="exibirMais()" class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor}">
-    <app-banners pagina="cassino" ></app-banners>
+    <app-banners pagina="cassino" [showLoadingIndicator]="showLoadingIndicator"></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
 
