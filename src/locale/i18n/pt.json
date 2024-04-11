@@ -210,7 +210,6 @@
         "jogarAgora": "Jogar Agora",
         "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
-        "resultadosEncontrados": "Foram encontrados {{quantidade}} resultados",
         "selecioneChavePix": "Selecione a chave pix",
         "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
         "chaveAleatoria": "Chave aleatória",
@@ -369,7 +368,9 @@
         "depositoRegistrado": "Depósito - Registrado",
         "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Depósitos recentes",
-        "depositDetails": "Detalhes do depósito"
+        "depositDetails": "Detalhes do depósito",
+        "depositText": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, selecione se deseja receber o bônus de primeiro depósito, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
+        "depositTextWithoutBonus": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento."
     },
     "footer": {
         "afiliados": "Afiliados",

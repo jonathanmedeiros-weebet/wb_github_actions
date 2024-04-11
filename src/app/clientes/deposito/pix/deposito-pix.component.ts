@@ -105,27 +105,37 @@ export class NgbdModalContent {
 })
 export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     @ViewChild('verificarPromocaoModal', {static: true}) verificarPromocaoModal;
-    submitting = false;
+
+    modalPromocao;
     pix: DepositoPix;
-    exibirMensagemPagamento = false;
+
+    rolloverAtivo: Rollover[] = [];
+
+    bonusOption = '';
+    paymentMethod;
+    paymentMethodSelected = '';
+    sautoPayQr;
+
     novoSaldo;
-    clearSetInterval;
-    verificacoes = 0;
     valorMinDeposito;
     valorPix = 0;
-    paymentMethod;
-    sautoPayQr;
-    isMobile = false;
-    permitirBonusPrimeiroDeposito = false;
-    bonusEsportivo = false;
-    bonusCassino = false;
-    paymentMethodSelected = '';
-    bonusOption = '';
-    rolloverAtivo: Rollover[] = [];
-    modalPromocao;
+    verificacoes = 0;
+    amountSportsBonus = 0;
+    maxAmountSportsBonus = 0;
+    amountCasinoBonus = 0;
+    maxAmountCasinoBonus = 0;
 
+    bonusCassino = false;
+    bonusEsportivo = false;
     droppedBonus = true;
     droppedPromoCode = true;
+    exibirMensagemPagamento = false;
+    isMobile = false;
+    onlyOneModality = false;
+    permitirBonusPrimeiroDeposito = false;
+    submitting = false;
+
+    clearSetInterval;
 
     constructor(
         private domSanitizer: DomSanitizer,
@@ -156,6 +166,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                     this.permitirBonusPrimeiroDeposito = res.permitir_bonificacao;
                     this.bonusEsportivo = res.bonus_esportivo;
                     this.bonusCassino = res.bonus_cassino;
+                    this.onlyOneModality = !(res.bonus_esportivo && res.bonus_cassino);
+                    this.maxAmountSportsBonus = res.max_bonus_esportivo;
+                    this.maxAmountCasinoBonus = res.max_bonus_cassino;
                     if (!res.permitir_bonificacao) {
                         this.form.get('bonus').patchValue('nenhum');
                         this.bonusOption = 'nenhum';
@@ -183,11 +196,28 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
     changeAmount(amount) {
         this.form.patchValue({ 'valor': amount });
+        this.calculateBonusAmount();
     }
 
     changeBonusOption(bonusOption: string) {
         this.bonusOption = bonusOption;
         this.form.get('bonus').patchValue(bonusOption);
+    }
+
+    calculateBonusAmount()
+    {
+        let enteredAmount = this.form.value.valor;
+
+        this.amountSportsBonus = enteredAmount;
+        this.amountCasinoBonus = enteredAmount;
+
+        if (enteredAmount > this.maxAmountSportsBonus) {
+            this.amountSportsBonus = this.maxAmountSportsBonus;
+        }
+
+        if (enteredAmount > this.maxAmountCasinoBonus) {
+            this.amountCasinoBonus = this.maxAmountCasinoBonus;
+        }
     }
 
     toggleBonusSection() {

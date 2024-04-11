@@ -298,28 +298,14 @@
     font-size: 20px;
 }
 
-.promocao-tipo{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    color: var(--highlight);
-    padding: 15px;
-}
-
 .group-buttons {
    display: flex;
 }
 
-.btn-cancelar{
+.btn-cancelar {
     background-color: var(--foreground-highlight);
     color: var(--highlight);
     border-color: var(--highlight);
-}
-
-.info {
-    margin: 15px 25px 30px;
-    font-weight: 600;
-    color: var(--foreground);
 }
 
 .buttons {
@@ -336,34 +322,6 @@
     margin-right: 10px;
 }
 
-label.label-tempo {
-    display: block;
-    text-align: center;
-    margin: 0;
-}
-
-.tempo {
-    font-size: 14px;
-    font-weight: 600;
-    display: block;
-    text-align: center;
-}
-
-.valor {
-    display: block;
-    text-align: center;
-    font-size: 14px;
-    margin: 10px 0 70px;
-}
-
-.qr-code {
-    display: inline-block;
-    padding: 15px;
-    margin: 20px 0 10px;
-    border: 1px solid var(--highlight);
-    border-radius: 5px;
-}
-
 .modal-header, .modal-body {
     border-radius: 5px;
     text-align: center;
@@ -373,73 +331,16 @@ label.label-tempo {
     border-radius: 10px;
 }
 
-.permitirBonusPrimeiroDeposito{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.btn-regras-bonus{
+.btn-regras-bonus {
     color: var(--highlight);
     text-decoration: none;
     cursor: pointer;
-}
-.links-bonus{
-    display: flex;
 }
 
 @media only screen and (max-width: 1024px) {
     .modal-body {
         padding-top: 50px;
     }
-
-    .group-input-valor {
-        text-align: center;
-    }
-
-    .row-input-valor {
-        justify-content: center;
-        margin-top: 40px;
-    }
-
-    .label-input-valor {
-        font-size: 16px;
-        text-align: center;
-        display: block;
-    }
-
-    .input-valor {
-        border: 0;
-        border-bottom: 2px solid var(--game);
-        color: var(--foreground);
-        border-radius: 0;
-        width: 100%;
-
-        text-align: center !important;
-        font-size: 22px;
-        background-color: transparent;
-
-        padding: 5px;
-    }
-
-    .input-valor:focus {
-        border: 0;
-        border-bottom: 2px solid var(--highlight);
-        color: var(--foreground);
-        background-color: transparent;
-    }
-
-    .alerta-min {
-        border-radius: 4px;
-        margin-top: 40px !important;
-        padding: 10px 15px;
-        font-size: 11px; /* ajuste fonte */
-        background: var(--game);
-        color: var(--foreground-game);
-        text-align: left;
-    }
-
-
 
     .group-buttons {
         width: 100%;
@@ -451,43 +352,68 @@ label.label-tempo {
         gap: 10px;
     }
 
-    .buttons-container {
-        border-radius: 4px;
-        flex-wrap: wrap;
+    #deposito-pix {
+        background-color: var(--background);
+        padding: 0;
     }
 
-    .buttons-container a {
-        flex: 1;
-        margin: 0;
-        justify-content: center;
-        border: 0;
+    #details-wrapper {
+        margin-top: 0;
+    }
+
+    .details-text {
+        width: 100%;
+    }
+
+    .details-payment-method {
+        margin-top: 28px;
+        width: 100%;
+    }
+
+    .details-payment-method select {
+        margin-top: 24px;
+    }
+
+    .details-payment-method .form-group {
+        margin-bottom: 0;
+    }
+
+    .details-amount input {
+        width: 100%;
+    }
+
+    .shortcut-amounts {
+        width: 100%;
+    }
+
+    .shortcut-amounts button {
         background-color: var(--game);
-        color: var(--foreground-game);
     }
 
-    .buttons-container a.active {
-        background-color: var(--highlight);
-        color: var(--foreground-highlight);
-        fill: var(--foreground-highlight);
+    #bonus-wrapper .bonus-options {
+        flex-direction: column;
     }
 
-    .buttons-container a i.radio{
-        display: none;
+    #bonus-wrapper .bonus-option {
+        width: 100% !important;
+        flex-direction: row;
     }
 
-    .btn-converterBonus{
-        text-decoration: none;
-        cursor: pointer;
+    #bonus-wrapper .bonus-option .bonus {
+        align-items: flex-start;
+        margin-right: 24px;
     }
 
-    .deposito-pix{
-        justify-content: center;
-        max-width: 100% !important;
-        flex: 0 0 100% !important;
+    #bonus-wrapper .bonus-option .bonus-option-wrapper div:first-child {
+        margin-top: 0;
     }
 
-    .links-bonus{
-        flex-grow: 1;
-        margin: 0 1% 1% 0;
+    #promo-code-wrapper {
+        width: 100% !important;
+    }
+
+    .details-submit {
+        width: 100%;
+        margin-bottom: -55px;
     }
 }
