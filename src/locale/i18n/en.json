@@ -330,9 +330,8 @@
         "digiteSuaSenha": "Type your password"
     },
     "saques": {
-        "informeValorDesejadoSaque": "Enter the amount you want to withdraw",
+        "enterAmountWithdrawal": "Enter the amount for the withdrawal",
         "informeOValor": "Enter the amount",
-        "saldoDisponivelParaSaque": "Balance available for withdrawal",
         "infoSautoPay": "Withdrawals requested after 2pm will only be transferred on the next business day.",
         "saqueERegistrado": "Withdrawal - Registered",
         "paraProsseguirAtualizeChavePix": "To proceed, update your registration with your PIX key",
@@ -342,7 +341,14 @@
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Phone or Random",
         "pagamentoExclusivoChaveCPF": "We inform you that when requesting the withdrawal, it will be carried out exclusively for the account holder's pix CPF key.",
         "solicitacoesRecentes": "Recent withdrawal requests",
-        "avisoRollover": "We inform you that when requesting a withdrawal with an active rollover, it will be canceled and the entire bonus will be permanently lost."
+        "avisoRollover": "We inform you that when requesting a withdrawal with an active rollover, it will be canceled and the entire bonus will be permanently lost.",
+        "withdrawalDetails": "Withdrawal details",
+        "availableBalanceForWithdrawal": "Available balance for withdrawal",
+        "safeWithdrawalAlert": "It's important that you use a bank account linked to your CPF number that is registered.",
+        "enterPixKey": "Select the type of PIX key",
+        "minimumWithdrawal": "Minimum withdrawal",
+        "dailyMaximum": "Daily maximum",
+        "monthlyMaximum": "Monthly maximum"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",

@@ -85,9 +85,9 @@ export class DepositoComponent implements OnInit, OnDestroy {
 
     changeHeight() {
         const headerHeight = this.headerHeight;
-        const altura = window.innerHeight - headerHeight;
+        const height = window.innerHeight - headerHeight;
         const defaultContent = this.el.nativeElement.querySelector('#default-content');
-        this.renderer.setStyle(defaultContent, 'height', `${altura}px`);
+        this.renderer.setStyle(defaultContent, 'height', `${height}px`);
     }
 
     selecionarModalidade(modalide) {

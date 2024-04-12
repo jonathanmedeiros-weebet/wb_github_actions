@@ -6,16 +6,165 @@
     <div class="botao-direito"></div>
 </div>
 <div id="default-content">
-
     <app-spinner *ngIf="showLoading"></app-spinner>
-
     <ng-container *ngIf="!showLoading">
         <div class="content-header hide-mobile">
-            <h2>{{'geral.saques' | translate}} </h2>
+            <h2>{{'geral.saque' | translate}} </h2>
         </div>
         <div class="content-body">
             <div class="content">
-                <div class="alert alert-secondary" role="alert">
+                <div id="withdrawal">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="cadastroCompleto && !respostaSolicitacao">
+                        <div id="withdrawal-container">
+                            <section id="payment-method-column" class="hide-mobile">
+                                <h3>{{'financeiro.paymentGateway' | translate}}</h3>
+                                <div class="options-container payment-method-options">
+                                    <a class="payment-method-option" [ngClass]="{'active': paymentMethodSelected === paymentMethod}" (click)="changePaymentMethodOption(paymentMethod)">
+                                        <div class="payment-method">
+                                            <i class="radio"></i>
+                                        </div>
+                                        <div class="payment-method-icon"
+                                            [ngStyle]="{'background-image': 'url(https://cdn.wee.bet/img/cassino/logos/' + paymentMethod + '.png)'}"
+                                        ></div>
+                                        <div>
+                                            <span class="payment-method-name">{{paymentMethod | formatPaymentMethod}}</span>
+                                        </div>
+                                        <i class="fa-solid fa-caret-right"></i>
+                                    </a>
+                                </div>
+                            </section>
+                            <section id="withdrawal-details">
+                                <h3 class="hide-mobile">{{'saques.withdrawalDetails' | translate}}</h3>
+                                <div id="details-wrapper">
+                                    <div class="details-container">
+                                        <div class="details-available-amount">
+                                            {{'saques.availableBalanceForWithdrawal' | translate}}: <span class="available-amount">{{saldo | currency}}</span>
+                                        </div>
+                                        <div class="details-safe-withdrawal-alert">
+                                            {{'saques.safeWithdrawalAlert' | translate}}
+                                        </div>
+                                        <div class="details-key-type">
+                                            <div>{{'saques.enterPixKey' | translate}}</div>
+                                            <div class="options-container key-type-options hide-mobile">
+                                                <a class="key-type-option"
+                                                    (click)="changePixKey('cpf')"
+                                                    [ngClass]="{'active':selectedKeyType === 'cpf'}"
+                                                >
+                                                    <div class="key-type">
+                                                        <i class="radio"></i>
+                                                    </div>{{'geral.cpf' | translate}}
+                                                </a>
+                                                <ng-container *ngIf="permitirQualquerChavePix">
+                                                    <a class="key-type-option"
+                                                        (click)="changePixKey('phone')"
+                                                        [ngClass]="{'active':selectedKeyType === 'phone'}"
+                                                    >
+                                                        <div class="key-type">
+                                                            <i class="radio"></i>
+                                                        </div>{{'geral.telefone' | translate}}
+                                                    </a>
+                                                    <a class="key-type-option"
+                                                        (click)="changePixKey('email')"
+                                                        [ngClass]="{'active':selectedKeyType === 'email'}"
+                                                    >
+                                                        <div class="key-type">
+                                                            <i class="radio"></i>
+                                                        </div>{{'geral.email' | translate}}
+                                                    </a>
+                                                    <a class="key-type-option"
+                                                        (click)="changePixKey('random')"
+                                                        [ngClass]="{'active':selectedKeyType === 'random'}"
+                                                    >
+                                                        <div class="key-type">
+                                                            <i class="radio"></i>
+                                                        </div>{{'geral.chaveAleatoria' | translate}}
+                                                    </a>
+                                                </ng-container>
+                                            </div>
+                                            <div class="key-type-select hide-desktop">
+                                                <div class="form-group">
+                                                    <select class="form-control inverted-out" formControlName="tipoChavePix" (change)="onChavePixChange()">
+                                                        <option value="cpf" selected>{{'geral.cpf' | translate}}</option>
+                                                        <ng-container *ngIf="permitirQualquerChavePix">
+                                                            <option value="email">{{'geral.email' | translate}}</option>
+                                                            <option value="phone">{{'geral.telefone' | translate}}</option>
+                                                            <option value="random">{{'geral.chaveAleatoria' | translate}}</option>
+                                                        </ng-container>
+                                                    </select>
+                                                    <app-error-msg [control]="form.get('tipoChavePix')"></app-error-msg>
+                                                </div>
+                                            </div>
+                                            <div class="key-type-input">
+                                                <div>
+                                                    <div class="form-group">
+                                                        <input type="text" id="clienteChavePix" class="form-control inverted-out"
+                                                                formControlName="clienteChavePix"
+                                                                [mask]="getMask()"
+                                                                [readonly]="form.get('tipoChavePix').value == 'cpf'">
+                                                        <app-error-msg [control]="form.get('clienteChavePix')"></app-error-msg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="hide-desktop details-payment-method">
+                                            <h3>{{'financeiro.paymentGateway' | translate}}</h3>
+                                            <div class="form-group">
+                                                <select formControlName="paymentMethod" type="text" class="form-control inverted-out"
+                                                    (change)="changePaymentMethodOption($event.target.value)">
+                                                    <option [value]="paymentMethod">{{paymentMethod | formatPaymentMethod}}</option>
+                                                </select>
+                                                <app-error-msg [control]="form.get('paymentMethod')"></app-error-msg>
+                                            </div>
+                                        </div>
+                                        <div class="details-amount">
+                                            <label class="label">{{'saques.enterAmountWithdrawal' | translate}}</label>
+                                            <input currencyMask
+                                                class="form-control inverted-out"
+                                                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                                formControlName="valor">
+                                            <app-error-msg [control]="form.get('valor')"></app-error-msg>
+                                            <div class="min-amount">
+                                                <i class="fa-solid fa-circle-exclamation"></i>&nbsp;
+                                                {{'saques.minimumWithdrawal' | translate}}: {{valorMinSaque | currency}}
+                                                / {{'saques.dailyMaximum' | translate}}: {{valorMaxSaqueDiario | currency}}
+                                                / {{'saques.monthlyMaximum' | translate}}: {{valorMaxSaqueMensal | currency}}
+                                            </div>
+                                            <div class="shortcut-amounts">
+                                                <button type="button" class="btn" (click)="changeAmount(10)">
+                                                    {{10 | currency}}
+                                                </button>
+                                                <button type="button" class="btn" (click)="changeAmount(20)">
+                                                    {{20 | currency}}
+                                                </button>
+                                                <button type="button" class="btn" (click)="changeAmount(50)">
+                                                    {{50 | currency}}
+                                                </button>
+                                                <button type="button" class="btn" (click)="changeAmount(75)">
+                                                    {{75 | currency}}
+                                                </button>
+                                                <button type="button" class="btn" (click)="changeAmount(100)">
+                                                    {{100 | currency}}
+                                                </button>
+                                                <button type="button" class="btn" (click)="changeAmount(200)">
+                                                    {{200 | currency}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="details-submit">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-custom solicitar-saque"
+                                                        [disabled]="submitting"  [disabled]="disableButton">
+                                                    {{'geral.sacar' | translate}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="alert alert-secondary" role="alert">
                     <strong>{{'geral.atencao' | translate}}!</strong> <br>
                     {{'financeiro.valorMinimoSaque' | translate}}: <strong>{{valorMinSaque | currency}}</strong><br>
                     {{'financeiro.valorMaximoSaqueDiario' | translate}}: <strong>{{valorMaxSaqueDiario | currency}}</strong><br>
@@ -93,7 +242,7 @@
                             <div class="col col-sm-3 saque-pix">
                                 <div class="form-group group-buttons">
                                     <button type="submit" class="btn btn-custom solicitar-saque" [ngClass]="{'btn-block': isMobile}"
-                                            [disabled]="submitting"  [disabled]="disableButtom">
+                                            [disabled]="submitting"  [disabled]="disableButton">
                                         {{'geral.sacar' | translate}}
                                     </button>
                                 </div>
@@ -106,45 +255,8 @@
                 </div>
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}
-                </div>
+                </div> -->
             </div>
-        </div>
-
-        <div class="table-responsive">
-            <label class="label">
-                <span>{{'saques.solicitacoesRecentes' | translate}}</span>
-            </label>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>{{'geral.detalhes' | translate}}</th>
-                    <th>{{ 'geral.chavePix' | translate }}</th>
-                    <th>{{'geral.status' | translate}}</th>
-                    <th>{{'geral.valor' | translate}}</th>
-                    <!-- <th></th> -->
-                </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let saque of saques">
-                        <td><img src="/assets/images/debito.svg" alt="image"></td>
-                        <td>{{'saques.saqueERegistrado' | translate}} {{ saque.data }}</td>
-                        <td>{{ formatarChavePix(saque.chavePix, saque.tipoChavePix) }}</td>
-                        <td>
-                          {{ saque.status }}
-                          <a class="info" *ngIf="saque.observacao" placement="top" [ngbPopover]="saque.observacao">
-                            <i class="fa fa-info"></i>
-                          </a>
-                        </td>
-                        <td>{{ saque.valor | currency}}</td>
-                        <!-- <td>
-                            <a class="btn-cancelar" *ngIf="exibirCancelarSolicitacaoSaque(saque)" (click)="cancelarSolicitacaoSaque(saque.id)">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </td> -->
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </ng-container>
 </div>

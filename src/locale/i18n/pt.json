@@ -330,9 +330,8 @@
         "digiteSuaSenha": "Digite sua senha"
     },
     "saques": {
-        "informeValorDesejadoSaque": "Informe o valor desejado para saque",
+        "enterAmountWithdrawal": "Informe o valor para saque",
         "informeOValor": "Informe o valor",
-        "saldoDisponivelParaSaque": "Saldo disponivel para saque",
         "infoSautoPay": "Saques solicitados após as 14:00h serão transferidos somente no próximo dia útil.",
         "saqueERegistrado": "Saque - Registrado",
         "paraProsseguirAtualizeChavePix": "Para prosseguir, atualize seu cadastro com a sua chave PIX",
@@ -342,7 +341,14 @@
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória",
         "pagamentoExclusivoChaveCPF": "Informamos que ao solicitar o saque ele será realizado exclusivamente para a chave pix CPF do titular da conta.",
         "solicitacoesRecentes": "Solicitações de saque recentes",
-        "avisoBonus": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente."
+        "avisoBonus": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente.",
+        "withdrawalDetails": "Detalhes do saque",
+        "availableBalanceForWithdrawal": "Saldo disponível para saque",
+        "safeWithdrawalAlert": "É importante que você use uma conta bancária vinculada ao seu número de CPF que está cadastrado.",
+        "enterPixKey": "Informe o tipo de chave PIX",
+        "minimumWithdrawal": "Saque mínimo",
+        "dailyMaximum": "Máximo diário",
+        "monthlyMaximum": "Máximo mensal"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",

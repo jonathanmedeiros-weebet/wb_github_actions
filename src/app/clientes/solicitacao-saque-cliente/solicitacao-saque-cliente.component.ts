@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ClienteService } from '../../shared/services/clientes/cliente.service';
@@ -7,11 +7,13 @@ import { MessageService } from '../../shared/services/utils/message.service';
 import { FinanceiroService } from '../../shared/services/financeiro.service';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
 import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
-import { AuthService, SidebarService } from 'src/app/services';
+import { AuthService, LayoutService, SidebarService } from 'src/app/services';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClientePerfilModalComponent, ClientePixModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -19,27 +21,36 @@ import { Router } from '@angular/router';
     styleUrls: ['./solicitacao-saque-cliente.component.css']
 })
 export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    submitting;
-    disableButtom = false;
-    showLoading = true;
-    cadastroCompleto = true;
-    rotaCompletarCadastro: string;
-    respostaSolicitacao;
-    errorMessage;
+    unsub$ = new Subject();
     cliente: Cliente;
+    modalRef;
+
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M'];
+    saques = [];
+    respostaSolicitacao;
+
+    rotaCompletarCadastro: string;
+    labelChavePix = '';
+    paymentMethod;
+    paymentMethodSelected = '';
+    errorMessage;
+    selectedKeyType = 'cpf';
+
     valorMinSaque;
     valorMaxSaqueDiario;
     valorMaxSaqueMensal;
-    apiPagamentos;
-    metodoPagamentoDesabilitado;
-    isMobile = false;
-    modalRef;
-    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M'];
     qtdRolloverAtivos = 0;
     saldo = 0;
-    saques = [];
+    headerHeight = 92;
+
+    disableButton = false;
+    showLoading = true;
+    cadastroCompleto = true;
+    isMobile = false;
     permitirQualquerChavePix = false;
-    labelChavePix = '';
+    submitting;
+    metodoPagamentoDesabilitado;
+
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -54,6 +65,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         public activeModal: NgbActiveModal,
         private translate: TranslateService,
         private router: Router,
+        private cd: ChangeDetectorRef,
+        private el: ElementRef,
+        private layoutService: LayoutService,
+        private renderer: Renderer2
     ) {
         super();
     }
@@ -68,7 +83,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.getRollovers();
 
-        this.apiPagamentos = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.paymentMethod = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.paymentMethodSelected = this.paymentMethod;
         this.metodoPagamentoDesabilitado = this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado;
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
         this.createForm();
@@ -81,7 +97,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 posicaoFinanceira => {
                     this.saldo = posicaoFinanceira.saldo;
                     if (posicaoFinanceira.saldo == 0) {
-                        this.disableButtom = true;
+                        this.disableButton = true;
                     }
                 },
                 error => {
@@ -117,18 +133,47 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.handleError(error);
                 }
             );
+
+        if (!this.isMobile) {
+            this.layoutService.currentHeaderHeight
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curHeaderHeight => {
+                    this.headerHeight = curHeaderHeight;
+                    this.changeHeight();
+                    this.cd.detectChanges();
+                });
+        }
+    }
+
+    changeHeight() {
+        const headerHeight = this.headerHeight;
+        const height = window.innerHeight - headerHeight;
+        const defaultContent = this.el.nativeElement.querySelector('#default-content');
+        this.renderer.setStyle(defaultContent, 'height', `${height}px`);
     }
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
         this.form = this.fb.group({
             valor: [0, [Validators.required]],
-            tipoChavePix: [!this.permitirQualquerChavePix ? 'cpf' : '', Validators.required],
-            clienteChavePix: ['', Validators.required]
+            tipoChavePix: ['cpf', Validators.required],
+            clienteChavePix: ['', Validators.required],
+            paymentMethod: [this.paymentMethodSelected, Validators.required]
         });
+    }
+
+    changePaymentMethodOption(paymentMethod: string) {
+        this.paymentMethodSelected = paymentMethod;
+        this.form.get('paymentMethod').patchValue(paymentMethod);
+    }
+
+    changeAmount(amount) {
+        this.form.patchValue({ 'valor': amount });
     }
 
     handleError(error: string) {
@@ -229,6 +274,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     }
 
+    changePixKey(key: string) {
+        this.selectedKeyType = key;
+        this.form.get('tipoChavePix').patchValue(key);
+        this.onChavePixChange();
+    }
+
     onChavePixChange() {
         const chavePixValue = this.form.get('tipoChavePix').value;
         const clienteChavePixControle = this.form.get('clienteChavePix');
@@ -244,20 +295,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             switch (chavePixValue) {
                 case 'cpf':
                     this.form.get('clienteChavePix').setValue(this.cliente.cpf);
-                    this.labelChavePix = this.translate.instant('geral.cpf');
                     break;
                 case 'email':
                     clienteChavePixControle.setValidators([Validators.required, Validators.email]);
-                    this.labelChavePix = this.translate.instant('geral.email');
-                    break;
-                case 'phone':
-                    this.labelChavePix = this.translate.instant('geral.telefone');
-                    break;
-                case 'random':
-                    this.labelChavePix = this.translate.instant('geral.chaveAleatoria');
-                    break;
-                default:
-                    this.labelChavePix = this.translate.instant('geral.chavePix');
                     break;
             }
         }
