@@ -328,7 +328,9 @@
         "jrsports.io": "gulp jrsports.io",
         "vembet.com": "gulp vembet.com",
         "camaraobet.com": "gulp camaraobet.com",
-        "7copas.bet": "gulp 7copas.bet"
+        "7copas.bet": "gulp 7copas.bet",
+        "cravei.bet": "gulp cravei.bet",
+        "miamipix.net": "gulp miamipix.net"
     },
     "private": true,
     "dependencies": {

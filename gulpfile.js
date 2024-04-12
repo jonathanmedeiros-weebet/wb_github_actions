@@ -3127,3 +3127,21 @@ gulp.task('7copas.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('cravei.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "cravei.bet",
+        banca: "CRAVEI.BET",
+        styles: ""
+    });
+});
+
+gulp.task('miamipix.net', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "miamipix.net",
+        banca: "MIAMI PIX",
+        styles: ""
+    });
+});
