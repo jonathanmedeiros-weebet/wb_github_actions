@@ -160,6 +160,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                         response => {
                             this.messageService.success('Bônus Cancelado');
                             this.submit();
+                            this.getRollovers();
                         },
                         error => {
                             this.handleError(error);
