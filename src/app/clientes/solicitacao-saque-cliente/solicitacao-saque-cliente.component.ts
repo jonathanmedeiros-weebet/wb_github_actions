@@ -26,7 +26,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     modalRef;
 
     pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M'];
-    saques = [];
     respostaSolicitacao;
 
     rotaCompletarCadastro: string;
@@ -90,8 +89,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.createForm();
         const user = JSON.parse(localStorage.getItem('user'));
 
-        this.getSaques();
-
         this.auth.getPosicaoFinanceira()
             .subscribe(
                 posicaoFinanceira => {
@@ -145,6 +142,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         }
     }
 
+    closeAlert(id) {
+        this.el.nativeElement.querySelector(`#${id}`).remove();
+    }
+
     changeHeight() {
         const headerHeight = this.headerHeight;
         const height = window.innerHeight - headerHeight;
@@ -188,7 +189,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 res => {
                     this.respostaSolicitacao = res;
                     this.submitting = false;
-                    this.getSaques();
                 },
                 error => {
                     this.handleError(error);
@@ -238,24 +238,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         } else {
             this.router.navigate([this.rotaCompletarCadastro]);
         }
-    }
-
-    getSaques() {
-        const queryParams: any = {
-            'periodo': '',
-            'tipo': 'saques',
-        };
-
-        this.financeiroService.getDepositosSaques(queryParams)
-            .subscribe(
-                response => {
-                    this.saques = response;
-                },
-                error => {
-                    this.handleError(error);
-                    this.showLoading = false;
-                }
-            );
     }
 
     getRollovers() {
@@ -315,24 +297,5 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         }
 
         return chaveComMascara;
-    }
-
-    formatarChavePix(chavePix: string, tipoChavePix: string): string {
-        let chavePixFormatada: any;
-        switch (tipoChavePix) {
-            case 'phone':
-                chavePixFormatada = chavePix.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-                break;
-            case 'random':
-                chavePixFormatada = chavePix.replace(/^(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})$/, "$1-$2-$3-$4-$5");
-                break;
-            case 'cpf':
-                chavePixFormatada = chavePix.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-                break;
-            default:
-                chavePixFormatada = chavePix;
-                break;
-        }
-        return chavePixFormatada;
     }
 }

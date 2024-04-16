@@ -18,8 +18,7 @@ export class DepositoComponent implements OnInit, OnDestroy {
     whatsapp;
     hasApiPagamentos;
     modalidade;
-    showLoading = true;
-    depositos = [];
+    showLoading = false;
     mobileScreen;
 
     headerHeight = 92;
@@ -55,22 +54,6 @@ export class DepositoComponent implements OnInit, OnDestroy {
         } else {
             this.modalidade = 'pix';
         }
-
-        const queryParams: any = {
-            'periodo': '',
-            'tipo':  'depositos',
-        };
-        this.financeiroService.getDepositosSaques(queryParams)
-            .subscribe(
-                response => {
-                    this.depositos = response;
-                    this.showLoading = false;
-                },
-                error => {
-                    this.handleError(error);
-                }
-
-            );
 
         if (!this.mobileScreen) {
             this.layoutService.currentHeaderHeight

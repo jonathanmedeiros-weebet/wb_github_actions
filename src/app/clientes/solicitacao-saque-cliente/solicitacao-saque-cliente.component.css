@@ -157,6 +157,20 @@
     font-weight: 600;
 }
 
+#sautopay-alert {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 66%;
+    margin-top: 20px;
+    padding: 12px 10px 9px;
+}
+
+#sautopay-alert .sautopay-alert-text {
+    flex: 1;
+}
+
 #details-wrapper .details-safe-withdrawal-alert {
     width: 74%;
     margin-top: 28px;

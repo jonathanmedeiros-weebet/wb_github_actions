@@ -1,10 +1,10 @@
 <div id="deposito-pix">
-    <!-- <div class="alert alert-success alert-dismissible" *ngIf="exibirMensagemPagamento">
+    <div class="alert alert-success alert-dismissible" *ngIf="exibirMensagemPagamento">
         {{'deposito.seuPixFoiCreditado' | translate:{'novoSaldo': novoSaldo} }}
         <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close">
             <span class="close-x" aria-hidden="true">&times;</span>
         </button>
-    </div> -->
+    </div>
     <form [formGroup]="form" (ngSubmit)="solicitarDeposito()" *ngIf="!pix">
         <app-spinner *ngIf="submitting"></app-spinner>
         <div id="deposit-container">

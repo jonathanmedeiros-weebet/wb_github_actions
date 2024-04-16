@@ -214,8 +214,14 @@
         "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
         "chaveAleatoria": "Chave aleatória",
         "history": "Histórico",
+        "transactionHistory": "Histórico de transações",
         "promoCode": "Código promocional",
-        "promoCodePlaceholder": "EX.: BONUSCADASTRO"
+        "promoCodePlaceholder": "EX.: BONUSCADASTRO",
+        "approved": "Aprovado",
+        "failed": "Reprovado",
+        "resultWereNotFound": "Nenhum resultado encontrado",
+        "resultWereFound": "Foi encontrado 1 resultado",
+        "resultsWereFound": "Foram encontrados {{ quantity }} resultados"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -332,7 +338,7 @@
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",
         "informeOValor": "Informe o valor",
-        "infoSautoPay": "Saques solicitados após as 14:00h serão transferidos somente no próximo dia útil.",
+        "infoSautoPay": "Saques solicitados pela SautoPay após as 14:00h serão transferidos somente no próximo dia útil.",
         "saqueERegistrado": "Saque - Registrado",
         "paraProsseguirAtualizeChavePix": "Para prosseguir, atualize seu cadastro com a sua chave PIX",
         "preenchaCadastroCompleto": "Por favor, preencha seu cadastro por completo para realizar a solictação de saque.",

@@ -214,8 +214,14 @@
         "alertaSaque": "Only withdrawals to Pix keys linked to the account holder are allowed.",
         "chaveAleatoria": "Random key",
         "history": "History",
+        "transactionHistory": "Transaction history",
         "promoCode": "Promo code",
-        "promoCodePlaceholder": "EX.: BONUSREGISTRATION"
+        "promoCodePlaceholder": "EX.: BONUSREGISTRATION",
+        "approved": "Approved",
+        "failed": "Failed",
+        "resultWereNotFound": "No results found",
+        "resultWereFound": "1 result were found",
+        "resultsWereFound": "{{ quantity }} results were found"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -332,7 +338,7 @@
     "saques": {
         "enterAmountWithdrawal": "Enter the amount for the withdrawal",
         "informeOValor": "Enter the amount",
-        "infoSautoPay": "Withdrawals requested after 2pm will only be transferred on the next business day.",
+        "infoSautoPay": "Withdrawals requested by SautoPay after 2:00 PM will be transferred on the next business day only.",
         "saqueERegistrado": "Withdrawal - Registered",
         "paraProsseguirAtualizeChavePix": "To proceed, update your registration with your PIX key",
         "preenchaCadastroCompleto": "Please complete your registration completely to make the withdrawal request.",
