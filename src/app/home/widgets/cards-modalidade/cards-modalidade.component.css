@@ -8,14 +8,15 @@
     justify-content: space-between;
     align-items: center;
     gap: 16px;
+    overflow: auto;
 
     margin: 0;
     padding: 0;
 }
 
-
 .list-modalidades ul li {
     display: flex;
+    min-width: 205px;
     gap: 5px;
     flex-direction: column;
     flex: 1;

@@ -163,6 +163,38 @@
     font-size: 50px;
 }
 
+.game-tile:hover .info-game label, .game-tile:hover .info-game p {
+    opacity: 0.3;
+}
+
+.info-game {
+    padding: 30px 20px 10px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    color: #fff;
+    background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    transition: .300s;
+}
+
+.info-game p {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-shadow: 2px 2px 5px black;
+}
+
+.info-game label {
+    font-size: 12px;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
 .gameBloqueado {
     color: var(--highlight);
 }
@@ -364,7 +396,7 @@
     }
 
     .game-tile-inline {
-        min-width: var(--gameTileWidth);
+        min-width: 130px;
         margin-bottom: 0;
         margin-left: 20px !important;
     }

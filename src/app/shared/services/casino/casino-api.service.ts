@@ -59,6 +59,19 @@ export class CasinoApiService {
             );
     }
 
+    getGamesHome() {
+        var endpoint = this.central_url+"/games/gamesHome";
+        return this.http.post(String(endpoint),{},this.header.getRequestOptions(true))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getJogosLiberadosBonus() {
         return this.http.post(String(this.central_url+"/games/jogosLiberadosBonus"),{},this.header.getRequestOptions(true))
             .pipe(

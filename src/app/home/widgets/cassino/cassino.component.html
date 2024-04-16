@@ -26,9 +26,9 @@
                 <ng-container>
                     <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
                 </ng-container>
-                <div class="logo-game-background"></div>
-                <div class="logo-game">
-                    <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
+                <div class="info-game">
+                    <p>{{game.gameName}}</p>
+                    <label>{{game.fornecedor}}</label>
                 </div>
                 <div class="game-tile-buttons">
                     <ng-container *ngIf="!isDemo">

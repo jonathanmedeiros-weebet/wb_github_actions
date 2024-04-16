@@ -1,13 +1,11 @@
 <div class="home-container">
-
     <app-banners></app-banners>
 
     <app-cards-modalidade class="widgets"></app-cards-modalidade>
-    <app-cassino class="widgets" linkAll="/casino/c/wall/todos" [games]="gamesCassino"></app-cassino>
-    <app-cassino class="widgets" linkAll="/casino/cl/wall-live/todos" [games]="gamesCassino" [title]="'geral.cassinoAoVivo' | translate"></app-cassino>
+    <app-cassino class="widgets" linkAll="/casino/c/wall/todos" [games]="gamesPopulares"></app-cassino>
+    <app-cassino class="widgets" linkAll="/casino/cl/wall-live/todos" [games]="gamesPopularesAoVivo" [title]="'geral.cassinoAoVivo' | translate"></app-cassino>
     <app-jogos-aovivo class="widgets"></app-jogos-aovivo>
     <app-jogos-destaque class="widgets"></app-jogos-destaque>
-
 </div>
 
 <app-footer></app-footer>

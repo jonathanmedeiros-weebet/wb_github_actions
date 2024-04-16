@@ -8,8 +8,8 @@ import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.serv
 })
 export class HomeComponent implements OnInit {
     @ViewChildren('scrollGames') gamesScroll: QueryList<ElementRef>;
-    gamesCassino = [];
-    gamesDestaque = [];
+    gamesPopulares = [];
+    gamesPopularesAoVivo = [];
 
     isMobile = false;
     qtdItens = 0;
@@ -20,11 +20,9 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.casinoApi.getGamesList(false).subscribe(response => {
-            this.gamesCassino = response.gameList.filter(function(game) {
-                return game.dataType !== 'VSB';
-            });
-            this.gamesDestaque = response.populares;
+        this.casinoApi.getGamesHome().subscribe(response => {
+            this.gamesPopulares = response.populares;
+            this.gamesPopularesAoVivo = response.popularesAoVivo;
         }, erro => { console.log(erro) });
     }
 }
