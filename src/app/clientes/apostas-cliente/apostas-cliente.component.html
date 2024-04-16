@@ -103,7 +103,7 @@
                         <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta) }}">
                             <td>{{ aposta.codigo }}</td>
                             <td *ngIf="tabSelected == 'cassino'">{{ aposta.game | formatarNomeJogoCassino }}</td>
-                            <td>{{ aposta.horario }}</td>
+                            <td>{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm' }}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td>{{ aposta.premio | currency }}</td>
                             <td class="acoes-aposta" *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'">

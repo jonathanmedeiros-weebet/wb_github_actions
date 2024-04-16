@@ -165,8 +165,16 @@ export class ApostaComponent implements OnInit {
         response.forEach(aposta => {
             if (!aposta.cartao_aposta) {
                 this.totais.valor += aposta.valor;
-                if (aposta.resultado === 'ganhou') {
-                    this.totais.premio += aposta.premio;
+                if (aposta.tipo === 'loteria') {
+                    aposta.itens.forEach(lotteryItem => {
+                        if (lotteryItem.status === 'ganhou') {
+                            this.totais.premio += lotteryItem.premio;
+                        }
+                    });
+                } else {
+                    if (aposta.resultado === 'ganhou') {
+                        this.totais.premio += aposta.premio;
+                    }
                 }
             }
         });

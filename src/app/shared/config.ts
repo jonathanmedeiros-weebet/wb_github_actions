@@ -1,7 +1,7 @@
 const _host = '//weebet.local';
 // const _host = '//central.demo.wee.bet';
 // const _center = '//localhost:3002';
-const _loki = '//localhost:8000'
+const _loki = '//localhost:8000';
 const _center = 'https://hermes.wee.bet';
 const _live = 'https://streaming.wee.bet';
 // const _live = '//localhost:3003';
