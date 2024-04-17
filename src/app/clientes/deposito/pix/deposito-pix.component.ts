@@ -115,6 +115,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     paymentMethod;
     paymentMethodSelected = '';
     sautoPayQr;
+    bonusType = '';
+    bonusTypeFormatted = '';
+    bonusTypeFormattedTranslated = '';
 
     novoSaldo;
     valorMinDeposito;
@@ -164,6 +167,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             .subscribe(
                 res => {
                     this.permitirBonusPrimeiroDeposito = res.permitir_bonificacao;
+                    this.bonusType = res.bonus_type == 'primeiro_deposito' ? 'rollover.firstDepositBonus' : 'rollover.depositBonus';
                     this.bonusEsportivo = res.bonus_esportivo;
                     this.bonusCassino = res.bonus_cassino;
                     this.onlyOneModality = !(res.bonus_esportivo && res.bonus_cassino);

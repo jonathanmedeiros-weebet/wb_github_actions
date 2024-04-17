@@ -382,7 +382,7 @@
         "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Depósitos recentes",
         "depositDetails": "Detalhes do depósito",
-        "depositText": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, selecione se deseja receber o bônus de primeiro depósito, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
+        "depositText": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, selecione se deseja receber o {{bonusType}}, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
         "depositTextWithoutBonus": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento."
     },
     "footer": {
@@ -453,7 +453,7 @@
         "qtdMovimentacoesNoPeriodo": "Qtd. Movimentações no Período de {{de}} - {{ate}}",
         "nenhumaMovimentacaoNoPeriodo": "Nenhuma movimentação realizada no período e/ou com filtro atual.",
         "natureza": "Natureza",
-        "desejaReceberBonusPrimeiroDeposito": "Deseja receber o bônus de primeiro depósito?",
+        "desejaReceberBonusPrimeiroDeposito": "Deseja receber o {{bonusType}}?",
         "receberBonus": "Receber Bônus - Esporte",
         "naoQueroBonus": "Não quero Bônus",
         "valorMinimoSaque": "Valor mínimo de saque",
@@ -474,7 +474,9 @@
         "bonusForfeited": "Bônus descartado",
         "noBonus": "Sem bônus",
         "bonusWillBeForfeited": "Seu bônus será perdido",
-        "upTo": "até"
+        "upTo": "até",
+        "firstDepositBonus": "bônus de primeiro depósito",
+        "depositBonus": "bônus de depósito"
     },
     "indique_ganhe":{
         "indiqueGanhe": "Indique e ganhe",

@@ -382,7 +382,7 @@
         "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Recent deposits",
         "depositDetails": "Deposit details",
-        "depositText": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, select whether you want to receive the first deposit bonus, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
+        "depositText": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, select whether you want to receive the {{bonusType}}, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "depositTextWithoutBonus": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment."
     },
     "footer": {
@@ -453,7 +453,7 @@
         "qtdMovimentacoesNoPeriodo": "Qty. Movements in the Period from {{de}} - {{ate}}",
         "nenhumaMovimentacaoNoPeriodo": "No transactions performed in the period and/or with current filter.",
         "natureza": "Nature",
-        "desejaReceberBonusPrimeiroDeposito": "Do you want to receive first deposit bonus?",
+        "desejaReceberBonusPrimeiroDeposito": "Do you want to receive {{bonusType}}?",
         "receberBonus": "Receive Bonus - Sport",
         "naoQueroBonus": "I don't want bonus",
         "valorMinimoSaque": "Minimum withdrawal amount",
@@ -474,7 +474,9 @@
         "bonusForfeited": "Bonus forfeited",
         "noBonus": "No bonus",
         "bonusWillBeForfeited": "Your bonus will be forfeited.",
-        "upTo": "up to"
+        "upTo": "up to",
+        "firstDepositBonus": "first deposit bonus",
+        "depositBonus": "deposit bonus"
     },
     "indique_ganhe":{
         "indiqueGanhe": "Refer and earn",
