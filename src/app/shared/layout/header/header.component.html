@@ -78,7 +78,7 @@
                         <span><i class="fa-solid fa-user"></i></span>
                     </div>
                 </a>
-                <div class="dropdown-menu-right" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+                <div class="dropdown-menu-right dropdown-menu-custom" aria-labelledby="navbarDropdown" ngbDropdownMenu>
                     <a class="btnClose hide-desktop" aria-label="Close" (click)="dropDownConta.close()">
                         <span aria-hidden="true">&times;</span>
                     </a>
@@ -619,17 +619,17 @@
         </ng-container>
 
         <div class="category" *ngIf="cassinoAtivo">
-            <a [ngClass]="activeMenuCassino()" [routerLink]="['/casino/c']">
+            <a [routerLink]="['/casino']" routerLinkActive="active">
                 <span>{{'menu.cassino' | translate}}</span>
             </a>
         </div>
         <div class="category" *ngIf="cassinoAtivo">
-            <a [ngClass]="activeMenuCassinoLive()" [routerLink]="['/casino/cl/']">
+            <a [routerLink]="['/live-casino']" routerLinkActive="active">
                 <span>{{'menu.cassino-aovivo' | translate}}</span>
             </a>
         </div>
         <div class="category" *ngIf="virtuaisAtivo">
-            <a [routerLink]="['/casino/v']" routerLinkActive="active">
+            <a [routerLink]="['/virtual-sports']" routerLinkActive="active">
                 <span>{{'menu.virtuais' | translate}}</span>
             </a>
         </div>

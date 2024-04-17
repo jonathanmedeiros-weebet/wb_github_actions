@@ -100,7 +100,7 @@ export class FinanceiroService {
 
     bonusPrimeiroDepositoPermitido(): Observable<any> {
         const requestOptions = this.header.getRequestOptions(true);
-        return this.http.get(`${this.financeiroUrl}/permitir-bonus-primeiro-deposito`, requestOptions)
+        return this.http.get(`${this.financeiroUrl}/permitir-bonus`, requestOptions)
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)

@@ -1,5 +1,5 @@
 <div class="wall-container">
-    <app-banners pagina="cassino" *ngIf="!showLoadingIndicator"></app-banners>
+    <app-banners pagina="cassino" [showLoadingIndicator]="showLoadingIndicator"></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
 
