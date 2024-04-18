@@ -7,7 +7,7 @@
     </div>
     <form [formGroup]="form" (ngSubmit)="solicitarDeposito()" *ngIf="!pix">
         <app-spinner *ngIf="submitting"></app-spinner>
-        <div id="deposit-container">
+        <div id="deposit-container" *ngIf="!submitting">
             <section id="payment-method-column" class="hide-mobile">
                 <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                 <div class="options-container payment-method-options">

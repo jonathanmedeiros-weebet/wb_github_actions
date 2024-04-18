@@ -9,6 +9,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-
     template: `
     <div class="modal-body">
         <h4 class="modal-title text-center fs-20px" id="modal-basic-title">Depósito PIX</h4>
-        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('pix-modal-closed')">
             <i class="fa fa-times"></i>
         </a>
 
@@ -107,6 +108,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     @ViewChild('verificarPromocaoModal', {static: true}) verificarPromocaoModal;
 
     modalPromocao;
+    pixModal;
     pix: DepositoPix;
 
     rolloverAtivo: Rollover[] = [];
@@ -149,7 +151,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private messageService: MessageService,
         private modalService: NgbModal,
         private paramsLocais: ParametrosLocaisService,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private router: Router
     ) {
         super();
     }
@@ -277,21 +280,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             this.financeiroService.processarPagamento(detalhesPagamento)
                 .subscribe(
                     res => {
-                        const modalRef = this.modalService.open(NgbdModalContent, { centered: true });
-                        modalRef.componentInstance.valorPix = this.helperService.moneyFormat(res.valor);
-                        modalRef.componentInstance.qrCodeBase64 = res.qr_code_base64;
-                        modalRef.componentInstance.qrCode = res.qr_code;
-
                         this.pix = res;
-                        if (this.paymentMethod === 'sauto_pay') {
-                            const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
-                            this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
-                        }
-
-                        this.clearSetInterval = setInterval(() => {
-                            this.verificarPagamento(res);
-                        }, 10000);
-
+                        this.openPixModal();
                         this.submitting = false;
                     },
                     error => {
@@ -299,6 +289,35 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         this.submitting = false;
                     }
                 );
+    }
+
+    openPixModal() {
+        if (!this.pix) {
+            return;
+        }
+
+        this.pixModal = this.modalService.open(NgbdModalContent, { centered: true });
+        this.pixModal.componentInstance.valorPix = this.helperService.moneyFormat(this.pix.valor);
+        this.pixModal.componentInstance.qrCodeBase64 = this.pix.qr_code_base64;
+        this.pixModal.componentInstance.qrCode = this.pix.qr_code;
+
+        if (this.paymentMethod === 'sauto_pay') {
+            const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
+            this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
+        }
+
+        this.clearSetInterval = setInterval(() => {
+            this.verificarPagamento(this.pix);
+        }, 10000);
+
+        this.pixModal.result.then(
+            (result) => {},
+            (reason) => {
+                if (reason == 'pix-modal-closed') {
+                    this.novoPix();
+                }
+            }
+        );
     }
 
     copyInputMessage(inputElement) {
@@ -310,7 +329,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
     novoPix() {
         this.pix = null;
-        this.form.patchValue({'valor': 0});
+        this.form.patchValue({'valor': 0, 'bonus': '', 'promoCode': ''});
         this.submitting = false;
         clearInterval(this.clearSetInterval);
         this.verificacoes = 0;
@@ -326,9 +345,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                     res => {
                         if (res.deposito_status === 'approved') {
                             this.modalService.dismissAll();
-                            this.novoSaldo = res.novo_saldo;
-                            this.exibirMensagemPagamento = true;
                             this.novoPix();
+                            this.router.navigate(['clientes/transacoes-historico']);
                         }
                     },
                     error => {
