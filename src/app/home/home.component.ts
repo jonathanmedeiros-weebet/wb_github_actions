@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChildren, QueryList } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
+import { HomeService } from '../shared/services/home.service';
 
 @Component({
     selector: 'app-home',
@@ -15,8 +16,11 @@ export class HomeComponent implements OnInit {
     qtdItens = 0;
     modalRef;
 
+    widgets = [];
+
     constructor(
         private casinoApi: CasinoApiService,
+        private homeService: HomeService
     ) { }
 
     ngOnInit(): void {
@@ -24,5 +28,9 @@ export class HomeComponent implements OnInit {
             this.gamesPopulares = response.populares;
             this.gamesPopularesAoVivo = response.popularesAoVivo;
         }, erro => { console.log(erro) });
+
+        this.homeService.getPosicaoWidgets().subscribe(response => {
+            this.widgets = response
+        })
     }
 }

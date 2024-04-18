@@ -2,10 +2,12 @@
     <app-banners></app-banners>
 
     <app-cards-modalidade class="widgets"></app-cards-modalidade>
-    <app-cassino class="widgets" linkAll="/casino/c/wall/todos" [games]="gamesPopulares"></app-cassino>
-    <app-cassino class="widgets" linkAll="/casino/cl/wall-live/todos" [games]="gamesPopularesAoVivo" [title]="'geral.cassinoAoVivo' | translate"></app-cassino>
-    <app-jogos-aovivo class="widgets"></app-jogos-aovivo>
-    <app-jogos-destaque class="widgets"></app-jogos-destaque>
+    <ng-container *ngFor="let widget of widgets">
+        <app-cassino class="widgets" linkAll="/casino/c/wall/todos" [games]="gamesPopulares" *ngIf="widget.nome == 'Cassino'"></app-cassino>
+        <app-cassino class="widgets" linkAll="/casino/cl/wall-live/todos" [games]="gamesPopularesAoVivo" [title]="'geral.cassinoAoVivo' | translate" *ngIf="widget.nome == 'Cassino Ao Vivo'"></app-cassino>
+        <app-jogos-aovivo class="widgets" *ngIf="widget.nome == 'Jogos Ao Vivo'"></app-jogos-aovivo>
+        <app-jogos-destaque class="widgets" *ngIf="widget.nome == 'Jogos Destaque'"></app-jogos-destaque>
+    </ng-container>
 </div>
 
 <app-footer></app-footer>
