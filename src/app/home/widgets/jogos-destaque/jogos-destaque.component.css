@@ -7,6 +7,14 @@ owl-carousel-o {
     width: 100%;
 }
 
+.scroll-button {
+    cursor: pointer;
+}
+
+.scroll-button:hover {
+    color: var(--highlight);
+}
+
 .slider-header {
     display: flex;
     font-weight: 600;

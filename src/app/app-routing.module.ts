@@ -21,7 +21,8 @@ const appRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                component: HomeComponent
+                component: HomeComponent,
+                canActivate: [HomeGuard]
             },
             {
                 path: 'cadastro',

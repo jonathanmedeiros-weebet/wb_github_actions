@@ -18,7 +18,7 @@
                 <div class="jogo-destaque" (click)="maisCotacoes(jogoDestaque.fi)" >
                     <div class="header">
                         <span>
-                            Pernambucano
+                            {{ jogoDestaque.campeonato.nome }}
                         </span>
                         <span>
                             {{ jogoDestaque.horario }}
@@ -52,13 +52,13 @@
                     </div>
 
                     <div class="jogo-destaque-odds">
-                        <div *ngFor="let cotacao of []"
-                        [ngClass]="{'odd-disabled': !cotacaoPermitida(cotacao.valorFinal)}"
+                        <div *ngFor="let cotacao of jogoDestaque.cotacoes"
+                        [ngClass]="{'odd-disabled': !cotacaoPermitida(cotacao.valor)}"
                         class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque.fi + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
-                        (click)="cotacaoPermitida(cotacao.valorFinal) && addCotacao($event, jogoDestaque, cotacao)">
+                        (click)="cotacaoPermitida(cotacao.valor) && addCotacao($event, jogoDestaque, cotacao)">
                             {{ helperService.apostaTipoLabel(cotacao.chave, 'sigla') }}
-                            <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
-                                <span class="cotacao" >{{ cotacao.valorFinal }}</span>
+                            <ng-container *ngIf="cotacaoPermitida(cotacao.valor);else cotacaoBloqueada">
+                                <span class="cotacao" >{{ cotacao.valor }}</span>
                             </ng-container>
                             <ng-template #cotacaoBloqueada>
                                 <span class="cotacao"><i class="fa fa-lock"></i></span>

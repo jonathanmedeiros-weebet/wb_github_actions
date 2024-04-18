@@ -310,9 +310,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         const cotacaoFora = cotacoes.find(k => k.chave === 'fora_90');
 
         return [
-            cotacaoCasa ?? {nome: 'Casa', lock: true},
-            cotacaoEmpate ?? {nome: 'Empate', lock: true},
-            cotacaoFora ?? {nome: 'Fora', lock: true}
+            cotacaoCasa ?? { nome: 'Casa', lock: true },
+            cotacaoEmpate ?? { nome: 'Empate', lock: true },
+            cotacaoFora ?? { nome: 'Fora', lock: true }
         ];
     }
 

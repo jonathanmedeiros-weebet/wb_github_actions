@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnCh
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BilheteEsportivoService, HelperService, JogoService } from 'src/app/services';
+import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService, ParametrosLocaisService } from 'src/app/services';
 
 @Component({
     selector: 'app-jogos-destaque',
@@ -21,6 +21,8 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     itens = [];
     itensSelecionados = {};
     isDragging = false;
+    camps = [];
+    jogosBloqueados = [];
 
     jogosDestaquesIds = [];
 
@@ -41,10 +43,37 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
         private bilheteService: BilheteEsportivoService,
+        private paramsService: ParametrosLocaisService,
+        private campeonatoService: CampeonatoService,
     ) { }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+
+        let queryParams = {
+            'sport_id': 1,
+            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
+            'odds': ['casa_90', 'empate_90', 'fora_90']
+        };
+
+        this.campeonatoService.getCampeonatos(queryParams)
+            .pipe(
+                takeUntil(this.unsub$)
+            )
+            .subscribe(
+                campeonatos => {
+                    this.camps = campeonatos;
+
+                    this.camps = this.camps.filter(campeonato => {
+                        const jogosAtivos = campeonato.jogos.filter(jogo => !this.jogosBloqueados.includes(jogo.event_id));
+                        if (jogosAtivos.length > 0) {
+                            return campeonato;
+                        }
+                    });
+                    this.getJogosDestaques();
+                },
+                error => console.log(error)
+            );
 
         // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
@@ -61,7 +90,6 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
                 this.cd.markForCheck();
             });
 
-        this.getJogosDestaques();
         this.remapJogosDestaque();
     }
 
@@ -76,29 +104,29 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
             .subscribe(jogos => {
                 this.jogosDestaque = jogos.results;
                 this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
-                // this.mapJogosDestaque();
-                console.log('JOGOS:', this.jogosDestaque);
+                this.mapJogosDestaque();
             });
     }
 
-    // mapJogosDestaque() {
-    //     let jogosDestaques = [];
-    //
-    //     if (this.camps && this.camps.length > 0) {
-    //         this.camps.forEach(camp => {
-    //             const jogosSele = camp.jogos.filter(jogo => {
-    //                 return this.jogosDestaquesIds.includes(jogo._id + '');
-    //             });
-    //
-    //             jogosDestaques = jogosDestaques.concat(jogosSele);
-    //         });
-    //     }
-    //
-    //     this.jogosDestaque = jogosDestaques;
-    //     this.cd.detectChanges();
-    // }
+    mapJogosDestaque() {
+        let jogosDestaques = [];
+
+        if (this.camps && this.camps.length > 0) {
+            this.camps.forEach(camp => {
+                const jogosSele = camp.jogos.filter(jogo => {
+                    return this.jogosDestaquesIds.includes(jogo._id + '');
+                });
+
+                jogosDestaques = jogosDestaques.concat(jogosSele);
+            });
+        }
+
+        this.jogosDestaque = jogosDestaques;
+        this.cd.detectChanges();
+    }
 
     remapJogosDestaque() {
+        console.log('CHANGE', this.jogosDestaque);
         this.jogosDestaque.forEach((jogo) => {
             jogo.cotacoes.slice(0, 3).forEach((cotacao) => {
                 if (!cotacao.valorFinal) {

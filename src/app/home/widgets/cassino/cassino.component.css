@@ -112,6 +112,7 @@
     background-color: var(--header);
     position: relative;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 .game-tile img {
@@ -396,7 +397,7 @@
     }
 
     .game-tile-inline {
-        min-width: 270px;
+        min-width: 216px;
         margin-bottom: 0;
         margin-left: 20px !important;
     }

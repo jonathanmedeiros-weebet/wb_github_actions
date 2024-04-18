@@ -2,9 +2,9 @@
     width: 300px;
     position: absolute;
     bottom: 0;
-    right: 80px;
+    right: 20px;
 
-    z-index: 100;
+    z-index: 1001;
 }
 
 .header-bilhete {
