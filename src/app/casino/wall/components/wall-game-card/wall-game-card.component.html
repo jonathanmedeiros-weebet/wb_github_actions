@@ -1,4 +1,4 @@
-<div class="game-tile game-tile-inline">
+<div class="game-tile" [ngClass]="{'game-tile-inline': isCardInline}">
     <ng-container>
         <img loading="lazy" title="{{game.gameName}}" [src]="gameImageUrl">
     </ng-container>

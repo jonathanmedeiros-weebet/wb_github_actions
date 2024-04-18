@@ -15,9 +15,7 @@
 .bloco {
     position: relative;
     padding: 5px 20px;
-    max-width: 1910px;
     margin: 0 auto;
-    flex: 1;
     width: 100%;
 }
 .bloco .titulo {
@@ -30,6 +28,16 @@
 .games-container,
 .provider-container {
     position: relative;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Define as colunas automáticas com um mínimo de 150px e ocupando toda a largura disponível */
+    gap: 20px;
+}
+
+.game-grid::-webkit-scrollbar {
+    display: none;
 }
 
 .game-list {
@@ -301,6 +309,9 @@
 }
 
 @media only screen and (min-width: 1025px) {
+    .game-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
 
     .content-modal-fornecedores{
         display: flex;
@@ -310,3 +321,9 @@
     }
 }
 
+
+@media only screen and (min-width: 687px) and (max-width: 1024px) {
+    .game-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

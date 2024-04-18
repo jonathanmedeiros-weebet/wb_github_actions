@@ -3,6 +3,8 @@
     background-color: var(--header);
     position: relative;
     border-radius: 5px;
+    width: 100%;
+    height: 100%;
 }
 .game-tile img {
     position: relative;
@@ -46,8 +48,6 @@
 }
 
 .game-tile .game-button-lock {
-    /* color: var(--header);
-    background-color: var(--highlight); */
     width: 60%;
     height: 35%;
     font-size: 50px;
@@ -141,12 +141,10 @@
         margin-right: 0;
         margin-top: 0;
     }
-    .game-tile {
+    .game-tile-inline {
         min-width: 200px;
         max-width: 200px;
         min-height: 145px;
-        margin-top: 10px;
-        margin-right: 10px;
     }
 
     .ver-todos a {
@@ -168,8 +166,6 @@
 
 @media only screen and (min-width: 1025px) {
     .game-tile {
-        --gameTileWidth: calc((100vw / 6) - 16px);
-        width: var(--gameTileWidth);
         margin-left: 20px;
         margin-bottom: 20px;
     }
@@ -183,7 +179,8 @@
     }
 
     .game-tile-inline {
-        /* min-width: 270px; */
+        --gameTileWidth: calc((100vw / 6) - 16px);
+        width: var(--gameTileWidth);
         margin-bottom: 0;
         margin-left: 20px !important;
     }
@@ -194,9 +191,8 @@
 }
 
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
-    .game-tile {
+    .game-tile-inline {
         width: 30%;
-        /* height: 200px; */
     }
 }
 

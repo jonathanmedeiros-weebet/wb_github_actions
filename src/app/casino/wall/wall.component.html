@@ -64,7 +64,6 @@
     </div>
 
     <div class="wall-inner" *ngIf="!this.term && !this.termFornecedor && !showLoadingIndicator && isHomeCassino; else cassinoGameList">
-        
         <div class="bloco">
             <app-wall-section
                 sectionId="destaques"
@@ -251,62 +250,17 @@
             <div class="sem-evento" *ngIf="gameList && !gameList.length">
                 {{'geral.nenhumJogoEncontrado' | translate}}!
             </div>
-            <div class="game-list">
-                <div class="game-tile" *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }">
-                    <ng-container>
-                        <img title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                    </ng-container>
-                    <div class="logo-game-background"></div>
-                    <div class="logo-game">
-                        <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                    </div>
-                    <div class="game-tile-buttons">
-                        <ng-container *ngIf="!isDemo">
-                                <a *ngIf="game.gameDemo"
-                                [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                <ng-container *ngIf="isLoggedIn && isCliente">
-                                    <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                </ng-container>
-                                <ng-container *ngIf="!isLoggedIn">
-                                    <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                </ng-container>
-                        </ng-container>
-                        <ng-container *ngIf="isDemo">
-                            <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                <a
-                                    *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo"
-                                >
-                                    {{'geral.demo' | translate}}
-                                </a>
-                            </ng-container>
-                            <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                <ng-container *ngIf="isLoggedIn">
-                                    <a
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo"
-                                    >
-                                        {{'geral.demo' | translate}}
-                                    </a>
-                                </ng-container>
-                                <ng-container *ngIf="!isLoggedIn">
-                                    <a
-                                        (click)="abrirModalLogin()"
-                                        class="btn btn-xs game-button-demo"
-                                    >
-                                        {{'geral.demo' | translate}}
-                                    </a>
-                                </ng-container>
-                            </ng-container>
-                            <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                            </ng-container>
-                        </ng-container>
-                    </div>
-                </div>
+            <div class="game-grid">
+                <app-wall-game-card
+                    *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
+                    [game]="game"
+                    [blink]="blink"
+                    [isLoggedIn]="isLoggedIn"
+                    [isDemo]="isDemo"
+                    [isCliente]="isCliente"
+                    [isCardInline]="false"
+                    (openModalLogin)="abrirModalLogin()"
+                />
             </div>
         </div>
     </ng-template>

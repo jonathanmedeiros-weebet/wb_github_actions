@@ -13,6 +13,7 @@ export class WallGameCardComponent {
   @Input() isDemo: boolean;
   @Input() isLoggedIn: boolean;
   @Input() isCliente: boolean;
+  @Input() isCardInline: boolean = true;
   @Output() openModalLogin = new EventEmitter();
 
   get gameImageUrl(): string {
