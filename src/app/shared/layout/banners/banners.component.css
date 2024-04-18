@@ -7,8 +7,7 @@
 }
 
 .banners.cassino {
-    max-width: 1680px;
-    margin: 0 115px;
+    padding: 0;
 }
 
 .banners.cassino img {
