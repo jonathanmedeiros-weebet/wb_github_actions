@@ -1,0 +1,23 @@
+.provider-card {
+    width: 149px;
+    height: 66px;
+    background-color: var(--header);
+    border-radius: 5px;
+    border: .5px solid #333333;
+    display: flex;
+    justify-content: center;
+    padding: 15px 30px;
+    cursor: pointer;
+}
+
+.provider-card__image{
+    width: 100%;
+    height: auto;
+}
+
+@media only screen and (min-width: 1025px) {
+    .provider-card {
+        width: calc((100vw / 7.5) - 16px);
+        height: 78px;
+    }
+}

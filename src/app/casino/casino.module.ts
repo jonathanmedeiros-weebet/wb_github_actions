@@ -12,6 +12,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {WallLiveComponent} from "./wall-live/wall-live.component";
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { WallSearchBarComponent } from './wall/components/wall-search-bar/wall-search-bar.component';
+import { WallProviderCardComponent } from './wall/components/wall-provider-card/wall-provider-card.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { WallSearchBarComponent } from './wall/components/wall-search-bar/wall-s
     CasinoWrapperComponent,
     LiveComponent,
     WallSearchBarComponent,
+    WallProviderCardComponent,
   ],
     imports: [
       SharedModule,
