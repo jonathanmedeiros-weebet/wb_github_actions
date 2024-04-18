@@ -1,4 +1,8 @@
-<div class="provider-card" (click)="handleClick()">
+<div
+    class="provider-card"
+    [ngClass]="{'provider-card--selected': selected}"
+    (click)="handleClick()"
+>
     <img
         class="provider-card__image"
         loading="lazy"

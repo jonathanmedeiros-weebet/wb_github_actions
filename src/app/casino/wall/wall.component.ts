@@ -71,18 +71,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     limparCampoSearch;
     qtdItens = 20;
 
-    // SubMenu
-    selectedSubMenu = 'cassino';
-    submenuItems = [];
-    submenu = [];
-    activeSubmenu = true;
-    hideSubmenu = false;
+    public fornecedorSelecionado: string;
 
-    menuWidth;
-    scrollWidth;
-    rightDisabled = false;
-    leftDisabled = true;
-    centered = false;
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
@@ -105,15 +95,11 @@ export class WallComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.isVirtual = this.route.snapshot.data['virtual_sports'] ? true : false;
 
-        this.atualizarSubmenu();
         this.cd.detectChanges();
-        this.checkScrollWidth();
         this.computeResizeChanges();
 
         this.translate.onLangChange.subscribe(() => {
-            this.atualizarSubmenu();
             this.cd.detectChanges();
-            this.checkScrollWidth();
             this.computeResizeChanges();
         });
 
@@ -150,7 +136,6 @@ export class WallComponent implements OnInit, AfterViewInit {
 
                 if (this.isVirtual) {
                     this.isHomeCassino = false;
-                    this.activeSubmenu = false;
                     this.sideBarService.changeItens({
                         contexto: 'virtuais',
                         dados: {}
@@ -267,7 +252,6 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     handleChangeCategoria(categoria: string) {
-        this.selectedSubMenu = categoria;
         this.isHomeCassino = false;
 
         if (this.gameFornecedor) {
@@ -307,7 +291,6 @@ export class WallComponent implements OnInit, AfterViewInit {
                 break;
             default:
                 this.gameTitle = this.translate.instant('geral.todos');
-                this.gameList = this.gamesCassino;
                 this.isHomeCassino = (this.gameFornecedor === undefined || this.gameFornecedor === '');
                 break;
         }
@@ -320,49 +303,38 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameFornecedor = fornecedor;
 
         this.filtrarJogos(fornecedor);
-        this.handleChangeCategoria(this.selectedSubMenu);
+        // this.handleChangeCategoria(this.selectedSubMenu);
         this.cd.detectChanges();
     }
 
     filtrarJogos(fornecedor = null) {
-
-        if (fornecedor) {
-            if (fornecedor == 'todos') {
-                this.termFornecedor = null
-            } else {
-                this.termFornecedor = fornecedor;
-            }
-        }
+        this.fornecedorSelecionado = (this.fornecedorSelecionado !== fornecedor) ? fornecedor : 'todos'; // Responsável pela seleção do provedor no front;
+        this.termFornecedor = (this.fornecedorSelecionado && this.fornecedorSelecionado !== 'todos') ? this.fornecedorSelecionado : null;
 
         if (this.term || this.termFornecedor) {
-
-            if (!this.gamesCassinoTemp.length) {
+            if(!this.gamesCassinoTemp.length){
                 this.gamesCassinoTemp = this.gameList;
             } else {
                 this.gameList = this.gamesCassinoTemp;
             }
 
-            this.gamesCassinoFiltrados = this.gameList.filter(jogo => {
-                if (this.term && this.termFornecedor) {
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
-                        return true;
-                    }
-                    return false;
-                } else if (this.term) {
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase())) {
-                        return true;
-                    }
-                    return false;
-                } else {
-                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
-                        return true;
-                    }
-                    return false;
+            const gamesCassinoFiltrados =  this.gameList.filter(jogo => {
+                if(this.term && this.termFornecedor){
+                    return (
+                        jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) &&
+                        jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())
+                    );
+                }
+                
+                if(this.term){
+                    return (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()));
                 }
 
+                return (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase()))
             }).map(jogo => Object.assign({}, jogo));
 
-            this.gameList = this.gamesCassinoFiltrados;
+            this.gameList = gamesCassinoFiltrados;
+            this.gamesCassinoFiltrados = gamesCassinoFiltrados;
 
         } else {
             if (this.gamesCassinoTemp.length) {
@@ -445,164 +417,20 @@ export class WallComponent implements OnInit, AfterViewInit {
         const fornecedoresSet = new Set(games.map(game => game.fornecedor));
         return this.cassinoFornecedores.filter(fornecedor => fornecedoresSet.has(fornecedor.gameFornecedor));
     }
-
-    atualizarSubmenu() {
-        this.submenu = [
-            {
-                id: 'cassino',
-                name: this.translate.instant('submenu.todos'),
-                category: 'cassino',
-                svgIcon: true,
-                svgStroke: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/todos.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: "crash",
-                name: this.translate.instant('submenu.crash'),
-                category: 'cassino',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/crash.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'slot',
-                name: this.translate.instant('submenu.slot'),
-                category: 'cassino',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/slot.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'roleta',
-                name: this.translate.instant('submenu.roleta'),
-                category: 'cassino',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/roleta.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'mesa',
-                name: this.translate.instant('submenu.mesa'),
-                category: 'cassino',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/mesa.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'raspadinha',
-                name: this.translate.instant('submenu.raspadinha'),
-                category: 'cassino',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/raspadinha.svg',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
-                id: 'bingo',
-                name: 'Bingo',
-                category: 'cassino',
-                svgIcon: true,
-                svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/bingo.svg',
-                active: this.paramsService.getOpcoes().salsa_cassino
-            },
-        ];
-
-        this.submenuItems = this.submenu.filter((item) => {
-            return item.active;
-        });
-    }
-
-    checkScrollWidth() {
-        this.scrollWidth = this.scrollMenu.nativeElement.scrollWidth;
-    }
-
+   
     computeResizeChanges() {
         this.cd.detectChanges();
         if (window.innerWidth > 1024) {
-            this.menuWidth = window.innerWidth - 270;
+            // this.menuWidth = window.innerWidth - 270;
             this.isMobile = false;
         } else {
-            this.menuWidth = window.innerWidth;
             this.isMobile = true;
         }
         this.checkScrollButtons();
     }
 
     checkScrollButtons() {
-        if (this.menuWidth >= this.scrollWidth) {
-            this.rightDisabled = true;
-            this.leftDisabled = true;
-        } else {
-            this.rightDisabled = false;
-        }
-
-        this.centered = this.rightDisabled && this.leftDisabled;
         this.cd.detectChanges();
-    }
-
-    scrollLeftSubMenu() {
-        this.scrollMenu.nativeElement.scrollLeft -= 200;
-    }
-
-    scrollRightSubMenu() {
-        this.scrollMenu.nativeElement.scrollLeft += 200;
-    }
-
-    onScrollSubMenu(event) {
-        const scrollLeft = this.scrollMenu.nativeElement.scrollLeft;
-
-        this.leftDisabled = scrollLeft <= 0;
-
-        this.rightDisabled = (this.scrollWidth - (scrollLeft + this.menuWidth)) <= 0;
-    }
-
-    scrollToActiveButton() {
-        if (this.isMobile) {
-            const submenuAtivo = this.submenu.find(submenu => {
-                return submenu.link == this.router.url.split('?')[0];
-            });
-
-            const activeButtonElement = this.el.nativeElement.querySelector(`#${submenuAtivo.id}`);
-            if (activeButtonElement) {
-                this.scrollMenu.nativeElement.scrollLeft = activeButtonElement.offsetLeft - 35;
-            }
-        }
-    }
-
-    svgByRouteCss(route, hover = false) {
-        let svgCss = {
-            'width.px': 18,
-            'fill': 'var(--foreground-sub-nav)'
-        };
-
-        if (this.router.url === route || hover) {
-            svgCss = {
-                'width.px': 18,
-                'fill': 'var(--foreground-highlight)'
-            };
-        }
-
-        return svgCss;
-    }
-
-    svgByRouteCssStroke(route, hover = false) {
-        let svgCss = {
-            'width.px': 18,
-            'stroke': 'var(--foreground-sub-nav)',
-        };
-
-        if (this.router.url === route || hover) {
-            svgCss = {
-                'width.px': 18,
-                'stroke': 'var(--foreground-highlight)'
-            };
-        }
-
-        return svgCss;
-    }
-
-    changeSvgHover(index) {
-        this.submenuItems[index].svgHover = !this.submenuItems[index].svgHover;
     }
 
     onPageScroll(element) {
@@ -616,16 +444,13 @@ export class WallComponent implements OnInit, AfterViewInit {
             const navSubmenu = this.el.nativeElement.querySelector('#nav-submenu');
 
             if (navSubmenu) {
-                if (element.scrollTop > firstScrollTop && !this.hideSubmenu) {
-                    this.hideSubmenu = true;
+                if (element.scrollTop > firstScrollTop) {
                     this.renderer.setStyle(submenuContainer, 'min-height', '0');
                     this.renderer.setStyle(navSubmenu, 'height', '0');
-                } else if (element.scrollTop < firstScrollTop && this.hideSubmenu) {
-                    this.hideSubmenu = false;
+                } else if (element.scrollTop < firstScrollTop) {
                     this.renderer.setStyle(submenuContainer, 'min-height', '40px');
                     this.renderer.setStyle(navSubmenu, 'height', '40px');
-                } else if (element.scrollTop == 0 && this.hideSubmenu) {
-                    this.hideSubmenu = false;
+                } else if (element.scrollTop == 0) {
                     this.renderer.setStyle(submenuContainer, 'min-height', '40px');
                     this.renderer.setStyle(navSubmenu, 'height', '40px');
                 }

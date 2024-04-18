@@ -57,6 +57,7 @@
                 <app-wall-provider-card
                     *ngFor="let fornecedor of cassinoFornecedores"
                     [data]="fornecedor"
+                    [selected]="fornecedorSelecionado == fornecedor.gameFornecedor"
                     (onClick)="filtrarJogos($event)"
                 />
             </div>

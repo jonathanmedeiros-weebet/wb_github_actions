@@ -8,6 +8,7 @@ import { Fornecedor } from '../../wall.component';
 })
 export class WallProviderCardComponent {
   @Input() data: Fornecedor;
+  @Input() selected: boolean = false;
   @Output() onClick = new EventEmitter();
 
   public handleClick() {
