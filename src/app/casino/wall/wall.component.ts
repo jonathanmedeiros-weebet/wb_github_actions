@@ -10,6 +10,12 @@ import { config } from '../../shared/config';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
+export interface Fornecedor {
+    gameFornecedor: string;
+    gameFornecedorExibicao: string;
+    imagem?: string;
+}
+
 @Component({
     selector: 'app-wall',
     templateUrl: './wall.component.html',
@@ -33,7 +39,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     isHome = false;
     isMobile = false;
     salsaCassino;
-    cassinoFornecedores;
+    cassinoFornecedores: Fornecedor[] = [];
     filtroCassinoFornecedores;
     isHomeCassino = true;
     gameList: GameCasino[];
@@ -92,6 +98,10 @@ export class WallComponent implements OnInit, AfterViewInit {
     ) {
     }
 
+    get showFilterBox(): boolean {
+        return !this.showLoadingIndicator && this.gameType !== 'virtuais'
+    }
+
     ngOnInit(): void {
         this.isVirtual = this.route.snapshot.data['virtual_sports'] ? true : false;
 
@@ -119,7 +129,11 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = response.gameList.filter(function(game) {
                 return game.dataType !== 'VSB';
             });
-            this.cassinoFornecedores = response.fornecedores;
+            this.cassinoFornecedores = response.fornecedores.map((fornecedor: Fornecedor) => ({
+                ...fornecedor,
+                imagem: `https://cdn.wee.bet/img/cassino/logos/{{fornecedor.gameFornecedor}}.png`
+            }));
+
             this.gamesDestaque = response.populares;
             this.gamesSlot = this.filterDestaques(this.gamesCassino, 'slot');
             this.gamesCrash = this.filterDestaques(this.gamesCassino, 'crash');
@@ -132,8 +146,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.sub = this.route.params.subscribe(params => {
                 this.gameType = params['game_type'];
                 this.gameFornecedor = params['game_fornecedor'];
-
-                this.isHomeCassino = this.gameFornecedor === undefined;
+                this.isHomeCassino = this.gameType === 'todos' || this.gameType === '' || this.gameFornecedor === undefined;
 
                 if (this.isVirtual) {
                     this.isHomeCassino = false;
@@ -198,6 +211,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.pesquisarTextoAlterado.next($event.target.value);
         this.textoAlterado = $event.target.value;
     }
+
     ngAfterViewInit() {
         this.gamesScrolls.changes.subscribe((scrolls) => {
             this.scrolls = scrolls.toArray();
@@ -222,38 +236,22 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         const scrollLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-left`);
         const scrollRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-right`);
-
-        const fadeLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-left`);
-        const fadeRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-right`);
-
         const maxScrollSize = scrollTemp.nativeElement.clientWidth;
 
         if (scrollLeft <= 0) {
-            if (!this.isMobile) {
-                this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
-                this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
-            }
-            this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
+            this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
         } else {
-            if (!this.isMobile) {
-                this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
-                this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
-            }
-            this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
+            this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
         }
 
         if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 1) {
-            if (!this.isMobile) {
-                this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
-                this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
-            }
-            this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
+            this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
         } else {
-            if (!this.isMobile) {
-                this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
-                this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
-            }
-            this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
+            this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
         }
     }
 
@@ -303,8 +301,13 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.gameList = this.filterModalidades(this.gameList, 'bingo');
                 this.gameTitle = this.translate.instant('cassino.bingo');
                 break;
+            case 'destaques':
+                this.gameList = this.gamesDestaque;
+                this.gameTitle = this.translate.instant('cassino.maisPopulares');
+                break;
             default:
                 this.gameTitle = this.translate.instant('geral.todos');
+                this.gameList = this.gamesCassino;
                 this.isHomeCassino = (this.gameFornecedor === undefined || this.gameFornecedor === '');
                 break;
         }
