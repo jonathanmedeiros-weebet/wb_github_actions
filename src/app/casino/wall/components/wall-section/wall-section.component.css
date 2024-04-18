@@ -1,0 +1,79 @@
+.wall-section {
+    display: flex;
+    font-size: 16px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px 0;
+}
+
+.wall-section__group {
+    display: flex;
+    gap: 10px;
+}
+
+.wall-section__title {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+    color: var(--foreground-header);
+}
+
+.wall-section__see-all {
+    text-align: right;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--highlight);
+    text-decoration: none;
+    line-height: 16px;
+}
+
+.scroll-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.scroll-button {
+    width: 19px;
+    height: 19px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.enabled-scroll-button {
+    background-color: var(--inputs-odds);
+    color: var(--foreground);
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.enabled-scroll-button:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.disabled-scroll-button {
+    opacity: 0.5;
+    cursor: auto;
+    transition: 500ms;
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .wall-section__title {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .scroll-button {
+        width: 24px;
+        height: 24px;
+        font-size: 18px;
+    }
+}

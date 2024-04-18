@@ -11,9 +11,9 @@ import {TranslateModule} from '@ngx-translate/core';
 import {NgxPaginationModule} from "ngx-pagination";
 import {WallLiveComponent} from "./wall-live/wall-live.component";
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { WallSectionComponent } from './wall/components/wall-section/wall-section.component';
 import { WallSearchBarComponent } from './wall/components/wall-search-bar/wall-search-bar.component';
 import { WallProviderCardComponent } from './wall/components/wall-provider-card/wall-provider-card.component';
-
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import { WallProviderCardComponent } from './wall/components/wall-provider-card/
     GameviewComponent,
     CasinoWrapperComponent,
     LiveComponent,
+    WallSectionComponent,
     WallSearchBarComponent,
     WallProviderCardComponent,
   ],
