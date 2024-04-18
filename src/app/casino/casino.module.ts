@@ -14,6 +14,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { WallSectionComponent } from './wall/components/wall-section/wall-section.component';
 import { WallSearchBarComponent } from './wall/components/wall-search-bar/wall-search-bar.component';
 import { WallProviderCardComponent } from './wall/components/wall-provider-card/wall-provider-card.component';
+import { WallGameCardComponent } from './wall/components/wall-game-card/wall-game-card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { WallProviderCardComponent } from './wall/components/wall-provider-card/
     WallSectionComponent,
     WallSearchBarComponent,
     WallProviderCardComponent,
+    WallGameCardComponent,
   ],
     imports: [
       SharedModule,
