@@ -3106,3 +3106,13 @@ gulp.task('miamipix.net', function (done) {
         styles: ""
     });
 });
+
+
+gulp.task('betfeijo.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betfeijo.wee.bet",
+        banca: "BET FEIJÓ",
+        styles: ""
+    });
+});

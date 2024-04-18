@@ -326,7 +326,8 @@
         "camaraobet.com": "gulp camaraobet.com",
         "7copas.bet": "gulp 7copas.bet",
         "cravei.bet": "gulp cravei.bet",
-        "miamipix.net": "gulp miamipix.net"
+        "miamipix.net": "gulp miamipix.net",
+        "betfeijo.wee.bet": "gulp betfeijo.wee.bet"
     },
     "private": true,
     "dependencies": {
