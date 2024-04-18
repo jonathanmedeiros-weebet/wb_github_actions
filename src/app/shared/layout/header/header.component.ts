@@ -1,4 +1,3 @@
-import { RolloverComponent } from './../../../clientes/rollover/rollover.component';
 import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {IsActiveMatchOptions, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
@@ -37,6 +36,7 @@ import {ConfiguracoesComponent} from '../../../clientes/configuracoes/configurac
 import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
+import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
 
 @Component({
     selector: 'app-header',
@@ -47,6 +47,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
     @ViewChild('indiqueGanheCard', {read: ElementRef}) indiqueGanheCard: ElementRef;
+    paginaPromocaoHabilitado = false;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -70,6 +71,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     aoVivoAtivo;
     cassinoAtivo;
     virtuaisAtivo;
+    parlaybayAtivo;
     LOGO = config.LOGO;
     appVersion;
     whatsapp;
@@ -200,9 +202,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.esporteAtivo = this.paramsService.getOpcoes().esporte;
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
+        this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
+        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
-        this.valorGanhoPorIndicacao = this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao;
+        this.valorGanhoPorIndicacao =  (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
@@ -227,7 +231,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
- 
+
         if(this.mostrarSaldo == null){
             localStorage.setItem('exibirSaldo', 'true');
             this.mostrarSaldo = 'true';
@@ -264,6 +268,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         if (this.indiqueGanheHabilitado && (!this.isLoggedIn || this.isCliente) && !this.activeGameCassinoMobile()) {
             this.layoutService.changeIndiqueGanheCardHeight(37);
+        }
+
+        if(!this.indiqueGanheHabilitado){
+            this.layoutService.indiqueGanheRemovido(true);
         }
     }
 
@@ -418,7 +426,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirRollovers() {
-        this.modalService.open(RolloverComponent);
+        this.modalService.open(PromocaoComponent);
     }
 
     abrirIndiqueGanhe() {
@@ -520,6 +528,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.renderer.setStyle(card, 'padding', '0 20px');
         setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
         setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(0); }, 300);
+        this.layoutService.indiqueGanheRemovido(true);
     }
 
     btnCardOnMouseOver() {

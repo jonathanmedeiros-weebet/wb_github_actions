@@ -31,6 +31,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     isCliente;
     isLoggedIn;
     appMobile;
+    netPrize = 0;
     modalCompartilhamentoRef;
     modalCarregamentoRef;
 
@@ -52,6 +53,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         this.appMobile = this.authService.isAppMobile();
         this.isCliente = this.authService.isCliente();
         this.isLoggedIn = this.authService.isLoggedIn();
+        this.calculateNetPrize();
 
         this.sorteioService.getSorteios()
             .pipe(takeUntil(this.unsub$))
@@ -96,7 +98,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
 
     shared() {
         if (this.appMobile) {
-            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal,{
+            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal, {
                 ariaLabelledBy: 'modal-basic-title',
                 windowClass: 'modal-pop-up',
                 centered: true,
@@ -120,7 +122,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
                     }
                 },
                 (reason) => { }
-            );           
+            );
         } else {
             if (newNavigator.share) {
                 newNavigator.share({
@@ -152,5 +154,41 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
 
     print() {
         this.printService.lotteryTicket(this.aposta);
+    }
+
+    calculateNetPrize() {
+        this.netPrize = 0;
+        let prizes = 0;
+
+        this.aposta.itens.forEach(item => {
+            if (item.status === 'ganhou') {
+                prizes += item.premio;
+            }
+        });
+
+        this.netPrize = prizes * ((100 - this.aposta.passador.percentualPremio) / 100);
+        this.aposta.netPrize;
+    }
+
+    calcularPremioLoteria(valor, cotacao) {
+        let result = valor * cotacao;
+
+        if (result > this.paramsService.getOpcoes().valor_max_premio_loterias) {
+            result = this.paramsService.getOpcoes().valor_max_premio_loterias;
+        }
+
+        return result;
+    }
+
+    calcularPremioLiquidoLoteria(valor, cotacao, percentualPremio) {
+        let result = valor * cotacao;
+
+        if (result > this.paramsService.getOpcoes().valor_max_premio_loterias) {
+            result = this.paramsService.getOpcoes().valor_max_premio_loterias;
+        }
+
+        result = result * (100 - percentualPremio) / 100;
+
+        return result;
     }
 }

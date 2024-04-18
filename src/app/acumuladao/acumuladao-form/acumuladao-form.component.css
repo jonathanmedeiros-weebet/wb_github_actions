@@ -526,4 +526,12 @@
         border: 1px solid var(--highlight);
         border-radius: 4px;
     }
+
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1) and (max-width: 768px) {
+    #acumuladao-form {
+        overflow: scroll;
+        padding-bottom: 35px;
+    }
 }

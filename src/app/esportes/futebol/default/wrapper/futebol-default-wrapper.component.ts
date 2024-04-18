@@ -79,7 +79,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                 this.exibirMaisCotacoes = false;
                 this.showLoadingIndicator = true;
                 this.data = null;
-                let isHoje = false;
+                let addDay = false;
 
                 if (params['campeonato']) {
                     this.campeonatoSelecionado = true;
@@ -135,12 +135,16 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             } else {
                                 queryParams.data = dataLimiteTabela;
                             }
+
+                            if (dt.isBefore(dataLimiteTabela, 'day')) {
+                                addDay = true;
+                            }
                         } else if (!params['nome']) {
                             exibirDestaques = true;
                             queryParams.data = moment().format('YYYY-MM-DD');
 
-                            if (moment().day() !== 0) {
-                                isHoje = true;
+                            if (moment().isBefore(dataLimiteTabela, 'day')) {
+                                addDay = true;
                             }
                         }
 
@@ -154,7 +158,7 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(
                             switchMap(campeonatos => {
-                                if (campeonatos.length === 0 && isHoje) {
+                                if (campeonatos.length === 0 && addDay) {
                                     queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
                                     this.data = queryParams.data;
                                     return this.campeonatoService.getCampeonatos(queryParams);

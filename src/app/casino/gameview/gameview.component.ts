@@ -6,7 +6,6 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {AuthService, MenuFooterService, MessageService} from '../../services';
 import {interval} from 'rxjs';
-import {RolloverComponent} from "../../clientes/rollover/rollover.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
 
@@ -47,7 +46,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        
+
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
         }
@@ -93,7 +92,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                     this.sessionId = response.sessionId;
-                    this.gameName = response.gameName || "";
+                    if((this.gameFornecedor == 'tomhorn')){
+                        this.gameName = response.gameName.split("- 9", 1) || "";
+                    }else{
+                        this.gameName = response.gameName || "";
+                    }
                 },
                 error => {
                     this.handleError(error);
@@ -107,10 +110,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     back(): void {
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
-        }
-
-        if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
-            this.router.navigate(['casino/cl/wall-live/todos']);
+        } else if(this.gameFornecedor === 'parlaybay') {
+            this.router.navigate(['esportes/futebol']);
+        } else if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
+            this.router.navigate(['esportes/cl/wall-live/todos']);
         } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){
             this.router.navigate(['casino/c/wall/todos']);
         }else{
@@ -187,10 +190,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         });
     }
 
-    abrirRollovers() {
-        this.modalService.open(RolloverComponent);
-    }
-
     exibirJogosLiberadosBonus() {
         this.location.back();
         this.modalService.open(JogosLiberadosBonusModalComponent, {
@@ -201,7 +200,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     getMobileOperatingSystem() {
         let userAgent = navigator.userAgent ;
-        
+
         if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ){
             return 'ios';
         }

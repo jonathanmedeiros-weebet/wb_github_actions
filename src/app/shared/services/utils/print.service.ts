@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {AuthService} from './../auth/auth.service';
-import {HelperService} from './helper.service';
-import {ParametrosLocaisService} from './../parametros-locais.service';
+import { AuthService } from './../auth/auth.service';
+import { HelperService } from './helper.service';
+import { ParametrosLocaisService } from './../parametros-locais.service';
 
-import {config} from './../../config';
+import { config } from './../../config';
 import * as moment from 'moment';
 
 import EscPosEncoder from 'node_modules/esc-pos-encoder/dist/esc-pos-encoder.esm.js';
-import {ImagensService} from './imagens.service';
+import { ImagensService } from './imagens.service';
 
 declare var WeebetMessage: any;
 
@@ -31,10 +31,15 @@ export class PrintService {
         private imagensService: ImagensService
     ) {
         this.getPrinterSettings();
-        this.imagensService.buscarLogoImpressao()
-            .subscribe(
-                logoImpressao => this.LOGO_IMPRESSAO = `data:image/png;base64,${logoImpressao}`
-            );
+
+        const modoCambista = this.paramsService.getOpcoes().modo_cambista;
+
+        if (modoCambista) {
+            this.imagensService.buscarLogoImpressao()
+                .subscribe(
+                    logoImpressao => this.LOGO_IMPRESSAO = `data:image/png;base64,${logoImpressao}`
+                );
+        }
 
         if (this.auth.isAppMobile()) {
             this.sendFrontVersion();
@@ -294,7 +299,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(jogosEscPos.encode()), action: 'printLottery'};
+        const dataToSend = { data: Array.from(jogosEscPos.encode()), action: 'printLottery' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -448,7 +453,22 @@ export class PrintService {
                     </div>
                 </div>
                 `;
+
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    content += `
+                    <div class="clearfix margin-bottom-5">
+                        <div style="float: left;">
+                            Retorno líquido 6
+                        </div>
+                        <div style="float: right;">
+                            ${this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao6, aposta.passador.percentualPremio)}
+                        </div>
+                    </div>
+                    `;
+                }
             }
+
+
 
             if (item.cotacao5 > 0) {
                 content += `
@@ -460,6 +480,19 @@ export class PrintService {
                         ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao5)}
                     </div>
                 </div>`;
+
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    content += `
+                    <div class="clearfix margin-bottom-5">
+                        <div style="float: left;">
+                            Retorno líquido 5
+                        </div>
+                        <div style="float: right;">
+                            ${this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao5, aposta.passador.percentualPremio)}
+                        </div>
+                    </div>
+                    `;
+                }
             }
 
             if (item.cotacao4 > 0) {
@@ -472,6 +505,19 @@ export class PrintService {
                         ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao4)}
                     </div>
                 </div>`;
+
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    content += `
+                    <div class="clearfix margin-bottom-5">
+                        <div style="float: left;">
+                            Retorno líquido 4
+                        </div>
+                        <div style="float: right;">
+                            ${this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao4, aposta.passador.percentualPremio)}
+                        </div>
+                    </div>
+                    `;
+                }
             }
             if (item.cotacao3 > 0) {
                 content += `
@@ -483,6 +529,19 @@ export class PrintService {
                         ${this.helperService.calcularPremioLoteria(item.valor, item.cotacao3)}
                     </div>
                 </div>`;
+
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    content += `
+                    <div class="clearfix margin-bottom-5">
+                        <div style="float: left;">
+                            Retorno líquido 3
+                        </div>
+                        <div style="float: right;">
+                            ${this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao3, aposta.passador.percentualPremio)}
+                        </div>
+                    </div>
+                    `;
+                }
             }
 
             if (array.length > 1) {
@@ -630,6 +689,14 @@ export class PrintService {
                     .text('RETORNO 6: ')
                     .bold(false)
                     .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao6));
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    ticketEscPos
+                        .newline()
+                        .bold(true)
+                        .text('RETORNO LIQUIDO 6: ')
+                        .bold(false)
+                        .text(this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao6, aposta.passador.percentualPremio));
+                }
             }
             if (item.cotacao5 > 0) {
                 ticketEscPos
@@ -638,6 +705,14 @@ export class PrintService {
                     .text('RETORNO 5: ')
                     .bold(false)
                     .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao5));
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    ticketEscPos
+                        .newline()
+                        .bold(true)
+                        .text('RETORNO LIQUIDO 5: ')
+                        .bold(false)
+                        .text(this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao5, aposta.passador.percentualPremio));
+                }
             }
             if (item.cotacao4 > 0) {
                 ticketEscPos
@@ -646,6 +721,14 @@ export class PrintService {
                     .text('RETORNO 4: ')
                     .bold(false)
                     .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao4));
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    ticketEscPos
+                        .newline()
+                        .bold(true)
+                        .text('RETORNO LIQUIDO 4: ')
+                        .bold(false)
+                        .text(this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao4, aposta.passador.percentualPremio));
+                }
             }
             if (item.cotacao3 > 0) {
                 ticketEscPos
@@ -654,6 +737,14 @@ export class PrintService {
                     .text('RETORNO 3: ')
                     .bold(false)
                     .text(this.helperService.calcularPremioLoteria(item.valor, item.cotacao3));
+                if (!aposta.is_cliente && aposta.passador.percentualPremio > 0) {
+                    ticketEscPos
+                        .newline()
+                        .bold(true)
+                        .text('RETORNO LIQUIDO 3: ')
+                        .bold(false)
+                        .text(this.helperService.calcularPremioLiquidoLoteria(item.valor, item.cotacao3, aposta.passador.percentualPremio));
+                }
             }
         });
 
@@ -665,7 +756,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        const dataToSend = { data: Array.from(ticketEscPos.encode()), action: 'printLottery' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1041,7 +1132,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'}; // file://
+        const dataToSend = { data: Array.from(ticketEscPos.encode()), action: 'printLottery' }; // file://
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1163,7 +1254,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        const dataToSend = { data: Array.from(ticketEscPos.encode()), action: 'printLottery' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1705,7 +1796,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(ticketEscPos.encode()), action: 'printLottery'};
+        const dataToSend = { data: Array.from(ticketEscPos.encode()), action: 'printLottery' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1777,7 +1868,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(cardPrintEscPos.encode()), action: 'printCard'};
+        const dataToSend = { data: Array.from(cardPrintEscPos.encode()), action: 'printCard' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -1947,7 +2038,7 @@ export class PrintService {
             .newline()
             .newline();
 
-        const dataToSend = {data: Array.from(cardRecargaEscPos.encode()), action: 'printCard'};
+        const dataToSend = { data: Array.from(cardRecargaEscPos.encode()), action: 'printCard' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 
@@ -2109,11 +2200,11 @@ export class PrintService {
     }
 
     private sendFrontVersion() {
-        const dataToSend = {data: 3, action: 'frontVersion'};
+        const dataToSend = { data: 3, action: 'frontVersion' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
     private getApkConfigs() {
-        const dataToSend = {data: true, action: 'getApkConfigs'};
+        const dataToSend = { data: true, action: 'getApkConfigs' };
         WeebetMessage.postMessage(JSON.stringify(dataToSend));
     }
 }

@@ -1,0 +1,19 @@
+<div id="default-content" [ngStyle]="{'height': currentHeight + 'px'}">
+    <div class="wrap-stick">
+        <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+        <div *ngIf="!showLoadingIndicator" style="height: -webkit-fill-available;">
+            <div class="desktop-image">
+                <img style="width: 100%;" src="https://weebet.s3.amazonaws.com/{{ SLUG }}/paginaPromocao/{{ promocao.imagemDesktop }}" alt="">
+            </div>
+            <div class="content-header">
+                <h2 style="color: var(--foreground-sidebars);">{{ promocao.promocaoNome }}</h2>
+            </div>
+
+            <div class="content-body" style="margin-bottom: 32px;" #content id="print-section">
+                <div class="content" [innerHTML]="promocao.conteudo | safeHTML">
+                </div>
+            </div>
+            <app-footer></app-footer>
+        </div>
+    </div>
+</div>

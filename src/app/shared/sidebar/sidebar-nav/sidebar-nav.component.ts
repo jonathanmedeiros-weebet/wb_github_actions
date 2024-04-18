@@ -42,6 +42,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     pixCambista = false;
     modoCambista = true;
     indiqueGanheHabilitado = false;
+    permitirQualquerChavePix = false;
 
     subCartao = false;
     subPerfil = false;
@@ -80,6 +81,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
         this.modoCambista = this.paramsLocais.getOpcoes().modo_cambista;
         this.indiqueGanheHabilitado = this.paramsLocais.indiqueGanheHabilitado();
+        this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
 
         if (this.router.url === '/cambistas/cartoes' || this.router.url === '/cambistas/solicitacoes-saque') {
             this.subCartao = true;
@@ -87,10 +89,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
         if (this.router.url === '/clientes/perfil' || this.router.url === '/clientes/perfil-pix' || this.router.url === '/alterar-senha') {
             this.subPerfil = true;
-        }
-
-        if (this.router.url === '/clientes/rollover' || this.router.url === '/clientes/indique-ganhe') {
-            this.subPromocoes = true;
         }
 
         this.auth.logado

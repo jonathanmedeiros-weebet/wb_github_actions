@@ -11,18 +11,15 @@
             </div>
 
             <div class="tabs">
-                <a *ngIf="esporteHabilitado" [ngClass]="tabSelected == 'esporte' ? 'active' : ''" (click)="changeTab('esporte')">{{'geral.esporte' | translate}} </a>
-                <a *ngIf="acumuladaoHabilitado" [ngClass]="tabSelected == 'acumuladao' ? 'active' : ''"
-                (click)="changeTab('acumuladao')">{{'geral.acumuladao' | translate}}</a>
-                <a *ngIf="desafioHabilitado" [ngClass]="tabSelected == 'desafio' ? 'active' : ''"
-                (click)="changeTab('desafio')">{{'geral.desafio' | translate}}</a>
-                <a *ngIf="casinoHabilitado" [ngClass]="tabSelected == 'cassino' ? 'active' : ''"
-                (click)="changeTab('cassino')">{{'geral.cassino' | translate}}</a>
-                <a *ngIf="loteriasHabilitada" [ngClass]="tabSelected == 'loteria' ? 'active' : ''"
-                (click)="changeTab('loteria')">{{'geral.loteria' | translate}}</a>
-                <a *ngIf="loteriaPopularHabilitada" [ngClass]="tabSelected == 'loteria-popular' ? 'active' : ''"
-                (click)="changeTab('loteria-popular')">{{'submenu.loteriaPopular' | translate}}</a>
-            </div>
+                <ng-container *ngFor="let tab of getTabs()">
+                    <a *ngIf="tab.habilitado && tabSelected === tab.id" class="active" (click)="changeTab(tab.id)">
+                        {{ tab.label | translate }}
+                    </a>
+                    <a *ngIf="tab.habilitado && tabSelected !== tab.id" (click)="changeTab(tab.id)">
+                        {{ tab.label | translate }}
+                    </a>
+                </ng-container>
+            </div>              
 
             <div class="content-body">
                 <form (ngSubmit)="onSubmit()" [formGroup]="form">
@@ -106,7 +103,7 @@
                         <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta) }}">
                             <td>{{ aposta.codigo }}</td>
                             <td *ngIf="tabSelected == 'cassino'">{{ aposta.game | formatarNomeJogoCassino }}</td>
-                            <td>{{ aposta.horario }}</td>
+                            <td>{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm' }}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td>{{ aposta.premio | currency }}</td>
                             <td class="acoes-aposta" *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'">

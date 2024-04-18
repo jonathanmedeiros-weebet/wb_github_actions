@@ -12,13 +12,6 @@ import {JogosLiberadosBonusModalComponent} from "../jogos-liberados-bonus-modal/
 })
 export class RegrasBonusModalComponent implements OnInit {
 
-    multiplicador_rollover_esportivo;
-    cotacao_minima_aposta_bonus;
-    cotacao_minima_aposta_multipla_bonus;
-    valor_maximo_bonus_convertido;
-    valor_maximo_bonus_primeiro_deposito;
-    resultado_multiplicador_bonus;
-    vencimento_bonus;
     promocoes: Promocao[] = [];
 
 	constructor(
@@ -31,14 +24,6 @@ export class RegrasBonusModalComponent implements OnInit {
 
     ngOnInit(): void {
         this.getPromocoes();
-
-        this.multiplicador_rollover_esportivo = this.paramsLocais.getOpcoes().multiplicador_rollover_esportivo;
-        this.cotacao_minima_aposta_bonus = this.paramsLocais.getOpcoes().cotacao_minima_aposta_bonus;
-        this.cotacao_minima_aposta_multipla_bonus = this.paramsLocais.getOpcoes().cotacao_minima_aposta_multipla_bonus;
-        this.valor_maximo_bonus_convertido = this.paramsLocais.getOpcoes().valor_maximo_bonus_convertido;
-        this.valor_maximo_bonus_primeiro_deposito = this.paramsLocais.getOpcoes().valor_maximo_bonus_primeiro_deposito;
-        this.vencimento_bonus = this.paramsLocais.getOpcoes().vencimento_bonus;
-        this.resultado_multiplicador_bonus = this.multiplicador_rollover_esportivo*50;
     }
 
     getPromocoes(queryParams?: any) {

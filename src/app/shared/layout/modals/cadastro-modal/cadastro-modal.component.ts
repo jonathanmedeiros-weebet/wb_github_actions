@@ -151,10 +151,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
-            usuario: [null, [
-                Validators.required,
-                FormValidations.loginValidator
-            ], this.validarLoginUnico.bind(this)],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             senha: [null, [Validators.required, Validators.minLength(6)]],
             senha_confirmacao: [null, [Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]],
@@ -174,27 +170,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
     }
 
-    validarLoginUnico(control: AbstractControl) {
-        clearTimeout(this.debouncer);
-        return new Promise(resolve => {
-            this.debouncer = setTimeout(() => {
-                if (this.form.get('googleIdToken').value) {
-                    resolve(null);
-                }
-
-                if (control.value) {
-                    this.clientesService.verificarLogin(control.value).subscribe((res) => {
-                        if (res) {
-                            resolve(null);
-                        }
-                    }, () => {
-                        resolve({'loginEmUso': true});
-                    });
-                }
-            }, 1000);
-        });
-    }
-
     ngOnDestroy() {
         this.clearSocialForm();
         this.unsub$.next();
@@ -202,9 +177,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     clearValidators() {
-        this.form.controls['usuario'].patchValue('');
-        this.form.controls['usuario'].clearValidators();
-        this.form.controls['usuario'].updateValueAndValidity();
         this.form.controls['senha'].patchValue('');
         this.form.controls['senha'].clearValidators();
         this.form.controls['senha'].updateValueAndValidity();
@@ -214,10 +186,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     restoreValidators() {
-        this.form.controls['usuario'].setValidators([[
-            Validators.required,
-            FormValidations.loginValidator
-        ], this.validarLoginUnico.bind(this)]);
         this.form.controls['senha'].setValidators([Validators.required, Validators.minLength(6)]);
         this.form.controls['senha_confirmacao'].setValidators([Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]);
 
@@ -239,9 +207,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             .subscribe(
                 (res) => {
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
-                    
+
                     this.activeModal.dismiss();
-                    
+
                     localStorage.removeItem('codigoAfiliado');
 
                     if(this.validacaoEmailObrigatoria) {
@@ -254,8 +222,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         });
                     } else {
                         this.auth.setIsCliente(true);
-                        
+
                         localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
+                        localStorage.setItem('promocaoPrimeiroDepositoAtivo', res.dataUser.promocao_primeiro_deposito_ativa);
                         let nome = values.nome.split(" ")[0];
                         this.router.navigate(
                             ['/welcome'],

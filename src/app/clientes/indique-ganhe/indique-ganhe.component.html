@@ -108,6 +108,7 @@
                         <select class="form-control inverted-out" formControlName="status">
                             <option value="">{{'geral.todos' | translate}}</option>
                             <option value="depositado">{{'geral.depositado' | translate}}</option>
+                            <option value="resgatar">{{'indique_ganhe.resgatar' | translate}}</option>
                             <option value="pendente">{{'geral.pendente' | translate}}</option>
                             <option value="cancelado">{{'geral.cancelado' | translate}}</option>
                         </select>
@@ -129,9 +130,9 @@
                                 <th width="50"></th>
                                 <th width="200">{{'indique_ganhe.indicacoes' | translate}}</th>
                                 <th width="200">{{'indique_ganhe.dataDeCadastro' | translate}}</th>
-                                <th width="200">{{'indique_ganhe.progresso' | translate}}</th>
-                                <th width="100">{{'geral.status' | translate}} </th>
-                                <th width="100" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
+                                <th width="180">{{'indique_ganhe.progresso' | translate}}</th>
+                                <th width="200">{{'geral.status' | translate}} </th>
+                                <th width="80" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
                                 <th width="30"></th>
                             </tr>
                         </thead>
@@ -153,7 +154,7 @@
                                 <td>{{ 'indique_ganhe.voceIndicou' | translate }} {{ indicado.nome_indicado }}</td>
                                 <td>{{ 'data.dataHora' | translate:{'data': indicado.indicado_em.data, 'hora': indicado.indicado_em.hora} }}</td>
                                 <td>
-                                    <div 
+                                    <div
                                         class="progress-container"
                                         [ngClass]="setProgressFillClass(indicado)"
                                     >
@@ -162,14 +163,28 @@
                                         <span placement="bottom" ngbTooltip="{{'geral.aposta' | translate}}"></span>
                                     </div>
                                 </td>
-                                <td>{{ translateStatus(indicado.status) }}</td>
+                                <td>
+                                    {{ translateStatus(indicado.status) }}
+                                    <br>
+                                    <span [ngStyle]="{'color': '#6A6868'}" *ngIf="indicado.status == 'resgate'">
+                                        ({{ 'data.dataHora' | translate:{'data': indicado.prazo_resgate.data, 'hora': indicado.prazo_resgate.hora} }})
+                                    </span>
+                                </td>
                                 <td
                                     [ngStyle]="{
                                         'text-align': 'right',
                                         'color': setAmountColor(indicado.status)
                                     }"
-                                >{{ indicado.valor_comissao | currency }}</td>
-                                <td></td>
+                                >{{ indicado.valor_comissao | currency }}<br><span [ngStyle]="{'color': '#6A6868'}">({{ translateTipoSaldo(indicado.tipo_saldo) }})</span></td>
+                                <td id="td-btn-redeem" [ngStyle]="{'text-align': 'center'}">
+                                    <button
+                                        id="btn-redeem"
+                                        class="btn btn-custom"
+                                        type="button"
+                                        [disabled]="indicado.status != 'resgate'"
+                                        (click)="indicado.status == 'resgate' ? redeemCommission(indicado.comissao_id) : false"
+                                        >{{'indique_ganhe.resgatar' | translate}}</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -188,8 +203,16 @@
                         <div class="lista-indicados-info">
                             <p>{{ 'indique_ganhe.dataDeCadastro' | translate }} {{ 'data.dataHora' | translate:{'data': indicado.indicado_em.data, 'hora': indicado.indicado_em.hora} }}</p>
                             <p [ngStyle]="{'font-size': '14px'}">{{ 'indique_ganhe.voceIndicou' | translate }} {{ indicado.nome_indicado }}</p>
-                            <p [ngStyle]="{'color': setAmountColor(indicado.status)}">{{ indicado.valor_comissao | currency }}</p>
-                            <p>{{ translateStatus(indicado.status) }}</p>
+                            <p [ngStyle]="{'color': setAmountColor(indicado.status)}">
+                                {{ indicado.valor_comissao | currency }}
+                                <span [ngStyle]="{'color': '#6A6868'}">({{ translateTipoSaldo(indicado.tipo_saldo) }})</span>
+                            </p>
+                            <p>
+                                {{ translateStatus(indicado.status) }}
+                                <span [ngStyle]="{'color': '#6A6868'}" *ngIf="indicado.status == 'resgate'">
+                                    ({{ 'indique_ganhe.limiteResgate' | translate }} {{ 'data.dataHora' | translate:{'data': indicado.prazo_resgate.data, 'hora': indicado.prazo_resgate.hora} }})
+                                </span>
+                            </p>
                         </div>
                         <div class="lista-indicados-arrow">
                             <i class="fa-solid fa-angle-right"></i>
@@ -208,46 +231,38 @@
             <i class="fa fa-times"></i>
         </a>
     </div>
-    <div class="modal-body" style="min-height: 80%">
+    <div class="modal-body">
         <p>
-            Indique seus amigos e ganhe R${{valorGanhoPorIndicacao}} em saldo real!!<br>
-            Ficou interessado? Então veja abaixo todas as regras e condições
+            {{'regras_indique_ganhe.primeiro_paragrafo_um' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao, 'tipoSaldoGanho': tipoSaldoGanhoModalRegras()} }}
+            <br>
+            {{'regras_indique_ganhe.primeiro_paragrafo_dois' | translate}}
         </p>
         <ul style="padding-left: 1.5rem;">
             <li>
-                <b>Elegibilidade:</b> Para participar do programa de Indique e Ganhe você deve ser um membro registrado do site. Ao indicar usuários,
-                você estará concordando com estes termos e condições.
+                <b>{{'regras_indique_ganhe.lista_elegibilidade' | translate}}:</b> {{'regras_indique_ganhe.lista_elegibilidade_text' | translate}}
             </li>
             <li>
-                <b>Como indicar:</b> Para indicar um novo usuário, você deverá compartilhar o link de indicação na seção "Indique e ganhe" da sua conta,
-                localizada no menu Promoções. O usuário indicado deverá se registrar usando seu link de indicação. O indicador terá um total de
-                {{limiteIndicacoes}} indicações ao qual serão legíveis de comissionamento as demais que ultrapassarem essa quantidade não serão comissionadas.
+                <b>{{'regras_indique_ganhe.lista_como_indicar' | translate}}:</b> {{'regras_indique_ganhe.lista_como_indicar_text' | translate:{'limiteIndicacoes': limiteIndicacoes} }}
             </li>
             <li>
-                <b>Bônus para o Indicador:</b> A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar apostas
-                de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dias, você ganhará R${{valorGanhoPorIndicacao}} em saldo real (sacável). Este saldo será automaticamente
-                adicionado à sua conta em até 24 horas após o INDICADO cumprir as regras da promoção.
+                <b>{{'regras_indique_ganhe.lista_bonus_indicador' | translate}}:</b> {{'regras_indique_ganhe.lista_bonus_indicador_text' | translate:{'valorMinDepositado': valorMinDepositado, 'valorMinApostado': valorMinApostado, 'qtdDiasRequisitos': qtdDiasRequisitos, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao, 'tipoSaldoGanho': tipoSaldoGanhoModalRegras(true), 'modalidadePromocao': modalidadePromocao, 'prazoResgateSaldo': prazoResgateSaldo} }}
             </li>
             <li>
-                <b>Depósito do Indicado:</b> O usuário indicado deve realizar um depósito de no mínimo R${{valorMinDepositado}} na sua conta e fazer
-                uma aposta de no mínimo R${{valorMinApostado}} para que o saldo de R${{valorGanhoPorIndicacao}} seja creditado na conta do indicador.
+                <b>{{'regras_indique_ganhe.lista_deposito_indicado' | translate}}:</b> {{'regras_indique_ganhe.lista_deposito_indicado_text' | translate:{'valorMinDepositado': valorMinDepositado, 'valorMinApostado': valorMinApostado, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
             </li>
             <li>
-                <b>Prevenção de fraudes:</b> A {{nomeBanca}} monitora ativamente o uso do sistema de Indique e Ganhe para prevenir fraudes. Qualquer tentativa
-                de fraude, como a criação de múltiplas contas a partir do mesmo endereço IP, será considerada apenas o primeiro cadastro legível para ganho
-                do saldo as demais serão desconsideradas.
+                <b>{{'regras_indique_ganhe.lista_prevencao_fraudes' | translate}}:</b> {{'regras_indique_ganhe.lista_prevencao_fraudes_text' | translate:{'nomeBanca': nomeBanca} }}
             </li>
         </ul>
         <p>
-            Ao participar do sistema de Indique e Ganhe, você concorda que leu, entendeu e concorda em cumprir estas regras. É responsabilidade do indicador
-            garantir que os usuários indicados estejam cientes e concordem com estas regras antes de se registrarem na {{nomeBanca}}.
+            {{'regras_indique_ganhe.ultimo_paragrafo' | translate:{'nomeBanca': nomeBanca} }}
         </p>
     </div>
 </ng-template>
 
 <ng-template #minhasIndicacoesModal style="min-height: 80%">
     <div class="modal-header" [ngStyle]="{'border': 'none', 'padding': '15px 10px'}">
-        <a (click)="activeReferralsModal.dismiss('Cross click')" class="botao-esquerdo">
+        <a (click)="activeReferralsModal.dismiss('Cross click')" class="botao-esquerdo" ngbAutofocus>
             <i class="fa fa-arrow-left" [ngStyle]="{'color': 'var(--highlight)'}"></i>
         </a>
         <div class="titulo">{{'indique_ganhe.minhasIndicacoes' | translate}}</div>
@@ -258,7 +273,7 @@
             <h2 [ngStyle]="{'font-size': '32px', 'font-weight': '600', 'text-align': 'center'}">{{ indicadoSelecionado.valor_comissao | currency }}</h2>
             <h2 [ngStyle]="{'font-size': '14px', 'text-align': 'center'}">{{ 'geral.saldo' | translate }} {{ translateStatus(indicadoSelecionado.status) | lowercase }}</h2>
         </div>
-        <div class="vertical-progress-container">
+        <div class="vertical-progress-container" [ngStyle]="{'margin-bottom': '50px'}">
             <ul class="vertical-progress">
                 <li
                     class="vertical-progress-item"
@@ -271,7 +286,7 @@
                             {{ formatDateModal(indicadoSelecionado.comissionado_em.data_hora) }}
                         </span>
                         <span *ngIf="indicadoSelecionado.status == 'pago'">{{ 'indique_ganhe.seuSaldoDepositado' | translate }}</span>
-                        <span 
+                        <span
                             [ngStyle]="{'color': setAmountColor(indicadoSelecionado.status)}"
                             *ngIf="indicadoSelecionado.status == 'pago'"
                         >{{ indicadoSelecionado.valor_comissao | currency }}</span>
@@ -316,6 +331,15 @@
                     </p>
                 </li>
             </ul>
+        </div>
+        <div [ngStyle]="{'position': 'absolute', 'left': '0', 'bottom': '12px', 'width': '100%', 'display': 'flex', 'justify-content': 'center'}">
+            <button
+                class="btn btn-custom"
+                type="button"
+                [ngStyle]="{'width': '95%'}"
+                [disabled]="indicadoSelecionado.status != 'resgate'"
+                (click)="indicadoSelecionado.status == 'resgate' ? redeemCommission(indicadoSelecionado.comissao_id) : false"
+                >{{'indique_ganhe.resgatar' | translate}}</button>
         </div>
     </div>
 </ng-template>
