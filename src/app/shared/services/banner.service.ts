@@ -43,6 +43,6 @@ export class BannerService {
     }
 
     filterBanners(pagina) {
-        return this.cachedBanners.filter(banner => ['todas', pagina.toString()].includes(banner.pagina));
+        return this.cachedBanners.filter(banner => ['todas', pagina].includes(banner.pagina));
     }
 }
