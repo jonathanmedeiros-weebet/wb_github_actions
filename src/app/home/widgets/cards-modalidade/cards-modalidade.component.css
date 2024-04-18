@@ -76,10 +76,7 @@
     line-height: 24px;
 
     height: 94px;
-}
-
-.list-modalidades ul li a {
-    color: #fff;
+    color: var(--foregroud-header);
 }
 
 .list-modalidades ul li a span {
