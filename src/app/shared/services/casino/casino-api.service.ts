@@ -45,7 +45,7 @@ export class CasinoApiService {
 
     getGamesList(aoVivo: any) {
         if (aoVivo) {
-            var endpoint = this.loki_url+"/gamesAoVivo";
+            var endpoint = this.loki_url+"/live-games";
         } else {
             var endpoint = this.loki_url+"/games";
         }
