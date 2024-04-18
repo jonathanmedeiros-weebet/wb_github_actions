@@ -159,7 +159,6 @@
         "aguiasport.bet": "gulp aguiasport.bet",
         "megasports.bet": "gulp megasports.bet",
         "bet101.bet": "gulp bet101.bet",
-        "betbrazilian.com": "gulp betbrazilian.com",
         "81betpix.wee.bet": "gulp 81betpix.wee.bet",
         "sportpix.vip": "gulp sportpix.vip",
         "profit2.bet": "gulp profit2.bet",
@@ -173,7 +172,6 @@
         "cassinoaovivo.bet": "gulp cassinoaovivo.bet",
         "blackpix.bet": "gulp blackpix.bet",
         "n7futmix.com": "gulp n7futmix.com",
-        "nossabets.net": "gulp nossabets.net",
         "sortebet777.com": "gulp sortebet777.com",
         "fizabet.com": "gulp fizabet.com",
         "sorteesportiva.app": "gulp sorteesportiva.app",
@@ -217,7 +215,6 @@
         "betei7.com": "gulp betei7.com",
         "cassinowin.bet": "gulp cassinowin.bet",
         "capitalbets.bet": "gulp capitalbets.bet",
-        "seg.bet": "gulp seg.bet",
         "playnabet.com": "gulp playnabet.com",
         "betinvestidor.com": "gulp betinvestidor.com",
         "smartek777.com": "gulp smartek777.com",
@@ -299,7 +296,6 @@
         "playnopix.com": "gulp playnopix.com",
         "superesportiva.com": "gulp superesportiva.com",
         "bet10.bet": "gulp bet10.bet",
-        "shooting.bet": "gulp shooting.bet",
         "luckybets.vip": "gulp luckybets.vip",
         "decolar.bet": "gulp decolar.bet",
         "brasilbet.store": "gulp brasilbet.store",
@@ -328,7 +324,10 @@
         "jrsports.io": "gulp jrsports.io",
         "vembet.com": "gulp vembet.com",
         "camaraobet.com": "gulp camaraobet.com",
-        "7copas.bet": "gulp 7copas.bet"
+        "7copas.bet": "gulp 7copas.bet",
+        "cravei.bet": "gulp cravei.bet",
+        "miamipix.net": "gulp miamipix.net",
+        "betfeijo.wee.bet": "gulp betfeijo.wee.bet"
     },
     "private": true,
     "dependencies": {

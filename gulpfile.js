@@ -1507,16 +1507,6 @@ gulp.task('bet101.bet', function (done) {
     });
 });
 
-gulp.task('betbrazilian.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betbrazilian.com",
-        banca: "BET BRAZILIAN",
-        styles: "",
-        scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-PJG0WFJX99'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-PJG0WFJX99');</script>"
-    });
-});
-
 gulp.task('81betpix.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1649,15 +1639,6 @@ gulp.task('n7futmix.com', function (done) {
         server: "front1.wee.bet",
         host: "n7futmix.com",
         banca: "N7 FUTMIX",
-        styles: "",
-    });
-});
-
-gulp.task('nossabets.net', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "nossabets.net",
-        banca: "NOSSA BETS",
         styles: "",
     });
 });
@@ -2078,17 +2059,6 @@ gulp.task('capitalbets.bet', function (done) {
     });
 });
 
-gulp.task('seg.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "seg.bet",
-        banca: "SEG.BET",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5GWDQFFB');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-5GWDQFFB'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('playnabet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2407,9 +2377,7 @@ gulp.task('betbetix.com', function (done) {
         server: "front3.wee.bet",
         host: "betbetix.com",
         banca: "BET BETIX",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P8KM58BZ');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-P8KM58BZ'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
+        styles: ""
     });
 });
 
@@ -2859,15 +2827,6 @@ gulp.task('bet10.bet', function (done) {
     });
 });
 
-gulp.task('shooting.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "shooting.bet",
-        banca: "SHOOTING.BET",
-        styles: "",
-    });
-});
-
 gulp.task('luckybets.vip', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -3126,6 +3085,34 @@ gulp.task('7copas.bet', function (done) {
         server: "front3.wee.bet",
         host: "7copas.bet",
         banca: "7 COPAS",
+        styles: ""
+    });
+});
+
+gulp.task('cravei.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "cravei.bet",
+        banca: "CRAVEI.BET",
+        styles: ""
+    });
+});
+
+gulp.task('miamipix.net', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "miamipix.net",
+        banca: "MIAMI PIX",
+        styles: ""
+    });
+});
+
+
+gulp.task('betfeijo.wee.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betfeijo.wee.bet",
+        banca: "BET FEIJÓ",
         styles: ""
     });
 });
