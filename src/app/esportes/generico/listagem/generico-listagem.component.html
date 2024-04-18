@@ -82,7 +82,7 @@
     </div>
 </div>
 <div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
-    <app-banners [pagina]="esporte" [showLoadingIndicator]="showLoadingIndicator"></app-banners>
+    <app-banners [pagina]="esporte"></app-banners>
     <div class="wrap-sticky" *ngIf="!showLoadingIndicator">
 
         <div class="filter" *ngIf="!campeonatoSelecionado">

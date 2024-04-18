@@ -13,7 +13,7 @@ export class BannersComponent implements OnInit {
     isMobileView = false;
     showNavigationArrows = false;
     @Input() pagina = 'futebol';
-    @Input() showLoadingIndicator = true;
+    showLoadingIndicator = true;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -28,30 +28,32 @@ export class BannersComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.bannerService.getBanners(this.pagina).subscribe(
-            banners => {
-                this.banners = [];
-                let source = 'src';
+        this.showLoadingIndicator = true;
+        this.bannerService.requestBanners(this.pagina);
 
-                if (window.innerWidth <= 667) {
-                    source = 'src_mobile';
-                    this.isMobileView = true;
+        this.bannerService.banners.subscribe(banners => {
+            this.banners = [];
+            let source = 'src';
+
+            if (window.innerWidth <= 667) {
+                source = 'src_mobile';
+                this.isMobileView = true;
+            }
+
+            for (const banner of banners) {
+                if (banner[source]) {
+                    this.banners.push(banner);
                 }
+            }
 
-                for (const banner of banners) {
-                    if (banner[source]) {
-                        this.banners.push(banner);
-                    }
-                }
+            if (this.banners.length > 1) {
+                this.showNavigationArrows = true;
+            }
 
-                if (this.banners.length > 1) {
-                    this.showNavigationArrows = true;
-                }
-
-                this.cd.markForCheck();
-            },
-            error => this.handleError(error)
-        );
+            this.banners = banners;
+            this.showLoadingIndicator = false;
+            this.cd.markForCheck();
+        });
     }
 
     handleError(msg) {

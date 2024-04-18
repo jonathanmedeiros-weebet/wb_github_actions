@@ -168,7 +168,7 @@
     </div>
 </div>
 <div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
-    <app-banners [showLoadingIndicator]="showLoadingIndicator"></app-banners>
+    <app-banners></app-banners>
     <app-destaques (maisCotacoesDestaque)="maisCotacoes($event)" [jogosDestaque]="jogosDestaque"></app-destaques>
     <div class="wrap-sticky">
 

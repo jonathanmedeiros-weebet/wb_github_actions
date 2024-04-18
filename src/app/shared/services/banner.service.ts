@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { catchError, take, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError, map, take } from 'rxjs/operators';
 
 import { HeadersService } from './utils/headers.service';
 import { ErrorService } from './utils/error.service';
-import { Pagina } from '../../models';
 import { config } from '../config';
 
 @Injectable({
@@ -15,18 +14,35 @@ import { config } from '../config';
 export class BannerService {
     private BannerUrl = `${config.LOKI_URL}/banners`;
 
+    synchronized = false;
+    cachedBanners = [];
+
+    private bannersSource = new BehaviorSubject<any[]>([]);
+    public banners = this.bannersSource.asObservable();
+
     constructor(
         private http: HttpClient,
         private header: HeadersService,
         private errorService: ErrorService
-    ) { }
+    ) {}
 
-    getBanners(pagina = 'futebol'): Observable<any> {
-        return this.http.get(`${this.BannerUrl}?pagina=${pagina}`, this.header.getRequestOptions(true))
-            .pipe(
-                take(1),
-                map((res: any) => res.results),
-                catchError(this.errorService.handleError)
-            );
+    requestBanners(pagina = 'futebol') {
+        if (!this.synchronized) {
+            this.http.get(`${this.BannerUrl}`, this.header.getRequestOptions(false))
+                .subscribe((res: any) => {
+                        this.cachedBanners = res.results;
+                        this.bannersSource.next(this.getFilteredBanners(pagina));
+                        this.synchronized = true;
+                    },
+                    error => {
+                        catchError(this.errorService.handleError);
+                    });
+        } else {
+            this.bannersSource.next(this.getFilteredBanners(pagina));
+        }
+    }
+
+    getFilteredBanners(pagina) {
+        return this.cachedBanners.filter(banner => ['todas', pagina.toString()].includes(banner.pagina));
     }
 }
