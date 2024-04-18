@@ -221,7 +221,8 @@
         "failed": "Reprovado",
         "resultWereNotFound": "Nenhum resultado encontrado",
         "resultWereFound": "Foi encontrado 1 resultado",
-        "resultsWereFound": "Foram encontrados {{ quantity }} resultados"
+        "resultsWereFound": "Foram encontrados {{ quantity }} resultados",
+        "provedores": "Provedores"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -271,7 +272,9 @@
         "roleta": "Roleta",
         "mesa": "Mesa",
         "cassinoAoVivo": "Cassino Ao Vivo",
-        "loteriaPopular": "Loteria Popular"
+        "loteriaPopular": "Loteria Popular",
+        "maisPopulares": "Populares",
+        "news": "Novidades"
     },
     "bilhete": {
         "titulo": "BILHETE",

@@ -221,7 +221,8 @@
         "failed": "Failed",
         "resultWereNotFound": "No results found",
         "resultWereFound": "1 result were found",
-        "resultsWereFound": "{{ quantity }} results were found"
+        "resultsWereFound": "{{ quantity }} results were found",
+        "provedores": "Providers"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -271,7 +272,9 @@
         "roleta": "Roulette",
         "mesa": "Table",
         "cassinoAoVivo": "Live Casino",
-        "loteriaPopular": "Popular Lottery"
+        "loteriaPopular": "Popular Lottery",
+        "maisPopulares": "Populares",
+        "news": "Novidades"
     },
     "bilhete": {
         "titulo": "TICKET",
