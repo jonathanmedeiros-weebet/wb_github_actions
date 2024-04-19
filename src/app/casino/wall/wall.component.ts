@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { config } from '../../shared/config';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { WallProviderFilterModalComponent } from './components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 
 export interface Fornecedor {
     gameFornecedor: string;
@@ -24,7 +25,6 @@ export interface Fornecedor {
 export class WallComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @Input() games: GameCasino[];
-    @ViewChild('fornecedorModal', { static: true }) fornecedorModal;
     @ViewChild('listagem') listagemJogos;
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     scrolls: ElementRef[];
@@ -35,7 +35,6 @@ export class WallComponent implements OnInit, AfterViewInit {
     gameFornecedor: string;
     tituloPagina;
     private sub: any;
-    modalRef;
     isHome = false;
     isMobile = false;
     salsaCassino;
@@ -60,7 +59,6 @@ export class WallComponent implements OnInit, AfterViewInit {
     gamesLive: GameCasino[];
     LOGO = config.LOGO;
     blink: string;
-    modalFiltro;
     termFornecedorMobile;
     cassinoFornecedoresTemp = [];
     cassinoFornecedoresFiltrados = [];
@@ -241,7 +239,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     abrirModalLogin() {
-        this.modalRef = this.modalService.open(
+        this.modalService.open(
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -343,10 +341,6 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.gamesCassinoFiltrados = [];
             }
         }
-
-        if (this.modalFiltro) {
-            this.modalFiltro.close();
-        }
     }
 
     filtrarFornecedor() {
@@ -388,13 +382,24 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     openFiltroFornecedores() {
-        this.modalFiltro = this.modalService.open(
-            this.fornecedorModal,
+        const modalRef = this.modalService.open(
+            WallProviderFilterModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
+                size: 'xxl',
                 centered: true,
+                windowClass: 'modal-750'
             }
         );
+
+        modalRef.componentInstance.providers = this.cassinoFornecedores;
+        modalRef.componentInstance.providerSelected = this.fornecedorSelecionado;
+        modalRef.result.then(({event, data}) => {
+            if(event == 'apply'){
+                const {providerSelected} = data;
+                this.filtrarJogos(providerSelected)
+            }
+        })
     }
 
     filterDestaques(games, modalidade) {

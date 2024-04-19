@@ -222,7 +222,10 @@
         "resultWereNotFound": "Nenhum resultado encontrado",
         "resultWereFound": "Foi encontrado 1 resultado",
         "resultsWereFound": "Foram encontrados {{ quantity }} resultados",
-        "provedores": "Provedores"
+        "provedores": "Provedores",
+        "todosProvedores": "Todos provedores",
+        "digiteNomeProvedor": "Digite o nome do provedor",
+        "pesquisarJogosProvedores": "Pesquisar por jogos e provedores"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -239,7 +242,9 @@
     },
     "modais": {
         "fechar": "Fechar",
-        "finalizar": "Finalizar"
+        "finalizar": "Finalizar",
+        "aplicarFiltro": "Aplicar filtro",
+        "limparFiltro": "Limpar filtro"
     },
     "menu": {
         "esportes": "ESPORTES",

@@ -34,7 +34,7 @@
     <div class="bloco filters" *ngIf="showFilterBox">
         <app-wall-search-bar
             [term]="term"
-            placeholder="Pesquisar por Jogos e Provedores"
+            [placeholder]="'geral.pesquisarJogosProvedores' | translate"
             (onSearch)="search($event)"
             (onClear)="limparPesquisa()"
         />
@@ -266,48 +266,3 @@
         </div>
     </ng-template>
 </div>
-
-<ng-template #fornecedorModal let-modal>
-    <div class="modal-header">
-        <h4>Fornecedores</h4>
-        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <i class="fa fa-times"></i>
-        </a>
-    </div>
-    <div class="modal-body">
-        <div class="modal-body-content">
-            <div class="search-box search-fornecedores">
-                <i class="fa fa-search"></i>
-                    <input type="text" [(ngModel)]="termFornecedorMobile"
-                           class="form-control inverted-out"
-                           placeholder="Pesquisar Fornecedor"
-                           (keyup)="filtrarFornecedor()"
-                    >
-                    <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="termFornecedorMobile"></i>
-            </div>
-            <div class="fornecedores-menu">
-            <ul>
-                <li class="fornecedor">
-                    <div class="fornecedor-nome" style="margin-left: 0">
-                        <span><a (click)="filtrarJogos('todos')">Todos os Fornecedores</a></span>
-                    </div>
-                </li>
-                <ng-container *ngFor="let fornecedor of cassinoFornecedores">
-                    <li class="fornecedor">
-                        <div class="fornecedor-imagem">
-                            <img src="https://cdn.wee.bet/img/cassino/logos/{{fornecedor.gameFornecedor.toLowerCase()}}.png">
-                        </div>
-                        <div class="fornecedor-nome">
-                            <span>
-                                <a (click)="filtrarJogos(fornecedor.gameFornecedor)">
-                                 {{fornecedor.gameFornecedorExibicao}}
-                                </a>
-                            </span>
-                        </div>
-                    </li>
-                </ng-container>
-            </ul>
-            </div>
-        </div>
-    </div>
-</ng-template>

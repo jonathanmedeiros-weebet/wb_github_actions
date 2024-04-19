@@ -1,0 +1,48 @@
+<div class="provider-modal">
+    <div class="provider-modal__header">
+        <span class="provider-modal__title">{{'geral.todosProvedores' | translate}}</span>
+        <a
+            class="provider-button__close"
+            (click)="handleClose()"
+        >
+            <i class="fa fa-times provider-button__icon-close"></i>
+        </a>
+    </div>
+
+    <div class="provider-modal__filter-bar">
+        <app-wall-search-bar
+            [placeholder]="'geral.digiteNomeProvedor' | translate"
+            (onSearch)="handleSearch($event.target.value)"
+            (onClear)="handleClearSearch()"
+        />
+    </div>
+
+    <div class="provider-modal__body">
+        <div class="provider-list">
+            <app-wall-provider-card
+                *ngFor="let provider of providerList"
+                [data]="provider"
+                [selected]="providerSelected == provider.gameFornecedor"
+                type="filter"
+                (onClick)="handleProviderSelect(provider.gameFornecedor)"
+            />
+        </div>
+    </div>
+
+    <div class="provider-modal__footer">
+        <button
+            type="button"
+            class="provider-button__apply"
+            (click)="handleClearFilter()"
+        >
+            {{'modais.limparFiltro' | translate}}
+        </button>
+        <button
+            type="button"
+            class="provider-button__clear"
+            (click)="handleApplyFilter()"
+        >
+            {{'modais.aplicarFiltro' | translate}}
+        </button>
+    </div>
+</div>

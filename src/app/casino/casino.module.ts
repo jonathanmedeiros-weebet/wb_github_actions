@@ -15,6 +15,7 @@ import { WallSectionComponent } from './wall/components/wall-section/wall-sectio
 import { WallSearchBarComponent } from './wall/components/wall-search-bar/wall-search-bar.component';
 import { WallProviderCardComponent } from './wall/components/wall-provider-card/wall-provider-card.component';
 import { WallGameCardComponent } from './wall/components/wall-game-card/wall-game-card.component';
+import { WallProviderFilterModalComponent } from './wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +28,15 @@ import { WallGameCardComponent } from './wall/components/wall-game-card/wall-gam
     WallSearchBarComponent,
     WallProviderCardComponent,
     WallGameCardComponent,
+    WallProviderFilterModalComponent,
   ],
-    imports: [
-      SharedModule,
-      CasinoRoutingModule,
-      NgxSkeletonLoaderModule,
-      TranslateModule,
-      NgxPaginationModule,
-      AngularSvgIconModule
-    ]
+  imports: [
+    SharedModule,
+    CasinoRoutingModule,
+    NgxSkeletonLoaderModule,
+    TranslateModule,
+    NgxPaginationModule,
+    AngularSvgIconModule
+  ]
 })
 export class CasinoModule { }

@@ -1,12 +1,16 @@
 <div
     class="provider-card"
-    [ngClass]="{'provider-card--selected': selected}"
+    [ngClass]="{
+        'provider-card--selected': selected,
+        'provider-card--inline': cardInline,
+        'provider-card--filter': cardFilter,
+    }"
     (click)="handleClick()"
 >
     <img
         class="provider-card__image"
         loading="lazy"
         title="{{data.gameFornecedorExibicao}}"
-        src="../../../../../assets/images/providers/salsa.svg"
+        src="../../../../../assets/images/providers/{{data.gameFornecedor}}.png"
     >
 </div>

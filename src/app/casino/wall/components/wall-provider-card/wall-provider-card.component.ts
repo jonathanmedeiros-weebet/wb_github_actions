@@ -9,7 +9,16 @@ import { Fornecedor } from '../../wall.component';
 export class WallProviderCardComponent {
   @Input() data: Fornecedor;
   @Input() selected: boolean = false;
+  @Input() type: 'inline' | 'filter' = 'inline';
   @Output() onClick = new EventEmitter();
+
+  get cardInline(): boolean {
+    return this.type === 'inline';
+  }
+
+  get cardFilter(): boolean {
+    return this.type === 'filter';
+  }
 
   public handleClick() {
     this.onClick.emit(this.data.gameFornecedor)
