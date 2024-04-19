@@ -39,7 +39,7 @@ export class ParametroService {
     }
 
     getOdds(): Observable<any> {
-        const url = `${config.SPORTS_URL}/parametros/tipos-aposta`;
+        const url = `${config.LOKI_URL}/parameters/bet-type`;
         const token = localStorage.getItem('token');
         let requestOptions;
 
