@@ -448,7 +448,7 @@
     },
     "indique_ganhe":{
         "indiqueGanhe": "Indique e ganhe",
-        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}}",
+        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}}{{bonusBalance}}",
         "indiqueGanheInfo1": "Indique amigos e ganhe R${{valorGanhoPorIndicacao}} por cada indicado",
         "indiqueGanheInfo2": "Indique um amigo através do seu link de indicação e receba R${{valorGanhoPorIndicacao}} por cada indicação no saldo da sua conta. Confira nossas ",
         "seuLinkIndicacao": "Seu link de indicação:",
@@ -490,7 +490,9 @@
         "lista_deposito_indicado_text": "O usuário indicado deve realizar um depósito de no mínimo R${{valorMinDepositado}} na sua conta e fazer uma aposta de no mínimo R${{valorMinApostado}} para que o saldo de R${{valorGanhoPorIndicacao}} seja creditado na conta do indicador.",
         "lista_prevencao_fraudes": "Prevenção de fraudes",
         "lista_prevencao_fraudes_text": "A {{nomeBanca}} monitora ativamente o uso do sistema de Indique e Ganhe para prevenir fraudes. Qualquer tentativa de fraude, como a criação de múltiplas contas a partir do mesmo endereço IP, será considerada apenas o primeiro cadastro legível para ganho do saldo as demais serão desconsideradas.",
-        "ultimo_paragrafo": "Ao participar do sistema de Indique e Ganhe, você concorda que leu, entendeu e concorda em cumprir estas regras. É responsabilidade do indicador garantir que os usuários indicados estejam cientes e concordem com estas regras antes de se registrarem na {{nomeBanca}}."
+        "ultimo_paragrafo": "Ao participar do sistema de Indique e Ganhe, você concorda que leu, entendeu e concorda em cumprir estas regras. É responsabilidade do indicador garantir que os usuários indicados estejam cientes e concordem com estas regras antes de se registrarem na {{nomeBanca}}.",
+        "bonusRules": "Regras do bônus",
+        "checkBonusRules": "Confira as regras do bônus"
     },
     "data":{
         "dataHora": "{{data}} às {{hora}}",
