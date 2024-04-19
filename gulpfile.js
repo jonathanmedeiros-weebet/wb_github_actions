@@ -3107,12 +3107,20 @@ gulp.task('miamipix.net', function (done) {
     });
 });
 
-
 gulp.task('betfeijo.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "betfeijo.wee.bet",
         banca: "BET FEIJÓ",
+        styles: ""
+    });
+});
+
+gulp.task('pixplay.io', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "pixplay.io",
+        banca: "PIX PLAY",
         styles: ""
     });
 });
