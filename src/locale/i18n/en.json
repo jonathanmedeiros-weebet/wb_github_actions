@@ -448,7 +448,7 @@
     },
     "indique_ganhe":{
         "indiqueGanhe": "Refer and earn",
-        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}}",
+        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}} in {{balanceType}}",
         "indiqueGanheInfo1": "Refer friends and earn R${{valorGanhoPorIndicacao}} for each referral",
         "indiqueGanheInfo2": "Refer a friend through your referral link and receive R${{valorGanhoPorIndicacao}} for each referral in your account balance. Check out our ",
         "seuLinkIndicacao": "Your referral link:",
@@ -490,7 +490,9 @@
         "lista_deposito_indicado_text": "The referred user must make a minimum deposit of R${{valorMinDepositado}} into their account and place a minimum bet of R${{valorMinApostado}} for the balance of R${{valorGanhoPorIndicacao}} to be credited to the referrer's account.",
         "lista_prevencao_fraudes": "Fraud Prevention",
         "lista_prevencao_fraudes_text": "{{nomeBanca}} actively monitors the use of the Refer and Earn system to prevent fraud. Any attempt at fraud, such as creating multiple accounts from the same IP address, will only consider the first eligible registration for balance gain; any subsequent ones will be disregarded.",
-        "ultimo_paragrafo": "By participating in the Refer and Earn system, you agree that you have read, understood, and agreed to comply with these rules. It is the referrer's responsibility to ensure that the referred users are aware of and agree to these rules before registering with {{nomeBanca}}."
+        "ultimo_paragrafo": "By participating in the Refer and Earn system, you agree that you have read, understood, and agreed to comply with these rules. It is the referrer's responsibility to ensure that the referred users are aware of and agree to these rules before registering with {{nomeBanca}}.",
+        "bonusRules": "Bonus rules",
+        "checkBonusRules": "Check out the bonus rules"
     },
     "data":{
         "dataHora": "{{data}} at {{hora}}",

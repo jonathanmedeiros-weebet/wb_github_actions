@@ -152,8 +152,9 @@
     margin-top: 10px;
 }
 
-.indique-ganhe-info a {
+a.link-highlight {
     color: var(--highlight);
+    cursor: pointer;
 }
 
 .link-indicacao-container {

@@ -19,7 +19,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     tabSelected = 'link_compartilhamento';
 
     @ViewChild('regrasCondicoesModal', {static: true}) regrasCondicoesModal;
+    @ViewChild('regrasCondicoesBonusModal', {static: true}) regrasCondicoesBonusModal;
     @ViewChild('minhasIndicacoesModal', {static: true}) minhasIndicacoesModal;
+
     linkIndicacao: string = "";
     valorGanhoPorIndicacao;
     limiteIndicacoes;
@@ -29,6 +31,12 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     tipoSaldoGanho;
     prazoResgateSaldo;
     modalidadePromocao;
+    multiplicadorPromocao;
+    tipoConversaoPromocao;
+    maximoConversaoPromocao;
+    cotacaoMinimaSimplesPromocao;
+    cotacaoMinimaMultiplaPromocao;
+    diasVencimentoPromocao;
 
     nomeBanca;
 
@@ -63,6 +71,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     constructor(
         private activeModal: NgbActiveModal,
         private activeRulesModal: NgbActiveModal,
+        private activeBonusRulesModal: NgbActiveModal,
         private activeReferralsModal: NgbActiveModal,
         private authService: AuthService,
         private calendar: NgbCalendar,
@@ -100,6 +109,12 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         this.tipoSaldoGanho = this.paramsLocaisService.getOpcoes().indique_ganhe_tipo_saldo_ganho;
         this.prazoResgateSaldo = this.paramsLocaisService.getOpcoes().indique_ganhe_prazo_resgate_saldo;
         this.modalidadePromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_modalidade_promocao;
+        this.multiplicadorPromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_multiplicador_promocao;
+        this.tipoConversaoPromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_tipo_conversao_promocao;
+        this.maximoConversaoPromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_maximo_conversao_promocao;
+        this.cotacaoMinimaSimplesPromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_cotacao_minima_simples_promocao;
+        this.cotacaoMinimaMultiplaPromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_cotacao_minima_multipla_promocao;
+        this.diasVencimentoPromocao = this.paramsLocaisService.getOpcoes().indique_ganhe_dias_vencimento_promocao;
         this.nomeBanca = this.paramsLocaisService.getOpcoes().banca_nome;
         this.mobileScreen = window.innerWidth <= 1024;
         this.isAppMobile = this.authService.isAppMobile();
@@ -139,6 +154,17 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     {
         this.activeRulesModal = this.modalService.open(
             this.regrasCondicoesModal,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true
+            }
+        );
+    }
+
+    abrirModalRegrasBonus()
+    {
+        this.activeBonusRulesModal = this.modalService.open(
+            this.regrasCondicoesBonusModal,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true

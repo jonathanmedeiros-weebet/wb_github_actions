@@ -9,7 +9,7 @@
 <div class="modal-body cupom-ativo">
     <div class="mt-3">
         <ng-container *ngFor="let promocao of promocoes">
-           <span *ngIf="promocao.tipo !== 'manual_bonus'">
+           <span *ngIf="!['manual_bonus', 'cupom', 'indique_ganhe'].includes(promocao.tipo)">
                <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
                     <p>BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS {{promocao.bonusModalidade | uppercase}}</p>
                </ng-container>
