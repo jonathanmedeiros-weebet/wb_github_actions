@@ -1,0 +1,129 @@
+<div id="default-content">
+    <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </a>
+
+    <div class="internal-container-out">
+        <div class="content-header">
+            <h2>{{'geral.transactionHistory' | translate}} </h2>
+        </div>
+
+        <div class="tabs">
+            <ng-container *ngFor="let tab of getTabs()">
+                <a [ngClass]="{'active': tabSelected === tab.id}" (click)="changeTab(tab.id)">
+                    {{ tab.label | translate }}
+                </a>
+            </ng-container>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div class="filtros">
+                <input
+                    name="datepicker"
+                    class="dp-hidden"
+                    ngbDatepicker
+                    #datepicker="ngbDatepicker"
+                    [autoClose]="'outside'"
+                    (dateSelect)="onDateSelection($event, datepicker)"
+                    [displayMonths]="2"
+                    [dayTemplate]="t"
+                    outsideDays="hidden"
+                    [startDate]="fromDate!"
+                    tabindex="-1"
+                    value=""
+                >
+                <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                        {{ date.day }}
+                    </span>
+                </ng-template>
+                <div class="input-group datepicker-group">
+                    <i class="fa fa-calendar"></i>
+                    <input
+                        type="text"
+                        class="form-control inverted-out"
+                        [(ngModel)]="selectedDate"
+                        (click)="datepicker.toggle()"
+                        [ngModelOptions]="{standalone: true}"
+                        style="border-radius: 5px"
+                    >
+                </div>
+                <select class="form-control inverted-out" formControlName="status">
+                    <option value="">{{'geral.todos' | translate}}</option>
+                    <option [value]="option[0]" *ngFor="let option of statusFilterOptions">{{option[1] | translate}}</option>
+                </select>
+                <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
+            </div>
+        </form>
+
+        <app-spinner *ngIf="showLoading"></app-spinner>
+        <ng-container *ngIf="!showLoading">
+            <div class="content-body" [ngSwitch]="tabSelected">
+
+                <div class="table-responsive" *ngSwitchCase="'withdrawals'">
+                    <label class="label">
+                        <span *ngIf="qttWithdrawalsFound < 1">{{'geral.resultWereNotFound' | translate }}</span>
+                        <span *ngIf="qttWithdrawalsFound == 1">{{'geral.resultWereFound' | translate }}</span>
+                        <span *ngIf="qttWithdrawalsFound > 1">{{'geral.resultsWereFound' | translate: {'quantity': qttWithdrawalsFound} }}</span>
+                    </label>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{'geral.detalhes' | translate}}</th>
+                                <th>{{ 'geral.chavePix' | translate }}</th>
+                                <th>{{'geral.status' | translate}}</th>
+                                <th >{{'geral.valor' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let withdrawal of withdrawals">
+                                <td><img src="/assets/images/debito.svg" alt="image"></td>
+                                <td>{{'saques.saqueERegistrado' | translate}} {{ withdrawal.data }}</td>
+                                <td>{{ formatarChavePix(withdrawal.chavePix, withdrawal.tipoChavePix) }}</td>
+                                <td>
+                                {{ withdrawal.status }}
+                                <a class="info" *ngIf="withdrawal.observacao" placement="top" [ngbPopover]="withdrawal.observacao">
+                                    <i class="fa fa-info"></i>
+                                </a>
+                                </td>
+                                <td>{{ withdrawal.valor | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-responsive" *ngSwitchCase="'deposits'">
+                    <label class="label">
+                        <span *ngIf="qttDepositsFound < 1">{{'geral.resultWereNotFound' | translate }}</span>
+                        <span *ngIf="qttDepositsFound == 1">{{'geral.resultWereFound' | translate }}</span>
+                        <span *ngIf="qttDepositsFound > 1">{{'geral.resultsWereFound' | translate: {'quantity': qttDepositsFound} }}</span>
+                    </label>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="10"></th>
+                                <th>{{'geral.detalhes' | translate}}</th>
+                                <th>{{'geral.status' | translate}}</th>
+                                <th>{{'geral.valor' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let deposit of deposits">
+                                <td><img src="/assets/images/credito.svg" alt="image"></td>
+                                <td>{{'deposito.depositoERegistrado' | translate}} {{ deposit.data_registro }}</td>
+                                <td>{{ deposit.status | depositoStatusPixPipe}}</td>
+                                <td>{{ deposit.valor | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

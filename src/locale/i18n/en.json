@@ -87,7 +87,7 @@
         "creditos": "Credits",
         "debito": "Debit",
         "debitos": "Debits",
-        "depositar": "Depositar",
+        "depositar": "Deposit",
         "aCraseado": "to",
         "apostador": "Better",
         "codigo": "Code",
@@ -210,10 +210,22 @@
         "jogarAgora": "Play now",
         "nenhumaRodadaGratis": "No free spins found.",
         "opcaoPromocao": "Select one of the options to view the current promotions.",
-        "resultadosEncontrados": "{{quantidade}} results were found.",
         "selecioneChavePix": "select your pix key",
         "alertaSaque": "Only withdrawals to Pix keys linked to the account holder are allowed.",
-        "chaveAleatoria": "Random key"
+        "chaveAleatoria": "Random key",
+        "history": "History",
+        "transactionHistory": "Transaction history",
+        "promoCode": "Promo code",
+        "promoCodePlaceholder": "EX.: BONUSREGISTRATION",
+        "approved": "Approved",
+        "failed": "Failed",
+        "resultWereNotFound": "No results found",
+        "resultWereFound": "1 result were found",
+        "resultsWereFound": "{{ quantity }} results were found"
+    },
+    "bet": {
+        "sportsBetting": "Sports betting",
+        "casinoBetting": "Casino betting"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -325,10 +337,9 @@
         "digiteSuaSenha": "Type your password"
     },
     "saques": {
-        "informeValorDesejadoSaque": "Enter the amount you want to withdraw",
+        "enterAmountWithdrawal": "Enter the amount for the withdrawal",
         "informeOValor": "Enter the amount",
-        "saldoDisponivelParaSaque": "Balance available for withdrawal",
-        "infoSautoPay": "Withdrawals requested after 2pm will only be transferred on the next business day.",
+        "infoSautoPay": "Withdrawals requested by SautoPay after 2:00 PM will be transferred on the next business day only.",
         "saqueERegistrado": "Withdrawal - Registered",
         "paraProsseguirAtualizeChavePix": "To proceed, update your registration with your PIX key",
         "preenchaCadastroCompleto": "Please complete your registration completely to make the withdrawal request.",
@@ -337,7 +348,14 @@
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Phone or Random",
         "pagamentoExclusivoChaveCPF": "We inform you that when requesting the withdrawal, it will be carried out exclusively for the account holder's pix CPF key.",
         "solicitacoesRecentes": "Recent withdrawal requests",
-        "avisoRollover": "We inform you that when requesting a withdrawal with an active rollover, it will be canceled and the entire bonus will be permanently lost."
+        "avisoRollover": "We inform you that when requesting a withdrawal with an active rollover, it will be canceled and the entire bonus will be permanently lost.",
+        "withdrawalDetails": "Withdrawal details",
+        "availableBalanceForWithdrawal": "Available balance for withdrawal",
+        "safeWithdrawalAlert": "It's important that you use a bank account linked to your CPF number that is registered.",
+        "enterPixKey": "Select the type of PIX key",
+        "minimumWithdrawal": "Minimum withdrawal",
+        "dailyMaximum": "Daily maximum",
+        "monthlyMaximum": "Monthly maximum"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -356,12 +374,16 @@
         "depositoERegistrado": "Deposit - Registered",
         "selecioneUmaFormaDeDeposito": "Select a deposit method",
         "informeOValor": "Enter value",
+        "enterAmount": "Enter the amount for the deposit",
         "seuPixFoiCreditado": "Your pix was successfully credited, your new balance is: R$ {{novoSaldo}}",
-        "valorMinimo": "Minimum deposit amount",
+        "valorMinimo": "Minimum amount",
         "nenhumaModalidadeDeDeposito": "No deposit modality available. Please contact support.",
         "depositoRegistrado": "Deposit - Registered",
         "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}",
-        "depositosRecentes": "Recent deposits"
+        "depositosRecentes": "Recent deposits",
+        "depositDetails": "Deposit details",
+        "depositText": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, select whether you want to receive the {{bonusType}}, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
+        "depositTextWithoutBonus": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment."
     },
     "footer": {
         "afiliados": "Partnership",
@@ -431,13 +453,15 @@
         "qtdMovimentacoesNoPeriodo": "Qty. Movements in the Period from {{de}} - {{ate}}",
         "nenhumaMovimentacaoNoPeriodo": "No transactions performed in the period and/or with current filter.",
         "natureza": "Nature",
-        "desejaReceberBonusPrimeiroDeposito": "Do you want to receive First Deposit Bonus?",
+        "desejaReceberBonusPrimeiroDeposito": "Do you want to receive {{bonusType}}?",
         "receberBonus": "Receive Bonus - Sport",
         "naoQueroBonus": "I don't want bonus",
         "valorMinimoSaque": "Minimum withdrawal amount",
         "valorMaximoSaqueDiario": "Maximum daily withdrawal amount",
         "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
-        "receberBonusCassino": "Receive Bonus - Casino"
+        "receberBonusCassino": "Receive Bonus - Casino",
+        "transactions": "Transactions",
+        "paymentGateway": "Payment gateway"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
@@ -445,7 +469,14 @@
         "ativo": "Active",
         "completado": "Completed",
         "cancelado": "Canceled",
-        "vencido": "Vanquished"
+        "vencido": "Vanquished",
+        "bonusRules": "Bonus rules",
+        "bonusForfeited": "Bonus forfeited",
+        "noBonus": "No bonus",
+        "bonusWillBeForfeited": "Your bonus will be forfeited.",
+        "upTo": "up to",
+        "firstDepositBonus": "first deposit bonus",
+        "depositBonus": "deposit bonus"
     },
     "indique_ganhe":{
         "indiqueGanhe": "Refer and earn",

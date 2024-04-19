@@ -38,6 +38,10 @@ const routes: Routes = [{
                 .then(s => s.SolicitacaoSaqueClienteModule)
         },
         {
+            path: 'transacoes-historico',
+            loadChildren: () => import('./transacoes-historico/transacoes-historico.module').then(h => h.TransacoesHistoricoModule)
+        },
+        {
             path: 'depositos-saques',
             loadChildren: () => import('./depositos-saques/depositos-saques.module').then(m => m.DepositosSaquesModule)
         },

@@ -1,3 +1,293 @@
+#deposito-pix {
+    background-color: var(--sidebars);
+    padding: 30px;
+}
+
+#deposit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#deposit-container h3 {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 6px;
+    color: var(--foreground-sidebars);
+    border-bottom: 1px solid var(--foreground-sidebars);
+}
+
+#payment-method-column {
+    flex: 2;
+}
+
+#payment-method-column h3,
+#payment-method-column > div {
+    width: 75%;
+}
+
+#deposit-details {
+    flex: 3;
+}
+
+#details-wrapper {
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.payment-method-options {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: var(--foreground-sidebars);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-method-options a {
+    width: 96%;
+    position: relative;
+}
+
+.options-container a .radio {
+    height: 15px;
+    width: 15px;
+    border: 1px solid var(--foreground-sidebars);
+    background-color: transparent;
+    border-radius: 50%;
+    position: relative;
+}
+
+.options-container a.active .radio {
+    border: 1px solid var(--highlight);
+}
+
+.radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+
+    top: 3px;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--highlight);
+}
+
+.options-container a.active .radio:after {
+    display: block;
+}
+
+.payment-method-option {
+    display: flex;
+    align-items: center;
+    padding: 18px 24px 18px 24px;
+    margin-bottom: 15px;
+    border: 1px solid var(--game);
+    color: var(--foreground);
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border-color: rgba(var(--foreground-sidebars-rgb), 0.2);
+}
+
+.payment-method-option i.fa-caret-right {
+    display: none;
+    position: absolute;
+    right: -7px;
+    color: var(--highlight);
+    font-size: 18px;
+}
+
+.payment-method-option.active i.fa-caret-right {
+    display: block;
+}
+
+.payment-method {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.payment-method-icon {
+    width: 36px;
+    height: 23px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.payment-method-name {
+    font-size: 13px;
+}
+
+.active {
+    background-color: rgba(var(--highlight-rgb), 0.1) !important;
+    border-color: var(--highlight) !important;
+}
+
+.details-container {
+    width: 96%;
+    display: flex;
+    color: var(--foreground-sidebars);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.inverted-out {
+    border-color: rgba(var(--foreground-inputs-odds-rgb), 0.2);
+}
+
+.details-text {
+    width: 92%;
+    text-align: justify;
+    font-size: 12px;
+}
+
+.details-amount {
+    margin-top: 24px;
+    width: 100%;
+}
+
+.details-amount input {
+    text-align: left !important;
+    width: 66%;
+    margin: 12px 0 10px;
+}
+
+.details-amount label {
+    margin-bottom: 0;
+}
+
+.details-amount .min-amount {
+    color: rgba(var(--foreground-sidebars-rgb), 0.6);
+}
+
+.shortcut-amounts {
+    width: 66%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.shortcut-amounts button {
+    width: 32%;
+    height: 40px;
+    margin-top: 6px;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+}
+
+.shortcut-amounts button:active,
+.shortcut-amounts button:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.details-bonus, .details-promo-code {
+    width: 100%;
+    margin-top: 28px;
+}
+
+.details-bonus h3,
+.details-promo-code h3 {
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    margin: 0;
+}
+
+.details-bonus h3 span,
+.details-promo-code h3 span {
+    flex: 1;
+}
+
+.details-bonus h3 i,
+.details-promo-code h3 i {
+    padding-right: 12px;
+}
+
+#bonus-wrapper {
+    transition: 1s;
+    margin-top: 24px;
+}
+
+#bonus-wrapper .bonus-options {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#bonus-wrapper .bonus-option {
+    width: 31%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 16px 22px 16px 22px;
+    margin-bottom: 15px;
+    border: 1px solid var(--game);
+    color: var(--foreground-sidebars);
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border-color: rgba(var(--foreground-sidebars-rgb), 0.2);
+}
+
+.bonus {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 14px;
+    margin-bottom: 4px;
+}
+
+.bonus-info {
+    margin-top: 10px;
+}
+
+.bonus-amount span {
+    border-radius: 4px;
+    padding: 3px 6px;
+}
+
+.bonus-amount span.with-bonus {
+    color: #35CC95;
+    background-color: rgba(53, 204, 149, 0.22);
+}
+
+.bonus-amount span.without-bonus {
+    color: #ED4C5C;
+    background-color: rgba(237, 76, 92, 0.22);
+}
+
+.bonus-percent {
+    color: rgba(var(--foreground-sidebars-rgb), 0.6);
+}
+
+.details-promo-code #promo-code-wrapper {
+    width: 66%;
+    margin-top: 22px;
+}
+
+.details-submit {
+    width: 45%;
+    margin-top: 40px;
+}
+
+.details-submit div {
+    margin-bottom: 0;
+}
+
 .btn-close {
     position: absolute;
     top: -6px;
@@ -8,28 +298,14 @@
     font-size: 20px;
 }
 
-.promocao-tipo{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    color: var(--highlight);
-    padding: 15px;
-}
-
 .group-buttons {
    display: flex;
 }
 
-.btn-cancelar{
+.btn-cancelar {
     background-color: var(--foreground-highlight);
     color: var(--highlight);
     border-color: var(--highlight);
-}
-
-.info {
-    margin: 15px 25px 30px;
-    font-weight: 600;
-    color: var(--foreground);
 }
 
 .buttons {
@@ -46,34 +322,6 @@
     margin-right: 10px;
 }
 
-label.label-tempo {
-    display: block;
-    text-align: center;
-    margin: 0;
-}
-
-.tempo {
-    font-size: 14px;
-    font-weight: 600;
-    display: block;
-    text-align: center;
-}
-
-.valor {
-    display: block;
-    text-align: center;
-    font-size: 14px;
-    margin: 10px 0 70px;
-}
-
-.qr-code {
-    display: inline-block;
-    padding: 15px;
-    margin: 20px 0 10px;
-    border: 1px solid var(--highlight);
-    border-radius: 5px;
-}
-
 .modal-header, .modal-body {
     border-radius: 5px;
     text-align: center;
@@ -82,143 +330,17 @@ label.label-tempo {
 .modal-dialog .modal-content {
     border-radius: 10px;
 }
-.buttons-container {
-    width: 100%;
-    display: flex;
-    color: var(--foreground-header);
-    margin-bottom: 15px;
-}
 
-.buttons-container a * {
-    margin-right: 8px;
-}
-
-.buttons-container a.active .radio:after {
-    display: block;
-}
-
-.bonus{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.icone-bonus{
-    display: flex;
-}
-
-.permitirBonusPrimeiroDeposito{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.buttons-container a .radio {
-    height: 15px;
-    width: 15px;
-    border: 1px solid var(--highlight);
-    background-color: transparent;
-    border-radius: 50%;
-    position: relative;
-}
-
-.radio:after {
-    content: "";
-    position: absolute;
-    display: none;
-
-    top: 3px;
-    left: 3px;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--highlight);
-}
-
-.buttons-container a.active .radio {
-    border: 1px solid var(--highlight);
-}
-
-.opcao-bonus {
-    display: flex;
-    align-items: center;
-
-    width: 230px;
-    padding: 10px;
-
-    border: 1px solid var(--game);
-    color: var(--foreground);
-    border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.active {
-    background-color: transparent;
-    border-color: var(--highlight);
-}
-
-.btn-regras-bonus{
+.btn-regras-bonus {
     color: var(--highlight);
     text-decoration: none;
     cursor: pointer;
-}
-.links-bonus{
-    display: flex;
 }
 
 @media only screen and (max-width: 1024px) {
     .modal-body {
         padding-top: 50px;
     }
-
-    .group-input-valor {
-        text-align: center;
-    }
-
-    .row-input-valor {
-        justify-content: center;
-        margin-top: 40px;
-    }
-
-    .label-input-valor {
-        font-size: 16px;
-        text-align: center;
-        display: block;
-    }
-
-    .input-valor {
-        border: 0;
-        border-bottom: 2px solid var(--game);
-        color: var(--foreground);
-        border-radius: 0;
-        width: 100%;
-
-        text-align: center !important;
-        font-size: 22px;
-        background-color: transparent;
-
-        padding: 5px;
-    }
-
-    .input-valor:focus {
-        border: 0;
-        border-bottom: 2px solid var(--highlight);
-        color: var(--foreground);
-        background-color: transparent;
-    }
-
-    .alerta-min {
-        border-radius: 4px;
-        margin-top: 40px !important;
-        padding: 10px 15px;
-        font-size: 11px; /* ajuste fonte */
-        background: var(--game);
-        color: var(--foreground-game);
-        text-align: left;
-    }
-
-
 
     .group-buttons {
         width: 100%;
@@ -230,43 +352,67 @@ label.label-tempo {
         gap: 10px;
     }
 
-    .buttons-container {
-        border-radius: 4px;
-        flex-wrap: wrap;
+    #deposito-pix {
+        background-color: var(--background);
+        padding: 0;
     }
 
-    .buttons-container a {
-        flex: 1;
-        margin: 0;
-        justify-content: center;
-        border: 0;
+    #details-wrapper {
+        margin-top: 0;
+    }
+
+    .details-text {
+        width: 100%;
+    }
+
+    .details-payment-method {
+        margin-top: 28px;
+        width: 100%;
+    }
+
+    .details-payment-method select {
+        margin-top: 24px;
+    }
+
+    .details-payment-method .form-group {
+        margin-bottom: 0;
+    }
+
+    .details-amount input {
+        width: 100%;
+    }
+
+    .shortcut-amounts {
+        width: 100%;
+    }
+
+    .shortcut-amounts button {
         background-color: var(--game);
-        color: var(--foreground-game);
     }
 
-    .buttons-container a.active {
-        background-color: var(--highlight);
-        color: var(--foreground-highlight);
-        fill: var(--foreground-highlight);
+    #bonus-wrapper .bonus-options {
+        flex-direction: column;
     }
 
-    .buttons-container a i.radio{
-        display: none;
+    #bonus-wrapper .bonus-option {
+        width: 100% !important;
+        flex-direction: row;
     }
 
-    .btn-converterBonus{
-        text-decoration: none;
-        cursor: pointer;
+    #bonus-wrapper .bonus-option .bonus {
+        align-items: flex-start;
+        margin-right: 24px;
     }
 
-    .deposito-pix{
-        justify-content: center;
-        max-width: 100% !important;
-        flex: 0 0 100% !important;
+    #bonus-wrapper .bonus-option .bonus-option-wrapper div:first-child {
+        margin-top: 0;
     }
 
-    .links-bonus{
-        flex-grow: 1;
-        margin: 0 1% 1% 0;
+    #promo-code-wrapper {
+        width: 100% !important;
+    }
+
+    .details-submit {
+        width: 100%;
     }
 }

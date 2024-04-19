@@ -274,19 +274,36 @@
                 </a>
             </li>
 
-            <li class="cambista-item">
-                <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
+            <li class="cambista-item" routerLinkActive="router-link-active">
+                <a (click)="toggleSubTransacoes()">
                     <i class="fa fa-dollar icone-generico"></i>
-                    <span class="regiao-nome">{{'geral.saque' | translate}}</span>
+                    <span class="regiao-nome">{{'financeiro.transactions' | translate}}</span>
+                    <i class="fa m-0" [ngClass]="{'fa-angle-down': !subTransacoes, 'fa-angle-up': subTransacoes}"></i>
                 </a>
+
+                <div class="sub-nav-container" *ngIf="subTransacoes">
+                    <ul>
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">{{'geral.saque' | translate}}</span>
+                            </a>
+                        </li>
+
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">{{'geral.deposito' | translate}}</span>
+                            </a>
+                        </li>
+
+                        <li class="cambista-subitem">
+                            <a [routerLink]="['/clientes/transacoes-historico']" routerLinkActive="router-link-active">
+                                <span class="regiao-nome">{{'geral.history' | translate}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
-            <li class="cambista-item">
-                <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
-                    <i class="fa fa-dollar icone-generico"></i>
-                    <span class="regiao-nome">{{'geral.deposito' | translate}}</span>
-                </a>
-            </li>
             <li class="cambista-item">
                 <a [routerLink]="['/clientes/apostas']" routerLinkActive="router-link-active">
                     <i class="fa fa-check-square icone-generico"></i>
