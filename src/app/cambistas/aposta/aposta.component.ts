@@ -104,6 +104,11 @@ export class ApostaComponent implements OnInit {
 
     getApostas() {
         this.loading = true;
+
+        let dataSeparadas = this.selectedDate.split(" - ");
+        this.queryParams.dataFinal = this.formateDate(dataSeparadas[1]) ;
+        this.queryParams.dataInicial = this.formateDate(dataSeparadas[0]);
+
         const queryParams: any = {
             'codigo': this.codigo,
             'data-inicial': this.queryParams.dataInicial,
@@ -379,5 +384,12 @@ export class ApostaComponent implements OnInit {
 
     getDataFormatada(value, format) {
         return moment(value).format(format);
+    }
+
+    formateDate(data) {
+        let partes = data.split("/");
+        let dataFormatada = partes[2] + "-" + partes[1] + "-" + partes[0];
+
+        return dataFormatada;
     }
 }
