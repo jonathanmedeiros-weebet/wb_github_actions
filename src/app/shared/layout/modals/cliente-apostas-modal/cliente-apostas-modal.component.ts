@@ -262,6 +262,11 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     submit() {
         this.queryParams = this.form.value;
+
+        let dataSeparadas = this.selectedDate.split(" - ");
+        this.queryParams.dataFinal = this.formateDate(dataSeparadas[1]) ;
+        this.queryParams.dataInicial = this.formateDate(dataSeparadas[0]);
+
         this.tabSelected = this.queryParams.tipo;
         this.getApostas();
     }
@@ -383,5 +388,12 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     getDataFormatada(value, format) {
         return moment(value).format(format);;
+    }
+
+    formateDate(data) {
+        let partes = data.split("/");
+        let dataFormatada = partes[2] + "-" + partes[1] + "-" + partes[0];
+
+        return dataFormatada;
     }
 }

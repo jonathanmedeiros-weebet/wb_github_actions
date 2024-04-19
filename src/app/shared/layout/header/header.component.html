@@ -19,7 +19,10 @@
 
 <div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente) && !activeGameCassinoMobile()">
     <div class="indique-ganhe-card-content">
-        {{'indique_ganhe.indiqueGanheCard' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+        {{'indique_ganhe.indiqueGanheCard' | translate:{
+            'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
+            'bonusBalance': bonusBalanceReferAndEarn ? ' em ' + (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
+        }}
         <a (click)="isConnected && redirectIndiqueGanhe()"
             (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()"
             (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()"
