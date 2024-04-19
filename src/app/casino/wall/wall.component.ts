@@ -311,13 +311,11 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     handleChangeFornecedor(event) {
         const fornecedor = event.target.value;
-        this.handleChangeCategoria('cassino');
+        this.gameFornecedor = fornecedor;
 
-        if (fornecedor) {
-            this.router.navigate(['/casino', fornecedor]);
-        } else {
-            this.router.navigate(['/casino']);
-        }
+        this.filtrarJogos(fornecedor);
+        this.handleChangeCategoria(this.selectedSubMenu);
+        this.cd.detectChanges();
     }
 
     filtrarJogos(fornecedor = null) {
