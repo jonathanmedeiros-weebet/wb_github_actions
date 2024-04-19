@@ -127,7 +127,7 @@
             <div class="bloco-header">
                 <div class="titulo">{{'cassino.roleta' | translate}}</div>
                 <div class="ver-todos" *ngIf="gamesRoleta.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/roleta']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('roleta')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
@@ -194,7 +194,7 @@
             <div class="bloco-header">
                 <div class="titulo">Blackjack</div>
                 <div class="ver-todos" *ngIf="gamesBlackjack.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/blackjack']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('blackjack')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
@@ -261,7 +261,7 @@
             <div class="bloco-header">
                 <div class="titulo">Game Show</div>
                 <div class="ver-todos" *ngIf="gamesGameshow.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/gameshow']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('gameshow')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
@@ -328,7 +328,7 @@
             <div class="bloco-header">
                 <div class="titulo">Baccarat</div>
                 <div class="ver-todos" *ngIf="gamesBaccarat.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/baccarat']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('baccarat')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
@@ -395,7 +395,7 @@
             <div class="bloco-header">
                 <div class="titulo">Poker</div>
                 <div class="ver-todos" *ngIf="gamesPoker.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/poker']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('poker')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
