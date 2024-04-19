@@ -44,7 +44,7 @@ img{
 .botao-contato-flutuante {
     position: absolute;
     right: 20px;
-    bottom: 55px;
+    bottom: 30px;
     z-index: 1000;
     width: 60px;
     height: 60px;

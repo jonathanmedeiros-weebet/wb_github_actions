@@ -53,7 +53,7 @@
 .ver-todos a {
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 12px;
     color: var(--highlight);
     text-decoration: none;
     width: 100%;
@@ -94,7 +94,7 @@
 
 .more-games-fade-right {
     background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
-    right: 0;
+    right: -15px;
     opacity: 1;
 }
 
@@ -104,7 +104,7 @@
 
 .more-games-fade-left {
     background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
-    left: 0;
+    left: -15px;
     opacity: 0;
 }
 
@@ -170,7 +170,7 @@
 }
 
 .info-game {
-    padding: 30px 20px 10px;
+    padding: 50px 20px 10px;
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -195,6 +195,7 @@
     text-overflow: ellipsis;
     text-wrap: nowrap;
     overflow: hidden;
+    color: #C8C8C8;
 }
 
 .gameBloqueado {

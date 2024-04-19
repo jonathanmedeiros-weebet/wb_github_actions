@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChildren, QueryList, Input } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/services';
 import { LoginModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
@@ -15,15 +16,30 @@ export class CassinoComponent implements OnInit {
 
     isMobile = false;
     modalRef: NgbModalRef;
+    isLoggedIn = false;
+    isCliente = false;
 
     constructor(
         private modalService: NgbModal,
+        private auth: AuthService,
         private renderer: Renderer2,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
     ) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.auth.logado
+            .subscribe((isLoggedIn: any) => {
+                    this.isLoggedIn = isLoggedIn;
+                }
+            );
+
+        this.auth.cliente
+            .subscribe((isCliente: any) => {
+                    this.isCliente = isCliente;
+                }
+            );
+    }
 
     scrollLeft(scrollId: string) {
         const scrollTemp = this.gamesScroll.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
