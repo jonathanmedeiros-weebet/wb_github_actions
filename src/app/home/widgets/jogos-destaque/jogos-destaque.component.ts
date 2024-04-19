@@ -27,7 +27,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     jogosDestaquesIds = [];
 
     customOptions: OwlOptions = {
-        loop: false,
+        loop: true,
         autoplay: true,
         rewind: true,
         margin: 10,

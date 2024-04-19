@@ -39,7 +39,7 @@ export class JogosAovivoComponent implements OnInit {
     term = '';
 
     customOptions: OwlOptions = {
-        loop: false,
+        loop: true,
         autoplay: true,
         rewind: true,
         margin: 10,
