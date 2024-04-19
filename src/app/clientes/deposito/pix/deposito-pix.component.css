@@ -160,7 +160,7 @@
 .details-amount input {
     text-align: left !important;
     width: 66%;
-    margin: 12px 0 10px
+    margin: 12px 0 10px;
 }
 
 .details-amount label {
@@ -262,16 +262,16 @@
 
 .bonus-amount span.with-bonus {
     color: #35CC95;
-    background-color: rgba(53, 204, 149, 0.22)
+    background-color: rgba(53, 204, 149, 0.22);
 }
 
 .bonus-amount span.without-bonus {
     color: #ED4C5C;
-    background-color: rgba(237, 76, 92, 0.22)
+    background-color: rgba(237, 76, 92, 0.22);
 }
 
 .bonus-percent {
-    color: rgba(var(--foreground-sidebars-rgb), 0.6)
+    color: rgba(var(--foreground-sidebars-rgb), 0.6);
 }
 
 .details-promo-code #promo-code-wrapper {

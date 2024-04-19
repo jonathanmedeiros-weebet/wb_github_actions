@@ -219,7 +219,7 @@
 .details-amount input {
     text-align: left !important;
     width: 66%;
-    margin: 12px 0 8px
+    margin: 12px 0 8px;
 }
 
 .details-amount label {

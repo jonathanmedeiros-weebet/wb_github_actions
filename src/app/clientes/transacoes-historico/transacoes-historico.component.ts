@@ -266,7 +266,7 @@ export class TransacoesHistoricoComponent extends BaseFormComponent implements O
         if(lang == 'us') {
             return  date.year + '-' + String(date.month).padStart(2, '0') + "-" + String(date.day).padStart(2, '0');
         }
-        return String(date.day).padStart(2, '0') + '/' + String(date.month).padStart(2, '0') + "/" + date.year
+        return String(date.day).padStart(2, '0') + '/' + String(date.month).padStart(2, '0') + "/" + date.year;
     }
 
     isHovered(date: NgbDate) {

@@ -357,11 +357,6 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }
     }
 
-    // selecionarOpcaoBonus(opcaoBonus) {
-    //     this.opcaoBonus = opcaoBonus;
-    //     this.form.get('bonus').patchValue(opcaoBonus);
-    // }
-
     abrirRegrasBonus() {
         this.modalService.open(RegrasBonusModalComponent, {
             centered: true,
