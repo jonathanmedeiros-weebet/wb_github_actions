@@ -8,7 +8,7 @@ export const config: any = {
     BANCA_NOME: '[BANCA]',
     HOST: _host,
     BASE_URL: `${_host}/api`,
-    LOKI_URL: 'https://loki.wee.bet',
+    LOKI_URL: 'https://loki1.weebet.tech',
     SHARED_URL: '[SHARED_URL]',
     CENTER_HOST: _center,
     LIVE_HOST: _live,

@@ -12,12 +12,13 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgxPaginationModule} from "ngx-pagination";
 import {WallLiveComponent} from "./wall-live/wall-live.component";
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
 @NgModule({
   declarations: [
     WallComponent,
-      WallLiveComponent,
+    WallLiveComponent,
     GameviewComponent,
     CasinoWrapperComponent,
     LiveComponent
@@ -28,6 +29,7 @@ import {WallLiveComponent} from "./wall-live/wall-live.component";
         NgxSkeletonLoaderModule,
         TranslateModule,
         NgxPaginationModule,
+        AngularSvgIconModule,
     ]
 })
 export class CasinoModule { }

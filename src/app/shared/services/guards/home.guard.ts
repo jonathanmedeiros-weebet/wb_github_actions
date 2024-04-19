@@ -9,12 +9,12 @@ export class HomeGuard implements CanActivate {
 
     pages = {
         esporte: 'esportes',
-        cassino: 'casino/c',
-        virtual: 'casino/v',
+        cassino: 'casino',
+        virtual: 'vitual-sports',
         desafio: 'desafios',
         acumuladao: 'acumuladao',
         loteria: 'loterias',
-        cassino_ao_vivo: 'casino/cl'
+        cassino_ao_vivo: 'live-casino'
     }
 
     constructor(

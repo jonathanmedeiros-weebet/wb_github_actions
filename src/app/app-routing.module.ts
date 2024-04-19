@@ -56,7 +56,7 @@ const appRoutes: Routes = [
                 canActivate: [DesafioGuard]
             },
             {
-                path: 'casino',
+                path: '',
                 loadChildren: () => import('./casino/casino.module').then(m => m.CasinoModule)
             },
             {

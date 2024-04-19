@@ -61,7 +61,7 @@
 </div>
 
 <div class="content-list">
-    <app-banners pagina="desafio" *ngIf="!showLoadingIndicator"></app-banners>
+    <app-banners pagina="desafio" [showLoadingIndicator]="showLoadingIndicator"></app-banners>
     <div class="wrap-sticky">
         <div class="sem-evento" *ngIf="categorias && !categorias.length">
             {{'geral.nenhumEventoDisponivel' | translate}}!

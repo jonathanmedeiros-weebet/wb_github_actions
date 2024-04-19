@@ -204,7 +204,17 @@
         "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos.",
         "cadastro": "Cadastro",
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
-        "esportivo": "esportivo"
+        "esportivo": "esportivo",
+        "rodadaGratis": "Rodada grátis",
+        "dataVencimento": "Data de vencimento",
+        "quantidade": "Quantidade",
+        "jogarAgora": "Jogar Agora",
+        "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
+        "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
+        "resultadosEncontrados": "Foram encontrados {{quantidade}} resultados",
+        "selecioneChavePix": "Selecione a chave pix",
+        "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
+        "chaveAleatoria": "Chave aleatória"
     },
     "dias": {
         "ontem": "Ontem",
@@ -288,7 +298,8 @@
         "mesa": "Mesa",
         "destaques": "Destaques",
         "virtuais": "Virtuais",
-        "aoVivo": "Ao Vivo"
+        "aoVivo": "Ao Vivo",
+        "bingo": "Bingo"
     },
     "cartoes": {
         "titulo": "Cartões",

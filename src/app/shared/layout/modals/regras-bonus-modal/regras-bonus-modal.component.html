@@ -13,6 +13,9 @@
                <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
                     <p>BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS {{promocao.bonusModalidade | uppercase}}</p>
                </ng-container>
+               <ng-container *ngIf="promocao.tipo === 'deposito_bonus'">
+                    <p>BÔNUS DE DEPÓSITO - APOSTAS {{promocao.bonusModalidade | uppercase}}</p>
+               </ng-container>
                <ng-container *ngIf="promocao.tipo === 'cadastro_bonus'">
                     <p>BÔNUS DE CADASTRO - APOSTAS {{promocao.bonusModalidade | uppercase}}</p>
                </ng-container>
@@ -20,6 +23,23 @@
                    <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'">
                         <li>
                         Faça seu primeiro depósito e receba 100% extra até um máximo de R${{promocao.valorBonus}} em bônus (com um depósito de R${{promocao.valorBonus}}
+                            ). Para receber seu Bônus de Primeiro Depósito para apostas na modalidade {{promocao.bonusModalidade}}
+                            , você deve escolher este bônus no momento em que fizer seu Primeiro Depósito.
+                        </li>
+                        <ng-container *ngIf="promocao.bonusModalidade === 'cassino'">
+                            <li>
+                            Ao escolher o bônus na modalidade cassino, todo o valor depositado será transformado em saldo bônus. Por exemplo, se for realizado um depósito de R$10 e o valor a ser recebido
+                                de bônus for R$10 então seu saldo bônus será R$20 e seu saldo real será R$0
+                            </li>
+                        </ng-container>
+                        <li>
+                        O bônus será ativado diretamente na sua conta de cliente após o primeiro depósito. Para usar seu bônus de primeiro depósito de Apostas na modalidade {{promocao.bonusModalidade}}
+                            , você deve cumprir as condições estabelecidas nos seguintes pontos:
+                        </li>
+                   </ng-container>
+                    <ng-container *ngIf="promocao.tipo === 'deposito_bonus'">
+                        <li>
+                        Faça seu depósito e receba 100% extra até um máximo de R${{promocao.valorBonus}} em bônus (com um depósito de R${{promocao.valorBonus}}
                             ). Para receber seu Bônus de Primeiro Depósito para apostas na modalidade {{promocao.bonusModalidade}}
                             , você deve escolher este bônus no momento em que fizer seu Primeiro Depósito.
                         </li>
@@ -43,21 +63,31 @@
                             , você deve cumprir as condições estabelecidas nos seguintes pontos:
                         </li>
                    </ng-container>
-                    <li>
-                        O valor total de bônus deve ser apostado {{promocao.multiplicador}}
-                        vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito com bônus de R$50, você terá que fazer R${{promocao.multiplicador * 50}}
-                        em apostas na modalidade {{promocao.bonusModalidade}}.
-                    </li>
+                   <ng-container *ngIf="promocao.tipo === 'primeiro_deposito_bonus'; else regraPadrao">
+                        <li>
+                            O valor total do bônus, somado ao valor do depósito deverá ser apostado {{promocao.multiplicador}}
+                            vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito de R$50 com um bônus
+                            de R$50, o valor total do bônus (R$50) somado ao valor do depósito (R$50) resulta em um total de R$100. Você terá que fazer R${{promocao.multiplicador * 100}} em apostas na modalidade esportiva, o que equivale a {{promocao.multiplicador}} vezes o valor total do depósito e
+                            do bônus combinados.
+                        </li>
+                   </ng-container>
+                   <ng-template #regraPadrao>
+                        <li>
+                            O valor total de bônus deve ser apostado {{promocao.multiplicador}}
+                            vezes na modalidade {{promocao.bonusModalidade}}. As apostas colocadas em esportes virtuais não se encontram elegíveis para efeitos do cumprimento dos requisitos de bônus. Por exemplo, em um depósito com bônus de R$50, você terá que fazer R${{promocao.multiplicador * 50}}
+                            em apostas na modalidade {{promocao.bonusModalidade}}.
+                        </li>
+                   </ng-template>
                     <li>
                         Quaisquer ganhos provenientes de apostas com bônus serão contabilizados em seu saldo de bônus.
                     </li>
                     <li>
                         <span  *ngIf="promocao.tipoConversao === 'porcentagem'; else defaultTipoConversao">
-                            O valor máximo de saldo bônus a ser convertido para saldo real é {{promocao.maximoBonusConvertido | number: '1.0-0'}}% 
+                            O valor máximo de saldo bônus a ser convertido para saldo real é {{promocao.maximoBonusConvertido | number: '1.0-0'}}%
                             do valor do bônus recebido, todo o valor restante será descartado.
                         </span>
                         <ng-template #defaultTipoConversao>
-                            O valor máximo de saldo bônus a ser convertido para saldo real é R${{promocao.maximoBonusConvertido}}, 
+                            O valor máximo de saldo bônus a ser convertido para saldo real é R${{promocao.maximoBonusConvertido}},
                             todo o valor restante será descartado.
                         </ng-template>
                     </li>

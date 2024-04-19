@@ -1,6 +1,6 @@
 .casino-content {
     flex-grow: 1;
-    overflow: scroll;
+    overflow: hidden;
 
     height: -webkit-fill-available;
     -webkit-overflow-scrolling: touch;

@@ -99,31 +99,26 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                         'ligas_populares': this.ligasPopulares,
                         'odds': this.odds
                     };
-                    let isHoje = false;
 
-                    if (params['data']) {
-                        const dt = moment(params['data']);
-                        if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
-                            queryParams.data = dt.format('YYYY-MM-DD');
-                        } else {
-                            queryParams.data = dataLimiteTabela;
-                        }
+                    let addDay = false;
+                    const dt = params['data'] ? moment(params['data']) : moment();
+
+                    if (dt.isSameOrBefore(dataLimiteTabela, 'day')) {
+                        queryParams.data = dt.format('YYYY-MM-DD');
                     } else {
-                        queryParams.data = moment().format('YYYY-MM-DD');
-
-                        if (moment().day() !== 0) {
-                            isHoje = true;
-                        }
+                        queryParams.data = dataLimiteTabela;
                     }
 
-                    if (queryParams.data) {
-                        this.data = queryParams.data;
+                    this.data = queryParams.data;
+
+                    if (dt.isBefore(dataLimiteTabela, 'day')) {
+                        addDay = true;
                     }
 
                     this.campeonatoService.getCampeonatos(queryParams)
                         .pipe(
                             switchMap(campeonatos => {
-                                if (campeonatos.length === 0 && isHoje) {
+                                if (campeonatos.length === 0 && addDay) {
                                     queryParams.data = moment().add(1, 'd').format('YYYY-MM-DD');
                                     this.data = queryParams.data;
                                     return this.campeonatoService.getCampeonatos(queryParams);

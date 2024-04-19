@@ -1,16 +1,16 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {GameviewComponent} from './gameview/gameview.component';
-import {WallComponent} from './wall/wall.component';
-import {WallLiveComponent} from './wall-live/wall-live.component';
-import {CasinoWrapperComponent} from './wrapper/wrapper.component';
-import {CasinoGuard} from '../shared/services/guards/casino.guard';
-import {LiveComponent} from './live/live.component';
-import {CassinoLayoutComponent, CassinoLiveLayoutComponent, VirtuaisLayoutComponent} from '../shared/layout/app-layouts';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { GameviewComponent } from './gameview/gameview.component';
+import { WallComponent } from './wall/wall.component';
+import { WallLiveComponent } from './wall-live/wall-live.component';
+import { CasinoWrapperComponent } from './wrapper/wrapper.component';
+import { CasinoGuard } from '../shared/services/guards/casino.guard';
+import { LiveComponent } from './live/live.component';
+import { CassinoLayoutComponent, CassinoLiveLayoutComponent, VirtuaisLayoutComponent } from '../shared/layout/app-layouts';
 
 const routes: Routes = [
     {
-        path: 'c',
+        path: 'casino',
         component: CassinoLayoutComponent,
         children: [
             {
@@ -19,26 +19,22 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'wall/todos',
-                        pathMatch: 'full'
+                        component: WallComponent,
+                        pathMatch: 'full',
+                        canActivate: [CasinoGuard],
                     },
                     {
-                        path: 'wall',
+                        path: ':game_fornecedor',
                         component: WallComponent,
                         canActivate: [CasinoGuard]
                     },
                     {
-                        path: 'live',
-                        component: LiveComponent,
+                        path: ':game_fornecedor/:game_id',
+                        component: GameviewComponent,
                         canActivate: [CasinoGuard]
                     },
                     {
-                        path: 'wall/:game_type',
-                        component: WallComponent,
-                        canActivate: [CasinoGuard]
-                    },
-                    {
-                        path: 'play/:game_mode/:game_id/:game_fornecedor',
+                        path: ':game_fornecedor/:game_id/:game_mode',
                         component: GameviewComponent,
                         canActivate: [CasinoGuard]
                     }
@@ -47,7 +43,7 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'cl',
+        path: 'live-casino',
         component: CassinoLiveLayoutComponent,
         children: [
             {
@@ -56,31 +52,22 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'wall-live/todos',
-                        pathMatch: 'full'
+                        component: WallLiveComponent,
+                        pathMatch: 'full',
+                        canActivate: [CasinoGuard],
                     },
                     {
-                        path: 'wall-live',
+                        path: ':game_fornecedor',
                         component: WallLiveComponent,
                         canActivate: [CasinoGuard]
                     },
                     {
-                        path: 'wall-live',
-                        component: WallLiveComponent,
+                        path: ':game_fornecedor/:game_id',
+                        component: GameviewComponent,
                         canActivate: [CasinoGuard]
                     },
                     {
-                        path: 'live',
-                        component: LiveComponent,
-                        canActivate: [CasinoGuard]
-                    },
-                    {
-                        path: 'wall-live/:game_type',
-                        component: WallLiveComponent,
-                        canActivate: [CasinoGuard]
-                    },
-                    {
-                        path: 'play/:game_mode/:game_id/:game_fornecedor',
+                        path: ':game_fornecedor/:game_id/:game_mode',
                         component: GameviewComponent,
                         canActivate: [CasinoGuard]
                     }
@@ -89,7 +76,7 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'v',
+        path: 'virtual-sports',
         component: VirtuaisLayoutComponent,
         children: [
             {
@@ -98,15 +85,34 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'wall/virtuais',
-                        pathMatch: 'full'
+                        component: WallComponent,
+                        data: { virtual_sports: true },
+                        pathMatch: 'full',
+                        canActivate: [CasinoGuard],
                     },
                     {
-                        path: 'wall/:game_type',
-                        component: WallComponent,
+                        path: ':game_fornecedor/:game_id',
+                        component: GameviewComponent,
                         canActivate: [CasinoGuard]
                     },
                     {
+                        path: ':game_fornecedor/:game_id/:game_mode',
+                        component: GameviewComponent,
+                        canActivate: [CasinoGuard]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        path: 'pb',
+        component: VirtuaisLayoutComponent,
+        children: [
+            {
+                path: '',
+                component: CasinoWrapperComponent,
+                children: [
+                     {
                         path: 'play/:game_mode/:game_id/:game_fornecedor',
                         component: GameviewComponent,
                         canActivate: [CasinoGuard]
