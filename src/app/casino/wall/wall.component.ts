@@ -304,9 +304,11 @@ export class WallComponent implements OnInit, AfterViewInit {
                 break;
             default:
                 this.gameTitle = this.translate.instant('geral.todos');
-                this.isHomeCassino = this.gameFornecedor === undefined;
+                this.isHomeCassino = (this.gameFornecedor === undefined || this.gameFornecedor === '');
                 break;
         }
+
+        this.listagemJogos.nativeElement.scrollTo(0, 0);
     }
 
     handleChangeFornecedor(event) {

@@ -398,20 +398,20 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
                 break;
             default:
                 this.gameTitle = this.translate.instant('geral.todos');
-                this.isHomeCassino = this.gameFornecedor === undefined;
+                this.isHomeCassino = (this.gameFornecedor === undefined || this.gameFornecedor === '');
                 break;
         }
+
+        this.listagemJogos.nativeElement.scrollTo(0, 0);
     }
 
     handleChangeFornecedor(event) {
         const fornecedor = event.target.value;
-        this.handleChangeCategoria('cassino');
+        this.gameFornecedor = fornecedor;
 
-        if (fornecedor) {
-            this.router.navigate(['/live-casino', fornecedor]);
-        } else {
-            this.router.navigate(['/live-casino']);
-        }
+        this.filtrarJogos(fornecedor);
+        this.handleChangeCategoria(this.selectedSubMenu);
+        this.cd.detectChanges();
     }
 
     atualizarSubmenu() {
