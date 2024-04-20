@@ -645,7 +645,7 @@
 .scroll {
     overflow: auto;
     scroll-behavior: smooth;
-    width: 80%;
+    width: 100%;
 }
 
 .submenu a {
