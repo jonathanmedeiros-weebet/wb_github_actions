@@ -351,7 +351,7 @@
         "avisoRollover": "We inform you that when requesting a withdrawal with an active rollover, it will be canceled and the entire bonus will be permanently lost.",
         "withdrawalDetails": "Withdrawal details",
         "availableBalanceForWithdrawal": "Available balance for withdrawal",
-        "safeWithdrawalAlert": "It's important that you use a bank account linked to your CPF number that is registered.",
+        "safeWithdrawalAlert": "For security reasons, withdrawals will only be made to accounts belonging to the registered CPF.",
         "enterPixKey": "Select the type of PIX key",
         "minimumWithdrawal": "Minimum withdrawal",
         "dailyMaximum": "Daily maximum",

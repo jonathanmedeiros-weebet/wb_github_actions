@@ -67,14 +67,14 @@
                                 <button type="button" class="btn" (click)="changeAmount(50)">
                                     {{50 | currency}}
                                 </button>
-                                <button type="button" class="btn" (click)="changeAmount(75)">
-                                    {{75 | currency}}
-                                </button>
                                 <button type="button" class="btn" (click)="changeAmount(100)">
                                     {{100 | currency}}
                                 </button>
-                                <button type="button" class="btn" (click)="changeAmount(200)">
-                                    {{200 | currency}}
+                                <button type="button" class="btn" (click)="changeAmount(500)">
+                                    {{500 | currency}}
+                                </button>
+                                <button type="button" class="btn" (click)="changeAmount(1000)">
+                                    {{1000 | currency}}
                                 </button>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                                     {{amountSportsBonus | currency}} {{'geral.rollover' | translate}}
                                                 </span>
                                             </div>
-                                            <div class="bonus-info bonus-percent" [ngStyle]="{'font-size': '10px'}">100% {{'rollover.upTo' | translate}} R${{maxAmountSportsBonus}}</div>
+                                            <div class="bonus-info bonus-percent" [ngStyle]="{'font-size': '10px'}">100% {{'rollover.upTo' | translate}} {{maxAmountSportsBonus | currency}}</div>
                                         </div>
                                     </a>
                                     <a class="bonus-option"
@@ -126,7 +126,7 @@
                                                     {{amountCasinoBonus | currency}} {{'geral.rollover' | translate}}
                                                 </span>
                                             </div>
-                                            <div class="bonus-info bonus-percent" [ngStyle]="{'font-size': '10px'}">100% {{'rollover.upTo' | translate}} R${{maxAmountCasinoBonus}}</div>
+                                            <div class="bonus-info bonus-percent" [ngStyle]="{'font-size': '10px'}">100% {{'rollover.upTo' | translate}} {{maxAmountCasinoBonus | currency}}</div>
                                         </div>
                                     </a>
                                     <a class="bonus-option"
