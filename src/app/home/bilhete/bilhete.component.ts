@@ -69,7 +69,7 @@ export class BilheteComponent extends BaseFormComponent implements OnInit, OnDes
     showFrame = true;
     headerHeight = 92;
 
-    showBilhete = false;
+    showBilhete = true;
 
     constructor(
         public sanitizer: DomSanitizer,

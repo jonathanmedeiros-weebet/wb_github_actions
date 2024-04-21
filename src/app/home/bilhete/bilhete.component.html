@@ -1,7 +1,7 @@
 <section class="bilhete" *ngIf="itens.length > 0">
     <div class="header-bilhete" (click)="toggleBilhete()">
         <span>
-            <i class="fa fa-ticket"></i> Bilhete ({{itens.length}})
+            <i class="fa fa-ticket"></i> {{'bilhete.titulo' | translate}} ({{itens.length}})
         </span>
         <i class="fa fa-angle-{{ showBilhete ? 'up' : 'down' }}"></i>
     </div>
@@ -16,7 +16,7 @@
             <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
                 <div class="jogo-selecionado-info">
                     <div class="fw-600">
-                        {{item.jogo.horario | moment:'DD/MM/YYYY'}} <span *ngIf="item.jogo.ao_vivo"> - {{'bilhete.aoVivo' | translate}}</span>
+                        {{item.jogo.horario | moment:'DD/MM/YYYY HH:mm'}} <span *ngIf="item.jogo.ao_vivo"> - {{'bilhete.aoVivo' | translate}}</span>
                     </div>
                     <div class="fw-600">
                         {{item.jogo.nome}}
@@ -25,7 +25,21 @@
                         {{item.jogo.campeonato.nome}}
                     </div>
                     <div class="">
-                        Resultado final: {{ item.cotacao.chave }}
+                        {{ item.cotacao.chave  | oddCategoria}}:
+                        <span *ngIf="item.jogo.sport_id == 1">
+                            {{item.cotacao.chave | tipoAposta}}
+                        </span>
+                            <span *ngIf="item.jogo.sport_id != 1;">
+                            {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :item.jogo.time_b_nome}}
+                        </span>
+                        <span class="valor">
+                            ({{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
+                                item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }})
+                            <del *ngIf="item.cotacao_antiga_valor" class="cotaca-antiga-valor">
+                                ({{item.cotacao_antiga_valor | calcularCotacao: item.cotacao.chave:
+                                item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo}})
+                            </del>
+                        </span>
                     </div>
                 </div>
                 <div class="remover-item" (click)="removerItem(i)">
@@ -34,11 +48,176 @@
             </div>
         </div>
 
-        <form>
-            <input class="form-control inverted-out" placeholder="Nome do Apostador" />
-            <input class="form-control inverted-out" placeholder="R$ 0" />
-            <button class="btn btn-custom" type="submit">Apostar</button>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group" *ngIf="!isCliente && modoCambista">
+                <div class="input-md">
+                    <input type="text" id="nomeApostador" formControlName="apostador"
+                        [ngClass]="applyCssInputError('apostador')"
+                        class="form-control inverted-out" placeholder=" ">
+                    <label for="nomeApostador">{{'bilhete.nomeDoApostador' | translate}}</label>
+
+                </div>
+                <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}} "></app-error-msg>
+            </div>
+            <div class="form-group" style="margin-bottom: 0">
+                <div class="input-icon">
+                    <i>R$</i>
+                    <input type="number" formControlName="valor" [min]="apostaMinima"
+                        [max]="apostaMaximo" (focusin)="setFocoValor(true)" (focusout)="setFocoValor(false)"
+                        [ngClass]="applyCssInputError('valor')" class="form-control inverted-out"
+                        placeholder="Valor">
+                </div>
+                <app-error-msg [control]="form.get('valor')" label="Valor"></app-error-msg>
+            </div>
+            <div class="valores" [ngClass]="{'fadeIn': valorFocado, 'fadeOut': !valorFocado}">
+                <button type="button" (click)="definirValor(5)" class="btn btn-sm">{{5 | currency}}</button>
+                <button type="button" (click)="definirValor(10)" class="btn btn-sm">{{10 | currency}}</button>
+                <button type="button" (click)="definirValor(20)" class="btn btn-sm">{{20 | currency}}</button>
+                <button type="button" (click)="definirValor(50)" class="btn btn-sm">{{50 | currency}}</button>
+            </div>
+            <div class="informations">
+                {{'bilhete.cotacao' | translate}}:
+                <span class="cotacao">{{cotacao | cotacao}}</span>
+                <br>
+                {{'bilhete.possiveisGanhos' | translate}}:
+                <span class="possivel-ganho">{{possibilidadeGanho | currency}}</span>
+            </div>
+            <div *ngIf="isLoggedIn" class="form-group form-check-custom form-check-style-1 alteracoes-odds">
+                <input type="checkbox" class=""
+                    id="aceito-alteracoes-odds"
+                    formControlName="aceitar_alteracoes_odds">
+                <label for="aceito-alteracoes-odds" class="pointer">
+                    {{'bilhete.aceitarAlteracoesDeOdds' | translate}}
+                </label>
+            </div>
+            <div *ngIf="posicaoFinanceira.bonus != 0 && posicaoFinanceira.bonusModalidade === 'esportivo' && isCliente && isLoggedIn"
+                class="form-group form-check-custom form-check-style-1 utilizar-bonus">
+                <input type="checkbox" class=""
+                    id="utilizar-bonus"
+                    formControlName="utilizar_bonus" (click)="toggleUtilizarBonus()">
+                <label for="utilizar-bonus">
+                    {{'bilhete.utilizarBonus' | translate}}
+                </label>
+            </div>
+            <div class="form-group submit-buttons">
+                <ng-container *ngIf="mudancas;else btnApostar">
+                    <div class="mensagem-mudanca">
+                        {{'bilhete.algumasCotacoesMudaram' | translate}}
+                    </div>
+                    <button type="button" (click)="aceitarMudancas()" id="aceitar-mudancas"
+                            class="btn btn-custom btn-block">
+                        {{'bilhete.aceitarAlteracoes' | translate}}
+                    </button>
+                </ng-container>
+                <ng-template #btnApostar>
+                    <button *ngIf="!disabled; else btnProcessando" [attr.disabled]="itens.length <= 0 ? true : none"
+                            class="btn btn-custom btn-block">
+                        {{'bilhete.apostar' | translate}} <b>({{itens.length}})</b>
+                    </button>
+                    <ng-template #btnProcessando>
+                        <button disabled class="btn btn-custom btn-block">
+                            {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </ng-template>
+                </ng-template>
+            </div>
         </form>
     </div>
-
 </section>
+
+<ng-template #apostaDeslogadoModal let-modal>
+    <div class="modal-body" id="aposta-deslogado">
+        <div class="titulo-bilhete hide-desktop">
+            <a (click)="closeCupomPre()" class="fechar-pre-bilhete">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <div class="titulo">{{'bilhete.titulo' | translate}}</div>
+            <a [routerLink]="['/esportes/futebol/jogos']" (click)="closeCupomPre()" class="fechar-pre-bilhete">
+                <i class="fa fa-home"></i>
+            </a>
+        </div>
+
+        <div *ngIf="opcoes.cartao_aposta" class="tabs">
+            <a class="tab" (click)="trocarTipoApostaDeslogado('preaposta')"
+               [ngClass]="{'active':tipoApostaDeslogado == 'preaposta'}">
+                {{'bilhete.preAposta' | translate}}
+            </a>
+            <a class="tab" (click)="trocarTipoApostaDeslogado('cartao')"
+               [ngClass]="{'active':tipoApostaDeslogado == 'cartao'}">
+                {{'bilhete.cartaoDeAposta' | translate}}
+            </a>
+        </div>
+        <h4>{{'bilhete.jogosSelecionados' | translate}}</h4>
+        <div class="lista-apostas" *ngIf="itens.length > 0">
+            <div *ngFor="let item of itens.value; let i=index" class="aposta-item">
+                <div class="">
+                    <div class="horario">
+                        {{item.jogo.horario | moment: 'DD.MM.YYYY HH:mm'}}
+                    </div>
+                    <div class="cotacao">
+                        <span *ngIf="item.cotacao.nome; else chave">
+                            {{item.cotacao.nome}}
+                        </span>
+                        <ng-template #chave>
+                            <span *ngIf="item.jogo.sport_id == 1; else nomeOddCustom">
+                                {{item.cotacao.chave | tipoAposta}}
+                            </span>
+                            <ng-template #nomeOddCustom>
+                                {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :
+                                item.jogo.time_b_nome}}
+                            </ng-template>
+                        </ng-template>
+                        <span class="valor">
+                            {{item.cotacao.valor | calcularCotacao: item.cotacao.chave:
+                            item.jogo.event_id: item.jogo.favorito : item.jogo.ao_vivo }}
+                        </span>
+                        <span>
+                            {{item.cotacao.chave | oddCategoria}}
+                        </span>
+                    </div>
+                    <div class="jogo-nome">
+                        {{item.jogo.nome}}
+                    </div>
+                </div>
+                <div class="remover" (click)="removerItem(i)">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+        </div>
+        <div class="cartao-form" *ngIf="tipoApostaDeslogado == 'cartao'">
+            <form style="font-size: 1rem;" [formGroup]="cartaoApostaForm">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>{{'bilhete.chave' | translate}}</label>
+                        <input type="text" class="form-control inverted-out" formControlName="chave" autocomplete="off"
+                               style="text-transform:uppercase;" mask="AAA-AAA-AAA" [dropSpecialCharacters]="false">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>{{'bilhete.pin' | translate}}</label>
+                        <input type="password" class="form-control inverted-out" formControlName="pin"
+                               autocomplete="off">
+                    </div>
+                </div>
+                <div class="check-group">
+                    <input type="checkbox" id="manter-cartao" formControlName="manter_cartao">
+                    <label for="manter-cartao">{{'bilhete.manterCartao' | translate}}</label>
+                </div>
+            </form>
+        </div>
+        <div class="buttons mt-4">
+            <button type="button" class="btn btn-custom2" (click)="modalRef.dismiss('Cross click')">
+                {{'modais.fechar' | translate}}
+            </button>
+            <button type="button" class="btn btn-custom " *ngIf="!disabled; else processandoPreAposta"
+                    (click)="finalizarApostaDeslogado()">
+                {{'modais.finalizar' | translate}} <span>{{ btnText || ('bilhete.preAposta' | translate) }}</span>
+            </button>
+            <ng-template #processandoPreAposta>
+                <button disabled class="btn btn-custom">
+                    {{'geral.processando' | translate}}... <i class="fa fa-spinner fa-spin"></i>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+</ng-template>
