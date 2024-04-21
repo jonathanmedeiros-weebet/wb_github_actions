@@ -1,4 +1,4 @@
-<section class="bilhete">
+<section class="bilhete" *ngIf="itens.length > 0">
     <div class="header-bilhete" (click)="toggleBilhete()">
         <span>
             <i class="fa fa-ticket"></i> Bilhete ({{itens.length}})
@@ -12,11 +12,11 @@
             <a (click)="removerItens()"><i class="fa fa-trash"></i> {{ 'bilhete.removerTodos' | translate }}</a>
         </div>
 
-        <div *ngIf="itens.length > 0; else semJogosSelecionados" class="lista-jogos-selecionados">
+        <div class="lista-jogos-selecionados">
             <div *ngFor="let item of itens.value; let i=index" class="jogo-selecionado">
                 <div class="jogo-selecionado-info">
                     <div class="fw-600">
-                        {{item.jogo.horario}} <span *ngIf="item.jogo.ao_vivo"> - {{'bilhete.aoVivo' | translate}}</span>
+                        {{item.jogo.horario | moment:'DD/MM/YYYY'}} <span *ngIf="item.jogo.ao_vivo"> - {{'bilhete.aoVivo' | translate}}</span>
                     </div>
                     <div class="fw-600">
                         {{item.jogo.nome}}
@@ -33,17 +33,6 @@
                 </div>
             </div>
         </div>
-        <ng-template #semJogosSelecionados>
-            <div class="lista-jogos-selecionados">
-                <div id="nenhum-jogo">
-                    <p>
-                        <span><i
-                            class="fa-solid fa-circle-info"></i> {{'bilhete.nenhumaApostaSelecionada' | translate}}!</span>
-                    </p>
-                    {{'bilhete.selecioneAlgumaAposta' | translate}}
-                </div>
-            </div>
-        </ng-template>
 
         <form>
             <input class="form-control inverted-out" placeholder="Nome do Apostador" />

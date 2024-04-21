@@ -15,13 +15,13 @@
     <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;" #owlCar>
         <ng-container *ngFor="let jogoDestaque of jogosDestaque">
             <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="340">
-                <div class="jogo-destaque" (click)="maisCotacoes(jogoDestaque.fi)" >
+                <div class="jogo-destaque">
                     <div class="header">
                         <span>
-                            {{ jogoDestaque.campeonato.nome }}
+                            {{ jogoDestaque.campeonato?.nome }}
                         </span>
                         <span>
-                            {{ jogoDestaque.horario }}
+                            Hoje {{ jogoDestaque.horario | moment:"/ H:mm"}}
                         </span>
                     </div>
 
@@ -54,11 +54,11 @@
                     <div class="jogo-destaque-odds">
                         <div *ngFor="let cotacao of jogoDestaque.cotacoes"
                         [ngClass]="{'odd-disabled': !cotacaoPermitida(cotacao.valor)}"
-                        class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque.fi + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
+                        class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
                         (click)="cotacaoPermitida(cotacao.valor) && addCotacao($event, jogoDestaque, cotacao)">
                             {{ helperService.apostaTipoLabel(cotacao.chave, 'sigla') }}
                             <ng-container *ngIf="cotacaoPermitida(cotacao.valor);else cotacaoBloqueada">
-                                <span class="cotacao" >{{ cotacao.valor }}</span>
+                                <span class="cotacao" >{{ cotacao.valorFinal }}</span>
                             </ng-container>
                             <ng-template #cotacaoBloqueada>
                                 <span class="cotacao"><i class="fa fa-lock"></i></span>

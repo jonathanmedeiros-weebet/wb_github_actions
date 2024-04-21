@@ -21,8 +21,8 @@ const appRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                component: HomeComponent,
-                canActivate: [HomeGuard]
+                canActivate: [HomeGuard],
+                loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
             },
             {
                 path: 'cadastro',

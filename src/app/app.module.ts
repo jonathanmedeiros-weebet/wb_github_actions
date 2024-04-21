@@ -31,13 +31,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
-import { HomeComponent } from './home/home.component';
-import { CardsModalidadeComponent } from './home/widgets/cards-modalidade/cards-modalidade.component';
-import { JogosDestaqueComponent } from './home/widgets/jogos-destaque/jogos-destaque.component';
-import { JogosAovivoComponent } from './home/widgets/jogos-aovivo/jogos-aovivo.component';
-import { CassinoComponent } from './home/widgets/cassino/cassino.component';
-import { BilheteComponent } from './home/bilhete/bilhete.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -80,7 +73,7 @@ export function googleFactory(service: ParametrosLocaisService) {
 }
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent, CardsModalidadeComponent, JogosDestaqueComponent, JogosAovivoComponent, CassinoComponent, BilheteComponent],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -95,7 +88,6 @@ export function googleFactory(service: ParametrosLocaisService) {
         NgxSkeletonLoaderModule.forRoot({ loadingText: 'This item is actually loading...' }),
         AppRoutingModule,
         SocialLoginModule,
-        CarouselModule,
         LayoutModule,
         CupomModule,
         ToastrModule.forRoot({

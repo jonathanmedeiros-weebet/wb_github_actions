@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, OnDestroy, ElementRef, DoCheck } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { BilheteEsportivoService, HelperService, JogoService, LiveService, Param
         LiveService
     ]
 })
-export class JogosAovivoComponent implements OnInit {
+export class JogosAovivoComponent implements OnInit, OnDestroy {
     @Output() maisCotacoesDestaque = new EventEmitter();
     @Input() jogoIdAtual;
     jogosDestaque = [];
@@ -26,15 +26,15 @@ export class JogosAovivoComponent implements OnInit {
     jogosDestaquesIds = [];
 
     campeonatos = new Map();
-    jogos = [];
+    jogos = new Map();
     idsCampeonatosLiberados = this.paramsService.getCampeonatosAoVivo();
-    temJogoAoVivo = true;
     awaiting = true;
     showLoadingIndicator = true;
     campeonatosAbertos = [];
     contentSportsEl;
     minutoEncerramentoAoVivo = 0;
-    jogosBloqueados;
+    jogosBloqueados = [];
+    cotacoesLocais = [];
     unsub$ = new Subject();
     term = '';
 
@@ -51,6 +51,7 @@ export class JogosAovivoComponent implements OnInit {
     constructor(
         private jogoService: JogoService,
         private liveService: LiveService,
+        private el: ElementRef,
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
         private bilheteService: BilheteEsportivoService,
@@ -58,9 +59,12 @@ export class JogosAovivoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.liveService.connect();
+        this.liveService.entrarSalaEventos();
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.jogosBloqueados = this.paramsService.getJogosBloqueados();
+        this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
 
-        // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => {
@@ -77,65 +81,62 @@ export class JogosAovivoComponent implements OnInit {
 
         this.jogoService.getJogosAoVivo()
             .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                campeonatos => {
-                    campeonatos.forEach(campeonato => {
-                        campeonato.jogos.forEach(jogo => {
-                            let valido = true;
+            .subscribe(campeonatos => {
+                campeonatos.forEach(campeonato => {
+                    campeonato.jogos.forEach(jogo => {
+                        let valido = true;
 
-                            if (jogo.sport_id !== 1 || this.jogoBloqueado(jogo.event_id)) {
+                        if (jogo.sport_id !== 1 || this.jogoBloqueado(jogo.event_id)) {
+                            valido = false;
+                        }
+
+                        if (this.minutoEncerramentoAoVivo > 0) {
+                            if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                 valido = false;
                             }
+                        }
 
-                            if (this.minutoEncerramentoAoVivo > 0) {
-                                if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
-                                    valido = false;
-                                }
-                            }
-
-                            jogo.cotacoes.map(cotacao => {
-                                cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
-                                cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                                    cotacao.valor,
-                                    cotacao.chave,
-                                    jogo.event_id,
-                                    null,
-                                    true
-                                );
-                                return cotacao;
-                            });
-
-                            if (valido && jogo.ao_vivo) {
-                                this.jogos.push(jogo);
-                            }
+                        jogo.cotacoes.map(cotacao => {
+                            cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                            cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                                cotacao.valor,
+                                cotacao.chave,
+                                jogo.event_id,
+                                null,
+                                true
+                            );
+                            return cotacao;
                         });
+
+                        if (valido && jogo.ao_vivo) {
+                            if (this.jogos.size <= 10) {
+                                this.jogos.set(jogo._id, jogo);
+                            }
+                        }
                     });
+                });
 
-                    setTimeout(() => {
-                        this.awaiting = false;
-                    }, 2000);
+                setTimeout(() => {
+                    this.awaiting = false;
+                }, 2000);
 
-                    this.showLoadingIndicator = false;
+                this.showLoadingIndicator = false;
 
-                    // this.live();
-                },
-                error => this.handleError(error)
-            );
+                this.live();
+            });
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes['jogosDestaque']) {
-            this.remapJogosDestaque();
-        }
+    ngOnDestroy() {
+        this.liveService.sairSalaEventos();
+        this.liveService.disconnect();
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     live() {
         this.liveService.getEventos()
             .pipe(takeUntil(this.unsub$))
             .subscribe((jogo: any) => {
-                let campeonato = this.campeonatos.get(jogo.campeonato._id);
-                let inserirCampeonato = false;
-
                 jogo.cotacoes.map(cotacao => {
                     cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                     cotacao.valorFinal = this.helperService.calcularCotacao2String(
@@ -146,17 +147,6 @@ export class JogosAovivoComponent implements OnInit {
                         true);
                     return cotacao;
                 });
-
-                if (!campeonato) {
-                    campeonato = {
-                        _id: jogo.campeonato._id,
-                        nome: jogo.campeonato.nome,
-                        regiao_sigla: jogo.campeonato.regiao_sigla,
-                        jogos: new Map()
-                    };
-
-                    inserirCampeonato = true;
-                }
 
                 let valido = true;
 
@@ -175,20 +165,14 @@ export class JogosAovivoComponent implements OnInit {
                 }
 
                 if (valido && !jogo.finalizado && jogo.total_cotacoes > 0) {
-                    campeonato.jogos.set(jogo._id, jogo);
-
-                    if (inserirCampeonato) {
-                        this.campeonatos.set(jogo.campeonato._id, campeonato);
+                    if (this.jogos.size <= 10) {
+                        this.jogos.set(jogo._id, jogo);
                     }
                 } else {
-                    const eventoEncontrado = campeonato.jogos.get(jogo._id);
+                    const eventoEncontrado = this.jogos.get(jogo._id);
 
                     if (eventoEncontrado) {
-                        campeonato.jogos.delete(jogo._id);
-
-                        if (!campeonato.jogos.size) {
-                            this.campeonatos.delete(campeonato._id);
-                        }
+                        this.jogos.delete(jogo._id);
                     }
                 }
             });
@@ -198,31 +182,8 @@ export class JogosAovivoComponent implements OnInit {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
     }
 
-    remapJogosDestaque() {
-        this.jogosDestaque.forEach((jogo) => {
-            jogo.cotacoes.slice(0, 3).forEach((cotacao) => {
-                if (!cotacao.valorFinal) {
-                    cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                        cotacao.valor,
-                        cotacao.chave,
-                        jogo.event_id,
-                        jogo.favorito,
-                        false);
-                }
-            });
-        });
-        this.cd.detectChanges();
-    }
-
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
-    }
-
-    maisCotacoes(jogoId) {
-        if (!this.isDragging) {
-            this.jogoIdAtual = jogoId;
-            this.maisCotacoesDestaque.emit(jogoId);
-        }
     }
 
     addCotacao(event, jogo, cotacao) {
@@ -265,9 +226,5 @@ export class JogosAovivoComponent implements OnInit {
                 this.bilheteService.atualizarItens(this.itens);
             }
         }
-    }
-
-    handleError(msg) {
-        alert(msg)
     }
 }

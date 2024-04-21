@@ -11,19 +11,14 @@ import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService,
 })
 export class JogosDestaqueComponent implements OnInit, OnChanges {
     @Output() maisCotacoesDestaque = new EventEmitter();
-    @Input() jogoIdAtual;
     jogosDestaque = [];
-    regioesDestaque = null;
-    exibindoRegiao = false;
-    exibirDestaques = false;
-    menuWidth;
-    mobileScreen;
+    mobileScreen: boolean;
     itens = [];
     itensSelecionados = {};
     isDragging = false;
     camps = [];
     jogosBloqueados = [];
-
+    cotacoesLocais = [];
     jogosDestaquesIds = [];
 
     customOptions: OwlOptions = {
@@ -49,6 +44,8 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.cotacoesLocais = this.paramsService.getCotacoesLocais();
+        this.jogosBloqueados = this.paramsService.getJogosBloqueados();
 
         let queryParams = {
             'sport_id': 1,
@@ -57,25 +54,19 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         };
 
         this.campeonatoService.getCampeonatos(queryParams)
-            .pipe(
-                takeUntil(this.unsub$)
-            )
-            .subscribe(
-                campeonatos => {
-                    this.camps = campeonatos;
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(campeonatos => {
+                this.camps = campeonatos;
 
-                    this.camps = this.camps.filter(campeonato => {
-                        const jogosAtivos = campeonato.jogos.filter(jogo => !this.jogosBloqueados.includes(jogo.event_id));
-                        if (jogosAtivos.length > 0) {
-                            return campeonato;
-                        }
-                    });
-                    this.getJogosDestaques();
-                },
-                error => console.log(error)
-            );
+                this.camps = this.camps.filter(campeonato => {
+                    const jogosAtivos = campeonato.jogos.filter(jogo => !this.jogosBloqueados.includes(jogo.event_id));
+                    if (jogosAtivos.length > 0) {
+                        return campeonato;
+                    }
+                });
+                this.getJogosDestaques();
+            });
 
-        // Recebendo os itens atuais do bilhete
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => {
@@ -89,8 +80,6 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
 
                 this.cd.markForCheck();
             });
-
-        this.remapJogosDestaque();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -102,9 +91,9 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     getJogosDestaques() {
         this.jogoService.getJogosDestaque()
             .subscribe(jogos => {
-                this.jogosDestaque = jogos.results;
                 this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
                 this.mapJogosDestaque();
+                this.cotacoesJogosDestaque();
             });
     }
 
@@ -125,8 +114,35 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         this.cd.detectChanges();
     }
 
+    cotacoesJogosDestaque() {
+        this.jogosDestaque.forEach((jogo) => {
+            const cotacoesLocalJogo = this.getCotacaoLocal(jogo);
+
+            jogo.cotacoes.slice(0, 3).forEach(cotacao => {
+                const cotacaoLocal = cotacoesLocalJogo[cotacao.chave];
+                cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                    cotacaoLocal ? cotacaoLocal.valor : cotacao.valor,
+                    cotacao.chave,
+                    jogo.event_id,
+                    jogo.favorito,
+                    false);
+                cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+            });
+        });
+        this.cd.detectChanges();
+    }
+
+    getCotacaoLocal(jogo) {
+        const cotacoesLocais = this.cotacoesLocais[jogo.event_id];
+
+        if (cotacoesLocais) {
+            return cotacoesLocais;
+        } else {
+            return false;
+        }
+    }
+
     remapJogosDestaque() {
-        console.log('CHANGE', this.jogosDestaque);
         this.jogosDestaque.forEach((jogo) => {
             jogo.cotacoes.slice(0, 3).forEach((cotacao) => {
                 if (!cotacao.valorFinal) {
@@ -144,13 +160,6 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
 
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
-    }
-
-    maisCotacoes(jogoId) {
-        if (!this.isDragging) {
-            this.jogoIdAtual = jogoId;
-            this.maisCotacoesDestaque.emit(jogoId);
-        }
     }
 
     addCotacao(event, jogo, cotacao) {

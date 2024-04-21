@@ -1,4 +1,4 @@
-<div class="jogos-destaque" *ngIf="jogos.length > 0">
+<div class="jogos-destaque" *ngIf="jogos.size > 0">
     <div class="slider-header">
         Jogos Ao Vivo
         <nav>
@@ -12,25 +12,25 @@
             </div>
         </nav>
     </div>
-    <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;" #owlCar>
-        <ng-container *ngFor="let jogoDestaque of jogos">
-            <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="340">
-                <div class="jogo-destaque" (click)="maisCotacoes(jogoDestaque.fi)" >
+    <owl-carousel-o class="jogos" [options]="customOptions" (dragging)="isDragging = $event.dragging;" #owlCar>
+        <ng-container *ngFor="let jogoDestaque of jogos | keyvalue; trackBy: trackById">
+            <ng-template carouselSlide [id]="jogoDestaque.value._id" [width]="340">
+                <div class="jogo-destaque">
                     <div class="header">
                         <span>
-                            {{ jogoDestaque.campeonato.nome }}
+                            {{ jogoDestaque.value.campeonato?.nome }}
                         </span>
                         <span class="info-minutos">
                             <label>Ao vivo</label>
-                            {{ jogoDestaque.info.minutos }}'
+                            {{ jogoDestaque.value.info?.minutos }}'
                         </span>
                     </div>
 
                     <div class="jogo">
                         <div class="time1">
-                            <span class="text-center">{{ jogoDestaque.time_a_nome }}</span>
-                            <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
-                                <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.time_a_img}}.png" size="s" class="escudo-img">
+                            <span class="text-center">{{ jogoDestaque.value.time_a_nome }}</span>
+                            <span *ngIf="jogoDestaque.value.time_a_img; else defaulImage" class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.value.time_a_img}}.png" size="s" class="escudo-img">
                             </span>
                             <ng-template #defaulImage>
                                 <span class="escudo">
@@ -40,23 +40,23 @@
                         </div>
                         <span class="separador-times">-</span>
                         <div class="time2">
-                            <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
-                                <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.time_b_img}}.png" size="s" class="escudo-img">
+                            <span *ngIf="jogoDestaque.value.time_a_img; else defaulImage" class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.value.time_b_img}}.png" size="s" class="escudo-img">
                             </span>
                             <ng-template #defaulImage>
                                 <span class="escudo">
                                     <img src="https://cdn.wee.bet/img/times/m/default.png" size="s" class="escudo-img">
                                 </span>
                             </ng-template>
-                            <span class="text-center flex-grow-1">{{ jogoDestaque.time_b_nome }}</span>
+                            <span class="text-center flex-grow-1">{{ jogoDestaque.value.time_b_nome }}</span>
                         </div>
                     </div>
 
                     <div class="jogo-destaque-odds">
-                        <div *ngFor="let cotacao of jogoDestaque?.cotacoes"
+                        <div *ngFor="let cotacao of jogoDestaque.value.cotacoes"
                         [ngClass]="{'odd-disabled': !cotacaoPermitida(cotacao.valorFinal)}"
-                        class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque.fi + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
-                        (click)="cotacaoPermitida(cotacao.valorFinal) && addCotacao($event, jogoDestaque, cotacao)">
+                        class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque.value._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
+                        (click)="cotacaoPermitida(cotacao.valorFinal) && addCotacao($event, jogoDestaque.value, cotacao)">
                             {{ helperService.apostaTipoLabel(cotacao.chave, 'sigla') }}
                             <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
                                 <span class="cotacao" >{{ cotacao.valorFinal }}</span>

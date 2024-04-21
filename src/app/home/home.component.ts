@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
         this.casinoApi.getGamesHome().subscribe(response => {
             this.gamesPopulares = response.populares;
             this.gamesPopularesAoVivo = response.popularesAoVivo;
-        }, erro => { console.log(erro) });
+        });
 
         this.homeService.getPosicaoWidgets().subscribe(response => {
             this.widgets = response
