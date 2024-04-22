@@ -20,6 +20,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     jogosBloqueados = [];
     cotacoesLocais = [];
     jogosDestaquesIds = [];
+    widthCard = 340;
 
     customOptions: OwlOptions = {
         loop: true,
@@ -46,6 +47,10 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
+
+        if (window.innerWidth <= 380) {
+            this.widthCard = 300;
+        }
 
         let queryParams = {
             'sport_id': 1,

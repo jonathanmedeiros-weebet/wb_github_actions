@@ -214,7 +214,9 @@
         "resultadosEncontrados": "{{quantidade}} results were found.",
         "selecioneChavePix": "select your pix key",
         "alertaSaque": "Only withdrawals to Pix keys linked to the account holder are allowed.",
-        "chaveAleatoria": "Random key"
+        "chaveAleatoria": "Random key",
+        "jogosDestaques": "Highlights Games",
+        "jogosAoVivo": "Live Games"
     },
     "dias": {
         "ontem": "Yesterday",

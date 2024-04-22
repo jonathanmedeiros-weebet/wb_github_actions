@@ -1,6 +1,6 @@
 .bloco {
     position: relative;
-    padding: 5px 20px;
+    padding: 5px 10px;
     margin: 0 auto;
     flex: 1;
     width: 100%;
@@ -311,7 +311,6 @@
     .game-tile {
         min-width: 200px;
         max-width: 200px;
-        min-height: 145px;
         margin-top: 10px;
         margin-right: 10px;
     }
@@ -399,6 +398,7 @@
 
     .game-tile-inline {
         min-width: 216px;
+        max-width: 216px;
         margin-bottom: 0;
         margin-left: 20px !important;
     }
@@ -426,7 +426,6 @@
 @media only screen and (max-width: 1024px) and (orientation: landscape) {
     .game-tile {
         width: 30%;
-        height: 200px;
     }
 }
 
@@ -435,7 +434,6 @@
     .game-tile-inline,
     .game-tile-inline-destaque {
         min-width: 170px;
-        min-height: 120px;
     }
 
     .game-tile .game-button-play,
@@ -448,6 +446,6 @@
 
     .game-tile-inline,
     .game-tile-inline-destaque {
-        min-width: 162px;
+        min-width: 140px;
     }
 }

@@ -20,13 +20,13 @@
                 <span>Ao Vivo</span>
             </a>
         </li>
-        <li class="bg-promocoes">
+        <li class="bg-promocoes" *ngIf="promocoesHabilitado">
             <a routerLink="/promocao">
                 Promoções
             </a>
         </li>
-        <li class="bg-indique-ganhe">
-            <a routerLink="/clientes/indique-ganhe">
+        <li class="bg-indique-ganhe" *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente)">
+            <a (click)="redirectIndiqueGanhe()">
                 Indique
                 <span>e Ganhe</span>
             </a>

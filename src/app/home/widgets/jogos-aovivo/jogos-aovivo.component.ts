@@ -22,6 +22,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy {
     itens = [];
     itensSelecionados = {};
     isDragging = false;
+    widthCard = 340;
 
     jogosDestaquesIds = [];
 
@@ -62,6 +63,11 @@ export class JogosAovivoComponent implements OnInit, OnDestroy {
         this.liveService.connect();
         this.liveService.entrarSalaEventos();
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+
+        if (window.innerWidth <= 380) {
+            this.widthCard = 300;
+        }
+
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
         this.minutoEncerramentoAoVivo = this.paramsService.minutoEncerramentoAoVivo();
 
@@ -122,7 +128,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy {
 
                 this.showLoadingIndicator = false;
 
-                this.live();
+                // this.live();
             });
     }
 
@@ -164,13 +170,12 @@ export class JogosAovivoComponent implements OnInit, OnDestroy {
                     valido = false;
                 }
 
+                const eventoEncontrado = this.jogos.get(jogo._id);
                 if (valido && !jogo.finalizado && jogo.total_cotacoes > 0) {
-                    if (this.jogos.size <= 10) {
+                    if (eventoEncontrado) {
                         this.jogos.set(jogo._id, jogo);
                     }
                 } else {
-                    const eventoEncontrado = this.jogos.get(jogo._id);
-
                     if (eventoEncontrado) {
                         this.jogos.delete(jogo._id);
                     }
@@ -180,6 +185,18 @@ export class JogosAovivoComponent implements OnInit, OnDestroy {
 
     jogoBloqueado(eventId) {
         return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
+    }
+
+    cotacoesPorTipo(cotacoes) {
+        const cotacaoCasa = cotacoes.find(k => k.chave === 'casa_90');
+        const cotacaoEmpate = cotacoes.find(k => k.chave === 'empate_90');
+        const cotacaoFora = cotacoes.find(k => k.chave === 'fora_90');
+
+        return [
+            cotacaoCasa ?? { nome: 'Casa', lock: true },
+            cotacaoEmpate ?? { nome: 'Empate', lock: true },
+            cotacaoFora ?? { nome: 'Fora', lock: true }
+        ];
     }
 
     cotacaoPermitida(cotacao) {

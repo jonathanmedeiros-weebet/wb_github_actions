@@ -117,11 +117,10 @@ owl-carousel-o {
     display: flex;
     flex-direction: column;
     overflow-x: scroll;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 .jogo-destaque {
-    cursor: pointer;
     background: var(--game);
     color: var(--foreground-game);
     border: 1px solid var(--highlight);
@@ -203,7 +202,7 @@ owl-carousel-o {
     color: var(--foreground-inputs-odds);
     border-radius: 2px;
     flex: 1;
-    font-size: 8px;
+    font-size: 12px;
     padding: 4.5px;
 
     display: flex;
@@ -211,6 +210,7 @@ owl-carousel-o {
     align-items: center;
 
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .jogos-destaque .jogo-destaque-odds .jogo-destaque-odd.selecionado {
@@ -223,8 +223,8 @@ owl-carousel-o {
 }
 
 span.escudo img {
-    height: 20px;
-    width: 20px;
+    height: 32px;
+    width: 32px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -284,4 +284,12 @@ span.escudo img {
     .pull-right {
         right: 270px;
     }
+}
+
+@media (max-width: 385px) {
+
+    .jogo-destaque {
+        width: 300px;
+    }
+
 }
