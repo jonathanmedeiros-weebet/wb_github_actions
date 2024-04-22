@@ -40,6 +40,8 @@
      border-top: 0;
      border-bottom: 1px solid var(--game);
      vertical-align: middle;
+     padding: 15px 10px;
+
  }
 
  .table td.no-border{
