@@ -480,7 +480,7 @@
     },
     "indique_ganhe":{
         "indiqueGanhe": "Refer and earn",
-        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}} in {{balanceType}}",
+        "indiqueGanheCard": "Refer a friend and receive R${{valorGanhoPorIndicacao}} {{bonusBalance}}",
         "indiqueGanheInfo1": "Refer friends and earn R${{valorGanhoPorIndicacao}} for each referral",
         "indiqueGanheInfo2": "Refer a friend through your referral link and receive R${{valorGanhoPorIndicacao}} for each referral in your account balance. Check out our ",
         "seuLinkIndicacao": "Your referral link:",
@@ -506,7 +506,8 @@
         "indicacaoRecebida": "Indication received",
         "cadastroRealizado": "Registration was completed",
         "resgatar": "Redeem",
-        "limiteResgate": "Redeem limit"
+        "limiteResgate": "Redeem limit",
+        "inBonus": "in bonus"
     },
     "regras_indique_ganhe": {
         "primeiro_paragrafo_um": "Refer your friends and earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance!",
