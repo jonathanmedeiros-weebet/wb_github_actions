@@ -10,6 +10,7 @@ import { HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
 import { Router } from '@angular/router';
+import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
 
 
 @Component({
@@ -152,7 +153,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private modalService: NgbModal,
         private paramsLocais: ParametrosLocaisService,
         private renderer: Renderer2,
-        private router: Router
+        private router: Router,
+        public activeModal: NgbActiveModal
     ) {
         super();
     }
@@ -346,7 +348,12 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         if (res.deposito_status === 'approved') {
                             this.modalService.dismissAll();
                             this.novoPix();
-                            this.router.navigate(['clientes/transacoes-historico']);
+                            if (this.isMobile) {
+                                this.activeModal.dismiss('Cross click');
+                                this.modalService.open(TransacoesHistoricoComponent);
+                            } else {
+                                this.router.navigate(['clientes/transacoes-historico']);
+                            }
                         }
                     },
                     error => {

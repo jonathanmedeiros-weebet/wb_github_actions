@@ -1,14 +1,17 @@
-<div id="default-content">
-    <a class="btnClose hide-desktop" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
+<div class="mobile-modal-header margin-10 hide-desktop">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
     </a>
-
+    <div class="titulo">{{'geral.transactionHistory' | translate}}</div>
+    <div class="botao-direito"></div>
+</div>
+<div id="default-content">
     <div class="internal-container-out">
-        <div class="content-header">
+        <div class="content-header hide-mobile">
             <h2>{{'geral.transactionHistory' | translate}} </h2>
         </div>
 
-        <div class="tabs">
+        <div class="tabs hide-mobile">
             <ng-container *ngFor="let tab of getTabs()">
                 <a [ngClass]="{'active': tabSelected === tab.id}" (click)="changeTab(tab.id)">
                     {{ tab.label | translate }}
@@ -18,6 +21,10 @@
 
         <form (ngSubmit)="onSubmit()" [formGroup]="form">
             <div class="filtros">
+                <select class="form-control inverted-out hide-desktop" formControlName="type" (change)="changeTab($event.target.value)">
+                    <option value="deposits">{{'geral.depositos' | translate}}</option>
+                    <option value="withdrawals">{{'geral.saques' | translate}}</option>
+                </select>
                 <input
                     name="datepicker"
                     class="dp-hidden"

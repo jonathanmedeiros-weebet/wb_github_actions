@@ -37,6 +37,7 @@ import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentaca
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
+import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
 
 @Component({
     selector: 'app-header',
@@ -420,6 +421,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirDepositos() {
         this.modalService.open(DepositoComponent);
+    }
+
+    openTransactionHistory() {
+        this.modalService.open(TransacoesHistoricoComponent);
     }
 
     abrirDepositosCambista() {
