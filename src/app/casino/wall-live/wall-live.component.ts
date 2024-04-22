@@ -572,6 +572,10 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
     }
 
     onPageScroll(element) {
+        if (!this.isMobile) {
+            return;
+        }
+
         const firstScrollTop = element.scrollTop;
         setTimeout(() => {
             const submenuContainer = this.el.nativeElement.querySelector('#submenu-container');
