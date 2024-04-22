@@ -167,8 +167,8 @@
         </div>
     </div>
 </div>
-<div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
-    <app-banners [showLoadingIndicator]="showLoadingIndicator"></app-banners>
+<div #listagem id="futebol-listagem" class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()" (scroll)="layoutService.onPageScroll($event.target)">
+    <app-banners></app-banners>
     <app-destaques (maisCotacoesDestaque)="maisCotacoes($event)" [jogosDestaque]="jogosDestaque"></app-destaques>
     <div class="wrap-sticky">
 

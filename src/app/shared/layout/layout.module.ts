@@ -67,7 +67,8 @@ import {
     CarregamentoModalComponent,
     CompatilhamentoBilheteModal,
     RegrasBonusModalComponent,
-    JogosLiberadosBonusModalComponent
+    JogosLiberadosBonusModalComponent,
+    CanceledBonusConfirmComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -180,7 +181,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         InformativoModalComponent,
         CarregamentoModalComponent,
         CompatilhamentoBilheteModal,
-        WelcomePageComponent
+        WelcomePageComponent,
+        CanceledBonusConfirmComponent
     ],
     exports: [
         MainLayoutComponent,

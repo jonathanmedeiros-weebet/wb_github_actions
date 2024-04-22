@@ -211,10 +211,22 @@
         "jogarAgora": "Jogar Agora",
         "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
-        "resultadosEncontrados": "Foram encontrados {{quantidade}} resultados",
         "selecioneChavePix": "Selecione a chave pix",
         "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
-        "chaveAleatoria": "Chave aleatória"
+        "chaveAleatoria": "Chave aleatória",
+        "history": "Histórico",
+        "transactionHistory": "Histórico de transações",
+        "promoCode": "Código promocional",
+        "promoCodePlaceholder": "EX.: BONUSCADASTRO",
+        "approved": "Aprovado",
+        "failed": "Reprovado",
+        "resultWereNotFound": "Nenhum resultado encontrado",
+        "resultWereFound": "Foi encontrado 1 resultado",
+        "resultsWereFound": "Foram encontrados {{ quantity }} resultados"
+    },
+    "bet": {
+        "sportsBetting": "Apostas esportivas",
+        "casinoBetting": "Apostas cassino"
     },
     "dias": {
         "ontem": "Ontem",
@@ -299,7 +311,8 @@
         "mesa": "Mesa",
         "destaques": "Destaques",
         "virtuais": "Virtuais",
-        "aoVivo": "Ao Vivo"
+        "aoVivo": "Ao Vivo",
+        "bingo": "Bingo"
     },
     "cartoes": {
         "titulo": "Cartões",
@@ -326,10 +339,9 @@
         "digiteSuaSenha": "Digite sua senha"
     },
     "saques": {
-        "informeValorDesejadoSaque": "Informe o valor desejado para saque",
+        "enterAmountWithdrawal": "Informe o valor para saque",
         "informeOValor": "Informe o valor",
-        "saldoDisponivelParaSaque": "Saldo disponivel para saque",
-        "infoSautoPay": "Saques solicitados após as 14:00h serão transferidos somente no próximo dia útil.",
+        "infoSautoPay": "Saques solicitados pela SautoPay após as 14:00h serão transferidos somente no próximo dia útil.",
         "saqueERegistrado": "Saque - Registrado",
         "paraProsseguirAtualizeChavePix": "Para prosseguir, atualize seu cadastro com a sua chave PIX",
         "preenchaCadastroCompleto": "Por favor, preencha seu cadastro por completo para realizar a solictação de saque.",
@@ -338,7 +350,14 @@
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória",
         "pagamentoExclusivoChaveCPF": "Informamos que ao solicitar o saque ele será realizado exclusivamente para a chave pix CPF do titular da conta.",
         "solicitacoesRecentes": "Solicitações de saque recentes",
-        "avisoBonus": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente."
+        "avisoBonus": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente.",
+        "withdrawalDetails": "Detalhes do saque",
+        "availableBalanceForWithdrawal": "Saldo disponível para saque",
+        "safeWithdrawalAlert": "Por motivos de segurança, os saques só serão efetivados para contas pertencentes ao CPF cadastrado.",
+        "enterPixKey": "Informe o tipo de chave PIX",
+        "minimumWithdrawal": "Saque mínimo",
+        "dailyMaximum": "Máximo diário",
+        "monthlyMaximum": "Máximo mensal"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",
@@ -357,12 +376,16 @@
         "titulo": "Depósito",
         "selecioneUmaFormaDeDeposito": "Selecione uma forma de depósito",
         "informeOValor": "Informe o valor",
+        "enterAmount": "Informe o valor para depósito",
         "seuPixFoiCreditado": "Seu pix foi creditado com sucesso, seu novo saldo é: R$ {{novoSaldo}}",
-        "valorMinimo": "Valor mínimo para depósito",
+        "valorMinimo": "Valor Mínimo",
         "nenhumaModalidadeDeDeposito": "Nenhuma modalidade de depósito disponível. Entre em contato com suporte.",
         "depositoRegistrado": "Depósito - Registrado",
         "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}",
-        "depositosRecentes": "Depósitos recentes"
+        "depositosRecentes": "Depósitos recentes",
+        "depositDetails": "Detalhes do depósito",
+        "depositText": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, selecione se deseja receber o {{bonusType}}, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
+        "depositTextWithoutBonus": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento."
     },
     "footer": {
         "afiliados": "Afiliados",
@@ -432,13 +455,15 @@
         "qtdMovimentacoesNoPeriodo": "Qtd. Movimentações no Período de {{de}} - {{ate}}",
         "nenhumaMovimentacaoNoPeriodo": "Nenhuma movimentação realizada no período e/ou com filtro atual.",
         "natureza": "Natureza",
-        "desejaReceberBonusPrimeiroDeposito": "Deseja receber Bônus de primeiro depósito?",
+        "desejaReceberBonusPrimeiroDeposito": "Deseja receber o {{bonusType}}?",
         "receberBonus": "Receber Bônus - Esporte",
         "naoQueroBonus": "Não quero Bônus",
         "valorMinimoSaque": "Valor mínimo de saque",
         "valorMaximoSaqueDiario": "Valor máximo de saque diário",
         "valorMaximoSaqueMensal" : "Valor máximo de saque mensal",
-        "receberBonusCassino": "Receber Bônus - Cassino"
+        "receberBonusCassino": "Receber Bônus - Cassino",
+        "transactions": "Transações",
+        "paymentGateway": "Gateway de pagamento"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
@@ -446,7 +471,14 @@
         "ativo": "Ativo",
         "completado": "Completado",
         "cancelado": "Cancelado",
-        "vencido": "Vencido"
+        "vencido": "Vencido",
+        "bonusRules": "Regras do bônus",
+        "bonusForfeited": "Bônus descartado",
+        "noBonus": "Sem bônus",
+        "bonusWillBeForfeited": "Seu bônus será perdido",
+        "upTo": "até",
+        "firstDepositBonus": "bônus de primeiro depósito",
+        "depositBonus": "bônus de depósito"
     },
     "indique_ganhe":{
         "indiqueGanhe": "Indique e ganhe",
