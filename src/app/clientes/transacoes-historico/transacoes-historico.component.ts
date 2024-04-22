@@ -222,6 +222,7 @@ export class TransacoesHistoricoComponent extends BaseFormComponent implements O
         this.form = this.fb.group({
             dateFrom: [this.formatDate(this.fromDate, 'us'), Validators.required],
             dateTo: [this.formatDate(this.toDate, 'us'), Validators.required],
+            type: ['deposits'],
             status: [''],
         });
 
@@ -235,7 +236,10 @@ export class TransacoesHistoricoComponent extends BaseFormComponent implements O
 
     submit() {
         this.queryParams = this.form.value;
-        switch (this.tabSelected) {
+
+        const type = this.mobileScreen ? this.form.get('type').value : this.tabSelected;
+
+        switch (type) {
             case 'deposits':
                 this.getDeposits();
                 break;
