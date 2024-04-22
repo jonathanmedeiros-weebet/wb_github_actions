@@ -1,0 +1,15 @@
+<div class="home-container">
+    <app-banners pagina="home"></app-banners>
+
+    <app-cards-modalidade class="widgets"></app-cards-modalidade>
+    <ng-container *ngFor="let widget of widgets">
+        <app-cassino class="widgets" linkAll="/casino" [games]="gamesPopulares" *ngIf="widget.nome == 'Cassino'"></app-cassino>
+        <app-cassino class="widgets" linkAll="/live-casino" [games]="gamesPopularesAoVivo" [title]="'geral.cassinoAoVivo' | translate" *ngIf="widget.nome == 'Cassino Ao Vivo'"></app-cassino>
+        <app-jogos-aovivo class="widgets" *ngIf="widget.nome == 'Jogos Ao Vivo'"></app-jogos-aovivo>
+        <app-jogos-destaque class="widgets" *ngIf="widget.nome == 'Jogos Destaque'"></app-jogos-destaque>
+    </ng-container>
+</div>
+
+<app-footer></app-footer>
+
+<app-bilhete></app-bilhete>

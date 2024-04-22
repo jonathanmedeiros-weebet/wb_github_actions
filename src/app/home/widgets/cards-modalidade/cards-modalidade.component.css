@@ -1,0 +1,89 @@
+.list-modalidades {
+    margin: 30px 10px;
+}
+
+.list-modalidades ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    overflow: auto;
+
+    margin: 0;
+    padding: 0;
+}
+
+.list-modalidades ul li {
+    border-radius: 10px;
+    background-size: cover;
+    position: relative;
+    flex: 1;
+}
+
+.list-modalidades ul li::before {
+    border-radius: 10px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--header);
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.bg-cassino-aovivo {
+    background-image: url(https://weebet.s3.amazonaws.com/cdn/img/modalidades/cassino_aovivo.jpg);
+}
+
+.bg-cassino {
+    background-image: url(https://weebet.s3.amazonaws.com/cdn/img/modalidades/cassino.jpg);
+}
+
+.bg-esportes-aovivo {
+    background-image: url(https://weebet.s3.amazonaws.com/cdn/img/modalidades/esportes_aovivo.jpg);
+}
+
+.bg-esportes {
+    background-image: url(https://weebet.s3.amazonaws.com/cdn/img/modalidades/esportes.jpg);
+}
+
+.bg-esportes-sports {
+    background-image: url(https://weebet.s3.amazonaws.com/cdn/img/modalidades/esportes-esports.jpg);
+}
+
+.bg-indique-ganhe {
+    background-image: url(https://weebet.s3.amazonaws.com/cdn/img/modalidades/indique_e_ganhe.jpg);
+}
+
+.bg-promocoes {
+    background-image: url(https://weebet.s3.amazonaws.com/cdn/img/modalidades/promocoes.jpg);
+}
+
+.list-modalidades ul li a {
+    display: flex;
+    position: relative;
+    z-index: 2;
+    min-width: 205px;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 24px;
+
+    height: 94px;
+    color: var(--foregroud-header);
+}
+
+.list-modalidades ul li a span {
+    font-size: 20px;
+    line-height: 22px;
+    padding: 5px 15px;
+
+    background: var(--highlight);
+    color: var(--foreground-highlight)
+}

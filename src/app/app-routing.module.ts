@@ -11,6 +11,7 @@ import { WelcomeGuard } from './shared/services/guards/welcome.guard';
 import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
     {
@@ -20,8 +21,8 @@ const appRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                component: AppComponent,
-                canActivate: [HomeGuard]
+                canActivate: [HomeGuard],
+                loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
             },
             {
                 path: 'cadastro',
