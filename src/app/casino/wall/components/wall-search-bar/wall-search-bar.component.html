@@ -5,6 +5,10 @@
         class="search-box__input"
         [placeholder]="placeholder"
         (keyup)="handleSearch($event)"
+        (focus)="handleFocusIn()"
+        (focusout)="handleFocusOut()"
+        [value]="term"
+        autocomplete="off"
     >
     <i
         class="fa fa-close search-box__icon--clear"
