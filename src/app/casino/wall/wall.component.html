@@ -1,5 +1,5 @@
-<div class="submenu-container" *ngIf="activeSubmenu">
-    <nav class="submenu scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth}"
+<div id="submenu-container" class="submenu-container" *ngIf="activeSubmenu">
+    <nav id="nav-submenu" class="submenu scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth}"
          (scroll)="onScrollSubMenu($event)" #scrollMenu>
         <div class="subcategory" *ngFor="let item of submenuItems; let i = index">
             <a id="{{item.id}}" (click)="handleChangeCategoria(item.id)" [ngClass]="{'active': selectedSubMenu == item.id}" (mouseover)="changeSvgHover(i)" (mouseout)="changeSvgHover(i)">
@@ -9,7 +9,7 @@
         </div>
     </nav>
 </div>
-<div #listagem infiniteScroll (scrolled)="exibirMais()" class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor, 'virtual-container': isVirtual}">
+<div #listagem infiniteScroll (scrolled)="exibirMais()" (scroll)="onPageScroll($event.target)" class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor, 'virtual-container': isVirtual}">
     <app-banners pagina="cassino"></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>

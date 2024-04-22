@@ -59,7 +59,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
-        private layoutService: LayoutService,
+        public layoutService: LayoutService,
         private cd: ChangeDetectorRef
     ) {
         super();
@@ -129,6 +129,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
                 this.definirAltura();
                 this.cd.detectChanges();
             });
+
+        this.layoutService.resetHideSubmenu();
     }
 
     ngOnDestroy() {

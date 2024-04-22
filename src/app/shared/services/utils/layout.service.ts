@@ -13,17 +13,22 @@ export class LayoutService {
 	private submenuHeightSub = new BehaviorSubject<number>(this.submenuHeight);
 	private currentHeaderHeightSub = new BehaviorSubject<number>(this.defaultHeaderHeight);
 	private statusIndiqueGanheAtivo = new BehaviorSubject<boolean>(false);
-
 	currentIndiqueGanheCardHeight;
 	currentSubmenuHeight;
 	currentHeaderHeight;
 	verificaRemocaoIndiqueGanhe;
+
+    private hideSubmenuSub = new BehaviorSubject<boolean>(false);
+    private hideSubmenuCtrl = false;
+    hideSubmenu;
 
 	constructor() {
 		this.currentIndiqueGanheCardHeight = this.indiqueGanheCardHeightSub.asObservable();
 		this.currentSubmenuHeight = this.submenuHeightSub.asObservable();
 		this.currentHeaderHeight = this.currentHeaderHeightSub.asObservable();
 		this.verificaRemocaoIndiqueGanhe = this.statusIndiqueGanheAtivo.asObservable();
+        this.hideSubmenu = this.hideSubmenuSub.asObservable();
+
 	}
 
 	changeIndiqueGanheCardHeight(height: number): void {
@@ -57,4 +62,25 @@ export class LayoutService {
 	indiqueGanheRemovido(status: boolean): void {
 		this.statusIndiqueGanheAtivo.next(status);
 	}
+
+    onPageScroll(element) {
+        const firstScrollTop = element.scrollTop;
+        setTimeout(() => {
+            if (element.scrollTop > firstScrollTop && !this.hideSubmenuCtrl) {
+                this.hideSubmenuSub.next(true);
+                this.hideSubmenuCtrl = true;
+            } else if (element.scrollTop < firstScrollTop && this.hideSubmenuCtrl) {
+                this.hideSubmenuSub.next(false);
+                this.hideSubmenuCtrl = false;
+            } else if (element.scrollTop == 0 && this.hideSubmenuCtrl) {
+                this.hideSubmenuSub.next(false);
+                this.hideSubmenuCtrl = false;
+            }
+        }, 50);
+    }
+
+    resetHideSubmenu() {
+        this.hideSubmenuCtrl = false;
+        this.hideSubmenuSub.next(false);
+    }
 }

@@ -59,7 +59,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private modalService: NgbModal,
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
-        private layoutService: LayoutService,
+        public layoutService: LayoutService,
         private cd: ChangeDetectorRef
     ) {
         super();
@@ -131,6 +131,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
                 this.definirAltura();
                 this.cd.detectChanges();
             });
+
+        this.layoutService.resetHideSubmenu();
     }
 
     ngOnDestroy() {
