@@ -1,9 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {Router} from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarService, FinanceiroService, MessageService } from 'src/app/services';
+import { SidebarService, FinanceiroService, MessageService, LayoutService } from 'src/app/services';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-deposito',
@@ -11,12 +13,15 @@ import {MenuFooterService} from '../../shared/services/utils/menu-footer.service
     styleUrls: ['./deposito.component.css']
 })
 export class DepositoComponent implements OnInit, OnDestroy {
+    unsub$ = new Subject();
+
     whatsapp;
     hasApiPagamentos;
     modalidade;
-    showLoading = true;
-    depositos = [];
+    showLoading = false;
     mobileScreen;
+
+    headerHeight = 92;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -24,7 +29,11 @@ export class DepositoComponent implements OnInit, OnDestroy {
         private siderbarService: SidebarService,
         private financeiroService: FinanceiroService,
         private messageService: MessageService,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private cd: ChangeDetectorRef,
+        private el: ElementRef,
+        private layoutService: LayoutService,
+        private renderer: Renderer2
     ) {
     }
 
@@ -46,21 +55,22 @@ export class DepositoComponent implements OnInit, OnDestroy {
             this.modalidade = 'pix';
         }
 
-        const queryParams: any = {
-            'periodo': '',
-            'tipo':  'depositos',
-        };
-        this.financeiroService.getDepositosSaques(queryParams)
-            .subscribe(
-                response => {
-                    this.depositos = response;
-                    this.showLoading = false;
-                },
-                error => {
-                    this.handleError(error);
-                }
+        if (!this.mobileScreen) {
+            this.layoutService.currentHeaderHeight
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curHeaderHeight => {
+                    this.headerHeight = curHeaderHeight;
+                    this.changeHeight();
+                    this.cd.detectChanges();
+                });
+        }
+    }
 
-            );
+    changeHeight() {
+        const headerHeight = this.headerHeight;
+        const height = window.innerHeight - headerHeight;
+        const defaultContent = this.el.nativeElement.querySelector('#default-content');
+        this.renderer.setStyle(defaultContent, 'height', `${height}px`);
     }
 
     selecionarModalidade(modalide) {
@@ -69,6 +79,8 @@ export class DepositoComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     handleError(error: string) {

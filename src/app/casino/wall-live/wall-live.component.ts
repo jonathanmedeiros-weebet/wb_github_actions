@@ -67,6 +67,7 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
     submenuItems = [];
     submenu = [];
     activeSubmenu = true;
+    hideSubmenu = false;
 
     menuWidth;
     scrollWidth;
@@ -398,20 +399,20 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
                 break;
             default:
                 this.gameTitle = this.translate.instant('geral.todos');
-                this.isHomeCassino = this.gameFornecedor === undefined;
+                this.isHomeCassino = (this.gameFornecedor === undefined || this.gameFornecedor === '');
                 break;
         }
+
+        this.listagemJogos.nativeElement.scrollTo(0, 0);
     }
 
     handleChangeFornecedor(event) {
         const fornecedor = event.target.value;
-        this.handleChangeCategoria('cassino');
+        this.gameFornecedor = fornecedor;
 
-        if (fornecedor) {
-            this.router.navigate(['/live-casino', fornecedor]);
-        } else {
-            this.router.navigate(['/live-casino']);
-        }
+        this.filtrarJogos(fornecedor);
+        this.handleChangeCategoria(this.selectedSubMenu);
+        this.cd.detectChanges();
     }
 
     atualizarSubmenu() {
@@ -568,5 +569,35 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
 
     changeSvgHover(index) {
         this.submenuItems[index].svgHover = !this.submenuItems[index].svgHover;
+    }
+
+    onPageScroll(element) {
+        if (!this.isMobile) {
+            return;
+        }
+
+        const firstScrollTop = element.scrollTop;
+        setTimeout(() => {
+            const submenuContainer = this.el.nativeElement.querySelector('#submenu-container');
+            const navSubmenu = this.el.nativeElement.querySelector('#nav-submenu');
+
+            if (navSubmenu) {
+                if (element.scrollTop > firstScrollTop && !this.hideSubmenu) {
+                    this.hideSubmenu = true;
+                    this.renderer.setStyle(submenuContainer, 'min-height', '0');
+                    this.renderer.setStyle(navSubmenu, 'height', '0');
+                } else if (element.scrollTop < firstScrollTop && this.hideSubmenu) {
+                    this.hideSubmenu = false;
+                    this.renderer.setStyle(submenuContainer, 'min-height', '40px');
+                    this.renderer.setStyle(navSubmenu, 'height', '40px');
+                } else if (element.scrollTop == 0 && this.hideSubmenu) {
+                    this.hideSubmenu = false;
+                    this.renderer.setStyle(submenuContainer, 'min-height', '40px');
+                    this.renderer.setStyle(navSubmenu, 'height', '40px');
+                }
+            }
+
+            this.cd.detectChanges();
+        }, 50);
     }
 }

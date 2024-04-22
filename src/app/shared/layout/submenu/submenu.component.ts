@@ -1,9 +1,11 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LayoutService } from './../../../services';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-submenu',
@@ -14,6 +16,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() active = true;
     @Input() category = 'esporte';
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
+    unsub$ = new Subject();
     menuWidth;
     scrollWidth;
     rightDisabled = false;
@@ -36,7 +39,8 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
         private router: Router,
         private translate: TranslateService,
         private el: ElementRef,
-        private layoutService: LayoutService
+        private layoutService: LayoutService,
+        private renderer: Renderer2
     ) {
     }
 
@@ -59,6 +63,27 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
             this.checkScrollWidth();
             this.computeResizeChanges();
         });
+
+        if (this.isMobile) {
+            this.layoutService.hideSubmenu
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(hideSubmenu => {
+                    const submenuContainer = this.el.nativeElement.querySelector('#submenu-container');
+                    const navSubmenu = this.el.nativeElement.querySelector('#nav-submenu');
+                    if (navSubmenu) {
+                        if (hideSubmenu) {
+                            this.layoutService.changeSubmenuHeight(0);
+                            this.renderer.setStyle(submenuContainer, 'min-height', '0');
+                            this.renderer.setStyle(navSubmenu, 'height', '0');
+                        } else {
+                            this.renderer.setStyle(submenuContainer, 'min-height', '40px');
+                            this.renderer.setStyle(navSubmenu, 'height', '38px');
+                            this.layoutService.changeSubmenuHeight(40);
+                        }
+                    }
+                    this.cd.detectChanges();
+                });
+        }
     }
 
     ngAfterViewInit() {
@@ -69,6 +94,8 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.layoutService.changeSubmenuHeight(0);
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     checkScrollWidth() {

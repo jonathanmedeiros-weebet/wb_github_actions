@@ -257,6 +257,11 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     submit() {
         this.queryParams = this.form.value;
+
+        let dataSeparadas = this.selectedDate.split(" - ");
+        this.queryParams.dataFinal = this.formateDate(dataSeparadas[1]) ;
+        this.queryParams.dataInicial = this.formateDate(dataSeparadas[0]);
+
         this.getApostas();
     }
 
@@ -378,6 +383,13 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                 },
                 error => this.handleError(error)
             );
+    }
+
+    formateDate(data) {
+        let partes = data.split("/");
+        let dataFormatada = partes[2] + "-" + partes[1] + "-" + partes[0];
+
+        return dataFormatada;
     }
 
     /*handleCancel(aposta) {

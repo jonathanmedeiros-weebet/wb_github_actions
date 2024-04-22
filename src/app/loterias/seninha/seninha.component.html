@@ -1,7 +1,7 @@
 <div class="loteria-content">
     <div class="content-body">
         <div class="content">
-            <div class="col content-loteria">
+            <div class="col content-loteria" (scroll)="layoutService.onPageScroll($event.target)">
                 <div class="wrap-sticky">
                     <div class="mt-4">
                         <form>

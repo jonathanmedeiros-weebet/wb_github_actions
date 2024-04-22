@@ -1,5 +1,5 @@
-<div class="submenu-container">
-    <nav class="submenu scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth}"
+<div id="submenu-container" class="submenu-container">
+    <nav id="nav-submenu" class="submenu scroll" scrollX="true" [ngStyle]="{'width.px': menuWidth}"
          (scroll)="onScrollSubMenu($event)" #scrollMenu>
         <div class="subcategory" *ngFor="let item of submenuItems; let i = index">
             <a id="{{item.id}}" (click)="handleChangeCategoria(item.id)" [ngClass]="{'active': selectedSubMenu == item.id}" (mouseover)="changeSvgHover(i)" (mouseout)="changeSvgHover(i)">
@@ -9,8 +9,8 @@
         </div>
     </nav>
 </div>
-<div #listagem infiniteScroll (scrolled)="exibirMais()" class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor}">
-    <app-banners pagina="cassino" [showLoadingIndicator]="showLoadingIndicator"></app-banners>
+<div #listagem infiniteScroll (scrolled)="exibirMais()" (scroll)="onPageScroll($event.target)" class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor}">
+    <app-banners pagina="cassino"></app-banners>
 
     <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
 
@@ -127,7 +127,7 @@
             <div class="bloco-header">
                 <div class="titulo">{{'cassino.roleta' | translate}}</div>
                 <div class="ver-todos" *ngIf="gamesRoleta.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/roleta']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('roleta')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
@@ -194,7 +194,7 @@
             <div class="bloco-header">
                 <div class="titulo">Blackjack</div>
                 <div class="ver-todos" *ngIf="gamesBlackjack.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/blackjack']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('blackjack')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
@@ -261,7 +261,7 @@
             <div class="bloco-header">
                 <div class="titulo">Game Show</div>
                 <div class="ver-todos" *ngIf="gamesGameshow.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/gameshow']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('gameshow')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
@@ -328,7 +328,7 @@
             <div class="bloco-header">
                 <div class="titulo">Baccarat</div>
                 <div class="ver-todos" *ngIf="gamesBaccarat.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/baccarat']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('baccarat')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>
@@ -395,7 +395,7 @@
             <div class="bloco-header">
                 <div class="titulo">Poker</div>
                 <div class="ver-todos" *ngIf="gamesPoker.length > 5">
-                    <a [routerLink]="['/casino/cl/wall-live/poker']">
+                    <a style="cursor: pointer" (click)="handleChangeCategoria('poker')">
                         {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
                     </a>
                 </div>

@@ -6,7 +6,7 @@ import {
 import { Router, NavigationExtras } from '@angular/router';
 
 import { Campeonato, Jogo } from '../../../models';
-import { ParametrosLocaisService, BilheteEsportivoService, HelperService } from '../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService, HelperService, LayoutService } from '../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -87,7 +87,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         private cd: ChangeDetectorRef,
         private router: Router,
         private modalService: NgbModal,
-        private translate: TranslateService
+        private translate: TranslateService,
+        public layoutService: LayoutService
     ) { }
 
     ngOnInit() {
@@ -120,6 +121,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
                 this.cd.markForCheck();
             });
+
+        this.layoutService.resetHideSubmenu();
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {

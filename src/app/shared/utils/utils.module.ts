@@ -19,7 +19,8 @@ import {
     FormatarPromocaoPipe,
     FormatarNomeJogoCassinoPipe,
     DepositoStatusPixPipePipe,
-    SafeIframePipe
+    SafeIframePipe,
+    FormatPaymentMethodPipe
 } from './index';
 
 
@@ -43,7 +44,8 @@ import {
         SanitizeCampNamePipe,
         DepositoStatusPixPipePipe,
         CotacaoPipe,
-        SafeIframePipe
+        SafeIframePipe,
+        FormatPaymentMethodPipe
     ],
     exports: [
         MomentPipe,
@@ -64,7 +66,8 @@ import {
         DepositoStatusPixPipePipe,
         SanitizeCampNamePipe,
         CotacaoPipe,
-        SafeIframePipe
+        SafeIframePipe,
+        FormatPaymentMethodPipe
     ]
 })
 export class UtilsModule { }
