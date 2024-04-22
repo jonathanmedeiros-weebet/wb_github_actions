@@ -32,11 +32,14 @@
     </div>
 
     <div class="bloco filters" *ngIf="showFilterBox">
-        <app-wall-search-bar
-            [term]="term"
-            [placeholder]="'geral.pesquisarJogosProvedores' | translate"
-            (onSearch)="search($event)"
-            (onClear)="limparPesquisa()"
+        <app-wall-games-search
+            [games]="gamesCassino"
+            [featuredGames]="gamesDestaque"
+            [providers]="cassinoFornecedores"
+            [isCliente]="isCliente"
+            [isLoggedIn]="isLoggedIn"
+            (openModalLogin)="abrirModalLogin()"
+            (onFilterGames)="filtrarJogos($event)"
         />
 
         <app-submenu category="cassino" version="v2" />

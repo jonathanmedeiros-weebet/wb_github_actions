@@ -58,11 +58,9 @@ export class WallComponent implements OnInit, AfterViewInit {
     gamesBingo: GameCasino[];
     gamesLive: GameCasino[];
     LOGO = config.LOGO;
-    blink: string;
     termFornecedorMobile;
     cassinoFornecedoresTemp = [];
     cassinoFornecedoresFiltrados = [];
-    isDemo = false;
     isVirtual = false;
     pesquisarTextoAlterado = new Subject<string>();
     textoAlterado;
@@ -90,6 +88,14 @@ export class WallComponent implements OnInit, AfterViewInit {
         return !this.showLoadingIndicator && this.gameType !== 'virtuais'
     }
 
+    get isDemo(): boolean {
+        return location.host === 'demo.wee.bet';
+    }
+
+    get blink(): string {
+        return this.isVirtual ? 'virtual-sports' : 'casino'
+    }
+
     ngOnInit(): void {
         this.isVirtual = this.route.snapshot.data['virtual_sports'] ? true : false;
 
@@ -101,13 +107,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.computeResizeChanges();
         });
 
-
-        if (this.isVirtual) {
-            this.blink = 'virtual-sports'
-        } else {
-            this.blink = 'casino'
-        }
-
         this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
         this.casinoApi.getGamesList(false).subscribe(response => {
             this.gamesCassino = response.gameList.filter(function(game) {
@@ -115,7 +114,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             });
             this.cassinoFornecedores = response.fornecedores.map((fornecedor: Fornecedor) => ({
                 ...fornecedor,
-                imagem: `https://cdn.wee.bet/img/cassino/logos/{{fornecedor.gameFornecedor}}.png`
+                imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
             }));
 
             this.gamesDestaque = response.populares;
@@ -168,25 +167,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.filtrarJogos();
             });
 
-        }, erro => { });
-        this.auth.logado
-            .subscribe(
-                isLoggedIn => {
-                    this.isLoggedIn = isLoggedIn;
-                }
-            );
+        }, erro => {});
 
-        this.auth.cliente
-            .subscribe(
-                isCliente => {
-                    this.isCliente = isCliente;
-                }
-            );
-
-        if (location.host === 'demo.wee.bet') {
-            this.isDemo = true;
-        }
-
+        this.auth.logado.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+        this.auth.cliente.subscribe(isCliente => this.isCliente = isCliente);
         this.isMobile = window.innerWidth < 1025;
     }
 

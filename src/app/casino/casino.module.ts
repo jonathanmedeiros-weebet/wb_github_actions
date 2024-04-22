@@ -16,6 +16,7 @@ import { WallSearchBarComponent } from './wall/components/wall-search-bar/wall-s
 import { WallProviderCardComponent } from './wall/components/wall-provider-card/wall-provider-card.component';
 import { WallGameCardComponent } from './wall/components/wall-game-card/wall-game-card.component';
 import { WallProviderFilterModalComponent } from './wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { WallGamesSearchComponent } from './wall/components/wall-games-search/wall-games-search.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { WallProviderFilterModalComponent } from './wall/components/wall-provide
     WallProviderCardComponent,
     WallGameCardComponent,
     WallProviderFilterModalComponent,
+    WallGamesSearchComponent,
   ],
   imports: [
     SharedModule,
