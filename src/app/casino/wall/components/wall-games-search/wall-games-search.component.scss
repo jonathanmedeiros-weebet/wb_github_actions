@@ -1,0 +1,224 @@
+.games-search {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &--actived {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+
+        padding: 30px 15px;
+        width: 100vw;
+        height: 100vh;
+
+        background-color: var(--header);
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        height: 100%;
+        overflow: auto;
+    }
+
+    &__input {
+        width: 100%;
+    }
+
+    &__close {
+        display: none;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 16px;
+        color: var(--foreground-header);
+        cursor: pointer;
+    }
+
+    &--actived .games-search__close {
+        display: block;
+    }
+}
+
+.search-recents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--foreground-header);
+        line-height: 16px;
+    }
+
+    &__clear {
+        font-size: 10px;
+        font-weight: 400;
+        color: var(--foreground-header);
+        line-height: 13px;
+        cursor: pointer;
+    }
+
+    &__body {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: var(--foreground-header);;
+        background-color: var(--inputs-odds);
+
+        height: 23px;
+        border-radius: 3px;
+        padding: 7px 17px;
+        cursor: pointer;
+    }
+}
+
+.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    &__header {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--foreground-header);
+        line-height: 16px;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__message {
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--foreground-header);
+        line-height: 16px;
+    }
+
+    &__providers,
+    &__games {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+
+    &__title {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+    }
+}
+
+.featured-games {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__header {
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--foreground-header);
+        line-height: 16px;
+    }
+
+    &__body {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+@media only screen and (min-width: 667px) {
+    .featured-games__body {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .search-results__list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .games-search {
+        &--actived {
+            position: relative;
+
+            top: auto;
+            left: auto;
+            z-index: 10;
+    
+            padding: 0 0 20px 0;
+            width: auto;
+            height: 600px;
+    
+            background-color: var(--header);
+            border-radius: 5px;
+            border-top: 0;
+            border-right: 1px solid var(--highlight);
+            border-bottom: 1px solid var(--highlight);
+            border-left: 1px solid  var(--highlight);
+        }
+
+        &--actived .games-search__header {
+            border: 1px solid var(--highlight);
+            border-radius: 5px 5px 0 0 ;
+        }
+
+        &--actived .games-search__close {
+            padding: 0 20px;
+            color: var(--highlight);
+        }
+
+        &__content {
+            padding: 0 30px;
+        }
+    }
+
+    :host ::ng-deep .games-search--actived .games-search__input .search-box__input {
+        background-color: var(--header);
+        border: none;
+    }
+
+    .featured-games__body {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px;
+    }
+
+    .search-results__list {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px;
+    }
+}
