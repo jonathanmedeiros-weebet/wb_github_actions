@@ -17,7 +17,6 @@
             </a>
             <ng-container *ngIf="isLoggedIn && isCliente">
                 <a
-                    *ngIf="isCliente"
                     [routerLink]="routerLinkReal"
                     class="btn btn-xs game-button-play"
                 >
@@ -27,6 +26,7 @@
             <ng-container *ngIf="!isLoggedIn">
                 <a
                     (click)="handleModalLogin()"
+                    [routerLink]="routerLinkReal"
                     class="btn btn-xs game-button-play"
                 >
                     {{'geral.jogar' | translate}}

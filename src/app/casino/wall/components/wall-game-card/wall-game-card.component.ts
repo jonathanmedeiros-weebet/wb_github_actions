@@ -7,8 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class WallGameCardComponent {
   @Input() game: any;
-  @Input() title: string;
-  @Input() routerLink: string;
   @Input() blink: string;
   @Input() isDemo: boolean;
   @Input() isLoggedIn: boolean;
