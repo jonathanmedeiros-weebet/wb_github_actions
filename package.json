@@ -327,7 +327,9 @@
         "7copas.bet": "gulp 7copas.bet",
         "cravei.bet": "gulp cravei.bet",
         "miamipix.net": "gulp miamipix.net",
-        "betfeijo.wee.bet": "gulp betfeijo.wee.bet"
+        "betfeijo.wee.bet": "gulp betfeijo.wee.bet",
+        "pixplay.io": "gulp pixplay.io",
+        "sortepix.com": "gulp sortepix.com"
     },
     "private": true,
     "dependencies": {

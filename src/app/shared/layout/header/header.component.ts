@@ -47,11 +47,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
     @ViewChild('indiqueGanheCard', {read: ElementRef}) indiqueGanheCard: ElementRef;
-    paginaPromocaoHabilitado = false;
-    loteriasHabilitado = false;
-    acumuladaoHabilitado = false;
-    desafioHabilitado = false;
-    indiqueGanheHabilitado = false;
+
+    usuario = new Usuario();
+    unsub$ = new Subject();
+    modalRef;
+
     posicaoFinanceira = {
         saldo: 0,
         credito: 0,
@@ -59,46 +59,51 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         saldoMaisBonus: 0,
         bonusModalidade: 'nenhum'
     };
-    usuario = new Usuario();
-    isLoggedIn;
-    BANCA_NOME;
-    appMobile;
-    isOpen = false;
-    seninhaAtiva;
-    quininhaAtiva;
-    loteriaPopularAtiva;
-    esporteAtivo;
-    aoVivoAtivo;
-    cassinoAtivo;
-    virtuaisAtivo;
-    parlaybayAtivo;
-    LOGO = config.LOGO;
-    appVersion;
-    whatsapp;
-    isCliente;
-    modoClienteAtivo;
-    menuWidth;
-    clienteWidth;
-    scrollWidth;
-    unsub$ = new Subject();
-    isMobile = false;
-    centered = true;
-    pixCambista = false;
-    cartaoApostaHabilitado;
-    modalRef;
-    linguagemSelecionada = 'pt';
     myMatchOptions: IsActiveMatchOptions = {
         matrixParams: 'ignored',
         queryParams: 'ignored',
         fragment: 'ignored',
         paths: 'exact'
     };
-    mostrarSaldo;
-    firstLoggedIn;
-    valorGanhoPorIndicacao;
-    removendoIndiqueGanheCard = false;
+
+    BANCA_NOME;
+    appVersion;
     messageConnection;
+    linguagemSelecionada = 'pt';
+    LOGO = config.LOGO;
+    bonusBalanceReferAndEarn = '';
+
+    menuWidth;
+    clienteWidth;
+    scrollWidth;
+    valorGanhoPorIndicacao;
+
+    isOpen = false;
+    appMobile;
+    isMobile = false;
     isConnected = true;
+    whatsapp;
+    isLoggedIn;
+    firstLoggedIn;
+    isCliente;
+    modoClienteAtivo;
+    centered = true;
+    pixCambista = false;
+    mostrarSaldo;
+    removendoIndiqueGanheCard = false;
+    seninhaAtiva;
+    quininhaAtiva;
+    esporteAtivo;
+    cassinoAtivo;
+    virtuaisAtivo;
+    parlaybayAtivo;
+    loteriaPopularAtiva;
+    loteriasHabilitado = false;
+    acumuladaoHabilitado = false;
+    desafioHabilitado = false;
+    paginaPromocaoHabilitado = false;
+    indiqueGanheHabilitado = false;
+    cartaoApostaHabilitado;
     isDemo = location.host === 'demo.wee.bet';
 
     @HostListener('window:resize', ['$event'])
@@ -206,7 +211,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
-        this.valorGanhoPorIndicacao =  (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
+        this.valorGanhoPorIndicacao = (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
+        this.bonusBalanceReferAndEarn = this.paramsService.getOpcoes().indique_ganhe_tipo_saldo_ganho == 'bonus' ? "geral.bonus" : "";
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;

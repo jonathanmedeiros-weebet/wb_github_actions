@@ -26,7 +26,7 @@
                     </h4>
                     <p>
                         {{'indique_ganhe.indiqueGanheInfo2' | translate:{'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
-                        <a (click)="abrirModalRegras()" style="cursor: pointer;">{{'geral.regrasCondicoes' | translate}}</a>
+                        <a (click)="abrirModalRegras()" class="link-highlight">{{'geral.regrasCondicoes' | translate}}</a>
                     </p>
                 </div>
                 <div class="link-indicacao-container">
@@ -246,6 +246,9 @@
             </li>
             <li>
                 <b>{{'regras_indique_ganhe.lista_bonus_indicador' | translate}}:</b> {{'regras_indique_ganhe.lista_bonus_indicador_text' | translate:{'valorMinDepositado': valorMinDepositado, 'valorMinApostado': valorMinApostado, 'qtdDiasRequisitos': qtdDiasRequisitos, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao, 'tipoSaldoGanho': tipoSaldoGanhoModalRegras(true), 'modalidadePromocao': modalidadePromocao, 'prazoResgateSaldo': prazoResgateSaldo} }}
+                <ng-container *ngIf="tipoSaldoGanho == 'bonus'">
+                    <a (click)="abrirModalRegrasBonus()" class="link-highlight">{{'regras_indique_ganhe.checkBonusRules' | translate}}.</a>
+                </ng-container>
             </li>
             <li>
                 <b>{{'regras_indique_ganhe.lista_deposito_indicado' | translate}}:</b> {{'regras_indique_ganhe.lista_deposito_indicado_text' | translate:{'valorMinDepositado': valorMinDepositado, 'valorMinApostado': valorMinApostado, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
@@ -257,6 +260,71 @@
         <p>
             {{'regras_indique_ganhe.ultimo_paragrafo' | translate:{'nomeBanca': nomeBanca} }}
         </p>
+    </div>
+</ng-template>
+
+<ng-template #regrasCondicoesBonusModal style="min-height: 80%">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'regras_indique_ganhe.bonusRules' | translate}}</h4>
+        <a type="button" class="btn-close" aria-label="Close" (click)="activeBonusRulesModal.dismiss('Cross click')">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    <div class="modal-body">
+        <ul style="padding-left: 1.5rem;">
+            <li>
+                O valor total de bônus deve ser apostado {{multiplicadorPromocao}}
+                vezes na modalidade {{modalidadePromocao}}. As apostas colocadas
+                em esportes virtuais não se encontram elegíveis para efeitos do cumprimento
+                dos requisitos de bônus. Por exemplo, com bônus de R$50,
+                você terá que fazer R${{multiplicadorPromocao * 50}} em apostas na modalidade {{modalidadePromocao}}.
+            </li>
+            <li>
+                Quaisquer ganhos provenientes de apostas com bônus serão contabilizados em seu saldo de bônus.
+            </li>
+            <li>
+                <span *ngIf="tipoConversaoPromocao === 'porcentagem'; else defaultTipoConversao">
+                    O valor máximo de saldo bônus a ser convertido para saldo real é {{maximoConversaoPromocao | number: '1.0-0'}}%
+                    do valor do bônus recebido, todo o valor restante será descartado.
+                </span>
+                <ng-template #defaultTipoConversao>
+                    O valor máximo de saldo bônus a ser convertido para saldo real é R${{maximoConversaoPromocao | number: '1.2-2'}},
+                    todo o valor restante será descartado.
+                </ng-template>
+            </li>
+            <ng-container *ngIf="modalidadePromocao === 'esportivo'">
+                <li>
+                    Para efeitos de cumprimento dos requisitos de liberação, apenas as apostas realizadas com cotações iguais ou superiores a {{cotacaoMinimaSimplesPromocao}}
+                    para apostas simples, e {{cotacaoMinimaMultiplaPromocao}} para apostas múltiplas, contribuem para o Bônus em Apostas na modalidade esportivo
+                    .
+                </li>
+                <li>
+                    O Bônus para Apostas na modalidade esportivo não está disponível em nenhum tipo de jogo de cassino.
+                </li>
+            </ng-container>
+            <li>
+                O valor gasto de bônus é calculado no momento em que as apostas são liquidadas, não no momento em que são realizadas.
+            </li>
+            <li>
+                A partir do momento da ativação do bônus, cada cliente tem um período de {{diasVencimentoPromocao}}
+                dia(s) para completar os requisitos de liberação. Caso o(s) {{diasVencimentoPromocao}} dia(s) tenha(m) se passado, qualquer valor do bônus será automaticamente perdido.
+            </li>
+            <li>
+                A empresa se reserva o direito de alterar a promoção sem aviso prévio.
+            </li>
+            <li>
+                Em caso de atividade fraudulenta suspeita, a empresa se reserva ao direito de suspender sua conta e confiscar os valores. Atividades como abuso de bônus podem ser incluídas, tais como criar múltiplas contas com apostas similares.
+            </li>
+            <li>
+                Todo o valor depositado será bloqueado para saques enquanto houver bônus ativo.
+            </li>
+            <li>
+                Os jogadores podem cancelar sua participação nesta promoção e liberar o saque do saldo real. Se isso acontecer, todo o dinheiro do bônus recebido e quaisquer ganhos com dinheiro do bônus serão perdidos. Todo o valor gasto em apostas com bônus será descontado do saldo disponível.
+            </li>
+            <li>
+                Ao cancelar um bônus ativo, todas as apostas pendentes de resultado serão consideradas inválidas.
+            </li>
+        </ul>
     </div>
 </ng-template>
 
