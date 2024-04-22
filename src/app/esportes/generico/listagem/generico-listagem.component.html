@@ -81,7 +81,7 @@
         </div>
     </div>
 </div>
-<div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
+<div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()" (scroll)="layoutService.onPageScroll($event.target)">
     <app-banners [pagina]="esporte"></app-banners>
     <div class="wrap-sticky" *ngIf="!showLoadingIndicator">
 

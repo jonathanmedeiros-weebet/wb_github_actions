@@ -616,6 +616,7 @@
     box-shadow: 0 -2px 0 var(--highlight) inset;
     justify-content: center;
     position: relative;
+    transition: min-height 150ms linear;
 }
 
 .submenu {
@@ -625,6 +626,7 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     justify-content: center;
+    transition: height 150ms linear;
 }
 
 .submenu::-webkit-scrollbar {

@@ -67,6 +67,7 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
     submenuItems = [];
     submenu = [];
     activeSubmenu = true;
+    hideSubmenu = false;
 
     menuWidth;
     scrollWidth;
@@ -568,5 +569,35 @@ export class WallLiveComponent implements OnInit, AfterViewInit {
 
     changeSvgHover(index) {
         this.submenuItems[index].svgHover = !this.submenuItems[index].svgHover;
+    }
+
+    onPageScroll(element) {
+        if (!this.isMobile) {
+            return;
+        }
+
+        const firstScrollTop = element.scrollTop;
+        setTimeout(() => {
+            const submenuContainer = this.el.nativeElement.querySelector('#submenu-container');
+            const navSubmenu = this.el.nativeElement.querySelector('#nav-submenu');
+
+            if (navSubmenu) {
+                if (element.scrollTop > firstScrollTop && !this.hideSubmenu) {
+                    this.hideSubmenu = true;
+                    this.renderer.setStyle(submenuContainer, 'min-height', '0');
+                    this.renderer.setStyle(navSubmenu, 'height', '0');
+                } else if (element.scrollTop < firstScrollTop && this.hideSubmenu) {
+                    this.hideSubmenu = false;
+                    this.renderer.setStyle(submenuContainer, 'min-height', '40px');
+                    this.renderer.setStyle(navSubmenu, 'height', '40px');
+                } else if (element.scrollTop == 0 && this.hideSubmenu) {
+                    this.hideSubmenu = false;
+                    this.renderer.setStyle(submenuContainer, 'min-height', '40px');
+                    this.renderer.setStyle(navSubmenu, 'height', '40px');
+                }
+            }
+
+            this.cd.detectChanges();
+        }, 50);
     }
 }
