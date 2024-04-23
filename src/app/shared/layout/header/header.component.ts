@@ -105,6 +105,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     indiqueGanheHabilitado = false;
     cartaoApostaHabilitado;
     isDemo = location.host === 'demo.wee.bet';
+    aoVivoAtivo;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {

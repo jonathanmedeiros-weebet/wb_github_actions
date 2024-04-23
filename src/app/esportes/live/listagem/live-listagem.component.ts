@@ -34,7 +34,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     mobileScreen = false;
     term = '';
     itens;
-    esportesAbertos = [48242];
+    esportesAbertos = [48242, 1];
     qtdJogosFutebol = 0;
     qtdJogosBasquete = 0;
     futebolAoVivohabilitado = false;
@@ -81,7 +81,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe(itens => this.itens = itens);
 
 
-        this.liveService.entrarSalaEventos();1
+        this.liveService.entrarSalaEventos();
         this.getJogosAoVivo();
     }
 
@@ -124,10 +124,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                             }
 
                             if (this.jogoBloqueado(jogo.event_id)) {
-                                valido = false;
-                            }
-
-                            if (jogo.cotacoes.length) {
                                 valido = false;
                             }
 
