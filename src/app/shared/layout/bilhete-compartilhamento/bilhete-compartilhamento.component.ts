@@ -75,7 +75,7 @@ export class BilheteCompartilhamentoComponent implements OnInit {
             if (newNavigator.share) {
                 newNavigator.share({
                     title: config.BANCA_NOME,
-                    text: `${config.BANCA_NOME}: ${this.aposta.codigo}`,
+                    text: `${config.BANCA_NOME}\n\nSeu Bilhete:\n${location.origin}/bilhete/${this.aposta.codigo}\n\nCasa das Apostas:\n`,
                     url: `${location.origin}/bilhete/${this.aposta.codigo}`,
                 });
             } else {
