@@ -44,8 +44,8 @@
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
 }
 
 .game-list::-webkit-scrollbar {
@@ -91,16 +91,11 @@
     opacity: 1;
 }
 
-#destaques-fade-right {
-    display: none;
-}
-
 .more-games-fade-left {
     background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
     left: 0;
     opacity: 0;
 }
-
 
 .hide {
     opacity: 0;
