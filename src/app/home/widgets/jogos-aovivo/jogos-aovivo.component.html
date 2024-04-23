@@ -1,3 +1,19 @@
+<div class="loading-listagem" *ngIf="showLoadingIndicator">
+    <div class="slider">
+        <div class="ssc-square title"></div>
+        <div class="itens">
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+        </div>
+    </div>
+</div>
 <div class="jogos-destaque" *ngIf="jogos.size > 0">
     <div class="slider-header">
         {{ 'geral.jogosAoVivo' | translate }}
@@ -28,7 +44,7 @@
 
                     <div class="jogo">
                         <div class="time1">
-                            <span class="text-center">{{ jogoDestaque.value.time_a_nome }}</span>
+                            <span class="text-center" title="{{ jogoDestaque.value.time_a_nome }}">{{ jogoDestaque.value.time_a_nome }}</span>
                             <span *ngIf="jogoDestaque.value.time_a_img; else defaulImage" class="escudo">
                                 <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.value.time_a_img}}.png" size="s" class="escudo-img">
                             </span>
@@ -54,7 +70,7 @@
                                     <img src="https://cdn.wee.bet/img/times/m/default.png" size="s" class="escudo-img">
                                 </span>
                             </ng-template>
-                            <span class="text-center flex-grow-1">{{ jogoDestaque.value.time_b_nome }}</span>
+                            <span class="text-center flex-grow-1" title="{{ jogoDestaque.value.time_b_nome }}">{{ jogoDestaque.value.time_b_nome }}</span>
                         </div>
                     </div>
 

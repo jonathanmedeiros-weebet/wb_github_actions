@@ -94,8 +94,6 @@ export class BilheteComponent extends BaseFormComponent implements OnInit, OnDes
 
     ngOnInit() {
         const {
-            habilitar_live_tracker,
-            habilitar_live_stream,
             modo_cambista,
             valor_min_aposta,
             valor_max_aposta
@@ -157,28 +155,6 @@ export class BilheteComponent extends BaseFormComponent implements OnInit, OnDes
                 this.calcularPossibilidadeGanho(this.form.value.valor);
                 this.scrollToBottom();
             });
-
-        this.bilheteService.idJogo
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                (response: any) => {
-                    if (response) {
-                        if (habilitar_live_stream) {
-                            this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + response);
-                            this.showStreamFrame();
-                        }
-
-                        if (habilitar_live_tracker) {
-                            this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response);
-                            this.showCampinhoFrame();
-                        }
-                    } else {
-                        this.liveTrackerUrl = null;
-                        this.liveStreamUrl = null;
-                    }
-                },
-                error => this.handleError(error)
-            );
 
         this.form.get('valor').valueChanges
             .pipe(takeUntil(this.unsub$))

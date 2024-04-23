@@ -165,8 +165,14 @@ owl-carousel-o {
     flex: 1;
 }
 
-.jogos-destaque .jogo .time1 img {
-    margin-left: 10px;
+.jogos-destaque .jogo .time1 .text-center,
+.jogos-destaque .jogo .time2 .text-center {
+
+    display: block;
+    width: 102px;
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
 }
 
 .jogos-destaque .jogo .time1 .text-center {
@@ -178,10 +184,6 @@ owl-carousel-o {
     gap: 5px;
     align-items: center;
     flex: 1;
-}
-
-.jogos-destaque .jogo .time2 img {
-    margin-right: 10px;
 }
 
 .jogos-destaque .jogo .time2 .text-center {
@@ -244,6 +246,30 @@ span.escudo img {
     padding: 2px 10px;
     border-radius: 5px;
     margin-bottom: 2px;
+}
+
+.loading-listagem .slider {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+}
+
+.loading-listagem .slider .title {
+    width: 300px;
+    height: 27px;
+    margin: 10px 0;
+}
+
+.loading-listagem .slider .itens {
+    display: flex;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.loading-listagem .slider .itens div {
+    min-width: 340px;
+    height: 170px;
+    border-radius: 5px;
 }
 
 @media only screen and (max-width: 1024px) {

@@ -21,6 +21,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     cotacoesLocais = [];
     jogosDestaquesIds = [];
     widthCard = 340;
+    showLoadingIndicator = true;
 
     customOptions: OwlOptions = {
         loop: true,
@@ -99,6 +100,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
                 this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
                 this.mapJogosDestaque();
                 this.cotacoesJogosDestaque();
+                this.showLoadingIndicator = false;
             });
     }
 

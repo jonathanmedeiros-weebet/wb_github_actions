@@ -40,8 +40,8 @@ export class JogosAovivoComponent implements OnInit, OnDestroy {
     term = '';
 
     customOptions: OwlOptions = {
-        loop: true,
-        autoplay: true,
+        loop: false,
+        autoplay: false,
         rewind: true,
         margin: 10,
         dots: false,
