@@ -57,6 +57,7 @@
 }
 
 .games-container {
+    overflow: hidden;
     position: relative;
 }
 
