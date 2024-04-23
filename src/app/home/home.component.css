@@ -1,3 +1,8 @@
+.home-container {
+    max-height: calc(100vh - 132px);
+    overflow-x: auto;
+}
+
 .widgets {
     display: block;
     margin-bottom: 30px;
