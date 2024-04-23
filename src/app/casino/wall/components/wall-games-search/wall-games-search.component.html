@@ -67,7 +67,7 @@
                             <span class="search-results__title">{{ 'geral.jogos' | translate }} ({{ gameList.length }})</span>
                             <div class="search-results__list">
                                 <app-wall-game-card
-                                    *ngFor="let game of gameList"
+                                    *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
                                     [game]="game"
                                     [isCardInline]="false"
                                     [isDemo]="isDemo"
@@ -94,7 +94,7 @@
                 </div>
                 <div class="featured-games__body">
                     <app-wall-game-card
-                        *ngFor="let game of featuredGameList"
+                        *ngFor="let game of featuredGameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
                         [game]="game"
                         [isCardInline]="false"
                         [isDemo]="isDemo"

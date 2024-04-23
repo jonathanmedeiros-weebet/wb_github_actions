@@ -91,13 +91,6 @@
     text-shadow: 2px 2px 5px black;
 }
 
-/* .info-game label {
-    font-size: 12px;
-    text-overflow: ellipsis;
-    text-wrap: nowrap;
-    overflow: hidden;
-} */
-
 .info-game label {
     font-size: 12px;
     text-overflow: ellipsis;
@@ -185,7 +178,6 @@
 @media only screen and (min-width: 1025px) {
     .game-tile {
         margin-left: 20px;
-        margin-bottom: 20px;
     }
 
     .game-tile:nth-child(5n+1) {

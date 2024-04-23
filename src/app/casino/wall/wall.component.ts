@@ -67,6 +67,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     limparCampoSearch;
     qtdItens = 20;
 
+    private newGamesCassino: GameCasino[];
     public fornecedorSelecionado: string;
 
     constructor(
@@ -112,11 +113,13 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = response.gameList.filter(function(game) {
                 return game.dataType !== 'VSB';
             });
+            
             this.cassinoFornecedores = response.fornecedores.map((fornecedor: Fornecedor) => ({
                 ...fornecedor,
                 imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
             }));
 
+            this.newGamesCassino = response.news;
             this.gamesDestaque = response.populares;
             this.gamesSlot = this.filterDestaques(this.gamesCassino, 'slot');
             this.gamesCrash = this.filterDestaques(this.gamesCassino, 'crash');
