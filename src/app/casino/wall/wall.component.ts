@@ -205,20 +205,27 @@ export class WallComponent implements OnInit, AfterViewInit {
         const scrollRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-right`);
         const maxScrollSize = scrollTemp.nativeElement.clientWidth;
 
+        const fadeLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-left`);
+        const fadeRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-right`);
+
         if (scrollLeft <= 0) {
             this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
             this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
         } else {
             this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
         }
 
         if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 1) {
             this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
         } else {
             this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
         }
     }
 
