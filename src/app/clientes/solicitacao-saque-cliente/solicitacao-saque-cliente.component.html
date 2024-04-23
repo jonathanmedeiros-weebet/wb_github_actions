@@ -129,7 +129,7 @@
                         <td><img src="/assets/images/debito.svg" alt="image"></td>
                         <td>
                             {{'saques.saqueERegistrado' | translate}} {{ saque.data }}
-                            <a class="info" *ngIf="saque.chavePix" placement="top" [ngbPopover]="formatarChavePix(saque.chavePix, saque.tipoChavePix)">
+                            <a class="info" *ngIf="saque.chavePix" placement="top" [ngbPopover]="('geral.chavePix' | translate) + ': ' + formatarChavePix(saque.chavePix, saque.tipoChavePix)">
                                 <i class="fa fa-info"></i>
                               </a>
                         </td>
