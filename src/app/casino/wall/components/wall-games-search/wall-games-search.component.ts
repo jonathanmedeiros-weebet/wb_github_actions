@@ -106,8 +106,7 @@ export class WallGamesSearchComponent implements OnInit {
       .subscribe((term) => this.setTermAndLocalStorage(term))
   }
 
-  public handleSearch(term, saveStorage = true) {
-    this.searchTermSubject.next(term)
+  public handleSearch(term: string, saveStorage = true) {
     if(saveStorage) { 
       this.searchTermSubject.next(term);
     } else {
@@ -134,6 +133,7 @@ export class WallGamesSearchComponent implements OnInit {
 
   public handleClose() {
     this.showResults = false;
+    this.handleClear();
   }
 
   public handleModalLogin() {

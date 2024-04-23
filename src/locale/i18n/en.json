@@ -225,7 +225,12 @@
         "provedores": "Providers",
         "todosProvedores": "All providers",
         "digiteNomeProvedor": "Enter the provider name",
-        "pesquisarJogosProvedores": "Search for games and providers"
+        "pesquisarJogosProvedores": "Search for games and providers",
+        "limpar": "Clear",
+        "pesquisasRecentes": "Recent researches",
+        "limparHistorico": "Clear history",
+        "nenhumResultadoEncontrado": "No results found for this search",
+        "jogosEmAlta": "Trending games"
     },
     "bet": {
         "sportsBetting": "Sports betting",

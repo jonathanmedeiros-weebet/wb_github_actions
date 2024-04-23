@@ -210,6 +210,7 @@
         "jogarAgora": "Jogar Agora",
         "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
+        "resultadosEncontradosComQuantidade": "Foram encontrados {{quantidade}} resultados",
         "selecioneChavePix": "Selecione a chave pix",
         "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
         "chaveAleatoria": "Chave aleatória",
@@ -225,7 +226,12 @@
         "provedores": "Provedores",
         "todosProvedores": "Todos provedores",
         "digiteNomeProvedor": "Digite o nome do provedor",
-        "pesquisarJogosProvedores": "Pesquisar por jogos e provedores"
+        "pesquisarJogosProvedores": "Pesquisar por jogos e provedores",
+        "limpar": "Limpar",
+        "pesquisasRecentes": "Pesquisas recentes",
+        "limparHistorico": "Limpar histórico",
+        "nenhumResultadoEncontrado": "Nenhum resultado encontrado para esta pesquisa",
+        "jogosEmAlta": "Jogos em alta"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",

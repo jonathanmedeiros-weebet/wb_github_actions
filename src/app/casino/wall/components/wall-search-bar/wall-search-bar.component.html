@@ -10,9 +10,11 @@
         [value]="term"
         autocomplete="off"
     >
-    <i
-        class="fa fa-close search-box__icon--clear"
+    <span
+        class="search-box__icon--clear"
         (click)="handleClear()"
         *ngIf="term"
-    ></i>
+    >
+        {{ 'geral.limpar' | translate }}
+    </span>
 </div>

@@ -15,7 +15,9 @@
             class="games-search__close"
             (click)="handleClose()"
         >
-            Fechar
+            <i
+                class="fa fa-close"
+            ></i>
         </a>
     </div>
 
@@ -23,12 +25,12 @@
         <div class="games-search__content">
             <div class="search-recents" *ngIf="showLastGamesSearch">
                 <div class="search-recents__header">
-                    <span class="search-recents__title">Pesquisas recentes</span>
+                    <span class="search-recents__title">{{ 'geral.pesquisasRecentes' | translate }}</span>
                     <a
                         class="search-recents__clear"
                         (click)="handleCleanHistory()"
                     >
-                        Limpar histórico
+                        {{ 'geral.limparHistorico' | translate }}
                     </a>
                 </div>
                 <div class="search-recents__body">
@@ -44,13 +46,13 @@
 
             <div class="search-results">
                 <div class="search-results__header">
-                    Resultados encontrados <span *ngIf="showSearchResults">({{searchItemLength}})</span>
+                    {{ 'geral.resultadosEncontrados' | translate }} <span *ngIf="showSearchResults">({{searchItemLength}})</span>
                 </div>
 
                 <div class="search-results__body">
                     <ng-container *ngIf="showSearchResults; else elseWithoutItem">
                         <div class="search-results__providers">
-                            <span class="search-results__title">Provedores ({{ providerList.length }})</span>
+                            <span class="search-results__title">{{ 'geral.provedores' | translate }} ({{ providerList.length }})</span>
                             <div class="search-results__list">
                                 <app-wall-provider-card
                                     *ngFor="let provider of providerList"
@@ -62,7 +64,7 @@
                         </div>
             
                         <div class="search-results__games">
-                            <span class="search-results__title">Jogos ({{ gameList.length }})</span>
+                            <span class="search-results__title">{{ 'geral.jogos' | translate }} ({{ gameList.length }})</span>
                             <div class="search-results__list">
                                 <app-wall-game-card
                                     *ngFor="let game of gameList"
@@ -80,7 +82,7 @@
 
                     <ng-template #elseWithoutItem>
                         <span class="search-results__message">
-                            Nenhum resultado encontrado para esta pesquisa
+                            {{ 'geral.nenhumResultadoEncontrado' | translate }}
                         </span>
                     </ng-template>
                 </div>
@@ -88,7 +90,7 @@
 
             <div class="featured-games" *ngIf="showFeasturedGames">
                 <div class="featured-games__header">
-                    Jogos em alta
+                    {{ 'geral.jogosEmAlta' | translate }}
                 </div>
                 <div class="featured-games__body">
                     <app-wall-game-card

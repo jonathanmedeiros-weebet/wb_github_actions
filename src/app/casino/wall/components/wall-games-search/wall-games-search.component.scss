@@ -1,7 +1,7 @@
 .games-search {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 10px;
 
     &--actived {
         position: fixed;
@@ -14,6 +14,7 @@
         height: 100vh;
 
         background-color: var(--header);
+        transition: 300ms;
     }
 
     &__header {
@@ -24,6 +25,7 @@
     }
 
     &__content {
+        padding-top: 20px;
         display: flex;
         flex-direction: column;
         gap: 25px;
@@ -37,16 +39,24 @@
 
     &__close {
         display: none;
-        font-size: 12px;
+        font-size: 20px;
         font-weight: 600;
         line-height: 16px;
-        color: var(--foreground-header);
+        color: var(--highlight);
         cursor: pointer;
+    }
+
+    &__close:hover {
+        opacity: .9;
     }
 
     &--actived .games-search__close {
         display: block;
     }
+}
+
+:host ::ng-deep .games-search--actived .games-search__input .search-box__icon--clear {
+    right: 55px;
 }
 
 .search-recents {
@@ -105,6 +115,8 @@
         font-weight: 600;
         color: var(--foreground-header);
         line-height: 16px;
+
+        text-transform: capitalize;
     }
 
     &__body {
@@ -199,7 +211,6 @@
 
         &--actived .games-search__close {
             padding: 0 20px;
-            color: var(--highlight);
         }
 
         &__content {
@@ -210,6 +221,10 @@
     :host ::ng-deep .games-search--actived .games-search__input .search-box__input {
         background-color: var(--header);
         border: none;
+    }
+
+    :host ::ng-deep .games-search--actived .games-search__input .search-box__icon--clear {
+        right: 20px;
     }
 
     .featured-games__body {
