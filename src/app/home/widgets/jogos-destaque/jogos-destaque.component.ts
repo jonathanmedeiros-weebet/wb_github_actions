@@ -31,6 +31,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         dots: false,
         autoHeight: true,
         autoWidth: true,
+        center: true
     };
 
     unsub$ = new Subject();
