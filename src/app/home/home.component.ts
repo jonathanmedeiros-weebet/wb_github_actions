@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit {
     qtdItens = 0;
     modalRef;
 
+    loadingCassino = true;
+    loadingCassinoAoVivo = true;
+
     widgets = [];
 
     constructor(
@@ -24,13 +27,15 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.casinoApi.getGamesHome().subscribe(response => {
-            this.gamesPopulares = response.populares;
-            this.gamesPopularesAoVivo = response.popularesAoVivo;
-        });
-
         this.homeService.getPosicaoWidgets().subscribe(response => {
             this.widgets = response
-        })
+        });
+
+        this.casinoApi.getGamesHome().subscribe(response => {
+            this.gamesPopulares = response.populares;
+            this.loadingCassino = false;
+            this.gamesPopularesAoVivo = response.popularesAoVivo;
+            this.loadingCassinoAoVivo = false;
+        });
     }
 }

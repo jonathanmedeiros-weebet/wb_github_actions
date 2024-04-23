@@ -1,6 +1,22 @@
+<div class="loading-listagem" *ngIf="showLoadingIndicator">
+    <div class="slider">
+        <div class="ssc-square title"></div>
+        <div class="itens">
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+        </div>
+    </div>
+</div>
 <div class="jogos-destaque" *ngIf="jogosDestaque.length > 0">
     <div class="slider-header">
-        Jogos Destaque
+        {{ 'geral.jogosDestaques' | translate }}
         <nav>
             <div class="scroll-button scroll-left disabled-scroll-button" id="cassino-left"
                 (click)="owlCar.prev()">
@@ -14,7 +30,7 @@
     </div>
     <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;" #owlCar>
         <ng-container *ngFor="let jogoDestaque of jogosDestaque">
-            <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="340">
+            <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="widthCard">
                 <div class="jogo-destaque">
                     <div class="header">
                         <span>

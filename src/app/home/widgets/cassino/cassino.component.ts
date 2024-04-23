@@ -13,6 +13,7 @@ export class CassinoComponent implements OnInit {
     @Input() games = [];
     @Input() title: string;
     @Input() linkAll: string;
+    @Input() showLoadingIndicator: boolean;
 
     isMobile = false;
     modalRef: NgbModalRef;
@@ -30,14 +31,14 @@ export class CassinoComponent implements OnInit {
     ngOnInit(): void {
         this.auth.logado
             .subscribe((isLoggedIn: any) => {
-                    this.isLoggedIn = isLoggedIn;
-                }
+                this.isLoggedIn = isLoggedIn;
+            }
             );
 
         this.auth.cliente
             .subscribe((isCliente: any) => {
-                    this.isCliente = isCliente;
-                }
+                this.isCliente = isCliente;
+            }
             );
     }
 
