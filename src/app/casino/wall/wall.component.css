@@ -312,7 +312,6 @@
     }
 }
 
-
 @media only screen and (min-width: 687px) and (max-width: 1024px) {
     .game-grid {
         grid-template-columns: repeat(4, 1fr);
