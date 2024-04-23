@@ -73,10 +73,18 @@ export class BilheteCompartilhamentoComponent implements OnInit {
             }
         } else {
             if (newNavigator.share) {
+                let message = `\r${config.BANCA_NOME}\n\nSeu Bilhete:\n`;
+                let url = `${location.origin}/bilhete/${this.aposta.codigo}`;
+
+                if (this.helperService.casaDasApostasId) {
+                    message += `${url}\n\nCasa das Apostas:\n`;
+                    url = `http://casadasapostas.net/bilhete?banca=${this.helperService.casaDasApostasId}&codigo=${this.aposta.codigo}`;
+                }
+
                 newNavigator.share({
                     title: config.BANCA_NOME,
-                    text: `${config.BANCA_NOME}\n\nSeu Bilhete:\n${location.origin}/bilhete/${this.aposta.codigo}\n\nCasa das Apostas:\n`,
-                    url: `${location.origin}/bilhete/${this.aposta.codigo}`,
+                    text: message,
+                    url: url,
                 });
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
