@@ -229,13 +229,17 @@
         right: 20px;
     }
 
+    :host ::ng-deep .games-search--actived .provider-card--filter {
+        max-width: none;
+    }
+
     .featured-games__body {
         grid-template-columns: repeat(6, 1fr);
-        gap: 20px;
+        gap: 15px;
     }
 
     .search-results__list {
         grid-template-columns: repeat(6, 1fr);
-        gap: 20px;
+        gap: 15px;
     }
 }
