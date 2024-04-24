@@ -24,7 +24,7 @@
     }
 
     &__content {
-        padding-top: 20px;
+        padding: 20px 0;
         display: flex;
         flex-direction: column;
         gap: 25px;
@@ -73,6 +73,7 @@
         font-size: 12px;
         font-weight: 600;
         color: var(--foreground-header);
+        
         line-height: 16px;
     }
 
@@ -94,7 +95,7 @@
         justify-content: center;
         align-items: center;
 
-        color: var(--foreground-header);;
+        color: var(--foreground-inputs-odds);
         background-color: var(--inputs-odds);
 
         height: 23px;
@@ -209,6 +210,8 @@
             border-bottom: 1px solid var(--highlight);
             border-left: 0;
             border-radius: 5px 5px 0 0 ;
+
+            background-color: var(--foreground-inputs-odds);
         }
 
         &--actived .games-search__close {
@@ -220,9 +223,16 @@
         }
     }
 
-    :host ::ng-deep .games-search--actived .games-search__input .search-box__input {
-        background-color: var(--header);
+    :host ::ng-deep .games-search--actived .games-search__input .search-box__input,
+    :host ::ng-deep .games-search--actived .games-search__input .search-box__input:hover,
+    :host ::ng-deep .games-search--actived .games-search__input .search-box__input:focus {
+        background-color: var(--foreground-inputs-odds);
+        color: var(--inputs-odds);
         border: none;
+    }
+
+    :host ::ng-deep .games-search--actived .games-search__input .search-box__icon--search {
+        color: var(--inputs-odds);
     }
 
     :host ::ng-deep .games-search--actived .games-search__input .search-box__icon--clear {

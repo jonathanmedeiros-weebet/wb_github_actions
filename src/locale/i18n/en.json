@@ -283,8 +283,8 @@
         "mesa": "Table",
         "cassinoAoVivo": "Live Casino",
         "loteriaPopular": "Popular Lottery",
-        "maisPopulares": "Populares",
-        "news": "Novidades"
+        "maisPopulares": "Popular",
+        "news": "News"
     },
     "bilhete": {
         "titulo": "TICKET",

@@ -158,6 +158,8 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
                 return submenu.link == this.router.url.split('?')[0];
             });
 
+            if(!submenuAtivo) return
+
             const activeButtonElement = this.el.nativeElement.querySelector(`#${submenuAtivo.id}`);
             if (activeButtonElement) {
                 this.scrollMenu.nativeElement.scrollLeft = activeButtonElement.offsetLeft - 35;

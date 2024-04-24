@@ -210,6 +210,6 @@
 @media only screen and (max-width: 400px) {
     .game-tile-inline,
     .game-tile-inline-destaque {
-        min-width: 140px;
+        min-width: 150px;
     }
 }

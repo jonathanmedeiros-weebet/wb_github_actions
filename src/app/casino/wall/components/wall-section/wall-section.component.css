@@ -48,15 +48,13 @@
 }
 
 .enabled-scroll-button {
-    background-color: var(--inputs-odds);
     color: var(--foreground);
     cursor: pointer;
     transition: 500ms;
 }
 
 .enabled-scroll-button:hover {
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
+    color: var(--highlight);
 }
 
 .disabled-scroll-button {

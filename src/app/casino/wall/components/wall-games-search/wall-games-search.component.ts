@@ -92,7 +92,7 @@ export class WallGamesSearchComponent implements OnInit {
   }
 
   get blink(): string {
-    return this.router.url.split('/')[2];
+    return this.router.url.split('/')[1];
   }
 
   ngOnInit(): void {

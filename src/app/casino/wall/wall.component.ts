@@ -127,14 +127,8 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.cd.detectChanges();
-
-        if (this.isCassinoPage || this.isVirtualPage) {
-            this.getGameCassinoList();
-        }
-
-        if(this.isCassinoAoVivoPage) {
-            this.getGameCassinoAoVivoList();
-        }
+        this.onTranslateChange();
+        this.getGameList();
 
         if (this.isMobile) {
             this.scrollStep = 200;
@@ -142,6 +136,23 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         this.auth.logado.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
         this.auth.cliente.subscribe(isCliente => this.isCliente = isCliente);
+    }
+
+    private onTranslateChange() {
+        this.translate.onLangChange.subscribe(() => {
+            this.getGameList()
+            this.cd.detectChanges();
+        });
+    }
+
+    private getGameList() {
+        if (this.isCassinoPage || this.isVirtualPage) {
+            this.getGameCassinoList();
+        }
+
+        if(this.isCassinoAoVivoPage) {
+            this.getGameCassinoAoVivoList();
+        }
     }
 
     private async getGameCassinoList() {
@@ -327,21 +338,21 @@ export class WallComponent implements OnInit, AfterViewInit {
         if (scrollLeft <= 0) {
             this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
             this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
-            this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
+            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
         } else {
             this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
-            this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
+            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
         }
 
         if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 1) {
             this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
-            this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
+            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
         } else {
             this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
-            this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
+            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
         }
     }
 
