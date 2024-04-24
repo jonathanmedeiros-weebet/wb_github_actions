@@ -5,7 +5,7 @@
     class="wall-container"
     [ngClass]="{
         'internal': !isHomeCassino,
-        'virtual-container': isVirtual
+        'virtual-container': isVirtualPage
     }"
 >
     <app-banners pagina="cassino"></app-banners>
@@ -42,14 +42,14 @@
         />
 
         <app-submenu
-            category="cassino"
+            [category]="subMenuCategory"
             version="v2"
             [menuItemSelected]="categorySelected"
             (onClick)="filterGames(gameFornecedor, $event, false)"
         />
     </div>
 
-    <div class="bloco" *ngIf="!this.isVirtual">
+    <div class="bloco" *ngIf="!this.isVirtualPage">
         <app-wall-section
             sectionId="providers"
             [title]="'geral.provedores' | translate"
@@ -72,194 +72,34 @@
     </div>
 
     <div class="wall-inner" *ngIf="!showLoadingIndicator && isHomeCassino; else cassinoGameList">
-        <div class="bloco">
-            <app-wall-section
-                sectionId="destaques"
-                [title]="'cassino.maisPopulares' | translate"
-                [itemsQty]="gamesDestaque.length"
-                (onSeeAll)="filterGames($event, 'destaques', true)"
-                (onLeft)="scrollLeft('destaques')"
-                (onRight)="scrollRight('destaques')"
-            />
+        <ng-container *ngFor="let section of gamesSection">
+            <div class="bloco" *ngIf="section.show">
+                <app-wall-section
+                    [sectionId]="section.id"
+                    [title]="section.title"
+                    [itemsQty]="section.gameList.length"
+                    (onSeeAll)="filterGames($event, section.id, true)"
+                    (onLeft)="scrollLeft(section.id)"
+                    (onRight)="scrollRight(section.id)"
+                />
 
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="destaques-fade-left"></div>
-                <div class="game-list game-list-inline" #scrollGames id="destaques-scroll" (scroll)="onScroll('destaques')">
-                    <app-wall-game-card
-                        *ngFor="let game of gamesDestaque"
-                        [game]="game"
-                        [blink]="blink"
-                        [isLoggedIn]="isLoggedIn"
-                        [isDemo]="isDemo"
-                        [isCliente]="isCliente"
-                        (openModalLogin)="abrirModalLogin()"
-                    />
+                <div class="games-container">
+                    <div class="more-games-fade more-games-fade-left" id="{{ section.id }}-fade-left"></div>
+                    <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
+                        <app-wall-game-card
+                            *ngFor="let game of section.gameList"
+                            [game]="game"
+                            [blink]="blink"
+                            [isLoggedIn]="isLoggedIn"
+                            [isDemo]="isDemo"
+                            [isCliente]="isCliente"
+                            (openModalLogin)="abrirModalLogin()"
+                        />
+                    </div>
+                    <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
                 </div>
-                <div class="more-games-fade more-games-fade-right" id="destaques-fade-right" *ngIf="gamesDestaque.length > 2"></div>
             </div>
-        </div>
-
-        <div class="bloco">
-            <app-wall-section
-                sectionId="crash"
-                [title]="'cassino.crash' | translate"
-                [itemsQty]="gamesCrash.length"
-                (onSeeAll)="filterGames($event, 'crash', true)"
-                (onLeft)="scrollLeft('crash')"
-                (onRight)="scrollRight('crash')"
-            />
-
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="crash-fade-left"></div>
-                <div class="game-list game-list-inline" #scrollGames id="crash-scroll" (scroll)="onScroll('crash')">
-                    <app-wall-game-card
-                        *ngFor="let game of gamesCrash"
-                        [game]="game"
-                        [blink]="blink"
-                        [isLoggedIn]="isLoggedIn"
-                        [isDemo]="isDemo"
-                        [isCliente]="isCliente"
-                        (openModalLogin)="abrirModalLogin()"
-                    />
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="crash-fade-right" *ngIf="gamesCrash.length > 2"></div>
-            </div>
-        </div>
-
-        <div class="bloco">
-            <app-wall-section
-                sectionId="slot"
-                [title]="'cassino.slot' | translate"
-                [itemsQty]="gamesSlot.length"
-                (onSeeAll)="filterGames($event, 'slot', true)"
-                (onLeft)="scrollLeft('slot')"
-                (onRight)="scrollRight('slot')"
-            />
-
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="slot-fade-left"></div>
-                <div class="game-list game-list-inline" #scrollGames id="slot-scroll" (scroll)="onScroll('slot')">
-                    <app-wall-game-card
-                        *ngFor="let game of gamesSlot"
-                        [game]="game"
-                        [blink]="blink"
-                        [isLoggedIn]="isLoggedIn"
-                        [isDemo]="isDemo"
-                        [isCliente]="isCliente"
-                        (openModalLogin)="abrirModalLogin()"
-                    />
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="slot-fade-right" *ngIf="gamesSlot.length > 2"></div>
-            </div>
-        </div>
-
-        <div class="bloco">
-            <app-wall-section
-                sectionId="roleta"
-                [title]="'cassino.roleta' | translate"
-                [itemsQty]="gamesRoleta.length"
-                (onSeeAll)="filterGames($event, 'roleta', true)"
-                (onLeft)="scrollLeft('roleta')"
-                (onRight)="scrollRight('roleta')"
-            />
-
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="roleta-fade-left"></div>
-                <div class="game-list game-list-inline" #scrollGames id="roleta-scroll" (scroll)="onScroll('roleta')">
-                    <app-wall-game-card
-                        *ngFor="let game of gamesRoleta"
-                        [game]="game"
-                        [blink]="blink"
-                        [isLoggedIn]="isLoggedIn"
-                        [isDemo]="isDemo"
-                        [isCliente]="isCliente"
-                        (openModalLogin)="abrirModalLogin()"
-                    />
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="roleta-fade-right" *ngIf="gamesRoleta.length > 2"></div>
-            </div>
-        </div>
-
-        <div class="bloco">
-            <app-wall-section
-                sectionId="mesa"
-                [title]="'cassino.mesa' | translate"
-                [itemsQty]="gamesMesa.length"
-                (onSeeAll)="filterGames($event, 'mesa', true)"
-                (onLeft)="scrollLeft('mesa')"
-                (onRight)="scrollRight('mesa')"
-            />
-
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="mesa-fade-left"></div>
-                <div class="game-list game-list-inline" #scrollGames id="mesa-scroll" (scroll)="onScroll('mesa')">
-                    <app-wall-game-card
-                        *ngFor="let game of gamesMesa"
-                        [game]="game"
-                        [blink]="blink"
-                        [isLoggedIn]="isLoggedIn"
-                        [isDemo]="isDemo"
-                        [isCliente]="isCliente"
-                        (openModalLogin)="abrirModalLogin()"
-                    />
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="mesa-fade-right" *ngIf="gamesMesa.length > 2"></div>
-            </div>
-        </div>
-
-        <div class="bloco">
-            <app-wall-section
-                sectionId="raspadinha"
-                [title]="'cassino.raspadinha' | translate"
-                [itemsQty]="gamesRaspadinha.length"
-                (onSeeAll)="filterGames($event, 'raspadinha', true)"
-                (onLeft)="scrollLeft('raspadinha')"
-                (onRight)="scrollRight('raspadinha')"
-            />
-
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="raspadinha-fade-left"></div>
-                <div class="game-list game-list-inline" #scrollGames id="raspadinha-scroll" (scroll)="onScroll('raspadinha')">
-                    <app-wall-game-card
-                        *ngFor="let game of gamesRaspadinha"
-                        [game]="game"
-                        [blink]="blink"
-                        [isLoggedIn]="isLoggedIn"
-                        [isDemo]="isDemo"
-                        [isCliente]="isCliente"
-                        (openModalLogin)="abrirModalLogin()"
-                    />
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="raspadinha-fade-right" *ngIf="gamesRaspadinha.length > 2"></div>
-            </div>
-        </div>
-
-        <div *ngIf="isSalsaCassino" class="bloco">
-            <app-wall-section
-                sectionId="bingo"
-                title="Bingo"
-                [itemsQty]="gamesBingo.length"
-                (onSeeAll)="filterGames($event, 'bingo', true)"
-                (onLeft)="scrollLeft('bingo')"
-                (onRight)="scrollRight('bingo')"
-            />
-
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="bingo-fade-left"></div>
-                <div class="game-list game-list-inline" #scrollGames id="bingo-scroll" (scroll)="onScroll('bingo')">
-                    <app-wall-game-card
-                        *ngFor="let game of gamesBingo"
-                        [game]="game"
-                        [blink]="blink"
-                        [isLoggedIn]="isLoggedIn"
-                        [isDemo]="isDemo"
-                        [isCliente]="isCliente"
-                        (openModalLogin)="abrirModalLogin()"
-                    />
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="bingo-fade-right" *ngIf="gamesBingo.length > 2"></div>
-            </div>
-        </div>
+        </ng-container>
     </div>
 
     <app-footer [container]="listagem"></app-footer>
