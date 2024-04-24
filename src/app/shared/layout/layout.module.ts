@@ -198,7 +198,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         SpinnerComponent,
         BilheteEsportivoComponent,
         BannersComponent,
-        WelcomePageComponent
+        WelcomePageComponent,
+        SubmenuComponent
     ],
     providers: [
         ApostaEsportivaService,

@@ -225,7 +225,16 @@
         "failed": "Failed",
         "resultWereNotFound": "No results found",
         "resultWereFound": "1 result were found",
-        "resultsWereFound": "{{ quantity }} results were found"
+        "resultsWereFound": "{{ quantity }} results were found",
+        "provedores": "Providers",
+        "todosProvedores": "All providers",
+        "digiteNomeProvedor": "Enter the provider name",
+        "pesquisarJogosProvedores": "Search for games and providers",
+        "limpar": "Clear",
+        "pesquisasRecentes": "Recent researches",
+        "limparHistorico": "Clear history",
+        "nenhumResultadoEncontrado": "No results found for this search",
+        "jogosEmAlta": "Trending games"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -242,7 +251,9 @@
     },
     "modais": {
         "fechar": "Close",
-        "finalizar": "Finalize"
+        "finalizar": "Finalize",
+        "aplicarFiltro": "Apply filter",
+        "limparFiltro": "Clean filter"
     },
     "menu": {
         "aoVivo": "LIVE",
@@ -276,7 +287,9 @@
         "roleta": "Roulette",
         "mesa": "Table",
         "cassinoAoVivo": "Live Casino",
-        "loteriaPopular": "Popular Lottery"
+        "loteriaPopular": "Popular Lottery",
+        "maisPopulares": "Populares",
+        "news": "Novidades"
     },
     "bilhete": {
         "titulo": "TICKET",
@@ -315,7 +328,8 @@
         "destaques": "Highlights",
         "virtuais": "Virtuals",
         "aoVivo": "Live Casino",
-        "bingo": "Bingo"
+        "bingo": "Bingo",
+        "news": "News"
     },
     "cartoes": {
         "titulo": "Cards",

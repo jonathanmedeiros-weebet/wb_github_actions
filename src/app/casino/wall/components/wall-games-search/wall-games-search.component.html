@@ -1,0 +1,110 @@
+<div
+    class="games-search" 
+    [ngClass]="{'games-search--actived': showResults}"
+>
+    <div class="games-search__header">
+        <app-wall-search-bar
+            [term]="term"
+            class="games-search__input"
+            [placeholder]="'geral.pesquisarJogosProvedores' | translate"
+            (onFocusIn)="handleFocusIn()"
+            (onSearch)="handleSearch($event.target.value)"
+            (onClear)="handleClear()"
+        />
+        <a
+            class="games-search__close"
+            (click)="handleClose()"
+        >
+            <i
+                class="fa fa-close"
+            ></i>
+        </a>
+    </div>
+
+    <ng-container *ngIf="showResults">
+        <div class="games-search__content">
+            <div class="search-recents" *ngIf="showLastGamesSearch">
+                <div class="search-recents__header">
+                    <span class="search-recents__title">{{ 'geral.pesquisasRecentes' | translate }}</span>
+                    <a
+                        class="search-recents__clear"
+                        (click)="handleCleanHistory()"
+                    >
+                        {{ 'geral.limparHistorico' | translate }}
+                    </a>
+                </div>
+                <div class="search-recents__body">
+                    <a
+                        class="search-recents__item"
+                        *ngFor="let termSearch of lastGamesSearch"
+                        (click)="handleSearch(termSearch, false)"
+                    >
+                        {{ termSearch }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="search-results">
+                <div class="search-results__header">
+                    {{ 'geral.resultadosEncontrados' | translate }} <span *ngIf="showSearchResults">({{searchItemLength}})</span>
+                </div>
+
+                <div class="search-results__body">
+                    <ng-container *ngIf="showSearchResults; else elseWithoutItem">
+                        <div class="search-results__providers">
+                            <span class="search-results__title">{{ 'geral.provedores' | translate }} ({{ providerList.length }})</span>
+                            <div class="search-results__list">
+                                <app-wall-provider-card
+                                    *ngFor="let provider of providerList"
+                                    [data]="provider"
+                                    type="filter"
+                                    (onClick)="handleFilterGamesByProvider($event)"
+                                />
+                            </div>
+                        </div>
+            
+                        <div class="search-results__games">
+                            <span class="search-results__title">{{ 'geral.jogos' | translate }} ({{ gameList.length }})</span>
+                            <div class="search-results__list">
+                                <app-wall-game-card
+                                    *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
+                                    [game]="game"
+                                    [isCardInline]="false"
+                                    [isDemo]="isDemo"
+                                    [isLoggedIn]="isLoggedIn"
+                                    [isCliente]="isCliente"
+                                    [blink]="blink"
+                                    (openModalLogin)="handleModalLogin()"
+                                />
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-template #elseWithoutItem>
+                        <span class="search-results__message">
+                            {{ 'geral.nenhumResultadoEncontrado' | translate }}
+                        </span>
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="featured-games" *ngIf="showFeasturedGames">
+                <div class="featured-games__header">
+                    {{ 'geral.jogosEmAlta' | translate }}
+                </div>
+                <div class="featured-games__body">
+                    <app-wall-game-card
+                        *ngFor="let game of featuredGameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
+                        [game]="game"
+                        [isCardInline]="false"
+                        [isDemo]="isDemo"
+                        [isLoggedIn]="isLoggedIn"
+                        [isCliente]="isCliente"
+                        [blink]="blink"
+                        (openModalLogin)="handleModalLogin()"
+                    />
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>

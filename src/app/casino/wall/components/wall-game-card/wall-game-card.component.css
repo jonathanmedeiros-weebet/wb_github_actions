@@ -1,0 +1,215 @@
+.game-tile {
+    background-color: var(--header);
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden; 
+}
+
+.game-tile img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.game-tile .game-tile-buttons {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    top: 0;
+}
+
+.game-tile .game-button-play {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    color: var(--header);
+    background-color: var(--highlight);
+    width: 70%;
+    height: 42px;
+}
+
+.game-tile .game-button-demo {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--header);
+    border-color: var(--foreground-header);
+    color: var(--foreground-header);
+    width: 70%;
+    height: 42px;
+    margin-bottom: 18px;
+}
+
+.game-tile .game-button-lock {
+    width: 60%;
+    height: 35%;
+    font-size: 50px;
+}
+
+.game-tile:hover .info-game label,
+.game-tile:hover .info-game p {
+    opacity: 0.3;
+}
+
+.info-game {
+    padding: 50px 20px 10px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    color: #fff;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    transition: .300s;
+}
+
+.info-game p {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-shadow: 2px 2px 5px black;
+}
+
+.info-game label {
+    font-size: 12px;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+    color: #C8C8C8;
+}
+
+.gameBloqueado {
+    color: var(--highlight);
+}
+
+.game-tile:hover .game-tile-buttons {
+    display: flex;
+    border-radius: 5px;
+}
+
+.game-tile:hover img {
+    filter: brightness(20%);
+    transition: 300ms;
+}
+
+.game-tile:hover .game-button-play {
+    display: flex;
+}
+
+.game-tile:hover .game-button-demo {
+    display: flex;
+}
+
+.logo-game {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    top: 0px;
+    right: 10px;
+    backdrop-filter: blur(10px);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.logo-game-background {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 0px;
+    right: 10px;
+    background: white;
+    opacity: 20%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .internal .game-tile {
+        max-width: calc(50% - 5px);
+        min-width: calc(50% - 5px);
+        margin-right: 0;
+        margin-top: 0;
+    }
+    .game-tile-inline {
+        min-width: 200px;
+        max-width: 200px;
+    }
+
+    .ver-todos a {
+        font-size: 12px;
+    }
+
+    .game-tile a {
+        pointer-events: none;
+    }
+
+    .game-tile .game-button-demo {
+        margin-bottom: 10px;
+    }
+
+    .game-tile-buttons:hover a {
+        pointer-events: unset;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .game-tile {
+        margin-left: 20px;
+    }
+
+    .game-tile:nth-child(5n+1) {
+        margin-left: 0;
+    }
+
+    .game-tile:first-child {
+        margin-left: 0;
+    }
+
+    .game-tile-inline {
+        --gameTileWidth: calc((100vw / 6) - 16px);
+        width: var(--gameTileWidth);
+        margin-bottom: 0;
+        margin-left: 20px !important;
+
+        min-width: 216px;
+        max-width: 216px;
+    }
+
+    .game-tile-inline:first-of-type {
+        margin-left: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: landscape) {
+    .game-tile-inline {
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .game-tile-inline,
+    .game-tile-inline-destaque {
+        min-width: 170px;
+    }
+
+    .game-tile .game-button-play,
+    .game-tile .game-button-demo {
+        height: 35px !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .game-tile-inline,
+    .game-tile-inline-destaque {
+        min-width: 140px;
+    }
+}

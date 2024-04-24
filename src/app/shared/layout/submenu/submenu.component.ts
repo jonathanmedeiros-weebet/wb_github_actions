@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,9 +13,15 @@ import { Subject } from 'rxjs';
     styleUrls: ['./submenu.component.css'],
 })
 export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
-    @Input() active = true;
-    @Input() category = 'esporte';
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
+
+    @Input() active: boolean = true;
+    @Input() version: string = 'v1';
+    @Input() category: string = 'esporte';
+
+    @Input() menuItemSelected: string;
+    @Output() onClick = new EventEmitter();
+
     unsub$ = new Subject();
     menuWidth;
     scrollWidth;
@@ -309,6 +315,22 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
                 active: this.paramsService.getOpcoes().casino
             },
             {
+                id: 'news', //TODO: Procurar saber url para categorias novidades
+                name: this.translate.instant('submenu.news'),
+                link: '/casino/c/wall/news',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
+                id: 'destaques',
+                name: this.translate.instant('submenu.maisPopulares'),
+                link: '/casino/c/wall/destaques',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino
+            },
+            {
                 id: "crash",
                 name: this.translate.instant('submenu.crash'),
                 link: '/casino/c/wall/crash',
@@ -318,17 +340,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
                 svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/crash.svg',
                 active: this.paramsService.getOpcoes().casino
             },
-            // {
-            //     id: 'live-cassino',
-            //     name: this.translate.instant('submenu.cassinoAoVivo'),
-            //     link: '/casino/c/wall/live',
-            //     icon_class: 'fa-solid fa-dice',
-            //     svgIcon: true,
-            //     svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/cassino_ao_vivo.svg',
-            //     queryParams: '',
-            //     category: 'cassino',
-            //     active: this.paramsService.getOpcoes().casino
-            // },
             {
                 id: 'slot',
                 name: this.translate.instant('submenu.slot'),
@@ -445,5 +456,9 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
         this.submenuItems = this.submenu.filter((item) => {
             return item.category === this.category && item.active;
         });
+    }
+
+    public handleClick(menuId: string) {
+        this.onClick.emit(menuId)
     }
 }

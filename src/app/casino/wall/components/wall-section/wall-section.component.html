@@ -1,0 +1,31 @@
+<div class="wall-section">
+    <div class="wall-section__group">
+        <div class="wall-section__title">{{title}}</div>
+
+        <div class="scroll-buttons" *ngIf="showScroolButton">
+            <div
+                id="{{sectionId}}-left"
+                class="scroll-button disabled-scroll-button"
+                (click)="handleLeft()"
+            >
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+    
+            <div
+                id="{{sectionId}}-right"
+                class="scroll-button enabled-scroll-button"
+                (click)="handleRight()"
+            >
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+        </div>
+    </div>
+   
+    <a
+        class="wall-section__see-all"
+        *ngIf="showSeeAllButton"
+        (click)="handleSeeAll()"
+    >
+        {{'geral.verTodos' | translate}} ({{ itemsQty }})
+    </a>
+</div>
