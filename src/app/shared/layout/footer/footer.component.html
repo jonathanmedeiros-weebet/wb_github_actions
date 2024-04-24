@@ -17,13 +17,17 @@
         <div class="info-jogo">
             <h4 class="title">{{'footer.jogueComResponsabilidade' | translate}}</h4>
             <div class="icons">
+                <iframe
+                    src="https://licensing.gaming-curacao.com/validator/?lh=3e6ea9b3c638911372d6c78c18ed6ca2&template=tseal"
+                    width="150" height="50" style="border:none;"></iframe>
+            </div>
+            <div class="icons">
                 <a href="https://www.gamblingtherapy.org/pt-br/" target="_blank">
                     <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/game_terapia.svg'" [svgStyle]="svgStyleGameTerapia()"></svg-icon>
                 </a>
                 <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
                     <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/mais_18.svg'" [svgStyle]="svgStyleMaiorIdade()"></svg-icon>
                 </a>
-                <iframe *ngIf="slug == 'ragnar.bet'" src="https://licensing.gaming-curacao.com/validator/?lh=3e6ea9b3c638911372d6c78c18ed6ca2&template=tseal" width="150" height="50" style="border:none;"></iframe>
                 <div class="info pagamento" *ngIf="hasApiPagamentos">
                     <h4 class="title">{{'footer.metodosDePagamento' | translate}}</h4>
                     <p>

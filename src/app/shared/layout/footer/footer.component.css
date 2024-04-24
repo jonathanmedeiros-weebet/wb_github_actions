@@ -65,7 +65,7 @@ footer {
 }
 
 .info-jogo .icons {
-    margin-top: 0;
+    margin-top: 10px;
     display: flex;
     gap: 50px;
     align-items: center;

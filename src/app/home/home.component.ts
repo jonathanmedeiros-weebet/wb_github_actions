@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
     loadingCassino = true;
     loadingCassinoAoVivo = true;
+    headerHeight = 92;
 
     widgets = [];
 
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         this.homeService.getPosicaoWidgets().subscribe(response => {
-            this.widgets = response
+            this.widgets = response;
         });
 
         this.casinoApi.getGamesHome().subscribe(response => {
