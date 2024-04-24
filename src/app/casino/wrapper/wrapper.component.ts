@@ -46,6 +46,7 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(curHeaderHeight => {
                 this.headerHeight = curHeaderHeight;
+                this.definirAltura();
                 this.cd.detectChanges();
             });
     }
@@ -59,4 +60,11 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy, DoCheck {
         this.unsub$.next();
         this.unsub$.complete();
     }
+
+    definirAltura() {
+        const headerHeight = this.mobileScreen ? 161 : this.headerHeight;
+        const casinoContent = this.el.nativeElement.querySelector('.casino-content');
+        this.renderer.setStyle(casinoContent, 'height', `calc(100vh - ${headerHeight}px)`);
+    }
+
 }
