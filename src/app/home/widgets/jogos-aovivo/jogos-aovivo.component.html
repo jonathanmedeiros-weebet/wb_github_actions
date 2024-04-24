@@ -2,19 +2,14 @@
     <div class="slider">
         <div class="ssc-square title"></div>
         <div class="itens">
-            <div class="ssc-square content"></div>
-            <div class="ssc-square content"></div>
-            <div class="ssc-square content"></div>
-            <div class="ssc-square content"></div>
-            <div class="ssc-square content"></div>
-            <div class="ssc-square content"></div>
+            <div class="ssc-square camp"></div>
             <div class="ssc-square content"></div>
             <div class="ssc-square content"></div>
             <div class="ssc-square content"></div>
         </div>
     </div>
 </div>
-<div class="jogos-aovivo" *ngIf="campeonatos.size && !showLoadingIndicator">
+<div class="jogos-aovivo" *ngIf="campeonatos.size > 0 && !showLoadingIndicator">
     <div class="widgets-header">
         <div class="widgets-title">
             {{ 'geral.jogosAoVivo' | translate }}

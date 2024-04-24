@@ -1,5 +1,6 @@
+.loading-listagem,
 .jogos-aovivo {
-    padding: 0 10px;
+    padding: 0 10px 30px;
 }
 
 .widgets-header {
@@ -38,25 +39,30 @@
 .loading-listagem .slider {
     display: flex;
     flex-direction: column;
-    margin: 0 10px;
+    margin: 0;
 }
 
 .loading-listagem .slider .title {
-    width: 300px;
+    width: 120px;
     height: 27px;
     margin: 10px 0;
 }
 
 .loading-listagem .slider .itens {
     display: flex;
+    flex-direction: column;
     overflow: hidden;
-    gap: 10px;
+    gap: 5px;
 }
 
-.loading-listagem .slider .itens div {
+.loading-listagem .slider .itens .camp {
     min-width: 340px;
-    height: 170px;
-    border-radius: 5px;
+    height: 39px;
+    border-radius: 2px;
+}
+
+.loading-listagem .slider .itens .content {
+    height: 64px;
 }
 
 .campeonato {}
@@ -169,6 +175,19 @@
 
 
 @media only screen and (max-width: 1024px) {
+
+    .jogos-aovivo,
+    .loading-listagem {
+        padding: 0 10px 19px;
+    }
+
+    .widgets-header {
+        padding: 0 0 10px;
+    }
+
+    .loading-listagem .slider .itens .content {
+        height: 133px;
+    }
 
     .campeonato .jogos .jogo {
         background-color: var(--game);
