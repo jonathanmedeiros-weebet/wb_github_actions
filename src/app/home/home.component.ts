@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
 
     loadingCassino = true;
     loadingCassinoAoVivo = true;
-    headerHeight = 92;
 
     widgets = [];
 
