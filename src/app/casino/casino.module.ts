@@ -9,7 +9,6 @@ import { LiveComponent } from './live/live.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgxPaginationModule} from "ngx-pagination";
-import {WallLiveComponent} from "./wall-live/wall-live.component";
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { WallSectionComponent } from './wall/components/wall-section/wall-section.component';
 import { WallSearchBarComponent } from './wall/components/wall-search-bar/wall-search-bar.component';
@@ -21,7 +20,6 @@ import { WallGamesSearchComponent } from './wall/components/wall-games-search/wa
 @NgModule({
   declarations: [
     WallComponent,
-    WallLiveComponent,
     GameviewComponent,
     CasinoWrapperComponent,
     LiveComponent,

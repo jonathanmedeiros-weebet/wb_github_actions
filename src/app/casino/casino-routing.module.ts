@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GameviewComponent } from './gameview/gameview.component';
 import { WallComponent } from './wall/wall.component';
-import { WallLiveComponent } from './wall-live/wall-live.component';
 import { CasinoWrapperComponent } from './wrapper/wrapper.component';
 import { CasinoGuard } from '../shared/services/guards/casino.guard';
-import { LiveComponent } from './live/live.component';
 import { CassinoLayoutComponent, CassinoLiveLayoutComponent, VirtuaisLayoutComponent } from '../shared/layout/app-layouts';
 
 const routes: Routes = [
@@ -52,13 +50,13 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        component: WallLiveComponent,
+                        component: WallComponent,
                         pathMatch: 'full',
                         canActivate: [CasinoGuard],
                     },
                     {
                         path: ':game_fornecedor',
-                        component: WallLiveComponent,
+                        component: WallComponent,
                         canActivate: [CasinoGuard]
                     },
                     {
