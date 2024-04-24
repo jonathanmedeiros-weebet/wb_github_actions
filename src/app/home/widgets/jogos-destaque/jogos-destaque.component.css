@@ -118,7 +118,6 @@ owl-carousel-o {
 }
 
 .jogos-destaque {
-    margin-top: 15px;
     display: flex;
     flex-direction: column;
     overflow-x: scroll;
