@@ -16,6 +16,7 @@
 
     &__body {
         overflow: auto;
+        max-height: calc(100% - 160px);
     }
 
     &__footer {
@@ -103,6 +104,10 @@
 
         &__footer {
             justify-content: flex-end;
+        }
+
+        &__body {
+            max-height: auto;
         }
     }
 
