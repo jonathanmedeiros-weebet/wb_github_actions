@@ -51,7 +51,9 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.layoutService.changeSubmenuHeight(40);
+        if(this.version === 'v1') { // v1 é usado na navbar
+            this.layoutService.changeSubmenuHeight(40);
+        }
 
         if (window.innerWidth > 1024) {
             this.menuWidth = window.innerWidth - 270;
