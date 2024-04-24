@@ -19,6 +19,7 @@ export class CassinoComponent implements OnInit {
     modalRef: NgbModalRef;
     isLoggedIn = false;
     isCliente = false;
+    scrollStep = 700;
 
     constructor(
         private modalService: NgbModal,
@@ -29,6 +30,12 @@ export class CassinoComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.isMobile = window.innerWidth < 1025;
+
+        if (this.isMobile) {
+            this.scrollStep = 200;
+        }
+
         this.auth.logado
             .subscribe((isLoggedIn: any) => {
                 this.isLoggedIn = isLoggedIn;
@@ -44,12 +51,12 @@ export class CassinoComponent implements OnInit {
 
     scrollLeft(scrollId: string) {
         const scrollTemp = this.gamesScroll.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
-        scrollTemp.nativeElement.scrollLeft -= 700;
+        scrollTemp.nativeElement.scrollLeft -= this.scrollStep;
     }
 
     scrollRight(scrollId: string) {
         const scrollTemp = this.gamesScroll.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
-        scrollTemp.nativeElement.scrollLeft += 700;
+        scrollTemp.nativeElement.scrollLeft += this.scrollStep;
     }
 
     onScroll(scrollId: string) {

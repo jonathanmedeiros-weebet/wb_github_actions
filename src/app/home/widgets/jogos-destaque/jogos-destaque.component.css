@@ -1,3 +1,8 @@
+.jogos-destaque,
+.loading-listagem {
+    margin-bottom: 30px;
+}
+
 .campeonato-header {
     height: 34px;
     margin: 0;
@@ -262,6 +267,16 @@ span.escudo img {
 }
 
 @media only screen and (max-width: 1024px) {
+
+    .jogos-destaque,
+    .loading-listagem {
+        margin-bottom: 24px;
+    }
+
+    .slider-header {
+        padding: 0 0 10px;
+    }
+
     .menu-camp-destaques {
         font-size: 0.8rem;
         padding: 0 5px;
@@ -324,6 +339,11 @@ span.escudo img {
 
     .jogo-destaque {
         width: 300px;
+    }
+
+    .jogos-destaque .jogo .time1 .text-center,
+    .jogos-destaque .jogo .time2 .text-center {
+        width: 84px;
     }
 
 }
