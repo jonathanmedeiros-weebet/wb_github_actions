@@ -27,6 +27,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     public scrolls: ElementRef[];
     public qtdItens: number = 20;
+    public scrollStep = 700;
 
     public showLoadingIndicator: boolean = true;
     public isCliente: boolean;
@@ -64,7 +65,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get showFilterBox(): boolean {
-        return !this.showLoadingIndicator && !this.isVirtual
+        return !this.showLoadingIndicator && !this.isVirtual;
     }
 
     get isDemo(): boolean {
@@ -94,8 +95,12 @@ export class WallComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.cd.detectChanges();
 
-        if(this.isHomeCassino || this.isVirtual) {
+        if (this.isHomeCassino || this.isVirtual) {
             this.getGameCassinoList();
+        }
+
+        if (this.isMobile) {
+            this.scrollStep = 200;
         }
 
         this.auth.logado.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
@@ -123,7 +128,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.gamesCassino = response.gameList.filter(function(game) {
                     return game.dataType !== 'VSB';
                 });
-                
+
                 this.newGamesCassino = response.news;
                 this.gamesDestaque = response.populares;
                 this.gamesSlot = this.filterDestaques(this.gamesCassino, 'slot');
@@ -133,7 +138,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.gamesMesa = this.filterDestaques(this.gamesCassino, 'table');
                 this.gamesBingo = this.filterDestaques(this.gamesCassino, 'bingo');
                 this.gamesLive = this.filterDestaques(this.gamesCassino, 'live');
-                
+
                 this.sideBarService.changeItens({
                     contexto: 'casino',
                     dados: {}
@@ -159,12 +164,12 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     public scrollLeft(scrollId: string) {
         const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
-        scrollTemp.nativeElement.scrollLeft -= 700;
+        scrollTemp.nativeElement.scrollLeft -= this.scrollStep;
     }
 
     public scrollRight(scrollId: string) {
         const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
-        scrollTemp.nativeElement.scrollLeft += 700;
+        scrollTemp.nativeElement.scrollLeft += this.scrollStep;
     }
 
     public onScroll(scrollId: string) {
@@ -247,18 +252,18 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gameList = gamesCassinoList.filter((game: any) => {
                 const gameProvider = game.fornecedor.toUpperCase();
                 const gameCategory = game.category.toUpperCase();
-    
+
                 if(providerName && categoryName) {
                     return (
                         gameProvider.includes(providerName.toUpperCase()) &&
                         gameCategory.includes(categoryName.toUpperCase())
                     );
                 }
-    
+
                 if(providerName){
                     return gameProvider.includes(providerName.toUpperCase());
                 }
-    
+
                 if(categoryName){
                     return gameCategory.includes(categoryName.toUpperCase());
                 }
@@ -298,7 +303,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             todos: 'cassino',
             cassino: 'cassino',
         }
-        
+
         return categories[category] ?? category
     }
 
