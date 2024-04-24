@@ -21,7 +21,7 @@
     <div class="indique-ganhe-card-content">
         {{'indique_ganhe.indiqueGanheCard' | translate:{
             'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
-            'bonusBalance': bonusBalanceReferAndEarn ? ' em ' + (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
+            'bonusBalance': bonusBalanceReferAndEarn ? (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
         }}
         <a (click)="isConnected && redirectIndiqueGanhe()"
             (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()"

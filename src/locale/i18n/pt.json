@@ -485,7 +485,7 @@
     },
     "indique_ganhe":{
         "indiqueGanhe": "Indique e ganhe",
-        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}}{{bonusBalance}}",
+        "indiqueGanheCard": "Indique um amigo e receba R${{valorGanhoPorIndicacao}} {{bonusBalance}}",
         "indiqueGanheInfo1": "Indique amigos e ganhe R${{valorGanhoPorIndicacao}} por cada indicado",
         "indiqueGanheInfo2": "Indique um amigo através do seu link de indicação e receba R${{valorGanhoPorIndicacao}} por cada indicação no saldo da sua conta. Confira nossas ",
         "seuLinkIndicacao": "Seu link de indicação:",
@@ -511,7 +511,8 @@
         "indicacaoRecebida": "Indicação recebida",
         "cadastroRealizado": "Cadastro foi realizado",
         "resgatar": "Resgatar",
-        "limiteResgate": "Limite resgate"
+        "limiteResgate": "Limite resgate",
+        "inBonus": "em bônus"
     },
     "regras_indique_ganhe": {
         "primeiro_paragrafo_um": "Indique seus amigos e ganhe R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho}}!!",

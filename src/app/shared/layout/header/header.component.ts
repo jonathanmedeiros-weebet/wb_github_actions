@@ -214,7 +214,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
         this.valorGanhoPorIndicacao = (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
-        this.bonusBalanceReferAndEarn = this.paramsService.getOpcoes().indique_ganhe_tipo_saldo_ganho == 'bonus' ? "geral.bonus" : "";
+        this.bonusBalanceReferAndEarn = this.paramsService.getOpcoes().indique_ganhe_tipo_saldo_ganho == 'bonus' ? "indique_ganhe.inBonus" : "";
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
