@@ -35,12 +35,12 @@
             #scrollMenu
         >
             <a
-                class="submenu-v2__item" 
+                class="submenu-v2__item"
                 *ngFor="let item of submenuItems; let i = index"
-                routerLink="{{item.link}}"
+                [ngClass]="{'submenu-v2__item--selected': menuItemSelected === item.id}"
                 routerLinkActive="active"
+                (click)="handleClick(item.id)"
                 id="{{item.id}}"
-                [queryParams]="item.queryParams"
             >
                 {{ item.name }}
             </a>

@@ -2,10 +2,9 @@
     #listagem
     infiniteScroll
     (scrolled)="exibirMais()"
-    (scroll)="onPageScroll($event.target)"
     class="wall-container"
     [ngClass]="{
-        'internal': !isHomeCassino || term || termFornecedor,
+        'internal': !isHomeCassino,
         'virtual-container': isVirtual
     }"
 >
@@ -39,10 +38,15 @@
             [isCliente]="isCliente"
             [isLoggedIn]="isLoggedIn"
             (openModalLogin)="abrirModalLogin()"
-            (onFilterGames)="filtrarJogos($event)"
+            (onFilterGames)="filterGames($event, categorySelected, true)"
         />
 
-        <app-submenu category="cassino" version="v2" />
+        <app-submenu
+            category="cassino"
+            version="v2"
+            [menuItemSelected]="categorySelected"
+            (onClick)="filterGames(gameFornecedor, $event, false)"
+        />
     </div>
 
     <div class="bloco">
@@ -60,20 +64,20 @@
                 <app-wall-provider-card
                     *ngFor="let fornecedor of cassinoFornecedores"
                     [data]="fornecedor"
-                    [selected]="fornecedorSelecionado == fornecedor.gameFornecedor"
-                    (onClick)="filtrarJogos($event)"
+                    [selected]="gameFornecedor == fornecedor.gameFornecedor"
+                    (onClick)="filterGames($event, categorySelected, true)"
                 />
             </div>
         </div>
     </div>
 
-    <div class="wall-inner" *ngIf="!this.term && !this.termFornecedor && !showLoadingIndicator && isHomeCassino; else cassinoGameList">
+    <div class="wall-inner" *ngIf="!showLoadingIndicator && isHomeCassino; else cassinoGameList">
         <div class="bloco">
             <app-wall-section
                 sectionId="destaques"
                 [title]="'cassino.maisPopulares' | translate"
                 [itemsQty]="gamesDestaque.length"
-                seeAllRouterLink="/casino/c/wall/destaques"
+                (onSeeAll)="filterGames($event, 'destaques', true)"
                 (onLeft)="scrollLeft('destaques')"
                 (onRight)="scrollRight('destaques')"
             />
@@ -100,7 +104,7 @@
                 sectionId="crash"
                 [title]="'cassino.crash' | translate"
                 [itemsQty]="gamesCrash.length"
-                seeAllRouterLink="/casino/c/wall/crash"
+                (onSeeAll)="filterGames($event, 'crash', true)"
                 (onLeft)="scrollLeft('crash')"
                 (onRight)="scrollRight('crash')"
             />
@@ -127,7 +131,7 @@
                 sectionId="slot"
                 [title]="'cassino.slot' | translate"
                 [itemsQty]="gamesSlot.length"
-                seeAllRouterLink="/casino/c/wall/slot"
+                (onSeeAll)="filterGames($event, 'slot', true)"
                 (onLeft)="scrollLeft('slot')"
                 (onRight)="scrollRight('slot')"
             />
@@ -154,7 +158,7 @@
                 sectionId="roleta"
                 [title]="'cassino.roleta' | translate"
                 [itemsQty]="gamesRoleta.length"
-                seeAllRouterLink="/casino/c/wall/roleta"
+                (onSeeAll)="filterGames($event, 'roleta', true)"
                 (onLeft)="scrollLeft('roleta')"
                 (onRight)="scrollRight('roleta')"
             />
@@ -181,7 +185,7 @@
                 sectionId="mesa"
                 [title]="'cassino.mesa' | translate"
                 [itemsQty]="gamesMesa.length"
-                seeAllRouterLink="/casino/c/wall/mesa"
+                (onSeeAll)="filterGames($event, 'mesa', true)"
                 (onLeft)="scrollLeft('mesa')"
                 (onRight)="scrollRight('mesa')"
             />
@@ -208,7 +212,7 @@
                 sectionId="raspadinha"
                 [title]="'cassino.raspadinha' | translate"
                 [itemsQty]="gamesRaspadinha.length"
-                seeAllRouterLink="/casino/c/wall/raspadinha"
+                (onSeeAll)="filterGames($event, 'raspadinha', true)"
                 (onLeft)="scrollLeft('raspadinha')"
                 (onRight)="scrollRight('raspadinha')"
             />
@@ -230,12 +234,12 @@
             </div>
         </div>
 
-        <div *ngIf="salsaCassino" class="bloco">
+        <div *ngIf="isSalsaCassino" class="bloco">
             <app-wall-section
                 sectionId="bingo"
                 title="Bingo"
                 [itemsQty]="gamesBingo.length"
-                seeAllRouterLink="/casino/c/wall/bingo"
+                (onSeeAll)="filterGames($event, 'bingo', true)"
                 (onLeft)="scrollLeft('bingo')"
                 (onRight)="scrollRight('bingo')"
             />

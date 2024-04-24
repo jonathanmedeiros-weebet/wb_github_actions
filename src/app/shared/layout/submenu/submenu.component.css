@@ -181,8 +181,10 @@
     border: 1px solid var(--highlight);
     border-radius: 29px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
+.submenu-v2__item--selected,
 .submenu-v2__item.active, 
 .submenu-v2__item:hover {
     color: var(--foreground-highlight);

@@ -19,11 +19,11 @@ export class WallGameCardComponent {
   }
 
   get routerLinkDemo(): any[] {
-    return [`/casino/${this.blink}/play/DEMO`, this.game.gameID, this.game.fornecedor];
+    return [`/${this.blink}/`, this.game.fornecedor, this.game.gameID, 'DEMO'];
   }
 
   get routerLinkReal(): any[] {
-    return [`/casino/${this.blink}/play/REAL`, this.game.gameID, this.game.fornecedor];
+    return [`/${this.blink}/`, this.game.fornecedor, this.game.gameID];
   }
 
   get providerIsPragmatic(): boolean {
