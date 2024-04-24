@@ -71,7 +71,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 }
             );
 
-            let altura = window.innerHeight - 140;
+            let altura = window.innerHeight - 145;
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }

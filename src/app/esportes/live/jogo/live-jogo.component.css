@@ -1,5 +1,5 @@
 .jogo-container {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 132px);
     display: flex;
     flex-direction: column;
 

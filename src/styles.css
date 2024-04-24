@@ -670,6 +670,7 @@ button {
 
 .campeonato-header {
     /*text-transform: uppercase;*/
+    padding: 0 10px;
     font-size: 0.9rem;
     /*border-bottom: 4px solid #0A0A09;*/
     cursor: pointer;

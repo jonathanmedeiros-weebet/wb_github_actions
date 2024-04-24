@@ -28,7 +28,6 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['bilhete-esportivo.component.css'],
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    @Input() subtracaoAltura = 132;
     @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
     @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
     mudancas = false;
@@ -212,7 +211,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     definirAltura() {
-        const altura = window.innerHeight - this.subtracaoAltura;
+        const altura = window.innerHeight - this.headerHeight;
         const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
         this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
@@ -427,7 +426,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
         let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
-        
+
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true,
