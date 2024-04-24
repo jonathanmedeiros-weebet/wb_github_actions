@@ -151,11 +151,13 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
                         campeonato.jogos = jogos;
 
-                        if (campeonato.sport_id === 1 || !campeonato.sport_id) {
+                        const campeonatoPermitido = this.campeonatoPermitido(campeonato._id);
+
+                        if (campeonatoPermitido && (campeonato.sport_id === 1 || !campeonato.sport_id)) {
                             this.qtdJogosFutebol += qtdJogosValidos;
                         }
 
-                        if (campeonato.sport_id === 48242) {
+                        if (campeonatoPermitido && campeonato.sport_id === 48242) {
                             this.qtdJogosBasquete += qtdJogosValidos;
                         }
 
