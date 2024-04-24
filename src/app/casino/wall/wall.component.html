@@ -49,7 +49,7 @@
         />
     </div>
 
-    <div class="bloco">
+    <div class="bloco" *ngIf="!this.isVirtual">
         <app-wall-section
             sectionId="providers"
             [title]="'geral.provedores' | translate"
@@ -58,7 +58,7 @@
             (onLeft)="scrollLeft('providers')"
             (onRight)="scrollRight('providers')"
         />
-       
+
         <div class="provider-container">
             <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
                 <app-wall-provider-card
