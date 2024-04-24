@@ -1,6 +1,9 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChildren, QueryList } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { HomeService } from '../shared/services/home.service';
+import { LayoutService } from '../shared/services/utils/layout.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-home',
@@ -15,6 +18,7 @@ export class HomeComponent implements OnInit {
     isMobile = false;
     qtdItens = 0;
     modalRef;
+    headerHeight = 92;
 
     loadingCassino = true;
     loadingCassinoAoVivo = true;
@@ -22,9 +26,14 @@ export class HomeComponent implements OnInit {
 
     widgets = [];
 
+    unsub$ = new Subject();
+
     constructor(
+        private layoutService: LayoutService,
         private casinoApi: CasinoApiService,
-        private homeService: HomeService
+        private homeService: HomeService,
+        private el: ElementRef,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
@@ -38,5 +47,12 @@ export class HomeComponent implements OnInit {
             this.gamesPopularesAoVivo = response.popularesAoVivo;
             this.loadingCassinoAoVivo = false;
         });
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.cd.detectChanges();
+            });
     }
 }

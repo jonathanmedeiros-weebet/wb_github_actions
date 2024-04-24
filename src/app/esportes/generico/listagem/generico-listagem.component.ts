@@ -132,8 +132,6 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
             });
 
         this.layoutService.resetHideSubmenu();
-
-        this.layoutService.resetHideSubmenu();
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {

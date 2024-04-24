@@ -150,7 +150,6 @@ export class BilheteComponent extends BaseFormComponent implements OnInit, OnDes
         this.bilheteService.itensAtuais
             .pipe(takeUntil(this.unsub$))
             .subscribe(result => {
-                console.log('RESULT:', result);
                 this.setItens(result);
                 this.calcularPossibilidadeGanho(this.form.value.valor);
                 this.scrollToBottom();

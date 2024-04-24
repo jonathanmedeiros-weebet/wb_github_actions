@@ -1,5 +1,4 @@
 .home-container {
-    max-height: calc(100vh - 132px);
     overflow-x: auto;
 }
 
