@@ -1,5 +1,5 @@
 .list-modalidades {
-    margin: 30px 10px 24px;
+    margin: 30px 10px 30px;
 }
 
 .list-modalidades ul {
@@ -87,4 +87,11 @@
 
     background: var(--highlight);
     color: var(--foreground-highlight)
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .list-modalidades {
+        margin: 30px 10px 24px;
+    }
 }
