@@ -1,4 +1,4 @@
-<div class="home-container">
+<div class="home-container" [ngStyle]="{'max-height': 'calc(100vh - ' +headerHeight+'px)'}">
     <app-banners pagina="home"></app-banners>
 
     <app-cards-modalidade class="widgets"></app-cards-modalidade>
