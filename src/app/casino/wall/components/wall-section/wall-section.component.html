@@ -10,7 +10,7 @@
             >
                 <i class="fa-solid fa-angle-left"></i>
             </div>
-    
+
             <div
                 id="{{sectionId}}-right"
                 class="scroll-button enabled-scroll-button"
@@ -20,12 +20,12 @@
             </div>
         </div>
     </div>
-   
+
     <a
         class="wall-section__see-all"
         *ngIf="showSeeAllButton"
         (click)="handleSeeAll()"
     >
-        {{'geral.verTodos' | translate}} ({{ itemsQty }})
+        {{'geral.verTodos' | translate}}
     </a>
 </div>
