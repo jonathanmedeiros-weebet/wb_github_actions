@@ -29,8 +29,7 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy, DoCheck {
     ) {}
 
     ngOnInit(): void {
-        this.isVirtuais = this.router.url.split('/')[2] === 'v';
-
+        this.isVirtuais = this.router.url.split('/')[1] === 'virtual-sports';
         this.mobileScreen = window.innerWidth <= 1024;
         this.sideBarService.changeItens({
             contexto: 'casino',
@@ -62,9 +61,8 @@ export class CasinoWrapperComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     definirAltura() {
-        const headerHeight = this.mobileScreen ? 161 : this.headerHeight;
+        const headerHeight = this.mobileScreen ? 101 : this.headerHeight;
         const casinoContent = this.el.nativeElement.querySelector('.casino-content');
         this.renderer.setStyle(casinoContent, 'height', `calc(100vh - ${headerHeight}px)`);
     }
-
 }
