@@ -1,11 +1,19 @@
 import {
     Component, OnInit, OnDestroy, Renderer2,
-    ElementRef, DoCheck, Output, EventEmitter
+    ElementRef, DoCheck, Output, EventEmitter, ChangeDetectorRef
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocaisService, MessageService, JogoService, LiveService, BilheteEsportivoService, HelperService } from '../../../services';
+import {
+    ParametrosLocaisService,
+    MessageService,
+    JogoService,
+    LiveService,
+    BilheteEsportivoService,
+    HelperService,
+    LayoutService
+} from '../../../services';
 import { Jogo } from '../../../models';
 
 @Component({
@@ -31,6 +39,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     mobileScreen = false;
     term = '';
     itens;
+    headerHeight = 92;
 
     constructor(
         private messageService: MessageService,
@@ -40,7 +49,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         private helperService: HelperService,
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private layoutService: LayoutService,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
@@ -124,6 +135,16 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 },
                 error => this.handleError(error)
             );
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definindoAlturas();
+                this.cd.detectChanges();
+            });
+
+        this.layoutService.resetHideSubmenu();
     }
 
     ngDoCheck() {
@@ -140,7 +161,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     definindoAlturas() {
-        const headerHeight = this.mobileScreen ? 145 : 132;
+        const headerHeight = this.mobileScreen ? 145 : this.headerHeight;
         const altura = window.innerHeight - headerHeight;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
