@@ -1,4 +1,4 @@
-import { Component, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, Output, Renderer2, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import {
     BilheteEsportivoService,
     HelperService,
     JogoService,
+    LayoutService,
     LiveService,
     MessageService,
     ParametrosLocaisService
