@@ -233,12 +233,12 @@
     :host ::ng-deep .games-search--actived .games-search__input .search-box__input:hover,
     :host ::ng-deep .games-search--actived .games-search__input .search-box__input:focus {
         background-color: var(--header);
-        color: var(--foregroun-header);
+        color: var(--foreground-header);
         border: none;
     }
 
     :host ::ng-deep .games-search--actived .games-search__input .search-box__icon--search {
-        color: var(--foregroun-header);
+        color: var(--foreground-header);
     }
 
     :host ::ng-deep .games-search--actived .games-search__input .search-box__icon--clear {
