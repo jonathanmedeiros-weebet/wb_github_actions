@@ -51,8 +51,6 @@ owl-carousel-o {
     overflow-x: auto !important;
     /* Hide scrollbar for IE and Edge */
     -ms-overflow-style: none;
-    /* justify-content: center; */
-    /*background-color: #ffffff;*/
     margin: 0;
 }
 
@@ -160,7 +158,6 @@ owl-carousel-o {
     align-items: center;
     justify-content: space-between;
     font-size: 11px;
-    /* ajuste fonte */
 }
 
 .jogos-destaque .jogo .time1 {
