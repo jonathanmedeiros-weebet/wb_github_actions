@@ -111,7 +111,5 @@ export class CassinoComponent implements OnInit {
                 centered: true,
             }
         );
-
-        console.log('Modal', this.modalRef);
     }
 }
