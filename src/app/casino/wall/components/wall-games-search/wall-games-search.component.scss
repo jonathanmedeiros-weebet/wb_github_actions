@@ -103,6 +103,11 @@
         padding: 7px 17px;
         cursor: pointer;
     }
+
+    &__clear:hover,
+    &__item:hover {
+        opacity: 0.9;
+    }
 }
 
 .search-results {
@@ -130,6 +135,7 @@
         font-weight: 400;
         color: var(--foreground-header);
         line-height: 16px;
+        opacity: 0.5;
     }
 
     &__providers,

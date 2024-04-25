@@ -84,19 +84,24 @@
                 />
 
                 <div class="games-container">
-                    <div class="more-games-fade more-games-fade-left" id="{{ section.id }}-fade-left"></div>
-                    <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
-                        <app-wall-game-card
-                            *ngFor="let game of section.gameList"
-                            [game]="game"
-                            [blink]="blink"
-                            [isLoggedIn]="isLoggedIn"
-                            [isDemo]="isDemo"
-                            [isCliente]="isCliente"
-                            (openModalLogin)="abrirModalLogin()"
-                        />
-                    </div>
-                    <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
+                    <ng-container *ngIf="section.gameList.length; else elseWithoutGames">
+                        <div class="more-games-fade more-games-fade-left" id="{{ section.id }}-fade-left"></div>
+                        <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
+                            <app-wall-game-card
+                                *ngFor="let game of section.gameList"
+                                [game]="game"
+                                [blink]="blink"
+                                [isLoggedIn]="isLoggedIn"
+                                [isDemo]="isDemo"
+                                [isCliente]="isCliente"
+                                (openModalLogin)="abrirModalLogin()"
+                            />
+                        </div>
+                        <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
+                    </ng-container>
+                    <ng-template #elseWithoutGames>
+                        <span class="empty-game-list">Nenhum jogo disponível no momento</span>
+                    </ng-template>
                 </div>
             </div>
         </ng-container>
@@ -109,7 +114,7 @@
             <div class="titulo" *ngIf="gameList && gameList.length">
                 {{gameTitle | titlecase}}
             </div>
-            <div class="sem-evento" *ngIf="gameList && !gameList.length">
+            <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">
                 {{'geral.nenhumJogoEncontrado' | translate}}!
             </div>
             <div class="game-grid">

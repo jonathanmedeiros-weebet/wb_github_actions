@@ -33,16 +33,22 @@
 .game-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Define as colunas automáticas com um mínimo de 150px e ocupando toda a largura disponível */
-    gap: 20px;
+    gap: 10px;
 }
 
 .game-grid::-webkit-scrollbar {
     display: none;
 }
 
+.empty-game-list {
+    color: var(--foreground-header);
+    opacity: 0.5;
+}
+
+
 .game-list {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     flex-wrap: wrap;
     -ms-overflow-style: none;
     scrollbar-width: none; 
@@ -60,7 +66,7 @@
 
 .provider-list {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     flex-wrap: wrap;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -193,7 +199,6 @@
         gap: 10px;
         justify-content: center;
     }
-    
 
     .internal .game-tile {
         max-width: calc(50% - 5px);
@@ -300,6 +305,12 @@
 }
 
 @media only screen and (min-width: 1025px) {
+    .game-list,
+    .game-grid,
+    .provider-list {
+        gap: 15px;
+    }
+
     .game-grid {
         grid-template-columns: repeat(6, 1fr);
     }

@@ -374,7 +374,6 @@ export class WallComponent implements OnInit, AfterViewInit {
     ) {
         let providerName = provider ?? this.gameFornecedor;
         let categoryName = this.getCategorySlug(category ?? this.categorySelected);
-        this.gameTitle = this.getGameTitle(category);
         
         this.categorySelected = category ?? 'cassino';
         let gamesCassinoList = this.gamesCassino;
@@ -416,6 +415,8 @@ export class WallComponent implements OnInit, AfterViewInit {
                 }
             });
         }
+
+        this.gameTitle = this.getGameTitle(category);
     }
 
     private getGameTitle(category: string) {
@@ -440,7 +441,12 @@ export class WallComponent implements OnInit, AfterViewInit {
             gameshow: 'Game Show'
         }
 
-        return gameTitles[category] ?? ''
+        const categoryTitle = gameTitles[category] ?? '';
+        const providerTitle = this.gameFornecedor
+            ? this.cassinoFornecedores.find(provider => provider.gameFornecedor === this.gameFornecedor)?.gameFornecedorExibicao ?? null
+            : null;
+
+        return categoryTitle && providerTitle ? `${categoryTitle} | ${providerTitle}` : categoryTitle;
     }
 
     private getCategorySlug(category: string) {
