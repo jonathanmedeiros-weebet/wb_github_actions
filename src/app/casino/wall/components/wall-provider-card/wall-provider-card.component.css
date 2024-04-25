@@ -16,7 +16,6 @@
 .provider-card--filter {
     width: 100%;
     min-height: 100%;
-    max-width: 129px;
 }
 
 .provider-card:hover {
@@ -37,5 +36,9 @@
     .provider-card--inline {
         width: calc((100vw / 7.5) - 16px);
         height: 78px;
+    }
+
+    .provider-card--filter {
+        max-width: 129px;
     }
 }

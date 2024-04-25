@@ -14,6 +14,13 @@ export interface Fornecedor {
     imagem?: string;
 }
 
+export interface GameSection {
+    id: string;
+    title: string;
+    gameList: GameCasino[];
+    show: boolean;
+}
+
 @Component({
     selector: 'app-wall',
     templateUrl: './wall.component.html',
@@ -36,6 +43,12 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gameList: GameCasino[];
     public gamesCassino: GameCasino[];
     public gamesDestaque: GameCasino[];
+    private newGamesCassino: GameCasino[];
+    public cassinoFornecedores: Fornecedor[] = [];
+
+    public gamesSection: GameSection[] = [];
+
+    // Cassino
     public gamesSlot: GameCasino[];
     public gamesCrash: GameCasino[];
     public gamesRaspadinha: GameCasino[];
@@ -43,8 +56,12 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gamesMesa: GameCasino[];
     public gamesBingo: GameCasino[];
     public gamesLive: GameCasino[];
-    private newGamesCassino: GameCasino[];
-    public cassinoFornecedores: Fornecedor[] = [];
+    
+    // Cassino ao vivo
+    public gamesBlackjack: GameCasino[];
+    public gamesBaccarat: GameCasino[];
+    public gamesPoker: GameCasino[];
+    public gamesGameshow: GameCasino[];
 
     public gameFornecedor: string;
     public categorySelected: string = 'cassino';
@@ -65,7 +82,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get showFilterBox(): boolean {
-        return !this.showLoadingIndicator && !this.isVirtual;
+        return !this.showLoadingIndicator && !this.isVirtualPage;
     }
 
     get isDemo(): boolean {
@@ -77,11 +94,23 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get isHomeCassino(): boolean {
-        return ['', 'todos', 'cassino'].includes(this.categorySelected) && !this.gameFornecedor && !this.isVirtual
+        return (
+            ['', 'todos', 'cassino', 'cassino-live'].includes(this.categorySelected) &&
+            (this.isCassinoPage || this.isCassinoAoVivoPage) &&
+            !this.gameFornecedor
+        );
     }
 
-    get isVirtual(): boolean {
+    get isVirtualPage(): boolean {
         return this.blink === 'virtual-sports';
+    }
+
+    get isCassinoAoVivoPage(): boolean {
+        return this.blink === 'live-casino'
+    }
+
+    get isCassinoPage(): boolean {
+        return this.blink === 'casino'
     }
 
     get isMobile(): boolean {
@@ -92,12 +121,14 @@ export class WallComponent implements OnInit, AfterViewInit {
         return this.paramsService.getOpcoes().salsa_cassino;
     }
 
+    get subMenuCategory(): string {
+        return this.isCassinoPage ? 'cassino' : 'cassino-live'
+    }
+
     ngOnInit(): void {
         this.cd.detectChanges();
-
-        if (this.isHomeCassino || this.isVirtual) {
-            this.getGameCassinoList();
-        }
+        this.onTranslateChange();
+        this.getGameList();
 
         if (this.isMobile) {
             this.scrollStep = 200;
@@ -107,53 +138,172 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.auth.cliente.subscribe(isCliente => this.isCliente = isCliente);
     }
 
-    private getGameCassinoList() {
-        this.casinoApi.getGamesList(false).subscribe(response => {
-            this.cassinoFornecedores = response.fornecedores.map((fornecedor: Fornecedor) => ({
-                ...fornecedor,
-                imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
-            }));
-
-            if (this.isVirtual) {
-                this.sideBarService.changeItens({
-                    contexto: 'virtuais',
-                    dados: {}
-                });
-                this.gamesCassino = response.gameList.filter(function(game) {
-                    return game.category === 'virtual';
-                });
-
-                this.categorySelected = 'virtual';
-            } else {
-                this.gamesCassino = response.gameList.filter(function(game) {
-                    return game.dataType !== 'VSB';
-                });
-
-                this.newGamesCassino = response.news;
-                this.gamesDestaque = response.populares;
-                this.gamesSlot = this.filterDestaques(this.gamesCassino, 'slot');
-                this.gamesCrash = this.filterDestaques(this.gamesCassino, 'crash');
-                this.gamesRaspadinha = this.filterDestaques(this.gamesCassino, 'scratchcard');
-                this.gamesRoleta = this.filterDestaques(this.gamesCassino, 'roulette');
-                this.gamesMesa = this.filterDestaques(this.gamesCassino, 'table');
-                this.gamesBingo = this.filterDestaques(this.gamesCassino, 'bingo');
-                this.gamesLive = this.filterDestaques(this.gamesCassino, 'live');
-
-                this.sideBarService.changeItens({
-                    contexto: 'casino',
-                    dados: {}
-                });
-
-                this.categorySelected = 'cassino';
-            }
-
-            this.gameList = this.gamesCassino;
-            this.gameTitle = this.translate.instant('geral.todos');
-            this.listagemJogos.nativeElement.scrollTo(0, 0);
-
-            // this.filterGames('todos', this.categorySelected, false);
-            this.showLoadingIndicator = false;
+    private onTranslateChange() {
+        this.translate.onLangChange.subscribe(() => {
+            this.getGameList()
+            this.cd.detectChanges();
         });
+    }
+
+    private getGameList() {
+        if (this.isCassinoPage || this.isVirtualPage) {
+            this.getGameCassinoList();
+        }
+
+        if(this.isCassinoAoVivoPage) {
+            this.getGameCassinoAoVivoList();
+        }
+    }
+
+    private async getGameCassinoList() {
+        const {
+            fornecedores,
+            gameList,
+            news,
+            populares
+        } = await this.casinoApi.getGamesList(false).toPromise();
+
+        this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
+            ...fornecedor,
+            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+        }));
+
+        if (this.isVirtualPage) {
+            this.sideBarService.changeItens({
+                contexto: 'virtuais',
+                dados: {}
+            });
+            this.gamesCassino = gameList.filter((game: GameCasino) => game.category === 'virtual');
+            this.categorySelected = 'virtual';
+        } else {
+            this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
+            this.newGamesCassino = news;
+            this.gamesDestaque = populares;
+
+            this.gamesSection = [
+                {
+                    id: 'destaques',
+                    title: this.translate.instant('cassino.maisPopulares'),
+                    gameList: this.gamesDestaque,
+                    show: true
+                },
+                {
+                    id: 'crash',
+                    title: this.translate.instant('cassino.crash'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'crash'),
+                    show: true
+                },
+                {
+                    id: 'slot',
+                    title: this.translate.instant('cassino.slot'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'slot'),
+                    show: true
+                },
+                {
+                    id: 'roleta',
+                    title: this.translate.instant('cassino.roleta'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'roulette'),
+                    show: true
+                },
+                {
+                    id: 'mesa',
+                    title: this.translate.instant('cassino.mesa'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'table'),
+                    show: true
+                },
+                {
+                    id: 'raspadinha',
+                    title: this.translate.instant('cassino.raspadinha'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'scratchcard'),
+                    show: true
+                },
+                {
+                    id: 'bingo',
+                    title: this.translate.instant('cassino.bingo'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'bingo'),
+                    show: true
+                }
+            ]
+
+            this.gamesLive = this.filterDestaques(this.gamesCassino, 'live');
+
+            this.sideBarService.changeItens({
+                contexto: 'casino',
+                dados: {}
+            });
+        }
+
+        this.gameList = this.gamesCassino;
+        this.gameTitle = this.translate.instant('geral.todos');
+        this.listagemJogos.nativeElement.scrollTo(0, 0);
+        this.showLoadingIndicator = false;
+    }
+
+    private async getGameCassinoAoVivoList() {
+        const {
+            fornecedores,
+            gameList,
+            news,
+            populares
+        } = await this.casinoApi.getGamesList(true).toPromise();
+
+        this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
+            ...fornecedor,
+            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+        }));
+
+        this.gamesCassino = gameList.filter( (game: GameCasino) => game.dataType !== 'VSB');
+        this.newGamesCassino = news;
+        this.gamesDestaque = populares;
+
+        this.gamesSection = [
+            {
+                id: 'destaques',
+                title: this.translate.instant('cassino.maisPopulares'),
+                gameList: this.gamesDestaque,
+                show: true
+            },
+            {
+                id: 'roleta',
+                title: this.translate.instant('cassino.roleta'),
+                gameList: this.filterDestaques(this.gamesCassino, 'roulette'),
+                show: true
+            },
+            {
+                id: 'blackjack',
+                title: 'Blackjack',
+                gameList: this.filterDestaques(this.gamesCassino, 'blackjack'),
+                show: true
+            },
+            {
+                id: 'gameshow',
+                title: 'Game Show',
+                gameList: this.filterDestaques(this.gamesCassino, 'gameshow'),
+                show: true
+            },
+            {
+                id: 'baccarat',
+                title: 'Baccarat',
+                gameList: this.filterDestaques(this.gamesCassino, 'baccarat'),
+                show: true
+            },
+            {
+                id: 'poker',
+                title: 'Poker',
+                gameList: this.filterDestaques(this.gamesCassino, 'poker'),
+                show: true
+            }
+        ]
+
+        this.sideBarService.changeItens({
+            contexto: 'casino',
+            dados: {}
+        });
+
+        this.gameList = this.gamesCassino;
+        this.gameTitle = this.translate.instant('geral.todos');
+        this.listagemJogos.nativeElement.scrollTo(0, 0);
+        this.showLoadingIndicator = false;
     }
 
     ngAfterViewInit() {
@@ -188,21 +338,21 @@ export class WallComponent implements OnInit, AfterViewInit {
         if (scrollLeft <= 0) {
             this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
             this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
-            this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
+            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
         } else {
             this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
-            this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
+            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
         }
 
         if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 1) {
             this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
-            this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
+            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
         } else {
             this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
-            this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
+            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
         }
     }
 
@@ -232,7 +382,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             gamesCassinoList = categoryName === 'news' ? this.newGamesCassino : this.gamesDestaque;
         }
 
-        if(['cassino', 'todos', 'news', 'destaques', 'virtual'].includes(categoryName)) {
+        if(['cassino', 'cassino-live', 'todos', 'news', 'destaques', 'virtual'].includes(categoryName)) {
             categoryName = null;
         }
 
@@ -241,10 +391,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             providerName = (this.gameFornecedor !== providerName) ? providerName : null;
             this.gameFornecedor = providerName;
         }
-
-        console.log(providerName)
-        console.log(categoryName)
-
 
         if(!providerName && !categoryName) {
             this.gameList = gamesCassinoList
@@ -269,11 +415,11 @@ export class WallComponent implements OnInit, AfterViewInit {
                 }
             });
         }
-        console.log(this.gameList)
     }
 
     private getGameTitle(category: string) {
         const gameTitles = {
+            // Cassino
             slot: this.translate.instant('cassino.slot'),
             crash: this.translate.instant('cassino.crash'),
             roulette: this.translate.instant('cassino.roleta'),
@@ -284,7 +430,13 @@ export class WallComponent implements OnInit, AfterViewInit {
             news: this.translate.instant('cassino.news'),
             todos: this.translate.instant('geral.todos'),
             cassino: this.translate.instant('geral.todos'),
-            virtual: this.translate.instant('geral.todos')
+            virtual: this.translate.instant('geral.todos'),
+
+            // Cassino ao vivo
+            blackjack: 'Blackjack',
+            baccarat: 'Baccarat',
+            poker: 'Poker',
+            gameshow: 'Game Show'
         }
 
         return gameTitles[category] ?? ''

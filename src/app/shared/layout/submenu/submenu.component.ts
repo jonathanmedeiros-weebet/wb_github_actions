@@ -51,8 +51,10 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit() {
-        if(this.version === 'v1') { // v1 é usado na navbar
+        if (this.version === 'v1') { // v1 é usado na navbar
             this.layoutService.changeSubmenuHeight(40);
+        } else {
+            this.layoutService.changeSubmenuHeight(0);
         }
 
         if (window.innerWidth > 1024) {
@@ -155,6 +157,8 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
             const submenuAtivo = this.submenu.find(submenu => {
                 return submenu.link == this.router.url.split('?')[0];
             });
+
+            if(!submenuAtivo) return
 
             const activeButtonElement = this.el.nativeElement.querySelector(`#${submenuAtivo.id}`);
             if (activeButtonElement) {

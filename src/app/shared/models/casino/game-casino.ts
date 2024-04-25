@@ -7,4 +7,5 @@ export class GameCasino {
     fornecedorExibicao?: string;
     gameDemo: any;
     modalidade: any;
+    category?: any;
 }
