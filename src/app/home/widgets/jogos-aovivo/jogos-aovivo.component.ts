@@ -95,48 +95,50 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
                         const jogos = new Map();
                         let temJogoValido = false;
 
-                        campeonato.jogos.forEach(jogo => {
-                            if (totalJogos < 5) {
-                                let valido = true;
+                        if (this.campeonatoPermitido(campeonato._id)) {
+                            campeonato.jogos.forEach(jogo => {
+                                if (totalJogos < 5) {
+                                    let valido = true;
 
-                                if (jogo.sport_id !== 1) {
-                                    valido = false;
-                                }
-
-                                if (this.minutoEncerramentoAoVivo > 0) {
-                                    if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                                    if (jogo.sport_id !== 1) {
                                         valido = false;
                                     }
-                                }
 
-                                if (this.jogoBloqueado(jogo.event_id)) {
-                                    valido = false;
-                                }
+                                    if (this.minutoEncerramentoAoVivo > 0) {
+                                        if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                                            valido = false;
+                                        }
+                                    }
 
-                                jogo.cotacoes.map(cotacao => {
-                                    cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
-                                    cotacao.valorFinal = this.helperService.calcularCotacao2String(
-                                        cotacao.valor,
-                                        cotacao.chave,
-                                        jogo.event_id,
-                                        null,
-                                        true
-                                    );
-                                    return cotacao;
-                                });
+                                    if (this.jogoBloqueado(jogo.event_id)) {
+                                        valido = false;
+                                    }
 
-                                if (valido) {
-                                    jogos.set(jogo._id, jogo);
-                                    temJogoValido = true;
-                                    totalJogos++;
+                                    jogo.cotacoes.map(cotacao => {
+                                        cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                                        cotacao.valorFinal = this.helperService.calcularCotacao2String(
+                                            cotacao.valor,
+                                            cotacao.chave,
+                                            jogo.event_id,
+                                            null,
+                                            true
+                                        );
+                                        return cotacao;
+                                    });
+
+                                    if (valido) {
+                                        jogos.set(jogo._id, jogo);
+                                        temJogoValido = true;
+                                        totalJogos++;
+                                    }
                                 }
+                            });
+
+                            campeonato.jogos = jogos;
+
+                            if (temJogoValido) {
+                                this.campeonatos.set(campeonato._id, campeonato);
                             }
-                        });
-
-                        campeonato.jogos = jogos;
-
-                        if (temJogoValido) {
-                            this.campeonatos.set(campeonato._id, campeonato);
                         }
                     });
 

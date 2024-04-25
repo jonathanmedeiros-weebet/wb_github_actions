@@ -324,6 +324,7 @@
 
     .bloco .titulo {
         padding: 0;
+        font-size: 16px;
     }
 
     .game-list {
@@ -499,7 +500,7 @@
 
     .game-tile-inline,
     .game-tile-inline-destaque {
-        min-width: 140px;
+        min-width: 150px;
     }
 
     .loading-listagem .slider .itens div {
