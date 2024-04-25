@@ -140,7 +140,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     private onTranslateChange() {
         this.translate.onLangChange.subscribe(() => {
-            this.getGameList()
+            this.filterGames(this.gameFornecedor, this.categorySelected, false)
             this.cd.detectChanges();
         });
     }
@@ -375,6 +375,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         let providerName = provider ?? this.gameFornecedor;
         let categoryName = this.getCategorySlug(category ?? this.categorySelected);
         this.gameTitle = this.getGameTitle(category);
+        
         this.categorySelected = category ?? 'cassino';
         let gamesCassinoList = this.gamesCassino;
 
@@ -422,10 +423,10 @@ export class WallComponent implements OnInit, AfterViewInit {
             // Cassino
             slot: this.translate.instant('cassino.slot'),
             crash: this.translate.instant('cassino.crash'),
-            roulette: this.translate.instant('cassino.roleta'),
-            table: this.translate.instant('cassino.mesa'),
+            roleta: this.translate.instant('cassino.roleta'),
+            mesa: this.translate.instant('cassino.mesa'),
             bingo: this.translate.instant('cassino.bingo'),
-            scratchcard: this.translate.instant('cassino.raspadinha'),
+            raspadinha: this.translate.instant('cassino.raspadinha'),
             destaques: this.translate.instant('cassino.maisPopulares'),
             news: this.translate.instant('cassino.news'),
             todos: this.translate.instant('geral.todos'),

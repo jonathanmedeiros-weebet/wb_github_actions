@@ -409,7 +409,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
             },
             {
                 id: 'roleta',
-                name: 'Roleta',
+                name: this.translate.instant('submenu.roleta'),
                 link: '/casino/cl/wall-live/roleta',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',
