@@ -1,4 +1,9 @@
-<div class="loteria-popular-content">
+<div class="loteria-popular-content" [ngClass]="{'desktop-fullscreen': fullscreen}">
+    <div class="expand-btn">
+        <a (click)="fullscreen ? exitFullscreen() : openFullscreen()">
+            <i class="fa" [ngClass]="{'fa-expand': !fullscreen, 'fa-compress': fullscreen}"></i>
+        </a>
+    </div>
     <div class="loteria-frame">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <iframe *ngIf="gameUrl!=''" [src]="gameUrl"></iframe>

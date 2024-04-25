@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, HostListener } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoteriaPopularService } from 'src/app/shared/services/loteria/loteria-popular.service';
 import { AuthService, MenuFooterService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { LoginModalComponent } from 'src/app/shared/layout/modals';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'app-loteria-popular',
@@ -16,12 +17,27 @@ import { LoginModalComponent } from 'src/app/shared/layout/modals';
     styleUrls: ['./loteria-popular.component.css']
 })
 export class LoteriaPopularComponent implements OnInit, OnDestroy {
+    @HostListener('document:fullscreenchange')
+    @HostListener('document:webkitfullscreenchange')
+    @HostListener('document:mozfullscreenchange')
+    @HostListener('document:MSFullscreenChange')
+    onFullscreenChange() {
+        if (this.document.fullscreenElement) {
+            this.fullscreen = true;
+        } else {
+            this.fullscreen = false;
+        }
+    }
+
     gameUrl: SafeUrl = "";
+    documentEl: any;
     modalRef;
     isLoggedIn;
     isCliente;
     mobileScreen;
     showLoadingIndicator = true;
+
+    fullscreen = false;
 
     constructor(
         private loteriaPopularApi: LoteriaPopularService,
@@ -33,11 +49,13 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
         private auth: AuthService,
         private messageService: MessageService,
         private translate: TranslateService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        @Inject(DOCUMENT) private document: any
     ) {}
 
     ngOnInit(): void {
         this.mobileScreen = window.innerWidth <= 1024;
+        this.documentEl = document.documentElement;
         this.menuFooterService.setIsPagina(true);
         this.route.params.subscribe(params => {
             this.auth.logado
@@ -107,5 +125,35 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
                 centered: true,
             }
         );
+    }
+
+    openFullscreen() {
+        if (this.documentEl.requestFullscreen) {
+            this.documentEl.requestFullscreen();
+        } else if (this.documentEl.mozRequestFullScreen) {
+            /* Firefox */
+            this.documentEl.mozRequestFullScreen();
+        } else if (this.documentEl.webkitRequestFullscreen) {
+            /* Chrome, Safari and Opera */
+            this.documentEl.webkitRequestFullscreen();
+        } else if (this.documentEl.msRequestFullscreen) {
+            /* IE/Edge */
+            this.documentEl.msRequestFullscreen();
+        }
+    }
+
+    exitFullscreen() {
+        if (this.document.exitFullscreen) {
+            this.document.exitFullscreen();
+        } else if (this.document.mozCancelFullScreen) {
+            /* Firefox */
+            this.document.mozCancelFullScreen();
+        } else if (this.document.webkitExitFullscreen) {
+            /* Chrome, Safari and Opera */
+            this.document.webkitExitFullscreen();
+        } else if (this.document.msExitFullscreen) {
+            /* IE/Edge */
+            this.document.msExitFullscreen();
+        }
     }
 }
