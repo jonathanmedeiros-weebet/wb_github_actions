@@ -151,7 +151,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     overflow-x: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -193,6 +193,7 @@
 @media only screen and (min-width: 1025px) {
     .submenu-v2__items {
         max-width: 1910px;
+        gap: 15px;
     }
 
     .submenu-v2__item {

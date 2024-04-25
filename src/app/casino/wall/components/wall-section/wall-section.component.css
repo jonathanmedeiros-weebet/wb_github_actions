@@ -3,19 +3,20 @@
     font-size: 16px;
     justify-content: space-between;
     align-items: center;
-    margin: 18px 0;
+    margin: 10px 0;
 }
 
 .wall-section__group {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 
 .wall-section__title {
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
-    line-height: 19px;
+    line-height: 24px;
     color: var(--foreground-header);
 }
 
@@ -64,6 +65,9 @@
 }
 
 @media only screen and (min-width: 1024px) {
+    .wall-section {
+        margin: 18px 0;
+    }
 
     .wall-section__title {
         font-size: 18px;
