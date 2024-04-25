@@ -226,13 +226,13 @@
     :host ::ng-deep .games-search--actived .games-search__input .search-box__input,
     :host ::ng-deep .games-search--actived .games-search__input .search-box__input:hover,
     :host ::ng-deep .games-search--actived .games-search__input .search-box__input:focus {
-        background-color: var(--foreground-inputs-odds);
-        color: var(--inputs-odds);
+        background-color: var(--header);
+        color: var(--foregroun-header);
         border: none;
     }
 
     :host ::ng-deep .games-search--actived .games-search__input .search-box__icon--search {
-        color: var(--inputs-odds);
+        color: var(--foregroun-header);
     }
 
     :host ::ng-deep .games-search--actived .games-search__input .search-box__icon--clear {
