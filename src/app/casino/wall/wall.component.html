@@ -100,7 +100,7 @@
                         <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
                     </ng-container>
                     <ng-template #elseWithoutGames>
-                        <span class="empty-game-list">Nenhum jogo disponível no momento</span>
+                        <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
                     </ng-template>
                 </div>
             </div>

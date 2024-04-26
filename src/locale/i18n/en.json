@@ -230,7 +230,8 @@
         "pesquisasRecentes": "Recent researches",
         "limparHistorico": "Clear history",
         "nenhumResultadoEncontrado": "No results found for this search",
-        "jogosEmAlta": "Trending games"
+        "jogosEmAlta": "Trending games",
+        "nenhumJogoDisponivel": "No games available at the moment"
     },
     "bet": {
         "sportsBetting": "Sports betting",
