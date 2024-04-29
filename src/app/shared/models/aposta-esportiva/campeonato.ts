@@ -5,6 +5,8 @@ export class Campeonato {
     nome: string;
     regiao: string;
     regiao_sigla: string;
+    alias: string;
+    sport_id:  number;
     jogos: Jogo[];
     isSelected? : boolean;
 }

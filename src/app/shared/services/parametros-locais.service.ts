@@ -143,6 +143,18 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.loteriaPopular : null;
     }
 
+    aoVivoAtivo() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.aovivo : null;
+    }
+
+    futebolAoVivoAtivo() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.futebol_aovivo : null;
+    }
+
+    basqueteAoVivoAtivo() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.basquete_aovivo : null;
+    }
+
     getBancaNome() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.banca_nome : null;
     }

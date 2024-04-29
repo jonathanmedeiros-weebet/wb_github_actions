@@ -151,10 +151,6 @@
 }
 
 @media only screen and (max-width: 1024px) {
-    app-footer {
-        padding: 0 5px;
-    }
-
     .scroll-button {
         display: none;
     }

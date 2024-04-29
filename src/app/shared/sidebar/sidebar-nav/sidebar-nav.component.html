@@ -53,7 +53,7 @@
                 </a>
             </li>
         </div>
-        <ng-container *ngIf="esporte == 'futebol'; else esporteGenerico">
+        <ng-container *ngIf="esporte == 'futebol' || esporte == 'basquete'; else esporteGenerico">
             <span class="group" *ngIf="!collapsed">{{'geral.campeonatos' | translate}}</span>
             <li class="regiao" *ngFor="let regiao of itens">
                 <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
@@ -63,7 +63,7 @@
                 <div class="sub-nav-container">
                     <ul *ngIf="regiao._id == regiaoOpen" [ngClass]="{'sub-nav-out': collapsed}">
                         <li *ngFor="let campeonato of regiao.campeonatos"
-                            (click)="goTo('/esportes/futebol', { campeonato: campeonato._id })">
+                            (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
                             <a>
                                 {{campeonato.nome.replace(regiao._id + ': ', '')}}
                             </a>

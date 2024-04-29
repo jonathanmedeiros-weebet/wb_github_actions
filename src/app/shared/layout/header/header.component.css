@@ -94,6 +94,7 @@ nav a {
     font-weight: 600;
     font-size: 14px;
     transition: 300ms;
+    white-space: nowrap;
     border-bottom: 2px solid transparent;
 }
 
@@ -178,7 +179,7 @@ nav::-webkit-scrollbar {
 }
 
 .dropdown-menu-custom {
-    inset: 0px 0px auto auto !important;
+    inset: 0 0 auto auto !important;
 }
 
 .language-dropdown .flag-icon {
@@ -444,7 +445,6 @@ body .change-theme {
         width: 100%;
         height: 64px;
         display: flex;
-        border-bottom: 1px solid rgba(var(--foreground-header-rgb), 0.1);
     }
 
     nav {

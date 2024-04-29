@@ -74,7 +74,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             if (this.gameMode === 'REAL' && !this.isCliente) {
-                this.router.navigate(['casino/wall']);
+                this.router.navigate(['casino']);
             } else {
                 this.loadGame();
             }

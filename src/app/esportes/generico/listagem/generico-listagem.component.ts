@@ -53,6 +53,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     term = '';
     campeonatosTemp = [];
     campeonatosFiltrados = [];
+    headerHeight = 92;
 
     modalRef;
 
@@ -122,6 +123,14 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                 this.cd.markForCheck();
             });
 
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
+            });
+
         this.layoutService.resetHideSubmenu();
     }
 
@@ -178,7 +187,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     definirAltura() {
-        const headerHeight = this.mobileScreen ? 161 : 132;
+        const headerHeight = this.mobileScreen ? 161 : this.headerHeight;
         const altura = window.innerHeight - headerHeight;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
@@ -379,7 +388,8 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
                     jogo.event_id,
                     jogo.favorito,
                     false);
-                cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome);
+                cotacao.label = this.helperService.apostaTipoLabelCustom(cotacao.chave, jogo.time_a_nome, jogo.time_b_nome, jogo.sport_id);
+
             });
         });
 
@@ -408,7 +418,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirTotalOdds() {
-        return this.sportId === '18';
+        return this.sportId === '48242';
     }
 
     toggleCampeonato(campeonatoId) {

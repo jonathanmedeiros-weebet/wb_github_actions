@@ -610,6 +610,11 @@
 
 <ng-template #menuTemplate>
     <div #menu class="d-flex">
+        <div class="category" *ngIf="aoVivoAtivo">
+            <a [routerLink]="['/live']" routerLinkActive="active">
+                <span>{{'menu.aoVivo' | translate}}</span>
+            </a>
+        </div>
         <div class="category" *ngIf="esporteAtivo">
             <a [routerLink]="['/esportes']" routerLinkActive="active">
                 <span>{{'menu.esportes' | translate}}</span>

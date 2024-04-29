@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef,Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subject, Observable, of } from 'rxjs';
@@ -426,7 +426,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
         let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
-        
+
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true,

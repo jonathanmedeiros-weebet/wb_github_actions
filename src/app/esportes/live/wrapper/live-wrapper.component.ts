@@ -8,6 +8,7 @@ import {
     MessageService, LiveService, MenuFooterService
 } from '../../../services';
 import { LiveJogoComponent } from '../jogo/live-jogo.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-live-wrapper',
@@ -29,21 +30,13 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
         private menuFooterService: MenuFooterService,
         private liveService: LiveService,
         private modalServices: NgbModal,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.getJogos();
+        this.mobileScreen = window.innerWidth <= 1024;
         this.liveService.connect();
-
-        this.sidebarService.itens
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                dados => {
-                    if (dados.esporte !== 'futebol') {
-                        this.getJogos();
-                    }
-                }
-            );
     }
 
     ngOnDestroy() {
@@ -54,28 +47,45 @@ export class LiveWrapperComponent implements OnInit, OnDestroy {
     }
 
     getJogos() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(1);
+        // const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportId);
         const opcoes = this.paramsService.getOpcoes();
-        const params = {
-            'sport_id': 1,
-            'campeonatos_bloqueados': campeonatosBloqueados,
-            'data_final': opcoes.data_limite_tabela,
-        };
+        // const params = {
+        //     'sport_id': this.sportId,
+        //     'campeonatos_bloqueados': campeonatosBloqueados,
+        //     'data_final': opcoes.data_limite_tabela,
+        // };
 
-        this.campeonatoService.getCampeonatosPorRegioes(params)
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(
-                campeonatos => {
-                    const dados = {
-                        itens: campeonatos,
-                        contexto: 'esportes',
-                        esporte: 'futebol'
-                    };
-
-                    this.sidebarService.changeItens(dados);
-                },
-                error => this.messageService.error(error)
-            );
+        // if (this.sportId == 1) {
+        //     this.campeonatoService.getCampeonatosPorRegioes(params)
+        //         .pipe(takeUntil(this.unsub$))
+        //         .subscribe(
+        //             campeonatos => {
+        //                 const dados = {
+        //                     itens: campeonatos,
+        //                     contexto: 'esportes',
+        //                     esporte: this.esporte
+        //                 };
+        //
+        //                 this.sidebarService.changeItens(dados);
+        //             },
+        //             error => this.messageService.error(error)
+        //         );
+        // } else {
+        //     this.campeonatoService.getCampeonatos(params)
+        //         .pipe(takeUntil(this.unsub$))
+        //         .subscribe(
+        //             campeonatos => {
+        //                 const dados = {
+        //                     itens: campeonatos,
+        //                     contexto: 'esportes',
+        //                     esporte: this.esporte
+        //                 };
+        //
+        //                 this.sidebarService.changeItens(dados);
+        //             },
+        //             error => this.messageService.error(error)
+        //         );
+        // }
     }
 
     receptorJogoSelecionadoId(jogoId) {

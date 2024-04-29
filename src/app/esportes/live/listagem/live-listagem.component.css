@@ -1,8 +1,55 @@
-.campeonato-header{
+.esporte:first-of-type {
+    margin-bottom: 8px;
+}
+
+.esporte-header {
+    display: flex;
+    align-items: center;
+    background-color: var(--league);
+    color: var(--foreground-league);
+    padding: 5px 15px;
+    border-radius: 4px 4px 0 0;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    height: 45px;
+}
+
+.collapsed-header {
+    border-radius: 4px;
+}
+
+.esporte-header>span {
+    line-height: 15px;
+}
+
+.esporte-header.column-left {
+    align-content: center;
+}
+
+.esporte-header .esporte-nome {
+    margin-left: 5px;
+}
+
+.esporte-header .wbicon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    align-self: center;
+}
+
+.esporte .campeonatos {
+    padding: 8px;
+    /* background-color: var(--background-live); */
+    background-color: rgba(var(--background-live), 50%);
+}
+
+.campeonato-header {
     border: none;
     font-size: 12px;
     cursor: pointer;
     margin-bottom: 5px;
+    border-radius: 2px;
 }
 
 .wrap-sticky {
@@ -10,12 +57,12 @@
     flex: 1;
 }
 
-.campeonato-header .column-left{
+.campeonato-header .column-left, .esporte-header .column-left  {
     flex-grow: 1;
     position: relative;
 }
 
-.campeonato-header .campeonato-nome{
+.campeonato-header .campeonato-nome {
     margin-left: 28px;
 }
 
@@ -191,10 +238,13 @@
     display: flex;
     background-color: var(--game);
     padding: 7.5px;
+    min-width: 250px;
+    max-width: 280px;
 }
 
 .cotacoes .cotacao {
     display: flex;
+    flex: 1 1 0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -218,6 +268,11 @@
 
 .cotacoes .cotacao label {
     margin: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 }
 
 .cotacoes .cotacao.disabled,
@@ -307,6 +362,12 @@
 
     .indentificacao .nome {
         padding-left: 0;
+        width: calc(100% - 85px);
+    }
+
+    .cotacoes {
+        min-width: none;
+        max-width: none;
     }
 
     .cotacoes, .cotacoes .cotacao {

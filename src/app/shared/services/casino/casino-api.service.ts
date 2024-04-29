@@ -44,11 +44,23 @@ export class CasinoApiService {
     }
 
     getGamesList(aoVivo: any) {
-        if (aoVivo) {
-            var endpoint = this.loki_url+"/live-games";
-        } else {
-            var endpoint = this.loki_url+"/games";
-        }
+        const endpoint: string = Boolean(aoVivo)
+            ? this.central_url + "/games/gamesAoVivo"
+            : this.central_url + "/games/";
+
+        return this.http.post(endpoint, {}, this.header.getRequestOptions(true))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getGamesHome() {
+        var endpoint = this.central_url+"/games/gamesHome";
         return this.http.post(String(endpoint),{},this.header.getRequestOptions(true))
             .pipe(
                 map(
@@ -82,7 +94,7 @@ export class CasinoApiService {
         queryParams['language'] = 'pt';
         queryParams['playMode'] = gameMode;
         queryParams['cashierUr'] = `https://${config.SHARED_URL}/clientes/deposito`;
-        queryParams['lobbyUrl'] = `https://${config.SHARED_URL}/casino/wall`;
+        queryParams['lobbyUrl'] = `https://${config.SHARED_URL}/casino`;
         queryParams['fornecedor'] = $gameFornecedor;
         queryParams['isMobile'] = isMobile;
 

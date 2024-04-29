@@ -3124,3 +3124,13 @@ gulp.task('pixplay.io', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sortepix.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "sortepix.com",
+        banca: "SORTE PIX",
+        styles: "",
+        dominioTemp: "sortepix.net"
+    });
+});

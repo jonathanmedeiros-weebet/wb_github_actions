@@ -1,0 +1,35 @@
+<div class="list-modalidades">
+    <ul>
+        <li class="bg-esportes">
+            <a routerLink="/esportes">Esporte</a>
+        </li>
+        <li class="bg-esportes-aovivo">
+            <a routerLink="/live/all">
+                Esporte
+                <span>Ao Vivo</span>
+            </a>
+        </li>
+        <li class="bg-cassino">
+            <a routerLink="/casino">
+                Cassino
+            </a>
+        </li>
+        <li class="bg-cassino-aovivo">
+            <a routerLink="/live-casino">
+                Cassino
+                <span>Ao Vivo</span>
+            </a>
+        </li>
+        <li class="bg-promocoes" *ngIf="promocoesHabilitado">
+            <a routerLink="/promocao">
+                Promoções
+            </a>
+        </li>
+        <li class="bg-indique-ganhe" *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente)">
+            <a (click)="redirectIndiqueGanhe()">
+                Indique
+                <span>e Ganhe</span>
+            </a>
+        </li>
+    </ul>
+</div>

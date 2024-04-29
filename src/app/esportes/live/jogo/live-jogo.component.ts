@@ -215,12 +215,17 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
-                odd.label = tipoAposta.nome;
+                odd.label = this.helperService.apostaTipoLabelCustom(
+                    odd.chave,
+                    this.jogo.time_a_nome,
+                    this.jogo.time_b_nome,
+                    this.jogo.sport_id
+                );
                 odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, null, true);
 
                 mercado.odds.push(odd);
 
-                if(this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
+                if (this.oddsAberto.findIndex(id => id === mercado.nome) < 0) {
                     this.oddsAberto.push(mercado.nome);
                 }
             }

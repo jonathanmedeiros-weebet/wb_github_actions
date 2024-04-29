@@ -42,6 +42,7 @@
         "nenhumEventoDisponivelNesteDia": "No events available on this day",
         "nenhumJogoEncontrado": "No game found",
         "nenhumEventoAoVivoDisponivel": "No live events available at this time!",
+        "nenhumModalidadeAoVivoDisponivel": "No live modality enabled at the moment!",
         "saldo": "Balance",
         "minhaConta": "My Account",
         "salvar": "Save",
@@ -162,6 +163,7 @@
         "loginExpirouEntreNovamente": "Login timed out, please login again.",
         "chavePix": "PIX Key",
         "cassino": "Casino",
+        "cassinoAoVivo": "Live Casino",
         "reembolso": "Refund",
         "editarPerfil": "Edit Profile",
         "maisOpcoes": "More options",
@@ -213,6 +215,8 @@
         "selecioneChavePix": "select your pix key",
         "alertaSaque": "Only withdrawals to Pix keys linked to the account holder are allowed.",
         "chaveAleatoria": "Random key",
+        "jogosDestaques": "Highlights Games",
+        "jogosAoVivo": "Live Games",
         "history": "History",
         "transactionHistory": "Transaction history",
         "promoCode": "Promo code",
@@ -221,7 +225,16 @@
         "failed": "Failed",
         "resultWereNotFound": "No results found",
         "resultWereFound": "1 result were found",
-        "resultsWereFound": "{{ quantity }} results were found"
+        "resultsWereFound": "{{ quantity }} results were found",
+        "provedores": "Providers",
+        "todosProvedores": "All providers",
+        "digiteNomeProvedor": "Enter the provider name",
+        "pesquisarJogosProvedores": "Search for games and providers",
+        "limpar": "Clear",
+        "pesquisasRecentes": "Recent researches",
+        "limparHistorico": "Clear history",
+        "nenhumResultadoEncontrado": "No results found for this search",
+        "jogosEmAlta": "Trending games"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -238,9 +251,12 @@
     },
     "modais": {
         "fechar": "Close",
-        "finalizar": "Finalize"
+        "finalizar": "Finalize",
+        "aplicarFiltro": "Apply filter",
+        "limparFiltro": "Clean filter"
     },
     "menu": {
+        "aoVivo": "LIVE",
         "esportes": "SPORTS",
         "cassino": "CASINO",
         "cassino-aovivo": "LIVE CASINO",
@@ -271,7 +287,9 @@
         "roleta": "Roulette",
         "mesa": "Table",
         "cassinoAoVivo": "Live Casino",
-        "loteriaPopular": "Popular Lottery"
+        "loteriaPopular": "Popular Lottery",
+        "maisPopulares": "Popular",
+        "news": "News"
     },
     "bilhete": {
         "titulo": "TICKET",
@@ -310,7 +328,8 @@
         "destaques": "Highlights",
         "virtuais": "Virtuals",
         "aoVivo": "Live Casino",
-        "bingo": "Bingo"
+        "bingo": "Bingo",
+        "news": "News"
     },
     "cartoes": {
         "titulo": "Cards",

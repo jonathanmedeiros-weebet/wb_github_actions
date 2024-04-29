@@ -1,0 +1,217 @@
+.loading-listagem,
+.jogos-aovivo {
+    padding: 0 10px 30px;
+}
+
+.widgets-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    padding: 5px 0 10px;
+    align-items: center;
+    text-align: left;
+    font-size: 18px;
+    color: var(--foreground);
+    flex-grow: 1;
+}
+
+.widgets-header a {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--highlight);
+}
+
+.back {
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+    color: initial;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-normal {
+    justify-content: normal;
+}
+
+.loading-listagem .slider {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.loading-listagem .slider .title {
+    width: 120px;
+    height: 27px;
+    margin: 10px 0;
+}
+
+.loading-listagem .slider .itens {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 5px;
+}
+
+.loading-listagem .slider .itens .camp {
+    min-width: 340px;
+    height: 39px;
+    border-radius: 2px;
+}
+
+.loading-listagem .slider .itens .content {
+    height: 64px;
+}
+
+.campeonato {}
+
+.campeonato .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 2px;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    margin-bottom: 5px;
+}
+
+.campeonato .header .flag-icon {
+    width: 19px;
+    height: 19px;
+    clip-path: circle();
+    border-radius: 100%;
+}
+
+.campeonato .jogos {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campeonato .jogos .jogo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.campeonato .jogos .jogo .tempo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    height: 64px;
+    padding: 0 20px;
+}
+
+.campeonato .jogos .jogo .tempo-box .aovivo-label {
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.campeonato .jogos .jogo .times-placar {
+    display: flex;
+    flex-direction: column;
+    height: 64px;
+    flex: 1;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    justify-content: center;
+    padding: 0 20px;
+    gap: 5px;
+}
+
+.campeonato .jogos .jogo .times-placar .time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.campeonato .jogos .jogo .times-placar .time .escudo-img {
+    margin-right: 10px;
+}
+
+.campeonato .jogos .jogo .cotacoes {
+    display: flex;
+    align-items: stretch;
+    height: 64px;
+    justify-content: center;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    padding: 5px 20px;
+    gap: 5px;
+}
+
+.campeonato .jogos .jogo .cotacoes .cotacao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 180px;
+    padding: 0 20px;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    cursor: pointer;
+}
+
+.campeonato .jogos .jogo .cotacoes .cotacao.selecionado {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.campeonato .jogos .jogo .cotacoes .cotacao.disabled {
+    cursor: not-allowed;
+}
+
+.campeonato .jogos .jogo .cotacoes .cotacao.disabled * {
+    opacity: 0.3;
+}
+
+
+@media only screen and (max-width: 1024px) {
+
+    .jogos-aovivo,
+    .loading-listagem {
+        padding: 0 10px 19px;
+    }
+
+    .widgets-header {
+        padding: 0 0 10px;
+        font-size: 16px;
+    }
+
+    .loading-listagem .slider .itens .content {
+        height: 133px;
+    }
+
+    .campeonato .jogos .jogo {
+        background-color: var(--game);
+        flex-wrap: wrap;
+    }
+
+    .campeonato .jogos .jogo .cotacoes {
+        width: 100%;
+        padding: 5px 10px 10px;
+    }
+
+    .campeonato .jogos .jogo .tempo-box,
+    .campeonato .jogos .jogo .times-placar {
+        padding: 0 10px;
+    }
+
+    .campeonato .jogos .jogo .cotacoes .cotacao {
+        width: auto;
+        min-width: auto;
+        flex: 1;
+    }
+}
+
+@media (min-width: 1025px) {}
+
+@media (max-width: 385px) {}

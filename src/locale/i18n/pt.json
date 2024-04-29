@@ -43,6 +43,7 @@
         "nenhumEventoDisponivelNesteDia": "Nenhum evento disponível neste dia",
         "nenhumJogoEncontrado": "Nenhum jogo encontrado",
         "nenhumEventoAoVivoDisponivel": "Nenhum evento ao vivo disponível no momento!",
+        "nenhumModalidadeAoVivoDisponivel": "Nenhuma modalidade ao vivo habilitada no momento!",
         "saldo": "Saldo",
         "minhaConta": "Minha Conta",
         "salvar": "Salvar",
@@ -162,6 +163,7 @@
         "loginExpirouEntreNovamente": "Login expirou, entre novamente.",
         "chavePix": "Chave PIX",
         "cassino": "Cassino",
+        "cassinoAoVivo": "Cassino Ao Vivo",
         "reembolso": "Reembolso",
         "editarPerfil": "Editar Perfil",
         "maisOpcoes": "Mais opções",
@@ -210,9 +212,12 @@
         "jogarAgora": "Jogar Agora",
         "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
+        "resultadosEncontradosComQuantidade": "Foram encontrados {{quantidade}} resultados",
         "selecioneChavePix": "Selecione a chave pix",
         "alertaSaque": "Apenas saques para chaves Pix vinculadas ao titular da conta são permitidos.",
         "chaveAleatoria": "Chave aleatória",
+        "jogosDestaques": "Jogos Destaques",
+        "jogosAoVivo": "Jogos Ao Vivo",
         "history": "Histórico",
         "transactionHistory": "Histórico de transações",
         "promoCode": "Código promocional",
@@ -221,7 +226,16 @@
         "failed": "Reprovado",
         "resultWereNotFound": "Nenhum resultado encontrado",
         "resultWereFound": "Foi encontrado 1 resultado",
-        "resultsWereFound": "Foram encontrados {{ quantity }} resultados"
+        "resultsWereFound": "Foram encontrados {{ quantity }} resultados",
+        "provedores": "Provedores",
+        "todosProvedores": "Todos provedores",
+        "digiteNomeProvedor": "Digite o nome do provedor",
+        "pesquisarJogosProvedores": "Pesquisar por jogos e provedores",
+        "limpar": "Limpar",
+        "pesquisasRecentes": "Pesquisas recentes",
+        "limparHistorico": "Limpar histórico",
+        "nenhumResultadoEncontrado": "Nenhum resultado encontrado para esta pesquisa",
+        "jogosEmAlta": "Jogos em alta"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -238,9 +252,12 @@
     },
     "modais": {
         "fechar": "Fechar",
-        "finalizar": "Finalizar"
+        "finalizar": "Finalizar",
+        "aplicarFiltro": "Aplicar filtro",
+        "limparFiltro": "Limpar filtro"
     },
     "menu": {
+        "aoVivo": "AO VIVO",
         "esportes": "ESPORTES",
         "cassino": "CASSINO",
         "cassino-aovivo": "CASSINO AO VIVO",
@@ -271,7 +288,9 @@
         "roleta": "Roleta",
         "mesa": "Mesa",
         "cassinoAoVivo": "Cassino Ao Vivo",
-        "loteriaPopular": "Loteria Popular"
+        "loteriaPopular": "Loteria Popular",
+        "maisPopulares": "Populares",
+        "news": "Novidades"
     },
     "bilhete": {
         "titulo": "BILHETE",
@@ -310,7 +329,8 @@
         "destaques": "Destaques",
         "virtuais": "Virtuais",
         "aoVivo": "Ao Vivo",
-        "bingo": "Bingo"
+        "bingo": "Bingo",
+        "news": "Novidades"
     },
     "cartoes": {
         "titulo": "Cartões",

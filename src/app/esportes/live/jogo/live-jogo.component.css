@@ -96,6 +96,10 @@ section.jogo {
     border-radius: 8px;
 }
 
+.indentificacao-jogo-basquete {
+    background-image: url("https://cdn.wee.bet/img/quadra-basquete-background.png");
+}
+
 .indentificacao-jogo .info-jogo {
     display: flex;
     flex-direction: column;

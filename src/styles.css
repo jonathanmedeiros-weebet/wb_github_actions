@@ -1644,6 +1644,10 @@ input[type=number]::-webkit-outer-spin-button {
     max-width: 537px;
 }
 
+.modal-750 .modal-dialog {
+    max-width: 750px;
+}
+
 .btn.disabled, .btn:disabled {
     opacity: 0.3;
 }

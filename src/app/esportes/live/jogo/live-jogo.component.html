@@ -117,7 +117,7 @@
         </div>
     </div>
     <section class="jogo" *ngIf="!showLoadingIndicator">
-        <div *ngIf="!isMobile" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
+        <div *ngIf="!isMobile" [ngClass]="{'indentificacao-jogo-basquete': jogo?.sport_id == 48242}" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
 
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
@@ -125,7 +125,7 @@
                     <div class="time-a">
                         <div class="time-a-nome">
                             <span *ngIf="jogo?.time_a_img; else defaulImageA">
-                                <img src="https://cdn.wee.bet/img/times/m/{{jogo.time_a_img}}.png" size="m">
+                                <img src="https://cdn.wee.bet/img/times/v2/{{jogo.time_a_img}}.png" size="m">
                             </span>
                             <ng-template #defaulImageA class="escudo">
                                 <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
@@ -146,7 +146,7 @@
                     <div class="time-b">
                         <div class="time-b-nome">
                             <span *ngIf="jogo?.time_b_img; else defaulImageB">
-                                <img src="https://cdn.wee.bet/img/times/m/{{jogo.time_b_img}}.png" size="m">
+                                <img src="https://cdn.wee.bet/img/times/v2/{{jogo.time_b_img}}.png" size="m">
                             </span>
                             <ng-template #defaulImageB class="escudo">
                                 <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
@@ -160,14 +160,15 @@
                 </div>
                 <div class="aovivo-tempo">
                     <div class="aovivo-label"><i class="fa fa-circle blink_me"></i> AO VIVO</div>
-                    <div class="tempo" *ngIf="jogo?.info?.tempo != 0">{{jogo.info?.tempo}}º {{jogo.info?.minutos}}'</div>
+                    <div class="tempo" *ngIf="jogo?.info?.tempo != 0 && jogo.sport_id == 1">{{jogo.info?.tempo}}º {{jogo.info?.minutos}}'</div>
+                    <div class="tempo" *ngIf="jogo?.info?.tempo != 0 && jogo.sport_id == 48242">Q{{jogo.info?.tempo}} {{jogo.info?.minutos}}'</div>
                     <div class="tempo" *ngIf="jogo?.info?.tempo == 0">Intervalo</div>
                 </div>
             </div>
         </div>
     </section>
     <section class="content-sports inside-event">
-        <div *ngIf="loadedFrame && (isMobile && !theSportUrl)" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
+        <div *ngIf="loadedFrame && (isMobile && !theSportUrl)" [ngClass]="{'indentificacao-jogo-basquete': jogo?.sport_id == 48242}" class="indentificacao-jogo" style="flex: 1; min-width: 60%;">
             <div class="info-jogo">
                 <small class="campeonato-nome">{{jogo?.campeonato?.nome}}</small>
                 <div class="nome">
@@ -237,8 +238,9 @@
         </ng-container>
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div class="jogo" *ngIf="!showLoadingIndicator">
+            <div *ngIf="!objectKeys(mercados).length">Nenhuma cotação disponível no momento</div>
             <div class="tipo-apostas mt-2">
-                <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercados); trackBy">
+                <div class="tipo-aposta" *ngFor="let chave of objectKeys(mercados);">
                     <div class="header-tipo-aposta" (click)="toggleOdd(mercados[chave])" [ngClass]="{'collapsed' : oddAberto(mercados[chave])}">
                         <h4>{{mercados[chave].nome}}</h4>
                         <i class="fa fa-angle-down"></i>

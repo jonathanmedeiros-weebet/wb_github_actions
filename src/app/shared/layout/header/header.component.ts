@@ -106,6 +106,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     indiqueGanheHabilitado = false;
     cartaoApostaHabilitado;
     isDemo = location.host === 'demo.wee.bet';
+    aoVivoAtivo;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -198,6 +199,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isCliente => this.isCliente = isCliente
             );
 
+        this.aoVivoAtivo = this.paramsService.aoVivoAtivo();
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;

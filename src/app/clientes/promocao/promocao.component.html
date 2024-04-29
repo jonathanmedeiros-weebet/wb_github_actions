@@ -267,7 +267,7 @@
                     </ng-container>   
                     <ng-container *ngIf="mobileScreen">
                         <div class="count-rodadas-mobile" *ngIf="rodadasListagem.length">
-                            <p>{{ 'geral.resultadosEncontrados' | translate: {quantidade: rodadasListagem.length} }}</p>
+                            <p>{{ 'geral.resultadosEncontradosComQuantidade' | translate: {quantidade: rodadasListagem.length} }}</p>
                         </div>
                         <ng-container *ngFor="let rodada of rodadasListagem">
                             <div class="rodada-gratis-container">

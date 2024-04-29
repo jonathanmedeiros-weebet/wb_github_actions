@@ -15,7 +15,8 @@ import {
     PagesLayoutComponent,
     PagesNoNavLayoutComponent,
     SportLayoutComponent,
-    VirtuaisLayoutComponent
+    VirtuaisLayoutComponent,
+    LiveSportLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -161,6 +162,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         LoteriaLayoutComponent,
         DesafioLayoutComponent,
         AcumuladaoLayoutComponent,
+        LiveSportLayoutComponent,
         SidebarNavComponent,
         SidebarMenuComponent,
         LoginModalComponent,
@@ -196,7 +198,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         SpinnerComponent,
         BilheteEsportivoComponent,
         BannersComponent,
-        WelcomePageComponent
+        WelcomePageComponent,
+        SubmenuComponent
     ],
     providers: [
         ApostaEsportivaService,
@@ -214,7 +217,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         {
             provide: RECAPTCHA_SETTINGS,
 
-            useValue: { siteKey: "6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun" } as RecaptchaSettings,
+            useValue: { siteKey: '6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun' } as RecaptchaSettings,
         }
     ]
 })

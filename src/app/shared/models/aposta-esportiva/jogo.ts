@@ -16,6 +16,7 @@ export class Jogo {
     cancelado: boolean;
     finalizado: boolean;
     ao_vivo: boolean;
+    sport_id: number;
     campeonato: Campeonato;
     cotacoes: Cotacao[];
     cotacoes_aovivo: Cotacao[];
