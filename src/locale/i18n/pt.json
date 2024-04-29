@@ -235,7 +235,8 @@
         "pesquisasRecentes": "Pesquisas recentes",
         "limparHistorico": "Limpar histórico",
         "nenhumResultadoEncontrado": "Nenhum resultado encontrado para esta pesquisa",
-        "jogosEmAlta": "Jogos em alta"
+        "jogosEmAlta": "Jogos em alta",
+        "nenhumJogoDisponivel": "Nenhum jogo disponível no momento"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
