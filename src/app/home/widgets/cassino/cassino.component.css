@@ -155,8 +155,6 @@
 }
 
 .game-tile .game-button-lock {
-    /* color: var(--header);
-    background-color: var(--highlight); */
     width: 60%;
     height: 35%;
     font-size: 50px;
