@@ -3125,3 +3125,12 @@ gulp.task('sortepix.com', function (done) {
         dominioTemp: "sortepix.net"
     });
 });
+
+gulp.task('sortegol.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sortegol.bet",
+        banca: "SORTE GOL",
+        styles: ""
+    });
+});

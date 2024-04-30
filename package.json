@@ -328,7 +328,8 @@
         "miamipix.net": "gulp miamipix.net",
         "betfeijo.wee.bet": "gulp betfeijo.wee.bet",
         "pixplay.io": "gulp pixplay.io",
-        "sortepix.com": "gulp sortepix.com"
+        "sortepix.com": "gulp sortepix.com",
+        "sortegol.bet": "gulp sortegol.bet"
     },
     "private": true,
     "dependencies": {
