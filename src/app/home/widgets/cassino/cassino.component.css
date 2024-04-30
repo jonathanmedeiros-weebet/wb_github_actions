@@ -64,6 +64,7 @@
 
 .game-list {
     display: flex;
+    gap: 15px;
     flex-wrap: wrap;
     -ms-overflow-style: none;
     /* IE and Edge */

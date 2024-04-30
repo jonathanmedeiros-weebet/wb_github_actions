@@ -69,7 +69,7 @@
                                 <app-wall-game-card
                                     *ngFor="let game of gameList"
                                     [game]="game"
-                                    [isCardInline]="false"
+                                    cardType="filter"
                                     [isDemo]="isDemo"
                                     [isLoggedIn]="isLoggedIn"
                                     [isCliente]="isCliente"
@@ -96,7 +96,7 @@
                     <app-wall-game-card
                         *ngFor="let game of featuredGameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
                         [game]="game"
-                        [isCardInline]="false"
+                        cardType="filter"
                         [isDemo]="isDemo"
                         [isLoggedIn]="isLoggedIn"
                         [isCliente]="isCliente"

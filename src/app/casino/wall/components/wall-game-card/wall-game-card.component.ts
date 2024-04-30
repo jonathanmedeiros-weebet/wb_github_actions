@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-wall-game-card',
   templateUrl: './wall-game-card.component.html',
-  styleUrls: ['./wall-game-card.component.css']
+  styleUrls: ['./wall-game-card.component.scss']
 })
 export class WallGameCardComponent {
   @Input() game: any;
@@ -11,7 +11,7 @@ export class WallGameCardComponent {
   @Input() isDemo: boolean;
   @Input() isLoggedIn: boolean;
   @Input() isCliente: boolean;
-  @Input() isCardInline: boolean = true;
+  @Input() cardType: 'filter' | 'default' | 'inline' = 'default';
   @Output() openModalLogin = new EventEmitter();
 
   get gameImageUrl(): string {
@@ -36,6 +36,18 @@ export class WallGameCardComponent {
 
   get providerIsSalsa(): boolean {
     return this.game.fornecedor === 'salsa';
+  }
+
+  get isCardInline(): boolean {
+    return this.cardType === 'inline';
+  }
+
+  get isCardDefault(): boolean {
+    return this.cardType === 'default';
+  }
+
+  get isCardFilter(): boolean {
+    return this.cardType === 'filter';
   }
 
   public handleModalLogin() {
