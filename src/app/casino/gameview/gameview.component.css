@@ -10,7 +10,7 @@
 }
 
 .game-frame {
-    width: 94%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -166,7 +166,7 @@ iframe{
 
 @media (min-width: 1025px) {
     .game-frame {
-        height: calc(100vh - 234px);
+        height: calc(100vh - 139px);
     }
 
     iframe {
