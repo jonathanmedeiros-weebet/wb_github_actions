@@ -157,11 +157,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     createForm() {
+        let paymentMethodToForm = !!this.availablePaymentMethods.length ? [this.paymentMethodSelected, Validators.required] : [null];
+
         this.form = this.fb.group({
             valor: [0, [Validators.required]],
             tipoChavePix: ['cpf', Validators.required],
             clienteChavePix: ['', Validators.required],
-            paymentMethod: [this.paymentMethodSelected, Validators.required]
+            paymentMethod: paymentMethodToForm
         });
     }
 
