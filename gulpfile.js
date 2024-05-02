@@ -1679,6 +1679,7 @@ gulp.task('nacionalbet.club', function (done) {
         host: "nacionalbet.club",
         banca: "NACIONAL BET",
         styles: "",
+        description: "A melhor maneira de fazer apostas online nos seus esportes favoritos e ganhar até R$3000 em bônus ao se registrar. Aproveite a experiência da NacionalBET e as melhores ODDS. Site de apostas 100% confiável. Faça sua aposta!",
     });
 });
 
