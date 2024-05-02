@@ -138,7 +138,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }
 
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
-        this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
+        this.availablePaymentMethods = this.paramsLocais.getOpcoes().payment_methods_available_for_bettors;
         this.paymentMethodSelected = this.availablePaymentMethods[0];
         this.createForm();
     }
