@@ -20,328 +20,332 @@
 
 .table {
     color: var(--foreground);
- }
+}
 
- .table thead th {
-     background-color: var(--game);
-     color: var(--foreground-game);
-     border-top: 0;
-     border-bottom: 1px solid var(--game);
-     padding: 15px 10px;
- }
+.table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+    padding: 15px 10px;
+}
 
- .table thead th:first-child {
-     border-left: 10px solid  var(--game);
- }
+.table thead th:first-child {
+    border-left: 10px solid var(--game);
+}
 
- .table .right {
-     text-align: right;
- }
+.table .right {
+    text-align: right;
+}
 
- .table tbody td {
-     border-top: 0;
-     border-bottom: 1px solid var(--game);
-     vertical-align: middle;
-     padding: 15px 10px;
+.table tbody td {
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+    vertical-align: middle;
+    padding: 15px 10px;
 
- }
+}
 
- .table td.no-border{
-     border-left: 0 !important;
- }
+.table td.no-border {
+    border-left: 0 !important;
+}
 
 
 .table a.info {
     display: inline-flex;
     align-items: center;
-#withdrawal-container h3 {
-    font-size: 14px;
-    font-weight: 400;
-    padding-bottom: 6px;
-    color: var(--foreground-sidebars);
-    border-bottom: 1px solid var(--foreground-sidebars);
-}
 
-#payment-method-column {
-    flex: 2;
-}
-
-#payment-method-column h3,
-#payment-method-column > div {
-    width: 75%;
-}
-
-#withdrawal-details {
-    flex: 3;
-}
-
-#details-wrapper {
-    width: 100%;
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-}
-
-.payment-method-options {
-    width: 100%;
-    margin-top: 25px;
-    margin-bottom: 15px;
-    color: var(--foreground-sidebars);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    background: var(--highlight);
-}
-
-.options-container a.active .radio:after {
-    display: block;
-}
-
-.payment-method-option {
-    display: flex;
-    align-items: center;
-    padding: 18px 24px 18px 24px;
-    margin-bottom: 15px;
-    border: 1px solid var(--game);
-    color: var(--foreground);
-    border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
-    border-color: rgba(var(--foreground-sidebars-rgb), 0.2);
-}
-
-.payment-method-option i.fa-caret-right {
-    display: none;
-    position: absolute;
-    right: -7px;
-    color: var(--highlight);
-    font-size: 18px;
-}
-
-.payment-method-option.active i.fa-caret-right {
-    display: block;
-}
-
-.payment-method {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 14px;
-}
-
-.payment-method-icon {
-    width: 36px;
-    height: 23px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.payment-method-name {
-    font-size: 13px;
-}
-
-.active:not(.key-type-option) {
-    background-color: rgba(var(--highlight-rgb), 0.1) !important;
-    border-color: var(--highlight) !important;
-}
-
-.details-container {
-    width: 96%;
-    display: flex;
-    color: var(--foreground-sidebars);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-#details-wrapper .details-available-amount {
-    border: 0.5px solid rgba(var(--foreground-sidebars-rgb), 0.2);
-    padding: 12px 10px 9px;
-    width: 66%;
-    border-radius: 5px;
-}
-
-#details-wrapper .details-available-amount span {
-    font-weight: 600;
-}
-
-#sautopay-alert {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 66%;
-    margin-top: 20px;
-    padding: 12px 10px 9px;
-}
-
-#sautopay-alert .sautopay-alert-text {
-    flex: 1;
-}
-
-#details-wrapper .details-safe-withdrawal-alert {
-    width: 74%;
-    margin-top: 28px;
-}
-
-#details-wrapper .details-key-type {
-    width: 100%;
-    margin-top: 28px;
-}
-
-#details-wrapper .key-type-options {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin-top: 22px;
-}
-
-#details-wrapper .key-type-option {
-    display: flex;
-    flex-direction: row;
-    color: var(--foreground-sidebars);
-    text-decoration: none;
-    cursor: pointer;
-    margin-right: 20px;
-}
-
-#details-wrapper .key-type {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 6px;
-    margin-bottom: 4px;
-}
-
-#details-wrapper .key-type-input {
-    margin-top: 22px;
-    width: 66%;
-}
-
-.details-amount {
-    margin-top: 20px;
-    width: 100%;
-}
-
-.details-amount input {
-    text-align: left !important;
-    width: 66%;
-    margin: 12px 0 8px;
-}
-
-.details-amount label {
-    margin-bottom: 0;
-}
-
-.details-amount .min-amount {
-    color: rgba(var(--foreground-sidebars-rgb), 0.6);
-}
-
-.shortcut-amounts {
-    width: 66%;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-top: 12px;
-}
-
-.shortcut-amounts button {
-    width: 32%;
-    height: 40px;
-    margin-top: 6px;
-    background-color: var(--inputs-odds);
-    color: var(--foreground-inputs-odds);
-}
-
-.shortcut-amounts button:active,
-.shortcut-amounts button:hover {
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
-}
-
-.inverted-out, input.inverted-out:disabled, input.inverted-out:read-only {
-    border-color: rgba(var(--foreground-inputs-odds-rgb), 0.2);
-}
-
-.details-submit {
-    width: 45%;
-    margin-top: 40px;
-}
-
-#details-wrapper .details-submit button {
-    width: 100%;
-}
-
-.details-submit div {
-    margin-bottom: 0;
-}
-
-@media only screen and (max-width: 1024px) {
-    #default-content {
-        padding: 20px;
+    #withdrawal-container h3 {
+        font-size: 14px;
+        font-weight: 400;
+        padding-bottom: 6px;
+        color: var(--foreground-sidebars);
+        border-bottom: 1px solid var(--foreground-sidebars);
     }
 
-    #withdrawal {
-        background: var(--background);
-        padding: 0;
+    #payment-method-column {
+        flex: 2;
     }
 
-    .modal-body {
-        padding-top: 50px;
+    #payment-method-column h3,
+    #payment-method-column>div {
+        width: 75%;
+    }
+
+    #withdrawal-details {
+        flex: 3;
     }
 
     #details-wrapper {
-        margin-top: 0;
+        width: 100%;
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .payment-method-options {
+        width: 100%;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: var(--foreground-sidebars);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        background: var(--highlight);
+    }
+
+    .options-container a.active .radio:after {
+        display: block;
+    }
+
+    .payment-method-option {
+        display: flex;
+        align-items: center;
+        padding: 18px 24px 18px 24px;
+        margin-bottom: 15px;
+        border: 1px solid var(--game);
+        color: var(--foreground);
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        border-color: rgba(var(--foreground-sidebars-rgb), 0.2);
+    }
+
+    .payment-method-option i.fa-caret-right {
+        display: none;
+        position: absolute;
+        right: -7px;
+        color: var(--highlight);
+        font-size: 18px;
+    }
+
+    .payment-method-option.active i.fa-caret-right {
+        display: block;
+    }
+
+    .payment-method {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 14px;
+    }
+
+    .payment-method-icon {
+        width: 36px;
+        height: 23px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .payment-method-name {
+        font-size: 13px;
+    }
+
+    .active:not(.key-type-option) {
+        background-color: rgba(var(--highlight-rgb), 0.1) !important;
+        border-color: var(--highlight) !important;
+    }
+
+    .details-container {
+        width: 96%;
+        display: flex;
+        color: var(--foreground-sidebars);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 
     #details-wrapper .details-available-amount {
-        width: 100%;
+        border: 0.5px solid rgba(var(--foreground-sidebars-rgb), 0.2);
+        padding: 12px 10px 9px;
+        width: 66%;
+        border-radius: 5px;
+    }
+
+    #details-wrapper .details-available-amount span {
+        font-weight: 600;
+    }
+
+    #sautopay-alert {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 66%;
+        margin-top: 20px;
+        padding: 12px 10px 9px;
+    }
+
+    #sautopay-alert .sautopay-alert-text {
+        flex: 1;
     }
 
     #details-wrapper .details-safe-withdrawal-alert {
-        width: 100%;
+        width: 74%;
+        margin-top: 28px;
     }
 
-    #details-wrapper .key-type-select {
+    #details-wrapper .details-key-type {
+        width: 100%;
+        margin-top: 28px;
+    }
+
+    #details-wrapper .key-type-options {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
         margin-top: 22px;
     }
 
+    #details-wrapper .key-type-option {
+        display: flex;
+        flex-direction: row;
+        color: var(--foreground-sidebars);
+        text-decoration: none;
+        cursor: pointer;
+        margin-right: 20px;
+    }
+
+    #details-wrapper .key-type {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 6px;
+        margin-bottom: 4px;
+    }
+
     #details-wrapper .key-type-input {
+        margin-top: 22px;
+        width: 66%;
+    }
+
+    .details-amount {
+        margin-top: 20px;
         width: 100%;
-    }
-
-    .details-payment-method {
-        margin-top: 28px;
-        width: 100%;
-    }
-
-    .details-payment-method select {
-        margin-top: 24px;
-    }
-
-    .details-payment-method .form-group {
-        margin-bottom: 0;
     }
 
     .details-amount input {
-        width: 100%;
+        text-align: left !important;
+        width: 66%;
+        margin: 12px 0 8px;
+    }
+
+    .details-amount label {
+        margin-bottom: 0;
+    }
+
+    .details-amount .min-amount {
+        color: rgba(var(--foreground-sidebars-rgb), 0.6);
     }
 
     .shortcut-amounts {
-        width: 100%;
+        width: 66%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-top: 12px;
     }
 
     .shortcut-amounts button {
-        background-color: var(--game);
+        width: 32%;
+        height: 40px;
+        margin-top: 6px;
+        background-color: var(--inputs-odds);
+        color: var(--foreground-inputs-odds);
     }
 
-    #details-wrapper .details-submit {
+    .shortcut-amounts button:active,
+    .shortcut-amounts button:hover {
+        background-color: var(--highlight);
+        color: var(--foreground-highlight);
+    }
+
+    .inverted-out,
+    input.inverted-out:disabled,
+    input.inverted-out:read-only {
+        border-color: rgba(var(--foreground-inputs-odds-rgb), 0.2);
+    }
+
+    .details-submit {
+        width: 45%;
+        margin-top: 40px;
+    }
+
+    #details-wrapper .details-submit button {
         width: 100%;
+    }
+
+    .details-submit div {
+        margin-bottom: 0;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #default-content {
+            padding: 20px;
+        }
+
+        #withdrawal {
+            background: var(--background);
+            padding: 0;
+        }
+
+        .modal-body {
+            padding-top: 50px;
+        }
+
+        #details-wrapper {
+            margin-top: 0;
+        }
+
+        #details-wrapper .details-available-amount {
+            width: 100%;
+        }
+
+        #details-wrapper .details-safe-withdrawal-alert {
+            width: 100%;
+        }
+
+        #details-wrapper .key-type-select {
+            margin-top: 22px;
+        }
+
+        #details-wrapper .key-type-input {
+            width: 100%;
+        }
+
+        .details-payment-method {
+            margin-top: 28px;
+            width: 100%;
+        }
+
+        .details-payment-method select {
+            margin-top: 24px;
+        }
+
+        .details-payment-method .form-group {
+            margin-bottom: 0;
+        }
+
+        .details-amount input {
+            width: 100%;
+        }
+
+        .shortcut-amounts {
+            width: 100%;
+        }
+
+        .shortcut-amounts button {
+            background-color: var(--game);
+        }
+
+        #details-wrapper .details-submit {
+            width: 100%;
+        }
     }
 }
