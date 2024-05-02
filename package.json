@@ -322,14 +322,14 @@
         "newbets.com.br": "gulp newbets.com.br",
         "jupterbet.com": "gulp jupterbet.com",
         "jrsports.io": "gulp jrsports.io",
-        "vembet.com": "gulp vembet.com",
         "camaraobet.com": "gulp camaraobet.com",
         "7copas.bet": "gulp 7copas.bet",
         "cravei.bet": "gulp cravei.bet",
         "miamipix.net": "gulp miamipix.net",
         "betfeijo.wee.bet": "gulp betfeijo.wee.bet",
         "pixplay.io": "gulp pixplay.io",
-        "sortepix.com": "gulp sortepix.com"
+        "sortepix.com": "gulp sortepix.com",
+        "sortegol.bet": "gulp sortegol.bet"
     },
     "private": true,
     "dependencies": {

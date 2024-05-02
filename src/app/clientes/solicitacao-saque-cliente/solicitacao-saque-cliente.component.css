@@ -14,6 +14,46 @@
     align-items: flex-start;
 }
 
+.table-responsive {
+    margin-top: 50px;
+}
+
+.table {
+    color: var(--foreground);
+ }
+
+ .table thead th {
+     background-color: var(--game);
+     color: var(--foreground-game);
+     border-top: 0;
+     border-bottom: 1px solid var(--game);
+     padding: 15px 10px;
+ }
+
+ .table thead th:first-child {
+     border-left: 10px solid  var(--game);
+ }
+
+ .table .right {
+     text-align: right;
+ }
+
+ .table tbody td {
+     border-top: 0;
+     border-bottom: 1px solid var(--game);
+     vertical-align: middle;
+     padding: 15px 10px;
+
+ }
+
+ .table td.no-border{
+     border-left: 0 !important;
+ }
+
+
+.table a.info {
+    display: inline-flex;
+    align-items: center;
 #withdrawal-container h3 {
     font-size: 14px;
     font-weight: 400;
@@ -50,36 +90,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
 
-.payment-method-options a {
-    width: 96%;
-    position: relative;
-}
-
-.options-container a .radio {
-    height: 15px;
-    width: 15px;
-    border: 1px solid var(--foreground-sidebars);
-    background-color: transparent;
-    border-radius: 50%;
-    position: relative;
-}
-
-.options-container a.active .radio {
-    border: 1px solid var(--highlight);
-}
-
-.radio:after {
-    content: "";
-    position: absolute;
-    display: none;
-
-    top: 3px;
-    left: 3px;
-    width: 7px;
-    height: 7px;
+    width: 17px;
+    height: 17px;
     border-radius: 50%;
     background: var(--highlight);
 }
