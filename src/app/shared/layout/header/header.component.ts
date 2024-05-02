@@ -276,7 +276,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         });
 
         if (this.indiqueGanheHabilitado && (!this.isLoggedIn || this.isCliente) && !this.activeGameCassinoMobile()) {
-            this.layoutService.changeIndiqueGanheCardHeight(42);
+            this.layoutService.changeIndiqueGanheCardHeight(37);
         }
 
         if(!this.indiqueGanheHabilitado){
@@ -539,19 +539,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.layoutService.indiqueGanheRemovido(true);
     }
 
-    btnCardOnMouseOver() {
-        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '45px');
-        this.layoutService.changeIndiqueGanheCardHeight(45);
-    }
-
-    btnCardOnMouseOut() {
-        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
-        setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(40); }, 300);
-    }
-
     private onShowHeaderMobile() {
         this.showHeaderMobile = window.innerWidth <= 1281;
-
         this.layoutService.changeHeaderHeigh(this.showHeaderMobile ? 106 : 92);
     }
 }

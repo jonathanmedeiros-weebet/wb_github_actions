@@ -24,11 +24,12 @@
             'bonusBalance': bonusBalanceReferAndEarn ? ' em ' + (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
         }}
         
-        <a (click)="isConnected && redirectIndiqueGanhe()"
-            (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()"
-            (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()"
+        <a
+            (click)="isConnected && redirectIndiqueGanhe()"
             class="btn btn-indique-ganhe-card"
-        >{{'indique_ganhe.indicar' | translate}}</a>
+        >
+            {{'indique_ganhe.indicar' | translate}}
+        </a>
 
         <a (click)="removerIndiqueGanheCard()" type="button" class="btn-close" aria-label="Close">
             <i class="fa fa-times"></i>
