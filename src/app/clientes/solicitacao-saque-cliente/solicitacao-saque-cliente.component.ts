@@ -30,7 +30,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     rotaCompletarCadastro: string;
     labelChavePix = '';
-    paymentMethod;
+    availablePaymentMethods;
     paymentMethodSelected = '';
     errorMessage;
     selectedKeyType = 'cpf';
@@ -48,8 +48,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     isMobile = false;
     permitirQualquerChavePix = false;
     submitting;
-    metodoPagamentoDesabilitado;
-
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -82,9 +80,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.getRollovers();
 
-        this.paymentMethod = this.paramsLocais.getOpcoes().api_pagamentos;
-        this.paymentMethodSelected = this.paymentMethod;
-        this.metodoPagamentoDesabilitado = this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado;
+        this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
+        this.paymentMethodSelected = this.availablePaymentMethods[0];
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
         this.createForm();
         const user = JSON.parse(localStorage.getItem('user'));

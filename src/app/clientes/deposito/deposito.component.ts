@@ -47,7 +47,7 @@ export class DepositoComponent implements OnInit, OnDestroy {
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
-        this.hasApiPagamentos = !this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado && this.paramsLocais.getOpcoes().api_pagamentos;
+        this.hasApiPagamentos = !!this.paramsLocais.getOpcoes().available_payment_methods.length;
 
         if (!this.hasApiPagamentos && this.whatsapp) {
             this.modalidade = 'whatsapp';

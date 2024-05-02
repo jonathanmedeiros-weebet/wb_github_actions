@@ -164,7 +164,7 @@
                 </a>
             </li>
 
-            <li class="cambista-item" *ngIf="pixCambista">
+            <li class="cambista-item" *ngIf="enabledBettorPix">
                 <a [routerLink]="['/cambistas/deposito']" routerLinkActive="router-link-active">
                     <i class="fa fa-check-square icone-generico"></i>
                     <span class="regiao-nome">{{'deposito.titulo' | translate}}</span>
