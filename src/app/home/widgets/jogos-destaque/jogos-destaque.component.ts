@@ -20,18 +20,17 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     jogosBloqueados = [];
     cotacoesLocais = [];
     jogosDestaquesIds = [];
-    widthCard = 340;
+    widthCard = 300;
     showLoadingIndicator = true;
 
     customOptions: OwlOptions = {
-        loop: true,
+        loop: false,
         autoplay: true,
         rewind: true,
         margin: 10,
         dots: false,
         autoHeight: true,
         autoWidth: true,
-        center: true
     };
 
     unsub$ = new Subject();
