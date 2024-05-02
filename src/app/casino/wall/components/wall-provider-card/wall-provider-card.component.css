@@ -4,6 +4,7 @@
     border: .5px solid #333333;
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 15px 30px;
     cursor: pointer;
 }
@@ -29,7 +30,7 @@
 
 .provider-card__image{
     width: auto;
-    height: auto;
+    height: min-content;
 }
 
 @media only screen and (min-width: 1025px) {

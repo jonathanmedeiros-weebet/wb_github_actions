@@ -39,6 +39,7 @@ import { WallGamesSearchComponent } from './wall/components/wall-games-search/wa
     AngularSvgIconModule
   ],
   exports: [
+    WallSectionComponent,
     WallGameCardComponent
   ]
 })

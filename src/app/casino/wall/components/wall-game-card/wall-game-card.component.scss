@@ -21,7 +21,7 @@
     &__image {
         position: relative;
         width: 100%;
-        height: 102px;
+        height: min-content;
         border-radius: 5px;
         object-fit: cover;
     }
