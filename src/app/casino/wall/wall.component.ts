@@ -2,7 +2,7 @@ import { GameCasino } from './../../shared/models/casino/game-casino';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, Input, ViewChild } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { AuthService, ParametrosLocaisService, SidebarService } from './../../services';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginModalComponent } from '../../shared/layout/modals';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -71,6 +71,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         private casinoApi: CasinoApiService,
         private auth: AuthService,
         private router: Router,
+        private route: ActivatedRoute,
         private modalService: NgbModal,
         private sideBarService: SidebarService,
         private renderer: Renderer2,
@@ -235,6 +236,12 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         this.gameList = this.gamesCassino;
         this.gameTitle = this.translate.instant('geral.todos');
+
+        const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
+        if(providerParam) {
+            this.filterGames(providerParam, this.categorySelected, true);
+        }
+
         this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
     }
@@ -302,6 +309,12 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         this.gameList = this.gamesCassino;
         this.gameTitle = this.translate.instant('geral.todos');
+
+        const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
+        if(providerParam) {
+            this.filterGames(providerParam, this.categorySelected, true);
+        }
+        
         this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
     }

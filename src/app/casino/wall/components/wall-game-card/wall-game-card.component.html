@@ -1,24 +1,34 @@
-<div class="game-tile" [ngClass]="{'game-tile-inline': isCardInline}">
+<div class="game-card" [ngClass]="{
+    'game-card--inline': isCardInline,
+    'game-card--default': isCardDefault,
+    'game-card--filter': isCardFilter,
+}">
     <ng-container>
-        <img loading="lazy" title="{{game.gameName}}" [src]="gameImageUrl">
+        <img
+            class="game-card__image"
+            loading="lazy"
+            title="{{game.gameName}}"
+            [src]="gameImageUrl"
+        >
     </ng-container>
-    <div class="info-game">
-        <p>{{game.gameName}}</p>
-        <label>{{game.fornecedorExibicao}}</label>
+    
+    <div class="game-card__info">
+        <span class="game-card__info--title">{{game.gameName}}</span>
+        <span class="game-card__info--provider">{{game.fornecedorExibicao}}</span>
     </div>
-    <div class="game-tile-buttons">
+    <div class="game-button">
         <ng-container *ngIf="!isDemo">
             <a
                 *ngIf="game.gameDemo"
                 [routerLink]="routerLinkDemo"
-                class="btn btn-xs game-button-demo"
+                class="btn btn-xs game-button--demo"
             >
                 {{'geral.demo' | translate}}
             </a>
             <ng-container *ngIf="isLoggedIn && isCliente">
                 <a
                     [routerLink]="routerLinkReal"
-                    class="btn btn-xs game-button-play"
+                    class="btn btn-xs game-button--play"
                 >
                     {{'geral.jogar' | translate}}
                 </a>
@@ -27,7 +37,7 @@
                 <a
                     (click)="handleModalLogin()"
                     [routerLink]="routerLinkReal"
-                    class="btn btn-xs game-button-play"
+                    class="btn btn-xs game-button--play"
                 >
                     {{'geral.jogar' | translate}}
                 </a>
@@ -38,7 +48,7 @@
                 <a
                     *ngIf="game.gameDemo"
                     [routerLink]="routerLinkDemo"
-                    class="btn btn-xs game-button-demo"
+                    class="btn btn-xs game-button--demo"
                 >
                     {{'geral.demo' | translate}}
                 </a>
@@ -47,7 +57,7 @@
                 <ng-container *ngIf="isLoggedIn">
                     <a
                         [routerLink]="routerLinkDemo"
-                        class="btn btn-xs game-button-demo"
+                        class="btn btn-xs game-button--demo"
                     >
                         {{'geral.demo' | translate}}
                     </a>
@@ -55,15 +65,15 @@
                 <ng-container *ngIf="!isLoggedIn">
                     <a
                         (click)="handleModalLogin()"
-                        class="btn btn-xs game-button-demo"
+                        class="btn btn-xs game-button--demo"
                     >
                         {{'geral.demo' | translate}}
                     </a>
                 </ng-container>
             </ng-container>
             <ng-container *ngIf="!providerIsPragmatic && !providerIsSpribe && !providerIsSalsa">
-                <a class="btn btn-xs game-button-lock">
-                    <i class="fa fa-lock gameBloqueado"></i>
+                <a class="btn btn-xs game-button--lock">
+                    <i class="fa fa-lock"></i>
                 </a>
             </ng-container>
         </ng-container>

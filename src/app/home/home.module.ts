@@ -11,6 +11,7 @@ import { JogosAovivoComponent } from './widgets/jogos-aovivo/jogos-aovivo.compon
 import { JogosDestaqueComponent } from './widgets/jogos-destaque/jogos-destaque.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BilheteComponent } from './bilhete/bilhete.component';
+import { CasinoModule } from '../casino/casino.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { BilheteComponent } from './bilhete/bilhete.component';
         BilheteComponent,
     ],
     imports: [
+        CasinoModule,
         CommonModule,
         SharedModule,
         NgbModule,
