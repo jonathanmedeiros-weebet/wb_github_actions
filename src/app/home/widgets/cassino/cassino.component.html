@@ -21,26 +21,15 @@
     </div>
 </div>
 <div class="bloco" *ngIf="games.length > 0">
-    <div class="bloco-header">
-        <div class="titulo">
-            {{ title ? title : ('geral.cassino' | translate) }}
-            <nav>
-                <div class="scroll-button scroll-left disabled-scroll-button" id="cassino-left"
-                    (click)="scrollLeft('cassino')">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="scroll-button scroll-right enabled-scroll-button" id="cassino-right"
-                    (click)="scrollRight('cassino')">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-            </nav>
-        </div>
-        <div class="ver-todos" *ngIf="games.length > 5">
-            <a [routerLink]="[linkAll]">
-                {{'geral.verTodos' | translate}}  <i class="fa fa-solid fa-angle-right ml-2"></i>
-            </a>
-        </div>
-    </div>
+    <app-wall-section
+        sectionId="cassino"
+        [title]="title ? title : ('geral.cassino' | translate)"
+        [itemsQty]="games.length"
+        [seeAllRouterLink]="linkAll"
+        (onLeft)="scrollLeft('cassino')"
+        (onRight)="scrollRight('cassino')"
+    />
+
     <div class="games-container">
         <div class="more-games-fade more-games-fade-left" id="cassino-fade-left"></div>
         <div class="game-list game-list-inline" #scrollGames id="cassino-scroll" (scroll)="onScroll('cassino')">
