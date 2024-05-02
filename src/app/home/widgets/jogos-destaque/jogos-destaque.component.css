@@ -1,6 +1,6 @@
 .jogos-destaque,
 .loading-listagem {
-    margin-bottom: 30px;
+    margin-bottom: 24px;
 }
 
 .campeonato-header {
@@ -263,12 +263,6 @@ span.escudo img {
 }
 
 @media only screen and (max-width: 1024px) {
-
-    .jogos-destaque,
-    .loading-listagem {
-        margin-bottom: 24px;
-    }
-
     .slider-header {
         padding: 0 0 10px;
         font-size: 16px;
