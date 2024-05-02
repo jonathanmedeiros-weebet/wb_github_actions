@@ -23,15 +23,17 @@
             'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
             'bonusBalance': bonusBalanceReferAndEarn ? ' em ' + (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
         }}
+        
         <a (click)="isConnected && redirectIndiqueGanhe()"
             (mouseover)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOver()"
             (mouseout)="!isMobile && !removendoIndiqueGanheCard && btnCardOnMouseOut()"
             class="btn btn-indique-ganhe-card"
         >{{'indique_ganhe.indicar' | translate}}</a>
+
+        <a (click)="removerIndiqueGanheCard()" type="button" class="btn-close" aria-label="Close">
+            <i class="fa fa-times"></i>
+        </a>
     </div>
-    <a (click)="removerIndiqueGanheCard()" type="button" class="btn-close" aria-label="Close">
-        <i class="fa fa-times"></i>
-    </a>
 </div>
 
 <div class="header">
@@ -40,7 +42,7 @@
             <img [src]="LOGO" class="logo">
         </a>
     </div>
-    <nav class="desktop" *ngIf="!isMobile" #scrollMenu>
+    <nav class="desktop" *ngIf="!showHeaderMobile" #scrollMenu>
         <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
     </nav>
     <div class="side side-right">
@@ -595,7 +597,7 @@
     </div>
 </div>
 
-<nav class="mobile" *ngIf="isMobile" [ngClass]="{'centered': centered}" #scrollMenu>
+<nav class="mobile" *ngIf="showHeaderMobile" [ngClass]="{'centered': centered}" #scrollMenu>
     <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
 </nav>
 
