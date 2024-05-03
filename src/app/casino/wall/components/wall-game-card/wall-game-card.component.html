@@ -17,34 +17,8 @@
         <span class="game-card__info--provider">{{game.fornecedorExibicao}}</span>
     </div>
     <div class="game-button">
-        <ng-container *ngIf="!isDemo">
-            <a
-                *ngIf="game.gameDemo"
-                [routerLink]="routerLinkDemo"
-                class="btn btn-xs game-button--demo"
-            >
-                {{'geral.demo' | translate}}
-            </a>
-            <ng-container *ngIf="isLoggedIn && isCliente">
-                <a
-                    [routerLink]="routerLinkReal"
-                    class="btn btn-xs game-button--play"
-                >
-                    {{'geral.jogar' | translate}}
-                </a>
-            </ng-container>
-            <ng-container *ngIf="!isLoggedIn">
-                <a
-                    (click)="handleModalLogin()"
-                    [routerLink]="routerLinkReal"
-                    class="btn btn-xs game-button--play"
-                >
-                    {{'geral.jogar' | translate}}
-                </a>
-            </ng-container>
-        </ng-container>
-        <ng-container *ngIf="isDemo">
-            <ng-container *ngIf="providerIsPragmatic || providerIsSalsa">
+        <div class="game-button__container">
+            <ng-container *ngIf="!isDemo">
                 <a
                     *ngIf="game.gameDemo"
                     [routerLink]="routerLinkDemo"
@@ -52,30 +26,58 @@
                 >
                     {{'geral.demo' | translate}}
                 </a>
-            </ng-container>
-            <ng-container *ngIf="providerIsSpribe">
-                <ng-container *ngIf="isLoggedIn">
+                <ng-container *ngIf="isLoggedIn && isCliente">
                     <a
+                        [routerLink]="routerLinkReal"
+                        class="btn btn-xs game-button--play"
+                    >
+                        {{'geral.jogar' | translate}}
+                    </a>
+                </ng-container>
+                <ng-container *ngIf="!isLoggedIn">
+                    <a
+                        (click)="handleModalLogin()"
+                        [routerLink]="routerLinkReal"
+                        class="btn btn-xs game-button--play"
+                    >
+                        {{'geral.jogar' | translate}}
+                    </a>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="isDemo">
+                <ng-container *ngIf="providerIsPragmatic || providerIsSalsa">
+                    <a
+                        *ngIf="game.gameDemo"
                         [routerLink]="routerLinkDemo"
                         class="btn btn-xs game-button--demo"
                     >
                         {{'geral.demo' | translate}}
                     </a>
                 </ng-container>
-                <ng-container *ngIf="!isLoggedIn">
-                    <a
-                        (click)="handleModalLogin()"
-                        class="btn btn-xs game-button--demo"
-                    >
-                        {{'geral.demo' | translate}}
+                <ng-container *ngIf="providerIsSpribe">
+                    <ng-container *ngIf="isLoggedIn">
+                        <a
+                            [routerLink]="routerLinkDemo"
+                            class="btn btn-xs game-button--demo"
+                        >
+                            {{'geral.demo' | translate}}
+                        </a>
+                    </ng-container>
+                    <ng-container *ngIf="!isLoggedIn">
+                        <a
+                            (click)="handleModalLogin()"
+                            class="btn btn-xs game-button--demo"
+                        >
+                            {{'geral.demo' | translate}}
+                        </a>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!providerIsPragmatic && !providerIsSpribe && !providerIsSalsa">
+                    <a class="btn btn-xs game-button--lock">
+                        <i class="fa fa-lock"></i>
                     </a>
                 </ng-container>
             </ng-container>
-            <ng-container *ngIf="!providerIsPragmatic && !providerIsSpribe && !providerIsSalsa">
-                <a class="btn btn-xs game-button--lock">
-                    <i class="fa fa-lock"></i>
-                </a>
-            </ng-container>
-        </ng-container>
+        </div>
     </div>
 </div>

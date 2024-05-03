@@ -3,7 +3,7 @@
     font-size: 16px;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 
 .wall-section__group {
@@ -65,7 +65,7 @@
 
 @media only screen and (min-width: 1024px) {
     .wall-section {
-        margin: 18px 0;
+        margin-bottom: 18px;
     }
 
     .wall-section__title {

@@ -91,6 +91,8 @@ import { InformativoModalComponent } from './modals/informativo-modal/informativ
 import { JogoService } from '../services/aposta-esportiva/jogo.service';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { SkeletonComponent } from './skeleton/skeleton.component';
+import { SkeletonModule } from './skeleton/skeleton.module';
 
 @NgModule({
     imports: [
@@ -118,7 +120,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         }),
         TranslateModule,
         RecaptchaModule,
-        RecaptchaFormsModule
+        RecaptchaFormsModule,
+        SkeletonModule
     ],
     declarations: [
         MainLayoutComponent,
@@ -182,7 +185,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         CarregamentoModalComponent,
         CompatilhamentoBilheteModal,
         WelcomePageComponent,
-        CanceledBonusConfirmComponent
+        CanceledBonusConfirmComponent,
     ],
     exports: [
         MainLayoutComponent,
@@ -199,7 +202,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         BilheteEsportivoComponent,
         BannersComponent,
         WelcomePageComponent,
-        SubmenuComponent
+        SubmenuComponent,
+        SkeletonModule
     ],
     providers: [
         ApostaEsportivaService,

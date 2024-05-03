@@ -14,10 +14,11 @@
 
 .bloco {
     position: relative;
-    padding: 5px 20px;
+    padding: 0 20px 24px 20px;
     margin: 0 auto;
     width: 100%;
 }
+
 .bloco .titulo {
     text-align: left;
     font-size: 18px;
@@ -141,7 +142,7 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 16px;
 }
 
 .box-web{
@@ -172,6 +173,13 @@
     border-bottom-right-radius: 5px;
 }
 
+.skeleton-group {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
 @media only screen and (max-width: 1024px) {
     .wall-container {
         height: -webkit-fill-available;
@@ -179,7 +187,7 @@
     }
 
     .bloco {
-        padding: 10px;
+        padding: 0 10px 24px 10px
     }
 
     .game-list {
@@ -220,6 +228,7 @@
    
     .more-games-fade-right {
         background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
+        right: -2px;
     }
 
     .more-games-fade-left {

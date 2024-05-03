@@ -5,7 +5,6 @@ import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JogoService } from '../shared/services/aposta-esportiva/jogo.service';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { CardsModalidadeComponent } from './widgets/cards-modalidade/cards-modalidade.component';
 import { CassinoComponent } from './widgets/cassino/cassino.component';
 import { JogosAovivoComponent } from './widgets/jogos-aovivo/jogos-aovivo.component';
 import { JogosDestaqueComponent } from './widgets/jogos-destaque/jogos-destaque.component';
@@ -16,7 +15,6 @@ import { CasinoModule } from '../casino/casino.module';
 @NgModule({
     declarations: [
         HomeComponent,
-        CardsModalidadeComponent,
         CassinoComponent,
         JogosAovivoComponent,
         JogosDestaqueComponent,
