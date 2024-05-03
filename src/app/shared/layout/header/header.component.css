@@ -3,16 +3,18 @@
     position: relative;
     width: 100%;
     height: 37px;
-    padding: 6px 20px;
     background-color: var(--highlight);
     overflow: hidden;
     transition: height 0.3s, padding 0.3s;
 }
 
 .indique-ganhe-card-content {
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 6px;
 }
 
 .indique-ganhe-card-content:not(button) {
@@ -23,10 +25,13 @@
 .btn-indique-ganhe-card {
     background-color: var(--header);
     color: var(--highlight);
-    width: 60px;
-    height: 25px !important;
-    margin-left: 6px;
-    padding: 4px 7px !important;
+    height: 25px;
+    padding: 0 10px !important;
+    transition: width 0.3s, height 0.3s, font-size 0.3s;
+}
+
+.btn.btn-indique-ganhe-card {
+    height: 33px !important;
     transition: width 0.3s, height 0.3s, font-size 0.3s;
 }
 
@@ -57,6 +62,7 @@
     width: 100%;
     height: 92px;
     display: flex;
+    justify-content: space-between;
     background-color: var(--header);
     color: var(--foreground-header);
 }
@@ -424,21 +430,36 @@ body .change-theme {
 
 @media only screen and (min-width: 1025px) {
     .btn-indique-ganhe-card:hover {
-        width: 80px;
-        height: 33px !important;
-        font-size: 15px;
+        padding: 0 15px !important;
+    }
+
+    .btn.btn-indique-ganhe-card:hover {
+        height: 30px !important;
+        font-size: 14px;
+    }
+
+    .btn.btn-indique-ganhe-card {
+        height: 25px !important;
     }
 }
 
-@media only screen and (max-width: 1024px) {
-    .indique-ganhe-card {
-        height: 50px;
+@media only screen and (max-width: 1281px) {
+    nav {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: auto;
+        height: 39px;
+        justify-content: start;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25) inset;
+        background-color: var(--header);
     }
 
-    .indique-ganhe-card .btn-close {
-        right: 20px;
-        top: 12px;
-        align-items: normal;
+    .category {
+        height: 100%;
+    }
+
+    .category a {
+        font-size: 11px; /* ajuste fonte */
     }
 
     .header {
@@ -447,14 +468,69 @@ body .change-theme {
         display: flex;
     }
 
-    nav {
-        background-color: var(--header);
+    .deposit-shortcut a {
+        height: 30px !important;
+        padding: 6px 11px;
+        font-size: 10px;
+    }
+
+    .menu-conta {
+        margin-right: 8px;
+    }
+
+    .menu-perfil {
+        height: 30px;
+        padding: 0 9px;
+    }
+
+    .menu-perfil div.user-card {
+        padding-right: 8px;
+    }
+
+    .menu-perfil .nome-usuario {
+        display: none;
+    }
+
+    .menu-perfil .saldo-usuario .olhinho {
+        display: none;
+    }
+
+    .menu-perfil .saldo-usuario span {
+        font-size: 10px;
+    }
+
+    .menu-perfil div.user-icon i {
+        font-size: 20px;
+    }
+
+    .logo {
+        max-height: 30px;
+        max-width: calc(40vw - 25px);
+    }
+
+    .btn {
+        white-space: nowrap;
+        padding: 5px 10px;
+
+        height: 38px;
+    }
+
+    .indique-ganhe-card .btn-close {
+        right: 20px;
+        top: 5px;
+        align-items: normal;
     }
 
     .saldos-item {
         text-align: center;
     }
 
+    .btn.mr-4 {
+        margin-right: 10px !important;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
     .dropdown-menu {
         height: 100vh;
         max-height: 100%;
@@ -512,39 +588,6 @@ body .change-theme {
         justify-content: flex-end;
     }
 
-    .logo {
-        max-height: 30px;
-        max-width: calc(40vw - 25px);
-    }
-
-    .btn {
-        white-space: nowrap;
-        padding: 5px 10px;
-
-        height: 38px !important;
-    }
-
-    .btn.mr-4 {
-        margin-right: 10px !important;
-    }
-
-    nav {
-        width: 100%;
-        max-width: 100vw;
-        overflow-x: auto;
-        height: 39px;
-        justify-content: start;
-        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25) inset;
-    }
-
-    .category {
-        height: 100%;
-    }
-
-    .category a {
-        font-size: 11px; /* ajuste fonte */
-    }
-
     .side {
         justify-content: start;
     }
@@ -560,41 +603,6 @@ body .change-theme {
 
     .side-left {
         padding-left: 10px;
-    }
-
-    .deposit-shortcut a {
-        height: 30px !important;
-        padding: 6px 11px;
-        font-size: 10px;
-    }
-
-    .menu-conta {
-        margin-right: 8px;
-    }
-
-    .menu-perfil {
-        height: 30px;
-        padding: 0 9px;
-    }
-
-    .menu-perfil div.user-card {
-        padding-right: 8px;
-    }
-
-    .menu-perfil .nome-usuario {
-        display: none;
-    }
-
-    .menu-perfil .saldo-usuario .olhinho {
-        display: none;
-    }
-
-    .menu-perfil .saldo-usuario span {
-        font-size: 10px;
-    }
-
-    .menu-perfil div.user-icon i {
-        font-size: 20px;
     }
 }
 
