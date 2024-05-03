@@ -1,6 +1,5 @@
 <div class="home-container" [ngStyle]="{'max-height': 'calc(100vh - ' +headerHeight+'px)'}">
     <app-banners pagina="home"/>
-    <app-cards-modalidade class="widgets" *ngIf="showModalidades"/>
     <ng-container *ngFor="let widget of widgets">
         <app-cassino class="widgets" linkAll="/casino" [games]="gamesPopulares" *ngIf="widget.nome == 'Cassino'" [showLoadingIndicator]="loadingCassino"/>
         <app-cassino class="widgets" linkAll="/live-casino" [games]="gamesPopularesAoVivo" [title]="'geral.cassinoAoVivo' | translate" *ngIf="widget.nome == 'Cassino Ao Vivo'" [showLoadingIndicator]="loadingCassinoAoVivo"/>
