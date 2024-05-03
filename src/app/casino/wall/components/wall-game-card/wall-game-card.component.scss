@@ -21,6 +21,8 @@
     &__image {
         position: relative;
         width: 100%;
+        min-height: 105px;
+        background-color: #00000050;
         height: min-content;
         border-radius: 5px;
         object-fit: cover;
@@ -151,6 +153,10 @@
     .game-card--filter .game-card__info {
         max-width: 200px;
     }
+
+    .game-card__image {
+        min-height: 144px;
+    }
 }
 
 @media only screen and (min-width: 1025px) {
@@ -163,20 +169,18 @@
     
             min-width: 216px;
             max-width: 216px;
-            min-height: 155px;
         }
 
         &--default {
             width: calc((100vw / 6) - 26px);
-            min-height: 155px;
         }
 
         &--filter {
             width: 100%;
-            min-height: 155px;
         }
 
         &__image {
+            min-height: 155px;
             height: auto;
         }
     }
