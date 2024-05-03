@@ -40,6 +40,11 @@ export class LayoutService {
 		this.recalculateHeaderHeight();
 	}
 
+	changeHeaderHeigh(height: number): void {
+		this.defaultHeaderHeight = height;
+		this.recalculateHeaderHeight();
+	}
+
 	private recalculateHeaderHeight(): void {
 		this.currentIndiqueGanheCardHeight
 			.subscribe(curIndiqueGanheCardHeight => {
