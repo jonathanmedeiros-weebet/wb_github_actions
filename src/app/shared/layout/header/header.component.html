@@ -23,7 +23,7 @@
             'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
             'bonusBalance': bonusBalanceReferAndEarn ? (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
         }}
-        
+
         <a
             (click)="isConnected && redirectIndiqueGanhe()"
             class="btn btn-indique-ganhe-card"
@@ -625,7 +625,7 @@
         </div>
         <ng-container *ngIf="isLoggedIn">
             <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
-                <a [routerLink]="['/casino/pb/play/real/170000/parlaybay']" routerLinkActive="active">
+                <a [routerLink]="['/pb/play/real/170000/parlaybay']" routerLinkActive="active">
                     <span>PARLAYBAY</span>
                 </a>
             </div>
