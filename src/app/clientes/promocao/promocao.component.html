@@ -17,7 +17,7 @@
                 <p style="font-size: 12px; margin-bottom: 0;">{{ 'geral.opcaoPromocao' | translate }}</p>
             </div>
             <div class="tabs">
-                <a [ngClass]="tabSelected == 'bonus' ? 'active' : ''" 
+                <a [ngClass]="tabSelected == 'bonus' ? 'active' : ''"
 					(click)="changeTab('bonus')">{{'geral.bonus' | translate}} <span class="circle">{{ rollovers.length }}</span></a>
                 <a [ngClass]="tabSelected == 'rodada-gratis' ? 'active' : ''"
                 	(click)="changeTab('rodada-gratis')">{{'geral.rodadaGratis' | translate}} <span class="circle">{{ rodadas.length }}</span></a>
@@ -113,7 +113,12 @@
                                             {{rollover.valorMeta | currency}}
                                         </td>
                                         <td class="custom-td">
-                                            {{rollover.cotacaoMinSimples}} (Simples) / {{rollover.cotacaoMinMultipla}} (Múltipla)
+                                            <ng-container *ngIf="rollover.modalidade == 'esportivo' else noCotacoes">
+                                                {{rollover.cotacaoMinSimples}} (Simples) / {{rollover.cotacaoMinMultipla}} (Múltipla)
+                                            </ng-container>
+                                            <ng-template #noCotacoes>
+                                                --
+                                            </ng-template>
                                         </td>
                                         <td class="custom-td">
                                             {{rollover.modalidade}}
@@ -141,7 +146,7 @@
                             <table class="table" >
                                 <thead>
                                 <tr>
-        
+
                                 </tr>
                                 </thead>
                                 <tbody *ngIf="!showLoading">
@@ -255,7 +260,7 @@
                                             <td style="text-align: center; max-width: 80px;">
                                                 <ng-container>
                                                     <button class="btn btn-custom btn-jogar-rodada"
-                                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''" 
+                                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
                                                         (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
                                                 </ng-container>
                                             </td>
@@ -264,7 +269,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </ng-container>   
+                    </ng-container>
                     <ng-container *ngIf="mobileScreen">
                         <div class="count-rodadas-mobile" *ngIf="rodadasListagem.length">
                             <p>{{ 'geral.resultadosEncontradosComQuantidade' | translate: {quantidade: rodadasListagem.length} }}</p>
@@ -276,14 +281,14 @@
                                 <p class="info-rodada">{{ 'geral.quantidade' | translate }}: <span>{{ rodada.quantidade }}</span></p>
                                 <p class="info-rodada">{{ 'geral.jogo' | translate }}: <span>{{ rodada.gameName }}</span></p>
                                 <div class="button-rodada">
-                                    <button class="btn btn-custom btn-jogar-rodada" 
+                                    <button class="btn btn-custom btn-jogar-rodada"
                                         [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
                                         (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
                                     </button>
                                 </div>
                             </div>
                         </ng-container>
-                    </ng-container>                 
+                    </ng-container>
                 </ng-container>
             </div>
         </div>
