@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
         private layoutService: LayoutService,
         private casinoApi: CasinoApiService,
         private homeService: HomeService,
-        private el: ElementRef,
         private cd: ChangeDetectorRef
     ) { }
 
