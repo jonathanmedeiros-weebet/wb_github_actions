@@ -221,6 +221,7 @@
    
     .more-games-fade-right {
         background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
+        right: -2px;
     }
 
     .more-games-fade-left {

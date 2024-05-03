@@ -73,12 +73,6 @@
         .game-button--demo {
             display: flex;
         }
-
-        .game-button--play,
-        .game-button--lock,
-        .game-button--demo {
-            pointer-events: unset;
-        }
     }
 }
 
@@ -135,6 +129,11 @@
     &--lock i {
         color: var(--highlight);
     }
+}
+
+.game-button:hover .game-button--play,
+.game-button:hover .game-button--demo {
+    pointer-events: unset;
 }
 
 .internal .game-card {
