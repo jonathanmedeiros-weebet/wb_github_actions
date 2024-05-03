@@ -173,6 +173,13 @@
     border-bottom-right-radius: 5px;
 }
 
+.skeleton-group {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
 @media only screen and (max-width: 1024px) {
     .wall-container {
         height: -webkit-fill-available;
