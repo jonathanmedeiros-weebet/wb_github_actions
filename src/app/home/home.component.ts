@@ -4,6 +4,7 @@ import { HomeService } from '../shared/services/home.service';
 import { LayoutService } from '../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ParametrosLocaisService } from '../services';
 
 @Component({
     selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
     qtdItens = 0;
     modalRef;
     headerHeight = 92;
+    liveFootballIsActive: boolean;
 
     loadingCassino = true;
     loadingCassinoAoVivo = true;
@@ -31,7 +33,8 @@ export class HomeComponent implements OnInit {
         private layoutService: LayoutService,
         private casinoApi: CasinoApiService,
         private homeService: HomeService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private paramsService: ParametrosLocaisService
     ) { }
 
     ngOnInit(): void {
@@ -52,5 +55,7 @@ export class HomeComponent implements OnInit {
                 this.headerHeight = curHeaderHeight;
                 this.cd.detectChanges();
             });
+
+        this.liveFootballIsActive = this.paramsService.futebolAoVivoAtivo();
     }
 }

@@ -3,7 +3,7 @@
     <ng-container *ngFor="let widget of widgets">
         <app-cassino class="widgets" linkAll="/casino" [games]="gamesPopulares" *ngIf="widget.nome == 'Cassino'" [showLoadingIndicator]="loadingCassino"/>
         <app-cassino class="widgets" linkAll="/live-casino" [games]="gamesPopularesAoVivo" [title]="'geral.cassinoAoVivo' | translate" *ngIf="widget.nome == 'Cassino Ao Vivo'" [showLoadingIndicator]="loadingCassinoAoVivo"/>
-        <app-jogos-aovivo class="widgets" *ngIf="widget.nome == 'Jogos Ao Vivo'"/>
+        <app-jogos-aovivo class="widgets" *ngIf="liveFootballActive && widget.nome == 'Jogos Ao Vivo'"/>
         <app-jogos-destaque class="widgets" *ngIf="widget.nome == 'Jogos Destaque'"/>
     </ng-container>
     <app-footer/>
