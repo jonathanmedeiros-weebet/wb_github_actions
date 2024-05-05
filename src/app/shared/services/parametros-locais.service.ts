@@ -144,7 +144,7 @@ export class ParametrosLocaisService {
     }
 
     aoVivoAtivo() {
-        return this.parametrosLocais ? this.parametrosLocais.opcoes.aovivo : null;
+        return (this.futebolAoVivoAtivo || this.basqueteAoVivoAtivo);
     }
 
     futebolAoVivoAtivo() {
