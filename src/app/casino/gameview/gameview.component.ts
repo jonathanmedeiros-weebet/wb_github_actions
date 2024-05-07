@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {AuthService, MenuFooterService, MessageService} from '../../services';
+import {AuthService, MenuFooterService, MessageService, UtilsService} from '../../services';
 import {interval} from 'rxjs';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
@@ -41,6 +41,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private menuFooterService: MenuFooterService,
         private messageService: MessageService,
         private modalService: NgbModal,
+        private utilsService: UtilsService,
         @Inject(DOCUMENT) private document: any
     ) {
     }
@@ -51,7 +52,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.isMobile = 1;
         }
 
-        if(this.getMobileOperatingSystem() == 'ios'){
+        if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
         }
 
@@ -196,20 +197,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             centered: true,
             size: 'xl',
         });
-    }
-
-    getMobileOperatingSystem() {
-        let userAgent = navigator.userAgent ;
-
-        if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ){
-            return 'ios';
-        }
-        else if( userAgent.match( /Android/i ) ){
-            return 'android';
-        }
-        else{
-            return 'unknown';
-        }
     }
 
     appendScriptGalaxsys(){
