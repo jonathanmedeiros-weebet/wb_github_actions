@@ -39,7 +39,7 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
 
     fullscreen = false;
     forceFullscreen = false;
-    forcedFullscreen = false;
+    forcedFullscreen = true;
 
     constructor(
         private loteriaPopularApi: LoteriaPopularService,
