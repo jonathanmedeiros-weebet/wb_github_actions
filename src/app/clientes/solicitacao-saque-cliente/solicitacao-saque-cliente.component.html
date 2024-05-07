@@ -123,7 +123,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="hide-desktop details-payment-method">
+                                        <div class="hide-desktop details-payment-method" [hidden]="!availablePaymentMethods.length">
                                             <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                                             <div class="form-group">
                                                 <select formControlName="paymentMethod" type="text" class="form-control inverted-out"
