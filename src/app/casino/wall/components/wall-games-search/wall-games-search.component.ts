@@ -134,6 +134,7 @@ export class WallGamesSearchComponent implements OnInit {
   public handleFocusIn() {
     this.showOrHideHeaderMobile(false);
     this.showResults = true;
+    setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 500);
   }
 
   public handleClose() {
