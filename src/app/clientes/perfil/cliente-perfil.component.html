@@ -53,8 +53,15 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input type="text" formControlName="telefone" placeholder="(00)00000-0000"
-                                        mask="(00)00000-0000" class="form-control inverted-out" [dropSpecialCharacters]="false">
+                                    <input
+                                        type="text"
+                                        formControlName="telefone"
+                                        placeholder="(00)00000-0000"
+                                        mask="(00)00000-0000"
+                                        class="form-control inverted-out"
+                                        [dropSpecialCharacters]="false"
+                                        [validation]="false"
+                                    >
                                     <app-error-msg [control]="form.get('telefone')"></app-error-msg>
                                 </div>
                             </div>
@@ -80,8 +87,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <input type="text" formControlName="cep" placeholder="00000-000" mask="00000-000"
-                                        class="form-control inverted-out" (change)="buscarPorCep($event)">
+                                    <input
+                                        type="text"
+                                        formControlName="cep"
+                                        placeholder=""
+                                        mask="00000-000"
+                                        class="form-control inverted-out"
+                                        [validation]="false"
+                                    >
                                     <app-error-msg [control]="form.get('cep')"></app-error-msg>
                                 </div>
                             </div>
@@ -172,7 +185,11 @@
                                     <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
                                         {{'geral.cancelar' | translate}}
                                     </button>
-                                    <button class="btn btn-custom w-150" type="submit">
+                                    <button
+                                        class="btn btn-custom w-150"
+                                        type="submit"
+                                        [disabled]="form.invalid"
+                                    >
                                         {{'geral.atualizar' | translate}}
                                     </button>
                                 </div>
