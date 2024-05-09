@@ -161,7 +161,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         };
 
 
-        if (this.sportId == 48242) {
+        if (this.sportId == sportsIds.BASKETBALL_ID) {
             this.campeonatoService.getCampeonatosPorRegioes(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(

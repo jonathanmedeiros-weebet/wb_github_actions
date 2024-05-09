@@ -138,12 +138,12 @@
             </div>
 
             <div class="esporte" *ngIf="basqueteAoVivohabilitado && qtdJogosBasquete > 0">
-                <div class="esporte-header" (click)="toggleEsporte(48242)" [ngClass]="{'collapsed-header': !esporteAberto(48242)}">
+                <div class="esporte-header" (click)="toggleEsporte(basketballId)" [ngClass]="{'collapsed-header': !esporteAberto(basketballId)}">
                     <span class="column-left">
                         <span class="wbicon icon-basquete"></span>
                         <span class="esporte-nome">{{'submenu.basquete' | translate}}</span>
                     </span>
-                    <span *ngIf="esporteAberto(48242); else downIcon">
+                    <span *ngIf="esporteAberto(basketballId); else downIcon">
                             <i class="fa fa-angle-up"></i>
                         </span>
                     <ng-template #downIcon>
@@ -152,9 +152,9 @@
                             </span>
                     </ng-template>
                 </div>
-                <div class="campeonatos" [hidden]="!esporteAberto(48242)">
+                <div class="campeonatos" [hidden]="!esporteAberto(basketballId)">
                     <ng-container
-                        [ngTemplateOutlet]="campeonatoTemplate" [ngTemplateOutletContext]="{sportId: 48242}">
+                        [ngTemplateOutlet]="campeonatoTemplate" [ngTemplateOutletContext]="{sportId: basketballId}">
                     </ng-container>
                 </div>
             </div>
