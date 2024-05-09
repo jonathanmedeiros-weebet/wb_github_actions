@@ -143,8 +143,8 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.loteriaPopular : null;
     }
 
-    aoVivoAtivo() {
-        return this.parametrosLocais ? this.parametrosLocais.opcoes.aovivo : null;
+    aoVivoAtivo(): boolean {
+        return (this.futebolAoVivoAtivo() || this.basqueteAoVivoAtivo());
     }
 
     futebolAoVivoAtivo() {

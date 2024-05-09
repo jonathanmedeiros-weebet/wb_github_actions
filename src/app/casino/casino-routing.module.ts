@@ -111,7 +111,7 @@ const routes: Routes = [
                 component: CasinoWrapperComponent,
                 children: [
                      {
-                        path: 'play/:game_mode/:game_id/:game_fornecedor',
+                        path: ':game_fornecedor/:game_id',
                         component: GameviewComponent,
                         canActivate: [CasinoGuard]
                     }

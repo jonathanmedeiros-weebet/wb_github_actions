@@ -27,7 +27,7 @@
 }
 
 #payment-method-column h3,
-#payment-method-column > div {
+#payment-method-column>div {
     width: 75%;
 }
 
@@ -157,20 +157,6 @@
     font-weight: 600;
 }
 
-#sautopay-alert {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 66%;
-    margin-top: 20px;
-    padding: 12px 10px 9px;
-}
-
-#sautopay-alert .sautopay-alert-text {
-    flex: 1;
-}
-
 #details-wrapper .details-safe-withdrawal-alert {
     width: 74%;
     margin-top: 28px;
@@ -219,7 +205,7 @@
 .details-amount input {
     text-align: left !important;
     width: 66%;
-    margin: 12px 0 8px;
+    margin: 12px 0 8px
 }
 
 .details-amount label {

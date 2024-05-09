@@ -8,127 +8,124 @@
         'virtual-container': isVirtualPage
     }"
 >
-    <app-banners pagina="cassino"></app-banners>
-
-    <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
-
-    <div *ngIf="showLoadingIndicator" class="wall-inner">
-        <div class="bloco">
-            <div class="ssc-square" style="height: 47px; width: 200px; margin-top: 20px"></div>
+    <ng-container *ngIf="showLoadingIndicator; else elseCasinoPage;">
+        <div class="bloco skeleton-group">
+            <app-skeleton type="banner"/>
+            <app-skeleton type="casino-filter-bar"/>
+            <app-skeleton type="provider"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
         </div>
-        <div class="bloco" style="display: flex; flex-wrap: wrap;">
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
+    </ng-container>
+
+    <ng-template #elseCasinoPage>
+        <app-banners pagina="cassino"></app-banners>
+
+        <div class="bloco filters" *ngIf="showFilterBox">
+            <app-wall-games-search
+                [games]="gamesCassino"
+                [featuredGames]="gamesDestaque"
+                [providers]="cassinoFornecedores"
+                [isCliente]="isCliente"
+                [isLoggedIn]="isLoggedIn"
+                (openModalLogin)="abrirModalLogin()"
+                (onFilterGames)="filterGames($event, categorySelected, true)"
+            />
+
+            <app-submenu
+                [category]="subMenuCategory"
+                version="v2"
+                [menuItemSelected]="categorySelected"
+                (onClick)="filterGames(gameFornecedor, $event, false)"
+            />
         </div>
-    </div>
 
-    <div class="bloco filters" *ngIf="showFilterBox">
-        <app-wall-games-search
-            [games]="gamesCassino"
-            [featuredGames]="gamesDestaque"
-            [providers]="cassinoFornecedores"
-            [isCliente]="isCliente"
-            [isLoggedIn]="isLoggedIn"
-            (openModalLogin)="abrirModalLogin()"
-            (onFilterGames)="filterGames($event, categorySelected, true)"
-        />
+        <div class="bloco" *ngIf="!this.isVirtualPage">
+            <app-wall-section
+                sectionId="providers"
+                [title]="'geral.provedores' | translate"
+                [itemsQty]="cassinoFornecedores.length"
+                (onSeeAll)="openFiltroFornecedores()"
+                (onLeft)="scrollLeft('providers')"
+                (onRight)="scrollRight('providers')"
+            />
 
-        <app-submenu
-            [category]="subMenuCategory"
-            version="v2"
-            [menuItemSelected]="categorySelected"
-            (onClick)="filterGames(gameFornecedor, $event, false)"
-        />
-    </div>
-
-    <div class="bloco" *ngIf="!this.isVirtualPage">
-        <app-wall-section
-            sectionId="providers"
-            [title]="'geral.provedores' | translate"
-            [itemsQty]="cassinoFornecedores.length"
-            (onSeeAll)="openFiltroFornecedores()"
-            (onLeft)="scrollLeft('providers')"
-            (onRight)="scrollRight('providers')"
-        />
-
-        <div class="provider-container">
-            <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
-                <app-wall-provider-card
-                    *ngFor="let fornecedor of cassinoFornecedores"
-                    [data]="fornecedor"
-                    [selected]="gameFornecedor == fornecedor.gameFornecedor"
-                    (onClick)="filterGames($event, categorySelected, true)"
-                />
-            </div>
-        </div>
-    </div>
-
-    <div class="wall-inner" *ngIf="!showLoadingIndicator && isHomeCassino; else cassinoGameList">
-        <ng-container *ngFor="let section of gamesSection">
-            <div class="bloco" *ngIf="section.show">
-                <app-wall-section
-                    [sectionId]="section.id"
-                    [title]="section.title"
-                    [itemsQty]="section.gameList.length"
-                    (onSeeAll)="filterGames($event, section.id, true)"
-                    (onLeft)="scrollLeft(section.id)"
-                    (onRight)="scrollRight(section.id)"
-                />
-
-                <div class="games-container">
-                    <ng-container *ngIf="section.gameList.length; else elseWithoutGames">
-                        <div class="more-games-fade more-games-fade-left" id="{{ section.id }}-fade-left"></div>
-                        <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
-                            <app-wall-game-card
-                                *ngFor="let game of section.gameList"
-                                [game]="game"
-                                [blink]="blink"
-                                [isLoggedIn]="isLoggedIn"
-                                [isDemo]="isDemo"
-                                [isCliente]="isCliente"
-                                (openModalLogin)="abrirModalLogin()"
-                            />
-                        </div>
-                        <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
-                    </ng-container>
-                    <ng-template #elseWithoutGames>
-                        <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
-                    </ng-template>
+            <div class="provider-container">
+                <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
+                    <app-wall-provider-card
+                        *ngFor="let fornecedor of cassinoFornecedores"
+                        [data]="fornecedor"
+                        [selected]="gameFornecedor == fornecedor.gameFornecedor"
+                        (onClick)="filterGames($event, categorySelected, true)"
+                    />
                 </div>
             </div>
-        </ng-container>
-    </div>
-
-    <app-footer [container]="listagem"></app-footer>
-
-    <ng-template #cassinoGameList>
-        <div class="bloco">
-            <div class="titulo" *ngIf="gameList && gameList.length">
-                {{gameTitle | titlecase}}
-            </div>
-            <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">
-                {{'geral.nenhumJogoEncontrado' | translate}}!
-            </div>
-            <div class="game-grid">
-                <app-wall-game-card
-                    *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
-                    [game]="game"
-                    [blink]="blink"
-                    [isLoggedIn]="isLoggedIn"
-                    [isDemo]="isDemo"
-                    [isCliente]="isCliente"
-                    [isCardInline]="false"
-                    (openModalLogin)="abrirModalLogin()"
-                />
-            </div>
         </div>
+
+        <div class="wall-inner" *ngIf="isHomeCassino; else cassinoGameList">
+            <ng-container *ngFor="let section of gamesSection">
+                <div class="bloco" *ngIf="section.show">
+                    <app-wall-section
+                        [sectionId]="section.id"
+                        [title]="section.title"
+                        [itemsQty]="section.gameList.length"
+                        (onSeeAll)="filterGames($event, section.id, true)"
+                        (onLeft)="scrollLeft(section.id)"
+                        (onRight)="scrollRight(section.id)"
+                    />
+
+                    <div class="games-container">
+                        <ng-container *ngIf="section.gameList.length; else elseWithoutGames">
+                            <div class="more-games-fade more-games-fade-left" id="{{ section.id }}-fade-left"></div>
+                            <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
+                                <app-wall-game-card
+                                    *ngFor="let game of section.gameList"
+                                    [game]="game"
+                                    [blink]="blink"
+                                    [isLoggedIn]="isLoggedIn"
+                                    [isDemo]="isDemo"
+                                    [isCliente]="isCliente"
+                                    cardType="inline"
+                                    (openModalLogin)="abrirModalLogin()"
+                                />
+                            </div>
+                            <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
+                        </ng-container>
+                        <ng-template #elseWithoutGames>
+                            <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+                        </ng-template>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <app-footer [container]="listagem"></app-footer>
+
+        <ng-template #cassinoGameList>
+            <div class="bloco">
+                <div class="titulo" *ngIf="gameList && gameList.length">
+                    {{gameTitle | titlecase}}
+                </div>
+                <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">
+                    {{'geral.nenhumJogoEncontrado' | translate}}!
+                </div>
+                <div class="game-grid">
+                    <app-wall-game-card
+                        *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
+                        [game]="game"
+                        [blink]="blink"
+                        [isLoggedIn]="isLoggedIn"
+                        [isDemo]="isDemo"
+                        [isCliente]="isCliente"
+                        (openModalLogin)="abrirModalLogin()"
+                    />
+                </div>
+            </div>
+        </ng-template>
     </ng-template>
 </div>

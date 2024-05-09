@@ -108,6 +108,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isDemo = location.host === 'demo.wee.bet';
     aoVivoAtivo;
 
+    public showHeaderMobile: boolean = false;
+
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         if (window.innerWidth > 1025) {
@@ -117,8 +119,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             this.menuWidth = window.innerWidth;
             this.isMobile = true;
         }
-        this.cd.detectChanges();
 
+        this.onShowHeaderMobile();
+        this.cd.detectChanges();
         this.checkCentering();
     }
 
@@ -236,6 +239,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             this.isMobile = true;
         }
 
+        this.onShowHeaderMobile();
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
         this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
@@ -315,7 +319,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     logout() {
         this.auth.logout();
         this.getUsuario();
-        // this.atualizarTiposAposta();
     }
 
     getUsuario() {
@@ -543,13 +546,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.layoutService.indiqueGanheRemovido(true);
     }
 
-    btnCardOnMouseOver() {
-        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '45px');
-        this.layoutService.changeIndiqueGanheCardHeight(45);
-    }
-
-    btnCardOnMouseOut() {
-        this.renderer.setStyle(this.indiqueGanheCard.nativeElement, 'height', '37px');
-        setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(37); }, 300);
+    private onShowHeaderMobile() {
+        this.showHeaderMobile = window.innerWidth <= 1281;
+        this.layoutService.changeHeaderHeigh(this.showHeaderMobile ? 106 : 92);
     }
 }

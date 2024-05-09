@@ -1679,6 +1679,7 @@ gulp.task('nacionalbet.club', function (done) {
         host: "nacionalbet.club",
         banca: "NACIONAL BET",
         styles: "",
+        description: "A melhor maneira de fazer apostas online nos seus esportes favoritos e ganhar até R$3000 em bônus ao se registrar. Aproveite a experiência da NacionalBET e as melhores ODDS. Site de apostas 100% confiável. Faça sua aposta!",
     });
 });
 
@@ -3062,15 +3063,6 @@ gulp.task('jrsports.io', function (done) {
     });
 });
 
-gulp.task('vembet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "vembet.com",
-        banca: "VEM BET",
-        styles: ""
-    });
-});
-
 gulp.task('camaraobet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -3132,5 +3124,14 @@ gulp.task('sortepix.com', function (done) {
         banca: "SORTE PIX",
         styles: "",
         dominioTemp: "sortepix.net"
+    });
+});
+
+gulp.task('sortegol.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sortegol.bet",
+        banca: "SORTE GOL",
+        styles: ""
     });
 });

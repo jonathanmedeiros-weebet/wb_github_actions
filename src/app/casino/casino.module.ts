@@ -37,6 +37,10 @@ import { WallGamesSearchComponent } from './wall/components/wall-games-search/wa
     TranslateModule,
     NgxPaginationModule,
     AngularSvgIconModule
+  ],
+  exports: [
+    WallSectionComponent,
+    WallGameCardComponent
   ]
 })
 export class CasinoModule { }

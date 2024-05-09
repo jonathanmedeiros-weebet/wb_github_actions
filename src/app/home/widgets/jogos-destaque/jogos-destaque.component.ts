@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,18 +20,17 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     jogosBloqueados = [];
     cotacoesLocais = [];
     jogosDestaquesIds = [];
-    widthCard = 340;
+    widthCard = 300;
     showLoadingIndicator = true;
 
     customOptions: OwlOptions = {
-        loop: true,
+        loop: false,
         autoplay: true,
         rewind: true,
         margin: 10,
         dots: false,
         autoHeight: true,
         autoWidth: true,
-        center: true
     };
 
     unsub$ = new Subject();

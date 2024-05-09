@@ -95,6 +95,10 @@ export class WallGamesSearchComponent implements OnInit {
     return this.router.url.split('/')[1];
   }
 
+  get isMobile(): boolean {
+    return window.innerWidth <= 1025
+  }
+
   ngOnInit(): void {
     this.lastGamesSearch = this.getLastGamesSearch()
 
@@ -128,12 +132,25 @@ export class WallGamesSearchComponent implements OnInit {
   }
 
   public handleFocusIn() {
+    this.showOrHideHeaderMobile(false);
     this.showResults = true;
+    setTimeout(() => window.scrollTo({top: 0, behavior: 'smooth'}), 500);
   }
 
   public handleClose() {
+    this.showOrHideHeaderMobile(true);
     this.showResults = false;
     this.handleClear();
+  }
+
+  private showOrHideHeaderMobile(show: boolean = true) {
+    if(this.isMobile) {
+      const headerElement = document.querySelector('.header') as HTMLElement;
+      const subMenuMobileElement = document.querySelector('nav.mobile') as HTMLElement;
+
+      headerElement.style.display = show ? 'flex' : 'none'
+      subMenuMobileElement.style.display = show ? 'flex' : 'none';
+    }
   }
 
   public handleModalLogin() {

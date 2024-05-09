@@ -125,7 +125,8 @@
                     <div class="time-a">
                         <div class="time-a-nome">
                             <span *ngIf="jogo?.time_a_img; else defaulImageA">
-                                <img src="https://cdn.wee.bet/img/times/v2/{{jogo.time_a_img}}.png" size="m">
+                                <img *ngIf="jogo?.sport_id == 1" src="https://cdn.wee.bet/img/times/m/{{jogo.time_a_img}}.png" size="m">
+                                <img *ngIf="jogo?.sport_id == 48242" src="https://cdn.wee.bet/img/times/v2/{{jogo.time_a_img}}.png" size="m">
                             </span>
                             <ng-template #defaulImageA class="escudo">
                                 <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
@@ -133,6 +134,24 @@
                             <br>
                             <div class="time-nome">
                                 {{jogo?.time_a_nome}}
+                            </div>
+                            <div class="game-stats" *ngIf="jogo?.sport_id == 1">
+                                <div class="game-stats-item">
+                                    <div class="game-card">
+                                        <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 0.919525V7.27988M12.8249 13.6402H6.91245M1 7.27988V13.6402H6.91245M1 7.27988V7.27988C3.77463 8.23954 5.92692 10.4624 6.79656 13.2666L6.91245 13.6402" stroke="white" stroke-width="1.88461"/>
+                                        </svg>
+                                    </div>
+                                    {{ jogo?.stats.casa_escanteios }}
+                                </div>
+                                <div class="game-stats-item">
+                                    <div class="game-card red-card"></div>
+                                    {{ jogo?.stats.casa_cartoes_vermelho }}
+                                </div>
+                                <div class="game-stats-item">
+                                    <div class="game-card yellow-card"></div>
+                                    {{ jogo?.stats.casa_cartoes_amarelo }}
+                                </div>                            
                             </div>
                         </div>
                     </div>
@@ -146,7 +165,8 @@
                     <div class="time-b">
                         <div class="time-b-nome">
                             <span *ngIf="jogo?.time_b_img; else defaulImageB">
-                                <img src="https://cdn.wee.bet/img/times/v2/{{jogo.time_b_img}}.png" size="m">
+                                <img *ngIf="jogo?.sport_id == 1" src="https://cdn.wee.bet/img/times/m/{{jogo.time_b_img}}.png" size="m">
+                                <img *ngIf="jogo?.sport_id == 48242" src="https://cdn.wee.bet/img/times/v2/{{jogo.time_b_img}}.png" size="m">
                             </span>
                             <ng-template #defaulImageB class="escudo">
                                 <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
@@ -154,6 +174,24 @@
                             <br>
                             <div class="time-nome">
                                 {{jogo?.time_b_nome}}
+                            </div>
+                            <div class="game-stats" *ngIf="jogo?.sport_id == 1">
+                                <div class="game-stats-item">
+                                    <div class="game-card">
+                                        <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 0.919525V7.27988M12.8249 13.6402H6.91245M1 7.27988V13.6402H6.91245M1 7.27988V7.27988C3.77463 8.23954 5.92692 10.4624 6.79656 13.2666L6.91245 13.6402" stroke="white" stroke-width="1.88461"/>
+                                        </svg>
+                                    </div>
+                                    {{ jogo?.stats.fora_escanteios }}
+                                </div>
+                                <div class="game-stats-item">
+                                    <div class="game-card red-card"></div>
+                                    {{ jogo?.stats.fora_cartoes_vermelho }}
+                                </div>
+                                <div class="game-stats-item">
+                                    <div class="game-card yellow-card"></div>
+                                    {{ jogo?.stats.fora_cartoes_amarelo }}
+                                </div>                            
                             </div>
                         </div>
                     </div>

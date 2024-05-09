@@ -203,6 +203,10 @@ export class AuthService {
         return result;
     }
 
+    liveIsActive() {
+        return this.paramsService.aoVivoAtivo;
+    }
+
     setAppMobile() {
         localStorage.setItem('app-mobile', 'true');
     }

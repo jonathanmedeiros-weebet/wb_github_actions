@@ -419,6 +419,7 @@ label.label-tempo {
     }
 
     #bonus-wrapper .bonus-options {
+        width: 100% !important;
         flex-direction: column;
     }
 

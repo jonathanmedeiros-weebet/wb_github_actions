@@ -6,7 +6,8 @@
     width: 100%;
 }
 
-.banners.cassino {
+.banners.cassino,
+.banners.home {
     padding: 0;
 }
 

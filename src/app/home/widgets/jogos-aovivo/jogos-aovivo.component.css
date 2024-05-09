@@ -1,6 +1,6 @@
 .loading-listagem,
 .jogos-aovivo {
-    padding: 0 10px 30px;
+    padding: 0 10px 24px;
 }
 
 .widgets-header {
@@ -173,14 +173,7 @@
     opacity: 0.3;
 }
 
-
 @media only screen and (max-width: 1024px) {
-
-    .jogos-aovivo,
-    .loading-listagem {
-        padding: 0 10px 19px;
-    }
-
     .widgets-header {
         padding: 0 0 10px;
         font-size: 16px;
