@@ -37,7 +37,7 @@
                             {{ jogoDestaque.campeonato?.nome }}
                         </span>
                         <span>
-                            Hoje {{ jogoDestaque.horario | moment:"/ H:mm"}}
+                            {{ jogoDestaque.horario | moment: '' : true}}{{ jogoDestaque.horario | moment:"/ H:mm"}}
                         </span>
                     </div>
 
