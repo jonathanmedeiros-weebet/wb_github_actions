@@ -37,6 +37,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     ordemExibicaoCampeonatos = 'alfabetica';
     unsub$ = new Subject();
 
+    basketballId = sportsIds.BASKETBALL_ID;
+
     constructor(
         private campeonatoService: CampeonatoService,
         private sidebarService: SidebarService,

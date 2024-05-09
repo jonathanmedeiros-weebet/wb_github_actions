@@ -116,7 +116,7 @@
                 <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span [ngClass]="['modalidade-icon', iconesGenericos[esporte]]"></span>
                     <span class="campeonato-nome">
-                        <ng-template [ngIf]="sportId == 48242"> {{campeonato.regiao | uppercase}} - </ng-template> {{campeonato.nome | uppercase}}
+                        <ng-template [ngIf]="sportId == basketballId"> {{campeonato.regiao | uppercase}} - </ng-template> {{campeonato.nome | uppercase}}
                     </span>
 
                     <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">
@@ -177,7 +177,7 @@
                                 <div class="list-odds">
                                     <div class="odds">
                                         <div class="odd" *ngFor="let cotacao of jogo.cotacoes"
-                                             [ngClass]="sportId !== '83' ? 'generico' : ''">
+                                             [ngClass]="sportId !== futsalId ? 'generico' : ''">
                                             <ng-container *ngIf="cotacaoPermitida(cotacao.valorFinal);else cotacaoBloqueada">
                                                 <div
                                                     class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"

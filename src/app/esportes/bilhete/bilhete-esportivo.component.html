@@ -58,10 +58,10 @@
                                 {{item.cotacao.nome}}
                             </span>
                                 <ng-template #chave>
-                                <span *ngIf="item.jogo.sport_id == 1">
+                                <span *ngIf="item.jogo.sport_id == soccerId">
                                     {{item.cotacao.chave | tipoAposta}}
                                 </span>
-                                    <span *ngIf="item.jogo.sport_id != 1;">
+                                    <span *ngIf="item.jogo.sport_id != soccerId;">
                                     {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :item.jogo.time_b_nome}}
                                 </span>
                                 </ng-template>
@@ -215,7 +215,7 @@
                             {{item.cotacao.nome}}
                         </span>
                         <ng-template #chave>
-                            <span *ngIf="item.jogo.sport_id == 1; else nomeOddCustom">
+                            <span *ngIf="item.jogo.sport_id == soccerId; else nomeOddCustom">
                                 {{item.cotacao.chave | tipoAposta}}
                             </span>
                             <ng-template #nomeOddCustom>
@@ -266,7 +266,7 @@
             </button>
             <button type="button" class="btn btn-custom " *ngIf="!disabled; else processandoPreAposta"
                     (click)="finalizarApostaDeslogado()">
-                {{'modais.finalizar' | translate}} <span>{{ btnText || ('bilhete.preAposta' | translate) }}</span> 
+                {{'modais.finalizar' | translate}} <span>{{ btnText || ('bilhete.preAposta' | translate) }}</span>
             </button>
             <ng-template #processandoPreAposta>
                 <button disabled class="btn btn-custom">

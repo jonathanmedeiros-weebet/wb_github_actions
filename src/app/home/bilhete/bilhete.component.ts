@@ -22,6 +22,8 @@ import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
+import { SOCCER_ID } from '../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-bilhete',
     templateUrl: './bilhete.component.html',
@@ -70,6 +72,8 @@ export class BilheteComponent extends BaseFormComponent implements OnInit, OnDes
     headerHeight = 92;
 
     showBilhete = false;
+
+    soccerId = SOCCER_ID;
 
     constructor(
         public sanitizer: DomSanitizer,

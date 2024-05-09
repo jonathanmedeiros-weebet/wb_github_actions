@@ -50,7 +50,7 @@
                                 <span
                                     *ngIf="jogo.resultado; else semResultado">
                                     <b>{{jogo.resultado.casa}} - {{jogo.resultado.fora}}</b>
-                                    <ng-container *ngIf="sport == 1">
+                                    <ng-container *ngIf="sport == sportsIds.SOCCER_ID">
                                          ({{jogo.resultado.casa_1t}} - {{jogo.resultado.fora_1t}})
                                     </ng-container>
                                 </span>

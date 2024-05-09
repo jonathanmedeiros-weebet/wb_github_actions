@@ -17,6 +17,8 @@ import {
     LiveService, BilheteEsportivoService, HelperService
 } from '../../../services';
 
+import { SOCCER_ID, BASKETBALL_ID } from '../../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-live-jogo',
     templateUrl: 'live-jogo.component.html',
@@ -43,6 +45,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     theSportStreamUrl: SafeResourceUrl;
     showCampinho = true;
     showStream = false;
+
+    soccerId = SOCCER_ID;
+    basketballId = BASKETBALL_ID;
 
     constructor(
         public sanitizer: DomSanitizer,

@@ -167,7 +167,7 @@
                             <span
                                 class="flag-icon flag-icon-{{campeonato.value.regiao_sigla}} flag-icon-squared"></span>
                             <span class="campeonato-nome">
-                                <ng-template *ngIf="sportId == 1">{{campeonato.value.regiao}}: </ng-template>
+                                <ng-template *ngIf="sportId == soccerId">{{campeonato.value.regiao}}: </ng-template>
                                 {{campeonato.value.nome}}
                             </span>
                         </span>
@@ -185,7 +185,7 @@
                             <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
                                 <div class="indentificacao" style="cursor: pointer" (click)="maisCotacoes(jogo.value._id)">
                                     <div class="tempo-box">
-                                        <div class="aovivo-label" *ngIf="sportId == 1">
+                                        <div class="aovivo-label" *ngIf="sportId == soccerId">
                                             <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
                                         </div>
                                         <div *ngIf="jogo.value.info.tempo == 0">
@@ -194,7 +194,7 @@
                                         <div class="tempo" *ngIf="jogo.value.info.tempo != 0">
                                             {{jogo.value.info.minutos}}"
                                         </div>
-                                        <div class="tempo" *ngIf="sportId == 48242 && jogo.value.info.tempo != 0">
+                                        <div class="tempo" *ngIf="sportId == basketballId && jogo.value.info.tempo != 0">
                                             {{jogo.value.info.tempo}}ª Parte
                                         </div>
                                     </div>

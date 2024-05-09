@@ -70,6 +70,9 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     tabSelected;
 
+    basketballId = sportsIds.BASKETBALL_ID;
+    futsalId = sportsIds.FUTSAL_ID;
+
     iconesGenericos = {
         'basquete': 'wbicon icon-basquete',
         'volei': 'wbicon icon-volei',

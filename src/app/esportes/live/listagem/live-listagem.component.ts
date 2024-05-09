@@ -47,6 +47,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     headerHeight = 92;
 
+    soccerId = SOCCER_ID;
+    basketballId = BASKETBALL_ID;
+
     constructor(
         private messageService: MessageService,
         private jogoService: JogoService,
