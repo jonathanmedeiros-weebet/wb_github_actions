@@ -17,6 +17,8 @@ import { BasqueteJogoComponent } from '../basquete-jogo/basquete-jogo.component'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
+import * as sportsIds from '../../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-generico-listagem',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -414,11 +416,11 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirEscudo() {
-        return (this.sportId !== '13' && this.sportId !== '9' && this.sportId !== '151');
+        return (this.sportId !== sportsIds.TENNIS_ID && this.sportId !== sportsIds.BOXING_ID && this.sportId !== sportsIds.E_SPORTS_ID);
     }
 
     exibirTotalOdds() {
-        return this.sportId === '48242';
+        return this.sportId === sportsIds.BASKETBALL_ID;
     }
 
     toggleCampeonato(campeonatoId) {

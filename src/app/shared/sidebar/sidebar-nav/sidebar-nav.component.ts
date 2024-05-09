@@ -21,6 +21,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/auth/auth.service';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 
+import * as sportsIds from '../../constants/sports-ids';
 @Component({
     selector: 'app-sidebar-nav',
     templateUrl: './sidebar-nav.component.html',
@@ -48,6 +49,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     subPerfil = false;
     subPromocoes = false;
     subTransacoes = false;
+
+    sportsIds = sportsIds;
 
     iconesGenericos = {
         'basquete': 'wbicon icon-basquete',
@@ -295,48 +298,39 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         let className = 'icon-futebol wbicon';
 
         switch (sportId) {
-            case 1: {
-                // Futebol
+            case sportsIds.SOCCER_ID: {
                 className = 'wbicon icon-futebol';
                 break;
             }
-            case 9: {
-                // Combate
+            case sportsIds.BOXING_ID: {
                 className = 'wbicon icon-luta';
                 break;
             }
-            case 12: {
-                // Futebol Americano
+            case sportsIds.FOOTBALL_ID: {
                 className = 'wbicon icon-futebol-americano';
                 break;
             }
-            case 13: {
-                // Tennis
+            case sportsIds.TENNIS_ID: {
                 className = 'wbicon icon-tenis';
                 break;
             }
-            case 17: {
-                // Ice Hockey
+            case sportsIds.ICE_HOCKEY_ID: {
                 className = 'wbicon icon-hoquei-no-gelo';
                 break;
             }
-            case 18: {
-                // Basquetebol
+            case sportsIds.BASKETBALL_ID: {
                 className = 'wbicon icon-basquete';
                 break;
             }
-            case 83: {
-                // Futsal
+            case sportsIds.FUTSAL_ID: {
                 className = 'wbicon icon-futsal';
                 break;
             }
-            case 91: {
-                // Volleyball
+            case sportsIds.VOLLEYBALL_ID: {
                 className = 'wbicon icon-volei';
                 break;
             }
-            case 151: {
-                // Esports
+            case sportsIds.E_SPORTS_ID: {
                 className = 'wbicon icon-e-sports';
                 break;
             }
@@ -346,18 +340,18 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     getRotaPorEsporteId(sportId) {
-        const rotaPorSporteId = {
-            1: '/esportes/futebol',
-            9: '/esportes/combate',
-            12: '/esportes/futebol-americano',
-            13: '/esportes/tenis',
-            17: '/esportes/hoquei-gelo',
-            18: '/esportes/basquete',
-            83: '/esportes/futsal',
-            91: '/esportes/volei',
-            151: '/esportes/esports',
-        };
+        const routeBySportId = {};
 
-        return rotaPorSporteId[sportId] ?? '/esportes/futebol';
+        routeBySportId[sportsIds.SOCCER_ID] = '/esportes/futebol';
+        routeBySportId[sportsIds.BOXING_ID] = '/esportes/combate';
+        routeBySportId[sportsIds.FOOTBALL_ID] = '/esportes/futebol-americano';
+        routeBySportId[sportsIds.TENNIS_ID] = '/esportes/tenis';
+        routeBySportId[sportsIds.ICE_HOCKEY_ID] = '/esportes/hoquei-gelo';
+        routeBySportId[sportsIds.BASKETBALL_ID] = '/esportes/basquete';
+        routeBySportId[sportsIds.FUTSAL_ID] = '/esportes/futsal';
+        routeBySportId[sportsIds.VOLLEYBALL_ID] = '/esportes/volei';
+        routeBySportId[sportsIds.E_SPORTS_ID] = '/esportes/esports';
+
+        return routeBySportId[sportId] ?? '/esportes/futebol';
     }
 }

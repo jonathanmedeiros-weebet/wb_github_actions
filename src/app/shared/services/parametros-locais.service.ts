@@ -7,6 +7,7 @@ import { tap } from 'rxjs/operators';
 import {config} from '../config';
 import { DOCUMENT } from '@angular/common';
 
+import * as sportsIds from '../constants/sports-ids';
 
 @Injectable({
     providedIn: 'root'
@@ -65,7 +66,7 @@ export class ParametrosLocaisService {
             );
     }
 
-    getCampeonatosBloqueados(sportId= 1) {
+    getCampeonatosBloqueados(sportId = sportsIds.SOCCER_ID) {
         const sport = 'sport_' + sportId;
         return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_bloqueados[sport]) : null;
     }

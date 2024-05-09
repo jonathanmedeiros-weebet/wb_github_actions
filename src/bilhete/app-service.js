@@ -1,3 +1,5 @@
+import { SOCCER_ID } from '../app/shared/constants/sports-ids';
+
 async function getParams() {
     var url = window.location.pathname;
 
@@ -151,7 +153,7 @@ function filterLiveItems(ticketItems, itemsWithResults) {
     ticketItems.forEach((item) => {
         var itemTimestamp = new Date(item.jogo_horario.replace(/-/g, "/")).getTime();
 
-        if (item.sport === 1 && this.checkMatchPeriod(itemTimestamp)) {
+        if (item.sport === SOCCER_ID && this.checkMatchPeriod(itemTimestamp)) {
             if (!itemsWithResults.includes(item.jogo_api_id)) {
                 liveItems.push({
                     jogo_api_id: item.jogo_api_id,
