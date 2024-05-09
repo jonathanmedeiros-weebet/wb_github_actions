@@ -1,10 +1,15 @@
-<div class="loteria-popular-content" [ngClass]="{'desktop-fullscreen': fullscreen}">
+<div class="loteria-popular-content" [ngClass]="{'desktop-fullscreen': fullscreen, 'forced-fullscreen': forcedFullscreen}">
     <div class="expand-btn">
-        <a (click)="fullscreen ? exitFullscreen() : openFullscreen()">
+        <a *ngIf="!forceFullscreen; else forceFullscreenBtn" (click)="fullscreen ? exitFullscreen() : openFullscreen()">
             <i class="fa" [ngClass]="{'fa-expand': !fullscreen, 'fa-compress': fullscreen}"></i>
         </a>
+        <ng-template #forceFullscreenBtn>
+            <a (click)="toggleForcedFullscreen()">
+                <i class="fa" [ngClass]="{'fa-expand': !forcedFullscreen, 'fa-compress': forcedFullscreen}"></i>
+            </a>
+        </ng-template>
     </div>
-    <div class="loteria-frame">
+    <div class="loteria-frame" [ngClass]="{'forced-fullscreen': forcedFullscreen}">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <iframe *ngIf="gameUrl!=''" [src]="gameUrl"></iframe>
     </div>

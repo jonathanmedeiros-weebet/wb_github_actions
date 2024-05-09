@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
 import { LoteriaPopularService } from 'src/app/shared/services/loteria/loteria-popular.service';
-import { AuthService, MenuFooterService, MessageService, ParametrosLocaisService } from 'src/app/services';
+import { AuthService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService } from 'src/app/services';
 import { LoginModalComponent } from 'src/app/shared/layout/modals';
 import { DOCUMENT } from '@angular/common';
 
@@ -38,6 +38,8 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
     showLoadingIndicator = true;
 
     fullscreen = false;
+    forceFullscreen = false;
+    forcedFullscreen = true;
 
     constructor(
         private loteriaPopularApi: LoteriaPopularService,
@@ -50,11 +52,13 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private translate: TranslateService,
         private paramsService: ParametrosLocaisService,
+        private utilsService: UtilsService,
         @Inject(DOCUMENT) private document: any
     ) {}
 
     ngOnInit(): void {
         this.mobileScreen = window.innerWidth <= 1024;
+        this.forceFullscreen = this.utilsService.getMobileOperatingSystem() == 'ios' && this.mobileScreen;
         this.documentEl = document.documentElement;
         this.menuFooterService.setIsPagina(true);
         this.route.params.subscribe(params => {
@@ -155,5 +159,9 @@ export class LoteriaPopularComponent implements OnInit, OnDestroy {
             /* IE/Edge */
             this.document.msExitFullscreen();
         }
+    }
+
+    toggleForcedFullscreen() {
+        this.forcedFullscreen = !this.forcedFullscreen;
     }
 }
