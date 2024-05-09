@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService,
     styleUrls: ['./jogos-destaque.component.css']
 })
 export class JogosDestaqueComponent implements OnInit, OnChanges {
+    @Input() displayLabel = true;
     @Output() maisCotacoesDestaque = new EventEmitter();
     jogosDestaque = [];
     mobileScreen: boolean;
@@ -58,9 +59,9 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
 
     getJogosDestaques() {
         this.jogoService.getJogosDestaque()
-            .subscribe(jogos => {                
+            .subscribe(jogos => {
                 this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
-                
+
                 this.getMatchsInCenter();
             });
     }
@@ -77,7 +78,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         };
 
         console.log(queryParams);
-        
+
 
         this.campeonatoService.getCampeonatos(queryParams)
             .pipe(takeUntil(this.unsub$))
