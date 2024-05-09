@@ -203,7 +203,6 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }, 10000);
 
         this.pixModal.result.then(
-            (result) => {},
             (reason) => {
                 if (reason == 'pix-modal-closed') {
                     this.novoPix();

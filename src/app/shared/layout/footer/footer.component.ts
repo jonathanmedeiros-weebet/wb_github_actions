@@ -57,7 +57,7 @@ export class FooterComponent implements OnInit {
     ngOnInit() {
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
-        this.hasApiPagamentos = !!this.paramsLocais.getOpcoes().available_payment_methods.length;
+        this.hasApiPagamentos = Boolean(this.paramsLocais.getOpcoes().available_payment_methods.length);
         this.hasApk = this.paramsLocais.getOpcoes().has_aplicativo;
         this.hasRegras = this.paramsLocais.getOpcoes().has_regras;
         this.hasTermosCondicoes = this.paramsLocais.getOpcoes().has_termos_condicoes;

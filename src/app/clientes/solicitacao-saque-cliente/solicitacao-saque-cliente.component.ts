@@ -157,7 +157,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     createForm() {
-        let paymentMethodToForm = !!this.availablePaymentMethods.length ? [this.paymentMethodSelected, Validators.required] : [null];
+        let paymentMethodToForm = Boolean(this.availablePaymentMethods.length) ? [this.paymentMethodSelected, Validators.required] : [null];
 
         this.form = this.fb.group({
             valor: [0, [Validators.required]],

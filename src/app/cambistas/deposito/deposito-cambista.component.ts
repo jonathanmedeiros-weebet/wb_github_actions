@@ -31,7 +31,7 @@ export class DepositoCambistaComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(true);
         }
 
-        this.hasPaymentMethodsAvailableForBettors = !!this.paramsLocais.getOpcoes().payment_methods_available_for_bettors.length;
+        this.hasPaymentMethodsAvailableForBettors = Boolean(this.paramsLocais.getOpcoes().payment_methods_available_for_bettors.length);
         if (!this.hasPaymentMethodsAvailableForBettors) {
             this.router.navigate(['esportes/futebol']);
         }
