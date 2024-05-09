@@ -238,7 +238,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameTitle = this.translate.instant('geral.todos');
 
         const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
-        if(providerParam && providerParam !== 'wall') {
+        if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
             this.filterGames(providerParam, this.categorySelected, true);
         }
 
@@ -311,7 +311,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameTitle = this.translate.instant('geral.todos');
 
         const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
-        if(providerParam && providerParam !== 'wall') {
+        if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
             this.filterGames(providerParam, this.categorySelected, true);
         }
 

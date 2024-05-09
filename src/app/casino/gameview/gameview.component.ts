@@ -65,8 +65,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.gameMode = params['game_mode'] ?? 'REAL';
             this.gameFornecedor = params['game_fornecedor'];
 
-            if (this.gameFornecedor === 'wall') {
-                this.router.navigate(['casino']);
+            if (['c', 'cl', 'v'].includes(String(this.gameFornecedor))) {
+                const casinoAcronyms = {
+                    c: 'casino',
+                    cl: 'live-casino',
+                    v: 'virtual-sports'
+                };
+
+                this.router.navigate([casinoAcronyms[String(this.gameFornecedor)]]);
                 return;
             }
 
