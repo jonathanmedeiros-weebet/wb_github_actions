@@ -19,11 +19,12 @@
 
 <div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente) && !activeGameCassinoMobile()">
     <div class="indique-ganhe-card-content">
-        {{'indique_ganhe.indiqueGanheCard' | translate:{
-            'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
-            'bonusBalance': bonusBalanceReferAndEarn ? (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
-        }}
-
+        <div>
+            {{'indique_ganhe.indiqueGanheCard' | translate:{
+                'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
+                'bonusBalance': bonusBalanceReferAndEarn ? (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
+            }}
+        </div>
         <a
             (click)="isConnected && redirectIndiqueGanhe()"
             class="btn btn-indique-ganhe-card"
