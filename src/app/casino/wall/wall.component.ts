@@ -83,10 +83,10 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get showFilterBox(): boolean {
-        return !this.showLoadingIndicator && !this.hiddenProviders;
+        return !this.showLoadingIndicator && !this.hideProviders;
     }
 
-    get hiddenProviders(){
+    get hideProviders(){
         return this.isVirtualPage || this.isParlaybay;
     }
 

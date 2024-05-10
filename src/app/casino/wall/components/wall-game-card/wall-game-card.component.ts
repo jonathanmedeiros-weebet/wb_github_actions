@@ -23,7 +23,7 @@ export class WallGameCardComponent {
   }
 
   get routerLinkReal(): any[] {
-      return [`/${this.blink}/`, this.game.fornecedor, this.game.gameID];
+    return [`/${this.blink}/`, this.game.fornecedor, this.game.gameID];
   }
 
   get providerIsPragmatic(): boolean {
