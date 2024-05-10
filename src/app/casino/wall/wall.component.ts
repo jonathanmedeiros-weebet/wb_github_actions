@@ -111,7 +111,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get isParlaybay(): boolean {
-        return this.blink === 'parlaybay';
+        return this.blink === 'pb';
     }
 
     get isCassinoAoVivoPage(): boolean {

@@ -114,7 +114,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         } else if(this.gameFornecedor === 'parlaybay') {
-            this.router.navigate(['esportes/futebol']);
+            this.router.navigate(['pb']);
         } else if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
             this.router.navigate(['live-casino']);
         } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){

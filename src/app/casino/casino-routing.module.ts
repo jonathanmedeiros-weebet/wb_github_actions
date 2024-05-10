@@ -103,7 +103,7 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'parlaybay',
+        path: 'pb',
         component: VirtuaisLayoutComponent,
         children: [
             {
