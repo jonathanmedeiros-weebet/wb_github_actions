@@ -192,7 +192,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.fornecedor === 'parlaybay');
             this.categorySelected = 'parlaybay';
         } else {
-            this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
+            this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB' && game.fornecedor !== 'parlaybay');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
 
