@@ -45,7 +45,7 @@
             />
         </div>
 
-        <div class="bloco" *ngIf="!this.isVirtualPage">
+        <div class="bloco" *ngIf="!this.hiddenProviders">
             <app-wall-section
                 sectionId="providers"
                 [title]="'geral.provedores' | translate"

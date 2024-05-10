@@ -56,7 +56,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gamesMesa: GameCasino[];
     public gamesBingo: GameCasino[];
     public gamesLive: GameCasino[];
-    
+
     // Cassino ao vivo
     public gamesBlackjack: GameCasino[];
     public gamesBaccarat: GameCasino[];
@@ -83,7 +83,11 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get showFilterBox(): boolean {
-        return !this.showLoadingIndicator && !this.isVirtualPage;
+        return !this.showLoadingIndicator && !this.hiddenProviders;
+    }
+
+    get hiddenProviders(){
+        return this.isVirtualPage || this.isParlaybay;
     }
 
     get isDemo(): boolean {
@@ -104,6 +108,10 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     get isVirtualPage(): boolean {
         return this.blink === 'virtual-sports';
+    }
+
+    get isParlaybay(): boolean {
+        return this.blink === 'parlaybay';
     }
 
     get isCassinoAoVivoPage(): boolean {
@@ -147,7 +155,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     private getGameList() {
-        if (this.isCassinoPage || this.isVirtualPage) {
+        if (this.isCassinoPage || this.isVirtualPage || this.isParlaybay) {
             this.getGameCassinoList();
         }
 
@@ -176,6 +184,13 @@ export class WallComponent implements OnInit, AfterViewInit {
             });
             this.gamesCassino = gameList.filter((game: GameCasino) => game.category === 'virtual');
             this.categorySelected = 'virtual';
+        } else if (this.isParlaybay) {
+            this.sideBarService.changeItens({
+                contexto: 'parlaybay',
+                dados: {}
+            });
+            this.gamesCassino = gameList.filter((game: GameCasino) => game.fornecedor === 'parlaybay');
+            this.categorySelected = 'parlaybay';
         } else {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
@@ -314,7 +329,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         if(providerParam) {
             this.filterGames(providerParam, this.categorySelected, true);
         }
-        
+
         this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
     }
@@ -387,7 +402,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     ) {
         let providerName = provider ?? this.gameFornecedor;
         let categoryName = this.getCategorySlug(category ?? this.categorySelected);
-        
+
         this.categorySelected = category ?? 'cassino';
         let gamesCassinoList = this.gamesCassino;
 

@@ -623,21 +623,11 @@
                 <span>{{'menu.esportes' | translate}}</span>
             </a>
         </div>
-        <ng-container *ngIf="isLoggedIn">
-            <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
-                <a [routerLink]="['pb/parlaybay/170000']" routerLinkActive="active">
-                    <span>PARLAYBAY</span>
-                </a>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="!isLoggedIn">
-            <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
-                <a (click)="abrirLogin()" routerLinkActive="active">
-                    <span>PARLAYBAY</span>
-                </a>
-            </div>
-        </ng-container>
-
+        <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
+            <a [routerLink]="['/parlaybay']" routerLinkActive="active">
+                <span>PARLAYBAY</span>
+            </a>
+        </div>
         <div class="category" *ngIf="cassinoAtivo">
             <a [routerLink]="['/casino']" routerLinkActive="active">
                 <span>{{'menu.cassino' | translate}}</span>
