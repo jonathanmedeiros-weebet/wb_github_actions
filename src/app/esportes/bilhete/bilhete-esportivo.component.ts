@@ -164,7 +164,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                         }
 
                         if(habilitar_live_tracker) {
-                            this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + response);
+                            this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=' + response);
                             this.showCampinhoFrame();
                         }
                     } else {
