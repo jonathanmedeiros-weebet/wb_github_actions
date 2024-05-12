@@ -108,14 +108,20 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: CasinoWrapperComponent,
-                children: [
-                     {
-                        path: ':game_fornecedor/:game_id',
-                        component: GameviewComponent,
-                        canActivate: [CasinoGuard]
-                    }
-                ]
+                component: WallComponent,
+                data: { parlaybay: true },
+                pathMatch: 'full',
+                canActivate: [CasinoGuard],
+            },
+            {
+                path: ':game_fornecedor/:game_id',
+                component: GameviewComponent,
+                canActivate: [CasinoGuard]
+            },
+            {
+                path: ':game_fornecedor/:game_id/:game_mode',
+                component: GameviewComponent,
+                canActivate: [CasinoGuard]
             }
         ]
     }
