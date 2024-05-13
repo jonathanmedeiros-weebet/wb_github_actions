@@ -14,7 +14,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
     showLoading = true;
     mostrarSenha = false;
     googleLogin = false;
-    metodoPagamento = '';
+    availablePaymentMethods = '';
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -34,7 +34,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
         this.googleLogin = user?.google_login ?? false;
 
         this.sidebarService.changeItens({contexto: 'cliente'});
-        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
 
         this.createForm();
         this.loadCliente();
