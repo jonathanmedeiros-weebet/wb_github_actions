@@ -77,9 +77,6 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
             'games_ids': this.jogosDestaquesIds
         };
 
-        console.log(queryParams);
-
-
         this.campeonatoService.getCampeonatos(queryParams)
             .pipe(takeUntil(this.unsub$))
             .subscribe(campeonatos => {
