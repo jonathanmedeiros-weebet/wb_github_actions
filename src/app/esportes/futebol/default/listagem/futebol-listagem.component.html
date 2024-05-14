@@ -169,7 +169,7 @@
 </div>
 <div #listagem id="futebol-listagem" class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()" (scroll)="layoutService.onPageScroll($event.target)">
     <app-banners></app-banners>
-    <app-destaques (maisCotacoesDestaque)="maisCotacoes($event)" [jogosDestaque]="jogosDestaque"></app-destaques>
+    <app-jogos-destaque [displayLabel]="false"></app-jogos-destaque>
     <div class="wrap-sticky">
 
         <div class="filter" *ngIf="!campeonatoSelecionado">
