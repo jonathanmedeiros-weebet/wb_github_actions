@@ -19,11 +19,12 @@
 
 <div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente) && !activeGameCassinoMobile()">
     <div class="indique-ganhe-card-content">
-        {{'indique_ganhe.indiqueGanheCard' | translate:{
-            'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
-            'bonusBalance': bonusBalanceReferAndEarn ? (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
-        }}
-
+        <div>
+            {{'indique_ganhe.indiqueGanheCard' | translate:{
+                'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
+                'bonusBalance': bonusBalanceReferAndEarn ? (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
+            }}
+        </div>
         <a
             (click)="isConnected && redirectIndiqueGanhe()"
             class="btn btn-indique-ganhe-card"
@@ -116,7 +117,7 @@
                                 </ng-template>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around" *ngIf="pixCambista">
+                        <div class="d-flex justify-content-around" *ngIf="enabledBettorPix">
                             <a class="dropdown-btn w-150" (click)="abrirDepositosCambista()">
                                 {{'geral.liberarCredito' | translate}}
                             </a>
@@ -468,7 +469,7 @@
                             <a class="dropdown-btn w-130" [routerLink]="['clientes/saque']" *ngIf="isCliente">
                                 {{'geral.sacar' | translate}}
                             </a>
-                            <a class="dropdown-btn w-130" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
+                            <a class="dropdown-btn w-130" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && enabledBettorPix">
                                 {{'geral.liberarCredito' | translate}}
                             </a>
                         </div>
@@ -623,21 +624,11 @@
                 <span>{{'menu.esportes' | translate}}</span>
             </a>
         </div>
-        <ng-container *ngIf="isLoggedIn">
-            <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
-                <a [routerLink]="['pb/parlaybay/170000']" routerLinkActive="active">
-                    <span>PARLAYBAY</span>
-                </a>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="!isLoggedIn">
-            <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
-                <a (click)="abrirLogin()" routerLinkActive="active">
-                    <span>PARLAYBAY</span>
-                </a>
-            </div>
-        </ng-container>
-
+        <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
+            <a [routerLink]="['/pb']" routerLinkActive="active">
+                <span>PARLAYBAY</span>
+            </a>
+        </div>
         <div class="category" *ngIf="cassinoAtivo">
             <a [routerLink]="['/casino']" routerLinkActive="active">
                 <span>{{'menu.cassino' | translate}}</span>

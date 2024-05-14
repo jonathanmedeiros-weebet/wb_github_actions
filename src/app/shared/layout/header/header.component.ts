@@ -89,7 +89,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isCliente;
     modoClienteAtivo;
     centered = true;
-    pixCambista = false;
+    enabledBettorPix = false;
     mostrarSaldo;
     removendoIndiqueGanheCard = false;
     seninhaAtiva;
@@ -220,7 +220,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.bonusBalanceReferAndEarn = this.paramsService.getOpcoes().indique_ganhe_tipo_saldo_ganho == 'bonus' ? "indique_ganhe.inBonus" : "";
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
-        this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
+        this.enabledBettorPix = Boolean(this.paramsService.getOpcoes().payment_methods_available_for_bettors.length);
 
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen

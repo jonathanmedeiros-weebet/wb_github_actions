@@ -361,6 +361,16 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     }
 
     podeEncerrar(aposta) {
+        const strategy = this.paramsLocais.getOpcoes().closure_strategy;     
+
+        if (strategy === 'probability') {
+            const itemSemProbabilidade = aposta.itens.find((item: any) => item.probabilidade == null);
+    
+            if (itemSemProbabilidade || (new Date(aposta.horario) < new Date('2024-05-08 13:00:00'))) {
+                return false;
+            }
+        }
+
         const found = aposta.itens.find((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
         if(!found) {
             return false;

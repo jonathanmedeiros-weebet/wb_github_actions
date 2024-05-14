@@ -17,10 +17,12 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="cadastroCompleto && !respostaSolicitacao">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div id="withdrawal-container">
-                            <section id="payment-method-column" class="hide-mobile">
+                            <section id="payment-method-column" class="hide-mobile" [hidden]="!availablePaymentMethods.length">
                                 <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                                 <div class="options-container payment-method-options">
-                                    <a class="payment-method-option" [ngClass]="{'active': paymentMethodSelected === paymentMethod}" (click)="changePaymentMethodOption(paymentMethod)">
+                                    <a *ngFor="let paymentMethod of availablePaymentMethods"
+                                        class="payment-method-option"
+                                        [ngClass]="{'active': paymentMethodSelected === paymentMethod}" (click)="changePaymentMethodOption(paymentMethod)">
                                         <div class="payment-method">
                                             <i class="radio"></i>
                                         </div>
@@ -42,7 +44,7 @@
                                             {{'saques.availableBalanceForWithdrawal' | translate}}: <span class="available-amount">{{saldo | currency}}</span>
                                         </div>
                                         <div
-                                            *ngIf="paymentMethodSelected == 'sauto_pay' && !metodoPagamentoDesabilitado"
+                                            *ngIf="paymentMethodSelected == 'sauto_pay'"
                                             id="sautopay-alert"
                                             class="alert alert-info"
                                         >
@@ -121,12 +123,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="hide-desktop details-payment-method">
+                                        <div class="hide-desktop details-payment-method" [hidden]="!availablePaymentMethods.length">
                                             <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                                             <div class="form-group">
                                                 <select formControlName="paymentMethod" type="text" class="form-control inverted-out"
                                                     (change)="changePaymentMethodOption($event.target.value)">
-                                                    <option [value]="paymentMethod">{{paymentMethod | formatPaymentMethod}}</option>
+                                                    <option *ngFor="let paymentMethod of availablePaymentMethods" [value]="paymentMethod">{{paymentMethod | formatPaymentMethod}}</option>
                                                 </select>
                                                 <app-error-msg [control]="form.get('paymentMethod')"></app-error-msg>
                                             </div>
