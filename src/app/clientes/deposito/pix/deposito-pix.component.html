@@ -8,7 +8,7 @@
     <form [formGroup]="form" (ngSubmit)="solicitarDeposito()" *ngIf="!pix">
         <app-spinner *ngIf="submitting"></app-spinner>
         <div id="deposit-container" *ngIf="!submitting">
-            <section id="payment-method-column" class="hide-mobile">
+            <section id="payment-method-column" class="hide-mobile" *ngIf="availablePaymentMethods.length > 1">
                 <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                 <div class="options-container payment-method-options">
                     <a *ngFor="let paymentMethod of availablePaymentMethods"
@@ -38,7 +38,7 @@
                             ('deposito.depositTextWithoutBonus' | translate:{'paymentMethod': (paymentMethodSelected | formatPaymentMethod)})
                             }}
                         </div>
-                        <div class="hide-desktop details-payment-method">
+                        <div class="hide-desktop details-payment-method" *ngIf="availablePaymentMethods.length > 1">
                             <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                             <div class="form-group">
                                 <select formControlName="paymentMethod" type="text" class="form-control inverted-out"
