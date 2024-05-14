@@ -3089,3 +3089,21 @@ gulp.task('sortegol.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betcombinada.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betcombinada.net",
+        banca: "BET COMBINADA",
+        styles: ""
+    });
+});
+
+gulp.task('gramado.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "gramado.bet",
+        banca: "GRAMADO.BET",
+        styles: ""
+    });
+});
