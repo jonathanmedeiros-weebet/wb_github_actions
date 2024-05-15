@@ -14,6 +14,8 @@ import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.compone
 import {config} from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 
+
+
 @Component({
     selector: 'app-login-modal',
     templateUrl: './login-modal.component.html',
@@ -34,6 +36,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     loginGoogle = false;
     googleUser;
 
+
     constructor(
         public activeModal: NgbActiveModal,
         private fb: UntypedFormBuilder,
@@ -49,6 +52,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     ngOnInit() {
+
         this.appMobile = this.auth.isAppMobile();
         if (window.innerWidth > 1025) {
             this.isMobile = false;
