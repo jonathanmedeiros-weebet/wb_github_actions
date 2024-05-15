@@ -28,6 +28,9 @@ import { CasinoModule } from '../casino/casino.module';
         HomeRoutingModule,
         CarouselModule,
     ],
+    exports: [
+        JogosDestaqueComponent
+    ],
     providers: [
         NgbActiveModal,
         JogoService

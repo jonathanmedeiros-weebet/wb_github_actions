@@ -17,7 +17,7 @@
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="cadastroCompleto && !respostaSolicitacao">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div id="withdrawal-container">
-                            <section id="payment-method-column" class="hide-mobile" [hidden]="!availablePaymentMethods.length">
+                            <section id="payment-method-column" class="hide-mobile" *ngIf="availablePaymentMethods.length > 1">
                                 <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                                 <div class="options-container payment-method-options">
                                     <a *ngFor="let paymentMethod of availablePaymentMethods"
@@ -123,7 +123,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="hide-desktop details-payment-method" [hidden]="!availablePaymentMethods.length">
+                                        <div class="hide-desktop details-payment-method" *ngIf="availablePaymentMethods.length > 1">
                                             <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                                             <div class="form-group">
                                                 <select formControlName="paymentMethod" type="text" class="form-control inverted-out"

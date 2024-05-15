@@ -605,15 +605,6 @@ gulp.task('top10sportsvip.com', function (done) {
     });
 });
 
-gulp.task('esportepremium.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "esportepremium.wee.bet",
-        banca: "ESPORTE PREMIUM",
-        styles: "",
-    });
-});
-
 gulp.task('garanhunsbet.site', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2080,15 +2071,6 @@ gulp.task('betinvestidor.com', function (done) {
     });
 });
 
-gulp.task('smartek777.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "smartek777.com",
-        banca: "SMARTEK 777",
-        styles: "",
-    });
-});
-
 gulp.task('a7bet.fun', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2864,15 +2846,6 @@ gulp.task('betstar.vip', function (done) {
     });
 });
 
-gulp.task('bet263.online', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "bet263.online",
-        banca: "BET263",
-        styles: "",
-    });
-});
-
 gulp.task('jaybet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2910,15 +2883,6 @@ gulp.task('fezinhabet.net', function (done) {
     });
 });
 
-gulp.task('polarbet.vip', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "polarbet.vip",
-        banca: "POLAR BET",
-        styles: ""
-    });
-});
-
 gulp.task('betcampea.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2942,15 +2906,6 @@ gulp.task('riquinhobet.com', function (done) {
         server: "front2.wee.bet",
         host: "riquinhobet.com",
         banca: "RIQUINHO BET",
-        styles: ""
-    });
-});
-
-gulp.task('joguebet.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "joguebet.net",
-        banca: "JOGUE BET",
         styles: ""
     });
 });
@@ -3122,8 +3077,7 @@ gulp.task('sortepix.com', function (done) {
         server: "front4.wee.bet",
         host: "sortepix.com",
         banca: "SORTE PIX",
-        styles: "",
-        dominioTemp: "sortepix.net"
+        styles: ""
     });
 });
 
@@ -3132,6 +3086,24 @@ gulp.task('sortegol.bet', function (done) {
         server: "front3.wee.bet",
         host: "sortegol.bet",
         banca: "SORTE GOL",
+        styles: ""
+    });
+});
+
+gulp.task('betcombinada.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "betcombinada.net",
+        banca: "BET COMBINADA",
+        styles: ""
+    });
+});
+
+gulp.task('gramado.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "gramado.bet",
+        banca: "GRAMADO.BET",
         styles: ""
     });
 });

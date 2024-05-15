@@ -14,8 +14,8 @@
         </div>
     </div>
 </div>
-<div class="jogos-destaque" *ngIf="jogosDestaque.length > 0">
-    <div class="slider-header">
+<div class="jogos-destaque" [ngClass]="{'mb-1': !displayLabel, 'mt-3': !displayLabel}" *ngIf="jogosDestaque.length > 0">
+    <div class="slider-header" *ngIf="displayLabel">
         {{ 'geral.jogosDestaques' | translate }}
         <nav>
             <div class="scroll-button scroll-left disabled-scroll-button" id="cassino-left"
