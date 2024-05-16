@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Fornecedor } from '../../wall.component';
 import { Router } from '@angular/router';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
@@ -13,7 +13,7 @@ const MAX_QTY_TERMS = 3;
   templateUrl: './wall-games-search.component.html',
   styleUrls: ['./wall-games-search.component.scss']
 })
-export class WallGamesSearchComponent implements OnInit {
+export class WallGamesSearchComponent implements OnInit, OnDestroy {
   @Input() providers: Fornecedor[] = [];
   @Input() games: GameCasino[] = []
   @Input() featuredGames: any[] = []
@@ -100,6 +100,8 @@ export class WallGamesSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.showOrHideHeaderMobile(true);
+
     this.lastGamesSearch = this.getLastGamesSearch()
 
     this.searchTermSubject
@@ -184,5 +186,9 @@ export class WallGamesSearchComponent implements OnInit {
   private setLastGamesSearch(terms): void {
     this.lastGamesSearch = terms;
     localStorage.setItem(LAST_GAMES_SEARCH, JSON.stringify(terms));
+  }
+
+  ngOnDestroy() {
+    this.showOrHideHeaderMobile(true);
   }
 }
