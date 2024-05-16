@@ -141,10 +141,21 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         if (this.isMobile) {
             this.scrollStep = 200;
+            this.showHeaderMobile();
         }
 
         this.auth.logado.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
         this.auth.cliente.subscribe(isCliente => this.isCliente = isCliente);
+    }
+
+    private showHeaderMobile() {
+        if(this.isMobile) {
+            const headerElement = document.querySelector('.header') as HTMLElement;
+            const subMenuMobileElement = document.querySelector('nav.mobile') as HTMLElement;
+        
+            headerElement.style.display = 'flex';
+            subMenuMobileElement.style.display = 'flex';
+        }
     }
 
     private onTranslateChange() {
