@@ -8,6 +8,7 @@ import { FinanceiroService } from '../../shared/services/financeiro.service';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
 import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
 import { AuthService, LayoutService, SidebarService } from 'src/app/services';
+import { LegitimuzService } from '../../shared/services/legitimuz.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClientePerfilModalComponent, ClientePixModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,6 +25,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     unsub$ = new Subject();
     cliente: Cliente;
     modalRef;
+    legitimuzService;
 
     pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M'];
     respostaSolicitacao;
@@ -34,6 +36,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     paymentMethodSelected = '';
     errorMessage;
     selectedKeyType = 'cpf';
+    currentLanguage = 'pt';
 
     valorMinSaque;
     valorMaxSaqueDiario;
@@ -48,6 +51,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     isMobile = false;
     permitirQualquerChavePix = false;
     submitting;
+    legitimuzEnabled = false;
+    legitimuzToken = "";
+    verifiedIdentity = false;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -80,6 +86,20 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.getRollovers();
 
+        this.currentLanguage = this.translate.currentLang;
+
+        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.legitimuzEnabled = Boolean(this.paramsLocais.getOpcoes().legitimuz_enabled && this.legitimuzToken);
+
+        if (this.legitimuzEnabled) {
+            this.legitimuzService = new LegitimuzService({token: this.legitimuzToken, lang: this.currentLanguage});
+        }
+
+        this.translate.onLangChange.subscribe(change => {
+            this.currentLanguage = change.lang;
+            this.legitimuzService.changeLang(change.lang);
+        });
+
         this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
         this.paymentMethodSelected = this.availablePaymentMethods[0];
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
@@ -107,6 +127,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.cliente = res;
+
+                    this.verifiedIdentity = res.verifiedIdentity;
 
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';

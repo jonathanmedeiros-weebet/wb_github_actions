@@ -28,9 +28,10 @@ export class ParametrosLocaisService {
                     this.parametrosLocais = response;
 
                     const GTM_ID = response?.opcoes?.gtm_id_site
+                    const head = this.document.getElementsByTagName('head')[0];
+                    const body = this.document.getElementsByTagName('body')[0];
+
                     if (GTM_ID) {
-                        const head = this.document.getElementsByTagName('head')[0];
-                        const body = this.document.getElementsByTagName('body')[0];
 
                         const GTMScriptHead = this.document.createElement('script');
                         GTMScriptHead.innerHTML = `
@@ -49,6 +50,14 @@ export class ParametrosLocaisService {
 
                         head.appendChild(GTMScriptHead);
                         body.prepend(GTMScriptBody);
+                    }
+
+                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.legitimuz_enabled && response?.opcoes?.legitimuz_token);
+                    if (LEGITIMUZ_ENABLED) {
+                        const LegitimuzScripSDK = this.document.createElement('script');
+                        LegitimuzScripSDK.src = 'https://cdn.legitimuz.com/js/sdk/legitimuz-sdk.js';
+
+                        head.appendChild(LegitimuzScripSDK);
                     }
 
                     resolve(true);

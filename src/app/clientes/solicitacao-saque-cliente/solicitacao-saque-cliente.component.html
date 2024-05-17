@@ -13,8 +13,8 @@
         </div>
         <div class="content-body">
             <div class="content">
-                <div id="withdrawal">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="cadastroCompleto && !respostaSolicitacao">
+                <div id="withdrawal" *ngIf="cadastroCompleto && !respostaSolicitacao && (!legitimuzEnabled || verifiedIdentity)">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div id="withdrawal-container">
                             <section id="payment-method-column" class="hide-mobile" *ngIf="availablePaymentMethods.length > 1">
@@ -183,6 +183,22 @@
                 </div>
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
                     {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
+                </div>
+                <div id="legitimuz-container" *ngIf="cadastroCompleto && legitimuzEnabled && !verifiedIdentity">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            Para prosseguir com o saque será necessário realizar a verificação de identidade da sua conta antes.
+                        </div>
+                        <div id="verify-identity-cpf">
+                            CPF:
+                            <input id="legitimuz-hydrate-cpf" type="tel" class="form-control inverted-out" [value]="cliente.cpf" readonly/>
+                        </div>
+                        <button id="legitimuz-action-verify" class="btn btn-custom">
+                            Verificar identidade
+                            <i class="fa-solid fa-id-card"></i>
+                        </button>
+                    </div>
+                    <div id="legitimuz-root"></div>
                 </div>
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}
