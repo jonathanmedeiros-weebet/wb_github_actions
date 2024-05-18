@@ -1,22 +1,49 @@
-<div class="submenu-container">
-    <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth}"
-         [ngClass]="{'centered': centered}"
-         (scroll)="onScroll($event)" #scrollMenu>
-        <div class="pull pull-left" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''" *ngIf="!isMobile">
-            <i class="fa fa-angle-left fa-left"></i>
-        </div>
-        <div class="subcategory" *ngFor="let item of submenuItems; let i = index">
-            <a routerLink="{{item.link}}" routerLinkActive="active" id="{{item.id}}" *ngIf="!item.svgIcon" [queryParams]="item.queryParams">
-                <i class="{{item.icon_class}}"></i>
-                <span>{{item.name}}</span>
+<ng-container *ngIf="version == 'v1'; else templateV2">
+    <div class="submenu-container">
+        <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth}"
+             [ngClass]="{'centered': centered}"
+             (scroll)="onScroll($event)" #scrollMenu>
+            <div class="pull pull-left" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''" *ngIf="!isMobile">
+                <i class="fa fa-angle-left fa-left"></i>
+            </div>
+            <div class="subcategory" *ngFor="let item of submenuItems; let i = index">
+                <a routerLink="{{item.link}}" routerLinkActive="active" id="{{item.id}}" *ngIf="!item.svgIcon" [queryParams]="item.queryParams">
+                    <i class="{{item.icon_class}}"></i>
+                    <span>{{item.name}}</span>
+                </a>
+                <a routerLink="{{item.link}}" routerLinkActive="active" id="{{item.id}}" *ngIf="item.svgIcon" [queryParams]="item.queryParams" (mouseover)="changeSvgHover(i)" (mouseout)="changeSvgHover(i)">
+                    <svg-icon [src]="item.svgSrc" [svgStyle]="item.svgStroke ? svgByRouteCssStroke(item.link, item.svgHover) : svgByRouteCss(item.link, item.svgHover)"></svg-icon>
+                    <span>{{item.name}}</span>
+                </a>
+            </div>
+            <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''" *ngIf="!isMobile">
+                <i class="fa fa-angle-right fa-right"></i>
+            </div>
+        </nav>
+    </div>
+</ng-container>
+
+<ng-template #templateV2>
+    <div class="submenu-v2">
+        <nav 
+            class="submenu-v2__items scroll"
+            scrollX="true"
+            *ngIf="active"
+            [ngStyle]="{'width.px': menuWidth}"
+            [ngClass]="{'centered': centered}"
+            (scroll)="onScroll($event)"
+            #scrollMenu
+        >
+            <a
+                class="submenu-v2__item"
+                *ngFor="let item of submenuItems; let i = index"
+                [ngClass]="{'submenu-v2__item--selected': menuItemSelected === item.id}"
+                routerLinkActive="active"
+                (click)="handleClick(item.id)"
+                id="{{item.id}}"
+            >
+                {{ item.name }}
             </a>
-            <a routerLink="{{item.link}}" routerLinkActive="active" id="{{item.id}}" *ngIf="item.svgIcon" [queryParams]="item.queryParams" (mouseover)="changeSvgHover(i)" (mouseout)="changeSvgHover(i)">
-                <svg-icon [src]="item.svgSrc" [svgStyle]="item.svgStroke ? svgByRouteCssStroke(item.link, item.svgHover) : svgByRouteCss(item.link, item.svgHover)"></svg-icon>
-                <span>{{item.name}}</span>
-            </a>
-        </div>
-        <div class="pull pull-right" (click)="scrollRight()" [ngClass]="rightDisabled ? 'visibility':''" *ngIf="!isMobile">
-            <i class="fa fa-angle-right fa-right"></i>
-        </div>
-    </nav>
-</div>
+        </nav>
+    </div>
+</ng-template>

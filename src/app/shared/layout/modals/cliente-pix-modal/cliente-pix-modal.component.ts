@@ -13,7 +13,7 @@ import {BaseFormComponent} from '../../base-form/base-form.component';
 export class ClientePixModalComponent extends BaseFormComponent implements OnInit {
     showLoading = true;
     mostrarSenha = false;
-    metodoPagamento = '';
+    availablePaymentMethods = '';
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -29,7 +29,7 @@ export class ClientePixModalComponent extends BaseFormComponent implements OnIni
     ngOnInit() {
         this.createForm();
         this.loadCliente();
-        this.metodoPagamento = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
     }
 
     createForm() {

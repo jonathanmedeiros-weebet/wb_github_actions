@@ -1,0 +1,20 @@
+<div class="search-box" >
+    <i class="fa fa-search search-box__icon--search"></i>
+    <input id="limparCampoSearch"
+        type="text"
+        class="search-box__input"
+        [placeholder]="placeholder"
+        (keyup)="handleSearch($event)"
+        (focus)="handleFocusIn()"
+        (focusout)="handleFocusOut()"
+        [value]="term"
+        autocomplete="off"
+    >
+    <span
+        class="search-box__icon--clear"
+        (click)="handleClear()"
+        *ngIf="term"
+    >
+        {{ 'geral.limpar' | translate }}
+    </span>
+</div>

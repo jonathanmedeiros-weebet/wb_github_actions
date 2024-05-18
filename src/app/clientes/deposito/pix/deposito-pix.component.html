@@ -1,91 +1,182 @@
-<div class="row mt-4">
-    <div class="col-md-6 col-sm-12">
-        <div class="alert alert-success alert-dismissible" *ngIf="exibirMensagemPagamento">
-            {{'deposito.seuPixFoiCreditado' | translate:{'novoSaldo': novoSaldo} }}
-            <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close">
-                <span class="close-x" aria-hidden="true">&times;</span>
-            </button>
-        </div>
+<div id="deposito-pix">
+    <div class="alert alert-success alert-dismissible" *ngIf="exibirMensagemPagamento">
+        {{'deposito.seuPixFoiCreditado' | translate:{'novoSaldo': novoSaldo} }}
+        <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close">
+            <span class="close-x" aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
-<div class="content">
     <form [formGroup]="form" (ngSubmit)="solicitarDeposito()" *ngIf="!pix">
         <app-spinner *ngIf="submitting"></app-spinner>
-        <div class="row">
-            <div class="col col-sm-3 deposito-pix">
-                <div class="form-group required" [ngClass]="{'text-center': isMobile}">
-                    <label class="label">{{'deposito.informeOValor' | translate}}</label>
-                    <input currencyMask
-                           [ngClass]="{'form-control inverted-out text-left mt-3': !isMobile, 'input-valor': isMobile}"
-                           [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                           formControlName="valor">
-                    <app-error-msg [control]="form.get('valor')"></app-error-msg>
-                    <span class="mt-3 d-block alerta-min">
-                        {{'deposito.valorMinimo' | translate}} {{ valorMinDeposito | currency }}
-                    </span>
+        <div id="deposit-container" *ngIf="!submitting">
+            <section id="payment-method-column" class="hide-mobile" *ngIf="availablePaymentMethods.length > 1">
+                <h3>{{'financeiro.paymentGateway' | translate}}</h3>
+                <div class="options-container payment-method-options">
+                    <a *ngFor="let paymentMethod of availablePaymentMethods"
+                        class="payment-method-option"
+                        [ngClass]="{'active': paymentMethodSelected === paymentMethod}" (click)="changePaymentMethodOption(paymentMethod)">
+                        <div class="payment-method">
+                            <i class="radio"></i>
+                        </div>
+                        <div class="payment-method-icon"
+                            [ngStyle]="{'background-image': 'url(https://cdn.wee.bet/img/cassino/logos/' + paymentMethod + '.png)'}"
+                        ></div>
+                        <div>
+                            <span class="payment-method-name">{{paymentMethod | formatPaymentMethod}}</span>
+                        </div>
+                        <i class="fa-solid fa-caret-right"></i>
+                    </a>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-3" *ngIf="permitirBonusPrimeiroDeposito">
-            <div class="col col-sm-6 permitirBonusPrimeiroDeposito">
-                <label class="">{{'financeiro.desejaReceberBonusPrimeiroDeposito' | translate}}</label><br>
-                <a class="btn-regras-bonus" (click)="abrirRegrasBonus()">Regras do Bônus</a>
-                <div class="buttons-container mt-3">
-                    <div class="links-bonus">
-                        <a *ngIf="bonusEsportivo" class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'esportivo'}" (click)="selecionarOpcaoBonus('esportivo')">
-                            <div class="bonus">
-                                <i class="radio"></i>
+            </section>
+            <section id="deposit-details">
+                <h3 class="hide-mobile">{{'deposito.depositDetails' | translate}}</h3>
+                <div id="details-wrapper">
+                    <div class="details-container">
+                        <div class="details-text">
+                            {{
+                            permitirBonusPrimeiroDeposito ?
+                            ('deposito.depositText' | translate:{'paymentMethod': (paymentMethodSelected | formatPaymentMethod), 'bonusType': (bonusType | translate)}) :
+                            ('deposito.depositTextWithoutBonus' | translate:{'paymentMethod': (paymentMethodSelected | formatPaymentMethod)})
+                            }}
+                        </div>
+                        <div class="hide-desktop details-payment-method" *ngIf="availablePaymentMethods.length > 1">
+                            <h3>{{'financeiro.paymentGateway' | translate}}</h3>
+                            <div class="form-group">
+                                <select formControlName="paymentMethod" type="text" class="form-control inverted-out"
+                                    (change)="changePaymentMethodOption($event.target.value)">
+                                    <option *ngFor="let paymentMethod of availablePaymentMethods" [value]="paymentMethod">{{paymentMethod | formatPaymentMethod}}</option>
+                                </select>
+                                <app-error-msg [control]="form.get('paymentMethod')"></app-error-msg>
                             </div>
-                            <div class="icone-bonus">
-                                <i class="fa-solid fa-coins" style="font-size: 20px"></i>
+                        </div>
+                        <div class="details-amount">
+                            <label class="label">{{'deposito.enterAmount' | translate}}</label>
+                            <input currencyMask
+                                class="form-control inverted-out"
+                                (keyup)="calculateBonusAmount()"
+                                [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                formControlName="valor">
+                            <app-error-msg [control]="form.get('valor')"></app-error-msg>
+                            <div class="min-amount">
+                                {{'deposito.valorMinimo' | translate}} {{ valorMinDeposito | currency }}
                             </div>
-                            <div>
-                                <span style="margin-left: 5px">{{'financeiro.receberBonus' | translate}}</span>
+                            <div class="shortcut-amounts">
+                                <button type="button" class="btn" (click)="changeAmount(10)">
+                                    {{10 | currency}}
+                                </button>
+                                <button type="button" class="btn" (click)="changeAmount(20)">
+                                    {{20 | currency}}
+                                </button>
+                                <button type="button" class="btn" (click)="changeAmount(50)">
+                                    {{50 | currency}}
+                                </button>
+                                <button type="button" class="btn" (click)="changeAmount(100)">
+                                    {{100 | currency}}
+                                </button>
+                                <button type="button" class="btn" (click)="changeAmount(500)">
+                                    {{500 | currency}}
+                                </button>
+                                <button type="button" class="btn" (click)="changeAmount(1000)">
+                                    {{1000 | currency}}
+                                </button>
                             </div>
-                        </a>
-                    </div>
-                    <div class="links-bonus" *ngIf="bonusCassino" >
-                        <a class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'cassino'}" (click)="selecionarOpcaoBonus('cassino')">
-                            <div class="bonus">
-                                <i class="radio"></i>
+                        </div>
+                        <div class="details-bonus" *ngIf="permitirBonusPrimeiroDeposito">
+                            <h3 (click)="toggleBonusSection()">
+                                <span>{{'geral.rollover' | translate}}</span>
+                                <i class="fa m-0"
+                                    [ngClass]="{'fa-angle-down': !droppedBonus, 'fa-angle-up': droppedBonus}"
+                                ></i>
+                            </h3>
+                            <div id="bonus-wrapper">
+                                <div class="bonus-text">
+                                    {{'financeiro.desejaReceberBonusPrimeiroDeposito' | translate:{'bonusType': (bonusType | translate)} }}
+                                    &nbsp;<a class="btn-regras-bonus" (click)="abrirRegrasBonus()">{{'rollover.bonusRules' | translate}}</a>
+                                </div>
+                                <div class="options-container bonus-options" [ngStyle]="{'width': onlyOneModality ? '67%' : '100%'}">
+                                    <a class="bonus-option"
+                                        [ngClass]="{'active':bonusOption === 'esportivo'}"
+                                        [ngStyle]="{'width': onlyOneModality ? '48%' : '31%'}"
+                                        (click)="changeBonusOption('esportivo')"
+                                        *ngIf="bonusEsportivo"
+                                    >
+                                        <div class="bonus">
+                                            <i class="radio"></i>
+                                        </div>
+                                        <div class="bonus-option-wrapper">
+                                            <div class="bonus-info bonus-type">{{'bet.sportsBetting' | translate}}</div>
+                                            <div class="bonus-info bonus-amount">
+                                                <span class="with-bonus">
+                                                    {{amountSportsBonus | currency}} {{'geral.rollover' | translate}}
+                                                </span>
+                                            </div>
+                                            <div class="bonus-info bonus-percent" [ngStyle]="{'font-size': '10px'}">100% {{'rollover.upTo' | translate}} {{maxAmountSportsBonus | currency}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="bonus-option"
+                                        [ngClass]="{'active':bonusOption === 'cassino'}"
+                                        [ngStyle]="{'width': onlyOneModality ? '48%' : '31%'}"
+                                        (click)="changeBonusOption('cassino')"
+                                        *ngIf="bonusCassino"
+                                    >
+                                        <div class="bonus">
+                                            <i class="radio"></i>
+                                        </div>
+                                        <div class="bonus-option-wrapper">
+                                            <div class="bonus-info bonus-type">{{'bet.casinoBetting' | translate}}</div>
+                                            <div class="bonus-info bonus-amount">
+                                                <span class="with-bonus">
+                                                    {{amountCasinoBonus | currency}} {{'geral.rollover' | translate}}
+                                                </span>
+                                            </div>
+                                            <div class="bonus-info bonus-percent" [ngStyle]="{'font-size': '10px'}">100% {{'rollover.upTo' | translate}} {{maxAmountCasinoBonus | currency}}</div>
+                                        </div>
+                                    </a>
+                                    <a class="bonus-option"
+                                        [ngClass]="{'active':bonusOption === 'nenhum'}"
+                                        [ngStyle]="{'width': onlyOneModality ? '48%' : '31%'}"
+                                        (click)="changeBonusOption('nenhum')"
+                                    >
+                                        <div class="bonus">
+                                            <i class="radio"></i>
+                                        </div>
+                                        <div class="bonus-option-wrapper">
+                                            <div class="bonus-info bonus-type">{{'rollover.bonusForfeited' | translate}}</div>
+                                            <div class="bonus-info bonus-amount">
+                                                <span class="without-bonus">
+                                                    {{'rollover.noBonus' | translate}}
+                                                </span>
+                                            </div>
+                                            <div class="bonus-info bonus-percent" [ngStyle]="{'font-size': '10px'}">{{'rollover.bonusWillBeForfeited' | translate}}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <app-error-msg [control]="form.get('bonus')"></app-error-msg>
                             </div>
-                            <div class="icone-bonus">
-                                <i class="fa-solid fa-coins" style="font-size: 20px"></i>
+                        </div>
+                        <div class="details-promo-code">
+                            <h3 (click)="togglePromoCodeSection()">
+                                <span>{{'geral.promoCode' | translate}}</span>
+                                <i class="fa m-0"
+                                    [ngClass]="{'fa-angle-down': !droppedPromoCode, 'fa-angle-up': droppedPromoCode}"
+                                ></i>
+                            </h3>
+                            <div id="promo-code-wrapper">
+                                <input class="form-control inverted-out" formControlName="promoCode" [attr.placeholder]="'geral.promoCodePlaceholder' | translate">
                             </div>
-                            <div>
-                                <span style="margin-left: 5px">{{'financeiro.receberBonusCassino' | translate}}</span>
+                        </div>
+                        <div class="details-submit">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-custom btn-block" [disabled]="submitting">
+                                    {{'geral.depositar' | translate}}
+                                </button>
                             </div>
-                        </a>
-                    </div>
-                    <div class="links-bonus">
-                        <a  class="opcao-bonus" [ngClass]="{'active':opcaoBonus === 'nenhum'}" (click)="selecionarOpcaoBonus('nenhum')">
-                            <div class="bonus">
-                                <i class="radio"></i>
-                            </div>
-                            <div class="icone-bonus">
-                                <i class="fa-solid fa-square-xmark" style="font-size: 20px"></i>
-                            </div>
-                            <div>
-                                <span style="margin-left: 5px">{{'financeiro.naoQueroBonus' | translate}}</span>
-                            </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
-                <app-error-msg [control]="form.get('bonus')"></app-error-msg>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-sm-3 deposito-pix">
-                <div class="form-group group-buttons">
-                    <button type="submit" class="btn btn-custom btn-block" [disabled]="submitting">
-                        {{'geral.depositar' | translate}}
-                    </button>
-                </div>
-            </div>
+            </section>
         </div>
     </form>
 </div>
-
 <ng-template #verificarPromocaoModal let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Atenção!</h4>

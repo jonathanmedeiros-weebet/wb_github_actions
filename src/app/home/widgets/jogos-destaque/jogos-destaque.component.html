@@ -1,0 +1,88 @@
+<div class="loading-listagem" *ngIf="showLoadingIndicator">
+    <div class="slider">
+        <div class="ssc-square title"></div>
+        <div class="itens">
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+        </div>
+    </div>
+</div>
+<div class="jogos-destaque" [ngClass]="{'mb-1': !displayLabel, 'mt-3': !displayLabel}" *ngIf="jogosDestaque.length > 0">
+    <div class="slider-header" *ngIf="displayLabel">
+        {{ 'geral.jogosDestaques' | translate }}
+        <nav>
+            <div class="scroll-button scroll-left disabled-scroll-button" id="cassino-left"
+                (click)="owlCar.prev()">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="scroll-button scroll-right enabled-scroll-button" id="cassino-right"
+                (click)="owlCar.next()">
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+        </nav>
+    </div>
+    <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;" #owlCar>
+        <ng-container *ngFor="let jogoDestaque of jogosDestaque">
+            <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="widthCard">
+                <div class="jogo-destaque">
+                    <div class="header">
+                        <span [title]="jogoDestaque.campeonato?.nome">
+                            {{ jogoDestaque.campeonato?.nome }}
+                        </span>
+                        <span>
+                            {{ jogoDestaque.horario | moment: '' : true}}{{ jogoDestaque.horario | moment:"/ H:mm"}}
+                        </span>
+                    </div>
+
+                    <div class="jogo">
+                        <div class="time1">
+                            <span class="text-center" [title]="jogoDestaque.time_a_nome">{{ jogoDestaque.time_a_nome }}</span>
+                            <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.time_a_img}}.png" size="s" class="escudo-img">
+                            </span>
+                            <ng-template #defaulImage>
+                                <span class="escudo">
+                                    <img src="https://cdn.wee.bet/img/times/m/default.png" size="s" class="escudo-img">
+                                </span>
+                            </ng-template>
+                        </div>
+                        <span class="separador-times">-</span>
+                        <div class="time2">
+                            <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
+                                <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.time_b_img}}.png" size="s" class="escudo-img">
+                            </span>
+                            <ng-template #defaulImage>
+                                <span class="escudo">
+                                    <img src="https://cdn.wee.bet/img/times/m/default.png" size="s" class="escudo-img">
+                                </span>
+                            </ng-template>
+                            <span class="text-center flex-grow-1" [title]="jogoDestaque.time_b_nome">{{ jogoDestaque.time_b_nome }}</span>
+                        </div>
+                    </div>
+
+                    <div class="jogo-destaque-odds">
+                        <div *ngFor="let cotacao of jogoDestaque.cotacoes"
+                        [ngClass]="{'odd-disabled': !cotacaoPermitida(cotacao.valor)}"
+                        class="jogo-destaque-odd {{ itensSelecionados[jogoDestaque._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
+                        (click)="cotacaoPermitida(cotacao.valor) && addCotacao($event, jogoDestaque, cotacao)">
+                            {{ helperService.apostaTipoLabel(cotacao.chave, 'sigla') }}
+                            <ng-container *ngIf="cotacaoPermitida(cotacao.valor);else cotacaoBloqueada">
+                                <span class="cotacao" >{{ cotacao.valorFinal }}</span>
+                            </ng-container>
+                            <ng-template #cotacaoBloqueada>
+                                <span class="cotacao"><i class="fa fa-lock"></i></span>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+</div>

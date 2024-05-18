@@ -1,12 +1,16 @@
-import {
-    Component, OnInit, OnDestroy, Renderer2,
-    ElementRef, DoCheck, Output, EventEmitter
-} from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ParametrosLocaisService, MessageService, JogoService, LiveService, BilheteEsportivoService, HelperService } from '../../../services';
-import { Jogo } from '../../../models';
+import {
+    BilheteEsportivoService,
+    HelperService,
+    JogoService,
+    LayoutService,
+    LiveService,
+    MessageService,
+    ParametrosLocaisService
+} from '../../../services';
 
 @Component({
     selector: 'app-live-listagem',
@@ -31,6 +35,24 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     mobileScreen = false;
     term = '';
     itens;
+    esportesAbertos = [48242, 1];
+    qtdJogosFutebol = 0;
+    qtdJogosBasquete = 0;
+    futebolAoVivohabilitado = false;
+    basqueteAoVivohabilitado = false;
+
+    chavesMercadosPrincipais = {
+        1: {
+            casa: 'casa_90',
+            empate: 'empate_90',
+            fora: 'fora_90'
+        },
+        48242: {
+            casa: 'bkt_casa',
+            fora: 'bkt_fora'
+        }
+    };
+    headerHeight = 92;
 
     constructor(
         private messageService: MessageService,
@@ -40,13 +62,17 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         private helperService: HelperService,
         private bilheteService: BilheteEsportivoService,
         private renderer: Renderer2,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private layoutService: LayoutService,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
-        this.liveService.entrarSalaEventos();
         this.mobileScreen = window.innerWidth <= 1024;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
+
+        this.futebolAoVivohabilitado = this.paramsService.futebolAoVivoAtivo();
+        this.basqueteAoVivohabilitado = this.paramsService.basqueteAoVivoAtivo();
 
         this.definindoAlturas();
 
@@ -57,10 +83,32 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.unsub$))
             .subscribe(itens => this.itens = itens);
 
+
+        this.liveService.entrarSalaEventos();
+        this.getJogosAoVivo();
+    }
+
+    ngDoCheck() {
+        if (!this.awaiting) {
+            const jogosEl = this.el.nativeElement.querySelector('.jogos');
+            this.temJogoAoVivo = !!jogosEl;
+        }
+    }
+
+    ngOnDestroy() {
+        this.liveService.sairSalaEventos();
+        this.unsub$.next();
+        this.unsub$.complete();
+    }
+
+    getJogosAoVivo() {
+        this.campeonatos = new Map();
+        this.showLoadingIndicator = true;
         this.jogoService.getJogosAoVivo()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
+                    let qtdJogosValidos = 0;
                     campeonatos.forEach(campeonato => {
                         const jogos = new Map();
                         let temJogoValido = false;
@@ -68,14 +116,14 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         campeonato.jogos.forEach(jogo => {
                             let valido = true;
 
-                            if (jogo.sport_id !== 1) {
-                                valido = false;
-                            }
-
                             if (this.minutoEncerramentoAoVivo > 0) {
-                                if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                                if (jogo.sport_id === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                     valido = false;
                                 }
+                            }
+
+                            if (jogo.sport_id === 48242 && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
+                                valido = false;
                             }
 
                             if (this.jogoBloqueado(jogo.event_id)) {
@@ -97,12 +145,23 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                             if (valido) {
                                 jogos.set(jogo._id, jogo);
                                 temJogoValido = true;
+                                qtdJogosValidos++;
                             }
-
-
                         });
 
                         campeonato.jogos = jogos;
+
+                        const campeonatoPermitido = this.campeonatoPermitido(campeonato._id);
+
+                        if (campeonatoPermitido && (campeonato.sport_id === 1 || !campeonato.sport_id)) {
+                            this.qtdJogosFutebol += qtdJogosValidos;
+                        }
+
+                        if (campeonatoPermitido && campeonato.sport_id === 48242) {
+                            this.qtdJogosBasquete += qtdJogosValidos;
+                        }
+
+                        qtdJogosValidos = 0;
 
                         if (temJogoValido) {
                             this.campeonatos.set(campeonato._id, campeonato);
@@ -113,34 +172,29 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         }
                     });
 
-
                     setTimeout(() => {
                         this.awaiting = false;
                     }, 2000);
 
                     this.showLoadingIndicator = false;
-
                     this.live();
                 },
                 error => this.handleError(error)
             );
-    }
 
-    ngDoCheck() {
-        if (!this.awaiting) {
-            const jogosEl = this.el.nativeElement.querySelector('.jogos');
-            this.temJogoAoVivo = jogosEl ? true : false;
-        }
-    }
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definindoAlturas();
+                this.cd.detectChanges();
+            });
 
-    ngOnDestroy() {
-        this.liveService.sairSalaEventos();
-        this.unsub$.next();
-        this.unsub$.complete();
+        this.layoutService.resetHideSubmenu();
     }
 
     definindoAlturas() {
-        const headerHeight = this.mobileScreen ? 145 : 132;
+        const headerHeight = this.mobileScreen ? 145 : this.headerHeight;
         const altura = window.innerHeight - headerHeight;
         this.contentSportsEl = this.el.nativeElement.querySelector('.content-sports');
         this.renderer.setStyle(this.contentSportsEl, 'height', `${altura}px`);
@@ -154,7 +208,12 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let inserirCampeonato = false;
 
                 jogo.cotacoes.map(cotacao => {
-                    cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                    cotacao.nome = this.helperService.apostaTipoLabelCustom(
+                        cotacao.chave,
+                        jogo.time_a_nome,
+                        jogo.time_b_nome,
+                        jogo.sport_id
+                    );
                     cotacao.valorFinal = this.helperService.calcularCotacao2String(
                         cotacao.valor,
                         cotacao.chave,
@@ -177,21 +236,21 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
                 let valido = true;
 
-                if (jogo.sport_id && jogo.sport_id !== 1) {
-                    valido = false;
-                }
-
                 if (this.minutoEncerramentoAoVivo > 0) {
-                    if (jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                    if (jogo.sport_id === 1 && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                         valido = false;
                     }
+                }
+
+                if (jogo.sport_id === 48242 && jogo.info.minutos === 0 && jogo.info.tempo == 'fim de jogo') {
+                    valido = false;
                 }
 
                 if (this.jogoBloqueado(jogo.event_id)) {
                     valido = false;
                 }
 
-                if (valido && !jogo.finalizado && jogo.total_cotacoes > 0) {
+                if (valido && !jogo.finalizado) {
                     campeonato.jogos.set(jogo._id, jogo);
 
                     if (inserirCampeonato) {
@@ -234,7 +293,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     jogoBloqueado(eventId) {
-        return this.jogosBloqueados ? (this.jogosBloqueados.includes(eventId) ? true : false) : false;
+        return this.jogosBloqueados ? (!!this.jogosBloqueados.includes(eventId)) : false;
     }
 
     oddSelecionada(jogoId, chave) {
@@ -266,7 +325,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             cotacao: {
                 chave: cotacao.chave,
                 valor: cotacao.valor,
-                nome: this.helperService.apostaTipoLabel(cotacao.chave, 'sigla'),
+                nome: this.helperService.apostaTipoLabelCustom(
+                    cotacao.chave,
+                    jogo.time_a_nome,
+                    jogo.time_b_nome
+                ),
             },
             mudanca: false,
             cotacao_antiga_valor: null
@@ -304,16 +367,53 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         return this.campeonatosAbertos.includes(campeonatoId);
     }
 
-    cotacoesPorTipo(cotacoes) {
-        const cotacaoCasa = cotacoes.find(k => k.chave === 'casa_90');
-        const cotacaoEmpate = cotacoes.find(k => k.chave === 'empate_90');
-        const cotacaoFora = cotacoes.find(k => k.chave === 'fora_90');
+    esporteAberto(sportId) {
+        return this.esportesAbertos.includes(sportId);
+    }
 
-        return [
-            cotacaoCasa ?? {nome: 'Casa', lock: true},
-            cotacaoEmpate ?? {nome: 'Empate', lock: true},
-            cotacaoFora ?? {nome: 'Fora', lock: true}
-        ];
+    toggleEsporte(sportId) {
+        const index = this.esportesAbertos.findIndex(id => id === sportId);
+        if (index >= 0) {
+            this.esportesAbertos.splice(index, 1);
+        } else {
+            this.esportesAbertos.push(sportId);
+        }
+    }
+
+    cotacoesPorTipo(jogo) {
+        const cotacoes = jogo.value.cotacoes;
+        const sportId = jogo.value.sport_id;
+
+        const mercadosPrincipais = [];
+
+        mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[sportId]['casa']) ?? {
+            nome: this.helperService.apostaTipoLabelCustom(
+                    this.chavesMercadosPrincipais[sportId]['casa'],
+                jogo.value.time_a_nome,
+                jogo.value.time_b_nome,
+                jogo.value.sport_id
+            ),
+            lock: false
+        });
+
+        if (sportId === 1) {
+            mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[1]['empate']) ?? {
+                nome: 'Empate',
+                lock: true
+            });
+        }
+
+        mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[sportId]['fora']) ?? {
+            nome: this.helperService.apostaTipoLabelCustom(
+                this.chavesMercadosPrincipais[sportId]['fora'],
+                jogo.value.time_a_nome,
+                jogo.value.time_b_nome,
+                jogo.value.sport_id
+            ),
+            lock: false
+        });
+
+        return mercadosPrincipais;
     }
 
     cotacaoPermitida(cotacao) {

@@ -85,7 +85,7 @@ section.jogo {
     align-items: center;
     padding: 10px;
     position: relative;
-    height: 20vh;
+    height: 30vh;
     max-height: 300px;
     background-color: #181818;
     background-image: url("https://cdn.wee.bet/img/stadium-background.png");
@@ -94,6 +94,10 @@ section.jogo {
     background-repeat: no-repeat;
     margin: 5px;
     border-radius: 8px;
+}
+
+.indentificacao-jogo-basquete {
+    background-image: url("https://cdn.wee.bet/img/quadra-basquete-background.png");
 }
 
 .indentificacao-jogo .info-jogo {
@@ -209,7 +213,7 @@ section.jogo {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 25px 45px 0;
+    margin: 0 45px 0;
 }
 
 .placares span {
@@ -276,6 +280,37 @@ section.jogo {
 
 .time-nome {
     margin-top: 5px;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 5px;
+}
+
+.game-stats-item {
+    display: flex;    
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 2px;
+    margin: 0 4px;
+}
+
+.game-card {
+    width: 13px;
+    height: 16px;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
+.yellow-card {
+    background-color: yellow;
+}
+
+.red-card {
+    background-color: red;
 }
 
 .tipo-apostas {

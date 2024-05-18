@@ -1,3 +1,40 @@
 #futebol-live-wrapper{
     max-height: calc(100vh - 132px);
 }
+
+.live-menu-container {
+    margin: 5px;
+    background-color: var(--background);
+    padding: 3px;
+}
+
+.live-menu-container .tabs {
+    background: var(--game);
+    border-radius: 5px;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.live-menu-container .tabs .tab {
+    color: var(--foreground-game);
+    display: block;
+    padding: 10px 10px;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    border-bottom: 3px solid transparent;
+}
+
+.live-menu-container .tabs .tab.active {
+    border-color: var(--highlight);
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 1024px) {
+    .live-menu-container {
+        padding: 0;
+    }
+}

@@ -109,7 +109,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         private jogoService: JogoService,
         private router: Router,
         private translate: TranslateService,
-        private layoutService: LayoutService
+        public layoutService: LayoutService
     ) {
     }
 
@@ -211,6 +211,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                 this.definirAltura();
                 this.cd.detectChanges();
             });
+
+        this.layoutService.resetHideSubmenu();
     }
 
     detectScrollOddsWidth() {

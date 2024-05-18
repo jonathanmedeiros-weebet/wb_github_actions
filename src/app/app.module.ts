@@ -1,9 +1,9 @@
-import {NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {registerLocaleData} from '@angular/common';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {environment} from '../environments/environment';
+import { NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../environments/environment';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import ptBr from '@angular/common/locales/pt';
@@ -11,25 +11,25 @@ import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
 
 import * as moment from 'moment';
-moment.updateLocale('pt-bt', {parentLocale: 'pt-br'});
+moment.updateLocale('pt-bt', { parentLocale: 'pt-br' });
 
 // App routing
-import {AppRoutingModule} from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 // App is our top level component
-import {AppComponent} from './app.component';
+import { AppComponent } from './app.component';
 
 // Core providers
-import {LayoutModule} from './shared/layout/layout.module';
-import {CupomModule} from './cupom/cupom.module';
-import {ParametrosLocaisService} from './services';
+import { LayoutModule } from './shared/layout/layout.module';
+import { CupomModule } from './cupom/cupom.module';
+import { ParametrosLocaisService } from './services';
 
-import {ToastrModule} from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 // Translation Modules
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
@@ -88,7 +88,6 @@ export function googleFactory(service: ParametrosLocaisService) {
         NgxSkeletonLoaderModule.forRoot({ loadingText: 'This item is actually loading...' }),
         AppRoutingModule,
         SocialLoginModule,
-
         LayoutModule,
         CupomModule,
         ToastrModule.forRoot({

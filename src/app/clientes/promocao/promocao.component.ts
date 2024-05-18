@@ -4,16 +4,16 @@ import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.com
 import { UntypedFormBuilder } from '@angular/forms';
 import { Rollover, RodadaGratis } from '../../models';
 import { ActivatedRoute, Router } from '@angular/router';
-import {ConfirmModalComponent} from 'src/app/shared/layout/modals';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmModalComponent, CanceledBonusConfirmComponent } from 'src/app/shared/layout/modals';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegrasBonusModalComponent } from './../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
-import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
+import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
 
 @Component({
-  selector: 'app-promocao',
-  templateUrl: './promocao.component.html',
-  styleUrls: ['./promocao.component.css']
+    selector: 'app-promocao',
+    templateUrl: './promocao.component.html',
+    styleUrls: ['./promocao.component.css']
 })
 export class PromocaoComponent extends BaseFormComponent implements OnInit {
     modalRef;
@@ -31,9 +31,9 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     reverse: boolean = false;
     tabSelected = 'bonus';
 
-    constructor (
+    constructor(
         private financeiroService: FinanceiroService,
-        private sidebarService:SidebarService,
+        private sidebarService: SidebarService,
         private messageService: MessageService,
         private activatedRoute: ActivatedRoute,
         private menuFooterService: MenuFooterService,
@@ -49,7 +49,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         this.mobileScreen = window.innerWidth <= 1024;
         if (!this.mobileScreen) {
-            this.sidebarService.changeItens({contexto: 'cliente'});
+            this.sidebarService.changeItens({ contexto: 'cliente' });
             this.menuFooterService.setIsPagina(true);
         }
 
@@ -100,32 +100,32 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     getRollovers(queryParams?: any) {
         this.showLoading = true;
         this.financeiroService.getRollovers(queryParams)
-        .subscribe(
-            response => {
-                this.rollovers = response.rollovers;
-                this.rodadas = response.rodadas.map(rodada => {
-                    const status = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : 'Cancelado';
-                    return { ...rodada, status };
-                });
-                this.rodadas.sort((a, b) => {
-                    const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3 };
-                    return statusOrder[a.status] - statusOrder[b.status];
-                });
+            .subscribe(
+                response => {
+                    this.rollovers = response.rollovers;
+                    this.rodadas = response.rodadas.map(rodada => {
+                        const status = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : 'Cancelado';
+                        return { ...rodada, status };
+                    });
+                    this.rodadas.sort((a, b) => {
+                        const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3 };
+                        return statusOrder[a.status] - statusOrder[b.status];
+                    });
 
-                this.rodadasListagem = this.rodadas;
-                this.rolloversListagem = this.rollovers;
-                this.showLoading = false;
-                this.loading = false;
-            },
-            error => {
-                this.handleError(error);
-                this.showLoading = false;
-            }
-        );
+                    this.rodadasListagem = this.rodadas;
+                    this.rolloversListagem = this.rollovers;
+                    this.showLoading = false;
+                    this.loading = false;
+                },
+                error => {
+                    this.handleError(error);
+                    this.showLoading = false;
+                }
+            );
     }
 
-    converterBonus(rolloverId){
-        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
+    converterBonus(rolloverId) {
+        this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Converter Bônus';
         this.modalRef.componentInstance.msg = 'Tem certeza que deseja converter seu bônus em saldo real?';
 
@@ -145,10 +145,13 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         );
     }
 
-    cancelarBonus(rolloverId){
-        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
-        this.modalRef.componentInstance.title = 'Cancelar Bônus';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar seu bônus?';
+    cancelarBonus(rolloverId) {
+        this.modalRef = this.modalService.open(CanceledBonusConfirmComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            size: 'md',
+            centered: true,
+            windowClass: 'modal-537 modal-cadastro-cliente'
+        });
 
         this.modalRef.result.then(
             () => {
@@ -157,6 +160,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                         response => {
                             this.messageService.success('Bônus Cancelado');
                             this.submit();
+                            this.getRollovers();
                         },
                         error => {
                             this.handleError(error);
@@ -168,7 +172,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
 
     filtrarPorStatus() {
         const statusSelecionado = this.form.get('status').value.toLowerCase();
-      
+
         this.rodadasListagem = statusSelecionado === ''
             ? [...this.rodadas]
             : this.rodadas.filter(rodada => rodada.status.toLowerCase() === statusSelecionado);
@@ -177,23 +181,23 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     filtarRolloverStatus() {
         const statusSelecionado = this.form.get('statusRollover').value.toLowerCase();
 
-        this.rolloversListagem = statusSelecionado === '' 
+        this.rolloversListagem = statusSelecionado === ''
             ? [...this.rollovers]
             : this.rollovers.filter(rollover => rollover.status === statusSelecionado);
     }
 
     sortBy(field: string) {
         this.cd.detectChanges();
-    
+
         if (this.order === field) {
             this.reverse = !this.reverse;
         }
-    
+
         this.order = field;
         this.rodadasListagem.sort((a, b) => {
             const valueA = a[field];
             const valueB = b[field];
-    
+
             if (valueA < valueB) {
                 return this.reverse ? 1 : -1;
             } else if (valueA > valueB) {
@@ -204,7 +208,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         });
     }
 
-    openGame(game: string, fornecedor: string){
-        this.router.navigate(['casino/c/play/REAL', game, fornecedor]);
+    openGame(game: string, fornecedor: string) {
+        this.router.navigate(['casino/', fornecedor, game]);
     }
 }

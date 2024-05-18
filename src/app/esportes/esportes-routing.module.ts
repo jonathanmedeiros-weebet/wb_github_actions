@@ -22,11 +22,6 @@ export const routes: Routes = [
                 pathMatch: 'full',
             },
             {
-                path: 'live',
-                loadChildren: () => import('./live/live.module').then(m => m.LiveModule),
-                canActivate: [AoVivoGuard]
-            },
-            {
                 path: 'futebol',
                 loadChildren: () => import('./futebol/futebol.module').then(m => m.FutebolModule),
             },
@@ -56,7 +51,7 @@ export const routes: Routes = [
             },
             {
                 path: 'basquete',
-                data: { sportId: '18' },
+                data: { sportId: '48242' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [BasqueteGuard]
             },

@@ -2,220 +2,319 @@
     padding: 25px 38px;
 }
 
-.btnClose {
-    font-size: 32px;
-    line-height: 22px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color:  var(--highlight);
-    cursor: pointer;
+#withdrawal {
+    background-color: var(--sidebars);
+    padding: 30px;
 }
 
-.table-responsive {
-    margin-top: 50px;
+#withdrawal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-.table {
-    color: var(--foreground);
- }
+#withdrawal-container h3 {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 6px;
+    color: var(--foreground-sidebars);
+    border-bottom: 1px solid var(--foreground-sidebars);
+}
 
- .table thead th {
-     background-color: var(--game);
-     color: var(--foreground-game);
-     border-top: 0;
-     border-bottom: 1px solid var(--game);
-     padding: 15px 10px;
- }
+#payment-method-column {
+    flex: 2;
+}
 
- .table thead th:first-child {
-     border-left: 10px solid  var(--game);
- }
+#payment-method-column h3,
+#payment-method-column>div {
+    width: 75%;
+}
 
- .table .right {
-     text-align: right;
- }
+#withdrawal-details {
+    flex: 3;
+}
 
- .table tbody td {
-     border-top: 0;
-     border-bottom: 1px solid var(--game);
-     vertical-align: middle;
-     padding: 15px 10px;
-
- }
-
- .table td.no-border{
-     border-left: 0 !important;
- }
-
-
-.table a.info {
-    display: inline-flex;
-    align-items: center;
+#details-wrapper {
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
     justify-content: center;
+}
 
-    width: 17px;
-    height: 17px;
+.payment-method-options {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: var(--foreground-sidebars);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-method-options a {
+    width: 96%;
+    position: relative;
+}
+
+.options-container a .radio {
+    height: 15px;
+    width: 15px;
+    border: 1px solid var(--foreground-sidebars);
+    background-color: transparent;
     border-radius: 50%;
+    position: relative;
+}
 
+.options-container a.active .radio {
+    border: 1px solid var(--highlight);
+}
+
+.radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+
+    top: 3px;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--highlight);
+}
+
+.options-container a.active .radio:after {
+    display: block;
+}
+
+.payment-method-option {
+    display: flex;
+    align-items: center;
+    padding: 18px 24px 18px 24px;
+    margin-bottom: 15px;
+    border: 1px solid var(--game);
+    color: var(--foreground);
+    border-radius: 4px;
+    text-decoration: none;
     cursor: pointer;
+    border-color: rgba(var(--foreground-sidebars-rgb), 0.2);
+}
 
+.payment-method-option i.fa-caret-right {
+    display: none;
+    position: absolute;
+    right: -7px;
+    color: var(--highlight);
+    font-size: 18px;
+}
+
+.payment-method-option.active i.fa-caret-right {
+    display: block;
+}
+
+.payment-method {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.payment-method-icon {
+    width: 36px;
+    height: 23px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.payment-method-name {
+    font-size: 13px;
+}
+
+.active:not(.key-type-option) {
+    background-color: rgba(var(--highlight-rgb), 0.1) !important;
+    border-color: var(--highlight) !important;
+}
+
+.details-container {
+    width: 96%;
+    display: flex;
+    color: var(--foreground-sidebars);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#details-wrapper .details-available-amount {
+    border: 0.5px solid rgba(var(--foreground-sidebars-rgb), 0.2);
+    padding: 12px 10px 9px;
+    width: 66%;
+    border-radius: 5px;
+}
+
+#details-wrapper .details-available-amount span {
+    font-weight: 600;
+}
+
+#details-wrapper .details-safe-withdrawal-alert {
+    width: 74%;
+    margin-top: 28px;
+}
+
+#details-wrapper .details-key-type {
+    width: 100%;
+    margin-top: 28px;
+}
+
+#details-wrapper .key-type-options {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 22px;
+}
+
+#details-wrapper .key-type-option {
+    display: flex;
+    flex-direction: row;
+    color: var(--foreground-sidebars);
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+#details-wrapper .key-type {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 6px;
+    margin-bottom: 4px;
+}
+
+#details-wrapper .key-type-input {
+    margin-top: 22px;
+    width: 66%;
+}
+
+.details-amount {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.details-amount input {
+    text-align: left !important;
+    width: 66%;
+    margin: 12px 0 8px
+}
+
+.details-amount label {
+    margin-bottom: 0;
+}
+
+.details-amount .min-amount {
+    color: rgba(var(--foreground-sidebars-rgb), 0.6);
+}
+
+.shortcut-amounts {
+    width: 66%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.shortcut-amounts button {
+    width: 32%;
+    height: 40px;
+    margin-top: 6px;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+}
+
+.shortcut-amounts button:active,
+.shortcut-amounts button:hover {
     background-color: var(--highlight);
     color: var(--foreground-highlight);
 }
 
- .btn-cancelar {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 1px;
+.inverted-out, input.inverted-out:disabled, input.inverted-out:read-only {
+    border-color: rgba(var(--foreground-inputs-odds-rgb), 0.2);
+}
 
-    display: block;
-    width: 24px;
-    height: 24px;
+.details-submit {
+    width: 45%;
+    margin-top: 40px;
+}
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
- }
-
- .btn-cancelar i {
-    color: #fff;
-    margin: 0;
- }
-
- .alerta-saldo {
-    display: none;
- }
-
-.solicitar-saque{
+#details-wrapper .details-submit button {
     width: 100%;
 }
 
- @media only screen and (max-width: 1024px) {
+.details-submit div {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1024px) {
     #default-content {
         padding: 20px;
+    }
+
+    #withdrawal {
         background: var(--background);
-        color: var(--foreground);
-        height: 100%;
-    }
-
-    h2 {
-        font-size: 18px;
-        margin-bottom: 25px;
-    }
-
-    .uncollapsed {
         padding: 0;
-    }
-
-    .buttons-container {
-        background-color: #181818;
-        border: 2px solid #181818;
-        border-radius: 4px;
-    }
-
-    .buttons-container a {
-        margin: 0;
-        justify-content: center;
-        border: 0;
-        background-color: #181818;
-    }
-
-    .buttons-container a.active {
-        background-color: #35cc95;
-        color: #181818;
-        fill: #181818;
-    }
-
-    .buttons-container a i.radio{
-        display: none;
-    }
-
-    .table thead th {
-        background-color: var(--game);
-        white-space: nowrap;
-    }
-
-    .table td {
-        white-space: nowrap;
     }
 
     .modal-body {
         padding-top: 50px;
     }
 
-    .group-input-valor {
-        text-align: center;
+    #details-wrapper {
+        margin-top: 0;
     }
 
-    .row-input-valor {
-        justify-content: center;
-        margin-top: 40px;
-    }
-
-    .label-input-valor {
-        text-align: center;
-        display: block;
-    }
-
-    .input-valor {
-        border: 0;
-        border-bottom: 2px solid var(--game);
-        color: var(--foreground);
-        border-radius: 0;
-
-        text-align: center !important;
-        font-size: 22px;
-        background-color: transparent;
-
-        padding: 5px;
-    }
-
-    .input-valor:focus {
-        border: 0;
-        border-bottom: 2px solid var(--highlight);
-        color: var(--foreground);
-        background-color: transparent;
-    }
-
-    .alerta-min {
-        border-radius: 4px;
-        margin-top: 40px !important;
-        padding: 10px 15px;
-        font-size: 11px; /* ajuste fonte */
-        background: var(--game);
-        color: var(--foreground-game);
-        text-align: left;
-    }
-
-    .group-buttons {
+    #details-wrapper .details-available-amount {
         width: 100%;
-        margin-top: 50px;
     }
 
-    .saque-pix{
-        justify-content: center;
-        max-width: 100% !important;
-        flex: 0 0 100% !important;
+    #details-wrapper .details-safe-withdrawal-alert {
+        width: 100%;
     }
 
-
-    .buttons {
-        flex-direction: column;
-        gap: 10px;
+    #details-wrapper .key-type-select {
+        margin-top: 22px;
     }
 
-    .alerta-saldo {
-        display: block;
+    #details-wrapper .key-type-input {
+        width: 100%;
+    }
 
-        border-radius: 4px;
-        margin-top: 15px !important;
-        margin-bottom: 30px;
-        padding: 10px 15px;
-        font-size: 11px; /* ajuste fonte */
-        background: var(--game);
-        color: var(--foreground-game);
-        text-align: left;
-     }
+    .details-payment-method {
+        margin-top: 28px;
+        width: 100%;
+    }
+
+    .details-payment-method select {
+        margin-top: 24px;
+    }
+
+    .details-payment-method .form-group {
+        margin-bottom: 0;
+    }
+
+    .details-amount input {
+        width: 100%;
+    }
+
+    .shortcut-amounts {
+        width: 100%;
+    }
+
+    .shortcut-amounts button {
+        background-color: var(--game);
+    }
+
+    #details-wrapper .details-submit {
+        width: 100%;
+    }
 }

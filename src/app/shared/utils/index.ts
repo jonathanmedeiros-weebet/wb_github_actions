@@ -20,6 +20,7 @@ export { FormatarPromocaoPipe } from './pipes/formatar-promocao.pipe';
 export { FormatarNomeJogoCassinoPipe } from './pipes/formatar-nome-jogo-cassino.pipe';
 export { DepositoStatusPixPipePipe } from './pipes/depositos-status-pix.pipe';
 export { SafeIframePipe } from './pipes/safe-iframe.pipe';
+export { FormatPaymentMethodPipe } from './pipes/format-payment-method.pipe'
 //
 export { CustomEncoder } from './custom-encoder';
 export { FormValidations } from './form-validation';

@@ -51,7 +51,7 @@ export class MenuFooterComponent implements OnInit {
         this.mobileScreen = window.innerWidth <= 1024;
 
         this.modoCambistaHabilitado = this.paramsService.getOpcoes().modo_cambista;
-        this.aoVivoHabilitado = this.paramsService.getOpcoes().aovivo;
+        this.aoVivoHabilitado = this.paramsService.aoVivoAtivo();
 
         if (this.mobileScreen) {
             this.sidebarNavHeight = window.innerHeight - 125;

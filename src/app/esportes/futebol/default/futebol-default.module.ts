@@ -10,6 +10,7 @@ import {EsportesModule} from '../../esportes.module';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {TranslateModule} from '@ngx-translate/core';
+import { HomeModule } from '../../../home/home.module';
 
 @NgModule({
     imports: [
@@ -19,12 +20,13 @@ import {TranslateModule} from '@ngx-translate/core';
         NgbNavModule,
         EsportesModule,
         Ng2SearchPipeModule,
-        TranslateModule
+        TranslateModule,
+        HomeModule
     ],
     declarations: [
         FutebolDefaultWrapperComponent,
         FutebolListagemComponent,
-        FutebolJogoComponent
+        FutebolJogoComponent,
     ],
     providers: [
         NgbActiveModal

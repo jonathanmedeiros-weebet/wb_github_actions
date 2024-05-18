@@ -156,7 +156,24 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
             'data_final': opcoes.data_limite_tabela,
         };
 
-        this.campeonatoService.getCampeonatos(params)
+
+        if (this.sportId == 48242) {
+            this.campeonatoService.getCampeonatosPorRegioes(params)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                campeonatos => {
+                    const dados = {
+                        itens: campeonatos,
+                        contexto: this.contexto,
+                        esporte: this.esporte
+                    };
+
+                    this.sidebarService.changeItens(dados);
+                },
+                error => this.messageService.error(error)
+            );
+        } else {
+            this.campeonatoService.getCampeonatos(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 campeonatos => {
@@ -169,6 +186,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                 },
                 error => this.messageService.error(error)
             );
+        }        
     }
 
     receptorJogoSelecionadoId(jogoId) {
@@ -206,7 +224,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                 this.esporte = 'hoquei-gelo';
                 this.odds = ['hoquei_gelo_casa', 'hoquei_gelo_fora'];
                 break;
-            case '18':
+            case '48242':
                 this.esporte = 'basquete';
                 this.odds = ['bkt_casa', 'bkt_fora'];
                 break;
