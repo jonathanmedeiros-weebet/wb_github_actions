@@ -62,9 +62,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.menuFooterService.setIsPagina(true);
         this.route.params.subscribe(params => {
             this.params = params;
-            this.gameId = params['game_id'];
-            this.gameMode = params['game_mode'] ?? 'REAL';
-            this.gameFornecedor = params['game_fornecedor'];
+            if(this.router.url.includes('parlaybay')){
+                this.gameId = "170000";
+                this.gameMode = 'REAL';
+                this.gameFornecedor = 'parlaybay';
+            } else {
+                this.gameId = params['game_id'];
+                this.gameMode = params['game_mode'] ?? 'REAL';
+                this.gameFornecedor = params['game_fornecedor'];
+            }
 
             if (['c', 'cl', 'v'].includes(String(this.gameFornecedor))) {
                 const casinoAcronyms = {
