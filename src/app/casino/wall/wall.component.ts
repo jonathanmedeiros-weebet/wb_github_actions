@@ -87,7 +87,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get hideProviders(){
-        return this.isVirtualPage || this.isParlaybay;
+        return this.isVirtualPage;
     }
 
     get isDemo(): boolean {
@@ -108,10 +108,6 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     get isVirtualPage(): boolean {
         return this.blink === 'virtual-sports';
-    }
-
-    get isParlaybay(): boolean {
-        return this.blink === 'pb';
     }
 
     get isCassinoAoVivoPage(): boolean {
@@ -155,7 +151,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     private getGameList() {
-        if (this.isCassinoPage || this.isVirtualPage || this.isParlaybay) {
+        if (this.isCassinoPage || this.isVirtualPage) {
             this.getGameCassinoList();
         }
 
@@ -184,15 +180,8 @@ export class WallComponent implements OnInit, AfterViewInit {
             });
             this.gamesCassino = gameList.filter((game: GameCasino) => game.category === 'virtual');
             this.categorySelected = 'virtual';
-        } else if (this.isParlaybay) {
-            this.sideBarService.changeItens({
-                contexto: 'parlaybay',
-                dados: {}
-            });
-            this.gamesCassino = gameList.filter((game: GameCasino) => game.fornecedor === 'parlaybay');
-            this.categorySelected = 'parlaybay';
         } else {
-            this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB' && game.fornecedor !== 'parlaybay');
+            this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
 

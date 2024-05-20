@@ -624,7 +624,7 @@
                 <span>{{'menu.esportes' | translate}}</span>
             </a>
         </div>
-        <ng-container *ngIf="!isLoggedIn">
+        <ng-container *ngIf="isLoggedIn">
             <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
                 <a [routerLink]="['parlaybay']" routerLinkActive="active">
                     <span>PARLAYBAY</span>
