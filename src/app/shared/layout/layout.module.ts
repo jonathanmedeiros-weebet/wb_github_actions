@@ -15,7 +15,8 @@ import {
     PagesLayoutComponent,
     PagesNoNavLayoutComponent,
     SportLayoutComponent,
-    VirtuaisLayoutComponent
+    VirtuaisLayoutComponent,
+    LiveSportLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -66,7 +67,8 @@ import {
     CarregamentoModalComponent,
     CompatilhamentoBilheteModal,
     RegrasBonusModalComponent,
-    JogosLiberadosBonusModalComponent
+    JogosLiberadosBonusModalComponent,
+    CanceledBonusConfirmComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -89,6 +91,8 @@ import { InformativoModalComponent } from './modals/informativo-modal/informativ
 import { JogoService } from '../services/aposta-esportiva/jogo.service';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { SkeletonComponent } from './skeleton/skeleton.component';
+import { SkeletonModule } from './skeleton/skeleton.module';
 
 @NgModule({
     imports: [
@@ -116,7 +120,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         }),
         TranslateModule,
         RecaptchaModule,
-        RecaptchaFormsModule
+        RecaptchaFormsModule,
+        SkeletonModule
     ],
     declarations: [
         MainLayoutComponent,
@@ -160,6 +165,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         LoteriaLayoutComponent,
         DesafioLayoutComponent,
         AcumuladaoLayoutComponent,
+        LiveSportLayoutComponent,
         SidebarNavComponent,
         SidebarMenuComponent,
         LoginModalComponent,
@@ -178,7 +184,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         InformativoModalComponent,
         CarregamentoModalComponent,
         CompatilhamentoBilheteModal,
-        WelcomePageComponent
+        WelcomePageComponent,
+        CanceledBonusConfirmComponent,
     ],
     exports: [
         MainLayoutComponent,
@@ -194,7 +201,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         SpinnerComponent,
         BilheteEsportivoComponent,
         BannersComponent,
-        WelcomePageComponent
+        WelcomePageComponent,
+        SubmenuComponent,
+        SkeletonModule
     ],
     providers: [
         ApostaEsportivaService,
@@ -212,7 +221,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
         {
             provide: RECAPTCHA_SETTINGS,
 
-            useValue: { siteKey: "6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun" } as RecaptchaSettings,
+            useValue: { siteKey: '6LdT1I0kAAAAAEQlEiqdYeD58l1QkNT-EL1Hdiun' } as RecaptchaSettings,
         }
     ]
 })

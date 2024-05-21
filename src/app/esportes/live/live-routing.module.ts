@@ -1,27 +1,22 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { LiveListagemComponent } from './listagem/live-listagem.component';
+import {LiveSportLayoutComponent, SportLayoutComponent} from 'src/app/shared/layout/app-layouts';
 import { LiveWrapperComponent } from './wrapper/live-wrapper.component';
-import { LiveJogoComponent } from './jogo/live-jogo.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: LiveWrapperComponent,
+        component: LiveSportLayoutComponent,
         children: [
             {
                 path: '',
-                redirectTo: 'jogos',
+                redirectTo: '/live/all',
                 pathMatch: 'full'
             },
             {
-                path: 'jogos',
-                component: LiveListagemComponent
-            },
-            {
-                path: 'jogos/:id',
-                component: LiveJogoComponent
+                path: ':esporte',
+                component: LiveWrapperComponent
             }
         ]
     }

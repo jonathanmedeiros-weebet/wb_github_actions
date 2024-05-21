@@ -1,0 +1,12 @@
+.home-container {
+    overflow-x: auto;
+}
+
+.widgets {
+    display: block;
+}
+
+.banner {
+    display: block;
+    margin-bottom: 14px;
+}

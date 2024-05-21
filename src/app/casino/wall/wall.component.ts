@@ -1,14 +1,25 @@
 import { GameCasino } from './../../shared/models/casino/game-casino';
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, Input, ViewChild} from '@angular/core';
-import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
-import {AuthService, ParametrosLocaisService, SidebarService} from './../../services';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LoginModalComponent} from '../../shared/layout/modals';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {TranslateService} from '@ngx-translate/core';
-import {config} from '../../shared/config';
-import { Subject} from 'rxjs';
-import { debounceTime} from 'rxjs/operators';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, Input, ViewChild } from '@angular/core';
+import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
+import { AuthService, ParametrosLocaisService, SidebarService } from './../../services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginModalComponent } from '../../shared/layout/modals';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { WallProviderFilterModalComponent } from './components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+
+export interface Fornecedor {
+    gameFornecedor: string;
+    gameFornecedorExibicao: string;
+    imagem?: string;
+}
+
+export interface GameSection {
+    id: string;
+    title: string;
+    gameList: GameCasino[];
+    show: boolean;
+}
 
 @Component({
     selector: 'app-wall',
@@ -18,54 +29,49 @@ import { debounceTime} from 'rxjs/operators';
 export class WallComponent implements OnInit, AfterViewInit {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @Input() games: GameCasino[];
-    @ViewChild('fornecedorModal', {static: true}) fornecedorModal;
-    @ViewChild('listagem') listagemJogos;
-    scrolls: ElementRef[];
-    showLoadingIndicator = true;
-    isCliente;
-    isLoggedIn;
-    gameType: string;
-    tituloPagina;
-    private sub: any;
-    modalRef;
-    isHome = false;
-    isMobile = false;
-    salsaCassino;
-    cassinoFornecedores;
-    filtroCassinoFornecedores;
-    isHomeCassino = true;
-    gameList: GameCasino[];
-    gameAllList: GameCasino[];
-    term = '';
-    termFornecedor = '';
-    gameTitle;
-    gamesCassinoTemp = [];
-    gamesCassinoFiltrados = [];
-    gamesCassino: GameCasino[];
-    gamesDestaque: GameCasino[];
-    gamesSlot: GameCasino[];
-    gamesCrash: GameCasino[];
-    gamesRaspadinha: GameCasino[];
-    gamesRoleta: GameCasino[];
-    gamesMesa: GameCasino[];
-    gamesBingo: GameCasino[];
-    gamesLive: GameCasino[];
-    LOGO = config.LOGO;
-    blink: string;
-    modalFiltro;
-    termFornecedorMobile;
-    cassinoFornecedoresTemp = [];
-    cassinoFornecedoresFiltrados = [];
-    isDemo = false;
-    pesquisarTextoAlterado = new Subject<string>();
-    textoAlterado;
-    limparCampoSearch;
-    qtdItens = 20;
+    @ViewChild('listagem') listagemJogos: ElementRef;
+    @ViewChild('scrollMenu') scrollMenu: ElementRef;
+
+    public scrolls: ElementRef[];
+    public qtdItens: number = 20;
+    public scrollStep = 700;
+
+    public showLoadingIndicator: boolean = true;
+    public isCliente: boolean;
+    public isLoggedIn: boolean;
+
+    public gameList: GameCasino[];
+    public gamesCassino: GameCasino[];
+    public gamesDestaque: GameCasino[];
+    private newGamesCassino: GameCasino[];
+    public cassinoFornecedores: Fornecedor[] = [];
+
+    public gamesSection: GameSection[] = [];
+
+    // Cassino
+    public gamesSlot: GameCasino[];
+    public gamesCrash: GameCasino[];
+    public gamesRaspadinha: GameCasino[];
+    public gamesRoleta: GameCasino[];
+    public gamesMesa: GameCasino[];
+    public gamesBingo: GameCasino[];
+    public gamesLive: GameCasino[];
+
+    // Cassino ao vivo
+    public gamesBlackjack: GameCasino[];
+    public gamesBaccarat: GameCasino[];
+    public gamesPoker: GameCasino[];
+    public gamesGameshow: GameCasino[];
+
+    public gameFornecedor: string;
+    public categorySelected: string = 'cassino';
+    public gameTitle: string;
+
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
-        private route: ActivatedRoute,
         private router: Router,
+        private route: ActivatedRoute,
         private modalService: NgbModal,
         private sideBarService: SidebarService,
         private renderer: Renderer2,
@@ -76,132 +82,264 @@ export class WallComponent implements OnInit, AfterViewInit {
     ) {
     }
 
+    get showFilterBox(): boolean {
+        return !this.showLoadingIndicator && !this.hideProviders;
+    }
+
+    get hideProviders(){
+        return this.isVirtualPage;
+    }
+
+    get isDemo(): boolean {
+        return location.host === 'demo.wee.bet';
+    }
+
+    get blink(): string {
+        return this.router.url.split('/')[1] ?? 'casino';
+    }
+
+    get isHomeCassino(): boolean {
+        return (
+            ['', 'todos', 'cassino', 'cassino-live'].includes(this.categorySelected) &&
+            (this.isCassinoPage || this.isCassinoAoVivoPage) &&
+            !this.gameFornecedor
+        );
+    }
+
+    get isVirtualPage(): boolean {
+        return this.blink === 'virtual-sports';
+    }
+
+    get isCassinoAoVivoPage(): boolean {
+        return this.blink === 'live-casino'
+    }
+
+    get isCassinoPage(): boolean {
+        return this.blink === 'casino'
+    }
+
+    get isMobile(): boolean {
+        return window.innerWidth < 1025;
+    }
+
+    get isSalsaCassino(): boolean {
+        return this.paramsService.getOpcoes().salsa_cassino;
+    }
+
+    get subMenuCategory(): string {
+        return this.isCassinoPage ? 'cassino' : 'cassino-live'
+    }
+
     ngOnInit(): void {
-        this.blink = this.router.url.split('/')[2];
-        this.salsaCassino = this.paramsService.getOpcoes().salsa_cassino;
-        this.casinoApi.getGamesList(false).subscribe(response => {
-            this.gamesCassino = response.gameList.filter(function (game) {
-                return game.dataType !== 'VSB';
-            });
-            this.cassinoFornecedores = response.fornecedores;
-            this.gamesDestaque = response.populares;
-            this.gamesSlot = this.filterDestaques(this.gamesCassino, 'slot');
-            this.gamesCrash = this.filterDestaques(this.gamesCassino, 'crash');
-            this.gamesRaspadinha = this.filterDestaques(this.gamesCassino, 'scratchcard');
-            this.gamesRoleta = this.filterDestaques(this.gamesCassino, 'roulette');
-            this.gamesMesa = this.filterDestaques(this.gamesCassino, 'table');
-            this.gamesBingo = this.filterDestaques(this.gamesCassino, 'bingo');
-            this.gamesLive = this.filterDestaques(this.gamesCassino, 'live');
+        this.cd.detectChanges();
+        this.onTranslateChange();
+        this.getGameList();
 
-            this.sub = this.route.params.subscribe(params => {
-                this.gameType = params['game_type'];
-
-                this.isHomeCassino = this.gameType === 'todos' || this.gameType === '';
-
-                if (this.gameType === 'virtuais') {
-                    this.sideBarService.changeItens({
-                        contexto: 'virtuais',
-                        dados: {}
-                    });
-                    this.gameList = response.gameList.filter(function (game) {
-                        return game.category === 'virtual';
-                    });
-                } else {
-                    this.sideBarService.changeItens({
-                        contexto: 'casino',
-                        dados: {}
-                    });
-                    if (this.isHomeCassino) {
-                        this.gameList =  this.gamesCassino;
-                        this.gameTitle = this.translate.instant('geral.todos');
-                    } else {
-                        this.qtdItens = 20;
-                    }
-                    this.listagemJogos.nativeElement.scrollTo( 0, 0 );
-                    switch (this.gameType) {
-                        case 'slot':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'slot');
-                            this.gameTitle = this.translate.instant('cassino.slot');
-                            break;
-                        case 'crash':
-                            this.gameList =this.filterModalidades(this.gamesCassino, 'crash');
-                            this.gameTitle = this.translate.instant('cassino.crash');
-                            break;
-                        case 'roleta':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'roulette');
-                            this.gameTitle = this.translate.instant('cassino.roleta');
-                            break;
-                        case 'raspadinha':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'scratchcard');
-                            this.gameTitle = this.translate.instant('cassino.raspadinha');
-                            break;
-                        case 'mesa':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'table');
-                            this.gameTitle = this.translate.instant('cassino.mesa');
-                            break;
-                        case 'bingo':
-                            this.gameList = this.filterModalidades(this.gamesCassino, 'bingo');
-                            this.gameTitle = 'Bingo';
-                            break;
-                    }
-
-                    this.filtroCassinoFornecedores = this.setFiltroFornecedores(this.gameList);
-                    this.gamesCassinoTemp = [];
-                    this.gamesCassinoFiltrados = [];
-                    this.term = '';
-                    this.termFornecedor = '';
-                }
-            });
-
-            this.showLoadingIndicator = false;
-            this.pesquisarTextoAlterado.pipe(debounceTime(1500)).subscribe(() => {
-                this.term = this.textoAlterado;
-                this.filtrarJogos();
-            });
-
-        }, erro => {});
-        this.auth.logado
-            .subscribe(
-                isLoggedIn => {
-                    this.isLoggedIn = isLoggedIn;
-                }
-            );
-
-        this.auth.cliente
-            .subscribe(
-                isCliente => {
-                    this.isCliente = isCliente;
-                }
-            );
-
-        if (location.host === 'demo.wee.bet') {
-           this.isDemo = true;
+        if (this.isMobile) {
+            this.scrollStep = 200;
         }
 
-        this.isMobile = window.innerWidth < 1025;
+        this.auth.logado.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+        this.auth.cliente.subscribe(isCliente => this.isCliente = isCliente);
     }
 
-    search($event) {
-        this.pesquisarTextoAlterado.next($event.target.value);
-        this.textoAlterado = $event.target.value;
-    }
-    ngAfterViewInit() {
-        this.gamesScrolls.changes.subscribe((scrolls) => {
-            this.scrolls = scrolls.toArray();
+    private onTranslateChange() {
+        this.translate.onLangChange.subscribe(() => {
+            this.filterGames(this.gameFornecedor, this.categorySelected, false)
+            this.cd.detectChanges();
         });
     }
 
-    scrollLeft(scrollId) {
-        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
-        scrollTemp.nativeElement.scrollLeft -= 700;
+    private getGameList() {
+        if (this.isCassinoPage || this.isVirtualPage) {
+            this.getGameCassinoList();
+        }
+
+        if(this.isCassinoAoVivoPage) {
+            this.getGameCassinoAoVivoList();
+        }
     }
 
-    scrollRight(scrollId) {
-        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
-        scrollTemp.nativeElement.scrollLeft += 700;
+    private async getGameCassinoList() {
+        const {
+            fornecedores,
+            gameList,
+            news,
+            populares
+        } = await this.casinoApi.getGamesList(false).toPromise();
+
+        this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
+            ...fornecedor,
+            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+        }));
+
+        if (this.isVirtualPage) {
+            this.sideBarService.changeItens({
+                contexto: 'virtuais',
+                dados: {}
+            });
+            this.gamesCassino = gameList.filter((game: GameCasino) => game.category === 'virtual');
+            this.categorySelected = 'virtual';
+        } else {
+            this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
+            this.newGamesCassino = news;
+            this.gamesDestaque = populares;
+
+            this.gamesSection = [
+                {
+                    id: 'destaques',
+                    title: this.translate.instant('cassino.maisPopulares'),
+                    gameList: this.gamesDestaque,
+                    show: true
+                },
+                {
+                    id: 'crash',
+                    title: this.translate.instant('cassino.crash'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'crash'),
+                    show: true
+                },
+                {
+                    id: 'slot',
+                    title: this.translate.instant('cassino.slot'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'slot'),
+                    show: true
+                },
+                {
+                    id: 'roleta',
+                    title: this.translate.instant('cassino.roleta'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'roulette'),
+                    show: true
+                },
+                {
+                    id: 'mesa',
+                    title: this.translate.instant('cassino.mesa'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'table'),
+                    show: true
+                },
+                {
+                    id: 'raspadinha',
+                    title: this.translate.instant('cassino.raspadinha'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'scratchcard'),
+                    show: true
+                },
+                {
+                    id: 'bingo',
+                    title: this.translate.instant('cassino.bingo'),
+                    gameList: this.filterDestaques(this.gamesCassino, 'bingo'),
+                    show: true
+                }
+            ]
+
+            this.gamesLive = this.filterDestaques(this.gamesCassino, 'live');
+
+            this.sideBarService.changeItens({
+                contexto: 'casino',
+                dados: {}
+            });
+        }
+
+        this.gameList = this.gamesCassino;
+        this.gameTitle = this.translate.instant('geral.todos');
+
+        const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
+        if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
+            this.filterGames(providerParam, this.categorySelected, true);
+        }
+
+        this.listagemJogos.nativeElement.scrollTo(0, 0);
+        this.showLoadingIndicator = false;
     }
 
-    onScroll(scrollId) {
+    private async getGameCassinoAoVivoList() {
+        const {
+            fornecedores,
+            gameList,
+            news,
+            populares
+        } = await this.casinoApi.getGamesList(true).toPromise();
+
+        this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
+            ...fornecedor,
+            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+        }));
+
+        this.gamesCassino = gameList.filter( (game: GameCasino) => game.dataType !== 'VSB');
+        this.newGamesCassino = news;
+        this.gamesDestaque = populares;
+
+        this.gamesSection = [
+            {
+                id: 'destaques',
+                title: this.translate.instant('cassino.maisPopulares'),
+                gameList: this.gamesDestaque,
+                show: true
+            },
+            {
+                id: 'roleta',
+                title: this.translate.instant('cassino.roleta'),
+                gameList: this.filterDestaques(this.gamesCassino, 'roulette'),
+                show: true
+            },
+            {
+                id: 'blackjack',
+                title: 'Blackjack',
+                gameList: this.filterDestaques(this.gamesCassino, 'blackjack'),
+                show: true
+            },
+            {
+                id: 'gameshow',
+                title: 'Game Show',
+                gameList: this.filterDestaques(this.gamesCassino, 'gameshow'),
+                show: true
+            },
+            {
+                id: 'baccarat',
+                title: 'Baccarat',
+                gameList: this.filterDestaques(this.gamesCassino, 'baccarat'),
+                show: true
+            },
+            {
+                id: 'poker',
+                title: 'Poker',
+                gameList: this.filterDestaques(this.gamesCassino, 'poker'),
+                show: true
+            }
+        ]
+
+        this.sideBarService.changeItens({
+            contexto: 'casino',
+            dados: {}
+        });
+
+        this.gameList = this.gamesCassino;
+        this.gameTitle = this.translate.instant('geral.todos');
+
+        const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
+        if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
+            this.filterGames(providerParam, this.categorySelected, true);
+        }
+
+        this.listagemJogos.nativeElement.scrollTo(0, 0);
+        this.showLoadingIndicator = false;
+    }
+
+    ngAfterViewInit() {
+        this.gamesScrolls.changes.subscribe(
+            (scrolls) => this.scrolls = scrolls.toArray()
+        );
+    }
+
+    public scrollLeft(scrollId: string) {
+        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        scrollTemp.nativeElement.scrollLeft -= this.scrollStep;
+    }
+
+    public scrollRight(scrollId: string) {
+        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        scrollTemp.nativeElement.scrollLeft += this.scrollStep;
+    }
+
+    public onScroll(scrollId: string) {
         this.cd.detectChanges();
         const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
         const scrollLeft = scrollTemp.nativeElement.scrollLeft;
@@ -209,43 +347,34 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         const scrollLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-left`);
         const scrollRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-right`);
+        const maxScrollSize = scrollTemp.nativeElement.clientWidth;
 
         const fadeLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-left`);
         const fadeRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-right`);
 
-        const maxScrollSize = scrollTemp.nativeElement.clientWidth;
-
         if (scrollLeft <= 0) {
-            if (!this.isMobile) {
-                this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
-                this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
-            }
-            this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
+            this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
         } else {
-            if (!this.isMobile) {
-                this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
-                this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
-            }
-            this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
+            this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
         }
 
         if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 1) {
-            if (!this.isMobile) {
-                this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
-                this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
-            }
-            this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
+            this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
         } else {
-            if (!this.isMobile) {
-                this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
-                this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
-            }
-            this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
+            this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
         }
     }
 
     abrirModalLogin() {
-        this.modalRef = this.modalService.open(
+        this.modalService.open(
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -255,123 +384,131 @@ export class WallComponent implements OnInit, AfterViewInit {
         );
     }
 
-    filtrarJogos(fornecedor = null) {
-        if(fornecedor){
-            if(fornecedor == 'todos'){
-                this.termFornecedor = null
-            }else{
-                this.termFornecedor = fornecedor;
-            }
-        }
-        if (this.term || this.termFornecedor) {
+    public async filterGames(
+        provider: string = '',
+        category: string = '',
+        enableSelectProvider: boolean = true
+    ) {
+        let providerName = provider ?? this.gameFornecedor;
+        let categoryName = this.getCategorySlug(category ?? this.categorySelected);
 
-            if(!this.gamesCassinoTemp.length){
-                this.gamesCassinoTemp = this.gameList;
-            }else{
-                this.gameList = this.gamesCassinoTemp;
-            }
+        this.categorySelected = category ?? 'cassino';
+        let gamesCassinoList = this.gamesCassino;
 
-            this.gamesCassinoFiltrados =  this.gameList.filter(jogo => {
-                if(this.term && this.termFornecedor){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase()) && jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
-                        return true;
-                    }
-                    return false;
-                }else if(this.term){
-                    if (jogo.gameName.toUpperCase().includes(this.term.toUpperCase())) {
-                        return true;
-                    }
-                    return false;
-                }else{
-                    if (jogo.fornecedor.toUpperCase().includes(this.termFornecedor.toUpperCase())) {
-                        return true;
-                    }
-                    return false;
-                }
-
-            }).map(jogo => Object.assign({}, jogo));
-
-            this.gameList = this.gamesCassinoFiltrados;
-
-        } else {
-            if (this.gamesCassinoTemp.length)   {
-                this.gameList = this.gamesCassinoTemp;
-                this.gamesCassinoTemp = [];
-                this.gamesCassinoFiltrados = [];
-            }
+        if(['news', 'destaques'].includes(categoryName)) {
+            gamesCassinoList = categoryName === 'news' ? this.newGamesCassino : this.gamesDestaque;
         }
 
-        if(this.modalFiltro){
-            this.modalFiltro.close();
+        if(['cassino', 'cassino-live', 'todos', 'news', 'destaques', 'virtual'].includes(categoryName)) {
+            categoryName = null;
         }
-    }
 
-    filtrarFornecedor() {
-        if (this.termFornecedorMobile) {
-            if (!this.cassinoFornecedoresTemp.length) {
-                this.cassinoFornecedoresTemp = this.cassinoFornecedores;
-            } else {
-                this.cassinoFornecedores = this.cassinoFornecedoresTemp;
-            }
-
-            this.cassinoFornecedoresFiltrados = this.cassinoFornecedores.filter(fornecedor => {
-                if (this.termFornecedorMobile) {
-                    return fornecedor.gameFornecedor.includes(this.termFornecedorMobile.toLowerCase()) ||
-                        fornecedor.gameFornecedorExibicao.toLowerCase().includes(this.termFornecedorMobile.toLowerCase());
-                }
-            }).map(fornecedor => Object.assign({}, fornecedor));
-
-            this.cassinoFornecedores = this.cassinoFornecedoresFiltrados;
-        } else {
-            if (this.cassinoFornecedoresTemp.length) {
-                this.cassinoFornecedores = this.cassinoFornecedoresTemp;
-                this.cassinoFornecedoresTemp = [];
-                this.cassinoFornecedoresFiltrados = [];
-            }
+        if(enableSelectProvider){
+            // Responsável pela seleção do provedor no front;
+            providerName = (this.gameFornecedor !== providerName) ? providerName : null;
+            this.gameFornecedor = providerName;
         }
-    }
 
-    limparPesquisa() {
-        if(this.term){
-            this.term = '';
-            this.limparCampoSearch = document.getElementById('limparCampoSearch');
-            this.limparCampoSearch.value = '';
-            this.filtrarJogos();
+        if(!providerName && !categoryName) {
+            this.gameList = gamesCassinoList
         }else{
-            this.termFornecedorMobile = '';
-            this.filtrarFornecedor();
+            this.gameList = gamesCassinoList.filter((game: any) => {
+                const gameProvider = game.fornecedor.toUpperCase();
+                const gameCategory = game.category.toUpperCase();
+
+                if(providerName && categoryName) {
+                    return (
+                        gameProvider.includes(providerName.toUpperCase()) &&
+                        gameCategory.includes(categoryName.toUpperCase())
+                    );
+                }
+
+                if(providerName){
+                    return gameProvider.includes(providerName.toUpperCase());
+                }
+
+                if(categoryName){
+                    return gameCategory.includes(categoryName.toUpperCase());
+                }
+            });
         }
 
+        this.gameTitle = this.getGameTitle(category);
     }
 
-    openFiltroFornecedores() {
-        this.modalFiltro = this.modalService.open(
-            this.fornecedorModal,
+    private getGameTitle(category: string) {
+        const gameTitles = {
+            // Cassino
+            slot: this.translate.instant('cassino.slot'),
+            crash: this.translate.instant('cassino.crash'),
+            roleta: this.translate.instant('cassino.roleta'),
+            mesa: this.translate.instant('cassino.mesa'),
+            bingo: this.translate.instant('cassino.bingo'),
+            raspadinha: this.translate.instant('cassino.raspadinha'),
+            destaques: this.translate.instant('cassino.maisPopulares'),
+            news: this.translate.instant('cassino.news'),
+            todos: this.translate.instant('geral.todos'),
+            cassino: this.translate.instant('geral.todos'),
+            virtual: this.translate.instant('geral.todos'),
+
+            // Cassino ao vivo
+            blackjack: 'Blackjack',
+            baccarat: 'Baccarat',
+            poker: 'Poker',
+            gameshow: 'Game Show'
+        }
+
+        const categoryTitle = gameTitles[category] ?? '';
+        const providerTitle = this.gameFornecedor
+            ? this.cassinoFornecedores.find(provider => provider.gameFornecedor === this.gameFornecedor)?.gameFornecedorExibicao ?? null
+            : null;
+
+        return categoryTitle && providerTitle ? `${categoryTitle} | ${providerTitle}` : categoryTitle;
+    }
+
+    private getCategorySlug(category: string) {
+        const categories = {
+            slot: 'slot',
+            crash: 'crash',
+            roleta: 'roulette',
+            mesa: 'table',
+            bingo: 'bingo',
+            raspadinha: 'scratchcard',
+            destaques: 'destaques',
+            news: 'news',
+            todos: 'cassino',
+            cassino: 'cassino',
+        }
+
+        return categories[category] ?? category
+    }
+
+    public openFiltroFornecedores() {
+        const modalRef = this.modalService.open(
+            WallProviderFilterModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
+                size: 'xxl',
                 centered: true,
+                windowClass: 'modal-750'
             }
         );
+
+        modalRef.componentInstance.providers = this.cassinoFornecedores;
+        modalRef.componentInstance.providerSelected = this.gameFornecedor;
+        modalRef.result.then(({event, data}) => {
+            if(event == 'apply'){
+                const {providerSelected} = data;
+                this.filterGames(providerSelected, this.categorySelected, true)
+            }
+        })
     }
 
-    filterDestaques(games, modalidade) {
-        return games.filter(function (game) {
-            return game.modalidade === modalidade;
-        });
+    private filterDestaques(games: GameCasino[], modalidade: string) {
+        return games.filter((game) => game.modalidade === modalidade);
     }
 
-    filterModalidades(games, modalidade) {
-        return games.filter(function (game) {
-            return game.category === modalidade;
-        });
-    }
-
-    exibirMais() {
-       this.qtdItens += 3;
-    }
-
-    setFiltroFornecedores(games: any[]) {
-        const fornecedoresSet = new Set(games.map(game => game.fornecedor));
-        return this.cassinoFornecedores.filter(fornecedor => fornecedoresSet.has(fornecedor.gameFornecedor));
+    public exibirMais() {
+        this.qtdItens += 3;
     }
 }

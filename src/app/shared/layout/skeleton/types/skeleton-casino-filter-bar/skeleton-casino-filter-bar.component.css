@@ -1,0 +1,29 @@
+.loading-listagem .slider {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0;
+}
+
+.loading-listagem .slider .search-bar {
+   width: 100%;
+   height: 40px;
+}
+
+.loading-listagem .slider .itens {
+    display: flex;
+    overflow: hidden;
+    gap: 20px;
+}
+
+.loading-listagem .slider .itens div {
+    min-width: 80px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .loading-listagem .slider .itens {
+        gap: 10px;
+    }
+}

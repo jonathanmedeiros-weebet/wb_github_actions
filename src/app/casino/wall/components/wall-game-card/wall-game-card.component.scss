@@ -1,0 +1,197 @@
+.game-card {
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    min-height: 125px;
+
+    &--inline {
+        width: 150px;
+        min-height: 144px;
+    }
+
+    &--default {
+        width: calc((100vw / 2) - 16px);
+        min-height: 144px;
+    }
+
+    &--filter .game-card__info {
+        max-width: 140px;
+    }
+    
+    &__image {
+        position: relative;
+        width: 100%;
+        min-height: 105px;
+        height: auto !important;
+        background-color: #00000050;
+        height: min-content;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    &__info {
+        font-size: 14px;
+        font-weight: 600;
+
+        width: 100%;
+        color: var(--foreground-header);
+        transition: .300s;
+        padding: 0 4px;
+        margin-top: 5px;
+
+        display: flex;
+        flex-direction: column;
+
+        &--title {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 19px;
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+            overflow: hidden;
+        }
+
+        &--provider {
+            font-size: 13px;
+            font-weight: 500;
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+            overflow: hidden;
+            opacity: 0.6;
+        }
+    }
+
+    &:hover {
+        .game-button {
+            display: flex;
+            border-radius: 5px;
+        }
+
+        .game-card__image {
+            filter: brightness(20%);
+            transition: 300ms;
+        }
+
+        .game-button--play,
+        .game-button--demo {
+            display: flex;
+        }
+    }
+}
+
+.game-button {
+    display: none;
+    width: 100%;
+    height: calc(100% - 41px);
+    position: absolute;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    top: 0;
+
+    &__container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &--demo {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--header);
+        border-color: var(--foreground-header);
+        color: var(--foreground-header);
+        width: 70%;
+        height: 33px !important;
+        margin-bottom: 10px;
+        pointer-events: none;
+    }
+
+    &--play {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        color: var(--header);
+        background-color: var(--highlight);
+        width: 70%;
+        height: 33px !important;
+        pointer-events: none;
+    }
+
+    &--lock {
+        width: 60%;
+        height: 35%;
+        font-size: 50px;
+        pointer-events: none;
+    }
+
+    &--lock i {
+        color: var(--highlight);
+    }
+}
+
+.game-button:hover .game-button--play,
+.game-button:hover .game-button--demo {
+    pointer-events: unset;
+}
+
+.internal .game-card {
+    width: calc(50% - 5px) !important;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+@media only screen and (min-width: 687px) {
+    .game-card--default {
+        width: calc((100vw / 4) - 16px);
+        min-height: 144px;
+    }
+
+    .game-card--filter .game-card__info {
+        max-width: 200px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .game-card {
+        width: 100%;
+
+        &--inline {
+            width: calc((100vw / 6) - 16px);
+            margin: 0;
+    
+            min-width: 216px;
+            max-width: 216px;
+        }
+
+        &--default {
+            width: calc((100vw / 6) - 26px);
+        }
+
+        &--filter {
+            width: 100%;
+        }
+
+        &__image {
+            min-height: 155px;
+            height: auto;
+        }
+    }
+
+    .game-card--dafault .game-card__image {
+        height: 169px;
+    }
+
+    .game-card--filter .game-card__info {
+        max-width: 140px;
+    }
+
+    .game-button--demo,
+    .game-button--play {
+        height: 42px !important;
+    }
+}

@@ -1,16 +1,17 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {MainLayoutComponent, AuthLayoutComponent} from './shared/layout/app-layouts';
+import { MainLayoutComponent, AuthLayoutComponent } from './shared/layout/app-layouts';
 
-import {AuthGuard, DesafioGuard, LoteriaGuard} from './services';
-import {CupomComponent} from './cupom/cupom.component';
-import {ClientGuard} from './shared/services/guards/client.guard';
-import {CambistaGuard} from './shared/services/guards/cambista.guard';
+import { AoVivoGuard, AuthGuard, DesafioGuard, LoteriaGuard } from './services';
+import { CupomComponent } from './cupom/cupom.component';
+import { ClientGuard } from './shared/services/guards/client.guard';
+import { CambistaGuard } from './shared/services/guards/cambista.guard';
 import { WelcomeGuard } from './shared/services/guards/welcome.guard';
 import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
     {
@@ -20,8 +21,8 @@ const appRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                component: AppComponent,
-                canActivate: [HomeGuard]
+                canActivate: [HomeGuard],
+                loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
             },
             {
                 path: 'cadastro',
@@ -55,12 +56,17 @@ const appRoutes: Routes = [
                 canActivate: [DesafioGuard]
             },
             {
-                path: 'casino',
+                path: '',
                 loadChildren: () => import('./casino/casino.module').then(m => m.CasinoModule)
             },
             {
                 path: 'esportes',
                 loadChildren: () => import('./esportes/esportes.module').then(m => m.EsportesModule)
+            },
+            {
+                path: 'live',
+                loadChildren: () => import('./esportes/live/live.module').then(m => m.LiveModule),
+                canActivate: [AoVivoGuard]
             },
             {
                 path: 'informacoes',
@@ -112,7 +118,7 @@ const appRoutes: Routes = [
         component: CupomComponent
     },
     {
-        path:'welcome',
+        path: 'welcome',
         component: WelcomePageComponent,
         canActivate: [WelcomeGuard]
     },
@@ -125,8 +131,8 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(appRoutes, {
-    scrollPositionRestoration: 'enabled'
-})],
+        scrollPositionRestoration: 'enabled'
+    })],
     exports: [RouterModule]
 })
 export class AppRoutingModule {

@@ -167,9 +167,9 @@
         </div>
     </div>
 </div>
-<div #listagem class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()">
-    <app-banners [showLoadingIndicator]="showLoadingIndicator"></app-banners>
-    <app-destaques (maisCotacoesDestaque)="maisCotacoes($event)" [jogosDestaque]="jogosDestaque"></app-destaques>
+<div #listagem id="futebol-listagem" class="content-sports content-sports-list" infiniteScroll (scrolled)="exibirMais()" (scroll)="layoutService.onPageScroll($event.target)">
+    <app-banners></app-banners>
+    <app-jogos-destaque [displayLabel]="false"></app-jogos-destaque>
     <div class="wrap-sticky">
 
         <div class="filter" *ngIf="!campeonatoSelecionado">
@@ -203,7 +203,7 @@
                 <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span class="column-left">
                         <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
-                        <span class="campeonato-nome">{{campeonato.nome}}</span>
+                        <span class="campeonato-nome">{{campeonato.nome | uppercase}}</span>
                     </span>
                     <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">
                         <i class="fa fa-angle-up"></i>

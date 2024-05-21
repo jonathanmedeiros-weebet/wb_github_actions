@@ -37,6 +37,7 @@ import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentaca
 import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
 import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
+import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
 
 @Component({
     selector: 'app-header',
@@ -88,7 +89,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isCliente;
     modoClienteAtivo;
     centered = true;
-    pixCambista = false;
+    enabledBettorPix = false;
     mostrarSaldo;
     removendoIndiqueGanheCard = false;
     seninhaAtiva;
@@ -105,6 +106,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     indiqueGanheHabilitado = false;
     cartaoApostaHabilitado;
     isDemo = location.host === 'demo.wee.bet';
+    aoVivoAtivo;
 
     public showHeaderMobile: boolean = false;
 
@@ -200,6 +202,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isCliente => this.isCliente = isCliente
             );
 
+        this.aoVivoAtivo = this.paramsService.aoVivoAtivo();
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
@@ -214,10 +217,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
         this.valorGanhoPorIndicacao = (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
-        this.bonusBalanceReferAndEarn = this.paramsService.getOpcoes().indique_ganhe_tipo_saldo_ganho == 'bonus' ? "geral.bonus" : "";
+        this.bonusBalanceReferAndEarn = this.paramsService.getOpcoes().indique_ganhe_tipo_saldo_ganho == 'bonus' ? "indique_ganhe.inBonus" : "";
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
-        this.pixCambista = this.paramsService.getOpcoes().pix_cambista;
+        this.enabledBettorPix = Boolean(this.paramsService.getOpcoes().payment_methods_available_for_bettors.length);
 
         if (window.innerWidth <= 1024) {
             this.sidebarService.isOpen
@@ -425,6 +428,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(DepositoComponent);
     }
 
+    openTransactionHistory() {
+        this.modalService.open(TransacoesHistoricoComponent);
+    }
+
     abrirDepositosCambista() {
         this.modalService.open(DepositoCambistaComponent);
     }
@@ -494,7 +501,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     activeMenuCassino() {
-        if (this.router.url.includes('/casino/c/')) {
+        if (this.router.url.includes('/casino')) {
             return 'active';
         }
 
@@ -502,7 +509,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     activeMenuCassinoLive() {
-        if (this.router.url.includes('/casino/cl/')) {
+        if (this.router.url.includes('/live-casino')) {
             return 'active';
         }
 
@@ -512,7 +519,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     activeGameCassinoMobile() {
         return (
             this.isMobile
-            && (this.router.url.includes('/casino/c/play') || this.router.url.includes('/casino/cl/play'))
+            && (this.router.url.includes('/casino') || this.router.url.includes('/live-casino'))
         );
     }
 

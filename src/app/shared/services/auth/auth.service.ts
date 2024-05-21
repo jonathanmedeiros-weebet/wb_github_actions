@@ -203,6 +203,10 @@ export class AuthService {
         return result;
     }
 
+    liveIsActive() {
+        return this.paramsService.aoVivoAtivo;
+    }
+
     setAppMobile() {
         localStorage.setItem('app-mobile', 'true');
     }
@@ -218,7 +222,7 @@ export class AuthService {
     }
 
     getPosicaoFinanceira() {
-        const url = `${config.BASE_URL}/financeiro/posicao`;
+        const url = `${config.LOKI_URL}/financial/position`;
 
         return this.http
             .get(url, this.header.getRequestOptions(true))

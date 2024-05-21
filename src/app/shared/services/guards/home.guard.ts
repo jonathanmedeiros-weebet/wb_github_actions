@@ -9,12 +9,12 @@ export class HomeGuard implements CanActivate {
 
     pages = {
         esporte: 'esportes',
-        cassino: 'casino/c',
-        virtual: 'casino/v',
+        cassino: 'casino',
+        virtual: 'vitual-sports',
         desafio: 'desafios',
         acumuladao: 'acumuladao',
         loteria: 'loterias',
-        cassino_ao_vivo: 'casino/cl' 
+        cassino_ao_vivo: 'live-casino'
     }
 
     constructor(
@@ -23,14 +23,18 @@ export class HomeGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const { pagina_inicial } = this.paramsService.getOpcoes();
-    
+        const { pagina_inicial, casino, esporte } = this.paramsService.getOpcoes();
+
         if (pagina_inicial) {
-            this.router.navigate([this.pages[pagina_inicial]], {queryParams: route.queryParams});
+            if (pagina_inicial == 'home' && casino && esporte) {
+                return true;
+            }
+
+            this.router.navigate([this.pages[pagina_inicial]], { queryParams: route.queryParams });
             return false;
         }
 
-        this.router.navigate([this.pages['esporte']], {queryParams: route.queryParams});
+        this.router.navigate([this.pages['esporte']], { queryParams: route.queryParams });
         return false;
     }
 }

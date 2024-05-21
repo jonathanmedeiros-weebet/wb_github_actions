@@ -31,18 +31,20 @@ export class HelperService {
         return tipoAposta ? tipoAposta[field] : '';
     }
 
-    apostaTipoLabelCustom(value: any, timeA: string, timeB: string): string {
+    apostaTipoLabelCustom(value: any, timeA: string, timeB: string, sportId = 1): string {
         let result = '';
 
         if (this.tiposAposta[value]) {
             const nome = this.tiposAposta[value].nome;
             result = nome;
 
-            if (nome.search(/casa/ig) >= 0) {
-                result = nome.replace(/casa/ig, timeA);
-            }
-            if (nome.search(/fora/ig) >= 0) {
-                result = nome.replace(/fora/ig, timeB);
+            if (sportId !== 1) {
+                if (nome.search(/casa/ig) >= 0) {
+                    result = nome.replace(/casa/ig, timeA);
+                }
+                if (nome.search(/fora/ig) >= 0) {
+                    result = nome.replace(/fora/ig, timeB);
+                }
             }
         }
 
@@ -254,7 +256,7 @@ export class HelperService {
     }
 
     compartilharPreAposta(codigo) {
-        let dataToSend = {
+        const dataToSend = {
             message: `[${config.BANCA_NOME}] PRÉ APOSTA: ${codigo}`,
             data: `[${config.BANCA_NOME}] PRÉ APOSTA: ${codigo}`,
             action: 'shareURL'
@@ -275,7 +277,7 @@ export class HelperService {
             message += `\nCasa das Apostas: \nhttp://casadasapostas.net/bilhete?banca=${this.casaDasApostasId}&codigo=${aposta.codigo}`;
         }
 
-        let dataToSend = {
+        const dataToSend = {
             message: message,
             file: file,
             data: url,
@@ -286,7 +288,7 @@ export class HelperService {
     }
 
     sharedDepositoPix(file) {
-        let dataToSend = {
+        const dataToSend = {
             message: `Deposito PIX`,
             file: file,
             data: `Qrcode para deposito PIX`,
@@ -296,7 +298,7 @@ export class HelperService {
     }
 
     sharedRecargaCartao(recarga, file) {
-        let dataToSend = {
+        const dataToSend = {
             message: `Comprovante de Recarga`,
             file: file,
             data: `Comprovante de Recarga`,
@@ -306,7 +308,7 @@ export class HelperService {
     }
 
     shareFile(message, file) {
-        let dataToSend = {
+        const dataToSend = {
             message: message,
             file: file,
             data: message,
@@ -316,7 +318,7 @@ export class HelperService {
     }
 
     sendExternalUrl(url) {
-        let dataToSend = {
+        const dataToSend = {
             message: `URL Externa`,
             data: url,
             action: 'externalURL'

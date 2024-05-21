@@ -1,626 +1,131 @@
-<div #listagem infiniteScroll (scrolled)="exibirMais()" class="wall-container" [ngClass]="{'internal': !isHomeCassino || term || termFornecedor}">
-    <app-banners pagina="cassino" [showLoadingIndicator]="showLoadingIndicator"></app-banners>
-
-    <div *ngIf="showLoadingIndicator" class="ssc-square" style="height: 300px"></div>
-
-    <div *ngIf="showLoadingIndicator" class="wall-inner">
-        <div class="bloco">
-            <div class="ssc-square" style="height: 47px; width: 200px; margin-top: 20px"></div>
+<div
+    #listagem
+    infiniteScroll
+    (scrolled)="exibirMais()"
+    class="wall-container"
+    [ngClass]="{
+        'internal': !isHomeCassino,
+        'virtual-container': isVirtualPage
+    }"
+>
+    <ng-container *ngIf="showLoadingIndicator; else elseCasinoPage;">
+        <div class="bloco skeleton-group">
+            <app-skeleton type="banner"/>
+            <app-skeleton type="casino-filter-bar"/>
+            <app-skeleton type="provider"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="casino"/>
         </div>
-        <div class="bloco" style="display: flex; flex-wrap: wrap;">
-            <div class="ssc-square box-jogo" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-            <div class="ssc-square box-jogo hide-mobile" ></div>
-        </div>
-    </div>
+    </ng-container>
 
-    <div class="filter" *ngIf="!showLoadingIndicator && gameType != 'virtuais'">
-        <div class="search-box" >
-            <i class="fa fa-search"></i>
-            <input id="limparCampoSearch" type="text"
-                class="form-control inverted-out"
-                placeholder="Digite o nome de um jogo"
-                (keyup)="search($event)"
-            >
-            <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
-        </div>
-        <ng-container *ngIf="!isMobile">
-            <div class="search-box box-web">
-                <select [(ngModel)]="termFornecedor" (change)="filtrarJogos()" class="inverted-out form-control">
-                    <option value="" selected>Todos os Provedores</option>
-                    <option value="{{fornecedor.gameFornecedor}}" *ngFor="let fornecedor of filtroCassinoFornecedores">
-                        {{fornecedor.gameFornecedorExibicao}}
-                    </option>
-                </select>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="isMobile">
-            <div class="search-box-mobile">
-                <a (click)="openFiltroFornecedores()"><i class="fa fa-filter" aria-hidden="true"></i></a>
-            </div>
-         </ng-container>
-    </div>
-    <div class="wall-inner" *ngIf="!this.term && !this.termFornecedor && !showLoadingIndicator && isHomeCassino; else cassinoGameList">
+    <ng-template #elseCasinoPage>
+        <app-banners pagina="cassino"></app-banners>
 
-        <div class="bloco">
-            <div class="bloco-header">
-                <div class="titulo">{{'cassino.maisPopulares' | translate}}</div>
-            </div>
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="destaques-fade-left"></div>
-                <div class="scroll-button scroll-left disabled-scroll-button" id="destaques-left"
-                     (click)="scrollLeft('destaques')" *ngIf="gamesDestaque.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-left"></i>
+        <div class="bloco filters" *ngIf="showFilterBox">
+            <app-wall-games-search
+                [games]="gamesCassino"
+                [featuredGames]="gamesDestaque"
+                [providers]="cassinoFornecedores"
+                [isCliente]="isCliente"
+                [isLoggedIn]="isLoggedIn"
+                (openModalLogin)="abrirModalLogin()"
+                (onFilterGames)="filterGames($event, categorySelected, true)"
+            />
+
+            <app-submenu
+                [category]="subMenuCategory"
+                version="v2"
+                [menuItemSelected]="categorySelected"
+                (onClick)="filterGames(gameFornecedor, $event, false)"
+            />
+        </div>
+
+        <div class="bloco" *ngIf="!this.hideProviders">
+            <app-wall-section
+                sectionId="providers"
+                [title]="'geral.provedores' | translate"
+                [itemsQty]="cassinoFornecedores.length"
+                (onSeeAll)="openFiltroFornecedores()"
+                (onLeft)="scrollLeft('providers')"
+                (onRight)="scrollRight('providers')"
+            />
+
+            <div class="provider-container">
+                <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
+                    <app-wall-provider-card
+                        *ngFor="let fornecedor of cassinoFornecedores"
+                        [data]="fornecedor"
+                        [selected]="gameFornecedor == fornecedor.gameFornecedor"
+                        (onClick)="filterGames($event, categorySelected, true)"
+                    />
                 </div>
-                <div class="game-list game-list-inline-destaque" #scrollGames id="destaques-scroll" (scroll)="onScroll('destaques')">
-                    <div class="game-tile game-tile-inline-destaque" *ngFor="let game of gamesDestaque">
-                        <ng-container>
-                            <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
+            </div>
+        </div>
+
+        <div class="wall-inner" *ngIf="isHomeCassino; else cassinoGameList">
+            <ng-container *ngFor="let section of gamesSection">
+                <div class="bloco" *ngIf="section.show">
+                    <app-wall-section
+                        [sectionId]="section.id"
+                        [title]="section.title"
+                        [itemsQty]="section.gameList.length"
+                        (onSeeAll)="filterGames($event, section.id, true)"
+                        (onLeft)="scrollLeft(section.id)"
+                        (onRight)="scrollRight(section.id)"
+                    />
+
+                    <div class="games-container">
+                        <ng-container *ngIf="section.gameList.length; else elseWithoutGames">
+                            <div class="more-games-fade more-games-fade-left" id="{{ section.id }}-fade-left"></div>
+                            <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
+                                <app-wall-game-card
+                                    *ngFor="let game of section.gameList"
+                                    [game]="game"
+                                    [blink]="blink"
+                                    [isLoggedIn]="isLoggedIn"
+                                    [isDemo]="isDemo"
+                                    [isCliente]="isCliente"
+                                    cardType="inline"
+                                    (openModalLogin)="abrirModalLogin()"
+                                />
+                            </div>
+                            <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
                         </ng-container>
-                        <div class="logo-game-background"></div>
-                        <div class="logo-game">
-                            <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                        </div>
-                        <div class="game-tile-buttons">
-                            <ng-container *ngIf="!isDemo">
-                                    <a *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    <ng-container *ngIf="isLoggedIn && isCliente">
-                                        <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isLoggedIn">
-                                        <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                            </ng-container>
-                            <ng-container *ngIf="isDemo">
-                                    <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                        <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                        <ng-container *ngIf="isLoggedIn">
-                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                                    </ng-container>
-                            </ng-container>
-                        </div>
+                        <ng-template #elseWithoutGames>
+                            <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+                        </ng-template>
                     </div>
                 </div>
-                <div class="scroll-button scroll-right enabled-scroll-button" id="destaques-right"
-                    (click)="scrollRight('destaques')" *ngIf="gamesDestaque.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="destaques-fade-right" *ngIf="gamesDestaque.length > 2"></div>
-            </div>
+            </ng-container>
         </div>
 
-        <div class="bloco">
-            <div class="bloco-header">
-                <div class="titulo">{{'cassino.crash' | translate}}</div>
-                <div class="ver-todos" *ngIf="gamesCrash.length > 5">
-                    <a [routerLink]="['/casino/c/wall/crash']">
-                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="crash-fade-left"></div>
-                <div class="scroll-button scroll-left disabled-scroll-button" id="crash-left"
-                     (click)="scrollLeft('crash')" *ngIf="gamesCrash.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="game-list game-list-inline" #scrollGames id="crash-scroll" (scroll)="onScroll('crash')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesCrash">
-                        <ng-container>
-                            <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                        </ng-container>
-                        <div class="logo-game-background"></div>
-                        <div class="logo-game">
-                            <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                        </div>
-                        <div class="game-tile-buttons">
-                            <ng-container *ngIf="!isDemo">
-                                    <a *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    <ng-container *ngIf="isLoggedIn && isCliente">
-                                        <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isLoggedIn">
-                                        <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                            </ng-container>
-                            <ng-container *ngIf="isDemo">
-                                <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                    <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                        <ng-container *ngIf="isLoggedIn">
-                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                                    </ng-container>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="scroll-button scroll-right enabled-scroll-button" id="crash-right"
-                     (click)="scrollRight('crash')" *ngIf="gamesCrash.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="crash-fade-right" *ngIf="gamesCrash.length > 2"></div>
-            </div>
-        </div>
+        <app-footer [container]="listagem"></app-footer>
 
-        <div class="bloco">
-            <div class="bloco-header">
-                <div class="titulo">{{'cassino.slot' | translate}}</div>
-                <div class="ver-todos" *ngIf="gamesSlot.length > 5">
-                    <a [routerLink]="['/casino/c/wall/slot']">
-                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
-                    </a>
+        <ng-template #cassinoGameList>
+            <div class="bloco">
+                <div class="titulo" *ngIf="gameList && gameList.length">
+                    {{gameTitle | titlecase}}
+                </div>
+                <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">
+                    {{'geral.nenhumJogoEncontrado' | translate}}!
+                </div>
+                <div class="game-grid">
+                    <app-wall-game-card
+                        *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }"
+                        [game]="game"
+                        [blink]="blink"
+                        [isLoggedIn]="isLoggedIn"
+                        [isDemo]="isDemo"
+                        [isCliente]="isCliente"
+                        (openModalLogin)="abrirModalLogin()"
+                    />
                 </div>
             </div>
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="slot-fade-left"></div>
-                <div class="scroll-button scroll-left disabled-scroll-button" id="slot-left"
-                     (click)="scrollLeft('slot')" *ngIf="gamesSlot.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="game-list game-list-inline" #scrollGames id="slot-scroll" (scroll)="onScroll('slot')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesSlot">
-                        <ng-container>
-                            <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                        </ng-container>
-                        <div class="logo-game-background"></div>
-                        <div class="logo-game">
-                            <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                        </div>
-                        <div class="game-tile-buttons">
-                            <ng-container *ngIf="!isDemo">
-                                    <a *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    <ng-container *ngIf="isLoggedIn && isCliente">
-                                        <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isLoggedIn">
-                                        <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                            </ng-container>
-                            <ng-container *ngIf="isDemo">
-                                <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                    <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                        <ng-container *ngIf="isLoggedIn">
-                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                                    </ng-container>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="scroll-button scroll-right enabled-scroll-button" id="slot-right"
-                     (click)="scrollRight('slot')" *ngIf="gamesSlot.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="slot-fade-right" *ngIf="gamesSlot.length > 2"></div>
-            </div>
-        </div>
-
-        <div class="bloco">
-            <div class="bloco-header">
-                <div class="titulo">{{'cassino.roleta' | translate}}</div>
-                <div class="ver-todos" *ngIf="gamesRoleta.length > 5">
-                    <a [routerLink]="['/casino/c/wall/roleta']">
-                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="roleta-fade-left"></div>
-                <div class="scroll-button scroll-left disabled-scroll-button" id="roleta-left"
-                     (click)="scrollLeft('roleta')"  *ngIf="gamesRoleta.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="game-list game-list-inline"  #scrollGames id="roleta-scroll" (scroll)="onScroll('roleta')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesRoleta">
-                        <ng-container>
-                            <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                        </ng-container>
-                        <div class="logo-game-background"></div>
-                        <div class="logo-game">
-                            <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                        </div>
-                        <div class="game-tile-buttons">
-                            <ng-container *ngIf="!isDemo">
-                                    <a *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    <ng-container *ngIf="isLoggedIn && isCliente">
-                                        <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isLoggedIn">
-                                        <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                            </ng-container>
-                            <ng-container *ngIf="isDemo">
-                                <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                    <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                        <ng-container *ngIf="isLoggedIn">
-                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                                    </ng-container>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="scroll-button scroll-right enabled-scroll-button" id="roleta-right"
-                     (click)="scrollRight('roleta')" *ngIf="gamesRoleta.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="roleta-fade-right" *ngIf="gamesRoleta.length > 2"></div>
-            </div>
-        </div>
-
-        <div class="bloco">
-            <div class="bloco-header">
-                <div class="titulo">{{'cassino.mesa' | translate}}</div>
-                <div class="ver-todos" *ngIf="gamesMesa.length > 5">
-                    <a [routerLink]="['/casino/c/wall/mesa']">
-                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="mesa-fade-left"></div>
-                <div class="scroll-button scroll-left disabled-scroll-button" id="mesa-left"
-                     (click)="scrollLeft('mesa')" *ngIf="gamesMesa.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="game-list game-list-inline" #scrollGames id="mesa-scroll" (scroll)="onScroll('mesa')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesMesa">
-                        <ng-container>
-                            <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                        </ng-container>
-                        <div class="logo-game-background"></div>
-                        <div class="logo-game">
-                            <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                        </div>
-                        <div class="game-tile-buttons">
-                            <ng-container *ngIf="!isDemo">
-                                    <a *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    <ng-container *ngIf="isLoggedIn && isCliente">
-                                        <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isLoggedIn">
-                                        <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                            </ng-container>
-                            <ng-container *ngIf="isDemo">
-                                <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                    <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                        <ng-container *ngIf="isLoggedIn">
-                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                                    </ng-container>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="scroll-button scroll-right enabled-scroll-button" id="mesa-right"
-                    (click)="scrollRight('mesa')" *ngIf="gamesMesa.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="mesa-fade-right" *ngIf="gamesMesa.length > 2"></div>
-            </div>
-        </div>
-
-        <div class="bloco">
-            <div class="bloco-header">
-                <div class="titulo">{{'cassino.raspadinha' | translate}}</div>
-                <div class="ver-todos" *ngIf="gamesRaspadinha.length > 5">
-                    <a [routerLink]="['/casino/c/wall/raspadinha']">
-                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="raspadinha-fade-left"></div>
-                <div class="scroll-button scroll-left disabled-scroll-button" id="raspadinha-left"
-                     (click)="scrollLeft('raspadinha')" *ngIf="gamesRaspadinha.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="game-list game-list-inline" #scrollGames id="raspadinha-scroll"
-                     (scroll)="onScroll('raspadinha')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesRaspadinha">
-                        <ng-container>
-                            <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                        </ng-container>
-                        <div class="logo-game-background"></div>
-                        <div class="logo-game">
-                            <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                        </div>
-                        <div class="game-tile-buttons">
-                            <ng-container *ngIf="!isDemo">
-                                    <a *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    <ng-container *ngIf="isLoggedIn && isCliente">
-                                        <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isLoggedIn">
-                                        <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                            </ng-container>
-                            <ng-container *ngIf="isDemo">
-                                <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                    <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        <ng-container *ngIf="isLoggedIn && isCliente">
-                                            <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                            class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                        <ng-container *ngIf="isLoggedIn">
-                                            <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                                    </ng-container>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="scroll-button scroll-right enabled-scroll-button" id="raspadinha-right"
-                     (click)="scrollRight('raspadinha')" *ngIf="gamesRaspadinha.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="raspadinha-fade-right" *ngIf="gamesRaspadinha.length > 2"></div>
-            </div>
-        </div>
-
-        <div *ngIf="salsaCassino" class="bloco">
-            <div class="bloco-header">
-                <div class="titulo">Bingo</div>
-                <div class="ver-todos" *ngIf="gamesBingo.length > 5">
-                    <a [routerLink]="['/casino/c/wall/bingo']">
-                        {{'geral.verTodos' | translate}} <i class="fa fa-solid fa-angle-right ml-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="games-container">
-                <div class="more-games-fade more-games-fade-left" id="bingo-fade-left"></div>
-                <div class="scroll-button scroll-left disabled-scroll-button" id="bingo-left"
-                     (click)="scrollLeft('bingo')"  *ngIf="gamesBingo.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-left"></i>
-                </div>
-                <div class="game-list game-list-inline" #scrollGames id="bingo-scroll" (scroll)="onScroll('bingo')">
-                    <div class="game-tile game-tile-inline" *ngFor="let game of gamesBingo">
-                        <ng-container>
-                            <img loading="lazy" title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                        </ng-container>
-                        <div class="logo-game-background"></div>
-                        <div class="logo-game">
-                            <img loading="lazy" class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                        </div>
-                        <div class="game-tile-buttons">
-                            <ng-container *ngIf="!isDemo">
-                                    <a *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    <ng-container *ngIf="isLoggedIn && isCliente">
-                                        <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isLoggedIn">
-                                        <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                            </ng-container>
-                            <ng-container *ngIf="isDemo">
-                                <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                    <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                        <ng-container *ngIf="isLoggedIn">
-                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                                    </ng-container>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="scroll-button scroll-right enabled-scroll-button" id="bingo-right"
-                     (click)="scrollRight('bingo')" *ngIf="gamesBingo.length > 5 && !isMobile">
-                    <i class="fa-solid fa-angle-right"></i>
-                </div>
-                <div class="more-games-fade more-games-fade-right" id="bingo-fade-right" *ngIf="gamesBingo.length > 2"></div>
-            </div>
-        </div>
-    </div>
-    <app-footer [container]="listagem"></app-footer>
-
-    <ng-template #cassinoGameList>
-        <div class="bloco">
-            <div class="titulo" *ngIf="gameList && gameList.length">
-                {{gameTitle | titlecase}}
-            </div>
-            <div class="sem-evento" *ngIf="gameList && !gameList.length">
-                {{'geral.nenhumJogoEncontrado' | translate}}!
-            </div>
-            <div class="game-list">
-                <div class="game-tile" *ngFor="let game of gameList | paginate: { itemsPerPage: qtdItens, currentPage: 1 }">
-                    <ng-container>
-                        <img title="{{game.gameName}}" src="https://cdn.wee.bet/img/cassino/{{game.fornecedor}}/{{game.gameID}}.png">
-                    </ng-container>
-                    <div class="logo-game-background"></div>
-                        <div class="logo-game">
-                            <img class="logo" src="https://cdn.wee.bet/img/cassino/logos/{{game.fornecedor}}.png">
-                        </div>
-                        <div class="game-tile-buttons">
-                            <ng-container *ngIf="!isDemo">
-                                    <a *ngIf="game.gameDemo"
-                                    [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                    class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    <ng-container *ngIf="isLoggedIn && isCliente">
-                                        <a *ngIf="isCliente" [routerLink]="['/casino/' + blink + '/play/REAL',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!isLoggedIn">
-                                        <a (click)="abrirModalLogin()" class="btn btn-xs game-button-play">{{'geral.jogar' | translate}}</a>
-                                    </ng-container>
-                            </ng-container>
-                            <ng-container *ngIf="isDemo">
-                                <ng-container *ngIf="game.fornecedor == 'pragmatic' || game.fornecedor == 'salsa'">
-                                    <a *ngIf="game.gameDemo"
-                                        [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="game.fornecedor == 'spribe'">
-                                        <ng-container *ngIf="isLoggedIn">
-                                            <a [routerLink]="['/casino/' + blink + '/play/DEMO',game.gameID,game.fornecedor]"
-                                        class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                        <ng-container *ngIf="!isLoggedIn">
-                                            <a (click)="abrirModalLogin()" class="btn btn-xs game-button-demo">{{'geral.demo' | translate}}</a>
-                                        </ng-container>
-                                    </ng-container>
-                                    <ng-container  *ngIf="game.fornecedor !== 'pragmatic' && game.fornecedor !== 'spribe' && game.fornecedor !== 'salsa'">
-                                        <a class="btn btn-xs game-button-lock"> <i class="fa fa-lock gameBloqueado"></i></a>
-                                    </ng-container>
-                            </ng-container>
-                        </div>
-                </div>
-            </div>
-        </div>
+        </ng-template>
     </ng-template>
 </div>
-
-<ng-template #fornecedorModal let-modal>
-    <div class="modal-header">
-        <h4>Fornecedores</h4>
-        <a type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <i class="fa fa-times"></i>
-        </a>
-    </div>
-    <div class="modal-body">
-        <div class="modal-body-content">
-            <div class="search-box search-fornecedores">
-                <i class="fa fa-search"></i>
-                    <input type="text" [(ngModel)]="termFornecedorMobile"
-                           class="form-control inverted-out"
-                           placeholder="Pesquisar Fornecedor"
-                           (keyup)="filtrarFornecedor()"
-                    >
-                    <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="termFornecedorMobile"></i>
-            </div>
-            <div class="fornecedores-menu">
-            <ul>
-                <li class="fornecedor">
-                    <div class="fornecedor-nome" style="margin-left: 0">
-                        <span><a (click)="filtrarJogos('todos')">Todos os Fornecedores</a></span>
-                    </div>
-                </li>
-                <ng-container *ngFor="let fornecedor of cassinoFornecedores">
-                    <li class="fornecedor">
-                        <div class="fornecedor-imagem">
-                            <img src="https://cdn.wee.bet/img/cassino/logos/{{fornecedor.gameFornecedor.toLowerCase()}}.png">
-                        </div>
-                        <div class="fornecedor-nome">
-                            <span>
-                                <a (click)="filtrarJogos(fornecedor.gameFornecedor)">
-                                 {{fornecedor.gameFornecedorExibicao}}
-                                </a>
-                            </span>
-                        </div>
-                    </li>
-                </ng-container>
-            </ul>
-            </div>
-        </div>
-    </div>
-</ng-template>

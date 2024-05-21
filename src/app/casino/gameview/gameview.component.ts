@@ -62,9 +62,27 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.menuFooterService.setIsPagina(true);
         this.route.params.subscribe(params => {
             this.params = params;
-            this.gameId = params['game_id'];
-            this.gameMode = params['game_mode'];
-            this.gameFornecedor = params['game_fornecedor'];
+            if(this.router.url.includes('parlaybay')){
+                this.gameId = "170000";
+                this.gameMode = 'REAL';
+                this.gameFornecedor = 'parlaybay';
+            } else {
+                this.gameId = params['game_id'];
+                this.gameMode = params['game_mode'] ?? 'REAL';
+                this.gameFornecedor = params['game_fornecedor'];
+            }
+
+            if (['c', 'cl', 'v'].includes(String(this.gameFornecedor))) {
+                const casinoAcronyms = {
+                    c: 'casino',
+                    cl: 'live-casino',
+                    v: 'virtual-sports'
+                };
+
+                this.router.navigate([casinoAcronyms[String(this.gameFornecedor)]]);
+                return;
+            }
+
             this.auth.cliente
                 .subscribe(
                     isCliente => {
@@ -72,7 +90,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             if (this.gameMode === 'REAL' && !this.isCliente) {
-                this.router.navigate(['casino/wall']);
+                this.router.navigate(['casino']);
             } else {
                 this.loadGame();
             }
@@ -82,7 +100,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 });
         });
 
-        if(this.gameFornecedor === 'galaxsys'){
+        if (this.gameFornecedor === 'galaxsys') {
             this.appendScriptGalaxsys();
         }
     }
@@ -93,9 +111,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 response => {
                     this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                     this.sessionId = response.sessionId;
-                    if((this.gameFornecedor == 'tomhorn')){
+                    if ((this.gameFornecedor == 'tomhorn')) {
                         this.gameName = response.gameName.split("- 9", 1) || "";
-                    }else{
+                    } else {
                         this.gameName = response.gameName || "";
                     }
                 },
@@ -112,11 +130,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         } else if(this.gameFornecedor === 'parlaybay') {
-            this.router.navigate(['esportes/futebol']);
+            this.router.navigate(['pb']);
         } else if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
-            this.router.navigate(['esportes/cl/wall-live/todos']);
+            this.router.navigate(['live-casino']);
         } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){
-            this.router.navigate(['casino/c/wall/todos']);
+            this.router.navigate(['casino']);
         }else{
             this.location.back();
         }
@@ -137,9 +155,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(true);
         }
 
-        let scriptGalaxsys= document.getElementById("galaxsysScript");
+        let scriptGalaxsys = document.getElementById("galaxsysScript");
 
-        if(scriptGalaxsys){
+        if (scriptGalaxsys) {
             scriptGalaxsys.remove();
         }
     }
@@ -199,7 +217,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         });
     }
 
-    appendScriptGalaxsys(){
+    appendScriptGalaxsys() {
         let body = document.getElementsByTagName('body')[0];
         let bodyScript = document.createElement('script');
 

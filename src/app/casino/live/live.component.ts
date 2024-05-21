@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CasinoApiService} from '../../shared/services/casino/casino-api.service';
-import {AuthService} from './../../services';
-import {interval} from 'rxjs';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {LoginModalComponent} from '../../shared/layout/modals';
-import {Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CasinoApiService } from '../../shared/services/casino/casino-api.service';
+import { AuthService } from './../../services';
+import { interval } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginModalComponent } from '../../shared/layout/modals';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-live',
@@ -85,13 +85,13 @@ export class LiveComponent implements OnInit, OnDestroy {
             self.websocket.close();
         }
         self.websocket = new WebSocket('wss://' + wsUri + '/ws');
-        self.websocket.onopen = function (evt) {
+        self.websocket.onopen = function(evt) {
             self.onWsOpen(evt);
         };
-        self.websocket.onclose = function (evt) {
+        self.websocket.onclose = function(evt) {
             self.onWsClose(evt);
         };
-        self.websocket.onmessage = function (evt) {
+        self.websocket.onmessage = function(evt) {
             self.onWsMessage(evt);
         };
         if (tableId) {

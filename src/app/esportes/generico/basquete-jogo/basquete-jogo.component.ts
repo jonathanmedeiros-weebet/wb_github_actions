@@ -181,7 +181,7 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.posicaoY = tipoAposta.posicao_y;
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
-                odd.label = this.helperService.apostaTipoLabelCustom(odd.chave, this.jogo.time_a_nome, this.jogo.time_b_nome)
+                odd.label = this.helperService.apostaTipoLabelCustom(odd.chave, this.jogo.time_a_nome, this.jogo.time_b_nome, this.jogo.sport_id)
                 odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, this.jogo.favorito, false);
 
                 mercado.odds.push(odd);

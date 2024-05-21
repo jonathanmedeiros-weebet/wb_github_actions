@@ -19,11 +19,12 @@
 
 <div class="indique-ganhe-card" #indiqueGanheCard *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente) && !activeGameCassinoMobile()">
     <div class="indique-ganhe-card-content">
-        {{'indique_ganhe.indiqueGanheCard' | translate:{
-            'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
-            'bonusBalance': bonusBalanceReferAndEarn ? ' em ' + (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
-        }}
-        
+        <div>
+            {{'indique_ganhe.indiqueGanheCard' | translate:{
+                'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
+                'bonusBalance': bonusBalanceReferAndEarn ? (bonusBalanceReferAndEarn | translate).toLowerCase() : ""}
+            }}
+        </div>
         <a
             (click)="isConnected && redirectIndiqueGanhe()"
             class="btn btn-indique-ganhe-card"
@@ -116,7 +117,7 @@
                                 </ng-template>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around" *ngIf="pixCambista">
+                        <div class="d-flex justify-content-around" *ngIf="enabledBettorPix">
                             <a class="dropdown-btn w-150" (click)="abrirDepositosCambista()">
                                 {{'geral.liberarCredito' | translate}}
                             </a>
@@ -349,7 +350,7 @@
                                 <span>
                                     <i class="fa fa-solid fa-money-bill-transfer"></i>
                                 </span>
-                                {{'geral.saques' | translate}}
+                                {{'geral.saque' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -358,7 +359,16 @@
                                 <span>
                                     <i class="fa fa-solid fa-money-bill-transfer"></i>
                                 </span>
-                                {{'geral.depositos' | translate}}
+                                {{'geral.deposito' | translate}}
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
+                            <a (click)="openTransactionHistory()">
+                                <span>
+                                    <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                </span>
+                                {{'geral.transactionHistory' | translate}}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
@@ -459,7 +469,7 @@
                             <a class="dropdown-btn w-130" [routerLink]="['clientes/saque']" *ngIf="isCliente">
                                 {{'geral.sacar' | translate}}
                             </a>
-                            <a class="dropdown-btn w-130" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && pixCambista">
+                            <a class="dropdown-btn w-130" [routerLink]="['cambistas/deposito']" *ngIf="!isCliente && enabledBettorPix">
                                 {{'geral.liberarCredito' | translate}}
                             </a>
                         </div>
@@ -604,6 +614,11 @@
 
 <ng-template #menuTemplate>
     <div #menu class="d-flex">
+        <div class="category" *ngIf="aoVivoAtivo">
+            <a [routerLink]="['/live']" routerLinkActive="active">
+                <span>{{'menu.aoVivo' | translate}}</span>
+            </a>
+        </div>
         <div class="category" *ngIf="esporteAtivo">
             <a [routerLink]="['/esportes']" routerLinkActive="active">
                 <span>{{'menu.esportes' | translate}}</span>
@@ -611,7 +626,7 @@
         </div>
         <ng-container *ngIf="isLoggedIn">
             <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
-                <a [routerLink]="['/casino/pb/play/real/170000/parlaybay']" routerLinkActive="active">
+                <a [routerLink]="['parlaybay']" routerLinkActive="active">
                     <span>PARLAYBAY</span>
                 </a>
             </div>
@@ -623,19 +638,18 @@
                 </a>
             </div>
         </ng-container>
-
         <div class="category" *ngIf="cassinoAtivo">
-            <a [ngClass]="activeMenuCassino()" [routerLink]="['/casino/c']">
+            <a [routerLink]="['/casino']" routerLinkActive="active">
                 <span>{{'menu.cassino' | translate}}</span>
             </a>
         </div>
         <div class="category" *ngIf="cassinoAtivo">
-            <a [ngClass]="activeMenuCassinoLive()" [routerLink]="['/casino/cl/']">
+            <a [routerLink]="['/live-casino']" routerLinkActive="active">
                 <span>{{'menu.cassino-aovivo' | translate}}</span>
             </a>
         </div>
         <div class="category" *ngIf="virtuaisAtivo">
-            <a [routerLink]="['/casino/v']" routerLinkActive="active">
+            <a [routerLink]="['/virtual-sports']" routerLinkActive="active">
                 <span>{{'menu.virtuais' | translate}}</span>
             </a>
         </div>

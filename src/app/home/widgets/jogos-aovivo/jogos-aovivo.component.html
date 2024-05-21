@@ -1,0 +1,85 @@
+<div class="loading-listagem" *ngIf="showLoadingIndicator">
+    <div class="slider">
+        <div class="ssc-square title"></div>
+        <div class="itens">
+            <div class="ssc-square camp"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+            <div class="ssc-square content"></div>
+        </div>
+    </div>
+</div>
+<div class="jogos-aovivo" *ngIf="campeonatos.size > 0 && !showLoadingIndicator">
+    <div class="widgets-header">
+        <div class="widgets-title">
+            {{ 'geral.jogosAoVivo' | translate }}
+        </div>
+        <a routerLink="/live/all">
+            {{'geral.verTodos' | translate}}
+        </a>
+    </div>
+    <div class="wrap-sticky">
+        <div class="campeonato" *ngFor="let campeonato of campeonatos | keyvalue:reOrder; trackBy: trackById">
+            <ng-container *ngIf="campeonatoPermitido(campeonato.value._id)">
+                <div class="header">
+                    <span class="flag-icon flag-icon-{{campeonato.value.regiao_sigla}} flag-icon-squared"></span>
+                    <span class="campeonato-nome">{{campeonato.value.nome}}</span>
+                </div>
+                <div class="jogos">
+                    <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
+                        <div class="tempo-box">
+                            <div class="aovivo-label">
+                                <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
+                            </div>
+                            <div class="tempo">
+                                {{jogo.value.info.minutos}}'
+                            </div>
+                        </div>
+                        <div class="times-placar">
+                            <div class="time time-a">
+                                <div class="time-a-nome">
+                                    <ng-container *ngIf="jogo.value.time_a_img; else defaulImageA" class="escudo">
+                                        <img src="https://cdn.wee.bet/img/times/s/{{jogo.value.time_a_img}}.png" class="escudo-img" size="s">
+                                    </ng-container>
+                                    <ng-template #defaulImageA class="escudo">
+                                        <img src="https://cdn.wee.bet/img/times/s/default.png" class="escudo-img">
+                                    </ng-template>
+                                    {{jogo.value.time_a_nome}}
+                                </div>
+                                <div class="placar time-a-placar">{{jogo.value.info.time_a_resultado}}</div>
+                            </div>
+                            <div class="time time-b">
+                                <div class="time-b-nome">
+                                    <span *ngIf="jogo.value.time_b_img; else defaulImageB" class="escudo">
+                                        <img src="https://cdn.wee.bet/img/times/s/{{jogo.value.time_b_img}}.png" class="escudo-img" size="s">
+                                    </span>
+                                    <ng-template #defaulImageB class="escudo">
+                                        <img src="https://cdn.wee.bet/img/times/s/default.png" class="escudo-img">
+                                    </ng-template>
+                                    {{jogo.value.time_b_nome}}
+                                </div>
+                                <div class="placar time-b-placar">{{jogo.value.info.time_b_resultado}}</div>
+                            </div>
+                        </div>
+                        <div class="cotacoes">
+                            <ng-container *ngFor="let cotacao of cotacoesPorTipo(jogo.value.cotacoes)">
+                                <div class="cotacao disabled" *ngIf="cotacao.lock || !cotacaoPermitida(cotacao.valorFinal); else noLock">
+                                    <label>{{ cotacao.nome }}</label>
+                                    <span><i class="fa fa-lock"></i></span>
+                                </div>
+
+                                <ng-template #noLock>
+                                    <div class="cotacao"
+                                    (click)="addCotacao(jogo.value, cotacao); $event.stopPropagation()" [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
+                                        <label>{{ cotacao.nome }}</label>
+                                        <span>{{ cotacao.valorFinal}}</span>
+                                    </div>
+                                </ng-template>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

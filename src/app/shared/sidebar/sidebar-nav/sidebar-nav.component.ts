@@ -39,7 +39,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     isLogado = false;
     whatsapp;
     cartaoApostaHabilitado;
-    pixCambista = false;
+    enabledBettorPix = false;
     modoCambista = true;
     indiqueGanheHabilitado = false;
     permitirQualquerChavePix = false;
@@ -47,6 +47,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     subCartao = false;
     subPerfil = false;
     subPromocoes = false;
+    subTransacoes = false;
 
     iconesGenericos = {
         'basquete': 'wbicon icon-basquete',
@@ -78,17 +79,26 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
-        this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
+        this.enabledBettorPix = Boolean(this.paramsLocais.getOpcoes().payment_methods_available_for_bettors.length);
         this.modoCambista = this.paramsLocais.getOpcoes().modo_cambista;
         this.indiqueGanheHabilitado = this.paramsLocais.indiqueGanheHabilitado();
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
 
-        if (this.router.url === '/cambistas/cartoes' || this.router.url === '/cambistas/solicitacoes-saque') {
-            this.subCartao = true;
-        }
-
-        if (this.router.url === '/clientes/perfil' || this.router.url === '/clientes/perfil-pix' || this.router.url === '/alterar-senha') {
-            this.subPerfil = true;
+        switch (this.router.url) {
+            case '/cambistas/cartoes':
+            case '/cambistas/solicitacoes-saque':
+                this.subCartao = true;
+                break;
+            case '/clientes/perfil':
+            case '/clientes/perfil-pix':
+            case '/alterar-senha':
+                this.subPerfil = true;
+                break;
+            case '/clientes/saque':
+            case '/clientes/deposito':
+            case '/clientes/transacoes-historico':
+                this.subTransacoes = true;
+                break;
         }
 
         this.auth.logado
@@ -169,7 +179,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
                     let size = aposta.tipo == 'esportes' ? 'lg' : '';
                     let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
-                    
+
                     const modalRef = this.modalService.open(ApostaModalComponent, {
                         ariaLabelledBy: 'modal-basic-title',
                         centered: true,
@@ -271,6 +281,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     toogleSubPromocoes() {
         this.subPromocoes = !this.subPromocoes;
+    }
+
+    toggleSubTransacoes() {
+        this.subTransacoes = !this.subTransacoes;
     }
 
     logout() {

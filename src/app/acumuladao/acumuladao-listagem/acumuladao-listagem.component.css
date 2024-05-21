@@ -95,7 +95,7 @@
         height: -webkit-fill-available;
         height: calc(100vh - 122px);
         -webkit-overflow-scrolling: touch;
-        padding: 5px;
+        padding: 5px 0;
     }
 
     .acumuladao {
