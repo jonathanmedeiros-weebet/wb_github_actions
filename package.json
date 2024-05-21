@@ -322,7 +322,8 @@
         "sortepix.com": "gulp sortepix.com",
         "sortegol.bet": "gulp sortegol.bet",
         "betcombinada.net": "gulp betcombinada.net",
-        "gramado.bet": "gulp gramado.bet"
+        "gramado.bet": "gulp gramado.bet",
+        "avante.bet": "gulp avante.bet"
     },
     "private": true,
     "dependencies": {

@@ -3070,3 +3070,12 @@ gulp.task('gramado.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('avante.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "avante.bet",
+        banca: "AVANTE.BET",
+        styles: ""
+    });
+});
