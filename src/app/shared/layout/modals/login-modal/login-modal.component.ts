@@ -13,6 +13,7 @@ import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-se
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 import {config} from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { FormValidations } from 'src/app/shared/utils';
 
 @Component({
     selector: 'app-login-modal',
@@ -226,26 +227,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     blockInvalidCharacters(e, inputName){
-        const char = String.fromCharCode(e.keyCode);
-        let pattern;
-        switch (inputName) {
-            case 'name':
-                pattern = '[a-zA-Z ]';
-                break;
-            case 'email':
-            case 'password':
-                pattern = '[ ]';
-                break;
-        }
-
-        if (inputName == 'password' || inputName == 'email') {
-            if (char.match(pattern)) {
-                e.preventDefault();
-            }
-        } else {
-            if (!char.match(pattern)) {
-                e.preventDefault();
-            }
-        }
+        FormValidations.blockInvalidCharacters(e, inputName);
     }
 }
