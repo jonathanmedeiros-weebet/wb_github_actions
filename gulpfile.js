@@ -3073,7 +3073,7 @@ gulp.task('gramado.bet', function (done) {
 
 gulp.task('avante.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front2.wee.bet",
         host: "avante.bet",
         banca: "AVANTE.BET",
         styles: ""
