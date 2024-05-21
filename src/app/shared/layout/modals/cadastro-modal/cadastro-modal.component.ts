@@ -306,13 +306,28 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
 
     }
-
-    bloquearCaracteresInvalido(e){
+    
+    blockInvalidCharacters(e, inputName){
         const char = String.fromCharCode(e.keyCode);
-        const pattern = '[a-zA-Z\]';
+        let pattern;
+        switch (inputName) {
+            case 'name':
+                pattern = '[a-zA-Z\ ]';
+                break;
+            case 'email':
+            case 'password':
+                pattern = '[ ]';
+                break;
+        }
 
-        if(!char.match(pattern)){
-            e.preventDefault();
+        if (inputName == 'password' || inputName == 'email') {
+            if (char.match(pattern)) {
+                e.preventDefault();
+            }
+        } else {
+            if (!char.match(pattern)) {
+                e.preventDefault();
+            }
         }
     }
 }
