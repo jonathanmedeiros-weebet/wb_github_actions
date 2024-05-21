@@ -143,7 +143,7 @@ export class FormValidations {
                 pattern = '[a-zA-Z ]';
                 break;
             case 'email':
-                pattern = '[&\'\"\,;*:<>?!+=*{}()#$%\[ ]';
+                pattern = '[&\'\",;*:<>?!+=*{}()#$%\[ ]';
                 break;
             case 'password':
                 pattern = '[ ]';
