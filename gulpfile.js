@@ -1355,15 +1355,6 @@ gulp.task('imperiopix.bet', function (done) {
     });
 });
 
-gulp.task('reidabet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "reidabet.wee.bet",
-        banca: "REI DA BET",
-        styles: "",
-    });
-});
-
 gulp.task('primoos.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2208,17 +2199,6 @@ gulp.task('exclusiva.bet', function (done) {
     });
 });
 
-gulp.task('partida.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "partida.bet",
-        banca: "PARTIDA.BET",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PK44BXD8');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-PK44BXD8'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('valebets.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2527,15 +2507,6 @@ gulp.task('supertop3.bet', function (done) {
         server: "front2.wee.bet",
         host: "supertop3.bet",
         banca: "SUPERTOP3.BET",
-        styles: "",
-    });
-});
-
-gulp.task('fiel.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "fiel.bet",
-        banca: "FIEL.BET",
         styles: "",
     });
 });
@@ -2871,15 +2842,6 @@ gulp.task('alfa-bet.club', function (done) {
         server: "front2.wee.bet",
         host: "alfa-bet.club",
         banca: "ALFA BET",
-        styles: ""
-    });
-});
-
-gulp.task('fezinhabet.net', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "fezinhabet.net",
-        banca: "FEZINHA BET",
         styles: ""
     });
 });

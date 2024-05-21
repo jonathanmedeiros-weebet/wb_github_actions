@@ -23,6 +23,11 @@
     color: var(--header);
 }
 
+.indique-ganhe-card-content .btn-close {
+    position: absolute;
+    right: 20px;
+}
+
 .btn-indique-ganhe-card {
     background-color: var(--header);
     color: var(--highlight);
