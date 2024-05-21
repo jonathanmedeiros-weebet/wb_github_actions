@@ -6,10 +6,10 @@
     background-color: var(--highlight);
     overflow: hidden;
     transition: height 0.3s, padding 0.3s;
+    padding: 0 10px;
 }
 
 .indique-ganhe-card-content {
-    padding: 0 10px;
     height: 100%;
     width: 100%;
     display: flex;
@@ -26,13 +26,8 @@
 .btn-indique-ganhe-card {
     background-color: var(--header);
     color: var(--highlight);
-    height: 25px;
-    padding: 0 10px !important;
-    transition: width 0.3s, height 0.3s, font-size 0.3s;
-}
-
-.btn.btn-indique-ganhe-card {
-    height: 33px !important;
+    height: 25px!important;
+    margin-left: 10px;
     transition: width 0.3s, height 0.3s, font-size 0.3s;
 }
 
@@ -47,12 +42,9 @@
 }
 
 .indique-ganhe-card .btn-close {
-    position: absolute;
-    right: 30px;
-    top: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }
 
 .indique-ganhe-card .btn-close i {
@@ -439,9 +431,9 @@ body .change-theme {
         font-size: 14px;
     }
 
-    .btn.btn-indique-ganhe-card {
+    /* .btn.btn-indique-ganhe-card {
         height: 25px !important;
-    }
+    } */
 }
 
 @media only screen and (max-width: 1281px) {
@@ -451,7 +443,7 @@ body .change-theme {
         overflow-x: auto;
         height: 39px;
         justify-content: start;
-        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25) inset;
+        /* box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25) inset; */
         background-color: var(--header);
     }
 
@@ -518,7 +510,8 @@ body .change-theme {
 
     .indique-ganhe-card .btn-close {
         right: 20px;
-        top: 5px;
+        top: 10px;
+        position: absolute;
         align-items: normal;
     }
 
@@ -604,12 +597,6 @@ body .change-theme {
 
     .side-left {
         padding-left: 10px;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .indique-ganhe-card-content {
-        width: 88%;
     }
 }
 

@@ -12,9 +12,9 @@ import {SidebarService} from '../../shared/services/utils/sidebar.service';
 })
 export class DepositoCambistaComponent implements OnInit, OnDestroy {
     whatsapp;
-    modalidade;
+    modalidade = 'pix';
     pixCambista = false;
-    hasApiPagamentos;
+    hasPaymentMethodsAvailableForBettors;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -31,12 +31,10 @@ export class DepositoCambistaComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(true);
         }
 
-        this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
-        if (!this.pixCambista) {
+        this.hasPaymentMethodsAvailableForBettors = Boolean(this.paramsLocais.getOpcoes().payment_methods_available_for_bettors.length);
+        if (!this.hasPaymentMethodsAvailableForBettors) {
             this.router.navigate(['esportes/futebol']);
         }
-        this.hasApiPagamentos = !this.paramsLocais.getOpcoes().metodo_pagamento_desabilitado && this.paramsLocais.getOpcoes().api_pagamentos;
-        this.modalidade = 'pix';
     }
 
     ngOnDestroy() {

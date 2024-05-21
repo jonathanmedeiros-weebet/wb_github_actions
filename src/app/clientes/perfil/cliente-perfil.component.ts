@@ -10,6 +10,7 @@ import {Endereco} from '../../shared/models/endereco/endereco';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
 import { AuthService, SidebarService } from 'src/app/services';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -17,13 +18,13 @@ import { AuthService, SidebarService } from 'src/app/services';
     styleUrls: ['./cliente-perfil.component.css']
 })
 export class ClientePerfilComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    estados: Array<Estado>;
-    cidades: Array<Cidade>;
-    estadoSelecionado: number;
-    cidadeSelecionada: number;
-    showLoading = true;
-    mostrarSenha = false;
-    googleLogin = false;
+    public estados: Array<Estado>;
+    public cidades: Array<Cidade>;
+    private estadoSelecionado: number;
+    public cidadeSelecionada: number;
+    public showLoading = true;
+    public mostrarSenha = false;
+    public googleLogin = false;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -47,62 +48,56 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.sidebarService.changeItens({contexto: 'cliente'});
 
         this.createForm();
-        this.utilsService.getEstados()
-            .subscribe(
-                estados => {
-                    this.estados = estados;
-                });
-
+        this.utilsService.getEstados().subscribe(estados => this.estados = estados);
         this.loadCliente();
 
         this.menuFooterService.setIsPagina(true);
     }
 
-    loadCliente() {
-        const user = JSON.parse(localStorage.getItem('user'));
-        this.clienteService
-            .getCliente(user.id)
-            .subscribe(
-                cliente => {
-                    this.form.patchValue(
-                        {
-                            nome: cliente.nome.toUpperCase(),
-                            sobrenome: cliente.sobrenome.toUpperCase(),
-                            nascimento: moment(cliente.dataNascimento.date).format('DD/MM/YYYY'),
-                            cpf: cliente.cpf,
-                            telefone: cliente.telefone,
-                            email: cliente.email
-                        }
-                    );
-                    if (cliente.endereco) {
-                        const endereco: Endereco = cliente.endereco;
-                        if (endereco.estado && endereco.cidade) {
-                            this.estadoSelecionado = endereco.estado.id;
-                            this.cidadeSelecionada = endereco.cidade.id;
-                            this.utilsService.getCidades(endereco.estado.id).subscribe(
-                                cidades => {
-                                    this.cidades = cidades;
-                                },
-                                error => this.handleError(error));
-                            this.form.patchValue(
-                                {
-                                    logradouro: endereco.logradouro,
-                                    numero: endereco.numero,
-                                    bairro: endereco.bairro,
-                                    cep: endereco.cep
-                                }
-                            );
-                            this.form.get('estado').patchValue(this.estadoSelecionado);
-                            this.form.get('cidade').patchValue(this.cidadeSelecionada);
-                        }
-                    }
+    async loadCliente() {
+        try {
+            this.showLoading = true;
+            const user = JSON.parse(localStorage.getItem('user'));
+            const cliente = await this.clienteService
+                .getCliente(user.id)
+                .toPromise();
 
-                    this.showLoading = false;
-                },
-                error => {
-                    this.handleError('Algo inesperado aconteceu. Tente novamente mais tarde.');
+            this.form.patchValue({
+                nome: cliente.nome.toUpperCase(),
+                sobrenome: cliente.sobrenome.toUpperCase(),
+                nascimento: moment(cliente.dataNascimento.date).format('DD/MM/YYYY'),
+                cpf: cliente.cpf,
+                telefone: cliente.telefone,
+                email: cliente.email
+            });
+
+            if (Boolean(cliente.endereco)) {
+                const endereco: Endereco = cliente.endereco;
+                if (Boolean(endereco.estado) && Boolean(endereco.cidade)) {
+                    this.estadoSelecionado = endereco.estado.id;
+                    this.cidadeSelecionada = endereco.cidade.id;
+                    this.utilsService.getCidades(endereco.estado.id)
+                    .subscribe(
+                        cidades => this.cidades = cidades,
+                        error => this.handleError(error)
+                    );
+
+                    this.form.patchValue({
+                        logradouro: endereco.logradouro,
+                        numero: endereco.numero,
+                        bairro: endereco.bairro,
+                        cep: endereco.cep
+                    });
+                    this.form.get('estado').patchValue(this.estadoSelecionado);
+                    this.form.get('cidade').patchValue(this.cidadeSelecionada);
                 }
-            );
+            }
+
+        } catch (error) {
+            this.handleError('Algo inesperado aconteceu. Tente novamente mais tarde.')
+        } finally {
+            this.showLoading = false;
+        }
     }
 
     ngOnDestroy() {
@@ -115,16 +110,24 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             sobrenome: [''],
             nascimento: [''],
             cpf: [''],
-            telefone: ['', Validators.required],
+            telefone: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
             email: [''],
             logradouro: ['', Validators.required],
             numero: ['', Validators.required],
             bairro: ['', Validators.required],
             cidade: ['0', Validators.required],
             estado: ['0', Validators.required],
-            cep: ['', Validators.required],
+            cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
             senha_atual: [null, this.googleLogin ? [] : Validators.required]
         });
+
+        this.form.controls['cep']
+            .valueChanges
+            .pipe(
+                debounceTime(600),
+                distinctUntilChanged()
+            )
+            .subscribe((cep) => this.buscarPorCep(cep))
     }
 
     resetarForm() {
@@ -148,10 +151,9 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         }
     }
 
-    buscarPorCep(event: any) {
-        const cepValue = event.target.value;
-        if (cepValue.length == 9) {
-            this.utilsService.getEnderecoPorCep(cepValue).subscribe(
+    buscarPorCep(cep: string) {
+        if (cep.length == 8) {
+            this.utilsService.getEnderecoPorCep(cep).subscribe(
                 (endereco: any) => {
                     if (!endereco.erro) {
                         let estadoLocal: Estado;
@@ -186,20 +188,15 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     }
 
     submit() {
-        const values = this.form.value;
-        this.clienteService.atualizarDadosCadastrais(values)
+        this.clienteService
+            .atualizarDadosCadastrais(this.form.value)
             .subscribe(
-                () => {
-                    this.messageService.success('Dados Cadastrais atualizados.');
-                },
-                error => {
-                    this.handleError(error);
-                }
+                () => this.messageService.success('Dados Cadastrais atualizados.'),
+                error => this.handleError(error)
             );
     }
 
     handleError(mensagem: string) {
         this.messageService.error(mensagem);
     }
-
 }

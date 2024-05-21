@@ -130,7 +130,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
                         if (habilitar_live_tracker && jogo.live_track_id) {
                             if (window.innerWidth <= 1024) {
-                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo?.live_track_id);
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=' + jogo?.live_track_id);
                             } else {
                                 if (this.exibindoMaisCotacoes) {
                                     this.bilheteService.sendId(jogo.live_track_id);

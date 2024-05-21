@@ -53,4 +53,16 @@ export class UtilsService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    getMobileOperatingSystem() {
+        const userAgent = navigator.userAgent;
+
+        if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
+            return 'ios';
+        } else if (userAgent.match( /Android/i)) {
+            return 'android';
+        }
+
+        return 'unknown';
+    }
 }

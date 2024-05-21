@@ -1,3 +1,209 @@
+#deposito-pix {
+    background-color: var(--sidebars);
+    padding: 30px;
+}
+
+#deposit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#deposit-container h3 {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 6px;
+    color: var(--foreground-sidebars);
+    border-bottom: 1px solid var(--foreground-sidebars);
+}
+
+#payment-method-column {
+    flex: 2;
+}
+
+#payment-method-column h3,
+#payment-method-column > div {
+    width: 75%;
+}
+
+#deposit-details {
+    flex: 3;
+}
+
+#details-wrapper {
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.payment-method-options {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: var(--foreground-sidebars);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-method-options a {
+    width: 96%;
+    position: relative;
+}
+
+.options-container a .radio {
+    height: 15px;
+    width: 15px;
+    border: 1px solid var(--foreground-sidebars);
+    background-color: transparent;
+    border-radius: 50%;
+    position: relative;
+}
+
+.options-container a.active .radio {
+    border: 1px solid var(--highlight);
+}
+
+.radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+
+    top: 3px;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--highlight);
+}
+
+.options-container a.active .radio:after {
+    display: block;
+}
+
+.payment-method-option {
+    display: flex;
+    align-items: center;
+    padding: 18px 24px 18px 24px;
+    margin-bottom: 15px;
+    border: 1px solid var(--game);
+    color: var(--foreground);
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border-color: rgba(var(--foreground-sidebars-rgb), 0.2);
+}
+
+.payment-method-option i.fa-caret-right {
+    display: none;
+    position: absolute;
+    right: -7px;
+    color: var(--highlight);
+    font-size: 18px;
+}
+
+.payment-method-option.active i.fa-caret-right {
+    display: block;
+}
+
+.payment-method {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 14px;
+}
+
+.payment-method-icon {
+    width: 36px;
+    height: 23px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.payment-method-name {
+    font-size: 13px;
+}
+
+.active {
+    background-color: rgba(var(--highlight-rgb), 0.1) !important;
+    border-color: var(--highlight) !important;
+}
+
+.details-container {
+    width: 96%;
+    display: flex;
+    color: var(--foreground-sidebars);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.inverted-out {
+    border-color: rgba(var(--foreground-inputs-odds-rgb), 0.2);
+}
+
+.details-text {
+    width: 92%;
+    text-align: justify;
+    font-size: 12px;
+}
+
+.details-amount {
+    margin-top: 24px;
+    width: 100%;
+}
+
+.details-amount input {
+    text-align: left !important;
+    width: 66%;
+    margin: 12px 0 10px;
+}
+
+.details-amount label {
+    margin-bottom: 0;
+}
+
+.details-amount .min-amount {
+    color: rgba(var(--foreground-sidebars-rgb), 0.6);
+}
+
+.shortcut-amounts {
+    width: 66%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.shortcut-amounts button {
+    width: 32%;
+    height: 40px;
+    margin-top: 6px;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+}
+
+.shortcut-amounts button:active,
+.shortcut-amounts button:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.details-submit {
+    width: 45%;
+    margin-top: 40px;
+}
+
+.details-submit div {
+    margin-bottom: 0;
+}
+
+/**
+    MODAL
+*/
 .btn-close {
     position: absolute;
     top: 5px;
@@ -70,59 +276,50 @@ label.label-tempo {
         padding-top: 50px;
     }
 
-    .group-input-valor {
-        text-align: center;
-    }
-
-    .row-input-valor {
-        justify-content: center;
-        margin-top: 40px;
-    }
-
-    .label-input-valor {
-        font-size: 16px;
-        text-align: center;
-        display: block;
-    }
-
-    .input-valor {
-        border: 0;
-        border-bottom: 2px solid var(--game);
-        color: var(--foreground);
-        border-radius: 0;
-        width: 100%;
-
-        text-align: center !important;
-        font-size: 22px;
-        background-color: transparent;
-
-        padding: 5px;
-    }
-
-    .input-valor:focus {
-        border: 0;
-        border-bottom: 2px solid var(--highlight);
-        color: var(--foreground);
-        background-color: transparent;
-    }
-
-    .alerta-min {
-        border-radius: 4px;
-        margin-top: 40px !important;
-        padding: 10px 15px;
-        font-size: 11px; /* ajuste fonte */
-        background: var(--game);
-        color: var(--foreground-game);
-        text-align: left;
-    }
-
-    .group-buttons {
-        width: 100%;
-        margin-top: 50px;
-    }
-
     .buttons {
         flex-direction: column;
         gap: 10px;
+    }
+
+    #deposito-pix {
+        background-color: var(--background);
+        padding: 0;
+    }
+
+    #details-wrapper {
+        margin-top: 0;
+    }
+
+    .details-text {
+        width: 100%;
+    }
+
+    .details-payment-method {
+        margin-top: 28px;
+        width: 100%;
+    }
+
+    .details-payment-method select {
+        margin-top: 24px;
+    }
+
+    .details-payment-method .form-group {
+        margin-bottom: 0;
+    }
+
+    .details-amount input {
+        width: 100%;
+    }
+
+    .shortcut-amounts {
+        width: 100%;
+    }
+
+    .shortcut-amounts button {
+        background-color: var(--game);
+    }
+
+    .details-submit {
+        width: 100%;
     }
 }

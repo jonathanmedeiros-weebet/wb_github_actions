@@ -56,6 +56,7 @@ export class NgbdModalContent {
     qrCodeBase64;
     qrCode;
     paymentMethod;
+    availablePaymentMethods;
     sautoPayQr;
     minute = 20;
     second = 0;
@@ -70,7 +71,8 @@ export class NgbdModalContent {
     ) {}
 
     ngOnInit() {
-        this.paymentMethod = this.paramsLocais.getOpcoes().api_pagamentos;
+        this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
+        this.paymentMethod = this.availablePaymentMethods[0];
         if (this.paymentMethod === 'sauto_pay') {
             const SautoPayUrl = 'data:image/svg+xml;base64,' + this.qrCodeBase64;
             this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
@@ -115,7 +117,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     rolloverAtivo: Rollover[] = [];
 
     bonusOption = '';
-    paymentMethod;
+    availablePaymentMethods;
     paymentMethodSelected = '';
     sautoPayQr;
     bonusType = '';
@@ -165,8 +167,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }
 
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
-        this.paymentMethod = this.paramsLocais.getOpcoes().api_pagamentos;
-        this.paymentMethodSelected = this.paymentMethod;
+        this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
+        this.paymentMethodSelected = this.availablePaymentMethods[0];
         this.createForm();
         this.financeiroService.bonusPrimeiroDepositoPermitido()
             .subscribe(
@@ -303,7 +305,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.pixModal.componentInstance.qrCodeBase64 = this.pix.qr_code_base64;
         this.pixModal.componentInstance.qrCode = this.pix.qr_code;
 
-        if (this.paymentMethod === 'sauto_pay') {
+        if (this.paymentMethodSelected === 'sauto_pay') {
             const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;
             this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
         }
