@@ -123,6 +123,16 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
             if (params.c) {
                 this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
+
+                localStorage.setItem('campRef', params.c);
+                localStorage.setItem('campFonte', params.s);
+            } else {
+                const campRef = localStorage.getItem('campRef');
+                const campFonte = localStorage.getItem('campFonte');
+
+                if (campRef) {
+                    this.form.patchValue({campRef: campRef, campFonte: campFonte});
+                }
             }
 
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
@@ -172,8 +182,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             googleIdToken: [''],
             btag: [this.route.snapshot.queryParams.btag],
             refId: [this.route.snapshot.queryParams.refId],
-            campRed: [this.route.snapshot.queryParams.c],
-            fonte: [this.route.snapshot.queryParams.s],
+            campRef: [this.route.snapshot.queryParams.c],
+            campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null]
         });
     }
