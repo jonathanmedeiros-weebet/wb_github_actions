@@ -312,7 +312,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         let pattern;
         switch (inputName) {
             case 'name':
-                pattern = '[a-zA-Z\ ]';
+                pattern = '[a-zA-Z ]';
                 break;
             case 'email':
             case 'password':
