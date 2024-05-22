@@ -263,10 +263,13 @@
 #legitimuz {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
 }
 
 #verify-identity-cpf {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     flex: 1;
     width: 25%;
 }
@@ -336,6 +339,14 @@
     }
 
     #details-wrapper .details-submit {
+        width: 100%;
+    }
+
+    #verify-identity-cpf {
+        width: 100%;
+    }
+
+    #legitimuz-action-verify {
         width: 100%;
     }
 }

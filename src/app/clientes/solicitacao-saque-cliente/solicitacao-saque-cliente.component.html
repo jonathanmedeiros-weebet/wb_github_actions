@@ -184,17 +184,18 @@
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
                     {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
                 </div>
-                <div id="legitimuz-container" *ngIf="cadastroCompleto && legitimuzEnabled && !verifiedIdentity">
+                <div #legitimuz id="legitimuz-container" *ngIf="cadastroCompleto && legitimuzEnabled && !verifiedIdentity">
                     <div id="legitimuz">
                         <div id="verify-identity-text">
-                            Para prosseguir com o saque será necessário realizar a verificação de identidade da sua conta antes.
+                            {{'saques.identityVerifyNeeded' | translate}}
                         </div>
                         <div id="verify-identity-cpf">
-                            CPF:
+                            <span>CPF</span>
                             <input id="legitimuz-hydrate-cpf" type="tel" class="form-control inverted-out" [value]="cliente.cpf" readonly/>
                         </div>
+                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <button id="legitimuz-action-verify" class="btn btn-custom">
-                            Verificar identidade
+                            {{'saques.identityVerify' | translate}}
                             <i class="fa-solid fa-id-card"></i>
                         </button>
                     </div>

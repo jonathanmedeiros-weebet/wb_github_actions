@@ -376,7 +376,9 @@
         "enterPixKey": "Informe o tipo de chave PIX",
         "minimumWithdrawal": "Saque mínimo",
         "dailyMaximum": "Máximo diário",
-        "monthlyMaximum": "Máximo mensal"
+        "monthlyMaximum": "Máximo mensal",
+        "identityVerify": "Verificar identidade",
+        "identityVerifyNeeded": "Para prosseguir com o saque será necessário realizar a verificação de identidade antes."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",

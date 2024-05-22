@@ -375,7 +375,9 @@
         "enterPixKey": "Select the type of PIX key",
         "minimumWithdrawal": "Minimum withdrawal",
         "dailyMaximum": "Daily maximum",
-        "monthlyMaximum": "Monthly maximum"
+        "monthlyMaximum": "Monthly maximum",
+        "identityVerify": "Verify identity",
+        "identityVerifyNeeded": "To proceed with the withdrawal, it will be necessary to perform identity verification beforehand."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",

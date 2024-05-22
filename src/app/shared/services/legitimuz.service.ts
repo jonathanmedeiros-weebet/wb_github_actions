@@ -1,8 +1,19 @@
+import { Injectable } from "@angular/core";
+
+import { BehaviorSubject } from "rxjs";
+
+import { ClienteService } from "./clientes/cliente.service";
+import { ParametrosLocaisService } from "./parametros-locais.service";
+import { MessageService } from "./utils/message.service";
+
 declare var Legitimuz: any;
 
+@Injectable({
+    providedIn: 'root'
+})
 export class LegitimuzService {
 
-    private legitimuz;
+    private sdk;
 
     private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
 
@@ -16,51 +27,57 @@ export class LegitimuzService {
         onError: (eventName) => console.log(eventName)
     };
 
-    constructor (options: {
-        token: string;
-        lang?: string;
-        enableRedirect?: boolean;
-        autoOpenValidation?: boolean;
-        onSuccess?;
-        onError?;
-    }) {
-        this.options.token = options.token;
+    private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
+    curCustomerIsVerified;
 
-        if (options.lang) {
-            this.options.lang = options.lang;
-        }
+    constructor (
+        private clienteService: ClienteService,
+        private messageService: MessageService,
+        private paramsService: ParametrosLocaisService
+    ) {
+        this.options.token = this.paramsService.getOpcoes().legitimuz_token;
 
-        if (options.enableRedirect) {
-            this.options.enableRedirect = options.enableRedirect;
-        }
+        this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
 
-        if (options.autoOpenValidation) {
-            this.options.autoOpenValidation = options.autoOpenValidation;
-        }
+        const user = JSON.parse(localStorage.getItem('user'));
 
-        if (options.onSuccess) {
-            this.options.onSuccess = options.onSuccess;
-        }
+        this.options.onSuccess = (eventName) => {
+            if (eventName === 'facematch') {
+                setTimeout(() => {
+                    this.clienteService.getCliente(user.id)
+                        .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
+                }, 1000);
+            }
+        };
 
-        if (options.onError) {
-            this.options.onError = options.onError;
-        }
+        this.options.onError = (eventName) => {
+            this.closeModal();
+            this.messageService.error('Não foi possível realizar a verificação de identidade.');
+        };
     }
 
     init() {
-        this.legitimuz = Legitimuz(this.options);
+        this.sdk = Legitimuz(this.options);
     }
 
     mount() {
-        this.legitimuz.mount();
+        this.sdk.mount();
     }
 
     changeLang(lang: string) {
-        this.legitimuz.setLang(lang);
+        this.sdk.setLang(lang);
+    }
+
+    toggleEnableRedirect(enable: boolean) {
+        this.options.enableRedirect = enable;
+    }
+
+    toggleAutoOpenValidation(enable: boolean) {
+        this.options.autoOpenValidation = enable;
     }
 
     closeModal() {
-        this.legitimuz.closeModal();
+        this.sdk.closeModal();
     }
 
 }
