@@ -11,6 +11,8 @@ import {config} from './../../config';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
 
+declare var xtremepush: any;
+
 @Injectable({
     providedIn: 'root',
 })
@@ -99,6 +101,7 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
+                    xtremepush('set', 'user_id', res.results.user);
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -124,6 +127,7 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
+                    xtremepush('set', 'user_id', res.results.user);
                 }),
                 catchError(this.errorService.handleError)
             );
