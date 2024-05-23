@@ -47,7 +47,6 @@
 }
 
 .regiao-nome {
-    text-transform: uppercase;
     align-self: center;
     margin-left: 5px;
     white-space: nowrap !important;
@@ -220,7 +219,6 @@ li.router-link-active > a {
 
 .cambista-menu .cambista-item .sub-nav-container ul .cambista-subitem a {
     padding: 5px 5px 5px 60px !important;
-    text-transform: uppercase;
     height: auto;
     font-size: 12px;
     border: 0;
