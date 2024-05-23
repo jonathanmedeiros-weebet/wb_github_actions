@@ -172,6 +172,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 this.verifiedIdentity = curCustomerIsVerified;
                 this.cd.detectChanges();
                 if (this.verifiedIdentity) {
+                    this.legitimuzService.closeModal();
                     this.messageService.success('Identidade verificada!');
                 }
             })
