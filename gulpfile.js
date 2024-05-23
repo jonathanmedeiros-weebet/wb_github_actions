@@ -95,7 +95,16 @@ gulp.task('casadinha.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "casadinha.com",
-        banca: "Casadinha.com",
+        banca: "CASADINHA.COM",
+        styles: "",
+       });
+});
+
+gulp.task('casadinha.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "casadinha.bet",
+        banca: "CASADINHA.BET",
         styles: "",
        });
 });
