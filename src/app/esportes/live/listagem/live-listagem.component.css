@@ -23,8 +23,10 @@
     line-height: 15px;
 }
 
-.esporte-header.column-left {
-    align-content: center;
+.esporte-header .column-left {
+    display: flex;
+    align-items: center;
+    align-self: center;
 }
 
 .esporte-header .esporte-nome {
