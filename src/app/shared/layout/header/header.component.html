@@ -592,7 +592,10 @@
         </ng-template>
         <div class="btn-group language-dropdown hide-mobile" ngbDropdown>
             <button class="btn" type="button" id="dropdownLanguage" ngbDropdownToggle>
-                <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : 'flag-icon-us'}} flag-icon-squared"></span>
+                <ng-conteiner *ngIf="linguagemSelecionada == 'pt'">
+                    <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : 'flag-icon-us'}} flag-icon-squared"></span>
+                </ng-conteiner>
+
             </button>
             <div class="language-dropdown-menu position-absolute" aria-labelledby="dropdownLanguage" ngbDropdownMenu>
                 <a class="m-2 p-0 dropdown-item" (click)="useLanguage('pt')">
@@ -602,6 +605,10 @@
                 <a class="m-2 p-0 dropdown-item" (click)="useLanguage('en')">
                     <span class="flag-icon flag-icon-us flag-icon-squared"></span>
                     {{'geral.ingles' | translate}}
+                </a>
+                <a class="m-2 p-0 dropdown-item" (click)="useLanguage('es')">
+                    <span class="flag-icon flag-icon-es flag-icon-squared"></span>
+                    {{'geral.espanhol' | translate}}
                 </a>
             </div>
         </div>
