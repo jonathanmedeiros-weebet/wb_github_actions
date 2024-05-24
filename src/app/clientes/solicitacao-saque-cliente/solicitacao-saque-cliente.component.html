@@ -189,10 +189,7 @@
                         <div id="verify-identity-text">
                             {{'saques.identityVerifyNeeded' | translate}}
                         </div>
-                        <div id="verify-identity-cpf">
-                            <span>CPF</span>
-                            <input id="legitimuz-hydrate-cpf" type="tel" class="form-control inverted-out" [value]="cliente.cpf" readonly/>
-                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
                         <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <button id="legitimuz-action-verify" class="btn btn-custom">
                             {{'saques.identityVerify' | translate}}

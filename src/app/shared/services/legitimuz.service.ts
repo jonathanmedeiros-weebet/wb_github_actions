@@ -4,7 +4,6 @@ import { BehaviorSubject } from "rxjs";
 
 import { ClienteService } from "./clientes/cliente.service";
 import { ParametrosLocaisService } from "./parametros-locais.service";
-import { MessageService } from "./utils/message.service";
 
 declare var Legitimuz: any;
 
@@ -32,7 +31,6 @@ export class LegitimuzService {
 
     constructor (
         private clienteService: ClienteService,
-        private messageService: MessageService,
         private paramsService: ParametrosLocaisService
     ) {
         this.options.token = this.paramsService.getOpcoes().legitimuz_token;
@@ -48,11 +46,6 @@ export class LegitimuzService {
                         .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
                 }, 1000);
             }
-        };
-
-        this.options.onError = (eventName) => {
-            this.closeModal();
-            this.messageService.error('Não foi possível realizar a verificação de identidade.');
         };
     }
 

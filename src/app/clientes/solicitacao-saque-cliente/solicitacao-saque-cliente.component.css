@@ -266,14 +266,6 @@
     gap: 16px;
 }
 
-#verify-identity-cpf {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    flex: 1;
-    width: 25%;
-}
-
 #legitimuz-action-verify {
     flex: 1;
     width: 25%;
@@ -339,10 +331,6 @@
     }
 
     #details-wrapper .details-submit {
-        width: 100%;
-    }
-
-    #verify-identity-cpf {
         width: 100%;
     }
 
