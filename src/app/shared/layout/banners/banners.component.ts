@@ -50,7 +50,6 @@ export class BannersComponent implements OnInit {
                 this.showNavigationArrows = true;
             }
 
-            this.banners = banners;
             this.showLoadingIndicator = false;
             this.cd.markForCheck();
         });

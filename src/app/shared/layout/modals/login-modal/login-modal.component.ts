@@ -13,6 +13,7 @@ import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-se
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 import {config} from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { FormValidations } from 'src/app/shared/utils';
 
 @Component({
     selector: 'app-login-modal',
@@ -223,5 +224,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     toogleSenha() {
         this.mostrarSenha = !this.mostrarSenha;
+    }
+
+    blockInvalidCharacters(e, inputName){
+        FormValidations.blockInvalidCharacters(e, inputName);
     }
 }
