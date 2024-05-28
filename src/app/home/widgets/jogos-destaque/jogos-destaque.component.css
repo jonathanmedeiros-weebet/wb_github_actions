@@ -152,6 +152,14 @@ owl-carousel-o {
     justify-content: space-between;
 }
 
+.jogos-destaque .header .campeonato-nome {
+    width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}
+
 .jogos-destaque .jogo {
     display: flex;
     align-items: center;
