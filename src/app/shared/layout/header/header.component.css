@@ -100,6 +100,7 @@ nav a {
     transition: 300ms;
     white-space: nowrap;
     border-bottom: 2px solid transparent;
+    text-transform: uppercase;
 }
 
 .category a.active, .category a:hover {

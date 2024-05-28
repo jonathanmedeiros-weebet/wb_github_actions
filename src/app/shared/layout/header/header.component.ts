@@ -102,6 +102,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
+    desafioNome: string;
     paginaPromocaoHabilitado = false;
     indiqueGanheHabilitado = false;
     cartaoApostaHabilitado;
@@ -204,6 +205,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.aoVivoAtivo = this.paramsService.aoVivoAtivo();
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
+        this.desafioNome = this.paramsService.getOpcoes().desafio_nome;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
