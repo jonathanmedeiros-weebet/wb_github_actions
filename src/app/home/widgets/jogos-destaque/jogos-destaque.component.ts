@@ -93,6 +93,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
                 this.cotacoesJogosDestaque();
 
                 this.showLoadingIndicator = false;
+                this.cd.detectChanges();
             });
 
         this.bilheteService.itensAtuais
@@ -148,7 +149,6 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
                 cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
             });
         });
-        this.cd.detectChanges();
     }
 
     getCotacaoLocal(jogo) {

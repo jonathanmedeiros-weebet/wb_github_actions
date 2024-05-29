@@ -306,4 +306,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
 
     }
+    
+    blockInvalidCharacters(e, inputName){
+        FormValidations.blockInvalidCharacters(e, inputName);
+    }
 }

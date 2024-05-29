@@ -23,6 +23,11 @@
     color: var(--header);
 }
 
+.indique-ganhe-card-content .btn-close {
+    position: absolute;
+    right: 20px;
+}
+
 .btn-indique-ganhe-card {
     background-color: var(--header);
     color: var(--highlight);
@@ -603,6 +608,15 @@ body .change-theme {
 @media only screen and (max-width: 360px) {
     .logo {
         max-width: calc(32vw - 25px);
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .indique-ganhe-card-content {
+        justify-content: space-around;
+    }
+    .indique-ganhe-card .btn-close {
+        position: static;
     }
 }
 

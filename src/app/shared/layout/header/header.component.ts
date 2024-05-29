@@ -519,9 +519,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     activeGameCassinoMobile() {
+        const url = this.router.url;
+
         return (
             this.isMobile
-            && (this.router.url.includes('/casino') || this.router.url.includes('/live-casino'))
+            && (url.match(/\/casino\/\w*/g) || url.match(/\/live-casino\/\w*/g))
         );
     }
 
