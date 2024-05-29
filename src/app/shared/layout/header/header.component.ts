@@ -107,6 +107,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     cartaoApostaHabilitado;
     isDemo = location.host === 'demo.wee.bet';
     aoVivoAtivo;
+    notificationsXtremepushOpen = false;
+
 
     public showHeaderMobile: boolean = false;
 
@@ -549,5 +551,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     private onShowHeaderMobile() {
         this.showHeaderMobile = window.innerWidth <= 1281;
         this.layoutService.changeHeaderHeigh(this.showHeaderMobile ? 106 : 92);
+    }
+
+    notificationsXtremepush() {
+        this.notificationsXtremepushOpen = !this.notificationsXtremepushOpen;
     }
 }

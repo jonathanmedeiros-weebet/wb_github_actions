@@ -687,3 +687,46 @@ body .change-theme {
 .icon-hidden {
     display: none;
 }
+
+.container {
+    margin: 20px;
+}
+
+.content-div-xtremepush {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: var(--foreground-highlight);
+    border-right: 1px solid var(--highlight);
+    padding: 10px;
+    box-sizing: border-box;
+    transition: left 0.5s ease;
+    z-index: 99999;
+}
+
+.btn-xtremepush {
+    margin: 0 0 0 10px;
+    color: var(--highlight);
+}
+
+.btn-xtremepush:focus {
+    outline: none;
+}
+
+.btn-xtremepush:active {
+    outline: none;
+    border: none;
+}
+
+.content-div-xtremepush.open {
+    left: 0;
+}
+
+.btn-close-xtremepush {
+    position: absolute;
+    left: 265px
+}
+
+
