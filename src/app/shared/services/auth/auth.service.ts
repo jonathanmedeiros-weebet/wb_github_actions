@@ -101,7 +101,7 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
-                    xtremepush('set', 'user_id', res.results.user);
+                    xtremepush('set', 'user_id', res.results.user.id);
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -127,7 +127,7 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
-                    xtremepush('set', 'user_id', res.results.user);
+                    xtremepush('set', 'user_id', res.results.user.id);
                 }),
                 catchError(this.errorService.handleError)
             );
