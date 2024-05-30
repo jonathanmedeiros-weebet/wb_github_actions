@@ -135,9 +135,17 @@ export class AuthService {
 
     logout() {
         this.limparStorage();
+        this.cleanXtremepushNotifications();
         this.logadoSource.next(false);
         window.location.reload();
     }
+
+    cleanXtremepushNotifications(){
+        xtremepush('set', 'user_id', "");
+        const xtremepushNotificationContainer = document.getElementById('xtremepushNotificationContainer');
+        xtremepushNotificationContainer.innerHTML = '';
+    }
+
 
     isLoggedIn(): boolean {
         return !!localStorage.getItem('token');

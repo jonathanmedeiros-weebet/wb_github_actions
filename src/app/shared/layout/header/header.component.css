@@ -603,6 +603,11 @@ body .change-theme {
     .side-left {
         padding-left: 10px;
     }
+
+    .btn-xtremepush {
+        margin: 0 10px 0 0 !important;
+        color: var(--highlight);
+    }
 }
 
 @media only screen and (max-width: 360px) {
@@ -702,10 +707,6 @@ body .change-theme {
     display: none;
 }
 
-.container {
-    margin: 20px;
-}
-
 .content-div-xtremepush {
     position: fixed;
     top: 0;
@@ -718,11 +719,6 @@ body .change-theme {
     box-sizing: border-box;
     transition: left 0.5s ease;
     z-index: 99999;
-}
-
-.btn-xtremepush {
-    margin: 0 0 0 10px;
-    color: var(--highlight);
 }
 
 .btn-xtremepush:focus {
@@ -738,9 +734,118 @@ body .change-theme {
     left: 0;
 }
 
-.btn-close-xtremepush {
-    position: absolute;
-    left: 265px
+#xtremepushNotificationWrapper {
+    padding: 10px;
+    overflow: auto;
 }
+
+.xtremepush-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.xtremepush-title {
+    color: #fff;
+    margin: 0;
+}
+
+.btn-close-xtremepush {
+    color: #fff;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+#xtremepushNotificationContainer {
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.xtremepush-notification-item {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 350px;
+    margin: 10px;
+}
+
+.xtremepush-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.xtremepush-card-img-top {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.xtremepush-card-body {
+    padding: 15px;
+}
+
+.xtremepush-card-title {
+    margin-top: 10px;
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+
+.xtremepush-card-text {
+    margin-bottom: 20px;
+}
+
+.xtremepush-card-date {
+    align-self: flex-end;
+    font-size: 0.875em;
+    margin-top: auto;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo semi-transparente */
+}
+
+.overlay.open {
+    display: block;
+    z-index: 99998; /* Coloca a div acima de outras */
+}
+
+#badge-xtremepush {
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(50%, -50%);
+    display: none; /* Inicialmente oculto */
+}
+
+/* Estilo para mostrar o badge */
+#badge-xtremepush.show-badge {
+    display: block; /* Mostrar o badge */
+}
+
+.btn-xtremepush {
+    margin: 0 10px 0 0;
+    color: var(--highlight);
+}
+
+
+
+
 
 
