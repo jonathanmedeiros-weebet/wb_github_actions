@@ -57,6 +57,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     legitimuzEnabled = false;
     legitimuzToken = "";
     verifiedIdentity = false;
+    disapprovedIdentity = false;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -135,6 +136,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.cliente = res;
 
                     this.verifiedIdentity = res.verifiedIdentity;
+                    this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
 
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
@@ -166,20 +168,22 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        this.legitimuzService.curCustomerIsVerified
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(curCustomerIsVerified => {
-                this.verifiedIdentity = curCustomerIsVerified;
-                this.cd.detectChanges();
-                if (this.verifiedIdentity) {
-                    this.legitimuzService.closeModal();
-                    this.messageService.success('Identidade verificada!');
-                }
-            })
+        if (this.legitimuzEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    this.cd.detectChanges();
+                    if (this.verifiedIdentity) {
+                        this.legitimuzService.closeModal();
+                        this.messageService.success('Identidade verificada!');
+                    }
+                });
+        }
     }
 
     ngAfterViewInit() {
-        if (this.legitimuzEnabled) {
+        if (this.legitimuzEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
