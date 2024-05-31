@@ -753,6 +753,11 @@ body .change-theme {
     margin: 0;
 }
 
+.xtremepush-title img{
+    margin-bottom: 1px;
+    margin-right: 10px;
+}
+
 .btn-close-xtremepush {
     color: #fff;
     background: none;
@@ -844,6 +849,10 @@ body .change-theme {
     color: var(--highlight);
 }
 
+.xtremepush-notification-item {
+    border-bottom: 1px solid #ccc; /* Adiciona uma linha divisória entre os cards */
+    padding-bottom: 10px; /* Adiciona espaço entre os cards */
+}
 
 
 

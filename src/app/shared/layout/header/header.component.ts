@@ -603,7 +603,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     const xtremepushElement = document.createElement('div');
                     xtremepushElement.className = 'xtremepush-notification-item';  // Adicione uma classe para estilização
                     xtremepushElement.innerHTML = `
-                    <div class="xtremepush-card">
+                    <div class="xtremepush-card" style="
+                        border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+                        padding-bottom: 10px;
+                    ">
                         <img src="${xtremepushItem.message.icon}" class="xtremepush-card-img-top" alt="${xtremepushItem.message.title}">
                         <div class="xtremepush-card-body">
                             <h5 class="xtremepush-card-title">${xtremepushItem.message.title}</h5>
