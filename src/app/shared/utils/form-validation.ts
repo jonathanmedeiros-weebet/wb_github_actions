@@ -134,4 +134,35 @@ export class FormValidations {
         };
         return config[validatorName];
     }
+
+    static blockInvalidCharacters(e, inputName){
+        const char = String.fromCharCode(e.keyCode);
+        let pattern;
+        switch (inputName) {
+            case 'name':
+                pattern = '[a-zA-Z ]';
+                break;
+            case 'email':
+                pattern = '[\/&\'\",;*:<>?!=*{}()#$%\[ ]';
+                break;
+            case 'password':
+                pattern = '[ ]';
+                break;
+        }
+
+        if (inputName == 'password' || inputName == 'email') {
+            if (inputName == 'email') {
+                if (char.match(']')) {
+                    e.preventDefault();
+                }
+            }
+            if (char.match(pattern)) {
+                e.preventDefault();
+            }
+        } else {
+            if (!char.match(pattern)) {
+                e.preventDefault();
+            }
+        }
+    }
 }

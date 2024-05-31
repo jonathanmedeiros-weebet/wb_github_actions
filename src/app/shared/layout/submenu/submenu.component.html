@@ -1,6 +1,6 @@
 <ng-container *ngIf="version == 'v1'; else templateV2">
-    <div class="submenu-container">
-        <nav class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth}"
+    <div id="submenu-container" class="submenu-container">
+        <nav id="nav-submenu" class="submenu scroll" scrollX="true" *ngIf="active" [ngStyle]="{'width.px': menuWidth}"
              [ngClass]="{'centered': centered}"
              (scroll)="onScroll($event)" #scrollMenu>
             <div class="pull pull-left" (click)="scrollLeft()" [ngClass]="leftDisabled ? 'visibility':''" *ngIf="!isMobile">
@@ -25,7 +25,7 @@
 
 <ng-template #templateV2>
     <div class="submenu-v2">
-        <nav 
+        <nav
             class="submenu-v2__items scroll"
             scrollX="true"
             *ngIf="active"

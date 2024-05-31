@@ -118,7 +118,7 @@
             <div class="esporte" *ngIf="futebolAoVivohabilitado && qtdJogosFutebol > 0">
                 <div class="esporte-header" (click)="toggleEsporte(1)" [ngClass]="{'collapsed-header': !esporteAberto(1)}">
                     <span class="column-left">
-                        <span class="wbicon icon-futebol"></span>
+                        <span class="wbicon icon-futebol"></span> 
                         <span class="esporte-nome">{{'submenu.futebol' | translate}}</span>
                     </span>
                     <span *ngIf="esporteAberto(1); else downIcon">
