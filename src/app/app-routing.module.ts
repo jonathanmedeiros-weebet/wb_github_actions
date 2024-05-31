@@ -21,8 +21,7 @@ const appRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                component: AppComponent,
-                canActivate: [HomeGuard]
+                redirectTo: 'rifas',
             },
             {
                 path: 'cadastro',

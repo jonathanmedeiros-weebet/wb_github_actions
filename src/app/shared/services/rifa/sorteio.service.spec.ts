@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SorteioService } from './sorteio.service';
+import { RifaSorteioService } from './rifa-sorteio.service';
 
 describe('SorteioService', () => {
-  let service: SorteioService;
+  let service: RifaSorteioService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SorteioService);
+    service = TestBed.inject(RifaSorteioService);
   });
 
   it('should be created', () => {

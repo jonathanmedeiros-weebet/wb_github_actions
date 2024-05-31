@@ -15,7 +15,8 @@ import {
     PagesLayoutComponent,
     PagesNoNavLayoutComponent,
     SportLayoutComponent,
-    VirtuaisLayoutComponent
+    VirtuaisLayoutComponent,
+    RifaLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -73,6 +74,7 @@ import {NgxMaskModule} from 'ngx-mask';
 import {NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
+import {BilheteRifaComponent} from '../../rifas/bilhete/bilhete-rifa.component';
 import {SubmenuComponent} from './submenu/submenu.component';
 import {SidebarMenuComponent, SidebarNavComponent} from '../sidebar';
 
@@ -151,6 +153,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
         ApostaEncerramentoModalComponent,
         MenuFooterComponent,
         BilheteEsportivoComponent,
+        BilheteRifaComponent,
         SportLayoutComponent,
         PagesLayoutComponent,
         PagesNoNavLayoutComponent,
@@ -159,6 +162,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
         VirtuaisLayoutComponent,
         SubmenuComponent,
         LoteriaLayoutComponent,
+        RifaLayoutComponent,
         DesafioLayoutComponent,
         AcumuladaoLayoutComponent,
         SidebarNavComponent,
@@ -192,9 +196,11 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
         ExibirBilheteDesafioComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
+        ExibirBilheteRifaComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
         BilheteEsportivoComponent,
+        BilheteRifaComponent,
         BannersComponent,
         WelcomePageComponent
     ],

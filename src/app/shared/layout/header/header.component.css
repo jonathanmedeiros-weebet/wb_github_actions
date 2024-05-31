@@ -57,8 +57,9 @@
     width: 100%;
     height: 92px;
     display: flex;
-    background-color: var(--header);
+    background-color: #F2F2F2;
     color: var(--foreground-header);
+    border-bottom: 2px solid #d5d5d5;
 }
 
 nav {
@@ -85,20 +86,25 @@ nav a {
 }
 
 .category a {
+    font-family: Montserrat,sans-serif;
     display: flex;
     width: 100%;
     height: 95%;
     padding: 0 5px;
     align-items: center;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 14px;
     transition: 300ms;
+    margin-left: 12px;
+    margin-right: 12px;
+    color: #49525A;
 }
 
 .category a.active, .category a:hover {
-    border-bottom: 2px solid var(--highlight);
-    color: var(--highlight);
+    border-bottom: 2px solid #1A85AB;
+    font-weight: 600;
+
 }
 
 .category a span {
@@ -605,7 +611,7 @@ body .change-theme {
     }
 }
 
-@media only screen and (max-width: 1366px) and (min-width: 1280px){    
+@media only screen and (max-width: 1366px) and (min-width: 1280px){
     .w-130 {
         width: 103px;
     }

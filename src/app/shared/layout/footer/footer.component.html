@@ -1,137 +1,84 @@
 <footer>
-    <a class="toTop" (click)="container.scrollTop = 0" *ngIf="container">
-        <i class="fa fa-angle-up"></i>
-    </a>
-    <div class="container">
-        <div class="logo">
-            <p>
-                <a class="" [routerLink]="['/esportes/futebol/jogos']">
-                    <img [src]="LOGO">
-                </a>
-            </p>
-        </div>
-
-        <div [innerHTML]="rodape | safeHTML">
-        </div>
-
-        <div class="info-jogo">
-            <h4 class="title">{{'footer.jogueComResponsabilidade' | translate}}</h4>
-            <div class="icons">
-                <a href="https://www.gamblingtherapy.org/pt-br/" target="_blank">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/game_terapia.svg'" [svgStyle]="svgStyleGameTerapia()"></svg-icon>
-                </a>
-                <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/mais_18.svg'" [svgStyle]="svgStyleMaiorIdade()"></svg-icon>
-                </a>
-                <iframe *ngIf="slug == 'ragnar.bet'" src="https://licensing.gaming-curacao.com/validator/?lh=3e6ea9b3c638911372d6c78c18ed6ca2&template=tseal" width="150" height="50" style="border:none;"></iframe>
-                <div class="info pagamento" *ngIf="hasApiPagamentos">
-                    <h4 class="title">{{'footer.metodosDePagamento' | translate}}</h4>
-                    <p>
-                        <img src="https://www.bcb.gov.br/content/estabilidadefinanceira/piximg/logo_pix.png" class="image">
-                    </p>
+    <div class="instruction">
+        <div class="content row">
+            <div class="col-sm-4 col-12">
+                <h3>Veja como é fácil comprar seu sorteio na Betsocial</h3>
+                <p style="margin-bottom: 32px">É bem fácil e rápido, se liga nas dicas ao lado! 😉😉</p>
+            </div>
+            <div class="col-sm-8 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="step">
+                            <div >
+                                01
+                            </div>
+                        </div>
+                        <div>
+                            <div class="title">Escolha to Sorteio</div>
+                            <div class="description">
+                                <p>Escolha o prêmio que gostaria de concorrer, verifique a descrição, regulamento do sorteio e fotos em caso de dúvidas entre em contato com o administrador.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="step">
+                            <div >
+                                02
+                            </div>
+                        </div>
+                        <div>
+                            <div class="title">Selecione os números</div>
+                            <div class="description">
+                                <p>Escolha a quantidade de número que desejar. Lembre-se quanto mais números, mais chances de ganhar</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="step">
+                            <div >
+                                03
+                            </div>
+                        </div>
+                        <div>
+                            <div class="title">Faça o pagamento</div>
+                            <div class="description">
+                                <p>Realize o depósito do valor em sua conta e realize o pagamento.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="step">
+                            <div >
+                                04
+                            </div>
+                        </div>
+                        <div>
+                            <div class="title">Aguarde do sorteio</div>
+                            <div class="description">
+                                <p>Cruze os dedos e aguarde o resultado do sorteio. Você pode ser o próximo sorteado.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="redes-sociais" *ngIf="temRedesSociais()">
-            <div class="links-redes">
-                <a [href]="linkTwitter" target="_blank" *ngIf="linkTwitter">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/twitter.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
-                </a>
-                <a [href]="linkYoutube" target="_blank" *ngIf="linkYoutube">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/youtube.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
-                </a>
-                <a [href]="linkTikTok" target="_blank" *ngIf="linkTikTok">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/tiktok.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
-                </a>
-                <a [href]="linkFacebook" target="_blank" *ngIf="linkFacebook">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/facebook.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
-                </a>
-                <a [href]="linkTelegram" target="_blank" *ngIf="linkTelegram">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/telegram.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
-                </a>
-                <a [href]="linkInstagram" target="_blank" *ngIf="linkInstagram">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/instagram.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
-                </a>
-                <a [href]="linkLinkedin" target="_blank" *ngIf="linkLinkedin">
-                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/linkedin.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
-                </a>
+            <div class="crop">
+                <img src="assets/images/peolples/person_1.png" >
             </div>
         </div>
 
-<!--        <div class="info">-->
-<!--            <h4 class="title">Patrocinador oficial</h4>-->
-<!--            <p>-->
-<!--                <img src="https://cdn.wee.bet/img/logo-sportivedata.png" class="image">-->
-<!--            </p>-->
-<!--        </div>-->
 
-        <div class="links">
-            <a [routerLink]="['/informacoes/quem-somos']" *ngIf="hasQuemSomos">
-                {{'footer.quemSomos' | translate}}
-            </a>
-            <a href="https://afiliados.{{sharedUrl}}" target="_blank" *ngIf="exibirLinkAfiliado">
-                {{'footer.afiliados' | translate}}
-            </a>
-            <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="hasApk && !isAppMobile">
-                {{'footer.downloadApp' | translate}}
-            </a>
-            <a [routerLink]="['/informacoes/regras']" *ngIf="hasRegras">
-                {{'footer.regras' | translate}}
-            </a>
-            <a *ngIf="isLoggedIn && esporteHabilitado" class="pointer" (click)="abrirResultados()">
-                {{'footer.resultados' | translate}}
-            </a>
-            <a [routerLink]="['/informacoes/politica-privacidade']" *ngIf="hasPoliticaPrivacidade">
-                {{'footer.politicaDePrivacidade' | translate}}
-            </a>
-            <a [routerLink]="['/informacoes/politica-aml']" *ngIf="hasPoliticaAml">
-                {{'footer.politicaAml' | translate}}
-            </a>
-            <a [routerLink]="['/informacoes/jogo-responsavel']" *ngIf="hasJogoResponsavel">
-                {{'footer.jogoResponsavel' | translate}}
-            </a>
-            <a [routerLink]="['/informacoes/termos-condicoes']" *ngIf="hasTermosCondicoes">
-                {{'footer.termosECondicoes' | translate}}
-            </a>
+
+    </div>
+
+    <div class="page-bottom d-flex justify-content-around">
+        <div class="">
+            <a>2024 © Todos os direitos reservados Betsocial</a>
         </div>
+        <div class="">
+            <a>Termos de uso</a>&nbsp;&nbsp;
 
-        <div class="links" *ngIf="cartaoApostaHabilitado">
-            <ng-container *ngIf="isLoggedIn && !isCliente">
-                <a (click)="abrirCriarCartao()">
-                    Criar Cartão de Aposta
-                </a>
-                <a (click)="abrirRecargaCartao()">
-                    Recarregar Cartão de Aposta
-                </a>
-            </ng-container>
-            <a (click)="abrirConsultarCartao()">
-                Consultar Cartão de Aposta
-            </a>
-            <a (click)="abrirSolicitarSaque()">
-                Solicitar Saque Cartão de Aposta
-            </a>
-        </div>
-
-        <div class="btn-group language-dropdown hide-desktop" ngbDropdown>
-            <button class="btn" type="button" id="dropdownLanguage" ngbDropdownToggle>
-                <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : 'flag-icon-us'}} flag-icon-squared"></span>
-                {{'geral.selecionarIdioma' | translate}}
-            </button>
-            <div class="language-dropdown-menu" aria-labelledby="dropdownLanguage" ngbDropdownMenu>
-                <a class="m-2 p-0 dropdown-item" (click)="alterarLinguagem('pt')">
-                    <span class="flag-icon flag-icon-br flag-icon-squared"></span>
-                    {{'geral.portugues' | translate}}
-                </a>
-                <a class="m-2 p-0 dropdown-item" (click)="alterarLinguagem('en')">
-                    <span class="flag-icon flag-icon-us flag-icon-squared"></span>
-                    {{'geral.ingles' | translate}}
-                </a>
-            </div>
-        </div>
-
-        <div class="info copyright" style="margin-top: 20px; margin-bottom: 0">
-            <small>{{'footer.todosOsDireitosReservados' | translate:{'BANCA_NOME': BANCA_NOME} }}</small>
+            <a>Politica de Privacidade</a>
         </div>
     </div>
+
 </footer>

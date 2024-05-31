@@ -1,7 +1,71 @@
-<div class="base-container">
-    <app-navigation></app-navigation>
-    <main style="width: 100%">
-        <p>View works</p>
-    </main>
-    <app-bilhete-rifa></app-bilhete-rifa>
+<div class="center" >
+
+        <div class="rifa" style="margin: auto; margin-top: 32px; margin-bottom: 32px;">
+
+            <div class="rifa-header" style="position: relative">
+                <img class="hide-mobile banner" style="width: 100%" src="https://weebet.s3.amazonaws.com/{{SLUG}}/banners/{{sorteio.imagem}}" title="{{sorteio.nome}}">
+                <img class="hide-desktop banner" style="width: 100%" src="https://weebet.s3.amazonaws.com/{{SLUG}}/banners/{{sorteio.imagem_mobile}}" title="{{sorteio.nome}}">
+                <div style="position: relative">
+                    <app-countdown [time]="sorteio.timestamp * 1000 "></app-countdown>
+                </div>
+
+                <div class="content">
+
+                    <h1>{{sorteio.titulo}}</h1>
+
+                    <div style="margin-bottom: 8px">
+                        <span *ngFor="let tag of sorteio.tags" class="tag">{{tag}}</span>
+                    </div>
+
+
+                    <p style="color: #818C97">Por apenas <span class="rifa-valor">{{sorteio.valor_numero | currency}}</span></p>
+
+                    <p class="progress-text">Progresso de Vendas</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: {{sorteio.vendas.percentual}}%">
+                            <p class="label">{{sorteio.vendas.percentual}}% vendidas</p>
+                        </div>
+                        <p class="label" style="">{{sorteio.vendas.percentual}}% vendidas</p>
+                    </div>
+
+                    <div class="avatars" style="display: none">
+
+                        <img class="avatar" src="assets/images/avatars/placeholder_2.png">
+                        <img class="avatar" src="assets/images/avatars/placeholder_1.png">
+                        <img class="avatar" src="assets/images/avatars/placeholder_4.png">
+                        <img class="avatar" src="assets/images/avatars/placeholder_3.png">
+
+                        <p>+ 1 pessoas compraram números</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+                <a href="/clientes/apostas" class="btn btn-custom w-100 margin-top-30 margin-bottom-30"><i class="ri-archive-2-line"></i> Ver Meus Bilhetes</a>
+            </div>
+
+
+            <div class="rifa-content">
+                <p class="text-center">Selecione a quantidade de números</p>
+                <div class="rifa-form">
+                    <app-rifa-form></app-rifa-form>
+                </div>
+            </div>
+
+            <div class="rifa-content margin-top-30">
+                <h2><i class="ri-file-list-3-line" style="margin-right: 5px; color: #1A85AB"></i>Descrição</h2>
+                <div [innerHTML]="sorteio.descricao"></div>
+
+            </div>
+
+        </div>
+
 </div>
+
+
+
+
+
+
+

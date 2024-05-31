@@ -1,9 +1,9 @@
 .pre-bilhete {
-    width: 380px;
+    width: 100%;
     text-align: center;
     padding: 0;
-    height: 100%;
-    background-color: transparent;
+    height: calc(100vh - 92px);
+    background-color: var(--sidebar-left);
 }
 
 .bilhete-container {
@@ -563,6 +563,7 @@ h4 {
         }
     }
 }
+
 
 @media (min-width: 1025px) {
     section.pre-bilhete {

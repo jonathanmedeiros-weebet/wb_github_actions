@@ -5,14 +5,18 @@ import { RifasRoutingModule } from './rifas-routing.module';
 import { WallComponent } from './wall/wall.component';
 import { ViewComponent } from './view/view.component';
 import {SharedModule} from '../shared/shared.module';
-import {RifaBilheteComponent} from './bilhete/rifa-bilhete.component';
+import { CountdownComponent } from './countdown/countdown.component';
+import { FormComponent } from './form/form.component';
+
 
 
 @NgModule({
     declarations: [
         WallComponent,
         ViewComponent,
-        RifaBilheteComponent
+        CountdownComponent,
+        FormComponent
+
     ],
     imports: [
         SharedModule,

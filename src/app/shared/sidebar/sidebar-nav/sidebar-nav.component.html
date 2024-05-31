@@ -251,11 +251,11 @@
                                 <span class="regiao-nome">{{'geral.dadosPessoais' | translate}}</span>
                             </a>
                         </li>
-                        <li class="cambista-subitem" *ngIf="permitirQualquerChavePix">
-                            <a [routerLink]="['/clientes/perfil-pix']" routerLinkActive="router-link-active">
-                                <span class="regiao-nome">{{'geral.pix' | translate}}</span>
-                            </a>
-                        </li>
+<!--                        <li class="cambista-subitem" *ngIf="permitirQualquerChavePix">-->
+<!--                            <a [routerLink]="['/clientes/perfil-pix']" routerLinkActive="router-link-active">-->
+<!--                                <span class="regiao-nome">{{'geral.pix' | translate}}</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
 
                         <li class="cambista-subitem">
                             <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
@@ -266,12 +266,12 @@
                 </div>
             </li>
 
-             <li class="cambista-item">
-                <a [routerLink]="['/clientes/configuracoes']" routerLinkActive="router-link-active">
-                    <i class="fa fa-cogs icone-generico"></i>
-                    <span class="regiao-nome">{{'geral.configuracoes' | translate}}</span>
-                </a>
-            </li>
+<!--             <li class="cambista-item">-->
+<!--                <a [routerLink]="['/clientes/configuracoes']" routerLinkActive="router-link-active">-->
+<!--                    <i class="fa fa-cogs icone-generico"></i>-->
+<!--                    <span class="regiao-nome">{{'geral.configuracoes' | translate}}</span>-->
+<!--                </a>-->
+<!--            </li>-->
 
              <li class="cambista-item">
                 <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
@@ -280,12 +280,12 @@
                 </a>
             </li>
 
-            <li class="cambista-item">
-                <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
-                    <i class="fa fa-dollar icone-generico"></i>
-                    <span class="regiao-nome">{{'geral.saque' | translate}}</span>
-                </a>
-            </li>
+<!--            <li class="cambista-item">-->
+<!--                <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">-->
+<!--                    <i class="fa fa-dollar icone-generico"></i>-->
+<!--                    <span class="regiao-nome">{{'geral.saque' | translate}}</span>-->
+<!--                </a>-->
+<!--            </li>-->
 
             <li class="cambista-item">
                 <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
@@ -299,28 +299,28 @@
                     <span class="regiao-nome">{{'geral.apostas' | translate}}</span>
                 </a>
             </li>
-            <li class="cambista-item" routerLinkActive="router-link-active">
-                <a (click)="toogleSubPromocoes()">
-                    <i class="fa fa-gift icone-generico"></i>
-                    <span class="regiao-nome">{{'geral.promocoes' | translate}}</span>
-                    <i class="fa m-0" [ngClass]="{'fa-angle-up': subPromocoes, 'fa-angle-down': !subPromocoes}"></i>
-                </a>
+<!--            <li class="cambista-item" routerLinkActive="router-link-active">-->
+<!--                <a (click)="toogleSubPromocoes()">-->
+<!--                    <i class="fa fa-gift icone-generico"></i>-->
+<!--                    <span class="regiao-nome">{{'geral.promocoes' | translate}}</span>-->
+<!--                    <i class="fa m-0" [ngClass]="{'fa-angle-up': subPromocoes, 'fa-angle-down': !subPromocoes}"></i>-->
+<!--                </a>-->
 
-                <div class="sub-nav-container" *ngIf="subPromocoes">
-                    <ul>
-                        <li class="cambista-subitem">
-                            <a [routerLink]="['/clientes/rollover']" routerLinkActive="router-link-active">
-                                <span class="regiao-nome">{{'geral.rollover' | translate}}</span>
-                            </a>
-                        </li>
-                        <li class="cambista-subitem" *ngIf="indiqueGanheHabilitado">
-                            <a [routerLink]="['/clientes/indique-ganhe']" routerLinkActive="router-link-active">
-                                <span class="regiao-nome">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+<!--                <div class="sub-nav-container" *ngIf="subPromocoes">-->
+<!--                    <ul>-->
+<!--                        <li class="cambista-subitem">-->
+<!--                            <a [routerLink]="['/clientes/rollover']" routerLinkActive="router-link-active">-->
+<!--                                <span class="regiao-nome">{{'geral.rollover' | translate}}</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="cambista-subitem" *ngIf="indiqueGanheHabilitado">-->
+<!--                            <a [routerLink]="['/clientes/indique-ganhe']" routerLinkActive="router-link-active">-->
+<!--                                <span class="regiao-nome">{{'indique_ganhe.indiqueGanhe' | translate}}</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </li>-->
         </ul>
         <ul class="menu-middle" style="border-top: 0">
         </ul>

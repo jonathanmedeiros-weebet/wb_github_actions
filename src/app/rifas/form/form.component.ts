@@ -1,9 +1,10 @@
 import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
+import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
 import {AuthService} from '../../shared/services/auth/auth.service';
 import {MessageService} from '../../shared/services/utils/message.service';
+import {RifaBilheteService} from '../../shared/services/rifa/rifa-bilhete.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
@@ -11,15 +12,14 @@ import {LayoutService} from '../../shared/services/utils/layout.service';
 import {takeUntil} from 'rxjs/operators';
 import * as clone from 'clone';
 import {ApostaModalComponent, LoginModalComponent} from '../../shared/layout/modals';
-import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
-import {RifaBilheteService} from '../../shared/services/rifa/rifa-bilhete.service';
+import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 
 @Component({
-    selector: 'app-bilhete-rifa',
-    templateUrl: './rifa-bilhete.component.html',
-    styleUrls: ['./rifa-bilhete.component.css']
+  selector: 'app-rifa-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
-export class RifaBilheteComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class FormComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
     @ViewChild('apostaDeslogadoModal', {static: false}) apostaDeslogadoModal;
     modalRef;
@@ -43,6 +43,8 @@ export class RifaBilheteComponent extends BaseFormComponent implements OnInit, O
     mobileScreen;
     headerHeight = 92;
 
+    submiting = false;
+
     constructor(
         private apostaService: RifaApostaService,
         private auth: AuthService,
@@ -61,7 +63,6 @@ export class RifaBilheteComponent extends BaseFormComponent implements OnInit, O
     }
 
     ngOnInit() {
-        this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
         this.createForm();
         this.auth.logado
@@ -118,13 +119,17 @@ export class RifaBilheteComponent extends BaseFormComponent implements OnInit, O
     }
 
     definirAltura() {
-        const altura = window.innerHeight - this.headerHeight;
-        const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
-        this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
+        // const altura = window.innerHeight - this.headerHeight;
+        // const preBilheteEl = this.el.nativeElement.querySelector('.pre-bilhete');
+        // this.renderer.setStyle(preBilheteEl, 'height', `${altura}px`);
     }
 
     adicionarNumeros(numeros) {
         let new_qt = this.form.value.numeros + numeros;
+
+        if(new_qt < 0){
+            return;
+        }
 
         this.form.patchValue({'valor': new_qt*this.sorteio.valor_numero,'numeros':new_qt});
 
@@ -225,9 +230,11 @@ export class RifaBilheteComponent extends BaseFormComponent implements OnInit, O
         this.closeCupom();
         this.enableSubmit();
 
-        this.bilheteService.selecionarSorteio(null);
-        this.form.reset();
+
+        this.resetForm();
+
         this.cartaoApostaForm.reset();
+
 
         if (this.isCliente) {
             this.form.patchValue({'apostador': 'cliente'});
@@ -257,11 +264,13 @@ export class RifaBilheteComponent extends BaseFormComponent implements OnInit, O
     }
 
     disabledSubmit() {
+        this.submiting = true;
         this.disabled = true;
     }
 
     enableSubmit() {
         this.disabled = false;
+        this.submiting = false;
     }
 
     salvarAposta(dados) {
@@ -284,6 +293,12 @@ export class RifaBilheteComponent extends BaseFormComponent implements OnInit, O
         this.modalRef = this.modalService.open(
             LoginModalComponent, options
         );
+    }
+
+    resetForm() {
+        this.form.reset();
+        this.removerNumeros();
+        this.form.patchValue({'sorteio_id': this.soterio.id});
     }
 
 }

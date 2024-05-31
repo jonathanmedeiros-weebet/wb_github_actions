@@ -11,7 +11,6 @@
             {{'bilhete.eventosSelecionados' | translate}}<br>
             <h5><span *ngIf="sorteio">{{soterio.titulo}}</span></h5>
             <p *ngIf="sorteio">{{soterio.nome}}</p>
-            <p *ngIf="sorteio">{{soterio.descricao}}</p>
             <p *ngIf="sorteio">Valor do número: {{soterio.valor_numero | currency}}</p>
             <a [ngClass]="{'disabled': numeros == 0}" (click)="removerNumeros()">
                 <i class="fa-solid fa-trash"></i> {{'bilhete.removerTodos' | translate}}
@@ -49,7 +48,7 @@
                 <div class="form-group submit-buttons">
                     <button *ngIf="!disabled; else btnProcessando" (click)="submit()" [attr.disabled]="numeros <= 0 ? true : none"
                             class="btn btn-custom btn-block">
-                        {{'bilhete.apostar' | translate}} <b>({{numeros}})</b>
+                        {{'bilhete.comprar' | translate}} <b>({{numeros}})</b>
                     </button>
                     <ng-template #btnProcessando>
                         <button disabled class="btn btn-custom btn-block">

@@ -115,7 +115,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.createForm();
         this.menuFooterService.setIsPagina(true);
 
-        this.paginaPrincipal = this.params.getOpcoes().pagina_inicial;
+        this.paginaPrincipal = 'rifa';
         this.tabSelected = this.paginaPrincipal == 'cassino_ao_vivo' ? 'cassino' : this.paginaPrincipal;
 
         this.getApostas();
@@ -133,12 +133,12 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     getTabs(): any[] {
         const tabs: any[] = [
-            { id: 'esporte', label: 'geral.esporte', habilitado: this.esporteHabilitado },
-            { id: 'cassino', label: 'geral.cassino', habilitado: this.casinoHabilitado },
-            { id: 'acumuladao', label: 'geral.acumuladao', habilitado: this.acumuladaoHabilitado },
-            { id: 'desafio', label: 'geral.desafio', habilitado: this.desafioHabilitado },
-            { id: 'loteria', label: 'geral.loteria', habilitado: this.loteriasHabilitada },
-            { id: 'loteria-popular', label: 'submenu.loteriaPopular', habilitado: this.loteriaPopularHabilitada },
+            // { id: 'esporte', label: 'geral.esporte', habilitado: this.esporteHabilitado },
+            // { id: 'cassino', label: 'geral.cassino', habilitado: this.casinoHabilitado },
+            // { id: 'acumuladao', label: 'geral.acumuladao', habilitado: this.acumuladaoHabilitado },
+            // { id: 'desafio', label: 'geral.desafio', habilitado: this.desafioHabilitado },
+            // { id: 'loteria', label: 'geral.loteria', habilitado: this.loteriasHabilitada },
+            // { id: 'loteria-popular', label: 'submenu.loteriaPopular', habilitado: this.loteriaPopularHabilitada },
             { id: 'rifa', label: 'geral.rifa', habilitado: this.rifaHabilitada }
         ];
 

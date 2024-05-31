@@ -265,6 +265,7 @@
         "cotacao": "Quotation",
         "aceitarAlteracoesDeOdds": "Accept odds changes",
         "apostar": "Bet",
+        "comprar": "Buy",
         "utilizarBonus": "Use bonus",
         "algumasCotacoesMudaram": "Some odds have changed, check carefully before confirming the bet",
         "algumasCotacoesMudaramPreAposta": "Some odds have changed since the pre-bet was created, check carefully before validating.",

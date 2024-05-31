@@ -22,6 +22,8 @@ import {BaseFormComponent} from '../../base-form/base-form.component';
 import * as moment from 'moment/moment';
 import { config } from '../../../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
+import {RifaBilheteService} from '../../../services/rifa/rifa-bilhete.service';
+import {RifaApostaService} from '../../../services/rifa/rifa-aposta.service';
 
 @Component({
     selector: 'app-cliente-apostas-modal',
@@ -38,6 +40,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     casinoHabilitado;
     esporteHabilitado;
     loteriaPopularHabilitada;
+    rifaHabilitada;
     activeId = 'esporte';
 
     showLoading = false;
@@ -93,6 +96,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         private cassinoService: CasinoApiService,
         private loteriaService: ApostaLoteriaService,
         private loteriaPopularService: LoteriaPopularService,
+        private rifaService: RifaApostaService,
         private translate: TranslateService,
         private auth: AuthService
     ) {
@@ -123,14 +127,15 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.esporteHabilitado = this.params.getOpcoes().esporte;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
         this.casinoHabilitado = this.params.getOpcoes().casino;
+        this.rifaHabilitada = this.params.getOpcoes().rifa;
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
-        
-        this.paginaPrincipal = this.params.getOpcoes().pagina_inicial;
+
+        this.paginaPrincipal = 'rifa';
         this.tabSelected = this.paginaPrincipal == 'cassino_ao_vivo' ? 'cassino' : this.paginaPrincipal;
-        
+
         this.generateOptions();
         this.createForm();
-        
+
         this.pronomeCliente = this.pronomesCliente[this.translate.currentLang];
         this.translate.onLangChange.subscribe(change => this.pronomeCliente = this.pronomesCliente[change.lang]);
         this.appMobile = this.auth.isAppMobile();
@@ -139,26 +144,27 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
-    }    
-    
+    }
+
     generateOptions() {
         const habilitados = {
-            esporte: this.esporteHabilitado,
-            cassino: this.casinoHabilitado,
-            acumuladao: this.acumuladaoHabilitado,
-            desafio: this.desafioHabilitado,
-            loteria: this.loteriasHabilitada,
-            loteriaPopular: this.loteriaPopularHabilitada
+            // esporte: this.esporteHabilitado,
+            // cassino: this.casinoHabilitado,
+            // acumuladao: this.acumuladaoHabilitado,
+            // desafio: this.desafioHabilitado,
+            // loteria: this.loteriasHabilitada,
+            // loteriaPopular: this.loteriaPopularHabilitada,
+            rifa: this.rifaHabilitada
         };
-    
+
         const chaves = Object.keys(habilitados);
         const indicePaginaPrincipal = chaves.findIndex(key => key === this.paginaPrincipal);
-    
+
         if (indicePaginaPrincipal !== -1) {
             const elementoMovido = chaves.splice(indicePaginaPrincipal, 1);
             chaves.unshift(...elementoMovido);
         }
-    
+
         chaves.forEach(key => {
             if (habilitados[key]) {
                 this.options.push({ value: key, label: `geral.${key}` });
@@ -215,6 +221,13 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
                 break;
             case 'loteria-popular':
                 this.loteriaPopularService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
+                break;
+            case 'rifa':
+                this.rifaService.getApostas(queryParams)
                     .subscribe(
                         apostas => this.handleResponse(apostas),
                         error => this.handleError(error)

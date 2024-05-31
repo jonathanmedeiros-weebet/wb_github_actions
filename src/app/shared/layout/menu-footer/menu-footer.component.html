@@ -11,21 +11,21 @@
     <app-sidebar-nav *ngIf="campeonatosIsOpen" [height]="sidebarNavHeight"></app-sidebar-nav>
 </div>
 <div id="bottom-bar" [hidden]="hidden">
-    <div class="bottom-bar-button" *ngIf="!['acumuladao', 'quininha', 'seninha'].includes(contexto)">
-        <a (click)="toggleCampeonatos()">
-            <i class="fa-solid fa-bars-staggered"></i> {{nomeBotaoExtras}}
-        </a>
-    </div>
-    <div *ngIf="aoVivoHabilitado" class="bottom-bar-button" routerLinkActive="active" [ngClass]="{'menu-open': menuIsOpen}">
-        <a [routerLink]="['/esportes/live']">
-            <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate}}
-        </a>
-    </div>
-    <div *ngIf="!aoVivoHabilitado" class="bottom-bar-button" routerLinkActive="active">
-        <a [routerLink]="['/esportes/futebol']">
-            <i class="wbicon icon-futebol"></i> {{'submenu.futebol' | translate}}
-        </a>
-    </div>
+<!--    <div class="bottom-bar-button" *ngIf="!['acumuladao', 'quininha', 'seninha'].includes(contexto)">-->
+<!--        <a (click)="toggleCampeonatos()">-->
+<!--            <i class="fa-solid fa-bars-staggered"></i> {{nomeBotaoExtras}}-->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <div *ngIf="aoVivoHabilitado" class="bottom-bar-button" routerLinkActive="active" [ngClass]="{'menu-open': menuIsOpen}">-->
+<!--        <a [routerLink]="['/esportes/live']">-->
+<!--            <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate}}-->
+<!--        </a>-->
+<!--    </div>-->
+<!--    <div *ngIf="!aoVivoHabilitado" class="bottom-bar-button" routerLinkActive="active">-->
+<!--        <a [routerLink]="['/esportes/futebol']">-->
+<!--            <i class="wbicon icon-futebol"></i> {{'submenu.futebol' | translate}}-->
+<!--        </a>-->
+<!--    </div>-->
     <div class="bottom-bar-button">
         <a (click)="toggleBilhete()">
             <div class="badge-container" *ngIf="quantidadeItens > 0">

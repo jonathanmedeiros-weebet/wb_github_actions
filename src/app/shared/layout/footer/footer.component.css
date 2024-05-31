@@ -1,205 +1,77 @@
-footer {
-    margin-top: 15px;
-    margin-bottom: 0;
-    background-color: var(--header);
-    min-height: 250px;
-    padding: 25px 0 25px 0;
-    font-size: 12px;
-}
-
-.footer-app-mobile{
-    margin-top: 15px;
-    margin-bottom: 0;
-    background-color: var(--header);
-    min-height: 0;
-    max-height: 0;
-    /*padding: 25px 0 35px 0;*/
-    /*font-size: 14px;*/
-}
-
-.title {
-    font-weight: 600;
-    font-size: 12px;
-    margin-bottom: 15px;
-}
-
-.title-cartao {
-    font-weight: 600;
-    font-size: 14px;
-    margin-top: 15px;
-    margin-bottom: 5px;
-}
-
-.image {
-    max-width: 70px;
-    max-height: 40px;
-}
-
-.container {
-    text-align: center;
-    color: var(--foreground-header);
-}
-
-.info {
-    margin: 15px 0;
-}
-
-.logo {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.logo img {
-    max-height: 100px;
-    max-width: 150px;
-}
-
-.info-jogo {
-    margin-top: 20px;
-    margin-bottom: 0;
-}
-
-.info-jogo h4 {
-    font-weight: normal;
-    margin-bottom: 0;
-}
-
-.info-jogo .icons {
-    margin-top: 0;
-    display: flex;
-    gap: 50px;
-    align-items: center;
-    justify-content: center;
-}
-
-.redes-sociais {
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-.redes-sociais .links-redes {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    justify-content: center;
-}
-
-.redes-sociais .links-redes svg {
-    height: 20px;
-}
-
-.links {
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.links a {
-    font-weight: 400;
-    color: var(--highlight);
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-footer {
+.instruction{
+    min-height: 400px;
     position: relative;
+    padding-top: 32px;
+    background: #F2F2F2;
+    margin: auto;
 }
 
-.toTop {
+
+
+.instruction .crop{
     position: absolute;
-    top: 20px;
-    right: 20px;
+    height: 240px;
+    overflow: hidden;
+    left: -50px;
+    bottom: 0px;
 
-    color: var(--foreground-inputs-odds);
-    text-decoration: none;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: var(--inputs-odds);
-    border-radius: 4px;
-
-    height: 45px;
-    width: 45px;
 }
 
-.toTop:hover {
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
+.instruction .crop img{
+    height: 100%;
+    transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
 }
 
-.language-dropdown {
-    font-size: 12px;
-    margin: 8px auto;
-    color: var(--foreground-sidebars);
-    width: 50%;
+.instruction .content{
+    position: relative;
+    max-width: 768px;
+    min-height: 400px;
+    margin: auto;
 }
 
-.language-dropdown .btn {
-    font-size: 12px;
-    color: var(--foreground-sidebars);
+.instruction .step{
+    height: 100%;
+    display: block;
+    float: left;
+    color: #FAB171;
+    font-size: 36px;
+    font-weight: 400;
+    padding-right:4px;
 }
 
-.language-dropdown-menu {
-    width: 100%;
-    font-size: 12px;
+.instruction .step div{
+    margin-top: -15px;
 }
 
-.info.pagamento h4 {
-    margin-bottom: 4px;
+
+.instruction .title{
+    color: #2C3135;
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 5px;
+
 }
 
-@media only screen and (max-width: 480px) {
-    @supports (-webkit-touch-callout: none) {
-        .info.copyright {
-            margin-bottom: 35px !important;
-        }
-        footer {
-            margin-bottom: 38px;
-        }
-    }
+.instruction .description{
+    display: block;
+
+}
+.page-bottom {
+    font-family: "Montserrat",sans-serif;
+    color: #A9B0B8;
+    background-color: #0D3154;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    border-top: 1px solid #e7e7e7;
+
 }
 
-@media only screen and (max-width: 1024px) {
-    footer {
-        padding-bottom: 60px;
-    }
+@media (max-width: 768px) {
 
-    .info.copyright {
-        margin-top: 5px !important;
-    }
-
-    .container{
-        font-size: 11px; /* ajuste fonte */
-    }
-
-    .title {
-        font-size: 12px;
-    }
-
-    .links {
-        flex-direction: column;
-        font-size: 12px;
-        gap: 15px;
-        margin-top: 10px;
-    }
-
-    .info {
-        margin: 0;
-    }
-
-    .info-jogo .icons {
-        gap: 25px;
-        margin-top: 15px;
-    }
-
-    .info.pagamento h4 {
-        margin-bottom: 4px;
+    .instruction .content{
+        padding-bottom: 250px;
     }
 }

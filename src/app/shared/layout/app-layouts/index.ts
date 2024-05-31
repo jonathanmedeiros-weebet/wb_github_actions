@@ -10,3 +10,4 @@ export * from './sport-layout.component';
 export * from './cassino-layout.component';
 export * from './cassino-live-layout.component';
 export * from './virtuais-layout.component';
+export * from './rifa-layout.component';

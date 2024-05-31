@@ -10,7 +10,7 @@ import {Sorteio} from '../../models/loteria/sorteio';
 @Injectable({
   providedIn: 'root'
 })
-export class SorteioService {
+export class RifaSorteioService {
 
     private SorteioUrl = `${config.RIFA_URL}/sorteios`; // URL to web api
 
@@ -41,7 +41,7 @@ export class SorteioService {
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
-                map((res: any) => res.results),
+                map((res: any) => res),
                 catchError(this.errorService.handleError)
             );
     }

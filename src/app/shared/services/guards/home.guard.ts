@@ -14,8 +14,9 @@ export class HomeGuard implements CanActivate {
         desafio: 'desafios',
         acumuladao: 'acumuladao',
         loteria: 'loterias',
-        cassino_ao_vivo: 'casino/cl' 
-    }
+        cassino_ao_vivo: 'casino/cl',
+        rifas: 'rifas/wall'
+    };
 
     constructor(
         private paramsService: ParametrosLocaisService,
@@ -24,7 +25,7 @@ export class HomeGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const { pagina_inicial } = this.paramsService.getOpcoes();
-    
+
         if (pagina_inicial) {
             this.router.navigate([this.pages[pagina_inicial]], {queryParams: route.queryParams});
             return false;

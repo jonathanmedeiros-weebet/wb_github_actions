@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SorteioService } from 'src/app/shared/services/rifa/sorteio.service';
+import { RifaSorteioService } from 'src/app/shared/services/rifa/rifa-sorteio.service';
 import {Observable, Observer} from 'rxjs';
 import {config} from '../../shared/config';
 import {RifaBilheteService} from '../../shared/services/rifa/rifa-bilhete.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-wall',
@@ -17,8 +18,9 @@ export class WallComponent implements OnInit {
 
 
     constructor(
-        private sorteioService: SorteioService,
-        private rifaBilheteService: RifaBilheteService
+        private sorteioService: RifaSorteioService,
+        private rifaBilheteService: RifaBilheteService,
+        private router: Router
 
     ) {}
 
@@ -26,8 +28,18 @@ export class WallComponent implements OnInit {
 
         this.sorteioService.getSorteios().subscribe({
             next: (sorteios) => {
-                this.sorteios = sorteios;
+                if (sorteios.length == 1) {
+                    this.redirecionar(sorteios[0]);
+
+                } else {
+                    this.sorteios = sorteios;
+                }
             }});
+
+    }
+
+    redirecionar(soteio) {
+        this.router.navigate(['/rifas/show', soteio.id]);
 
     }
 
