@@ -2592,15 +2592,6 @@ gulp.task('greenp1x.com', function (done) {
     });
 });
 
-gulp.task('strikebet.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "strikebet.bet",
-        banca: "STRIKE BET",
-        styles: "",
-    });
-});
-
 gulp.task('lidersport.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -3057,6 +3048,15 @@ gulp.task('avante.bet', function (done) {
         server: "front2.wee.bet",
         host: "avante.bet",
         banca: "AVANTE.BET",
+        styles: ""
+    });
+});
+
+gulp.task('26sports.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "26sports.bet",
+        banca: "26 SPORTS",
         styles: ""
     });
 });
