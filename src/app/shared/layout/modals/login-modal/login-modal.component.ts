@@ -229,7 +229,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.mostrarSenha = !this.mostrarSenha;
     }
 
-    blockInvalidCharacters(e, inputName){
+    onBeforeInput(e, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
     }
 }
