@@ -579,15 +579,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         const loadItems = () => {
             xtremepush('inbox', 'message.list', {
-                // limit: 5,
-                // offset: this.offset
             }, (result) => {
-                // console.log(result.items);
-                // if (result.badge !== undefined) {
-                //     console.log(result.badge);
-                //     this.atualizarBadge(result.badge);
-                // }
-
                 for (let i = 0; i < result.items.length; i++) {
                     const xtremepushItem = result.items[i];
 
@@ -601,7 +593,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     });
 
                     const xtremepushElement = document.createElement('div');
-                    xtremepushElement.className = 'xtremepush-notification-item';  // Adicione uma classe para estilização
+                    xtremepushElement.className = 'xtremepush-notification-item';
                     xtremepushElement.innerHTML = `
                     <div class="xtremepush-card" style="
                         border-bottom: 1px solid rgba(204, 204, 204, 0.5);
@@ -631,13 +623,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
                     xtremepushNotificationContainer.appendChild(xtremepushElement);
                 }
-                //
-                // if (result.more) {
-                //     this.exibirBotaoMaisItens = true;
-                // } else {
-                //     this.offset = 0;
-                //     this.exibirBotaoMaisItens = false;
-                // }
             }, (err) => {
                 console.log(err);
             });
@@ -661,9 +646,4 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     closeNotifications() {
         this.notificationsXtremepushOpen = false;
     }
-
-    // loadMoreItems() {
-    //     this.offset += 5; // Começa a partir do segundo conjunto de itens
-    //     this.notificationsXtremepush(); // Carrega mais itens
-    // }
 }
