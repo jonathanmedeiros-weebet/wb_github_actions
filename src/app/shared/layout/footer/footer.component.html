@@ -71,13 +71,81 @@
     </div>
 
     <div class="page-bottom d-flex justify-content-around">
-        <div class="">
-            <a>2024 © Todos os direitos reservados Betsocial</a>
+        <div style="width: 90%">
+            <div [innerHTML]="rodape | safeHTML">
+            </div>
         </div>
-        <div class="">
-            <a>Termos de uso</a>&nbsp;&nbsp;
+    </div>
 
-            <a>Politica de Privacidade</a>
+    <div class="page-bottom d-flex justify-content-around">
+        <div class="" style="width: 90%">
+            <div class="d-flex justify-content-around links">
+                <a [routerLink]="['/informacoes/quem-somos']" *ngIf="hasQuemSomos">
+                    {{'footer.quemSomos' | translate}}
+                </a>
+<!--                <a href="https://afiliados.{{sharedUrl}}" target="_blank" *ngIf="exibirLinkAfiliado">-->
+<!--                    {{'footer.afiliados' | translate}}-->
+<!--                </a>-->
+<!--                <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="hasApk && !isAppMobile">-->
+<!--                    {{'footer.downloadApp' | translate}}-->
+<!--                </a>-->
+                <a [routerLink]="['/informacoes/regras']" *ngIf="hasRegras">
+                    {{'footer.regras' | translate}}
+                </a>
+<!--                <a *ngIf="isLoggedIn && esporteHabilitado" class="pointer" (click)="abrirResultados()">-->
+<!--                    {{'footer.resultados' | translate}}-->
+<!--                </a>-->
+                <a [routerLink]="['/informacoes/politica-privacidade']" *ngIf="hasPoliticaPrivacidade">
+                    {{'footer.politicaDePrivacidade' | translate}}
+                </a>
+<!--                <a [routerLink]="['/informacoes/politica-aml']" *ngIf="hasPoliticaAml">-->
+<!--                    {{'footer.politicaAml' | translate}}-->
+<!--                </a>-->
+<!--                <a [routerLink]="['/informacoes/jogo-responsavel']" *ngIf="hasJogoResponsavel">-->
+<!--                    {{'footer.jogoResponsavel' | translate}}-->
+<!--                </a>-->
+                <a [routerLink]="['/informacoes/termos-condicoes']" *ngIf="hasTermosCondicoes">
+                    {{'footer.termosECondicoes' | translate}}
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="page-bottom d-flex justify-content-around">
+
+
+
+        <div class="redes-sociais" *ngIf="temRedesSociais()">
+            <div class="links-redes">
+                <a [href]="linkTwitter" target="_blank" *ngIf="linkTwitter">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/twitter.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkYoutube" target="_blank" *ngIf="linkYoutube">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/youtube.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkTikTok" target="_blank" *ngIf="linkTikTok">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/tiktok.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkFacebook" target="_blank" *ngIf="linkFacebook">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/facebook.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkTelegram" target="_blank" *ngIf="linkTelegram">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/telegram.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkInstagram" target="_blank" *ngIf="linkInstagram">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/instagram.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+                <a [href]="linkLinkedin" target="_blank" *ngIf="linkLinkedin">
+                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/linkedin.svg'" [svgStyle]="{ height: '20px', fill: 'var(--foreground-header)' }"></svg-icon>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="page-bottom d-flex justify-content-around">
+        <div class="info copyright" style="margin-top: 20px; margin-bottom: 0">
+            <small>{{'footer.todosOsDireitosReservados' | translate:{'BANCA_NOME': BANCA_NOME} }}</small>
         </div>
     </div>
 

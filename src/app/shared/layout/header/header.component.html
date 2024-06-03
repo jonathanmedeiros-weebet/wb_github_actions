@@ -268,13 +268,13 @@
                             <div style="align-items: center; justify-content: center; display: flex;">
                                 <i class="separador"></i>
                             </div>
-                            <div class="saldos-item">
-                                <span class="">{{'geral.bonus' | translate}}</span>
-                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.bonus | currency}}</span>
-                                <ng-template #elseSaldoOculto>
-                                    <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
-                                </ng-template>
-                            </div>
+<!--                            <div class="saldos-item">-->
+<!--                                <span class="">{{'geral.bonus' | translate}}</span>-->
+<!--                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.bonus | currency}}</span>-->
+<!--                                <ng-template #elseSaldoOculto>-->
+<!--                                    <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>-->
+<!--                                </ng-template>-->
+<!--                            </div>-->
                         </div>
 
                         <div class="d-flex justify-content-around">
@@ -307,24 +307,24 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
-                            <a (click)="abrirPix()">
-                                <span>
-                                     <i class="fa fa-brands fa-pix"></i>
-                                </span>
-                                Pix
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirConfiguracoes()">
-                                <span>
-                                     <i class="fa fa-cogs"></i>
-                                </span>
-                                {{'geral.configuracoes' | translate}}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
+<!--                            <a (click)="abrirPix()">-->
+<!--                                <span>-->
+<!--                                     <i class="fa fa-brands fa-pix"></i>-->
+<!--                                </span>-->
+<!--                                Pix-->
+<!--                                <span class="arrow-nav">-->
+<!--                                    <i class="fa-solid fa-angle-right"></i>-->
+<!--                                </span>-->
+<!--                            </a>-->
+<!--                            <a (click)="abrirConfiguracoes()">-->
+<!--                                <span>-->
+<!--                                     <i class="fa fa-cogs"></i>-->
+<!--                                </span>-->
+<!--                                {{'geral.configuracoes' | translate}}-->
+<!--                                <span class="arrow-nav">-->
+<!--                                    <i class="fa-solid fa-angle-right"></i>-->
+<!--                                </span>-->
+<!--                            </a>-->
                             <hr />
                             <label>{{'geral.maisOpcoes' | translate}}</label>
                             <a (click)="abrirFinanceiro()">
@@ -336,15 +336,15 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
-                            <a (click)="abrirSaques()">
-                                <span>
-                                    <i class="fa fa-solid fa-money-bill-transfer"></i>
-                                </span>
-                                {{'geral.saques' | translate}}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
+<!--                            <a (click)="abrirSaques()">-->
+<!--                                <span>-->
+<!--                                    <i class="fa fa-solid fa-money-bill-transfer"></i>-->
+<!--                                </span>-->
+<!--                                {{'geral.saques' | translate}}-->
+<!--                                <span class="arrow-nav">-->
+<!--                                    <i class="fa-solid fa-angle-right"></i>-->
+<!--                                </span>-->
+<!--                            </a>-->
                             <a (click)="abrirDepositos()">
                                 <span>
                                     <i class="fa fa-solid fa-money-bill-transfer"></i>
@@ -363,24 +363,24 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
-                            <a (click)="abrirRollovers()">
-                                <span>
-                                    <i class="fa fa-solid fa-gift"></i>
-                                </span>
-                                {{'geral.rollover' | translate}}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirIndiqueGanhe()" *ngIf="isCliente && indiqueGanheHabilitado">
-                                <span>
-                                    <i class="fa fa-solid fa-gift"></i>
-                                </span>
-                                {{'indique_ganhe.indiqueGanhe' | translate}}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
+<!--                            <a (click)="abrirRollovers()">-->
+<!--                                <span>-->
+<!--                                    <i class="fa fa-solid fa-gift"></i>-->
+<!--                                </span>-->
+<!--                                {{'geral.rollover' | translate}}-->
+<!--                                <span class="arrow-nav">-->
+<!--                                    <i class="fa-solid fa-angle-right"></i>-->
+<!--                                </span>-->
+<!--                            </a>-->
+<!--                            <a (click)="abrirIndiqueGanhe()" *ngIf="isCliente && indiqueGanheHabilitado">-->
+<!--                                <span>-->
+<!--                                    <i class="fa fa-solid fa-gift"></i>-->
+<!--                                </span>-->
+<!--                                {{'indique_ganhe.indiqueGanhe' | translate}}-->
+<!--                                <span class="arrow-nav">-->
+<!--                                    <i class="fa-solid fa-angle-right"></i>-->
+<!--                                </span>-->
+<!--                            </a>-->
                             <a (click)="listPrinters()" *ngIf="appMobile">
                                 <span>
                                     <i class="fa fa-solid fa-cogs"></i>
@@ -432,15 +432,15 @@
                                 <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.saldo | currency}}</span>
                                 <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
                             </div>
-                            <div  *ngIf="isCliente" style="align-items: center; justify-content: center; display: flex;">
-                                <i class="separador"></i>
-                            </div>
-                            <div class="saldos-item"
-                                *ngIf="isCliente">
-                                <span class="">{{'geral.bonus' | translate}}</span>
-                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.bonus | currency}}</span>
-                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
-                            </div>
+<!--                            <div  *ngIf="isCliente" style="align-items: center; justify-content: center; display: flex;">-->
+<!--                                <i class="separador"></i>-->
+<!--                            </div>-->
+<!--                            <div class="saldos-item"-->
+<!--                                *ngIf="isCliente">-->
+<!--                                <span class="">{{'geral.bonus' | translate}}</span>-->
+<!--                                <span class="dados" *ngIf="mostrarSaldo; else elseSaldoOculto">{{posicaoFinanceira.bonus | currency}}</span>-->
+<!--                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>-->
+<!--                            </div>-->
                         </div>
 
                         <div class="d-flex justify-content-around">

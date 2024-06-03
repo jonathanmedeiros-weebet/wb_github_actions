@@ -65,8 +65,18 @@
     text-align: center;
     font-size: 14px;
     font-weight: 400;
-    border-top: 1px solid #e7e7e7;
+    /*border-top: 1px solid #e7e7e7;*/
 
+}
+
+.page-bottom a {
+    color: #A9B0B8;
+    text-decoration: none;
+    margin: 3px;
+}
+.page-bottom a:hover {
+    color: #FAB171;
+    text-decoration: none;
 }
 
 @media (max-width: 768px) {

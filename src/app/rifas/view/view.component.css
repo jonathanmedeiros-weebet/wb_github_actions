@@ -81,6 +81,8 @@
     background:  #FAB171;
     font-weight: 500;
     border-radius: 15px;
+    display: inline-block;
+    margin: 5px;
 }
 
 .rifa h1{
