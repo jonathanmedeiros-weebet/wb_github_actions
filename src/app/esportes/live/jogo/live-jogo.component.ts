@@ -152,7 +152,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                             }
 
                             if(habilitar_live_tracker) {
-                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets.thesports01.com/br/3d/football?profile=5oq66hkn0cwunq7&uuid=' + jogo.live_track_id);
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=' + jogo.live_track_id);
                                 this.showCampinhoFrame();
                             }
                         } else {

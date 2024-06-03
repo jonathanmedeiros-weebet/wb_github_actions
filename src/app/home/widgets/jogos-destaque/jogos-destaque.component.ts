@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { SOCCER_ID } from '../../../shared/constants/sports-ids';
     styleUrls: ['./jogos-destaque.component.css']
 })
 export class JogosDestaqueComponent implements OnInit, OnChanges {
+    @Input() displayLabel = true;
     @Output() maisCotacoesDestaque = new EventEmitter();
     jogosDestaque = [];
     mobileScreen: boolean;
@@ -55,10 +56,27 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
             this.widthCard = 300;
         }
 
+        this.getJogosDestaques();
+    }
+
+    getJogosDestaques() {
+        this.jogoService.getJogosDestaque()
+            .subscribe(jogos => {
+                this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
+
+                this.getMatchsInCenter();
+            });
+    }
+
+    getMatchsInCenter() {
+        const opcoes = this.paramsService.getOpcoes();
+
         let queryParams = {
             'sport_id': SOCCER_ID,
             'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(SOCCER_ID),
-            'odds': ['casa_90', 'empate_90', 'fora_90']
+            'odds': ['casa_90', 'empate_90', 'fora_90'],
+            'data_final': opcoes.data_limite_tabela,
+            'games_ids': this.jogosDestaquesIds
         };
 
         this.campeonatoService.getCampeonatos(queryParams)
@@ -72,7 +90,12 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
                         return campeonato;
                     }
                 });
-                this.getJogosDestaques();
+
+                this.mapJogosDestaque();
+                this.cotacoesJogosDestaque();
+
+                this.showLoadingIndicator = false;
+                this.cd.detectChanges();
             });
 
         this.bilheteService.itensAtuais
@@ -94,16 +117,6 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         if (changes['jogosDestaque']) {
             this.remapJogosDestaque();
         }
-    }
-
-    getJogosDestaques() {
-        this.jogoService.getJogosDestaque()
-            .subscribe(jogos => {
-                this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
-                this.mapJogosDestaque();
-                this.cotacoesJogosDestaque();
-                this.showLoadingIndicator = false;
-            });
     }
 
     mapJogosDestaque() {
@@ -138,7 +151,6 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
                 cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
             });
         });
-        this.cd.detectChanges();
     }
 
     getCotacaoLocal(jogo) {

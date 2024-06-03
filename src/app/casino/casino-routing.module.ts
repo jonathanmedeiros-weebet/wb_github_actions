@@ -103,15 +103,15 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'pb',
+        path: 'parlaybay',
         component: VirtuaisLayoutComponent,
         children: [
             {
                 path: '',
                 component: CasinoWrapperComponent,
                 children: [
-                     {
-                        path: ':game_fornecedor/:game_id',
+                    {
+                        path: '',
                         component: GameviewComponent,
                         canActivate: [CasinoGuard]
                     }

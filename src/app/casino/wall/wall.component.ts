@@ -56,7 +56,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gamesMesa: GameCasino[];
     public gamesBingo: GameCasino[];
     public gamesLive: GameCasino[];
-    
+
     // Cassino ao vivo
     public gamesBlackjack: GameCasino[];
     public gamesBaccarat: GameCasino[];
@@ -83,7 +83,11 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get showFilterBox(): boolean {
-        return !this.showLoadingIndicator && !this.isVirtualPage;
+        return !this.showLoadingIndicator && !this.hideProviders;
+    }
+
+    get hideProviders(){
+        return this.isVirtualPage;
     }
 
     get isDemo(): boolean {
@@ -238,7 +242,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameTitle = this.translate.instant('geral.todos');
 
         const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
-        if(providerParam) {
+        if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
             this.filterGames(providerParam, this.categorySelected, true);
         }
 
@@ -311,10 +315,10 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameTitle = this.translate.instant('geral.todos');
 
         const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
-        if(providerParam) {
+        if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
             this.filterGames(providerParam, this.categorySelected, true);
         }
-        
+
         this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
     }
@@ -387,7 +391,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     ) {
         let providerName = provider ?? this.gameFornecedor;
         let categoryName = this.getCategorySlug(category ?? this.categorySelected);
-        
+
         this.categorySelected = category ?? 'cassino';
         let gamesCassinoList = this.gamesCassino;
 

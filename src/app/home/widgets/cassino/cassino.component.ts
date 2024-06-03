@@ -112,4 +112,8 @@ export class CassinoComponent implements OnInit {
             }
         );
     }
+
+    get isDemo(): boolean {
+        return location.host === 'demo.wee.bet';
+    }
 }

@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import {
     AcumuladaoService,
     ApostaEsportivaService,
@@ -13,12 +13,12 @@ import {
     SidebarService,
     LoteriaPopularService
 } from 'src/app/services';
-import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
-import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from 'src/app/shared/layout/modals';
-import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import {BaseFormComponent} from '../../base-form/base-form.component';
+import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { BaseFormComponent } from '../../base-form/base-form.component';
 import * as moment from 'moment/moment';
 import { config } from '../../../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
@@ -65,7 +65,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     mobileScreen: boolean;
     slug;
 
-    pronomesCliente = {'pt': 'Você ', 'en': 'You '};
+    pronomesCliente = { 'pt': 'Você ', 'en': 'You ' };
     pronomeCliente;
 
     origin;
@@ -73,7 +73,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     paginaPrincipal: string;
     selectedOption: string;
 
-    options: {value: string, label: string}[] = [];
+    options: { value: string, label: string }[] = [];
 
     constructor(
         private messageService: MessageService,
@@ -113,7 +113,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.slug = config.SLUG;
         this.mobileScreen = window.innerWidth <= 1024;
         if (!this.mobileScreen) {
-            this.sidebarService.changeItens({contexto: 'cliente'});
+            this.sidebarService.changeItens({ contexto: 'cliente' });
             this.menuFooterService.setIsPagina(true);
         }
 
@@ -124,23 +124,29 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
         this.casinoHabilitado = this.params.getOpcoes().casino;
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
-        
-        this.paginaPrincipal = this.params.getOpcoes().pagina_inicial;
-        this.tabSelected = this.paginaPrincipal == 'cassino_ao_vivo' ? 'cassino' : this.paginaPrincipal;
-        
+
+
+        if (this.params.getOpcoes().pagina_inicial == 'home' || this.params.getOpcoes().pagina_inicial == 'cassino_ao_vivo') {
+            this.paginaPrincipal = 'cassino';
+            this.tabSelected = 'cassino';
+        } else {
+            this.paginaPrincipal = this.params.getOpcoes().pagina_inicial;
+            this.tabSelected = this.params.getOpcoes().pagina_inicial;
+        }
+
         this.generateOptions();
         this.createForm();
-        
+
         this.pronomeCliente = this.pronomesCliente[this.translate.currentLang];
         this.translate.onLangChange.subscribe(change => this.pronomeCliente = this.pronomesCliente[change.lang]);
         this.appMobile = this.auth.isAppMobile();
-        this.origin = this.appMobile ? '?origin=app':'';
+        this.origin = this.appMobile ? '?origin=app' : '';
     }
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
-    }    
-    
+    }
+
     generateOptions() {
         const habilitados = {
             esporte: this.esporteHabilitado,
@@ -150,15 +156,15 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             loteria: this.loteriasHabilitada,
             loteriaPopular: this.loteriaPopularHabilitada
         };
-    
+
         const chaves = Object.keys(habilitados);
         const indicePaginaPrincipal = chaves.findIndex(key => key === this.paginaPrincipal);
-    
+
         if (indicePaginaPrincipal !== -1) {
             const elementoMovido = chaves.splice(indicePaginaPrincipal, 1);
             chaves.unshift(...elementoMovido);
         }
-    
+
         chaves.forEach(key => {
             if (habilitados[key]) {
                 this.options.push({ value: key, label: `geral.${key}` });
@@ -180,31 +186,31 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         switch (this.tabSelected) {
             case 'esporte':
                 this.apostaEsportivaService.getApostas(queryParams)
-                .subscribe(
-                    apostas => this.handleResponse(apostas),
-                    error => this.handleError(error)
-                );
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             case 'acumuladao':
                 this.acumuladaoService.getApostas(queryParams)
-                .subscribe(
-                    apostas => this.handleResponse(apostas),
-                    error => this.handleError(error)
-                );
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             case 'desafio':
                 this.desafioApostaService.getApostas(queryParams)
-                .subscribe(
-                    apostas => this.handleResponse(apostas),
-                    error => this.handleError(error)
-                );
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             case 'cassino':
                 this.cassinoService.getApostas(queryParams)
-                .subscribe(
-                    apostas => this.handleResponse(apostas),
-                    error => this.handleError(error)
-                );
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             case 'loteria':
                 this.loteriaService.getApostas(queryParams)
@@ -264,7 +270,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.queryParams = this.form.value;
 
         let dataSeparadas = this.selectedDate.split(" - ");
-        this.queryParams.dataFinal = this.formateDate(dataSeparadas[1]) ;
+        this.queryParams.dataFinal = this.formateDate(dataSeparadas[1]);
         this.queryParams.dataInicial = this.formateDate(dataSeparadas[0]);
 
         this.tabSelected = this.queryParams.tipo;
@@ -316,8 +322,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     }
 
     formatDate(date, lang = 'br') {
-        if(lang == 'us') {
-            return  date.year + '-' + String(date.month).padStart(2, '0') + "-" + String(date.day).padStart(2, '0');
+        if (lang == 'us') {
+            return date.year + '-' + String(date.month).padStart(2, '0') + "-" + String(date.day).padStart(2, '0');
         }
         return String(date.day).padStart(2, '0') + '/' + String(date.month).padStart(2, '0') + "/" + date.year
     }
@@ -331,7 +337,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
     isRange(date: NgbDate) {
         return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
-        this.isHovered(date);
+            this.isHovered(date);
     }
 
     validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {

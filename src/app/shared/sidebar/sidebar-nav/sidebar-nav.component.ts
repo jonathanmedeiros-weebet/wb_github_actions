@@ -40,7 +40,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     isLogado = false;
     whatsapp;
     cartaoApostaHabilitado;
-    pixCambista = false;
+    enabledBettorPix = false;
     modoCambista = true;
     indiqueGanheHabilitado = false;
     permitirQualquerChavePix = false;
@@ -82,7 +82,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
-        this.pixCambista = this.paramsLocais.getOpcoes().pix_cambista;
+        this.enabledBettorPix = Boolean(this.paramsLocais.getOpcoes().payment_methods_available_for_bettors.length);
         this.modoCambista = this.paramsLocais.getOpcoes().modo_cambista;
         this.indiqueGanheHabilitado = this.paramsLocais.indiqueGanheHabilitado();
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
