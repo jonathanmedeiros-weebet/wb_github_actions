@@ -421,9 +421,7 @@ gulp.task('esportebets.bet', function (done) {
         server: "front4.wee.bet",
         host: "esportebets.bet",
         banca: "ESPORTE BETS",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WTVCW394');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WTVCW394'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
+        styles: ""
     });
 });
 
@@ -2594,15 +2592,6 @@ gulp.task('greenp1x.com', function (done) {
     });
 });
 
-gulp.task('strikebet.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "strikebet.bet",
-        banca: "STRIKE BET",
-        styles: "",
-    });
-});
-
 gulp.task('lidersport.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -3059,6 +3048,15 @@ gulp.task('avante.bet', function (done) {
         server: "front2.wee.bet",
         host: "avante.bet",
         banca: "AVANTE.BET",
+        styles: ""
+    });
+});
+
+gulp.task('26sports.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "26sports.bet",
+        banca: "26 SPORTS",
         styles: ""
     });
 });

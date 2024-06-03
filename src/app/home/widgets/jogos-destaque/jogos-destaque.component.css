@@ -147,9 +147,17 @@ owl-carousel-o {
 
 .jogos-destaque .header {
     display: flex;
-    font-size: 9px;
+    font-size: 10px;
     align-items: center;
     justify-content: space-between;
+}
+
+.jogos-destaque .header .campeonato-nome {
+    width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
 }
 
 .jogos-destaque .jogo {
@@ -213,7 +221,7 @@ owl-carousel-o {
     color: var(--foreground-inputs-odds);
     border-radius: 2px;
     flex: 1;
-    font-size: 8px;
+    font-size: 10px;
     padding: 4.5px;
 
     display: flex;

@@ -49,7 +49,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
-        this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
+        if (botaoContatoFlutuante) {
+            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
+        }
 
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;

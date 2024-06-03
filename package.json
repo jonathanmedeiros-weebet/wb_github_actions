@@ -270,7 +270,6 @@
         "beton.club": "gulp beton.club",
         "maxbet.wee.bet": "gulp maxbet.wee.bet",
         "greenp1x.com": "gulp greenp1x.com",
-        "strikebet.bet": "gulp strikebet.bet",
         "lidersport.bet": "gulp lidersport.bet",
         "betrapida.com": "gulp betrapida.com",
         "bruxo888.com": "gulp bruxo888.com",
@@ -322,7 +321,8 @@
         "sortegol.bet": "gulp sortegol.bet",
         "betcombinada.net": "gulp betcombinada.net",
         "gramado.bet": "gulp gramado.bet",
-        "avante.bet": "gulp avante.bet"
+        "avante.bet": "gulp avante.bet",
+        "26sports.bet": "gulp 26sports.bet"
     },
     "private": true,
     "dependencies": {
