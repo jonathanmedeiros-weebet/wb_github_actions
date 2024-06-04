@@ -20,9 +20,9 @@ import {
     FormatarNomeJogoCassinoPipe,
     DepositoStatusPixPipePipe,
     SafeIframePipe,
-    FormatPaymentMethodPipe
+    FormatPaymentMethodPipe,
+    IdleDetectDirective
 } from './index';
-
 
 @NgModule({
     declarations: [
@@ -45,7 +45,8 @@ import {
         DepositoStatusPixPipePipe,
         CotacaoPipe,
         SafeIframePipe,
-        FormatPaymentMethodPipe
+        FormatPaymentMethodPipe,
+        IdleDetectDirective
     ],
     exports: [
         MomentPipe,
@@ -67,7 +68,8 @@ import {
         SanitizeCampNamePipe,
         CotacaoPipe,
         SafeIframePipe,
-        FormatPaymentMethodPipe
+        FormatPaymentMethodPipe,
+        IdleDetectDirective
     ]
 })
 export class UtilsModule { }

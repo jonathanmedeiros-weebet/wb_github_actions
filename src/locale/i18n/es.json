@@ -205,7 +205,9 @@
         "semPermissaoAcesso": "Sin permiso de acceso",
         "cadastroMenorDeIdade": "Registro solo permitido para mayores de 18 años.",
         "cadastro": "Registro",
-        "alertaChavePixCpf": "Al solicitar el retiro, se procesará a través de la clave Pix asociada con tu CPF (ID fiscal brasileño). Asegúrate de que tu CPF esté correctamente rellenado.",
+        "tituloInformativoCookies": "Uso de Cookies y Sesiones",
+        "informativoCookies": "Este sitio utiliza cookies y sesiones para mejorar su experiencia. Las cookies son pequeños archivos de texto almacenados en su dispositivo que nos ayudan a mantenerlo autenticado, personalizar funciones y configuraciones, así como mejorar la funcionalidad del sitio. Al continuar utilizando este sitio, usted acepta el uso de cookies y sesiones de acuerdo con nuestra Política de Privacidad.",
+        "alertaChavePixCpf": "Al solicitar el retiro, será procesado a través de la clave Pix asociada a su CPF. Asegúrese de que su CPF esté ingresado correctamente.",
         "esportivo": "deportivo",
         "rodadaGratis": "Tirada gratis",
         "dataVencimento": "Fecha de vencimiento",
@@ -572,5 +574,8 @@
         "outubro": "Octubre",
         "novembro": "Noviembre",
         "dezembro": "Diciembre"
+    },
+    "botoes": {
+        "aceitar": "Aceptar"
     }
 }
