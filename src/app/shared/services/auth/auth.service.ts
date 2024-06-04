@@ -146,7 +146,6 @@ export class AuthService {
         xtremepushNotificationContainer.innerHTML = '';
     }
 
-
     isLoggedIn(): boolean {
         return !!localStorage.getItem('token');
     }

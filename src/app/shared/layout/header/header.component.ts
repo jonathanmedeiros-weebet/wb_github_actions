@@ -110,10 +110,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isDemo = location.host === 'demo.wee.bet';
     aoVivoAtivo;
     notificationsXtremepushOpen = false;
-    exibirBotaoMaisItens = false;
-    offset: number = 0;
-
-
     public showHeaderMobile: boolean = false;
 
     @HostListener('window:resize', ['$event'])
@@ -632,7 +628,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.notificationsXtremepushOpen = !this.notificationsXtremepushOpen;
     }
-
 
     atualizarBadge(badge) {
         const badgeElement = document.getElementById('badge-xtremepush');

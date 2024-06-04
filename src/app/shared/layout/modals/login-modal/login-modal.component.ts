@@ -1,7 +1,6 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-
 import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -14,8 +13,6 @@ import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.compone
 import {config} from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { FormValidations } from 'src/app/shared/utils';
-
-
 
 @Component({
     selector: 'app-login-modal',
@@ -36,7 +33,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     LOGO = config.LOGO;
     loginGoogle = false;
     googleUser;
-
 
     constructor(
         public activeModal: NgbActiveModal,

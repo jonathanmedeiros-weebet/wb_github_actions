@@ -839,7 +839,6 @@ body .change-theme {
     display: none;
 }
 
-
 #badge-xtremepush.show-badge {
     display: block;
 }
@@ -853,8 +852,3 @@ body .change-theme {
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
 }
-
-
-
-
-
