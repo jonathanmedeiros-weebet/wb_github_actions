@@ -139,7 +139,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                                     if (this.usuario.tipo_usuario === 'cambista') {
                                         location.reload();
                                     }
-                                    this.activeModal.dismiss();
+                                    this.activeModal.close(true);
                                 },
                                 error => this.handleError(error)
                             );
@@ -231,5 +231,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     blockInvalidCharacters(e, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
+    }
+
+    public toClose() {
+        this.activeModal.close(false);
     }
 }
