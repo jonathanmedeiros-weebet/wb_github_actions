@@ -1,14 +1,14 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
-import {MessageService} from '../../shared/services/utils/message.service';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { MessageService } from '../../shared/services/utils/message.service';
 import * as moment from 'moment';
-import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
-import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
+import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
+import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
 import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService, ApostaLoteriaService, LoteriaPopularService } from 'src/app/services';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { forEach } from 'lodash';
-import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -57,7 +57,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     apostas = [];
 
-    isCliente ;
+    isCliente;
     slug;
 
     appMobile;
@@ -97,7 +97,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     }
 
     ngOnInit() {
-        this.sidebarService.changeItens({contexto: 'cliente'});
+        this.sidebarService.changeItens({ contexto: 'cliente' });
 
         this.esporteHabilitado = this.params.getOpcoes().esporte;
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
@@ -112,7 +112,12 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.menuFooterService.setIsPagina(true);
 
         this.paginaPrincipal = this.params.getOpcoes().pagina_inicial;
-        this.tabSelected = this.paginaPrincipal == 'cassino_ao_vivo' ? 'cassino' : this.paginaPrincipal;
+
+        if (this.paginaPrincipal == 'home' || this.paginaPrincipal == 'cassino_ao_vivo') {
+            this.tabSelected = 'cassino';
+        } else {
+            this.tabSelected = this.paginaPrincipal;
+        }
 
         this.getApostas();
 
@@ -120,7 +125,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.slug = config.SLUG;
 
         this.appMobile = this.auth.isAppMobile();
-        this.origin = this.appMobile ? '?origin=app':'';
+        this.origin = this.appMobile ? '?origin=app' : '';
     }
 
     ngOnDestroy() {
@@ -140,7 +145,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         const sortedTabs = tabs.slice();
         let principalIndex = sortedTabs.findIndex(tab => tab.id === this.paginaPrincipal);
 
-        if (this.paginaPrincipal === 'cassino' || this.paginaPrincipal === 'cassino_ao_vivo') {
+        if (this.paginaPrincipal === 'cassino' || this.paginaPrincipal === 'cassino_ao_vivo' || this.paginaPrincipal === 'home') {
             principalIndex = sortedTabs.findIndex(tab => tab.id === 'cassino');
         }
 
@@ -167,31 +172,31 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         switch (this.tabSelected) {
             case 'esporte':
                 this.apostaEsportivaService.getApostas(queryParams)
-                .subscribe(
-                    apostas => this.handleResponse(apostas),
-                    error => this.handleError(error)
-                );
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             case 'acumuladao':
                 this.acumuladaoService.getApostas(queryParams)
-                .subscribe(
-                    apostas => this.handleResponse(apostas),
-                    error => this.handleError(error)
-                );
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             case 'desafio':
                 this.desafioApostaService.getApostas(queryParams)
-                .subscribe(
-                    apostas => this.handleResponse(apostas),
-                    error => this.handleError(error)
-                );
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             case 'cassino':
                 this.cassinoService.getApostas(queryParams)
-                .subscribe(
-                    apostas => this.handleResponse(apostas),
-                    error => this.handleError(error)
-                );
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
                 break;
             case 'loteria':
                 this.loteriaServie.getApostas(queryParams)
@@ -259,7 +264,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.queryParams = this.form.value;
 
         let dataSeparadas = this.selectedDate.split(" - ");
-        this.queryParams.dataFinal = this.formateDate(dataSeparadas[1]) ;
+        this.queryParams.dataFinal = this.formateDate(dataSeparadas[1]);
         this.queryParams.dataInicial = this.formateDate(dataSeparadas[0]);
 
         this.getApostas();
@@ -311,8 +316,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     }
 
     formatDate(date, lang = 'br') {
-        if(lang == 'us') {
-            return  date.year + '-' + String(date.month).padStart(2, '0') + "-" + String(date.day).padStart(2, '0');
+        if (lang == 'us') {
+            return date.year + '-' + String(date.month).padStart(2, '0') + "-" + String(date.day).padStart(2, '0');
         }
         return String(date.day).padStart(2, '0') + '/' + String(date.month).padStart(2, '0') + "/" + date.year
     }
@@ -326,7 +331,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     isRange(date: NgbDate) {
         return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) ||
-        this.isHovered(date);
+            this.isHovered(date);
     }
 
     validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
@@ -350,7 +355,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         }
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
-        let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
+        let typeWindow = aposta.tipo == 'esportes' ? 'modal-700' : '';
 
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(

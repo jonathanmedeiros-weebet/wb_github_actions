@@ -58,14 +58,14 @@
             <li class="regiao" *ngFor="let regiao of itens">
                 <a class="{{regiao._id == regiaoOpen ? 'selected' : ''}}" (click)="abrirRegiao(regiao._id)">
                     <span class="flag-icon flag-icon-{{regiao.sigla}} flag-icon-squared"></span>
-                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{regiao._id}}</span>
+                    <span class="regiao-nome" [ngClass]="{'hide-item': collapsed, 'show-item': !collapsed}">{{regiao._id | uppercase}}</span>
                 </a>
                 <div class="sub-nav-container">
                     <ul *ngIf="regiao._id == regiaoOpen" [ngClass]="{'sub-nav-out': collapsed}">
                         <li *ngFor="let campeonato of regiao.campeonatos"
                             (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
                             <a>
-                                {{campeonato.nome.replace(regiao._id + ': ', '')}}
+                                {{campeonato.nome.replace(regiao._id + ': ', '') | uppercase}}
                             </a>
                         </li>
                     </ul>

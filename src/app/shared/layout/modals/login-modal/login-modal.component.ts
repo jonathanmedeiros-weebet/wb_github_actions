@@ -13,6 +13,7 @@ import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-se
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 import {config} from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { FormValidations } from 'src/app/shared/utils';
 
 @Component({
     selector: 'app-login-modal',
@@ -118,9 +119,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 (res) => {
                     this.getUsuario();
-                    if (this.usuario && this.usuario.tipo_usuario === 'cliente' &&
-                        this.authDoisFatoresHabilitado &&
-                        this.auth.getCookie(this.usuario.cookie) === '') {
+                    if (
+                        this.usuario && this.usuario.tipo_usuario === 'cliente'
+                        && this.authDoisFatoresHabilitado
+                        && this.auth.getCookie(this.usuario.cookie) === ''
+                        && this.usuario.login !== 'suporte@wee.bet'
+                    ) {
                         this.abrirModalAuthDoisFatores();
                     } else if (res && res.results && res.results.migracao) {
                         this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
@@ -223,5 +227,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     toogleSenha() {
         this.mostrarSenha = !this.mostrarSenha;
+    }
+
+    blockInvalidCharacters(e, inputName){
+        FormValidations.blockInvalidCharacters(e, inputName);
     }
 }

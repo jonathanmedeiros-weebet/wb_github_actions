@@ -181,6 +181,7 @@
         "selecionarIdioma": "Selecionar Idioma",
         "ingles": "English",
         "portugues": "Português",
+        "espanhol": "Español",
         "criacao": "Criação",
         "cambista": "Cambista",
         "cliente": "Cliente",
@@ -236,7 +237,8 @@
         "limparHistorico": "Limpar histórico",
         "nenhumResultadoEncontrado": "Nenhum resultado encontrado para esta pesquisa",
         "jogosEmAlta": "Jogos em alta",
-        "nenhumJogoDisponivel": "Nenhum jogo disponível no momento"
+        "nenhumJogoDisponivel": "Nenhum jogo disponível no momento",
+        "loginGoogle" : "Realize o login com a conta do google"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",

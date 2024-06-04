@@ -181,6 +181,7 @@
         "selecionarIdioma": "Select Language",
         "ingles": "English",
         "portugues": "Português",
+        "espanhol": "Español",
         "criacao": "Creation",
         "cambista": "Money changer",
         "cliente": "Client",
@@ -235,7 +236,8 @@
         "limparHistorico": "Clear history",
         "nenhumResultadoEncontrado": "No results found for this search",
         "jogosEmAlta": "Trending games",
-        "nenhumJogoDisponivel": "No games available at the moment"
+        "nenhumJogoDisponivel": "No games available at the moment",
+        "loginGoogle" : "Sign in with Google account."
     },
     "bet": {
         "sportsBetting": "Sports betting",

@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
@@ -42,11 +42,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private modalService: NgbModal,
         private utilsService: UtilsService,
+        private renderer: Renderer2,
         @Inject(DOCUMENT) private document: any
     ) {
     }
 
     ngOnInit(): void {
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+        if (botaoContatoFlutuante) {
+            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
+        }
 
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
@@ -62,9 +67,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.menuFooterService.setIsPagina(true);
         this.route.params.subscribe(params => {
             this.params = params;
-            this.gameId = params['game_id'];
-            this.gameMode = params['game_mode'] ?? 'REAL';
-            this.gameFornecedor = params['game_fornecedor'];
+            if(this.router.url.includes('parlaybay')){
+                this.gameId = "170000";
+                this.gameMode = 'REAL';
+                this.gameFornecedor = 'parlaybay';
+            } else {
+                this.gameId = params['game_id'];
+                this.gameMode = params['game_mode'] ?? 'REAL';
+                this.gameFornecedor = params['game_fornecedor'];
+            }
 
             if (['c', 'cl', 'v'].includes(String(this.gameFornecedor))) {
                 const casinoAcronyms = {
