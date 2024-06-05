@@ -1,7 +1,6 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-
 import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -50,6 +49,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     ngOnInit() {
+
         this.appMobile = this.auth.isAppMobile();
         if (window.innerWidth > 1025) {
             this.isMobile = false;
