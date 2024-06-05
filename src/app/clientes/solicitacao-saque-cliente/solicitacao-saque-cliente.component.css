@@ -310,10 +310,6 @@
         width: 100%;
     }
 
-    .shortcut-amounts button {
-        background-color: var(--game);
-    }
-
     #details-wrapper .details-submit {
         width: 100%;
     }

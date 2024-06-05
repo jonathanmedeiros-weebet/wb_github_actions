@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild, Renderer2, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, Renderer2, ElementRef} from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
@@ -113,7 +113,6 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     modalPromocao;
     pixModal;
     pix: DepositoPix;
-
     rolloverAtivo: Rollover[] = [];
 
     bonusOption = '';
@@ -142,8 +141,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     onlyOneModality = false;
     permitirBonusPrimeiroDeposito = false;
     submitting = false;
-
     clearSetInterval;
+
+    public valuesShortcuts: number[] = [10, 20, 50, 100, 500, 1000];
 
     constructor(
         private domSanitizer: DomSanitizer,
@@ -206,7 +206,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     changeAmount(amount) {
-        this.form.patchValue({ 'valor': amount });
+        const newAmount = this.form.value.valor + amount;
+        this.form.patchValue({ 'valor': newAmount});
         this.calculateBonusAmount();
     }
 
