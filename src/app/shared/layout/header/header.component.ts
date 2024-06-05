@@ -111,6 +111,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     aoVivoAtivo;
     notificationsXtremepushOpen = false;
     public showHeaderMobile: boolean = false;
+    xtremepushHabilitado = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -149,17 +150,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     ngOnInit() {
 
-        xtremepush('inbox', 'message.list', {
-            limit: 1,
-            opened: 0
-        }, (result) => {
-            if (result.items.length > 0) {
-                this.atualizarBadge(true);
-            }
-        }, function(err) {
-            console.log(err);
-        });
-
+        this.xtremepushHabilitado = this.paramsService.getOpcoes().xtremepush_habilitado;
+        if(this.xtremepushHabilitado) {
+            this.verificarNotificacoes();
+        }
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
         this.appVersion = localStorage.getItem('app_version');
@@ -299,6 +293,21 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         if(!this.indiqueGanheHabilitado){
             this.layoutService.indiqueGanheRemovido(true);
         }
+    }
+
+    verificarNotificacoes(){
+        setTimeout(() => {
+            xtremepush('inbox', 'message.list', {
+                limit: 1,
+                opened: 0
+            }, (result) => {
+                if (result.items.length > 0) {
+                    this.atualizarBadge(true);
+                }
+            }, function(err) {
+                console.log(err);
+            });
+        }, 100);
     }
 
     ngOnDestroy() {
