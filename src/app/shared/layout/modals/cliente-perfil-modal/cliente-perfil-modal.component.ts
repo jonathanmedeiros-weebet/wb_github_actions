@@ -49,8 +49,8 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
             logradouro: ['', Validators.required],
             numero: ['', Validators.required],
             bairro: ['', Validators.required],
-            cidade: ['0', Validators.required],
-            estado: ['0', Validators.required],
+            cidade: ['', Validators.required],
+            estado: ['', Validators.required],
             cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
             senha_atual: [null, Validators.required]
         });
@@ -62,6 +62,8 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                 distinctUntilChanged()
             )
             .subscribe((cep) => this.buscarPorCep(cep))
+        
+        this.form.markAllAsTouched();
     }
 
     submit() {
