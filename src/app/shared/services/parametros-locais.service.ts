@@ -60,7 +60,7 @@ export class ParametrosLocaisService {
                               (function(p,u,s,h,e,r,l,i,b) {p['XtremePushObject']=s;p[s]=function(){
                                 (p[s].q=p[s].q||[]).push(arguments)};i=u.createElement('script');i.async=1;
                                 i.src=h;b=u.getElementsByTagName('script')[0];b.parentNode.insertBefore(i,b);
-                              })(window,document,'xtremepush','https://prod.webpu.sh/${XTREMEPUSH_SDK_KEY}/sdk.js');
+                              })(window,document,'xtremepush','https://us.webpu.sh/${XTREMEPUSH_SDK_KEY}/sdk.js');
                         `;
 
                         head.appendChild(XTREMEPUSH_SDKScriptHead);
