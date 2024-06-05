@@ -63,7 +63,7 @@
             </a>
         </div>
 
-        <a (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
+        <a *ngIf="xtremepushHabilitado" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
             <div id="badge-xtremepush"></div>
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHVQTFRFAAAA/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8fvbQOwAAACd0Uk5TAGtqVv9QlFveV/7Cj/1TFvlm9Q6Cp690zThCwPEPF+qA491R19VNV+9p7gAAAJ5JREFUeJy90c0KgkAUBeB7ShIXFdKPWSJF7/9CLaKwslIrKohssIYJ4k6N4KqzuHOYb7ibAZUEVQAojFAH4WGCRkG1/BdsCDkt3L7AQW6DnncHZw3auDaP8nQvLWQcuic3UaV/6Ow4DNJerMpw7605BFs/UiXcjJYcLBKkt//BeMUgWHxA3vMowfuVHkHVfnASUTg3wRTAzASlq/S8AOWULRluMiNTAAAAAElFTkSuQmCC" alt="Toggle Icon">
         </a>
