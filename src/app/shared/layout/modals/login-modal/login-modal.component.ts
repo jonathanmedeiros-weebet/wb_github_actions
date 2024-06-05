@@ -1,7 +1,6 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-
 import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -50,6 +49,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     ngOnInit() {
+
         this.appMobile = this.auth.isAppMobile();
         if (window.innerWidth > 1025) {
             this.isMobile = false;
@@ -119,9 +119,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 (res) => {
                     this.getUsuario();
-                    if (this.usuario && this.usuario.tipo_usuario === 'cliente' &&
-                        this.authDoisFatoresHabilitado &&
-                        this.auth.getCookie(this.usuario.cookie) === '') {
+                    if (
+                        this.usuario && this.usuario.tipo_usuario === 'cliente'
+                        && this.authDoisFatoresHabilitado
+                        && this.auth.getCookie(this.usuario.cookie) === ''
+                        && this.usuario.login !== 'suporte@wee.bet'
+                    ) {
                         this.abrirModalAuthDoisFatores();
                     } else if (res && res.results && res.results.migracao) {
                         this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
@@ -226,7 +229,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.mostrarSenha = !this.mostrarSenha;
     }
 
-    blockInvalidCharacters(e, inputName){
+    onBeforeInput(e, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
     }
 }

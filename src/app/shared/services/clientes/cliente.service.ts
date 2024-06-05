@@ -9,6 +9,8 @@ import {Observable, BehaviorSubject} from 'rxjs';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
 
+declare var xtremepush: any;
+
 @Injectable({
     providedIn: 'root'
 })
@@ -42,9 +44,9 @@ export class ClienteService {
     cadastrarCliente(values: any) {
         return this.http.post(`${this.clienteUrl}/cadastro`, JSON.stringify(values), this.headers.getRequestOptions())
             .pipe(
-                map((response: any) => {                    
+                map((response: any) => {
                     const dataUser = response.results.dataUser;
-            
+
                     if (dataUser && Object.keys(dataUser).length > 0) {
                         this.setCookie(dataUser.user.cookie);
                         const expires = moment().add(1, 'd').valueOf();
@@ -54,6 +56,7 @@ export class ClienteService {
                         this.setIsCliente(true);
                         localStorage.setItem('tokenCassino', dataUser.tokenCassino);
                         this.logadoSource.next(true);
+                        xtremepush('set', 'user_id', dataUser.user.id);
                     }
 
                     return response.results;
