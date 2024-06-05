@@ -11,6 +11,8 @@ import {config} from './../../config';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
 
+declare var xtremepush: any;
+
 @Injectable({
     providedIn: 'root',
 })
@@ -99,6 +101,7 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
+                    xtremepush('set', 'user_id', res.results.user.id);
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -124,6 +127,7 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
+                    xtremepush('set', 'user_id', res.results.user.id);
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -131,8 +135,15 @@ export class AuthService {
 
     logout() {
         this.limparStorage();
+        this.cleanXtremepushNotifications();
         this.logadoSource.next(false);
         window.location.reload();
+    }
+
+    cleanXtremepushNotifications(){
+        xtremepush('set', 'user_id', "");
+        const xtremepushNotificationContainer = document.getElementById('xtremepushNotificationContainer');
+        xtremepushNotificationContainer.innerHTML = '';
     }
 
     isLoggedIn(): boolean {
