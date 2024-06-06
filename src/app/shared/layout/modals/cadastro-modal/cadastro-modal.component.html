@@ -32,7 +32,7 @@
             <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial)">
                 <div class="form-group mb-4">
                     <div class="input-md">
-                        <input type="text" id="nome" class="form-control inverted-out" formControlName="nome"
+                        <input type="text" id="nome" class="form-control inverted-out"  (beforeinput)="onBeforeInput($event, 'name')" formControlName="nome"
                                [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento">
                         <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
                     </div>
@@ -63,7 +63,9 @@
                         <input type="text" id="email" class="form-control inverted-out"
                                [ngClass]="applyCssInputError('email')"
                                [readonly]="formSocial"
-                               formControlName="email" placeholder=" ">
+                               formControlName="email" placeholder=" "
+                               (beforeinput)="onBeforeInput($event, 'email')"
+                               >
                         <label for="email">{{'geral.email' | translate}}</label>
                     </div>
 
@@ -94,7 +96,7 @@
                     <div class="input-md">
                         <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
                                class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
-                               formControlName="senha" placeholder=" ">
+                               formControlName="senha" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
                         <label for="password">{{'geral.senha' | translate}}</label>
                         <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                            (click)="mostrarSenha = !mostrarSenha"></i>
@@ -111,7 +113,7 @@
                     <div class="input-md">
                         <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
                                class="form-control inverted-out" formControlName="senha_confirmacao"
-                               [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" ">
+                               [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
                         <label for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
                         <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'"
                            (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>

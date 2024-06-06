@@ -7,7 +7,7 @@
 <div class="modal-body" [ngStyle]="{'padding-top': loginGoogle ? '10px' : '40px'}">
     <div class="modal-body-content">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-            <span class="space-buttons" *ngIf="loginGoogle">Realize o login com a conta do google</span>
+            <span class="space-buttons" *ngIf="loginGoogle">{{'geral.loginGoogle' | translate}}</span>
             <asl-google-signin-button type='standard' size='large' text='signin_with' logo_alignment='center' *ngIf="loginGoogle"></asl-google-signin-button>
             <div class="text-line" *ngIf="loginGoogle">
                 <span>OU</span>
@@ -23,7 +23,7 @@
             <div class="form-group" [ngClass]="applyCssDivError('password')">
                 <div class="input-md">
                     <input [type]=" mostrarSenha ? 'text' : 'password' " id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('password')"
-                        formControlName="password" placeholder=" ">
+                        formControlName="password" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
                     <label for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="toogleSenha()"></i>
                 </div>

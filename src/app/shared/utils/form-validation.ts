@@ -134,4 +134,26 @@ export class FormValidations {
         };
         return config[validatorName];
     }
+
+    static blockInvalidCharacters(e, inputName){
+        const inputType = e.inputType;
+        const data = e.data;
+        let regex;
+
+        switch (inputName) {
+            case 'name':
+                regex = /^[a-zA-ZÀ-ÿ ]*$/;
+                break;
+            case 'email':
+                regex = /^[a-zA-ZÀ-ÿ0-9_.@]$/;
+                break;
+            case 'password':
+                regex = /^\S*$/;
+                break;
+        }
+
+        if (inputType === 'insertText' && data && !regex.test(data)) {
+            e.preventDefault();
+        }
+    }
 }

@@ -51,6 +51,21 @@ export class ParametrosLocaisService {
                         body.prepend(GTMScriptBody);
                     }
 
+                    const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key
+                    if (XTREMEPUSH_SDK_KEY) {
+                        const head = this.document.getElementsByTagName('head')[0];
+
+                        const XTREMEPUSH_SDKScriptHead = this.document.createElement('script');
+                        XTREMEPUSH_SDKScriptHead.innerHTML = `
+                              (function(p,u,s,h,e,r,l,i,b) {p['XtremePushObject']=s;p[s]=function(){
+                                (p[s].q=p[s].q||[]).push(arguments)};i=u.createElement('script');i.async=1;
+                                i.src=h;b=u.getElementsByTagName('script')[0];b.parentNode.insertBefore(i,b);
+                              })(window,document,'xtremepush','https://us.webpu.sh/${XTREMEPUSH_SDK_KEY}/sdk.js');
+                        `;
+
+                        head.appendChild(XTREMEPUSH_SDKScriptHead);
+                    }
+
                     resolve(true);
                 });
         });

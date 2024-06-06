@@ -71,8 +71,8 @@ export class FormatarFornecedoresPipe implements PipeTransform {
             case 'rubyplay':
                 fornecedorFormatado = 'Ruby Play';
                 break;
-            case 'cassinomobi':
-                fornecedorFormatado = 'Cassino Mobi';
+            case 'soline':
+                fornecedorFormatado = 'Soline';
                 break;
             case 'mga':
                 fornecedorFormatado = 'MGA';
