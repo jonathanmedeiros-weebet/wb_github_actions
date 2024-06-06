@@ -95,6 +95,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.router.navigate([casinoAcronyms[String(this.gameFornecedor)]]);
                 return;
             }
+            this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    if(isLoggedIn){
+                        this.isLoggedIn = this.auth.isLoggedIn();
+
+                        this.loadGame();
+                    }
+                }
+            );
 
             this.auth.cliente
                 .subscribe(
@@ -103,10 +113,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             if (this.gameMode === 'REAL' && !this.isCliente) {
-
                 this.abriModalLogin();
 
             } else {
+
                 this.loadGame();
             }
             interval(3000)
@@ -160,6 +170,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         }
@@ -250,7 +261,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 centered: true,
             }
         );
-
+        this.renderer.setStyle(LoginModalComponent, 'z-index', '2147483690');
         modalRef.result.then(
             (result) => {
                 if(result) {

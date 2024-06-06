@@ -17,7 +17,7 @@
         </div>
     </div>
     <ng-container>
-        <div *ngIf="isLoggedIn" class="game-frame">
+        <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame">
             <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
             <ng-container *ngIf="mobileScreen">
                 <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
@@ -28,11 +28,11 @@
 
         </div>
 
-        <div *ngIf="!isLoggedIn" class="game-frame">
+        <div *ngIf="!isLoggedIn && gameMode == 'REAL'" class="game-frame">
             <div class="overlay overlay--unauthorized">
                 <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'">
                 </div>
-                <div class="overlay-content -mt-4">
+                <div class="overlay-content -mt-4 p-5">
                     <p class="overlay-content__title">registre-se ou faça login</p>
                     <p class="overlay-content__text">Por favor, registre-se ou faça login para fazer seu primeiro depósito e começar a jogar.</p>
                     <div class="inline-button">
