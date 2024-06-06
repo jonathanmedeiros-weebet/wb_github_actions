@@ -48,6 +48,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     isMobile = false;
     permitirQualquerChavePix = false;
     submitting;
+    public valuesShortcuts: number[] = [10, 20, 50, 75, 100, 200];
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -173,7 +174,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     changeAmount(amount) {
-        this.form.patchValue({ 'valor': amount });
+        const newAmount = this.form.value.valor + amount;
+        this.form.patchValue({ 'valor': newAmount});
     }
 
     handleError(error: string) {
