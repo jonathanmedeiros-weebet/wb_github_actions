@@ -261,7 +261,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 centered: true,
             }
         );
-        this.renderer.setStyle(LoginModalComponent, 'z-index', '2147483690');
         modalRef.result.then(
             (result) => {
                 if(result) {
@@ -273,8 +272,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     abrirCadastro(){
-
-
         this.modalService.open(
             CadastroModalComponent,
             {
