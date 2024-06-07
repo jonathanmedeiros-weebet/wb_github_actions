@@ -72,10 +72,10 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
         this.auth.logado.subscribe((isLogged) => {
-            const isAnAccreditedHouse =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
+            const logoutByInactivityIsEnabled =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
             const isCliente = this.auth.isCliente();
 
-            if(isLogged && isCliente && isAnAccreditedHouse) {
+            if(isLogged && isCliente && logoutByInactivityIsEnabled) {
                 this.idleDetectService.startTimer(1800000);
             } else {
                 this.idleDetectService.stopTimer();

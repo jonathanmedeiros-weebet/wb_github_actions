@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
     providedIn: 'root'
 })
 export class IdleDetectService {
-    private isSessionExpired = false;
+    private isSessionExpired = true;
     private timer = null;
     private timeInMilliSeconds = 0;
 
@@ -16,6 +16,7 @@ export class IdleDetectService {
     }
 
     startTimer(timeInMilliSeconds: number) {
+        this.isSessionExpired = false;
         this.timeInMilliSeconds = timeInMilliSeconds;
 
         this.timer = setTimeout(() => {
@@ -26,7 +27,6 @@ export class IdleDetectService {
 
     resetTimer() {
         if (!this.isSessionExpired) {
-            this.isSessionExpired = false;
             this.stopTimer();
             this.startTimer(this.timeInMilliSeconds);
         }
