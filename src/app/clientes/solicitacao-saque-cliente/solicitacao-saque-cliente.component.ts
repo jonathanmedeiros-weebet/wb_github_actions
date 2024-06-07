@@ -59,6 +59,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     verifiedIdentity = false;
     disapprovedIdentity = false;
 
+    public valuesShortcuts: number[] = [10, 20, 50, 75, 100, 200];
+
     constructor(
         private fb: UntypedFormBuilder,
         private messageService: MessageService,
@@ -230,7 +232,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     changeAmount(amount) {
-        this.form.patchValue({ 'valor': amount });
+        const newAmount = this.form.value.valor + amount;
+        this.form.patchValue({ 'valor': newAmount});
     }
 
     handleError(error: string) {

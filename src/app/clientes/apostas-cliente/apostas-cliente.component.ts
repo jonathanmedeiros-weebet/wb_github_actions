@@ -28,6 +28,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
+    desafioNome: string;
     casinoHabilitado;
     loteriaPopularHabilitada;
     activeId = 'esporte';
@@ -103,6 +104,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
+        this.desafioNome = this.params.getOpcoes().desafio_nome;
         this.casinoHabilitado = this.params.getOpcoes().casino;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
 
@@ -137,7 +139,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             { id: 'esporte', label: 'geral.esporte', habilitado: this.esporteHabilitado },
             { id: 'cassino', label: 'geral.cassino', habilitado: this.casinoHabilitado },
             { id: 'acumuladao', label: 'geral.acumuladao', habilitado: this.acumuladaoHabilitado },
-            { id: 'desafio', label: 'geral.desafio', habilitado: this.desafioHabilitado },
+            { id: 'desafio', label: this.desafioNome, habilitado: this.desafioHabilitado },
             { id: 'loteria', label: 'geral.loteria', habilitado: this.loteriasHabilitada },
             { id: 'loteria-popular', label: 'submenu.loteriaPopular', habilitado: this.loteriaPopularHabilitada }
         ];
