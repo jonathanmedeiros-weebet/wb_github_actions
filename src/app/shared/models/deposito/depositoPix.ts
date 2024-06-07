@@ -9,4 +9,5 @@ export class DepositoPix {
     qr_code: string;
     qr_code_base64: string;
     qr_code_sauto_pay: string;
+    selected_payment_method: string;
 }
