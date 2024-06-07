@@ -35,6 +35,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
+    desafioNome: string;
     casinoHabilitado;
     esporteHabilitado;
     loteriaPopularHabilitada;
@@ -120,6 +121,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
+        this.desafioNome = this.params.getOpcoes().desafio_nome;
         this.esporteHabilitado = this.params.getOpcoes().esporte;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
         this.casinoHabilitado = this.params.getOpcoes().casino;
@@ -167,7 +169,11 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
 
         chaves.forEach(key => {
             if (habilitados[key]) {
-                this.options.push({ value: key, label: `geral.${key}` });
+                if (key == 'desafio') {
+                    this.options.push({ value: key, label: this.desafioNome });
+                } else {
+                    this.options.push({ value: key, label: `geral.${key}` });
+                }
             }
         });
     }
