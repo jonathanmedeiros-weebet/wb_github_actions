@@ -8,6 +8,7 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
+import {ParametrosLocaisService} from "../parametros-locais.service";
 
 declare var xtremepush: any;
 
@@ -25,7 +26,8 @@ export class ClienteService {
         private http: HttpClient,
         private errorService: ErrorService,
         private headers: HeadersService,
-        private router: Router
+        private router: Router,
+        private paramsService: ParametrosLocaisService,
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -56,7 +58,9 @@ export class ClienteService {
                         this.setIsCliente(true);
                         localStorage.setItem('tokenCassino', dataUser.tokenCassino);
                         this.logadoSource.next(true);
-                        xtremepush('set', 'user_id', dataUser.user.id);
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('set', 'user_id', dataUser.user.id);
+                        }
                     }
 
                     return response.results;
@@ -226,5 +230,14 @@ export class ClienteService {
 
     getUser() {
         return JSON.parse(localStorage.getItem('user'));
+    }
+
+    xtremepushHabilitado() {
+        let result = false;
+        const opcoes = this.paramsService.getOpcoes().xtremepush_habilitado;
+        if (opcoes) {
+            result = true;
+        }
+        return result;
     }
 }
