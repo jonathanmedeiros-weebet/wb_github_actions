@@ -17,7 +17,6 @@ import {
     FormatarNaturezaPipe,
     FormatarFornecedoresPipe,
     FormatarPromocaoPipe,
-    FormatarNomeJogoCassinoPipe,
     DepositoStatusPixPipePipe,
     SafeIframePipe,
     FormatPaymentMethodPipe
@@ -40,7 +39,6 @@ import {
         FormatarNaturezaPipe,
         FormatarFornecedoresPipe,
         FormatarPromocaoPipe,
-        FormatarNomeJogoCassinoPipe,
         SanitizeCampNamePipe,
         DepositoStatusPixPipePipe,
         CotacaoPipe,
@@ -62,7 +60,6 @@ import {
         FormatarNaturezaPipe,
         FormatarFornecedoresPipe,
         FormatarPromocaoPipe,
-        FormatarNomeJogoCassinoPipe,
         DepositoStatusPixPipePipe,
         SanitizeCampNamePipe,
         CotacaoPipe,
