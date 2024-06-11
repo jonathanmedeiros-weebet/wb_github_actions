@@ -4,11 +4,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {AuthService, MenuFooterService, MessageService, UtilsService} from '../../services';
+import {AuthService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService} from '../../services';
 import {interval} from 'rxjs';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
-
+import {JogosLiberadosBonusModalComponent} from "../../shared/layout/modals";
 
 @Component({
     selector: 'app-gameview',
@@ -43,8 +42,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private modalService: NgbModal,
         private utilsService: UtilsService,
         private renderer: Renderer2,
+        private paramsService: ParametrosLocaisService,
         @Inject(DOCUMENT) private document: any
-    ) {
+    ) {}
+
+    get customCasinoName(): string {
+        return this.paramsService.getCustomCasinoName();
     }
 
     ngOnInit(): void {

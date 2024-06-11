@@ -12,11 +12,11 @@
 
             <div class="tabs">
                 <ng-container *ngFor="let tab of getTabs()">
-                    <a *ngIf="tab.habilitado && tabSelected === tab.id" class="active" (click)="changeTab(tab.id)">
-                        {{ tab.label | translate }}
-                    </a>
-                    <a *ngIf="tab.habilitado && tabSelected !== tab.id" (click)="changeTab(tab.id)">
-                        {{ tab.label | translate }}
+                    <a
+                        [ngClass]="{'active': tab.habilitado && tabSelected === tab.id}"
+                        (click)="changeTab(tab.id)"
+                    >
+                        {{ tab.label }}
                     </a>
                 </ng-container>
             </div>              

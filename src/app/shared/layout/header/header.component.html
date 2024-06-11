@@ -693,12 +693,12 @@
         </ng-container>
         <div class="category" *ngIf="cassinoAtivo">
             <a [routerLink]="['/casino']" routerLinkActive="active">
-                <span>{{ 'menu.cassino' | translate }}</span>
+                <span>{{ customCasinoName }}</span>
             </a>
         </div>
         <div class="category" *ngIf="cassinoAtivo">
             <a [routerLink]="['/live-casino']" routerLinkActive="active">
-                <span>{{ 'menu.cassino-aovivo' | translate }}</span>
+                <span>{{ customLiveCasinoName }}</span>
             </a>
         </div>
         <div class="category" *ngIf="virtuaisAtivo">
