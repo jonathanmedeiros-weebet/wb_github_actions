@@ -1,4 +1,6 @@
-<router-outlet></router-outlet>
+<div class="idle-detector" idleDetect>
+    <router-outlet></router-outlet>
+</div>
 
 <ng-template #demoModal let-modal>
     <div class="modal-inicial" style="display: flex; justify-content: end;">
@@ -65,4 +67,18 @@
        href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
         <i class="fa fa-brands fa-whatsapp"></i>
     </a>
+</div>
+
+<div class="accept-cookies" *ngIf="!acceptedCookies">
+    <div class="cookie-message">
+        <div class="titulo-informativo-cookies">
+            {{'geral.tituloInformativoCookies' | translate}} <i class="fa-solid fa-cookie"></i>
+        </div>
+        <div class="informativo-cookies">
+            <div>{{'geral.informativoCookies' | translate}}</div>
+            <div>
+                <a class="btn btn-custom w-130" (click)="acceptCookies()">{{ 'botoes.aceitar' | translate }}</a>
+            </div>
+        </div>
+    </div>
 </div>

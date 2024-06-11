@@ -101,7 +101,9 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
-                    xtremepush('set', 'user_id', res.results.user.id);
+                    if(this.xtremepushHabilitado()){
+                        xtremepush('set', 'user_id', res.results.user.id);
+                    }
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -127,7 +129,9 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
-                    xtremepush('set', 'user_id', res.results.user.id);
+                    if(this.xtremepushHabilitado()){
+                        xtremepush('set', 'user_id', res.results.user.id);
+                    }
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -211,6 +215,15 @@ export class AuthService {
             result = opcoes[modalidade];
         }
 
+        return result;
+    }
+
+    xtremepushHabilitado() {
+        let result = false;
+        const opcoes = this.paramsService.getOpcoes().xtremepush_habilitado;
+        if (opcoes) {
+            result = true;
+        }
         return result;
     }
 
