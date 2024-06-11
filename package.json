@@ -322,7 +322,8 @@
         "betcombinada.net": "gulp betcombinada.net",
         "gramado.bet": "gulp gramado.bet",
         "avante.bet": "gulp avante.bet",
-        "26sports.bet": "gulp 26sports.bet"
+        "26sports.bet": "gulp 26sports.bet",
+        "stargoldbet.app": "gulp stargoldbet.app"
     },
     "private": true,
     "dependencies": {

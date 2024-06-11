@@ -3059,3 +3059,12 @@ gulp.task('26sports.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('stargoldbet.app', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "stargoldbet.app",
+        banca: "STAR GOLD BET",
+        styles: ""
+    });
+});
