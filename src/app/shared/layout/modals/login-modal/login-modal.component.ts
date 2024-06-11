@@ -1,5 +1,5 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {UntypedFormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
 import { Subject } from 'rxjs';
@@ -12,6 +12,7 @@ import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-se
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 import {config} from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { FormValidations } from 'src/app/shared/utils';
 
 @Component({
@@ -33,6 +34,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     LOGO = config.LOGO;
     loginGoogle = false;
     googleUser;
+    private geolocation: Geolocation;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -43,7 +45,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private paramsLocais: ParametrosLocaisService,
         private socialAuth: SocialAuthService,
         private router: Router,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
@@ -94,6 +97,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 );
         }
 
+        this.geolocationService
+            .getGeolocation()
+            .then((geolocation) => this.geolocation = geolocation)
     }
 
     createForm() {
@@ -131,7 +137,13 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         this.activeModal.dismiss();
                     } else {
                         this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                        this.auth.login(this.form.value)
+                        const data = {
+                            ...this.form.value,
+                            cookie: this.auth.getCookie(this.usuario.cookie),
+                            geolocation: this.geolocation
+                        };
+
+                        this.auth.login(data)
                             .pipe(takeUntil(this.unsub$))
                             .subscribe(
                                 () => {

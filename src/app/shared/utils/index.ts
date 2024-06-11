@@ -1,6 +1,7 @@
 // Directives
 export { DefaultImageDirective } from './directives/default-image.directive';
 export { InfiniteScrollDirective } from './directives/inifinite-scroll.directive';
+export { IdleDetectDirective } from './directives/idle-detect.directive';
 
 // Pipes
 export { MomentPipe } from './pipes/moment.pipe';

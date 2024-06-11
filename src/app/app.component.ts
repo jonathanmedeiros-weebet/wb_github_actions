@@ -5,10 +5,11 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 import { filter } from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {CadastroModalComponent, ValidarEmailModalComponent} from './shared/layout/modals';
+import {CadastroModalComponent} from './shared/layout/modals';
 import {LoginModalComponent} from './shared/layout/modals';
 
 import {TranslateService} from '@ngx-translate/core';
+import {IdleDetectService} from './shared/services/idle-detect.service';
 
 @Component({
     selector: 'app-root',
@@ -31,10 +32,12 @@ export class AppComponent implements OnInit {
     whatsapp;
     isDemo = location.host === 'demo.wee.bet';
     isCadastro = false;
+    public acceptedCookies: boolean = false;
 
     constructor(
         private auth: AuthService,
         private parametroService: ParametroService,
+        private paramsLocais: ParametrosLocaisService,
         public modalService: NgbModal,
         private helperService: HelperService,
         private router: Router,
@@ -43,7 +46,8 @@ export class AppComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private paramLocais: ParametrosLocaisService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private idleDetectService: IdleDetectService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -66,6 +70,28 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
+        this.auth.logado.subscribe((isLogged) => {
+            const logoutByInactivityIsEnabled =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
+            const isCliente = this.auth.isCliente();
+
+            if(isLogged && isCliente && logoutByInactivityIsEnabled) {
+                this.idleDetectService.startTimer(1800000);
+            } else {
+                this.idleDetectService.stopTimer();
+            }
+        })
+
+        this.idleDetectService
+            .watcher()
+            .subscribe(isExpired => {
+                if (isExpired) {
+                    if (this.auth.isLoggedIn()) {
+                        this.auth.logout();
+                    }
+                }
+            });
+
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.modalService.open(CadastroModalComponent, {
@@ -255,5 +281,10 @@ export class AppComponent implements OnInit {
 
         head.appendChild(cambistaAnalyticsHeadScript);
         body.appendChild(cambistaAnalyticsBodyScript);
+    }
+
+    public acceptCookies() {
+        this.acceptedCookies = true;
+        localStorage.setItem('accepted_cookies', 'true');
     }
 }
