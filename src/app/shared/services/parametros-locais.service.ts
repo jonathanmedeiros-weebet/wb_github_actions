@@ -28,9 +28,10 @@ export class ParametrosLocaisService {
                     this.parametrosLocais = response;
 
                     const GTM_ID = response?.opcoes?.gtm_id_site
+                    const head = this.document.getElementsByTagName('head')[0];
+                    const body = this.document.getElementsByTagName('body')[0];
+
                     if (GTM_ID) {
-                        const head = this.document.getElementsByTagName('head')[0];
-                        const body = this.document.getElementsByTagName('body')[0];
 
                         const GTMScriptHead = this.document.createElement('script');
                         GTMScriptHead.innerHTML = `
@@ -51,6 +52,14 @@ export class ParametrosLocaisService {
                         body.prepend(GTMScriptBody);
                     }
 
+                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.legitimuz_enabled && response?.opcoes?.legitimuz_token);
+                    if (LEGITIMUZ_ENABLED) {
+                        const LegitimuzScripSDK = this.document.createElement('script');
+                        LegitimuzScripSDK.src = 'https://cdn.legitimuz.com/js/sdk/legitimuz-sdk.js';
+
+                        head.appendChild(LegitimuzScripSDK);
+                    }
+
                     const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key
                     if (XTREMEPUSH_SDK_KEY) {
                         const head = this.document.getElementsByTagName('head')[0];
@@ -60,7 +69,7 @@ export class ParametrosLocaisService {
                               (function(p,u,s,h,e,r,l,i,b) {p['XtremePushObject']=s;p[s]=function(){
                                 (p[s].q=p[s].q||[]).push(arguments)};i=u.createElement('script');i.async=1;
                                 i.src=h;b=u.getElementsByTagName('script')[0];b.parentNode.insertBefore(i,b);
-                              })(window,document,'xtremepush','https://prod.webpu.sh/${XTREMEPUSH_SDK_KEY}/sdk.js');
+                              })(window,document,'xtremepush','https://us.webpu.sh/${XTREMEPUSH_SDK_KEY}/sdk.js');
                         `;
 
                         head.appendChild(XTREMEPUSH_SDKScriptHead);

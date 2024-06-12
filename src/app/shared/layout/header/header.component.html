@@ -709,7 +709,7 @@
 
         <div class="category" *ngIf="desafioHabilitado">
             <a [routerLink]="['/desafios']" routerLinkActive="active">
-                <span>{{ 'menu.desafio' | translate }}</span>
+                <span>{{desafioNome}}</span>
             </a>
         </div>
         <div class="category" *ngIf="acumuladaoHabilitado">
