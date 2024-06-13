@@ -21,6 +21,7 @@ export * from './shared/services/loteria/preaposta-loteria.service';
 export * from './shared/services/loteria/sorteio.service';
 export * from './shared/services/loteria/tipo-aposta-loteria.service';
 export * from './shared/services/loteria/loteria-popular.service';
+export * from './shared/services/loteria/copiar-aposta-loteria.service';
 
 export * from './shared/services/aposta-esportiva/aposta-esportiva.service';
 export * from './shared/services/aposta-esportiva/bilhete-esportivo.service';

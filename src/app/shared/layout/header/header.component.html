@@ -213,6 +213,15 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
+                            <a (click)="abrirCambistaCopiarAposta()">
+                                <span>
+                                    <i class="fa fa-solid fa-copy"></i>
+                                </span>
+                                {{'geral.copiarAposta' | translate}}
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
                             <a (click)="abrirCambistaApuracao()">
                                 <span>
                                     <i class="fa fa-solid fa-table-columns"></i>
@@ -532,6 +541,12 @@
                             *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-check mb-2"></i>
                                 {{'geral.validacao' | translate}}
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['/copiar-aposta']"
+                               routerLinkActive="router-link-active"
+                               *ngIf="!isCliente">
+                                <i class="fa fa-solid fa-table-columns mb-2"></i>
+                               Copiar Loteria
                             </a>
                             <a class="dropdown-btn-filled" [routerLink]="['cambistas/apuracao']"
                             routerLinkActive="router-link-active"

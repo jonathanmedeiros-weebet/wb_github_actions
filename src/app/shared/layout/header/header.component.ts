@@ -38,6 +38,9 @@ import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-ca
 import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
 import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
+import {CopiarApostaLoteriaService} from "../../services/loteria/copiar-aposta-loteria.service";
+import {CopiarApostaLoteriasComponent} from "../../../copiar-aposta/loterias/copiar-aposta-loterias.component";
+import {CopiarApostaWrapperComponent} from "../../../copiar-aposta/wrapper/copiar-aposta-wrapper.component";
 
 @Component({
     selector: 'app-header',
@@ -474,6 +477,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirCambistaValidacao() {
         this.modalService.open(ValidarApostaWrapperComponent);
+    }
+
+    abrirCambistaCopiarAposta() {
+        console.log("copiar")
+        this.modalService.open(CopiarApostaWrapperComponent);
     }
 
     abrirCambistaApuracao() {
