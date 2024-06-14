@@ -151,7 +151,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                                     if (this.usuario.tipo_usuario === 'cambista') {
                                         location.reload();
                                     }
-                                    this.activeModal.dismiss();
+                                    // this.activeModal.dismiss();
+                                    this.activeModal.close(true);
+                                    this.router.navigate([this.router.url]);
                                 },
                                 error => this.handleError(error)
                             );
