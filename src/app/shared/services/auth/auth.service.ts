@@ -139,7 +139,9 @@ export class AuthService {
 
     logout() {
         this.limparStorage();
-        this.cleanXtremepushNotifications();
+        if(this.xtremepushHabilitado()) {
+            this.cleanXtremepushNotifications();
+        }
         this.logadoSource.next(false);
         window.location.reload();
     }

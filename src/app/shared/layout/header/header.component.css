@@ -185,6 +185,7 @@ nav::-webkit-scrollbar {
 
 .dropdown-menu-custom {
     inset: 0 0 auto auto !important;
+    z-index: 1002;
 }
 
 .language-dropdown .flag-icon {
