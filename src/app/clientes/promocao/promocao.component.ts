@@ -24,6 +24,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     mobileScreen;
     rodadasListagem;
     rolloversListagem;
+    quantityRoundsToNotify: number = 0;
+    quantityRolloversToNotify: number = 0;
     rollovers: Rollover[] = [];
     rodadas: RodadaGratis[] = [];
 
@@ -104,11 +106,11 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                 response => {
                     this.rollovers = response.rollovers;
                     this.rodadas = response.rodadas.map(rodada => {
-                        const status = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : 'Cancelado';
+                        const status = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : (rodada.quantidade <= rodada.quantidadeUtilizada ? 'Concluído' : 'Cancelado');
                         return { ...rodada, status };
                     });
                     this.rodadas.sort((a, b) => {
-                        const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3 };
+                        const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3, 'Concluído': 4};
                         return statusOrder[a.status] - statusOrder[b.status];
                     });
 
@@ -116,6 +118,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                     this.rolloversListagem = this.rollovers;
                     this.showLoading = false;
                     this.loading = false;
+                    this.setQuantityRoundsToNotify();
+                    this.setQuantityRolloversToNotify();
                 },
                 error => {
                     this.handleError(error);
@@ -211,4 +215,20 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     openGame(game: string, fornecedor: string) {
         this.router.navigate(['casino/', fornecedor, game]);
     }
+
+    setQuantityRoundsToNotify(): void{
+        this.rodadas.forEach((round) => {
+            if(round.status === "Ativo"){
+                this.quantityRoundsToNotify++;
+            }
+        })
+    }    
+
+    setQuantityRolloversToNotify(): void{
+        this.rollovers.forEach((rollover) => {
+            if(rollover.status === "ativo"){
+                this.quantityRolloversToNotify++;
+            }
+        })
+    }  
 }

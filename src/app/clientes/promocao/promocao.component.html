@@ -18,9 +18,9 @@
             </div>
             <div class="tabs">
                 <a [ngClass]="tabSelected == 'bonus' ? 'active' : ''"
-					(click)="changeTab('bonus')">{{'geral.bonus' | translate}} <span class="circle">{{ rollovers.length }}</span></a>
+					(click)="changeTab('bonus')">{{'geral.bonus' | translate}} <span class="circle">{{ quantityRolloversToNotify }}</span></a>
                 <a [ngClass]="tabSelected == 'rodada-gratis' ? 'active' : ''"
-                	(click)="changeTab('rodada-gratis')">{{'geral.rodadaGratis' | translate}} <span class="circle">{{ rodadas.length }}</span></a>
+                	(click)="changeTab('rodada-gratis')">{{'geral.rodadaGratis' | translate}} <span class="circle">{{ quantityRoundsToNotify }}</span></a>
             </div>
 
             <div class="content-body">
@@ -212,6 +212,7 @@
                                     <option value="">{{'geral.todos' | translate}}</option>
                                     <option value="Ativo">Ativo</option>
                                     <option value="Expirado">Expirado</option>
+                                    <option value="Concluído">{{'geral.concluido' | translate}}</option>
                                     <option value="Cancelado">Cancelado</option>
                                 </select>
                                 <button class="btn btn-custom" style="min-height: 44px; min-width: 137px;" type="submit" (click)="filtrarPorStatus()">{{'geral.filtrar' | translate}}</button>
@@ -229,6 +230,7 @@
                                         <th data-field="termino" (click)="sortBy('termino')"><span style="cursor: pointer;">{{ 'geral.dataVencimento' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="valor" (click)="sortBy('valor')"><span style="cursor: pointer;">{{ 'geral.valor' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="quantidade" (click)="sortBy('quantidade')"><span style="cursor: pointer;">{{ 'geral.quantidade' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="quantidadeUtilizada" (click)="sortBy('quantidadeUtilizada')"><span style="cursor: pointer;">{{ 'geral.quantidadeUtilizada' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="game" (click)="sortBy('game')"><span style="cursor: pointer;">{{ 'geral.jogo' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="status" (click)="sortBy('status')"><span style="cursor: pointer;">Status &uarr;&darr;</span></th>
                                         <th></th>
@@ -250,6 +252,9 @@
                                             </td>
                                             <td class="td-custom">
                                                 {{rodada.quantidade}}
+                                            </td>
+                                            <td class="td-custom">
+                                                {{rodada.quantidadeUtilizada}}
                                             </td>
                                             <td class="td-custom">
                                                 {{rodada.gameName}}
