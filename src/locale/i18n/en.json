@@ -580,5 +580,10 @@
     },
     "botoes": {
         "aceitar": "Accept"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recover my account!",
+        "contaBloqueadaPorTentativas": "Your account has been blocked because you have exceeded the maximum number of Login attempts.",
+        "instrucoesRecuperacao": "Please use password recovery to unlock your account."
     }
 }
