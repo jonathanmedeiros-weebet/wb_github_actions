@@ -1,17 +1,19 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="submit()">
     <div class="loteria">
-        <div class="palpites">
-            <div *ngFor="let item of preApostaItens; let i=index" class="item-selecionado">
+        <div formArrayName="preApostaItens" class="palpites">
+            <div *ngFor="let item of preApostaItens.controls; let i = index" [formGroupName]="i" class="item-selecionado">
                 <div>
-                    <div>
-                        <label>{{sorteioNome(item.sorteio_id)}}</label>
+                    <div class="form-group col-xs-12 col-lg-4">
+                        <select class="form-control inverted-out" formControlName="sorteio_id">
+                            <option *ngFor="let sorteio of sorteios" [value]="sorteio.id">{{sorteio.nome}}</option>
+                        </select>
                     </div>
                     <div>
                         <label>Valor:</label>
-                        <span>{{item.valor | currency}}</span>
+                        <input class="form-control inverted-out" type="number" formControlName="valor" (change)="updateEstimativaGanho(item, i)" />
                     </div>
                     <div class="circle-group">
-                        <div class="circle" *ngFor="let numero of item.numeros">
+                        <div class="circle" *ngFor="let numero of item.get('numeros').value">
                             <div class="content">
                                 {{numero | number:'2.0'}}
                             </div>
@@ -19,19 +21,19 @@
                     </div>
                     <div>
                         <label>Retorno 6: </label>
-                        <span>{{calcularEstimativaGanho(item.cotacao6, item.valor) | currency}}</span>
+                        <span>{{calcularEstimativaGanho(item.get('cotacao6').value, item.get('valor').value) | currency}}</span>
                     </div>
                     <div>
                         <label>Retorno 5: </label>
-                        <span>{{calcularEstimativaGanho(item.cotacao4,item.valor) | currency}}</span>
+                        <span>{{calcularEstimativaGanho(item.get('cotacao5').value, item.get('valor').value) | currency}}</span>
                     </div>
                     <div>
                         <label>Retorno 4: </label>
-                        <span>{{calcularEstimativaGanho(item.cotacao5,item.valor) | currency}}</span>
+                        <span>{{calcularEstimativaGanho(item.get('cotacao4').value, item.get('valor').value) | currency}}</span>
                     </div>
                     <div>
                         <label>Retorno 3: </label>
-                        <span>{{calcularEstimativaGanho(item.cotacao3,item.valor) | currency}}</span>
+                        <span>{{calcularEstimativaGanho(item.get('cotacao3').value, item.get('valor').value) | currency}}</span>
                     </div>
                 </div>
                 <div class="remover-item" (click)="removerItem(i)">
@@ -40,18 +42,12 @@
             </div>
         </div>
         <div class="informacoes">
-            <p>
-                {{'geral.horario' | translate}}: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
-            </p>
-            <p>
-                Total de palpites: {{preAposta.itens.length}}
-            </p>
+            <p>{{'geral.horario' | translate}}: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</p>
+            <p>Total de palpites: {{preApostaItens.length}}</p>
             <div class="form-group">
-                <label >{{'geral.apostador' | translate}} </label>
-                <input type="text" class="form-control inverted-out" formControlName="apostador"
-                    [ngClass]="applyCssInputError('apostador')">
-                <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}} ">
-                </app-error-msg>
+                <label>{{'geral.apostador' | translate}}</label>
+                <input type="text" class="form-control inverted-out" formControlName="apostador" [ngClass]="applyCssInputError('apostador')">
+                <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}}"></app-error-msg>
             </div>
         </div>
     </div>
