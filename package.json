@@ -162,7 +162,6 @@
         "profit2.bet": "gulp profit2.bet",
         "alfasports.online": "gulp alfasports.online",
         "novabet.site": "gulp novabet.site",
-        "lfbets.io": "gulp lfbets.io",
         "vemprabet.com": "gulp vemprabet.com",
         "esportenetreipele.com": "gulp esportenetreipele.com",
         "powerbets.vip": "gulp powerbets.vip",
@@ -210,7 +209,6 @@
         "winsport.vip": "gulp winsport.vip",
         "betbras.com": "gulp betbras.com",
         "betei7.com": "gulp betei7.com",
-        "cassinowin.bet": "gulp cassinowin.bet",
         "capitalbets.bet": "gulp capitalbets.bet",
         "playnabet.com": "gulp playnabet.com",
         "betinvestidor.com": "gulp betinvestidor.com",
@@ -323,7 +321,8 @@
         "gramado.bet": "gulp gramado.bet",
         "avante.bet": "gulp avante.bet",
         "26sports.bet": "gulp 26sports.bet",
-        "stargoldbet.app": "gulp stargoldbet.app"
+        "stargoldbet.app": "gulp stargoldbet.app",
+        "goalbet.com.br": "gulp goalbet.com.br"
     },
     "private": true,
     "dependencies": {
