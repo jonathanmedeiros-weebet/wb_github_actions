@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
-import {AcumuladaoService, AuthService, MenuFooterService, MessageService, ParametrosLocaisService} from './../../services';
+import {AcumuladaoService, AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService} from './../../services';
 import {Acumuladao} from './../../models';
 import {PreApostaModalComponent, ApostaModalComponent, LoginModalComponent} from '../../shared/layout/modals';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -33,6 +33,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     isCliente;
     isLoggedIn;
     unsub$ = new Subject();
+    headerHeight;
     mobileScreen;
 
     constructor(
@@ -41,10 +42,14 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         private auth: AuthService,
         private acumuladaoService: AcumuladaoService,
         private messageService: MessageService,
+        private layoutService: LayoutService,
         public modalService: NgbModal,
         private fb: UntypedFormBuilder,
         private paramsService: ParametrosLocaisService,
-        private menuFooterService: MenuFooterService
+        private menuFooterService: MenuFooterService,
+        private cd: ChangeDetectorRef,
+        private renderer: Renderer2,
+        private el: ElementRef,
     ) {
         super();
     }
@@ -97,6 +102,22 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
                 res => this.displayPreTicker = res
             );
         this.menuFooterService.atualizarQuantidade(1);
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.definirAltura();
+                this.cd.detectChanges();
+            });
+        this.layoutService.resetHideSubmenu();
+    }
+
+    definirAltura() {
+        const headerHeight = this.mobileScreen ? 161 : this.headerHeight;
+        const altura = window.innerHeight - headerHeight;
+        const contentEl = this.el.nativeElement.querySelector('.content');
+        this.renderer.setStyle(contentEl, 'height', `${altura}px`);
     }
 
     createForm() {
