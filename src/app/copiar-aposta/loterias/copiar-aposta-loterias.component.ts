@@ -68,8 +68,8 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
 
     createPreApostaItem(item: any): FormGroup {
         return this.fb.group({
-            sorteio_id: [item.sorteio_id],
-            valor: [item.valor, Validators.required],
+            sorteio_id: [""],
+            valor: [0, Validators.required],
             numeros: [item.numeros],
             cotacao6: [item.cotacao6],
             cotacao5: [item.cotacao5],
@@ -115,9 +115,6 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
         this.disabledSubmit();
 
         const values = this.form.value;
-        values.preaposta_codigo = this.preAposta.codigo;
-        values.telefone = this.preAposta.telefone;
-        values.versao_app = 'angular';
 
         if (values.preApostaItens.length) {
             this.apostaLoteriaService.create(values)

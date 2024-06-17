@@ -56,6 +56,14 @@
     cursor: pointer;
 }
 
+.custom-width-value{
+    width: 100px;
+}
+
+.custom-width-apostador{
+    width: 500px;
+}
+
 @media only screen and (max-width: 1024px) {
     .btn-custom {
         width: 100%;
