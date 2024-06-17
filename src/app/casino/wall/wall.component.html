@@ -33,7 +33,7 @@
                 [providers]="cassinoFornecedores"
                 [isCliente]="isCliente"
                 [isLoggedIn]="isLoggedIn"
-                (openModalLogin)="abrirModalLogin()"
+
                 (onFilterGames)="filterGames($event, categorySelected, true)"
             />
 
@@ -91,7 +91,7 @@
                                     [isDemo]="isDemo"
                                     [isCliente]="isCliente"
                                     cardType="inline"
-                                    (openModalLogin)="abrirModalLogin()"
+
                                 />
                             </div>
                             <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
@@ -122,7 +122,7 @@
                         [isLoggedIn]="isLoggedIn"
                         [isDemo]="isDemo"
                         [isCliente]="isCliente"
-                        (openModalLogin)="abrirModalLogin()"
+
                     />
                 </div>
             </div>
