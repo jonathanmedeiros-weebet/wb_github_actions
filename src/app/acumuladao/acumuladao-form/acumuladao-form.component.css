@@ -40,6 +40,12 @@
     padding-right: 20px;
 }
 
+.acumuladao-valor-aposta{
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
 #acumuladao-form .div-back {
     display: flex;
     justify-content: center;
