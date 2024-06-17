@@ -577,5 +577,10 @@
     },
     "botoes": {
         "aceitar": "Aceptar"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recuperar mi cuenta!",
+        "contaBloqueadaPorTentativas": "Su cuenta ha sido bloqueada porque ha excedido el número máximo de intentos de inicio de sesión.",
+        "instrucoesRecuperacao": "Por favor, utilice la recuperación de contraseña para desbloquear su cuenta."
     }
 }

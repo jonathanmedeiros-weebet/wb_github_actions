@@ -583,5 +583,10 @@
     },
     "botoes": {
         "aceitar": "Aceitar"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recuperar minha conta!",
+        "contaBloqueadaPorTentativas": "Sua conta foi bloqueada porque você excedeu o número máximo de tentativas de login.",
+        "instrucoesRecuperacao": "Por favor, utilize a recuperação de senha para desbloquear sua conta."
     }
 }
