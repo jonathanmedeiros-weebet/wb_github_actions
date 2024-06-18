@@ -355,6 +355,7 @@
         "confirmarSenha": "Confirmar contraseña",
         "redefinirSenha": "Restablecer contraseña",
         "codigoDeVerificacao": "Código de verificación",
+        "codigoDeVerificacaoPorSms": "Código de verificación enviado por SMS",
         "reenviaCodigoDeVerificacao": "Reenviar código de verificación",
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
@@ -576,7 +577,8 @@
         "dezembro": "Diciembre"
     },
     "botoes": {
-        "aceitar": "Aceptar"
+        "aceitar": "Aceptar",
+        "voltar": "Volver"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",

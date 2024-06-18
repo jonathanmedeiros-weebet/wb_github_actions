@@ -357,6 +357,7 @@
         "confirmarNovaSenha": "Confirmar nova senha",
         "confirmarSenha": "Confirmar senha",
         "redefinirSenha": "Redefinir Senha",
+        "codigoDeVerificacaoPorSms": "Código de verificação enviado por SMS",
         "codigoDeVerificacao": "Código de Verificação",
         "reenviaCodigoDeVerificacao": "Reenviar Código de Verificação",
         "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
@@ -582,7 +583,8 @@
         "dezembro": "Dezembro"
     },
     "botoes": {
-        "aceitar": "Aceitar"
+        "aceitar": "Aceitar",
+        "voltar": "Voltar"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",

@@ -357,6 +357,7 @@
         "confirmarSenha": "Confirm password",
         "redefinirSenha": "Redefine password",
         "codigoDeVerificacao": "Verification Code",
+        "codigoDeVerificacaoPorSms": "Verification code sent via SMS",
         "reenviaCodigoDeVerificacao": "Resend Verification Code",
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
@@ -581,7 +582,8 @@
         "dezembro": "December"
     },
     "botoes": {
-        "aceitar": "Accept"
+        "aceitar": "Accept",
+        "voltar": "Back"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
