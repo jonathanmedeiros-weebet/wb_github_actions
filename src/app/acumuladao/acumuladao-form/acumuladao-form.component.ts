@@ -110,7 +110,6 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
                 this.definirAltura();
                 this.cd.detectChanges();
             });
-        this.layoutService.resetHideSubmenu();
     }
 
     definirAltura() {
