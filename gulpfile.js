@@ -1791,15 +1791,6 @@ gulp.task('favoritao.com', function (done) {
     });
 });
 
-gulp.task('x1fortbet.vip', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "x1fortbet.vip",
-        banca: "X1 FORT BET",
-        styles: "",
-    });
-});
-
 gulp.task('085.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1875,15 +1866,6 @@ gulp.task('jogue.bet', function (done) {
     });
 });
 
-gulp.task('amazoniasports.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "amazoniasports.bet",
-        banca: "AMAZÔNIA SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('ultrabetss.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1900,15 +1882,6 @@ gulp.task('gamegol.bet', function (done) {
         banca: "GAMEGOL.BET",
         pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
         scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'><script src='//code.jivosite.com/widget/EbO2qGOScc' async></script>",
-        styles: "",
-    });
-});
-
-gulp.task('fortebets.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "fortebets.bet",
-        banca: "FORTE BETS",
         styles: "",
     });
 });
@@ -2965,15 +2938,6 @@ gulp.task('miamipix.net', function (done) {
         server: "front4.wee.bet",
         host: "miamipix.net",
         banca: "MIAMI PIX",
-        styles: ""
-    });
-});
-
-gulp.task('betfeijo.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "betfeijo.wee.bet",
-        banca: "BET FEIJÓ",
         styles: ""
     });
 });
