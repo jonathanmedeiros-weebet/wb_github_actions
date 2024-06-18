@@ -60,6 +60,7 @@ export class ClienteService {
                         this.logadoSource.next(true);
                         if(this.xtremepushHabilitado()){
                             xtremepush('set', 'user_id', dataUser.user.id);
+                            xtremepush('event', 'login');
                         }
                     }
 

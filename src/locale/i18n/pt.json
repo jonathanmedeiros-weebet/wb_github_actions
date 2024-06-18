@@ -50,6 +50,7 @@
         "cancelar": "Cancelar",
         "fechar": "Fechar",
         "todos": "Todos",
+        "concluido": "Concluído",
         "confirmar": "Confirmar",
         "ganhou": "Ganhou",
         "perdeu": "Perdeu",
@@ -212,6 +213,7 @@
         "rodadaGratis": "Rodada grátis",
         "dataVencimento": "Data de vencimento",
         "quantidade": "Quantidade",
+        "quantidadeUtilizada": "Qtd. Utilizada",
         "jogarAgora": "Jogar Agora",
         "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
@@ -581,5 +583,10 @@
     },
     "botoes": {
         "aceitar": "Aceitar"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recuperar minha conta!",
+        "contaBloqueadaPorTentativas": "Sua conta foi bloqueada porque você excedeu o número máximo de tentativas de login.",
+        "instrucoesRecuperacao": "Por favor, utilize a recuperação de senha para desbloquear sua conta."
     }
 }

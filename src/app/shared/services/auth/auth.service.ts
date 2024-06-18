@@ -103,6 +103,7 @@ export class AuthService {
                     }
                     if(this.xtremepushHabilitado()){
                         xtremepush('set', 'user_id', res.results.user.id);
+                        xtremepush('event', 'login');
                     }
                 }),
                 catchError(this.errorService.handleError)
@@ -131,6 +132,7 @@ export class AuthService {
                     }
                     if(this.xtremepushHabilitado()){
                         xtremepush('set', 'user_id', res.results.user.id);
+                        xtremepush('event', 'login');
                     }
                 }),
                 catchError(this.errorService.handleError)

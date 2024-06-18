@@ -14,6 +14,12 @@ import {config} from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { FormValidations } from 'src/app/shared/utils';
+import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
+
+enum LoginErrorCode {
+    INACTIVE_REGISTER = 'cadastro_inativo',
+    CUSTOMER_BLOCKED = 'customerBlocked'
+}
 
 @Component({
     selector: 'app-login-modal',
@@ -151,26 +157,49 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                                     if (this.usuario.tipo_usuario === 'cambista') {
                                         location.reload();
                                     }
-                                    this.activeModal.dismiss();
+                                    // this.activeModal.dismiss();
+                                    this.activeModal.close(true);
+                                    this.router.navigate([this.router.url]);
                                 },
                                 error => this.handleError(error)
                             );
                     }
                 },
-                error => {
+                (error) => {
                     this.handleError(error.message);
-                    if (error.code === 'cadastro_inativo') {
+                    if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
                         sessionStorage.setItem('user', JSON.stringify(error.user));
-                        this.activeModal.dismiss();
-                        this.modalService.open(ValidarEmailModalComponent, {
-                            ariaLabelledBy: 'modal-basic-title',
-                            windowClass: 'modal-pop-up',
-                            centered: true,
-                            backdrop: 'static'
-                        });
+                        this.openModalInactiveRegister();
+                    }
+
+                    if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
+                        this.openModalBlockPeerAttemps();
                     }
                 }
             );
+    }
+
+    private openModalInactiveRegister() {
+        this.activeModal.dismiss();
+        this.modalService.open(ValidarEmailModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static'
+        });
+    }
+
+    private openModalBlockPeerAttemps() {
+        this.activeModal.dismiss();
+        this.modalRef = this.modalService.open(
+            BlockPeerAttempsModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+                backdrop: 'static',
+                windowClass: 'modal-600'
+            }
+        );
     }
 
     getUsuario() {
