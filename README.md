@@ -1,29 +1,33 @@
-# README #
+# weebet
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This template should help get you started developing with Vue 3 in Vite.
 
-### What is this repository for? ###
+## Recommended IDE Setup
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-### How do I get set up? ###
+## Type Support for `.vue` Imports in TS
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
-### Contribution guidelines ###
+## Customize configuration
 
-* Writing tests
-* Code review
-* Other guidelines
+See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-### Who do I talk to? ###
+## Project Setup
 
-* Repo owner or admin
-* Other community or team contact
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Type-Check, Compile and Minify for Production
+
+```sh
+npm run build
+```
