@@ -47,9 +47,6 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     blocked = false;
     opcaoExclusao = '';
 
-    smallScreen = false;
-    mobileScreen = false;
-
     sectionLimiteApostas = false;
     sectionLimiteDeposito = false;
     sectionTemporizadorSessao = false;
@@ -81,7 +78,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         private paramsLocais: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
-        public activeModal: NgbActiveModal,
+        private activeModal: NgbActiveModal,
         private modalService: NgbModal,
     ) {}
 
@@ -89,9 +86,11 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         return Boolean(this.paramsLocais.getOpcoes()?.enable_two_factor_in_profile_change);
     }
 
+    get mobileScreen(): boolean {
+        return window.innerWidth <= 1024;
+    }
+
     ngOnInit(): void {
-        this.smallScreen = window.innerWidth < 669;
-        this.mobileScreen = window.innerWidth <= 1024;
         if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
@@ -360,5 +359,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     handleError(error: string) {
         this.messageService.error(error);
+    }
+
+    toClose() {
+        this.activeModal.dismiss('Cross click');
     }
 }

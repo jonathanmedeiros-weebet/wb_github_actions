@@ -2,7 +2,7 @@
 
     <ng-container>
         <div class="mobile-modal-header" *ngIf="mobileScreen">
-            <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+            <a (click)="toClose()" class="botao-esquerdo">
                 <i class="fa fa-arrow-left"></i>
             </a>
             <div class="titulo">{{'geral.configuracoes' | translate}}</div>
@@ -145,7 +145,7 @@
                                     />
                                 </div>
                             </div>
-                            <ng-container *ngIf="showDataFinalPausa">
+                            <ng-container *ngIf="!infoPeriodoPausa">
                                 <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
                             </ng-container>
                             <div class="info-pausa" *ngIf="infoPeriodoPausa">
@@ -168,8 +168,11 @@
                         <i class="fa {{sectionExclusaoConta ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
                     </div>
                     <div class="section-body" *ngIf="sectionExclusaoConta">
-                        <p class="descricao">{{ 'jogo_responsavel.exclusao_conta.descricao' | translate }}
-                        <br><b>{{ 'jogo_responsavel.exclusao_conta.descricao_2' | translate }}</b></p>
+                        <p class="descricao">
+                            {{ 'jogo_responsavel.exclusao_conta.descricao' | translate }}
+                            <br>
+                            <b>{{ 'jogo_responsavel.exclusao_conta.descricao_2' | translate }}</b>
+                        </p>
                         <form [formGroup]="formExclusaoConta" (ngSubmit)="handleSubmit('onSubmitExclusaoConta')">
                             <div class="field w-500">
                                 <label for="">{{ 'jogo_responsavel.exclusao_conta.informe_motivo' | translate }}</label>

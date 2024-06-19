@@ -13,10 +13,23 @@
                     </div>
                     <div class="col-md-10 col-lg-4 align-items-center">
                         <div class="form-group">
-                            <input type="password" class="inverted-out form-control" placeholder="{{'senhas.digiteSuaSenha' | translate}}" formControlName="senha_atual"
-                                    [ngClass]="applyCssInputError('senha_atual')" [type]="mostrarSenhaAtual ? 'text' : 'password'">
-                            <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }" (click)="toggleMostrarSenha('senhaAtual')"></i>
-                            <app-error-msg [control]="form.get('senha_atual')" label="{{'senhas.senhaAtual' | translate}}"></app-error-msg>
+                            <input
+                                type="password"
+                                class="inverted-out form-control"
+                                placeholder="{{'senhas.digiteSuaSenha' | translate}}"
+                                formControlName="senha_atual"
+                                [ngClass]="applyCssInputError('senha_atual')"
+                                [type]="mostrarSenhaAtual ? 'text' : 'password'"
+                            >
+                            <i
+                                class="fa"
+                                [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }"
+                                (click)="toggleMostrarSenha('senhaAtual')"
+                            ></i>
+                            <app-error-msg
+                                [control]="form.get('senha_atual')"
+                                label="{{'senhas.senhaAtual' | translate}}"
+                            ></app-error-msg>
                         </div>
                     </div>
                 </div>
@@ -28,10 +41,23 @@
                     </div>
                     <div class="col-md-10 col-lg-4 align-items-center">
                         <div class="form-group">
-                            <input type="password" class="inverted-out form-control" placeholder="{{'senhas.novaSenha' | translate}}" formControlName="senha_nova"
-                                    [ngClass]="applyCssInputError('senha_nova')" [type]="mostrarSenhaNova ? 'text' : 'password'">
-                            <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaNova, 'fa-eye': !mostrarSenhaNova }" (click)="toggleMostrarSenha('senhaNova')"></i>
-                            <app-error-msg [control]="form.get('senha_nova')" label="Senha"></app-error-msg>
+                            <input
+                                type="password"
+                                class="inverted-out form-control"
+                                placeholder="{{'senhas.novaSenha' | translate}}"
+                                formControlName="senha_nova"
+                                [ngClass]="applyCssInputError('senha_nova')"
+                                [type]="mostrarSenhaNova ? 'text' : 'password'"
+                            >
+                            <i
+                                class="fa"
+                                [ngClass]="{ 'fa-eye-slash': mostrarSenhaNova, 'fa-eye': !mostrarSenhaNova }"
+                                (click)="toggleMostrarSenha('senhaNova')"
+                            ></i>
+                            <app-error-msg
+                                [control]="form.get('senha_nova')"
+                                label="{{'senhas.novaSenha' | translate}}"
+                            ></app-error-msg>
                         </div>
                     </div>
                 </div>
@@ -43,17 +69,35 @@
                     </div>
                     <div class="col-md-10 col-lg-4 align-items-center">
                         <div class="form-group">
-                            <input class="inverted-out form-control" placeholder="{{'senhas.confirmarNovaSenha' | translate}}" formControlName="senha_confirmacao"
-                                    [ngClass]="applyCssInputError('senha_confirmacao')" [type]="mostrarSenhaConfirmacao ? 'text' : 'password'">
-                            <i class="fa" [ngClass]="{ 'fa-eye-slash': mostrarSenhaConfirmacao, 'fa-eye': !mostrarSenhaConfirmacao }" (click)="toggleMostrarSenha('senhaConfirmacao')"></i>
-                            <app-error-msg [control]="form.get('senha_confirmacao')"
-                                            label="{{'senhas.confirmarSenha' | translate}}"></app-error-msg>
+                            <input
+                                class="inverted-out form-control"
+                                placeholder="{{'senhas.confirmarNovaSenha' | translate}}"
+                                formControlName="senha_confirmacao"
+                                [ngClass]="applyCssInputError('senha_confirmacao')"
+                                [type]="mostrarSenhaConfirmacao ? 'text' : 'password'"
+                            >
+                            <i
+                                class="fa"
+                                [ngClass]="{
+                                    'fa-eye-slash': mostrarSenhaConfirmacao,
+                                    'fa-eye': !mostrarSenhaConfirmacao
+                                }"
+                                (click)="toggleMostrarSenha('senhaConfirmacao')"
+                            ></i>
+                            <app-error-msg
+                                [control]="form.get('senha_confirmacao')"
+                                label="{{'senhas.confirmarSenha' | translate}}"
+                            ></app-error-msg>
                         </div>
                     </div>
                 </div>
 
                 <div class="buttons">
-                    <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
+                    <button
+                        class="btn btn-custom2 w-150 mr-4"
+                        type="button"
+                        (click)="resetarForm()"
+                    >
                         {{'geral.cancelar' | translate}}
                     </button>
                     <button class="btn btn-custom w-150" type="submit">
