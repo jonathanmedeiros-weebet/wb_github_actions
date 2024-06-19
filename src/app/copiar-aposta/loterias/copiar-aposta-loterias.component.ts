@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { UntypedFormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,13 +11,15 @@ import { BaseFormComponent } from '../../shared/layout/base-form/base-form.compo
     styleUrls: ['./copiar-aposta-loterias.component.css']
 })
 export class CopiarApostaLoteriasComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChild('apostaContainer', { static: false }) apostaContainer: ElementRef;
     @Output() success = new EventEmitter();
-    @Input() preAposta: any;
+    @Input() aposta: any;
     disabled = false;
     sorteios = [];
     opcoes;
     unsub$ = new Subject();
     form: FormGroup;
+    modalidade;
 
     constructor(
         private sorteioService: SorteioService,
@@ -31,11 +33,10 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
 
     ngOnInit() {
         this.opcoes = this.paramsService.getOpcoes();
-        this.sorteioService.getSorteios().subscribe(sorteios => (this.sorteios = sorteios));
         this.createForm();
         this.populateForm();
 
-        this.sorteioService.getSorteios({tipo: 'quininha', sort: 'data'})
+        this.sorteioService.getSorteios({tipo: this.aposta.modalidade, sort: 'data'})
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 sorteios => this.sorteios = sorteios,
@@ -51,22 +52,29 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
     createForm() {
         this.form = this.fb.group({
             apostador: ['', Validators.required],
-            preApostaItens: this.fb.array([])
+            itens: this.fb.array([])
         });
+    }
+
+
+    cleanForm() {
+        if (this.apostaContainer) {
+            this.apostaContainer.nativeElement.innerHTML = '';
+        }
     }
 
     populateForm() {
-        this.preAposta.itens.forEach(item => {
-            this.preApostaItens.push(this.createPreApostaItem(item));
+        this.aposta.itens.forEach(item => {
+            this.apostaItens.push(this.createApostaItem(item));
         });
-        this.form.patchValue({ apostador: this.preAposta.apostador });
+        this.form.patchValue({ apostador: this.aposta.apostador });
     }
 
-    get preApostaItens(): FormArray {
-        return this.form.get('preApostaItens') as FormArray;
+    get apostaItens(): FormArray {
+        return this.form.get('itens') as FormArray;
     }
 
-    createPreApostaItem(item: any): FormGroup {
+    createApostaItem(item: any): FormGroup {
         return this.fb.group({
             sorteio_id: [""],
             valor: [0, Validators.required],
@@ -92,7 +100,7 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
     }
 
     updateEstimativaGanho(item, index) {
-        const control = this.preApostaItens.at(index);
+        const control = this.apostaItens.at(index);
         const valor = control.get('valor').value;
         const cotacaoOriginal6 = control.get('cotacao_original_6').value;
         const cotacaoOriginal5 = control.get('cotacao_original_5').value;
@@ -108,19 +116,19 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
     }
 
     removerItem(i) {
-        this.preApostaItens.removeAt(i);
+        this.apostaItens.removeAt(i);
     }
 
     submit() {
         this.disabledSubmit();
-
         const values = this.form.value;
-
-        if (values.preApostaItens.length) {
+        if (values.itens.length) {
+            console.log(values)
             this.apostaLoteriaService.create(values)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
                     result => {
+                        this.cleanForm();
                         this.enableSubmit();
                         this.success.emit(result);
                     },

@@ -28,8 +28,8 @@ import {Aposta} from "../../shared/models/loteria/aposta";
 export class CopiarApostaWrapperComponent extends BaseFormComponent implements OnInit, OnDestroy {
     codigo: any;
     showLoadingIndicator = false;
-    exibirPreAposta = false;
-    preAposta: any;
+    exibirAposta = false;
+    aposta: any;
     modalRef;
     unsub$ = new Subject();
     mobileScreen;
@@ -64,15 +64,15 @@ export class CopiarApostaWrapperComponent extends BaseFormComponent implements O
 
     submit() {
         this.showLoadingIndicator = true;
-        this.exibirPreAposta = false;
+        this.exibirAposta = false;
 
         this.copiarApostaService
             .getApostaCopiar(this.codigo)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                preAposta => {
-                    this.exibirPreAposta = true;
-                    this.preAposta = preAposta;
+                aposta => {
+                    this.exibirAposta = true;
+                    this.aposta = aposta;
                     this.showLoadingIndicator = false;
                 },
                 error => this.handleError(error)

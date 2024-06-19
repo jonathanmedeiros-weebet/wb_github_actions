@@ -3,13 +3,13 @@
         <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
             <i class="fa fa-arrow-left"></i>
         </a>
-        <div class="titulo">{{'geral.copiarApostaLoteria' | translate}}</div>
+        <div class="titulo">{{'geral.replicarApostaLoteria' | translate}}</div>
         <div class="botao-direito"></div>
     </div>
 
     <div class="internal-container-out">
         <div class="content-header hide-mobile">
-            <h2>{{'geral.copiarApostaLoteria' | translate}}</h2>
+            <h2>{{'geral.replicarApostaLoteria' | translate}}</h2>
         </div>
         <div class="content-body">
             <div class="content">
@@ -29,11 +29,11 @@
 
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
-                <div *ngIf="exibirPreAposta">
-                    <div id="pre-aposta">
-                        <ng-container [ngSwitch]="preAposta.tipo">
-                            <app-copiar-aposta-loterias *ngSwitchCase="'loteria'" [preAposta]="preAposta"
-                                                         (success)="success($event)">
+                <div *ngIf="exibirAposta">
+                    <div id="aposta">
+                        <ng-container [ngSwitch]="aposta.tipo">
+                            <app-copiar-aposta-loterias *ngSwitchCase="'loteria'" [aposta]="aposta"
+                                                        (success)="success($event)">
                             </app-copiar-aposta-loterias>
                         </ng-container>
                     </div>

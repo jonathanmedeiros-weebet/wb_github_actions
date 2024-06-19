@@ -1,7 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="submit()" #apostaContainer>
     <div class="loteria">
-        <div formArrayName="preApostaItens" class="palpites">
-            <div *ngFor="let item of preApostaItens.controls; let i = index" [formGroupName]="i" class="item-selecionado">
+        <div formArrayName="itens" class="palpites">
+            <div *ngFor="let item of apostaItens.controls; let i = index" [formGroupName]="i" class="item-selecionado">
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label>Sorteio:</label>
@@ -53,8 +53,8 @@
             </div>
         </div>
         <div class="informacoes">
-            <p>{{'geral.horario' | translate}}: {{preAposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</p>
-            <p>Total de palpites: {{preApostaItens.length}}</p>
+            <p>{{'geral.horario' | translate}}: {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</p>
+            <p>Total de palpites: {{apostaItens.length}}</p>
             <div class="form-group col-lg-4">
                 <label>{{'geral.apostador' | translate}}</label>
                 <input type="text" class="form-control inverted-out" formControlName="apostador" [ngClass]="applyCssInputError('apostador')">

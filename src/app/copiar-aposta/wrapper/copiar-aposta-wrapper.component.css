@@ -10,13 +10,13 @@
     width: 270px;
 }
 
-#pre-aposta{
+#aposta{
     padding: 10px 14px;
     border: 1px solid var(--game);
     border-radius: 5px;
 }
 
-#pre-aposta h2{
+#aposta h2{
     margin-bottom: 30px;
 }
 
