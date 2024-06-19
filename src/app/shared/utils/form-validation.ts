@@ -136,33 +136,24 @@ export class FormValidations {
     }
 
     static blockInvalidCharacters(e, inputName){
-        const char = String.fromCharCode(e.keyCode);
-        let pattern;
+        const inputType = e.inputType;
+        const data = e.data;
+        let regex;
+
         switch (inputName) {
             case 'name':
-                pattern = '[a-zA-Z ]';
+                regex = /^[a-zA-ZÀ-ÿ ]*$/;
                 break;
             case 'email':
-                pattern = '[\/&\'\",;*:<>?!=*{}()#$%\[ ]';
+                regex = /^[a-zA-ZÀ-ÿ0-9_.@]$/;
                 break;
             case 'password':
-                pattern = '[ ]';
+                regex = /^\S*$/;
                 break;
         }
 
-        if (inputName == 'password' || inputName == 'email') {
-            if (inputName == 'email') {
-                if (char.match(']')) {
-                    e.preventDefault();
-                }
-            }
-            if (char.match(pattern)) {
-                e.preventDefault();
-            }
-        } else {
-            if (!char.match(pattern)) {
-                e.preventDefault();
-            }
+        if (inputType === 'insertText' && data && !regex.test(data)) {
+            e.preventDefault();
         }
     }
 }

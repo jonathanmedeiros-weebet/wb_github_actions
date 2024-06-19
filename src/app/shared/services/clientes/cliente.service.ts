@@ -8,6 +8,9 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
+import {ParametrosLocaisService} from "../parametros-locais.service";
+
+declare var xtremepush: any;
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +26,8 @@ export class ClienteService {
         private http: HttpClient,
         private errorService: ErrorService,
         private headers: HeadersService,
-        private router: Router
+        private router: Router,
+        private paramsService: ParametrosLocaisService,
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -42,9 +46,9 @@ export class ClienteService {
     cadastrarCliente(values: any) {
         return this.http.post(`${this.clienteUrl}/cadastro`, JSON.stringify(values), this.headers.getRequestOptions())
             .pipe(
-                map((response: any) => {                    
+                map((response: any) => {
                     const dataUser = response.results.dataUser;
-            
+
                     if (dataUser && Object.keys(dataUser).length > 0) {
                         this.setCookie(dataUser.user.cookie);
                         const expires = moment().add(1, 'd').valueOf();
@@ -54,6 +58,10 @@ export class ClienteService {
                         this.setIsCliente(true);
                         localStorage.setItem('tokenCassino', dataUser.tokenCassino);
                         this.logadoSource.next(true);
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('set', 'user_id', dataUser.user.id);
+                            xtremepush('event', 'login');
+                        }
                     }
 
                     return response.results;
@@ -223,5 +231,14 @@ export class ClienteService {
 
     getUser() {
         return JSON.parse(localStorage.getItem('user'));
+    }
+
+    xtremepushHabilitado() {
+        let result = false;
+        const opcoes = this.paramsService.getOpcoes().xtremepush_habilitado;
+        if (opcoes) {
+            result = true;
+        }
+        return result;
     }
 }

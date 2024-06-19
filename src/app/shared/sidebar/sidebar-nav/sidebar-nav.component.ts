@@ -43,6 +43,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     modoCambista = true;
     indiqueGanheHabilitado = false;
     permitirQualquerChavePix = false;
+    desafioNome: string;
 
     subCartao = false;
     subPerfil = false;
@@ -83,6 +84,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.modoCambista = this.paramsLocais.getOpcoes().modo_cambista;
         this.indiqueGanheHabilitado = this.paramsLocais.indiqueGanheHabilitado();
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
+        this.desafioNome = this.paramsLocais.getOpcoes().desafio_nome;
 
         switch (this.router.url) {
             case '/cambistas/cartoes':

@@ -1,7 +1,6 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {UntypedFormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
-
 import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -13,7 +12,14 @@ import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-se
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 import {config} from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { FormValidations } from 'src/app/shared/utils';
+import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
+
+enum LoginErrorCode {
+    INACTIVE_REGISTER = 'cadastro_inativo',
+    CUSTOMER_BLOCKED = 'customerBlocked'
+}
 
 @Component({
     selector: 'app-login-modal',
@@ -34,6 +40,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     LOGO = config.LOGO;
     loginGoogle = false;
     googleUser;
+    private geolocation: Geolocation;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -44,12 +51,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private paramsLocais: ParametrosLocaisService,
         private socialAuth: SocialAuthService,
         private router: Router,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
 
     ngOnInit() {
+
         this.appMobile = this.auth.isAppMobile();
         if (window.innerWidth > 1025) {
             this.isMobile = false;
@@ -94,6 +103,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 );
         }
 
+        this.geolocationService
+            .getGeolocation()
+            .then((geolocation) => this.geolocation = geolocation)
     }
 
     createForm() {
@@ -131,7 +143,13 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         this.activeModal.dismiss();
                     } else {
                         this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                        this.auth.login(this.form.value)
+                        const data = {
+                            ...this.form.value,
+                            cookie: this.auth.getCookie(this.usuario.cookie),
+                            geolocation: this.geolocation
+                        };
+
+                        this.auth.login(data)
                             .pipe(takeUntil(this.unsub$))
                             .subscribe(
                                 () => {
@@ -139,26 +157,49 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                                     if (this.usuario.tipo_usuario === 'cambista') {
                                         location.reload();
                                     }
-                                    this.activeModal.dismiss();
+                                    // this.activeModal.dismiss();
+                                    this.activeModal.close(true);
+                                    this.router.navigate([this.router.url]);
                                 },
                                 error => this.handleError(error)
                             );
                     }
                 },
-                error => {
+                (error) => {
                     this.handleError(error.message);
-                    if (error.code === 'cadastro_inativo') {
+                    if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
                         sessionStorage.setItem('user', JSON.stringify(error.user));
-                        this.activeModal.dismiss();
-                        this.modalService.open(ValidarEmailModalComponent, {
-                            ariaLabelledBy: 'modal-basic-title',
-                            windowClass: 'modal-pop-up',
-                            centered: true,
-                            backdrop: 'static'
-                        });
+                        this.openModalInactiveRegister();
+                    }
+
+                    if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
+                        this.openModalBlockPeerAttemps();
                     }
                 }
             );
+    }
+
+    private openModalInactiveRegister() {
+        this.activeModal.dismiss();
+        this.modalService.open(ValidarEmailModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static'
+        });
+    }
+
+    private openModalBlockPeerAttemps() {
+        this.activeModal.dismiss();
+        this.modalRef = this.modalService.open(
+            BlockPeerAttempsModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+                backdrop: 'static',
+                windowClass: 'modal-600'
+            }
+        );
     }
 
     getUsuario() {
@@ -229,7 +270,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.mostrarSenha = !this.mostrarSenha;
     }
 
-    blockInvalidCharacters(e, inputName){
+    onBeforeInput(e, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
     }
 }
