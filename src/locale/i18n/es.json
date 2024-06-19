@@ -239,7 +239,10 @@
         "nenhumResultadoEncontrado": "No se encontraron resultados para esta búsqueda",
         "jogosEmAlta": "Juegos de tendencia",
         "nenhumJogoDisponivel": "No hay juegos disponibles en este momento",
-        "loginGoogle" : "Inicia sesión con la cuenta de Google."
+        "loginGoogle" : "Inicia sesión con la cuenta de Google.",
+        "alteracoesSucesso": "¡Cambios realizados con éxito!",
+        "erroInesperado": "Algo inesperado ocurrió. Inténtalo de nuevo más tarde.",
+        "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente."
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
@@ -356,6 +359,7 @@
         "redefinirSenha": "Restablecer contraseña",
         "codigoDeVerificacao": "Código de verificación",
         "codigoDeVerificacaoPorSms": "Código de verificación enviado por SMS",
+        "codigoDeVerificacaoPorEmail": "Código de verificación enviado por correo electrónico",
         "reenviaCodigoDeVerificacao": "Reenviar código de verificación",
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
@@ -576,13 +580,67 @@
         "novembro": "Noviembre",
         "dezembro": "Diciembre"
     },
+    "placeholders": {
+        "selecione_uma_opcao": "Seleccione una opción"
+    },
     "botoes": {
         "aceitar": "Aceptar",
+        "salvar_alteracoes": "Guardar Cambios",
         "voltar": "Volver"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",
         "contaBloqueadaPorTentativas": "Su cuenta ha sido bloqueada porque ha excedido el número máximo de intentos de inicio de sesión.",
         "instrucoesRecuperacao": "Por favor, utilice la recuperación de contraseña para desbloquear su cuenta."
+    },
+    "jogo_responsavel": {
+        "limite_apostas": {
+            "titulo": "Límite de apuestas",
+            "descripcion": "La configuración del límite de apuestas es una función que le permite establecer un valor máximo para sus apuestas. Esta configuración ayuda a controlar y limitar el monto que se puede apostar, evitando gastos excesivos y comportamientos irresponsables de juego. Se pueden configurar límites diarios, semanales y mensuales para las apuestas.",
+            "definir_limite_diario": "Establecer límite diario de apuestas",
+            "definir_limite_semanal": "Establecer límite semanal de apuestas",
+            "definir_limite_mensal": "Establecer límite mensual de apuestas"
+        },
+        "limite_depositos": {
+            "titulo": "Límite de depósitos",
+            "descripcion": "La configuración del límite de depósito es una función que le permite establecer un valor máximo para los depósitos que se pueden realizar en su cuenta. Esta configuración tiene como objetivo ayudar a controlar el monto de dinero invertido, evitando gastos excesivos y promoviendo un juego responsable. El límite de depósito establecido evita que deposite cantidades por encima de este límite durante un cierto período de tiempo (diario, semanal y mensual).",
+            "definir_limite_diario": "Establecer límite diario de depósito",
+            "definir_limite_semanal": "Establecer límite semanal de depósito",
+            "definir_limite_mensal": "Establecer límite mensual de depósito"
+        },
+        "periodo_pausa": {
+            "titulo": "Período de pausa",
+            "descripcion": "La función de período de pausa de la cuenta le permite suspender temporalmente el uso de su cuenta en la plataforma. Durante este período, la cuenta se vuelve inactiva, impidiendo el acceso y la realización de actividades como apuestas, retiros y depósitos. Esta opción es útil para tomar un descanso temporal, sin eliminar permanentemente la cuenta, preservando los datos y configuraciones para una reactivación posterior.",
+            "definir_periodo_pausa": "Establecer período de pausa",
+            "6horas": "6 horas",
+            "12horas": "12 horas",
+            "24horas": "24 horas",
+            "36horas": "36 horas",
+            "48horas": "48 horas",
+            "72horas": "72 horas",
+            "custom": "Personalizar",
+            "periodo_pausa_ativado": "El período de pausa está activado. Su cuenta volverá a la normalidad en: {{info}}"
+        },
+        "exclusao_conta": {
+            "titulo": "Exclusión de cuenta",
+            "descripcion": "Eliminar permanentemente la cuenta es una acción que resulta en la eliminación completa de la cuenta y toda la información asociada a ella, de forma irreversible. Esto incluye datos personales, historial de apuestas y acceso a la plataforma. Al eliminar permanentemente la cuenta, terminará su participación en el sitio de forma definitiva, sin posibilidad de recuperar la cuenta o su información en el futuro.",
+            "descripcion_2": "Además, enfatizamos que esta acción también implicará la imposibilidad de crear una nueva cuenta en la plataforma.",
+            "informe_motivo": "Informe por qué desea eliminar permanentemente su cuenta:",
+            "motivo_1": "Se creó una segunda cuenta",
+            "motivo_2": "Toma demasiado tiempo/atención",
+            "motivo_3": "Ya no tengo interés en apostar en este sitio",
+            "motivo_4": "Ya no estoy usando esta cuenta",
+            "motivo_5": "Problemas al usar el sistema",
+            "motivo_6": "Otros motivos",
+            "digite_para_continuar": "Escriba \"<b>ELIMINAR PERMANENTEMENTE</b>\" para confirmar la acción de eliminación.",
+            "explique_motivo": "Explique por qué está eliminando la cuenta...",
+            "excluir_conta": "Eliminar cuenta permanentemente"
+        },
+        "temporizador_sessao": {
+            "titulo": "Temporizador de sesión",
+            "descripcion": "El temporizador de sesión es una configuración que le permite establecer un límite de tiempo para el uso de la plataforma. Ayuda a controlar el tiempo empleado, alertándole cuando se alcanza el límite y finalizando automáticamente su sesión, promoviendo un uso equilibrado y consciente. Por ejemplo, puede optar por limitar sus sesiones a 30 minutos, 1 hora o cualquier otro intervalo adecuado para usted, y también desactivar esta función según lo desee. Cuando se alcanza el límite de tiempo de la sesión, nuestro sistema finalizará automáticamente su sesión y cerrará la sesión de su cuenta. Esto ayuda a garantizar que respete sus límites de tiempo predefinidos.",
+            "definir_tempo": "Establecer tiempo de sesión",
+            "desativado": "Desactivado"
+        }
     }
 }

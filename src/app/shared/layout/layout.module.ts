@@ -93,6 +93,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SkeletonModule } from './skeleton/skeleton.module';
 import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-modal/block-peer-attemps-modal.component';
+import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 
 @NgModule({
     imports: [
@@ -187,6 +188,7 @@ import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-moda
         WelcomePageComponent,
         CanceledBonusConfirmComponent,
         BlockPeerAttempsModalComponent,
+        MultifactorConfirmationModalComponent,
     ],
     exports: [
         MainLayoutComponent,

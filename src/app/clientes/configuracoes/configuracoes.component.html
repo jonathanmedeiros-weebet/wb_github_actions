@@ -17,14 +17,14 @@
             <div class="content-body">
                 <section class="limite-apostas">
                     <div class="section-header" (click)="toggleSections('limiteApostas')">
-                        <h3>Limite de apostas</h3>
+                        <h3>{{ 'jogo_responsavel.limite_apostas.titulo' | translate }}</h3>
                         <i class="fa {{sectionLimiteApostas ? 'fa-chevron-up' : 'fa-chevron-down'}}" ></i>
                     </div>
                     <div class="section-body" *ngIf="sectionLimiteApostas">
-                        <p class="descricao">A configuração de limite de apostas é uma funcionalidade que permite você definir um valor máximo para as suas apostas. Essa configuração ajuda a controlar e limitar o valor que pode ser apostado, evitando gastos excessivos e comportamentos de jogo irresponsáveis. Pode ser configurado limite diário, semanal e mensal para apostas.</p>
-                        <form [formGroup]="formLimiteApostas" (ngSubmit)="onSubmitLimiteApostas()">
+                        <p class="descricao">{{ 'jogo_responsavel.limite_apostas.descricao' | translate }}</p>
+                        <form [formGroup]="formLimiteApostas" (ngSubmit)="handleSubmit('onSubmitLimiteApostas')">
                             <div class="field">
-                                <label for="">Definir limite diário de apostas</label>
+                                <label for="">{{ 'jogo_responsavel.limite_apostas.definir_limite_diario' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', nullable: true, allowZero: true }"
@@ -33,7 +33,7 @@
                                 >
                             </div>
                             <div class="field">
-                                <label for="">Definir limite semanal de apostas</label>
+                                <label for="">{{ 'jogo_responsavel.limite_apostas.definir_limite_semanal' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
@@ -41,27 +41,28 @@
                                 >
                             </div>
                             <div class="field">
-                                <label for="">Definir limite mensal de apostas</label>
+                                <label for="">{{ 'jogo_responsavel.limite_apostas.definir_limite_mensal' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                     formControlName="limiteMensal"
                                 >
                             </div>
-                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
+                            <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
                 </section>
                 <section class="limite-depositos">
                     <div class="section-header" (click)="toggleSections('limiteDeposito')">
-                        <h3>Limite de depósitos</h3>
+                        <h3>{{ 'jogo_responsavel.limite_depositos.titulo' | translate }}</h3>
                         <i class="fa {{sectionLimiteDeposito ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
                     </div>
                     <div class="section-body" *ngIf="sectionLimiteDeposito">
-                        <p class="descricao">A configuração de limite de depósito é uma funcionalidade que permite você definir um valor máximo para os depósitos que podem ser feitos em sua conta. Essa configuração visa ajudar a controlar o valor de dinheiro investido, prevenindo gastos excessivos e promovendo um jogo responsável. O limite de depósito estabelecido impede que você deposite valores acima desse limite durante um determinado período de tempo (diário, semanal e mensal).</p>
-                        <form [formGroup]="formLimiteDeposito" (ngSubmit)="onSubmitLimiteDeposito()">
+                        <p class="descricao">{{ 'jogo_responsavel.limite_depositos.descricao' | translate }}</p>
+                        <form [formGroup]="formLimiteDeposito" (ngSubmit)="handleSubmit('onSubmitLimiteDeposito')">
                             <div class="field">
-                                <label for="">Definir limite diário de depósito</label>
+                                <label for="">{{ 'jogo_responsavel.limite_depositos.definir_limite_diario' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
@@ -69,7 +70,7 @@
                                 >
                             </div>
                             <div class="field">
-                                <label for="">Definir limite semanal de depósito</label>
+                                <label for="">{{ 'jogo_responsavel.limite_depositos.definir_limite_semanal' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
@@ -77,55 +78,57 @@
                                 >
                             </div>
                             <div class="field">
-                                <label for="">Definir limite mensal de depósito</label>
+                                <label for="">{{ 'jogo_responsavel.limite_depositos.definir_limite_mensal' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                     formControlName="limiteMensal"
                                 >
                             </div>
-                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
+                            <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
                 </section>
                 <section class="limite-apostas" *ngIf="blocked">
                     <div class="section-header" (click)="toggleSections('temporizadorSessao')">
-                        <h3>Temporizador de sessão</h3>
+                        <h3>{{ 'jogo_responsavel.temporizador_sessao.titulo' | translate }}</h3>
                         <i class="fa {{sectionTemporizadorSessao ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
                     </div>
                     <div class="section-body" *ngIf="sectionTemporizadorSessao">
-                        <p class="descricao">O temporizador de sessão é uma configuração no qual permite você definir um limite de tempo para o uso da plataforma. Ela ajuda a controlar o tempo gasto, alertando  você quando o limite é atingido e encerrando a sua sessão automaticamente, promovendo um uso equilibrado e consciente.  Por exemplo, você pode escolher limitar suas sessões a 30 minutos, 1 hora ou qualquer outro intervalo adequado para você e também desativar essa funcionalidade assim que desejar. Quando o limite de tempo da sessão for atingido, nosso sistema encerrará automaticamente sua sessão e fará o logout de sua conta. Isso ajuda a garantir que você respeite seus limites de tempo predefinidos.</p>
+                        <p class="descricao">{{ 'jogo_responsavel.temporizador_sessao.descricao' | translate }}</p>
                         <form>
                             <div class="field">
-                                <label for="">Definir tempo de sessão</label>
+                                <label for="">{{ 'jogo_responsavel.temporizador_sessao.definir_tempo' | translate }}</label>
                                 <select class="form-control inverted-out">
-                                    <option value="">Desativado</option>
+                                    <option value="">{{ 'jogo_responsavel.temporizador_sessao.desativado' | translate }}</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
+                            <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
                 </section>
                 <section class="limite-apostas">
                     <div class="section-header" (click)="toggleSections('periodoPausa')">
-                        <h3>Período de pausa</h3>
+                        <h3>{{ 'jogo_responsavel.periodo_pausa.titulo' | translate }}</h3>
                         <i class="fa {{sectionPeriodoPausa ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
                     </div>
                     <div class="section-body" *ngIf="sectionPeriodoPausa">
-                        <p class="descricao">A funcionalidade de período de pausa de conta permite que você suspendam temporariamente o uso da sua conta na plataforma. Durante esse período, a conta fica inativa, impedindo o acesso e a realização de atividades como apostas, saques e depósitos. Essa opção é útil para fazer uma pausa temporária, sem excluir permanentemente a conta, preservando os dados e configurações para posterior reativação.</p>
-                        <form [formGroup]="formPeriodoPausa" (ngSubmit)="onSubmitPeriodoPausa()">
+                        <p class="descricao">{{ 'jogo_responsavel.periodo_pausa.descricao' | translate }}</p>
+                        <form [formGroup]="formPeriodoPausa" (ngSubmit)="handleSubmit('onSubmitPeriodoPausa')">
                             <div class="fields-row" *ngIf="!infoPeriodoPausa">
                                 <div class="field">
-                                    <label for="">Definir período de pausa</label>
+                                    <label for="">{{ 'jogo_responsavel.periodo_pausa.definir_periodo_pausa' | translate }}</label>
                                     <select class="form-control inverted-out" formControlName="opcaoPausa" (change)="changeOpcaoPausa()">
-                                        <option value="">Selecione uma opção</option>
-                                        <option value="6horas">6 horas</option>
-                                        <option value="12horas">12 horas</option>
-                                        <option value="24horas">24 horas</option>
-                                        <option value="36horas">36 horas</option>
-                                        <option value="48horas">48 horas</option>
-                                        <option value="72horas">72 horas</option>
-                                        <option value="custom">Customizar</option>
+                                        <option value="">{{ 'placeholders.selecione_uma_opcao' | translate }}</option>
+                                        <option value="6horas">{{ 'jogo_responsavel.periodo_pausa.6horas' | translate }}</option>
+                                        <option value="12horas">{{ 'jogo_responsavel.periodo_pausa.12horas' | translate }}</option>
+                                        <option value="24horas">{{ 'jogo_responsavel.periodo_pausa.24horas' | translate }}</option>
+                                        <option value="36horas">{{ 'jogo_responsavel.periodo_pausa.36horas' | translate }}</option>
+                                        <option value="48horas">{{ 'jogo_responsavel.periodo_pausa.48horas' | translate }}</option>
+                                        <option value="72horas">{{ 'jogo_responsavel.periodo_pausa.72horas' | translate }}</option>
+                                        <option value="custom">{{ 'jogo_responsavel.periodo_pausa.custom' | translate }}</option>
                                     </select>
                                 </div>
                                 <div class="field" style="position: relative" *ngIf="showDataFinalPausa">
@@ -142,43 +145,47 @@
                                     />
                                 </div>
                             </div>
+                            <ng-container *ngIf="showDataFinalPausa">
+                                <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+                            </ng-container>
                             <div class="info-pausa" *ngIf="infoPeriodoPausa">
-                                <i class="fa fa-info-circle"></i> O período de pausa está ativado. Sua conta voltará ao normal em {{infoPeriodoPausa}}
+                                <i class="fa fa-info-circle"></i> 
+                                {{ 'jogo_responsavel.periodo_pausa.periodo_pausa_ativado' | translate: {info: infoPeriodoPausa} }} {{infoPeriodoPausa}}
                             </div>
                             <button
                                 type="submit"
                                 class="btn btn-custom"
                                 *ngIf="!infoPeriodoPausa"
                             >
-                                Salvar alterações
+                                {{ 'botoes.salvar_alteracoes' | translate }}
                             </button>
                         </form>
                     </div>
                 </section>
                 <section class="exclusao-conta">
                     <div class="section-header" (click)="toggleSections('exclusaoConta')">
-                        <h3>Exclusão de conta</h3>
+                        <h3>{{ 'jogo_responsavel.exclusao_conta.titulo' | translate }}</h3>
                         <i class="fa {{sectionExclusaoConta ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
                     </div>
                     <div class="section-body" *ngIf="sectionExclusaoConta">
-                        <p class="descricao">Excluir permanentemente a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta permanentemente, você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro.
-                        <br><b>Além disso, ressaltamos que essa ação também implicará na impossibilidade de criar uma nova conta na plataforma.</b></p>
-                        <form [formGroup]="formExclusaoConta" (ngSubmit)="onSubmitExclusaoConta()">
+                        <p class="descricao">{{ 'jogo_responsavel.exclusao_conta.descricao' | translate }}
+                        <br><b>{{ 'jogo_responsavel.exclusao_conta.descricao_2' | translate }}</b></p>
+                        <form [formGroup]="formExclusaoConta" (ngSubmit)="handleSubmit('onSubmitExclusaoConta')">
                             <div class="field w-500">
-                                <label for="">Informe por qual motivo você deseja excluir sua conta permanentemente:</label>
+                                <label for="">{{ 'jogo_responsavel.exclusao_conta.informe_motivo' | translate }}</label>
                                 <select class="form-control inverted-out" (change)="changeOpcaoExclusao()" formControlName="opcao">
-                                    <option value="">Selecione uma opção</option>
-                                    <option value="1">Uma segunda conta foi criada</option>
-                                    <option value="2">Ocupa muito meu tempo/desvia muito minha atenção</option>
-                                    <option value="3">Não tenho mais interesse em realizar apostas neste site</option>
-                                    <option value="4">Não estou mais usando está conta</option>
-                                    <option value="5">Problemas ao utilizar o sistema</option>
-                                    <option value="6">Outros motivos</option>
+                                    <option value="">{{ 'placeholders.selecione_uma_opcao' | translate }}</option>
+                                    <option value="1">{{ 'jogo_responsavel.exclusao_conta.motivo_1' | translate }}</option>
+                                    <option value="2">{{ 'jogo_responsavel.exclusao_conta.motivo_2' | translate }}</option>
+                                    <option value="3">{{ 'jogo_responsavel.exclusao_conta.motivo_3' | translate }}</option>
+                                    <option value="4">{{ 'jogo_responsavel.exclusao_conta.motivo_4' | translate }}</option>
+                                    <option value="5">{{ 'jogo_responsavel.exclusao_conta.motivo_5' | translate }}</option>
+                                    <option value="6">{{ 'jogo_responsavel.exclusao_conta.motivo_6' | translate }}</option>
                                 </select>
                             </div>
                             <div class="field w-500" *ngIf="showConfirmarExclusao">
                                 <div>
-                                    <label class="label">Digite "<b>EXCLUIR PERMANENTEMENTE</b>" para confirmar a ação de exclusão.</label>
+                                    <label class="label" [innerHTML]="'jogo_responsavel.exclusao_conta.digite_para_continuar' | translate"></label>
                                 </div>
                                 <div>
                                     <div class="form-group">
@@ -186,14 +193,31 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+
                             <div class="field w-full" *ngIf="showMotivoExclusaoConta">
-                                <textarea rows="3" class="inverted-out" placeholder="Explique sobre quais motivos você está excluindo a conta..." formControlName="motivoExclusao"></textarea>
+                                <textarea rows="3" class="inverted-out" placeholder="{{ 'jogo_responsavel.exclusao_conta.explique_motivo' | translate }}" formControlName="motivoExclusao"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-custom">Excluir conta permanentemente</button>
+                            <button type="submit" class="btn btn-custom">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
                         </form>
                     </div>
                 </section>
             </div>
         </div>
     </ng-container>
+
+    <ng-template #senhaAtualTemplate>
+        <div class="field w-500" *ngIf="twoFactorInProfileChangeEnabled">
+            <div>
+                <label class="label">{{'senhas.senhaAtual' | translate}}</label>
+            </div>
+            <div class="position-relative mb-5">
+                <div class="form-group position-absolute">
+                    <input [type]="mostrarSenha ? 'text' : 'password'" class="form-control inverted-out" [formControl]="senhaAtual">
+                    <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenha = !mostrarSenha"></i>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </div>
