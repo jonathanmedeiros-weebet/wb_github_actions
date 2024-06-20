@@ -239,7 +239,8 @@
         "nenhumResultadoEncontrado": "No se encontraron resultados para esta búsqueda",
         "jogosEmAlta": "Juegos de tendencia",
         "nenhumJogoDisponivel": "No hay juegos disponibles en este momento",
-        "loginGoogle" : "Inicia sesión con la cuenta de Google."
+        "loginGoogle" : "Inicia sesión con la cuenta de Google.",
+        "computadoEm": "Calculado en:"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
