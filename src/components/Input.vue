@@ -80,18 +80,17 @@ export default {
   &__field {
     width: 100%;
     height: 56px;
-    background-color: #181818;
-    border: none;
-    outline: 0;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
+    
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.5);
     padding-left: 30px;
     
     margin-left: -20px;
+  }
+
+  &_field:focus {  
+    border: 3px solid #555;
   }
 }
 </style>

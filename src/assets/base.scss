@@ -2,6 +2,8 @@
 /* semantic color variables for this project */
 :root {
   --color-background: rgba(10, 10, 10, 1);
+  --color-primary: rgba(11, 229, 142, 1);
+  --color-text: rgb(255, 255, 255, 1);
 }
 
 // reset css
@@ -28,4 +30,23 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  background-color: #181818;
+    box-sizing: border-box;
+    border: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus {
+  border: 3px solid var(--color-primary);
 }

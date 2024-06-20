@@ -41,7 +41,8 @@ export default {
     width: 100%;
     height: 46px;
     border-radius: 8px 8px 8px 8px;
-    background: rgba(11, 229, 142, 1);
+    border: none;
+    background: var(--color-primary);
     color: rgba(10, 10, 10, 1);
     font-family: Roboto;
     font-size: 14px;

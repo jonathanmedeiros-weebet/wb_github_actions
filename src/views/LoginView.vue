@@ -34,6 +34,10 @@
         name="btn-entrar"
       />
     </div>
+    <div class="login__footer">
+        <a class="login__privacity" href="#">Política de privacidade</a>
+        <p class="login_copyright">&copyCopyright2024</p>
+      </div>
   </div>
    
 </template>
@@ -52,21 +56,25 @@ export default {
 
 <style lang="scss" scoped>
 .login {
+  justify-content: space-between;
+  
   padding: 0px 30px;
   
   &__container {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    padding-top: 88.99px;
+    padding-top: 90px;
+    min-height: 100vh;
   }
 
   &__image {
     width: 101.67px;
     height: 21.17px;
+    margin-bottom: 32px;
   }
 
   &__title {
-    color: #ffffff;
     font-size: 24px;
     font-weight: 500;
     line-height: 28.13px;
@@ -88,6 +96,30 @@ export default {
     font-weight: 400;
     line-height: 18.75px;
     text-align: left;
+  }
+
+  &__header {
+    margin-bottom: 16px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    
+  }
+
+  &__privacity {
+    text-decoration: none;    
+    color: var(--color-text);
+  }
+
+  &__copyright {
+    margin: 0px;
   }
 } 
 </style>
