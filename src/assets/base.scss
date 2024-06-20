@@ -34,19 +34,21 @@ body {
 
 input {
   background-color: #181818;
-    box-sizing: border-box;
-    border: none;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  transition: 0.5s;
+  outline: none;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -webkit-transition: 0.5s;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+    
 }
 
 input:focus {
-  border: 3px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
