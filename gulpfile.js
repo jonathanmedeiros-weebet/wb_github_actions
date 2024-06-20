@@ -1535,15 +1535,6 @@ gulp.task('profit2.bet', function (done) {
     });
 });
 
-gulp.task('lfbets.io', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "lfbets.io",
-        banca: "LF BETS",
-        styles: "",
-    });
-});
-
 gulp.task('vemprabet.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1800,15 +1791,6 @@ gulp.task('favoritao.com', function (done) {
     });
 });
 
-gulp.task('x1fortbet.vip', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "x1fortbet.vip",
-        banca: "X1 FORT BET",
-        styles: "",
-    });
-});
-
 gulp.task('085.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1884,15 +1866,6 @@ gulp.task('jogue.bet', function (done) {
     });
 });
 
-gulp.task('amazoniasports.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "amazoniasports.bet",
-        banca: "AMAZÔNIA SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('ultrabetss.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1909,15 +1882,6 @@ gulp.task('gamegol.bet', function (done) {
         banca: "GAMEGOL.BET",
         pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
         scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'><script src='//code.jivosite.com/widget/EbO2qGOScc' async></script>",
-        styles: "",
-    });
-});
-
-gulp.task('fortebets.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "fortebets.bet",
-        banca: "FORTE BETS",
         styles: "",
     });
 });
@@ -2002,16 +1966,6 @@ gulp.task('betei7.com', function (done) {
         styles: "",
         scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-01DFJHWG0L'></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-01DFJHWG0L');</script>",
         pixel:"<!-- Meta Pixel Code --><script>  !function(f,b,e,v,n,t,s)  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?  n.callMethod.apply(n,arguments):n.queue.push(arguments)};  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';  n.queue=[];t=b.createElement(e);t.async=!0;  t.src=v;s=b.getElementsByTagName(e)[0];  s.parentNode.insertBefore(t,s)}(window, document,'script',  'https://connect.facebook.net/en_US/fbevents.js');  fbq('init', '764505425455248');  fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'  src='https://www.facebook.com/tr?id=764505425455248&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
-    });
-});
-
-gulp.task('cassinowin.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "cassinowin.bet",
-        banca: "CASSINO WIN",
-        styles: "",
-        pixel: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-B8HFJV5MHV'></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-B8HFJV5MHV');</script>"
     });
 });
 
@@ -2988,15 +2942,6 @@ gulp.task('miamipix.net', function (done) {
     });
 });
 
-gulp.task('betfeijo.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "betfeijo.wee.bet",
-        banca: "BET FEIJÓ",
-        styles: ""
-    });
-});
-
 gulp.task('pixplay.io', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -3065,6 +3010,15 @@ gulp.task('stargoldbet.app', function (done) {
         server: "front2.wee.bet",
         host: "stargoldbet.app",
         banca: "STAR GOLD BET",
+        styles: ""
+    });
+});
+
+gulp.task('goalbet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "goalbet.com.br",
+        banca: "GOAL BET",
         styles: ""
     });
 });
