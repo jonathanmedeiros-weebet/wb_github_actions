@@ -66,6 +66,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+input {
+  background-color: var(--color-background-input);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  transition: 0.5s;
+  outline: none;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -webkit-transition: 0.5s;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-input);
+}
+
 .input {
   font-family: 'Roboto', sans-serif;
   display: flex;
@@ -75,7 +92,7 @@ export default {
   &__label {
     font-weight: 400;
     font-size: 16px;
-    color: #FFFFFF;
+    color: var(--color-text);
     margin-bottom: 6px;
   }
 
@@ -84,7 +101,7 @@ export default {
     align-items: center;
     margin-bottom: 16px;
     padding-left: 10px;
-    background-color: #181818;
+    background-color: var(--color-background-input);
     border-radius: 5px;
 
     &--focused {
@@ -102,10 +119,9 @@ export default {
   &__field {
     width: 100%;
     height: 56px;
-    
     font-size: 14px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--color-text-input);
     padding-left: 10px;
     
   }
