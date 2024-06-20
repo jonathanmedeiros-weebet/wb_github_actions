@@ -11,6 +11,7 @@
         label="Usuário"
         name="user_name"
         placeholder="Digite seu usuário"
+        type="email"
       >
         <template #icon>
           <img src="@/assets/images/user-line-white.png" alt="login_user_icon">
@@ -52,21 +53,25 @@ export default {
 
 <style lang="scss" scoped>
 .login {
+  justify-content: space-between;
+  
   padding: 0px 30px;
   
   &__container {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    padding-top: 88.99px;
+    padding-top: 90px;
+    min-height: 100vh;
   }
 
   &__image {
     width: 101.67px;
     height: 21.17px;
+    margin-bottom: 32px;
   }
 
   &__title {
-    color: #ffffff;
     font-size: 24px;
     font-weight: 500;
     line-height: 28.13px;
@@ -89,5 +94,10 @@ export default {
     line-height: 18.75px;
     text-align: left;
   }
+
+  &__header {
+    margin-bottom: 16px;
+  }
+
 } 
 </style>
