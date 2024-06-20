@@ -1,7 +1,7 @@
 <template>
   <div class="input">
     <label class="input__label" :for="name">{{ label }}</label>
-    <div class="input__group">
+    <div class="input__group" :class="{ 'input__group--focused': isFocused }">
       <div class="input__icon" v-if="$slots['icon']">
         <slot name="icon"></slot>
       </div>
@@ -13,6 +13,9 @@
         @input="handleInput"
         class="input__field"
         :type="type"
+        
+        @focus="handleFocus"
+        @blur="handleBlur"
       />
     </div>
   </div>
@@ -43,9 +46,20 @@ export default {
       default: ''
     }
   },
+  data() {
+    return {
+      isFocused: false,
+    };
+  },
   methods: {
     handleInput(event) {
       this.$emit('input', event.target.value)
+    },
+    handleFocus(){
+      this.isFocused = true;
+    },
+    handleBlur(){
+      this.isFocused = false;
     }
   }
 }
@@ -69,6 +83,14 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
+    padding-left: 10px;
+    background-color: #181818;
+    border-radius: 5px;
+
+    &--focused {
+      border: 2px solid var(--color-primary);
+    }
+
   }
 
   &__icon {
@@ -84,13 +106,8 @@ export default {
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.5);
-    padding-left: 30px;
+    padding-left: 10px;
     
-    margin-left: -20px;
-  }
-
-  &_field:focus {  
-    border: 3px solid #555;
   }
 }
 </style>

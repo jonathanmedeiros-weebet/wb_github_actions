@@ -49,5 +49,9 @@ export default {
     font-weight: 400;
     line-height: 16.41px;
   }
+
+  button:hover {
+    background-color: rgb(3, 181, 110);
+  }
 }
 </style>

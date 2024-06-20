@@ -11,6 +11,7 @@
         label="Usuário"
         name="user_name"
         placeholder="Digite seu usuário"
+        type="email"
       >
         <template #icon>
           <img src="@/assets/images/user-line-white.png" alt="login_user_icon">
@@ -34,10 +35,6 @@
         name="btn-entrar"
       />
     </div>
-    <div class="login__footer">
-        <a class="login__privacity" href="#">Política de privacidade</a>
-        <p class="login_copyright">&copyCopyright2024</p>
-      </div>
   </div>
    
 </template>
@@ -102,24 +99,5 @@ export default {
     margin-bottom: 16px;
   }
 
-  &__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 10px 20px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.8);
-    
-  }
-
-  &__privacity {
-    text-decoration: none;    
-    color: var(--color-text);
-  }
-
-  &__copyright {
-    margin: 0px;
-  }
 } 
 </style>
