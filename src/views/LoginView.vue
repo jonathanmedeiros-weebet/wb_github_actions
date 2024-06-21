@@ -33,8 +33,25 @@
         text="Entrar"
         value="entrar"
         name="btn-entrar"
+        @click="openModal"
       />
     </div>
+
+    <WModal v-if="isModalVisible" @close="closeModal" title="Example Modal">
+      
+      <template #title>
+        <p>Title</p>
+      </template>
+
+      <template #body>
+        <p>Item in content body</p>
+      </template>
+      
+      <template #footer>
+        <p>Footer</p>
+      </template>
+      
+    </WModal>
   </div>
    
 </template>
@@ -42,12 +59,27 @@
 <script>
 import WInput from '@/components/Input.vue'
 import WButton from '@/components/Button.vue'
+import WModal from '@/components/Modal.vue'
 export default {
   name: 'login',
   components: {
     WInput,
-    WButton 
+    WButton,
+    WModal
   },
+  data() {
+    return {
+      isModalVisible: false
+    }
+  },
+  methods: {
+    openModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    }
+  }
 }
 </script>
 
