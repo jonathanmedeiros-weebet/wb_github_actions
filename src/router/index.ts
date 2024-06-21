@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
-import HomeView from '@/views/HomeView.vue'
+import HomeView from '@/views/HomeView/HomeView.vue'
 import ValidationView from '@/views/ValidationView.vue'
 import TicketsView from '@/views/TicketsView.vue'
 import BetsView from '@/views/BetsView.vue'

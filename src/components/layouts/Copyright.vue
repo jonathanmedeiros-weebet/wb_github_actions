@@ -7,13 +7,15 @@
 
 <script>
 export default {
-  name: 'copyright',
+  name: 'w-copyright',
 }
 </script>
 
 <style lang="scss" scoped>
   .copyright {
+    width: 100%;
     display: flex;
+    justify-content: center;
     gap: 110px;
     padding: 24px;
     

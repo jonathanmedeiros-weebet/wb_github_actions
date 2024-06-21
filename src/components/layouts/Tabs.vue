@@ -24,7 +24,7 @@ import IconTicket from '../icons/IconTicket.vue'
 import IconValidation from '../icons/IconValidation.vue'
 
 export default {
-  name: 'home',
+  name: 'w-tabs',
   components: {
     RouterLink,
     IconHome,

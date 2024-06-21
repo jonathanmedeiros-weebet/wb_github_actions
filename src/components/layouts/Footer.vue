@@ -10,7 +10,7 @@ import Copyright from './Copyright.vue'
 import Tabs from './Tabs.vue'
 
 export default {
-  name: 'home',
+  name: 'w-footer',
   components: {
     Tabs,
     Copyright
