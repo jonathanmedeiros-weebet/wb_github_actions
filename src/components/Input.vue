@@ -1,7 +1,7 @@
 <template>
   <div class="input">
     <label class="input__label" :for="name">{{ label }}</label>
-    <div class="input__group">
+    <div class="input__group" :class="{ 'input__group--focused': isFocused }">
       <div class="input__icon" v-if="$slots['icon']">
         <slot name="icon"></slot>
       </div>
@@ -13,6 +13,9 @@
         @input="handleInput"
         class="input__field"
         :type="type"
+        
+        @focus="handleFocus"
+        @blur="handleBlur"
       />
     </div>
   </div>
@@ -43,15 +46,43 @@ export default {
       default: ''
     }
   },
+  data() {
+    return {
+      isFocused: false,
+    };
+  },
   methods: {
     handleInput(event) {
       this.$emit('input', event.target.value)
+    },
+    handleFocus(){
+      this.isFocused = true;
+    },
+    handleBlur(){
+      this.isFocused = false;
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
+input {
+  background-color: var(--color-background-input);
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  transition: 0.5s;
+  outline: none;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -webkit-transition: 0.5s;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-input);
+}
+
 .input {
   font-family: 'Roboto', sans-serif;
   display: flex;
@@ -61,7 +92,7 @@ export default {
   &__label {
     font-weight: 400;
     font-size: 16px;
-    color: #FFFFFF;
+    color: var(--color-text);
     margin-bottom: 6px;
   }
 
@@ -69,6 +100,14 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
+    padding-left: 10px;
+    background-color: var(--color-background-input);
+    border-radius: 5px;
+
+    &--focused {
+      border: 2px solid var(--color-primary);
+    }
+
   }
 
   &__icon {
@@ -80,18 +119,11 @@ export default {
   &__field {
     width: 100%;
     height: 56px;
-    background-color: #181818;
-    border: none;
-    outline: 0;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
     font-size: 14px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
-    padding-left: 30px;
+    color: var(--color-text-input);
+    padding-left: 10px;
     
-    margin-left: -20px;
   }
 }
 </style>

@@ -11,6 +11,7 @@
         label="Usuário"
         name="user_name"
         placeholder="Digite seu usuário"
+        type="email"
       >
         <template #icon>
           <img src="@/assets/images/user-line-white.png" alt="login_user_icon">
@@ -32,6 +33,7 @@
         text="Entrar"
         value="entrar"
         name="btn-entrar"
+        @click="handleClick"
       />
     </div>
   </div>
@@ -47,26 +49,34 @@ export default {
     WInput,
     WButton 
   },
+  methods: {
+    handleClick() {
+      this.$router.push('/home')
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .login {
+  justify-content: space-between;
+  
   padding: 0px 30px;
   
   &__container {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    padding-top: 88.99px;
+    padding-top: 90px;
   }
 
   &__image {
     width: 101.67px;
     height: 21.17px;
+    margin-bottom: 32px;
   }
 
   &__title {
-    color: #ffffff;
     font-size: 24px;
     font-weight: 500;
     line-height: 28.13px;
@@ -89,5 +99,10 @@ export default {
     line-height: 18.75px;
     text-align: left;
   }
+
+  &__header {
+    margin-bottom: 16px;
+  }
+
 } 
 </style>
