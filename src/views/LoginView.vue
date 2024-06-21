@@ -33,6 +33,7 @@
         text="Entrar"
         value="entrar"
         name="btn-entrar"
+        @click="handleClick"
       />
     </div>
   </div>
@@ -48,6 +49,11 @@ export default {
     WInput,
     WButton 
   },
+  methods: {
+    handleClick() {
+      this.$router.push('/home')
+    }
+  }
 }
 </script>
 
@@ -62,7 +68,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding-top: 90px;
-    min-height: 100vh;
   }
 
   &__image {
