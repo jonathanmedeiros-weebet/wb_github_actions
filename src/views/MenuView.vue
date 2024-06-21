@@ -1,0 +1,14 @@
+<template>
+  <div class="menu">
+    Tela Menu
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'menu',
+}
+</script>
+
+<style lang="scss" scoped>
+</style>
