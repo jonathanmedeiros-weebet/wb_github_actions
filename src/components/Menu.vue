@@ -1,46 +1,64 @@
 <template>
-  <div class="menu container">
-    <div class="menu__user-icon">
-      <img src="../assets/user-line.png" alt="User Icon">
-    </div>
-    <div class="menu__user-info">
-      <h5 class="menu__user-info__greeting">Olá,</h5>
-      <h2 class="menu__user-info__name">{{ name }}</h2>
-    </div>
-    <div class="card card--first">
-      <div class="card__close-icon" @click="toggleModal">&times;</div>
-      <div class="card__content">
-        <p class="card__label">Crédito</p>
-        <div class="card__balance">
-          <h2 class="card__balance__value">R$ {{ showCredito ? credito : '********' }}</h2>
-          <span class="card__eye-icon" @click="toggleCreditoVisibility">
-            <i class="far" :class="showCredito ? 'fa-eye' : 'fa-eye-slash'" style="color: rgba(255, 255, 255, 0.5);"></i>
-          </span>
-        </div>
-        <p class="card__label">Saldo</p>
-        <div class="card__balance">
-          <h2 class="card__balance__value">R$ {{ showSaldo ? saldo : '********' }}</h2>
-          <span class="card__eye-icon" @click="toggleSaldoVisibility">
-            <i class="far" :class="showSaldo ? 'fa-eye' : 'fa-eye-slash'" style="color: rgba(255, 255, 255, 0.5);"></i>
-          </span>
-        </div>
-        <div class="card__button-group">
-          <button class='card__button card__button--dash'><img src="../assets/dashboard.png" alt="">Dashboard</button>
-          <button class='card__button card__button--consulta'><img src="../assets/consultar.png" alt="">Consultar Bilhete</button>
-          <button class='card__button'>Apuração</button>
+  <div class="menu">
+    <section class="menu__container">
+      <div class="user-info">
+        <img class="user-info__icon" src="../assets/user-line.png" alt="User Icon">
+        <div class="user-info__welcome">
+          <span class="user-info__greeting">Olá,</span>
+          <span class="user-info__name">{{ name }}</span>
         </div>
       </div>
-    </div>
-    <div class="menu__options-container">
-      <h4 class="menu__option-text">Mais opções</h4>
-    </div>
-    <div class="card card--second">
-      <button class="card__second__button"><img src="../assets/movimentacoes.png" alt="">Movimentações</button>
-      <button class="card__second__button"><img src="../assets/alterar.png" alt="">Alterar senha</button>
-      <button class="card__second__button"><img src="../assets/configuracoes.png" alt="">Configurações</button>
-      <button class="card__second__button"><img src="../assets/resultados.png" alt="">Resultados</button>
-      <button class="card__second__button"><img src="../assets/sair.png" alt="">Sair</button>
-    </div>
+      <div class="wallet">
+        <div class="wallet__item">
+          <p class="wallet__label">Crédito</p>
+          <span class="wallet__value">
+            R$ {{ isCreditoVisible ? credito : '*******' }}
+            <i class="fas fa-eye wallet__icon" @click="toggleCreditoVisibility"></i>
+          </span>
+        </div>
+
+        <div class="wallet__item">
+          <p class="wallet__label">Saldo</p>
+          <span class="wallet__value">
+            R$ {{ isSaldoVisible ? saldo : '*******' }}
+            <i class="fas fa-eye wallet__icon" @click="toggleSaldoVisibility"></i>
+          </span>
+        </div>
+
+        <div class="wallet__shortcuts">
+          <button class="wallet__button wallet__button--dash">
+            <img src="../assets/dashboard.png" alt="Dashboard Icon">Dashboard
+          </button>
+          <button class="wallet__button wallet__button--consulta">
+            <img src="../assets/consultar.png" alt="Consultar Bilhete Icon">Consultar Bilhete
+          </button>
+          <button class="wallet__button">
+            <img src="../assets/consultar.png" alt="Apuração Icon">Apuração
+          </button>
+        </div>
+      </div>
+
+      <div class="more-options">
+        <span class="more-options__text">Mais opções</span>
+        <div class="card">
+          <button class="more-options__item">
+            <img src="../assets/movimentacoes.png" alt="Movimentações Icon"> Movimentações
+          </button>
+          <button class="more-options__item">
+            <img src="../assets/alterar.png" alt="Alterar senha Icon"> Alterar senha
+          </button>
+          <button class="more-options__item">
+            <img src="../assets/configuracoes.png" alt="Configurações Icon"> Configurações
+          </button>
+          <button class="more-options__item">
+            <img src="../assets/resultados.png" alt="Resultados Icon"> Resultados
+          </button>
+          <button class="more-options__item">
+            <img src="../assets/sair.png" alt="Sair Icon"> Sair
+          </button>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -52,27 +70,19 @@ export default {
       name: "Marcos Felipe",
       credito: "850,00",
       saldo: "17,58",
-      showCredito: false,
-      showSaldo: false
+      isCreditoVisible: false,
+      isSaldoVisible: false
     };
   },
   methods: {
     toggleCreditoVisibility() {
-      this.showCredito = !this.showCredito;
-      if (this.showCredito) {
-        this.credito = "850,00";
-      } else {
-        this.credito = "********";
-      }
+      console.log('Toggling Credito Visibility');
+      this.isCreditoVisible = !this.isCreditoVisible;
     },
     toggleSaldoVisibility() {
-      this.showSaldo = !this.showSaldo;
-      if (this.showSaldo) {
-        this.saldo = "17,58";
-      } else {
-        this.saldo = "********";
-      }
-    },
+      console.log('Toggling Saldo Visibility');
+      this.isSaldoVisible = !this.isSaldoVisible;
+    }
   }
 }
 </script>
@@ -89,47 +99,48 @@ body {
   position: relative;
 }
 
-.container {
+.menu__container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 5px;
+  margin-top: 32px;
 }
 
 .menu {
   color: #ffffff;
 }
 
-.menu__user-icon {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 5px;
-  width: 16px;
-  height: 25px;
-  gap: 0px;
-  opacity: 0px;
-  margin-top: 20px;
-  font-size: 24px;
-  border-radius: 50%;
+.user-info {
+  display: flex;
+  align-items: center;
 }
 
-.menu__user-info {
-  position: absolute;
-  top: 10px;
-  left: 68px;
+.user-info__icon {
+  position: relative;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.user-info__welcome {
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
-.menu__user-info__greeting {
-  margin-bottom: -18px;
-  opacity: 0.5;
+.user-info__greeting {
+  opacity: 0.7;
 }
 
-.card {
+.user-info__name {
+  font-size: 20px;
+}
+
+.wallet {
   position: fixed;
   font-family: 'Poppins', sans-serif;
-  width: 350px;
-  height: 227px;
+  width: 350px; 
+  height: 200px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #181818;
@@ -139,145 +150,95 @@ body {
   z-index: 1000;
 }
 
-.card--first {
-  top: 120px; 
+.wallet__item {
+  margin-bottom: 30px;
 }
 
-.card__close-icon {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  opacity: 0;
-}
-
-.card__close-icon:hover {
-  opacity: 1;
-}
-
-.card__content h2 {
-  color: #ffffff;
-  margin-top: -5px;
-}
-
-.card__content p {
-  color: #ffffff;
+.wallet__label {
   margin-top: 2px;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
   opacity: 0.5;
+  margin-bottom: 11px;
 }
 
-.card__button-group {
+.wallet__value {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px; 
+}
+
+.wallet__icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: gray;
+  opacity: 0.6;
+}
+
+.wallet__shortcuts {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  
 }
 
-.card__button {
+.wallet__button {
   display: flex;
   align-items: center;
   font-family: 'Roboto', sans-serif;
-  padding: 10px 20px;
+  padding: 13px 7px;
+  gap: 3px;
   background-color: #ffffff;
   border: none;
-  border-radius: 25px;
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  margin-right: 10px;
+  border-radius: 18px;
+  color: rgb(0, 0, 0); 
 }
 
-.card__button:last-child {
-  margin-right: 0;
+.more-options {
+  margin-top: 250px;
+  padding: 20px;
 }
 
-.card__eye-icon {
-  cursor: pointer;
-  margin-top: -30px;
-}
-
-.card__button--dash {
-  display: flex;
-  align-items: center;
-  padding: 13px 7px;
-  gap: 2px;
-  opacity: 1;
-}
-
-.card__button--consulta {
-  display: flex;
-  align-items: center;
-  padding: 13px 7px;
-  gap: 2px;
-  opacity: 1;
-}
-
-.card__button--dash img {
-  width: 12.5px;
-  height: 12.5px;
-  margin-right: 5px;
-}
-
-.card__balance {
-  display: flex;
-  align-items: center;
-}
-
-.card__balance__value {
-  margin-right: 10px;
-}
-
-.menu__options-container {
-  position: fixed;
-  top: 390px;
-  left: 18%;
-  transform: translateX(-50%);
-  z-index: 1001; 
-  text-align: center;
-}
-
-.menu__option-text {
+.more-options__text {
   color: #ffffff;
-  font-size: 18px; 
+  font-size: 24px; 
   font-family: 'Roboto', sans-serif;
 }
 
-.card--second {
+
+.card {
+  margin-top: 30px;
   position: fixed;
-  top: 450px; 
+  font-family: 'Poppins', sans-serif;
+  width: 346px; 
+  height: 226px;
   left: 50%;
   transform: translateX(-50%);
-  width: 350px;
   background-color: #181818;
-  padding: 20px; 
+  padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  height: 174px;
-  z-index: 1000;
 }
 
-.card__second__button {
+
+.more-options__item {
   display: flex;
-  align-items: center; 
   background: none;
   border: none;
   color: inherit;
   font: inherit;
-  cursor: pointer;
-  margin-top: -15px; 
+  margin-top: -8px; 
   font-family: 'Roboto', sans-serif;
   text-align: left;
   padding-left: 0; 
-  padding-top: 23px; 
+  padding-top: 12px;
+  height: 56px;
 }
 
-.card__second__button img {
+.more-options__item img {
   margin-right: 18px;
   width: 14px;
   height: 18px;
 }
 
-.card__second__button:hover {
-  text-decoration: underline;
-}
 </style>
