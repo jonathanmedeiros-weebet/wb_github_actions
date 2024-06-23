@@ -45,6 +45,14 @@
 
       <template #body>
         <p>Item in content body</p>
+        <p>Item in content body</p>
+        <p>Item in content body</p>
+        <p>Item in content body</p>
+        <p>Item in content body</p>
+        <p>Item in content body</p>
+        <p>Item in content body</p>
+        <p>Item in content body</p>
+        
       </template>
       
       <template #footer>

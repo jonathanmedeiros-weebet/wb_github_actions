@@ -1,7 +1,14 @@
 <template>
   <div class="modal-overlay" @click.self="close">
     <div class="modal">
-      <div class="modal__element"></div>
+      <div class="modal_icons">
+        <button class="modal__btnclose" @click="close">
+          <icon-close
+          color="var(--color-text-input)"
+          />
+        </button>
+        <div class="modal__element"></div>
+      </div>
       <div class="modal__header" v-if="$slots['title']">
         <slot name="title"></slot>
       </div>
@@ -16,8 +23,13 @@
 </template>
   
 <script>
+import IconClose from "@/components/icons/IconClose.vue";
+
 export default {
   name: 'w-modal',
+  components: { 
+    IconClose 
+  },
   methods: {
     close() {
       this.$emit('close');
@@ -41,31 +53,49 @@ export default {
   z-index: 3;
   overflow: hidden;
   transition: transform 0.5s ease-out;
+  
 }
   
 .modal {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
   background: var(--color-background-input);
-  padding: 20px;
-  border-radius: 5px;
+  
+  border-radius: 24px 24px 0px 0px;
   width: 100%;
   height: auto;
   max-height: 90%;
-  border-radius: 10px;
-  overflow-y: auto;
   
- 
-  &__element {
+  overflow-y: auto;
+
+  &_icons {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+  }
+  
+  &__element {
+    margin-left: auto;
+    margin-right: auto;
     background-color: var(--color-background);
     width: 49px;
     height: 5px;
     gap: 10px;
     border-radius: 10px;
+  }
+
+  &__btnclose {
+    display: flex;
+    align-items: center;  /* Centraliza verticalmente */
+    justify-content: center; 
+    background-color: var(--color-background-input);
+    color: var(--color-text-input);
+    border: none;
+    font-size: 15px;
+    margin-left: auto;
+    margin-bottom: -10px;
+    padding-top: 7px; 
+    padding-right: 20px; 
   }
 
   &__header {
@@ -83,6 +113,8 @@ export default {
   &__body {
     text-align: center;
   }
+
+  
 }
 
 </style>
