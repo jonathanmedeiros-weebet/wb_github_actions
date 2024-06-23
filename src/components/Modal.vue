@@ -1,8 +1,8 @@
 <template>
-  <div class="modal-overlay" @click.self="close">
-    <div class="modal">
+  <div class="modal-overlay" @click.self="handleBackdropClick">
+    <div ref="modal" class="modal">
       <div class="modal_icons">
-        <button class="modal__btnclose" @click="close">
+        <button class="modal__btnclose" @click="handleClose">
           <icon-close
           color="var(--color-text-input)"
           />
@@ -30,8 +30,49 @@ export default {
   components: { 
     IconClose 
   },
+  props: {
+    backdropClick: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      touchStartPageY: 0,
+      modalHeightLimit: 0,
+      modalHeight: 0
+    }
+  },
+  mounted() {
+    const modalRef = this.$refs['modal'];
+    modalRef.addEventListener('touchstart', (e) => {
+      this.touchStartPageY = e.changedTouches[0].pageY;
+      this.modalHeight = e.target.clientHeight;
+      this.modalHeightLimit = this.modalHeight - 50;
+    });
+
+    modalRef.addEventListener('touchmove', (e) => {
+      const touchMovePageY = e.changedTouches[0].pageY;
+
+      const modalMoveY = touchMovePageY - this.touchStartPageY;
+      modalRef.style.marginBottom = `-${modalMoveY.toFixed(2)}px`;
+
+      const modalHeightObserver = this.modalHeightLimit - (touchMovePageY - this.touchStartPageY);
+      if(modalHeightObserver <= 0) {
+        this.handleClose();
+      }
+    });
+
+    modalRef.addEventListener('touchend', (e) => {
+      modalRef.style.marginBottom = 0;
+    });
+  },
   methods: {
-    close() {
+    handleBackdropClick() {
+      if(!this.backdropClick) return;
+      this.handleClose();
+    },
+    handleClose() {
       this.$emit('close');
     }
   }
@@ -61,7 +102,6 @@ export default {
   flex-direction: column;
   gap: 20px;
   background: var(--color-background-input);
-  
   border-radius: 24px 24px 0px 0px;
   width: 100%;
   height: auto;
@@ -113,8 +153,6 @@ export default {
   &__body {
     text-align: center;
   }
-
-  
 }
 
 </style>
