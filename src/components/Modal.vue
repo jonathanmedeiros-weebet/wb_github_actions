@@ -1,6 +1,6 @@
 <template>
-  <div class="modal-overlay" @click.self="close">
-    <div class="modal">
+  <div class="modal-overlay" @click.self="handleBackdropClick">
+    <div ref="modal" class="modal">
       <div class="modal__element"></div>
       <div class="modal__header" v-if="$slots['title']">
         <slot name="title"></slot>
@@ -18,8 +18,49 @@
 <script>
 export default {
   name: 'w-modal',
+  props: {
+    backdropClick: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      touchStartPageY: 0,
+      modalHeightLimit: 0,
+      modalHeight: 0
+    }
+  },
+  mounted() {
+    const modalRef = this.$refs['modal'];
+    modalRef.addEventListener('touchstart', (e) => {
+      this.touchStartPageY = e.changedTouches[0].pageY;
+      this.modalHeight = e.target.clientHeight;
+      this.modalHeightLimit = this.modalHeight - 50;
+    });
+
+    modalRef.addEventListener('touchmove', (e) => {
+      const touchMovePageY = e.changedTouches[0].pageY;
+
+      const modalMoveY = touchMovePageY - this.touchStartPageY;
+      modalRef.style.marginBottom = `-${modalMoveY.toFixed(2)}px`;
+
+      const modalHeightObserver = this.modalHeightLimit - (touchMovePageY - this.touchStartPageY);
+      if(modalHeightObserver <= 0) {
+        this.handleClose();
+      }
+    });
+
+    modalRef.addEventListener('touchend', (e) => {
+      modalRef.style.marginBottom = 0;
+    });
+  },
   methods: {
-    close() {
+    handleBackdropClick() {
+      if(!this.backdropClick) return;
+      this.handleClose();
+    },
+    handleClose() {
       this.$emit('close');
     }
   }
