@@ -2977,3 +2977,12 @@ gulp.task('goalbet.com.br', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sortegol.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sortegol.com",
+        banca: "SORTE GOL",
+        styles: ""
+    });
+});
