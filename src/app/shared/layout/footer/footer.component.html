@@ -119,7 +119,7 @@
 
         <div class="btn-group language-dropdown hide-desktop" ngbDropdown>
             <button class="btn" type="button" id="dropdownLanguage" ngbDropdownToggle>
-                <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : 'flag-icon-us'}} flag-icon-squared"></span>
+                <span class="flag-icon {{getLanguageIconClass()}} flag-icon-squared"></span>
                 {{'geral.selecionarIdioma' | translate}}
             </button>
             <div class="language-dropdown-menu" aria-labelledby="dropdownLanguage" ngbDropdownMenu>
@@ -131,11 +131,20 @@
                     <span class="flag-icon flag-icon-us flag-icon-squared"></span>
                     {{'geral.ingles' | translate}}
                 </a>
+
+                <a class="m-2 p-0 dropdown-item" (click)="alterarLinguagem('es')">
+                    <span class="flag-icon flag-icon-es flag-icon-squared"></span>
+                    {{'geral.espanhol' | translate}}
+                </a>
             </div>
         </div>
 
         <div class="info copyright" style="margin-top: 20px; margin-bottom: 0">
             <small>{{'footer.todosOsDireitosReservados' | translate:{'BANCA_NOME': BANCA_NOME} }}</small>
+        </div>
+
+        <div class="info small">
+            {{'geral.versao' | translate}} 2.23
         </div>
     </div>
 </footer>
