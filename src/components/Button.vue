@@ -5,6 +5,7 @@
       :value="value"
       type="button"
       class="button__item"
+      @click="handleClick"
     >
       {{text}}
     </button>
@@ -28,8 +29,8 @@ export default {
     }
   },
   methods: {
-    login(){
-      alert('login');
+    handleClick(){
+      this.$emit('click', this.value);
     }
   }
 }
@@ -44,7 +45,6 @@ export default {
     border: none;
     background: var(--color-primary);
     color: rgba(10, 10, 10, 1);
-    font-family: Roboto;
     font-size: 14px;
     font-weight: 400;
     line-height: 16.41px;

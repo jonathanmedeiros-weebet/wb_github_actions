@@ -30,10 +30,10 @@
               <icon-password/>
           </template>
           <template #icon-right>          
-            <icon-visibility v-if="showPassword" @click="passWordVisible()"
+            <icon-visibility v-if="showPassword" @click="passWordVisible"
             color="var(--color-text-input)"
             />
-            <icon-visibility-off v-if="!showPassword" @click="passWordVisible()"
+            <icon-visibility-off v-if="!showPassword" @click="passWordVisible"
             color="var(--color-text-input)"
             />
           </template>
@@ -43,7 +43,7 @@
           text="Entrar"
           value="entrar"
           name="btn-entrar"
-          @click="openModal"
+          @click="handleClick"
         />
       </form>
     </div>
@@ -111,6 +111,9 @@ export default {
     },
     passWordVisible() {
       this.showPassword = !this.showPassword;
+    },
+    handleClick() {
+      this.$router.push('/home')
     }
   },
   computed: {
@@ -132,7 +135,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding-top: 90px;
-    min-height: 100vh;
   }
 
   &__image {
