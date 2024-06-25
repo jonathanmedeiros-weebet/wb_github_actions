@@ -1,17 +1,16 @@
 <template>
-    <div class="tabs">
-        <RouterLink
-            class="tabs__item"
-            activeClass="tabs__item--actived"
-            v-slot="{ isActive }"
-            v-for="tab in tabs"
-            :key="tab.name"
-            :to="tab.route"
-        >
-            <component :is="tab.icon" :color="isActive ? '#0be58e' : '#ffffff80'"/>
-            {{ tab.name }}
-        </RouterLink>
-    </div>
+  <div class="tabs">
+    <RouterLink
+      class="tabs__item"
+      active-class="tabs__item--actived"
+      v-for="tab in tabs"
+      :key="tab.name"
+      :to="tab.route"
+    >
+      <component :is="tab.icon" :color="tab.actived ? '#0be58e' : '#ffffff80'"/>
+      {{ tab.name }}
+    </RouterLink>
+  </div>
 </template>
 
 <script>
@@ -33,40 +32,45 @@ export default {
     IconArticle,
     IconMenu
   },
-  data() {
-    return {
-      tabs: [
+  computed: {
+    tabs() {
+      return [
         {
           icon: IconHome,
           name: 'Home',
           route: '/home',
-          actived: false
+          actived: this.verifyIfRouteIsActived('/home')
         },
         {
           icon: IconValidation,
           name: 'Validação',
           route: '/validation',
-          actived: false
+          actived: this.verifyIfRouteIsActived('/validation')
         },
         {
           icon: IconTicket,
           name: 'Bilhete',
           route: '/tickets',
-          actived: false
+          actived: this.verifyIfRouteIsActived('/tickets')
         },
         {
           icon: IconArticle,
           name: 'Apostas',
           route: '/bets',
-          actived: false
+          actived: this.verifyIfRouteIsActived('/bets')
         },
         {
           icon: IconMenu,
           name: 'Menu',
           route: '/menu',
-          actived: false
+          actived: this.verifyIfRouteIsActived('/menu')
         }
       ]
+    }
+  },
+  methods: {
+    verifyIfRouteIsActived(routerName) {
+      return this.$route.path === routerName
     }
   }
 }

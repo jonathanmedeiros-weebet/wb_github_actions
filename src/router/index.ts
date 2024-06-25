@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
 import ValidationView from '@/views/ValidationView.vue'
@@ -7,9 +7,8 @@ import BetsView from '@/views/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 
-
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+const router = new VueRouter({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -48,5 +47,4 @@ const router = createRouter({
     },
   ]
 })
-
 export default router

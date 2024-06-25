@@ -1,1 +1,1 @@
-export * from './modalities.enum.ts'
+export * from './modalities.enum'
