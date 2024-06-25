@@ -1,79 +1,97 @@
 <template>
-	 <div class="menu">
-		<section class="menu__container">
-			<div class="user-info">
-				<img class="user-info__icon" src="../assets/images/user-line.png" alt="User Icon">
-				<div class="user-info__welcome">
-					<span class="user-info__greeting">Olá,</span>
-					<span class="user-info__name">{{ name }}</span>
-				</div>
-			</div>
-<!--       
-			<div class="wallet">
-				<div class="wallet__item">
-					<p class="wallet__label">Crédito</p>
-					<span class="wallet__value">
-						R$ {{ isCreditoVisible ? credito : '*******' }}
-            <IconEye />
-					</span>
-				</div>
+  <div class="menu">
+    <section class="menu__container">
+      <div class="user-info">
+        <img class="user-info__icon" src="../assets/images/user-line.png" alt="User Icon">
+        <div class="user-info__welcome">
+          <span class="user-info__greeting">Olá,</span>
+          <span class="user-info__name">{{ name }}</span>
+        </div>
+      </div>
 
-				<div class="wallet__item">
-					<p class="wallet__label">Saldo</p>
-					<span class="wallet__value">
-						R$ {{ isSaldoVisible ? saldo : '*******' }}
-            <IconEye />
-					</span>
-				</div>
+      <div class="wallet">
+        <div class="wallet__item">
+          <p class="wallet__label">Crédito</p>
+          <span class="wallet__value">
+            R$ {{ isCreditoVisible ? credito : '*******' }}
+            <IconEye class="wallet__eye" @click="toggleCreditoVisibility" />
+          </span>
+        </div>
 
-				<div class="wallet__shortcuts">
-					<button class="wallet__button wallet__button--dash">
-						<img src="../assets/dashboard.png" alt="Dashboard Icon">Dashboard
-					</button>
-					<button class="wallet__button wallet__button--consulta">
-						<img src="../assets/consultar.png" alt="Consultar Bilhete Icon">Consultar Bilhete
-					</button>
-					<button class="wallet__button">
-						<img src="../assets/consultar.png" alt="Apuração Icon">Apuração
-					</button>
-				</div>
-			</div>
+        <div class="wallet__item">
+          <p class="wallet__label">Saldo</p>
+          <span class="wallet__value">
+            R$ {{ isSaldoVisible ? saldo : '*******' }}
+            <IconEye class="wallet__eye" @click="toggleSaldoVisibility" />
+          </span>
+        </div>
 
-			<div class="more-options">
-				<span class="more-options__text">Mais opções</span>
-				<div class="card">
-					<button class="more-options__item">
-						<img src="../assets/movimentacoes.png" alt="Movimentações Icon"> Movimentações
-					</button>
-					<button class="more-options__item">
-						<img src="../assets/alterar.png" alt="Alterar senha Icon"> Alterar senha
-					</button>
-					<button class="more-options__item">
-						<img src="../assets/configuracoes.png" alt="Configurações Icon"> Configurações
-					</button>
-					<button class="more-options__item">
-						<img src="../assets/resultados.png" alt="Resultados Icon"> Resultados
-					</button>
-					<button class="more-options__item">
-						<img src="../assets/sair.png" alt="Sair Icon"> Sair
-					</button>
-				</div>
-			</div> -->
-		</section>
-	</div>
+        <div class="wallet__shortcuts">
+          <button class="wallet__button wallet__button--dash">
+            <IconInsertChart class="wallet__icon" />
+            Dashboard
+          </button>
+          <button class="wallet__button wallet__button--consulta">
+            <IconManageSearch class="wallet__icon" />
+            Consultar Bilhete
+          </button>
+          <button class="wallet__button">
+            <IconFactCheck class="wallet__icon" />
+            Apuração
+          </button>
+        </div>
+      </div>
+
+      <div class="more-options">
+        <span class="more-options__text">Mais opções</span>
+        <div class="more-options__card">
+          <button class="more-options__item">
+            <IconMoney class="more-options__icon" />
+            Movimentações
+          </button>
+          <button class="more-options__item">
+            <IconPassKey class="more-options__icon" />
+            Alterar senha
+          </button>
+          <button class="more-options__item">
+            <IconSettings class="more-options__icon" />
+            Configurações
+          </button>
+          <button class="more-options__item">
+            <IconFactCheck class="more-options__icon" />
+            Resultados
+          </button>
+          <button class="more-options__item">
+            <IconLogout class="more-options__icon" />
+            Sair
+          </button>
+        </div>
+      </div> 
+    </section>
+  </div>
 </template>
 
 <script>
 import IconEye from '@/components/icons/IconEye.vue';
+import IconMoney from '@/components/icons/IconMoney.vue';
+import IconSettings from '@/components/icons/IconSettings.vue';
+import IconLogout from '@/components/icons/IconLogout.vue';
+import IconPassKey from '@/components/icons/IconPassKey.vue';
+import IconFactCheck from '@/components/icons/IconFactCheck.vue';
+import IconManageSearch from '@/components/icons/IconManageSearch.vue';
+import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 
 export default {
-  components: { IconEye },
+  components: {
+    IconEye, IconMoney, IconSettings, IconLogout, 
+    IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart
+  },
   name: 'menu',
   data() {
     return {
       name: "Marcos Felipe",
       credito: "850,00",
-      saldo: "17,58",
+      saldo: "18.258,00",
       isCreditoVisible: false,
       isSaldoVisible: false
     };
@@ -91,16 +109,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
 
+<style lang="scss" scoped>
 .menu {
   color: #ffffff;
 
   &__container {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    padding-top: 80px;
+    padding-top: 70px;
   }
 }
 
@@ -135,109 +152,111 @@ export default {
   }
 }
 
-// .wallet {
-//   position: fixed;
-//   font-family: 'Poppins', sans-serif;
-//   width: 350px; 
-//   height: 200px;
-//   left: 50%;
-//   transform: translateX(-50%);
-//   background-color: #181818;
-//   padding: 20px;
-//   border-radius: 10px;
-//   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-//   z-index: 1000;
-// }
+.wallet {
+  position: fixed;
+  width: 350px;
+  height: 227px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #181818;
+  border-radius: 10px;
+  padding: 22px 18px 22px 18px;
+  gap: 29px;
+  padding-top: 16px;
+  margin-top: 25px;
 
-// .wallet__item {
-//   margin-bottom: 30px;
-// }
+  &__item {
+    margin-bottom: 15px;
+  }
 
-// .wallet__label {
-//   margin-top: 2px;
-//   font-family: 'Poppins', sans-serif;
-//   color: #ffffff;
-//   opacity: 0.5;
-//   margin-bottom: 11px;
-// }
+  &__label {
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    opacity: 0.5;
+    margin-bottom: 8px;
+    font-size: 13px; 
+  }
 
-// .wallet__value {
-//   display: flex;
-//   align-items: center;
-//   color: #ffffff;
-//   font-family: 'Poppins', sans-serif;
-//   font-size: 18px; 
-// }
+  &__value {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-size: 20px; 
+  }
 
-// .wallet__icon {
-//   margin-left: 10px;
-//   cursor: pointer;
-//   color: gray;
-//   opacity: 0.6;
-// }
+  &__eye {
+    margin-left: 15px;
+    cursor: pointer;
+    color: #ffffff80;
+    opacity: 0.5;
+  }
 
-// .wallet__shortcuts {
-//   display: flex;
-//   justify-content: space-between;
-  
-// }
+  &__shortcuts {
+    display: flex;
+    justify-content: space-between;
+  }
 
-// .wallet__button {
-//   display: flex;
-//   align-items: center;
-//   font-family: 'Roboto', sans-serif;
-//   padding: 13px 7px;
-//   gap: 3px;
-//   background-color: #ffffff;
-//   border: none;
-//   border-radius: 18px;
-//   color: rgb(0, 0, 0); 
-// }
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 18px;
+    color: rgb(0, 0, 0); 
+    padding: 10px 10px;
+    gap: 1px;
+    opacity: 0px;
+    white-space: nowrap;
+    font-size: 10px;
+  }
 
-// .more-options {
-//   margin-top: 250px;
-//   padding: 20px;
-// }
+  &__icon {
+    fill: #181818;
+  }
+}
 
-// .more-options__text {
-//   color: #ffffff;
-//   font-size: 24px; 
-//   font-family: 'Roboto', sans-serif;
-// }
+.more-options {
+  margin-top: 255px;
+  padding: 14px;
 
+  &__text {
+    color: #ffffff;
+    font-size: 16px; 
+  }
 
-// .card {
-//   margin-top: 30px;
-//   position: fixed;
-//   font-family: 'Poppins', sans-serif;
-//   width: 346px; 
-//   height: 226px;
-//   left: 50%;
-//   transform: translateX(-50%);
-//   background-color: #181818;
-//   padding: 20px;
-//   border-radius: 10px;
-// }
+  &__card {
+    position: fixed;
+    width: 346px; 
+    margin-top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #181818;
+    padding: 20px;
+    padding-top: 8px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+  }
 
+  &__item {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: inherit;
+    padding-top: 10px;    
+    font-size: 14px;
+  }
 
-// .more-options__item {
-//   display: flex;
-//   background: none;
-//   border: none;
-//   color: inherit;
-//   font: inherit;
-//   margin-top: -8px; 
-//   font-family: 'Roboto', sans-serif;
-//   text-align: left;
-//   padding-left: 0; 
-//   padding-top: 12px;
-//   height: 56px;
-// }
+  &__icon {
+    margin-left: -10px;
+    margin-right: 10px;
+  }
+}
 
-// .more-options__item img {
-//   margin-right: 18px;
-//   width: 14px;
-//   height: 18px;
-// }
 
 </style>
