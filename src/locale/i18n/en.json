@@ -104,6 +104,8 @@
         "selecionarTodos": "Select all",
         "selecionarTodosDe": "Select all from",
         "validarAposta": "Validate Bet",
+        "replicarApostaLoteria": "Replicate Bet Lottery",
+        "replicarAposta": "Replicate Bet",
         "codigoAposta": "Bet Code",
         "codigoPreAposta": "Pre-bet Code",
         "totalDeJogos": "Total games",
