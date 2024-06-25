@@ -213,6 +213,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
                 let inserirCampeonato = false;
 
+                if (jogo.sport_id == 1) {
+                    jogo.sport_id = SOCCER_ID;
+                }
+
                 jogo.cotacoes.map(cotacao => {
                     cotacao.nome = this.helperService.apostaTipoLabelCustom(
                         cotacao.chave,
@@ -402,8 +406,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             lock: false
         });
 
-        if (sportId === 1) {
-            mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[1]['empate']) ?? {
+        if (sportId === SOCCER_ID) {
+            mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[sportId]['empate']) ?? {
                 nome: 'Empate',
                 lock: true
             });
