@@ -39,11 +39,6 @@
             <i class="fa-solid fa-check"></i> {{'geral.validacao' | translate}}
         </a>
     </div>
-    <div class="bottom-bar-button" *ngIf="isLoggedIn && !isCliente">
-        <a (click)="abrirCopiarAposta()">
-            <i class="fa-solid fa-copy"></i> {{'geral.replicarAposta' | translate}}
-        </a>
-    </div>
     <div class="bottom-bar-button">
         <a (click)="toggleApostas()">
             <i class="ri ri-file-list-3-line"></i> {{'geral.apostas' | translate}}
