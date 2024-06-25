@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     showTabs() {
-      return !['/', '/login'].includes(this.$router.currentRoute.value.fullPath)
+      return !['/', '/login', '/change-password'].includes(this.$router.currentRoute.value.fullPath)
     },
     showCopyright() {
       return ['/', '/login'].includes(this.$router.currentRoute.value.fullPath)
