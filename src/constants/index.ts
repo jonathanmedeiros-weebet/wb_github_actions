@@ -1,1 +1,1 @@
-export * from './modalities.constant.ts'
+export * from './modalities.constant'
