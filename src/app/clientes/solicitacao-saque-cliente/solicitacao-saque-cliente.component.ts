@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ClienteService } from '../../shared/services/clientes/cliente.service';
@@ -8,6 +8,7 @@ import { FinanceiroService } from '../../shared/services/financeiro.service';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
 import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
 import { AuthService, LayoutService, SidebarService } from 'src/app/services';
+import { LegitimuzService } from '../../shared/services/legitimuz.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClientePerfilModalComponent, ClientePixModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,8 +21,11 @@ import { Subject } from 'rxjs';
     templateUrl: './solicitacao-saque-cliente.component.html',
     styleUrls: ['./solicitacao-saque-cliente.component.css']
 })
-export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnDestroy {
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+
     unsub$ = new Subject();
+    unsubLegitimuz$ = new Subject();
     cliente: Cliente;
     modalRef;
 
@@ -34,6 +38,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     paymentMethodSelected = '';
     errorMessage;
     selectedKeyType = 'cpf';
+    currentLanguage = 'pt';
+    token = '';
 
     valorMinSaque;
     valorMaxSaqueDiario;
@@ -48,6 +54,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     isMobile = false;
     permitirQualquerChavePix = false;
     submitting;
+    legitimuzEnabled = false;
+    legitimuzToken = "";
+    verifiedIdentity = false;
+    disapprovedIdentity = false;
+
+    public valuesShortcuts: number[] = [10, 20, 50, 75, 100, 200];
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -65,7 +77,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private cd: ChangeDetectorRef,
         private el: ElementRef,
         private layoutService: LayoutService,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private legitimuzService: LegitimuzService
     ) {
         super();
     }
@@ -79,6 +92,22 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         }
 
         this.getRollovers();
+
+        this.currentLanguage = this.translate.currentLang;
+
+        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.legitimuzEnabled = Boolean(this.paramsLocais.getOpcoes().legitimuz_enabled && this.legitimuzToken);
+
+        if (this.legitimuzEnabled) {
+            this.token = this.auth.getToken();
+        }
+
+        this.translate.onLangChange.subscribe(change => {
+            this.currentLanguage = change.lang;
+            if (this.legitimuzEnabled) {
+                this.legitimuzService.changeLang(change.lang);
+            }
+        });
 
         this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
         this.paymentMethodSelected = this.availablePaymentMethods[0];
@@ -108,6 +137,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 res => {
                     this.cliente = res;
 
+                    this.verifiedIdentity = res.verifiedIdentity;
+                    this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
                     this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
@@ -135,6 +167,33 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.headerHeight = curHeaderHeight;
                     this.changeHeight();
                     this.cd.detectChanges();
+                });
+        }
+
+        if (this.legitimuzEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    this.cd.detectChanges();
+                    if (this.verifiedIdentity) {
+                        this.legitimuzService.closeModal();
+                        this.messageService.success('Identidade verificada!');
+                    }
+                });
+        }
+    }
+
+    ngAfterViewInit() {
+        if (this.legitimuzEnabled && !this.disapprovedIdentity) {
+            this.legitimuz.changes
+                .pipe(takeUntil(this.unsubLegitimuz$))
+                .subscribe(() => {
+                    this.legitimuzService.init();
+                    this.legitimuzService.mount();
+
+                    this.unsubLegitimuz$.next();
+                    this.unsubLegitimuz$.complete();
                 });
         }
     }
@@ -173,7 +232,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     changeAmount(amount) {
-        this.form.patchValue({ 'valor': amount });
+        const newAmount = this.form.value.valor + amount;
+        this.form.patchValue({ 'valor': newAmount});
     }
 
     handleError(error: string) {

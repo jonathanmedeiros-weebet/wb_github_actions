@@ -5,6 +5,7 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SharedModule } from './shared/shared.module';
 
 import ptBr from '@angular/common/locales/pt';
 
@@ -94,6 +95,7 @@ export function googleFactory(service: ParametrosLocaisService) {
             timeOut: 7000
         }),
         NgxPaginationModule,
+        SharedModule
     ],
     providers: [
         APP_TOKENS,

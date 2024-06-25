@@ -81,7 +81,13 @@ export class FooterComponent implements OnInit {
         this.linkYoutube = this.paramsLocais.getOpcoes().linkYoutube;
 
         this.linguagemSelecionada = this.translate.currentLang;
-        this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
+        this.translate.onLangChange.subscribe(res => {
+            this.linguagemSelecionada = res.lang;
+            this.rodape = this.paramsLocais.getOpcoes()[`rodape_${res.lang}`];
+        });
+
+        this.rodape = this.paramsLocais.getOpcoes()[`rodape_${this.linguagemSelecionada}`];
+
 
         this.isMobile = window.innerWidth < 1025;
 
@@ -175,5 +181,24 @@ export class FooterComponent implements OnInit {
             fill: 'var(--foreground-header)',
             stroke: 'var(--foreground-header)',
         }
+    }
+
+    public getLanguageIconClass() {
+        let cssClass = 'flag-icon-';
+        switch (this.linguagemSelecionada) {
+            case 'pt':
+                cssClass += 'br';
+                break;
+            case 'en':
+                cssClass += 'us';
+                break;
+            case 'es':
+                cssClass += 'es';
+                break;
+            default:
+                cssClass += 'br';
+        }
+
+        return cssClass;
     }
 }

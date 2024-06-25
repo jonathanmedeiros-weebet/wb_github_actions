@@ -13,8 +13,8 @@
         </div>
         <div class="content-body">
             <div class="content">
-                <div id="withdrawal">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="cadastroCompleto && !respostaSolicitacao">
+                <div id="withdrawal" *ngIf="cadastroCompleto && !respostaSolicitacao && (!legitimuzEnabled || verifiedIdentity)">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div id="withdrawal-container">
                             <section id="payment-method-column" class="hide-mobile" *ngIf="availablePaymentMethods.length > 1">
@@ -147,23 +147,13 @@
                                                 / {{'saques.monthlyMaximum' | translate}}: {{valorMaxSaqueMensal | currency}}
                                             </div>
                                             <div class="shortcut-amounts">
-                                                <button type="button" class="btn" (click)="changeAmount(10)">
-                                                    {{10 | currency}}
-                                                </button>
-                                                <button type="button" class="btn" (click)="changeAmount(20)">
-                                                    {{20 | currency}}
-                                                </button>
-                                                <button type="button" class="btn" (click)="changeAmount(50)">
-                                                    {{50 | currency}}
-                                                </button>
-                                                <button type="button" class="btn" (click)="changeAmount(75)">
-                                                    {{75 | currency}}
-                                                </button>
-                                                <button type="button" class="btn" (click)="changeAmount(100)">
-                                                    {{100 | currency}}
-                                                </button>
-                                                <button type="button" class="btn" (click)="changeAmount(200)">
-                                                    {{200 | currency}}
+                                                <button
+                                                    *ngFor="let value of valuesShortcuts"
+                                                    type="button"
+                                                    class="btn"
+                                                    (click)="changeAmount(value)"
+                                                >
+                                                    +{{ value }}
                                                 </button>
                                             </div>
                                         </div>
@@ -183,6 +173,20 @@
                 </div>
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
                     {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
+                </div>
+                <div #legitimuz id="legitimuz-container" *ngIf="cadastroCompleto && legitimuzEnabled && !verifiedIdentity">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                        <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            {{'saques.identityVerify' | translate}}
+                            <i class="fa-solid fa-id-card"></i>
+                        </button>
+                    </div>
+                    <div id="legitimuz-root"></div>
                 </div>
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}
