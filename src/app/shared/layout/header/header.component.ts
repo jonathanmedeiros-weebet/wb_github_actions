@@ -478,7 +478,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     abrirCambistaValidacao() {
         this.modalService.open(ValidarApostaWrapperComponent);
     }
-    
+
     abrirCambistaApuracao() {
         this.modalService.open(ApuracaoComponent);
     }
