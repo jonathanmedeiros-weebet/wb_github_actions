@@ -521,15 +521,6 @@ gulp.task('betdez.net', function (done) {
     });
 });
 
-gulp.task('minibets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "minibets.wee.bet",
-        banca: "MINI BETS",
-        styles: ""
-    });
-});
-
 gulp.task('resenhaesportiva.site', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -983,15 +974,6 @@ gulp.task('sm7.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "sm7.wee.bet",
         banca: "SM7",
-        styles: "",
-    });
-});
-
-gulp.task('visabet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "visabet.wee.bet",
-        banca: "VISA BET",
         styles: "",
     });
 });
@@ -2059,15 +2041,6 @@ gulp.task('veteranobet.com', function (done) {
     });
 });
 
-gulp.task('condecassinos.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "condecassinos.com",
-        banca: "CONDE CASSINOS",
-        styles: "",
-    });
-});
-
 gulp.task('pixcassino999.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2616,15 +2589,6 @@ gulp.task('brotanabet.com', function (done) {
     });
 });
 
-gulp.task('caminhobet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "caminhobet.com",
-        banca: "CAMINHO BET",
-        styles: "",
-    });
-});
-
 gulp.task('mdsports.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2720,15 +2684,6 @@ gulp.task('decolar.bet', function (done) {
         server: "front2.wee.bet",
         host: "decolar.bet",
         banca: "DECOLAR.BET",
-        styles: "",
-    });
-});
-
-gulp.task('brasilbet.store', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "brasilbet.store",
-        banca: "BRASIL BET",
         styles: "",
     });
 });
