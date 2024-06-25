@@ -6,8 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 import { CopiarApostaRoutingModule } from './copiar-aposta-routing.module';
 import {NgxMaskModule} from 'ngx-mask';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {CopiarApostaLoteriaService} from "../shared/services/loteria/copiar-aposta-loteria.service";
-
 @NgModule({
     imports: [SharedModule, CopiarApostaRoutingModule, NgxMaskModule],
     exports: [],
@@ -16,7 +14,6 @@ import {CopiarApostaLoteriaService} from "../shared/services/loteria/copiar-apos
         CopiarApostaLoteriasComponent
     ],
     providers: [
-        CopiarApostaLoteriaService,
         NgbActiveModal
     ]
 })
