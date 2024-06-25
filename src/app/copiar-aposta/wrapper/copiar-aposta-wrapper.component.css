@@ -1,0 +1,103 @@
+.content-body{
+    margin-bottom: 15px;
+}
+.consulta-form{
+    margin-bottom: 30px;
+}
+
+.consulta-form input{
+    margin-right: 1.5rem;
+    width: 270px;
+}
+
+#aposta{
+    padding: 10px 14px;
+    border: 1px solid var(--game);
+    border-radius: 5px;
+}
+
+#aposta h2{
+    margin-bottom: 30px;
+}
+
+.btn-custom {
+    height: 38px;
+    margin-left: 5px;
+}
+
+.btnClose {
+    font-size: 32px;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color:  var(--highlight);
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1024px) {
+
+    .filtro{
+        width: 100%;
+    }
+
+    #default-content {
+        padding: 10px;
+        height: 100vh;
+        overflow: auto;
+        position: relative;
+    }
+
+    .counts {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .counts .count {
+        margin: 0;
+    }
+
+    .col-graph {
+        margin-bottom: 30px;
+    }
+
+    .apostas-realizadas {
+        height: auto;
+    }
+
+    .card-dashboard h3 {
+        flex-direction: column;
+        align-items: start;
+        gap: 25px;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .filtros select {
+        max-width: none;
+        margin: 0;
+    }
+
+    .consulta-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .consulta-form input {
+        width: 100%;
+    }
+
+    app-error-msg {
+        margin-left: 0 !important;
+    }
+
+    .btn-custom {
+        margin-left: 8px;
+    }
+}
