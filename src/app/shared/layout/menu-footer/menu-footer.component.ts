@@ -171,10 +171,6 @@ export class MenuFooterComponent implements OnInit {
         this.modalService.open(ValidarApostaWrapperComponent);
     }
 
-    abrirCopiarAposta() {
-        this.modalService.open(CopiarApostaWrapperComponent);
-    }
-
     svgCss() {
         return {
             'width.rem': 1.8,
