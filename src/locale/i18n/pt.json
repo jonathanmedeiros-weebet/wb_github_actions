@@ -50,6 +50,7 @@
         "cancelar": "Cancelar",
         "fechar": "Fechar",
         "todos": "Todos",
+        "concluido": "Concluído",
         "confirmar": "Confirmar",
         "ganhou": "Ganhou",
         "perdeu": "Perdeu",
@@ -205,11 +206,14 @@
         "semPermissaoAcesso": "Sem permissão de acesso",
         "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos.",
         "cadastro": "Cadastro",
+        "tituloInformativoCookies": "Utilização de Cookies e Sessões",
+        "informativoCookies": "Este site utiliza cookies e sessões para aprimorar a sua experiência. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo que nos ajudam a manter você autenticado, personalizar recursos e configurações, bem como melhorar a funcionalidade do site. Ao continuar a usar este site, você concorda com o uso de cookies e sessões de acordo com a nossa Política de Privacidade.",
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
         "esportivo": "esportivo",
         "rodadaGratis": "Rodada grátis",
         "dataVencimento": "Data de vencimento",
         "quantidade": "Quantidade",
+        "quantidadeUtilizada": "Qtd. Utilizada",
         "jogarAgora": "Jogar Agora",
         "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
@@ -378,7 +382,10 @@
         "enterPixKey": "Informe o tipo de chave PIX",
         "minimumWithdrawal": "Saque mínimo",
         "dailyMaximum": "Máximo diário",
-        "monthlyMaximum": "Máximo mensal"
+        "monthlyMaximum": "Máximo mensal",
+        "identityVerify": "Verificar identidade",
+        "identityVerifyNeeded": "Para prosseguir com o saque será necessário realizar a verificação de identidade antes.",
+        "disapprovedIdentity": "Sua verificação de identidade foi reprovada. Para a realização de uma análise manual, por favor, entre em contato com o suporte."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",
@@ -573,5 +580,13 @@
         "outubro": "Outubro",
         "novembro": "Novembro",
         "dezembro": "Dezembro"
+    },
+    "botoes": {
+        "aceitar": "Aceitar"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recuperar minha conta!",
+        "contaBloqueadaPorTentativas": "Sua conta foi bloqueada porque você excedeu o número máximo de tentativas de login.",
+        "instrucoesRecuperacao": "Por favor, utilize a recuperação de senha para desbloquear sua conta."
     }
 }

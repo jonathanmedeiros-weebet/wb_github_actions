@@ -49,6 +49,7 @@
         "cancelar": "Cancel",
         "fechar": "Close",
         "todos": "All",
+        "concluido": "Completed",
         "confirmar": "Confirm",
         "ganhou": "Win",
         "perdeu": "Lost",
@@ -205,11 +206,14 @@
         "semPermissaoAcesso": "No access permission",
         "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age.",
         "cadastro": "Registration",
+        "tituloInformativoCookies": "Use of Cookies and Sessions",
+        "informativoCookies": "This website uses cookies and sessions to enhance your experience. Cookies are small text files stored on your device that help us keep you authenticated, customize features and settings, as well as improve website functionality. By continuing to use this website, you agree to the use of cookies and sessions in accordance with our Privacy Policy.",
         "alertaChavePixCpf": "When requesting the withdrawal, it will be processed through the Pix key associated with your CPF (Brazilian Tax ID). Ensure that your CPF is filled in correctly.",
         "esportivo": "sporty",
         "rodadaGratis": "Free Spin",
         "dataVencimento": "Expiration date",
         "quantidade": "Quantity",
+        "quantidadeUtilizada": "Qty. used",
         "jogarAgora": "Play now",
         "nenhumaRodadaGratis": "No free spins found.",
         "opcaoPromocao": "Select one of the options to view the current promotions.",
@@ -377,7 +381,10 @@
         "enterPixKey": "Select the type of PIX key",
         "minimumWithdrawal": "Minimum withdrawal",
         "dailyMaximum": "Daily maximum",
-        "monthlyMaximum": "Monthly maximum"
+        "monthlyMaximum": "Monthly maximum",
+        "identityVerify": "Verify identity",
+        "identityVerifyNeeded": "To proceed with the withdrawal, it will be necessary to perform identity verification beforehand.",
+        "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -572,5 +579,13 @@
         "outubro": "October",
         "novembro": "November",
         "dezembro": "December"
+    },
+    "botoes": {
+        "aceitar": "Accept"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recover my account!",
+        "contaBloqueadaPorTentativas": "Your account has been blocked because you have exceeded the maximum number of Login attempts.",
+        "instrucoesRecuperacao": "Please use password recovery to unlock your account."
     }
 }

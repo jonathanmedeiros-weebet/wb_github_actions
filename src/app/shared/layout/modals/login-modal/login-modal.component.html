@@ -15,7 +15,7 @@
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input type="text" id="username" class="form-control inverted-out" formControlName="username" placeholder=" "
-                        [ngClass]="applyCssInputError('username')" (keypress)="blockInvalidCharacters($event, 'email')">
+                        [ngClass]="applyCssInputError('username')">
                     <label for="username">{{'geral.email' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('username')" label="{{'geral.email' | translate}}" class="text-left"></app-error-msg>
@@ -23,7 +23,7 @@
             <div class="form-group" [ngClass]="applyCssDivError('password')">
                 <div class="input-md">
                     <input [type]=" mostrarSenha ? 'text' : 'password' " id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('password')"
-                        formControlName="password" placeholder=" " (keypress)="blockInvalidCharacters($event, 'password')">
+                        formControlName="password" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
                     <label for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="toogleSenha()"></i>
                 </div>

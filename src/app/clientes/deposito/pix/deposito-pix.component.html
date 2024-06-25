@@ -60,23 +60,13 @@
                                 {{'deposito.valorMinimo' | translate}} {{ valorMinDeposito | currency }}
                             </div>
                             <div class="shortcut-amounts">
-                                <button type="button" class="btn" (click)="changeAmount(10)">
-                                    {{10 | currency}}
-                                </button>
-                                <button type="button" class="btn" (click)="changeAmount(20)">
-                                    {{20 | currency}}
-                                </button>
-                                <button type="button" class="btn" (click)="changeAmount(50)">
-                                    {{50 | currency}}
-                                </button>
-                                <button type="button" class="btn" (click)="changeAmount(100)">
-                                    {{100 | currency}}
-                                </button>
-                                <button type="button" class="btn" (click)="changeAmount(500)">
-                                    {{500 | currency}}
-                                </button>
-                                <button type="button" class="btn" (click)="changeAmount(1000)">
-                                    {{1000 | currency}}
+                                <button
+                                    *ngFor="let value of valuesShortcuts"
+                                    type="button"
+                                    class="btn"
+                                    (click)="changeAmount(value)"
+                                >
+                                    +{{ value }}
                                 </button>
                             </div>
                         </div>

@@ -115,8 +115,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             logradouro: ['', Validators.required],
             numero: ['', Validators.required],
             bairro: ['', Validators.required],
-            cidade: ['0', Validators.required],
-            estado: ['0', Validators.required],
+            cidade: ['', Validators.required],
+            estado: ['', Validators.required],
             cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
             senha_atual: [null, this.googleLogin ? [] : Validators.required]
         });
@@ -128,6 +128,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                 distinctUntilChanged()
             )
             .subscribe((cep) => this.buscarPorCep(cep))
+
+        this.form.markAllAsTouched();
     }
 
     resetarForm() {
