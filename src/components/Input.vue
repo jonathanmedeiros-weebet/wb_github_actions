@@ -18,10 +18,14 @@
       />
       <div class="input__icon__right">
         
-        <icon-visibility v-if="showPassword && initType == 'password'" @click="passWordVisible"
+        <icon-visibility 
+        v-if="showPassword && initType == 'password'"
+        @click="passWordVisible"
         color="var(--color-text-input)"
         />
-        <icon-visibility-off v-if="!showPassword && initType == 'password'" @click="passWordVisible"
+        <icon-visibility-off 
+        v-if="!showPassword && initType == 'password'" 
+        @click="passWordVisible"
         color="var(--color-text-input)"
         />
 

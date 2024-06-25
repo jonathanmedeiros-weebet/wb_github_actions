@@ -3,9 +3,7 @@
     <div ref="modal" class="modal">
       <div class="modal_icons">
         <button class="modal__btnclose" @click="handleClose">
-          <icon-close
-          color="var(--color-text-input)"
-          />
+          <icon-close color="var(--color-text-input)"/>
         </button>
         <div class="modal__element"></div>
       </div>

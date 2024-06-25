@@ -2,9 +2,9 @@
   <div class="login">
     <div class="login__container">
       <form id="form-login">
-        <img class="login__image" src="@/assets/images/weebet_logo_verde.png" alt="">
+        <img class="login__image" src="@/assets/images/weebet_logo_verde.png">
         <div class="login__header">
-          <h1 class="login__title">Bem-vindo <img class="login__emogi" src="@/assets/images/hand.png" alt=""></h1>
+          <h1 class="login__title">Bem-vindo <img class="login__emogi" src="@/assets/images/hand.png"></h1>
           <p class="login__description">Insira seus dados para acessar o aplicativo </p>
         </div>
         <w-input
@@ -27,7 +27,7 @@
           v-model="userPassword"
         >
           <template #icon>
-              <icon-password/>
+            <icon-password/>
           </template>
 
         </w-input>
