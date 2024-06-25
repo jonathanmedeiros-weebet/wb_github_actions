@@ -30,13 +30,11 @@
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
 
                 <div *ngIf="exibirAposta">
-                    <div id="aposta">
                         <ng-container [ngSwitch]="aposta.tipo">
                             <app-copiar-aposta-loterias *ngSwitchCase="'loteria'" [aposta]="aposta"
                                                         (success)="success($event)">
                             </app-copiar-aposta-loterias>
                         </ng-container>
-                    </div>
                 </div>
             </div>
         </div>

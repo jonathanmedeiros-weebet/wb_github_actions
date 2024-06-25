@@ -1,67 +1,74 @@
-<form [formGroup]="form" (ngSubmit)="submit()" #apostaContainer>
-    <div class="loteria">
-        <div formArrayName="itens" class="palpites">
-            <div *ngFor="let item of apostaItens.controls; let i = index" [formGroupName]="i" class="item-selecionado">
-                <div class="row">
-                    <div class="form-group col-lg-4">
-                        <label>Sorteio:</label>
-                        <select class="form-control inverted-out" formControlName="sorteio_id">
-                            <option value="">Selecione um sorteio</option>
-                            <option *ngFor="let sorteio of sorteios" [value]="sorteio.id">{{sorteio.nome}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-4">
-                        <label>Valor:</label>
-                        <input class="form-control inverted-out custom-width-value" type="number" formControlName="valor" (change)="updateEstimativaGanho(item, i)" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="circle-group">
-                        <label class="mr-2">Palpites:</label>
-                        <div class="d-inline">
-                            <ng-container *ngFor="let numero of item.get('numeros').value; let last = last">
-                                <div class="circle d-inline-block mr-2">
-                                    <div class="content">
-                                        {{numero | number:'2.0'}}{{!last ? '-' : ''}}
-                                    </div>
-                                </div>
-                            </ng-container>
+<div id="aposta" *ngIf="apostaContainer">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="loteria">
+            <div formArrayName="itens" class="palpites">
+                <div *ngFor="let item of apostaItens.controls; let i = index" [formGroupName]="i"
+                     class="item-selecionado">
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label>Sorteio</label>
+                            <select class="form-control inverted-out" formControlName="sorteio_id">
+                                <option value="">Selecione um sorteio</option>
+                                <option *ngFor="let sorteio of sorteios" [value]="sorteio.id">{{ sorteio.nome }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label>Valor</label>
+                            <input class="form-control inverted-out custom-width-value" type="number"
+                                   formControlName="valor" (change)="updateEstimativaGanho(item, i)"/>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="circle-group">
+                            <label class="mr-2">Palpites:</label>
+                            <div class="d-inline">
+                                <ng-container *ngFor="let numero of item.get('numeros').value; let last = last">
+                                    <div class="circle d-inline-block mr-2">
+                                        <div class="content">
+                                            {{ numero | number:'2.0' }}{{ !last ? '-' : '' }}
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Retorno 6: </label>
+                            <span>{{ calcularEstimativaGanho(item.get('cotacao6').value, item.get('valor').value) | currency }}</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Retorno 5: </label>
+                            <span>{{ calcularEstimativaGanho(item.get('cotacao5').value, item.get('valor').value) | currency }}</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Retorno 4: </label>
+                            <span>{{ calcularEstimativaGanho(item.get('cotacao4').value, item.get('valor').value) | currency }}</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Retorno 3: </label>
+                            <span>{{ calcularEstimativaGanho(item.get('cotacao3').value, item.get('valor').value) | currency }}</span>
+                        </div>
+                    </div>
+                    <div class="remover-item" (click)="removerItem(i)">
+                        <i class="fa fa-times"></i>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <label>Retorno 6: </label>
-                        <span>{{calcularEstimativaGanho(item.get('cotacao6').value, item.get('valor').value) | currency}}</span>
-                    </div>
-                    <div class="col-lg-4">
-                        <label>Retorno 5: </label>
-                        <span>{{calcularEstimativaGanho(item.get('cotacao5').value, item.get('valor').value) | currency}}</span>
-                    </div>
-                    <div class="col-lg-4">
-                        <label>Retorno 4: </label>
-                        <span>{{calcularEstimativaGanho(item.get('cotacao4').value, item.get('valor').value) | currency}}</span>
-                    </div>
-                    <div class="col-lg-4">
-                        <label>Retorno 3: </label>
-                        <span>{{calcularEstimativaGanho(item.get('cotacao3').value, item.get('valor').value) | currency}}</span>
-                    </div>
-                </div>
-                <div class="remover-item" (click)="removerItem(i)">
-                    <i class="fa fa-times"></i>
+            </div>
+            <div class="informacoes">
+                <p>{{ 'geral.horario' | translate }}: {{ aposta.horario | moment: 'DD/MM/YYYY HH:mm' }}</p>
+                <p>Total de palpites: {{ apostaItens.length }}</p>
+                <div class="form-group col-lg-4">
+                    <label>{{ 'geral.apostador' | translate }}</label>
+                    <input type="text" class="form-control inverted-out" formControlName="apostador"
+                           [ngClass]="applyCssInputError('apostador')">
+                    <app-error-msg [control]="form.get('apostador')"
+                                   label="{{'geral.apostador' | translate}}"></app-error-msg>
                 </div>
             </div>
         </div>
-        <div class="informacoes">
-            <p>{{'geral.horario' | translate}}: {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</p>
-            <p>Total de palpites: {{apostaItens.length}}</p>
-            <div class="form-group col-lg-4">
-                <label>{{'geral.apostador' | translate}}</label>
-                <input type="text" class="form-control inverted-out" formControlName="apostador" [ngClass]="applyCssInputError('apostador')">
-                <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}}"></app-error-msg>
-            </div>
-        </div>
-    </div>
 
-    <button type="submit" [disabled]="disabled" class="btn btn-custom">{{'bilhete.apostar' | translate}}</button>
-</form>
+        <button type="submit" [disabled]="disabled" class="btn btn-custom">{{ 'bilhete.apostar' | translate }}</button>
+    </form>
+</div>

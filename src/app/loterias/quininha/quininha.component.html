@@ -71,7 +71,7 @@
                                             {{'loteria.incluirPalpite' | translate}}
                                         </button>
                                     </div>
-                                    <div class="form-group col-xs-12 col-lg-4 ">
+                                    <div *ngIf="isLoggedIn && !isCliente" class="form-group col-xs-12 col-lg-4 ">
                                         <a class="btn btn-custom btn-line replicar-aposta" [routerLink]="['/copiar-aposta']"
                                            *ngIf="!isCliente">
                                             <i class="fa fa-solid fa-copy mb-2"></i>

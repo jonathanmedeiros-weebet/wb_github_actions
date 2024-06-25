@@ -74,6 +74,7 @@ export class CopiarApostaWrapperComponent extends BaseFormComponent implements O
                     this.exibirAposta = true;
                     this.aposta = aposta;
                     this.showLoadingIndicator = false;
+                    this.form.reset();
                 },
                 error => this.handleError(error)
             );

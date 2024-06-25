@@ -11,7 +11,6 @@ import { BaseFormComponent } from '../../shared/layout/base-form/base-form.compo
     styleUrls: ['./copiar-aposta-loterias.component.css']
 })
 export class CopiarApostaLoteriasComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    @ViewChild('apostaContainer', { static: false }) apostaContainer: ElementRef;
     @Output() success = new EventEmitter();
     @Input() aposta: any;
     disabled = false;
@@ -20,6 +19,7 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
     unsub$ = new Subject();
     form: FormGroup;
     modalidade;
+    apostaContainer = true;
 
     constructor(
         private sorteioService: SorteioService,
@@ -58,9 +58,7 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
 
 
     cleanForm() {
-        if (this.apostaContainer) {
-            this.apostaContainer.nativeElement.innerHTML = '';
-        }
+       this.apostaContainer = false;
     }
 
     populateForm() {
