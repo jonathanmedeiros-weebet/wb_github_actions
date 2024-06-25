@@ -14,7 +14,8 @@
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
             R$ {{ isCreditoVisible ? credito : '*******' }}
-            <IconEye class="wallet__eye" @click="toggleCreditoVisibility" />
+            <IconEyeClose v-if="isCreditoVisible" class="wallet__eye" @click="toggleCreditoVisibility" />
+            <IconEye v-else class="wallet__eye" @click="toggleCreditoVisibility" />
           </span>
         </div>
 
@@ -22,16 +23,17 @@
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
             R$ {{ isSaldoVisible ? saldo : '*******' }}
-            <IconEye class="wallet__eye" @click="toggleSaldoVisibility" />
+            <IconEyeClose v-if="isSaldoVisible" class="wallet__eye" @click="toggleSaldoVisibility" />
+            <IconEye v-else class="wallet__eye" @click="toggleSaldoVisibility" />
           </span>
         </div>
 
         <div class="wallet__shortcuts">
-          <button class="wallet__button wallet__button--dash">
+          <button class="wallet__button">
             <IconInsertChart class="wallet__icon"/>
             Dashboard
           </button>
-          <button class="wallet__button wallet__button--consulta">
+          <button class="wallet__button">
             <IconManageSearch class="wallet__icon" />
             Consultar Bilhete
           </button>
@@ -73,6 +75,7 @@
 
 <script>
 import IconEye from '@/components/icons/IconEye.vue';
+import IconEyeClose from '@/components/icons/IconEyeClose.vue';
 import IconMoney from '@/components/icons/IconMoney.vue';
 import IconSettings from '@/components/icons/IconSettings.vue';
 import IconLogout from '@/components/icons/IconLogout.vue';
@@ -83,7 +86,7 @@ import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 
 export default {
   components: {
-    IconEye, IconMoney, IconSettings, IconLogout, 
+    IconEye, IconEyeClose, IconMoney, IconSettings, IconLogout, 
     IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart
   },
   name: 'menu',
@@ -113,7 +116,7 @@ export default {
 <style lang="scss" scoped>
 .menu {
   color: #ffffff;
-  height: 100%;
+  height: auto;
   width: 100%;
   padding-bottom: 100px;
 
@@ -219,23 +222,29 @@ export default {
 
   &__icon {
     fill: #181818;
+    align-items: center;
   }
 }
 
 .more-options {
+  display: flex;
+  flex-direction: column;
+
   &__text {
     color: #ffffff;
-    font-size: 16px; 
+    font-size: 16px;
+    padding-bottom: 10px;
   }
 
   &__card {
-    width: 100%; 
+    width: 100%;
     background-color: #181818;
-    padding: 20px;
+    padding: 18px;
+    padding-top: 8px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px; 
+    gap: 12px;
   }
 
   &__item {
@@ -244,7 +253,7 @@ export default {
     background: none;
     border: none;
     color: inherit;
-    padding-top: 10px;    
+    padding-top: 10px;
     font-size: 14px;
   }
 
@@ -253,6 +262,4 @@ export default {
     margin-right: 10px;
   }
 }
-
-
 </style>

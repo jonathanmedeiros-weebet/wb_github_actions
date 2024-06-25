@@ -12,7 +12,7 @@
 </template>
 <script>
 export default {
-    name: 'icon-list-alt',
+    name: 'icon-insert-chart',
     props: {
         size: {
             type: Number,
