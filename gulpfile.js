@@ -40,6 +40,19 @@ function tasks(done, config) {
         .pipe(replace('[HOST]', config.host))
         .pipe(gulp.dest('src/bilhete/'));
 
+    if (config.xtremepush_sdk) {
+        gulp.src(['base-build/xtremepush/subscribe.html'])
+            .pipe(replace('[XTREMEPUSH_SDK_KEY]', config.xtremepush_sdk))
+            .pipe(gulp.dest('src/assets/'));
+
+        gulp.src(['base-build/xtremepush/frame.html'])
+            .pipe(replace('[XTREMEPUSH_SDK_KEY]', config.xtremepush_sdk))
+            .pipe(gulp.dest('src/assets/'));
+
+        gulp.src(['base-build/xtremepush/service-worker.js'])
+            .pipe(gulp.dest('src/assets/'));
+    }
+
     let currency = 'BRL';
     if (config.currency) {
         currency = config.currency;
@@ -2232,6 +2245,7 @@ gulp.task('jetbet365.com', function (done) {
         styles: "",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P65H9KK8');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-P65H9KK8'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
+        xtremepush_sdk: "eevBAQ-IGn6GrAGzjOBRlWA7_q37u3Pa"
     });
 });
 
