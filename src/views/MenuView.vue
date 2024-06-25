@@ -28,7 +28,7 @@
 
         <div class="wallet__shortcuts">
           <button class="wallet__button wallet__button--dash">
-            <IconInsertChart class="wallet__icon" />
+            <IconInsertChart class="wallet__icon"/>
             Dashboard
           </button>
           <button class="wallet__button wallet__button--consulta">
@@ -113,9 +113,16 @@ export default {
 <style lang="scss" scoped>
 .menu {
   color: #ffffff;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 100px;
 
   &__container {
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    margin: 0;
     padding: 0 20px;
     padding-top: 70px;
   }
@@ -153,17 +160,14 @@ export default {
 }
 
 .wallet {
-  position: fixed;
-  width: 350px;
-  height: 227px;
-  left: 50%;
-  transform: translateX(-50%);
+  
+  width: 100%;
+  height: auto;
   background-color: #181818;
   border-radius: 10px;
-  padding: 22px 18px 22px 18px;
+  padding: 22px 18px;
   gap: 29px;
   padding-top: 16px;
-  margin-top: 25px;
 
   &__item {
     margin-bottom: 15px;
@@ -219,23 +223,15 @@ export default {
 }
 
 .more-options {
-  margin-top: 255px;
-  padding: 14px;
-
   &__text {
     color: #ffffff;
     font-size: 16px; 
   }
 
   &__card {
-    position: fixed;
-    width: 346px; 
-    margin-top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%; 
     background-color: #181818;
     padding: 20px;
-    padding-top: 8px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
