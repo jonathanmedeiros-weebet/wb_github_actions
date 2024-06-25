@@ -12,20 +12,34 @@
         :placeholder="placeholder"
         @input="handleInput"
         class="input__field"
-        :type="type"
+        :type="typeInputPassword"
         @focus="handleFocus"
         @blur="handleBlur"
       />
-      <div class="input__icon__right" v-if="$slots['icon-right']">
-        <slot name="icon-right"></slot>
+      <div class="input__icon__right">
+        
+        <icon-visibility v-if="showPassword && initType == 'password'" @click="passWordVisible"
+        color="var(--color-text-input)"
+        />
+        <icon-visibility-off v-if="!showPassword && initType == 'password'" @click="passWordVisible"
+        color="var(--color-text-input)"
+        />
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import IconVisibility from '@/components/icons/IconVisibility.vue'
+import IconVisibilityOff from '@/components/icons/iconVisibilityOff.vue'
+
 export default {
   name: 'w-input',
+  components: {
+    IconVisibility,
+    IconVisibilityOff
+  },
   props: {
     label: {
       type: String,
@@ -51,6 +65,8 @@ export default {
   data() {
     return {
       isFocused: false,
+      showPassword: false,
+      initType: this.type
     };
   },
   methods: {
@@ -62,11 +78,17 @@ export default {
     },
     handleBlur(){
       this.isFocused = false;
-    }
+    },
+    passWordVisible() {
+      this.showPassword = !this.showPassword;
+    },
   },
   computed: {
     password() {
       return this.value;
+    },
+    typeInputPassword() {
+      return this.showPassword ? 'text' : 'password';
     }
   }
 }

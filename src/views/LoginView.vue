@@ -23,20 +23,13 @@
           label="Senha"
           name="user_password"
           placeholder="Digite sua senha"
-          :type="typeInputPassword"
+          type="password"
           v-model="userPassword"
         >
           <template #icon>
               <icon-password/>
           </template>
-          <template #icon-right>          
-            <icon-visibility v-if="showPassword" @click="passWordVisible"
-            color="var(--color-text-input)"
-            />
-            <icon-visibility-off v-if="!showPassword" @click="passWordVisible"
-            color="var(--color-text-input)"
-            />
-          </template>
+
         </w-input>
         <w-button
           id="btn-entrar"
@@ -79,8 +72,6 @@
 import WInput from '@/components/Input.vue'
 import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
-import IconVisibility from '@/components/icons/IconVisibility.vue'
-import IconVisibilityOff from '@/components/icons/iconVisibilityOff.vue'
 import IconUserLine from '@/components/icons/IconUserLine.vue'
 import IconPassword from '@/components/icons/IconPassword.vue'
 
@@ -90,15 +81,12 @@ export default {
     WInput,
     WButton,
     WModal,
-    IconVisibility,
-    IconVisibilityOff,
     IconUserLine,
     IconPassword
   },
   data() {
     return {
       isModalVisible: false,
-      showPassword: false,
       userPassword: ''
     }
   },
@@ -109,16 +97,9 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     },
-    passWordVisible() {
-      this.showPassword = !this.showPassword;
-    },
+    
     handleClick() {
       this.$router.push('/home')
-    }
-  },
-  computed: {
-    typeInputPassword() {
-      return this.showPassword ? 'text' : 'password';
     }
   }
 }
