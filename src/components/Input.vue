@@ -5,18 +5,20 @@
       <div class="input__icon" v-if="$slots['icon']">
         <slot name="icon"></slot>
       </div>
+      
       <input
         :id="name"
         :name="name"
-        :value="value"
         :placeholder="placeholder"
         @input="handleInput"
         class="input__field"
         :type="type"
-        
         @focus="handleFocus"
         @blur="handleBlur"
       />
+      <div class="input__icon__right" v-if="$slots['icon-right']">
+        <slot name="icon-right"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +62,11 @@ export default {
     },
     handleBlur(){
       this.isFocused = false;
+    }
+  },
+  computed: {
+    password() {
+      return this.value;
     }
   }
 }
@@ -114,6 +121,13 @@ input {
     display: flex;
     align-items: center;
     z-index: 1;
+  }
+
+  &__icon__right {
+    display: flex;
+    align-items: right;
+    z-index: 1;
+    padding-right: 10px;
   }
 
   &__field {
