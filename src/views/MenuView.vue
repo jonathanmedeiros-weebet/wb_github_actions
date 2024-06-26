@@ -254,9 +254,5 @@ export default {
     gap: 8px;
   }
 
-  &__icon {
-    
-    
-  }
 }
 </style>
