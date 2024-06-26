@@ -115,7 +115,7 @@ export default {
 
 <style lang="scss" scoped>
 .menu {
-  color: #ffffff;
+  color: (--color-text);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -158,7 +158,7 @@ export default {
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
-    color: #FFFFFF80;
+    color: (--color-text-input);
   }
 }
 
@@ -166,29 +166,27 @@ export default {
   
   width: 100%;
   height: auto;
-  background-color: #181818;
+  background-color: (--color-background-input);
   border-radius: 10px;
   padding: 22px 18px;
   gap: 29px;
   padding-top: 16px;
 
   &__item {
-    margin-bottom: 15px;
+    padding-bottom: 14px;
   }
 
   &__label {
     display: flex;
-    font-family: 'Poppins', sans-serif;
-    color: #ffffff;
+    color: (--color-text);
     opacity: 0.5;
-    margin-bottom: 8px;
     font-size: 13px; 
   }
 
   &__value {
     display: flex;
     align-items: center;
-    color: #ffffff;
+    color: (--color-text);
     font-size: 20px; 
   }
 
@@ -208,20 +206,18 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Roboto', sans-serif;
-    background-color: #ffffff;
+    background-color: (--color-text);
     border: none;
     border-radius: 18px;
-    color: rgb(0, 0, 0); 
-    padding: 10px 10px;
-    gap: 1px;
-    opacity: 0px;
+    color: (--color-background); 
+    padding: 10px;
+    gap: 2px;
     white-space: nowrap;
     font-size: 10px;
   }
 
   &__icon {
-    fill: #181818;
+    fill: (--color-background-input);
     align-items: center;
   }
 }
@@ -231,14 +227,14 @@ export default {
   flex-direction: column;
 
   &__text {
-    color: #ffffff;
+    color: (--color-text);
     font-size: 16px;
     padding-bottom: 10px;
   }
 
   &__card {
     width: 100%;
-    background-color: #181818;
+    background-color: (--color-background-input);
     padding: 18px;
     padding-top: 8px;
     border-radius: 10px;
@@ -259,7 +255,7 @@ export default {
 
   &__icon {
     margin-left: -10px;
-    margin-right: 10px;
+    margin-right: 15px;
   }
 }
 </style>
