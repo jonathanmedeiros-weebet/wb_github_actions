@@ -163,7 +163,7 @@ gulp.task('major.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "major.wee.bet",
         banca: "Major",
-        styles: "--header:#046eef;--sidebar-right:#046eef;--sidebar-left:#046eef;--odds:#011e46;"
+        styles: ""
     });
 });
 
@@ -2988,6 +2988,15 @@ gulp.task('goalbet.com.br', function (done) {
         server: "front5.wee.bet",
         host: "goalbet.com.br",
         banca: "GOAL BET",
+        styles: ""
+    });
+});
+
+gulp.task('sortegol.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sortegol.com",
+        banca: "SORTE GOL",
         styles: ""
     });
 });

@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApostaComponent } from 'src/app/cambistas/aposta/aposta.component';
 import { ValidarApostaWrapperComponent } from '../../../validar-aposta/wrapper/validar-aposta-wrapper.component';
+import { CopiarApostaWrapperComponent } from '../../../copiar-aposta/wrapper/copiar-aposta-wrapper.component'
 import { config } from '../../config';
 import { AuthService } from '../../services/auth/auth.service';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
