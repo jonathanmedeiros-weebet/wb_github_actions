@@ -163,6 +163,7 @@ export default {
 }
 
 .wallet {
+  
   width: 100%;
   height: auto;
   background-color: var(--color-background-input);
@@ -234,7 +235,7 @@ export default {
   &__card {
     width: 100%;
     background-color: var(--color-background-input);
-    padding: 18px 4px;
+    padding: 18px 8px;
     padding-top: 8px;
     border-radius: 10px;
     display: flex;
@@ -250,8 +251,12 @@ export default {
     color: inherit;
     padding-top: 10px;
     font-size: 14px;
-    gap: 8px; 
+    gap: 8px;
   }
 
+  &__icon {
+    
+    
+  }
 }
 </style>
