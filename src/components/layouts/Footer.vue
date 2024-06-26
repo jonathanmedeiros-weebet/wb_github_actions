@@ -1,8 +1,8 @@
 <template>
-    <footer class="footer">
-      <Tabs v-if="showTabs" />
-      <Copyright v-if="showCopyright" />
-    </footer>
+  <footer class="footer">
+    <Tabs v-if="showTabs" />
+    <Copyright v-if="showCopyright" />
+  </footer>
 </template>
 
 <script>
@@ -17,10 +17,10 @@ export default {
   },
   computed: {
     showTabs() {
-      return !['/', '/login'].includes(this.$router.currentRoute.value.fullPath)
+      return !['/', '/login'].includes(this.$route.path)
     },
     showCopyright() {
-      return ['/', '/login'].includes(this.$router.currentRoute.value.fullPath)
+      return ['/', '/login'].includes(this.$route.path)
     }
   }
 }
