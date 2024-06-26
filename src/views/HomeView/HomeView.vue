@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <Header :showCalendarButton="true" :showSearchButton="true">
-      <SelectFake @click="handleSpotsModal"> {{ modality }} </SelectFake>
+      <SelectFake @click="handleOpenModalitiesModal"> {{ modality.name }} </SelectFake>
     </Header>
     <section class="home__body">
       <SelectFake
         class="home__league-select"
         titleSize="medium"
-        @click="handleLeaguesModal"
+        @click="handleOpenLeaguesModal"
       >
         <img v-if="league.image" :src="league.image">
         <span>{{ league.title }}</span>
@@ -40,6 +40,19 @@
         </div>
       </Collapse>
     </section>
+
+    <ModalLeagues
+      v-if="showModalLeagues"
+      @closeModal="handleCloseLeaguesModal"
+      @click="handleLeague"
+    />
+
+    <ModalModalities
+      v-if="showModalModalities"
+      :modalityId="modality.id"
+      @closeModal="handleCloseModalitiesModal"
+      @click="handleModality"
+    />
   </div>
 </template>
 
@@ -49,6 +62,8 @@ import SelectFake from './parts/SelectFake.vue'
 import { modalityList, championshipList, leagueList, gameList } from '@/constants'
 import Collapse from '@/components/Collapse.vue'
 import GameItem from './parts/GameItem.vue'
+import ModalLeagues from './parts/ModalLeagues.vue'
+import ModalModalities from './parts/ModalModalities.vue'
 
 export default {
   name: 'home',
@@ -56,11 +71,15 @@ export default {
     Header,
     SelectFake,
     Collapse,
-    GameItem
+    GameItem,
+    ModalLeagues,
+    ModalModalities
   },
   data() {
     return {
-      modality: 'Futebol',
+      showModalLeagues: false,
+      showModalModalities: false,
+      modality: modalityList[0],
       league: leagueList[0],
       modalityList,
       championshipList,
@@ -69,11 +88,25 @@ export default {
     }
   },
   methods: {
-    handleSpotsModal() {
-      alert('Modal handleSpotsModal')
+    handleOpenModalitiesModal() {
+      this.showModalModalities = true;
     },
-    handleLeaguesModal() {
-      alert('Modal handleLeaguesModal')
+    handleCloseModalitiesModal() {
+      this.showModalModalities = false;
+    },
+    handleModality(modalityId) {
+      this.modality = this.modalityList.find(modality => modality.id === modalityId)
+      this.handleCloseModalitiesModal()
+    },
+    handleOpenLeaguesModal() {
+      this.showModalLeagues = true;
+    },
+    handleCloseLeaguesModal() {
+      this.showModalLeagues = false;
+    },
+    handleLeague(leagueName) {
+      this.league = this.leagueList.find(league => league.title === leagueName)
+      this.handleCloseLeaguesModal()
     }
   }
 }
@@ -126,8 +159,6 @@ export default {
     align-items: center;
     justify-content: center;
     color: #FFFFFF80;
-;
   }
-
 }
 </style>

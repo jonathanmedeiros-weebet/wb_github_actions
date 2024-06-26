@@ -150,6 +150,8 @@ export default {
 
   &__body {
     text-align: center;
+    overflow-y: auto;
+    max-height: calc(90% - 60px);
   }
 }
 

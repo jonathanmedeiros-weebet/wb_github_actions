@@ -40,38 +40,12 @@
         />
       </form>
     </div>
-
-    <WModal v-if="isModalVisible" @close="closeModal" title="Example Modal">
-      
-      <template #title>
-        <p>Title</p>
-      </template>
-
-      <template #body>
-        <p>Item in content body</p>
-        <p>Item in content body</p>
-        <p>Item in content body</p>
-        <p>Item in content body</p>
-        <p>Item in content body</p>
-        <p>Item in content body</p>
-        <p>Item in content body</p>
-        <p>Item in content body</p>
-        
-      </template>
-      
-      <template #footer>
-        <p>Footer</p>
-      </template>
-      
-    </WModal>
-
   </div>
 </template>
 
 <script>
 import WInput from '@/components/Input.vue'
 import WButton from '@/components/Button.vue'
-import WModal from '@/components/Modal.vue'
 import IconUserLine from '@/components/icons/IconUserLine.vue'
 import IconPassword from '@/components/icons/IconPassword.vue'
 
@@ -80,24 +54,15 @@ export default {
   components: {
     WInput,
     WButton,
-    WModal,
     IconUserLine,
     IconPassword
   },
   data() {
     return {
-      isModalVisible: false,
       userPassword: ''
     }
   },
-  methods: {
-    openModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    },
-    
+  methods: {    
     handleClick() {
       this.$router.push('/home')
     }
@@ -108,7 +73,6 @@ export default {
 <style lang="scss" scoped>
 .login {
   justify-content: space-between;
-  
   padding: 0px 30px;
   
   &__container {

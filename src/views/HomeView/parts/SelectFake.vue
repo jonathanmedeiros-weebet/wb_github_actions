@@ -1,5 +1,5 @@
 <template>
-    <div class="select-fake" @click.once="handleClick">
+    <div class="select-fake" @click="handleClick">
         <span
             class="select-fake__title"
             :class="`select-fake__title--${titleSize}`"
