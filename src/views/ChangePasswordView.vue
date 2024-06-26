@@ -4,39 +4,39 @@
         <div class="password__container">
           <div class="password_inputs">
             <w-input
-            class="login__input"
-            label="Senha atual"
-            name="current_password"
-            placeholder="Digite sua senha atual"
-            type="password"
+              class="login__input"
+              label="Senha atual"
+              name="current_password"
+              placeholder="Digite sua senha atual"
+              type="password"
             >
             </w-input>
             
             <w-input
-            class="login__input"
-            label="Nova Senha"
-            name="new_password"
-            placeholder="Digite sua nova senha"
-            type="password"
+              class="login__input"
+              label="Nova Senha"
+              name="new_password"
+              placeholder="Digite sua nova senha"
+              type="password"
             >
             </w-input>
 
             <w-input
-            class="login__input"
-            label="Confirmar Senha"
-            name="confirm_password"
-            placeholder="Confirme a nova senha"
-            type="password"
+              class="login__input"
+              label="Confirmar Senha"
+              name="confirm_password"
+              placeholder="Confirme a nova senha"
+              type="password"
             >
             </w-input>
           </div>
 
           <div class="password__button">
             <w-button
-            id="btn-salvar"
-            text="Salvar Alterações"
-            value="salvar"
-            name="btn-salvar"
+              id="btn-salvar"
+              text="Salvar Alterações"
+              value="salvar"
+              name="btn-salvar"
             />
           </div>
         </div>
