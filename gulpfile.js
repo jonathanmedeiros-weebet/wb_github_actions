@@ -163,7 +163,7 @@ gulp.task('major.wee.bet', function (done) {
         server: "front4.wee.bet",
         host: "major.wee.bet",
         banca: "Major",
-        styles: "--header:#046eef;--sidebar-right:#046eef;--sidebar-left:#046eef;--odds:#011e46;"
+        styles: ""
     });
 });
 
