@@ -1,44 +1,42 @@
 <template>
   <div class="login">
     <div class="login__container">
-      <form id="form-login">
-        <img class="login__image" src="@/assets/images/weebet_logo_verde.png">
-        <div class="login__header">
-          <h1 class="login__title">Bem-vindo <img class="login__emogi" src="@/assets/images/hand.png"></h1>
-          <p class="login__description">Insira seus dados para acessar o aplicativo </p>
-        </div>
-        <w-input
-          class="login__input"
-          label="Usuário"
-          name="user_name"
-          placeholder="Digite seu usuário"
-          type="email"
-        >
-          <template #icon>
-            <icon-user-line/>
-          </template>
-        </w-input> 
-        <w-input
-          class="login__input"
-          label="Senha"
-          name="user_password"
-          placeholder="Digite sua senha"
-          type="password"
-          v-model="userPassword"
-        >
-          <template #icon>
+      <img class="login__image" src="@/assets/images/weebet_logo_verde.png">
+      <div class="login__header">
+        <h1 class="login__title">Bem-vindo <img class="login__emogi" src="@/assets/images/hand.png"></h1>
+        <p class="login__description">Insira seus dados para acessar o aplicativo </p>
+      </div>
+      <w-input
+        class="login__input"
+        label="Usuário"
+        name="user_name"
+        placeholder="Digite seu usuário"
+        type="email"
+      >
+        <template #icon>
+          <icon-user-line/>
+        </template>
+      </w-input> 
+      <w-input
+        class="login__input"
+        label="Senha"
+        name="user_password"
+        placeholder="Digite sua senha"
+        type="password"
+        v-model="userPassword"
+      >
+        <template #icon>
             <icon-password/>
-          </template>
+        </template>
 
-        </w-input>
-        <w-button
-          id="btn-entrar"
-          text="Entrar"
-          value="entrar"
-          name="btn-entrar"
-          @click="handleClick"
-        />
-      </form>
+      </w-input>
+      <w-button
+        id="btn-entrar"
+        text="Entrar"
+        value="entrar"
+        name="btn-entrar"
+        @click="handleClick"
+      />
     </div>
 
     <WModal v-if="isModalVisible" @close="closeModal" title="Example Modal">
