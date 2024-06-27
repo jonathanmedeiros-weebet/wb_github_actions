@@ -243,7 +243,8 @@
         "nenhumResultadoEncontrado": "No results found for this search",
         "jogosEmAlta": "Trending games",
         "nenhumJogoDisponivel": "No games available at the moment",
-        "loginGoogle" : "Sign in with Google account."
+        "loginGoogle" : "Sign in with Google account.",
+        "computadoEm": "Computed in:"
     },
     "bet": {
         "sportsBetting": "Sports betting",
