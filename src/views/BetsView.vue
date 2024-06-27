@@ -2,39 +2,45 @@
   <div class="bets">
     <Header title="Apostas" :showBackButton="true" />
     <div class="bets__container">
-      <w-input
-        label="Apostador"
-        name="punter"
-        placeholder="999.999.999-99"
-        type="text"
-      />
+      
+      <div class="bets_contente">
+          <w-input
+          label="Apostador"
+          name="punter"
+          placeholder="999.999.999-99"
+          type="text"
+        />
 
-      <w-input
-        label="Apostador"
-        name="code"
-        placeholder="999.999.999-99"
-        type="text"
-      />
+        <w-input
+          label="Apostador"
+          name="code"
+          placeholder="999.999.999-99"
+          type="text"
+        />
 
-      <w-input
-        label="Data"
-        name="date"
-        placeholder="dd/mm/aaaa"
-        type="date"
-      />
+        <w-input
+          label="Data"
+          name="date"
+          placeholder="dd/mm/aaaa"
+          type="date"
+        />
 
-      <w-button
-        id="btn-filter"
-        text="Filtar"
-        value="filter"
-        name="btn-filter"
-        @click="getFilters"
-      />
+        <w-button
+          id="btn-filter"
+          text="Filtar"
+          value="filter"
+          name="btn-filter"
+          class="button--primary"
+          @click="getFilters"
+        />
+      </div>
+      
 
       <div class="bets__results" v-if="isFiltersVisible">
-        <p class="bets__filters">{{ bets.length }} apostas encontradas</p>
+
+        <p class="bets__count-results">{{ bets.length }} apostas encontradas</p>
   
-        <div class="bets__button-filters">
+        <div class="bets__buttons-filters">
           <button>Todas</button>
           <button>Pendentes</button>
           <button>Ganhou</button>
@@ -53,28 +59,28 @@
               <p>Apostador: {{ bet.client }}</p>
               <table class="table">
                 <tbody>
-                  <tr class="table__line">
-                    <td class="table__column table_column--left">Valor apostado:</td>
-                    <td class="table__column table_column--right">R$ {{ bet.value }}</td>
+                  <tr>
+                    <td class="table__line--left">Valor apostado:</td>
+                    <td class="table__line--right">R$ {{ bet.value }}</td>
                   </tr>
                   <tr>
-                    <td class="left-align">Comissão:</td>
-                    <td class="right-align">R$ {{ bet.comission }}</td>
+                    <td class="table__line--left">Comissão:</td>
+                    <td class="table__line--right">R$ {{ bet.comission }}</td>
                   </tr>
                   <tr>
-                    <td class="left-align">Prêmio:</td>
-                    <td class="right-align">R$ {{ bet.premio }}</td>
+                    <td class="table__line--left">Prêmio:</td>
+                    <td class="table__line--right">R$ {{ bet.premio }}</td>
                   </tr>
                   <tr>
-                    <td class="left-align">Status:</td>
+                    <td class="table__line--left">Status:</td>
                     <td 
-                      class="right-align"
-                      :class="{ 'table__status--win text-win': bet.status === 'Ganhou', 'table__status--lose': bet.status === 'Perdeu' }"
+                      class="table__line--right"
+                      :class="{ 'table__status--success': bet.status === 'Ganhou', 'table__status--danger': bet.status === 'Perdeu' }"
                     >{{ bet.status }}</td>
                   </tr>
                   <tr>
-                    <td class="left-align">Pagamento:</td>
-                    <td class="right-align">{{ bet.payment }}</td>
+                    <td class="table__line--left">Pagamento:</td>
+                    <td class="table__line--right">{{ bet.payment }}</td>
                   </tr>
                 </tbody>  
               </table>
@@ -82,17 +88,15 @@
   
             <template #footer >
               <div :class="{
-                'bets__card__footer--inline': bet.status === 'Pendente',
-                'bets__card__footer':  bet.status !== 'Pendente'
+                'bets__card-footer--inline': bet.status === 'Pendente',
+                'bets__card-footer':  bet.status !== 'Pendente'
               }">
                 <w-button
                   id="btn-view"
                   text="Visuaizar"
                   value="view"
                   name="btn-view"
-                  color="secondary"
-                  class="bets_btn"
-                  v-if="bet.status != 'Pendente'"
+                  class="button--secondary"
                 />
 
                 <w-button
@@ -100,10 +104,9 @@
                   text="Pagar"
                   value="payer"
                   name="btn-payer"
-                  color="secondary"
-                  class="bets_btn"
+                  class="button--secondary"
                   @click="pagar"
-                    v-if="bet.status === 'Pendente'"
+                  v-if="bet.status === 'Pendente'"
                 />
 
                 <w-button
@@ -111,8 +114,7 @@
                   text="Encerrar aposta"
                   value="finish"
                   name="finish"
-                  color="secondary"
-                  class="bets_btn"
+                  class="button--secondary"
                   v-if="bet.status === 'Pendente'"
                 />
               </div>
@@ -130,7 +132,7 @@
             text="Sim"
             value="yes"
             name="btn-yes"
-            color="primary"
+            class="button--primary"
           />
           <div class="bets__separator"></div>
 
@@ -139,7 +141,7 @@
             text="Não"
             value="no"
             name="btn-no"
-            color="secondary"
+            class="button--secondary"
           />
 
           <div class="bets__separator"></div>
@@ -220,9 +222,9 @@ export default {
     getButtonClass(status) {
       switch(status) {
         case 'Pendente':
-          return 'bets__card__footer--inline'
+          return 'bets__card-footer--inline'
         default:
-          return 'bets__card__footer'
+          return 'bets__card-footer'
       }
     }
   }
@@ -239,35 +241,28 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     padding: 30px 30px 0px 30px;
     
   }
 
-  &__filters {
+  &__results {
+    padding-bottom: 80px;
+  }
+
+  &__count-results {
     padding-top: 30px;
     color: var(--color-text-input);
   }
 
-  &__buttons__filters {
+  &__buttons-filters {
     display: flex;
     flex-direction: row;
     padding-top: 20px;
   }
 
-  &_content_filters {
+  &__content-filters {
     margin-top: 20px;
-  }
-
-  &__table {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-
-  tr {
-    padding: 0;
-    margin: 0;
   }
 
   &__separator {
@@ -275,7 +270,7 @@ export default {
   }
 
   
-  &__card__footer {
+  &__card-footer {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -288,26 +283,34 @@ export default {
     }
     
   }
-
-  
-
-
   
 }
 
-.left-align {
-  text-align: left;
+.table {
+  width: 100%;
+
+  &__line {   
+    
+    &--left {
+      text-align: left;
+    }
+
+    &--right {
+      text-align: right;
+    }
+  }
+
+  &__status {
+    &--success {
+      color: var(--color-success);
+    }
+    &--danger {
+      color: var(--color-danger);
+    }
+  }
 }
 
-.right-align {
-  text-align: right;
-}
 
-.text-win {
-  color: var(--color-text-win);
-}
-.text-lose {
-  color: var(--color-text-lose);
-}
+
 
 </style>

@@ -4,7 +4,6 @@
     :value="value"
     type="button"
     class="button"
-    :class="buttonClass"
     @click="handleClick"
   >
     {{ text }}
@@ -28,20 +27,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'primary'
-    }
-  },
-  data(){
-    return {
-      customClass: 'button--primary',
-    }
-  },
-  computed: {
-    buttonClass() {
-      return {
-        'button--primary': this.color === 'primary',
-        'button--secondary': this.color === 'secondary'
-      };
+      default: 'secondary'
     }
   },
   methods: {
@@ -67,8 +53,8 @@ export default {
   font-weight: 400;
   line-height: 14px;
 
-  background: var(--color-primary);
   color: var(--color-background);
+  background: var(--color-primary);
   
   &--primary {
     color: var(--color-background);
@@ -76,8 +62,8 @@ export default {
   }
 
   &--secondary {
-    background: var(--color-primary);
     color: var(--color-text);
+    background: var(--color-background);
   }
 }
 </style>
