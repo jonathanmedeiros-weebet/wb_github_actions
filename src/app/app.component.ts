@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 
-import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService} from './services';
+import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService} from './services';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from './shared/config';
 import { filter } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import {LoginModalComponent} from './shared/layout/modals';
 
 import {TranslateService} from '@ngx-translate/core';
 import {IdleDetectService} from './shared/services/idle-detect.service';
-
+declare var xtremepush;
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
     @ViewChild('demoModal', {static: true}) demoModal;
     @ViewChild('inicialModal', {static: true}) inicialModal;
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
+    @ViewChild('enableNotificationXtremepushModal', {static: true}) enableNotificationXtremepushModal;
     @ViewChild('wrongVersionModal', {static: true}) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     imagemInicial;
@@ -33,6 +34,8 @@ export class AppComponent implements OnInit {
     isDemo = location.host === 'demo.wee.bet';
     isCadastro = false;
     public acceptedCookies: boolean = false;
+    modalPush;
+    xtremepushHabilitado = false;
 
     constructor(
         private auth: AuthService,
@@ -47,7 +50,8 @@ export class AppComponent implements OnInit {
         private route: ActivatedRoute,
         private paramLocais: ParametrosLocaisService,
         private translate: TranslateService,
-        private idleDetectService: IdleDetectService
+        private idleDetectService: IdleDetectService,
+        private utilsService: UtilsService,
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -70,6 +74,22 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.xtremepushHabilitado = this.paramLocais.getOpcoes().xtremepush_habilitado;
+        if(this.xtremepushHabilitado) {
+            const xtremepush_localstorage = JSON.parse(localStorage.getItem('xtremepush.data'));
+            if(xtremepush_localstorage.permission !== 'granted' && this.utilsService.getMobileOperatingSystem() !== 'ios') {
+                this.modalPush = this.modalService.open(
+                    this.enableNotificationXtremepushModal,
+                    {
+                        ariaLabelledBy: 'modal-basic-title',
+                        windowClass: 'modal-pop-up',
+                        centered: true,
+                        size: 'md',
+                    }
+                );
+            }
+        }
         this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
         this.auth.logado.subscribe((isLogged) => {
             const logoutByInactivityIsEnabled =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
@@ -109,7 +129,7 @@ export class AppComponent implements OnInit {
                 size: 'md',
                 centered: true,
                 windowClass: 'modal-500 modal-cadastro-cliente'
-            });            
+            });
 
             this.router.navigate(['esportes/futebol']);
         }
@@ -286,5 +306,14 @@ export class AppComponent implements OnInit {
     public acceptCookies() {
         this.acceptedCookies = true;
         localStorage.setItem('accepted_cookies', 'true');
+    }
+
+    activateNotifications(){
+        this.modalPush.close()
+        xtremepush('prompt');
+    }
+
+    disableNotifications() {
+        this.modalPush.close()
     }
 }

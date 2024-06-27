@@ -299,7 +299,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     verificarNotificacoes(){
        setInterval(() => {
-            console.log("verificado xtreme");
             xtremepush('inbox', 'message.list', {
                 limit: 1,
                 opened: 0
