@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild,} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild,} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import {Subject} from 'rxjs';
@@ -25,6 +25,8 @@ export class InformacoesComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     mobileScreen;
     tituloPagina = '';
+    private linguagemSelecionada: string = 'pt';
+    private paginas;
 
     constructor(
         private route: ActivatedRoute,
@@ -32,30 +34,33 @@ export class InformacoesComponent implements OnInit, OnDestroy {
         private menuFooterService: MenuFooterService,
         private renderer: Renderer2,
         private el: ElementRef,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private cd: ChangeDetectorRef
     ) {
     }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
+        this.linguagemSelecionada = this.translate.currentLang;
 
         this.route.data.pipe(takeUntil(this.unsub$)).subscribe((data) => {
-            this.tituloPagina = this.translate.instant(
-                'paginas.' + data.pagina
-            );
-            this.translate.onLangChange.subscribe(
-                () =>
-                    (this.tituloPagina = this.translate.instant(
-                        'paginas.' + data.pagina
-                    ))
-            );
+            const pageDataDefault = {conteudo: ''};
+
+            this.tituloPagina = this.translate.instant('paginas.' + data.pagina);
+            this.translate.onLangChange.subscribe((change) => {
+                this.tituloPagina = this.translate.instant(`paginas.${data.pagina}`)
+                this.pagina = this.paginas[change.lang.toUpperCase()] || pageDataDefault;
+            });
+
             this.paginaService
                 .getPaginaPorChave(data.pagina)
-                .subscribe((pagina) => {
-                    this.pagina = pagina;
+                .subscribe((paginas) => {
+                    this.paginas = paginas;
                     this.showLoadingIndicator = false;
+                    this.pagina = this.paginas[this.linguagemSelecionada.toUpperCase()] || pageDataDefault;
                 });
         });
+
         this.menuFooterService.setIsPagina(true);
         this.definirAltura();
     }

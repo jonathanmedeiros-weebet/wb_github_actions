@@ -114,7 +114,7 @@
                     <div class="section-body" *ngIf="sectionPeriodoPausa">
                         <p class="descricao">A funcionalidade de período de pausa de conta permite que você suspendam temporariamente o uso da sua conta na plataforma. Durante esse período, a conta fica inativa, impedindo o acesso e a realização de atividades como apostas, saques e depósitos. Essa opção é útil para fazer uma pausa temporária, sem excluir permanentemente a conta, preservando os dados e configurações para posterior reativação.</p>
                         <form [formGroup]="formPeriodoPausa" (ngSubmit)="onSubmitPeriodoPausa()">
-                            <div class="fields-row">
+                            <div class="fields-row" *ngIf="!infoPeriodoPausa">
                                 <div class="field">
                                     <label for="">Definir período de pausa</label>
                                     <select class="form-control inverted-out" formControlName="opcaoPausa" (change)="changeOpcaoPausa()">
@@ -145,7 +145,13 @@
                             <div class="info-pausa" *ngIf="infoPeriodoPausa">
                                 <i class="fa fa-info-circle"></i> O período de pausa está ativado. Sua conta voltará ao normal em {{infoPeriodoPausa}}
                             </div>
-                            <button type="submit" class="btn btn-custom">Salvar alterações</button>
+                            <button
+                                type="submit"
+                                class="btn btn-custom"
+                                *ngIf="!infoPeriodoPausa"
+                            >
+                                Salvar alterações
+                            </button>
                         </form>
                     </div>
                 </section>

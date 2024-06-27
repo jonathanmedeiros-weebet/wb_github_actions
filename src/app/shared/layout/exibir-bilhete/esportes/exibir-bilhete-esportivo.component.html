@@ -7,24 +7,24 @@
             </p>
         </div>
         <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-            <p>
+            <p class="aposta">
                 <b>Cliente: </b><span>{{aposta.apostador}}</span>
             </p>
         </div>
         <ng-template #exibicaoPadrao>
-            <p>
+            <p class="aposta">
                 <b>Cambista:</b> {{aposta.passador.nome}}
             </p>
-            <p>
+            <p class="aposta">
                 <b>Apostador: </b><span>{{aposta.apostador}}</span>
             </p>
         </ng-template>
-        <p>
+        <p class="aposta">
             <b>{{'geral.status' | translate}}: </b>
             <span>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</span>
         </p>
         <p class="aposta-horario">
-            <b>Horário:</b><span> {{aposta.horario | moment: 'DD/MM HH:mm'}}</span>
+            <b>Horário:</b><span> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
         </p>
         <p class="total-jogos">
             Quantidade de jogos:<span>{{aposta.itens.length}}</span>
@@ -48,6 +48,9 @@
         </p>
         <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
             Cambista paga: <span>{{cambistaPaga | currency}}</span>
+        </p>
+        <p class="computado" *ngIf="aposta?.data_liquidacao">
+            {{'geral.computadoEm' | translate}} <span>{{aposta.data_liquidacao | moment: 'DD/MM/YYYY HH:mm'}}</span>
         </p>
     </div>
     <div class="table-container">

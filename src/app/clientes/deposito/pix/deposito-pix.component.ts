@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild, Renderer2, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, Renderer2, ElementRef} from '@angular/core';
 import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {FinanceiroService} from '../../../shared/services/financeiro.service';
@@ -29,11 +29,11 @@ import { TransacoesHistoricoComponent } from '../../transacoes-historico/transac
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code" *ngIf="qrCodeBase64">
-            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag'].includes(paymentMethod)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
-            <img [ngStyle]="{'width': '170px'}" *ngIf="paymentMethod === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
-            <img [ngStyle]="{'width': '170px'}" *ngIf="paymentMethod === 'sauto_pay'" [src]="sautoPayQr"/>
-            <img [ngStyle]="{'width': '170px'}" *ngIf="paymentMethod === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
-            <img [ngStyle]="{'width': '170px', 'background-color':'#ffffff'}" *ngIf="paymentMethod === 'paag'" src="{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag'].includes(selectedPaymentMethod)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'sauto_pay'" [src]="sautoPayQr"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px', 'background-color':'#ffffff'}" *ngIf="selectedPaymentMethod === 'paag'" src="{{ qrCodeBase64 }}"/>
         </div>
         <div class="qr-code" *ngIf="!qrCodeBase64">
             <ngx-qrcode
@@ -55,8 +55,7 @@ export class NgbdModalContent {
     valorPix;
     qrCodeBase64;
     qrCode;
-    paymentMethod;
-    availablePaymentMethods;
+    selectedPaymentMethod;
     sautoPayQr;
     minute = 20;
     second = 0;
@@ -66,14 +65,11 @@ export class NgbdModalContent {
         public modal: NgbActiveModal,
         private _sanitizer: DomSanitizer,
         private _helper: HelperService,
-        private paramsLocais: ParametrosLocaisService,
         private domSanitizer: DomSanitizer,
     ) {}
 
     ngOnInit() {
-        this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
-        this.paymentMethod = this.availablePaymentMethods[0];
-        if (this.paymentMethod === 'sauto_pay') {
+        if (this.selectedPaymentMethod === 'sauto_pay') {
             const SautoPayUrl = 'data:image/svg+xml;base64,' + this.qrCodeBase64;
             this.sautoPayQr = this.domSanitizer.bypassSecurityTrustUrl(SautoPayUrl);
         }
@@ -113,7 +109,6 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     modalPromocao;
     pixModal;
     pix: DepositoPix;
-
     rolloverAtivo: Rollover[] = [];
 
     bonusOption = '';
@@ -142,8 +137,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     onlyOneModality = false;
     permitirBonusPrimeiroDeposito = false;
     submitting = false;
-
     clearSetInterval;
+
+    public valuesShortcuts: number[] = [10, 20, 50, 100, 500, 1000];
 
     constructor(
         private domSanitizer: DomSanitizer,
@@ -206,7 +202,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     changeAmount(amount) {
-        this.form.patchValue({ 'valor': amount });
+        const newAmount = this.form.value.valor + amount;
+        this.form.patchValue({ 'valor': newAmount});
         this.calculateBonusAmount();
     }
 
@@ -304,6 +301,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.pixModal.componentInstance.valorPix = this.helperService.moneyFormat(this.pix.valor);
         this.pixModal.componentInstance.qrCodeBase64 = this.pix.qr_code_base64;
         this.pixModal.componentInstance.qrCode = this.pix.qr_code;
+        this.pixModal.componentInstance.selectedPaymentMethod = this.pix.selected_payment_method;
 
         if (this.paymentMethodSelected === 'sauto_pay') {
             const SautoPayUrl = 'data:image/svg+xml;base64,' + this.pix.qr_code_base64;

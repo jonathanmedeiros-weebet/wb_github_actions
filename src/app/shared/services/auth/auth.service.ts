@@ -11,6 +11,8 @@ import {config} from './../../config';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
 
+declare var xtremepush: any;
+
 @Injectable({
     providedIn: 'root',
 })
@@ -99,6 +101,10 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
+                    if(this.xtremepushHabilitado()){
+                        xtremepush('set', 'user_id', res.results.user.id);
+                        xtremepush('event', 'login');
+                    }
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -124,6 +130,10 @@ export class AuthService {
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
+                    if(this.xtremepushHabilitado()){
+                        xtremepush('set', 'user_id', res.results.user.id);
+                        xtremepush('event', 'login');
+                    }
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -131,8 +141,17 @@ export class AuthService {
 
     logout() {
         this.limparStorage();
+        if(this.xtremepushHabilitado()) {
+            this.cleanXtremepushNotifications();
+        }
         this.logadoSource.next(false);
         window.location.reload();
+    }
+
+    cleanXtremepushNotifications(){
+        xtremepush('set', 'user_id', "");
+        const xtremepushNotificationContainer = document.getElementById('xtremepushNotificationContainer');
+        xtremepushNotificationContainer.innerHTML = '';
     }
 
     isLoggedIn(): boolean {
@@ -200,6 +219,15 @@ export class AuthService {
             result = opcoes[modalidade];
         }
 
+        return result;
+    }
+
+    xtremepushHabilitado() {
+        let result = false;
+        const opcoes = this.paramsService.getOpcoes().xtremepush_habilitado;
+        if (opcoes) {
+            result = true;
+        }
         return result;
     }
 

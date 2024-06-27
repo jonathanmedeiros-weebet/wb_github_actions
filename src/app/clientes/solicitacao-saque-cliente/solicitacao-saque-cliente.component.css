@@ -255,6 +255,22 @@
     margin-bottom: 0;
 }
 
+#legitimuz-container {
+    background-color: var(--sidebars);
+    padding: 30px 20px;
+}
+
+#legitimuz {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#legitimuz-action-verify {
+    flex: 1;
+    width: 25%;
+}
+
 @media only screen and (max-width: 1024px) {
     #default-content {
         padding: 20px;
@@ -310,11 +326,11 @@
         width: 100%;
     }
 
-    .shortcut-amounts button {
-        background-color: var(--game);
+    #details-wrapper .details-submit {
+        width: 100%;
     }
 
-    #details-wrapper .details-submit {
+    #legitimuz-action-verify {
         width: 100%;
     }
 }
