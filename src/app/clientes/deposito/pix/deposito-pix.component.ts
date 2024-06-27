@@ -11,6 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
 import { Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -66,7 +67,16 @@ export class NgbdModalContent {
         private _sanitizer: DomSanitizer,
         private _helper: HelperService,
         private domSanitizer: DomSanitizer,
+        private paramsService: ParametrosLocaisService,
+        private translate: TranslateService
     ) {}
+
+    get customCasinoBetting(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('bet.casinoBetting').toLowerCase(),
+            this.translate.instant('geral.cassino').toLowerCase()
+        );
+    }
 
     ngOnInit() {
         if (this.selectedPaymentMethod === 'sauto_pay') {

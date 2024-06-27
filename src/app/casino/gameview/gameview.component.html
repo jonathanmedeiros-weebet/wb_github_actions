@@ -2,7 +2,7 @@
     <div class="header-game-view">
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
-                <span> Cassino Galaxsys </span>
+                <span> {{ customCasinoName }} Galaxsys </span>
             </ng-container>
             <ng-template #nomeOficialGame>
                 <span>{{ gameName }}</span>

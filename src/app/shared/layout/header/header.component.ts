@@ -149,6 +149,20 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         super();
     }
 
+    get customCasinoName(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('menu.cassino'),
+            this.translate.instant('geral.cassino').toUpperCase()
+        );
+    }
+
+    get customLiveCasinoName(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('menu.cassino-aovivo'),
+            this.translate.instant('geral.cassino').toUpperCase()
+        );
+    }
+
     ngOnInit() {
 
         this.xtremepushHabilitado = this.paramsService.getOpcoes().xtremepush_habilitado;
