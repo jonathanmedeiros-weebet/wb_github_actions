@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <Header :showCalendarButton="true" :showSearchButton="true">
+    <Header
+      :showCalendarButton="true"
+      :showSearchButton="true"
+      @calendarClick="handleOpenCalendarModal"
+    >
       <SelectFake @click="handleOpenModalitiesModal"> {{ modality.name }} </SelectFake>
     </Header>
     <section class="home__body">
@@ -54,7 +58,11 @@
       @click="handleModality"
     />
 
-    <!-- <ModalCalendar /> -->
+    <ModalCalendar
+      v-if="showModalCalendar"
+      @closeModal="handleCloseCalendarModal"
+      @change="handleCalendar"
+    />
   </div>
 </template>
 
@@ -81,6 +89,7 @@ export default {
   },
   data() {
     return {
+      showModalCalendar: false,
       showModalLeagues: false,
       showModalModalities: false,
       modality: modalityList[0],
@@ -111,7 +120,17 @@ export default {
     handleLeague(leagueName) {
       this.league = this.leagueList.find(league => league.title === leagueName)
       this.handleCloseLeaguesModal()
-    }
+    },
+    handleOpenCalendarModal() {
+      this.showModalCalendar = true;
+    },
+    handleCloseCalendarModal() {
+      this.showModalCalendar = false;
+    },
+    handleCalendar(dateTime) {
+      console.log(dateTime)
+      this.handleCloseCalendarModal()
+    },
   }
 }
 </script>

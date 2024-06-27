@@ -28,7 +28,7 @@
           <div
             class="calendar__day"
             v-for="(day, indexDay) in week"
-            :class="{'calendar__day--selected': day == daySelected}"
+            :class="{'calendar__day--selected': day == daySelected && isMonthSelected}"
             :key="`${indexDay}-${index}`"
             @click="handleClick(day)"
           >
@@ -41,32 +41,45 @@
 </template>
   
 <script>
-import { dateFormatInMonthAndYear, now } from '@/utilities'
+import {
+  dateFormatInMonthAndYear,
+  now,
+  convertInMomentInstance
+} from '@/utilities/date.utitlity.ts'
 import IconArrowLeft from './icons/IconArrowLeft.vue'
 import IconArrowRight from './icons/IconArrowRight.vue'
-import { convertInMomentInstance } from '@/utilities/date.utitlity'
 
 export default {
   components: { IconArrowLeft, IconArrowRight },
   name: 'calendar',
   props: {
     initialDate: {
-      type: String,
-      default: now()
+      type: [String, Object],
+      default: () => now()
     }
   },
   data() {
     return {
       calendar: [],
-      today: convertInMomentInstance(),
+      today: convertInMomentInstance(this.initialDate),
       currentMonthAndYear: dateFormatInMonthAndYear(this.initialDate),
-      daySelected: '',
+      dateSelected: convertInMomentInstance(this.initialDate),
+      monthPreview: ''
     }
   },
   created() {
     this.mountCalendar()
-    this.daySelected = this.today.format('DD');
-    console.log(this.daySelected);
+    this.monthPreview = this.today.format('MM')
+  },
+  computed: {
+    daySelected() {
+      return this.dateSelected.format('DD')
+    },
+    isMonthSelected() {
+      console.log(dateFormatInMonthAndYear(this.dateSelected))
+      console.log(this.currentMonthAndYear)
+      return dateFormatInMonthAndYear(this.dateSelected) === this.currentMonthAndYear
+    }
   },
   methods: {
     nextMonth() {
@@ -107,11 +120,12 @@ export default {
       this.calendar = calendar;
     },
     handleClick(day) {
-      this.daySelected = day;
+      if(!Boolean(day)) return;
+      const dateCustom = convertInMomentInstance(this.today);
+      dateCustom.date(day);
 
-      const dateCustom = this.today;
-      dateCustom.date(Number(day));
-
+      this.dateSelected = null;
+      this.dateSelected = dateCustom;
       this.$emit('change', dateCustom)
     }
   },

@@ -1,7 +1,11 @@
 <template>
-    <WModal :backdropClick="true">
+    <WModal :backdropClick="true" @close="handleClose">
       <template #body>
-        <Calendar class="calendar" @change="handleCalendarChange"/>
+        <Calendar
+          class="calendar"
+          @change="handleCalendarChange"
+          :initialDate="initialDate"
+        />
       </template>
     </WModal>
 </template>
@@ -9,20 +13,23 @@
 <script>
 import WModal from '@/components/Modal.vue'
 import Calendar from '@/components/Calendar.vue'
-import { now } from '@/utilities/date.utitlity'
+import { now } from '@/utilities/date.utitlity.ts'
 
 export default {
     name: 'modal-calendar',
     components: { WModal, Calendar },
     props: {
       initialDate: {
-        type: String,
-        default: now()
+        type: [String, Object],
+        default: () => now()
       }
     },
     methods: {
       handleCalendarChange(date) {
         this.$emit('change', date)
+      },
+      handleClose() {
+        this.$emit('closeModal')
       }
     }
 }
