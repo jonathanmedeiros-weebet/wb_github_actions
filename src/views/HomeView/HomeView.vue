@@ -53,6 +53,8 @@
       @closeModal="handleCloseModalitiesModal"
       @click="handleModality"
     />
+
+    <!-- <ModalCalendar /> -->
   </div>
 </template>
 
@@ -64,6 +66,7 @@ import Collapse from '@/components/Collapse.vue'
 import GameItem from './parts/GameItem.vue'
 import ModalLeagues from './parts/ModalLeagues.vue'
 import ModalModalities from './parts/ModalModalities.vue'
+import ModalCalendar from './parts/ModalCalendar.vue'
 
 export default {
   name: 'home',
@@ -73,7 +76,8 @@ export default {
     Collapse,
     GameItem,
     ModalLeagues,
-    ModalModalities
+    ModalModalities,
+    ModalCalendar
   },
   data() {
     return {
