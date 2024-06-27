@@ -6,6 +6,7 @@ import TicketsView from '@/views/TicketsView.vue'
 import BetsView from '@/views/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
+import VerificationView from '@/views/VerificationView.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -45,6 +46,11 @@ const router = new VueRouter({
       name: 'change-password',
       component: ChangePasswordView,
     },
+    {
+      path: '/verification',
+      name: 'verification',
+      component: VerificationView,
+    }
   ]
 })
 export default router
