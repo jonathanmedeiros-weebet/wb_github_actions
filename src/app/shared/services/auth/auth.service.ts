@@ -41,11 +41,10 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    if (res.results.migracao) {
-                        return res.results;
-                    } else {
+                    if (res.results.user) {
                         localStorage.setItem('user', JSON.stringify(res.results.user));
                     }
+                    return res;
                 }),
                 catchError(this.errorService.handleErrorLogin),
             );
@@ -114,11 +113,13 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
+
                     this.setCookie(res.results.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.results.token);
                     localStorage.setItem('user', JSON.stringify(res.results.user));
+
                     if (res.results.user.tipo_usuario === 'cambista') {
                         localStorage.setItem('tipos_aposta', JSON.stringify(res.results.tipos_aposta));
                         this.setIsCliente(false);
@@ -126,10 +127,12 @@ export class AuthService {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
                     }
+
                     this.logadoSource.next(true);
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
                     }
+
                     if(this.xtremepushHabilitado()){
                         xtremepush('set', 'user_id', res.results.user.id);
                         xtremepush('event', 'login');
@@ -190,6 +193,43 @@ export class AuthService {
             );
     }
 
+    requestSMSToken(step = 1, token = null) {
+        const url = `${this.AuthUrl}/requestSMSMultifactor`;
+        const data = {
+            step: step,
+            token: token,
+        };
+
+        return this.http
+            .post(url, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                map((res: any) => res),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    requestEmailMultifator(senha) {
+        const url = `${this.AuthUrl}/requestMultifatorEmail`;
+        const data  = { senha };
+        return this.http
+            .post(url, data, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    validarMultifator(dados: any) {
+        const url = `${this.AuthUrl}/validarMultifator`;
+
+        return this.http
+            .post(url, dados, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getToken() {
         return localStorage.getItem('token');
     }
@@ -223,12 +263,7 @@ export class AuthService {
     }
 
     xtremepushHabilitado() {
-        let result = false;
-        const opcoes = this.paramsService.getOpcoes().xtremepush_habilitado;
-        if (opcoes) {
-            result = true;
-        }
-        return result;
+        return Boolean(this.paramsService.getOpcoes()?.xtremepush_habilitado);
     }
 
     liveIsActive() {

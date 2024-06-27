@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClienteService, MessageService, UtilsService } from 'src/app/services';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ClienteService, MessageService, ParametrosLocaisService, UtilsService } from 'src/app/services';
 import { Cidade } from 'src/app/shared/models/endereco/cidade';
 import { Estado } from 'src/app/shared/models/endereco/estado';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import * as moment from 'moment';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MultifactorConfirmationModalComponent } from '../multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-cliente-perfil-modal',
@@ -22,14 +24,24 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
     private showLoading = true;
     public mostrarSenha = false;
 
+    private tokenMultifator: string;
+    private codigoMultifator: string;
+
     constructor(
         private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private utilsService: UtilsService,
         private messageService: MessageService,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private modalService: NgbModal,
+        private translate: TranslateService,
+        private paramsLocais: ParametrosLocaisService,
     ) {
         super();
+    }
+
+    get twoFactorInProfileChangeEnabled(): boolean {
+        return Boolean(this.paramsLocais.getOpcoes()?.enable_two_factor_in_profile_change);
     }
 
     ngOnInit() {
@@ -66,14 +78,60 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
         this.form.markAllAsTouched();
     }
 
+    onSubmit() {
+        if (this.form.valid) {
+            if(this.twoFactorInProfileChangeEnabled) {
+                this.validacaoMultifator();
+            } else {
+                this.submit();
+            }
+        } else {
+            this.checkFormValidations(this.form);
+        }
+    }
+
     submit() {
         if(this.form.invalid) return;
-        this.clienteService.atualizarDadosCadastrais(this.form.value)
+
+        let values = this.form.value;
+
+        if(this.twoFactorInProfileChangeEnabled) {
+            values = {
+                ...values,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+        this.clienteService
+            .atualizarDadosCadastrais(values)
             .subscribe(
-                () => this.messageService.success('Dados Cadastrais atualizados.'),
-                (error) => this.handleError(error)
+                () => this.messageService.success(this.translate.instant('geral.alteracoesSucesso')),
+                error => this.handleError(error)
             );
     }
+
+    private validacaoMultifator() {
+        const modalref = this.modalService.open(
+             MultifactorConfirmationModalComponent, {
+                 ariaLabelledBy: 'modal-basic-title',
+                 windowClass: 'modal-550 modal-h-350',
+                 centered: true,
+                 backdrop: 'static'
+             }
+         );
+ 
+        modalref.componentInstance.senha = this.form.get('senha_atual').value;
+        modalref.result.then(
+             (result) => {
+                 this.tokenMultifator = result.token;
+                 this.codigoMultifator = result.codigo;
+ 
+                 if (result.checked) {
+                     this.submit();
+                 }
+             }
+         );
+     }
 
     async loadCliente() {
         try {

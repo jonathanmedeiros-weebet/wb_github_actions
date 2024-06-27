@@ -105,13 +105,10 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     }
 
     onCodeChanged(code: string) {
-        console.log('Change:', code);
         this.codigo = code;
     }
 
     onCodeCompleted(code: string) {
-        console.log('Complete:', code);
         this.codigo = code;
     }
-
 }
