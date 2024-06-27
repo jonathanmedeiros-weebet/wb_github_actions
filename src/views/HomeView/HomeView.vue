@@ -4,6 +4,7 @@
       :showCalendarButton="true"
       :showSearchButton="true"
       @calendarClick="handleOpenCalendarModal"
+      @searchClick="handleOpenSearchModal"
     >
       <SelectFake @click="handleOpenModalitiesModal"> {{ modality.name }} </SelectFake>
     </Header>
@@ -17,32 +18,7 @@
         <span>{{ league.title }}</span>
       </SelectFake>
 
-      <Collapse
-        class="home__collapse"
-        :initCollapsed="true"
-        v-for="({title, image}, index) in championshipList"
-        :key="index"
-      >
-        <template #title>
-          <img :src="image" />
-          {{ title }}
-        </template>
-
-        <div class="game-list"> 
-          <div class="game-list__item-empty">
-            <div class="game-list__columns">
-              <span class="game-list__column">1</span>
-              <span class="game-list__column">x</span>
-              <span class="game-list__column">2</span>
-            </div>
-          </div>
-          <GameItem
-            v-for="(game, index) in gameList"
-            :key="index"
-            :game="game"
-          />
-        </div>
-      </Collapse>
+      <GameList :data="championshipList" />
     </section>
 
     <ModalLeagues
@@ -63,32 +39,39 @@
       @closeModal="handleCloseCalendarModal"
       @change="handleCalendar"
     />
+
+    <ModalSearch
+      v-if="showModalSearch"
+      @closeModal="handleCloseSearchModal"
+      @change="handleSearch"
+    />
   </div>
 </template>
 
 <script>
 import Header from '@/components/layouts/Header.vue'
 import SelectFake from './parts/SelectFake.vue'
-import { modalityList, championshipList, leagueList, gameList } from '@/constants'
-import Collapse from '@/components/Collapse.vue'
-import GameItem from './parts/GameItem.vue'
+import { modalityList, championshipList, leagueList } from '@/constants'
 import ModalLeagues from './parts/ModalLeagues.vue'
 import ModalModalities from './parts/ModalModalities.vue'
 import ModalCalendar from './parts/ModalCalendar.vue'
+import ModalSearch from './parts/ModalGameSearch.vue'
+import GameList from './parts/GameList.vue'
 
 export default {
   name: 'home',
   components: {
     Header,
     SelectFake,
-    Collapse,
-    GameItem,
     ModalLeagues,
     ModalModalities,
-    ModalCalendar
+    ModalCalendar,
+    ModalSearch,
+    GameList,
   },
   data() {
     return {
+      showModalSearch: false,
       showModalCalendar: false,
       showModalLeagues: false,
       showModalModalities: false,
@@ -97,7 +80,6 @@ export default {
       modalityList,
       championshipList,
       leagueList,
-      gameList
     }
   },
   methods: {
@@ -111,6 +93,7 @@ export default {
       this.modality = this.modalityList.find(modality => modality.id === modalityId)
       this.handleCloseModalitiesModal()
     },
+
     handleOpenLeaguesModal() {
       this.showModalLeagues = true;
     },
@@ -121,6 +104,7 @@ export default {
       this.league = this.leagueList.find(league => league.title === leagueName)
       this.handleCloseLeaguesModal()
     },
+
     handleOpenCalendarModal() {
       this.showModalCalendar = true;
     },
@@ -131,12 +115,23 @@ export default {
       console.log(dateTime)
       this.handleCloseCalendarModal()
     },
+
+    handleOpenSearchModal() {
+      this.showModalSearch = true
+    },
+    handleCloseSearchModal() {
+      this.showModalSearch = false
+    },
+    handleSearch(gameId) {
+      console.log(gameId)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .home {
+  padding-bottom: 100px;
   &__body {
     display: flex;
     flex-direction: column;
@@ -147,41 +142,9 @@ export default {
     padding: 8px 16px;
   }
 
-  &__collapse img,
   &__league-select img {
     width: 16px;
     height: 16px;
-  }
-}
-
-.game-list {
-  margin-top: 1px;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-
-  &__item-empty {
-    width: 100%;
-    height: 30px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 16px;
-  }
-
-  &__columns {
-    width: 190px;
-    display: flex;
-    gap: 8px;
-  }
-
-  &__column {
-    width: 58px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF80;
   }
 }
 </style>
