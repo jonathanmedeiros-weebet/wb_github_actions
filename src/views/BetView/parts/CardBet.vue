@@ -33,7 +33,7 @@ export default {
     border-radius: 8px;
 
     &__container {
-        padding: 15px 15px;
+        padding: 24px 16px;
     }
 
     &__title {

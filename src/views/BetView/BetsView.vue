@@ -4,27 +4,24 @@
     <div class="bets__container">
       
       <div class="bets_contente">
-          <w-input
+        <w-input
           label="Apostador"
           name="punter"
           placeholder="999.999.999-99"
           type="text"
         />
-
         <w-input
           label="Apostador"
           name="code"
           placeholder="999.999.999-99"
           type="text"
         />
-
         <w-input
           label="Data"
           name="date"
           placeholder="dd/mm/aaaa"
           type="date"
         />
-
         <w-button
           id="btn-filter"
           text="Filtar"
@@ -35,16 +32,38 @@
         />
       </div>
       
-
       <div class="bets__results" v-if="isFiltersVisible">
-
         <p class="bets__count-results">{{ bets.length }} apostas encontradas</p>
   
         <div class="bets__buttons-filters">
-          <button>Todas</button>
-          <button>Pendentes</button>
-          <button>Ganhou</button>
-          <button>Perdeu</button>
+          <tag-button
+            id="btn-all"
+            text="Todas"
+            value="all"
+            name="btn-all"
+            class="button--primary"
+          />
+          <tag-button
+            id="btn-pendent"
+            text="Pendente"
+            value="pendeent"
+            name="btn-pendent"
+            class="button--secondary"
+          />
+          <tag-button
+            id="btn-win"
+            text="Ganhou"
+            value="win"
+            name="btn-win"
+            class="button--secondary"
+          />
+          <tag-button
+            id="btn-lose"
+            text="Perdeu"
+            value="lose"
+            name="btn-lose"
+            class="button--secondary"
+          />
         </div>
   
         <div class="bets__content-filters" v-for="(bet, index) in bets" :key="index">
@@ -98,7 +117,6 @@
                   name="btn-view"
                   class="button--secondary"
                 />
-
                 <w-button
                   id="btn-payer"
                   text="Pagar"
@@ -108,7 +126,6 @@
                   @click="pagar"
                   v-if="bet.status === 'Pendente'"
                 />
-
                 <w-button
                   id="btn-finish"
                   text="Encerrar aposta"
@@ -124,9 +141,7 @@
       </div>
 
       <WModal v-if="isModalVisible" @close="closeModal">
-
-        <template #body>    
-                
+        <template #body>             
           <w-button
             id="btn-yes"
             text="Sim"
@@ -135,7 +150,6 @@
             class="button--primary"
           />
           <div class="bets__separator"></div>
-
           <w-button
             id="btn-no"
             text="Não"
@@ -143,12 +157,8 @@
             name="btn-no"
             class="button--secondary"
           />
-
           <div class="bets__separator"></div>
         </template>
-        
-        
-      
       </WModal>
 
     </div>
@@ -160,7 +170,8 @@ import Header from '@/components/layouts/Header.vue'
 import WInput from '@/components/Input.vue'
 import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
-import CardBets from '@/components/CardBets.vue'
+import CardBets from '@/views/BetView/parts/CardBet.vue'
+import TagButton from '@/components/TagButton.vue'
 
 export default {
   name: 'bets',
@@ -169,7 +180,8 @@ export default {
     WInput,
     WButton,
     WModal,
-    CardBets
+    CardBets,
+    TagButton
   },
   data() {
     return {
@@ -242,7 +254,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 30px 30px 0px 30px;
+    padding: 24px 24px 0px 24px;
     
   }
 
@@ -259,10 +271,12 @@ export default {
     display: flex;
     flex-direction: row;
     padding-top: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
   &__content-filters {
-    margin-top: 20px;
+    margin-top: 16px;
   }
 
   &__separator {
