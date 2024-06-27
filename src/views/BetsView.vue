@@ -31,20 +31,17 @@
         @click="getFilters"
       />
 
-      <div class="bets__container__filters" v-if="isFiltersVisible">
-
-        <div class="bets__filters">
-          <p class="bets_registers">{{ bets.length }} apostas encontradas</p>
-        </div>
+      <div class="bets__results" v-if="isFiltersVisible">
+        <p class="bets__filters">{{ bets.length }} apostas encontradas</p>
   
-        <div class="bets__buttons__filters">
+        <div class="bets__button-filters">
           <button>Todas</button>
           <button>Pendentes</button>
           <button>Ganhou</button>
           <button>Perdeu</button>
         </div>
   
-        <div class="bets_content_filters" v-for="(bet, index) in bets" :key="index">
+        <div class="bets__content-filters" v-for="(bet, index) in bets" :key="index">
           <card-bets>
             <template #title>
               <p>Código da Aposta: {{ bet.code }}</p>
@@ -54,11 +51,11 @@
             </template>
             <template #body>
               <p>Apostador: {{ bet.client }}</p>
-              <table class="bets__table">
+              <table class="table">
                 <tbody>
-                  <tr>
-                    <td class="left-align">Valor apostado:</td>
-                    <td class="right-align">R$ {{ bet.value }}</td>
+                  <tr class="table__line">
+                    <td class="table__column table_column--left">Valor apostado:</td>
+                    <td class="table__column table_column--right">R$ {{ bet.value }}</td>
                   </tr>
                   <tr>
                     <td class="left-align">Comissão:</td>
@@ -72,7 +69,7 @@
                     <td class="left-align">Status:</td>
                     <td 
                       class="right-align"
-                      :class="{ 'text-win': bet.status === 'Ganhou', 'text-lose': bet.status === 'Perdeu' }"
+                      :class="{ 'table__status--win text-win': bet.status === 'Ganhou', 'table__status--lose': bet.status === 'Perdeu' }"
                     >{{ bet.status }}</td>
                   </tr>
                   <tr>
@@ -84,66 +81,43 @@
             </template>
   
             <template #footer >
-              
-              <div :class="getButtonClass(bet.status)">
-                
-                <div class="bets_btn" v-if="bet.status != 'Pendente'">
-  
-                  <w-button
-                    id="btn-view"
-                    text="Visuaizar"
-                    value="view"
-                    name="btn-view"
-                    color="secondary"
-                    class="bets_btn"
-                  />
-                </div>
-  
-                <template v-if="bet.status === 'Pendente'">
-  
-                  <div class="bets_btn">
-                    <w-button
-                      id="btn-view"
-                      text="Visuaizar"
-                      value="view"
-                      name="btn-view"
-                      color="secondary"
-                      class="bets_btn"
-                    />
-                  </div>
-  
-                  <div class="bets_btn">
-                    <w-button
-                      id="btn-payer"
-                      text="Pagar"
-                      value="payer"
-                      name="btn-payer"
-                      color="secondary"
-                      class="bets_btn"
-                      @click="pagar"
-                    />
-                  </div>
-  
-                  <div class="bets_btn">
-                    <w-button
-                      id="btn-finish"
-                      text="Encerrar aposta"
-                      value="finish"
-                      name="finish"
-                      color="secondary"
-                      class="bets_btn"
-                    />
-  
-                  </div>
-  
-                </template>
-  
-  
+              <div :class="{
+                'bets__card__footer--inline': bet.status === 'Pendente',
+                'bets__card__footer':  bet.status !== 'Pendente'
+              }">
+                <w-button
+                  id="btn-view"
+                  text="Visuaizar"
+                  value="view"
+                  name="btn-view"
+                  color="secondary"
+                  class="bets_btn"
+                  v-if="bet.status != 'Pendente'"
+                />
+
+                <w-button
+                  id="btn-payer"
+                  text="Pagar"
+                  value="payer"
+                  name="btn-payer"
+                  color="secondary"
+                  class="bets_btn"
+                  @click="pagar"
+                    v-if="bet.status === 'Pendente'"
+                />
+
+                <w-button
+                  id="btn-finish"
+                  text="Encerrar aposta"
+                  value="finish"
+                  name="finish"
+                  color="secondary"
+                  class="bets_btn"
+                  v-if="bet.status === 'Pendente'"
+                />
               </div>
-  
             </template>
           </card-bets>
-          
         </div>
       </div>
 

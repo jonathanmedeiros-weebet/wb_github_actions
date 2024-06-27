@@ -1,15 +1,14 @@
 <template>
-  <div class="button">
-    <button
-      :id="id"
-      :value="value"
-      type="button"
-      :class="buttonClass"
-      @click="handleClick"
-    >
-      {{text}}
-    </button>
-  </div>
+  <button
+    :id="id"
+    :value="value"
+    type="button"
+    class="button"
+    :class="buttonClass"
+    @click="handleClick"
+  >
+    {{ text }}
+  </button>
 </template>
 
 <script>
@@ -40,8 +39,8 @@ export default {
   computed: {
     buttonClass() {
       return {
-        'button button--primary': this.color === 'primary',
-        'button button--secondary': this.color === 'secondary'
+        'button--primary': this.color === 'primary',
+        'button--secondary': this.color === 'secondary'
       };
     }
   },
@@ -55,30 +54,30 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
   width: 100%;
   height: 46px;
-  border-radius: 8px 8px 8px 8px;
+  border-radius: 8px;
   border: none;
+
   font-size: 14px;
   font-weight: 400;
-  
-  line-height: 16.41px;
-  padding: 10px;
+  line-height: 14px;
+
   background: var(--color-primary);
+  color: var(--color-background);
   
   &--primary {
-    color: rgba(10, 10, 10, 1);
-    background-color: rgb(3, 181, 110);
-    
+    color: var(--color-background);
+    background: var(--color-primary);
   }
 
   &--secondary {
     background: var(--color-primary);
     color: var(--color-text);
   }
- 
 }
 </style>
