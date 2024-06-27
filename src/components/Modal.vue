@@ -104,7 +104,7 @@ export default {
   width: 100%;
   height: auto;
   max-height: 90%;
-  
+  padding: 0px 20px;
   overflow-y: auto;
 
   &_icons {
@@ -133,7 +133,7 @@ export default {
     margin-left: auto;
     margin-bottom: -10px;
     padding-top: 7px; 
-    padding-right: 20px; 
+    padding-right: 5px; 
   }
 
   &__header {
