@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
-
-import {AuthService, ClienteService, MenuFooterService, MessageService, SidebarService} from './../services';
+import {AuthService, ClienteService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService} from './../services';
 import {BaseFormComponent} from '../shared/layout/base-form/base-form.component';
-
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {PasswordValidation} from '../shared/utils';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 
 @Component({
     selector: 'app-meu-perfil',
@@ -15,12 +15,13 @@ import {PasswordValidation} from '../shared/utils';
 })
 export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     public isCollapsed = false;
-    unsub$ = new Subject();
-    isCliente;
+    private unsub$ = new Subject();
+    public mostrarSenhaAtual: boolean = false;
+    public mostrarSenhaNova: boolean = false;
+    public mostrarSenhaConfirmacao: boolean = false;
 
-    mostrarSenhaAtual = false;
-    mostrarSenhaNova = false;
-    mostrarSenhaConfirmacao = false;
+    private tokenMultifator: string;
+    private codigoMultifator: string;
 
     constructor(
         private messageService: MessageService,
@@ -28,14 +29,23 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
         private menuFooterService: MenuFooterService,
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
+        private modalService: NgbModal,
+        private paramsLocais: ParametrosLocaisService
     ) {
         super();
     }
 
+    get isCliente() {
+        return this.auth.isCliente();
+    }
+
+    get twoFactorInProfileChangeEnabled(): boolean {
+        return Boolean(this.paramsLocais.getOpcoes()?.enable_two_factor_in_profile_change);
+    }
+
     ngOnInit() {
         this.createForm();
-        this.isCliente = this.auth.isCliente();
 
         if(this.isCliente) {
             this.sidebarService.changeItens({contexto: 'cliente'});
@@ -76,8 +86,29 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         }, {validator: PasswordValidation.MatchPassword});
     }
 
+    onSubmit() {
+        if (this.form.valid) {
+            if(this.twoFactorInProfileChangeEnabled) {
+                this.validacaoMultifator();
+            } else {
+                this.submit();
+            }
+        } else {
+            this.checkFormValidations(this.form);
+        }
+    }
+
     submit() {
-        const values = this.form.value;
+        let values = this.form.value;
+
+        if(this.twoFactorInProfileChangeEnabled) {
+            values = {
+                ...values,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+        
         if (this.isCliente) {
             this.clienteService.alterarSenha(values)
                 .pipe(takeUntil(this.unsub$))
@@ -113,7 +144,26 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.messageService.error(error);
     }
 
-    mostrarSenha(event: any) {
+    private validacaoMultifator() {
+        const modalref = this.modalService.open(
+            MultifactorConfirmationModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350',
+                centered: true,
+                backdrop: 'static'
+            }
+        );
+ 
+        modalref.componentInstance.senha = this.form.get('senha_atual').value;
+        modalref.result.then(
+            (result) => {
+                this.tokenMultifator = result.token;
+                this.codigoMultifator = result.codigo;
 
+                if (result.checked) {
+                    this.submit();
+                }
+            }
+        );
     }
 }

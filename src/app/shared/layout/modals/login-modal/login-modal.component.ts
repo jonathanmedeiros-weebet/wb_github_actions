@@ -1,16 +1,16 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {UntypedFormBuilder} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
+import { Router} from '@angular/router';
+import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { AuthService, MessageService, ParametrosLocaisService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
-import {config} from '../../../config';
+import { config } from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { FormValidations } from 'src/app/shared/utils';
@@ -45,7 +45,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     constructor(
         public activeModal: NgbActiveModal,
         private fb: UntypedFormBuilder,
-        private apostaService: ApostaService,
         private messageService: MessageService,
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService,
@@ -131,39 +130,50 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 (res) => {
                     this.getUsuario();
+
                     if (
-                        this.usuario && this.usuario.tipo_usuario === 'cliente'
-                        && this.authDoisFatoresHabilitado
-                        && this.auth.getCookie(this.usuario.cookie) === ''
-                        && this.usuario.login !== 'suporte@wee.bet'
+                        Boolean(res) &&
+                        Boolean(res.results) &&
+                        Boolean(res.results.migracao)
                     ) {
-                        this.abrirModalAuthDoisFatores();
-                    } else if (res && res.results && res.results.migracao) {
                         this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
                         this.activeModal.dismiss();
-                    } else {
-                        this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                        const data = {
-                            ...this.form.value,
-                            cookie: this.auth.getCookie(this.usuario.cookie),
-                            geolocation: this.geolocation
-                        };
-
-                        this.auth.login(data)
-                            .pipe(takeUntil(this.unsub$))
-                            .subscribe(
-                                () => {
-                                    this.getUsuario();
-                                    if (this.usuario.tipo_usuario === 'cambista') {
-                                        location.reload();
-                                    }
-                                    // this.activeModal.dismiss();
-                                    this.activeModal.close(true);
-                                    this.router.navigate([this.router.url]);
-                                },
-                                error => this.handleError(error)
-                            );
+                        return;
                     }
+
+                    if (
+                        Boolean(this.usuario) && 
+                        this.usuario.tipo_usuario === 'cliente' &&
+                        this.authDoisFatoresHabilitado &&
+                        !Boolean(this.auth.getCookie(this.usuario.cookie)) &&
+                        this.usuario.login !== 'suporte@wee.bet'
+                    ) {
+                        this.abrirModalAuthDoisFatores();
+                        return;
+                    }  
+                    
+                    this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
+                    const data = {
+                        ...this.form.value,
+                        cookie: this.auth.getCookie(this.usuario.cookie),
+                        geolocation: this.geolocation
+                    };
+
+                    this.auth.login(data)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            () => {
+                                this.getUsuario();
+
+                                if (this.usuario.tipo_usuario === 'cambista') {
+                                    location.reload();
+                                }
+
+                                this.activeModal.close(true);
+                                this.router.navigate([this.router.url]);
+                            },
+                            error => this.handleError(error)
+                        );
                 },
                 (error) => {
                     this.handleError(error.message);
@@ -272,5 +282,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     onBeforeInput(e, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
+    }
+
+    public toClose() {
+        this.activeModal.dismiss('Cross click')
     }
 }
