@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 
 import {config} from '../config';
 import { DOCUMENT } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable({
@@ -16,7 +17,8 @@ export class ParametrosLocaisService {
 
     constructor(
         @Inject(DOCUMENT) private document: Document,
-        private http: HttpClient
+        private http: HttpClient,
+        private translate: TranslateService
     ) { }
 
     load() {
@@ -246,5 +248,15 @@ export class ParametrosLocaisService {
     indiqueGanheHabilitado() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.indique_ganhe_habilitado : null;
     }
-}
 
+    getCustomCasinoName(wordToReplace: string = '', casinoDefault: string = this.translate.instant('geral.cassino')) {
+        const currentLang = this.translate.currentLang;
+
+        let customCasinoName = this.getOpcoes()?.custom_casino_name;
+        customCasinoName = customCasinoName[currentLang] ?? casinoDefault;
+
+        return wordToReplace
+            ? wordToReplace.replace(casinoDefault, customCasinoName)
+            : customCasinoName;
+    }
+}
