@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-
+    
     background-color: var(--color-background-input);
     font-size: 14px;
     font-weight: 400;
@@ -37,7 +37,6 @@ export default {
     }
 
     &__title {
-        
         text-align: left;
     }
 

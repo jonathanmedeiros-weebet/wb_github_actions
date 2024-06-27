@@ -246,6 +246,7 @@ export default {
 <style lang="scss" scoped>
 
 .bets {
+
   height: 100vh;
   justify-content: space-between;
 
@@ -255,7 +256,6 @@ export default {
     flex-direction: column;
     height: 100%;
     padding: 24px 24px 0px 24px;
-    
   }
 
   &__results {
@@ -283,7 +283,6 @@ export default {
     margin-bottom: 20px;
   }
 
-  
   &__card-footer {
     display: flex;
     flex-direction: column;
@@ -301,6 +300,7 @@ export default {
 }
 
 .table {
+  
   width: 100%;
 
   &__line {   

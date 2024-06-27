@@ -1,9 +1,9 @@
 <template>
     <button
-    :id="id"
-    :value="value"
-    type="button"
-    class="button"
+        :id="id"
+        :value="value"
+        type="button"
+        class="button"
     >
         {{ text }}
     </button>
@@ -30,21 +30,18 @@ export default {
 
 <style lang="scss" scoped>
 .button {
+    
     display: flex;
     justify-content: center;
     align-items: center;
-  
     height: 32px;
     padding: 10px 17px 10px 17px;
     gap: 10px;
     border-radius: 37px;
-
     border: none;
-
     font-size: 16px;
     font-weight: 400;
     line-height: 14px;
-
     color: var(--color-background);
     background: var(--color-primary);
     
