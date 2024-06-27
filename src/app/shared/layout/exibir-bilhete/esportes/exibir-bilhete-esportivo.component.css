@@ -95,7 +95,10 @@ hr {
     margin: 1px;
     font-size: 12px;
 }
-.valores .aposta, .valores .ganho, .valores .cambista-paga, .valores .resultado {
+.valores .aposta, 
+.valores .ganho,
+.valores .cambista-paga,
+.valores .resultado {
     margin: 4px 1px 1px 1px;
     font-weight: bold;
     font-size: 12px;
@@ -107,9 +110,13 @@ hr {
     display: flex;
     margin: 0;
 }
-.codigo-aposta, .aposta-horario {
+
+.codigo-aposta,
+.aposta-horario,
+.computado {
     display: none;
 }
+
 .modal-title-mobile {
     font-weight: 600;
     margin-bottom: 4px;
@@ -237,8 +244,11 @@ table tr td:nth-child(3) {
         display: flex;
         justify-content: space-between;
     }
-    .codigo-aposta, .aposta-horario {
+    .codigo-aposta,
+    .aposta-horario,
+    .computado {
         display: flex;
+        justify-content: space-between;
     }
     .modal-title {
         display: none;

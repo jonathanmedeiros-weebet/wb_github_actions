@@ -50,6 +50,7 @@
         "cancelar": "Cancelar",
         "fechar": "Fechar",
         "todos": "Todos",
+        "concluido": "Concluído",
         "confirmar": "Confirmar",
         "ganhou": "Ganhou",
         "perdeu": "Perdeu",
@@ -103,6 +104,8 @@
         "selecionarTodos": "Selecionar todos",
         "selecionarTodosDe": "Selecionar todos de",
         "validarAposta": "Validar Aposta",
+        "replicarApostaLoteria": "Replicar Aposta de Loteria",
+        "replicarAposta": "Replicar Aposta",
         "codigoAposta": "Código Aposta",
         "codigoPreAposta": "Código Pré-aposta",
         "totalDeJogos": "Total de jogos",
@@ -212,6 +215,7 @@
         "rodadaGratis": "Rodada grátis",
         "dataVencimento": "Data de vencimento",
         "quantidade": "Quantidade",
+        "quantidadeUtilizada": "Qtd. Utilizada",
         "jogarAgora": "Jogar Agora",
         "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
@@ -240,7 +244,8 @@
         "nenhumResultadoEncontrado": "Nenhum resultado encontrado para esta pesquisa",
         "jogosEmAlta": "Jogos em alta",
         "nenhumJogoDisponivel": "Nenhum jogo disponível no momento",
-        "loginGoogle" : "Realize o login com a conta do google"
+        "loginGoogle" : "Realize o login com a conta do google",
+        "computadoEm": "Computado em:"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -581,5 +586,10 @@
     },
     "botoes": {
         "aceitar": "Aceitar"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recuperar minha conta!",
+        "contaBloqueadaPorTentativas": "Sua conta foi bloqueada porque você excedeu o número máximo de tentativas de login.",
+        "instrucoesRecuperacao": "Por favor, utilize a recuperação de senha para desbloquear sua conta."
     }
 }

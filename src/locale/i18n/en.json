@@ -49,6 +49,7 @@
         "cancelar": "Cancel",
         "fechar": "Close",
         "todos": "All",
+        "concluido": "Completed",
         "confirmar": "Confirm",
         "ganhou": "Win",
         "perdeu": "Lost",
@@ -103,6 +104,8 @@
         "selecionarTodos": "Select all",
         "selecionarTodosDe": "Select all from",
         "validarAposta": "Validate Bet",
+        "replicarApostaLoteria": "Replicate Bet Lottery",
+        "replicarAposta": "Replicate Bet",
         "codigoAposta": "Bet Code",
         "codigoPreAposta": "Pre-bet Code",
         "totalDeJogos": "Total games",
@@ -212,6 +215,7 @@
         "rodadaGratis": "Free Spin",
         "dataVencimento": "Expiration date",
         "quantidade": "Quantity",
+        "quantidadeUtilizada": "Qty. used",
         "jogarAgora": "Play now",
         "nenhumaRodadaGratis": "No free spins found.",
         "opcaoPromocao": "Select one of the options to view the current promotions.",
@@ -239,7 +243,8 @@
         "nenhumResultadoEncontrado": "No results found for this search",
         "jogosEmAlta": "Trending games",
         "nenhumJogoDisponivel": "No games available at the moment",
-        "loginGoogle" : "Sign in with Google account."
+        "loginGoogle" : "Sign in with Google account.",
+        "computadoEm": "Computed in:"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -580,5 +585,10 @@
     },
     "botoes": {
         "aceitar": "Accept"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recover my account!",
+        "contaBloqueadaPorTentativas": "Your account has been blocked because you have exceeded the maximum number of Login attempts.",
+        "instrucoesRecuperacao": "Please use password recovery to unlock your account."
     }
 }

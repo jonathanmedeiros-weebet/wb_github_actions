@@ -88,6 +88,11 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(true);
         }
 
+        this.getClientConfigs();
+        this.createForms();
+    }
+
+    private getClientConfigs() {
         this.clienteService.getConfigs().subscribe(
             resp => {
                 this.formLimiteApostas.setValue({
@@ -110,7 +115,6 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 this.handleError(error);
             }
         )
-        this.createForms();
     }
 
     ngOnDestroy() {
@@ -169,6 +173,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         this.clienteService.configPeriodoPausa(this.formPeriodoPausa.value).subscribe(
             result => {
                 this.messageService.success(result.message)
+                this.getClientConfigs();
             },
             error => {
                 this.handleError(error);

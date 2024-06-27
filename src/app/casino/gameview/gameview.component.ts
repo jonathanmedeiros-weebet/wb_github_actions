@@ -6,8 +6,10 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {AuthService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService} from '../../services';
 import {interval} from 'rxjs';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {JogosLiberadosBonusModalComponent} from "../../shared/layout/modals";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
+
+
 
 @Component({
     selector: 'app-gameview',
@@ -29,6 +31,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
     sessionId = '';
     isMobile = 0;
     removerBotaoFullscreen = false;
+    isLoggedIn = false;
+    backgroundImageUrl = '';
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -51,6 +55,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+
+        this.isLoggedIn = this.auth.isLoggedIn();
+        const routeParams = this.route.snapshot.params;
+        this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
+
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
@@ -90,6 +99,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.router.navigate([casinoAcronyms[String(this.gameFornecedor)]]);
                 return;
             }
+            this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    if(isLoggedIn){
+                        this.isLoggedIn = this.auth.isLoggedIn();
+
+                        this.loadGame();
+                    }
+                }
+            );
 
             this.auth.cliente
                 .subscribe(
@@ -98,8 +117,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             if (this.gameMode === 'REAL' && !this.isCliente) {
-                this.router.navigate(['casino']);
+                this.abriModalLogin();
+
             } else {
+
                 this.loadGame();
             }
             interval(3000)
@@ -153,6 +174,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         }
@@ -232,5 +254,36 @@ export class GameviewComponent implements OnInit, OnDestroy {
         bodyScript.append('window.addEventListener("message",(e) => {const { type, mainDomain } = e.data; if(type === "rgs-backToHome") {window.location.href = mainDomain;}});');
         bodyScript.id = 'galaxsysScript';
         body.appendChild(bodyScript);
+    }
+
+    abriModalLogin(){
+        const modalRef = this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
+            }
+        );
+        modalRef.result.then(
+            (result) => {
+                if(result) {
+                    this.isLoggedIn = this.auth.isLoggedIn();
+                    this.loadGame();
+                }
+            }
+        );
+    }
+
+    abrirCadastro(){
+        this.modalService.open(
+            CadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            }
+        );
     }
 }
