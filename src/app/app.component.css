@@ -41,6 +41,20 @@ img{
     margin: 20px
 }
 
+.content-modal-push{
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+    text-align: center;
+}
+
+.content-modal-push img{
+    width: 150px;
+    height: auto;
+    align-self: center;
+    margin-bottom: 20px
+}
+
 .botao-contato-flutuante {
     position: absolute;
     right: 20px;

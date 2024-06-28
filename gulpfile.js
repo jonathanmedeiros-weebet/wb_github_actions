@@ -1567,6 +1567,7 @@ gulp.task('ragnar.bet', function (done) {
         host: "ragnar.bet",
         banca: "RAGNAR.BET",
         styles: "",
+        xtremepush_sdk: "IiG7anngT2KQjqlbEve0zEVJlmSWIBHi"
     });
 });
 
