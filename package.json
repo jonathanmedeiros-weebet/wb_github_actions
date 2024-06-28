@@ -311,7 +311,8 @@
         "26sports.bet": "gulp 26sports.bet",
         "stargoldbet.app": "gulp stargoldbet.app",
         "goalbet.com.br": "gulp goalbet.com.br",
-        "sortegol.com": "gulp sortegol.com"
+        "sortegol.com": "gulp sortegol.com",
+        "prowin.bet": "gulp prowin.bet"
     },
     "private": true,
     "dependencies": {

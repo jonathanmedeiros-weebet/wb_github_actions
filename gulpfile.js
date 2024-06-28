@@ -2974,3 +2974,12 @@ gulp.task('sortegol.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('prowin.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "prowin.bet",
+        banca: "PROWIN.BET",
+        styles: ""
+    });
+});
