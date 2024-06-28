@@ -303,10 +303,6 @@ export default {
   
 }
 
-.text-uppercase {
-  text-transform: uppercase;
-}
-
 .table {
 
   width: 100%;
