@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     showTabs() {
-      return !['/', '/login'].includes(this.$route.path)
+      return !['/', '/login', '/change-password'].includes(this.$route.path)
     },
     showCopyright() {
       return ['/', '/login'].includes(this.$route.path)
