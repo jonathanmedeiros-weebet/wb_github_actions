@@ -1891,15 +1891,6 @@ gulp.task('vegasbrasilbet.com', function (done) {
     });
 });
 
-gulp.task('ello.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "ello.bet",
-        banca: "ELLO.BET",
-        styles: "",
-    });
-});
-
 gulp.task('bet165.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2060,15 +2051,6 @@ gulp.task('pixcassino999.com', function (done) {
         server: "front5.wee.bet",
         host: "pixcassino999.com",
         banca: "PIX CASSINO 99",
-        styles: "",
-    });
-});
-
-gulp.task('fullbet.app', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "fullbet.app",
-        banca: "FULL BET",
         styles: "",
     });
 });
@@ -2273,15 +2255,6 @@ gulp.task('pix777.bet', function (done) {
         server: "front3.wee.bet",
         host: "pix777.bet",
         banca: "PIX 777",
-        styles: "",
-    });
-});
-
-gulp.task('sportmilionario.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "sportmilionario.com",
-        banca: "SPORT MILIONÁRIO",
         styles: "",
     });
 });
