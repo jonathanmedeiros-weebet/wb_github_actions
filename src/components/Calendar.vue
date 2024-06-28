@@ -76,8 +76,6 @@ export default {
       return this.dateSelected.format('DD')
     },
     isMonthSelected() {
-      console.log(dateFormatInMonthAndYear(this.dateSelected))
-      console.log(this.currentMonthAndYear)
       return dateFormatInMonthAndYear(this.dateSelected) === this.currentMonthAndYear
     }
   },
@@ -161,7 +159,7 @@ export default {
     align-items: center;
     justify-content: space-between;
 
-    padding: 10px 24px 10px 24px;
+    padding: 10px 24px;
 
     color: var(--color-text);
     background: var(--color-background);

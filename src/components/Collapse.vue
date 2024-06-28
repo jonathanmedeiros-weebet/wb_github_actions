@@ -33,7 +33,6 @@ export default {
     },
     methods: {
         handleClick() {
-            console.log('clicou');
             this.collapsed = !this.collapsed;
         }
     }
@@ -51,7 +50,7 @@ export default {
         align-items: center;
 
         height: 40px;
-        padding: 8px 16px 8px 16px;
+        padding: 8px 16px;
         background: var(--color-background-input);
     }
 
