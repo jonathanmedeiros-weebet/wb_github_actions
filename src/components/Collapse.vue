@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import IconArrowDown from './icons/IconArrowDown.vue'
 import IconArrowUp from './icons/IconArrowUp.vue'
 
