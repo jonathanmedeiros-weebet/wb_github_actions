@@ -6,20 +6,22 @@
       <div class="bets_contente">
         <w-input
           label="Apostador"
-          name="punter"
+          name="cpf"
           placeholder="999.999.999-99"
           type="text"
+          mask="###.###.###-##"
         />
         <w-input
-          label="Apostador"
+          label="Código"
           name="code"
-          placeholder="999.999.999-99"
+          placeholder=""
           type="text"
+          mask="XXXX-XXXX"
         />
         <w-input
           label="Data"
           name="date"
-          placeholder="dd/mm/aaaa"
+          placeholder="##/##/####"
           type="date"
         />
         <w-button
@@ -299,6 +301,10 @@ export default {
     color: var(--color-text-input);
   }
   
+}
+
+.text-uppercase {
+  text-transform: uppercase;
 }
 
 .table {
