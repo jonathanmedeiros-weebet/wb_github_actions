@@ -11,12 +11,12 @@
 </template>
 
 <script>
-export default{
-  name: 'icon-example',
+export default {
+  name: 'icon-close',
   props: {
     color: {
       type: String,
-      default: '#ffff'
+      default: '#ffffff'
     },
     size: {
       type: Number,

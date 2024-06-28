@@ -136,11 +136,11 @@ input {
     padding-left: 10px;
     background-color: var(--color-background-input);
     border-radius: 5px;
+    border: 2px solid var(--color-background-input);
 
     &--focused {
-      border: 2px solid var(--color-primary);
+      border-color: var(--color-primary);
     }
-
   }
 
   &__icon {
