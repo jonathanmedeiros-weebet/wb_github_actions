@@ -133,15 +133,15 @@ export default {
     margin-left: auto;
     margin-bottom: -10px;
     padding-top: 7px; 
-    padding-right: 5px; 
+    padding-right: 7px; 
   }
 
   &__header {
     display: flex;
-    gap: 20px;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    gap: 24px;
+    margin-bottom: 100px;
   }
 
   &__footer {

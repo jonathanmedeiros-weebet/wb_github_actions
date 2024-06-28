@@ -123,7 +123,7 @@
                   value="payer"
                   name="btn-payer"
                   class="button--secondary"
-                  @click="pagar"
+                  @click="handleOpenPayModal"
                   v-if="bet.status === 'Pendente'"
                 />
                 <w-button
@@ -140,7 +140,13 @@
         </div>
       </div>
 
-      <WModal v-if="isModalVisible" @close="closeModal">
+      <WModal v-if="isModalVisible" @close="handleClosePayModal">
+        
+        <template #title>
+          <p>Pagar aposta</p>
+          <p class="bets__text-light">Tem certeza que deseja pagar a aposta?</p>
+        </template>
+
         <template #body>             
           <w-button
             id="btn-yes"
@@ -156,6 +162,7 @@
             value="no"
             name="btn-no"
             class="button--secondary"
+            @click="handleClosePayModal"
           />
           <div class="bets__separator"></div>
         </template>
@@ -222,29 +229,20 @@ export default {
     }
   },
   methods: {
-    pagar(){
+    handleOpenPayModal(){
       this.isModalVisible = true;
     },
-    closeModal() {
+    handleClosePayModal() {
       this.isModalVisible = false;
     },
     getFilters() {
       this.isFiltersVisible = !this.isFiltersVisible;
-    },
-    getButtonClass(status) {
-      switch(status) {
-        case 'Pendente':
-          return 'bets__card-footer--inline'
-        default:
-          return 'bets__card-footer'
-      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .bets {
 
   height: 100vh;
@@ -280,7 +278,7 @@ export default {
   }
 
   &__separator {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   &__card-footer {
@@ -296,11 +294,15 @@ export default {
     }
     
   }
+
+  &__text-light {
+    color: var(--color-text-input);
+  }
   
 }
 
 .table {
-  
+
   width: 100%;
 
   &__line {   
@@ -323,8 +325,4 @@ export default {
     }
   }
 }
-
-
-
-
 </style>
