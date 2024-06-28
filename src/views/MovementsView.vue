@@ -1,24 +1,24 @@
 <template>
   <div class="header">
-    <Header :showCalendarButton="true" :showSearchButton="true">
+    <Header :showCalendarButton="true">
       <SelectFake :text="modality" @click="handleSelectModalClick"/>
     </Header>
-    <section class="verification__container">
+    <div class="verification__container">
       <span class="date">
         {{ date }}
         <IconClose class="date__close" />
       </span>
-      <div class="information">
-        <span class="information__date">{{info_date}}</span>
-      </div>
       <div v-for="(movement, index) in movements" :key="index">
+        <div v-if="index % 4 === 0" class="information">
+          <span class="information__date">{{movement.info}}</span>
+        </div>
         <MovementsItem   
           :value="movement.value"
           :debit="movement.debit"
           :date="movement.date"
         />
       </div>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -47,16 +47,15 @@ export default {
       info_date: 'Seg, 04 Junho 2024',
       modalityList: modalityList,
       movements: [
-        {value: '350,00', debit: 'Crédito', date: '03/06/2024'},
-        {value: '80,00', debit: 'Débito', date: '03/06/2024'},
-        {value: '25,00', debit: 'Débito', date: '03/06/2024'},
-        {value: '1,00', debit: 'Débito', date: '03/06/2024'},
-        {value: '52,00', debit: 'Crédito', date: '03/06/2024'},
-        {value: '14,33', debit: 'Débito', date: '03/06/2024'},
-        {value: '6,00', debit: 'Débito', date: '03/06/2024'},
-        {value: '72,22', debit: 'Crédito', date: '03/06/2024'}
+        {value: '350,00', debit: 'Crédito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
+        {value: '80,00', debit: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
+        {value: '25,00', debit: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
+        {value: '1,00', debit: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
+        {value: '52,00', debit: 'Crédito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
+        {value: '14,33', debit: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
+        {value: '6,00', debit: 'Débito', date: '04/06/2024',  info: 'Seg, 04 Junho 2024'},
+        {value: '72,22', debit: 'Crédito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'}
       ]
-      
     };
   },
   created() {
@@ -65,26 +64,26 @@ export default {
   methods: {
     handleSelectModalClick() {
       alert('Modal select');
-    }
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .verification {
   color: var(--color-background);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
-  
+
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     margin: 0;
     padding: 0 20px;
-    padding-top: 20px;
+    padding-top: 15px;
+    min-height: 100%;
   }
 }
 
@@ -106,6 +105,7 @@ export default {
 }
 
 .information {
+  padding-bottom: 15px;
   &__date {
     color: var(--color-text);
     font-size: 16px;
@@ -114,5 +114,4 @@ export default {
     line-height: normal;
   }
 }
-
 </style>
