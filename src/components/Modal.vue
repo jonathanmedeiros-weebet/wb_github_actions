@@ -149,6 +149,10 @@ export default {
   }
 
   &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 15px;
     text-align: center;
     overflow-y: auto;
     max-height: calc(90% - 60px);
