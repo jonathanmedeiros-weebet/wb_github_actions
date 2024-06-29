@@ -35,8 +35,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 32px;
-    padding: 10px 17px 10px 17px;
-    gap: 10px;
+    padding: 10px 17px;
     border-radius: 37px;
     border: none;
     font-size: 16px;
@@ -44,7 +43,7 @@ export default {
     line-height: 14px;
     color: var(--color-background);
     background: var(--color-primary);
-    
+
     &--primary {
         color: var(--color-background);
         background: var(--color-primary);

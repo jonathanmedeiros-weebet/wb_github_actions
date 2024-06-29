@@ -43,15 +43,19 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  width: 100%;
+  padding: 10px;
   height: 46px;
   border-radius: 8px;
   border: none;
-
+  
   font-size: 14px;
   font-weight: 400;
   line-height: 14px;
+
+  font-family: 'Roboto', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   color: var(--color-background);
   background: var(--color-primary);

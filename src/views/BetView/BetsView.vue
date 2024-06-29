@@ -3,7 +3,7 @@
     <Header title="Apostas" :showBackButton="true" />
     <div class="bets__container">
       
-      <div class="bets_contente">
+      <div class="bets__contente">
         <w-input
           label="Apostador"
           name="cpf"
@@ -14,7 +14,7 @@
         <w-input
           label="Código"
           name="code"
-          placeholder=""
+          placeholder="XXXX-XXXX"
           type="text"
           mask="XXXX-XXXX"
         />
@@ -157,7 +157,7 @@
             name="btn-yes"
             class="button--primary"
           />
-          <div class="bets__separator"></div>
+          
           <w-button
             id="btn-no"
             text="Não"
@@ -166,7 +166,7 @@
             class="button--secondary"
             @click="handleClosePayModal"
           />
-          <div class="bets__separator"></div>
+          
         </template>
       </WModal>
 
@@ -245,17 +245,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bets {
+.bets {  
 
   height: 100vh;
   justify-content: space-between;
 
   &__container {
-    flex: 1;
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 24px 24px 0px 24px;
+    padding: 24px 24px 24px 24px;
+  }
+
+  &__contente {
+    display: flex;
+    flex-direction: column;
   }
 
   &__results {
@@ -273,26 +277,23 @@ export default {
     padding-top: 20px;
     overflow-x: auto;
     white-space: nowrap;
+    gap: 8px;
   }
 
   &__content-filters {
-    margin-top: 16px;
-  }
-
-  &__separator {
-    margin-bottom: 10px;
+    margin-top: 24px;
   }
 
   &__card-footer {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 
     &--inline {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      gap: 10px;
+      justify-content: space-between;
+      gap: 8px;
     }
     
   }
