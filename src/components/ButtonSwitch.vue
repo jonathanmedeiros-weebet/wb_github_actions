@@ -1,27 +1,41 @@
 <template>
-    <label class="toggle">
-        <input 
-          class="toggle__checkbox" 
-          type="checkbox"
-          :checked="isChecked" 
-          @change="toggleCheckbox"
-        >
-        <div class="toggle__switch"></div>
-    </label>
+  <label class="toggle">
+    <input
+      :id="id"
+      :name="name" 
+      class="toggle__checkbox" 
+      type="checkbox"
+      v-model="isChecked"
+    >
+    <div class="toggle__switch"></div>
+  </label>
 </template>
 
 <script>
 export default {
-    name: 'button-switch',
-    props: {
-    isChecked: {
-      type: Boolean,
-      required: true
+  name: 'button-switch',
+  props: {
+    id: {
+      type: String,
+      default: ''
     },
-    methods: {
-        toggleCheckbox(event) {
-            this.$emit('update:isChecked', event.target.checked);
-        }
+    name: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    isChecked: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit('input', val);
+      }
     }
   }
 }
@@ -76,7 +90,4 @@ export default {
     background: linear-gradient(to bottom, #fff 0%, #fff 100%);
   }
 }
-
-
-
 </style>

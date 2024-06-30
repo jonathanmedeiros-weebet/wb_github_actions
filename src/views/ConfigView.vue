@@ -4,7 +4,11 @@
         <div class="config_container">
             <div class="config_content">
                 <p class="config__title">Ativiar bluetooh</p>
-                <button-switch :isChecked="bluetooh" />
+                <button-switch
+                    id='bluetooh'
+                    name="bluetooh"
+                    v-model="bluetooh"
+                />
             </div>
             <div class="config_content_column">
                 <p class="config__title">Impressora padrão</p>
@@ -12,7 +16,11 @@
             </div>
             <div class="config_content">
                 <p class="config__title">Imprimir elementos gráficos</p>
-                <button-switch :isChecked="bluetooh" />
+                <button-switch 
+                    id='print'
+                    name="print"
+                    v-model="print"
+                />
             </div>
         </div>
   </div>
@@ -24,17 +32,19 @@ import Header from '@/components/layouts/Header.vue'
 import ButtonSwitch from '@/components/ButtonSwitch.vue'
 
 export default {
-    name: 'config',
-    components: { 
-        Header,
-        ButtonSwitch
-    },
-    data() {
-        return {
-            bluetooh: true,
-        }
-    }
+  name: 'config',
+  components: { 
+    Header,
+    ButtonSwitch
+  },
+  data() {
+    return {
+      bluetooh: false,
+      print: false,
+    };
+  }
 }
+
 </script>
 
 <style lang="scss" scoped>
