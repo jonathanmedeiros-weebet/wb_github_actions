@@ -60,9 +60,13 @@
           <button class="value__add">+50</button>
           <w-input
             class="value__balance-input"
-            name="ticket_value"
-            placeholder="R$"
-            type="text"/>
+            name="user_name"
+            type="email"
+          >
+            <template #icon>
+              <span style="color: rgba(255, 255, 255, 0.50);">R$</span>
+            </template>
+          </w-input> 
         </div>
       </div>
 
@@ -104,6 +108,7 @@ import IconBall from '@/components/icons/IconBall.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
+import IconUserLine from '@/components/icons/IconUserLine.vue'
 
 export default {
   name: 'ticket',
@@ -114,6 +119,7 @@ export default {
     IconLive,
     IconBall,
     IconClose,
+    IconUserLine,
     WInput,
     WButton
   },
