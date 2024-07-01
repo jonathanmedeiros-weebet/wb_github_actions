@@ -77,7 +77,7 @@
           <span>R$ 90,00</span>
         </div>
         <div class="cotacao__alteracao">
-          <input type="checkbox" id="accept-changes">
+          
           <label for="accept-changes">Aceitar Alterações de odds</label>
         </div>
         <div class="cotacao__finalizar">
@@ -307,6 +307,9 @@ export default {
   &__finalizar {
     padding-top: 16px;
   }
+  
+
+
 }
 
 </style>
