@@ -12,12 +12,14 @@
         :placeholder="placeholder"
         @input="handleInput"
         class="input__field"
-        :type="type"
+        :type="tipo"
         @focus="handleFocus"
         @blur="handleBlur"
         v-mask="mask"
         v-model="localValue"
         maxlength="maxlength"
+        @click="$emit('click')"
+        @change="emitChange"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
         
@@ -74,7 +76,8 @@ export default {
       localValue: this.value,
       isFocused: false,
       showPassword: false,
-      initType: this.type
+      initType: this.type,
+      tipo: this.type
     };
   },
   methods: {
@@ -83,20 +86,22 @@ export default {
     },
     handleFocus(){
       this.isFocused = true;
+      this.$emit('click');
     },
     handleBlur(){
       this.isFocused = false;
     },
     passWordVisible() {
       this.showPassword = !this.showPassword;
+      this.tipo = this.showPassword ? 'text' : 'password';
     },
+    emitChange(event) {
+      this.$emit('change',  event.target.value);
+    }
   },
   computed: {
     password() {
       return this.value;
-    },
-    typeInputPassword() {
-      return this.showPassword ? 'text' : 'password';
     }
   }
 }
@@ -140,11 +145,11 @@ input {
     padding-left: 10px;
     background-color: var(--color-background-input);
     border-radius: 5px;
-    border: 2px solid var(--color-background-input);
 
     &--focused {
-      border-color: var(--color-primary);
+      border: 2px solid var(--color-primary);
     }
+
   }
 
   &__icon {

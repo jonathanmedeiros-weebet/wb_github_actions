@@ -5,6 +5,7 @@
       
       <div class="bets__contente">
         <w-input
+          id="inputCpf"
           label="Apostador"
           name="cpf"
           placeholder="999.999.999-99"
@@ -12,17 +13,23 @@
           mask="###.###.###-##"
         />
         <w-input
+          id="inputCode"
           label="Código"
           name="code"
           placeholder="XXXX-XXXX"
           type="text"
           mask="XXXX-XXXX"
+          autocomple="off"
         />
         <w-input
+          id="inputDate"
+          name="inputDate"
           label="Data"
-          name="date"
-          placeholder="##/##/####"
+          placeholder="dd/mm/aaaa"
           type="date"
+          @click="handleOpenCalendarModal"
+          v-model="dateFilter"
+          
         />
         <w-button
           id="btn-filter"
@@ -34,7 +41,7 @@
         />
       </div>
       
-      <div class="bets__results" v-if="isFiltersVisible">
+      <div class="bets__results" v-if="showResults">
         <p class="bets__count-results">{{ bets.length }} apostas encontradas</p>
   
         <div class="bets__buttons-filters">
@@ -142,7 +149,7 @@
         </div>
       </div>
 
-      <WModal v-if="isModalVisible" @close="handleClosePayModal">
+      <WModal v-if="showModalPay" @close="handleClosePayModal">
         
         <template #title>
           <p>Pagar aposta</p>
@@ -170,6 +177,12 @@
         </template>
       </WModal>
 
+      <ModalCalendar
+        v-if="showModalCalendar"
+        @closeModal="handleCloseCalendarModal"
+        @change="handleCalendar"
+      />
+
     </div>
   </div>
 </template>
@@ -181,6 +194,7 @@ import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
+import ModalCalendar from './parts/ModalCalendar.vue'
 
 export default {
   name: 'bets',
@@ -190,12 +204,15 @@ export default {
     WButton,
     WModal,
     CardBets,
-    TagButton
+    TagButton,
+    ModalCalendar
   },
   data() {
     return {
-      isModalVisible: false,
-      isFiltersVisible: false,
+      showModalPay: false,
+      showResults: false,
+      showModalCalendar: false,
+      dateFilter: null,
       bets: [
         {
           code: 'AEC0-1AB4',
@@ -232,13 +249,23 @@ export default {
   },
   methods: {
     handleOpenPayModal(){
-      this.isModalVisible = true;
+      this.showModalPay = true;
     },
     handleClosePayModal() {
-      this.isModalVisible = false;
+      this.showModalPay = false;
+    },
+    handleOpenCalendarModal() {      
+      this.showModalCalendar = true;
+    },
+    handleCloseCalendarModal() {
+      this.showModalCalendar = false;
+    },
+    handleCalendar(dateTime) {
+      this.dateFilter = dateTime.format('YYYY-MM-DD');
+      this.handleCloseCalendarModal();
     },
     getFilters() {
-      this.isFiltersVisible = !this.isFiltersVisible;
+      this.showResults = !this.showResults;
     }
   }
 }
