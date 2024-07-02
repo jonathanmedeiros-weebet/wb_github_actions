@@ -7,7 +7,7 @@ import BetsView from '@/views/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import ConfigView from '@/views/ConfigView.vue'
-import GameDetailView from '@/views/GameDetailView.vue'
+import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 
 const router = new VueRouter({
   mode: 'history',
