@@ -194,7 +194,7 @@ import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
-import ModalCalendar from './parts/ModalCalendar.vue'
+import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 
 export default {
   name: 'bets',
@@ -274,14 +274,14 @@ export default {
 <style lang="scss" scoped>
 .bets {  
 
-  height: 100vh;
+  height: 100%;
   justify-content: space-between;
 
   &__container {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 24px 24px 24px 24px;
+    padding: 24px;
   }
 
   &__contente {

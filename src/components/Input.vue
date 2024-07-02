@@ -12,7 +12,7 @@
         :placeholder="placeholder"
         @input="handleInput"
         class="input__field"
-        :type="tipo"
+        :type="inputType"
         @focus="handleFocus"
         @blur="handleBlur"
         v-mask="mask"
@@ -77,7 +77,7 @@ export default {
       isFocused: false,
       showPassword: false,
       initType: this.type,
-      tipo: this.type
+      inputType: this.type
     };
   },
   methods: {
@@ -145,9 +145,10 @@ input {
     padding-left: 10px;
     background-color: var(--color-background-input);
     border-radius: 5px;
+    border: 2px solid var(--color-background-input);
 
     &--focused {
-      border: 2px solid var(--color-primary);
+      border-color: var(--color-primary);
     }
 
   }
