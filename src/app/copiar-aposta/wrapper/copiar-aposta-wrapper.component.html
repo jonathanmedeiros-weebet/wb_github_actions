@@ -1,0 +1,42 @@
+<div id="default-content">
+    <div class="mobile-modal-header" *ngIf="mobileScreen">
+        <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <div class="titulo">{{'geral.replicarApostaLoteria' | translate}}</div>
+        <div class="botao-direito"></div>
+    </div>
+
+    <div class="internal-container-out">
+        <div class="content-header hide-mobile">
+            <h2>{{'geral.replicarApostaLoteria' | translate}}</h2>
+        </div>
+        <div class="content-body">
+            <div class="content">
+                <div class="">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="consulta-form">
+                        <div class="d-flex flex-row">
+                            <div class="form-group filtro">
+                                <input type="text" placeholder="{{'geral.codigoAposta' | translate}}"
+                                       class="inverted-out form-control" formControlName="codigo" autocomplete="off"
+                                       [ngClass]="applyCssInputError('codigo')" [(ngModel)]="codigo">
+                                <app-error-msg [control]="form.get('codigo')"></app-error-msg>
+                            </div>
+                            <button type="submit" class="btn btn-custom">{{'geral.consultar' | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+
+                <div *ngIf="exibirAposta">
+                        <ng-container [ngSwitch]="aposta.tipo">
+                            <app-copiar-aposta-loterias *ngSwitchCase="'loteria'" [aposta]="aposta"
+                                                        (success)="success($event)">
+                            </app-copiar-aposta-loterias>
+                        </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

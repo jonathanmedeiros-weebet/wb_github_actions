@@ -6,6 +6,7 @@ import { AuthService, MessageService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 
 import {config} from '../../../config';
+import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 
 @Component({
     selector: 'app-auth-dois-fatores-modal',
@@ -20,12 +21,14 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     codigo = '';
 
     LOGO = config.LOGO;
+    private geolocation: Geolocation;
 
     constructor(
         public activeModal: NgbActiveModal,
         private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private auth: AuthService,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
@@ -34,6 +37,10 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
         this.createForm();
         this.enviarEmail();
         this.contagem();
+
+        this.geolocationService
+            .getGeolocation()
+            .then((geolocation) => this.geolocation = geolocation)
     }
 
     createForm() {
@@ -45,7 +52,12 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     }
 
     submit() {
-        this.auth.loginAuthDoisFatores(this.form.value)
+        const data = {
+            ...this.form.value,
+            geolocation: this.geolocation
+        };
+
+        this.auth.loginAuthDoisFatores(data)
             .subscribe(
                 () => {
                     this.messageService.success('Código validado com sucesso.');
@@ -93,13 +105,10 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
     }
 
     onCodeChanged(code: string) {
-        console.log('Change:', code);
         this.codigo = code;
     }
 
     onCodeCompleted(code: string) {
-        console.log('Complete:', code);
         this.codigo = code;
     }
-
 }

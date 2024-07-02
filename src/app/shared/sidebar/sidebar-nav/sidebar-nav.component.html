@@ -85,7 +85,7 @@
     </ng-container>
 
     <ng-container *ngIf="contexto == 'desafio'">
-        <span class="group" *ngIf="!collapsed">{{'geral.desafios' | translate}}</span>
+        <span class="group" *ngIf="!collapsed">{{desafioNome}}</span>
         <li class="categoria" (click)="goTo('/desafios', {})">
             <a>
                 <i class="fa fa-trophy icone-generico"></i>

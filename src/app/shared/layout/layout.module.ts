@@ -91,8 +91,9 @@ import { InformativoModalComponent } from './modals/informativo-modal/informativ
 import { JogoService } from '../services/aposta-esportiva/jogo.service';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-import { SkeletonComponent } from './skeleton/skeleton.component';
 import { SkeletonModule } from './skeleton/skeleton.module';
+import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-modal/block-peer-attemps-modal.component';
+import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 
 @NgModule({
     imports: [
@@ -186,6 +187,8 @@ import { SkeletonModule } from './skeleton/skeleton.module';
         CompatilhamentoBilheteModal,
         WelcomePageComponent,
         CanceledBonusConfirmComponent,
+        BlockPeerAttempsModalComponent,
+        MultifactorConfirmationModalComponent,
     ],
     exports: [
         MainLayoutComponent,

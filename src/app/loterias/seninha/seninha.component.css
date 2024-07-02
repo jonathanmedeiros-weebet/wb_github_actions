@@ -143,4 +143,8 @@ input, select {
     .btn-surpresinha i {
         margin-left: 0;
     }
+
+    .replicar-aposta {
+        width: 100%;
+    }
 }
