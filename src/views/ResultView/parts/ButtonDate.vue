@@ -1,18 +1,21 @@
 <template>
+  <div class="button">
     <button
       :id="id"
       :value="value"
+      :text="text"
       type="button"
-      class="button button__item"
+      :class="customClass"
       @click="handleClick"
     >
       {{text}}
     </button>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'w-button',
+  name: 'w-button-date-result',
   props: {
     id: {
       type: String,
@@ -24,6 +27,10 @@ export default {
     value: {
       type: String,
       default: 'button'
+    },
+    customClass: {
+      type: String,
+      default: 'button button__item'
     }
   },
   methods: {
@@ -36,16 +43,23 @@ export default {
 
 <style lang="scss" scoped>
 .button {
+
+  display: flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px;
+
   &__item {
-    width: 100%;
-    height: 46px;
-    border-radius: 8px 8px 8px 8px;
-    border: none;
-    background: var(--color-primary);
-    color: rgba(10, 10, 10, 1);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.41px;
+    color: var(--color-text-input);
+
+    &--active {
+      color: var(--color-primary);
+      border-bottom: 1px solid var(--color-primary);
+      
+    }
   }
 
   &__item:hover {
