@@ -7,6 +7,8 @@ import BetsView from '@/views/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import MovementsView from '@/views/MovementsView.vue'
+import ConfigView from '@/views/ConfigView.vue'
+import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -50,6 +52,16 @@ const router = new VueRouter({
       path: '/movements',
       name: 'movements',
       component: MovementsView,
+    },
+    {
+      path: '/game-detail',
+      name: 'game-detail',
+      component: GameDetailView,
+    },
+    {
+      path: '/config',
+      name: 'config',
+      component: ConfigView,
     },
   ]
 })

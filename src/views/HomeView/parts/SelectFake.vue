@@ -1,9 +1,13 @@
 <template>
     <div class="select-fake" @click="handleClick">
-        <span class="select-fake__title">{{ text }}</span>
+        <span
+            class="select-fake__title"
+            :class="`select-fake__title--${titleSize}`"
+        >
+            <slot/>
+        </span>
         <IconArrowDown />
     </div>
-    
 </template>
 
 <script>
@@ -13,10 +17,10 @@ export default {
     components: {IconArrowDown},
     name: 'w-select-fake',
     props: {
-        text: {
+        titleSize: {
             type: String,
-            default: ''
-        },
+            default: 'large'
+        }
     },
     methods: {
         handleClick() {
@@ -29,15 +33,28 @@ export default {
 <style lang="scss" scoped>
 .select-fake {
     display: flex;
-    gap: 10px;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    gap: 10px;
 
     &__title {
-        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
         font-weight: 400;
         line-height: 23.44px;
         color: var(--color-text);
+
+        &--large {
+            font-size: 20px;
+        }
+        &--medium {
+            font-size: 16px;
+        }
+        &--small {
+            font-size: 12px;
+        }
     }
 }
 </style>

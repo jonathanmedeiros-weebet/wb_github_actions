@@ -1,4 +1,4 @@
-import type { ModalityOption } from "@/enums";
+import type { ModalityOption } from "@/interfaces";
 
 export const modalityList: ModalityOption[] = [
     {
