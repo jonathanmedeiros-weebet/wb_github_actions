@@ -16,7 +16,7 @@ export default{
   props: {
     color: {
       type: String,
-      default: '#ffff'
+      default: '#ffffff'
     },
     size: {
       type: Number,
