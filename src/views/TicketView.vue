@@ -3,8 +3,6 @@
     <Header>
       <SelectFake :text="modality" @click="handleSelectModalClick"/>
     </Header>
-
-
     <div class="ticket__container">
       <div class="game">
         <span class="game__select">Jogos selecionados</span>
@@ -13,8 +11,6 @@
           <span>Excluir todos</span>
         </div>
       </div>
-
-
       <div v-for="(team, index) in teams" :key="index" class="bet">
         <div class="bet__header">
           <span class="bet__team">
@@ -35,8 +31,6 @@
           <span>{{ team.odd }}</span>
         </div>
       </div>
-
-
       <div class="finish">
         <div class="finish__cpf">
           <w-input
@@ -48,8 +42,6 @@
           />
         </div> 
       </div>
-      
-
       <div class="value">
         <div class="value__label">
           <span class="value__balance-text">Valor</span>
@@ -69,8 +61,6 @@
           </w-input> 
         </div>
       </div>
-
-      
       <div class="cotacao">
         <div class="cotacao__value">
           <span>Cotação:</span>
@@ -80,8 +70,7 @@
           <span>Possiveis Ganhos:</span>
           <span>R$ 90,00</span>
         </div>
-        <div class="cotacao__alteracao">
-          
+        <div class="cotacao__alteracao">         
           <label for="accept-changes">Aceitar Alterações de odds</label>
         </div>
         <div class="cotacao__finalizar">
