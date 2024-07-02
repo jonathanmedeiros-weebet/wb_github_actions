@@ -87,15 +87,19 @@ export default {
     min-height: 201px;
     padding-bottom: 26px;
     padding-top: 10px;
+        transition: 1s;
     
     &--slim {
         height: 73px;
         min-height: 0;
         padding: 0;
         align-items: center;
+
+        transition: 0.5s;
     }
 
     &--fixed {
+        transition: 0.5s;
         position: fixed;
         width: 100%;
         background: var(--color-background);
@@ -205,4 +209,12 @@ export default {
     }
 }
 
+@keyframes slim {
+  from {
+    transform: translateX(100px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 </style>

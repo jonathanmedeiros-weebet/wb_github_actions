@@ -1,9 +1,9 @@
 <template>
     <div class="game-detail">
         <div class="game-detail__header">
-           <GameDetailHeader :game="game" type="slim"/>
+           <GameDetailHeader :game="game" :type="gameHeaderType" :fixed="headerFixed"/>
         </div>
-        <div class="game-detail__body">
+        <div class="game-detail__body" :class="{'game-detail__body--paddintTop': headerFixed}">
            <div class="game-detail__filters">
                 <button
                     class="game-detail__filter"
@@ -52,12 +52,24 @@ export default {
     name: 'game-detail',
     data() {
         return {
-            headerFixed: true,
+            headerFixed: false,
             game: gameList[0],
             filterSelected: GameDetailFilter.FULL_TIME
         }
     },
+    mounted() {
+        document.addEventListener("scroll", () => {
+            if(window.pageYOffset > 75) {
+                this.headerFixed = true;
+            } else {
+                this.headerFixed = false;
+            };
+        });
+    },
     computed: {
+        gameHeaderType() {
+            return this.headerFixed ? 'slim' : 'normal'
+        },
         filters() {
             return [
                 {
@@ -132,6 +144,13 @@ export default {
         &--selected {
             color: #0AAF6D;
             border-color: #0AAF6D;
+        }
+    }
+
+    &__body {
+        padding: 0;
+        &--paddintTop {
+            padding-top: 155px;
         }
     }
 }
