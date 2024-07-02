@@ -330,7 +330,7 @@ export class AppComponent implements OnInit {
         const xtremepushHabilitado = this.paramLocais.getOpcoes().xtremepush_habilitado;
         if (xtremepushHabilitado) {
             const xtremepush_localstorage = JSON.parse(localStorage.getItem('xtremepush.data'));
-            if (xtremepush_localstorage && xtremepush_localstorage.permission !== 'granted' && this.utilsService.getMobileOperatingSystem() !== 'ios' && this.hasDayPassed()) {
+            if (xtremepush_localstorage && xtremepush_localstorage.permission !== 'granted' && this.hasDayPassed()) {
                 this.modalPush = this.modalService.open(
                     this.enableNotificationXtremepushModal,
                     {
