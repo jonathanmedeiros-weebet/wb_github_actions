@@ -103,7 +103,7 @@ export default {
   width: 100%;
   height: auto;
   max-height: 90%;
-  
+  padding: 0px 20px;
   overflow-y: auto;
 
   &_icons {
@@ -133,15 +133,15 @@ export default {
     margin-left: auto;
     margin-bottom: -10px;
     padding-top: 7px; 
-    padding-right: 20px; 
+    padding-right: 7px; 
   }
 
   &__header {
     display: flex;
-    gap: 20px;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    gap: 24px;
+    margin-bottom: 100px;
   }
 
   &__footer {
@@ -149,6 +149,10 @@ export default {
   }
 
   &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 15px;
     text-align: center;
     overflow-y: auto;
     max-height: calc(90% - 60px);
