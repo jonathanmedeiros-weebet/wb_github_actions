@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     showTabs() {
-      return !['/', '/login', '/change-password', '/config'].includes(this.$route.path)
+      return !['/', '/login', '/change-password', '/game-detail', '/config'].includes(this.$route.path)
     },
     showCopyright() {
       return ['/', '/login'].includes(this.$route.path)

@@ -1,1 +1,1 @@
-export * from './modalities.enum'
+export * from './game.enum'

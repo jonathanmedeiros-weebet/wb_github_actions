@@ -1,1 +1,1 @@
-export {}
+export * from '../interfaces/modalities.interface'

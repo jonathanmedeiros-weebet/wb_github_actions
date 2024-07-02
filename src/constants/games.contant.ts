@@ -4,12 +4,12 @@ export const gameList = [
         pontuation: '+150',
         teams: [
             {
-                name: 'Manchester United Football Club',
-                image: 'src/assets/images/mocks/circle-flags_br.png',
+                name: 'Manchester United',
+                image: 'src/assets/images/mocks/atletico.png',
             },
             {
                 name: 'Caracas',
-                image: 'src/assets/images/mocks/circle-flags_br.png',
+                image: 'src/assets/images/mocks/fortaleza.png',
             }
         ],
         quotes: {
@@ -74,5 +74,107 @@ export const gameList = [
             host: '7.00',
             draw: '2.54'
         }
+    },
+]
+
+export const gameBetList = [
+    {
+        group: 'Resultado final',
+        bets: [
+            {
+                label: 'Casa',
+                value: '1.00'
+            },
+            {
+                label: 'Empate',
+                value: '1.00'
+            },
+            {
+                label: 'Fora',
+                value: '7.80'
+            }
+        ]
+    },
+    {
+        group: 'Ambos os times marcam',
+        bets: [
+            {
+                label: 'Sim',
+                value: '1.00'
+            },
+            {
+                label: 'Não',
+                value: '7.80'
+            }
+        ]
+    },
+    {
+        group: 'Intervalo / Fim de jogo',
+        bets: [
+            {
+                label: 'Casa/Casa',
+                value: '1.00'
+            },
+            {
+                label: 'Empate/Casa',
+                value: '1.00'
+            },
+            {
+                label: 'Fora/Casa',
+                value: '7.80'
+            },
+
+            {
+                label: 'Casa/Empate',
+                value: '1.00'
+            },
+            {
+                label: 'Empate/Empate',
+                value: '1.00'
+            },
+            {
+                label: 'Fora/Empate',
+                value: '7.80'
+            },
+
+            {
+                label: 'Casa/Fora',
+                value: '1.00'
+            },
+            {
+                label: 'Empate/Fora',
+                value: '1.00'
+            },
+            {
+                label: 'Fora/Fora',
+                value: '7.80'
+            }
+        ]
+    },
+    {
+        group: 'Empate anula aposta',
+        bets: [
+            {
+                label: 'Casa',
+                value: '1.00'
+            },
+            {
+                label: 'Fora',
+                value: '7.80'
+            }
+        ]
+    },
+    {
+        group: 'Empate anula aposta',
+        bets: [
+            {
+                label: 'Casa',
+                value: '1.00'
+            },
+            {
+                label: 'Fora',
+                value: '7.80'
+            }
+        ]
     },
 ]
