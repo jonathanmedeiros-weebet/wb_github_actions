@@ -12,22 +12,19 @@
         :placeholder="placeholder"
         @input="handleInput"
         class="input__field"
-        :type="typeInputPassword"
+        :type="inputType"
         @focus="handleFocus"
         @blur="handleBlur"
+        v-mask="mask"
+        v-model="localValue"
+        maxlength="maxlength"
+        @click="$emit('click')"
+        @change="emitChange"
       />
-      <div class="input__icon__right">
+      <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
         
-        <icon-visibility 
-        v-if="showPassword && initType == 'password'"
-        @click="passWordVisible"
-        color="var(--color-text-input)"
-        />
-        <icon-visibility-off 
-        v-if="!showPassword && initType == 'password'" 
-        @click="passWordVisible"
-        color="var(--color-text-input)"
-        />
+        <icon-visibility v-if="showPassword" color="var(--color-text-input)" />
+        <icon-visibility-off v-else color="var(--color-text-input)" />
 
       </div>
     </div>
@@ -64,13 +61,23 @@ export default {
     placeholder: {
       type: String,
       default: ''
-    }
+    },
+    mask: {
+      type: String,
+      default: ''
+    },
+    maxlength: {
+      type: String,
+      default: '255'
+    },
   },
   data() {
     return {
+      localValue: this.value,
       isFocused: false,
       showPassword: false,
-      initType: this.type
+      initType: this.type,
+      inputType: this.type
     };
   },
   methods: {
@@ -79,20 +86,22 @@ export default {
     },
     handleFocus(){
       this.isFocused = true;
+      this.$emit('click');
     },
     handleBlur(){
       this.isFocused = false;
     },
     passWordVisible() {
       this.showPassword = !this.showPassword;
+      this.tipo = this.showPassword ? 'text' : 'password';
     },
+    emitChange(event) {
+      this.$emit('change',  event.target.value);
+    }
   },
   computed: {
     password() {
       return this.value;
-    },
-    typeInputPassword() {
-      return this.showPassword ? 'text' : 'password';
     }
   }
 }
@@ -141,6 +150,7 @@ input {
     &--focused {
       border-color: var(--color-primary);
     }
+
   }
 
   &__icon {
