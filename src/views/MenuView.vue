@@ -1,3 +1,4 @@
+
 <template>
   <div class="menu">
     <section class="menu__container">
@@ -33,7 +34,7 @@
             <IconInsertChart :size="14" class="wallet__icon"/>
             Dashboard
           </button>
-          <button class="wallet__button" @click="showModal('consultTicket')">
+          <button class="wallet__button">
             <IconManageSearch :size="14" class="wallet__icon" />
             Consultar Bilhete
           </button>
@@ -70,7 +71,6 @@
         </div>
       </div> 
     </section>
-      <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="hideModal('consultTicket')" />
   </div>
 </template>
 
@@ -84,12 +84,11 @@ import IconPassKey from '@/components/icons/IconPassKey.vue';
 import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
-import ModalConsultTicket from './HomeView/parts/ModalConsultTicket.vue';
 
 export default {
   components: {
     IconEye, IconEyeClose, IconMoney, IconSettings, IconLogout, 
-    IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart, ModalConsultTicket
+    IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart
   },
   name: 'menu-view',
   data() {
@@ -98,8 +97,7 @@ export default {
       credito: "850,00",
       saldo: "18.258,00",
       isCreditoVisible: false,
-      isSaldoVisible: false,
-      isConsultTicketModalVisible: false
+      isSaldoVisible: false
     };
   },
   methods: {
@@ -110,20 +108,9 @@ export default {
     toggleSaldoVisibility() {
       console.log('Toggling Saldo Visibility');
       this.isSaldoVisible = !this.isSaldoVisible;
-    },
-    showModal(modal) {
-      if (modal === 'consultTicket') {
-        this.isConsultTicketModalVisible = true;
-      }
-    },
-    hideModal(modal) {
-      if (modal === 'consultTicket') {
-        this.isConsultTicketModalVisible = false;
-      }
     }
   }
 }
-
 </script>
 
 
