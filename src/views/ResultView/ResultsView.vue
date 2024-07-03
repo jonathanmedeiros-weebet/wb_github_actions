@@ -79,7 +79,6 @@ export default {
       showModalModalities: false,
       modalityList,
       championshipList,
-  ,
       dateRange: []
     }
   },
