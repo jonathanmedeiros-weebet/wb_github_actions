@@ -2,9 +2,6 @@
   <div class="modal-overlay" @click.self="handleBackdropClick">
     <div ref="modal" class="modal">
       <div class="modal_icons">
-        <button class="modal__btnclose" @click="handleClose">
-          <icon-close color="var(--color-text-input)"/>
-        </button>
         <div class="modal__element"></div>
       </div>
       <div class="modal__header" v-if="$slots['title']">
@@ -42,6 +39,8 @@ export default {
     }
   },
   mounted() {
+    document.body.style.overflow = 'hidden'
+
     const modalRef = this.$refs['modal'];
     modalRef.addEventListener('touchstart', (e) => {
       this.touchStartPageY = e.changedTouches[0].pageY;
@@ -71,6 +70,7 @@ export default {
       this.handleClose();
     },
     handleClose() {
+      document.body.style.overflow = 'initial'
       this.$emit('close');
     }
   }
@@ -92,7 +92,6 @@ export default {
   z-index: 3;
   overflow: hidden;
   transition: transform 0.5s ease-out;
-  
 }
   
 .modal {
@@ -104,7 +103,7 @@ export default {
   width: 100%;
   height: auto;
   max-height: 90%;
-  
+  padding: 0px 20px;
   overflow-y: auto;
 
   &_icons {
@@ -115,6 +114,7 @@ export default {
   &__element {
     margin-left: auto;
     margin-right: auto;
+    margin-top: 18px;
     background-color: var(--color-background);
     width: 49px;
     height: 5px;
@@ -133,15 +133,15 @@ export default {
     margin-left: auto;
     margin-bottom: -10px;
     padding-top: 7px; 
-    padding-right: 20px; 
+    padding-right: 7px; 
   }
 
   &__header {
     display: flex;
-    gap: 20px;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    gap: 24px;
+    margin-bottom: 100px;
   }
 
   &__footer {
@@ -149,7 +149,13 @@ export default {
   }
 
   &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 15px;
     text-align: center;
+    overflow-y: auto;
+    max-height: calc(90% - 60px);
   }
 }
 

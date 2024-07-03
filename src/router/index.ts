@@ -3,10 +3,12 @@ import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
 import ValidationView from '@/views/ValidationView.vue'
 import TicketsView from '@/views/TicketsView.vue'
-import BetsView from '@/views/BetsView.vue'
+import BetsView from '@/views/BetView/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import VerificationView from '@/views/VerificationView.vue'
+import ConfigView from '@/views/ConfigView.vue'
+import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -50,7 +52,17 @@ const router = new VueRouter({
       path: '/verification',
       name: 'verification',
       component: VerificationView,
-    }
+    },
+    {
+      path: '/game-detail',
+      name: 'game-detail',
+      component: GameDetailView,
+    },
+    {
+      path: '/config',
+      name: 'config',
+      component: ConfigView,
+    },
   ]
 })
 export default router

@@ -37,8 +37,8 @@
             <IconManageSearch class="wallet__icon" />
             Consultar Bilhete
           </button>
-          <button class="wallet__button" @click="navigateTo('/verification')">
-            <IconFactCheck class="wallet__icon" />
+          <button class="wallet__button">
+            <IconFactCheck :size="14" class="wallet__icon" />
             Apuração
           </button>
         </div>
@@ -75,10 +75,23 @@
 
 
 <script>
-import Header from '@/components/layouts/Header.vue'
+import IconEye from '@/components/icons/IconEye.vue';
+import IconEyeClose from '@/components/icons/IconEyeClose.vue';
+import IconMoney from '@/components/icons/IconMoney.vue';
+import IconSettings from '@/components/icons/IconSettings.vue';
+import IconLogout from '@/components/icons/IconLogout.vue';
+import IconPassKey from '@/components/icons/IconPassKey.vue';
+import IconFactCheck from '@/components/icons/IconFactCheck.vue';
+import IconManageSearch from '@/components/icons/IconManageSearch.vue';
+import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 
 export default {
   name: 'menu',
+  components: {
+    IconEye, IconEyeClose, IconMoney, IconSettings, IconLogout, 
+    IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart
+  },
+  name: 'menu-view',
   data() {
     return {
       name: "Marcos Felipe",
@@ -104,5 +117,147 @@ export default {
 }
 </script>
 
+
 <style lang="scss" scoped>
+.menu {
+  color: var(--color-text);
+  height: auto;
+  width: 100%;
+  padding-bottom: 100px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    margin: 0;
+    padding: 0 20px;
+    padding-top: 70px;
+  }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  &__welcome {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__name {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  &__greeting {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-text-input);
+  }
+}
+
+.wallet {
+  
+  width: 100%;
+  height: auto;
+  background-color: var(--color-background-input);
+  border-radius: 10px;
+  padding: 22px 18px;
+  gap: 29px;
+  padding-top: 16px;
+
+  &__item {
+    padding-bottom: 14px;
+  }
+
+  &__label {
+    display: flex;
+    color: var(--color-text);
+    opacity: 0.5;
+    font-size: 13px; 
+  }
+
+  &__value {
+    display: flex;
+    align-items: center;
+    color: var(--color-text);
+    font-size: 20px; 
+  }
+
+  &__eye {
+    margin-left: 15px;
+    cursor: pointer;
+    color: #ffffff80;
+    opacity: 0.5;
+  }
+
+  &__shortcuts {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-text);
+    border: none;
+    border-radius: 18px;
+    color: var(--color-background); 
+    padding: 10px;
+    gap: 2px;
+    white-space: nowrap;
+    font-size: 10px;
+  }
+
+  &__icon {
+    fill: var(--color-background-input);
+    align-items: center;
+  }
+}
+
+.more-options {
+  display: flex;
+  flex-direction: column;
+
+  &__text {
+    color: var(--color-text);
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
+
+  &__card {
+    width: 100%;
+    background-color: var(--color-background-input);
+    padding: 18px 8px;
+    padding-top: 8px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: inherit;
+    padding-top: 10px;
+    font-size: 14px;
+    gap: 8px;
+  }
+
+}
 </style>
