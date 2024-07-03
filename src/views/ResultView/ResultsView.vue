@@ -19,14 +19,12 @@
     </div>
     <div class="results__modalities">
       <label for="" class="results__modalities-label">Modalidade</label>
-      <select-fake-result @click="OpenModalModalities">  
-        {{ valueFilter }}
-      </select-fake-result>
+      <select-fake-result @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake-result>
     </div>
     
     <p class="results__count-modalities">{{ modalityList.length }} Resultados encontrados</p>
     
-    <collapse :leftIcon="true" :initCollapsed="false" v-for="({title,image,games}, index) in championshipList" :key="index">
+    <collapse :leftIcon="true" :initCollapsed="false" v-for="({title,image,games}, championshipListIndex) in championshipList" :key="championshipListIndex">
       <template #title>
         <img :src="image" />
         {{ title }}
@@ -36,17 +34,18 @@
           <p class="games__datetime">{{ game.dateTime }}</p>
           
           <div class="games__team">
+            
             <div class="games__team-left">
               <span class="games__team-name-left"> {{ game.teams[0].name }}</span>
-              
               <img class="games__team-image-left"  height="26px" width="26px" :src="game.teams[0].image">
-              
             </div>
+
             <div class="games__scores">
-              <div v-for="(result, index) in game.results" :key="index">
-                <span v-if="index==0">
+              <div v-for="(result, resultsIndex) in game.results" :key="resultsIndex">
+                <span v-if="resultsIndex==0">
                   {{ result.team0 }} x {{ result.team1 }}
                 </span>
+                
                 <span 
                 v-else
                 class="games__scores games__scores--secondary"
@@ -57,9 +56,7 @@
             </div>
             
             <div class="games__team-right">
-              
               <img class="games__team-image-right"  height="26px" width="26px" :src="game.teams[1].image">
-              
               <span class="games__team-name-right"> {{ game.teams[1].name }}</span>
             </div>
            
@@ -69,23 +66,12 @@
       </div>
         
     </collapse>
-    <modal-modalities v-if="showModalModalities" @closeModal="handleCloseModalModalities">
-      <template #title>
-        <p>Selecione</p>
-      </template>
-      <template #body>
-        <p
-          class="results__modalities-modal"
-          v-for="(modality, index) in modalityList" 
-          :key="index"
-          @click="handleModalities(modality.name)"
-        >
-          {{ modality.name }}
-          <IconCheck v-if="valueFilter == modality.name" class="modal-modalities__icon"/>
-          
-        </p>
-      </template>
-    </modal-modalities>
+    <ModalModalities
+      v-if="showModalModalities"
+      :modalityId="modality.id"
+      @closeModal="handleCloseModalitiesModal"
+      @click="handleModality"
+    />  
   </div>
 </template>
 
@@ -94,7 +80,7 @@ import Header from '@/components/layouts/Header.vue'
 import ButtonDate from './parts/ButtonDate.vue'
 import SelectFakeResult from './parts/SelectFakeResult.vue';
 import moment from 'moment';
-import ModalModalities from '@/components/Modal.vue';
+import ModalModalities from '@/views/HomeView/parts/ModalModalities.vue';
 import Collapse from '@/components/Collapse.vue';
 import { modalityList, championshipList, leagueList } from '@/constants'
 import GameItemResult from './parts/GameItemResult.vue';
@@ -117,7 +103,7 @@ export default {
   data() {
     return {
       today: moment().format('DD/MM'),
-      valueFilter: 'Futebol',
+      modality: modalityList[0],
       showModalModalities: false,
       modalityList,
       championshipList,
@@ -136,15 +122,15 @@ export default {
         currentDate.add(1, 'day');
       }
     },
-    OpenModalModalities() {
+    handleOpenModalitiesModal() {
       this.showModalModalities = !this.showModalModalities;
     },
-    handleCloseModalModalities() {
+    handleCloseModalitiesModal() {
       this.showModalModalities = false;
     },
-    handleModalities(value) {
-      this.valueFilter = value;
-      this.showModalModalities = false;
+    handleModality(modalityId) {
+      this.modality = this.modalityList.find(modality => modality.id === modalityId)
+      this.handleCloseModalitiesModal()
     }
   }
 }
