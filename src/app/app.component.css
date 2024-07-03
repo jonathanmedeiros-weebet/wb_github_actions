@@ -90,7 +90,7 @@ img{
     color: var(--foreground);
     border-radius: 10px 10px 0 0;
     z-index: 1001;
-    position: absolute;
+    position: fixed;
     min-height: 150px;
     min-width: 100%;
     right: 0;
