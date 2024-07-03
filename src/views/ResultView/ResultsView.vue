@@ -4,8 +4,8 @@
     <div class="results__dates">
       <div class="results__dates-buttos" v-for="day in dateRange"  :key="day">
         <button-date 
-          v-if="day == currentDate1"
-          value="Hoje"
+          v-if="day == today"
+          :value="day"
           text="Hoje"
           customClass="button button__item--active"
           ref="todayButton"
@@ -26,24 +26,40 @@
     
     <p class="results__count-modalities">{{ modalityList.length }} Resultados encontrados</p>
     
-    <collapse :initCollapsed="false" v-for="({title, image, games}, index) in championshipList" :key="index">
+    <collapse :leftIcon="true" :initCollapsed="false" v-for="({title,image,games}, index) in championshipList" :key="index">
       <template #title>
         <img :src="image" />
         {{ title }}
       </template>
       <div class="games">
-        <div class="games__items" v-for="(game, index) in games" :key="index">
-          <p class="games__datetime" >{{ game.dateTime }}</p>
-          
+        <div class="games__items" v-for="(game, i) in games" :key="i">
+          <p class="games__datetime">{{ game.dateTime }}</p>
           
           <div class="games__team">
-            <div class="games_team-left">
+            <div class="games__team-left">
               <span class="games__team-name-left"> {{ game.teams[0].name }}</span>
-              <img class="games__team-image" :src="game.teams[0].image">
+              
+              <img class="games__team-image-left"  height="26px" width="26px" :src="game.teams[0].image">
+              
             </div>
-            x
+            <div class="games__scores">
+              <div v-for="(result, index) in game.results" :key="index">
+                <span v-if="index==0">
+                  {{ result.team0 }} x {{ result.team1 }}
+                </span>
+                <span 
+                v-else
+                class="games__scores games__scores--secondary"
+                >
+                  ({{ result.team0 }} x {{ result.team1 }})
+                </span>
+              </div>
+            </div>
+            
             <div class="games__team-right">
-              <img class="games__team-image" :src="game.teams[1].image">
+              
+              <img class="games__team-image-right"  height="26px" width="26px" :src="game.teams[1].image">
+              
               <span class="games__team-name-right"> {{ game.teams[1].name }}</span>
             </div>
            
@@ -59,11 +75,14 @@
       </template>
       <template #body>
         <p
-          v-for="modality in modalityList" 
-          :key="modality"
+          class="results__modalities-modal"
+          v-for="(modality, index) in modalityList" 
+          :key="index"
           @click="handleModalities(modality.name)"
         >
           {{ modality.name }}
+          <IconCheck v-if="valueFilter == modality.name" class="modal-modalities__icon"/>
+          
         </p>
       </template>
     </modal-modalities>
@@ -79,6 +98,7 @@ import ModalModalities from '@/components/Modal.vue';
 import Collapse from '@/components/Collapse.vue';
 import { modalityList, championshipList, leagueList } from '@/constants'
 import GameItemResult from './parts/GameItemResult.vue';
+import IconCheck from '@/components/icons/IconCheck.vue';
 
 export default {
   name: 'results-view',
@@ -88,17 +108,16 @@ export default {
     SelectFakeResult,
     ModalModalities,
     Collapse,
-    GameItemResult
+    GameItemResult,
+    IconCheck
   },
   created() {
     this.generateDaysOfMonth();
-    console.log(championshipList);
   },
   data() {
     return {
-      currentDate1: moment().format('DD/MM'),
+      today: moment().format('DD/MM'),
       valueFilter: 'Futebol',
-      modalities: ['Futebol', 'Volêi', 'Basquete', 'Boxe'],
       showModalModalities: false,
       modalityList,
       championshipList,
@@ -159,25 +178,37 @@ export default {
     padding: 5px 20px;
     color: var(--color-text-input);
   }
+
+  &__modalities-modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 32px;
+    font-size: 16px;
+  }
 }
 
 .games {
   display: flex;
   flex-direction: column;
-  padding: 13px 16px;
+  height: 100%;
+  
   background: var(--color-background-input);
   
   
   &__items {
   
     align-items: center;
-    background-color: red;
-    padding: 10px;    
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+     
   }
 
   &__datetime {
+    padding: 15px 8px;
     align-items: center;
-    background-color: blue;
+    text-align: center;
+    color: var(--color-text-input);
     
   }
 
@@ -185,29 +216,60 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    border-bottom: 3px solid blue;
+    justify-content: space-between;
+    
+  }
+
+  &__team-left,
+  &__team-right {
+    font-size: 14px;
+    flex: 1;
   }
 
   &__team-left {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
+    width: 37%;
+    text-align: left;
+    
   }
+
+  &__scores {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    padding: 5px;
+    flex: 0 0 30%; /* Ocupa 30% da largura total */
+
+    &--secondary {
+      font-size: 12px;
+      color: var(--color-text-input);
+      padding-top: 0;
+    }
+
+  }
+
   &__team-right {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
+    width: 37%;
+        margin-left: 5px;
+
   }
 
+  &__team-image-left {
+    margin-left: 10px
+  }
 
-
-  &__team-image {
-    height: 50px;
-    width: 50px;
+  &__team-image-right {
+    margin-right: 10px
   }
 }
 </style>

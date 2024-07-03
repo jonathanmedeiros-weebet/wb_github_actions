@@ -19,6 +19,10 @@ export default {
         initCollapsed: {
             type: Boolean,
             default: false
+        },
+        leftIcon: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
