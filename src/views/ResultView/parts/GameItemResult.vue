@@ -1,28 +1,38 @@
 <template>
-    <div class="game" @click="handleClick">
-        <!-- <p>{{ game.dateTime }}</p> -->
-        <div 
-            class="game__teams" 
+    <div class="games" @click="handleClick">
+        <div class="games__items" v-for="(game, i) in games" :key="i">
+            <p class="games__datetime">{{ game.dateTime }}</p>
             
-        >
-            <!-- <span class="game_datetime">{{ game.dateTime }}</span> -->
-            <span
-                class="game__team"
-                v-for="(team, index) in game.teams"
-                :key="index"
-            >
-                <img :src="team.image">
-                {{ team.name }}
-            </span>
-            <span class="game__info">
-                <span class="game__pontuation">{{ game.pontuation }}</span>
-            </span>
+            <div class="games__team">
+            
+            <div class="games__team-left">
+                <span class="games__team-name-left"> {{ game.teams[0].name }}</span>
+                <img class="games__team-image-left"  height="26px" width="26px" :src="game.teams[0].image">
+            </div>
+
+            <div class="games__scores">
+                <div v-for="(result, resultsIndex) in game.results" :key="resultsIndex">
+                <span v-if="resultsIndex==0">
+                    {{ result.team0 }} x {{ result.team1 }}
+                </span>
+                
+                <span 
+                v-else
+                class="games__scores games__scores--secondary"
+                >
+                    ({{ result.team0 }} x {{ result.team1 }})
+                </span>
+                </div>
+            </div>
+            
+            <div class="games__team-right">
+                <img class="games__team-image-right"  height="26px" width="26px" :src="game.teams[1].image">
+                <span class="games__team-name-right"> {{ game.teams[1].name }}</span>
+            </div>
+            
+            </div>
+            
         </div>
-        <!-- <div class="game__quotes">
-            <div class="game__quota">{{ game.quotes.host }}</div>
-            <div class="game__quota">{{ game.quotes.draw }}</div>
-            <div class="game__quota">{{ game.quotes.visitor }}</div>
-        </div> -->
     </div>
 </template>
 
@@ -30,10 +40,10 @@
 export default {
     name: 'game-item',
     props: {
-        game: {
-            type: Object,
-            required: true
-        },
+        games: {
+            type: Array,
+            required: true,
+        }
     },
     methods: {
         handleClick() {
@@ -44,81 +54,79 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.game {
-    width: 100%;
-
+.games {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 13px 16px;
+    flex-direction: column;
+    height: 100%;
     background: var(--color-background-input);
+    
+    &__items {
+        align-items: center;
+        padding: 16px 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.10);  
+    }
 
-    &__teams {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+    &__datetime {
+        padding: 15px 8px;
+        align-items: center;
+        text-align: center;
+        color: var(--color-text-input);
     }
 
     &__team {
         display: flex;
+        flex-direction: row;
         align-items: center;
-        gap: 4px;
-        color: var(--color-text);
+        justify-content: space-between; 
+    }
+
+    &__team-left,
+    &__team-right {
         font-size: 14px;
-        font-weight: 400;
-        line-height: 14px;
-
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        width: calc(100vw - 240px);
+        flex: 1;
     }
 
-    &__team img {
-        width: 16px;
-        height: 16px;
-    }
-
-    &__info {
+    &__team-left {
         display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
         align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        line-height: 12px;
-        font-weight: 400;
-        color: #666666;
+        width: 37%;
+        text-align: left;   
     }
 
-    &__pontuation {
-        font-size: 10px;
-        line-height: 10px;
-        font-weight: 400;
-        color: var(--color-primary);
-
-        border: 0.5px solid var(--color-primary);
-        border-radius: 2px;
-
-        height: 15px;
-        width: 28px;
+    &__scores {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-align: center;
+        font-size: 20px;
+        padding: 5px;
+        flex: 0 0 30%; /* Ocupa 30% da largura total */
+
+        &--secondary {
+            font-size: 12px;
+            color: var(--color-text-input);
+            padding-top: 0;
+        }
     }
 
-    &__quotes {
+    &__team-right {
         display: flex;
-        justify-content: space-between;
-        gap: 8px;
-    }
-
-    &__quota {
-        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
         align-items: center;
-        justify-content: center;
-        width: 58px;
-        height: 54px;
-        border-radius: 4px;
-        background: var(--color-background);
+        width: 37%;
+        margin-left: 5px;
+    }
+
+    &__team-image-left {
+        margin-left: 10px
+    }
+
+    &__team-image-right {
+        margin-right: 10px
     }
 }
 </style>

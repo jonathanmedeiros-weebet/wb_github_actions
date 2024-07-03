@@ -24,54 +24,28 @@
     
     <p class="results__count-modalities">{{ modalityList.length }} Resultados encontrados</p>
     
-    <collapse :leftIcon="true" :initCollapsed="false" v-for="({title,image,games}, championshipListIndex) in championshipList" :key="championshipListIndex">
+    <collapse 
+      :leftIcon="true" 
+      :initCollapsed="false" 
+      v-for="({title,image,games}, championshipListIndex) in championshipList" 
+      :key="championshipListIndex"
+    >
       <template #title>
         <img :src="image" />
         {{ title }}
       </template>
-      <div class="games">
-        <div class="games__items" v-for="(game, i) in games" :key="i">
-          <p class="games__datetime">{{ game.dateTime }}</p>
-          
-          <div class="games__team">
-            
-            <div class="games__team-left">
-              <span class="games__team-name-left"> {{ game.teams[0].name }}</span>
-              <img class="games__team-image-left"  height="26px" width="26px" :src="game.teams[0].image">
-            </div>
 
-            <div class="games__scores">
-              <div v-for="(result, resultsIndex) in game.results" :key="resultsIndex">
-                <span v-if="resultsIndex==0">
-                  {{ result.team0 }} x {{ result.team1 }}
-                </span>
-                
-                <span 
-                v-else
-                class="games__scores games__scores--secondary"
-                >
-                  ({{ result.team0 }} x {{ result.team1 }})
-                </span>
-              </div>
-            </div>
-            
-            <div class="games__team-right">
-              <img class="games__team-image-right"  height="26px" width="26px" :src="game.teams[1].image">
-              <span class="games__team-name-right"> {{ game.teams[1].name }}</span>
-            </div>
-           
-          </div>
-         
-        </div>
-      </div>
-        
+      <game-item-result :games="games"/>
+    
     </collapse>
+
     <ModalModalities
       v-if="showModalModalities"
       :modalityId="modality.id"
       @closeModal="handleCloseModalitiesModal"
       @click="handleModality"
     />  
+
   </div>
 </template>
 
@@ -82,9 +56,8 @@ import SelectFakeResult from './parts/SelectFakeResult.vue';
 import moment from 'moment';
 import ModalModalities from '@/views/HomeView/parts/ModalModalities.vue';
 import Collapse from '@/components/Collapse.vue';
-import { modalityList, championshipList, leagueList } from '@/constants'
+import { modalityList, championshipList } from '@/constants'
 import GameItemResult from './parts/GameItemResult.vue';
-import IconCheck from '@/components/icons/IconCheck.vue';
 
 export default {
   name: 'results-view',
@@ -94,8 +67,7 @@ export default {
     SelectFakeResult,
     ModalModalities,
     Collapse,
-    GameItemResult,
-    IconCheck
+    GameItemResult
   },
   created() {
     this.generateDaysOfMonth();
@@ -107,7 +79,7 @@ export default {
       showModalModalities: false,
       modalityList,
       championshipList,
-      leagueList,
+  ,
       dateRange: []
     }
   },
@@ -174,88 +146,4 @@ export default {
   }
 }
 
-.games {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  
-  background: var(--color-background-input);
-  
-  
-  &__items {
-  
-    align-items: center;
-    padding: 16px 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-     
-  }
-
-  &__datetime {
-    padding: 15px 8px;
-    align-items: center;
-    text-align: center;
-    color: var(--color-text-input);
-    
-  }
-
-  &__team {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    
-  }
-
-  &__team-left,
-  &__team-right {
-    font-size: 14px;
-    flex: 1;
-  }
-
-  &__team-left {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    width: 37%;
-    text-align: left;
-    
-  }
-
-  &__scores {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 20px;
-    padding: 5px;
-    flex: 0 0 30%; /* Ocupa 30% da largura total */
-
-    &--secondary {
-      font-size: 12px;
-      color: var(--color-text-input);
-      padding-top: 0;
-    }
-
-  }
-
-  &__team-right {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    width: 37%;
-        margin-left: 5px;
-
-  }
-
-  &__team-image-left {
-    margin-left: 10px
-  }
-
-  &__team-image-right {
-    margin-right: 10px
-  }
-}
 </style>
