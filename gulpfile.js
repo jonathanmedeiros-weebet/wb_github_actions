@@ -2983,3 +2983,39 @@ gulp.task('prowin.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('canela.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "canela.bet",
+        banca: "CANELA BET",
+        styles: ""
+    });
+});
+
+gulp.task('curitiba.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "curitiba.bet",
+        banca: "CURITIBA BET",
+        styles: ""
+    });
+});
+
+gulp.task('portoalegre.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "portoalegre.bet",
+        banca: "PORTO ALEGRE BET",
+        styles: ""
+    });
+});
+
+gulp.task('rio.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "rio.bet",
+        banca: "RIO BET",
+        styles: ""
+    });
+});

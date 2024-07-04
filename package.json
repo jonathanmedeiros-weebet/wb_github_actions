@@ -312,7 +312,11 @@
         "stargoldbet.app": "gulp stargoldbet.app",
         "goalbet.com.br": "gulp goalbet.com.br",
         "sortegol.com": "gulp sortegol.com",
-        "prowin.bet": "gulp prowin.bet"
+        "prowin.bet": "gulp prowin.bet",
+        "canela.bet": "gulp canela.bet",
+        "curitiba.bet": "gulp curitiba.bet",
+        "portoalegre.bet": "gulp portoalegre.bet",
+        "rio.bet": "gulp rio.bet"
     },
     "private": true,
     "dependencies": {
