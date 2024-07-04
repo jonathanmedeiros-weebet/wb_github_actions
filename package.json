@@ -316,7 +316,8 @@
         "canela.bet": "gulp canela.bet",
         "curitiba.bet": "gulp curitiba.bet",
         "portoalegre.bet": "gulp portoalegre.bet",
-        "rio.bet": "gulp rio.bet"
+        "rio.bet": "gulp rio.bet",
+        "riojogos.com": "gulp riojogos.com"
     },
     "private": true,
     "dependencies": {

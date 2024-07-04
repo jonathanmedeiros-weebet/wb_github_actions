@@ -3019,3 +3019,12 @@ gulp.task('rio.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('riojogos.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "riojogos.com",
+        banca: "Rio Jogos",
+        styles: ""
+    });
+});
