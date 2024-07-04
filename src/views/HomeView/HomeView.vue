@@ -23,6 +23,7 @@
 
     <ModalLeagues
       v-if="showModalLeagues"
+      :items="championshipPerRegionList"
       @closeModal="handleCloseLeaguesModal"
       @click="handleLeague"
     />
@@ -57,6 +58,10 @@ import ModalModalities from './parts/ModalModalities.vue'
 import ModalCalendar from './parts/ModalCalendar.vue'
 import ModalSearch from './parts/ModalGameSearch.vue'
 import GameList from './parts/GameList.vue'
+import { getChampionShipBySportId, getChampionShipRegionBySportId } from '@/services'
+import { useHomeStore } from '@/stores'
+
+const MODALITY_SPORT_FUTEBOL = 1;
 
 export default {
   name: 'home',
@@ -75,11 +80,21 @@ export default {
       showModalCalendar: false,
       showModalLeagues: false,
       showModalModalities: false,
-      modality: modalityList[0],
+      modality: null,
       league: leagueList[0],
       modalityList,
       championshipList,
       leagueList,
+
+      homeStore: useHomeStore()
+    }
+  },
+  created() {
+    this.handleModality(MODALITY_SPORT_FUTEBOL)
+  },
+  computed: {
+    championshipPerRegionList() {
+      return this.homeStore.championshipPerRegionList;
     }
   },
   methods: {
@@ -89,9 +104,12 @@ export default {
     handleCloseModalitiesModal() {
       this.showModalModalities = false;
     },
-    handleModality(modalityId) {
+    async handleModality(modalityId) {
       this.modality = this.modalityList.find(modality => modality.id === modalityId)
-      this.handleCloseModalitiesModal()
+      this.handleCloseModalitiesModal();
+      // const championships = await getChampionShipBySportId(this.modality.id);
+
+      this.prepareChampionshipPerRegionList(modalityId);
     },
 
     handleOpenLeaguesModal() {
@@ -124,6 +142,27 @@ export default {
     },
     handleSearch(gameId) {
       console.log(gameId)
+    },
+
+    async prepareChampionshipPerRegionList(modalityId) {
+      let championshipPerRegion = await getChampionShipRegionBySportId(modalityId);
+      championshipPerRegion = championshipPerRegion.result.map((region) => {
+        region.campeonatos.push({
+          _id: `region_${region._id}`,
+          nome: `Todos os campeonatos - ${region._id}`
+        })
+        region.image = `https://cdn.wee.bet/flags/1x1/${region.sigla}.svg`;
+        return region;
+      });
+
+      championshipPerRegion.push({
+        _id: "Todos os campeonatos",
+        sigla: "ww",
+        image: `https://cdn.wee.bet/flags/1x1/ww.svg`,
+        campeonatos: []
+      })
+
+      this.homeStore.setChampionshipPerRegionList(championshipPerRegion)
     }
   }
 }

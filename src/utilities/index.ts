@@ -1,1 +1,2 @@
-export * from './date.utitlity'
+export * from './date.utility'
+export * from './general.utility'

@@ -13,7 +13,7 @@
 <script>
 import WModal from '@/components/Modal.vue'
 import Calendar from '@/components/Calendar.vue'
-import { now } from '@/utilities/date.utitlity.ts'
+import { now } from '@/utilities'
 
 export default {
     name: 'modal-calendar',

@@ -14,7 +14,7 @@
                     @click="handleSelect(league.title)"
                 >
                     <img :src="league.image">
-                    {{ league.title }}
+                    {{ league._id }}
                 </a>
 
                 <a
@@ -39,9 +39,10 @@ import { leagueList } from '@/constants';
 export default {
     name: 'modal-leagues',
     components: {WModal},
-    data() {
-        return {
-            items: leagueList
+    props: {
+        items: {
+            type: Array,
+            required: true
         }
     },
     methods: {
@@ -76,6 +77,7 @@ export default {
         display: flex;
         align-items: center;
         gap: 10px;
+        text-transform: uppercase;
 
         color: var(--color-text);
         font-size: 16px;
@@ -94,6 +96,7 @@ export default {
     }
 
     &__item img {
+        border-radius: 50px;
         width: 18px;
         height: 18px;
     }
