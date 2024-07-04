@@ -158,6 +158,10 @@ nav::-webkit-scrollbar {
     font-size: 12px;
 }
 
+.btn-register{
+    min-width: 103px !important;
+}
+
 .btn-cadastro {
     background-color: var(--highlight);
     color: var(--foreground-header);
@@ -468,7 +472,7 @@ body .change-theme {
     }
 
     .menu-perfil {
-        height: 30px;
+        height: 32px;
         padding: 0 9px;
     }
 
@@ -609,6 +613,9 @@ body .change-theme {
     }
     .btn{
         height: 32px !important;
+    }
+    .menu-perfil {
+        height: 34px;
     }
 }
 

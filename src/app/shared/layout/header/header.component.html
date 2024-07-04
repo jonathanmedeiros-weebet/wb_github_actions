@@ -630,7 +630,7 @@
 
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="btn btn-custom w-130 mr-4" (click)="abrirCadastro()" *ngIf="modoClienteAtivo">
+                <a class="btn btn-custom w-130 mr-4 btn-register" (click)="abrirCadastro()" *ngIf="modoClienteAtivo">
                     {{ 'geral.registreSe' | translate | uppercase }}
                 </a>
                 <a (click)="abrirLogin()" class="botao-entrar nav-link btn btn-custom2 w-130" role="button">
