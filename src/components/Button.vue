@@ -1,13 +1,13 @@
 <template>
-    <button
-      :id="id"
-      :value="value"
-      type="button"
-      class="button button__item"
-      @click="handleClick"
-    >
-      {{text}}
-    </button>
+  <button
+    :id="id"
+    :value="value"
+    type="button"
+    class="button button__item"
+    @click="handleClick"
+  >
+    {{text}}
+  </button>
 </template>
 
 <script>
