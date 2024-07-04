@@ -9,6 +9,8 @@ import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-
 import { TranslateService } from '@ngx-translate/core';
 import { CartaoCadastroModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../modals';
 
+declare let anj_cd823ed6_bffb_4764_9e1b_05566f369c8c: any;
+
 @Component({
     selector: 'app-footer',
     templateUrl: 'footer.component.html',
@@ -106,6 +108,10 @@ export class FooterComponent implements OnInit {
                     this.isCliente = isCliente;
                 }
             );
+
+        setTimeout(function() {
+            anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init()
+        }, 200);
     }
 
     temRedesSociais() {
