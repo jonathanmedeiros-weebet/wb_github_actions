@@ -19,62 +19,78 @@
             </span>
           </div>
         </div>
-        <div class="collapse" @click="handleClick">
+
+        <div class="collapse" @click="toggleCollapse('entradas', $event)">
           <div class="collapse__item">
-            <component :is="iconArrowDinamic" />
+            <component :is="iconArrowDinamicEntradas" />
             <span class="collapse__title">Entradas</span>
             <div class="collapse__value">
               <IconAdd class="collapse__icon" />
               <span class="collapse__balance">R$ 2,00</span>
             </div>
           </div>
-          <div v-if="collapsed" class="collapse__content">
+
+          <div v-if="collapsedEntradas" class="collapse__content">
             <div class="collapse__section">
-              <div class="collapse__section-item">
-                <span>Total Apostado:</span>
-                <span>R$ {{ totalApostado }}</span>
+              <div class="collapse" @click="toggleCollapse('apostado', $event)">
+                <div class="collapse__item">
+                  <component :is="iconArrowDinamicApostado" />
+                  <span class="collapse__title">Total Apostado:</span>
+                  <div class="collapse__icon-wrapper">
+                    <IconAdd class="collapse__icon-add" />
+                    <span>R$ {{ totalApostado }}</span>
+                  </div>
+                </div>
+                <div v-if="collapsedApostado" class="collapse__section-result">
+                  <span>Futebol</span>
+                </div>
               </div>
+
               <div class="collapse__section-item">
-                <span>Recargas de Cartão:</span>
-                <span>R$ {{ recargasCartao }}</span>
+                <span class="collapse__section-text">Recargas de Cartão:</span>
+                <span class="collapse__value-right">R$ {{ recargasCartao }}</span>
               </div>
+              <div class="collapse__line"></div>
             </div>
-        <hr>
           </div>
         </div>
-        <div class="collapse" @click="handleClick">
+
+        <div class="collapse" @click="toggleCollapse('saidas')">
           <div class="collapse__item">
-            <component :is="iconArrowDinamic" />
+            <component :is="iconArrowDinamicSaidas" />
             <span class="collapse__title">Saídas</span>
             <div class="collapse__value">
               <IconRemove class="collapse__icon-remove" />
               <span class="collapse__balance">R$ 2,00</span>
             </div>
           </div>
-          <div v-if="collapsed" class="collapse__content">
+
+          <div v-if="collapsedSaidas" class="collapse__content">
             <div class="collapse__section">
               <div class="collapse__section-item">
                 <span>Comissões</span>
-                <span>R$ {{ totalApostado }}</span>
+                <span class="collapse__value-right">R$ {{ comissao }}</span>
               </div>
               <div class="collapse__section-item">
                 <span>Prêmio</span>
-                <span>R$ {{ recargasCartao }}</span>
+                <span class="collapse__value-right">R$ {{ premio }}</span>
               </div>
               <div class="collapse__section-item">
                 <span>Saque</span>
-                <span>R$ {{ recargasCartao }}</span>
+                <span class="collapse__value-right">R$ {{ Saque }}</span>
               </div>
+              <div class="collapse__line"></div>
             </div>
-          <hr>
           </div>
         </div>
+
         <div class="result">
           <span>Resultado 01/06 à 06/06</span>
           <div class="result__date">
             <span class="result__value">R$1,90</span>
           </div>
         </div>
+        <div class="collapse__line"></div>
         <div class="credit">
           <span>Créditos</span>
           <div class="credit__date">
@@ -82,6 +98,7 @@
             <span class="credit__value">R$0,00</span>
           </div>
         </div>
+        <div class="collapse__line"></div>
         <div class="debit">
           <span>Débitos</span>
           <div class="debit__date">
@@ -89,13 +106,13 @@
             <span class="debit__value">R$0,00</span>
           </div>
         </div>
+        <div class="collapse__line"></div>
         <div class="balance">
           <span>Saldo</span>
           <div class="balance__date">
             <span class="balance__value">R$0,00</span>
           </div>
         </div>
-
       </section>
     </div>
   </div>
@@ -136,19 +153,27 @@ export default {
       modality: 'Apuração',
       relatory: '31/05',
       value: '0,00',
-      totalApostado: '150,00',
-      recargasCartao: '50,00',
+      totalApostado: '2,00',
+      recargasCartao: '0,00',
       comissao: '2,10',
       premio: '13,10',
       Saque: '55,10',
       modalityList: modalityList,
-      collapsed: this.initCollapsed
+      collapsedEntradas: this.initCollapsed,
+      collapsedApostado: this.initCollapsed,
+      collapsedSaidas: this.initCollapsed
     }
   },
 
   computed: {
-    iconArrowDinamic() {
-      return this.collapsed ? IconArrowUp : IconArrowDown;
+    iconArrowDinamicEntradas() {
+      return this.collapsedEntradas ? IconArrowUp : IconArrowDown;
+    },
+    iconArrowDinamicApostado() {
+      return this.collapsedApostado ? IconArrowUp : IconArrowDown;
+    },
+    iconArrowDinamicSaidas() {
+      return this.collapsedSaidas ? IconArrowUp : IconArrowDown;
     }
   },
 
@@ -156,8 +181,16 @@ export default {
     handleSelectModalClick() {
       alert('Modal select')
     },
-    handleClick() {
-      this.collapsed = !this.collapsed;
+    toggleCollapse(section, event) {
+      console.log(section);
+      if (section === 'entradas') {
+        this.collapsedEntradas = !this.collapsedEntradas;
+      } else if (section === 'saidas') {
+        this.collapsedSaidas = !this.collapsedSaidas;
+      } else if (section === 'apostado') {
+        event.stopPropagation();
+        this.collapsedApostado = !this.collapsedApostado;
+      }
     }
   }
 }
@@ -173,7 +206,7 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 5px;
     margin: 0;
     padding: 0 20px;
     padding-top: 20px;
@@ -210,7 +243,7 @@ export default {
 
   &__add {
     fill: var(--color-primary);
-    padding: 3px;
+    padding: 1px;
   }
 }
 
@@ -221,13 +254,17 @@ export default {
     color: #FFF;
     font-size: 14px;
     font-style: normal;
+    display: flex;
+    flex: 1;
+    padding: 5px 1px;
+    
   }
 
   &__item {
     display: flex;
     align-items: center;
     justify-content: space-between; 
-    gap: 10px;
+    gap: 5px;
     width: 100%;
   }
 
@@ -239,71 +276,113 @@ export default {
     width: 100%; 
   }
 
-  &__balance {
-    color: #FFF; 
+  &__section-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__icon-add {
+    padding: 1px;
+    fill: var(--color-primary);
+  }
+
+  &__value-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 100px; 
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+
+  &__icon-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 7px; 
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   &__icon {
     fill: var(--color-primary);
-    padding: 3px;
   }
+
   &__icon-remove {
     fill: var(--color-danger);
   }
 
-  &__content {
-    padding: 10px 0;
-  }
-
-  &__section {
-    padding-top: 10px;
-  }
-
-  &__section-item {
-    display: flex;
-    justify-content: space-between;
+  &__line {
+    width: 100%;
+    height: 1px;
+    background: #FFFFFF;
+    opacity: 0.1;
   }
 }
+
 .result {
   display: flex;
-  align-items: center;
   justify-content: space-between;
 
+  &__date {
+    display: flex;
+    gap: 20px;
+  }
+
   &__value {
-    color: green;
-  } 
+    display: flex;
+    align-items: center;
+  }
 }
 
 .credit {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   &__date {
-      display: flex;
-      gap: 5px; 
+    display: flex;
+    gap: 10px;
   }
+
+  &__value {
+    display: flex;
+    align-items: center;
+  }
+
   &__icon {
     fill: var(--color-primary);
-    padding: 3px;
   }
 }
 
 .debit {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 
   &__date {
     display: flex;
-    gap: 5px; 
+    gap: 10px;
   }
+
+  &__value {
+    display: flex;
+    align-items: center;
+  }
+
   &__icon {
     fill: var(--color-danger);
-    padding: 3px;
   }
 }
-
 .balance {
   display: flex;
   align-items: center;
@@ -314,7 +393,4 @@ export default {
     gap: 5px; 
   }
 }
-
-
-
 </style>
