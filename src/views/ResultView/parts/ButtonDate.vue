@@ -64,6 +64,8 @@ export default {
 
   &__item:hover {
     background-color: rgb(3, 181, 110);
+    border: none;
+    background: transparent;
   }
 }
 </style>

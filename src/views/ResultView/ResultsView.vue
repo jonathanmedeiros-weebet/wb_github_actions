@@ -1,20 +1,15 @@
 <template>
   <div class="results">
     <Header title="Resultados" :showBackButton="true" />
-    <div class="results__dates">
-      <div class="results__dates-buttos" v-for="day in dateRange"  :key="day">
+    <div class="results__dates" >
+      <div class="results__dates-buttons" v-for="(day, dateRangeIndex) in dateRange"  :key="dateRangeIndex">
         <button-date 
-          v-if="day == today"
-          :value="day"
-          text="Hoje"
-          customClass="button button__item--active"
-          ref="todayButton"
-        />  
-        <button-date 
-          v-else
-          :value="day"
-          :text="day"
-        />  
+          :value="day.format('YYYY-MM-DD')"
+          :text="day.format('YYYY-MM-DD') === today ? 'Hoje' : day.format('DD/MM')"
+          :customClass="day.format('YYYY-MM-DD') === activeDay ? 'button button__item--active' : 'button button__item'"
+          @click="setActiveDay(day)"
+          :ref="day.format('YYYY-MM-DD') === today ? 'todayButton' : ''"
+        />
       </div>
     </div>
     <div class="results__modalities">
@@ -71,10 +66,12 @@ export default {
   },
   created() {
     this.generateDaysOfMonth();
+    console.log(this.today);
   },
   data() {
     return {
-      today: moment().format('DD/MM'),
+      activeDay: moment().format('YYYY-MM-DD'),
+      today: moment().format('YYYY-MM-DD'),
       modality: modalityList[0],
       showModalModalities: false,
       modalityList,
@@ -89,7 +86,7 @@ export default {
       let currentDate = startDate.clone();
 
       while (currentDate.isBefore(endDate) || currentDate.isSame(endDate, 'day')) {
-        this.dateRange.push(currentDate.format('DD/MM'));
+        this.dateRange.push(currentDate.clone());
         currentDate.add(1, 'day');
       }
     },
@@ -102,7 +99,24 @@ export default {
     handleModality(modalityId) {
       this.modality = this.modalityList.find(modality => modality.id === modalityId)
       this.handleCloseModalitiesModal()
+    },
+    setActiveDay(day) {
+      this.activeDay = day.format('YYYY-MM-DD');
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      if (this.$refs.todayButton && this.$refs.todayButton[0]) {
+        const todayButtonEl = this.$refs.todayButton[0].$el || this.$refs.todayButton[0];
+        if (todayButtonEl.scrollIntoView) {
+          todayButtonEl.scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+          });
+        }
+      }
+    });
   }
 }
 </script>
@@ -114,15 +128,18 @@ export default {
   height: 100%;
 
   &__dates {
-    display: flex;
-    flex-direction: row;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
     
-    &-buttons {
-      display: inline-block;
-    }
+  }
+
+  &__dates::-webkit-scrollbar {
+    display: none;  /* WebKit-based browsers */
+  }
+
+  &__dates-buttons {
+    display: inline-block;
   }
 
   &__modalities {
