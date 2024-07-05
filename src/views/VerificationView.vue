@@ -34,7 +34,7 @@
             <div class="collapse__section">
               <div class="collapse" @click="toggleCollapse('apostado', $event)">
                 <div class="collapse__item">
-                  <component :is="iconArrowDinamicApostado" />
+                  <component class="collapse__icon-arrow" :is="iconArrowDinamicApostado" />
                   <span class="collapse__title">Total Apostado:</span>
                   <div class="collapse__icon-wrapper">
                     <IconAdd class="collapse__icon-add" />
@@ -83,7 +83,6 @@
             </div>
           </div>
         </div>
-
         <div class="result">
           <span>Resultado 01/06 à 06/06</span>
           <div class="result__date">
@@ -231,6 +230,7 @@ export default {
 }
 
 .balance {
+  padding-top: 8px;
   &__date {
     display: flex;
     gap: 25px;
@@ -305,6 +305,9 @@ export default {
     display: flex;
     align-items: center;
     gap: 7px; 
+  }
+  &__icon-arrow {
+    padding: 1.5px;
   }
 
   &__section {
