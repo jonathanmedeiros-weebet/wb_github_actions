@@ -12,7 +12,7 @@ import {Sorteio} from '../../models/loteria/sorteio';
 })
 export class RifaSorteioService {
 
-    private SorteioUrl = `${config.RIFA_URL}/sorteios`; // URL to web api
+    private SorteioUrl = `${config.BASE_URL}/rifa/sorteios`; // URL to web api
 
     constructor(
         private http: HttpClient,

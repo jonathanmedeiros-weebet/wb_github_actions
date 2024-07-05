@@ -13,7 +13,7 @@ import {Aposta} from '../../models/loteria/aposta';
 export class RifaApostaService {
 
     private ApostaUrl = `${config.BASE_URL}/apostas`;
-    private ApostaLoteriaUrl = `${config.RIFA_URL}/apostas`;
+    private ApostaLoteriaUrl = `${config.BASE_URL}/rifa/apostas`;
 
     constructor(
         private http: HttpClient,

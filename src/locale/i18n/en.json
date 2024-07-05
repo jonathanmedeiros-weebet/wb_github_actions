@@ -277,7 +277,8 @@
         "desafio": "CHALLENGE",
         "acumuladao": "ACCUMULATED",
         "loteria": "LOTERY",
-        "promocao": "PROMOTIONS"
+        "promocao": "PROMOTIONS",
+        "rifas": "RIFAS"
     },
     "submenu": {
         "copa22": "Cup 2022",
