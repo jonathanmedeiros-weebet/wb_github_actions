@@ -87,13 +87,13 @@
             <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
                 <div *ngIf="isMobile; then depositShortCutMobile else depositShortCutDesktop"></div>
                 <ng-template #depositShortCutDesktop>
-                    <a class="btn btn-custom mr-4" [routerLink]="['clientes/deposito']" [ngStyle]="{'height': '38px'}">
-                        {{ 'geral.depositar' | translate | uppercase }}
+                    <a class="btn btn-custom mr-4" [routerLink]="['clientes/deposito']">
+                        {{'geral.depositar' | translate | uppercase}}
                     </a>
                 </ng-template>
                 <ng-template #depositShortCutMobile>
-                    <a class="btn btn-custom mr-4" (click)="abrirDepositos()" [ngStyle]="{'height': '38px'}">
-                        {{ 'geral.depositar' | translate | uppercase }}
+                    <a class="btn btn-custom mr-4" (click)="abrirDepositos()" [ngStyle]="{'height': '32px'}">
+                        {{'geral.depositar' | translate | uppercase}}
                     </a>
                 </ng-template>
             </div>
@@ -630,7 +630,7 @@
 
         <ng-template #loggedOut>
             <div class="menu-conta dropdown">
-                <a class="btn btn-custom w-130 mr-4" (click)="abrirCadastro()" *ngIf="modoClienteAtivo">
+                <a class="btn btn-custom w-130 mr-4 btn-register" (click)="abrirCadastro()" *ngIf="modoClienteAtivo">
                     {{ 'geral.registreSe' | translate | uppercase }}
                 </a>
                 <a (click)="abrirLogin()" class="botao-entrar nav-link btn btn-custom2 w-130" role="button">

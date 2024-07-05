@@ -1732,11 +1732,11 @@ ngb-datepicker-month {
 @media only screen and (max-width: 1024px) {
 
     .modal-login{
-        z-index: 2147483648 !important;
+        z-index: 99999 !important;
     }
 
-    .modal-cadastro-cliente{
-        z-index: 2147483648 !important;
+    .modal-cadastro-cliente {
+        z-index: 99999 !important;
     }
 
     *::-webkit-scrollbar{
