@@ -2758,7 +2758,8 @@ gulp.task('zilionz.com', function (done) {
         server: "front3.wee.bet",
         host: "zilionz.com",
         banca: "ZILIONZ",
-        styles: ""
+        styles: "",
+        scripts: "<script type='text/javascript' src='h]ps://cd823ed6-bS-4764-9e1b-05566f369c8c.snippet.anjouangaming.org/anj-seal.js'></script>"
     });
 });
 
