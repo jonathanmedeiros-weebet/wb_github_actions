@@ -37,7 +37,7 @@
                 :key="categoryIndex"
                  
             >
-            
+
                 <div class="card__categories-title">
                     <p>
                         <icon-circle
@@ -128,6 +128,16 @@ export default {
         padding-bottom: 20px;
     }
 
+    &__body-icon {
+        color: var(--color-text-input);
+    }
+
+    &__bars {
+        display: flex;
+        flex-direction: row;
+        gap: 2px;
+    }
+
     &__bar-category {
         display: flex;
         flex-direction: row;
@@ -140,16 +150,6 @@ export default {
         &--last {
             border-radius: 0px 6px 6px 0px;
         }
-    }
-
-    &__body-icon {
-        color: var(--color-text-input);
-    }
-
-    &__bars {
-        display: flex;
-        flex-direction: row;
-        gap: 2px;
     }
 
     &__footer {

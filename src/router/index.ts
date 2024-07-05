@@ -60,7 +60,7 @@ const router = new VueRouter({
     },
     {
       path: '/dashboard',
-      name: 'Dashboard',
+      name: 'dashboard',
       component: DashboardView,
     },
   ]
