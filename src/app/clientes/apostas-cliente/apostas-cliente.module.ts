@@ -13,6 +13,7 @@ import {DesafioApostaService} from '../../shared/services/desafio/desafio-aposta
 import {ApostasClienteLoteriaComponent} from './apostas-cliente-loteria/apostas-cliente-loteria.component';
 import {ApostaLoteriaService} from '../../shared/services/loteria/aposta-loteria.service';
 import {ApostasClienteCasinoComponent} from './apostas-cliente-casino/apostas-cliente-casino.component';
+import { ApostaClienteRifaComponent } from './aposta-cliente-rifa/aposta-cliente-rifa/aposta-cliente-rifa.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ApostasClienteCasinoComponent} from './apostas-cliente-casino/apostas-cl
         ApostasClienteAcumuladaoComponent,
         ApostasClienteDesafioComponent,
         ApostasClienteLoteriaComponent,
-        ApostasClienteCasinoComponent
+        ApostasClienteCasinoComponent,
+        ApostaClienteRifaComponent
     ],
     imports: [
         SharedModule,

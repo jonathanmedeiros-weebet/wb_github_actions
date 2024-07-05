@@ -1,0 +1,26 @@
+#sport-wrapper{
+    display: flex;
+    flex-direction: row;
+    max-height: calc(100vh - 132px);
+    /*min-height: 800px;*/
+}
+
+.sport-content{
+    flex-grow: 1;
+    /*padding: 0 0 0 255px;*/
+}
+
+@media only screen and (max-width: 1024px) {
+    .sport-content{
+        padding: 0;
+    }
+    #sport-wrapper{
+        min-height: initial;
+    }
+}
+
+/*@media (min-width: 1025px) {*/
+/*    #sport-wrapper {*/
+/*        padding-right: 270px;*/
+/*    }*/
+/*}*/
