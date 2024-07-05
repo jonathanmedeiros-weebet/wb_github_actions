@@ -8,6 +8,7 @@ import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
+import DashboardView from '@/views/Dashboard/DashboardView.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -56,6 +57,11 @@ const router = new VueRouter({
       path: '/config',
       name: 'config',
       component: ConfigView,
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: DashboardView,
     },
   ]
 })
