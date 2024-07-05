@@ -13,7 +13,16 @@
 
             </div>
             <div class="dashboard__chart">
-                <chart-bar width="313.624px" height="250.792px"/>
+                <chart-bar 
+                    :width="313"
+                    :height="250"
+                    :dataChartApi="entryData.charData"
+                />
+            </div>
+
+            <div class="dashboard__movements">
+                <p class="dashboard__movements-title">Movimentações</p>
+                <p class="dashboard__movements-filter">Visualizar todos</p>
             </div>
 
         </div>
@@ -59,7 +68,22 @@ export default {
                         tile: 'Repasse gerente',
                         value: 68.15
                     }
-                ]
+                ],
+                charData: {
+                    labels: ['Seg','Ter','Qua','Qui','Sex','Sab','Dom'],
+                    datasets: [
+                        {
+                            label: 'Entrada',
+                            backgroundColor: '#6DA544',
+                            data: [460, 210, 110, 0, 0, 0, 0 ]
+                        },
+                        {
+                            label: 'Saida',
+                            backgroundColor: '#F61A1A',
+                            data: [350, 290, 110, 0, 0, 0, 0 ]
+                        },
+                    ]
+                }
             }
         }
     }
@@ -68,11 +92,7 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    
-    width: 100%;
+    padding-bottom: 100px;
 
     &__container {
         padding: 12px;
@@ -97,8 +117,22 @@ export default {
         width: 80%;
     }
 
-    &__chart {
-        padding-bottom: 70px;
+
+    &__movements {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 32px 12px 70px 12px;
+        
+    }
+
+    &__movements-title {
+        font-size: 16px;
+    }
+    &__movements-filter {
+        font-size: 12px;
+        color: var(--color-text-input);
     }
 }
 </style>

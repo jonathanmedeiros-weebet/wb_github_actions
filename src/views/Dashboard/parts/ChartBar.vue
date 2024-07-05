@@ -60,33 +60,14 @@ export default {
         plugins: {
             type: Array,
             default: () => []
+        },
+        dataChartApi: {
+            type: Object
         }
     },
     data() {
         return {
-            chartData: {
-                labels: [
-                    'Seg',
-                    'Ter',
-                    'Qua',
-                    'Qui',
-                    'Sex',
-                    'Sab',
-                    'Dom'
-                ],
-                datasets: [
-                    {
-                        label: 'Entrada',
-                        backgroundColor: '#6DA544',
-                        data: [450, 210, 0, 0, 0, 0, 0 ]
-                     },
-                    {
-                        label: 'Saida',
-                        backgroundColor: '#F61A1A',
-                        data: [350, 290, 0, 0, 0, 0, 0 ]
-                    },
-                ]
-            },            
+            chartData: this.dataChartApi,            
             chartOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -97,21 +78,24 @@ export default {
                             boxWidth: 14,
                             useBorderRadius: true,
                             borderRadius: 2,
+                            font: {
+                                size: 14,
+                                color: '#fff'
+                            }
                         }
                     }
                 },
                 scales: {
+                   
                     y: {
                         grid: {
-                            color: 'rgb(255,255,255,0.5)',
-                            stacked: true,
-                            borderDash: [1],
-                            borderDashOffset: 0,
-                            borderWidth: 1
-
+                        color: 'rgba(255, 366, 255, 0.3)', // Cor das linhas horizontais
+                        borderDash: [5, 5], // Linhas horizontais pontilhadas
+                        borderDashOffset: 0,
+                        borderWidth: 0 // Ajusta a espessura das linhas horizontais
                         }
                     }
-                }
+                },
             }
         }
     }
