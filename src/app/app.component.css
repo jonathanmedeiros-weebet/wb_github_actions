@@ -123,3 +123,14 @@ img{
     justify-content: center;
     flex-direction: column;
 }
+
+
+@media screen and (max-width: 425px){
+    .accept-cookies .cookie-message .titulo-informativo-cookies {
+        font-size: 16px;
+    }
+    
+    .accept-cookies .cookie-message .informativo-cookies {
+        font-size: 12px;
+    }
+}
