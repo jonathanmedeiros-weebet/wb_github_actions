@@ -806,15 +806,6 @@ gulp.task('betfacil123.app', function (done) {
     });
 });
 
-gulp.task('megabet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "megabet.wee.bet",
-        banca: "MEGA BET",
-        styles: "",
-    });
-});
-
 gulp.task('bolanarede.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1871,17 +1862,6 @@ gulp.task('ultrabetss.com', function (done) {
     });
 });
 
-gulp.task('gamegol.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "gamegol.bet",
-        banca: "GAMEGOL.BET",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'><script src='//code.jivosite.com/widget/EbO2qGOScc' async></script>",
-        styles: "",
-    });
-});
-
 gulp.task('vegasbrasilbet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2023,15 +2003,6 @@ gulp.task('pbpixbet.com', function (done) {
         host: "pbpixbet.com",
         banca: "PB PIX BET",
         styles: "",
-    });
-});
-
-gulp.task('deupixbet.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "deupixbet.com",
-        banca: "DEU PIX",
-        styles: ""
     });
 });
 
@@ -2316,17 +2287,6 @@ gulp.task('valeno.bet', function (done) {
     });
 });
 
-gulp.task('malybet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "malybet.com",
-        banca: "MALYBET",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N4VFPHTJ');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-N4VFPHTJ'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('dentrodaaposta.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2582,15 +2542,6 @@ gulp.task('mdsports.bet', function (done) {
         server: "front3.wee.bet",
         host: "mdsports.bet",
         banca: "MD SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('vyperbet.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "vyperbet.com",
-        banca: "VYPER BET",
         styles: "",
     });
 });
@@ -2863,15 +2814,6 @@ gulp.task('7copas.bet', function (done) {
         server: "front3.wee.bet",
         host: "7copas.bet",
         banca: "7 COPAS",
-        styles: ""
-    });
-});
-
-gulp.task('cravei.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "cravei.bet",
-        banca: "CRAVEI.BET",
         styles: ""
     });
 });
