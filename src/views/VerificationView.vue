@@ -20,28 +20,28 @@
           </div>
         </div>
 
-        <div class="collapse" @click="toggleCollapse('entradas', $event)">
+        <div class="collapse" @click="toggleCollapse('input', $event)">
           <div class="collapse__item">
-            <component :is="iconArrowDinamicEntradas" />
+            <component :is="iconArrowDinamicInputs" />
             <span class="collapse__title">Entradas</span>
             <div class="collapse__value">
               <IconAdd class="collapse__icon" />
-              <span class="collapse__balance">R$ 2,00</span>
+                R$ 2,00
             </div>
           </div>
 
-          <div v-if="collapsedEntradas" class="collapse__content">
+          <div v-if="collapsedInputs" class="collapse__content">
             <div class="collapse__section">
-              <div class="collapse" @click="toggleCollapse('apostado', $event)">
+              <div class="collapse" @click="toggleCollapse('bet', $event)">
                 <div class="collapse__item">
-                  <component class="collapse__icon-arrow" :is="iconArrowDinamicApostado" />
+                  <component class="collapse__icon-arrow" :is="iconArrowDinamicBet" />
                   <span class="collapse__title">Total Apostado:</span>
                   <div class="collapse__icon-wrapper">
                     <IconAdd class="collapse__icon-add" />
                     <span>R$ {{ totalApostado }}</span>
                   </div>
                 </div>
-                <div v-if="collapsedApostado" class="collapse__section-result">
+                <div v-if="collapsedBet" class="collapse__section-result">
                   <span>Futebol</span>
                 </div>
               </div>
@@ -55,9 +55,9 @@
           </div>
         </div>
 
-        <div class="collapse" @click="toggleCollapse('saidas')">
+        <div class="collapse" @click="toggleCollapse('exit')">
           <div class="collapse__item">
-            <component :is="iconArrowDinamicSaidas" />
+            <component :is="iconArrowDinamicExits" />
             <span class="collapse__title">Saídas</span>
             <div class="collapse__value">
               <IconRemove class="collapse__icon-remove" />
@@ -65,7 +65,7 @@
             </div>
           </div>
 
-          <div v-if="collapsedSaidas" class="collapse__content">
+          <div v-if="collapsedExits" class="collapse__content">
             <div class="collapse__section">
               <div class="collapse__section-item">
                 <span>Comissões</span>
@@ -128,7 +128,7 @@ import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 
 export default {
-  name: 'Verification',
+  name: 'verification',
   components: {
     Header,
     SelectFake,
@@ -158,12 +158,12 @@ export default {
       premio: '13,10',
       Saque: '55,10',
       modalityList: modalityList,
-      collapsedEntradas: this.initCollapsed,
-      collapsedApostado: this.initCollapsed,
-      collapsedSaidas: this.initCollapsed,
+      collapsedInputs: this.initCollapsed,
+      collapsedBet: this.initCollapsed,
+      collapsedExits: this.initCollapsed,
       verification: {
         dateIni: "2024-06-01",
-        dateEnd: "2024-06-06",
+        dateEnd: "2024-06-0",
         items: [
           {
             title: "Entradas",
@@ -200,19 +200,20 @@ export default {
             }
           }  
         ],
+
       }
     }
   },
 
   computed: {
-    iconArrowDinamicEntradas() {
-      return this.collapsedEntradas ? IconArrowUp : IconArrowDown;
+    iconArrowDinamicInputs() {
+      return this.collapsedInputs ? IconArrowUp : IconArrowDown;
     },
-    iconArrowDinamicApostado() {
-      return this.collapsedApostado ? IconArrowUp : IconArrowDown;
+    iconArrowDinamicBet() {
+      return this.collapsedBet ? IconArrowUp : IconArrowDown;
     },
-    iconArrowDinamicSaidas() {
-      return this.collapsedSaidas ? IconArrowUp : IconArrowDown;
+    iconArrowDinamicExits() {
+      return this.collapsedExits ? IconArrowUp : IconArrowDown;
     }
   },
 
@@ -222,13 +223,13 @@ export default {
     },
     toggleCollapse(section, event) {
       console.log(section);
-      if (section === 'entradas') {
-        this.collapsedEntradas = !this.collapsedEntradas;
-      } else if (section === 'saidas') {
-        this.collapsedSaidas = !this.collapsedSaidas;
-      } else if (section === 'apostado') {
+      if (section === 'input') {
+        this.collapsedInputs = !this.collapsedInputs;
+      } else if (section === 'exit') {
+        this.collapsedExits = !this.collapsedExits;
+      } else if (section === 'bet') {
         event.stopPropagation();
-        this.collapsedApostado = !this.collapsedApostado;
+        this.collapsedBet = !this.collapsedBet;
       }
     }
   }

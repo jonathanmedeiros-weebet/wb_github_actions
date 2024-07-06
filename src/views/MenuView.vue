@@ -37,7 +37,7 @@
             <IconManageSearch  class="wallet__icon" />
             Consultar Bilhete
           </button>
-          <button class="wallet__button">
+          <button @click="navigateTo"  class="wallet__button">
             <IconFactCheck class="wallet__icon" />
             Apuração
           </button>
@@ -110,8 +110,8 @@ export default {
       console.log('Toggling Saldo Visibility');
       this.isSaldoVisible = !this.isSaldoVisible;
     },
-    navigateTo(route) {
-      this.$router.push(route);
+    navigateTo() {
+      this.$router.push("/verification");
     }
   }
 }
