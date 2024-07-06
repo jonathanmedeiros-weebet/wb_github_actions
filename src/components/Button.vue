@@ -3,7 +3,7 @@
     :id="id"
     :value="value"
     type="button"
-    class="button button__item"
+    class="button"
     @click="handleClick"
   >
     {{text}}

@@ -2,19 +2,25 @@
   <div class="results">
     <Header title="Resultados" :showBackButton="true" />
     <div class="results__dates" >
-      <div class="results__dates-buttons" v-for="(day, dateRangeIndex) in dateRange"  :key="dateRangeIndex">
+
+      <div 
+        class="results__dates-buttons" 
+        v-for="(day, dateRangeIndex) in dateRange"  
+        :key="dateRangeIndex"
+      >
         <button-date 
           :value="day.format('YYYY-MM-DD')"
-          :text="day.format('YYYY-MM-DD') === today ? 'Hoje' : day.format('DD/MM')"
-          :customClass="day.format('YYYY-MM-DD') === activeDay ? 'button button__item--active' : 'button button__item'"
+          :text="getTextButton(day)"
+          :actived="isCurrentDay(day)"
           @click="setActiveDay(day)"
-          :ref="day.format('YYYY-MM-DD') === today ? 'todayButton' : ''"
+          :ref="getRef(day)"
         />
       </div>
+
     </div>
     <div class="results__modalities">
-      <label for="" class="results__modalities-label">Modalidade</label>
-      <select-fake-result @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake-result>
+      <label class="results__modalities-label">Modalidade</label>
+      <select-fake titleSize="medium" @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake>
     </div>
     
     <p class="results__count-modalities">{{ modalityList.length }} Resultados encontrados</p>
@@ -47,7 +53,7 @@
 <script>
 import Header from '@/components/layouts/Header.vue'
 import ButtonDate from './parts/ButtonDate.vue'
-import SelectFakeResult from './parts/SelectFakeResult.vue';
+import SelectFake from '@/views/HomeView/parts/SelectFake.vue';
 import moment from 'moment';
 import ModalModalities from '@/views/HomeView/parts/ModalModalities.vue';
 import Collapse from '@/components/Collapse.vue';
@@ -59,14 +65,13 @@ export default {
   components: {
     Header,
     ButtonDate,
-    SelectFakeResult,
+    SelectFake,
     ModalModalities,
     Collapse,
     GameItemResult
   },
   created() {
     this.generateDaysOfMonth();
-    console.log(this.today);
   },
   data() {
     return {
@@ -117,6 +122,24 @@ export default {
         }
       }
     });
+  },
+  computed: {
+    getRef() {
+      return (day) => {
+        return day.format('YYYY-MM-DD') === this.today ? 'todayButton' : '';
+      };
+    },
+    getTextButton() {
+      return (day) => {
+        return day.format('YYYY-MM-DD') === this.today ? 'Hoje' : day.format('DD/MM')
+      };
+    },
+    isCurrentDay() {
+      return (day) => {
+        return day.format('YYYY-MM-DD') === this.activeDay;
+      };
+    },
+    
   }
 }
 </script>
@@ -159,6 +182,20 @@ export default {
     justify-content: center;
     padding-bottom: 32px;
     font-size: 16px;
+  }
+}
+
+
+::v-deep .select-fake {
+  background-color: var(--color-background-input);
+  padding: 18px 16px;
+  
+  &__title {
+    color: var(--color-text-input);
+
+    &--medium { 
+      font-size: 14px;
+    }
   }
 }
 

@@ -1,19 +1,19 @@
 <template>
-  <div class="button">
     <button
       :id="id"
       :value="value"
       :text="text"
       type="button"
-      :class="customClass"
+      class="button" 
+      :class="{ 'button--active': actived }"
       @click="handleClick"
     >
       {{text}}
     </button>
-  </div>
 </template>
 
 <script>
+
 export default {
   name: 'w-button-date-result',
   props: {
@@ -28,9 +28,9 @@ export default {
       type: String,
       default: 'button'
     },
-    customClass: {
-      type: String,
-      default: 'button button__item'
+    actived: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -43,29 +43,18 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-
   display: flex;
   align-items: center;
   border: none;
   background: transparent;
   font-size: 16px;
   font-weight: 500;
-  padding: 10px;
+  padding: 16px 10px;
+  color: var(--color-text-input);
 
-  &__item {
-    color: var(--color-text-input);
-
-    &--active {
-      color: var(--color-primary);
-      border-bottom: 1px solid var(--color-primary);
-      
-    }
-  }
-
-  &__item:hover {
-    background-color: rgb(3, 181, 110);
-    border: none;
-    background: transparent;
+  &--active {
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-primary);
   }
 }
 </style>
