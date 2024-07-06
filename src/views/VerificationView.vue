@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <Header :showCalendarButton="true" :showSearchButton="true">
-      <SelectFake :text="modality" @click="handleSelectModalClick" />
+    <Header :title="modality" :showCalendarButton="true" :showSearchButton="true">
+      <SelectFake  @click="handleSelectModalClick" />
     </Header>
     <div class="verification">
       <section class="verification__container">
@@ -148,8 +148,8 @@ export default {
 
   data() {
     return {
-      date: "01/06/2024 - 06/06/2024",
       modality: 'Apuração',
+      date: "01/06/2024 - 06/06/2024",
       relatory: '31/05',
       value: '0,00',
       totalApostado: '2,00',
@@ -160,7 +160,47 @@ export default {
       modalityList: modalityList,
       collapsedEntradas: this.initCollapsed,
       collapsedApostado: this.initCollapsed,
-      collapsedSaidas: this.initCollapsed
+      collapsedSaidas: this.initCollapsed,
+      verification: {
+        dateIni: "2024-06-01",
+        dateEnd: "2024-06-06",
+        items: [
+          {
+            title: "Entradas",
+            subItems: {
+              title: 'Total Apostado',
+              value: 2.00,
+              modalities: [
+                {
+                  name: 'futebol',
+                  value: 2.00,
+                }
+              ]
+            }
+          },
+          {
+            title: "Saídas",
+            subItems: {
+              title: 'Total Apostado',
+              value: 2.00,
+              modalities: [
+                {
+                  name: 'Comissões',
+                  value: 0.10,
+                },
+                {
+                  name: 'Prêmio',
+                  value: 0.00,
+                },
+                {
+                  name: 'Saque',
+                  value: 0.00,
+                },
+              ]
+            }
+          }  
+        ],
+      }
     }
   },
 

@@ -30,15 +30,15 @@
 
         <div class="wallet__shortcuts">
           <button class="wallet__button">
-            <IconInsertChart class="wallet__icon"/>
+            <IconInsertChart  class="wallet__icon"/>
             Dashboard
           </button>
           <button class="wallet__button">
-            <IconManageSearch class="wallet__icon" />
+            <IconManageSearch  class="wallet__icon" />
             Consultar Bilhete
           </button>
           <button class="wallet__button">
-            <IconFactCheck :size="14" class="wallet__icon" />
+            <IconFactCheck class="wallet__icon" />
             Apuração
           </button>
         </div>
