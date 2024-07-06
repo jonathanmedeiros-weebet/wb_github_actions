@@ -1817,15 +1817,6 @@ gulp.task('apostacerta.bet', function (done) {
     });
 });
 
-gulp.task('betgol.website', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betgol.website",
-        banca: "BET GOL",
-        styles: "",
-    });
-});
-
 gulp.task('apostenasorte.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
