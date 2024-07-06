@@ -214,7 +214,8 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
         BannersComponent,
         WelcomePageComponent,
         SubmenuComponent,
-        SkeletonModule
+        SkeletonModule,
+        MenuFooterComponent
     ],
     providers: [
         ApostaEsportivaService,
