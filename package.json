@@ -310,7 +310,8 @@
         "curitiba.bet": "gulp curitiba.bet",
         "portoalegre.bet": "gulp portoalegre.bet",
         "rio.bet": "gulp rio.bet",
-        "riojogos.com": "gulp riojogos.com"
+        "riojogos.com": "gulp riojogos.com",
+        "gli.wee.bet": "gulp gli.wee.bet"
     },
     "private": true,
     "dependencies": {

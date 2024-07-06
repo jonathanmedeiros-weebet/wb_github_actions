@@ -2960,3 +2960,12 @@ gulp.task('riojogos.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('gli.wee.bet', function (done) {
+    tasks(done, {
+        server: "54.147.182.240",
+        host: "gli.wee.bet",
+        banca: "GLI - Sandbox",
+        styles: ""
+    });
+});
