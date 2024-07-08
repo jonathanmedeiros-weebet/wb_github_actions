@@ -2,12 +2,12 @@
     <div class="dashboard">
         <Header title="Dashboard" :showBackButton="true" />
         <div class="dashboard__container">
-            <card-entry-dashboard :data="entryData"/>
+            <card-entry-dashboard :data="entryData" @click="handleReloadEntry"/>
 
             <div class="dashboard__chart-header">
                 <p class="dashboard__chart-header-title">Fluxo de caixa</p>
                 
-                <collapse-dashboard>
+                <collapse-dashboard @click="openModalChart">
                     <template #title>Semana passada</template>
                 </collapse-dashboard>
 
@@ -22,10 +22,42 @@
 
             <div class="dashboard__movements">
                 <p class="dashboard__movements-title">Movimentações</p>
-                <p class="dashboard__movements-filter">Visualizar todos</p>
+                <p @click="toMoviments()" class="dashboard__movements-filter">Visualizar todos</p>
             </div>
 
+            
+
+            <div class="dashboard__movements-dates">
+                
+                <p class="dashboard__movements-icon-range-dates">
+                    <icon-calendar-month class="dashboard__movements-icon-calendar" fill="var(--color-text-input)"/>
+                    {{ dateFilterIni.format('DD/MM/YYYY') }} - {{ dateFilterEnd.format('DD/MM/YYYY') }}</p>  
+            </div>
+        
+
+            <card-movement-dashboard 
+                v-for="(movement, movementsIndex) in momentsResults" 
+                :key="movementsIndex"
+                :movement="movement"
+            />
+
         </div>
+
+        <modal
+            v-if="showModalChart"
+            @click="closeModalChart"
+        >
+            <template #body>
+                    <p  
+                        v-for="item in filterCashFlow" 
+                        :key="item.id"
+                        @click="handleSelect(item.id)"
+                    >
+                        {{ item.name }}
+                        <IconCheck v-if="item.checked" class="modal-modalities__icon"/>
+                    </p>
+            </template>
+        </modal>
     </div>
 </template>
 
@@ -36,16 +68,27 @@ import CardEntryDashboard from './parts/CardEntryDashboard.vue'
 import CollapseDashboard from './parts/CollapseDashboard.vue'
 import ChartBar from './parts/ChartBar.vue'
 
+import { now } from '@/utilities/date.utitlity.ts'
+import IconCalendarMonth from '@/components/icons/IconCalendarMonth.vue'
+import Modal from '@/components/Modal.vue'
+import CardMovementDashboard from './parts/CardMovementDashboard.vue'
+import IconCheck from '@/components/icons/IconCheck.vue'
+
 export default {
     name: 'dashboard-view',
     components: {
         Header,
         CardEntryDashboard,
         CollapseDashboard,
-        ChartBar
+        ChartBar,
+        IconCalendarMonth,
+        Modal,
+        CardMovementDashboard,
+        IconCheck
     },
     data() {
         return {
+            showModalChart: false,
             entryData: {
                 categories: [
                     {
@@ -83,8 +126,81 @@ export default {
                             data: [350, 290, 110, 0, 0, 0, 0 ]
                         },
                     ]
-                }
-            }
+                },
+            },
+            movements: {     
+                results: [
+                    {
+                        date: '2024-06-03',
+                        title: 'Comissão',
+                        value: 200,
+                        type: 'Débito',
+                    },
+                    {
+                        date: '2024-06-03',
+                        title: 'Comissão',
+                        value: 150,
+                        type: 'Crédito',
+                    },
+                    {
+                        date: '2024-06-03',
+                        title: 'Comissão',
+                        value: 150,
+                        type: 'Crédito',
+                    },
+                    {
+                        date: '2024-06-03',
+                        title: 'Comissão',
+                        value: 200,
+                        type: 'Débito',
+                    },
+
+                ]
+            },
+            maxItems: 4,
+            filterCashFlow: [
+                {  
+                    id: 1,
+                    name: 'Semana passada',
+                    checked: true
+                },
+                {
+                    id: 2,
+                    name: 'Mês passado',
+                    checked: false
+                },
+            ]
+        }
+    },
+    methods: {
+        toMoviments() {
+            alert('Abrir view de movimentações');
+        },
+        openModalChart() {
+            this.showModalChart = true;
+        },
+        closeModalChart() {
+            this.showModalChart = false;
+        },
+        handleFluxo() {
+            this.showModalChart = false;
+        },
+        handleReloadEntry() {
+            alert('atualizar');
+        },
+        handleSelect(item) {
+            
+        }
+    },
+    computed: {
+        momentsResults() {
+            return this.movements.results.slice(0,this.maxItems);
+        },
+        dateFilterIni() {
+            return now().subtract(7, 'd');
+        },
+        dateFilterEnd() { 
+            return now();
         }
     }
 }
@@ -108,8 +224,7 @@ export default {
     }
 
     &__chart-header-title {
-        font-size: 16px;
-        
+        font-size: 16px;  
     }
 
     &__chart-header-title {
@@ -117,22 +232,48 @@ export default {
         width: 80%;
     }
 
-
     &__movements {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 32px 12px 70px 12px;
-        
+        padding: 12px 0; 
     }
 
     &__movements-title {
         font-size: 16px;
     }
+
     &__movements-filter {
         font-size: 12px;
         color: var(--color-text-input);
+    }
+
+    &__movements-dates {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 8px 0px;
+        font-size: 14px;
+        color: var(--color-text-input);
+        
+    }
+
+    &__movements-icon-calendar {
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+        margin-right: 8px;
+    }
+
+    &__movements-icon-range-dates {
+        display: flex;
+        flex-direction: row;
+        max-width: fit-content;
+        padding: 8px 14px;
+        border-radius: 6px;
+        background: rgba(24, 24, 24, 0.50);
+        color: rgba(255, 255, 255, 0.70);
     }
 }
 </style>

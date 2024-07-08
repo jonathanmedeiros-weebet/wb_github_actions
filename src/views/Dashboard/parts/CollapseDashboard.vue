@@ -34,6 +34,7 @@ export default {
     methods: {
         handleClick() {
             this.collapsed = !this.collapsed;
+            this.$emit('click', this.value);
         }
     }
 }

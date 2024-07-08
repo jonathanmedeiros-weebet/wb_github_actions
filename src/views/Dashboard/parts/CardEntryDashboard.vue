@@ -4,9 +4,9 @@
 
             <div class="card__body-title">
                 <p class="card__body-title">Total de Entrada</p>
-                <p class="card__body-title-value">R$ {{ totalValue }}</p>
+                <p class="card__body-title-value">{{ formatCurrencyMoney(totalValue) }}</p>
             </div>
-            <div class="card__body-icon">
+            <div class="card__body-icon" @click="handleClick">
                 <icon-restart
                     width="24px" 
                     height="24px"
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="card__categories-value">
-                    <p>R$ {{ item.value }}</p>
+                    <p>{{ formatCurrencyMoney(item.value) }}</p>
                 </div>
 
             </div>
@@ -62,6 +62,7 @@
 
 import IconRestart from '@/components/icons/IconRestart.vue'
 import IconCircle from '@/components/icons/IconCircle.vue';
+import { formatCurrency } from '@/utilities/formatCurrency'
 
 export default {
   components: { IconRestart, IconCircle },
@@ -86,6 +87,12 @@ export default {
         },
         isLast(index) {
             return index === this.data.categories.length - 1;
+        },
+        handleClick(event) {
+            return this.$emit('click', event.value);
+        },
+        formatCurrencyMoney(value) {
+            return formatCurrency(value);
         }
     },
     computed: {
