@@ -93,7 +93,7 @@ export default {
     },
     passWordVisible() {
       this.showPassword = !this.showPassword;
-      this.tipo = this.showPassword ? 'text' : 'password';
+      this.inputType = this.showPassword ? 'text' : 'password';
     },
     emitChange(event) {
       this.$emit('change',  event.target.value);
