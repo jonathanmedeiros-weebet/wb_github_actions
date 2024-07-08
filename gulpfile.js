@@ -1817,15 +1817,6 @@ gulp.task('apostacerta.bet', function (done) {
     });
 });
 
-gulp.task('betgol.website', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betgol.website",
-        banca: "BET GOL",
-        styles: "",
-    });
-});
-
 gulp.task('apostenasorte.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2957,6 +2948,15 @@ gulp.task('riojogos.com', function (done) {
         server: "front2.wee.bet",
         host: "riojogos.com",
         banca: "Rio Jogos",
+        styles: ""
+    });
+});
+
+gulp.task('gli.wee.bet', function (done) {
+    tasks(done, {
+        server: "54.147.182.240",
+        host: "gli.wee.bet",
+        banca: "GLI - Sandbox",
         styles: ""
     });
 });

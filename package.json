@@ -188,7 +188,6 @@
         "blubet.site": "gulp blubet.site",
         "playgreen.bet": "gulp playgreen.bet",
         "apostacerta.bet": "gulp apostacerta.bet",
-        "betgol.website": "gulp betgol.website",
         "apostenasorte.bet": "gulp apostenasorte.bet",
         "betmaniapix.com": "gulp betmaniapix.com",
         "jogue.bet": "gulp jogue.bet",
@@ -310,7 +309,8 @@
         "curitiba.bet": "gulp curitiba.bet",
         "portoalegre.bet": "gulp portoalegre.bet",
         "rio.bet": "gulp rio.bet",
-        "riojogos.com": "gulp riojogos.com"
+        "riojogos.com": "gulp riojogos.com",
+        "gli.wee.bet": "gulp gli.wee.bet"
     },
     "private": true,
     "dependencies": {
