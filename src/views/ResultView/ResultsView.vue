@@ -107,7 +107,16 @@ export default {
     },
     setActiveDay(day) {
       this.activeDay = day.format('YYYY-MM-DD');
-    }
+    },
+    getRef(day){
+      return day.format('YYYY-MM-DD') === this.today ? 'todayButton' : '';
+    },
+    getTextButton(day) {
+      return day.format('YYYY-MM-DD') === this.today ? 'Hoje' : day.format('DD/MM');
+    },
+    isCurrentDay(day) {
+        return day.format('YYYY-MM-DD') === this.activeDay;
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -122,24 +131,6 @@ export default {
         }
       }
     });
-  },
-  computed: {
-    getRef() {
-      return (day) => {
-        return day.format('YYYY-MM-DD') === this.today ? 'todayButton' : '';
-      };
-    },
-    getTextButton() {
-      return (day) => {
-        return day.format('YYYY-MM-DD') === this.today ? 'Hoje' : day.format('DD/MM')
-      };
-    },
-    isCurrentDay() {
-      return (day) => {
-        return day.format('YYYY-MM-DD') === this.activeDay;
-      };
-    },
-    
   }
 }
 </script>

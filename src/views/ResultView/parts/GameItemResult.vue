@@ -37,7 +37,7 @@
 
 <script>
 export default {
-    name: 'game-item',
+    name: 'game-item-result',
     props: {
         games: {
             type: Array,
