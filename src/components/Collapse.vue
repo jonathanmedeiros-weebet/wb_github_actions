@@ -1,11 +1,11 @@
 <template>
-  <div class="collapse" @click="handleClick">
-    <div class="collapse__item">
-        <span class="collapse__title"><slot name="title"/></span>
-        <component :is="iconArrowDinamic"/>
+    <div class="collapse">
+        <div class="collapse__item" @click="handleClick">
+            <span class="collapse__title"><slot name="title"/></span>
+            <component :is="iconArrowDinamic"/>
+        </div>
+        <slot v-if="collapsed" />
     </div>
-    <slot v-if="collapsed" />
-  </div>
 </template>
 
 <script>

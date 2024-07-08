@@ -3,12 +3,13 @@
         <Collapse
             class="game-list__collapse"
             :initCollapsed="true"
-            v-for="({title, image, games}, index) in data"
+            v-for="(championship, index) in championshipList"
             :key="index"
         >
             <template #title>
-                <img :src="image" />
-                {{ title }}
+                <img v-if="championship.image" :src="championship.image" />
+                <component v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
+                {{ championship.nome }}
             </template>
 
             <div class="game-list__items"> 
@@ -20,7 +21,7 @@
                     </div>
                 </div>
                 <GameItem
-                    v-for="(game, index) in games"
+                    v-for="(game, index) in championship.jogos"
                     :key="index"
                     :game="game"
                     @click="handleClick(game)"
@@ -33,14 +34,28 @@
 <script>
 import Collapse from '@/components/Collapse.vue';
 import GameItem from './GameItem.vue';
+import { useHomeStore } from '@/stores';
+import IconGlobal from '@/components/icons/IconGlobal.vue';
 export default {
-  components: { Collapse, GameItem },
+  components: { Collapse, GameItem, IconGlobal },
     name: 'game-list',
-    props: {
-        data: {
-            type: Array,
-            required: true
-        },
+    data() {
+        return {
+            homeStore: useHomeStore()
+        }
+    },
+    computed: {
+        championshipList() {
+            return this.homeStore.championshipList.map((championship) => {
+                if(championship.regiao_sigla !== 'ww') {
+                    championship.image = `https://cdn.wee.bet/flags/1x1/${championship.regiao_sigla}.svg`;
+                } else {
+                    championship.icon = IconGlobal;
+                }
+                
+                return championship;
+            });
+        }
     },
     methods: {
         handleClick(game) {
@@ -89,6 +104,7 @@ export default {
     }
 
     &__collapse img {
+        border-radius: 50px;
         width: 16px;
         height: 16px;
     }

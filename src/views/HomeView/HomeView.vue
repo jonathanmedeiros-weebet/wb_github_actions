@@ -18,12 +18,11 @@
         <span>{{ league.title }}</span>
       </SelectFake>
 
-      <GameList :data="championshipList" />
+      <GameList />
     </section>
 
     <ModalLeagues
       v-if="showModalLeagues"
-      :items="championshipPerRegionList"
       @closeModal="handleCloseLeaguesModal"
       @click="handleLeague"
     />
@@ -52,14 +51,16 @@
 <script>
 import Header from '@/components/layouts/Header.vue'
 import SelectFake from './parts/SelectFake.vue'
-import { modalityList, championshipList, leagueList } from '@/constants'
+import { modalityList, leagueList } from '@/constants'
 import ModalLeagues from './parts/ModalLeagues.vue'
 import ModalModalities from './parts/ModalModalities.vue'
 import ModalCalendar from './parts/ModalCalendar.vue'
 import ModalSearch from './parts/ModalGameSearch.vue'
 import GameList from './parts/GameList.vue'
-import { getChampionShipBySportId, getChampionShipRegionBySportId } from '@/services'
+import { getChampionshipBySportId, getChampionshipRegionBySportId } from '@/services'
 import { useHomeStore } from '@/stores'
+import IconTrophy from '@/components/icons/IconTrophy.vue'
+import IconGlobal from '@/components/icons/IconGlobal.vue'
 
 const MODALITY_SPORT_FUTEBOL = 1;
 
@@ -73,6 +74,8 @@ export default {
     ModalCalendar,
     ModalSearch,
     GameList,
+    IconTrophy,
+    IconGlobal
   },
   data() {
     return {
@@ -83,14 +86,14 @@ export default {
       modality: null,
       league: leagueList[0],
       modalityList,
-      championshipList,
-      leagueList,
 
       homeStore: useHomeStore()
     }
   },
   created() {
-    this.handleModality(MODALITY_SPORT_FUTEBOL)
+    this.modality = this.modalityList.find(modality => modality.id === MODALITY_SPORT_FUTEBOL);
+    this.prepareChampionshipPerRegionList(this.modality.id);
+    this.prepareChampionshipList(this.modality.id, true);
   },
   computed: {
     championshipPerRegionList() {
@@ -98,6 +101,25 @@ export default {
     }
   },
   methods: {
+    async prepareChampionshipPerRegionList(modalityId) {
+      const championshipPerRegion = await getChampionshipRegionBySportId(modalityId);
+      this.homeStore.setChampionshipPerRegionList(championshipPerRegion.result);
+    },
+
+    async prepareChampionshipList(modalityId, popularLeague = false) {
+      const regionSelected = this.homeStore.regionSelected;
+      const dateSelected = this.homeStore.dateSelected;
+
+      const championships = await getChampionshipBySportId(
+        modalityId,
+        regionSelected?.name ?? null,
+        dateSelected,
+        popularLeague
+      );
+
+      this.homeStore.setChampionshipList(championships.result)
+    },
+
     handleOpenModalitiesModal() {
       this.showModalModalities = true;
     },
@@ -107,9 +129,9 @@ export default {
     async handleModality(modalityId) {
       this.modality = this.modalityList.find(modality => modality.id === modalityId)
       this.handleCloseModalitiesModal();
-      // const championships = await getChampionShipBySportId(this.modality.id);
 
       this.prepareChampionshipPerRegionList(modalityId);
+      this.prepareChampionshipList(modalityId);
     },
 
     handleOpenLeaguesModal() {
@@ -142,27 +164,6 @@ export default {
     },
     handleSearch(gameId) {
       console.log(gameId)
-    },
-
-    async prepareChampionshipPerRegionList(modalityId) {
-      let championshipPerRegion = await getChampionShipRegionBySportId(modalityId);
-      championshipPerRegion = championshipPerRegion.result.map((region) => {
-        region.campeonatos.push({
-          _id: `region_${region._id}`,
-          nome: `Todos os campeonatos - ${region._id}`
-        })
-        region.image = `https://cdn.wee.bet/flags/1x1/${region.sigla}.svg`;
-        return region;
-      });
-
-      championshipPerRegion.push({
-        _id: "Todos os campeonatos",
-        sigla: "ww",
-        image: `https://cdn.wee.bet/flags/1x1/ww.svg`,
-        campeonatos: []
-      })
-
-      this.homeStore.setChampionshipPerRegionList(championshipPerRegion)
     }
   }
 }

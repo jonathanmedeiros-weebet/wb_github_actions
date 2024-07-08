@@ -53,7 +53,7 @@ const router = new VueRouter({
       component: ChangePasswordView,
     },
     {
-      path: '/game-detail',
+      path: '/game-detail/:id',
       name: 'game-detail',
       component: GameDetailView,
     },

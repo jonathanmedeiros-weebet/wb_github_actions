@@ -1,1 +1,2 @@
-export * from '../interfaces/modalities.interface'
+export * from './modalities.interface'
+export * from './championships.interface'
