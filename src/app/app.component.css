@@ -41,6 +41,20 @@ img{
     margin: 20px
 }
 
+.content-modal-push{
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+    text-align: center;
+}
+
+.content-modal-push img{
+    width: 150px;
+    height: auto;
+    align-self: center;
+    margin-bottom: 20px
+}
+
 .botao-contato-flutuante {
     position: absolute;
     right: 20px;
@@ -63,4 +77,49 @@ img{
 .contato .fa {
     align-self: center;
     font-size: 30px;
+}
+
+.idle-detector {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.accept-cookies {
+    background-color: rgba(var(--background-rgb), 95%);
+    color: var(--foreground);
+    border-radius: 10px 10px 0 0;
+    z-index: 1001;
+    position: fixed;
+    min-height: 150px;
+    min-width: 100%;
+    right: 0;
+    bottom: 0;
+}
+
+.accept-cookies .cookie-message {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.accept-cookies .cookie-message .titulo-informativo-cookies {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.accept-cookies .cookie-message .informativo-cookies {
+    display: flex;
+    font-size: 14px;
+}
+
+.accept-cookies .cookie-message .informativo-cookies :first-child {
+    padding-right: 25px;
+}
+
+.accept-cookies .cookie-message .informativo-cookies :last-child {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

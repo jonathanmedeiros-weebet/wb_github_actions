@@ -1,11 +1,16 @@
 import {
-    Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy,
-    Input, OnChanges
+    Component,
+    OnInit,
+    OnDestroy,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    Input,
+    OnChanges
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {ApostaService, MessageService, AuthService, ParametrosLocaisService} from './../../../services';
+import {MessageService} from './../../../services';
 import {ApostaCasino} from './../../../models';
 import {CasinoApiService} from '../../../shared/services/casino/casino-api.service';
 
@@ -28,12 +33,9 @@ export class ApostasClienteCasinoComponent implements OnInit, OnDestroy, OnChang
     unsub$ = new Subject();
 
     constructor(
-        private apostaService: ApostaService,
         private apostaCasinoService: CasinoApiService,
         private messageService: MessageService,
         private cd: ChangeDetectorRef,
-        private authService: AuthService,
-        private paramsLocais: ParametrosLocaisService,
     ) { }
 
     ngOnInit() {
@@ -84,7 +86,6 @@ export class ApostasClienteCasinoComponent implements OnInit, OnDestroy, OnChang
                 error => this.handleError(error)
             );
     }
-
 
     handleError(msg) {
         this.messageService.error(msg);

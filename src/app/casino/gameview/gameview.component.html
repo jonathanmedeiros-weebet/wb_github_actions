@@ -2,7 +2,7 @@
     <div class="header-game-view">
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
-                <span> Cassino Galaxsys </span>
+                <span> {{ customCasinoName }} Galaxsys </span>
             </ng-container>
             <ng-template #nomeOficialGame>
                 <span>{{ gameName }}</span>
@@ -17,7 +17,7 @@
         </div>
     </div>
     <ng-container>
-        <div class="game-frame">
+        <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame">
             <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
             <ng-container *ngIf="mobileScreen">
                 <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
@@ -27,5 +27,26 @@
             </ng-container>
 
         </div>
+
+        <div *ngIf="!isLoggedIn && gameMode == 'REAL'" class="game-frame">
+            <div class="overlay overlay--unauthorized">
+                <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'">
+                </div>
+                <div class="overlay-content -mt-4 p-5">
+                    <p class="overlay-content__title">registre-se ou faça login</p>
+                    <p class="overlay-content__text">Por favor, registre-se ou faça login para fazer seu primeiro depósito e começar a jogar.</p>
+                    <div class="inline-button">
+
+                        <a class="btn btn-custom w-130 mr-4" (click)="abrirCadastro()">
+                            {{'geral.registreSe' | translate | uppercase}}
+                        </a>
+                        <a (click)="abriModalLogin()" class="botao-entrar btn btn-custom2 w-130" role="button">
+                            {{'geral.entrar' | translate | uppercase}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </ng-container>
 </div>

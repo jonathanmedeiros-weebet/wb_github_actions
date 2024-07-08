@@ -12,11 +12,11 @@
 
             <div class="tabs">
                 <ng-container *ngFor="let tab of getTabs()">
-                    <a *ngIf="tab.habilitado && tabSelected === tab.id" class="active" (click)="changeTab(tab.id)">
-                        {{ tab.label | translate }}
-                    </a>
-                    <a *ngIf="tab.habilitado && tabSelected !== tab.id" (click)="changeTab(tab.id)">
-                        {{ tab.label | translate }}
+                    <a
+                        [ngClass]="{'active': tab.habilitado && tabSelected === tab.id}"
+                        (click)="changeTab(tab.id)"
+                    >
+                        {{ tab.label }}
                     </a>
                 </ng-container>
             </div>              
@@ -102,7 +102,7 @@
                         <tbody *ngIf="!loading">
                         <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta) }}">
                             <td>{{ aposta.codigo }}</td>
-                            <td *ngIf="tabSelected == 'cassino'">{{ aposta.game | formatarNomeJogoCassino }}</td>
+                            <td *ngIf="tabSelected == 'cassino'">{{ aposta.game }}</td>
                             <td>{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm' }}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td>{{ aposta.premio | currency }}</td>

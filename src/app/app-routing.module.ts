@@ -97,6 +97,11 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard, CambistaGuard]
             },
             {
+                path: 'copiar-aposta',
+                loadChildren: () => import('./copiar-aposta/copiar-aposta.module').then(m => m.CopiarApostaModule),
+                canActivate: [AuthGuard, CambistaGuard]
+            },
+            {
                 path: 'auth',
                 component: AuthLayoutComponent,
                 loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)

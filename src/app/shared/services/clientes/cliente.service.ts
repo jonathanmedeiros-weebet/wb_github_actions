@@ -8,6 +8,9 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
+import {ParametrosLocaisService} from "../parametros-locais.service";
+
+declare var xtremepush: any;
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +26,8 @@ export class ClienteService {
         private http: HttpClient,
         private errorService: ErrorService,
         private headers: HeadersService,
-        private router: Router
+        private router: Router,
+        private paramsService: ParametrosLocaisService,
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -42,9 +46,9 @@ export class ClienteService {
     cadastrarCliente(values: any) {
         return this.http.post(`${this.clienteUrl}/cadastro`, JSON.stringify(values), this.headers.getRequestOptions())
             .pipe(
-                map((response: any) => {                    
+                map((response: any) => {
                     const dataUser = response.results.dataUser;
-            
+
                     if (dataUser && Object.keys(dataUser).length > 0) {
                         this.setCookie(dataUser.user.cookie);
                         const expires = moment().add(1, 'd').valueOf();
@@ -54,6 +58,10 @@ export class ClienteService {
                         this.setIsCliente(true);
                         localStorage.setItem('tokenCassino', dataUser.tokenCassino);
                         this.logadoSource.next(true);
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('set', 'user_id', dataUser.user.id);
+                            xtremepush('event', 'login');
+                        }
                     }
 
                     return response.results;
@@ -146,12 +154,17 @@ export class ClienteService {
         return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true)).pipe(map((res: any) => res.results));
     }
 
-    excluirConta(motivo: string, confirmarExclusao: string) {
-        return this.http.post(`${this.clienteUrl}/excluir-conta`, { motivo, confirmarExclusao }, this.headers.getRequestOptions(true))
+    excluirConta(motivo: string, confirmarExclusao: string, multifator = {}) {
+        const url = `${this.clienteUrl}/excluir-conta`;
+        const data = {
+            motivo,
+            confirmarExclusao,
+            ...multifator
+        };
+
+        return this.http.post(url, data, this.headers.getRequestOptions(true))
             .pipe(
-                map((response: any) => {
-                    return response.results;
-                }),
+                map((response: any) => response.results),
                 catchError(this.errorService.handleError)
             );
     }
@@ -223,5 +236,14 @@ export class ClienteService {
 
     getUser() {
         return JSON.parse(localStorage.getItem('user'));
+    }
+
+    xtremepushHabilitado() {
+        let result = false;
+        const opcoes = this.paramsService.getOpcoes().xtremepush_habilitado;
+        if (opcoes) {
+            result = true;
+        }
+        return result;
     }
 }
