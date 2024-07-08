@@ -1,2 +1,2 @@
 export * from './date.utitlity'
-export * from './formatCurrency'
+export * from './currency.utility'

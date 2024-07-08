@@ -7,8 +7,8 @@
             <div class="dashboard__chart-header">
                 <p class="dashboard__chart-header-title">Fluxo de caixa</p>
                 
-                <collapse-dashboard @click="openModalChart">
-                    <template #title>Semana passada</template>
+                <collapse-dashboard @click="handleOpenModalFilterDate">
+                    <template #title>{{ filterDate.name }}</template>
                 </collapse-dashboard>
 
             </div>
@@ -43,21 +43,13 @@
 
         </div>
 
-        <modal
-            v-if="showModalChart"
-            @click="closeModalChart"
-        >
-            <template #body>
-                    <p  
-                        v-for="item in filterCashFlow" 
-                        :key="item.id"
-                        @click="handleSelect(item.id)"
-                    >
-                        {{ item.name }}
-                        <IconCheck v-if="item.checked" class="modal-modalities__icon"/>
-                    </p>
-            </template>
-        </modal>
+        <modal-filter-date
+            v-if="showModalFilterDate"
+            :dateId="filterDate.id"
+            @closeModal="handleCloseModalFilterDate"
+            @click="handleFilterDate"
+        />
+       
     </div>
 </template>
 
@@ -70,9 +62,9 @@ import ChartBar from './parts/ChartBar.vue'
 
 import { now } from '@/utilities/date.utitlity.ts'
 import IconCalendarMonth from '@/components/icons/IconCalendarMonth.vue'
-import Modal from '@/components/Modal.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
+import ModalFilterDate from './parts/ModalFilterDate.vue'
 
 export default {
     name: 'dashboard-view',
@@ -82,13 +74,13 @@ export default {
         CollapseDashboard,
         ChartBar,
         IconCalendarMonth,
-        Modal,
         CardMovementDashboard,
-        IconCheck
+        IconCheck,
+        ModalFilterDate
     },
     data() {
         return {
-            showModalChart: false,
+            showModalFilterDate: false,
             entryData: {
                 categories: [
                     {
@@ -158,26 +150,29 @@ export default {
                 ]
             },
             maxItems: 4,
-            filterCashFlow: [
-                {  
+            filterDateList: [
+                {
                     id: 1,
-                    name: 'Semana passada',
+                    name: 'Semana atual',
                     checked: true
                 },
                 {
                     id: 2,
-                    name: 'Mês passado',
+                    name: 'Mês atual',
                     checked: false
-                },
-            ]
+                }
+            ],
+            filterDate: {
+                id: 1,
+                name: 'Semana atual',
+                checked: false
+            }
+            
         }
     },
     methods: {
         toMoviments() {
             alert('Abrir view de movimentações');
-        },
-        openModalChart() {
-            this.showModalChart = true;
         },
         closeModalChart() {
             this.showModalChart = false;
@@ -188,16 +183,23 @@ export default {
         handleReloadEntry() {
             alert('atualizar');
         },
-        handleSelect(item) {
-            
-        }
+        handleOpenModalFilterDate() {
+            this.showModalFilterDate = true;
+        },
+        handleCloseModalFilterDate() {
+            this.showModalFilterDate = false;
+        },
+        handleFilterDate(filterDateId) {
+            this.filterDate = this.filterDateList.find(filterDate => filterDate.id === filterDateId);
+            this.handleCloseModalFilterDate();
+        },
     },
     computed: {
         momentsResults() {
             return this.movements.results.slice(0,this.maxItems);
         },
         dateFilterIni() {
-            return now().subtract(7, 'd');
+            return now().subtract(6, 'd');
         },
         dateFilterEnd() { 
             return now();
@@ -274,6 +276,23 @@ export default {
         border-radius: 6px;
         background: rgba(24, 24, 24, 0.50);
         color: rgba(255, 255, 255, 0.70);
+    }
+
+    &__modal-items {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--color-text);
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    &__modal-title {
+        color: rgba(255, 255, 255, 0.5019607843);
+        font-size: 16px;
+        font-weight: 500;
     }
 }
 </style>

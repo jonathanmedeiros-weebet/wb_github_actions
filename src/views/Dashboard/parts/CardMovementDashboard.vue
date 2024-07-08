@@ -15,9 +15,7 @@
 </template>
 
 <script>
-
-import { convertInMomentInstance } from '@/utilities/date.utitlity.ts'
-import { formatCurrency } from '@/utilities/formatCurrency'
+import { convertInMomentInstance, formatCurrency } from '@/utilities'
 import IconMoney from '@/components/icons/IconMoney.vue';
 
 export default {

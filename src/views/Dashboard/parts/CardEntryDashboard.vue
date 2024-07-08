@@ -62,7 +62,7 @@
 
 import IconRestart from '@/components/icons/IconRestart.vue'
 import IconCircle from '@/components/icons/IconCircle.vue';
-import { formatCurrency } from '@/utilities/formatCurrency'
+import { formatCurrency } from '@/utilities'
 
 export default {
   components: { IconRestart, IconCircle },
