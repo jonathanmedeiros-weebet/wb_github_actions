@@ -2228,24 +2228,6 @@ gulp.task('ciaaonline.com', function (done) {
     });
 });
 
-gulp.task('fourbet.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "fourbet.com",
-        banca: "FOURBET",
-        styles: "",
-    });
-});
-
-gulp.task('fourbet.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "fourbet.net",
-        banca: "FOURBET",
-        styles: ""
-    });
-});
-
 gulp.task('bnrbet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2350,15 +2332,6 @@ gulp.task('bullbets.online', function (done) {
         server: "front3.wee.bet",
         host: "bullbets.online",
         banca: "BULL BETS",
-        styles: "",
-    });
-});
-
-gulp.task('betganha.vip', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betganha.vip",
-        banca: "BET GANHA",
         styles: "",
     });
 });
@@ -2957,6 +2930,42 @@ gulp.task('gli.wee.bet', function (done) {
         server: "54.147.182.240",
         host: "gli.wee.bet",
         banca: "GLI - Sandbox",
+        styles: ""
+    });
+});
+
+gulp.task('deupix.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "deupix.bet",
+        banca: "DEU PIX",
+        styles: "",
+    });
+});
+
+gulp.task('balneario.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "balneario.bet",
+        banca: "BALNEÁRIO BET",
+        styles: ""
+    });
+});
+
+gulp.task('caxias.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "caxias.bet",
+        banca: "CAXIAS BET",
+        styles: ""
+    });
+});
+
+gulp.task('floripa.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "floripa.bet",
+        banca: "FLORIPA BET",
         styles: ""
     });
 });
