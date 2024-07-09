@@ -1,8 +1,6 @@
 <template>
   <div class="calculation">
-    <Header :title="modality" :showCalendarButton="true" :showSearchButton="true">
-      <SelectFake @click="handleSelectModalClick" />
-    </Header>
+    <Header :title="modality" :showCalendarButton="true" :showBackButton="true" />
     <div class="calculation__container">
       <span class="date">
         {{ date }}
@@ -88,14 +86,12 @@
           <span class="result__value">R$1,90</span>
         </div>
       </div>
-
-      <div v-for="(item, index) in calculation.items" :key="index">
-        <div class="collapse__line"></div>
+      <div class="collapse__line"></div>
         <div class="credit">
           <span>Créditos</span>
           <div class="credit__date">
             <IconAdd class="credit__icon" />
-            <span class="credit__value">R$ {{ item.credit }}</span>
+            <span class="credit__value">R$0,00</span>
           </div>
         </div>
 
@@ -104,7 +100,7 @@
           <span>Débitos</span>
           <div class="debit__date">
             <IconRemove class="debit__icon" />
-            <span class="debit__value">R$ {{ item.debit }}</span>
+            <span class="debit__value">R$ 5,00</span>
           </div>
         </div>
 
@@ -112,11 +108,10 @@
         <div class="balance">
           <span>Saldo</span>
           <div class="balance__date">
-            <span class="balance__value">R$ {{ item.balance }}</span>
+            <span class="balance__value">R$ 2,00</span>
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -165,21 +160,36 @@ export default {
       collapsedBet: this.initCollapsed,
       collapsedExits: this.initCollapsed,
       calculation: {
-        dateIni: "01/06/2024",
-        dateFin: "06/06/2024",
-        entry: [
-          {input_value: '2,00', bet: "2,00", refills: "0,00"}
-        ],
-        exit: [
-          {exit_value: "2,00", commissions: "2,10", award: "13,10", withdraw: "55,10"}
-        ],
-        dateValue: "1,90",
-        items: [
-          {credit: "5,00", debit: "0,00", balance: "0,00"}
-        ]
+        startDate: "01/06/2024",
+        endDate: "06/06/2024",
+        summary: {
+          inputs: {
+            name: 'Entradas',
+            value: 1,
+            items: [
+              {
+                name: 'Total apostado',
+                value: 2,
+                subitems: []
+              },
+              {
+                name: 'recargas',
+                value: 0,
+              }
+            ]
+          },
+          outputs: [
+          ],
+          results: {
+            startDate: '',
+            endDate: '',
+            value: 1
+          },
+          credit: 5,
+          debit: 0,
+          balance: 0
+        },
       }
-        
-      
     }
   },
 
