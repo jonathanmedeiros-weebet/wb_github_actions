@@ -1,19 +1,19 @@
 <template>
   <div class="ticket">
-    <Header :title="modality"  :showBackButton="true" />
+    <Header :title="modality" :showBackButton="true" />
     <div class="ticket__container">
       <div class="game">
         <span class="game__select">Jogos selecionados</span>
         <div class="game__delete">
           <IconDelete class="game__icon" />
-          <span>Excluir todos</span>
+          <span class="game__text" >Excluir todos</span>
         </div>
       </div>
       <div v-for="(team, index) in teams" :key="index" class="bet">
         <div class="bet__header">
           <span class="bet__team">
-            <IconLive v-if="team.live" class="bet__icon-live"/>   
-            <IconBall class="bet__icon-ball"/>   
+            <IconLive v-if="team.live" class="bet__icon-live"/>
+            <IconBall class="bet__icon-ball"/>
             {{ team.team_house }} X {{ team.team_outside }}
           </span>
           <IconClose class="bet__icon-close" />
@@ -29,6 +29,7 @@
           <span>{{ team.odd }}</span>
         </div>
       </div>
+      <div class="line"></div>
       <div class="finish">
         <div class="finish__cpf">
           <w-input
@@ -38,7 +39,7 @@
             placeholder="Informe o cpf do apostador"
             type="text"
           />
-        </div> 
+        </div>
       </div>
       <div class="value">
         <div class="value__label">
@@ -54,9 +55,9 @@
             type="email"
           >
             <template #icon>
-              <span style="color: rgba(255, 255, 255, 0.50);">R$</span>
+              <span style="color: #ffffff80;">R$</span>
             </template>
-          </w-input> 
+          </w-input>
         </div>
       </div>
       <div class="cotacao">
@@ -65,10 +66,11 @@
           <span>{{sumOdds}}</span>
         </div>
         <div class="cotacao__ganhos">
-          <span>Possiveis Ganhos:</span>
+          <span>Possíveis Ganhos:</span>
           <span>R$ 90,00</span>
         </div>
-        <div class="cotacao__alteracao">         
+        <div class="cotacao__alteracao">
+          <input class="cotacao__checkbox" type="checkbox" id="accept-changes" />
           <label for="accept-changes">Aceitar Alterações de odds</label>
         </div>
         <div class="cotacao__finalizar">
@@ -76,17 +78,17 @@
             id="btn-entrar"
             text="Finalizar Aposta"
             value="entrar"
+            class="cotacao__finalizar-button"
             name="btn-entrar"
             @click="handleClick"
           />
         </div>
       </div>
-    </div>  
+    </div>
   </div>
 </template>
 
 <script>
-import SelectFake from '../views/HomeView/parts/SelectFake.vue';
 import Header from '@/components/layouts/Header.vue';
 import { modalityList } from '../constants/modalities.constant';
 import IconDelete from '@/components/icons/IconDelete.vue';
@@ -146,6 +148,10 @@ export default {
   display: flex;
   justify-content: space-between;
   
+  &__text {
+    gap: 10px;
+  }
+
   &__select {
     text-align: center;
     font-size: 14px;
@@ -176,7 +182,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative; 
-
+  
   &::after { 
     content: '';
     position: absolute;
@@ -184,7 +190,7 @@ export default {
     left: 0;
     width: 100vw; 
     height: 1px;
-    background-color: rgba(126, 123, 123, 0.1);
+    background-color: var(--color-line);
     transform: translateX(-20px); 
   }
 
@@ -232,6 +238,24 @@ export default {
   }
 }
 
+.line {
+
+  &::after { 
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw; 
+    height: 1px;
+    background-color: var(--color-line);
+    transform: translateX(-20px); 
+  }
+
+}
+
+.finish {
+  margin-bottom: -20px;
+}
 .value {
   
   &__balance-text {
@@ -249,18 +273,24 @@ export default {
     width: 46px;
     padding: 18px;
     justify-content: center;
+    align-items: center;
     border-radius: 8px;
     background: var(--color-background-input);
     color: var(--color-text-input);
     font-size: 14px;
     border: none; 
+    
   }
 
   &__balance-input{
-    padding-top: 20px;
     width: 100%;
+    margin-bottom: -10px;
+  }
+  &__balance-input ::v-deep .input__field {
+    height: 50px;
   }
 }
+
 
 .cotacao {
   padding: 8px;
@@ -282,11 +312,45 @@ export default {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    & input[type="checkbox"] {
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border: 1px solid var(--color-text-input);
+      background-color: transparent;
+      cursor: pointer;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    & input[type="checkbox"]::after {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      background-color: var(--color-primary);
+      opacity: 0;
+      border-radius: 2px;
+    }
+
+    & input[type="checkbox"]:checked::after {
+      opacity: 1;
+    }
+
   }
 
   &__finalizar {
     padding-top: 16px;
   }
+
+  &__finalizar-button {
+    width: 100%;
+  }
+
 }
 
 </style>
