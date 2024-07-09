@@ -19,6 +19,11 @@ const router = new VueRouter({
       component: LoginView,
     },
     {
+      path: '/login',
+      name: 'login',
+      component: LoginView,
+    },
+    {
       path: '/home',
       name: 'home',
       component: HomeView,
@@ -49,12 +54,7 @@ const router = new VueRouter({
       component: ChangePasswordView,
     },
     {
-      path: '/results',
-      name: 'results',
-      component: ResultsView,
-    },
-    {
-      path: '/game-detail',
+      path: '/game-detail/:id',
       name: 'game-detail',
       component: GameDetailView,
     },

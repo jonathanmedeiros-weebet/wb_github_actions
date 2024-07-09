@@ -45,7 +45,7 @@ import {
   dateFormatInMonthAndYear,
   now,
   convertInMomentInstance
-} from '@/utilities/date.utitlity.ts'
+} from '@/utilities'
 import IconArrowLeft from './icons/IconArrowLeft.vue'
 import IconArrowRight from './icons/IconArrowRight.vue'
 

@@ -141,7 +141,6 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    margin-bottom: 100px;
   }
 
   &__footer {

@@ -1,28 +1,33 @@
 <template>
-    <div class="game" @click="handleClick">
+    <div class="game" @click="handleGameDetailClick">
         <div class="game__teams">
             <span
                 class="game__team"
-                v-for="(team, index) in game.teams"
+                v-for="(team, index) in teams"
                 :key="index"
             >
                 <img :src="team.image">
                 {{ team.name }}
             </span>
             <span class="game__info">
-                {{ game.dateTime }}
-                <span class="game__pontuation">{{ game.pontuation }}</span>
+                {{ dateTime }}
+                <span class="game__pontuation">+{{ pontuation }}</span>
             </span>
         </div>
         <div class="game__quotes">
-            <div class="game__quota">{{ game.quotes.host }}</div>
-            <div class="game__quota">{{ game.quotes.draw }}</div>
-            <div class="game__quota">{{ game.quotes.visitor }}</div>
+            <div
+                class="game__quota"
+                v-for="(quote, index) in quotes"
+                :key="index"
+            >
+                {{ quote.valor }}
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import { convertInMomentInstance } from '@/utilities';
 export default {
     name: 'game-item',
     props: {
@@ -31,9 +36,42 @@ export default {
             required: true
         },
     },
+    computed: {
+        teams() {
+            return [
+                {
+                    image: `https://cdn.wee.bet/img/times/m/${this.game.time_a_img ?? 'default'}.png`,
+                    name: this.game.time_a_nome,
+                },
+                {
+                    image: `https://cdn.wee.bet/img/times/m/${this.game.time_b_img ?? 'default'}.png`,
+                    name: this.game.time_b_nome,
+                }
+            ]
+        },
+        pontuation() {
+            return this.game.total_cotacoes;
+        },
+        dateTime() {
+            return convertInMomentInstance(this.game.horario).format('DD/MM hh:mm');
+        },
+        quotes() {
+            return this.game.cotacoes.map(quote => ({
+                ...quote,
+                valor: quote.valor.toFixed(2)
+            }));
+        }
+    },
     methods: {
-        handleClick() {
-            this.$emit('click');
+        handleGameDetailClick() {
+            this.$router.push({
+                name: 'game-detail',
+                params: {
+                    id: this.game._id
+                }
+            });
+
+            event.stopPropagation();
         },
     }
 }
@@ -93,9 +131,10 @@ export default {
 
         border: 0.5px solid var(--color-primary);
         border-radius: 2px;
+        padding: 0 5px;
 
         height: 15px;
-        width: 28px;
+        width: auto;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -117,4 +156,4 @@ export default {
         background: var(--color-background);
     }
 }
-</style>
+</style>v

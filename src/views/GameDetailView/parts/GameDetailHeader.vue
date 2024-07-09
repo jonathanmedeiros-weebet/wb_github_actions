@@ -14,8 +14,8 @@
             <div class="game-detail-header__container">
                 <Header :showBackButton="true">
                     <span class="game-detail-header__title" v-if="isHeaderNormal">
-                        <span> Campeonato brasileiro </span>
-                        <span> {{ game.dateTime}} </span>
+                        <span> {{ championshipName }} </span>
+                        <span> {{ dateTime }} </span>
                     </span>
 
                     <div class="game-detail-header__teams game-detail-header__teams--slim" v-if="isHeaderSlim">
@@ -47,6 +47,8 @@
 
 <script>
 import Header from '@/components/layouts/Header.vue'
+import { convertInMomentInstance } from '@/utilities';
+
 export default {
   components: { Header },
     name: 'game-detail-header',
@@ -71,13 +73,25 @@ export default {
         isHeaderSlim() {
             return this.type === 'slim';
         },
+        championshipName() {
+            return this.game?.campeonato?.nome ?? ''
+        },
+        dateTime() {
+            return convertInMomentInstance(this.game.horario).format('DD/MM hh:mm');
+        },
         teamA() {
-            return this.game.teams[0]
+            return {
+                name: this.game.time_a_nome,
+                image: `https://cdn.wee.bet/img/times/m/${this.game.time_a_img ?? 'default'}.png`
+            }
         },
         teamB() {
-            return this.game.teams[1]
+            return {
+                name: this.game.time_b_nome,
+                image: `https://cdn.wee.bet/img/times/m/${this.game.time_b_img ?? 'default'}.png`
+            }
         },
-    }
+    },
 }
 </script>
 
