@@ -286,6 +286,7 @@ export default {
     width: 100%;
     margin-bottom: -10px;
   }
+  
   &__balance-input ::v-deep .input__field {
     height: 50px;
   }
@@ -350,7 +351,6 @@ export default {
   &__finalizar-button {
     width: 100%;
   }
-
 }
 
 </style>
