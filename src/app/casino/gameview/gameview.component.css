@@ -134,6 +134,19 @@ iframe{
     margin: 0;
 }
 
+.close-modal-continuar-jogando i{
+    color: var(--highlight);
+    font-size: medium;
+}
+
+.btn-custom, .btn-custom2 {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 @media only screen and (max-width: 1024px) {
     .game-view {
@@ -141,7 +154,7 @@ iframe{
         background-color: #000;
         width: 100%;
         height: 100%;
-        z-index: 2147483647;
+        z-index: 9000;
         top: 0;
     }
 
@@ -162,6 +175,11 @@ iframe{
     .btn-cassino {
         padding: 5px;
     }
+
+    .overlay {
+        height: calc(100% - 45px);
+        margin-top: 45px;
+    }
 }
 
 @media (min-width: 1025px) {
@@ -171,6 +189,11 @@ iframe{
 
     iframe {
         height: 100%;
+    }
+
+    .overlay {
+        height: calc(100% - 11em);
+        margin-top: 11em;
     }
 }
 
@@ -184,12 +207,10 @@ iframe{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    height: 100%;
     justify-content: center;
     position: absolute;
     top: 0;
     width: 100%;
-    margin-top: 11em;
 }
 
 .overlay .overlay-background {
@@ -256,6 +277,20 @@ iframe{
     margin: 5px; /* Espaço entre os botões */
     padding: 10px 20px;
     font-size: 16px;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: end;
+    border: none;
+    z-index: 9001 !important;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 60px 60px 60px;
 }
 
 

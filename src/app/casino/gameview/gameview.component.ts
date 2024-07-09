@@ -1,13 +1,27 @@
-import {Component, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {AuthService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService} from '../../services';
-import {interval} from 'rxjs';
+import {
+    AuthService,
+    FinanceiroService,
+    MenuFooterService,
+    MessageService,
+    ParametrosLocaisService,
+    UtilsService
+} from '../../services';
+import {interval, Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
+import {
+    CadastroModalComponent,
+    CanceledBonusConfirmComponent,
+    JogosLiberadosBonusModalComponent,
+    LoginModalComponent,
+    RegrasBonusModalComponent
+} from "../../shared/layout/modals";
+import {takeUntil} from "rxjs/operators";
 
 
 
@@ -17,6 +31,7 @@ import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalCom
     styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
+    @ViewChild('continuarJogandoModal', {static: true}) continuarJogandoModal;
     gameUrl: SafeUrl = '';
     gameId: String = '';
     gameMode: String = '';
@@ -33,6 +48,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     removerBotaoFullscreen = false;
     isLoggedIn = false;
     backgroundImageUrl = '';
+    posicaoFinanceira;
+    unsub$ = new Subject();
+    avisoCancelarBonus = false;
+    modalRef;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -47,6 +66,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private utilsService: UtilsService,
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
+        private financeiroService: FinanceiroService,
         @Inject(DOCUMENT) private document: any
     ) {}
 
@@ -57,6 +77,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
 
         this.isLoggedIn = this.auth.isLoggedIn();
+        if(this.isLoggedIn) {
+            this.getPosicaoFinanceira()
+        }
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
 
@@ -104,8 +127,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 isLoggedIn => {
                     if(isLoggedIn){
                         this.isLoggedIn = this.auth.isLoggedIn();
-
-                        this.loadGame();
+                        if(this.avisoCancelarBonus === false){
+                            this.loadGame();
+                        }
                     }
                 }
             );
@@ -120,8 +144,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.abriModalLogin();
 
             } else {
-
-                this.loadGame();
+                if(this.avisoCancelarBonus === false){
+                    this.loadGame();
+                }
             }
             interval(3000)
                 .subscribe(() => {
@@ -156,6 +181,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
+        if(this.modalRef) {
+            this.modalRef.close();
+        }
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         } else if(this.gameFornecedor === 'parlaybay') {
@@ -269,7 +297,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             (result) => {
                 if(result) {
                     this.isLoggedIn = this.auth.isLoggedIn();
-                    this.loadGame();
+                    this.getPosicaoFinanceira()
                 }
             }
         );
@@ -285,5 +313,56 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
+    }
+
+    getPosicaoFinanceira() {
+        this.auth.getPosicaoFinanceira()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                posicaoFinanceira => {
+                    this.posicaoFinanceira = posicaoFinanceira.bonus;
+                    if(this.posicaoFinanceira > 0 && this.posicaoFinanceira < 1) {
+                       this.avisoCancelarBonus = true;
+                       this.abriModalContinuarJogando();
+                    }
+                },
+                error => {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
+                        this.auth.logout();
+                    } else {
+                        this.handleError(error);
+                    }
+                }
+            );
+    }
+
+    abriModalContinuarJogando(){
+        this.modalRef =  this.modalService.open(
+            this.continuarJogandoModal,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+            }
+        );
+    }
+
+    continuarBonus(){
+        this.avisoCancelarBonus = false;
+        this.modalRef.close();
+    }
+
+    continuarSaldoReal(){
+        this.financeiroService.cancelarBonusAtivos()
+            .subscribe(
+                response => {
+                    this.avisoCancelarBonus = false;
+                    this.modalRef.close();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+
     }
 }
