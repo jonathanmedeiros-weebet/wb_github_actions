@@ -111,7 +111,7 @@ export default {
       this.isSaldoVisible = !this.isSaldoVisible;
     },
     navigateTo() {
-      this.$router.push("/verification");
+      this.$router.push("/reckoning");
     }
   }
 }

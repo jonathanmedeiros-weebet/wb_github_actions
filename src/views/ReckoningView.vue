@@ -1,124 +1,127 @@
 <template>
-  <div class="header">
+  <div class="calculation">
     <Header :title="modality" :showCalendarButton="true" :showSearchButton="true">
-      <SelectFake  @click="handleSelectModalClick" />
+      <SelectFake @click="handleSelectModalClick" />
     </Header>
-    <div class="verification">
-      <section class="verification__container">
-        <span class="date">
-          {{ date }}
-          <IconClose class="date__close" />
-        </span>
+    <div class="calculation__container">
+      <span class="date">
+        {{ date }}
+        <IconClose class="date__close" />
+      </span>
+      <div class="balance">
+        <div class="balance__date">
+          <span class="balance__relatory">Saldo em {{ relatory }}</span>
+          <span class="balance__value">
+            <IconAdd class="balance__add" />
+            R$ {{ value }}
+          </span>
+        </div>
+      </div>
 
-        <div class="balance">
-          <div class="balance__date">
-            <span class="balance__relatory">Saldo em {{ relatory }}</span>
-            <span class="balance__value">
-              <IconAdd class="balance__add" />
-              R$ {{ value }}
-            </span>
+      <div class="collapse" @click="toggleCollapse('input', $event)">
+        <div class="collapse__item">
+          <component :is="iconArrowDinamicInputs" />
+          <span class="collapse__title">Entradas</span>
+          <div class="collapse__value">
+            <IconAdd class="collapse__icon" />
+            R$ 2,00
           </div>
         </div>
 
-        <div class="collapse" @click="toggleCollapse('input', $event)">
-          <div class="collapse__item">
-            <component :is="iconArrowDinamicInputs" />
-            <span class="collapse__title">Entradas</span>
-            <div class="collapse__value">
-              <IconAdd class="collapse__icon" />
-                R$ 2,00
-            </div>
-          </div>
-
-          <div v-if="collapsedInputs" class="collapse__content">
-            <div class="collapse__section">
-              <div class="collapse" @click="toggleCollapse('bet', $event)">
-                <div class="collapse__item">
-                  <component class="collapse__icon-arrow" :is="iconArrowDinamicBet" />
-                  <span class="collapse__title">Total Apostado:</span>
-                  <div class="collapse__icon-wrapper">
-                    <IconAdd class="collapse__icon-add" />
-                    <span>R$ {{ totalApostado }}</span>
-                  </div>
-                </div>
-                <div v-if="collapsedBet" class="collapse__section-result">
-                  <span>Futebol</span>
+        <div v-if="collapsedInputs" class="collapse__content">
+          <div class="collapse__section">
+            <div class="collapse" @click="toggleCollapse('bet', $event)">
+              <div class="collapse__item">
+                <component class="collapse__icon-arrow" :is="iconArrowDinamicBet" />
+                <span class="collapse__title">Total Apostado:</span>
+                <div class="collapse__icon-wrapper">
+                  <IconAdd class="collapse__icon-add" />
+                  <span>R$ {{ totalApostado }}</span>
                 </div>
               </div>
-
-              <div class="collapse__section-item">
-                <span class="collapse__section-text">Recargas de Cartão:</span>
-                <span class="collapse__value-right">R$ {{ recargasCartao }}</span>
+              <div v-if="collapsedBet" class="collapse__section-result">
+                <span>Futebol</span>
               </div>
-              <div class="collapse__line"></div>
             </div>
+
+            <div class="collapse__section-item">
+              <span class="collapse__section-text">Recargas de Cartão:</span>
+              <span class="collapse__value-right">R$ {{ recargasCartao }}</span>
+            </div>
+            <div class="collapse__line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse" @click="toggleCollapse('exit')">
+        <div class="collapse__item">
+          <component :is="iconArrowDinamicExits" />
+          <span class="collapse__title">Saídas</span>
+          <div class="collapse__value">
+            <IconRemove class="collapse__icon-remove" />
+            <span class="collapse__balance">R$ 2,00</span>
           </div>
         </div>
 
-        <div class="collapse" @click="toggleCollapse('exit')">
-          <div class="collapse__item">
-            <component :is="iconArrowDinamicExits" />
-            <span class="collapse__title">Saídas</span>
-            <div class="collapse__value">
-              <IconRemove class="collapse__icon-remove" />
-              <span class="collapse__balance">R$ 2,00</span>
+        <div v-if="collapsedExits" class="collapse__content">
+          <div class="collapse__section">
+            <div class="collapse__section-item">
+              <span>Comissões</span>
+              <span class="collapse__value-right">R$ {{ comissao }}</span>
             </div>
+            <div class="collapse__section-item">
+              <span>Prêmio</span>
+              <span class="collapse__value-right">R$ {{ premio }}</span>
+            </div>
+            <div class="collapse__section-item">
+              <span>Saque</span>
+              <span class="collapse__value-right">R$ {{ Saque }}</span>
+            </div>
+            <div class="collapse__line"></div>
           </div>
+        </div>
+      </div>
 
-          <div v-if="collapsedExits" class="collapse__content">
-            <div class="collapse__section">
-              <div class="collapse__section-item">
-                <span>Comissões</span>
-                <span class="collapse__value-right">R$ {{ comissao }}</span>
-              </div>
-              <div class="collapse__section-item">
-                <span>Prêmio</span>
-                <span class="collapse__value-right">R$ {{ premio }}</span>
-              </div>
-              <div class="collapse__section-item">
-                <span>Saque</span>
-                <span class="collapse__value-right">R$ {{ Saque }}</span>
-              </div>
-              <div class="collapse__line"></div>
-            </div>
-          </div>
+      <div class="result">
+        <span>Resultado 01/06 à 06/06</span>
+        <div class="result__date">
+          <span class="result__value">R$1,90</span>
         </div>
-        <div class="result">
-          <span>Resultado 01/06 à 06/06</span>
-          <div class="result__date">
-            <span class="result__value">R$1,90</span>
-          </div>
-        </div>
+      </div>
+
+      <div v-for="(item, index) in calculation.items" :key="index">
         <div class="collapse__line"></div>
         <div class="credit">
           <span>Créditos</span>
           <div class="credit__date">
             <IconAdd class="credit__icon" />
-            <span class="credit__value">R$0,00</span>
+            <span class="credit__value">R$ {{ item.credit }}</span>
           </div>
         </div>
+
         <div class="collapse__line"></div>
         <div class="debit">
           <span>Débitos</span>
           <div class="debit__date">
             <IconRemove class="debit__icon" />
-            <span class="debit__value">R$0,00</span>
+            <span class="debit__value">R$ {{ item.debit }}</span>
           </div>
         </div>
+
         <div class="collapse__line"></div>
         <div class="balance">
           <span>Saldo</span>
           <div class="balance__date">
-            <span class="balance__value">R$0,00</span>
+            <span class="balance__value">R$ {{ item.balance }}</span>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import SelectFake from '../views/HomeView/parts/SelectFake.vue'
+import SelectFake from './HomeView/parts/SelectFake.vue'
 import Header from '@/components/layouts/Header.vue'
 import { modalityList } from '../constants/modalities.constant'
 import IconClose from '@/components/icons/IconClose.vue'
@@ -128,7 +131,7 @@ import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 
 export default {
-  name: 'verification',
+  name: 'reckoning',
   components: {
     Header,
     SelectFake,
@@ -161,47 +164,22 @@ export default {
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
       collapsedExits: this.initCollapsed,
-      verification: {
-        dateIni: "2024-06-01",
-        dateEnd: "2024-06-0",
-        items: [
-          {
-            title: "Entradas",
-            subItems: {
-              title: 'Total Apostado',
-              value: 2.00,
-              modalities: [
-                {
-                  name: 'futebol',
-                  value: 2.00,
-                }
-              ]
-            }
-          },
-          {
-            title: "Saídas",
-            subItems: {
-              title: 'Total Apostado',
-              value: 2.00,
-              modalities: [
-                {
-                  name: 'Comissões',
-                  value: 0.10,
-                },
-                {
-                  name: 'Prêmio',
-                  value: 0.00,
-                },
-                {
-                  name: 'Saque',
-                  value: 0.00,
-                },
-              ]
-            }
-          }  
+      calculation: {
+        dateIni: "01/06/2024",
+        dateFin: "06/06/2024",
+        entry: [
+          {input_value: '2,00', bet: "2,00", refills: "0,00"}
         ],
-
+        exit: [
+          {exit_value: "2,00", commissions: "2,10", award: "13,10", withdraw: "55,10"}
+        ],
+        dateValue: "1,90",
+        items: [
+          {credit: "5,00", debit: "0,00", balance: "0,00"}
+        ]
       }
+        
+      
     }
   },
 
@@ -237,7 +215,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.verification {
+
+.calculation {
   color: #ffffff;
   height: auto;
   width: 100%;
@@ -264,7 +243,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  
   &__close {
     cursor: pointer;
   }
