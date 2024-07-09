@@ -263,18 +263,15 @@
                                             <td class="td-custom">
                                                 {{rodada.status}}
                                             </td>
-                                            <td style="text-align: center; max-width: 80px;">
+                                            <td class="btn-custom-game">
                                                 <ng-container>
                                                     <button class="btn btn-custom btn-jogar-rodada"
                                                         [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
                                                         (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
-                                                </ng-container>
-                                            </td>
-                                            <td style="text-align: center; max-width: 80px;">
-                                                <ng-container>
-                                                    <button class="btn btn-custom btn-jogar-rodada"
+
+                                                        <button class="btn btn-custom btn-jogar-rodada"
                                                         [ngClass]="rodada.status != 'Concluído' ? 'disabled-button' : ''"
-                                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.resgatarPremio' | translate }}</button>
+                                                        (click)="redeemPrize(rodada.id)">{{ 'geral.resgatarPremio' | translate }}</button>
                                                 </ng-container>
                                             </td>
                                         </tr>

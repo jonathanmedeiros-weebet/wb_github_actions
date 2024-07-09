@@ -247,7 +247,8 @@
         "computadoEm": "Computed in:",
         "alteracoesSucesso": "Changes made successfully!",
         "erroInesperado": "Something unexpected happened. Please try again later.",
-        "enderecoNaoEncontrado": "Address not found, please fill it in manually."
+        "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
+        "resgatarPremio": "Resgatar Prêmio"
     },
     "bet": {
         "sportsBetting": "Sports betting",
