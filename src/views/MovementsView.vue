@@ -1,9 +1,7 @@
 <template>
-  <div class="header">
-    <Header :showCalendarButton="true">
-      <SelectFake :text="modality" @click="handleSelectModalClick"/>
-    </Header>
-    <div class="verification__container">
+  <div class="movements">
+    <Header :title="modality" :showCalendarButton="true" :showBackButton="true" />
+    <div class="movements__container">
       <span class="date">
         {{ date }}
         <IconClose class="date__close" />
@@ -54,7 +52,11 @@ export default {
         {value: '52,00', debit: 'Crédito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
         {value: '14,33', debit: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
         {value: '6,00', debit: 'Débito', date: '04/06/2024',  info: 'Seg, 04 Junho 2024'},
-        {value: '72,22', debit: 'Crédito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'}
+        {value: '42,22', debit: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
+        {value: '12,22', debit: 'Crédito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
+        {value: '702,22', debit: 'Débito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
+        {value: '120,22', debit: 'Crédito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
+        {value: '72,22', debit: 'Débito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
       ]
     };
   },
@@ -70,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.verification {
+.movements {
   color: var(--color-background);
   height: auto;
   width: 100%;
@@ -79,7 +81,7 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     margin: 0;
     padding: 0 20px;
     padding-top: 15px;
@@ -105,8 +107,12 @@ export default {
 }
 
 .information {
+  
   padding-bottom: 15px;
+  padding-top: 10px;
+
   &__date {
+    
     color: var(--color-text);
     font-size: 16px;
     font-style: normal;
