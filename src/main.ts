@@ -6,7 +6,7 @@ import { PiniaVuePlugin, createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import VueRouter from 'vue-router'
-import VueMask from 'v-mask'
+import VueMask from 'vue-the-mask'
 
 Vue.use(VueMask);
 Vue.use(PiniaVuePlugin)
