@@ -73,7 +73,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import IconEye from '@/components/icons/IconEye.vue';
 import IconEyeClose from '@/components/icons/IconEyeClose.vue';
 import IconMoney from '@/components/icons/IconMoney.vue';
@@ -100,11 +100,11 @@ export default {
     };
   },
   methods: {
-    handleLogout() {
+    handleLogout(){
       this.$router.replace('/');
     },
-    handleNavigate(route: string) {
-      this.$router.push(route)
+    handleNavigate(route) {
+      this.$router.push(route);
     },
     toggleCreditoVisibility() {
       console.log('Toggling Credito Visibility');

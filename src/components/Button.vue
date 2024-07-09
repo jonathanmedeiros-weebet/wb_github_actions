@@ -6,7 +6,7 @@
     class="button"
     @click="handleClick"
   >
-    {{ text }}
+    {{text}}
   </button>
 </template>
 

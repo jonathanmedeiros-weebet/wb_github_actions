@@ -16,7 +16,17 @@ export const gameList = [
             visitor: '1.00',
             host: '7.00',
             draw: '2.54'
-        }
+        },
+        results: [
+            {
+                team0: 5,
+                team1: 2
+            },
+            {
+                team0: 1,
+                team1: 3
+            }
+        ]
     },
     {
         dateTIme: '28/05 09:00',
@@ -35,7 +45,13 @@ export const gameList = [
             visitor: '1.00',
             host: '7.00',
             draw: '2.54'
-        }
+        },
+        results: [
+            {
+                team0: 0,
+                team1: 0
+            }
+        ]
     },
     {
         dateTIme: '28/05 09:00',
@@ -54,7 +70,13 @@ export const gameList = [
             visitor: '1.00',
             host: '7.00',
             draw: '2.54'
-        }
+        },
+        results: [
+            {
+                team0: 1,
+                team1: 3
+            }
+        ]
     },
     {
         dateTIme: '28/05 09:00',
@@ -73,7 +95,13 @@ export const gameList = [
             visitor: '1.00',
             host: '7.00',
             draw: '2.54'
-        }
+        },
+        results: [
+            {
+                team0: 2,
+                team1: 3
+            }
+        ]
     },
 ]
 
