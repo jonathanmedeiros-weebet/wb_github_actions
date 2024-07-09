@@ -44,19 +44,30 @@ export default {
       dateComission: '03/06/2024',
       info_date: 'Seg, 04 Junho 2024',
       modalityList: modalityList,
-      movements: [
-        {value: '350,00', debit: 'Crédito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
-        {value: '80,00', debit: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
-        {value: '25,00', debit: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
-        {value: '1,00', debit: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
-        {value: '52,00', debit: 'Crédito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
-        {value: '14,33', debit: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
-        {value: '6,00', debit: 'Débito', date: '04/06/2024',  info: 'Seg, 04 Junho 2024'},
-        {value: '42,22', debit: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
-        {value: '12,22', debit: 'Crédito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
-        {value: '702,22', debit: 'Débito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
-        {value: '120,22', debit: 'Crédito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
-        {value: '72,22', debit: 'Débito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
+      // movements: [
+      //   {value: '350,00', type: 'Crédito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
+      //   {value: '80,00', type: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
+      //   {value: '25,00', type: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
+      //   {value: '1,00', type: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
+      //   {value: '52,00', type: 'Crédito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
+      //   {value: '14,33', type: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
+      //   {value: '6,00', type: 'Débito', date: '04/06/2024',  info: 'Seg, 04 Junho 2024'},
+      //   {value: '42,22', type: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
+      //   {value: '12,22', type: 'Crédito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
+      //   {value: '702,22', type: 'Débito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
+      //   {value: '120,22', type: 'Crédito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
+      //   {value: '72,22', type: 'Débito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
+      // ]
+      dates: [
+          {
+            date: '04/06/2024' 
+            movements: []
+          },
+          {
+            date: '04/06/2024' 
+            movements: []
+          },
+
       ]
     };
   },
