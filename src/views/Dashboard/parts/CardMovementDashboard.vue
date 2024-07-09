@@ -98,7 +98,5 @@ export default {
         height: 24px;
         border-radius: 100%;
     }
-
-    
 }
 </style>
