@@ -1,4 +1,3 @@
-
 <template>
   <div class="menu">
     <section class="menu__container">

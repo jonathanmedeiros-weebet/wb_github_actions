@@ -1,8 +1,6 @@
 <template>
-  <div class="header">
-    <Header>
-      <SelectFake :text="modality" @click="handleSelectModalClick"/>
-    </Header>
+  <div class="ticket">
+    <Header :title="modality"  :showBackButton="true" />
     <div class="ticket__container">
       <div class="game">
         <span class="game__select">Jogos selecionados</span>
@@ -103,7 +101,6 @@ export default {
   name: 'ticket',
   components: { 
     Header, 
-    SelectFake, 
     IconDelete,
     IconLive,
     IconBall,
@@ -114,7 +111,7 @@ export default {
   },
   data() {
     return {  
-      modality: 'Bilhetes',
+      modality: 'Bilhete',
       modalityList: modalityList,
       teams: [
         { team_house: 'Argentino JRS', team_outside: 'Rosario Central', odd: 3.30, date: '19/03/2024', hour: '21:15', live: true, select: 'Empate' },
@@ -127,23 +124,12 @@ export default {
     sumOdds() {
       return this.teams.reduce((total, team) => total + team.odd, 0).toFixed(2);
     }
-  },
-  methods: {
-    handleSelectModalClick() {
-      alert('Modal select');
-    },
-    handleClick() {
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .ticket {
-  color: var(--color-background);
-  height: auto;
-  width: 100%;
-  padding-bottom: 100px;
 
   &__container {
     display: flex;
@@ -248,7 +234,6 @@ export default {
 
 .value {
   
-
   &__balance-text {
     font-size: 14px;
   }
@@ -302,9 +287,6 @@ export default {
   &__finalizar {
     padding-top: 16px;
   }
-  
-
-
 }
 
 </style>
