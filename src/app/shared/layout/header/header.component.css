@@ -601,8 +601,6 @@ body .change-theme {
     .logo {
         max-width: calc(32vw - 25px);
     }
-
-
 }
 
 @media only screen and (max-width: 480px) {
