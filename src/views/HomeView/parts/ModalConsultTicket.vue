@@ -3,7 +3,6 @@
     <template #title>
       <span class="modal-modalities__title">Consultar bilhete</span>
     </template>
-
     <template #body>
       <div class="modal-modalities__items">
         <span class="modal-modalities__text">
