@@ -6,15 +6,17 @@
         {{ date }}
         <IconClose class="date__close" />
       </span>
-      <div v-for="(movement, index) in movements" :key="index">
-        <div v-if="index % 4 === 0" class="information">
-          <span class="information__date">{{movement.info}}</span>
+      <div v-for="(movement, index) in dates" :key="index">
+        <div class="information">
+          <span class="information__date">{{movement.infoDate}}</span>
         </div>
-        <MovementsItem   
-          :value="movement.value"
-          :debit="movement.debit"
-          :date="movement.date"
-        />
+        <div v-for="(i,index) in movements" :key="index">
+          <MovementsItem  
+            :value="i.value"
+            :debit="i.type"
+            :date="i.date"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -60,13 +62,33 @@ export default {
       // ]
       dates: [
           {
-            date: '04/06/2024' 
-            movements: []
+            infoDate: 'Seg 04 de Jun de 2024',
+            movements: [
+              {value: '350,00', type: 'Crédito', date: '04/06/2024',},
+              {value: '350,00', type: 'Crédito'},
+              {value: '350,00', type: 'Débito'},
+              {value: '350,00', type: 'Crédito'}
+            ]
           },
           {
-            date: '04/06/2024' 
-            movements: []
+            infoDate: 'Ter 05 de Jun de 2024 ',
+            movements: [
+              {value: '350,00', type: 'Débito', date: '05/06/2024', },
+              {value: '350,00', type: 'Crédito', date: '05/06/2024', },
+              {value: '350,00', type: 'Débito', date: '05/06/2024', },
+              {value: '350,00', type: 'Crédito', date: '05/06/2024', }
+            ]
           },
+          {
+            infoDate: 'Qua 06 de Jun de 2024 ',
+            date: '06/06/2024', 
+            movements: [
+              {value: '250,00', type: 'Débito', date: '05/06/2024', },
+              {value: '150,00', type: 'Crédito', date: '05/06/2024', },
+              {value: '100,00', type: 'Débito', date: '05/06/2024', },
+              {value: '10,00', type: 'Crédito', date: '05/06/2024', }
+            ]
+          }
 
       ]
     };
