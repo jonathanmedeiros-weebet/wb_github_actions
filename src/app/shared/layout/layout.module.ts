@@ -94,6 +94,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SkeletonModule } from './skeleton/skeleton.module';
 import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-modal/block-peer-attemps-modal.component';
 import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { RodadaGratisService } from '../services/clientes/rodada-gratis.service';
 
 @NgModule({
     imports: [
@@ -221,6 +222,7 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
         JogoService,
         AcumuladaoService,
         IndiqueGanheService,
+        RodadaGratisService,
         {
             provide: RECAPTCHA_SETTINGS,
 

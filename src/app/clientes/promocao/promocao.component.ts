@@ -9,7 +9,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegrasBonusModalComponent } from './../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
 import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
-
+import { RodadaGratisService } from '../../shared/services/clientes/rodada-gratis.service';
 @Component({
     selector: 'app-promocao',
     templateUrl: './promocao.component.html',
@@ -43,7 +43,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         private modalService: NgbModal,
         private router: Router,
         private fb: UntypedFormBuilder,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private rodadaGratisService: RodadaGratisService
     ) { super(); }
 
     ngOnInit(): void {
@@ -218,6 +219,13 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
 
     openGame(game: string, fornecedor: string) {
         this.router.navigate(['casino/', fornecedor, game]);
+    }
+
+    redeemPrize(rodadaId: string) {
+        this.rodadaGratisService.redeemPrize(rodadaId).subscribe(
+            response => response,
+            error => this.handleError(error)
+        );
     }
 
     setQuantityRoundsToNotify(): void{

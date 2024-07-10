@@ -17,7 +17,7 @@ export class RodadaGratisService {
 		private header: HeadersService
 	) { }
     
-	redeemCommission(freeRoundId: number): Observable<any> {
+	redeemPrize(freeRoundId: string): Observable<any> {
 		return this.http.post(`${this.rodadaGratisUrl}/resgatar-premio`,
 			{freeRoundId: freeRoundId},
 			this.header.getRequestOptions(true))
