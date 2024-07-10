@@ -28,7 +28,7 @@ document.onreadystatechange = async function () {
                     ticketData = ticketData.results
                     const ticketItens = await orderTicketItens(ticketData.itens, ticketData.tipo);
 
-                    ticketData.numeros = ticketItens;
+                    ticketData.itens = ticketItens;
 
                     if (ticketData.tipo === 'esportes' || ticketData.tipo === 'desafio') {
                         this.getElementById('cash-back').append(ticketData.possibilidade_ganho.toLocaleString('pt-br', {

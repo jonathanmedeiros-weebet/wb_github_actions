@@ -4,8 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-    SLUG: 'weebet.local',
-    api_url: 'http://weebet.local',
   production: false,
   locale: 'pt-BR',
   currencyCode: 'BRL'
