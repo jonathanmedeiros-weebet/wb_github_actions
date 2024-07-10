@@ -1,6 +1,6 @@
 <template>
   <div class="tickets">
-    <Header title="Validar Aposta" />
+    <Header title="Validar Aposta" :showBackButton="true" />
     <div class="modal-modalities__items">
       <span class="modal-modalities__text">
         Digite o código de aposta para realizar a validação
