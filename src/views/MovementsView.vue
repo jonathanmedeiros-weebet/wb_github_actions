@@ -3,14 +3,14 @@
     <Header :title="modality" :showCalendarButton="true" :showBackButton="true" />
     <div class="movements__container">
       <span class="date">
-        {{ date }}
+        {{ startDate }} - {{endDate}}
         <IconClose class="date__close" />
       </span>
-      <div v-for="(movement, index) in dates" :key="index">
-        <div class="information">
-          <span class="information__date">{{movement.infoDate}}</span>
+      <div v-for="(movement, movementIndex) in dates" :key="movementIndex" class="information">
+        <div class="information__text">
+          <span class="information__date">{{ movement.infoDate }}</span>
         </div>
-        <div v-for="(i,index) in movements" :key="index">
+        <div v-for="(i, index) in movement.movements" :key="index" class="information__item">
           <MovementsItem  
             :value="i.value"
             :debit="i.type"
@@ -41,52 +41,38 @@ export default {
   },
   data() {
     return {  
-      date: "01/06/2024 - 06/06/2024",
+      startDate: '04/06/2024',
+      endDate: '06/06/2024',
       modality: 'Movimentações',
-      dateComission: '03/06/2024',
-      info_date: 'Seg, 04 Junho 2024',
       modalityList: modalityList,
-      // movements: [
-      //   {value: '350,00', type: 'Crédito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
-      //   {value: '80,00', type: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
-      //   {value: '25,00', type: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
-      //   {value: '1,00', type: 'Débito', date: '03/06/2024', info: 'Seg, 03 Junho 2024'},
-      //   {value: '52,00', type: 'Crédito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
-      //   {value: '14,33', type: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
-      //   {value: '6,00', type: 'Débito', date: '04/06/2024',  info: 'Seg, 04 Junho 2024'},
-      //   {value: '42,22', type: 'Débito', date: '04/06/2024', info: 'Seg, 04 Junho 2024'},
-      //   {value: '12,22', type: 'Crédito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
-      //   {value: '702,22', type: 'Débito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
-      //   {value: '120,22', type: 'Crédito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
-      //   {value: '72,22', type: 'Débito', date: '05/06/2024', info: 'Seg, 05 Junho 2024'},
-      // ]
       dates: [
           {
             infoDate: 'Seg 04 de Jun de 2024',
             movements: [
-              {value: '350,00', type: 'Crédito', date: '04/06/2024',},
-              {value: '350,00', type: 'Crédito'},
-              {value: '350,00', type: 'Débito'},
-              {value: '350,00', type: 'Crédito'}
+              {value: '30,00', type: 'Crédito', date: '04/06/2024',},
+              {value: '50,00', type: 'Crédito'},
+              {value: '10,00', type: 'Débito'},
+              {value: '11,00', type: 'Crédito'}
             ]
           },
           {
             infoDate: 'Ter 05 de Jun de 2024 ',
             movements: [
-              {value: '350,00', type: 'Débito', date: '05/06/2024', },
-              {value: '350,00', type: 'Crédito', date: '05/06/2024', },
-              {value: '350,00', type: 'Débito', date: '05/06/2024', },
-              {value: '350,00', type: 'Crédito', date: '05/06/2024', }
+              {value: '25,00', type: 'Débito', date: '05/06/2024', },
+              {value: '15,00', type: 'Crédito', date: '05/06/2024', },
+              {value: '8,00', type: 'Débito', date: '05/06/2024', },
+              {value: '2,00', type: 'Crédito', date: '05/06/2024', },
+              {value: '750,00', type: 'Crédito', date: '05/06/2024', }
             ]
           },
           {
             infoDate: 'Qua 06 de Jun de 2024 ',
             date: '06/06/2024', 
             movements: [
-              {value: '250,00', type: 'Débito', date: '05/06/2024', },
-              {value: '150,00', type: 'Crédito', date: '05/06/2024', },
-              {value: '100,00', type: 'Débito', date: '05/06/2024', },
-              {value: '10,00', type: 'Crédito', date: '05/06/2024', }
+              {value: '41,00', type: 'Débito', date: '06/06/2024', },
+              {value: '13,00', type: 'Crédito', date: '06/06/2024', },
+              {value: '100,00', type: 'Débito', date: '06/06/2024', },
+              {value: '10,00', type: 'Crédito', date: '06/06/2024', }
             ]
           }
 
@@ -114,7 +100,7 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 16px;
     margin: 0;
     padding: 0 20px;
     padding-top: 15px;
@@ -140,17 +126,24 @@ export default {
 }
 
 .information {
-  
-  padding-bottom: 15px;
-  padding-top: 10px;
+  margin-bottom: -10px;
+
+  &__text {
+    padding-bottom: 15px;
+    padding-top: 10px;
+  }
 
   &__date {
-    
     color: var(--color-text);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
   }
+
+  &__item {
+    margin-bottom: 4px; 
+  }
 }
+
 </style>
