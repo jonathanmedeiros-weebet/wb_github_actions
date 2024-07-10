@@ -219,7 +219,8 @@
                                 {{'geral.premio' | translate}} {{premio.quantidade_acertos}} partidas:
                                 {{premio.valor | currency}}
                             </div>
-                        </div>
+                            
+                       </div>
                         <div *ngFor="let jogo of acumuladao.jogos; let i=index" class="evento">
                             <div class="evento-inner">
                                 <div class="horario">
@@ -234,6 +235,9 @@
                     </div>
                 </div>
                 <div class="footer-bilhete">
+                    <div class="acumuladao-valor-aposta">
+                        Valor da aposta: {{acumuladao.valor | currency}}
+                    </div>
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <div class="div-inputs" *ngIf="!isCliente && modoCambista">
                             <div class="form-group">

@@ -966,10 +966,10 @@ button {
     width: 51px;
     height: 51px;
     margin: 6px;
-    border: 6px solid var(--header);
+    border: 6px solid var(--highlight);
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: var(--header) transparent transparent transparent;
+    border-color: var(--highlight) transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -1732,11 +1732,11 @@ ngb-datepicker-month {
 @media only screen and (max-width: 1024px) {
 
     .modal-login{
-        z-index: 2147483648 !important;
+        z-index: 99999 !important;
     }
 
-    .modal-cadastro-cliente{
-        z-index: 2147483648 !important;
+    .modal-cadastro-cliente {
+        z-index: 99999 !important;
     }
 
     *::-webkit-scrollbar{
