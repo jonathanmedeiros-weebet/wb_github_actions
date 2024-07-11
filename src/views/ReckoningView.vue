@@ -1,7 +1,8 @@
 <template>
-  <div class="calculation">
+  <div class="reckoning">
     <Header :title="modality" :showCalendarButton="true" :showBackButton="true" />
-    <div class="calculation__container">
+    
+    <div class="reckoning__container">
       <span class="date">
         {{ date }}
         <IconClose class="date__close" />
@@ -159,7 +160,7 @@ export default {
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
       collapsedExits: this.initCollapsed,
-      calculation: {
+      reckoning: {
         startDate: "01/06/2024",
         endDate: "06/06/2024",
         summary: {
@@ -226,7 +227,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.calculation {
+.reckoning {
   color: #ffffff;
   height: auto;
   width: 100%;
