@@ -1,15 +1,15 @@
 <template>
   <WModal :backdropClick="true" @close="handleCloseModal">
     <template #title>
-      <span class="modal-modalities__title">Consultar bilhete</span>
+      <span class="modal-ticket__title">Consultar bilhete</span>
     </template>
     <template #body>
-      <div class="modal-modalities__items">
-        <span class="modal-modalities__text">
+      <div class="modal-ticket__items">
+        <span class="modal-ticket__text">
           Digite o código de aposta para realizar a consulta do bilhete
         </span>
         <w-input
-          class="modal-modalities__input"
+          class="modal-ticket__input"
           name="consult_ticket"
           placeholder="Ex.: EA5D-DG41"
           type="text"
@@ -31,7 +31,7 @@ import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 
 export default {
-  name: 'ModalConsultTicket',
+  name: 'modal-consult-ticket',
   components: { WModal, WInput, WButton },
   methods: {
     handleCloseModal() {
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-modalities {
+.modal-ticket {
   &__title {
     color: var(--color-text);
     font-size: 16px;
