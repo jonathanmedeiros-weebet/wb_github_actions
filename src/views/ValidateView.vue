@@ -2,12 +2,9 @@
   <div class="ticket">
     <Header :title="modality" :showBackButton="true" />
     <div class="ticket__container">
-      <div class="game">
-        <span class="game__select">Jogos selecionados</span>
-        <div class="game__delete">
-          <IconDelete class="game__icon" />
-          <span class="game__text" >Excluir todos</span>
-        </div>
+      <div class="code">
+        <span class="code__bet">Código pré-aposta:</span>
+        <span class="code__number">{{code_aposta}}</span>
       </div>
       <div v-for="(team, index) in teams" :key="index" class="bet">
         <div class="bet__header">
@@ -113,8 +110,9 @@ export default {
   },
   data() {
     return {  
-      modality: 'Bilhete',
+      modality: 'Validar Aposta',
       modalityList: modalityList,
+      code_aposta: 231,
       teams: [
         { team_house: 'Argentino JRS', team_outside: 'Rosario Central', odd: 3.30, date: '19/03/2024', hour: '21:15', live: true, select: 'Empate' },
         { team_house: 'França', team_outside: 'Itália', odd: 3.30, date: '19/03/2024', hour: '21:15', live: false, select: 'França' },
@@ -140,9 +138,28 @@ export default {
     margin: 0;
     padding: 0 20px;
     min-height: 100%;
+    padding-top: 12px;
   }
 }
+.code {
+  
+  border-radius: 4px;
+  background: #181818;
+  display: flex;
+  width: 100%;
+  padding: 13px;
+  align-items: center;
+  gap: 10px;
+  
+  &__bet {
+    font-size: 16px;
+  }
 
+  &__number {
+    font-size: 20px;
+    
+  }
+}
 .game {
   padding: 10px;
   display: flex;
@@ -291,7 +308,6 @@ export default {
     height: 50px;
   }
 }
-
 
 .cotacao {
   padding: 8px;
