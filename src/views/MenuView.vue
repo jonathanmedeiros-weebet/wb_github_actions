@@ -29,11 +29,11 @@
         </div>
 
         <div class="wallet__shortcuts">
-          <button class="wallet__button">
+          <button class="wallet__button" @click="handleNavigate('/dashboard')">
             <IconInsertChart  class="wallet__icon"/>
             Dashboard
           </button>
-          <button class="wallet__button" @click="showModal('consultTicket')">
+          <button class="wallet__button" @click="handleOpenConsultTicketModal">
             <IconManageSearch class="wallet__icon" />
             Consultar Bilhete
           </button>
@@ -47,7 +47,7 @@
       <div class="more-options">
         <span class="more-options__text">Mais opções</span>
         <div class="more-options__card">
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/movements')">
             <IconMoney class="more-options__icon" />
             Movimentações
           </button>
@@ -59,7 +59,7 @@
             <IconSettings class="more-options__icon" />
             Configurações
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/results')">
             <IconFactCheck class="more-options__icon" />
             Resultados
           </button>
@@ -70,7 +70,7 @@
         </div>
       </div> 
     </section>
-      <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="hideModal('consultTicket')" />
+      <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="handleCloseConsultTicketModal" />
   </div>
 </template>
 
@@ -119,15 +119,11 @@ export default {
       console.log('Toggling Saldo Visibility');
       this.isSaldoVisible = !this.isSaldoVisible;
     },
-    showModal(modal) {
-      if (modal === 'consultTicket') {
-        this.isConsultTicketModalVisible = true;
-      }
+    handleOpenConsultTicketModal() {
+      this.isConsultTicketModalVisible = true;
     },
-    hideModal(modal) {
-      if (modal === 'consultTicket') {
-        this.isConsultTicketModalVisible = false;
-      }
+    handleCloseConsultTicketModal() {
+      this.isConsultTicketModalVisible = false;
     },
   }
 }
