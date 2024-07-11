@@ -161,47 +161,6 @@ export default {
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
       collapsedExits: this.initCollapsed,
-      verification: {
-        dateIni: "2024-06-01",
-        dateEnd: "2024-06-0",
-        items: [
-          {
-            title: "Entradas",
-            subItems: {
-              title: 'Total Apostado',
-              value: 2.00,
-              modalities: [
-                {
-                  name: 'futebol',
-                  value: 2.00,
-                }
-              ]
-            }
-          },
-          {
-            title: "Saídas",
-            subItems: {
-              title: 'Total Apostado',
-              value: 2.00,
-              modalities: [
-                {
-                  name: 'Comissões',
-                  value: 0.10,
-                },
-                {
-                  name: 'Prêmio',
-                  value: 0.00,
-                },
-                {
-                  name: 'Saque',
-                  value: 0.00,
-                },
-              ]
-            }
-          }  
-        ],
-
-      }
     }
   },
 
