@@ -210,7 +210,7 @@ export default {
     left: 0;
     width: 100vw; 
     height: 1px;
-    background-color: var(--color-line);
+    background-color: #7e7b7b1a;
     transform: translateX(-20px); 
   }
 
