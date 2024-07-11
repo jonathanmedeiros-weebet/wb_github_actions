@@ -6,10 +6,14 @@
         <span class="game__select">Jogos selecionados</span>
         <div class="game__delete">
           <IconDelete class="game__icon" />
-          <span class="game__text" >Excluir todos</span>
+          <span class="game__text">Excluir todos</span>
         </div>
       </div>
-      <div v-for="(team, index) in teams" :key="index" class="bet">
+      <div 
+        class="bet"
+        v-for="(team, index) in teams" 
+        :key="index" 
+      >
         <div class="bet__header">
           <span class="bet__team">
             <IconLive v-if="team.live" class="bet__icon-live"/>
@@ -29,7 +33,6 @@
           <span>{{ team.odd }}</span>
         </div>
       </div>
-      <div class="line"></div>
       <div class="finish">
         <div class="finish__cpf">
           <w-input
@@ -70,7 +73,12 @@
           <span>R$ 90,00</span>
         </div>
         <div class="cotacao__alteracao">
-          <input class="cotacao__checkbox" type="checkbox" id="accept-changes" />
+          <input
+            class="cotacao__checkbox"
+            type="checkbox"
+            id="accept-changes"
+            v-model="acceptChanges"
+          />
           <label for="accept-changes">Aceitar Alterações de odds</label>
         </div>
         <div class="cotacao__finalizar">
@@ -90,14 +98,12 @@
 
 <script>
 import Header from '@/components/layouts/Header.vue';
-import { modalityList } from '../constants/modalities.constant';
 import IconDelete from '@/components/icons/IconDelete.vue';
 import IconLive from '@/components/icons/IconLive.vue';
 import IconBall from '@/components/icons/IconBall.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
-import IconUserLine from '@/components/icons/IconUserLine.vue'
 
 export default {
   name: 'ticket',
@@ -107,19 +113,18 @@ export default {
     IconLive,
     IconBall,
     IconClose,
-    IconUserLine,
     WInput,
     WButton
   },
   data() {
     return {  
       modality: 'Bilhete',
-      modalityList: modalityList,
       teams: [
         { team_house: 'Argentino JRS', team_outside: 'Rosario Central', odd: 3.30, date: '19/03/2024', hour: '21:15', live: true, select: 'Empate' },
         { team_house: 'França', team_outside: 'Itália', odd: 3.30, date: '19/03/2024', hour: '21:15', live: false, select: 'França' },
         { team_house: 'Infinity', team_outside: 'Qhai', odd: 2.90, date: '19/03/2024', hour: '21:15', live: false, select: 'Qhali' },
-      ]
+      ],
+      acceptChanges: false,
     };
   },
   computed: {
@@ -190,7 +195,7 @@ export default {
     left: 0;
     width: 100vw; 
     height: 1px;
-    background-color: var(--color-line);
+    background-color: #7e7b7b1a;
     transform: translateX(-20px); 
   }
 
@@ -238,24 +243,10 @@ export default {
   }
 }
 
-.line {
-
-  &::after { 
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100vw; 
-    height: 1px;
-    background-color: var(--color-line);
-    transform: translateX(-20px); 
-  }
-
-}
-
 .finish {
   margin-bottom: -20px;
 }
+
 .value {
   
   &__balance-text {
@@ -279,7 +270,6 @@ export default {
     color: var(--color-text-input);
     font-size: 14px;
     border: none; 
-    
   }
 
   &__balance-input{
@@ -307,49 +297,42 @@ export default {
     font-size: 14px;
   }
 
+  &__checkbox {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--color-text-input);
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  &__checkbox:checked {
+    background-color: var(--color-primary);
+  }
+
+  &__checkbox::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    width: 5px;
+    height: 9px;
+  }
+
   &__alteracao {
-    padding-top: 5px;
     display: flex;
     align-items: center;
-    gap: 8px;
-
-    & input[type="checkbox"] {
-      appearance: none;
-      width: 15px;
-      height: 15px;
-      border: 1px solid var(--color-text-input);
-      background-color: transparent;
-      cursor: pointer;
-      border-radius: 3px;
-      position: relative;
-    }
-
-    & input[type="checkbox"]::after {
-      content: '';
-      display: block;
-      width: 10px;
-      height: 10px;
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      background-color: var(--color-primary);
-      opacity: 0;
-      border-radius: 2px;
-    }
-
-    & input[type="checkbox"]:checked::after {
-      opacity: 1;
-    }
-
+    gap: 4px;
   }
 
   &__finalizar {
-    padding-top: 16px;
+    padding: 8px;
   }
 
   &__finalizar-button {
     width: 100%;
   }
 }
-
 </style>
