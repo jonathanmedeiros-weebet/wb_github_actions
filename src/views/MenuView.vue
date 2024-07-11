@@ -29,16 +29,16 @@
         </div>
 
         <div class="wallet__shortcuts">
-          <button class="wallet__button">
-            <IconInsertChart :size="14" class="wallet__icon"/>
+          <button class="wallet__button" @click="handleNavigate('/dashboard')">
+            <IconInsertChart  class="wallet__icon"/>
             Dashboard
           </button>
-          <button class="wallet__button">
-            <IconManageSearch :size="14" class="wallet__icon" />
+          <button class="wallet__button" @click="handleOpenConsultTicketModal">
+            <IconManageSearch class="wallet__icon" />
             Consultar Bilhete
           </button>
-          <button class="wallet__button">
-            <IconFactCheck :size="14" class="wallet__icon" />
+          <button @click="handleNavigate('/reckoning')"  class="wallet__button">
+            <IconFactCheck class="wallet__icon" />
             Apuração
           </button>
         </div>
@@ -47,7 +47,7 @@
       <div class="more-options">
         <span class="more-options__text">Mais opções</span>
         <div class="more-options__card">
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/movements')">
             <IconMoney class="more-options__icon" />
             Movimentações
           </button>
@@ -59,7 +59,7 @@
             <IconSettings class="more-options__icon" />
             Configurações
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/results')">
             <IconFactCheck class="more-options__icon" />
             Resultados
           </button>
@@ -70,6 +70,7 @@
         </div>
       </div> 
     </section>
+      <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="handleCloseConsultTicketModal" />
   </div>
 </template>
 
@@ -83,11 +84,21 @@ import IconPassKey from '@/components/icons/IconPassKey.vue';
 import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
+import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
 
 export default {
+  name: 'menu',
   components: {
-    IconEye, IconEyeClose, IconMoney, IconSettings, IconLogout, 
-    IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart
+    IconEye,
+    IconEyeClose,
+    IconMoney,
+    IconSettings,
+    IconLogout,
+    IconPassKey,
+    IconFactCheck,
+    IconManageSearch,
+    IconInsertChart,
+    ModalConsultTicket
   },
   name: 'menu-view',
   data() {
@@ -96,7 +107,8 @@ export default {
       credito: "850,00",
       saldo: "18.258,00",
       isCreditoVisible: false,
-      isSaldoVisible: false
+      isSaldoVisible: false,
+      isConsultTicketModalVisible: false
     };
   },
   methods: {
@@ -113,11 +125,16 @@ export default {
     toggleSaldoVisibility() {
       console.log('Toggling Saldo Visibility');
       this.isSaldoVisible = !this.isSaldoVisible;
-    }
+    },
+    handleOpenConsultTicketModal() {
+      this.isConsultTicketModalVisible = true;
+    },
+    handleCloseConsultTicketModal() {
+      this.isConsultTicketModalVisible = false;
+    },
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 .menu {
@@ -169,7 +186,6 @@ export default {
 }
 
 .wallet {
-  
   width: 100%;
   height: auto;
   background-color: var(--color-background-input);
@@ -259,6 +275,5 @@ export default {
     font-size: 14px;
     gap: 8px;
   }
-
 }
 </style>

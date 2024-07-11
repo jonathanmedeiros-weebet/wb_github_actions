@@ -1,14 +1,18 @@
 import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
+import ValidationDetailView from '@/views/ValidationDetailView.vue'
 import ValidationView from '@/views/ValidationView.vue'
-import TicketsView from '@/views/TicketsView.vue'
-import BetsView from '@/views/BetView/BetsView.vue'
+import TicketsView from '@/views/TicketsView/TicketsView.vue'
+import BetsView from '@/views/BetsView/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
-import ResultsView from '@/views/ResultView/ResultsView.vue'
+import MovementsView from '@/views/MovementsView/MovementsView.vue'
+import ReckoningView from '@/views/ReckoningView.vue'
+import ResultsView from '@/views/ResultsView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
+import DashboardView from '@/views/DashboardView/DashboardView.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -22,6 +26,11 @@ const router = new VueRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
+    },
+    {
+      path: '/validation-detail',
+      name: 'validation-detail',
+      component: ValidationDetailView,
     },
     {
       path: '/validation',
@@ -49,6 +58,16 @@ const router = new VueRouter({
       component: ChangePasswordView,
     },
     {
+      path: '/movements',
+      name: 'movements',
+      component: MovementsView,
+    },
+    {
+      path: '/reckoning',
+      name: 'reckoning',
+      component: ReckoningView,
+    },
+    {
       path: '/results',
       name: 'results',
       component: ResultsView,
@@ -62,6 +81,11 @@ const router = new VueRouter({
       path: '/config',
       name: 'config',
       component: ConfigView,
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: DashboardView,
     },
   ]
 })

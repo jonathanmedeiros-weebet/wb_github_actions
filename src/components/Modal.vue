@@ -144,7 +144,7 @@ export default {
   }
 
   &__footer {
-      text-align: center;
+    text-align: center;
   }
 
   &__body {
