@@ -18,7 +18,7 @@
 import IconAttachMoney from '@/components/icons/IconAttachMoney.vue'; 
 
 export default {
-  name: 'MovementsItem',
+  name: 'movement-item',
   components: {
     IconAttachMoney  
   },

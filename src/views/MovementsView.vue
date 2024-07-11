@@ -1,21 +1,25 @@
 <template>
   <div class="movements">
     <Header :title="modality" :showCalendarButton="true" :showBackButton="true" />
+
     <div class="movements__container">
       <span class="date">
         {{ startDate }} - {{endDate}}
         <IconClose class="date__close" />
       </span>
+
       <div v-for="(movement, movementIndex) in dates" :key="movementIndex" class="information">
         <div class="information__text">
           <span class="information__date">{{ movement.infoDate }}</span>
         </div>
+
         <div v-for="(i, index) in movement.movements" :key="index" class="information__item">
-          <MovementsItem  
+          <MovementItem  
             :value="i.value"
             :debit="i.type"
             :date="i.date"
           />
+          
         </div>
       </div>
     </div>
@@ -24,7 +28,7 @@
 
 <script>
 import SelectFake from '../views/HomeView/parts/SelectFake.vue';
-import MovementsItem from '../views/MovementView/parts/MovementsItem.vue';
+import MovementItem from './MovementView/parts/MovementItem.vue';
 import Header from '@/components/layouts/Header.vue';
 import { modalityList } from '../constants/modalities.constant';
 import IconClose from '@/components/icons/IconClose.vue';
@@ -37,7 +41,7 @@ export default {
     SelectFake, 
     IconClose, 
     IconAttachMoney, 
-    MovementsItem 
+    MovementItem 
   },
   data() {
     return {  
@@ -77,9 +81,6 @@ export default {
 
       ]
     };
-  },
-  created() {
-    console.log(this.modalityList);
   },
   methods: {
     handleSelectModalClick() {
