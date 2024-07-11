@@ -1,6 +1,6 @@
 <template>
   <div class="ticket">
-    <Header :title="modality" :showBackButton="true" />
+    <Header :title="title" :showBackButton="true" />
     <div class="ticket__container">
       <div class="game">
         <span class="game__select">Jogos selecionados</span>
@@ -118,7 +118,7 @@ export default {
   },
   data() {
     return {  
-      modality: 'Bilhete',
+      title: 'Bilhete',
       teams: [
         { team_house: 'Argentino JRS', team_outside: 'Rosario Central', odd: 3.30, date: '19/03/2024', hour: '21:15', live: true, select: 'Empate' },
         { team_house: 'França', team_outside: 'Itália', odd: 3.30, date: '19/03/2024', hour: '21:15', live: false, select: 'França' },
