@@ -119,6 +119,15 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             }
 
+            if (params.clickId) {
+                localStorage.setItem('clickid', params.clickId);
+            } else {
+                const storagedClickId = localStorage.getItem('clickId');
+                if (storagedClickId) {
+                    this.form.patchValue({clickId: storagedClickId});
+                }
+            }
+
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
                 this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                 this.possuiCodigoAfiliado = true;
@@ -166,7 +175,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             googleIdToken: [''],
             btag: [this.route.snapshot.queryParams.btag],
             refId: [this.route.snapshot.queryParams.refId],
-            dadosCriptografados: [null]
+            dadosCriptografados: [null],
+            postback: [{ clickid: this.route.snapshot.queryParams.clickId }]
         });
     }
 
@@ -198,6 +208,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             return;
         }
         const values = this.form.value;
+        console.log(values);
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
