@@ -49,10 +49,10 @@ export default {
           {
             infoDate: 'Seg 04 de Jun de 2024',
             movements: [
-              {value: '30,00', type: 'Crédito', date: '04/06/2024',},
-              {value: '50,00', type: 'Crédito'},
-              {value: '10,00', type: 'Débito'},
-              {value: '11,00', type: 'Crédito'}
+              {value: '30,00', type: 'Crédito', date: '04/06/2024'},
+              {value: '50,00', type: 'Crédito', date: '04/06/2024'},
+              {value: '10,00', type: 'Débito', date: '04/06/2024'},
+              {value: '11,00', type: 'Crédito', date: '04/06/2024'}
             ]
           },
           {
@@ -67,7 +67,6 @@ export default {
           },
           {
             infoDate: 'Qua 06 de Jun de 2024 ',
-            date: '06/06/2024', 
             movements: [
               {value: '41,00', type: 'Débito', date: '06/06/2024', },
               {value: '13,00', type: 'Crédito', date: '06/06/2024', },
