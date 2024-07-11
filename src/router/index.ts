@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
+import ValidationDetailView from '@/views/ValidationDetailView.vue'
 import ValidationView from '@/views/ValidationView.vue'
 import TicketsView from '@/views/TicketsView.vue'
 import BetsView from '@/views/BetsView/BetsView.vue'
@@ -26,6 +27,11 @@ const router = new VueRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
+    },
+    {
+      path: '/validation-detail',
+      name: 'validation-detail',
+      component: ValidationDetailView,
     },
     {
       path: '/validation',
