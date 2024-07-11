@@ -1,95 +1,90 @@
 <template>
-  <div class="header">
-    <Header :title="modality" :showCalendarButton="true" :showSearchButton="true">
-      <SelectFake  @click="handleSelectModalClick" />
-    </Header>
-    <div class="verification">
-      <section class="verification__container">
-        <span class="date">
-          {{ date }}
-          <IconClose class="date__close" />
-        </span>
-
-        <div class="balance">
-          <div class="balance__date">
-            <span class="balance__relatory">Saldo em {{ relatory }}</span>
-            <span class="balance__value">
-              <IconAdd class="balance__add" />
-              R$ {{ value }}
-            </span>
+  <div class="reckoning">
+    <Header 
+      :title="title" 
+      :showCalendarButton="true" 
+      :showBackButton="true" 
+    />
+    <div class="reckoning__container">
+      <span class="date">
+        {{ date }}
+        <IconClose class="date__close" />
+      </span>
+      <div class="balance">
+        <div class="balance__date">
+          <span class="balance__relatory">Saldo em {{ relatory }}</span>
+          <span class="balance__value">
+            <IconAdd class="balance__add" />
+            R$ {{ value }}
+          </span>
+        </div>
+      </div>
+      <div class="collapse" @click="toggleCollapse('input', $event)">
+        <div class="collapse__item">
+          <component :is="iconArrowDinamicInputs" />
+          <span class="collapse__title">Entradas</span>
+          <div class="collapse__value">
+            <IconAdd class="collapse__icon" />
+            R$ 2,00
           </div>
         </div>
-
-        <div class="collapse" @click="toggleCollapse('input', $event)">
-          <div class="collapse__item">
-            <component :is="iconArrowDinamicInputs" />
-            <span class="collapse__title">Entradas</span>
-            <div class="collapse__value">
-              <IconAdd class="collapse__icon" />
-                R$ 2,00
-            </div>
-          </div>
-
-          <div v-if="collapsedInputs" class="collapse__content">
-            <div class="collapse__section">
-              <div class="collapse" @click="toggleCollapse('bet', $event)">
-                <div class="collapse__item">
-                  <component class="collapse__icon-arrow" :is="iconArrowDinamicBet" />
-                  <span class="collapse__title">Total Apostado:</span>
-                  <div class="collapse__icon-wrapper">
-                    <IconAdd class="collapse__icon-add" />
-                    <span>R$ {{ totalApostado }}</span>
-                  </div>
-                </div>
-                <div v-if="collapsedBet" class="collapse__section-result">
-                  <span>Futebol</span>
+        <div v-if="collapsedInputs" class="collapse__content">
+          <div class="collapse__section">
+            <div class="collapse" @click="toggleCollapse('bet', $event)">
+              <div class="collapse__item">
+                <component class="collapse__icon-arrow" :is="iconArrowDinamicBet" />
+                <span class="collapse__title">Total Apostado:</span>
+                <div class="collapse__icon-wrapper">
+                  <IconAdd class="collapse__icon-add" />
+                  <span>R$ {{ totalApostado }}</span>
                 </div>
               </div>
-
-              <div class="collapse__section-item">
-                <span class="collapse__section-text">Recargas de Cartão:</span>
-                <span class="collapse__value-right">R$ {{ recargasCartao }}</span>
+              <div v-if="collapsedBet" class="collapse__section-result">
+                <span>Futebol</span>
               </div>
-              <div class="collapse__line"></div>
             </div>
+            <div class="collapse__section-item">
+              <span class="collapse__section-text">Recargas de Cartão:</span>
+              <span class="collapse__value-right">R$ {{ recargasCartao }}</span>
+            </div>
+            <div class="collapse__line"></div>
           </div>
         </div>
-
-        <div class="collapse" @click="toggleCollapse('exit')">
-          <div class="collapse__item">
-            <component :is="iconArrowDinamicExits" />
-            <span class="collapse__title">Saídas</span>
-            <div class="collapse__value">
-              <IconRemove class="collapse__icon-remove" />
-              <span class="collapse__balance">R$ 2,00</span>
-            </div>
-          </div>
-
-          <div v-if="collapsedExits" class="collapse__content">
-            <div class="collapse__section">
-              <div class="collapse__section-item">
-                <span>Comissões</span>
-                <span class="collapse__value-right">R$ {{ comissao }}</span>
-              </div>
-              <div class="collapse__section-item">
-                <span>Prêmio</span>
-                <span class="collapse__value-right">R$ {{ premio }}</span>
-              </div>
-              <div class="collapse__section-item">
-                <span>Saque</span>
-                <span class="collapse__value-right">R$ {{ Saque }}</span>
-              </div>
-              <div class="collapse__line"></div>
-            </div>
+      </div>
+      <div class="collapse" @click="toggleCollapse('exit')">
+        <div class="collapse__item">
+          <component :is="iconArrowDinamicExits" />
+          <span class="collapse__title">Saídas</span>
+          <div class="collapse__value">
+            <IconRemove class="collapse__icon-remove" />
+            <span class="collapse__balance">R$ 2,00</span>
           </div>
         </div>
-        <div class="result">
-          <span>Resultado 01/06 à 06/06</span>
-          <div class="result__date">
-            <span class="result__value">R$1,90</span>
+        <div v-if="collapsedExits" class="collapse__content">
+          <div class="collapse__section">
+            <div class="collapse__section-item">
+              <span>Comissões</span>
+              <span class="collapse__value-right">R$ {{ comissao }}</span>
+            </div>
+            <div class="collapse__section-item">
+              <span>Prêmio</span>
+              <span class="collapse__value-right">R$ {{ premio }}</span>
+            </div>
+            <div class="collapse__section-item">
+              <span>Saque</span>
+              <span class="collapse__value-right">R$ {{ Saque }}</span>
+            </div>
+            <div class="collapse__line"></div>
           </div>
         </div>
-        <div class="collapse__line"></div>
+      </div>
+      <div class="result">
+        <span>Resultado 01/06 à 06/06</span>
+        <div class="result__date">
+          <span class="result__value">R$1,90</span>
+        </div>
+      </div>
+      <div class="collapse__line"></div>
         <div class="credit">
           <span>Créditos</span>
           <div class="credit__date">
@@ -102,23 +97,22 @@
           <span>Débitos</span>
           <div class="debit__date">
             <IconRemove class="debit__icon" />
-            <span class="debit__value">R$0,00</span>
+            <span class="debit__value">R$ 5,00</span>
           </div>
         </div>
         <div class="collapse__line"></div>
         <div class="balance">
           <span>Saldo</span>
           <div class="balance__date">
-            <span class="balance__value">R$0,00</span>
+            <span class="balance__value">R$ 2,00</span>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
   </div>
 </template>
 
 <script>
-import SelectFake from '../views/HomeView/parts/SelectFake.vue'
+import SelectFake from './HomeView/parts/SelectFake.vue'
 import Header from '@/components/layouts/Header.vue'
 import { modalityList } from '../constants/modalities.constant'
 import IconClose from '@/components/icons/IconClose.vue'
@@ -128,7 +122,7 @@ import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 
 export default {
-  name: 'verification',
+  name: 'reckoning',
   components: {
     Header,
     SelectFake,
@@ -148,7 +142,7 @@ export default {
 
   data() {
     return {
-      modality: 'Apuração',
+      title: 'Apuração',
       date: "01/06/2024 - 06/06/2024",
       relatory: '31/05',
       value: '0,00',
@@ -196,7 +190,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.verification {
+
+.reckoning {
   color: #ffffff;
   height: auto;
   width: 100%;
@@ -223,7 +218,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  
   &__close {
     cursor: pointer;
   }
