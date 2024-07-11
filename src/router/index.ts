@@ -7,8 +7,10 @@ import BetsView from '@/views/BetView/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import ReckoningView from '@/views/ReckoningView.vue'
+import ResultsView from '@/views/ResultView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
+import DashboardView from '@/views/Dashboard/DashboardView.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -54,6 +56,11 @@ const router = new VueRouter({
       component: ReckoningView,
     },
     {
+      path: '/results',
+      name: 'results',
+      component: ResultsView,
+    },
+    {
       path: '/game-detail',
       name: 'game-detail',
       component: GameDetailView,
@@ -62,6 +69,11 @@ const router = new VueRouter({
       path: '/config',
       name: 'config',
       component: ConfigView,
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: DashboardView,
     },
   ]
 })
