@@ -1,7 +1,7 @@
 <template>
-  <div class="ticket">
+  <div class="tickets">
     <Header :title="title" :showBackButton="true" />
-    <div class="ticket__container">
+    <div class="tickets__container">
       <div class="game">
         <span class="game__select">Jogos selecionados</span>
         <div class="game__delete">
@@ -38,7 +38,7 @@
           <w-input
             label="Apostador"
             class="finish__input"
-            name="ticket_cpf"
+            name="tickets_cpf"
             placeholder="Informe o cpf do apostador"
             type="text"
           />
@@ -106,7 +106,7 @@ import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 
 export default {
-  name: 'ticket',
+  name: 'tickets',
   components: { 
     Header, 
     IconDelete,
@@ -136,8 +136,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ticket {
-
+.tickets {
   &__container {
     display: flex;
     flex-direction: column;
@@ -145,6 +144,7 @@ export default {
     margin: 0;
     padding: 0 20px;
     min-height: 100%;
+    padding-bottom: 100px;
   }
 }
 
@@ -283,8 +283,6 @@ export default {
 }
 
 .cotacao {
-  padding: 8px;
-
   &__value {
     display: flex;
     justify-content: space-between;
@@ -328,7 +326,7 @@ export default {
   }
 
   &__finalizar {
-    padding: 8px;
+    padding: 8px 0;
   }
 
   &__finalizar-button {

@@ -3,13 +3,12 @@ import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
 import ValidationDetailView from '@/views/ValidationDetailView.vue'
 import ValidationView from '@/views/ValidationView.vue'
-import TicketsView from '@/views/TicketsView.vue'
+import TicketsView from '@/views/TicketsView/TicketsView.vue'
 import BetsView from '@/views/BetsView/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import MovementsView from '@/views/MovementsView/MovementsView.vue'
 import ReckoningView from '@/views/ReckoningView.vue'
-import TicketView from '@/views/TicketView/TicketView.vue'
 import ResultsView from '@/views/ResultsView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
@@ -67,11 +66,6 @@ const router = new VueRouter({
       path: '/reckoning',
       name: 'reckoning',
       component: ReckoningView,
-    },
-    {
-      path: '/ticket',
-      name: 'ticket',
-      component: TicketView,
     },
     {
       path: '/results',

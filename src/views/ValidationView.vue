@@ -16,6 +16,7 @@
         text="Consultar"
         value="salvar"
         name="btn-salvar"
+        @click="handleSearch"
       />
     </div>
   </div>
@@ -32,6 +33,11 @@ export default {
   data(){
     return {
       title: 'Validar Aposta',
+    }
+  },
+  methods: {
+    handleSearch() {
+      this.$router.push('/validation-detail')
     }
   }
 }
