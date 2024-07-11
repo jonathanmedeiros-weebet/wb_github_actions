@@ -1,19 +1,28 @@
 <template>
   <div class="movements">
-    <Header :title="modality" :showCalendarButton="true" :showBackButton="true" />
-
+    <Header 
+      :title="title" 
+      :showCalendarButton="true" 
+      :showBackButton="true" 
+    />
     <div class="movements__container">
       <span class="date">
         {{ startDate }} - {{endDate}}
         <IconClose class="date__close" />
       </span>
-
-      <div v-for="(movement, movementIndex) in dates" :key="movementIndex" class="information">
+      <div 
+        class="information"
+        v-for="(movement, movementIndex) in dates" 
+        :key="movementIndex" 
+      >
         <div class="information__text">
           <span class="information__date">{{ movement.infoDate }}</span>
         </div>
-
-        <div v-for="(i, index) in movement.movements" :key="index" class="information__item">
+        <div 
+          class="information__item"
+          v-for="(i, index) in movement.movements" 
+          :key="index" 
+        >
           <MovementItem  
             :value="i.value"
             :debit="i.type"
@@ -47,7 +56,7 @@ export default {
     return {  
       startDate: '04/06/2024',
       endDate: '06/06/2024',
-      modality: 'Movimentações',
+      title: 'Movimentações',
       modalityList: modalityList,
       dates: [
           {
