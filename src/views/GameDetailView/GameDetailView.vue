@@ -15,26 +15,9 @@
                     {{ title }}
                 </button>
             </div>
-            <Collapse
-                :initCollapsed="true"
-                v-for="(option, index) in options"
-                :key="index"
-            > 
-                <template #title>{{ option.name }}</template>
 
-                <div class="collapse__options" :class="{'collapse__options--grid': option.odds.length > 3}">
-                    <button
-                        class="collapse__option"
-                        v-for="(odd, oddIndex) in option.odds"
-                        :key="`${oddIndex}-${index}`"
-                        :class="{'collapse__option--selected': oddIndex === 0}"
-                        @click="handleItemClick(odd)"
-                    >
-                        <span class="collapse__label">{{ odd.label }}</span>
-                        <span class="collapse__value">{{ odd.value }}</span>
-                    </button>
-                </div>
-            </Collapse>
+            <TimeQuotes v-if="!filteredPerPlayer" :quotes="options"/>
+            <PlayerQuotes v-if="filteredPerPlayer" :quotes="options"/>
         </div>
     </div>
 </template>
@@ -47,9 +30,18 @@ import Collapse from '@/components/Collapse.vue'
 import Button from '@/components/Button.vue'
 import { getGame } from '@/services'
 import { useConfigClient } from '@/stores'
+import TimeQuotes from './parts/TimeQuotes.vue'
+import PlayerQuotes from './parts/PlayerQuotes.vue'
 
 export default {
-  components: { Header, GameDetailHeader, Collapse, Button },
+    components: {
+        Header,
+        GameDetailHeader,
+        Collapse,
+        Button,
+        TimeQuotes,
+        PlayerQuotes
+    },
     name: 'game-detail',
     data() {
         return {
@@ -78,6 +70,9 @@ export default {
         });
     },
     computed: {
+        filteredPerPlayer() {
+            return this.filterSelected == MarketTime.PLAYERS;
+        },
         gameHeaderType() {
             return this.headerFixed ? 'slim' : 'normal'
         },
@@ -150,19 +145,82 @@ export default {
                 });
             }
 
+            console.log(markets[MarketTime.PLAYERS])
+
             this.markets[MarketTime.FULL_TIME] = Object.values(markets[MarketTime.FULL_TIME]);
             this.markets[MarketTime.FIRST_TIME] = Object.values(markets[MarketTime.FIRST_TIME]);
             this.markets[MarketTime.SECOND_TIME] = Object.values(markets[MarketTime.SECOND_TIME]);
-            this.markets[MarketTime.PLAYERS] = Object.values(markets[MarketTime.PLAYERS]);
+            this.markets[MarketTime.PLAYERS] = this.preparePlayerQuotes(Object.values(markets[MarketTime.PLAYERS]));
+        },
+        preparePlayerQuotes(quotes) {
+            const playerQuotes = [];
+            for (const quote of quotes) {
+                console.log(quote)
+                
+                // mercados[chave].odds.forEach((odd) => {
+                //     const casaFora = chave.includes('casa') ? 'casa' : chave.includes('fora') ? 'fora' : null;
+                //     let chaveJogador = null;
 
-            console.log(this.options)
+                //     const verificacaoJogador = jogadoresMercados.some((item, key) => {
+                //         chaveJogador = key;
+                //         return item.nome === odd.nome;
+                //     });
+
+                //     if (!verificacaoJogador) {
+                //         const temp = {
+                //             nome: odd.nome,
+                //             m_gols: {},
+                //             m_marcadores: {},
+                //             m_cartoes: {},
+                //             m_gols_casa: {},
+                //             m_gols_fora: {},
+                //             casa_fora: casaFora
+                //         };
+                //         jogadoresMercados.push(temp);
+                //     } else {
+                //         if (!jogadoresMercados[chaveJogador].casa_fora) {
+                //             jogadoresMercados[chaveJogador].casa_fora = casaFora;
+                //         }
+                //     }
+                // });
+            }
+
+            // jogadoresMercados.forEach((jogador) => {
+            //     const mercadosJogador = {};
+            //     for (const chave in mercados) {
+            //         const mercadoTemp = mercados[chave].odds.filter((odd) => {
+            //             return (odd.nome === jogador.nome && odd.nome !== 'No Bookings');
+            //         });
+
+            //         mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : {};
+            //     }
+
+            //     jogador['m_gols']['jogador_marca_primeiro'] = this.checkEmpty(mercadosJogador['jogador_marca_primeiro']);
+            //     jogador['m_gols']['jogador_marca_ultimo'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo']);
+            //     jogador['m_gols']['jogador_marca_qualquer_momento'] = this.checkEmpty(mercadosJogador['jogador_marca_qualquer_momento']);
+
+            //     jogador['m_marcadores']['jogador_marca_2_ou_mais_gols'] = this.checkEmpty(mercadosJogador['jogador_marca_2_ou_mais_gols']);
+            //     jogador['m_marcadores']['jogador_marca_3_ou_mais_gols'] = this.checkEmpty(mercadosJogador['jogador_marca_3_ou_mais_gols']);
+
+            //     jogador['m_cartoes']['jogador_recebera_primeiro_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_primeiro_cartao']);
+            //     jogador['m_cartoes']['jogador_recebera_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_cartao']);
+            //     jogador['m_cartoes']['jogador_sera_expulso'] = this.checkEmpty(mercadosJogador['jogador_sera_expulso']);
+
+            //     if (jogador.casa_fora === 'casa') {
+            //         jogador['m_gols_casa']['jogador_marca_1st_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_casa']);
+            //         jogador['m_gols_casa']['jogador_marca_ultimo_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_casa']);
+            //     }
+
+            //     if (jogador.casa_fora === 'fora') {
+            //         jogador['m_gols_fora']['jogador_marca_1st_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_fora']);
+            //         jogador['m_gols_fora']['jogador_marca_ultimo_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_fora']);
+            //     }
+            // });
+
+            return quotes;
         },
         handleGameFilter(filter) {
             this.filterSelected = filter
-        },
-        handleItemClick(odd) {
-            console.log(odd);
-            event.stopPropagation();
         },
     }
 }
@@ -218,70 +276,4 @@ export default {
         }
     }
 }
-
-.collapse {
-    &__options {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 10px;
-
-        padding: 13px 16px;
-
-        background: var(--color-background-input);
-
-        &--grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-    }
-
-    &__option {
-        height: 54px;
-        width: 100%;
-        background: var(--color-background);
-        border: none;
-        border-radius: 4px;
-        padding: 9px 15px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 7px;
-
-        &--selected {
-            background: var(--color-primary);
-        }
-    }
-
-    &__option--selected &__label,
-    &__option--selected &__value {
-        color: #000;
-    }
-
-    &__label {
-        overflow: hidden;
-        color: #f2f2f280;
-        text-overflow: ellipsis;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
-
-    &__value {
-        color: var(--color-text);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-    }
-}
-
-::v-deep .collapse__item {
-    background: var(--color-background);
-    padding: 13px 24px;
-}
-
 </style>

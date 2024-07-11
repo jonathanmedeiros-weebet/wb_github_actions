@@ -6,7 +6,7 @@
                 v-for="(team, index) in teams"
                 :key="index"
             >
-                <img :src="team.image">
+                <img :src="team.image" @error="changeSrcWhenImageError" />
                 {{ team.name }}
             </span>
             <span class="game__info">
@@ -73,6 +73,9 @@ export default {
 
             event.stopPropagation();
         },
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        }
     }
 }
 </script>

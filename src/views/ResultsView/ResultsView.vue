@@ -48,7 +48,7 @@
           :key="championshipListIndex"
         >
           <template #title>
-            <img :src="image" />
+            <img :src="image" @error="changeSrcWhenImageError" />
             {{ title }}
           </template>
 
@@ -134,6 +134,9 @@ export default {
     isCurrentDay(day) {
         return day.format('YYYY-MM-DD') === this.activeDay;
     },
+    changeSrcWhenImageError (event) {
+      event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+    }
   },
   mounted() {
     this.$nextTick(() => {

@@ -20,11 +20,11 @@
 
                     <div class="game-detail-header__teams game-detail-header__teams--slim" v-if="isHeaderSlim">
                         <div class="team">
-                            <img class="team__image" :src="teamA.image">
+                            <img class="team__image" :src="teamA.image" @error="changeSrcWhenImageError">
                         </div>
                         <span class="team__versus">X</span>
                         <div class="team">
-                            <img class="team__image" :src="teamB.image">
+                            <img class="team__image" :src="teamB.image" @error="changeSrcWhenImageError">
                         </div>
                     </div>
 
@@ -32,12 +32,12 @@
 
                 <div class="game-detail-header__teams" v-if="isHeaderNormal">
                     <div class="team">
-                        <img class="team__image" :src="teamA.image">
+                        <img class="team__image" :src="teamA.image" @error="changeSrcWhenImageError">
                         <span class="team__name">{{ teamA.name }}</span>
                     </div>
                     <span class="team__versus">X</span>
                     <div class="team">
-                        <img class="team__image" :src="teamB.image">
+                        <img class="team__image" :src="teamB.image" @error="changeSrcWhenImageError">
                         <span class="team__name">{{ teamB.name }}</span>
                     </div>
                 </div>
@@ -92,6 +92,11 @@ export default {
             }
         },
     },
+    methods: {
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        }
+    }
 }
 </script>
 

@@ -19,14 +19,13 @@ export default {
     showTabs() {
       return ![
         '/',
-        '/login',
         '/change-password',
         '/game-detail',
         '/config',
       ].includes(this.$route.path)
     },
     showCopyright() {
-      return ['/login'].includes(this.$route.path)
+      return ['/'].includes(this.$route.path)
     }
   }
 }

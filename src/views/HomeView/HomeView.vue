@@ -14,7 +14,7 @@
         titleSize="medium"
         @click="handleOpenLeaguesModal"
       >
-        <img v-if="league.image" :src="league.image">
+        <img v-if="league.image" :src="league.image"  @error="changeSrcWhenImageError">
         <span>{{ league.title }}</span>
       </SelectFake>
 
@@ -164,6 +164,9 @@ export default {
     },
     handleSearch(gameId) {
       console.log(gameId)
+    },
+    changeSrcWhenImageError (event) {
+      event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
     }
   }
 }

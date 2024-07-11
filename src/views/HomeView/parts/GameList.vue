@@ -7,7 +7,11 @@
             :key="index"
         >
             <template #title>
-                <img v-if="championship.image" :src="championship.image" />
+                <img
+                    v-if="championship.image"
+                    :src="championship.image"
+                    @error="changeSrcWhenImageError"
+                />
                 <component v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
                 {{ championship.nome }}
             </template>
@@ -61,6 +65,9 @@ export default {
         handleClick(game) {
             this.$emit('click', game);
         },
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        }
     }
 }
 </script>
