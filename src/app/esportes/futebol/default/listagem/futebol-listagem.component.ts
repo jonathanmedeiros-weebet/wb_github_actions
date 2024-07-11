@@ -28,6 +28,7 @@ import * as moment from 'moment';
 import 'moment/min/locales';
 
 import { TranslateService } from '@ngx-translate/core';
+import { has } from 'lodash';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -92,6 +93,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     diaHojeMaisQuatroStr;
 
     tabSelected;
+
+    hasFeaturedMatches = true;
 
     @HostListener('window:resize', ['$event'])
     onResize() {
@@ -718,5 +721,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.diaHojeMaisDoisStr = this.diaHojeMaisDois.format(this.mobileScreen ? 'ddd' : 'dddd');
         this.diaHojeMaisTresStr = this.diaHojeMaisTres.format(this.mobileScreen ? 'ddd' : 'dddd');
         this.diaHojeMaisQuatroStr = this.diaHojeMaisQuatro.format(this.mobileScreen ? 'ddd' : 'dddd');
+    }
+
+    changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
+        this.hasFeaturedMatches = hasFeaturedMatches;
     }
 }
