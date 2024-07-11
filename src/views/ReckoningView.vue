@@ -1,7 +1,11 @@
 <template>
-  <div class="calculation">
-    <Header :title="modality" :showCalendarButton="true" :showBackButton="true" />
-    <div class="calculation__container">
+  <div class="reckoning">
+    <Header 
+      :title="title" 
+      :showCalendarButton="true" 
+      :showBackButton="true" 
+    />
+    <div class="reckoning__container">
       <span class="date">
         {{ date }}
         <IconClose class="date__close" />
@@ -15,7 +19,6 @@
           </span>
         </div>
       </div>
-
       <div class="collapse" @click="toggleCollapse('input', $event)">
         <div class="collapse__item">
           <component :is="iconArrowDinamicInputs" />
@@ -25,7 +28,6 @@
             R$ 2,00
           </div>
         </div>
-
         <div v-if="collapsedInputs" class="collapse__content">
           <div class="collapse__section">
             <div class="collapse" @click="toggleCollapse('bet', $event)">
@@ -41,7 +43,6 @@
                 <span>Futebol</span>
               </div>
             </div>
-
             <div class="collapse__section-item">
               <span class="collapse__section-text">Recargas de Cartão:</span>
               <span class="collapse__value-right">R$ {{ recargasCartao }}</span>
@@ -50,7 +51,6 @@
           </div>
         </div>
       </div>
-
       <div class="collapse" @click="toggleCollapse('exit')">
         <div class="collapse__item">
           <component :is="iconArrowDinamicExits" />
@@ -60,7 +60,6 @@
             <span class="collapse__balance">R$ 2,00</span>
           </div>
         </div>
-
         <div v-if="collapsedExits" class="collapse__content">
           <div class="collapse__section">
             <div class="collapse__section-item">
@@ -79,7 +78,6 @@
           </div>
         </div>
       </div>
-
       <div class="result">
         <span>Resultado 01/06 à 06/06</span>
         <div class="result__date">
@@ -94,7 +92,6 @@
             <span class="credit__value">R$0,00</span>
           </div>
         </div>
-
         <div class="collapse__line"></div>
         <div class="debit">
           <span>Débitos</span>
@@ -103,7 +100,6 @@
             <span class="debit__value">R$ 5,00</span>
           </div>
         </div>
-
         <div class="collapse__line"></div>
         <div class="balance">
           <span>Saldo</span>
@@ -146,7 +142,7 @@ export default {
 
   data() {
     return {
-      modality: 'Apuração',
+      title: 'Apuração',
       date: "01/06/2024 - 06/06/2024",
       relatory: '31/05',
       value: '0,00',
@@ -159,37 +155,6 @@ export default {
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
       collapsedExits: this.initCollapsed,
-      calculation: {
-        startDate: "01/06/2024",
-        endDate: "06/06/2024",
-        summary: {
-          inputs: {
-            name: 'Entradas',
-            value: 1,
-            items: [
-              {
-                name: 'Total apostado',
-                value: 2,
-                subitems: []
-              },
-              {
-                name: 'recargas',
-                value: 0,
-              }
-            ]
-          },
-          outputs: [
-          ],
-          results: {
-            startDate: '',
-            endDate: '',
-            value: 1
-          },
-          credit: 5,
-          debit: 0,
-          balance: 0
-        },
-      }
     }
   },
 
@@ -226,7 +191,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.calculation {
+.reckoning {
   color: #ffffff;
   height: auto;
   width: 100%;
