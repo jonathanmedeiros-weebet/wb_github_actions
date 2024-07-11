@@ -30,15 +30,15 @@
 
         <div class="wallet__shortcuts">
           <button class="wallet__button">
-            <IconInsertChart :size="14" class="wallet__icon"/>
+            <IconInsertChart  class="wallet__icon"/>
             Dashboard
           </button>
           <button class="wallet__button" @click="showModal('consultTicket')">
-            <IconManageSearch :size="14" class="wallet__icon" />
+            <IconManageSearch class="wallet__icon" />
             Consultar Bilhete
           </button>
-          <button class="wallet__button">
-            <IconFactCheck :size="14" class="wallet__icon" />
+          <button @click="handleNavigate('/reckoning')"  class="wallet__button">
+            <IconFactCheck class="wallet__icon" />
             Apuração
           </button>
         </div>
@@ -51,11 +51,11 @@
             <IconMoney class="more-options__icon" />
             Movimentações
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/change-password')">
             <IconPassKey class="more-options__icon" />
             Alterar senha
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/config')">
             <IconSettings class="more-options__icon" />
             Configurações
           </button>
@@ -63,7 +63,7 @@
             <IconFactCheck class="more-options__icon" />
             Resultados
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleLogout">
             <IconLogout class="more-options__icon" />
             Sair
           </button>
@@ -73,6 +73,7 @@
       <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="hideModal('consultTicket')" />
   </div>
 </template>
+
 
 <script>
 import IconEye from '@/components/icons/IconEye.vue';
@@ -87,6 +88,7 @@ import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketView/parts/ModalConsultTicket.vue';
 
 export default {
+  name: 'menu',
   components: {
     IconEye, IconEyeClose, IconMoney, IconSettings, IconLogout, 
     IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart, ModalConsultTicket
@@ -103,6 +105,12 @@ export default {
     };
   },
   methods: {
+    handleLogout(){
+      this.$router.replace('/');
+    },
+    handleNavigate(route) {
+      this.$router.push(route);
+    },
     toggleCreditoVisibility() {
       console.log('Toggling Credito Visibility');
       this.isCreditoVisible = !this.isCreditoVisible;
@@ -120,7 +128,7 @@ export default {
       if (modal === 'consultTicket') {
         this.isConsultTicketModalVisible = false;
       }
-    }
+    },
   }
 }
 
