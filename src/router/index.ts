@@ -6,6 +6,7 @@ import TicketsView from '@/views/TicketsView.vue'
 import BetsView from '@/views/BetView/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
+import ReckoningView from '@/views/ReckoningView.vue'
 import TicketView from '@/views/TicketView.vue'
 import ResultsView from '@/views/ResultView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
@@ -49,6 +50,11 @@ const router = new VueRouter({
       path: '/change-password',
       name: 'change-password',
       component: ChangePasswordView,
+    },
+    {
+      path: '/reckoning',
+      name: 'reckoning',
+      component: ReckoningView,
     },
     {
       path: '/ticket',
