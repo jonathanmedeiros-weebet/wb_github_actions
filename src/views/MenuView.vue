@@ -51,11 +51,11 @@
             <IconMoney class="more-options__icon" />
             Movimentações
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/change-password')">
             <IconPassKey class="more-options__icon" />
             Alterar senha
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/config')">
             <IconSettings class="more-options__icon" />
             Configurações
           </button>
@@ -63,7 +63,7 @@
             <IconFactCheck class="more-options__icon" />
             Resultados
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleLogout">
             <IconLogout class="more-options__icon" />
             Sair
           </button>
@@ -100,6 +100,12 @@ export default {
     };
   },
   methods: {
+    handleLogout(){
+      this.$router.replace('/');
+    },
+    handleNavigate(route) {
+      this.$router.push(route);
+    },
     toggleCreditoVisibility() {
       console.log('Toggling Credito Visibility');
       this.isCreditoVisible = !this.isCreditoVisible;
