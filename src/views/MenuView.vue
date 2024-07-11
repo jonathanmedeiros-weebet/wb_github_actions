@@ -84,7 +84,7 @@ import IconPassKey from '@/components/icons/IconPassKey.vue';
 import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
-import ModalConsultTicket from './MenuView/parts/ModalConsultTicket.vue';
+import ModalConsultTicket from './TicketView/parts/ModalConsultTicket.vue';
 
 export default {
   components: {
