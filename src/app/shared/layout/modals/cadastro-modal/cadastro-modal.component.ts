@@ -16,6 +16,7 @@ import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-m
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
+import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -55,6 +56,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private clientesService: ClienteService,
         private fb: UntypedFormBuilder,
         private apostaService: ApostaService,
+        private campanhaService: CampanhaAfiliadoService,
         private messageService: MessageService,
         private auth: AuthService,
         private route: ActivatedRoute,
@@ -119,6 +121,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             }
 
+            if (params.c) {
+                this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
+
+                localStorage.setItem('campRef', params.c);
+                localStorage.setItem('campFonte', params.s);
+            } else {
+                const campRef = localStorage.getItem('campRef');
+                const campFonte = localStorage.getItem('campFonte');
+
+                if (campRef) {
+                    this.form.patchValue({campRef: campRef, campFonte: campFonte});
+                }
+            }
+
             if (params.clickId) {
                 localStorage.setItem('clickid', params.clickId);
             } else {
@@ -175,6 +191,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             googleIdToken: [''],
             btag: [this.route.snapshot.queryParams.btag],
             refId: [this.route.snapshot.queryParams.refId],
+            campRef: [this.route.snapshot.queryParams.c],
+            campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null],
             postback: [{ clickid: this.route.snapshot.queryParams.clickId }]
         });

@@ -88,7 +88,7 @@
                     <ng-container *ngFor="let aposta of apostas">
                         <tr class="{{ classNameAposta(aposta) }} mobile-tds">
                             <td class="codigo">{{ aposta.codigo }}</td>
-                            <td *ngIf="tabSelected === 'cassino'">{{ aposta.game | formatarNomeJogoCassino }}</td>
+                            <td *ngIf="tabSelected === 'cassino'">{{ aposta.game}}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td *ngIf="tabSelected === 'cassino'">{{ aposta.premio | currency }}</td>
                             <td *ngIf="tabSelected !== 'cassino'" class="acoes-aposta">

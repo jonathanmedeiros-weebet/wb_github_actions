@@ -1,5 +1,5 @@
-<div class="mobile-modal-header margin-10" *ngIf="mobileScreen">
-    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+<div class="mobile-modal-header margin-10" *ngIf="isMobile">
+    <a (click)="toClose()" class="botao-esquerdo">
         <i class="fa fa-arrow-left"></i>
     </a>
     <div class="titulo">{{'geral.alterarSenha' | translate}}</div>
@@ -14,23 +14,47 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="fields">
                     <div class="form-group input-md">
-                        <input [type]="mostrarSenhaAtual ? 'text' : 'password'" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
+                        <input
+                            [type]="mostrarSenhaAtual ? 'text' : 'password'"
+                            formControlName="senha_atual"
+                            class="form-control inverted-out"
+                        >
                         <label>{{'senhas.senhaAtual' | translate}}</label>
-                        <i class="fa showPassword" [ngClass]="mostrarSenhaAtual ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaAtual = !mostrarSenhaAtual"></i>
+                        <i
+                            class="fa showPassword"
+                            [ngClass]="mostrarSenhaAtual ? 'fa-eye-slash' : 'fa-eye'"
+                            (click)="mostrarSenhaAtual = !mostrarSenhaAtual"
+                        ></i>
                     </div>
                     <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
 
                     <div class="form-group input-md">
-                        <input [type]="mostrarSenhaNova ? 'text' : 'password'" placeholder=" " formControlName="senha_nova" class="form-control inverted-out">
+                        <input
+                            [type]="mostrarSenhaNova ? 'text' : 'password'"
+                            formControlName="senha_nova"
+                            class="form-control inverted-out"
+                        >
                         <label>{{'senhas.novaSenha' | translate}}</label>
-                        <i class="fa showPassword" [ngClass]="mostrarSenhaNova ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaNova = !mostrarSenhaNova"></i>
+                        <i
+                            class="fa showPassword"
+                            [ngClass]="mostrarSenhaNova ? 'fa-eye-slash' : 'fa-eye'"
+                            (click)="mostrarSenhaNova = !mostrarSenhaNova"
+                        ></i>
                     </div>
                     <app-error-msg [control]="form.get('senha_nova')"></app-error-msg>
 
                     <div class="form-group input-md">
-                        <input [type]="mostrarSenhaConfirmacao ? 'text' : 'password'" placeholder=" " formControlName="senha_confirmacao" class="form-control inverted-out">
+                        <input
+                            [type]="mostrarSenhaConfirmacao ? 'text' : 'password'"
+                            formControlName="senha_confirmacao"
+                            class="form-control inverted-out"
+                        >
                         <label>{{'senhas.confirmarNovaSenha' | translate}}</label>
-                        <i class="fa showPassword" [ngClass]="mostrarSenhaConfirmacao ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenhaConfirmacao = !mostrarSenhaConfirmacao"></i>
+                        <i
+                            class="fa showPassword"
+                            [ngClass]="mostrarSenhaConfirmacao ? 'fa-eye-slash' : 'fa-eye'"
+                            (click)="mostrarSenhaConfirmacao = !mostrarSenhaConfirmacao"
+                        ></i>
                     </div>
                     <app-error-msg [control]="form.get('senha_confirmacao')"></app-error-msg>
                 </div>
@@ -40,7 +64,6 @@
                         {{'geral.atualizar' | translate}}
                     </button>
                 </div>
-
             </form>
         </div>
     </ng-container>

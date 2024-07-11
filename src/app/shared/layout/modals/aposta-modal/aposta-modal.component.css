@@ -17,6 +17,7 @@
 
 @media only screen and (max-width: 532px) {
     .modal-header .info-horario,
+    .modal-header .computado,
     .modal-header .modal-esportes-title {
         display: none;
     }

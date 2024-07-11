@@ -140,7 +140,7 @@
                                 <div class="form-group">
                                     <select formControlName="estado" type="text" class="form-control inverted-out"
                                         (change)="getCidades($event)">
-                                        <option value="0">{{'geral.selecione' | translate}}</option>
+                                        <option value="">{{'geral.selecione' | translate}}</option>
                                         <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}
                                         </option>
                                     </select>
@@ -155,7 +155,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <select formControlName="cidade" class="form-control inverted-out">
-                                        <option value="0">{{'geral.selecioneACidade' | translate}}</option>
+                                        <option value="">{{'geral.selecioneACidade' | translate}}</option>
                                         <option *ngFor="let cidade of cidades" [value]="cidade.id"
                                             [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
                                     </select>

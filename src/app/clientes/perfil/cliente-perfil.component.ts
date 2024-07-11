@@ -9,8 +9,11 @@ import {UtilsService} from '../../shared/services/utils/utils.service';
 import {Endereco} from '../../shared/models/endereco/endereco';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
-import { AuthService, SidebarService } from 'src/app/services';
+import { AuthService, ParametrosLocaisService, SidebarService } from 'src/app/services';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { MultifactorConfirmationModalComponent } from 'src/app/shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -26,6 +29,9 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     public mostrarSenha = false;
     public googleLogin = false;
 
+    private tokenMultifator: string;
+    private codigoMultifator: string;
+
     constructor(
         private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
@@ -33,12 +39,19 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         private messageService: MessageService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
-        private auth: AuthService
+        private auth: AuthService,
+        private modalService: NgbModal,
+        private translate: TranslateService,
+        private paramsLocais: ParametrosLocaisService,
     ) {
         super();
         this.cidades = [];
         this.estadoSelecionado = 0;
         this.cidadeSelecionada = 0;
+    }
+
+    get twoFactorInProfileChangeEnabled(): boolean {
+        return Boolean(this.paramsLocais.getOpcoes()?.enable_two_factor_in_profile_change);
     }
 
     ngOnInit() {
@@ -94,7 +107,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             }
 
         } catch (error) {
-            this.handleError('Algo inesperado aconteceu. Tente novamente mais tarde.')
+            this.handleError(this.translate.instant('erroInesperado'))
         } finally {
             this.showLoading = false;
         }
@@ -115,8 +128,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             logradouro: ['', Validators.required],
             numero: ['', Validators.required],
             bairro: ['', Validators.required],
-            cidade: ['0', Validators.required],
-            estado: ['0', Validators.required],
+            cidade: ['', Validators.required],
+            estado: ['', Validators.required],
             cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
             senha_atual: [null, this.googleLogin ? [] : Validators.required]
         });
@@ -128,6 +141,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                 distinctUntilChanged()
             )
             .subscribe((cep) => this.buscarPorCep(cep))
+
+        this.form.markAllAsTouched();
     }
 
     resetarForm() {
@@ -180,20 +195,64 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             bairro: endereco.bairro,
                         });
                     } else {
-                        this.handleError('Endereço não encontrado, por favor preencha manualmente');
+                        this.handleError(this.translate.instant('enderecoNaoEncontrado'));
                     }
                 },
             );
         }
     }
 
+    onSubmit() {
+        if (this.form.valid) {
+            if(this.twoFactorInProfileChangeEnabled) {
+                this.validacaoMultifator();
+            } else {
+                this.submit();
+            }
+        } else {
+            this.checkFormValidations(this.form);
+        }
+    }
+
     submit() {
+        let values = this.form.value;
+
+        if(this.twoFactorInProfileChangeEnabled) {
+            values = {
+                ...values,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
         this.clienteService
-            .atualizarDadosCadastrais(this.form.value)
+            .atualizarDadosCadastrais(values)
             .subscribe(
-                () => this.messageService.success('Dados Cadastrais atualizados.'),
+                () => this.messageService.success(this.translate.instant('geral.alteracoesSucesso')),
                 error => this.handleError(error)
             );
+    }
+
+    private validacaoMultifator() {
+       const modalref = this.modalService.open(
+            MultifactorConfirmationModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350',
+                centered: true,
+                backdrop: 'static'
+            }
+        );
+
+       modalref.componentInstance.senha = this.form.get('senha_atual').value;
+       modalref.result.then(
+            (result) => {
+                this.tokenMultifator = result.token;
+                this.codigoMultifator = result.codigo;
+
+                if (result.checked) {
+                    this.submit();
+                }
+            }
+        );
     }
 
     handleError(mensagem: string) {

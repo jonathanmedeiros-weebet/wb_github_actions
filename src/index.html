@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DEMO</title>
+    <title>WEEBET</title>
     <base href="/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -19,12 +19,15 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-W6CF4C5');
     </script>
+
     <!-- End Google Tag Manager -->
 
+    
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.wee.bet/fonts/remix-icon/remixicon.css" />
-
 
     <link rel="apple-touch-icon" href="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png">
     <link rel="shortcut icon" type="image/png" href="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png">
@@ -76,6 +79,8 @@
 
             /* RGB */
 
+            --background-live: #181818;
+
             --background-rgb: 24, 24, 24;
             --foreground-rgb: 255, 255, 255;
 
@@ -119,7 +124,16 @@
             --foreground-bottom-bar-rgb: 170, 170, 170;
         }
     </style>
-    <!-- <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/demo.wee.bet/param/cores.css"> -->
+    <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/demo.wee.bet/param/cores.css?v=1720230350">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WEEBET">
+    <meta property="og:description" content="WEEBET é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website WEEBET, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. WEEBET apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.">
+    <meta property="og:url" content="central.demo.wee.bet">
+    <meta property="og:image" content="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png">
+    <meta property="og:image:alt" content="LOGO WEEBET">
+    <meta name="description" content="WEEBET é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website WEEBET, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. WEEBET apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.">
+
     <script>
         function getAndroidVersion(ua) {
             ua = (ua || navigator.userAgent).toLowerCase();
@@ -129,9 +143,9 @@
         }
 
 
-        if (parseInt(getAndroidVersion()) < 7) {
+        if (parseInt(getAndroidVersion()) <= 7) {
             if (location.search.indexOf('app') >= 0) {
-                window.location.href = 'https://[S3_FOLDER]/client-light/?config=true&host=[HOST]&slug=[S3_FOLDER]&nome=[BANCA]'
+                window.location.href = 'https://demo.wee.bet/client-light/?config=true&host=central.demo.wee.bet&slug=demo.wee.bet&nome=WEEBET'
             }
         }
     </script>
@@ -145,21 +159,27 @@
         </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-
+    
 
     <app-root>
-        <div style="position: fixed;left: 50%;top: 50%;margin-left: -50px;margin-top: -50px;color: #fff;">
-            <img style="width: 100px;" src="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png" alt="">
-            <br>
-            <div class="loading-app" style="text-align: center;">
-                Carregando...
+        <div style="position: absolute;left: 50%;top: 50%; transform: translate(-50%, -50%);color: #fff;">
+            <div style="margin-bottom: 32px; display: flex;">
+                <img style="max-width: 250px; max-height: 164px;" src="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png" alt="">
+            </div>
+            <div class="loading-app" style="position: relative;">
+                <div class="lds-ring" style="left: 50%; margin-left: -32px; top: 0; margin-top: 0; position: inherit;">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>   
             </div>
         </div>
     </app-root>
-
+    
 
     <style>
-
+        
     </style>
 </body>
 

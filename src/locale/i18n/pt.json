@@ -104,6 +104,8 @@
         "selecionarTodos": "Selecionar todos",
         "selecionarTodosDe": "Selecionar todos de",
         "validarAposta": "Validar Aposta",
+        "replicarApostaLoteria": "Replicar Aposta de Loteria",
+        "replicarAposta": "Replicar Aposta",
         "codigoAposta": "Código Aposta",
         "codigoPreAposta": "Código Pré-aposta",
         "totalDeJogos": "Total de jogos",
@@ -182,6 +184,7 @@
         "selecionarIdioma": "Selecionar Idioma",
         "ingles": "English",
         "portugues": "Português",
+        "espanhol": "Español",
         "criacao": "Criação",
         "cambista": "Cambista",
         "cliente": "Cliente",
@@ -205,6 +208,8 @@
         "semPermissaoAcesso": "Sem permissão de acesso",
         "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos.",
         "cadastro": "Cadastro",
+        "tituloInformativoCookies": "Utilização de Cookies e Sessões",
+        "informativoCookies": "Este site utiliza cookies e sessões para aprimorar a sua experiência. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo que nos ajudam a manter você autenticado, personalizar recursos e configurações, bem como melhorar a funcionalidade do site. Ao continuar a usar este site, você concorda com o uso de cookies e sessões de acordo com a nossa Política de Privacidade.",
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
         "esportivo": "esportivo",
         "rodadaGratis": "Rodada grátis",
@@ -238,7 +243,12 @@
         "limparHistorico": "Limpar histórico",
         "nenhumResultadoEncontrado": "Nenhum resultado encontrado para esta pesquisa",
         "jogosEmAlta": "Jogos em alta",
-        "nenhumJogoDisponivel": "Nenhum jogo disponível no momento"
+        "nenhumJogoDisponivel": "Nenhum jogo disponível no momento",
+        "loginGoogle" : "Realize o login com a conta do google",
+        "computadoEm": "Computado em:",
+        "alteracoesSucesso": "Alterações realizadas com sucesso!",
+        "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
+        "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente."
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -353,6 +363,8 @@
         "confirmarNovaSenha": "Confirmar nova senha",
         "confirmarSenha": "Confirmar senha",
         "redefinirSenha": "Redefinir Senha",
+        "codigoDeVerificacaoPorSms": "Código de verificação enviado por SMS",
+        "codigoDeVerificacaoPorEmail": "Código de verificação enviado por e-mail",
         "codigoDeVerificacao": "Código de Verificação",
         "reenviaCodigoDeVerificacao": "Reenviar Código de Verificação",
         "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
@@ -378,7 +390,10 @@
         "enterPixKey": "Informe o tipo de chave PIX",
         "minimumWithdrawal": "Saque mínimo",
         "dailyMaximum": "Máximo diário",
-        "monthlyMaximum": "Máximo mensal"
+        "monthlyMaximum": "Máximo mensal",
+        "identityVerify": "Verificar identidade",
+        "identityVerifyNeeded": "Para prosseguir com o saque será necessário realizar a verificação de identidade antes.",
+        "disapprovedIdentity": "Sua verificação de identidade foi reprovada. Para a realização de uma análise manual, por favor, entre em contato com o suporte."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",
@@ -573,5 +588,68 @@
         "outubro": "Outubro",
         "novembro": "Novembro",
         "dezembro": "Dezembro"
+    },
+    "placeholders": {
+        "selecione_uma_opcao": "Selecione uma opção"
+    },
+    "botoes": {
+        "aceitar": "Aceitar",
+        "salvar_alteracoes": "Salvar Alterações",
+        "voltar": "Voltar"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recuperar minha conta!",
+        "contaBloqueadaPorTentativas": "Sua conta foi bloqueada porque você excedeu o número máximo de tentativas de login.",
+        "instrucoesRecuperacao": "Por favor, utilize a recuperação de senha para desbloquear sua conta."
+    },
+    "jogo_responsavel": {
+        "limite_apostas": {
+            "titulo": "Limite de apostas",
+            "descricao": "A configuração de limite de apostas é uma funcionalidade que permite você definir um valor máximo para as suas apostas. Essa configuração ajuda a controlar e limitar o valor que pode ser apostado, evitando gastos excessivos e comportamentos de jogo irresponsáveis. Pode ser configurado limite diário, semanal e mensal para apostas.",
+            "definir_limite_diario": "Definir limite diário de apostas",
+            "definir_limite_semanal": "Definir limite semanal de apostas",
+            "definir_limite_mensal": "Definir limite mensal de apostas"
+        },
+        "limite_depositos": {
+            "titulo": "Limite de depósitos",
+            "descricao": "A configuração de limite de depósito é uma funcionalidade que permite você definir um valor máximo para os depósitos que podem ser feitos em sua conta. Essa configuração visa ajudar a controlar o valor de dinheiro investido, prevenindo gastos excessivos e promovendo um jogo responsável. O limite de depósito estabelecido impede que você deposite valores acima desse limite durante um determinado período de tempo (diário, semanal e mensal).",
+            "definir_limite_diario": "Definir limite diário de depósito",
+            "definir_limite_semanal": "Definir limite semanal de depósito",
+            "definir_limite_mensal": "Definir limite mensal de depósito"
+        },
+        "periodo_pausa": {
+            "titulo": "Período de pausa",
+            "descricao": "A funcionalidade de período de pausa de conta permite que você suspendam temporariamente o uso da sua conta na plataforma. Durante esse período, a conta fica inativa, impedindo o acesso e a realização de atividades como apostas, saques e depósitos. Essa opção é útil para fazer uma pausa temporária, sem excluir permanentemente a conta, preservando os dados e configurações para posterior reativação.",
+            "definir_periodo_pausa": "Definir período de pausa",
+            "6horas": "6 horas",
+            "12horas": "12 horas",
+            "24horas": "24 horas",
+            "36horas": "36 horas",
+            "48horas": "48 hora",
+            "72horas": "72 horas",
+            "custom": "Customizar",
+            "periodo_pausa_ativado": "O período de pausa está ativado. Sua conta voltará ao normal em: {{info}}"
+        },
+        "exclusao_conta": {
+            "titulo": "Exclusão de conta",
+            "descricao": "Excluir permanentemente a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta permanentemente, você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro.",
+            "descricao_2": "Além disso, ressaltamos que essa ação também implicará na impossibilidade de criar uma nova conta na plataforma.",
+            "informe_motivo": "Informe por qual motivo você deseja excluir sua conta permanentemente:",
+            "motivo_1": "Uma segunda conta foi criada",
+            "motivo_2": "Ocupa muito meu tempo/desvia muito minha atenção",
+            "motivo_3": "Não tenho mais interesse em realizar apostas neste site",
+            "motivo_4": "Não estou mais usando está conta",
+            "motivo_5": "Problemas ao utilizar o sistema",
+            "motivo_6": "Outros motivos",
+            "digite_para_continuar": "Digite \"<b>EXCLUIR PERMANENTEMENTE</b>\" para confirmar a ação de exclusão.",
+            "explique_motivo": "Explique sobre quais motivos você está excluindo a conta...",
+            "excluir_conta": "Excluir conta permanentemente"
+        },
+        "temporizador_sessao": {
+            "titulo": "Temporizador de sessão",
+            "descricao": "O temporizador de sessão é uma configuração no qual permite você definir um limite de tempo para o uso da plataforma. Ela ajuda a controlar o tempo gasto, alertando  você quando o limite é atingido e encerrando a sua sessão automaticamente, promovendo um uso equilibrado e consciente.  Por exemplo, você pode escolher limitar suas sessões a 30 minutos, 1 hora ou qualquer outro intervalo adequado para você e também desativar essa funcionalidade assim que desejar. Quando o limite de tempo da sessão for atingido, nosso sistema encerrará automaticamente sua sessão e fará o logout de sua conta. Isso ajuda a garantir que você respeite seus limites de tempo predefinidos.",
+            "definir_tempo": "Definir tempo de sessão",
+            "desativado": "Desativado"
+        }
     }
 }

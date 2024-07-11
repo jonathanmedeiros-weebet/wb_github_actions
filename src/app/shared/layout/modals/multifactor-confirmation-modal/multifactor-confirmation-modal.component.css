@@ -1,0 +1,105 @@
+:host {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-dialog {
+    max-width: 600px;
+  }
+
+.modal-header {
+    border-bottom-color: var(--foreground);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btn-close {
+    margin-right: 10px;
+    background: none;
+}
+
+.modal-body {
+    text-align: center;
+    padding: 10px 80px 15px;
+    height: auto;
+}
+
+.logo {
+    max-width: 175px;
+    max-height: 140px;
+}
+
+.logo-mobile {
+    display: none;
+}
+
+button {
+    margin-top: 30px;
+}
+
+.space-buttons {
+    display: block;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.text-line {
+    height: 1px;
+    margin: 30px 0;
+    background-color: var(--foreground);
+    text-align: center;
+}
+
+.text-line span {
+    background-color: var(--background);
+    position: relative;
+    top: -0.65em;
+    padding: 0 10px;
+}
+
+asl-google-signin-button {
+    display: flex;
+    justify-content: center;
+}
+
+.esqueceu-senha {
+    color: var(--highlight);
+    font-size: 12px;
+    display: block;
+    margin: 26px 0 20px;
+    text-decoration: none;
+}
+
+.registrar {
+    font-size: 12px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.registrar a {
+    color: var(--highlight);
+}
+
+.showPassword {
+    position: absolute;
+    top: calc(50% - 16px);;
+    right: 0;
+    color: var(--foreground-inputs-odds);
+    cursor: pointer;
+    padding: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .modal-body {
+        text-align: center;
+        padding: 40px 25px 15px;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-body .modal-body-content {
+        flex: 1;
+    }
+}

@@ -13,6 +13,7 @@ import { config } from '../../config';
 export class ApostaLoteriaService {
     private ApostaUrl = `${config.BASE_URL}/apostas`;
     private ApostaLoteriaUrl = `${config.LOTTERIES_URL}/apostas`;
+    private copiarApostaUrl = `${config.BASE_URL}/copiarApostas`; // URL to web api
 
     constructor(
         private http: HttpClient,
@@ -48,6 +49,16 @@ export class ApostaLoteriaService {
 
     create(aposta): Observable<any> {
         return this.http.post(this.ApostaLoteriaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getApostaCopiar(id: number): Observable<any> {
+        const url = `${this.copiarApostaUrl}/${id}`;
+
+        return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)

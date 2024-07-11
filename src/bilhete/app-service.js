@@ -5,11 +5,15 @@ async function getParams() {
     var centerUrl = 'central.' + slug;
     var ticketId = url.substring(url.lastIndexOf('/') + 1);
 
+    var urlParams = new URLSearchParams(window.location.search);
+    var origin = urlParams.get("origin");
+
     if (ticketId && centerUrl && slug) {
         var params = {
             slug: slug,
             center: centerUrl,
-            ticketId: ticketId
+            ticketId: ticketId,
+            origin: origin
         };
 
         return params;
