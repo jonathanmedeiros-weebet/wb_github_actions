@@ -65,7 +65,7 @@ export default {
     align-self: stretch;
     align-items: flex-start;
     border-radius: 8px;
-    background: #181818;   
+    background: #171717;   
     padding-bottom: 14px;
   }
   
@@ -97,14 +97,14 @@ export default {
   }
 
   &__debit {
-    color: rgba(255, 255, 255, 0.50);
+    color: var(--color-text-input);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
   }
 
   &__date { 
-    color: rgba(255, 255, 255, 0.50);
+    color: var(--color-text-input);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
