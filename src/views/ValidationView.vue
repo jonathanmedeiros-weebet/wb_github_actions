@@ -1,12 +1,12 @@
 <template>
   <div class="validation">
     <Header :title="title" :showBackButton="true" />
-    <div class="validate__items">
-      <span class="validate__text">
+    <div class="validation__items">
+      <span class="validation__text">
         Digite o código de aposta para realizar a validação
       </span>
       <WInput
-        class="validate__input"
+        class="validation__input"
         name="consult_ticket"
         placeholder="Ex.: EA5D-DG41"
         type="email"
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.validate {
+.validation {
 
   &__items {
     padding: 17.35px;

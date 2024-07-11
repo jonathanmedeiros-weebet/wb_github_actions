@@ -1,7 +1,7 @@
 <template>
-  <div class="validation">
+  <div class="validation-detail">
     <Header :title="title" :showBackButton="true" />
-    <div class="validation__container">
+    <div class="validation-detail__container">
       <div class="code">
         <span class="code__bet">Código pré-aposta:</span>
         <span class="code__number">{{code_aposta}}</span>
@@ -100,7 +100,7 @@ import WButton from '@/components/Button.vue';
 import IconUserLine from '@/components/icons/IconUserLine.vue'
 
 export default {
-  name: 'validation',
+  name: 'validation-detail',
   components: { 
     Header, 
     IconDelete,
@@ -132,7 +132,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.validation {
+.validation-detail {
 
   &__container {
     display: flex;
