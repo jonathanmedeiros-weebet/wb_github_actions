@@ -32,6 +32,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     order: string = 'status';
     reverse: boolean = false;
     tabSelected = 'bonus';
+    dataAtual;
 
     constructor(
         private financeiroService: FinanceiroService,
@@ -62,6 +63,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
 
         this.getRollovers();
         this.createForm();
+        this.dataAtual = new Date();
     }
 
     ngOnDestroy() {
@@ -111,8 +113,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                             : rollover.modalidade
                     }));
                     this.rodadas = response.rodadas.map(rodada => {
-                        const status = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : (rodada.quantidade <= rodada.quantidadeUtilizada ? 'Concluído' : 'Cancelado');
-                        return { ...rodada, status };
+                        const customStatusFreeSpin = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : (rodada.quantidade <= rodada.quantidadeUtilizada ? 'Concluído' : 'Cancelado');
+                        return { ...rodada, customStatusFreeSpin };
                     });
                     this.rodadas.sort((a, b) => {
                         const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3, 'Concluído': 4};
@@ -221,13 +223,6 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         this.router.navigate(['casino/', fornecedor, game]);
     }
 
-    redeemPrize(rodadaId: string) {
-        this.rodadaGratisService.redeemPrize(rodadaId).subscribe(
-            response => response,
-            error => this.handleError(error)
-        );
-    }
-
     setQuantityRoundsToNotify(): void{
         this.rodadas.forEach((round) => {
             if(round.status === "Ativo"){
@@ -242,5 +237,16 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                 this.quantityRolloversToNotify++;
             }
         })
-    }  
+    } 
+    
+    redeemPrize(rodadaId: string) {
+        this.rodadaGratisService.redeemPrize(rodadaId).subscribe(
+            response => this.handleRedeemPrize(response),
+            error => this.handleError(error)
+        );
+    }
+
+    handleRedeemPrize(response) {
+        this.messageService.success(response.message);
+    }
 }

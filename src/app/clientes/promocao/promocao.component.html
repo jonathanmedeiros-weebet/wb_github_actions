@@ -246,7 +246,7 @@
                                     <ng-container *ngFor="let rodada of rodadasListagem">
                                         <tr>
                                             <td class="td-custom">
-                                                {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}
+                                                {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY HH:mm:ss' }}
                                             </td>
                                             <td class="td-custom">
                                                 {{ rodada.valor | currency }}
@@ -261,16 +261,16 @@
                                                 {{rodada.gameName}}
                                             </td>
                                             <td class="td-custom">
-                                                {{rodada.status}}
+                                                {{rodada.customStatusFreeSpin}}
                                             </td>
                                             <td class="btn-custom-game">
                                                 <ng-container>
                                                     <button class="btn btn-custom btn-jogar-rodada"
-                                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
+                                                        [ngClass]="rodada.customStatusFreeSpin != 'Ativo' ? 'disabled-button' : ''"
                                                         (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
 
                                                         <button class="btn btn-custom btn-jogar-rodada"
-                                                        [ngClass]="rodada.status != 'Concluído' ? 'disabled-button' : ''"
+                                                        [ngClass]="(rodada.status == 'resgatado' || rodada.status == 'anulado' || rodada.ativo == 1 || rodada.customStatusFreeSpin != 'Concluído' || ((dataAtual | moment: 'DD/MM/YYYY HH:mm:ss') > (rodada.dataTermino.date | moment: 'DD/MM/YYYY HH:mm:ss'))) ? 'disabled-button' : ''"
                                                         (click)="redeemPrize(rodada.id)">{{ 'geral.resgatarPremio' | translate }}</button>
                                                 </ng-container>
                                             </td>
