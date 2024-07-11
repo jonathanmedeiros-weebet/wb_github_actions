@@ -36,10 +36,9 @@
 </template>
 
 <script>
-import SelectFake from '../views/HomeView/parts/SelectFake.vue';
-import MovementItem from './MovementView/parts/MovementItem.vue';
+import SelectFake from '../HomeView/parts/SelectFake.vue';
+import MovementItem from './parts/MovementItem.vue';
 import Header from '@/components/layouts/Header.vue';
-import { modalityList } from '../constants/modalities.constant';
 import IconClose from '@/components/icons/IconClose.vue';
 import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
 
@@ -57,7 +56,6 @@ export default {
       startDate: '04/06/2024',
       endDate: '06/06/2024',
       title: 'Movimentações',
-      modalityList: modalityList,
       dates: [
           {
             infoDate: 'Seg 04 de Jun de 2024',

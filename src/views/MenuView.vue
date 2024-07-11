@@ -29,7 +29,7 @@
         </div>
 
         <div class="wallet__shortcuts">
-          <button class="wallet__button">
+          <button class="wallet__button" @click="handleNavigate('/dashboard')">
             <IconInsertChart  class="wallet__icon"/>
             Dashboard
           </button>
@@ -37,7 +37,7 @@
             <IconManageSearch  class="wallet__icon" />
             Consultar Bilhete
           </button>
-          <button @click="navigateTo"  class="wallet__button">
+          <button @click="handleNavigate('/reckoning')"  class="wallet__button">
             <IconFactCheck class="wallet__icon" />
             Apuração
           </button>
@@ -47,7 +47,7 @@
       <div class="more-options">
         <span class="more-options__text">Mais opções</span>
         <div class="more-options__card">
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/movements')">
             <IconMoney class="more-options__icon" />
             Movimentações
           </button>
@@ -59,7 +59,7 @@
             <IconSettings class="more-options__icon" />
             Configurações
           </button>
-          <button class="more-options__item">
+          <button class="more-options__item" @click="handleNavigate('/results')">
             <IconFactCheck class="more-options__icon" />
             Resultados
           </button>
@@ -116,9 +116,6 @@ export default {
       console.log('Toggling Saldo Visibility');
       this.isSaldoVisible = !this.isSaldoVisible;
     },
-    navigateTo() {
-      this.$router.push("/reckoning");
-    }
   }
 }
 </script>

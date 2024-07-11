@@ -141,11 +141,10 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    margin-bottom: 100px;
   }
 
   &__footer {
-      text-align: center;
+    text-align: center;
   }
 
   &__body {

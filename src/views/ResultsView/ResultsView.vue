@@ -2,7 +2,6 @@
   <div class="results">
     <Header title="Resultados" :showBackButton="true" />
     <div class="results__dates" >
-
       <div 
         class="results__dates-buttons" 
         v-for="(day, dateRangeIndex) in dateRange"  
@@ -16,30 +15,48 @@
           :ref="getRef(day)"
         />
       </div>
-
     </div>
-    <div class="results__modalities">
-      <label class="results__modalities-label">Modalidade</label>
-      <select-fake titleSize="medium" @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake>
+
+    <div class="results__content">
+      <div class="results__dates" >
+        <div 
+          class="results__dates-buttons" 
+          v-for="(day, dateRangeIndex) in dateRange"  
+          :key="dateRangeIndex"
+        >
+          <button-date 
+            :value="day.format('YYYY-MM-DD')"
+            :text="getTextButton(day)"
+            :actived="isCurrentDay(day)"
+            @click="setActiveDay(day)"
+            :ref="getRef(day)"
+          />
+        </div>
+      </div>
+      
+      <div class="results__modalities">
+        <label class="results__modalities-label">Modalidade</label>
+        <select-fake titleSize="medium" @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake>
+      </div>
+      
+      <p class="results__count-modalities">{{ modalityList.length }} Resultados encontrados</p>
+      <div class="results__collapses">
+        <collapse 
+          :leftIcon="true" 
+          :initCollapsed="true" 
+          v-for="({title,image,games}, championshipListIndex) in championshipList" 
+          :key="championshipListIndex"
+        >
+          <template #title>
+            <img :src="image" />
+            {{ title }}
+          </template>
+
+          <game-item-result :games="games"/>
+        </collapse>
+      </div>
     </div>
     
-    <p class="results__count-modalities">{{ modalityList.length }} Resultados encontrados</p>
-    
-    <collapse 
-      :leftIcon="true" 
-      :initCollapsed="false" 
-      v-for="({title,image,games}, championshipListIndex) in championshipList" 
-      :key="championshipListIndex"
-    >
-      <template #title>
-        <img :src="image" />
-        {{ title }}
-      </template>
-
-      <game-item-result :games="games"/>
-    
-    </collapse>
-
     <ModalModalities
       v-if="showModalModalities"
       :modalityId="modality.id"
@@ -145,7 +162,15 @@ export default {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
-    
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 100px;
+    overflow-y: auto;
   }
 
   &__dates::-webkit-scrollbar {
@@ -175,7 +200,6 @@ export default {
     font-size: 16px;
   }
 }
-
 
 ::v-deep .select-fake {
   background-color: var(--color-background-input);
