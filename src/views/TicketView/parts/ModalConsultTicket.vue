@@ -1,15 +1,15 @@
 <template>
   <WModal :backdropClick="true" @close="handleCloseModal">
     <template #title>
-      <span class="modal-ticket__title">Consultar bilhete</span>
+      <span class="modal-consult-ticket__title">Consultar bilhete</span>
     </template>
     <template #body>
-      <div class="modal-ticket__items">
-        <span class="modal-ticket__text">
+      <div class="modal-consult-ticket__items">
+        <span class="modal-consult-ticket__text">
           Digite o código de aposta para realizar a consulta do bilhete
         </span>
         <w-input
-          class="modal-ticket__input"
+          class="modal-consult-ticket__input"
           name="consult_ticket"
           placeholder="Ex.: EA5D-DG41"
           type="text"
@@ -42,7 +42,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-ticket {
+.modal-consult-ticket {
+  padding-top: 60px;
   &__title {
     color: var(--color-text);
     font-size: 16px;
@@ -50,7 +51,7 @@ export default {
   }
 
   &__items {
-    padding: 17.358px 24px 38.5px 24px;
+    padding: 10.358px 24px 38.5px 24px;
     display: flex;
     flex-direction: column;
     gap: 10px;
