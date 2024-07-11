@@ -9,9 +9,11 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "chart.js": "^4.4.3",
     "moment": "^2.30.1",
     "pinia": "^2.0.16",
     "vue": "^2.7.7",
+    "vue-chartjs": "^5.3.1",
     "vue-router": "^3.5.4",
     "vue-the-mask": "^0.11.1"
   },
