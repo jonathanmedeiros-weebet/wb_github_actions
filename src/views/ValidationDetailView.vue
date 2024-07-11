@@ -27,7 +27,7 @@ import WButton from '@/components/Button.vue';
 import Header from '@/components/layouts/Header.vue';
 
 export default {
-  name: 'Tickets',
+  name: 'validation-detail',
   components: { Header, WInput, WButton }
 }
 </script>
