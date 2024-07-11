@@ -30,7 +30,6 @@
           <span>{{ team.odd }}</span>
         </div>
       </div>
-      <div class="line"></div>
       <div class="finish">
         <div class="finish__cpf">
           <w-input
@@ -259,20 +258,6 @@ export default {
   }
 }
 
-.line {
-
-  &::after { 
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100vw; 
-    height: 1px;
-    background-color: var(--color-line);
-    transform: translateX(-20px); 
-  }
-
-}
 
 .finish {
   margin-bottom: -20px;
@@ -345,11 +330,10 @@ export default {
     border-radius: 3px;
     position: relative;
   }
-
+  
   &__checkbox:checked {
     background-color: var(--color-primary);
   }
-  
   &__checkbox::after {
     content: '';
     position: absolute;

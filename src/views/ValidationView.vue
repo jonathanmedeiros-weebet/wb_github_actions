@@ -1,12 +1,12 @@
 <template>
-  <div class="tickets">
-    <Header title="Validar Aposta" :showBackButton="true" />
-    <div class="modal-modalities__items">
-      <span class="modal-modalities__text">
+  <div class="validation">
+    <Header :title="title" :showBackButton="true" />
+    <div class="validate__items">
+      <span class="validate__text">
         Digite o código de aposta para realizar a validação
       </span>
       <WInput
-        class="modal-modalities__input"
+        class="validate__input"
         name="consult_ticket"
         placeholder="Ex.: EA5D-DG41"
         type="email"
@@ -27,13 +27,18 @@ import WButton from '@/components/Button.vue';
 import Header from '@/components/layouts/Header.vue';
 
 export default {
-  name: 'validation-detail',
-  components: { Header, WInput, WButton }
+  name: 'validation',
+  components: { Header, WInput, WButton },
+  data(){
+    return {
+      title: 'Validar Aposta',
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.modal-modalities {
+.validate {
 
   &__items {
     padding: 17.35px;
