@@ -12,7 +12,7 @@
           class="modal-modalities__input"
           name="consult_ticket"
           placeholder="Ex.: EA5D-DG41"
-          type="email"
+          type="text"
         />
         <w-button
           id="btn-salvar"
