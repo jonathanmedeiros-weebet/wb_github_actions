@@ -30,15 +30,15 @@
 
         <div class="wallet__shortcuts">
           <button class="wallet__button">
-            <IconInsertChart :size="14" class="wallet__icon"/>
+            <IconInsertChart  class="wallet__icon"/>
             Dashboard
           </button>
           <button class="wallet__button">
-            <IconManageSearch :size="14" class="wallet__icon" />
+            <IconManageSearch  class="wallet__icon" />
             Consultar Bilhete
           </button>
-          <button class="wallet__button">
-            <IconFactCheck :size="14" class="wallet__icon" />
+          <button @click="navigateTo"  class="wallet__button">
+            <IconFactCheck class="wallet__icon" />
             Apuração
           </button>
         </div>
@@ -73,6 +73,7 @@
   </div>
 </template>
 
+
 <script>
 import IconEye from '@/components/icons/IconEye.vue';
 import IconEyeClose from '@/components/icons/IconEyeClose.vue';
@@ -85,6 +86,7 @@ import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 
 export default {
+  name: 'menu',
   components: {
     IconEye, IconEyeClose, IconMoney, IconSettings, IconLogout, 
     IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart
@@ -113,6 +115,9 @@ export default {
     toggleSaldoVisibility() {
       console.log('Toggling Saldo Visibility');
       this.isSaldoVisible = !this.isSaldoVisible;
+    },
+    navigateTo() {
+      this.$router.push("/reckoning");
     }
   }
 }

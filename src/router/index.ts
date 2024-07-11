@@ -7,6 +7,8 @@ import BetsView from '@/views/BetView/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import MovementsView from '@/views/MovementsView.vue'
+import ReckoningView from '@/views/ReckoningView.vue'
+import TicketView from '@/views/TicketView.vue'
 import ResultsView from '@/views/ResultView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
@@ -54,6 +56,16 @@ const router = new VueRouter({
       path: '/movements',
       name: 'movements',
       component: MovementsView,
+    },
+    {
+      path: '/reckoning',
+      name: 'reckoning',
+      component: ReckoningView,
+    },
+    {
+      path: '/ticket',
+      name: 'ticket',
+      component: TicketView,
     },
     {
       path: '/results',
