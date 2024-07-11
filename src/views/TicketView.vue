@@ -292,7 +292,6 @@ export default {
   }
 }
 
-
 .cotacao {
   padding: 8px;
 
