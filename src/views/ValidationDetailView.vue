@@ -90,7 +90,6 @@
 
 <script>
 import Header from '@/components/layouts/Header.vue';
-import { modalityList } from '../constants/modalities.constant';
 import IconDelete from '@/components/icons/IconDelete.vue';
 import IconLive from '@/components/icons/IconLive.vue';
 import IconBall from '@/components/icons/IconBall.vue';
@@ -114,7 +113,6 @@ export default {
   data() {
     return {  
       title: 'Validar Aposta',
-      modalityList: modalityList,
       code_aposta: 231,
       teams: [
         { team_house: 'Argentino JRS', team_outside: 'Rosario Central', odd: 3.30, date: '19/03/2024', hour: '21:15', live: true, select: 'Empate' },
@@ -133,7 +131,6 @@ export default {
 
 <style lang="scss" scoped>
 .validation-detail {
-
   &__container {
     display: flex;
     flex-direction: column;
@@ -145,7 +142,6 @@ export default {
   }
 }
 .code {
-  
   border-radius: 4px;
   background: #181818;
   display: flex;
@@ -163,6 +159,7 @@ export default {
     
   }
 }
+
 .game {
   padding: 10px;
   display: flex;
@@ -258,12 +255,11 @@ export default {
   }
 }
 
-
 .finish {
   margin-bottom: -20px;
 }
+
 .value {
-  
   &__balance-text {
     font-size: 14px;
   }
@@ -285,7 +281,6 @@ export default {
     color: var(--color-text-input);
     font-size: 14px;
     border: none; 
-    
   }
 
   &__balance-input{
@@ -351,5 +346,4 @@ export default {
     width: 100%;
   }
 }
-
 </style>

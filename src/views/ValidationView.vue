@@ -39,7 +39,6 @@ export default {
 
 <style lang="scss" scoped>
 .validation {
-
   &__items {
     padding: 17.35px;
     display: flex;
@@ -52,11 +51,10 @@ export default {
     font-size: 14px;
     text-align: center;
   }
-
 }
 
 ::v-deep .input__group,
 ::v-deep .input__field {
-    background-color: var(--color-background);
+  background-color: var(--color-background);
 }
 </style>
