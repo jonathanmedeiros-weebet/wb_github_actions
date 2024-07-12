@@ -1,15 +1,19 @@
 import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
+import ValidationDetailView from '@/views/ValidationDetailView.vue'
 import ValidationView from '@/views/ValidationView.vue'
-import TicketsView from '@/views/TicketsView.vue'
-import BetsView from '@/views/BetView/BetsView.vue'
+import TicketsView from '@/views/TicketsView/TicketsView.vue'
+import BetsView from '@/views/BetsView/BetsView.vue'
 import MenuView from '@/views/MenuView.vue'
 import ChangePasswordView from '@/views/ChangePasswordView.vue'
-import ResultsView from '@/views/ResultView/ResultsView.vue'
+import MovementsView from '@/views/MovementsView/MovementsView.vue'
+import ReckoningView from '@/views/ReckoningView.vue'
+import ResultsView from '@/views/ResultsView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
-import { checkToken, localStorageService } from "@/services";
+import { localStorageService } from "@/services";
+import DashboardView from '@/views/DashboardView/DashboardView.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -28,6 +32,14 @@ const router = new VueRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/validation-detail',
+      name: 'validation-detail',
+      component: ValidationDetailView,
       meta: {
         auth: true
       }
@@ -73,7 +85,31 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/game-detail/:id',
+      path: '/movements',
+      name: 'movements',
+      component: MovementsView,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/reckoning',
+      name: 'reckoning',
+      component: ReckoningView,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/results',
+      name: 'results',
+      component: ResultsView,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/game-detail',
       name: 'game-detail',
       component: GameDetailView,
       meta: {
@@ -88,11 +124,19 @@ const router = new VueRouter({
         auth: true
       }
     },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: DashboardView,
+      meta: {
+        auth: true
+      }
+    },
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
-  
+
   const tokenIsValid = localStorageService.get('token');
 
   if (to.meta?.auth) {

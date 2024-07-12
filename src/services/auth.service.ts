@@ -27,7 +27,7 @@ export const authUser = async (
         }
         return false;
     } catch (error) {
-        localStorageService.removeAll();
+        localStorageService.removeAuth();
         throw error;
     }
 }
@@ -63,4 +63,9 @@ export const verifyToken = async () => {
         }
         return false;
     }
-};
+}
+
+
+export const logout = () => {
+    localStorageService.removeAuth();
+}

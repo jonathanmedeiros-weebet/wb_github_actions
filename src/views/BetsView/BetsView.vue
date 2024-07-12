@@ -192,7 +192,7 @@ import Header from '@/components/layouts/Header.vue'
 import WInput from '@/components/Input.vue'
 import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
-import CardBets from '@/views/BetView/parts/CardBet.vue'
+import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 
@@ -305,6 +305,10 @@ export default {
     overflow-x: auto;
     white-space: nowrap;
     gap: 8px;
+  }
+
+  &__buttons-filters::-webkit-scrollbar {
+    display: none;  /* WebKit-based browsers */
   }
 
   &__content-filters {

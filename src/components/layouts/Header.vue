@@ -78,6 +78,7 @@ export default {
 
     width: 100%;
     height: 58px;
+    min-height: 58px;
 
     background: var(--color-background);
     border-bottom: 1px solid #FFFFFF1A;

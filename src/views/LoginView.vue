@@ -82,12 +82,11 @@ export default {
         if(resp) {
           this.$router.replace('/home');
         }else{
-          console.log(resp);
           this.toastText = 'Usuário ou Senha inválido';
           this.showToast = true;
         }
       } catch (error) {
-        this.toastText = error.response.data.errors.message;
+        this.toastText = error.response?.data?.errors?.message ?? 'Usuário ou Senha inválido';
         this.showToast = true;
       }
     }
