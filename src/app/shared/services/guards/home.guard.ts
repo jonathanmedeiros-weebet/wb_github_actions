@@ -23,7 +23,11 @@ export class HomeGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const { pagina_inicial, casino, esporte } = this.paramsService.getOpcoes();
+        const { pagina_inicial, casino, esporte, betby } = this.paramsService.getOpcoes();
+
+        if (betby) {
+            this.pages.esporte = 'betby';
+        }
 
         if (pagina_inicial) {
             if (pagina_inicial == 'home' && casino && esporte) {

@@ -112,6 +112,7 @@ export class AuthService {
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.results.token);
+                    localStorage.setItem('tokenBetby', res.results.tokenBetby);
                     localStorage.setItem('user', JSON.stringify(res.results.user));
                     if (res.results.user.tipo_usuario === 'cambista') {
                         localStorage.setItem('tipos_aposta', JSON.stringify(res.results.tipos_aposta));
@@ -179,6 +180,10 @@ export class AuthService {
         return localStorage.getItem('tokenCassino');
     }
 
+    getTokenBetby() {
+        return localStorage.getItem('tokenBetby');
+    }
+
     getUser() {
         return JSON.parse(localStorage.getItem('user'));
     }
@@ -235,6 +240,7 @@ export class AuthService {
     limparStorage() {
         localStorage.removeItem('token');
         localStorage.removeItem('tokenCassino');
+        localStorage.removeItem('tokenBetby');
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');

@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
 import { HomeComponent } from './home/home.component';
+import { BetbyComponent } from './betby/betby.component';
 
 const appRoutes: Routes = [
     {
@@ -35,6 +36,10 @@ const appRoutes: Routes = [
             {
                 path: 'login',
                 component: AppComponent
+            },
+            {
+                path: 'betby',
+                component: BetbyComponent
             },
             {
                 path: 'acumuladao',
