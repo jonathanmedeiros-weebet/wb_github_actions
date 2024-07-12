@@ -20,6 +20,8 @@
         maxlength="maxlength"
         @click="$emit('click')"
         @change="emitChange"
+        :value="value"
+        autocomplete="off"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
         

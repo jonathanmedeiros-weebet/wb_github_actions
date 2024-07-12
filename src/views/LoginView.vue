@@ -1,5 +1,12 @@
 <template>
   <div class="login">
+    <toast 
+      v-if="showToast" 
+      type="danger" 
+      @close="showToast = false"
+    >
+      {{ toastText }}
+     </toast>
     <div class="login__container">
       <img class="login__image" src="@/assets/images/weebet_logo_verde.png">
       <div class="login__header">
@@ -12,6 +19,7 @@
         name="user_name"
         placeholder="Digite seu usuário"
         type="email"
+        v-model="username"
       >
         <template #icon>
           <icon-user-line/>
@@ -23,7 +31,7 @@
         name="user_password"
         placeholder="Digite sua senha"
         type="password"
-        v-model="userPassword"
+        v-model="password" 
       >
         <template #icon>
             <icon-password/>
@@ -46,6 +54,8 @@ import WInput from '@/components/Input.vue'
 import WButton from '@/components/Button.vue'
 import IconUserLine from '@/components/icons/IconUserLine.vue'
 import IconPassword from '@/components/icons/IconPassword.vue'
+import { authUser } from '@/services'
+import Toast from '@/components/Toast.vue'
 
 export default {
   name: 'login',
@@ -53,17 +63,35 @@ export default {
     WInput,
     WButton,
     IconUserLine,
-    IconPassword
+    IconPassword,
+    Toast
   },
   data() {
     return {
-      userPassword: ''
+      showToast: false,
+      toastText: '',
+      username: '',
+      password: '',
     }
   },
   methods: {    
-    handleClick() {
-      this.$router.push('/home')
+    async handleClick() {
+      try {
+        this.showToast = false;
+        const resp = await authUser(this.username, this.password);
+        if(resp) {
+          this.$router.replace('/home');
+        }else{
+          console.log(resp);
+          this.toastText = 'Usuário ou Senha inválido';
+          this.showToast = true;
+        }
+      } catch (error) {
+        this.toastText = error.response.data.errors.message;
+        this.showToast = true;
+      }
     }
+    
   }
 }
 </script>
@@ -78,6 +106,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding-top: 90px;
+    gap: 10px;
   }
 
   &__image {
