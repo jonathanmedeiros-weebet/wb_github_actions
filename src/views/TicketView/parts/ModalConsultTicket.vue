@@ -44,7 +44,6 @@ export default {
 <style lang="scss" scoped>
 .modal-consult-ticket {
   &__title {
-  margin-bottom: -80px;  
     color: var(--color-text);
     font-size: 16px;
     font-weight: 500;
