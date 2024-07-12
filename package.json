@@ -362,6 +362,7 @@
         "ngx-skeleton-loader": "^6.0.0",
         "ngx-toastr": "^16.2.0",
         "pdfmake": "^0.2.6",
+        "remixicon": "^4.2.0",
         "rxjs": "~6.6.0",
         "skeleton-screen-css": "^1.1.0",
         "socket.io-client": "^2.1.1",

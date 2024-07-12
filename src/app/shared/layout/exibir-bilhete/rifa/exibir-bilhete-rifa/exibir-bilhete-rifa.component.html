@@ -1,0 +1,78 @@
+<app-bilhete-compartilhamento #bilheteCompartilhamento [aposta]="aposta"></app-bilhete-compartilhamento>
+<div class="modal-body cupom-ativo">
+    <div class="cupom-header">
+        <div>
+            <p class="codigo-aposta">
+                <b>Código da aposta:</b><span> {{aposta.codigo}}</span>
+            </p>
+        </div>
+        <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+            <p>
+                <b>Cliente: </b><span>{{aposta.apostador}}</span>
+            </p>
+        </div>
+        <ng-template #exibicaoPadrao>
+            <p>
+                <b>Cambista:</b> {{aposta.passador.nome}}
+            </p>
+            <p>
+                <b>Apostador: </b><span>{{aposta.apostador}}</span>
+            </p>
+        </ng-template>
+        <p>
+            <b>{{'geral.status' | translate}}: </b>
+            <span>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</span>
+        </p>
+        <p class="aposta-horario">
+            <b>Horário:</b><span> {{aposta.horario | moment: 'DD/MM HH:mm'}}</span>
+        </p>
+        <p class="total-jogos">
+            Quantidade de Números:<span>{{aposta.itens.length}}</span>
+        </p>
+        <p class="aposta">
+            Valor apostado: <span> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
+        </p>
+        <p class="resultado">
+            <b>Resultados: </b>
+            <span *ngIf="aposta.resultado">{{aposta.resultado || titlecase}}</span>
+            <span *ngIf="!aposta.resultado">Aguardando</span>
+        </p>
+        <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
+            {{'geral.premio' | translate}}: <span>{{aposta.premio | currency}}</span>
+        </p>
+        <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
+            Cambista paga: <span>{{cambistaPaga | currency}}</span>
+        </p>
+    </div>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Números</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let item of aposta.itens">
+                <tr class="cupom">
+                    <td>{{item.numero}}</td>
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+    </div>
+    <ng-container *ngFor="let item of aposta.itens">
+        <div class="cupom-container">
+            <div id="cupom">
+                <div class="conteudo">
+                    <div class="item">
+                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                            {{item.numero}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<div class="modal-footer">
+</div>
