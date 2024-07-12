@@ -212,6 +212,7 @@
         "informativoCookies": "Este site utiliza cookies e sessões para aprimorar a sua experiência. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo que nos ajudam a manter você autenticado, personalizar recursos e configurações, bem como melhorar a funcionalidade do site. Ao continuar a usar este site, você concorda com o uso de cookies e sessões de acordo com a nossa Política de Privacidade.",
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
         "esportivo": "esportivo",
+        "rifa": "Rifa",
         "rodadaGratis": "Rodada grátis",
         "dataVencimento": "Data de vencimento",
         "quantidade": "Quantidade",
@@ -278,7 +279,8 @@
         "desafio": "DESAFIO",
         "acumuladao": "ACUMULADÃO",
         "loteria": "LOTERIA",
-        "promocao": "PROMOÇÕES"
+        "promocao": "PROMOÇÕES",
+        "rifas": "RIFAS"
     },
     "submenu": {
         "copa22": "Copa 2022",
@@ -319,6 +321,7 @@
         "cotacao": "Cotação",
         "aceitarAlteracoesDeOdds": "Aceitar alterações de odds",
         "apostar": "Apostar",
+        "comprar": "Comprar",
         "utilizarBonus": "Utilizar bônus",
         "algumasCotacoesMudaram": "Algumas cotações mudaram, verifique com atenção antes de confirmar a aposta",
         "algumasCotacoesMudaramPreAposta": "Algumas cotações mudaram desde que foi criada a pré-aposta, verifique com atenção antes realizar a validação.",
