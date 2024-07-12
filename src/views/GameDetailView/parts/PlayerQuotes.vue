@@ -5,29 +5,34 @@
             v-for="(option, index) in quotes"
             :key="index"
         > 
-            <template #title>{{ option.name }}</template>
+            <template #title>{{ option.title }}</template>
 
             <div class="collapse__items">
                 <div
                     class="collapse__item"
-                    v-for="(odd, oddIndex) in option.odds"
-                    :key="`${oddIndex}-${index}`"
+                    v-for="(player, playerIndex) in option.players"
+                    :key="`${playerIndex}-${index}`"
                 >
-                    <span class="collapse__title">{{ odd.label }}</span>
-                    <div class="collapse__options">
+                    <span class="collapse__label">{{ player.name }}</span>
+                    <div
+                        class="collapse__options"
+                        :class="{
+                            'collapse__options--three-column': player.odds.length == 3,
+                            'collapse__options--two-column': player.odds.length == 2,
+                        }"
+                    >
                         <button
                             class="collapse__option"
-                            :class="{'collapse__option--selected': false}"
+                            v-for="odd in player.odds"
+                            :key="odd.id"
+                            :class="{
+                                'collapse__option--selected': false,
+                                'collapse__option--disabled': !odd.hasPermission,
+                            }"
                             @click="handleItemClick(odd)"
                         >
-                            <span class="collapse__value">{{ odd.value }}</span>
-                        </button>
-                        <button
-                            class="collapse__option"
-                            :class="{'collapse__option--selected': false}"
-                            @click="handleItemClick(odd)"
-                        >
-                            <span class="collapse__value">{{ odd.value }}</span>
+                            <span class="collapse__value" v-if="odd.hasPermission">{{ odd.finalValue }}</span>
+                            <IconLock v-else :size="14" color="var(--color-text-input)"/>
                         </button>
                     </div>
                 </div>
@@ -38,10 +43,11 @@
 
 <script>
 import Collapse from '@/components/Collapse.vue';
+import IconLock from '@/components/icons/IconLock.vue';
 
 export default {
     name: 'player-quotes',
-    components: { Collapse },
+    components: { Collapse, IconLock },
     props: {
         quotes: {
             type: Array,
@@ -50,6 +56,7 @@ export default {
     },
     methods: {
         handleItemClick(odd) {
+            if(!odd.hasPermission) return;
             void odd;
             event.stopPropagation();
         },
@@ -60,24 +67,32 @@ export default {
 <style lang="scss" scoped>
 .collapse {
     &__options {
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 10px;
+        gap: 5px;
 
-        padding: 13px 16px;
-
+        padding: 5px;
         background: var(--color-background-input);
 
-        &--grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+        &--three-column {
+            width: 200px;
+        }
+        &--two-column {
+            width: 150px;
         }
     }
 
+    &__options--three-column &__option {
+        min-width: calc(180px / 3);
+    }
+    &__options--two-column &__option {
+        min-width: calc(130px / 2);
+    }
+
     &__option {
-        height: 54px;
-        width: 100%;
+        min-width: calc(150px / 3);
         background: var(--color-background);
         border: none;
         border-radius: 4px;
@@ -111,10 +126,15 @@ export default {
 
     &__value {
         color: var(--color-text);
-        font-size: 14px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+    }
+
+    &__item {
+        display: flex;
+        gap: 5px;
     }
 }
 

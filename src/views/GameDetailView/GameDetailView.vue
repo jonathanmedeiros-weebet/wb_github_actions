@@ -33,6 +33,9 @@ import { useConfigClient } from '@/stores'
 import TimeQuotes from './parts/TimeQuotes.vue'
 import PlayerQuotes from './parts/PlayerQuotes.vue'
 
+const FAVORITE_QUOTE_HOME = 'casa'
+const FAVORITE_QUOTE_OUTSIDE = 'fora'
+
 export default {
     components: {
         Header,
@@ -47,7 +50,7 @@ export default {
         return {
             headerFixed: false,
             game: {},
-            filterSelected: MarketTime.PLAYERS,
+            filterSelected: MarketTime.FULL_TIME,
             markets: {
                 [MarketTime.FULL_TIME]: [],
                 [MarketTime.FIRST_TIME]: [],
@@ -136,16 +139,24 @@ export default {
                     }
                 }
 
+                const finalValue = this.calculateQuota({
+                    value: quote.valor,
+                    key: quote.chave,
+                    gameEventId: this.game.event_id,
+                    favorite: this.game.favorito,
+                    isLive: this.game.ao_vivo
+                });
+
                 market[betType.cat_chave]['odds'].push({
                     key: quote.chave,
                     label: isPlayerTime ? quote.nome : betType.nome,
                     og: quote.og,
                     value: quote.valor,
-                    id: quote._id
+                    id: quote._id,
+                    finalValue,
+                    hasPermission: this.hasQuotaPermission(finalValue)
                 });
             }
-
-            console.log(markets[MarketTime.PLAYERS])
 
             this.markets[MarketTime.FULL_TIME] = Object.values(markets[MarketTime.FULL_TIME]);
             this.markets[MarketTime.FIRST_TIME] = Object.values(markets[MarketTime.FIRST_TIME]);
@@ -153,71 +164,127 @@ export default {
             this.markets[MarketTime.PLAYERS] = this.preparePlayerQuotes(Object.values(markets[MarketTime.PLAYERS]));
         },
         preparePlayerQuotes(quotes) {
-            const playerQuotes = [];
+            let quoteGroups = [
+                {
+                    title: 'Marcadores de gols',
+                    keys: ['jogador_marca_primeiro', 'jogador_marca_ultimo', 'jogador_marca_qualquer_momento'],
+                    players: []
+                },
+                {
+                    title: 'Multi marcadores',
+                    keys: ['jogador_marca_2_ou_mais_gols', 'jogador_marca_3_ou_mais_gols'],
+                    players: []
+                },
+                {
+                    title: 'Cartões',
+                    keys: ['jogador_recebera_primeiro_cartao', 'jogador_recebera_cartao', 'jogador_sera_expulso'],
+                    players: []
+                },
+                {
+                    title: `Gols casa - ${this.game.time_a_nome}`,
+                    keys: ['jogador_marca_1st_gol_casa', 'jogador_marca_ultimo_gol_casa'],
+                    players: []
+                },
+                {
+                    title: `Gols fora - ${this.game.time_b_nome}`,
+                    keys: ['jogador_marca_1st_gol_fora', 'jogador_marca_ultimo_gol_fora'],
+                    players: []
+                }
+            ];
+
             for (const quote of quotes) {
-                console.log(quote)
-                
-                // mercados[chave].odds.forEach((odd) => {
-                //     const casaFora = chave.includes('casa') ? 'casa' : chave.includes('fora') ? 'fora' : null;
-                //     let chaveJogador = null;
+                const groupIndex = quoteGroups.findIndex(group => group.keys.includes(quote.key));
+                if(groupIndex == -1) continue;
 
-                //     const verificacaoJogador = jogadoresMercados.some((item, key) => {
-                //         chaveJogador = key;
-                //         return item.nome === odd.nome;
-                //     });
+                for (const odd of quote.odds) {
+                    let playerIndex = quoteGroups[groupIndex].players.findIndex(player => player.name == odd.label)
+                    if(playerIndex == -1) {
+                        quoteGroups[groupIndex].players.push({
+                            name: odd.label,
+                            odds: []
+                        })
+                        playerIndex = quoteGroups[groupIndex].players.length - 1
+                    }
 
-                //     if (!verificacaoJogador) {
-                //         const temp = {
-                //             nome: odd.nome,
-                //             m_gols: {},
-                //             m_marcadores: {},
-                //             m_cartoes: {},
-                //             m_gols_casa: {},
-                //             m_gols_fora: {},
-                //             casa_fora: casaFora
-                //         };
-                //         jogadoresMercados.push(temp);
-                //     } else {
-                //         if (!jogadoresMercados[chaveJogador].casa_fora) {
-                //             jogadoresMercados[chaveJogador].casa_fora = casaFora;
-                //         }
-                //     }
-                // });
+                    const finalValue = this.calculateQuota({
+                        value: odd.value,
+                        key: odd.key,
+                        gameEventId: this.game.event_id,
+                        favorite: this.game.favorito,
+                        isLive: this.game.ao_vivo
+                    });
+
+                    quoteGroups[groupIndex].players[playerIndex].odds.push({
+                        ...odd,
+                        label: quote.name,
+                        finalValue,
+                        hasPermission: this.hasQuotaPermission(finalValue)
+                    })
+                }
             }
 
-            // jogadoresMercados.forEach((jogador) => {
-            //     const mercadosJogador = {};
-            //     for (const chave in mercados) {
-            //         const mercadoTemp = mercados[chave].odds.filter((odd) => {
-            //             return (odd.nome === jogador.nome && odd.nome !== 'No Bookings');
-            //         });
+            return quoteGroups.filter(group => Boolean(group.players.length));
+        },
+        hasQuotaPermission(quotaValue) {
+            const { options } = useConfigClient();
+            return Number(quotaValue) >= Number(options.bloquear_cotacao_menor_que || 1.05);
+        },
+        calculateQuota({
+            value = 0,
+            key,
+            gameEventId,
+            favorite,
+            isLive = false
+        }) {
+            const { betOptions, localQuotes, options } = useConfigClient();
+            const betType = betOptions[key] ?? undefined;
 
-            //         mercadosJogador[chave] = mercadoTemp[0] ? mercadoTemp[0] : {};
-            //     }
+            // Cotacação Local
+            if (localQuotes[gameEventId] && localQuotes[gameEventId][key]) {
+                value = parseFloat(localQuotes[gameEventId][key].valor);
+            }
 
-            //     jogador['m_gols']['jogador_marca_primeiro'] = this.checkEmpty(mercadosJogador['jogador_marca_primeiro']);
-            //     jogador['m_gols']['jogador_marca_ultimo'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo']);
-            //     jogador['m_gols']['jogador_marca_qualquer_momento'] = this.checkEmpty(mercadosJogador['jogador_marca_qualquer_momento']);
+            if (Boolean(betType)) {
+                if (isLive) {
+                    // Fator ao vivo
+                    const liveFactor = Boolean(betType.fator_ao_vivo)
+                        ? parseFloat(betType.fator_ao_vivo)
+                        : 1;
 
-            //     jogador['m_marcadores']['jogador_marca_2_ou_mais_gols'] = this.checkEmpty(mercadosJogador['jogador_marca_2_ou_mais_gols']);
-            //     jogador['m_marcadores']['jogador_marca_3_ou_mais_gols'] = this.checkEmpty(mercadosJogador['jogador_marca_3_ou_mais_gols']);
+                    value = value * liveFactor;
+                } else {
+                    const factor = Boolean(betType.fator)
+                        ? parseFloat(betType.fator)
+                        : 1;
 
-            //     jogador['m_cartoes']['jogador_recebera_primeiro_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_primeiro_cartao']);
-            //     jogador['m_cartoes']['jogador_recebera_cartao'] = this.checkEmpty(mercadosJogador['jogador_recebera_cartao']);
-            //     jogador['m_cartoes']['jogador_sera_expulso'] = this.checkEmpty(mercadosJogador['jogador_sera_expulso']);
+                    value = value * factor;
 
-            //     if (jogador.casa_fora === 'casa') {
-            //         jogador['m_gols_casa']['jogador_marca_1st_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_casa']);
-            //         jogador['m_gols_casa']['jogador_marca_ultimo_gol_casa'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_casa']);
-            //     }
+                    if (Boolean(favorite)) {
+                        // Favorito e Zebra
+                        const favoriteZebraQuotes = [
+                            'casa_90',
+                            'fora_90',
+                            'casa_empate_90',
+                            'fora_empate_90'
+                        ];
 
-            //     if (jogador.casa_fora === 'fora') {
-            //         jogador['m_gols_fora']['jogador_marca_1st_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_1st_gol_fora']);
-            //         jogador['m_gols_fora']['jogador_marca_ultimo_gol_fora'] = this.checkEmpty(mercadosJogador['jogador_marca_ultimo_gol_fora']);
-            //     }
-            // });
+                        if (favoriteZebraQuotes.includes(key)) {
+                            if (/casa/.test(key)) {
+                                value *= (favorite === FAVORITE_QUOTE_HOME)? options.fator_favorito : options.fator_zebra;
+                            } else {
+                                value *= (favorite === FAVORITE_QUOTE_OUTSIDE) ? options.fator_favorito : options.fator_zebra;
+                            }
+                        }
+                    }
+                }
 
-            return quotes;
+                // Limite
+                if (value > betType.limite) {
+                    value = parseFloat(betType.limite);
+                }
+            }
+
+            return value.toFixed(2);
         },
         handleGameFilter(filter) {
             this.filterSelected = filter

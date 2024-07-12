@@ -11,11 +11,12 @@
                     class="collapse__option"
                     v-for="(odd, oddIndex) in option.odds"
                     :key="`${oddIndex}-${index}`"
-                    :class="{'collapse__option--selected': oddIndex === 0}"
+                    :class="{'collapse__option--selected': false}"
                     @click="handleItemClick(odd)"
                 >
                     <span class="collapse__label">{{ odd.label }}</span>
-                    <span class="collapse__value">{{ odd.value }}</span>
+                    <span class="collapse__value" v-if="odd.hasPermission">{{ odd.finalValue }}</span>
+                    <IconLock v-else :size="14" color="var(--color-text-input)"/>
                 </button>
             </div>
         </Collapse>
@@ -24,10 +25,11 @@
 
 <script>
 import Collapse from '@/components/Collapse.vue';
+import IconLock from '@/components/icons/IconLock.vue';
 
 export default {
     name: 'time-quotes',
-    components: { Collapse },
+    components: { Collapse, IconLock },
     props: {
         quotes: {
             type: Array,
