@@ -1802,15 +1802,6 @@ gulp.task('vegasbrasilbet.com', function (done) {
     });
 });
 
-gulp.task('bet165.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bet165.bet",
-        banca: "BET 165",
-        styles: "",
-    });
-});
-
 gulp.task('palpitei.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
