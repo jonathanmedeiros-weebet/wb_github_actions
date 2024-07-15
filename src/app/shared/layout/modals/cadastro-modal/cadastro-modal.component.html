@@ -74,6 +74,24 @@
                 </div>
             </div>
         </div>
+        <div>
+            <div class="col-md-12">
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
+                    <div class="input-md">
+                        <input type="text" id="confirmarEmail" class="form-control inverted-out"
+                               [ngClass]="applyCssInputError('confirmarEmail')"
+                               [readonly]="formSocial"
+                               formControlName="confirmarEmail" placeholder=" "
+                               (paste)="blockPaste($event)" autocomplete="off"
+                        >
+                        <label for="email">{{'geral.confirmarEmail' | translate}}</label>
+                    </div>
+
+                    <app-error-msg [control]="form.get('confirmarEmail')" label="{{'geral.confirmarEmail' | translate}}"
+                                   class="text-left"></app-error-msg>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group mb-4">
