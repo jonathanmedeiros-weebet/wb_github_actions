@@ -19,27 +19,27 @@
         <div class="gain">
           <div class="gain__item">
             <span>Quantidade de Jogos:</span>
-            <span class="info__value">{{ ticketItem.infoBet[0].qtGames }}</span>
+            <span class="gain__value">{{ ticketItem.infoBet[0].qtGames }}</span>
           </div>
           <div class="gain__item">
             <span>Cotação:</span>
-            <span class="info__value">{{ ticketItem.infoBet[0].odd }}</span>
+            <span class="gain__value">{{ ticketItem.infoBet[0].odd }}</span>
           </div>
           <div class="gain__item">
             <span>Valor Apostado:</span>
-            <span class="info__value">R${{ ticketItem.infoBet[0].valueBet }}</span>
+            <span class="gain__value">R${{ ticketItem.infoBet[0].valueBet }}</span>
           </div>
           <div class="gain__item">
             <span>Possível Retorno:</span>
-            <span class="info__value">R${{ ticketItem.infoBet[0].returnEarnings }}</span>
+            <span class="gain__value">R${{ ticketItem.infoBet[0].returnEarnings }}</span>
           </div>
           <div class="gain__item">
             <span>Resultados:</span>
-            <span class="info__value">{{ ticketItem.infoBet[0].statusResult }}</span>
+            <span class="gain__value">{{ ticketItem.infoBet[0].statusResult }}</span>
           </div>
           <div class="gain__item">
             <span>Prêmio:</span>
-            <span class="info__value">R${{ ticketItem.infoBet[0].award }}</span>
+            <span class="gain__value">R${{ ticketItem.infoBet[0].award }}</span>
           </div>
         </div>
         <div 
@@ -97,12 +97,10 @@
         <w-button
         text="Compartilhar"
         class="button__cancel"
-        @click="cancelAction"
         />
         <w-button
         text="Imprimir"
         class="button__confirm"
-        @click="confirmAction"
         />
     </div>
       <div class="finish" v-if="showCloseBet">
@@ -125,10 +123,12 @@ import IconLive from '@/components/icons/IconLive.vue';
 import IconGame from '@/components/icons/IconGame.vue';
 import IconVolleyball from '@/components/icons/IconVolleyball.vue';
 import IconFootball from '@/components/icons/IconFootball.vue';
+import IconShare from '@/components/icons/IconShare.vue';
+import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
 
 export default {
-  name: 'Ticket',
+  name: 'close-bet',
   components: { 
     Header, 
     IconBall,
@@ -136,7 +136,9 @@ export default {
     WButton,
     IconGame,
     IconVolleyball,
-    IconFootball
+    IconFootball,
+    IconShare,
+    IconPrinter
   },
   data() {
     return {  
@@ -217,6 +219,7 @@ export default {
       this.showFinish = false;
       this.showClickFinalized = false;
       this.showFinished = true
+      this.title = 'Aposta'
     }
   }
 }
@@ -241,7 +244,7 @@ export default {
   gap: 12px;
   padding: 19px 15px;
   width: 100%;
-  background: #181818;
+  background: var(--color-background-input);
   border-radius: 2px;
   
 
@@ -254,10 +257,10 @@ export default {
 
     &__text {
         font-size: 14px;
-        color: #fff;
+        color: var(--color-text);
     }
     &__date {
-        color: #ffffff80
+        color: var(--color-text-input)
     }
 }
 
@@ -267,6 +270,7 @@ export default {
     flex-direction: column;
     gap: 4px;
     margin-bottom: -10px;
+
     &__text {
         font-size: 14px;
     }
@@ -276,11 +280,12 @@ export default {
     flex-direction: column;
     gap: 4px;
     margin-bottom: 10px;
+
     &__item {
         display: flex;
         justify-content: space-between;
         font-size: 14px;
-        color: #fff;
+        color: var(--color-text);
     }
     &__value {
         margin-left: auto;
@@ -292,9 +297,10 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    background: #0A0A0A;
+    background: var(--color-background);
     border-radius: 4px;
     margin-bottom: -9px;
+    
     &__header, &__info, &__text, &__result {
         display: flex;
         align-items: center;
@@ -303,27 +309,27 @@ export default {
 
     &__team {
         font-size: 14px;
-        color: #fff;
+        color: var(--color-text);
         display: flex;          
         align-items: center;   
         font-size: 14px;
-        color: #fff;
+        color: var(--color-text);
         gap: 4px;  
     }
 
     &__date, &__text, &__result {
         font-size: 14px;
-        color: #bbb;
+        color: #bbbbbb;
         justify-content: space-between;
     }
 
     &__odd {
         font-size: 14px;
-        color: #FFF;
+        color: var(--color-text);
     }
 
     &__select {
-        color: #FFF;
+        color: var(--color-text);
         font-size: 14px;
     }
 
@@ -332,7 +338,7 @@ export default {
         height: 16px;
     }
     &__message {
-        color: #F61A1A;
+        color: var(--color-danger);
         text-align: center;
         font-size: 14px;
         padding: 10px;
@@ -340,17 +346,15 @@ export default {
     }
 }
 
-
 .buttons {
   display: flex;
   justify-content: space-between;
   gap: 8px;
   padding-top: 25px;
   
-
   &__cancel {
     font-size: 16px;
-    background: #181818;
+    background: var(--color-background-input);
   }
 
   &__confirm {
