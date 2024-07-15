@@ -40,6 +40,7 @@ import Collapse from '@/components/Collapse.vue';
 import GameItem from './GameItem.vue';
 import { useHomeStore } from '@/stores';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
+import { hasQuotaPermission, calculateQuota } from '@/services';
 export default {
   components: { Collapse, GameItem, IconGlobal },
     name: 'game-list',
@@ -50,18 +51,41 @@ export default {
     },
     computed: {
         championshipList() {
+            console.log(this.homeStore.championshipList)
             return this.homeStore.championshipList.map((championship) => {
                 if(championship.regiao_sigla !== 'ww') {
                     championship.image = `https://cdn.wee.bet/flags/1x1/${championship.regiao_sigla}.svg`;
                 } else {
                     championship.icon = IconGlobal;
                 }
+
+                championship.jogos = championship.jogos.map((game) => {
+                    game.cotacoes = game.cotacoes.map(quota => {
+                        const finalValue = this.calculateQuota({
+                            value: quota.valor,
+                            key: quota.chave,
+                            gameEventId: game.event_id,
+                            favorite: game.favorito,
+                            isLive: game.ao_vivo
+                        });
+                        const hasPermission = this.hasQuotaPermission(finalValue)
+
+                        return {
+                            ...quota,
+                            hasPermission,
+                            finalValue
+                        };
+                    })
+                    return game;
+                })
                 
                 return championship;
             });
         }
     },
     methods: {
+        hasQuotaPermission,
+        calculateQuota,
         handleClick(game) {
             this.$emit('click', game);
         },

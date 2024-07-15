@@ -28,13 +28,11 @@ import GameDetailHeader from './parts/GameDetailHeader.vue'
 import { MarketTime } from '@/enums'
 import Collapse from '@/components/Collapse.vue'
 import Button from '@/components/Button.vue'
-import { getGame } from '@/services'
+import { getGame, hasQuotaPermission, calculateQuota } from '@/services'
 import { useConfigClient } from '@/stores'
 import TimeQuotes from './parts/TimeQuotes.vue'
 import PlayerQuotes from './parts/PlayerQuotes.vue'
 
-const FAVORITE_QUOTE_HOME = 'casa'
-const FAVORITE_QUOTE_OUTSIDE = 'fora'
 
 export default {
     components: {
@@ -80,34 +78,41 @@ export default {
             return this.headerFixed ? 'slim' : 'normal'
         },
         filters() {
-            return [
+            const filters = [
                 {
                     title: 'Tempo completo',
                     selected: this.filterSelected === MarketTime.FULL_TIME,
                     slug: MarketTime.FULL_TIME,
+                    show: Boolean(this.markets[MarketTime.FULL_TIME].length)
                 },
                 {
                     title: 'Primeiro tempo',
                     selected: this.filterSelected === MarketTime.FIRST_TIME,
-                    slug: MarketTime.FIRST_TIME
+                    slug: MarketTime.FIRST_TIME,
+                    show: Boolean(this.markets[MarketTime.FIRST_TIME].length)
                 },
                 {
                     title: 'Segundo tempo',
                     selected: this.filterSelected === MarketTime.SECOND_TIME,
-                    slug: MarketTime.SECOND_TIME
+                    slug: MarketTime.SECOND_TIME,
+                    show: Boolean(this.markets[MarketTime.SECOND_TIME].length)
                 },
                 {
                     title: 'Jogadores',
                     selected: this.filterSelected === MarketTime.PLAYERS,
-                    slug: MarketTime.PLAYERS
-                },
-            ]
+                    slug: MarketTime.PLAYERS,
+                    show: Boolean(this.markets[MarketTime.PLAYERS].length)
+                }
+            ];
+            return filters.filter(filter => filter.show)
         },
         options() {
             return this.markets[this.filterSelected]
         }
     },
     methods: {
+        hasQuotaPermission,
+        calculateQuota,
         async prepareGameDetail() {
             const gameId = String(this.$route.params.id);
             const response = await getGame(gameId);
@@ -225,67 +230,7 @@ export default {
 
             return quoteGroups.filter(group => Boolean(group.players.length));
         },
-        hasQuotaPermission(quotaValue) {
-            const { options } = useConfigClient();
-            return Number(quotaValue) >= Number(options.bloquear_cotacao_menor_que || 1.05);
-        },
-        calculateQuota({
-            value = 0,
-            key,
-            gameEventId,
-            favorite,
-            isLive = false
-        }) {
-            const { betOptions, localQuotes, options } = useConfigClient();
-            const betType = betOptions[key] ?? undefined;
-
-            // Cotacação Local
-            if (localQuotes[gameEventId] && localQuotes[gameEventId][key]) {
-                value = parseFloat(localQuotes[gameEventId][key].valor);
-            }
-
-            if (Boolean(betType)) {
-                if (isLive) {
-                    // Fator ao vivo
-                    const liveFactor = Boolean(betType.fator_ao_vivo)
-                        ? parseFloat(betType.fator_ao_vivo)
-                        : 1;
-
-                    value = value * liveFactor;
-                } else {
-                    const factor = Boolean(betType.fator)
-                        ? parseFloat(betType.fator)
-                        : 1;
-
-                    value = value * factor;
-
-                    if (Boolean(favorite)) {
-                        // Favorito e Zebra
-                        const favoriteZebraQuotes = [
-                            'casa_90',
-                            'fora_90',
-                            'casa_empate_90',
-                            'fora_empate_90'
-                        ];
-
-                        if (favoriteZebraQuotes.includes(key)) {
-                            if (/casa/.test(key)) {
-                                value *= (favorite === FAVORITE_QUOTE_HOME)? options.fator_favorito : options.fator_zebra;
-                            } else {
-                                value *= (favorite === FAVORITE_QUOTE_OUTSIDE) ? options.fator_favorito : options.fator_zebra;
-                            }
-                        }
-                    }
-                }
-
-                // Limite
-                if (value > betType.limite) {
-                    value = parseFloat(betType.limite);
-                }
-            }
-
-            return value.toFixed(2);
-        },
+        
         handleGameFilter(filter) {
             this.filterSelected = filter
         },

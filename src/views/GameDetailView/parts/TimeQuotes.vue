@@ -38,8 +38,9 @@ export default {
     },
     methods: {
         handleItemClick(odd) {
-            void odd;
             event.stopPropagation();
+            if(!odd.hasPermission) return;
+            void odd;
         },
     }
 }
@@ -69,7 +70,6 @@ export default {
         background: var(--color-background);
         border: none;
         border-radius: 4px;
-        padding: 9px 15px;
 
         display: flex;
         flex-direction: column;

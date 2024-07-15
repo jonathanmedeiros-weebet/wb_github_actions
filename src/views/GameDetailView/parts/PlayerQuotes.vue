@@ -25,10 +25,7 @@
                             class="collapse__option"
                             v-for="odd in player.odds"
                             :key="odd.id"
-                            :class="{
-                                'collapse__option--selected': false,
-                                'collapse__option--disabled': !odd.hasPermission,
-                            }"
+                            :class="{'collapse__option--selected': false}"
                             @click="handleItemClick(odd)"
                         >
                             <span class="collapse__value" v-if="odd.hasPermission">{{ odd.finalValue }}</span>
@@ -56,9 +53,9 @@ export default {
     },
     methods: {
         handleItemClick(odd) {
+            event.stopPropagation();
             if(!odd.hasPermission) return;
             void odd;
-            event.stopPropagation();
         },
     }
 }
@@ -96,7 +93,6 @@ export default {
         background: var(--color-background);
         border: none;
         border-radius: 4px;
-        padding: 9px 15px;
 
         display: flex;
         flex-direction: column;

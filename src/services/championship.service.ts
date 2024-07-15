@@ -1,6 +1,14 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
 
+interface CalculateQuotaParams {
+    key: string;
+    value: number;
+    gameEventId: string | number;
+    favorite: string;
+    isLive: boolean;
+}
+
 export const getChampionship = async (championshipId: string = '') => {
     const { deadlineTable, mainOdds, centerUrl } = useConfigClient();
     const params = {
@@ -60,4 +68,69 @@ export const getGame = async (gameId: string) => {
     const { centerUrl } = useConfigClient();
     const url = `${centerUrl}/jogos/${gameId}`;
     return await axiosInstance().get(url)
+}
+
+export const hasQuotaPermission = (quotaValue: number | string) => {
+    const { options } = useConfigClient();
+    return Number(quotaValue) >= Number(options.bloquear_cotacao_menor_que || 1.05);
+}
+
+export const calculateQuota = ({
+    value = 0,
+    key,
+    gameEventId,
+    favorite,
+    isLive = false
+}: CalculateQuotaParams) => {
+    const FAVORITE_QUOTE_HOME = 'casa'
+    const FAVORITE_QUOTE_OUTSIDE = 'fora'
+    const { betOptions, localQuotes, options } = useConfigClient();
+    const betType = betOptions[key] ?? undefined;
+
+    // Cotacação Local
+    if (localQuotes[gameEventId] && localQuotes[gameEventId][key]) {
+        value = parseFloat(localQuotes[gameEventId][key].valor);
+    }
+
+    if (Boolean(betType)) {
+        if (isLive) {
+            // Fator ao vivo
+            const liveFactor = Boolean(betType.fator_ao_vivo)
+                ? parseFloat(betType.fator_ao_vivo)
+                : 1;
+
+            value = value * liveFactor;
+        } else {
+            const factor = Boolean(betType.fator)
+                ? parseFloat(betType.fator)
+                : 1;
+
+            value = value * factor;
+
+            if (Boolean(favorite)) {
+                // Favorito e Zebra
+                const favoriteZebraQuotes = [
+                    'casa_90',
+                    'fora_90',
+                    'casa_empate_90',
+                    'fora_empate_90'
+                ];
+
+                if (favoriteZebraQuotes.includes(key)) {
+                    if (/casa/.test(key)) {
+                        value *= (favorite === FAVORITE_QUOTE_HOME)? options.fator_favorito : options.fator_zebra;
+                    } else {
+                        value *= (favorite === FAVORITE_QUOTE_OUTSIDE) ? options.fator_favorito : options.fator_zebra;
+                    }
+                }
+            }
+        }
+
+        // Limite
+        if (value > betType.limite) {
+            value = parseFloat(betType.limite);
+        }
+    }
+
+    return value.toFixed(2);
 }

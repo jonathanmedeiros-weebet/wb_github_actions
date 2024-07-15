@@ -18,9 +18,12 @@
             <div
                 class="game__quota"
                 v-for="(quote, index) in quotes"
+                :class="{'game__quota--disabled': !quote.hasPermission,}"
                 :key="index"
+                @click="handleItemClick(quote)"
             >
-                {{ quote.valor }}
+                <span v-if="quote.hasPermission">{{ quote.finalValue }}</span>
+                <IconLock v-else :size="14" color="var(--color-text-input)"/>
             </div>
         </div>
     </div>
@@ -28,7 +31,9 @@
 
 <script>
 import { convertInMomentInstance } from '@/utilities';
+import IconLock from '@/components/icons/IconLock.vue';
 export default {
+  components: { IconLock },
     name: 'game-item',
     props: {
         game: {
@@ -75,7 +80,12 @@ export default {
         },
         changeSrcWhenImageError (event) {
             event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
-        }
+        },
+        handleItemClick(odd) {
+            event.stopPropagation();
+            if(!odd.hasPermission) return;
+            void odd;
+        },
     }
 }
 </script>
