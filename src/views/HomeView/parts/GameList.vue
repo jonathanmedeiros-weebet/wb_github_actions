@@ -51,22 +51,23 @@ export default {
     },
     computed: {
         championshipList() {
-            console.log(this.homeStore.championshipList)
             return this.homeStore.championshipList.map((championship) => {
-                if(championship.regiao_sigla !== 'ww') {
-                    championship.image = `https://cdn.wee.bet/flags/1x1/${championship.regiao_sigla}.svg`;
+                const newChampionship = { ...championship };
+                if(newChampionship.regiao_sigla !== 'ww') {
+                    newChampionship.image = `https://cdn.wee.bet/flags/1x1/${newChampionship.regiao_sigla}.svg`;
                 } else {
-                    championship.icon = IconGlobal;
+                    newChampionship.icon = IconGlobal;
                 }
 
-                championship.jogos = championship.jogos.map((game) => {
-                    game.cotacoes = game.cotacoes.map(quota => {
+                newChampionship.jogos = championship.jogos.map((game) => {
+                    const newGame = { ...game };
+                    newGame.cotacoes = newGame.cotacoes.map(quota => {
                         const finalValue = this.calculateQuota({
                             value: quota.valor,
                             key: quota.chave,
-                            gameEventId: game.event_id,
-                            favorite: game.favorito,
-                            isLive: game.ao_vivo
+                            gameEventId: newGame.event_id,
+                            favorite: newGame.favorito,
+                            isLive: newGame.ao_vivo
                         });
                         const hasPermission = this.hasQuotaPermission(finalValue)
 
@@ -76,10 +77,10 @@ export default {
                             finalValue
                         };
                     })
-                    return game;
+                    return newGame;
                 })
                 
-                return championship;
+                return newChampionship;
             });
         }
     },

@@ -1,24 +1,27 @@
 <template>
     <div class="game-detail">
-        <div class="game-detail__header">
-           <GameDetailHeader :game="game" :type="gameHeaderType" :fixed="headerFixed"/>
-        </div>
-        <div class="game-detail__body" :class="{'game-detail__body--paddintTop': headerFixed}">
-           <div class="game-detail__filters">
-                <button
-                    class="game-detail__filter"
-                    v-for="({ title, selected, slug}, index) in filters"
-                    :key="index"
-                    :class="{'game-detail__filter--selected': selected}"
-                    @click="handleGameFilter(slug)"
-                >
-                    {{ title }}
-                </button>
+        <GameDetailSkeleton v-if="loading"/>
+        <template v-else>
+            <div class="game-detail__header">
+            <GameDetailHeader :game="game" :type="gameHeaderType" :fixed="headerFixed"/>
             </div>
+            <div class="game-detail__body" :class="{'game-detail__body--paddintTop': headerFixed}">
+            <div class="game-detail__filters">
+                    <button
+                        class="game-detail__filter"
+                        v-for="({ title, selected, slug}, index) in filters"
+                        :key="index"
+                        :class="{'game-detail__filter--selected': selected}"
+                        @click="handleGameFilter(slug)"
+                    >
+                        {{ title }}
+                    </button>
+                </div>
 
-            <TimeQuotes v-if="!filteredPerPlayer" :quotes="options"/>
-            <PlayerQuotes v-if="filteredPerPlayer" :quotes="options"/>
-        </div>
+                <TimeQuotes v-if="!filteredPerPlayer" :quotes="options"/>
+                <PlayerQuotes v-if="filteredPerPlayer" :quotes="options"/>
+            </div>
+        </template>
     </div>
 </template>
 
@@ -32,6 +35,7 @@ import { getGame, hasQuotaPermission, calculateQuota } from '@/services'
 import { useConfigClient } from '@/stores'
 import TimeQuotes from './parts/TimeQuotes.vue'
 import PlayerQuotes from './parts/PlayerQuotes.vue'
+import GameDetailSkeleton from './parts/GameDetailSkeleton.vue'
 
 
 export default {
@@ -41,7 +45,8 @@ export default {
         Collapse,
         Button,
         TimeQuotes,
-        PlayerQuotes
+        PlayerQuotes,
+        GameDetailSkeleton
     },
     name: 'game-detail',
     data() {
@@ -54,12 +59,15 @@ export default {
                 [MarketTime.FIRST_TIME]: [],
                 [MarketTime.SECOND_TIME]: [],
                 [MarketTime.PLAYERS]: []
-            }
+            },
+            loading: false
         }
     },
     async created() {
+        this.loading = true;
         await this.prepareGameDetail();
-        this.prepareQuotes();
+        await this.prepareQuotes();
+        this.loading = false;
     },
     mounted() {
         document.addEventListener("scroll", () => {
@@ -83,25 +91,25 @@ export default {
                     title: 'Tempo completo',
                     selected: this.filterSelected === MarketTime.FULL_TIME,
                     slug: MarketTime.FULL_TIME,
-                    show: Boolean(this.markets[MarketTime.FULL_TIME].length)
+                    show: Boolean(this.game && this.markets[MarketTime.FULL_TIME].length)
                 },
                 {
                     title: 'Primeiro tempo',
                     selected: this.filterSelected === MarketTime.FIRST_TIME,
                     slug: MarketTime.FIRST_TIME,
-                    show: Boolean(this.markets[MarketTime.FIRST_TIME].length)
+                    show: Boolean(this.game && this.markets[MarketTime.FIRST_TIME].length)
                 },
                 {
                     title: 'Segundo tempo',
                     selected: this.filterSelected === MarketTime.SECOND_TIME,
                     slug: MarketTime.SECOND_TIME,
-                    show: Boolean(this.markets[MarketTime.SECOND_TIME].length)
+                    show: Boolean(this.game && this.markets[MarketTime.SECOND_TIME].length)
                 },
                 {
                     title: 'Jogadores',
                     selected: this.filterSelected === MarketTime.PLAYERS,
                     slug: MarketTime.PLAYERS,
-                    show: Boolean(this.markets[MarketTime.PLAYERS].length)
+                    show: Boolean(this.game && this.markets[MarketTime.PLAYERS].length)
                 }
             ];
             return filters.filter(filter => filter.show)
@@ -114,13 +122,17 @@ export default {
         hasQuotaPermission,
         calculateQuota,
         async prepareGameDetail() {
-            const gameId = String(this.$route.params.id);
-            const response = await getGame(gameId);
-            this.game = response.result;
+            try {
+                const gameId = String(this.$route.params.id);
+                const response = await getGame(gameId);
+                this.game = response.result;
+            } catch (error) {
+                this.$router.back();
+            }
         },
         async prepareQuotes() {
             const { betOptions } = useConfigClient();
-            const quotes = this.game.cotacoes;
+            const quotes = this.game?.cotacoes ?? [];
             const markets = {
                 [MarketTime.FULL_TIME]: {},
                 [MarketTime.FIRST_TIME]: {},
@@ -240,7 +252,7 @@ export default {
 
 <style lang="scss" scoped>
 .game-detail {
-    padding-bottom: 100px;
+    padding-bottom: 20px;
 
     &__filters {
         height: 53px;

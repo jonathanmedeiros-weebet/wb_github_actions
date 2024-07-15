@@ -11,7 +11,7 @@
                     type="button"
                     class="modal-leagues__item"
                     :key="regionIndex"
-                    @click="handleSelect(region.id)"
+                    @click="handleSelect(region)"
                 >
                     <span
                         v-if="region.image"
@@ -29,7 +29,7 @@
                     class="modal-leagues__subitem"
                     v-for="(championship, championshipIndex) in region.championships"
                     :key="`${championshipIndex}-${regionIndex}`"
-                    @click="handleSelect(championship.id)"
+                    @click="handleSelect(championship)"
                 >
                     {{ championship.name }}
                 </a>
@@ -59,15 +59,7 @@ export default {
     },
     computed: {
         items() {
-            return this.homeStore.championshipPerRegionList.map((item) => {
-                const isIcon = ['ww', 'all'].includes(item.slug);
-                const iconComponent = item.slug === 'ww' ? IconGlobal : IconTrophy;
-                return {
-                    ...item,
-                    image: !isIcon ? `https://cdn.wee.bet/flags/1x1/${item.slug}.svg` : null,
-                    icon: isIcon ? iconComponent : null
-                };
-            });
+            return this.homeStore.championshipPerRegionList;
         }
     },
     
