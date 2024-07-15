@@ -81,34 +81,40 @@
           </p>
         </div>
       </div>  
-    <div class="buttons" v-if="showClickFinalized">
+      <div class="buttons" v-if="showClickFinalized">
         <w-button
-        text="Cancelar"
-        class="button__cancel"
-        @click="cancelAction"
+          text="Cancelar"
+          color="secondary-light"
+          @click="cancelAction"
         />
         <w-button
-        text="Confirmar"
-        class="button__confirm"
-        @click="confirmAction"
+          text="Confirmar"
+          @click="confirmAction"
         />
-    </div>
-        <div class="buttons" v-if="showFinished">
+      </div>
+      <div class="buttons" v-if="showFinished">
         <w-button
-        text="Compartilhar"
-        class="button__cancel"
-        />
+          text="Compartilhar"
+          color="secondary-light"
+        >
+        <template #icon-left>
+          <IconShare :size="20"/>
+        </template>
+        </w-button>
         <w-button
-        text="Imprimir"
-        class="button__confirm"
-        />
-    </div>
+          text="Imprimir"
+          class="button__confirm"
+        >
+        <template #icon-left>
+          <IconPrinter :size="20"/>
+        </template>
+        </w-button>
+      </div>
       <div class="finish" v-if="showCloseBet">
         <w-button
           id="btn-entrar"
           text="Encerrar Aposta"
           value="entrar"
-          class="finish__button"
           name="btn-entrar"
           @click="closeBet"
         />
@@ -246,8 +252,6 @@ export default {
   width: 100%;
   background: var(--color-background-input);
   border-radius: 2px;
-  
-
 }
 
 .code {
@@ -264,7 +268,6 @@ export default {
     }
 }
 
-
 .info {
     display: flex;
     flex-direction: column;
@@ -272,7 +275,9 @@ export default {
     margin-bottom: -10px;
 
     &__text {
-        font-size: 14px;
+      display: flex;
+      font-size: 14px;
+      width: 100%;
     }
 }
 .gain {
@@ -286,9 +291,6 @@ export default {
         justify-content: space-between;
         font-size: 14px;
         color: var(--color-text);
-    }
-    &__value {
-        margin-left: auto;
     }
 
 }
@@ -351,16 +353,6 @@ export default {
   justify-content: space-between;
   gap: 8px;
   padding-top: 25px;
-  
-  &__cancel {
-    font-size: 16px;
-    background: var(--color-background-input);
-  }
-
-  &__confirm {
-    font-size: 16px;
-  }
-
 }
 
 .finish {
