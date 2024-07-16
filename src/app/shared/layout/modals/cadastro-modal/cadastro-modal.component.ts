@@ -24,6 +24,7 @@ import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afilia
     styleUrls: ['./cadastro-modal.component.css'],
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChild('captchaRef') captchaRef;
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     appMobile;
     isMobile = false;
@@ -46,7 +47,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     cpfValidado = false;
     menorDeIdade = false;
     possuiCodigoAfiliado = false;
-
+    isLoterj;
     user: any;
     loginGoogleAtivo = false;
     formSocial = false;
@@ -74,7 +75,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
-
+        this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.createForm();
 
         this.hCaptchaLanguage = this.translate.currentLang;
@@ -188,6 +189,17 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null]
         });
+
+        if (this.isLoterj) {
+            this.form.addControl('confirmarEmail', this.fb.control(null, [
+                Validators.required,
+                Validators.email,
+                FormValidations.equalsTo('email')
+            ]));
+            this.form.addControl('termosUso', this.fb.control(null, [
+                Validators.requiredTrue,
+            ]));
+        }
     }
 
     ngOnDestroy() {
@@ -333,5 +345,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
+    }
+
+    executeCaptcha() {
+        if(this.form.valid){
+            this.captchaRef.execute()
+        }
     }
 }
