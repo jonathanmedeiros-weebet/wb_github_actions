@@ -33,7 +33,7 @@
             </div>
         </nav>
     </div>
-    <ng-container *ngIf="jogosDestaque.length; else elseWithoutLeagues">
+    <ng-container *ngIf="jogosDestaque.length">
         <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;" #owlCar>
             <ng-container *ngFor="let jogoDestaque of jogosDestaque">
                 <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="widthCard">
@@ -46,7 +46,7 @@
                                 {{ jogoDestaque.horario | moment: '' : true}}{{ jogoDestaque.horario | moment:"/ H:mm"}}
                             </span>
                         </div>
-    
+
                         <div class="jogo">
                             <div class="time1">
                                 <span class="text-center" [title]="jogoDestaque.time_a_nome">{{ jogoDestaque.time_a_nome }}</span>
@@ -72,7 +72,7 @@
                                 <span class="text-center flex-grow-1" [title]="jogoDestaque.time_b_nome">{{ jogoDestaque.time_b_nome }}</span>
                             </div>
                         </div>
-    
+
                         <div class="jogo-destaque-odds">
                             <div *ngFor="let cotacao of jogoDestaque.cotacoes"
                             [ngClass]="{'odd-disabled': !cotacaoPermitida(cotacao.valor)}"
@@ -92,7 +92,4 @@
             </ng-container>
         </owl-carousel-o>
     </ng-container>
-    <ng-template #elseWithoutLeagues>
-        <span class="empty-league-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
-    </ng-template>
 </div>
