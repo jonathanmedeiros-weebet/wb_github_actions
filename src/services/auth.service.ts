@@ -17,13 +17,12 @@ export const authUser = async (
         const resp = await axiosInstance().post(url, user); 
 
         if(resp.success){
-            console.log(resp);
-            //TODO: VERIFICAR O TIPO DE USUÁRIO (CAMBISTA)
-            // if(resp.results.user.tipo_usuario == 'cambista'){
+            
+            if(resp.results.user.tipo_usuario == 'cambista'){
                 localStorageService.set('token', resp.results.token);
                 localStorageService.set('user', resp.results.user);
                 return true;   
-            // }
+            }
         }
         return false;
     } catch (error) {
