@@ -1,5 +1,5 @@
 <template>
-    <WModal :backdropClick="true" @close="handleCloseModal">
+    <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
       <template #title>
         <span class="modal-modalities__title">Selecione uma modalidade</span>
       </template>
@@ -49,6 +49,7 @@ export default {
             this.$emit('closeModal');
         },
         handleSelect(modalityId) {
+            this.$refs['wmodal'].handleClose();
             this.$emit('click', modalityId);
         }
     }

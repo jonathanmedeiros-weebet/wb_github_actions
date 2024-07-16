@@ -1,37 +1,40 @@
 <template>
     <div class="game-list">
-        <Collapse
-            class="game-list__collapse"
-            :initCollapsed="true"
-            v-for="(championship, index) in championshipList"
-            :key="index"
-        >
-            <template #title>
-                <img
-                    v-if="championship.image"
-                    :src="championship.image"
-                    @error="changeSrcWhenImageError"
-                />
-                <component v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
-                {{ championship.nome }}
-            </template>
+        <span class="game-list__message" v-if="!Boolean(championshipList.length)">Nenhum evento disponível</span>
+        <template v-else>
+            <Collapse
+                class="game-list__collapse"
+                :initCollapsed="true"
+                v-for="(championship, index) in championshipList"
+                :key="index"
+            >
+                <template #title>
+                    <img
+                        v-if="championship.image"
+                        :src="championship.image"
+                        @error="changeSrcWhenImageError"
+                    />
+                    <component v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
+                    {{ championship.nome }}
+                </template>
 
-            <div class="game-list__items"> 
-                <div class="game-list__item-empty">
-                    <div class="game-list__columns">
-                    <span class="game-list__column">1</span>
-                    <span class="game-list__column">x</span>
-                    <span class="game-list__column">2</span>
+                <div class="game-list__items"> 
+                    <div class="game-list__item-empty">
+                        <div class="game-list__columns">
+                        <span class="game-list__column">1</span>
+                        <span class="game-list__column">x</span>
+                        <span class="game-list__column">2</span>
+                        </div>
                     </div>
+                    <GameItem
+                        v-for="(game, index) in championship.jogos"
+                        :key="index"
+                        :game="game"
+                        @click="handleClick(game)"
+                    />
                 </div>
-                <GameItem
-                    v-for="(game, index) in championship.jogos"
-                    :key="index"
-                    :game="game"
-                    @click="handleClick(game)"
-                />
-            </div>
-        </Collapse>
+            </Collapse>
+        </template>
     </div>
 </template>
 
@@ -139,6 +142,12 @@ export default {
         border-radius: 50px;
         width: 16px;
         height: 16px;
+    }
+
+    &__message {
+        padding: 8px 16px;
+        font-size: 12px;
+        color: var(--color-text-input);
     }
 }
 </style>

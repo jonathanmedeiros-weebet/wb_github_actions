@@ -1,5 +1,5 @@
 <template>
-    <WModal :backdropClick="true" @close="handleCloseModal">
+    <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
       <template #title>
         <span class="modal-leagues__title">Selecione um campeonato</span>
       </template>
@@ -68,7 +68,8 @@ export default {
             this.$emit('closeModal');
         },
         handleSelect(item) {
-            this.$emit('click', item);
+            this.$refs['wmodal'].handleClose();
+            this.$emit('click', {...item});
         }
     }
 }
@@ -112,6 +113,7 @@ export default {
         color: #FFFFFF99;
         font-size: 14px;
         font-weight: 400;
+        text-align: left;
     }
 
     &__image {

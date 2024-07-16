@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <Header
-      :showCalendarButton="false"
-      :showSearchButton="false"
+      :showCalendarButton="true"
+      :showSearchButton="true"
       @calendarClick="handleOpenCalendarModal"
       @searchClick="handleOpenSearchModal"
     >
@@ -20,7 +20,7 @@
           <img v-if="league.image" :src="league.image"  @error="changeSrcWhenImageError">
           <component v-if="league.icon" :is="league.icon" color="var(--color-primary)" />
 
-          <span>{{ league.name }}</span>
+          <span>{{ league.label }}</span>
         </SelectFake>
 
         <GameList />
@@ -57,7 +57,7 @@
 
 <script>
 import { now } from '@/utilities'
-import { modalityList, leagueList } from '@/constants'
+import { modalityList, leagueList, countriesWithFemaleNames } from '@/constants'
 import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId } from '@/services'
 import { useHomeStore } from '@/stores'
 
@@ -99,6 +99,7 @@ export default {
       league: leagueList[0],
       modalityList,
       dateSelected: now(),
+      regionSelected: '',
       homeStore: useHomeStore()
     }
   },
@@ -106,7 +107,7 @@ export default {
     this.loading = true;
     this.modality = this.modalityList.find(modality => modality.id === MODALITY_SPORT_FUTEBOL);
     await this.prepareChampionshipPerRegionList(this.modality.id);
-    await this.prepareChampionshipList(this.modality.id, true);
+    await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
     this.loading = false;
   },
   computed: {
@@ -125,13 +126,15 @@ export default {
         const championships = region.campeonatos.map(({_id, nome}) => ({
           id: _id,
           name: nome.replace(`${region._id}: `, '').toUpperCase(),
+          label: nome.toUpperCase(),
           image: !isIcon ? `https://cdn.wee.bet/flags/1x1/${region.sigla}.svg` : null,
           icon: isIcon ? iconComponent : null
         }));
 
         championships.unshift({
           id: `region_${region._id}`,
-          name: `TODOS OS CAMPEONATOS`.toUpperCase(),
+          name: `TODOS OS CAMPEONATOS ${this.prepareCountryName(region._id)}`.toUpperCase(),
+          label: region._id.toUpperCase(),
           image: !isIcon ? `https://cdn.wee.bet/flags/1x1/${region.sigla}.svg` : null,
           icon: isIcon ? iconComponent : null
         })
@@ -139,6 +142,7 @@ export default {
         return {
           id: `region_${region._id}`,
           name: region._id.toUpperCase(),
+          label: region._id.toUpperCase(),
           slug: region.sigla,
           image: !isIcon ? `https://cdn.wee.bet/flags/1x1/${region.sigla}.svg` : null,
           icon: isIcon ? iconComponent : null,
@@ -149,7 +153,8 @@ export default {
       if(Boolean(championshipPerRegionList.length)) {
         championshipPerRegionList.unshift({
           id: "region_ALL",
-          name: "Todos os campeonatos".toUpperCase(),
+          name: "TODOS OS CAMPEONATOS".toUpperCase(),
+          label: "TODOS OS CAMPEONATOS".toUpperCase(),
           slug: "all",
           image: null,
           icon: IconGlobal,
@@ -162,15 +167,22 @@ export default {
       const league = championshipPerRegionList[0];
       delete league?.championships;
       this.league = league;
-
-      console.log(this.league)
     },
 
-    async prepareChampionshipList(modalityId, popularLeague = false, regionName = null) {
+    prepareCountryName(countryName) {
+      return countriesWithFemaleNames.includes(countryName.toUpperCase()) ? `da ${countryName}` : `do ${countryName}`;
+    },
+
+    async prepareChampionshipList(
+      modalityId,
+      popularLeague = false,
+      regionName = null,
+      dateSelected= null
+    ) {
       const championships = await getChampionshipBySportId(
         modalityId,
         regionName,
-        this.dateSelected.format('YYYY-MM-DD'),
+        dateSelected,
         popularLeague
       );
       this.homeStore.setChampionshipList(championships.result)
@@ -192,7 +204,7 @@ export default {
       this.handleCloseModalitiesModal();
 
       await this.prepareChampionshipPerRegionList(modalityId);
-      await this.prepareChampionshipList(modalityId);
+      await this.prepareChampionshipList(modalityId, false, null, this.dateSelected.format('YYYY-MM-DD'));
       this.loading = false;
     },
 
@@ -204,6 +216,8 @@ export default {
     },
     async handleLeague(regionOrChampionship) {
       this.loading = true;
+      this.regionSelected = '';
+
       const searchTypeIsRegion = regionOrChampionship.id.includes('region');
       this.handleCloseLeaguesModal();
 
@@ -211,7 +225,9 @@ export default {
         let regionName = regionOrChampionship.id;
         regionName = regionName.split('region_').pop();
         regionName = regionName != 'ALL' ? regionName : null;
-        await this.prepareChampionshipList(this.modalityId, false, regionName);
+
+        this.regionSelected = regionName;
+        await this.prepareChampionshipList(this.modality.id, false, regionName);
       } else {
         await this.prepareChampionship(regionOrChampionship.id);
       }
@@ -231,7 +247,14 @@ export default {
       this.loading = true;
       this.dateSelected = dateTime;
       this.handleCloseCalendarModal();
-      await this.prepareChampionshipList(this.modalityId);
+
+      await this.prepareChampionshipList(
+        this.modality.id,
+        false,
+        this.regionSelected,
+        this.dateSelected.format('YYYY-MM-DD')
+      );
+
       this.loading = false;
     },
 
@@ -267,6 +290,7 @@ export default {
   &__league-select img {
     width: 16px;
     height: 16px;
+    border-radius: 50px;
   }
 }
 </style>

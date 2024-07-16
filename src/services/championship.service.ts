@@ -44,7 +44,7 @@ export const getChampionshipBySportId = async (
         sport_id: sportId,
         campeonatos_bloqueados: Boolean(blockedChampionships[sportId]) ? blockedChampionships[sportId].join(',') : '',
         data: startDate,
-        data_final: !Boolean(startDate) ? deadlineTable : '',
+        data_final: deadlineTable,
         odds: mainOdds.join(','),
         regiao_nome: regionName ?? '',
         ligas_populares: popularLeagueIds
