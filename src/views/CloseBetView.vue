@@ -6,10 +6,10 @@
         class="ticket" 
         v-for="(ticketItem, ticketIndex) in ticket" 
         :key="ticketIndex"
-       >
+      >
         <div class="code">
           <span class="code__text">Código da aposta: {{ ticketItem.infoBet[0].codeBet }}</span>
-          <span class="code__date">Horário: {{ ticketItem.infoBet[0].hourDate }}</span>
+          <span class="code__date">Horário: {{ formatDate(ticketItem.infoBet[0].hourDate) }}</span>
         </div>
         <div class="info">
           <span class="info__text">Cambista: {{ ticketItem.infoBet[0].scalperName }}</span>
@@ -43,9 +43,9 @@
           </div>
         </div>
         <div 
-            class="bet" 
-            v-for="(bet, betIndex) in Object.values(ticketItem.team_bet)" 
-            :key="betIndex"
+          class="bet" 
+          v-for="(bet, betIndex) in Object.values(ticketItem.team_bet)" 
+          :key="betIndex"
         >
           <div class="bet__header">
             <span class="bet__team">
@@ -65,11 +65,11 @@
             </span>
           </div>
           <div class="bet__info">
-            <span class="bet__date">{{ bet[0].date }} {{ bet[0].hour }}</span>
+            <span class="bet__date">{{ formatDate(bet[0].date) }} {{ bet[0].hour }}</span>
           </div>
           <div class="bet__text">
             <span class="bet__select">
-                {{ bet[0].live ? 'Resultado Final' : 'Para ganhar' }} : {{bet[0].select}}
+              {{ bet[0].live ? 'Resultado Final' : 'Para ganhar' }} : {{ bet[0].select }}
             </span>
             <span class="bet__odd">{{ bet[0].odd }}</span>
           </div>
@@ -122,7 +122,10 @@
     </div>
   </div>
 </template>
+
 <script>
+import moment from 'moment';
+import 'moment/locale/pt-br';
 import Header from '@/components/layouts/Header.vue';
 import IconBall from '@/components/icons/IconBall.vue';
 import IconLive from '@/components/icons/IconLive.vue';
@@ -154,7 +157,7 @@ export default {
           infoBet: [
             {   
               codeBet: "AEC0-1AB4", 
-              hourDate: "02/06/2024 18:00",
+              hourDate: "2024-06-02 18:00",
               scalperName: "Demo", 
               punter: '118.525.478-83', 
               status: "Ativo", 
@@ -173,7 +176,7 @@ export default {
                 team_outside: 'Rosario Central',
                 modality: 'football',  
                 odd: 3.30, 
-                date: '19/03/2024', 
+                date: '2024-03-19', 
                 hour: '21:15', 
                 live: true, 
                 select: 'Empate'
@@ -185,7 +188,7 @@ export default {
                 team_outside: 'Itália',
                 modality: 'e-sport', 
                 odd: 3.10, 
-                date: '19/03/2024', 
+                date: '2024-03-19', 
                 hour: '21:15', 
                 live: false, 
                 select: 'França'
@@ -197,7 +200,7 @@ export default {
                 team_outside: 'Barcelona',
                 modality: 'volleyball', 
                 odd: 3.30, 
-                date: '19/03/2024', 
+                date: '2024-03-19', 
                 hour: '21:15', 
                 live: false, 
                 select: 'Real Madrid'
@@ -212,6 +215,9 @@ export default {
     };
   },
   methods: {
+    formatDate(date) {
+      return moment(date).locale('pt-br').format('DD/MM/YYYY');
+    },
     closeBet() {
       this.showCloseBet = false;
       this.showClickFinalized = true;
@@ -230,7 +236,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
 .close-bet {
   &__container {
