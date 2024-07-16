@@ -133,6 +133,7 @@
         "informacoesDeContato": "Contact Info",
         "telefone": "Phone",
         "email": "Email",
+        "confirmarEmail": "Confirmar E-mail",
         "endereco": "Address",
         "cep": "Zipcode",
         "logradouro": "Street",
