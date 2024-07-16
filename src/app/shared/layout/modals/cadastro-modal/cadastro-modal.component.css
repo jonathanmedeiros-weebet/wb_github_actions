@@ -161,16 +161,6 @@ a.link-termos-politica {
     align-items: center;
 }
 
-.termos-text {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.termos-text span, .termos-text a {
-    margin-right: 5px;
-}
-
 .label-termo-uso input[type="checkbox"] {
     width: 31px;
     height: 16px;

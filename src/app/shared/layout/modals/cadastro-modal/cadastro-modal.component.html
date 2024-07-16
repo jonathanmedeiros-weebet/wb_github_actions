@@ -159,7 +159,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <label *ngIf="!isLoterj" class="label-termo-uso">
+                <label *ngIf="!isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
                     {{'geral.deAcordoComOsTermos1' | translate}}
                     <a id="linkTermos"
                         target="_blank"
@@ -171,7 +171,7 @@
                         [routerLink]="['/informacoes/politica-privacidade']"
                         class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
                 </label>
-                <label *ngIf="isLoterj" class="label-termo-uso">
+                <label *ngIf="isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
                     <input type="checkbox" id="termosUso" formControlName="termosUso">
                     <div>
                         {{'geral.certificoQueTenhoMais' | translate}}

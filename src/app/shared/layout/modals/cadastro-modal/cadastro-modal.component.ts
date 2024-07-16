@@ -51,6 +51,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     user: any;
     loginGoogleAtivo = false;
     formSocial = false;
+    aplicarCssTermo: boolean = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -76,6 +77,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+        if(this.isLoterj) {
+            this.aplicarCssTermo = true;
+        }
         this.createForm();
 
         this.hCaptchaLanguage = this.translate.currentLang;
