@@ -12,9 +12,18 @@
           <span class="code__date">Horário: {{ formatDate(ticketItem.infoBet[0].hourDate) }}</span>
         </div>
         <div class="info">
-          <span class="info__text">Cambista: {{ ticketItem.infoBet[0].scalperName }}</span>
-          <span class="info__text">Apostador: {{ ticketItem.infoBet[0].punter }}</span>
-          <span class="info__text">Status: {{ ticketItem.infoBet[0].status }}</span>
+          <div class="info__item">
+            <span>Cambista:</span>
+            <span>{{ ticketItem.infoBet[0].scalperName }}</span>
+          </div>
+          <div class="info__item">
+            <span>Apostador:</span>
+            <span>{{ ticketItem.infoBet[0].punter }}</span>
+          </div>
+          <div class="info__item">
+            <span class="info__text">Status:</span>
+            <span>{{ ticketItem.infoBet[0].status }}</span>
+          </div>
         </div>
         <div class="gain">
           <div class="gain__item">
@@ -279,10 +288,10 @@ export default {
     gap: 4px;
     margin-bottom: -10px;
 
-    &__text {
+    &__item {
       display: flex;
+      justify-content: space-between;
       font-size: 14px;
-      width: 100%;
     }
 }
 .gain {
