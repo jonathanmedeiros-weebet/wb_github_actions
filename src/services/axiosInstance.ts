@@ -1,6 +1,6 @@
 import axios from "axios";
 import { localStorageService } from "./storage.service";
-import VueRouter from 'vue-router';
+import router from "@/router";
 
 export const axiosInstance = () => {
   const axiosInstance = axios.create({
@@ -14,12 +14,10 @@ export const axiosInstance = () => {
     (response: any) => response.data,
     (error: any) => {
       if (error.response && error.response.status === 401) {
-        //TODO: ADICIONAR TRATATIVA DE REDIRECIONAMENTO PARA TELA DE LOGIN
-        console.log("--- Token inválido ---");
         localStorageService.removeAuth();
-        return;
+        router.push({ name: 'login' });
       }
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   );
 
