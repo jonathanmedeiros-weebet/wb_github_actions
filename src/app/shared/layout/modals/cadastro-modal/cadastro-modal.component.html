@@ -185,9 +185,9 @@
                            [routerLink]="['/informacoes/politica-privacidade']"
                            class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
                     </div>
+                    <app-error-msg [control]="form.get('termosUso')"
+                                   class="text-left"></app-error-msg>
                 </label>
-                <app-error-msg [control]="form.get('termosUso')"
-                               class="text-left"></app-error-msg>
             </div>
         </div>
 
@@ -216,7 +216,7 @@
             </div>
 
             <div class="col-12">
-                <button type="submit" (click)="executeCaptcha()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
             </div>
             <div class="login">
                 {{'geral.jaPossuiUmaConta' | translate}}

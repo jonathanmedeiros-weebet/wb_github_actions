@@ -24,7 +24,6 @@ import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afilia
     styleUrls: ['./cadastro-modal.component.css'],
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    @ViewChild('captchaRef') captchaRef;
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     appMobile;
     isMobile = false;
@@ -180,7 +179,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required, Validators.email]],
-            confirmarEmail: [null, [Validators.required, Validators.email, FormValidations.equalsTo('email')]],
             afiliado: [null, [Validators.maxLength(50)]],
             captcha: [null, [Validators.required]],
             check_1: [''],
@@ -349,11 +347,5 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
-    }
-
-    executeCaptcha() {
-        if(this.form.valid){
-            this.captchaRef.execute()
-        }
     }
 }
