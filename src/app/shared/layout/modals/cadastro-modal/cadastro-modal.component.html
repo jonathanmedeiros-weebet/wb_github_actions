@@ -74,6 +74,24 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="isLoterj">
+            <div class="col-md-12">
+                <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
+                    <div class="input-md">
+                        <input type="text" id="confirmarEmail" class="form-control inverted-out"
+                               [ngClass]="applyCssInputError('confirmarEmail')"
+                               [readonly]="formSocial"
+                               formControlName="confirmarEmail" placeholder=" "
+                               (paste)="blockPaste($event)" autocomplete="off"
+                        >
+                        <label for="email">{{'geral.confirmarEmail' | translate}}</label>
+                    </div>
+
+                    <app-error-msg [control]="form.get('confirmarEmail')" label="{{'geral.confirmarEmail' | translate}}"
+                                   class="text-left"></app-error-msg>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group mb-4">
@@ -141,7 +159,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <label class="label-termo-uso">
+                <label *ngIf="!isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
                     {{'geral.deAcordoComOsTermos1' | translate}}
                     <a id="linkTermos"
                         target="_blank"
@@ -152,6 +170,23 @@
                         target="_blank"
                         [routerLink]="['/informacoes/politica-privacidade']"
                         class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
+                </label>
+                <label *ngIf="isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
+                    <input type="checkbox" id="termosUso" formControlName="termosUso">
+                    <div>
+                        {{'geral.certificoQueTenhoMais' | translate}}
+                        <a id="linkTermos"
+                           target="_blank"
+                           [routerLink]="['/informacoes/termos-condicoes']"
+                           class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
+                        {{'geral.deAcordoComOsTermos2' | translate}}
+                        <a id="linkPolitica"
+                           target="_blank"
+                           [routerLink]="['/informacoes/politica-privacidade']"
+                           class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
+                    </div>
+                    <app-error-msg [control]="form.get('termosUso')"
+                                   class="text-left"></app-error-msg>
                 </label>
             </div>
         </div>
@@ -173,7 +208,7 @@
         </div>
 
         <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
-            <div class="col-12" [ngStyle]="{'text-align': 'left'}">
+            <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px'}">
                 <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
                 Este site é protegido por reCAPTCHA e a
                 <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de Privacidade</a> do Google e os
