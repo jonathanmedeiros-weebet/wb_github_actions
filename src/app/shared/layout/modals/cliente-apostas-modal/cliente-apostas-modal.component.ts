@@ -22,6 +22,8 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 import * as moment from 'moment/moment';
 import { config } from '../../../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
+import {RifaBilheteService} from '../../../services/rifa/rifa-bilhete.service';
+import {RifaApostaService} from '../../../services/rifa/rifa-aposta.service';
 
 @Component({
     selector: 'app-cliente-apostas-modal',
@@ -39,6 +41,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     casinoHabilitado;
     esporteHabilitado;
     loteriaPopularHabilitada;
+    rifaHabilitada;
     activeId = 'esporte';
 
     showLoading = false;
@@ -94,6 +97,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         private cassinoService: CasinoApiService,
         private loteriaService: ApostaLoteriaService,
         private loteriaPopularService: LoteriaPopularService,
+        private rifaService: RifaApostaService,
         private translate: TranslateService,
         private auth: AuthService
     ) {
@@ -125,6 +129,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.esporteHabilitado = this.params.getOpcoes().esporte;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
         this.casinoHabilitado = this.params.getOpcoes().casino;
+        this.rifaHabilitada = this.params.getOpcoes().rifa;
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
 
 
@@ -156,7 +161,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             acumuladao: this.acumuladaoHabilitado,
             desafio: this.desafioHabilitado,
             loteria: this.loteriasHabilitada,
-            loteriaPopular: this.loteriaPopularHabilitada
+            loteriaPopular: this.loteriaPopularHabilitada,
+            rifa: this.rifaHabilitada
         };
 
         const chaves = Object.keys(habilitados);
@@ -227,6 +233,13 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
                 break;
             case 'loteria-popular':
                 this.loteriaPopularService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
+                break;
+            case 'rifa':
+                this.rifaService.getApostas(queryParams)
                     .subscribe(
                         apostas => this.handleResponse(apostas),
                         error => this.handleError(error)

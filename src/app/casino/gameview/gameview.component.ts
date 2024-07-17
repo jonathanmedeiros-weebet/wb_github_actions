@@ -141,8 +141,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             if (this.gameMode === 'REAL' && !this.isCliente) {
-                this.abriModalLogin();
-
+                if(!this.isMobile){
+                    this.abriModalLogin();
+                }
             } else {
                 if(this.avisoCancelarBonus === false){
                     this.loadGame();

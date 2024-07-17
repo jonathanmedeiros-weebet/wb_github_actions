@@ -47,7 +47,11 @@ export class FormValidations {
             }
 
             if (field.value !== formControl.value) {
-                return { equalsTo: otherField };
+                if(otherField == 'email') {
+                    return { equalsToEmail: otherField };
+                } else {
+                    return { equalsTo: otherField };
+                }
             }
 
             return null;
@@ -123,6 +127,7 @@ export class FormValidations {
             'emailInvalido': 'Email já cadastrado!',
             'email': 'Email Inválido!',
             'equalsTo': 'Campos não são iguais',
+            'equalsToEmail': 'Os Emails devem ser iguais',
             'pattern': 'Campo inválido',
             'matchPin': 'Confirmação diferente do PIN.',
             'loginEmUso': 'Nome de usuário indisponível. Por favor escolha outro',

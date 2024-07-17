@@ -1,0 +1,578 @@
+.pre-bilhete {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    height: calc(100vh - 92px);
+    background-color: var(--sidebar-left);
+}
+
+.bilhete-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    overflow: scroll;
+}
+
+.campinho {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: var(--sidebars);
+    color: var(--foreground-sidebars);
+}
+
+.campinho .campinho-toogle{
+    border-radius: 5px 5px 0 0;
+    font-size: 14px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.campinho .campinho-toogle i{
+    cursor: pointer;
+}
+
+.campinho .campinho-toogle .options {
+    display: flex;
+    gap: 10px;
+}
+
+
+.campinho .campinho-toogle a {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.campinho .campinho-toogle a svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--foreground-sidebars);
+    stroke: var(--foreground-sidebars);
+}
+
+.campinho .campinho-toogle a:hover, .campinho .campinho-toogle a.active {
+    color: var(--highlight);
+}
+
+.campinho .campinho-toogle a:hover svg, .campinho .campinho-toogle a.active svg {
+    fill: var(--highlight);
+    stroke: var(--highlight);
+}
+
+.no-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 215px;
+}
+
+.iframe-responsive {
+    max-width: 100%;
+    padding-top: 64%;
+    position: relative;
+    width: 100%;
+}
+
+.iframe-responsive.stream {
+    padding-top: 57%;
+}
+
+.iframe-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.blihete {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /*margin: 5px 5px 5px 0;*/
+    /*border-radius: 5px;*/
+    background-color: var(--sidebars);
+    color: var(--foreground-sidebars);
+}
+
+.titulo {
+    padding: 10px 20px;
+    color: var(--foreground-sidebars);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+
+.acoes-bilhete {
+    padding: 0 15px;
+    font-weight: 400;
+    font-size: 11px; /* ajuste fonte */
+    line-height: 14px;
+    text-align: left;
+    margin: 10px 0;
+}
+
+.acoes-bilhete a {
+    color: var(--foreground-sidebars);
+    height: 15px;
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.acoes-bilhete a.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+#nenhum-jogo {
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    text-align: left;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 11px; /* ajuste fonte */
+    line-height: 12px;
+}
+
+#nenhum-jogo span {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.pre-bilhete-esportes {
+    flex-grow: 1;
+}
+
+.footer-bilhete {
+    border-top: 2px solid rgba(241, 241, 241, .05);
+}
+
+.div-inputs {
+    padding: 20px 15px 8px 15px;
+    /*border-radius: 0.25rem;*/
+    /*margin-bottom: 15px;*/
+}
+
+.informations {
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 0 0 10px;
+}
+
+.submit-buttons {
+    padding: 0 15px 0 15px;
+}
+
+#aposta-deslogado .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.live-odd {
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 5px;
+}
+
+.pre-bilhete .valor,
+.pre-bilhete .possivel-ganho,
+.pre-bilhete .cotacao {
+    color: var(--foreground-sidebars);
+    font-weight: bolder;
+}
+
+.div-jogos-selecionados {
+    padding: 0 15px;
+    margin: 0;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.div-jogos-selecionados h3 {
+    color: var(--foreground-highlight);
+}
+
+.div-jogos-selecionados h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.div-jogos-selecionados h3::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
+.jogo-selecionado {
+    padding: 15px 0;
+    border-top: 1px dashed var(--highlight);
+    text-align: left;
+    position: relative;
+}
+
+.jogo-selecionado:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.jogo-selecionado > div:not(.remover-item) {
+    color: var(--foreground-sidebars);
+}
+
+.jogo-selecionado .horario,
+.jogo-selecionado .odd-bilhete .valor {
+    color: var(--foreground-sidebars);
+}
+
+.jogo-selecionado .odd-bilhete {
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 2px 0;
+}
+
+.jogo-nome, .mercado, .horario {
+    font-size: 0.9rem;
+}
+
+.div-jogos-selecionados .remover-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--highlight);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.success-msg {
+    font-size: 1.3rem;
+}
+
+.success-msg .codigo {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#aposta-deslogado {
+    padding: 20px;
+}
+
+#aposta-deslogado .active {
+    color: #35cd96;
+    border-bottom: 2px solid #35cd96;
+}
+
+#aposta-deslogado .aposta-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    border-bottom: 1px dashed var(--highlight);
+    padding: 5px 5px 20px;
+}
+
+#aposta-deslogado .aposta-item:last-child {
+    border-bottom: 0;
+}
+
+#aposta-deslogado .remover {
+    color: var(--highlight);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#aposta-deslogado .valor,
+#aposta-deslogado .horario {
+    font-weight: bolder;
+}
+
+.cartao-form .form-row select,
+.cartao-form .form-row input {
+    font-size: 1rem;
+}
+
+.jogo-selecionado-inner {
+    padding-right: 20px;
+}
+
+.check-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.check-group input,
+.check-group label {
+    margin: 0;
+}
+
+.mensagem-mudanca {
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    background-color: var(--game);
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+#aceitar-mudancas {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.mudou {
+    border: 1px solid var(--highlight);
+}
+
+.alteracoes-odds, .utilizar-bonus {
+    text-align: left;
+    color: var(--foreground-sidebars);
+}
+
+input {
+    font-size: 12px;
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 15px 0;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon > i {
+    position: absolute;
+    display: block;
+    transform: translate(0, -50%);
+    top: 50%;
+    pointer-events: none;
+    width: 25px;
+    text-align: center;
+    font-style: normal;
+    margin-left: 5px;
+}
+
+.input-icon > input {
+    padding-left: 30px;
+}
+
+.hide {
+    display: none;
+}
+
+.valores {
+    margin: 5px 0;
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    /*padding: 5px 0;*/
+}
+
+.valores button {
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 11px; /* ajuste fonte */
+    transition: 200ms;
+    height: 30px;
+    width: 55px;
+}
+
+.valores button:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.valores.fadeIn {
+    /*animation-delay: 500ms;*/
+    animation-name: openValores;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+}
+
+.valores.fadeOut {
+    animation-delay: 500ms;
+    animation-name: closeValores;
+    animation-duration: 500ms;
+    animation-fill-mode: both;
+}
+
+.modal-footer {
+    background-color: #0a0a0a;
+}
+
+.tabs {
+    display: flex;
+    border: 0;
+    background: var(--game);
+    color: var(--foreground-game);
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.tabs .tab {
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+    background: var(--game);
+    color: var(--foreground-game);
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+#aposta-deslogado .tabs .tab.active,
+.tabs .tab.active {
+    border: 0;
+    background: var(--highlight);
+    color: var(--foreground-highlight);
+    border-radius: 4px;
+}
+
+@keyframes openValores {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 40px;
+    }
+}
+
+@keyframes closeValores {
+    0% {
+        height: 40px;
+    }
+    100% {
+        height: 0;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .iframe-responsive {
+        max-width: 100%;
+        padding-top: 64%;
+        position: relative;
+        width: 100%;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    section.pre-bilhete {
+        height: 0 !important;
+        overflow: hidden;
+    }
+
+    .titulo {
+        padding: 10px;
+        color: var(--foreground);
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+    }
+
+    .valores button {
+        width: auto;
+    }
+
+    section.pre-bilhete.pre-bilhete-mobile {
+        height: 100% !important;
+        position: fixed !important;
+    }
+
+    #aposta-deslogado {
+        background-color: var(--sidebars);
+        color: var(--foreground-sidebars);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lista-apostas {
+        flex: 1;
+    }
+
+    .tabs {
+        display: flex;
+        border: 0;
+        background: var(--game);
+        color: var(--foreground-game);
+        border-radius: 4px;
+    }
+
+    .tabs .tab {
+        padding: 10px;
+        text-align: center;
+        flex: 1;
+        background: var(--game);
+        color: var(--foreground-game);
+    }
+
+    #aposta-deslogado .tabs .tab.active,
+    .tabs .tab.active {
+        border: 0;
+        background: var(--highlight);
+        color: var(--foreground-highlight);
+        border-radius: 4px;
+    }
+
+    @keyframes openValores {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 50px;
+        }
+    }
+
+    @keyframes closeValores {
+        0% {
+            height: 50px;
+        }
+        100% {
+            height: 0;
+        }
+    }
+}
+
+
+@media (min-width: 1025px) {
+    section.pre-bilhete {
+        /*position: absolute;*/
+        /*top: 46px;*/
+        /*right: 0;*/
+    }
+
+    .hide-desktop {
+        display: none;
+    }
+}

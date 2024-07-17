@@ -1,0 +1,23 @@
+#rifa-default-wrapper{
+    max-height: calc(100vh - 92px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
+.collapsed {
+    max-width: calc(100vw - 380px);
+    padding-left: 50px;
+}
+
+.uncollapsed {
+    max-width: calc(100vw - 650px);
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .collapsed, .uncollapsed {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 5px;
+    }
+}
