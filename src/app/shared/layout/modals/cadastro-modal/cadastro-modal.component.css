@@ -155,3 +155,14 @@ a.link-termos-politica {
 
 @media only screen and (max-width: 610px) {
 }
+
+.label-termo-uso {
+    display: flex;
+    align-items: center;
+}
+
+.label-termo-uso input[type="checkbox"] {
+    width: 31px;
+    height: 16px;
+    margin-right: 10px;
+}
