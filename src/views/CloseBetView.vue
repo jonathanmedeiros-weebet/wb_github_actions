@@ -46,16 +46,16 @@
           <div class="bet__header">
             <span class="bet__team">
               <template v-if="betItem.isLive">
-                <IconLive class="bet__icon-live"/>
+                <IconLive :size="16"/>
               </template>
               <template v-if="betItem.modality === 'football'">
-                <IconFootball class="bet__icon-modality"/>
+                <IconFootball :size="16"/>
               </template>
               <template v-else-if="betItem.modality === 'volleyball'">
-                <IconVolleyball class="bet__icon-modality"/>
+                <IconVolleyball :size="16"/>
               </template>
               <template v-else-if="betItem.modality === 'e-sport'">
-                <IconGame class="bet__icon-modality"/>
+                <IconGame :size="16"/>
               </template>
               {{ betItem.title }}
             </span>
@@ -325,11 +325,7 @@ export default {
         color: var(--color-text);
         font-size: 14px;
     }
-
-    &__icon-ball, &__icon-modality, &__icon-live {
-        width: 16px;
-        height: 16px;
-    }
+    
     &__message {
         color: var(--color-danger);
         text-align: center;
