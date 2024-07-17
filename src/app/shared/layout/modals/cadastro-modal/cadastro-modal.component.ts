@@ -139,15 +139,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             }
 
-            if (params.clickId) {
-                localStorage.setItem('clickid', params.clickId);
-            } else {
-                const storagedClickId = localStorage.getItem('clickId');
-                if (storagedClickId) {
-                    this.form.patchValue({clickId: storagedClickId});
-                }
-            }
-
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
                 this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                 this.possuiCodigoAfiliado = true;
@@ -199,7 +190,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null],
-            postback: [{ clickid: this.route.snapshot.queryParams.clickId }]
+            postback: [{ click_id: this.route.snapshot.queryParams.click_id }]
         });
 
         if (this.isLoterj) {
