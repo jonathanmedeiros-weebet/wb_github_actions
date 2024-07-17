@@ -2,85 +2,72 @@
   <div class="close-bet">
     <Header :title="title" :showBackButton="true" />
     <div class="close-bet__container">
-      <div 
-        class="ticket" 
-        v-for="(ticketItem, ticketIndex) in ticket" 
-        :key="ticketIndex"
-      >
+      <div class="close-bet__ticket">
         <div class="code">
-          <span class="code__text">Código da aposta: {{ ticketItem.infoBet[0].codeBet }}</span>
-          <span class="code__date">Horário: {{ formatDate(ticketItem.infoBet[0].hourDate) }}</span>
+          <span class="code__text">Código da aposta: {{ bet.codeBet }}</span>
+          <span class="code__date">Horário: {{ bet.hourDate }}</span>
         </div>
         <div class="info">
-          <div class="info__item">
-            <span>Cambista:</span>
-            <span>{{ ticketItem.infoBet[0].scalperName }}</span>
-          </div>
-          <div class="info__item">
-            <span>Apostador:</span>
-            <span>{{ ticketItem.infoBet[0].punter }}</span>
-          </div>
-          <div class="info__item">
-            <span class="info__text">Status:</span>
-            <span>{{ ticketItem.infoBet[0].status }}</span>
-          </div>
+          <span class="info__text">Cambista: {{ bet.scalperName }}</span>
+          <span class="info__text">Apostador: {{ bet.punter }}</span>
+          <span class="info__text">Status: {{ bet.status }}</span>
         </div>
         <div class="gain">
           <div class="gain__item">
             <span>Quantidade de Jogos:</span>
-            <span class="gain__value">{{ ticketItem.infoBet[0].qtGames }}</span>
+            <span class="gain__value">{{ bet.qtGames }}</span>
           </div>
           <div class="gain__item">
             <span>Cotação:</span>
-            <span class="gain__value">{{ ticketItem.infoBet[0].odd }}</span>
+            <span class="gain__value">{{ bet.odd }}</span>
           </div>
           <div class="gain__item">
             <span>Valor Apostado:</span>
-            <span class="gain__value">R${{ ticketItem.infoBet[0].valueBet }}</span>
+            <span class="gain__value">R${{ bet.valueBet }}</span>
           </div>
           <div class="gain__item">
             <span>Possível Retorno:</span>
-            <span class="gain__value">R${{ ticketItem.infoBet[0].returnEarnings }}</span>
+            <span class="gain__value">R${{ bet.returnEarnings }}</span>
           </div>
           <div class="gain__item">
             <span>Resultados:</span>
-            <span class="gain__value">{{ ticketItem.infoBet[0].statusResult }}</span>
+            <span class="gain__value">{{ bet.statusResult }}</span>
           </div>
           <div class="gain__item">
             <span>Prêmio:</span>
-            <span class="gain__value">R${{ ticketItem.infoBet[0].award }}</span>
+            <span class="gain__value">R${{ bet.award }}</span>
           </div>
         </div>
         <div 
           class="bet" 
-          v-for="(bet, betIndex) in Object.values(ticketItem.team_bet)" 
+          v-for="(betItem, betIndex) in bet.items" 
           :key="betIndex"
         >
           <div class="bet__header">
             <span class="bet__team">
-              <template v-if="bet[0].live">
+              <template v-if="betItem.isLive">
                 <IconLive class="bet__icon-live"/>
               </template>
-              <template v-if="bet[0].modality === 'football'">
+              <template v-if="betItem.modality === 'football'">
                 <IconFootball class="bet__icon-modality"/>
               </template>
-              <template v-else-if="bet[0].modality === 'volleyball'">
+              <template v-else-if="betItem.modality === 'volleyball'">
                 <IconVolleyball class="bet__icon-modality"/>
               </template>
-              <template v-else-if="bet[0].modality === 'e-sport'">
+              <template v-else-if="betItem.modality === 'e-sport'">
                 <IconGame class="bet__icon-modality"/>
               </template>
-              {{ bet[0].team_house }} X {{ bet[0].team_outside }}
+              {{ betItem.title }}
             </span>
           </div>
           <div class="bet__info">
-            <span class="bet__date">{{ formatDate(bet[0].date) }} {{ bet[0].hour }}</span>
+            <span class="bet__date">{{ formatDate(betItem.date) }} {{ betItem.hour }}</span>
           </div>
           <div class="bet__text">
             <span class="bet__select">
-              {{ bet[0].live ? 'Resultado Final' : 'Para ganhar' }} : {{ bet[0].select }}
+              {{ betItem.isLive ? 'Resultado Final' : 'Para ganhar' }} : {{ betItem.select }}
             </span>
-            <span class="bet__odd">{{ bet[0].odd }}</span>
+            <span class="bet__odd">{{ betItem.odd }}</span>
           </div>
         </div>
         <div class="bet__message" v-if="showClickFinalized">
@@ -89,35 +76,37 @@
             Ao confirmar essa operação, não poderá ser desfeita.
           </p>
         </div>
-      </div>  
-      <div class="buttons" v-if="showClickFinalized">
-        <w-button
-          text="Cancelar"
-          color="secondary-light"
-          @click="cancelAction"
-        />
-        <w-button
-          text="Confirmar"
-          @click="confirmAction"
-        />
       </div>
-      <div class="buttons" v-if="showFinished">
-        <w-button
-          text="Compartilhar"
-          color="secondary-light"
-        >
-        <template #icon-left>
-          <IconShare :size="20"/>
+      <div class="buttons">
+        <template v-if="showClickFinalized">
+          <w-button
+            text="Cancelar"
+            color="secondary-light"
+            @click="cancelAction"
+          />
+          <w-button
+            text="Confirmar"
+            @click="confirmAction"
+          />
         </template>
-        </w-button>
-        <w-button
-          text="Imprimir"
-          class="button__confirm"
-        >
-        <template #icon-left>
-          <IconPrinter :size="20"/>
+        <template v-if="showFinished">
+          <w-button
+            text="Compartilhar"
+            color="secondary-light"
+          >
+            <template #icon-left>
+              <IconShare :size="20"/>
+            </template>
+          </w-button>
+          <w-button
+            text="Imprimir"
+            class="button__confirm"
+          >
+            <template #icon-left>
+              <IconPrinter :size="20"/>
+            </template>
+          </w-button>
         </template>
-        </w-button>
       </div>
       <div class="finish" v-if="showCloseBet">
         <w-button
@@ -161,63 +150,48 @@ export default {
   data() {
     return {  
       title: 'Bilhete',
-      ticket: [
-        {
-          infoBet: [
-            {   
-              codeBet: "AEC0-1AB4", 
-              hourDate: "2024-06-02 18:00",
-              scalperName: "Demo", 
-              punter: '118.525.478-83', 
-              status: "Ativo", 
-              qtGames: 3,   
-              odd: 29, 
-              valueBet: 10, 
-              returnEarnings: 290, 
-              statusResult: "Pendente", 
-              award: 0.00 
-            }
-          ],
-          team_bet: {
-            bet_one: [
-              {
-                team_house: 'Argentino JRS', 
-                team_outside: 'Rosario Central',
-                modality: 'football',  
-                odd: 3.30, 
-                date: '2024-03-19', 
-                hour: '21:15', 
-                live: true, 
-                select: 'Empate'
-              }
-            ],
-            bet_two: [
-              {
-                team_house: 'França', 
-                team_outside: 'Itália',
-                modality: 'e-sport', 
-                odd: 3.10, 
-                date: '2024-03-19', 
-                hour: '21:15', 
-                live: false, 
-                select: 'França'
-              }
-            ],
-            bet_three: [
-              {
-                team_house: 'Real Madrid', 
-                team_outside: 'Barcelona',
-                modality: 'volleyball', 
-                odd: 3.30, 
-                date: '2024-03-19', 
-                hour: '21:15', 
-                live: false, 
-                select: 'Real Madrid'
-              }
-            ],
-          }
-        }
-      ],
+      bet: {
+        codeBet: "AEC0-1AB4", 
+        hourDate: "2024-06-02 18:00",
+        scalperName: "Demo", 
+        punter: '118.525.478-83', 
+        status: "Ativo", 
+        qtGames: 3,   
+        odd: 29, 
+        valueBet: 10, 
+        returnEarnings: 290, 
+        statusResult: "Pendente", 
+        award: 0.00,
+        items: [
+          {
+            title: 'Argentino JRS X Rosario Central',
+            isLive: true,
+            date: '2024-03-19', 
+            hour: '21:15', 
+            select: 'Empate',
+            odd: 3.30,
+            modality: 'football', 
+          },
+          {
+            title: 'França X Italia',
+            isLive: false,
+            date: '2024-03-19', 
+            hour: '20:15', 
+            select: 'França',
+            odd: 1.30,
+            modality: 'e-sport', 
+          },
+          {
+            title: 'Real Madrid X Sporting',
+            isLive: false,
+            date: '2024-03-19', 
+            hour: '20:15', 
+            select: 'Sporting',
+            odd: 4.30,
+            modality: 'volleyball', 
+          },
+        ]
+      },
       showClickFinalized: false,
       showCloseBet: true,
       showFinished: false,
@@ -239,8 +213,8 @@ export default {
       console.log('Encerrada');
       this.showFinish = false;
       this.showClickFinalized = false;
-      this.showFinished = true
-      this.title = 'Aposta'
+      this.showFinished = true;
+      this.title = 'Aposta';
     }
   }
 }
@@ -256,16 +230,15 @@ export default {
     min-height: 100%;
     padding-top: 15px;
   }
-}
-
-.ticket {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 19px 15px;
-  width: 100%;
-  background: var(--color-background-input);
-  border-radius: 2px;
+  &__ticket {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 19px 15px;
+    width: 100%;
+    background: var(--color-background-input);
+    border-radius: 2px;
+  }
 }
 
 .code {
@@ -291,6 +264,10 @@ export default {
     &__item {
       display: flex;
       justify-content: space-between;
+      font-size: 14px;
+    }
+
+    &__text {
       font-size: 14px;
     }
 }
