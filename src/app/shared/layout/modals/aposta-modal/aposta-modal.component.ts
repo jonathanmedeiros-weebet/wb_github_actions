@@ -4,6 +4,7 @@ import { ExibirBilheteEsportivoComponent } from '../../exibir-bilhete/esportes/e
 import { BilheteAcumuladaoComponent } from '../../exibir-bilhete/acumuladao/bilhete-acumuladao.component';
 import { ExibirBilheteDesafioComponent } from '../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
 import { ExibirBilheteLoteriaComponent } from '../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import { ExibirBilheteRifaComponent} from '../../exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService, AuthService, ParametrosLocaisService } from '../../../../services';
 import { config } from '../../../config';
@@ -18,6 +19,7 @@ export class ApostaModalComponent implements OnInit {
     @ViewChild(ExibirBilheteLoteriaComponent) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
     @ViewChild(ExibirBilheteDesafioComponent) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
     @ViewChild(BilheteAcumuladaoComponent) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
+    @ViewChild(ExibirBilheteRifaComponent) bilheteRifaComponent: ExibirBilheteRifaComponent;
     @Input() aposta;
     @Input() showCancel = false;
     @Input() primeiraImpressao = false;
@@ -44,7 +46,7 @@ export class ApostaModalComponent implements OnInit {
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
         this.isCliente = this.auth.isCliente();
-        this.origin = this.appMobile ? '?origin=app':''; 
+        this.origin = this.appMobile ? '?origin=app':'';
         this.urlBilheteAoVivo = `https://${config.SLUG}/bilhete/${this.aposta.codigo}${this.origin}`;
     }
 

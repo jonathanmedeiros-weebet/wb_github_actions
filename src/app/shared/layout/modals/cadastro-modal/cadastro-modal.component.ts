@@ -46,10 +46,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     cpfValidado = false;
     menorDeIdade = false;
     possuiCodigoAfiliado = false;
-
+    isLoterj;
     user: any;
     loginGoogleAtivo = false;
     formSocial = false;
+    aplicarCssTermo: boolean = false;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -74,7 +75,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
-
+        this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+        if(this.isLoterj) {
+            this.aplicarCssTermo = true;
+        }
         this.createForm();
 
         this.hCaptchaLanguage = this.translate.currentLang;
@@ -160,6 +164,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             this.form.patchValue({
                                 nome: user.name,
                                 email: user.email,
+                                confirmarEmail: user.email,
                                 googleId: user.id,
                                 googleIdToken: user.idToken,
                             });
@@ -196,6 +201,17 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             dadosCriptografados: [null],
             postback: [{ clickid: this.route.snapshot.queryParams.clickId }]
         });
+
+        if (this.isLoterj) {
+            this.form.addControl('confirmarEmail', this.fb.control(null, [
+                Validators.required,
+                Validators.email,
+                FormValidations.equalsTo('email')
+            ]));
+            this.form.addControl('termosUso', this.fb.control(null, [
+                Validators.requiredTrue,
+            ]));
+        }
     }
 
     ngOnDestroy() {
@@ -338,5 +354,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     onBeforeInput(e : InputEvent, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
+    }
+
+    blockPaste(event: ClipboardEvent): void {
+        event.preventDefault();
     }
 }
