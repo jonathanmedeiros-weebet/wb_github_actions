@@ -53,7 +53,7 @@
     <nav class="desktop" *ngIf="!showHeaderMobile" #scrollMenu>
         <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
     </nav>
-    <div class="side side-right">
+    <div class="container-icons">
         <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo)">
             <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
                 <i class="fa-solid fa-headset"></i>
@@ -62,14 +62,11 @@
                 <i class="fa-solid fa-headset"></i>
             </a>
         </div>
-
         <a *ngIf="xtremepushHabilitado" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
             <div id="badge-xtremepush"></div>
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHVQTFRFAAAA/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8fvbQOwAAACd0Uk5TAGtqVv9QlFveV/7Cj/1TFvlm9Q6Cp690zThCwPEPF+qA491R19VNV+9p7gAAAJ5JREFUeJy90c0KgkAUBeB7ShIXFdKPWSJF7/9CLaKwslIrKohssIYJ4k6N4KqzuHOYb7ibAZUEVQAojFAH4WGCRkG1/BdsCDkt3L7AQW6DnncHZw3auDaP8nQvLWQcuic3UaV/6Ow4DNJerMpw7605BFs/UiXcjJYcLBKkt//BeMUgWHxA3vMowfuVHkHVfnASUTg3wRTAzASlq/S8AOWULRluMiNTAAAAAElFTkSuQmCC" alt="Toggle Icon">
         </a>
-
         <div id="overlay" class="overlay" (click)="closeNotifications()" [class.open]="notificationsXtremepushOpen"></div>
-
         <div id="xtremepushNotificationWrapper" class="content-div-xtremepush" [class.open]="notificationsXtremepushOpen">
             <div class="xtremepush-header">
                 <h4 class="xtremepush-title">
@@ -82,7 +79,16 @@
             </div>
             <div id="xtremepushNotificationContainer"></div>
         </div>
-
+        
+        <div class="btn-promocao" *ngIf="paginaPromocaoHabilitado">
+            <a [routerLink]="['/promocao']" routerLinkActive="active">
+                <div class="btn-promocao">
+                    <i id="icon-promocao" class="bi bi-gift"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="side side-right">
         <ng-container *ngIf="isLoggedIn; else loggedOut">
             <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
                 <div *ngIf="isMobile; then depositShortCutMobile else depositShortCutDesktop"></div>
@@ -720,11 +726,6 @@
         <div class="category" *ngIf="(loteriasHabilitado && (seninhaAtiva || quininhaAtiva)) || loteriaPopularAtiva">
             <a [routerLink]="['/loterias']" routerLinkActive="active">
                 <span>{{ 'menu.loteria' | translate }}</span>
-            </a>
-        </div>
-        <div class="category" *ngIf="paginaPromocaoHabilitado">
-            <a [routerLink]="['/promocao']" routerLinkActive="active">
-                <span>{{ 'menu.promocao' | translate }}</span>
             </a>
         </div>
     </div>

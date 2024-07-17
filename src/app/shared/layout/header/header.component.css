@@ -112,8 +112,19 @@ nav a {
     white-space: nowrap;
 }
 
+.container-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 6px;
+}
+
+#icon-promocao::before {
+    font-weight: 900 !important;
+}
+
 .side {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,6 +167,17 @@ nav::-webkit-scrollbar {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
+}
+
+.btn-promocao i {
+    font-size: 18px;
+    color: white;
+    padding: 2px;
+}
+
+.btn-promocao i:hover {
+    cursor: pointer;
+    color: var(--highlight); 
 }
 
 .btn-register{
@@ -339,8 +361,13 @@ body .change-theme {
 }
 
 .support-btn i {
-    margin-right: 12px;
-    font-size: 16px;
+    font-size: 19px;
+    color: var(--foreground-header);
+    margin-top: 1px;
+    padding-left: 3px;
+}
+
+.support-btn:hover i {
     color: var(--highlight);
 }
 
@@ -498,7 +525,7 @@ body .change-theme {
 
     .logo {
         max-height: 30px;
-        max-width: calc(40vw - 25px);
+        max-width: calc(40vw - 70px);
     }
 
     .indique-ganhe-card .btn-close {
@@ -593,14 +620,169 @@ body .change-theme {
     }
 
     .btn-xtremepush {
-        margin: 0 10px 0 0 !important;
         color: var(--highlight);
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(35vw - 25px);
+    }
+    .container-icons {
+        padding: 0px 1%;
+        gap: 5px;
+        margin-right: 140px;
+    }
+    .btn-xtremepush {
+        color: var(--highlight);
+    }
+    .btn-promocao {
+        padding-left: 0;
+    }
+    .btn {
+        width: 60px;
+        font-size: 9.9px;
+    }
+    .menu-perfil {
+        width: 80px;
+        padding: 0px 2px;
+    }
+    .div.user-card{
+        padding-right: 4.9px;
+    }
+    .fa-user::before {
+        font-size: 14px;
+    }
+    .menu-perfil .div.user-icon {
+        font-size: 15px;
+    }
+    .menu-perfil div.user-icon  i {
+        font-size: 15px;
+    }
+    .menu-perfil .saldo-usuario {
+        font-size: 9.8px;
+    }
+    #xtremepushNotificationWrapper {
+        width: 320px;
     }
 }
 
 @media only screen and (max-width: 360px) {
     .logo {
-        max-width: calc(32vw - 25px);
+        max-width: calc(32vw - 35px);
+    }
+    .container-icons {
+        padding: 0px 1%;
+        gap: 5px;
+        margin-right: 0px;
+    }
+    .btn-promocao {
+        font-size: 20px;
+    }
+    .support-btn i {
+        font-size: 20px;
+    }
+    .btn-xtremepush img {
+        height: 25px;
+    }
+    #xtremepushNotificationWrapper .content-div-xtremepush {
+        width: 320px;
+    }
+    .menu-conta .btn-custom2{
+        margin-right: 0;
+    }
+    .deposit-shortcut a {
+        padding: 0px 4px;
+    }
+    .menu-perfil {
+        padding: 0px 2px;
+    }
+    .menu-perfil .div.user-icon {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 375px) and  (min-width: 370px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons{
+        margin-right: -4px;
+        margin-left: 10px;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+    .btn-promocao {
+        padding-left: 0;
+        padding-right: 5px;
+    }
+    .deposit-shortcut a {
+        padding: 0px 4px;
+    }
+    .menu-perfil .div.user-icon {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 415px) and (min-width: 410px){
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons {
+        margin-right: 50px;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+    .btn-xtremepush img {
+        height: 25px;
+    }
+    .btn-promocao {
+        padding-left: 0;
+        padding-right: 5px;
+        font-size: 20px;
+    }
+    .support-btn i {
+        margin-top: 2px;
+        font-size: 20px;
+    }
+    .side{
+        max-width: calc(32vw - 75px);
+    } 
+    .menu-conta .btn-custom2{
+        margin-right: 0;
+    }
+}
+
+@media only screen and (max-width: 430px) and (min-width: 416px){
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons {
+        gap: 5px;
+        margin-right: -40px;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+    .btn-xtremepush img {
+        height: 25px;
+    }
+    .btn-promocao {
+        padding-left: 0;
+        padding-right: 5px;
+        font-size: 20px;
+    }
+    .support-btn i {
+        font-size: 20px;
     }
 }
 
@@ -616,6 +798,9 @@ body .change-theme {
     }
     .menu-perfil {
         height: 32px;
+    }
+    .deposit-shortcut a{
+        padding: 0px 4px;
     }
 }
 
@@ -838,7 +1023,6 @@ body .change-theme {
 }
 
 .btn-xtremepush {
-    margin: 0 10px 0 0;
     color: var(--highlight);
 }
 
