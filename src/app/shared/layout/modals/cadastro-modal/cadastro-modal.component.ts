@@ -242,7 +242,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             return;
         }
         const values = this.form.value;
-        console.log(values);
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
