@@ -151,7 +151,7 @@ export default {
       comissao: '2,10',
       premio: '13,10',
       Saque: '55,10',
-      modalityList: modalityList,
+      modalityList: modalityList(),
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
       collapsedExits: this.initCollapsed,

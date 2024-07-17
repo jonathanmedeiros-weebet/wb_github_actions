@@ -1,6 +1,6 @@
 <template>
     <div class="game-list">
-        <span class="game-list__message" v-if="!Boolean(championshipList.length)">Nenhum evento disponível</span>
+        <span class="game-list__message" v-if="!hasChampionshipList">Nenhum evento disponível</span>
         <template v-else>
             <Collapse
                 class="game-list__collapse"
@@ -53,6 +53,9 @@ export default {
         }
     },
     computed: {
+        hasChampionshipList() {
+            return Boolean(this.championshipList.length);
+        },
         championshipList() {
             return this.homeStore.championshipList.map((championship) => {
                 const newChampionship = { ...championship };
@@ -145,6 +148,8 @@ export default {
     }
 
     &__message {
+        display: flex;
+        width: 100%;
         padding: 8px 16px;
         font-size: 12px;
         color: var(--color-text-input);

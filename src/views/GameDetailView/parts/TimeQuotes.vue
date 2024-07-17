@@ -1,6 +1,9 @@
 <template>
     <div class="time-quotes">
+        <span v-if="!hasQuotes" class="time-quotes__message">Nenhuma cotação disponível no momento</span>
+        
         <Collapse
+            v-else
             :initCollapsed="true"
             v-for="(option, index) in quotes"
             :key="index"
@@ -36,6 +39,11 @@ export default {
             default: () => []
         }
     },
+    computed: {
+        hasQuotes() {
+            return Boolean(this.quotes.length)
+        }
+    },
     methods: {
         handleItemClick(odd) {
             event.stopPropagation();
@@ -47,6 +55,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.time-quotes {
+    position: relative;
+    z-index: 1;
+    height: calc(100vh - 100px);
+    background: var(--color-background);
+    &__message {
+        display: flex;
+        width: 100%;
+        padding: 8px 16px;
+        font-size: 12px;
+        color: var(--color-text-input);
+    }
+}
+
 .collapse {
     &__options {
         display: flex;

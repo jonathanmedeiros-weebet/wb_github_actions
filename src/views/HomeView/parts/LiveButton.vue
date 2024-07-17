@@ -1,0 +1,58 @@
+<template>
+    <button class="live-button" :class="{'live-button--actived': actived}">
+        <IconCircle class="live-button__icon" :size="12" :color="actived ? 'var(--color-text)' : 'var(--color-danger)'" />
+        <span>Ao vivo</span>
+    </button>
+</template>
+
+<script>
+import IconCircle from '@/components/icons/IconCircle.vue'
+export default {
+  components: { IconCircle },
+    name: 'live-button',
+    props: {
+        actived: {
+            type: Boolean,
+            required: false
+        },
+    },
+}
+</script>
+
+<style lang="scss" scoped>
+.live-button {
+    height: 21px;
+    padding: 0 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+
+    border: 0;
+    border-radius: 3px;
+    background: var(--color-text);
+    color: var(--color-danger);
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    &--actived {
+        background: var(--color-danger);
+        color: var(--color-text);
+    }
+
+    &--actived &__icon {
+        animation: blink 1s linear infinite;
+    }
+}
+
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+</style>

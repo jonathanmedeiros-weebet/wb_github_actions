@@ -3,4 +3,5 @@ export enum MarketTime {
     FIRST_TIME = '1T',
     SECOND_TIME = '2T',
     PLAYERS = 'JOGADORES',
+    TOTAL = 'TOTAL'
 }

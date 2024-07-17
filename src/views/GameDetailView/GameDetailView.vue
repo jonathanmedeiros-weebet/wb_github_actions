@@ -3,10 +3,10 @@
         <GameDetailSkeleton v-if="loading"/>
         <template v-else>
             <div class="game-detail__header">
-            <GameDetailHeader :game="game" :type="gameHeaderType" :fixed="headerFixed"/>
+                <GameDetailHeader :game="game" :type="gameHeaderType" :fixed="headerFixed"/>
             </div>
             <div class="game-detail__body" :class="{'game-detail__body--paddintTop': headerFixed}">
-            <div class="game-detail__filters">
+                <div class="game-detail__filters" v-if="isFutebolModality && hasQuotes">
                     <button
                         class="game-detail__filter"
                         v-for="({ title, selected, slug}, index) in filters"
@@ -28,7 +28,7 @@
 <script>
 import Header from '@/components/layouts/Header.vue'
 import GameDetailHeader from './parts/GameDetailHeader.vue'
-import { MarketTime } from '@/enums'
+import { MarketTime, Modalities } from '@/enums'
 import Collapse from '@/components/Collapse.vue'
 import Button from '@/components/Button.vue'
 import { getGame, hasQuotaPermission, calculateQuota } from '@/services'
@@ -36,7 +36,6 @@ import { useConfigClient } from '@/stores'
 import TimeQuotes from './parts/TimeQuotes.vue'
 import PlayerQuotes from './parts/PlayerQuotes.vue'
 import GameDetailSkeleton from './parts/GameDetailSkeleton.vue'
-
 
 export default {
     components: {
@@ -58,7 +57,8 @@ export default {
                 [MarketTime.FULL_TIME]: [],
                 [MarketTime.FIRST_TIME]: [],
                 [MarketTime.SECOND_TIME]: [],
-                [MarketTime.PLAYERS]: []
+                [MarketTime.PLAYERS]: [],
+                [MarketTime.TOTAL]: []
             },
             loading: false
         }
@@ -67,6 +67,11 @@ export default {
         this.loading = true;
         await this.prepareGameDetail();
         await this.prepareQuotes();
+
+        if(!this.isFutebolModality) {
+            this.filterSelected = MarketTime.TOTAL;
+        }
+
         this.loading = false;
     },
     mounted() {
@@ -79,6 +84,12 @@ export default {
         });
     },
     computed: {
+        hasQuotes() {
+            return Boolean(this.options.length);
+        },
+        isFutebolModality() {
+            return this.game.sport_id === Modalities.SOCCER;
+        },
         filteredPerPlayer() {
             return this.filterSelected == MarketTime.PLAYERS;
         },
@@ -132,12 +143,16 @@ export default {
         },
         async prepareQuotes() {
             const { betOptions } = useConfigClient();
-            const quotes = this.game?.cotacoes ?? [];
+            const quotes = Boolean(this.game.ao_vivo)
+                ? this.game.cotacoes_aovivo ?? []
+                : this.game.cotacoes ?? [];
+
             const markets = {
                 [MarketTime.FULL_TIME]: {},
                 [MarketTime.FIRST_TIME]: {},
                 [MarketTime.SECOND_TIME]: {},
-                [MarketTime.PLAYERS]: {}
+                [MarketTime.PLAYERS]: {},
+                [MarketTime.TOTAL]: {}
             }
 
             for await (let quote of quotes) {
@@ -178,6 +193,7 @@ export default {
             this.markets[MarketTime.FULL_TIME] = Object.values(markets[MarketTime.FULL_TIME]);
             this.markets[MarketTime.FIRST_TIME] = Object.values(markets[MarketTime.FIRST_TIME]);
             this.markets[MarketTime.SECOND_TIME] = Object.values(markets[MarketTime.SECOND_TIME]);
+            this.markets[MarketTime.TOTAL] = Object.values(markets[MarketTime.TOTAL]);
             this.markets[MarketTime.PLAYERS] = this.preparePlayerQuotes(Object.values(markets[MarketTime.PLAYERS]));
         },
         preparePlayerQuotes(quotes) {
@@ -255,6 +271,8 @@ export default {
     padding-bottom: 20px;
 
     &__filters {
+        position: relative;
+        z-index: 1;
         height: 53px;
         display: flex;
         align-items: center;

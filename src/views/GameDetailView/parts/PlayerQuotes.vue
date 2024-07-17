@@ -1,6 +1,9 @@
 <template>
     <div class="player-quotes">
+        <span v-if="!hasQuotes" class="player-quotes__message">Nenhuma cotação disponível no momento</span>
+
         <Collapse
+            v-else
             :initCollapsed="true"
             v-for="(option, index) in quotes"
             :key="index"
@@ -62,6 +65,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.player-quotes {
+    position: relative;
+    z-index: 1;
+    height: calc(100vh - 100px);
+    background: var(--color-background);
+
+    &__message {
+        display: flex;
+        width: 100%;
+        padding: 8px 16px;
+        font-size: 12px;
+        color: var(--color-text-input);
+    }
+}
+
 .collapse {
     &__options {
         width: 100%;

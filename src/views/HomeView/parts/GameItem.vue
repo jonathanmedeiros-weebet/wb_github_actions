@@ -10,7 +10,12 @@
                 {{ team.name }}
             </span>
             <span class="game__info">
-                {{ dateTime }}
+                <template v-if="isLive">
+                    <span class="game__live">Ao vivo</span>
+                    <span class="game__time">{{ liveTime }}</span>
+                </template>
+
+                <span v-else>{{ dateTime }}</span>
                 <span class="game__pontuation">+{{ pontuation }}</span>
             </span>
         </div>
@@ -32,6 +37,7 @@
 <script>
 import { convertInMomentInstance } from '@/utilities';
 import IconLock from '@/components/icons/IconLock.vue';
+import { Modalities } from '@/enums';
 export default {
   components: { IconLock },
     name: 'game-item',
@@ -42,6 +48,14 @@ export default {
         },
     },
     computed: {
+        isLive() {
+            return Boolean(this.game.ao_vivo);
+        },
+        liveTime() {
+            return Boolean(this.game.info.tempo == 0)
+                ? 'intervalo'
+                : `${this.game.info.minutos}'`
+        },
         teams() {
             return [
                 {
@@ -58,10 +72,14 @@ export default {
             return this.game.total_cotacoes;
         },
         dateTime() {
-            return convertInMomentInstance(this.game.horario).format('DD/MM hh:mm');
+            return convertInMomentInstance(this.game.horario).format('DD/MM HH:mm');
         },
         quotes() {
-            return this.game.cotacoes.map(quote => ({
+            const quotes = Boolean(this.game.ao_vivo)
+                ? this.game.cotacoes_aovivo ?? []
+                : this.game.cotacoes ?? [];
+
+            return quotes.map(quote => ({
                 ...quote,
                 valor: quote.valor.toFixed(2)
             }));
@@ -157,6 +175,7 @@ export default {
         display: flex;
         justify-content: space-between;
         gap: 8px;
+        min-width: 190px;
     }
 
     &__quota {
@@ -167,6 +186,22 @@ export default {
         height: 54px;
         border-radius: 4px;
         background: var(--color-background);
+    }
+
+    &__live {
+        color: var(--color-danger);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+    }
+
+    &__time {
+        color: var(--color-text-input);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
     }
 }
 </style>v

@@ -22,7 +22,14 @@
                         <div class="team">
                             <img class="team__image" :src="teamA.image" @error="changeSrcWhenImageError">
                         </div>
-                        <span class="team__versus">X</span>
+                        <span class="team__versus">
+                            <template v-if="isLive">
+                                <span class="team__time">{{ liveTime }}</span>
+                                <span class="team__score">0 - 0</span>
+                            </template>
+
+                            <span v-else>X</span>
+                        </span>
                         <div class="team">
                             <img class="team__image" :src="teamB.image" @error="changeSrcWhenImageError">
                         </div>
@@ -35,7 +42,13 @@
                         <img class="team__image" :src="teamA.image" @error="changeSrcWhenImageError">
                         <span class="team__name">{{ teamA.name }}</span>
                     </div>
-                    <span class="team__versus">X</span>
+                    <span class="team__versus">
+                        <template v-if="isLive">
+                            <span class="team__time">{{ liveTime }}</span>
+                            <span class="team__score">0 - 0</span>
+                        </template>
+                        <span v-else>X</span>
+                    </span>
                     <div class="team">
                         <img class="team__image" :src="teamB.image" @error="changeSrcWhenImageError">
                         <span class="team__name">{{ teamB.name }}</span>
@@ -67,6 +80,14 @@ export default {
         }
     },
     computed: {
+        isLive() {
+            return Boolean(this.game.ao_vivo);
+        },
+        liveTime() {
+            return Boolean(this.game.info.tempo == 0)
+                ? 'intervalo'
+                : `${this.game.info.minutos}'`
+        },
         isHeaderNormal() {
             return this.type === 'normal';
         },
@@ -106,7 +127,7 @@ export default {
     min-height: 201px;
     padding-bottom: 26px;
     padding-top: 10px;
-        transition: 1s;
+    transition: 1s;
     
     &--slim {
         height: 73px;
@@ -120,6 +141,7 @@ export default {
     &--fixed {
         transition: 0.5s;
         position: fixed;
+        z-index: 2;
         width: 100%;
         background: var(--color-background);
     }
@@ -198,6 +220,28 @@ export default {
         font-weight: 400;
         margin-top: 16px;
         color: var(--color-text);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    &__time {
+        color: var(--color-text-input);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__score {
+        color: var(--color-text);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 }
 

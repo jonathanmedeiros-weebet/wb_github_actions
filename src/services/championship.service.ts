@@ -1,5 +1,7 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
+import { modalityOdds } from "@/constants";
+import { Modalities } from "@/enums";
 
 interface CalculateQuotaParams {
     key: string;
@@ -28,7 +30,6 @@ export const getChampionshipBySportId = async (
     const {
         blockedChampionships,
         deadlineTable,
-        mainOdds,
         centerUrl,
         popularLeagues
     } = useConfigClient();
@@ -42,15 +43,32 @@ export const getChampionshipBySportId = async (
 
     const params = {
         sport_id: sportId,
-        campeonatos_bloqueados: Boolean(blockedChampionships[sportId]) ? blockedChampionships[sportId].join(',') : '',
+        campeonatos_bloqueados: Boolean(blockedChampionships[`sport_${sportId}`]) ? blockedChampionships[`sport_${sportId}`].join(',') : '',
         data: startDate,
         data_final: deadlineTable,
-        odds: mainOdds.join(','),
+        odds: getOddsBySportId(sportId).join(','),
         regiao_nome: regionName ?? '',
         ligas_populares: popularLeagueIds
     }
     const url = `${centerUrl}/campeonatos`;
-    return await axiosInstance().get(url , {params})
+    const response: any = await axiosInstance().get(url , {params})
+    return response.result;
+}
+
+export const getLiveChampionship = async (sportId: number | string) => {
+    try {
+        const { centerUrl } = useConfigClient();
+        const url = `${centerUrl}/jogos/ao-vivo`;
+        const response: any = await axiosInstance().get(url)
+        return response.result.filter((championship: any) => championship.sport_id == sportId)
+    } catch {
+        return [];
+    }
+}
+
+const getOddsBySportId = (sportId: string | number) =>{
+    const sportOdds = modalityOdds();
+    return sportOdds[sportId as Modalities] ?? []
 }
 
 export const getChampionshipRegionBySportId = async (sportId: string) => {

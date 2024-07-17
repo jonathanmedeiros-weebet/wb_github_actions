@@ -38,12 +38,15 @@ export default {
   data() {
     return {
       championshipList: [],
-      modalityList,
-      modality: modalityList[0],
+      modalityList: modalityList(),
+      modality: null,
       showModalModalities: false,
       loading: true,
       homeStore: useHomeStore()
     }
+  },
+  created() {
+    this.modality = this.modalityList[0];
   },
   mounted() {
     this.championshipList = this.homeStore.championshipList;

@@ -94,12 +94,15 @@ export default {
     return {
       activeDay: moment().format('YYYY-MM-DD'),
       today: moment().format('YYYY-MM-DD'),
-      modality: modalityList[0],
+      modality: null,
       showModalModalities: false,
-      modalityList,
+      modalityList: modalityList(),
       championshipList,
       dateRange: []
     }
+  },
+  created() {
+    this.modality = this.modalityList[0];
   },
   methods: {
     generateDaysOfMonth() {

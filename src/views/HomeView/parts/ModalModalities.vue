@@ -38,7 +38,7 @@ export default {
     },
     data() {
         return {
-            items: modalityList.map((modalitiy) => ({
+            items: modalityList().map((modalitiy) => ({
                 ...modalitiy,
                 checked: modalitiy.id === this.modalityId
             }))

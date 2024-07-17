@@ -44,13 +44,31 @@ import WModal from '@/components/Modal.vue'
 import { useHomeStore } from '@/stores';
 import IconTrophy from '@/components/icons/IconTrophy.vue';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
+import IconFootball from '@/components/icons/IconFootball.vue'
+import IconCombat from '@/components/icons/IconCombat.vue'
+import IconAmericanFootball from '@/components/icons/IconAmericanFootball.vue'
+import IconTennis from '@/components/icons/IconTennis.vue'
+import IconHockey from '@/components/icons/IconHockey.vue'
+import IconBasketball from '@/components/icons/IconBasketball.vue'
+import IconFutsal from '@/components/icons/IconFutsal.vue'
+import IconVoleiball from '@/components/icons/IconVoleiball.vue'
+import IconESport from '@/components/icons/IconESport.vue'
 
 export default {
     name: 'modal-leagues',
     components: {
         WModal,
         IconTrophy,
-        IconGlobal
+        IconGlobal,
+        IconFootball,
+        IconCombat,
+        IconAmericanFootball,
+        IconTennis,
+        IconHockey,
+        IconBasketball,
+        IconFutsal,
+        IconVoleiball,
+        IconESport
     },
     data() {
         return {
