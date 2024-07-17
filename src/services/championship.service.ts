@@ -57,10 +57,10 @@ export const getChampionshipBySportId = async (
 
 export const getLiveChampionship = async (sportId: number | string) => {
     try {
-        const { centerUrl } = useConfigClient();
+        const { centerUrl, liveChampionships } = useConfigClient();
         const url = `${centerUrl}/jogos/ao-vivo`;
         const response: any = await axiosInstance().get(url)
-        return response.result.filter((championship: any) => championship.sport_id == sportId)
+        return response.result.filter((championship: any) => championship.sport_id == sportId && liveChampionships.includes(championship._id))
     } catch {
         return [];
     }

@@ -68,7 +68,7 @@
 import { now } from '@/utilities'
 import { modalityList, leagueList, countriesWithFemaleNames } from '@/constants'
 import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship } from '@/services'
-import { useHomeStore } from '@/stores'
+import { useConfigClient, useHomeStore } from '@/stores'
 
 import Header from '@/components/layouts/Header.vue'
 import SelectFake from './parts/SelectFake.vue'
@@ -141,7 +141,13 @@ export default {
       return this.homeStore.championshipPerRegionList;
     },
     hasLive() {
-      return [Modalities.SOCCER, Modalities.BACKETBALL].includes(this.modality.id);
+      const { options } = useConfigClient();
+      if(!options.aovivo) return false;
+
+      if(this.modality.id == Modalities.SOCCER && options.futebol_aovivo) return true;
+      if(this.modality.id == Modalities.BACKETBALL && options.basquete_aovivo) return true;
+      
+      return false;
     }
   },
   methods: {
