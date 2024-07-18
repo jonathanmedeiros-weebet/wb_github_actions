@@ -634,11 +634,11 @@ body .change-theme {
         gap: 5px;
         margin-right: 140px;
     }
-    .btn-xtremepush {
-        color: var(--highlight);
-    }
-    .btn-promocao {
+    .btn-register{
+        min-width: 80px !important;
         padding-left: 0;
+        padding-right: 0;
+        line-height: 0;
     }
     .btn {
         width: 60px;
@@ -663,22 +663,17 @@ body .change-theme {
     .menu-perfil .saldo-usuario {
         font-size: 9.8px;
     }
-    #xtremepushNotificationWrapper {
-        width: 320px;
-    }
 }
 
-@media only screen and (max-width: 360px) {
-    .logo {
-        max-width: calc(32vw - 35px);
+@media only screen and (max-width: 375px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
     }
     .container-icons {
         padding: 0px 1%;
         gap: 5px;
-        margin-right: 0px;
-    }
-    .btn-promocao {
-        font-size: 20px;
+        margin-right: -4px;
     }
     .support-btn i {
         font-size: 20px;
@@ -686,88 +681,47 @@ body .change-theme {
     .btn-xtremepush img {
         height: 25px;
     }
-    #xtremepushNotificationWrapper .content-div-xtremepush {
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+    #xtremepushNotificationWrapper {
         width: 320px;
     }
-    .menu-conta .btn-custom2{
-        margin-right: 0;
+    .btn-promocao {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 20px;
+    }
+    .side-right {
+        padding-right: 10px;
     }
     .deposit-shortcut a {
         padding: 0px 4px;
+    }
+    .menu-conta .btn-custom2{
+        margin-right: 0;
     }
     .menu-perfil {
         padding: 0px 2px;
+        width: 85px;
     }
-    .menu-perfil .div.user-icon {
+    .menu-perfil div.user-icon i {
         font-size: 15px;
     }
-}
-
-@media only screen and (max-width: 375px) and  (min-width: 370px) {
-    .logo{
-        max-height: 30px;
-        max-width: calc(40vw - 70px);
-    }
-    .container-icons{
-        margin-right: -4px;
-        margin-left: 10px;
-    }
-    .btn-xtremepush {
-        padding-left: 1px;
-        color: var(--highlight);
-    }
-    .btn-promocao {
-        padding-left: 0;
-        padding-right: 5px;
-    }
-    .deposit-shortcut a {
-        padding: 0px 4px;
-    }
-    .menu-perfil .div.user-icon {
-        font-size: 15px;
+    .btn.mr-4 {
+        margin-right: 5px !important;
     }
 }
 
-@media only screen and (max-width: 415px) and (min-width: 410px){
-    .logo{
-        max-height: 30px;
-        max-width: calc(40vw - 70px);
-    }
-    .container-icons {
-        margin-right: 50px;
-    }
-    .btn-xtremepush {
-        padding-left: 1px;
-        color: var(--highlight);
-    }
-    .btn-xtremepush img {
-        height: 25px;
-    }
-    .btn-promocao {
-        padding-left: 0;
-        padding-right: 5px;
-        font-size: 20px;
-    }
-    .support-btn i {
-        margin-top: 2px;
-        font-size: 20px;
-    }
-    .side{
-        max-width: calc(32vw - 75px);
-    } 
-    .menu-conta .btn-custom2{
-        margin-right: 0;
-    }
-}
-
-@media only screen and (max-width: 430px) and (min-width: 416px){
+@media only screen and (max-width: 430px){
     .logo{
         max-height: 30px;
         max-width: calc(40vw - 70px);
     }
     .container-icons {
         gap: 5px;
-        margin-right: -40px;
+        padding-left: 5px;
     }
     .btn-xtremepush {
         padding-left: 1px;
