@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CadastroModalComponent, LoginModalComponent } from '../shared/layout/modals';
 import { AuthService } from 'src/app/services';
+import { Router } from '@angular/router';
+import { DepositoComponent } from '../clientes/deposito/deposito.component';
+import { TranslateService } from '@ngx-translate/core';
 
 declare function BTRenderer(): void;
 
@@ -13,9 +16,14 @@ declare function BTRenderer(): void;
 
 export class BetbyComponent implements OnInit, OnDestroy {
 
+    private bt: any;
+    private langs = { pt: 'pt-br', en: 'en' };
+
     constructor(
         private modalService: NgbModal,
+        private router: Router,
         private authService: AuthService,
+        private translate: TranslateService,
     ) {
         let node = document.createElement("script");
         node.src = "https://ui.invisiblesport.com/bt-renderer.min.js";
@@ -24,33 +32,84 @@ export class BetbyComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         setTimeout(() => {
-            this.betbyInitialize(this.authService.getTokenBetby());
-        }, 1000);
+            console.log(this.translate.currentLang);
+            let currentLang = this.translate.currentLang;
+            this.authService.getTokenBetby().subscribe(
+                (res) => {
+                    this.betbyInitialize(res.token, currentLang);
+                }
+            );
+        }, 500);
+
+        this.translate.onLangChange.subscribe(
+            change => {
+                this.onChangeLang(change.lang);
+            }
+        );
     }
 
     ngOnDestroy() {
+        this.bt.kill();
     }
 
-    betbyInitialize(token = null) {
+    onChangeLang(lang: string) {
+        if (this.bt) {
+            this.bt.kill();
+            this.authService.getTokenBetby().subscribe(
+                (res) => {
+                    this.betbyInitialize(res.token, lang);
+                }
+            );
+        }
+    }
+
+    betbyInitialize(token = null, lang = 'pt') {
         let that = this;
 
-
-        let bt = new BTRenderer().initialize({
+        this.bt = new BTRenderer().initialize({
             brand_id: '2415231049618558976',
             token: token ?? null,
-            onTokenExpired: function() {},
             themeName: "get-x",
-            lang: "pt-br",
+            lang: this.langs[lang],
             target: document.getElementById('betby'),
-            betSlipOffsetTop: 0,
+            betSlipOffsetTop: 92,
             betslipZIndex: 0,
-            onRouteChange: function(path: string) { console.log(path) },
-            onLogin: function() { that.openLogin() },
-            onRegister: function() { that.openRegister() },
-            onRecharge: function() { that.openDeposit() },
-            onSessionRefresh: function() {},
-            onBetSlipStateChange: function() {}
+            onTokenExpired: () => that.refreshTokenExpired(),
+            onRouteChange: (path: string) => console.log('PATH', path),
+            onLogin: () => that.openLogin(),
+            onRegister: () => that.openRegister(),
+            onRecharge: () => that.openDeposit(),
+            onSessionRefresh: () => that.refreshSession(),
+            onBetSlipStateChange: () => console.log('CHANGE STATE')
         });
+    }
+
+    refreshTokenExpired() {
+        return new Promise((resolve, reject) => {
+            this.authService.refreshTokenBetby().subscribe(
+                (res) => {
+                    if (res.refresh) {
+                        resolve(res.token);
+                    } else {
+                        reject(new Error('Token not expired!'));
+                    }
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
+        });
+    }
+
+    refreshSession() {
+        this.authService.refreshTokenBetby().subscribe(
+            (response) => {
+                location.reload();
+            },
+            (error) => {
+                console.log('ERROR', error);
+            }
+        )
     }
 
     openRegister() {
@@ -77,13 +136,11 @@ export class BetbyComponent implements OnInit, OnDestroy {
     }
 
     openDeposit() {
-        this.modalService.open(
-            LoginModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350 modal-login',
-                centered: true,
-            }
-        );
+        if (window.innerWidth < 1025) {
+            this.modalService.open(DepositoComponent);
+            this.router.navigate(['/']);
+        } else {
+            this.router.navigate(['/clientes/deposito']);
+        }
     }
 }

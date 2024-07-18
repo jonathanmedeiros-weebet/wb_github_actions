@@ -130,6 +130,34 @@ export class AuthService {
             );
     }
 
+    getTokenBetby() {
+        const token = this.getToken();
+
+        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token }, this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    localStorage.setItem('tokenBetby', res.token);
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    refreshTokenBetby() {
+        const token = this.getTokenBetbyStorage();
+
+        return this.http.post<any>(`${this.authLokiUrl}/betby/refresh-token`, { token }, this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    if (res.refresh) {
+                        localStorage.setItem('tokenBetby', res.token);
+                    }
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     logout() {
         this.limparStorage();
         this.logadoSource.next(false);
@@ -180,7 +208,7 @@ export class AuthService {
         return localStorage.getItem('tokenCassino');
     }
 
-    getTokenBetby() {
+    getTokenBetbyStorage() {
         return localStorage.getItem('tokenBetby');
     }
 
