@@ -35,6 +35,7 @@ export const useConfigClient = defineStore('configClient', {
     apiUrl: prepareClientHost(),
     lokiUrl: _loki,
     centerUrl: `${_center}/v1`,
+    sportsUrl: `${_host}/api/esportes`,
     params: {} as any,
 
     readyForUse: false
