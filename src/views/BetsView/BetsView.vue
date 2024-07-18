@@ -5,12 +5,12 @@
       
       <div class="bets__contente">
         <w-input
-          id="inputCpf"
+          id="inputApostador"
           label="Apostador"
-          name="cpf"
-          placeholder="999.999.999-99"
-          type="text"
-          mask="###.###.###-##"
+          name="apostador"
+          placeholder=""
+          type="email"
+          v-model="apostador"
         />
         <w-input
           id="inputCode"
@@ -20,6 +20,7 @@
           type="text"
           mask="XXXX-XXXX"
           autocomple="off"
+          v-model="code"
         />
         <w-input
           id="inputDate"
@@ -37,7 +38,7 @@
           value="filter"
           name="btn-filter"
           class="button--primary"
-          @click="getFilters"
+          @click="getResults"
         />
       </div>
       
@@ -48,67 +49,71 @@
           <tag-button
             id="btn-all"
             text="Todas"
-            value="all"
+            value="todos"
             name="btn-all"
-            class="button--primary"
+            :class="{ 'button--primary': activeButton === 'todos', 'button--secondary': activeButton !== 'todos'}"
+            @click="setActive('todos')"
           />
           <tag-button
             id="btn-pendent"
             text="Pendente"
-            value="pendeent"
+            value="pendente"
             name="btn-pendent"
-            class="button--secondary"
+            :class="{ 'button--primary': activeButton === 'pendente', 'button--secondary': activeButton !== 'pendente'}"
+            @click="setActive('pendente')"
           />
           <tag-button
             id="btn-win"
             text="Ganhou"
-            value="win"
+            value="ganhou"
             name="btn-win"
-            class="button--secondary"
+            :class="{ 'button--primary': activeButton === 'ganhou', 'button--secondary': activeButton !== 'ganhou'}"
+            @click="setActive('ganhou')"
           />
           <tag-button
             id="btn-lose"
             text="Perdeu"
-            value="lose"
+            value="perdeu"
             name="btn-lose"
-            class="button--secondary"
+            :class="{ 'button--primary': activeButton === 'perdeu', 'button--secondary': activeButton !== 'perdeu'}"
+            @click="setActive('perdeu')"
           />
         </div>
   
         <div class="bets__content-filters" v-for="(bet, index) in bets" :key="index">
           <card-bets>
             <template #title>
-              <p>Código da Aposta: {{ bet.code }}</p>
+              <p>Código da Aposta: {{ bet.codigo }}</p>
             </template>
             <template #subtitle>
-              <p>HORÁRIO: 02/06/2024 18:00</p>
+              <p>HORÁRIO: {{ formateDateTime(bet.horario) }}</p>
             </template>
             <template #body>
-              <p>Apostador: {{ bet.client }}</p>
+              <p>Apostador: {{ bet.apostador }}</p>
               <table class="table">
                 <tbody>
                   <tr>
                     <td class="table__line--left">Valor apostado:</td>
-                    <td class="table__line--right">R$ {{ bet.value }}</td>
+                    <td class="table__line--right">{{ formatCurrencyMoney(bet.valor) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Comissão:</td>
-                    <td class="table__line--right">R$ {{ bet.comission }}</td>
+                    <td class="table__line--right">{{ formatCurrencyMoney(bet.comissao) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Prêmio:</td>
-                    <td class="table__line--right">R$ {{ bet.premio }}</td>
+                    <td class="table__line--right">{{ formatCurrencyMoney(bet.premio) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Status:</td>
                     <td 
                       class="table__line--right"
-                      :class="{ 'table__status--success': bet.status === 'Ganhou', 'table__status--danger': bet.status === 'Perdeu' }"
-                    >{{ bet.status }}</td>
+                      :class="{ 'table__status--success': bet.resultado === 'ganhou', 'table__status--danger': bet.resultado === 'perdeu' }"
+                    >{{ capitalizeFirstLetter(bet.resultado) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Pagamento:</td>
-                    <td class="table__line--right">{{ bet.payment }}</td>
+                    <td class="table__line--right">{{ bet.status_pagamento ?? '-' }}</td>
                   </tr>
                 </tbody>  
               </table>
@@ -125,6 +130,7 @@
                   value="view"
                   name="btn-view"
                   class="button--secondary"
+                  @click="goToTickets(bet)"
                 />
                 <w-button
                   id="btn-payer"
@@ -195,6 +201,9 @@ import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
+import { find, getById } from '@/services'
+import moment from 'moment'
+import { formatCurrency } from '@/utilities'
 
 export default {
   name: 'bets',
@@ -209,42 +218,23 @@ export default {
   },
   data() {
     return {
+      code: '',
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
       dateFilter: null,
-      bets: [
-        {
-          code: 'AEC0-1AB4',
-          client: '999.999.999-99',
-          value: 100,
-          comission: 0,
-          premio: 0,
-          status: 'Perdeu',
-          payment:  '-'
-
-        },
-        {
-          code: 'XAB3-5BU1',
-          client: '999.999.999-99',
-          value: 200,
-          comission: 0,
-          premio: 0,
-          status: 'Ganhou',
-          payment:  '-'
-
-        },
-        {
-          code: 'CCB0-1A39',
-          client: '999.999.999-99',
-          value: 50,
-          comission: 10,
-          premio: 1,
-          status: 'Pendente',
-          payment:  '-'
-
-        }
-      ]
+      activeButton: 'todos',
+      apostador: '',
+      bets: [],
+      parametros: {
+        codigo: '',
+        dataInicial: '',
+        dataFinal: '',
+        status: '',
+        apostador: '',
+        sort: '',
+        otimizado: true,
+      },
     }
   },
   methods: {
@@ -264,8 +254,67 @@ export default {
       this.dateFilter = dateTime.format('YYYY-MM-DD');
       this.handleCloseCalendarModal();
     },
-    getFilters() {
-      this.showResults = !this.showResults;
+    setActive(button) {
+      this.activeButton = button;
+    },
+    formatCurrencyMoney(value) {
+      return formatCurrency(value);
+    },  
+    getResults() {
+      
+      this.parametros.codigo = this.code.replace(/-/g, '');
+      this.parametros.dataInicial = '';
+      this.parametros.dataFinal = '';
+      this.parametros.status = this.activeButton == 'todos' ? '' : this.activeButton;
+      this.parametros.apostador = this.apostador;
+      this.parametros.sort = '-horario';
+      this.parametros.otimizado = true;
+      
+      this.getApiBets();
+      
+    },
+    async getApiBets() {
+      this.bets = [];
+      this.showResults = false;
+      find(this.parametros)
+      .then(resp => {
+        console.log(resp);
+        this.bets = resp.results;
+        this.showResults = true;
+        
+      })
+      .catch(error => {
+        console.error(error);
+      })
+    },
+    goToTickets() {
+      this.$router.push( { name: 'tickets' } );
+    },
+    async viewTicket(bet) {
+      getById(bet.id)
+      .then(resp => {
+        console.log(resp);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    },
+    formateDateTime(datetime) {
+      return moment(datetime).format("DD/MM/YYYY HH:mm");
+    },
+    capitalizeFirstLetter(str) {
+      if(str){
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }else{
+        return str;
+      }
+    }
+  },
+  watch: {
+    activeButton(newValue, oldValue){
+      this.parametros.status = newValue == 'todos' ? '' : newValue; 
+      this.getApiBets();
+
     }
   }
 }
