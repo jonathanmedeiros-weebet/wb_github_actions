@@ -28,10 +28,26 @@
                             class="collapse__option"
                             v-for="odd in player.odds"
                             :key="odd.id"
-                            :class="{'collapse__option--selected': false}"
+                            :class="{
+                                'collapse__option--selected': false,
+                                'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd)
+                            }"
                             @click="handleItemClick(odd)"
                         >
-                            <span class="collapse__value" v-if="odd.hasPermission">{{ odd.finalValue }}</span>
+                            <template v-if="odd.hasPermission">
+                                <IconArrowFillUp
+                                    v-if="isIncreasedOdd(odd)"
+                                    :size="14"
+                                    color="var(--color-success)"
+                                />
+                                <span class="collapse__value">{{ odd.finalValue }}</span>
+                                <IconArrowFillDown
+                                    v-if="isDecreasedOdd(odd)"
+                                    :size="14"
+                                    color="var(--color-danger)"
+                                />
+                            </template>
+                        
                             <IconLock v-else :size="14" color="var(--color-text-input)"/>
                         </button>
                     </div>
@@ -44,10 +60,13 @@
 <script>
 import Collapse from '@/components/Collapse.vue';
 import IconLock from '@/components/icons/IconLock.vue';
+import { QuotaStatus } from '@/enums';
+import IconArrowFillDown from '@/components/icons/IconArrowFillDown.vue';
+import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
 
 export default {
     name: 'player-quotes',
-    components: { Collapse, IconLock },
+    components: { Collapse, IconLock, IconArrowFillDown, IconArrowFillUp },
     props: {
         quotes: {
             type: Array,
@@ -60,6 +79,12 @@ export default {
             if(!odd.hasPermission) return;
             void odd;
         },
+        isIncreasedOdd(odd) {
+            return Boolean(odd.status) && odd.status === QuotaStatus.INCREASED;
+        },
+        isDecreasedOdd(odd) {
+            return Boolean(odd.status) && odd.status === QuotaStatus.DECREASED;
+        }
     }
 }
 </script>
@@ -117,6 +142,10 @@ export default {
         justify-content: center;
         align-items: center;
         gap: 7px;
+
+        &--live {
+            gap: 0;
+        }
 
         &--selected {
             background: var(--color-primary);

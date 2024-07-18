@@ -1,7 +1,7 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
 import { modalityOdds } from "@/constants";
-import type { Modalities } from "@/enums";
+import { QuotaStatus, type Modalities } from "@/enums";
 
 interface CalculateQuotaParams {
     key: string;
@@ -85,7 +85,8 @@ export const getChampionshipRegionBySportId = async (sportId: string) => {
 export const getGame = async (gameId: string) => {
     const { centerUrl } = useConfigClient();
     const url = `${centerUrl}/jogos/${gameId}`;
-    return await axiosInstance().get(url)
+    const response: any = await axiosInstance().get(url);
+    return response.result;
 }
 
 export const hasQuotaPermission = (quotaValue: number | string) => {
@@ -151,4 +152,23 @@ export const calculateQuota = ({
     }
 
     return value.toFixed(2);
+}
+
+export const prepareLiveQuote = (lastQuotes: any[], newQuotes: any[]) => {
+    return newQuotes.map(newQuote => {
+        const lastQuote = lastQuotes.find(quote => quote._id == newQuote._id);
+
+        let status = QuotaStatus.DEFAULT;
+        if(newQuote.valor != lastQuote.valor) {
+          status = newQuote.valor > lastQuote.valor ? QuotaStatus.INCREASED: QuotaStatus.DECREASED;
+        }
+
+        return {
+          ...lastQuote,
+          ...newQuote,
+          valor: newQuote.valor,
+          valor_anterior: lastQuote.valor,
+          status,
+        }
+    })
 }

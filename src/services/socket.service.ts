@@ -49,13 +49,13 @@ export class SocketService {
         this.socket.emit(SocketKeys.EVENT_ROOM_EXIT, eventId);
     }
 
-    getEvents(): Observable<any> {
+    public getEvents(): Observable<any> {
         return new Observable((observer: any) => {
             this.socket.on(SocketKeys.EVENTS, (data: any) => observer.next(data));
         });
     }
 
-    getEventDetail(eventoId: string | number): Observable<any> {
+    public getEventDetail(eventoId: string | number): Observable<any> {
         return new Observable((observer: any) => {
             this.socket.on(`${SocketKeys.EVENT}-${eventoId}`, (data: any) => observer.next(data));
         });

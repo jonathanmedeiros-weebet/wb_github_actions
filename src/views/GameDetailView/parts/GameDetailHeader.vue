@@ -25,7 +25,7 @@
                         <span class="team__versus">
                             <template v-if="isLive">
                                 <span class="team__time">{{ liveTime }}</span>
-                                <span class="team__score">0 - 0</span>
+                                <span class="team__score">{{ teamScoreA }} - {{ teamScoreB }}</span>
                             </template>
 
                             <span v-else>X</span>
@@ -112,6 +112,12 @@ export default {
                 image: `https://cdn.wee.bet/img/times/m/${this.game.time_b_img ?? 'default'}.png`
             }
         },
+        teamScoreA() {
+            this.game.info.time_a_resultado ?? 0;
+        },
+        teamScoreB() {
+            this.game.info.time_b_resultado ?? 0;
+        }
     },
     methods: {
         changeSrcWhenImageError (event) {

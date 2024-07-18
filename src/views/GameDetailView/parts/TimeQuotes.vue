@@ -14,12 +14,30 @@
                     class="collapse__option"
                     v-for="(odd, oddIndex) in option.odds"
                     :key="`${oddIndex}-${index}`"
-                    :class="{'collapse__option--selected': false}"
+                    :class="{
+                        'collapse__option--selected': false,
+                        'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
+                    }"
                     @click="handleItemClick(odd)"
                 >
-                    <span class="collapse__label">{{ odd.label }}</span>
-                    <span class="collapse__value" v-if="odd.hasPermission">{{ odd.finalValue }}</span>
-                    <IconLock v-else :size="14" color="var(--color-text-input)"/>
+                    <template v-if="odd.hasPermission">
+                        <IconArrowFillUp
+                            v-if="isIncreasedOdd(odd)"
+                            :size="14"
+                            color="var(--color-success)"
+                        />
+                        <span class="collapse__label">{{ odd.label }}</span>
+                        <span class="collapse__value">{{ odd.finalValue }}</span>
+                        <IconArrowFillDown
+                            v-if="isDecreasedOdd(odd)"
+                            :size="14"
+                            color="var(--color-danger)"
+                        />
+                    </template>
+                    <template v-else>
+                        <span class="collapse__label">{{ odd.label }}</span>
+                        <IconLock :size="14" color="var(--color-text-input)"/>
+                    </template>
                 </button>
             </div>
         </Collapse>
@@ -29,10 +47,13 @@
 <script>
 import Collapse from '@/components/Collapse.vue';
 import IconLock from '@/components/icons/IconLock.vue';
+import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
+import IconArrowFillDown from '@/components/icons/IconArrowFillDown.vue';
+import { QuotaStatus } from '@/enums';
 
 export default {
     name: 'time-quotes',
-    components: { Collapse, IconLock },
+    components: { Collapse, IconLock, IconArrowFillUp, IconArrowFillDown },
     props: {
         quotes: {
             type: Array,
@@ -50,6 +71,12 @@ export default {
             if(!odd.hasPermission) return;
             void odd;
         },
+        isIncreasedOdd(odd) {
+            return Boolean(odd.status) && odd.status === QuotaStatus.INCREASED;
+        },
+        isDecreasedOdd(odd) {
+            return Boolean(odd.status) && odd.status === QuotaStatus.DECREASED;
+        }
     }
 }
 </script>
@@ -98,6 +125,10 @@ export default {
         justify-content: center;
         align-items: center;
         gap: 7px;
+
+        &--live {
+            gap: 0;
+        }
 
         &--selected {
             background: var(--color-primary);

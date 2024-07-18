@@ -67,7 +67,7 @@
 <script>
 import { now } from '@/utilities'
 import { modalityList, leagueList, countriesWithFemaleNames } from '@/constants'
-import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship, SocketService } from '@/services'
+import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship, prepareLiveQuote, SocketService } from '@/services'
 import { useConfigClient, useHomeStore } from '@/stores'
 
 import Header from '@/components/layouts/Header.vue'
@@ -293,23 +293,7 @@ export default {
             if(hasGame) {
               hasChange = true;
               const game = championship.jogos[gameIndex];
-
-              const quotes = newQuotes.map(newQuote => {
-                const lastQuote = game.cotacoes.find(quote => quote._id == newQuote._id);
-
-                let status = QuotaStatus.DEFAULT;
-                if(newQuote.valor != lastQuote.valor) {
-                  status = newQuote.valor > lastQuote.valor ? QuotaStatus.INCREASED: QuotaStatus.DECREASED;
-                }
-
-                return {
-                  ...lastQuote,
-                  ...newQuote,
-                  valor: newQuote.valor,
-                  valor_anterior: lastQuote.valor,
-                  status,
-                }
-              })
+              const quotes = prepareLiveQuote(game.cotacoes ?? [], newQuotes);
 
               championship.jogos[gameIndex] = {
                 ...game,

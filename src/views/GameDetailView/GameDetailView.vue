@@ -28,10 +28,10 @@
 <script>
 import Header from '@/components/layouts/Header.vue'
 import GameDetailHeader from './parts/GameDetailHeader.vue'
-import { MarketTime, Modalities } from '@/enums'
+import { MarketTime, Modalities, QuotaStatus } from '@/enums'
 import Collapse from '@/components/Collapse.vue'
 import Button from '@/components/Button.vue'
-import { getGame, hasQuotaPermission, calculateQuota } from '@/services'
+import { getGame, hasQuotaPermission, calculateQuota, SocketService, prepareLiveQuote } from '@/services'
 import { useConfigClient } from '@/stores'
 import TimeQuotes from './parts/TimeQuotes.vue'
 import PlayerQuotes from './parts/PlayerQuotes.vue'
@@ -60,7 +60,8 @@ export default {
                 [MarketTime.PLAYERS]: [],
                 [MarketTime.TOTAL]: []
             },
-            loading: false
+            loading: false,
+            socket: new SocketService()
         }
     },
     async created() {
@@ -135,8 +136,13 @@ export default {
         async prepareGameDetail() {
             try {
                 const gameId = String(this.$route.params.id);
-                const response = await getGame(gameId);
-                this.game = response.result;
+                this.game = await getGame(gameId);
+
+                if(this.game.ao_vivo) {
+                    this.socket.connect();
+                    this.socket.enterEventRoom(this.game._id);
+                    this.behaviorLiveEvent(this.game._id);
+                }
             } catch (error) {
                 this.$router.back();
             }
@@ -186,6 +192,7 @@ export default {
                     value: quote.valor,
                     id: quote._id,
                     finalValue,
+                    status: quote.status ?? QuotaStatus.DEFAULT,
                     hasPermission: this.hasQuotaPermission(finalValue)
                 });
             }
@@ -262,6 +269,19 @@ export default {
         handleGameFilter(filter) {
             this.filterSelected = filter
         },
+        behaviorLiveEvent(eventId) {
+            this.socket.getEventDetail(eventId).subscribe((event) => {
+                this.game.info = event.info;
+                this.game.cotacoes_aovivo = prepareLiveQuote(this.game.cotacoes_aovivo ?? [], event.cotacoes_aovivo ?? []);
+                this.prepareQuotes()
+            })
+        }
+    },
+    destroyed() {
+        if(this.socket.connected()) {
+            this.socket.exitEventRoom(this.game._id);
+            this.socket.disconnect();
+        }
     }
 }
 </script>
