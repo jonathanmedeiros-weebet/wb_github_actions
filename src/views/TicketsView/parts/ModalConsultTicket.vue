@@ -50,17 +50,16 @@ export default {
   }
 
   &__items {
-    padding: 10.358px 24px 38.5px 24px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-bottom: 20px;
   }
 
   &__text {
     color: var(--color-text-input);
     font-size: 14px;
   }
-
 }
 
 ::v-deep .input__group,

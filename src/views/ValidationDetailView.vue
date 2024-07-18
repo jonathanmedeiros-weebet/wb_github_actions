@@ -139,6 +139,7 @@ export default {
     padding: 0 20px;
     min-height: 100%;
     padding-top: 12px;
+    padding-bottom: 100px;
   }
 }
 .code {

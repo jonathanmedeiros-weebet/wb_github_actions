@@ -74,7 +74,6 @@
   </div>
 </template>
 
-
 <script>
 import IconEye from '@/components/icons/IconEye.vue';
 import IconEyeClose from '@/components/icons/IconEyeClose.vue';
@@ -85,13 +84,21 @@ import IconPassKey from '@/components/icons/IconPassKey.vue';
 import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
-import ModalConsultTicket from './TicketView/parts/ModalConsultTicket.vue';
+import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
 
 export default {
   name: 'menu',
   components: {
-    IconEye, IconEyeClose, IconMoney, IconSettings, IconLogout, 
-    IconPassKey, IconFactCheck, IconManageSearch, IconInsertChart, ModalConsultTicket
+    IconEye,
+    IconEyeClose,
+    IconMoney,
+    IconSettings,
+    IconLogout,
+    IconPassKey,
+    IconFactCheck,
+    IconManageSearch,
+    IconInsertChart,
+    ModalConsultTicket
   },
   name: 'menu-view',
   data() {
@@ -127,9 +134,7 @@ export default {
     },
   }
 }
-
 </script>
-
 
 <style lang="scss" scoped>
 .menu {
@@ -181,7 +186,6 @@ export default {
 }
 
 .wallet {
-  
   width: 100%;
   height: auto;
   background-color: var(--color-background-input);
@@ -271,6 +275,5 @@ export default {
     font-size: 14px;
     gap: 8px;
   }
-
 }
 </style>
