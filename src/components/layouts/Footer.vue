@@ -23,6 +23,7 @@ export default {
         '/change-password',
         '/game-detail',
         '/config',
+        '/close-bet'
       ].includes(this.$route.path)
     },
     showCopyright() {
