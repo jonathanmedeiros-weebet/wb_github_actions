@@ -1,7 +1,7 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
 import { modalityOdds } from "@/constants";
-import { Modalities } from "@/enums";
+import type { Modalities } from "@/enums";
 
 interface CalculateQuotaParams {
     key: string;

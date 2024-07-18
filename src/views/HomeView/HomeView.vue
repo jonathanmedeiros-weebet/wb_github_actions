@@ -32,7 +32,7 @@
           <span>{{ league.label }}</span>
         </SelectFake>
 
-        <GameList />
+        <GameList @gameClick="handleGameDetailClick" />
       </template>
     </section>
 
@@ -67,7 +67,7 @@
 <script>
 import { now } from '@/utilities'
 import { modalityList, leagueList, countriesWithFemaleNames } from '@/constants'
-import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship } from '@/services'
+import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship, SocketService } from '@/services'
 import { useConfigClient, useHomeStore } from '@/stores'
 
 import Header from '@/components/layouts/Header.vue'
@@ -89,7 +89,7 @@ import IconBasketball from '@/components/icons/IconBasketball.vue'
 import IconFutsal from '@/components/icons/IconFutsal.vue'
 import IconVoleiball from '@/components/icons/IconVoleiball.vue'
 import IconESport from '@/components/icons/IconESport.vue'
-import { Modalities } from '@/enums'
+import { Modalities, QuotaStatus } from '@/enums'
 import LiveButton from './parts/LiveButton.vue'
 
 export default {
@@ -129,7 +129,8 @@ export default {
       modalityList: modalityList(),
       dateSelected: now(),
       regionSelected: '',
-      homeStore: useHomeStore()
+      homeStore: useHomeStore(),
+      socket: new SocketService()
     }
   },
   created() {
@@ -155,6 +156,10 @@ export default {
       this.loading = true;
       await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
       await this.prepareChampionshipPerRegionList(this.modality.id);
+
+      if(this.liveActived && this.socket.connected()){
+        this.behaviorLiveEvents();
+      }
       this.loading = false;
     },
 
@@ -268,6 +273,61 @@ export default {
       return countriesWithFemaleNames.includes(countryName.toUpperCase()) ? `da ${countryName}` : `do ${countryName}`;
     },
 
+    behaviorLiveEvents() {
+      this.socket.getEvents().subscribe((event) => {
+        console.log(event)
+        let hasChange = false;
+        const {
+          _id: id,
+          info: newInfo,
+          cotacoes: newQuotes,
+          campeonato
+        } = event;
+
+        let championshipList = this.homeStore.championshipList.map((championship) => {
+          const championshipIsEqual = championship._id == campeonato._id;
+          if(championshipIsEqual) {
+            const gameIndex = championship.jogos.findIndex(game => game._id == id);
+            const hasGame = gameIndex != -1;
+            
+            if(hasGame) {
+              hasChange = true;
+              const game = championship.jogos[gameIndex];
+
+              const quotes = newQuotes.map(newQuote => {
+                const lastQuote = game.cotacoes.find(quote => quote._id == newQuote._id);
+
+                let status = QuotaStatus.DEFAULT;
+                if(newQuote.valor != lastQuote.valor) {
+                  status = newQuote.valor > lastQuote.valor ? QuotaStatus.INCREASED: QuotaStatus.DECREASED;
+                }
+
+                return {
+                  ...lastQuote,
+                  ...newQuote,
+                  valor: newQuote.valor,
+                  valor_anterior: lastQuote.valor,
+                  status,
+                }
+              })
+
+              championship.jogos[gameIndex] = {
+                ...game,
+                cotacoes: quotes,
+                info: newInfo,
+              }
+            }
+          }
+
+          return championship;
+        })
+
+        if(hasChange) {
+          this.homeStore.setChampionshipList(championshipList)
+        }
+      })
+    },
+
     handleOpenModalitiesModal() {
       this.showModalModalities = true;
     },
@@ -349,8 +409,34 @@ export default {
 
     handleLive() {
       this.liveActived = !this.liveActived;
+
+      if(this.liveActived) {
+        this.socket.connect();
+        this.socket.enterEventsRoom();
+      } else {
+        this.socket.exitEventsRoom();
+        this.socket.disconnect();
+      }
+
       this.pageLoad();
-    }
+    },
+    handleGameDetailClick(gameId) {
+      this.socket.exitEventsRoom();
+      this.socket.disconnect();
+
+      this.$router.push({
+        name: 'game-detail',
+        params: {
+          id: gameId
+        }
+      });
+
+      event.stopPropagation();
+    },
+  },
+  destroyed() {
+    this.socket.exitEventsRoom();
+    this.socket.disconnect();
   }
 }
 </script>

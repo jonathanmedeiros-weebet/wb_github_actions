@@ -30,7 +30,7 @@
                         v-for="(game, index) in championship.jogos"
                         :key="index"
                         :game="game"
-                        @click="handleClick(game)"
+                        @click.native="handleClick(game._id)"
                     />
                 </div>
             </Collapse>
@@ -93,8 +93,8 @@ export default {
     methods: {
         hasQuotaPermission,
         calculateQuota,
-        handleClick(game) {
-            this.$emit('click', game);
+        handleClick(gameId) {
+            this.$emit('gameClick', gameId);
         },
         changeSrcWhenImageError (event) {
             event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';

@@ -1,5 +1,5 @@
 <template>
-    <div class="game" @click="handleGameDetailClick">
+    <div class="game">
         <div class="game__teams">
             <span
                 class="game__team"
@@ -27,8 +27,24 @@
                 :key="index"
                 @click="handleItemClick(quote)"
             >
-                <span v-if="quote.hasPermission">{{ quote.finalValue }}</span>
-                <IconLock v-else :size="14" color="var(--color-text-input)"/>
+                <span class="game__value-quota" v-if="quote.hasPermission">
+                    <IconArrowFillUp
+                        class="game__icon-quota"
+                        :size="14"
+                        :color="isIncreasedQuote(quote) ? 'var(--color-success)' : 'transparent'"
+                    />
+                    {{ quote.finalValue }}
+                    <IconArrowFillDown
+                        class="game__icon-quota"
+                        :size="14"
+                        :color="isDecreasedQuote(quote) ? 'var(--color-danger)' : 'transparent'"
+                    />
+                </span>
+                <IconLock
+                    v-else
+                    :size="14"
+                    color="var(--color-text-input)"
+                />
             </div>
         </div>
     </div>
@@ -37,9 +53,12 @@
 <script>
 import { convertInMomentInstance } from '@/utilities';
 import IconLock from '@/components/icons/IconLock.vue';
-import { Modalities } from '@/enums';
+import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
+import { QuotaStatus } from '@/enums';
+import IconArrowFillDown from '@/components/icons/IconArrowFillDown.vue';
+
 export default {
-  components: { IconLock },
+  components: { IconLock, IconArrowFillUp, IconArrowFillDown },
     name: 'game-item',
     props: {
         game: {
@@ -75,27 +94,13 @@ export default {
             return convertInMomentInstance(this.game.horario).format('DD/MM HH:mm');
         },
         quotes() {
-            const quotes = Boolean(this.game.ao_vivo)
-                ? this.game.cotacoes_aovivo ?? []
-                : this.game.cotacoes ?? [];
-
-            return quotes.map(quote => ({
+            return (this.game.cotacoes ?? []).map(quote => ({
                 ...quote,
                 valor: quote.valor.toFixed(2)
             }));
-        }
+        },
     },
     methods: {
-        handleGameDetailClick() {
-            this.$router.push({
-                name: 'game-detail',
-                params: {
-                    id: this.game._id
-                }
-            });
-
-            event.stopPropagation();
-        },
         changeSrcWhenImageError (event) {
             event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
         },
@@ -104,6 +109,12 @@ export default {
             if(!odd.hasPermission) return;
             void odd;
         },
+        isIncreasedQuote(quote) {
+            return Boolean(quote.status) && quote.status === QuotaStatus.INCREASED;
+        },
+        isDecreasedQuote(quote) {
+            return Boolean(quote.status) && quote.status === QuotaStatus.DECREASED;
+        }
     }
 }
 </script>
@@ -188,6 +199,17 @@ export default {
         background: var(--color-background);
     }
 
+    &__value-quota {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__icon-quota {
+        animation: blink 1s linear infinite;
+    }
+
     &__live {
         color: var(--color-danger);
         font-size: 12px;
@@ -204,4 +226,5 @@ export default {
         line-height: normal;
     }
 }
+
 </style>v

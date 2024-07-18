@@ -5,3 +5,9 @@ export enum MarketTime {
     PLAYERS = 'JOGADORES',
     TOTAL = 'TOTAL'
 }
+
+export enum QuotaStatus {
+    DEFAULT = 'default',
+    INCREASED = 'increased',
+    DECREASED = 'decreased',
+}

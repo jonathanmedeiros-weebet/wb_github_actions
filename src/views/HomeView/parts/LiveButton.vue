@@ -48,11 +48,4 @@ export default {
         animation: blink 1s linear infinite;
     }
 }
-
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
-}
 </style>
