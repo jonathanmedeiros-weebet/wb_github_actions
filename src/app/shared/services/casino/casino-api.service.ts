@@ -127,7 +127,6 @@ export class CasinoApiService {
                     catchError(this.errorService.handleError)
                 );
                 break;
-                break;
             default:
                 return this.http.get(`${this.central_url}/games/url`, requestOptions).pipe(
                     map((res: any) => {
