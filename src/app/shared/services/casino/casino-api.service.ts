@@ -111,7 +111,7 @@ export class CasinoApiService {
         }
 
         switch ($gameFornecedor) {
-            case "parlaybay":
+            case "jvm":
                 return this.http.get(`${config.HOST}/api-reverse/game-url`, requestOptions).pipe(
                     map((res: any) => {
                         return res;
@@ -119,7 +119,7 @@ export class CasinoApiService {
                     catchError(this.errorService.handleError)
                 );
                 break;
-            case "jvm":
+            case "parlaybay":
                 return this.http.get(`${config.HOST}/dcs/loginGame`, requestOptions).pipe(
                     map((res: any) => {
                         return res;
