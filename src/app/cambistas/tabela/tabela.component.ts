@@ -46,6 +46,7 @@ export class TabelaComponent implements OnInit {
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
 
         const queryParams: any = {
+            'sport_id': 1,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'odds': odds.slice(0, 24),
             'data': moment().format('YYYY-MM-DD')

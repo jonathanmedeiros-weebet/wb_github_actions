@@ -2,18 +2,17 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../../shared/services/utils/message.service';
-import * as moment from 'moment';
 import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
 import { SidebarService, ApostaEsportivaService, AcumuladaoService, DesafioApostaService, ApostaService, ApostaLoteriaService, LoteriaPopularService } from 'src/app/services';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
-import { forEach } from 'lodash';
 import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent } from 'src/app/shared/layout/modals';
-import { takeUntil } from 'rxjs/operators';
+import { ApostaEncerramentoModalComponent, ApostaModalComponent } from 'src/app/shared/layout/modals';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../services'
 import { config } from '../../shared/config';
+import { TranslateService } from '@ngx-translate/core';
+import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -28,8 +27,10 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     loteriasHabilitada;
     acumuladaoHabilitado;
     desafioHabilitado;
+    desafioNome: string;
     casinoHabilitado;
     loteriaPopularHabilitada;
+    rifaHabilitada;
     activeId = 'esporte';
     paginaPrincipal: string;
 
@@ -73,6 +74,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private acumuladaoService: AcumuladaoService,
         private cassinoService: CasinoApiService,
         private loteriaServie: ApostaLoteriaService,
+        private rifaApostaService: RifaApostaService,
         public desafioApostaService: DesafioApostaService,
         private loteriaPopularService: LoteriaPopularService,
         public formatter: NgbDateParserFormatter,
@@ -81,7 +83,9 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private modalService: NgbModal,
         private apostaService: ApostaService,
         public activeModal: NgbActiveModal,
-        private auth: AuthService
+        private auth: AuthService,
+        private translate: TranslateService,
+        private paramsService: ParametrosLocaisService
     ) {
         super();
 
@@ -103,8 +107,10 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.loteriasHabilitada = this.params.getOpcoes().loterias;
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
+        this.desafioNome = this.params.getOpcoes().desafio_nome;
         this.casinoHabilitado = this.params.getOpcoes().casino;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
+        this.rifaHabilitada = this.params.getOpcoes().rifa;
 
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
 
@@ -134,12 +140,13 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
     getTabs(): any[] {
         const tabs: any[] = [
-            { id: 'esporte', label: 'geral.esporte', habilitado: this.esporteHabilitado },
-            { id: 'cassino', label: 'geral.cassino', habilitado: this.casinoHabilitado },
-            { id: 'acumuladao', label: 'geral.acumuladao', habilitado: this.acumuladaoHabilitado },
-            { id: 'desafio', label: 'geral.desafio', habilitado: this.desafioHabilitado },
-            { id: 'loteria', label: 'geral.loteria', habilitado: this.loteriasHabilitada },
-            { id: 'loteria-popular', label: 'submenu.loteriaPopular', habilitado: this.loteriaPopularHabilitada }
+            { id: 'esporte', label: this.translate.instant('geral.esporte'), habilitado: this.esporteHabilitado },
+            { id: 'cassino', label: this.paramsService.getCustomCasinoName(), habilitado: this.casinoHabilitado },
+            { id: 'acumuladao', label: this.translate.instant('geral.acumuladao'), habilitado: this.acumuladaoHabilitado },
+            { id: 'desafio', label: this.translate.instant(this.desafioNome), habilitado: this.desafioHabilitado },
+            { id: 'loteria', label: this.translate.instant('geral.loteria'), habilitado: this.loteriasHabilitada },
+            { id: 'loteria-popular', label: this.translate.instant('submenu.loteriaPopular'), habilitado: this.loteriaPopularHabilitada },
+            { id: 'rifa', label: this.translate.instant('geral.rifa'), habilitado: this.rifaHabilitada }
         ];
 
         const sortedTabs = tabs.slice();
@@ -211,6 +218,14 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                         apostas => this.handleResponse(apostas),
                         error => this.handleError(error)
                     );
+                break;
+            case 'rifa':
+                this.rifaApostaService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
+                break;
             default:
                 this.handleResponse([]);
                 break;
@@ -396,45 +411,4 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
         return dataFormatada;
     }
-
-    /*handleCancel(aposta) {
-        this.showLoading = true;
-        const params = {};
-
-        if (aposta.id === this.apostas[0].id) {
-            params['verificar-ultima-aposta'] = 1;
-        }
-
-        this.apostaService.getAposta(aposta.id, params)
-            .subscribe(
-                apostaLocalizada => {
-                    this.cancelar(apostaLocalizada);
-
-                    this.showLoading = false;
-                    this.cd.detectChanges();
-                },
-                error => this.handleError(error)
-            );
-    }
-
-    cancelar(aposta) {
-        this.modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
-        this.modalRef.componentInstance.title = 'Cancelar Aposta';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja cancelar a aposta?';
-
-        console.log("APOSTA", aposta);
-
-        this.modalRef.result.then(
-            (result) => {
-                this.apostaService.cancelar({id: aposta.id, version: aposta.version})
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        () => this.getApostas(),
-                        error => this.handleError(error)
-                    );
-            },
-            (reason) => {
-            }
-        );
-    }*/
 }

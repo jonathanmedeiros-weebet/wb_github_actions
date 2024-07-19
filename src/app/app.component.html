@@ -1,4 +1,6 @@
-<router-outlet></router-outlet>
+<div class="idle-detector" idleDetect>
+    <router-outlet></router-outlet>
+</div>
 
 <ng-template #demoModal let-modal>
     <div class="modal-inicial" style="display: flex; justify-content: end;">
@@ -56,6 +58,26 @@
     </div>
 </ng-template>
 
+<ng-template #enableNotificationXtremepushModal let-modal>
+      <div class="modal-header" style="display: flex;
+        justify-content: end;
+        border-bottom: none;
+        padding-bottom: 25px !important">
+        <a class="close-imagem-inicial-demo" aria-label="Close" (click)="disableNotifications()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="modal-body" style="min-height: 80%">
+        <div class="content-modal-push">
+            <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png">
+            <h4>Gostaria de ativar notificações para ficar atualizado com as nossas novidades?</h4>
+        </div>
+    </div>
+    <div class="modal-footer" >
+        <button style="align-self: center" class="btn btn-custom" (click)="activateNotifications()">Sim, Ativar</button>
+    </div>
+</ng-template>
+
 <div class="botao-contato-flutuante" *ngIf="!mobileScreen && (isDemo || whatsapp)">
     <a *ngIf="isDemo" class="btn btn-custom rounded-circle contato" target="_blank"
        href="https://materiais.wee.bet/demo-weebet">
@@ -65,4 +87,18 @@
        href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
         <i class="fa fa-brands fa-whatsapp"></i>
     </a>
+</div>
+
+<div class="accept-cookies" *ngIf="!acceptedCookies">
+    <div class="cookie-message">
+        <div class="titulo-informativo-cookies">
+            {{'geral.tituloInformativoCookies' | translate}} <i class="fa-solid fa-cookie"></i>
+        </div>
+        <div class="informativo-cookies">
+            <div>{{'geral.informativoCookies' | translate}}</div>
+            <div>
+                <a class="btn btn-custom w-130" (click)="acceptCookies()">{{ 'botoes.aceitar' | translate }}</a>
+            </div>
+        </div>
+    </div>
 </div>

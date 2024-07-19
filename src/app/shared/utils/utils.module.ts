@@ -17,12 +17,11 @@ import {
     FormatarNaturezaPipe,
     FormatarFornecedoresPipe,
     FormatarPromocaoPipe,
-    FormatarNomeJogoCassinoPipe,
     DepositoStatusPixPipePipe,
     SafeIframePipe,
-    FormatPaymentMethodPipe
+    FormatPaymentMethodPipe,
+    IdleDetectDirective
 } from './index';
-
 
 @NgModule({
     declarations: [
@@ -40,12 +39,12 @@ import {
         FormatarNaturezaPipe,
         FormatarFornecedoresPipe,
         FormatarPromocaoPipe,
-        FormatarNomeJogoCassinoPipe,
         SanitizeCampNamePipe,
         DepositoStatusPixPipePipe,
         CotacaoPipe,
         SafeIframePipe,
-        FormatPaymentMethodPipe
+        FormatPaymentMethodPipe,
+        IdleDetectDirective
     ],
     exports: [
         MomentPipe,
@@ -62,12 +61,12 @@ import {
         FormatarNaturezaPipe,
         FormatarFornecedoresPipe,
         FormatarPromocaoPipe,
-        FormatarNomeJogoCassinoPipe,
         DepositoStatusPixPipePipe,
         SanitizeCampNamePipe,
         CotacaoPipe,
         SafeIframePipe,
-        FormatPaymentMethodPipe
+        FormatPaymentMethodPipe,
+        IdleDetectDirective
     ]
 })
 export class UtilsModule { }

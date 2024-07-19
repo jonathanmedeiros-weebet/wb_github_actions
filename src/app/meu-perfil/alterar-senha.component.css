@@ -34,13 +34,15 @@ label {
     line-height: 38px;
 }
 
+.form-group {
+    display: flex;
+    align-items: center;
+}
 
 .form-group i {
-    position: absolute;
-    top: 13px;
-    right: 30px;
     color: var(--foreground-inputs-odds);
     cursor: pointer;
+    margin-left: -30px;
 }
 
 @media only screen and (max-width: 1024px) {

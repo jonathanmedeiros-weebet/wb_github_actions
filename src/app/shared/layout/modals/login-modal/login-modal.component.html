@@ -1,13 +1,13 @@
 <div class="modal-header">
     <img class="logo-modal" [src]="LOGO" alt="">
-    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <a type="button" class="btn-close" aria-label="Close" (click)="toClose()">
         <i class="fa fa-times"></i>
     </a>
 </div>
 <div class="modal-body" [ngStyle]="{'padding-top': loginGoogle ? '10px' : '40px'}">
     <div class="modal-body-content">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-            <span class="space-buttons" *ngIf="loginGoogle">Realize o login com a conta do google</span>
+            <span class="space-buttons" *ngIf="loginGoogle">{{'geral.loginGoogle' | translate}}</span>
             <asl-google-signin-button type='standard' size='large' text='signin_with' logo_alignment='center' *ngIf="loginGoogle"></asl-google-signin-button>
             <div class="text-line" *ngIf="loginGoogle">
                 <span>OU</span>

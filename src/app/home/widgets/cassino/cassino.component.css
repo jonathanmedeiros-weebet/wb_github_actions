@@ -75,6 +75,11 @@
     opacity: 0;
 }
 
+.empty-game-list {
+    color: var(--foreground-header);
+    opacity: 0.5;
+}
+
 @keyframes surgirAnim {
     0% {
         opacity: 0;

@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CasinoApiService } from '../../shared/services/casino/casino-api.service';
-import { AuthService } from './../../services';
+import { AuthService, ParametrosLocaisService } from './../../services';
 import { interval } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../../shared/layout/modals';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-live',
@@ -31,7 +32,16 @@ export class LiveComponent implements OnInit, OnDestroy {
         private auth: AuthService,
         private modalService: NgbModal,
         private router: Router,
+        private paramsService: ParametrosLocaisService,
+        private translate: TranslateService
     ) {
+    }
+
+    get customLiveCasinoName(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('cassino.aoVivo'),
+            this.translate.instant('geral.cassino').toUpperCase()
+        );
     }
 
     ngOnInit(): void {

@@ -1,0 +1,82 @@
+.jogos, .palpites{
+    margin-bottom: 15px;
+}
+
+#aposta{
+    padding: 10px 14px;
+    border: 1px solid var(--game);
+    border-radius: 5px;
+}
+
+#aposta h2{
+    margin-bottom: 30px;
+}
+
+
+.div-jogos-selecionados .item-selecionado-inner{
+    margin: 0px 30px;
+}
+
+.div-jogos-selecionados h3{
+    margin: 30px 0;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.div-jogos-selecionados h3::before{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    background: var(--highlight);
+    top: 23px;
+    left: 108px;
+    position: relative;
+}
+
+.item-selecionado{
+    padding: 15px 0;
+    border-bottom: 1px dashed var(--game);
+    text-align: left;
+    position: relative;
+}
+
+.item-selecionado:first-of-type{
+    border-top: none;
+    padding-top: 0;
+}
+
+.item-selecionado label{
+    margin-right: 5px;
+}
+
+.item-selecionado .horario{
+    font-weight: bold;
+}
+
+.item-selecionado .cotacao .valor{
+    font-weight: bold;
+}
+
+.remover-item{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--highlight);
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.custom-width-value{
+    width: 100px;
+}
+
+.custom-width-apostador{
+    width: 500px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .btn-custom {
+        width: 100%;
+    }
+}

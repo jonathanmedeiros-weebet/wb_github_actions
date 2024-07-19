@@ -16,6 +16,7 @@ import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-m
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
+import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -45,16 +46,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     cpfValidado = false;
     menorDeIdade = false;
     possuiCodigoAfiliado = false;
-
+    isLoterj;
     user: any;
     loginGoogleAtivo = false;
     formSocial = false;
+    aplicarCssTermo: boolean = false;
 
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
         private fb: UntypedFormBuilder,
         private apostaService: ApostaService,
+        private campanhaService: CampanhaAfiliadoService,
         private messageService: MessageService,
         private auth: AuthService,
         private route: ActivatedRoute,
@@ -72,7 +75,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
-
+        this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+        if(this.isLoterj) {
+            this.aplicarCssTermo = true;
+        }
         this.createForm();
 
         this.hCaptchaLanguage = this.translate.currentLang;
@@ -119,6 +125,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
             }
 
+            if (params.c) {
+                this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
+
+                localStorage.setItem('campRef', params.c);
+                localStorage.setItem('campFonte', params.s);
+            } else {
+                const campRef = localStorage.getItem('campRef');
+                const campFonte = localStorage.getItem('campFonte');
+
+                if (campRef) {
+                    this.form.patchValue({campRef: campRef, campFonte: campFonte});
+                }
+            }
+
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
                 this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                 this.possuiCodigoAfiliado = true;
@@ -135,6 +155,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             this.form.patchValue({
                                 nome: user.name,
                                 email: user.email,
+                                confirmarEmail: user.email,
                                 googleId: user.id,
                                 googleIdToken: user.idToken,
                             });
@@ -166,8 +187,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             googleIdToken: [''],
             btag: [this.route.snapshot.queryParams.btag],
             refId: [this.route.snapshot.queryParams.refId],
+            campRef: [this.route.snapshot.queryParams.c],
+            campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null]
         });
+
+        if (this.isLoterj) {
+            this.form.addControl('confirmarEmail', this.fb.control(null, [
+                Validators.required,
+                Validators.email,
+                FormValidations.equalsTo('email')
+            ]));
+            this.form.addControl('termosUso', this.fb.control(null, [
+                Validators.requiredTrue,
+            ]));
+        }
     }
 
     ngOnDestroy() {
@@ -309,5 +343,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     onBeforeInput(e : InputEvent, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
+    }
+
+    blockPaste(event: ClipboardEvent): void {
+        event.preventDefault();
     }
 }

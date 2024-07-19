@@ -92,6 +92,7 @@
     &__body {
         display: flex;
         gap: 10px;
+        flex-direction: column;
     }
 
     &__item {
@@ -102,9 +103,9 @@
         color: var(--foreground-inputs-odds);
         background-color: var(--inputs-odds);
 
-        height: 23px;
+        height: fit-content;
         border-radius: 3px;
-        padding: 7px 17px;
+        padding: 10px 17px;
         cursor: pointer;
     }
 
@@ -190,6 +191,10 @@
     .search-results__list {
         grid-template-columns: repeat(3, 1fr);
         gap: 15px;
+    }
+
+    .search-recents__body{
+        flex-direction: row;
     }
 }
 

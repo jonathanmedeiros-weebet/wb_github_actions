@@ -124,7 +124,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
         this.layoutService.currentHeaderHeight
             .pipe(takeUntil(this.unsub$))
-            .subscribe(curHeaderHeight => {console.log(curHeaderHeight);
+            .subscribe(curHeaderHeight => {
                 this.headerHeight = curHeaderHeight;
                 this.definirAltura();
                 this.cd.detectChanges();

@@ -16,7 +16,8 @@ import {
     PagesNoNavLayoutComponent,
     SportLayoutComponent,
     VirtuaisLayoutComponent,
-    LiveSportLayoutComponent
+    LiveSportLayoutComponent,
+    RifaLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -75,6 +76,7 @@ import {NgxMaskModule} from 'ngx-mask';
 import {NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
+import {BilheteRifaComponent} from '../../rifas/bilhete/bilhete-rifa.component';
 import {SubmenuComponent} from './submenu/submenu.component';
 import {SidebarMenuComponent, SidebarNavComponent} from '../sidebar';
 
@@ -91,8 +93,10 @@ import { InformativoModalComponent } from './modals/informativo-modal/informativ
 import { JogoService } from '../services/aposta-esportiva/jogo.service';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-import { SkeletonComponent } from './skeleton/skeleton.component';
 import { SkeletonModule } from './skeleton/skeleton.module';
+import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-modal/block-peer-attemps-modal.component';
+import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
 
 @NgModule({
     imports: [
@@ -155,6 +159,7 @@ import { SkeletonModule } from './skeleton/skeleton.module';
         ApostaEncerramentoModalComponent,
         MenuFooterComponent,
         BilheteEsportivoComponent,
+        BilheteRifaComponent,
         SportLayoutComponent,
         PagesLayoutComponent,
         PagesNoNavLayoutComponent,
@@ -163,6 +168,7 @@ import { SkeletonModule } from './skeleton/skeleton.module';
         VirtuaisLayoutComponent,
         SubmenuComponent,
         LoteriaLayoutComponent,
+        RifaLayoutComponent,
         DesafioLayoutComponent,
         AcumuladaoLayoutComponent,
         LiveSportLayoutComponent,
@@ -186,6 +192,9 @@ import { SkeletonModule } from './skeleton/skeleton.module';
         CompatilhamentoBilheteModal,
         WelcomePageComponent,
         CanceledBonusConfirmComponent,
+        BlockPeerAttempsModalComponent,
+        MultifactorConfirmationModalComponent,
+        ExibirBilheteRifaComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -197,13 +206,16 @@ import { SkeletonModule } from './skeleton/skeleton.module';
         ExibirBilheteDesafioComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
+        ExibirBilheteRifaComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
         BilheteEsportivoComponent,
+        BilheteRifaComponent,
         BannersComponent,
         WelcomePageComponent,
         SubmenuComponent,
-        SkeletonModule
+        SkeletonModule,
+        MenuFooterComponent
     ],
     providers: [
         ApostaEsportivaService,
