@@ -1,4 +1,7 @@
 <div id="deposito-pix">
+    <div class="content-header">
+        <h2>{{'deposito.titulo' | translate}}</h2>
+    </div>
     <div class="alert alert-success alert-dismissible" *ngIf="exibirMensagemPagamento">
         {{'deposito.seuPixFoiCreditado' | translate:{'novoSaldo': novoSaldo} }}
         <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close">

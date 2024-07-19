@@ -9,10 +9,10 @@
 
     <app-spinner *ngIf="showLoading"></app-spinner>
 
+    
+    <!-- <div class="ssc-square banner"></div> -->
+    <app-banners pagina="deposito" class="banner-deposito"></app-banners>
     <ng-container *ngIf="!showLoading">
-        <div class="content-header hide-mobile">
-            <h2>{{'deposito.titulo' | translate}}</h2>
-        </div>
         <div class="content-body">
             <div class="content">
                 <div *ngIf="hasApiPagamentos || whatsapp">
