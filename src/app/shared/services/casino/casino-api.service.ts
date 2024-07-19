@@ -110,20 +110,32 @@ export class CasinoApiService {
             requestOptions = this.header.getRequestOptions(true);
         }
 
-        if($gameFornecedor == 'parlaybay'){
-            return this.http.get(`${config.HOST}/dcs/loginGame`, requestOptions).pipe(
-                map((res: any) => {
-                    return res;
-                }),
-                catchError(this.errorService.handleError)
-            );
-        } else{
-            return this.http.get(`${this.central_url}/games/url`, requestOptions).pipe(
-                map((res: any) => {
-                    return res;
-                }),
-                catchError(this.errorService.handleError)
-            );
+        switch ($gameFornecedor) {
+            case "parlaybay":
+                return this.http.get(`${config.HOST}/api-reverse/game-url`, requestOptions).pipe(
+                    map((res: any) => {
+                        return res;
+                    }),
+                    catchError(this.errorService.handleError)
+                );
+                break;
+            case "jvm":
+                return this.http.get(`${config.HOST}/dcs/loginGame`, requestOptions).pipe(
+                    map((res: any) => {
+                        return res;
+                    }),
+                    catchError(this.errorService.handleError)
+                );
+                break;
+                break;
+            default:
+                return this.http.get(`${this.central_url}/games/url`, requestOptions).pipe(
+                    map((res: any) => {
+                        return res;
+                    }),
+                    catchError(this.errorService.handleError)
+                );
+                break;
         }
     }
 
