@@ -122,7 +122,7 @@ export default {
       showModalCalendar: false,
       showModalLeagues: false,
       showModalModalities: false,
-      liveActived: false,
+
       loading: false,
       modality: null,
       league: leagueList[0],
@@ -135,6 +135,7 @@ export default {
   },
   created() {
     this.modality = this.modalityList.find(modality => modality.id === Modalities.SOCCER);
+    if(this.liveActived) this.prepareSocket();
     this.pageLoad();
   },
   computed: {
@@ -149,7 +150,10 @@ export default {
       if(this.modality.id == Modalities.BACKETBALL && options.basquete_aovivo) return true;
       
       return false;
-    }
+    },
+    liveActived() {
+      return this.homeStore.isLive;
+    },
   },
   methods: {
     async pageLoad() {
@@ -275,7 +279,6 @@ export default {
 
     behaviorLiveEvents() {
       this.socket.getEvents().subscribe((event) => {
-        console.log(event)
         let hasChange = false;
         const {
           _id: id,
@@ -385,24 +388,25 @@ export default {
       this.showModalSearch = false
     },
     handleSearch(gameId) {
-      console.log(gameId)
+      void gameId;
     },
     changeSrcWhenImageError (event) {
       event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
     },
 
     handleLive() {
-      this.liveActived = !this.liveActived;
-
+      this.homeStore.setIsLive(!this.liveActived);
+      this.prepareSocket();
+      this.pageLoad();
+    },
+    async prepareSocket() {
       if(this.liveActived) {
-        this.socket.connect();
+        await this.socket.connect();
         this.socket.enterEventsRoom();
       } else {
         this.socket.exitEventsRoom();
         this.socket.disconnect();
       }
-
-      this.pageLoad();
     },
     handleGameDetailClick(gameId) {
       this.socket.exitEventsRoom();

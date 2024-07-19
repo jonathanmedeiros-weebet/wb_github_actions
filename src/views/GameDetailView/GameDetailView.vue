@@ -139,7 +139,7 @@ export default {
                 this.game = await getGame(gameId);
 
                 if(this.game.ao_vivo) {
-                    this.socket.connect();
+                    await this.socket.connect();
                     this.socket.enterEventRoom(this.game._id);
                     this.behaviorLiveEvent(this.game._id);
                 }

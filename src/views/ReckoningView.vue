@@ -175,7 +175,6 @@ export default {
       alert('Modal select')
     },
     toggleCollapse(section, event) {
-      console.log(section);
       if (section === 'input') {
         this.collapsedInputs = !this.collapsedInputs;
       } else if (section === 'exit') {

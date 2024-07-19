@@ -119,11 +119,9 @@ export default {
       this.$router.push(route);
     },
     toggleCreditoVisibility() {
-      console.log('Toggling Credito Visibility');
       this.isCreditoVisible = !this.isCreditoVisible;
     },
     toggleSaldoVisibility() {
-      console.log('Toggling Saldo Visibility');
       this.isSaldoVisible = !this.isSaldoVisible;
     },
     handleOpenConsultTicketModal() {

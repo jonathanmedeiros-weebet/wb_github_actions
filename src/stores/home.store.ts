@@ -6,6 +6,7 @@ export const useHomeStore = defineStore('home', {
         championshipList: [],
         championshipPerRegionList: [] as ChampionshipPerRegion[],
         championshipSelected: null,
+        isLive: false
     }),
     actions: {
         setChampionshipPerRegionList(championships: any) {
@@ -14,5 +15,8 @@ export const useHomeStore = defineStore('home', {
         setChampionshipList(championships: any) {
             this.championshipList = championships;
         },
+        setIsLive(isLive: boolean) {
+            this.isLive = isLive;
+        }
     },
 })

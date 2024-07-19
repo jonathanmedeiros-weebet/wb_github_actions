@@ -14,13 +14,20 @@ enum SocketKeys {
 export class SocketService {
     private socket: SocketIOClient.Socket | any;
 
-    public connect() {
-        if(!this.socket?.connected) {
-            const { liveUrl } = useConfigClient();
-            this.socket = io(liveUrl);
-            this.socket.on('connect', () => console.warn('socket connected'))
-            this.socket.on('disconnect', () => console.warn('socket disconnected'))
-        }
+    public connect(): Promise<boolean | string> {
+        return new Promise((resolve, reject) => {
+            if(!this.socket?.connected) {
+                const { liveUrl } = useConfigClient();
+                this.socket = io(liveUrl);
+                this.socket.on('connect', () => {
+                    console.warn('socket connected')
+                    resolve(true);
+                })
+                this.socket.on('disconnect', () => console.warn('socket disconnected'))
+            } else {
+                reject('Socket já está conectado!');
+            }
+        })
     }
 
     public connected(): boolean{
@@ -28,25 +35,33 @@ export class SocketService {
     }
 
     public disconnect() {
-        if(this.socket?.connected) {
+        if(this.connected()) {
             this.socket.disconnect();
         }
     }
 
     public enterEventsRoom() {
-        this.socket.emit(SocketKeys.EVENTS_ROOM_ENTER);
+        if(this.connected()) {
+            this.socket.emit(SocketKeys.EVENTS_ROOM_ENTER);
+        }
     }
 
     public exitEventsRoom() {
-        this.socket.emit(SocketKeys.EVENTS_ROOM_EXIT);
+        if(this.connected()) {
+            this.socket.emit(SocketKeys.EVENTS_ROOM_EXIT);
+        }
     }
 
     public enterEventRoom(eventId: string | number) {
-        this.socket.emit(SocketKeys.EVENT_ROOM_ENTER, eventId);
+        if(this.connected()) {
+            this.socket.emit(SocketKeys.EVENT_ROOM_ENTER, eventId);
+        }
     }
 
     public exitEventRoom(eventId: string | number) {
-        this.socket.emit(SocketKeys.EVENT_ROOM_EXIT, eventId);
+        if(this.connected()) {
+            this.socket.emit(SocketKeys.EVENT_ROOM_EXIT, eventId);
+        }
     }
 
     public getEvents(): Observable<any> {
