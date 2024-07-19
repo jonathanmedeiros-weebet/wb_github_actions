@@ -138,18 +138,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     ) {
                         this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
                         this.activeModal.dismiss();
-                    } else {
-                        this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                        this.auth.login(this.form.value)
-                            .pipe(takeUntil(this.unsub$))
-                            .subscribe(
-                                () => {
-                                    this.getUsuario();
-                                    location.reload();
-                                    this.activeModal.dismiss();
-                                },
-                                error => this.handleError(error)
-                            );
                         return;
                     }
 
