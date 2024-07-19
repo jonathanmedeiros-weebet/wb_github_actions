@@ -9,6 +9,7 @@ import {DepositoWhatsappComponent} from './whatsapp/deposito-whatsapp.component'
 import {NgxCurrencyModule} from 'ngx-currency';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { DepositoOpenModalComponent } from './deposito-open-modal.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
         DepositoComponent,
         DepositoPixComponent,
         DepositoWhatsappComponent,
-        NgbdModalContent
+        NgbdModalContent,
+        DepositoOpenModalComponent
     ],
     imports: [
         SharedModule,
