@@ -45,6 +45,7 @@
     <ModalModalities
       v-if="showModalModalities"
       :modalityId="modality.id"
+      :isLive="liveActived"
       @closeModal="handleCloseModalitiesModal"
       @click="handleModality"
     />
@@ -122,9 +123,7 @@ export default {
       showModalCalendar: false,
       showModalLeagues: false,
       showModalModalities: false,
-
       loading: false,
-      modality: null,
       league: leagueList[0],
       modalityList: modalityList(),
       dateSelected: now(),
@@ -134,8 +133,15 @@ export default {
     }
   },
   created() {
-    this.modality = this.modalityList.find(modality => modality.id === Modalities.SOCCER);
-    if(this.liveActived) this.prepareSocket();
+    if(!Boolean(this.modality)) {
+      const modality = this.modalityList.find(modality => modality.id === Modalities.SOCCER);
+      this.homeStore.setModality(modality);
+    }
+    
+    if(this.liveActived) {
+      this.prepareSocket();
+    }
+
     this.pageLoad();
   },
   computed: {
@@ -154,6 +160,9 @@ export default {
     liveActived() {
       return this.homeStore.isLive;
     },
+    modality() {
+      return this.homeStore.modality;
+    }
   },
   methods: {
     async pageLoad() {
@@ -284,24 +293,30 @@ export default {
           _id: id,
           info: newInfo,
           cotacoes: newQuotes,
-          campeonato
+          campeonato,
+          finalizado: finished
         } = event;
-
-        let championshipList = this.homeStore.championshipList.map((championship) => {
+       
+        const championshipList = this.homeStore.championshipList.map((championship) => {
           const championshipIsEqual = championship._id == campeonato._id;
           if(championshipIsEqual) {
             const gameIndex = championship.jogos.findIndex(game => game._id == id);
             const hasGame = gameIndex != -1;
             
             if(hasGame) {
-              hasChange = true;
-              const game = championship.jogos[gameIndex];
-              const quotes = prepareLiveQuote(game.cotacoes ?? [], newQuotes);
+              if(finished) {
+                championship.jogos.splice(gameIndex);
+                hasChange = true;
+              } else {
+                hasChange = true;
+                const game = championship.jogos[gameIndex];
+                const quotes = prepareLiveQuote(game.cotacoes ?? [], newQuotes);
 
-              championship.jogos[gameIndex] = {
-                ...game,
-                cotacoes: quotes,
-                info: newInfo,
+                championship.jogos[gameIndex] = {
+                  ...game,
+                  cotacoes: quotes,
+                  info: newInfo,
+                }
               }
             }
           }
@@ -323,7 +338,10 @@ export default {
     },
     async handleModality(modalityId) {
       this.loading = true;
-      this.modality = this.modalityList.find(modality => modality.id === modalityId)
+
+      const modality = this.modalityList.find(modality => modality.id === modalityId);
+      this.homeStore.setModality(modality);
+
       this.handleCloseModalitiesModal();
 
       await this.prepareChampionshipPerRegionList(modalityId);
@@ -404,13 +422,11 @@ export default {
         await this.socket.connect();
         this.socket.enterEventsRoom();
       } else {
-        this.socket.exitEventsRoom();
-        this.socket.disconnect();
+        this.eventSocketDisconnect();
       }
     },
     handleGameDetailClick(gameId) {
-      this.socket.exitEventsRoom();
-      this.socket.disconnect();
+      this.eventSocketDisconnect();
 
       this.$router.push({
         name: 'game-detail',
@@ -421,10 +437,13 @@ export default {
 
       event.stopPropagation();
     },
+    eventSocketDisconnect() {
+      this.socket.exitEventsRoom();
+      this.socket.disconnect();
+    }
   },
   destroyed() {
-    this.socket.exitEventsRoom();
-    this.socket.disconnect();
+    this.eventSocketDisconnect();
   }
 }
 </script>

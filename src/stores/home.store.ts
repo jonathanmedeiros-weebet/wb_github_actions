@@ -1,3 +1,4 @@
+import { modalityList } from "@/constants";
 import type { ChampionshipPerRegion } from "@/interfaces";
 import { defineStore } from "pinia"
 
@@ -6,7 +7,8 @@ export const useHomeStore = defineStore('home', {
         championshipList: [],
         championshipPerRegionList: [] as ChampionshipPerRegion[],
         championshipSelected: null,
-        isLive: false
+        isLive: false,
+        modality: null
     }),
     actions: {
         setChampionshipPerRegionList(championships: any) {
@@ -17,6 +19,9 @@ export const useHomeStore = defineStore('home', {
         },
         setIsLive(isLive: boolean) {
             this.isLive = isLive;
+        },
+        setModality(modality: any) {
+            this.modality = modality;
         }
     },
 })

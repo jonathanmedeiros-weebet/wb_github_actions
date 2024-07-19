@@ -22,6 +22,7 @@
                 >
                     <template v-if="odd.hasPermission">
                         <IconArrowFillUp
+                            class="collapse__icon-option"
                             v-if="isIncreasedOdd(odd)"
                             :size="14"
                             color="var(--color-success)"
@@ -29,6 +30,7 @@
                         <span class="collapse__label">{{ odd.label }}</span>
                         <span class="collapse__value">{{ odd.finalValue }}</span>
                         <IconArrowFillDown
+                            class="collapse__icon-option"
                             v-if="isDecreasedOdd(odd)"
                             :size="14"
                             color="var(--color-danger)"
@@ -138,6 +140,10 @@ export default {
     &__option--selected &__label,
     &__option--selected &__value {
         color: #000;
+    }
+
+    &__icon-option {
+        animation: blink 1s linear infinite;
     }
 
     &__label {

@@ -227,4 +227,4 @@ export default {
     }
 }
 
-</style>v
+</style>

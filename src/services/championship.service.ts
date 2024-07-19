@@ -156,8 +156,9 @@ export const calculateQuota = ({
 
 export const prepareLiveQuote = (lastQuotes: any[], newQuotes: any[]) => {
     return newQuotes.map(newQuote => {
-        const lastQuote = lastQuotes.find(quote => quote._id == newQuote._id);
-
+        let lastQuote = lastQuotes.find(quote => quote.chave == newQuote.chave);
+        lastQuote = lastQuote ?? newQuote;
+        
         let status = QuotaStatus.DEFAULT;
         if(newQuote.valor != lastQuote.valor) {
           status = newQuote.valor > lastQuote.valor ? QuotaStatus.INCREASED: QuotaStatus.DECREASED;
@@ -172,3 +173,10 @@ export const prepareLiveQuote = (lastQuotes: any[], newQuotes: any[]) => {
         }
     })
 }
+
+// TODOS:
+// Falta reorganizar cotações nas seguinte ordem (casa, empate, fora)
+// Falta mostrar placar na tela home em ao vivo
+// Falta mostrar placar na pagina do jogo quando scrolla.
+// Falta colocar data selecionada no pinia.
+// Falta colocar campeonato selecionado no pinia.

@@ -34,14 +34,26 @@ export default {
         modalityId: {
             type: Number | String,
             default: 1
+        },
+        isLive: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
         return {
-            items: modalityList().map((modalitiy) => ({
+            options: modalityList().map((modalitiy) => ({
                 ...modalitiy,
                 checked: modalitiy.id === this.modalityId
             }))
+        }
+    },
+    computed: {
+        items() {
+            if(this.isLive){
+                return this.options.filter(option => Boolean(option.hasLive));
+            }
+            return this.options;
         }
     },
     methods: {
