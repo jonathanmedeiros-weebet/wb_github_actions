@@ -8,7 +8,8 @@ export const useHomeStore = defineStore('home', {
         championshipPerRegionList: [] as ChampionshipPerRegion[],
         championshipSelected: null,
         isLive: false,
-        modality: null
+        modality: null,
+        league: null,
     }),
     actions: {
         setChampionshipPerRegionList(championships: any) {
@@ -22,6 +23,9 @@ export const useHomeStore = defineStore('home', {
         },
         setModality(modality: any) {
             this.modality = modality;
+        },
+        setLeague(league: any) {
+            this.league = league;
         }
     },
 })

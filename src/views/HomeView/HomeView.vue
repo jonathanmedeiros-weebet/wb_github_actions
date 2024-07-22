@@ -67,7 +67,7 @@
 
 <script>
 import { now } from '@/utilities'
-import { modalityList, leagueList, countriesWithFemaleNames } from '@/constants'
+import { modalityList, countriesWithFemaleNames } from '@/constants'
 import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship, prepareLiveQuote, SocketService } from '@/services'
 import { useConfigClient, useHomeStore } from '@/stores'
 
@@ -90,7 +90,7 @@ import IconBasketball from '@/components/icons/IconBasketball.vue'
 import IconFutsal from '@/components/icons/IconFutsal.vue'
 import IconVoleiball from '@/components/icons/IconVoleiball.vue'
 import IconESport from '@/components/icons/IconESport.vue'
-import { Modalities, QuotaStatus } from '@/enums'
+import { Modalities } from '@/enums'
 import LiveButton from './parts/LiveButton.vue'
 
 export default {
@@ -124,7 +124,6 @@ export default {
       showModalLeagues: false,
       showModalModalities: false,
       loading: false,
-      league: leagueList[0],
       modalityList: modalityList(),
       dateSelected: now(),
       regionSelected: '',
@@ -137,7 +136,7 @@ export default {
       const modality = this.modalityList.find(modality => modality.id === Modalities.SOCCER);
       this.homeStore.setModality(modality);
     }
-    
+
     if(this.liveActived) {
       this.prepareSocket();
     }
@@ -162,17 +161,25 @@ export default {
     },
     modality() {
       return this.homeStore.modality;
+    },
+    league() {
+      return this.homeStore.league
     }
   },
   methods: {
     async pageLoad() {
       this.loading = true;
-      await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
+      if(Boolean(this.league)) {
+        await this.handleLeague(this.league);
+      } else {
+        await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
+      }
       await this.prepareChampionshipPerRegionList(this.modality.id);
 
       if(this.liveActived && this.socket.connected()){
         this.behaviorLiveEvents();
       }
+
       this.loading = false;
     },
 
@@ -223,9 +230,11 @@ export default {
 
       this.homeStore.setChampionshipPerRegionList(championshipPerRegionList);
 
-      const league = championshipPerRegionList[0];
-      delete league?.championships;
-      this.league = league;
+      if(!Boolean(this.league)) {
+        const league = { ...championshipPerRegionList[0] };
+        delete league?.championships;
+        this.homeStore.setLeague(league);
+      }
 
       if(this.modality.id !== Modalities.SOCCER) {
         this.prepareChampionshipPerRegionListForModalityOtherThanFootball();
@@ -341,6 +350,7 @@ export default {
 
       const modality = this.modalityList.find(modality => modality.id === modalityId);
       this.homeStore.setModality(modality);
+      this.homeStore.setLeague(null);
 
       this.handleCloseModalitiesModal();
 
@@ -374,7 +384,7 @@ export default {
       }
 
       delete regionOrChampionship?.championships;
-      this.league = regionOrChampionship;
+      this.homeStore.setLeague(regionOrChampionship);
       this.loading = false;
     },
 
@@ -414,6 +424,7 @@ export default {
 
     handleLive() {
       this.homeStore.setIsLive(!this.liveActived);
+      this.homeStore.setLeague(null);
       this.prepareSocket();
       this.pageLoad();
     },
