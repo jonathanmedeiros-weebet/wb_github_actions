@@ -1,0 +1,15 @@
+export enum Modalities {
+    SOCCER = 1,
+    COMBAT = 9,
+    AMERICAN_SOCCER = 12,
+    TENNIS = 13,
+    HOCKEY = 17,
+    BACKETBALL = 48242,
+    FUTSAL = 83,
+    VOLEIBALL = 91,
+    TABLE_TENNIS = 92,
+    E_SPORT = 151,
+    CHALLENGE = 'null1',
+    ACCUMULATION = 'null2',
+    POPULAR_LOTTERY = 'null3',
+}

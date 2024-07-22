@@ -4,9 +4,12 @@
     :value="value"
     type="button"
     class="button"
+    :class="`button--${color}`"
     @click="handleClick"
   >
+    <slot name="icon-left"></slot>
     {{text}}
+    <slot name="icon-right"></slot>
   </button>
 </template>
 
@@ -27,7 +30,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'secondary'
+      default: 'primary'
     }
   },
   methods: {
@@ -41,6 +44,7 @@ export default {
 <style lang="scss" scoped>
 .button {
   display: flex;
+  gap: 8px;
   justify-content: center;
   align-items: center;
   padding: 10px;
@@ -64,6 +68,10 @@ export default {
   &--secondary {
     color: var(--color-text);
     background: var(--color-background);
+  }
+  &--secondary-light {
+    color: var(--color-text);
+    background: var(--color-background-input);
   }
 }
 </style>

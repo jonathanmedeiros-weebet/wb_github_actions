@@ -2,12 +2,12 @@ import './assets/main.scss'
 
 import Vue from 'vue'
 import { PiniaVuePlugin, createPinia } from 'pinia'
+import VueRouter from 'vue-router'
+import VueMask from 'vue-the-mask'
 
 import App from './App.vue'
 import router from './router'
-import VueRouter from 'vue-router'
-import { prepareConfigClient, checkToken } from '@/services'
-import VueMask from 'vue-the-mask'
+import { prepareConfigClient, checkToken } from './services'
 
 Vue.use(VueMask);
 Vue.use(PiniaVuePlugin)

@@ -10,7 +10,7 @@
       @blur="handleBlur"
     />
     <div class="input-search__icon--right">
-      <IconClose :size="14" />
+      <IconClose :size="14" @click.native="handleClear"/>
     </div>
   </div>
 </template>
@@ -44,6 +44,9 @@ export default {
     handleInput(event) {
       this.$emit('input', event.target.value)
     },
+    handleClear() {
+      this.$emit('clear', '')
+    },
     handleFocus(){
       this.isFocused = true;
     },
@@ -68,7 +71,8 @@ export default {
   box-sizing: border-box;
   border-radius: 50px;
   padding: 0 16px;
-
+  width: 100%;
+  
   &--focused {
     border-color: var(--color-primary);
   }
