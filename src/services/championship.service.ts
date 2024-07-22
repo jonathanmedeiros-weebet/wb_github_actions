@@ -107,14 +107,12 @@ export const calculateQuota = ({
     const { betOptions, localQuotes, options } = useConfigClient();
     const betType = betOptions[key] ?? undefined;
 
-    // Cotacação Local
     if (localQuotes[gameEventId] && localQuotes[gameEventId][key]) {
         value = parseFloat(localQuotes[gameEventId][key].valor);
     }
 
     if (Boolean(betType)) {
         if (isLive) {
-            // Fator ao vivo
             const liveFactor = Boolean(betType.fator_ao_vivo)
                 ? parseFloat(betType.fator_ao_vivo)
                 : 1;
@@ -128,7 +126,6 @@ export const calculateQuota = ({
             value = value * factor;
 
             if (Boolean(favorite)) {
-                // Favorito e Zebra
                 const favoriteZebraQuotes = [
                     'casa_90',
                     'fora_90',
@@ -146,7 +143,6 @@ export const calculateQuota = ({
             }
         }
 
-        // Limite
         if (value > betType.limite) {
             value = parseFloat(betType.limite);
         }

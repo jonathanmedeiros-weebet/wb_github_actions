@@ -3,7 +3,11 @@
         <GameDetailSkeleton v-if="loading"/>
         <template v-else>
             <div class="game-detail__header">
-                <GameDetailHeader :game="game" :type="gameHeaderType" :fixed="headerFixed"/>
+                <GameDetailHeader
+                    :game="game"
+                    :type="gameHeaderType"
+                    :fixed="headerFixed"
+                />
             </div>
             <div class="game-detail__body" :class="{'game-detail__body--paddintTop': headerFixed}">
                 <div class="game-detail__filters" v-if="isFutebolModality && hasQuotes">
