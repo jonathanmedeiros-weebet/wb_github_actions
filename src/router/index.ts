@@ -62,9 +62,13 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/close-bet',
+      path: '/close-bet/:id',
       name: 'close-bet',
-      component: CloseBetView
+      component: CloseBetView,
+      meta: {
+        auth: true
+      },
+      props: true
     },
     {
       path: '/bets',
