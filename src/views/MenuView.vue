@@ -134,12 +134,6 @@ export default {
     handleCloseConsultTicketModal() {
       this.isConsultTicketModalVisible = false;
     },
-  },
-  mounted() {
-
-    const user = JSON.parse(localStorage.getItem('user'));
-    this.name = user.nome;
-    
   }
 }
 </script>
