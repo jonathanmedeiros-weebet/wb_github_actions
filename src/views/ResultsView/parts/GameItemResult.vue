@@ -7,7 +7,13 @@
             
                 <div class="games__team-left">
                     <span class="games__team-name-left"> {{ game.teams[0].name }}</span>
-                    <img class="games__team-image-left"  height="26px" width="26px" :src="game.teams[0].image">
+                    <img
+                        class="games__team-image-left"
+                        height="26px"
+                        width="26px"
+                        :src="game.teams[0].image"
+                        @error="changeSrcWhenImageError"
+                    >
                 </div>
 
                 <div class="games__scores">
@@ -25,7 +31,13 @@
                 </div>
             
                 <div class="games__team-right">
-                    <img class="games__team-image-right"  height="26px" width="26px" :src="game.teams[1].image">
+                    <img
+                        class="games__team-image-right"
+                        height="26px"
+                        width="26px"
+                        :src="game.teams[1].image"
+                        @error="changeSrcWhenImageError"
+                    >
                     <span class="games__team-name-right"> {{ game.teams[1].name }}</span>
                 </div>
             
@@ -48,6 +60,9 @@ export default {
         handleClick() {
             this.$emit('click');
         },
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        }
     }
 }
 </script>

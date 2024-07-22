@@ -63,6 +63,11 @@ export default {
         color: var(--color-text);
         font-size: 14px;
         font-weight: 400;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: calc(100vw - 60px);
     }
 
     &__title img {
