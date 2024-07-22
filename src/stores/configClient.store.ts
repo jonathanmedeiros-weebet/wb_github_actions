@@ -45,7 +45,7 @@ export const useConfigClient = defineStore('configClient', {
     logo: (state) => `https://weebet.s3.amazonaws.com/${state.slug}/logos/logo_banca.png`,
     paramUrl: (state) => `https://weebet.s3.amazonaws.com/${state.slug}/param/parametros.json?${+ new Date()}`,
 
-    options: (state) => state.params?.options ?? null,
+    options: (state) => state.params?.opcoes ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
     mainOdds: (state) => state.params?.odds_principais ?? [],
     popularLeagues: (state) => state.params?.ligas_populares ?? [],
