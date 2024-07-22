@@ -66,7 +66,6 @@
 </template>
 
 <script>
-import { now } from '@/utilities'
 import { modalityList, countriesWithFemaleNames } from '@/constants'
 import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship, prepareLiveQuote, SocketService } from '@/services'
 import { useConfigClient, useHomeStore } from '@/stores'
@@ -125,7 +124,6 @@ export default {
       showModalModalities: false,
       loading: false,
       modalityList: modalityList(),
-      dateSelected: now(),
       regionSelected: '',
       homeStore: useHomeStore(),
       socket: new SocketService()
@@ -163,7 +161,10 @@ export default {
       return this.homeStore.modality;
     },
     league() {
-      return this.homeStore.league
+      return this.homeStore.league;
+    },
+    dateSelected() {
+      return this.homeStore.date;
     }
   },
   methods: {
@@ -172,6 +173,7 @@ export default {
       if(Boolean(this.league)) {
         await this.handleLeague(this.league);
       } else {
+        console.log(this.dateSelected)
         await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
       }
       await this.prepareChampionshipPerRegionList(this.modality.id);
@@ -287,8 +289,8 @@ export default {
 
       this.homeStore.setChampionshipList(championships);
     },
-    async prepareChampionship(championshipId) {
-      const championship = await getChampionship(championshipId);
+    async prepareChampionship(championshipId, date = '') {
+      const championship = await getChampionship(championshipId, date);
       this.homeStore.setChampionshipList([championship.result])
     },
     prepareCountryName(countryName) {
@@ -368,24 +370,28 @@ export default {
     async handleLeague(regionOrChampionship) {
       this.loading = true;
       this.regionSelected = '';
-
-      const searchTypeIsRegion = regionOrChampionship.id.includes('region');
       this.handleCloseLeaguesModal();
 
+      delete regionOrChampionship?.championships;
+      this.homeStore.setLeague(regionOrChampionship);
+
+      await this.prepareChampionshipListByLeague();
+
+      this.loading = false;
+    },
+
+    async prepareChampionshipListByLeague() {
+      const searchTypeIsRegion = this.league.id.includes('region');
       if(searchTypeIsRegion) {
-        let regionName = regionOrChampionship.id;
+        let regionName = this.league.id;
         regionName = regionName.split('region_').pop();
         regionName = regionName != 'ALL' ? regionName : null;
 
         this.regionSelected = regionName;
-        await this.prepareChampionshipList(this.modality.id, false, regionName);
+        await this.prepareChampionshipList(this.modality.id, false, regionName, this.dateSelected.format('YYYY-MM-DD'));
       } else {
-        await this.prepareChampionship(regionOrChampionship.id);
+        await this.prepareChampionship(this.league.id, this.dateSelected.format('YYYY-MM-DD'));
       }
-
-      delete regionOrChampionship?.championships;
-      this.homeStore.setLeague(regionOrChampionship);
-      this.loading = false;
     },
 
     handleOpenCalendarModal() {
@@ -396,15 +402,10 @@ export default {
     },
     async handleCalendar(dateTime) {
       this.loading = true;
-      this.dateSelected = dateTime;
+      this.homeStore.setDate(dateTime);
       this.handleCloseCalendarModal();
 
-      await this.prepareChampionshipList(
-        this.modality.id,
-        false,
-        this.regionSelected,
-        this.dateSelected.format('YYYY-MM-DD')
-      );
+      await this.prepareChampionshipListByLeague();
 
       this.loading = false;
     },

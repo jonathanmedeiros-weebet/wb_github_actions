@@ -11,10 +11,11 @@ interface CalculateQuotaParams {
     isLive: boolean;
 }
 
-export const getChampionship = async (championshipId: string = '') => {
+export const getChampionship = async (championshipId: string = '', startDate: string = '') => {
     const { deadlineTable, mainOdds, centerUrl } = useConfigClient();
     const params = {
         data_final: deadlineTable,
+        data: startDate,
         odds: mainOdds.join(','),
     }
     const url = `${centerUrl}/campeonatos/${championshipId}`;
@@ -178,5 +179,3 @@ export const prepareLiveQuote = (lastQuotes: any[], newQuotes: any[]) => {
 // Falta reorganizar cotações nas seguinte ordem (casa, empate, fora)
 // Falta mostrar placar na tela home em ao vivo
 // Falta mostrar placar na pagina do jogo quando scrolla.
-// Falta colocar data selecionada no pinia.
-// Falta colocar campeonato selecionado no pinia.

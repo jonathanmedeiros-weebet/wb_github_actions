@@ -1,5 +1,5 @@
-import { modalityList } from "@/constants";
 import type { ChampionshipPerRegion } from "@/interfaces";
+import { now } from "@/utilities";
 import { defineStore } from "pinia"
 
 export const useHomeStore = defineStore('home', {
@@ -10,6 +10,7 @@ export const useHomeStore = defineStore('home', {
         isLive: false,
         modality: null,
         league: null,
+        date: now(),
     }),
     actions: {
         setChampionshipPerRegionList(championships: any) {
@@ -26,6 +27,9 @@ export const useHomeStore = defineStore('home', {
         },
         setLeague(league: any) {
             this.league = league;
+        },
+        setDate(date: any) {
+            this.date = date;
         }
     },
 })
