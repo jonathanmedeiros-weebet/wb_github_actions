@@ -100,6 +100,11 @@ export default {
       inputType: this.type
     };
   },
+  watch: {
+    value(newValue) {
+      this.localValue = newValue;
+    }
+  },
   methods: {
     handleInput(event) {
       this.$emit('input', event.target.value)
