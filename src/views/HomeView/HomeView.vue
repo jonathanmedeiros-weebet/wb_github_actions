@@ -173,7 +173,6 @@ export default {
       if(Boolean(this.league)) {
         await this.handleLeague(this.league);
       } else {
-        console.log(this.dateSelected)
         await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
       }
       await this.prepareChampionshipPerRegionList(this.modality.id);
