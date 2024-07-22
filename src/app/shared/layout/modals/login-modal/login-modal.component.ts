@@ -33,6 +33,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     modoClienteHabilitado;
     LOGO = config.LOGO;
     loginGoogle = false;
+    resgister_cancel = false;
     googleUser;
 
     constructor(
@@ -94,6 +95,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 );
         }
 
+    }
+    registerCancel(){
+        this.resgister_cancel = true;
     }
 
     createForm() {

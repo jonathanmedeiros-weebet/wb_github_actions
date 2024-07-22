@@ -1,206 +1,233 @@
-<div class="modal-header">
-    <img [src]="LOGO" alt="" class="logo-modal">
-    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <i class="fa fa-times"></i>
-    </a>
-</div>
-<div class="modal-body">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-        <span class="space-buttons" *ngIf="!formSocial && loginGoogleAtivo">Cadastre-se com sua conta do google</span>
-        <asl-google-signin-button type='standard' size='large' logo_alignment='center' text='signup_with' *ngIf="!formSocial && loginGoogleAtivo"></asl-google-signin-button>
-        <div class="text-line" *ngIf="!formSocial && loginGoogleAtivo">
-            <span>OU</span>
-        </div>
-        <span class="space-buttons" *ngIf="!loginGoogleAtivo || formSocial">Preencha os campos para realizar o seu cadastro</span>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group mb-4">
-                    <div class="input-md">
-                        <input type="text" id="cpf" class="form-control inverted-out" mask="000.000.000-00"
-                               (change)="validarCpf()"
-                               formControlName="cpf"
-                               [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
-                               inputmode="numeric">
-                        <label for="cpf">{{'geral.cpf' | translate}}</label>
-                    </div>
-
-                    <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial)">
-                <div class="form-group mb-4">
-                    <div class="input-md">
-                        <input type="text" id="nome" class="form-control inverted-out"  (beforeinput)="onBeforeInput($event, 'name')" formControlName="nome"
-                               [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento">
-                        <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
-                    </div>
-                    <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
-                </div>
-            </div>
-            <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">
-        </div>
-        <div class="row">
-            <div class="col-md-12" [hidden]="autoPreenchimento">
-                <div class="form-group mb-4">
-                    <div class="input-md">
-                        <input type="text" id="dataNascimento" class="form-control inverted-out" mask="d0/M0/0000"
-                               formControlName="nascimento"
-                               [ngClass]="applyCssInputError('nascimento')" placeholder=" ">
-                        <label for="dataNascimento">{{'geral.dataDeNascimento' | translate}}</label>
-                    </div>
-
-                    <app-error-msg [control]="form.get('nascimento')" label="{{'geral.dataDeNascimento' | translate}}"
-                                   class="text-left"></app-error-msg>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="col-md-12">
-                <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
-                    <div class="input-md">
-                        <input type="text" id="email" class="form-control inverted-out"
-                               [ngClass]="applyCssInputError('email')"
-                               [readonly]="formSocial"
-                               formControlName="email" placeholder=" "
-                               (beforeinput)="onBeforeInput($event, 'email')"
-                               >
-                        <label for="email">{{'geral.email' | translate}}</label>
-                    </div>
-
-                    <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
-                                   class="text-left"></app-error-msg>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group mb-4">
-                    <div class="input-md">
-                        <input type="text" id="telefone" mask="(00)00000-0000" class="form-control inverted-out"
-                               formControlName="telefone"
-                               [ngClass]="applyCssInputError('telefone')" placeholder=" "
-                               [dropSpecialCharacters]="false" inputmode="numeric">
-                        <label for="telefone">{{'geral.telefone' | translate}}</label>
-                    </div>
-
-                    <app-error-msg [control]="form.get('telefone')" label="{{'geral.telefone' | translate}}"
-                                   class="text-left"></app-error-msg>
-                </div>
-            </div>
-        </div>
-        <div class="row" *ngIf="!formSocial">
-            <div class="col-md-12">
-                <div class="form-group" [ngClass]="applyCssDivError('senha')">
-                    <div class="input-md">
-                        <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
-                               class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
-                               formControlName="senha" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
-                        <label for="password">{{'geral.senha' | translate}}</label>
-                        <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
-                           (click)="mostrarSenha = !mostrarSenha"></i>
-                    </div>
-
-                    <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
-                    <small class="form-text text-muted">{{'geral.requisitosSenha' | translate}}</small>
-                </div>
-            </div>
-        </div>
-        <div class="row" *ngIf="!formSocial">
-            <div class="col-md-12">
-                <div class="form-group mb-4">
-                    <div class="input-md">
-                        <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
-                               class="form-control inverted-out" formControlName="senha_confirmacao"
-                               [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
-                        <label for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
-                        <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'"
-                           (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
-                    </div>
-
-                    <app-error-msg [control]="form.get('senha_confirmacao')"
-                                   label="{{'senhas.confirmarSenha' | translate}}" class="text-left"></app-error-msg>
-                </div>
-            </div>
-        </div>
-        <div class="row" *ngIf="afiliadoHabilitado">
-            <div class="col-md-12">
-                <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
-                    <div class="input-md">
-                        <input type="text" id="afiliado" class="form-control inverted-out"
-                               [ngClass]="applyCssInputError('afiliado')"
-                               formControlName="afiliado" placeholder=" " [readonly]="possuiCodigoAfiliado">
-                        <label for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
-                    </div>
-
-                    <app-error-msg [control]="form.get('afiliado')" label="Código de afiliação(Opcional)"
-                                   class="text-left"></app-error-msg>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <label class="label-termo-uso">
-                    {{'geral.deAcordoComOsTermos1' | translate}}
-                    <a id="linkTermos"
-                        target="_blank"
-                        [routerLink]="['/informacoes/termos-condicoes']"
-                        class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
-                    {{'geral.deAcordoComOsTermos2' | translate}}
-                    <a id="linkPolitica"
-                        target="_blank"
-                        [routerLink]="['/informacoes/politica-privacidade']"
-                        class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
-                </label>
-            </div>
-        </div>
-
-        <input type="hidden" formControlName="check_1">
-        <input type="text" formControlName="check_2" class="d-none">
-
-        <input type="hidden" formControlName="btag">
-
-        <div class="row captcha" *ngIf="provedorCaptcha == 'hcaptcha'">
-            <div class="col-12">
-                <ng-hcaptcha formControlName="captcha" [languageCode]="hCaptchaLanguage"></ng-hcaptcha>
-                <app-error-msg [control]="form.get('captcha')"></app-error-msg>
-            </div>
-
-            <div class="col-12">
-                <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
-            </div>
-        </div>
-
-        <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
-            <div class="col-12" [ngStyle]="{'text-align': 'left'}">
-                <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
-                Este site é protegido por reCAPTCHA e a
-                <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de Privacidade</a> do Google e os
-                <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de Serviço</a> se aplicam.
-            </div>
-
-            <div class="col-12">
-                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
-            </div>
-            <div class="login">
-                {{'geral.jaPossuiUmaConta' | translate}}
-                <a (click)="abrirLogin()">{{'geral.entrarNaConta' | translate}}</a>
-            </div>
-        </div>
-    </form>
-</div>
-
-<ng-template #ativacaoCadastroModal let-modal>
-    <div class="modal-header" style="display: flex; justify-content: end;">
-        <a class="close-modal-ativacao" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <i class="fa fa-times" aria-hidden="true"></i>
+<div *ngIf="modalClose">
+    <div class="modal-header">
+        <img [src]="LOGO" alt="" class="logo-modal">
+        <a type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+            <i class="fa fa-times"></i>
         </a>
-        <div class="content-modal-ativacao">
-            <h3>{{'ativacaoEmail.cadastroAtivadoComSucesso' | translate}}</h3>
-            <span>{{'ativacaoEmail.realizeSeuLogin' | translate}}</span>
-            <img src="{{LOGO}}">
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <span class="space-buttons" *ngIf="!formSocial && loginGoogleAtivo">Cadastre-se com sua conta do google</span>
+            <asl-google-signin-button type='standard' size='large' logo_alignment='center' text='signup_with' *ngIf="!formSocial && loginGoogleAtivo"></asl-google-signin-button>
+            <div class="text-line" *ngIf="!formSocial && loginGoogleAtivo">
+                <span>OU</span>
+            </div>
+            <span class="space-buttons" *ngIf="!loginGoogleAtivo || formSocial">Preencha os campos para realizar o seu cadastro</span>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input type="text" id="cpf" class="form-control inverted-out" mask="000.000.000-00"
+                                   (change)="validarCpf()"
+                                   formControlName="cpf"
+                                   [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
+                                   inputmode="numeric">
+                            <label for="cpf">{{'geral.cpf' | translate}}</label>
+                        </div>
+
+                        <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial)">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input type="text" id="nome" class="form-control inverted-out"  (beforeinput)="onBeforeInput($event, 'name')" formControlName="nome"
+                                   [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento">
+                            <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
+                        </div>
+                        <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
+                    </div>
+                </div>
+                <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">
+            </div>
+            <div class="row">
+                <div class="col-md-12" [hidden]="autoPreenchimento">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input type="text" id="dataNascimento" class="form-control inverted-out" mask="d0/M0/0000"
+                                   formControlName="nascimento"
+                                   [ngClass]="applyCssInputError('nascimento')" placeholder=" ">
+                            <label for="dataNascimento">{{'geral.dataDeNascimento' | translate}}</label>
+                        </div>
+
+                        <app-error-msg [control]="form.get('nascimento')" label="{{'geral.dataDeNascimento' | translate}}"
+                                       class="text-left"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-12">
+                    <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
+                        <div class="input-md">
+                            <input type="text" id="email" class="form-control inverted-out"
+                                   [ngClass]="applyCssInputError('email')"
+                                   [readonly]="formSocial"
+                                   formControlName="email" placeholder=" "
+                                   (beforeinput)="onBeforeInput($event, 'email')"
+                                   >
+                            <label for="email">{{'geral.email' | translate}}</label>
+                        </div>
+
+                        <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
+                                       class="text-left"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input type="text" id="telefone" mask="(00)00000-0000" class="form-control inverted-out"
+                                   formControlName="telefone"
+                                   [ngClass]="applyCssInputError('telefone')" placeholder=" "
+                                   [dropSpecialCharacters]="false" inputmode="numeric">
+                            <label for="telefone">{{'geral.telefone' | translate}}</label>
+                        </div>
+
+                        <app-error-msg [control]="form.get('telefone')" label="{{'geral.telefone' | translate}}"
+                                       class="text-left"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="!formSocial">
+                <div class="col-md-12">
+                    <div class="form-group" [ngClass]="applyCssDivError('senha')">
+                        <div class="input-md">
+                            <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
+                                   class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
+                                   formControlName="senha" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
+                            <label for="password">{{'geral.senha' | translate}}</label>
+                            <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
+                               (click)="mostrarSenha = !mostrarSenha"></i>
+                        </div>
+
+                        <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
+                        <small class="form-text text-muted">{{'geral.requisitosSenha' | translate}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="!formSocial">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
+                                   class="form-control inverted-out" formControlName="senha_confirmacao"
+                                   [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
+                            <label for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
+                            <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'"
+                               (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
+                        </div>
+
+                        <app-error-msg [control]="form.get('senha_confirmacao')"
+                                       label="{{'senhas.confirmarSenha' | translate}}" class="text-left"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="afiliadoHabilitado">
+                <div class="col-md-12">
+                    <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
+                        <div class="input-md">
+                            <input type="text" id="afiliado" class="form-control inverted-out"
+                                   [ngClass]="applyCssInputError('afiliado')"
+                                   formControlName="afiliado" placeholder=" " [readonly]="possuiCodigoAfiliado">
+                            <label for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
+                        </div>
+
+                        <app-error-msg [control]="form.get('afiliado')" label="Código de afiliação(Opcional)"
+                                       class="text-left"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label class="label-termo-uso">
+                        {{'geral.deAcordoComOsTermos1' | translate}}
+                        <a id="linkTermos"
+                            target="_blank"
+                            [routerLink]="['/informacoes/termos-condicoes']"
+                            class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
+                        {{'geral.deAcordoComOsTermos2' | translate}}
+                        <a id="linkPolitica"
+                            target="_blank"
+                            [routerLink]="['/informacoes/politica-privacidade']"
+                            class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
+                    </label>
+                </div>
+            </div>
+
+            <input type="hidden" formControlName="check_1">
+            <input type="text" formControlName="check_2" class="d-none">
+
+            <input type="hidden" formControlName="btag">
+
+            <div class="row captcha" *ngIf="provedorCaptcha == 'hcaptcha'">
+                <div class="col-12">
+                    <ng-hcaptcha formControlName="captcha" [languageCode]="hCaptchaLanguage"></ng-hcaptcha>
+                    <app-error-msg [control]="form.get('captcha')"></app-error-msg>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
+                <div class="col-12" [ngStyle]="{'text-align': 'left'}">
+                    <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
+                    Este site é protegido por reCAPTCHA e a
+                    <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de Privacidade</a> do Google e os
+                    <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de Serviço</a> se aplicam.
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+                </div>
+                <div class="login">
+                    {{'geral.jaPossuiUmaConta' | translate}}
+                    <a (click)="abrirLogin()">{{'geral.entrarNaConta' | translate}}</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <ng-template #ativacaoCadastroModal let-modal>
+        <div class="modal-header" style="display: flex; justify-content: end;">
+            <a class="close-modal-ativacao" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+            <div class="content-modal-ativacao">
+                <h3>{{'ativacaoEmail.cadastroAtivadoComSucesso' | translate}}</h3>
+                <span>{{'ativacaoEmail.realizeSeuLogin' | translate}}</span>
+                <img src="{{LOGO}}">
+            </div>
+        </div>
+    </ng-template>
+</div>
+
+
+<div class="modal" *ngIf="registerCancel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header-he">
+                <h3 class="modal-title">Tem certeza que deseja cancelar seu registro ?</h3>
+                <a class="close-modal-ativacao" aria-label="Close" (click)="registerOpen()">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <div class="modal-body-custom">
+                <p>Você está quase lá! Cadastre-se agora e experimente a
+                 emoção das apostas esportivas e cassino em primeira mão.</p>
+            </div>
+            <div class="modal-footer-he">
+                <button type="button" class="btn btn-custom btn-block btn-cadastrar" (click)="registerOpen()">Continuar com o cadastro</button>
+                <button type="button" class="btn btn-secondary btn-cancel" (click)="cancelModal()">Sim, quero cancelar</button>
+            </div>
         </div>
     </div>
-</ng-template>
+</div>
+
+
+
 

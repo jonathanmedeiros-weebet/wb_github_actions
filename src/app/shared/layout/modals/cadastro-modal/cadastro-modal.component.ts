@@ -50,6 +50,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     loginGoogleAtivo = false;
     formSocial = false;
 
+    registerCancel = false;
+    modalClose = true;
+
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -148,6 +151,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
     }
 
+    closeModal(){
+        this.modalClose = false;
+        this.registerCancel = true;
+    }
+    cancelModal() {
+        this.activeModal.dismiss();
+    }
+    registerOpen(){
+        this.registerCancel = false;
+        this.modalClose = true;
+    }
+
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
@@ -169,6 +184,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             dadosCriptografados: [null]
         });
     }
+
 
     ngOnDestroy() {
         this.clearSocialForm();
