@@ -54,7 +54,7 @@ export const find = async ( parametros: any ) => {
     });        
 }
 
-export const cancelar = async ( bet: any ) => {
+export const cancelBet = async ( bet: any ) => {
     const { centerUrl } = useConfigClient();
     const token = localStorageService.get('token');
     const url = `${centerUrl}/apostas/${bet.id}/cancelar`;
@@ -70,12 +70,12 @@ export const cancelar = async ( bet: any ) => {
     });
 }
 
-export const pagar = async ( id: number ) => {
-    const { centerUrl } = useConfigClient();
+export const payBet = async ( id: number ) => {
+    const { apiUrl } = useConfigClient();
     const token = localStorageService.get('token');
-    const url = `${centerUrl}/apostas/${id}/pagamento`;
-
-    return await axiosInstance().post(url, {
+    const url = `${apiUrl}/apostas/${id}/pagamento`;
+    
+    return await axiosInstance().post(url, {}, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
