@@ -3,9 +3,9 @@ import {AbstractControl, UntypedFormBuilder, Validators} from '@angular/forms';
 
 import {Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService} from './../../../../services';
+import {ApostaService, AuthService, ClienteService, MessageService, ParametroService, ParametrosLocaisService} from './../../../../services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {Usuario} from '../../../models/usuario';
 import {FormValidations, PasswordValidation} from 'src/app/shared/utils';
 
@@ -51,6 +51,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     loginGoogleAtivo = false;
     formSocial = false;
     aplicarCssTermo: boolean = false;
+    postbacks;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -72,6 +73,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
+        this.postbacks = this.paramsService.getOpcoes().enabledPostbacks;
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
@@ -92,9 +94,16 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
-
+        
         this.route.queryParams
             .subscribe((params) => {
+
+            this.postbacks.forEach(postback => {
+                params[`${postback}`];
+            });
+            
+            console.log(params);
+            
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
 
@@ -358,4 +367,23 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
     }
+
+    // addingPostbacksInParams() {
+    //     let dinamicsParams = this.paramsService.getOpcoes().enabledPostbacks;
+
+    //     let queryParams = { ...this.route.snapshot.queryParams};
+
+    //     for(let key in dinamicsParams) {
+    //         if (this.postbacks.hasOwnProperty(key)) {
+    //             queryParams[key] = this.postbacks[key]
+    //         }
+    //     }
+
+    //     this.router.navigate([], {
+    //         relativeTo: this.route,
+    //         queryParams: queryParams,
+    //         queryParamsHandling: 'merge'
+    //       });
+
+    // }
 }
