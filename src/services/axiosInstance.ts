@@ -1,8 +1,10 @@
+import { useConfigClient } from "@/stores";
 import axios from "axios";
 
 export const axiosInstance = () => {
+  const { apiUrl } = useConfigClient();
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: apiUrl,
     headers: {
       'Content-Type': 'application/json',
     },
