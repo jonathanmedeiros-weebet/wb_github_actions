@@ -177,5 +177,3 @@ export const prepareLiveQuote = (lastQuotes: any[], newQuotes: any[]) => {
 
 // TODOS:
 // Falta reorganizar cotações nas seguinte ordem (casa, empate, fora)
-// Falta mostrar placar na tela home em ao vivo
-// Falta mostrar placar na pagina do jogo quando scrolla.

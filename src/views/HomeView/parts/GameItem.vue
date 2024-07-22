@@ -9,6 +9,7 @@
                 <img :src="team.image" @error="changeSrcWhenImageError" />
                 {{ team.name }}
             </span>
+            
             <span class="game__info">
                 <template v-if="isLive">
                     <span class="game__live">Ao vivo</span>
@@ -19,11 +20,15 @@
                 <span class="game__pontuation">+{{ pontuation }}</span>
             </span>
         </div>
+        <div class="game__score" v-if="isLive">
+            <strong>{{ teamScoreA }}</strong>
+            <strong>{{ teamScoreB }}</strong>
+        </div>
         <div class="game__quotes">
             <div
                 class="game__quota"
                 v-for="(quote, index) in quotes"
-                :class="{'game__quota--disabled': !quote.hasPermission,}"
+                :class="{'game__quota--disabled': !quote.hasPermission}"
                 :key="index"
                 @click="handleItemClick(quote)"
             >
@@ -99,6 +104,12 @@ export default {
                 valor: quote.valor.toFixed(2)
             }));
         },
+        teamScoreA() {
+            return this.game.info.time_a_resultado ?? 0;
+        },
+        teamScoreB() {
+            return this.game.info.time_b_resultado ?? 0;
+        }
     },
     methods: {
         changeSrcWhenImageError (event) {
@@ -125,7 +136,7 @@ export default {
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 13px 16px;
     background: var(--color-background-input);
 
@@ -147,7 +158,7 @@ export default {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        width: calc(100vw - 240px);
+        width: calc(100vw - 250px);
     }
 
     &__team img {
@@ -187,6 +198,8 @@ export default {
         justify-content: space-between;
         gap: 8px;
         min-width: 190px;
+        margin-top: auto;
+        margin-bottom: auto;
     }
 
     &__quota {
@@ -224,6 +237,16 @@ export default {
         font-style: normal;
         font-weight: 300;
         line-height: normal;
+    }
+
+    &__score {
+        width: 10px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 5px;
     }
 }
 
