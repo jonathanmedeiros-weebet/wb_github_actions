@@ -34,7 +34,6 @@ export class BannersComponent implements OnInit {
 
         this.bannerService.banners.subscribe(banners => {
             this.showLoadingIndicator = true;
-            console.log(this.showLoadingIndicator, this.showSkeleton);
             this.banners = [];
             let source = 'src';
 
@@ -53,9 +52,9 @@ export class BannersComponent implements OnInit {
                 this.showNavigationArrows = true;
             }
 
-
-            this.showLoadingIndicator = false;
-            console.log(this.showLoadingIndicator, this.banners.length)
+            setTimeout(()=>{
+                this.showLoadingIndicator = false;
+            },2000);
             this.cd.markForCheck();
         });
     }
