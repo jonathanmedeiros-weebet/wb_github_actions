@@ -1,5 +1,5 @@
 <template>
-    <WModal :backdropClick="true" @close="handleClose">
+    <WModal ref="wmodal" :backdropClick="true" @close="handleClose">
       <template #body>
         <Calendar
           class="calendar"
@@ -13,7 +13,7 @@
 <script>
 import WModal from '@/components/Modal.vue'
 import Calendar from '@/components/Calendar.vue'
-import { now } from '@/utilities/date.utitlity.ts'
+import { now } from '@/utilities'
 
 export default {
     name: 'modal-calendar',
@@ -26,6 +26,7 @@ export default {
     },
     methods: {
       handleCalendarChange(date) {
+        this.$refs['wmodal'].handleClose();
         this.$emit('change', date)
       },
       handleClose() {

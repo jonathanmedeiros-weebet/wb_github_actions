@@ -79,7 +79,7 @@ const router = new VueRouter({
       component: ResultsView,
     },
     {
-      path: '/game-detail',
+      path: '/game-detail/:id',
       name: 'game-detail',
       component: GameDetailView,
     },

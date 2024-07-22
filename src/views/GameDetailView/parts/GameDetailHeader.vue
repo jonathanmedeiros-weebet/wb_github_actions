@@ -14,17 +14,24 @@
             <div class="game-detail-header__container">
                 <Header :showBackButton="true">
                     <span class="game-detail-header__title" v-if="isHeaderNormal">
-                        <span> Campeonato brasileiro </span>
-                        <span> {{ game.dateTime}} </span>
+                        <span> {{ championshipName }} </span>
+                        <span> {{ dateTime }} </span>
                     </span>
 
                     <div class="game-detail-header__teams game-detail-header__teams--slim" v-if="isHeaderSlim">
                         <div class="team">
-                            <img class="team__image" :src="teamA.image">
+                            <img class="team__image" :src="teamA.image" @error="changeSrcWhenImageError">
                         </div>
-                        <span class="team__versus">X</span>
+                        <span class="team__versus">
+                            <template v-if="isLive">
+                                <span class="team__time">{{ liveTime }}</span>
+                                <span class="team__score">{{ teamScoreA }} - {{ teamScoreB }}</span>
+                            </template>
+
+                            <span v-else>X</span>
+                        </span>
                         <div class="team">
-                            <img class="team__image" :src="teamB.image">
+                            <img class="team__image" :src="teamB.image" @error="changeSrcWhenImageError">
                         </div>
                     </div>
 
@@ -32,12 +39,18 @@
 
                 <div class="game-detail-header__teams" v-if="isHeaderNormal">
                     <div class="team">
-                        <img class="team__image" :src="teamA.image">
+                        <img class="team__image" :src="teamA.image" @error="changeSrcWhenImageError">
                         <span class="team__name">{{ teamA.name }}</span>
                     </div>
-                    <span class="team__versus">X</span>
+                    <span class="team__versus">
+                        <template v-if="isLive">
+                            <span class="team__time">{{ liveTime }}</span>
+                            <span class="team__score">{{ teamScoreA }} - {{ teamScoreB }}</span>
+                        </template>
+                        <span v-else>X</span>
+                    </span>
                     <div class="team">
-                        <img class="team__image" :src="teamB.image">
+                        <img class="team__image" :src="teamB.image" @error="changeSrcWhenImageError">
                         <span class="team__name">{{ teamB.name }}</span>
                     </div>
                 </div>
@@ -47,6 +60,8 @@
 
 <script>
 import Header from '@/components/layouts/Header.vue'
+import { convertInMomentInstance } from '@/utilities';
+
 export default {
   components: { Header },
     name: 'game-detail-header',
@@ -65,18 +80,49 @@ export default {
         }
     },
     computed: {
+        isLive() {
+            return Boolean(this.game.ao_vivo);
+        },
+        liveTime() {
+            return Boolean(this.game.info.tempo == 0)
+                ? 'intervalo'
+                : `${this.game.info.minutos}'`
+        },
         isHeaderNormal() {
             return this.type === 'normal';
         },
         isHeaderSlim() {
             return this.type === 'slim';
         },
+        championshipName() {
+            return this.game?.campeonato?.nome ?? ''
+        },
+        dateTime() {
+            return convertInMomentInstance(this.game.horario).format('DD/MM hh:mm');
+        },
         teamA() {
-            return this.game.teams[0]
+            return {
+                name: this.game.time_a_nome,
+                image: `https://cdn.wee.bet/img/times/m/${this.game.time_a_img ?? 'default'}.png`
+            }
         },
         teamB() {
-            return this.game.teams[1]
+            return {
+                name: this.game.time_b_nome,
+                image: `https://cdn.wee.bet/img/times/m/${this.game.time_b_img ?? 'default'}.png`
+            }
         },
+        teamScoreA() {
+            return this.game.info.time_a_resultado ?? 0;
+        },
+        teamScoreB() {
+            return this.game.info.time_b_resultado ?? 0;
+        }
+    },
+    methods: {
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        }
     }
 }
 </script>
@@ -87,7 +133,7 @@ export default {
     min-height: 201px;
     padding-bottom: 26px;
     padding-top: 10px;
-        transition: 1s;
+    transition: 1s;
     
     &--slim {
         height: 73px;
@@ -101,6 +147,7 @@ export default {
     &--fixed {
         transition: 0.5s;
         position: fixed;
+        z-index: 2;
         width: 100%;
         background: var(--color-background);
     }
@@ -179,6 +226,28 @@ export default {
         font-weight: 400;
         margin-top: 16px;
         color: var(--color-text);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    &__time {
+        color: var(--color-text-input);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__score {
+        color: var(--color-text);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 }
 

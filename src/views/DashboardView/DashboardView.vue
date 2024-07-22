@@ -60,7 +60,7 @@ import CardEntryDashboard from './parts/CardEntryDashboard.vue'
 import CollapseDashboard from './parts/CollapseDashboard.vue'
 import ChartBar from './parts/ChartBar.vue'
 
-import { now } from '@/utilities/date.utitlity.ts'
+import { now } from '@/utilities'
 import IconCalendarMonth from '@/components/icons/IconCalendarMonth.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'

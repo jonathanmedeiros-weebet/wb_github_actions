@@ -1,5 +1,13 @@
-export enum GameDetailFilter {
-    FULL_TIME = 'full-time',
-    FIRST_TIME = 'first-time',
-    SECOND_TIME = 'second-time',
+export enum MarketTime {
+    FULL_TIME = '90',
+    FIRST_TIME = '1T',
+    SECOND_TIME = '2T',
+    PLAYERS = 'JOGADORES',
+    TOTAL = 'TOTAL'
+}
+
+export enum QuotaStatus {
+    DEFAULT = 'default',
+    INCREASED = 'increased',
+    DECREASED = 'decreased',
 }

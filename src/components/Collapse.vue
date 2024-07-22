@@ -1,11 +1,11 @@
 <template>
-  <div class="collapse" @click="handleClick">
-    <div class="collapse__item">
-        <span class="collapse__title"><slot name="title"/></span>
-        <component :is="iconArrowDinamic"/>
+    <div class="collapse">
+        <div class="collapse__item" @click="handleClick">
+            <span class="collapse__title"><slot name="title"/></span>
+            <component :is="iconArrowDinamic"/>
+        </div>
+        <slot v-if="collapsed" />
     </div>
-    <slot v-if="collapsed" />
-  </div>
 </template>
 
 <script>
@@ -63,6 +63,11 @@ export default {
         color: var(--color-text);
         font-size: 14px;
         font-weight: 400;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: calc(100vw - 60px);
     }
 
     &__title img {
