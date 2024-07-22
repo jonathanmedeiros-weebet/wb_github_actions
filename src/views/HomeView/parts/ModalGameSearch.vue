@@ -1,75 +1,91 @@
 <template>
     <div class="modal-game-search">
       <div class="modal-game-search__header">
-        <SelectFake titleSize="large" @click="handleOpenModalitiesModal">
-          <IconFootball />
-        </SelectFake>
-        <InputSearch @input="handleSearch"/>
+        <InputSearch @input="handleSearch" @clear="handleSearch"/>
         <button class="modal-game-search__close" @click="handleClose">
           <IconClose color="var(--color-text)"/>
         </button>
       </div>
       <div class="modal-game-search__body">
-        <GameList :data="championshipList" @click="handleClick"/>
+        <GameListSkeleton v-if="loading" :showFirstCollapse="false"/>
+        <GameList
+          v-else
+          @click="handleClick"
+        />
       </div>
-
-      <ModalModalities
-        v-if="showModalModalities"
-        :modalityId="modality.id"
-        @closeModal="handleCloseModalitiesModal"
-        @click="handleModality"
-      />
     </div>
 </template>
 
 <script>
 import IconClose from '@/components/icons/IconClose.vue'
-import SelectFake from './SelectFake.vue'
-import IconFootball from '@/components/icons/IconFootball.vue'
 import InputSearch from '@/components/InputSearch.vue'
 import GameList from './GameList.vue'
-import { championshipList, modalityList } from '@/constants'
+import { modalityList } from '@/constants'
 import ModalModalities from './ModalModalities.vue'
+import GameListSkeleton from './GameListSkeleton.vue'
+import { useHomeStore } from '@/stores'
+import _ from 'lodash'
 
 export default {
   components: {
     IconClose,
-    SelectFake,
-    IconFootball,
     InputSearch,
     GameList,
-    ModalModalities
+    ModalModalities,
+    GameListSkeleton
   },
   name: 'modal-game-search',
   data() {
     return {
-      championshipList,
-      modalityList,
-      modality: modalityList[0],
+      championshipList: [],
+      modalityList: modalityList(),
+      modality: null,
       showModalModalities: false,
+      loading: true,
+      homeStore: useHomeStore()
     }
+  },
+  created() {
+    this.modality = this.modalityList[0];
+  },
+  mounted() {
+    this.championshipList = this.homeStore.championshipList;
+    setTimeout(() => this.loading = false, 1000);
   },
   methods: {
     handleClick(game) {
+      this.homeStore.setChampionshipList(this.championshipList);
       this.$emit('click', game)
     },
     handleClose() {
+      this.homeStore.setChampionshipList(this.championshipList);
       this.$emit('closeModal')
     },
-    handleSearch(value) {
-      console.log(value)
-    },
+    handleSearch: _.debounce(function (term){
+      term = term.toUpperCase();
+      let championships = this.championshipList;
 
-    handleOpenModalitiesModal() {
-      this.showModalModalities = true;
-    },
-    handleCloseModalitiesModal() {
-      this.showModalModalities = false;
-    },
-    handleModality(modalityId) {
-      this.modality = this.modalityList.find(modality => modality.id === modalityId)
-      this.handleCloseModalitiesModal()
-    },
+      if(Boolean(term)) {
+        championships = this.championshipList.filter(championship => {
+          const hasGames = championship.jogos.some(
+            game => (game.nome ?? '').toUpperCase().includes(term)
+          );
+          
+          return hasGames;
+        })
+
+        if(Boolean(championships.length)) {
+          championships = championships.map(championship => {
+            championship.jogos = championship.jogos.filter(
+              game => (game.nome ?? '').toUpperCase().includes(term)
+            );
+            return championship;
+          })
+        }
+      }
+
+      this.homeStore.setChampionshipList(championships);
+    }, 700),
   }
 }
 </script>

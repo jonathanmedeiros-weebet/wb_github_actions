@@ -18,15 +18,15 @@ export default {
   computed: {
     showTabs() {
       return ![
-        '/',
-        '/login',
-        '/change-password',
-        '/game-detail',
-        '/config',
-      ].includes(this.$route.path)
+        'login',
+        'change-password',
+        'game-detail',
+        'config',
+        'close-bet'
+      ].includes(this.$route.name)
     },
     showCopyright() {
-      return ['/login'].includes(this.$route.path)
+      return ['login'].includes(this.$route.name)
     }
   }
 }
