@@ -1,5 +1,12 @@
 <template>
   <div class="bets">
+    <toast 
+      v-if="showToast" 
+      type="danger" 
+      @close="showToast = false"
+    >
+      {{ toastText }}
+    </toast>
     <Header title="Apostas" :showBackButton="true" />
     <div class="bets__container">
       
@@ -8,7 +15,7 @@
           id="inputApostador"
           label="Apostador"
           name="apostador"
-          placeholder=""
+          placeholder="Apostador"
           type="email"
           v-model="apostador"
         />
@@ -25,16 +32,16 @@
         <w-input
           id="inputDate"
           name="inputDate"
-          label="Data"
+          label="email"
+          type="email"
           placeholder="dd/mm/aaaa"
-          type="date"
           @click="handleOpenCalendarModal"
           v-model="dateFilter"
           
         />
         <w-button
           id="btn-filter"
-          text="Filtar"
+          text="Filtrar"
           value="filter"
           name="btn-filter"
           class="button--primary"
@@ -120,10 +127,7 @@
             </template>
   
             <template #footer >
-              <div :class="{
-                'bets__card-footer--inline': bet.status === 'Pendente',
-                'bets__card-footer':  bet.status !== 'Pendente'
-              }">
+              <div class="bets__card-footer--inline">
                 <w-button
                   id="btn-view"
                   text="Visuaizar"
@@ -138,8 +142,8 @@
                   value="payer"
                   name="btn-payer"
                   class="button--secondary"
-                  @click="handleOpenPayModal"
-                  v-if="bet.status === 'Pendente'"
+                  @click="handleOpenPayModal(bet)"
+                  v-if="bet.pago === false && bet.resultado === 'ganhou'"
                 />
                 <w-button
                   id="btn-finish"
@@ -147,7 +151,7 @@
                   value="finish"
                   name="finish"
                   class="button--secondary"
-                  v-if="bet.status === 'Pendente'"
+                  v-if="bet.pago === false"
                 />
               </div>
             </template>
@@ -169,6 +173,7 @@
             value="yes"
             name="btn-yes"
             class="button--primary"
+            @click="pay()"
           />
           
           <w-button
@@ -201,9 +206,14 @@ import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
-import { find, getById } from '@/services'
+import { find, payBet } from '@/services'
 import moment from 'moment'
 import { formatCurrency } from '@/utilities'
+import { useConfigClient } from '@/stores'
+import Toast from '@/components/Toast.vue'
+
+
+
 
 export default {
   name: 'bets',
@@ -214,7 +224,12 @@ export default {
     WModal,
     CardBets,
     TagButton,
-    ModalCalendar
+    ModalCalendar,
+    Toast
+  },
+  mounted() {
+    const { options } = useConfigClient();
+    this.habilitar_cancelar_aposta = options.habilitar_cancelar_aposta;
   },
   data() {
     return {
@@ -222,10 +237,11 @@ export default {
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
-      dateFilter: null,
+      dateFilter: '',
       activeButton: 'todos',
       apostador: '',
       bets: [],
+      betSelected: null,
       parametros: {
         codigo: '',
         dataInicial: '',
@@ -235,13 +251,18 @@ export default {
         sort: '',
         otimizado: true,
       },
+      showToast: false,
+      toastText: '',
+      habilitar_cancelar_aposta: true
     }
   },
   methods: {
-    handleOpenPayModal(){
+    handleOpenPayModal(bet){
+      this.betSelected = bet;
       this.showModalPay = true;
     },
     handleClosePayModal() {
+      this.betSelected = null;
       this.showModalPay = false;
     },
     handleOpenCalendarModal() {      
@@ -251,7 +272,7 @@ export default {
       this.showModalCalendar = false;
     },
     handleCalendar(dateTime) {
-      this.dateFilter = dateTime.format('YYYY-MM-DD');
+      this.dateFilter = dateTime.format("DD/MM/YYYY");
       this.handleCloseCalendarModal();
     },
     setActive(button) {
@@ -261,6 +282,7 @@ export default {
       return formatCurrency(value);
     },  
     getResults() {
+      
       
       this.parametros.codigo = this.code.replace(/-/g, '');
       this.parametros.dataInicial = '';
@@ -287,17 +309,27 @@ export default {
         console.error(error);
       })
     },
-    goToTickets() {
-      this.$router.push( { name: 'tickets' } );
+    goToTickets(bet) {
+      this.$router.push({ 
+        name: 'close-bet',
+        params: {
+          id: bet.id
+        }
+      });
     },
-    async viewTicket(bet) {
-      getById(bet.id)
+    async pay() {
+      payBet(this.betSelected.id)
       .then(resp => {
         console.log(resp);
+        this.getResults();
       })
       .catch(error => {
         console.log(error);
+        this.toastText = error.response?.data?.errors?.message ?? 'Usuário ou Senha inválido';
+        this.showToast = true;
+        
       })
+      this.showModalPay = false;
     },
     formateDateTime(datetime) {
       return moment(datetime).format("DD/MM/YYYY HH:mm");
@@ -315,6 +347,9 @@ export default {
       this.parametros.status = newValue == 'todos' ? '' : newValue; 
       this.getApiBets();
 
+    },
+    dateFilter(newValue) {
+      this.dateFilter = newValue;   
     }
   }
 }

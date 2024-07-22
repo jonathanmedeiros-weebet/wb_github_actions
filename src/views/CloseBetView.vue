@@ -2,121 +2,126 @@
   <div class="close-bet">
     <Header :title="title" :showBackButton="true" />
     <div class="close-bet__container">
-      <div class="close-bet__ticket">
-        <div class="code">
-          <span class="code__text">Código da aposta: {{ bet.codeBet }}</span>
-          <span class="code__date">Horário: {{ bet.hourDate }}</span>
-        </div>
-        <div class="info">
-          <span class="info__text">Cambista: {{ bet.scalperName }}</span>
-          <span class="info__text">Apostador: {{ bet.punter }}</span>
-          <span class="info__text">Status: {{ bet.status }}</span>
-        </div>
-        <div class="gain">
-          <div class="gain__item">
-            <span>Quantidade de Jogos:</span>
-            <span class="gain__value">{{ bet.qtGames }}</span>
+      <template v-if="bet">
+        <div class="close-bet__ticket">
+          <div class="code">
+            <span class="code__text">Código da aposta: {{ bet.codigo }}</span>
+            <span class="code__date">Horário: {{ formateDateTime(bet.horario) }}</span>
           </div>
-          <div class="gain__item">
-            <span>Cotação:</span>
-            <span class="gain__value">{{ bet.odd }}</span>
+          <div class="info">
+            <span class="info__text">Cambista: {{ bet.passador.nome }}</span>
+            <span class="info__text">Apostador: {{ bet.apostador }}</span>
+            <span class="info__text">Status: {{ bet.ativo === true ? 'Ativo' : 'Inativo' }}</span>
           </div>
-          <div class="gain__item">
-            <span>Valor Apostado:</span>
-            <span class="gain__value">R${{ bet.valueBet }}</span>
+          <div class="gain">
+            <div class="gain__item">
+              <span>Quantidade de Jogos:</span>
+              <span class="gain__value">{{ bet.itens_ativos }}</span>
+            </div>
+            <div class="gain__item">
+              <span>Cotação:</span>
+              <span class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 3) }}</span>
+            </div>
+            <div class="gain__item">
+              <span>Valor Apostado:</span>
+              <span class="gain__value">{{ formatCurrencyMoney(bet.valor) }}</span>
+            </div>
+            <div class="gain__item">
+              <span>Possível Retorno:</span>
+              <span class="gain__value">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
+            </div>
+            <div class="gain__item">
+              <span>Resultados:</span>
+              <span class="gain__value">{{ capitalizeFirstLetter(bet.resultado) }}</span>
+            </div>
+            <div class="gain__item">
+              <span>Prêmio:</span>
+              <span class="gain__value">{{ formatCurrencyMoney(bet.premio) }}</span>
+            </div>
           </div>
-          <div class="gain__item">
-            <span>Possível Retorno:</span>
-            <span class="gain__value">R${{ bet.returnEarnings }}</span>
-          </div>
-          <div class="gain__item">
-            <span>Resultados:</span>
-            <span class="gain__value">{{ bet.statusResult }}</span>
-          </div>
-          <div class="gain__item">
-            <span>Prêmio:</span>
-            <span class="gain__value">R${{ bet.award }}</span>
-          </div>
-        </div>
-        <div 
-          class="bet" 
-          v-for="(betItem, betIndex) in bet.items" 
-          :key="betIndex"
-        >
-          <div class="bet__header">
-            <span class="bet__team">
-              <template v-if="betItem.isLive">
-                <IconLive :size="16"/>
-              </template>
-              <template v-if="betItem.modality === 'football'">
-                <IconFootball :size="16"/>
-              </template>
-              <template v-else-if="betItem.modality === 'volleyball'">
-                <IconVolleyball :size="16"/>
-              </template>
-              <template v-else-if="betItem.modality === 'e-sport'">
-                <IconGame :size="16"/>
-              </template>
-              {{ betItem.title }}
-            </span>
-          </div>
-          <div class="bet__info">
-            <span class="bet__date">{{ formatDate(betItem.date) }} {{ betItem.hour }}</span>
-          </div>
-          <div class="bet__text">
-            <span class="bet__select">
-              {{ betItem.isLive ? 'Resultado Final' : 'Para ganhar' }} : {{ betItem.select }}
-            </span>
-            <span class="bet__odd">{{ betItem.odd }}</span>
-          </div>
-        </div>
-        <div class="bet__message" v-if="showClickFinalized">
-          <p>
-            <strong>Atenção:</strong> Confira como ficarão os novos valores. 
-            Ao confirmar essa operação, não poderá ser desfeita.
-          </p>
-        </div>
-      </div>
-      <div class="buttons">
-        <template v-if="showClickFinalized">
-          <w-button
-            text="Cancelar"
-            color="secondary-light"
-            @click="cancelAction"
-          />
-          <w-button
-            text="Confirmar"
-            @click="confirmAction"
-          />
-        </template>
-        <template v-if="showFinished">
-          <w-button
-            text="Compartilhar"
-            color="secondary-light"
+          <div 
+            class="bet" 
+            v-for="(betItem, betIndex) in bet.itens" 
+            :key="betIndex"
           >
-            <template #icon-left>
-              <IconShare :size="20"/>
-            </template>
-          </w-button>
+            <div class="bet__header">
+              <span class="bet__team">
+                <template v-if="betItem.ao_vivo">
+                  <IconLive :size="16"/>
+                </template>
+                <template v-if="betItem.sport === MODALITY_SPORT_FUTEBOL">
+                  <IconFootball :size="16"/>
+                </template>
+                <template v-else-if="betItem.sport === MODALITY_SPORT_VOLEI">
+                  <IconVolleyball :size="16"/>
+                </template>
+                <template v-else-if="betItem.sport === MODALITY_SPORT_E_SPORTS">
+                  <IconGame :size="16"/>
+                </template>
+                {{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}
+              </span>
+              <template v-if="showFinished">
+                <p :class="{ 'bet__status--success': betItem.resultado === 'ganhou', 'bet__status--danger': betItem.resultado === 'perdeu' }">{{ capitalizeFirstLetter(betItem.resultado) }}</p>
+              </template>
+            </div>
+            <div class="bet__info">
+              <span class="bet__date">{{ formateDateTime(betItem.jogo_horario) }}</span>
+            </div>
+            <div class="bet__text">
+              <span class="bet__select">
+                {{ betItem.encerrado ? 'Resultado Final' : 'Para ganhar' }} : {{ betItem.odd_nome }}
+              </span>
+              <span class="bet__odd">{{ betItem.cotacao }}</span>
+            </div>
+          </div>
+          <div class="bet__message" v-if="showClickFinalized">
+            <p>
+              <strong>Atenção:</strong> Confira como ficarão os novos valores. 
+              Ao confirmar essa operação, não poderá ser desfeita.
+            </p>
+          </div>
+        </div>
+        <div class="buttons">
+          <template v-if="showClickFinalized">
+            <w-button
+              text="Cancelar"
+              color="secondary-light"
+              @click="cancelAction"
+            />
+            <w-button
+              text="Confirmar"
+              @click="confirmAction"
+            />
+          </template>
+          <template v-if="showFinished">
+            <w-button
+              text="Compartilhar"
+              color="secondary-light"
+            >
+              <template #icon-left>
+                <IconShare :size="20"/>
+              </template>
+            </w-button>
+            <w-button
+              text="Imprimir"
+              class="button__confirm"
+            >
+              <template #icon-left>
+                <IconPrinter :size="20"/>
+              </template>
+            </w-button>
+          </template>
+        </div>
+        <div class="finish" v-if="showCloseBet">
           <w-button
-            text="Imprimir"
-            class="button__confirm"
-          >
-            <template #icon-left>
-              <IconPrinter :size="20"/>
-            </template>
-          </w-button>
-        </template>
-      </div>
-      <div class="finish" v-if="showCloseBet">
-        <w-button
-          id="btn-entrar"
-          text="Encerrar Aposta"
-          value="entrar"
-          name="btn-entrar"
-          @click="closeBet"
-        />
-      </div>
+            id="btn-entrar"
+            text="Encerrar Aposta"
+            value="entrar"
+            name="btn-entrar"
+            @click="closeBet"
+          />
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -133,6 +138,12 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
+import { getById } from '@/services'
+import { formatCurrency } from '@/utilities'
+
+const MODALITY_SPORT_FUTEBOL = 1;
+const MODALITY_SPORT_VOLEI = 91;
+const MODALITY_SPORT_E_SPORTS = 151;
 
 export default {
   name: 'close-bet',
@@ -147,55 +158,23 @@ export default {
     IconShare,
     IconPrinter
   },
+  props: {
+    id: {
+        type: Number | String,
+        required: true
+    },
+  },
   data() {
     return {  
       title: 'Bilhete',
-      bet: {
-        codeBet: "AEC0-1AB4", 
-        hourDate: "2024-06-02 18:00",
-        scalperName: "Demo", 
-        punter: '118.525.478-83', 
-        status: "Ativo", 
-        qtGames: 3,   
-        odd: 29, 
-        valueBet: 10, 
-        returnEarnings: 290, 
-        statusResult: "Pendente", 
-        award: 0.00,
-        items: [
-          {
-            title: 'Argentino JRS X Rosario Central',
-            isLive: true,
-            date: '2024-03-19', 
-            hour: '21:15', 
-            select: 'Empate',
-            odd: 3.30,
-            modality: 'football', 
-          },
-          {
-            title: 'França X Italia',
-            isLive: false,
-            date: '2024-03-19', 
-            hour: '20:15', 
-            select: 'França',
-            odd: 1.30,
-            modality: 'e-sport', 
-          },
-          {
-            title: 'Real Madrid X Sporting',
-            isLive: false,
-            date: '2024-03-19', 
-            hour: '20:15', 
-            select: 'Sporting',
-            odd: 4.30,
-            modality: 'volleyball', 
-          },
-        ]
-      },
+      bet: null,
       showClickFinalized: false,
-      showCloseBet: true,
+      showCloseBet: false,
       showFinished: false,
     };
+  },
+  mounted() {
+    this.fetchBetDetails();
   },
   methods: {
     formatDate(date) {
@@ -215,12 +194,74 @@ export default {
       this.showClickFinalized = false;
       this.showFinished = true;
       this.title = 'Aposta';
+    },
+    async fetchBetDetails() {
+      getById(this.id)
+      .then(resp => {
+        this.bet = resp.results;
+
+        if(resp.results.pago == false && resp.results.resultado == 'ganhou'){
+          this.showCloseBet = true;
+          this.showFinished = false;
+          this.showClickFinalized = false;
+        }
+        if (resp.results.pago == true && (resp.results.resultado === 'ganhou' || resp.results.resultado == 'perdeu' )) {
+          this.showFinish = false;
+          this.showFinished = true;
+          this.showClickFinalized = false;
+        } 
+
+        // this.showFinished = this.bet.resultado !== 'pendente' ? true : false;
+        console.log(resp);
+      })
+      .catch(error => {
+          console.log(error);
+      })
+    },
+    formatCurrencyMoney(value) {
+        return formatCurrency(value);
+    },
+    formateDateTime(datetime) {
+        return moment(datetime).format("DD/MM/YYYY HH:mm");
+    },
+    capitalizeFirstLetter(str) {
+        if(str){
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }else{
+            return str;
+        }
+    },
+    formatNumber(value, minFractionDigits, maxFractionDigits) {
+        return 'R$ ' + new Intl.NumberFormat('pt-BR', {
+            minimumFractionDigits: minFractionDigits,
+            maximumFractionDigits: maxFractionDigits
+        }).format(value);
+    },
+    truncateText(text, maxLength = 27) {
+      if (text.length > maxLength) {
+        return text.slice(0, maxLength) + '...';
+      }
+      return text;
     }
+  },
+  computed: {
+    MODALITY_SPORT_FUTEBOL() {
+      return MODALITY_SPORT_FUTEBOL;
+    },
+    MODALITY_SPORT_VOLEI() {
+      return MODALITY_SPORT_VOLEI;
+    },
+    MODALITY_SPORT_E_SPORTS() {
+      return MODALITY_SPORT_E_SPORTS;
+    },
   }
 }
 </script>
 <style lang="scss" scoped>
 .close-bet {
+
+  padding-bottom: 10px;
+
   &__container {
     display: flex;
     flex-direction: column;
@@ -296,6 +337,8 @@ export default {
     
     &__header, &__info, &__text, &__result {
         display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
         gap: 8px;
     }
@@ -332,6 +375,13 @@ export default {
         font-size: 14px;
         padding: 10px;
         padding-top: 10px;
+    }
+
+    &__status--success {
+      color: var(--color-success);
+    }
+    &__status--danger {
+      color: var(--color-danger);
     }
 }
 
