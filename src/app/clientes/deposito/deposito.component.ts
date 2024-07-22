@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarService, FinanceiroService, MessageService, LayoutService } from 'src/app/services';
@@ -6,22 +6,26 @@ import {ParametrosLocaisService} from '../../shared/services/parametros-locais.s
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { BannersComponent } from 'src/app/shared/layout/banners/banners.component';
 
 @Component({
     selector: 'app-deposito',
     templateUrl: './deposito.component.html',
     styleUrls: ['./deposito.component.css']
 })
-export class DepositoComponent implements OnInit, OnDestroy {
+export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
     unsub$ = new Subject();
 
     whatsapp;
     hasApiPagamentos;
     modalidade;
     showLoading = false;
+    showLoadingIndicator:boolean = true;
     mobileScreen;
 
     headerHeight = 92;
+
+    @ViewChild(BannersComponent) bannersComponent!: BannersComponent;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -34,6 +38,9 @@ export class DepositoComponent implements OnInit, OnDestroy {
         private layoutService: LayoutService,
         private renderer: Renderer2
     ) {
+    }
+    ngAfterViewInit(): void {
+        this.showLoadingIndicator = this.bannersComponent.showLoadingIndicator;
     }
 
     ngOnInit() {
@@ -64,7 +71,7 @@ export class DepositoComponent implements OnInit, OnDestroy {
                 });
         }
     }
-
+    
     changeHeight() {
         const headerHeight = this.headerHeight;
         const height = window.innerHeight - headerHeight;

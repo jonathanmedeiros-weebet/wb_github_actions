@@ -1,3 +1,7 @@
+<ng-container *ngIf="showSkeleton && showLoadingIndicator">
+    dskls
+</ng-container>
+
 <div  *ngIf="banners.length > 0" class="banners" [ngClass]="{'p-0':pagina === 'deposito'}" [hidden]="showLoadingIndicator">
     <ngb-carousel [showNavigationArrows]="showNavigationArrows">
         <ng-template *ngFor="let banner of banners" ngbSlide>

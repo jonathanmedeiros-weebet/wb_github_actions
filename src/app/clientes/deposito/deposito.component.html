@@ -9,9 +9,8 @@
 
     <app-spinner *ngIf="showLoading"></app-spinner>
 
+    <app-banners pagina="deposito" [showSkeleton]="true"></app-banners>
     
-    <!-- <div class="ssc-square banner"></div> -->
-    <app-banners pagina="deposito" class="banner-deposito"></app-banners>
     <ng-container *ngIf="!showLoading">
         <div class="content-body">
             <div class="content">
