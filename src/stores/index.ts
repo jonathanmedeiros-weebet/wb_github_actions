@@ -1,2 +1,3 @@
 export * from './configClient.store'
 export * from './home.store'
+export * from './ticket.store'

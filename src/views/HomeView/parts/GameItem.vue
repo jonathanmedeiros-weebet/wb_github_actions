@@ -61,6 +61,7 @@ import IconLock from '@/components/icons/IconLock.vue';
 import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
 import { QuotaStatus } from '@/enums';
 import IconArrowFillDown from '@/components/icons/IconArrowFillDown.vue';
+import { useTicketStore } from '@/stores';
 
 export default {
   components: { IconLock, IconArrowFillUp, IconArrowFillDown },
@@ -70,6 +71,11 @@ export default {
             type: Object,
             required: true
         },
+    },
+    data() {
+        return {
+            ticketStore: useTicketStore()
+        }
     },
     computed: {
         isLive() {
@@ -106,16 +112,35 @@ export default {
         },
         teamScoreB() {
             return this.game.info.time_b_resultado ?? 0;
+        },
+        ticketItemStore() {
+            // return this.ticketStore.ticket[this.game.id] ?? null
         }
     },
     methods: {
         changeSrcWhenImageError (event) {
             event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
         },
-        handleItemClick(odd) {
+        handleItemClick(quota) {
             event.stopPropagation();
-            if(!odd.hasPermission) return;
-            void odd;
+            if(!quota.hasPermission) return;
+
+            const { items, addQuote, removeQuote } = useTicketStore();
+            const gameExist = Boolean(items[this.game._id]);
+            const quoteExist = items[this.game.id]?.quoteKey == quota.chave;
+
+            if(gameExist && quoteExist) {
+                removeQuote(this.game.id);
+            } else {
+                addQuote({
+                    gameId: this.game._id,
+                    gameName: this.game.nome,
+                    eventId: this.game.event_id,
+                    live: this.game.ao_vivo,
+                    quoteKey: quota.chave,
+                    quoteValue: quota.valor
+                })
+            }
         },
         isIncreasedQuote(quote) {
             return Boolean(quote.status) && quote.status === QuotaStatus.INCREASED;
@@ -124,14 +149,18 @@ export default {
             return Boolean(quote.status) && quote.status === QuotaStatus.DECREASED;
         },
         rearrangeQuotes(quotes) {
+            console.log(this.ticketItemStore)
             const newQuotes = [];
             const homeQuote = quotes.find(quote => quote.chave.includes('casa'));
+            // homeQuote.selected = (this.ticketItemStore.quoteKey ?? null) == homeQuote.chave;
             if(Boolean(homeQuote)) newQuotes.push(homeQuote);
 
             const drawQuote = quotes.find(quote => quote.chave.includes('empate'));
+            // drawQuote.selected = (this.ticketItemStore.quoteKey ?? null) == drawQuote.chave;
             if(Boolean(drawQuote)) newQuotes.push(drawQuote);
 
             const outOfHomeQuote = quotes.find(quote => quote.chave.includes('fora'));
+            // outOfHomeQuote.selected = (this.ticketItemStore.quoteKey ?? null) == outOfHomeQuote.chave;
             if(Boolean(outOfHomeQuote)) newQuotes.push(outOfHomeQuote);
             return newQuotes;
         }
