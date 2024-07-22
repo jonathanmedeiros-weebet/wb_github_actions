@@ -25,7 +25,7 @@
           <span class="collapse__title">Entradas</span>
           <div class="collapse__value">
             <IconAdd class="collapse__icon" />
-            R$ 2,00
+            {{totalApostado}}
           </div>
         </div>
         <div v-if="collapsedInputs" class="collapse__content">
@@ -72,7 +72,7 @@
             </div>
             <div class="collapse__section-item">
               <span>Saque</span>
-              <span class="collapse__value-right">R$ {{ Saque }}</span>
+              <span class="collapse__value-right">R$ {{ saque }}</span>
             </div>
             <div class="collapse__line"></div>
           </div>
@@ -120,6 +120,9 @@ import IconAdd from '@/components/icons/IconAdd.vue'
 import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
+import { getCalculationValue } from '@/services/reckoning.service'
+import { computed } from 'vue'
+import { formatCurrency } from '@/utilities'
 
 export default {
   name: 'reckoning',
@@ -132,62 +135,73 @@ export default {
     IconArrowUp,
     IconRemove
   },
-
   props: {
     initCollapsed: {
       type: Boolean,
       default: false
     }
   },
-
   data() {
     return {
       title: 'Apuração',
+      balanceCalculation: null,
       date: "01/06/2024 - 06/06/2024",
       relatory: '31/05',
       value: '0,00',
-      totalApostado: '2,00',
+      totalApostado: '0,00',
       recargasCartao: '0,00',
       comissao: '2,10',
       premio: '13,10',
-      Saque: '55,10',
+      saque: null,
       modalityList: modalityList,
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
-      collapsedExits: this.initCollapsed,
+      collapsedExits: this.initCollapsed
     }
   },
-
-  computed: {
-    iconArrowDinamicInputs() {
-      return this.collapsedInputs ? IconArrowUp : IconArrowDown;
-    },
-    iconArrowDinamicBet() {
-      return this.collapsedBet ? IconArrowUp : IconArrowDown;
-    },
-    iconArrowDinamicExits() {
-      return this.collapsedExits ? IconArrowUp : IconArrowDown;
-    }
-  },
-
   methods: {
     handleSelectModalClick() {
       alert('Modal select')
     },
     toggleCollapse(section, event) {
-      console.log(section);
+      console.log(section)
       if (section === 'input') {
-        this.collapsedInputs = !this.collapsedInputs;
+        this.collapsedInputs = !this.collapsedInputs
       } else if (section === 'exit') {
-        this.collapsedExits = !this.collapsedExits;
+        this.collapsedExits = !this.collapsedExits
       } else if (section === 'bet') {
-        event.stopPropagation();
-        this.collapsedBet = !this.collapsedBet;
+        event.stopPropagation()
+        this.collapsedBet = !this.collapsedBet
+      }
+    },
+    async getValue() {
+      try {
+        const res = await getCalculationValue()
+        this.saque = res.saque;
+      } catch (error) {
+        console.error('Error fetching data:', error)
       }
     }
+  },
+  mounted() {
+    this.getValue()
+  },
+  computed: {
+    iconArrowDinamicInputs() {
+      return this.collapsedInputs ? IconArrowUp : IconArrowDown
+    },
+    iconArrowDinamicBet() {
+      return this.collapsedBet ? IconArrowUp : IconArrowDown
+    },
+    iconArrowDinamicExits() {
+      return this.collapsedExits ? IconArrowUp : IconArrowDown
+    }
+    
+
   }
 }
 </script>
+
 
 <style lang="scss" scoped>
 
