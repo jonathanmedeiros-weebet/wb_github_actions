@@ -99,10 +99,7 @@ export default {
             return convertInMomentInstance(this.game.horario).format('DD/MM HH:mm');
         },
         quotes() {
-            return (this.game.cotacoes ?? []).map(quote => ({
-                ...quote,
-                valor: quote.valor.toFixed(2)
-            }));
+            return this.rearrangeQuotes(this.game.cotacoes ?? []);
         },
         teamScoreA() {
             return this.game.info.time_a_resultado ?? 0;
@@ -125,6 +122,18 @@ export default {
         },
         isDecreasedQuote(quote) {
             return Boolean(quote.status) && quote.status === QuotaStatus.DECREASED;
+        },
+        rearrangeQuotes(quotes) {
+            const newQuotes = [];
+            const homeQuote = quotes.find(quote => quote.chave.includes('casa'));
+            if(Boolean(homeQuote)) newQuotes.push(homeQuote);
+
+            const drawQuote = quotes.find(quote => quote.chave.includes('empate'));
+            if(Boolean(drawQuote)) newQuotes.push(drawQuote);
+
+            const outOfHomeQuote = quotes.find(quote => quote.chave.includes('fora'));
+            if(Boolean(outOfHomeQuote)) newQuotes.push(outOfHomeQuote);
+            return newQuotes;
         }
     }
 }

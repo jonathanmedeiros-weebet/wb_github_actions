@@ -174,6 +174,3 @@ export const prepareLiveQuote = (lastQuotes: any[], newQuotes: any[]) => {
         }
     })
 }
-
-// TODOS:
-// Falta reorganizar cotações nas seguinte ordem (casa, empate, fora)
