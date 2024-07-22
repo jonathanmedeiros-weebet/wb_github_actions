@@ -35,7 +35,7 @@ export const getParams = async () => {
 export const checkToken = async () => {
     const token = localStorage.getItem('token');
     if(!token) {
-        localStorageService.removeAll();
+        localStorageService.removeAuth();
         return false;
     }
     return verifyToken();
