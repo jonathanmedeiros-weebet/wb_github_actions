@@ -42,11 +42,7 @@ export const verifyToken = async () => {
     }
   
     try {
-        const resp = await axiosInstance().get(url, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        const resp = await axiosInstance().get(url);
         
         if(resp){
             if(resp.results == true){
