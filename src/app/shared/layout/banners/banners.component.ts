@@ -15,6 +15,7 @@ export class BannersComponent implements OnInit {
     showNavigationArrows = false;
     @Input() pagina = 'futebol';
     @Input() showSkeleton = false;
+    @Input() type = 'banner';
 
     constructor(
         private cd: ChangeDetectorRef,

@@ -9,7 +9,7 @@
 
     <app-spinner *ngIf="showLoading"></app-spinner>
 
-    <app-banners pagina="deposito" [showSkeleton]="true"></app-banners>
+    <app-banners pagina="deposito" type="small-banner" [showSkeleton]="true"></app-banners>
     
     <ng-container *ngIf="!showLoading">
         <div class="content-body">
