@@ -12,6 +12,19 @@ export const axiosInstance = () => {
     },
   })
 
+  axiosInstance.interceptors.request.use(
+    (config: any) => {
+      const token = localStorageService.get('token');
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error: any) => {
+      return Promise.reject(error);
+    }
+  );
+
   axiosInstance.interceptors.response.use(
     (response: any) => response.data,
     (error: any) => {
