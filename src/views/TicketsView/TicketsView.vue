@@ -1,38 +1,40 @@
 <template>
   <div class="tickets">
-    <Header :title="title" :showBackButton="true" />
+    <Header title="Bilhete" :showBackButton="true" />
     <div class="tickets__container">
       <div class="game">
         <span class="game__select">Jogos selecionados</span>
-        <div class="game__delete">
+        <div class="game__delete" @click="handleAllRemove">
           <IconDelete class="game__icon" />
           <span class="game__text">Excluir todos</span>
         </div>
       </div>
+
       <div 
         class="bet"
-        v-for="(team, index) in teams" 
+        v-for="(item, index) in items" 
         :key="index" 
       >
         <div class="bet__header">
           <span class="bet__team">
-            <IconLive v-if="team.live" class="bet__icon-live"/>
+            <IconLive v-if="item.live" class="bet__icon-live"/>
             <IconBall class="bet__icon-ball"/>
-            {{ team.team_house }} X {{ team.team_outside }}
+            {{ item.gameName }}
           </span>
-          <IconClose class="bet__icon-close" />
+          <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
         </div>
         <div class="bet__info">
-          <span class="bet__date">{{ team.date }} {{ team.hour }}</span>
+          <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
         </div>
         <div class="bet__text">
-          <span>{{ team.live ? 'Resultado Final' : 'Para ganhar' }}</span>
+          <span>{{ item.quoteGroupName }}</span>
         </div>
         <div class="bet__result">
-          <span>{{ team.select }}</span>
-          <span>{{ team.odd }}</span>
+          <span>{{ item.quoteName }}</span>
+          <span>{{ item.quoteValue }}</span>
         </div>
       </div>
+
       <div class="finish">
         <div class="finish__cpf">
           <w-input
@@ -42,6 +44,15 @@
             placeholder="Informe o cpf do apostador"
             type="text"
           />
+
+          <w-input
+            id="inputCpf"
+            label="Apostador"
+            name="cpf"
+            placeholder="999.999.999-99"
+            type="text"
+            mask="###.###.###-##"
+          />
         </div>
       </div>
       <div class="value">
@@ -49,13 +60,14 @@
           <span class="value__balance-text">Valor</span>
         </div>
         <div class="value__balance">
-          <button class="value__add">+10</button>
-          <button class="value__add">+20</button>
-          <button class="value__add">+50</button>
+          <button class="value__add" @click="handleBetValueClick(10)">+10</button>
+          <button class="value__add" @click="handleBetValueClick(20)">+20</button>
+          <button class="value__add" @click="handleBetValueClick(50)">+50</button>
           <w-input
             class="value__balance-input"
             name="user_name"
             type="email"
+            v-model="betValue"
           >
             <template #icon>
               <span style="color: #ffffff80;">R$</span>
@@ -69,7 +81,7 @@
           <span>{{sumOdds}}</span>
         </div>
         <div class="cotacao__ganhos">
-          <span>Possíveis Ganhos:</span>
+          <span>Possíveis ganhos:</span>
           <span>R$ 90,00</span>
         </div>
         <div class="cotacao__alteracao">
@@ -79,7 +91,7 @@
             id="accept-changes"
             v-model="acceptChanges"
           />
-          <label for="accept-changes">Aceitar Alterações de odds</label>
+          <label for="accept-changes">Aceitar alterações de odds</label>
         </div>
         <div class="cotacao__finalizar">
           <w-button
@@ -88,7 +100,7 @@
             value="entrar"
             class="cotacao__finalizar-button"
             name="btn-entrar"
-            @click="handleClick"
+            @click="handleFinalizeBet"
           />
         </div>
       </div>
@@ -104,6 +116,8 @@ import IconBall from '@/components/icons/IconBall.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
+import { useTicketStore } from '@/stores';
+import { formatDateTimeBR } from '@/utilities';
 
 export default {
   name: 'tickets',
@@ -118,18 +132,58 @@ export default {
   },
   data() {
     return {  
-      title: 'Bilhete',
-      teams: [
-        { team_house: 'Argentino JRS', team_outside: 'Rosario Central', odd: 3.30, date: '19/03/2024', hour: '21:15', live: true, select: 'Empate' },
-        { team_house: 'França', team_outside: 'Itália', odd: 3.30, date: '19/03/2024', hour: '21:15', live: false, select: 'França' },
-        { team_house: 'Infinity', team_outside: 'Qhai', odd: 2.90, date: '19/03/2024', hour: '21:15', live: false, select: 'Qhali' },
-      ],
-      acceptChanges: false,
+      ticketStore: useTicketStore()
     };
   },
   computed: {
     sumOdds() {
-      return this.teams.reduce((total, team) => total + team.odd, 0).toFixed(2);
+      return (this.items.reduce((total, item) => Number(total) + Number(item.quoteValue), 0)).toFixed(2);
+    },
+    items() {
+      return Object.values(this.ticketStore.items).map(item => ({
+        ...item,
+        quoteValue: item.quoteValue.toFixed(2)
+      }));
+    },
+
+    bettorName: {
+      get() {
+        return this.ticketStore.bettor;
+      },
+      set(value) {
+        this.ticketStore.setBettor(value);
+      }
+    },
+    betValue: {
+      get() {
+        return this.ticketStore.value;
+      },
+      set(value) {
+        this.ticketStore.setValue(value);
+      }
+    },
+    acceptChanges: {
+      get() {
+        return this.ticketStore.accepted;
+      },
+      set(value) {
+        this.ticketStore.setAccepted(value);
+      }
+    }
+  },
+  methods: {
+    formatDateTimeBR,
+    handleBetValueClick(valueAditional) {
+      this.betValue += valueAditional;
+    },
+    handleAllRemove() {
+      this.ticketStore.clear();
+    },
+    handleItemRemove(gameId) {
+      this.ticketStore.removeQuote(gameId)
+    },
+    handleFinalizeBet() {
+
     }
   }
 }

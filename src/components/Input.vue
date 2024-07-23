@@ -1,6 +1,6 @@
 <template>
   <div class="input">
-    <label class="input__label" :for="name">{{ label }}</label>
+    <label class="input__label" v-if="label" :for="name">{{ label }}</label>
     <div class="input__group" :class="{ 'input__group--focused': isFocused }">
       <div class="input__icon" v-if="$slots['icon']">
         <slot name="icon"></slot>
@@ -44,7 +44,7 @@ export default {
   props: {
     label: {
       type: String,
-      required: true
+      required: false
     },
     name: {
       type: String,

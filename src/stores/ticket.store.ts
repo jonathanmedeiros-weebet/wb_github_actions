@@ -22,6 +22,7 @@ export const useTicketStore = defineStore('ticket', {
         addQuote({
             gameId,
             gameName,
+            gameDate,
             eventId,
             live,
             quoteKey,
@@ -33,6 +34,7 @@ export const useTicketStore = defineStore('ticket', {
             items[gameId] = {
                 gameId,
                 gameName,
+                gameDate,
                 eventId,
                 live,
                 quoteKey,

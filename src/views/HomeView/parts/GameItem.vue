@@ -147,6 +147,7 @@ export default {
                 addQuote({
                     gameId: this.game._id,
                     gameName: this.game.nome,
+                    gameDate: this.game.horario,
                     eventId: this.game.event_id,
                     live: this.game.ao_vivo,
                     quoteKey: quota.chave,
