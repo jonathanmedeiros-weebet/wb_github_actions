@@ -134,6 +134,7 @@
         "endereco": "Dirección",
         "cep": "Código postal",
         "logradouro": "Calle",
+        "exLogradouro": "Calle, Avenida, Callejón, Alameda, Plaza, y etcétera.",
         "bairro": "Barrio",
         "estado": "Estado",
         "cidade": "Ciudad",

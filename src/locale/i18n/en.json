@@ -137,6 +137,7 @@
         "endereco": "Address",
         "cep": "Zipcode",
         "logradouro": "Street",
+        "exLogradouro": "Street, Avenue, Alley, Boulevard, Square, and so on.",
         "bairro": "Neighborhood",
         "estado": "State",
         "cidade": "City",

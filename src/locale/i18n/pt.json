@@ -137,6 +137,7 @@
         "endereco": "Endereço",
         "cep": "CEP",
         "logradouro": "Logradouro",
+        "exLogradouro": "Rua, avenida, travessa, alameda, praça e etc.",
         "bairro": "Bairro",
         "estado": "Estado",
         "cidade": "Cidade",
