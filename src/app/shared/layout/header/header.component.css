@@ -112,6 +112,12 @@ nav a {
     white-space: nowrap;
 }
 
+.container-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .container-icons {
     display: flex;
     flex-direction: row;
@@ -170,9 +176,8 @@ nav::-webkit-scrollbar {
 }
 
 .btn-promocao i {
-    font-size: 18px;
+    font-size: 19.5px;
     color: white;
-    padding: 2px;
 }
 
 .btn-promocao i:hover {
@@ -678,6 +683,12 @@ body .change-theme {
     .support-btn i {
         font-size: 20px;
     }
+    .btn{
+        font-size: 10px;
+    }
+    .btn-register {
+        min-width: 92px !important;
+    }
     .btn-xtremepush img {
         height: 25px;
     }
@@ -732,7 +743,6 @@ body .change-theme {
     }
     .btn-promocao {
         padding-left: 0;
-        padding-right: 5px;
         font-size: 20px;
     }
     .support-btn i {
@@ -768,7 +778,6 @@ body .change-theme {
     }
     .side-right {
         padding-right: 0;
-        width: 600px;
     }
     .logo {
         max-width: 215px;
@@ -782,7 +791,6 @@ body .change-theme {
     }
     .side-right {
         padding-right: 0;
-        width: 420px;
     }
 }
 
