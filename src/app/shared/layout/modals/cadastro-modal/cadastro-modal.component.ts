@@ -51,6 +51,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     formSocial = false;
     aplicarCssTermo: boolean = false;
     postbacks = {};
+    postbacksList;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -72,7 +73,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
-        this.postbacks = this.paramsService.getOpcoes().enabledPostbacks;
+        this.postbacksList = this.paramsService.getOpcoes().enabledPostbacks;
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
@@ -98,12 +99,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         
         this.route.queryParams
             .subscribe((params) => {
-
-            this.postbacks.forEach(postback => {
-                params[`${postback}`];
-            });
-            
-            console.log(params);
             
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
@@ -154,9 +149,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.possuiCodigoAfiliado = true;
             }
 
-            if (params.clickId) {
-                this.postbacks['clickId'] = params.clickId;
-            }
+            this.postbacksList.forEach(postback => {
+                if (params.hasOwnProperty(postback)) {
+                    this.postbacks[postback] = params[postback];
+                }
+            });
         });
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
@@ -369,23 +366,4 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
     }
-
-    // addingPostbacksInParams() {
-    //     let dinamicsParams = this.paramsService.getOpcoes().enabledPostbacks;
-
-    //     let queryParams = { ...this.route.snapshot.queryParams};
-
-    //     for(let key in dinamicsParams) {
-    //         if (this.postbacks.hasOwnProperty(key)) {
-    //             queryParams[key] = this.postbacks[key]
-    //         }
-    //     }
-
-    //     this.router.navigate([], {
-    //         relativeTo: this.route,
-    //         queryParams: queryParams,
-    //         queryParamsHandling: 'merge'
-    //       });
-
-    // }
 }
