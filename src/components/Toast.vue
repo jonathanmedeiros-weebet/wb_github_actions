@@ -18,12 +18,21 @@ export default {
         type: {
             type: String,
             default: 'success'
+        },
+        timeout: {
+            type: Number,
+            default: 3000
         }
     },
     methods: {
         handleClick() {
             this.$emit('close');
         }
+    },
+    mounted() {
+        setTimeout(() => {
+            this.$emit('close');
+        }, this.timeout);
     }
 }
 </script>
