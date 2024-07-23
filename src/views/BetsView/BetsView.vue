@@ -159,7 +159,7 @@
         </div>
       </div>
 
-      <WModal v-if="showModalPay" @close="handleClosePayModal">
+      <WModal ref="modalPay" v-if="showModalPay" @close="handleClosePayModal">
         
         <template #title>
           <p>Pagar aposta</p>
@@ -264,6 +264,7 @@ export default {
     handleClosePayModal() {
       this.betSelected = null;
       this.showModalPay = false;
+      this.$refs.modalPay.handleClose();
     },
     handleOpenCalendarModal() {      
       this.showModalCalendar = true;
@@ -282,8 +283,7 @@ export default {
       return formatCurrency(value);
     },  
     getResults() {
-      
-      
+    
       this.parametros.codigo = this.code.replace(/-/g, '');
       this.parametros.dataInicial = '';
       this.parametros.dataFinal = '';
@@ -329,7 +329,9 @@ export default {
         this.showToast = true;
         
       })
+      this.$refs.modalPay.handleClose();
       this.showModalPay = false;
+      this.$refs['wmodal'].handleClose();
     },
     formateDateTime(datetime) {
       return moment(datetime).format("DD/MM/YYYY HH:mm");
