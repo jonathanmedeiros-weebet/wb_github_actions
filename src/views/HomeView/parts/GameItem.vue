@@ -243,6 +243,7 @@ export default {
         background: var(--color-background);
         &--selected {
             background: var(--color-primary);
+            color: var(--color-background);
         }
     }
 

@@ -29,7 +29,7 @@
                             v-for="odd in player.odds"
                             :key="odd.id"
                             :class="{
-                                'collapse__option--selected': false,
+                                'collapse__option--selected': odd.selected,
                                 'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd)
                             }"
                             @click="handleItemClick(odd)"
@@ -65,6 +65,7 @@ import IconLock from '@/components/icons/IconLock.vue';
 import { QuotaStatus } from '@/enums';
 import IconArrowFillDown from '@/components/icons/IconArrowFillDown.vue';
 import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
+import { useTicketStore } from '@/stores';
 
 export default {
     name: 'player-quotes',
@@ -73,13 +74,38 @@ export default {
         quotes: {
             type: Array,
             default: () => []
+        },
+        game: {
+            type: Object,
+            default: () => {}
+        }
+    },
+    computed: {
+        hasQuotes() {
+            return Boolean(this.quotes.length)
         }
     },
     methods: {
         handleItemClick(odd) {
             event.stopPropagation();
             if(!odd.hasPermission) return;
-            void odd;
+            
+            const { items, addQuote, removeQuote } = useTicketStore();
+            const gameExist = Boolean(items[this.game._id]);
+            const quoteExist = items[this.game._id]?.quoteKey == odd.chave;
+
+            if(gameExist && quoteExist) {
+                removeQuote(this.game._id);
+            } else {
+                addQuote({
+                    gameId: this.game._id,
+                    gameName: this.game.nome,
+                    eventId: this.game.event_id,
+                    live: this.game.ao_vivo,
+                    quoteKey: odd.chave,
+                    quoteValue: odd.valor
+                })
+            }
         },
         isIncreasedOdd(odd) {
             return Boolean(odd.status) && odd.status === QuotaStatus.INCREASED;

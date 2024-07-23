@@ -18,8 +18,8 @@
                     </button>
                 </div>
 
-                <TimeQuotes v-if="!filteredPerPlayer" :quotes="options"/>
-                <PlayerQuotes v-if="filteredPerPlayer" :quotes="options"/>
+                <TimeQuotes v-if="!filteredPerPlayer" :quotes="options" :game="game"/>
+                <PlayerQuotes v-if="filteredPerPlayer" :quotes="options" :game="game"/>
             </div>
         </template>
     </div>
