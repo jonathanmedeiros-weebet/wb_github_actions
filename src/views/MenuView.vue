@@ -86,7 +86,7 @@ import { formatCurrency } from '@/utilities';
 import { localStorageService } from "@/services";
 
 export default {
-  name: 'MenuView',
+  name: 'menu',
   components: {
     IconEye,
     IconEyeClose,
@@ -107,6 +107,9 @@ export default {
       isConsultTicketModalVisible: false
     };
   },
+  mounted() {
+    this.getData();
+  },
   computed: {
     balance() {
       return formatCurrency(Number(this.balanceData?.saldo ?? 0));
@@ -118,9 +121,6 @@ export default {
       const user = localStorageService.get('user');
       return user ? user.nome : '';
     }
-  },
-  mounted() {
-    this.getData();
   },
   methods: {
     handleLogout() {
