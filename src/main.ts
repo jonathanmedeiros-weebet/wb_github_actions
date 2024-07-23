@@ -7,7 +7,7 @@ import VueMask from 'vue-the-mask'
 
 import App from './App.vue'
 import router from './router'
-import { prepareConfigClient, checkToken} from './services'
+import { prepareConfigClient, checkToken } from './services'
 
 Vue.use(VueMask);
 Vue.use(PiniaVuePlugin)
