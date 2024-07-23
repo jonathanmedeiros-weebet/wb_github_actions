@@ -232,8 +232,8 @@
                                         <th data-field="quantidade" (click)="sortBy('quantidade')"><span style="cursor: pointer;">{{ 'geral.quantidade' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="quantidadeUtilizada" (click)="sortBy('quantidadeUtilizada')"><span style="cursor: pointer;">{{ 'geral.quantidadeUtilizada' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="game" (click)="sortBy('game')"><span style="cursor: pointer;">{{ 'geral.jogo' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="game" (click)="sortBy('game')"><span style="cursor: pointer;">Prêmio &uarr;&darr;</span></th>
                                         <th data-field="status" (click)="sortBy('status')"><span style="cursor: pointer;">Status &uarr;&darr;</span></th>
-                                        <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -261,17 +261,21 @@
                                                 {{rodada.gameName}}
                                             </td>
                                             <td class="td-custom">
+                                                {{rodada.premio | currency }}
+                                            </td>
+                                            <td class="td-custom">
                                                 {{rodada.customStatusFreeSpin}}
                                             </td>
-                                            <td class="btn-custom-game">
+                                            <td class="td-custom">
                                                 <ng-container>
-                                                    <button class="btn btn-custom btn-jogar-rodada"
+                                                    <button *ngIf="rodada.customStatusFreeSpin == 'Ativo'; else elseResgatePremio " class="btn btn-custom btn-jogar-rodada"
                                                         [ngClass]="rodada.customStatusFreeSpin != 'Ativo' ? 'disabled-button' : ''"
-                                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
-
-                                                        <button class="btn btn-custom btn-jogar-rodada"
-                                                        [ngClass]="(rodada.status == 'resgatado' || rodada.status == 'anulado' || rodada.ativo == 1 || rodada.customStatusFreeSpin != 'Concluído' || ((dataAtual | moment: 'DD/MM/YYYY HH:mm:ss') > (rodada.dataTermino.date | moment: 'DD/MM/YYYY HH:mm:ss'))) ? 'disabled-button' : ''"
-                                                        (click)="redeemPrize(rodada.id)">{{ 'geral.resgatarPremio' | translate }}</button>
+                                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
+                                                    </button>
+                                                    <ng-template #elseResgatePremio>
+                                                        <button *ngIf="(rodada.status == 'resgatado' || rodada.status == 'anulado' || rodada.ativo == 1 || rodada.customStatusFreeSpin != 'Concluído' || ((dataAtual | moment: 'DD/MM/YYYY HH:mm:ss') > (rodada.dataTermino.date | moment: 'DD/MM/YYYY HH:mm:ss'))) ? false : true " class="btn btn-custom btn-jogar-rodada" (click)="redeemPrize(rodada.id)">{{ 'geral.resgatarPremio' | translate }}
+                                                        </button>
+                                                    </ng-template>
                                                 </ng-container>
                                             </td>
                                         </tr>
