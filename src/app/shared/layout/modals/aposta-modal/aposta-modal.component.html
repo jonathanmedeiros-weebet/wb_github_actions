@@ -37,6 +37,8 @@
     </app-bilhete-acumuladao>
     <app-exibir-bilhete-desafio [aposta]="aposta" *ngIf="aposta.tipo == 'desafio'">
     </app-exibir-bilhete-desafio>
+    <app-exibir-bilhete-rifa [aposta]="aposta" *ngIf="aposta.tipo == 'rifa'">
+    </app-exibir-bilhete-rifa>
 </div>
 <ng-template #bilheteEsporte>
     <app-exibir-bilhete-esportivo [aposta]="aposta"></app-exibir-bilhete-esportivo>

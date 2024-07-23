@@ -206,7 +206,7 @@ nav::-webkit-scrollbar {
 }
 
 .dropdown-menu {
-    min-width: 320px;
+    min-width: 350px;
     border-radius: 8px;
     background-color: var(--header);
     color: var(--foreground-header);
@@ -270,7 +270,7 @@ nav::-webkit-scrollbar {
 }
 
 .container-menu {
-    padding: 20px 20px 0;
+    padding: 10px 10px 0;
 }
 
 .dropdown-btn-filled {
@@ -278,7 +278,6 @@ nav::-webkit-scrollbar {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px;
     width: calc((100% / 3) - 8px);
     height: 65px;
     text-decoration: none;
@@ -287,8 +286,8 @@ nav::-webkit-scrollbar {
     color: var(--foreground-inputs-odds);
     white-space: nowrap;
     background-color: var(--inputs-odds);
-    margin-bottom: 10px;
-    margin-left: 10px;
+    margin-bottom: 6px;
+    margin-left: 6px;
 }
 
 .dropdown-btn-filled:first-of-type, .dropdown-btn-filled:nth-child(3n + 1) {
@@ -762,6 +761,13 @@ body .change-theme {
     }
     .menu-perfil {
         height: 32px;
+    }    
+    .btn-register{
+        min-width: 95px !important;
+        margin-right: 5px;
+    }
+    .menu-conta .btn{
+        padding: 5px 10px;
     }
     .deposit-shortcut a{
         padding: 0px 4px;
@@ -769,6 +775,9 @@ body .change-theme {
 }
 
 @media only screen and (max-width: 1366px) and (min-width: 1280px){
+    .menu-conta .btn{
+        padding: 5px 6px;
+    }
     .w-130 {
         width: 103px;
     }
