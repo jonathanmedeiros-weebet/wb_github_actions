@@ -67,7 +67,6 @@ export default {
     flex-direction: column;
     height: 100vh;
     
-  
   &__container {
     flex: 1;
     display: flex;
