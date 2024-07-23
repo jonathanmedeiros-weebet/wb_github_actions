@@ -1,10 +1,12 @@
+import { useConfigClient } from "@/stores";
 import axios from "axios";
 import { localStorageService } from "./storage.service";
 import VueRouter from 'vue-router';
 
 export const axiosInstance = () => {
+  const { apiUrl } = useConfigClient();
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: apiUrl,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -15,11 +17,11 @@ export const axiosInstance = () => {
     (error: any) => {
       if (error.response && error.response.status === 401) {
         //TODO: ADICIONAR TRATATIVA DE REDIRECIONAMENTO PARA TELA DE LOGIN
-        console.log("--- Token inválido ---");
+        console.warn("--- Token inválido ---");
         localStorageService.removeAuth();
         return;
       }
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   );
 

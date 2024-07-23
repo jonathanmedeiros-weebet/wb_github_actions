@@ -1,26 +1,55 @@
 <template>
-    <div class="game" @click="handleGameDetailClick">
+    <div class="game">
         <div class="game__teams">
             <span
                 class="game__team"
                 v-for="(team, index) in teams"
                 :key="index"
             >
-                <img :src="team.image">
+                <img :src="team.image" @error="changeSrcWhenImageError" />
                 {{ team.name }}
             </span>
+            
             <span class="game__info">
-                {{ dateTime }}
+                <template v-if="isLive">
+                    <span class="game__live">Ao vivo</span>
+                    <span class="game__time">{{ liveTime }}</span>
+                </template>
+
+                <span v-else>{{ dateTime }}</span>
                 <span class="game__pontuation">+{{ pontuation }}</span>
             </span>
+        </div>
+        <div class="game__score" v-if="isLive">
+            <strong>{{ teamScoreA }}</strong>
+            <strong>{{ teamScoreB }}</strong>
         </div>
         <div class="game__quotes">
             <div
                 class="game__quota"
                 v-for="(quote, index) in quotes"
+                :class="{'game__quota--disabled': !quote.hasPermission}"
                 :key="index"
+                @click="handleItemClick(quote)"
             >
-                {{ quote.valor }}
+                <span class="game__value-quota" v-if="quote.hasPermission">
+                    <IconArrowFillUp
+                        class="game__icon-quota"
+                        :size="14"
+                        :color="isIncreasedQuote(quote) ? 'var(--color-success)' : 'transparent'"
+                    />
+                    {{ quote.finalValue }}
+                    <IconArrowFillDown
+                        class="game__icon-quota"
+                        :size="14"
+                        :color="isDecreasedQuote(quote) ? 'var(--color-danger)' : 'transparent'"
+                    />
+                </span>
+                <IconLock
+                    v-else
+                    :size="14"
+                    color="var(--color-text-input)"
+                />
             </div>
         </div>
     </div>
@@ -28,7 +57,13 @@
 
 <script>
 import { convertInMomentInstance } from '@/utilities';
+import IconLock from '@/components/icons/IconLock.vue';
+import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
+import { QuotaStatus } from '@/enums';
+import IconArrowFillDown from '@/components/icons/IconArrowFillDown.vue';
+
 export default {
+  components: { IconLock, IconArrowFillUp, IconArrowFillDown },
     name: 'game-item',
     props: {
         game: {
@@ -37,6 +72,14 @@ export default {
         },
     },
     computed: {
+        isLive() {
+            return Boolean(this.game.ao_vivo);
+        },
+        liveTime() {
+            return Boolean(this.game.info.tempo == 0)
+                ? 'intervalo'
+                : `${this.game.info.minutos}'`
+        },
         teams() {
             return [
                 {
@@ -53,26 +96,45 @@ export default {
             return this.game.total_cotacoes;
         },
         dateTime() {
-            return convertInMomentInstance(this.game.horario).format('DD/MM hh:mm');
+            return convertInMomentInstance(this.game.horario).format('DD/MM HH:mm');
         },
         quotes() {
-            return this.game.cotacoes.map(quote => ({
-                ...quote,
-                valor: quote.valor.toFixed(2)
-            }));
+            return this.rearrangeQuotes(this.game.cotacoes ?? []);
+        },
+        teamScoreA() {
+            return this.game.info.time_a_resultado ?? 0;
+        },
+        teamScoreB() {
+            return this.game.info.time_b_resultado ?? 0;
         }
     },
     methods: {
-        handleGameDetailClick() {
-            this.$router.push({
-                name: 'game-detail',
-                params: {
-                    id: this.game._id
-                }
-            });
-
-            event.stopPropagation();
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
         },
+        handleItemClick(odd) {
+            event.stopPropagation();
+            if(!odd.hasPermission) return;
+            void odd;
+        },
+        isIncreasedQuote(quote) {
+            return Boolean(quote.status) && quote.status === QuotaStatus.INCREASED;
+        },
+        isDecreasedQuote(quote) {
+            return Boolean(quote.status) && quote.status === QuotaStatus.DECREASED;
+        },
+        rearrangeQuotes(quotes) {
+            const newQuotes = [];
+            const homeQuote = quotes.find(quote => quote.chave.includes('casa'));
+            if(Boolean(homeQuote)) newQuotes.push(homeQuote);
+
+            const drawQuote = quotes.find(quote => quote.chave.includes('empate'));
+            if(Boolean(drawQuote)) newQuotes.push(drawQuote);
+
+            const outOfHomeQuote = quotes.find(quote => quote.chave.includes('fora'));
+            if(Boolean(outOfHomeQuote)) newQuotes.push(outOfHomeQuote);
+            return newQuotes;
+        }
     }
 }
 </script>
@@ -83,7 +145,7 @@ export default {
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 13px 16px;
     background: var(--color-background-input);
 
@@ -105,7 +167,7 @@ export default {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        width: calc(100vw - 240px);
+        width: calc(100vw - 250px);
     }
 
     &__team img {
@@ -144,6 +206,9 @@ export default {
         display: flex;
         justify-content: space-between;
         gap: 8px;
+        min-width: 190px;
+        margin-top: auto;
+        margin-bottom: auto;
     }
 
     &__quota {
@@ -155,5 +220,43 @@ export default {
         border-radius: 4px;
         background: var(--color-background);
     }
+
+    &__value-quota {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__icon-quota {
+        animation: blink 1s linear infinite;
+    }
+
+    &__live {
+        color: var(--color-danger);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+    }
+
+    &__time {
+        color: var(--color-text-input);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+    }
+
+    &__score {
+        width: 10px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 5px;
+    }
 }
-</style>v
+
+</style>

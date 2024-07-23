@@ -1,5 +1,6 @@
 import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
+import CloseBetView from '@/views/CloseBetView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
 import ValidationDetailView from '@/views/ValidationDetailView.vue'
 import ValidationView from '@/views/ValidationView.vue'
@@ -22,11 +23,6 @@ const router = new VueRouter({
       path: '/',
       //TODO: DECIDIR QUAL O NOME DA RODA OU SE IRÁ REMOVE-LA
       name: 'root',
-      component: LoginView,
-    },
-    {
-      path: '/login',
-      name: 'login',
       component: LoginView,
     },
     {
@@ -60,6 +56,11 @@ const router = new VueRouter({
       meta: {
         auth: true
       }
+    },
+    {
+      path: '/close-bet',
+      name: 'close-bet',
+      component: CloseBetView
     },
     {
       path: '/bets',
@@ -110,7 +111,7 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/game-detail',
+      path: '/game-detail/:id',
       name: 'game-detail',
       component: GameDetailView,
       meta: {

@@ -1,5 +1,5 @@
 <template>
-    <WModal :backdropClick="true" @close="handleCloseModal">
+    <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
       <template #title>
         <span class="modal-leagues__title">Selecione um campeonato</span>
       </template>
@@ -11,7 +11,7 @@
                     type="button"
                     class="modal-leagues__item"
                     :key="regionIndex"
-                    @click="handleSelect(region.id)"
+                    @click="handleSelect(region)"
                 >
                     <span
                         v-if="region.image"
@@ -29,7 +29,7 @@
                     class="modal-leagues__subitem"
                     v-for="(championship, championshipIndex) in region.championships"
                     :key="`${championshipIndex}-${regionIndex}`"
-                    @click="handleSelect(championship.id)"
+                    @click="handleSelect(championship)"
                 >
                     {{ championship.name }}
                 </a>
@@ -44,13 +44,31 @@ import WModal from '@/components/Modal.vue'
 import { useHomeStore } from '@/stores';
 import IconTrophy from '@/components/icons/IconTrophy.vue';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
+import IconFootball from '@/components/icons/IconFootball.vue'
+import IconCombat from '@/components/icons/IconCombat.vue'
+import IconAmericanFootball from '@/components/icons/IconAmericanFootball.vue'
+import IconTennis from '@/components/icons/IconTennis.vue'
+import IconHockey from '@/components/icons/IconHockey.vue'
+import IconBasketball from '@/components/icons/IconBasketball.vue'
+import IconFutsal from '@/components/icons/IconFutsal.vue'
+import IconVoleiball from '@/components/icons/IconVoleiball.vue'
+import IconESport from '@/components/icons/IconESport.vue'
 
 export default {
     name: 'modal-leagues',
     components: {
         WModal,
         IconTrophy,
-        IconGlobal
+        IconGlobal,
+        IconFootball,
+        IconCombat,
+        IconAmericanFootball,
+        IconTennis,
+        IconHockey,
+        IconBasketball,
+        IconFutsal,
+        IconVoleiball,
+        IconESport
     },
     data() {
         return {
@@ -59,15 +77,7 @@ export default {
     },
     computed: {
         items() {
-            return this.homeStore.championshipPerRegionList.map((item) => {
-                const isIcon = ['ww', 'all'].includes(item.slug);
-                const iconComponent = item.slug === 'ww' ? IconGlobal : IconTrophy;
-                return {
-                    ...item,
-                    image: !isIcon ? `https://cdn.wee.bet/flags/1x1/${item.slug}.svg` : null,
-                    icon: isIcon ? iconComponent : null
-                };
-            });
+            return this.homeStore.championshipPerRegionList;
         }
     },
     
@@ -76,7 +86,8 @@ export default {
             this.$emit('closeModal');
         },
         handleSelect(item) {
-            this.$emit('click', item);
+            this.$refs['wmodal'].handleClose();
+            this.$emit('click', {...item});
         }
     }
 }
@@ -120,6 +131,7 @@ export default {
         color: #FFFFFF99;
         font-size: 14px;
         font-weight: 400;
+        text-align: left;
     }
 
     &__image {
