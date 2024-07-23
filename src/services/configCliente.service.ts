@@ -1,8 +1,6 @@
 import VueRouter from "vue-router";
 import { axiosInstance } from "./axiosInstance";
 import { useConfigClient } from "@/stores";
-import { localStorageService } from "./storage.service";
-import { verifyToken } from "@/services";
 
 export const prepareConfigClient = async () => {
     const route = new VueRouter().currentRoute;
@@ -30,13 +28,4 @@ export const prepareConfigClient = async () => {
 export const getParams = async () => {
     const { paramUrl } = useConfigClient();
     return await axiosInstance().get(paramUrl)
-}
-
-export const checkToken = async () => {
-    const token = localStorage.getItem('token');
-    if(!token) {
-        localStorageService.removeAuth();
-        return false;
-    }
-    return verifyToken();
 }

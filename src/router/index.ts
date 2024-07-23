@@ -1,6 +1,5 @@
 import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
-import CloseBetView from '@/views/CloseBetView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
 import ValidationDetailView from '@/views/ValidationDetailView.vue'
 import ValidationView from '@/views/ValidationView.vue'
@@ -15,13 +14,14 @@ import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 import { localStorageService } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
+import CloseBetView from '@/views/CloseBetView.vue'
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'root',
+      name: 'login',
       component: LoginView,
     },
     {
@@ -142,15 +142,15 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
 
-  const tokenIsValid = localStorageService.get('token');
+  const hasToken = localStorageService.get('token');
 
   if (to.meta?.auth) {
-    if (tokenIsValid) {
+    if (hasToken) {
       next();
     } else {
       next({ name: 'login' });
     }
-  } else if ((to.name === 'login' || to.name === 'root') && tokenIsValid) {
+  } else if ((to.name === 'login') && hasToken) {
     next({ name: 'home' });
   } else {
     next();
