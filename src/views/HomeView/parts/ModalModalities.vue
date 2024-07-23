@@ -1,5 +1,5 @@
 <template>
-    <WModal :backdropClick="true" @close="handleCloseModal">
+    <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
       <template #title>
         <span class="modal-modalities__title">Selecione uma modalidade</span>
       </template>
@@ -34,14 +34,26 @@ export default {
         modalityId: {
             type: Number | String,
             default: 1
+        },
+        isLive: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
         return {
-            items: modalityList.map((modalitiy) => ({
+            options: modalityList().map((modalitiy) => ({
                 ...modalitiy,
                 checked: modalitiy.id === this.modalityId
             }))
+        }
+    },
+    computed: {
+        items() {
+            if(this.isLive){
+                return this.options.filter(option => Boolean(option.hasLive));
+            }
+            return this.options;
         }
     },
     methods: {
@@ -49,6 +61,7 @@ export default {
             this.$emit('closeModal');
         },
         handleSelect(modalityId) {
+            this.$refs['wmodal'].handleClose();
             this.$emit('click', modalityId);
         }
     }

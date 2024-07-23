@@ -1,10 +1,12 @@
+import { useConfigClient } from "@/stores";
 import axios from "axios";
 import { localStorageService } from "./storage.service";
 import router from "@/router";
 
 export const axiosInstance = () => {
+  const { apiUrl } = useConfigClient();
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: apiUrl,
     headers: {
       'Content-Type': 'application/json',
     },

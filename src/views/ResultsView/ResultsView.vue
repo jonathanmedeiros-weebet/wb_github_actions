@@ -48,7 +48,7 @@
           :key="championshipListIndex"
         >
           <template #title>
-            <img :src="image" />
+            <img :src="image" @error="changeSrcWhenImageError" />
             {{ title }}
           </template>
 
@@ -94,12 +94,15 @@ export default {
     return {
       activeDay: moment().format('YYYY-MM-DD'),
       today: moment().format('YYYY-MM-DD'),
-      modality: modalityList[0],
+      modality: null,
       showModalModalities: false,
-      modalityList,
+      modalityList: modalityList(),
       championshipList,
       dateRange: []
     }
+  },
+  created() {
+    this.modality = this.modalityList[0];
   },
   methods: {
     generateDaysOfMonth() {
@@ -134,6 +137,9 @@ export default {
     isCurrentDay(day) {
         return day.format('YYYY-MM-DD') === this.activeDay;
     },
+    changeSrcWhenImageError (event) {
+      event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+    }
   },
   mounted() {
     this.$nextTick(() => {

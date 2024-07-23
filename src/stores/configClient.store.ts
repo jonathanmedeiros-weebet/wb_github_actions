@@ -10,8 +10,9 @@ interface ConfigClient {
 const _host = '//localhost';
 const _loki = '//localhost:8000';
 const _center = 'https://hermes.wee.bet';
+const _live = 'https://streaming.wee.bet';
 const _name = 'DEMO';
-const _slug = 'demo.wee.bet';
+const _slug = 'weebet.jm';
 
 const prepareClientName = () => {
   const configClient = localStorageService.get(LocalStorageKey.CONFIG_CLIENT);
@@ -34,6 +35,7 @@ export const useConfigClient = defineStore('configClient', {
     slug: prepareClientSlug(),
     apiUrl: prepareClientHost(),
     lokiUrl: _loki,
+    liveUrl: _live,
     centerUrl: `${_center}/v1`,
     sportsUrl: `${_host}/api/esportes`,
     params: {} as any,
