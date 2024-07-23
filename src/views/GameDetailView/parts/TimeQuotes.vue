@@ -18,7 +18,7 @@
                         'collapse__option--selected': odd.selected,
                         'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
                     }"
-                    @click="handleItemClick(odd)"
+                    @click="handleItemClick(odd, option.name)"
                 >
                     <template v-if="odd.hasPermission">
                         <IconArrowFillUp
@@ -91,7 +91,7 @@ export default {
         }
     },
     methods: {
-        handleItemClick(odd) {
+        handleItemClick(odd, groupName) {
             event.stopPropagation();
             if(!odd.hasPermission) return;
 
@@ -107,7 +107,9 @@ export default {
                     eventId: this.game.event_id,
                     live: this.game.ao_vivo,
                     quoteKey: odd.key,
-                    quoteValue: odd.value
+                    quoteValue: odd.value,
+                    quoteName: odd.label,
+                    quoteGroup: groupName
                 })
             }
         },

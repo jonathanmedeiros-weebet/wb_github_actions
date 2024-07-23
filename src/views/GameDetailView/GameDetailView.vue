@@ -254,8 +254,11 @@ export default {
                         isLive: this.game.ao_vivo
                     });
 
+                    const playerKey = `player___${odd.label.replaceAll(' ', '_')}___${odd.key}`
+
                     quoteGroups[groupIndex].players[playerIndex].odds.push({
                         ...odd,
+                        key: playerKey,
                         label: quote.name,
                         finalValue,
                         hasPermission: this.hasQuotaPermission(finalValue)

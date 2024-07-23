@@ -25,7 +25,9 @@ export const useTicketStore = defineStore('ticket', {
             eventId,
             live,
             quoteKey,
-            quoteValue
+            quoteValue,
+            quoteName,
+            quoteGroupName
         }: any) {
             const items = { ...this.items };
             items[gameId] = {
@@ -34,7 +36,9 @@ export const useTicketStore = defineStore('ticket', {
                 eventId,
                 live,
                 quoteKey,
-                quoteValue
+                quoteValue,
+                quoteName,
+                quoteGroupName
             };
             this.items = { ...items }
         },

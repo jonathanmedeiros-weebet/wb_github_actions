@@ -138,6 +138,9 @@ export default {
             const gameExist = Boolean(items[this.game._id]);
             const quoteExist = items[this.game._id]?.quoteKey == quota.chave;
 
+            let quoteLabel = quota.chave.includes('casa') ? 'Casa' : 'Empate';
+            quoteLabel = quota.chave.includes('fora') ? 'Fora' : 'Empate';
+
             if(gameExist && quoteExist) {
                 removeQuote(this.game._id);
             } else {
@@ -147,7 +150,9 @@ export default {
                     eventId: this.game.event_id,
                     live: this.game.ao_vivo,
                     quoteKey: quota.chave,
-                    quoteValue: quota.valor
+                    quoteValue: quota.valor,
+                    quoteName: quoteLabel,
+                    quoteGroupName: 'Resultado final'
                 })
             }
         },

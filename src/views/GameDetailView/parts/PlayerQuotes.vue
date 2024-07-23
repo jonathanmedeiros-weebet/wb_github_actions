@@ -5,7 +5,7 @@
         <Collapse
             v-else
             :initCollapsed="true"
-            v-for="(option, index) in quotes"
+            v-for="(option, index) in options"
             :key="index"
         > 
             <template #title>{{ option.title }}</template>
@@ -32,7 +32,7 @@
                                 'collapse__option--selected': odd.selected,
                                 'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd)
                             }"
-                            @click="handleItemClick(odd)"
+                            @click="handleItemClick(odd, player.name)"
                         >
                             <template v-if="odd.hasPermission">
                                 <IconArrowFillUp
@@ -80,19 +80,40 @@ export default {
             default: () => {}
         }
     },
+    data() {
+        return {
+            ticketStore: useTicketStore()
+        }
+    },
     computed: {
         hasQuotes() {
             return Boolean(this.quotes.length)
+        },
+        options() {
+            const quoteKey = this.ticketStore.items[this.game._id]
+                ? this.ticketStore.items[this.game._id].quoteKey
+                : null;
+
+            return this.quotes.map(quote => ({
+                ...quote,
+                players: quote.players.map(player => ({
+                    ...player,
+                    odds: player.odds.map(odd => ({
+                        ...odd,
+                        selected: odd.key == quoteKey
+                    }))
+                }))
+            }))
         }
     },
     methods: {
-        handleItemClick(odd) {
+        handleItemClick(odd, playerName) {
             event.stopPropagation();
             if(!odd.hasPermission) return;
-            
+
             const { items, addQuote, removeQuote } = useTicketStore();
             const gameExist = Boolean(items[this.game._id]);
-            const quoteExist = items[this.game._id]?.quoteKey == odd.chave;
+            const quoteExist = items[this.game._id]?.quoteKey == odd.key;
 
             if(gameExist && quoteExist) {
                 removeQuote(this.game._id);
@@ -102,8 +123,10 @@ export default {
                     gameName: this.game.nome,
                     eventId: this.game.event_id,
                     live: this.game.ao_vivo,
-                    quoteKey: odd.chave,
-                    quoteValue: odd.valor
+                    quoteKey: odd.key,
+                    quoteValue: odd.value,
+                    quoteName: playerName,
+                    quoteGroupName: odd.label
                 })
             }
         },
