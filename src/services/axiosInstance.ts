@@ -1,10 +1,12 @@
+import { useConfigClient } from "@/stores";
 import axios from "axios";
 import { localStorageService } from "./storage.service";
 import VueRouter from 'vue-router';
 
 export const axiosInstance = () => {
+  const { apiUrl } = useConfigClient();
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: apiUrl,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -19,7 +21,7 @@ export const axiosInstance = () => {
         localStorageService.removeAuth();
         return;
       }
-      Promise.reject(error)
+      return Promise.reject(error)
     }
   );
 

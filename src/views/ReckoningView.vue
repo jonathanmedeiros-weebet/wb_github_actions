@@ -151,7 +151,7 @@ export default {
       comissao: '2,10',
       premio: '13,10',
       Saque: '55,10',
-      modalityList: modalityList,
+      modalityList: modalityList(),
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
       collapsedExits: this.initCollapsed,
@@ -174,7 +174,6 @@ export default {
       alert('Modal select')
     },
     toggleCollapse(section, event) {
-      console.log(section);
       if (section === 'input') {
         this.collapsedInputs = !this.collapsedInputs;
       } else if (section === 'exit') {
