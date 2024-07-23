@@ -2,9 +2,9 @@ import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance";
 import { localStorageService } from "@/services";
 
-export const getCalculationValue = async () => {
+export const getCalculationValue = async (startDate: string, endDate: string) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/relatorios/resultado?data-inicial=2024-07-22&data-final=2024-07-28`;
+    const url = `${apiUrl}/relatorios/resultado?data-inicial=${startDate}&data-final=${endDate}`;
     const token = localStorageService.get('token');
     const response: any = await axiosInstance().get(url, {
         headers: {
@@ -12,4 +12,4 @@ export const getCalculationValue = async () => {
         },
     });
     return response.results;
-};
+}; 

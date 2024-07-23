@@ -25,7 +25,7 @@
           <span class="collapse__title">Entradas</span>
           <div class="collapse__value">
             <IconAdd class="collapse__icon" />
-            {{totalApostado}}
+            {{entry}}
           </div>
         </div>
         <div v-if="collapsedInputs" class="collapse__content">
@@ -36,16 +36,16 @@
                 <span class="collapse__title">Total Apostado:</span>
                 <div class="collapse__icon-wrapper">
                   <IconAdd class="collapse__icon-add" />
-                  <span>R$ {{ totalApostado }}</span>
+                  <span>{{ totalBet }}</span>
                 </div>
               </div>
               <div v-if="collapsedBet" class="collapse__section-result">
-                <span>Futebol</span>
+                <span></span>
               </div>
             </div>
             <div class="collapse__section-item">
               <span class="collapse__section-text">Recargas de Cartão:</span>
-              <span class="collapse__value-right">R$ {{ recargasCartao }}</span>
+              <span class="collapse__value-right">{{ rechargesCartao }}</span>
             </div>
             <div class="collapse__line"></div>
           </div>
@@ -57,22 +57,22 @@
           <span class="collapse__title">Saídas</span>
           <div class="collapse__value">
             <IconRemove class="collapse__icon-remove" />
-            <span class="collapse__balance">R$ 2,00</span>
+            <span class="collapse__balance">{{totalExits}}</span>
           </div>
         </div>
         <div v-if="collapsedExits" class="collapse__content">
           <div class="collapse__section">
             <div class="collapse__section-item">
               <span>Comissões</span>
-              <span class="collapse__value-right">R$ {{ comissao }}</span>
+              <span class="collapse__value-right">{{ commission }}</span>
             </div>
             <div class="collapse__section-item">
               <span>Prêmio</span>
-              <span class="collapse__value-right">R$ {{ premio }}</span>
+              <span class="collapse__value-right">{{ award }}</span>
             </div>
             <div class="collapse__section-item">
               <span>Saque</span>
-              <span class="collapse__value-right">R$ {{ saque }}</span>
+              <span class="collapse__value-right">{{ withdraw }}</span>
             </div>
             <div class="collapse__line"></div>
           </div>
@@ -81,7 +81,7 @@
       <div class="result">
         <span>Resultado 01/06 à 06/06</span>
         <div class="result__date">
-          <span class="result__value">R$1,90</span>
+          <span class="result__value">000</span>
         </div>
       </div>
       <div class="collapse__line"></div>
@@ -89,7 +89,7 @@
           <span>Créditos</span>
           <div class="credit__date">
             <IconAdd class="credit__icon" />
-            <span class="credit__value">R$0,00</span>
+            <span class="credit__value">{{credit}}</span>
           </div>
         </div>
         <div class="collapse__line"></div>
@@ -97,14 +97,14 @@
           <span>Débitos</span>
           <div class="debit__date">
             <IconRemove class="debit__icon" />
-            <span class="debit__value">R$ 5,00</span>
+            <span class="debit__value">{{debit}}</span>
           </div>
         </div>
         <div class="collapse__line"></div>
         <div class="balance">
           <span>Saldo</span>
           <div class="balance__date">
-            <span class="balance__value">R$ 2,00</span>
+            <span class="balance__value">{{balance}}</span>
           </div>
         </div>
       </div>
@@ -145,14 +145,21 @@ export default {
     return {
       title: 'Apuração',
       balanceCalculation: null,
+      startDate: '2024-07-22',
+      endDate: '2024-07-28',
       date: "01/06/2024 - 06/06/2024",
       relatory: '31/05',
       value: '0,00',
-      totalApostado: '0,00',
-      recargasCartao: '0,00',
-      comissao: '2,10',
-      premio: '13,10',
-      saque: null,
+      totalBet: null,
+      rechargesCartao: null,
+      entry: null,
+      comissao: null,
+      totalExits: null,
+      award: null,
+      withdraw: null,
+      credit: null,
+      debit: null,
+      balance: null,
       modalityList: modalityList,
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
@@ -176,8 +183,17 @@ export default {
     },
     async getValue() {
       try {
-        const res = await getCalculationValue()
-        this.saque = res.saque;
+        const res = await getCalculationValue(this.startDate,this.endDate)
+        this.withdraw = formatCurrency(Number(res.withdraw ?? 0));
+        this.commission = formatCurrency(Number(res.total_comissao ?? 0));
+        this.award = formatCurrency(Number(res.total_premios ?? 0));
+        this.totalBet = formatCurrency(Number(res.total_apostado ?? 0));
+        this.entry = formatCurrency(Number(res.total_entradas ?? 0));
+        this.rechargesCartao = formatCurrency(Number(res.cartao ?? 0));
+        this.totalExits = formatCurrency(Number(res.total_saidas ?? 0));
+        this.credit = formatCurrency(Number(res.creditos ?? 0));
+        this.debit = formatCurrency(Number(res.debitos ?? 0));
+        this.balance = formatCurrency(Number(res.saldo ?? 0));
       } catch (error) {
         console.error('Error fetching data:', error)
       }
@@ -196,8 +212,6 @@ export default {
     iconArrowDinamicExits() {
       return this.collapsedExits ? IconArrowUp : IconArrowDown
     }
-    
-
   }
 }
 </script>
