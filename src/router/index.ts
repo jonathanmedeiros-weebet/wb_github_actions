@@ -104,7 +104,7 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/game-detail',
+      path: '/game-detail/:id',
       name: 'game-detail',
       component: GameDetailView,
       meta: {
