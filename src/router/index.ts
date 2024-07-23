@@ -20,6 +20,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
+      //TODO: DECIDIR QUAL O NOME DA RODA OU SE IRÁ REMOVE-LA
       name: 'root',
       component: LoginView,
     },
@@ -137,15 +138,15 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
 
-  const tokenIsValid = localStorageService.get('token');
+  const hasToken = localStorageService.get('token');
 
   if (to.meta?.auth) {
-    if (tokenIsValid) {
+    if (hasToken) {
       next();
     } else {
       next({ name: 'login' });
     }
-  } else if ((to.name === 'login' || to.name === 'root') && tokenIsValid) {
+  } else if ((to.name === 'login') && hasToken) {
     next({ name: 'home' });
   } else {
     next();
