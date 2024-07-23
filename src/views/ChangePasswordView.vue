@@ -66,7 +66,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100vh;
-  
+    
   &__container {
     flex: 1;
     display: flex;
@@ -81,6 +81,8 @@ export default {
   }
 
   &__button {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     margin-bottom: 20px;
   }

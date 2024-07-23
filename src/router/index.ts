@@ -1,6 +1,5 @@
 import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
-import CloseBetView from '@/views/CloseBetView.vue'
 import HomeView from '@/views/HomeView/HomeView.vue'
 import ValidationDetailView from '@/views/ValidationDetailView.vue'
 import ValidationView from '@/views/ValidationView.vue'
@@ -13,6 +12,7 @@ import ReckoningView from '@/views/ReckoningView.vue'
 import ResultsView from '@/views/ResultsView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
+import { localStorageService } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
 
 const router = new VueRouter({
@@ -27,73 +27,124 @@ const router = new VueRouter({
       path: '/home',
       name: 'home',
       component: HomeView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/validation-detail',
       name: 'validation-detail',
       component: ValidationDetailView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/validation',
       name: 'validation',
       component: ValidationView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/tickets',
       name: 'tickets',
       component: TicketsView,
-    },
-    {
-      path: '/close-bet',
-      name: 'close-bet',
-      component: CloseBetView
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/bets',
       name: 'bets',
       component: BetsView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/menu',
       name: 'menu',
       component: MenuView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/change-password',
       name: 'change-password',
       component: ChangePasswordView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/movements',
       name: 'movements',
       component: MovementsView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/reckoning',
       name: 'reckoning',
       component: ReckoningView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/results',
       name: 'results',
       component: ResultsView,
+      meta: {
+        auth: true
+      }
     },
     {
-      path: '/game-detail/:id',
+      path: '/game-detail',
       name: 'game-detail',
       component: GameDetailView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/config',
       name: 'config',
       component: ConfigView,
+      meta: {
+        auth: true
+      }
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: DashboardView
-    }
-    
+      component: DashboardView,
+      meta: {
+        auth: true
+      }
+    },
   ]
 })
+
+router.beforeEach(async (to, from, next) => {
+
+  const hasToken = localStorageService.get('token');
+
+  if (to.meta?.auth) {
+    if (hasToken) {
+      next();
+    } else {
+      next({ name: 'login' });
+    }
+  } else if ((to.name === 'login') && hasToken) {
+    next({ name: 'home' });
+  } else {
+    next();
+  }
+})
+
 export default router

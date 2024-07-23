@@ -15,11 +15,31 @@
         :type="inputType"
         @focus="handleFocus"
         @blur="handleBlur"
+        v-if="canMask"
         v-mask="mask"
         v-model="localValue"
-        maxlength="maxlength"
+        :maxlength="maxlength"
         @click="$emit('click')"
         @change="emitChange"
+        :value="value"
+        autocomplete="off"
+      />
+      <input
+        v-else
+        :id="name"
+        :name="name"
+        :placeholder="placeholder"
+        @input="handleInput"
+        class="input__field"
+        :type="inputType"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        v-model="localValue"
+        :maxlength="maxlength"
+        @click="$emit('click')"
+        @change="emitChange"
+        :value="value"
+        autocomplete="off"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
         
@@ -44,7 +64,7 @@ export default {
   props: {
     label: {
       type: String,
-      required: true
+      required: false
     },
     name: {
       type: String,
@@ -102,6 +122,9 @@ export default {
   computed: {
     password() {
       return this.value;
+    },
+    canMask() {
+      return !['email', 'number', 'date', 'password'].includes(this.initType);
     }
   }
 }

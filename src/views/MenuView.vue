@@ -85,6 +85,7 @@ import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
+import { logout } from '@/services';
 
 export default {
   name: 'menu',
@@ -113,6 +114,7 @@ export default {
   },
   methods: {
     handleLogout(){
+      logout();
       this.$router.replace('/');
     },
     handleNavigate(route) {
