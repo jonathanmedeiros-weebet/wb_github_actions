@@ -5,45 +5,41 @@
         <img class="user-info__icon" src="../assets/images/user-line.png" alt="User Icon">
         <div class="user-info__welcome">
           <span class="user-info__greeting">Olá,</span>
-          <span class="user-info__name">{{ name }}</span>
+          <span class="user-info__name">{{ userName }}</span>
         </div>
       </div>
-
       <div class="wallet">
         <div class="wallet__item">
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
-            R$ {{ isCreditoVisible ? credito : '*******' }}
-            <IconEyeClose v-if="isCreditoVisible" class="wallet__eye" @click="toggleCreditoVisibility" />
-            <IconEye v-else class="wallet__eye" @click="toggleCreditoVisibility" />
+            {{ isCreditoVisible ? '*******' : credit }}
+            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click="toggleCreditoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click="toggleCreditoVisibility" />
           </span>
         </div>
-
         <div class="wallet__item">
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
-            R$ {{ isSaldoVisible ? saldo : '*******' }}
-            <IconEyeClose v-if="isSaldoVisible" class="wallet__eye" @click="toggleSaldoVisibility" />
-            <IconEye v-else class="wallet__eye" @click="toggleSaldoVisibility" />
+            {{ isSaldoVisible ? '*******' : balance }}
+            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click="toggleSaldoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click="toggleSaldoVisibility" />
           </span>
         </div>
-
         <div class="wallet__shortcuts">
           <button class="wallet__button" @click="handleNavigate('/dashboard')">
-            <IconInsertChart  class="wallet__icon"/>
+            <IconInsertChart class="wallet__icon"/>
             Dashboard
           </button>
           <button class="wallet__button" @click="handleOpenConsultTicketModal">
             <IconManageSearch class="wallet__icon" />
             Consultar Bilhete
           </button>
-          <button @click="handleNavigate('/reckoning')"  class="wallet__button">
+          <button @click="handleNavigate('/reckoning')" class="wallet__button">
             <IconFactCheck class="wallet__icon" />
             Apuração
           </button>
         </div>
       </div>
-
       <div class="more-options">
         <span class="more-options__text">Mais opções</span>
         <div class="more-options__card">
@@ -70,7 +66,7 @@
         </div>
       </div> 
     </section>
-      <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="handleCloseConsultTicketModal" />
+    <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="handleCloseConsultTicketModal" />
   </div>
 </template>
 
@@ -85,6 +81,9 @@ import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
+import { logout, getBalance } from '@/services';
+import { formatCurrency } from '@/utilities';
+import { localStorageService } from "@/services";
 
 export default {
   name: 'menu',
@@ -100,19 +99,32 @@ export default {
     IconInsertChart,
     ModalConsultTicket
   },
-  name: 'menu-view',
   data() {
     return {
-      name: "Marcos Felipe",
-      credito: "850,00",
-      saldo: "18.258,00",
+      balanceData: null,
       isCreditoVisible: false,
       isSaldoVisible: false,
       isConsultTicketModalVisible: false
     };
   },
+  mounted() {
+    this.getData();
+  },
+  computed: {
+    balance() {
+      return formatCurrency(Number(this.balanceData?.saldo ?? 0));
+    },
+    credit() {
+      return formatCurrency(Number(this.balanceData?.credito ?? 0));
+    },
+    userName() {
+      const user = localStorageService.get('user');
+      return user ? user.nome : '';
+    }
+  },
   methods: {
-    handleLogout(){
+    handleLogout() {
+      logout();
       this.$router.replace('/');
     },
     handleNavigate(route) {
@@ -130,6 +142,14 @@ export default {
     handleCloseConsultTicketModal() {
       this.isConsultTicketModalVisible = false;
     },
+    async getData() {
+      try {
+        const res = await getBalance();
+        this.balanceData = res;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
   }
 }
 </script>
@@ -145,7 +165,6 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 25px;
-
     margin: 0;
     padding: 0 20px;
     padding-top: 70px;

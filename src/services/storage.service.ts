@@ -1,5 +1,7 @@
 export enum LocalStorageKey {
-    CONFIG_CLIENT = 'config_client'
+    CONFIG_CLIENT = 'config_client',
+    TOKEN = 'token',
+    USER = 'user'
 }
 
 export const localStorageService = {
@@ -14,4 +16,9 @@ export const localStorageService = {
         localStorage.removeItem(name)
     },
     removeAll: () => localStorage.clear()
+    ,
+    removeAuth: () => {
+        localStorage.removeItem(LocalStorageKey.TOKEN);
+        localStorage.removeItem(LocalStorageKey.USER);
+    }
 }
