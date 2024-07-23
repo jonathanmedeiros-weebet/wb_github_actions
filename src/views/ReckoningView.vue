@@ -7,7 +7,7 @@
     />
     <div class="reckoning__container">
       <span class="date">
-        {{ date }}
+        {{ this.startDate }} - {{this.endDate}}
         <IconClose class="date__close" />
       </span>
       <div class="balance">
@@ -123,7 +123,7 @@ import IconRemove from '@/components/icons/IconRemove.vue'
 import { getCalculationValue } from '@/services/reckoning.service'
 import { computed } from 'vue'
 import { formatCurrency } from '@/utilities'
-
+import { dateFormatInMonthAndYear } from '@/utilities'
 export default {
   name: 'reckoning',
   components: {
@@ -147,7 +147,6 @@ export default {
       balanceCalculation: null,
       startDate: '2024-07-22',
       endDate: '2024-07-28',
-      date: "01/06/2024 - 06/06/2024",
       relatory: '31/05',
       value: '0,00',
       totalBet: null,
@@ -165,6 +164,20 @@ export default {
       collapsedBet: this.initCollapsed,
       collapsedExits: this.initCollapsed
     }
+  },
+  computed: {
+    iconArrowDinamicInputs() {
+      return this.collapsedInputs ? IconArrowUp : IconArrowDown
+    },
+    iconArrowDinamicBet() {
+      return this.collapsedBet ? IconArrowUp : IconArrowDown
+    },
+    iconArrowDinamicExits() {
+      return this.collapsedExits ? IconArrowUp : IconArrowDown
+    }
+  },
+  mounted() {
+    this.getValue()
   },
   methods: {
     handleSelectModalClick() {
@@ -184,6 +197,7 @@ export default {
     async getValue() {
       try {
         const res = await getCalculationValue(this.startDate,this.endDate)
+        console.log(res);
         this.withdraw = formatCurrency(Number(res.withdraw ?? 0));
         this.commission = formatCurrency(Number(res.total_comissao ?? 0));
         this.award = formatCurrency(Number(res.total_premios ?? 0));
@@ -198,27 +212,11 @@ export default {
         console.error('Error fetching data:', error)
       }
     }
-  },
-  mounted() {
-    this.getValue()
-  },
-  computed: {
-    iconArrowDinamicInputs() {
-      return this.collapsedInputs ? IconArrowUp : IconArrowDown
-    },
-    iconArrowDinamicBet() {
-      return this.collapsedBet ? IconArrowUp : IconArrowDown
-    },
-    iconArrowDinamicExits() {
-      return this.collapsedExits ? IconArrowUp : IconArrowDown
-    }
   }
 }
 </script>
 
-
 <style lang="scss" scoped>
-
 .reckoning {
   color: #ffffff;
   height: auto;
