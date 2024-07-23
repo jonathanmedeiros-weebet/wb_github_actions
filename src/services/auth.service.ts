@@ -49,10 +49,8 @@ export const verifyToken = async () => {
             },
         });
         
-        if(resp){
-            if(resp.results == true){
-                return true;
-            }
+        if(resp && typeof resp === 'object' && resp.results == true){
+            return true;
         }
 
         return false;
@@ -68,4 +66,14 @@ export const verifyToken = async () => {
 
 export const logout = () => {
     localStorageService.removeAuth();
+}
+
+
+export const checkToken = async () => {
+    const token = localStorage.getItem('token');
+    if(!token) {
+        localStorageService.removeAll();
+        return false;
+    }
+    return verifyToken();
 }
