@@ -28,7 +28,7 @@
             <div
                 class="game__quota"
                 v-for="(quote, index) in quotes"
-                :class="{'game__quota--disabled': !quote.hasPermission}"
+                :class="{'game__quota--selected': quote.selected}"
                 :key="index"
                 @click="handleItemClick(quote)"
             >
@@ -105,7 +105,19 @@ export default {
             return convertInMomentInstance(this.game.horario).format('DD/MM HH:mm');
         },
         quotes() {
-            return this.rearrangeQuotes(this.game.cotacoes ?? []);
+            const quotes = this.game.cotacoes ?? [];
+            const newQuotes = [];
+
+            const homeQuote = quotes.find(quote => quote.chave.includes('casa'));
+            if(Boolean(homeQuote)) newQuotes.push(homeQuote);
+
+            const drawQuote = quotes.find(quote => quote.chave.includes('empate'));
+            if(Boolean(drawQuote)) newQuotes.push(drawQuote);
+
+            const outOfHomeQuote = quotes.find(quote => quote.chave.includes('fora'));
+            if(Boolean(outOfHomeQuote)) newQuotes.push(outOfHomeQuote);
+
+            return newQuotes;
         },
         teamScoreA() {
             return this.game.info.time_a_resultado ?? 0;
@@ -113,9 +125,6 @@ export default {
         teamScoreB() {
             return this.game.info.time_b_resultado ?? 0;
         },
-        ticketItemStore() {
-            // return this.ticketStore.ticket[this.game.id] ?? null
-        }
     },
     methods: {
         changeSrcWhenImageError (event) {
@@ -127,10 +136,10 @@ export default {
 
             const { items, addQuote, removeQuote } = useTicketStore();
             const gameExist = Boolean(items[this.game._id]);
-            const quoteExist = items[this.game.id]?.quoteKey == quota.chave;
+            const quoteExist = items[this.game._id]?.quoteKey == quota.chave;
 
             if(gameExist && quoteExist) {
-                removeQuote(this.game.id);
+                removeQuote(this.game._id);
             } else {
                 addQuote({
                     gameId: this.game._id,
@@ -148,22 +157,6 @@ export default {
         isDecreasedQuote(quote) {
             return Boolean(quote.status) && quote.status === QuotaStatus.DECREASED;
         },
-        rearrangeQuotes(quotes) {
-            console.log(this.ticketItemStore)
-            const newQuotes = [];
-            const homeQuote = quotes.find(quote => quote.chave.includes('casa'));
-            // homeQuote.selected = (this.ticketItemStore.quoteKey ?? null) == homeQuote.chave;
-            if(Boolean(homeQuote)) newQuotes.push(homeQuote);
-
-            const drawQuote = quotes.find(quote => quote.chave.includes('empate'));
-            // drawQuote.selected = (this.ticketItemStore.quoteKey ?? null) == drawQuote.chave;
-            if(Boolean(drawQuote)) newQuotes.push(drawQuote);
-
-            const outOfHomeQuote = quotes.find(quote => quote.chave.includes('fora'));
-            // outOfHomeQuote.selected = (this.ticketItemStore.quoteKey ?? null) == outOfHomeQuote.chave;
-            if(Boolean(outOfHomeQuote)) newQuotes.push(outOfHomeQuote);
-            return newQuotes;
-        }
     }
 }
 </script>
@@ -248,6 +241,9 @@ export default {
         height: 54px;
         border-radius: 4px;
         background: var(--color-background);
+        &--selected {
+            background: var(--color-primary);
+        }
     }
 
     &__value-quota {

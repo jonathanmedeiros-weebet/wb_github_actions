@@ -27,7 +27,8 @@ export const useTicketStore = defineStore('ticket', {
             quoteKey,
             quoteValue
         }: any) {
-            this.items[gameId] = {
+            const items = { ...this.items };
+            items[gameId] = {
                 gameId,
                 gameName,
                 eventId,
@@ -35,10 +36,18 @@ export const useTicketStore = defineStore('ticket', {
                 quoteKey,
                 quoteValue
             };
+            this.items = { ...items }
         },
-
         removeQuote(gameId: number) {
-            delete this.items[gameId];
+            const items = { ...this.items };
+            delete items[gameId];
+            this.items = { ...items };
+        },
+        clear() {
+            this.items = {};
+            this.bettor = '';
+            this.value = 0;
+            this.accepted = false;
         }
     },
 })
