@@ -157,7 +157,6 @@ export default {
       collapsedExits: this.initCollapsed,
     }
   },
-
   computed: {
     iconArrowDinamicInputs() {
       return this.collapsedInputs ? IconArrowUp : IconArrowDown;
