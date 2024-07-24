@@ -5,7 +5,6 @@
       :showCalendarButton="true" 
       :showBackButton="true"
       @calendarClick="handleOpenCalendarModal"
-      @searchClick="handleOpenSearchModal"
     />
     <ModalCalendar
       v-if="showModalCalendar"
@@ -119,7 +118,6 @@ import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 import { getCalculationValue } from '@/services/reckoning.service'
-import { computed } from 'vue'
 import moment from 'moment';
 import { formatCurrency } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
@@ -195,9 +193,6 @@ export default {
       this.handleCloseCalendarModal();
       await this.getValue();
     },
-    handleOpenSearchModal() {
-      console.log('Open search modal')
-    },
     toggleCollapse(section, event) {
       if (section === 'input') {
         this.collapsedInputs = !this.collapsedInputs
@@ -211,7 +206,6 @@ export default {
     async getValue() {
       try {
         const res = await getCalculationValue(this.startDate, this.endDate)
-        console.log(res)
         this.withdraw = formatCurrency(Number(res.withdraw ?? 0))
         this.commission = formatCurrency(Number(res.total_comissao ?? 0))
         this.award = formatCurrency(Number(res.total_premios ?? 0))
@@ -231,8 +225,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .reckoning {
-  color: #ffffff;
+  color: var(--color-text);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -268,7 +263,7 @@ export default {
   cursor: pointer;
 
   &__title {
-    color: #FFF;
+    color: var(--color-text);
     font-size: 14px;
     font-style: normal;
     display: flex;
@@ -344,7 +339,7 @@ export default {
   &__line {
     width: 100%;
     height: 1px;
-    background: #FFFFFF;
+    background: var(--color-text);
     opacity: 0.1;
   }
 }
