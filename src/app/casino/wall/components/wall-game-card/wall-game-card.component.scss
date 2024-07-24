@@ -5,7 +5,7 @@
     min-height: 125px;
 
     &--inline {
-        width: 150px;
+        width: 130px;
         min-height: 144px;
     }
 
@@ -145,6 +145,22 @@
     margin-top: 0;
 }
 
+@media only screen and (min-width: 360px)  and (max-width: 375px) {
+    .game-card {
+        width: 100%;
+
+        &--inline {
+            min-width: 145px;
+            max-width: 145px;
+        }
+
+        &__image {
+            min-height: 160px;
+            height: auto;
+        }
+    }
+}
+
 @media only screen and (min-width: 687px) {
     .game-card--default {
         width: calc((100vw / 4) - 16px);
@@ -156,6 +172,22 @@
     }
 }
 
+@media only screen and (min-width: 884px)  and (max-width: 890px) {
+    .game-card {
+        width: 100%;
+
+        &--inline {
+            min-width: 150px;
+            max-width: 150px;
+        }
+
+        &__image {
+            min-height: 150px;
+            height: auto;
+        }
+    }
+}
+
 @media only screen and (min-width: 1025px) {
     .game-card {
         width: 100%;
@@ -164,8 +196,8 @@
             width: calc((100vw / 6) - 16px);
             margin: 0;
     
-            min-width: 216px;
-            max-width: 216px;
+            min-width: 170px;
+            max-width: 170px;
         }
 
         &--default {
@@ -193,5 +225,21 @@
     .game-button--demo,
     .game-button--play {
         height: 42px !important;
+    }
+}
+
+@media only screen and (min-width: 1025px){
+    .game-card {
+        width: 100%;
+
+        &--inline {
+            min-width: 200px;
+            max-width: 200px;
+        }
+
+        &__image {
+            min-height: 200px;
+            height: auto;
+        }
     }
 }

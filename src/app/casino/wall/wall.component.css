@@ -336,3 +336,15 @@
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+@media only screen and (min-width: 1500px) {
+    .game-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+@media only screen and (min-width: 2300px) {
+    .game-grid {
+        grid-template-columns: repeat(10, 1fr);
+    }
+}
