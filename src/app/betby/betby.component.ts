@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CadastroModalComponent, LoginModalComponent } from '../shared/layout/modals';
 import { AuthService } from 'src/app/services';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DepositoComponent } from '../clientes/deposito/deposito.component';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,11 +17,14 @@ declare function BTRenderer(): void;
 export class BetbyComponent implements OnInit, OnDestroy {
 
     private bt: any;
-    private langs = { pt: 'pt-br', en: 'en' };
+    private queryParamsSubscription: any;
+    private langs = { pt: 'pt-br', en: 'en', es: 'es' };
+    private heightHeader = 92;
 
     constructor(
         private modalService: NgbModal,
         private router: Router,
+        private route: ActivatedRoute,
         private authService: AuthService,
         private translate: TranslateService,
     ) {
@@ -31,6 +34,11 @@ export class BetbyComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+
+        if (window.innerWidth <= 1024) {
+            this.heightHeader = 103;
+        }
+
         setTimeout(() => {
             console.log(this.translate.currentLang);
             let currentLang = this.translate.currentLang;
@@ -41,6 +49,13 @@ export class BetbyComponent implements OnInit, OnDestroy {
             );
         }, 500);
 
+        this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+            console.log('Query Params changed:', params);
+            if (this.bt) {
+                this.bt.updateOptions({url: params['bt-path']});
+            }
+        });
+
         this.translate.onLangChange.subscribe(
             change => {
                 this.onChangeLang(change.lang);
@@ -50,6 +65,9 @@ export class BetbyComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.bt.kill();
+        if (this.queryParamsSubscription) {
+            this.queryParamsSubscription.unsubscribe();
+        }
     }
 
     onChangeLang(lang: string) {
@@ -69,12 +87,12 @@ export class BetbyComponent implements OnInit, OnDestroy {
         this.bt = new BTRenderer().initialize({
             brand_id: '2415231049618558976',
             token: token ?? null,
-            themeName: "get-x",
+            themeName: "demo-turquoise-dark-table",
             lang: this.langs[lang],
             target: document.getElementById('betby'),
-            betSlipOffsetTop: 0,
-            stickyTop: 0,
-            betslipZIndex: 0,
+            betSlipOffsetTop: this.heightHeader,
+            stickyTop: this.heightHeader,
+            betslipZIndex: 95,
             onTokenExpired: () => that.refreshTokenExpired(),
             onRouteChange: (path: string) => console.log('PATH', path),
             onLogin: () => that.openLogin(),

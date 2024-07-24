@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MainLayoutComponent, AuthLayoutComponent } from './shared/layout/app-layouts';
+import { MainLayoutComponent, AuthLayoutComponent, BetbyLayoutComponent } from './shared/layout/app-layouts';
 
 import { AoVivoGuard, AuthGuard, DesafioGuard, LoteriaGuard } from './services';
 import { CupomComponent } from './cupom/cupom.component';
@@ -37,10 +37,6 @@ const appRoutes: Routes = [
             {
                 path: 'login',
                 component: AppComponent
-            },
-            {
-                path: 'betby',
-                component: BetbyComponent
             },
             {
                 path: 'acumuladao',
@@ -127,6 +123,16 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard, CambistaGuard],
                 loadChildren: () => import('./cambistas/cambistas.module').then(c => c.CambistasModule)
             }
+        ]
+    },
+    {
+        path: '',
+        component: BetbyLayoutComponent,
+        children: [
+            {
+                path: 'sports',
+                component: BetbyComponent
+            },
         ]
     },
     {

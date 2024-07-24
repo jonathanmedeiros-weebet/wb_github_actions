@@ -27,7 +27,7 @@ export class HomeGuard implements CanActivate {
         const { pagina_inicial, casino, esporte, betby } = this.paramsService.getOpcoes();
 
         if (betby) {
-            this.pages.esporte = 'betby';
+            this.pages.esporte = 'sports';
         }
 
         if (pagina_inicial) {
