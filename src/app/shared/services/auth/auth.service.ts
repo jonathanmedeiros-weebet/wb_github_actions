@@ -143,10 +143,10 @@ export class AuthService {
             );
     }
 
-    getTokenBetby() {
+    getTokenBetby(lang: string) {
         const token = this.getToken();
 
-        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token }, this.header.getRequestOptions())
+        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token, lang }, this.header.getRequestOptions())
             .pipe(
                 map(res => {
                     localStorage.setItem('tokenBetby', res.token);
@@ -156,10 +156,10 @@ export class AuthService {
             );
     }
 
-    refreshTokenBetby() {
+    refreshTokenBetby(lang: string) {
         const token = this.getTokenBetbyStorage();
 
-        return this.http.post<any>(`${this.authLokiUrl}/betby/refresh-token`, { token }, this.header.getRequestOptions())
+        return this.http.post<any>(`${this.authLokiUrl}/betby/refresh-token`, { token, lang }, this.header.getRequestOptions())
             .pipe(
                 map(res => {
                     if (res.refresh) {

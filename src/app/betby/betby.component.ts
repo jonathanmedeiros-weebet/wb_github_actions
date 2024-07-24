@@ -35,14 +35,13 @@ export class BetbyComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        if (window.innerWidth <= 1024) {
+        if (window.innerWidth <= 1280) {
             this.heightHeader = 103;
         }
 
         setTimeout(() => {
-            console.log(this.translate.currentLang);
             let currentLang = this.translate.currentLang;
-            this.authService.getTokenBetby().subscribe(
+            this.authService.getTokenBetby(currentLang).subscribe(
                 (res) => {
                     this.betbyInitialize(res.token, currentLang);
                 }
@@ -73,7 +72,7 @@ export class BetbyComponent implements OnInit, OnDestroy {
     onChangeLang(lang: string) {
         if (this.bt) {
             this.bt.kill();
-            this.authService.getTokenBetby().subscribe(
+            this.authService.getTokenBetby(lang).subscribe(
                 (res) => {
                     this.betbyInitialize(res.token, lang);
                 }
@@ -105,7 +104,7 @@ export class BetbyComponent implements OnInit, OnDestroy {
 
     refreshTokenExpired() {
         return new Promise((resolve, reject) => {
-            this.authService.refreshTokenBetby().subscribe(
+            this.authService.refreshTokenBetby(this.translate.currentLang).subscribe(
                 (res) => {
                     if (res.refresh) {
                         resolve(res.token);
@@ -121,7 +120,7 @@ export class BetbyComponent implements OnInit, OnDestroy {
     }
 
     refreshSession() {
-        this.authService.refreshTokenBetby().subscribe(
+        this.authService.refreshTokenBetby(this.translate.currentLang).subscribe(
             (response) => {
                 location.reload();
             },
