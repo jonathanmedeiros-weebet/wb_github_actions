@@ -201,16 +201,14 @@ export default {
       this.showModalCalendar = false;
     },
     handleCalendar(dateTime) {
-      console.log(dateTime)
+      console.log(dateTime._d)
       this.handleCloseCalendarModal()
     },
     handleOpenSearchModal() {
       console.log('Open search modal')
     },
     toggleCollapse(section, event) {
-      console.log(section)
       if (section === 'input') {
-        console.log(this.startDate);
         this.collapsedInputs = !this.collapsedInputs
       } else if (section === 'exit') {
         this.collapsedExits = !this.collapsedExits
@@ -222,7 +220,6 @@ export default {
     async getValue() {
       try {
         const res = await getCalculationValue(this.startDate, this.endDate)
-        console.log(res)
         this.withdraw = formatCurrency(Number(res.withdraw ?? 0))
         this.commission = formatCurrency(Number(res.total_comissao ?? 0))
         this.award = formatCurrency(Number(res.total_premios ?? 0))
