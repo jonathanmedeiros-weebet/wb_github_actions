@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DepositoComponent} from './deposito.component';
+import { DepositoOpenModalComponent } from './deposito-open-modal.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: DepositoComponent
+        component: window.innerWidth < 1024 ? DepositoOpenModalComponent : DepositoComponent
     },
 ];
 
