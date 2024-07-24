@@ -149,8 +149,6 @@ export default {
       balanceCalculation: null,
       startDate: moment().format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
-      relatory: '31/05',
-      value: '0,00',
       totalBet: null,
       rechargesCartao: null,
       entry: null,
