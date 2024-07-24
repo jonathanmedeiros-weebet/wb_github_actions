@@ -17,15 +17,6 @@
         {{ startDate }} - {{ endDate }}
         <IconClose class="date__close" />
       </span>
-      <div class="balance">
-        <div class="balance__date">
-          <span class="balance__relatory">Saldo em {{ relatory }}</span>
-          <span class="balance__value">
-            <IconAdd class="balance__add" />
-            R$ {{ value }}
-          </span>
-        </div>
-      </div>
       <div class="collapse" @click="toggleCollapse('input', $event)">
         <div class="collapse__item">
           <component :is="iconArrowDinamicInputs" />
@@ -200,9 +191,11 @@ export default {
     handleCloseCalendarModal() {
       this.showModalCalendar = false;
     },
-    handleCalendar(dateTime) {
-      console.log(dateTime._d)
-      this.handleCloseCalendarModal()
+    async handleCalendar(dateTime) {
+      this.startDate = moment(dateTime._d).format('YYYY-MM-DD');
+      this.endDate = moment(dateTime._d).format('YYYY-MM-DD');
+      this.handleCloseCalendarModal();
+      await this.getValue();
     },
     handleOpenSearchModal() {
       console.log('Open search modal')
@@ -220,6 +213,7 @@ export default {
     async getValue() {
       try {
         const res = await getCalculationValue(this.startDate, this.endDate)
+        console.log(res)
         this.withdraw = formatCurrency(Number(res.withdraw ?? 0))
         this.commission = formatCurrency(Number(res.total_comissao ?? 0))
         this.award = formatCurrency(Number(res.total_premios ?? 0))
@@ -269,24 +263,6 @@ export default {
   
   &__close {
     cursor: pointer;
-  }
-}
-
-.balance {
-  padding-top: 8px;
-  &__date {
-    display: flex;
-    gap: 25px;
-  }
-
-  &__value {
-    display: flex;
-    align-items: center;
-  }
-
-  &__add {
-    fill: var(--color-primary);
-    padding: 1px;
   }
 }
 
