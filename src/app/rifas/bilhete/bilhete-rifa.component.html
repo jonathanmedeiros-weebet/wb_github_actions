@@ -1,0 +1,80 @@
+<section class="pre-bilhete" [ngClass]="{'pre-bilhete-mobile': displayPreTicker}">
+    <div class="bilhete-container">
+        <div class="titulo-bilhete">
+            <a (click)="closeCupom()" class="botao-esquerdo" *ngIf="mobileScreen">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <div class="titulo">{{'bilhete.titulo' | translate}}</div>
+            <div class="botao-direito" *ngIf="mobileScreen"></div>
+        </div>
+        <div class="acoes-bilhete">
+            {{'bilhete.eventosSelecionados' | translate}}<br>
+            <h5><span *ngIf="sorteio">{{soterio.titulo}}</span></h5>
+            <p *ngIf="sorteio">{{soterio.nome}}</p>
+            <p *ngIf="sorteio">Valor do número: {{soterio.valor_numero | currency}}</p>
+            <a [ngClass]="{'disabled': numeros == 0}" (click)="removerNumeros()">
+                <i class="fa-solid fa-trash"></i> {{'bilhete.removerTodos' | translate}}
+            </a>
+        </div>
+
+        <div class="footer-bilhete">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="div-inputs">
+                    <div class="form-group" *ngIf="!isCliente && modoCambista">
+                        <div class="input-md">
+                            <input type="text" id="nomeApostador" formControlName="apostador"
+                                   [ngClass]="applyCssInputError('apostador')"
+                                   class="form-control inverted-out" placeholder=" ">
+                            <label for="nomeApostador">{{'bilhete.nomeDoApostador' | translate}}</label>
+                        </div>
+
+                        <app-error-msg [control]="form.get('apostador')" label="{{'geral.apostador' | translate}} "></app-error-msg>
+                    </div>
+
+                    <div class="valores" [ngClass]="{'fadeIn': sorteio, 'fadeOut': !sorteio}">
+                        <button type="button" (click)="adicionarNumeros(1)" class="btn btn-sm">+1</button>
+                        <button type="button" (click)="adicionarNumeros(5)" class="btn btn-sm">+5</button>
+                        <button type="button" (click)="adicionarNumeros(10)" class="btn btn-sm">+10</button>
+                        <button type="button" (click)="adicionarNumeros(20)" class="btn btn-sm">+20</button>
+                    </div>
+                    <div class="informations">
+                        Quantidade de Números:
+                        <span class="">{{form.value.numeros}}</span>
+                        <br>
+                        {{'bilhete.valorDaAposta' | translate}}:
+                        <span class="valor">{{form.value.valor  | currency}}</span>
+                    </div>
+                </div>
+                <div class="form-group submit-buttons">
+                    <button *ngIf="!disabled; else btnProcessando" (click)="submit()" [attr.disabled]="numeros <= 0 ? true : none"
+                            class="btn btn-custom btn-block">
+                        {{'bilhete.comprar' | translate}} <b>({{numeros}})</b>
+                    </button>
+                    <ng-template #btnProcessando>
+                        <button disabled class="btn btn-custom btn-block">
+                            {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </ng-template>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<ng-template #apostaDeslogadoModal let-modal>
+    <div class="modal-body" id="aposta-deslogado">
+        <div class="buttons">
+            <button type="button" class="btn btn-custom2" (click)="modalRef.dismiss()">{{'modais.fechar' | translate}}</button>
+            <button type="button" class="btn btn-custom" *ngIf="!disabled; else processandoPreAposta"
+                    (click)="finalizarApostaDeslogado()">
+                {{'modais.finalizar' | translate}}
+            </button>
+            <ng-template #processandoPreAposta>
+                <button disabled class="btn btn-custom">
+                    {{'geral.processando' | translate}}... <i class="fa fa-spinner fa-spin"></i>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+</ng-template>

@@ -15,6 +15,7 @@ import {ApostaLoteriaService} from '../../shared/services/loteria/aposta-loteria
 import {ApostasClienteCasinoComponent} from './apostas-cliente-casino/apostas-cliente-casino.component';
 
 
+
 @NgModule({
     declarations: [
         ApostasClienteComponent,

@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
 import { HomeComponent } from './home/home.component';
+import {RifaGuard} from './shared/services/guards/rifa.guard';
 
 const appRoutes: Routes = [
     {
@@ -80,6 +81,11 @@ const appRoutes: Routes = [
                 path: 'loterias',
                 loadChildren: () => import('./loterias/loterias.module').then(m => m.LoteriasModule),
                 canActivate: [LoteriaGuard]
+            },
+            {
+                path: 'rifas',
+                loadChildren: () => import('./rifas/rifas.module').then(m => m.RifasModule),
+                canActivate: [RifaGuard]
             },
             {
                 path: 'resultados',

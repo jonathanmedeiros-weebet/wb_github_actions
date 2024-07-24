@@ -1,8 +1,8 @@
 .background-cassino {
-    background-image: url('https://weebet.s3.amazonaws.com/cdn/img/cassino-full-screen.webp');
+    /*background-image: url('https://weebet.s3.amazonaws.com/cdn/img/cassino-full-screen.webp');*/
 }
 .background-esporte {
-    background-image: url('https://weebet.s3.amazonaws.com/cdn/img/esportivo-full-scren.webp');
+    /*background-image: url('https://weebet.s3.amazonaws.com/cdn/img/esportivo-full-scren.webp');*/
 }
 .welcome-container {
     position: relative;
@@ -20,11 +20,11 @@
     z-index: 3000;
 }
 .info-emphasis {
-    text-align: center; 
-    font-size: 40px; 
-    font-style: normal; 
-    font-weight: 700; 
-    line-height: normal; 
+    text-align: center;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
     margin-top: 55px;
     padding: 0 16px;
 }
@@ -77,7 +77,7 @@
     background-color: rgba(var(--highlight-rgb), 0.3);
     border-radius: 50%;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     margin-bottom: 16px;
 }
 svg {
@@ -116,7 +116,7 @@ svg {
         width: 200px;
     }
 }
-    
+
 @media (max-width: 530px) {
     .background-cassino {
         background-image: url('https://weebet.s3.amazonaws.com/cdn/img/cassino-smartphone.webp');
