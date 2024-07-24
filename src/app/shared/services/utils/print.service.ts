@@ -897,6 +897,14 @@ export class PrintService {
                     <p>
                         <b>HORÁRIO:</b> ${this.helperService.dateFormat(aposta.horario, 'DD/MM/YYYY [ÀS] HH:mm')}
                     </p>
+                    <p>
+                        <b>STATUS: </b>
+                        <span>${aposta.ativo ? 'ATIVO' : 'CANCELADO'}</span>
+                    </p>
+                    <p>
+                        <b>RESULTADO: </b>
+                        <span>${aposta.resultado ? aposta.resultado : 'aguardando'}</span>
+                    </p>
                 </div>
                 <hr>
                 <hr>
