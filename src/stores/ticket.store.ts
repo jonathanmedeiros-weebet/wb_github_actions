@@ -1,4 +1,7 @@
 import { defineStore } from "pinia"
+import { useConfigClient } from "./configClient.store";
+import { useToastStore } from "./toast.store";
+import { ToastType } from "@/enums";
 
 export const useTicketStore = defineStore('ticket', {
     state: () => ({
@@ -6,9 +9,12 @@ export const useTicketStore = defineStore('ticket', {
         value: 0,
         items: {} as any,
         accepted: false,
-
+        error: ''
     }),
     actions: {
+        setError(error: string) {
+            this.error = error
+        },
         setBettor(bettor: string) {
             this.bettor = bettor;
         },
@@ -28,9 +34,27 @@ export const useTicketStore = defineStore('ticket', {
             quoteKey,
             quoteValue,
             quoteName,
-            quoteGroupName
+            quoteGroupName,
+            favorite
         }: any) {
             const items = { ...this.items };
+
+            if(!Boolean(items[gameId])) {
+                const { options } = useConfigClient();
+                const { quantidade_max_jogos_bilhete } = options;
+                const qtdItems = Object.values(items).length;
+
+                if(qtdItems >= quantidade_max_jogos_bilhete) {
+                    const { setToastConfig } = useToastStore();
+                    setToastConfig({
+                        message: 'Desculpe, você atingiu a quantidade MÁXIMA de apostas.',
+                        type: ToastType.DANGER,
+                        duration: 3000
+                    });
+                    return;
+                }
+            }
+
             items[gameId] = {
                 gameId,
                 gameName,
@@ -40,7 +64,8 @@ export const useTicketStore = defineStore('ticket', {
                 quoteKey,
                 quoteValue,
                 quoteName,
-                quoteGroupName
+                quoteGroupName,
+                favorite
             };
             this.items = { ...items }
         },

@@ -153,7 +153,8 @@ export default {
                     quoteKey: quota.chave,
                     quoteValue: quota.valor,
                     quoteName: quoteLabel,
-                    quoteGroupName: 'Resultado final'
+                    quoteGroupName: 'Resultado final',
+                    favorite: this.game.favorito
                 })
             }
         },

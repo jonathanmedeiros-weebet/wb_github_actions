@@ -14,7 +14,7 @@ export const authUser = async (
         password: password
     }
     try {
-        const resp = await axiosInstance().post(url, user); 
+        const resp: any = await axiosInstance().post(url, user); 
 
         if(resp.success){
             
@@ -42,7 +42,7 @@ export const verifyToken = async () => {
     }
   
     try {
-        const resp = await axiosInstance().get(url);
+        const resp: any = await axiosInstance().get(url);
         
         if(resp && typeof resp === 'object' && resp.results == true){
             return true;

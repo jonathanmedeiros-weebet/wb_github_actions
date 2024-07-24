@@ -110,7 +110,8 @@ export default {
                     quoteKey: odd.key,
                     quoteValue: odd.value,
                     quoteName: odd.label,
-                    quoteGroup: groupName
+                    quoteGroup: groupName,
+                    favorite: this.game.favorito
                 })
             }
         },

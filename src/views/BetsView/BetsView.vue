@@ -27,7 +27,7 @@
           label="Data"
           placeholder="dd/mm/aaaa"
           type="date"
-          @click="handleOpenCalendarModal"
+          @focus="handleOpenCalendarModal"
           v-model="dateFilter"
           
         />

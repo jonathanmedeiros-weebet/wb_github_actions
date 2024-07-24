@@ -68,7 +68,7 @@
 <script>
 import { modalityList, countriesWithFemaleNames } from '@/constants'
 import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship, prepareLiveQuote, SocketService } from '@/services'
-import { useConfigClient, useHomeStore } from '@/stores'
+import { useConfigClient, useHomeStore, useToastStore } from '@/stores'
 
 import Header from '@/components/layouts/Header.vue'
 import SelectFake from './parts/SelectFake.vue'
@@ -91,6 +91,7 @@ import IconVoleiball from '@/components/icons/IconVoleiball.vue'
 import IconESport from '@/components/icons/IconESport.vue'
 import { Modalities } from '@/enums'
 import LiveButton from './parts/LiveButton.vue'
+import Toast from '@/components/Toast.vue'
 
 export default {
   name: 'home',
@@ -114,7 +115,8 @@ export default {
     IconFutsal,
     IconVoleiball,
     IconESport,
-    LiveButton
+    LiveButton,
+    Toast
   },
   data() {
     return {
@@ -126,6 +128,7 @@ export default {
       modalityList: modalityList(),
       regionSelected: '',
       homeStore: useHomeStore(),
+      toastStore: useToastStore(),
       socket: new SocketService()
     }
   },
@@ -165,7 +168,7 @@ export default {
     },
     dateSelected() {
       return this.homeStore.date;
-    }
+    },
   },
   methods: {
     async pageLoad() {
@@ -451,6 +454,10 @@ export default {
     eventSocketDisconnect() {
       this.socket.exitEventsRoom();
       this.socket.disconnect();
+    },
+
+    handleCloseToast() {
+      this.toastStore.setToastConfig({ message: '' });
     }
   },
   destroyed() {

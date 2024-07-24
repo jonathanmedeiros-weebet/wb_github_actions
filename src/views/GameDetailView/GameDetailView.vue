@@ -36,7 +36,7 @@ import { MarketTime, Modalities, QuotaStatus } from '@/enums'
 import Collapse from '@/components/Collapse.vue'
 import Button from '@/components/Button.vue'
 import { getGame, hasQuotaPermission, calculateQuota, SocketService, prepareLiveQuote } from '@/services'
-import { useConfigClient } from '@/stores'
+import { useConfigClient, useToastStore } from '@/stores'
 import TimeQuotes from './parts/TimeQuotes.vue'
 import PlayerQuotes from './parts/PlayerQuotes.vue'
 import GameDetailSkeleton from './parts/GameDetailSkeleton.vue'
@@ -49,7 +49,7 @@ export default {
         Button,
         TimeQuotes,
         PlayerQuotes,
-        GameDetailSkeleton
+        GameDetailSkeleton,
     },
     name: 'game-detail',
     data() {
@@ -65,7 +65,8 @@ export default {
                 [MarketTime.TOTAL]: []
             },
             loading: false,
-            socket: new SocketService()
+            socket: new SocketService(),
+            toastStore: useToastStore(),
         }
     },
     async created() {
@@ -132,11 +133,9 @@ export default {
         },
         options() {
             return this.markets[this.filterSelected]
-        }
+        },
     },
     methods: {
-        hasQuotaPermission,
-        calculateQuota,
         async prepareGameDetail() {
             try {
                 const gameId = String(this.$route.params.id);
@@ -181,7 +180,7 @@ export default {
                     }
                 }
 
-                const finalValue = this.calculateQuota({
+                const finalValue = calculateQuota({
                     value: quote.valor,
                     key: quote.chave,
                     gameEventId: this.game.event_id,
@@ -197,7 +196,7 @@ export default {
                     id: quote._id,
                     finalValue,
                     status: quote.status ?? QuotaStatus.DEFAULT,
-                    hasPermission: this.hasQuotaPermission(finalValue)
+                    hasPermission: hasQuotaPermission(finalValue)
                 });
             }
 
@@ -250,7 +249,7 @@ export default {
                         playerIndex = quoteGroups[groupIndex].players.length - 1
                     }
 
-                    const finalValue = this.calculateQuota({
+                    const finalValue = calculateQuota({
                         value: odd.value,
                         key: odd.key,
                         gameEventId: this.game.event_id,
@@ -265,7 +264,7 @@ export default {
                         key: playerKey,
                         label: quote.name,
                         finalValue,
-                        hasPermission: this.hasQuotaPermission(finalValue)
+                        hasPermission: hasQuotaPermission(finalValue)
                     })
                 }
             }
@@ -282,6 +281,10 @@ export default {
                 this.game.cotacoes_aovivo = prepareLiveQuote(this.game.cotacoes_aovivo ?? [], event.cotacoes_aovivo ?? []);
                 this.prepareQuotes()
             })
+        },
+
+        handleCloseToast() {
+            this.toastStore.setToastConfig({ message: '' });
         }
     },
     destroyed() {

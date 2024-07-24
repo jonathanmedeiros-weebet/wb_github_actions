@@ -69,7 +69,7 @@ export default {
                 newChampionship.jogos = championship.jogos.map((game) => {
                     const newGame = { ...game };
                     newGame.cotacoes = newGame.cotacoes.map(quota => {
-                        const finalValue = this.calculateQuota({
+                        const finalValue = calculateQuota({
                             value: quota.valor,
                             key: quota.chave,
                             gameEventId: newGame.event_id,
@@ -77,7 +77,7 @@ export default {
                             isLive: newGame.ao_vivo
                         });
 
-                        const hasPermission = this.hasQuotaPermission(finalValue)
+                        const hasPermission = hasQuotaPermission(finalValue)
                         const quoteKey = this.ticketStore.items[newGame._id]
                             ? this.ticketStore.items[newGame._id].quoteKey
                             : null;
@@ -97,8 +97,6 @@ export default {
         }
     },
     methods: {
-        hasQuotaPermission,
-        calculateQuota,
         handleClick(gameId) {
             this.$emit('gameClick', gameId);
         },

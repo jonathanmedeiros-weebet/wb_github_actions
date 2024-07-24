@@ -1,12 +1,5 @@
 <template>
   <div class="login">
-    <toast 
-      v-if="showToast" 
-      type="danger" 
-      @close="showToast = false"
-    >
-      {{ toastText }}
-     </toast>
     <div class="login__container">
       <img class="login__image" src="@/assets/images/weebet_logo_verde.png">
       <div class="login__header">
@@ -55,7 +48,8 @@ import WButton from '@/components/Button.vue'
 import IconUserLine from '@/components/icons/IconUserLine.vue'
 import IconPassword from '@/components/icons/IconPassword.vue'
 import { authUser } from '@/services'
-import Toast from '@/components/Toast.vue'
+import { useToastStore } from '@/stores'
+import { ToastType } from '@/enums'
 
 export default {
   name: 'login',
@@ -64,33 +58,36 @@ export default {
     WButton,
     IconUserLine,
     IconPassword,
-    Toast
   },
   data() {
     return {
-      showToast: false,
-      toastText: '',
       username: '',
       password: '',
+      toastStore: useToastStore()
     }
   },
   methods: {    
     async handleClick() {
       try {
-        this.showToast = false;
+        this.toastStore.setToastConfig({ message: '' })
         const resp = await authUser(this.username, this.password);
         if(resp) {
           this.$router.replace('/home');
         }else{
-          this.toastText = 'Usuário ou Senha inválido';
-          this.showToast = true;
+          this.toastStore.setToastConfig({
+            message: 'Usuário ou senha inválida',
+            type: ToastType.DANGER,
+            duration: 3000
+          })
         }
-      } catch (error) {
-        this.toastText = error.response?.data?.errors?.message ?? 'Usuário ou Senha inválido';
-        this.showToast = true;
+      } catch ({ errors }) {
+        this.toastStore.setToastConfig({
+          message: errors?.message ?? 'Usuário ou Senha inválido',
+          type: ToastType.DANGER,
+          duration: 3000
+        })
       }
     }
-    
   }
 }
 </script>

@@ -1,7 +1,11 @@
 <template>
-    <div class="toast" :class="`toast--${type}`">
+    <div
+        v-show="showToast"
+        class="toast"
+        :class="`toast--${typeToast}`"
+    >
         <div class="toast__container">
-            <slot />
+            {{ messageToast }}
         </div>
         <div class="toast__close_icon" @click="handleClick">
             <icon-close ></icon-close>
@@ -10,30 +14,47 @@
 </template>
 
 <script>
+import { useToastStore } from '@/stores';
 import IconClose from './icons/IconClose.vue'
 export default {
   components: { IconClose },
     name: 'toast',
-    props: {
-        type: {
-            type: String,
-            default: 'success'
+    data() {
+        return {
+            timeoutInstance: null,
+            toastStore: useToastStore()
+        }
+    },
+    updated() {
+        if(this.showToast) {
+            console.log('toast sendo exibido')
+            this.timeoutInstance = setTimeout(() => {
+                this.toastStore.setToastConfig({message: ''})
+            }, this.durationToast);
+        }
+    },
+    computed: {
+        showToast() {
+            return Boolean(this.toastStore.message);
         },
-        timeout: {
-            type: Number,
-            default: 3000
+        typeToast() {
+            return this.toastStore.type;
+        },
+        messageToast() {
+            return this.toastStore.message;
+        },
+        durationToast() {
+            return this.toastStore.duration;
         }
     },
     methods: {
         handleClick() {
-            this.$emit('close');
+            if(this.timeoutInstance) {
+                clearTimeout(this.timeoutInstance);
+            }
+            this.toastStore.setToastConfig({message: ''})
         }
     },
-    mounted() {
-        setTimeout(() => {
-            this.$emit('close');
-        }, this.timeout);
-    }
 }
 </script>
 
@@ -45,11 +66,13 @@ export default {
     padding: 15px;
     border-radius: 8px;
 
-    position: absolute;
+    position: fixed;
     width: 90%;
     left: 5%;
     top: 2%;
-    
+
+    z-index: 3;
+
     &--success {
         background-color: var(--color-success);
     }

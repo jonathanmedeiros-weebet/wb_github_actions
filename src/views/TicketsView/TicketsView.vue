@@ -2,39 +2,41 @@
   <div class="tickets">
     <Header title="Bilhete" :showBackButton="true" />
     <div class="tickets__container">
-      <div class="game">
-        <span class="game__select">Jogos selecionados</span>
-        <div class="game__delete" @click="handleAllRemove">
-          <IconDelete class="game__icon" />
-          <span class="game__text">Excluir todos</span>
+      <span class="tickets__message" v-if="!hasItems">Não há apostas selecionadas.</span>
+      <template v-else>
+        <div class="game">
+          <span class="game__select">Jogos selecionados</span>
+          <div class="game__delete" @click="handleAllRemove">
+            <IconDelete class="game__icon" />
+            <span class="game__text">Excluir todos</span>
+          </div>
         </div>
-      </div>
 
-      <div 
-        class="bet"
-        v-for="(item, index) in items" 
-        :key="index" 
-      >
-        <div class="bet__header">
-          <span class="bet__team">
-            <IconLive v-if="item.live" class="bet__icon-live"/>
-            <IconBall class="bet__icon-ball"/>
-            {{ item.gameName }}
-          </span>
-          <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
+        <div
+          class="bet"
+          v-for="(item, index) in items" 
+          :key="index" 
+        >
+          <div class="bet__header">
+            <span class="bet__team">
+              <IconLive v-if="item.live" class="bet__icon-live"/>
+              <IconBall class="bet__icon-ball"/>
+              {{ item.gameName }}
+            </span>
+            <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
+          </div>
+          <div class="bet__info">
+            <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
+          </div>
+          <div class="bet__text">
+            <span>{{ item.quoteGroupName }}</span>
+          </div>
+          <div class="bet__result">
+            <span>{{ item.quoteName }}</span>
+            <span>{{ item.quoteValue }}</span>
+          </div>
         </div>
-        <div class="bet__info">
-          <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
-        </div>
-        <div class="bet__text">
-          <span>{{ item.quoteGroupName }}</span>
-        </div>
-        <div class="bet__result">
-          <span>{{ item.quoteName }}</span>
-          <span>{{ item.quoteValue }}</span>
-        </div>
-      </div>
-
+      </template>
       <div class="finish">
         <div class="finish__cpf">
           <w-input
@@ -43,15 +45,7 @@
             name="tickets_cpf"
             placeholder="Informe o cpf do apostador"
             type="text"
-          />
-
-          <w-input
-            id="inputCpf"
-            label="Apostador"
-            name="cpf"
-            placeholder="999.999.999-99"
-            type="text"
-            mask="###.###.###-##"
+            v-model="bettorName"
           />
         </div>
       </div>
@@ -65,9 +59,11 @@
           <button class="value__add" @click="handleBetValueClick(50)">+50</button>
           <w-input
             class="value__balance-input"
-            name="user_name"
-            type="email"
+            name="bet-value"
+            type="number"
             v-model="betValue"
+            :value="betValue"
+            @focus="handleInitializeBetValue"
           >
             <template #icon>
               <span style="color: #ffffff80;">R$</span>
@@ -78,11 +74,11 @@
       <div class="cotacao">
         <div class="cotacao__value">
           <span>Cotação:</span>
-          <span>{{sumOdds}}</span>
+          <span>{{ quoteValue }}</span>
         </div>
         <div class="cotacao__ganhos">
           <span>Possíveis ganhos:</span>
-          <span>R$ 90,00</span>
+          <span>{{ possibilityAward }}</span>
         </div>
         <div class="cotacao__alteracao">
           <input
@@ -100,6 +96,7 @@
             value="entrar"
             class="cotacao__finalizar-button"
             name="btn-entrar"
+            :disabled="buttonDisable"
             @click="handleFinalizeBet"
           />
         </div>
@@ -116,8 +113,11 @@ import IconBall from '@/components/icons/IconBall.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
-import { useTicketStore } from '@/stores';
+import { useConfigClient, useTicketStore, useToastStore } from '@/stores';
 import { formatDateTimeBR } from '@/utilities';
+import { calculateQuota, createPrebet } from '@/services';
+import Toast from '@/components/Toast.vue';
+import { ToastType } from '@/enums';
 
 export default {
   name: 'tickets',
@@ -128,22 +128,59 @@ export default {
     IconBall,
     IconClose,
     WInput,
-    WButton
+    WButton,
+    Toast
   },
   data() {
     return {  
-      ticketStore: useTicketStore()
+      ticketStore: useTicketStore(),
+      toastStore: useToastStore(),
+      submitting: false
     };
   },
   computed: {
-    sumOdds() {
-      return (this.items.reduce((total, item) => Number(total) + Number(item.quoteValue), 0)).toFixed(2);
+    quoteValue() {
+      if(!Boolean(this.items.length)) return 0;
+
+      let quote = this.items.reduce((total, item) => {
+        console.log(item)
+        const finalValue = calculateQuota({
+          value: Number(item.quoteValue),
+          key: item.quoteKey,
+          gameEventId: item.eventId,
+          favorite: item.favorite,
+          isLive: item.live
+        });
+        return Number(total) * Number(finalValue)
+      }, 1)
+
+      const { options } = useConfigClient();
+      if (quote > options.fator_max) {
+          quote = options.fator_max;
+      }
+
+      return quote.toFixed(2);
+    },
+    possibilityAward() {
+      const { options } = useConfigClient();
+      const award = Number(this.betValue) * Number(this.quoteValue);
+      const possibilityAward = (award < options.valor_max_premio)
+        ? award
+        : options.valor_max_premio;
+
+      return possibilityAward.toFixed(2);
     },
     items() {
       return Object.values(this.ticketStore.items).map(item => ({
         ...item,
         quoteValue: item.quoteValue.toFixed(2)
       }));
+    },
+    hasLiveBet() {
+      return this.items.some(item => item.live);
+    },
+    hasItems() {
+      return Boolean(this.items.length)
     },
 
     bettorName: {
@@ -169,12 +206,23 @@ export default {
       set(value) {
         this.ticketStore.setAccepted(value);
       }
+    },
+    buttonDisable() {
+      return (
+        !Boolean(this.bettorName)
+        || !Boolean(this.betValue)
+        || !Boolean(this.items.length)
+        || this.submitting
+      )
     }
   },
   methods: {
     formatDateTimeBR,
     handleBetValueClick(valueAditional) {
-      this.betValue += valueAditional;
+      this.betValue = parseFloat(this.betValue) + Number(valueAditional);
+    },
+    handleInitializeBetValue() {
+      this.betValue = Boolean(this.betValue) ? this.betValue : '';
     },
     handleAllRemove() {
       this.ticketStore.clear();
@@ -183,7 +231,50 @@ export default {
       this.ticketStore.removeQuote(gameId)
     },
     handleFinalizeBet() {
+      this.submitting = true;
 
+      const {items, bettor, value, accepted} = this.ticketStore;
+      const data = {
+        apostador: bettor,
+        valor: value,
+        utilizar_bonus: false,
+        aceitar_alteracoes_odds: accepted,
+        itens: Object.values(items).map(item => {
+          const isQuotePlayer = item.quoteKey.includes('player');
+          const quoteKey = isQuotePlayer ? item.quoteKey.split('___')[2] : item.quoteKey;
+          return {
+            ao_vivo: item.live,
+            jogo_id: item.gameId,
+            jogo_nome: item.gameName,
+            jogo_event_id: item.eventId,
+            cotacao: {
+              chave: quoteKey,
+              valor: item.quoteValue,
+              nome: isQuotePlayer ? item.quoteName : null
+            },
+            cotacao_antiga_valor: null,
+          }
+        })
+      }
+
+      createPrebet(data)
+        .then(() => {
+          this.toastStore.setToastConfig({
+            message: 'Pré aposta realizada com sucesso!',
+            type: ToastType.SUCCESS,
+            duration: 5000
+          })
+          this.handleAllRemove();
+          this.$router.push('/home');
+        })
+        .catch(({ errors }) => {
+          this.toastStore.setToastConfig({
+            message: errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+        })
+        .finally(() => this.submitting = true)
     }
   }
 }
@@ -199,6 +290,11 @@ export default {
     padding: 0 20px;
     min-height: 100%;
     padding-bottom: 100px;
+  }
+
+  &__message {
+    margin-top: 10px;
+    font-size: 12px;
   }
 }
 
