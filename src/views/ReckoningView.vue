@@ -76,9 +76,9 @@
         </div>
       </div>
       <div class="result">
-        <span>Resultado 01/06 à 06/06</span>
+        <span>Resultado {{startDate}} à {{endDate}}</span>
         <div class="result__date">
-          <span class="result__value">000</span>
+          <span class="result__value">{{resultDate}}</span>
         </div>
       </div>
       <div class="collapse__line"></div>
@@ -148,6 +148,7 @@ export default {
       startDate: moment().format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
       totalBet: null,
+      resultDate: 0,
       rechargesCartao: null,
       entry: null,
       comissao: null,
@@ -188,8 +189,8 @@ export default {
       this.showModalCalendar = false;
     },
     async handleCalendar(dateTime) {
-      this.startDate = moment(dateTime._d).format('YYYY-MM-DD');
-      this.endDate = moment(dateTime._d).format('YYYY-MM-DD');
+      this.startDate = dateTime.format('YYYY-MM-DD');
+      this.endDate = dateTime.format('YYYY-MM-DD');
       this.handleCloseCalendarModal();
       await this.getValue();
     },
@@ -206,7 +207,8 @@ export default {
     async getValue() {
       try {
         const res = await getCalculationValue(this.startDate, this.endDate)
-        this.withdraw = formatCurrency(Number(res.withdraw ?? 0))
+        console.log(res);
+        this.withdraw = formatCurrency(Number(res.saque ?? 0))
         this.commission = formatCurrency(Number(res.total_comissao ?? 0))
         this.award = formatCurrency(Number(res.total_premios ?? 0))
         this.totalBet = formatCurrency(Number(res.total_apostado ?? 0))
@@ -216,6 +218,9 @@ export default {
         this.credit = formatCurrency(Number(res.creditos ?? 0))
         this.debit = formatCurrency(Number(res.debitos ?? 0))
         this.balance = formatCurrency(Number(res.saldo ?? 0))
+        this.resultDate = formatCurrency(Number(res.total_apostado + res.cartao - res.saque -
+                          res.total_comissao - res.total_premios));
+        console.log(resultDate)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
