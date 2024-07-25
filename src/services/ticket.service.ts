@@ -4,7 +4,8 @@ import { axiosInstance } from "./axiosInstance";
 export const createPrebet = async(payload: any) => {
     const { apiUrl } = useConfigClient();
     const url = `${apiUrl}/esportes/apostas`
-    return await axiosInstance().post(url, payload);
+    const response: any = await axiosInstance().post(url, payload);
+    return response.results;
 }
 
 export const createLiveToken = async(payload: any) => {

@@ -318,14 +318,21 @@ export default {
       }
 
       createPrebet(data)
-        .then(() => {
+        .then(({id}) => {
           this.toastStore.setToastConfig({
             message: 'Aposta realizada com sucesso!',
             type: ToastType.SUCCESS,
             duration: 5000
           })
           this.handleAllRemove();
-          this.$router.push('/home');
+
+          this.$router.push({
+            name: 'close-bet',
+            params: {
+              id,
+              action: 'view'
+            }
+          });
         })
         .catch(({ errors }) => {
           this.toastStore.setToastConfig({

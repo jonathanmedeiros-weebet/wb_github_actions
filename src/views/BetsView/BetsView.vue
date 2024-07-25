@@ -32,8 +32,8 @@
         <w-input
           id="inputDate"
           name="inputDate"
-          label="email"
-          type="email"
+          label="Data"
+          type="date"
           placeholder="dd/mm/aaaa"
           @click="handleOpenCalendarModal"
           v-model="dateFilter"
