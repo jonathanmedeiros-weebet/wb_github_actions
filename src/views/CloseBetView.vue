@@ -138,7 +138,7 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
-import { getById } from '@/services'
+import { checkLive, closeBet, getById, tokenLiveClosing } from '@/services'
 import { formatCurrency } from '@/utilities'
 
 const MODALITY_SPORT_FUTEBOL = 1;
@@ -175,44 +175,77 @@ export default {
   },
   mounted() {
     this.fetchBetDetails();
+    
   },
   methods: {
     formatDate(date) {
       return moment(date).locale('pt-br').format('DD/MM/YYYY');
     },
-    closeBet() {
+    async closeBet() {
+      // TODO: IMPLEMENTADO O SERVICE DE IMPLEMENTAR A APOSTA MAS FALTA TESTAR 
+      // simulateBetClosure(this.bet.id)
+      // then(resp => {
+      //   console.log(resp);
+      // })
+      // .catch(error => {
+      //   console.error(error);
+      // })
+      console.log('SIMULAR FECAR A APOSTA!');
       this.showCloseBet = false;
       this.showClickFinalized = true;
+  
     },
     cancelAction() {
       this.showCloseBet = true;
       this.showClickFinalized = false;
     },
-    confirmAction() {
-      console.log('Encerrada');
-      this.showFinish = false;
-      this.showClickFinalized = false;
-      this.showFinished = true;
-      this.title = 'Aposta';
+    async confirmAction() {
+      // TODO: API APRESENTANDO PROBLEMA NO PHP
+      // this.showFinish = false;
+      // this.showClickFinalized = false;
+      // this.showFinished = true;
+      // this.title = 'Aposta';   
+      if(this.bet) {
+        
+        const live = await this.haveLive(this.bet);
+        let payload = { apostaId: this.bet.id, version: this.bet.version };
+
+        if(live) {
+          const token = await tokenLiveClosing(this.bet.id);
+          const token_aovivo = token ?? null;
+          payload.token = token_aovivo;
+        }
+        
+        closeBet(payload)
+        .then(resp => {
+          console.log('Aposta encerrada com sucesso');
+          console.log(resp);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+        
+      }
+
     },
     async fetchBetDetails() {
       getById(this.id)
       .then(resp => {
+        
         this.bet = resp.results;
 
-        if(resp.results.pago == false && resp.results.resultado == 'ganhou'){
+        if(resp.results.pago == false && resp.results.resultado == null){
           this.showCloseBet = true;
           this.showFinished = false;
           this.showClickFinalized = false;
         }
+
         if (resp.results.pago == true && (resp.results.resultado === 'ganhou' || resp.results.resultado == 'perdeu' )) {
           this.showFinish = false;
           this.showFinished = true;
           this.showClickFinalized = false;
         } 
-
-        // this.showFinished = this.bet.resultado !== 'pendente' ? true : false;
-        console.log(resp);
+        
       })
       .catch(error => {
           console.log(error);
@@ -242,6 +275,26 @@ export default {
         return text.slice(0, maxLength) + '...';
       }
       return text;
+    },
+    async haveLive(bet) {
+      let result = false;
+
+      const found = bet.itens.find((item) => item.ao_vivo);
+      if(found) {
+          return true;
+      }
+
+      const itensID = bet.itens.map((item) => {
+          return item.jogo_api_id;
+      })
+
+      const retorno = await checkLive(itensID);
+
+      if(retorno) {
+          result = true;
+      }
+
+      return result;
     }
   },
   computed: {

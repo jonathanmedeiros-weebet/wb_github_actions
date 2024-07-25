@@ -151,7 +151,8 @@
                   value="finish"
                   name="finish"
                   class="button--secondary"
-                  v-if="bet.pago === false"
+                  v-if="bet.pago === false && habilitar_cancelar_aposta == true"
+                  @click="goToTickets(bet)"
                 />
               </div>
             </template>
@@ -211,9 +212,6 @@ import moment from 'moment'
 import { formatCurrency } from '@/utilities'
 import { useConfigClient } from '@/stores'
 import Toast from '@/components/Toast.vue'
-
-
-
 
 export default {
   name: 'bets',
@@ -300,10 +298,8 @@ export default {
       this.showResults = false;
       find(this.parametros)
       .then(resp => {
-        console.log(resp);
         this.bets = resp.results;
         this.showResults = true;
-        
       })
       .catch(error => {
         console.error(error);
@@ -320,11 +316,11 @@ export default {
     async pay() {
       payBet(this.betSelected.id)
       .then(resp => {
-        console.log(resp);
         this.getResults();
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
+        //TODO: AJUSTAR O RETORNO COM O NOVO AJUSTE NO INTERCEPTOR DO AXIOS
         this.toastText = error.response?.data?.errors?.message ?? 'Usuário ou Senha inválido';
         this.showToast = true;
         

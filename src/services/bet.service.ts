@@ -81,3 +81,27 @@ export const payBet = async ( id: number ) => {
         },
     });
 }
+
+export const simulateBetClosure = async ( id: number ) => {
+    const { apiUrl } = useConfigClient();
+    const url = `${apiUrl}/apostas/simular-encerramento?aposta=${id}`;
+    
+    return await axiosInstance().get(url);
+}
+
+export const tokenLiveClosing = async (id: any) => {
+    const { sportsUrl } = useConfigClient();
+    const url = `${sportsUrl}/apostas/token-aovivo-encerramento`;
+    
+    return await axiosInstance().post(url, { aposta: id });
+}
+
+export const closeBet = async (payload: any) => {
+    const { apiUrl } = useConfigClient();
+    const url = `${apiUrl}/apostas/encerrar-aposta`;
+    
+    return await axiosInstance().post(url, payload);
+}
+
+
+
