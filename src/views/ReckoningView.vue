@@ -218,9 +218,9 @@ export default {
         this.credit = formatCurrency(Number(res.creditos ?? 0))
         this.debit = formatCurrency(Number(res.debitos ?? 0))
         this.balance = formatCurrency(Number(res.saldo ?? 0))
-        this.resultDate = formatCurrency(Number(res.total_apostado + res.cartao - res.saque -
+        this.resultDate = formatCurrency(Number(res.total_apostado + 
+                          res.cartao - res.saque -
                           res.total_comissao - res.total_premios));
-        console.log(resultDate)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
