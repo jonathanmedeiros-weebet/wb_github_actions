@@ -17,13 +17,12 @@ export const authUser = async (
         const resp = await axiosInstance().post(url, user); 
 
         if(resp.success){
-            console.log(resp);
-            //TODO: VERIFICAR O TIPO DE USUÁRIO (CAMBISTA)
-            // if(resp.results.user.tipo_usuario == 'cambista'){
+            
+            if(resp.results.user.tipo_usuario == 'cambista'){
                 localStorageService.set('token', resp.results.token);
                 localStorageService.set('user', resp.results.user);
                 return true;   
-            // }
+            }
         }
         return false;
     } catch (error) {
@@ -43,16 +42,10 @@ export const verifyToken = async () => {
     }
   
     try {
-        const resp = await axiosInstance().get(url, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        const resp = await axiosInstance().get(url);
         
-        if(resp){
-            if(resp.results == true){
-                return true;
-            }
+        if(resp && typeof resp === 'object' && resp.results == true){
+            return true;
         }
 
         return false;
@@ -68,4 +61,14 @@ export const verifyToken = async () => {
 
 export const logout = () => {
     localStorageService.removeAuth();
+}
+
+
+export const checkToken = async () => {
+    const token = localStorage.getItem('token');
+    if(!token) {
+        localStorageService.removeAll();
+        return false;
+    }
+    return verifyToken();
 }

@@ -38,7 +38,6 @@
         :maxlength="maxlength"
         @click="$emit('click')"
         @change="emitChange"
-        :value="value"
         autocomplete="off"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
@@ -100,6 +99,11 @@ export default {
       inputType: this.type
     };
   },
+  watch: {
+    value(newValue) {
+      this.localValue = newValue;
+    }
+  },
   methods: {
     handleInput(event) {
       this.$emit('input', event.target.value)
@@ -117,6 +121,9 @@ export default {
     },
     emitChange(event) {
       this.$emit('change',  event.target.value);
+    },
+    reset() {
+      this.localValue = '';
     }
   },
   computed: {

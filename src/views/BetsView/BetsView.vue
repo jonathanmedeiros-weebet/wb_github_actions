@@ -1,16 +1,23 @@
 <template>
   <div class="bets">
+    <toast 
+      v-if="showToast" 
+      type="danger" 
+      @close="showToast = false"
+    >
+      {{ toastText }}
+    </toast>
     <Header title="Apostas" :showBackButton="true" />
     <div class="bets__container">
       
       <div class="bets__contente">
         <w-input
-          id="inputCpf"
+          id="inputApostador"
           label="Apostador"
-          name="cpf"
-          placeholder="999.999.999-99"
-          type="text"
-          mask="###.###.###-##"
+          name="apostador"
+          placeholder="Apostador"
+          type="email"
+          v-model="apostador"
         />
         <w-input
           id="inputCode"
@@ -20,24 +27,25 @@
           type="text"
           mask="XXXX-XXXX"
           autocomple="off"
+          v-model="code"
         />
         <w-input
           id="inputDate"
           name="inputDate"
-          label="Data"
+          label="email"
+          type="email"
           placeholder="dd/mm/aaaa"
-          type="date"
           @click="handleOpenCalendarModal"
           v-model="dateFilter"
           
         />
         <w-button
           id="btn-filter"
-          text="Filtar"
+          text="Filtrar"
           value="filter"
           name="btn-filter"
           class="button--primary"
-          @click="getFilters"
+          @click="getResults"
         />
       </div>
       
@@ -48,83 +56,85 @@
           <tag-button
             id="btn-all"
             text="Todas"
-            value="all"
+            value="todos"
             name="btn-all"
-            class="button--primary"
+            :class="{ 'button--primary': activeButton === 'todos', 'button--secondary': activeButton !== 'todos'}"
+            @click="setActive('todos')"
           />
           <tag-button
             id="btn-pendent"
             text="Pendente"
-            value="pendeent"
+            value="pendente"
             name="btn-pendent"
-            class="button--secondary"
+            :class="{ 'button--primary': activeButton === 'pendente', 'button--secondary': activeButton !== 'pendente'}"
+            @click="setActive('pendente')"
           />
           <tag-button
             id="btn-win"
             text="Ganhou"
-            value="win"
+            value="ganhou"
             name="btn-win"
-            class="button--secondary"
+            :class="{ 'button--primary': activeButton === 'ganhou', 'button--secondary': activeButton !== 'ganhou'}"
+            @click="setActive('ganhou')"
           />
           <tag-button
             id="btn-lose"
             text="Perdeu"
-            value="lose"
+            value="perdeu"
             name="btn-lose"
-            class="button--secondary"
+            :class="{ 'button--primary': activeButton === 'perdeu', 'button--secondary': activeButton !== 'perdeu'}"
+            @click="setActive('perdeu')"
           />
         </div>
   
         <div class="bets__content-filters" v-for="(bet, index) in bets" :key="index">
           <card-bets>
             <template #title>
-              <p>Código da Aposta: {{ bet.code }}</p>
+              <p>Código da Aposta: {{ bet.codigo }}</p>
             </template>
             <template #subtitle>
-              <p>HORÁRIO: 02/06/2024 18:00</p>
+              <p>HORÁRIO: {{ formateDateTime(bet.horario) }}</p>
             </template>
             <template #body>
-              <p>Apostador: {{ bet.client }}</p>
+              <p>Apostador: {{ bet.apostador }}</p>
               <table class="table">
                 <tbody>
                   <tr>
                     <td class="table__line--left">Valor apostado:</td>
-                    <td class="table__line--right">R$ {{ bet.value }}</td>
+                    <td class="table__line--right">{{ formatCurrencyMoney(bet.valor) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Comissão:</td>
-                    <td class="table__line--right">R$ {{ bet.comission }}</td>
+                    <td class="table__line--right">{{ formatCurrencyMoney(bet.comissao) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Prêmio:</td>
-                    <td class="table__line--right">R$ {{ bet.premio }}</td>
+                    <td class="table__line--right">{{ formatCurrencyMoney(bet.premio) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Status:</td>
                     <td 
                       class="table__line--right"
-                      :class="{ 'table__status--success': bet.status === 'Ganhou', 'table__status--danger': bet.status === 'Perdeu' }"
-                    >{{ bet.status }}</td>
+                      :class="{ 'table__status--success': bet.resultado === 'ganhou', 'table__status--danger': bet.resultado === 'perdeu' }"
+                    >{{ capitalizeFirstLetter(bet.resultado) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Pagamento:</td>
-                    <td class="table__line--right">{{ bet.payment }}</td>
+                    <td class="table__line--right">{{ bet.status_pagamento ?? '-' }}</td>
                   </tr>
                 </tbody>  
               </table>
             </template>
   
             <template #footer >
-              <div :class="{
-                'bets__card-footer--inline': bet.status === 'Pendente',
-                'bets__card-footer':  bet.status !== 'Pendente'
-              }">
+              <div class="bets__card-footer--inline">
                 <w-button
                   id="btn-view"
                   text="Visuaizar"
                   value="view"
                   name="btn-view"
                   class="button--secondary"
+                  @click="goToTickets(bet)"
                 />
                 <w-button
                   id="btn-payer"
@@ -132,8 +142,8 @@
                   value="payer"
                   name="btn-payer"
                   class="button--secondary"
-                  @click="handleOpenPayModal"
-                  v-if="bet.status === 'Pendente'"
+                  @click="handleOpenPayModal(bet)"
+                  v-if="bet.pago === false && bet.resultado === 'ganhou'"
                 />
                 <w-button
                   id="btn-finish"
@@ -141,7 +151,8 @@
                   value="finish"
                   name="finish"
                   class="button--secondary"
-                  v-if="bet.status === 'Pendente'"
+                  v-if="bet.pago === false && habilitar_cancelar_aposta == true"
+                  @click="goToTickets(bet)"
                 />
               </div>
             </template>
@@ -149,7 +160,11 @@
         </div>
       </div>
 
-      <WModal v-if="showModalPay" @close="handleClosePayModal">
+      <WModal 
+        ref="modalPay" 
+        v-if="showModalPay" 
+        @close="handleClosePayModal"
+      >
         
         <template #title>
           <p>Pagar aposta</p>
@@ -163,6 +178,7 @@
             value="yes"
             name="btn-yes"
             class="button--primary"
+            @click="pay()"
           />
           
           <w-button
@@ -195,6 +211,10 @@ import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
+import { find, payBet } from '@/services'
+import { convertInMomentInstance, formatCurrency } from '@/utilities'
+import { useConfigClient } from '@/stores'
+import Toast from '@/components/Toast.vue'
 
 export default {
   name: 'bets',
@@ -205,54 +225,47 @@ export default {
     WModal,
     CardBets,
     TagButton,
-    ModalCalendar
+    ModalCalendar,
+    Toast
+  },
+  mounted() {
+    const { options } = useConfigClient();
+    this.habilitar_cancelar_aposta = options.habilitar_cancelar_aposta;
   },
   data() {
     return {
+      code: '',
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
-      dateFilter: null,
-      bets: [
-        {
-          code: 'AEC0-1AB4',
-          client: '999.999.999-99',
-          value: 100,
-          comission: 0,
-          premio: 0,
-          status: 'Perdeu',
-          payment:  '-'
-
-        },
-        {
-          code: 'XAB3-5BU1',
-          client: '999.999.999-99',
-          value: 200,
-          comission: 0,
-          premio: 0,
-          status: 'Ganhou',
-          payment:  '-'
-
-        },
-        {
-          code: 'CCB0-1A39',
-          client: '999.999.999-99',
-          value: 50,
-          comission: 10,
-          premio: 1,
-          status: 'Pendente',
-          payment:  '-'
-
-        }
-      ]
+      dateFilter: '',
+      activeButton: 'todos',
+      apostador: '',
+      bets: [],
+      betSelected: null,
+      parametros: {
+        codigo: '',
+        dataInicial: '',
+        dataFinal: '',
+        status: '',
+        apostador: '',
+        sort: '',
+        otimizado: true,
+      },
+      showToast: false,
+      toastText: '',
+      habilitar_cancelar_aposta: true
     }
   },
   methods: {
-    handleOpenPayModal(){
+    handleOpenPayModal(bet){
+      this.betSelected = bet;
       this.showModalPay = true;
     },
     handleClosePayModal() {
+      this.betSelected = null;
       this.showModalPay = false;
+      this.$refs.modalPay.handleClose();
     },
     handleOpenCalendarModal() {      
       this.showModalCalendar = true;
@@ -261,11 +274,83 @@ export default {
       this.showModalCalendar = false;
     },
     handleCalendar(dateTime) {
-      this.dateFilter = dateTime.format('YYYY-MM-DD');
+      this.dateFilter = dateTime.format("DD/MM/YYYY");
       this.handleCloseCalendarModal();
     },
-    getFilters() {
-      this.showResults = !this.showResults;
+    setActive(button) {
+      this.activeButton = button;
+    },
+    formatCurrencyMoney(value) {
+      return formatCurrency(value);
+    },  
+    getResults() {
+    
+      this.parametros.codigo = this.code.replace(/-/g, '');
+      this.parametros.dataInicial = '';
+      this.parametros.dataFinal = '';
+      this.parametros.status = this.activeButton == 'todos' ? '' : this.activeButton;
+      this.parametros.apostador = this.apostador;
+      this.parametros.sort = '-horario';
+      this.parametros.otimizado = true;
+      
+      this.getApiBets();
+      
+    },
+    async getApiBets() {
+      this.bets = [];
+      this.showResults = false;
+      find(this.parametros)
+      .then(resp => {
+        this.bets = resp.results;
+        this.showResults = true;
+      })
+      .catch(error => {
+        console.error(error);
+      })
+    },
+    goToTickets(bet) {
+      this.$router.push({ 
+        name: 'close-bet',
+        params: {
+          id: bet.id
+        }
+      });
+    },
+    async pay() {
+      payBet(this.betSelected.id)
+      .then(resp => {
+        this.getResults();
+      })
+      .catch(error => {
+        console.error(error);
+        //TODO: AJUSTAR O RETORNO COM O NOVO AJUSTE NO INTERCEPTOR DO AXIOS
+        this.toastText = error.response?.data?.errors?.message ?? 'Usuário ou Senha inválido';
+        this.showToast = true;
+        
+      })
+      this.$refs.modalPay.handleClose();
+      this.showModalPay = false;
+      this.$refs['wmodal'].handleClose();
+    },
+    formateDateTime(datetime) {
+      return convertInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
+    },
+    capitalizeFirstLetter(str) {
+      if(str){
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }else{
+        return str;
+      }
+    }
+  },
+  watch: {
+    activeButton(newValue, oldValue){
+      this.parametros.status = newValue == 'todos' ? '' : newValue; 
+      this.getApiBets();
+
+    },
+    dateFilter(newValue) {
+      this.dateFilter = newValue;   
     }
   }
 }

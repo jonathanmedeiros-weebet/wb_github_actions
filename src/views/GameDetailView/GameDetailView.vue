@@ -1,72 +1,83 @@
 <template>
     <div class="game-detail">
-        <div class="game-detail__header">
-           <GameDetailHeader :game="game" :type="gameHeaderType" :fixed="headerFixed"/>
-        </div>
-        <div class="game-detail__body" :class="{'game-detail__body--paddintTop': headerFixed}">
-           <div class="game-detail__filters">
-                <button
-                    class="game-detail__filter"
-                    v-for="({ title, selected, slug}, index) in filters"
-                    :key="index"
-                    :class="{'game-detail__filter--selected': selected}"
-                    @click="handleGameFilter(slug)"
-                >
-                    {{ title }}
-                </button>
+        <GameDetailSkeleton v-if="loading"/>
+        <template v-else>
+            <div class="game-detail__header">
+                <GameDetailHeader
+                    :game="game"
+                    :type="gameHeaderType"
+                    :fixed="headerFixed"
+                />
             </div>
-            <Collapse
-                :initCollapsed="true"
-                v-for="(option, index) in options"
-                :key="index"
-            > 
-                <template #title>{{ option.name }}</template>
-
-                <div class="collapse__options" :class="{'collapse__options--grid': option.odds.length > 3}">
+            <div class="game-detail__body" :class="{'game-detail__body--paddintTop': headerFixed}">
+                <div class="game-detail__filters" v-if="isFutebolModality && hasQuotes">
                     <button
-                        class="collapse__option"
-                        v-for="(odd, oddIndex) in option.odds"
-                        :key="`${oddIndex}-${index}`"
-                        :class="{'collapse__option--selected': oddIndex === 0}"
-                        @click="handleItemClick(odd)"
+                        class="game-detail__filter"
+                        v-for="({ title, selected, slug}, index) in filters"
+                        :key="index"
+                        :class="{'game-detail__filter--selected': selected}"
+                        @click="handleGameFilter(slug)"
                     >
-                        <span class="collapse__label">{{ odd.label }}</span>
-                        <span class="collapse__value">{{ odd.value }}</span>
+                        {{ title }}
                     </button>
                 </div>
-            </Collapse>
-        </div>
+
+                <TimeQuotes v-if="!filteredPerPlayer" :quotes="options"/>
+                <PlayerQuotes v-if="filteredPerPlayer" :quotes="options"/>
+            </div>
+        </template>
     </div>
 </template>
 
 <script>
 import Header from '@/components/layouts/Header.vue'
 import GameDetailHeader from './parts/GameDetailHeader.vue'
-import { MarketTime } from '@/enums'
+import { MarketTime, Modalities, QuotaStatus } from '@/enums'
 import Collapse from '@/components/Collapse.vue'
 import Button from '@/components/Button.vue'
-import { getGame } from '@/services'
+import { getGame, hasQuotaPermission, calculateQuota, SocketService, prepareLiveQuote } from '@/services'
 import { useConfigClient } from '@/stores'
+import TimeQuotes from './parts/TimeQuotes.vue'
+import PlayerQuotes from './parts/PlayerQuotes.vue'
+import GameDetailSkeleton from './parts/GameDetailSkeleton.vue'
 
 export default {
-  components: { Header, GameDetailHeader, Collapse, Button },
+    components: {
+        Header,
+        GameDetailHeader,
+        Collapse,
+        Button,
+        TimeQuotes,
+        PlayerQuotes,
+        GameDetailSkeleton
+    },
     name: 'game-detail',
     data() {
         return {
             headerFixed: false,
             game: {},
-            filterSelected: MarketTime.PLAYERS,
+            filterSelected: MarketTime.FULL_TIME,
             markets: {
                 [MarketTime.FULL_TIME]: [],
                 [MarketTime.FIRST_TIME]: [],
                 [MarketTime.SECOND_TIME]: [],
-                [MarketTime.PLAYERS]: []
-            }
+                [MarketTime.PLAYERS]: [],
+                [MarketTime.TOTAL]: []
+            },
+            loading: false,
+            socket: new SocketService()
         }
     },
     async created() {
+        this.loading = true;
         await this.prepareGameDetail();
-        this.prepareQuotes();
+        await this.prepareQuotes();
+
+        if(!this.isFutebolModality) {
+            this.filterSelected = MarketTime.TOTAL;
+        }
+
+        this.loading = false;
     },
     mounted() {
         document.addEventListener("scroll", () => {
@@ -78,32 +89,46 @@ export default {
         });
     },
     computed: {
+        hasQuotes() {
+            return Boolean(this.options.length);
+        },
+        isFutebolModality() {
+            return this.game.sport_id === Modalities.SOCCER;
+        },
+        filteredPerPlayer() {
+            return this.filterSelected == MarketTime.PLAYERS;
+        },
         gameHeaderType() {
             return this.headerFixed ? 'slim' : 'normal'
         },
         filters() {
-            return [
+            const filters = [
                 {
                     title: 'Tempo completo',
                     selected: this.filterSelected === MarketTime.FULL_TIME,
                     slug: MarketTime.FULL_TIME,
+                    show: Boolean(this.game && this.markets[MarketTime.FULL_TIME].length)
                 },
                 {
                     title: 'Primeiro tempo',
                     selected: this.filterSelected === MarketTime.FIRST_TIME,
-                    slug: MarketTime.FIRST_TIME
+                    slug: MarketTime.FIRST_TIME,
+                    show: Boolean(this.game && this.markets[MarketTime.FIRST_TIME].length)
                 },
                 {
                     title: 'Segundo tempo',
                     selected: this.filterSelected === MarketTime.SECOND_TIME,
-                    slug: MarketTime.SECOND_TIME
+                    slug: MarketTime.SECOND_TIME,
+                    show: Boolean(this.game && this.markets[MarketTime.SECOND_TIME].length)
                 },
                 {
                     title: 'Jogadores',
                     selected: this.filterSelected === MarketTime.PLAYERS,
-                    slug: MarketTime.PLAYERS
-                },
-            ]
+                    slug: MarketTime.PLAYERS,
+                    show: Boolean(this.game && this.markets[MarketTime.PLAYERS].length)
+                }
+            ];
+            return filters.filter(filter => filter.show)
         },
         options() {
             return this.markets[this.filterSelected]
@@ -111,18 +136,31 @@ export default {
     },
     methods: {
         async prepareGameDetail() {
-            const gameId = String(this.$route.params.id);
-            const response = await getGame(gameId);
-            this.game = response.result;
+            try {
+                const gameId = String(this.$route.params.id);
+                this.game = await getGame(gameId);
+
+                if(this.game.ao_vivo) {
+                    await this.socket.connect();
+                    this.socket.enterEventRoom(this.game._id);
+                    this.behaviorLiveEvent(this.game._id);
+                }
+            } catch (error) {
+                this.$router.back();
+            }
         },
         async prepareQuotes() {
             const { betOptions } = useConfigClient();
-            const quotes = this.game.cotacoes;
+            const quotes = Boolean(this.game.ao_vivo)
+                ? this.game.cotacoes_aovivo ?? []
+                : this.game.cotacoes ?? [];
+
             const markets = {
                 [MarketTime.FULL_TIME]: {},
                 [MarketTime.FIRST_TIME]: {},
                 [MarketTime.SECOND_TIME]: {},
-                [MarketTime.PLAYERS]: {}
+                [MarketTime.PLAYERS]: {},
+                [MarketTime.TOTAL]: {}
             }
 
             for await (let quote of quotes) {
@@ -141,38 +179,122 @@ export default {
                     }
                 }
 
+                const finalValue = this.calculateQuota({
+                    value: quote.valor,
+                    key: quote.chave,
+                    gameEventId: this.game.event_id,
+                    favorite: this.game.favorito,
+                    isLive: this.game.ao_vivo
+                });
+
                 market[betType.cat_chave]['odds'].push({
                     key: quote.chave,
                     label: isPlayerTime ? quote.nome : betType.nome,
                     og: quote.og,
                     value: quote.valor,
-                    id: quote._id
+                    id: quote._id,
+                    finalValue,
+                    status: quote.status ?? QuotaStatus.DEFAULT,
+                    hasPermission: hasQuotaPermission(finalValue)
                 });
             }
 
             this.markets[MarketTime.FULL_TIME] = Object.values(markets[MarketTime.FULL_TIME]);
             this.markets[MarketTime.FIRST_TIME] = Object.values(markets[MarketTime.FIRST_TIME]);
             this.markets[MarketTime.SECOND_TIME] = Object.values(markets[MarketTime.SECOND_TIME]);
-            this.markets[MarketTime.PLAYERS] = Object.values(markets[MarketTime.PLAYERS]);
-
-            console.log(this.options)
+            this.markets[MarketTime.TOTAL] = Object.values(markets[MarketTime.TOTAL]);
+            this.markets[MarketTime.PLAYERS] = this.preparePlayerQuotes(Object.values(markets[MarketTime.PLAYERS]));
         },
+        preparePlayerQuotes(quotes) {
+            let quoteGroups = [
+                {
+                    title: 'Marcadores de gols',
+                    keys: ['jogador_marca_primeiro', 'jogador_marca_ultimo', 'jogador_marca_qualquer_momento'],
+                    players: []
+                },
+                {
+                    title: 'Multi marcadores',
+                    keys: ['jogador_marca_2_ou_mais_gols', 'jogador_marca_3_ou_mais_gols'],
+                    players: []
+                },
+                {
+                    title: 'Cartões',
+                    keys: ['jogador_recebera_primeiro_cartao', 'jogador_recebera_cartao', 'jogador_sera_expulso'],
+                    players: []
+                },
+                {
+                    title: `Gols casa - ${this.game.time_a_nome}`,
+                    keys: ['jogador_marca_1st_gol_casa', 'jogador_marca_ultimo_gol_casa'],
+                    players: []
+                },
+                {
+                    title: `Gols fora - ${this.game.time_b_nome}`,
+                    keys: ['jogador_marca_1st_gol_fora', 'jogador_marca_ultimo_gol_fora'],
+                    players: []
+                }
+            ];
+
+            for (const quote of quotes) {
+                const groupIndex = quoteGroups.findIndex(group => group.keys.includes(quote.key));
+                if(groupIndex == -1) continue;
+
+                for (const odd of quote.odds) {
+                    let playerIndex = quoteGroups[groupIndex].players.findIndex(player => player.name == odd.label)
+                    if(playerIndex == -1) {
+                        quoteGroups[groupIndex].players.push({
+                            name: odd.label,
+                            odds: []
+                        })
+                        playerIndex = quoteGroups[groupIndex].players.length - 1
+                    }
+
+                    const finalValue = calculateQuota({
+                        value: odd.value,
+                        key: odd.key,
+                        gameEventId: this.game.event_id,
+                        favorite: this.game.favorito,
+                        isLive: this.game.ao_vivo
+                    });
+
+                    quoteGroups[groupIndex].players[playerIndex].odds.push({
+                        ...odd,
+                        label: quote.name,
+                        finalValue,
+                        hasPermission: this.hasQuotaPermission(finalValue)
+                    })
+                }
+            }
+
+            return quoteGroups.filter(group => Boolean(group.players.length));
+        },
+        
         handleGameFilter(filter) {
             this.filterSelected = filter
         },
-        handleItemClick(odd) {
-            console.log(odd);
-            event.stopPropagation();
-        },
+        behaviorLiveEvent(eventId) {
+            this.socket.getEventDetail(eventId).subscribe((event) => {
+                this.game.info = event.info;
+                this.game.cotacoes_aovivo = prepareLiveQuote(this.game.cotacoes_aovivo ?? [], event.cotacoes_aovivo ?? []);
+                this.prepareQuotes()
+            })
+        }
+    },
+    destroyed() {
+        if(this.socket.connected()) {
+            this.socket.exitEventRoom(this.game._id);
+            this.socket.disconnect();
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .game-detail {
-    padding-bottom: 100px;
+    padding-bottom: 20px;
 
     &__filters {
+        position: relative;
+        z-index: 1;
         height: 53px;
         display: flex;
         align-items: center;
@@ -218,70 +340,4 @@ export default {
         }
     }
 }
-
-.collapse {
-    &__options {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 10px;
-
-        padding: 13px 16px;
-
-        background: var(--color-background-input);
-
-        &--grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-    }
-
-    &__option {
-        height: 54px;
-        width: 100%;
-        background: var(--color-background);
-        border: none;
-        border-radius: 4px;
-        padding: 9px 15px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 7px;
-
-        &--selected {
-            background: var(--color-primary);
-        }
-    }
-
-    &__option--selected &__label,
-    &__option--selected &__value {
-        color: #000;
-    }
-
-    &__label {
-        overflow: hidden;
-        color: #f2f2f280;
-        text-overflow: ellipsis;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
-
-    &__value {
-        color: var(--color-text);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-    }
-}
-
-::v-deep .collapse__item {
-    background: var(--color-background);
-    padding: 13px 24px;
-}
-
 </style>

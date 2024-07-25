@@ -14,17 +14,13 @@ import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 import { localStorageService } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
+import CloseBetView from '@/views/CloseBetView.vue'
 
 const router = new VueRouter({
   mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'root',
-      component: LoginView,
-    },
-    {
-      path: '/login',
       name: 'login',
       component: LoginView,
     },
@@ -59,6 +55,15 @@ const router = new VueRouter({
       meta: {
         auth: true
       }
+    },
+    {
+      path: '/close-bet/:id',
+      name: 'close-bet',
+      component: CloseBetView,
+      meta: {
+        auth: true
+      },
+      props: true
     },
     {
       path: '/bets',
@@ -109,7 +114,7 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/game-detail',
+      path: '/game-detail/:id',
       name: 'game-detail',
       component: GameDetailView,
       meta: {
@@ -137,15 +142,15 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
 
-  const tokenIsValid = localStorageService.get('token');
+  const hasToken = localStorageService.get('token');
 
   if (to.meta?.auth) {
-    if (tokenIsValid) {
+    if (hasToken) {
       next();
     } else {
       next({ name: 'login' });
     }
-  } else if ((to.name === 'login' || to.name === 'root') && tokenIsValid) {
+  } else if ((to.name === 'login') && hasToken) {
     next({ name: 'home' });
   } else {
     next();

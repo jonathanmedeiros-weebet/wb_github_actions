@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { RouterView } from 'vue-router'
 import { useConfigClient } from './stores'
 import SplashScreen from './components/SplashScreen.vue'

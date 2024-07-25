@@ -1,33 +1,40 @@
 <template>
     <div class="game-list">
-        <Collapse
-            class="game-list__collapse"
-            :initCollapsed="true"
-            v-for="(championship, index) in championshipList"
-            :key="index"
-        >
-            <template #title>
-                <img v-if="championship.image" :src="championship.image" />
-                <component v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
-                {{ championship.nome }}
-            </template>
+        <span class="game-list__message" v-if="!hasChampionshipList">Nenhum evento disponível</span>
+        <template v-else>
+            <Collapse
+                class="game-list__collapse"
+                :initCollapsed="true"
+                v-for="(championship, index) in championshipList"
+                :key="index"
+            >
+                <template #title>
+                    <img
+                        v-if="championship.image"
+                        :src="championship.image"
+                        @error="changeSrcWhenImageError"
+                    />
+                    <component v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
+                    {{ championship.nome }}
+                </template>
 
-            <div class="game-list__items"> 
-                <div class="game-list__item-empty">
-                    <div class="game-list__columns">
-                    <span class="game-list__column">1</span>
-                    <span class="game-list__column">x</span>
-                    <span class="game-list__column">2</span>
+                <div class="game-list__items"> 
+                    <div class="game-list__item-empty">
+                        <div class="game-list__columns">
+                        <span class="game-list__column">1</span>
+                        <span class="game-list__column">x</span>
+                        <span class="game-list__column">2</span>
+                        </div>
                     </div>
+                    <GameItem
+                        v-for="(game, index) in championship.jogos"
+                        :key="index"
+                        :game="game"
+                        @click.native="handleClick(game._id)"
+                    />
                 </div>
-                <GameItem
-                    v-for="(game, index) in championship.jogos"
-                    :key="index"
-                    :game="game"
-                    @click="handleClick(game)"
-                />
-            </div>
-        </Collapse>
+            </Collapse>
+        </template>
     </div>
 </template>
 
@@ -36,6 +43,7 @@ import Collapse from '@/components/Collapse.vue';
 import GameItem from './GameItem.vue';
 import { useHomeStore } from '@/stores';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
+import { hasQuotaPermission, calculateQuota } from '@/services';
 export default {
   components: { Collapse, GameItem, IconGlobal },
     name: 'game-list',
@@ -45,22 +53,50 @@ export default {
         }
     },
     computed: {
+        hasChampionshipList() {
+            return Boolean(this.championshipList.length);
+        },
         championshipList() {
             return this.homeStore.championshipList.map((championship) => {
-                if(championship.regiao_sigla !== 'ww') {
-                    championship.image = `https://cdn.wee.bet/flags/1x1/${championship.regiao_sigla}.svg`;
+                const newChampionship = { ...championship };
+                if(newChampionship.regiao_sigla !== 'ww') {
+                    newChampionship.image = `https://cdn.wee.bet/flags/1x1/${newChampionship.regiao_sigla}.svg`;
                 } else {
-                    championship.icon = IconGlobal;
+                    newChampionship.icon = IconGlobal;
                 }
+
+                newChampionship.jogos = championship.jogos.map((game) => {
+                    const newGame = { ...game };
+                    newGame.cotacoes = newGame.cotacoes.map(quota => {
+                        const finalValue = calculateQuota({
+                            value: quota.valor,
+                            key: quota.chave,
+                            gameEventId: newGame.event_id,
+                            favorite: newGame.favorito,
+                            isLive: newGame.ao_vivo
+                        });
+                        const hasPermission = hasQuotaPermission(finalValue)
+
+                        return {
+                            ...quota,
+                            hasPermission,
+                            finalValue
+                        };
+                    })
+                    return newGame;
+                })
                 
-                return championship;
+                return newChampionship;
             });
         }
     },
     methods: {
-        handleClick(game) {
-            this.$emit('click', game);
+        handleClick(gameId) {
+            this.$emit('gameClick', gameId);
         },
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        }
     }
 }
 </script>
@@ -107,6 +143,14 @@ export default {
         border-radius: 50px;
         width: 16px;
         height: 16px;
+    }
+
+    &__message {
+        display: flex;
+        width: 100%;
+        padding: 8px 16px;
+        font-size: 12px;
+        color: var(--color-text-input);
     }
 }
 </style>

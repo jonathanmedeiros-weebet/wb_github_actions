@@ -10,6 +10,8 @@
         <slot></slot>
         <span class="header__title" v-if="title"> {{ title }}</span>
         <div class="header__action-buttons">
+            <slot name="actions"></slot>
+
             <button
                 class="header__action-button"
                 v-if="showCalendarButton"
