@@ -136,7 +136,7 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
-import { checkLive, closeBet, getById, tokenLiveClosing } from '@/services'
+import { checkLive, closeBet, getById, simulateBetClosure, tokenLiveClosing } from '@/services'
 import { convertInMomentInstance, formatDateBR, formatCurrency } from '@/utilities'
 import { Modalities } from '@/enums';
 
@@ -178,16 +178,18 @@ export default {
     },
     async closeBet() {
       // TODO: IMPLEMENTADO O SERVICE DE IMPLEMENTAR A APOSTA MAS FALTA TESTAR 
-      // simulateBetClosure(this.bet.id)
-      // then(resp => {
-      //   console.log(resp);
-      // })
-      // .catch(error => {
-      //   console.error(error);
-      // })
       console.log('SIMULAR FECAR A APOSTA!');
-      this.showCloseBet = false;
-      this.showClickFinalized = true;
+      simulateBetClosure(this.bet.id)
+      .then(resp => {
+        console.log(resp);
+        this.showCloseBet = false;
+        this.showClickFinalized = true;
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      
+      
   
     },
     cancelAction() {
