@@ -16,7 +16,7 @@ export const config: any = {
     CENTER_API: `${_center}/v1`,
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
-    SLUG: 'weebet.marcosfelipe',
+    SLUG: 'demo.wee.bet',
     // LOGO: _host.replace('central.', '')+'/assets/images/logo_banca.png',
     LOGO: 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png',
     LOGO_IMPRESSAO: 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_impressao.png',
