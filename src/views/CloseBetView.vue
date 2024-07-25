@@ -127,8 +127,6 @@
 </template>
 
 <script>
-import moment from 'moment';
-import 'moment/locale/pt-br';
 import Header from '@/components/layouts/Header.vue';
 import IconBall from '@/components/icons/IconBall.vue';
 import IconLive from '@/components/icons/IconLive.vue';
@@ -139,11 +137,8 @@ import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
 import { checkLive, closeBet, getById, tokenLiveClosing } from '@/services'
-import { formatCurrency } from '@/utilities'
-
-const MODALITY_SPORT_FUTEBOL = 1;
-const MODALITY_SPORT_VOLEI = 91;
-const MODALITY_SPORT_E_SPORTS = 151;
+import { convertInMomentInstance, formatDateBR, formatCurrency } from '@/utilities'
+import { Modalities } from '@/enums';
 
 export default {
   name: 'close-bet',
@@ -179,7 +174,7 @@ export default {
   },
   methods: {
     formatDate(date) {
-      return moment(date).locale('pt-br').format('DD/MM/YYYY');
+      return formatDateBR(date);
     },
     async closeBet() {
       // TODO: IMPLEMENTADO O SERVICE DE IMPLEMENTAR A APOSTA MAS FALTA TESTAR 
@@ -255,7 +250,7 @@ export default {
         return formatCurrency(value);
     },
     formateDateTime(datetime) {
-        return moment(datetime).format("DD/MM/YYYY HH:mm");
+        return convertInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
     },
     capitalizeFirstLetter(str) {
         if(str){
@@ -299,13 +294,13 @@ export default {
   },
   computed: {
     MODALITY_SPORT_FUTEBOL() {
-      return MODALITY_SPORT_FUTEBOL;
+      return Modalities.SOCCER;
     },
     MODALITY_SPORT_VOLEI() {
-      return MODALITY_SPORT_VOLEI;
+      return Modalities.VOLEIBALL;
     },
     MODALITY_SPORT_E_SPORTS() {
-      return MODALITY_SPORT_E_SPORTS;
+      return Modalities.E_SPORT;
     },
   }
 }

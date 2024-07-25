@@ -160,7 +160,11 @@
         </div>
       </div>
 
-      <WModal ref="modalPay" v-if="showModalPay" @close="handleClosePayModal">
+      <WModal 
+        ref="modalPay" 
+        v-if="showModalPay" 
+        @close="handleClosePayModal"
+      >
         
         <template #title>
           <p>Pagar aposta</p>
@@ -208,8 +212,7 @@ import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 import { find, payBet } from '@/services'
-import moment from 'moment'
-import { formatCurrency } from '@/utilities'
+import { convertInMomentInstance, formatCurrency } from '@/utilities'
 import { useConfigClient } from '@/stores'
 import Toast from '@/components/Toast.vue'
 
@@ -330,7 +333,7 @@ export default {
       this.$refs['wmodal'].handleClose();
     },
     formateDateTime(datetime) {
-      return moment(datetime).format("DD/MM/YYYY HH:mm");
+      return convertInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
     },
     capitalizeFirstLetter(str) {
       if(str){
