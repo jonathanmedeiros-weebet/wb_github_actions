@@ -402,15 +402,6 @@ gulp.task('mastersports.wee.bet', function (done) {
     });
 });
 
-gulp.task('redelsports.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "redelsports.com",
-        banca: "REDE LSPORTS",
-        styles: ""
-    });
-});
-
 gulp.task('megasports.club', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1847,17 +1838,6 @@ gulp.task('betbras.com', function (done) {
     });
 });
 
-gulp.task('betei7.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "betei7.com",
-        banca: "Betei7",
-        styles: "",
-        scripts: "<!-- Google tag (gtag.js) --><script async src='https://www.googletagmanager.com/gtag/js?id=G-01DFJHWG0L'></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-01DFJHWG0L');</script>",
-        pixel:"<!-- Meta Pixel Code --><script>  !function(f,b,e,v,n,t,s)  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?  n.callMethod.apply(n,arguments):n.queue.push(arguments)};  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';  n.queue=[];t=b.createElement(e);t.async=!0;  t.src=v;s=b.getElementsByTagName(e)[0];  s.parentNode.insertBefore(t,s)}(window, document,'script',  'https://connect.facebook.net/en_US/fbevents.js');  fbq('init', '764505425455248');  fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'  src='https://www.facebook.com/tr?id=764505425455248&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
-    });
-});
-
 gulp.task('capitalbets.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1884,17 +1864,6 @@ gulp.task('betinvestidor.com', function (done) {
         host: "betinvestidor.com",
         banca: "BET INVESTIDOR",
         styles: "",
-    });
-});
-
-gulp.task('a7bet.fun', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "a7bet.fun",
-        banca: "A7 BET",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://cdn.wee.bet/jivosite/jivosite.css'>",
-        scripts: "<script src='https://cdn.wee.bet/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/7HdsXw7HgD' async></script>",
     });
 });
 
@@ -2699,15 +2668,6 @@ gulp.task('pixplay.io', function (done) {
         server: "front4.wee.bet",
         host: "pixplay.io",
         banca: "PIX PLAY",
-        styles: ""
-    });
-});
-
-gulp.task('sortepix.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "sortepix.com",
-        banca: "SORTE PIX",
         styles: ""
     });
 });
