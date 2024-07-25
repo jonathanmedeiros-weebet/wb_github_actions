@@ -3,7 +3,7 @@ import {AbstractControl, UntypedFormBuilder, Validators} from '@angular/forms';
 
 import {Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService} from './../../../../services';
+import {ApostaService, AuthService, ClienteService, FinanceiroService, MessageService, ParametrosLocaisService, PromocoesService} from './../../../../services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Usuario} from '../../../models/usuario';
@@ -16,6 +16,8 @@ import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-m
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
+import { Promocao } from 'src/app/shared/models/clientes/promocao';
+import { PromocoesModule } from 'src/app/promocoes/promocoes.module';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -52,6 +54,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     registerCancel = false;
     modalClose = true;
+    promocoes: any;
+    promocaoAtiva = true;
+    valorPromocao: number | null = null;
+    bonusModalidade: string | null = null;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -67,11 +73,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
+        private financeiroService: FinanceiroService,
     ) {
         super();
     }
 
     ngOnInit() {
+        this.getPromocoes();
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
@@ -151,13 +159,63 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
     }
 
+    getPromocoes(queryParams?: any) {
+        this.financeiroService.getPromocoes(queryParams)
+            .subscribe(
+                response => {
+                    this.promocoes = response;
+                    this.verificarPromocaoAtiva();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+    }
+
+    verificarPromocaoAtiva(): void {
+        if (this.promocoes && this.promocoes.length > 0) {
+            const promocaoEsportivo = this.promocoes.find(promocoesExistentes => promocoesExistentes.ativo && promocoesExistentes.bonusModalidade === 'esportivo')
+            const promocaoCassino = this.promocoes.find(promocoesExistentes => promocoesExistentes.ativo && promocoesExistentes.bonusModalidade === 'cassino')
+
+            if (promocaoCassino) {
+                this.promocaoAtiva = true;
+                this.valorPromocao = parseFloat(promocaoCassino.valorBonus);
+                this.bonusModalidade = 'cassino';
+            } else if (promocaoEsportivo) {
+                this.promocaoAtiva = true;
+                this.valorPromocao = parseFloat(promocaoEsportivo.valorBonus);
+                this,this.bonusModalidade = 'esportivo';
+            } else {
+                this.promocaoAtiva = false;
+                this.valorPromocao = null;
+            }
+        } else {
+            this.promocaoAtiva = false;
+            this.valorPromocao = null;
+        }
+    }
+  
+    descricaoParagrafo(): string {
+        if (this.promocaoAtiva && this.valorPromocao) {
+            if (this.bonusModalidade === 'cassino') {
+                return `Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até R$ ${this.valorPromocao}`;
+            } else if (this.bonusModalidade === 'esportivo') {
+                return `Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até R$ ${this.valorPromocao}.`;
+            }
+        } else {
+            return 'Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.';
+        }
+    }
+
     closeModal(){
         this.modalClose = false;
         this.registerCancel = true;
     }
+
     cancelModal() {
         this.activeModal.dismiss();
     }
+
     registerOpen(){
         this.registerCancel = false;
         this.modalClose = true;
