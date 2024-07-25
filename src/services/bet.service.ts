@@ -59,7 +59,7 @@ export const payBet = async ( id: number ) => {
 
 export const simulateBetClosure = async ( id: number ) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/simular-encerramento?aposta=${id}`;
+    const url = `${apiUrl}/apostas/simular-encerramento?aposta=${id}`;
         
     return await axiosInstance().get(url);
 }
