@@ -726,15 +726,6 @@ gulp.task('ilhabet.net', function (done) {
     });
 });
 
-gulp.task('nortaobet.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "nortaobet.com",
-        banca: "NORTÃO BET",
-        styles: "",
-    });
-});
-
 gulp.task('jmxbet.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2487,15 +2478,6 @@ gulp.task('multisports.bet', function (done) {
         banca: "MULTISPORTS",
         styles: "",
         dominioTemp: "multisports.wee.bet"
-    });
-});
-
-gulp.task('alfa-bet.club', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "alfa-bet.club",
-        banca: "ALFA BET",
-        styles: ""
     });
 });
 
