@@ -49,6 +49,7 @@
         "cancelar": "Cancel",
         "fechar": "Close",
         "todos": "All",
+        "concluido": "Completed",
         "confirmar": "Confirm",
         "ganhou": "Win",
         "perdeu": "Lost",
@@ -103,6 +104,8 @@
         "selecionarTodos": "Select all",
         "selecionarTodosDe": "Select all from",
         "validarAposta": "Validate Bet",
+        "replicarApostaLoteria": "Replicate Bet Lottery",
+        "replicarAposta": "Replicate Bet",
         "codigoAposta": "Bet Code",
         "codigoPreAposta": "Pre-bet Code",
         "totalDeJogos": "Total games",
@@ -130,6 +133,7 @@
         "informacoesDeContato": "Contact Info",
         "telefone": "Phone",
         "email": "Email",
+        "confirmarEmail": "Confirmar E-mail",
         "endereco": "Address",
         "cep": "Zipcode",
         "logradouro": "Street",
@@ -181,6 +185,7 @@
         "selecionarIdioma": "Select Language",
         "ingles": "English",
         "portugues": "Português",
+        "espanhol": "Español",
         "criacao": "Creation",
         "cambista": "Money changer",
         "cliente": "Client",
@@ -204,11 +209,14 @@
         "semPermissaoAcesso": "No access permission",
         "cadastroMenorDeIdade": "Registration only permitted for people over 18 years of age.",
         "cadastro": "Registration",
+        "tituloInformativoCookies": "Use of Cookies and Sessions",
+        "informativoCookies": "This website uses cookies and sessions to enhance your experience. Cookies are small text files stored on your device that help us keep you authenticated, customize features and settings, as well as improve website functionality. By continuing to use this website, you agree to the use of cookies and sessions in accordance with our Privacy Policy.",
         "alertaChavePixCpf": "When requesting the withdrawal, it will be processed through the Pix key associated with your CPF (Brazilian Tax ID). Ensure that your CPF is filled in correctly.",
         "esportivo": "sporty",
         "rodadaGratis": "Free Spin",
         "dataVencimento": "Expiration date",
         "quantidade": "Quantity",
+        "quantidadeUtilizada": "Qty. used",
         "jogarAgora": "Play now",
         "nenhumaRodadaGratis": "No free spins found.",
         "opcaoPromocao": "Select one of the options to view the current promotions.",
@@ -235,7 +243,12 @@
         "limparHistorico": "Clear history",
         "nenhumResultadoEncontrado": "No results found for this search",
         "jogosEmAlta": "Trending games",
-        "nenhumJogoDisponivel": "No games available at the moment"
+        "nenhumJogoDisponivel": "No games available at the moment",
+        "loginGoogle" : "Sign in with Google account.",
+        "computadoEm": "Computed in:",
+        "alteracoesSucesso": "Changes made successfully!",
+        "erroInesperado": "Something unexpected happened. Please try again later.",
+        "enderecoNaoEncontrado": "Address not found, please fill it in manually."
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -265,7 +278,8 @@
         "desafio": "CHALLENGE",
         "acumuladao": "ACCUMULATED",
         "loteria": "LOTERY",
-        "promocao": "PROMOTIONS"
+        "promocao": "PROMOTIONS",
+        "rifas": "RIFAS"
     },
     "submenu": {
         "copa22": "Cup 2022",
@@ -306,6 +320,7 @@
         "cotacao": "Quotation",
         "aceitarAlteracoesDeOdds": "Accept odds changes",
         "apostar": "Bet",
+        "comprar": "Buy",
         "utilizarBonus": "Use bonus",
         "algumasCotacoesMudaram": "Some odds have changed, check carefully before confirming the bet",
         "algumasCotacoesMudaramPreAposta": "Some odds have changed since the pre-bet was created, check carefully before validating.",
@@ -351,6 +366,8 @@
         "confirmarSenha": "Confirm password",
         "redefinirSenha": "Redefine password",
         "codigoDeVerificacao": "Verification Code",
+        "codigoDeVerificacaoPorSms": "Verification code sent via SMS",
+        "codigoDeVerificacaoPorEmail": "Verification code sent via e-mail",
         "reenviaCodigoDeVerificacao": "Resend Verification Code",
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
@@ -375,7 +392,10 @@
         "enterPixKey": "Select the type of PIX key",
         "minimumWithdrawal": "Minimum withdrawal",
         "dailyMaximum": "Daily maximum",
-        "monthlyMaximum": "Monthly maximum"
+        "monthlyMaximum": "Monthly maximum",
+        "identityVerify": "Verify identity",
+        "identityVerifyNeeded": "To proceed with the withdrawal, it will be necessary to perform identity verification beforehand.",
+        "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support."
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -570,5 +590,68 @@
         "outubro": "October",
         "novembro": "November",
         "dezembro": "December"
+    },
+    "placeholders": {
+        "selecione_uma_opcao": "Select an option"
+    },
+    "botoes": {
+        "aceitar": "Accept",
+        "salvar_alteracoes": "Save Changes",
+        "voltar": "Back"
+    },
+    "conta": {
+        "recuperarMinhaConta": "Recover my account!",
+        "contaBloqueadaPorTentativas": "Your account has been blocked because you have exceeded the maximum number of Login attempts.",
+        "instrucoesRecuperacao": "Please use password recovery to unlock your account."
+    },
+    "jogo_responsavel": {
+        "limite_apostas": {
+            "titulo": "Betting Limit",
+            "descricao": "The betting limit setting is a feature that allows you to set a maximum value for your bets. This setting helps to control and limit the amount that can be wagered, avoiding excessive spending and irresponsible gambling behavior. Daily, weekly, and monthly limits can be configured for bets.",
+            "definir_limite_diario": "Set daily betting limit",
+            "definir_limite_semanal": "Set weekly betting limit",
+            "definir_limite_mensal": "Set monthly betting limit"
+        },
+        "limite_depositos": {
+            "titulo": "Deposit Limit",
+            "descricao": "The deposit limit setting is a feature that allows you to set a maximum value for the deposits that can be made into your account. This setting aims to help control the amount of money invested, preventing excessive spending and promoting responsible gaming. The established deposit limit prevents you from depositing amounts above this limit for a certain period of time (daily, weekly, and monthly).",
+            "definir_limite_diario": "Set daily deposit limit",
+            "definir_limite_semanal": "Set weekly deposit limit",
+            "definir_limite_mensal": "Set monthly deposit limit"
+        },
+        "periodo_pausa": {
+            "titulo": "Pause Period",
+            "descricao": "The account pause period feature allows you to temporarily suspend the use of your account on the platform. During this period, the account becomes inactive, preventing access and the performance of activities such as betting, withdrawals, and deposits. This option is useful for taking a temporary break, without permanently deleting the account, preserving data and settings for later reactivation.",
+            "definir_periodo_pausa": "Set pause period",
+            "6horas": "6 hours",
+            "12horas": "12 hours",
+            "24horas": "24 hours",
+            "36horas": "36 hours",
+            "48horas": "48 hours",
+            "72horas": "72 hours",
+            "custom": "Customize",
+            "periodo_pausa_ativado": "The pause period is activated. Your account will return to normal in: {{info}}"
+        },
+        "exclusao_conta": {
+            "titulo": "Account Exclusion",
+            "descricao": "Permanently deleting the account is an action that results in the complete removal of the account and all associated information, irreversibly. This includes personal data, betting history, and access to the platform. By permanently deleting the account, you will end your participation on the site definitively, with no possibility of recovering the account or its information in the future.",
+            "descricao_2": "Additionally, we emphasize that this action will also result in the impossibility of creating a new account on the platform.",
+            "informe_motivo": "Inform the reason why you want to permanently delete your account:",
+            "motivo_1": "A second account was created",
+            "motivo_2": "It takes up too much of my time/attention",
+            "motivo_3": "I am no longer interested in betting on this site",
+            "motivo_4": "I am no longer using this account",
+            "motivo_5": "Issues using the system",
+            "motivo_6": "Other reasons",
+            "digite_para_continuar": "Type \"<b>PERMANENTLY DELETE</b>\" to confirm the deletion action.",
+            "explique_motivo": "Explain why you are deleting the account...",
+            "excluir_conta": "Permanently delete account"
+        },
+        "temporizador_sessao": {
+            "titulo": "Session Timer",
+            "descricao": "The session timer is a setting that allows you to set a time limit for platform usage. It helps control the time spent, alerting you when the limit is reached and automatically ending your session, promoting balanced and conscious use. For example, you can choose to limit your sessions to 30 minutes, 1 hour, or any other suitable interval for you, and also disable this feature as desired. When the session time limit is reached, our system will automatically end your session and log you out of your account. This helps ensure that you respect your predefined time limits.",
+            "definir_tempo": "Set session time",
+            "desativado": "Disabled"
+        }
     }
 }

@@ -27,7 +27,6 @@ export class DepositoComponent implements OnInit, OnDestroy {
         private paramsLocais: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         private siderbarService: SidebarService,
-        private financeiroService: FinanceiroService,
         private messageService: MessageService,
         public activeModal: NgbActiveModal,
         private cd: ChangeDetectorRef,

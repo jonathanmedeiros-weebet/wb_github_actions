@@ -1,19 +1,25 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-
-import {AuthDoisFatoresModalComponent, ValidarEmailModalComponent} from '../../modals';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { UntypedFormBuilder } from '@angular/forms';
+import { Router} from '@angular/router';
+import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ApostaService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { AuthService, MessageService, ParametrosLocaisService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
 import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
-import {config} from '../../../config';
+import { config } from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { FormValidations } from 'src/app/shared/utils';
+import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
+
+enum LoginErrorCode {
+    INACTIVE_REGISTER = 'cadastro_inativo',
+    CUSTOMER_BLOCKED = 'customerBlocked'
+}
 
 @Component({
     selector: 'app-login-modal',
@@ -35,22 +41,24 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     loginGoogle = false;
     resgister_cancel = false;
     googleUser;
+    private geolocation: Geolocation;
 
     constructor(
         public activeModal: NgbActiveModal,
         private fb: UntypedFormBuilder,
-        private apostaService: ApostaService,
         private messageService: MessageService,
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService,
         private socialAuth: SocialAuthService,
         private router: Router,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
 
     ngOnInit() {
+
         this.appMobile = this.auth.isAppMobile();
         if (window.innerWidth > 1025) {
             this.isMobile = false;
@@ -95,6 +103,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 );
         }
 
+        this.geolocationService
+            .getGeolocation()
+            .then((geolocation) => this.geolocation = geolocation)
     }
     registerCancel(){
         this.resgister_cancel = true;
@@ -123,46 +134,86 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .subscribe(
                 (res) => {
                     this.getUsuario();
+
                     if (
-                        this.usuario && this.usuario.tipo_usuario === 'cliente'
-                        && this.authDoisFatoresHabilitado
-                        && this.auth.getCookie(this.usuario.cookie) === ''
-                        && this.usuario.login !== 'suporte@wee.bet'
+                        Boolean(res) &&
+                        Boolean(res.results) &&
+                        Boolean(res.results.migracao)
                     ) {
-                        this.abrirModalAuthDoisFatores();
-                    } else if (res && res.results && res.results.migracao) {
                         this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
                         this.activeModal.dismiss();
-                    } else {
-                        this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                        this.auth.login(this.form.value)
-                            .pipe(takeUntil(this.unsub$))
-                            .subscribe(
-                                () => {
-                                    this.getUsuario();
-                                    if (this.usuario.tipo_usuario === 'cambista') {
-                                        location.reload();
-                                    }
-                                    this.activeModal.dismiss();
-                                },
-                                error => this.handleError(error)
-                            );
+                        return;
                     }
+
+                    if (
+                        Boolean(this.usuario) && 
+                        this.usuario.tipo_usuario === 'cliente' &&
+                        this.authDoisFatoresHabilitado &&
+                        !Boolean(this.auth.getCookie(this.usuario.cookie)) &&
+                        this.usuario.login !== 'suporte@wee.bet'
+                    ) {
+                        this.abrirModalAuthDoisFatores();
+                        return;
+                    }  
+                    
+                    this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
+                    const data = {
+                        ...this.form.value,
+                        cookie: this.auth.getCookie(this.usuario.cookie),
+                        geolocation: this.geolocation
+                    };
+
+                    this.auth.login(data)
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(
+                            () => {
+                                this.getUsuario();
+
+                                if (this.usuario.tipo_usuario === 'cambista') {
+                                    location.reload();
+                                }
+
+                                this.activeModal.close(true);
+                                this.router.navigate([this.router.url]);
+                            },
+                            error => this.handleError(error)
+                        );
                 },
-                error => {
+                (error) => {
                     this.handleError(error.message);
-                    if (error.code === 'cadastro_inativo') {
+                    if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
                         sessionStorage.setItem('user', JSON.stringify(error.user));
-                        this.activeModal.dismiss();
-                        this.modalService.open(ValidarEmailModalComponent, {
-                            ariaLabelledBy: 'modal-basic-title',
-                            windowClass: 'modal-pop-up',
-                            centered: true,
-                            backdrop: 'static'
-                        });
+                        this.openModalInactiveRegister();
+                    }
+
+                    if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
+                        this.openModalBlockPeerAttemps();
                     }
                 }
             );
+    }
+
+    private openModalInactiveRegister() {
+        this.activeModal.dismiss();
+        this.modalService.open(ValidarEmailModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static'
+        });
+    }
+
+    private openModalBlockPeerAttemps() {
+        this.activeModal.dismiss();
+        this.modalRef = this.modalService.open(
+            BlockPeerAttempsModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+                backdrop: 'static',
+                windowClass: 'modal-600'
+            }
+        );
     }
 
     getUsuario() {
@@ -235,5 +286,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     onBeforeInput(e, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
+    }
+
+    public toClose() {
+        this.activeModal.dismiss('Cross click')
     }
 }

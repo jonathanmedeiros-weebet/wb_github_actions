@@ -39,6 +39,8 @@ import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ga
 import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
 import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
 
+declare var xtremepush: any;
+
 @Component({
     selector: 'app-header',
     templateUrl: 'header.component.html',
@@ -98,17 +100,20 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     cassinoAtivo;
     virtuaisAtivo;
     parlaybayAtivo;
+    rifa = false;
     loteriaPopularAtiva;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
+    desafioNome: string;
     paginaPromocaoHabilitado = false;
     indiqueGanheHabilitado = false;
     cartaoApostaHabilitado;
     isDemo = location.host === 'demo.wee.bet';
     aoVivoAtivo;
-
+    notificationsXtremepushOpen = false;
     public showHeaderMobile: boolean = false;
+    xtremepushHabilitado = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -145,7 +150,26 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         super();
     }
 
+    get customCasinoName(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('menu.cassino'),
+            this.translate.instant('geral.cassino').toUpperCase()
+        );
+    }
+
+    get customLiveCasinoName(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('menu.cassino-aovivo'),
+            this.translate.instant('geral.cassino').toUpperCase()
+        );
+    }
+
     ngOnInit() {
+
+        this.xtremepushHabilitado = this.paramsService.getOpcoes().xtremepush_habilitado;
+        if(this.xtremepushHabilitado) {
+            this.verificarNotificacoes();
+        }
         this.BANCA_NOME = config.BANCA_NOME;
         this.appMobile = this.auth.isAppMobile();
         this.appVersion = localStorage.getItem('app_version');
@@ -204,6 +228,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.aoVivoAtivo = this.paramsService.aoVivoAtivo();
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
+        this.desafioNome = this.paramsService.getOpcoes().desafio_nome;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;
         this.loteriasHabilitado = this.paramsService.getOpcoes().loterias;
         this.seninhaAtiva = this.paramsService.seninhaAtiva();
@@ -213,6 +238,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
+        this.rifa = this.paramsService.getOpcoes().rifa;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
@@ -285,6 +311,21 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         if(!this.indiqueGanheHabilitado){
             this.layoutService.indiqueGanheRemovido(true);
         }
+    }
+
+    verificarNotificacoes(){
+       setInterval(() => {
+            xtremepush('inbox', 'message.list', {
+                limit: 1,
+                opened: 0
+            }, (result) => {
+                if (result.items.length > 0) {
+                    this.atualizarBadge(true);
+                }
+            }, function(err) {
+                console.log(err);
+            });
+        }, 50000);
     }
 
     ngOnDestroy() {
@@ -552,5 +593,80 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     private onShowHeaderMobile() {
         this.showHeaderMobile = window.innerWidth <= 1281;
         this.layoutService.changeHeaderHeigh(this.showHeaderMobile ? 106 : 92);
+    }
+
+    notificationsXtremepush() {
+        this.atualizarBadge(false);
+
+        const xtremepushNotificationContainer = document.getElementById('xtremepushNotificationContainer');
+        xtremepushNotificationContainer.innerHTML = '';
+
+        const loadItems = () => {
+            xtremepush('inbox', 'message.list', {
+            }, (result) => {
+                for (let i = 0; i < result.items.length; i++) {
+                    const xtremepushItem = result.items[i];
+
+                    const date = new Date(xtremepushItem.create_time * 1000);
+                    const formattedDate = date.toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+
+                    const xtremepushElement = document.createElement('div');
+                    xtremepushElement.className = 'xtremepush-notification-item';
+                    xtremepushElement.innerHTML = `
+                    <div class="xtremepush-card" style="
+                        border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+                        padding-bottom: 10px;
+                    ">
+                        <img src="${xtremepushItem.message.icon}" class="xtremepush-card-img-top" alt="${xtremepushItem.message.title}">
+                        <div class="xtremepush-card-body">
+                            <h5 class="xtremepush-card-title">${xtremepushItem.message.title}</h5>
+                            <p class="xtremepush-card-text">${xtremepushItem.message.alert}</p>
+                            <p class="xtremepush-card-date">${formattedDate}</p>
+                        </div>
+                    </div>
+                `;
+
+                    xtremepushElement.addEventListener('click', () => {
+                        xtremepush('inbox', 'message.action', {
+                            id: xtremepushItem.id,
+                            open: 1
+                        }, (result) => {
+                            // if (result.badge !== undefined) {
+                            //     this.atualizarBadge(result.badge);
+                            // }
+                        }, (err) => {
+                            console.log(err);
+                        });
+                    });
+
+                    xtremepushNotificationContainer.appendChild(xtremepushElement);
+                }
+            }, (err) => {
+                console.log(err);
+            });
+        };
+
+        loadItems();
+
+        this.notificationsXtremepushOpen = !this.notificationsXtremepushOpen;
+    }
+
+    atualizarBadge(badge) {
+        const badgeElement = document.getElementById('badge-xtremepush');
+        if (badge == true) {
+            badgeElement.classList.add('show-badge');
+        } else {
+            badgeElement.classList.remove('show-badge');
+        }
+    }
+
+    closeNotifications() {
+        this.notificationsXtremepushOpen = false;
     }
 }

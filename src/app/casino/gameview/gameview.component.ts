@@ -1,13 +1,28 @@
-import {Component, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {AuthService, MenuFooterService, MessageService, UtilsService} from '../../services';
-import {interval} from 'rxjs';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
+import {
+    AuthService,
+    FinanceiroService,
+    MenuFooterService,
+    MessageService,
+    ParametrosLocaisService,
+    UtilsService
+} from '../../services';
+import {interval, Subject} from 'rxjs';
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {
+    CadastroModalComponent,
+    CanceledBonusConfirmComponent,
+    JogosLiberadosBonusModalComponent,
+    LoginModalComponent,
+    RegrasBonusModalComponent
+} from "../../shared/layout/modals";
+import {takeUntil} from "rxjs/operators";
+
 
 
 @Component({
@@ -16,6 +31,7 @@ import {JogosLiberadosBonusModalComponent, RegrasBonusModalComponent} from "../.
     styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
+    @ViewChild('continuarJogandoModal', {static: true}) continuarJogandoModal;
     gameUrl: SafeUrl = '';
     gameId: String = '';
     gameMode: String = '';
@@ -30,6 +46,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
     sessionId = '';
     isMobile = 0;
     removerBotaoFullscreen = false;
+    isLoggedIn = false;
+    backgroundImageUrl = '';
+    posicaoFinanceira;
+    unsub$ = new Subject();
+    avisoCancelarBonus = false;
+    modalRef;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -43,11 +65,24 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private modalService: NgbModal,
         private utilsService: UtilsService,
         private renderer: Renderer2,
+        private paramsService: ParametrosLocaisService,
+        private financeiroService: FinanceiroService,
         @Inject(DOCUMENT) private document: any
-    ) {
+    ) {}
+
+    get customCasinoName(): string {
+        return this.paramsService.getCustomCasinoName();
     }
 
     ngOnInit(): void {
+
+        this.isLoggedIn = this.auth.isLoggedIn();
+        if(this.isLoggedIn) {
+            this.getPosicaoFinanceira()
+        }
+        const routeParams = this.route.snapshot.params;
+        this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
+
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
@@ -87,6 +122,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.router.navigate([casinoAcronyms[String(this.gameFornecedor)]]);
                 return;
             }
+            this.auth.logado
+            .subscribe(
+                isLoggedIn => {
+                    if(isLoggedIn){
+                        this.isLoggedIn = this.auth.isLoggedIn();
+                        if(this.avisoCancelarBonus === false){
+                            this.loadGame();
+                        }
+                    }
+                }
+            );
 
             this.auth.cliente
                 .subscribe(
@@ -95,9 +141,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             if (this.gameMode === 'REAL' && !this.isCliente) {
-                this.router.navigate(['casino']);
+                if(!this.isMobile){
+                    this.abriModalLogin();
+                }
             } else {
-                this.loadGame();
+                if(this.avisoCancelarBonus === false){
+                    this.loadGame();
+                }
             }
             interval(3000)
                 .subscribe(() => {
@@ -132,6 +182,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
+        if(this.modalRef) {
+            this.modalRef.close();
+        }
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         } else if(this.gameFornecedor === 'parlaybay') {
@@ -150,6 +203,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         }
@@ -229,5 +283,87 @@ export class GameviewComponent implements OnInit, OnDestroy {
         bodyScript.append('window.addEventListener("message",(e) => {const { type, mainDomain } = e.data; if(type === "rgs-backToHome") {window.location.href = mainDomain;}});');
         bodyScript.id = 'galaxsysScript';
         body.appendChild(bodyScript);
+    }
+
+    abriModalLogin(){
+        const modalRef = this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
+            }
+        );
+        modalRef.result.then(
+            (result) => {
+                if(result) {
+                    this.isLoggedIn = this.auth.isLoggedIn();
+                    this.getPosicaoFinanceira()
+                }
+            }
+        );
+    }
+
+    abrirCadastro(){
+        this.modalService.open(
+            CadastroModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            }
+        );
+    }
+
+    getPosicaoFinanceira() {
+        this.auth.getPosicaoFinanceira()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                posicaoFinanceira => {
+                    this.posicaoFinanceira = posicaoFinanceira.bonus;
+                    if(this.posicaoFinanceira > 0 && this.posicaoFinanceira < 1) {
+                       this.avisoCancelarBonus = true;
+                       this.abriModalContinuarJogando();
+                    }
+                },
+                error => {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
+                        this.auth.logout();
+                    } else {
+                        this.handleError(error);
+                    }
+                }
+            );
+    }
+
+    abriModalContinuarJogando(){
+        this.modalRef =  this.modalService.open(
+            this.continuarJogandoModal,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+            }
+        );
+    }
+
+    continuarBonus(){
+        this.avisoCancelarBonus = false;
+        this.modalRef.close();
+    }
+
+    continuarSaldoReal(){
+        this.financeiroService.cancelarBonusAtivos()
+            .subscribe(
+                response => {
+                    this.avisoCancelarBonus = false;
+                    this.modalRef.close();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+
     }
 }

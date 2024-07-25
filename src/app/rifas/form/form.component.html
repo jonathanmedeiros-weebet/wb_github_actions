@@ -1,0 +1,39 @@
+<div>
+    <div style="display: flex; flex-wrap: wrap;">
+        <button class="btn big-button" (click)="adicionarNumeros(1)">
+            +1<br>
+            <div style="font-size: 12px">Adicionar</div>
+        </button>
+        <button class="btn big-button" (click)="adicionarNumeros(5)" style="margin-left: 5% ">
+            +5<br>
+            <span style="font-size: 12px">Adicionar</span>
+        </button>
+    </div>
+    <div style="display: flex; flex-wrap: wrap;">
+        <button class="btn big-button" (click)="adicionarNumeros(10)">
+            +10<br>
+            <span style="font-size: 12px">Adicionar</span>
+        </button>
+        <button type="button" class="btn big-button" (click)="adicionarNumeros(20)" style="margin-left: 5%" >
+            +20<br>
+            <span style="font-size: 12px">Adicionar</span>
+        </button>
+    </div>
+
+    <div class="number-show">
+        <button class="float-start" (click)="adicionarNumeros(-1)"><i class="ri-indeterminate-circle-line"></i></button>
+        <span class="center">{{form.value.numeros}}</span>
+        <button class="float-end" (click)="adicionarNumeros(1)"><i class="ri-add-circle-line"></i></button>
+    </div>
+
+
+    <button class="btn btn-custom w-100 margin-top-30" style="font-size: 16px" *ngIf="!disabled; else submiting" (click)="submit()" [attr.disabled]="numeros <= 0 ? true : none">
+        <div *ngIf="submiting">
+            <i class="fa fa-gear fa-spin"></i> Processando ...
+        </div>
+        <div *ngIf="!submiting">
+        <span class="float-start">Comprar agora</span>
+        <span class="float-end">{{form.value.valor | currency}}</span>
+        </div>
+    </button>
+</div>

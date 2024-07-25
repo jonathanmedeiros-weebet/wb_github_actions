@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FinanceiroService, MessageService, SidebarService } from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import { UntypedFormBuilder } from '@angular/forms';
 import { Rollover, RodadaGratis } from '../../models';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ConfirmModalComponent, CanceledBonusConfirmComponent } from 'src/app/shared/layout/modals';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegrasBonusModalComponent } from './../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
@@ -24,6 +24,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     mobileScreen;
     rodadasListagem;
     rolloversListagem;
+    quantityRoundsToNotify: number = 0;
+    quantityRolloversToNotify: number = 0;
     rollovers: Rollover[] = [];
     rodadas: RodadaGratis[] = [];
 
@@ -35,7 +37,6 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         private financeiroService: FinanceiroService,
         private sidebarService: SidebarService,
         private messageService: MessageService,
-        private activatedRoute: ActivatedRoute,
         private menuFooterService: MenuFooterService,
         private paramsLocais: ParametrosLocaisService,
         public activeModal: NgbActiveModal,
@@ -102,13 +103,18 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         this.financeiroService.getRollovers(queryParams)
             .subscribe(
                 response => {
-                    this.rollovers = response.rollovers;
+                    this.rollovers = response.rollovers.map((rollover) => ({
+                        ...rollover,
+                        modalidade: rollover.modalidade == 'cassino'
+                            ? this.paramsLocais.getCustomCasinoName().toLowerCase()
+                            : rollover.modalidade
+                    }));
                     this.rodadas = response.rodadas.map(rodada => {
-                        const status = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : 'Cancelado';
+                        const status = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : (rodada.quantidade <= rodada.quantidadeUtilizada ? 'Concluído' : 'Cancelado');
                         return { ...rodada, status };
                     });
                     this.rodadas.sort((a, b) => {
-                        const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3 };
+                        const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3, 'Concluído': 4};
                         return statusOrder[a.status] - statusOrder[b.status];
                     });
 
@@ -116,6 +122,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                     this.rolloversListagem = this.rollovers;
                     this.showLoading = false;
                     this.loading = false;
+                    this.setQuantityRoundsToNotify();
+                    this.setQuantityRolloversToNotify();
                 },
                 error => {
                     this.handleError(error);
@@ -211,4 +219,20 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     openGame(game: string, fornecedor: string) {
         this.router.navigate(['casino/', fornecedor, game]);
     }
+
+    setQuantityRoundsToNotify(): void{
+        this.rodadas.forEach((round) => {
+            if(round.status === "Ativo"){
+                this.quantityRoundsToNotify++;
+            }
+        })
+    }    
+
+    setQuantityRolloversToNotify(): void{
+        this.rollovers.forEach((rollover) => {
+            if(rollover.status === "ativo"){
+                this.quantityRolloversToNotify++;
+            }
+        })
+    }  
 }

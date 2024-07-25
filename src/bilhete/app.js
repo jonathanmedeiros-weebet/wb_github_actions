@@ -350,6 +350,10 @@ document.onreadystatechange = async function () {
                 }
                 this.getElementById('ticket').hidden = false;
                 this.getElementById('loader').hidden = true;
+
+                if (params.origin == 'app') {
+                    this.getElementById('link-retornar-site').hidden = false;
+                }
             }
         } catch (error) {
             displayError(error);

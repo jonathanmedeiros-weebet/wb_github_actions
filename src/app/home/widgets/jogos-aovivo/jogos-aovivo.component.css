@@ -173,6 +173,13 @@
     opacity: 0.3;
 }
 
+.empty-league-list {
+    color: var(--foreground-header);
+    opacity: 0.5;
+    margin-top: 8px;
+    display: flex;
+}
+
 @media only screen and (max-width: 1024px) {
     .widgets-header {
         padding: 0 0 10px;

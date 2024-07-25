@@ -12,6 +12,7 @@ import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService,
 export class JogosDestaqueComponent implements OnInit, OnChanges {
     @Input() displayLabel = true;
     @Output() maisCotacoesDestaque = new EventEmitter();
+    @Output() hasFeaturedMatches = new EventEmitter<boolean>();
     jogosDestaque = [];
     mobileScreen: boolean;
     itens = [];
@@ -46,7 +47,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
-        this.mobileScreen = window.innerWidth <= 1024 ? true : false;
+        this.mobileScreen = window.innerWidth <= 1024;
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.jogosBloqueados = this.paramsService.getJogosBloqueados();
 
@@ -62,7 +63,13 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
             .subscribe(jogos => {
                 this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
 
-                this.getMatchsInCenter();
+                if (Object.keys(this.jogosDestaquesIds).length) {
+                    this.getMatchsInCenter();
+                    this.hasFeaturedMatches.emit(true);
+                } else {
+                    this.showLoadingIndicator = false;
+                    this.hasFeaturedMatches.emit(false);
+                }
             });
     }
 

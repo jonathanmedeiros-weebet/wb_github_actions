@@ -1,6 +1,6 @@
 .content {
     display: flex;
-    height: calc(100vh - 92px);
+    height: calc(100vh - 129px);
 }
 
 #acumuladao-form {
@@ -38,6 +38,12 @@
 
 .premios .premio {
     padding-right: 20px;
+}
+
+.acumuladao-valor-aposta{
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 5px;
 }
 
 #acumuladao-form .div-back {

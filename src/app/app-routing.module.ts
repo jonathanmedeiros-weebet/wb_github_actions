@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
 import { HomeComponent } from './home/home.component';
+import {RifaGuard} from './shared/services/guards/rifa.guard';
 
 const appRoutes: Routes = [
     {
@@ -82,6 +83,11 @@ const appRoutes: Routes = [
                 canActivate: [LoteriaGuard]
             },
             {
+                path: 'rifas',
+                loadChildren: () => import('./rifas/rifas.module').then(m => m.RifasModule),
+                canActivate: [RifaGuard]
+            },
+            {
                 path: 'resultados',
                 loadChildren: () => import('./resultados/resultados.module').then(m => m.ResultadosModule),
                 canActivate: [AuthGuard]
@@ -94,6 +100,11 @@ const appRoutes: Routes = [
             {
                 path: 'validar-aposta',
                 loadChildren: () => import('./validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
+                canActivate: [AuthGuard, CambistaGuard]
+            },
+            {
+                path: 'copiar-aposta',
+                loadChildren: () => import('./copiar-aposta/copiar-aposta.module').then(m => m.CopiarApostaModule),
                 canActivate: [AuthGuard, CambistaGuard]
             },
             {

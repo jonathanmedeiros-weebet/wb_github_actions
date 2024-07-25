@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChildren, QueryList, Input } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from 'src/app/services';
+import { AuthService, ParametrosLocaisService } from 'src/app/services';
 import { LoginModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
@@ -27,7 +27,12 @@ export class CassinoComponent implements OnInit {
         private renderer: Renderer2,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
+        private paramsService: ParametrosLocaisService
     ) { }
+
+    get customCasinoName(): string {
+        return this.paramsService.getCustomCasinoName(this.title);
+    }
 
     ngOnInit(): void {
         this.isMobile = window.innerWidth < 1025;
