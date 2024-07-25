@@ -4,6 +4,7 @@
         :value="value"
         type="button"
         class="button"
+        @click="handleClick"
     >
         {{ text }}
     </button>
@@ -23,6 +24,11 @@ export default {
         value: {
             type: String,
             default: 'button'
+        }
+    },
+    methods: {
+        handleClick(){
+            this.$emit('click', this.value);
         }
     }
 }

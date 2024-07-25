@@ -135,8 +135,6 @@ export default {
         }
     },
     methods: {
-        hasQuotaPermission,
-        calculateQuota,
         async prepareGameDetail() {
             try {
                 const gameId = String(this.$route.params.id);
@@ -197,7 +195,7 @@ export default {
                     id: quote._id,
                     finalValue,
                     status: quote.status ?? QuotaStatus.DEFAULT,
-                    hasPermission: this.hasQuotaPermission(finalValue)
+                    hasPermission: hasQuotaPermission(finalValue)
                 });
             }
 
@@ -250,7 +248,7 @@ export default {
                         playerIndex = quoteGroups[groupIndex].players.length - 1
                     }
 
-                    const finalValue = this.calculateQuota({
+                    const finalValue = calculateQuota({
                         value: odd.value,
                         key: odd.key,
                         gameEventId: this.game.event_id,

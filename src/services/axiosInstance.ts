@@ -31,6 +31,7 @@ export const axiosInstance = () => {
       if (error.response && error.response.status === 401) {
         localStorageService.removeAuth();
         router.push({ name: 'login' });
+        return;
       }
       return Promise.reject(error)
     }

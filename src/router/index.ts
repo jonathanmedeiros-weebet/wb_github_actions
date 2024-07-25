@@ -14,6 +14,7 @@ import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 import { localStorageService } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
+import CloseBetView from '@/views/CloseBetView.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -54,6 +55,15 @@ const router = new VueRouter({
       meta: {
         auth: true
       }
+    },
+    {
+      path: '/close-bet/:id',
+      name: 'close-bet',
+      component: CloseBetView,
+      meta: {
+        auth: true
+      },
+      props: true
     },
     {
       path: '/bets',
