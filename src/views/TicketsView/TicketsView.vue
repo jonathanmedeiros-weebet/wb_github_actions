@@ -20,7 +20,7 @@
           <div class="bet__header">
             <span class="bet__team">
               <IconLive v-if="item.live" class="bet__icon-live"/>
-              <IconBall class="bet__icon-ball"/>
+              <component :is="item.icon" :size="14" class="bet__icon-ball"/>
               {{ item.gameName }}
             </span>
             <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
@@ -92,7 +92,7 @@
         <div class="cotacao__finalizar">
           <w-button
             id="btn-entrar"
-            text="Finalizar Aposta"
+            :text="buttonText"
             value="entrar"
             class="cotacao__finalizar-button"
             name="btn-entrar"
@@ -114,10 +114,19 @@ import IconClose from '@/components/icons/IconClose.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 import { useConfigClient, useTicketStore, useToastStore } from '@/stores';
-import { formatDateTimeBR } from '@/utilities';
-import { calculateQuota, createPrebet } from '@/services';
+import { delay, formatCurrency, formatDateTimeBR } from '@/utilities';
+import { calculateQuota, createLiveToken, createPrebet } from '@/services';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
+import IconFootball from '@/components/icons/IconFootball.vue';
+import IconCombat from '@/components/icons/IconCombat.vue';
+import IconAmericanFootball from '@/components/icons/IconAmericanFootball.vue';
+import IconTennis from '@/components/icons/IconTennis.vue';
+import IconHockey from '@/components/icons/IconHockey.vue';
+import IconBasketball from '@/components/icons/IconBasketball.vue';
+import IconFutsal from '@/components/icons/IconFutsal.vue';
+import IconVoleiball from '@/components/icons/IconVoleiball.vue';
+import IconESport from '@/components/icons/IconESport.vue';
 
 export default {
   name: 'tickets',
@@ -129,13 +138,34 @@ export default {
     IconClose,
     WInput,
     WButton,
-    Toast
+    Toast,
+    IconFootball,
+    IconCombat,
+    IconTennis,
+    IconHockey,
+    IconBasketball,
+    IconFutsal,
+    IconVoleiball,
+    IconTennis,
+    IconESport
   },
   data() {
     return {  
       ticketStore: useTicketStore(),
       toastStore: useToastStore(),
-      submitting: false
+      submitting: false,
+      icons: {
+        1: IconFootball,
+        9: IconCombat,
+        12: IconAmericanFootball,
+        13: IconTennis,
+        17: IconHockey,
+        48242: IconBasketball,
+        83: IconFutsal,
+        91: IconVoleiball,
+        92: IconTennis,
+        151: IconESport
+      }
     };
   },
   computed: {
@@ -168,11 +198,12 @@ export default {
         ? award
         : options.valor_max_premio;
 
-      return possibilityAward.toFixed(2);
+      return formatCurrency(possibilityAward);
     },
     items() {
       return Object.values(this.ticketStore.items).map(item => ({
         ...item,
+        icon: this.icons[item.modalityId],
         quoteValue: item.quoteValue.toFixed(2)
       }));
     },
@@ -214,6 +245,9 @@ export default {
         || !Boolean(this.items.length)
         || this.submitting
       )
+    },
+    buttonText() {
+      return this.submitting ? 'Processando...' : 'Finalizar Aposta'
     }
   },
   methods: {
@@ -230,8 +264,28 @@ export default {
     handleItemRemove(gameId) {
       this.ticketStore.removeQuote(gameId)
     },
-    handleFinalizeBet() {
+    async handleFinalizeBet() {
       this.submitting = true;
+
+      const { options } = useConfigClient();
+
+      if (this.items.length < options.quantidade_min_jogos_bilhete) {
+        this.toastStore.setToastConfig({
+          message: `Por favor, inclua no MÍNIMO ${options.quantidade_min_jogos_bilhete} evento(s).`,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+        this.submitting = false;
+      }
+
+      if (this.items.length > options.quantidade_max_jogos_bilhete) {
+        this.toastStore.setToastConfig({
+          message: `Por favor, inclua no MÁXIMO ${options.quantidade_max_jogos_bilhete} evento(s).`,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+        this.submitting = false;
+      }
 
       const {items, bettor, value, accepted} = this.ticketStore;
       const data = {
@@ -257,10 +311,16 @@ export default {
         })
       }
 
+      if(this.hasLiveBet) {
+        const liveToken = await createLiveToken(data);
+        data.token_aovivo = liveToken;
+        await delay(10000);
+      }
+
       createPrebet(data)
         .then(() => {
           this.toastStore.setToastConfig({
-            message: 'Pré aposta realizada com sucesso!',
+            message: 'Aposta realizada com sucesso!',
             type: ToastType.SUCCESS,
             duration: 5000
           })
@@ -274,7 +334,7 @@ export default {
             duration: 5000
           })
         })
-        .finally(() => this.submitting = true)
+        .finally(() => this.submitting = false)
     }
   }
 }
@@ -371,7 +431,7 @@ export default {
   }
 
   &__icon-ball {
-    width: 14px;
+    min-width: 14px;
     height: 14px;
   }
 

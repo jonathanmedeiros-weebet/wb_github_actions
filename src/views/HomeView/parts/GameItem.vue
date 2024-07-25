@@ -138,8 +138,10 @@ export default {
             const gameExist = Boolean(items[this.game._id]);
             const quoteExist = items[this.game._id]?.quoteKey == quota.chave;
 
-            let quoteLabel = quota.chave.includes('casa') ? 'Casa' : 'Empate';
-            quoteLabel = quota.chave.includes('fora') ? 'Fora' : 'Empate';
+            let quoteLabel = quota.chave.includes('casa') ? 'Casa' : null;
+            if(!quoteLabel) {
+                quoteLabel = quota.chave.includes('fora') ? 'Fora' : 'Empate';
+            }
 
             if(gameExist && quoteExist) {
                 removeQuote(this.game._id);
@@ -154,7 +156,8 @@ export default {
                     quoteValue: quota.valor,
                     quoteName: quoteLabel,
                     quoteGroupName: 'Resultado final',
-                    favorite: this.game.favorito
+                    favorite: this.game.favorito,
+                    modalityId: this.game.sport_id
                 })
             }
         },

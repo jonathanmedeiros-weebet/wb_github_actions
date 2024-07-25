@@ -128,7 +128,8 @@ export default {
                     quoteValue: odd.value,
                     quoteName: playerName,
                     quoteGroupName: odd.label,
-                    favorite: this.game.favorito
+                    favorite: this.game.favorito,
+                    modalityId: this.game.sport_id
                 })
             }
         },

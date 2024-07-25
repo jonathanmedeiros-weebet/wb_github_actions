@@ -35,7 +35,8 @@ export const useTicketStore = defineStore('ticket', {
             quoteValue,
             quoteName,
             quoteGroupName,
-            favorite
+            favorite,
+            modalityId
         }: any) {
             const items = { ...this.items };
 
@@ -65,7 +66,8 @@ export const useTicketStore = defineStore('ticket', {
                 quoteValue,
                 quoteName,
                 quoteGroupName,
-                favorite
+                favorite,
+                modalityId
             };
             this.items = { ...items }
         },

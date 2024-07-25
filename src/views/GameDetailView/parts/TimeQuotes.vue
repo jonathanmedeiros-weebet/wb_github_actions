@@ -110,8 +110,9 @@ export default {
                     quoteKey: odd.key,
                     quoteValue: odd.value,
                     quoteName: odd.label,
-                    quoteGroup: groupName,
-                    favorite: this.game.favorito
+                    quoteGroupName: groupName,
+                    favorite: this.game.favorito,
+                    modalityId: this.game.sport_id
                 })
             }
         },

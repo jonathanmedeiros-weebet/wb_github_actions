@@ -72,6 +72,11 @@ export default {
         this.toastStore.setToastConfig({ message: '' })
         const resp = await authUser(this.username, this.password);
         if(resp) {
+          this.toastStore.setToastConfig({
+            message: 'Login realizado com sucesso!',
+            type: ToastType.SUCCESS,
+            duration: 2000
+          })
           this.$router.replace('/home');
         }else{
           this.toastStore.setToastConfig({
