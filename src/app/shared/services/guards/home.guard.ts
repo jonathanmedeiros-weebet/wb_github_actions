@@ -31,7 +31,7 @@ export class HomeGuard implements CanActivate {
         }
 
         if (pagina_inicial) {
-            if (pagina_inicial == 'home' && casino && esporte) {
+            if (pagina_inicial == 'home' && casino && (esporte || betby)) {
                 return true;
             }
 

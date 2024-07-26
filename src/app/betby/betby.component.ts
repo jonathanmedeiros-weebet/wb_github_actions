@@ -27,11 +27,7 @@ export class BetbyComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private authService: AuthService,
         private translate: TranslateService,
-    ) {
-        let node = document.createElement("script");
-        node.src = "https://ui.invisiblesport.com/bt-renderer.min.js";
-        document.body.prepend(node);
-    }
+    ) { }
 
     ngOnInit() {
 
@@ -39,14 +35,12 @@ export class BetbyComponent implements OnInit, OnDestroy {
             this.heightHeader = 103;
         }
 
-        setTimeout(() => {
-            let currentLang = this.translate.currentLang;
-            this.authService.getTokenBetby(currentLang).subscribe(
-                (res) => {
-                    this.betbyInitialize(res.token, currentLang);
-                }
-            );
-        }, 500);
+        let currentLang = this.translate.currentLang;
+        this.authService.getTokenBetby(currentLang).subscribe(
+            (res) => {
+                this.betbyInitialize(res.token, currentLang);
+            }
+        );
 
         this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
             console.log('Query Params changed:', params);

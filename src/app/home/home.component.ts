@@ -4,7 +4,10 @@ import { HomeService } from '../shared/services/home.service';
 import { LayoutService } from '../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ParametrosLocaisService } from '../services';
+import { AuthService, ParametrosLocaisService } from '../services';
+import { TranslateService } from '@ngx-translate/core';
+
+declare function BTRenderer(): void;
 
 @Component({
     selector: 'app-home',
@@ -26,16 +29,23 @@ export class HomeComponent implements OnInit {
     loadingCassinoAoVivo = true;
 
     hasFeaturedMatches = true;
+    betby = true;
 
     widgets = [];
 
     unsub$ = new Subject();
+
+    private bt: any;
+    private queryParamsSubscription: any;
+    private langs = { pt: 'pt-br', en: 'en', es: 'es' };
 
     constructor(
         private layoutService: LayoutService,
         private casinoApi: CasinoApiService,
         private homeService: HomeService,
         private cd: ChangeDetectorRef,
+        private translate: TranslateService,
+        private authService: AuthService,
         private paramsService: ParametrosLocaisService
     ) { }
 
@@ -43,6 +53,13 @@ export class HomeComponent implements OnInit {
         this.homeService.getPosicaoWidgets().subscribe(response => {
             this.widgets = response;
         });
+
+        let currentLang = this.translate.currentLang;
+        this.authService.getTokenBetby(currentLang).subscribe(
+            (res) => {
+                this.betbyInitialize(res.token, currentLang);
+            }
+        );
 
         this.casinoApi.getGamesHome().subscribe(response => {
             this.gamesPopulares = response.populares;
@@ -63,5 +80,19 @@ export class HomeComponent implements OnInit {
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
         this.hasFeaturedMatches = hasFeaturedMatches;
+    }
+
+    betbyInitialize(token = null, lang = 'pt-br') {
+        this.bt = new BTRenderer().initialize({
+            brand_id: '2415231049618558976',
+            token: token ?? null,
+            themeName: "demo-turquoise-dark-table",
+            lang: this.langs[lang],
+            target: document.getElementById('betby'),
+            widgetName: "promo",
+            widgetParams: {
+                placeholder: "operator_page",
+            }
+        });
     }
 }
