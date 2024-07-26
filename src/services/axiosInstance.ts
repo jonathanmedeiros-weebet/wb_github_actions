@@ -14,8 +14,9 @@ export const axiosInstance = () => {
 
   axiosInstance.interceptors.request.use(
     (config: any) => {
+      const awsRouteException = config.url.includes('s3.amazonaws');
       const token = localStorageService.get('token');
-      if (token) {
+      if (token && !awsRouteException) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
       return config;
