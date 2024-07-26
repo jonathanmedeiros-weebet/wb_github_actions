@@ -1,18 +1,17 @@
-import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AbstractControl, UntypedFormBuilder, Validators} from '@angular/forms';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
-import {Subject} from 'rxjs';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService} from './../../../../services';
-import {BaseFormComponent} from '../../base-form/base-form.component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Usuario} from '../../../models/usuario';
-import {FormValidations, PasswordValidation} from 'src/app/shared/utils';
+import { Subject } from 'rxjs';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { BaseFormComponent } from '../../base-form/base-form.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Usuario } from '../../../models/usuario';
+import { FormValidations } from 'src/app/shared/utils';
 
 import * as moment from 'moment';
-import {config} from '../../../config';
-import {TranslateService} from '@ngx-translate/core';
-import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
+import { config } from '../../../config';
+import { TranslateService } from '@ngx-translate/core';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
@@ -51,6 +50,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     loginGoogleAtivo = false;
     formSocial = false;
     aplicarCssTermo: boolean = false;
+    postbacks = {};
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -76,9 +76,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
-        if(this.isLoterj) {
+
+        if (this.isLoterj) {
             this.aplicarCssTermo = true;
         }
+
         this.createForm();
 
         this.hCaptchaLanguage = this.translate.currentLang;
@@ -142,6 +144,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
                 this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                 this.possuiCodigoAfiliado = true;
+            }
+
+            if (params.clickId) {
+                this.postbacks['clickId'] = params.clickId;
             }
         });
 
@@ -231,11 +237,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
             return;
         }
+
         const values = this.form.value;
+
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
         }
+
+        if (Object.keys(this.postbacks).length) {
+            values.postbacks = this.postbacks;
+        }
+
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
