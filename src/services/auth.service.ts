@@ -1,6 +1,6 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
-import { localStorageService } from "@/services";
+import { LocalStorageKey, localStorageService } from "@/services";
 
 export const authUser = async (
     username: string,
@@ -14,13 +14,12 @@ export const authUser = async (
         password: password
     }
     try {
-        const resp = await axiosInstance().post(url, user); 
-
+        const resp: any = await axiosInstance().post(url, user); 
         if(resp.success){
             
             if(resp.results.user.tipo_usuario == 'cambista'){
-                localStorageService.set('token', resp.results.token);
-                localStorageService.set('user', resp.results.user);
+                localStorageService.set(LocalStorageKey.TOKEN, resp.results.token);
+                localStorageService.set(LocalStorageKey.USER, resp.results.user);
                 return true;   
             }
         }
@@ -42,7 +41,7 @@ export const verifyToken = async () => {
     }
   
     try {
-        const resp = await axiosInstance().get(url);
+        const resp: any = await axiosInstance().get(url);
         
         if(resp && typeof resp === 'object' && resp.results == true){
             return true;

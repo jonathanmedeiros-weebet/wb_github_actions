@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay" @click.self="handleBackdropClick">
     <div ref="modal" class="modal">
-      <div class="modal_icons">
+      <div ref="modal-bar" class="modal_icons">
         <div class="modal__element"></div>
       </div>
       <div class="modal__header" v-if="$slots['title']">
@@ -42,15 +42,15 @@ export default {
     document.body.style.overflow = 'hidden'
 
     const modalRef = this.$refs['modal'];
-    modalRef.addEventListener('touchstart', (e) => {
+    const modalBarRef = this.$refs['modal-bar'];
+    modalBarRef.addEventListener('touchstart', (e) => {
       this.touchStartPageY = e.changedTouches[0].pageY;
-      this.modalHeight = e.target.clientHeight;
-      this.modalHeightLimit = this.modalHeight - 50;
+      this.modalHeight = modalRef.clientHeight;
+      this.modalHeightLimit = this.modalHeight - 100;
     });
 
-    modalRef.addEventListener('touchmove', (e) => {
+    modalBarRef.addEventListener('touchmove', (e) => {
       const touchMovePageY = e.changedTouches[0].pageY;
-
       const modalMoveY = touchMovePageY - this.touchStartPageY;
       modalRef.style.marginBottom = `-${modalMoveY.toFixed(2)}px`;
 
@@ -60,7 +60,7 @@ export default {
       }
     });
 
-    modalRef.addEventListener('touchend', (e) => {
+    modalBarRef.addEventListener('touchend', () => {
       modalRef.style.marginBottom = 0;
     });
   },
