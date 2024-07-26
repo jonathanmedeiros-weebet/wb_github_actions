@@ -622,7 +622,7 @@ button {
 /* Override JS Toast*/
 
 .jq-toast-wrap {
-    z-index: 10000 !important;
+    z-index: 100000 !important;
 }
 
 .form-control {
@@ -645,7 +645,7 @@ button {
 }
 
 .modal {
-    z-index: 9002;
+    z-index: 90002;
 }
 
 .modal-header, .modal-body, .modal-footer{
@@ -1732,11 +1732,11 @@ ngb-datepicker-month {
 @media only screen and (max-width: 1024px) {
 
     .modal-login{
-        z-index: 9000 !important;
+        z-index: 90000 !important;
     }
 
     .modal-cadastro-cliente {
-        z-index: 9000 !important;
+        z-index: 90000 !important;
     }
 
     *::-webkit-scrollbar{
