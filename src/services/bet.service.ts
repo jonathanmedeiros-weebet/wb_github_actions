@@ -1,6 +1,5 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
-import { localStorageService } from "@/services";
 
 export const getByCode = async ( code: string ) => {
     const { apiUrl } = useConfigClient();
@@ -73,7 +72,7 @@ export const tokenLiveClosing = async (id: any) => {
 
 export const closeBet = async (payload: any) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/encerrar-aposta`;
+    const url = `${apiUrl}/apostas/encerrar-aposta`;
         
     return await axiosInstance().post(url, payload);
 }
