@@ -145,10 +145,14 @@ export class AuthService {
 
     getTokenBetby(lang: string) {
         const token = this.getToken();
+        const user = this.getUser();
 
         return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token, lang }, this.header.getRequestOptions())
             .pipe(
                 map(res => {
+                    if (user.id != 146407) {
+                        res.token = null;
+                    }
                     localStorage.setItem('tokenBetby', res.token);
                     return res;
                 }),
