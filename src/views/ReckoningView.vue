@@ -15,7 +15,7 @@
     <div class="reckoning__container">
       <span class="date">
         {{ dateFormatedWithYear}}
-        <IconClose class="date__close" @click="resetDateToCurrent" />
+        <IconClose class="date__close" @click.native="resetDateToCurrent" />
       </span>
       <div class="collapse" @click="toggleCollapse('input', $event)">
         <div class="collapse__item">
