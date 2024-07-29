@@ -28,7 +28,11 @@
             </div>
             <div class="gain__item">
               <span>Possível Retorno:</span>
-              <span class="gain__value">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
+              <span v-if="!newEarningPossibility" class="gain__value">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
+              <span v-else class="gain__value">
+                <span class="gain__strikethrough">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
+                <span class="gain--danger"> {{ formatCurrencyMoney(newEarningPossibility) }}</span>
+              </span>
             </div>
             <div class="gain__item">
               <span>Resultados:</span>
@@ -58,20 +62,25 @@
                 <template v-else-if="betItem.sport === MODALITY_SPORT_E_SPORTS">
                   <IconGame :size="16"/>
                 </template>
-                {{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}
+                <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
               </span>
               <template v-if="showFinished">
-                <p :class="{ 'bet__status--success': betItem.resultado === 'ganhou', 'bet__status--danger': betItem.resultado === 'perdeu' }">{{ capitalizeFirstLetter(betItem.resultado) }}</p>
+                <p :class="{ 
+                  'bet__status--success': betItem.resultado === 'ganhou', 
+                  'bet__status--danger': betItem.resultado === 'perdeu',
+                  'gain__strikethrough': newEarningPossibility !== null
+                }"
+                >{{ capitalizeFirstLetter(betItem.resultado) }}</p>
               </template>
             </div>
             <div class="bet__info">
-              <span class="bet__date">{{ formateDateTime(betItem.jogo_horario) }}</span>
+              <span class="bet__date" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ formateDateTime(betItem.jogo_horario) }}</span>
             </div>
             <div class="bet__text">
-              <span class="bet__select">
+              <span class="bet__select" :class="{'gain__strikethrough': newEarningPossibility !== null}">
                 {{ betItem.encerrado ? 'Resultado Final' : 'Para ganhar' }} : {{ betItem.odd_nome }}
               </span>
-              <span class="bet__odd">{{ betItem.cotacao }}</span>
+              <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
             </div>
           </div>
           <div class="bet__message" v-if="showClickFinalized">
@@ -137,8 +146,9 @@ import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
 import { checkLive, closeBet, getById, simulateBetClosure, tokenLiveClosing } from '@/services'
-import { convertInMomentInstance, formatDateBR, formatCurrency } from '@/utilities'
+import { convertDateTimeInMomentInstance, formatDateBR, formatCurrency, delay } from '@/utilities'
 import { Modalities } from '@/enums';
+import { useConfigClient } from '@/stores';
 
 export default {
   name: 'close-bet',
@@ -166,6 +176,9 @@ export default {
       showClickFinalized: false,
       showCloseBet: false,
       showFinished: false,
+      newQuotation: null,
+      newEarningPossibility: null,
+      isLoading: false,
     };
   },
   mounted() {
@@ -177,60 +190,60 @@ export default {
       return formatDateBR(date);
     },
     async closeBet() {
-      // TODO: IMPLEMENTADO O SERVICE DE IMPLEMENTAR A APOSTA MAS FALTA TESTAR 
-      console.log('SIMULAR FECAR A APOSTA!');
       simulateBetClosure(this.bet.id)
       .then(resp => {
         console.log(resp);
         this.showCloseBet = false;
         this.showClickFinalized = true;
+        this.newQuotation = resp.results.nova_cotacao;
+        this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
       })
       .catch(error => {
         console.error(error);
+        this.newQuotation = null;
+        this.newEarningPossibility = null;
       })
-      
-      
   
     },
     cancelAction() {
       this.showCloseBet = true;
       this.showClickFinalized = false;
+      this.newQuotation = null;
+      this.newEarningPossibility = null;
     },
-    async confirmAction() {
-      // TODO: API APRESENTANDO PROBLEMA NO PHP
-      // this.showFinish = false;
-      // this.showClickFinalized = false;
-      // this.showFinished = true;
-      // this.title = 'Aposta';   
+    async confirmAction() { 
       if(this.bet) {
-        
         const live = await this.haveLive(this.bet);
         let payload = { apostaId: this.bet.id, version: this.bet.version };
 
         if(live) {
+          // this.setDelay();
           const token = await tokenLiveClosing(this.bet.id);
           const token_aovivo = token ?? null;
           payload.token = token_aovivo;
+          const { option } = useConfigClient();
+          const timeDelay = option.delay_aposta_aovivo ? option.delay_aposta_aovivo : 10;
+          await delay((timeDelay * 1000));
         }
         
         closeBet(payload)
-        .then(resp => {
-          console.log('Aposta encerrada com sucesso');
-          console.log(resp);
-        })
-        .catch(error => {
-          console.log(error);
-        })
-        
-      }
+          .then(resp => {
+            this.showClickFinalized = false;
+            this.showCloseBet = false;
+            this.showFinished = true;
+            this.fetchBetDetails();
+          })
+          .catch(error => {
+            console.log(error);
+          })
+        }
 
     },
     async fetchBetDetails() {
       getById(this.id)
       .then(resp => {
-        
         this.bet = resp.results;
-
+        
         if(resp.results.pago == false && resp.results.resultado == null){
           this.showCloseBet = true;
           this.showFinished = false;
@@ -252,7 +265,7 @@ export default {
         return formatCurrency(value);
     },
     formateDateTime(datetime) {
-        return convertInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
+        return convertDateTimeInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
     },
     capitalizeFirstLetter(str) {
         if(str){
@@ -287,12 +300,12 @@ export default {
 
       const retorno = await checkLive(itensID);
 
-      if(retorno) {
+      if(retorno.result) {
           result = true;
       }
 
       return result;
-    }
+    },
   },
   computed: {
     MODALITY_SPORT_FUTEBOL() {
@@ -373,6 +386,14 @@ export default {
         justify-content: space-between;
         font-size: 14px;
         color: var(--color-text);
+    }
+
+    &__strikethrough {
+      text-decoration: line-through;
+    }
+
+    &--danger {
+      color: var(--color-danger);
     }
 
 }
