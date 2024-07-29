@@ -2825,3 +2825,12 @@ gulp.task('floripa.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('appjetbet365.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "appjetbet365.com",
+        banca: "APP JETBET365",
+        styles: ""
+    });
+});
