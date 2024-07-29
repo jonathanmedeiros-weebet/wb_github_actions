@@ -50,7 +50,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     loginGoogleAtivo = false;
     formSocial = false;
     aplicarCssTermo: boolean = false;
-    postbacks = {};
+    parameters = {};
+    parametersList;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -72,6 +73,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
+        this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
@@ -94,9 +96,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
-
+        
         this.route.queryParams
             .subscribe((params) => {
+            
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
 
@@ -146,9 +149,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.possuiCodigoAfiliado = true;
             }
 
-            if (params.clickId) {
-                this.postbacks['clickId'] = params.clickId;
-            }
+            this.parametersList.forEach(param => {
+                if (params[param]) {
+                    this.parameters[param] = params[param];
+                }
+            });
         });
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
@@ -245,8 +250,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             values.nomeCompleto = values.nome;
         }
 
-        if (Object.keys(this.postbacks).length) {
-            values.postbacks = this.postbacks;
+        if (Object.keys(this.parameters).length) {
+            values.parameters = this.parameters;
         }
 
         this.submitting = true;
