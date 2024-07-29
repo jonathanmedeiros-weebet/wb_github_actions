@@ -7,9 +7,10 @@ interface ConfigClient {
   apiUrl: string;
 }
 
-const _host = '//localhost';
-const _loki = '//localhost:8000';
-const _center = 'https://hermes.wee.bet';
+const production = false;
+const _host = production ? 'https://demo.wee.bet' : '//localhost';
+const _loki = production ? 'https://loki1.weebet.tech' : '//localhost:8000';
+const _center = production ? 'https://center7.wee.bet' : 'https://hermes.wee.bet';
 const _live = 'https://streaming.wee.bet';
 const _name = 'DEMO';
 const _slug = 'weebet.jm';
