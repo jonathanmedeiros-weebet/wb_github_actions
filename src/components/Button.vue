@@ -5,6 +5,7 @@
     type="button"
     class="button"
     :class="`button--${color}`"
+    :disabled="disabled"
     @click="handleClick"
   >
     <slot name="icon-left"></slot>
@@ -31,6 +32,10 @@ export default {
     color: {
       type: String,
       default: 'primary'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -73,5 +78,9 @@ export default {
     color: var(--color-text);
     background: var(--color-background-input);
   }
+}
+
+.button:disabled {
+  opacity: 0.3;
 }
 </style>

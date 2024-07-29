@@ -12,9 +12,11 @@ import ReckoningView from '@/views/ReckoningView.vue'
 import ResultsView from '@/views/ResultsView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
-import { localStorageService } from "@/services";
+import { checkToken, localStorageService, prepareConfigClient, verifyToken } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
 import CloseBetView from '@/views/CloseBetView.vue'
+
+const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
 const router = new VueRouter({
   mode: 'history',
@@ -29,7 +31,7 @@ const router = new VueRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -37,7 +39,7 @@ const router = new VueRouter({
       name: 'validation-detail',
       component: ValidationDetailView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -45,7 +47,7 @@ const router = new VueRouter({
       name: 'validation',
       component: ValidationView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -53,7 +55,7 @@ const router = new VueRouter({
       name: 'tickets',
       component: TicketsView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -70,7 +72,7 @@ const router = new VueRouter({
       name: 'bets',
       component: BetsView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -78,7 +80,7 @@ const router = new VueRouter({
       name: 'menu',
       component: MenuView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -86,7 +88,7 @@ const router = new VueRouter({
       name: 'change-password',
       component: ChangePasswordView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -94,7 +96,7 @@ const router = new VueRouter({
       name: 'movements',
       component: MovementsView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -102,7 +104,7 @@ const router = new VueRouter({
       name: 'reckoning',
       component: ReckoningView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -110,7 +112,7 @@ const router = new VueRouter({
       name: 'results',
       component: ResultsView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -118,7 +120,7 @@ const router = new VueRouter({
       name: 'game-detail',
       component: GameDetailView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -126,7 +128,7 @@ const router = new VueRouter({
       name: 'config',
       component: ConfigView,
       meta: {
-        auth: true
+        auth: production
       }
     },
     {
@@ -134,17 +136,22 @@ const router = new VueRouter({
       name: 'dashboard',
       component: DashboardView,
       meta: {
-        auth: true
+        auth: production
       }
     },
   ]
 })
 
 router.beforeEach(async (to, from, next) => {
-
   const hasToken = localStorageService.get('token');
+  window.scrollTo(0,0);
 
-  if (to.meta?.auth) {
+  if(!Boolean(from.name)) {
+    prepareConfigClient(to)
+    checkToken();
+  }
+
+  if (Boolean(to.meta?.auth)) {
     if (hasToken) {
       next();
     } else {

@@ -34,7 +34,10 @@ export const axiosInstance = () => {
         router.push({ name: 'login' });
         return;
       }
-      return Promise.reject(error)
+      return Promise.reject({
+        ...error.response.data,
+        status: error.response.status
+      })
     }
   );
 

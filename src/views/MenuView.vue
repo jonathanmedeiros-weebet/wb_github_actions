@@ -13,16 +13,16 @@
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
             {{ isCreditoVisible ? '*******' : credit }}
-            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click="toggleCreditoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click="toggleCreditoVisibility" />
+            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click.native="toggleCreditoVisibility" />
           </span>
         </div>
         <div class="wallet__item">
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
             {{ isSaldoVisible ? '*******' : balance }}
-            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click="toggleSaldoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click="toggleSaldoVisibility" />
+            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click.native="toggleSaldoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click.native="toggleSaldoVisibility" />
           </span>
         </div>
         <div class="wallet__shortcuts">

@@ -8,7 +8,7 @@ interface ConfigClient {
 }
 
 const production = false;
-const _host = production ? 'https://demo.wee.bet' : '//localhost';
+const _host = production ? 'https://central.demo.wee.bet' : '//localhost';
 const _loki = production ? 'https://loki1.weebet.tech' : '//localhost:8000';
 const _center = production ? 'https://center7.wee.bet' : 'https://hermes.wee.bet';
 const _live = 'https://streaming.wee.bet';
@@ -27,7 +27,7 @@ const prepareClientSlug = () => {
 
 const prepareClientHost = () => {
   const configClient = localStorageService.get(LocalStorageKey.CONFIG_CLIENT);
-  return Boolean(configClient) ? configClient.host : `${_host}/api`
+  return Boolean(configClient) ? `${configClient.host}/api` : `${_host}/api`
 }
 
 export const useConfigClient = defineStore('configClient', {
@@ -39,8 +39,7 @@ export const useConfigClient = defineStore('configClient', {
     liveUrl: _live,
     centerUrl: `${_center}/v1`,
     params: {} as any,
-
-    readyForUse: false
+    readyForUse: true
   }),
   getters: {
     config: (state) => state,
@@ -56,14 +55,18 @@ export const useConfigClient = defineStore('configClient', {
     blockedChampionships: (state) => state.params?.campeonatos_bloqueados ?? null,
     localQuotes: (state) => state.params?.cotacoes_local ?? [],
     deadlineTable: (state) => state.params?.data_limite_tabela ?? null,
+
+    hasParams: (state) => Boolean(Object.values(state.params).length)
   },
   actions: {
     setConfig(config: ConfigClient) {
       this.name = config.name;
       this.slug = config.slug;
-      this.apiUrl = `//${config.apiUrl}/api`;
+      this.apiUrl = `${config.apiUrl}/api`;
+      console.log(config.apiUrl)
+      console.log(this.apiUrl)
 
-      localStorageService.set(LocalStorageKey.CONFIG_CLIENT,{
+      localStorageService.set(LocalStorageKey.CONFIG_CLIENT, {
         name: this.name,
         slug: this.slug,
         apiUrl: this.apiUrl,

@@ -1,6 +1,6 @@
 <template>
   <div class="input">
-    <label class="input__label" :for="name">{{ label }}</label>
+    <label class="input__label" v-if="label" :for="name">{{ label }}</label>
     <div class="input__group" :class="{ 'input__group--focused': isFocused }">
       <div class="input__icon" v-if="$slots['icon']">
         <slot name="icon"></slot>
@@ -15,9 +15,8 @@
         :type="inputType"
         @focus="handleFocus"
         @blur="handleBlur"
-        v-if="canMask"
+        v-if="canMask && mask"
         v-mask="mask"
-        v-model="localValue"
         :maxlength="maxlength"
         @click="$emit('click')"
         @change="emitChange"
@@ -34,17 +33,15 @@
         :type="inputType"
         @focus="handleFocus"
         @blur="handleBlur"
-        v-model="localValue"
+        :value="value"
         :maxlength="maxlength"
         @click="$emit('click')"
         @change="emitChange"
         autocomplete="off"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
-        
         <icon-visibility v-if="showPassword" color="var(--color-text-input)" />
         <icon-visibility-off v-else color="var(--color-text-input)" />
-
       </div>
     </div>
   </div>
@@ -70,7 +67,7 @@ export default {
       required: true
     },
     value: {
-      type: String,
+      type: String | Number,
       default: ''
     },
     type: {
@@ -92,17 +89,11 @@ export default {
   },
   data() {
     return {
-      localValue: this.value,
       isFocused: false,
       showPassword: false,
       initType: this.type,
       inputType: this.type
     };
-  },
-  watch: {
-    value(newValue) {
-      this.localValue = newValue;
-    }
   },
   methods: {
     handleInput(event) {
@@ -110,7 +101,7 @@ export default {
     },
     handleFocus(){
       this.isFocused = true;
-      this.$emit('click');
+      this.$emit('focus');
     },
     handleBlur(){
       this.isFocused = false;
@@ -123,7 +114,7 @@ export default {
       this.$emit('change',  event.target.value);
     },
     reset() {
-      this.localValue = '';
+      this.value = '';
     }
   },
   computed: {
