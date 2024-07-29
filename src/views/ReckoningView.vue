@@ -202,38 +202,37 @@ export default {
     },
     toggleCollapse(section, event) {
       if (section === 'input') {
-        this.collapsedInputs = !this.collapsedInputs
+        this.collapsedInputs = !this.collapsedInputs;
       } else if (section === 'exit') {
-        this.collapsedExits = !this.collapsedExits
+        this.collapsedExits = !this.collapsedExits;
       } else if (section === 'bet') {
-        event.stopPropagation()
-        this.collapsedBet = !this.collapsedBet
+        event.stopPropagation();
+        this.collapsedBet = !this.collapsedBet;
       }
     },
     async getValue() {
       try {
-        const res = await getCalculationValue(this.startDate, this.endDate)
-        console.log(this.startDate, this.endDate)
+        const res = await getCalculationValue(this.startDate, this.endDate);
+        console.log(this.startDate, this.endDate);
         this.sports = formatCurrency(Number(res.esporte.apostado ?? 0));
-        this.withdraw = formatCurrency(Number(res.saque ?? 0))
-        this.commission = formatCurrency(Number(res.total_comissao ?? 0))
-        this.award = formatCurrency(Number(res.total_premios ?? 0))
-        this.totalBet = formatCurrency(Number(res.total_apostado ?? 0))
-        this.entry = formatCurrency(Number(res.total_entradas ?? 0))
-        this.rechargesCartao = formatCurrency(Number(res.cartao ?? 0))
-        this.totalExits = formatCurrency(Number(res.total_saidas ?? 0))
-        this.credit = formatCurrency(Number(res.creditos ?? 0))
-        this.debit = formatCurrency(Number(res.debitos ?? 0))
-        this.balance = formatCurrency(Number(res.saldo ?? 0))
+        this.withdraw = formatCurrency(Number(res.saque ?? 0));
+        this.commission = formatCurrency(Number(res.total_comissao ?? 0));
+        this.award = formatCurrency(Number(res.total_premios ?? 0));
+        this.totalBet = formatCurrency(Number(res.total_apostado ?? 0));
+        this.entry = formatCurrency(Number(res.total_entradas ?? 0));
+        this.rechargesCartao = formatCurrency(Number(res.cartao ?? 0));
+        this.totalExits = formatCurrency(Number(res.total_saidas ?? 0));
+        this.credit = formatCurrency(Number(res.creditos ?? 0));
+        this.debit = formatCurrency(Number(res.debitos ?? 0));
+        this.balance = formatCurrency(Number(res.saldo ?? 0));
         this.resultDate = formatCurrency(
           Number(res.total_apostado + res.cartao - res.saque - res.total_comissao - res.total_premios)
         );
       } catch (error) {
-        console.error('Error fetching data:', error)
+        console.error('Error fetching data:', error);
       }
     },
-    async resetDateToCurrent() {
-      console.log('click');
+    resetDateToCurrent() {
       const currentDate = now().format('YYYY-MM-DD');
       this.startDate = currentDate;
       this.endDate = currentDate;
