@@ -146,6 +146,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
                     this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
 
+                    this.checkPixsTermsAcceptance(res.accepted_pixs_terms);
+
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
                         this.rotaCompletarCadastro = '/clientes/perfil';
@@ -356,5 +358,31 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         }
 
         return chaveComMascara;
+    }
+
+    checkPixsTermsAcceptance(acceptedPixsTerms = false) {
+        if (this.availablePaymentMethods.includes('pixs') && !acceptedPixsTerms) {
+            this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+            this.modalRef.componentInstance.title = 'Termos de uso Pixs';
+            this.modalRef.componentInstance.msg = 'Para continuar com as movimentações financeiras, é necessário aceitar os termos de uso da instituição financeira Pixs. Caso não aceite, não será possível prosseguir. Deseja aceitar os termos?';
+
+            this.modalRef.result.then(
+                (result) => {
+                    this.financeiroService.acceptPixsTerms().subscribe(
+                        res =>{
+                            this.messageService.success('Você aceitou os termos de uso. Agora, você pode realizar movimentações financeiras.');
+                        },
+                        error => {
+                            this.messageService.warning('Algo não saiu muito bem. Tente novamente mais tarde.');
+                            this.router.navigate(['/']);
+                        }
+                    )                    
+                },
+                (reason) => { 
+                    this.messageService.warning('Você não aceitou os termos de uso. Você será redirecionado para a página inicial.');
+                    this.router.navigate(['/']);
+                }
+            );
+        }
     }
 }
