@@ -1,20 +1,21 @@
 <template>
   <div class="reckoning">
     <Header 
-      :title="title" 
+      title="Apuração" 
       :showCalendarButton="true" 
       :showBackButton="true"
       @calendarClick="handleOpenCalendarModal"
     />
     <ModalCalendar
       v-if="showModalCalendar"
+      :initialDate="dateSelected"
       @closeModal="handleCloseCalendarModal"
       @change="handleCalendar"
     />
     <div class="reckoning__container">
       <span class="date">
-        {{ startDate }} - {{ endDate }}
-        <IconClose class="date__close" />
+        {{ dateFormatedWithYear}}
+        <IconClose class="date__close" @click="resetDateToCurrent" />
       </span>
       <div class="collapse" @click="toggleCollapse('input', $event)">
         <div class="collapse__item">
@@ -30,18 +31,21 @@
             <div class="collapse" @click="toggleCollapse('bet', $event)">
               <div class="collapse__item">
                 <component class="collapse__icon-arrow" :is="iconArrowDinamicBet" />
-                <span class="collapse__title">Total Apostado:</span>
+                <span class="collapse__title">Total apostado:</span>
                 <div class="collapse__icon-wrapper">
                   <IconAdd class="collapse__icon-add" />
                   <span>{{ totalBet }}</span>
                 </div>
               </div>
               <div v-if="collapsedBet" class="collapse__section-result">
-                <span></span>
+                <div class="collapse__section-item">
+                  <span class="collapse__section-sports">Esportivas</span>
+                  <span class="collapse__value-right">{{sports}}</span>
+                </div>
               </div>
             </div>
             <div class="collapse__section-item">
-              <span class="collapse__section-text">Recargas de Cartão:</span>
+              <span class="collapse__section-text">Recargas de cartão:</span>
               <span class="collapse__value-right">{{ rechargesCartao }}</span>
             </div>
             <div class="collapse__line"></div>
@@ -76,7 +80,7 @@
         </div>
       </div>
       <div class="result">
-        <span>Resultado {{startDate}} à {{endDate}}</span>
+        <span>Resultado {{dateFormated}}</span>
         <div class="result__date">
           <span class="result__value">{{resultDate}}</span>
         </div>
@@ -111,15 +115,13 @@
 <script>
 import SelectFake from './HomeView/parts/SelectFake.vue'
 import Header from '@/components/layouts/Header.vue'
-import { modalityList } from '../constants/modalities.constant'
 import IconClose from '@/components/icons/IconClose.vue'
 import IconAdd from '@/components/icons/IconAdd.vue'
 import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 import { getCalculationValue } from '@/services/reckoning.service'
-import moment from 'moment';
-import { formatCurrency } from '@/utilities'
+import { formatCurrency, now , dateFormatInDayAndMonth } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
 
 export default {
@@ -134,34 +136,28 @@ export default {
     IconRemove,
     ModalCalendar
   },
-  props: {
-    initCollapsed: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
-      title: 'Apuração',
       showModalCalendar: false,
       balanceCalculation: null,
-      startDate: moment().format('YYYY-MM-DD'),
-      endDate: moment().format('YYYY-MM-DD'),
-      totalBet: null,
+      startDate: now().format('YYYY-MM-DD'),
+      endDate: now().format('YYYY-MM-DD'),
+      totalBet: 0,
       resultDate: 0,
-      rechargesCartao: null,
-      entry: null,
-      comissao: null,
-      totalExits: null,
-      award: null,
-      withdraw: null,
-      credit: null,
-      debit: null,
-      balance: null,
-      modalityList: modalityList,
+      rechargesCartao: 0,
+      entry: 0,
+      comissao: 0,
+      totalExits: 0,
+      award: 0,
+      withdraw: 0,
+      credit: 0,
+      debit: 0,
+      balance: 0,
+      sports: 0,
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
-      collapsedExits: this.initCollapsed
+      collapsedExits: this.initCollapsed,
+      dateSelected: now().format('YYYY-MM-DD')
     }
   },
   computed: {
@@ -173,14 +169,23 @@ export default {
     },
     iconArrowDinamicExits() {
       return this.collapsedExits ? IconArrowUp : IconArrowDown
+    },
+    dateFormated() {
+      return `${dateFormatInDayAndMonth(this.startDate)} à ${dateFormatInDayAndMonth(this.endDate)}`;
+    },
+    dateFormatedWithYear() {
+      const startDateFormatted = this.formatDateWithYear(this.startDate);
+      const endDateFormatted = this.formatDateWithYear(this.endDate);
+      return `${startDateFormatted} - ${endDateFormatted}`;
     }
   },
   mounted() {
     this.getValue()
   },
   methods: {
-    handleSelectModalClick() {
-      alert('Modal select')
+    formatDateWithYear(date) {
+      const [year, month, day] = date.split('-');
+      return `${day}/${month}/${year}`;
     },
     handleOpenCalendarModal() {
       this.showModalCalendar = true;
@@ -191,8 +196,9 @@ export default {
     async handleCalendar(dateTime) {
       this.startDate = dateTime.format('YYYY-MM-DD');
       this.endDate = dateTime.format('YYYY-MM-DD');
+      this.dateSelected = dateTime.format('YYYY-MM-DD'); 
       this.handleCloseCalendarModal();
-      await this.getValue();
+      this.getValue();
     },
     toggleCollapse(section, event) {
       if (section === 'input') {
@@ -207,7 +213,8 @@ export default {
     async getValue() {
       try {
         const res = await getCalculationValue(this.startDate, this.endDate)
-        console.log(res);
+        console.log(this.startDate, this.endDate)
+        this.sports = formatCurrency(Number(res.esporte.apostado ?? 0));
         this.withdraw = formatCurrency(Number(res.saque ?? 0))
         this.commission = formatCurrency(Number(res.total_comissao ?? 0))
         this.award = formatCurrency(Number(res.total_premios ?? 0))
@@ -218,12 +225,20 @@ export default {
         this.credit = formatCurrency(Number(res.creditos ?? 0))
         this.debit = formatCurrency(Number(res.debitos ?? 0))
         this.balance = formatCurrency(Number(res.saldo ?? 0))
-        this.resultDate = formatCurrency(Number(res.total_apostado + 
-                          res.cartao - res.saque -
-                          res.total_comissao - res.total_premios));
+        this.resultDate = formatCurrency(
+          Number(res.total_apostado + res.cartao - res.saque - res.total_comissao - res.total_premios)
+        );
       } catch (error) {
         console.error('Error fetching data:', error)
       }
+    },
+    async resetDateToCurrent() {
+      console.log('click');
+      const currentDate = now().format('YYYY-MM-DD');
+      this.startDate = currentDate;
+      this.endDate = currentDate;
+      this.dateSelected = currentDate; 
+      this.getValue();
     }
   }
 }
@@ -317,12 +332,12 @@ export default {
     gap: 10px;
   }
 
-
   &__icon-wrapper {
     display: flex;
     align-items: center;
     gap: 7px; 
   }
+
   &__icon-arrow {
     padding: 1.5px;
   }
@@ -361,7 +376,10 @@ export default {
   &__value {
     display: flex;
     align-items: center;
+    color: var(--color-success);
+
   }
+
 }
 
 .credit {
@@ -411,6 +429,10 @@ export default {
   &__date {
     display: flex;
     gap: 5px; 
+  }
+  
+  &__value {
+    color: var(--color-success);
   }
 }
 </style>

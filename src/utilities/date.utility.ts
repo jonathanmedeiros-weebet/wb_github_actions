@@ -6,6 +6,12 @@ export const dateFormatInMonthAndYear = (datetime: string | Moment) => {
     return momentReserve.format('MMMM [de] YYYY')
 }
 
+export const dateFormatInDayAndMonth = (datetime: string | Moment) => {
+    if(!Boolean(datetime)) return ''
+    const momentReserve = moment(datetime);
+    return momentReserve.format('DD/MM')
+}
+
 export const now = () => {
     return moment()
 }
