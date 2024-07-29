@@ -1,16 +1,19 @@
-import VueRouter from "vue-router";
 import { axiosInstance } from "./axiosInstance";
 import { useConfigClient } from "@/stores";
 
-export const prepareConfigClient = async () => {
-    const route = new VueRouter().currentRoute;
-    const configClienteStore = useConfigClient();
+export const prepareConfigClient = async (route: any) => {
+    const {
+        setConfig,
+        setReadyForUse,
+        setParams
+    } = useConfigClient();
 
-    configClienteStore.setReadyForUse(false);
+    setReadyForUse(false);
 
     const {name, host, slug} = route.query;
+
     if(Boolean(name) && Boolean(host) && Boolean(slug)) {
-        configClienteStore.setConfig({
+        setConfig({
             name: name as string,
             slug: slug as string,
             apiUrl: host as string
@@ -18,12 +21,9 @@ export const prepareConfigClient = async () => {
     }
    
     const params = await getParams();
-    configClienteStore.setParams(params);
-    configClienteStore.setReadyForUse(true);
-
-    console.warn('config client montado!')
+    setParams(params);
+    setReadyForUse(true);
 }
-
 
 export const getParams = async () => {
     const { paramUrl } = useConfigClient();
