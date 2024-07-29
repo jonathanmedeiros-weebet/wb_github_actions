@@ -213,7 +213,6 @@ export default {
     async getValue() {
       try {
         const res = await getCalculationValue(this.startDate, this.endDate);
-        console.log(this.startDate, this.endDate);
         this.sports = formatCurrency(Number(res.esporte.apostado ?? 0));
         this.withdraw = formatCurrency(Number(res.saque ?? 0));
         this.commission = formatCurrency(Number(res.total_comissao ?? 0));
