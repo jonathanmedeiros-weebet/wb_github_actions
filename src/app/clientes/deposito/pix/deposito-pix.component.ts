@@ -8,9 +8,10 @@ import {ParametrosLocaisService} from '../../../shared/services/parametros-locai
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
+import { ConfirmModalComponent, RegrasBonusModalComponent } from '../../../shared/layout/modals';
 import { Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -66,7 +67,16 @@ export class NgbdModalContent {
         private _sanitizer: DomSanitizer,
         private _helper: HelperService,
         private domSanitizer: DomSanitizer,
+        private paramsService: ParametrosLocaisService,
+        private translate: TranslateService
     ) {}
+
+    get customCasinoBetting(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('bet.casinoBetting').toLowerCase(),
+            this.translate.instant('geral.cassino').toLowerCase()
+        );
+    }
 
     ngOnInit() {
         if (this.selectedPaymentMethod === 'sauto_pay') {
@@ -139,6 +149,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     submitting = false;
     clearSetInterval;
 
+    modalRef;
+
     public valuesShortcuts: number[] = [10, 20, 50, 100, 500, 1000];
 
     constructor(
@@ -176,6 +188,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                     this.onlyOneModality = !(res.bonus_esportivo && res.bonus_cassino);
                     this.maxAmountSportsBonus = res.max_bonus_esportivo;
                     this.maxAmountCasinoBonus = res.max_bonus_cassino;
+                    this.checkPixsTermsAcceptance(res.accepted_pixs_terms);
+
                     if (!res.permitir_bonificacao) {
                         this.form.get('bonus').patchValue('nenhum');
                         this.bonusOption = 'nenhum';
@@ -194,6 +208,32 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             paymentMethod: [this.paymentMethodSelected, Validators.required],
             promoCode: [""]
         });
+    }
+
+    checkPixsTermsAcceptance(acceptedPixsTerms = false) {
+        if (this.availablePaymentMethods.includes('pixs') && !acceptedPixsTerms) {
+            this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+            this.modalRef.componentInstance.title = 'Termos de uso Pixs';
+            this.modalRef.componentInstance.msg = 'Para continuar com as movimentações financeiras, é necessário aceitar os termos de uso da instituição financeira Pixs. Caso não aceite, não será possível prosseguir. Deseja aceitar os termos?';
+
+            this.modalRef.result.then(
+                (result) => {
+                    this.financeiroService.acceptPixsTerms().subscribe(
+                        res =>{
+                            this.messageService.success('Você aceitou os termos de uso. Agora, você pode realizar movimentações financeiras.');
+                        },
+                        error => {
+                            this.messageService.warning('Algo não saiu muito bem. Tente novamente mais tarde.');
+                            this.router.navigate(['/']);
+                        }
+                    )                    
+                },
+                (reason) => { 
+                    this.messageService.warning('Você não aceitou os termos de uso. Você será redirecionado para a página inicial.');
+                    this.router.navigate(['/']);
+                }
+            );
+        }
     }
 
     changePaymentMethodOption(paymentMethod: string) {

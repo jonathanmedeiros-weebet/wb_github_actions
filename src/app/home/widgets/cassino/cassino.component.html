@@ -2,10 +2,10 @@
     <app-skeleton type="casino" />
 </ng-container>
 <ng-template #elseGameCasinoList>
-    <div class="bloco" *ngIf="games.length > 0">
+    <div class="bloco">
         <app-wall-section
             sectionId="cassino"
-            [title]="title ? title : ('geral.cassino' | translate)"
+            [title]="customCasinoName"
             [itemsQty]="games.length"
             [seeAllRouterLink]="linkAll"
             (onLeft)="scrollLeft('cassino')"
@@ -13,20 +13,26 @@
         />
     
         <div class="games-container">
-            <div class="more-games-fade more-games-fade-left" id="cassino-fade-left"></div>
-            <div class="game-list game-list-inline" #scrollGames id="cassino-scroll" (scroll)="onScroll('cassino')">
-                <app-wall-game-card
-                    *ngFor="let game of games"
-                    [game]="game"
-                    [blink]="linkAll"
-                    [isLoggedIn]="isLoggedIn"
-                    [isDemo]="isDemo"
-                    [isCliente]="isCliente"
-                    cardType="inline"
-                    (openModalLogin)="abrirModalLogin()"
-                />
-            </div>
-            <div class="more-games-fade more-games-fade-right" id="cassino-fade-right" *ngIf="games.length > 2"></div>
+            <ng-container *ngIf="games.length; else elseWithoutGames">
+                <div class="more-games-fade more-games-fade-left" id="cassino-fade-left"></div>
+                <div class="game-list game-list-inline" #scrollGames id="cassino-scroll" (scroll)="onScroll('cassino')">
+                    <app-wall-game-card
+                        *ngFor="let game of games"
+                        [game]="game"
+                        [blink]="linkAll"
+                        [isLoggedIn]="isLoggedIn"
+                        [isDemo]="isDemo"
+                        [isCliente]="isCliente"
+                        cardType="inline"
+                        (openModalLogin)="abrirModalLogin()"
+                    />
+                </div>
+                <div class="more-games-fade more-games-fade-right" id="cassino-fade-right" *ngIf="games.length > 2"></div>
+            </ng-container>
+
+            <ng-template #elseWithoutGames>
+                <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+            </ng-template>
         </div>
     </div>
 </ng-template>

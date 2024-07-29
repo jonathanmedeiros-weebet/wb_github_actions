@@ -100,6 +100,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     cassinoAtivo;
     virtuaisAtivo;
     parlaybayAtivo;
+    rifa = false;
     loteriaPopularAtiva;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
@@ -147,6 +148,20 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private layoutService: LayoutService
     ) {
         super();
+    }
+
+    get customCasinoName(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('menu.cassino'),
+            this.translate.instant('geral.cassino').toUpperCase()
+        );
+    }
+
+    get customLiveCasinoName(): string {
+        return this.paramsService.getCustomCasinoName(
+            this.translate.instant('menu.cassino-aovivo'),
+            this.translate.instant('geral.cassino').toUpperCase()
+        );
     }
 
     ngOnInit() {
@@ -223,6 +238,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
+        this.rifa = this.paramsService.getOpcoes().rifa;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
@@ -299,7 +315,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     verificarNotificacoes(){
        setInterval(() => {
-            console.log("verificado xtreme");
             xtremepush('inbox', 'message.list', {
                 limit: 1,
                 opened: 0

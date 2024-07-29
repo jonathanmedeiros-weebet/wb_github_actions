@@ -154,12 +154,17 @@ export class ClienteService {
         return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true)).pipe(map((res: any) => res.results));
     }
 
-    excluirConta(motivo: string, confirmarExclusao: string) {
-        return this.http.post(`${this.clienteUrl}/excluir-conta`, { motivo, confirmarExclusao }, this.headers.getRequestOptions(true))
+    excluirConta(motivo: string, confirmarExclusao: string, multifator = {}) {
+        const url = `${this.clienteUrl}/excluir-conta`;
+        const data = {
+            motivo,
+            confirmarExclusao,
+            ...multifator
+        };
+
+        return this.http.post(url, data, this.headers.getRequestOptions(true))
             .pipe(
-                map((response: any) => {
-                    return response.results;
-                }),
+                map((response: any) => response.results),
                 catchError(this.errorService.handleError)
             );
     }

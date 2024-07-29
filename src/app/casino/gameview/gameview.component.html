@@ -2,7 +2,7 @@
     <div class="header-game-view">
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
-                <span> Cassino Galaxsys </span>
+                <span> {{ customCasinoName }} Galaxsys </span>
             </ng-container>
             <ng-template #nomeOficialGame>
                 <span>{{ gameName }}</span>
@@ -47,6 +47,45 @@
                 </div>
             </div>
         </div>
+    </ng-container>
 
+    <ng-container>
+        <div *ngIf="avisoCancelarBonus" class="game-frame">
+            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+            <ng-container *ngIf="mobileScreen">
+                <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+            </ng-container>
+            <ng-container *ngIf="!mobileScreen">
+                <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
+            </ng-container>
+
+        </div>
+        <div *ngIf="avisoCancelarBonus" class="game-frame" style="overflow: hidden">
+            <div class="overlay overlay--unauthorized">
+                <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'">
+                </div>
+                <div class="overlay-content -mt-4 p-5">
+                </div>
+            </div>
+        </div>
+        <ng-template #continuarJogandoModal let-modal>
+            <div class="modal-header">
+                <a class="close-modal-continuar-jogando" aria-label="Close" (click)="back()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <h4>Continuar Jogando...</h4>
+                <p>
+                    Seu bônus está quase acabando! Deseja cancelar seu saldo bônus e trocar para o seu saldo real para continuar jogando?
+                </p>
+                <a class="btn btn-custom" (click)="continuarSaldoReal()">
+                  Sim, cancelar bônus e usar saldo real
+                </a>
+                <a class="btn btn-custom2 " (click)="continuarBonus()">
+                  Continuar com bônus
+                </a>
+            </div>
+        </ng-template>
     </ng-container>
 </div>

@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
     loadingCassino = true;
     loadingCassinoAoVivo = true;
 
+    hasFeaturedMatches = true;
+
     widgets = [];
 
     unsub$ = new Subject();
@@ -57,5 +59,9 @@ export class HomeComponent implements OnInit {
             });
 
         this.liveFootballIsActive = this.paramsService.futebolAoVivoAtivo();
+    }
+
+    changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
+        this.hasFeaturedMatches = hasFeaturedMatches;
     }
 }

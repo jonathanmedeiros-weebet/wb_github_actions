@@ -1,12 +1,13 @@
 import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
+import {FormControl, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import { SidebarService } from 'src/app/services';
-import {NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { MultifactorConfirmationModalComponent } from 'src/app/shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 
 /**
  * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
@@ -32,7 +33,6 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 	}
 }
 
-
 @Component({
     selector: 'app-configuracoes',
     templateUrl: './configuracoes.component.html',
@@ -46,9 +46,6 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     showLoading = true;
     blocked = false;
     opcaoExclusao = '';
-
-    smallScreen = false;
-    mobileScreen = false;
 
     sectionLimiteApostas = false;
     sectionLimiteDeposito = false;
@@ -66,8 +63,12 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     formExclusaoConta: UntypedFormGroup;
 
     infoPeriodoPausa = '';
-
     configuracoes: any;
+
+    public mostrarSenha: boolean = false;
+    private tokenMultifator: string;
+    private codigoMultifator: string;
+    public senhaAtual: FormControl;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -77,12 +78,19 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         private paramsLocais: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
-        public activeModal: NgbActiveModal
-    ) { }
+        private activeModal: NgbActiveModal,
+        private modalService: NgbModal,
+    ) {}
+
+    get twoFactorInProfileChangeEnabled(): boolean {
+        return Boolean(this.paramsLocais.getOpcoes()?.enable_two_factor_in_profile_change);
+    }
+
+    get mobileScreen(): boolean {
+        return window.innerWidth <= 1024;
+    }
 
     ngOnInit(): void {
-        this.smallScreen = window.innerWidth < 669;
-        this.mobileScreen = window.innerWidth <= 1024;
         if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
@@ -122,6 +130,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     createForms() {
+        this.senhaAtual = new FormControl('', [Validators.required]);
+
         this.formLimiteApostas = this.fb.group({
             limiteDiario: [''],
             limiteSemanal: [''],
@@ -147,45 +157,108 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     }
 
-    onSubmitLimiteApostas() {
-        this.clienteService.configLimiteAposta(this.formLimiteApostas.value).subscribe(
-            result => {
-                this.messageService.success(result.message)
-            },
-            error => {
-                this.handleError(error);
+    handleSubmit(submitFunctionName: string) {
+        if(this.twoFactorInProfileChangeEnabled) {
+            this.validacaoMultifator(submitFunctionName)
+        } else {
+            this[submitFunctionName]();
+        }
+    }
+
+    validacaoMultifator(submitFunctionName: string) {
+        const modalRef = this.modalService.open(
+            MultifactorConfirmationModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350',
+                centered: true,
+                backdrop: 'static'
             }
+        );
+         
+        modalRef.componentInstance.senha = this.senhaAtual.value;
+
+        modalRef.result.then(
+            (result) => {
+                this.tokenMultifator = result.token;
+                this.codigoMultifator = result.codigo;
+
+                if (result.checked) {
+                    this[submitFunctionName]();
+                }
+            },
+        );
+    }
+
+    onSubmitLimiteApostas() {
+        let data = this.formLimiteApostas.value;
+
+        if(this.twoFactorInProfileChangeEnabled){
+            data = {
+                ...data,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+
+        this.clienteService.configLimiteAposta(data).subscribe(
+            result => {
+                this.messageService.success(result.message);
+                this.senhaAtual.patchValue('');
+            },
+            error => this.handleError(error)
         )
     }
 
     onSubmitLimiteDeposito() {
-        this.clienteService.configLimiteDesposito(this.formLimiteDeposito.value).subscribe(
-            result => {
-                this.messageService.success(result.message)
-            },
-            error => {
-                this.handleError(error);
+        let data = this.formLimiteDeposito.value;
+
+        if(this.twoFactorInProfileChangeEnabled){
+            data = {
+                ...data,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
             }
+        }
+
+        this.clienteService.configLimiteDesposito(data).subscribe(
+            result => {
+                this.messageService.success(result.message);
+                this.senhaAtual.patchValue('');
+            },
+            error => this.handleError(error)
         )
     }
 
     onSubmitPeriodoPausa() {
-        this.clienteService.configPeriodoPausa(this.formPeriodoPausa.value).subscribe(
+        let data = this.formPeriodoPausa.value;
+
+        if(this.twoFactorInProfileChangeEnabled){
+            data = {
+                ...data,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+
+        this.clienteService.configPeriodoPausa(data).subscribe(
             result => {
                 this.messageService.success(result.message)
+                this.senhaAtual.patchValue('');
                 this.getClientConfigs();
             },
-            error => {
-                this.handleError(error);
-            }
+            error => this.handleError(error)
         )
     }
 
     onSubmitExclusaoConta() {
         const { motivoExclusao, confirmarExclusao, opcao} = this.formExclusaoConta.value;
+        
+        const multifator = this.twoFactorInProfileChangeEnabled
+            ? {codigo: this.codigoMultifator, token: this.tokenMultifator}
+            : {};
 
         if (this.validarExclusao(confirmarExclusao) || opcao == '') {
-            this.clienteService.excluirConta(motivoExclusao, confirmarExclusao).subscribe(
+            this.clienteService.excluirConta(motivoExclusao, confirmarExclusao, multifator).subscribe(
                 result => {
                     this.messageService.success(result.message);
                     this.authService.logout();
@@ -280,11 +353,15 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     validarExclusao(input: string): boolean {
-        const textoEsperado = "EXCLUIR PERMANENTEMENTE";
-        return input === textoEsperado;
+        const textoEsperado = ['EXCLUIR PERMANENTEMENTE', 'PERMANENTLY DELETE', 'ELIMINAR PERMANENTEMENTE'];
+        return textoEsperado.includes(input);
     }
 
     handleError(error: string) {
         this.messageService.error(error);
+    }
+
+    toClose() {
+        this.activeModal.dismiss('Cross click');
     }
 }

@@ -58,6 +58,26 @@
     </div>
 </ng-template>
 
+<ng-template #enableNotificationXtremepushModal let-modal>
+      <div class="modal-header" style="display: flex;
+        justify-content: end;
+        border-bottom: none;
+        padding-bottom: 25px !important">
+        <a class="close-imagem-inicial-demo" aria-label="Close" (click)="disableNotifications()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="modal-body" style="min-height: 80%">
+        <div class="content-modal-push">
+            <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png">
+            <h4>Gostaria de ativar notificações para ficar atualizado com as nossas novidades?</h4>
+        </div>
+    </div>
+    <div class="modal-footer" >
+        <button style="align-self: center" class="btn btn-custom" (click)="activateNotifications()">Sim, Ativar</button>
+    </div>
+</ng-template>
+
 <div class="botao-contato-flutuante" *ngIf="!mobileScreen && (isDemo || whatsapp)">
     <a *ngIf="isDemo" class="btn btn-custom rounded-circle contato" target="_blank"
        href="https://materiais.wee.bet/demo-weebet">

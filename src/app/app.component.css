@@ -41,6 +41,20 @@ img{
     margin: 20px
 }
 
+.content-modal-push{
+    display: flex;
+    flex-direction: column;
+    margin: 25px;
+    text-align: center;
+}
+
+.content-modal-push img{
+    width: 150px;
+    height: auto;
+    align-self: center;
+    margin-bottom: 20px
+}
+
 .botao-contato-flutuante {
     position: absolute;
     right: 20px;
@@ -76,7 +90,7 @@ img{
     color: var(--foreground);
     border-radius: 10px 10px 0 0;
     z-index: 1001;
-    position: absolute;
+    position: fixed;
     min-height: 150px;
     min-width: 100%;
     right: 0;
@@ -108,4 +122,15 @@ img{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+
+@media screen and (max-width: 480px){
+    .accept-cookies .cookie-message .titulo-informativo-cookies {
+        font-size: 16px;
+    }
+    
+    .accept-cookies .cookie-message .informativo-cookies {
+        font-size: 12px;
+    }
 }

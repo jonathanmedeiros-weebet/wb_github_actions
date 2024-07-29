@@ -1,18 +1,17 @@
-import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AbstractControl, UntypedFormBuilder, Validators} from '@angular/forms';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
-import {Subject} from 'rxjs';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService} from './../../../../services';
-import {BaseFormComponent} from '../../base-form/base-form.component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Usuario} from '../../../models/usuario';
-import {FormValidations, PasswordValidation} from 'src/app/shared/utils';
+import { Subject } from 'rxjs';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { BaseFormComponent } from '../../base-form/base-form.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Usuario } from '../../../models/usuario';
+import { FormValidations } from 'src/app/shared/utils';
 
 import * as moment from 'moment';
-import {config} from '../../../config';
-import {TranslateService} from '@ngx-translate/core';
-import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
+import { config } from '../../../config';
+import { TranslateService } from '@ngx-translate/core';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
@@ -46,10 +45,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     cpfValidado = false;
     menorDeIdade = false;
     possuiCodigoAfiliado = false;
-
+    isLoterj;
     user: any;
     loginGoogleAtivo = false;
     formSocial = false;
+    aplicarCssTermo: boolean = false;
+    postbacks = {};
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -74,6 +75,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
+        this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+
+        if (this.isLoterj) {
+            this.aplicarCssTermo = true;
+        }
 
         this.createForm();
 
@@ -139,6 +145,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                 this.possuiCodigoAfiliado = true;
             }
+
+            if (params.clickId) {
+                this.postbacks['clickId'] = params.clickId;
+            }
         });
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
@@ -151,6 +161,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             this.form.patchValue({
                                 nome: user.name,
                                 email: user.email,
+                                confirmarEmail: user.email,
                                 googleId: user.id,
                                 googleIdToken: user.idToken,
                             });
@@ -186,6 +197,17 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null]
         });
+
+        if (this.isLoterj) {
+            this.form.addControl('confirmarEmail', this.fb.control(null, [
+                Validators.required,
+                Validators.email,
+                FormValidations.equalsTo('email')
+            ]));
+            this.form.addControl('termosUso', this.fb.control(null, [
+                Validators.requiredTrue,
+            ]));
+        }
     }
 
     ngOnDestroy() {
@@ -215,11 +237,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
             return;
         }
+
         const values = this.form.value;
+
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
         }
+
+        if (Object.keys(this.postbacks).length) {
+            values.postbacks = this.postbacks;
+        }
+
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
@@ -327,5 +356,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     onBeforeInput(e : InputEvent, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
+    }
+
+    blockPaste(event: ClipboardEvent): void {
+        event.preventDefault();
     }
 }

@@ -14,7 +14,8 @@ export class HomeGuard implements CanActivate {
         desafio: 'desafios',
         acumuladao: 'acumuladao',
         loteria: 'loterias',
-        cassino_ao_vivo: 'live-casino'
+        cassino_ao_vivo: 'live-casino',
+        rifas: 'rifas/wall'
     }
 
     constructor(
