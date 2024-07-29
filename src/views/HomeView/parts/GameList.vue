@@ -41,7 +41,7 @@
 <script>
 import Collapse from '@/components/Collapse.vue';
 import GameItem from './GameItem.vue';
-import { useHomeStore } from '@/stores';
+import { useHomeStore, useTicketStore } from '@/stores';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
 import { hasQuotaPermission, calculateQuota } from '@/services';
 export default {
@@ -49,7 +49,8 @@ export default {
     name: 'game-list',
     data() {
         return {
-            homeStore: useHomeStore()
+            homeStore: useHomeStore(),
+            ticketStore: useTicketStore(),
         }
     },
     computed: {
@@ -75,12 +76,17 @@ export default {
                             favorite: newGame.favorito,
                             isLive: newGame.ao_vivo
                         });
+
                         const hasPermission = hasQuotaPermission(finalValue)
+                        const quoteKey = this.ticketStore.items[newGame._id]
+                            ? this.ticketStore.items[newGame._id].quoteKey
+                            : null;
 
                         return {
                             ...quota,
                             hasPermission,
-                            finalValue
+                            finalValue,
+                            selected: quota.chave === quoteKey
                         };
                     })
                     return newGame;

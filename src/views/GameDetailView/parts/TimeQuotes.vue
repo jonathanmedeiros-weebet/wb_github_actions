@@ -5,20 +5,20 @@
         <Collapse
             v-else
             :initCollapsed="true"
-            v-for="(option, index) in quotes"
-            :key="index"
+            v-for="(option, groupIndex) in options"
+            :key="groupIndex"
         > 
             <template #title>{{ option.name }}</template>
             <div class="collapse__options" :class="{'collapse__options--grid': option.odds.length > 3}">
                 <button
                     class="collapse__option"
                     v-for="(odd, oddIndex) in option.odds"
-                    :key="`${oddIndex}-${index}`"
+                    :key="`${oddIndex}-${groupIndex}`"
                     :class="{
-                        'collapse__option--selected': false,
+                        'collapse__option--selected': odd.selected,
                         'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
                     }"
-                    @click="handleItemClick(odd)"
+                    @click="handleItemClick(odd, option.name)"
                 >
                     <template v-if="odd.hasPermission">
                         <IconArrowFillUp
@@ -52,6 +52,7 @@ import IconLock from '@/components/icons/IconLock.vue';
 import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
 import IconArrowFillDown from '@/components/icons/IconArrowFillDown.vue';
 import { QuotaStatus } from '@/enums';
+import { useTicketStore } from '@/stores';
 
 export default {
     name: 'time-quotes',
@@ -60,18 +61,60 @@ export default {
         quotes: {
             type: Array,
             default: () => []
+        },
+        game: {
+            type: Object,
+            default: () => {}
+        }
+    },
+    data() {
+        return {
+            ticketStore: useTicketStore()
         }
     },
     computed: {
         hasQuotes() {
             return Boolean(this.quotes.length)
+        },
+        options() {
+            const quoteKey = this.ticketStore.items[this.game._id]
+                ? this.ticketStore.items[this.game._id].quoteKey
+                : null;
+
+            return this.quotes.map(quote => ({
+                ...quote,
+                odds: quote.odds.map(odd => ({
+                    ...odd,
+                    selected: odd.key == quoteKey
+                }))
+            }))
         }
     },
     methods: {
-        handleItemClick(odd) {
+        handleItemClick(odd, groupName) {
             event.stopPropagation();
             if(!odd.hasPermission) return;
-            void odd;
+
+            const gameExist = Boolean(this.ticketStore.items[this.game._id]);
+            const quoteExist = this.ticketStore.items[this.game._id]?.quoteKey == odd.key;
+
+            if(gameExist && quoteExist) {
+                this.ticketStore.removeQuote(this.game._id);
+            } else {
+                this.ticketStore.addQuote({
+                    gameId: this.game._id,
+                    gameName: this.game.nome,
+                    gameDate: this.game.horario,
+                    eventId: this.game.event_id,
+                    live: this.game.ao_vivo,
+                    quoteKey: odd.key,
+                    quoteValue: odd.value,
+                    quoteName: odd.label,
+                    quoteGroupName: groupName,
+                    favorite: this.game.favorito,
+                    modalityId: this.game.sport_id
+                })
+            }
         },
         isIncreasedOdd(odd) {
             return Boolean(odd.status) && odd.status === QuotaStatus.INCREASED;
@@ -139,7 +182,7 @@ export default {
 
     &__option--selected &__label,
     &__option--selected &__value {
-        color: #000;
+        color: var(--color-background);
     }
 
     &__icon-option {

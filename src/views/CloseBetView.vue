@@ -82,7 +82,7 @@
           </div>
         </div>
         <div class="buttons">
-          <template v-if="showClickFinalized">
+          <template v-if="showConfirmCancelButtons">
             <w-button
               text="Cancelar"
               color="secondary-light"
@@ -93,10 +93,11 @@
               @click="confirmAction"
             />
           </template>
-          <template v-if="showFinished">
+          <template v-if="showDefaultButtons">
             <w-button
               text="Compartilhar"
               color="secondary-light"
+              :disabled="true"
             >
               <template #icon-left>
                 <IconShare :size="20"/>
@@ -105,6 +106,7 @@
             <w-button
               text="Imprimir"
               class="button__confirm"
+              :disabled="true"
             >
               <template #icon-left>
                 <IconPrinter :size="20"/>
@@ -112,7 +114,7 @@
             </w-button>
           </template>
         </div>
-        <div class="finish" v-if="showCloseBet">
+        <div class="finish" v-if="showCancelButtons">
           <w-button
             id="btn-entrar"
             text="Encerrar Aposta"
@@ -155,22 +157,45 @@ export default {
   },
   props: {
     id: {
-        type: Number | String,
-        required: true
+      type: Number | String,
+      required: true
+    },
+    action: {
+      type: String,
+      default: 'view' // view | cancel
     },
   },
   data() {
     return {  
       title: 'Bilhete',
       bet: null,
-      showClickFinalized: false,
-      showCloseBet: false,
-      showFinished: false,
+      cancelRequesterd: false,
     };
   },
   mounted() {
     this.fetchBetDetails();
-    
+  },
+  computed: {
+    showDefaultButtons() {
+      return this.action === 'view'
+    },
+    showCancelButtons() {
+      return this.action !== 'view' && !this.cancelRequesterd
+    },
+    showConfirmCancelButtons() {
+      return this.action !== 'view' && this.cancelRequesterd
+    },
+
+    // TODO: Rever essa logica. Pois precisa cobrir todos.
+    MODALITY_SPORT_FUTEBOL() {
+      return Modalities.SOCCER;
+    },
+    MODALITY_SPORT_VOLEI() {
+      return Modalities.VOLEIBALL;
+    },
+    MODALITY_SPORT_E_SPORTS() {
+      return Modalities.E_SPORT;
+    },
   },
   methods: {
     formatDate(date) {
@@ -186,13 +211,10 @@ export default {
       //   console.error(error);
       // })
       console.log('SIMULAR FECAR A APOSTA!');
-      this.showCloseBet = false;
-      this.showClickFinalized = true;
-  
+      this.cancelRequesterd = true;
     },
     cancelAction() {
-      this.showCloseBet = true;
-      this.showClickFinalized = false;
+      this.cancelRequesterd = false;
     },
     async confirmAction() {
       // TODO: API APRESENTANDO PROBLEMA NO PHP
@@ -230,15 +252,15 @@ export default {
         this.bet = resp.results;
 
         if(resp.results.pago == false && resp.results.resultado == null){
-          this.showCloseBet = true;
-          this.showFinished = false;
-          this.showClickFinalized = false;
+          // this.showCloseBet = true;
+          // this.showFinished = false;
+          // this.showClickFinalized = false;
         }
 
         if (resp.results.pago == true && (resp.results.resultado === 'ganhou' || resp.results.resultado == 'perdeu' )) {
-          this.showFinish = false;
-          this.showFinished = true;
-          this.showClickFinalized = false;
+          // this.showFinish = false;
+          // this.showFinished = true;
+          // this.showClickFinalized = false;
         } 
         
       })
@@ -292,17 +314,6 @@ export default {
       return result;
     }
   },
-  computed: {
-    MODALITY_SPORT_FUTEBOL() {
-      return Modalities.SOCCER;
-    },
-    MODALITY_SPORT_VOLEI() {
-      return Modalities.VOLEIBALL;
-    },
-    MODALITY_SPORT_E_SPORTS() {
-      return Modalities.E_SPORT;
-    },
-  }
 }
 </script>
 <style lang="scss" scoped>

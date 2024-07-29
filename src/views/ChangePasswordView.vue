@@ -1,12 +1,5 @@
 <template>
     <div class="password">
-      <toast 
-        v-if="showToast" 
-        :type="typeToast" 
-        @close="showToast = false"
-      >
-        {{ toastText }}
-      </toast>
       <Header title="Alterar senha" :showBackButton="true" />
         <div class="password__container">
           <div class="password_inputs">
@@ -64,7 +57,8 @@ import WButton from '@/components/Button.vue'
 import IconPassword from '@/components/icons/IconPassword.vue'
 import WInput from '@/components/Input.vue'
 import { changePassword } from '@/services'
-import Toast from '@/components/Toast.vue'
+import { useToastStore } from '@/stores'
+import { ToastType } from '@/enums'
 
 export default {
   name: 'change-password',
@@ -72,39 +66,39 @@ export default {
     Header,
     WInput,
     IconPassword,
-    WButton,
-    Toast
+    WButton
   },
   data() {
     return {
       currentPassword: '',
       newPassword: '',
       confirmPassword: '',
-      toastText: '',
-      showToast: false,
-      typeToast: 'danger',
+      tostStore: useToastStore()
     }
   },
   methods: {
     async handleClickSave() {
-      this.toastText = '';
-      this.showToast = false;
+      this.tostStore.setToastConfig({ message: '' })
       changePassword(this.currentPassword,this.newPassword, this.confirmPassword)
       .then(resp => {
+        let typeToast = ToastType.WARNING;
         if(resp.success) {
-          this.typeToast = 'success';
+          typeToast = ToastType.SUCCESS;
           this.clearInputs();
-        }else{
-          this.typeToast = 'warning';
         }
-        this.toastText = resp.results.message;
-        this.showToast = true;
-        
+
+        this.tostStore.setToastConfig({
+          message: resp.results.message,
+          type: typeToast,
+          duration: 5000
+        })
       })
-      .catch(error => {
-        this.toastText = error.response?.data?.errors?.message;
-        this.typeToast = 'danger';
-        this.showToast = true;            
+      .catch(({ errors }) => {
+        this.tostStore.setToastConfig({
+          message: errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
       })
     },
     clearInputs() {

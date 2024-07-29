@@ -1,38 +1,42 @@
 <template>
   <div class="tickets">
-    <Header :title="title" :showBackButton="true" />
+    <Header title="Bilhete" :showBackButton="true" />
     <div class="tickets__container">
-      <div class="game">
-        <span class="game__select">Jogos selecionados</span>
-        <div class="game__delete">
-          <IconDelete class="game__icon" />
-          <span class="game__text">Excluir todos</span>
+      <span class="tickets__message" v-if="!hasItems">Não há apostas selecionadas.</span>
+      <template v-else>
+        <div class="game">
+          <span class="game__select">Jogos selecionados</span>
+          <div class="game__delete" @click="handleAllRemove">
+            <IconDelete class="game__icon" />
+            <span class="game__text">Excluir todos</span>
+          </div>
         </div>
-      </div>
-      <div 
-        class="bet"
-        v-for="(team, index) in teams" 
-        :key="index" 
-      >
-        <div class="bet__header">
-          <span class="bet__team">
-            <IconLive v-if="team.live" class="bet__icon-live"/>
-            <IconBall class="bet__icon-ball"/>
-            {{ team.team_house }} X {{ team.team_outside }}
-          </span>
-          <IconClose class="bet__icon-close" />
+
+        <div
+          class="bet"
+          v-for="(item, index) in items" 
+          :key="index" 
+        >
+          <div class="bet__header">
+            <span class="bet__team">
+              <IconLive v-if="item.live" class="bet__icon-live"/>
+              <component :is="item.icon" :size="14" class="bet__icon-ball"/>
+              {{ item.gameName }}
+            </span>
+            <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
+          </div>
+          <div class="bet__info">
+            <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
+          </div>
+          <div class="bet__text">
+            <span>{{ item.quoteGroupName }}</span>
+          </div>
+          <div class="bet__result">
+            <span>{{ item.quoteName }}</span>
+            <span>{{ item.quoteValue }}</span>
+          </div>
         </div>
-        <div class="bet__info">
-          <span class="bet__date">{{ team.date }} {{ team.hour }}</span>
-        </div>
-        <div class="bet__text">
-          <span>{{ team.live ? 'Resultado Final' : 'Para ganhar' }}</span>
-        </div>
-        <div class="bet__result">
-          <span>{{ team.select }}</span>
-          <span>{{ team.odd }}</span>
-        </div>
-      </div>
+      </template>
       <div class="finish">
         <div class="finish__cpf">
           <w-input
@@ -41,6 +45,7 @@
             name="tickets_cpf"
             placeholder="Informe o cpf do apostador"
             type="text"
+            v-model="bettorName"
           />
         </div>
       </div>
@@ -49,13 +54,16 @@
           <span class="value__balance-text">Valor</span>
         </div>
         <div class="value__balance">
-          <button class="value__add">+10</button>
-          <button class="value__add">+20</button>
-          <button class="value__add">+50</button>
+          <button class="value__add" @click="handleBetValueClick(10)">+10</button>
+          <button class="value__add" @click="handleBetValueClick(20)">+20</button>
+          <button class="value__add" @click="handleBetValueClick(50)">+50</button>
           <w-input
             class="value__balance-input"
-            name="user_name"
-            type="email"
+            name="bet-value"
+            type="number"
+            v-model="betValue"
+            :value="betValue"
+            @focus="handleInitializeBetValue"
           >
             <template #icon>
               <span style="color: #ffffff80;">R$</span>
@@ -66,11 +74,11 @@
       <div class="cotacao">
         <div class="cotacao__value">
           <span>Cotação:</span>
-          <span>{{sumOdds}}</span>
+          <span>{{ quoteValue }}</span>
         </div>
         <div class="cotacao__ganhos">
-          <span>Possíveis Ganhos:</span>
-          <span>R$ 90,00</span>
+          <span>Possíveis ganhos:</span>
+          <span>{{ possibilityAward }}</span>
         </div>
         <div class="cotacao__alteracao">
           <input
@@ -79,16 +87,17 @@
             id="accept-changes"
             v-model="acceptChanges"
           />
-          <label for="accept-changes">Aceitar Alterações de odds</label>
+          <label for="accept-changes">Aceitar alterações de odds</label>
         </div>
         <div class="cotacao__finalizar">
           <w-button
             id="btn-entrar"
-            text="Finalizar Aposta"
+            :text="buttonText"
             value="entrar"
             class="cotacao__finalizar-button"
             name="btn-entrar"
-            @click="handleClick"
+            :disabled="buttonDisable"
+            @click="handleFinalizeBet"
           />
         </div>
       </div>
@@ -104,6 +113,20 @@ import IconBall from '@/components/icons/IconBall.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
+import { useConfigClient, useTicketStore, useToastStore } from '@/stores';
+import { delay, formatCurrency, formatDateTimeBR } from '@/utilities';
+import { calculateQuota, createLiveToken, createPrebet } from '@/services';
+import Toast from '@/components/Toast.vue';
+import { ToastType } from '@/enums';
+import IconFootball from '@/components/icons/IconFootball.vue';
+import IconCombat from '@/components/icons/IconCombat.vue';
+import IconAmericanFootball from '@/components/icons/IconAmericanFootball.vue';
+import IconTennis from '@/components/icons/IconTennis.vue';
+import IconHockey from '@/components/icons/IconHockey.vue';
+import IconBasketball from '@/components/icons/IconBasketball.vue';
+import IconFutsal from '@/components/icons/IconFutsal.vue';
+import IconVoleiball from '@/components/icons/IconVoleiball.vue';
+import IconESport from '@/components/icons/IconESport.vue';
 
 export default {
   name: 'tickets',
@@ -114,22 +137,211 @@ export default {
     IconBall,
     IconClose,
     WInput,
-    WButton
+    WButton,
+    Toast,
+    IconFootball,
+    IconCombat,
+    IconTennis,
+    IconHockey,
+    IconBasketball,
+    IconFutsal,
+    IconVoleiball,
+    IconTennis,
+    IconESport
   },
   data() {
     return {  
-      title: 'Bilhete',
-      teams: [
-        { team_house: 'Argentino JRS', team_outside: 'Rosario Central', odd: 3.30, date: '19/03/2024', hour: '21:15', live: true, select: 'Empate' },
-        { team_house: 'França', team_outside: 'Itália', odd: 3.30, date: '19/03/2024', hour: '21:15', live: false, select: 'França' },
-        { team_house: 'Infinity', team_outside: 'Qhai', odd: 2.90, date: '19/03/2024', hour: '21:15', live: false, select: 'Qhali' },
-      ],
-      acceptChanges: false,
+      ticketStore: useTicketStore(),
+      toastStore: useToastStore(),
+      submitting: false,
+      icons: {
+        1: IconFootball,
+        9: IconCombat,
+        12: IconAmericanFootball,
+        13: IconTennis,
+        17: IconHockey,
+        48242: IconBasketball,
+        83: IconFutsal,
+        91: IconVoleiball,
+        92: IconTennis,
+        151: IconESport
+      }
     };
   },
   computed: {
-    sumOdds() {
-      return this.teams.reduce((total, team) => total + team.odd, 0).toFixed(2);
+    quoteValue() {
+      if(!Boolean(this.items.length)) return 0;
+
+      let quote = this.items.reduce((total, item) => {
+        console.log(item)
+        const finalValue = calculateQuota({
+          value: Number(item.quoteValue),
+          key: item.quoteKey,
+          gameEventId: item.eventId,
+          favorite: item.favorite,
+          isLive: item.live
+        });
+        return Number(total) * Number(finalValue)
+      }, 1)
+
+      const { options } = useConfigClient();
+      if (quote > options.fator_max) {
+          quote = options.fator_max;
+      }
+
+      return quote.toFixed(2);
+    },
+    possibilityAward() {
+      const { options } = useConfigClient();
+      const award = Number(this.betValue) * Number(this.quoteValue);
+      const possibilityAward = (award < options.valor_max_premio)
+        ? award
+        : options.valor_max_premio;
+
+      return formatCurrency(possibilityAward);
+    },
+    items() {
+      return Object.values(this.ticketStore.items).map(item => ({
+        ...item,
+        icon: this.icons[item.modalityId],
+        quoteValue: item.quoteValue.toFixed(2)
+      }));
+    },
+    hasLiveBet() {
+      return this.items.some(item => item.live);
+    },
+    hasItems() {
+      return Boolean(this.items.length)
+    },
+
+    bettorName: {
+      get() {
+        return this.ticketStore.bettor;
+      },
+      set(value) {
+        this.ticketStore.setBettor(value);
+      }
+    },
+    betValue: {
+      get() {
+        return this.ticketStore.value;
+      },
+      set(value) {
+        this.ticketStore.setValue(value);
+      }
+    },
+    acceptChanges: {
+      get() {
+        return this.ticketStore.accepted;
+      },
+      set(value) {
+        this.ticketStore.setAccepted(value);
+      }
+    },
+    buttonDisable() {
+      return (
+        !Boolean(this.bettorName)
+        || !Boolean(this.betValue)
+        || !Boolean(this.items.length)
+        || this.submitting
+      )
+    },
+    buttonText() {
+      return this.submitting ? 'Processando...' : 'Finalizar Aposta'
+    }
+  },
+  methods: {
+    formatDateTimeBR,
+    handleBetValueClick(valueAditional) {
+      this.betValue = parseFloat(this.betValue) + Number(valueAditional);
+    },
+    handleInitializeBetValue() {
+      this.betValue = Boolean(this.betValue) ? this.betValue : '';
+    },
+    handleAllRemove() {
+      this.ticketStore.clear();
+    },
+    handleItemRemove(gameId) {
+      this.ticketStore.removeQuote(gameId)
+    },
+    async handleFinalizeBet() {
+      this.submitting = true;
+
+      const { options } = useConfigClient();
+
+      if (this.items.length < options.quantidade_min_jogos_bilhete) {
+        this.toastStore.setToastConfig({
+          message: `Por favor, inclua no MÍNIMO ${options.quantidade_min_jogos_bilhete} evento(s).`,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+        this.submitting = false;
+      }
+
+      if (this.items.length > options.quantidade_max_jogos_bilhete) {
+        this.toastStore.setToastConfig({
+          message: `Por favor, inclua no MÁXIMO ${options.quantidade_max_jogos_bilhete} evento(s).`,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+        this.submitting = false;
+      }
+
+      const {items, bettor, value, accepted} = this.ticketStore;
+      const data = {
+        apostador: bettor,
+        valor: value,
+        utilizar_bonus: false,
+        aceitar_alteracoes_odds: accepted,
+        itens: Object.values(items).map(item => {
+          const isQuotePlayer = item.quoteKey.includes('player');
+          const quoteKey = isQuotePlayer ? item.quoteKey.split('___')[2] : item.quoteKey;
+          return {
+            ao_vivo: item.live,
+            jogo_id: item.gameId,
+            jogo_nome: item.gameName,
+            jogo_event_id: item.eventId,
+            cotacao: {
+              chave: quoteKey,
+              valor: item.quoteValue,
+              nome: isQuotePlayer ? item.quoteName : null
+            },
+            cotacao_antiga_valor: null,
+          }
+        })
+      }
+
+      if(this.hasLiveBet) {
+        const liveToken = await createLiveToken(data);
+        data.token_aovivo = liveToken;
+        await delay(10000);
+      }
+
+      createPrebet(data)
+        .then(({id}) => {
+          this.toastStore.setToastConfig({
+            message: 'Aposta realizada com sucesso!',
+            type: ToastType.SUCCESS,
+            duration: 5000
+          })
+          this.handleAllRemove();
+
+          this.$router.push({
+            name: 'close-bet',
+            params: {
+              id,
+              action: 'view'
+            }
+          });
+        })
+        .catch(({ errors }) => {
+          this.toastStore.setToastConfig({
+            message: errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+        })
+        .finally(() => this.submitting = false)
     }
   }
 }
@@ -145,6 +357,11 @@ export default {
     padding: 0 20px;
     min-height: 100%;
     padding-bottom: 100px;
+  }
+
+  &__message {
+    margin-top: 10px;
+    font-size: 12px;
   }
 }
 
@@ -221,7 +438,7 @@ export default {
   }
 
   &__icon-ball {
-    width: 14px;
+    min-width: 14px;
     height: 14px;
   }
 

@@ -28,7 +28,7 @@
             <div
                 class="game__quota"
                 v-for="(quote, index) in quotes"
-                :class="{'game__quota--disabled': !quote.hasPermission}"
+                :class="{'game__quota--selected': quote.selected}"
                 :key="index"
                 @click="handleItemClick(quote)"
             >
@@ -61,6 +61,7 @@ import IconLock from '@/components/icons/IconLock.vue';
 import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
 import { QuotaStatus } from '@/enums';
 import IconArrowFillDown from '@/components/icons/IconArrowFillDown.vue';
+import { useTicketStore } from '@/stores';
 
 export default {
   components: { IconLock, IconArrowFillUp, IconArrowFillDown },
@@ -70,6 +71,11 @@ export default {
             type: Object,
             required: true
         },
+    },
+    data() {
+        return {
+            ticketStore: useTicketStore()
+        }
     },
     computed: {
         isLive() {
@@ -99,32 +105,9 @@ export default {
             return convertInMomentInstance(this.game.horario).format('DD/MM HH:mm');
         },
         quotes() {
-            return this.rearrangeQuotes(this.game.cotacoes ?? []);
-        },
-        teamScoreA() {
-            return this.game.info.time_a_resultado ?? 0;
-        },
-        teamScoreB() {
-            return this.game.info.time_b_resultado ?? 0;
-        }
-    },
-    methods: {
-        changeSrcWhenImageError (event) {
-            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
-        },
-        handleItemClick(odd) {
-            event.stopPropagation();
-            if(!odd.hasPermission) return;
-            void odd;
-        },
-        isIncreasedQuote(quote) {
-            return Boolean(quote.status) && quote.status === QuotaStatus.INCREASED;
-        },
-        isDecreasedQuote(quote) {
-            return Boolean(quote.status) && quote.status === QuotaStatus.DECREASED;
-        },
-        rearrangeQuotes(quotes) {
+            const quotes = this.game.cotacoes ?? [];
             const newQuotes = [];
+
             const homeQuote = quotes.find(quote => quote.chave.includes('casa'));
             if(Boolean(homeQuote)) newQuotes.push(homeQuote);
 
@@ -133,8 +116,57 @@ export default {
 
             const outOfHomeQuote = quotes.find(quote => quote.chave.includes('fora'));
             if(Boolean(outOfHomeQuote)) newQuotes.push(outOfHomeQuote);
+
             return newQuotes;
-        }
+        },
+        teamScoreA() {
+            return this.game.info.time_a_resultado ?? 0;
+        },
+        teamScoreB() {
+            return this.game.info.time_b_resultado ?? 0;
+        },
+    },
+    methods: {
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        },
+        handleItemClick(quota) {
+            event.stopPropagation();
+            if(!quota.hasPermission) return;
+
+            const { items, addQuote, removeQuote } = useTicketStore();
+            const gameExist = Boolean(items[this.game._id]);
+            const quoteExist = items[this.game._id]?.quoteKey == quota.chave;
+
+            let quoteLabel = quota.chave.includes('casa') ? 'Casa' : null;
+            if(!quoteLabel) {
+                quoteLabel = quota.chave.includes('fora') ? 'Fora' : 'Empate';
+            }
+
+            if(gameExist && quoteExist) {
+                removeQuote(this.game._id);
+            } else {
+                addQuote({
+                    gameId: this.game._id,
+                    gameName: this.game.nome,
+                    gameDate: this.game.horario,
+                    eventId: this.game.event_id,
+                    live: this.game.ao_vivo,
+                    quoteKey: quota.chave,
+                    quoteValue: quota.valor,
+                    quoteName: quoteLabel,
+                    quoteGroupName: 'Resultado final',
+                    favorite: this.game.favorito,
+                    modalityId: this.game.sport_id
+                })
+            }
+        },
+        isIncreasedQuote(quote) {
+            return Boolean(quote.status) && quote.status === QuotaStatus.INCREASED;
+        },
+        isDecreasedQuote(quote) {
+            return Boolean(quote.status) && quote.status === QuotaStatus.DECREASED;
+        },
     }
 }
 </script>
@@ -219,6 +251,10 @@ export default {
         height: 54px;
         border-radius: 4px;
         background: var(--color-background);
+        &--selected {
+            background: var(--color-primary);
+            color: var(--color-background);
+        }
     }
 
     &__value-quota {
