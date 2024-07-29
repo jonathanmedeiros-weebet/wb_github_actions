@@ -212,7 +212,7 @@ import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 import { find, payBet } from '@/services'
-import { convertInMomentInstance, formatCurrency } from '@/utilities'
+import { convertDateTimeInMomentInstance, convertInMomentInstance, formatCurrency, now } from '@/utilities'
 import { useConfigClient } from '@/stores'
 import Toast from '@/components/Toast.vue'
 
@@ -284,9 +284,8 @@ export default {
       return formatCurrency(value);
     },  
     getResults() {
-    
       this.parametros.codigo = this.code.replace(/-/g, '');
-      this.parametros.dataInicial = '';
+      this.parametros.dataInicial = this.dateFilter ? convertInMomentInstance(this.dateFilter, "DD/MM/YYYY").format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
       this.parametros.dataFinal = '';
       this.parametros.status = this.activeButton == 'todos' ? '' : this.activeButton;
       this.parametros.apostador = this.apostador;
@@ -333,7 +332,7 @@ export default {
       this.$refs['wmodal'].handleClose();
     },
     formateDateTime(datetime) {
-      return convertInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
+      return convertDateTimeInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
     },
     capitalizeFirstLetter(str) {
       if(str){
