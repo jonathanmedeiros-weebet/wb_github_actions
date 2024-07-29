@@ -119,9 +119,13 @@ img{
 }
 
 .accept-cookies .cookie-message .informativo-cookies :last-child {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     flex-direction: column;
+}
+
+.informativoCookiesLink {
+    width: fit-content;
 }
 
 
