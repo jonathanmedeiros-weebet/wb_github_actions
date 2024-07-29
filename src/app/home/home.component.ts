@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { HomeService } from '../shared/services/home.service';
 import { LayoutService } from '../shared/services/utils/layout.service';
@@ -14,7 +14,7 @@ declare function BTRenderer(): void;
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy{
     @ViewChildren('scrollGames') gamesScroll: QueryList<ElementRef>;
     gamesPopulares = [];
     gamesPopularesAoVivo = [];
@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
     unsub$ = new Subject();
 
     private bt: any;
-    private queryParamsSubscription: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
 
     constructor(
@@ -61,6 +60,12 @@ export class HomeComponent implements OnInit {
             }
         );
 
+        this.translate.onLangChange.subscribe(
+            change => {
+                this.handleChangeLang(change.lang);
+            }
+        );
+
         this.casinoApi.getGamesHome().subscribe(response => {
             this.gamesPopulares = response.populares;
             this.loadingCassino = false;
@@ -78,11 +83,17 @@ export class HomeComponent implements OnInit {
         this.liveFootballIsActive = this.paramsService.futebolAoVivoAtivo();
     }
 
+    ngOnDestroy() {
+        this.bt.kill();
+    }
+
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
         this.hasFeaturedMatches = hasFeaturedMatches;
     }
 
     betbyInitialize(token = null, lang = 'pt-br') {
+        let that = this;
+
         this.bt = new BTRenderer().initialize({
             brand_id: '2415231049618558976',
             token: token ?? null,
@@ -92,7 +103,25 @@ export class HomeComponent implements OnInit {
             widgetName: "promo",
             widgetParams: {
                 placeholder: "operator_page",
+                onBannerClick: args => that.handleClickBanner(args),
+                withSportsList: true,
+                onSportClick: args => {console.log(args)},
             }
         });
+    }
+
+    handleChangeLang(lang: string) {
+        if (this.bt) {
+            this.bt.kill();
+            this.authService.getTokenBetby(lang).subscribe(
+                (res) => {
+                    this.betbyInitialize(res.token, lang);
+                }
+            );
+        }
+    }
+
+    handleClickBanner(args: any) {
+        console.log(args);
     }
 }

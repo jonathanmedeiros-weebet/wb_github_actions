@@ -43,7 +43,6 @@ export class BetbyComponent implements OnInit, OnDestroy {
         );
 
         this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
-            console.log('Query Params changed:', params);
             if (this.bt) {
                 this.bt.updateOptions({url: params['bt-path']});
             }
