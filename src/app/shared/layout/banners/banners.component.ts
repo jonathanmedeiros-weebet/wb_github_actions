@@ -52,10 +52,13 @@ export class BannersComponent implements OnInit {
             if (this.banners.length > 1) {
                 this.showNavigationArrows = true;
             }
-
-            setTimeout(()=>{
+            if(this.showSkeleton){
+                setTimeout(()=>{
+                    this.showLoadingIndicator = false;
+                },2000);
+            }else{
                 this.showLoadingIndicator = false;
-            },2000);
+            }
             this.cd.markForCheck();
         });
     }
