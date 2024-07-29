@@ -10,8 +10,13 @@ export const now = () => {
     return moment()
 }
 
-export const convertInMomentInstance = (date: string | Moment) => moment(date);
+export const convertInMomentInstance = (date: string | Moment, formatDate = "YYYY-MM-DD") => moment(date,formatDate);
 
 export const formatDateBR = (date: string | Moment) => {
     return moment(date).locale('pt-br').format('DD/MM/YYYY');
 }
+
+export const convertDateTimeInMomentInstance = (datetime: string | Moment) => {
+    if (!datetime) return moment.invalid();
+    return moment(datetime, "YYYY-MM-DD HH:mm:ss");
+};
