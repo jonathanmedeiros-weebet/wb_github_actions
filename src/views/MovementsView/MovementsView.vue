@@ -41,6 +41,7 @@ import MovementItem from './parts/MovementItem.vue';
 import Header from '@/components/layouts/Header.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
+import { getMovements } from '@/services';
 
 export default {
   name: 'movements',
@@ -93,6 +94,14 @@ export default {
     handleSelectModalClick() {
       alert('Modal select');
     },
+    async getBalance() {
+      try {
+        const res = await getMovements();
+        this.balanceData = res;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
   }
 }
 </script>
