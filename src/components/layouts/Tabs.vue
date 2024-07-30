@@ -7,7 +7,7 @@
       :key="tab.name"
       :to="tab.route"
     >
-      <component :is="tab.icon" :color="tab.actived ? '#0be58e' : '#ffffff80'"/>
+      <component :is="tab.icon" :color="tab.actived ? '#0be58e' : '#ffffff'"/>
       {{ tab.name }}
     </RouterLink>
   </div>
@@ -78,29 +78,29 @@ export default {
 
 <style lang="scss" scoped>
 .tabs {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid #FFFFFF1A;
+  background: var(--color-background);
+
+  &__item {
     display: flex;
-    justify-content: space-between;
-    padding: 16px 24px;
-    border-top: 1px solid #FFFFFF1A;
-    background: var(--color-background);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 
-    &__item {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
+    height: 41px;
+    color: var(--color-text);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.06px;
+    text-decoration: none;
 
-        height: 41px;
-        color: var(--color-text-input);
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 14.06px;
-        text-decoration: none;
-
-        &--actived {
-            color: var(--color-primary);
-        }
+    &--actived {
+      color: var(--color-primary);
     }
+  }
 }
 </style>

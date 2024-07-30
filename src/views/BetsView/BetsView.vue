@@ -33,7 +33,7 @@
           id="inputDate"
           name="inputDate"
           label="Data"
-          type="date"
+          type="text"
           placeholder="dd/mm/aaaa"
           @click="handleOpenCalendarModal"
           v-model="dateFilter"
@@ -266,7 +266,8 @@ export default {
       this.showModalPay = false;
       this.$refs.modalPay.handleClose();
     },
-    handleOpenCalendarModal() {      
+    handleOpenCalendarModal() {    
+      event.stopPropagation();
       this.showModalCalendar = true;
     },
     handleCloseCalendarModal() {
