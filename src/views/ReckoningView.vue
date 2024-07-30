@@ -121,9 +121,8 @@ import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 import { getCalculationValue } from '@/services'
-import { formatCurrency, now , dateFormatInDayAndMonth } from '@/utilities'
+import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
-import moment from 'moment';
 
 export default {
   name: 'reckoning',
@@ -175,7 +174,9 @@ export default {
       return `${dateFormatInDayAndMonth(this.startDate)} à ${dateFormatInDayAndMonth(this.endDate)}`;
     },
     dateFormatedWithYear() {
-      return `${moment(this.startDate).format('DD/MM/YYYY')} - ${moment(this.endDate).format('DD/MM/YYYY')}`;
+      const startDateFormatted = formatDateBR(this.startDate);
+      const endDateFormatted = formatDateBR(this.endDate);
+      return `${startDateFormatted} - ${endDateFormatted}`;
     }
   },
   mounted() {
