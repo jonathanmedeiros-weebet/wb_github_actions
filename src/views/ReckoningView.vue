@@ -46,7 +46,7 @@
             </div>
             <div class="collapse__section-item">
               <span class="collapse__section-text">Recargas de cartão:</span>
-              <span class="collapse__value-right">{{ rechargesCartao }}</span>
+              <span class="collapse__value-right">{{ rechargeCard }}</span>
             </div>
             <div class="collapse__line"></div>
           </div>
@@ -120,9 +120,10 @@ import IconAdd from '@/components/icons/IconAdd.vue'
 import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
-import { getCalculationValue } from '@/services/reckoning.service'
+import { getCalculationValue } from '@/services'
 import { formatCurrency, now , dateFormatInDayAndMonth } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
+import moment from 'moment';
 
 export default {
   name: 'reckoning',
@@ -144,7 +145,7 @@ export default {
       endDate: now().format('YYYY-MM-DD'),
       totalBet: 0,
       resultDate: 0,
-      rechargesCartao: 0,
+      rechargeCard: 0,
       entry: 0,
       comissao: 0,
       totalExits: 0,
@@ -174,9 +175,7 @@ export default {
       return `${dateFormatInDayAndMonth(this.startDate)} à ${dateFormatInDayAndMonth(this.endDate)}`;
     },
     dateFormatedWithYear() {
-      const startDateFormatted = this.formatDateWithYear(this.startDate);
-      const endDateFormatted = this.formatDateWithYear(this.endDate);
-      return `${startDateFormatted} - ${endDateFormatted}`;
+      return `${moment(this.startDate).format('DD/MM/YYYY')} - ${moment(this.endDate).format('DD/MM/YYYY')}`;
     }
   },
   mounted() {
@@ -219,7 +218,7 @@ export default {
         this.award = formatCurrency(Number(res.total_premios ?? 0));
         this.totalBet = formatCurrency(Number(res.total_apostado ?? 0));
         this.entry = formatCurrency(Number(res.total_entradas ?? 0));
-        this.rechargesCartao = formatCurrency(Number(res.cartao ?? 0));
+        this.rechargeCard = formatCurrency(Number(res.cartao ?? 0));
         this.totalExits = formatCurrency(Number(res.total_saidas ?? 0));
         this.credit = formatCurrency(Number(res.creditos ?? 0));
         this.debit = formatCurrency(Number(res.debitos ?? 0));

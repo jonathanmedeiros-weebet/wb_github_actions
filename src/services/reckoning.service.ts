@@ -5,7 +5,6 @@ import { localStorageService } from "@/services";
 export const getCalculationValue = async (startDate: string, endDate: string) => {
     const { apiUrl } = useConfigClient();
     const url = `${apiUrl}/relatorios/resultado?data-inicial=${startDate}&data-final=${endDate}`;
-    const token = localStorageService.get('token');
     const response: any = await axiosInstance().get(url);
     return response.results;
 }; 
