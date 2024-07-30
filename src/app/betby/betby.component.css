@@ -1,0 +1,10 @@
+main {
+    padding-top: 92px;
+    min-height: calc(100vh - 292px);
+}
+
+@media only screen and (max-width: 1280px) {
+    main {
+        padding-top: 103px;
+    }
+}

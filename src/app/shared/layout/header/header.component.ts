@@ -102,6 +102,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     parlaybayAtivo;
     rifa = false;
     loteriaPopularAtiva;
+    betbyAtivo;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -238,6 +239,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
+        this.betbyAtivo = this.paramsService.getOpcoes().betby;
         this.rifa = this.paramsService.getOpcoes().rifa;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
