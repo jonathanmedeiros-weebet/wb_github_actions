@@ -54,9 +54,10 @@ export default {
   },
   data() {
     return {  
-      startDate: '04/06/2024',
-      endDate: '06/06/2024',
+      startDate: '2024-07-29',
+      endDate: '2024-08-04',
       title: 'Movimentações',
+      balanceData: null,
       dates: [
           {
             infoDate: 'Seg 04 de Jun de 2024',
@@ -96,8 +97,9 @@ export default {
     },
     async getBalance() {
       try {
-        const res = await getMovements();
+        const res = await getMovements(this.startDate, this.endDate);
         this.balanceData = res;
+        console.log(balanceData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
