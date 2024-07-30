@@ -8,7 +8,7 @@ h3 {
     max-width: 600px;
     display: flex;
     justify-content: center;
-  }
+}
 
 .modal-header {
     border-bottom-color: var(--foreground);
@@ -217,7 +217,9 @@ a.link-termos-politica {
     }
 }
 
-.grecaptcha-badge { visibility: hidden; }
+.grecaptcha-badge { 
+    visibility: hidden; 
+}
 
 .checkbox-aceitar-termos{
     margin-right: 5px
