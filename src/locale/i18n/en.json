@@ -597,6 +597,7 @@
     },
     "botoes": {
         "aceitar": "Accept",
+        "entendi": "Got it",
         "salvar_alteracoes": "Save Changes",
         "voltar": "Back"
     },

@@ -598,7 +598,8 @@
         "selecione_uma_opcao": "Selecione uma opção"
     },
     "botoes": {
-        "aceitar": "Entendi",
+        "aceitar": "Aceitar",
+        "entendi": "Entendi",
         "salvar_alteracoes": "Salvar Alterações",
         "voltar": "Voltar"
     },

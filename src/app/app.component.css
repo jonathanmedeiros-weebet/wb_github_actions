@@ -128,7 +128,6 @@ img{
     width: fit-content;
 }
 
-
 @media screen and (max-width: 480px){
     .accept-cookies .cookie-message .titulo-informativo-cookies {
         font-size: 16px;
@@ -136,5 +135,9 @@ img{
     
     .accept-cookies .cookie-message .informativo-cookies {
         font-size: 12px;
+    }
+    
+    .btn-accept {
+        display: flex !important;    
     }
 }
