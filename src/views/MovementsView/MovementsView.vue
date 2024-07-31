@@ -91,6 +91,9 @@ export default {
       ]
     };
   },
+  mounted(){
+    this.getBalance();
+  },
   methods: {
     handleSelectModalClick() {
       alert('Modal select');
@@ -99,7 +102,7 @@ export default {
       try {
         const res = await getMovements(this.startDate, this.endDate);
         this.balanceData = res;
-        console.log(balanceData);
+        console.log(this.balanceData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
