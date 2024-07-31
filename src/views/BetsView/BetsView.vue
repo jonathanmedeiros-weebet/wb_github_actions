@@ -29,7 +29,7 @@
           type="text"
           placeholder="dd/mm/aaaa"
           @click="handleOpenCalendarModal"
-          v-model="dateFilter"
+          v-model="dateFilterView"
           :readonly="true"
         />
         <w-button
@@ -232,6 +232,7 @@
 
       <ModalCalendar
         v-if="showModalCalendar"
+        :initialDate="dateFilter"
         @closeModal="handleCloseCalendarModal"
         @change="handleCalendar"
       />
@@ -277,7 +278,7 @@ export default {
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
-      dateFilter: '',
+      dateFilter: now(),
       activeButton: 'todos',
       apostador: '',
       bets: [],
@@ -296,6 +297,17 @@ export default {
       options: null,
       toastStore: useToastStore(),
       isLastBet: false,
+    }
+  },
+  watch: {
+    activeButton(newValue, oldValue){
+      this.parametros.status = newValue == 'todos' ? '' : newValue; 
+      this.getApiBets();
+    },
+  },
+  computed: {
+    dateFilterView() {
+      return this.dateFilter ? convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY") : '';
     }
   },
   methods: {
@@ -339,7 +351,7 @@ export default {
       this.showModalCalendar = false;
     },
     handleCalendar(dateTime) {
-      this.dateFilter = dateTime.format("YYYY-MM-DD");
+      this.dateFilter = dateTime;
       this.handleCloseCalendarModal();
     },
     setActive(button) {
@@ -492,16 +504,6 @@ export default {
       this.$refs.modalCancel.handleClose();
       this.handleCloseCancelModal();
       
-    }
-  },
-  watch: {
-    activeButton(newValue, oldValue){
-      this.parametros.status = newValue == 'todos' ? '' : newValue; 
-      this.getApiBets();
-
-    },
-    dateFilter(newValue) {
-      this.dateFilter = newValue;   
     }
   }
 }

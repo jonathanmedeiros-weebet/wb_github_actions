@@ -99,6 +99,7 @@ export default {
         color: #FFFFFF80;
         font-size: 16px;
         font-weight: 500;
+        min-height: 26px;
     }
 
     &__items {
@@ -107,6 +108,9 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         gap: 20px;
+        height: 100%;
+        overflow-y: auto;
+        max-height: calc(80% - 56px);
     }
 
     &__item {
@@ -115,6 +119,7 @@ export default {
         align-items: center;
         gap: 10px;
         text-transform: uppercase;
+        min-height: 30px;
 
         color: var(--color-text);
         font-size: 16px;
@@ -127,6 +132,7 @@ export default {
         display: flex;
         align-items: center;
         gap: 10px;
+        min-height: 30px;
 
         color: #FFFFFF99;
         font-size: 14px;

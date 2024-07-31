@@ -102,7 +102,7 @@ export default {
   border-radius: 24px 24px 0px 0px;
   width: 100%;
   height: auto;
-  max-height: 90%;
+  max-height: 80%;
   padding: 0px 20px;
   overflow-y: auto;
 
