@@ -53,7 +53,6 @@ export default {
       this.submitting = true;
       getPreBetByCode(this.code)
       .then(resp => {
-        console.log(resp);
         this.$router.push({ 
           name: 'validation-detail',
           params: {
