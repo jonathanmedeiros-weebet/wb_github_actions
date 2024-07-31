@@ -17,20 +17,25 @@
         {{ dateFormatedWithYear }}
         <IconClose class="date__close" @click.native="resetDateToCurrent" />
       </span>
-      <div 
-        class="information"
-        v-for="(movements, date) in balanceData" 
-        :key="date"
-      >
-        <div class="information__text">
-          <span class="information__date">{{date}}</span>
-        </div>
-        <div class="information__item" v-for="(movement, index) in movements" :key="index">
-          <MovementItem  
-            :value="formatCurrency(movement.valor)"
-            :debit="movement.descricao"
-            :date="movement.data"
-          />
+      <div v-if="isBalanceDataEmpty" class="no-data">
+        Nenhuma informação nesse período
+      </div>
+      <div v-else>
+        <div 
+          class="information"
+          v-for="(movements, date) in balanceData" 
+          :key="date"
+        >
+          <div class="information__text">
+            <span class="information__date">{{date}}</span>
+          </div>
+          <div class="information__item" v-for="(movement, index) in movements" :key="index">
+            <MovementItem  
+              :value="formatCurrency(movement.valor)"
+              :debit="movement.descricao"
+              :date="movement.data"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -73,11 +78,8 @@ export default {
       const endDateFormatted = formatDateBR(this.endDate);
       return `${startDateFormatted} - ${endDateFormatted}`;
     },
-    formattedBalanceData() {
-      return Object.keys(this.balanceData).reduce((acc, date) => {
-        acc[dateFormatInLongFormat(date)] = this.balanceData[date];
-        return acc;
-      }, {});
+    isBalanceDataEmpty() {
+      return Object.keys(this.balanceData).length === 0;
     }
   },
   mounted(){
@@ -116,6 +118,7 @@ export default {
       return formatCurrency(value);
     },
     groupMovementsByDate(movements) {
+      console.log(movements);
       return movements.reduce((groups, movement) => {
         const date = movement.data;
         if (!groups[date]) {
@@ -128,6 +131,7 @@ export default {
   }
 }
 </script>
+
 
 <style lang="scss" scoped>
 
@@ -145,6 +149,10 @@ export default {
     padding-top: 15px;
     min-height: 100%;
   }
+}
+
+.no-data {
+  color: #cf53530d;
 }
 
 .date {

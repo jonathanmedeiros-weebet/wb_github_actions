@@ -1,22 +1,23 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
-import { localStorageService } from "@/services";
 
-export const getByCode = async ( code: string ) => {
+export const getBetByCode = async ( code: string ) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas-por-codigo/${code}`;
+    const url = `${apiUrl}/apostas-por-codigo/${code}`;
     
     return await axiosInstance().get(url);        
 }
 
-export const getById = async ( id: number ) => {
+export const getBetById = async ( id: number, params = {}) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/${id}`;
-    
-    return await axiosInstance().get(url);        
+    const url = `${apiUrl}/apostas/${id}`;
+    const queryString = new URLSearchParams(params).toString();
+    const fullUrl = queryString ? `${url}?${queryString}` : url;
+
+    return await axiosInstance().get(fullUrl);        
 }
 
-export const find = async ( parametros: any ) => {
+export const findBet = async ( parametros: any ) => {
 
     const { apiUrl } = useConfigClient();
     let url = `${apiUrl}/esportes/apostas`;
@@ -29,9 +30,8 @@ export const find = async ( parametros: any ) => {
     params.append('status', parametros.status);
     params.append('apostador', parametros.apostador);
     params.append('sort', parametros.sort);
-    params.append('otimizado', parametros.otimizado);
+    
 
-    // Adiciona os parâmetros à URL se existirem
     if (params.toString()) {
         url += `?${params.toString()}`;
     }
@@ -40,8 +40,8 @@ export const find = async ( parametros: any ) => {
 }
 
 export const cancelBet = async ( bet: any ) => {
-    const { centerUrl } = useConfigClient();
-    const url = `${centerUrl}/apostas/${bet.id}/cancelar`;
+    const { apiUrl } = useConfigClient();
+    const url = `${apiUrl}/apostas/${bet.id}/cancelar`;
 
     const payload = {
         version: bet.version
@@ -52,14 +52,14 @@ export const cancelBet = async ( bet: any ) => {
 
 export const payBet = async ( id: number ) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/${id}/pagamento`;
+    const url = `${apiUrl}/apostas/${id}/pagamento`;
         
     return await axiosInstance().post(url, {});
 }
 
 export const simulateBetClosure = async ( id: number ) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/simular-encerramento?aposta=${id}`;
+    const url = `${apiUrl}/apostas/simular-encerramento?aposta=${id}`;
         
     return await axiosInstance().get(url);
 }
@@ -73,7 +73,7 @@ export const tokenLiveClosing = async (id: any) => {
 
 export const closeBet = async (payload: any) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/encerrar-aposta`;
+    const url = `${apiUrl}/apostas/encerrar-aposta`;
         
     return await axiosInstance().post(url, payload);
 }

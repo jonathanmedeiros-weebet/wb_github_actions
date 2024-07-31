@@ -9,5 +9,4 @@ export * from './socket.service'
 export * from './ticket.service'
 export * from './game.service'
 export * from './movements.service'
-
-
+export * from './reckoning.service'
