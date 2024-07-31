@@ -135,7 +135,6 @@
                   value="cancel"
                   name="btn-cancel"
                   class="button--secondary"
-                  v-if="canCancel"
                   @click="handleOpenCancelModal(bet)"
                 />
 
@@ -248,7 +247,7 @@ import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
-import { cancelBet, findBet, payBet } from '@/services'
+import { cancelBet, findBet, getBetById, payBet } from '@/services'
 import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
@@ -295,6 +294,7 @@ export default {
       permitir_encerrar_aposta: false,
       options: null,
       toastStore: useToastStore(),
+      isLastBet: false,
     }
   },
   methods: {
@@ -311,8 +311,16 @@ export default {
       this.handleClosePayModal();
     },
     handleOpenCancelModal(bet){
-      this.betSelected = bet;
-      this.showModalCancel = true;
+      if(this.canCancel(bet)){
+        this.betSelected = bet;
+        this.showModalCancel = true;
+      }else{
+        this.toastStore.setToastConfig({
+          message: 'Sem permissão para cancelar a aposta',
+          type: ToastType.WARNING,
+          duration: 5000
+        })
+      }
     },
     handleCloseCancelModal() {
       this.betSelected = null;
@@ -354,6 +362,7 @@ export default {
       this.showResults = false;
       findBet(this.parametros)
       .then(resp => {
+        console.log(resp);
         this.bets = resp.results;
         this.showResults = true;
       })
@@ -436,18 +445,31 @@ export default {
 
       return true;
     },
-    canCancel() {
+    canCancel(bet) {
       let result = false;
-      
+      this.isLastBet = false;
+
+      getBetById(bet.id, { 'verificar-ultima-aposta': 'true' })
+      .then(resp => {
+        console.log("GETBYID");
+        console.log(resp);
+        this.isLastBet = resp.results.is_ultima_aposta ?? false;
+      })
+      .catch(error => {
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+      })
+
       if (this.options.habilitar_cancelar_aposta) {
-          result = true;
+        result = true;
       } 
-      //TODO: VERIFICAR O isUltimaAposta
-      // else if (this.options.habilitar_cancelar_ultima_aposta && this.isUltimaAposta) {
-      else if (this.options.habilitar_cancelar_ultima_aposta) {
+      else if (this.options.habilitar_cancelar_ultima_aposta && this.isLastBet) {
           result = true;
       }
-      
+      console.log("isLastBet",  this.isLastBet);
       return result;
     },
     async confirmCancelBet() {

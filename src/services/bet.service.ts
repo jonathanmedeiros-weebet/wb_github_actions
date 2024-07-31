@@ -8,11 +8,13 @@ export const getBetByCode = async ( code: string ) => {
     return await axiosInstance().get(url);        
 }
 
-export const getBetById = async ( id: number ) => {
+export const getBetById = async ( id: number, params = {}) => {
     const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/${id}`;
-    
-    return await axiosInstance().get(url);        
+    const url = `${apiUrl}/apostas/${id}`;
+    const queryString = new URLSearchParams(params).toString();
+    const fullUrl = queryString ? `${url}?${queryString}` : url;
+
+    return await axiosInstance().get(fullUrl);        
 }
 
 export const findBet = async ( parametros: any ) => {
