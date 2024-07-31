@@ -12,23 +12,18 @@
       </span>
       <div 
         class="information"
-        v-for="(movement, movementIndex) in dates" 
+        v-for="(movement, movementIndex) in balanceData" 
         :key="movementIndex" 
       >
         <div class="information__text">
-          <span class="information__date">{{ movement.infoDate }}</span>
+          <span class="information__date">{{movement.data}}</span>
         </div>
-        <div 
-          class="information__item"
-          v-for="(i, index) in movement.movements" 
-          :key="index" 
-        >
+        <div class="information__item">
           <MovementItem  
-            :value="i.value"
-            :debit="i.type"
-            :date="i.date"
+            :value="movement.valor"
+            :debit="movement.descricao"
+            :date="movement.data"
           />
-          
         </div>
       </div>
     </div>
@@ -58,37 +53,6 @@ export default {
       endDate: '2024-08-04',
       title: 'Movimentações',
       balanceData: null,
-      dates: [
-          {
-            infoDate: 'Seg 04 de Jun de 2024',
-            movements: [
-              {value: '30,00', type: 'Crédito', date: '04/06/2024'},
-              {value: '50,00', type: 'Crédito', date: '04/06/2024'},
-              {value: '10,00', type: 'Débito', date: '04/06/2024'},
-              {value: '11,00', type: 'Crédito', date: '04/06/2024'}
-            ]
-          },
-          {
-            infoDate: 'Ter 05 de Jun de 2024 ',
-            movements: [
-              {value: '25,00', type: 'Débito', date: '05/06/2024', },
-              {value: '15,00', type: 'Crédito', date: '05/06/2024', },
-              {value: '8,00', type: 'Débito', date: '05/06/2024', },
-              {value: '2,00', type: 'Crédito', date: '05/06/2024', },
-              {value: '750,00', type: 'Crédito', date: '05/06/2024', }
-            ]
-          },
-          {
-            infoDate: 'Qua 06 de Jun de 2024 ',
-            movements: [
-              {value: '41,00', type: 'Débito', date: '06/06/2024', },
-              {value: '13,00', type: 'Crédito', date: '06/06/2024', },
-              {value: '100,00', type: 'Débito', date: '06/06/2024', },
-              {value: '10,00', type: 'Crédito', date: '06/06/2024', }
-            ]
-          }
-
-      ]
     };
   },
   mounted(){
@@ -101,7 +65,7 @@ export default {
     async getBalance() {
       try {
         const res = await getMovements(this.startDate, this.endDate);
-        this.balanceData = res;
+        this.balanceData = res.movimentacoes;
         console.log(this.balanceData);
       } catch (error) {
         console.error('Error fetching data:', error);
