@@ -88,6 +88,7 @@ export default {
 
     &__back-button,
     &__back-button:hover {
+        z-index: 5;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -15,7 +15,7 @@ export default {
   .copyright {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 110px;
     padding: 24px;
     

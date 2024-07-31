@@ -51,7 +51,7 @@
             <IconPassKey class="more-options__icon" />
             Alterar senha
           </button>
-          <button class="more-options__item" @click="handleNavigate('/config')">
+          <button class="more-options__item" @click="handlePrinterSetting">
             <IconSettings class="more-options__icon" />
             Configurações
           </button>
@@ -87,7 +87,7 @@ import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
 import { logout, getBalance, getBetByCode } from '@/services';
-import { formatCurrency } from '@/utilities';
+import { formatCurrency, wbPostMessage } from '@/utilities';
 import { localStorageService } from "@/services";
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
@@ -152,6 +152,9 @@ export default {
     },
     handleCloseConsultTicketModal() {
       this.isConsultTicketModalVisible = false;
+    },
+    handlePrinterSetting() {
+      wbPostMessage('listPrinters')
     },
     async getData() {
       try {

@@ -1,6 +1,5 @@
 import { axiosInstance } from "./axiosInstance"
 import { useConfigClient } from "@/stores";
-import { localStorageService } from "@/services";
 
 export const changePassword = async (
     currentPass: string,

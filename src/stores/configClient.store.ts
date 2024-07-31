@@ -7,7 +7,13 @@ interface ConfigClient {
   apiUrl: string;
 }
 
-const production = false;
+interface PrinterSetting {
+  printGraphics?: boolean;
+  apkVersion?: number;
+  printerWidth?: number;
+}
+
+const production = true;
 const _host = production ? 'https://central.demo.wee.bet' : '//localhost';
 const _loki = production ? 'https://loki1.weebet.tech' : '//localhost:8000';
 const _center = production ? 'https://center7.wee.bet' : 'https://hermes.wee.bet';
@@ -39,7 +45,13 @@ export const useConfigClient = defineStore('configClient', {
     liveUrl: _live,
     centerUrl: `${_center}/v1`,
     params: {} as any,
-    readyForUse: true
+    readyForUse: true,
+
+    printerSetting: {
+      printGraphics: false,
+      apkVersion: 0,
+      printerWidth: 58
+    }
   }),
   getters: {
     config: (state) => state,
@@ -63,8 +75,6 @@ export const useConfigClient = defineStore('configClient', {
       this.name = config.name;
       this.slug = config.slug;
       this.apiUrl = `${config.apiUrl}/api`;
-      console.log(config.apiUrl)
-      console.log(this.apiUrl)
 
       localStorageService.set(LocalStorageKey.CONFIG_CLIENT, {
         name: this.name,
@@ -77,6 +87,12 @@ export const useConfigClient = defineStore('configClient', {
     },
     setReadyForUse(ready: boolean) {
       this.readyForUse = ready;
+    },
+    setPrinterSetting(setting: PrinterSetting) {
+      this.printerSetting = {
+        ...this.printerSetting,
+        ...setting
+      }
     }
   },
 })

@@ -26,7 +26,7 @@
           id="inputDate"
           name="inputDate"
           label="Data"
-          type="date"
+          type="text"
           placeholder="dd/mm/aaaa"
           @click="handleOpenCalendarModal"
           v-model="dateFilter"
@@ -330,7 +330,8 @@ export default {
       this.$refs.modalCancel.handleClose();
       this.handleCloseCancelModal();
     },
-    handleOpenCalendarModal() {      
+    handleOpenCalendarModal() {    
+      event.stopPropagation();
       this.showModalCalendar = true;
     },
     handleCloseCalendarModal() {
