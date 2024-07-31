@@ -39,6 +39,9 @@ export class BetbyComponent implements OnInit, OnDestroy {
         this.authService.getTokenBetby(currentLang).subscribe(
             (res) => {
                 this.betbyInitialize(res.token, currentLang);
+            } ,
+            (error) => {
+                console.log(error)
             }
         );
 
@@ -56,7 +59,9 @@ export class BetbyComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.bt.kill();
+        if (this.bt) {
+            this.bt.kill();
+        }
         if (this.queryParamsSubscription) {
             this.queryParamsSubscription.unsubscribe();
         }
@@ -77,7 +82,7 @@ export class BetbyComponent implements OnInit, OnDestroy {
         let that = this;
 
         this.bt = new BTRenderer().initialize({
-            brand_id: '2415231049618558976',
+            brand_id: '2429614261820076032',
             token: token ?? null,
             themeName: "demo-turquoise-dark-table",
             lang: this.langs[lang],
