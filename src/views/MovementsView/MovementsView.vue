@@ -150,7 +150,7 @@ export default {
 }
 
 .no-data {
-  color: #cf53530d;
+  color: var(--color-text-input);
 }
 
 .date {
