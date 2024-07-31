@@ -14,9 +14,6 @@
                 <p class="config__title">Impressora padrão</p>
                 <p class="config_description">Selecionar um modelo de impressora abaixo</p>
             </div>
-            <div class="config_content" @click="handlePrint">
-                Testar impressão
-            </div>
             <div class="config_content">
                 <p class="config__title">Imprimir elementos gráficos</p>
                 <button-switch 
@@ -33,7 +30,6 @@
 <script>
 import Header from '@/components/layouts/Header.vue'
 import ButtonSwitch from '@/components/ButtonSwitch.vue'
-import { print } from '@/services';
 
 export default {
     name: 'config',
@@ -47,11 +43,6 @@ export default {
             print: false,
         };
     },
-    methods: {
-        handlePrint() {
-            print();
-        }
-    }
 }
 
 </script>
