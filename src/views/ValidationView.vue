@@ -9,7 +9,8 @@
         class="validation__input"
         name="consult_ticket"
         placeholder="Ex.: EA5D-DG41"
-        type="email"
+        type="text"
+        v-model="code"
       />
       <WButton
         id="btn-salvar"
@@ -17,6 +18,7 @@
         value="salvar"
         name="btn-salvar"
         @click="handleSearch"
+        :disabled="buttonDisable"
       />
     </div>
   </div>
@@ -26,18 +28,52 @@
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 import Header from '@/components/layouts/Header.vue';
+import { getPreBetByCode } from '@/services/preBet.service';
+import { useToastStore } from '@/stores';
+import Toast from '@/components/Toast.vue';
+import { ToastType } from '@/enums';
 
 export default {
   name: 'validation',
-  components: { Header, WInput, WButton },
+  components: { Header,
+    WInput,
+    WButton,
+    Toast 
+  },
   data(){
     return {
       title: 'Validar Aposta',
+      code: '',
+      toastStore: useToastStore(),
+      submitting: false
     }
   },
   methods: {
-    handleSearch() {
-      this.$router.push('/validation-detail')
+    async handleSearch() {
+      this.submitting = true;
+      getPreBetByCode(this.code)
+      .then(resp => {
+        console.log(resp);
+        this.$router.push({ 
+          name: 'validation-detail',
+          params: {
+            id: resp.results.id
+          }
+        });
+      })
+      .catch(error => {
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+      })
+      .finally(() => this.submitting = false)
+    }
+  },
+  computed: {
+    buttonDisable() {
+      return this.submitting == true;
     }
   }
 }
