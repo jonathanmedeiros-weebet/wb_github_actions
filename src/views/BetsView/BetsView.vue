@@ -451,8 +451,6 @@ export default {
 
       getBetById(bet.id, { 'verificar-ultima-aposta': 'true' })
       .then(resp => {
-        console.log("GETBYID");
-        console.log(resp);
         this.isLastBet = resp.results.is_ultima_aposta ?? false;
       })
       .catch(error => {
@@ -469,7 +467,6 @@ export default {
       else if (this.options.habilitar_cancelar_ultima_aposta && this.isLastBet) {
           result = true;
       }
-      console.log("isLastBet",  this.isLastBet);
       return result;
     },
     async confirmCancelBet() {
