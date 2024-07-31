@@ -298,7 +298,9 @@
         "balneario.bet": "gulp balneario.bet",
         "caxias.bet": "gulp caxias.bet",
         "floripa.bet": "gulp floripa.bet",
-        "appjetbet365.com": "gulp appjetbet365.com"
+        "appjetbet365.com": "gulp appjetbet365.com",
+        "amurel.bet": "gulp amurel.bet",
+        "bellagames.bet": "gulp bellagames.bet"
     },
     "private": true,
     "dependencies": {

@@ -2834,3 +2834,21 @@ gulp.task('appjetbet365.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('amurel.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "amurel.bet",
+        banca: "AMUREL.BET",
+        styles: ""
+    });
+});
+
+gulp.task('bellagames.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "bellagames.bet",
+        banca: "APP JETBET365",
+        styles: ""
+    });
+});
