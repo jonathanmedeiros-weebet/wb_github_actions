@@ -22,6 +22,7 @@
         @change="emitChange"
         :value="value"
         autocomplete="off"
+        :readonly="readonly"
       />
       <input
         v-else
@@ -38,6 +39,7 @@
         @click="$emit('click')"
         @change="emitChange"
         autocomplete="off"
+        :readonly="readonly"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
         <icon-visibility v-if="showPassword" color="var(--color-text-input)" />
@@ -86,6 +88,10 @@ export default {
       type: String,
       default: '255'
     },
+    readonly: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {

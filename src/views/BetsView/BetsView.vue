@@ -30,6 +30,7 @@
           placeholder="dd/mm/aaaa"
           @click="handleOpenCalendarModal"
           v-model="dateFilter"
+          :readonly="true"
         />
         <w-button
           id="btn-filter"
@@ -508,9 +509,9 @@ export default {
 
 <style lang="scss" scoped>
 .bets {  
-
-  height: 100%;
-  justify-content: space-between;
+  height: 100;
+  padding-bottom: 100px;
+  overflow-y: auto;
 
   &__container {
     display: flex;
@@ -520,6 +521,7 @@ export default {
   }
 
   &__contente {
+    min-height: 390px;
     display: flex;
     flex-direction: column;
   }
