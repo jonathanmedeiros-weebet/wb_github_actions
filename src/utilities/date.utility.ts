@@ -19,3 +19,7 @@ export const formatDateBR = (date: string | Moment) => {
 export const formatDateTimeBR = (date: string | Moment) => {
     return moment(date).locale('pt-br').format('DD/MM/YYYY HH:mm');
 }
+
+export const formatDateLong = (date: string | Moment) => {
+    return moment(date).locale('pt-br').format('ddd, DD MMMM YYYY');
+}

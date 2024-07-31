@@ -5,7 +5,7 @@
       <div class="comission__info">
         <div class="comission__header">
           <span class="comission__text">Comissão</span>
-          <span :class="valueClass" :style="{ color: computedValueColor }">R$ {{ value }}</span>
+          <span :class="valueClass" :style="{ color: computedValueColor }">{{ value }}</span>
         </div>
         <span :class="debitClass">{{ debit }}</span>
         <span :class="dateClass">{{ date }}</span>

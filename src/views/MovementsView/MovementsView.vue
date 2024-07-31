@@ -14,20 +14,20 @@
     />
     <div class="movements__container">
       <span class="date">
-        {{ startDate }} - {{endDate}}
-        <IconClose class="date__close" />
+        {{ dateFormatedWithYear }}
+        <IconClose class="date__close" @click.native="resetDateToCurrent" />
       </span>
       <div 
         class="information"
-        v-for="(movement, movementIndex) in balanceData" 
-        :key="movementIndex" 
+        v-for="(movements, date) in balanceData" 
+        :key="date"
       >
         <div class="information__text">
-          <span class="information__date">{{movement.data}}</span>
+          <span class="information__date">{{ date }}</span>
         </div>
-        <div class="information__item">
+        <div class="information__item" v-for="(movement, index) in movements" :key="index">
           <MovementItem  
-            :value="movement.valor"
+            :value="formatCurrency(movement.valor)"
             :debit="movement.descricao"
             :date="movement.data"
           />
@@ -44,8 +44,8 @@ import Header from '@/components/layouts/Header.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
 import { getMovements } from '@/services';
-import { formatCurrency, now ,formatDateBR } from '@/utilities'
-import ModalCalendar from './../HomeView/parts/ModalCalendar.vue'
+import { formatCurrency, now, formatDateBR } from '@/utilities';
+import ModalCalendar from './../HomeView/parts/ModalCalendar.vue';
 
 export default {
   name: 'movements',
@@ -63,17 +63,21 @@ export default {
       startDate: now().format('YYYY-MM-DD'),
       endDate: now().format('YYYY-MM-DD'),
       title: 'Movimentações',
-      balanceData: null,
+      balanceData: {},
       dateSelected: now().format('YYYY-MM-DD')
     };
+  },
+  computed: {
+    dateFormatedWithYear() {
+      const startDateFormatted = formatDateBR(this.startDate);
+      const endDateFormatted = formatDateBR(this.endDate);
+      return `${startDateFormatted} - ${endDateFormatted}`;
+    }
   },
   mounted(){
     this.getBalance();
   },
   methods: {
-    handleSelectModalClick() {
-      alert('Modal select');
-    },
     handleOpenCalendarModal() {
       console.log("Opening calendar modal");
       this.showModalCalendar = true;
@@ -92,11 +96,31 @@ export default {
     async getBalance() {
       try {
         const res = await getMovements(this.startDate, this.endDate);
-        this.balanceData = res.movimentacoes;
+        this.balanceData = this.groupMovementsByDate(res.movimentacoes);
         console.log(this.balanceData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+    },
+    resetDateToCurrent() {
+      const currentDate = now().format('YYYY-MM-DD');
+      this.startDate = currentDate;
+      this.endDate = currentDate;
+      this.dateSelected = currentDate; 
+      this.getBalance();
+    },
+    formatCurrency(value) {
+      return formatCurrency(value);
+    },
+    groupMovementsByDate(movements) {
+      return movements.reduce((groups, movement) => {
+        const date = movement.data;
+        if (!groups[date]) {
+          groups[date] = [];
+        }
+        groups[date].push(movement);
+        return groups;
+      }, {});
     }
   }
 }
