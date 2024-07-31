@@ -35,12 +35,13 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/validation-detail',
+      path: '/validation-detail/:id',
       name: 'validation-detail',
       component: ValidationDetailView,
       meta: {
         auth: production
-      }
+      },
+      props: true
     },
     {
       path: '/validation',
