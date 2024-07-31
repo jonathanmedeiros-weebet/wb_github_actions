@@ -1,12 +1,5 @@
 <template>
   <div class="bets">
-    <toast 
-      v-if="showToast" 
-      type="danger" 
-      @close="showToast = false"
-    >
-      {{ toastText }}
-    </toast>
     <Header title="Apostas" :showBackButton="true" />
     <div class="bets__container">
       
@@ -133,8 +126,18 @@
                   value="view"
                   name="btn-view"
                   class="button--secondary"
-                  @click="goToTickets(bet)"
+                  @click="goToTickets(bet, 'view')"
                 />
+
+                <w-button
+                  id="btn-cancel"
+                  text="Cancelar"
+                  value="cancel"
+                  name="btn-cancel"
+                  class="button--secondary"
+                  @click="handleOpenCancelModal(bet)"
+                />
+
                 <w-button
                   id="btn-payer"
                   text="Pagar"
@@ -142,7 +145,7 @@
                   name="btn-payer"
                   class="button--secondary"
                   @click="handleOpenPayModal(bet)"
-                  v-if="bet.pago === false && bet.resultado === 'ganhou'"
+                  v-if="bet.pago === false && bet.resultado === 'ganhou' && !bet.cartao_aposta"
                 />
                 <w-button
                   id="btn-finish"
@@ -150,8 +153,8 @@
                   value="finish"
                   name="finish"
                   class="button--secondary"
-                  v-if="bet.pago === false && habilitar_cancelar_aposta == true"
-                  @click="goToTickets(bet)"
+                  v-if="bet.pago === false && ['cambista', 'todos'].includes(options.permitir_encerrar_aposta) && canClose(bet)"
+                  @click="goToTickets(bet, 'close')"
                 />
               </div>
             </template>
@@ -186,7 +189,41 @@
             value="no"
             name="btn-no"
             class="button--secondary"
-            @click="handleClosePayModal"
+            @click="handleButtonNoPayBet"
+          />
+          
+        </template>
+      </WModal>
+
+      <WModal 
+        ref="modalCancel"
+        v-if="showModalCancel" 
+        @close="handleCloseCancelModal"
+      >
+        
+        <template #title>
+          <p>Cancelar aposta</p>
+          <p class="bets__text-light">Tem certeza que deseja cancelar a aposta?</p>
+        </template>
+
+        <template #body>             
+          <w-button
+            id="btn-cancel-yes"
+            text="Sim"
+            value="yes"
+            name="btn-yes"
+            class="button--primary"
+            @click="confirmCancelBet"
+            
+          />
+          
+          <w-button
+            id="btn-no"
+            text="Não"
+            value="no"
+            name="btn-no"
+            class="button--secondary"
+            @click="handleButtonNoCancelBet"
           />
           
         </template>
@@ -210,10 +247,11 @@ import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
-import { find, payBet } from '@/services'
-import { convertInMomentInstance, formatCurrency } from '@/utilities'
-import { useConfigClient } from '@/stores'
+import { cancelBet, findBet, getBetById, payBet } from '@/services'
+import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now } from '@/utilities'
+import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
+import { ToastType } from '@/enums';
 
 export default {
   name: 'bets',
@@ -229,11 +267,12 @@ export default {
   },
   mounted() {
     const { options } = useConfigClient();
-    this.habilitar_cancelar_aposta = options.habilitar_cancelar_aposta;
+    this.options = options;
   },
   data() {
     return {
       code: '',
+      showModalCancel: false,
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
@@ -248,12 +287,14 @@ export default {
         dataFinal: '',
         status: '',
         apostador: '',
-        sort: '',
-        otimizado: true,
+        sort: ''
       },
       showToast: false,
       toastText: '',
-      habilitar_cancelar_aposta: true
+      permitir_encerrar_aposta: false,
+      options: null,
+      toastStore: useToastStore(),
+      isLastBet: false,
     }
   },
   methods: {
@@ -264,7 +305,30 @@ export default {
     handleClosePayModal() {
       this.betSelected = null;
       this.showModalPay = false;
+    },
+    handleButtonNoPayBet() {
       this.$refs.modalPay.handleClose();
+      this.handleClosePayModal();
+    },
+    handleOpenCancelModal(bet){
+      if(this.canCancel(bet)){
+        this.betSelected = bet;
+        this.showModalCancel = true;
+      }else{
+        this.toastStore.setToastConfig({
+          message: 'Sem permissão para cancelar a aposta',
+          type: ToastType.WARNING,
+          duration: 5000
+        })
+      }
+    },
+    handleCloseCancelModal() {
+      this.betSelected = null;
+      this.showModalCancel = false;
+    },
+    handleButtonNoCancelBet() {
+      this.$refs.modalCancel.handleClose();
+      this.handleCloseCancelModal();
     },
     handleOpenCalendarModal() {    
       event.stopPropagation();
@@ -274,7 +338,7 @@ export default {
       this.showModalCalendar = false;
     },
     handleCalendar(dateTime) {
-      this.dateFilter = dateTime.format("DD/MM/YYYY");
+      this.dateFilter = dateTime.format("YYYY-MM-DD");
       this.handleCloseCalendarModal();
     },
     setActive(button) {
@@ -284,14 +348,12 @@ export default {
       return formatCurrency(value);
     },  
     getResults() {
-    
       this.parametros.codigo = this.code.replace(/-/g, '');
-      this.parametros.dataInicial = '';
+      this.parametros.dataInicial = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
       this.parametros.dataFinal = '';
       this.parametros.status = this.activeButton == 'todos' ? '' : this.activeButton;
       this.parametros.apostador = this.apostador;
-      this.parametros.sort = '-horario';
-      this.parametros.otimizado = true;
+      this.parametros.sort = '-horario'
       
       this.getApiBets();
       
@@ -299,41 +361,61 @@ export default {
     async getApiBets() {
       this.bets = [];
       this.showResults = false;
-      find(this.parametros)
+      findBet(this.parametros)
       .then(resp => {
+        console.log(resp);
         this.bets = resp.results;
         this.showResults = true;
       })
       .catch(error => {
-        console.error(error);
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
       })
     },
-    goToTickets(bet) {
+    goToTickets(bet, action) {
       this.$router.push({ 
         name: 'close-bet',
         params: {
-          id: bet.id
+          id: bet.id,
+          action: action
         }
       });
     },
     async pay() {
       payBet(this.betSelected.id)
       .then(resp => {
+        if(resp.results.pago){
+          this.toastStore.setToastConfig({
+            message: 'Pagamento realizado com sucesso!',
+            type: ToastType.SUCCESS,
+            duration: 5000
+          })
+        }else{
+          this.toastStore.setToastConfig({
+            message: 'Não foi possível realizar o pagamento. Se o erro persistir, entre em contato com o suporte',
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+        }
         this.getResults();
       })
       .catch(error => {
-        console.error(error);
-        //TODO: AJUSTAR O RETORNO COM O NOVO AJUSTE NO INTERCEPTOR DO AXIOS
-        this.toastText = error.response?.data?.errors?.message ?? 'Usuário ou Senha inválido';
-        this.showToast = true;
-        
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
       })
-      this.$refs.modalPay.handleClose();
-      this.showModalPay = false;
-      this.$refs['wmodal'].handleClose();
+      .finally(() => {
+        this.$refs.modalPay.handleClose();
+        this.handleClosePayModal();
+      })
     },
     formateDateTime(datetime) {
-      return convertInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
+      return formatDateTimeBR(datetime);
     },
     capitalizeFirstLetter(str) {
       if(str){
@@ -341,6 +423,74 @@ export default {
       }else{
         return str;
       }
+    },
+    canClose(bet) {
+      const strategy = this.options.closure_strategy;     
+
+      if (strategy === 'probability') {
+          const itemSemProbabilidade = bet.itens.find((item) => item.probabilidade == null);
+  
+          if (itemSemProbabilidade || (new Date(bet.horario) < new Date('2024-05-08 13:00:00'))) {
+              return false;
+          }
+      }
+
+      const found = bet.itens.find((item) => !item.encerrado && !item.resultado && !item.cancelado);
+      if(!found) {
+          return false;
+      }
+
+      if(bet.resultado) {
+          return false;
+      }
+
+      return true;
+    },
+    canCancel(bet) {
+      let result = false;
+      this.isLastBet = false;
+
+      getBetById(bet.id, { 'verificar-ultima-aposta': 'true' })
+      .then(resp => {
+        this.isLastBet = resp.results.is_ultima_aposta ?? false;
+      })
+      .catch(error => {
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+      })
+
+      if (this.options.habilitar_cancelar_aposta) {
+        result = true;
+      } 
+      else if (this.options.habilitar_cancelar_ultima_aposta && this.isLastBet) {
+          result = true;
+      }
+      return result;
+    },
+    async confirmCancelBet() {
+      cancelBet(this.betSelected)
+      .then(resp => {
+        this.toastStore.setToastConfig({
+          message: resp.results.message ?? 'Cancelado com sucesso!',
+          type: ToastType.SUCCESS,
+          duration: 5000
+        })
+        this.getResults();
+      })
+      .catch(error => {
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+      })
+      
+      this.$refs.modalCancel.handleClose();
+      this.handleCloseCancelModal();
+      
     }
   },
   watch: {

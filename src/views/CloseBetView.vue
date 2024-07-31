@@ -28,7 +28,11 @@
             </div>
             <div class="gain__item">
               <span>Possível Retorno:</span>
-              <span class="gain__value">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
+              <span v-if="newEarningPossibility == null" class="gain__value">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
+              <span v-else class="gain__value">
+                <span class="gain__strikethrough">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
+                <span class="gain--danger"> {{ formatCurrencyMoney(newEarningPossibility) }}</span>
+              </span>
             </div>
             <div class="gain__item">
               <span>Resultados:</span>
@@ -58,23 +62,28 @@
                 <template v-else-if="betItem.sport === MODALITY_SPORT_E_SPORTS">
                   <IconGame :size="16"/>
                 </template>
-                {{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}
+                <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
               </span>
               <template v-if="showFinished">
-                <p :class="{ 'bet__status--success': betItem.resultado === 'ganhou', 'bet__status--danger': betItem.resultado === 'perdeu' }">{{ capitalizeFirstLetter(betItem.resultado) }}</p>
+                <p :class="{ 
+                  'bet__status--success': betItem.resultado === 'ganhou', 
+                  'bet__status--danger': betItem.resultado === 'perdeu',
+                  'gain__strikethrough': newEarningPossibility !== null
+                }"
+                >{{ capitalizeFirstLetter(betItem.resultado) }}</p>
               </template>
             </div>
             <div class="bet__info">
-              <span class="bet__date">{{ formateDateTime(betItem.jogo_horario) }}</span>
+              <span class="bet__date" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ formateDateTime(betItem.jogo_horario) }}</span>
             </div>
             <div class="bet__text">
-              <span class="bet__select">
+              <span class="bet__select" :class="{'gain__strikethrough': newEarningPossibility !== null}">
                 {{ betItem.encerrado ? 'Resultado Final' : 'Para ganhar' }} : {{ betItem.odd_nome }}
               </span>
-              <span class="bet__odd">{{ betItem.cotacao }}</span>
+              <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
             </div>
           </div>
-          <div class="bet__message" v-if="showClickFinalized">
+          <div class="bet__message" v-if="showConfirmCancelButtons">
             <p>
               <strong>Atenção:</strong> Confira como ficarão os novos valores. 
               Ao confirmar essa operação, não poderá ser desfeita.
@@ -87,10 +96,12 @@
               text="Cancelar"
               color="secondary-light"
               @click="cancelAction"
+              :disabled="buttonDisable"
             />
             <w-button
               text="Confirmar"
               @click="confirmAction"
+              :disabled="buttonDisable"
             />
           </template>
           <template v-if="showDefaultButtons">
@@ -98,6 +109,7 @@
               text="Compartilhar"
               color="secondary-light"
               @click="handleShared"
+              :disabled="buttonDisable"
             >
               <template #icon-left>
                 <IconShare :size="20"/>
@@ -107,6 +119,7 @@
               text="Imprimir"
               class="button__confirm"
               @click="handlePrint"
+              :disabled="buttonDisable"
             >
               <template #icon-left>
                 <IconPrinter :size="20"/>
@@ -121,6 +134,7 @@
             value="entrar"
             name="btn-entrar"
             @click="closeBet"
+            :disabled="buttonDisable"
           />
         </div>
       </template>
@@ -138,9 +152,12 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
-import { checkLive, closeBet, getById, printTicket, sharedTicket, tokenLiveClosing } from '@/services'
-import { convertInMomentInstance, formatDateBR, formatCurrency } from '@/utilities'
+import { checkLive, closeBet, getBetById, simulateBetClosure, tokenLiveClosing } from '@/services'
+import { formatDateTimeBR, formatDateBR, formatCurrency, delay } from '@/utilities'
 import { Modalities } from '@/enums';
+import { useConfigClient, useToastStore } from '@/stores';
+import Toast from '@/components/Toast.vue';
+import { ToastType } from '@/enums';
 
 export default {
   name: 'close-bet',
@@ -153,7 +170,8 @@ export default {
     IconVolleyball,
     IconFootball,
     IconShare,
-    IconPrinter
+    IconPrinter,
+    Toast
   },
   props: {
     id: {
@@ -162,14 +180,20 @@ export default {
     },
     action: {
       type: String,
-      default: 'view' // view | cancel
+      default: 'view' // view | close
     },
   },
   data() {
     return {  
       title: 'Bilhete',
       bet: null,
-      cancelRequesterd: false,
+      submitting: false,
+      showCloseBet: false,
+      showFinished: false,
+      newQuotation: null,
+      newEarningPossibility: null,
+      closeRequesterd: false,
+      toastStore: useToastStore(),
     };
   },
   mounted() {
@@ -180,12 +204,11 @@ export default {
       return this.action === 'view'
     },
     showCancelButtons() {
-      return this.action !== 'view' && !this.cancelRequesterd
+      return this.action !== 'view' && !this.closeRequesterd
     },
     showConfirmCancelButtons() {
-      return this.action !== 'view' && this.cancelRequesterd
+      return this.action !== 'view' && this.closeRequesterd
     },
-
     // TODO: Rever essa logica. Pois precisa cobrir todos.
     MODALITY_SPORT_FUTEBOL() {
       return Modalities.SOCCER;
@@ -196,34 +219,37 @@ export default {
     MODALITY_SPORT_E_SPORTS() {
       return Modalities.E_SPORT;
     },
+    buttonDisable() {
+      return this.submitting == true;
+    }
   },
   methods: {
     formatDate(date) {
       return formatDateBR(date);
     },
     async closeBet() {
-      // TODO: IMPLEMENTADO O SERVICE DE IMPLEMENTAR A APOSTA MAS FALTA TESTAR 
-      // simulateBetClosure(this.bet.id)
-      // then(resp => {
-      //   console.log(resp);
-      // })
-      // .catch(error => {
-      //   console.error(error);
-      // })
-      console.log('SIMULAR FECAR A APOSTA!');
-      this.cancelRequesterd = true;
+      this.submitting = true;
+      simulateBetClosure(this.bet.id)
+      .then(resp => {
+        this.closeRequesterd = true;
+        this.newQuotation = resp.results.nova_cotacao;
+        this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
+      })
+      .catch(error => {
+        this.newQuotation = null;
+        this.newEarningPossibility = null;
+      })
+      .finally(() => this.submitting = false)
     },
     cancelAction() {
-      this.cancelRequesterd = false;
+      this.newQuotation = null;
+      this.newEarningPossibility = null;
+      this.closeRequesterd = false;
+      this.submitting = false;
     },
-    async confirmAction() {
-      // TODO: API APRESENTANDO PROBLEMA NO PHP
-      // this.showFinish = false;
-      // this.showClickFinalized = false;
-      // this.showFinished = true;
-      // this.title = 'Aposta';   
+    async confirmAction() { 
       if(this.bet) {
-        
+        this.submitting = true;
         const live = await this.haveLive(this.bet);
         let payload = { apostaId: this.bet.id, version: this.bet.version };
 
@@ -231,48 +257,47 @@ export default {
           const token = await tokenLiveClosing(this.bet.id);
           const token_aovivo = token ?? null;
           payload.token = token_aovivo;
+          const { option } = useConfigClient();
+          const timeDelay = option.delay_aposta_aovivo ? option.delay_aposta_aovivo : 10;
+          await delay((timeDelay * 1000));
         }
         
         closeBet(payload)
         .then(resp => {
-          console.log('Aposta encerrada com sucesso');
-          console.log(resp);
+          this.fetchBetDetails();
+          this.newQuotation = null;
+          this.newEarningPossibility = null;
+          this.closeRequesterd = true;
         })
         .catch(error => {
-          console.log(error);
+          this.toastStore.setToastConfig({
+            message: error.errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+          this.submitting = false;
         })
-        
+        .finally(() => this.submitting = false)
       }
-
     },
     async fetchBetDetails() {
-      getById(this.id)
+      getBetById(this.id)
       .then(resp => {
-        
         this.bet = resp.results;
-
-        if(resp.results.pago == false && resp.results.resultado == null){
-          // this.showCloseBet = true;
-          // this.showFinished = false;
-          // this.showClickFinalized = false;
-        }
-
-        if (resp.results.pago == true && (resp.results.resultado === 'ganhou' || resp.results.resultado == 'perdeu' )) {
-          // this.showFinish = false;
-          // this.showFinished = true;
-          // this.showClickFinalized = false;
-        } 
-        
       })
       .catch(error => {
-          console.log(error);
+        this.toastStore.setToastConfig({
+            message: error.errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
       })
     },
     formatCurrencyMoney(value) {
         return formatCurrency(value);
     },
     formateDateTime(datetime) {
-        return convertInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
+        return formatDateTimeBR(datetime);
     },
     capitalizeFirstLetter(str) {
         if(str){
@@ -302,7 +327,7 @@ export default {
       const itensID = bet.itens.map((item) => item.jogo_api_id)
       const retorno = await checkLive(itensID);
 
-      if(retorno) {
+      if(retorno.result) {
         result = true;
       }
 
@@ -382,6 +407,14 @@ export default {
         justify-content: space-between;
         font-size: 14px;
         color: var(--color-text);
+    }
+
+    &__strikethrough {
+      text-decoration: line-through;
+    }
+
+    &--danger {
+      color: var(--color-danger);
     }
 
 }

@@ -6,11 +6,17 @@ export const dateFormatInMonthAndYear = (datetime: string | Moment) => {
     return momentReserve.format('MMMM [de] YYYY')
 }
 
+export const dateFormatInDayAndMonth = (datetime: string | Moment) => {
+    if(!Boolean(datetime)) return ''
+    const momentReserve = moment(datetime);
+    return momentReserve.format('DD/MM')
+}
+
 export const now = () => {
     return moment()
 }
 
-export const convertInMomentInstance = (date: string | Moment) => moment(date);
+export const convertInMomentInstance = (date: string | Moment, formatDate = "YYYY-MM-DD") => moment(date,formatDate);
 
 export const formatDateBR = (date: string | Moment) => {
     return moment(date).locale('pt-br').format('DD/MM/YYYY');

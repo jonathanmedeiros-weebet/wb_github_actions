@@ -13,16 +13,16 @@
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
             {{ isCreditoVisible ? '*******' : credit }}
-            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click="toggleCreditoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click="toggleCreditoVisibility" />
+            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click.native="toggleCreditoVisibility" />
           </span>
         </div>
         <div class="wallet__item">
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
             {{ isSaldoVisible ? '*******' : balance }}
-            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click="toggleSaldoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click="toggleSaldoVisibility" />
+            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click.native="toggleSaldoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click.native="toggleSaldoVisibility" />
           </span>
         </div>
         <div class="wallet__shortcuts">
@@ -66,7 +66,12 @@
         </div>
       </div> 
     </section>
-    <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="handleCloseConsultTicketModal" />
+    <ModalConsultTicket
+      ref="modalConsultTicket"
+      v-if="isConsultTicketModalVisible" 
+      @close="handleCloseConsultTicketModal" 
+      @consult="handleConsultTicket"
+    />
   </div>
 </template>
 
@@ -81,9 +86,12 @@ import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
-import { logout, getBalance } from '@/services';
+import { logout, getBalance, getBetByCode } from '@/services';
 import { formatCurrency, wbPostMessage } from '@/utilities';
 import { localStorageService } from "@/services";
+import Toast from '@/components/Toast.vue';
+import { ToastType } from '@/enums';
+import { useToastStore } from '@/stores';
 
 export default {
   name: 'menu',
@@ -97,14 +105,17 @@ export default {
     IconFactCheck,
     IconManageSearch,
     IconInsertChart,
-    ModalConsultTicket
+    ModalConsultTicket,
+    Toast
   },
   data() {
     return {
+      code: null,
       balanceData: null,
       isCreditoVisible: false,
       isSaldoVisible: false,
-      isConsultTicketModalVisible: false
+      isConsultTicketModalVisible: false,
+      toastStore: useToastStore()
     };
   },
   mounted() {
@@ -152,6 +163,31 @@ export default {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+    },
+    async handleConsultTicket(ticketCode) {
+      console.log("codigo", ticketCode);
+      getBetByCode(ticketCode)
+      .then(resp => {
+        console.log(resp);
+        if(resp.results){
+          this.$router.push({ 
+            name: 'close-bet',
+            params: {
+              id: resp.results.id,
+              action: 'view'
+            }
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+        this.handleCloseConsultTicketModal();
+      })
     }
   }
 }
