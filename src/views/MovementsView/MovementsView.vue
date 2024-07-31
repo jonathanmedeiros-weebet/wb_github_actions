@@ -44,6 +44,8 @@ import Header from '@/components/layouts/Header.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
 import { getMovements } from '@/services';
+import { formatCurrency, now ,formatDateBR } from '@/utilities'
+import ModalCalendar from './../HomeView/parts/ModalCalendar.vue'
 
 export default {
   name: 'movements',
@@ -52,7 +54,8 @@ export default {
     SelectFake, 
     IconClose, 
     IconAttachMoney, 
-    MovementItem 
+    MovementItem,
+    ModalCalendar 
   },
   data() {
     return {  
@@ -72,9 +75,11 @@ export default {
       alert('Modal select');
     },
     handleOpenCalendarModal() {
+      console.log("Opening calendar modal");
       this.showModalCalendar = true;
     },
     handleCloseCalendarModal() {
+      console.log("Closing calendar modal");
       this.showModalCalendar = false;
     },
     async handleCalendar(dateTime) {
