@@ -23,7 +23,7 @@
         :key="date"
       >
         <div class="information__text">
-          <span class="information__date">{{ date }}</span>
+          <span class="information__date">{{date}}</span>
         </div>
         <div class="information__item" v-for="(movement, index) in movements" :key="index">
           <MovementItem  
