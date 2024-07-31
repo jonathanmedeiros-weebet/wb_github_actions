@@ -79,11 +79,9 @@ export default {
   },
   methods: {
     handleOpenCalendarModal() {
-      console.log("Opening calendar modal");
       this.showModalCalendar = true;
     },
     handleCloseCalendarModal() {
-      console.log("Closing calendar modal");
       this.showModalCalendar = false;
     },
     async handleCalendar(dateTime) {
@@ -127,8 +125,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .movements {
-  color: var(--color-background);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -138,7 +136,7 @@ export default {
     flex-direction: column;
     gap: 16px;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 25px;
     padding-top: 15px;
     min-height: 100%;
   }
@@ -150,7 +148,7 @@ export default {
   height: 30px;
   opacity: 0.5;
   color: var(--color-text);
-  background-color: #FFFFFF0D;
+  background-color: #cf53530d;
   padding: 10px;
   display: flex;
   align-items: center;
