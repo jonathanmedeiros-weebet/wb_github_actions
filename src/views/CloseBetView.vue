@@ -152,7 +152,7 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
-import { checkLive, closeBet, getBetById, simulateBetClosure, tokenLiveClosing } from '@/services'
+import { checkLive, closeBet, getBetById, printTicket, sharedTicket, simulateBetClosure, tokenLiveClosing } from '@/services'
 import { formatDateTimeBR, formatDateBR, formatCurrency, delay } from '@/utilities'
 import { Modalities } from '@/enums';
 import { useConfigClient, useToastStore } from '@/stores';
