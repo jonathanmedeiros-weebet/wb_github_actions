@@ -1,5 +1,5 @@
 <template>
-  <WModal :backdropClick="true" @close="handleCloseModal">
+  <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
     <template #title>
       <span class="modal-consult-ticket__title">Consultar bilhete</span>
     </template>
@@ -9,16 +9,19 @@
           Digite o código de aposta para realizar a consulta do bilhete
         </span>
         <w-input
+          v-model="ticketCode"
           class="modal-consult-ticket__input"
           name="consult_ticket"
           placeholder="Ex.: EA5D-DG41"
           type="text"
+          mask="XXXX-XXXX"
         />
         <w-button
           id="btn-salvar"
           text="Consultar"
           value="salvar"
           name="btn-salvar"
+          @click="handleConsult"
         />
       </div>
     </template>
@@ -33,9 +36,19 @@ import WButton from '@/components/Button.vue';
 export default {
   name: 'modal-consult-ticket',
   components: { WModal, WInput, WButton },
+  data() {
+    return {
+      ticketCode: ''
+    };
+  },
   methods: {
     handleCloseModal() {
+      
       this.$emit('close');
+    },
+    handleConsult() {
+      this.$emit('consult', this.ticketCode);
+      this.$refs['wmodal'].handleClose();
     }
   }
 };

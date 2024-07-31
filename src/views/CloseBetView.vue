@@ -28,7 +28,7 @@
             </div>
             <div class="gain__item">
               <span>Possível Retorno:</span>
-              <span v-if="!newEarningPossibility" class="gain__value">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
+              <span v-if="newEarningPossibility == null" class="gain__value">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
               <span v-else class="gain__value">
                 <span class="gain__strikethrough">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
                 <span class="gain--danger"> {{ formatCurrencyMoney(newEarningPossibility) }}</span>
@@ -83,7 +83,7 @@
               <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
             </div>
           </div>
-          <div class="bet__message" v-if="showClickFinalized">
+          <div class="bet__message" v-if="showConfirmCancelButtons">
             <p>
               <strong>Atenção:</strong> Confira como ficarão os novos valores. 
               Ao confirmar essa operação, não poderá ser desfeita.
@@ -96,17 +96,19 @@
               text="Cancelar"
               color="secondary-light"
               @click="cancelAction"
+              :disabled="buttonDisable"
             />
             <w-button
               text="Confirmar"
               @click="confirmAction"
+              :disabled="buttonDisable"
             />
           </template>
           <template v-if="showDefaultButtons">
             <w-button
               text="Compartilhar"
               color="secondary-light"
-              :disabled="true"
+              :disabled="buttonDisable"
             >
               <template #icon-left>
                 <IconShare :size="20"/>
@@ -115,7 +117,7 @@
             <w-button
               text="Imprimir"
               class="button__confirm"
-              :disabled="true"
+              :disabled="buttonDisable"
             >
               <template #icon-left>
                 <IconPrinter :size="20"/>
@@ -130,6 +132,7 @@
             value="entrar"
             name="btn-entrar"
             @click="closeBet"
+            :disabled="buttonDisable"
           />
         </div>
       </template>
@@ -147,10 +150,12 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
-import { checkLive, closeBet, getById, simulateBetClosure, tokenLiveClosing } from '@/services'
-import { convertDateTimeInMomentInstance, formatDateBR, formatCurrency, delay } from '@/utilities'
+import { checkLive, closeBet, getBetById, simulateBetClosure, tokenLiveClosing } from '@/services'
+import { formatDateTimeBR, formatDateBR, formatCurrency, delay } from '@/utilities'
 import { Modalities } from '@/enums';
-import { useConfigClient } from '@/stores';
+import { useConfigClient, useToastStore } from '@/stores';
+import Toast from '@/components/Toast.vue';
+import { ToastType } from '@/enums';
 
 export default {
   name: 'close-bet',
@@ -163,7 +168,8 @@ export default {
     IconVolleyball,
     IconFootball,
     IconShare,
-    IconPrinter
+    IconPrinter,
+    Toast
   },
   props: {
     id: {
@@ -172,20 +178,20 @@ export default {
     },
     action: {
       type: String,
-      default: 'view' // view | cancel
+      default: 'view' // view | close
     },
   },
   data() {
     return {  
       title: 'Bilhete',
       bet: null,
-      showClickFinalized: false,
+      submitting: false,
       showCloseBet: false,
       showFinished: false,
       newQuotation: null,
       newEarningPossibility: null,
-      isLoading: false,
-      cancelRequesterd: false,
+      closeRequesterd: false,
+      toastStore: useToastStore(),
     };
   },
   mounted() {
@@ -196,12 +202,11 @@ export default {
       return this.action === 'view'
     },
     showCancelButtons() {
-      return this.action !== 'view' && !this.cancelRequesterd
+      return this.action !== 'view' && !this.closeRequesterd
     },
     showConfirmCancelButtons() {
-      return this.action !== 'view' && this.cancelRequesterd
+      return this.action !== 'view' && this.closeRequesterd
     },
-
     // TODO: Rever essa logica. Pois precisa cobrir todos.
     MODALITY_SPORT_FUTEBOL() {
       return Modalities.SOCCER;
@@ -212,45 +217,41 @@ export default {
     MODALITY_SPORT_E_SPORTS() {
       return Modalities.E_SPORT;
     },
+    buttonDisable() {
+      return this.submitting == true;
+    }
   },
   methods: {
     formatDate(date) {
       return formatDateBR(date);
     },
     async closeBet() {
+      this.submitting = true;
       simulateBetClosure(this.bet.id)
       .then(resp => {
-        console.log(resp);
-        this.showCloseBet = false;
-        this.showClickFinalized = true;
+        this.closeRequesterd = true;
         this.newQuotation = resp.results.nova_cotacao;
         this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
       })
       .catch(error => {
-        console.error(error);
         this.newQuotation = null;
         this.newEarningPossibility = null;
       })
-  
+      .finally(() => this.submitting = false)
     },
     cancelAction() {
-      this.showCloseBet = true;
-      this.showClickFinalized = false;
       this.newQuotation = null;
       this.newEarningPossibility = null;
-
-      this.cancelRequesterd = true;
-    },
-    cancelAction() {
-      this.cancelRequesterd = false;
+      this.closeRequesterd = false;
+      this.submitting = false;
     },
     async confirmAction() { 
       if(this.bet) {
+        this.submitting = true;
         const live = await this.haveLive(this.bet);
         let payload = { apostaId: this.bet.id, version: this.bet.version };
 
         if(live) {
-          // this.setDelay();
           const token = await tokenLiveClosing(this.bet.id);
           const token_aovivo = token ?? null;
           payload.token = token_aovivo;
@@ -260,45 +261,41 @@ export default {
         }
         
         closeBet(payload)
-          .then(resp => {
-            this.showClickFinalized = false;
-            this.showCloseBet = false;
-            this.showFinished = true;
-            this.fetchBetDetails();
+        .then(resp => {
+          this.fetchBetDetails();
+          this.newQuotation = null;
+          this.newEarningPossibility = null;
+          this.closeRequesterd = true;
+        })
+        .catch(error => {
+          this.toastStore.setToastConfig({
+            message: error.errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
           })
-          .catch(error => {
-            console.log(error);
-          })
-        }
-
+          this.submitting = false;
+        })
+        .finally(() => this.submitting = false)
+      }
     },
     async fetchBetDetails() {
-      getById(this.id)
+      getBetById(this.id)
       .then(resp => {
         this.bet = resp.results;
-        
-        if(resp.results.pago == false && resp.results.resultado == null){
-          // this.showCloseBet = true;
-          // this.showFinished = false;
-          // this.showClickFinalized = false;
-        }
-
-        if (resp.results.pago == true && (resp.results.resultado === 'ganhou' || resp.results.resultado == 'perdeu' )) {
-          // this.showFinish = false;
-          // this.showFinished = true;
-          // this.showClickFinalized = false;
-        } 
-        
       })
       .catch(error => {
-          console.log(error);
+        this.toastStore.setToastConfig({
+            message: error.errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
       })
     },
     formatCurrencyMoney(value) {
         return formatCurrency(value);
     },
     formateDateTime(datetime) {
-        return convertDateTimeInMomentInstance(datetime).format("DD/MM/YYYY HH:mm");
+        return formatDateTimeBR(datetime);
     },
     capitalizeFirstLetter(str) {
         if(str){

@@ -16,10 +16,6 @@ export const formatDateBR = (date: string | Moment) => {
     return moment(date).locale('pt-br').format('DD/MM/YYYY');
 }
 
-export const convertDateTimeInMomentInstance = (datetime: string | Moment) => {
-    if (!datetime) return moment.invalid();
-    return moment(datetime, "YYYY-MM-DD HH:mm:ss");
-};
 export const formatDateTimeBR = (date: string | Moment) => {
     return moment(date).locale('pt-br').format('DD/MM/YYYY HH:mm');
 }
