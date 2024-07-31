@@ -4,6 +4,13 @@
       :title="title" 
       :showCalendarButton="true" 
       :showBackButton="true" 
+      @calendarClick="handleOpenCalendarModal"
+    />
+    <ModalCalendar
+      v-if="showModalCalendar"
+      :initialDate="dateSelected"
+      @closeModal="handleCloseCalendarModal"
+      @change="handleCalendar"
     />
     <div class="movements__container">
       <span class="date">
@@ -49,10 +56,12 @@ export default {
   },
   data() {
     return {  
-      startDate: '2024-07-29',
-      endDate: '2024-08-04',
+      showModalCalendar: false,
+      startDate: now().format('YYYY-MM-DD'),
+      endDate: now().format('YYYY-MM-DD'),
       title: 'Movimentações',
       balanceData: null,
+      dateSelected: now().format('YYYY-MM-DD')
     };
   },
   mounted(){
@@ -61,6 +70,19 @@ export default {
   methods: {
     handleSelectModalClick() {
       alert('Modal select');
+    },
+    handleOpenCalendarModal() {
+      this.showModalCalendar = true;
+    },
+    handleCloseCalendarModal() {
+      this.showModalCalendar = false;
+    },
+    async handleCalendar(dateTime) {
+      this.startDate = dateTime.format('YYYY-MM-DD');
+      this.endDate = dateTime.format('YYYY-MM-DD');
+      this.dateSelected = dateTime.format('YYYY-MM-DD'); 
+      this.handleCloseCalendarModal();
+      this.getBalance();
     },
     async getBalance() {
       try {
