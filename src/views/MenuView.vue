@@ -66,7 +66,12 @@
         </div>
       </div> 
     </section>
-    <ModalConsultTicket v-if="isConsultTicketModalVisible" @close="handleCloseConsultTicketModal" />
+    <ModalConsultTicket
+      ref="modalConsultTicket"
+      v-if="isConsultTicketModalVisible" 
+      @close="handleCloseConsultTicketModal" 
+      @consult="handleConsultTicket"
+    />
   </div>
 </template>
 
@@ -81,9 +86,12 @@ import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
-import { logout, getBalance } from '@/services';
+import { logout, getBalance, getBetByCode } from '@/services';
 import { formatCurrency } from '@/utilities';
 import { localStorageService } from "@/services";
+import Toast from '@/components/Toast.vue';
+import { ToastType } from '@/enums';
+import { useToastStore } from '@/stores';
 
 export default {
   name: 'menu',
@@ -97,14 +105,17 @@ export default {
     IconFactCheck,
     IconManageSearch,
     IconInsertChart,
-    ModalConsultTicket
+    ModalConsultTicket,
+    Toast
   },
   data() {
     return {
+      code: null,
       balanceData: null,
       isCreditoVisible: false,
       isSaldoVisible: false,
-      isConsultTicketModalVisible: false
+      isConsultTicketModalVisible: false,
+      toastStore: useToastStore()
     };
   },
   mounted() {
@@ -149,6 +160,31 @@ export default {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+    },
+    async handleConsultTicket(ticketCode) {
+      console.log("codigo", ticketCode);
+      getBetByCode(ticketCode)
+      .then(resp => {
+        console.log(resp);
+        if(resp.results){
+          this.$router.push({ 
+            name: 'close-bet',
+            params: {
+              id: resp.results.id,
+              action: 'view'
+            }
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+        this.handleCloseConsultTicketModal();
+      })
     }
   }
 }
