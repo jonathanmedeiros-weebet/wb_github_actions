@@ -131,6 +131,7 @@ export default {
 <style lang="scss" scoped>
 
 input {
+  background-color: #181818;
   background-color: var(--color-background-input);
   box-sizing: border-box;
   border: none;
@@ -147,7 +148,6 @@ input {
 }
 
 .input {
-  font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
   margin-bottom: 8px;
@@ -155,6 +155,7 @@ input {
   &__label {
     font-weight: 400;
     font-size: 16px;
+    color: #ffffff;
     color: var(--color-text);
     margin-bottom: 6px;
   }
@@ -164,8 +165,10 @@ input {
     align-items: center;
     margin-bottom: 16px;
     padding-left: 10px;
+    background-color: #181818;
     background-color: var(--color-background-input);
     border-radius: 5px;
+    border: 2px solid #181818;
     border: 2px solid var(--color-background-input);
 
     &--focused {
@@ -192,9 +195,10 @@ input {
     height: 56px;
     font-size: 14px;
     font-weight: 400;
+    color: #ffffff;
     color: var(--color-text-input);
     padding-left: 10px;
-    
+    background: transparent;
   }
 }
 </style>

@@ -27,7 +27,6 @@ export default {
     },
     updated() {
         if(this.showToast) {
-            console.log('toast sendo exibido')
             this.timeoutInstance = setTimeout(() => {
                 this.toastStore.setToastConfig({message: ''})
             }, this.durationToast);
@@ -74,14 +73,17 @@ export default {
     z-index: 3;
 
     &--success {
+        background-color: #6da544;
         background-color: var(--color-success);
     }
 
     &--warning {
+        background-color: #c09516;
         background-color: var(--color-warning);
     }
 
     &--danger {
+        background-color: #f61a1a;
         background-color: var(--color-danger);
     }
 

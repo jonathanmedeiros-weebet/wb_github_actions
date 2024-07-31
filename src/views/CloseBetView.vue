@@ -108,6 +108,7 @@
             <w-button
               text="Compartilhar"
               color="secondary-light"
+              @click="handleShared"
               :disabled="buttonDisable"
             >
               <template #icon-left>
@@ -117,6 +118,7 @@
             <w-button
               text="Imprimir"
               class="button__confirm"
+              @click="handlePrint"
               :disabled="buttonDisable"
             >
               <template #icon-left>
@@ -320,28 +322,28 @@ export default {
       let result = false;
 
       const found = bet.itens.find((item) => item.ao_vivo);
-      if(found) {
-          return true;
-      }
+      if(found) return true;
 
-      const itensID = bet.itens.map((item) => {
-          return item.jogo_api_id;
-      })
-
+      const itensID = bet.itens.map((item) => item.jogo_api_id)
       const retorno = await checkLive(itensID);
 
       if(retorno.result) {
-          result = true;
+        result = true;
       }
 
       return result;
     },
+    handleShared() {
+      sharedTicket(this.bet);
+    },
+    handlePrint() {
+      printTicket(this.bet)
+    }
   },
 }
 </script>
 <style lang="scss" scoped>
 .close-bet {
-
   padding-bottom: 10px;
 
   &__container {
