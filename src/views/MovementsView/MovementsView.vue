@@ -72,6 +72,12 @@ export default {
       const startDateFormatted = formatDateBR(this.startDate);
       const endDateFormatted = formatDateBR(this.endDate);
       return `${startDateFormatted} - ${endDateFormatted}`;
+    },
+    formattedBalanceData() {
+      return Object.keys(this.balanceData).reduce((acc, date) => {
+        acc[dateFormatInLongFormat(date)] = this.balanceData[date];
+        return acc;
+      }, {});
     }
   },
   mounted(){
