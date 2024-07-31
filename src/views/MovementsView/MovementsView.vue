@@ -118,7 +118,6 @@ export default {
       return formatCurrency(value);
     },
     groupMovementsByDate(movements) {
-      console.log(movements);
       return movements.reduce((groups, movement) => {
         const date = movement.data;
         if (!groups[date]) {
@@ -131,7 +130,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 
