@@ -33,6 +33,11 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     reverse: boolean = false;
     tabSelected = 'bonus';
     dataAtual;
+    date1: string = ''; 
+    date2: string = ''; 
+    isButtonDisabled = false;
+    isRescued = false;
+    
 
     constructor(
         private financeiroService: FinanceiroService,
@@ -45,7 +50,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         private router: Router,
         private fb: UntypedFormBuilder,
         private cd: ChangeDetectorRef,
-        private rodadaGratisService: RodadaGratisService
+        private rodadaGratisService: RodadaGratisService,
+        private activeRulesModal: NgbActiveModal
     ) { super(); }
 
     ngOnInit(): void {
@@ -240,13 +246,33 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     } 
     
     redeemPrize(rodadaId: string) {
+        this.isButtonDisabled = true; 
+        
         this.rodadaGratisService.redeemPrize(rodadaId).subscribe(
-            response => this.handleRedeemPrize(response),
-            error => this.handleError(error)
+            response => {
+                this.handleRedeemPrize(response)
+            },
+            error => {
+                this.handleError(error)
+                setTimeout(() => {
+                    this.isButtonDisabled = false;
+                }, 2000);
+            } 
         );
     }
 
     handleRedeemPrize(response) {
         this.messageService.success(response.message);
+    }
+
+    parseDate( dateStr: string) {
+        const [day, month, year] = dateStr.split('/').map(Number);
+        const date = new Date(year, month -1, day);
+        return !isNaN(date.getTime()) ? date : null;
+    }
+
+
+    isDateGreater(date1: Date, date2: Date) {
+        return date1 > date2;
     }
 }
