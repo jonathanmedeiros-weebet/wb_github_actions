@@ -101,7 +101,6 @@ export default {
       try {
         const res = await getMovements(this.startDate, this.endDate);
         this.balanceData = this.groupMovementsByDate(res.movimentacoes);
-        console.log(this.balanceData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
