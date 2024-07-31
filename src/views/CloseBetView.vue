@@ -97,7 +97,7 @@
             <w-button
               text="Compartilhar"
               color="secondary-light"
-              :disabled="true"
+              @click="handleShared"
             >
               <template #icon-left>
                 <IconShare :size="20"/>
@@ -106,7 +106,7 @@
             <w-button
               text="Imprimir"
               class="button__confirm"
-              :disabled="true"
+              @click="handlePrint"
             >
               <template #icon-left>
                 <IconPrinter :size="20"/>
@@ -138,7 +138,7 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
-import { checkLive, closeBet, getById, tokenLiveClosing } from '@/services'
+import { checkLive, closeBet, getById, printTicket, sharedTicket, tokenLiveClosing } from '@/services'
 import { convertInMomentInstance, formatDateBR, formatCurrency } from '@/utilities'
 import { Modalities } from '@/enums';
 
@@ -297,28 +297,28 @@ export default {
       let result = false;
 
       const found = bet.itens.find((item) => item.ao_vivo);
-      if(found) {
-          return true;
-      }
+      if(found) return true;
 
-      const itensID = bet.itens.map((item) => {
-          return item.jogo_api_id;
-      })
-
+      const itensID = bet.itens.map((item) => item.jogo_api_id)
       const retorno = await checkLive(itensID);
 
       if(retorno) {
-          result = true;
+        result = true;
       }
 
       return result;
+    },
+    handleShared() {
+      sharedTicket(this.bet);
+    },
+    handlePrint() {
+      printTicket(this.bet)
     }
   },
 }
 </script>
 <style lang="scss" scoped>
 .close-bet {
-
   padding-bottom: 10px;
 
   &__container {
