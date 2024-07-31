@@ -2848,7 +2848,7 @@ gulp.task('bellagames.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "bellagames.bet",
-        banca: "APP JETBET365",
+        banca: "BELLA GAMES",
         styles: ""
     });
 });
