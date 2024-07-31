@@ -13,7 +13,6 @@ export const printTicket = async (bet: any) => {
         separator
     } = await getPrinterSettings();
 
-
     const encoder = new EscPosEncoder();
     const ticketEscPos = encoder
         .initialize();
@@ -200,7 +199,6 @@ const prepareLogoToPrint = () => {
         };
     })
 }
-
 
 const getLogoToPrint = async () => {
     const { lokiUrl } = useConfigClient();

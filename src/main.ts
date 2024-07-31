@@ -18,8 +18,6 @@ new Vue({
     beforeCreate() {
         WeebetMessage.addEventListener('message', function(event: any) {
             const { setPrinterSetting } = useConfigClient();
-            console.warn('postMessage => ', event);
-
             switch (event.data.action) {
                 case 'printerWidth':
                     setPrinterSetting({ printerWidth: event.data.width })
