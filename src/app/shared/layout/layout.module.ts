@@ -17,7 +17,8 @@ import {
     SportLayoutComponent,
     VirtuaisLayoutComponent,
     LiveSportLayoutComponent,
-    RifaLayoutComponent
+    RifaLayoutComponent,
+    BetbyLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -130,6 +131,7 @@ import { RodadaGratisService } from '../services/clientes/rodada-gratis.service'
     ],
     declarations: [
         MainLayoutComponent,
+        BetbyLayoutComponent,
         EmptyLayoutComponent,
         AuthLayoutComponent,
         HeaderComponent,
