@@ -4,7 +4,7 @@ import { HomeService } from '../shared/services/home.service';
 import { LayoutService } from '../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { AuthService, ParametrosLocaisService } from '../services';
+import { AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
 import { TranslateService } from '@ngx-translate/core';
 
 declare function BTRenderer(): void;
@@ -39,6 +39,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
 
     constructor(
+        private messageService: MessageService,
+        private helper: HelperService,
         private layoutService: LayoutService,
         private casinoApi: CasinoApiService,
         private homeService: HomeService,
@@ -49,11 +51,27 @@ export class HomeComponent implements OnInit, OnDestroy{
     ) { }
 
     ngOnInit(): void {
+        let currentLang = this.translate.currentLang;
+
+        this.betby = this.paramsService.getOpcoes().betby;
+
         this.homeService.getPosicaoWidgets().subscribe(response => {
             this.widgets = response;
         });
 
-        let currentLang = this.translate.currentLang;
+        this.helper.injectBetbyScript(this.paramsService.getOpcoes().betby_script).then(() => {
+            this.authService.getTokenBetby(currentLang).subscribe(
+                (res) => {
+                    this.betbyInitialize(res.token, currentLang);
+                } ,
+                (_) => {
+                    this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
+                }
+            );
+        }).catch((_) => {
+            this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
+        });
+
         this.authService.getTokenBetby(currentLang).subscribe(
             (res) => {
                 this.betbyInitialize(res.token, currentLang);
@@ -81,7 +99,6 @@ export class HomeComponent implements OnInit, OnDestroy{
             });
 
         this.liveFootballIsActive = this.paramsService.futebolAoVivoAtivo();
-        this.betby = this.paramsService.getOpcoes().betby;
     }
 
     ngOnDestroy() {
@@ -98,17 +115,15 @@ export class HomeComponent implements OnInit, OnDestroy{
         let that = this;
 
         this.bt = new BTRenderer().initialize({
-            brand_id: '2429614261820076032',
+            brand_id: this.paramsService.getOpcoes().betby_brand,
             token: token,
-            themeName: 'demo-turquoise-dark-table',
+            themeName: this.paramsService.getOpcoes().betby_theme,
             lang: this.langs[lang],
             target: document.getElementById('betby'),
             widgetName: 'promo',
             widgetParams: {
                 placeholder: 'operator_page',
-                onBannerClick: args => that.handleClickBanner(args),
-                withSportsList: true,
-                onSportClick: args => {console.log(args)},
+                onBannerClick: args => that.handleClickBanner(args)
             }
         });
     }
