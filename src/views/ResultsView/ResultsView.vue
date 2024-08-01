@@ -89,6 +89,7 @@ export default {
   },
   created() {
     this.generateDaysOfMonth();
+    this.modality = this.modalityList[0];
   },
   data() {
     return {
@@ -100,9 +101,6 @@ export default {
       championshipList,
       dateRange: []
     }
-  },
-  created() {
-    this.modality = this.modalityList[0];
   },
   methods: {
     generateDaysOfMonth() {
