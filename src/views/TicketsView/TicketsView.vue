@@ -42,8 +42,8 @@
           <w-input
             label="Apostador"
             class="finish__input"
-            name="tickets_cpf"
-            placeholder="Informe o cpf do apostador"
+            name="bettor_name"
+            placeholder="Informe o nome do apostador"
             type="text"
             v-model="bettorName"
           />
