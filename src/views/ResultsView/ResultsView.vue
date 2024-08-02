@@ -1,7 +1,7 @@
 <template>
   <div class="results">
     <Header title="Resultados" :showBackButton="true" />
-    <div class="results__dates" >
+    <div class="results__dates">
       <div 
         class="results__dates-buttons" 
         v-for="(day, dateRangeIndex) in dateRange"  
@@ -16,66 +16,46 @@
         />
       </div>
     </div>
-
     <div class="results__content">
-      <div class="results__dates" >
-        <div 
-          class="results__dates-buttons" 
-          v-for="(day, dateRangeIndex) in dateRange"  
-          :key="dateRangeIndex"
-        >
-          <button-date 
-            :value="day.format('YYYY-MM-DD')"
-            :text="getTextButton(day)"
-            :actived="isCurrentDay(day)"
-            @click="setActiveDay(day)"
-            :ref="getRef(day)"
-          />
-        </div>
-      </div>
-      
       <div class="results__modalities">
         <label class="results__modalities-label">Modalidade</label>
         <select-fake titleSize="medium" @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake>
       </div>
-      
-      <p class="results__count-modalities">{{ modalityList.length }} Resultados encontrados</p>
+      <p class="results__count-modalities">{{ championshipList.length }} Resultados encontrados</p>
       <div class="results__collapses">
         <collapse 
           :leftIcon="true" 
           :initCollapsed="true" 
-          v-for="({title,image,games}, championshipListIndex) in championshipList" 
+          v-for="(championship, championshipListIndex) in championshipList" 
           :key="championshipListIndex"
         >
           <template #title>
-            <img :src="image" @error="changeSrcWhenImageError" />
-            {{ title }}
+            <img :src="championship.image" @error="changeSrcWhenImageError" />
+            {{ championship.nome }}
           </template>
-
-          <game-item-result :games="games"/>
+          <game-item-result :games="championship.jogos"/>
         </collapse>
       </div>
     </div>
-    
     <ModalModalities
       v-if="showModalModalities"
       :modalityId="modality.id"
       @closeModal="handleCloseModalitiesModal"
       @click="handleModality"
     />  
-
   </div>
 </template>
 
 <script>
-import Header from '@/components/layouts/Header.vue'
-import ButtonDate from './parts/ButtonDate.vue'
+import Header from '@/components/layouts/Header.vue';
+import ButtonDate from './parts/ButtonDate.vue';
 import SelectFake from '@/views/HomeView/parts/SelectFake.vue';
 import moment from 'moment';
 import ModalModalities from '@/views/HomeView/parts/ModalModalities.vue';
 import Collapse from '@/components/Collapse.vue';
-import { modalityList, championshipList } from '@/constants'
+import { modalityList } from '@/constants';
 import GameItemResult from './parts/GameItemResult.vue';
+import { getResults } from '@/services';
 
 export default {
   name: 'results-view',
@@ -85,11 +65,7 @@ export default {
     SelectFake,
     ModalModalities,
     Collapse,
-    GameItemResult
-  },
-  created() {
-    this.generateDaysOfMonth();
-    this.modality = this.modalityList[0];
+    GameItemResult,
   },
   data() {
     return {
@@ -98,9 +74,13 @@ export default {
       modality: null,
       showModalModalities: false,
       modalityList: modalityList(),
-      championshipList,
-      dateRange: []
-    }
+      championshipList: [],
+      dateRange: [],
+    };
+  },
+  created() {
+    this.generateDaysOfMonth();
+    this.modality = this.modalityList[0];
   },
   methods: {
     generateDaysOfMonth() {
@@ -120,26 +100,62 @@ export default {
       this.showModalModalities = false;
     },
     handleModality(modalityId) {
-      this.modality = this.modalityList.find(modality => modality.id === modalityId)
-      this.handleCloseModalitiesModal()
+      this.modality = this.modalityList.find(modality => modality.id === modalityId);
+      this.handleCloseModalitiesModal();
     },
     setActiveDay(day) {
       this.activeDay = day.format('YYYY-MM-DD');
+      this.getSports(); 
     },
-    getRef(day){
+    getRef(day) {
       return day.format('YYYY-MM-DD') === this.today ? 'todayButton' : '';
     },
     getTextButton(day) {
       return day.format('YYYY-MM-DD') === this.today ? 'Hoje' : day.format('DD/MM');
     },
     isCurrentDay(day) {
-        return day.format('YYYY-MM-DD') === this.activeDay;
+      return day.format('YYYY-MM-DD') === this.activeDay;
     },
-    changeSrcWhenImageError (event) {
+    changeSrcWhenImageError(event) {
       event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+    },
+   async getSports() {
+    try {
+      const res = await getResults(this.activeDay, this.modality.id);
+      this.championshipList = res.map(championship => {
+        return {
+          ...championship,
+          jogos: championship.jogos.map(game => {
+            const resultado = game.resultado;
+            return {
+              dateTime: moment(game.horario).format('DD/MM/YYYY HH:mm'),
+              teams: [
+                {
+                  name: game.time_a_nome,
+                  image: 'URL da imagem do time A' 
+                },
+                {
+                  name: game.time_b_nome,
+                  image: 'URL da imagem do time B'
+                }
+              ],
+              results: [
+                {
+                  team0: resultado.casa || `-`,
+                  team1: resultado.fora || `-`
+                }
+              ]
+            };
+          })
+        };
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
+  }
   },
   mounted() {
+    this.getSports();
     this.$nextTick(() => {
       if (this.$refs.todayButton && this.$refs.todayButton[0]) {
         const todayButtonEl = this.$refs.todayButton[0].$el || this.$refs.todayButton[0];
@@ -147,13 +163,13 @@ export default {
           todayButtonEl.scrollIntoView({
             behavior: 'auto',
             block: 'center',
-            inline: 'center'
+            inline: 'center',
           });
         }
       }
     });
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
