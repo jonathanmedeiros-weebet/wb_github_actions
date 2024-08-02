@@ -59,18 +59,20 @@ export class HomeComponent implements OnInit, OnDestroy{
             this.widgets = response;
         });
 
-        this.helper.injectBetbyScript(this.paramsService.getOpcoes().betby_script).then(() => {
-            this.authService.getTokenBetby(currentLang).subscribe(
-                (res) => {
-                    this.betbyInitialize(res.token, currentLang);
-                } ,
-                (_) => {
+        if (this.betby) {
+            this.helper.injectBetbyScript(this.paramsService.getOpcoes().betby_script).then(() => {
+                this.authService.getTokenBetby(currentLang).subscribe(
+                    (res) => {
+                        this.betbyInitialize(res.token, currentLang);
+                    } ,
+                    (_) => {
+                        this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
+                    }
+                );
+            }).catch((_) => {
                     this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
-                }
-            );
-        }).catch((_) => {
-            this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
-        });
+                });
+        }
 
         this.authService.getTokenBetby(currentLang).subscribe(
             (res) => {
