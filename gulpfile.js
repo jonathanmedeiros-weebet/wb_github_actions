@@ -2587,7 +2587,7 @@ gulp.task('zilionz.com', function (done) {
         host: "zilionz.com",
         banca: "ZILIONZ",
         styles: "",
-        scripts: "<script type='text/javascript' src='h]ps://cd823ed6-bS-4764-9e1b-05566f369c8c.snippet.anjouangaming.org/anj-seal.js'></script>"
+        scripts: "<script type='text/javascript' src='https://cd823ed6-bffb-4764-9e1b-05566f369c8c.snippet.anjouangaming.org/anj-seal.js'></script><script></script>"
     });
 });
 

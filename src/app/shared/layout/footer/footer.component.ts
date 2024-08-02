@@ -90,7 +90,6 @@ export class FooterComponent implements OnInit {
 
         this.rodape = this.paramsLocais.getOpcoes()[`rodape_${this.linguagemSelecionada}`];
 
-
         this.isMobile = window.innerWidth < 1025;
 
         this.authService.logado
@@ -109,9 +108,9 @@ export class FooterComponent implements OnInit {
                 }
             );
 
-        setTimeout(function() {
-            anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init()
-        }, 200);
+        if (config.SLUG === 'zilionz.com') {
+            anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init();
+        }
     }
 
     temRedesSociais() {
