@@ -112,8 +112,25 @@ nav a {
     white-space: nowrap;
 }
 
+.container-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.container-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 6px;
+}
+
+#icon-promocao::before {
+    font-weight: 900 !important;
+}
+
 .side {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,6 +173,16 @@ nav::-webkit-scrollbar {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
+}
+
+.btn-promocao i {
+    font-size: 19.5px;
+    color: white;
+}
+
+.btn-promocao i:hover {
+    cursor: pointer;
+    color: var(--highlight); 
 }
 
 .btn-register{
@@ -338,8 +365,13 @@ body .change-theme {
 }
 
 .support-btn i {
-    margin-right: 12px;
-    font-size: 16px;
+    font-size: 19px;
+    color: var(--foreground-header);
+    margin-top: 1px;
+    padding-left: 3px;
+}
+
+.support-btn:hover i {
     color: var(--highlight);
 }
 
@@ -497,7 +529,7 @@ body .change-theme {
 
     .logo {
         max-height: 30px;
-        max-width: calc(40vw - 25px);
+        max-width: calc(40vw - 70px);
     }
 
     .indique-ganhe-card .btn-close {
@@ -592,14 +624,128 @@ body .change-theme {
     }
 
     .btn-xtremepush {
-        margin: 0 10px 0 0 !important;
         color: var(--highlight);
     }
 }
 
-@media only screen and (max-width: 360px) {
-    .logo {
-        max-width: calc(32vw - 25px);
+@media only screen and (max-width: 320px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(35vw - 25px);
+    }
+    .container-icons {
+        padding: 0px 1%;
+        gap: 5px;
+        margin-right: 140px;
+    }
+    .btn-register{
+        min-width: 80px !important;
+        padding-left: 0;
+        padding-right: 0;
+        line-height: 0;
+    }
+    .btn {
+        width: 60px;
+        font-size: 9.9px;
+    }
+    .menu-perfil {
+        width: 80px;
+        padding: 0px 2px;
+    }
+    .div.user-card{
+        padding-right: 4.9px;
+    }
+    .fa-user::before {
+        font-size: 14px;
+    }
+    .menu-perfil .div.user-icon {
+        font-size: 15px;
+    }
+    .menu-perfil div.user-icon  i {
+        font-size: 15px;
+    }
+    .menu-perfil .saldo-usuario {
+        font-size: 9.8px;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons {
+        padding: 0px 1%;
+        gap: 5px;
+        margin-right: -4px;
+    }
+    .support-btn i {
+        font-size: 20px;
+    }
+    .btn{
+        font-size: 10px;
+    }
+    .btn-register {
+        min-width: 92px !important;
+    }
+    .btn-xtremepush img {
+        height: 25px;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+    #xtremepushNotificationWrapper {
+        width: 320px;
+    }
+    .btn-promocao {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 20px;
+    }
+    .side-right {
+        padding-right: 10px;
+    }
+    .deposit-shortcut a {
+        padding: 0px 4px;
+    }
+    .menu-conta .btn-custom2{
+        margin-right: 0;
+    }
+    .menu-perfil {
+        padding: 0px 2px;
+        width: 85px;
+    }
+    .menu-perfil div.user-icon i {
+        font-size: 15px;
+    }
+    .btn.mr-4 {
+        margin-right: 5px !important;
+    }
+}
+
+@media only screen and (max-width: 430px){
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons {
+        gap: 5px;
+        padding-left: 5px;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+    .btn-xtremepush img {
+        height: 25px;
+    }
+    .btn-promocao {
+        padding-left: 0;
+        font-size: 20px;
+    }
+    .support-btn i {
+        font-size: 20px;
     }
 }
 
@@ -623,6 +769,9 @@ body .change-theme {
     .menu-conta .btn{
         padding: 5px 10px;
     }
+    .deposit-shortcut a{
+        padding: 0px 4px;
+    }
 }
 
 @media only screen and (max-width: 1366px) and (min-width: 1280px){
@@ -638,7 +787,6 @@ body .change-theme {
     }
     .side-right {
         padding-right: 0;
-        width: 600px;
     }
     .logo {
         max-width: 215px;
@@ -652,7 +800,6 @@ body .change-theme {
     }
     .side-right {
         padding-right: 0;
-        width: 420px;
     }
 }
 
@@ -847,7 +994,6 @@ body .change-theme {
 }
 
 .btn-xtremepush {
-    margin: 0 10px 0 0;
     color: var(--highlight);
 }
 
