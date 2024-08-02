@@ -60,7 +60,7 @@
     <ModalSearch
       v-if="showModalSearch"
       @closeModal="handleCloseSearchModal"
-      @change="handleSearch"
+      @click="handleGameDetailClick"
     />
   </div>
 </template>
