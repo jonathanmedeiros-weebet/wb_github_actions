@@ -38,6 +38,7 @@
         @click="$emit('click')"
         @change="emitChange"
         autocomplete="off"
+        @keypress="emitKeypress"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
         <icon-visibility v-if="showPassword" color="var(--color-text-input)" />
@@ -115,6 +116,9 @@ export default {
     },
     reset() {
       this.value = '';
+    },
+    emitKeypress(event) {
+      this.$emit('keypress', event);
     }
   },
   computed: {
