@@ -71,14 +71,14 @@ export class HomeComponent implements OnInit, OnDestroy{
                 );
             }).catch((_) => {
                     this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
-                });
-        }
+            });
 
-        this.authService.getTokenBetby(currentLang).subscribe(
-            (res) => {
-                this.betbyInitialize(res.token, currentLang);
-            }
-        );
+            this.authService.getTokenBetby(currentLang).subscribe(
+                (res) => {
+                    this.betbyInitialize(res.token, currentLang);
+                }
+            );
+        }
 
         this.translate.onLangChange.subscribe(
             change => {
