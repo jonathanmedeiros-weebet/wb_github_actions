@@ -15,7 +15,11 @@ export class WallGameCardComponent {
   @Output() openModalLogin = new EventEmitter();
 
   get gameImageUrl(): string {
-    return `https://cdn.wee.bet/img/cassino/${this.game.fornecedor}/${this.game.gameID}.png`;
+    if (this.game.fornecedor == 'creedroomz') {
+      return `https://cdn.wee.bet/img/cassino/thumbnails/${this.game.fornecedor}/${this.game.gameID}.png`;
+    } else {
+      return `https://cdn.wee.bet/img/cassino/${this.game.fornecedor}/${this.game.gameID}.png`;
+    }
   }
 
   get routerLinkDemo(): any[] {
