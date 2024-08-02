@@ -310,7 +310,14 @@ export default {
   },
   watch: {
     valueBet(newValue, oldValue){
-      this.calculateEstimatedWinnings(newValue);
+      const value = parseFloat(newValue);
+      if(value <= 0 || this.valueBet <= 0) {
+        this.buttonDisabled = true;
+        this.gainEstimate = 0;
+      }else{
+        this.calculateEstimatedWinnings(newValue);
+        this.buttonDisabled = false;
+      }
     }
   }
 }
