@@ -8,17 +8,17 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class RodadaGratisService {
-	private rodadaGratisUrl = `${config.BASE_URL}/rodadagratis`;
+export class FreeSpinService {
+	private freeSpinUrl = `${config.BASE_URL}/freeround`;
 
 	constructor(
 		private http: HttpClient,
 		private errorService: ErrorService,
 		private header: HeadersService
 	) { }
-    
+
 	redeemPrize(freeRoundId: string): Observable<any> {
-		return this.http.post(`${this.rodadaGratisUrl}/resgatar-premio`,
+		return this.http.post(`${this.freeSpinUrl}/redeem-prize`,
 			{freeRoundId: freeRoundId},
 			this.header.getRequestOptions(true))
 			.pipe(

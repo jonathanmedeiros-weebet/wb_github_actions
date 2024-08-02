@@ -1,4 +1,5 @@
 export class RodadaGratis {
+    id: string;
     codigo: string;
     forneceddor: string;
     game: string;

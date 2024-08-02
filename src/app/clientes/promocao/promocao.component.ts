@@ -9,7 +9,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegrasBonusModalComponent } from './../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
 import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
-import { RodadaGratisService } from '../../shared/services/clientes/rodada-gratis.service';
+import { FreeSpinService } from '../../shared/services/clientes/free-spin.service';
 @Component({
     selector: 'app-promocao',
     templateUrl: './promocao.component.html',
@@ -33,11 +33,11 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     reverse: boolean = false;
     tabSelected = 'bonus';
     dataAtual;
-    date1: string = ''; 
-    date2: string = ''; 
+    date1: string = '';
+    date2: string = '';
     isButtonDisabled = false;
     isRescued = false;
-    
+
 
     constructor(
         private financeiroService: FinanceiroService,
@@ -50,7 +50,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         private router: Router,
         private fb: UntypedFormBuilder,
         private cd: ChangeDetectorRef,
-        private rodadaGratisService: RodadaGratisService,
+        private freeSpinService: FreeSpinService,
         private activeRulesModal: NgbActiveModal
     ) { super(); }
 
@@ -78,6 +78,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
 
     changeTab(tab) {
         this.tabSelected = tab;
+        this.getRollovers();
     }
 
     createForm() {
@@ -230,34 +231,27 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     }
 
     setQuantityRoundsToNotify(): void{
-        this.rodadas.forEach((round) => {
-            if(round.status === "Ativo"){
-                this.quantityRoundsToNotify++;
-            }
-        })
-    }    
+        this.quantityRoundsToNotify = this.rodadas.filter(obj => obj.status === 'pendente').length;
+    }
 
     setQuantityRolloversToNotify(): void{
-        this.rollovers.forEach((rollover) => {
-            if(rollover.status === "ativo"){
-                this.quantityRolloversToNotify++;
-            }
-        })
-    } 
-    
-    redeemPrize(rodadaId: string) {
-        this.isButtonDisabled = true; 
-        
-        this.rodadaGratisService.redeemPrize(rodadaId).subscribe(
+        this.quantityRolloversToNotify = this.rollovers.filter(obj => obj.status === 'ativo').length;
+    }
+
+    redeemPrize(freeRoundId: string) {
+        this.isButtonDisabled = true;
+
+        this.freeSpinService.redeemPrize(freeRoundId).subscribe(
             response => {
                 this.handleRedeemPrize(response)
+                this.isButtonDisabled = false;
+                this.getRollovers();
             },
             error => {
                 this.handleError(error)
-                setTimeout(() => {
-                    this.isButtonDisabled = false;
-                }, 2000);
-            } 
+                this.isButtonDisabled = false;
+                this.getRollovers();
+            }
         );
     }
 

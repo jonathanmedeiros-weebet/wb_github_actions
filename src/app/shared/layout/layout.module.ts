@@ -98,7 +98,7 @@ import { SkeletonModule } from './skeleton/skeleton.module';
 import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-modal/block-peer-attemps-modal.component';
 import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
-import { RodadaGratisService } from '../services/clientes/rodada-gratis.service';
+import { FreeSpinService } from '../services/clientes/free-spin.service';
 
 @NgModule({
     imports: [
@@ -233,7 +233,7 @@ import { RodadaGratisService } from '../services/clientes/rodada-gratis.service'
         JogoService,
         AcumuladaoService,
         IndiqueGanheService,
-        RodadaGratisService,
+        FreeSpinService,
         {
             provide: RECAPTCHA_SETTINGS,
 
