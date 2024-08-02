@@ -110,7 +110,9 @@ export class FooterComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init();
+        if (config.slug === 'zilionz.com') {
+            anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init();
+        }
     }
 
     temRedesSociais() {
