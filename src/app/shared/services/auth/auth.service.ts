@@ -118,6 +118,7 @@ export class AuthService {
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.results.token);
+                    localStorage.setItem('tokenBetby', res.results.tokenBetby);
                     localStorage.setItem('user', JSON.stringify(res.results.user));
 
                     if (res.results.user.tipo_usuario === 'cambista') {
@@ -137,6 +138,38 @@ export class AuthService {
                         xtremepush('set', 'user_id', res.results.user.id);
                         xtremepush('event', 'login');
                     }
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getTokenBetby(lang: string) {
+        const token = this.getToken();
+        const user = this.getUser();
+
+        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token, lang }, this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    if (user?.id != 146407) {
+                        res.token = null;
+                    }
+                    localStorage.setItem('tokenBetby', res.token);
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    refreshTokenBetby(lang: string) {
+        const token = this.getTokenBetbyStorage();
+
+        return this.http.post<any>(`${this.authLokiUrl}/betby/refresh-token`, { token, lang }, this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    if (res.refresh) {
+                        localStorage.setItem('tokenBetby', res.token);
+                    }
+                    return res;
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -238,6 +271,10 @@ export class AuthService {
         return localStorage.getItem('tokenCassino');
     }
 
+    getTokenBetbyStorage() {
+        return localStorage.getItem('tokenBetby');
+    }
+
     getUser() {
         return JSON.parse(localStorage.getItem('user'));
     }
@@ -298,6 +335,7 @@ export class AuthService {
     limparStorage() {
         localStorage.removeItem('token');
         localStorage.removeItem('tokenCassino');
+        localStorage.removeItem('tokenBetby');
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');

@@ -76,7 +76,6 @@
         "futsport.net": "gulp futsport.net",
         "trandbets.com": "gulp trandbets.com",
         "ilhabet.net": "gulp ilhabet.net",
-        "nortaobet.com": "gulp nortaobet.com",
         "saqbet.tv": "gulp saqbet.tv",
         "starbets.online": "gulp starbets.online",
         "dfsportsbet.wee.bet": "gulp dfsportsbet.wee.bet",
@@ -261,7 +260,6 @@
         "betstar.vip": "gulp betstar.vip",
         "jaybet.com": "gulp jaybet.com",
         "multisports.bet": "gulp multisports.bet",
-        "alfa-bet.club": "gulp alfa-bet.club",
         "betcampea.com": "gulp betcampea.com",
         "brinksbet.com": "gulp brinksbet.com",
         "riquinhobet.com": "gulp riquinhobet.com",
@@ -299,7 +297,10 @@
         "deupix.bet": "gulp deupix.bet",
         "balneario.bet": "gulp balneario.bet",
         "caxias.bet": "gulp caxias.bet",
-        "floripa.bet": "gulp floripa.bet"
+        "floripa.bet": "gulp floripa.bet",
+        "appjetbet365.com": "gulp appjetbet365.com",
+        "amurel.bet": "gulp amurel.bet",
+        "bellagames.bet": "gulp bellagames.bet"
     },
     "private": true,
     "dependencies": {

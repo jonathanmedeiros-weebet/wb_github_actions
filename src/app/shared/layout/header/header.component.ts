@@ -1,5 +1,5 @@
 import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {IsActiveMatchOptions, Router} from '@angular/router';
+import {IsActiveMatchOptions, NavigationEnd, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -102,6 +102,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     parlaybayAtivo;
     rifa = false;
     loteriaPopularAtiva;
+    betbyAtivo;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -114,6 +115,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     notificationsXtremepushOpen = false;
     public showHeaderMobile: boolean = false;
     xtremepushHabilitado = false;
+
+    private currentRoute: string;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -148,6 +151,16 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private layoutService: LayoutService
     ) {
         super();
+
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.currentRoute = event.urlAfterRedirects;
+            }
+        });
+    }
+
+    isSportsActive(): boolean {
+        return this.currentRoute.startsWith('/sports') && !this.currentRoute.startsWith('/sports/live');
     }
 
     get customCasinoName(): string {
@@ -238,6 +251,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
+        this.betbyAtivo = this.paramsService.getOpcoes().betby;
         this.rifa = this.paramsService.getOpcoes().rifa;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
