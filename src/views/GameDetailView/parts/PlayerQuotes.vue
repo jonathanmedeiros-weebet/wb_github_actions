@@ -29,7 +29,7 @@
                             v-for="odd in player.odds"
                             :key="odd.id"
                             :class="{
-                                'collapse__option--selected': odd.selected,
+                                'collapse__option--selected': odd.key === quoteSelected,
                                 'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd)
                             }"
                             @click="handleItemClick(odd, player.name)"
@@ -90,20 +90,10 @@ export default {
             return Boolean(this.quotes.length)
         },
         options() {
-            const quoteKey = this.ticketStore.items[this.game._id]
-                ? this.ticketStore.items[this.game._id].quoteKey
-                : null;
-
-            return this.quotes.map(quote => ({
-                ...quote,
-                players: quote.players.map(player => ({
-                    ...player,
-                    odds: player.odds.map(odd => ({
-                        ...odd,
-                        selected: odd.key == quoteKey
-                    }))
-                }))
-            }))
+            return this.quotes;
+        },
+        quoteSelected() {
+            return this.ticketStore.items[this.game._id]?.quoteKey ?? null;
         }
     },
     methods: {
@@ -187,6 +177,7 @@ export default {
 
     &__option {
         min-width: calc(150px / 3);
+        min-height: 40px;
         background: var(--color-background);
         border: none;
         border-radius: 4px;
@@ -195,7 +186,6 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 7px;
 
         &--live {
             gap: 0;
@@ -223,6 +213,8 @@ export default {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        max-width: 100px;
+        margin-bottom: 7px;
     }
 
     &__value {

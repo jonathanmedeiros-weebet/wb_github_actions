@@ -58,7 +58,6 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: 6px;
 
         color: var(--color-text);
         font-size: 14px;

@@ -148,7 +148,7 @@ router.beforeEach(async (to, from, next) => {
 
   if(!Boolean(from.name)) {
     prepareConfigClient(to)
-    checkToken();
+    // checkToken(); // TODO: verificar endpoint de verificar token
   }
 
   if (Boolean(to.meta?.auth)) {

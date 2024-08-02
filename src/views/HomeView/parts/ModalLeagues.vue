@@ -117,7 +117,6 @@ export default {
         width: 100%;
         display: flex;
         align-items: center;
-        gap: 10px;
         text-transform: uppercase;
         min-height: 30px;
 
@@ -144,6 +143,7 @@ export default {
         border-radius: 50px;
         width: 18px;
         height: 18px;
+        margin-right: 10px;
 
         background-size: contain;
         background-position: 50%;
@@ -157,6 +157,8 @@ export default {
         border-radius: 50px;
         width: 18px;
         height: 18px;
+        margin-right: 10px;
+        margin-left: -1px;
     }
 }
 </style>

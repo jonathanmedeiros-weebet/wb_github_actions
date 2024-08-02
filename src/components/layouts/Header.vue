@@ -110,7 +110,6 @@ export default {
 
     &__action-buttons {
         display: flex;
-        gap: 24px;
         align-items: center;
         justify-content: flex-end;
     }
@@ -120,6 +119,7 @@ export default {
         padding: 0;
         border: none;
         background: transparent;
+        margin-left: 24px;
     }
 }
 </style>

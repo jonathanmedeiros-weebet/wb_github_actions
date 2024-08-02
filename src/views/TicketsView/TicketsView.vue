@@ -173,7 +173,6 @@ export default {
       if(!Boolean(this.items.length)) return 0;
 
       let quote = this.items.reduce((total, item) => {
-        console.log(item)
         const finalValue = calculateQuota({
           value: Number(item.quoteValue),
           key: item.quoteKey,

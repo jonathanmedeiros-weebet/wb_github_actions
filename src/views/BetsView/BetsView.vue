@@ -376,7 +376,6 @@ export default {
       this.showResults = false;
       findBet(this.parametros)
       .then(resp => {
-        console.log(resp);
         this.bets = resp.results;
         this.showResults = true;
       })

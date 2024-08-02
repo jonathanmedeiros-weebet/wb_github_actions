@@ -165,10 +165,8 @@ export default {
       }
     },
     async handleConsultTicket(ticketCode) {
-      console.log("codigo", ticketCode);
       getBetByCode(ticketCode)
       .then(resp => {
-        console.log(resp);
         if(resp.results){
           this.$router.push({ 
             name: 'close-bet',
@@ -180,7 +178,6 @@ export default {
         }
       })
       .catch(error => {
-        console.log(error);
         this.toastStore.setToastConfig({
           message: error.errors.message,
           type: ToastType.DANGER,
