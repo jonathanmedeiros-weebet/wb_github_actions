@@ -194,6 +194,7 @@ export default {
       newEarningPossibility: null,
       closeRequesterd: false,
       toastStore: useToastStore(),
+      option: useConfigClient().options
     };
   },
   mounted() {
@@ -254,30 +255,38 @@ export default {
         let payload = { apostaId: this.bet.id, version: this.bet.version };
 
         if(live) {
-          const token = await tokenLiveClosing(this.bet.id);
-          const token_aovivo = token ?? null;
-          payload.token = token_aovivo;
-          const { option } = useConfigClient();
-          const timeDelay = option.delay_aposta_aovivo ? option.delay_aposta_aovivo : 10;
+          tokenLiveClosing(this.bet.id)
+            .then(resp => {
+              payload.token = resp.results ?? null;
+            })
+            .catch(error => {
+              this.toastStore.setToastConfig({
+                message: error.errors?.message,
+                type: ToastType.DANGER,
+                duration: 5000
+              })
+            });
+          const timeDelay = this.option.delay_aposta_aovivo ?? 10;
           await delay((timeDelay * 1000));
         }
-        
+
         closeBet(payload)
-        .then(resp => {
-          this.fetchBetDetails();
-          this.newQuotation = null;
-          this.newEarningPossibility = null;
-          this.closeRequesterd = true;
-        })
-        .catch(error => {
-          this.toastStore.setToastConfig({
-            message: error.errors.message,
-            type: ToastType.DANGER,
-            duration: 5000
+          .then(resp => {
+            this.fetchBetDetails();
+            this.newQuotation = null;
+            this.newEarningPossibility = null;
+            this.closeRequesterd = true;
           })
-          this.submitting = false;
-        })
-        .finally(() => this.submitting = false)
+          .catch(error => {
+            console.log(error);
+            this.toastStore.setToastConfig({
+              message: error.errors?.message,
+              type: ToastType.DANGER,
+              duration: 5000
+            })
+            this.submitting = false;
+          })
+          .finally(() => this.submitting = false)
       }
     },
     async fetchBetDetails() {
@@ -287,10 +296,10 @@ export default {
       })
       .catch(error => {
         this.toastStore.setToastConfig({
-            message: error.errors.message,
-            type: ToastType.DANGER,
-            duration: 5000
-          })
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
       })
     },
     formatCurrencyMoney(value) {
