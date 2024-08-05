@@ -167,6 +167,7 @@ input {
     font-size: 16px;
     color: #ffffff;
     color: var(--color-text);
+    margin-bottom: 8px;
   }
 
   &__group {
