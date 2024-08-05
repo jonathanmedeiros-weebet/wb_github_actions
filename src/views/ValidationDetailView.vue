@@ -352,6 +352,7 @@ export default {
   width: 100%;
   padding: 13px;
   align-items: center;
+  margin-bottom: 6px;
 
   &__bet {
     font-size: 16px;
@@ -361,13 +362,12 @@ export default {
   &__number {
     font-size: 20px;
   }
-  margin-bottom: 6px;
+  
 }
 
 
 .bet {
   padding: 8px;
-  // gap: 2.5px;
   display: flex;
   flex-direction: column;
   position: relative; 
