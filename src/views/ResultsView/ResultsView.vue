@@ -102,6 +102,7 @@ export default {
     handleModality(modalityId) {
       this.modality = this.modalityList.find(modality => modality.id === modalityId);
       this.handleCloseModalitiesModal();
+      this.getSports(); 
     },
     setActiveDay(day) {
       this.activeDay = day.format('YYYY-MM-DD');
@@ -119,40 +120,39 @@ export default {
     changeSrcWhenImageError(event) {
       event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
     },
-   async getSports() {
-    try {
-      const res = await getResults(this.activeDay, this.modality.id);
-      this.championshipList = res.map(championship => {
-        return {
-          ...championship,
-          jogos: championship.jogos.map(game => {
-            const resultado = game.resultado;
-            return {
-              dateTime: moment(game.horario).format('DD/MM/YYYY HH:mm'),
-              teams: [
-                {
-                  name: game.time_a_nome,
-                  image: 'URL da imagem do time A' 
-                },
-                {
-                  name: game.time_b_nome,
-                  image: 'URL da imagem do time B'
-                }
-              ],
-              results: [
-                {
-                  team0: resultado.casa || `-`,
-                  team1: resultado.fora || `-`
-                }
-              ]
-            };
-          })
-        };
-      });
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    async getSports() {
+      try {
+        const res = await getResults(this.activeDay, this.modality.id);
+        console.log(res);
+        this.championshipList = res.map(championship => {
+          return {
+            ...championship,
+            jogos: championship.jogos.map(game => {
+              const resultado = game.resultado;
+              return {
+                dateTime: moment(game.horario).format('DD/MM/YYYY HH:mm'),
+                teams: [
+                  {
+                    name: game.time_a_nome,
+                  },
+                  {
+                    name: game.time_b_nome,
+                  }
+                ],
+                results: [
+                  {
+                    team0: (resultado.casa === 0 || resultado.casa) ? resultado.casa : '-',
+                    team1: (resultado.fora === 0 || resultado.fora) ? resultado.fora : '-'
+                  }
+                ]
+              };
+            })
+          };
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
-  }
   },
   mounted() {
     this.getSports();
@@ -171,6 +171,7 @@ export default {
   },
 };
 </script>
+
 
 <style lang="scss" scoped>
 .results {

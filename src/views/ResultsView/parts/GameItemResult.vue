@@ -19,13 +19,6 @@
         </div>
 
         <div class="games__team-right">
-          <img
-            class="games__team-image-right"
-            height="26px"
-            width="26px"
-            :src="game.teams[1].image"
-            @error="changeSrcWhenImageError"
-          />
           <span class="games__team-name-right"> {{ game.teams[1].name }}</span>
         </div>
       </div>
