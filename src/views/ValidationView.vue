@@ -14,11 +14,12 @@
       />
       <WButton
         id="btn-salvar"
-        text="Consultar"
+        :text="textButtonConfirm"
         value="salvar"
         name="btn-salvar"
         @click="handleSearch"
         :disabled="buttonDisable"
+        class="validation__button"
       />
     </div>
   </div>
@@ -45,12 +46,14 @@ export default {
       title: 'Validar Aposta',
       code: '',
       toastStore: useToastStore(),
-      submitting: false
+      submitting: false,
+      textButtonConfirm: 'Confirmar'
     }
   },
   methods: {
     async handleSearch() {
       this.submitting = true;
+      this.textButtonConfirm = 'Processando...';
       getPreBetByCode(this.code)
       .then(resp => {
         this.$router.push({ 
@@ -67,7 +70,10 @@ export default {
           duration: 5000
         })
       })
-      .finally(() => this.submitting = false)
+      .finally(() => {
+        this.submitting = false,
+        this.textButtonConfirm = 'Confirmar';
+      })
     }
   },
   computed: {
@@ -84,13 +90,18 @@ export default {
     padding: 17.35px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    // gap: 10px;
   }
 
   &__text {
     color: var(--color-text-input);
     font-size: 14px;
     text-align: center;
+  }
+
+  &__input {
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
 }
 
