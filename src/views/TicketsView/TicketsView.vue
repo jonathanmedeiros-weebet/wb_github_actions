@@ -352,11 +352,11 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 6px;
     margin: 0;
     padding: 0 20px;
     min-height: 100%;
     padding-bottom: 100px;
+
   }
 
   &__message {
@@ -369,10 +369,7 @@ export default {
   padding: 10px;
   display: flex;
   justify-content: space-between;
-  
-  &__text {
-    gap: 10px;
-  }
+  margin-top: 10px;
 
   &__select {
     text-align: center;
@@ -399,8 +396,7 @@ export default {
 }
 
 .bet {
-  padding: 8px;
-  gap: 2.5px;
+  padding: 8px;  
   display: flex;
   flex-direction: column;
   position: relative; 
@@ -420,6 +416,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 2.5px;
   }
 
   &__team {
@@ -429,17 +426,20 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    gap: 4px;
+    // gap: 4px;
+    // 
   }
 
   &__icon-live {
     width: 18px;
     height: 18px;
+    
   }
 
   &__icon-ball {
     min-width: 14px;
     height: 14px;
+    margin-right: 4px;
   }
 
   &__icon-close {
@@ -457,6 +457,7 @@ export default {
     font-size: 12px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 4px;
   }
 }
 
@@ -465,13 +466,12 @@ export default {
 }
 
 .value {
-  
+  margin-top: 8px;
   &__balance-text {
     font-size: 14px;
   }
 
   &__balance {
-    gap: 8px;
     display: flex;
     align-items: center;
   }
@@ -487,15 +487,20 @@ export default {
     color: var(--color-text-input);
     font-size: 14px;
     border: none; 
+    margin-right: 8px;
   }
 
   &__balance-input{
     width: 100%;
-    margin-bottom: -10px;
+    margin-top: 10px;
   }
   
   &__balance-input ::v-deep .input__field {
     height: 50px;
+  }
+
+  &__label {
+    margin-top: 10px;
   }
 }
 
@@ -521,6 +526,7 @@ export default {
     cursor: pointer;
     border-radius: 3px;
     position: relative;
+    margin-right: 4px;
   }
 
   &__checkbox:checked {
@@ -539,7 +545,6 @@ export default {
   &__alteracao {
     display: flex;
     align-items: center;
-    gap: 4px;
   }
 
   &__finalizar {
