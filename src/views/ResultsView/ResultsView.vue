@@ -56,6 +56,7 @@ import Collapse from '@/components/Collapse.vue';
 import { modalityList } from '@/constants';
 import GameItemResult from './parts/GameItemResult.vue';
 import { getResults } from '@/services';
+import { formatDateTimeBR, now  } from '@/utilities';
 
 export default {
   name: 'results-view',
@@ -69,8 +70,8 @@ export default {
   },
   data() {
     return {
-      activeDay: moment().format('YYYY-MM-DD'),
-      today: moment().format('YYYY-MM-DD'),
+      activeDay: now().format('YYYY-MM-DD'),
+      today: now().format('YYYY-MM-DD'),
       modality: null,
       showModalModalities: false,
       modalityList: modalityList(),
@@ -123,14 +124,13 @@ export default {
     async getSports() {
       try {
         const res = await getResults(this.activeDay, this.modality.id);
-        console.log(res);
         this.championshipList = res.map(championship => {
           return {
             ...championship,
             jogos: championship.jogos.map(game => {
               const resultado = game.resultado;
               return {
-                dateTime: moment(game.horario).format('DD/MM/YYYY HH:mm'),
+                dateTime: formatDateTimeBR(game.horario),
                 teams: [
                   {
                     name: game.time_a_nome,
