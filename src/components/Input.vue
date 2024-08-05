@@ -167,13 +167,11 @@ input {
     font-size: 16px;
     color: #ffffff;
     color: var(--color-text);
-    margin-bottom: 6px;
   }
 
   &__group {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
     padding-left: 10px;
     background-color: #181818;
     background-color: var(--color-background-input);
