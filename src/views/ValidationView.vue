@@ -90,7 +90,6 @@ export default {
     padding: 17.35px;
     display: flex;
     flex-direction: column;
-    // gap: 10px;
   }
 
   &__text {
