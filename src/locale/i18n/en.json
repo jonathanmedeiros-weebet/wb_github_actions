@@ -214,12 +214,10 @@
         "informativoCookies": "This website uses cookies and sessions to enhance your experience. Cookies are small text files stored on your device that help us keep you authenticated, customize features and settings, as well as improve website functionality. By continuing to use this website, you agree to the use of cookies and sessions in accordance with our Privacy Policy.",
         "alertaChavePixCpf": "When requesting the withdrawal, it will be processed through the Pix key associated with your CPF (Brazilian Tax ID). Ensure that your CPF is filled in correctly.",
         "esportivo": "sporty",
-        "rodadaGratis": "Free Spin",
         "dataVencimento": "Expiration date",
         "quantidade": "Quantity",
         "quantidadeUtilizada": "Qty. used",
         "jogarAgora": "Play now",
-        "nenhumaRodadaGratis": "No free spins found.",
         "opcaoPromocao": "Select one of the options to view the current promotions.",
         "selecioneChavePix": "select your pix key",
         "alertaSaque": "Only withdrawals to Pix keys linked to the account holder are allowed.",
@@ -249,8 +247,7 @@
         "computadoEm": "Computed in:",
         "alteracoesSucesso": "Changes made successfully!",
         "erroInesperado": "Something unexpected happened. Please try again later.",
-        "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
-        "resgatarPremio": "Resgatar Prêmio"
+        "enderecoNaoEncontrado": "Address not found, please fill it in manually."
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -655,5 +652,15 @@
             "definir_tempo": "Set session time",
             "desativado": "Disabled"
         }
+    },
+    "rodada_gratis":{
+        "resgatarPremio": "Redeem Prize",
+        "rodadaGratis": "Free Spin",
+        "nenhumaRodadaGratis": "No free spins found.",
+        "todas": "All",
+        "ativa": "Active",
+        "expirada": "Expired",
+        "concluida":"Completed",
+        "cancelada":"Canceled"
     }
 }
