@@ -37,6 +37,7 @@
         value="entrar"
         name="btn-entrar"
         @click="handleClick"
+        class="login__button"
       />
     </div>
   </div>
@@ -107,7 +108,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding-top: 90px;
-    gap: 10px;
   }
 
   &__image {
@@ -122,18 +122,12 @@ export default {
     line-height: 28.13px;
     text-align: left;
     margin-bottom: 4px;
-
-    &--primary {
-      color: green;
-    }
-
-    &--secondary {
-      color: black;
-    }
+    margin-top: 10px;
   }
 
   &__description {
-    color: #FFFFFF99;
+    color: #ffffff80;
+    color: var(--color-text-input);
     font-size: 16px;
     font-weight: 400;
     line-height: 18.75px;
@@ -142,6 +136,13 @@ export default {
 
   &__header {
     margin-bottom: 16px;
+  }
+
+  &__input {
+    margin-top: 10px 
+  }
+  &__button {
+    margin-top: 10px
   }
 
 } 
