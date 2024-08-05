@@ -384,6 +384,14 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
                             </a>
+                            <a (click)="abrirCarteira()">
+                                <span class="material-symbols-outlined">
+</span>
+                                {{ 'geral.carteira' | translate }}
+                                <span class="arrow-nav">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </a>
                             <a (click)="abrirSaques()">
                                 <span>
                                     <i class="fa fa-solid fa-money-bill-transfer"></i>
@@ -531,6 +539,12 @@
                                *ngIf="isCliente">
                                 <i class="fa fa-solid fa-dollar mb-2"></i>
                                 {{ 'geral.financeiro' | translate }}
+                            </a>
+                            <a class="dropdown-btn-filled" [routerLink]="['clientes/carteira']"
+                               routerLinkActive="router-link-active"
+                               *ngIf="isCliente">
+                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                {{ 'geral.carteira' | translate }}
                             </a>
                             <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
                                routerLinkActive="router-link-active"

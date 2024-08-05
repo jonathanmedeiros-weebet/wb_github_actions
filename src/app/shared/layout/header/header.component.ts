@@ -38,6 +38,7 @@ import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-ca
 import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
 import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
+import {CarteiraComponent} from "../../../clientes/carteira/carteira.component";
 
 declare var xtremepush: any;
 
@@ -465,6 +466,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirSaques() {
         this.modalService.open(SolicitacaoSaqueClienteComponent);
+    }
+
+    abrirCarteira() {
+        this.modalService.open(CarteiraComponent);
     }
 
     abrirDepositos() {

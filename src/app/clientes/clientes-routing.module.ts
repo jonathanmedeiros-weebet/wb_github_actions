@@ -25,6 +25,10 @@ const routes: Routes = [{
             loadChildren: () => import('./financeiro/financeiro.module').then(f => f.FinanceiroModule)
         },
         {
+            path: 'carteira',
+            loadChildren: () => import('./carteira/carteira.module').then(f => f.Carteira)
+        },
+        {
             path: 'apostas',
             loadChildren: () => import('./apostas-cliente/apostas-cliente.module').then(a => a.ApostasClienteModule)
         },
