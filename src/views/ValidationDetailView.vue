@@ -189,7 +189,13 @@ export default {
 
           this.betLive = live;
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          this.toastStore.setToastConfig({
+            message: error.errors?.message ?? 'Erro inesperado',
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+        })
     },
     calculateEstimatedWinnings(value = undefined) {
       if (value === undefined) {
@@ -270,8 +276,6 @@ export default {
 
         createBetSport(values)
           .then(resp => {
-            console.log("Sucesso!");
-            console.log(resp);
             this.toastStore.setToastConfig({
               message: resp.results.message ?? 'Validado com sucesso!',
               type: ToastType.SUCCESS,
@@ -286,7 +290,6 @@ export default {
             });
           })
           .catch(error => {
-            console.log(error);
             this.buttonDisabled = false;
             this.textButtonFinalizeBet = "Finalizar aposta";
             this.toastStore.setToastConfig({
