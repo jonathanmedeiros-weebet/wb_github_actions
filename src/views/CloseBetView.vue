@@ -293,7 +293,6 @@ export default {
             });
           })
           .catch(error => {
-            console.log(error);
             this.toastStore.setToastConfig({
               message: error.errors?.message,
               type: ToastType.DANGER,
