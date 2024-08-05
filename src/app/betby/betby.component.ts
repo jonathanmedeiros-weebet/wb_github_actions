@@ -55,9 +55,6 @@ export class BetbyComponent implements OnInit, OnDestroy {
 
         this.urlSubscription = this.route.url.subscribe(url => {
             this.path = '/' + url.join('/');
-            if (this.bt) {
-                this.bt.updateOptions({url: this.path});
-            }
         });
 
         this.translate.onLangChange.subscribe(
@@ -91,7 +88,6 @@ export class BetbyComponent implements OnInit, OnDestroy {
         let that = this;
 
         this.bt = new BTRenderer().initialize({
-            url: this.path,
             brand_id: this.params.getOpcoes().betby_brand,
             token: token ?? null,
             themeName: this.params.getOpcoes().betby_theme,
@@ -100,13 +96,11 @@ export class BetbyComponent implements OnInit, OnDestroy {
             betSlipOffsetTop: this.heightHeader,
             stickyTop: this.heightHeader,
             betslipZIndex: 95,
-            basename: 'sports',
             onTokenExpired: () => that.refreshTokenExpired(),
             onLogin: () => that.openLogin(),
             onRegister: () => that.openRegister(),
             onRecharge: () => that.openDeposit(),
-            onSessionRefresh: () => that.refreshSession(),
-            onRouteChange: (path: string) => that.handleChangeSection(path)
+            onSessionRefresh: () => that.refreshSession()
         });
     }
 
