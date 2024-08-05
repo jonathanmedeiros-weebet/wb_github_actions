@@ -11,4 +11,5 @@ export class RodadaGratis {
     ativo: string;
     tipo: string;
     status: string;
+    dataTermino: Date;
 }

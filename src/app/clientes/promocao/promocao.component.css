@@ -100,7 +100,7 @@
 .custom-td {
     min-width: 15%;
     white-space: nowrap;
-    text-align: right;
+    text-align: left;
 }
 
 .td-custom {

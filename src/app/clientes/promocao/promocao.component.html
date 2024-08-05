@@ -209,18 +209,18 @@
                         <form (ngSubmit)="onSubmit()" [formGroup]="form">
                             <div class="filtros">
                                 <select class="inverted-out form-control" style="min-height: 44px; min-width: 169px;" formControlName="status">
-                                    <option value="">{{'geral.todos' | translate}}</option>
-                                    <option value="Ativo">Ativo</option>
-                                    <option value="Expirado">Expirado</option>
-                                    <option value="Concluído">{{'geral.concluido' | translate}}</option>
-                                    <option value="Cancelado">Cancelado</option>
+                                    <option value="">{{'rodada_gratis.todas' | translate}}</option>
+                                    <option value="Ativa">{{'rodada_gratis.ativa' | translate}}</option>
+                                    <option value="Expirada">{{'rodada_gratis.expirada' | translate}}</option>
+                                    <option value="Concluída">{{'rodada_gratis.concluida' | translate}}</option>
+                                    <option value="Cancelada">{{'rodada_gratis.cancelada' | translate}}</option>
                                 </select>
                                 <button class="btn btn-custom" style="min-height: 44px; min-width: 137px;" type="submit" (click)="filtrarPorStatus()">{{'geral.filtrar' | translate}}</button>
                             </div>
                         </form>
                     </div>
                     <div *ngIf="!rodadasListagem.length" class="alert alert-warning text-center" role="alert">
-                        {{ 'geral.nenhumaRodadaGratis' | translate }}
+                        {{ 'rodada_gratis.nenhumaRodadaGratis' | translate }}
                     </div>
                     <ng-container *ngIf="!mobileScreen">
                         <div class="table-responsive" *ngIf="rodadasListagem.length">
@@ -268,12 +268,12 @@
                                             </td>
                                             <td class="td-custom">
                                                 <ng-container>
-                                                    <button *ngIf="rodada.customStatusFreeSpin == 'Ativo'; else elseResgatePremio " class="btn btn-custom btn-jogar-rodada"
-                                                        [ngClass]="rodada.customStatusFreeSpin != 'Ativo' ? 'disabled-button' : ''"
+                                                    <button *ngIf="(rodada.customStatusFreeSpin == 'Pendente') && (rodada.dataTermino.date >= formattedCurrentDate) ; else elseResgatePremio " class="btn btn-custom btn-jogar-rodada"
+                                                        [ngClass]="rodada.customStatusFreeSpin != 'Pendente' ? 'disabled-button' : ''"
                                                         (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
                                                     </button>
                                                     <ng-template #elseResgatePremio>
-                                                        <button [disabled]="isButtonDisabled" *ngIf="(rodada.status != 'resgate' || rodada.ativo == 1 || rodada.customStatusFreeSpin != 'Concluído' || ( isDateGreater(parseDate(dataAtual  | moment: 'DD/MM/YYYY HH:mm:ss'), parseDate(rodada.dataTermino.date  | moment: 'DD/MM/YYYY HH:mm:ss')) ) || (rodada.tipoSaldoConvertido == 'real') || (rodada.premio <= 0 )) ? false : true " class="btn btn-custom btn-jogar-rodada" (click)="redeemPrize(rodada.id)">{{ 'geral.resgatarPremio' | translate }}
+                                                        <button [disabled]="isButtonDisabled" *ngIf="(rodada.status != 'resgate' || rodada.ativo == 1 || rodada.customStatusFreeSpin != 'Concluída' || ( isDateGreater(parseDate(dataAtual  | moment: 'DD/MM/YYYY HH:mm:ss'), parseDate(rodada.dataTermino.date  | moment: 'DD/MM/YYYY HH:mm:ss')) ) || (rodada.tipoSaldoConvertido == 'real') || (rodada.premio <= 0 )) ? false : true " class="btn btn-custom btn-jogar-rodada" (click)="redeemPrize(rodada.id)">{{ 'rodada_gratis.resgatarPremio' | translate }}
                                                         </button>
                                                     </ng-template>
                                                 </ng-container>
@@ -290,7 +290,7 @@
                         </div>
                         <ng-container *ngFor="let rodada of rodadasListagem">
                             <div class="rodada-gratis-container">
-                                <p class="info-rodada">{{ 'geral.rodadaGratis' | translate }}: <span>Expira em {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}</span></p>
+                                <p class="info-rodada">{{ 'rodada_gratis.rodadaGratis' | translate }}: <span>Expira em {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}</span></p>
                                 <p class="info-rodada">{{ 'geral.valor' | translate }}: <span>{{ rodada.valor | currency }}</span></p>
                                 <p class="info-rodada">{{ 'geral.quantidade' | translate }}: <span>{{ rodada.quantidade }}</span></p>
                                 <p class="info-rodada">{{ 'geral.jogo' | translate }}: <span>{{ rodada.gameName }}</span></p>
