@@ -125,7 +125,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                             customStatusFreeSpin = 'Pendente';
                         } else if (rodada.ativo == '1' && rodada.status == 'pendente' && rodada.dataTermino.date < this.formattedCurrentDate) {
                             customStatusFreeSpin = 'Expirada';
-                        } else if (rodada.quantidade <= rodada.quantidadeUtilizada) {
+                        } else if (rodada.quantidade == rodada.quantidadeUtilizada) {
                             customStatusFreeSpin = 'Concluída';
                         } else if (rodada.status == 'cancelada'){
                             customStatusFreeSpin = 'Cancelada'

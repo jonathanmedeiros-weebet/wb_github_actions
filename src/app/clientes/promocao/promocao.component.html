@@ -273,7 +273,7 @@
                                                         (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
                                                     </button>
                                                     <ng-template #elseResgatePremio>
-                                                        <button [disabled]="isButtonDisabled" *ngIf="(rodada.status != 'resgate' || rodada.ativo == 1 || rodada.customStatusFreeSpin != 'Concluída' || ( isDateGreater(parseDate(dataAtual  | moment: 'DD/MM/YYYY HH:mm:ss'), parseDate(rodada.dataTermino.date  | moment: 'DD/MM/YYYY HH:mm:ss')) ) || (rodada.tipoSaldoConvertido == 'real') || (rodada.premio <= 0 )) ? false : true " class="btn btn-custom btn-jogar-rodada" (click)="redeemPrize(rodada.id)">{{ 'rodada_gratis.resgatarPremio' | translate }}
+                                                        <button [disabled]="isButtonDisabled" *ngIf="(rodada.status == 'resgate' && rodada.ativo == 1 && rodada.customStatusFreeSpin == 'Concluída' && rodada.dataTermino.date >= this.formattedCurrentDate && rodada.tipoSaldoConvertido == 'bonus' && rodada.premio > 0 ) ? true : false " class="btn btn-custom btn-jogar-rodada" (click)="redeemPrize(rodada.id)">{{ 'rodada_gratis.resgatarPremio' | translate }}
                                                         </button>
                                                     </ng-template>
                                                 </ng-container>
