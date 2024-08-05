@@ -89,7 +89,7 @@
           <div class="cotacao__finalizar">
             <w-button
               id="btn-entrar"
-              text="Finalizar Aposta"
+              :text="textButtonFinalizeBet"
               value="entrar"
               class="cotacao__finalizar-button"
               name="btn-entrar"
@@ -156,7 +156,8 @@ export default {
       hasDifferentOdds: false,
       bettorName: '',
       acceptChangesOdds: false,
-      toastStore: useToastStore()
+      toastStore: useToastStore(),
+      textButtonFinalizeBet: "Finalizar aposta"
     };
   },
   mounted() {
@@ -238,7 +239,7 @@ export default {
     },
     async submit() {
       this.buttonDisabled = true;
-
+      this.textButtonFinalizeBet = "Processando...";
       const values = {};
       values.preaposta_codigo = this.bet.codigo;
       values.apostador = this.bettorName;
@@ -287,6 +288,7 @@ export default {
           .catch(error => {
             console.log(error);
             this.buttonDisabled = false;
+            this.textButtonFinalizeBet = "Finalizar aposta";
             this.toastStore.setToastConfig({
               message: error.errors?.message ?? 'Erro inesperado',
               type: ToastType.DANGER,
@@ -295,6 +297,8 @@ export default {
         })
         
       } else {
+        this.buttonDisabled = false;
+        this.textButtonFinalizeBet = "Finalizar aposta";
         this.toastStore.setToastConfig({
           message: 'Nenhum jogo na aposta!',
           type: ToastType.WARNING,
@@ -306,7 +310,8 @@ export default {
   computed: {
     sumOdds() {
       return this.teams.reduce((total, team) => total + team.odd, 0).toFixed(2);
-    }
+    },
+    
   },
   watch: {
     valueBet(newValue, oldValue){
@@ -335,6 +340,7 @@ export default {
     padding-top: 12px;
     padding-bottom: 100px;
   }
+  
 }
 .code {
   border-radius: 4px;
@@ -343,54 +349,22 @@ export default {
   width: 100%;
   padding: 13px;
   align-items: center;
-  gap: 10px;
-  
+
   &__bet {
     font-size: 16px;
+    margin-right: 10px;
   }
 
   &__number {
     font-size: 20px;
-    
   }
+  margin-bottom: 6px;
 }
 
-.game {
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  
-  &__text {
-    gap: 10px;
-  }
-
-  &__select {
-    text-align: center;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-
-  &__delete {
-    display: flex; 
-    align-items: center; 
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-
-  &__icon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-  }
-}
 
 .bet {
   padding: 8px;
-  gap: 2.5px;
+  // gap: 2.5px;
   display: flex;
   flex-direction: column;
   position: relative; 
@@ -452,6 +426,7 @@ export default {
   &__text {
     &--danger {
       color: #ff0000;
+      color: var(--color-danger);
     }
   }
 }
@@ -478,7 +453,9 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    background: #181818;
     background: var(--color-background-input);
+    color: #ffffff80;
     color: var(--color-text-input);
     font-size: 14px;
     border: none; 
@@ -520,6 +497,7 @@ export default {
     appearance: none;
     width: 15px;
     height: 15px;
+    border: 1px solid #ffffff80;
     border: 1px solid var(--color-text-input);
     background-color: transparent;
     cursor: pointer;
@@ -528,6 +506,7 @@ export default {
   }
   
   &__checkbox:checked {
+    background-color: #0be58e;
     background-color: var(--color-primary);
   }
   &__checkbox::after {
