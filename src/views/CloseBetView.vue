@@ -99,7 +99,7 @@
               :disabled="buttonDisable"
             />
             <w-button
-              text="Confirmar"
+              :text="textButtonConfirm"
               @click="confirmAction"
               :disabled="buttonDisable"
             />
@@ -130,7 +130,7 @@
         <div class="finish" v-if="showCancelButtons">
           <w-button
             id="btn-entrar"
-            text="Encerrar Aposta"
+            :text="textButtonCloseBet"
             value="entrar"
             name="btn-entrar"
             @click="closeBet"
@@ -194,7 +194,9 @@ export default {
       newEarningPossibility: null,
       closeRequesterd: false,
       toastStore: useToastStore(),
-      option: useConfigClient().options
+      option: useConfigClient().options,
+      textButtonConfirm: 'Confirmar',
+      textButtonCloseBet: 'Encerrar Aposta'
     };
   },
   mounted() {
@@ -230,17 +232,21 @@ export default {
     },
     async closeBet() {
       this.submitting = true;
+      this.textButtonCloseBet = 'Processando...';
       simulateBetClosure(this.bet.id)
-      .then(resp => {
-        this.closeRequesterd = true;
-        this.newQuotation = resp.results.nova_cotacao;
-        this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
-      })
-      .catch(error => {
-        this.newQuotation = null;
-        this.newEarningPossibility = null;
-      })
-      .finally(() => this.submitting = false)
+        .then(resp => {
+          this.closeRequesterd = true;
+          this.newQuotation = resp.results.nova_cotacao;
+          this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
+        })
+        .catch(error => {
+          this.newQuotation = null;
+          this.newEarningPossibility = null;
+        })
+        .finally(() => {
+          this.submitting = false;
+          this.textButtonCloseBet = 'Encerrar Aposta';
+        })
     },
     cancelAction() {
       this.newQuotation = null;
@@ -251,6 +257,7 @@ export default {
     async confirmAction() { 
       if(this.bet) {
         this.submitting = true;
+        this.textButtonConfirm = "Processando...";
         const live = await this.haveLive(this.bet);
         let payload = { apostaId: this.bet.id, version: this.bet.version };
 
@@ -271,11 +278,19 @@ export default {
         }
 
         closeBet(payload)
-          .then(resp => {
-            this.fetchBetDetails();
-            this.newQuotation = null;
-            this.newEarningPossibility = null;
-            this.closeRequesterd = true;
+          .then(resp => { 
+            this.toastStore.setToastConfig({
+              message: 'Encerrado com sucesso!',
+              type: ToastType.SUCCESS,
+              duration: 5000
+            })
+            this.$router.push({ 
+              name: 'close-bet',
+              params: {
+                id: resp.results.id,
+                action: 'view'
+              }
+            });
           })
           .catch(error => {
             console.log(error);
@@ -284,9 +299,11 @@ export default {
               type: ToastType.DANGER,
               duration: 5000
             })
-            this.submitting = false;
           })
-          .finally(() => this.submitting = false)
+          .finally(() => {
+            this.submitting = false;
+            this.textButtonConfirm = "Confirmar";
+          })
       }
     },
     async fetchBetDetails() {
