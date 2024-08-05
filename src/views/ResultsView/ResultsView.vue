@@ -172,8 +172,8 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
+
 .results {
   display: flex;
   flex-direction: column;
@@ -195,7 +195,7 @@ export default {
   }
 
   &__dates::-webkit-scrollbar {
-    display: none;  /* WebKit-based browsers */
+    display: none;  
   }
 
   &__dates-buttons {
