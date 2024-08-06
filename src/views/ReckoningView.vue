@@ -362,6 +362,7 @@ export default {
     background: var(--color-text);
     background: #ffffff;
     opacity: 0.1;
+    margin-top: 5px;
   }
 }
 
@@ -386,6 +387,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2px;
 
   &__date {
     display: flex;
@@ -407,6 +409,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2px;
 
   &__date {
     display: flex;
@@ -427,7 +430,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  margin-top: 2px;
+  
   &__date {
     display: flex;
   }
