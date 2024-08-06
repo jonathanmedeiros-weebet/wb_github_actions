@@ -66,10 +66,10 @@
 }
 
 nav {
+    margin-left: 65%;
     width: calc(100% - 700px);
     display: flex;
     justify-content: center;
-    padding-right: 2%;
 }
 
 nav a {
@@ -175,7 +175,8 @@ nav::-webkit-scrollbar {
 .btn-xtremepush i {
     font-size: 22px;
     color: var(--foreground-header);
-    opacity: 65%;
+    opacity: 75%;
+    margin-top: 3px;
 }
 
 .btn-xtremepush span:hover {
@@ -183,8 +184,9 @@ nav::-webkit-scrollbar {
 }
 
 .btn-promocao i {
-    opacity: 65%;
-    font-size: 18px;
+    margin-top: 8px;
+    opacity: 75%;
+    font-size: 20px;
     color: white;
 }
 
@@ -374,11 +376,11 @@ body .change-theme {
 
 .support-btn i {
     font-size: 19px;
-    opacity: 65%;
+    opacity: 75%;
     color: var(--foreground-header);
-    margin-top: 1px;
+    margin-top: 6px;
     padding-left: 3px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .support-btn:hover i {
@@ -473,6 +475,11 @@ body .change-theme {
     margin-right: 5px;
 }
 
+.stylingNotificationIcon{
+    margin-right: 10px;
+    margin-top: -2px;
+}
+
 @media only screen and (min-width: 1025px) {
     .btn-indique-ganhe-card:hover {
         padding: 0 15px !important;
@@ -496,6 +503,10 @@ body .change-theme {
 
     .category {
         height: 100%;
+    }
+
+    nav {
+        margin-left: 0%;
     }
 
     .category a {
@@ -676,10 +687,6 @@ body .change-theme {
         padding-left: 1px;
         color: var(--highlight);
     }
-    .btn-promocao {
-        padding-left: 0;
-        font-size: 20px;
-    }
     .support-btn i {
         font-size: 20px;
     }
@@ -696,7 +703,7 @@ body .change-theme {
         margin-right: -4px;
     }
     .support-btn i {
-        font-size: 20px;
+        font-size: 19px;
     }
     .btn{
         font-size: 10px;
@@ -750,10 +757,6 @@ body .change-theme {
     .container-icons {
         padding: 0px 1%;
         gap: 6px;
-    }
-
-    .support-btn i{
-        font-size: 18px;
     }
 
     .btn-register{

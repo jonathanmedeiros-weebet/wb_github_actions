@@ -50,17 +50,19 @@
             <img [src]="LOGO" class="logo">
         </a>
     </div>
-    <nav class="desktop" *ngIf="!showHeaderMobile" #scrollMenu>
-        <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
-    </nav>
+    <div>
+        <nav class="desktop" *ngIf="!showHeaderMobile" #scrollMenu>
+            <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
+        </nav>
+    </div>
     <div class="container-group">
         <div class="container-icons">
             <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo)">
                 <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
-                    <i class="fa-solid fa-headset"></i>
+                    <i class="material-symbols-outlined">headset_mic</i>
                 </a>
                 <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
-                    <i class="fa-solid fa-headset"></i>
+                    <i class="material-symbols-outlined">headset_mic</i>
                 </a>
             </div>
             <a *ngIf="xtremepushHabilitado" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
@@ -73,8 +75,11 @@
             <div id="xtremepushNotificationWrapper" class="content-div-xtremepush" [class.open]="notificationsXtremepushOpen">
                 <div class="xtremepush-header">
                     <h4 class="xtremepush-title">
-                        <span id="icon-xtremepush" class="material-symbols-outlined">notifications</span>
-                        <span style="vertical-align: middle;">Notificações</span>
+                        <div style="display: flex;">
+                            <span id="icon-xtremepush" class="material-symbols-outlined stylingNotificationIcon">notifications</span>
+                            <span style="vertical-align: middle;">Notificações</span>
+                        </div>
+                        
                     </h4>
                     <a type="button" class="btn-close-xtremepush" aria-label="Close" (click)="notificationsXtremepush()">
                         <i class="fa fa-times"></i>
@@ -82,11 +87,11 @@
                 </div>
                 <div id="xtremepushNotificationContainer"></div>
             </div>
-        
+            
             <div class="btn-promocao" *ngIf="paginaPromocaoHabilitado">
                 <a [routerLink]="['/promocao']" routerLinkActive="active">
                     <div class="btn-promocao">
-                        <i id="icon-promocao" class="bi bi-gift"></i>
+                        <i class="material-symbols-outlined">featured_seasonal_and_gifts</i>
                     </div>
                 </a>
             </div>
