@@ -246,6 +246,7 @@ export default {
 
 .reckoning {
   color: var(--color-text);
+  color: #ffffff;
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -253,7 +254,6 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     margin: 0;
     padding: 0 20px;
     padding-top: 20px;
@@ -266,6 +266,7 @@ export default {
   height: 30px;
   opacity: 0.5;
   color: var(--color-text);
+  color: #ffffff;
   background-color: #FFFFFF0D;
   padding: 10px;
   display: flex;
@@ -282,19 +283,19 @@ export default {
 
   &__title {
     color: var(--color-text);
+    color: #ffffff;
     font-size: 14px;
     font-style: normal;
     display: flex;
     flex: 1;
     padding: 5px 1px;
-    
+    margin-left: 5px;
   }
 
   &__item {
     display: flex;
     align-items: center;
     justify-content: space-between; 
-    gap: 5px;
     width: 100%;
   }
 
@@ -302,7 +303,6 @@ export default {
     display: flex;
     align-items: center; 
     justify-content: flex-end; 
-    gap: 5px; 
     width: 100%; 
   }
 
@@ -316,6 +316,7 @@ export default {
   &__icon-add {
     padding: 1px;
     fill: var(--color-primary);
+    fill: #0be58e;;
   }
 
   &__value-right {
@@ -327,13 +328,11 @@ export default {
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 10px;
   }
 
   &__icon-wrapper {
     display: flex;
     align-items: center;
-    gap: 7px; 
   }
 
   &__icon-arrow {
@@ -343,21 +342,25 @@ export default {
   &__section {
     display: flex;
     flex-direction: column;
-    gap: 12px;
   }
 
   &__icon {
     fill: var(--color-primary);
+    fill: #0be58e;
+    margin-right: 5px;
   }
 
   &__icon-remove {
     fill: var(--color-danger);
+    fill: #f61a1a;
+    margin-right: 5px;
   }
 
   &__line {
     width: 100%;
     height: 1px;
     background: var(--color-text);
+    background: #ffffff;
     opacity: 0.1;
   }
 }
@@ -368,14 +371,13 @@ export default {
 
   &__date {
     display: flex;
-    gap: 20px;
   }
 
   &__value {
     display: flex;
     align-items: center;
     color: var(--color-success);
-
+    color: #6da544;
   }
 
 }
@@ -387,7 +389,6 @@ export default {
 
   &__date {
     display: flex;
-    gap: 10px;
   }
 
   &__value {
@@ -397,6 +398,8 @@ export default {
 
   &__icon {
     fill: var(--color-primary);
+    fill: #0be58e;
+    margin-right: 5px;
   }
 }
 
@@ -407,7 +410,6 @@ export default {
 
   &__date {
     display: flex;
-    gap: 10px;
   }
 
   &__value {
@@ -417,6 +419,8 @@ export default {
 
   &__icon {
     fill: var(--color-danger);
+    fill: #f61a1a;
+    margin-right: 5px;
   }
 }
 .balance {
@@ -426,11 +430,11 @@ export default {
 
   &__date {
     display: flex;
-    gap: 5px; 
   }
   
   &__value {
     color: var(--color-success);
+    color: #6da544;
   }
 }
 </style>
