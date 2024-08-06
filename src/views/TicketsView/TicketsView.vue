@@ -425,14 +425,11 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    // gap: 4px;
-    // 
   }
 
   &__icon-live {
     width: 18px;
     height: 18px;
-    
   }
 
   &__icon-ball {
@@ -466,6 +463,7 @@ export default {
 
 .value {
   margin-top: 8px;
+
   &__balance-text {
     font-size: 14px;
   }
@@ -483,7 +481,9 @@ export default {
     align-items: center;
     border-radius: 8px;
     background: var(--color-background-input);
+    background: #181818;
     color: var(--color-text-input);
+    color: #ffffff80;
     font-size: 14px;
     border: none; 
     margin-right: 8px;
@@ -520,7 +520,7 @@ export default {
     appearance: none;
     width: 15px;
     height: 15px;
-    border: 1px solid var(--color-text-input);
+    border: 1px solid #ffffff80;
     background-color: transparent;
     cursor: pointer;
     border-radius: 3px;
@@ -530,6 +530,7 @@ export default {
 
   &__checkbox:checked {
     background-color: var(--color-primary);
+    background-color: #0be58e;
   }
 
   &__checkbox::after {
