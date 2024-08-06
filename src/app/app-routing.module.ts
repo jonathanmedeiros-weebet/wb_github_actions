@@ -126,13 +126,13 @@ const appRoutes: Routes = [
         ]
     },
     {
-        path: '',
+        path: 'sports',
         component: BetbyLayoutComponent,
         children: [
             {
-                path: 'sports',
+                path: '**',
                 component: BetbyComponent
-            },
+            }
         ]
     },
     {

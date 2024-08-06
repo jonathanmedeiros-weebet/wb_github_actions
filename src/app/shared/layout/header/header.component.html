@@ -691,13 +691,13 @@
                 <span>{{ 'menu.esportes' | translate }}</span>
             </a>
         </div>
-        <div class="category" *ngIf="betbyAtivo && aoVivoAtivo">
-            <a [routerLink]="['/sports?bt-path=%2Flive']" routerLinkActive="active">
+        <div class="category" *ngIf="betbyAtivo">
+            <a [routerLink]="['/sports/live']" routerLinkActive="active">
                 <span>{{'menu.aoVivo' | translate}}</span>
             </a>
         </div>
         <div class="category" *ngIf="betbyAtivo">
-            <a [routerLink]="['/sports']" routerLinkActive="active">
+            <a [routerLink]="['/sports']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [class.active]="isSportsActive()">
                 <span>{{'menu.esportes' | translate}}</span>
             </a>
         </div>

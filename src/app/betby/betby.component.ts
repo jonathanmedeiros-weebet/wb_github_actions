@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CadastroModalComponent, LoginModalComponent } from '../shared/layout/modals';
-import { AuthService } from 'src/app/services';
+import { AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepositoComponent } from '../clientes/deposito/deposito.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,37 +17,46 @@ declare function BTRenderer(): void;
 export class BetbyComponent implements OnInit, OnDestroy {
 
     private bt: any;
-    private queryParamsSubscription: any;
+    private urlSubscription: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
     private heightHeader = 92;
+    private path = '/';
 
     constructor(
+        private helper: HelperService,
+        private messageService: MessageService,
         private modalService: NgbModal,
         private router: Router,
         private route: ActivatedRoute,
         private authService: AuthService,
         private translate: TranslateService,
+        private params: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
+        let currentLang = this.translate.currentLang;
 
         if (window.innerWidth <= 1280) {
             this.heightHeader = 103;
         }
 
-        let currentLang = this.translate.currentLang;
-        this.authService.getTokenBetby(currentLang).subscribe(
-            (res) => {
-                this.betbyInitialize(res.token, currentLang);
-            } ,
-            (error) => {
-                console.log(error)
-            }
-        );
+        this.helper.injectBetbyScript(this.params.getOpcoes().betby_script).then(() => {
+            this.authService.getTokenBetby(currentLang).subscribe(
+                (res) => {
+                    this.betbyInitialize(res.token, currentLang);
+                } ,
+                (_) => {
+                    this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
+                }
+            );
+        }).catch((_) => {
+            this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
+        });
 
-        this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+        this.urlSubscription = this.route.url.subscribe(url => {
+            this.path = '/' + url.join('/');
             if (this.bt) {
-                this.bt.updateOptions({url: params['bt-path']});
+                this.bt.updateOptions({url: this.path});
             }
         });
 
@@ -62,8 +71,8 @@ export class BetbyComponent implements OnInit, OnDestroy {
         if (this.bt) {
             this.bt.kill();
         }
-        if (this.queryParamsSubscription) {
-            this.queryParamsSubscription.unsubscribe();
+        if (this.urlSubscription) {
+            this.urlSubscription.unsubscribe();
         }
     }
 
@@ -82,22 +91,27 @@ export class BetbyComponent implements OnInit, OnDestroy {
         let that = this;
 
         this.bt = new BTRenderer().initialize({
-            brand_id: '2429614261820076032',
+            url: this.path,
+            brand_id: this.params.getOpcoes().betby_brand,
             token: token ?? null,
-            themeName: "demo-turquoise-dark-table",
+            themeName: this.params.getOpcoes().betby_theme,
             lang: this.langs[lang],
             target: document.getElementById('betby'),
             betSlipOffsetTop: this.heightHeader,
             stickyTop: this.heightHeader,
             betslipZIndex: 95,
+            basename: 'sports',
             onTokenExpired: () => that.refreshTokenExpired(),
-            onRouteChange: (path: string) => console.log('PATH', path),
             onLogin: () => that.openLogin(),
             onRegister: () => that.openRegister(),
             onRecharge: () => that.openDeposit(),
             onSessionRefresh: () => that.refreshSession(),
-            onBetSlipStateChange: () => console.log('CHANGE STATE')
+            onRouteChange: (path: string) => that.handleChangeSection(path)
         });
+    }
+
+    handleChangeSection(url: string) {
+        this.router.navigateByUrl(`/sports${url}`, { skipLocationChange: true });
     }
 
     refreshTokenExpired() {

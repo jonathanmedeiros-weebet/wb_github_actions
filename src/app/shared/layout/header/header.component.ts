@@ -1,5 +1,5 @@
 import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {IsActiveMatchOptions, Router} from '@angular/router';
+import {IsActiveMatchOptions, NavigationEnd, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
@@ -117,6 +117,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     public showHeaderMobile: boolean = false;
     xtremepushHabilitado = false;
 
+    private currentRoute: string;
+
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         if (window.innerWidth > 1025) {
@@ -150,6 +152,16 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private layoutService: LayoutService
     ) {
         super();
+
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.currentRoute = event.urlAfterRedirects;
+            }
+        });
+    }
+
+    isSportsActive(): boolean {
+        return this.currentRoute.startsWith('/sports') && !this.currentRoute.startsWith('/sports/live');
     }
 
     get customCasinoName(): string {

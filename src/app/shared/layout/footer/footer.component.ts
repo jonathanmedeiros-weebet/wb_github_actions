@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,12 +9,14 @@ import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-
 import { TranslateService } from '@ngx-translate/core';
 import { CartaoCadastroModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../modals';
 
+declare let anj_cd823ed6_bffb_4764_9e1b_05566f369c8c: any;
+
 @Component({
     selector: 'app-footer',
     templateUrl: 'footer.component.html',
     styleUrls: ['footer.component.css']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, AfterViewInit {
     @Input() container;
     BANCA_NOME = '';
     LOGO = config.LOGO;
@@ -88,7 +90,6 @@ export class FooterComponent implements OnInit {
 
         this.rodape = this.paramsLocais.getOpcoes()[`rodape_${this.linguagemSelecionada}`];
 
-
         this.isMobile = window.innerWidth < 1025;
 
         this.authService.logado
@@ -106,6 +107,12 @@ export class FooterComponent implements OnInit {
                     this.isCliente = isCliente;
                 }
             );
+    }
+
+    ngAfterViewInit() {
+        if (config.slug === 'zilionz.com') {
+            anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init();
+        }
     }
 
     temRedesSociais() {
