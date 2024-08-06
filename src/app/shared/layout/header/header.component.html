@@ -87,7 +87,7 @@
             <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
                 <div *ngIf="isMobile; then depositShortCutMobile else depositShortCutDesktop"></div>
                 <ng-template #depositShortCutDesktop>
-                    <a class="btn btn-custom mr-4" [routerLink]="['clientes/deposito']">
+                    <a class="btn btn-custom mr-4" [routerLink]="['/clientes/deposito']">
                         {{'geral.depositar' | translate | uppercase}}
                     </a>
                 </ng-template>
@@ -506,13 +506,13 @@
                         </div>
 
                         <div class="d-flex justify-content-around">
-                            <a class="dropdown-btn w-130" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
+                            <a class="dropdown-btn w-130" [routerLink]="['/clientes/deposito']" *ngIf="isCliente">
                                 {{ 'geral.depositar' | translate }}
                             </a>
-                            <a class="dropdown-btn w-130" [routerLink]="['clientes/saque']" *ngIf="isCliente">
+                            <a class="dropdown-btn w-130" [routerLink]="['/clientes/saque']" *ngIf="isCliente">
                                 {{ 'geral.sacar' | translate }}
                             </a>
-                            <a class="dropdown-btn w-130" [routerLink]="['cambistas/deposito']"
+                            <a class="dropdown-btn w-130" [routerLink]="['/cambistas/deposito']"
                                *ngIf="!isCliente && enabledBettorPix">
                                 {{ 'geral.liberarCredito' | translate }}
                             </a>
@@ -520,51 +520,51 @@
 
                         <div class="menu-divider mt-4"></div>
                         <div class="d-flex flex-wrap container-menu">
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/clientes/perfil']"
                                routerLinkActive="router-link-active"
                                *ngIf="isCliente">
                                 <i class="fa fa-user mb-2"></i>
                                 {{ 'geral.minhaConta' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/financeiro']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/clientes/financeiro']"
                                routerLinkActive="router-link-active"
                                *ngIf="isCliente">
                                 <i class="fa fa-solid fa-dollar mb-2"></i>
                                 {{ 'geral.financeiro' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/clientes/apostas']"
                                routerLinkActive="router-link-active"
                                *ngIf="isCliente">
                                 <i class="fa fa-solid fa-table-columns mb-2"></i>
                                 {{ 'geral.apostas' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/rollover']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/clientes/rollover']"
                                routerLinkActive="router-link-active"
                                *ngIf="isCliente">
                                 <i class="fa fa-solid fa-gift mb-2"></i>
                                 {{ 'geral.bonus' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/rodada-gratis']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/clientes/rodada-gratis']"
                                routerLinkActive="router-link-active"
                                *ngIf="isCliente">
                                 <i class="fa fa-solid fa-gift mb-2"></i>
                                 <span
                                     style="text-align: center; white-space: break-spaces; line-height: 14px;">{{ 'geral.rodadaGratis' | translate }}</span>
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/indique-ganhe']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/clientes/indique-ganhe']"
                                routerLinkActive="router-link-active"
                                *ngIf="isCliente && indiqueGanheHabilitado">
                                 <i class="fa fa-solid fa-gift mb-2"></i>
                                 <span
                                     style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/configuracoes']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/clientes/configuracoes']"
                                routerLinkActive="router-link-active"
                                *ngIf="isCliente">
                                 <i class="fa fa-solid fa-cogs mb-2"></i>
                                 {{ 'geral.configuracoes' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/alterar-senha']"
                                routerLinkActive="router-link-active" *ngIf="!isCliente">
                                 <i class="fa fa-key mb-2"></i> {{ 'geral.alterarSenha' | translate }}
                             </a>
@@ -580,25 +580,25 @@
                                 <i class="fa fa-solid fa-check mb-2"></i>
                                 {{ 'geral.validacao' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/apuracao']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/cambistas/apuracao']"
                                routerLinkActive="router-link-active"
                                *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-table-columns mb-2"></i>
                                 {{ 'geral.apuracao' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/apostas']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/cambistas/apostas']"
                                routerLinkActive="router-link-active"
                                *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-table-columns mb-2"></i>
                                 {{ 'geral.apostas' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/tabela']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/cambistas/tabela']"
                                routerLinkActive="router-link-active"
                                *ngIf="!isCliente">
                                 <i class="fa fa-solid fa-print mb-2"></i>
                                 {{ 'geral.tabela' | translate }}
                             </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/cartoes']"
+                            <a class="dropdown-btn-filled" [routerLink]="['/cambistas/cartoes']"
                                routerLinkActive="router-link-active"
                                *ngIf="!isCliente && cartaoApostaHabilitado">
                                 <i class="fa fa-solid fa-credit-card mb-2"></i>
