@@ -17,10 +17,9 @@ declare function BTRenderer(): void;
 export class BetbyComponent implements OnInit, OnDestroy {
 
     private bt: any;
-    private urlSubscription: any;
+    private queryParamsSubscription: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
     private heightHeader = 92;
-    private path = '/';
 
     constructor(
         private helper: HelperService,
@@ -53,8 +52,10 @@ export class BetbyComponent implements OnInit, OnDestroy {
             this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
         });
 
-        this.urlSubscription = this.route.url.subscribe(url => {
-            this.path = '/' + url.join('/');
+        this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+            if (this.bt && (params['bt-path'] == '/' || params['bt-path'] == '/live')) {
+                this.bt.updateOptions({url: params['bt-path']})
+            }
         });
 
         this.translate.onLangChange.subscribe(
@@ -68,8 +69,8 @@ export class BetbyComponent implements OnInit, OnDestroy {
         if (this.bt) {
             this.bt.kill();
         }
-        if (this.urlSubscription) {
-            this.urlSubscription.unsubscribe();
+        if (this.queryParamsSubscription) {
+            this.queryParamsSubscription.unsubscribe();
         }
     }
 

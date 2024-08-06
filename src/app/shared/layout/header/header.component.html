@@ -678,12 +678,12 @@
             </a>
         </div>
         <div class="category" *ngIf="betbyAtivo">
-            <a [routerLink]="['/sports/live']" routerLinkActive="active">
+            <a [routerLink]="['/sports']" [queryParams]="{'bt-path': '/live'}" routerLinkActive="active" [class.active]="sportsLiveIsActive">
                 <span>{{'menu.aoVivo' | translate}}</span>
             </a>
         </div>
         <div class="category" *ngIf="betbyAtivo">
-            <a [routerLink]="['/sports']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [class.active]="isSportsActive()">
+            <a [routerLink]="['/sports']" routerLinkActive="active" [queryParams]="{'bt-path': '/'}" [routerLinkActiveOptions]="{ exact: true }" [class.active]="sportsIsActive">
                 <span>{{'menu.esportes' | translate}}</span>
             </a>
         </div>
