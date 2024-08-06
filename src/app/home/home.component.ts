@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 declare function BTRenderer(): void;
 
@@ -47,7 +48,8 @@ export class HomeComponent implements OnInit, OnDestroy{
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
         private authService: AuthService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -142,6 +144,8 @@ export class HomeComponent implements OnInit, OnDestroy{
     }
 
     handleClickBanner(args: any) {
-        console.log(args);
+        this.router.navigate(['/sports'], {
+            queryParams: { "bt-path": args.url }
+        });
     }
 }
