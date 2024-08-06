@@ -17,10 +17,9 @@ declare function BTRenderer(): void;
 export class BetbyComponent implements OnInit, OnDestroy {
 
     private bt: any;
-    private urlSubscription: any;
+    private queryParamsSubscription: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
     private heightHeader = 92;
-    private path = '/';
 
     constructor(
         private helper: HelperService,
@@ -53,10 +52,9 @@ export class BetbyComponent implements OnInit, OnDestroy {
             this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
         });
 
-        this.urlSubscription = this.route.url.subscribe(url => {
-            this.path = '/' + url.join('/');
-            if (this.bt) {
-                this.bt.updateOptions({url: this.path});
+        this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+            if (this.bt && (params['bt-path'] == '/' || params['bt-path'] == '/live')) {
+                this.bt.updateOptions({url: params['bt-path']})
             }
         });
 
@@ -71,8 +69,8 @@ export class BetbyComponent implements OnInit, OnDestroy {
         if (this.bt) {
             this.bt.kill();
         }
-        if (this.urlSubscription) {
-            this.urlSubscription.unsubscribe();
+        if (this.queryParamsSubscription) {
+            this.queryParamsSubscription.unsubscribe();
         }
     }
 
@@ -91,7 +89,6 @@ export class BetbyComponent implements OnInit, OnDestroy {
         let that = this;
 
         this.bt = new BTRenderer().initialize({
-            url: this.path,
             brand_id: this.params.getOpcoes().betby_brand,
             token: token ?? null,
             themeName: this.params.getOpcoes().betby_theme,
@@ -100,13 +97,11 @@ export class BetbyComponent implements OnInit, OnDestroy {
             betSlipOffsetTop: this.heightHeader,
             stickyTop: this.heightHeader,
             betslipZIndex: 95,
-            basename: 'sports',
             onTokenExpired: () => that.refreshTokenExpired(),
             onLogin: () => that.openLogin(),
             onRegister: () => that.openRegister(),
             onRecharge: () => that.openDeposit(),
-            onSessionRefresh: () => that.refreshSession(),
-            onRouteChange: (path: string) => that.handleChangeSection(path)
+            onSessionRefresh: () => that.refreshSession()
         });
     }
 

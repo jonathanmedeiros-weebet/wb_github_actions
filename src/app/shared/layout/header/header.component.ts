@@ -1,9 +1,9 @@
 import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {IsActiveMatchOptions, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
 import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService} from './../../../services';
 import {Usuario} from './../../../models';
@@ -118,6 +118,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     private currentRoute: string;
 
+    sportsIsActive = false;
+    sportsLiveIsActive = false;
+
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         if (window.innerWidth > 1025) {
@@ -144,6 +147,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private modalService: NgbModal,
         private translate: TranslateService,
         private router: Router,
+        private route: ActivatedRoute,
         private connectionCheck: ConnectionCheckService,
         private renderer: Renderer2,
         private host: ElementRef,
@@ -151,16 +155,17 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private layoutService: LayoutService
     ) {
         super();
-
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                this.currentRoute = event.urlAfterRedirects;
-            }
-        });
     }
 
-    isSportsActive(): boolean {
-        return this.currentRoute.startsWith('/sports') && !this.currentRoute.startsWith('/sports/live');
+    sportsActive(): void {
+        if (this.currentRoute.startsWith('/sports') && !this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
+            this.sportsIsActive = true;
+        } else if(this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
+            this.sportsLiveIsActive = true;
+        } else {
+            this.sportsLiveIsActive = false;
+            this.sportsIsActive = false;
+        }
     }
 
     get customCasinoName(): string {
@@ -178,6 +183,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngOnInit() {
+        this.currentRoute = this.router.url;
+        this.sportsActive();
+
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.currentRoute = event.urlAfterRedirects;
+                this.sportsActive();
+            }
+        });
 
         this.xtremepushHabilitado = this.paramsService.getOpcoes().xtremepush_habilitado;
         if(this.xtremepushHabilitado) {
