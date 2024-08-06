@@ -84,6 +84,7 @@ export default {
     this.modality = this.modalityList[0];
   },
   methods: {
+    
     generateDaysOfMonth() {
       const startDate = moment().subtract(15, 'days');
       const endDate = moment().add(15, 'days');
@@ -211,6 +212,7 @@ export default {
   &__count-modalities {
     padding: 5px 20px;
     color: var(--color-text-input);
+    color: #ffffff80;
   }
 
   &__modalities-modal {
@@ -224,10 +226,12 @@ export default {
 
 ::v-deep .select-fake {
   background-color: var(--color-background-input);
+  background-color: #181818;
   padding: 18px 16px;
   
   &__title {
     color: var(--color-text-input);
+    color: #ffffff80;
 
     &--medium { 
       font-size: 14px;
