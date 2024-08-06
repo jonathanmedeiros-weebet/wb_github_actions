@@ -137,11 +137,10 @@ export default {
   height: auto;
   width: 100%;
   padding-bottom: 100px;
-
+  
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     margin: 0;
     padding: 0 25px;
     padding-top: 15px;
@@ -156,6 +155,7 @@ export default {
 .date {
   border-radius: 50px;
   width: 185px;
+  margin-top: 5px;
   height: 30px;
   opacity: 0.5;
   color: var(--color-text);
@@ -172,6 +172,7 @@ export default {
 
 .information {
   margin-bottom: -10px;
+  margin-top: 10px;
 
   &__text {
     padding-bottom: 15px;
@@ -180,6 +181,7 @@ export default {
 
   &__date {
     color: var(--color-text);
+    color: #ffffff;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
