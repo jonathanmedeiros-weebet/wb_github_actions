@@ -27,7 +27,7 @@ pipelines:
             - flutter pub upgrade
             - flutter pub run flutter_launcher_icons:main
             - flutter pub run flutter_native_splash:create
-            - flutter build apk --release
+            - flutter build apk --release --android-skip-build-dependency-validation
             - mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app.apk -f
             - aws s3 cp $APP_FILE $S3_BUCKET$APP_OUT --acl public-read
           services:
