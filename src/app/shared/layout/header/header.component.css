@@ -80,6 +80,10 @@ nav a {
     color: var(--highlight);
 }
 
+.material-symbols-outlined {
+    color: var(--highlight);
+}
+
 .category {
     margin: 0 2px;
     display: flex;
@@ -615,7 +619,7 @@ body .change-theme {
     }
     .menu-perfil {
         height: 32px;
-    }    
+    }
     .btn-register{
         min-width: 95px !important;
         margin-right: 5px;

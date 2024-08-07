@@ -385,8 +385,9 @@
                                 </span>
                             </a>
                             <a (click)="abrirCarteira()">
-                                <span class="material-symbols-outlined">
-</span>
+                                <span>
+                                 <i class="material-symbols-outlined">account_balance_wallet</i>
+                                </span>
                                 {{ 'geral.carteira' | translate }}
                                 <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
@@ -543,7 +544,7 @@
                             <a class="dropdown-btn-filled" [routerLink]="['clientes/carteira']"
                                routerLinkActive="router-link-active"
                                *ngIf="isCliente">
-                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                <i class="material-symbols-outlined">account_balance_wallet</i>
                                 {{ 'geral.carteira' | translate }}
                             </a>
                             <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
