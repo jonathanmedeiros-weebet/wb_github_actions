@@ -51,6 +51,7 @@ import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
 import { getMovements } from '@/services';
 import { formatCurrency, now, formatDateBR } from '@/utilities';
 import ModalCalendar from './../HomeView/parts/ModalCalendar.vue';
+import { getCurrentInstance } from 'vue';
 
 export default {
   name: 'movements',
@@ -62,11 +63,21 @@ export default {
     MovementItem,
     ModalCalendar 
   },
+  props: {
+    dateIni: {
+      type: String,
+      default: null
+    },
+    dateEnd: {
+      type: String,
+      default: null
+    }
+  },
   data() {
     return {  
       showModalCalendar: false,
-      startDate: now().format('YYYY-MM-DD'),
-      endDate: now().format('YYYY-MM-DD'),
+      startDate: this.dateIni ?? now().format('YYYY-MM-DD'),
+      endDate: this.dateEnd ?? now().format('YYYY-MM-DD'),
       title: 'Movimentações',
       balanceData: {},
       dateSelected: now().format('YYYY-MM-DD')

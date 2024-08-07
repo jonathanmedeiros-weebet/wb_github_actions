@@ -92,12 +92,13 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/movements',
+      path: '/movements/:dateIni?/:dateEnd?',
       name: 'movements',
       component: MovementsView,
       meta: {
         auth: production
-      }
+      },
+      props: true
     },
     {
       path: '/reckoning',
