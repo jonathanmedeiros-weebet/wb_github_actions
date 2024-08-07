@@ -192,8 +192,8 @@ export default {
 
 <style lang="scss" scoped>
 .menu {
-  color: var(--color-text);
   color: #ffffff;
+  color: var(--color-text);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -235,8 +235,8 @@ export default {
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
-    color: var(--color-text-input);
     color: #ffffff80;
+    color: var(--color-text-input);
   }
 }
 
@@ -244,8 +244,8 @@ export default {
   width: 100%;
   height: auto;
   margin-top: 18px;
-  background-color: var(--color-background-input);
   background-color: #181818;
+  background-color: var(--color-background-input);
   border-radius: 10px;
   padding: 22px 18px;
   padding-top: 16px;
@@ -256,8 +256,8 @@ export default {
 
   &__label {
     display: flex;
-    color: var(--color-text);
     color: #ffffff;
+    color: var(--color-text);
     opacity: 0.5;
     font-size: 13px; 
   }
@@ -265,16 +265,16 @@ export default {
   &__value {
     display: flex;
     align-items: center;
-    color: var(--color-text);
     color: #ffffff;
+    color: var(--color-text);
     font-size: 20px; 
   }
 
   &__eye {
     margin-left: 15px;
     cursor: pointer;
-    color: var(--color-text-input);
     color: #ffffff80;
+    color: var(--color-text-input);
     opacity: 0.5;
   }
 
@@ -287,12 +287,12 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #ffffff;
     background-color: var(--color-text);
-    color: #ffffff;
     border: none;
     border-radius: 18px;
-    color: var(--color-background); 
     color: #0a0a0a;
+    color: var(--color-background); 
     padding: 10px;
     
     white-space: nowrap;
@@ -300,8 +300,8 @@ export default {
   }
 
   &__icon {
-    fill: var(--color-background-input);
     fill: #181818;
+    fill: var(--color-background-input);
     align-items: center;
   }
 }
@@ -311,16 +311,16 @@ export default {
   flex-direction: column;
 
   &__text {
-    color: var(--color-text);
     color: #ffffff;
+    color: var(--color-text);
     font-size: 16px;
     padding-bottom: 10px;
   }
 
   &__card {
     width: 100%;
-    background-color: var(--color-background-input);
     background-color: #181818;
+    background-color: var(--color-background-input);
     padding: 18px 8px;
     padding-top: 8px;
     border-radius: 10px;
