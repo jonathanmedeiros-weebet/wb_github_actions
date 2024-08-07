@@ -180,7 +180,7 @@ export default {
   }
 
   &__dates::-webkit-scrollbar {
-    display: none;  /* WebKit-based browsers */
+    display: none;  
   }
 
   &__dates-buttons {

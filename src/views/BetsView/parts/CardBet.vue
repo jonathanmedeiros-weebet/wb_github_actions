@@ -24,8 +24,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .card {
-    
+
+    background-color: #181818;
     background-color: var(--color-background-input);
     font-size: 14px;
     font-weight: 400;
@@ -41,6 +43,7 @@ export default {
     }
 
     &__subtitle {
+        color: #ffffff80;
         color: var(--color-text-input);
         margin-bottom: 10px;
     }

@@ -149,6 +149,7 @@ export default {
         position: fixed;
         z-index: 2;
         width: 100%;
+        background: #0a0a0a;
         background: var(--color-background);
     }
 
@@ -213,6 +214,7 @@ export default {
     }
 
     &__name {
+        color: #ffffff;
         color: var(--color-text);
         text-align: center;
         font-size: 14px;
@@ -225,6 +227,7 @@ export default {
         font-size: 20px;
         font-weight: 400;
         margin-top: 16px;
+        color: #ffffff;
         color: var(--color-text);
 
         display: flex;
@@ -235,6 +238,7 @@ export default {
     }
 
     &__time {
+        color: #ffffff80;
         color: var(--color-text-input);
         font-size: 12px;
         font-style: normal;
@@ -243,6 +247,7 @@ export default {
     }
 
     &__score {
+        color: #ffffff;
         color: var(--color-text);
         font-size: 20px;
         font-style: normal;
@@ -261,7 +266,7 @@ export default {
     display: flex;
     filter: blur(40px);
     -webkit-filter: blur(40px);
-    background: rgba(255, 255, 255, 0.02);
+    background: #ffffff05;
     
     &--slim {
         height: 73px;

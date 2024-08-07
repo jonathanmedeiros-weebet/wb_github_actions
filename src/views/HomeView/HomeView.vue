@@ -472,7 +472,6 @@ export default {
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 1px;
   }
 
   &__league-select {
