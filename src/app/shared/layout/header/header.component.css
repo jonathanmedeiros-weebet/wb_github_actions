@@ -184,9 +184,8 @@ nav::-webkit-scrollbar {
 }
 
 .btn-promocao i {
-    margin-top: 8px;
     opacity: 75%;
-    font-size: 20px;
+    font-size: 0px;
     color: white;
 }
 
@@ -375,10 +374,8 @@ body .change-theme {
 }
 
 .support-btn i {
-    font-size: 19px;
     opacity: 75%;
     color: var(--foreground-header);
-    margin-top: 6px;
     padding-left: 3px;
     font-weight: 500;
 }
@@ -477,7 +474,6 @@ body .change-theme {
 
 .stylingNotificationIcon{
     margin-right: 10px;
-    margin-top: -4px;
 }
 
 .material-symbols-outlined::before {
@@ -486,7 +482,6 @@ body .change-theme {
     font-style: normal;
     font-size: 22px;
     display: inline-block;
-    vertical-align: middle;
 }
 
 .material-symbols-outlined-headset_mic::before {
@@ -586,7 +581,7 @@ body .change-theme {
     }
 
     .btn.mr-4 {
-        margin-right: 16px !important;
+        margin-right: 8px !important;
     }
 }
 
@@ -684,7 +679,6 @@ body .change-theme {
         height: 32px;
     }    
     .btn-register{
-        min-width: 85px !important;
         margin-right: 5px;
     }
     .menu-conta .btn{
@@ -708,9 +702,6 @@ body .change-theme {
         padding-left: 1px;
         color: var(--highlight);
     }
-    .support-btn i {
-        font-size: 20px;
-    }
 }
 
 @media only screen and (max-width: 375px) {
@@ -722,9 +713,6 @@ body .change-theme {
         padding: 0px 1%;
         gap: 5px;
         margin-right: -4px;
-    }
-    .support-btn i {
-        font-size: 19px;
     }
     .btn{
         font-size: 10px;

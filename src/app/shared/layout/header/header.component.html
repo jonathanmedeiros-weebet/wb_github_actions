@@ -58,25 +58,27 @@
     <div class="container-group">
         <div class="container-icons">
             <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo)">
-                <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
+                <a *ngIf="isDemo" target="_blank" style="font-size: 0px;" href="https://materiais.wee.bet/demo-weebet">
                     <i class="material-symbols-outlined material-symbols-outlined-headset_mic"></i>
                 </a>
-                <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                <a *ngIf="!isDemo && whatsapp" style="font-size: 0px;" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
                     <i class="material-symbols-outlined material-symbols-outlined-headset_mic"></i>
                 </a>
             </div>
-            <a style="color: #ffffff;" *ngIf="xtremepushHabilitado" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
-                <div id="badge-xtremepush"></div>
-                <div class="icon-xtremepush">
-                    <span style="margin-top: 4px;" class="material-symbols-outlined material-symbols-outlined-notifications"></span>  
-                </div>
-            </a>
+            <div style="display: flex;">
+                <a style="color: #ffffff; font-size: 0px;" *ngIf="xtremepushHabilitado" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
+                    <div id="badge-xtremepush"></div>
+                    <div class="icon-xtremepush">
+                        <span class="material-symbols-outlined material-symbols-outlined-notifications" style="opacity: 75%; font-size: 0px;"></span>
+                    </div>
+                </a>
+            </div>
             <div id="overlay" class="overlay" (click)="closeNotifications()" [class.open]="notificationsXtremepushOpen"></div>
             <div id="xtremepushNotificationWrapper" class="content-div-xtremepush" [class.open]="notificationsXtremepushOpen">
                 <div class="xtremepush-header">
                     <h4 class="xtremepush-title">
                         <div style="display: flex;">
-                            <span id="icon-xtremepush" class="material-symbols-outlined material-symbols-outlined-notifications stylingNotificationIcon"></span>
+                            <span id="icon-xtremepush" class="material-symbols-outlined material-symbols-outlined-notifications stylingNotificationIcon" style="font-size: 0px;"></span>
                             <span style="vertical-align: middle;">Notificações</span>
                         </div>
                     </h4>
@@ -87,7 +89,7 @@
                 <div id="xtremepushNotificationContainer"></div>
             </div>
             <div class="btn-promocao" *ngIf="paginaPromocaoHabilitado">
-                <a [routerLink]="['/promocao']" routerLinkActive="active">
+                <a [routerLink]="['/promocao']" style="font-size: 0px; line-height: 0;" routerLinkActive="active">
                     <div class="btn-promocao">
                         <i class="material-symbols-outlined material-symbols-outlined-featured_seasonal_and_gifts hidingIconText"></i>
                     </div>
