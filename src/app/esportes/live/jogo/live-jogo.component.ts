@@ -221,6 +221,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                     this.jogo.time_b_nome,
                     this.jogo.sport_id
                 );
+                odd.oddChange = 'up'
                 odd.valorFinal = this.helperService.calcularCotacao2String(odd.valor, odd.chave, this.jogo.event_id, null, true);
 
                 mercado.odds.push(odd);

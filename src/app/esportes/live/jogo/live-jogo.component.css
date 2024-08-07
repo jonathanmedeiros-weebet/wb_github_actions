@@ -502,6 +502,56 @@ section.jogo {
 .loading-template .cols .ld-odds {
     width: 50%;
 }
+
+.odd-up::before {
+    content: '';
+    width: 18px;
+    height: 12px;
+    right: 0;
+    top: 0;
+    position: absolute;
+    border-radius: 0 2px;
+    margin-top: 2px;
+    margin-right: 2px;
+    border-top: 18px solid #6DA544;
+    border-left: 18px solid transparent;
+    animation: blink 1s infinite;
+}
+
+.odd-down::before {
+    content: '';
+    width: 18px;
+    height: 12px;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    border-radius: 2px 0;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    border-bottom: 18px solid #F61A1A;
+    border-left: 18px solid transparent;
+    animation: blink 1s infinite;
+}
+
+.inner-odd.odd-enabled.selecionado {
+    .odd-down::before {
+        display: none;
+    };
+    
+    .odd-up::before {
+        display: none;
+    };
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
 /* Large devices (desktops, 1025px and up) */
 @media (min-width: 1025px) {
 

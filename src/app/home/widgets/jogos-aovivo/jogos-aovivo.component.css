@@ -158,6 +158,7 @@
     background-color: var(--inputs-odds);
     color: var(--foreground-inputs-odds);
     cursor: pointer;
+    position: relative;
 }
 
 .campeonato .jogos .jogo .cotacoes .cotacao.selecionado {
@@ -173,12 +174,62 @@
     opacity: 0.3;
 }
 
+.campeonato .jogos .jogo .cotacoes .cotacao.selecionado{
+    .odd-down::before {
+        display: none;
+    };
+    
+    .odd-up::before {
+        display: none;
+    };
+}
+
 .empty-league-list {
     color: var(--foreground-header);
     opacity: 0.5;
     margin-top: 8px;
     display: flex;
 }
+
+.odd-up::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    right: 0;
+    top: 0;
+    position: absolute;
+    border-radius: 0 2px;
+    margin-top: 2px;
+    margin-right: 2px;
+    border-top: 12px solid #6DA544;
+    border-left: 12px solid transparent;
+    animation: blink 1s infinite;
+}
+
+.odd-down::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    border-radius: 2px 0;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    border-bottom: 12px solid #F61A1A;
+    border-left: 12px solid transparent;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
 
 @media only screen and (max-width: 1024px) {
     .widgets-header {
