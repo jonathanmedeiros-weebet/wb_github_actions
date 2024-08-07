@@ -1949,10 +1949,4 @@ label {
         height: 100%;
         margin: 0;
     }
-
-    /* @supports (-webkit-touch-callout: none) { */
-    /*     body { */
-    /*         overflow: hidden; */
-    /*     } */
-    /* } */
 }
