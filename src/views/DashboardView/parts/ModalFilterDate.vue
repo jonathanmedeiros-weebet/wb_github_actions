@@ -39,14 +39,16 @@ export default {
     data() {
         return {
             items: [
-                {
+            {
                     id: 1,
                     name: 'Semana atual',
+                    slug: 'semana-atual',
                     checked: false
                 },
                 {
                     id: 2,
-                    name: 'Mês atual',
+                    name: 'Semana passada',
+                    slug: 'semana-anterior',
                     checked: false
                 }
             ].map((filterDate) => ({
@@ -61,6 +63,10 @@ export default {
         },
         handleSelect(dateId) {
             this.$emit('click', dateId);
+        },
+        handleClose() {
+            document.body.style.overflow = 'initial'
+            this.$emit('close');
         }
     }
 }
