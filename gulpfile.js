@@ -2587,7 +2587,7 @@ gulp.task('zilionz.com', function (done) {
         host: "zilionz.com",
         banca: "ZILIONZ",
         styles: "",
-        scripts: "<script type='text/javascript' src='h]ps://cd823ed6-bS-4764-9e1b-05566f369c8c.snippet.anjouangaming.org/anj-seal.js'></script>"
+        scripts: "<script type='text/javascript' src='https://cd823ed6-bffb-4764-9e1b-05566f369c8c.snippet.anjouangaming.org/anj-seal.js'></script><script></script>"
     });
 });
 
@@ -2823,6 +2823,33 @@ gulp.task('floripa.bet', function (done) {
         server: "front4.wee.bet",
         host: "floripa.bet",
         banca: "FLORIPA BET",
+        styles: ""
+    });
+});
+
+gulp.task('appjetbet365.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "appjetbet365.com",
+        banca: "APP JETBET365",
+        styles: ""
+    });
+});
+
+gulp.task('amurel.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "amurel.bet",
+        banca: "AMUREL.BET",
+        styles: ""
+    });
+});
+
+gulp.task('bellagames.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "bellagames.bet",
+        banca: "BELLA GAMES",
         styles: ""
     });
 });
