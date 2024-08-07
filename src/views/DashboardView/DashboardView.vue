@@ -66,7 +66,10 @@ import IconCalendarMonth from '@/components/icons/IconCalendarMonth.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
 import ModalFilterDate from './parts/ModalFilterDate.vue'
-import { getCashFlow, getFinancial, getQtdBets, listMovements  } from '@/services'
+import { getCashFlow, getFinancial, getMovements, getQtdBets, listMovements  } from '@/services'
+import Toast from '@/components/Toast.vue'
+import { ToastType } from '@/enums'
+import { useToastStore } from '@/stores'
 
 export default {
     name: 'dashboard-view',
@@ -78,7 +81,8 @@ export default {
         IconCalendarMonth,
         CardMovementDashboard,
         IconCheck,
-        ModalFilterDate
+        ModalFilterDate,
+        Toast
     },
     data() {
         return {
@@ -86,16 +90,16 @@ export default {
             chartData: {
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
                 datasets: [
-                {
-                    label: 'Entrada',
-                    backgroundColor: '#6DA544',
-                    data: []
-                },
-                {
-                    label: 'Saida',
-                    backgroundColor: '#F61A1A',
-                    data: []
-                }
+                    {
+                        label: 'Entrada',
+                        backgroundColor: '#6DA544',
+                        data: []
+                    },
+                    {
+                        label: 'Saida',
+                        backgroundColor: '#F61A1A',
+                        data: []
+                    }
                 ]
             },
             entryData: {
@@ -103,33 +107,7 @@ export default {
                 balance: 0,
             },
             movements: {     
-                results: [
-                    {
-                        date: '2024-06-03',
-                        title: 'Comissão',
-                        value: 200,
-                        type: 'Débito',
-                    },
-                    {
-                        date: '2024-06-03',
-                        title: 'Comissão',
-                        value: 150,
-                        type: 'Crédito',
-                    },
-                    {
-                        date: '2024-06-03',
-                        title: 'Comissão',
-                        value: 150,
-                        type: 'Crédito',
-                    },
-                    {
-                        date: '2024-06-03',
-                        title: 'Comissão',
-                        value: 200,
-                        type: 'Débito',
-                    },
-
-                ]
+                results: []
             },
             maxItems: 4,
             filterDateList: [
@@ -151,13 +129,19 @@ export default {
                 name: 'Semana atual',
                 slug: 'semana-atual',
                 checked: false,
-            }
-            
+            },
+            toastStore: useToastStore()
         }
     },
     methods: {
         toMoviments() {
-            alert('Abrir view de movimentações');
+            this.$router.push({ 
+                name: 'movements',
+                params: {
+                    dateIni: this.dateFilterIni.format("YYYY-MM-DD"),
+                    dateEnd: this.dateFilterEnd.format("YYYY-MM-DD")
+                }
+            });
         },
         closeModalChart() {
             this.showModalChart = false;
@@ -186,7 +170,6 @@ export default {
             }
             getCashFlow(filter)
                 .then(resp => {
-                   
                     this.chartData = {
                         labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
                         datasets: [
@@ -194,15 +177,18 @@ export default {
                         { ...this.chartData.datasets[1], data: resp.results.saida }
                         ]
                     }
-
-                    
                 })
-                .catch(error => console.log(error));
+                .catch(error => {
+                    this.toastStore.setToastConfig({
+                        message: error.errors.message,
+                        type: ToastType.DANGER,
+                        duration: 5000
+                    })
+                });
         },
         async fetchFinancial(){ 
             getFinancial()
                 .then(resp => {
-                    console.log('Financeiro', resp);
                     this.entryData.categories = [];
                     for (let [title, value] of Object.entries(resp.results)) {
                         if(title !== 'saldo') {
@@ -216,25 +202,38 @@ export default {
                         
                     }
                 })
-                .catch(error => console.log(error));
+                .catch(error => {
+                    this.toastStore.setToastConfig({
+                        message: error.errors.message,
+                        type: ToastType.DANGER,
+                        duration: 5000
+                    })
+                });
         },
-        async fetchQtyBets(){ 
-            getQtdBets()
-                .then(resp => {
-                    console.log('Qtd apostas', resp);
-                })
-                .catch(error => console.log(error));
-        },  
         async fetchhMoviments(){ 
             const queryParams = {
-                'periodoDe': now().format('YYYY-MM-DD'),
-                'periodoAte': now().format('YYYY-MM-DD'),
+                'periodoDe': this.dateFilterIni.format('YYYY-MM-DD'),
+                'periodoAte': this.dateFilterEnd.format('YYYY-MM-DD')
             }
             listMovements(queryParams)
                 .then(resp => {
-                    console.log('lista movimentações', resp);
+                    this.movements.results = [];
+                    for (let [key, item]  of Object.entries(resp.results.movimentacoes)) {
+                        this.movements.results.push({
+                            date: item.data,
+                            title: 'Comissão',
+                            value: parseFloat(item.valor ?? 0),
+                            type: item.descricao,
+                        });
+                    }
                 })
-                .catch(error => console.log(error));
+                .catch(error => {
+                    this.toastStore.setToastConfig({
+                        message: error.errors.message,
+                        type: ToastType.DANGER,
+                        duration: 5000
+                    })
+                });
         }
     },
     computed: {
@@ -251,6 +250,7 @@ export default {
     mounted() {
         this.fetchDataCashFlow();
         this.fetchFinancial();
+        this.fetchhMoviments();
     }
 }
 </script>

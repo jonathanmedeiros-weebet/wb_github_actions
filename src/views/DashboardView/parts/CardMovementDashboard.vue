@@ -6,7 +6,7 @@
         <div class="card__description">
             <p class="card__title">{{ movement.title }}</p>
             <p class="card__subtitle">{{ movement.type}}</p>
-            <p class="card__date">{{ formatDate(movement.date) }}</p>
+            <p class="card__date">{{ movement.date }}</p>
         </div>
         <div class="card__value" :class="typeColor(movement.type)">
             <p>{{ formatCurrencyMoney(movement.value) }}</p>

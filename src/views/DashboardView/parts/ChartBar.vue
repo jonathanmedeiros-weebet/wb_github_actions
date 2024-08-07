@@ -96,8 +96,6 @@
     watch: {
       chartData: {
         handler(newData) {
-
-        console.log('chartData atualizado:', newData)
           this.updateChart()
         },
         deep: true

@@ -51,7 +51,6 @@ import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
 import { getMovements } from '@/services';
 import { formatCurrency, now, formatDateBR } from '@/utilities';
 import ModalCalendar from './../HomeView/parts/ModalCalendar.vue';
-import { getCurrentInstance } from 'vue';
 
 export default {
   name: 'movements',
