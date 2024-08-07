@@ -245,8 +245,8 @@ export default {
 <style lang="scss" scoped>
 
 .reckoning {
-  color: var(--color-text);
   color: #ffffff;
+  color: var(--color-text);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -265,8 +265,8 @@ export default {
   width: 185px;
   height: 30px;
   opacity: 0.5;
-  color: var(--color-text);
   color: #ffffff;
+  color: var(--color-text);
   background-color: #FFFFFF0D;
   padding: 10px;
   display: flex;
@@ -282,8 +282,8 @@ export default {
   cursor: pointer;
 
   &__title {
-    color: var(--color-text);
     color: #ffffff;
+    color: var(--color-text);
     font-size: 14px;
     font-style: normal;
     display: flex;
@@ -315,8 +315,8 @@ export default {
 
   &__icon-add {
     padding: 1px;
-    fill: var(--color-primary);
     fill: #0be58e;;
+    fill: var(--color-primary);
   }
 
   &__value-right {
@@ -345,22 +345,22 @@ export default {
   }
 
   &__icon {
-    fill: var(--color-primary);
     fill: #0be58e;
+    fill: var(--color-primary);
     margin-right: 5px;
   }
 
   &__icon-remove {
-    fill: var(--color-danger);
     fill: #f61a1a;
+    fill: var(--color-danger);
     margin-right: 5px;
   }
 
   &__line {
     width: 100%;
     height: 1px;
-    background: var(--color-text);
     background: #ffffff;
+    background: var(--color-text);
     opacity: 0.1;
     margin-top: 5px;
   }
@@ -377,8 +377,8 @@ export default {
   &__value {
     display: flex;
     align-items: center;
-    color: var(--color-success);
     color: #6da544;
+    color: var(--color-success);
   }
 
 }
@@ -399,8 +399,8 @@ export default {
   }
 
   &__icon {
-    fill: var(--color-primary);
     fill: #0be58e;
+    fill: var(--color-primary);
     margin-right: 5px;
   }
 }
@@ -421,8 +421,8 @@ export default {
   }
 
   &__icon {
-    fill: var(--color-danger);
     fill: #f61a1a;
+    fill: var(--color-danger);
     margin-right: 5px;
   }
 }
@@ -437,8 +437,8 @@ export default {
   }
   
   &__value {
-    color: var(--color-success);
     color: #6da544;
+    color: var(--color-success);
   }
 }
 </style>
