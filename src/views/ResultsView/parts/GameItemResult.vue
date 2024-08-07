@@ -51,18 +51,20 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
+    background: #181818;
     background: var(--color-background-input);
     
     &__items {
         align-items: center;
         padding: 16px 24px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.10);  
+        border-bottom: 1px solid #ffffff1a;  
     }
 
     &__datetime {
         padding: 15px 8px;
         align-items: center;
         text-align: center;
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 
@@ -96,7 +98,7 @@ export default {
         text-align: center;
         font-size: 20px;
         padding: 5px;
-        flex: 0 0 30%; /* Ocupa 30% da largura total */
+        flex: 0 0 30%; 
 
         &--secondary {
             font-size: 12px;
