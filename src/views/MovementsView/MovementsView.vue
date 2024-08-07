@@ -149,6 +149,7 @@ export default {
 }
 
 .no-data {
+  color: #181818;
   color: var(--color-text-input);
 }
 
@@ -158,8 +159,8 @@ export default {
   margin-top: 5px;
   height: 30px;
   opacity: 0.5;
-  color: var(--color-text);
   background-color: #cf53530d;
+  color: var(--color-text);
   padding: 10px;
   display: flex;
   align-items: center;
@@ -180,8 +181,8 @@ export default {
   }
 
   &__date {
-    color: var(--color-text);
     color: #ffffff;
+    color: var(--color-text);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
