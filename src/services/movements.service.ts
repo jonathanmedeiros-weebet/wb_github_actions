@@ -1,6 +1,5 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
-import { localStorageService } from "@/services";
 
 export const getMovements = async (startDate: string, endDate: string) => {
     const { apiUrl } =  useConfigClient();
