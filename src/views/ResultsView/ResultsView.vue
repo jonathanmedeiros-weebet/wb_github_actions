@@ -211,8 +211,8 @@ export default {
 
   &__count-modalities {
     padding: 5px 20px;
-    color: var(--color-text-input);
     color: #ffffff80;
+    color: var(--color-text-input);
   }
 
   &__modalities-modal {
@@ -225,13 +225,13 @@ export default {
 }
 
 ::v-deep .select-fake {
-  background-color: var(--color-background-input);
   background-color: #181818;
+  background-color: var(--color-background-input);
   padding: 18px 16px;
   
   &__title {
-    color: var(--color-text-input);
     color: #ffffff80;
+    color: var(--color-text-input);
 
     &--medium { 
       font-size: 14px;
