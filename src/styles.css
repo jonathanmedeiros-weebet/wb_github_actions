@@ -1950,9 +1950,9 @@ label {
         margin: 0;
     }
 
-    @supports (-webkit-touch-callout: none) {
-        body {
-            overflow: hidden;
-        }
-    }
+    /* @supports (-webkit-touch-callout: none) { */
+    /*     body { */
+    /*         overflow: hidden; */
+    /*     } */
+    /* } */
 }
