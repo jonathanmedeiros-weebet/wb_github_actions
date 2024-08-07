@@ -5,7 +5,7 @@
     min-height: 125px;
 
     &--inline {
-        width: 130px;
+        width: 144px;
         min-height: 144px;
     }
 
@@ -21,7 +21,9 @@
     &__image {
         position: relative;
         width: 100%;
-        min-height: 105px;
+        min-height: 144px;
+        max-height: calc((100vw / 2) - 16px);
+        max-width: 200px;
         height: auto !important;
         background-color: #00000050;
         height: min-content;
@@ -155,36 +157,78 @@
         }
 
         &__image {
-            min-height: 160px;
+            min-height: 145px;
             height: auto;
+        }
+    }
+
+    .game-card--default > .game-card__image{
+        max-width: 170px;
+        min-height: 170px;
+    }
+}
+
+@media only screen and (min-width: 425px){
+    .game-card--inline{
+        width: 200px;
+    }
+
+    .game-card{
+        &--default {
+            width: 200px;
+        }
+
+        &__image{
+            min-height: 200px;
         }
     }
 }
 
-@media only screen and (min-width: 687px) {
+@media only screen and (min-width: 490px) and (max-width: 680px){
     .game-card--default {
-        width: calc((100vw / 4) - 16px);
-        min-height: 144px;
+        width: 152px;
     }
+
+    .game-card--default > .game-card__image{
+        min-height: 152px;
+    }
+}
+
+@media only screen and (min-width: 687px) and (max-width: 850px){
+    .game-card{
+        &--default {
+            width: calc((100vw / 4) - 12px);
+            min-height: 144px;
+        }
+    }
+
+    .game-card--default > .game-card__image{
+        min-height: 180px;
+    }
+    
 
     .game-card--filter .game-card__info {
         max-width: 200px;
     }
 }
 
-@media only screen and (min-width: 884px)  and (max-width: 890px) {
+@media only screen and (min-width: 884px){
     .game-card {
         width: 100%;
 
-        &--inline {
-            min-width: 150px;
-            max-width: 150px;
+        &--default {
+            width: calc((100vw / 5) - 12.8px);
         }
 
-        &__image {
-            min-height: 150px;
-            height: auto;
+        &--inline {
+            min-width: 200px;
+            max-width: 200px;
         }
+    }
+
+    .game-card--default > .game-card__image {
+        min-height: 192px;
+        height: auto;
     }
 }
 
@@ -193,15 +237,13 @@
         width: 100%;
 
         &--inline {
-            width: calc((100vw / 6) - 16px);
-            margin: 0;
-    
-            min-width: 170px;
-            max-width: 170px;
+            min-width: 200px;
+            max-width: 200px;
         }
 
         &--default {
-            width: calc((100vw / 6) - 26px);
+            width: 100%;
+            max-width: 165px;
         }
 
         &--filter {
@@ -209,13 +251,14 @@
         }
 
         &__image {
-            min-height: 155px;
+            min-height: 200px;
             height: auto;
         }
     }
 
-    .game-card--dafault .game-card__image {
-        height: 169px;
+    .game-card--default > .game-card__image {
+        min-height: 165px;
+        height: auto;
     }
 
     .game-card--filter .game-card__info {
@@ -228,18 +271,38 @@
     }
 }
 
-@media only screen and (min-width: 1025px){
-    .game-card {
+@media only screen and (min-width: 1336px) {
+    .game-card--default{
         width: 100%;
+        max-width: 175px;
+    }
 
-        &--inline {
-            min-width: 200px;
-            max-width: 200px;
-        }
+    .game-card--default > .game-card__image {
+        min-height: 175px;
+        height: auto;
+    }
+}
 
-        &__image {
-            min-height: 200px;
-            height: auto;
-        }
+@media only screen and (min-width: 1440px) {
+    .game-card--default{
+        width: 100%;
+        max-width: 188px;
+    }
+
+    .game-card--default > .game-card__image {
+        min-height: 188px;
+        height: auto;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .game-card--default{
+        width: 100%;
+        max-width: 190px;
+    }
+
+    .game-card--default > .game-card__image {
+        min-height: 190px;
+        height: auto;
     }
 }

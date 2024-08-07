@@ -34,7 +34,7 @@
 .game-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Define as colunas automáticas com um mínimo de 150px e ocupando toda a largura disponível */
-    gap: 10px;
+    gap: 7px;
 }
 
 .game-grid::-webkit-scrollbar {
@@ -319,7 +319,8 @@
         gap: 15px;
     }
 
-    .game-grid {
+    .bloco > .game-grid {
+        gap: 10px;
         grid-template-columns: repeat(6, 1fr);
     }
 
@@ -331,20 +332,39 @@
     }
 }
 
-@media only screen and (min-width: 687px) and (max-width: 1024px) {
+@media only screen and (min-width: 1336px) {
+    .bloco > .game-grid {
+        gap: 10px;
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+@media only screen and (min-width: 490px) and (max-width: 680px){
+    .game-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media only screen and (min-width: 687px) {
     .game-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
+@media only screen and (min-width: 884px) {
+    div.game-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
 @media only screen and (min-width: 1500px) {
-    .game-grid {
-        grid-template-columns: repeat(8, 1fr);
+    .bloco > .game-grid {
+        grid-template-columns: repeat(9, 1fr);
     }
 }
 
 @media only screen and (min-width: 2300px) {
-    .game-grid {
-        grid-template-columns: repeat(10, 1fr);
+    .bloco > .game-grid {
+        grid-template-columns: repeat(12, 1fr);
     }
 }

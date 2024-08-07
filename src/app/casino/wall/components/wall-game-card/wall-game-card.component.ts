@@ -16,9 +16,9 @@ export class WallGameCardComponent {
 
   get gameImageUrl(): string {
     if (this.game.fornecedor == 'creedroomz') {
-      return `https://cdn.wee.bet/img/cassino/thumbnails/${this.game.fornecedor}/${this.game.gameID}.png`;
+      return `https://weebet.s3.amazonaws.com/weebet.marcelo/img/thumbnails/wm-slot-pelaElReno.png`;
     } else {
-      return `https://cdn.wee.bet/img/cassino/${this.game.fornecedor}/${this.game.gameID}.png`;
+      return `https://weebet.s3.amazonaws.com/weebet.marcelo/img/thumbnails/wm-slot-pelaElReno.png`;
     }
   }
 
