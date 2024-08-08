@@ -3,9 +3,9 @@ const CENTER = 'https://center7.wee.bet/v1';
 async function getParams() {
     var url = window.location.pathname;
 
-    var slug = 'weebet.william';
-    var centerUrl = '//localhost';
-    var ticketId = 'FBA6-4333';
+    var slug = '[HOST]';
+    var centerUrl = 'central.' + slug;
+    var ticketId = url.substring(url.lastIndexOf('/') + 1);
     let timestamp = Date.now();
 
     var urlParams = new URLSearchParams(window.location.search);
