@@ -9,7 +9,7 @@ document.onreadystatechange = async function () {
                 const appCssLink = this.getElementById('app-css');
                 const linkTag = this.createElement('link');
                 const fieldLinkFootball = 'https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=';
-                const fieldLinkBasketball = 'https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=';
+                const fieldLinkBasketball = 'https://widgets-v2.thesports01.com/br/pro/basketball?profile=5oq66hkn0cwunq7&uuid=';
                 const liveTrackerIsActive = params.liveTracker;
                 linkTag.href = `https://weebet.s3.amazonaws.com/${params.slug}/param/cores.css`
                 linkTag.rel = 'stylesheet';
