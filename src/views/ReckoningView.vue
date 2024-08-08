@@ -245,6 +245,7 @@ export default {
 <style lang="scss" scoped>
 
 .reckoning {
+  color: #ffffff;
   color: var(--color-text);
   height: auto;
   width: 100%;
@@ -253,7 +254,6 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     margin: 0;
     padding: 0 20px;
     padding-top: 20px;
@@ -265,6 +265,7 @@ export default {
   width: 185px;
   height: 30px;
   opacity: 0.5;
+  color: #ffffff;
   color: var(--color-text);
   background-color: #FFFFFF0D;
   padding: 10px;
@@ -281,20 +282,20 @@ export default {
   cursor: pointer;
 
   &__title {
+    color: #ffffff;
     color: var(--color-text);
     font-size: 14px;
     font-style: normal;
     display: flex;
     flex: 1;
     padding: 5px 1px;
-    
+    margin-left: 5px;
   }
 
   &__item {
     display: flex;
     align-items: center;
     justify-content: space-between; 
-    gap: 5px;
     width: 100%;
   }
 
@@ -302,7 +303,6 @@ export default {
     display: flex;
     align-items: center; 
     justify-content: flex-end; 
-    gap: 5px; 
     width: 100%; 
   }
 
@@ -315,6 +315,7 @@ export default {
 
   &__icon-add {
     padding: 1px;
+    fill: #0be58e;;
     fill: var(--color-primary);
   }
 
@@ -327,13 +328,11 @@ export default {
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 10px;
   }
 
   &__icon-wrapper {
     display: flex;
     align-items: center;
-    gap: 7px; 
   }
 
   &__icon-arrow {
@@ -343,22 +342,27 @@ export default {
   &__section {
     display: flex;
     flex-direction: column;
-    gap: 12px;
   }
 
   &__icon {
+    fill: #0be58e;
     fill: var(--color-primary);
+    margin-right: 5px;
   }
 
   &__icon-remove {
+    fill: #f61a1a;
     fill: var(--color-danger);
+    margin-right: 5px;
   }
 
   &__line {
     width: 100%;
     height: 1px;
+    background: #ffffff;
     background: var(--color-text);
     opacity: 0.1;
+    margin-top: 5px;
   }
 }
 
@@ -368,14 +372,13 @@ export default {
 
   &__date {
     display: flex;
-    gap: 20px;
   }
 
   &__value {
     display: flex;
     align-items: center;
+    color: #6da544;
     color: var(--color-success);
-
   }
 
 }
@@ -384,10 +387,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2px;
 
   &__date {
     display: flex;
-    gap: 10px;
   }
 
   &__value {
@@ -396,7 +399,9 @@ export default {
   }
 
   &__icon {
+    fill: #0be58e;
     fill: var(--color-primary);
+    margin-right: 5px;
   }
 }
 
@@ -404,10 +409,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 2px;
 
   &__date {
     display: flex;
-    gap: 10px;
   }
 
   &__value {
@@ -416,20 +421,23 @@ export default {
   }
 
   &__icon {
+    fill: #f61a1a;
     fill: var(--color-danger);
+    margin-right: 5px;
   }
 }
 .balance {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  margin-top: 2px;
+  
   &__date {
     display: flex;
-    gap: 5px; 
   }
   
   &__value {
+    color: #6da544;
     color: var(--color-success);
   }
 }
