@@ -61,7 +61,7 @@ export default {
   &__card {
     display: flex;
     padding: 18px 15px;
-    gap: 10px;
+    
     align-self: stretch;
     align-items: flex-start;
     border-radius: 8px;
@@ -94,20 +94,25 @@ export default {
     font-weight: 500;
     line-height: normal;
     display: flex;
+    margin-left: 10px;
   }
 
   &__debit {
+    color: #ffffff80;
     color: var(--color-text-input);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
+    margin-left: 10px;
   }
 
   &__date { 
+    color: #ffffff80;
     color: var(--color-text-input);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
+    margin-left: 10px;
   }
 
   &__value {
