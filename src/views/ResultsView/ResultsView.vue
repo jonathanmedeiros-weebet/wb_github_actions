@@ -122,38 +122,37 @@ export default {
       event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
     },
     async getSports() {
-  try {
-    const res = await getResults(this.activeDay, this.modality.id);
-    this.championshipList = res.map(championship => {
-      return {
-        ...championship,
-        jogos: championship.jogos.map(game => {
-          const resultado = game.resultado;
+      try {
+        const res = await getResults(this.activeDay, this.modality.id);
+        this.championshipList = res.map(championship => {
           return {
-            dateTime: formatDateTimeBR(game.horario),
-            teams: [
-              { name: game.time_a_nome },
-              { name: game.time_b_nome }
-            ],
-            results: [
-              {
-                team0: (resultado.casa === 0 || resultado.casa) ? resultado.casa : '-',
-                team1: (resultado.fora === 0 || resultado.fora) ? resultado.fora : '-'
-              }
-            ],
-            halfTime: {
-              team0: (resultado.casa_1t === 0 || resultado.casa_1t) ? resultado.casa_1t : '-',
-              team1: (resultado.fora_1t === 0 || resultado.fora_1t) ? resultado.fora_1t : '-'
-            }
+            ...championship,
+            jogos: championship.jogos.map(game => {
+              const resultado = game.resultado;
+              return {
+                dateTime: formatDateTimeBR(game.horario),
+                teams: [
+                  { name: game.time_a_nome },
+                  { name: game.time_b_nome }
+                ],
+                results: [
+                  {
+                    team0: (resultado.casa === 0 || resultado.casa) ? resultado.casa : '-',
+                    team1: (resultado.fora === 0 || resultado.fora) ? resultado.fora : '-'
+                  }
+                ],
+                halfTime: {
+                  team0: (resultado.casa_1t === 0 || resultado.casa_1t) ? resultado.casa_1t : '-',
+                  team1: (resultado.fora_1t === 0 || resultado.fora_1t) ? resultado.fora_1t : '-'
+                }
+              };
+            })
           };
-        })
-      };
-    });
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-}
-
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
   },
   mounted() {
     this.getSports();
