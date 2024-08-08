@@ -113,6 +113,20 @@ export class FormValidations {
         return check ? null : { cpfInvalido: true };
     }
 
+    static cpfNotExists(nonexistentCpf: string) {
+        const validator = (formControl: UntypedFormControl) => {
+            const cpfField = (<UntypedFormGroup>formControl.root).get('cpf');
+
+            if (cpfField.value === nonexistentCpf) {
+                return { cpfNotExists: true };
+            }
+
+            return null;
+        };
+
+        return validator;
+    }
+
     static getErrorMsg(fieldName: string, validatorName: string, validatorValue?: any) {
         if (!fieldName) {
             fieldName = 'Campo';
@@ -135,6 +149,7 @@ export class FormValidations {
             'dataNascimentoInvalida': 'Data de Nascimento Inválida.',
             'menorDeIdade': 'Cadastro permitido apenas para maiores de 18 anos.',
             'cpfInvalido': 'CPF Inválido!',
+            'cpfNotExists': 'CPF informado não existe.',
             'nomeDeUsuarioInvalido': 'Nome de usuário só pode conter letras, números e sublinhado (_)'
         };
         return config[validatorName];

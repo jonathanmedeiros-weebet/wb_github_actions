@@ -10,10 +10,12 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class BannersComponent implements OnInit {
     banners = [];
+    showLoadingIndicator = true;
     isMobileView = false;
     showNavigationArrows = false;
     @Input() pagina = 'futebol';
-    showLoadingIndicator = true;
+    @Input() showSkeleton = false;
+    @Input() type = 'banner';
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -32,6 +34,7 @@ export class BannersComponent implements OnInit {
         this.bannerService.requestBanners(this.pagina);
 
         this.bannerService.banners.subscribe(banners => {
+            this.showLoadingIndicator = true;
             this.banners = [];
             let source = 'src';
 
@@ -49,8 +52,13 @@ export class BannersComponent implements OnInit {
             if (this.banners.length > 1) {
                 this.showNavigationArrows = true;
             }
-
-            this.showLoadingIndicator = false;
+            if(this.showSkeleton){
+                setTimeout(()=>{
+                    this.showLoadingIndicator = false;
+                },2000);
+            }else{
+                this.showLoadingIndicator = false;
+            }
             this.cd.markForCheck();
         });
     }

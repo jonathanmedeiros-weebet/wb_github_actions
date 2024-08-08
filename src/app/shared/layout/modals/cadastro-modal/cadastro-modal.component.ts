@@ -50,7 +50,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     loginGoogleAtivo = false;
     formSocial = false;
     aplicarCssTermo: boolean = false;
-    postbacks = {};
+    parameters = {};
+    parametersList;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -72,6 +73,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
+        this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
@@ -97,6 +99,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.route.queryParams
             .subscribe((params) => {
+
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
 
@@ -146,9 +149,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.possuiCodigoAfiliado = true;
             }
 
-            if (params.clickId) {
-                this.postbacks['clickId'] = params.clickId;
-            }
+            this.parametersList.forEach(param => {
+                if (params[param]) {
+                    this.parameters[param] = params[param];
+                }
+            });
         });
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
@@ -245,8 +250,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             values.nomeCompleto = values.nome;
         }
 
-        if (Object.keys(this.postbacks).length) {
-            values.postbacks = this.postbacks;
+        if (Object.keys(this.parameters).length) {
+            values.parameters = this.parameters;
         }
 
         this.submitting = true;
@@ -322,34 +327,48 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const { cpf } = this.form.value;
 
         if (this.autoPreenchimento) {
-            this.clientesService.validarCpf(cpf).subscribe(
-                res => {
-                    if (res.validarCpfAtivado) {
-                        this.autoPreenchimento = true;
-                        this.cpfValidado = true;
-                        this.menorDeIdade = res.menorDeIdade;
-                        this.form.controls['nascimento'].clearValidators();
-                        this.form.controls['nascimento'].updateValueAndValidity();
-                        this.form.patchValue({
-                            nome: res.nome,
-                            dadosCriptografados: res.dados
-                        });
-                    } else {
-                        if (!this.formSocial) {
-                            this.form.patchValue({nome: ''});
+            if (this.form.get('cpf').valid) {
+                this.clientesService.validarCpf(cpf).subscribe(
+                    res => {
+                        if (res.validarCpfAtivado) {
+                            this.autoPreenchimento = true;
+                            this.cpfValidado = true;
+                            this.menorDeIdade = res.menorDeIdade;
+                            this.form.controls['nascimento'].clearValidators();
+                            this.form.controls['nascimento'].updateValueAndValidity();
+                            this.form.patchValue({
+                                nome: res.nome,
+                                dadosCriptografados: res.dados
+                            });
+                        } else {
+                            if (!this.formSocial) {
+                                this.form.patchValue({nome: ''});
+                            }
+                            this.autoPreenchimento = false;
+                            this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
+                            this.form.controls['nascimento'].updateValueAndValidity();
+                            this.cpfValidado = false;
                         }
-                        this.autoPreenchimento = false;
-                        this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
-                        this.form.controls['nascimento'].updateValueAndValidity();
+                    },
+                    error => {
                         this.cpfValidado = false;
+                        this.form.patchValue({nome: ''});
+                        if (error?.code === 'cpfInformadoNaoExiste') {
+                            this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
+                            this.form.controls['cpf'].updateValueAndValidity();
+                        } else {
+                            this.messageService.error(error);
+                        }
                     }
-                },
-                error => {
-                    this.cpfValidado = false;
-                    this.form.patchValue({nome: ''});
-                    this.messageService.error(error);
-                }
-            );
+                );
+            } else {
+                this.cpfValidado = false;
+                this.menorDeIdade = false;
+                this.form.patchValue({
+                    nome: '',
+                    dadosCriptografados: null
+                });
+            }
         }
 
     }

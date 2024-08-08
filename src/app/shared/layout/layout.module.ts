@@ -17,7 +17,8 @@ import {
     SportLayoutComponent,
     VirtuaisLayoutComponent,
     LiveSportLayoutComponent,
-    RifaLayoutComponent
+    RifaLayoutComponent,
+    BetbyLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -129,6 +130,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
     ],
     declarations: [
         MainLayoutComponent,
+        BetbyLayoutComponent,
         EmptyLayoutComponent,
         AuthLayoutComponent,
         HeaderComponent,
