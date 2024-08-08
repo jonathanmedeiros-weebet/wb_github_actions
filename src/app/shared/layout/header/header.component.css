@@ -80,10 +80,6 @@ nav a {
     color: var(--highlight);
 }
 
-.material-symbols-outlined {
-    color: var(--highlight);
-}
-
 .category {
     margin: 0 2px;
     display: flex;
@@ -597,6 +593,10 @@ body .change-theme {
 
     .btn-xtremepush {
         margin: 0 10px 0 0 !important;
+        color: var(--highlight);
+    }
+
+    .material-symbols-outlined {
         color: var(--highlight);
     }
 }
