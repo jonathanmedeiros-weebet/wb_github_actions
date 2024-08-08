@@ -8,6 +8,9 @@ document.onreadystatechange = async function () {
             } else {
                 const appCssLink = this.getElementById('app-css');
                 const linkTag = this.createElement('link');
+                const fieldLinkFootball = 'https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=';
+                const fieldLinkBasketball = 'https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=';
+                const liveTrackerIsActive = params.liveTracker;
                 linkTag.href = `https://weebet.s3.amazonaws.com/${params.slug}/param/cores.css`
                 linkTag.rel = 'stylesheet';
                 appCssLink.parentElement.insertBefore(linkTag, appCssLink);
@@ -205,7 +208,7 @@ document.onreadystatechange = async function () {
 
                         if (ticketData.tipo == 'esportes') {
                             div.innerHTML = `
-                            <div class="ticket-item">
+                            <div id="${ticketItem.jogo_api_id}_ticket_item" class="ticket-item">
                                 <div class="identification">
                                     <strong>${ticketItem.campeonato_nome}</strong>
                                 </div>
@@ -280,9 +283,44 @@ document.onreadystatechange = async function () {
 
                                 <div id="${ticketItem.jogo_api_id}_live_status" class="live_status">
                                 </div>
+
+                                <div id="${ticketItem.jogo_api_id}_field" style="margin-top:18px">
+                                </div>
+
                             </div>
                         </div>`;
 
+                        if (liveTrackerIsActive) {
+                            for (ticketItem of ticketData.itens) {
+                                if (ticketItem.sport == 1 || ticketItem.sport == 18) {
+                                    function insertIframe() {
+                                        const ticketDiv = document.getElementById(`${ticketItem.jogo_api_id}_ticket_item`);
+                                        let live_track_id = ticketItem.live_track_id;
+                                        let fieldLink;
+            
+                                        if (ticketItem.sport == 1) {
+                                            fieldLink = fieldLinkFootball;
+                                        }
+            
+                                        if (ticketItem.sport == 18) {
+                                            fieldLink = fieldLinkBasketball;
+                                        }
+        
+                                        if (ticketDiv && typeof(live_track_id) == 'string') {
+                                            ticketDiv.innerHTML += `
+                                                <div id="${ticketItem.jogo_api_id}_field_body" class="field_body hidden_field">
+                                                    <div class="iframe-responsive">
+                                                        <iframe src="${fieldLink + live_track_id}" scrolling="no" frameborder="0"></iframe>
+                                                    </div>
+                                                </div>
+                                            `
+                                        }
+                                    };
+        
+                                    insertIframe();
+                                }
+                            }
+                        }
                         } else if (ticketData.tipo === 'acumuladao') {
                             div.innerHTML =
                                 `<div class="ticket-item">
@@ -338,6 +376,36 @@ document.onreadystatechange = async function () {
                         this.getElementById('ticket-itens').appendChild(div);
                     }
 
+                    for (let ticketItem of ticketData.itens) {
+                        if (ticketItem.sport == 1 || ticketItem.sport == 18) {
+                            function insertIframe() {
+                                const ticketDiv = document.getElementById(`${ticketItem.jogo_api_id}_ticket_item`);
+                                let live_track_id = ticketItem.live_track_id;
+                                let fieldLink;
+    
+                                if (ticketItem.sport == 1) {
+                                    fieldLink = fieldLinkFootball;
+                                }
+    
+                                if (ticketItem.sport == 18) {
+                                    fieldLink = fieldLinkBasketball;
+                                }
+
+                                if (ticketDiv && typeof(live_track_id) == 'string') {
+                                    ticketDiv.innerHTML += `
+                                        <div id="${ticketItem.jogo_api_id}_field_body" class="field_body hidden_field">
+                                            <div class="iframe-responsive">
+                                                <iframe src="${fieldLink + live_track_id}" scrolling="no" frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    `
+                                }
+                            };
+
+                            insertIframe();
+                        }
+                    }
+                    
                     var liveItems = ticketData.tipo === 'esportes' ? filterLiveItems(ticketItens, itemsWithResults) : [];
 
                     if (!ticketData.resultado && liveItems.length > 0) {

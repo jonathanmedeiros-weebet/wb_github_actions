@@ -1,19 +1,33 @@
+const HERMES = 'https://hermes.wee.bet/v1';
+
 async function getParams() {
     var url = window.location.pathname;
 
-    var slug = 'demo.wee.bet';
-    var centerUrl = 'central.' + slug;
-    var ticketId = url.substring(url.lastIndexOf('/') + 1);
+    var slug = 'weebet.william';
+    var centerUrl = '//localhost';
+    var ticketId = '62AF-1289';
+    let timestamp = Date.now();
 
     var urlParams = new URLSearchParams(window.location.search);
     var origin = urlParams.get("origin");
+
+    async function getLiveTrackerStatus() {
+        const response = await fetch(`https://weebet.s3.amazonaws.com/${slug}/param/parametros.json?${timestamp}`)
+        const responseJson = await response.json();
+        if (responseJson.status == 404 || responseJson.status == 500) {
+            throw responseJson.errors;
+        };
+     
+        return responseJson.opcoes.habilitar_live_tracker;
+    }
 
     if (ticketId && centerUrl && slug) {
         var params = {
             slug: slug,
             center: centerUrl,
             ticketId: ticketId,
-            origin: origin
+            origin: origin,
+            liveTracker: await getLiveTrackerStatus(),
         };
 
         return params;
@@ -60,27 +74,13 @@ function getFormatedDate(date) {
 async function getResults(ids) {
     try {
         paramIds = ids.join(',');
-        const request = await fetch(`https://hermes.wee.bet/v1/resultados/detalhado?ids=${paramIds}`)
+        const request = await fetch(`${HERMES}/resultados/detalhado?ids=${paramIds}`)
         const results = await request.json();
 
         if (request.status == 404 || request.status == 500) {
             throw results.errors;
         }
         return results;
-    } catch (error) {
-        return error;
-    }
-}
-
-async function getIdLiveTracker(id) {
-    try {
-        const request = await fetch(`https://center7.wee.bet/v1/jogos/${id}`);
-        const result = await request.json();
-
-        if (request.status == 404 || request.status == 500) {
-            throw result.errors;
-        }
-        return result;
     } catch (error) {
         return error;
     }
@@ -101,7 +101,7 @@ function displayError(message) {
 
 async function getLiveItems(items) {
     try {
-        const request = await fetch(`https://hermes.wee.bet/v1/resultados/live`, {
+        const request = await fetch(`${HERMES}/resultados/live`, {
             method: "POST",
             body: JSON.stringify(items),
             headers: { "Content-type": "application/json; charset=UTF-8" }
@@ -256,16 +256,20 @@ function showAlert() {
 function activeAndDeactiveField(id) {
     const btn = document.getElementById(`${id}_field_btn`);
     const field = document.getElementById(`${id}_field_body`);
+
     if(btn) {
-        btn.classList.toggle('field_active');
-        btnText =  btn.getElementsByTagName('p'); 
-        if (btn.classList.contains('field_active')) {
-            btnText[0].innerText = "Acompanhando evento";
-        } else {
-            btnText[0].innerText = "Acompanhar evento";
-        }
+        btnText =  btn.getElementsByTagName('p')[0];
+
         if (field) {
+            btn.classList.toggle('field_active');
+            
             field.classList.toggle('hidden_field');
+
+            if (btn.classList.contains('field_active')) {
+                btnText.innerText = "Acompanhando evento";
+            } else {
+                btnText.innerText = "Acompanhar evento";
+            }
         }
     };
 

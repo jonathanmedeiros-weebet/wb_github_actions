@@ -1,19 +1,32 @@
+const CENTER = 'https://center7.wee.bet/v1';
+
 async function getParams() {
     var url = window.location.pathname;
 
     var slug = '[HOST]';
     var centerUrl = 'central.' + slug;
     var ticketId = url.substring(url.lastIndexOf('/') + 1);
+    var timestamp = Date.now();
 
     var urlParams = new URLSearchParams(window.location.search);
     var origin = urlParams.get("origin");
+
+    async function getLiveTrackerStatus() {
+        const response = await fetch(`https://weebet.s3.amazonaws.com/${slug}/param/parametros.json?${timestamp}`)
+        const responseJson = await response.json();
+        if (responseJson.status == 404 || responseJson.status == 500) {
+            throw responseJson.errors;
+        }
+        return responseJson;
+    }
 
     if (ticketId && centerUrl && slug) {
         var params = {
             slug: slug,
             center: centerUrl,
             ticketId: ticketId,
-            origin: origin
+            origin: origin,
+            liveTracker: await getLiveTrackerStatus()
         };
 
         return params;
@@ -60,7 +73,7 @@ function getFormatedDate(date) {
 async function getResults(ids) {
     try {
         paramIds = ids.join(',');
-        const request = await fetch(`https://center7.wee.bet/v1/resultados/detalhado?ids=${paramIds}`)
+        const request = await fetch(`${CENTER}/resultados/detalhado?ids=${paramIds}`)
         const results = await request.json();
 
         if (request.status == 404 || request.status == 500) {
@@ -87,7 +100,7 @@ function displayError(message) {
 
 async function getLiveItems(items) {
     try {
-        const request = await fetch(`https://center7.wee.bet/v1/resultados/live`, {
+        const request = await fetch(`${CENTER}/resultados/live`, {
             method: "POST",
             body: JSON.stringify(items),
             headers: { "Content-type": "application/json; charset=UTF-8" }
