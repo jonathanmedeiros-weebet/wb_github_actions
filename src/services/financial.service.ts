@@ -8,7 +8,6 @@ export const getCashFlow = async ( params = {} ) => {
     const fullUrl = queryString ? `${url}?${queryString}` : url;
 
     return await axiosInstance().get(fullUrl);
-    // return await axiosInstance().get('http://localhost/api/cambistas/fluxoCaixa?periodo=semana-anterior');
 }
 
 
