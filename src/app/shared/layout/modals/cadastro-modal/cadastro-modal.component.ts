@@ -96,10 +96,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
-        
+
         this.route.queryParams
             .subscribe((params) => {
-            
+
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
 
@@ -327,34 +327,48 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const { cpf } = this.form.value;
 
         if (this.autoPreenchimento) {
-            this.clientesService.validarCpf(cpf).subscribe(
-                res => {
-                    if (res.validarCpfAtivado) {
-                        this.autoPreenchimento = true;
-                        this.cpfValidado = true;
-                        this.menorDeIdade = res.menorDeIdade;
-                        this.form.controls['nascimento'].clearValidators();
-                        this.form.controls['nascimento'].updateValueAndValidity();
-                        this.form.patchValue({
-                            nome: res.nome,
-                            dadosCriptografados: res.dados
-                        });
-                    } else {
-                        if (!this.formSocial) {
-                            this.form.patchValue({nome: ''});
+            if (this.form.get('cpf').valid) {
+                this.clientesService.validarCpf(cpf).subscribe(
+                    res => {
+                        if (res.validarCpfAtivado) {
+                            this.autoPreenchimento = true;
+                            this.cpfValidado = true;
+                            this.menorDeIdade = res.menorDeIdade;
+                            this.form.controls['nascimento'].clearValidators();
+                            this.form.controls['nascimento'].updateValueAndValidity();
+                            this.form.patchValue({
+                                nome: res.nome,
+                                dadosCriptografados: res.dados
+                            });
+                        } else {
+                            if (!this.formSocial) {
+                                this.form.patchValue({nome: ''});
+                            }
+                            this.autoPreenchimento = false;
+                            this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
+                            this.form.controls['nascimento'].updateValueAndValidity();
+                            this.cpfValidado = false;
                         }
-                        this.autoPreenchimento = false;
-                        this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
-                        this.form.controls['nascimento'].updateValueAndValidity();
+                    },
+                    error => {
                         this.cpfValidado = false;
+                        this.form.patchValue({nome: ''});
+                        if (error?.code === 'cpfInformadoNaoExiste') {
+                            this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
+                            this.form.controls['cpf'].updateValueAndValidity();
+                        } else {
+                            this.messageService.error(error);
+                        }
                     }
-                },
-                error => {
-                    this.cpfValidado = false;
-                    this.form.patchValue({nome: ''});
-                    this.messageService.error(error);
-                }
-            );
+                );
+            } else {
+                this.cpfValidado = false;
+                this.menorDeIdade = false;
+                this.form.patchValue({
+                    nome: '',
+                    dadosCriptografados: null
+                });
+            }
         }
 
     }
