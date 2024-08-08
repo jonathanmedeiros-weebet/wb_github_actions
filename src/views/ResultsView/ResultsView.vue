@@ -30,7 +30,6 @@
           :key="championshipListIndex"
         >
           <template #title>
-            <img :src="championship.image" @error="changeSrcWhenImageError" />
             {{ championship.nome }}
           </template>
           <game-item-result :games="championship.jogos"/>
@@ -133,19 +132,19 @@ export default {
               return {
                 dateTime: formatDateTimeBR(game.horario),
                 teams: [
-                  {
-                    name: game.time_a_nome,
-                  },
-                  {
-                    name: game.time_b_nome,
-                  }
+                  { name: game.time_a_nome },
+                  { name: game.time_b_nome }
                 ],
                 results: [
                   {
                     team0: (resultado.casa === 0 || resultado.casa) ? resultado.casa : '-',
                     team1: (resultado.fora === 0 || resultado.fora) ? resultado.fora : '-'
                   }
-                ]
+                ],
+                halfTime: {
+                  team0: (resultado.casa_1t === 0 || resultado.casa_1t) ? resultado.casa_1t : '-',
+                  team1: (resultado.fora_1t === 0 || resultado.fora_1t) ? resultado.fora_1t : '-'
+                }
               };
             })
           };
