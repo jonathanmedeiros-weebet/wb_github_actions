@@ -5,7 +5,7 @@ async function getParams() {
 
     var slug = 'weebet.william';
     var centerUrl = '//localhost';
-    var ticketId = '62AF-1289';
+    var ticketId = 'FBA6-4333';
     let timestamp = Date.now();
 
     var urlParams = new URLSearchParams(window.location.search);

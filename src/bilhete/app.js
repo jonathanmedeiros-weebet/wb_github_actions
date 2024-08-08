@@ -126,7 +126,10 @@ document.onreadystatechange = async function () {
                                     if (game.jogo_api_id === item.event_id) {
                                         game.time_a_img = item.time_a_img;
                                         game.time_b_img = item.time_b_img;
-                                    }
+                                    };
+                                    if (item.live_track_id) {
+                                        game.live_track_id = item.live_track_id;
+                                    };
                                 });
 
                                 if (item.resultado){
@@ -360,7 +363,7 @@ document.onreadystatechange = async function () {
                                         fieldLink = fieldLinkBasketball;
                                     }
     
-                                    if (ticketDiv && typeof(live_track_id) == 'string') {
+                                    if (ticketDiv && live_track_id) {
                                         ticketDiv.innerHTML += `
                                             <div id="${ticketItem.jogo_api_id}_field_body" class="field_body hidden_field">
                                                 <div class="iframe-responsive">

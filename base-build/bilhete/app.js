@@ -126,7 +126,10 @@ document.onreadystatechange = async function () {
                                     if (game.jogo_api_id === item.event_id) {
                                         game.time_a_img = item.time_a_img;
                                         game.time_b_img = item.time_b_img;
-                                    }
+                                    };
+                                    if (item.live_track_id) {
+                                        game.live_track_id = item.live_track_id;
+                                    };
                                 });
 
                                 if (item.resultado){
@@ -284,43 +287,11 @@ document.onreadystatechange = async function () {
                                 <div id="${ticketItem.jogo_api_id}_live_status" class="live_status">
                                 </div>
 
-                                <div id="${ticketItem.jogo_api_id}_field" style="margin-top:18px">
+                                <div id="${ticketItem.jogo_api_id}_field" ${ticketItem.live_track_id ? '' : 'hidden'}>
                                 </div>
 
                             </div>
                         </div>`;
-
-                        if (liveTrackerIsActive) {
-                            for (ticketItem of ticketData.itens) {
-                                if (ticketItem.sport == 1 || ticketItem.sport == 18) {
-                                    function insertIframe() {
-                                        const ticketDiv = document.getElementById(`${ticketItem.jogo_api_id}_ticket_item`);
-                                        let live_track_id = ticketItem.live_track_id;
-                                        let fieldLink;
-            
-                                        if (ticketItem.sport == 1) {
-                                            fieldLink = fieldLinkFootball;
-                                        }
-            
-                                        if (ticketItem.sport == 18) {
-                                            fieldLink = fieldLinkBasketball;
-                                        }
-        
-                                        if (ticketDiv && typeof(live_track_id) == 'string') {
-                                            ticketDiv.innerHTML += `
-                                                <div id="${ticketItem.jogo_api_id}_field_body" class="field_body hidden_field">
-                                                    <div class="iframe-responsive">
-                                                        <iframe src="${fieldLink + live_track_id}" scrolling="no" frameborder="0"></iframe>
-                                                    </div>
-                                                </div>
-                                            `
-                                        }
-                                    };
-        
-                                    insertIframe();
-                                }
-                            }
-                        }
                         } else if (ticketData.tipo === 'acumuladao') {
                             div.innerHTML =
                                 `<div class="ticket-item">
@@ -376,33 +347,35 @@ document.onreadystatechange = async function () {
                         this.getElementById('ticket-itens').appendChild(div);
                     }
 
-                    for (let ticketItem of ticketData.itens) {
-                        if (ticketItem.sport == 1 || ticketItem.sport == 18) {
-                            function insertIframe() {
-                                const ticketDiv = document.getElementById(`${ticketItem.jogo_api_id}_ticket_item`);
-                                let live_track_id = ticketItem.live_track_id;
-                                let fieldLink;
+                    if (liveTrackerIsActive) {
+                        for (let ticketItem of ticketData.itens) {
+                            if (ticketItem.sport == 1 || ticketItem.sport == 18) {
+                                function insertIframe() {
+                                    const ticketDiv = document.getElementById(`${ticketItem.jogo_api_id}_ticket_item`);
+                                    let live_track_id = ticketItem.live_track_id;
+                                    let fieldLink;
+        
+                                    if (ticketItem.sport == 1) {
+                                        fieldLink = fieldLinkFootball;
+                                    }
+        
+                                    if (ticketItem.sport == 18) {
+                                        fieldLink = fieldLinkBasketball;
+                                    }
     
-                                if (ticketItem.sport == 1) {
-                                    fieldLink = fieldLinkFootball;
-                                }
-    
-                                if (ticketItem.sport == 18) {
-                                    fieldLink = fieldLinkBasketball;
-                                }
-
-                                if (ticketDiv && typeof(live_track_id) == 'string') {
-                                    ticketDiv.innerHTML += `
-                                        <div id="${ticketItem.jogo_api_id}_field_body" class="field_body hidden_field">
-                                            <div class="iframe-responsive">
-                                                <iframe src="${fieldLink + live_track_id}" scrolling="no" frameborder="0"></iframe>
+                                    if (ticketDiv && live_track_id) {
+                                        ticketDiv.innerHTML += `
+                                            <div id="${ticketItem.jogo_api_id}_field_body" class="field_body hidden_field">
+                                                <div class="iframe-responsive">
+                                                    <iframe src="${fieldLink + live_track_id}" scrolling="no" frameborder="0"></iframe>
+                                                </div>
                                             </div>
-                                        </div>
-                                    `
-                                }
-                            };
-
-                            insertIframe();
+                                        `
+                                    }
+                                };
+    
+                                insertIframe();
+                            }
                         }
                     }
                     
