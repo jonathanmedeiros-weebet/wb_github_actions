@@ -294,9 +294,9 @@ export default {
     color: #0a0a0a;
     color: var(--color-background); 
     padding: 10px;
-    
     white-space: nowrap;
     font-size: 10px;
+    margin-right: 10px;
   }
 
   &__icon {
