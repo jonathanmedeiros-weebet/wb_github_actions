@@ -43,6 +43,7 @@ export default {
     mounted() {
         if(this.options.loteriaPopular){
             this.getGameUrl();
+            document.addEventListener('fullscreenchange', this.onFullScreenChange);
         }else{
             this.toastStore.setToastConfig({
                 message: 'Você não tem acesso a Loteria Popular',
@@ -52,6 +53,9 @@ export default {
 
             this.$router.push({ name: 'home' });
         }
+    },
+    beforeDestroy() {
+        document.removeEventListener('fullscreenchange', this.onFullScreenChange);
     },
     methods: {
         async getGameUrl(){
@@ -83,17 +87,22 @@ export default {
                 }
                 this.isFullscreen = true;
             } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) { // Firefox
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { // IE/Edge
-                    document.msExitFullscreen();
+                if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.mozCancelFullScreen) { // Firefox
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) { // IE/Edge
+                        document.msExitFullscreen();
+                    }
                 }
                 this.isFullscreen = false;
             }
+        },
+        onFullScreenChange() {
+            this.isFullscreen = !!document.fullscreenElement;
         }
     }
 }
