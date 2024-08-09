@@ -306,6 +306,10 @@ export default {
     width: 100%; 
   }
 
+  &__section-sports {
+    margin-left: 25px;
+  }
+
   &__section-item {
     display: flex;
     align-items: center;
