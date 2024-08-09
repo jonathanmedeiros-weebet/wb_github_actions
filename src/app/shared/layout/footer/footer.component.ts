@@ -110,8 +110,17 @@ export class FooterComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        if (config.slug === 'zilionz.com') {
+        if (this.slug === 'zilionz.com') {
             anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init();
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.id = 'ra-embed-verified-seal';
+            script.src = 'https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js';
+            script.setAttribute('data-id', 'MTUyMzg1ODp6aWxsaW9uei1iZXQ=');
+            script.setAttribute('data-target', 'ra-verified-seal');
+            script.setAttribute('data-model', '2');
+            document.body.appendChild(script);
         }
     }
 
