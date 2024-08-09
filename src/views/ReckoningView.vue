@@ -23,7 +23,7 @@
           <span class="collapse__title">Entradas</span>
           <div class="collapse__value">
             <IconAdd class="collapse__icon" />
-            {{ entry }}
+            R$   {{ entry }}
           </div>
         </div>
         <div v-if="collapsedInputs" class="collapse__content">
@@ -34,19 +34,19 @@
                 <span class="collapse__title">Total apostado:</span>
                 <div class="collapse__icon-wrapper">
                   <IconAdd class="collapse__icon-add" />
-                  <span>{{ totalBet }}</span>
+                  <span>R$ {{ totalBet }}</span>
                 </div>
               </div>
               <div v-if="collapsedBet" class="collapse__section-result">
                 <div class="collapse__section-item">
                   <span class="collapse__section-sports">Esportivas</span>
-                  <span class="collapse__value-right">{{sports}}</span>
+                  <span class="collapse__value-right">R$ {{sports}}</span>
                 </div>
               </div>
             </div>
             <div class="collapse__section-item">
               <span class="collapse__section-text">Recargas de cartão:</span>
-              <span class="collapse__value-right">{{ rechargeCard }}</span>
+              <span class="collapse__value-right">R$ {{ rechargeCard }}</span>
             </div>
             <div class="collapse__line"></div>
           </div>
@@ -58,22 +58,22 @@
           <span class="collapse__title">Saídas</span>
           <div class="collapse__value">
             <IconRemove class="collapse__icon-remove" />
-            <span class="collapse__balance">{{ totalExits }}</span>
+            <span class="collapse__balance">R$ {{ totalExits }}</span>
           </div>
         </div>
         <div v-if="collapsedExits" class="collapse__content">
           <div class="collapse__section">
             <div class="collapse__section-item">
               <span>Comissões</span>
-              <span class="collapse__value-right">{{ commission }}</span>
+              <span class="collapse__value-right">R$ {{ commission }}</span>
             </div>
             <div class="collapse__section-item">
               <span>Prêmio</span>
-              <span class="collapse__value-right">{{ award }}</span>
+              <span class="collapse__value-right">R$ {{ award }}</span>
             </div>
             <div class="collapse__section-item">
               <span>Saque</span>
-              <span class="collapse__value-right">{{ withdraw }}</span>
+              <span class="collapse__value-right">R$ {{ withdraw }}</span>
             </div>
             <div class="collapse__line"></div>
           </div>
@@ -82,7 +82,7 @@
       <div class="result">
         <span>Resultado {{dateFormated}}</span>
         <div class="result__date">
-          <span class="result__value">{{resultDate}}</span>
+          <span class="result__value">R$ {{resultDate}}</span>
         </div>
       </div>
       <div class="collapse__line"></div>
@@ -90,7 +90,7 @@
         <span>Créditos</span>
         <div class="credit__date">
           <IconAdd class="credit__icon" />
-          <span class="credit__value">{{ credit }}</span>
+          <span class="credit__value">R$ {{ credit }}</span>
         </div>
       </div>
       <div class="collapse__line"></div>
@@ -98,14 +98,14 @@
         <span>Débitos</span>
         <div class="debit__date">
           <IconRemove class="debit__icon" />
-          <span class="debit__value">{{ debit }}</span>
+          <span class="debit__value">R$ {{ debit }}</span>
         </div>
       </div>
       <div class="collapse__line"></div>
       <div class="balance">
         <span>Saldo</span>
         <div class="balance__date">
-          <span class="balance__value">{{ balance }}</span>
+          <span class="balance__value">R$ {{ balance }}</span>
         </div>
       </div>
     </div>
