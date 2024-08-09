@@ -15,7 +15,7 @@
                     v-for="(odd, oddIndex) in option.odds"
                     :key="`${oddIndex}-${groupIndex}`"
                     :class="{
-                        'collapse__option--selected': odd.selected,
+                        'collapse__option--selected': odd.key === quoteSelected,
                         'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
                     }"
                     @click="handleItemClick(odd, option.name)"
@@ -77,17 +77,10 @@ export default {
             return Boolean(this.quotes.length)
         },
         options() {
-            const quoteKey = this.ticketStore.items[this.game._id]
-                ? this.ticketStore.items[this.game._id].quoteKey
-                : null;
-
-            return this.quotes.map(quote => ({
-                ...quote,
-                odds: quote.odds.map(odd => ({
-                    ...odd,
-                    selected: odd.key == quoteKey
-                }))
-            }))
+            return this.quotes;
+        },
+        quoteSelected() {
+            return this.ticketStore.items[this.game._id]?.quoteKey ?? null;
         }
     },
     methods: {
@@ -146,15 +139,13 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 10px;
-
         padding: 13px 16px;
 
         background: var(--color-background-input);
 
         &--grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            display: flex;
+            flex-wrap: wrap;
         }
     }
 
@@ -165,11 +156,15 @@ export default {
         border: none;
         border-radius: 4px;
 
+        flex: 1 0 100px; /* Cada item ocupa pelo menos 100px */
+
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 7px;
+        margin-left: 10px;
+        margin-top: 10px;
 
         &--live {
             gap: 0;
@@ -178,6 +173,36 @@ export default {
         &--selected {
             background: var(--color-primary);
         }
+    }
+
+    &__option:nth-child(1),
+    &__option:nth-child(4),
+    &__option:nth-child(7),
+    &__option:nth-child(10),
+    &__option:nth-child(13),
+    &__option:nth-child(16),
+    &__option:nth-child(19),
+    &__option:nth-child(22),
+    &__option:nth-child(25),
+    &__option:nth-child(28),
+    &__option:nth-child(31),
+    &__option:nth-child(34),
+    &__option:nth-child(37),
+    &__option:nth-child(40),
+    &__option:nth-child(43),
+    &__option:nth-child(46),
+    &__option:nth-child(49),
+    &__option:nth-child(52),
+    &__option:nth-child(55),
+    &__option:nth-child(58)
+    {
+        margin-left: 0;
+    }
+
+    &__option:nth-child(1),
+    &__option:nth-child(2),
+    &__option:nth-child(3) {
+        margin-top: 0;
     }
 
     &__option--selected &__label,

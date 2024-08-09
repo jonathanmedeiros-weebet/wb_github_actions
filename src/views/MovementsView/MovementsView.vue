@@ -137,11 +137,10 @@ export default {
   height: auto;
   width: 100%;
   padding-bottom: 100px;
-
+  
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     margin: 0;
     padding: 0 25px;
     padding-top: 15px;
@@ -150,16 +149,18 @@ export default {
 }
 
 .no-data {
-  color: #cf53530d;
+  color: #181818;
+  color: var(--color-text-input);
 }
 
 .date {
   border-radius: 50px;
   width: 185px;
+  margin-top: 5px;
   height: 30px;
   opacity: 0.5;
-  color: var(--color-text);
   background-color: #cf53530d;
+  color: var(--color-text);
   padding: 10px;
   display: flex;
   align-items: center;
@@ -172,6 +173,7 @@ export default {
 
 .information {
   margin-bottom: -10px;
+  margin-top: 10px;
 
   &__text {
     padding-bottom: 15px;
@@ -179,6 +181,7 @@ export default {
   }
 
   &__date {
+    color: #ffffff;
     color: var(--color-text);
     font-size: 16px;
     font-style: normal;

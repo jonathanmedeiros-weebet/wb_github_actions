@@ -97,12 +97,11 @@ export default {
 .modal {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   background: var(--color-background-input);
   border-radius: 24px 24px 0px 0px;
   width: 100%;
   height: auto;
-  max-height: 90%;
+  max-height: 80%;
   padding: 0px 20px;
   overflow-y: auto;
 
@@ -141,13 +140,16 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 24px;
+    margin-top: 20px;
   }
 
   &__footer {
+    margin-top: 20px;
     text-align: center;
   }
 
   &__body {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 8px;

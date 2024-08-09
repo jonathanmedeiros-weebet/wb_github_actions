@@ -2,6 +2,7 @@ import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
 import { modalityOdds } from "@/constants";
 import { QuotaStatus, type Modalities } from "@/enums";
+import { convertInMomentInstance, now } from "@/utilities";
 
 interface CalculateQuotaParams {
     key: string;
@@ -74,10 +75,14 @@ const getOddsBySportId = (sportId: string | number) =>{
 
 export const getChampionshipRegionBySportId = async (sportId: string) => {
     const { blockedChampionships, deadlineTable, centerUrl } = useConfigClient();
+    const newDeadlineTable = convertInMomentInstance(deadlineTable).diff(now()) < 1
+        ? now().format('YYYY-MM-DD')
+        : deadlineTable;
+
     const params = {
         sport_id: sportId,
         campeonatos_bloqueados: Boolean(blockedChampionships[sportId]) ? blockedChampionships[sportId].join(',') : '',
-        data_final: deadlineTable
+        data_final: newDeadlineTable
     }
     const url = `${centerUrl}/campeonatos/regioes`;
     return await axiosInstance().get(url , {params})

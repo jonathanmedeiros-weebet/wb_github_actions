@@ -4,17 +4,18 @@
         <template v-else>
             <Collapse
                 class="game-list__collapse"
-                :initCollapsed="true"
+                :initCollapsed="false"
                 v-for="(championship, index) in championshipList"
                 :key="index"
             >
                 <template #title>
                     <img
+                        class="game-list__collapse-icon"
                         v-if="championship.image"
                         :src="championship.image"
                         @error="changeSrcWhenImageError"
                     />
-                    <component v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
+                    <component class="game-list__collapse-icon" v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
                     {{ championship.nome }}
                 </template>
 
@@ -22,7 +23,7 @@
                     <div class="game-list__item-empty">
                         <div class="game-list__columns">
                         <span class="game-list__column">1</span>
-                        <span class="game-list__column">x</span>
+                        <span class="game-list__column game-list__column--second">x</span>
                         <span class="game-list__column">2</span>
                         </div>
                     </div>
@@ -78,15 +79,11 @@ export default {
                         });
 
                         const hasPermission = hasQuotaPermission(finalValue)
-                        const quoteKey = this.ticketStore.items[newGame._id]
-                            ? this.ticketStore.items[newGame._id].quoteKey
-                            : null;
 
                         return {
                             ...quota,
                             hasPermission,
                             finalValue,
-                            selected: quota.chave === quoteKey
                         };
                     })
                     return newGame;
@@ -110,15 +107,17 @@ export default {
 <style lang="scss" scoped>
 .game-list {
     width: 100%;
+    height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
     gap: 1px;
+    overflow-y: auto;
+    padding-bottom: 100px;
 
     &__items {
         margin-top: 1px;
         display: flex;
         flex-direction: column;
-        gap: 1px;
     }
 
     &__item-empty {
@@ -133,7 +132,6 @@ export default {
     &__columns {
         width: 190px;
         display: flex;
-        gap: 8px;
     }
 
     &__column {
@@ -143,12 +141,25 @@ export default {
         align-items: center;
         justify-content: center;
         color: #FFFFFF80;
+
+        &--second {
+            margin: 0 8px;
+        }
     }
 
     &__collapse img {
         border-radius: 50px;
-        width: 16px;
+        min-width: 16px;
         height: 16px;
+        margin-right: 6px;
+    }
+
+     &__collapse svg {
+        border-radius: 50px;
+        min-width: 18px;
+        height: 18px;
+        margin-left: -1px;
+        margin-right: 6px;
     }
 
     &__message {
