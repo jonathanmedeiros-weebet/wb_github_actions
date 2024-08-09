@@ -349,7 +349,12 @@ export default {
     },
     async handleModality(modalityId) {
       this.loading = true;
+      console.log('modalityId', modalityId);
 
+      if(modalityId === Modalities.POPULAR_LOTTERY){
+        this.$router.push({ name: 'popular-lottery' });
+        return; 
+      }
       const modality = this.modalityList.find(modality => modality.id === modalityId);
       this.homeStore.setModality(modality);
       this.homeStore.setLeague(null);
