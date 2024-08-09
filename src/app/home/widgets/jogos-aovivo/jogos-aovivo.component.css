@@ -174,16 +174,6 @@
     opacity: 0.3;
 }
 
-.campeonato .jogos .jogo .cotacoes .cotacao.selecionado{
-    .odd-down::before {
-        display: none;
-    };
-    
-    .odd-up::before {
-        display: none;
-    };
-}
-
 .empty-league-list {
     color: var(--foreground-header);
     opacity: 0.5;

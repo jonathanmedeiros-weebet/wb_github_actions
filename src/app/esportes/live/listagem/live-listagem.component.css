@@ -264,16 +264,6 @@
     position: relative;
 }
 
-.cotacao.cotacao-basquete.selecionado{
-    .odd-down::before {
-        display: none;
-    };
-    
-    .odd-up::before {
-        display: none;
-    };
-}
-
 .cotacoes .cotacao.selecionado {
     background-color: var(--highlight);
     color: var(--foreground-highlight);

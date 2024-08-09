@@ -537,16 +537,6 @@ section.jogo {
     position: relative;
 }
 
-.inner-odd.odd-enabled.selecionado {
-    .odd-down::before {
-        display: none;
-    };
-    
-    .odd-up::before {
-        display: none;
-    };
-}
-
 @keyframes blink {
     0%, 100% {
         opacity: 1;
