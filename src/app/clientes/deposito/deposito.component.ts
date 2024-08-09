@@ -1,7 +1,6 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarService, FinanceiroService, MessageService, LayoutService, BannerService } from 'src/app/services';
+import { SidebarService, FinanceiroService, MessageService, LayoutService} from 'src/app/services';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import { takeUntil } from 'rxjs/operators';
@@ -21,8 +20,6 @@ export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
     modalidade;
     showLoading = false;
     showLoadingIndicator:boolean = true;
-    
-
     headerHeight = 92;
 
     @ViewChild(BannersComponent) bannersComponent!: BannersComponent;
@@ -37,9 +34,8 @@ export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
         private el: ElementRef,
         private layoutService: LayoutService,
         private renderer: Renderer2,
-        private bannerService: BannerService,
-    ) {
-    }
+    ) {}
+    
     ngAfterViewInit(): void {
         this.showLoadingIndicator = this.bannersComponent.showLoadingIndicator;
     }
@@ -89,7 +85,6 @@ export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
         this.menuFooterService.setIsPagina(false);
         this.unsub$.next();
         this.unsub$.complete();
-        //this.bannerService.requestBanners();
     }
 
     handleError(error: string) {
