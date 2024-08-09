@@ -363,7 +363,8 @@ export default {
     getResults() {
       this.parametros.codigo = this.code.replace(/-/g, '');
       this.parametros.dataInicial = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
-      this.parametros.dataFinal = '';
+      //TODO: Será alterada a dataFinal após criação do componente de calendário com ranger de data.
+      this.parametros.dataFinal = this.parametros.dataInicial;
       this.parametros.status = this.activeButton == 'todos' ? '' : this.activeButton;
       this.parametros.apostador = this.apostador;
       this.parametros.sort = '-horario'

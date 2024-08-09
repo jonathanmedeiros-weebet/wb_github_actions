@@ -99,7 +99,7 @@
               :disabled="buttonDisable"
             />
             <w-button
-              text="Confirmar"
+              :text="textButtonConfirm"
               @click="confirmAction"
               :disabled="buttonDisable"
             />
@@ -130,7 +130,7 @@
         <div class="finish" v-if="showCancelButtons">
           <w-button
             id="btn-entrar"
-            text="Encerrar Aposta"
+            :text="textButtonCloseBet"
             value="entrar"
             name="btn-entrar"
             @click="closeBet"
@@ -194,6 +194,9 @@ export default {
       newEarningPossibility: null,
       closeRequesterd: false,
       toastStore: useToastStore(),
+      option: useConfigClient().options,
+      textButtonConfirm: 'Confirmar',
+      textButtonCloseBet: 'Encerrar Aposta'
     };
   },
   mounted() {
@@ -229,17 +232,21 @@ export default {
     },
     async closeBet() {
       this.submitting = true;
+      this.textButtonCloseBet = 'Processando...';
       simulateBetClosure(this.bet.id)
-      .then(resp => {
-        this.closeRequesterd = true;
-        this.newQuotation = resp.results.nova_cotacao;
-        this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
-      })
-      .catch(error => {
-        this.newQuotation = null;
-        this.newEarningPossibility = null;
-      })
-      .finally(() => this.submitting = false)
+        .then(resp => {
+          this.closeRequesterd = true;
+          this.newQuotation = resp.results.nova_cotacao;
+          this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
+        })
+        .catch(error => {
+          this.newQuotation = null;
+          this.newEarningPossibility = null;
+        })
+        .finally(() => {
+          this.submitting = false;
+          this.textButtonCloseBet = 'Encerrar Aposta';
+        })
     },
     cancelAction() {
       this.newQuotation = null;
@@ -250,34 +257,52 @@ export default {
     async confirmAction() { 
       if(this.bet) {
         this.submitting = true;
+        this.textButtonConfirm = "Processando...";
         const live = await this.haveLive(this.bet);
         let payload = { apostaId: this.bet.id, version: this.bet.version };
 
         if(live) {
-          const token = await tokenLiveClosing(this.bet.id);
-          const token_aovivo = token ?? null;
-          payload.token = token_aovivo;
-          const { option } = useConfigClient();
-          const timeDelay = option.delay_aposta_aovivo ? option.delay_aposta_aovivo : 10;
+          tokenLiveClosing(this.bet.id)
+            .then(resp => {
+              payload.token = resp.results ?? null;
+            })
+            .catch(error => {
+              this.toastStore.setToastConfig({
+                message: error.errors?.message,
+                type: ToastType.DANGER,
+                duration: 5000
+              })
+            });
+          const timeDelay = this.option.delay_aposta_aovivo ?? 10;
           await delay((timeDelay * 1000));
         }
-        
+
         closeBet(payload)
-        .then(resp => {
-          this.fetchBetDetails();
-          this.newQuotation = null;
-          this.newEarningPossibility = null;
-          this.closeRequesterd = true;
-        })
-        .catch(error => {
-          this.toastStore.setToastConfig({
-            message: error.errors.message,
-            type: ToastType.DANGER,
-            duration: 5000
+          .then(resp => { 
+            this.toastStore.setToastConfig({
+              message: 'Encerrado com sucesso!',
+              type: ToastType.SUCCESS,
+              duration: 5000
+            })
+            this.$router.push({ 
+              name: 'close-bet',
+              params: {
+                id: resp.results.id,
+                action: 'view'
+              }
+            });
           })
-          this.submitting = false;
-        })
-        .finally(() => this.submitting = false)
+          .catch(error => {
+            this.toastStore.setToastConfig({
+              message: error.errors?.message,
+              type: ToastType.DANGER,
+              duration: 5000
+            })
+          })
+          .finally(() => {
+            this.submitting = false;
+            this.textButtonConfirm = "Confirmar";
+          })
       }
     },
     async fetchBetDetails() {
@@ -287,10 +312,10 @@ export default {
       })
       .catch(error => {
         this.toastStore.setToastConfig({
-            message: error.errors.message,
-            type: ToastType.DANGER,
-            duration: 5000
-          })
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
       })
     },
     formatCurrencyMoney(value) {

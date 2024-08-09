@@ -39,6 +39,7 @@
         @click="$emit('click')"
         @change="emitChange"
         autocomplete="off"
+        @keypress="emitKeypress"
         :readonly="readonly"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
@@ -121,6 +122,9 @@ export default {
     },
     reset() {
       this.value = '';
+    },
+    emitKeypress(event) {
+      this.$emit('keypress', event);
     }
   },
   computed: {
@@ -163,13 +167,12 @@ input {
     font-size: 16px;
     color: #ffffff;
     color: var(--color-text);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   &__group {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
     padding-left: 10px;
     background-color: #181818;
     background-color: var(--color-background-input);
