@@ -1,6 +1,6 @@
 <template>
-  <div class="men">
-    <section class="men__container">
+  <div class="menu">
+    <section class="menu__container">
       <div class="user-info">
         <img class="user-info__icon" src="../assets/images/user-line.png" alt="User Icon">
         <div class="user-info__welcome">
@@ -190,7 +190,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.men {
+.menu {
   color: #ffffff;
   color: var(--color-text);
   height: auto;
