@@ -1,7 +1,7 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarService, FinanceiroService, MessageService, LayoutService } from 'src/app/services';
+import { SidebarService, FinanceiroService, MessageService, LayoutService, BannerService } from 'src/app/services';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import { takeUntil } from 'rxjs/operators';
@@ -15,13 +15,13 @@ import { BannersComponent } from 'src/app/shared/layout/banners/banners.componen
 })
 export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
     unsub$ = new Subject();
-
+    mobileScreen;
     whatsapp;
     hasApiPagamentos;
     modalidade;
     showLoading = false;
     showLoadingIndicator:boolean = true;
-    mobileScreen;
+    
 
     headerHeight = 92;
 
@@ -36,7 +36,8 @@ export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
         private cd: ChangeDetectorRef,
         private el: ElementRef,
         private layoutService: LayoutService,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private bannerService: BannerService,
     ) {
     }
     ngAfterViewInit(): void {
@@ -45,6 +46,7 @@ export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
+
         if (!this.mobileScreen) {
             this.siderbarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
@@ -87,6 +89,7 @@ export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
         this.menuFooterService.setIsPagina(false);
         this.unsub$.next();
         this.unsub$.complete();
+        //this.bannerService.requestBanners();
     }
 
     handleError(error: string) {
