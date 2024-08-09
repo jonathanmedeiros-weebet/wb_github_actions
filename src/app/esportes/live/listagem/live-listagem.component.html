@@ -246,7 +246,8 @@
                                                      (click)="addCotacao(jogo.value, cotacao); $event.stopPropagation()"
                                                      [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
                                                     <label
-                                                     [ngClass]="{'odd-up': cotacao.oddChange == 'up', 'odd-down': cotacao.oddChange == 'down'}"
+                                                     id="{{sanitazerId(jogo.value.id + cotacao.chave)}}"
+                                                     [ngClass]="getOddChangeClass(sanitazerId(jogo.value.id + cotacao.chave), cotacao.price_change)"
                                                     >
                                                         {{ cotacao.nome }}</label>
                                                     <span>{{ cotacao.valorFinal}}</span>

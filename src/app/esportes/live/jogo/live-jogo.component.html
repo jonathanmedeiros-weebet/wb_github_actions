@@ -323,17 +323,15 @@
                         <div *ngFor="let odds of mercados[chave].odds">
                             <div class="odd" *ngFor="let odd of odds">
                                 <ng-container *ngIf="cotacaoPermitida(odd.valorFinal);else cotacaoBloqueada">
-                                    <div class="inner-odd odd-enabled" style="position: relative;"
+                                    <div class="inner-odd odd-enabled"
                                         [ngClass]="{
                                             'selecionado': oddSelecionada(jogo._id, odd.chave),
                                         }"
                                         (click)="addCotacao(jogo, odd)">
-                                        <span class="nome-odd"
-                                            [ngClass]="{
-                                            'odd-up': odd.oddChange == 'up',
-                                            'odd-down': odd.oddChange == 'down'}"
+                                        <span class="nome-odd" id="{{sanitazerId(odd.chave)}}"
+                                            [ngClass]="getOddChangeClass(sanitazerId(odd.chave), odd.price_change)"
                                         >                                     
-                                            {{odd.label}}
+                                        {{odd.label}}
                                         </span>
                                         <span class="valor">
                                             {{odd.valorFinal}}

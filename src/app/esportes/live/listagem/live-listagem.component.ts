@@ -11,6 +11,7 @@ import {
     MessageService,
     ParametrosLocaisService
 } from '../../../services';
+import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
 @Component({
     selector: 'app-live-listagem',
@@ -330,8 +331,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 nome: this.helperService.apostaTipoLabelCustom(
                     cotacao.chave,
                     jogo.time_a_nome,
-                    jogo.time_b_nome
+                    jogo.time_b_nome,
                 ),
+                price_change: cotacao.price_change
             },
             mudanca: false,
             cotacao_antiga_valor: null
@@ -420,5 +422,33 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
+    }
+
+    getOddChangeClass(id:string, status:string) {
+        let element = this.el.nativeElement.querySelector(`#${id}`);
+        let elementClassList = Array.from(element.classList);
+
+        switch (status) {
+            case CotationPriceChange.Up:
+                return 'odd-up';
+            case CotationPriceChange.Down:
+                return 'odd-down';
+            case CotationPriceChange.Same:
+                if (elementClassList.includes('odd-up')) {
+                    return 'odd-up'
+                };
+
+                if (elementClassList.includes('odd-down')) {
+                    return 'odd-down'
+                };
+        };
+    }
+
+    sanitazerId(id:string) {
+        const sanitazerSignals = id.replace(/[+-.]/g, '');
+
+        const sanitazedId = /^\d/.test(sanitazerSignals) ? `_${sanitazerSignals}` : sanitazerSignals;
+
+        return sanitazedId;
     }
 }

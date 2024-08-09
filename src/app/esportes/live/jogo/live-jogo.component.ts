@@ -16,6 +16,7 @@ import {
     ParametrosLocaisService, MessageService, JogoService,
     LiveService, BilheteEsportivoService, HelperService
 } from '../../../services';
+import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
 @Component({
     selector: 'app-live-jogo',
@@ -254,7 +255,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             cotacao: {
                 chave: cotacao.chave,
                 valor: cotacao.valor,
-                nome: cotacao.nome
+                nome: cotacao.nome,
+                price_change: cotacao.price_change
             },
             mudanca: false,
             cotacao_antiga_valor: null
@@ -404,4 +406,33 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             LoginModalComponent, options
         );
     }
+
+    getOddChangeClass(id:string, status:string) {
+        let element = this.el.nativeElement.querySelector(`#${id}`);
+        let elementClassList = element.classList;
+        
+        switch (status) {
+            case CotationPriceChange.Up:
+                return 'odd-up';
+            case CotationPriceChange.Down:
+                return 'odd-down';
+            case CotationPriceChange.Same:
+                if (elementClassList.includes('odd-up')) {
+                    return 'odd-up'
+                };
+
+                if (elementClassList.includes('odd-down')) {
+                    return 'odd-down'
+                };
+        };
+    }
+
+    sanitazerId(id:string) {
+        const sanitazerSignals = id.replace(/[+-.]/g, '');
+
+        const sanitazedId = /^\d/.test(sanitazerSignals) ? `_${sanitazerSignals}` : sanitazerSignals;
+
+        return sanitazedId;
+    }
+
 }

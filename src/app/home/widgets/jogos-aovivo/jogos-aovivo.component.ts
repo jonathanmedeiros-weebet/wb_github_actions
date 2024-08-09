@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnDe
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 import { BilheteEsportivoService, HelperService, JogoService, LiveService, ParametrosLocaisService } from 'src/app/services';
 
 @Component({
@@ -116,7 +117,6 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
 
                                     jogo.cotacoes.map(cotacao => {
                                         cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
-                                        cotacao.oddChange = 'up'
                                         cotacao.valorFinal = this.helperService.calcularCotacao2String(
                                             cotacao.valor,
                                             cotacao.chave,
@@ -290,6 +290,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
                 chave: cotacao.chave,
                 valor: cotacao.valor,
                 nome: this.helperService.apostaTipoLabel(cotacao.chave, 'sigla'),
+                price_change: cotacao.price_change
             },
             mudanca: false,
             cotacao_antiga_valor: null
@@ -313,4 +314,33 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
             this.bilheteService.atualizarItens(this.itens);
         }
     }
+
+    getOddChangeClass(id:string, status:string) {
+        let element = this.el.nativeElement.querySelector(`#${id}`);
+        let elementClassList = Array.from(element.classList);
+        
+        switch (status) {
+            case CotationPriceChange.Up:
+                return 'odd-up';
+            case CotationPriceChange.Down:
+                return 'odd-down';
+            case CotationPriceChange.Same:
+                if (elementClassList.includes('odd-up')) {
+                    return 'odd-up'
+                };
+
+                if (elementClassList.includes('odd-down')) {
+                    return 'odd-down'
+                };
+        };
+    }
+
+    sanitazerId(id:string) {
+        const sanitazerSignals = id.replace(/[+-.]/g, '');
+
+        const sanitazedId = /^\d/.test(sanitazerSignals) ? `_${sanitazerSignals}` : sanitazerSignals;
+
+        return sanitazedId;
+    }
+
 }
