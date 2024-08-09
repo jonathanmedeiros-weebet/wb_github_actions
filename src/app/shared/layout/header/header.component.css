@@ -615,10 +615,11 @@ body .change-theme {
     }
     .menu-perfil {
         height: 32px;
-    }    
+    }
     .btn-register{
         min-width: 95px !important;
         margin-right: 5px;
+        white-space: nowrap;
     }
     .menu-conta .btn{
         padding: 5px 10px;
