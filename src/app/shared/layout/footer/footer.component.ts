@@ -110,9 +110,35 @@ export class FooterComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        if (config.slug === 'zilionz.com') {
-            anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init();
+        let appendReclameAqui = true;
+        let reclameAquiDataId = '';
+
+        switch (this.slug) {
+            case 'zilionz.com':
+                anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init();
+                reclameAquiDataId = 'MTUyMzg1ODp6aWxsaW9uei1iZXQ=';
+                break;
+            case 'saqbet.tv':
+                reclameAquiDataId = 'eFVwSWdfU2FSRm42dmZOLTpzYXFiZXQtdHY=';
+                break;
+            default:
+                appendReclameAqui = false;
         }
+
+        if (appendReclameAqui) {
+            this.appendReclameAqui(reclameAquiDataId);
+        }
+    }
+
+    appendReclameAqui(dataId: string) {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.id = 'ra-embed-verified-seal';
+        script.src = 'https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js';
+        script.setAttribute('data-id', dataId);
+        script.setAttribute('data-target', 'ra-verified-seal');
+        script.setAttribute('data-model', '2');
+        document.body.appendChild(script);
     }
 
     temRedesSociais() {
