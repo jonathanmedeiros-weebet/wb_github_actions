@@ -13,7 +13,7 @@ interface PrinterSetting {
   printerWidth?: number;
 }
 
-const production = true;
+const production = false;
 const _host = production ? 'https://central.demo.wee.bet' : '//localhost';
 const _loki = production ? 'https://loki1.weebet.tech' : '//localhost:8000';
 const _center = production ? 'https://center7.wee.bet' : 'https://hermes.wee.bet';
