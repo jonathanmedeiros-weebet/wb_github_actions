@@ -78,7 +78,7 @@ const router = new VueRouter({
     },
     {
       path: '/menu',
-      name: 'menu',
+      name: 'userMenu',
       component: MenuView,
       meta: {
         auth: production

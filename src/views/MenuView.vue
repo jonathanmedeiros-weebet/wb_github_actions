@@ -13,16 +13,16 @@
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
             R$ {{ isCreditoVisible ? '*******' : credit }}
-            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click.native="toggleCreditoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click="toggleCreditoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click="toggleCreditoVisibility" />
           </span>
         </div>
         <div class="wallet__item">
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
             R$ {{  isSaldoVisible ? '*******' : balance }}
-            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click.native="toggleSaldoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click.native="toggleSaldoVisibility" />
+            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click="toggleSaldoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click="toggleSaldoVisibility" />
           </span>
         </div>
         <div class="wallet__shortcuts">
@@ -94,7 +94,7 @@ import { ToastType } from '@/enums';
 import { useToastStore } from '@/stores';
 
 export default {
-  name: 'menu',
+  name: 'userMenu',
   components: {
     IconEye,
     IconEyeClose,
@@ -165,8 +165,8 @@ export default {
       }
     },
     async handleConsultTicket(ticketCode) {
-      getBetByCode(ticketCode)
-      .then(resp => {
+      try {
+        const resp = await getBetByCode(ticketCode);
         if(resp.results){
           this.$router.push({ 
             name: 'close-bet',
@@ -176,15 +176,14 @@ export default {
             }
           });
         }
-      })
-      .catch(error => {
+      } catch (error) {
         this.toastStore.setToastConfig({
           message: error.errors.message,
           type: ToastType.DANGER,
           duration: 5000
-        })
+        });
         this.handleCloseConsultTicketModal();
-      })
+      }
     }
   }
 }
