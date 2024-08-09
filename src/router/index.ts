@@ -15,6 +15,7 @@ import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 import { checkToken, localStorageService, prepareConfigClient, verifyToken } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
 import CloseBetView from '@/views/CloseBetView.vue'
+import PopularLotteryView from '@/views/PopularLotteryView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -135,6 +136,14 @@ const router = new VueRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
+      meta: {
+        auth: production
+      }
+    },
+    {
+      path: '/popular-lottery',
+      name: 'popular-lottery',
+      component: PopularLotteryView,
       meta: {
         auth: production
       }
