@@ -3,8 +3,10 @@
         <div class="card__body">
 
             <div class="card__body-title">
-                <p class="card__body-title">Total de Entrada</p>
-                <p class="card__body-title-value">{{ formatCurrencyMoney(totalValue) }}</p>
+                <!-- TODO: BUSCAR NA API O TOTAL DE ENTRADAS -->
+                <!-- <p class="card__body-title">Total de Entrada</p> -->
+                <p class="card__body-title">Saldo</p>
+                <p class="card__body-title-value">{{ formatCurrencyMoney(data.balance) }}</p>
             </div>
             <div class="card__body-icon" @click="handleClick">
                 <icon-restart
@@ -46,7 +48,7 @@
                         height="10.465px"
                         
                         :fill="colors[categoryIndex]"
-                        />{{ item.tile }}</p>
+                        />{{ item.title }}</p>
                 </div>
 
                 <div class="card__categories-value">
