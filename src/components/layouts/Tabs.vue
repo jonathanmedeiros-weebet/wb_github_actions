@@ -7,8 +7,8 @@
       :key="tab.name"
       :to="tab.route"
     >
-      <component :is="tab.icon" :color="tab.actived ? '#0be58e' : '#ffffff'"/>
-      {{ tab.name }}
+      <component :is="tab.icon" :color="tab.actived ? '#0be58e' : '#ffffff'" :count="itemCount"/>
+      {{ tab.name }} 
     </RouterLink>
   </div>
 </template>
@@ -21,6 +21,7 @@ import IconHome from '../icons/IconHome.vue'
 import IconMenu from '../icons/IconMenu.vue'
 import IconTicket from '../icons/IconTicket.vue'
 import IconValidation from '../icons/IconValidation.vue'
+import { useTicketStore } from '@/stores'
 
 export default {
   name: 'w-tabs',
@@ -31,6 +32,11 @@ export default {
     IconTicket,
     IconArticle,
     IconMenu
+  },
+  data() {
+    return {
+      ticketStore: useTicketStore()
+    }
   },
   computed: {
     tabs() {
@@ -66,6 +72,9 @@ export default {
           actived: this.verifyIfRouteIsActived('/menu')
         }
       ]
+    },
+    itemCount() {
+      return Object.keys(useTicketStore().items).length;
     }
   },
   methods: {
