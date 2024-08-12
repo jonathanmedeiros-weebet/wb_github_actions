@@ -158,13 +158,13 @@ export default {
 
         display: flex;
         flex-direction: column;
-        gap: 20px;
         width: 100%;
     }
 
     ::v-deep .header {
         background: transparent;
         border: none;
+        margin-bottom: 20px;
     }
 
     &__title {
@@ -175,17 +175,18 @@ export default {
 
         margin-left: -20px;
 
+        max-width: 250px;
+        text-align: center;
         color: #FFFFFF80
     }
 
     &__teams {
         display: flex;
         justify-content: center;
-        gap: 50px;
         align-items: flex-start;
 
         &--slim {
-            gap: 18px;
+            gap: 0;
             align-items: center;
         }
     }
@@ -194,10 +195,13 @@ export default {
     &__teams--slim .team__image {
         height: 30px;
         width: 30px;
+        margin-bottom: 0;
     }
 
     &__teams--slim .team__versus {
         margin-top: 0;
+        margin-left: 18px;
+        margin-right: 18px;
     }
 } 
 
@@ -206,11 +210,17 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
     width: 100px;
+
+    &__versus {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
     &__image {
         width: 50px;
         height: 50px;
+        margin-bottom: 20px;
     }
 
     &__name {

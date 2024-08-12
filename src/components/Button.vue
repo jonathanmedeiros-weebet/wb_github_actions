@@ -62,20 +62,28 @@ export default {
   font-weight: 400;
   line-height: 14px;
 
+  color: #0a0a0a;
   color: var(--color-background);
+  background: #0be58e;
   background: var(--color-primary);
   
   &--primary {
+    color: #0a0a0a;
     color: var(--color-background);
+    background: #0be58e;
     background: var(--color-primary);
   }
 
   &--secondary {
+    color: #ffffff;
     color: var(--color-text);
+    background: #0a0a0a;
     background: var(--color-background);
   }
   &--secondary-light {
+    color: #ffffff;
     color: var(--color-text);
+    background: #181818;
     background: var(--color-background-input);
   }
 }

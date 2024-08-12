@@ -15,6 +15,7 @@ import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 import { checkToken, localStorageService, prepareConfigClient, verifyToken } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
 import CloseBetView from '@/views/CloseBetView.vue'
+import PopularLotteryView from '@/views/PopularLotteryView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -35,12 +36,13 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/validation-detail',
+      path: '/validation-detail/:id',
       name: 'validation-detail',
       component: ValidationDetailView,
       meta: {
         auth: production
-      }
+      },
+      props: true
     },
     {
       path: '/validation',
@@ -77,7 +79,7 @@ const router = new VueRouter({
     },
     {
       path: '/menu',
-      name: 'menu',
+      name: 'userMenu',
       component: MenuView,
       meta: {
         auth: production
@@ -92,12 +94,13 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/movements',
+      path: '/movements/:dateIni?/:dateEnd?',
       name: 'movements',
       component: MovementsView,
       meta: {
         auth: production
-      }
+      },
+      props: true
     },
     {
       path: '/reckoning',
@@ -139,6 +142,14 @@ const router = new VueRouter({
         auth: production
       }
     },
+    {
+      path: '/popular-lottery',
+      name: 'popular-lottery',
+      component: PopularLotteryView,
+      meta: {
+        auth: production
+      }
+    },
   ]
 })
 
@@ -148,7 +159,7 @@ router.beforeEach(async (to, from, next) => {
 
   if(!Boolean(from.name)) {
     prepareConfigClient(to)
-    checkToken();
+    // checkToken(); // TODO: verificar endpoint de verificar token
   }
 
   if (Boolean(to.meta?.auth)) {

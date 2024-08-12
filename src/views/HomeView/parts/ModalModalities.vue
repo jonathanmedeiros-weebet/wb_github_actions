@@ -90,6 +90,8 @@ export default {
         align-items: center;
         justify-content: center;
         gap: 10px;
+        line-height: 30px;
+
 
         color: var(--color-text);
         font-size: 16px;

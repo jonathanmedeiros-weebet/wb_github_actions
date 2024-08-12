@@ -12,17 +12,17 @@
         <div class="wallet__item">
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
-            {{ isCreditoVisible ? '*******' : credit }}
-            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click.native="toggleCreditoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            R$ {{ isCreditoVisible ? '*******' : credit }}
+            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click="toggleCreditoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click="toggleCreditoVisibility" />
           </span>
         </div>
         <div class="wallet__item">
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
-            {{ isSaldoVisible ? '*******' : balance }}
-            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click.native="toggleSaldoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click.native="toggleSaldoVisibility" />
+            R$ {{  isSaldoVisible ? '*******' : balance }}
+            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click="toggleSaldoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" @click="toggleSaldoVisibility" />
           </span>
         </div>
         <div class="wallet__shortcuts">
@@ -45,23 +45,23 @@
         <div class="more-options__card">
           <button class="more-options__item" @click="handleNavigate('/movements')">
             <IconMoney class="more-options__icon" />
-            Movimentações
+            <span class="more-options__text-icon">Movimentações</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/change-password')">
             <IconPassKey class="more-options__icon" />
-            Alterar senha
+            <span class="more-options__text-icon">Alterar senha</span>
           </button>
-          <button class="more-options__item" @click="handleNavigate('/config')">
+          <button class="more-options__item" @click="handlePrinterSetting">
             <IconSettings class="more-options__icon" />
-            Configurações
+            <span class="more-options__text-icon">Configurações</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/results')">
             <IconFactCheck class="more-options__icon" />
-            Resultados
+            <span class="more-options__text-icon">Resultados</span>
           </button>
           <button class="more-options__item" @click="handleLogout">
             <IconLogout class="more-options__icon" />
-            Sair
+            <span class="more-options__text-icon">Sair</span>
           </button>
         </div>
       </div> 
@@ -87,14 +87,14 @@ import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
 import { logout, getBalance, getBetByCode } from '@/services';
-import { formatCurrency } from '@/utilities';
+import { formatCurrency, wbPostMessage } from '@/utilities';
 import { localStorageService } from "@/services";
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import { useToastStore } from '@/stores';
 
 export default {
-  name: 'menu',
+  name: 'userMenu',
   components: {
     IconEye,
     IconEyeClose,
@@ -153,6 +153,9 @@ export default {
     handleCloseConsultTicketModal() {
       this.isConsultTicketModalVisible = false;
     },
+    handlePrinterSetting() {
+      wbPostMessage('listPrinters')
+    },
     async getData() {
       try {
         const res = await getBalance();
@@ -162,10 +165,8 @@ export default {
       }
     },
     async handleConsultTicket(ticketCode) {
-      console.log("codigo", ticketCode);
-      getBetByCode(ticketCode)
-      .then(resp => {
-        console.log(resp);
+      try {
+        const resp = await getBetByCode(ticketCode);
         if(resp.results){
           this.$router.push({ 
             name: 'close-bet',
@@ -175,16 +176,14 @@ export default {
             }
           });
         }
-      })
-      .catch(error => {
-        console.log(error);
+      } catch (error) {
         this.toastStore.setToastConfig({
           message: error.errors.message,
           type: ToastType.DANGER,
           duration: 5000
-        })
+        });
         this.handleCloseConsultTicketModal();
-      })
+      }
     }
   }
 }
@@ -192,6 +191,7 @@ export default {
 
 <style lang="scss" scoped>
 .menu {
+  color: #ffffff;
   color: var(--color-text);
   height: auto;
   width: 100%;
@@ -200,7 +200,6 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
     margin: 0;
     padding: 0 20px;
     padding-top: 70px;
@@ -210,7 +209,6 @@ export default {
 .user-info {
   display: flex;
   align-items: center;
-  gap: 14px;
 
   &__icon {
     width: 40px;
@@ -221,19 +219,22 @@ export default {
   &__welcome {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    margin-top: -10px;
+    margin-left: 10px;
   }
 
   &__name {
     font-size: 24px;
     font-weight: 500;
     line-height: 24px;
+    
   }
 
   &__greeting {
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
+    color: #ffffff80;
     color: var(--color-text-input);
   }
 }
@@ -241,10 +242,11 @@ export default {
 .wallet {
   width: 100%;
   height: auto;
+  margin-top: 18px;
+  background-color: #181818;
   background-color: var(--color-background-input);
   border-radius: 10px;
   padding: 22px 18px;
-  gap: 29px;
   padding-top: 16px;
 
   &__item {
@@ -253,6 +255,7 @@ export default {
 
   &__label {
     display: flex;
+    color: #ffffff;
     color: var(--color-text);
     opacity: 0.5;
     font-size: 13px; 
@@ -261,6 +264,7 @@ export default {
   &__value {
     display: flex;
     align-items: center;
+    color: #ffffff;
     color: var(--color-text);
     font-size: 20px; 
   }
@@ -269,6 +273,7 @@ export default {
     margin-left: 15px;
     cursor: pointer;
     color: #ffffff80;
+    color: var(--color-text-input);
     opacity: 0.5;
   }
 
@@ -281,17 +286,20 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #ffffff;
     background-color: var(--color-text);
     border: none;
     border-radius: 18px;
+    color: #0a0a0a;
     color: var(--color-background); 
-    padding: 10px;
-    gap: 2px;
+    padding: 7px;
     white-space: nowrap;
     font-size: 10px;
+    margin-right: 10px;
   }
 
   &__icon {
+    fill: #181818;
     fill: var(--color-background-input);
     align-items: center;
   }
@@ -302,6 +310,7 @@ export default {
   flex-direction: column;
 
   &__text {
+    color: #ffffff;
     color: var(--color-text);
     font-size: 16px;
     padding-bottom: 10px;
@@ -309,13 +318,14 @@ export default {
 
   &__card {
     width: 100%;
+    background-color: #181818;
     background-color: var(--color-background-input);
     padding: 18px 8px;
     padding-top: 8px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    
   }
 
   &__item {
@@ -326,7 +336,9 @@ export default {
     color: inherit;
     padding-top: 10px;
     font-size: 14px;
-    gap: 8px;
+  }
+  &__text-icon {
+    margin-left: 10px;
   }
 }
 </style>

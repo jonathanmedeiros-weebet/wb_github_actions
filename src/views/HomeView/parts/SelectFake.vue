@@ -40,7 +40,6 @@ export default {
     &__title {
         display: flex;
         align-items: center;
-        gap: 8px;
 
         font-weight: 400;
         line-height: 23.44px;

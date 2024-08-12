@@ -32,7 +32,7 @@
           <span>{{ league.label }}</span>
         </SelectFake>
 
-        <GameList @gameClick="handleGameDetailClick" />
+        <GameList :infiniteScroll="true" @gameClick="handleGameDetailClick" />
       </template>
     </section>
 
@@ -60,7 +60,7 @@
     <ModalSearch
       v-if="showModalSearch"
       @closeModal="handleCloseSearchModal"
-      @change="handleSearch"
+      @click="handleGameDetailClick"
     />
   </div>
 </template>
@@ -173,12 +173,13 @@ export default {
   methods: {
     async pageLoad() {
       this.loading = true;
-      if(Boolean(this.league)) {
-        await this.handleLeague(this.league);
-      } else {
-        await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
-      }
-      await this.prepareChampionshipPerRegionList(this.modality.id);
+
+      await Promise.all([
+        Boolean(this.league)
+          ? this.handleLeague(this.league)
+          : this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD')),
+        this.prepareChampionshipPerRegionList(this.modality.id)
+      ]);
 
       if(this.liveActived && this.socket.connected()){
         this.behaviorLiveEvents();
@@ -309,33 +310,30 @@ export default {
           campeonato,
           finalizado: finished
         } = event;
-       
-        const championshipList = this.homeStore.championshipList.map((championship) => {
-          const championshipIsEqual = championship._id == campeonato._id;
-          if(championshipIsEqual) {
-            const gameIndex = championship.jogos.findIndex(game => game._id == id);
-            const hasGame = gameIndex != -1;
-            
-            if(hasGame) {
-              if(finished) {
-                championship.jogos.splice(gameIndex);
-                hasChange = true;
-              } else {
-                hasChange = true;
-                const game = championship.jogos[gameIndex];
-                const quotes = prepareLiveQuote(game.cotacoes ?? [], newQuotes);
 
-                championship.jogos[gameIndex] = {
-                  ...game,
-                  cotacoes: quotes,
-                  info: newInfo,
-                }
+        const championshipList = [ ...this.homeStore.championshipList ];
+        const championshipIndex = championshipList.findIndex((championship) => championship._id == campeonato._id);
+        const hasChampionship = championshipIndex =! -1;
+
+        if(hasChampionship) {
+          const gameIndex = championshipList[championshipIndex].jogos.findIndex(game => game._id == id);
+          const hasGame = gameIndex != -1;
+          if(hasGame) {
+            if(finished) {
+              championshipList[championshipIndex].jogos.splice(gameIndex);
+              hasChange = true;
+            } else {
+              hasChange = true;
+              const game = championshipList[championshipIndex].jogos[gameIndex];
+              const quotes = prepareLiveQuote(game.cotacoes ?? [], newQuotes);
+              championshipList[championshipIndex].jogos[gameIndex] = {
+                ...game,
+                cotacoes: quotes,
+                info: newInfo,
               }
             }
           }
-
-          return championship;
-        })
+        }
 
         if(hasChange) {
           this.homeStore.setChampionshipList(championshipList)
@@ -351,7 +349,12 @@ export default {
     },
     async handleModality(modalityId) {
       this.loading = true;
+      console.log('modalityId', modalityId);
 
+      if(modalityId === Modalities.POPULAR_LOTTERY){
+        this.$router.push({ name: 'popular-lottery' });
+        return; 
+      }
       const modality = this.modalityList.find(modality => modality.id === modalityId);
       this.homeStore.setModality(modality);
       this.homeStore.setLeague(null);
@@ -468,10 +471,15 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  padding-bottom: 100px;
+  overflow: hidden;
   &__body {
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
+=======
+    gap: 1px;
+    overflow: hidden;
+>>>>>>> e0b67e093665a9ae2aa2290934bce32b07b3c1c2
   }
 
   &__league-select {
@@ -482,6 +490,15 @@ export default {
     width: 16px;
     height: 16px;
     border-radius: 50px;
+    margin-right: 8px;
+  }
+
+  &__league-select svg {
+    width: 18px;
+    height: 18px;
+    border-radius: 50px;
+    margin-right: 8px;
+    margin-left: -1px;
   }
 }
 </style>

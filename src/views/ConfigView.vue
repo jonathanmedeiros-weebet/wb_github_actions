@@ -32,17 +32,17 @@ import Header from '@/components/layouts/Header.vue'
 import ButtonSwitch from '@/components/ButtonSwitch.vue'
 
 export default {
-  name: 'config',
-  components: { 
-    Header,
-    ButtonSwitch
-  },
-  data() {
-    return {
-      bluetooh: false,
-      print: false,
-    };
-  }
+    name: 'config',
+    components: { 
+        Header,
+        ButtonSwitch
+    },
+    data() {
+        return {
+            bluetooh: false,
+            print: false,
+        };
+    },
 }
 
 </script>

@@ -2,8 +2,9 @@
     <div class="game">
         <div class="game__teams">
             <span
-                class="game__team"
                 v-for="(team, index) in teams"
+                class="game__team"
+                :class="{'game__team--first': index == 0}"
                 :key="index"
             >
                 <img :src="team.image" @error="changeSrcWhenImageError" />
@@ -28,7 +29,7 @@
             <div
                 class="game__quota"
                 v-for="(quote, index) in quotes"
-                :class="{'game__quota--selected': quote.selected}"
+                :class="{'game__quota--selected': quote.chave == quoteSelected}"
                 :key="index"
                 @click="handleItemClick(quote)"
             >
@@ -56,7 +57,7 @@
 </template>
 
 <script>
-import { convertInMomentInstance } from '@/utilities';
+import { formatShortDateTimeBR } from '@/utilities';
 import IconLock from '@/components/icons/IconLock.vue';
 import IconArrowFillUp from '@/components/icons/IconArrowFillUp.vue';
 import { QuotaStatus } from '@/enums';
@@ -102,7 +103,7 @@ export default {
             return this.game.total_cotacoes;
         },
         dateTime() {
-            return convertInMomentInstance(this.game.horario).format('DD/MM HH:mm');
+            return formatShortDateTimeBR(this.game.horario);
         },
         quotes() {
             const quotes = this.game.cotacoes ?? [];
@@ -125,6 +126,9 @@ export default {
         teamScoreB() {
             return this.game.info.time_b_resultado ?? 0;
         },
+        quoteSelected() {
+            return this.ticketStore.items[this.game._id]?.quoteKey ?? null;
+        }
     },
     methods: {
         changeSrcWhenImageError (event) {
@@ -180,11 +184,11 @@ export default {
     align-items: flex-start;
     padding: 13px 16px;
     background: var(--color-background-input);
+    margin-top: 1px;
 
     &__teams {
         display: flex;
         flex-direction: column;
-        gap: 8px;
     }
 
     &__team {
@@ -200,6 +204,10 @@ export default {
         white-space: nowrap;
         text-overflow: ellipsis;
         width: calc(100vw - 250px);
+
+        &--first {
+            margin-bottom: 8px;
+        }
     }
 
     &__team img {
@@ -210,11 +218,11 @@ export default {
     &__info {
         display: flex;
         align-items: center;
-        gap: 8px;
         font-size: 12px;
         line-height: 12px;
         font-weight: 400;
         color: #666666;
+        margin-top: 8px;
     }
 
     &__pontuation {
@@ -232,6 +240,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: 8px;
     }
 
     &__quotes {
@@ -282,6 +291,7 @@ export default {
         font-style: normal;
         font-weight: 300;
         line-height: normal;
+        margin-left: 8px;
     }
 
     &__score {

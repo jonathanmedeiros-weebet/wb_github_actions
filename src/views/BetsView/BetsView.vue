@@ -26,10 +26,11 @@
           id="inputDate"
           name="inputDate"
           label="Data"
-          type="date"
+          type="text"
           placeholder="dd/mm/aaaa"
           @click="handleOpenCalendarModal"
-          v-model="dateFilter"
+          v-model="dateFilterView"
+          :readonly="true"
         />
         <w-button
           id="btn-filter"
@@ -231,6 +232,7 @@
 
       <ModalCalendar
         v-if="showModalCalendar"
+        :initialDate="dateFilter"
         @closeModal="handleCloseCalendarModal"
         @change="handleCalendar"
       />
@@ -276,7 +278,7 @@ export default {
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
-      dateFilter: '',
+      dateFilter: now(),
       activeButton: 'todos',
       apostador: '',
       bets: [],
@@ -295,6 +297,17 @@ export default {
       options: null,
       toastStore: useToastStore(),
       isLastBet: false,
+    }
+  },
+  watch: {
+    activeButton(newValue, oldValue){
+      this.parametros.status = newValue == 'todos' ? '' : newValue; 
+      this.getApiBets();
+    },
+  },
+  computed: {
+    dateFilterView() {
+      return this.dateFilter ? convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY") : '';
     }
   },
   methods: {
@@ -330,14 +343,15 @@ export default {
       this.$refs.modalCancel.handleClose();
       this.handleCloseCancelModal();
     },
-    handleOpenCalendarModal() {      
+    handleOpenCalendarModal() {    
+      event.stopPropagation();
       this.showModalCalendar = true;
     },
     handleCloseCalendarModal() {
       this.showModalCalendar = false;
     },
     handleCalendar(dateTime) {
-      this.dateFilter = dateTime.format("YYYY-MM-DD");
+      this.dateFilter = dateTime;
       this.handleCloseCalendarModal();
     },
     setActive(button) {
@@ -349,7 +363,8 @@ export default {
     getResults() {
       this.parametros.codigo = this.code.replace(/-/g, '');
       this.parametros.dataInicial = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
-      this.parametros.dataFinal = '';
+      //TODO: Será alterada a dataFinal após criação do componente de calendário com ranger de data.
+      this.parametros.dataFinal = this.parametros.dataInicial;
       this.parametros.status = this.activeButton == 'todos' ? '' : this.activeButton;
       this.parametros.apostador = this.apostador;
       this.parametros.sort = '-horario'
@@ -362,7 +377,6 @@ export default {
       this.showResults = false;
       findBet(this.parametros)
       .then(resp => {
-        console.log(resp);
         this.bets = resp.results;
         this.showResults = true;
       })
@@ -491,25 +505,15 @@ export default {
       this.handleCloseCancelModal();
       
     }
-  },
-  watch: {
-    activeButton(newValue, oldValue){
-      this.parametros.status = newValue == 'todos' ? '' : newValue; 
-      this.getApiBets();
-
-    },
-    dateFilter(newValue) {
-      this.dateFilter = newValue;   
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .bets {  
-
-  height: 100%;
-  justify-content: space-between;
+  height: 100;
+  padding-bottom: 100px;
+  overflow-y: auto;
 
   &__container {
     display: flex;
@@ -519,6 +523,7 @@ export default {
   }
 
   &__contente {
+    min-height: 390px;
     display: flex;
     flex-direction: column;
   }

@@ -4,31 +4,38 @@
       :title="title" 
       :showCalendarButton="true" 
       :showBackButton="true" 
+      @calendarClick="handleOpenCalendarModal"
+    />
+    <ModalCalendar
+      v-if="showModalCalendar"
+      :initialDate="dateSelected"
+      @closeModal="handleCloseCalendarModal"
+      @change="handleCalendar"
     />
     <div class="movements__container">
       <span class="date">
-        {{ startDate }} - {{endDate}}
-        <IconClose class="date__close" />
+        {{ dateFormatedWithYear }}
+        <IconClose class="date__close" @click.native="resetDateToCurrent" />
       </span>
-      <div 
-        class="information"
-        v-for="(movement, movementIndex) in dates" 
-        :key="movementIndex" 
-      >
-        <div class="information__text">
-          <span class="information__date">{{ movement.infoDate }}</span>
-        </div>
+      <div v-if="isBalanceDataEmpty" class="no-data">
+        Nenhuma informação nesse período
+      </div>
+      <div v-else>
         <div 
-          class="information__item"
-          v-for="(i, index) in movement.movements" 
-          :key="index" 
+          class="information"
+          v-for="(movements, date) in balanceData" 
+          :key="date"
         >
-          <MovementItem  
-            :value="i.value"
-            :debit="i.type"
-            :date="i.date"
-          />
-          
+          <div class="information__text">
+            <span class="information__date">{{date}}</span>
+          </div>
+          <div class="information__item" v-for="(movement, index) in movements" :key="index">
+            <MovementItem  
+              :value="formatCurrency(movement.valor)"
+              :debit="movement.descricao"
+              :date="movement.data"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -41,6 +48,9 @@ import MovementItem from './parts/MovementItem.vue';
 import Header from '@/components/layouts/Header.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
+import { getMovements } from '@/services';
+import { formatCurrency, now, formatDateBR } from '@/utilities';
+import ModalCalendar from './../HomeView/parts/ModalCalendar.vue';
 
 export default {
   name: 'movements',
@@ -49,79 +59,118 @@ export default {
     SelectFake, 
     IconClose, 
     IconAttachMoney, 
-    MovementItem 
+    MovementItem,
+    ModalCalendar 
+  },
+  props: {
+    dateIni: {
+      type: String,
+      default: null
+    },
+    dateEnd: {
+      type: String,
+      default: null
+    }
   },
   data() {
     return {  
-      startDate: '04/06/2024',
-      endDate: '06/06/2024',
+      showModalCalendar: false,
+      startDate: this.dateIni ?? now().format('YYYY-MM-DD'),
+      endDate: this.dateEnd ?? now().format('YYYY-MM-DD'),
       title: 'Movimentações',
-      dates: [
-          {
-            infoDate: 'Seg 04 de Jun de 2024',
-            movements: [
-              {value: '30,00', type: 'Crédito', date: '04/06/2024'},
-              {value: '50,00', type: 'Crédito', date: '04/06/2024'},
-              {value: '10,00', type: 'Débito', date: '04/06/2024'},
-              {value: '11,00', type: 'Crédito', date: '04/06/2024'}
-            ]
-          },
-          {
-            infoDate: 'Ter 05 de Jun de 2024 ',
-            movements: [
-              {value: '25,00', type: 'Débito', date: '05/06/2024', },
-              {value: '15,00', type: 'Crédito', date: '05/06/2024', },
-              {value: '8,00', type: 'Débito', date: '05/06/2024', },
-              {value: '2,00', type: 'Crédito', date: '05/06/2024', },
-              {value: '750,00', type: 'Crédito', date: '05/06/2024', }
-            ]
-          },
-          {
-            infoDate: 'Qua 06 de Jun de 2024 ',
-            movements: [
-              {value: '41,00', type: 'Débito', date: '06/06/2024', },
-              {value: '13,00', type: 'Crédito', date: '06/06/2024', },
-              {value: '100,00', type: 'Débito', date: '06/06/2024', },
-              {value: '10,00', type: 'Crédito', date: '06/06/2024', }
-            ]
-          }
-
-      ]
+      balanceData: {},
+      dateSelected: now().format('YYYY-MM-DD')
     };
   },
-  methods: {
-    handleSelectModalClick() {
-      alert('Modal select');
+  computed: {
+    dateFormatedWithYear() {
+      const startDateFormatted = formatDateBR(this.startDate);
+      const endDateFormatted = formatDateBR(this.endDate);
+      return `${startDateFormatted} - ${endDateFormatted}`;
     },
+    isBalanceDataEmpty() {
+      return Object.keys(this.balanceData).length === 0;
+    }
+  },
+  mounted(){
+    this.getBalance();
+  },
+  methods: {
+    handleOpenCalendarModal() {
+      this.showModalCalendar = true;
+    },
+    handleCloseCalendarModal() {
+      this.showModalCalendar = false;
+    },
+    async handleCalendar(dateTime) {
+      this.startDate = dateTime.format('YYYY-MM-DD');
+      this.endDate = dateTime.format('YYYY-MM-DD');
+      this.dateSelected = dateTime.format('YYYY-MM-DD'); 
+      this.handleCloseCalendarModal();
+      this.getBalance();
+    },
+    async getBalance() {
+      try {
+        const res = await getMovements(this.startDate, this.endDate);
+        this.balanceData = this.groupMovementsByDate(res.movimentacoes);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    },
+    resetDateToCurrent() {
+      const currentDate = now().format('YYYY-MM-DD');
+      this.startDate = currentDate;
+      this.endDate = currentDate;
+      this.dateSelected = currentDate; 
+      this.getBalance();
+    },
+    formatCurrency(value) {
+      return formatCurrency(value);
+    },
+    groupMovementsByDate(movements) {
+      return movements.reduce((groups, movement) => {
+        const date = movement.data;
+        if (!groups[date]) {
+          groups[date] = [];
+        }
+        groups[date].push(movement);
+        return groups;
+      }, {});
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 .movements {
-  color: var(--color-background);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
-
+  
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 25px;
     padding-top: 15px;
     min-height: 100%;
   }
 }
 
+.no-data {
+  color: #181818;
+  color: var(--color-text-input);
+}
+
 .date {
   border-radius: 50px;
   width: 185px;
+  margin-top: 5px;
   height: 30px;
   opacity: 0.5;
+  background-color: #cf53530d;
   color: var(--color-text);
-  background-color: #FFFFFF0D;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -134,6 +183,7 @@ export default {
 
 .information {
   margin-bottom: -10px;
+  margin-top: 10px;
 
   &__text {
     padding-bottom: 15px;
@@ -141,6 +191,7 @@ export default {
   }
 
   &__date {
+    color: #ffffff;
     color: var(--color-text);
     font-size: 16px;
     font-style: normal;

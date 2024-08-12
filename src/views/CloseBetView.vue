@@ -99,7 +99,7 @@
               :disabled="buttonDisable"
             />
             <w-button
-              text="Confirmar"
+              :text="textButtonConfirm"
               @click="confirmAction"
               :disabled="buttonDisable"
             />
@@ -108,6 +108,7 @@
             <w-button
               text="Compartilhar"
               color="secondary-light"
+              @click="handleShared"
               :disabled="buttonDisable"
             >
               <template #icon-left>
@@ -117,6 +118,7 @@
             <w-button
               text="Imprimir"
               class="button__confirm"
+              @click="handlePrint"
               :disabled="buttonDisable"
             >
               <template #icon-left>
@@ -128,7 +130,7 @@
         <div class="finish" v-if="showCancelButtons">
           <w-button
             id="btn-entrar"
-            text="Encerrar Aposta"
+            :text="textButtonCloseBet"
             value="entrar"
             name="btn-entrar"
             @click="closeBet"
@@ -150,7 +152,7 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
-import { checkLive, closeBet, getBetById, simulateBetClosure, tokenLiveClosing } from '@/services'
+import { checkLive, closeBet, getBetById, printTicket, sharedTicket, simulateBetClosure, tokenLiveClosing } from '@/services'
 import { formatDateTimeBR, formatDateBR, formatCurrency, delay } from '@/utilities'
 import { Modalities } from '@/enums';
 import { useConfigClient, useToastStore } from '@/stores';
@@ -192,6 +194,9 @@ export default {
       newEarningPossibility: null,
       closeRequesterd: false,
       toastStore: useToastStore(),
+      option: useConfigClient().options,
+      textButtonConfirm: 'Confirmar',
+      textButtonCloseBet: 'Encerrar Aposta'
     };
   },
   mounted() {
@@ -227,17 +232,21 @@ export default {
     },
     async closeBet() {
       this.submitting = true;
+      this.textButtonCloseBet = 'Processando...';
       simulateBetClosure(this.bet.id)
-      .then(resp => {
-        this.closeRequesterd = true;
-        this.newQuotation = resp.results.nova_cotacao;
-        this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
-      })
-      .catch(error => {
-        this.newQuotation = null;
-        this.newEarningPossibility = null;
-      })
-      .finally(() => this.submitting = false)
+        .then(resp => {
+          this.closeRequesterd = true;
+          this.newQuotation = resp.results.nova_cotacao;
+          this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
+        })
+        .catch(error => {
+          this.newQuotation = null;
+          this.newEarningPossibility = null;
+        })
+        .finally(() => {
+          this.submitting = false;
+          this.textButtonCloseBet = 'Encerrar Aposta';
+        })
     },
     cancelAction() {
       this.newQuotation = null;
@@ -248,34 +257,52 @@ export default {
     async confirmAction() { 
       if(this.bet) {
         this.submitting = true;
+        this.textButtonConfirm = "Processando...";
         const live = await this.haveLive(this.bet);
         let payload = { apostaId: this.bet.id, version: this.bet.version };
 
         if(live) {
-          const token = await tokenLiveClosing(this.bet.id);
-          const token_aovivo = token ?? null;
-          payload.token = token_aovivo;
-          const { option } = useConfigClient();
-          const timeDelay = option.delay_aposta_aovivo ? option.delay_aposta_aovivo : 10;
+          tokenLiveClosing(this.bet.id)
+            .then(resp => {
+              payload.token = resp.results ?? null;
+            })
+            .catch(error => {
+              this.toastStore.setToastConfig({
+                message: error.errors?.message,
+                type: ToastType.DANGER,
+                duration: 5000
+              })
+            });
+          const timeDelay = this.option.delay_aposta_aovivo ?? 10;
           await delay((timeDelay * 1000));
         }
-        
+
         closeBet(payload)
-        .then(resp => {
-          this.fetchBetDetails();
-          this.newQuotation = null;
-          this.newEarningPossibility = null;
-          this.closeRequesterd = true;
-        })
-        .catch(error => {
-          this.toastStore.setToastConfig({
-            message: error.errors.message,
-            type: ToastType.DANGER,
-            duration: 5000
+          .then(resp => { 
+            this.toastStore.setToastConfig({
+              message: 'Encerrado com sucesso!',
+              type: ToastType.SUCCESS,
+              duration: 5000
+            })
+            this.$router.push({ 
+              name: 'close-bet',
+              params: {
+                id: resp.results.id,
+                action: 'view'
+              }
+            });
           })
-          this.submitting = false;
-        })
-        .finally(() => this.submitting = false)
+          .catch(error => {
+            this.toastStore.setToastConfig({
+              message: error.errors?.message,
+              type: ToastType.DANGER,
+              duration: 5000
+            })
+          })
+          .finally(() => {
+            this.submitting = false;
+            this.textButtonConfirm = "Confirmar";
+          })
       }
     },
     async fetchBetDetails() {
@@ -285,10 +312,10 @@ export default {
       })
       .catch(error => {
         this.toastStore.setToastConfig({
-            message: error.errors.message,
-            type: ToastType.DANGER,
-            duration: 5000
-          })
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
       })
     },
     formatCurrencyMoney(value) {
@@ -320,28 +347,28 @@ export default {
       let result = false;
 
       const found = bet.itens.find((item) => item.ao_vivo);
-      if(found) {
-          return true;
-      }
+      if(found) return true;
 
-      const itensID = bet.itens.map((item) => {
-          return item.jogo_api_id;
-      })
-
+      const itensID = bet.itens.map((item) => item.jogo_api_id)
       const retorno = await checkLive(itensID);
 
       if(retorno.result) {
-          result = true;
+        result = true;
       }
 
       return result;
     },
+    handleShared() {
+      sharedTicket(this.bet);
+    },
+    handlePrint() {
+      printTicket(this.bet)
+    }
   },
 }
 </script>
 <style lang="scss" scoped>
 .close-bet {
-
   padding-bottom: 10px;
 
   &__container {

@@ -23,6 +23,9 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  
+  &__image {
+    margin-bottom: 40px;
+  }
 }
 </style>
