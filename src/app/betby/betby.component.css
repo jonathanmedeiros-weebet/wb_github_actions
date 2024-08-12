@@ -1,3 +1,15 @@
+app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 105;
+    width: 100vw;
+}
+
+app-footer footer {
+    margin-top: 0px;
+}
+
 main {
     padding-top: 92px;
     min-height: 100vh;
