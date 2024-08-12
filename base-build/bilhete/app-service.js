@@ -15,7 +15,7 @@ async function getParams() {
         const response = await fetch(`https://weebet.s3.amazonaws.com/${slug}/param/parametros.json?${timestamp}`)
         const responseJson = await response.json();
         if (responseJson.status == 404 || responseJson.status == 500) {
-            throw responseJson.errors;
+            return false;
         };
      
         return responseJson.opcoes.habilitar_live_tracker;
