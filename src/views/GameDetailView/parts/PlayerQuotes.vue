@@ -138,6 +138,7 @@ export default {
     position: relative;
     z-index: 1;
     height: calc(100vh - 100px);
+    background: #0a0a0a;
     background: var(--color-background);
 
     &__message {
@@ -145,6 +146,7 @@ export default {
         width: 100%;
         padding: 8px 16px;
         font-size: 12px;
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 }
@@ -158,6 +160,7 @@ export default {
         gap: 5px;
 
         padding: 5px;
+        background: #ffffff80;
         background: var(--color-background-input);
 
         &--three-column {
@@ -177,7 +180,7 @@ export default {
 
     &__option {
         min-width: calc(150px / 3);
-        min-height: 40px;
+        background: #0a0a0a;
         background: var(--color-background);
         border: none;
         border-radius: 4px;
@@ -192,6 +195,7 @@ export default {
         }
 
         &--selected {
+            background: #0be58e;
             background: var(--color-primary);
         }
     }
@@ -218,6 +222,7 @@ export default {
     }
 
     &__value {
+        color: #ffffff;
         color: var(--color-text);
         font-size: 12px;
         font-style: normal;

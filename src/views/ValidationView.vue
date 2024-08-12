@@ -93,6 +93,7 @@ export default {
   }
 
   &__text {
+    color: #ffffff80;
     color: var(--color-text-input);
     font-size: 14px;
     text-align: center;
@@ -106,6 +107,7 @@ export default {
 
 ::v-deep .input__group,
 ::v-deep .input__field {
+  background-color: #0a0a0a;
   background-color: var(--color-background);
 }
 </style>

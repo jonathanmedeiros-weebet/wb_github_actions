@@ -58,6 +58,7 @@ export default {
         align-items: center;
         justify-content: flex-start;
         padding: 0 16px;
+        background: #181818;
         background: var(--color-background-input);
     }
 
@@ -68,7 +69,9 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background: #0a0a0a;
         background: var(--color-background);
+        color: #ffffff;
         color: var(--color-text);
     }
 

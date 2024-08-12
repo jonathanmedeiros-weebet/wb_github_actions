@@ -124,12 +124,14 @@ export default {
     position: relative;
     z-index: 1;
     height: calc(100vh - 100px);
+    background: #0a0a0a;
     background: var(--color-background);
     &__message {
         display: flex;
         width: 100%;
         padding: 8px 16px;
         font-size: 12px;
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 }
@@ -139,8 +141,9 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+        gap: 10px;
         padding: 13px 16px;
-
+        background: #181818 ;
         background: var(--color-background-input);
 
         &--grid {
@@ -152,6 +155,7 @@ export default {
     &__option {
         height: 54px;
         width: 100%;
+        background: #0a0a0a;
         background: var(--color-background);
         border: none;
         border-radius: 4px;
@@ -171,6 +175,7 @@ export default {
         }
 
         &--selected {
+            background: #0be58e;
             background: var(--color-primary);
         }
     }
@@ -207,6 +212,7 @@ export default {
 
     &__option--selected &__label,
     &__option--selected &__value {
+        color: #0a0a0a;
         color: var(--color-background);
     }
 
@@ -225,6 +231,7 @@ export default {
     }
 
     &__value {
+        color: #ffffff;
         color: var(--color-text);
         font-size: 14px;
         font-style: normal;
@@ -234,6 +241,7 @@ export default {
 }
 
 ::v-deep .collapse__item {
+    background: #0a0a0a;
     background: var(--color-background);
     padding: 13px 24px;
 }

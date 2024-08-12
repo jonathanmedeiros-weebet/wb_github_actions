@@ -312,15 +312,16 @@ export default {
 
         width: 100%;
         overflow-y: auto;
-        -ms-overflow-style: none;  /* Internet Explorer 10+ */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;  
+        scrollbar-width: none;  
 
         border-bottom: 1px solid #ffffff1a;
+        background: #181818;
         background: var(--color-background-input);
     }
 
     &__filters::-webkit-scrollbar {
-        display: none;  /* WebKit-based browsers */
+        display: none;  
     }
 
     &__filter {

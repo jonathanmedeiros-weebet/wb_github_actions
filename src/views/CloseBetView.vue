@@ -180,7 +180,7 @@ export default {
     },
     action: {
       type: String,
-      default: 'view' // view | close
+      default: 'view'
     },
   },
   data() {
@@ -386,6 +386,7 @@ export default {
     gap: 12px;
     padding: 19px 15px;
     width: 100%;
+    background: #181818;
     background: var(--color-background-input);
     border-radius: 2px;
   }
@@ -398,9 +399,11 @@ export default {
 
     &__text {
         font-size: 14px;
+        color: #ffffff;
         color: var(--color-text);
     }
     &__date {
+        color: #ffffff80;
         color: var(--color-text-input)
     }
 }
@@ -431,6 +434,7 @@ export default {
         display: flex;
         justify-content: space-between;
         font-size: 14px;
+        color: #ffffff;
         color: var(--color-text);
     }
 
@@ -439,6 +443,7 @@ export default {
     }
 
     &--danger {
+      color: #f61a1a;
       color: var(--color-danger);
     }
 
@@ -448,6 +453,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    background: #0a0a0a;
     background: var(--color-background);
     border-radius: 4px;
     margin-bottom: -9px;
@@ -462,10 +468,12 @@ export default {
 
     &__team {
         font-size: 14px;
+        color: #ffffff;
         color: var(--color-text);
         display: flex;          
         align-items: center;   
         font-size: 14px;
+        color: #ffffff;
         color: var(--color-text);
         gap: 4px;  
     }
@@ -478,15 +486,18 @@ export default {
 
     &__odd {
         font-size: 14px;
+        color: #ffffff;
         color: var(--color-text);
     }
 
     &__select {
+      color: #ffffff;
         color: var(--color-text);
         font-size: 14px;
     }
     
     &__message {
+        color: #f61a1a;
         color: var(--color-danger);
         text-align: center;
         font-size: 14px;
@@ -495,9 +506,11 @@ export default {
     }
 
     &__status--success {
+      color: #6da544;
       color: var(--color-success);
     }
     &__status--danger {
+      color: #f61a1a;
       color: var(--color-danger);
     }
 }

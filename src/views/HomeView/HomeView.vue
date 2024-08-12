@@ -475,8 +475,6 @@ export default {
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    overflow: hidden;
   }
 
   &__league-select {

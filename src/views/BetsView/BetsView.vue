@@ -534,6 +534,7 @@ export default {
 
   &__count-results {
     padding-top: 30px;
+    color: #ffffff80;
     color: var(--color-text-input);
   }
 
@@ -543,11 +544,11 @@ export default {
     padding-top: 20px;
     overflow-x: auto;
     white-space: nowrap;
-    gap: 8px;
+    
   }
 
   &__buttons-filters::-webkit-scrollbar {
-    display: none;  /* WebKit-based browsers */
+    display: none;  
   }
 
   &__content-filters {
@@ -557,18 +558,18 @@ export default {
   &__card-footer {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+   
 
     &--inline {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      gap: 8px;
     }
     
   }
 
   &__text-light {
+    color: #ffffff80;
     color: var(--color-text-input);
   }
   
@@ -591,9 +592,11 @@ export default {
 
   &__status {
     &--success {
+      color: #6da544;
       color: var(--color-success);
     }
     &--danger {
+      color: #f61a1a;
       color: var(--color-danger);
     }
   }
