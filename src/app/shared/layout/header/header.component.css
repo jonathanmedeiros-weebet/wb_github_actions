@@ -677,9 +677,10 @@ body .change-theme {
     }
     .menu-perfil {
         height: 32px;
-    }    
+    }
     .btn-register{
         margin-right: 5px;
+        white-space: nowrap;
     }
     .menu-conta .btn{
         padding: 5px 10px;
