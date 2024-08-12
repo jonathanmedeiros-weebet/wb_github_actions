@@ -32,6 +32,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { BetbyModule } from './betby/betby.module';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -91,6 +92,7 @@ export function googleFactory(service: ParametrosLocaisService) {
         SocialLoginModule,
         LayoutModule,
         CupomModule,
+        BetbyModule,
         ToastrModule.forRoot({
             timeOut: 7000
         }),
