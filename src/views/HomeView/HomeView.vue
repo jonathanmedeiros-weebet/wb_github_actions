@@ -475,11 +475,6 @@ export default {
   &__body {
     display: flex;
     flex-direction: column;
-<<<<<<< HEAD
-=======
-    gap: 1px;
-    overflow: hidden;
->>>>>>> e0b67e093665a9ae2aa2290934bce32b07b3c1c2
   }
 
   &__league-select {

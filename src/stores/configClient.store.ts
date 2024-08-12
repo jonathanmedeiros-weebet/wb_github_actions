@@ -7,16 +7,7 @@ interface ConfigClient {
   apiUrl: string;
 }
 
-<<<<<<< HEAD
-=======
-interface PrinterSetting {
-  printGraphics?: boolean;
-  apkVersion?: number;
-  printerWidth?: number;
-}
-
->>>>>>> e0b67e093665a9ae2aa2290934bce32b07b3c1c2
-const production = true;
+const production = false;
 const _host = production ? 'https://central.demo.wee.bet' : '//localhost';
 const _loki = production ? 'https://loki1.weebet.tech' : '//localhost:8000';
 const _center = production ? 'https://center7.wee.bet' : 'https://hermes.wee.bet';
