@@ -66,6 +66,7 @@
 }
 
 nav {
+    margin-left: 65%;
     width: calc(100% - 700px);
     display: flex;
     justify-content: center;
@@ -112,8 +113,21 @@ nav a {
     white-space: nowrap;
 }
 
+.container-group {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.container-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 12px;
+}
+
 .side {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,6 +170,28 @@ nav::-webkit-scrollbar {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
+}
+
+.btn-xtremepush i {
+    font-size: 22px;
+    color: var(--foreground-header);
+    opacity: 75%;
+    margin-top: 3px;
+}
+
+.btn-xtremepush span:hover {
+    color: var(--highlight);
+}
+
+.btn-promocao i {
+    opacity: 75%;
+    font-size: 0px;
+    color: white;
+}
+
+.btn-promocao i:hover {
+    cursor: pointer;
+    color: var(--highlight); 
 }
 
 .btn-register{
@@ -338,8 +374,13 @@ body .change-theme {
 }
 
 .support-btn i {
-    margin-right: 12px;
-    font-size: 16px;
+    opacity: 75%;
+    color: var(--foreground-header);
+    padding-left: 3px;
+    font-weight: 500;
+}
+
+.support-btn:hover i {
     color: var(--highlight);
 }
 
@@ -431,6 +472,30 @@ body .change-theme {
     margin-right: 5px;
 }
 
+.stylingNotificationIcon{
+    margin-right: 10px;
+}
+
+.material-symbols-outlined::before {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 22px;
+    display: inline-block;
+}
+
+.material-symbols-outlined-headset_mic::before {
+    content: 'headset_mic';
+}
+
+.material-symbols-outlined-notifications::before {
+    content: 'notifications';
+}
+
+.material-symbols-outlined-featured_seasonal_and_gifts::before {
+    content: 'featured_seasonal_and_gifts';
+}
+
 @media only screen and (min-width: 1025px) {
     .btn-indique-ganhe-card:hover {
         padding: 0 15px !important;
@@ -454,6 +519,10 @@ body .change-theme {
 
     .category {
         height: 100%;
+    }
+
+    nav {
+        margin-left: 0%;
     }
 
     .category a {
@@ -497,7 +566,7 @@ body .change-theme {
 
     .logo {
         max-height: 30px;
-        max-width: calc(40vw - 25px);
+        max-width: calc(40vw - 70px);
     }
 
     .indique-ganhe-card .btn-close {
@@ -512,7 +581,7 @@ body .change-theme {
     }
 
     .btn.mr-4 {
-        margin-right: 10px !important;
+        margin-right: 8px !important;
     }
 }
 
@@ -591,15 +660,8 @@ body .change-theme {
         padding-left: 10px;
     }
 
-    .btn-xtremepush {
-        margin: 0 10px 0 0 !important;
-        color: var(--highlight);
-    }
-}
-
-@media only screen and (max-width: 360px) {
-    .logo {
-        max-width: calc(32vw - 25px);
+    .btn-xtremepush span {
+        color: var(--foreground-header);
     }
 }
 
@@ -615,17 +677,142 @@ body .change-theme {
     }
     .menu-perfil {
         height: 32px;
-    }    
+    }
     .btn-register{
-        min-width: 95px !important;
         margin-right: 5px;
+        white-space: nowrap;
     }
     .menu-conta .btn{
         padding: 5px 10px;
     }
+    .deposit-shortcut a{
+        padding: 0px 4px;
+    }
+}
+
+@media only screen and (max-width: 430px){
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons {
+        gap: 5px;
+        padding-left: 5px;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons {
+        padding: 0px 1%;
+        gap: 5px;
+        margin-right: -4px;
+    }
+    .btn{
+        font-size: 10px;
+    }
+    .btn-register {
+        min-width: 92px !important;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+    #xtremepushNotificationWrapper {
+        width: 320px;
+    }
+    .btn-promocao {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 18px;
+    }
+    .side-right {
+        padding-right: 10px;
+    }
+    .deposit-shortcut a {
+        padding: 0px 4px;
+    }
+    .menu-conta .btn-custom2{
+        margin-right: 0;
+    }
+    .menu-perfil {
+        padding: 0px 2px;
+        width: 85px;
+    }
+    .menu-perfil div.user-icon i {
+        font-size: 15px;
+    }
+    .btn.mr-4 {
+        margin-right: 5px !important;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(28vw - 25px);
+    }
+
+    .container-group{
+        gap: 12px;
+    }
+
+    .container-icons {
+        padding: 0px 1%;
+        gap: 6px;
+    }
+
+    .btn-register{
+        min-width: 80px !important;
+        padding: 5px 8px !important;
+    }
+
+    .btn.btn-register.mr-4{
+        margin-right: 8px !important;
+    }
+
+    .btn {
+        width: 54px;
+        font-size: 10px;
+    }
+
+    .menu-perfil {
+        width: 80px;
+        padding: 0px 2px;
+    }
+
+    .menu-conta{
+        margin-right: 4px;
+    }
+
+    .div.user-card{
+        padding-right: 5px;
+    }
+    .fa-user::before {
+        font-size: 14px;
+    }
+    .menu-perfil .div.user-icon {
+        font-size: 15px;
+    }
+    .menu-perfil div.user-icon  i {
+        font-size: 15px;
+    }
+    .menu-perfil .saldo-usuario {
+        font-size: 9.8px;
+    }
 }
 
 @media only screen and (max-width: 1366px) and (min-width: 1280px){
+    nav {
+        padding-right: 0;
+    }
     .menu-conta .btn{
         padding: 5px 6px;
     }
@@ -634,11 +821,9 @@ body .change-theme {
     }
     .side-left {
         padding-left: 10px;
-        width: 600px;
     }
     .side-right {
         padding-right: 0;
-        width: 600px;
     }
     .logo {
         max-width: 215px;
@@ -652,7 +837,6 @@ body .change-theme {
     }
     .side-right {
         padding-right: 0;
-        width: 420px;
     }
 }
 
@@ -751,12 +935,16 @@ body .change-theme {
     margin-bottom: 20px;
 }
 
+.xtremepush-header i {
+    margin-right: 8px;
+}
+
 .xtremepush-title {
     color: #fff;
     margin: 0;
 }
 
-.xtremepush-title img{
+.xtremepush-title i{
     margin-bottom: 1px;
     margin-right: 10px;
 }
@@ -844,11 +1032,6 @@ body .change-theme {
 
 #badge-xtremepush.show-badge {
     display: block;
-}
-
-.btn-xtremepush {
-    margin: 0 10px 0 0;
-    color: var(--highlight);
 }
 
 .xtremepush-notification-item {

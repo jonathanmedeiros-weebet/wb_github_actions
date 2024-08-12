@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
     public acceptedCookies: boolean = false;
     modalPush;
     xtremepushHabilitado = false;
+    hasPoliticaPrivacidade = false;
 
     constructor(
         private auth: AuthService,
@@ -74,6 +75,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
         this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
         this.auth.logado.subscribe((isLogged) => {
             const logoutByInactivityIsEnabled =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
