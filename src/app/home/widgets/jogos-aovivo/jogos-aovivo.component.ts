@@ -174,10 +174,8 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe((jogo: any) => {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
                 let inserirCampeonato = false;
-
                 jogo.cotacoes.map(cotacao => {
                     cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
-                    cotacao.oddChange = 'up'
                     cotacao.valorFinal = this.helperService.calcularCotacao2String(
                         cotacao.valor,
                         cotacao.chave,

@@ -133,7 +133,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
                             jogo.cotacoes.map(cotacao => {
                                 cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
-                                cotacao.oddChange = 'up'
                                 cotacao.valorFinal = this.helperService.calcularCotacao2String(
                                     cotacao.valor,
                                     cotacao.chave,
@@ -216,7 +215,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         jogo.time_b_nome,
                         jogo.sport_id
                     );
-                    cotacao.oddChange = 'up'
                     cotacao.valorFinal = this.helperService.calcularCotacao2String(
                         cotacao.valor,
                         cotacao.chave,
