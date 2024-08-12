@@ -7,6 +7,12 @@ interface ConfigClient {
   apiUrl: string;
 }
 
+interface PrinterSetting {
+  printGraphics?: boolean;
+  apkVersion?: number;
+  printerWidth?: number;
+}
+
 const production = true;
 const _host = production ? 'https://central.demo.wee.bet' : '//localhost';
 const _loki = production ? 'https://loki1.weebet.tech' : '//localhost:8000';
