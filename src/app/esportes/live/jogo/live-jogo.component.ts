@@ -407,41 +407,15 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         );
     }
 
-    getOddChangeClass(id:string, status:string) {
-        let element = this.el.nativeElement.querySelector(`#${id}`);
-        if (!element) return;
-
-        let elementClassList = Array.from(element.classList);
-        
-        let classToReturn:string;
-
+    getOddChangeClass(status:string) {
         switch (status) {
             case CotationPriceChange.Up:
-                classToReturn = 'odd-up';
-                break;
+                return  'odd-up';
             case CotationPriceChange.Down:
-                classToReturn = 'odd-down';
-                break;
+                return 'odd-down';
             case CotationPriceChange.Same:
-                if (elementClassList.includes('odd-up')) {
-                    classToReturn = 'odd-up'
-                };
-
-                if (elementClassList.includes('odd-down')) {
-                    classToReturn = 'odd-down'
-                };
-                break;
+            default:
+                return '';
         };
-
-        return classToReturn;
     }
-
-    sanitazerId(id:string) {
-        const sanitazerSignals = id.replace(/[+-.]/g, '');
-
-        const sanitazedId = /^\d/.test(sanitazerSignals) ? `_${sanitazerSignals}` : sanitazerSignals;
-
-        return sanitazedId;
-    }
-
 }

@@ -505,7 +505,7 @@ section.jogo {
 
 .odd-up::before {
     content: '';
-    width: 18px;
+    width: 12px;
     height: 12px;
     right: 0;
     top: 0;
@@ -513,14 +513,14 @@ section.jogo {
     border-radius: 0 2px;
     margin-top: 2px;
     margin-right: 2px;
-    border-top: 18px solid #6DA544;
-    border-left: 18px solid transparent;
-    animation: blink 1s infinite;
+    border-top: 16px solid #6DA544;
+    border-left: 16px solid transparent;
+    animation: blink 1s 3, hide 0s 2.5s forwards;
 }
 
 .odd-down::before {
     content: '';
-    width: 18px;
+    width: 12px;
     height: 12px;
     right: 0;
     bottom: 0;
@@ -528,9 +528,9 @@ section.jogo {
     border-radius: 2px 0;
     margin-bottom: 2px;
     margin-right: 2px;
-    border-bottom: 18px solid #F61A1A;
-    border-left: 18px solid transparent;
-    animation: blink 1s infinite;
+    border-bottom: 16px solid #F61A1A;
+    border-left: 16px solid transparent;
+    animation: blink 1s 3, hide 0s 2.5s forwards;
 }
 
 .inner-odd.odd-enabled {
@@ -543,6 +543,15 @@ section.jogo {
     }
     50% {
         opacity: 0;
+    }
+}
+
+@keyframes hide {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        display: none;
     }
 }
 
@@ -684,5 +693,17 @@ section.jogo {
     }
     .indentificacao-jogo {
         height: 25vh;
+    }
+}
+
+@media (max-width:480px) {
+    .odd-up::before {
+        border-top: 14px solid #6DA544;
+        border-left: 14px solid transparent;
+    }
+    
+    .odd-down::before {
+        border-bottom: 14px solid #F61A1A;
+        border-left: 14px solid transparent;
     }
 }

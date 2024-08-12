@@ -353,7 +353,7 @@
     margin-right: 2px;
     border-top: 12px solid #6DA544;
     border-left: 12px solid transparent;
-    animation: blink 1s infinite;
+    animation: blink 1s 3, hide 0s 2.5s forwards;
 }
 
 .odd-down::before {
@@ -368,7 +368,7 @@
     margin-right: 2px;
     border-bottom: 12px solid #F61A1A;
     border-left: 12px solid transparent;
-    animation: blink 1s infinite;
+    animation: blink 1s 3, hide 0s 2.5s forwards;
 }
 
 @keyframes blink {
@@ -377,6 +377,15 @@
     }
     50% {
         opacity: 0;
+    }
+}
+
+@keyframes hide {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        display: none;
     }
 }
 

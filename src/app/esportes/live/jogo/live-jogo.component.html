@@ -328,8 +328,8 @@
                                             'selecionado': oddSelecionada(jogo._id, odd.chave),
                                         }"
                                         (click)="addCotacao(jogo, odd)">
-                                        <span class="nome-odd" id="{{sanitazerId(odd.chave)}}"
-                                            [ngClass]="getOddChangeClass(sanitazerId(odd.chave), odd.price_change)"
+                                        <span class="nome-odd"
+                                            [ngClass]="getOddChangeClass(odd.price_change)"
                                         >                                     
                                         {{odd.label}}
                                         </span>

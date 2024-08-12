@@ -191,9 +191,9 @@
     border-radius: 0 2px;
     margin-top: 2px;
     margin-right: 2px;
-    border-top: 12px solid #6DA544;
-    border-left: 12px solid transparent;
-    animation: blink 1s infinite;
+    border-top: 16px solid #6DA544;
+    border-left: 16px solid transparent;
+    animation: blink 1s 3, hide 0s 2.5s forwards;
 }
 
 .odd-down::before {
@@ -206,9 +206,9 @@
     border-radius: 2px 0;
     margin-bottom: 2px;
     margin-right: 2px;
-    border-bottom: 12px solid #F61A1A;
-    border-left: 12px solid transparent;
-    animation: blink 1s infinite;
+    border-bottom: 16px solid #F61A1A;
+    border-left: 16px solid transparent;
+    animation: blink 1s 3, hide 0s 2.5s forwards;
 }
 
 @keyframes blink {
@@ -220,6 +220,14 @@
     }
 }
 
+@keyframes hide {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        display: none;
+    }
+}
 
 @media only screen and (max-width: 1024px) {
     .widgets-header {
@@ -256,3 +264,15 @@
 @media (min-width: 1025px) {}
 
 @media (max-width: 385px) {}
+
+@media (max-width:480px) {
+    .odd-up::before {
+        border-top: 14px solid #6DA544;
+        border-left: 14px solid transparent;
+    }
+    
+    .odd-down::before {
+        border-bottom: 14px solid #F61A1A;
+        border-left: 14px solid transparent;
+    }
+}
