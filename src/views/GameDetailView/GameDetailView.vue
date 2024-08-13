@@ -80,15 +80,6 @@ export default {
 
         this.loading = false;
     },
-    mounted() {
-        document.addEventListener("scroll", () => {
-            if(window.pageYOffset > 75) {
-                this.headerFixed = true;
-            } else {
-                this.headerFixed = false;
-            };
-        });
-    },
     computed: {
         hasQuotes() {
             return Boolean(this.options.length);
