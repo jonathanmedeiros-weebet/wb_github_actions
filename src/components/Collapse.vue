@@ -35,6 +35,11 @@ export default {
         handleClick() {
             this.collapsed = !this.collapsed;
         }
+    },
+    watch: {
+        initCollapsed(newVal) {
+            this.collapsed = newVal;
+        }
     }
 }
 </script>

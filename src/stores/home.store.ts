@@ -11,6 +11,8 @@ export const useHomeStore = defineStore('home', {
         modality: null,
         league: null,
         date: now(),
+        selectedSearch: false,
+        inSearch: false
     }),
     actions: {
         setChampionshipPerRegionList(championships: any) {
