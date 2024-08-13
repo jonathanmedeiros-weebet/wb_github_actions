@@ -1,12 +1,13 @@
 <template>
     <div class="game-list">
         <span class="game-list__message" v-if="!hasChampionshipList">Nenhum evento disponível</span>
-        <template v-else>
+        <template v-else-if="homeStore.selectedSearch == false">
             <Collapse
                 class="game-list__collapse"
-                :initCollapsed="false"
+                :initCollapsed="allCollapsed"
                 v-for="(championship, index) in championshipList"
                 :key="index"
+                
             >
                 <template #title>
                     <img
@@ -91,7 +92,11 @@ export default {
                 
                 return newChampionship;
             });
-        }
+        },
+        allCollapsed() {
+            return Boolean(this.homeStore.inSearch);
+        },
+
     },
     methods: {
         handleClick(gameId) {

@@ -349,7 +349,6 @@ export default {
     },
     async handleModality(modalityId) {
       this.loading = true;
-      console.log('modalityId', modalityId);
 
       if(modalityId === Modalities.POPULAR_LOTTERY){
         this.$router.push({ name: 'popular-lottery' });
@@ -416,10 +415,13 @@ export default {
     },
 
     handleOpenSearchModal() {
-      this.showModalSearch = true
+      this.showModalSearch = true,
+      this.homeStore.selectedSearch = true;
+      this.homeStore.inSearch = true;
     },
     handleCloseSearchModal() {
       this.showModalSearch = false
+      this.homeStore.selectedSearch = false;
     },
     handleSearch(gameId) {
       void gameId;
@@ -430,6 +432,7 @@ export default {
 
     handleLive() {
       this.homeStore.setIsLive(!this.liveActived);
+      this.homeStore.inSearch = !this.homeStore.inSearch;
       this.homeStore.setLeague(null);
       this.prepareSocket();
       this.pageLoad();
