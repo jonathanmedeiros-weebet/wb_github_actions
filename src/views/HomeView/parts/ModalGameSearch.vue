@@ -59,12 +59,14 @@ export default {
     },
     handleClose() {
       this.homeStore.setChampionshipList(this.championshipList);
+      this.homeStore.inSearch = false;
       this.$emit('closeModal')
     },
     handleSearch: _.debounce(function (term){
+      this.loading = true;
       term = term.toUpperCase();
       let championships = this.championshipList;
-
+      
       if(Boolean(term)) {
         championships = this.championshipList.filter(championship => {
           const hasGames = championship.jogos.some(
@@ -82,9 +84,13 @@ export default {
             return championship;
           })
         }
+        this.homeStore.selectedSearch = false;
+        this.homeStore.setChampionshipList(championships);
+      }else{
+        this.homeStore.setChampionshipList([]);
       }
-
-      this.homeStore.setChampionshipList(championships);
+      this.loading = false;
+      
     }, 700),
   }
 }
