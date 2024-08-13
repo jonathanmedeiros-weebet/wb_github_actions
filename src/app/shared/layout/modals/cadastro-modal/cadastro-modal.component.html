@@ -217,7 +217,12 @@
                 </a>
             </div>
             <div class="modal-body-custom">
-                <p>{{ descricaoParagrafo() }}</p>
+                <ng-container *ngIf="promocaoAtiva && valorPromocao; else noPromotion">
+                    <p>Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até R$ {{this.valorPromocao | currency}}</p>
+                </ng-container>
+                <ng-template #noPromotion>
+                    <p>Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.</p>
+                </ng-template>
             </div>
             <div class="modal-footer-he">
                 <button type="button" class="btn btn-custom btn-block btn-cadastrar" (click)="registerOpen()">Continuar</button>

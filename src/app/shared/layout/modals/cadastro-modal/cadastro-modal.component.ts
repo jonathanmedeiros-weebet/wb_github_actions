@@ -205,17 +205,15 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     verificarPromocaoAtiva(): void {
         if (this.promocoes && this.promocoes.length > 0) {
-            const promocaoEsportivo = this.promocoes.find(promocoesExistentes => promocoesExistentes.ativo && promocoesExistentes.bonusModalidade === 'esportivo')
-            const promocaoCassino = this.promocoes.find(promocoesExistentes => promocoesExistentes.ativo && promocoesExistentes.bonusModalidade === 'cassino')
+            const promocaoEsportivo = this.promocoes.find(promocao => promocao.ativo && promocao.bonusModalidade === 'esportivo' && promocao.valorBonus > 0.00)
+            const promocaoCassino = this.promocoes.find(promocao => promocao.ativo && promocao.bonusModalidade === 'cassino' && promocao.valorBonus > 0.00)
 
             if (promocaoCassino) {
                 this.promocaoAtiva = true;
                 this.valorPromocao = parseFloat(promocaoCassino.valorBonus);
-                this.bonusModalidade = 'cassino';
             } else if (promocaoEsportivo) {
                 this.promocaoAtiva = true;
                 this.valorPromocao = parseFloat(promocaoEsportivo.valorBonus);
-                this,this.bonusModalidade = 'esportivo';
             } else {
                 this.promocaoAtiva = false;
                 this.valorPromocao = null;
@@ -223,18 +221,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         } else {
             this.promocaoAtiva = false;
             this.valorPromocao = null;
-        }
-    }
-  
-    descricaoParagrafo(): string {
-        if (this.promocaoAtiva && this.valorPromocao) {
-            if (this.bonusModalidade === 'cassino') {
-                return `Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até R$ ${this.valorPromocao}`;
-            } else if (this.bonusModalidade === 'esportivo') {
-                return `Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até R$ ${this.valorPromocao}.`;
-            }
-        } else {
-            return 'Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.';
         }
     }
 
