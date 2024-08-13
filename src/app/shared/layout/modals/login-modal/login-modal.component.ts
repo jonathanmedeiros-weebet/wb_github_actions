@@ -146,7 +146,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     }
 
                     if (
-                        Boolean(this.usuario) && 
+                        Boolean(this.usuario) &&
                         this.usuario.tipo_usuario === 'cliente' &&
                         this.authDoisFatoresHabilitado &&
                         !Boolean(this.auth.getCookie(this.usuario.cookie)) &&
@@ -154,8 +154,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     ) {
                         this.abrirModalAuthDoisFatores();
                         return;
-                    }  
-                    
+                    }
+
                     this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
                     const data = {
                         ...this.form.value,
@@ -168,13 +168,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         .subscribe(
                             () => {
                                 this.getUsuario();
-
-                                if (this.usuario.tipo_usuario === 'cambista') {
-                                    location.reload();
-                                }
-
-                                this.activeModal.close(true);
-                                this.router.navigate([this.router.url]);
+                                location.reload();
                             },
                             error => this.handleError(error)
                         );

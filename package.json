@@ -196,7 +196,6 @@
         "betinvestidor.com": "gulp betinvestidor.com",
         "esportemix.com": "gulp esportemix.com",
         "pbpixbet.com": "gulp pbpixbet.com",
-        "veteranobet.com": "gulp veteranobet.com",
         "pixcassino999.com": "gulp pixcassino999.com",
         "betsnordeste.bet": "gulp betsnordeste.bet",
         "suasortebet.com": "gulp suasortebet.com",
@@ -297,7 +296,10 @@
         "deupix.bet": "gulp deupix.bet",
         "balneario.bet": "gulp balneario.bet",
         "caxias.bet": "gulp caxias.bet",
-        "floripa.bet": "gulp floripa.bet"
+        "floripa.bet": "gulp floripa.bet",
+        "appjetbet365.com": "gulp appjetbet365.com",
+        "amurel.bet": "gulp amurel.bet",
+        "bellagames.bet": "gulp bellagames.bet"
     },
     "private": true,
     "dependencies": {
