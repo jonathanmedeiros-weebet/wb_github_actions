@@ -2,6 +2,8 @@
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["es2022", "dom"],
     "baseUrl": ".",
     "allowJs": true,
     "noEmit": true,
