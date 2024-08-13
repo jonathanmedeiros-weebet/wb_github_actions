@@ -66,6 +66,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: var(--foreground);
     background-color: var(--background);
+    width: 100%
 }
 
 .base-container {
