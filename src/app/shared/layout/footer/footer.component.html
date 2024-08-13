@@ -15,10 +15,13 @@
         </div>
 
         <div class="info-jogo">
-            <div *ngIf="slug == 'zilionz.com'" class="icons" style="margin-bottom: 30px; gap: 0">
-                <iframe src="https://licensing.gaming-curacao.com/validator/?lh=3e6ea9b3c638911372d6c78c18ed6ca2&amp;template=tseal" width="150" height="50" style="border:none;"></iframe>
-                <div id="anj-cd823ed6-bffb-4764-9e1b-05566f369c8c" data-anj-seal-id="cd823ed6-bffb-4764-9e1b-05566f369c8c"
-                    data-anj-image-size="128" data-anj-image-type="basic-small" style="width: 50px"></div>
+            <div *ngIf="this.slug == 'zilionz.com' || slug == 'saqbet.tv'" class="icons" style="margin-bottom: 30px; gap: 0">
+                <ng-container *ngIf="slug == 'zilionz.com'">
+                    <iframe src="https://licensing.gaming-curacao.com/validator/?lh=3e6ea9b3c638911372d6c78c18ed6ca2&amp;template=tseal" width="150" height="50" style="border:none;"></iframe>
+                    <div id="anj-cd823ed6-bffb-4764-9e1b-05566f369c8c" data-anj-seal-id="cd823ed6-bffb-4764-9e1b-05566f369c8c"
+                         data-anj-image-size="128" data-anj-image-type="basic-small" style="width: 50px"></div>
+                </ng-container>
+                <div style="margin-left: 10px" id="ra-verified-seal"></div>
             </div>
             <h4 class="title">{{'footer.jogueComResponsabilidade' | translate}}</h4>
             <div class="icons" *ngIf="slug == 'ragnar.bet'">
