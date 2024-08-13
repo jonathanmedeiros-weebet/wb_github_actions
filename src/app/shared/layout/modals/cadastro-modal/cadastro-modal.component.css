@@ -39,7 +39,7 @@ h3 {
 }
 
 .modal-body {
-    padding: 20px 60px;
+    padding: 16px 60px;
 }
 
 .logo {
@@ -194,7 +194,7 @@ a.link-termos-politica {
 }
 
 .btn-custom {
-    margin-top: 5px;
+    margin-top: 10px;
     width: 80%;
 }
 
@@ -226,11 +226,6 @@ a.link-termos-politica {
 }
 
 @media only screen and (max-width: 610px) {
-}
-
-.label-termo-uso {
-    display: flex;
-    align-items: center;
 }
 
 .label-termo-uso input[type="checkbox"] {

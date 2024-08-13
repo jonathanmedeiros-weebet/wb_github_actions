@@ -52,8 +52,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     aplicarCssTermo: boolean = false;
     parameters = {};
     parametersList;
-    parameters = {};
-    parametersList;
     postbacks = {};
     registerCancel = false;
     modalClose = true;
@@ -83,7 +81,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
-        this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.getPromocoes();
         this.appMobile = this.auth.isAppMobile();
@@ -162,11 +159,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.possuiCodigoAfiliado = true;
             }
 
-            this.parametersList.forEach(param => {
-                if (params[param]) {
-                    this.parameters[param] = params[param];
-                }
-            });
             this.parametersList.forEach(param => {
                 if (params[param]) {
                     this.parameters[param] = params[param];
@@ -330,9 +322,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
         }
-
-        if (Object.keys(this.parameters).length) {
-            values.parameters = this.parameters;
+        
         if (Object.keys(this.parameters).length) {
             values.parameters = this.parameters;
         }
