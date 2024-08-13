@@ -7,6 +7,16 @@
     padding: 30px;
 }
 
+.withdrawal-details-title h3 {
+    width: 96%;
+}
+
+.withdrawal-details-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 #withdrawal-container {
     display: flex;
     flex-direction: row;
@@ -15,7 +25,7 @@
 }
 
 #withdrawal-container h3 {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     padding-bottom: 6px;
     color: var(--foreground-sidebars);
@@ -149,7 +159,7 @@
 #details-wrapper .details-available-amount {
     border: 0.5px solid rgba(var(--foreground-sidebars-rgb), 0.2);
     padding: 12px 10px 9px;
-    width: 66%;
+    width: 25.5rem;
     border-radius: 5px;
 }
 
@@ -158,6 +168,7 @@
 }
 
 #details-wrapper .details-safe-withdrawal-alert {
+    opacity: 70%;
     width: 74%;
     margin-top: 28px;
 }
@@ -194,7 +205,7 @@
 
 #details-wrapper .key-type-input {
     margin-top: 22px;
-    width: 66%;
+    width: 25.5rem;
 }
 
 .details-amount {
@@ -204,7 +215,7 @@
 
 .details-amount input {
     text-align: left !important;
-    width: 66%;
+    width: 25.5rem;
     margin: 12px 0 8px
 }
 
@@ -217,19 +228,31 @@
 }
 
 .shortcut-amounts {
-    width: 66%;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
     margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 25.5rem;
 }
 
 .shortcut-amounts button {
-    width: 32%;
+    width: 8rem;
     height: 40px;
-    margin-top: 6px;
+    margin-top: 8px;
     background-color: var(--inputs-odds);
     color: var(--foreground-inputs-odds);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto; 
+}
+
+.shortcut-amounts button p {
+    margin-bottom: 0;
+}
+
+.shortcut-amounts button p:first-child {
+    margin-right: 2px;
 }
 
 .shortcut-amounts button:active,
@@ -243,7 +266,7 @@
 }
 
 .details-submit {
-    width: 45%;
+    width: 17rem;
     margin-top: 40px;
 }
 
@@ -324,6 +347,12 @@
 
     .shortcut-amounts {
         width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .shortcut-amounts .btn{
+        width: 30%;
     }
 
     #details-wrapper .details-submit {
