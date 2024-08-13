@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CadastroModalComponent, LoginModalComponent } from '../shared/layout/modals';
 import { AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
@@ -30,6 +30,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         private authService: AuthService,
         private translate: TranslateService,
         private params: ParametrosLocaisService,
+        private renderer: Renderer2,
         private elementRef: ElementRef
     ) { }
 
@@ -89,6 +90,37 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         });
 
         this.resizeObserver.observe(divElement);
+
+        setTimeout(() => {
+            this.hideGtmElements();
+        }, 1000);
+    }
+
+
+    hideGtmElements() {
+        const elementChat = document.querySelector('#chat-widget-container');
+        const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
+
+        if (elementChat) {
+            this.renderer.setStyle(elementChat, 'display', 'none');
+        }
+
+        if (elementChatWeebet) {
+            this.renderer.setStyle(elementChatWeebet, 'display', 'none');
+        }
+    }
+
+    showGtmElements() {
+        const elementChat = document.querySelector('#chat-widget-container');
+        const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
+
+        if (elementChat) {
+            this.renderer.removeStyle(elementChat, 'display');
+        }
+
+        if (elementChatWeebet) {
+            this.renderer.removeStyle(elementChatWeebet, 'display');
+        }
     }
 
     ngOnDestroy() {
@@ -101,6 +133,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.resizeObserver) {
             this.resizeObserver.disconnect();
         }
+        this.showGtmElements();
     }
 
     onChangeLang(lang: string) {
