@@ -335,6 +335,13 @@
 @media only screen and (min-width: 1336px) {
     .bloco > .game-grid {
         gap: 15px 10px;
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1512px) {
+    .bloco > .game-grid {
+        gap: 15px 10px;
         grid-template-columns: repeat(7, 1fr);
     }
 }
@@ -370,9 +377,15 @@
     }
 }
 
+@media only screen and (min-width: 1920px) {
+    .bloco > .game-grid {
+        grid-template-columns: repeat(9, 1fr);
+    }
+}
+
 @media only screen and (min-width: 2300px) {
     .bloco > .game-grid {
-        grid-template-columns: repeat(11, 1fr);
+        grid-template-columns: repeat(12, 1fr);
         gap: 20px 12px;
     }
 }

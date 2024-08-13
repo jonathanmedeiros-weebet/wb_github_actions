@@ -147,7 +147,27 @@
     margin-top: 0;
 }
 
-@media only screen and (min-width: 360px)  and (max-width: 390px) {
+@media only screen and (max-width: 344px){
+    .game-card--inline{
+        width: 140px;
+    }
+
+    .game-card--inline > .game-card__image{
+        min-height: 140px;
+    }
+}
+
+@media only screen and (max-width: 330px){
+    .game-card--inline{
+        width: 130px;
+    }
+
+    .game-card--inline > .game-card__image{
+        min-height: 130px;
+    }
+}
+
+@media only screen and (min-width: 360px)  and (max-width: 389px) {
     .game-card {
         width: 100%;
 
@@ -165,6 +185,13 @@
     .game-card--default > .game-card__image{
         max-width: 170px;
         min-height: 170px;
+    }
+}
+
+@media only screen and (min-width: 390px)  and (max-width: 390px) {
+    .game-card--default > .game-card__image{
+        max-width: 175px;
+        min-height: 175px;
     }
 }
 
@@ -190,11 +217,11 @@
 
 @media only screen and (min-width: 425px){
     .game-card--inline{
-        width: 180px;
+        width: 175px;
     }
 
     .game-card--inline > .game-card__image{
-        min-height: 180px;
+        min-height: 175px;
     }
 
     .game-card{
@@ -208,15 +235,26 @@
     }
 }
 
+@media only screen and (min-width: 768px){
+    .game-card--inline{
+        width: 160px;
+    }
+
+    .game-card--inline > .game-card__image{
+        min-height: 160px;
+    }
+}
+
 @media only screen and (min-width: 490px) and (max-width: 680px){
     .game-card--default {
-        width: 152px;
+        width: 165px;
     }
 
     .game-card--default > .game-card__image{
         min-height: 152px;
     }
 }
+
 
 @media only screen and (min-width: 687px) and (max-width: 850px){
     .game-card{
@@ -236,12 +274,40 @@
     }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 799px){
+    .game-card--inline{
+        width: 160px;
+    }
+
+    .game-card--inline > .game-card__image{
+        min-height: 160px;
+    }
+}
+
+@media only screen and (min-width: 820px) and (max-width: 820px){
+    .game-card{
+        &--default {
+            width: 190px;
+            min-height: 190px;
+        }
+    }
+
+    .game-card--default > .game-card__image{
+        min-height: 180px;
+    }
+    
+
+    .game-card--filter .game-card__info {
+        max-width: 200px;
+    }
+}
+
 @media only screen and (min-width: 884px) and (max-width: 1020px){
     .game-card {
         width: 100%;
 
         &--default {
-            width: 190px;
+            width: 165px;
         }
 
         &--inline {
@@ -251,11 +317,11 @@
     }
 
     .game-card--default > .game-card__image {
-        min-height: 190px;
+        min-height: 165px;
     }
 
     .game-card--inline > .game-card__image {
-        min-height: 190px;
+        min-height: 170px;
         height: auto;
     }
 }
@@ -321,12 +387,34 @@
 @media only screen and (min-width: 1440px) {
     .game-card--default{
         width: 100%;
-        max-width: 188px;
+        max-width: 160px;
     }
 
     .game-card--default > .game-card__image {
-        min-height: 188px;
+        min-height: 160px;
         height: auto;
+    }
+
+    .game-card--inline{
+        min-width: 175px;
+        max-width: 175px;
+    }
+}
+
+@media only screen and (min-width: 1512px) {
+    .game-card--default{
+        width: 100%;
+        max-width: 174px;
+    }
+
+    .game-card--default > .game-card__image {
+        min-height: 174px;
+        height: auto;
+    }
+
+    .game-card--inline{
+        min-width: 174px;
+        max-width: 174px;
     }
 }
 
@@ -337,7 +425,7 @@
     }
 
     .game-card--default > .game-card__image {
-        min-height: 200px;
+        min-height: 178px;
     }
 }
 
