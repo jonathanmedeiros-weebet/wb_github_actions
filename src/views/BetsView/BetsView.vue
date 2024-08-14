@@ -487,7 +487,7 @@ export default {
       cancelBet(this.betSelected)
       .then(resp => {
         this.toastStore.setToastConfig({
-          message: resp.results.message ?? 'Cancelado com sucesso!',
+          message: resp.results?.message ?? 'Aposta cancelada com sucesso!',
           type: ToastType.SUCCESS,
           duration: 5000
         })
@@ -495,7 +495,7 @@ export default {
       })
       .catch(error => {
         this.toastStore.setToastConfig({
-          message: error.errors.message,
+          message: error.errors?.message,
           type: ToastType.DANGER,
           duration: 5000
         })
