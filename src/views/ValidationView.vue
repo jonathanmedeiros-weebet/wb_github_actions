@@ -9,7 +9,7 @@
         class="validation__input"
         name="consult_ticket"
         placeholder="Ex.: EA5D-DG41"
-        type="text"
+        type="number"
         v-model="code"
       />
       <WButton
