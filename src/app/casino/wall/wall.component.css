@@ -33,7 +33,7 @@
 
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Define as colunas automáticas com um mínimo de 150px e ocupando toda a largura disponível */
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Define as colunas automáticas com um mínimo de 150px e ocupando toda a largura disponível */
     gap: 1.25rem 0.75rem;
 }
 
@@ -318,7 +318,7 @@
 @media only screen and (min-width: 768px) and (max-width: 1279px){
     .bloco > .game-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 1.25rem .75rem;
     }
 }
@@ -340,7 +340,7 @@
 @media only screen and (min-width: 1280px) {
     .bloco > .game-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
         gap: 1.25rem .75rem;
     }
 }
