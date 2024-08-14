@@ -247,14 +247,6 @@
     flex: 0 0 auto; 
 }
 
-.shortcut-amounts button p {
-    margin-bottom: 0;
-}
-
-.shortcut-amounts button p:first-child {
-    margin-right: 2px;
-}
-
 .shortcut-amounts button:active,
 .shortcut-amounts button:hover {
     background-color: var(--highlight);
