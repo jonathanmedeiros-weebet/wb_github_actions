@@ -28,6 +28,7 @@
     text-decoration: none;
     line-height: 16px;
     cursor: pointer;
+    padding-right: 10px;
 }
 
 .scroll-buttons {
