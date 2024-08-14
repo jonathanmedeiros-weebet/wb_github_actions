@@ -56,7 +56,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     registerCancel = false;
     modalClose = true;
     promocoes: any;
-    promocaoAtiva = true;
+    promocaoAtiva = false;
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
 
@@ -205,22 +205,27 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     verificarPromocaoAtiva(): void {
         if (this.promocoes && this.promocoes.length > 0) {
-            const promocaoEsportivo = this.promocoes.find(promocao => promocao.ativo && promocao.bonusModalidade === 'esportivo' && promocao.valorBonus > 0.00)
-            const promocaoCassino = this.promocoes.find(promocao => promocao.ativo && promocao.bonusModalidade === 'cassino' && promocao.valorBonus > 0.00)
+            const promocaoCassino = this.promocoes.find(promocao => 
+                promocao.ativo && 
+                promocao.tipo === 'primeiro_deposito_bonus' && 
+                promocao.valorBonus > 0.00 && 
+                promocao.bonusModalidade === 'cassino'
+            );
+
+            const promocaoEsportivo = this.promocoes.find(promocao => 
+                promocao.ativo && 
+                promocao.tipo === 'primeiro_deposito_bonus' && 
+                promocao.valorBonus > 0.00 &&
+                promocao.bonusModalidade === 'esportivo'
+            );
 
             if (promocaoCassino) {
-                this.promocaoAtiva = true;
+                this.promocaoAtiva = promocaoCassino.ativo;
                 this.valorPromocao = parseFloat(promocaoCassino.valorBonus);
-            } else if (promocaoEsportivo) {
-                this.promocaoAtiva = true;
+            } else if(promocaoEsportivo){
+                this.promocaoAtiva = promocaoEsportivo.ativo;
                 this.valorPromocao = parseFloat(promocaoEsportivo.valorBonus);
-            } else {
-                this.promocaoAtiva = false;
-                this.valorPromocao = null;
             }
-        } else {
-            this.promocaoAtiva = false;
-            this.valorPromocao = null;
         }
     }
 
