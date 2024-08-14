@@ -97,6 +97,7 @@ export default {
 .modal {
   display: flex;
   flex-direction: column;
+  background-color: #181818;
   background: var(--color-background-input);
   border-radius: 24px 24px 0px 0px;
   width: 100%;
@@ -114,10 +115,10 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-top: 18px;
+    background-color: #0a0a0a;
     background-color: var(--color-background);
     width: 49px;
     height: 5px;
-    gap: 10px;
     border-radius: 10px;
   }
 
@@ -125,7 +126,9 @@ export default {
     display: flex;
     align-items: center;  /* Centraliza verticalmente */
     justify-content: center; 
+    background-color: #181818;
     background-color: var(--color-background-input);
+    color: #ffffff80;
     color: var(--color-text-input);
     border: none;
     font-size: 15px;
@@ -139,7 +142,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
     margin-top: 20px;
   }
 
@@ -152,7 +154,6 @@ export default {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
     padding-bottom: 15px;
     text-align: center;
     overflow-y: auto;
