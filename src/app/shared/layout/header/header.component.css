@@ -124,7 +124,7 @@ nav a {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    gap: 12px;
+    gap: 8px;
 }
 
 .side {
@@ -696,7 +696,7 @@ body .change-theme {
         max-width: calc(40vw - 70px);
     }
     .container-icons {
-        gap: 5px;
+        gap: 8px;
         padding-left: 5px;
     }
     .btn-xtremepush {
@@ -712,7 +712,7 @@ body .change-theme {
     }
     .container-icons {
         padding: 0px 1%;
-        gap: 5px;
+        gap: 8px;
         margin-right: -4px;
     }
     .btn{
