@@ -74,7 +74,7 @@
       <div class="cotacao">
         <div class="cotacao__value">
           <span>Cotação:</span>
-          <span>{{ quoteValue }}</span>
+          <span>{{ quoteValue.toFixed(2) }}</span>
         </div>
         <div class="cotacao__ganhos">
           <span>Possíveis ganhos:</span>
@@ -188,7 +188,7 @@ export default {
           quote = options.fator_max;
       }
 
-      return quote.toFixed(2);
+      return quote;
     },
     possibilityAward() {
       const { options } = useConfigClient();
@@ -341,6 +341,9 @@ export default {
           })
         })
         .finally(() => this.submitting = false)
+    },
+    formatCurrency(value) {
+      return formatCurrency(value);
     }
   }
 }
