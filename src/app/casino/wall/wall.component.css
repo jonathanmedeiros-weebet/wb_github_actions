@@ -334,13 +334,14 @@
     }
 }
 
-@media only screen and (min-width: 1336px) {
+@media only screen and (min-width: 1280px) {
     .bloco > .game-grid {
-        gap: 15px 10px;
-        grid-template-columns: repeat(8, 1fr);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 1.25rem .75rem;
     }
 }
-
+/* 
 @media only screen and (min-width: 1512px) {
     .bloco > .game-grid {
         gap: 15px 10px;
@@ -390,4 +391,4 @@
         grid-template-columns: repeat(12, 1fr);
         gap: 20px 12px;
     }
-}
+} */
