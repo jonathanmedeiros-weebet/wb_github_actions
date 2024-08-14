@@ -65,8 +65,8 @@
                     <i class="material-symbols-outlined material-symbols-outlined-headset_mic"></i>
                 </a>
             </div>
-            <div style="display: flex;">
-                <a style="color: #ffffff; font-size: 0px;" *ngIf="xtremepushHabilitado" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
+            <div style="display: flex;" *ngIf="xtremepushHabilitado">
+                <a style="color: #ffffff; font-size: 0px;" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
                     <div id="badge-xtremepush"></div>
                     <div class="icon-xtremepush">
                         <span class="material-symbols-outlined material-symbols-outlined-notifications" style="opacity: 75%; font-size: 0px;"></span>
