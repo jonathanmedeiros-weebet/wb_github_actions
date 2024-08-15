@@ -156,16 +156,24 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
-        if (this.gameFornecedor === 'tomhorn') {
-            this.closeSessionGameTomHorn();
-        } else if(this.gameFornecedor === 'parlaybay') {
-            this.router.navigate(['pb']);
-        } else if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
-            this.router.navigate(['live-casino']);
-        } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){
-            this.router.navigate(['casino']);
-        }else{
-            this.location.back();
+        switch (this.gameFornecedor) {
+            case 'tomhorn':
+                this.closeSessionGameTomHorn();
+                break;
+            case 'parlaybay':
+                this.router.navigate(['pb']);
+                break;
+            case 'ezugi':
+            case 'evolution':
+                this.router.navigate(['live-casino']);
+                break;
+            case 'pascal':
+            case 'galaxsys':
+            case 'pgsoft':
+                this.router.navigate(['casino']);
+                break;
+            default:
+                this.location.back();
         }
 
         if (this.fullscreen) {
