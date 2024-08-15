@@ -1,13 +1,14 @@
-import {Component, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {AuthService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService} from '../../services';
-import {interval} from 'rxjs';
+import {AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService} from '../../services';
+import {interval, Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
+import { takeUntil } from 'rxjs/operators';
 
 
 
@@ -33,6 +34,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
     removerBotaoFullscreen = false;
     isLoggedIn = false;
     backgroundImageUrl = '';
+    unsub$ = new Subject();
+    headerHeight = 92;
+    currentHeight = window.innerHeight - this.headerHeight;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -47,6 +51,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private utilsService: UtilsService,
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
+        private layoutService: LayoutService,
+        private cd: ChangeDetectorRef,
+        private el: ElementRef,
         @Inject(DOCUMENT) private document: any
     ) {}
 
@@ -131,6 +138,26 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.gameFornecedor === 'galaxsys') {
             this.appendScriptGalaxsys();
+        }
+    }
+    
+    ngAfterViewInit(){
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.changeGameviewHeight();
+                this.cd.detectChanges();
+            });
+    }
+
+    changeGameviewHeight() {
+        if(!this.isMobile){
+            const headerHeight = this.headerHeight;
+            const contentEl = this.el.nativeElement.querySelector('.game-frame');
+            const headerGameView = this.el.nativeElement.querySelector('.header-game-view').getBoundingClientRect().height;
+            const height = window.innerHeight - headerHeight - headerGameView;
+            this.renderer.setStyle(contentEl, 'height', `${height}px`);
         }
     }
 
