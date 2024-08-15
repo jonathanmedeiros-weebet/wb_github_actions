@@ -202,6 +202,8 @@
                 <app-error-msg [control]="form.get('captcha')"></app-error-msg>
             </div>
 
+            <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
+
             <div class="col-12">
                 <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
             </div>
@@ -215,6 +217,8 @@
                 <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de Serviço</a> se aplicam.
             </div>
 
+            <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
+
             <div class="col-12">
                 <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
             </div>
@@ -225,6 +229,14 @@
         </div>
     </form>
 </div>
+
+<ng-template #registerErrorTemplate>
+    <div class="col-12" *ngIf="errorMessage">
+        <div class="alert alert-danger">
+            {{errorMessage}}
+        </div>
+    </div>
+</ng-template>
 
 <ng-template #ativacaoCadastroModal let-modal>
     <div class="modal-header" style="display: flex; justify-content: end;">
