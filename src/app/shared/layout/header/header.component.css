@@ -66,8 +66,6 @@
 }
 
 nav {
-    margin-left: 63%;
-    width: calc(100% - 700px);
     display: flex;
     justify-content: center;
 }
@@ -494,6 +492,30 @@ body .change-theme {
 
 .material-symbols-outlined-featured_seasonal_and_gifts::before {
     content: 'featured_seasonal_and_gifts';
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.side-left, .container-group{
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+}
+
+.center{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 400px);
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 1;
 }
 
 @media only screen and (min-width: 1025px) {
