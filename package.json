@@ -299,7 +299,8 @@
         "floripa.bet": "gulp floripa.bet",
         "appjetbet365.com": "gulp appjetbet365.com",
         "amurel.bet": "gulp amurel.bet",
-        "bellagames.bet": "gulp bellagames.bet"
+        "bellagames.bet": "gulp bellagames.bet",
+        "tourodasorte.bet": "gulp tourodasorte.bet"
     },
     "private": true,
     "dependencies": {
