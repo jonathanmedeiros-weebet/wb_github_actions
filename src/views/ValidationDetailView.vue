@@ -61,9 +61,11 @@
             <button class="value__add" @click="addValue(50)">+50</button>
             <w-input
               class="value__balance-input"
-              name="value_bet"
+              name="bet-value"
               type="number"
-              v-model="valueBet" 
+              v-model="betValue"
+              :value="betValue"
+              @focus="handleInitializeBetValue"
             >
               <template #icon>
                 <span style="color: #ffffff80;">R$</span>
@@ -439,6 +441,9 @@ export default {
 }
 
 .value {
+
+  padding-top: 15px;
+
   &__balance-text {
     font-size: 14px;
   }
@@ -466,7 +471,7 @@ export default {
 
   &__balance-input{
     width: 100%;
-    margin-bottom: -10px;
+    margin-top: 10px;
   }
   
   &__balance-input ::v-deep .input__field {
