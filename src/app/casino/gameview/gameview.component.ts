@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
@@ -6,6 +6,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {
     AuthService,
+    LayoutService,
     FinanceiroService,
     MenuFooterService,
     MessageService,
@@ -48,10 +49,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
     removerBotaoFullscreen = false;
     isLoggedIn = false;
     backgroundImageUrl = '';
+    headerHeight = 92;
+    currentHeight = window.innerHeight - this.headerHeight;
     posicaoFinanceira;
-    unsub$ = new Subject();
     avisoCancelarBonus = false;
     modalRef;
+    unsub$ = new Subject();
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -66,6 +69,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private utilsService: UtilsService,
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
+        private layoutService: LayoutService,
+        private cd: ChangeDetectorRef,
+        private el: ElementRef,
         private financeiroService: FinanceiroService,
         @Inject(DOCUMENT) private document: any
     ) {}
@@ -159,6 +165,26 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.appendScriptGalaxsys();
         }
     }
+    
+    ngAfterViewInit(){
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.changeGameviewHeight();
+                this.cd.detectChanges();
+            });
+    }
+
+    changeGameviewHeight() {
+        if(!this.isMobile){
+            const headerHeight = this.headerHeight;
+            const contentEl = this.el.nativeElement.querySelector('.game-frame');
+            const headerGameView = this.el.nativeElement.querySelector('.header-game-view').getBoundingClientRect().height;
+            const height = window.innerHeight - headerHeight - headerGameView;
+            this.renderer.setStyle(contentEl, 'height', `${height}px`);
+        }
+    }
 
     loadGame() {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
@@ -185,16 +211,25 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if(this.modalRef) {
             this.modalRef.close();
         }
-        if (this.gameFornecedor === 'tomhorn') {
-            this.closeSessionGameTomHorn();
-        } else if(this.gameFornecedor === 'parlaybay') {
-            this.router.navigate(['pb']);
-        } else if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
-            this.router.navigate(['live-casino']);
-        } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){
-            this.router.navigate(['casino']);
-        }else{
-            this.location.back();
+        
+        switch (this.gameFornecedor) {
+            case 'tomhorn':
+                this.closeSessionGameTomHorn();
+                break;
+            case 'parlaybay':
+                this.router.navigate(['pb']);
+                break;
+            case 'ezugi':
+            case 'evolution':
+                this.router.navigate(['live-casino']);
+                break;
+            case 'pascal':
+            case 'galaxsys':
+            case 'pgsoft':
+                this.router.navigate(['casino']);
+                break;
+            default:
+                this.location.back();
         }
 
         if (this.fullscreen) {

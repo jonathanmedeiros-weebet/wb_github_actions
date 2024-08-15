@@ -184,7 +184,7 @@ iframe{
 
 @media (min-width: 1025px) {
     .game-frame {
-        height: calc(100vh - 139px);
+        height: calc(100vh - 175px);
     }
 
     iframe {

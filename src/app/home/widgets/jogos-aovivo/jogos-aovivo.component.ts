@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnDe
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 import { BilheteEsportivoService, HelperService, JogoService, LiveService, ParametrosLocaisService } from 'src/app/services';
 
 @Component({
@@ -173,7 +174,6 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
             .subscribe((jogo: any) => {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
                 let inserirCampeonato = false;
-
                 jogo.cotacoes.map(cotacao => {
                     cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                     cotacao.valorFinal = this.helperService.calcularCotacao2String(
@@ -288,6 +288,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
                 chave: cotacao.chave,
                 valor: cotacao.valor,
                 nome: this.helperService.apostaTipoLabel(cotacao.chave, 'sigla'),
+                price_change: cotacao.price_change
             },
             mudanca: false,
             cotacao_antiga_valor: null
@@ -310,5 +311,17 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+    }
+
+    getOddChangeClass(status:string) {
+        switch (status) {
+            case CotationPriceChange.Up:
+                return'odd-up';
+            case CotationPriceChange.Down:
+                return'odd-down';
+            case CotationPriceChange.Same:
+            default:
+                return '';
+        };
     }
 }

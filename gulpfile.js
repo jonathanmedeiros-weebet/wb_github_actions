@@ -2841,3 +2841,12 @@ gulp.task('bellagames.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('tourodasorte.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "tourodasorte.bet",
+        banca: "TOURO DA SORTE",
+        styles: ""
+    });
+});
