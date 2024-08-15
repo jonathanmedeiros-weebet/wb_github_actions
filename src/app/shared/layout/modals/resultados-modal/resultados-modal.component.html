@@ -15,8 +15,7 @@
     <div class="filters">
         <form (ngSubmit)="onSubmit()" [formGroup]="form">
             <div class="input-group datepicker-group">
-                <i class="fa fa-calendar"></i>
-                <input type="date" class="form-control inverted-out" formControlName="data">
+                <input type="date" class="form-control inverted-out custom-date-input" id="calendar" formControlName="data">
             </div>
             <select class="form-control inverted-out" formControlName="sport_id">
                 <option value="1">{{'submenu.futebol' | translate}}</option>
