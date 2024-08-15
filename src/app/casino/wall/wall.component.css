@@ -35,6 +35,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Define as colunas automáticas com um mínimo de 150px e ocupando toda a largura disponível */
     gap: 1.25rem 0.75rem;
+    padding-right: 10px;
 }
 
 .game-grid::-webkit-scrollbar {
@@ -179,18 +180,39 @@
     gap: 24px;
 }
 
-.blocoGameList{
-    padding: 0 0 24px 10px !important;
+@media only screen and (min-width: 320px) and (max-width: 768px){
+    .blocoGameList{
+        padding: 0 0 24px 10px !important;
+    }
+
+    .bloco {
+        position: relative;
+        padding: 0 0 24px 10px;
+        margin: 0 auto;
+        width: 100%;
+    }
 }
+
+@media only screen and (min-width: 769px) and (max-width: 1279px){
+    .blocoGameList{
+        padding: 0 0 24px 16px !important;
+    }
+
+    .bloco {
+        padding: 0 0 24px 16px;
+    }
+
+    .game-grid {
+        padding-right: 16px;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     .wall-container {
         height: -webkit-fill-available;
         -webkit-overflow-scrolling: touch;
     }
 
-    .bloco {
-        padding: 0 10px 24px 10px
-    }
 
     .game-list {
         flex-wrap: nowrap;
@@ -342,5 +364,17 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
         gap: 1.25rem .75rem;
+    }
+
+    .bloco {
+        padding: 0 0 24px 18px;
+    }
+
+    .blocoGameList{
+        padding: 0 0 24px 18px !important;
+    }
+
+    .game-grid {
+        padding-right: 18px;
     }
 }

@@ -552,9 +552,9 @@ body .change-theme {
     }
 
     .header {
-        padding-top: 14px;
+        padding-top: 15px;
         width: 100%;
-        height: 46px;
+        height: 52px;
         display: flex;
     }
 
