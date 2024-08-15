@@ -16,7 +16,7 @@
                         :src="championship.image"
                         @error="changeSrcWhenImageError"
                     />
-                    <component class="game-list__collapse-icon" v-if="championship.icon" :is="championship.icon" color="var(--color-primary)" />
+                    <component class="game-list__collapse-icon" v-if="championship.icon" :is="championship.icon" color="#0be58e" />
                     {{ championship.nome }}
                 </template>
 
@@ -114,13 +114,13 @@ export default {
     width: 100%;
     height: calc(100vh - 100px);
     display: flex;
-    flex-direction: column;
-    gap: 1px;
+    flex-direction: column; 
     overflow-y: auto;
     padding-bottom: 100px;
 
     &__items {
         margin-top: 1px;
+        margin-bottom: 1px;
         display: flex;
         flex-direction: column;
     }
@@ -172,6 +172,7 @@ export default {
         width: 100%;
         padding: 8px 16px;
         font-size: 12px;
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 }

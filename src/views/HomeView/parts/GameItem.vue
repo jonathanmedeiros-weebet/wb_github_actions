@@ -22,8 +22,8 @@
             </span>
         </div>
         <div class="game__score" v-if="isLive">
-            <strong>{{ teamScoreA }}</strong>
-            <strong>{{ teamScoreB }}</strong>
+            <span><strong>{{ teamScoreA }}</strong></span>
+            <span class="game__score-number"><strong>{{ teamScoreB }}</strong></span>
         </div>
         <div class="game__quotes">
             <div
@@ -37,19 +37,19 @@
                     <IconArrowFillUp
                         class="game__icon-quota"
                         :size="14"
-                        :color="isIncreasedQuote(quote) ? 'var(--color-success)' : 'transparent'"
+                        :color="isIncreasedQuote(quote) ? '#6da544' : 'transparent'"
                     />
                     {{ quote.finalValue }}
                     <IconArrowFillDown
                         class="game__icon-quota"
                         :size="14"
-                        :color="isDecreasedQuote(quote) ? 'var(--color-danger)' : 'transparent'"
+                        :color="isDecreasedQuote(quote) ? '#f61a1a' : 'transparent'"
                     />
                 </span>
                 <IconLock
                     v-else
                     :size="14"
-                    color="var(--color-text-input)"
+                    color="#ffffff80"
                 />
             </div>
         </div>
@@ -183,6 +183,7 @@ export default {
     justify-content: space-between;
     align-items: flex-start;
     padding: 13px 16px;
+    background: #181818;
     background: var(--color-background-input);
     margin-top: 1px;
 
@@ -194,12 +195,11 @@ export default {
     &__team {
         display: flex;
         align-items: center;
-        gap: 4px;
+        color: #ffffff;
         color: var(--color-text);
         font-size: 14px;
         font-weight: 400;
         line-height: 14px;
-
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -213,6 +213,7 @@ export default {
     &__team img {
         width: 16px;
         height: 16px;
+        margin-right: 8px;
     }
 
     &__info {
@@ -229,9 +230,10 @@ export default {
         font-size: 10px;
         line-height: 10px;
         font-weight: 400;
+        color: #0be58e;
         color: var(--color-primary);
 
-        border: 0.5px solid var(--color-primary);
+        border: 0.5px solid #0be58e;
         border-radius: 2px;
         padding: 0 5px;
 
@@ -246,7 +248,6 @@ export default {
     &__quotes {
         display: flex;
         justify-content: space-between;
-        gap: 8px;
         min-width: 190px;
         margin-top: auto;
         margin-bottom: auto;
@@ -259,9 +260,12 @@ export default {
         width: 58px;
         height: 54px;
         border-radius: 4px;
+        background: #0a0a0a;
         background: var(--color-background);
         &--selected {
+            background: #0be58e;
             background: var(--color-primary);
+            color: #0a0a0a;
             color: var(--color-background);
         }
     }
@@ -278,6 +282,7 @@ export default {
     }
 
     &__live {
+        color: #f61a1a;
         color: var(--color-danger);
         font-size: 12px;
         font-style: normal;
@@ -286,6 +291,7 @@ export default {
     }
 
     &__time {
+        color: #ffffff80;
         color: var(--color-text-input);
         font-size: 12px;
         font-style: normal;
@@ -301,8 +307,12 @@ export default {
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        gap: 5px;
     }
+
+    &__score-number {
+        margin-top: 4px;
+    }
+    
 }
 
 </style>
