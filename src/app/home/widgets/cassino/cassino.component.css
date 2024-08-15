@@ -36,7 +36,7 @@
 
 .game-list {
     display: flex;
-    gap: 15px;
+    gap: 0.75rem;
     flex-wrap: wrap;
     -ms-overflow-style: none;
     /* IE and Edge */
@@ -92,7 +92,7 @@
 
 @media only screen and (max-width: 1024px) {
     .bloco {
-        padding: 0 10px 24px;
+        padding: 0 0 24px 16px;
     }
 
     .bloco .titulo {
