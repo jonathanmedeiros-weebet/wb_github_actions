@@ -389,6 +389,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 2.5px;
   }
 
   &__team {
@@ -398,7 +399,6 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    gap: 4px;
   }
 
   &__icon-live {
@@ -409,6 +409,7 @@ export default {
   &__icon-ball {
     width: 14px;
     height: 14px;
+    margin-right: 4px;
   }
 
   &__icon-close {
@@ -426,6 +427,7 @@ export default {
     font-size: 12px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 4px;
   }
 
   &__text {
@@ -441,15 +443,13 @@ export default {
 }
 
 .value {
-
-  padding-top: 15px;
+  margin-top: 8px;
 
   &__balance-text {
     font-size: 14px;
   }
 
   &__balance {
-    gap: 8px;
     display: flex;
     align-items: center;
   }
@@ -461,12 +461,13 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: #181818;
     background: var(--color-background-input);
-    color: #ffffff80;
+    background: #181818;
     color: var(--color-text-input);
+    color: #ffffff80;
     font-size: 14px;
     border: none; 
+    margin-right: 8px;
   }
 
   &__balance-input{
@@ -476,6 +477,10 @@ export default {
   
   &__balance-input ::v-deep .input__field {
     height: 50px;
+  }
+
+  &__label {
+    margin-top: 10px;
   }
 }
 
@@ -498,10 +503,10 @@ export default {
     padding-top: 5px;
     display: flex;
     align-items: center;
-    gap: 8px;
   }
 
   &__checkbox {
+    margin-right: 5px;
     appearance: none;
     width: 15px;
     height: 15px;
