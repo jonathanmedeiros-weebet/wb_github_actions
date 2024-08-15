@@ -90,11 +90,11 @@ export default {
         teams() {
             return [
                 {
-                    image: `https://cdn.wee.bet/img/times/m/${this.game.time_a_img ?? 'https://cdn.wee.bet/img/times/m/default'}.png`,
+                    image: `https://cdn.wee.bet/img/times/m/${this.game.time_a_img ?? 'https://cdn.wee.bet/img/times/m/default.png'}.png`,
                     name: this.game.time_a_nome,
                 },
                 {
-                    image: `https://cdn.wee.bet/img/times/m/${this.game.time_b_img ?? 'https://cdn.wee.bet/img/times/m/default'}.png`,
+                    image: `https://cdn.wee.bet/img/times/m/${this.game.time_b_img ?? 'https://cdn.wee.bet/img/times/m/default.png'}.png`,
                     name: this.game.time_b_nome,
                 }
             ]
