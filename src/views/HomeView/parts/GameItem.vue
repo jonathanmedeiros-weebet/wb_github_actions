@@ -3,7 +3,7 @@
         <div class="game__teams">
             <span
                 v-for="(team, index) in teams"
-                class="game__team truncate-single-line"
+                class="game__team"
                 :class="{'game__team--first': index == 0}"
                 :key="index"
             >
@@ -314,12 +314,4 @@ export default {
     }
     
 }
-
-.truncate-single-line {
-    white-space: nowrap;          /* Impede a quebra de linha */
-    // overflow: hidden;             /* Esconde o texto que ultrapassa o limite do elemento */
-    text-overflow: ellipsis;      /* Adiciona "..." ao final do texto cortado */
-    width: 150px;                 /* Define a largura do elemento */
-}
-
 </style>
