@@ -25,7 +25,6 @@
             <ng-container *ngIf="!mobileScreen">
                 <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
             </ng-container>
-
         </div>
 
         <div *ngIf="!isLoggedIn && gameMode == 'REAL'" class="game-frame">
