@@ -2850,3 +2850,13 @@ gulp.task('tourodasorte.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('decola.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "decola.bet",
+        banca: "DECOLA.BET",
+        styles: "",
+        dominioTemp: "tempdecolabet.wee.bet"
+    });
+});

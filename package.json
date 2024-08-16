@@ -300,7 +300,8 @@
         "appjetbet365.com": "gulp appjetbet365.com",
         "amurel.bet": "gulp amurel.bet",
         "bellagames.bet": "gulp bellagames.bet",
-        "tourodasorte.bet": "gulp tourodasorte.bet"
+        "tourodasorte.bet": "gulp tourodasorte.bet",
+        "decola.bet": "gulp decola.bet"
     },
     "private": true,
     "dependencies": {
