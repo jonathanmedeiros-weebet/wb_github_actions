@@ -85,7 +85,6 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
     }
 
     &__item {
@@ -93,11 +92,12 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
 
+        color: #ffffff;
         color: var(--color-text);
         font-size: 16px;
         font-weight: 400;
+        padding-bottom: 20px;
     }
 
     &__item img {
@@ -107,6 +107,7 @@ export default {
 
     &__icon {
         margin-bottom: 10px;
+        margin-left: 10px;
     }
 }
 </style>
