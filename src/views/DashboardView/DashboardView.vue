@@ -324,22 +324,5 @@ export default {
         background: rgba(24, 24, 24, 0.50);
         color: rgba(255, 255, 255, 0.70);
     }
-
-    &__modal-items {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        color: var(--color-text);
-        font-size: 16px;
-        font-weight: 400;
-    }
-
-    &__modal-title {
-        color: rgba(255, 255, 255, 0.5019607843);
-        font-size: 16px;
-        font-weight: 500;
-    }
 }
 </style>
