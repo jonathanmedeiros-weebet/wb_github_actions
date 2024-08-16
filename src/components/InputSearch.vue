@@ -63,10 +63,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 4px;
 
+  background-color: #181818;
   background-color: var(--color-background-input);
-  border: 2px solid var(--color-background-input);
+  border: 2px solid #181818;
 
   box-sizing: border-box;
   border-radius: 50px;
@@ -74,6 +74,7 @@ export default {
   width: 100%;
   
   &--focused {
+    border-color: #0be58e;
     border-color: var(--color-primary);
   }
 
@@ -85,7 +86,6 @@ export default {
       width: 16px;
       display: flex;
       justify-content: center;
-      align-items: center;
     }
   }
 
@@ -94,10 +94,12 @@ export default {
     height: 40px;
     font-size: 16px;
     font-weight: 400;
+    color: #ffffff80;
     color: var(--color-text-input);
     background: transparent;
     border: 0;
     outline: none;
+    margin-left: 4px;
   }
   &__field:hover {
     background: transparent;

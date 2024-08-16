@@ -35,14 +35,14 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
 
     &__title {
         display: flex;
         align-items: center;
-
+        margin-right: 10px;
         font-weight: 400;
         line-height: 23.44px;
+        color: #ffffff;
         color: var(--color-text);
 
         &--large {
