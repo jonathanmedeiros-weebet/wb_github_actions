@@ -45,31 +45,9 @@
             />
         </div>
 
-        <div class="bloco" *ngIf="!this.hideProviders">
-            <app-wall-section
-                sectionId="providers"
-                [title]="'geral.provedores' | translate"
-                [itemsQty]="cassinoFornecedores.length"
-                (onSeeAll)="openFiltroFornecedores()"
-                (onLeft)="scrollLeft('providers')"
-                (onRight)="scrollRight('providers')"
-            />
-
-            <div class="provider-container">
-                <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
-                    <app-wall-provider-card
-                        *ngFor="let fornecedor of cassinoFornecedores"
-                        [data]="fornecedor"
-                        [selected]="gameFornecedor == fornecedor.gameFornecedor"
-                        (onClick)="filterGames($event, categorySelected, true)"
-                    />
-                </div>
-            </div>
-        </div>
-
         <div class="wall-inner" *ngIf="isHomeCassino; else cassinoGameList">
             <ng-container *ngFor="let section of gamesSection">
-                <div class="bloco" *ngIf="section.show">
+                <div class="bloco blocoGameList" *ngIf="section.show">
                     <app-wall-section
                         [sectionId]="section.id"
                         [title]="section.title"
@@ -94,7 +72,6 @@
 
                                 />
                             </div>
-                            <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
                         </ng-container>
                         <ng-template #elseWithoutGames>
                             <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
@@ -103,6 +80,29 @@
                 </div>
             </ng-container>
         </div>
+
+        <div class="bloco" *ngIf="!this.hideProviders">
+            <app-wall-section
+                sectionId="providers"
+                [title]="'geral.provedores' | translate"
+                [itemsQty]="cassinoFornecedores.length"
+                (onSeeAll)="openFiltroFornecedores()"
+                (onLeft)="scrollLeft('providers')"
+                (onRight)="scrollRight('providers')"
+            />
+
+            <div class="provider-container">
+                <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
+                    <app-wall-provider-card
+                        *ngFor="let fornecedor of cassinoFornecedores"
+                        [data]="fornecedor"
+                        [selected]="gameFornecedor == fornecedor.gameFornecedor"
+                        (onClick)="filterGames($event, categorySelected, true)"
+                    />
+                </div>
+            </div>
+        </div>
+
 
         <app-footer [container]="listagem"></app-footer>
 

@@ -15,7 +15,7 @@ export class WallGameCardComponent {
   @Output() openModalLogin = new EventEmitter();
 
   get gameImageUrl(): string {
-    return `https://cdn.wee.bet/img/cassino/${this.game.fornecedor}/${this.game.gameID}.png`;
+      return `https://cdn.wee.bet/img/casino/thumbnails/${this.game.fornecedor}/${this.game.gameID}.png`;
   }
 
   get routerLinkDemo(): any[] {

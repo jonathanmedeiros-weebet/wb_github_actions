@@ -66,8 +66,6 @@
 }
 
 nav {
-    margin-left: 65%;
-    width: calc(100% - 700px);
     display: flex;
     justify-content: center;
 }
@@ -124,7 +122,7 @@ nav a {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    gap: 12px;
+    gap: 8px;
 }
 
 .side {
@@ -496,6 +494,30 @@ body .change-theme {
     content: 'featured_seasonal_and_gifts';
 }
 
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.side-left, .container-group{
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+}
+
+.center{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 400px);
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 1;
+}
+
 @media only screen and (min-width: 1025px) {
     .btn-indique-ganhe-card:hover {
         padding: 0 15px !important;
@@ -530,8 +552,9 @@ body .change-theme {
     }
 
     .header {
+        padding-top: 15px;
         width: 100%;
-        height: 64px;
+        height: 52px;
         display: flex;
     }
 
@@ -696,7 +719,7 @@ body .change-theme {
         max-width: calc(40vw - 70px);
     }
     .container-icons {
-        gap: 5px;
+        gap: 8px;
         padding-left: 5px;
     }
     .btn-xtremepush {
@@ -712,7 +735,7 @@ body .change-theme {
     }
     .container-icons {
         padding: 0px 1%;
-        gap: 5px;
+        gap: 8px;
         margin-right: -4px;
     }
     .btn{
@@ -848,6 +871,13 @@ body .change-theme {
         width: 270px;
     }
 }
+
+@media screen and (min-width: 1366px) and (max-width: 1400px) {
+    .container-group{
+        margin-left: 20px;
+    }
+}
+
 
 .info-connection-card {
     display: block;

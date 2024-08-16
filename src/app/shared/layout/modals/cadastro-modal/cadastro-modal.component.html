@@ -162,35 +162,47 @@
 
             <input type="hidden" formControlName="btag">
 
-            <div class="row captcha" *ngIf="provedorCaptcha == 'hcaptcha'">
-                <div class="col-12">
-                    <ng-hcaptcha formControlName="captcha" [languageCode]="hCaptchaLanguage"></ng-hcaptcha>
-                    <app-error-msg [control]="form.get('captcha')"></app-error-msg>
-                </div>
+        <div class="row captcha" *ngIf="provedorCaptcha == 'hcaptcha'">
+            <div class="col-12">
+                <ng-hcaptcha formControlName="captcha" [languageCode]="hCaptchaLanguage"></ng-hcaptcha>
+                <app-error-msg [control]="form.get('captcha')"></app-error-msg>
+            </div>
+
+            <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
                 </div>
             </div>
 
-            <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
-                <div class="col-12" [ngStyle]="{'text-align': 'left'}">
-                    <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
-                    Este site é protegido por reCAPTCHA e a
-                    <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de Privacidade</a> do Google e os
-                    <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de Serviço</a> se aplicam.
-                </div>
-
-                <div class="col-12">
-                    <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
-                </div>
-                <div class="login">
-                    {{'geral.jaPossuiUmaConta' | translate}}
-                    <a (click)="abrirLogin()">{{'geral.entrarNaConta' | translate}}</a>
-                </div>
+        <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
+            <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px'}">
+                <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
+                Este site é protegido por reCAPTCHA e a
+                <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de Privacidade</a> do Google e os
+                <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de Serviço</a> se aplicam.
             </div>
-        </form>
+
+            <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
+
+            <div class="col-12">
+                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+            </div>
+            <div class="login">
+                {{'geral.jaPossuiUmaConta' | translate}}
+                <a (click)="abrirLogin()">{{'geral.entrarNaConta' | translate}}</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<ng-template #registerErrorTemplate>
+    <div class="col-12" *ngIf="errorMessage">
+        <div class="alert alert-danger">
+            {{errorMessage}}
+        </div>
     </div>
+</ng-template>
 
     <ng-template #ativacaoCadastroModal let-modal>
         <div class="modal-header" style="display: flex; justify-content: end;">

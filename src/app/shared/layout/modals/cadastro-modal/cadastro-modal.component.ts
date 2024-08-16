@@ -49,9 +49,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     user: any;
     loginGoogleAtivo = false;
     formSocial = false;
-    aplicarCssTermo: boolean = false;
+    aplicarCssTermo = false;
     parameters = {};
     parametersList;
+    errorMessage = '';
     postbacks = {};
     registerCancel = false;
     modalClose = true;
@@ -301,6 +302,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.form.updateValueAndValidity();
     }
 
+    onSubmit() {
+        this.clearErrorMessage();
+        super.onSubmit();
+    }
+
     submit() {
         if (this.menorDeIdade) {
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
@@ -349,7 +355,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 },
                 error => {
-                    this.messageService.error(error);
+                    this.handleError(error);
                     this.form.patchValue({captcha: null});
                     this.submitting = false;
                 }
@@ -357,7 +363,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     handleError(error: string) {
-        this.messageService.error(error);
+        this.errorMessage = error;
+    }
+
+    clearErrorMessage() {
+        this.errorMessage = '';
     }
 
     abrirLogin() {
