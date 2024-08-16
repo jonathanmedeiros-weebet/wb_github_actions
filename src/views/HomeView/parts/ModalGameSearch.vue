@@ -3,7 +3,7 @@
       <div class="modal-game-search__header">
         <InputSearch @input="handleSearch" @clear="handleSearch"/>
         <button class="modal-game-search__close" @click="handleClose">
-          <IconClose color="var(--color-text)"/>
+          <IconClose color="#ffffff"/>
         </button>
       </div>
       <div class="modal-game-search__body">
@@ -111,7 +111,9 @@ export default {
   display: flex;
   flex-direction: column;
 
+  color: #ffffff;
   color: var(--color-text);
+  background: #0a0a0a;
   background: var(--color-background);
 
   &__header {
@@ -119,7 +121,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
   }
 
   &__body {
@@ -127,6 +128,7 @@ export default {
     overflow-y: auto;
     max-height: calc(100% - 40px);
     height: 100%;
+    
   }
 
   &__close,
@@ -139,6 +141,7 @@ export default {
 
     margin: 0;
     padding: 0;
+    margin-left: 8px;
   }
 }
 </style>
