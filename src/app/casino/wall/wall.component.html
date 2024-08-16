@@ -49,6 +49,7 @@
             <ng-container *ngFor="let section of gamesSection">
                 <div class="bloco blocoGameList" *ngIf="section.show">
                     <app-wall-section
+                        [container]="listagem"
                         [sectionId]="section.id"
                         [title]="section.title"
                         [itemsQty]="section.gameList.length"
@@ -59,7 +60,6 @@
 
                     <div class="games-container">
                         <ng-container *ngIf="section.gameList.length; else elseWithoutGames">
-                            <div class="more-games-fade more-games-fade-left" id="{{ section.id }}-fade-left"></div>
                             <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
                                 <app-wall-game-card
                                     *ngFor="let game of section.gameList"
@@ -94,6 +94,7 @@
             <div class="provider-container">
                 <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
                     <app-wall-provider-card
+                        [container]="listagem"
                         *ngFor="let fornecedor of cassinoFornecedores"
                         [data]="fornecedor"
                         [selected]="gameFornecedor == fornecedor.gameFornecedor"

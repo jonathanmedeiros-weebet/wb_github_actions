@@ -130,7 +130,7 @@ iframe{
 
 .desktop-fullscreen .game-frame {
     width:100%;
-    height: calc(100vh - 63px);
+    height: calc(100vh - 46px) !important;
     margin: 0;
 }
 

@@ -32,6 +32,8 @@
 .games-container {
     overflow: hidden;
     position: relative;
+    padding-left: 16px;
+    margin-left: -16px;
 }
 
 .game-list {
@@ -104,6 +106,8 @@
         flex-wrap: nowrap;
         overflow: scroll;
         scroll-behavior: smooth;
+        margin-left: -16px;
+        padding-left: 16px;
     }
 
     .internal .game-list {

@@ -504,7 +504,6 @@ body .change-theme {
 
 .side-left, .container-group{
     flex-shrink: 0;
-    z-index: 2;
     position: relative;
 }
 
@@ -515,7 +514,6 @@ body .change-theme {
     width: calc(100vw - 400px);
     box-sizing: border-box;
     text-align: center;
-    z-index: 1;
 }
 
 @media only screen and (min-width: 1025px) {
