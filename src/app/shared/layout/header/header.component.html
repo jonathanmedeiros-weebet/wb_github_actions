@@ -50,29 +50,37 @@
             <img [src]="LOGO" class="logo">
         </a>
     </div>
-    <nav class="desktop" *ngIf="!showHeaderMobile" #scrollMenu>
-        <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
-    </nav>
+    <div class="center">
+        <nav class="desktop" *ngIf="!showHeaderMobile" #scrollMenu>
+            <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
+        </nav>
+    </div>
     <div class="container-group">
         <div class="container-icons">
             <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo)">
-                <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
-                    <i class="fa-solid fa-headset"></i>
+                <a *ngIf="isDemo" target="_blank" style="font-size: 0px;" href="https://materiais.wee.bet/demo-weebet">
+                    <i class="material-symbols-outlined material-symbols-outlined-headset_mic"></i>
                 </a>
-                <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
-                    <i class="fa-solid fa-headset"></i>
+                <a *ngIf="!isDemo && whatsapp" style="font-size: 0px;" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                    <i class="material-symbols-outlined material-symbols-outlined-headset_mic"></i>
                 </a>
             </div>
-            <a *ngIf="xtremepushHabilitado" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
-                <div id="badge-xtremepush"></div>
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHVQTFRFAAAA/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8fvbQOwAAACd0Uk5TAGtqVv9QlFveV/7Cj/1TFvlm9Q6Cp690zThCwPEPF+qA491R19VNV+9p7gAAAJ5JREFUeJy90c0KgkAUBeB7ShIXFdKPWSJF7/9CLaKwslIrKohssIYJ4k6N4KqzuHOYb7ibAZUEVQAojFAH4WGCRkG1/BdsCDkt3L7AQW6DnncHZw3auDaP8nQvLWQcuic3UaV/6Ow4DNJerMpw7605BFs/UiXcjJYcLBKkt//BeMUgWHxA3vMowfuVHkHVfnASUTg3wRTAzASlq/S8AOWULRluMiNTAAAAAElFTkSuQmCC" alt="Toggle Icon">
-            </a>
+            <div style="display: flex;" *ngIf="xtremepushHabilitado">
+                <a style="color: #ffffff; font-size: 0px;" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
+                    <div id="badge-xtremepush"></div>
+                    <div class="icon-xtremepush">
+                        <span class="material-symbols-outlined material-symbols-outlined-notifications" style="opacity: 75%; font-size: 0px;"></span>
+                    </div>
+                </a>
+            </div>
             <div id="overlay" class="overlay" (click)="closeNotifications()" [class.open]="notificationsXtremepushOpen"></div>
             <div id="xtremepushNotificationWrapper" class="content-div-xtremepush" [class.open]="notificationsXtremepushOpen">
                 <div class="xtremepush-header">
                     <h4 class="xtremepush-title">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHVQTFRFAAAA/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8fvbQOwAAACd0Uk5TAGtqVv9QlFveV/7Cj/1TFvlm9Q6Cp690zThCwPEPF+qA491R19VNV+9p7gAAAJ5JREFUeJy90c0KgkAUBeB7ShIXFdKPWSJF7/9CLaKwslIrKohssIYJ4k6N4KqzuHOYb7ibAZUEVQAojFAH4WGCRkG1/BdsCDkt3L7AQW6DnncHZw3auDaP8nQvLWQcuic3UaV/6Ow4DNJerMpw7605BFs/UiXcjJYcLBKkt//BeMUgWHxA3vMowfuVHkHVfnASUTg3wRTAzASlq/S8AOWULRluMiNTAAAAAElFTkSuQmCC" alt="Toggle Icon">
-                        <span style="vertical-align: middle;">Notificações</span>
+                        <div style="display: flex;">
+                            <span id="icon-xtremepush" class="material-symbols-outlined material-symbols-outlined-notifications stylingNotificationIcon" style="font-size: 0px;"></span>
+                            <span style="vertical-align: middle;">Notificações</span>
+                        </div>
                     </h4>
                     <a type="button" class="btn-close-xtremepush" aria-label="Close" (click)="notificationsXtremepush()">
                         <i class="fa fa-times"></i>
@@ -80,11 +88,10 @@
                 </div>
                 <div id="xtremepushNotificationContainer"></div>
             </div>
-        
             <div class="btn-promocao" *ngIf="paginaPromocaoHabilitado">
-                <a [routerLink]="['/promocao']" routerLinkActive="active">
+                <a [routerLink]="['/promocao']" style="font-size: 0px; line-height: 0;" routerLinkActive="active">
                     <div class="btn-promocao">
-                        <i id="icon-promocao" class="bi bi-gift"></i>
+                        <i class="material-symbols-outlined material-symbols-outlined-featured_seasonal_and_gifts hidingIconText"></i>
                     </div>
                 </a>
             </div>
@@ -94,7 +101,7 @@
                 <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
                     <div *ngIf="isMobile; then depositShortCutMobile else depositShortCutDesktop"></div>
                     <ng-template #depositShortCutDesktop>
-                        <a class="btn btn-custom mr-4" [routerLink]="['clientes/deposito']">
+                        <a class="btn btn-custom mr-4" [routerLink]="['/clientes/deposito']">
                             {{'geral.depositar' | translate | uppercase}}
                         </a>
                     </ng-template>
@@ -506,64 +513,64 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-around">
-                                <a class="dropdown-btn w-130" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
+                                <a class="dropdown-btn w-130" [routerLink]="['/clientes/deposito']" *ngIf="isCliente">
                                     {{ 'geral.depositar' | translate }}
                                 </a>
-                                <a class="dropdown-btn w-130" [routerLink]="['clientes/saque']" *ngIf="isCliente">
+                                <a class="dropdown-btn w-130" [routerLink]="['/clientes/saque']" *ngIf="isCliente">
                                     {{ 'geral.sacar' | translate }}
                                 </a>
-                                <a class="dropdown-btn w-130" [routerLink]="['cambistas/deposito']"
+                                <a class="dropdown-btn w-130" [routerLink]="['/cambistas/deposito']"
                                    *ngIf="!isCliente && enabledBettorPix">
                                     {{ 'geral.liberarCredito' | translate }}
                                 </a>
                             </div>
                             <div class="menu-divider mt-4"></div>
                             <div class="d-flex flex-wrap container-menu">
-                                <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/perfil']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="isCliente">
                                     <i class="fa fa-user mb-2"></i>
                                     {{ 'geral.minhaConta' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['clientes/financeiro']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/financeiro']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="isCliente">
                                     <i class="fa fa-solid fa-dollar mb-2"></i>
                                     {{ 'geral.financeiro' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/apostas']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="isCliente">
                                     <i class="fa fa-solid fa-table-columns mb-2"></i>
                                     {{ 'geral.apostas' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['clientes/rollover']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/rollover']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="isCliente">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
                                     {{ 'geral.bonus' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['clientes/rodada-gratis']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/rodada-gratis']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="isCliente">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
                                     <span
                                         style="text-align: center; white-space: break-spaces; line-height: 14px;">{{ 'geral.rodadaGratis' | translate }}</span>
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['clientes/indique-ganhe']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/indique-ganhe']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="isCliente && indiqueGanheHabilitado">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
                                     <span
                                         style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['clientes/configuracoes']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/configuracoes']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="isCliente">
                                     <i class="fa fa-solid fa-cogs mb-2"></i>
                                     {{ 'geral.configuracoes' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/alterar-senha']"
                                    routerLinkActive="router-link-active" *ngIf="!isCliente">
                                     <i class="fa fa-key mb-2"></i> {{ 'geral.alterarSenha' | translate }}
                                 </a>
@@ -579,25 +586,25 @@
                                     <i class="fa fa-solid fa-check mb-2"></i>
                                     {{ 'geral.validacao' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['cambistas/apuracao']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/apuracao']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="!isCliente">
                                     <i class="fa fa-solid fa-table-columns mb-2"></i>
                                     {{ 'geral.apuracao' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['cambistas/apostas']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/apostas']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="!isCliente">
                                     <i class="fa fa-solid fa-table-columns mb-2"></i>
                                     {{ 'geral.apostas' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['cambistas/tabela']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/tabela']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="!isCliente">
                                     <i class="fa fa-solid fa-print mb-2"></i>
                                     {{ 'geral.tabela' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['cambistas/cartoes']"
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/cartoes']"
                                    routerLinkActive="router-link-active"
                                    *ngIf="!isCliente && cartaoApostaHabilitado">
                                     <i class="fa fa-solid fa-credit-card mb-2"></i>
@@ -664,19 +671,29 @@
 
 <ng-template #menuTemplate>
     <div #menu class="d-flex">
-        <div class="category" *ngIf="aoVivoAtivo">
+        <div class="category" *ngIf="aoVivoAtivo && !betbyAtivo">
             <a [routerLink]="['/live']" routerLinkActive="active">
                 <span>{{ 'menu.aoVivo' | translate }}</span>
             </a>
         </div>
-        <div class="category" *ngIf="esporteAtivo">
+        <div class="category" *ngIf="esporteAtivo && !betbyAtivo">
             <a [routerLink]="['/esportes']" routerLinkActive="active">
                 <span>{{ 'menu.esportes' | translate }}</span>
             </a>
         </div>
+        <div class="category" *ngIf="betbyAtivo">
+            <a [routerLink]="['/sports']" [queryParams]="{'bt-path': '/live'}" routerLinkActive="active" [class.active]="sportsLiveIsActive">
+                <span>{{'menu.aoVivo' | translate}}</span>
+            </a>
+        </div>
+        <div class="category" *ngIf="betbyAtivo">
+            <a [routerLink]="['/sports']" routerLinkActive="active" [queryParams]="{'bt-path': '/'}" [routerLinkActiveOptions]="{ exact: true }" [class.active]="sportsIsActive">
+                <span>{{'menu.esportes' | translate}}</span>
+            </a>
+        </div>
         <ng-container *ngIf="isLoggedIn">
             <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
-                <a [routerLink]="['parlaybay']" routerLinkActive="active">
+                <a [routerLink]="['/parlaybay']" routerLinkActive="active">
                     <span>PARLAYBAY</span>
                 </a>
             </div>

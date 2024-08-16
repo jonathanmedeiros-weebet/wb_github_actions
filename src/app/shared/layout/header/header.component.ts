@@ -1,9 +1,9 @@
 import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {IsActiveMatchOptions, Router} from '@angular/router';
+import {ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
 import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService} from './../../../services';
 import {Usuario} from './../../../models';
@@ -102,6 +102,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     parlaybayAtivo;
     rifa = false;
     loteriaPopularAtiva;
+    betbyAtivo;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -114,6 +115,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     notificationsXtremepushOpen = false;
     public showHeaderMobile: boolean = false;
     xtremepushHabilitado = false;
+
+    private currentRoute: string;
+
+    sportsIsActive = false;
+    sportsLiveIsActive = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -141,6 +147,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private modalService: NgbModal,
         private translate: TranslateService,
         private router: Router,
+        private route: ActivatedRoute,
         private connectionCheck: ConnectionCheckService,
         private renderer: Renderer2,
         private host: ElementRef,
@@ -148,6 +155,17 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private layoutService: LayoutService
     ) {
         super();
+    }
+
+    sportsActive(): void {
+        if (this.currentRoute.startsWith('/sports') && !this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
+            this.sportsIsActive = true;
+        } else if(this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
+            this.sportsLiveIsActive = true;
+        } else {
+            this.sportsLiveIsActive = false;
+            this.sportsIsActive = false;
+        }
     }
 
     get customCasinoName(): string {
@@ -165,6 +183,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngOnInit() {
+        this.currentRoute = this.router.url;
+        this.sportsActive();
+
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.currentRoute = event.urlAfterRedirects;
+                this.sportsActive();
+            }
+        });
 
         this.xtremepushHabilitado = this.paramsService.getOpcoes().xtremepush_habilitado;
         if(this.xtremepushHabilitado) {
@@ -238,6 +265,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
+        this.betbyAtivo = this.paramsService.getOpcoes().betby;
         this.rifa = this.paramsService.getOpcoes().rifa;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;

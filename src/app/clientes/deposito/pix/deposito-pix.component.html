@@ -1,4 +1,7 @@
 <div id="deposito-pix">
+    <div class="content-header">
+        <h2>{{'deposito.titulo' | translate}}</h2>
+    </div>
     <div class="alert alert-success alert-dismissible" *ngIf="exibirMensagemPagamento">
         {{'deposito.seuPixFoiCreditado' | translate:{'novoSaldo': novoSaldo} }}
         <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close">
@@ -28,7 +31,9 @@
                 </div>
             </section>
             <section id="deposit-details">
-                <h3 class="hide-mobile">{{'deposito.depositDetails' | translate}}</h3>
+                <div class="deposit-details-title"> 
+                    <h3 class="hide-mobile">{{'deposito.depositDetails' | translate}}</h3>
+                </div>
                 <div id="details-wrapper">
                     <div class="details-container">
                         <div class="details-text">
@@ -66,7 +71,7 @@
                                     class="btn"
                                     (click)="changeAmount(value)"
                                 >
-                                    +{{ value }}
+                                    +{{ value }} 
                                 </button>
                             </div>
                         </div>
@@ -85,7 +90,6 @@
                                 <div class="options-container bonus-options" [ngStyle]="{'width': onlyOneModality ? '67%' : '100%'}">
                                     <a class="bonus-option"
                                         [ngClass]="{'active':bonusOption === 'esportivo'}"
-                                        [ngStyle]="{'width': onlyOneModality ? '48%' : '31%'}"
                                         (click)="changeBonusOption('esportivo')"
                                         *ngIf="bonusEsportivo"
                                     >
@@ -104,7 +108,6 @@
                                     </a>
                                     <a class="bonus-option"
                                         [ngClass]="{'active':bonusOption === 'cassino'}"
-                                        [ngStyle]="{'width': onlyOneModality ? '48%' : '31%'}"
                                         (click)="changeBonusOption('cassino')"
                                         *ngIf="bonusCassino"
                                     >
@@ -123,7 +126,6 @@
                                     </a>
                                     <a class="bonus-option"
                                         [ngClass]="{'active':bonusOption === 'nenhum'}"
-                                        [ngStyle]="{'width': onlyOneModality ? '48%' : '31%'}"
                                         (click)="changeBonusOption('nenhum')"
                                     >
                                         <div class="bonus">

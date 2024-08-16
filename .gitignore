@@ -47,3 +47,9 @@ Thumbs.db
 
 #param
 #/src/param/parametros.json
+
+# Xtremepush Deploy files
+src/assets/frame.html
+src/assets/service-worker.js
+src/assets/subscribe.html
+
