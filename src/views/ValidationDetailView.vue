@@ -61,11 +61,9 @@
             <button class="value__add" @click="addValue(50)">+50</button>
             <w-input
               class="value__balance-input"
-              name="bet-value"
+              name="value_bet"
               type="number"
-              v-model="betValue"
-              :value="betValue"
-              @focus="handleInitializeBetValue"
+              v-model="valueBet" 
             >
               <template #icon>
                 <span style="color: #ffffff80;">R$</span>
@@ -104,6 +102,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import Header from '@/components/layouts/Header.vue';
