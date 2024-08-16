@@ -30,7 +30,7 @@
             <div class="dashboard__movements-dates">
                 
                 <p class="dashboard__movements-icon-range-dates">
-                    <icon-calendar-month class="dashboard__movements-icon-calendar" fill="var(--color-text-input)"/>
+                    <icon-calendar-month class="dashboard__movements-icon-calendar" fill="#ffffff80"/>
                     {{ dateFilterIni.format('DD/MM/YYYY') }} - {{ dateFilterEnd.format('DD/MM/YYYY') }}</p>  
             </div>
         
@@ -295,6 +295,7 @@ export default {
 
     &__movements-filter {
         font-size: 12px;
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 
@@ -304,6 +305,7 @@ export default {
         justify-content: flex-start;
         padding: 8px 0px;
         font-size: 14px;
+        color: #ffffff80;
         color: var(--color-text-input);
         
     }
