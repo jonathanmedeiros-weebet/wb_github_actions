@@ -19,7 +19,7 @@
                         :style="{'backgroundImage': `url(${region.image})`}"
                     />
 
-                    <component class="modal-leagues__icon" v-if="region.icon" :is="region.icon" color="var(--color-primary)" />
+                    <component class="modal-leagues__icon" v-if="region.icon" :is="region.icon" color="#0be58e" />
 
                     {{ region.name }}
                 </a>
@@ -107,7 +107,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 20px;
+        // gap: 20px;
         height: 100%;
         overflow-y: auto;
         max-height: calc(80% - 56px);
@@ -120,23 +120,30 @@ export default {
         text-transform: uppercase;
         min-height: 30px;
 
+        color: #ffffff;
         color: var(--color-text);
         font-size: 16px;
         font-weight: 400;
         text-align: left;
+
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     &__subitem {
         width: 100%;
         display: flex;
         align-items: center;
-        gap: 10px;
+        
         min-height: 30px;
 
         color: #FFFFFF99;
         font-size: 14px;
         font-weight: 400;
         text-align: left;
+
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     &__image {
@@ -148,6 +155,7 @@ export default {
         background-size: contain;
         background-position: 50%;
         background-repeat: no-repeat;
+        background-color: #0be58e;
         background-color: var(--color-primary);
 
         clip-path: circle();
