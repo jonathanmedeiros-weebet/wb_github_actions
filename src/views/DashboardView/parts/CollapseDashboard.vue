@@ -2,7 +2,7 @@
   <div class="collapse" @click="handleClick">
     <div class="collapse__item">
         <span class="collapse__title"><slot name="title"/></span>
-        <component fill="var(--color-text-input)" :is="iconArrowDinamic"/>
+        <component fill="#ffffff80" :is="iconArrowDinamic"/>
     </div>
     <slot v-if="collapsed" />
   </div>
@@ -52,8 +52,10 @@ export default {
 
         height: 40px;
         padding: 8px 14px;
+        background: #181818;
         background: var(--color-background-input);
         border-radius: 6px;
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 
@@ -61,11 +63,12 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: 6px;
 
+        color: #ffffff;
         color: var(--color-text);
         font-size: 14px;
         font-weight: 400;
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 
@@ -76,6 +79,7 @@ export default {
     }
 
     &__icon {
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 }
