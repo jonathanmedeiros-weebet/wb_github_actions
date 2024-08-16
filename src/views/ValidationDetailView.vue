@@ -460,10 +460,10 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: var(--color-background-input);
     background: #181818;
-    color: var(--color-text-input);
+    background: var(--color-background-input);
     color: #ffffff80;
+    color: var(--color-text-input);
     font-size: 14px;
     border: none; 
     margin-right: 8px;
