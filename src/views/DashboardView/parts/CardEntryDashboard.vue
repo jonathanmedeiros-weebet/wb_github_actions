@@ -6,13 +6,13 @@
                 <!-- TODO: BUSCAR NA API O TOTAL DE ENTRADAS -->
                 <!-- <p class="card__body-title">Total de Entrada</p> -->
                 <p class="card__body-title">Saldo</p>
-                <p class="card__body-title-value">{{ formatCurrencyMoney(data.balance) }}</p>
+                <p class="card__body-title-value">R$ {{ formatCurrencyMoney(data.balance) }}</p>
             </div>
             <div class="card__body-icon" @click="handleClick">
                 <icon-restart
                     width="24px" 
                     height="24px"
-                    fill="var(--color-text-input)"
+                    fill="#ffffff80"
                 />
             </div>
         </div>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="card__categories-value">
-                    <p>{{ formatCurrencyMoney(item.value) }}</p>
+                    <p>R$ {{ formatCurrencyMoney(item.value) }}</p>
                 </div>
 
             </div>
@@ -113,6 +113,7 @@ export default {
     flex-direction: column;
     padding: 25px 12px;
     border-radius: 8px;
+    background: #181818;
     background: var(--color-background-input);
     
     &__body {
@@ -127,37 +128,45 @@ export default {
         flex-direction: column;
         align-items: start;
         font-size: 14px;
+        color: #ffffff80;
         color: var(--color-text-input);
-        gap: 12px;
     }
 
     &__body-title-value {
         font-size: 24px;
+        color: #ffffff;
         color: var(--color-text);
         padding-bottom: 20px;
+        margin-top: 12px;
     }
 
     &__body-icon {
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 
     &__bars {
         display: flex;
         flex-direction: row;
-        gap: 2px;
     }
 
     &__bar-category {
         display: flex;
         flex-direction: row;
         min-height: 23px;
-        
+        margin-left: 2px;
+        margin-right: 2px;
+
         &--first {
             border-radius: 6px 0px 0px 6px;
+            margin-left: 0px;
+            margin-right: 2px;
         }
 
         &--last {
             border-radius: 0px 6px 6px 0px;
+            margin-right: 0px;
+            margin-left: 2px;
         }
     }
 
@@ -184,6 +193,7 @@ export default {
     }
     &__categories-value {
         font-size: 12px;
+        color: #ffffff80;
         color: var(--color-text-input);
         margin: 0px 0px 0px 15px;
     }

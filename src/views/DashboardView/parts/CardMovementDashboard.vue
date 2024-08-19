@@ -48,6 +48,7 @@ export default {
     justify-content: space-between;
     border-radius: 8px;
     padding: 18px 15px;
+    background: #181818;
     background: var(--color-background-input);
     margin: 4px 0px 4px 0px;
 
@@ -61,10 +62,12 @@ export default {
         text-align: right;
 
         &--success {
+            color: #6da544;
             color: var(--color-success);
         }
 
         &--danger {
+            color: #f61a1a;
             color: var(--color-danger);
         }
     }
@@ -81,6 +84,7 @@ export default {
     &__subtitle,
     &__date {
         font-size: 14px;
+        color: #ffffff80;        
         color: var(--color-text-input);        
     }
 
@@ -93,6 +97,7 @@ export default {
         justify-content: center;
         align-items: center;
         margin-right: 13px;
+        background-color: #0a0a0a;
         background-color: var(--color-background);
         width: 24px;
         height: 24px;

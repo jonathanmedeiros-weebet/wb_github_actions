@@ -30,7 +30,7 @@
             <div class="dashboard__movements-dates">
                 
                 <p class="dashboard__movements-icon-range-dates">
-                    <icon-calendar-month class="dashboard__movements-icon-calendar" fill="var(--color-text-input)"/>
+                    <icon-calendar-month class="dashboard__movements-icon-calendar" fill="#ffffff80"/>
                     {{ dateFilterIni.format('DD/MM/YYYY') }} - {{ dateFilterEnd.format('DD/MM/YYYY') }}</p>  
             </div>
         
@@ -92,12 +92,12 @@ export default {
                 datasets: [
                     {
                         label: 'Entrada',
-                        backgroundColor: '#6DA544',
+                        backgroundColor: 'rgb(109, 165, 68)',
                         data: []
                     },
                     {
                         label: 'Saida',
-                        backgroundColor: '#F61A1A',
+                        backgroundColor: 'rgb(246, 26, 26)',
                         data: []
                     }
                 ]
@@ -295,6 +295,7 @@ export default {
 
     &__movements-filter {
         font-size: 12px;
+        color: #ffffff80;
         color: var(--color-text-input);
     }
 
@@ -304,6 +305,7 @@ export default {
         justify-content: flex-start;
         padding: 8px 0px;
         font-size: 14px;
+        color: #ffffff80;
         color: var(--color-text-input);
         
     }
@@ -323,23 +325,6 @@ export default {
         border-radius: 6px;
         background: rgba(24, 24, 24, 0.50);
         color: rgba(255, 255, 255, 0.70);
-    }
-
-    &__modal-items {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        color: var(--color-text);
-        font-size: 16px;
-        font-weight: 400;
-    }
-
-    &__modal-title {
-        color: rgba(255, 255, 255, 0.5019607843);
-        font-size: 16px;
-        font-weight: 500;
     }
 }
 </style>
