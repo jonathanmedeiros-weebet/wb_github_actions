@@ -43,6 +43,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     theSportStreamUrl: SafeResourceUrl;
     showCampinho = true;
     showStream = false;
+    sportId: number;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -92,6 +93,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     ngOnDestroy() {
+        this.setSportId(null);
         this.liveService.sairSalaEvento(this.jogoId);
         this.bilheteService.sendId(null);
         this.unsub$.next();
@@ -138,6 +140,7 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
                     this.jogo = jogo;
                     this.mapearCotacoes(jogo.cotacoes_aovivo);
                     this.live(id);
+                    this.setSportId(this.jogo.sport_id);
 
                     if (window.innerWidth <= 1024) {
                         if(jogo?.live_track_id) {
@@ -402,5 +405,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         this.modalRef = this.modalService.open(
             LoginModalComponent, options
         );
+    }
+
+    setSportId(id: number) {
+        this.bilheteService.setSportId(id);
     }
 }
