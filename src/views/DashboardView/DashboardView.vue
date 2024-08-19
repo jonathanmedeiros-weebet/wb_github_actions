@@ -92,12 +92,12 @@ export default {
                 datasets: [
                     {
                         label: 'Entrada',
-                        backgroundColor: '#6DA544',
+                        backgroundColor: 'rgb(109, 165, 68)',
                         data: []
                     },
                     {
                         label: 'Saida',
-                        backgroundColor: '#F61A1A',
+                        backgroundColor: 'rgb(246, 26, 26)',
                         data: []
                     }
                 ]
