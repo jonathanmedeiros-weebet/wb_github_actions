@@ -150,7 +150,6 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
-        this.setSportId(this.footballId);
         const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         this.oddsAberto = [];
 

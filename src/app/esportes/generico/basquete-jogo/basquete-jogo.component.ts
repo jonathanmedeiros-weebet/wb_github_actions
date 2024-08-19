@@ -135,7 +135,6 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
-        this.setSportId(this.sportId);
         const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         if (this.jogoId) {
             this.showLoadingIndicator = true;
