@@ -62,7 +62,9 @@
                 <template v-else-if="betItem.sport === MODALITY_SPORT_E_SPORTS">
                   <IconGame :size="16"/>
                 </template>
-                <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
+                <div class="bet__team-name">
+                  <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
+                </div>
               </span>
               <template v-if="showFinished">
                 <p :class="{ 
@@ -374,16 +376,15 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 6px;
     margin: 0;
     padding: 0 10px;
     min-height: 100%;
     padding-top: 15px;
   }
+
   &__ticket {
     display: flex;
     flex-direction: column;
-    gap: 12px;
     padding: 19px 15px;
     width: 100%;
     background: #181818;
@@ -395,8 +396,7 @@ export default {
 .code {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-
+    
     &__text {
         font-size: 14px;
         color: #ffffff;
@@ -411,7 +411,6 @@ export default {
 .info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
     margin-bottom: -10px;
 
     &__item {
@@ -427,9 +426,9 @@ export default {
 .gain {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    margin-bottom: 10px;
-
+    margin-bottom: 15px;
+    margin-top: 8px;
+    
     &__item {
         display: flex;
         justify-content: space-between;
@@ -457,13 +456,12 @@ export default {
     background: var(--color-background);
     border-radius: 4px;
     margin-bottom: -9px;
-    
+
     &__header, &__info, &__text, &__result {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        gap: 8px;
     }
 
     &__team {
@@ -475,7 +473,10 @@ export default {
         font-size: 14px;
         color: #ffffff;
         color: var(--color-text);
-        gap: 4px;  
+    }
+
+    &__team-name {
+      margin-left: 4px;
     }
 
     &__date, &__text, &__result {
@@ -518,7 +519,6 @@ export default {
 .buttons {
   display: flex;
   justify-content: space-between;
-  gap: 8px;
   padding-top: 25px;
 }
 
