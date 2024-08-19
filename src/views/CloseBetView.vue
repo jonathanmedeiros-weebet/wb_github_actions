@@ -376,16 +376,15 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
-    
     margin: 0;
     padding: 0 10px;
     min-height: 100%;
     padding-top: 15px;
   }
+
   &__ticket {
     display: flex;
     flex-direction: column;
-    
     padding: 19px 15px;
     width: 100%;
     background: #181818;
@@ -398,7 +397,6 @@ export default {
     display: flex;
     flex-direction: column;
     
-
     &__text {
         font-size: 14px;
         color: #ffffff;
@@ -413,7 +411,6 @@ export default {
 .info {
     display: flex;
     flex-direction: column;
-    
     margin-bottom: -10px;
 
     &__item {
@@ -431,6 +428,7 @@ export default {
     flex-direction: column;
     margin-bottom: 15px;
     margin-top: 8px;
+    
     &__item {
         display: flex;
         justify-content: space-between;
