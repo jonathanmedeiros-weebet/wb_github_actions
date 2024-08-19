@@ -58,6 +58,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     theSportUrl: SafeResourceUrl;
     loadedFrame: boolean;
+    footballId = 1;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -81,6 +82,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnInit() {
+        this.setSportId(this.footballId);
         const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
@@ -148,6 +150,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
+        this.setSportId(this.footballId);
         const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         this.oddsAberto = [];
 
@@ -177,6 +180,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.setSportId(null);
         this.bilheteService.sendId(null)
         this.unsub$.next();
         this.unsub$.complete();
@@ -587,5 +591,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     handleError(msg: any) {
         this.messageService.error(msg);
+    }
+
+    setSportId(id: number) {
+        this.bilheteService.setSportId(id);
     }
 }

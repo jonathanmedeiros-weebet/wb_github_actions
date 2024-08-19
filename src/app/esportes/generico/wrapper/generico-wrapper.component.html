@@ -10,8 +10,9 @@
             </app-generico-listagem>
         </div>
         <div class="jogo" [hidden]="!exibirMaisCotacoes">
-            <app-basquete-jogo *ngIf="sportId == '48242'" [jogoId]="jogoId"
-                               (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)">
+            <app-basquete-jogo *ngIf="sportId == '48242'" [jogoId]="jogoId" [sportId]="sportId"
+                               (exibirMaisCotacoes)="changeExibirMaisCotacoes($event)"
+                               [exibindoMaisCotacoes]="exibirMaisCotacoes">
             </app-basquete-jogo>
         </div>
     </div>

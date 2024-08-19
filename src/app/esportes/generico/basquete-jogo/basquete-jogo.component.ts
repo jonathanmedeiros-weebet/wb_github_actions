@@ -24,6 +24,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-basquete-jogo',
@@ -34,6 +35,8 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
     jogo: Jogo;
     @Input() jogoId;
+    @Input() sportId;
+    @Input() exibindoMaisCotacoes: boolean;
     @Output() exibirMaisCotacoes = new EventEmitter();
     isMobile = false;
     mercados: any = {};
@@ -46,6 +49,9 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
     contentSportsEl;
     unsub$ = new Subject();
 
+    theSportUrl: SafeResourceUrl;
+    loadedFrame: boolean;
+
     constructor(
         private jogoService: JogoService,
         private bilheteService: BilheteEsportivoService,
@@ -56,10 +62,13 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
         private cd: ChangeDetectorRef,
-        private activeModal: NgbActiveModal
+        private activeModal: NgbActiveModal,
+        private sanitizer: DomSanitizer
     ) { }
 
     ngOnInit() {
+        this.setSportId(this.sportId);
+        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
 
@@ -105,6 +114,20 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
                     jogo => {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
+
+                        if (habilitar_live_tracker && jogo.live_track_id) {
+                            if (window.innerWidth <= 1024) {
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets-v2.thesports01.com/br/pro/basketball?profile=5oq66hkn0cwunq7&uuid=' + jogo?.live_track_id);
+                            } else {
+                                if (this.exibindoMaisCotacoes) {
+                                    this.bilheteService.sendId(jogo.live_track_id);
+                                } else {
+                                    this.bilheteService.sendId(null);
+                                }
+                            }
+                        }
+                        this.loadedFrame = true;
+                        this.cd.markForCheck();
                     },
                     error => this.messageService.error(error)
                 );
@@ -112,6 +135,8 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges() {
+        this.setSportId(this.sportId);
+        const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         if (this.jogoId) {
             this.showLoadingIndicator = true;
 
@@ -121,6 +146,16 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
                     jogo => {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
+
+                        if(habilitar_live_tracker && jogo.live_track_id) {
+                            if (this.exibindoMaisCotacoes) {
+                                this.bilheteService.sendId(jogo.live_track_id);
+                            } else {
+                                this.bilheteService.sendId(null);
+                            }
+                        } else {
+                            this.bilheteService.sendId(null);
+                        }
                     },
                     error => this.messageService.error(error)
                 );
@@ -128,6 +163,8 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.setSportId(null);
+        this.bilheteService.sendId(null);
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -382,5 +419,9 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
+    }
+
+    setSportId(id: number) {
+        this.bilheteService.setSportId(id);
     }
 }
