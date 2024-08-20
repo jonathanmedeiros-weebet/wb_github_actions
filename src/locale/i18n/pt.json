@@ -216,12 +216,10 @@
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
         "esportivo": "esportivo",
         "rifa": "Rifa",
-        "rodadaGratis": "Rodada grátis",
         "dataVencimento": "Data de vencimento",
         "quantidade": "Quantidade",
         "quantidadeUtilizada": "Qtd. Utilizada",
         "jogarAgora": "Jogar Agora",
-        "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
         "resultadosEncontradosComQuantidade": "Foram encontrados {{quantidade}} resultados",
         "selecioneChavePix": "Selecione a chave pix",
@@ -658,5 +656,15 @@
             "definir_tempo": "Definir tempo de sessão",
             "desativado": "Desativado"
         }
+    },
+    "rodada_gratis":{
+        "resgatarPremio": "Resgatar Prêmio",
+        "rodadaGratis": "Rodada Grátis",
+        "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
+        "todas": "Todas",
+        "ativa": "Ativa",
+        "expirada": "Expirada",
+        "concluida":"Concluída",
+        "cancelada":"Cancelada"
     }
 }
