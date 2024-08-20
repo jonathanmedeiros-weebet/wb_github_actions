@@ -1,4 +1,5 @@
 export class RodadaGratis {
+    id: string;
     codigo: string;
     forneceddor: string;
     game: string;
@@ -10,4 +11,5 @@ export class RodadaGratis {
     ativo: string;
     tipo: string;
     status: string;
+    dataTermino: Date;
 }
