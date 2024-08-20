@@ -1,22 +1,12 @@
-import {Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {interval, Subject} from 'rxjs';
-import {
-    AuthService,
-    LayoutService,
-    MenuFooterService,
-    MessageService,
-    ParametrosLocaisService,
-    UtilsService
-} from '../../services';
+import {AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService} from '../../services';
 import {interval, Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
 import {
     CadastroModalComponent,
     CanceledBonusConfirmComponent,
@@ -57,8 +47,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     avisoCancelarBonus = false;
     modalRef;
     unsub$ = new Subject();
-    avisoCancelarBonus = false;
-    modalRef;
 
     constructor(
         private casinoApi: CasinoApiService,
