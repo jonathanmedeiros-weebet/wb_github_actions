@@ -117,6 +117,7 @@
                 <IconShare :size="20"/>
               </template>
             </w-button>
+            <div class="button-spacer"></div>
             <w-button
               text="Imprimir"
               class="button__confirm"
@@ -369,6 +370,7 @@ export default {
   },
 }
 </script>
+
 <style lang="scss" scoped>
 .close-bet {
   padding-bottom: 10px;
@@ -394,141 +396,135 @@ export default {
 }
 
 .code {
-    display: flex;
-    flex-direction: column;
-    
-    &__text {
-        font-size: 14px;
-        color: #ffffff;
-        color: var(--color-text);
-    }
-    &__date {
-        color: #ffffff80;
-        color: var(--color-text-input)
-    }
+  display: flex;
+  flex-direction: column;
+  
+  &__text {
+    font-size: 14px;
+    color: #ffffff;
+    color: var(--color-text);
+  }
+  &__date {
+    color: #ffffff80;
+    color: var(--color-text-input)
+  }
 }
 
 .info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -10px;
+
+  &__item {
     display: flex;
-    flex-direction: column;
-    margin-bottom: -10px;
+    justify-content: space-between;
+    font-size: 14px;
+  }
 
-    &__item {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-    }
-
-    &__text {
-      font-size: 14px;
-    }
+  &__text {
+    font-size: 14px;
+  }
 }
+
 .gain {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  margin-top: 8px;
+  
+  &__item {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    margin-top: 8px;
-    
-    &__item {
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-        color: #ffffff;
-        color: var(--color-text);
-    }
+    justify-content: space-between;
+    font-size: 14px;
+    color: #ffffff;
+    color: var(--color-text);
+  }
 
-    &__strikethrough {
-      text-decoration: line-through;
-    }
+  &__strikethrough {
+    text-decoration: line-through;
+  }
 
-    &--danger {
-      color: #f61a1a;
-      color: var(--color-danger);
-    }
+  &--danger {
+    color: #f61a1a;
+    color: var(--color-danger);
+  }
 
 }
 
 .bet {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: #0a0a0a;
+  background: var(--color-background);
+  border-radius: 4px;
+  margin-bottom: -9px;
+
+  &__header, &__info, &__text, &__result {
     display: flex;
-    flex-direction: column;
-    padding: 10px;
-    background: #0a0a0a;
-    background: var(--color-background);
-    border-radius: 4px;
-    margin-bottom: -9px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    &__header, &__info, &__text, &__result {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
+  &__team {
+    font-size: 14px;
+    color: #ffffff;
+    color: var(--color-text);
+    display: flex;          
+    align-items: center;   
+  }
 
-    &__team {
-        font-size: 14px;
-        color: #ffffff;
-        color: var(--color-text);
-        display: flex;          
-        align-items: center;   
-        font-size: 14px;
-        color: #ffffff;
-        color: var(--color-text);
-    }
+  &__team-name {
+    margin-left: 4px;
+  }
 
-    &__team-name {
-      margin-left: 4px;
-    }
+  &__date, &__text, &__result {
+    font-size: 14px;
+    color: #bbbbbb;
+    justify-content: space-between;
+    color: var(--color-text);
+    font-weight: 500;
+  }
 
-    &__date, &__text, &__result {
-        font-size: 14px;
-        color: #bbbbbb;
-        justify-content: space-between;
-    }
+  &__select {
+    font-size: 14px;
+    color: #bbbbbb;
+    color: var(--color-text);
+    font-weight: 500;
+  }
 
-    &__odd {
-        font-size: 14px;
-        color: #ffffff;
-        color: var(--color-text);
-    }
+  &__odd {
+    font-size: 14px;
+    color: #cccccc;
+    color: var(--color-text);
+    font-weight: 500;
+  }
 
-    &__select {
-      color: #ffffff;
-        color: var(--color-text);
-        font-size: 14px;
-    }
-    
-    &__message {
-        color: #f61a1a;
-        color: var(--color-danger);
-        text-align: center;
-        font-size: 14px;
-        padding: 10px;
-        padding-top: 10px;
-    }
+  &__status--success {
+    color: #4CAF50;
+    color: var(--color-success);
+  }
 
-    &__status--success {
-      color: #6da544;
-      color: var(--color-success);
-    }
-    &__status--danger {
-      color: #f61a1a;
-      color: var(--color-danger);
-    }
+  &__status--danger {
+    color: #f61a1a;
+    color: var(--color-danger);
+  }
 }
 
 .buttons {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   padding-top: 25px;
 }
 
+.button-spacer {
+  width: 20px; 
+}
+
 .finish {
-    padding: 8px;
-    padding-top: 25px;
-    
-    &__button{
-        width: 100%;
-    }
+  margin-top: 20px;
 }
 </style>
+
 
