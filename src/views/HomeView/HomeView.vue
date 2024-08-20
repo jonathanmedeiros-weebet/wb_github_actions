@@ -422,6 +422,7 @@ export default {
     handleCloseSearchModal() {
       this.showModalSearch = false
       this.homeStore.selectedSearch = false;
+      this.pageLoad();
     },
     handleSearch(gameId) {
       void gameId;
