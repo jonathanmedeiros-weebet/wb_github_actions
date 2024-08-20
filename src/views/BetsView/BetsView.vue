@@ -129,7 +129,7 @@
                   class="button--secondary"
                   @click="goToTickets(bet, 'view')"
                 />
-
+                <div class="button-spacer"></div>
                 <w-button
                   id="btn-cancel"
                   text="Cancelar"
@@ -215,9 +215,8 @@
             name="btn-yes"
             class="button--primary"
             @click="confirmCancelBet"
-            
           />
-          
+          <div class="button-space"></div>
           <w-button
             id="btn-no"
             text="Não"
@@ -575,8 +574,11 @@ export default {
   
 }
 
-.table {
+.button-space {
+  margin-top: 5px;
+}
 
+.table {
   width: 100%;
 
   &__line {   
@@ -600,5 +602,8 @@ export default {
       color: var(--color-danger);
     }
   }
+}
+.button-spacer {
+  width: 10px; 
 }
 </style>
