@@ -28,6 +28,7 @@
     text-decoration: none;
     line-height: 16px;
     cursor: pointer;
+    padding-right: 10px;
 }
 
 .scroll-buttons {
@@ -63,6 +64,13 @@
     transition: 500ms;
 }
 
+
+@media only screen and (min-width: 769px) and (max-width: 1279px){
+    .wall-section__see-all {
+        padding-right: 16px;
+    }
+}
+
 @media only screen and (min-width: 1024px) {
     .wall-section {
         margin-bottom: 18px;
@@ -77,5 +85,11 @@
         width: 24px;
         height: 24px;
         font-size: 18px;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .wall-section__see-all {
+        padding-right: 18px;
     }
 }

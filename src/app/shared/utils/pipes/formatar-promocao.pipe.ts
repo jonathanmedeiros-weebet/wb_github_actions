@@ -17,6 +17,15 @@ export class FormatarPromocaoPipe implements PipeTransform {
             case 'primeiro_deposito_bonus':
                 promocaoFormatada = 'Bônus Primeiro Depósito';
                 break;
+            case 'rodada_gratis_manual':
+                promocaoFormatada = 'Bônus Rodada Grátis';
+                break;
+            case 'primeiro_deposito_rodada_gratis':
+                promocaoFormatada = 'Bônus Rodada Grátis';
+                break;
+            case 'cadastro_rodada_gratis':
+                promocaoFormatada = 'Bônus Rodada Grátis';
+                break;
         }
         return promocaoFormatada;
     }

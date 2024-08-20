@@ -1,4 +1,5 @@
 import {Component, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
@@ -7,7 +8,7 @@ import {Location} from '@angular/common';
 import {interval, Subject} from 'rxjs';
 import {
     AuthService,
-    FinanceiroService,
+    LayoutService,
     MenuFooterService,
     MessageService,
     ParametrosLocaisService,
@@ -50,10 +51,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
     removerBotaoFullscreen = false;
     isLoggedIn = false;
     backgroundImageUrl = '';
-    unsub$ = new Subject();
     headerHeight = 92;
     currentHeight = window.innerHeight - this.headerHeight;
     posicaoFinanceira;
+    avisoCancelarBonus = false;
+    modalRef;
+    unsub$ = new Subject();
     avisoCancelarBonus = false;
     modalRef;
 
@@ -209,6 +212,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
+        if(this.modalRef) {
+            this.modalRef.close();
+        }
+
         switch (this.gameFornecedor) {
             case 'tomhorn':
                 this.closeSessionGameTomHorn();

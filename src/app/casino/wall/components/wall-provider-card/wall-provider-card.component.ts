@@ -7,6 +7,7 @@ import { Fornecedor } from '../../wall.component';
   styleUrls: ['./wall-provider-card.component.css']
 })
 export class WallProviderCardComponent {
+  @Input() container: any;
   @Input() data: Fornecedor;
   @Input() selected: boolean = false;
   @Input() type: 'inline' | 'filter' = 'inline';
@@ -22,5 +23,8 @@ export class WallProviderCardComponent {
 
   public handleClick() {
     this.onClick.emit(this.data.gameFornecedor)
+    if(this.container){
+      this.container.scrollTop = 0;
+    }
   }
 }

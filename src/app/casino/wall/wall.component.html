@@ -45,6 +45,42 @@
             />
         </div>
 
+        <div class="wall-inner" *ngIf="isHomeCassino; else cassinoGameList">
+            <ng-container *ngFor="let section of gamesSection">
+                <div class="bloco blocoGameList" *ngIf="section.show">
+                    <app-wall-section
+                        [container]="listagem"
+                        [sectionId]="section.id"
+                        [title]="section.title"
+                        [itemsQty]="section.gameList.length"
+                        (onSeeAll)="filterGames($event, section.id, true)"
+                        (onLeft)="scrollLeft(section.id)"
+                        (onRight)="scrollRight(section.id)"
+                    />
+
+                    <div class="games-container">
+                        <ng-container *ngIf="section.gameList.length; else elseWithoutGames">
+                            <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
+                                <app-wall-game-card
+                                    *ngFor="let game of section.gameList"
+                                    [game]="game"
+                                    [blink]="blink"
+                                    [isLoggedIn]="isLoggedIn"
+                                    [isDemo]="isDemo"
+                                    [isCliente]="isCliente"
+                                    cardType="inline"
+
+                                />
+                            </div>
+                        </ng-container>
+                        <ng-template #elseWithoutGames>
+                            <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+                        </ng-template>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
         <div class="bloco" *ngIf="!this.hideProviders">
             <app-wall-section
                 sectionId="providers"
@@ -58,6 +94,7 @@
             <div class="provider-container">
                 <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
                     <app-wall-provider-card
+                        [container]="listagem"
                         *ngFor="let fornecedor of cassinoFornecedores"
                         [data]="fornecedor"
                         [selected]="gameFornecedor == fornecedor.gameFornecedor"
@@ -67,42 +104,6 @@
             </div>
         </div>
 
-        <div class="wall-inner" *ngIf="isHomeCassino; else cassinoGameList">
-            <ng-container *ngFor="let section of gamesSection">
-                <div class="bloco" *ngIf="section.show">
-                    <app-wall-section
-                        [sectionId]="section.id"
-                        [title]="section.title"
-                        [itemsQty]="section.gameList.length"
-                        (onSeeAll)="filterGames($event, section.id, true)"
-                        (onLeft)="scrollLeft(section.id)"
-                        (onRight)="scrollRight(section.id)"
-                    />
-
-                    <div class="games-container">
-                        <ng-container *ngIf="section.gameList.length; else elseWithoutGames">
-                            <div class="more-games-fade more-games-fade-left" id="{{ section.id }}-fade-left"></div>
-                            <div class="game-list game-list-inline" #scrollGames id="{{ section.id }}-scroll" (scroll)="onScroll(section.id)">
-                                <app-wall-game-card
-                                    *ngFor="let game of section.gameList"
-                                    [game]="game"
-                                    [blink]="blink"
-                                    [isLoggedIn]="isLoggedIn"
-                                    [isDemo]="isDemo"
-                                    [isCliente]="isCliente"
-                                    cardType="inline"
-
-                                />
-                            </div>
-                            <div class="more-games-fade more-games-fade-right" id="{{ section.id }}-fade-right" *ngIf="section.gameList.length > 2"></div>
-                        </ng-container>
-                        <ng-template #elseWithoutGames>
-                            <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
-                        </ng-template>
-                    </div>
-                </div>
-            </ng-container>
-        </div>
 
         <app-footer [container]="listagem"></app-footer>
 

@@ -66,8 +66,6 @@
 }
 
 nav {
-    margin-left: 65%;
-    width: calc(100% - 700px);
     display: flex;
     justify-content: center;
 }
@@ -116,7 +114,7 @@ nav a {
 .container-group {
     display: flex;
     flex-direction: row;
-    gap: 16px;
+    gap: 12px;
 }
 
 .container-icons {
@@ -124,7 +122,7 @@ nav a {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    gap: 12px;
+    gap: 8px;
 }
 
 .side {
@@ -476,24 +474,48 @@ body .change-theme {
     margin-right: 10px;
 }
 
-.material-symbols-outlined::before {
-    font-family: 'Material Symbols Outlined';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 22px;
-    display: inline-block;
+.icon {
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    color: #ffffff;
+    opacity: 75%;
 }
 
-.material-symbols-outlined-headset_mic::before {
-    content: 'headset_mic';
+.icon:hover {
+    transform: scale(1.2);
+    color: var(--highlight);
 }
 
-.material-symbols-outlined-notifications::before {
-    content: 'notifications';
+.icon:focus {
+    color:var(--highlight) ;
 }
 
-.material-symbols-outlined-featured_seasonal_and_gifts::before {
-    content: 'featured_seasonal_and_gifts';
+.icon.selected {
+    transform: scale(1.1);
+    color: var(--highlight);
+}
+
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.side-left, .container-group{
+    flex-shrink: 0;
+    position: relative;
+}
+
+.center{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 400px);
+    box-sizing: border-box;
+    text-align: center;
 }
 
 @media only screen and (min-width: 1025px) {
@@ -530,12 +552,14 @@ body .change-theme {
     }
 
     .header {
+        padding-top: 15px;
         width: 100%;
-        height: 64px;
+        height: 52px;
         display: flex;
     }
 
     .menu-conta {
+        gap:8px;
         margin-right: 8px;
     }
 
@@ -696,7 +720,7 @@ body .change-theme {
         max-width: calc(40vw - 70px);
     }
     .container-icons {
-        gap: 5px;
+        gap: 8px;
         padding-left: 5px;
     }
     .btn-xtremepush {
@@ -712,7 +736,7 @@ body .change-theme {
     }
     .container-icons {
         padding: 0px 1%;
-        gap: 5px;
+        gap: 8px;
         margin-right: -4px;
     }
     .btn{
@@ -848,6 +872,28 @@ body .change-theme {
         width: 270px;
     }
 }
+
+@media screen and (min-width: 1366px) and (max-width: 1400px) {
+    .container-group{
+        margin-left: 20px;
+    }
+}
+
+@media only screen and (max-width: 440px){
+    .menu-conta {
+        gap:4px;
+        margin-right: 4px;
+    }
+
+    .container-icons{
+        gap: 4px;
+    }
+
+    .container-group {
+        gap: 8px;
+    }
+}
+
 
 .info-connection-card {
     display: block;
