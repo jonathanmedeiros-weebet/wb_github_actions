@@ -11,25 +11,25 @@
         </div>
 
         <div class="game-list-skeleton__scoreboard">
-            <SquareSkeleton :height="10" :width="10"/>
-            <SquareSkeleton :height="10" :width="10"/>
-            <SquareSkeleton :height="10" :width="10"/>
+            <SquareSkeleton class="game-list-skeleton__scoreboard-items" :height="10" :width="10"/>
+            <SquareSkeleton class="game-list-skeleton__scoreboard-items" :height="10" :width="10"/>
+            <SquareSkeleton class="game-list-skeleton__scoreboard-items" :height="10" :width="10"/>
         </div>
         <div class="game-list-skeleton__game-list">
             <div class="game-list-skeleton__game-item" v-for="item of Array(3)" :key="item">
                 <div class="teams">
-                    <SquareSkeleton :height="16" :width="134"/>
-                    <SquareSkeleton :height="16" :width="134"/>
+                    <SquareSkeleton class="teams__name" :height="16" :width="134"/>
+                    <SquareSkeleton class="teams__name" :height="16" :width="134"/>
 
                     <span class="teams__info">
-                        <SquareSkeleton :height="15" :width="80"/>
-                        <SquareSkeleton :height="15" :width="30"/>
+                        <SquareSkeleton class="teams__info-items" :height="15" :width="80"/>
+                        <SquareSkeleton class="teams__info-items" :height="15" :width="30"/>
                     </span>
                 </div>
                 <div class="quotes">
-                    <SquareSkeleton :height="54" :width="58"/>
-                    <SquareSkeleton :height="54" :width="58"/>
-                    <SquareSkeleton :height="54" :width="58"/>
+                    <SquareSkeleton class="quotes__items" :height="54" :width="58"/>
+                    <SquareSkeleton class="quotes__items" :height="54" :width="58"/>
+                    <SquareSkeleton class="quotes__items" :height="54" :width="58"/>
                 </div>
             </div>
         </div>
@@ -66,12 +66,16 @@ export default {
         justify-content: space-between;
         align-items: center;
         &--primary {
+            background: #0a0a0a;
             background: var(--color-background);
+            color: #ffffff;
             color: var(--color-text);
         }
 
         &--secondary {
+            background: #181818;
             background: var(--color-background-input);
+            color: #ffffff;
             color: var(--color-text);
         }
     }
@@ -82,7 +86,10 @@ export default {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        gap: 55px;
+    }
+
+    &__scoreboard-items {
+        margin-left: 55px;
     }
 
     &__game-list {
@@ -90,32 +97,47 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 2px;
+        background: #0a0a0a;
         background: var(--color-background);
     }
 
     &__game-item {
         display: flex;
         justify-content: space-between;
+        background: #181818;
         background: var(--color-background-input);
         width: 100%;
         padding: 16px 13px;
+        
     }
 }
 
 .teams {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    // gap: 8px;
+    
 
     &__info {
         display: flex;
-        gap: 10px;
+    }
+
+    &__info-items {
+        margin-right: 8px;
+    }
+    
+    &__name {
+        margin-bottom: 8px;
     }
 }
 
 .quotes {
     display: flex;
-    gap: 8px;
+
+    &__items {
+        margin-left: 8px;
+    }
+    
 }
 
 </style>
