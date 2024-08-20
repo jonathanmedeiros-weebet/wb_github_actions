@@ -117,10 +117,7 @@
                 <IconShare :size="20"/>
               </template>
             </w-button>
-
-            <!-- Espaçador entre os botões -->
             <div class="button-spacer"></div>
-
             <w-button
               text="Imprimir"
               class="button__confirm"
