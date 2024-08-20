@@ -19,22 +19,24 @@
     <div class="results__content">
       <div class="results__modalities">
         <label class="results__modalities-label">Modalidade</label>
-        <select-fake titleSize="medium" @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake>
+        <select-fake class="results__selectfake" titleSize="medium" @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake>
+        
+        <div class="results__collapses">
+          <p class="results__count-modalities">{{ championshipList.length }} Resultados encontrados</p>
+          <collapse 
+            :leftIcon="true" 
+            :initCollapsed="true" 
+            v-for="(championship, championshipListIndex) in championshipList" 
+            :key="championshipListIndex"
+          >
+            <template #title>
+              {{ championship.nome }}
+            </template>
+            <game-item-result :games="championship.jogos"/>
+          </collapse>
+        </div>
       </div>
-      <p class="results__count-modalities">{{ championshipList.length }} Resultados encontrados</p>
-      <div class="results__collapses">
-        <collapse 
-          :leftIcon="true" 
-          :initCollapsed="true" 
-          v-for="(championship, championshipListIndex) in championshipList" 
-          :key="championshipListIndex"
-        >
-          <template #title>
-            {{ championship.nome }}
-          </template>
-          <game-item-result :games="championship.jogos"/>
-        </collapse>
-      </div>
+      
     </div>
     <ModalModalities
       v-if="showModalModalities"
@@ -48,7 +50,7 @@
 <script>
 import Header from '@/components/layouts/Header.vue';
 import ButtonDate from './parts/ButtonDate.vue';
-import SelectFake from '@/views/HomeView/parts/SelectFake.vue';
+import SelectFake from '@/views/ResultsView/parts/SelectFake.vue';
 import moment from 'moment';
 import ModalModalities from '@/views/HomeView/parts/ModalModalities.vue';
 import Collapse from '@/components/Collapse.vue';
@@ -183,6 +185,7 @@ export default {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+    padding: 16px 10px;
   }
 
   &__content {
@@ -205,11 +208,23 @@ export default {
   &__modalities {
     display:  flex;
     flex-direction: column;
-    padding: 20px;
+    margin: 10px 20px;
+  }
+
+  &__selectfake {
+    margin-bottom: 10px;
+  }
+
+  &__collapses {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-top: 10px;
   }
 
   &__count-modalities {
-    padding: 5px 20px;
+    // padding: 5px 20px;
+    margin: 5px 20px;
     color: #ffffff80;
     color: var(--color-text-input);
   }
@@ -222,20 +237,4 @@ export default {
     font-size: 16px;
   }
 }
-
-::v-deep .select-fake {
-  background-color: #181818;
-  background-color: var(--color-background-input);
-  padding: 18px 16px;
-  
-  &__title {
-    color: #ffffff80;
-    color: var(--color-text-input);
-
-    &--medium { 
-      font-size: 14px;
-    }
-  }
-}
-
 </style>

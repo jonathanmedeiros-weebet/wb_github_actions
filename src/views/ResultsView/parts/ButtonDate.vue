@@ -50,11 +50,18 @@ export default {
   font-size: 16px;
   font-weight: 500;
   padding: 16px 10px;
+  color: #ffffff80;
   color: var(--color-text-input);
+  outline: none;
 
   &--active {
+    color: #0be58e;
     color: var(--color-primary);
-    border-bottom: 1px solid var(--color-primary);
+    border-bottom: 1px solid #0be58e;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 </style>
