@@ -230,7 +230,7 @@
             </div>
             <div class="modal-body-custom">
                 <ng-container *ngIf="promocaoAtiva && valorPromocao; else noPromotion">
-                    <p>Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até R$ {{this.valorPromocao | currency}}</p>
+                    <p>Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até {{this.valorPromocao | currency}}</p>
                 </ng-container>
                 <ng-template #noPromotion>
                     <p>Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.</p>

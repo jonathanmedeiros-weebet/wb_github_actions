@@ -4,15 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {
-    AuthService,
-    LayoutService,
-    FinanceiroService,
-    MenuFooterService,
-    MessageService,
-    ParametrosLocaisService,
-    UtilsService
-} from '../../services';
+import {AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService} from '../../services';
 import {interval, Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
@@ -165,7 +157,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.appendScriptGalaxsys();
         }
     }
-    
+
     ngAfterViewInit(){
         this.layoutService.currentHeaderHeight
             .pipe(takeUntil(this.unsub$))
@@ -211,7 +203,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if(this.modalRef) {
             this.modalRef.close();
         }
-        
+
         switch (this.gameFornecedor) {
             case 'tomhorn':
                 this.closeSessionGameTomHorn();
