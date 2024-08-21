@@ -71,9 +71,9 @@
                 <span *ngIf="!(aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado')">
                     <b>Resultados:</b>
                     <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
-                    <span *ngIf="!aposta.resultado">Aguardando</span>
+                    <span *ngIf="!aposta.resultado">{{'geral.aguardando' | translate}}</span>
                 </span>
-                <span *ngIf="aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado'">Bônus Cancelado</span>
+                <span *ngIf="aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado'">{{'geral.bonusCancelado' | translate}}</span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
                 {{'geral.premio' | translate}}:<span>{{aposta.premio | currency}}</span>
