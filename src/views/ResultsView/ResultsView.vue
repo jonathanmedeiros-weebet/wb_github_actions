@@ -22,18 +22,29 @@
         <select-fake class="results__selectfake" titleSize="medium" @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake>
         
         <div class="results__collapses">
-          <p class="results__count-modalities">{{ championshipList.length }} Resultados encontrados</p>
-          <collapse 
-            :leftIcon="true" 
-            :initCollapsed="true" 
-            v-for="(championship, championshipListIndex) in championshipList" 
-            :key="championshipListIndex"
-          >
-            <template #title>
-              {{ championship.nome }}
-            </template>
-            <game-item-result :games="championship.jogos"/>
-          </collapse>
+
+          <template v-if="loading">
+            <SquareSkeleton class="results__total_results-skeleton"  :height="14" :width="120"/>
+            <game-item-result-skeleton/>
+          </template>
+          <template v-else>
+            <p class="results__count-modalities">{{ championshipList.length }} Resultados encontrados</p>
+            <collapse 
+              :leftIcon="true" 
+              :initCollapsed="true" 
+              v-for="(championship, championshipListIndex) in championshipList" 
+              :key="championshipListIndex"
+            >
+              
+              <template #title>
+                {{ championship.nome }}
+              </template>
+
+              <game-item-result :games="championship.jogos"/>
+            </collapse>
+          </template>
+
+         
         </div>
       </div>
       
@@ -58,6 +69,8 @@ import { modalityList } from '@/constants';
 import GameItemResult from './parts/GameItemResult.vue';
 import { getResults } from '@/services';
 import { formatDateTimeBR, now  } from '@/utilities';
+import GameItemResultSkeleton from './parts/GameItemResultSkeleton.vue';
+import SquareSkeleton from '@/components/skeletons/SquareSkeleton.vue';
 
 export default {
   name: 'results-view',
@@ -68,6 +81,8 @@ export default {
     ModalModalities,
     Collapse,
     GameItemResult,
+    GameItemResultSkeleton,
+    SquareSkeleton,
   },
   data() {
     return {
@@ -78,6 +93,7 @@ export default {
       modalityList: modalityList(),
       championshipList: [],
       dateRange: [],
+      loading: true
     };
   },
   created() {
@@ -125,6 +141,7 @@ export default {
     },
     async getSports() {
       try {
+        this.loading = true;
         const res = await getResults(this.activeDay, this.modality.id);
         this.championshipList = res.map(championship => {
           return {
@@ -151,6 +168,7 @@ export default {
             })
           };
         });
+        this.loading = false;
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -235,6 +253,10 @@ export default {
     justify-content: center;
     padding-bottom: 32px;
     font-size: 16px;
+  }
+
+  &__total_results-skeleton {
+    margin-bottom: 10px;
   }
 }
 </style>
