@@ -14,7 +14,6 @@
     
         <div class="games-container">
             <ng-container *ngIf="games.length; else elseWithoutGames">
-                <div class="more-games-fade more-games-fade-left" id="cassino-fade-left"></div>
                 <div class="game-list game-list-inline" #scrollGames id="cassino-scroll" (scroll)="onScroll('cassino')">
                     <app-wall-game-card
                         *ngFor="let game of games"
@@ -27,7 +26,6 @@
                         (openModalLogin)="abrirModalLogin()"
                     />
                 </div>
-                <div class="more-games-fade more-games-fade-right" id="cassino-fade-right" *ngIf="games.length > 2"></div>
             </ng-container>
 
             <ng-template #elseWithoutGames>

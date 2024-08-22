@@ -9,7 +9,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegrasBonusModalComponent } from './../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
 import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
-
+import { FreeSpinService } from '../../shared/services/clientes/free-spin.service';
 @Component({
     selector: 'app-promocao',
     templateUrl: './promocao.component.html',
@@ -32,6 +32,11 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     order: string = 'status';
     reverse: boolean = false;
     tabSelected = 'bonus';
+    isButtonDisabled = false;
+    isRescued = false;
+    currentDateAndTime;
+    formattedCurrentDate;
+
 
     constructor(
         private financeiroService: FinanceiroService,
@@ -43,7 +48,9 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         private modalService: NgbModal,
         private router: Router,
         private fb: UntypedFormBuilder,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private freeSpinService: FreeSpinService,
+        private activeRulesModal: NgbActiveModal
     ) { super(); }
 
     ngOnInit(): void {
@@ -61,6 +68,8 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
 
         this.getRollovers();
         this.createForm();
+        this.currentDateAndTime = new Date();
+        this.formattedCurrentDate  = this.formatDateToCustomFormat(this.currentDateAndTime);
     }
 
     ngOnDestroy() {
@@ -69,6 +78,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
 
     changeTab(tab) {
         this.tabSelected = tab;
+        this.getRollovers();
     }
 
     createForm() {
@@ -110,11 +120,21 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                             : rollover.modalidade
                     }));
                     this.rodadas = response.rodadas.map(rodada => {
-                        const status = rodada.ativo ? (new Date(rodada.dataTermino.date) > new Date() ? 'Ativo' : 'Expirado') : (rodada.quantidade <= rodada.quantidadeUtilizada ? 'Concluído' : 'Cancelado');
-                        return { ...rodada, status };
+                        let customStatusFreeSpin = '';
+                        if ((rodada.ativo = '1') && (rodada.dataTermino.date >= this.formattedCurrentDate) && (rodada.status == 'pendente')) {
+                            customStatusFreeSpin = 'Pendente';
+                        } else if (rodada.ativo == '1' && rodada.status == 'pendente' && rodada.dataTermino.date < this.formattedCurrentDate) {
+                            customStatusFreeSpin = 'Expirada';
+                        } else if (rodada.quantidade == rodada.quantidadeUtilizada) {
+                            customStatusFreeSpin = 'Concluída';
+                        } else if (rodada.status == 'cancelada'){
+                            customStatusFreeSpin = 'Cancelada'
+                        }
+
+                        return { ...rodada, customStatusFreeSpin };
                     });
                     this.rodadas.sort((a, b) => {
-                        const statusOrder = { 'Ativo': 1, 'Expirado': 2, 'Cancelado': 3, 'Concluído': 4};
+                        const statusOrder = { 'Ativa': 1, 'Expirada': 2, 'Cancelada': 3, 'Concluída': 4};
                         return statusOrder[a.status] - statusOrder[b.status];
                     });
 
@@ -179,11 +199,38 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     }
 
     filtrarPorStatus() {
-        const statusSelecionado = this.form.get('status').value.toLowerCase();
+        let statusSelecionado = this.form.get('status').value.toLowerCase();
 
-        this.rodadasListagem = statusSelecionado === ''
-            ? [...this.rodadas]
-            : this.rodadas.filter(rodada => rodada.status.toLowerCase() === statusSelecionado);
+        switch (statusSelecionado) {
+            case 'ativa':
+                statusSelecionado = 'pendente';
+                break;
+            case 'cancelada':
+                statusSelecionado = 'cancelada';
+                break;
+            case 'concluída':
+                statusSelecionado = 'resgatada';
+                break;
+            case 'expirada':
+                statusSelecionado = 'expirada';
+                break;
+            default:
+                break;
+        }
+
+        if (statusSelecionado === '') {
+            this.rodadasListagem = [...this.rodadas];
+        } else if (statusSelecionado === 'pendente') {
+            this.rodadasListagem = this.rodadas.filter(rodada => (rodada.ativo == '1') && (this.formatDateToCustomFormat(new Date(rodada.termino)) >= this.formattedCurrentDate) && (rodada.status.toLowerCase() === statusSelecionado));
+        } else if (statusSelecionado === 'expirada') {
+            this.rodadasListagem = this.rodadas.filter(rodada => (rodada.ativo == '1') && (this.formattedCurrentDate > this.formatDateToCustomFormat(new Date(rodada.termino))) && (rodada.status.toLowerCase() === 'pendente'));
+        } else if (statusSelecionado === 'resgatada') {
+            this.rodadasListagem = this.rodadas.filter(rodada => (rodada.status.toLowerCase() === 'resgatada'));
+        } else if (statusSelecionado === 'cancelada') {
+            this.rodadasListagem = this.rodadas.filter(rodada => (rodada.status.toLowerCase() === 'cancelada'));
+        } else {
+            this.rodadasListagem = this.rodadas;
+        }
     }
 
     filtarRolloverStatus() {
@@ -221,18 +268,48 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     }
 
     setQuantityRoundsToNotify(): void{
-        this.rodadas.forEach((round) => {
-            if(round.status === "Ativo"){
-                this.quantityRoundsToNotify++;
-            }
-        })
-    }    
+        this.quantityRoundsToNotify = this.rodadas.filter(obj => obj.status === 'pendente'  && (this.formatDateToCustomFormat(new Date(obj.termino)) >= this.formattedCurrentDate) && (obj.ativo == '1')).length;
+    }
 
     setQuantityRolloversToNotify(): void{
-        this.rollovers.forEach((rollover) => {
-            if(rollover.status === "ativo"){
-                this.quantityRolloversToNotify++;
-            }
-        })
-    }  
+        this.quantityRolloversToNotify = this.rollovers.filter(obj => obj.status === 'ativo').length;
+    }
+
+    redeemPrize(freeRoundId: string) {
+        this.isButtonDisabled = true;
+
+        setTimeout(() => {
+            this.freeSpinService.redeemPrize(freeRoundId).subscribe(
+                response => {
+                    this.handleRedeemPrize(response)
+                    let item = this.rodadas.find(obj => obj.id === freeRoundId);{
+                        if (item) {
+                            item.status = 'resgatada';
+                        }
+                    }
+                    this.isButtonDisabled = false;
+                    this.quantityRolloversToNotify = 1;
+                },
+                error => {
+                    this.handleError(error)
+                    this.isButtonDisabled = false;
+                }
+            );
+        },2000);
+    }
+
+    handleRedeemPrize(response) {
+        this.messageService.success(response.message);
+    }
+
+    formatDateToCustomFormat(date: Date): string {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        const milliseconds = String(date.getMilliseconds()).padStart(3, '0') + '000';
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+    }
 }

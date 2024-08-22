@@ -34,6 +34,36 @@ th {
     padding: 10px 20px;
 }
 
+.custom-date-input {
+    position: relative;
+    width: 100%;
+    height: 2.5em;
+    color: white;
+    background-color: transparent;
+}
+
+.custom-date-input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    filter: invert(1);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.custom-date-input::-ms-expand {
+    display: none;
+}
+
+.custom-date-input::-moz-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    filter: invert(1);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
 td {
     border-bottom: 1px solid;
     border-color: var(--game);

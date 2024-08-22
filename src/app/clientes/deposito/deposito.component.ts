@@ -1,7 +1,6 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Output, Renderer2, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarService, FinanceiroService, MessageService, LayoutService } from 'src/app/services';
+import { SidebarService, FinanceiroService, MessageService, LayoutService} from 'src/app/services';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import { takeUntil } from 'rxjs/operators';
@@ -15,14 +14,12 @@ import { BannersComponent } from 'src/app/shared/layout/banners/banners.componen
 })
 export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
     unsub$ = new Subject();
-
+    mobileScreen;
     whatsapp;
     hasApiPagamentos;
     modalidade;
     showLoading = false;
     showLoadingIndicator:boolean = true;
-    mobileScreen;
-
     headerHeight = 92;
 
     @ViewChild(BannersComponent) bannersComponent!: BannersComponent;
@@ -36,15 +33,16 @@ export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
         private cd: ChangeDetectorRef,
         private el: ElementRef,
         private layoutService: LayoutService,
-        private renderer: Renderer2
-    ) {
-    }
+        private renderer: Renderer2,
+    ) {}
+    
     ngAfterViewInit(): void {
         this.showLoadingIndicator = this.bannersComponent.showLoadingIndicator;
     }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
+
         if (!this.mobileScreen) {
             this.siderbarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
