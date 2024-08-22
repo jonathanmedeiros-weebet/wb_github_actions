@@ -303,7 +303,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     onSubmit() {
-        this.clearErrorMessage();
         super.onSubmit();
     }
 
@@ -352,6 +351,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             ['/welcome'],
                             { queryParams: { nomeCliente: nome, valid: false }
                         });
+                    }
+
+                    if(this.errorMessage && res.success){
+                        this.clearErrorMessage();
                     }
                 },
                 error => {
