@@ -133,7 +133,7 @@
 
 .rodada-gratis-container {
     background-color: var(--header);
-    height: 220px;
+    height: 320px;
     padding: 16px;
     border-radius: 4px;
     margin-bottom: 15px;
@@ -241,7 +241,7 @@
     }
 
     .btn-jogar-rodada {
-        min-width: 100%; 
+        min-width: 100%;
         margin-top: 10px;
     }
 }

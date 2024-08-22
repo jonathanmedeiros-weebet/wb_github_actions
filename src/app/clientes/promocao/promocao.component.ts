@@ -121,7 +121,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
                     }));
                     this.rodadas = response.rodadas.map(rodada => {
                         let customStatusFreeSpin = '';
-                        if ((rodada.ativo = '1') && (rodada.dataTermino.date >= this.formattedCurrentDate) && (rodada.status == 'pendente')) {
+                        if ((rodada.ativo == '1') && (rodada.dataTermino.date >= this.formattedCurrentDate) && (rodada.status == 'pendente')) {
                             customStatusFreeSpin = 'Pendente';
                         } else if (rodada.ativo == '1' && rodada.status == 'pendente' && rodada.dataTermino.date < this.formattedCurrentDate) {
                             customStatusFreeSpin = 'Expirada';
