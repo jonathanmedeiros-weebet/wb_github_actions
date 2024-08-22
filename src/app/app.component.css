@@ -118,11 +118,14 @@ img{
 }
 
 .accept-cookies .cookie-message .informativo-cookies :last-child {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     flex-direction: column;
 }
 
+.informativoCookiesLink {
+    width: fit-content;
+}
 
 @media screen and (max-width: 480px){
     .accept-cookies .cookie-message .titulo-informativo-cookies {
@@ -131,5 +134,9 @@ img{
 
     .accept-cookies .cookie-message .informativo-cookies {
         font-size: 12px;
+    }
+
+    .btn-accept {
+        display: flex !important;
     }
 }

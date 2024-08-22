@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { config } from '../../../../shared/config';
 
 @Component({
   selector: 'app-wall-game-card',
@@ -15,7 +16,7 @@ export class WallGameCardComponent {
   @Output() openModalLogin = new EventEmitter();
 
   get gameImageUrl(): string {
-    return `https://cdn.wee.bet/img/cassino/${this.game.fornecedor}/${this.game.gameID}.png`;
+    return this.game.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + this.game.gameID + this.game.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${this.game.fornecedor}/${this.game.gameID}.png` ;
   }
 
   get routerLinkDemo(): any[] {

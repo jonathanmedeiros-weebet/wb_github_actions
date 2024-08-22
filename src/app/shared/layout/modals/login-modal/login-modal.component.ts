@@ -39,6 +39,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     modoClienteHabilitado;
     LOGO = config.LOGO;
     loginGoogle = false;
+    resgister_cancel = false;
     googleUser;
     private geolocation: Geolocation;
 
@@ -105,6 +106,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.geolocationService
             .getGeolocation()
             .then((geolocation) => this.geolocation = geolocation)
+    }
+    registerCancel(){
+        this.resgister_cancel = true;
     }
 
     createForm() {
