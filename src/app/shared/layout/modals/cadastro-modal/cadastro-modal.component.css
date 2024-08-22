@@ -216,8 +216,8 @@ a.link-termos-politica {
     }
 }
 
-.grecaptcha-badge { 
-    visibility: hidden; 
+.grecaptcha-badge {
+    visibility: hidden;
 }
 
 .checkbox-aceitar-termos{
@@ -225,6 +225,11 @@ a.link-termos-politica {
 }
 
 @media only screen and (max-width: 610px) {
+}
+
+.label-termo-uso {
+    display: flex;
+    align-items: center;
 }
 
 .label-termo-uso input[type="checkbox"] {

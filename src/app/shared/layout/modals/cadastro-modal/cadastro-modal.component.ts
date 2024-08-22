@@ -206,16 +206,16 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     verificarPromocaoAtiva(): void {
         if (this.promocoes && this.promocoes.length > 0) {
-            const promocaoCassino = this.promocoes.find(promocao => 
-                promocao.ativo && 
-                promocao.tipo === 'primeiro_deposito_bonus' && 
-                promocao.valorBonus > 0.00 && 
+            const promocaoCassino = this.promocoes.find(promocao =>
+                promocao.ativo &&
+                promocao.tipo === 'primeiro_deposito_bonus' &&
+                promocao.valorBonus > 0.00 &&
                 promocao.bonusModalidade === 'cassino'
             );
 
-            const promocaoEsportivo = this.promocoes.find(promocao => 
-                promocao.ativo && 
-                promocao.tipo === 'primeiro_deposito_bonus' && 
+            const promocaoEsportivo = this.promocoes.find(promocao =>
+                promocao.ativo &&
+                promocao.tipo === 'primeiro_deposito_bonus' &&
                 promocao.valorBonus > 0.00 &&
                 promocao.bonusModalidade === 'esportivo'
             );
@@ -268,14 +268,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
 
         if (this.isLoterj) {
-            this.form.addControl('confirmarEmail', this.fb.control(null, [
-                Validators.required,
-                Validators.email,
-                FormValidations.equalsTo('email')
-            ]));
             this.form.addControl('termosUso', this.fb.control(null, [
                 Validators.requiredTrue,
             ]));
+
+            this.form.controls['nome'].clearValidators();
+            this.form.controls['nome'].updateValueAndValidity();
+
+            this.form.controls['nascimento'].clearValidators();
+            this.form.controls['nascimento'].updateValueAndValidity();
+
+            this.form.controls['senha_confirmacao'].clearValidators();
+            this.form.controls['senha_confirmacao'].updateValueAndValidity();
+
+            this.form.controls['telefone'].clearValidators();
+            this.form.controls['telefone'].updateValueAndValidity();
         }
     }
 
@@ -318,7 +325,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
         }
-        
+
         if (Object.keys(this.parameters).length) {
             values.parameters = this.parameters;
         }
@@ -404,48 +411,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const { cpf } = this.form.value;
 
         if (this.autoPreenchimento) {
-            if (this.form.get('cpf').valid) {
-                this.clientesService.validarCpf(cpf).subscribe(
-                    res => {
-                        if (res.validarCpfAtivado) {
-                            this.autoPreenchimento = true;
-                            this.cpfValidado = true;
-                            this.menorDeIdade = res.menorDeIdade;
-                            this.form.controls['nascimento'].clearValidators();
-                            this.form.controls['nascimento'].updateValueAndValidity();
-                            this.form.patchValue({
-                                nome: res.nome,
-                                dadosCriptografados: res.dados
-                            });
-                        } else {
-                            if (!this.formSocial) {
-                                this.form.patchValue({nome: ''});
-                            }
-                            this.autoPreenchimento = false;
-                            this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
-                            this.form.controls['nascimento'].updateValueAndValidity();
-                            this.cpfValidado = false;
-                        }
-                    },
-                    error => {
-                        this.cpfValidado = false;
-                        this.form.patchValue({nome: ''});
-                        if (error?.code === 'cpfInformadoNaoExiste') {
-                            this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
-                            this.form.controls['cpf'].updateValueAndValidity();
-                        } else {
-                            this.messageService.error(error);
-                        }
-                    }
-                );
-            } else {
-                this.cpfValidado = false;
-                this.menorDeIdade = false;
-                this.form.patchValue({
-                    nome: '',
-                    dadosCriptografados: null
-                });
-            }
             if (this.form.get('cpf').valid) {
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
