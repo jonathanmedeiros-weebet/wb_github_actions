@@ -72,6 +72,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     sportId:number;
     liveUrl:string;
 
+    footballId = 1;
+    basketballId = 48242;
+
     constructor(
         public sanitizer: DomSanitizer,
         private apostaEsportivaService: ApostaEsportivaService,
@@ -163,11 +166,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 (response: any) => {
                     if (response) {
                         if (this.sportId) {
-                            if (this.sportId == 1) {
+                            if (this.sportId == this.footballId) {
                                 this.liveUrl = 'https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=';
                             }
 
-                            if (this.sportId == 48242) {
+                            if (this.sportId == this.basketballId) {
                                 this.liveUrl = 'https://stream.raysports.live/br/basketball?token=5oq66hkn0cwunq7&uuid=';
                             }
 
