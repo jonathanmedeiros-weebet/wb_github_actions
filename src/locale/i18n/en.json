@@ -663,6 +663,7 @@
         "ativa": "Active",
         "expirada": "Expired",
         "concluida":"Completed",
-        "cancelada":"Canceled"
+        "cancelada":"Canceled",
+        "premio": "Prize"
     }
 }
