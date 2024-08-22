@@ -29,12 +29,12 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!isLoterj">
                 <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial)">
                     <div class="form-group mb-4">
                         <div class="input-md">
                             <input type="text" id="nome" class="form-control inverted-out"  (beforeinput)="onBeforeInput($event, 'name')" formControlName="nome"
-                                   [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento">
+                                [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento">
                             <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
                         </div>
                         <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
@@ -42,13 +42,13 @@
                 </div>
                 <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!isLoterj">
                 <div class="col-md-12" [hidden]="autoPreenchimento">
                     <div class="form-group mb-4">
                         <div class="input-md">
                             <input type="text" id="dataNascimento" class="form-control inverted-out" mask="d0/M0/0000"
-                                   formControlName="nascimento"
-                                   [ngClass]="applyCssInputError('nascimento')" placeholder=" ">
+                                formControlName="nascimento"
+                                [ngClass]="applyCssInputError('nascimento')" placeholder=" ">
                             <label for="dataNascimento">{{'geral.dataDeNascimento' | translate}}</label>
                         </div>
 
@@ -62,30 +62,28 @@
                     <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
                         <div class="input-md">
                             <input type="text" id="email" class="form-control inverted-out"
-                                   [ngClass]="applyCssInputError('email')"
-                                   [readonly]="formSocial"
-                                   formControlName="email" placeholder=" "
-                                   (beforeinput)="onBeforeInput($event, 'email')"
-                                   >
+                                [ngClass]="applyCssInputError('email')"
+                                [readonly]="formSocial"
+                                formControlName="email" placeholder=" "
+                                (beforeinput)="onBeforeInput($event, 'email')"
+                                >
                             <label for="email">{{'geral.email' | translate}}</label>
                         </div>
-
                         <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
-                                       class="text-left"></app-error-msg>
+                                    class="text-left"></app-error-msg>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!isLoterj">
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">
                             <input type="text" id="telefone" mask="(00)00000-0000" class="form-control inverted-out"
-                                   formControlName="telefone"
-                                   [ngClass]="applyCssInputError('telefone')" placeholder=" "
-                                   [dropSpecialCharacters]="false" inputmode="numeric">
+                                formControlName="telefone"
+                                [ngClass]="applyCssInputError('telefone')" placeholder=" "
+                                [dropSpecialCharacters]="false" inputmode="numeric">
                             <label for="telefone">{{'geral.telefone' | translate}}</label>
                         </div>
-
                         <app-error-msg [control]="form.get('telefone')" label="{{'geral.telefone' | translate}}"
                                        class="text-left"></app-error-msg>
                     </div>
@@ -108,20 +106,19 @@
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="!formSocial">
+            <div class="row" *ngIf="!formSocial && !isLoterj">
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">
                             <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
-                                   class="form-control inverted-out" formControlName="senha_confirmacao"
-                                   [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
+                                class="form-control inverted-out" formControlName="senha_confirmacao"
+                                [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
                             <label for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
                             <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'"
-                               (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
+                                (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
                         </div>
-
                         <app-error-msg [control]="form.get('senha_confirmacao')"
-                                       label="{{'senhas.confirmarSenha' | translate}}" class="text-left"></app-error-msg>
+                                        label="{{'senhas.confirmarSenha' | translate}}" class="text-left"></app-error-msg>
                     </div>
                 </div>
             </div>
@@ -142,7 +139,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <label class="label-termo-uso">
+                    <label *ngIf="!isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
                         {{'geral.deAcordoComOsTermos1' | translate}}
                         <a id="linkTermos"
                             target="_blank"
@@ -153,6 +150,23 @@
                             target="_blank"
                             [routerLink]="['/informacoes/politica-privacidade']"
                             class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
+                    </label>
+                    <label *ngIf="isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
+                        <input type="checkbox" id="termosUso" formControlName="termosUso">
+                        <div>
+                            {{'geral.certificoQueTenhoMais' | translate}}
+                            <a id="linkTermos"
+                               target="_blank"
+                               [routerLink]="['/informacoes/termos-condicoes']"
+                               class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
+                            {{'geral.deAcordoComOsTermos2' | translate}}
+                            <a id="linkPolitica"
+                               target="_blank"
+                               [routerLink]="['/informacoes/politica-privacidade']"
+                               class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
+                        </div>
+                        <app-error-msg [control]="form.get('termosUso')"
+                                       class="text-left"></app-error-msg>
                     </label>
                 </div>
             </div>
