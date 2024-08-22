@@ -205,14 +205,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
 
         if (this.isLoterj) {
-            this.form.addControl('confirmarEmail', this.fb.control(null, [
-                Validators.required,
-                Validators.email,
-                FormValidations.equalsTo('email')
-            ]));
             this.form.addControl('termosUso', this.fb.control(null, [
                 Validators.requiredTrue,
             ]));
+
+            this.form.controls['nome'].clearValidators();
+            this.form.controls['nome'].updateValueAndValidity();
+
+            this.form.controls['nascimento'].clearValidators();
+            this.form.controls['nascimento'].updateValueAndValidity();
+
+            this.form.controls['senha_confirmacao'].clearValidators();
+            this.form.controls['senha_confirmacao'].updateValueAndValidity();
+
+            this.form.controls['telefone'].clearValidators();
+            this.form.controls['telefone'].updateValueAndValidity();
         }
     }
 
