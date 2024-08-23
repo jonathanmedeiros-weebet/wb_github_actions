@@ -655,6 +655,7 @@
         "ativa": "Activo",
         "expirada": "Venció",
         "concluida":"Terminado",
-        "cancelada":"Cancelado"
+        "cancelada":"Cancelado",
+        "premio": "Premio"
     }
 }

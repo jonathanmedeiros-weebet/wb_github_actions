@@ -239,7 +239,7 @@ body {
     font-size: 14px !important;
 }
 
-[hidden] {
+[hidden], .hidden_field {
     display: none;
 }
 
@@ -350,6 +350,41 @@ body {
 .btn:hover {
     animation: darken 0.2s;
     -webkit-animation-fill-mode: forwards;
+}
+
+.field_btn {
+    background-color: rgba(0, 0, 0, 0.50);
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 6px;
+    width: 264px;
+    height: 37px;
+    transition: .2s ease-in-out;
+}
+
+.field_active {
+    background-color: #000;
+}
+
+div.field_body.hidden, div.field_body {
+    margin: 0;
+}
+
+.iframe-responsive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iframe-responsive iframe {
+    width: 100%;
+    height: 340px;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes darken {
