@@ -121,7 +121,7 @@ import { FreeSpinService } from '../services/clientes/free-spin.service';
             codeLength: 6
         }),
         NgHcaptchaModule.forRoot({
-            siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
+            siteKey: '30aaf7ea-dc50-41d4-8866-d15e08ee3492',
             languageCode: 'pt'
         }),
         TranslateModule,
