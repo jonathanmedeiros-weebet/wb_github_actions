@@ -1,16 +1,16 @@
 .game-card {
     position: relative;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
     min-height: 125px;
 
     &--inline {
-        width: 150px;
+        width: 144px;
         min-height: 144px;
     }
 
     &--default {
-        width: calc((100vw / 2) - 16px);
+        width: 100%;
         min-height: 144px;
     }
 
@@ -21,11 +21,12 @@
     &__image {
         position: relative;
         width: 100%;
-        min-height: 105px;
+        max-height: calc((100vw / 2) - 16px);
+        max-width: 200px;
         height: auto !important;
         background-color: #00000050;
         height: min-content;
-        border-radius: 5px;
+        border-radius: 10px;
         object-fit: cover;
     }
 
@@ -145,53 +146,77 @@
     margin-top: 0;
 }
 
-@media only screen and (min-width: 687px) {
-    .game-card--default {
-        width: calc((100vw / 4) - 16px);
-        min-height: 144px;
+.game-card--inline{
+    width: 90px;
+    min-height: 90px;
+}
+
+.game-card--inline > .game-card__image{
+    min-height: 90px;
+}
+
+@media only screen and (min-width: 336px){
+    .game-card--inline{
+        width: 100px;
+        min-height: 100px;
     }
 
-    .game-card--filter .game-card__info {
-        max-width: 200px;
+    .game-card--inline > .game-card__image{
+        min-height: 100px;
     }
 }
 
-@media only screen and (min-width: 1025px) {
-    .game-card {
-        width: 100%;
-
-        &--inline {
-            width: calc((100vw / 6) - 16px);
-            margin: 0;
-    
-            min-width: 216px;
-            max-width: 216px;
-        }
-
-        &--default {
-            width: calc((100vw / 6) - 26px);
-        }
-
-        &--filter {
-            width: 100%;
-        }
-
-        &__image {
-            min-height: 155px;
-            height: auto;
-        }
+@media only screen and (min-width: 336px) and (max-width: 345px){
+    .game-card--inline{
+        width: 95px;
+        min-height: 95px;
     }
 
-    .game-card--dafault .game-card__image {
-        height: 169px;
+    .game-card--inline > .game-card__image{
+        min-height: 95px;
+    }
+}
+
+@media only screen and (min-width: 412px){
+    .game-card--inline{
+        width: 120px;
+        min-height: 120px;
     }
 
-    .game-card--filter .game-card__info {
-        max-width: 140px;
+    .game-card--inline > .game-card__image{
+        min-height: 120px;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .game-card--inline{
+        width: 140px;
+        min-height: 140px;
     }
 
-    .game-button--demo,
-    .game-button--play {
-        height: 42px !important;
+    .game-card--inline > .game-card__image{
+        min-height: 140px;
+    }
+}
+
+@media only screen and (min-width: 912px){
+    .game-card--inline{
+        width: 165px;
+        min-height: 165px;
+    }
+
+    .game-card--inline > .game-card__image{
+        min-height: 165px;
+    }
+}
+
+@media only screen and (min-width: 1920px){
+    .game-card--inline{
+        width: 170px;
+        min-height: 170px;
+    }
+
+    .game-card--inline > .game-card__image{
+        min-height: 170px;
     }
 }

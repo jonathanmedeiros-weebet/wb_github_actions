@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./wall-section.component.css']
 })
 export class WallSectionComponent {
+  @Input() container: any;
   @Input() sectionId: string = '';
   @Input() title: string = '';
   @Input() itemsQty: number = 0;
@@ -15,7 +16,10 @@ export class WallSectionComponent {
   @Output() onLeft = new EventEmitter();
   @Output() onRight = new EventEmitter();
 
-  constructor(private router: Router){}
+
+  constructor(private router: Router,
+    private elRef: ElementRef
+  ){ }
 
   get showScroolButton(): boolean {
     return this.itemsQty > 5
@@ -40,5 +44,12 @@ export class WallSectionComponent {
     }
 
     this.onSeeAll.emit();
+    this.goToTop();
+  }
+
+  public goToTop() {
+    if(this.container){
+      this.container.scrollTop = 0;
+    }
   }
 }

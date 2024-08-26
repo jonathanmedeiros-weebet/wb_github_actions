@@ -130,7 +130,7 @@ iframe{
 
 .desktop-fullscreen .game-frame {
     width:100%;
-    height: calc(100vh - 63px);
+    height: calc(100vh - 46px) !important;
     margin: 0;
 }
 
@@ -154,10 +154,10 @@ iframe{
         background-color: #000;
         width: 100%;
         height: 100%;
-        z-index: 9000;
+        z-index: 10000;
         top: 0;
     }
-
+ 
     .game-view .header-game-view {
         /* margin: 2% 0 0 0 ; */
     }
@@ -184,7 +184,7 @@ iframe{
 
 @media (min-width: 1025px) {
     .game-frame {
-        height: calc(100vh - 139px);
+        height: calc(100vh - 175px);
     }
 
     iframe {

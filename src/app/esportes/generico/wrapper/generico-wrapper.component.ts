@@ -115,7 +115,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
 
                     this.data = queryParams.data;
 
-                    if (dt.isBefore(dataLimiteTabela, 'day')) {
+                    if (!Boolean(params['data']) && dt.isBefore(dataLimiteTabela, 'day')) {
                         addDay = true;
                     }
 

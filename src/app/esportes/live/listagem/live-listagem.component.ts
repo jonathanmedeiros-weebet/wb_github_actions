@@ -11,6 +11,7 @@ import {
     MessageService,
     ParametrosLocaisService
 } from '../../../services';
+import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
 import { SOCCER_ID, BASKETBALL_ID } from 'src/app/shared/constants/sports-ids';
 
@@ -338,8 +339,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 nome: this.helperService.apostaTipoLabelCustom(
                     cotacao.chave,
                     jogo.time_a_nome,
-                    jogo.time_b_nome
+                    jogo.time_b_nome,
                 ),
+                price_change: cotacao.price_change
             },
             mudanca: false,
             cotacao_antiga_valor: null
@@ -428,5 +430,17 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
+    }
+
+    getOddChangeClass(status:string) {
+        switch (status) {
+            case CotationPriceChange.Up:
+                return 'odd-up';
+            case CotationPriceChange.Down:
+                return 'odd-down';
+            case CotationPriceChange.Same:
+            default:
+                return ''
+        };
     }
 }

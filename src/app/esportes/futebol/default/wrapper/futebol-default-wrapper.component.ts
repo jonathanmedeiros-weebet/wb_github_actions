@@ -137,10 +137,6 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                             } else {
                                 queryParams.data = dataLimiteTabela;
                             }
-
-                            if (dt.isBefore(dataLimiteTabela, 'day')) {
-                                addDay = true;
-                            }
                         } else if (!params['nome']) {
                             exibirDestaques = true;
                             queryParams.data = moment().format('YYYY-MM-DD');

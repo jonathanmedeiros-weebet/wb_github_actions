@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
     @ViewChild('demoModal', {static: true}) demoModal;
     @ViewChild('inicialModal', {static: true}) inicialModal;
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
-    @ViewChild('enableNotificationXtremepushModal', {static: true}) enableNotificationXtremepushModal;
     @ViewChild('wrongVersionModal', {static: true}) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     imagemInicial;
@@ -36,6 +35,7 @@ export class AppComponent implements OnInit {
     public acceptedCookies: boolean = false;
     modalPush;
     xtremepushHabilitado = false;
+    hasPoliticaPrivacidade = false;
 
     constructor(
         private auth: AuthService,
@@ -74,7 +74,9 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
         this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
+        this.eventPushXtremepush();
         this.auth.logado.subscribe((isLogged) => {
             const logoutByInactivityIsEnabled =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
             const isCliente = this.auth.isCliente();
@@ -263,9 +265,6 @@ export class AppComponent implements OnInit {
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
-
-        this.checkAndDisplayModal();
-        this.retryCheckPermission(3, 1000);
     }
 
     downloadApp() {
@@ -295,67 +294,10 @@ export class AppComponent implements OnInit {
         localStorage.setItem('accepted_cookies', 'true');
     }
 
-    activateNotifications(){
-        localStorage.setItem('push_xtremepush', "true");
-        this.modalPush.close()
-        xtremepush('prompt');
-    }
-
-    disableNotifications() {
-        localStorage.setItem('push_xtremepush', "false");
-        const timestamp = Date.now();
-        localStorage.setItem('push_xtremepush_timestamp', timestamp.toString());
-        this.modalPush.close()
-    }
-
-    saveTimestamp() {
-        const timestampKey = 'xtremepush.timestamp';
-        const timestamp = Date.now();
-        localStorage.setItem(timestampKey, timestamp.toString());
-    }
-
-    hasDayPassed() {
-        const timestampKey = 'xtremepush.timestamp';
-        const timestampStr = localStorage.getItem(timestampKey);
-        if (!timestampStr) {
-            return true; // No timestamp stored, consider it as a day has passed
-        }
-        const timestamp = parseInt(timestampStr, 10);
-        const currentTime = Date.now();
-        const oneDayInMillis = 24 * 60 * 60 * 1000; // 1 day in milliseconds
-        return (currentTime - timestamp) >= oneDayInMillis;
-    }
-
-    checkAndDisplayModal() {
+    eventPushXtremepush() {
         const xtremepushHabilitado = this.paramLocais.getOpcoes().xtremepush_habilitado;
         if (xtremepushHabilitado) {
-            const xtremepush_localstorage = JSON.parse(localStorage.getItem('xtremepush.data'));
-            if (xtremepush_localstorage && xtremepush_localstorage.permission !== 'granted' && this.hasDayPassed()) {
-                this.modalPush = this.modalService.open(
-                    this.enableNotificationXtremepushModal,
-                    {
-                        ariaLabelledBy: 'modal-basic-title',
-                        windowClass: 'modal-pop-up',
-                        centered: true,
-                        size: 'md',
-                    }
-                );
-                this.saveTimestamp();
-            }
+            xtremepush('event', 'push');
         }
-    }
-
-    retryCheckPermission(retries, delay) {
-        const interval = setInterval(() => {
-            const xtremepush_localstorage = JSON.parse(localStorage.getItem('xtremepush.data'));
-            if (xtremepush_localstorage && xtremepush_localstorage.permission !== undefined) {
-                clearInterval(interval);
-                this.checkAndDisplayModal();
-            } else if (retries <= 0) {
-                clearInterval(interval);
-            } else {
-                retries--;
-            }
-        }, delay);
     }
 }

@@ -16,6 +16,7 @@ import {
     ParametrosLocaisService, MessageService, JogoService,
     LiveService, BilheteEsportivoService, HelperService
 } from '../../../services';
+import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
 import { SOCCER_ID, BASKETBALL_ID } from '../../../shared/constants/sports-ids';
 
@@ -258,7 +259,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             cotacao: {
                 chave: cotacao.chave,
                 valor: cotacao.valor,
-                nome: cotacao.nome
+                nome: cotacao.nome,
+                price_change: cotacao.price_change
             },
             mudanca: false,
             cotacao_antiga_valor: null
@@ -407,5 +409,17 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         this.modalRef = this.modalService.open(
             LoginModalComponent, options
         );
+    }
+
+    getOddChangeClass(status:string) {
+        switch (status) {
+            case CotationPriceChange.Up:
+                return  'odd-up';
+            case CotationPriceChange.Down:
+                return 'odd-down';
+            case CotationPriceChange.Same:
+            default:
+                return '';
+        };
     }
 }

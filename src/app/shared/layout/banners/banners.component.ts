@@ -10,12 +10,15 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class BannersComponent implements OnInit {
     banners = [];
+    bannersModal = [];
     showLoadingIndicator = true;
     isMobileView = false;
     showNavigationArrows = false;
+    showNavigationArrowsInModal = false;
     @Input() pagina = 'futebol';
     @Input() showSkeleton = false;
     @Input() type = 'banner';
+    @Input() isModal = false;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -30,35 +33,62 @@ export class BannersComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        if (window.innerWidth <= 667) {
+            this.isMobileView = true;
+        }
+        if (!this.isModal) {
+            this.loadBanner();
+        } else {
+            this.loadBannerModal();
+        }
+    }
+
+    loadBanner() {
+        this.banners = [];
         this.showLoadingIndicator = true;
+        
         this.bannerService.requestBanners(this.pagina);
-
         this.bannerService.banners.subscribe(banners => {
+        
             this.showLoadingIndicator = true;
-            this.banners = [];
+            
             let source = 'src';
-
-            if (window.innerWidth <= 667) {
-                source = 'src_mobile';
-                this.isMobileView = true;
-            }
-
+            this.isMobileView && (source = 'src_mobile');
+            
             for (const banner of banners) {
-                if (banner[source]) {
+                if (banner[source] && !(banner['pagina'] === 'deposito' && this.isMobileView)) {
                     this.banners.push(banner);
                 }
             }
-
             if (this.banners.length > 1) {
                 this.showNavigationArrows = true;
             }
-            if(this.showSkeleton){
-                setTimeout(()=>{
-                    this.showLoadingIndicator = false;
-                },2000);
-            }else{
-                this.showLoadingIndicator = false;
+            this.showLoadingIndicator = false;      
+            this.cd.markForCheck();    
+        });
+    }
+
+    loadBannerModal() {
+        this.bannersModal = [];
+        this.showLoadingIndicator = true;
+
+        this.bannerService.requestBanners(this.pagina);
+        this.bannerService.banners.subscribe(banners => {
+
+            this.showLoadingIndicator = true;
+            
+            let source = 'src';
+            this.isMobileView && (source = 'src_mobile');
+
+            for (const banner of banners) {
+                if (banner[source]) {
+                    this.bannersModal.push(banner);
+                }
             }
+            if (this.bannersModal.length > 1) {
+                this.showNavigationArrowsInModal = true;
+            }
+            this.showLoadingIndicator = false;
             this.cd.markForCheck();
         });
     }
