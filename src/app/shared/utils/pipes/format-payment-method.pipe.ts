@@ -27,6 +27,8 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'Pay2m';
             case 'okto':
                 return 'Okto';
+            case 'pixs':
+                return 'Pixs';
 		}
 
         return "";
