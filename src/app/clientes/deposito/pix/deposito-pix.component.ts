@@ -30,11 +30,12 @@ import { TranslateService } from '@ngx-translate/core';
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code" *ngIf="qrCodeBase64">
-            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag'].includes(selectedPaymentMethod)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag','pixs'].includes(selectedPaymentMethod)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'sauto_pay'" [src]="sautoPayQr"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
             <img [ngStyle]="{'width': '170px', 'background-color':'#ffffff'}" *ngIf="selectedPaymentMethod === 'paag'" src="{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'pixs'" src="{{ qrCodeBase64 }}"/>
         </div>
         <div class="qr-code" *ngIf="!qrCodeBase64">
             <ngx-qrcode
