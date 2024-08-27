@@ -125,11 +125,10 @@
                     <div class="time-a">
                         <div class="time-a-nome">
                             <span *ngIf="jogo?.time_a_img; else defaulImageA">
-                                <img *ngIf="jogo?.sport_id == soccerId" src="https://cdn.wee.bet/img/times/m/{{jogo.time_a_img}}.png" size="m">
-                                <img *ngIf="jogo?.sport_id == basketballId" src="https://cdn.wee.bet/img/times/v2/{{jogo.time_a_img}}.png" size="m">
+                                <img src="https://cdn.wee.bet/img/times_v2/m/{{jogo.time_a_img}}.png" size="m">
                             </span>
                             <ng-template #defaulImageA class="escudo">
-                                <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
+                                <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="m" class="escudo-img">
                             </ng-template>
                             <br>
                             <div class="time-nome">
@@ -165,11 +164,10 @@
                     <div class="time-b">
                         <div class="time-b-nome">
                             <span *ngIf="jogo?.time_b_img; else defaulImageB">
-                                <img *ngIf="jogo?.sport_id == soccerId" src="https://cdn.wee.bet/img/times/m/{{jogo.time_b_img}}.png" size="m">
-                                <img *ngIf="jogo?.sport_id == basketballId" src="https://cdn.wee.bet/img/times/v2/{{jogo.time_b_img}}.png" size="m">
+                                <img src="https://cdn.wee.bet/img/times_v2/m/{{jogo.time_b_img}}.png" size="m">
                             </span>
                             <ng-template #defaulImageB class="escudo">
-                                <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
+                                <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="m" class="escudo-img">
                             </ng-template>
                             <br>
                             <div class="time-nome">
@@ -213,10 +211,10 @@
                     <div class="time-a">
                         <div class="time-a-nome">
                             <span *ngIf="jogo?.time_a_img; else defaulImageA">
-                                <img src="https://cdn.wee.bet/img/times/m/{{jogo.time_a_img}}.png" size="m">
+                                <img src="https://cdn.wee.bet/img/times_v2/m/{{jogo.time_a_img}}.png" size="m">
                             </span>
                             <ng-template #defaulImageA class="escudo">
-                                <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
+                                <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="m" class="escudo-img">
                             </ng-template>
                             <br>
                             <div class="time-nome">
@@ -252,10 +250,10 @@
                     <div class="time-b">
                         <div class="time-b-nome">
                             <span *ngIf="jogo?.time_b_img; else defaulImageB">
-                                <img src="https://cdn.wee.bet/img/times/m/{{jogo.time_b_img}}.png" size="m">
+                                <img src="https://cdn.wee.bet/img/times_v2/m/{{jogo.time_b_img}}.png" size="m">
                             </span>
                             <ng-template #defaulImageB class="escudo">
-                                <img src="https://cdn.wee.bet/img/times/m/default.png" size="m" class="escudo-img">
+                                <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="m" class="escudo-img">
                             </ng-template>
                             <br>
                             <div class="time-nome">
@@ -277,7 +275,7 @@
                                 <div class="game-stats-item">
                                     <div class="game-card yellow-card"></div>
                                     {{ jogo?.stats.fora_cartoes_amarelo }}
-                                </div>                            
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -330,7 +328,7 @@
                                         (click)="addCotacao(jogo, odd)">
                                         <span class="nome-odd"
                                             [ngClass]="getOddChangeClass(odd.price_change)"
-                                        >                                     
+                                        >
                                         {{odd.label}}
                                         </span>
                                         <span class="valor">

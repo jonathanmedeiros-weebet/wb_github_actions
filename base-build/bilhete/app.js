@@ -222,7 +222,7 @@ document.onreadystatechange = async function () {
                                 <div id="match">
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/times/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/times/m/default.png'">
+                                            <img src="https://cdn.wee.bet/img/times_v2/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/times_v2/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -241,7 +241,7 @@ document.onreadystatechange = async function () {
 
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/times/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/times/m/default.png'">
+                                            <img src="https://cdn.wee.bet/img/times_v2/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/times_v2/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_b_nome ? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -356,11 +356,11 @@ document.onreadystatechange = async function () {
                                 const ticketDiv = document.getElementById(`${ticketItem.jogo_api_id}_ticket_item`);
                                 let live_track_id = ticketItem.live_track_id;
                                 let fieldLink;
-    
+
                                 if (ticketItem.sport == footballId) {
                                     fieldLink = fieldLinkFootball;
                                 }
-    
+
                                 if (ticketItem.sport == basketballId) {
                                     fieldLink = fieldLinkBasketball;
                                 }
@@ -377,7 +377,7 @@ document.onreadystatechange = async function () {
                             }
                         }
                     }
-                    
+
                     var liveItems = ticketData.tipo === 'esportes' ? filterLiveItems(ticketItens, itemsWithResults) : [];
 
                     if (!ticketData.resultado && liveItems.length > 0) {
