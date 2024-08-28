@@ -223,7 +223,6 @@
         "valeno.bet": "gulp valeno.bet",
         "dentrodaaposta.com": "gulp dentrodaaposta.com",
         "xico.bet": "gulp xico.bet",
-        "arena365.bet": "gulp arena365.bet",
         "nortedasorte.bet": "gulp nortedasorte.bet",
         "faturabet.com": "gulp faturabet.com",
         "mczbet.com": "gulp mczbet.com",
@@ -303,7 +302,9 @@
         "tourodasorte.bet": "gulp tourodasorte.bet",
         "decola.bet": "gulp decola.bet",
         "camelodasorte.com": "gulp camelodasorte.com",
-        "oraculo.bet": "gulp oraculo.bet"
+        "oraculo.bet": "gulp oraculo.bet",
+        "priv8bet.com": "gulp priv8bet.com",
+        "betinha.com": "gulp betinha.com"
     },
     "private": true,
     "dependencies": {
