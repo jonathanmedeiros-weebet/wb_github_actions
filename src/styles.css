@@ -641,7 +641,7 @@ button {
 }
 
 .modal {
-    z-index: 90002;
+    z-index: 10000;
 }
 
 .modal-header, .modal-body, .modal-footer{
