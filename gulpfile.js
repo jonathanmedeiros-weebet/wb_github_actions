@@ -2848,6 +2848,7 @@ gulp.task('decola.bet', function (done) {
         host: "decola.bet",
         banca: "DECOLA.BET",
         styles: "",
+        description: "As melhores ofertas hoje: 100% até R$1000 em Apostas Esportivas e todos os Games. Aproveite as apostas no futebol, basquete, Esoccer, NBA e demais jogos. Dobramos seu depósito de até R$1000. Saque Rápido & Seguro."
     });
 });
 
