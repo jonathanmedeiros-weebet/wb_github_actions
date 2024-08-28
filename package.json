@@ -331,6 +331,7 @@
         "angular-code-input": "^1.6.0",
         "angular-svg-icon": "^7.2.0",
         "bootstrap": "^5.2.3",
+        "bootstrap-icons": "^1.11.3",
         "chart.js": "^3.9.1",
         "clone": "^2.1.1",
         "esc-pos-encoder": "^2.0.1",

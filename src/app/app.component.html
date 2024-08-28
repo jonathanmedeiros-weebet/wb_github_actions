@@ -75,9 +75,14 @@
             {{'geral.tituloInformativoCookies' | translate}} <i class="fa-solid fa-cookie"></i>
         </div>
         <div class="informativo-cookies">
-            <div>{{'geral.informativoCookies' | translate}}</div>
             <div>
-                <a class="btn btn-custom w-130" (click)="acceptCookies()">{{ 'botoes.aceitar' | translate }}</a>
+                {{'geral.informativoCookies' | translate}}
+                <a class="informativoCookiesLink" style="width: fit-content;" [routerLink]="['/informacoes/politica-privacidade']" *ngIf="hasPoliticaPrivacidade">
+                {{'geral.informativoCookiesLink' | translate}}
+                </a>
+            </div>
+            <div class="btn-accept">
+                <a class="btn btn-custom w-130" (click)="acceptCookies()">{{ 'botoes.entendi' | translate }}</a>
             </div>
         </div>
     </div>

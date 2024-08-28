@@ -33,11 +33,36 @@
     height: min-content;
 }
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 320px) and (max-width: 767px){
     .provider-card--inline {
-        width: calc((100vw / 7.5) - 16px);
-        height: 78px;
+        width: 120px;
+        height: 60px;
     }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 911px){
+    .provider-card--inline {
+        width: 140px;
+        height: 60px;
+    }
+}
+
+@media only screen and (min-width: 912px) and (max-width: 1919px){
+    .provider-card--inline {
+        width: 165px;
+        height: 60px;
+    }
+}
+
+@media only screen and (min-width: 912px){
+    .provider-card--inline {
+        width: 170px;
+        height: 60px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+
 
     .provider-card--filter {
         max-width: 129px;
