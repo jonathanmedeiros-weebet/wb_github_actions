@@ -8,6 +8,11 @@ document.onreadystatechange = async function () {
             } else {
                 const appCssLink = this.getElementById('app-css');
                 const linkTag = this.createElement('link');
+                const fieldLinkFootball = 'https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=';
+                const fieldLinkBasketball = 'https://widgets-v2.thesports01.com/br/pro/basketball?profile=5oq66hkn0cwunq7&uuid=';
+                const liveTrackerIsActive = params.liveTracker;
+                const footballId = 1;
+                const basketballId = 48242;
                 linkTag.href = `https://weebet.s3.amazonaws.com/${params.slug}/param/cores.css`
                 linkTag.rel = 'stylesheet';
                 appCssLink.parentElement.insertBefore(linkTag, appCssLink);
@@ -123,7 +128,11 @@ document.onreadystatechange = async function () {
                                     if (game.jogo_api_id === item.event_id) {
                                         game.time_a_img = item.time_a_img;
                                         game.time_b_img = item.time_b_img;
-                                    }
+
+                                        if (item.live_track_id) {
+                                            game.live_track_id = item.live_track_id;
+                                        };
+                                    };
                                 });
 
                                 if (item.resultado){
@@ -205,7 +214,7 @@ document.onreadystatechange = async function () {
 
                         if (ticketData.tipo == 'esportes') {
                             div.innerHTML = `
-                            <div class="ticket-item">
+                            <div id="${ticketItem.jogo_api_id}_ticket_item" class="ticket-item">
                                 <div class="identification">
                                     <strong>${ticketItem.campeonato_nome}</strong>
                                 </div>
@@ -280,9 +289,12 @@ document.onreadystatechange = async function () {
 
                                 <div id="${ticketItem.jogo_api_id}_live_status" class="live_status">
                                 </div>
+
+                                <div id="${ticketItem.jogo_api_id}_field" ${ticketItem.live_track_id ? '' : 'hidden'}>
+                                </div>
+
                             </div>
                         </div>`;
-
                         } else if (ticketData.tipo === 'acumuladao') {
                             div.innerHTML =
                                 `<div class="ticket-item">
@@ -338,6 +350,34 @@ document.onreadystatechange = async function () {
                         this.getElementById('ticket-itens').appendChild(div);
                     }
 
+                    if (liveTrackerIsActive) {
+                        for (let ticketItem of ticketData.itens) {
+                            if (ticketItem.sport == 1 || ticketItem.sport == 18) {
+                                const ticketDiv = document.getElementById(`${ticketItem.jogo_api_id}_ticket_item`);
+                                let live_track_id = ticketItem.live_track_id;
+                                let fieldLink;
+                                
+                                if (ticketItem.sport == footballId) {
+                                    fieldLink = fieldLinkFootball;
+                                }
+    
+                                if (ticketItem.sport == basketballId) {
+                                    fieldLink = fieldLinkBasketball;
+                                }
+
+                                if (ticketDiv && live_track_id) {
+                                    ticketDiv.innerHTML += `
+                                        <div id="${ticketItem.jogo_api_id}_field_body" class="field_body hidden_field">
+                                            <div class="iframe-responsive">
+                                                <iframe src="${fieldLink + live_track_id}" scrolling="no" frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    `
+                                }
+                            }
+                        }
+                    }
+                    
                     var liveItems = ticketData.tipo === 'esportes' ? filterLiveItems(ticketItens, itemsWithResults) : [];
 
                     if (!ticketData.resultado && liveItems.length > 0) {

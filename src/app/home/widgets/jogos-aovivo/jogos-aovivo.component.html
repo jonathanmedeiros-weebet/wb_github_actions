@@ -75,7 +75,10 @@
                                         <ng-template #noLock>
                                             <div class="cotacao"
                                             (click)="addCotacao(jogo.value, cotacao); $event.stopPropagation()" [ngClass]="{'selecionado': oddSelecionada(jogo.value._id, cotacao.chave)}">
-                                                <label>{{ cotacao.nome }}</label>
+                                                <label
+                                                 [ngClass]="getOddChangeClass(cotacao.price_change)"
+                                                >
+                                                {{ cotacao.nome }}</label>
                                                 <span>{{ cotacao.valorFinal}}</span>
                                             </div>
                                         </ng-template>

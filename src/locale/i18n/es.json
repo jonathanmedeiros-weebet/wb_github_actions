@@ -208,14 +208,13 @@
         "cadastroMenorDeIdade": "Registro solo permitido para mayores de 18 años.",
         "cadastro": "Registro",
         "tituloInformativoCookies": "Uso de Cookies y Sesiones",
-        "informativoCookies": "Este sitio utiliza cookies y sesiones para mejorar su experiencia. Las cookies son pequeños archivos de texto almacenados en su dispositivo que nos ayudan a mantenerlo autenticado, personalizar funciones y configuraciones, así como mejorar la funcionalidad del sitio. Al continuar utilizando este sitio, usted acepta el uso de cookies y sesiones de acuerdo con nuestra Política de Privacidad.",
+        "informativoCookies": "Este sitio utiliza cookies y sesiones para mejorar su experiencia. Las cookies son pequeños archivos de texto almacenados en su dispositivo que nos ayudan a mantenerlo autenticado, personalizar funciones y configuraciones, así como mejorar la funcionalidad del sitio. Al continuar utilizando este sitio, usted acepta el uso de cookies y sesiones de acuerdo con nuestra ",
+        "informativoCookiesLink": "Política de Privacidad.",
         "alertaChavePixCpf": "Al solicitar el retiro, será procesado a través de la clave Pix asociada a su CPF. Asegúrese de que su CPF esté ingresado correctamente.",
         "esportivo": "deportivo",
-        "rodadaGratis": "Tirada gratis",
         "dataVencimento": "Fecha de vencimiento",
         "quantidade": "Cantidad",
         "jogarAgora": "Jugar ahora",
-        "nenhumaRodadaGratis": "No se encontraron tiradas gratis.",
         "opcaoPromocao": "Selecciona una de las opciones para ver las promociones actuales.",
         "selecioneChavePix": "selecciona tu clave pix",
         "alertaSaque": "Solo se permiten retiros a claves Pix vinculadas al titular de la cuenta.",
@@ -589,6 +588,7 @@
     },
     "botoes": {
         "aceitar": "Aceptar",
+        "entendi": "Lo tengo",
         "salvar_alteracoes": "Guardar Cambios",
         "voltar": "Volver"
     },
@@ -646,5 +646,16 @@
             "definir_tempo": "Establecer tiempo de sesión",
             "desativado": "Desactivado"
         }
+    },
+    "rodada_gratis":{
+        "resgatarPremio": "Resgatar Prêmio",
+        "rodadaGratis": "Tirada Gratis",
+        "nenhumaRodadaGratis": "No se encontraron tiradas gratis.",
+        "todas": "Todo",
+        "ativa": "Activo",
+        "expirada": "Venció",
+        "concluida":"Terminado",
+        "cancelada":"Cancelado",
+        "premio": "Premio"
     }
 }
