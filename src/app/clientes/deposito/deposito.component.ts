@@ -1,27 +1,28 @@
-import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {Router} from '@angular/router';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarService, FinanceiroService, MessageService, LayoutService } from 'src/app/services';
+import { SidebarService, FinanceiroService, MessageService, LayoutService} from 'src/app/services';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { BannersComponent } from 'src/app/shared/layout/banners/banners.component';
 
 @Component({
     selector: 'app-deposito',
     templateUrl: './deposito.component.html',
     styleUrls: ['./deposito.component.css']
 })
-export class DepositoComponent implements OnInit, OnDestroy {
+export class DepositoComponent implements OnInit, OnDestroy, AfterViewInit {
     unsub$ = new Subject();
-
+    mobileScreen;
     whatsapp;
     hasApiPagamentos;
     modalidade;
     showLoading = false;
-    mobileScreen;
-
+    showLoadingIndicator:boolean = true;
     headerHeight = 92;
+
+    @ViewChild(BannersComponent) bannersComponent!: BannersComponent;
 
     constructor(
         private paramsLocais: ParametrosLocaisService,
@@ -32,12 +33,16 @@ export class DepositoComponent implements OnInit, OnDestroy {
         private cd: ChangeDetectorRef,
         private el: ElementRef,
         private layoutService: LayoutService,
-        private renderer: Renderer2
-    ) {
+        private renderer: Renderer2,
+    ) {}
+    
+    ngAfterViewInit(): void {
+        this.showLoadingIndicator = this.bannersComponent.showLoadingIndicator;
     }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
+
         if (!this.mobileScreen) {
             this.siderbarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
@@ -64,7 +69,7 @@ export class DepositoComponent implements OnInit, OnDestroy {
                 });
         }
     }
-
+    
     changeHeight() {
         const headerHeight = this.headerHeight;
         const height = window.innerHeight - headerHeight;

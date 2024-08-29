@@ -2150,15 +2150,6 @@ gulp.task('xico.bet', function (done) {
     });
 });
 
-gulp.task('arena365.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "arena365.bet",
-        banca: "ARENA 365",
-        styles: "",
-    });
-});
-
 gulp.task('nortedasorte.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2841,3 +2832,60 @@ gulp.task('bellagames.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('tourodasorte.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "tourodasorte.bet",
+        banca: "TOURO DA SORTE",
+        styles: ""
+    });
+});
+
+gulp.task('decola.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "decola.bet",
+        banca: "DECOLA.BET",
+        styles: "",
+        description: "As melhores ofertas hoje: 100% até R$1000 em Apostas Esportivas e todos os Games. Aproveite as apostas no futebol, basquete, Esoccer, NBA e demais jogos. Dobramos seu depósito de até R$1000. Saque Rápido & Seguro."
+    });
+});
+
+gulp.task('camelodasorte.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "camelodasorte.com",
+        banca: "CAMELO DA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('oraculo.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "oraculo.bet",
+        banca: "ORACULO.BET",
+        styles: "",
+    });
+});
+
+gulp.task('priv8bet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "priv8bet.com",
+        banca: "PRIV8BET",
+        styles: "",
+    });
+});
+
+gulp.task('betinha.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betinha.com",
+        banca: "BETINHA.COM",
+        styles: "",
+    });
+});
+
+

@@ -223,7 +223,6 @@
         "valeno.bet": "gulp valeno.bet",
         "dentrodaaposta.com": "gulp dentrodaaposta.com",
         "xico.bet": "gulp xico.bet",
-        "arena365.bet": "gulp arena365.bet",
         "nortedasorte.bet": "gulp nortedasorte.bet",
         "faturabet.com": "gulp faturabet.com",
         "mczbet.com": "gulp mczbet.com",
@@ -299,7 +298,13 @@
         "floripa.bet": "gulp floripa.bet",
         "appjetbet365.com": "gulp appjetbet365.com",
         "amurel.bet": "gulp amurel.bet",
-        "bellagames.bet": "gulp bellagames.bet"
+        "bellagames.bet": "gulp bellagames.bet",
+        "tourodasorte.bet": "gulp tourodasorte.bet",
+        "decola.bet": "gulp decola.bet",
+        "camelodasorte.com": "gulp camelodasorte.com",
+        "oraculo.bet": "gulp oraculo.bet",
+        "priv8bet.com": "gulp priv8bet.com",
+        "betinha.com": "gulp betinha.com"
     },
     "private": true,
     "dependencies": {
@@ -325,6 +330,7 @@
         "angular-code-input": "^1.6.0",
         "angular-svg-icon": "^7.2.0",
         "bootstrap": "^5.2.3",
+        "bootstrap-icons": "^1.11.3",
         "chart.js": "^3.9.1",
         "clone": "^2.1.1",
         "esc-pos-encoder": "^2.0.1",

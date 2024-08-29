@@ -313,7 +313,7 @@ game {
 }
 
 .titulo {
-    padding: 10px 0;
+    padding-bottom: 10px;
     color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
