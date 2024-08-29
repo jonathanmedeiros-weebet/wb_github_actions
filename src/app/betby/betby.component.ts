@@ -93,7 +93,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
         setTimeout(() => {
             this.hideGtmElements();
-        }, 1000);
+        }, 1200);
     }
 
 
