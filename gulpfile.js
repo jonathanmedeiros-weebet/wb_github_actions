@@ -1047,7 +1047,7 @@ gulp.task('betsesporte.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "betsesporte.com",
-        banca: "BETS ESPORTE",
+        banca: "LASVEGAS SPORT",
         styles: "",
     });
 });
