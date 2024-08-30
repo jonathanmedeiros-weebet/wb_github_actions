@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
@@ -37,6 +37,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     headerHeight = 92;
     currentHeight = window.innerHeight - this.headerHeight;
+    modalRef;
+    isDesktop: boolean;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -136,11 +138,41 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 });
         });
 
+        this.checkIfDesktop();
+
         if (this.gameFornecedor === 'galaxsys') {
             this.appendScriptGalaxsys();
         }
     }
-    
+
+    abrirLogin() {
+        this.modalRef = this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
+            }
+        );
+    }
+
+
+    checkIfDesktop() {
+        this.isDesktop = window.innerWidth > 482;
+    }
+
+
+    checkIfMobile() {
+        this.isDesktop = window.innerWidth < 481;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event: any) {
+      this.checkIfDesktop();
+    }
+
+
+
     ngAfterViewInit(){
         this.layoutService.currentHeaderHeight
             .pipe(takeUntil(this.unsub$))

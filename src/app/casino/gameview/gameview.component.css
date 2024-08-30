@@ -1,262 +1,176 @@
 .game-view {
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
-
-}
-
-.aviso h4{
-    margin: 40px !important;
-}
-
-.game-frame {
-    width: 100%;
-    margin: 0 auto;
-}
-
-
-.aviso{
+    height: 100%;
+    overflow: auto;
+    scroll-behavior: smooth;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column;
+
 }
 
-.aviso h4{
-    margin: 20px;
-}
+@media (max-width: 1024px) {
 
-.acoes{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
+    .header-game-view {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #000; /* Ajuste a cor de fundo conforme necessário */
+        color: #fff; /* Ajuste a cor do texto conforme necessário */
+    }
 
-.ver-bonus {
-    margin: 20px;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    color: var(--header);
-    background-color: var(--highlight);
-    width: 150px;
-    height: 42px;
-}
-
-.ver-jogos {
-    margin: 20px;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    border: var(--highlight);
-    color: var(--highlight);
-    border-style: solid;
-    border-width: 1px;
-    width: 150px;
-    height: 42px;
-}
-
-iframe{
-    width: 100%;
-    border:none;
-}
-
-.header-game-view {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    /* height: 51px; */
-    /* margin-bottom: 12px; */
-    border: 1px solid #1B1B1B;
-}
-
-.header-game-view > div {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-}
-
-.header-game-view .game-name {
-    justify-content: left;
-}
-
-.header-game-view .buttons-game-view {
-    justify-content: right;
-}
-
-.game-name span {
-    font-size: 16px;
-    margin-left: 16px;
-}
-
-.buttons-game-view a {
-    margin-right: 2px;
-}
-
-.btn-cassino {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
-    text-decoration: none;
-    cursor: pointer;
-    color: var(--foreground-inputs-odds);
-    background: var(--inputs-odds);
-    transition: 500ms;
-}
-
-.btn-cassino:hover {
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
-    transition: 500ms;
-}
-
-.game-close {
-    font-size: 26px;
-}
-
-.screen-adjust {
-    font-size: 20px;
-}
-
-.desktop-fullscreen {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: auto !important;
-    background-color: black;
-}
-
-.desktop-fullscreen .game-frame {
-    width:100%;
-    height: calc(100vh - 63px);
-    margin: 0;
-}
-
-
-@media only screen and (max-width: 1024px) {
     .game-view {
-        position: fixed;
-        background-color: #000;
         width: 100%;
         height: 100%;
-        z-index: 10000;
-        top: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
 
-    .game-view .header-game-view {
-        /* margin: 2% 0 0 0 ; */
+    .game-name {
+        flex-grow: 1;
+        font-size: 18px;
+        color: #fff; /* Ajuste a cor do texto conforme necessário */
     }
 
-    .game-frame {
-        width: 100%;
-        height: calc(100% - 50px);
-    }
-
-    .game-frame iframe {
-        position: relative !important;
-        height: 100%;
+    .buttons-game-view {
+        display: flex;
+        gap: 10px; /* Espaçamento entre os botões */
     }
 
     .btn-cassino {
-        padding: 5px;
+        cursor: pointer;
+        padding: 5px 10px;
+        background-color: transparent;
+        border: none;
+        color: #fff; /* Ajuste a cor do texto conforme necessário */
+        font-size: 16px;
     }
-}
 
-@media (min-width: 1025px) {
+
     .game-frame {
-        height: calc(100vh - 175px);
-    }
-
-    iframe {
+        flex: 1; /* Faz com que o .game-frame ocupe o espaço disponível */
+        justify-content: center;
+        align-items: center;
+        position: relative; /* Permite que o iframe se ajuste corretamente */
+        width: 100%;
         height: 100%;
     }
+
+
+    .game-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: none; /* Remove a borda do iframe */
+    }
+
+    .card-small {
+        width: 350px;
+        height: auto;
+        margin: auto;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px #00000033;
+        background: #0A0A0A;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 30px;
+        margin-top: 2em;
+    }
+
+    .card-content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .overlay-background {
+        width: 114px;
+        height: 114px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-right: 25px;
+        flex-shrink: 0;
+        border-radius: 3.83px;
+    }
+
+    .card-info {
+        flex-grow: 1;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+
+    .game-title {
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: white;
+    }
+
+    .game-provider {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #888888;
+    }
+
+    .card-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .register-btn {
+        border: 1px solid #0BF197;
+        background: #35CC95;
+        color: rgb(0, 0, 0);
+    }
+
+    .login-btn {
+        border: 1px solid #0BF197;
+        background: none;
+        color: #35CC95;
+    }
+    .main-footer {
+        margin-top: 20px;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 137px;
+        height: 40px;
+    }
+
+    .register-btn {
+        border: 1px solid #0BF197;
+        background: var(--10, #35CC95);
+        color: rgb(0, 0, 0);
+    }
+
+    .login-btn {
+        border: 1px solid #0BF197;
+        background: none;
+        color: #35CC96;
+        gap: 20px;
+    }
+    .inline-button {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
 }
-
-
-.overlay {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    margin-top: 11em;
-}
-
-.overlay .overlay-background {
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: auto 100%;
-    height: calc(100% - 80px);
-    position: absolute;
-    top: 40px;
-    width: 100%
-}
-
-.overlay .overlay-content {
-
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background: rgba(0,0,0,.7) radial-gradient(38.32% 50% at 50% 50%,transparent 0,#000 100%);
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    z-index: 1
-}
-
-.overlay .overlay-content__title {
-    -webkit-text-fill-color: #35cd96;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-    background: -webkit-gradient(linear,left top,left bottom,from(#35cd96),to(#35cd96));
-    background: linear-gradient(180deg,#35cd96,#35cd96);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: #35cd96;
-
-    font-size: 40px;
-    line-height: 40px;
-    margin: 0;
-    text-transform: uppercase
-}
-
-.overlay .overlay-content__text {
-    -webkit-text-fill-color: #fff;
-    color: #fff;
-    font-family: roboto-regular-webfont,sans-serif;
-    font-size: 18px;
-    line-height: 25px;
-    margin: 5px 0 0;
-    padding-left: 10px;
-    padding-right: 10px
-}
-
-.inline-button {
-    display: inline-block;
-    margin: 5px; /* Espaço entre os botões */
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-
-
