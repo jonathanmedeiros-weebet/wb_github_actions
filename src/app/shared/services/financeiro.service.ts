@@ -162,8 +162,8 @@ export class FinanceiroService {
             );
     }
 
-    acceptPixsTerms() {
-        return this.http.post(`${this.financeiroUrl}/accept-pixs-terms`, {}, this.header.getRequestOptions(true))
+    acceptOktoTerms() {
+        return this.http.post(`${this.financeiroUrl}/accept-okto-terms`, {}, this.header.getRequestOptions(true))
         .pipe(
             take(1),
             catchError(this.errorService.handleError)
