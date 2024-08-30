@@ -2857,6 +2857,43 @@ gulp.task('decola.bet', function (done) {
         host: "decola.bet",
         banca: "DECOLA.BET",
         styles: "",
-        dominioTemp: "tempdecolabet.wee.bet"
     });
 });
+
+gulp.task('camelodasorte.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "camelodasorte.com",
+        banca: "CAMELO DA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('oraculo.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "oraculo.bet",
+        banca: "ORACULO.BET",
+        styles: "",
+    });
+});
+
+gulp.task('priv8bet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "priv8bet.com",
+        banca: "PRIV8BET",
+        styles: "",
+    });
+});
+
+gulp.task('betinha.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betinha.com",
+        banca: "BETINHA.COM",
+        styles: "",
+    });
+});
+
+
