@@ -1227,16 +1227,6 @@ gulp.task('bomba.bet', function (done) {
     });
 });
 
-gulp.task('betnews.one', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betnews.one",
-        banca: "BET NEWS",
-        styles: "",
-        scripts: "<script type='text/javascript' async src='https://d335luupugsy2.cloudfront.net/js/loader-scripts/1890e981-6951-4a28-81e3-6aaa5495e35f-loader.js' ></script>"
-    });
-});
-
 gulp.task('pointbet.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2493,15 +2483,6 @@ gulp.task('betbastet.com', function (done) {
         server: "front3.wee.bet",
         host: "betbastet.com",
         banca: "BET BASTET",
-        styles: ""
-    });
-});
-
-gulp.task('americanbet.online', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "americanbet.online",
-        banca: "AMERICAN BET",
         styles: ""
     });
 });
