@@ -173,5 +173,222 @@
 }
 
 @media (min-width: 483px){
+    .game-view {
+        display: flex;
+        flex-direction: column; /* se você quiser que os elementos fiquem em coluna */
+        flex-wrap: nowrap; /* Se desejar evitar quebra */
+        width: 100%;
+    }
 
+    .aviso h4{
+        margin: 40px !important;
+    }
+
+    .game-frame {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+
+    .aviso{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+    }
+
+    .aviso h4{
+        margin: 20px;
+    }
+
+    .acoes{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .ver-bonus {
+        margin: 20px;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        color: var(--header);
+        background-color: var(--highlight);
+        width: 150px;
+        height: 42px;
+    }
+
+    .ver-jogos {
+        margin: 20px;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        border: var(--highlight);
+        color: var(--highlight);
+        border-style: solid;
+        border-width: 1px;
+        width: 150px;
+        height: 42px;
+    }
+
+    iframe{
+        width: 100%;
+        border:none;
+    }
+
+    .header-game-view {
+        display: flex;
+        flex-direction: row; /* Para garantir que os elementos fiquem em linha */
+        justify-content: space-between; /* Distribui os elementos entre as extremidades */
+        align-items: center;
+        width: 100%;
+        border: 1px solid #1B1B1B;
+    }
+
+    .header-game-view > div {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-game-view .game-name {
+        justify-content: left;
+    }
+
+    .header-game-view .buttons-game-view {
+        justify-content: right;
+    }
+
+    .game-name span {
+        font-size: 16px;
+        margin-left: 16px;
+    }
+
+    .buttons-game-view a {
+        margin-right: 2px;
+    }
+
+    .btn-cassino {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        text-decoration: none;
+        cursor: pointer;
+        color: var(--foreground-inputs-odds);
+        background: var(--inputs-odds);
+        transition: 500ms;
+    }
+
+    .btn-cassino:hover {
+        background-color: var(--highlight);
+        color: var(--foreground-highlight);
+        transition: 500ms;
+    }
+
+    .game-close {
+        font-size: 26px;
+    }
+
+    .screen-adjust {
+        font-size: 20px;
+    }
+
+    .desktop-fullscreen {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: auto !important;
+        background-color: black;
+    }
+
+    .desktop-fullscreen .game-frame {
+        width:100%;
+        height: calc(100vh - 63px);
+        margin: 0;
+    }
+
+    .overlay {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        margin-top: 11em;
+    }
+
+    .overlay .overlay-background {
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        height: calc(100% - 80px);
+        position: absolute;
+        top: 40px;
+        width: 100%
+    }
+
+    .overlay .overlay-content {
+
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        background: rgba(0,0,0,.7) radial-gradient(38.32% 50% at 50% 50%,transparent 0,#000 100%);
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        z-index: 1
+    }
+
+    .overlay .overlay-content__title {
+        -webkit-text-fill-color: #35cd96;
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent;
+        background: -webkit-gradient(linear,left top,left bottom,from(#35cd96),to(#35cd96));
+        background: linear-gradient(180deg,#35cd96,#35cd96);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: #35cd96;
+
+        font-size: 40px;
+        line-height: 40px;
+        margin: 0;
+        text-transform: uppercase
+    }
+
+    .overlay .overlay-content__text {
+        -webkit-text-fill-color: #fff;
+        color: #fff;
+        font-family: roboto-regular-webfont,sans-serif;
+        font-size: 18px;
+        line-height: 25px;
+        margin: 5px 0 0;
+        padding-left: 10px;
+        padding-right: 10px
+    }
+
+    .inline-button {
+        display: inline-block;
+        margin: 5px; /* Espaço entre os botões */
+        padding: 10px 20px;
+        font-size: 16px;
+    }
 }
