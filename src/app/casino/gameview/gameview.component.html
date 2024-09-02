@@ -1,6 +1,6 @@
-<div class="game-view" [ngClass]="{'desktop-fullscreen':fullscreen && !mobileScreen}">
+<div class="game-view">
 
-    <div class="header-game-view">
+    <div class="header-game-view" *ngIf="checkIfMobile">
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
                 <span>{{ customCasinoName }} Galaxsys</span>
@@ -11,20 +11,22 @@
         </div>
         <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="buttons-game-view">
             <ng-container>
-                <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
+                <a class="btn-cassino screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
             </ng-container>
             <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a>
         </div>
     </div>
     <ng-container>
-        <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame">
-            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-            <ng-container *ngIf="mobileScreen">
-                <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
-            </ng-container>
-            <ng-container *ngIf="!mobileScreen">
-                <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
-            </ng-container>
+        <div *ngIf="checkIfMobile" class="game-view-mobile">
+            <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame">
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+                <ng-container *ngIf="mobileScreen">
+                    <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+                </ng-container>
+                <ng-container *ngIf="!mobileScreen">
+                    <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
+                </ng-container>
+            </div>
         </div>
 
         <div *ngIf="isDesktop">

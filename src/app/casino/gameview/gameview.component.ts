@@ -68,7 +68,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.isLoggedIn = this.auth.isLoggedIn();
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
-
+        this.elem = this.el.nativeElement.querySelector('.game-frame');
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
@@ -145,6 +145,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
+
     abrirLogin() {
         this.modalRef = this.modalService.open(
             LoginModalComponent,
@@ -163,7 +164,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
 
     checkIfMobile() {
-        this.isDesktop = window.innerWidth < 481;
+        this.isDesktop = window.innerWidth <= 482;
     }
 
     @HostListener('window:resize', ['$event'])
@@ -260,6 +261,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     openFullscreen() {
+
+        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+
+        if (gameFrame) {
+            this.renderer.setStyle(gameFrame, 'position', 'fixed');
+            this.renderer.setStyle(gameFrame, 'top', '0');
+        }
+
         if (this.elem.requestFullscreen) {
             this.elem.requestFullscreen();
         } else if (this.elem.mozRequestFullScreen) {
