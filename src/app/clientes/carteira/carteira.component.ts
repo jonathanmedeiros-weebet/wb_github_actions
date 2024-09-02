@@ -28,6 +28,7 @@ export class CarteiraComponent implements OnInit, AfterViewInit, OnDestroy {
     bonusCasino = 0;
     bonusSport = 0;
     withdrawAvailable = 0;
+    withdrawBlocked = 0;
     showLoading = true;
     isMobile = false;
 
@@ -66,7 +67,8 @@ export class CarteiraComponent implements OnInit, AfterViewInit, OnDestroy {
             .subscribe(
                 posicaoFinanceira => {
                     this.balance = posicaoFinanceira.saldo;
-                    this.withdrawAvailable = this.balance - posicaoFinanceira.saldoBloqueado;
+                    this.withdrawBlocked = posicaoFinanceira.saldoBloqueado;
+                    this.withdrawAvailable = posicaoFinanceira.saldoLiberado;
                     if(posicaoFinanceira.bonusModalidade === 'esportivo') {
                         this.bonusSport = posicaoFinanceira.bonus;
                     } else {
