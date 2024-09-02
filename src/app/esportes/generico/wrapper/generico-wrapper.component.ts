@@ -216,7 +216,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                 this.esporte = 'combate';
                 this.odds = ['cmbt_casa', 'cmbt_fora'];
                 break;
-            case sportsIds.FOOTBALL_ID:
+            case sportsIds.AMERICAN_FOOTBALL_ID:
                 this.esporte = 'futebol-americano';
                 this.odds = ['futebol_americano_casa', 'futebol_americano_fora'];
                 break;

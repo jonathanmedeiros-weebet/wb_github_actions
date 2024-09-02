@@ -35,7 +35,7 @@ export const routes: Routes = [
             },
             {
                 path: 'futebol-americano',
-                data: { sportId: sportsIds.FOOTBALL_ID },
+                data: { sportId: sportsIds.AMERICAN_FOOTBALL_ID },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [FutebolAmericanoGuard]
             },

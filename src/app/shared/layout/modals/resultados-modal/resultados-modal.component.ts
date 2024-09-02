@@ -89,7 +89,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     createForm() {
         this.form = this.fb.group({
             data: [moment().format('YYYY-MM-DD'), Validators.required],
-            sport_id: [sportsIds.SOCCER_ID, Validators.required]
+            sport_id: [sportsIds.FOOTBALL_ID, Validators.required]
         });
     }
 
@@ -110,7 +110,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     getResultados(params?) {
         let queryParams: any = {
             'data': moment().format('YYYY-MM-DD'),
-            'sport': sportsIds.SOCCER_ID
+            'sport': sportsIds.FOOTBALL_ID
         };
 
         if (params) {

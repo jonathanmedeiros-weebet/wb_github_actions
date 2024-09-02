@@ -300,7 +300,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         let className = 'icon-futebol wbicon';
 
         switch (sportId) {
-            case sportsIds.SOCCER_ID: {
+            case sportsIds.FOOTBALL_ID: {
                 className = 'wbicon icon-futebol';
                 break;
             }
@@ -308,7 +308,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                 className = 'wbicon icon-luta';
                 break;
             }
-            case sportsIds.FOOTBALL_ID: {
+            case sportsIds.AMERICAN_FOOTBALL_ID: {
                 className = 'wbicon icon-futebol-americano';
                 break;
             }
@@ -344,9 +344,9 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     getRotaPorEsporteId(sportId) {
         const routeBySportId = {};
 
-        routeBySportId[sportsIds.SOCCER_ID] = '/esportes/futebol';
+        routeBySportId[sportsIds.FOOTBALL_ID] = '/esportes/futebol';
         routeBySportId[sportsIds.BOXING_ID] = '/esportes/combate';
-        routeBySportId[sportsIds.FOOTBALL_ID] = '/esportes/futebol-americano';
+        routeBySportId[sportsIds.AMERICAN_FOOTBALL_ID] = '/esportes/futebol-americano';
         routeBySportId[sportsIds.TENNIS_ID] = '/esportes/tenis';
         routeBySportId[sportsIds.ICE_HOCKEY_ID] = '/esportes/hoquei-gelo';
         routeBySportId[sportsIds.BASKETBALL_ID] = '/esportes/basquete';

@@ -19,7 +19,7 @@ import {
 } from '../../services';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 
-import { SOCCER_ID } from '../../shared/constants/sports-ids';
+import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-validar-aposta-esportes',
@@ -42,7 +42,7 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     opcoes;
     unsub$ = new Subject();
 
-    soccerId = SOCCER_ID;
+    footballId = FOOTBALL_ID;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,

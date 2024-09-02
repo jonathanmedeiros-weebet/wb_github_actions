@@ -1,4 +1,4 @@
-import { SOCCER_ID } from '../app/shared/constants/sports-ids';
+import { FOOTBALL_ID } from '../app/shared/constants/sports-ids';
 
 const HERMES = 'https://hermes.wee.bet/v1';
 
@@ -171,7 +171,7 @@ function filterLiveItems(ticketItems, itemsWithResults) {
     ticketItems.forEach((item) => {
         var itemTimestamp = new Date(item.jogo_horario.replace(/-/g, "/")).getTime();
 
-        if (item.sport === SOCCER_ID && this.checkMatchPeriod(itemTimestamp)) {
+        if (item.sport === FOOTBALL_ID && this.checkMatchPeriod(itemTimestamp)) {
             if (!itemsWithResults.includes(item.jogo_api_id)) {
                 liveItems.push({
                     jogo_api_id: item.jogo_api_id,

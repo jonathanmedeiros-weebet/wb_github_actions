@@ -116,12 +116,12 @@
             </div>
 
             <div class="esporte" *ngIf="futebolAoVivohabilitado && qtdJogosFutebol > 0">
-                <div class="esporte-header" (click)="toggleEsporte(soccerId)" [ngClass]="{'collapsed-header': !esporteAberto(soccerId)}">
+                <div class="esporte-header" (click)="toggleEsporte(footballId)" [ngClass]="{'collapsed-header': !esporteAberto(footballId)}">
                     <span class="column-left">
                         <span class="wbicon icon-futebol"></span>
                         <span class="esporte-nome">{{'submenu.futebol' | translate}}</span>
                     </span>
-                    <span *ngIf="esporteAberto(soccerId); else downIcon">
+                    <span *ngIf="esporteAberto(footballId); else downIcon">
                             <i class="fa fa-angle-up"></i>
                         </span>
                     <ng-template #downIcon>
@@ -130,9 +130,9 @@
                             </span>
                     </ng-template>
                 </div>
-                <div class="campeonatos" [hidden]="!esporteAberto(soccerId)">
+                <div class="campeonatos" [hidden]="!esporteAberto(footballId)">
                     <ng-container
-                        [ngTemplateOutlet]="campeonatoTemplate" [ngTemplateOutletContext]="{sportId: soccerId}">
+                        [ngTemplateOutlet]="campeonatoTemplate" [ngTemplateOutletContext]="{sportId: footballId}">
                     </ng-container>
                 </div>
             </div>
@@ -167,7 +167,7 @@
                             <span
                                 class="flag-icon flag-icon-{{campeonato.value.regiao_sigla}} flag-icon-squared"></span>
                             <span class="campeonato-nome">
-                                <ng-template *ngIf="sportId == soccerId">{{campeonato.value.regiao}}: </ng-template>
+                                <ng-template *ngIf="sportId == footballId">{{campeonato.value.regiao}}: </ng-template>
                                 {{campeonato.value.nome}}
                             </span>
                         </span>
@@ -185,7 +185,7 @@
                             <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
                                 <div class="indentificacao" style="cursor: pointer" (click)="maisCotacoes(jogo.value._id)">
                                     <div class="tempo-box">
-                                        <div class="aovivo-label" *ngIf="sportId == soccerId">
+                                        <div class="aovivo-label" *ngIf="sportId == footballId">
                                             <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
                                         </div>
                                         <div *ngIf="jogo.value.info.tempo == 0">

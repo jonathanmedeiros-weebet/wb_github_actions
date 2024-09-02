@@ -1,10 +1,10 @@
-export const SOCCER_ID = 6046;
+export const FOOTBALL_ID = 6046;
 export const BASKETBALL_ID = 48242;
 export const VOLLEYBALL_ID = 154830;
 export const BOXING_ID = 154919;
 export const TENNIS_ID = 54094;
 export const TABLE_TENNIS_ID = 92;
-export const FOOTBALL_ID = 12;
+export const AMERICAN_FOOTBALL_ID = 12;
 export const ICE_HOCKEY_ID = 17;
 export const FUTSAL_ID = 83;
 export const E_SPORTS_ID = 151;

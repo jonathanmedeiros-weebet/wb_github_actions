@@ -92,7 +92,7 @@ export class ParametrosLocaisService {
             );
     }
 
-    getCampeonatosBloqueados(sportId = sportsIds.SOCCER_ID) {
+    getCampeonatosBloqueados(sportId = sportsIds.FOOTBALL_ID) {
         const sport = 'sport_' + sportId;
         return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_bloqueados[sport]) : null;
     }

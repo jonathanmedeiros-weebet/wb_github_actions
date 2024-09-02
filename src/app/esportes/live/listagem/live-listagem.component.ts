@@ -13,7 +13,7 @@ import {
 } from '../../../services';
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
-import { SOCCER_ID, BASKETBALL_ID } from 'src/app/shared/constants/sports-ids';
+import { FOOTBALL_ID, BASKETBALL_ID } from 'src/app/shared/constants/sports-ids';
 
 @Component({
     selector: 'app-live-listagem',
@@ -38,7 +38,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     mobileScreen = false;
     term = '';
     itens;
-    esportesAbertos = [BASKETBALL_ID, SOCCER_ID];
+    esportesAbertos = [BASKETBALL_ID, FOOTBALL_ID];
     qtdJogosFutebol = 0;
     qtdJogosBasquete = 0;
     futebolAoVivohabilitado = false;
@@ -48,7 +48,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     headerHeight = 92;
 
-    soccerId = SOCCER_ID;
+    footballId = FOOTBALL_ID;
     basketballId = BASKETBALL_ID;
 
     constructor(
@@ -63,7 +63,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         private layoutService: LayoutService,
         private cd: ChangeDetectorRef
     ) {
-        this.chavesMercadosPrincipais[SOCCER_ID] = {
+        this.chavesMercadosPrincipais[FOOTBALL_ID] = {
             casa: 'casa_90',
             empate: 'empate_90',
             fora: 'fora_90'
@@ -124,7 +124,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                             let valido = true;
 
                             if (this.minutoEncerramentoAoVivo > 0) {
-                                if (jogo.sport_id === SOCCER_ID && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                                if (jogo.sport_id === FOOTBALL_ID && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                     valido = false;
                                 }
                             }
@@ -160,7 +160,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
                         const campeonatoPermitido = this.campeonatoPermitido(campeonato._id);
 
-                        if (campeonatoPermitido && (campeonato.sport_id === SOCCER_ID || !campeonato.sport_id)) {
+                        if (campeonatoPermitido && (campeonato.sport_id === FOOTBALL_ID || !campeonato.sport_id)) {
                             this.qtdJogosFutebol += qtdJogosValidos;
                         }
 
@@ -215,7 +215,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let inserirCampeonato = false;
 
                 if (jogo.sport_id == 1) {
-                    jogo.sport_id = SOCCER_ID;
+                    jogo.sport_id = FOOTBALL_ID;
                 }
 
                 jogo.cotacoes.map(cotacao => {
@@ -248,7 +248,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let valido = true;
 
                 if (this.minutoEncerramentoAoVivo > 0) {
-                    if (jogo.sport_id === SOCCER_ID && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                    if (jogo.sport_id === FOOTBALL_ID && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                         valido = false;
                     }
                 }
@@ -408,7 +408,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             lock: false
         });
 
-        if (sportId === SOCCER_ID) {
+        if (sportId === FOOTBALL_ID) {
             mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[sportId]['empate']) ?? {
                 nome: 'Empate',
                 lock: true

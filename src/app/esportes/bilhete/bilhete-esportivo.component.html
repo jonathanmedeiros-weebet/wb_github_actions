@@ -58,10 +58,10 @@
                                 {{item.cotacao.nome}}
                             </span>
                                 <ng-template #chave>
-                                <span *ngIf="item.jogo.sport_id == soccerId">
+                                <span *ngIf="item.jogo.sport_id == footballId">
                                     {{item.cotacao.chave | tipoAposta}}
                                 </span>
-                                    <span *ngIf="item.jogo.sport_id != soccerId;">
+                                    <span *ngIf="item.jogo.sport_id != footballId;">
                                     {{item.cotacao.chave | tipoApostaCustom: item.jogo.time_a_nome :item.jogo.time_b_nome}}
                                 </span>
                                 </ng-template>
@@ -215,7 +215,7 @@
                             {{item.cotacao.nome}}
                         </span>
                         <ng-template #chave>
-                            <span *ngIf="item.jogo.sport_id == soccerId; else nomeOddCustom">
+                            <span *ngIf="item.jogo.sport_id == footballId; else nomeOddCustom">
                                 {{item.cotacao.chave | tipoAposta}}
                             </span>
                             <ng-template #nomeOddCustom>
