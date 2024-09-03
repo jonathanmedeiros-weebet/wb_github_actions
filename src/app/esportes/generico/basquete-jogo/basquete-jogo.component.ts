@@ -114,10 +114,11 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
                     jogo => {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
+                        jogo.live_track_id = 48242;
 
                         if (habilitar_live_tracker && jogo.live_track_id) {
                             if (window.innerWidth <= 1024) {
-                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets-v2.thesports01.com/br/pro/basketball?profile=5oq66hkn0cwunq7&uuid=' + jogo?.live_track_id);
+                                this.theSportUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets-v2.thesports01.com/br/pro/basketball?profile=74m17t1keupuomw&uuid=' + jogo?.live_track_id);
                             } else {
                                 if (this.exibindoMaisCotacoes) {
                                     this.bilheteService.sendId(jogo.live_track_id);
