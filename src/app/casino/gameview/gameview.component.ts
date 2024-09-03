@@ -38,7 +38,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
     headerHeight = 92;
     currentHeight = window.innerHeight - this.headerHeight;
     modalRef;
-    isDesktop: boolean;
+    isMob: boolean = false;
+    isDesktop: boolean = false;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -69,6 +70,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
+        this.updateView();
+        window.addEventListener('resize', () => this.updateView());
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
@@ -127,7 +130,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 );
             if (this.gameMode === 'REAL' && !this.isCliente) {
                 if(!this.isMobile){
-                    this.abriModalLogin();
+
                 }
             } else {
                 this.loadGame();
@@ -160,11 +163,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     checkIfDesktop() {
         this.isDesktop = window.innerWidth > 482;
+        this.isMob = !this.isDesktop;
     }
 
-
     checkIfMobile() {
-        this.isDesktop = window.innerWidth <= 482;
+        this.isMob = window.innerWidth <= 482;
+        this.isDesktop = !this.isMobile;
+    }
+
+    updateView() {
+        this.isDesktop = window.innerWidth > 482;
+        this.isMob = !this.isDesktop;
     }
 
     @HostListener('window:resize', ['$event'])
@@ -190,7 +199,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             const contentEl = this.el.nativeElement.querySelector('.game-frame');
             const headerGameView = this.el.nativeElement.querySelector('.header-game-view').getBoundingClientRect().height;
             const height = window.innerHeight - headerHeight - headerGameView;
-            this.renderer.setStyle(contentEl, 'height', `${height}px`);
         }
     }
 
@@ -332,24 +340,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         body.appendChild(bodyScript);
     }
 
-    abriModalLogin(){
-        const modalRef = this.modalService.open(
-            LoginModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350 modal-login',
-                centered: true,
-            }
-        );
-        modalRef.result.then(
-            (result) => {
-                if(result) {
-                    this.isLoggedIn = this.auth.isLoggedIn();
-                    this.loadGame();
-                }
-            }
-        );
-    }
+
 
     abrirCadastro(){
         this.modalService.open(

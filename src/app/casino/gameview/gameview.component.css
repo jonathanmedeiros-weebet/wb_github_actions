@@ -173,12 +173,34 @@
 }
 
 @media (min-width: 483px){
+
+
     .game-view {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-
+        height: auto;
+        padding: 30px 30px;
     }
+
+    .card-centered {
+        border-radius: 4px;
+        background: #181818;
+        padding: 30px 45px;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 0 auto;
+    }
+
+
+    .inline-button {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
 
     .aviso h4{
         margin: 40px !important;
@@ -187,6 +209,7 @@
     .game-frame {
         width: 100%;
         margin: 0 auto;
+        height: calc(100vh);
     }
 
 
@@ -234,17 +257,17 @@
     iframe{
         width: 100%;
         border:none;
+        height: 70%;
     }
 
     .header-game-view {
         display: flex;
         justify-content: center;
         width: 100%;
-        /* height: 51px; */
-        /* margin-bottom: 12px; */
-        border: 1px solid #1B1B1B;
+        border-radius: 4px 4px 0px 0px;
+        background-color: #0A0A0A;
+        border: none;
     }
-
     .header-game-view > div {
         flex-grow: 1;
         display: flex;
@@ -277,13 +300,7 @@
         text-decoration: none;
         cursor: pointer;
         color: var(--foreground-inputs-odds);
-        background: var(--inputs-odds);
-        transition: 500ms;
-    }
-
-    .btn-cassino:hover {
-        background-color: var(--highlight);
-        color: var(--foreground-highlight);
+        background: transparent;
         transition: 500ms;
     }
 
@@ -326,14 +343,15 @@
         margin-top: 11em;
     }
 
-    .overlay .overlay-background {
+    .overlay-background {
         background-position: 50%;
         background-repeat: no-repeat;
         background-size: auto 100%;
         height: calc(100% - 80px);
         position: absolute;
         top: 40px;
-        width: 100%
+        width: 100%;
+        filter: blur(30px);
     }
 
     .overlay .overlay-content {
@@ -345,7 +363,6 @@
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
-        background: rgba(0,0,0,.7) radial-gradient(38.32% 50% at 50% 50%,transparent 0,#000 100%);
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -358,37 +375,73 @@
         z-index: 1
     }
 
-    .overlay .overlay-content__title {
-        -webkit-text-fill-color: #35cd96;
-        -webkit-text-fill-color: transparent;
-        text-fill-color: transparent;
-        background: -webkit-gradient(linear,left top,left bottom,from(#35cd96),to(#35cd96));
-        background: linear-gradient(180deg,#35cd96,#35cd96);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: #35cd96;
-
-        font-size: 40px;
-        line-height: 40px;
-        margin: 0;
-        text-transform: uppercase
+    .overlay-content__title {
+        color: #FFF;
+        text-align: center;
+        font-family: "Open Sans";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 20px;
     }
 
-    .overlay .overlay-content__text {
-        -webkit-text-fill-color: #fff;
-        color: #fff;
-        font-family: roboto-regular-webfont,sans-serif;
-        font-size: 18px;
-        line-height: 25px;
-        margin: 5px 0 0;
-        padding-left: 10px;
-        padding-right: 10px
+    .overlay-content__text {
+        color: rgba(255, 255, 255, 0.50);
+        text-align: center;
+        font-family: "Open Sans";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 
     .inline-button {
-        display: inline-block;
-        margin: 5px; /* Espaço entre os botões */
-        padding: 10px 20px;
-        font-size: 16px;
+        display: flex;
+        height: 40px;
+        align-items: flex-start;
+        gap: 32px;
     }
+
+    .register-btn {
+        border-radius: 5px;
+        border: 1px solid #0BF197;
+        background: var(--10, #35CC95);
+        display: flex;
+        width: 137px;
+        height: 40px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .register-btn:hover {
+        background: #0BF197;
+    }
+
+    .login-btn {
+        display: flex;
+        width: 137px;
+        height: 40px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        border-radius: 5px;
+        border: 1px solid #0BF197;
+        background: transparent;
+        color: #0BF197;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .login-btn:hover {
+        background: #0BF197;
+        color: white;
+    }
+
 }

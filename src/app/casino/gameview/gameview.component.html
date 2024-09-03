@@ -1,4 +1,4 @@
-<div class="game-view" *ngIf="checkIfMobile">
+<div class="game-view" *ngIf="isMob">
     <div class="header-game-view" >
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
@@ -52,7 +52,8 @@
     </ng-container>
 </div>
 
-<div class="game-view" *ngIf="checkIfDesktop">
+
+<div class="game-view" *ngIf="isDesktop">
     <div class="header-game-view">
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
@@ -64,8 +65,8 @@
         </div>
         <div class="buttons-game-view">
             <ng-container *ngIf="!isAppMobile() && !removerBotaoFullscreen">
-                <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
-                <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
+                    <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
+                    <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
             </ng-container>
             <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a>
         </div>
@@ -86,16 +87,15 @@
                 <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'">
                 </div>
                 <div class="overlay-content -mt-4 p-5">
-                    <p class="overlay-content__title">registre-se ou faça login</p>
-                    <p class="overlay-content__text">Por favor, registre-se ou faça login para fazer seu primeiro depósito e começar a jogar.</p>
-                    <div class="inline-button">
-
-                        <a class="btn btn-custom w-130 mr-4" (click)="abrirCadastro()">
-                            {{'geral.registreSe' | translate | uppercase}}
-                        </a>
-                        <a (click)="abriModalLogin()" class="botao-entrar btn btn-custom2 w-130" role="button">
-                            {{'geral.entrar' | translate | uppercase}}
-                        </a>
+                    <div class="card-centered">
+                        <h2 class="overlay-content__title">Continuar jogando...</h2>
+                        <p class="overlay-content__text">
+                            Para continuar jogando você precisa se registrar ou fazer login na sua conta
+                        </p>
+                        <div class="inline-button">
+                            <button class="btn register-btn" (click)="abrirCadastro()">Registrar-se</button>
+                            <button class="btn login-btn" (click)="abrirLogin()">Entrar</button>
+                        </div>
                     </div>
                 </div>
             </div>
