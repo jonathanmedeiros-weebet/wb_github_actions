@@ -2711,7 +2711,8 @@ gulp.task('sortegol.com', function (done) {
         server: "front2.wee.bet",
         host: "sortegol.com",
         banca: "SORTE GOL",
-        styles: ""
+        styles: "",
+        dominioTemp: "sortegol.wee.bet"
     });
 });
 

@@ -1,3 +1,5 @@
+import { FOOTBALL_ID } from '../../src/app/shared/constants/sports-ids';
+
 const CENTER = 'https://center7.wee.bet/v1';
 
 async function getParams() {
@@ -17,7 +19,7 @@ async function getParams() {
         if (responseJson.status == 404 || responseJson.status == 500) {
             return false;
         };
-     
+
         return responseJson.opcoes.habilitar_live_tracker;
     }
 
@@ -169,7 +171,7 @@ function filterLiveItems(ticketItems, itemsWithResults) {
     ticketItems.forEach((item) => {
         var itemTimestamp = new Date(item.jogo_horario.replace(/-/g, "/")).getTime();
 
-        if (item.sport === 1 && this.checkMatchPeriod(itemTimestamp)) {
+        if (item.sport === FOOTBALL_ID && this.checkMatchPeriod(itemTimestamp)) {
             if (!itemsWithResults.includes(item.jogo_api_id)) {
                 liveItems.push({
                     jogo_api_id: item.jogo_api_id,
@@ -233,7 +235,7 @@ function updateLiveItem(jogo_api_id, live) {
                 </svg>
                 <p style="margin: 0 0 0 7px">Acompanhar evento</p>
             </div>
-        </button>    
+        </button>
     `;
     document.getElementById(jogo_api_id + '_live_status').style.color = live.status === 'perdendo' ? 'red' : 'green';
 }
@@ -262,7 +264,7 @@ function activeAndDeactiveField(id) {
 
         if (field) {
             btn.classList.toggle('field_active');
-            
+
             field.classList.toggle('hidden_field');
 
             if (btn.classList.contains('field_active')) {
