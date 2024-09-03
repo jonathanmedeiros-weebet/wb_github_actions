@@ -303,7 +303,8 @@
         "oraculo.bet": "gulp oraculo.bet",
         "priv8bet.com": "gulp priv8bet.com",
         "betinha.com": "gulp betinha.com",
-        "sortebet.wee.bet": "gulp sortebet.wee.bet"
+        "sortebet.wee.bet": "gulp sortebet.wee.bet",
+        "goldeplaca.online": "gulp goldeplaca.online"
     },
     "private": true,
     "dependencies": {
