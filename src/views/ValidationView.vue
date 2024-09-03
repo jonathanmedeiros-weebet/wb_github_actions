@@ -9,8 +9,9 @@
         class="validation__input"
         name="consult_ticket"
         placeholder="Ex.: EA5D-DG41"
-        type="number"
-        v-model="code"
+        type="text"
+        mask="#########"
+        autocomple="off"
       />
       <WButton
         id="btn-salvar"
