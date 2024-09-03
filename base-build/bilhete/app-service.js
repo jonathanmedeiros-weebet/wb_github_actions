@@ -1,5 +1,4 @@
-import { FOOTBALL_ID } from '../../src/app/shared/constants/sports-ids';
-
+const FOOTBALL_ID = 6046;
 const CENTER = 'https://center7.wee.bet/v1';
 
 async function getParams() {

@@ -1,4 +1,5 @@
-import { FOOTBALL_ID, BASKETBALL_ID } from '../../src/app/shared/constants/sports-ids';
+const FOOTBALL_ID = 6046;
+const BASKETBALL_ID = 48242;
 
 document.onreadystatechange = async function () {
     if (this.readyState === 'complete') {

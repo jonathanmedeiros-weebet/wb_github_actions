@@ -1,5 +1,4 @@
-import { FOOTBALL_ID } from '../app/shared/constants/sports-ids';
-
+const FOOTBALL_ID = 6046;
 const HERMES = 'https://hermes.wee.bet/v1';
 
 async function getParams() {
