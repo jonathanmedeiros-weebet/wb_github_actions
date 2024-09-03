@@ -172,7 +172,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                                 this.liveUrl = 'https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=';
                             }
 
-                            console.log(this.sportId);
                             if (this.sportId == this.BASKETBALL_ID || this.sportId == this.LSPORTS_BASKETBALL_ID) {
                                 this.liveUrl = 'https://stream.raysports.live/br/basketball?token=5oq66hkn0cwunq7&uuid=';
                             }
