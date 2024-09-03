@@ -86,6 +86,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
         }
 
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'none');
+        }
+
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
         }
@@ -245,6 +250,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (scriptGalaxsys) {
             scriptGalaxsys.remove();
+        }
+
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+        if (botaoContatoFlutuante) {
+            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
         }
     }
 
