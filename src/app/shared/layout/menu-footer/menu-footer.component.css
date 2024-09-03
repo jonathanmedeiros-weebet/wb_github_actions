@@ -108,7 +108,7 @@
 
 @media only screen and (max-width: 1024px) {
     #bottom-bar {
-        z-index: 2147483647;
+        z-index: 999;
     }
 
     #definir {
