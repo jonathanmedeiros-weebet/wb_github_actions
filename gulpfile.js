@@ -2869,4 +2869,13 @@ gulp.task('betinha.com', function (done) {
     });
 });
 
+gulp.task('sortebet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sortebet.wee.bet",
+        banca: "SORTE BET",
+        styles: "",
+    });
+});
+
 

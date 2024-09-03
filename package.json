@@ -302,7 +302,8 @@
         "camelodasorte.com": "gulp camelodasorte.com",
         "oraculo.bet": "gulp oraculo.bet",
         "priv8bet.com": "gulp priv8bet.com",
-        "betinha.com": "gulp betinha.com"
+        "betinha.com": "gulp betinha.com",
+        "sortebet.wee.bet": "gulp sortebet.wee.bet"
     },
     "private": true,
     "dependencies": {
