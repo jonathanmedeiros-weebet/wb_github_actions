@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
         this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
-        this.eventPushXtremepush();
+        this.checkNotificationPermission();
         this.auth.logado.subscribe((isLogged) => {
             const logoutByInactivityIsEnabled =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
             const isCliente = this.auth.isCliente();
@@ -298,6 +298,24 @@ export class AppComponent implements OnInit {
         const xtremepushHabilitado = this.paramLocais.getOpcoes().xtremepush_habilitado;
         if (xtremepushHabilitado) {
             xtremepush('event', 'push');
+        }
+    }
+
+    checkAndExecuteEventPush() {
+        const lastExecution = localStorage.getItem('lastEventPushXtremepush');
+        const currentTime = new Date().getTime();
+
+        if (!lastExecution || (currentTime - parseInt(lastExecution, 10)) >= 3600000) {
+            this.eventPushXtremepush();
+            localStorage.setItem('lastEventPushXtremepush', currentTime.toString());
+        }
+    }
+
+    checkNotificationPermission() {
+        const permission = Notification.permission;
+        console.log(permission);
+        if (permission === 'denied' || permission === 'default') {
+            this.checkAndExecuteEventPush();
         }
     }
 }
