@@ -189,7 +189,6 @@ input {
   &__icon {
     display: flex;
     align-items: center;
-    z-index: 1;
   }
 
   &__icon__right {
