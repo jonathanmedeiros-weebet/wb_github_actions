@@ -74,8 +74,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     SOCCER_ID = 1;
     LSPORTS_SOCCER_ID = 6046;
-    BASKETBALL_ID = 18;
-    LSPORTS_BASKETBALL_ID = 48242;
+    BASKETBALL_ID = 48242;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -172,7 +171,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                                 this.liveUrl = 'https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=';
                             }
 
-                            if (this.sportId == this.BASKETBALL_ID || this.sportId == this.LSPORTS_BASKETBALL_ID) {
+                            if (this.sportId == this.BASKETBALL_ID) {
                                 this.liveUrl = 'https://stream.raysports.live/br/basketball?token=5oq66hkn0cwunq7&uuid=';
                             }
 
