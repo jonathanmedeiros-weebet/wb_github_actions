@@ -268,14 +268,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
-    openFullscreen() {
-
+    openFullScreenMob(){
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
 
         if (gameFrame) {
             this.renderer.setStyle(gameFrame, 'position', 'fixed');
             this.renderer.setStyle(gameFrame, 'top', '0');
         }
+    }
+
+    openFullscreen() {
 
         if (this.elem.requestFullscreen) {
             this.elem.requestFullscreen();
