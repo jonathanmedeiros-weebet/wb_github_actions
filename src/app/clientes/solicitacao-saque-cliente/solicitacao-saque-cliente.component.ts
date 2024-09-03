@@ -29,7 +29,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     cliente: Cliente;
     modalRef;
 
-    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M'];
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M', 'OKTO', 'PIXS'];
     respostaSolicitacao;
 
     rotaCompletarCadastro: string;
@@ -146,7 +146,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
                     this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
 
-                    this.checkPixsTermsAcceptance(res.accepted_pixs_terms);
+                    this.checkOktoTermsAcceptance(res.accepted_okto_terms);
 
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
@@ -360,15 +360,15 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         return chaveComMascara;
     }
 
-    checkPixsTermsAcceptance(acceptedPixsTerms = false) {
-        if (this.availablePaymentMethods.includes('pixs') && !acceptedPixsTerms) {
+    checkOktoTermsAcceptance(acceptedOktoTerms = false) {
+        if (this.availablePaymentMethods.includes('okto') && !acceptedOktoTerms) {
             this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
-            this.modalRef.componentInstance.title = 'Termos de uso Pixs';
-            this.modalRef.componentInstance.msg = 'Para continuar com as movimentações financeiras, é necessário aceitar os termos de uso da instituição financeira Pixs. Caso não aceite, não será possível prosseguir. Deseja aceitar os termos?';
+            this.modalRef.componentInstance.title = 'Termos de uso Okto';
+            this.modalRef.componentInstance.msg = 'Para continuar com as movimentações financeiras, é necessário aceitar os termos de uso da instituição financeira Okto. Caso não aceite, não será possível prosseguir. Deseja aceitar os termos?';
 
             this.modalRef.result.then(
                 (result) => {
-                    this.financeiroService.acceptPixsTerms().subscribe(
+                    this.financeiroService.acceptOktoTerms().subscribe(
                         res =>{
                             this.messageService.success('Você aceitou os termos de uso. Agora, você pode realizar movimentações financeiras.');
                         },

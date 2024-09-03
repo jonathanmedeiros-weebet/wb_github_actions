@@ -1047,7 +1047,7 @@ gulp.task('betsesporte.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "betsesporte.com",
-        banca: "BETS ESPORTE",
+        banca: "LASVEGAS SPORT",
         styles: "",
     });
 });
@@ -1224,16 +1224,6 @@ gulp.task('bomba.bet', function (done) {
         host: "bomba.bet",
         banca: "BOMBA.BET",
         styles: "",
-    });
-});
-
-gulp.task('betnews.one', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betnews.one",
-        banca: "BET NEWS",
-        styles: "",
-        scripts: "<script type='text/javascript' async src='https://d335luupugsy2.cloudfront.net/js/loader-scripts/1890e981-6951-4a28-81e3-6aaa5495e35f-loader.js' ></script>"
     });
 });
 
@@ -2150,15 +2140,6 @@ gulp.task('xico.bet', function (done) {
     });
 });
 
-gulp.task('arena365.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "arena365.bet",
-        banca: "ARENA 365",
-        styles: "",
-    });
-});
-
 gulp.task('nortedasorte.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2506,15 +2487,6 @@ gulp.task('betbastet.com', function (done) {
     });
 });
 
-gulp.task('americanbet.online', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "americanbet.online",
-        banca: "AMERICAN BET",
-        styles: ""
-    });
-});
-
 gulp.task('probetx1.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2857,6 +2829,53 @@ gulp.task('decola.bet', function (done) {
         host: "decola.bet",
         banca: "DECOLA.BET",
         styles: "",
-        dominioTemp: "tempdecolabet.wee.bet"
+        description: "As melhores ofertas hoje: 100% até R$1000 em Apostas Esportivas e todos os Games. Aproveite as apostas no futebol, basquete, Esoccer, NBA e demais jogos. Dobramos seu depósito de até R$1000. Saque Rápido & Seguro."
     });
 });
+
+gulp.task('camelodasorte.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "camelodasorte.com",
+        banca: "CAMELO DA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('oraculo.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "oraculo.bet",
+        banca: "ORACULO.BET",
+        styles: "",
+    });
+});
+
+gulp.task('priv8bet.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "priv8bet.com",
+        banca: "PRIV8BET",
+        styles: "",
+    });
+});
+
+gulp.task('betinha.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betinha.com",
+        banca: "BETINHA.COM",
+        styles: "",
+    });
+});
+
+gulp.task('sortebet.wee.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "sortebet.wee.bet",
+        banca: "SORTE BET",
+        styles: "",
+    });
+});
+
+

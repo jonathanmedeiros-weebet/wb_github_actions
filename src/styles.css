@@ -66,6 +66,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: var(--foreground);
     background-color: var(--background);
+    width: 100%
 }
 
 .base-container {
@@ -312,7 +313,7 @@ game {
 }
 
 .titulo {
-    padding: 10px 0;
+    padding-bottom: 10px;
     color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
@@ -1730,7 +1731,7 @@ ngb-datepicker-month {
     .modal-login{
         z-index: 90002 !important;
     }
-
+    
     .modal-cadastro-cliente {
         z-index: 90002 !important;
     }

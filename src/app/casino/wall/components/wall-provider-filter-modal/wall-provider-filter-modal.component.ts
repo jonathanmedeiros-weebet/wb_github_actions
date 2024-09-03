@@ -10,6 +10,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class WallProviderFilterModalComponent {
   @Input() providers: Fornecedor[] = []
   @Input() providerSelected: string = "";
+  @Input() container: any;
   public providerTerm: string = "";
 
   constructor(private activeModal: NgbActiveModal){}
@@ -33,6 +34,10 @@ export class WallProviderFilterModalComponent {
         providerSelected: this.providerSelected
       }
     })
+
+    if(this.container){
+      this.container.nativeElement.scrollTop = 0;
+    }
   }
 
   public handleClearFilter() {
