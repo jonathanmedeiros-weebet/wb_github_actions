@@ -269,7 +269,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         const liveChatBtn = this.document.getElementById('chat-widget-container');
         if (liveChatBtn) {
-            this.renderer.setStyle(liveChatBtn, 'display', 'inline');
+            this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
     }
 
