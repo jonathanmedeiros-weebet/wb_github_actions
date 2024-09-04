@@ -91,6 +91,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(jivoChatBtn, 'display', 'none');
         }
 
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'none');
+        }
+
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
         }
@@ -260,6 +265,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
         if (jivoChatBtn) {
             this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'inline');
         }
     }
 
