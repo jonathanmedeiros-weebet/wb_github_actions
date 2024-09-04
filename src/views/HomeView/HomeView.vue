@@ -174,12 +174,13 @@ export default {
     async pageLoad() {
       this.loading = true;
 
-      await Promise.all([
-        Boolean(this.league)
-          ? this.handleLeague(this.league)
-          : this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD')),
-        this.prepareChampionshipPerRegionList(this.modality.id)
-      ]);
+      if(Boolean(this.league)) {
+        await this.handleLeague(this.league)
+      } else {
+        await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'))
+      }
+       
+      await this.prepareChampionshipPerRegionList(this.modality.id)
 
       if(this.liveActived && this.socket.connected()){
         this.behaviorLiveEvents();
@@ -360,8 +361,8 @@ export default {
 
       this.handleCloseModalitiesModal();
 
-      await this.prepareChampionshipPerRegionList(modalityId);
       await this.prepareChampionshipList(modalityId, false, null, this.dateSelected.format('YYYY-MM-DD'));
+      await this.prepareChampionshipPerRegionList(modalityId);
       this.loading = false;
     },
 
