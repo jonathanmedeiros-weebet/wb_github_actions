@@ -12,6 +12,7 @@
         type="text"
         mask="#########"
         autocomple="off"
+        v-model="code"
       />
       <WButton
         id="btn-salvar"
