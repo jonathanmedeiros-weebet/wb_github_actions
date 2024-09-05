@@ -66,6 +66,7 @@ export class BannersComponent implements OnInit {
             this.showLoadingIndicator = false;      
             this.cd.markForCheck();    
         });
+        console.log(this.banners);
     }
 
     loadBannerModal() {
@@ -80,8 +81,8 @@ export class BannersComponent implements OnInit {
             let source = 'src';
             this.isMobileView && (source = 'src_mobile');
 
-            for (const banner of banners) {
-                if (banner[source]) {
+            for (const banner of banners ) {
+                if (banner[source] && banner['pagina'] === 'deposito') {
                     this.bannersModal.push(banner);
                 }
             }
@@ -91,6 +92,7 @@ export class BannersComponent implements OnInit {
             this.showLoadingIndicator = false;
             this.cd.markForCheck();
         });
+        console.log(this.banners);
     }
 
     handleError(msg) {
