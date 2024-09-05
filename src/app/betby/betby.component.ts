@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CadastroModalComponent, LoginModalComponent } from '../shared/layout/modals';
 import { AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
@@ -14,13 +14,12 @@ declare function BTRenderer(): void;
     styleUrls: ['betby.component.css'],
 })
 
-export class BetbyComponent implements OnInit, OnDestroy {
-
+export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
+    private resizeObserver: ResizeObserver;
     private bt: any;
-    private urlSubscription: any;
+    private queryParamsSubscription: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
-    private heightHeader = 92;
-    private path = '/';
+    public heightHeader = 92;
 
     constructor(
         private helper: HelperService,
@@ -30,7 +29,9 @@ export class BetbyComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private authService: AuthService,
         private translate: TranslateService,
-        private params: ParametrosLocaisService
+        private params: ParametrosLocaisService,
+        private renderer: Renderer2,
+        private elementRef: ElementRef
     ) { }
 
     ngOnInit() {
@@ -38,6 +39,13 @@ export class BetbyComponent implements OnInit, OnDestroy {
 
         if (window.innerWidth <= 1280) {
             this.heightHeader = 103;
+        }
+
+        if (this.params.getOpcoes().indique_ganhe_habilitado) {
+            this.heightHeader = 129;
+            if (window.innerWidth <= 1280) {
+                this.heightHeader = 140;
+            }
         }
 
         this.helper.injectBetbyScript(this.params.getOpcoes().betby_script).then(() => {
@@ -53,10 +61,9 @@ export class BetbyComponent implements OnInit, OnDestroy {
             this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
         });
 
-        this.urlSubscription = this.route.url.subscribe(url => {
-            this.path = '/' + url.join('/');
-            if (this.bt) {
-                this.bt.updateOptions({url: this.path});
+        this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
+            if (this.bt && (params['bt-path'] == '/' || params['bt-path'] == '/live')) {
+                this.bt.updateOptions({url: params['bt-path']})
             }
         });
 
@@ -67,13 +74,66 @@ export class BetbyComponent implements OnInit, OnDestroy {
         );
     }
 
+    ngAfterViewInit() {
+        const divElement = this.elementRef.nativeElement.querySelector('app-header');
+
+        this.resizeObserver = new ResizeObserver((entries) => {
+            for (let entry of entries) {
+                this.heightHeader = entry.contentRect.height;
+                if (this.bt) {
+                    this.bt.updateOptions({
+                        betSlipOffsetTop: this.heightHeader,
+                        stickyTop: this.heightHeader
+                    });
+                }
+            }
+        });
+
+        this.resizeObserver.observe(divElement);
+
+        setTimeout(() => {
+            this.hideGtmElements();
+        }, 1200);
+    }
+
+
+    hideGtmElements() {
+        const elementChat = document.querySelector('#chat-widget-container');
+        const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
+
+        if (elementChat) {
+            this.renderer.setStyle(elementChat, 'display', 'none');
+        }
+
+        if (elementChatWeebet) {
+            this.renderer.setStyle(elementChatWeebet, 'display', 'none');
+        }
+    }
+
+    showGtmElements() {
+        const elementChat = document.querySelector('#chat-widget-container');
+        const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
+
+        if (elementChat) {
+            this.renderer.removeStyle(elementChat, 'display');
+        }
+
+        if (elementChatWeebet) {
+            this.renderer.removeStyle(elementChatWeebet, 'display');
+        }
+    }
+
     ngOnDestroy() {
         if (this.bt) {
             this.bt.kill();
         }
-        if (this.urlSubscription) {
-            this.urlSubscription.unsubscribe();
+        if (this.queryParamsSubscription) {
+            this.queryParamsSubscription.unsubscribe();
         }
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+        }
+        this.showGtmElements();
     }
 
     onChangeLang(lang: string) {
@@ -91,7 +151,6 @@ export class BetbyComponent implements OnInit, OnDestroy {
         let that = this;
 
         this.bt = new BTRenderer().initialize({
-            url: this.path,
             brand_id: this.params.getOpcoes().betby_brand,
             token: token ?? null,
             themeName: this.params.getOpcoes().betby_theme,
@@ -100,13 +159,11 @@ export class BetbyComponent implements OnInit, OnDestroy {
             betSlipOffsetTop: this.heightHeader,
             stickyTop: this.heightHeader,
             betslipZIndex: 95,
-            basename: 'sports',
             onTokenExpired: () => that.refreshTokenExpired(),
             onLogin: () => that.openLogin(),
             onRegister: () => that.openRegister(),
             onRecharge: () => that.openDeposit(),
-            onSessionRefresh: () => that.refreshSession(),
-            onRouteChange: (path: string) => that.handleChangeSection(path)
+            onSessionRefresh: () => that.refreshSession()
         });
     }
 

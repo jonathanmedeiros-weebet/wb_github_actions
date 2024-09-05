@@ -20,7 +20,7 @@
                 <a [ngClass]="tabSelected == 'bonus' ? 'active' : ''"
 					(click)="changeTab('bonus')">{{'geral.bonus' | translate}} <span class="circle">{{ quantityRolloversToNotify }}</span></a>
                 <a [ngClass]="tabSelected == 'rodada-gratis' ? 'active' : ''"
-                	(click)="changeTab('rodada-gratis')">{{'geral.rodadaGratis' | translate}} <span class="circle">{{ quantityRoundsToNotify }}</span></a>
+                	(click)="changeTab('rodada-gratis')">{{'rodada_gratis.rodadaGratis' | translate}} <span class="circle">{{ quantityRoundsToNotify }}</span></a>
             </div>
 
             <div class="content-body">
@@ -209,18 +209,18 @@
                         <form (ngSubmit)="onSubmit()" [formGroup]="form">
                             <div class="filtros">
                                 <select class="inverted-out form-control" style="min-height: 44px; min-width: 169px;" formControlName="status">
-                                    <option value="">{{'geral.todos' | translate}}</option>
-                                    <option value="Ativo">Ativo</option>
-                                    <option value="Expirado">Expirado</option>
-                                    <option value="Concluído">{{'geral.concluido' | translate}}</option>
-                                    <option value="Cancelado">Cancelado</option>
+                                    <option value="">{{'rodada_gratis.todas' | translate}}</option>
+                                    <option value="Ativa">{{'rodada_gratis.ativa' | translate}}</option>
+                                    <option value="Expirada">{{'rodada_gratis.expirada' | translate}}</option>
+                                    <option value="Concluída">{{'rodada_gratis.concluida' | translate}}</option>
+                                    <option value="Cancelada">{{'rodada_gratis.cancelada' | translate}}</option>
                                 </select>
                                 <button class="btn btn-custom" style="min-height: 44px; min-width: 137px;" type="submit" (click)="filtrarPorStatus()">{{'geral.filtrar' | translate}}</button>
                             </div>
                         </form>
                     </div>
                     <div *ngIf="!rodadasListagem.length" class="alert alert-warning text-center" role="alert">
-                        {{ 'geral.nenhumaRodadaGratis' | translate }}
+                        {{ 'rodada_gratis.nenhumaRodadaGratis' | translate }}
                     </div>
                     <ng-container *ngIf="!mobileScreen">
                         <div class="table-responsive" *ngIf="rodadasListagem.length">
@@ -232,7 +232,8 @@
                                         <th data-field="quantidade" (click)="sortBy('quantidade')"><span style="cursor: pointer;">{{ 'geral.quantidade' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="quantidadeUtilizada" (click)="sortBy('quantidadeUtilizada')"><span style="cursor: pointer;">{{ 'geral.quantidadeUtilizada' | translate }} &uarr;&darr;</span></th>
                                         <th data-field="game" (click)="sortBy('game')"><span style="cursor: pointer;">{{ 'geral.jogo' | translate }} &uarr;&darr;</span></th>
-                                        <th data-field="status" (click)="sortBy('status')"><span style="cursor: pointer;">Status &uarr;&darr;</span></th>
+                                        <th data-field="game" (click)="sortBy('game')"><span style="cursor: pointer;">{{ 'rodada_gratis.premio' | translate }} &uarr;&darr;</span></th>
+                                        <th data-field="status" (click)="sortBy('status')"><span style="cursor: pointer;">{{ 'geral.status' | translate }} &uarr;&darr;</span></th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -245,7 +246,7 @@
                                     <ng-container *ngFor="let rodada of rodadasListagem">
                                         <tr>
                                             <td class="td-custom">
-                                                {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}
+                                                {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY HH:mm:ss' }}
                                             </td>
                                             <td class="td-custom">
                                                 {{ rodada.valor | currency }}
@@ -260,13 +261,21 @@
                                                 {{rodada.gameName}}
                                             </td>
                                             <td class="td-custom">
-                                                {{rodada.status}}
+                                                {{rodada.premio | currency }}
                                             </td>
-                                            <td style="text-align: center; max-width: 80px;">
+                                            <td class="td-custom">
+                                                {{rodada.customStatusFreeSpin}}
+                                            </td>
+                                            <td class="td-custom">
                                                 <ng-container>
-                                                    <button class="btn btn-custom btn-jogar-rodada"
-                                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
-                                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}</button>
+                                                    <button *ngIf="(rodada.customStatusFreeSpin == 'Pendente') && (rodada.dataTermino.date >= formattedCurrentDate) ; else elseResgatePremio " class="btn btn-custom btn-jogar-rodada"
+                                                        [ngClass]="rodada.customStatusFreeSpin != 'Pendente' ? 'disabled-button' : ''"
+                                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
+                                                    </button>
+                                                    <ng-template #elseResgatePremio>
+                                                        <button [disabled]="isButtonDisabled" *ngIf="(rodada.status == 'resgate' && rodada.customStatusFreeSpin == 'Concluída' && rodada.dataTermino.date >= this.formattedCurrentDate && rodada.tipoSaldoConvertido == 'bonus' && rodada.premio > 0 ) ? true : false " class="btn btn-custom btn-jogar-rodada" (click)="redeemPrize(rodada.id)">{{ 'rodada_gratis.resgatarPremio' | translate }}
+                                                        </button>
+                                                    </ng-template>
                                                 </ng-container>
                                             </td>
                                         </tr>
@@ -281,15 +290,24 @@
                         </div>
                         <ng-container *ngFor="let rodada of rodadasListagem">
                             <div class="rodada-gratis-container">
-                                <p class="info-rodada">{{ 'geral.rodadaGratis' | translate }}: <span>Expira em {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}</span></p>
+                                <p class="info-rodada">{{ 'rodada_gratis.rodadaGratis' | translate }}: <span>Expira em {{ rodada.dataTermino.date | moment: 'DD/MM/YYYY' }}</span></p>
                                 <p class="info-rodada">{{ 'geral.valor' | translate }}: <span>{{ rodada.valor | currency }}</span></p>
                                 <p class="info-rodada">{{ 'geral.quantidade' | translate }}: <span>{{ rodada.quantidade }}</span></p>
+                                <p class="info-rodada">{{ 'geral.quantidadeUtilizada' | translate }}: <span>{{ rodada.quantidadeUtilizada }}</span></p>
                                 <p class="info-rodada">{{ 'geral.jogo' | translate }}: <span>{{ rodada.gameName }}</span></p>
+                                <p class="info-rodada">{{ 'rodada_gratis.premio' | translate }}: <span>{{ rodada.premio | currency }}</span></p>
+                                <p class="info-rodada">{{ 'geral.status' | translate }}: <span>{{ rodada.customStatusFreeSpin }}</span></p>
                                 <div class="button-rodada">
-                                    <button class="btn btn-custom btn-jogar-rodada"
-                                        [ngClass]="rodada.status != 'Ativo' ? 'disabled-button' : ''"
-                                        (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
-                                    </button>
+                                    <ng-container>
+                                        <button *ngIf="(rodada.customStatusFreeSpin == 'Pendente') && (rodada.dataTermino.date >= formattedCurrentDate) ; else elseResgatePremio " class="btn btn-custom btn-jogar-rodada"
+                                            [ngClass]="rodada.customStatusFreeSpin != 'Pendente' ? 'disabled-button' : ''"
+                                            (click)="openGame(rodada.gameFront, rodada.fornecedorFront)">{{ 'geral.jogarAgora' | translate }}
+                                        </button>
+                                        <ng-template #elseResgatePremio>
+                                            <button [disabled]="isButtonDisabled" *ngIf="(rodada.status == 'resgate' && rodada.customStatusFreeSpin == 'Concluída' && rodada.dataTermino.date >= this.formattedCurrentDate && rodada.tipoSaldoConvertido == 'bonus' && rodada.premio > 0 ) ? true : false " class="btn btn-custom btn-jogar-rodada" (click)="redeemPrize(rodada.id)">{{ 'rodada_gratis.resgatarPremio' | translate }}
+                                            </button>
+                                        </ng-template>
+                                    </ng-container>
                                 </div>
                             </div>
                         </ng-container>

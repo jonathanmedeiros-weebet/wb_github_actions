@@ -11,7 +11,7 @@
 }
 
 #deposit-container h3 {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     padding-bottom: 6px;
     color: var(--foreground-sidebars);
@@ -29,6 +29,16 @@
 
 #deposit-details {
     flex: 3;
+}
+
+.deposit-details-title h3 {
+    width: 96%;
+}
+
+.deposit-details-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 #details-wrapper {
@@ -150,6 +160,7 @@
     width: 92%;
     text-align: justify;
     font-size: 12px;
+    opacity: 70%;
 }
 
 .details-amount {
@@ -159,7 +170,7 @@
 
 .details-amount input {
     text-align: left !important;
-    width: 66%;
+    width: 25.5rem;
     margin: 12px 0 10px;
 }
 
@@ -172,18 +183,22 @@
 }
 
 .shortcut-amounts {
-    width: 66%;
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    gap: 8px;
+    width: 25.5rem;
 }
 
 .shortcut-amounts button {
-    width: 32%;
+    width: 8rem;
     height: 40px;
-    margin-top: 6px;
+    margin-top: 8px;
     background-color: var(--inputs-odds);
     color: var(--foreground-inputs-odds);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto; 
 }
 
 .shortcut-amounts button:active,
@@ -225,11 +240,9 @@
     margin-top: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 
 #bonus-wrapper .bonus-option {
-    width: 31%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -241,6 +254,7 @@
     text-decoration: none;
     cursor: pointer;
     border-color: rgba(var(--foreground-sidebars-rgb), 0.2);
+    margin-right: 16px;
 }
 
 .bonus {
@@ -275,12 +289,12 @@
 }
 
 .details-promo-code #promo-code-wrapper {
-    width: 66%;
+    width: 25.5rem;
     margin-top: 22px;
 }
 
 .details-submit {
-    width: 45%;
+    width: 17rem;
     margin-top: 40px;
 }
 
@@ -369,7 +383,9 @@ label.label-tempo {
     .modal-body {
         padding-top: 50px;
     }
-
+    .content-header{
+        display: none;
+    }
     .group-buttons {
         width: 100%;
         margin-top: 50px;
@@ -383,6 +399,7 @@ label.label-tempo {
     #deposito-pix {
         background-color: var(--background);
         padding: 0;
+        padding-top: 24px;
     }
 
     #details-wrapper {
@@ -412,16 +429,17 @@ label.label-tempo {
 
     .shortcut-amounts {
         width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .shortcut-amounts .btn{
+        width: 30%;
     }
 
     #bonus-wrapper .bonus-options {
         width: 100% !important;
         flex-direction: column;
-    }
-
-    #bonus-wrapper .bonus-option {
-        width: 100% !important;
-        flex-direction: row;
     }
 
     #bonus-wrapper .bonus-option .bonus {

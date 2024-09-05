@@ -212,16 +212,15 @@
         "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos.",
         "cadastro": "Cadastro",
         "tituloInformativoCookies": "Utilização de Cookies e Sessões",
-        "informativoCookies": "Este site utiliza cookies e sessões para aprimorar a sua experiência. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo que nos ajudam a manter você autenticado, personalizar recursos e configurações, bem como melhorar a funcionalidade do site. Ao continuar a usar este site, você concorda com o uso de cookies e sessões de acordo com a nossa Política de Privacidade.",
+        "informativoCookies": "Este site utiliza cookies e sessões para aprimorar a sua experiência. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo que nos ajudam a manter você autenticado, personalizar recursos e configurações, bem como melhorar a funcionalidade do site. Ao continuar a usar este site, você concorda com o uso de cookies e sessões de acordo com a nossa ",
+        "informativoCookiesLink": "Política de Privacidade.",
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
         "esportivo": "esportivo",
         "rifa": "Rifa",
-        "rodadaGratis": "Rodada grátis",
         "dataVencimento": "Data de vencimento",
         "quantidade": "Quantidade",
         "quantidadeUtilizada": "Qtd. Utilizada",
         "jogarAgora": "Jogar Agora",
-        "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
         "resultadosEncontradosComQuantidade": "Foram encontrados {{quantidade}} resultados",
         "selecioneChavePix": "Selecione a chave pix",
@@ -600,6 +599,7 @@
     },
     "botoes": {
         "aceitar": "Aceitar",
+        "entendi": "Entendi",
         "salvar_alteracoes": "Salvar Alterações",
         "voltar": "Voltar"
     },
@@ -657,5 +657,16 @@
             "definir_tempo": "Definir tempo de sessão",
             "desativado": "Desativado"
         }
+    },
+    "rodada_gratis":{
+        "resgatarPremio": "Resgatar Prêmio",
+        "rodadaGratis": "Rodada Grátis",
+        "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
+        "todas": "Todas",
+        "ativa": "Ativa",
+        "expirada": "Expirada",
+        "concluida":"Concluída",
+        "cancelada":"Cancelada",
+        "premio": "Prêmio"
     }
 }

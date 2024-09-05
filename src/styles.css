@@ -59,7 +59,6 @@ html {
     font-size: 12px;
     width: 100vw;
     height: 100vh;
-    max-height: 100%;
 }
 
 html,
@@ -67,9 +66,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: var(--foreground);
     background-color: var(--background);
-    max-height: 100%;
-    height: 100vh;
-    overflow-x: hidden;
+    width: 100%
 }
 
 .base-container {
@@ -316,7 +313,7 @@ game {
 }
 
 .titulo {
-    padding: 10px 0;
+    padding-bottom: 10px;
     color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
@@ -1732,11 +1729,11 @@ ngb-datepicker-month {
 @media only screen and (max-width: 1024px) {
 
     .modal-login{
-        z-index: 90000 !important;
+        z-index: 90002 !important;
     }
-
+    
     .modal-cadastro-cliente {
-        z-index: 90000 !important;
+        z-index: 90002 !important;
     }
 
     *::-webkit-scrollbar{
@@ -1952,11 +1949,5 @@ label {
         max-width: 100%;
         height: 100%;
         margin: 0;
-    }
-
-    @supports (-webkit-touch-callout: none) {
-        body {
-            overflow: hidden;
-        }
     }
 }

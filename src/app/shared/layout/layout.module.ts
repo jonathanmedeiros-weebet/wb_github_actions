@@ -98,6 +98,7 @@ import { SkeletonModule } from './skeleton/skeleton.module';
 import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-modal/block-peer-attemps-modal.component';
 import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
+import { FreeSpinService } from '../services/clientes/free-spin.service';
 
 @NgModule({
     imports: [
@@ -120,7 +121,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
             codeLength: 6
         }),
         NgHcaptchaModule.forRoot({
-            siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
+            siteKey: '30aaf7ea-dc50-41d4-8866-d15e08ee3492',
             languageCode: 'pt'
         }),
         TranslateModule,
@@ -232,6 +233,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
         JogoService,
         AcumuladaoService,
         IndiqueGanheService,
+        FreeSpinService,
         {
             provide: RECAPTCHA_SETTINGS,
 

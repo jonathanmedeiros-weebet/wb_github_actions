@@ -50,627 +50,661 @@
             <img [src]="LOGO" class="logo">
         </a>
     </div>
-    <nav class="desktop" *ngIf="!showHeaderMobile" #scrollMenu>
-        <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
-    </nav>
-    <div class="side side-right">
-        <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo)">
-            <a *ngIf="isDemo" target="_blank" href="https://materiais.wee.bet/demo-weebet">
-                <i class="fa-solid fa-headset"></i>
-            </a>
-            <a *ngIf="!isDemo && whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
-                <i class="fa-solid fa-headset"></i>
-            </a>
-        </div>
-
-        <a *ngIf="xtremepushHabilitado" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
-            <div id="badge-xtremepush"></div>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHVQTFRFAAAA/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8fvbQOwAAACd0Uk5TAGtqVv9QlFveV/7Cj/1TFvlm9Q6Cp690zThCwPEPF+qA491R19VNV+9p7gAAAJ5JREFUeJy90c0KgkAUBeB7ShIXFdKPWSJF7/9CLaKwslIrKohssIYJ4k6N4KqzuHOYb7ibAZUEVQAojFAH4WGCRkG1/BdsCDkt3L7AQW6DnncHZw3auDaP8nQvLWQcuic3UaV/6Ow4DNJerMpw7605BFs/UiXcjJYcLBKkt//BeMUgWHxA3vMowfuVHkHVfnASUTg3wRTAzASlq/S8AOWULRluMiNTAAAAAElFTkSuQmCC" alt="Toggle Icon">
-        </a>
-
-        <div id="overlay" class="overlay" (click)="closeNotifications()" [class.open]="notificationsXtremepushOpen"></div>
-
-        <div id="xtremepushNotificationWrapper" class="content-div-xtremepush" [class.open]="notificationsXtremepushOpen">
-            <div class="xtremepush-header">
-                <h4 class="xtremepush-title">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHVQTFRFAAAA/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8fvbQOwAAACd0Uk5TAGtqVv9QlFveV/7Cj/1TFvlm9Q6Cp690zThCwPEPF+qA491R19VNV+9p7gAAAJ5JREFUeJy90c0KgkAUBeB7ShIXFdKPWSJF7/9CLaKwslIrKohssIYJ4k6N4KqzuHOYb7ibAZUEVQAojFAH4WGCRkG1/BdsCDkt3L7AQW6DnncHZw3auDaP8nQvLWQcuic3UaV/6Ow4DNJerMpw7605BFs/UiXcjJYcLBKkt//BeMUgWHxA3vMowfuVHkHVfnASUTg3wRTAzASlq/S8AOWULRluMiNTAAAAAElFTkSuQmCC" alt="Toggle Icon">
-                    <span style="vertical-align: middle;">Notificações</span>
-                </h4>
-                <a type="button" class="btn-close-xtremepush" aria-label="Close" (click)="notificationsXtremepush()">
-                    <i class="fa fa-times"></i>
+    <div class="center">
+        <nav class="desktop" *ngIf="!showHeaderMobile" #scrollMenu>
+            <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
+        </nav>
+    </div>
+    <div class="container-group">
+        <div class="container-icons">
+            <div class="support-btn" *ngIf="isMobile && (whatsapp || isDemo)">
+                <a *ngIf="isDemo" target="_blank" style="font-size: 0px;" href="https://materiais.wee.bet/demo-weebet">
+                    <svg class="icon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.25 13.75V10.0834C19.25 5.52702 15.5563 1.83337 11 1.83337V1.83337C6.44365 1.83337 2.75 5.52702 2.75 10.0834V13.75" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="2.75" y="9.16663" width="3.66667" height="6.41667" rx="1.83333" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="15.584" y="9.16663" width="3.66667" height="6.41667" rx="1.83333" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="8.70898" y="17.4166" width="4.58333" height="2.75" rx="1.375" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8.70898 18.7917H7.33398C5.8152 18.7917 4.58398 17.5605 4.58398 16.0417V15.5834" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a *ngIf="!isDemo && whatsapp" style="font-size: 0px;" target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}">
+                    <svg class="icon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.25 13.75V10.0834C19.25 5.52702 15.5563 1.83337 11 1.83337V1.83337C6.44365 1.83337 2.75 5.52702 2.75 10.0834V13.75" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="2.75" y="9.16663" width="3.66667" height="6.41667" rx="1.83333" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="15.584" y="9.16663" width="3.66667" height="6.41667" rx="1.83333" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="8.70898" y="17.4166" width="4.58333" height="2.75" rx="1.375" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8.70898 18.7917H7.33398C5.8152 18.7917 4.58398 17.5605 4.58398 16.0417V15.5834" stroke="currentcolor" stroke-width="1.375" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </a>
             </div>
-            <div id="xtremepushNotificationContainer"></div>
-        </div>
-
-        <ng-container *ngIf="isLoggedIn; else loggedOut">
-            <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
-                <div *ngIf="isMobile; then depositShortCutMobile else depositShortCutDesktop"></div>
-                <ng-template #depositShortCutDesktop>
-                    <a class="btn btn-custom mr-4" [routerLink]="['clientes/deposito']">
-                        {{'geral.depositar' | translate | uppercase}}
-                    </a>
-                </ng-template>
-                <ng-template #depositShortCutMobile>
-                    <a class="btn btn-custom mr-4" (click)="abrirDepositos()" [ngStyle]="{'height': '32px'}">
-                        {{'geral.depositar' | translate | uppercase}}
-                    </a>
-                </ng-template>
-            </div>
-            <div class="menu-conta" ngbDropdown #dropDownConta="ngbDropdown">
-                <a (click)="getPosicaoFinanceira()" class="nav-link menu-perfil" id="navbarDropdown"
-                   role="button" ngbDropdownToggle>
-                    <div class="user-card">
-                        <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
-                        <span class="saldo-usuario">
-                            <i class="fa olhinho" style="margin-right: 8px;" (click)="alternarExibirSaldo($event)"
-                               [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
-                            <span id="olhinho"
-                                  *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldoMaisBonus | currency }}</span>
-                            <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
-                        </span>
-                    </div>
-                    <div class="user-icon">
-                        <span><i class="fa-solid fa-user"></i></span>
+            <div style="display: flex;" *ngIf="xtremepushHabilitado">
+                <a style="color: #ffffff; font-size: 0px;" (click)="notificationsXtremepush()" class="btn-xtremepush" role="button">
+                    <div id="badge-xtremepush"></div>
+                    <div class="icon-xtremepush">
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.70801 18.344V18.709C9.70801 19.974 10.734 21 12 21V21C13.266 21 14.292 19.974 14.292 18.708V18.343" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.833 5.751V4.833C13.833 3.821 13.013 3 12 3V3C10.987 3 10.167 3.821 10.167 4.833V5.751" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.563 10.188V10.188C6.563 7.68498 8.592 5.65698 11.094 5.65698H12.907C15.41 5.65698 17.438 7.68598 17.438 10.188V10.188V12.985C17.438 13.515 17.649 14.024 18.024 14.399L18.665 15.04C19.04 15.415 19.251 15.924 19.251 16.454V16.454C19.251 17.498 18.405 18.344 17.361 18.344H6.64C5.596 18.344 4.75 17.498 4.75 16.454V16.454C4.75 15.924 4.961 15.415 5.336 15.04L5.977 14.399C6.352 14.024 6.563 13.515 6.563 12.985V10.188Z" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                 </a>
-                <div class="dropdown-menu-right dropdown-menu-custom" aria-labelledby="navbarDropdown" ngbDropdownMenu>
-                    <a class="btnClose hide-desktop" aria-label="Close" (click)="dropDownConta.close()">
-                        <span aria-hidden="true">&times;</span>
+            </div>
+            <div id="overlay" class="overlay" (click)="closeNotifications()" [class.open]="notificationsXtremepushOpen"></div>
+            <div id="xtremepushNotificationWrapper" class="content-div-xtremepush" [class.open]="notificationsXtremepushOpen">
+                <div class="xtremepush-header">
+                    <h4 class="xtremepush-title">
+                        <div style="display: flex;" style="pointer-events: none; cursor: default; ">
+                            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.70801 18.344V18.709C9.70801 19.974 10.734 21 12 21V21C13.266 21 14.292 19.974 14.292 18.708V18.343" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.833 5.751V4.833C13.833 3.821 13.013 3 12 3V3C10.987 3 10.167 3.821 10.167 4.833V5.751" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.563 10.188V10.188C6.563 7.68498 8.592 5.65698 11.094 5.65698H12.907C15.41 5.65698 17.438 7.68598 17.438 10.188V10.188V12.985C17.438 13.515 17.649 14.024 18.024 14.399L18.665 15.04C19.04 15.415 19.251 15.924 19.251 16.454V16.454C19.251 17.498 18.405 18.344 17.361 18.344H6.64C5.596 18.344 4.75 17.498 4.75 16.454V16.454C4.75 15.924 4.961 15.415 5.336 15.04L5.977 14.399C6.352 14.024 6.563 13.515 6.563 12.985V10.188Z" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span style="vertical-align: middle; padding-left: 5px; padding-top: 4px;">Notificações</span>
+                        </div>
+                    </h4>
+                    <a type="button" class="btn-close-xtremepush" aria-label="Close" (click)="notificationsXtremepush()">
+                        <i class="fa fa-times"></i>
                     </a>
-                    <div class="hide-desktop" *ngIf="!isCliente">
-                        <div class="info-profile">
-                            <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
-                            <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
-                        </div>
-
-                        <div class="saldos-container">
-                            <div class="saldos-item">
-                                <span class="">{{ 'geral.credito' | translate }}</span>
-                                <span>
-                                    <i class="fa olhinho" style="margin-right: 8px;"
-                                       (click)="alternarExibirSaldo($event)"
-                                       [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
-                                    <span class="dados"
-                                          *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.credito | currency }}</span>
-                                    <ng-template #elseSaldoOculto>
-                                        <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
-                                    </ng-template>
-                                </span>
-                            </div>
-                            <div style="align-items: center; justify-content: center; display: flex;">
-                                <i class="separador"></i>
-                            </div>
-                            <div class="saldos-item">
-                                <span class="">{{ 'geral.saldo' | translate }}</span>
-                                <span class="dados"
-                                      *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
-                                <ng-template #elseSaldoOculto>
-                                    <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
-                                </ng-template>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-around" *ngIf="enabledBettorPix">
-                            <a class="dropdown-btn w-150" (click)="abrirDepositosCambista()">
-                                {{ 'geral.liberarCredito' | translate }}
-                            </a>
-                        </div>
-
-                        <div class="nav">
-                            <hr/>
-                            <label>{{ 'geral.minhaConta' | translate }}</label>
-                            <a (click)="abrirCambistaDashboard()">
-                                <span>
-                                    <i class="fa fa-dashboard"></i>
-                                </span>
-                                {{ 'geral.dashboard' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirAlterarSenha()">
-                                <span>
-                                    <i class="fa fa-key"></i>
-                                </span>
-                                {{ 'geral.alterarSenha' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirCambistaMovimentacao()">
-                                <span>
-                                    <i class="fa fa-solid fa-dollar"></i>
-                                </span>
-                                {{ 'geral.movimentacao' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <hr/>
-                            <ng-container *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
-                                <label>{{ 'cartoes.cartao' | translate }}</label>
-                                <a (click)="abrirCambistaCartaoConsultar()">
-                                <span>
-                                    <i class="fa fa-solid fa-credit-card"></i>
-                                </span>
-                                    {{ 'cartoes.consultarCartao' | translate }}
-                                    <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                                </a>
-                                <a (click)="abrirCambistaCartaoCriar()">
-                                <span>
-                                    <i class="fa fa-solid fa-credit-card"></i>
-                                </span>
-                                    {{ 'geral.criar' | translate }}
-                                    <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                                </a>
-                                <a (click)="abrirCambistaCartaoListagem()">
-                                <span>
-                                    <i class="fa fa-solid fa-credit-card"></i>
-                                </span>
-                                    {{ 'geral.listagem' | translate }}
-                                    <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                                </a>
-                                <a (click)="abrirCambistaCartaoSaque()">
-                                <span>
-                                    <i class="fa fa-solid fa-credit-card"></i>
-                                </span>
-                                    {{ 'geral.solicitacoesDeSaque' | translate }}
-                                    <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                                </a>
-                                <a (click)="abrirCambistaCartaoRecarga()">
-                                <span>
-                                    <i class="fa fa-solid fa-credit-card"></i>
-                                </span>
-                                    {{ 'geral.recarga' | translate }}
-                                    <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                                </a>
-                                <hr/>
-                            </ng-container>
-                            <label>{{ 'geral.maisOpcoes' | translate }}</label>
-                            <a (click)="abrirCambistaValidacao()">
-                                <span>
-                                    <i class="fa fa-solid fa-check"></i>
-                                </span>
-                                {{ 'geral.validacao' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirCambistaApuracao()">
-                                <span>
-                                    <i class="fa fa-solid fa-table-columns"></i>
-                                </span>
-                                {{ 'geral.apuracao' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirCambistaApostas()">
-                                <span>
-                                    <i class="fa fa-solid fa-table-columns"></i>
-                                </span>
-                                {{ 'geral.apostas' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirCambistaTabela()">
-                                <span>
-                                    <i class="fa fa-solid fa-print"></i>
-                                </span>
-                                {{ 'geral.tabela' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="listPrinters()" *ngIf="appMobile">
-                                <span>
-                                    <i class="fa fa-solid fa-cogs"></i>
-                                </span>
-                                {{ 'geral.configuracoes' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <hr/>
-                            <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
-                               *ngIf="whatsapp">
-                                <span>
-                                    <i class="fa fa-solid fa-circle-question"></i>
-                                </span>
-                                {{ 'geral.ajuda' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="logout()">
-                                <span>
-                                    <i class="fa fa-solid fa-arrow-right-from-bracket"></i>
-                                </span>
-                                {{ 'geral.sair' | translate }}
-                            </a>
-                        </div>
+                </div>
+                <div id="xtremepushNotificationContainer"></div>
+            </div>
+            <div class="btn-promocao" *ngIf="paginaPromocaoHabilitado">
+                <a [routerLink]="['/promocao']" style="font-size: 0px; line-height: 0;" routerLinkActive="active">
+                    <div class="btn-promocao">
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M20 8H4C3.448 8 3 8.448 3 9V11C3 11.552 3.448 12 4 12H20C20.552 12 21 11.552 21 11V9C21 8.448 20.552 8 20 8Z" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 21V8" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15.6956 6.612C14.6176 7.734 12.9206 8 12.0986 8" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12.0993 8C12.0993 8 11.6053 4.884 12.8203 3.62" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15.6963 6.61199C16.4903 5.78599 16.4903 4.44599 15.6963 3.61999C14.9023 2.79399 13.6153 2.79399 12.8213 3.61999" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.30371 6.612C9.38171 7.734 11.0787 8 11.9007 8" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M11.9007 8C11.9007 8 12.3947 4.884 11.1797 3.62" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.30448 6.61199C7.51048 5.78599 7.51048 4.44599 8.30448 3.61999C9.09848 2.79399 10.3855 2.79399 11.1795 3.61999" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19 12V20C19 20.552 18.552 21 18 21H6C5.448 21 5 20.552 5 20V12" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                     </div>
-                    <div class="hide-desktop" *ngIf="isCliente">
-                        <div class="info-profile" *ngIf="isCliente">
-                            <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
-                            <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                </a>
+            </div>
+        </div>
+        <div class="side side-right">
+            <ng-container *ngIf="isLoggedIn; else loggedOut">
+                <div class="deposit-shortcut" *ngIf="modoClienteAtivo && isCliente">
+                    <div *ngIf="isMobile; then depositShortCutMobile else depositShortCutDesktop"></div>
+                    <ng-template #depositShortCutDesktop>
+                        <a class="btn btn-custom mr-4" [routerLink]="['/clientes/deposito']">
+                            {{'geral.depositar' | translate | uppercase}}
+                        </a>
+                    </ng-template>
+                    <ng-template #depositShortCutMobile>
+                        <a class="btn btn-custom mr-4" (click)="abrirDepositos()" [ngStyle]="{'height': '32px'}">
+                            {{'geral.depositar' | translate | uppercase}}
+                        </a>
+                    </ng-template>
+                </div>
+                <div class="menu-conta" ngbDropdown #dropDownConta="ngbDropdown">
+                    <a (click)="getPosicaoFinanceira()" class="nav-link menu-perfil" id="navbarDropdown"
+                       role="button" ngbDropdownToggle>
+                        <div class="user-card">
+                            <span class="nome-usuario">{{ usuario.nome | titlecase }}</span>
+                            <span class="saldo-usuario">
+                                <i class="fa olhinho" style="margin-right: 8px;" (click)="alternarExibirSaldo($event)"
+                                   [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
+                                <span id="olhinho"
+                                      *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldoMaisBonus | currency }}</span>
+                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull; </ng-template>
+                            </span>
                         </div>
-
-                        <div class="saldos-container">
-                            <div class="saldos-item">
-                                <span class="">{{ 'geral.saldo' | translate }}</span>
-                                <span>
-                                    <i class="fa olhinho" style="margin-right: 8px;"
-                                       (click)="alternarExibirSaldo($event)"
-                                       [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
+                        <div class="user-icon">
+                            <span><i class="fa-solid fa-user"></i></span>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu-right dropdown-menu-custom" aria-labelledby="navbarDropdown" ngbDropdownMenu>
+                        <a class="btnClose hide-desktop" aria-label="Close" (click)="dropDownConta.close()">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                        <div class="hide-desktop" *ngIf="!isCliente">
+                            <div class="info-profile">
+                                <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
+                                <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                            </div>
+                            <div class="saldos-container">
+                                <div class="saldos-item">
+                                    <span class="">{{ 'geral.credito' | translate }}</span>
+                                    <span>
+                                        <i class="fa olhinho" style="margin-right: 8px;"
+                                           (click)="alternarExibirSaldo($event)"
+                                           [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
+                                        <span class="dados"
+                                              *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.credito | currency }}</span>
+                                        <ng-template #elseSaldoOculto>
+                                            <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
+                                        </ng-template>
+                                    </span>
+                                </div>
+                                <div style="align-items: center; justify-content: center; display: flex;">
+                                    <i class="separador"></i>
+                                </div>
+                                <div class="saldos-item">
+                                    <span class="">{{ 'geral.saldo' | translate }}</span>
                                     <span class="dados"
                                           *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
                                     <ng-template #elseSaldoOculto>
                                         <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
                                     </ng-template>
-                                </span>
+                                </div>
                             </div>
-                            <div style="align-items: center; justify-content: center; display: flex;">
-                                <i class="separador"></i>
+                            <div class="d-flex justify-content-around" *ngIf="enabledBettorPix">
+                                <a class="dropdown-btn w-150" (click)="abrirDepositosCambista()">
+                                    {{ 'geral.liberarCredito' | translate }}
+                                </a>
                             </div>
-                            <div class="saldos-item">
-                                <span class="">{{ 'geral.bonus' | translate }}</span>
-                                <span class="dados"
-                                      *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.bonus | currency }}</span>
-                                <ng-template #elseSaldoOculto>
-                                    <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
-                                </ng-template>
+                            <div class="nav">
+                                <hr/>
+                                <label>{{ 'geral.minhaConta' | translate }}</label>
+                                <a (click)="abrirCambistaDashboard()">
+                                    <span>
+                                        <i class="fa fa-dashboard"></i>
+                                    </span>
+                                    {{ 'geral.dashboard' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirAlterarSenha()">
+                                    <span>
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                    {{ 'geral.alterarSenha' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirCambistaMovimentacao()">
+                                    <span>
+                                        <i class="fa fa-solid fa-dollar"></i>
+                                    </span>
+                                    {{ 'geral.movimentacao' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <hr/>
+                                <ng-container *ngIf="cartaoApostaHabilitado && (!isLoggedIn || !isCliente)">
+                                    <label>{{ 'cartoes.cartao' | translate }}</label>
+                                    <a (click)="abrirCambistaCartaoConsultar()">
+                                    <span>
+                                        <i class="fa fa-solid fa-credit-card"></i>
+                                    </span>
+                                        {{ 'cartoes.consultarCartao' | translate }}
+                                        <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                    </a>
+                                    <a (click)="abrirCambistaCartaoCriar()">
+                                    <span>
+                                        <i class="fa fa-solid fa-credit-card"></i>
+                                    </span>
+                                        {{ 'geral.criar' | translate }}
+                                        <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                    </a>
+                                    <a (click)="abrirCambistaCartaoListagem()">
+                                    <span>
+                                        <i class="fa fa-solid fa-credit-card"></i>
+                                    </span>
+                                        {{ 'geral.listagem' | translate }}
+                                        <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                    </a>
+                                    <a (click)="abrirCambistaCartaoSaque()">
+                                    <span>
+                                        <i class="fa fa-solid fa-credit-card"></i>
+                                    </span>
+                                        {{ 'geral.solicitacoesDeSaque' | translate }}
+                                        <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                    </a>
+                                    <a (click)="abrirCambistaCartaoRecarga()">
+                                    <span>
+                                        <i class="fa fa-solid fa-credit-card"></i>
+                                    </span>
+                                        {{ 'geral.recarga' | translate }}
+                                        <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                    </a>
+                                    <hr/>
+                                </ng-container>
+                                <label>{{ 'geral.maisOpcoes' | translate }}</label>
+                                <a (click)="abrirCambistaValidacao()">
+                                    <span>
+                                        <i class="fa fa-solid fa-check"></i>
+                                    </span>
+                                    {{ 'geral.validacao' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirCambistaApuracao()">
+                                    <span>
+                                        <i class="fa fa-solid fa-table-columns"></i>
+                                    </span>
+                                    {{ 'geral.apuracao' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirCambistaApostas()">
+                                    <span>
+                                        <i class="fa fa-solid fa-table-columns"></i>
+                                    </span>
+                                    {{ 'geral.apostas' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirCambistaTabela()">
+                                    <span>
+                                        <i class="fa fa-solid fa-print"></i>
+                                    </span>
+                                    {{ 'geral.tabela' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="listPrinters()" *ngIf="appMobile">
+                                    <span>
+                                        <i class="fa fa-solid fa-cogs"></i>
+                                    </span>
+                                    {{ 'geral.configuracoes' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <hr/>
+                                <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
+                                   *ngIf="whatsapp">
+                                    <span>
+                                        <i class="fa fa-solid fa-circle-question"></i>
+                                    </span>
+                                    {{ 'geral.ajuda' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="logout()">
+                                    <span>
+                                        <i class="fa fa-solid fa-arrow-right-from-bracket"></i>
+                                    </span>
+                                    {{ 'geral.sair' | translate }}
+                                </a>
                             </div>
                         </div>
-
-                        <div class="d-flex justify-content-around">
-                            <a class="dropdown-btn w-150" (click)="abrirDepositos()">
-                                {{ 'geral.depositar' | translate }}
-                            </a>
-                            <a class="dropdown-btn w-150" (click)="abrirSaques()">
-                                {{ 'geral.sacar' | translate }}
-                            </a>
-                        </div>
-
-                        <div class="nav">
-                            <hr/>
-                            <label>{{ 'geral.minhaConta' | translate }}</label>
-                            <a (click)="abrirEditarPerfil()">
-                                <span>
-                                    <i class="fa fa-solid fa-user"></i>
-                                </span>
-                                {{ 'geral.editarPerfil' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirAlterarSenha()">
-                                <span>
-                                    <i class="fa fa-key"></i>
-                                </span>
-                                {{ 'geral.alterarSenha' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirConfiguracoes()">
-                                <span>
-                                     <i class="fa fa-cogs"></i>
-                                </span>
-                                {{ 'geral.configuracoes' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <hr/>
-                            <label>{{ 'geral.maisOpcoes' | translate }}</label>
-                            <a (click)="abrirFinanceiro()">
-                                <span>
-                                    <i class="fa fa-solid fa-dollar"></i>
-                                </span>
-                                {{ 'geral.financeiro' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirCarteira()">
+                        <div class="hide-desktop" *ngIf="isCliente">
+                            <div class="info-profile" *ngIf="isCliente">
+                                <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
+                                <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                            </div>
+                            <div class="saldos-container">
+                                <div class="saldos-item">
+                                    <span class="">{{ 'geral.saldo' | translate }}</span>
+                                    <span>
+                                        <i class="fa olhinho" style="margin-right: 8px;"
+                                           (click)="alternarExibirSaldo($event)"
+                                           [ngClass]="{'fa-eye-slash': mostrarSaldo,'fa-eye': !mostrarSaldo}"></i>
+                                        <span class="dados"
+                                              *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
+                                        <ng-template #elseSaldoOculto>
+                                            <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
+                                        </ng-template>
+                                    </span>
+                                </div>
+                                <div style="align-items: center; justify-content: center; display: flex;">
+                                    <i class="separador"></i>
+                                </div>
+                                <div class="saldos-item">
+                                    <span class="">{{ 'geral.bonus' | translate }}</span>
+                                    <span class="dados"
+                                          *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.bonus | currency }}</span>
+                                    <ng-template #elseSaldoOculto>
+                                        <span class="dados"> R$ &bull; &bull; &bull; &bull; </span>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <a class="dropdown-btn w-150" (click)="abrirDepositos()">
+                                    {{ 'geral.depositar' | translate }}
+                                </a>
+                                <a class="dropdown-btn w-150" (click)="abrirSaques()">
+                                    {{ 'geral.sacar' | translate }}
+                                </a>
+                            </div>
+                            <div class="nav">
+                                <hr/>
+                                <label>{{ 'geral.minhaConta' | translate }}</label>
+                                <a (click)="abrirEditarPerfil()">
+                                    <span>
+                                        <i class="fa fa-solid fa-user"></i>
+                                    </span>
+                                    {{ 'geral.editarPerfil' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirAlterarSenha()">
+                                    <span>
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                    {{ 'geral.alterarSenha' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirConfiguracoes()">
+                                    <span>
+                                         <i class="fa fa-cogs"></i>
+                                    </span>
+                                    {{ 'geral.configuracoes' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <hr/>
+                                <label>{{ 'geral.maisOpcoes' | translate }}</label>
+                                <a (click)="abrirFinanceiro()">
+                                    <span>
+                                        <i class="fa fa-solid fa-dollar"></i>
+                                    </span>
+                                    {{ 'geral.financeiro' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirCarteira()">
                                 <span>
                                  <i class="material-symbols-outlined">account_balance_wallet</i>
                                 </span>
-                                {{ 'geral.carteira' | translate }}
-                                <span class="arrow-nav">
+                                    {{ 'geral.carteira' | translate }}
+                                    <span class="arrow-nav">
                                     <i class="fa-solid fa-angle-right"></i>
                                 </span>
-                            </a>
-                            <a (click)="abrirSaques()">
-                                <span>
-                                    <i class="fa fa-solid fa-money-bill-transfer"></i>
-                                </span>
-                                {{ 'geral.saque' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirDepositos()">
-                                <span>
-                                    <i class="fa fa-solid fa-money-bill-transfer"></i>
-                                </span>
-                                {{ 'geral.deposito' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="openTransactionHistory()">
-                                <span>
-                                    <i class="fa fa-solid fa-money-bill-transfer"></i>
-                                </span>
-                                {{ 'geral.transactionHistory' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirApostas()">
-                                <span>
-                                    <i class="fa fa-solid fa-table-columns"></i>
-                                </span>
-                                {{ 'geral.apostas' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirRollovers()">
-                                <span>
-                                    <i class="fa fa-solid fa-gift"></i>
-                                </span>
-                                {{ 'geral.promocoes' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="abrirIndiqueGanhe()" *ngIf="isCliente && indiqueGanheHabilitado">
-                                <span>
-                                    <i class="fa fa-solid fa-gift"></i>
-                                </span>
-                                {{ 'indique_ganhe.indiqueGanhe' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="listPrinters()" *ngIf="appMobile">
-                                <span>
+                                </a>
+                                <a (click)="abrirSaques()">
+                                    <span>
+                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                    </span>
+                                    {{ 'geral.saque' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirDepositos()">
+                                    <span>
+                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                    </span>
+                                    {{ 'geral.deposito' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="openTransactionHistory()">
+                                    <span>
+                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                    </span>
+                                    {{ 'geral.transactionHistory' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirApostas()">
+                                    <span>
+                                        <i class="fa fa-solid fa-table-columns"></i>
+                                    </span>
+                                    {{ 'geral.apostas' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirRollovers()">
+                                    <span>
+                                        <i class="fa fa-solid fa-gift"></i>
+                                    </span>
+                                    {{ 'geral.promocoes' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirIndiqueGanhe()" *ngIf="isCliente && indiqueGanheHabilitado">
+                                    <span>
+                                        <i class="fa fa-solid fa-gift"></i>
+                                    </span>
+                                    {{ 'indique_ganhe.indiqueGanhe' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="listPrinters()" *ngIf="appMobile">
+                                    <span>
+                                        <i class="fa fa-solid fa-cogs"></i>
+                                    </span>
+                                    {{ 'geral.configuracoes' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <hr/>
+                                <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
+                                   *ngIf="whatsapp">
+                                    <span>
+                                        <i class="fa fa-solid fa-circle-question"></i>
+                                    </span>
+                                    {{ 'geral.ajuda' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="logout()">
+                                    <span>
+                                        <i class="fa fa-solid fa-arrow-right-from-bracket"></i>
+                                    </span>
+                                    {{ 'geral.sair' | translate }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hide-mobile">
+                            <div class="info-profile" *ngIf="isCliente">
+                                <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
+                                <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                            </div>
+                            <div class="info-profile" *ngIf="!isCliente">
+                                <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
+                                <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
+                            </div>
+                            <div class="saldos-container">
+                                <div class="saldos-item" *ngIf="!isCliente">
+                                    <span class="">{{ 'geral.credito' | translate }}</span>
+                                    <span class="dados"
+                                          *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.credito | currency }}</span>
+                                    <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull;</ng-template>
+                                </div>
+                                <div *ngIf="!isCliente"
+                                     style="align-items: center; justify-content: center; display: flex;">
+                                    <i class="separador"></i>
+                                </div>
+                                <div class="saldos-item">
+                                    <span class="">{{ 'geral.saldo' | translate }}</span>
+                                    <span class="dados"
+                                          *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
+                                    <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull;</ng-template>
+                                </div>
+                                <div *ngIf="isCliente" style="align-items: center; justify-content: center; display: flex;">
+                                    <i class="separador"></i>
+                                </div>
+                                <div class="saldos-item"
+                                     *ngIf="isCliente">
+                                    <span class="">{{ 'geral.bonus' | translate }}</span>
+                                    <span class="dados"
+                                          *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.bonus | currency }}</span>
+                                    <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull;</ng-template>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <a class="dropdown-btn w-130" [routerLink]="['/clientes/deposito']" *ngIf="isCliente">
+                                    {{ 'geral.depositar' | translate }}
+                                </a>
+                                <a class="dropdown-btn w-130" [routerLink]="['/clientes/saque']" *ngIf="isCliente">
+                                    {{ 'geral.sacar' | translate }}
+                                </a>
+                                <a class="dropdown-btn w-130" [routerLink]="['/cambistas/deposito']"
+                                   *ngIf="!isCliente && enabledBettorPix">
+                                    {{ 'geral.liberarCredito' | translate }}
+                                </a>
+                            </div>
+                            <div class="menu-divider mt-4"></div>
+                            <div class="d-flex flex-wrap container-menu">
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/perfil']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="isCliente">
+                                    <i class="fa fa-user mb-2"></i>
+                                    {{ 'geral.minhaConta' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/financeiro']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="isCliente">
+                                    <i class="fa fa-solid fa-dollar mb-2"></i>
+                                    {{ 'geral.financeiro' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['clientes/carteira']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="isCliente">
+                                    <i class="material-symbols-outlined">account_balance_wallet</i>
+                                    {{ 'geral.carteira' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/apostas']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="isCliente">
+                                    <i class="fa fa-solid fa-table-columns mb-2"></i>
+                                    {{ 'geral.apostas' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/rollover']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="isCliente">
+                                    <i class="fa fa-solid fa-gift mb-2"></i>
+                                    {{ 'geral.bonus' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/rodada-gratis']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="isCliente">
+                                    <i class="fa fa-solid fa-gift mb-2"></i>
+                                    <span
+                                        style="text-align: center; white-space: break-spaces; line-height: 14px;">{{ 'rodada_gratis.rodadaGratis' | translate }}</span>
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/indique-ganhe']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="isCliente && indiqueGanheHabilitado">
+                                    <i class="fa fa-solid fa-gift mb-2"></i>
+                                    <span
+                                        style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/configuracoes']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="isCliente">
+                                    <i class="fa fa-solid fa-cogs mb-2"></i>
+                                    {{ 'geral.configuracoes' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/alterar-senha']"
+                                   routerLinkActive="router-link-active" *ngIf="!isCliente">
+                                    <i class="fa fa-key mb-2"></i> {{ 'geral.alterarSenha' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/dashboard']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="!isCliente">
+                                    <i class="fa fa-dashboard mb-2"></i>
+                                    {{ 'geral.dashboard' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/validar-aposta']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="!isCliente">
+                                    <i class="fa fa-solid fa-check mb-2"></i>
+                                    {{ 'geral.validacao' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/apuracao']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="!isCliente">
+                                    <i class="fa fa-solid fa-table-columns mb-2"></i>
+                                    {{ 'geral.apuracao' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/apostas']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="!isCliente">
+                                    <i class="fa fa-solid fa-table-columns mb-2"></i>
+                                    {{ 'geral.apostas' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/tabela']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="!isCliente">
+                                    <i class="fa fa-solid fa-print mb-2"></i>
+                                    {{ 'geral.tabela' | translate }}
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/cartoes']"
+                                   routerLinkActive="router-link-active"
+                                   *ngIf="!isCliente && cartaoApostaHabilitado">
+                                    <i class="fa fa-solid fa-credit-card mb-2"></i>
+                                    {{ 'cartoes.cartao' | translate }}
+                                </a>
+                                <!--                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/financeiro']"
+                                                            routerLinkActive="router-link-active"
+                                                            *ngIf="!isCliente">
+                                                                <i class="fa fa-solid fa-dollar mb-2"></i>
+                                                                {{'geral.financeiro' | translate}}
+                                                            </a>-->
+                                <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
                                     <i class="fa fa-solid fa-cogs"></i>
-                                </span>
-                                {{ 'geral.configuracoes' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <hr/>
-                            <a target="_blank" href="https://api.whatsapp.com/send?phone=55{{whatsapp}}"
-                               *ngIf="whatsapp">
-                                <span>
-                                    <i class="fa fa-solid fa-circle-question"></i>
-                                </span>
-                                {{ 'geral.ajuda' | translate }}
-                                <span class="arrow-nav">
-                                    <i class="fa-solid fa-angle-right"></i>
-                                </span>
-                            </a>
-                            <a (click)="logout()">
-                                <span>
-                                    <i class="fa fa-solid fa-arrow-right-from-bracket"></i>
-                                </span>
-                                {{ 'geral.sair' | translate }}
-                            </a>
-                        </div>
-                    </div>
-                    <div class="hide-mobile">
-                        <div class="info-profile" *ngIf="isCliente">
-                            <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
-                            <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
-                        </div>
-                        <div class="info-profile" *ngIf="!isCliente">
-                            <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
-                            <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
-                        </div>
-
-                        <div class="saldos-container">
-                            <div class="saldos-item" *ngIf="!isCliente">
-                                <span class="">{{ 'geral.credito' | translate }}</span>
-                                <span class="dados"
-                                      *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.credito | currency }}</span>
-                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull;</ng-template>
+                                    {{ 'geral.configuracoes' | translate }}
+                                </a>
                             </div>
-                            <div *ngIf="!isCliente"
-                                 style="align-items: center; justify-content: center; display: flex;">
-                                <i class="separador"></i>
+                            <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
+                                <i class="fa fa-sign-out mr-2"></i>
+                                <span class="dados">{{ 'geral.sair' | translate }}</span>
+                            </a>
+                            <div *ngIf="appMobile" class="app-version-info">
+                                App {{ 'geral.versao' | translate }} 2.0.{{ appVersion }}
                             </div>
-                            <div class="saldos-item">
-                                <span class="">{{ 'geral.saldo' | translate }}</span>
-                                <span class="dados"
-                                      *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.saldo | currency }}</span>
-                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull;</ng-template>
-                            </div>
-                            <div *ngIf="isCliente" style="align-items: center; justify-content: center; display: flex;">
-                                <i class="separador"></i>
-                            </div>
-                            <div class="saldos-item"
-                                 *ngIf="isCliente">
-                                <span class="">{{ 'geral.bonus' | translate }}</span>
-                                <span class="dados"
-                                      *ngIf="mostrarSaldo; else elseSaldoOculto">{{ posicaoFinanceira.bonus | currency }}</span>
-                                <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull;</ng-template>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-around">
-                            <a class="dropdown-btn w-130" [routerLink]="['clientes/deposito']" *ngIf="isCliente">
-                                {{ 'geral.depositar' | translate }}
-                            </a>
-                            <a class="dropdown-btn w-130" [routerLink]="['clientes/saque']" *ngIf="isCliente">
-                                {{ 'geral.sacar' | translate }}
-                            </a>
-                            <a class="dropdown-btn w-130" [routerLink]="['cambistas/deposito']"
-                               *ngIf="!isCliente && enabledBettorPix">
-                                {{ 'geral.liberarCredito' | translate }}
-                            </a>
-                        </div>
-
-                        <div class="menu-divider mt-4"></div>
-                        <div class="d-flex flex-wrap container-menu">
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/perfil']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="isCliente">
-                                <i class="fa fa-user mb-2"></i>
-                                {{ 'geral.minhaConta' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/financeiro']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="isCliente">
-                                <i class="fa fa-solid fa-dollar mb-2"></i>
-                                {{ 'geral.financeiro' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/carteira']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="isCliente">
-                                <i class="material-symbols-outlined">account_balance_wallet</i>
-                                {{ 'geral.carteira' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/apostas']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="isCliente">
-                                <i class="fa fa-solid fa-table-columns mb-2"></i>
-                                {{ 'geral.apostas' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/rollover']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="isCliente">
-                                <i class="fa fa-solid fa-gift mb-2"></i>
-                                {{ 'geral.bonus' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/rodada-gratis']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="isCliente">
-                                <i class="fa fa-solid fa-gift mb-2"></i>
-                                <span
-                                    style="text-align: center; white-space: break-spaces; line-height: 14px;">{{ 'geral.rodadaGratis' | translate }}</span>
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/indique-ganhe']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="isCliente && indiqueGanheHabilitado">
-                                <i class="fa fa-solid fa-gift mb-2"></i>
-                                <span
-                                    style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['clientes/configuracoes']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="isCliente">
-                                <i class="fa fa-solid fa-cogs mb-2"></i>
-                                {{ 'geral.configuracoes' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['alterar-senha']"
-                               routerLinkActive="router-link-active" *ngIf="!isCliente">
-                                <i class="fa fa-key mb-2"></i> {{ 'geral.alterarSenha' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['/cambistas/dashboard']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="!isCliente">
-                                <i class="fa fa-dashboard mb-2"></i>
-                                {{ 'geral.dashboard' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['/validar-aposta']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="!isCliente">
-                                <i class="fa fa-solid fa-check mb-2"></i>
-                                {{ 'geral.validacao' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/apuracao']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="!isCliente">
-                                <i class="fa fa-solid fa-table-columns mb-2"></i>
-                                {{ 'geral.apuracao' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/apostas']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="!isCliente">
-                                <i class="fa fa-solid fa-table-columns mb-2"></i>
-                                {{ 'geral.apostas' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/tabela']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="!isCliente">
-                                <i class="fa fa-solid fa-print mb-2"></i>
-                                {{ 'geral.tabela' | translate }}
-                            </a>
-                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/cartoes']"
-                               routerLinkActive="router-link-active"
-                               *ngIf="!isCliente && cartaoApostaHabilitado">
-                                <i class="fa fa-solid fa-credit-card mb-2"></i>
-                                {{ 'cartoes.cartao' | translate }}
-                            </a>
-                            <!--                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/financeiro']"
-                                                        routerLinkActive="router-link-active"
-                                                        *ngIf="!isCliente">
-                                                            <i class="fa fa-solid fa-dollar mb-2"></i>
-                                                            {{'geral.financeiro' | translate}}
-                                                        </a>-->
-                            <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
-                                <i class="fa fa-solid fa-cogs"></i>
-                                {{ 'geral.configuracoes' | translate }}
-                            </a>
-                        </div>
-
-                        <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
-                            <i class="fa fa-sign-out mr-2"></i>
-                            <span class="dados">{{ 'geral.sair' | translate }}</span>
-                        </a>
-                        <div *ngIf="appMobile" class="app-version-info">
-                            App {{ 'geral.versao' | translate }} 2.0.{{ appVersion }}
                         </div>
                     </div>
                 </div>
-            </div>
-        </ng-container>
-
-        <ng-template #loggedOut>
-            <div class="menu-conta dropdown">
-                <a class="btn btn-custom w-130 mr-4 btn-register" (click)="abrirCadastro()" *ngIf="modoClienteAtivo">
-                    {{ 'geral.registreSe' | translate | uppercase }}
-                </a>
-                <a (click)="abrirLogin()" class="botao-entrar nav-link btn btn-custom2 w-130" role="button">
-                    {{ 'geral.entrar' | translate | uppercase }}
-                </a>
-            </div>
-        </ng-template>
-
-        <div class="btn-group language-dropdown hide-mobile" ngbDropdown>
-            <button class="btn" type="button" id="dropdownLanguage" ngbDropdownToggle>
-                <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : (linguagemSelecionada === 'es' ? 'flag-icon-es' : 'flag-icon-us')}} flag-icon-squared"></span>
-            </button>
-            <div class="language-dropdown-menu position-absolute" aria-labelledby="dropdownLanguage" ngbDropdownMenu>
-                <a class="m-2 p-0 dropdown-item" (click)="useLanguage('pt')">
-                    <span class="flag-icon flag-icon-br flag-icon-squared"></span>
-                    {{ 'geral.portugues' | translate }}
-                </a>
-                <a class="m-2 p-0 dropdown-item" (click)="useLanguage('en')">
-                    <span class="flag-icon flag-icon-us flag-icon-squared"></span>
-                    {{ 'geral.ingles' | translate }}
-                </a>
-                <a class="m-2 p-0 dropdown-item" (click)="useLanguage('es')">
-                    <span class="flag-icon flag-icon-es flag-icon-squared"></span>
-                    {{ 'geral.espanhol' | translate }}
-                </a>
+            </ng-container>
+            <ng-template #loggedOut>
+                <div class="menu-conta dropdown">
+                    <a class="btn btn-custom w-130 mr-4 btn-register" (click)="abrirCadastro()" *ngIf="modoClienteAtivo">
+                        {{ 'geral.registreSe' | translate | uppercase }}
+                    </a>
+                    <a (click)="abrirLogin()" class="botao-entrar nav-link btn btn-custom2 w-130" role="button">
+                        {{ 'geral.entrar' | translate | uppercase }}
+                    </a>
+                </div>
+            </ng-template>
+            <div class="btn-group language-dropdown hide-mobile" ngbDropdown>
+                <button class="btn" type="button" id="dropdownLanguage" ngbDropdownToggle>
+                    <span class="flag-icon {{linguagemSelecionada === 'pt' ? 'flag-icon-br' : (linguagemSelecionada === 'es' ? 'flag-icon-es' : 'flag-icon-us')}} flag-icon-squared"></span>
+                </button>
+                <div class="language-dropdown-menu position-absolute" aria-labelledby="dropdownLanguage" ngbDropdownMenu>
+                    <a class="m-2 p-0 dropdown-item" (click)="useLanguage('pt')">
+                        <span class="flag-icon flag-icon-br flag-icon-squared"></span>
+                        {{ 'geral.portugues' | translate }}
+                    </a>
+                    <a class="m-2 p-0 dropdown-item" (click)="useLanguage('en')">
+                        <span class="flag-icon flag-icon-us flag-icon-squared"></span>
+                        {{ 'geral.ingles' | translate }}
+                    </a>
+                    <a class="m-2 p-0 dropdown-item" (click)="useLanguage('es')">
+                        <span class="flag-icon flag-icon-es flag-icon-squared"></span>
+                        {{ 'geral.espanhol' | translate }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -693,18 +727,18 @@
             </a>
         </div>
         <div class="category" *ngIf="betbyAtivo">
-            <a [routerLink]="['/sports/live']" routerLinkActive="active">
+            <a [routerLink]="['/sports']" [queryParams]="{'bt-path': '/live'}" routerLinkActive="active" [class.active]="sportsLiveIsActive">
                 <span>{{'menu.aoVivo' | translate}}</span>
             </a>
         </div>
         <div class="category" *ngIf="betbyAtivo">
-            <a [routerLink]="['/sports']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [class.active]="isSportsActive()">
+            <a [routerLink]="['/sports']" routerLinkActive="active" [queryParams]="{'bt-path': '/'}" [routerLinkActiveOptions]="{ exact: true }" [class.active]="sportsIsActive">
                 <span>{{'menu.esportes' | translate}}</span>
             </a>
         </div>
         <ng-container *ngIf="isLoggedIn">
             <div style="cursor: pointer" class="category" *ngIf="parlaybayAtivo">
-                <a [routerLink]="['parlaybay']" routerLinkActive="active">
+                <a [routerLink]="['/parlaybay']" routerLinkActive="active">
                     <span>PARLAYBAY</span>
                 </a>
             </div>
@@ -750,11 +784,6 @@
         <div class="category" *ngIf="(loteriasHabilitado && (seninhaAtiva || quininhaAtiva)) || loteriaPopularAtiva">
             <a [routerLink]="['/loterias']" routerLinkActive="active">
                 <span>{{ 'menu.loteria' | translate }}</span>
-            </a>
-        </div>
-        <div class="category" *ngIf="paginaPromocaoHabilitado">
-            <a [routerLink]="['/promocao']" routerLinkActive="active">
-                <span>{{ 'menu.promocao' | translate }}</span>
             </a>
         </div>
     </div>
