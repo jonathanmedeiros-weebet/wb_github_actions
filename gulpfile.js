@@ -2878,4 +2878,13 @@ gulp.task('sortebet.wee.bet', function (done) {
     });
 });
 
+gulp.task('goldeplaca.online', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "goldeplaca.online",
+        banca: "GOL DE PLACA",
+        styles: "",
+    });
+});
+
 
