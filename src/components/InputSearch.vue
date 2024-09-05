@@ -5,12 +5,12 @@
       class="input-search__field"
       type="text"
       :placeholder="placeholder"
-      @input="handleInput"
+      v-model="inputValue"
       @focus="handleFocus"
       @blur="handleBlur"
     />
     <div class="input-search__icon--right">
-      <IconClose :size="14" @click.native="handleClear"/>
+      <IconClose :size="14" @click="handleClear"/>
     </div>
   </div>
 </template>
@@ -38,41 +38,42 @@ export default {
   data() {
     return {
       isFocused: false,
+      inputValue: this.value
     };
   },
+  watch: {
+    value(newValue) {
+      this.inputValue = newValue;
+    }
+  },
   methods: {
-    handleInput(event) {
-      this.$emit('input', event.target.value)
-    },
     handleClear() {
-      this.$emit('clear', '')
+      this.inputValue = '';
+      this.$emit('input', this.inputValue);
     },
-    handleFocus(){
+    handleFocus() {
       this.isFocused = true;
     },
-    handleBlur(){
+    handleBlur() {
       this.isFocused = false;
-    },
-  },
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .input-search {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   background-color: #181818;
   background-color: var(--color-background-input);
   border: 2px solid #181818;
-
   box-sizing: border-box;
   border-radius: 50px;
   padding: 0 16px;
   width: 100%;
-  
+
   &--focused {
     border-color: #0be58e;
     border-color: var(--color-primary);
@@ -101,6 +102,7 @@ export default {
     outline: none;
     margin-left: 4px;
   }
+
   &__field:hover {
     background: transparent;
     border: 0;
