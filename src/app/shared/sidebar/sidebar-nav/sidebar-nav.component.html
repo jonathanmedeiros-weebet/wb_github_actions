@@ -65,7 +65,7 @@
                         <li *ngFor="let campeonato of regiao.campeonatos"
                             (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
                             <a>
-                                {{campeonato.nome.replace(regiao._id + ': ', '') | uppercase}}
+                                {{(campeonato.alias ? campeonato.alias : campeonato.nome).replace(regiao._id + ': ', '') | uppercase}}
                             </a>
                         </li>
                     </ul>

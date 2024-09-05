@@ -176,7 +176,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
 
                                 this.campeonatos = this.campeonatos.filter(campeonato => {
                                     const jogosAtivos = campeonato.jogos.filter(jogo => !this.jogosBloqueados.includes(jogo.event_id));
-                                    if (jogosAtivos.length > 0) {
+                                    const jogosComOdds = campeonato.jogos.filter(jogo => jogo.cotacoes.length > 0);
+                                    if (jogosAtivos.length > 0 && jogosComOdds.length > 0) {
                                         return campeonato;
                                     }
                                 });

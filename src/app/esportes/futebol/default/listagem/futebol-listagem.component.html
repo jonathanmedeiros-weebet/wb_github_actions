@@ -203,7 +203,7 @@
                 <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span class="column-left">
                         <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
-                        <span class="campeonato-nome">{{campeonato.nome | uppercase}}</span>
+                        <span class="campeonato-nome">{{(campeonato.alias ? campeonato.alias : campeonato.nome) | uppercase}}</span>
                     </span>
                     <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">
                         <i class="fa fa-angle-up"></i>
