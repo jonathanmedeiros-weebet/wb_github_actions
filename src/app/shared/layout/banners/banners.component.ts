@@ -66,7 +66,6 @@ export class BannersComponent implements OnInit {
             this.showLoadingIndicator = false;      
             this.cd.markForCheck();    
         });
-        console.log(this.banners);
     }
 
     loadBannerModal() {
@@ -86,13 +85,14 @@ export class BannersComponent implements OnInit {
                     this.bannersModal.push(banner);
                 }
             }
+
             if (this.bannersModal.length > 1) {
                 this.showNavigationArrowsInModal = true;
             }
+            
             this.showLoadingIndicator = false;
             this.cd.markForCheck();
         });
-        console.log(this.banners);
     }
 
     handleError(msg) {
