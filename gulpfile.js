@@ -10,6 +10,7 @@ function tasks(done, config) {
     }
 
     const defaultDescription = `${config.banca} é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website ${config.banca}, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. ${config.banca} apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.`;
+    const defaultAndroidVersion = "7";
 
     gulp.src(['base-build/config.ts'])
         .pipe(replace('[HOST]', 'central.' + (config.dominioTemp ?? config.host)))
@@ -23,6 +24,7 @@ function tasks(done, config) {
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[BANCA]', config.banca))
         .pipe(replace('[DESCRIPTION]', config.description ?? defaultDescription))
+        .pipe(replace('[ANDROID_VERSION]', config.android_version ?? defaultAndroidVersion))
         .pipe(replace('[SCRIPTS]', typeof config.scripts == "undefined" ? "" : config.scripts))
         .pipe(replace('[GOOGLE_TAG_PART_1]', typeof config.google_tag_part_1 == "undefined" ? "" : config.google_tag_part_1))
         .pipe(replace('[GOOGLE_TAG_PART_2]', typeof config.google_tag_part_2 == "undefined" ? "" : config.google_tag_part_2))
