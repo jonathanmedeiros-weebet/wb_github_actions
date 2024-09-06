@@ -5,7 +5,8 @@
       class="input-search__field"
       type="text"
       :placeholder="placeholder"
-      v-model="inputValue"
+      :value="inputValue"  
+      @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur"
     />
@@ -38,7 +39,7 @@ export default {
   data() {
     return {
       isFocused: false,
-      inputValue: this.value
+      inputValue: this.value, 
     };
   },
   watch: {
@@ -48,16 +49,20 @@ export default {
   },
   methods: {
     handleClear() {
-      this.inputValue = '';
-      this.$emit('input', this.inputValue);
+      this.inputValue = '';  
+      this.$emit('input', '');  
+    },
+    handleInput(event) {
+      this.inputValue = event.target.value;  
+      this.$emit('input', event.target.value);  
     },
     handleFocus() {
       this.isFocused = true;
     },
     handleBlur() {
       this.isFocused = false;
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -73,7 +78,7 @@ export default {
   border-radius: 50px;
   padding: 0 16px;
   width: 100%;
-
+  
   &--focused {
     border-color: #0be58e;
     border-color: var(--color-primary);
@@ -87,6 +92,8 @@ export default {
       width: 16px;
       display: flex;
       justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
   }
 
@@ -102,7 +109,6 @@ export default {
     outline: none;
     margin-left: 4px;
   }
-
   &__field:hover {
     background: transparent;
     border: 0;
