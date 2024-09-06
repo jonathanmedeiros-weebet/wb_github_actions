@@ -304,7 +304,8 @@
         "priv8bet.com": "gulp priv8bet.com",
         "betinha.com": "gulp betinha.com",
         "sortebet.wee.bet": "gulp sortebet.wee.bet",
-        "goldeplaca.online": "gulp goldeplaca.online"
+        "goldeplaca.online": "gulp goldeplaca.online",
+        "puskasbet.com.br": "gulp puskasbet.com.br"
     },
     "private": true,
     "dependencies": {
