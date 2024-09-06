@@ -2869,4 +2869,11 @@ gulp.task('goldeplaca.online', function (done) {
     });
 });
 
-
+gulp.task('puskasbet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "puskasbet.com.br",
+        banca: "PUSKAS BET",
+        styles: "",
+    });
+});
