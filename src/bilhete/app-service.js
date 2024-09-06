@@ -1,4 +1,3 @@
-const FOOTBALL_ID = 6046;
 const HERMES = 'https://hermes.wee.bet/v1';
 
 async function getParams() {
@@ -170,7 +169,9 @@ function filterLiveItems(ticketItems, itemsWithResults) {
     ticketItems.forEach((item) => {
         var itemTimestamp = new Date(item.jogo_horario.replace(/-/g, "/")).getTime();
 
-        if (item.sport === FOOTBALL_ID && this.checkMatchPeriod(itemTimestamp)) {
+        const footballId = 6046;
+
+        if (item.sport === footballId && this.checkMatchPeriod(itemTimestamp)) {
             if (!itemsWithResults.includes(item.jogo_api_id)) {
                 liveItems.push({
                     jogo_api_id: item.jogo_api_id,

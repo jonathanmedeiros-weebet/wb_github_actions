@@ -137,6 +137,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                                 valido = false;
                             }
 
+                            if (!jogo.cotacoes.length) {
+                                valido = false;
+                            }
+
                             jogo.cotacoes.map(cotacao => {
                                 cotacao.nome = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
                                 cotacao.valorFinal = this.helperService.calcularCotacao2String(
@@ -238,7 +242,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     campeonato = {
                         _id: jogo.campeonato._id,
                         nome: jogo.campeonato.nome,
+                        regiao: jogo.campeonato.regiao,
                         regiao_sigla: jogo.campeonato.regiao_sigla,
+                        sport_id: jogo.sport_id,
                         jogos: new Map()
                     };
 
@@ -261,11 +267,25 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     valido = false;
                 }
 
+                if (!jogo.cotacoes.length) {
+                    valido = false;
+                }
+
                 if (valido && !jogo.finalizado) {
+                    let gamePlacedNow = !campeonato.jogos.has(jogo._id);
                     campeonato.jogos.set(jogo._id, jogo);
 
                     if (inserirCampeonato) {
                         this.campeonatos.set(jogo.campeonato._id, campeonato);
+                        this.campeonatosAbertos = this.campeonatosAbertos.concat(jogo.campeonato._id);
+                    }
+
+                    if (gamePlacedNow && (jogo.sport_id === FOOTBALL_ID || !jogo.sport_id)) {
+                        this.qtdJogosFutebol++;
+                    }
+
+                    if (gamePlacedNow && jogo.sport_id === BASKETBALL_ID) {
+                        this.qtdJogosBasquete++;
                     }
                 } else {
                     const eventoEncontrado = campeonato.jogos.get(jogo._id);
@@ -275,6 +295,14 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
                         if (!campeonato.jogos.size) {
                             this.campeonatos.delete(campeonato._id);
+                        }
+
+                        if (jogo.sport_id === FOOTBALL_ID || !jogo.sport_id) {
+                            this.qtdJogosFutebol--;
+                        }
+
+                        if (jogo.sport_id === BASKETBALL_ID) {
+                            this.qtdJogosBasquete--;
                         }
                     }
                 }

@@ -1,6 +1,3 @@
-const FOOTBALL_ID = 6046;
-const BASKETBALL_ID = 48242;
-
 document.onreadystatechange = async function () {
     if (this.readyState === 'complete') {
 
@@ -358,11 +355,14 @@ document.onreadystatechange = async function () {
                                 let live_track_id = ticketItem.live_track_id;
                                 let fieldLink;
 
-                                if (ticketItem.sport == FOOTBALL_ID) {
+                                const footballId = 6046;
+                                const basketballId = 48242;
+
+                                if (ticketItem.sport == footballId) {
                                     fieldLink = fieldLinkFootball;
                                 }
 
-                                if (ticketItem.sport == BASKETBALL_ID) {
+                                if (ticketItem.sport == basketballId) {
                                     fieldLink = fieldLinkBasketball;
                                 }
 
