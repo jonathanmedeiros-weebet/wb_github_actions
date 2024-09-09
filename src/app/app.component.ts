@@ -313,7 +313,6 @@ export class AppComponent implements OnInit {
 
     checkNotificationPermission() {
         const permission = Notification.permission;
-        console.log(permission);
         if (permission === 'denied' || permission === 'default') {
             this.checkAndExecuteEventPush();
         }
