@@ -95,14 +95,13 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('set', 'user_id', res.results.user.id);
+                        }
                     }
                     this.logadoSource.next(true);
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
-                    }
-                    if(this.xtremepushHabilitado()){
-                        xtremepush('set', 'user_id', res.results.user.id);
-                        xtremepush('event', 'login');
                     }
                 }),
                 catchError(this.errorService.handleError)
@@ -127,16 +126,14 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('set', 'user_id', res.results.user.id);
+                        }
                     }
 
                     this.logadoSource.next(true);
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
-                    }
-
-                    if(this.xtremepushHabilitado()){
-                        xtremepush('set', 'user_id', res.results.user.id);
-                        xtremepush('event', 'login');
                     }
                 }),
                 catchError(this.errorService.handleError)

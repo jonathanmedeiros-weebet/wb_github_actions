@@ -189,7 +189,7 @@ nav::-webkit-scrollbar {
 
 .btn-promocao i:hover {
     cursor: pointer;
-    color: var(--highlight); 
+    color: var(--highlight);
 }
 
 .btn-register{
@@ -1018,37 +1018,9 @@ body .change-theme {
     width: 100%;
     max-width: 350px;
     margin: 10px;
-}
-
-.xtremepush-card {
-    display: flex;
-    flex-direction: column;
-}
-
-.xtremepush-card-img-top {
     width: 100%;
-    height: auto;
-    display: block;
-}
-
-.xtremepush-card-body {
-    padding: 15px;
-}
-
-.xtremepush-card-title {
-    margin-top: 10px;
-    font-size: 1.25em;
-    margin-bottom: 10px;
-}
-
-.xtremepush-card-text {
-    margin-bottom: 20px;
-}
-
-.xtremepush-card-date {
-    align-self: flex-end;
-    font-size: 0.875em;
-    margin-top: auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
 }
 
 .overlay {
@@ -1078,9 +1050,4 @@ body .change-theme {
 
 #badge-xtremepush.show-badge {
     display: block;
-}
-
-.xtremepush-notification-item {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
 }

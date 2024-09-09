@@ -16,6 +16,8 @@ import { Geolocation, GeolocationService } from 'src/app/shared/services/geoloca
 import { FormValidations } from 'src/app/shared/utils';
 import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
 
+declare var xtremepush: any;
+
 enum LoginErrorCode {
     INACTIVE_REGISTER = 'cadastro_inativo',
     CUSTOMER_BLOCKED = 'customerBlocked'
@@ -168,6 +170,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         .subscribe(
                             () => {
                                 this.getUsuario();
+                                if(this.xtremepushHabilitado() && this.usuario.tipo_usuario === 'cliente'){
+                                    xtremepush('event', 'login');
+                                }
                                 location.reload();
                             },
                             error => this.handleError(error)
@@ -284,5 +289,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     public toClose() {
         this.activeModal.dismiss('Cross click')
+    }
+
+    xtremepushHabilitado() {
+        return Boolean(this.paramsLocais.getOpcoes()?.xtremepush_habilitado);
     }
 }
