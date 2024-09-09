@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, MessageService } from './../../../../services';
+import {AuthService, MessageService, ParametrosLocaisService} from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 
 import {config} from '../../../config';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
+
+declare var xtremepush: any;
 
 @Component({
     selector: 'app-auth-dois-fatores-modal',
@@ -28,7 +30,8 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
         private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private auth: AuthService,
-        private geolocationService: GeolocationService
+        private geolocationService: GeolocationService,
+        private paramsLocais: ParametrosLocaisService
     ) {
         super();
     }
@@ -61,6 +64,9 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
             .subscribe(
                 () => {
                     this.messageService.success('Código validado com sucesso.');
+                    if(this.xtremepushHabilitado()){
+                        xtremepush('event', 'login');
+                    }
                     this.activeModal.dismiss();
                 },
                 error => this.handleError(error)
@@ -110,5 +116,9 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
 
     onCodeCompleted(code: string) {
         this.codigo = code;
+    }
+
+    xtremepushHabilitado() {
+        return Boolean(this.paramsLocais.getOpcoes()?.xtremepush_habilitado);
     }
 }
