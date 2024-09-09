@@ -297,13 +297,14 @@
         "bellagames.bet": "gulp bellagames.bet",
         "tourodasorte.bet": "gulp tourodasorte.bet",
         "decola.bet": "gulp decola.bet",
-        "camelodasorte.com": "gulp camelodasorte.com",
+        "bigdaybet.com": "gulp bigdaybet.com",
         "oraculo.bet": "gulp oraculo.bet",
         "priv8bet.com": "gulp priv8bet.com",
         "betinha.com": "gulp betinha.com",
         "sortebet.wee.bet": "gulp sortebet.wee.bet",
         "goldeplaca.online": "gulp goldeplaca.online",
-        "puskasbet.com.br": "gulp puskasbet.com.br"
+        "puskasbet.com.br": "gulp puskasbet.com.br",
+        "betagora.io": "gulp betagora.io"
     },
     "private": true,
     "dependencies": {

@@ -2815,11 +2815,11 @@ gulp.task('decola.bet', function (done) {
     });
 });
 
-gulp.task('camelodasorte.com', function (done) {
+gulp.task('bigdaybet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "camelodasorte.com",
-        banca: "CAMELO DA SORTE",
+        host: "bigdaybet.com",
+        banca: "BIG DAY BET",
         styles: "",
     });
 });
@@ -2874,6 +2874,15 @@ gulp.task('puskasbet.com.br', function (done) {
         server: "front5.wee.bet",
         host: "puskasbet.com.br",
         banca: "PUSKAS BET",
+        styles: "",
+    });
+});
+
+gulp.task('betagora.io', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betagora.io",
+        banca: "BET AGORA",
         styles: "",
     });
 });
