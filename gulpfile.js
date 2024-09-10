@@ -138,3 +138,14 @@ gulp.task('build-lite-alfa', function (done) {
         pkg_folder: ('net.alfasports.app.lite').split('.').join('/')
     });
 });
+
+gulp.task('build-appjetbet365.com', function (done) {
+    return prepare({
+        app_id: "com.appjetbet365.app",
+        url: "https://appjetbet365.com",
+        nome: "APP JETBET365",
+        slug: "appjetbet365.com",
+        splash_color: "#002458",
+        pkg_folder: ('com.appjetbet365.app').split('.').join('/')
+    });
+});
