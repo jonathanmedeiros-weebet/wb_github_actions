@@ -1,4 +1,4 @@
-image: dolalti/flutter-build-android:latest
+image: dolalti/flutter-android-build:31
 
 pipelines:
   custom:
