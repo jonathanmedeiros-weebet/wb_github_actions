@@ -301,20 +301,10 @@ export class AppComponent implements OnInit {
         }
     }
 
-    checkAndExecuteEventPush() {
-        const lastExecution = localStorage.getItem('lastEventPushXtremepush');
-        const currentTime = new Date().getTime();
-
-        if (!lastExecution || (currentTime - parseInt(lastExecution, 10)) >= 3600000) {
-            this.eventPushXtremepush();
-            localStorage.setItem('lastEventPushXtremepush', currentTime.toString());
-        }
-    }
-
     checkNotificationPermission() {
         const permission = Notification.permission;
         if (permission === 'denied' || permission === 'default') {
-            this.checkAndExecuteEventPush();
+            this.eventPushXtremepush();
         }
     }
 }
