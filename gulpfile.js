@@ -104,15 +104,6 @@ gulp.task('betsbr.club', function (done) {
     });
 });
 
-gulp.task('casadinha.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "casadinha.com",
-        banca: "CASADINHA.COM",
-        styles: "",
-       });
-});
-
 gulp.task('casadinha.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2052,15 +2043,6 @@ gulp.task('jetbet365.com', function (done) {
     });
 });
 
-gulp.task('tenbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "tenbet.wee.bet",
-        banca: "TEN BET",
-        styles: "",
-    });
-});
-
 gulp.task('betbetix.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2834,11 +2816,11 @@ gulp.task('decola.bet', function (done) {
     });
 });
 
-gulp.task('camelodasorte.com', function (done) {
+gulp.task('bigdaybet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "camelodasorte.com",
-        banca: "CAMELO DA SORTE",
+        host: "bigdaybet.com",
+        banca: "BIG DAY BET",
         styles: "",
     });
 });
@@ -2888,4 +2870,20 @@ gulp.task('goldeplaca.online', function (done) {
     });
 });
 
+gulp.task('puskasbet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "puskasbet.com.br",
+        banca: "PUSKAS BET",
+        styles: "",
+    });
+});
 
+gulp.task('betagora.io', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betagora.io",
+        banca: "BET AGORA",
+        styles: "",
+    });
+});
