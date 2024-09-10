@@ -1902,8 +1902,14 @@ ngb-datepicker-month {
     .mobile-modal-header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-size: 14px;
         font-weight: 600;
+        margin-top: 1em;
+    }
+
+    .titulo{
+        padding: 0;
     }
 }
 

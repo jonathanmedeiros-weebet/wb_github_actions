@@ -205,7 +205,7 @@
 
     #default-content {
         padding: 10px;
-        height: 100vh;
+        height: 100%;
         overflow: auto;
         position: relative;
     }
