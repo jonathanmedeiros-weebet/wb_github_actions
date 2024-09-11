@@ -512,6 +512,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         modalRef.componentInstance.providers = this.cassinoFornecedores;
         modalRef.componentInstance.providerSelected = this.gameFornecedor;
+        modalRef.componentInstance.container =  this.listagemJogos;
         modalRef.result.then(({event, data}) => {
             if(event == 'apply'){
                 const {providerSelected} = data;

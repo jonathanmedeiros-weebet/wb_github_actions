@@ -383,7 +383,9 @@ label.label-tempo {
     .modal-body {
         padding-top: 50px;
     }
-
+    .content-header{
+        display: none;
+    }
     .group-buttons {
         width: 100%;
         margin-top: 50px;
@@ -397,6 +399,7 @@ label.label-tempo {
     #deposito-pix {
         background-color: var(--background);
         padding: 0;
+        padding-top: 24px;
     }
 
     #details-wrapper {

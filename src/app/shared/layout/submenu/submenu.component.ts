@@ -57,7 +57,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
             this.layoutService.changeSubmenuHeight(0);
         }
 
-        if (window.innerWidth > 1024) {
+        if (window.innerWidth > 1280) {
             this.menuWidth = window.innerWidth - 270;
             this.isMobile = false;
         } else {

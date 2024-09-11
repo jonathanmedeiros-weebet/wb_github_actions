@@ -1,14 +1,20 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild , ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService} from '../../services';
+import {AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService} from '../../services';
 import {interval, Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
-import { takeUntil } from 'rxjs/operators';
+import {
+    CadastroModalComponent,
+    CanceledBonusConfirmComponent,
+    JogosLiberadosBonusModalComponent,
+    LoginModalComponent,
+    RegrasBonusModalComponent
+} from "../../shared/layout/modals";
+import {takeUntil} from "rxjs/operators";
 import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 
@@ -21,6 +27,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChild('providersScroll', { static: false }) providersScroll: ElementRef;
     @ViewChild('relatedGamesScroll', { static: false }) relatedGamesScroll: ElementRef;
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
+    @ViewChild('continuarJogandoModal', {static: true}) continuarJogandoModal;
     gameUrl: SafeUrl = '';
     gameId: String = '';
     gameMode: String = '';
@@ -37,7 +44,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     removerBotaoFullscreen = false;
     isLoggedIn = false;
     backgroundImageUrl = '';
-    unsub$ = new Subject();
     headerHeight = 92;
     currentHeight = window.innerHeight - this.headerHeight;
     modalRef;
@@ -61,6 +67,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public qtdProviders: number = 10;
     public popularGamesIds: string[] = [];
     private casinoRelatedGamesQuantity: number = 15;
+    posicaoFinanceira;
+    avisoCancelarBonus = false;
+    modalRef;
+    unsub$ = new Subject();
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -78,6 +88,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private layoutService: LayoutService,
         private cd: ChangeDetectorRef,
         private el: ElementRef,
+        private financeiroService: FinanceiroService,
         @Inject(DOCUMENT) private document: any
     ) {
         this.currentUrl = window.location.href;
@@ -100,6 +111,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         this.getFornecedores();
         this.isLoggedIn = this.auth.isLoggedIn();
+        if(this.isLoggedIn) {
+            this.getPosicaoFinanceira()
+        }
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
@@ -108,6 +122,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'none');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'none');
         }
 
         if (window.innerWidth <= 1024) {
@@ -149,6 +173,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 isLoggedIn => {
                     if(isLoggedIn){
                         this.isLoggedIn = this.auth.isLoggedIn();
+                        if(this.avisoCancelarBonus === false){
+                            this.loadGame();
+                        }
                     }
                     
                     this.loadGame();
@@ -166,7 +193,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
                 }
             } else {
-                this.loadGame();
+                if(this.avisoCancelarBonus === false){
+                    this.loadGame();
+                }
             }
             interval(3000)
                 .subscribe(() => {
@@ -353,6 +382,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
+        if(this.modalRef) {
+            this.modalRef.close();
+        }
+
         switch (this.gameFornecedor) {
             case 'tomhorn':
                 this.closeSessionGameTomHorn();
@@ -394,6 +427,36 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (scriptGalaxsys) {
             scriptGalaxsys.remove();
+
+            const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+            if (botaoContatoFlutuante) {
+                this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+            }
+
+            const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+            if (jivoChatBtn) {
+                this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
+            }
+
+            const liveChatBtn = this.document.getElementById('chat-widget-container');
+            if (liveChatBtn) {
+                this.renderer.setStyle(liveChatBtn, 'display', 'block');
+            }
+        }
+
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+        if (botaoContatoFlutuante) {
+            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
     }
 
@@ -429,6 +492,56 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
 
             this.isFullScreen = !this.isFullScreen;
+        }
+    }
+
+    disableHeaderOptions() {
+        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
+        
+        if (optionsHeader) {
+            this.renderer.setStyle(optionsHeader, 'display', 'none');
+        }
+    }
+
+    openFullScreenMob(){
+        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
+        const optionsHeaderHeight = optionsHeader.getBoundingClientRect().height;
+        const calculatedGameHeight = `calc(100% - ${optionsHeaderHeight}px)`;
+
+        if (gameFrame) {
+            if (!this.isFullScreen) {
+                this.renderer.setStyle(optionsHeader, 'position', 'fixed');
+                this.renderer.setStyle(optionsHeader, 'width', '100%');
+                this.renderer.setStyle(optionsHeader, 'top', 0);
+                this.renderer.setStyle(gameFrame, 'position', 'fixed');
+                this.renderer.setStyle(gameFrame, 'top', `${optionsHeaderHeight}px`);
+                this.renderer.setStyle(gameFrame, 'height', calculatedGameHeight);
+            } else {
+                this.renderer.removeStyle(optionsHeader, 'position');
+                this.renderer.removeStyle(optionsHeader, 'width');
+                this.renderer.removeStyle(optionsHeader, 'top');
+                this.renderer.removeStyle(gameFrame, 'position');
+                this.renderer.removeStyle(gameFrame, 'top');
+                this.renderer.setStyle(gameFrame, 'height', '100%');
+            }
+
+            this.isFullScreen = !this.isFullScreen;
+        }
+
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+        if (botaoContatoFlutuante) {
+            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
     }
 
@@ -535,6 +648,25 @@ export class GameviewComponent implements OnInit, OnDestroy {
         body.appendChild(bodyScript);
     }
 
+    abriModalLogin(){
+        const modalRef = this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-550 modal-h-350 modal-login',
+                centered: true,
+            }
+        );
+        modalRef.result.then(
+            (result) => {
+                if(result) {
+                    this.isLoggedIn = this.auth.isLoggedIn();
+                    this.getPosicaoFinanceira()
+                }
+            }
+        );
+    }
+
     abrirCadastro(){
         this.modalService.open(
             CadastroModalComponent,
@@ -545,6 +677,57 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
+    }
+
+    getPosicaoFinanceira() {
+        this.auth.getPosicaoFinanceira()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                posicaoFinanceira => {
+                    this.posicaoFinanceira = posicaoFinanceira.bonus;
+                    if(this.posicaoFinanceira > 0 && this.posicaoFinanceira < 1) {
+                       this.avisoCancelarBonus = true;
+                       this.abriModalContinuarJogando();
+                    }
+                },
+                error => {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
+                        this.auth.logout();
+                    } else {
+                        this.handleError(error);
+                    }
+                }
+            );
+    }
+
+    abriModalContinuarJogando(){
+        this.modalRef =  this.modalService.open(
+            this.continuarJogandoModal,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+            }
+        );
+    }
+
+    continuarBonus(){
+        this.avisoCancelarBonus = false;
+        this.modalRef.close();
+    }
+
+    continuarSaldoReal(){
+        this.financeiroService.cancelarBonusAtivos()
+            .subscribe(
+                response => {
+                    this.avisoCancelarBonus = false;
+                    this.modalRef.close();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+
     }
 
     private async getRelatedAndPopularGames(category:string) {

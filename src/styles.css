@@ -66,6 +66,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: var(--foreground);
     background-color: var(--background);
+    width: 100%
 }
 
 .base-container {
@@ -312,7 +313,7 @@ game {
 }
 
 .titulo {
-    padding: 10px 0;
+    padding-bottom: 10px;
     color: var(--foreground-sidebars);
     font-style: normal;
     font-weight: 600;
@@ -1949,4 +1950,8 @@ label {
         height: 100%;
         margin: 0;
     }
+}
+
+.webpush-swal2-popup .webpush-swal2-modal .webpush-swal2-show {
+    background: none !important;
 }

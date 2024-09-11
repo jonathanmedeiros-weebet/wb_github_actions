@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { SkeletonProviderComponent } from './types/skeleton-provider/skeleton-provider.component';
 import { SkeletonCasinoFilterBarComponent } from './types/skeleton-casino-filter-bar/skeleton-casino-filter-bar.component';
 import { SkeletonBannerComponent } from './types/skeleton-banner/skeleton-banner.component';
+import { SkeletonSmallBannerComponent } from './types/skeleton-small-banner/skeleton-small-banner.component';
 
 @NgModule({
     declarations: [
@@ -12,7 +13,8 @@ import { SkeletonBannerComponent } from './types/skeleton-banner/skeleton-banner
        SkeletonCasinoComponent,
        SkeletonProviderComponent,
        SkeletonCasinoFilterBarComponent,
-       SkeletonBannerComponent
+       SkeletonBannerComponent,
+       SkeletonSmallBannerComponent
     ],
     imports: [
         CommonModule

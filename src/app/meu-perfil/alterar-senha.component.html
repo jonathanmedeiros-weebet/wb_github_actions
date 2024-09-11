@@ -26,11 +26,11 @@
                                 [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }"
                                 (click)="toggleMostrarSenha('senhaAtual')"
                             ></i>
-                            <app-error-msg
-                                [control]="form.get('senha_atual')"
-                                label="{{'senhas.senhaAtual' | translate}}"
-                            ></app-error-msg>
                         </div>
+                        <app-error-msg
+                            [control]="form.get('senha_atual')"
+                            label="{{'senhas.senhaAtual' | translate}}"
+                        ></app-error-msg>
                     </div>
                 </div>
                 <div class="row">
@@ -54,11 +54,11 @@
                                 [ngClass]="{ 'fa-eye-slash': mostrarSenhaNova, 'fa-eye': !mostrarSenhaNova }"
                                 (click)="toggleMostrarSenha('senhaNova')"
                             ></i>
-                            <app-error-msg
-                                [control]="form.get('senha_nova')"
-                                label="{{'senhas.novaSenha' | translate}}"
-                            ></app-error-msg>
                         </div>
+                        <app-error-msg
+                            [control]="form.get('senha_nova')"
+                            label="{{'senhas.novaSenha' | translate}}"
+                        ></app-error-msg>
                     </div>
                 </div>
                 <div class="row">
@@ -84,11 +84,11 @@
                                 }"
                                 (click)="toggleMostrarSenha('senhaConfirmacao')"
                             ></i>
-                            <app-error-msg
-                                [control]="form.get('senha_confirmacao')"
-                                label="{{'senhas.confirmarSenha' | translate}}"
-                            ></app-error-msg>
                         </div>
+                        <app-error-msg
+                            [control]="form.get('senha_confirmacao')"
+                            label="{{'senhas.confirmarSenha' | translate}}"
+                        ></app-error-msg>
                     </div>
                 </div>
 

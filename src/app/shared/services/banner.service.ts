@@ -43,6 +43,11 @@ export class BannerService {
     }
 
     filterBanners(pagina) {
-        return this.cachedBanners.filter(banner => ['todas', pagina].includes(banner.pagina));
+        if (pagina === 'deposito') {
+            return this.cachedBanners.filter(banner => banner.pagina == pagina);
+        } else {
+            return this.cachedBanners.filter(banner => ['todas', pagina].includes(banner.pagina));
+        }
+        
     }
 }

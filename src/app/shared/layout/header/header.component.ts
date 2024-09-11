@@ -433,7 +433,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente'
+                windowClass: 'modal-500 modal-cadastro-cliente',
+                backdrop: 'static'
             }
         );
     }
@@ -633,7 +634,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             }, (result) => {
                 for (let i = 0; i < result.items.length; i++) {
                     const xtremepushItem = result.items[i];
-
                     const date = new Date(xtremepushItem.create_time * 1000);
                     const formattedDate = date.toLocaleDateString('pt-BR', {
                         day: '2-digit',
@@ -645,19 +645,28 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
                     const xtremepushElement = document.createElement('div');
                     xtremepushElement.className = 'xtremepush-notification-item';
+                    xtremepushElement.style.width = '100%';
+                    const isTypeZero = xtremepushItem.message.style.type === 0;
+                    const imageStyle = isTypeZero ? 'width: 100%; height: auto;' : 'width: 100px; height: 100px;';
+                    const containerStyle = isTypeZero ? 'flex-direction: column;' : '';
+                    const titleStyle = isTypeZero ? 'margin-top: 10px; margin-bottom: 10px;' : '';
+                    const dateStyle = isTypeZero ? 'float: right; margin-top: auto;' : '';
+
                     xtremepushElement.innerHTML = `
                     <div class="xtremepush-card" style="
-                        border-bottom: 1px solid rgba(204, 204, 204, 0.5);
-                        padding-bottom: 10px;
-                    ">
-                        <img src="${xtremepushItem.message.icon}" class="xtremepush-card-img-top" alt="${xtremepushItem.message.title}">
-                        <div class="xtremepush-card-body">
-                            <h5 class="xtremepush-card-title">${xtremepushItem.message.title}</h5>
+                            width: 100%;
+                            border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+                            padding-bottom: 10px;
+                            display: flex;
+                            ${containerStyle}
+                        ">
+                        <img src="${xtremepushItem.message.icon}" class="xtremepush-card-img-top" style="padding: 0 10px; ${imageStyle} display: block;" alt="${xtremepushItem.message.title}">
+                        <div class="xtremepush-card-body" style="padding: 15px;">
+                            <h5 class="xtremepush-card-title" style="font-size: 1.25em; ${titleStyle}">${xtremepushItem.message.title}</h5>
                             <p class="xtremepush-card-text">${xtremepushItem.message.alert}</p>
-                            <p class="xtremepush-card-date">${formattedDate}</p>
+                            <p class="xtremepush-card-date" style="font-size: 0.875em; ${dateStyle}">${formattedDate}</p>
                         </div>
-                    </div>
-                `;
+                    </div>`;
 
                     xtremepushElement.addEventListener('click', () => {
                         xtremepush('inbox', 'message.action', {
@@ -671,16 +680,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                             console.log(err);
                         });
                     });
-
                     xtremepushNotificationContainer.appendChild(xtremepushElement);
                 }
             }, (err) => {
                 console.log(err);
             });
         };
-
         loadItems();
-
         this.notificationsXtremepushOpen = !this.notificationsXtremepushOpen;
     }
 

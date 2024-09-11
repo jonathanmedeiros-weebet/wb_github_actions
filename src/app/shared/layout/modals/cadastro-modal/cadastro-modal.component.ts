@@ -3,7 +3,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { ApostaService, AuthService, ClienteService, FinanceiroService, MessageService, ParametrosLocaisService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario';
@@ -53,6 +53,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     parameters = {};
     parametersList;
     errorMessage = '';
+    postbacks = {};
+    registerCancel = false;
+    modalClose = true;
+    promocoes: any;
+    promocaoAtiva = false;
+    valorPromocao: number | null = null;
+    bonusModalidade: string | null = null;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -69,12 +76,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
+        private financeiroService: FinanceiroService,
     ) {
         super();
     }
 
     ngOnInit() {
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
+        this.getPromocoes();
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
@@ -100,6 +109,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.route.queryParams
             .subscribe((params) => {
+
 
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
@@ -181,6 +191,59 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
     }
 
+    getPromocoes(queryParams?: any) {
+        this.financeiroService.getPromocoes(queryParams)
+            .subscribe(
+                response => {
+                    this.promocoes = response;
+                    this.verificarPromocaoAtiva();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+    }
+
+    verificarPromocaoAtiva(): void {
+        if (this.promocoes && this.promocoes.length > 0) {
+            const promocaoCassino = this.promocoes.find(promocao =>
+                promocao.ativo &&
+                promocao.tipo === 'primeiro_deposito_bonus' &&
+                promocao.valorBonus > 0.00 &&
+                promocao.bonusModalidade === 'cassino'
+            );
+
+            const promocaoEsportivo = this.promocoes.find(promocao =>
+                promocao.ativo &&
+                promocao.tipo === 'primeiro_deposito_bonus' &&
+                promocao.valorBonus > 0.00 &&
+                promocao.bonusModalidade === 'esportivo'
+            );
+
+            if (promocaoCassino) {
+                this.promocaoAtiva = promocaoCassino.ativo;
+                this.valorPromocao = parseFloat(promocaoCassino.valorBonus);
+            } else if(promocaoEsportivo){
+                this.promocaoAtiva = promocaoEsportivo.ativo;
+                this.valorPromocao = parseFloat(promocaoEsportivo.valorBonus);
+            }
+        }
+    }
+
+    closeModal(){
+        this.modalClose = false;
+        this.registerCancel = true;
+    }
+
+    cancelModal() {
+        this.activeModal.dismiss();
+    }
+
+    registerOpen(){
+        this.registerCancel = false;
+        this.modalClose = true;
+    }
+
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
@@ -205,16 +268,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
 
         if (this.isLoterj) {
-            this.form.addControl('confirmarEmail', this.fb.control(null, [
-                Validators.required,
-                Validators.email,
-                FormValidations.equalsTo('email')
-            ]));
             this.form.addControl('termosUso', this.fb.control(null, [
                 Validators.requiredTrue,
             ]));
+
+            this.form.controls['nome'].clearValidators();
+            this.form.controls['nome'].updateValueAndValidity();
+
+            this.form.controls['nascimento'].clearValidators();
+            this.form.controls['nascimento'].updateValueAndValidity();
+
+            this.form.controls['senha_confirmacao'].clearValidators();
+            this.form.controls['senha_confirmacao'].updateValueAndValidity();
         }
     }
+
 
     ngOnDestroy() {
         this.clearSocialForm();

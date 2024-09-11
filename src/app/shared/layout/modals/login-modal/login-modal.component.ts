@@ -16,6 +16,8 @@ import { Geolocation, GeolocationService } from 'src/app/shared/services/geoloca
 import { FormValidations } from 'src/app/shared/utils';
 import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
 
+declare var xtremepush: any;
+
 enum LoginErrorCode {
     INACTIVE_REGISTER = 'cadastro_inativo',
     CUSTOMER_BLOCKED = 'customerBlocked'
@@ -39,6 +41,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     modoClienteHabilitado;
     LOGO = config.LOGO;
     loginGoogle = false;
+    resgister_cancel = false;
     googleUser;
     private geolocation: Geolocation;
 
@@ -106,6 +109,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .getGeolocation()
             .then((geolocation) => this.geolocation = geolocation)
     }
+    registerCancel(){
+        this.resgister_cancel = true;
+    }
 
     createForm() {
         this.form = this.fb.group({
@@ -164,7 +170,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         .subscribe(
                             () => {
                                 this.getUsuario();
-                                location.reload();
+                                if (this.usuario.tipo_usuario === 'cliente') {
+                                    if(this.xtremepushHabilitado()){
+                                        xtremepush('event', 'login');
+                                    }
+                                } else {
+                                    location.reload();
+                                }
+                                this.activeModal.dismiss();
+                                this.xtremepushBackgroundRemove();
                             },
                             error => this.handleError(error)
                         );
@@ -280,5 +294,25 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     public toClose() {
         this.activeModal.dismiss('Cross click')
+    }
+
+    xtremepushHabilitado() {
+        return Boolean(this.paramsLocais.getOpcoes()?.xtremepush_habilitado);
+    }
+
+    xtremepushBackgroundRemove() {
+        let intervalId = setInterval(() => {
+            const element = document.querySelector('.webpush-swal2-popup.webpush-swal2-modal.webpush-swal2-show');
+
+            if (element) {
+                (element as HTMLElement).style.visibility = 'hidden';
+                (element as HTMLElement).style.background = 'none';
+                (element as HTMLElement).style.visibility = 'visible';
+                clearInterval(intervalId);
+            }
+        }, 100);
+        setTimeout(() => {
+            clearInterval(intervalId);
+        }, 3000);
     }
 }

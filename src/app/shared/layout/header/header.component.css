@@ -66,7 +66,6 @@
 }
 
 nav {
-    width: calc(100% - 700px);
     display: flex;
     justify-content: center;
 }
@@ -112,8 +111,21 @@ nav a {
     white-space: nowrap;
 }
 
+.container-group {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.container-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 8px;
+}
+
 .side {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,6 +168,28 @@ nav::-webkit-scrollbar {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
+}
+
+.btn-xtremepush i {
+    font-size: 22px;
+    color: var(--foreground-header);
+    opacity: 75%;
+    margin-top: 3px;
+}
+
+.btn-xtremepush span:hover {
+    color: var(--highlight);
+}
+
+.btn-promocao i {
+    opacity: 75%;
+    font-size: 0px;
+    color: white;
+}
+
+.btn-promocao i:hover {
+    cursor: pointer;
+    color: var(--highlight);
 }
 
 .btn-register{
@@ -338,8 +372,13 @@ body .change-theme {
 }
 
 .support-btn i {
-    margin-right: 12px;
-    font-size: 16px;
+    opacity: 75%;
+    color: var(--foreground-header);
+    padding-left: 3px;
+    font-weight: 500;
+}
+
+.support-btn:hover i {
     color: var(--highlight);
 }
 
@@ -431,6 +470,54 @@ body .change-theme {
     margin-right: 5px;
 }
 
+.stylingNotificationIcon{
+    margin-right: 10px;
+}
+
+.icon {
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    color: #ffffff;
+    opacity: 75%;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+    color: var(--highlight);
+}
+
+.icon:focus {
+    color:var(--highlight) ;
+}
+
+.icon.selected {
+    transform: scale(1.1);
+    color: var(--highlight);
+}
+
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.side-left, .container-group{
+    flex-shrink: 0;
+    position: relative;
+}
+
+.center{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 400px);
+    box-sizing: border-box;
+    text-align: center;
+}
+
 @media only screen and (min-width: 1025px) {
     .btn-indique-ganhe-card:hover {
         padding: 0 15px !important;
@@ -456,17 +543,23 @@ body .change-theme {
         height: 100%;
     }
 
+    nav {
+        margin-left: 0%;
+    }
+
     .category a {
         font-size: 11px; /* ajuste fonte */
     }
 
     .header {
+        padding-top: 15px;
         width: 100%;
-        height: 64px;
+        height: 52px;
         display: flex;
     }
 
     .menu-conta {
+        gap:8px;
         margin-right: 8px;
     }
 
@@ -497,7 +590,7 @@ body .change-theme {
 
     .logo {
         max-height: 30px;
-        max-width: calc(40vw - 25px);
+        max-width: calc(40vw - 70px);
     }
 
     .indique-ganhe-card .btn-close {
@@ -512,7 +605,7 @@ body .change-theme {
     }
 
     .btn.mr-4 {
-        margin-right: 10px !important;
+        margin-right: 8px !important;
     }
 }
 
@@ -591,15 +684,8 @@ body .change-theme {
         padding-left: 10px;
     }
 
-    .btn-xtremepush {
-        margin: 0 10px 0 0 !important;
-        color: var(--highlight);
-    }
-}
-
-@media only screen and (max-width: 360px) {
-    .logo {
-        max-width: calc(32vw - 25px);
+    .btn-xtremepush span {
+        color: var(--foreground-header);
     }
 }
 
@@ -617,16 +703,140 @@ body .change-theme {
         height: 32px;
     }
     .btn-register{
-        min-width: 95px !important;
         margin-right: 5px;
         white-space: nowrap;
     }
     .menu-conta .btn{
         padding: 5px 10px;
     }
+    .deposit-shortcut a{
+        padding: 0px 4px;
+    }
+}
+
+@media only screen and (max-width: 430px){
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons {
+        gap: 8px;
+        padding-left: 5px;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(40vw - 70px);
+    }
+    .container-icons {
+        padding: 0px 1%;
+        gap: 8px;
+        margin-right: -4px;
+    }
+    .btn{
+        font-size: 10px;
+    }
+    .btn-register {
+        min-width: 92px !important;
+    }
+    .btn-xtremepush {
+        padding-left: 1px;
+        color: var(--highlight);
+    }
+    #xtremepushNotificationWrapper {
+        width: 320px;
+    }
+    .btn-promocao {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 18px;
+    }
+    .side-right {
+        padding-right: 10px;
+    }
+    .deposit-shortcut a {
+        padding: 0px 4px;
+    }
+    .menu-conta .btn-custom2{
+        margin-right: 0;
+    }
+    .menu-perfil {
+        padding: 0px 2px;
+        width: 85px;
+    }
+    .menu-perfil div.user-icon i {
+        font-size: 15px;
+    }
+    .btn.mr-4 {
+        margin-right: 5px !important;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .logo{
+        max-height: 30px;
+        max-width: calc(28vw - 25px);
+    }
+
+    .container-group{
+        gap: 12px;
+    }
+
+    .container-icons {
+        padding: 0px 1%;
+        gap: 6px;
+    }
+
+    .btn-register{
+        min-width: 80px !important;
+        padding: 5px 8px !important;
+    }
+
+    .btn.btn-register.mr-4{
+        margin-right: 8px !important;
+    }
+
+    .btn {
+        width: 54px;
+        font-size: 10px;
+    }
+
+    .menu-perfil {
+        width: 80px;
+        padding: 0px 2px;
+    }
+
+    .menu-conta{
+        margin-right: 4px;
+    }
+
+    .div.user-card{
+        padding-right: 5px;
+    }
+    .fa-user::before {
+        font-size: 14px;
+    }
+    .menu-perfil .div.user-icon {
+        font-size: 15px;
+    }
+    .menu-perfil div.user-icon  i {
+        font-size: 15px;
+    }
+    .menu-perfil .saldo-usuario {
+        font-size: 9.8px;
+    }
 }
 
 @media only screen and (max-width: 1366px) and (min-width: 1280px){
+    nav {
+        padding-right: 0;
+    }
     .menu-conta .btn{
         padding: 5px 6px;
     }
@@ -635,11 +845,9 @@ body .change-theme {
     }
     .side-left {
         padding-left: 10px;
-        width: 600px;
     }
     .side-right {
         padding-right: 0;
-        width: 600px;
     }
     .logo {
         max-width: 215px;
@@ -653,7 +861,6 @@ body .change-theme {
     }
     .side-right {
         padding-right: 0;
-        width: 420px;
     }
 }
 
@@ -665,6 +872,28 @@ body .change-theme {
         width: 270px;
     }
 }
+
+@media screen and (min-width: 1366px) and (max-width: 1400px) {
+    .container-group{
+        margin-left: 20px;
+    }
+}
+
+@media only screen and (max-width: 440px){
+    .menu-conta {
+        gap:4px;
+        margin-right: 4px;
+    }
+
+    .container-icons{
+        gap: 4px;
+    }
+
+    .container-group {
+        gap: 8px;
+    }
+}
+
 
 .info-connection-card {
     display: block;
@@ -752,12 +981,16 @@ body .change-theme {
     margin-bottom: 20px;
 }
 
+.xtremepush-header i {
+    margin-right: 8px;
+}
+
 .xtremepush-title {
     color: #fff;
     margin: 0;
 }
 
-.xtremepush-title img{
+.xtremepush-title i{
     margin-bottom: 1px;
     margin-right: 10px;
 }
@@ -785,37 +1018,9 @@ body .change-theme {
     width: 100%;
     max-width: 350px;
     margin: 10px;
-}
-
-.xtremepush-card {
-    display: flex;
-    flex-direction: column;
-}
-
-.xtremepush-card-img-top {
     width: 100%;
-    height: auto;
-    display: block;
-}
-
-.xtremepush-card-body {
-    padding: 15px;
-}
-
-.xtremepush-card-title {
-    margin-top: 10px;
-    font-size: 1.25em;
-    margin-bottom: 10px;
-}
-
-.xtremepush-card-text {
-    margin-bottom: 20px;
-}
-
-.xtremepush-card-date {
-    align-self: flex-end;
-    font-size: 0.875em;
-    margin-top: auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
 }
 
 .overlay {
@@ -845,14 +1050,4 @@ body .change-theme {
 
 #badge-xtremepush.show-badge {
     display: block;
-}
-
-.btn-xtremepush {
-    margin: 0 10px 0 0;
-    color: var(--highlight);
-}
-
-.xtremepush-notification-item {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
 }

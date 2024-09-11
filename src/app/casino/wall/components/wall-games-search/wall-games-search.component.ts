@@ -26,7 +26,6 @@ export class WallGamesSearchComponent implements OnInit, OnDestroy {
   public term: string = '';
   public showResults: boolean = false;
   public lastGamesSearch: string[] = [];
-
   private searchTermSubject = new Subject<string>();
 
   constructor(private router: Router) {}
@@ -113,7 +112,7 @@ export class WallGamesSearchComponent implements OnInit, OnDestroy {
   }
 
   public handleSearch(term: string, saveStorage = true) {
-    if(saveStorage) { 
+    if(saveStorage) {
       this.searchTermSubject.next(term);
     } else {
       this.setTermAndLocalStorage(term, false);
@@ -148,10 +147,18 @@ export class WallGamesSearchComponent implements OnInit, OnDestroy {
   private showOrHideHeaderMobile(show: boolean = true) {
     if(this.isMobile) {
       const headerElement = document.querySelector('.header') as HTMLElement;
+      const indiqueElement = document.querySelector('.indique-ganhe-card') as HTMLElement;
       const subMenuMobileElement = document.querySelector('nav.mobile') as HTMLElement;
 
-      headerElement.style.display = show ? 'flex' : 'none'
-      subMenuMobileElement.style.display = show ? 'flex' : 'none';
+      if (headerElement) {
+        headerElement.style.display = show ? 'flex' : 'none'
+      }
+      if (indiqueElement) {
+        indiqueElement.style.display = show ? 'block' : 'none'
+      }
+      if (subMenuMobileElement) {
+        subMenuMobileElement.style.display = show ? 'flex' : 'none';
+      }
     }
   }
 

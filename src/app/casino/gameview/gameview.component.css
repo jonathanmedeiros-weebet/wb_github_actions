@@ -501,6 +501,21 @@
         margin: 0;
     }
 
+.close-modal-continuar-jogando i{
+    color: var(--highlight);
+    font-size: medium;
+}
+
+.btn-custom, .btn-custom2 {
+    margin: 10px 0;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 260px;
+}
     .overlay {
         overflow: hidden;
         display: flex;
