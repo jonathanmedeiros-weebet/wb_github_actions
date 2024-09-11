@@ -12,7 +12,6 @@
         "e2e": "ng e2e",
         "vipsports.wee.bet": "gulp vipsports.wee.bet",
         "betsbr.club": "gulp betsbr.club",
-        "casadinha.com": "gulp casadinha.com",
         "casadinha.bet": "gulp casadinha.bet",
         "demo.wee.bet": "gulp demo.wee.bet",
         "esportivatop.wee.bet": "gulp esportivatop.wee.bet",
@@ -213,7 +212,6 @@
         "lottomaster.bet": "gulp lottomaster.bet",
         "jbnacional.bet": "gulp jbnacional.bet",
         "jetbet365.com": "gulp jetbet365.com",
-        "tenbet.wee.bet": "gulp tenbet.wee.bet",
         "betbetix.com": "gulp betbetix.com",
         "pix777.bet": "gulp pix777.bet",
         "moneybets.net": "gulp moneybets.net",
@@ -299,12 +297,14 @@
         "bellagames.bet": "gulp bellagames.bet",
         "tourodasorte.bet": "gulp tourodasorte.bet",
         "decola.bet": "gulp decola.bet",
-        "camelodasorte.com": "gulp camelodasorte.com",
+        "bigdaybet.com": "gulp bigdaybet.com",
         "oraculo.bet": "gulp oraculo.bet",
         "priv8bet.com": "gulp priv8bet.com",
         "betinha.com": "gulp betinha.com",
         "sortebet.wee.bet": "gulp sortebet.wee.bet",
-        "goldeplaca.online": "gulp goldeplaca.online"
+        "goldeplaca.online": "gulp goldeplaca.online",
+        "puskasbet.com.br": "gulp puskasbet.com.br",
+        "betagora.io": "gulp betagora.io"
     },
     "private": true,
     "dependencies": {

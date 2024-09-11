@@ -10,6 +10,7 @@ function tasks(done, config) {
     }
 
     const defaultDescription = `${config.banca} é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website ${config.banca}, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. ${config.banca} apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.`;
+    const defaultAndroidVersion = "7";
 
     gulp.src(['base-build/config.ts'])
         .pipe(replace('[HOST]', 'central.' + (config.dominioTemp ?? config.host)))
@@ -23,6 +24,7 @@ function tasks(done, config) {
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(replace('[BANCA]', config.banca))
         .pipe(replace('[DESCRIPTION]', config.description ?? defaultDescription))
+        .pipe(replace('[ANDROID_VERSION]', config.android_version ?? defaultAndroidVersion))
         .pipe(replace('[SCRIPTS]', typeof config.scripts == "undefined" ? "" : config.scripts))
         .pipe(replace('[GOOGLE_TAG_PART_1]', typeof config.google_tag_part_1 == "undefined" ? "" : config.google_tag_part_1))
         .pipe(replace('[GOOGLE_TAG_PART_2]', typeof config.google_tag_part_2 == "undefined" ? "" : config.google_tag_part_2))
@@ -102,15 +104,6 @@ gulp.task('betsbr.club', function (done) {
         banca: "Bets BR",
         styles: "--header: #666666; --foreground-header: #000; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #aec3d8; --odds: #e1b01e; --foreground-odds: #fff;",
     });
-});
-
-gulp.task('casadinha.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "casadinha.com",
-        banca: "CASADINHA.COM",
-        styles: "",
-       });
 });
 
 gulp.task('casadinha.bet', function (done) {
@@ -2052,15 +2045,6 @@ gulp.task('jetbet365.com', function (done) {
     });
 });
 
-gulp.task('tenbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "tenbet.wee.bet",
-        banca: "TEN BET",
-        styles: "",
-    });
-});
-
 gulp.task('betbetix.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2833,11 +2817,11 @@ gulp.task('decola.bet', function (done) {
     });
 });
 
-gulp.task('camelodasorte.com', function (done) {
+gulp.task('bigdaybet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "camelodasorte.com",
-        banca: "CAMELO DA SORTE",
+        host: "bigdaybet.com",
+        banca: "BIG DAY BET",
         styles: "",
     });
 });
@@ -2855,7 +2839,7 @@ gulp.task('priv8bet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "priv8bet.com",
-        banca: "PRIV8BET",
+        banca: "PRIV8BET: Apostas Esportivas Online & Casino | Aposte com total segurança",
         styles: "",
     });
 });
@@ -2887,4 +2871,20 @@ gulp.task('goldeplaca.online', function (done) {
     });
 });
 
+gulp.task('puskasbet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "puskasbet.com.br",
+        banca: "PUSKAS BET",
+        styles: "",
+    });
+});
 
+gulp.task('betagora.io', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "betagora.io",
+        banca: "BET AGORA",
+        styles: "",
+    });
+});

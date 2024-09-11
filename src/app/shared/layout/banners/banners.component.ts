@@ -80,14 +80,16 @@ export class BannersComponent implements OnInit {
             let source = 'src';
             this.isMobileView && (source = 'src_mobile');
 
-            for (const banner of banners) {
-                if (banner[source]) {
+            for (const banner of banners ) {
+                if (banner[source] && banner['pagina'] === 'deposito') {
                     this.bannersModal.push(banner);
                 }
             }
+
             if (this.bannersModal.length > 1) {
                 this.showNavigationArrowsInModal = true;
             }
+            
             this.showLoadingIndicator = false;
             this.cd.markForCheck();
         });
