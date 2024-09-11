@@ -1,4 +1,5 @@
 import { LocalStorageKey, localStorageService } from "@/services";
+import { getAndroidVersion } from "@/utilities";
 import { defineStore } from "pinia"
 
 interface ConfigClient {
@@ -51,7 +52,7 @@ export const useConfigClient = defineStore('configClient', {
       printGraphics: false,
       apkVersion: 0,
       printerWidth: 58
-    }
+    },
   }),
   getters: {
     config: (state) => state,
@@ -68,7 +69,26 @@ export const useConfigClient = defineStore('configClient', {
     localQuotes: (state) => state.params?.cotacoes_local ?? [],
     deadlineTable: (state) => state.params?.data_limite_tabela ?? null,
 
-    hasParams: (state) => Boolean(Object.values(state.params).length)
+    hasParams: (state) => Boolean(Object.values(state.params).length),
+
+    chartDeprecatedByAndroidVersion: () => {
+      try {
+        const androidVersion = String(getAndroidVersion()).split('.')[0];
+        return Number(androidVersion) <= 9;
+      } catch (error) {
+        void error;
+        return false; 
+      }
+    },
+    popularLotteryDeprecatedByAndroidVersion: () => {
+      try {
+        const androidVersion = String(getAndroidVersion()).split('.')[0];
+        return Number(androidVersion) <= 8;
+      } catch (error) {
+        void error;
+        return false; 
+      }
+    }
   },
   actions: {
     setConfig(config: ConfigClient) {

@@ -159,7 +159,7 @@ export default {
 }
 
 .no-data {
-  color: #181818;
+  color: #ffffff80;
   color: var(--color-text-input);
 }
 
@@ -169,7 +169,9 @@ export default {
   margin-top: 5px;
   height: 30px;
   opacity: 0.5;
-  background-color: #cf53530d;
+  background-color: #181818;
+  background-color: var(--color-background-input);
+  color: #ffffff;
   color: var(--color-text);
   padding: 10px;
   display: flex;

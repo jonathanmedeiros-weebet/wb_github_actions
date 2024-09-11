@@ -67,6 +67,7 @@ export default {
   background-color: #181818;
   background-color: var(--color-background-input);
   border: 2px solid #181818;
+  border: 2px solid var(--color-background-input);
 
   box-sizing: border-box;
   border-radius: 50px;

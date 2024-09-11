@@ -72,6 +72,7 @@ export default {
 .modal-modalities {
     &__title {
         color: #FFFFFF80;
+        color: var(--color-text-input);
         font-size: 16px;
         font-weight: 500;
     }

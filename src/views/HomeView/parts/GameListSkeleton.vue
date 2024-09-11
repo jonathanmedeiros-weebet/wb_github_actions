@@ -115,8 +115,6 @@ export default {
 .teams {
     display: flex;
     flex-direction: column;
-    // gap: 8px;
-    
 
     &__info {
         display: flex;
@@ -137,7 +135,6 @@ export default {
     &__items {
         margin-left: 8px;
     }
-    
 }
 
 </style>

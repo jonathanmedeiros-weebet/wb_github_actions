@@ -15,6 +15,18 @@ export default {
     Tabs,
     Copyright
   },
+  data() {
+    return {
+      hideCopyrightWhenKeyboardWasDisplayed: false
+    }
+  },
+  mounted() {
+    document.getElementById('user_name').addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)
+    document.getElementById('user_name').addEventListener('blur', () => this.hideCopyrightWhenKeyboardWasDisplayed = false)
+
+    document.getElementById('user_password').addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)
+    document.getElementById('user_password').addEventListener('blur', () => this.hideCopyrightWhenKeyboardWasDisplayed = false)
+  },
   computed: {
     showTabs() {
       return ![
@@ -26,7 +38,7 @@ export default {
       ].includes(this.$route.name)
     },
     showCopyright() {
-      return ['login'].includes(this.$route.name)
+      return ['login'].includes(this.$route.name) && !this.hideCopyrightWhenKeyboardWasDisplayed
     }
   }
 }

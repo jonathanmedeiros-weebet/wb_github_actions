@@ -140,6 +140,8 @@ export default {
     font-size: 16px;
     font-weight: 500;
     padding: 10px;
+    color: #ffffff;
+    color: var(--color-text);
   }
 
   &__body {
@@ -161,7 +163,9 @@ export default {
 
     padding: 10px 24px;
 
+    color: #ffffff;
     color: var(--color-text);
+    background: #0a0a0a;
     background: var(--color-background);
   }
 
@@ -188,8 +192,13 @@ export default {
     font-size: 14px;
     font-weight: 500;
 
+    color: #ffffff;
+    color: var(--color-text);
+
     &--selected {
+      background: #0be58e;
       background: var(--color-primary);
+      color: #181818;
       color: var(--color-background-input);
       border-radius: 50px;
     }

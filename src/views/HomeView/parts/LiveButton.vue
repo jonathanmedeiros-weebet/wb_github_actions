@@ -1,6 +1,6 @@
 <template>
     <button class="live-button" :class="{'live-button--actived': actived}">
-        <IconCircle class="live-button__icon" :size="12" :color="actived ? 'var(--color-text)' : 'var(--color-danger)'" />
+        <IconCircle class="live-button__icon" :size="12" :color="actived ? '#ffffff' : '#f61a1a'" />
         <span>Ao vivo</span>
     </button>
 </template>
@@ -31,7 +31,10 @@ export default {
 
     border: 0;
     border-radius: 3px;
+    background: #ffffff;
     background: var(--color-text);
+
+    color: #f61a1a;
     color: var(--color-danger);
 
     font-size: 12px;
@@ -40,7 +43,9 @@ export default {
     line-height: normal;
 
     &--actived {
+        background: #f61a1a;
         background: var(--color-danger);
+        color: #ffffff;
         color: var(--color-text);
     }
 
