@@ -2837,7 +2837,7 @@ gulp.task('priv8bet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "priv8bet.com",
-        banca: "PRIV8BET",
+        banca: "PRIV8BET: Apostas Esportivas Online & Casino | Aposte com total segurança",
         styles: "",
     });
 });
