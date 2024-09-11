@@ -108,26 +108,6 @@
     </ng-container>
 </div>
 
-<div class="bloco bloco-providers" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'" infiniteScroll (scrolled)="exibirMais()">
-    <app-wall-section
-        sectionId="providers"
-        [title]="'geral.provedores' | translate"
-        [itemsQty]="cassinoFornecedores.length"
-        (onSeeAll)="openFiltroFornecedores()"
-        (onLeft)="scrollLeft('providers')"
-        (onRight)="scrollRight('providers')"
-    />
-    <div class="provider-container">
-        <div class="provider-list provider-list-inline" #providersScroll id="providers-scroll" (scroll)="onScroll('providers')" infiniteScroll (scrolled)="showMoreProviders()">
-            <app-wall-provider-card
-                *ngFor="let fornecedor of cassinoFornecedores | paginate: { itemsPerPage: qtdProviders, currentPage: 1 }"
-                [data]="fornecedor"
-                [selected]="gameProviderSelected == fornecedor.gameFornecedor"
-                (click)="redirectToFilteredProviders(fornecedor)"
-            />
-        </div>
-    </div>
-</div>
 <div class="bloco bloco-relatedGames" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
     <app-wall-section
         infiniteScroll
@@ -154,6 +134,27 @@
     </div>
 </div>
 
-<div class="main-footer">
+<div class="bloco bloco-providers" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'" infiniteScroll (scrolled)="exibirMais()">
+    <app-wall-section
+        sectionId="providers"
+        [title]="'geral.provedores' | translate"
+        [itemsQty]="cassinoFornecedores.length"
+        (onSeeAll)="openFiltroFornecedores()"
+        (onLeft)="scrollLeft('providers')"
+        (onRight)="scrollRight('providers')"
+    />
+    <div class="provider-container">
+        <div class="provider-list provider-list-inline" #providersScroll id="providers-scroll" (scroll)="onScroll('providers')" infiniteScroll (scrolled)="showMoreProviders()">
+            <app-wall-provider-card
+                *ngFor="let fornecedor of cassinoFornecedores | paginate: { itemsPerPage: qtdProviders, currentPage: 1 }"
+                [data]="fornecedor"
+                [selected]="gameProviderSelected == fornecedor.gameFornecedor"
+                (click)="redirectToFilteredProviders(fornecedor)"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="main-footer" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
     <app-footer></app-footer>
 </div>
