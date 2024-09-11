@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild } from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
@@ -9,8 +9,8 @@ import {interval, Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
 import { takeUntil } from 'rxjs/operators';
-
-
+import { Fornecedor } from '../wall/wall.component';
+import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 
 @Component({
     selector: 'app-gameview',
@@ -18,6 +18,9 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
+    @ViewChild('providersScroll', { static: false }) providersScroll: ElementRef;
+    @ViewChild('relatedGamesScroll', { static: false }) relatedGamesScroll: ElementRef;
+    @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     gameUrl: SafeUrl = '';
     gameId: String = '';
     gameMode: String = '';
@@ -40,6 +43,24 @@ export class GameviewComponent implements OnInit, OnDestroy {
     modalRef;
     isMob: boolean = false;
     isDesktop: boolean = false;
+    isFullScreen: boolean = false;
+    public cassinoFornecedores: Fornecedor[] = [];
+    public scrollStep = 700;
+    public scrolls: ElementRef[] = [];
+    public gameList: GameCasino[];
+    public categorySelected: String = 'cassino';
+    public gameCategory: string;
+    public gameTitle: string;
+    public gameProviderSelected;
+    public linkFacebook:string;
+    public linkWhatsapp:string;
+    public linkTelegram:string;
+    public currentUrl:string;
+    public sharedMsg:string;
+    public qtdGames: number = 10;
+    public qtdProviders: number = 10;
+    public popularGamesIds: string[] = [];
+    private casinoRelatedGamesQuantity: number = 15;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -58,14 +79,26 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private cd: ChangeDetectorRef,
         private el: ElementRef,
         @Inject(DOCUMENT) private document: any
-    ) {}
+    ) {
+        this.currentUrl = window.location.href;
+    }
 
     get customCasinoName(): string {
         return this.paramsService.getCustomCasinoName();
     }
 
     ngOnInit(): void {
+        if (window.innerWidth <= 482) {
+            this.scrollStep = 200;
+        }
 
+        this.sharedMsg = encodeURIComponent("Confira este jogo incrível agora mesmo e teste sua sorte! \nBoa diversão! 🎲");
+
+        this.linkFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.currentUrl)}`;
+        this.linkWhatsapp = `https://api.whatsapp.com/send/?text=${this.sharedMsg}%0A${encodeURIComponent(this.currentUrl)}&type=custom_url&app_absent=0`;
+        this.linkTelegram = `https://telegram.me/share/url?url=${encodeURIComponent(this.currentUrl)}&text=${this.sharedMsg}`;
+
+        this.getFornecedores();
         this.isLoggedIn = this.auth.isLoggedIn();
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
@@ -116,9 +149,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 isLoggedIn => {
                     if(isLoggedIn){
                         this.isLoggedIn = this.auth.isLoggedIn();
-
-                        this.loadGame();
                     }
+                    
+                    this.loadGame();
                 }
             );
 
@@ -160,14 +193,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
         );
     }
 
-
     checkIfDesktop() {
         this.isDesktop = window.innerWidth > 482;
         this.isMob = !this.isDesktop;
     }
 
     checkIfMobile() {
-        this.isMob = window.innerWidth <= 482;
+        this.isMob = window.innerWidth > 482;
         this.isDesktop = !this.isMobile;
     }
 
@@ -181,9 +213,25 @@ export class GameviewComponent implements OnInit, OnDestroy {
       this.checkIfDesktop();
     }
 
-
-
     ngAfterViewInit(){
+        this.gamesScrolls.changes.subscribe(
+            (scrolls) => this.scrolls = scrolls.toArray()
+        );
+
+        if (this.providersScroll) {
+            this.scrolls.push(this.providersScroll);
+        };
+
+        if (this.relatedGamesScroll) {
+            this.scrolls.push(this.relatedGamesScroll);
+        };
+        
+        if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMob) {
+            this.disableHeaderOptions();
+            const gameView = this.el.nativeElement.querySelector('.game-view');
+            this.renderer.setStyle(gameView, 'max-height', '300px');
+        }
+        
         this.layoutService.currentHeaderHeight
             .pipe(takeUntil(this.unsub$))
             .subscribe(curHeaderHeight => {
@@ -191,6 +239,78 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.changeGameviewHeight();
                 this.cd.detectChanges();
             });
+    }
+
+    public copyLink() {
+        const url = window.location.href;
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(() => {
+                this.messageService.success('Link copiado para a área de transferência!')
+            });
+        } else {
+            this.fallbackCopyTextToClipboard(url);
+        }
+    }
+
+    //copyLink para navegadores sem suporte
+    public fallbackCopyTextToClipboard(text: string) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        document.body.appendChild(textArea);
+        
+        textArea.select();
+        document.execCommand('copy');
+        this.messageService.success('Link copiado para a área de transferência!')
+        
+        document.body.removeChild(textArea);
+      }
+
+    public scrollLeft(scrollId: string) {
+        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        scrollTemp.nativeElement.scrollLeft -= this.scrollStep;
+    }
+
+    public scrollRight(scrollId: string) {
+        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        scrollTemp.nativeElement.scrollLeft += this.scrollStep;
+    }
+
+    public onScroll(scrollId: string) {
+        this.cd.detectChanges();
+        const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
+        const scrollLeft = scrollTemp.nativeElement.scrollLeft;
+        const scrollWidth = scrollTemp.nativeElement.scrollWidth;
+
+        const scrollLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-left`);
+        const scrollRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-right`);
+        const maxScrollSize = scrollTemp.nativeElement.clientWidth;
+
+        const fadeLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-left`);
+        const fadeRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-right`);
+
+        if (scrollLeft <= 0) {
+            this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
+            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
+        } else {
+            this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
+            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
+        }
+
+        if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 1) {
+            this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
+            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
+        } else {
+            this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
+            this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
+            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
+        }
     }
 
     changeGameviewHeight() {
@@ -206,13 +326,22 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
                 response => {
-                    this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-                    this.sessionId = response.sessionId;
-                    if ((this.gameFornecedor == 'tomhorn')) {
-                        this.gameName = response.gameName.split("- 9", 1) || "";
+                    if(typeof response.gameUrl !== 'undefined') {
+                        this.gameCategory = response.category;
+                        this.gameFornecedor = response.fornecedor;
+                        this.gameName = response.gameName;
+                        this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${response.fornecedor}/${response.gameId}.png`; 
                     } else {
-                        this.gameName = response.gameName || "";
+                        this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        this.sessionId = response.sessionId;
+                        if ((this.gameFornecedor == 'tomhorn')) {
+                            this.gameName = response.gameName.split("- 9", 1) || "";
+                        } else {
+                            this.gameName = response.gameName || "";
+                        }
                     }
+
+                    this.getRelatedAndPopularGames(response.category);
                 },
                 error => {
                     this.handleError(error);
@@ -268,12 +397,38 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
+    disableHeaderOptions() {
+        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
+        
+        if (optionsHeader) {
+            this.renderer.setStyle(optionsHeader, 'display', 'none');
+        }
+    }
+
     openFullScreenMob(){
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
+        const optionsHeaderHeight = optionsHeader.getBoundingClientRect().height;
+        const calculatedGameHeight = `calc(100% - ${optionsHeaderHeight}px)`;
 
         if (gameFrame) {
-            this.renderer.setStyle(gameFrame, 'position', 'fixed');
-            this.renderer.setStyle(gameFrame, 'top', '0');
+            if (!this.isFullScreen) {
+                this.renderer.setStyle(optionsHeader, 'position', 'fixed');
+                this.renderer.setStyle(optionsHeader, 'width', '100%');
+                this.renderer.setStyle(optionsHeader, 'top', 0);
+                this.renderer.setStyle(gameFrame, 'position', 'fixed');
+                this.renderer.setStyle(gameFrame, 'top', `${optionsHeaderHeight}px`);
+                this.renderer.setStyle(gameFrame, 'height', calculatedGameHeight);
+            } else {
+                this.renderer.removeStyle(optionsHeader, 'position');
+                this.renderer.removeStyle(optionsHeader, 'width');
+                this.renderer.removeStyle(optionsHeader, 'top');
+                this.renderer.removeStyle(gameFrame, 'position');
+                this.renderer.removeStyle(gameFrame, 'top');
+                this.renderer.setStyle(gameFrame, 'height', '100%');
+            }
+
+            this.isFullScreen = !this.isFullScreen;
         }
     }
 
@@ -291,6 +446,23 @@ export class GameviewComponent implements OnInit, OnDestroy {
             /* IE/Edge */
             this.elem.msRequestFullscreen();
         }
+
+        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
+        this.renderer.setStyle(optionsHeader, 'margin', '0');
+
+        const gameView = this.el.nativeElement.querySelector('.game-view');
+        this.renderer.addClass(gameView, 'desktop-fullscreen');
+        this.renderer.setStyle(gameView, 'padding', '0');
+
+        const footer = this.el.nativeElement.querySelector('.main-footer');
+        this.renderer.setStyle(footer, 'display', 'none');
+
+        const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
+        this.renderer.setStyle(blocoProvider, 'display', 'none');
+
+        const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
+        this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
+
         this.fullscreen = true;
     }
 
@@ -307,6 +479,23 @@ export class GameviewComponent implements OnInit, OnDestroy {
             /* IE/Edge */
             this.document.msExitFullscreen();
         }
+
+        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
+        this.renderer.setStyle(optionsHeader, 'margin', '0 20px');
+
+        const gameView = this.el.nativeElement.querySelector('.game-view');
+        this.renderer.removeClass(gameView, 'desktop-fullscreen');
+        this.renderer.setStyle(gameView, 'padding', '30px');
+
+        const footer = this.el.nativeElement.querySelector('.main-footer');
+        this.renderer.setStyle(footer, 'display', 'block');
+
+        const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
+        this.renderer.setStyle(blocoProvider, 'display', 'block');
+
+        const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
+        this.renderer.setStyle(blocoRelatedGames, 'display', 'block');
+
         this.fullscreen = false;
     }
 
@@ -317,6 +506,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
             result = appMobile;
         }
         return result;
+    }
+
+    get isDemo(): boolean {
+        return location.host === 'demo.wee.bet';
     }
 
     closeSessionGameTomHorn() {
@@ -342,8 +535,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         body.appendChild(bodyScript);
     }
 
-
-
     abrirCadastro(){
         this.modalService.open(
             CadastroModalComponent,
@@ -354,5 +545,78 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
+    }
+
+    private async getRelatedAndPopularGames(category:string) {
+        const response = await this.casinoApi.getGamesList(false).toPromise();
+
+        this.gameList = await this.filterDestaques(response.gameList, category);
+    }
+
+    private async getFornecedores() {
+        const {
+            fornecedores,
+        } = await this.casinoApi.getGamesList(false).toPromise();
+
+        this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
+            ...fornecedor,
+            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+        }));
+    }
+
+    public redirectToFilteredProviders(provider) {
+        const providerName = provider.gameFornecedor;
+
+        this.router.navigate(['/casino', providerName]);
+    }
+
+    public showMoreGames() {
+        this.qtdGames += 3;
+    }
+
+    public showMoreProviders() {
+        this.qtdProviders += 3;
+    }
+
+    get blink(): string {
+        return this.router.url.split('/')[1] ?? 'casino';
+    }
+
+    public handleSeeAllGames() {
+        const category = this.gameCategory;
+
+        if (!category) {
+            console.error('Categoria do jogo não está definida');
+            return;
+        }
+    
+        this.router.navigate(['casino/wallFiltered'], { queryParams: { category } });
+    }
+
+    private filterDestaques(games: GameCasino[], category: string): Promise<GameCasino[]> {
+        return new Promise((resolve) => {
+            let filteredGames = games
+                .filter((game) => {
+                    if (game.modalidade === category && game.gameID !== this.gameId) {
+                        this.popularGamesIds.push(game.gameID);
+                        return true; 
+                    }
+                    return false;
+                });
+    
+            if (filteredGames.length < this.casinoRelatedGamesQuantity) {
+                let missingGamesCalc = this.casinoRelatedGamesQuantity - filteredGames.length;
+    
+                this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
+                    response => {
+                        filteredGames = filteredGames.concat(response);
+    
+                        resolve(filteredGames);
+                    }
+                );
+            } else {
+                resolve(filteredGames);
+            }
+        });
     }
 }

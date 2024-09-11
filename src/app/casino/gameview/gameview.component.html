@@ -16,18 +16,17 @@
         </div>
     </div>
     <ng-container>
-        <div class="game-view-mobile">
-            <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame">
+        <div class="game-view-mobile" *ngIf="isLoggedIn || gameMode != 'REAL'" >
+            <div class="game-frame">
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                 <ng-container *ngIf="mobileScreen">
                     <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
                 </ng-container>
                 <ng-container *ngIf="!mobileScreen">
-                    <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
+                    <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allow="fullscreen"></iframe>
                 </ng-container>
             </div>
         </div>
-
 
         <div *ngIf="!isLoggedIn && gameMode == 'REAL'" class="game-frame">
             <div class="overlay overlay--unauthorized">
@@ -35,8 +34,19 @@
                     <div class="card-content">
                         <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'"></div>
                         <div class="card-info">
-                            <h2 class="game-title">Jogo Crash</h2>
-                            <p class="game-provider">Pragmatic</p>
+                            <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
+                                <h2 class="card-info-game-name">{{ customCasinoName }} Galaxsys</h2>
+                            </ng-container>
+                            <ng-template #nomeOficialGame>
+                                <h2 class="card-info-game-name">{{ gameName }}</h2>
+                            </ng-template>
+                            <p class="game-provider">{{ gameFornecedor }}</p>
+                            <div class="social-buttons-container">
+                                <a href="{{linkWhatsapp}}" target="_blank" class="social-buttons whatsapp"></a>
+                                <a href="{{linkFacebook}}" target="_blank" class="social-buttons facebook"></a>
+                                <a href="{{linkTelegram}}" target="_blank" class="social-buttons telegram"></a>
+                                <a target="_blank" class="social-buttons copy" (click)="copyLink()"></a>
+                            </div>
                         </div>
                     </div>
                     <div class="card-buttons">
@@ -44,14 +54,10 @@
                         <button class="btn login-btn" (click)="abrirLogin()">Entrar</button>
                     </div>
                 </div>
-                <div class="main-footer">
-                    <app-footer></app-footer>
-                </div>
             </div>
         </div>
     </ng-container>
 </div>
-
 
 <div class="game-view" *ngIf="isDesktop">
     <div class="header-game-view">
@@ -84,8 +90,7 @@
 
         <div *ngIf="!isLoggedIn && gameMode == 'REAL'" class="game-frame">
             <div class="overlay overlay--unauthorized">
-                <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'">
-                </div>
+                <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'"></div>
                 <div class="overlay-content -mt-4 p-5">
                     <div class="card-centered">
                         <h2 class="overlay-content__title">Continuar jogando...</h2>
@@ -101,4 +106,54 @@
             </div>
         </div>
     </ng-container>
+</div>
+
+<div class="bloco bloco-providers" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'" infiniteScroll (scrolled)="exibirMais()">
+    <app-wall-section
+        sectionId="providers"
+        [title]="'geral.provedores' | translate"
+        [itemsQty]="cassinoFornecedores.length"
+        (onSeeAll)="openFiltroFornecedores()"
+        (onLeft)="scrollLeft('providers')"
+        (onRight)="scrollRight('providers')"
+    />
+    <div class="provider-container">
+        <div class="provider-list provider-list-inline" #providersScroll id="providers-scroll" (scroll)="onScroll('providers')" infiniteScroll (scrolled)="showMoreProviders()">
+            <app-wall-provider-card
+                *ngFor="let fornecedor of cassinoFornecedores | paginate: { itemsPerPage: qtdProviders, currentPage: 1 }"
+                [data]="fornecedor"
+                [selected]="gameProviderSelected == fornecedor.gameFornecedor"
+                (click)="redirectToFilteredProviders(fornecedor)"
+            />
+        </div>
+    </div>
+</div>
+<div class="bloco bloco-relatedGames" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
+    <app-wall-section
+        infiniteScroll
+        sectionId="relatedGames"
+        [title]="'Jogos relacionados' | translate"
+        [itemsQty]="cassinoFornecedores.length"
+        (onSeeAll)="handleSeeAllGames()"
+        (onLeft)="scrollLeft('relatedGames')"
+        (onRight)="scrollRight('relatedGames')"
+    />
+    <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">
+        {{'geral.nenhumJogoEncontrado' | translate}}!
+    </div>
+    <div class="game-list game-list-inline" #relatedGamesScroll id="relatedGames-scroll" (scroll)="onScroll('relatedGames')" infiniteScroll (scrolled)="showMoreGames()">
+        <app-wall-game-card
+            *ngFor="let game of gameList | paginate: { itemsPerPage: qtdGames, currentPage: 1 }"
+            [game]="game"
+            [blink]="blink"
+            [isLoggedIn]="isLoggedIn"
+            [isDemo]="isDemo"
+            [isCliente]="isCliente"
+            cardType="inline"
+        />
+    </div>
+</div>
+
+<div class="main-footer">
+    <app-footer></app-footer>
 </div>
