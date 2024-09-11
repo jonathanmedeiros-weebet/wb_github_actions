@@ -1,9 +1,10 @@
 @import './variables.scss';
+@import url('https://weebet.s3.amazonaws.com/ragnar.bet/param/cores.css?v=1720842027');
 
 #app {
   width: 100%;
   height: 100vh;
-  background: var(--color-background);
+  background: var(--background);
 }
 
 // reset css
@@ -18,7 +19,7 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background: var(--background);
   margin: 0;
   padding: 0;
   transition:

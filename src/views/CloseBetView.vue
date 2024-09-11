@@ -390,7 +390,7 @@ export default {
     padding: 19px 15px;
     width: 100%;
     background: #181818;
-    background: var(--color-background-input);
+    background: var(--inputs-odds);
     border-radius: 2px;
   }
 }
@@ -456,7 +456,7 @@ export default {
   flex-direction: column;
   padding: 10px;
   background: #0a0a0a;
-  background: var(--color-background);
+  background: var(--background);
   border-radius: 4px;
   margin-bottom: -9px;
 

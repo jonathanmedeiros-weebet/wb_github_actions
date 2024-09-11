@@ -150,7 +150,7 @@ export default {
         z-index: 2;
         width: 100%;
         background: #0a0a0a;
-        background: var(--color-background);
+        background: var(--background);
     }
 
     &__container {

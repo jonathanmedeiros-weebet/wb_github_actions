@@ -156,7 +156,7 @@ export default {
         background-position: 50%;
         background-repeat: no-repeat;
         background-color: #0be58e;
-        background-color: var(--color-primary);
+        background-color: var(--highlight);
 
         clip-path: circle();
     }

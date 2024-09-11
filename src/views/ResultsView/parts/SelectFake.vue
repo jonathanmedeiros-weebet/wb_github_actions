@@ -37,7 +37,7 @@ export default {
     justify-content: space-between;
 
     background-color: #181818;
-    background-color: var(--color-background-input);
+    background-color: var(--inputs-odds);
     padding: 18px 16px;
 
     &__title {

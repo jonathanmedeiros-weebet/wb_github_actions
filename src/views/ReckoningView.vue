@@ -320,7 +320,7 @@ export default {
   &__icon-add {
     padding: 1px;
     fill: #0be58e;;
-    fill: var(--color-primary);
+    fill: var(--highlight);
   }
 
   &__value-right {
@@ -350,7 +350,7 @@ export default {
 
   &__icon {
     fill: #0be58e;
-    fill: var(--color-primary);
+    fill: var(--highlight);
     margin-right: 5px;
   }
 
@@ -404,7 +404,7 @@ export default {
 
   &__icon {
     fill: #0be58e;
-    fill: var(--color-primary);
+    fill: var(--highlight);
     margin-right: 5px;
   }
 }

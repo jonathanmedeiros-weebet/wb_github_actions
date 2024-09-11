@@ -53,7 +53,7 @@ export default {
         height: 40px;
         padding: 8px 14px;
         background: #181818;
-        background: var(--color-background-input);
+        background: var(--inputs-odds);
         border-radius: 6px;
         color: #ffffff80;
         color: var(--color-text-input);

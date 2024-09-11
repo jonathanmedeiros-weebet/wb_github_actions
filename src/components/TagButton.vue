@@ -47,17 +47,17 @@ export default {
     font-size: 16px;
     font-weight: 400;
     line-height: 14px;
-    color: var(--color-background);
-    background: var(--color-primary);
+    color: var(--background);
+    background: var(--highlight);
 
     &--primary {
-        color: var(--color-background);
-        background: var(--color-primary);
+        color: var(--background);
+        background: var(--highlight);
     }
 
     &--secondary {
         color: var(--color-text);
-        background: var(--color-background-input);
+        background: var(--inputs-odds);
     }
 }
 </style>

@@ -30,9 +30,9 @@ export default {
 
 <style scoped>
 .rounded-border {
-  border: 2px solid var(--color-background);
+  border: 2px solid var(--background);
   border-radius: 50%; 
-  background-color: var(--color-background);
+  background-color: var(--background);
   display: inline-flex;
   align-items: center; 
   justify-content: center; 

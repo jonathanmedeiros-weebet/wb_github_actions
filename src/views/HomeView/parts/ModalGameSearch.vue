@@ -114,7 +114,7 @@ export default {
   color: #ffffff;
   color: var(--color-text);
   background: #0a0a0a;
-  background: var(--color-background);
+  background: var(--background);
 
   &__header {
     padding: 16px;

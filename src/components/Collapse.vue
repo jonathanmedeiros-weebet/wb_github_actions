@@ -56,7 +56,7 @@ export default {
 
         height: 40px;
         padding: 8px 16px;
-        background: var(--color-background-input);
+        background: var(--league);
     }
 
     &__title {

@@ -460,8 +460,7 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: #181818;
-    background: var(--color-background-input);
+    background: var(--inputs-odds);
     color: #ffffff80;
     color: var(--color-text-input);
     font-size: 14px;
@@ -519,7 +518,7 @@ export default {
   
   &__checkbox:checked {
     background-color: #0be58e;
-    background-color: var(--color-primary);
+    background-color: var(--highlight);
   }
   &__checkbox::after {
     content: '';

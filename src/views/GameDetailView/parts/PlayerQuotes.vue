@@ -139,7 +139,7 @@ export default {
     z-index: 1;
     height: calc(100vh - 100px);
     background: #0a0a0a;
-    background: var(--color-background);
+    background: var(--background);
 
     &__message {
         display: flex;
@@ -161,7 +161,7 @@ export default {
 
         padding: 5px;
         background: #ffffff80;
-        background: var(--color-background-input);
+        background: var(--inputs-odds);
 
         &--three-column {
             width: 200px;
@@ -181,7 +181,7 @@ export default {
     &__option {
         min-width: calc(150px / 3);
         background: #0a0a0a;
-        background: var(--color-background);
+        background: var(--background);
         border: none;
         border-radius: 4px;
 
@@ -196,7 +196,7 @@ export default {
 
         &--selected {
             background: #0be58e;
-            background: var(--color-primary);
+            background: var(--highlight);
         }
     }
 
@@ -237,7 +237,7 @@ export default {
 }
 
 ::v-deep .collapse__item {
-    background: var(--color-background);
+    background: var(--background);
     padding: 13px 24px;
 }
 </style>

@@ -91,7 +91,7 @@ export default {
   justify-content: space-between;
   padding: 16px 24px;
   border-top: 1px solid #FFFFFF1A;
-  background: var(--color-background);
+  background: var(--background);
 
   &__item {
     display: flex;
@@ -108,7 +108,7 @@ export default {
     text-decoration: none;
 
     &--actived {
-      color: var(--color-primary);
+      color: var(--highlight);
     }
   }
 }

@@ -56,7 +56,7 @@ export default {
 
   &--active {
     color: #0be58e;
-    color: var(--color-primary);
+    color: var(--highlight);
     border-bottom: 1px solid #0be58e;
   }
 

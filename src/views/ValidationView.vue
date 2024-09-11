@@ -109,6 +109,6 @@ export default {
 ::v-deep .input__group,
 ::v-deep .input__field {
   background-color: #0a0a0a;
-  background-color: var(--color-background);
+  background-color: var(--background);
 }
 </style>

@@ -72,7 +72,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   background-color: #181818;
-  background-color: var(--color-background-input);
+  background-color: var(--inputs-odds);
   border: 2px solid #181818;
   box-sizing: border-box;
   border-radius: 50px;
@@ -81,7 +81,7 @@ export default {
   
   &--focused {
     border-color: #0be58e;
-    border-color: var(--color-primary);
+    border-color: var(--highlight);
   }
 
   &__icon {

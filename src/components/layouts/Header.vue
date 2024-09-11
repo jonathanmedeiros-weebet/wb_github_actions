@@ -82,7 +82,7 @@ export default {
     height: 58px;
     min-height: 58px;
 
-    background: var(--color-background);
+    background: var(--header);
     border-bottom: 1px solid #FFFFFF1A;
     color: var(--color-text);
 

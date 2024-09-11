@@ -28,7 +28,7 @@ export default {
 .card {
 
     background-color: #181818;
-    background-color: var(--color-background-input);
+    background-color: var(--inputs-odds);
     font-size: 14px;
     font-weight: 400;
     text-align: left;

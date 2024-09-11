@@ -142,7 +142,7 @@ export default {
 
 input {
   background-color: #181818;
-  background-color: var(--color-background-input);
+  background-color: var(--inputs-odds);
   box-sizing: border-box;
   border: none;
   border-radius: 5px;
@@ -175,13 +175,13 @@ input {
     align-items: center;
     padding-left: 10px;
     background-color: #181818;
-    background-color: var(--color-background-input);
+    background-color: var(--inputs-odds);
     border-radius: 5px;
     border: 2px solid #181818;
-    border: 2px solid var(--color-background-input);
+    border: 2px solid var(--inputs-odds);
 
     &--focused {
-      border-color: var(--color-primary);
+      border-color: var(--highlight);
     }
 
   }

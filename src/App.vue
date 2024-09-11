@@ -33,6 +33,21 @@ export default {
     showSplashScreen() {
       return !this.configClientStore.readyForUse;
     },
-  }
+  },
+  mounted() {
+      const clientName = this.configClientStore.name;
+      const slugName = this.configClientStore.slug;
+      const link = document.createElement('link');
+      link.id = `${clientName}-css`;
+      link.rel = 'stylesheet';
+      // link.href = `https://weebet.s3.amazonaws.com/${slugName}/param/cores.css?v=1720842027`;
+      document.head.appendChild(link);
+      console.log( document.head)
+  },
 }
 </script>
+
+<style lang="scss">
+
+  
+</style>

@@ -41,7 +41,7 @@ export default {
   flex-direction: column;
   height: 100%;
   background: #181818;
-  background: var(--color-background-input);
+  background: var(--inputs-odds);
   
   &__items {
     align-items: center;

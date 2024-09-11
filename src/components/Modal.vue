@@ -98,7 +98,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #181818;
-  background: var(--color-background-input);
+  background: var(--inputs-odds);
   border-radius: 24px 24px 0px 0px;
   width: 100%;
   height: auto;
@@ -116,7 +116,7 @@ export default {
     margin-right: auto;
     margin-top: 18px;
     background-color: #0a0a0a;
-    background-color: var(--color-background);
+    background-color: var(--background);
     width: 49px;
     height: 5px;
     border-radius: 10px;
@@ -127,7 +127,7 @@ export default {
     align-items: center;  /* Centraliza verticalmente */
     justify-content: center; 
     background-color: #181818;
-    background-color: var(--color-background-input);
+    background-color: var(--inputs-odds);
     color: #ffffff80;
     color: var(--color-text-input);
     border: none;

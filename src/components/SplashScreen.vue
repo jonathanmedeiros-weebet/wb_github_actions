@@ -1,16 +1,25 @@
 <template>
   <div class="splash-screen">
-    <img class="splash-screen__image" src="@/assets/images/weebet_logo_verde_lg.png">
+    <img class="splash-screen__image" :src="imageClient" alt="Logo do cliente">
     <SpinnerLoading />
   </div>
 </template>
 
 <script>
 import SpinnerLoading from '@/components/SpinnerLoading.vue'
+import { useConfigClient } from "@/stores";
 
 export default {
   components: { SpinnerLoading },
   name: 'splash-screen',
+
+  computed: {
+    imageClient(){
+      const configClient =  useConfigClient();
+      const slug = configClient.slug;
+      return `https://weebet.s3.amazonaws.com/${slug}/logos/logo_banca.png`;
+    }
+  }
 }
 </script>
 
@@ -26,6 +35,8 @@ export default {
   
   &__image {
     margin-bottom: 40px;
+    width: 102px;
+    height: 102px;
   }
 }
 </style>

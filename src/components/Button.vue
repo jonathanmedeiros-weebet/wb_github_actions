@@ -63,28 +63,28 @@ export default {
   line-height: 14px;
 
   color: #0a0a0a;
-  color: var(--color-background);
+  color: var(--background);
   background: #0be58e;
-  background: var(--color-primary);
+  background: var(--highlight);
   
   &--primary {
     color: #0a0a0a;
-    color: var(--color-background);
+    color: var(--background);
     background: #0be58e;
-    background: var(--color-primary);
+    background: var(--highlight);
   }
 
   &--secondary {
     color: #ffffff;
     color: var(--color-text);
     background: #0a0a0a;
-    background: var(--color-background);
+    background: var(--background);
   }
   &--secondary-light {
     color: #ffffff;
     color: var(--color-text);
     background: #181818;
-    background: var(--color-background-input);
+    background: var(--inputs-odds);
   }
 }
 

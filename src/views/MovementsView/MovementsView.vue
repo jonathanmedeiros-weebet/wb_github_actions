@@ -169,9 +169,9 @@ export default {
   margin-top: 5px;
   height: 30px;
   opacity: 0.5;
-  background-color: #cf53530d;
+  background-color: var(--color-text-input);
   color: var(--color-text);
-  padding: 10px;
+  padding: 0px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;

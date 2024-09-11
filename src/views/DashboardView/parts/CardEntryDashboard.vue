@@ -114,7 +114,7 @@ export default {
     padding: 25px 12px;
     border-radius: 8px;
     background: #181818;
-    background: var(--color-background-input);
+    background: var(--inputs-odds);
     
     &__body {
         display: flex;

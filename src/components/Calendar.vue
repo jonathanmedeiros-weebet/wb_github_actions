@@ -162,7 +162,7 @@ export default {
     padding: 10px 24px;
 
     color: var(--color-text);
-    background: var(--color-background);
+    background: var(--background);
   }
 
   &__weeks {
@@ -189,8 +189,8 @@ export default {
     font-weight: 500;
 
     &--selected {
-      background: var(--color-primary);
-      color: var(--color-background-input);
+      background: var(--highlight);
+      color: var(--inputs-odds);
       border-radius: 50px;
     }
   }

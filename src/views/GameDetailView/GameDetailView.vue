@@ -308,7 +308,7 @@ export default {
 
         border-bottom: 1px solid #ffffff1a;
         background: #181818;
-        background: var(--color-background-input);
+        background: var(--game);
     }
 
     &__filters::-webkit-scrollbar {

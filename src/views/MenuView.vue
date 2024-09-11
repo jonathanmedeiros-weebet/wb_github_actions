@@ -244,7 +244,7 @@ export default {
   height: auto;
   margin-top: 18px;
   background-color: #181818;
-  background-color: var(--color-background-input);
+  background-color: var(--inputs-odds);
   border-radius: 10px;
   padding: 22px 18px;
   padding-top: 16px;
@@ -291,7 +291,7 @@ export default {
     border: none;
     border-radius: 18px;
     color: #0a0a0a;
-    color: var(--color-background); 
+    color: var(--background); 
     padding: 7px;
     white-space: nowrap;
     font-size: 10px;
@@ -300,7 +300,7 @@ export default {
 
   &__icon {
     fill: #181818;
-    fill: var(--color-background-input);
+    fill: var(--inputs-odds);
     align-items: center;
   }
 }
@@ -319,7 +319,7 @@ export default {
   &__card {
     width: 100%;
     background-color: #181818;
-    background-color: var(--color-background-input);
+    background-color: var(--inputs-odds);
     padding: 18px 8px;
     padding-top: 8px;
     border-radius: 10px;
