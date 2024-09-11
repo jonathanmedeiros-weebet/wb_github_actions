@@ -170,10 +170,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         .subscribe(
                             () => {
                                 this.getUsuario();
-                                if(this.xtremepushHabilitado() && this.usuario.tipo_usuario === 'cliente'){
-                                    xtremepush('event', 'login');
+                                if (this.usuario.tipo_usuario === 'cliente') {
+                                    if(this.xtremepushHabilitado()){
+                                        xtremepush('event', 'login');
+                                    }
+                                } else {
+                                    location.reload();
                                 }
-                                location.reload();
+                                this.activeModal.dismiss();
+                                this.xtremepushBackgroundRemove();
                             },
                             error => this.handleError(error)
                         );
@@ -293,5 +298,21 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     xtremepushHabilitado() {
         return Boolean(this.paramsLocais.getOpcoes()?.xtremepush_habilitado);
+    }
+
+    xtremepushBackgroundRemove() {
+        let intervalId = setInterval(() => {
+            const element = document.querySelector('.webpush-swal2-popup.webpush-swal2-modal.webpush-swal2-show');
+
+            if (element) {
+                (element as HTMLElement).style.visibility = 'hidden';
+                (element as HTMLElement).style.background = 'none';
+                (element as HTMLElement).style.visibility = 'visible';
+                clearInterval(intervalId);
+            }
+        }, 100);
+        setTimeout(() => {
+            clearInterval(intervalId);
+        }, 3000);
     }
 }

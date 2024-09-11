@@ -143,7 +143,7 @@
         }
 
 
-        if (parseInt(getAndroidVersion()) <= 7) {
+        if (parseInt(getAndroidVersion()) <= Number([ANDROID_VERSION])) {
             if (location.search.indexOf('app') >= 0) {
                 window.location.href = 'https://[S3_FOLDER]/client-light/?config=true&host=[HOST]&slug=[S3_FOLDER]&nome=[BANCA]'
             }
