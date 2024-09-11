@@ -15,6 +15,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { FormValidations } from 'src/app/shared/utils';
 import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
+import { LoginService } from 'src/app/shared/services/login.service';
 
 declare var xtremepush: any;
 
@@ -54,7 +55,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private socialAuth: SocialAuthService,
         private router: Router,
         private modalService: NgbModal,
-        private geolocationService: GeolocationService
+        private geolocationService: GeolocationService,
+        private loginService: LoginService,
     ) {
         super();
     }
@@ -174,6 +176,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                                     if(this.xtremepushHabilitado()){
                                         xtremepush('event', 'login');
                                     }
+                                    this.loginService.triggerEvent();
                                 } else {
                                     location.reload();
                                 }
