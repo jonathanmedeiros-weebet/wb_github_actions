@@ -8,7 +8,9 @@
     />
     <ModalCalendar
       v-if="showModalCalendar"
-      :initialDate="dateSelected"
+      :initialDate="startDate"
+      :finalDate="endDate"
+      :isMultiDate="true"
       @closeModal="handleCloseCalendarModal"
       @change="handleCalendar"
     />
@@ -79,7 +81,6 @@ export default {
       endDate: this.dateEnd ?? now().format('YYYY-MM-DD'),
       title: 'Movimentações',
       balanceData: {},
-      dateSelected: now().format('YYYY-MM-DD')
     };
   },
   computed: {
@@ -102,10 +103,9 @@ export default {
     handleCloseCalendarModal() {
       this.showModalCalendar = false;
     },
-    async handleCalendar(dateTime) {
-      this.startDate = dateTime.format('YYYY-MM-DD');
-      this.endDate = dateTime.format('YYYY-MM-DD');
-      this.dateSelected = dateTime.format('YYYY-MM-DD'); 
+    async handleCalendar({initialDate, finalDate}) {
+      this.startDate = initialDate.format('YYYY-MM-DD');
+      this.endDate = finalDate.format('YYYY-MM-DD');
       this.handleCloseCalendarModal();
       this.getBalance();
     },
@@ -118,10 +118,8 @@ export default {
       }
     },
     resetDateToCurrent() {
-      const currentDate = now().format('YYYY-MM-DD');
-      this.startDate = currentDate;
-      this.endDate = currentDate;
-      this.dateSelected = currentDate; 
+      this.startDate = this.dateIni ?? now().format('YYYY-MM-DD');
+      this.endDate = this.dateEnd ?? now().format('YYYY-MM-DD');
       this.getBalance();
     },
     formatCurrency(value) {

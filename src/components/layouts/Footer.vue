@@ -21,11 +21,17 @@ export default {
     }
   },
   mounted() {
-    document.getElementById('user_name').addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)
-    document.getElementById('user_name').addEventListener('blur', () => this.hideCopyrightWhenKeyboardWasDisplayed = false)
+    const userNameElement = document.getElementById('user_name');
+    if(userNameElement) {
+      userNameElement.addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)
+      userNameElement.addEventListener('blur', () => this.hideCopyrightWhenKeyboardWasDisplayed = false)
+    }
 
-    document.getElementById('user_password').addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)
-    document.getElementById('user_password').addEventListener('blur', () => this.hideCopyrightWhenKeyboardWasDisplayed = false)
+    const userPasswordElement = document.getElementById('user_password');
+    if(userPasswordElement) {
+      userPasswordElement.addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)
+      userPasswordElement.addEventListener('blur', () => this.hideCopyrightWhenKeyboardWasDisplayed = false)
+    }
   },
   computed: {
     showTabs() {

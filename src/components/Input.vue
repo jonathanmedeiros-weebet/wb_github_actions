@@ -41,6 +41,7 @@
         autocomplete="off"
         @keypress="emitKeypress"
         :readonly="readonly"
+        :inputmode="type"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
         <IconVisibility v-if="showPassword" :color="'#ffffff80'" />
