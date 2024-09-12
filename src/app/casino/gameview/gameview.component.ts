@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild , ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
@@ -17,6 +17,8 @@ import {
 import {takeUntil} from "rxjs/operators";
 import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
+import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
+import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 
 @Component({
     selector: 'app-gameview',
@@ -24,8 +26,6 @@ import { GameCasino } from 'src/app/shared/models/casino/game-casino';
     styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
-    @ViewChild('providersScroll', { static: false }) providersScroll: ElementRef;
-    @ViewChild('relatedGamesScroll', { static: false }) relatedGamesScroll: ElementRef;
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @ViewChild('continuarJogandoModal', {static: true}) continuarJogandoModal;
     gameUrl: SafeUrl = '';
@@ -46,14 +46,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
     backgroundImageUrl = '';
     headerHeight = 92;
     currentHeight = window.innerHeight - this.headerHeight;
-    modalRef;
     isMob: boolean = false;
     isDesktop: boolean = false;
     isFullScreen: boolean = false;
     public cassinoFornecedores: Fornecedor[] = [];
     public scrollStep = 700;
     public scrolls: ElementRef[] = [];
-    public gameList: GameCasino[];
+    public gameList: GameCasino[]= [];
     public categorySelected: String = 'cassino';
     public gameCategory: string;
     public gameTitle: string;
@@ -115,7 +114,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.getPosicaoFinanceira()
         }
         const routeParams = this.route.snapshot.params;
-        this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
+        this.backgroundImageUrl = `https://cdn.wee.bet/img/casino/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
         this.updateView();
         window.addEventListener('resize', () => this.updateView());
@@ -246,14 +245,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.gamesScrolls.changes.subscribe(
             (scrolls) => this.scrolls = scrolls.toArray()
         );
-
-        if (this.providersScroll) {
-            this.scrolls.push(this.providersScroll);
-        };
-
-        if (this.relatedGamesScroll) {
-            this.scrolls.push(this.relatedGamesScroll);
-        };
         
         if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMob) {
             this.disableHeaderOptions();
@@ -305,7 +296,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     public scrollRight(scrollId: string) {
         const scrollTemp = this.scrolls.find((scroll) => scroll.nativeElement.id === scrollId + '-scroll');
-        scrollTemp.nativeElement.scrollLeft += this.scrollStep;
+
+        if (scrollTemp) {
+            scrollTemp.nativeElement.scrollLeft += this.scrollStep;
+        } else {
+            console.error(`Elemento com ID ${scrollId + '-scroll'} não encontrado`);
+        }
     }
 
     public onScroll(scrollId: string) {
@@ -318,27 +314,20 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const scrollRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-right`);
         const maxScrollSize = scrollTemp.nativeElement.clientWidth;
 
-        const fadeLeftTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-left`);
-        const fadeRightTemp = this.el.nativeElement.querySelector(`#${scrollId}-fade-right`);
-
         if (scrollLeft <= 0) {
             this.renderer.addClass(scrollLeftTemp, 'disabled-scroll-button');
             this.renderer.removeClass(scrollLeftTemp, 'enabled-scroll-button');
-            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '0');
         } else {
             this.renderer.addClass(scrollLeftTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollLeftTemp, 'disabled-scroll-button');
-            if(fadeLeftTemp) this.renderer.setStyle(fadeLeftTemp, 'opacity', '1');
         }
 
         if ((scrollWidth - (scrollLeft + maxScrollSize)) <= 1) {
             this.renderer.addClass(scrollRightTemp, 'disabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'enabled-scroll-button');
-            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '0');
         } else {
             this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
-            if(fadeRightTemp) this.renderer.setStyle(fadeRightTemp, 'opacity', '1');
         }
     }
 
@@ -474,7 +463,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const optionsHeaderHeight = optionsHeader.getBoundingClientRect().height;
         const calculatedGameHeight = `calc(100% - ${optionsHeaderHeight}px)`;
 
-        if (gameFrame) {
+        if (gameFrame && !optionsHeader.classList.contains('in-game')) {
             if (!this.isFullScreen) {
                 this.renderer.setStyle(optionsHeader, 'position', 'fixed');
                 this.renderer.setStyle(optionsHeader, 'width', '100%');
@@ -492,41 +481,32 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
 
             this.isFullScreen = !this.isFullScreen;
+        } else {
+            if (this.document.exitFullscreen) {
+                this.document.exitFullscreen();
+            } else if (this.document.mozCancelFullScreen) {
+                /* Firefox */
+                this.document.mozCancelFullScreen();
+            } else if (this.document.webkitExitFullscreen) {
+                /* Chrome, Safari and Opera */
+                this.document.webkitExitFullscreen();
+            } else if (this.document.msExitFullscreen) {
+                /* IE/Edge */
+                this.document.msExitFullscreen();
+            }
         }
-    }
-
-    disableHeaderOptions() {
-        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
         
-        if (optionsHeader) {
-            this.renderer.setStyle(optionsHeader, 'display', 'none');
-        }
-    }
-
-    openFullScreenMob(){
-        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
-        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
-        const optionsHeaderHeight = optionsHeader.getBoundingClientRect().height;
-        const calculatedGameHeight = `calc(100% - ${optionsHeaderHeight}px)`;
-
-        if (gameFrame) {
-            if (!this.isFullScreen) {
-                this.renderer.setStyle(optionsHeader, 'position', 'fixed');
-                this.renderer.setStyle(optionsHeader, 'width', '100%');
-                this.renderer.setStyle(optionsHeader, 'top', 0);
-                this.renderer.setStyle(gameFrame, 'position', 'fixed');
-                this.renderer.setStyle(gameFrame, 'top', `${optionsHeaderHeight}px`);
-                this.renderer.setStyle(gameFrame, 'height', calculatedGameHeight);
-            } else {
-                this.renderer.removeStyle(optionsHeader, 'position');
-                this.renderer.removeStyle(optionsHeader, 'width');
-                this.renderer.removeStyle(optionsHeader, 'top');
-                this.renderer.removeStyle(gameFrame, 'position');
-                this.renderer.removeStyle(gameFrame, 'top');
-                this.renderer.setStyle(gameFrame, 'height', '100%');
-            }
-
-            this.isFullScreen = !this.isFullScreen;
+        if (this.elem.requestFullscreen) {
+            this.elem.requestFullscreen();
+        } else if (this.elem.mozRequestFullScreen) {
+            /* Firefox */
+            this.elem.mozRequestFullScreen();
+        } else if (this.elem.webkitRequestFullscreen) {
+            /* Chrome, Safari and Opera */
+            this.elem.webkitRequestFullscreen();
+        } else if (this.elem.msRequestFullscreen) {
+            /* IE/Edge */
+            this.elem.msRequestFullscreen();
         }
 
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
@@ -561,20 +541,33 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
-        this.renderer.setStyle(optionsHeader, 'margin', '0');
+        if (optionsHeader && optionsHeader.classList.contains('in-game')) {
+            this.renderer.setStyle(optionsHeader, 'margin', '0');
+        }
 
         const gameView = this.el.nativeElement.querySelector('.game-view');
-        this.renderer.addClass(gameView, 'desktop-fullscreen');
-        this.renderer.setStyle(gameView, 'padding', '0');
+
+        if(gameView && !gameView.classList.contains('in-game')) {
+            this.renderer.addClass(gameView, 'desktop-fullscreen');
+            this.renderer.setStyle(gameView, 'padding', '0');
+        }
+        
 
         const footer = this.el.nativeElement.querySelector('.main-footer');
-        this.renderer.setStyle(footer, 'display', 'none');
-
         const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
-        this.renderer.setStyle(blocoProvider, 'display', 'none');
-
         const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
-        this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
+
+        if (footer) {
+            this.renderer.setStyle(footer, 'display', 'none');
+        }
+
+        if (blocoProvider) {
+            this.renderer.setStyle(blocoProvider, 'display', 'none');
+        }
+
+        if (blocoRelatedGames) {
+            this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
+        }
 
         this.fullscreen = true;
     }
@@ -594,20 +587,33 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
-        this.renderer.setStyle(optionsHeader, 'margin', '0 20px');
-
+        
         const gameView = this.el.nativeElement.querySelector('.game-view');
-        this.renderer.removeClass(gameView, 'desktop-fullscreen');
-        this.renderer.setStyle(gameView, 'padding', '30px');
+
+        if(gameView && !gameView.classList.contains('in-game')) {
+            this.renderer.removeClass(gameView, 'desktop-fullscreen');
+        }
+        
+        if (gameView && !gameView.classList.contains('in-game')) {
+            this.renderer.setStyle(optionsHeader, 'margin', '0 20px');
+            this.renderer.setStyle(gameView, 'padding', '30px');
+        }
 
         const footer = this.el.nativeElement.querySelector('.main-footer');
-        this.renderer.setStyle(footer, 'display', 'block');
-
         const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
-        this.renderer.setStyle(blocoProvider, 'display', 'block');
-
         const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
-        this.renderer.setStyle(blocoRelatedGames, 'display', 'block');
+
+        if (footer) {
+            this.renderer.setStyle(footer, 'display', 'block');
+        }
+
+        if (blocoProvider) {
+            this.renderer.setStyle(blocoProvider, 'display', 'block');
+        }
+
+        if (blocoRelatedGames) {
+            this.renderer.setStyle(blocoRelatedGames, 'display', 'block');
+        }
 
         this.fullscreen = false;
     }
@@ -679,6 +685,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
         );
     }
 
+    openDeposit() {
+        this.modalService.open(DepositoComponent);
+    }
+
     getPosicaoFinanceira() {
         this.auth.getPosicaoFinanceira()
             .pipe(takeUntil(this.unsub$))
@@ -734,6 +744,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const response = await this.casinoApi.getGamesList(false).toPromise();
 
         this.gameList = await this.filterDestaques(response.gameList, category);
+        
     }
 
     private async getFornecedores() {
@@ -801,5 +812,26 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 resolve(filteredGames);
             }
         });
+    }
+
+    public openFiltroFornecedores() {
+        const modalRef = this.modalService.open(
+            WallProviderFilterModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'xxl',
+                centered: true,
+                windowClass: 'modal-750'
+            }
+        );
+
+        modalRef.componentInstance.providers = this.cassinoFornecedores;
+        modalRef.componentInstance.providerSelected = this.gameFornecedor;
+        modalRef.result.then(({event, data}) => {
+            if(event == 'apply'){
+                const {providerSelected} = data;
+                this.router.navigate(['/casino', providerSelected]);
+            }
+        })
     }
 }

@@ -9,12 +9,19 @@
     position: relative;
 }
 
+.empty-game-list {
+    color: var(--foreground-header);
+    opacity: 0.5;
+}
+
 .game-list {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     -ms-overflow-style: none;
     scrollbar-width: none; 
+    padding-left: 18px;
+    margin-left: -18px;
 }
 
 .game-list::-webkit-scrollbar {
@@ -49,11 +56,6 @@
     flex-wrap: nowrap;
     overflow: scroll;
     scroll-behavior: smooth;
-}
-
-.empty-game-list {
-    color: var(--foreground-header);
-    opacity: 0.5;
 }
 
 .more-games-fade {
@@ -147,6 +149,14 @@
         flex-wrap: nowrap;
         overflow: scroll;
         scroll-behavior: smooth;
+        padding-left: 16px;
+        margin-left: -16px;
+    }
+
+    .internal .game-list {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
     }
 
     .more-games-fade-right {
@@ -161,6 +171,19 @@
     .more-games-fade {
         height: calc(100% + 10px);
         top: 0;
+    }
+
+    .btn#deposit-btn{
+        background-color: var(--highlight);
+        color: var(--foreground-highlight);
+        width: 82px;
+        height: 23px !important;
+        padding: 10px 7px;
+        text-align: center;
+        margin: auto 0;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
     }
 }
 
@@ -185,15 +208,30 @@
     .game-view {
         width: 100%;
         height: 100%;
-        overflow: auto;
         display: flex;
         flex-direction: column;
         margin-bottom: 10px;
+        z-index: 1000;
     }
 
     .game-view-mobile {
         width: 100%;
         height: 100%;
+    }
+
+    .header-game-view.in-game {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+    
+    .game-view-mobile.in-game {
+       position: fixed;
+       top: 57px;
+    }
+
+    .game-list app-wall-game-card {
+        width: 120px;
     }
 
     .game-name {
@@ -384,7 +422,23 @@
         width: 100%;
         margin: 0 20px;
         margin-bottom: 40px;
-        height: 790px;
+        height: 780px;
+    }
+
+    .game-view.in-game {
+        padding: 0;
+        height: 100%;
+    }
+
+    .header-game-view.in-game {
+        width: 100%;
+        margin: 0;
+        background-color: var(--background);
+    }
+
+    .game-frame.in-game {
+        width: 100%;
+        margin: 0 auto;
     }
 
     .aviso{
@@ -442,6 +496,8 @@
         background-color: #0A0A0A;
         border: none;
         margin: 0 20px;
+        border: 1px solid #1B1B1B;
+        max-height: 45px;
     }
     .header-game-view > div {
         flex-grow: 1;
@@ -492,30 +548,30 @@
         top: 0;
         width: 100%;
         height: auto !important;
-        background-color: black;
+        background-color: var(--background-rgb);
     }
 
     .desktop-fullscreen .game-frame {
         width:100%;
-        height: calc(100vh - 63px);
+        height: calc(100vh - 23px);
         margin: 0;
     }
 
-.close-modal-continuar-jogando i{
-    color: var(--highlight);
-    font-size: medium;
-}
+    .close-modal-continuar-jogando i{
+        color: var(--highlight);
+        font-size: medium;
+    }
 
-.btn-custom, .btn-custom2 {
-    margin: 10px 0;
-    padding: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    white-space: nowrap;
-    min-width: 260px;
-}
+    .btn-custom, .btn-custom2 {
+        margin: 10px 0;
+        padding: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        white-space: nowrap;
+        min-width: 260px;
+    }
     .overlay {
         overflow: hidden;
         display: flex;

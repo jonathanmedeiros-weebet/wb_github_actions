@@ -1,5 +1,5 @@
 <div class="game-view" *ngIf="isMob">
-    <div class="header-game-view" >
+    <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
                 <span>{{ customCasinoName }} Galaxsys</span>
@@ -9,6 +9,9 @@
             </ng-template>
         </div>
         <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="buttons-game-view">
+            <ng-container > <!-- Lembrar de colocar a validacao correta! -->
+                <button class="btn" id="deposit-btn" (click)="openDeposit()">Depositar</button> 
+            </ng-container>
             <ng-container>
                 <a class="btn-cassino screen-adjust" (click)="openFullScreenMob()"><i class="fa fa-expand"></i></a>
             </ng-container>
@@ -16,7 +19,7 @@
         </div>
     </div>
     <ng-container>
-        <div class="game-view-mobile" *ngIf="isLoggedIn || gameMode != 'REAL'" >
+        <div class="game-view-mobile" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }" *ngIf="isLoggedIn || gameMode != 'REAL'" >
             <div class="game-frame">
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                 <ng-container *ngIf="mobileScreen">
@@ -59,8 +62,8 @@
     </ng-container>
 </div>
 
-<div class="game-view" *ngIf="isDesktop">
-    <div class="header-game-view">
+<div class="game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }" *ngIf="isDesktop">
+    <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
                 <span> {{ customCasinoName }} Galaxsys </span>
@@ -78,7 +81,7 @@
         </div>
     </div>
     <ng-container>
-        <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame">
+        <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame in-game">
             <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
             <ng-container *ngIf="mobileScreen">
                 <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
@@ -148,33 +151,38 @@
     </ng-container>
 </div>
 
-<div class="bloco bloco-relatedGames" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
+<div class="bloco" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
     <app-wall-section
-        infiniteScroll
-        sectionId="relatedGames"
-        [title]="'Jogos relacionados' | translate"
-        [itemsQty]="cassinoFornecedores.length"
+        sectionId="cassino"
+        [title]="'cassino.jogosRelacionados' | translate"
+        [itemsQty]="gameList.length"
         (onSeeAll)="handleSeeAllGames()"
-        (onLeft)="scrollLeft('relatedGames')"
-        (onRight)="scrollRight('relatedGames')"
+        (onLeft)="scrollLeft('cassino')"
+        (onRight)="scrollRight('cassino')"
     />
-    <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">
-        {{'geral.nenhumJogoEncontrado' | translate}}!
-    </div>
-    <div class="game-list game-list-inline" #relatedGamesScroll id="relatedGames-scroll" (scroll)="onScroll('relatedGames')" infiniteScroll (scrolled)="showMoreGames()">
-        <app-wall-game-card
-            *ngFor="let game of gameList | paginate: { itemsPerPage: qtdGames, currentPage: 1 }"
-            [game]="game"
-            [blink]="blink"
-            [isLoggedIn]="isLoggedIn"
-            [isDemo]="isDemo"
-            [isCliente]="isCliente"
-            cardType="inline"
-        />
+
+    <div class="games-container">
+        <ng-container *ngIf="gameList.length; else elseWithoutGames">
+            <div class="game-list game-list-inline" #scrollGames id="cassino-scroll" (scroll)="onScroll('cassino')">
+                <app-wall-game-card
+                    *ngFor="let game of gameList"
+                    [game]="game"
+                    [blink]="blink"
+                    [isLoggedIn]="isLoggedIn"
+                    [isDemo]="isDemo"
+                    [isCliente]="isCliente"
+                    cardType="inline"
+                />
+            </div>
+        </ng-container>
+
+        <ng-template #elseWithoutGames>
+            <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+        </ng-template>
     </div>
 </div>
 
-<div class="bloco bloco-providers" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'" infiniteScroll (scrolled)="exibirMais()">
+<div class="bloco" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
     <app-wall-section
         sectionId="providers"
         [title]="'geral.provedores' | translate"
@@ -183,12 +191,13 @@
         (onLeft)="scrollLeft('providers')"
         (onRight)="scrollRight('providers')"
     />
+
     <div class="provider-container">
-        <div class="provider-list provider-list-inline" #providersScroll id="providers-scroll" (scroll)="onScroll('providers')" infiniteScroll (scrolled)="showMoreProviders()">
+        <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
             <app-wall-provider-card
-                *ngFor="let fornecedor of cassinoFornecedores | paginate: { itemsPerPage: qtdProviders, currentPage: 1 }"
+                [container]="listagem"
+                *ngFor="let fornecedor of cassinoFornecedores"
                 [data]="fornecedor"
-                [selected]="gameProviderSelected == fornecedor.gameFornecedor"
                 (click)="redirectToFilteredProviders(fornecedor)"
             />
         </div>
