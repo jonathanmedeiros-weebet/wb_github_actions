@@ -1,3 +1,4 @@
+
 const _host = '//central.demo.wee.bet';
 const _center = 'https://center7.wee.bet';
 const _live = 'https://streaming.wee.bet';
