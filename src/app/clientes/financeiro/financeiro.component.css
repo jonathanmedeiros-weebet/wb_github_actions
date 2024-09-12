@@ -79,6 +79,10 @@
         position: relative;
     }
 
+    .mobile-modal-header{
+        margin: 1em 0;
+    }
+
     .filtros {
         flex-direction: column;
         gap: 20px;
