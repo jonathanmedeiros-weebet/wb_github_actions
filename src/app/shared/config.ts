@@ -23,4 +23,3 @@ export const config: any = {
 
     BG: `${_host}/tema/bk.jpg`
 };
-
