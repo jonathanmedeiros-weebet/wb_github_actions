@@ -32,7 +32,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
         private modalService: NgbModal,
-        private paramsLocais: ParametrosLocaisService,
+        private paramsLocais: ParametrosLocaisService
     ) {
         super();
     }
@@ -88,7 +88,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         }, {validator: PasswordValidation.MatchPassword});
 
         
-        if (this.isStrengthPassword){
+        if (this.isStrengthPassword) {
             this.form.controls.senha_nova.addValidators(FormValidations.strongPasswordValidator())
         }
     }

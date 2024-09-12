@@ -269,7 +269,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             dadosCriptografados: [null]
         });
 
-        if (this.isStrengthPassword){
+        if (this.isStrengthPassword) {
             this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
         }
         

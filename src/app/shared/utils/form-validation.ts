@@ -150,8 +150,8 @@ export class FormValidations {
             'menorDeIdade': 'Cadastro permitido apenas para maiores de 18 anos.',
             'cpfInvalido': 'CPF Inválido!',
             'cpfNotExists': 'CPF informado não existe.',
-            'strongPassword': 'A senha deve conter 8 dígitos, pelo menos uma letra minúscula, uma letra maiúscula, um número e um caractere especial',
             'nomeDeUsuarioInvalido': 'Nome de usuário só pode conter letras, números e sublinhado (_)',
+            'strongPassword': 'A senha deve conter 8 dígitos, pelo menos uma letra minúscula, uma letra maiúscula, um número e um caractere especial'
         };
         return config[validatorName];
     }
