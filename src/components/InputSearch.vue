@@ -5,12 +5,14 @@
       class="input-search__field"
       type="text"
       :placeholder="placeholder"
+      :value="inputValue"  
       @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur"
+      ref="myInput" 
     />
     <div class="input-search__icon--right">
-      <IconClose :size="14" @click.native="handleClear"/>
+      <IconClose :size="14" @click="handleClear"/>
     </div>
   </div>
 </template>
@@ -38,32 +40,42 @@ export default {
   data() {
     return {
       isFocused: false,
+      inputValue: this.value, 
     };
   },
+  watch: {
+    value(newValue) {
+      this.inputValue = newValue;
+    }
+  },
   methods: {
-    handleInput(event) {
-      this.$emit('input', event.target.value)
-    },
     handleClear() {
-      this.$emit('clear', '')
+      this.inputValue = '';  
+      this.$emit('input', '');
+      this.forcusInInput();
     },
-    handleFocus(){
+    handleInput(event) {
+      this.inputValue = event.target.value;  
+      this.$emit('input', event.target.value);  
+    },
+    handleFocus() {
       this.isFocused = true;
     },
-    handleBlur(){
+    handleBlur() {
       this.isFocused = false;
+    },
+    forcusInInput() {
+      this.$refs.myInput.focus();
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-
 .input-search {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   background-color: #181818;
   background-color: var(--color-background-input);
   border: 2px solid #181818;
@@ -87,6 +99,8 @@ export default {
       width: 16px;
       display: flex;
       justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
   }
 
