@@ -1,4 +1,4 @@
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn} from '@angular/forms';
 import * as moment from 'moment';
 
 export class FormValidations {
@@ -150,7 +150,8 @@ export class FormValidations {
             'menorDeIdade': 'Cadastro permitido apenas para maiores de 18 anos.',
             'cpfInvalido': 'CPF Inválido!',
             'cpfNotExists': 'CPF informado não existe.',
-            'nomeDeUsuarioInvalido': 'Nome de usuário só pode conter letras, números e sublinhado (_)'
+            'strongPassword': 'A senha deve conter 8 dígitos, pelo menos uma letra minúscula, uma letra maiúscula, um número e um caractere especial',
+            'nomeDeUsuarioInvalido': 'Nome de usuário só pode conter letras, números e sublinhado (_)',
         };
         return config[validatorName];
     }
@@ -175,5 +176,13 @@ export class FormValidations {
         if (inputType === 'insertText' && data && !regex.test(data)) {
             e.preventDefault();
         }
+    }
+
+    static strongPasswordValidator(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } | null => {
+          const value = control.value || '';
+          const isValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*]).{8,}$/.test(value);
+          return isValid ? null : { 'strongPassword': { value: control.value } };
+        };
     }
 }

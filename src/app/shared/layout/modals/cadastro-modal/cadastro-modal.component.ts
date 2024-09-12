@@ -60,6 +60,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     promocaoAtiva = false;
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
+    isStrengthPassword: boolean | null;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -88,6 +89,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+        this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
 
         if (this.isLoterj) {
             this.aplicarCssTermo = true;
@@ -248,8 +250,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(6)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]],
+            senha: [null, [Validators.required, Validators.minLength(8)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(8), FormValidations.equalsTo('senha')]],
             nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
@@ -267,6 +269,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             dadosCriptografados: [null]
         });
 
+        if (this.isStrengthPassword){
+            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
+        }
+        
         if (this.isLoterj) {
             this.form.addControl('termosUso', this.fb.control(null, [
                 Validators.requiredTrue,

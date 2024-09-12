@@ -192,7 +192,7 @@
         "resultadosFutebol": "Resultados de fútbol",
         "resultadosLoterias": "Resultados de loterías",
         "contato": "Contacto",
-        "requisitosSenha": "La contraseña debe tener al menos 6 caracteres.",
+        "requisitosSenha": "La contraseña debe tener al menos 8 caracteres.",
         "nomeJogoCassino": "Juego",
         "apostouEmAs": "{{apostador}} apostó el {{data}} a las {{hora}}",
         "historicoDeApostas": "Historial de apuestas",

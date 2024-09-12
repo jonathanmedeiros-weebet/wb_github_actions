@@ -195,7 +195,7 @@
         "resultadosFutebol": "Football Results",
         "resultadosLoterias": "Lottery Results",
         "contato": "Contact",
-        "requisitosSenha": "Password must have at least 6 characters.",
+        "requisitosSenha": "Password must have at least 8 characters.",
         "nomeJogoCassino": "Game",
         "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
         "historicoDeApostas": "Betting History",
