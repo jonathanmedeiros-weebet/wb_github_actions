@@ -44,6 +44,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     resgister_cancel = false;
     googleUser;
     private geolocation: Geolocation;
+    loginMode = 'email';
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -125,6 +126,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     setLoginMode(mode: 'email' | 'phone') {
         this.form.get('loginMode').setValue(mode);
+        this.loginMode = mode;
         this.form.get('username').reset();
     }
 
@@ -140,7 +142,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
         const formData = this.form.value;
 
-        if (formData.loginMode === 'phone') {
+        if (this.loginMode === 'phone') {
             formData.username = formData.username.replace(/\s+/g, '');
         }
 
