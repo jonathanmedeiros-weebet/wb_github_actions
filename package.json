@@ -301,10 +301,10 @@
         "oraculo.bet": "gulp oraculo.bet",
         "priv8bet.com": "gulp priv8bet.com",
         "betinha.com": "gulp betinha.com",
-        "sortebet.wee.bet": "gulp sortebet.wee.bet",
         "goldeplaca.online": "gulp goldeplaca.online",
         "puskasbet.com.br": "gulp puskasbet.com.br",
-        "betagora.io": "gulp betagora.io"
+        "betagora.io": "gulp betagora.io",
+        "tigre.bet": "gulp tigre.bet"
     },
     "private": true,
     "dependencies": {

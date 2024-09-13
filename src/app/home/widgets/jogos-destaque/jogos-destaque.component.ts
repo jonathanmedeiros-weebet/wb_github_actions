@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService, ParametrosLocaisService } from 'src/app/services';
 
+import { FOOTBALL_ID } from '../../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-jogos-destaque',
     templateUrl: './jogos-destaque.component.html',
@@ -77,8 +79,8 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         const opcoes = this.paramsService.getOpcoes();
 
         let queryParams = {
-            'sport_id': 1,
-            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
+            'sport_id': FOOTBALL_ID,
+            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID),
             'odds': ['casa_90', 'empate_90', 'fora_90'],
             'data_final': opcoes.data_limite_tabela,
             'games_ids': this.jogosDestaquesIds

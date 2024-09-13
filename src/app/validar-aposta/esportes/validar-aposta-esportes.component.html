@@ -18,7 +18,7 @@
                             {{item.odd_nome}}
                         </span>
                         <ng-template #chave>
-                            <span *ngIf="item.sport == 1; else nomeOddCustom">
+                            <span *ngIf="item.sport == footballId; else nomeOddCustom">
                                 {{item.aposta_tipo.chave | tipoAposta}}
                             </span>
                             <ng-template #nomeOddCustom>

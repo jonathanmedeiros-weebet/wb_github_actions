@@ -2667,7 +2667,8 @@ gulp.task('sortegol.com', function (done) {
         server: "front2.wee.bet",
         host: "sortegol.com",
         banca: "SORTE GOL",
-        styles: ""
+        styles: "",
+        dominioTemp: "sortegol.wee.bet"
     });
 });
 
@@ -2853,15 +2854,6 @@ gulp.task('betinha.com', function (done) {
     });
 });
 
-gulp.task('sortebet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sortebet.wee.bet",
-        banca: "SORTE BET",
-        styles: "",
-    });
-});
-
 gulp.task('goldeplaca.online', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2885,6 +2877,15 @@ gulp.task('betagora.io', function (done) {
         server: "front4.wee.bet",
         host: "betagora.io",
         banca: "BET AGORA",
+        styles: "",
+    });
+});
+
+gulp.task('tigre.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "tigre.bet",
+        banca: "TIGRE BET",
         styles: "",
     });
 });

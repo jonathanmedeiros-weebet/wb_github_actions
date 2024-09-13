@@ -51,22 +51,22 @@
                             <div class="time1">
                                 <span class="text-center" [title]="jogoDestaque.time_a_nome">{{ jogoDestaque.time_a_nome }}</span>
                                 <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
-                                    <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.time_a_img}}.png" size="s" class="escudo-img">
+                                    <img src="https://cdn.wee.bet/img/times_v2/m/{{jogoDestaque.time_a_img}}.png" size="s" class="escudo-img">
                                 </span>
                                 <ng-template #defaulImage>
                                     <span class="escudo">
-                                        <img src="https://cdn.wee.bet/img/times/m/default.png" size="s" class="escudo-img">
+                                        <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="s" class="escudo-img">
                                     </span>
                                 </ng-template>
                             </div>
                             <span class="separador-times">-</span>
                             <div class="time2">
                                 <span *ngIf="jogoDestaque.time_a_img; else defaulImage" class="escudo">
-                                    <img src="https://cdn.wee.bet/img/times/m/{{jogoDestaque.time_b_img}}.png" size="s" class="escudo-img">
+                                    <img src="https://cdn.wee.bet/img/times_v2/m/{{jogoDestaque.time_b_img}}.png" size="s" class="escudo-img">
                                 </span>
                                 <ng-template #defaulImage>
                                     <span class="escudo">
-                                        <img src="https://cdn.wee.bet/img/times/m/default.png" size="s" class="escudo-img">
+                                        <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="s" class="escudo-img">
                                     </span>
                                 </ng-template>
                                 <span class="text-center flex-grow-1" [title]="jogoDestaque.time_b_nome">{{ jogoDestaque.time_b_nome }}</span>
