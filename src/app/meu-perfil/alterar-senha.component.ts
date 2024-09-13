@@ -86,7 +86,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             senha_nova: ['', [Validators.required, Validators.minLength(8)]],
             senha_confirmacao: ['', [Validators.required, Validators.minLength(8)]]
         }, {validator: PasswordValidation.MatchPassword});
-
         
         if (this.isStrengthPassword) {
             this.form.controls.senha_nova.addValidators(FormValidations.strongPasswordValidator())
