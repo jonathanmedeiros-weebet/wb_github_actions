@@ -48,16 +48,22 @@ export default {
     font-weight: 400;
     line-height: 14px;
     color: var(--background);
+    color: #0a0a0a;
+    background: #0be58e;
     background: var(--highlight);
 
     &--primary {
         color: var(--background);
         background: var(--highlight);
+        color: #0a0a0a;
+        background: #0be58e;
     }
 
     &--secondary {
+        color: #ffffff;
         color: var(--color-text);
         background: var(--inputs-odds);
+        background: #181818;
     }
 }
 </style>

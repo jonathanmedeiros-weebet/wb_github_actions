@@ -478,7 +478,7 @@ export default {
 
   &__add {
     display: flex;
-    width: 46px;
+    width: calc(50%/3 - 8px);
     padding: 18px;
     justify-content: center;
     align-items: center;
@@ -492,7 +492,7 @@ export default {
   }
 
   &__balance-input{
-    width: 100%;
+    width: 50%;
     margin-top: 10px;
   }
   
@@ -547,6 +547,8 @@ export default {
   &__alteracao {
     display: flex;
     align-items: center;
+    color: #ffffff;
+    color: var(--color-text)
   }
 
   &__finalizar {

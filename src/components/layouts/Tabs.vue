@@ -92,6 +92,7 @@ export default {
   padding: 16px 24px;
   border-top: 1px solid #FFFFFF1A;
   background: var(--background);
+  background: #0a0a0a;
 
   &__item {
     display: flex;
@@ -101,6 +102,7 @@ export default {
     gap: 8px;
 
     height: 41px;
+    color: #ffffff;
     color: var(--color-text);
     font-size: 12px;
     font-weight: 400;
@@ -109,6 +111,7 @@ export default {
 
     &--actived {
       color: var(--highlight);
+      color: #0be58e;
     }
   }
 }

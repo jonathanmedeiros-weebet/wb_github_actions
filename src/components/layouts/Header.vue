@@ -83,7 +83,9 @@ export default {
     min-height: 58px;
 
     background: var(--header);
+    background: #0a0a0a;
     border-bottom: 1px solid #FFFFFF1A;
+    color: #ffffff;
     color: var(--color-text);
 
     &__back-button,
@@ -105,6 +107,7 @@ export default {
         font-size: 20px;
         font-weight: 400;
         line-height: 23.44px;
+        color: #ffffff;
         color: var(--color-text);
     }
 

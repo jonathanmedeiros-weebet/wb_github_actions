@@ -1,9 +1,9 @@
 <template>
   <div class="games">
     <div class="games__items" v-for="item in Array(4)" :key="item">
-        <div class="games__datetime">
-          <SquareSkeleton  :height="14" :width="100"/>
-        </div>
+      <div class="games__datetime">
+        <SquareSkeleton  :height="14" :width="100"/>
+      </div>
       <div class="games__team">
         <div class="games__team-left">
           <SquareSkeleton class="games__team-name-left" :height="30" :width="200"/>

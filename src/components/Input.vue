@@ -41,10 +41,11 @@
         autocomplete="off"
         @keypress="emitKeypress"
         :readonly="readonly"
+        :inputmode="type"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
-        <icon-visibility v-if="showPassword" color="var(--color-text-input)" />
-        <icon-visibility-off v-else color="var(--color-text-input)" />
+        <IconVisibility v-if="showPassword" :color="'#ffffff80'" />
+        <IconVisibilityOff v-else :color="'#fffff80'" />
       </div>
     </div>
   </div>
@@ -154,6 +155,7 @@ input {
   -webkit-transition: 0.5s;
   font-size: 14px;
   font-weight: 400;
+  color: #ffffff80;
   color: var(--color-text-input);
 }
 
@@ -182,8 +184,8 @@ input {
 
     &--focused {
       border-color: var(--highlight);
+      border-color: #0be58e;
     }
-
   }
 
   &__icon {

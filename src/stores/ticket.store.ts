@@ -8,6 +8,7 @@ export const useTicketStore = defineStore('ticket', {
         bettor: '',
         value: 0,
         items: {} as any,
+        championshipOpened: [] as any[],
         accepted: false,
         error: ''
     }),
@@ -36,7 +37,8 @@ export const useTicketStore = defineStore('ticket', {
             quoteName,
             quoteGroupName,
             favorite,
-            modalityId
+            modalityId,
+            championshipId
         }: any) {
             const items = { ...this.items };
 
@@ -67,20 +69,32 @@ export const useTicketStore = defineStore('ticket', {
                 quoteName,
                 quoteGroupName,
                 favorite,
-                modalityId
+                modalityId,
+                championshipId
             };
-            this.items = { ...items }
+
+            this.items = { ...items };
+
+            this.prepareChampionshipOpenedIds();
         },
         removeQuote(gameId: number) {
             const items = { ...this.items };
             delete items[gameId];
+            
             this.items = { ...items };
+
+            this.prepareChampionshipOpenedIds();
         },
         clear() {
             this.items = {};
             this.bettor = '';
             this.value = 0;
             this.accepted = false;
+
+            this.prepareChampionshipOpenedIds();
+        },
+        prepareChampionshipOpenedIds() {
+            this.championshipOpened = Object.values(this.items).map((item: any) => item.championshipId);
         }
     },
 })

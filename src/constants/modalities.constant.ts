@@ -3,7 +3,7 @@ import type { ModalityOption } from "@/interfaces";
 import { useConfigClient } from "@/stores";
 
 export const modalityList = (): ModalityOption[] => {
-    const { options } = useConfigClient();
+    const { options, popularLotteryDeprecatedByAndroidVersion } = useConfigClient();
     const modalities = [
         {
             name: 'Futebol',
@@ -80,7 +80,7 @@ export const modalityList = (): ModalityOption[] => {
         {
             name: 'Loteria popular',
             id: Modalities.POPULAR_LOTTERY,
-            show: Boolean(options.loteriaPopular),
+            show: Boolean(options.loteriaPopular) && !popularLotteryDeprecatedByAndroidVersion,
             hasLive: false
         },
     ];

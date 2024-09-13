@@ -8,10 +8,11 @@
       <WInput
         class="validation__input"
         name="consult_ticket"
-        placeholder="Ex.: EA5D-DG41"
-        type="text"
+        placeholder="Ex.: 0000"
+        type="number"
         mask="#########"
         autocomple="off"
+        v-model="code"
       />
       <WButton
         id="btn-salvar"

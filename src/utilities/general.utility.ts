@@ -23,3 +23,10 @@ export const wbPostMessage = (
         file
     }));
 }
+
+export const getAndroidVersion = () => {
+    const userAgent = navigator.userAgent;
+    const match = userAgent.match(/Android\s([0-9\.]*)/);
+    
+    return match ? match[1] : false;
+}

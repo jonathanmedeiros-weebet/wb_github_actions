@@ -48,15 +48,17 @@ export default {
 .collapse {
     width: 100%;
     background: transparent;
+    min-height: 40px;
 
     &__item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         height: 40px;
         padding: 8px 16px;
         background: var(--league);
+        background: #181818;
+        color: #ffffff;
     }
 
     &__title {
@@ -64,6 +66,7 @@ export default {
         align-items: center;
         justify-content: flex-start;
 
+        color: #ffffff;
         color: var(--color-text);
         font-size: 14px;
         font-weight: 400;
