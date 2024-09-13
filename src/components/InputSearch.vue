@@ -9,6 +9,7 @@
       @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur"
+      ref="myInput" 
     />
     <div class="input-search__icon--right">
       <IconClose :size="14" @click="handleClear"/>
@@ -50,7 +51,8 @@ export default {
   methods: {
     handleClear() {
       this.inputValue = '';  
-      this.$emit('input', '');  
+      this.$emit('input', '');
+      this.forcusInInput();
     },
     handleInput(event) {
       this.inputValue = event.target.value;  
@@ -61,6 +63,9 @@ export default {
     },
     handleBlur() {
       this.isFocused = false;
+    },
+    forcusInInput() {
+      this.$refs.myInput.focus();
     },
   },
 }
