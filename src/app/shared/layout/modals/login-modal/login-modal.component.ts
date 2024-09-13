@@ -113,7 +113,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.resgister_cancel = true;
     }
 
-
     createForm() {
         this.form = this.fb.group({
             username: [''],
