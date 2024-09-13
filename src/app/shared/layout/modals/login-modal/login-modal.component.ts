@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
@@ -113,13 +113,20 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.resgister_cancel = true;
     }
 
+
     createForm() {
         this.form = this.fb.group({
             username: [''],
             password: [''],
             googleId: [''],
-            googleIdToken: ['']
+            googleIdToken: [''],
+            loginMode: ['email']
         });
+    }
+
+    setLoginMode(mode: 'email' | 'phone') {
+        this.form.get('loginMode').setValue(mode);
+        this.form.get('username').reset();
     }
 
     ngOnDestroy() {
@@ -131,7 +138,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     submit() {
-        this.auth.verificaDadosLogin(this.form.value)
+
+        const formData = this.form.value;
+
+        if (formData.loginMode === 'phone') {
+            formData.username = formData.username.replace(/\s+/g, '');
+        }
+
+        this.auth.verificaDadosLogin(formData)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (res) => {
