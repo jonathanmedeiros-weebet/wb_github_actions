@@ -2848,7 +2848,7 @@ gulp.task('betinha.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "betinha.com",
-        banca: "BETINHA.COM",
+        banca: "betinha.com",
         styles: "",
     });
 });
