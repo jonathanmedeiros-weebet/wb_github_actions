@@ -1,7 +1,7 @@
 <template>
     <div class="modal-game-search">
       <div class="modal-game-search__header">
-        <InputSearch @input="handleSearch" @clear="handleSearch"/>
+        <InputSearch ref="InputSerachComponent" @input="handleSearch" @clear="handleSearch"/>
         <button class="modal-game-search__close" @click="handleClose">
           <IconClose color="#ffffff"/>
         </button>
@@ -51,6 +51,7 @@ export default {
   mounted() {
     this.championshipList = this.homeStore.championshipList;
     setTimeout(() => this.loading = false, 1000);
+    this.$refs.InputSerachComponent.forcusInInput();
   },
   methods: {
     handleClick(game) {
