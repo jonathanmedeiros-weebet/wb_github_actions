@@ -141,7 +141,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
-            let location = await this.geolocationService.getGeolocation();
+            const location = await this.geolocationService.getGeolocation();
             this.geolocation.next(location);
             let msg = '';
             let valid = true;

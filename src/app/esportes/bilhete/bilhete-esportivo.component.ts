@@ -91,7 +91,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
         private layoutService: LayoutService,
-        private geolocationService: GeolocationService,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
@@ -608,10 +608,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     async ajustarDadosParaEnvio() {
-
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
         
-        let location = await this.geolocationService.getGeolocation();
+        const location = await this.geolocationService.getGeolocation();
         this.geolocation.next(location);
 
         const values = clone(this.form.value);

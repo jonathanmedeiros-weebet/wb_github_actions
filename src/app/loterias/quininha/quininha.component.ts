@@ -233,7 +233,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     async create() {
         this.disabledSubmit();
 
-        let location = await this.geolocationService.getGeolocation();
+        const location = await this.geolocationService.getGeolocation();
         this.geolocation.next(location);
 
         this.aposta['geolocation'] = this.geolocation.value
