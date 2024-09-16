@@ -1,0 +1,104 @@
+<div id="cashback-content">
+    <div class="mobile-modal-header" *ngIf="mobileScreen">
+        <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <div class="titulo">{{'cashback.cashback' | translate}}</div>
+        <div class="botao-direito"></div>
+    </div>
+    <div class="internal-container-out">
+        <div class="content-header hide-mobile">
+            <h2>{{'cashback.cashback' | translate}}</h2>
+        </div>
+
+        <div class="content-body">
+            <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                <div class="filtros">
+                    <input
+                        name="datepicker"
+                        class="dp-hidden"
+                        ngbDatepicker
+                        #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'"
+                        (dateSelect)="onDateSelection($event, datepicker)"
+                        [displayMonths]="2"
+                        [dayTemplate]="t"
+                        outsideDays="hidden"
+                        [startDate]="fromDate!"
+                        tabindex="-1"
+                        value=""
+                    >
+                    <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day"
+                            [class.focused]="focused"
+                            [class.range]="isRange(date)"
+                            [class.faded]="isHovered(date) || isInside(date)"
+                            (mouseenter)="hoveredDate = date"
+                            (mouseleave)="hoveredDate = null">
+                            {{ date.day }}
+                        </span>
+                    </ng-template>
+                    <div class="input-group datepicker-group">
+                        <i class="fa fa-calendar" (click)="datepicker.toggle()"></i>
+                        <input
+                            type="text"
+                            class="form-control inverted-out"
+                            [(ngModel)]="selectedDate"
+                            (click)="datepicker.toggle()"
+                            [ngModelOptions]="{standalone: true}"
+                            style="border-radius: 5px"
+                        >
+                    </div>
+                    <select class="form-control inverted-out" formControlName="status">
+                        <option value="">{{'geral.todos' | translate}}</option>
+                        <option value="pending">{{'cashback.pending' | translate}}</option>
+                        <option value="redeemed">{{'cashback.redeemed' | translate}}</option>
+                    </select>
+                    <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
+                </div>
+            </form>
+            <div class="table-responsive only-desktop">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="200">{{'cashback.description' | translate}}</th>
+                            <th width="200">{{'cashback.registrationDate' | translate}}</th>
+                            <th width="200">{{'geral.status' | translate}} </th>
+                            <th width="80" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
+                            <th width="30"></th>
+                        </tr>
+                    </thead>
+                    <tr *ngIf="loading">
+                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
+                            {{'geral.carregando' | translate}}
+                        </td>
+                    </tr>
+                    <tbody *ngIf="!loading">
+                        <tr *ngFor="let cashback of cashbacks">
+                            <td>Cashback ({{cashback.accrual}})</td>
+                            <td>{{cashback.registrationDate}}</td>
+                            <td>
+                                {{translateStatus(cashback.status)}}
+                            </td>
+                            <td
+                                [ngStyle]="{
+                                    'text-align': 'right',
+                                    'color': setAmountColor(cashback.status)
+                                }"
+                            >{{ cashback.value | currency }}<br><span [ngStyle]="{'color': '#6A6868'}">({{ translateType(cashback.cashback_type) }})</span></td>
+                            <td id="td-btn-redeem" [ngStyle]="{'text-align': 'center'}">
+                                <button
+                                    id="btn-redeem"
+                                    class="btn btn-custom"
+                                    type="button"
+                                    [disabled]="cashback.status != 'pending'"
+                                    (click)="cashback.status == 'pending' ? redeemCashback(cashback.id) : false"
+                                    >{{'cashback.redeem' | translate}}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

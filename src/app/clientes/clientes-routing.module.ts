@@ -55,6 +55,10 @@ const routes: Routes = [{
             canActivate: [IndiqueGanheGuard]
         },
         {
+            path: 'cashback',
+            loadChildren: () => import('./cashback/cashback.module').then(i => i.CashbackModule)
+        },
+        {
             path: 'rodada-gratis',
             loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
