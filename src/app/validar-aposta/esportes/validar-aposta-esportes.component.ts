@@ -19,6 +19,8 @@ import {
 } from '../../services';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 
+import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-validar-aposta-esportes',
     templateUrl: 'validar-aposta-esportes.component.html',
@@ -39,6 +41,8 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     estimativaGanho;
     opcoes;
     unsub$ = new Subject();
+
+    footballId = FOOTBALL_ID;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,

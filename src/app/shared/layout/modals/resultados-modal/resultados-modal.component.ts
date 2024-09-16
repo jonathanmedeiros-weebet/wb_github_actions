@@ -13,6 +13,8 @@ import * as moment from 'moment';
 import { Campeonato } from 'src/app/models';
 import {config} from '../../../config';
 
+import * as sportsIds from '../../../constants/sports-ids';
+
 @Component({
     selector: 'app-resultados-modal',
     templateUrl: './resultados-modal.component.html',
@@ -27,6 +29,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
 
     showLoadingIndicator = true;
 
+    sportsIds = sportsIds;
     sport;
     campeonatos: Campeonato[] = [];
 
@@ -86,7 +89,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     createForm() {
         this.form = this.fb.group({
             data: [moment().format('YYYY-MM-DD'), Validators.required],
-            sport_id: ['1', Validators.required]
+            sport_id: [sportsIds.FOOTBALL_ID, Validators.required]
         });
     }
 
@@ -107,7 +110,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     getResultados(params?) {
         let queryParams: any = {
             'data': moment().format('YYYY-MM-DD'),
-            'sport': 1
+            'sport': sportsIds.FOOTBALL_ID
         };
 
         if (params) {
