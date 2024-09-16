@@ -615,6 +615,8 @@ body .change-theme {
         max-height: 100%;
         transform: none !important;
         position: fixed !important;
+        border: none;
+        border-radius: 0;
         width: 100%;
         overflow: auto;
     }
