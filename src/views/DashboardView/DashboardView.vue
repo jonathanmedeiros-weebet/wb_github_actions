@@ -28,7 +28,7 @@
 
             <div class="dashboard__movements-dates">
                 <label class="dashboard__movements-icon-range-dates">
-                    <IconCalendar class="dashboard__movements-icon-calendar" :color="'#ffffff80'"/>
+                    <IconCalendar class="dashboard__movements-icon-calendar" :color="useHexColors"/>
                     {{ dateFilterIni.format('DD/MM/YYYY') }} - {{ dateFilterEnd.format('DD/MM/YYYY') }}
                 </label>  
             </div>
@@ -57,7 +57,7 @@ import CardEntryDashboard from './parts/CardEntryDashboard.vue'
 import CollapseDashboard from './parts/CollapseDashboard.vue'
 import ChartBar from './parts/ChartBar.vue'
 
-import { now } from '@/utilities'
+import { now, getAndroidVersion } from '@/utilities'
 import IconCalendar from '@/components/icons/IconCalendar.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
@@ -231,6 +231,12 @@ export default {
                         duration: 5000
                     })
                 });
+        },
+        isAndroid5() {
+            const androidVersion = getAndroidVersion();
+            if (!androidVersion) return false;
+            const version = parseInt(androidVersion.split('.')[0], 10);
+            return version <= 5;
         }
     },
     computed: {
@@ -245,6 +251,9 @@ export default {
         },
         showChart() {
             return !this.configClientStore.chartDeprecatedByAndroidVersion;
+        },
+        useHexColors() {
+            return this.isAndroid5() ? '#ffffff80' : 'var(--color-text-input)';
         }
     },
     mounted() {

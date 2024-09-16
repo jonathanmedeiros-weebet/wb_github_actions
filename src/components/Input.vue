@@ -126,7 +126,7 @@ export default {
     },
     emitKeypress(event) {
       this.$emit('keypress', event);
-    }
+    },
   },
   computed: {
     password() {
@@ -134,6 +134,9 @@ export default {
     },
     canMask() {
       return !['email', 'number', 'date', 'password'].includes(this.initType);
+    },
+    useHexColors() {
+      return this.isAndroid5() ? '#0be58e' : 'var(--color-text-input)';
     }
   }
 }

@@ -7,21 +7,26 @@
       :key="tab.name"
       :to="tab.route"
     >
-      <component :is="tab.icon" :color="tab.actived ? 'var(--highlight)' : '#ffffff'" :count="itemCount"/>
+      <component
+        :is="tab.icon"
+        :color="tab.actived ? useHexColors : '#ffffff'"
+        :count="itemCount"
+      />
       {{ tab.name }} 
     </RouterLink>
   </div>
 </template>
 
+
 <script>
 import { RouterLink } from 'vue-router'
-
 import IconArticle from '../icons/IconArticle.vue'
 import IconHome from '../icons/IconHome.vue'
 import IconMenu from '../icons/IconMenu.vue'
 import IconTicket from '../icons/IconTicket.vue'
 import IconValidation from '../icons/IconValidation.vue'
 import { useTicketStore } from '@/stores'
+import { getAndroidVersion } from '@/utilities'
 
 export default {
   name: 'w-tabs',
@@ -75,15 +80,25 @@ export default {
     },
     itemCount() {
       return Object.keys(useTicketStore().items).length;
+    },
+    useHexColors() {
+      return this.isAndroid5() ? '#ffffff' : 'var(--highlight)';
     }
   },
   methods: {
     verifyIfRouteIsActived(routerName) {
-      return this.$route.path === routerName
+      return this.$route.path === routerName;
+    },
+    isAndroid5() {
+      const androidVersion = getAndroidVersion();
+      if (!androidVersion) return false;
+      const version = parseInt(androidVersion.split('.')[0], 10);
+      return version <= 5;
     }
   }
 }
 </script>
+
 
 <style lang="scss" scoped>
 .tabs {

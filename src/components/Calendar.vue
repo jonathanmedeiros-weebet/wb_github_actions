@@ -2,11 +2,11 @@
   <div class="calendar">
     <div class="calendar__header">
       <button class="calendar__actions" @click="prevMonth">
-        <IconArrowLeft :size="28" color="var(--highlight)"/>
+        <IconArrowLeft :size="28" :color="useHexColors"/>
       </button>
       {{ currentMonthAndYear }}
       <button class="calendar__actions" @click="nextMonth">
-        <IconArrowRight :size="28" color="var(--highlight)"/>
+        <IconArrowRight :size="28" :color="useHexColors"/>
       </button>
     </div>
     <div class="calendar__body">
@@ -44,7 +44,8 @@
 import {
   dateFormatInMonthAndYear,
   now,
-  convertInMomentInstance
+  convertInMomentInstance,
+  getAndroidVersion
 } from '@/utilities'
 import IconArrowLeft from './icons/IconArrowLeft.vue'
 import IconArrowRight from './icons/IconArrowRight.vue'
@@ -77,6 +78,9 @@ export default {
     },
     isMonthSelected() {
       return dateFormatInMonthAndYear(this.dateSelected) === this.currentMonthAndYear
+    },
+    useHexColors() {
+      return this.isAndroid5() ? '#0be58e' : 'var(--highlight)';
     }
   },
   methods: {
@@ -125,7 +129,14 @@ export default {
       this.dateSelected = null;
       this.dateSelected = dateCustom;
       this.$emit('change', dateCustom)
+    },
+    isAndroid5() {
+      const androidVersion = getAndroidVersion();
+      if (!androidVersion) return false;
+      const version = parseInt(androidVersion.split('.')[0], 10);
+      return version <= 5;
     }
+
   },
 }
 </script>

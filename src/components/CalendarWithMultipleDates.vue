@@ -2,11 +2,11 @@
   <div class="calendar">
     <div class="calendar__header">
       <button class="calendar__actions" @click="prevMonth">
-        <IconArrowLeft :size="28" color="#0be58e"/>
+        <IconArrowLeft :size="28" :color="useHexColors"/>
       </button>
       {{ initialMonthAndYear }}
       <button class="calendar__actions" @click="nextMonth">
-        <IconArrowRight :size="28" color="#0be58e"/>
+        <IconArrowRight :size="28" :color="useHexColors"/>
       </button>
     </div>
     <div class="calendar__body">
@@ -44,7 +44,8 @@
 import {
   dateFormatInMonthAndYear,
   now,
-  convertInMomentInstance
+  convertInMomentInstance,
+  getAndroidVersion
 } from '@/utilities'
 import IconArrowLeft from './icons/IconArrowLeft.vue'
 import IconArrowRight from './icons/IconArrowRight.vue'
@@ -90,6 +91,9 @@ export default {
     isFinalMonthSelected() {
       return dateFormatInMonthAndYear(this.finalDateSelected) === this.finalMonthAndYear
     },
+    useHexColors() {
+      return this.isAndroid5() ? '#0be58e' : 'var(--highlight)';
+    }
   },
   methods: {
     verifyIfWasSelected(day) {
@@ -156,6 +160,12 @@ export default {
           finalDate: this.finalDateSelected,
         })
       }
+    },
+    isAndroid5() {
+      const androidVersion = getAndroidVersion();
+      if (!androidVersion) return false;
+      const version = parseInt(androidVersion.split('.')[0], 10);
+      return version <= 5;
     }
   },
 }
