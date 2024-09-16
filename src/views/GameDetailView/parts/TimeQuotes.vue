@@ -144,7 +144,7 @@ export default {
         align-items: flex-start;
         gap: 10px;
         padding: 13px 16px;
-        background: #181818 ;
+        background: #181818;
         background: var(--game);
 
         &--grid {

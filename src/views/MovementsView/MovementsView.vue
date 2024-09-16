@@ -167,8 +167,8 @@ export default {
   margin-top: 5px;
   height: 30px;
   opacity: 0.5;
-  background-color: var(--color-text-input);
   background-color: #181818;
+  background-color: var(--color-text-input);
   color: #ffffff;
   color: var(--color-text);
   padding: 0px 10px;

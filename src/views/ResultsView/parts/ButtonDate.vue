@@ -58,6 +58,8 @@ export default {
     color: #0be58e;
     color: var(--highlight);
     border-bottom: 1px solid #0be58e;
+    border-bottom: 1px solid var(--highlight);
+
   }
 
   &:focus {

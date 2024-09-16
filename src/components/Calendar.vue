@@ -2,11 +2,11 @@
   <div class="calendar">
     <div class="calendar__header">
       <button class="calendar__actions" @click="prevMonth">
-        <IconArrowLeft :size="28" color="#0be58e"/>
+        <IconArrowLeft :size="28" color="var(--highlight)"/>
       </button>
       {{ currentMonthAndYear }}
       <button class="calendar__actions" @click="nextMonth">
-        <IconArrowRight :size="28" color="#0be58e"/>
+        <IconArrowRight :size="28" color="var(--highlight)"/>
       </button>
     </div>
     <div class="calendar__body">
@@ -165,8 +165,8 @@ export default {
 
     color: #ffffff;
     color: var(--color-text);
-    background: var(--background);
     background: #0a0a0a;
+    background: var(--background);
 
   }
 
@@ -197,10 +197,10 @@ export default {
     color: var(--color-text);
 
     &--selected {
-      background: var(--highlight);
-      color: var(--inputs-odds);
       background: #0be58e;
+      background: var(--highlight);
       color: #181818;
+      color: var(--inputs-odds);
       border-radius: 50px;
     }
   }

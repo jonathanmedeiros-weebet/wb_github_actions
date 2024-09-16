@@ -322,12 +322,9 @@ export default {
         width: fit-content;
         padding: 8px 14px;
         border-radius: 6px;
-
         color: #ffffff80;
         color: var(--color-text-input);
-
-        background: #181818;
-        background: var(--color-background-input);
+        background: var(--input-odds);
     }
 }
 </style>

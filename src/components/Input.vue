@@ -183,8 +183,8 @@ input {
     border: 2px solid var(--inputs-odds);
 
     &--focused {
-      border-color: var(--highlight);
       border-color: #0be58e;
+      border-color: var(--highlight);
     }
   }
 

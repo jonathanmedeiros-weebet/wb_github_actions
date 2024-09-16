@@ -7,7 +7,7 @@
       :key="tab.name"
       :to="tab.route"
     >
-      <component :is="tab.icon" :color="tab.actived ? '#0be58e' : '#ffffff'" :count="itemCount"/>
+      <component :is="tab.icon" :color="tab.actived ? 'var(--highlight)' : '#ffffff'" :count="itemCount"/>
       {{ tab.name }} 
     </RouterLink>
   </div>
@@ -91,8 +91,8 @@ export default {
   justify-content: space-between;
   padding: 16px 24px;
   border-top: 1px solid #FFFFFF1A;
-  background: var(--background);
   background: #0a0a0a;
+  background: var(--background);
 
   &__item {
     display: flex;
@@ -110,8 +110,8 @@ export default {
     text-decoration: none;
 
     &--actived {
-      color: var(--highlight);
       color: #0be58e;
+      color: var(--highlight);
     }
   }
 }

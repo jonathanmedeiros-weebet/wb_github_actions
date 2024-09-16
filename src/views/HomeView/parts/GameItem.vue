@@ -238,7 +238,7 @@ export default {
         color: var(--highlight);
 
         border: 0.5px solid #0be58e;
-        border: 0.5px solid var(--color-primary);
+        border: 0.5px solid var(--highlight);
         border-radius: 2px;
         padding: 0 5px;
 

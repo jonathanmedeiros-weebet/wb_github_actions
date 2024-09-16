@@ -531,8 +531,8 @@ export default {
   }
 
   &__checkbox:checked {
-    background-color: var(--highlight);
     background-color: #0be58e;
+    background-color: var(--highlight);
   }
 
   &__checkbox::after {

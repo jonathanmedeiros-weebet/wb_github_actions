@@ -56,8 +56,8 @@ export default {
         align-items: center;
         height: 40px;
         padding: 8px 16px;
-        background: var(--league);
         background: #181818;
+        background: var(--league);
         color: #ffffff;
     }
 
