@@ -114,7 +114,6 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
                     jogo => {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
-                        jogo.live_track_id = 48242;
 
                         if (habilitar_live_tracker && jogo.live_track_id) {
                             if (window.innerWidth <= 1024) {
