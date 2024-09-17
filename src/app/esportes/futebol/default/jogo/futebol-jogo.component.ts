@@ -20,6 +20,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { FOOTBALL_ID } from 'src/app/shared/constants/sports-ids';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -58,7 +59,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     theSportUrl: SafeResourceUrl;
     loadedFrame: boolean;
-    footballId = 1;
+    footballId = FOOTBALL_ID;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
