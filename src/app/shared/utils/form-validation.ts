@@ -151,7 +151,7 @@ export class FormValidations {
             'cpfInvalido': 'CPF Inválido!',
             'cpfNotExists': 'CPF informado não existe.',
             'nomeDeUsuarioInvalido': 'Nome de usuário só pode conter letras, números e sublinhado (_)',
-            'strongPassword': 'A senha deve conter 8 dígitos, pelo menos uma letra minúscula, uma letra maiúscula, um número e um caractere especial'
+            'strongPassword': 'A senha deve conter 8 dígitos, pelo menos uma letra minúscula e maiúscula, um número e um caractere especial (Ex: !, @, #, $, %, &, *)'
         };
         return config[validatorName];
     }
