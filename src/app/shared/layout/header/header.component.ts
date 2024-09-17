@@ -647,10 +647,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     xtremepushElement.className = 'xtremepush-notification-item';
                     xtremepushElement.style.width = '100%';
                     const isTypeZero = xtremepushItem.message.style.type === 0;
-                    const imageStyle = isTypeZero ? 'width: 100%; height: auto;' : 'width: 100px; height: 100px;';
-                    const containerStyle = isTypeZero ? 'flex-direction: column;' : '';
-                    const titleStyle = isTypeZero ? 'margin-top: 10px; margin-bottom: 10px;' : '';
-                    const dateStyle = isTypeZero ? 'float: right; margin-top: auto;' : '';
+                    const imageStyle = isTypeZero ? 'width: 100px; height: 100px;' : 'width: 100%; height: auto;';
+                    const containerStyle = isTypeZero ? '' : 'flex-direction: column;';
+                    const titleStyle = isTypeZero ? '' : 'margin-top: 10px; margin-bottom: 10px;';
+                    const dateStyle = isTypeZero ? '' : 'float: right; margin-top: auto;';
 
                     xtremepushElement.innerHTML = `
                     <div class="xtremepush-card" style="
