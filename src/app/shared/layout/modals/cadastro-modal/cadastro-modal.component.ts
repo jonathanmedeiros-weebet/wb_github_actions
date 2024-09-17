@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -16,14 +16,17 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
+import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 
 @Component({
     selector: 'app-cadastro-modal',
     templateUrl: './cadastro-modal.component.html',
     styleUrls: ['./cadastro-modal.component.css'],
 })
-export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    
     appMobile;
     isMobile = false;
     unsub$ = new Subject();
@@ -61,6 +64,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
 
+    verifiedIdentity = false
+    reconhecimentoFacialEnabled = true
+    legitimuzToken = "";
+    currentLanguage = 'pt';
+    unsubLegitimuz$ = new Subject();
+    disapprovedIdentity = false;
+    token = '';
+    dataUserCPF ='';
+    showLoading = true;
+
+    
+
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -77,11 +92,35 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
+        private legitimuzService: LegitimuzService,
     ) {
         super();
     }
+    printTeste(){
+        console.log("Disaprove identity",this.disapprovedIdentity)
+        console.log("Reconhecimento Facial",this.reconhecimentoFacialEnabled)
+        console.log("token",this.token)
+        console.log("Cpf Cliente",this.dataUserCPF)
+        console.log("Legitimnuz Token",this.legitimuzToken)
+    }
 
     ngOnInit() {
+        this.currentLanguage = this.translate.currentLang;
+        this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
+        this.reconhecimentoFacialEnabled = Boolean(this.paramsService.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
+        
+        if (this.reconhecimentoFacialEnabled) {
+            this.token = `cadastro`;
+          
+        }
+        this.translate.onLangChange.subscribe(change => {
+            this.currentLanguage = change.lang;
+            if (this.reconhecimentoFacialEnabled) {
+                this.legitimuzService.changeLang(change.lang);
+            }
+        });   
+
+
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.getPromocoes();
         this.appMobile = this.auth.isAppMobile();
@@ -94,6 +133,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
 
         this.createForm();
+        this.form.get('cpf')?.valueChanges.subscribe(cpf => {
+            this.dataUserCPF = cpf;
+            this.showLoading = false;
+          });
 
         this.hCaptchaLanguage = this.translate.currentLang;
 
@@ -189,6 +232,19 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 );
         }
+        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    console.log(curCustomerIsVerified)
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    this.cd.detectChanges();
+                    if (this.verifiedIdentity) {
+                        this.legitimuzService.closeModal();
+                        this.messageService.success('Identidade verificada!');
+                    }
+                });
+        }   
     }
 
     getPromocoes(queryParams?: any) {
@@ -326,8 +382,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (Object.keys(this.parameters).length) {
             values.parameters = this.parameters;
         }
-
-        this.submitting = true;
+        if (this.reconhecimentoFacialEnabled && !this.verifiedIdentity) {
+            this.submitting = false;
+        } else {
+            this.submitting = true;
+        }
         this.clientesService.cadastrarCliente(values)
             .subscribe(
                 (res) => {
@@ -461,4 +520,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
     }
+
+    ngAfterViewInit() {
+        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+            this.legitimuz.changes
+                .pipe(takeUntil(this.unsubLegitimuz$))
+                .subscribe(() => {
+                    this.legitimuzService.init();
+                    this.legitimuzService.mount();
+
+                    this.unsubLegitimuz$.next();
+                    this.unsubLegitimuz$.complete();
+                });
+        }
+    }
+
+    
 }

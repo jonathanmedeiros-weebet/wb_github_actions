@@ -244,7 +244,8 @@
         "computadoEm": "Calculado en:",
         "alteracoesSucesso": "¡Cambios realizados con éxito!",
         "erroInesperado": "Algo inesperado ocurrió. Inténtalo de nuevo más tarde.",
-        "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente."
+        "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
+        "resetarSenha": "Reiniciar a senha"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",

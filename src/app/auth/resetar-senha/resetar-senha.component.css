@@ -81,4 +81,21 @@ form .buttons {
     .ajusta-botao-alterar-senha{
         height: calc(100dvh - 155px) !important;
     }
+
 }
+#legitimuz-container {
+    background-color: var(--sidebars);
+    padding: 30px 20px;
+}
+
+#legitimuz {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#legitimuz-action-verify {
+    flex: 1;
+    width: 25%;
+}
+

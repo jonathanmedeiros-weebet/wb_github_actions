@@ -137,6 +137,20 @@
                     </div>
                 </div>
             </div>
+            <div #legitimuz id="legitimuz-container" *ngIf="(reconhecimentoFacialEnabled && !verifiedIdentity) && !showLoading">
+                <div id="legitimuz">
+                    <div id="verify-identity-text">
+                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                    </div>
+                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
+                    <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                    <button (click)="printTeste()" id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                        {{'saques.identityVerify' | translate}}
+                        <i class="fa-solid fa-id-card"></i>
+                    </button>
+                </div>
+                <div id="legitimuz-root"></div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <label *ngIf="!isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
@@ -200,7 +214,7 @@
             <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
 
             <div class="col-12">
-                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="!submitting">{{'geral.cadastrar' | translate}}</button>
             </div>
             <div class="login">
                 {{'geral.jaPossuiUmaConta' | translate}}

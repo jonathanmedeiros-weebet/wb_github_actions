@@ -54,7 +54,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     isMobile = false;
     permitirQualquerChavePix = false;
     submitting;
-    legitimuzEnabled = false;
+    reconhecimentoFacialEnabled = false;
     legitimuzToken = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
@@ -96,15 +96,15 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.currentLanguage = this.translate.currentLang;
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.legitimuzEnabled = Boolean(this.paramsLocais.getOpcoes().legitimuz_enabled && this.legitimuzToken);
+        this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
 
-        if (this.legitimuzEnabled) {
-            this.token = this.auth.getToken();
+        if (this.reconhecimentoFacialEnabled) {
+            this.token = `saque ${this.auth.getToken()}`;
         }
 
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
-            if (this.legitimuzEnabled) {
+            if (this.reconhecimentoFacialEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
         });
@@ -172,7 +172,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.legitimuzEnabled && !this.disapprovedIdentity) {
+        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -187,7 +187,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     ngAfterViewInit() {
-        if (this.legitimuzEnabled && !this.disapprovedIdentity) {
+        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {

@@ -23,7 +23,8 @@ export class LegitimuzService {
         enableRedirect: false,
         autoOpenValidation: false,
         onSuccess: (eventName) => console.log(eventName),
-        onError: (eventName) => console.log(eventName)
+        onError: (eventName) => console.log(eventName),
+        eventHandler:(eventName) => console.log(eventName),
     };
 
     private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
@@ -36,16 +37,24 @@ export class LegitimuzService {
         this.options.token = this.paramsService.getOpcoes().legitimuz_token;
 
         this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
+        
+        if (JSON.parse(localStorage.getItem('user'))){
 
-        const user = JSON.parse(localStorage.getItem('user'));
-
-        this.options.onSuccess = (eventName) => {
-            if (eventName === 'facematch') {
-                setTimeout(() => {
-                    this.clienteService.getCliente(user.id)
+            const user = JSON.parse(localStorage.getItem('user'));
+            
+            this.options.onSuccess = (eventName) => {
+                if (eventName === 'facematch') {
+                    setTimeout(() => {
+                        this.clienteService.getCliente(user.id)
                         .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
-                }, 1000);
-            }
+                    }, 1000);
+                }
+            };
+        }
+
+        this.options.eventHandler = (eventName) => {
+            console.log(eventName)
+            console.log(this.options);
         };
     }
 

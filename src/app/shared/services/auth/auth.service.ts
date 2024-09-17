@@ -389,5 +389,14 @@ export class AuthService {
         }
         return '';
     }
+    
+    getUserResetPassword(data: any): Observable<any> {
+        const url = `${this.AuthUrl}/getUserResetPassword`;
+        return this.http
+            .post(url, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
+    }
 
 }

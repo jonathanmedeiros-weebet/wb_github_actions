@@ -1,12 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {AuthService, ClienteService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService} from './../services';
 import {BaseFormComponent} from '../shared/layout/base-form/base-form.component';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {PasswordValidation} from '../shared/utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { Cliente } from '../shared/models/clientes/cliente';
+import { LegitimuzService } from '../shared/services/legitimuz.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-meu-perfil',
@@ -14,6 +17,7 @@ import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/m
     styleUrls: ['alterar-senha.component.css']
 })
 export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     public isCollapsed = false;
     private unsub$ = new Subject();
     public mostrarSenhaAtual: boolean = false;
@@ -22,6 +26,16 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     private tokenMultifator: string;
     private codigoMultifator: string;
+    currentLanguage = 'pt';
+    cliente: Cliente;
+    reconhecimentoFacialEnabled = false;
+    legitimuzToken = "";
+    unsubLegitimuz$ = new Subject();
+    verifiedIdentity = false;
+    disapprovedIdentity = false;
+    token = '';
+    showLoading = true;
+
 
     constructor(
         private messageService: MessageService,
@@ -31,7 +45,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private menuFooterService: MenuFooterService,
         private sidebarService: SidebarService,
         private modalService: NgbModal,
-        private paramsLocais: ParametrosLocaisService
+        private paramsLocais: ParametrosLocaisService,
+        private legitimuzService: LegitimuzService,
+        private cd: ChangeDetectorRef,
+        private translate: TranslateService,
     ) {
         super();
     }
@@ -54,6 +71,63 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         }
 
         this.menuFooterService.setIsPagina(true);
+
+        this.currentLanguage = this.translate.currentLang;
+        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
+
+        if (this.reconhecimentoFacialEnabled) {
+            this.token = `alteracao_senha ${this.auth.getToken()}`;
+        }
+
+        this.translate.onLangChange.subscribe(change => {
+            this.currentLanguage = change.lang;
+            if (this.reconhecimentoFacialEnabled) {
+                this.legitimuzService.changeLang(change.lang);
+            }
+        });   
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.clienteService.getCliente(user.id)
+            .subscribe(
+                res => {
+                    this.cliente = res;
+                    this.cd.detectChanges()
+                    this.verifiedIdentity = res.verifiedIdentity;
+                    this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+                    this.showLoading = false;
+                },
+                error => {
+                    this.handleError(error);
+                }
+            
+            );  
+            if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+                this.legitimuzService.curCustomerIsVerified
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(curCustomerIsVerified => {
+                        console.log(curCustomerIsVerified)
+                        this.verifiedIdentity = curCustomerIsVerified;
+                        this.cd.detectChanges();
+                        if (this.verifiedIdentity) {
+                            this.legitimuzService.closeModal();
+                            this.messageService.success('Identidade verificada!');
+                        }
+                    });
+            }   
+    }
+
+    ngAfterViewInit() {
+        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+            this.legitimuz.changes
+                .pipe(takeUntil(this.unsubLegitimuz$))
+                .subscribe(() => {
+                    this.legitimuzService.init();
+                    this.legitimuzService.mount();
+
+                    this.unsubLegitimuz$.next();
+                    this.unsubLegitimuz$.complete();
+                });
+        }
     }
 
     toggleMostrarSenha(reference) {
@@ -110,7 +184,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         }
         
         if (this.isCliente) {
-            this.clienteService.alterarSenha(values)
+            if (this.verifiedIdentity) {
+                this.clienteService.alterarSenha(values)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
                     res => {
@@ -119,6 +194,9 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                     },
                     error => this.handleError(error)
                 );
+            } else {
+                console.log('error')
+            }
         } else {
             this.auth.changePassword(values)
                 .pipe(takeUntil(this.unsub$))
@@ -166,4 +244,4 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             }
         );
     }
-}
+    }
