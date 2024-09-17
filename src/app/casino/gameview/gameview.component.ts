@@ -40,16 +40,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
     showLoadingIndicator = true;
     isCliente;
     sessionId = '';
-    isMobile = 0;
     removerBotaoFullscreen = false;
     isLoggedIn = false;
     backgroundImageUrl = '';
     headerHeight = 92;
     currentHeight = window.innerHeight - this.headerHeight;
-    isMob: boolean = false;
-    isDesktop: boolean = false;
-    isTablet: boolean = false;
-    isFullScreen: boolean = false;
+    public isMobile: boolean = false;
+    public isDesktop: boolean = false;
+    public isTablet: boolean = false;
+    public isFullScreen: boolean = false;
     public cassinoFornecedores: Fornecedor[] = [];
     public scrollStep = 700;
     public scrolls: ElementRef[] = [];
@@ -124,8 +123,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://cdn.wee.bet/img/casino/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
-        this.updateView();
-        window.addEventListener('resize', () => this.updateView());
+        window.addEventListener('resize', () => this.checkIfMobileOrDesktopOrTablet());
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
@@ -139,10 +137,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const liveChatBtn = this.document.getElementById('chat-widget-container');
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'none');
-        }
-
-        if (window.innerWidth <= 1024) {
-            this.isMobile = 1;
         }
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
@@ -195,28 +189,22 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.isCliente = isCliente;
                     }
                 );
-            if (this.gameMode === 'REAL' && !this.isCliente) {
-                if(!this.isMobile){
-
-                }
-            } else {
-                if(this.avisoCancelarBonus === false){
+                if (this.avisoCancelarBonus === false){
                     this.loadGame();
                 }
-            }
             interval(3000)
                 .subscribe(() => {
                     this.showLoadingIndicator = false;
                 });
         });
 
-        this.checkIfDesktop();
+        this.checkIfMobileOrDesktopOrTablet();
 
         if (this.gameFornecedor === 'galaxsys') {
             this.appendScriptGalaxsys();
         }
 
-        if ((this.isMob || this.isTablet) && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
+        if ((this.isMobile || this.isTablet) && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
             this.disableHeader();          
         }
     }
@@ -232,24 +220,25 @@ export class GameviewComponent implements OnInit, OnDestroy {
         );
     }
 
-    checkIfDesktop() {
-        this.isDesktop = window.innerWidth > 482;
-        this.isMob = !this.isDesktop;
-    }
+    checkIfMobileOrDesktopOrTablet() {
+        this.isDesktop = false;
+        this.isTablet = false;
+        this.isMobile = false;
 
-    checkIfMobile() {
-        this.isMob = window.innerWidth > 482;
-        this.isDesktop = !this.isMobile;
-    }
+        if (window.innerWidth > 1024) {
+            return this.isDesktop = true;
+        }
 
-    updateView() {
-        this.isDesktop = window.innerWidth > 482;
-        this.isMob = !this.isDesktop;
+        if (window.innerWidth > 482) {
+            return this.isTablet = true;
+        }
+
+        return this.isMobile = true;
     }
 
     @HostListener('window:resize', ['$event'])
     onResize(event: any) {
-      this.checkIfDesktop();
+      this.checkIfMobileOrDesktopOrTablet();
     }
 
     ngAfterViewInit(){
@@ -257,23 +246,24 @@ export class GameviewComponent implements OnInit, OnDestroy {
             (scrolls) => this.scrolls = scrolls.toArray()
         );
         
-        if (this.isTablet || this.isDesktop) {
-            this.fixTabletAndDesktopScreen();
-        }
-
-        if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMob) {
+        
+        if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMobile) {
             this.disableHeaderOptions();
             const gameView = this.el.nativeElement.querySelector('.game-view');
             this.renderer.setStyle(gameView, 'max-height', '300px');
         }
         
         this.layoutService.currentHeaderHeight
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(curHeaderHeight => {
-                this.headerHeight = curHeaderHeight;
-                this.changeGameviewHeight();
-                this.cd.detectChanges();
-            });
+        .pipe(takeUntil(this.unsub$))
+        .subscribe(curHeaderHeight => {
+            this.headerHeight = curHeaderHeight;
+            this.changeGameviewHeight();
+            this.cd.detectChanges();
+        });
+        
+        if (this.isTablet || this.isDesktop) {
+            this.fixTabletAndDesktopScreen();
+        }
     }
 
     public copyLink() {
@@ -359,7 +349,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
                 response => {
-                    if(typeof response.gameUrl !== 'undefined') {
+                    if (typeof response.gameUrl !== 'undefined') {
                         this.gameCategory = response.category;
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
@@ -463,7 +453,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
 
-        if (this.isMob && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
+        if (this.isMobile && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
             this.enableHeader();
         }
     }
@@ -597,7 +587,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         
         const gameView = this.el.nativeElement.querySelector('.game-view');
 
-        if(gameView ) {
+        if (gameView) {
             this.renderer.addClass(gameView, 'desktop-fullscreen');
             this.renderer.setStyle(gameView, 'padding', '0');
         }
@@ -635,7 +625,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.document.msExitFullscreen();
         }
 
-        if(!this.isTablet) {
+        if (!this.isTablet) {
             this.enableHeader();
     
             const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
@@ -643,7 +633,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             const gameView = this.el.nativeElement.querySelector('.game-view');
             const gameFrame = this.el.nativeElement.querySelector('.game-frame');
     
-            if(gameView) {
+            if (gameView) {
                 this.renderer.removeClass(gameView, 'desktop-fullscreen');
             }
             
@@ -904,9 +894,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     private fixTabletAndDesktopScreen() {
+        console.log('table', this.isTablet);
+        console.log('mobie', this.isMobile);
+        console.log('desktp', this.isDesktop);
+        
+        
         if (this.isTablet) {
             const gameView = this.el.nativeElement.querySelector('.game-view');
             const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+            
+            console.log(gameView);
+            console.log(gameFrame);
     
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
                 this.renderer.setStyle(gameView, 'padding', '0');

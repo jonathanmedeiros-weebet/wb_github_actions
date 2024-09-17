@@ -1,4 +1,4 @@
-<div class="game-view" *ngIf="isMob">
+<div class="game-view" *ngIf="isMobile">
     <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
         <div class="game-name">
             <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
@@ -64,7 +64,7 @@
 </div>
 
 <div class="game-view" 
-    *ngIf="isDesktop" 
+    *ngIf="isDesktop || isTablet" 
     [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }"
 >
     <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }">
@@ -141,7 +141,7 @@
     </ng-template>
 </ng-container>
 
-<div class="bloco bloco-relatedGames" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
+<div class="bloco bloco-relatedGames" *ngIf="(isDesktop || isMobile || isTablet) && !isLoggedIn && gameMode == 'REAL'">
     <app-wall-section
         sectionId="cassino"
         [title]="'cassino.jogosRelacionados' | translate"
@@ -172,7 +172,7 @@
     </div>
 </div>
 
-<div class="bloco bloco-providers" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
+<div class="bloco bloco-providers" *ngIf="(isDesktop || isMobile || isTablet) && !isLoggedIn && gameMode == 'REAL'">
     <app-wall-section
         sectionId="providers"
         [title]="'geral.provedores' | translate"
@@ -194,6 +194,6 @@
     </div>
 </div>
 
-<div class="main-footer" *ngIf="(isDesktop || isMob) && !isLoggedIn && gameMode == 'REAL'">
+<div class="main-footer" *ngIf="(isDesktop || isMobile || isTablet) && !isLoggedIn && gameMode == 'REAL'">
     <app-footer></app-footer>
 </div>
