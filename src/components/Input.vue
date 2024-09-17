@@ -44,8 +44,8 @@
         :inputmode="type"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
-        <IconVisibility v-if="showPassword" :color="'#ffffff80'" />
-        <IconVisibilityOff v-else :color="'#fffff80'" />
+        <IconVisibility v-if="showPassword" :color="useHexColors" />
+        <IconVisibilityOff v-else :color="useHexColors" />
       </div>
     </div>
   </div>
@@ -54,6 +54,7 @@
 <script>
 import IconVisibility from '@/components/icons/IconVisibility.vue'
 import IconVisibilityOff from '@/components/icons/iconVisibilityOff.vue'
+import { getAndroidVersion } from '@/utilities';
 
 export default {
   name: 'w-input',
@@ -127,6 +128,12 @@ export default {
     emitKeypress(event) {
       this.$emit('keypress', event);
     },
+    isAndroid5() {
+      const androidVersion = getAndroidVersion();
+      if (!androidVersion) return false;
+      const version = parseInt(androidVersion.split('.')[0], 10);
+      return version <= 5;
+    }
   },
   computed: {
     password() {
@@ -136,7 +143,8 @@ export default {
       return !['email', 'number', 'date', 'password'].includes(this.initType);
     },
     useHexColors() {
-      return this.isAndroid5() ? '#0be58e' : 'var(--color-text-input)';
+      const color = this.isAndroid5() ? '#fffff80' : 'var(--foreground-inputs-odds)';
+      return color;
     }
   }
 }

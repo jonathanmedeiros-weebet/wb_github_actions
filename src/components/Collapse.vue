@@ -59,6 +59,7 @@ export default {
         background: #181818;
         background: var(--league);
         color: #ffffff;
+        color: var(--foreground-league);
     }
 
     &__title {

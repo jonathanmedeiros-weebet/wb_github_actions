@@ -40,6 +40,8 @@ export default {
       const link = document.createElement('link');
       link.id = `${clientName}-css`;
       link.rel = 'stylesheet';
+      const timestamp = Math.floor(Date.now() / 1000);
+      link.href = `https://weebet.s3.amazonaws.com/${slugName}/param/cores.css?v=${timestamp}`;
       document.head.appendChild(link);
   },
 }

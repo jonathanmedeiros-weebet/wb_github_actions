@@ -238,7 +238,7 @@ export default {
 
     &--selected {
       background: #0be58e;
-      background: var(--color-primary);
+      background: var(--highlight);
       color: #181818;
       color: var(--color-background-input);
       border-radius: 50px;
