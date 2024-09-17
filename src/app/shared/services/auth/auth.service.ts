@@ -132,9 +132,6 @@ export class AuthService {
                     }
 
                     this.logadoSource.next(true);
-                    if (data.casino === undefined) {
-                        this.router.navigate(['esportes/futebol/jogos']);
-                    }
                 }),
                 catchError(this.errorService.handleError)
             );
