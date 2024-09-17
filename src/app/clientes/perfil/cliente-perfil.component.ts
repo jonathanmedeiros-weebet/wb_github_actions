@@ -195,7 +195,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             bairro: endereco.bairro,
                         });
                     } else {
-                        this.handleError(this.translate.instant('enderecoNaoEncontrado'));
+                        this.handleError(this.translate.instant('geral.enderecoNaoEncontrado'));
                     }
                 },
             );

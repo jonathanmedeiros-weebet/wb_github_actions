@@ -22,6 +22,8 @@ import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
+import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-bilhete-esportivo',
     templateUrl: 'bilhete-esportivo.component.html',
@@ -68,6 +70,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showStream = false;
     showFrame = true;
     headerHeight = 92;
+    footballId = FOOTBALL_ID;
 
     sportId:number;
     liveUrl:string;

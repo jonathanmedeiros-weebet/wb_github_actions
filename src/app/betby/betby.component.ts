@@ -93,13 +93,14 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
         setTimeout(() => {
             this.hideGtmElements();
-        }, 1000);
+        }, 1200);
     }
 
 
     hideGtmElements() {
         const elementChat = document.querySelector('#chat-widget-container');
         const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
+        const elementChatJivo = document.querySelector('#jivo_custom_widget');
 
         if (elementChat) {
             this.renderer.setStyle(elementChat, 'display', 'none');
@@ -108,11 +109,16 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         if (elementChatWeebet) {
             this.renderer.setStyle(elementChatWeebet, 'display', 'none');
         }
+
+        if (elementChatJivo) {
+            this.renderer.setStyle(elementChatJivo, 'display', 'none');
+        }
     }
 
     showGtmElements() {
         const elementChat = document.querySelector('#chat-widget-container');
         const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
+        const elementChatJivo = document.querySelector('#jivo_custom_widget');
 
         if (elementChat) {
             this.renderer.removeStyle(elementChat, 'display');
@@ -120,6 +126,10 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
         if (elementChatWeebet) {
             this.renderer.removeStyle(elementChatWeebet, 'display');
+        }
+
+        if (elementChatJivo) {
+            this.renderer.removeStyle(elementChatJivo, 'display');
         }
     }
 

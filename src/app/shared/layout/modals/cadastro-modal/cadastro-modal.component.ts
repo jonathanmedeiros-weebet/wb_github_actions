@@ -280,9 +280,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
             this.form.controls['senha_confirmacao'].clearValidators();
             this.form.controls['senha_confirmacao'].updateValueAndValidity();
-
-            this.form.controls['telefone'].clearValidators();
-            this.form.controls['telefone'].updateValueAndValidity();
         }
     }
 

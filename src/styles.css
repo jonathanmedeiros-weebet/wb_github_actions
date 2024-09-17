@@ -66,6 +66,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: var(--foreground);
     background-color: var(--background);
+    width: 100%
 }
 
 .base-container {
@@ -1901,8 +1902,14 @@ ngb-datepicker-month {
     .mobile-modal-header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-size: 14px;
         font-weight: 600;
+        margin-top: 1em;
+    }
+
+    .titulo{
+        padding: 0;
     }
 }
 
@@ -1949,4 +1956,8 @@ label {
         height: 100%;
         margin: 0;
     }
+}
+
+.webpush-swal2-popup .webpush-swal2-modal .webpush-swal2-show {
+    background: none !important;
 }

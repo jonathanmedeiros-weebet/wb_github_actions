@@ -18,6 +18,8 @@ import {
 } from '../../../services';
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
+import { FOOTBALL_ID, BASKETBALL_ID } from '../../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-live-jogo',
     templateUrl: 'live-jogo.component.html',
@@ -45,6 +47,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     showCampinho = true;
     showStream = false;
     sportId: number;
+
+    footballId = FOOTBALL_ID;
+    basketballId = BASKETBALL_ID;
 
     constructor(
         public sanitizer: DomSanitizer,
