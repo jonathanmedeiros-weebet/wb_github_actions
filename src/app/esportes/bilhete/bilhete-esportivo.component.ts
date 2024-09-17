@@ -22,7 +22,7 @@ import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
-import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
+import { BASKETBALL_ID, FOOTBALL_ID } from '../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -71,13 +71,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showFrame = true;
     headerHeight = 92;
     footballId = FOOTBALL_ID;
+    BasketballId = BASKETBALL_ID;
 
     sportId:number;
     liveUrl:string;
 
-    SOCCER_ID = 1;
-    LSPORTS_SOCCER_ID = 6046;
-    BASKETBALL_ID = 48242;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -170,11 +168,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 (response: any) => {
                     if (response) {
                         if (this.sportId) {
-                            if (this.sportId == this.SOCCER_ID || this.sportId == this.LSPORTS_SOCCER_ID) {
+                            if (this.sportId == this.footballId) {
                                 this.liveUrl = 'https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=';
                             }
 
-                            if (this.sportId == this.BASKETBALL_ID) {
+                            if (this.sportId == this.BasketballId) {
                                 this.liveUrl = 'https://stream.raysports.live/br/basketball?token=5oq66hkn0cwunq7&uuid=';
                             }
 
