@@ -84,6 +84,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     ngOnInit() {
+        this.legitimuzService.cadastroSub.next(false)
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
         } else {

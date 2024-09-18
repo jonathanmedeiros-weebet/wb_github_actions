@@ -6,6 +6,7 @@ import { ClienteService } from "./clientes/cliente.service";
 import { ParametrosLocaisService } from "./parametros-locais.service";
 
 declare var Legitimuz: any;
+declare var LegitimuzFaceIndex: any;
 
 @Injectable({
     providedIn: 'root'
@@ -13,11 +14,16 @@ declare var Legitimuz: any;
 export class LegitimuzService {
 
     private sdk;
+    cadastroSub = new BehaviorSubject<any>(true);
+    cadastro;
 
     private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
+    private static API_LEGITIMUZ_LIVENESS: String = "https://liveness.legitimuz.com";
 
     private options = {
         host: LegitimuzService.API_LEGITIMUZ,
+        apiURL : LegitimuzService.API_LEGITIMUZ,
+        appURL : LegitimuzService.API_LEGITIMUZ_LIVENESS,
         token: '',
         lang: 'pt',
         enableRedirect: false,
@@ -37,6 +43,12 @@ export class LegitimuzService {
         this.options.token = this.paramsService.getOpcoes().legitimuz_token;
 
         this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
+        this.cadastro = this.cadastroSub.asObservable();
+        this.cadastroSub.subscribe({next: (res)=>
+        {
+            this.init();
+        }
+        })
         
         if (JSON.parse(localStorage.getItem('user'))){
 
@@ -59,12 +71,17 @@ export class LegitimuzService {
     }
 
     init() {
-        this.sdk = Legitimuz(this.options);
+        if (this.cadastroSub.value) {
+            this.options.host = LegitimuzService.API_LEGITIMUZ;
+            this.sdk = Legitimuz(this.options);
+        } else {  
+            this.sdk = LegitimuzFaceIndex(this.options);
+        }
     }
 
-    mount() {
-        this.sdk.mount();
-    }
+    mount() {          
+            this.sdk.mount();
+    }     
 
     changeLang(lang: string) {
         this.sdk.setLang(lang);
@@ -82,4 +99,4 @@ export class LegitimuzService {
         this.sdk.closeModal();
     }
 
-}
+    }

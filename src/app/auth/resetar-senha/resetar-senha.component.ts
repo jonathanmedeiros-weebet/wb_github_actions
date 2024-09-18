@@ -86,7 +86,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+        this.legitimuzService.cadastroSub.next(false)
         this.currentLanguage = this.translate.currentLang;
         this.createForm();
         this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;

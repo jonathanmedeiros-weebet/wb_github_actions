@@ -62,6 +62,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngOnInit() {
+        this.legitimuzService.cadastroSub.next(false)
         this.createForm();
 
         if(this.isCliente) {
