@@ -61,9 +61,20 @@ export class LegitimuzService {
                     }, 1000);
                 }
             };
+        } else {
+            this.options.onSuccess = (eventName) => {console.log(eventName)
+            }
         }
 
         this.options.eventHandler = (eventName) => {
+            console.log(eventName)
+            console.log(this.options);
+        };
+        this.options.eveneventHandler = (eventName) => {
+            console.log(eventName)
+            console.log(this.options);
+        };
+        this.options.error = (eventName) => {
             console.log(eventName)
             console.log(this.options);
         };
