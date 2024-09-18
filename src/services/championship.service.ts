@@ -31,7 +31,6 @@ export const getChampionshipBySportId = async (
 ) => {
     const {
         blockedChampionships,
-        deadlineTable,
         centerUrl,
         popularLeagues
     } = useConfigClient();
@@ -47,7 +46,7 @@ export const getChampionshipBySportId = async (
         sport_id: sportId,
         campeonatos_bloqueados: Boolean(blockedChampionships[`sport_${sportId}`]) ? blockedChampionships[`sport_${sportId}`].join(',') : '',
         data: startDate,
-        data_final: deadlineTable,
+        data_final: startDate,
         odds: getOddsBySportId(sportId).join(','),
         regiao_nome: regionName ?? '',
         ligas_populares: popularLeagueIds

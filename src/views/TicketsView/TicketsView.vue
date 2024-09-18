@@ -252,7 +252,7 @@ export default {
   methods: {
     formatDateTimeBR,
     handleBetValueClick(valueAditional) {
-      this.betValue = parseFloat(this.betValue) + Number(valueAditional);
+      this.betValue = parseFloat(this.betValue || 0) + Number(valueAditional);
     },
     handleInitializeBetValue() {
       this.betValue = Boolean(this.betValue) ? this.betValue : '';
