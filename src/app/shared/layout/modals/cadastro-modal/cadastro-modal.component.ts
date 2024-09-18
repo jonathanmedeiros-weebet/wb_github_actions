@@ -61,6 +61,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
     isStrengthPassword: boolean | null;
+    validPassword: boolean = false;
+    requirements = {
+        minimumCharacters: false,
+        uppercaseLetter: false,
+        lowercaseLetter: false,
+        specialChar: false,
+    };
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -270,7 +277,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
 
         if (this.isStrengthPassword) {
-            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls['senha'].clearValidators();
+            this.form.controls['senha'].addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls['senha'].updateValueAndValidity();
         }
         
         if (this.isLoterj) {
@@ -466,5 +475,22 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
+    }
+
+    checkPassword() {
+        const passwordValue = this.form.controls.senha.value;
+        const lengthCheck = passwordValue.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(passwordValue);
+        const hasLowerCase = /[a-z]/.test(passwordValue);
+        const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
+        
+        this.requirements = {
+          minimumCharacters: lengthCheck,
+          uppercaseLetter: hasUpperCase,
+          lowercaseLetter: hasLowerCase,
+          specialChar: hasSpecialChar,
+        };
+
+        this.validPassword = Object.values(this.requirements).every(Boolean);
     }
 }

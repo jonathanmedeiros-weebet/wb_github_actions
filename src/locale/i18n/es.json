@@ -366,7 +366,11 @@
         "reenviaCodigoDeVerificacao": "Reenviar código de verificación",
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
-        "digiteSuaSenha": "Ingrese su contraseña"
+        "digiteSuaSenha": "Ingrese su contraseña",
+        "minimumCharactersPassword": "Mínimo 8 caracteres",
+        "lowercaseLetter": "Mínimo una letra minúscula",
+        "uppercaseLetter": "Mínimo una letra mayúscula",
+        "specialChar": "Mínimo un carácter especial (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Ingrese el monto para el retiro",
