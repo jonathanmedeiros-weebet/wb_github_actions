@@ -28,6 +28,7 @@ export class LegitimuzService {
         lang: 'pt',
         enableRedirect: false,
         autoOpenValidation: false,
+        onlyLiveness: false,
         onSuccess: (eventName) => console.log(eventName),
         onError: (eventName) => console.log(eventName),
         eventHandler:(eventName) => console.log(eventName),
@@ -75,6 +76,7 @@ export class LegitimuzService {
             this.options.host = LegitimuzService.API_LEGITIMUZ;
             this.sdk = Legitimuz(this.options);
         } else {  
+            this.options.onlyLiveness = true;
             this.sdk = LegitimuzFaceIndex(this.options);
         }
     }
