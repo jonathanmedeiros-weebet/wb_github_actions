@@ -24,6 +24,14 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     private tokenMultifator: string;
     private codigoMultifator: string;
 
+    validPassword: boolean = false;
+    requirements = {
+        minimumCharacters: false,
+        uppercaseLetter: false,
+        lowercaseLetter: false,
+        specialChar: false,
+    };
+
     constructor(
         private messageService: MessageService,
         private auth: AuthService,
@@ -88,7 +96,9 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         }, {validator: PasswordValidation.MatchPassword});
         
         if (this.isStrengthPassword) {
+            this.form.controls.senha_nova.clearValidators();
             this.form.controls.senha_nova.addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls.senha_nova.updateValueAndValidity();
         }
     }
 
@@ -171,5 +181,22 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 }
             }
         );
+    }
+
+    checkPassword() {
+        const passwordValue = this.form.controls.senha_nova.value;
+        const lengthCheck = passwordValue.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(passwordValue);
+        const hasLowerCase = /[a-z]/.test(passwordValue);
+        const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
+        
+        this.requirements = {
+          minimumCharacters: lengthCheck,
+          uppercaseLetter: hasUpperCase,
+          lowercaseLetter: hasLowerCase,
+          specialChar: hasSpecialChar,
+        };
+
+        this.validPassword = Object.values(this.requirements).every(Boolean);
     }
 }

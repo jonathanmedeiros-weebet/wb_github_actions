@@ -277,9 +277,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
 
         if (this.isStrengthPassword) {
-            this.form.controls['senha'].clearValidators();
-            this.form.controls['senha'].addValidators(FormValidations.strongPasswordValidator())
-            this.form.controls['senha'].updateValueAndValidity();
+            this.form.controls.senha.clearValidators();
+            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls.senha.updateValueAndValidity();
         }
         
         if (this.isLoterj) {

@@ -199,12 +199,9 @@ a.link-termos-politica {
 
 .requirements-password {
     margin: 0;
-    padding: 1em 0 0.4em 1em;
+    padding: 8px;
+    padding-bottom: 4px;
     list-style-type: none;
-}
-
-.requirements-password li {
-    padding: 5px 0;
 }
 
 .fulfilled {
@@ -213,7 +210,7 @@ a.link-termos-politica {
 }
 
 .unfulfilled {
-    color: red; 
+    opacity: 0.6;
 }
 
 @media only screen and (max-width: 1024px) {

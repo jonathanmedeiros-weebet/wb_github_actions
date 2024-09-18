@@ -95,7 +95,7 @@
                         <div class="input-md">
                             <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
                                    class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
-                                   formControlName="senha" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')" (input)=" isStrengthPassword ? checkPassword() : null">
+                                   formControlName="senha" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')" (input)="isStrengthPassword ? checkPassword() : null">
                             <label for="password">{{'geral.senha' | translate}}</label>
                             <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                                (click)="mostrarSenha = !mostrarSenha"></i>
