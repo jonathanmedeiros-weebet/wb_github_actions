@@ -2889,3 +2889,12 @@ gulp.task('tigre.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('mailing.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "mailing.bet",
+        banca: "MAILING.BET",
+        styles: "",
+    });
+});
