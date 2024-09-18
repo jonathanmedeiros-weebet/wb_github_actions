@@ -20,10 +20,8 @@ export class LegitimuzService {
     private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
     private static API_LEGITIMUZ_LIVENESS: String = "https://liveness.legitimuz.com";
 
-    private options = {
-        host: LegitimuzService.API_LEGITIMUZ,
-        apiURL : LegitimuzService.API_LEGITIMUZ,
-        appURL : LegitimuzService.API_LEGITIMUZ_LIVENESS,
+    private options:any = {
+        host: LegitimuzService.API_LEGITIMUZ, 
         token: '',
         lang: 'pt',
         enableRedirect: false,
@@ -76,9 +74,11 @@ export class LegitimuzService {
             this.options.host = LegitimuzService.API_LEGITIMUZ;
             this.sdk = Legitimuz(this.options);
         } else {  
+            this.options.apiURL = LegitimuzService.API_LEGITIMUZ,
+            this.options.appURL = LegitimuzService.API_LEGITIMUZ_LIVENESS,
             this.options.onlyLiveness = true;
             this.sdk = LegitimuzFaceIndex(this.options);
-        }
+        }     
     }
 
     mount() {          
