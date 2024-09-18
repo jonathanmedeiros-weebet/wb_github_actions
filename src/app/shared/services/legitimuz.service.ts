@@ -21,11 +21,14 @@ export class LegitimuzService {
     private static API_LEGITIMUZ_LIVENESS: String = "https://liveness.legitimuz.com";
 
     private options:any = {
-        host: LegitimuzService.API_LEGITIMUZ, 
+        host: LegitimuzService.API_LEGITIMUZ,
+        apiURL: LegitimuzService.API_LEGITIMUZ,
+        appURL :LegitimuzService.API_LEGITIMUZ_LIVENESS, 
         token: '',
         lang: 'pt',
         enableRedirect: false,
         autoOpenValidation: false,
+        onlyLiveness : false,
         onSuccess: (eventName) => console.log(eventName),
         onError: (eventName) => console.log(eventName),
         eventHandler:(eventName) => console.log(eventName),
@@ -81,15 +84,12 @@ export class LegitimuzService {
     }
 
     init() {
-        if (this.cadastroSub.value) {
-            this.options.host = LegitimuzService.API_LEGITIMUZ;
-            this.sdk = Legitimuz(this.options);
-        } else {  
+        if (!this.cadastroSub.value) {
             this.options.apiURL = LegitimuzService.API_LEGITIMUZ,
             this.options.appURL = LegitimuzService.API_LEGITIMUZ_LIVENESS,
             this.options.onlyLiveness = true;
-            this.sdk = LegitimuzFaceIndex(this.options);
-        }     
+        } 
+        this.sdk = Legitimuz(this.options);    
     }
 
     mount() {          
