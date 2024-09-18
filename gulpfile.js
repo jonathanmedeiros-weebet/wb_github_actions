@@ -2849,16 +2849,7 @@ gulp.task('betinha.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "betinha.com",
-        banca: "BETINHA.COM",
-        styles: "",
-    });
-});
-
-gulp.task('sortebet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sortebet.wee.bet",
-        banca: "SORTE BET",
+        banca: "betinha.com",
         styles: "",
     });
 });
@@ -2886,6 +2877,24 @@ gulp.task('betagora.io', function (done) {
         server: "front4.wee.bet",
         host: "betagora.io",
         banca: "BET AGORA",
+        styles: "",
+    });
+});
+
+gulp.task('tigre.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "tigre.bet",
+        banca: "TIGRE BET",
+        styles: "",
+    });
+});
+
+gulp.task('mailing.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "mailing.bet",
+        banca: "MAILING.BET",
         styles: "",
     });
 });

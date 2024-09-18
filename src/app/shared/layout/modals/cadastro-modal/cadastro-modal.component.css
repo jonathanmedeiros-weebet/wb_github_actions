@@ -144,8 +144,9 @@ a.link-termos-politica {
     justify-content: center;
     align-items: center;
 }
+
 .modal-content {
-    background-color: #181818;
+    background-color: var(--background);
     padding: 20px;
     border-radius: 4px;
     width: 100%;
