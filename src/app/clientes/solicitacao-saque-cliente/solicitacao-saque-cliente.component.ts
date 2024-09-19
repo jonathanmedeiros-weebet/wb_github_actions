@@ -1,3 +1,4 @@
+import { LegitimuzFacialService } from './../../shared/services/legitimuz-facial.service';
 import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
@@ -78,7 +79,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private el: ElementRef,
         private layoutService: LayoutService,
         private renderer: Renderer2,
-        private legitimuzService: LegitimuzService
+        private legitimuzService: LegitimuzService,
+        private LegitimuzFacialService : LegitimuzFacialService
     ) {
         super();
     }
@@ -191,8 +193,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
-                    this.legitimuzService.init();
-                    this.legitimuzService.mount();                   
+                    if (this.verifiedIdentity) {
+                        this.legitimuzService.init();
+                        this.legitimuzService.mount();                   
+                    } else {
+                        this.LegitimuzFacialService.init();
+                        this.LegitimuzFacialService.mount();    
+                    }
                 });
         }
     }

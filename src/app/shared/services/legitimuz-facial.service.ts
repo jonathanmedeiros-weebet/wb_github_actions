@@ -39,6 +39,7 @@ export class LegitimuzFacialService {
   ) {
       this.options.token = this.paramsService.getOpcoes().legitimuz_token; 
       
+      this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
       if (JSON.parse(localStorage.getItem('user'))){
 
           const user = JSON.parse(localStorage.getItem('user'));

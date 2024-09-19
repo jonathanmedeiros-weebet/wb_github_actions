@@ -47,7 +47,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private sidebarService: SidebarService,
         private modalService: NgbModal,
         private paramsLocais: ParametrosLocaisService,
-        private legitimuzService: LegitimuzFacialService,
+        private legitimuzService: LegitimuzService,
+        private LegitimuzFacialService: LegitimuzFacialService,
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
     ) {
@@ -122,8 +123,13 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
-                    this.legitimuzService.init();
-                    this.legitimuzService.mount();
+                    if (this.verifiedIdentity) {
+                        this.legitimuzService.init();
+                        this.legitimuzService.mount();                   
+                    } else {
+                        this.LegitimuzFacialService.init();
+                        this.LegitimuzFacialService.mount();    
+                    }
                 });
         }
     }
