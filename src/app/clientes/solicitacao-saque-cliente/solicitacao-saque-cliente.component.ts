@@ -174,18 +174,18 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
-            this.legitimuzService.curCustomerIsVerified
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(curCustomerIsVerified => {
-                    this.verifiedIdentity = curCustomerIsVerified;
-                    this.cd.detectChanges();
-                    if (this.verifiedIdentity) {
-                        this.legitimuzService.closeModal();
-                        this.messageService.success('Identidade verificada!');
-                    }
-                });
-        }
+        // if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+        //     this.legitimuzService.curCustomerIsVerified
+        //         .pipe(takeUntil(this.unsub$))
+        //         .subscribe(curCustomerIsVerified => {
+        //             this.verifiedIdentity = curCustomerIsVerified;
+        //             this.cd.detectChanges();
+        //             if (this.verifiedIdentity) {
+        //                 this.legitimuzService.closeModal();
+        //                 this.messageService.success('Identidade verificada!');
+        //             }
+        //         });
+        // }
     }
 
     ngAfterViewInit() {

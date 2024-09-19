@@ -148,19 +148,17 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.indiqueGanheRemovido = statusIndiqueGanhe;
             });
         
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
-            this.legitimuzService.curCustomerIsVerified
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(curCustomerIsVerified => {
-                    console.log(curCustomerIsVerified)
-                    this.verifiedIdentity = curCustomerIsVerified;
-                    this.cd.detectChanges();
-                    if (this.verifiedIdentity) {
-                        this.legitimuzService.closeModal();
-                        this.messageService.success('Identidade verificada!');
-                    }
-                });
-            }   
+        // if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+        //     this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
+        //             console.log(curCustomerIsVerified)
+        //             this.verifiedIdentity = curCustomerIsVerified;
+        //             this.cd.detectChanges();
+        //             if (this.verifiedIdentity) {
+        //                 this.legitimuzService.closeModal();
+        //                 this.messageService.success('Identidade verificada!');
+        //             }
+        //         });
+        // }   
                 
     }
 
