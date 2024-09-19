@@ -105,7 +105,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
-        this.legitimuzService.cadastroSub.next(true)
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
         this.reconhecimentoFacialEnabled = Boolean(this.paramsService.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
