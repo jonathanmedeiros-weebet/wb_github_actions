@@ -94,7 +94,7 @@ export default {
         justify-content: center;
 
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 16px;
         font-weight: 400;
         padding-bottom: 20px;

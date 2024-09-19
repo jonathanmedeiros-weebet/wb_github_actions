@@ -5,7 +5,7 @@
             v-if="showBackButton"
             @click="handleBackButtonClick"
         >
-            <IconArrowLeft :size="24"/>
+            <IconArrowLeft :size="24" :color="'var(--foreground-bottom-bar)'"/>
         </button>
         <slot></slot>
         <span class="header__title" v-if="title"> {{ title }}</span>
@@ -17,7 +17,7 @@
                 v-if="showCalendarButton"
                 @click="handleCalendarButtonClick"
             >
-                <IconCalendar :size="24" />
+                <IconCalendar :size="24" :color="'var(--foreground-bottom-bar)'" />
             </button>
 
             <button
@@ -25,7 +25,7 @@
                 v-if="showSearchButton"
                 @click="handleSearchButtonClick"
             >
-                <IconSearch :size="24" />
+                <IconSearch :size="24" :color="'var(--foreground-bottom-bar)'"/>
             </button>
         </div>
    </header>
@@ -86,7 +86,7 @@ export default {
     background: var(--header);
     border-bottom: 1px solid #FFFFFF1A;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
 
     &__back-button,
     &__back-button:hover {
@@ -107,8 +107,8 @@ export default {
         font-size: 20px;
         font-weight: 400;
         line-height: 23.44px;
-        color: #ffffff;
-        color: var(--color-text);
+        color:#ffff;
+        color: var(--foreground-header);
     }
 
     &__action-buttons {

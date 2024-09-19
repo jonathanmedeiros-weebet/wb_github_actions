@@ -402,11 +402,11 @@ export default {
   &__text {
     font-size: 14px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
   }
   &__date {
     color: #ffffff80;
-    color: var(--color-text-input)
+    color: var(--foreground-league-input)
   }
 }
 
@@ -437,7 +437,7 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
   }
 
   &__strikethrough {
@@ -470,7 +470,7 @@ export default {
   &__team {
     font-size: 14px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
     display: flex;          
     align-items: center;   
   }
@@ -483,21 +483,21 @@ export default {
     font-size: 14px;
     color: #bbbbbb;
     justify-content: space-between;
-    color: var(--color-text);
+    color: var(--foreground-league);
     font-weight: 500;
   }
 
   &__select {
     font-size: 14px;
     color: #bbbbbb;
-    color: var(--color-text);
+    color: var(--foreground-league);
     font-weight: 500;
   }
 
   &__odd {
     font-size: 14px;
     color: #cccccc;
-    color: var(--color-text);
+    color: var(--foreground-league);
     font-weight: 500;
   }
 

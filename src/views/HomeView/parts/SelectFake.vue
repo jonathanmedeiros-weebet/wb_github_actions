@@ -43,7 +43,7 @@ export default {
         font-weight: 400;
         line-height: 23.44px;
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-header);
 
         &--large {
             font-size: 20px;

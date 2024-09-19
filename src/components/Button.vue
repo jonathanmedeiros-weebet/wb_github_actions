@@ -63,26 +63,26 @@ export default {
   line-height: 14px;
 
   color: #0a0a0a;
-  color: var(--background);
+  color: var(--foreground-highlight);
   background: #0be58e;
   background: var(--highlight);
   
   &--primary {
     color: #0a0a0a;
-    color: var(--background);
+    color: var(--foreground-highlight);
     background: #0be58e;
     background: var(--highlight);
   }
 
   &--secondary {
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
     background: #0a0a0a;
     background: var(--background);
   }
   &--secondary-light {
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
     background: #181818;
     background: var(--inputs-odds);
   }

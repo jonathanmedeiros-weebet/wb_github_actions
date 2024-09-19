@@ -158,7 +158,7 @@ export default {
 
 .no-data {
   color: #ffffff80;
-  color: var(--color-text-input);
+  color: var(--foreground-header);
 }
 
 .date {
@@ -167,10 +167,8 @@ export default {
   margin-top: 5px;
   height: 30px;
   opacity: 0.5;
-  background-color: #181818;
-  background-color: var(--color-text-input);
   color: #ffffff;
-  color: var(--color-text);
+  color: var(--foreground-league);
   padding: 0px 10px;
   display: flex;
   align-items: center;
@@ -192,7 +190,7 @@ export default {
 
   &__date {
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

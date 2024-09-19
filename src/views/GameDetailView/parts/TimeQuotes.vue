@@ -38,7 +38,7 @@
                     </template>
                     <template v-else>
                         <span class="collapse__label">{{ odd.label }}</span>
-                        <IconLock :size="14" color="var(--color-text-input)"/>
+                        <IconLock :size="14" color="var(--foreground-league-input)"/>
                     </template>
                 </button>
             </div>
@@ -133,7 +133,7 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 }
 
@@ -157,7 +157,7 @@ export default {
         height: 54px;
         width: 100%;
         background: #0a0a0a;
-        background: var(--background);
+        background-color: var(--inputs-odds);
         border: none;
         border-radius: 4px;
 
@@ -224,6 +224,7 @@ export default {
     &__label {
         overflow: hidden;
         color: #f2f2f280;
+        color: var(--foreground-inputs-odds);
         text-overflow: ellipsis;
         font-size: 12px;
         font-style: normal;
@@ -233,7 +234,7 @@ export default {
 
     &__value {
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 14px;
         font-style: normal;
         font-weight: 500;

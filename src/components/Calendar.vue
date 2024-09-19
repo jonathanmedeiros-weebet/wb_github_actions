@@ -152,7 +152,7 @@ export default {
     font-weight: 500;
     padding: 10px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
   }
 
   &__body {
@@ -175,7 +175,7 @@ export default {
     padding: 10px 24px;
 
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-header);
     background: #0a0a0a;
     background: var(--background);
 
@@ -205,7 +205,7 @@ export default {
     font-weight: 500;
 
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
 
     &--selected {
       background: #0be58e;

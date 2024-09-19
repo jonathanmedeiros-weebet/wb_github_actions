@@ -114,7 +114,7 @@ export default {
     padding: 25px 12px;
     border-radius: 8px;
     background: #181818;
-    background: var(--inputs-odds);
+    background: var(--game);
     
     &__body {
         display: flex;
@@ -129,20 +129,20 @@ export default {
         align-items: start;
         font-size: 14px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 
     &__body-title-value {
         font-size: 24px;
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         padding-bottom: 20px;
         margin-top: 12px;
     }
 
     &__body-icon {
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 
     &__bars {
@@ -194,7 +194,7 @@ export default {
     &__categories-value {
         font-size: 12px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
         margin: 0px 0px 0px 15px;
     }
 

@@ -32,7 +32,7 @@ export default {
     border: 0;
     border-radius: 3px;
     background: #ffffff;
-    background: var(--color-text);
+    background: var(--foreground-league);
 
     color: #f61a1a;
     color: var(--color-danger);
@@ -46,7 +46,7 @@ export default {
         background: #f61a1a;
         background: var(--color-danger);
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
     }
 
     &--actived &__icon {

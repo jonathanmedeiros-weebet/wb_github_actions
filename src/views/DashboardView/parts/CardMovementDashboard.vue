@@ -85,7 +85,7 @@ export default {
     &__date {
         font-size: 14px;
         color: #ffffff80;        
-        color: var(--color-text-input);        
+        color: var(--foreground-league-input);        
     }
 
     &__subtitle {

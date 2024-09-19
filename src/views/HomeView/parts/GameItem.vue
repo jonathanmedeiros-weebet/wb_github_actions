@@ -189,7 +189,7 @@ export default {
     margin-top: 1px;
 
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
 
     &__teams {
         display: flex;
@@ -200,7 +200,7 @@ export default {
         display: flex;
         align-items: center;
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
         line-height: 14px;
@@ -297,7 +297,7 @@ export default {
 
     &__time {
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
         font-size: 12px;
         font-style: normal;
         font-weight: 300;

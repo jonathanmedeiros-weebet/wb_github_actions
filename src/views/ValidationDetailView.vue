@@ -462,7 +462,7 @@ export default {
     border-radius: 8px;
     background: var(--inputs-odds);
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--background);
     font-size: 14px;
     border: none; 
     margin-right: 8px;
@@ -509,7 +509,7 @@ export default {
     width: 15px;
     height: 15px;
     border: 1px solid #ffffff80;
-    border: 1px solid var(--color-text-input);
+    border: 1px solid var(--foreground-league-input);
     background-color: transparent;
     cursor: pointer;
     border-radius: 3px;

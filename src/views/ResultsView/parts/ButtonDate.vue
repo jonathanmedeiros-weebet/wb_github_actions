@@ -51,7 +51,7 @@ export default {
   font-weight: 500;
   padding: 16px 10px;
   color: #ffffff80;
-  color: var(--color-text-input);
+  color: var(--foreground-league-input);
   outline: none;
 
   &--active {

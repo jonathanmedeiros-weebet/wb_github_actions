@@ -167,7 +167,7 @@ input {
   font-size: 14px;
   font-weight: 400;
   color: #ffffff80;
-  color: var(--color-text-input);
+  color: var(--foreground-inputs-odds);
 }
 
 .input {
@@ -179,7 +179,7 @@ input {
     font-weight: 400;
     font-size: 16px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-header);
     margin-bottom: 8px;
   }
 
@@ -191,8 +191,9 @@ input {
     background-color: var(--inputs-odds);
     border-radius: 5px;
     border: 2px solid #181818;
-    border: 2px solid var(--inputs-odds);
-
+    border: 0.5px solid var(--foreground-inputs-odds);
+    transition: 0.5s;
+    
     &--focused {
       border-color: #0be58e;
       border-color: var(--highlight);
@@ -217,9 +218,9 @@ input {
     font-size: 14px;
     font-weight: 400;
     color: #ffffff;
-    color: var(--color-text-input);
+    color: var(--foreground-inputs-odds);
     padding-left: 10px;
-    background: transparent;
+    background: var(--inputs-odds);
   }
 }
 </style>

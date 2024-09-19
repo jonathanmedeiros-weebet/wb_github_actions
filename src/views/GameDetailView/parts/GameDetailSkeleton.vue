@@ -72,7 +72,7 @@ export default {
         background: #0a0a0a;
         background: var(--background);
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
     }
 
     &__quotes {

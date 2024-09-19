@@ -61,7 +61,6 @@ export default {
   &__card {
     display: flex;
     padding: 18px 15px;
-    
     align-self: stretch;
     align-items: flex-start;
     border-radius: 8px;
@@ -89,7 +88,7 @@ export default {
   
   &__text {
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -100,7 +99,7 @@ export default {
 
   &__debit {
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-league-input);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -109,7 +108,7 @@ export default {
 
   &__date { 
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-league-input);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

@@ -69,14 +69,14 @@ export default {
             background: #0a0a0a;
             background: var(--background);
             color: #ffffff;
-            color: var(--color-text);
+            color: var(--foreground-league);
         }
 
         &--secondary {
             background: #181818;
             background: var(--inputs-odds);
             color: #ffffff;
-            color: var(--color-text);
+            color: var(--foreground-league);
         }
     }
 

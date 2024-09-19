@@ -9,7 +9,7 @@
     >
       <component
         :is="tab.icon"
-        :color="tab.actived ? useHexColors : '#ffffff'"
+        :color="tab.actived ? useHexColors : 'var(--foreground-bottom-bar)'"
         :count="itemCount"
       />
       {{ tab.name }} 
@@ -50,8 +50,7 @@ export default {
           icon: IconHome,
           name: 'Home',
           route: '/home',
-          actived: this.verifyIfRouteIsActived('/home')
-        },
+          actived: this.verifyIfRouteIsActived('/home')        },
         {
           icon: IconValidation,
           name: 'Validação',
@@ -118,7 +117,7 @@ export default {
 
     height: 41px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
     font-size: 12px;
     font-weight: 400;
     line-height: 14.06px;

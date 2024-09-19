@@ -35,9 +35,9 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     background-color: #181818;
     background-color: var(--inputs-odds);
+    border: 0.5px solid var(--foreground-inputs-odds);
     padding: 18px 16px;
 
     &__title {
@@ -47,7 +47,7 @@ export default {
         font-weight: 400;
         line-height: 23.44px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
 
         &--large {
             font-size: 20px;

@@ -1,10 +1,5 @@
 /* semantic color variables for this project */
 :root {
-  --color-background: #0a0a0a;
-  --color-primary: #0be58e;
-  --color-text: #ffffff;
-  --color-text-input: #ffffff80;
-  --color-background-input: #181818;
   --foreground-highlight: #181818;
   --inputs-odds: #003566;
   --league: #001d3d;
@@ -15,10 +10,14 @@
   --wb-warning: #f61a1a;
   --inputs-odds: #003566;
   --foreground-inputs-odds: #000000;
+  --foreground-bottom-bar: #000000;
+  --foreground-game:#ffffff;
+  --foreground-league: #000000;
+  --foreground-header: #ffffff;
+  
   --color-danger: #f61a1a;
   --color-warning: #c09516;
   --color-success: #6da544;
-  --foreground-game:#ffffff;
-  --foreground-league: #000000;
+  
 
 }

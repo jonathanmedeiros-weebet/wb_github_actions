@@ -68,7 +68,7 @@ export default {
         justify-content: flex-start;
 
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
 

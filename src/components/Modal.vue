@@ -129,7 +129,7 @@ export default {
     background-color: #181818;
     background-color: var(--inputs-odds);
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-league-input);
     border: none;
     font-size: 15px;
     margin-left: auto;

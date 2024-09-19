@@ -50,7 +50,7 @@
                                 />
                             </template>
                         
-                            <IconLock v-else :size="14" color="var(--color-text-input)"/>
+                            <IconLock v-else :size="14" color="var(--foreground-league-input)"/>
                         </button>
                     </div>
                 </div>
@@ -148,7 +148,7 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 }
 
@@ -224,7 +224,7 @@ export default {
 
     &__value {
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 12px;
         font-style: normal;
         font-weight: 500;

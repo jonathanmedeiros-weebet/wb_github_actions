@@ -113,7 +113,7 @@ export default {
   flex-direction: column;
 
   color: #ffffff;
-  color: var(--color-text);
+  color: var(--foreground-league);
   background: #0a0a0a;
   background: var(--background);
 

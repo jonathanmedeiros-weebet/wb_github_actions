@@ -364,6 +364,8 @@ export default {
   &__message {
     margin-top: 10px;
     font-size: 12px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 }
 
@@ -469,6 +471,8 @@ export default {
 
   &__balance-text {
     font-size: 14px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__balance {
@@ -484,10 +488,9 @@ export default {
     align-items: center;
     border-radius: 8px;
     background: var(--inputs-odds);
-    color: var(--color-text-input);
     color: #ffffff80;
+    color: var(--foreground-inputs-odds);
     font-size: 14px;
-    border: none; 
     margin-right: 8px;
   }
 
@@ -510,12 +513,16 @@ export default {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__ganhos {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__checkbox {
@@ -542,13 +549,15 @@ export default {
     left: 4px;
     width: 5px;
     height: 9px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__alteracao {
     display: flex;
     align-items: center;
-    color: #ffffff;
-    color: var(--color-text)
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__finalizar {

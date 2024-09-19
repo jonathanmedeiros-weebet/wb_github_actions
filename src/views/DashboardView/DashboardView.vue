@@ -253,7 +253,7 @@ export default {
             return !this.configClientStore.chartDeprecatedByAndroidVersion;
         },
         useHexColors() {
-            return this.isAndroid5() ? '#ffffff80' : 'var(--color-text-input)';
+            return this.isAndroid5() ? '#ffffff80' : 'var(--foreground-league-input)';
         }
     },
     mounted() {
@@ -305,7 +305,7 @@ export default {
     &__movements-filter {
         font-size: 12px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 
     &__movements-dates {
@@ -315,7 +315,7 @@ export default {
         padding: 8px 0px;
         font-size: 14px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 
     &__movements-icon-calendar {
@@ -332,7 +332,7 @@ export default {
         padding: 8px 14px;
         border-radius: 6px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
         background: var(--input-odds);
     }
 }

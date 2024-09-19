@@ -92,7 +92,7 @@ export default {
   &__scores--secondary {
     font-size: 12px;
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-league-input);
     padding-top: 0;
   }
 
