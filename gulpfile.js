@@ -2849,7 +2849,7 @@ gulp.task('betinha.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
         host: "betinha.com",
-        banca: "BETINHA.COM",
+        banca: "betinha.com",
         styles: "",
     });
 });
@@ -2886,6 +2886,15 @@ gulp.task('tigre.bet', function (done) {
         server: "front4.wee.bet",
         host: "tigre.bet",
         banca: "TIGRE BET",
+        styles: "",
+    });
+});
+
+gulp.task('mailing.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "mailing.bet",
+        banca: "MAILING.BET",
         styles: "",
     });
 });

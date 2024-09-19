@@ -264,6 +264,7 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
     }
 
     openGame(game: string, fornecedor: string) {
+        this.activeModal.dismiss('Cross click');
         this.router.navigate(['casino/', fornecedor, game]);
     }
 
