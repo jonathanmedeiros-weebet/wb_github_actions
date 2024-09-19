@@ -6,7 +6,6 @@ import { ClienteService } from "./clientes/cliente.service";
 import { ParametrosLocaisService } from "./parametros-locais.service";
 
 declare var Legitimuz: any;
-declare var LegitimuzFaceIndex: any;
 
 @Injectable({
     providedIn: 'root'
@@ -14,21 +13,15 @@ declare var LegitimuzFaceIndex: any;
 export class LegitimuzService {
 
     private sdk;
-    cadastroSub = new BehaviorSubject<any>(true);
-    cadastro;
 
     private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
-    private static API_LEGITIMUZ_LIVENESS: String = "https://liveness.legitimuz.com";
 
     private options:any = {
         host: LegitimuzService.API_LEGITIMUZ,
-        apiURL: LegitimuzService.API_LEGITIMUZ,
-        appURL :LegitimuzService.API_LEGITIMUZ_LIVENESS, 
         token: '',
         lang: 'pt',
         enableRedirect: false,
         autoOpenValidation: false,
-        onlyLiveness : false,
         onSuccess: (eventName) => console.log(eventName),
         onError: (eventName) => console.log(eventName),
         eventHandler:(eventName) => console.log(eventName),
@@ -45,18 +38,12 @@ export class LegitimuzService {
         this.options.token = this.paramsService.getOpcoes().legitimuz_token;
 
         this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
-        this.cadastro = this.cadastroSub.asObservable();
-        this.cadastroSub.subscribe({next: (res)=>
-        {
-            this.init();
-        }
-        })
-        
         if (JSON.parse(localStorage.getItem('user'))){
 
             const user = JSON.parse(localStorage.getItem('user'));
             
             this.options.onSuccess = (eventName) => {
+                console.log(eventName)
                 if (eventName === 'facematch') {
                     setTimeout(() => {
                         this.clienteService.getCliente(user.id)
@@ -84,11 +71,6 @@ export class LegitimuzService {
     }
 
     init() {
-        if (!this.cadastroSub.value) {
-            this.options.apiURL = LegitimuzService.API_LEGITIMUZ,
-            this.options.appURL = LegitimuzService.API_LEGITIMUZ_LIVENESS,
-            this.options.onlyLiveness = true;
-        } 
         this.sdk = Legitimuz(this.options);    
     }
 

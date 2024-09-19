@@ -84,7 +84,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     }
 
     ngOnInit() {
-        this.legitimuzService.cadastroSub.next(false)
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
         } else {
@@ -100,7 +99,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
 
         if (this.reconhecimentoFacialEnabled) {
-            this.token = `saque ${this.auth.getToken()}`;
+            this.token = this.auth.getToken();
         }
 
         this.translate.onLangChange.subscribe(change => {
@@ -193,10 +192,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
                     this.legitimuzService.init();
-                    this.legitimuzService.mount();
-
-                    this.unsubLegitimuz$.next();
-                    this.unsubLegitimuz$.complete();
+                    this.legitimuzService.mount();                   
                 });
         }
     }
@@ -216,6 +212,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.menuFooterService.setIsPagina(false);
         this.unsub$.next();
         this.unsub$.complete();
+        this.unsubLegitimuz$.next();
+        this.unsubLegitimuz$.complete();
     }
 
     createForm() {

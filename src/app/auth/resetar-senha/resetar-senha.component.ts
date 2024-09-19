@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 import { ClienteService, ParametrosLocaisService } from 'src/app/services';
 import { TranslateService } from '@ngx-translate/core';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
 
 enum RecoveryStep {
     ONE_STEP = 1,
@@ -22,7 +23,7 @@ enum RecoveryStep {
     templateUrl: './resetar-senha.component.html',
     styleUrls: ['./resetar-senha.component.css']
 })
-export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
+export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     private recoveryTokenStep1: string;
     private recoveryTokenStep2: string;
@@ -55,10 +56,13 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
         private clienteService : ClienteService,
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
-        private legitimuzService: LegitimuzService,
+        private legitimuzService: LegitimuzFacialService,
     ) {
         super();
-        this.respostaLegitimus = this.legitimuzService.curCustomerIsVerified.asObserbale
+    }
+    ngOnDestroy(): void {
+        this.unsubLegitimuz$.next();
+        this.unsubLegitimuz$.complete();
     }
 
     get enableTwoFactorPasswordRecovery(): boolean {
@@ -86,7 +90,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.legitimuzService.cadastroSub.next(false)
         this.currentLanguage = this.translate.currentLang;
         this.createForm();
         this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
@@ -236,9 +239,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit {
                 .subscribe(() => {
                     this.legitimuzService.init();
                     this.legitimuzService.mount();
-
-                    this.unsubLegitimuz$.next();
-                    this.unsubLegitimuz$.complete();
                 });
         }
     }

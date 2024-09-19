@@ -10,6 +10,7 @@ import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/m
 import { Cliente } from '../shared/models/clientes/cliente';
 import { LegitimuzService } from '../shared/services/legitimuz.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LegitimuzFacialService } from '../shared/services/legitimuz-facial.service';
 
 @Component({
     selector: 'app-meu-perfil',
@@ -46,7 +47,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private sidebarService: SidebarService,
         private modalService: NgbModal,
         private paramsLocais: ParametrosLocaisService,
-        private legitimuzService: LegitimuzService,
+        private legitimuzService: LegitimuzFacialService,
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
     ) {
@@ -62,7 +63,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngOnInit() {
-        this.legitimuzService.cadastroSub.next(false)
         this.createForm();
 
         if(this.isCliente) {
@@ -124,9 +124,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 .subscribe(() => {
                     this.legitimuzService.init();
                     this.legitimuzService.mount();
-
-                    this.unsubLegitimuz$.next();
-                    this.unsubLegitimuz$.complete();
                 });
         }
     }
@@ -150,6 +147,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
+        this.unsubLegitimuz$.next();
+        this.unsubLegitimuz$.complete();
         this.menuFooterService.setIsPagina(false);
     }
 
