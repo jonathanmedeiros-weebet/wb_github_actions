@@ -51,18 +51,7 @@
 
                 <div class="search-results__body">
                     <ng-container *ngIf="showSearchResults; else elseWithoutItem">
-                        <div class="search-results__providers">
-                            <span class="search-results__title">{{ 'geral.provedores' | translate }} ({{ providerList.length }})</span>
-                            <div class="search-results__list">
-                                <app-wall-provider-card
-                                    *ngFor="let provider of providerList"
-                                    [data]="provider"
-                                    type="filter"
-                                    (onClick)="handleFilterGamesByProvider($event)"
-                                />
-                            </div>
-                        </div>
-            
+                        
                         <div class="search-results__games">
                             <span class="search-results__title">{{ 'geral.jogos' | translate }} ({{ gameList.length }})</span>
                             <div class="search-results__list">
@@ -75,6 +64,17 @@
                                     [isCliente]="isCliente"
                                     [blink]="blink"
                                     (openModalLogin)="handleModalLogin()"
+                                />
+                            </div>
+                        </div>                      
+                        <div class="search-results__providers">
+                            <span class="search-results__title">{{ 'geral.provedores' | translate }} ({{ providerList.length }})</span>
+                            <div class="search-results__list">
+                                <app-wall-provider-card
+                                    *ngFor="let provider of providerList"
+                                    [data]="provider"
+                                    type="filter"
+                                    (onClick)="handleFilterGamesByProvider($event)"
                                 />
                             </div>
                         </div>
