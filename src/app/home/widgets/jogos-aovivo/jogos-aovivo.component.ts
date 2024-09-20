@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnDestroy, ElementRef, DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -58,7 +59,8 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
         private bilheteService: BilheteEsportivoService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -323,5 +325,9 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
             default:
                 return '';
         };
+    }
+
+    redirectToGame(gameId) {
+        this.router.navigate(['live/all'], { queryParams: { gameId: gameId } });
     }
 }

@@ -12,6 +12,7 @@ import {
     ParametrosLocaisService
 } from '../../../services';
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-live-listagem',
@@ -65,10 +66,17 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
         private layoutService: LayoutService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private activatedRoute: ActivatedRoute,
+        private route: Router
     ) { }
 
     ngOnInit() {
+        let gameIdParams = this.activatedRoute.snapshot.queryParams.gameId;
+        if (gameIdParams) {
+            this.maisCotacoes(gameIdParams);
+            this.route.navigate([], { queryParams: { gameId: null }, queryParamsHandling: 'merge' });
+        }
         this.mobileScreen = window.innerWidth <= 1024;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
