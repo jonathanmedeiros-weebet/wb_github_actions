@@ -90,6 +90,43 @@
                         </form>
                     </div>
                 </section>
+                <section class="limite-perdas">
+                    <div class="section-header" (click)="toggleSections('limitePerdas')">
+                        <h3>{{ 'jogo_responsavel.limite_perdas.titulo' | translate }}</h3>
+                        <i class="fa {{sectionLimitePerdas ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+                    </div>
+                    <div class="section-body" *ngIf="sectionLimitePerdas">
+                        <p class="descricao">{{ 'jogo_responsavel.limite_perdas.descricao' | translate }}</p>
+                        <form [formGroup]="formLimitePerda" (ngSubmit)="handleSubmit('onSubmitLimitePerda')">
+                            <div class="field">
+                                <label for="">{{ 'jogo_responsavel.limite_perda.definir_limite_diario' | translate }}</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteDiario"
+                                >
+                            </div>
+                            <div class="field">
+                                <label for="">{{ 'jogo_responsavel.limite_perda.definir_limite_semanal' | translate }}</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteSemanal"
+                                >
+                            </div>
+                            <div class="field">
+                                <label for="">{{ 'jogo_responsavel.limite_perda.definir_limite_mensal' | translate }}</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteMensal"
+                                >
+                            </div>
+                            <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
+                        </form>
+                    </div>
+                </section>
                 <section class="limite-apostas" *ngIf="blocked">
                     <div class="section-header" (click)="toggleSections('temporizadorSessao')">
                         <h3>{{ 'jogo_responsavel.temporizador_sessao.titulo' | translate }}</h3>
