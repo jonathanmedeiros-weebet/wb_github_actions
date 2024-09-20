@@ -11,8 +11,6 @@ document.onreadystatechange = async function () {
                 const fieldLinkFootball = 'https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=';
                 const fieldLinkBasketball = 'https://widgets-v2.thesports01.com/br/pro/basketball?profile=5oq66hkn0cwunq7&uuid=';
                 const liveTrackerIsActive = params.liveTracker;
-                const footballId = 1;
-                const basketballId = 48242;
                 linkTag.href = `https://weebet.s3.amazonaws.com/${params.slug}/param/cores.css`
                 linkTag.rel = 'stylesheet';
                 appCssLink.parentElement.insertBefore(linkTag, appCssLink);
@@ -222,7 +220,7 @@ document.onreadystatechange = async function () {
                                 <div id="match">
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/times/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/times/m/default.png'">
+                                            <img src="https://cdn.wee.bet/img/times_v2/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/times_v2/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -241,7 +239,7 @@ document.onreadystatechange = async function () {
 
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/times/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/times/m/default.png'">
+                                            <img src="https://cdn.wee.bet/img/times_v2/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/times_v2/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_b_nome ? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -356,11 +354,14 @@ document.onreadystatechange = async function () {
                                 const ticketDiv = document.getElementById(`${ticketItem.jogo_api_id}_ticket_item`);
                                 let live_track_id = ticketItem.live_track_id;
                                 let fieldLink;
-    
+
+                                const footballId = 6046;
+                                const basketballId = 48242;
+
                                 if (ticketItem.sport == footballId) {
                                     fieldLink = fieldLinkFootball;
                                 }
-    
+
                                 if (ticketItem.sport == basketballId) {
                                     fieldLink = fieldLinkBasketball;
                                 }
@@ -377,7 +378,7 @@ document.onreadystatechange = async function () {
                             }
                         }
                     }
-                    
+
                     var liveItems = ticketData.tipo === 'esportes' ? filterLiveItems(ticketItens, itemsWithResults) : [];
 
                     if (!ticketData.resultado && liveItems.length > 0) {
