@@ -13,7 +13,7 @@ interface PrinterSetting {
   printerWidth?: number;
 }
 
-const production = true;
+const production = false;
 const _host = production ? 'https://central.demo.wee.bet' : '//localhost';
 const _loki = production ? 'https://loki1.weebet.tech' : '//localhost:8000';
 const _center = production ? 'https://center7.wee.bet' : 'https://hermes.wee.bet';
@@ -67,8 +67,8 @@ export const useConfigClient = defineStore('configClient', {
     blockedChampionships: (state) => state.params?.campeonatos_bloqueados ?? null,
     localQuotes: (state) => state.params?.cotacoes_local ?? [],
     deadlineTable: (state) => state.params?.data_limite_tabela ?? null,
-
-    hasParams: (state) => Boolean(Object.values(state.params).length)
+    hasParams: (state) => Boolean(Object.values(state.params).length),
+    bettorDocumentNumberEnabled: (state) => Boolean(state.params?.opcoes?.allow_bettor_document_number_on_the_ticket)
   },
   actions: {
     setConfig(config: ConfigClient) {
