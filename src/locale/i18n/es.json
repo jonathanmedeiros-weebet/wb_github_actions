@@ -658,5 +658,13 @@
         "concluida":"Terminado",
         "cancelada":"Cancelado",
         "premio": "Premio"
+    },
+    "cashback": {
+        "cashback": "Devolución de dinero",
+        "description": "Descripción",
+        "registrationDate": "Fecha de registro",
+        "pending": "Pendiente",
+        "redeemed": "Canjeado",
+        "redeem": "Canjear"
     }
 }

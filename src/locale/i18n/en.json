@@ -666,5 +666,13 @@
         "concluida":"Completed",
         "cancelada":"Canceled",
         "premio": "Prize"
+    },
+    "cashback": {
+        "cashback": "Cashback",
+        "description": "Description",
+        "registrationDate": "Registration Date",
+        "pending": "Pending",
+        "redeemed": "Redeemed",
+        "redeem": "Redeem"
     }
 }
