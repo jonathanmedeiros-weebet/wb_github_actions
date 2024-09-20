@@ -68,7 +68,7 @@ label {
     gap: 16px;
 }
 
-#legitimuz-action-faceindex{
+#legitimuz-action-faceindex, #legitimuz-action-verify {
     flex: 1;
     width: 25%;
 }

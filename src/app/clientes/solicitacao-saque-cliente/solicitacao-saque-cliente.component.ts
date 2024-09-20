@@ -24,6 +24,7 @@ import { Subject } from 'rxjs';
 })
 export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
 
     unsub$ = new Subject();
     unsubLegitimuz$ = new Subject();
@@ -135,12 +136,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             );
 
         this.clienteService.getCliente(user.id)
-            .subscribe(
-                res => {
+            .subscribe({
+                next: (res) => {
                     this.cliente = res;
 
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+                    this.cd.detectChanges();
 
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
@@ -159,10 +161,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.onChavePixChange();
                     this.showLoading = false;
                 },
-                error => {
+                error: (error) => {
                     this.handleError(error);
                 }
-            );
+            });
 
         if (!this.isMobile) {
             this.layoutService.currentHeaderHeight
@@ -174,18 +176,18 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        // if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
-        //     this.legitimuzService.curCustomerIsVerified
-        //         .pipe(takeUntil(this.unsub$))
-        //         .subscribe(curCustomerIsVerified => {
-        //             this.verifiedIdentity = curCustomerIsVerified;
-        //             this.cd.detectChanges();
-        //             if (this.verifiedIdentity) {
-        //                 this.legitimuzService.closeModal();
-        //                 this.messageService.success('Identidade verificada!');
-        //             }
-        //         });
-        // }
+        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    this.cd.detectChanges();
+                    if (this.verifiedIdentity) {
+                        this.legitimuzService.closeModal();
+                        this.messageService.success('Identidade verificada!');
+                    }
+                });
+        }
     }
 
     ngAfterViewInit() {
@@ -193,15 +195,17 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
-                    if (this.verifiedIdentity) {
                         this.legitimuzService.init();
-                        this.legitimuzService.mount();                   
-                    } else {
+                        this.legitimuzService.mount();                  
+                });
+            this.legitimuzLiveness.changes
+                .pipe(takeUntil(this.unsubLegitimuz$))
+                .subscribe(() => {
                         this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();    
-                    }
+                        this.LegitimuzFacialService.mount();                  
                 });
         }
+
     }
 
     closeAlert(id) {

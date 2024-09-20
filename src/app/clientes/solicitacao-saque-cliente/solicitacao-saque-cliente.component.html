@@ -176,14 +176,28 @@
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
                     {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
                 </div>
-                <div #legitimuz id="legitimuz-container" *ngIf="cadastroCompleto && reconhecimentoFacialEnabled && !verifiedIdentity">
+                <div #legitimuz id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && !verifiedIdentity">
                     <div id="legitimuz">
                         <div id="verify-identity-text">
-                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}} OCR + FACEMATCH
                         </div>
-                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                        <input *ngIf="cliente?.cpf" id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
                         <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            {{'saques.identityVerify' | translate}}
+                            <i class="fa-solid fa-id-card"></i>
+                        </button>
+                    </div>
+                    <div id="legitimuz-root"></div>
+                </div>
+                <div #legitimuzLiveness id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && verifiedIdentity">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}} Liveness
+                        </div>
+                        <input *ngIf="cliente?.cpf" id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                        <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
                             {{'saques.identityVerify' | translate}}
                             <i class="fa-solid fa-id-card"></i>
                         </button>
@@ -193,6 +207,7 @@
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}
                 </div>
+                
             </div>
         </div>
     </ng-container>

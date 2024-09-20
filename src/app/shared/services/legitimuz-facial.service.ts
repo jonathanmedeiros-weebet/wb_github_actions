@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ClienteService } from './clientes/cliente.service';
 import { ParametrosLocaisService } from './parametros-locais.service';
 
-declare var Legitimuz: any;
+declare var LegitimuzFaceIndex: any;
 
 @Injectable({
   providedIn: 'root'
@@ -73,7 +73,7 @@ export class LegitimuzFacialService {
   }
 
   init() {
-      this.sdk = Legitimuz(this.options);    
+      this.sdk = LegitimuzFaceIndex(this.options);    
   }
 
   mount() {          

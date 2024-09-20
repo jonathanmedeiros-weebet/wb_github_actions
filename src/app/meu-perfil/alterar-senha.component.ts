@@ -1,4 +1,5 @@
-import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
+
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, AfterViewChecked, AfterContentChecked, AfterContentInit, AfterViewInit } from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {AuthService, ClienteService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService} from './../services';
 import {BaseFormComponent} from '../shared/layout/base-form/base-form.component';
@@ -17,8 +18,9 @@ import { LegitimuzFacialService } from '../shared/services/legitimuz-facial.serv
     templateUrl: 'alterar-senha.component.html',
     styleUrls: ['alterar-senha.component.css']
 })
-export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
     public isCollapsed = false;
     private unsub$ = new Subject();
     public mostrarSenhaAtual: boolean = false;
@@ -79,7 +81,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
 
         if (this.reconhecimentoFacialEnabled) {
-            this.token = `alteracao_senha ${this.auth.getToken()}`;
+            this.token = this.auth.getToken();
         }
 
         this.translate.onLangChange.subscribe(change => {
@@ -93,7 +95,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             .subscribe(
                 res => {
                     this.cliente = res;
-                    this.cd.detectChanges()
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
                     this.showLoading = false;
@@ -102,32 +103,32 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                     this.handleError(error);
                 }
             
-            );  
-            // if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
-            //     this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
-            //             console.log(curCustomerIsVerified)
-            //             this.verifiedIdentity = curCustomerIsVerified;
-            //             this.cd.detectChanges();
-            //             if (this.verifiedIdentity) {
-            //                 this.legitimuzService.closeModal();
-            //                 this.messageService.success('Identidade verificada!');
-            //             }
-            //         });
-            // }   
+            );
+            if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
+                this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
+                        console.log(curCustomerIsVerified)
+                        this.verifiedIdentity = curCustomerIsVerified;
+                        this.cd.detectChanges();
+                        if (this.verifiedIdentity) {
+                            this.legitimuzService.closeModal();
+                            this.messageService.success('Identidade verificada!');
+                        }
+                    });
+            }   
     }
-
     ngAfterViewInit() {
         if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
-                    if (this.verifiedIdentity) {
                         this.legitimuzService.init();
-                        this.legitimuzService.mount();                   
-                    } else {
+                        this.legitimuzService.mount();                  
+                });
+            this.legitimuzLiveness.changes
+                .pipe(takeUntil(this.unsubLegitimuz$))
+                   .subscribe(() => {
                         this.LegitimuzFacialService.init();
                         this.LegitimuzFacialService.mount();    
-                    }
                 });
         }
     }

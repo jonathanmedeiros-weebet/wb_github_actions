@@ -25,6 +25,7 @@ enum RecoveryStep {
 })
 export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
     private recoveryTokenStep1: string;
     private recoveryTokenStep2: string;
     public step: number = RecoveryStep.ONE_STEP;
@@ -148,17 +149,17 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.indiqueGanheRemovido = statusIndiqueGanhe;
             });
         
-        // if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
-        //     this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
-        //             console.log(curCustomerIsVerified)
-        //             this.verifiedIdentity = curCustomerIsVerified;
-        //             this.cd.detectChanges();
-        //             if (this.verifiedIdentity) {
-        //                 this.legitimuzService.closeModal();
-        //                 this.messageService.success('Identidade verificada!');
-        //             }
-        //         });
-        // }   
+        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
+                    console.log(curCustomerIsVerified)
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    this.cd.detectChanges();
+                    if (this.verifiedIdentity) {
+                        this.legitimuzService.closeModal();
+                        this.messageService.success('Identidade verificada!');
+                    }
+                });
+        }   
                 
     }
 
@@ -237,13 +238,14 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
-                    if (this.verifiedIdentity) {
                         this.legitimuzService.init();
-                        this.legitimuzService.mount();                   
-                    } else {
+                        this.legitimuzService.mount();                  
+                });
+            this.legitimuzLiveness.changes
+                .pipe(takeUntil(this.unsubLegitimuz$))
+                   .subscribe(() => {
                         this.LegitimuzFacialService.init();
                         this.LegitimuzFacialService.mount();    
-                    }
                 });
         }
     }

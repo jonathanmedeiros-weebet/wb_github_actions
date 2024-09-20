@@ -71,11 +71,12 @@ export class LegitimuzService {
     }
 
     init() {
+        console.log(this.options)
         this.sdk = Legitimuz(this.options);    
     }
 
     mount() {          
-            this.sdk.mount();
+        this.sdk.mount();
     }     
 
     changeLang(lang: string) {
@@ -94,4 +95,4 @@ export class LegitimuzService {
         this.sdk.closeModal();
     }
 
-    }
+}
