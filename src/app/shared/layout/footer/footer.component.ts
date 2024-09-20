@@ -114,10 +114,6 @@ export class FooterComponent implements OnInit, AfterViewInit {
         let reclameAquiDataId = '';
 
         switch (this.slug) {
-            case 'zilionz.com':
-                anj_cd823ed6_bffb_4764_9e1b_05566f369c8c.init();
-                reclameAquiDataId = 'MTUyMzg1ODp6aWxsaW9uei1iZXQ=';
-                break;
             case 'saqbet.tv':
                 reclameAquiDataId = 'eFVwSWdfU2FSRm42dmZOLTpzYXFiZXQtdHY=';
                 break;
