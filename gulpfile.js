@@ -2926,3 +2926,12 @@ gulp.task('megapix.bet', function (done) {
         dominioTemp: "megapixbet.wee.bet"
     });
 });
+
+gulp.task('pinbet.io', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "pinbet.io",
+        banca: "PINBET",
+        styles: "",
+    });
+});
