@@ -2923,5 +2923,6 @@ gulp.task('megapix.bet', function (done) {
         host: "megapix.bet",
         banca: "MEGAPIX.BET",
         styles: "",
+        dominioTemp: "megapixbet.wee.bet"
     });
 });
