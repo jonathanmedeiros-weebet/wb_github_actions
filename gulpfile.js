@@ -2916,3 +2916,12 @@ gulp.task('sortte.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('megapix.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "megapix.bet",
+        banca: "MEGAPIX.BET",
+        styles: "",
+    });
+});

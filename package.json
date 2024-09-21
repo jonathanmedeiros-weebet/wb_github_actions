@@ -307,7 +307,8 @@
         "tigre.bet": "gulp tigre.bet",
         "mailing.bet": "gulp mailing.bet",
         "bocamafra.bet": "gulp bocamafra.bet",
-        "sortte.bet": "gulp sortte.bet"
+        "sortte.bet": "gulp sortte.bet",
+        "megapix.bet": "gulp megapix.bet"
     },
     "private": true,
     "dependencies": {
