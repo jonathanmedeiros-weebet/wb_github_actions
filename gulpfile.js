@@ -2177,6 +2177,7 @@ gulp.task('bullbets.online', function (done) {
         host: "bullbets.online",
         banca: "BULL BETS",
         styles: "",
+        dominioTemp: "bullbets.com.br"
     });
 });
 

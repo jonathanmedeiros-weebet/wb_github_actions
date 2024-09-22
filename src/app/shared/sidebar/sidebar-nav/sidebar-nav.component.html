@@ -267,16 +267,18 @@
                 </a>
             </li>
 
+
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/carteira']" routerLinkActive="router-link-active">
+                    <i class="material-symbols-outlined">account_balance_wallet</i>
+                    <span class="regiao-nome">{{'geral.carteira' | translate}}</span>
+                </a>
+            </li>
+
              <li class="cambista-item">
                 <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
                     <i class="fa fa-dollar icone-generico"></i>
                     <span class="regiao-nome">{{'geral.financeiro' | translate}}</span>
-                </a>
-            </li>
-            <li class="cambista-item">
-                <a [routerLink]="['/clientes/carteira']" routerLinkActive="router-link-active">
-                    <i class="fa fa-wallet"></i>
-                    <span class="regiao-nome">{{'geral.carteira' | translate}}</span>
                 </a>
             </li>
 
