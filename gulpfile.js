@@ -2153,13 +2153,12 @@ gulp.task('supertop3.bet', function (done) {
     });
 });
 
-gulp.task('bullbets.online', function (done) {
+gulp.task('bullbets.com.br', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "bullbets.online",
+        host: "bullbets.com.br",
         banca: "BULL BETS",
         styles: "",
-        dominioTemp: "bullbets.com.br"
     });
 });
 
