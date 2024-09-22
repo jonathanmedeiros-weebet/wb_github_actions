@@ -2398,15 +2398,6 @@ gulp.task('betstar.vip', function (done) {
     });
 });
 
-gulp.task('jaybet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jaybet.com",
-        banca: "JAYBET",
-        styles: "",
-    });
-});
-
 gulp.task('multisports.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
