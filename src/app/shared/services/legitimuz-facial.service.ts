@@ -55,6 +55,8 @@ export class LegitimuzFacialService {
           };
       } else {
           this.options.onSuccess = (eventName) => {console.log(eventName)
+          console.log(this.options);
+        
           }
       }
 

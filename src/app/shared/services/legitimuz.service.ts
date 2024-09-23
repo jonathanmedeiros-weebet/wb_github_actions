@@ -24,7 +24,6 @@ export class LegitimuzService {
         lang: 'pt',
         enableRedirect: false,
         autoOpenValidation: false,
-        onlyLiveness : true,
         onSuccess: (eventName) => console.log(eventName),
         onError: (eventName) => console.log(eventName),
         eventHandler:(eventName) => console.log(eventName),
@@ -90,15 +89,9 @@ export class LegitimuzService {
         this.options.enableRedirect = enable;
     }
 
-    toggleFacialValitation(enable: boolean) {
-        this.options.onlyLiveness = enable;
-    }
-
     toggleAutoOpenValidation(enable: boolean) {
         this.options.autoOpenValidation = enable;
     }
-
-
 
     closeModal() {
         this.sdk.closeModal();

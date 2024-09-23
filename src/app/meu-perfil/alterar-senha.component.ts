@@ -96,11 +96,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 res => {
                     this.cliente = res;
                     this.verifiedIdentity = res.verifiedIdentity;
-                    console.log(this.verifiedIdentity)
-                    this.legitimuzService.toggleFacialValitation(typeof this.verifiedIdentity === 'boolean' && this.verifiedIdentity === true)
-                    console.log(typeof this.verifiedIdentity === 'boolean' && this.verifiedIdentity)
-                    // this.legitimuzService.init();
-                    // this.legitimuzService.mount();
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
                     this.showLoading = false;
                 },
