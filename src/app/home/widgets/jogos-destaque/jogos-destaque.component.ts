@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService, ParametrosLocaisService } from 'src/app/services';
 
 import { FOOTBALL_ID } from '../../../shared/constants/sports-ids';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-jogos-destaque',
@@ -13,6 +14,7 @@ import { FOOTBALL_ID } from '../../../shared/constants/sports-ids';
 })
 export class JogosDestaqueComponent implements OnInit, OnChanges {
     @Input() displayLabel = true;
+    @Input() isHome = false;
     @Output() maisCotacoesDestaque = new EventEmitter();
     @Output() hasFeaturedMatches = new EventEmitter<boolean>();
     jogosDestaque = [];
@@ -46,6 +48,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         private bilheteService: BilheteEsportivoService,
         private paramsService: ParametrosLocaisService,
         private campeonatoService: CampeonatoService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -58,6 +61,14 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         }
 
         this.getJogosDestaques();
+    }
+
+    maisCotacoes(jogoId){
+        if (this.isHome) {
+            this.router.navigate([`/esportes/futebol/highlight-game/${jogoId}`])
+        } else {
+            this.maisCotacoesDestaque.emit(jogoId)
+        }
     }
 
     getJogosDestaques() {
