@@ -27,7 +27,7 @@
         v-model="password" 
       >
         <template #icon>
-            <icon-password/>
+          <icon-password/>
         </template>
 
       </w-input>
@@ -123,6 +123,9 @@ export default {
     text-align: left;
     margin-bottom: 4px;
     margin-top: 10px;
+
+    color: #ffffff;
+    color: var(--color-text);
   }
 
   &__description {

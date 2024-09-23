@@ -105,7 +105,8 @@ export default {
                     quoteName: odd.label,
                     quoteGroupName: groupName,
                     favorite: this.game.favorito,
-                    modalityId: this.game.sport_id
+                    modalityId: this.game.sport_id,
+                    championshipId: this.game?.campeonato?._id
                 })
             }
         },

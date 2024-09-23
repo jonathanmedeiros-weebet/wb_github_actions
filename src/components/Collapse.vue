@@ -48,6 +48,7 @@ export default {
 .collapse {
     width: 100%;
     background: transparent;
+    min-height: 40px;
 
     &__item {
         display: flex;
@@ -56,7 +57,11 @@ export default {
 
         height: 40px;
         padding: 8px 16px;
+        background: #181818;
         background: var(--color-background-input);
+
+        color: #ffffff;
+        color: var(--color-text);
     }
 
     &__title {
@@ -64,6 +69,7 @@ export default {
         align-items: center;
         justify-content: flex-start;
 
+        color: #ffffff;
         color: var(--color-text);
         font-size: 14px;
         font-weight: 400;

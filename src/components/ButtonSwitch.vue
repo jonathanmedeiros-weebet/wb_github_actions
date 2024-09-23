@@ -74,7 +74,8 @@ export default {
   }
 
   &__checkbox:checked + &__switch {
-    background: rgba(109, 165, 68, 1);
+    background: #6da544;
+    background: var(--color-success);
   }
 
   &__checkbox:checked + &__switch:before {

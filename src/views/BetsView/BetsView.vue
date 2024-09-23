@@ -246,6 +246,8 @@
       <ModalCalendar
         v-if="showModalCalendar"
         :initialDate="dateFilter"
+        :finalDate="finalDateFilter"
+        :isMultiDate="true"
         @closeModal="handleCloseCalendarModal"
         @change="handleCalendar"
       />
@@ -288,6 +290,7 @@ export default {
       showResults: false,
       showModalCalendar: false,
       dateFilter: now(),
+      finalDateFilter: now(),
       activeButton: 'todos',
       apostador: '',
       bets: [],
@@ -320,7 +323,9 @@ export default {
   },
   computed: {
     dateFilterView() {
-      return this.dateFilter ? convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY") : '';
+      const initialDate = convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY");
+      const finalDate = convertInMomentInstance(this.finalDateFilter).format("DD/MM/YYYY");
+      return `${initialDate} - ${finalDate}`;
     },
     showBettorDocumentNumber() {
       return this.configClientStore.bettorDocumentNumberEnabled;
@@ -369,8 +374,9 @@ export default {
     handleCloseCalendarModal() {
       this.showModalCalendar = false;
     },
-    handleCalendar(dateTime) {
-      this.dateFilter = dateTime;
+    handleCalendar({initialDate, finalDate}) {
+      this.dateFilter = initialDate;
+      this.finalDateFilter = finalDate;
       this.handleCloseCalendarModal();
     },
     setActive(button) {
@@ -382,8 +388,7 @@ export default {
     getResults() {
       this.parametros.codigo = this.code.replace(/-/g, '');
       this.parametros.dataInicial = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
-      //TODO: Será alterada a dataFinal após criação do componente de calendário com ranger de data.
-      this.parametros.dataFinal = this.parametros.dataInicial;
+      this.parametros.dataFinal = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.parametros.dataInicial;
       this.parametros.status = this.activeButton == 'todos' ? '' : this.activeButton;
       this.parametros.apostador = this.apostador;
       this.parametros.sort = '-horario'
@@ -391,7 +396,6 @@ export default {
       console.log(this.parametros)
       
       this.getApiBets();
-      
     },
     async getApiBets() {
       this.bets = [];

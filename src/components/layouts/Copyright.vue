@@ -25,7 +25,8 @@ export default {
       line-height: 14.09px;
       text-align: left;
       text-decoration: none;
-      color: #FFFFFFCC;
+      color: #FFFFFF;
+      color: var(--color-text);
     }
   }
 </style>

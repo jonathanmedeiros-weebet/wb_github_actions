@@ -91,6 +91,7 @@ export default {
   justify-content: space-between;
   padding: 16px 24px;
   border-top: 1px solid #FFFFFF1A;
+  background: #0a0a0a;
   background: var(--color-background);
 
   &__item {
@@ -101,6 +102,7 @@ export default {
     gap: 8px;
 
     height: 41px;
+    color: #ffffff;
     color: var(--color-text);
     font-size: 12px;
     font-weight: 400;
@@ -108,6 +110,7 @@ export default {
     text-decoration: none;
 
     &--actived {
+      color: #0be58e;
       color: var(--color-primary);
     }
   }

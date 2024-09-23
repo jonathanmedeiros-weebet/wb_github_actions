@@ -1,54 +1,64 @@
 <template>
   <div class="results">
-    <Header title="Resultados" :showBackButton="true" />
-    <div class="results__dates">
-      <div 
-        class="results__dates-buttons" 
-        v-for="(day, dateRangeIndex) in dateRange"  
-        :key="dateRangeIndex"
-      >
-        <button-date 
-          :value="day.format('YYYY-MM-DD')"
-          :text="getTextButton(day)"
-          :actived="isCurrentDay(day)"
-          @click="setActiveDay(day)"
-          :ref="getRef(day)"
-        />
-      </div>
-    </div>
-    <div class="results__content">
-      <div class="results__modalities">
-        <label class="results__modalities-label">Modalidade</label>
-        <select-fake class="results__selectfake" titleSize="medium" @click="handleOpenModalitiesModal">{{ modality.name }}</select-fake>
-        
-        <div class="results__collapses">
-
-          <template v-if="loading">
-            <SquareSkeleton class="results__total_results-skeleton"  :height="14" :width="120"/>
-            <game-item-result-skeleton/>
-          </template>
-          <template v-else>
-            <p class="results__count-modalities">{{ championshipList.length }} Resultados encontrados</p>
-            <collapse 
-              :leftIcon="true" 
-              :initCollapsed="true" 
-              v-for="(championship, championshipListIndex) in championshipList" 
-              :key="championshipListIndex"
-            >
-              
-              <template #title>
-                {{ championship.nome }}
-              </template>
-
-              <game-item-result :games="championship.jogos"/>
-            </collapse>
-          </template>
-
-         
+    <div class="results__header">
+      <Header title="Resultados" :showBackButton="true" />
+      <div class="results__dates">
+        <div 
+          class="results__dates-buttons" 
+          v-for="(day, dateRangeIndex) in dateRange"  
+          :key="dateRangeIndex"
+        >
+          <ButtonDate 
+            :value="day.format('YYYY-MM-DD')"
+            :text="getTextButton(day)"
+            :actived="isCurrentDay(day)"
+            @click="setActiveDay(day)"
+            :ref="getRef(day)"
+          />
         </div>
       </div>
-      
     </div>
+
+    <div class="results__body">
+      <div class="results__modalities">
+        <label class="results__modalities-label">Modalidade</label>
+        <SelectFake
+          class="results__selectfake"
+          titleSize="medium"
+          @click="handleOpenModalitiesModal"
+        >
+          {{ modality.name }}
+        </SelectFake>
+      </div>
+
+      <template v-if="loading">
+        <SquareSkeleton
+          class="results__total_results-skeleton"
+          :height="14"
+          :width="120"
+        />
+        <GameItemResultSkeleton />
+      </template>
+
+      <template v-else>
+        <p class="results__count-modalities">
+          {{ championshipList.length }} Resultados encontrados
+        </p>
+        <Collapse 
+          :leftIcon="true" 
+          :initCollapsed="true" 
+          v-for="(championship, championshipListIndex) in championshipList" 
+          :key="championshipListIndex"
+        >
+          <template #title>
+            {{ championship.nome }}
+          </template>
+
+          <GameItemResult :games="championship.jogos"/>
+        </Collapse>
+      </template>
+    </div>
+
     <ModalModalities
       v-if="showModalModalities"
       :modalityId="modality.id"
@@ -193,26 +203,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .results {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
+  width: 100%;
+  padding-bottom: 100px;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+  }
 
   &__dates {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
     padding: 16px 10px;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 100px;
-    overflow-y: auto;
   }
 
   &__dates::-webkit-scrollbar {
@@ -226,22 +243,10 @@ export default {
   &__modalities {
     display:  flex;
     flex-direction: column;
-    margin: 10px 20px;
-  }
-
-  &__selectfake {
-    margin-bottom: 10px;
-  }
-
-  &__collapses {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    margin-top: 10px;
+    padding: 10px 20px;
   }
 
   &__count-modalities {
-    // padding: 5px 20px;
     margin: 5px 20px;
     color: #ffffff80;
     color: var(--color-text-input);

@@ -4,7 +4,7 @@
         <div class="dashboard__container">
             <card-entry-dashboard :data="entryData" @click="handleReloadEntry"/>
 
-            <div class="dashboard__chart-header">
+            <div class="dashboard__chart-header" v-if="showChart">
                 <p class="dashboard__chart-header-title">Fluxo de caixa</p>
                 
                 <collapse-dashboard @click="handleOpenModalFilterDate">
@@ -12,7 +12,8 @@
                 </collapse-dashboard>
 
             </div>
-            <div class="dashboard__chart">
+
+            <div class="dashboard__chart" v-if="showChart">
                 <chart-bar 
                     :width="313"
                     :height="250"
@@ -25,22 +26,18 @@
                 <p @click="toMoviments()" class="dashboard__movements-filter">Visualizar todos</p>
             </div>
 
-            
-
             <div class="dashboard__movements-dates">
-                
-                <p class="dashboard__movements-icon-range-dates">
-                    <icon-calendar-month class="dashboard__movements-icon-calendar" fill="#ffffff80"/>
-                    {{ dateFilterIni.format('DD/MM/YYYY') }} - {{ dateFilterEnd.format('DD/MM/YYYY') }}</p>  
+                <label class="dashboard__movements-icon-range-dates">
+                    <IconCalendar class="dashboard__movements-icon-calendar" :color="'#ffffff80'"/>
+                    {{ dateFilterIni.format('DD/MM/YYYY') }} - {{ dateFilterEnd.format('DD/MM/YYYY') }}
+                </label>  
             </div>
-        
 
             <card-movement-dashboard 
                 v-for="(movement, movementsIndex) in momentsResults" 
                 :key="movementsIndex"
                 :movement="movement"
             />
-
         </div>
 
         <modal-filter-date
@@ -50,7 +47,6 @@
             @click="handleFilterDate"
             ref="modalFilter"
         />
-       
     </div>
 </template>
 
@@ -62,14 +58,14 @@ import CollapseDashboard from './parts/CollapseDashboard.vue'
 import ChartBar from './parts/ChartBar.vue'
 
 import { now } from '@/utilities'
-import IconCalendarMonth from '@/components/icons/IconCalendarMonth.vue'
+import IconCalendar from '@/components/icons/IconCalendar.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
 import ModalFilterDate from './parts/ModalFilterDate.vue'
-import { getCashFlow, getFinancial, getMovements, getQtdBets, listMovements  } from '@/services'
+import { getCashFlow, getFinancial, listMovements } from '@/services'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums'
-import { useToastStore } from '@/stores'
+import { useConfigClient, useToastStore } from '@/stores'
 
 export default {
     name: 'dashboard-view',
@@ -78,7 +74,7 @@ export default {
         CardEntryDashboard,
         CollapseDashboard,
         ChartBar,
-        IconCalendarMonth,
+        IconCalendar,
         CardMovementDashboard,
         IconCheck,
         ModalFilterDate,
@@ -130,7 +126,8 @@ export default {
                 slug: 'semana-atual',
                 checked: false,
             },
-            toastStore: useToastStore()
+            toastStore: useToastStore(),
+            configClientStore: useConfigClient(),
         }
     },
     methods: {
@@ -245,6 +242,9 @@ export default {
         },
         dateFilterEnd() { 
             return now();
+        },
+        showChart() {
+            return !this.configClientStore.chartDeprecatedByAndroidVersion;
         }
     },
     mounted() {
@@ -307,7 +307,6 @@ export default {
         font-size: 14px;
         color: #ffffff80;
         color: var(--color-text-input);
-        
     }
 
     &__movements-icon-calendar {
@@ -320,11 +319,15 @@ export default {
     &__movements-icon-range-dates {
         display: flex;
         flex-direction: row;
-        max-width: fit-content;
+        width: fit-content;
         padding: 8px 14px;
         border-radius: 6px;
-        background: rgba(24, 24, 24, 0.50);
-        color: rgba(255, 255, 255, 0.70);
+
+        color: #ffffff80;
+        color: var(--color-text-input);
+
+        background: #181818;
+        background: var(--color-background-input);
     }
 }
 </style>

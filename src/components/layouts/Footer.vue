@@ -15,6 +15,24 @@ export default {
     Tabs,
     Copyright
   },
+  data() {
+    return {
+      hideCopyrightWhenKeyboardWasDisplayed: false
+    }
+  },
+  mounted() {
+    const userNameElement = document.getElementById('user_name');
+    if(userNameElement) {
+      userNameElement.addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)
+      userNameElement.addEventListener('blur', () => this.hideCopyrightWhenKeyboardWasDisplayed = false)
+    }
+
+    const userPasswordElement = document.getElementById('user_password');
+    if(userPasswordElement) {
+      userPasswordElement.addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)
+      userPasswordElement.addEventListener('blur', () => this.hideCopyrightWhenKeyboardWasDisplayed = false)
+    }
+  },
   computed: {
     showTabs() {
       return ![
@@ -26,7 +44,7 @@ export default {
       ].includes(this.$route.name)
     },
     showCopyright() {
-      return ['login'].includes(this.$route.name)
+      return ['login'].includes(this.$route.name) && !this.hideCopyrightWhenKeyboardWasDisplayed
     }
   }
 }
