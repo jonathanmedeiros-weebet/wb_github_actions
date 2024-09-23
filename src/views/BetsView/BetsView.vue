@@ -123,7 +123,7 @@
               <div class="bets__card-footer--inline">
                 <w-button
                   id="btn-view"
-                  text="Visuaizar"
+                  text="Visualizar"
                   value="view"
                   name="btn-view"
                   class="button--secondary"

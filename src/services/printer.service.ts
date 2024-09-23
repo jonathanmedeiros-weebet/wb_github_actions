@@ -97,7 +97,7 @@ export const printTicket = async (bet: any) => {
             .text(bet.itens.length)
             .newline()
             .bold(true)
-            .text('COTACAOO: ')
+            .text('COTACAO: ')
             .bold(false)
             .text(formatCurrency(bet.possibilidade_ganho / bet.valor))
             .newline()
