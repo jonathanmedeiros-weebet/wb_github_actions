@@ -306,7 +306,9 @@
         "bocamafra.bet": "gulp bocamafra.bet",
         "sortte.bet": "gulp sortte.bet",
         "megapix.bet": "gulp megapix.bet",
-        "pinbet.io": "gulp pinbet.io"
+        "pinbet.io": "gulp pinbet.io",
+        "clbet.com": "gulp clbet.com",
+        "leaobet.com": "gulp leaobet.com"
     },
     "private": true,
     "dependencies": {
