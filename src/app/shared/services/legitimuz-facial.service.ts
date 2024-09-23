@@ -75,27 +75,27 @@ export class LegitimuzFacialService {
   }
 
   init() {
-      this.sdk = LegitimuzFaceIndex(this.options);    
+    this.sdk = LegitimuzFaceIndex(this.options);    
   }
 
   mount() {          
-          this.sdk.mount();
+    this.sdk.mount();
   }     
 
   changeLang(lang: string) {
-      this.sdk.setLang(lang);
+    this.sdk.setLang(lang);
   }
 
   toggleEnableRedirect(enable: boolean) {
-      this.options.enableRedirect = enable;
+    this.options.enableRedirect = enable;
   }
 
   toggleAutoOpenValidation(enable: boolean) {
-      this.options.autoOpenValidation = enable;
+    this.options.autoOpenValidation = enable;
   }
 
   closeModal() {
-      this.sdk.closeModal();
+    this.sdk.closeModal();
   }
 
 }

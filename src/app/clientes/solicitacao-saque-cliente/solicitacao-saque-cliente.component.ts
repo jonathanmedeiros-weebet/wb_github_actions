@@ -57,6 +57,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     permitirQualquerChavePix = false;
     submitting;
     reconhecimentoFacialEnabled = false;
+    reconhecimentoFacialPrimeiroSaque = false;
+    reconhecimentoFacialPrimeiroSaqueValidado = false;
     legitimuzToken = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
@@ -99,9 +101,14 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.currentLanguage = this.translate.currentLang;
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
+        this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
+        this.reconhecimentoFacialPrimeiroSaque = Boolean(this.paramsLocais.getOpcoes().reconhecimentoFacialPrimeiroSaque && this.legitimuzToken);
+        if (!this.reconhecimentoFacialEnabled && !this.reconhecimentoFacialPrimeiroSaque) {
+            this.reconhecimentoFacialPrimeiroSaqueValidado = true;
+        }
+        if (this.reconhecimentoFacialEnabled && this.reconhecimentoFacialPrimeiroSaque) {
+            
 
-        if (this.reconhecimentoFacialEnabled) {
             this.token = this.auth.getToken();
         }
 
@@ -176,7 +183,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
+        if (this.reconhecimentoFacialEnabled && this.reconhecimentoFacialPrimeiroSaque && !this.disapprovedIdentity && !this.verifiedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {

@@ -36,6 +36,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     private unsub$: Subject<any> = new Subject();
     verifiedIdentity = false
     reconhecimentoFacialEnabled = true
+    
     legitimuzToken = "";
     dataUserCPF: string;
     currentLanguage = 'pt';
@@ -96,7 +97,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.currentLanguage = this.translate.currentLang;
         this.createForm();
         this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramLocais.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
+        this.reconhecimentoFacialEnabled = Boolean(this.paramLocais.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
             if (this.reconhecimentoFacialEnabled) {

@@ -7,7 +7,7 @@
             <h2>{{'geral.alterarSenha' | translate}}</h2>
         </div>
         <div class="content-body">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate *ngIf="!reconhecimentoFacialEnabled || verifiedIdentity">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate *ngIf="reconhecimentoFacialAlteracaoSenhaValidado">
                 <div class="row">
                     <div class="col-md-2">
                         <label >
@@ -112,10 +112,10 @@
                 </button>
             </div>
             </form>
-            <div #legitimuz id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && verifiedIdentity">
+            <div #legitimuz id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && reconhecimentoFacialAlteracaoSenha && !reconhecimentoFacialAlteracaoSenhaValidado && !verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
-                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}} OCR + FACEMATCH
+                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                     </div>
                     <input *ngIf="cliente?.cpf" id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
                     <input type="hidden" id="legitimuz-ref-id" [value]="token">
@@ -126,10 +126,10 @@
                 </div>
                 <div id="legitimuz-root"></div>
             </div>
-            <div #legitimuzLiveness id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && verifiedIdentity">
+            <div #legitimuzLiveness id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && reconhecimentoFacialAlteracaoSenha && !reconhecimentoFacialAlteracaoSenhaValidado && verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
-                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}} Liveness
+                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                     </div>
                     <input *ngIf="cliente?.cpf" id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
                     <input type="hidden" id="legitimuz-ref-id" [value]="token">

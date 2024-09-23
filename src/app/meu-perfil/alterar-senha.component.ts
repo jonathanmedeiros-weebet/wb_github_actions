@@ -32,6 +32,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     currentLanguage = 'pt';
     cliente: Cliente;
     reconhecimentoFacialEnabled = false;
+    reconhecimentoFacialAlteracaoSenha = false;
+    reconhecimentoFacialAlteracaoSenhaValidado = false;
     legitimuzToken = "";
     unsubLegitimuz$ = new Subject();
     verifiedIdentity = false;
@@ -78,7 +80,16 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().get_Habilitar_Reconhecimento_Facial && this.legitimuzToken);
+        this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
+        this.reconhecimentoFacialAlteracaoSenha = Boolean(this.paramsLocais.getOpcoes().reconhecimentoFacialAlteracaoSenha && this.legitimuzToken);
+        console.log(this.verifiedIdentity)
+        console.log(this.reconhecimentoFacialEnabled)
+        console.log(this.reconhecimentoFacialAlteracaoSenha)
+
+        if (!this.reconhecimentoFacialAlteracaoSenha) {
+            this.reconhecimentoFacialAlteracaoSenhaValidado = true
+        }
+        
 
         if (this.reconhecimentoFacialEnabled) {
             this.token = this.auth.getToken();
@@ -248,5 +259,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 }
             }
         );
+    }
+    toogleValidado() {
+        this.reconhecimentoFacialAlteracaoSenhaValidado = !this.reconhecimentoFacialAlteracaoSenhaValidado;
     }
     }
