@@ -15,15 +15,14 @@ export class LegitimuzService {
     private sdk;
 
     private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
-    private static API_LEGITIMUZ_LIVENESS: String = "https://liveness.legitimuz.com";
 
     private options:any = {
         host: LegitimuzService.API_LEGITIMUZ,
-        appURL :LegitimuzService.API_LEGITIMUZ_LIVENESS, 
         token: '',
         lang: 'pt',
         enableRedirect: false,
         autoOpenValidation: false,
+        onlyLiveness : false,
         onSuccess: (eventName) => console.log(eventName),
         onError: (eventName) => console.log(eventName),
         eventHandler:(eventName) => console.log(eventName),
