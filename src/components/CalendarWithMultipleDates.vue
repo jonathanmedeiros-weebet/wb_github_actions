@@ -4,7 +4,7 @@
       <button class="calendar__actions" @click="prevMonth">
         <IconArrowLeft :size="28" color="#0be58e"/>
       </button>
-      {{ currentMonthAndYear }}
+      {{ initialMonthAndYear }}
       <button class="calendar__actions" @click="nextMonth">
         <IconArrowRight :size="28" color="#0be58e"/>
       </button>
@@ -28,7 +28,7 @@
           <div
             class="calendar__day"
             v-for="(day, indexDay) in week"
-            :class="{'calendar__day--selected': day == daySelected && isMonthSelected}"
+            :class="{ 'calendar__day--selected': verifyIfWasSelected(day)}"
             :key="`${indexDay}-${index}`"
             @click="handleClick(day)"
           >
@@ -51,19 +51,25 @@ import IconArrowRight from './icons/IconArrowRight.vue'
 
 export default {
   components: { IconArrowLeft, IconArrowRight },
-  name: 'calendar',
+  name: 'calendar-with-multi-dates',
   props: {
     initialDate: {
       type: [String, Object],
       default: () => now()
-    }
+    },
+    finalDate: {
+      type: [String, Object],
+      default: () => now()
+    },
   },
   data() {
     return {
       calendar: [],
       today: convertInMomentInstance(this.initialDate),
-      currentMonthAndYear: dateFormatInMonthAndYear(this.initialDate),
-      dateSelected: convertInMomentInstance(this.initialDate),
+      initialMonthAndYear: dateFormatInMonthAndYear(this.initialDate),
+      initialDateSelected: convertInMomentInstance(this.initialDate),
+      finalMonthAndYear: dateFormatInMonthAndYear(this.finalDate),
+      finalDateSelected: convertInMomentInstance(this.finalDate),
       monthPreview: ''
     }
   },
@@ -72,22 +78,33 @@ export default {
     this.monthPreview = this.today.format('MM')
   },
   computed: {
-    daySelected() {
-      return this.dateSelected.format('DD')
+    initialDaySelected() {
+      return this.initialDateSelected ? this.initialDateSelected.format('DD') : ''
     },
-    isMonthSelected() {
-      return dateFormatInMonthAndYear(this.dateSelected) === this.currentMonthAndYear
-    }
+    finalDaySelected() {
+      return this.finalDateSelected ? this.finalDateSelected.format('DD') : ''
+    },
+    isInitialMonthSelected() {
+      return dateFormatInMonthAndYear(this.initialDateSelected) === this.initialMonthAndYear
+    },
+    isFinalMonthSelected() {
+      return dateFormatInMonthAndYear(this.finalDateSelected) === this.finalMonthAndYear
+    },
   },
   methods: {
+    verifyIfWasSelected(day) {
+      return (day == this.initialDaySelected && this.isInitialMonthSelected) || (day == this.finalDaySelected && this.isFinalMonthSelected);
+    },
     nextMonth() {
       this.today.add(1,'month')
-      this.currentMonthAndYear = dateFormatInMonthAndYear(this.today)
+      this.initialMonthAndYear = dateFormatInMonthAndYear(this.today)
+      this.finalMonthAndYear = dateFormatInMonthAndYear(this.today)
       this.mountCalendar()
     },
     prevMonth() {
       this.today.subtract(1, 'month')
-      this.currentMonthAndYear = dateFormatInMonthAndYear(this.today)
+      this.initialMonthAndYear = dateFormatInMonthAndYear(this.today)
+      this.finalMonthAndYear = dateFormatInMonthAndYear(this.today)
       this.mountCalendar()
     },
     mountCalendar() {
@@ -119,12 +136,26 @@ export default {
     },
     handleClick(day) {
       if(!Boolean(day)) return;
+
       const dateCustom = convertInMomentInstance(this.today);
       dateCustom.date(day);
 
-      this.dateSelected = null;
-      this.dateSelected = dateCustom;
-      this.$emit('change', dateCustom)
+      if(this.initialDateSelected && this.finalDateSelected) {
+        this.initialDateSelected = dateCustom;
+        this.finalDateSelected = null;
+      } else if(!this.initialDateSelected) {
+        this.initialDateSelected = dateCustom;
+      } else if(!this.finalDateSelected) {
+        if(dateCustom < this.initialDateSelected) return;
+        this.finalDateSelected = dateCustom;
+      }
+
+      if(this.initialDateSelected && this.finalDateSelected) {
+        this.$emit('change', {
+          initialDate: this.initialDateSelected,
+          finalDate: this.finalDateSelected,
+        })
+      }
     }
   },
 }

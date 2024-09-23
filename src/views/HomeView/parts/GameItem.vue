@@ -161,7 +161,8 @@ export default {
                     quoteName: quoteLabel,
                     quoteGroupName: 'Resultado final',
                     favorite: this.game.favorito,
-                    modalityId: this.game.sport_id
+                    modalityId: this.game.sport_id,
+                    championshipId: this.game?.campeonato?._id
                 })
             }
         },
@@ -186,6 +187,9 @@ export default {
     background: #181818;
     background: var(--color-background-input);
     margin-top: 1px;
+
+    color: #ffffff;
+    color: var(--color-text);
 
     &__teams {
         display: flex;
@@ -234,6 +238,7 @@ export default {
         color: var(--color-primary);
 
         border: 0.5px solid #0be58e;
+        border: 0.5px solid var(--color-primary);
         border-radius: 2px;
         padding: 0 5px;
 

@@ -8,7 +8,9 @@
     />
     <ModalCalendar
       v-if="showModalCalendar"
-      :initialDate="dateSelected"
+      :initialDate="startDate"
+      :finalDate="endDate"
+      :isMultiDate="true"
       @closeModal="handleCloseCalendarModal"
       @change="handleCalendar"
     />
@@ -156,8 +158,7 @@ export default {
       sports: 0,
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
-      collapsedExits: this.initCollapsed,
-      dateSelected: now().format('YYYY-MM-DD')
+      collapsedExits: this.initCollapsed
     }
   },
   computed: {
@@ -193,10 +194,9 @@ export default {
     handleCloseCalendarModal() {
       this.showModalCalendar = false;
     },
-    async handleCalendar(dateTime) {
-      this.startDate = dateTime.format('YYYY-MM-DD');
-      this.endDate = dateTime.format('YYYY-MM-DD');
-      this.dateSelected = dateTime.format('YYYY-MM-DD'); 
+    async handleCalendar({initialDate, finalDate}) {
+      this.startDate = initialDate.format('YYYY-MM-DD');
+      this.endDate = finalDate.format('YYYY-MM-DD');
       this.handleCloseCalendarModal();
       this.getValue();
     },
@@ -235,7 +235,6 @@ export default {
       const currentDate = now().format('YYYY-MM-DD');
       this.startDate = currentDate;
       this.endDate = currentDate;
-      this.dateSelected = currentDate; 
       this.getValue();
     }
   }

@@ -1,11 +1,23 @@
 <template>
     <WModal ref="wmodal" :backdropClick="true" @close="handleClose">
       <template #body>
-        <Calendar
-          class="calendar"
-          @change="handleCalendarChange"
-          :initialDate="initialDate"
-        />
+        <template v-if="!isMultiDate">
+          <Calendar
+            class="calendar"
+            @change="handleCalendarChange"
+            :initialDate="initialDate"
+          />
+        </template>
+
+        <template v-else>
+          <CalendarWithMultipleDates
+            class="calendar"
+            @change="handleCalendarChange"
+            :initialDate="initialDate"
+            :finalDate="finalDate"
+          />
+        </template>
+        
       </template>
     </WModal>
 </template>
@@ -14,14 +26,23 @@
 import WModal from '@/components/Modal.vue'
 import Calendar from '@/components/Calendar.vue'
 import { now } from '@/utilities'
+import CalendarWithMultipleDates from '@/components/CalendarWithMultipleDates.vue'
 
 export default {
     name: 'modal-calendar',
-    components: { WModal, Calendar },
+    components: { WModal, Calendar, CalendarWithMultipleDates },
     props: {
       initialDate: {
         type: [String, Object],
         default: () => now()
+      },
+      finalDate: {
+        type: [String, Object],
+        default: () => now()
+      },
+      isMultiDate: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {

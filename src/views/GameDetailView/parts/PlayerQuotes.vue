@@ -119,7 +119,8 @@ export default {
                     quoteName: playerName,
                     quoteGroupName: odd.label,
                     favorite: this.game.favorito,
-                    modalityId: this.game.sport_id
+                    modalityId: this.game.sport_id,
+                    championshipId: this.game?.campeonato?._id
                 })
             }
         },

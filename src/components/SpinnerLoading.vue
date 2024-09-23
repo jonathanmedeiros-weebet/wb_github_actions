@@ -11,6 +11,7 @@ export default {
 <style lang="scss" scoped>
 .spinner-loading {
 	border: 4px solid #0BE68E21;
+	border-top: 4px #0be58e solid;
 	border-top: 4px var(--color-primary) solid;
 	border-radius: 50%;
 	-webkit-animation: spCircRot .6s infinite linear;

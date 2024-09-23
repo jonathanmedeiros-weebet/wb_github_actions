@@ -97,6 +97,7 @@ export default {
 .modal-leagues {
     &__title {
         color: #FFFFFF80;
+        color: var(--color-text-input);
         font-size: 16px;
         font-weight: 500;
         min-height: 26px;
@@ -107,10 +108,8 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        // gap: 20px;
-        height: 100%;
+        height: calc(80vh - 56px);
         overflow-y: auto;
-        max-height: calc(80% - 56px);
     }
 
     &__item {

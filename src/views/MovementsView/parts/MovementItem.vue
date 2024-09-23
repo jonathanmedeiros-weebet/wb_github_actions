@@ -88,7 +88,8 @@ export default {
   }
   
   &__text {
-    color: #FFF;
+    color: #ffffff;
+    color: var(--color-text);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

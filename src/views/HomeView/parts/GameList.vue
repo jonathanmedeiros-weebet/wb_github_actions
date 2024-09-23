@@ -4,10 +4,9 @@
         <template v-else-if="homeStore.selectedSearch == false">
             <Collapse
                 class="game-list__collapse"
-                :initCollapsed="allCollapsed"
                 v-for="(championship, index) in championshipList"
+                :initCollapsed="allCollapsed || championshipWasOpened(championship._id)"
                 :key="index"
-                
             >
                 <template #title>
                     <img
@@ -16,7 +15,12 @@
                         :src="championship.image"
                         @error="changeSrcWhenImageError"
                     />
-                    <component class="game-list__collapse-icon" v-if="championship.icon" :is="championship.icon" color="#0be58e" />
+                    <component
+                        class="game-list__collapse-icon"
+                        v-if="championship.icon"
+                        :is="championship.icon"
+                        color="#0be58e"
+                    />
                     {{ championship.nome }}
                 </template>
 
@@ -46,6 +50,7 @@ import GameItem from './GameItem.vue';
 import { useHomeStore, useTicketStore } from '@/stores';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
 import { hasQuotaPermission, calculateQuota } from '@/services';
+
 export default {
   components: { Collapse, GameItem, IconGlobal },
     name: 'game-list',
@@ -95,8 +100,7 @@ export default {
         },
         allCollapsed() {
             return Boolean(this.homeStore.inSearch);
-        },
-
+        }
     },
     methods: {
         handleClick(gameId) {
@@ -104,6 +108,9 @@ export default {
         },
         changeSrcWhenImageError (event) {
             event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        },
+        championshipWasOpened(championshipId) {
+            return (this.ticketStore.championshipOpened ?? []).includes(championshipId);
         }
     }
 }
@@ -112,7 +119,9 @@ export default {
 <style lang="scss" scoped>
 .game-list {
     width: 100%;
-    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
+    overflow-y: auto;
+
     display: flex;
     flex-direction: column; 
     overflow-y: auto;
@@ -146,6 +155,7 @@ export default {
         align-items: center;
         justify-content: center;
         color: #FFFFFF80;
+        color: var(--color-text-input);
 
         &--second {
             margin: 0 8px;
