@@ -629,15 +629,6 @@ gulp.task('tubaraobet.wee.bet', function (done) {
     });
 });
 
-gulp.task('primosbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "primosbet.wee.bet",
-        banca: "PRIMOS BET",
-        styles: "",
-    });
-});
-
 gulp.task('rrbets.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1852,15 +1843,6 @@ gulp.task('winvegas.bet', function (done) {
     });
 });
 
-gulp.task('esportemix.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "esportemix.com",
-        banca: "ESPORTE MIX",
-        styles: "",
-    });
-});
-
 gulp.task('pbpixbet.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2171,10 +2153,10 @@ gulp.task('supertop3.bet', function (done) {
     });
 });
 
-gulp.task('bullbets.online', function (done) {
+gulp.task('bullbets.com.br', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "bullbets.online",
+        host: "bullbets.com.br",
         banca: "BULL BETS",
         styles: "",
     });
@@ -2411,15 +2393,6 @@ gulp.task('betstar.vip', function (done) {
         server: "front3.wee.bet",
         host: "betstar.vip",
         banca: "BETSTAR",
-        styles: "",
-    });
-});
-
-gulp.task('jaybet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jaybet.com",
-        banca: "JAYBET",
         styles: "",
     });
 });
@@ -2667,7 +2640,8 @@ gulp.task('sortegol.com', function (done) {
         server: "front2.wee.bet",
         host: "sortegol.com",
         banca: "SORTE GOL",
-        styles: ""
+        styles: "",
+        dominioTemp: "sortegol.wee.bet"
     });
 });
 
@@ -2912,6 +2886,25 @@ gulp.task('sortte.bet', function (done) {
         server: "front5.wee.bet",
         host: "sortte.bet",
         banca: "SORTTE.BET",
+        styles: "",
+    });
+});
+
+gulp.task('megapix.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "megapix.bet",
+        banca: "MEGAPIX.BET",
+        styles: "",
+        dominioTemp: "megapixbet.wee.bet"
+    });
+});
+
+gulp.task('pinbet.io', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "pinbet.io",
+        banca: "PINBET",
         styles: "",
     });
 });

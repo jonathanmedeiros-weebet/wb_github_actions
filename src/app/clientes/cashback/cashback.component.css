@@ -1,0 +1,203 @@
+.content-header {
+    margin-bottom: 30px;
+}
+
+.filtros {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.filtros input,
+.filtros select {
+    margin-right: 20px;
+}
+
+.filtros>input,
+.filtros .datepicker-group {
+    max-width: 300px;
+}
+
+.filtros select {
+    max-width: 150px;
+}
+
+.info-resultado {
+    margin: 20px 0 32px;
+    font-size: 14px;
+    color: var(--foreground);
+    font-weight: 400;
+}
+
+.table {
+    color: var(--foreground);
+}
+
+.table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+    padding: 15px 10px;
+}
+
+.table .right {
+    text-align: right;
+}
+
+.table tbody td {
+    border-top: 0;
+    border-bottom: 1px solid var(--game);
+    vertical-align: middle;
+}
+
+.table tbody tr td:first-child span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table tbody div.progress-container {
+    width: 100%;
+    height: 100%;
+}
+
+.table tbody div.progress-container span {
+    width: calc(calc(70%/3) - 4px);
+    display: inline-block;
+    height: 15px;
+    background-color: #2F2F2F;
+    border-radius: 4px;
+}
+
+.table tbody div.progress-container.fill-one span:first-of-type {
+    background-color: #1773EA;
+}
+
+.table tbody div.progress-container.fill-two span:not(span:last-of-type) {
+    background-color: #1773EA;
+}
+
+.table tbody div.progress-container.fill-three span {
+    background-color: #0C9F19;
+}
+
+.table tbody div.progress-container span:not(span:first-of-type) {
+    margin-left: 4px;
+}
+
+.datepicker-group i {
+    position: absolute;
+    z-index: 100;
+    top: 12px;
+    right: 32px;
+    font-size: 14px;
+}
+
+.datepicker-group input {
+    padding-right: 35px;
+    border-radius: 5px;
+}
+
+.dp-hidden {
+    width: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: var(--highlight);
+}
+
+.custom-day.range,
+.custom-day:hover {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+}
+
+.custom-day.faded {
+    background-color: var(--highlight);
+}
+
+.modal-header,
+.modal-body {
+    padding: 15px 25px;
+}
+
+.modal-body li {
+    margin-bottom: 12px;
+}
+
+.only-mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 480px) {
+    .only-mobile {
+        display: block;
+    }
+
+    .only-desktop {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .filtros {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .filtros .datepicker-group,
+    .filtros input,
+    .filtros select {
+        max-width: none;
+        margin: 0;
+    }
+
+    .dp-hidden {
+        height: 0 !important;
+        position: absolute;
+    }
+
+    .filtros-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .filtros-container .input-group {
+        max-width: none;
+    }
+
+    .buttons {
+        padding: 0;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+
+    #td-btn-redeem {
+        display: flex;
+        justify-content: center;
+    }
+
+    #btn-redeem {
+        height: 36px !important;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+    }
+}
+
