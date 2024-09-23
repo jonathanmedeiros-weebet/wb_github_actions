@@ -363,13 +363,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             jogo: jogo,
             cotacao: {
                 chave: cotacao.chave,
-                valor: cotacao.valor,
-                nome: this.helperService.apostaTipoLabelCustom(
-                    cotacao.chave,
-                    jogo.time_a_nome,
-                    jogo.time_b_nome,
-                ),
-                price_change: cotacao.price_change
+                valor: cotacao.valor
             },
             mudanca: false,
             cotacao_antiga_valor: null
