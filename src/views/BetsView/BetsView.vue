@@ -102,8 +102,8 @@
               <p>HORÁRIO: {{ formateDateTime(bet.horario) }}</p>
             </template>
             <template #body>
-              <p  v-if="bet.apostador">Apostador: {{ bet.apostador }}</p>
-              <p  v-if="bet.bettor_document_number">CPF do apostador: {{ bet.bettor_document_number }}</p>
+              <p v-if="bet.apostador">Apostador: {{ bet.apostador }}</p>
+              <p v-if="bet.bettor_document_number">CPF do apostador: {{ bet.bettor_document_number }}</p>
               <table class="table">
                 <tbody>
                   <tr>
@@ -393,8 +393,6 @@ export default {
       this.parametros.apostador = this.apostador;
       this.parametros.sort = '-horario'
 
-      console.log(this.parametros)
-      
       this.getApiBets();
     },
     async getApiBets() {

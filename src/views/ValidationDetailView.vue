@@ -47,7 +47,19 @@
               name="bettor_name"
               placeholder="Informe o nome do apostador"
               type="text"
+              v-if="showBettorName"
               v-model="bettorName"
+            />
+
+            <w-input
+              label="CPF"
+              class="finish__input"
+              name="bettor_name"
+              placeholder="Informe o cpf do apostador"
+              type="text"
+              mask="XXX.XXX.XXX-XX"
+              v-if="showBettorDocumentNumber"
+              v-model="bettorDocumentNumber"
             />
           </div>
         </div>
@@ -115,12 +127,12 @@ import WButton from '@/components/Button.vue';
 import IconUserLine from '@/components/icons/IconUserLine.vue'
 import { getPreBetByCode } from '@/services/preBet.service';
 import { useConfigClient, useToastStore } from '@/stores';
-import { formatCurrency } from '@/utilities';
+import { delay, formatCurrency } from '@/utilities';
 import IconWarning from '@/components/icons/IconWarning.vue';
-import { createBetSport, tokenLiveSport } from '@/services/sport.service';
+import { createBetSport } from '@/services/sport.service';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
-
+import { createLiveToken } from '@/services';
 
 export default {
   name: 'validation-detail',
@@ -150,14 +162,14 @@ export default {
       bet: null,
       betLive: false,
       betItems: null,
-      betOptions: useConfigClient().betOptions,
-      options: useConfigClient().options,
       gainEstimate: 0,
       buttonDisabled: false,
       hasDifferentOdds: false,
       bettorName: '',
+      bettorDocumentNumber: '',
       acceptChangesOdds: false,
       toastStore: useToastStore(),
+      configClientStore: useConfigClient(),
       textButtonFinalizeBet: "Finalizar aposta"
     };
   },
@@ -250,29 +262,29 @@ export default {
       const values = {};
       values.preaposta_codigo = this.bet.codigo;
       values.apostador = this.bettorName;
+      values.bettorDocumentNumber = this.bettorDocumentNumber;
       values.valor = parseFloat(this.valueBet);
       values.aceitar_alteracoes_odds = this.acceptChangesOdds;
 
       values.itens = this.betItems.map(item => {
-          return {
-              jogo_event_id: item.jogo_api_id,
-              jogo_id: item.jogo_fi,
-              jogo_nome: item.jogo_nome,
-              ao_vivo: item.ao_vivo,
-              cotacao: {
-                  chave: item.aposta_tipo.chave,
-                  nome: item.odd_nome,
-                  valor: item.cotacao_base
-              }
-          };
+        return {
+          jogo_event_id: item.jogo_api_id,
+          jogo_id: item.jogo_fi,
+          jogo_nome: item.jogo_nome,
+          ao_vivo: item.ao_vivo,
+          cotacao: {
+            chave: item.aposta_tipo.chave,
+            nome: item.odd_nome,
+            valor: item.cotacao_base
+          }
+        };
       });
 
       if (values.itens.length) {
         if (this.betLive) {
-          values.token_aovivo = await tokenLiveSport(values);
-          const { option } = useConfigClient();
-          const timeDelay = option.delay_aposta_aovivo ? option.delay_aposta_aovivo : 10;
-          await delay((timeDelay * 1000));
+          values.token_aovivo = await createLiveToken(values);
+          const timeDelay = this.configClientStore.options.delay_aposta_aovivo ? this.configClientStore.options.delay_aposta_aovivo : 10;
+          await delay(timeDelay * 1000);
         }
 
         createBetSport(values)
@@ -315,7 +327,18 @@ export default {
     sumOdds() {
       return this.teams.reduce((total, team) => total + team.odd, 0).toFixed(2);
     },
-    
+    showBettorDocumentNumber() {
+      return this.configClientStore.bettorDocumentNumberEnabled;
+    },
+    showBettorName() {
+      return !this.configClientStore.bettorDocumentNumberEnabled;
+    },
+    betOptions() {
+      return this.configClientStore.betOptions;
+    },
+    options() {
+      return this.configClientStore.options;
+    },
   },
   watch: {
     valueBet(newValue, oldValue){
