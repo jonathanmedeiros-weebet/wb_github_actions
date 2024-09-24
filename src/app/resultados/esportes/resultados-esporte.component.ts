@@ -9,6 +9,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
 
+import * as sportsIds from '../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-resultados-esporte',
     templateUrl: 'resultados-esporte.component.html',
@@ -27,6 +29,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     tenisHabilitado = false;
     futebolAmericanoHabilitado = false;
     hoqueiGeloHabilitado = false;
+    sportsIds = sportsIds;
 
     constructor(
         private messageService: MessageService,
@@ -62,7 +65,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     createForm() {
         this.form = this.fb.group({
             data: [moment().format('YYYY-MM-DD'), Validators.required],
-            sport_id: ['1', Validators.required]
+            sport_id: [sportsIds.FOOTBALL_ID, Validators.required]
         });
     }
 
@@ -78,7 +81,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     getResultados(params?) {
         let queryParams: any = {
             'data': moment().format('YYYY-MM-DD'),
-            'sport': 1
+            'sport': sportsIds.FOOTBALL_ID
         };
 
         if (params) {
