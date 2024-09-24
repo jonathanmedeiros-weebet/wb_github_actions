@@ -125,6 +125,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                             this.messageService.success('Identidade verificada!');
                         }
                     });
+                this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
+                    this.reconhecimentoFacialAlteracaoSenhaValidado = faceIndex;
+                    console.log('Faceindex Validado');
+                })
             }   
     }
     ngAfterViewInit() {

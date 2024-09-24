@@ -192,6 +192,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.messageService.success('Identidade verificada!');
                     }
                 });
+            this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
+                this.reconhecimentoFacialPrimeiroSaqueValidado = faceIndex;
+                console.log('Faceindex Validado');
+            })
         }
     }
 

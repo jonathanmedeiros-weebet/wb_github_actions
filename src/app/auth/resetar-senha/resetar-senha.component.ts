@@ -169,6 +169,10 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.messageService.success('Identidade verificada!');
                     }
                 });
+            this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
+                this.reconhecimentoFacialRedefinicaoSenhaValidado = faceIndex;
+                console.log('Faceindex Validado');
+            })
         }   
                 
     }

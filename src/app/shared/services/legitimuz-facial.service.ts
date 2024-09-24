@@ -32,6 +32,8 @@ export class LegitimuzFacialService {
 
   private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
   curCustomerIsVerified;
+  private faceIndexSub = new BehaviorSubject<boolean>(false);
+  faceIndex;
 
   constructor (
       private clienteService: ClienteService,
@@ -40,6 +42,7 @@ export class LegitimuzFacialService {
       this.options.token = this.paramsService.getOpcoes().legitimuz_token; 
       
       this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
+      this.faceIndex = this.faceIndexSub.asObservable();
       if (JSON.parse(localStorage.getItem('user'))){
 
           const user = JSON.parse(localStorage.getItem('user'));
@@ -52,10 +55,17 @@ export class LegitimuzFacialService {
                       .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
                   }, 1000);
               }
+              if (eventName === 'faceindex') {
+               console.log('faceindex: Success');
+               this.faceIndexSub.next(true)
+              }
           };
       } else {
           this.options.onSuccess = (eventName) => {console.log(eventName)
-          console.log(this.options);
+            if (eventName === 'faceindex') {
+              console.log('faceindex: Success');
+              this.faceIndexSub.next(true)
+             }
         
           }
       }
