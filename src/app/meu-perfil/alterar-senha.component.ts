@@ -126,8 +126,9 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                         }
                     });
                 this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                    this.reconhecimentoFacialAlteracaoSenhaValidado = faceIndex;
                     console.log('Faceindex Validado');
+                    this.reconhecimentoFacialAlteracaoSenhaValidado = faceIndex;
+                    this.LegitimuzFacialService.closeModal();
                 })
             }   
     }
