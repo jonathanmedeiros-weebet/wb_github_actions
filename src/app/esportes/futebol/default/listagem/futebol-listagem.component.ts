@@ -419,7 +419,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
             this.oddsPrincipais.forEach(oddPrincipal => {
                 const possuiCotacao = jogo.cotacoes.find(c => c.chave === oddPrincipal);
-                if (!possuiCotacao) {
+
+                if (!possuiCotacao && (Object.keys(cotacoesLocalJogo).length)) {
                     const cotacaoLocal = cotacoesLocalJogo[oddPrincipal];
                     jogo.cotacoes.push({
                         _id: undefined,
@@ -436,6 +437,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                             jogo.favorito,
                             false)
                     });
+
+                    jogo.total_cotacoes += 1;
                 }
             });
         });

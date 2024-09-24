@@ -69,7 +69,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     };
 
     constructor(
-        private activeModal: NgbActiveModal,
+        protected activeModal: NgbActiveModal,
         private activeRulesModal: NgbActiveModal,
         private activeBonusRulesModal: NgbActiveModal,
         private activeReferralsModal: NgbActiveModal,
