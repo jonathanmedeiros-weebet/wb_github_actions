@@ -1,18 +1,17 @@
-import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {AbstractControl, UntypedFormBuilder, Validators} from '@angular/forms';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
-import {Subject} from 'rxjs';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ApostaService, AuthService, ClienteService, MessageService, ParametrosLocaisService} from './../../../../services';
-import {BaseFormComponent} from '../../base-form/base-form.component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Usuario} from '../../../models/usuario';
-import {FormValidations, PasswordValidation} from 'src/app/shared/utils';
+import { Subject } from 'rxjs';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApostaService, AuthService, ClienteService, FinanceiroService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { BaseFormComponent } from '../../base-form/base-form.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Usuario } from '../../../models/usuario';
+import { FormValidations } from 'src/app/shared/utils';
 
 import * as moment from 'moment';
-import {config} from '../../../config';
-import {TranslateService} from '@ngx-translate/core';
-import {ValidarEmailModalComponent} from '../validar-email-modal/validar-email-modal.component';
+import { config } from '../../../config';
+import { TranslateService } from '@ngx-translate/core';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
@@ -46,10 +45,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     cpfValidado = false;
     menorDeIdade = false;
     possuiCodigoAfiliado = false;
-
+    isLoterj;
     user: any;
     loginGoogleAtivo = false;
     formSocial = false;
+    aplicarCssTermo = false;
+    parameters = {};
+    parametersList;
+    errorMessage = '';
+    postbacks = {};
+    registerCancel = false;
+    modalClose = true;
+    promocoes: any;
+    promocaoAtiva = false;
+    valorPromocao: number | null = null;
+    bonusModalidade: string | null = null;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -66,14 +76,22 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
+        private financeiroService: FinanceiroService,
     ) {
         super();
     }
 
     ngOnInit() {
+        this.parametersList = this.paramsService.getOpcoes().enabledParameters;
+        this.getPromocoes();
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
+        this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+
+        if (this.isLoterj) {
+            this.aplicarCssTermo = true;
+        }
 
         this.createForm();
 
@@ -91,6 +109,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.route.queryParams
             .subscribe((params) => {
+
+
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
 
@@ -139,6 +159,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                 this.possuiCodigoAfiliado = true;
             }
+
+            this.parametersList.forEach(param => {
+                if (params[param]) {
+                    this.parameters[param] = params[param];
+                }
+            });
         });
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
@@ -151,6 +177,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             this.form.patchValue({
                                 nome: user.name,
                                 email: user.email,
+                                confirmarEmail: user.email,
                                 googleId: user.id,
                                 googleIdToken: user.idToken,
                             });
@@ -162,6 +189,59 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 );
         }
+    }
+
+    getPromocoes(queryParams?: any) {
+        this.financeiroService.getPromocoes(queryParams)
+            .subscribe(
+                response => {
+                    this.promocoes = response;
+                    this.verificarPromocaoAtiva();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+    }
+
+    verificarPromocaoAtiva(): void {
+        if (this.promocoes && this.promocoes.length > 0) {
+            const promocaoCassino = this.promocoes.find(promocao =>
+                promocao.ativo &&
+                promocao.tipo === 'primeiro_deposito_bonus' &&
+                promocao.valorBonus > 0.00 &&
+                promocao.bonusModalidade === 'cassino'
+            );
+
+            const promocaoEsportivo = this.promocoes.find(promocao =>
+                promocao.ativo &&
+                promocao.tipo === 'primeiro_deposito_bonus' &&
+                promocao.valorBonus > 0.00 &&
+                promocao.bonusModalidade === 'esportivo'
+            );
+
+            if (promocaoCassino) {
+                this.promocaoAtiva = promocaoCassino.ativo;
+                this.valorPromocao = parseFloat(promocaoCassino.valorBonus);
+            } else if(promocaoEsportivo){
+                this.promocaoAtiva = promocaoEsportivo.ativo;
+                this.valorPromocao = parseFloat(promocaoEsportivo.valorBonus);
+            }
+        }
+    }
+
+    closeModal(){
+        this.modalClose = false;
+        this.registerCancel = true;
+    }
+
+    cancelModal() {
+        this.activeModal.dismiss();
+    }
+
+    registerOpen(){
+        this.registerCancel = false;
+        this.modalClose = true;
     }
 
     createForm() {
@@ -186,7 +266,23 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null]
         });
+
+        if (this.isLoterj) {
+            this.form.addControl('termosUso', this.fb.control(null, [
+                Validators.requiredTrue,
+            ]));
+
+            this.form.controls['nome'].clearValidators();
+            this.form.controls['nome'].updateValueAndValidity();
+
+            this.form.controls['nascimento'].clearValidators();
+            this.form.controls['nascimento'].updateValueAndValidity();
+
+            this.form.controls['senha_confirmacao'].clearValidators();
+            this.form.controls['senha_confirmacao'].updateValueAndValidity();
+        }
     }
+
 
     ngOnDestroy() {
         this.clearSocialForm();
@@ -210,16 +306,27 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.form.updateValueAndValidity();
     }
 
+    onSubmit() {
+        super.onSubmit();
+    }
+
     submit() {
         if (this.menorDeIdade) {
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
             return;
         }
+
         const values = this.form.value;
+
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
         }
+
+        if (Object.keys(this.parameters).length) {
+            values.parameters = this.parameters;
+        }
+
         this.submitting = true;
         this.clientesService.cadastrarCliente(values)
             .subscribe(
@@ -249,9 +356,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             { queryParams: { nomeCliente: nome, valid: false }
                         });
                     }
+
+                    if(this.errorMessage && res.success){
+                        this.clearErrorMessage();
+                    }
                 },
                 error => {
-                    this.messageService.error(error);
+                    this.handleError(error);
                     this.form.patchValue({captcha: null});
                     this.submitting = false;
                 }
@@ -259,7 +370,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     handleError(error: string) {
-        this.messageService.error(error);
+        this.errorMessage = error;
+    }
+
+    clearErrorMessage() {
+        this.errorMessage = '';
     }
 
     abrirLogin() {
@@ -293,39 +408,57 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const { cpf } = this.form.value;
 
         if (this.autoPreenchimento) {
-            this.clientesService.validarCpf(cpf).subscribe(
-                res => {
-                    if (res.validarCpfAtivado) {
-                        this.autoPreenchimento = true;
-                        this.cpfValidado = true;
-                        this.menorDeIdade = res.menorDeIdade;
-                        this.form.controls['nascimento'].clearValidators();
-                        this.form.controls['nascimento'].updateValueAndValidity();
-                        this.form.patchValue({
-                            nome: res.nome,
-                            dadosCriptografados: res.dados
-                        });
-                    } else {
-                        if (!this.formSocial) {
-                            this.form.patchValue({nome: ''});
+            if (this.form.get('cpf').valid) {
+                this.clientesService.validarCpf(cpf).subscribe(
+                    res => {
+                        if (res.validarCpfAtivado) {
+                            this.autoPreenchimento = true;
+                            this.cpfValidado = true;
+                            this.menorDeIdade = res.menorDeIdade;
+                            this.form.controls['nascimento'].clearValidators();
+                            this.form.controls['nascimento'].updateValueAndValidity();
+                            this.form.patchValue({
+                                nome: res.nome,
+                                dadosCriptografados: res.dados
+                            });
+                        } else {
+                            if (!this.formSocial) {
+                                this.form.patchValue({nome: ''});
+                            }
+                            this.autoPreenchimento = false;
+                            this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
+                            this.form.controls['nascimento'].updateValueAndValidity();
+                            this.cpfValidado = false;
                         }
-                        this.autoPreenchimento = false;
-                        this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
-                        this.form.controls['nascimento'].updateValueAndValidity();
+                    },
+                    error => {
                         this.cpfValidado = false;
+                        this.form.patchValue({nome: ''});
+                        if (error?.code === 'cpfInformadoNaoExiste') {
+                            this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
+                            this.form.controls['cpf'].updateValueAndValidity();
+                        } else {
+                            this.messageService.error(error);
+                        }
                     }
-                },
-                error => {
-                    this.cpfValidado = false;
-                    this.form.patchValue({nome: ''});
-                    this.messageService.error(error);
-                }
-            );
+                );
+            } else {
+                this.cpfValidado = false;
+                this.menorDeIdade = false;
+                this.form.patchValue({
+                    nome: '',
+                    dadosCriptografados: null
+                });
+            }
         }
 
     }
 
     onBeforeInput(e : InputEvent, inputName){
         FormValidations.blockInvalidCharacters(e, inputName);
+    }
+
+    blockPaste(event: ClipboardEvent): void {
+        event.preventDefault();
     }
 }

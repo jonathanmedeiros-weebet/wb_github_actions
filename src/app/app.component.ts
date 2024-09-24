@@ -1,15 +1,15 @@
-import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService} from './services';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {config} from './shared/config';
+import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService } from './services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {CadastroModalComponent} from './shared/layout/modals';
-import {LoginModalComponent} from './shared/layout/modals';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { CadastroModalComponent } from './shared/layout/modals';
+import { LoginModalComponent } from './shared/layout/modals';
 
-import {TranslateService} from '@ngx-translate/core';
-import {IdleDetectService} from './shared/services/idle-detect.service';
+import { TranslateService } from '@ngx-translate/core';
+import { IdleDetectService } from './shared/services/idle-detect.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -17,11 +17,10 @@ declare var xtremepush;
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    @ViewChild('demoModal', {static: true}) demoModal;
-    @ViewChild('inicialModal', {static: true}) inicialModal;
-    @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
-    @ViewChild('enableNotificationXtremepushModal', {static: true}) enableNotificationXtremepushModal;
-    @ViewChild('wrongVersionModal', {static: true}) wrongVersionModal;
+    @ViewChild('demoModal', { static: true }) demoModal;
+    @ViewChild('inicialModal', { static: true }) inicialModal;
+    @ViewChild('ativacaoCadastroModal', { static: true }) ativacaoCadastroModal;
+    @ViewChild('wrongVersionModal', { static: true }) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     imagemInicial;
     mobileScreen = false;
@@ -36,6 +35,7 @@ export class AppComponent implements OnInit {
     public acceptedCookies: boolean = false;
     modalPush;
     xtremepushHabilitado = false;
+    hasPoliticaPrivacidade = false;
 
     constructor(
         private auth: AuthService,
@@ -74,54 +74,11 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
-        this.auth.logado.subscribe((isLogged) => {
-            const logoutByInactivityIsEnabled =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
-            const isCliente = this.auth.isCliente();
-
-            if(isLogged && isCliente && logoutByInactivityIsEnabled) {
-                this.idleDetectService.startTimer(1800000);
-            } else {
-                this.idleDetectService.stopTimer();
-            }
-        })
-
-        this.idleDetectService
-            .watcher()
-            .subscribe(isExpired => {
-                if (isExpired) {
-                    if (this.auth.isLoggedIn()) {
-                        this.auth.logout();
-                    }
-                }
-            });
-
-        this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
-        if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
-            this.modalService.open(CadastroModalComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente'
-            });
-            this.router.navigate(['/']);
-        }
-        if (this.router.url.includes('/login')) {
-
-            this.modalService.open(LoginModalComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente'
-            });
-
-            this.router.navigate(['esportes/futebol']);
-        }
-
         this.route.queryParams
             .subscribe((params) => {
                 if (params.token) {
                     this.ativacaoCadastro = true;
+
                     this.auth.ativacaoCadastro({ token: params.token })
                         .subscribe(
                             (res) => {
@@ -147,12 +104,63 @@ export class AppComponent implements OnInit {
                 }
             });
 
+        this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
+        this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
+
+        this.eventPushXtremepush();
+
+        this.auth.logado.subscribe((isLogged) => {
+            const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
+            const isCliente = this.auth.isCliente();
+
+            if (isLogged && isCliente && logoutByInactivityIsEnabled) {
+                this.idleDetectService.startTimer(1800000);
+            } else {
+                this.idleDetectService.stopTimer();
+            }
+        })
+
+        this.idleDetectService
+            .watcher()
+            .subscribe(isExpired => {
+                if (isExpired) {
+                    if (this.auth.isLoggedIn()) {
+                        this.auth.logout();
+                    }
+                }
+            });
+
+        this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
+
+        if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
+            this.modalService.open(CadastroModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            });
+
+            this.router.navigate(['/']);
+        }
+
+        if (this.router.url.includes('/login')) {
+            this.modalService.open(LoginModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            });
+
+            this.router.navigate(['esportes/futebol']);
+        }
+
         const params = new URLSearchParams(location.search);
 
         if (params.get('app')) {
             this.auth.setAppMobile();
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
             localStorage.setItem('app_version', String(appVersion));
+            
             if (appVersion < 2) {
                 this.modalService.open(
                     this.wrongVersionModal,
@@ -263,9 +271,6 @@ export class AppComponent implements OnInit {
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
-
-        this.checkAndDisplayModal();
-        this.retryCheckPermission(3, 1000);
     }
 
     downloadApp() {
@@ -295,67 +300,10 @@ export class AppComponent implements OnInit {
         localStorage.setItem('accepted_cookies', 'true');
     }
 
-    activateNotifications(){
-        localStorage.setItem('push_xtremepush', "true");
-        this.modalPush.close()
-        xtremepush('prompt');
-    }
-
-    disableNotifications() {
-        localStorage.setItem('push_xtremepush', "false");
-        const timestamp = Date.now();
-        localStorage.setItem('push_xtremepush_timestamp', timestamp.toString());
-        this.modalPush.close()
-    }
-
-    saveTimestamp() {
-        const timestampKey = 'xtremepush.timestamp';
-        const timestamp = Date.now();
-        localStorage.setItem(timestampKey, timestamp.toString());
-    }
-
-    hasDayPassed() {
-        const timestampKey = 'xtremepush.timestamp';
-        const timestampStr = localStorage.getItem(timestampKey);
-        if (!timestampStr) {
-            return true; // No timestamp stored, consider it as a day has passed
-        }
-        const timestamp = parseInt(timestampStr, 10);
-        const currentTime = Date.now();
-        const oneDayInMillis = 24 * 60 * 60 * 1000; // 1 day in milliseconds
-        return (currentTime - timestamp) >= oneDayInMillis;
-    }
-
-    checkAndDisplayModal() {
+    eventPushXtremepush() {
         const xtremepushHabilitado = this.paramLocais.getOpcoes().xtremepush_habilitado;
         if (xtremepushHabilitado) {
-            const xtremepush_localstorage = JSON.parse(localStorage.getItem('xtremepush.data'));
-            if (xtremepush_localstorage && xtremepush_localstorage.permission !== 'granted' && this.hasDayPassed()) {
-                this.modalPush = this.modalService.open(
-                    this.enableNotificationXtremepushModal,
-                    {
-                        ariaLabelledBy: 'modal-basic-title',
-                        windowClass: 'modal-pop-up',
-                        centered: true,
-                        size: 'md',
-                    }
-                );
-                this.saveTimestamp();
-            }
+            xtremepush('event', 'push');
         }
-    }
-
-    retryCheckPermission(retries, delay) {
-        const interval = setInterval(() => {
-            const xtremepush_localstorage = JSON.parse(localStorage.getItem('xtremepush.data'));
-            if (xtremepush_localstorage && xtremepush_localstorage.permission !== undefined) {
-                clearInterval(interval);
-                this.checkAndDisplayModal();
-            } else if (retries <= 0) {
-                clearInterval(interval);
-            } else {
-                retries--;
-            }
-        }, delay);
     }
 }

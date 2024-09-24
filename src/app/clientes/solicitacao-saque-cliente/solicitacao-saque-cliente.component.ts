@@ -29,7 +29,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     cliente: Cliente;
     modalRef;
 
-    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M'];
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M', 'OKTO', 'PIXS'];
     respostaSolicitacao;
 
     rotaCompletarCadastro: string;
@@ -118,7 +118,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.auth.getPosicaoFinanceira()
             .subscribe(
                 posicaoFinanceira => {
-                    this.saldo = posicaoFinanceira.saldo;
+                    this.saldo = posicaoFinanceira.saldo - posicaoFinanceira.saldoBloqueado;
                     if (posicaoFinanceira.saldo == 0) {
                         this.disableButton = true;
                     }
@@ -145,6 +145,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
 
                     this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
+
+                    this.checkOktoTermsAcceptance(res.accepted_okto_terms);
 
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
@@ -356,5 +358,31 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         }
 
         return chaveComMascara;
+    }
+
+    checkOktoTermsAcceptance(acceptedOktoTerms = false) {
+        if (this.availablePaymentMethods.includes('okto') && !acceptedOktoTerms) {
+            this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+            this.modalRef.componentInstance.title = 'Termos de uso Okto';
+            this.modalRef.componentInstance.msg = 'Para continuar com as movimentações financeiras, é necessário aceitar os termos de uso da instituição financeira Okto. Caso não aceite, não será possível prosseguir. Deseja aceitar os termos?';
+
+            this.modalRef.result.then(
+                (result) => {
+                    this.financeiroService.acceptOktoTerms().subscribe(
+                        res =>{
+                            this.messageService.success('Você aceitou os termos de uso. Agora, você pode realizar movimentações financeiras.');
+                        },
+                        error => {
+                            this.messageService.warning('Algo não saiu muito bem. Tente novamente mais tarde.');
+                            this.router.navigate(['/']);
+                        }
+                    )
+                },
+                (reason) => {
+                    this.messageService.warning('Você não aceitou os termos de uso. Você será redirecionado para a página inicial.');
+                    this.router.navigate(['/']);
+                }
+            );
+        }
     }
 }

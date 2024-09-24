@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 import { AuthService } from '../../services'
 import { config } from '../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
+import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -29,6 +30,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     desafioNome: string;
     casinoHabilitado;
     loteriaPopularHabilitada;
+    rifaHabilitada;
     activeId = 'esporte';
     paginaPrincipal: string;
 
@@ -76,6 +78,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         private acumuladaoService: AcumuladaoService,
         private cassinoService: CasinoApiService,
         private loteriaServie: ApostaLoteriaService,
+        private rifaApostaService: RifaApostaService,
         public desafioApostaService: DesafioApostaService,
         private loteriaPopularService: LoteriaPopularService,
         public formatter: NgbDateParserFormatter,
@@ -111,6 +114,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.desafioNome = this.params.getOpcoes().desafio_nome;
         this.casinoHabilitado = this.params.getOpcoes().casino;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
+        this.rifaHabilitada = this.params.getOpcoes().rifa;
 
         this.encerramentoPermitido = (['cliente', 'todos'].includes(this.params.getOpcoes().permitir_encerrar_aposta));
 
@@ -145,7 +149,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
             { id: 'acumuladao', label: this.translate.instant('geral.acumuladao'), habilitado: this.acumuladaoHabilitado },
             { id: 'desafio', label: this.translate.instant(this.desafioNome), habilitado: this.desafioHabilitado },
             { id: 'loteria', label: this.translate.instant('geral.loteria'), habilitado: this.loteriasHabilitada },
-            { id: 'loteria-popular', label: this.translate.instant('submenu.loteriaPopular'), habilitado: this.loteriaPopularHabilitada }
+            { id: 'loteria-popular', label: this.translate.instant('submenu.loteriaPopular'), habilitado: this.loteriaPopularHabilitada },
+            { id: 'rifa', label: this.translate.instant('geral.rifa'), habilitado: this.rifaHabilitada }
         ];
 
         const sortedTabs = tabs.slice();
@@ -217,6 +222,14 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                         apostas => this.handleResponse(apostas),
                         error => this.handleError(error)
                     );
+                break;
+            case 'rifa':
+                this.rifaApostaService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
+                break;
             default:
                 this.handleResponse([]);
                 break;

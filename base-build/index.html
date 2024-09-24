@@ -26,7 +26,8 @@
 
     [PIXEL]
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />.
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdn.wee.bet/fonts/remix-icon/remixicon.css" />
 
     <link rel="apple-touch-icon" href="https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/icone_app.png">
@@ -143,7 +144,7 @@
         }
 
 
-        if (parseInt(getAndroidVersion()) <= 7) {
+        if (parseInt(getAndroidVersion()) <= Number([ANDROID_VERSION])) {
             if (location.search.indexOf('app') >= 0) {
                 window.location.href = 'https://[S3_FOLDER]/client-light/?config=true&host=[HOST]&slug=[S3_FOLDER]&nome=[BANCA]'
             }
@@ -172,7 +173,7 @@
                     <div></div>
                     <div></div>
                     <div></div>
-                </div>   
+                </div>
             </div>
         </div>
     </app-root>

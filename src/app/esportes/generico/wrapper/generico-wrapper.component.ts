@@ -12,6 +12,8 @@ import {
 } from '../../../services';
 import * as moment from 'moment';
 
+import * as sportsIds from '../../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-generico-wrapper',
     templateUrl: 'generico-wrapper.component.html',
@@ -34,6 +36,8 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     ligasPopulares = '';
     ordemExibicaoCampeonatos = 'alfabetica';
     unsub$ = new Subject();
+
+    basketballId = sportsIds.BASKETBALL_ID;
 
     constructor(
         private campeonatoService: CampeonatoService,
@@ -111,7 +115,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
 
                     this.data = queryParams.data;
 
-                    if (dt.isBefore(dataLimiteTabela, 'day')) {
+                    if (!Boolean(params['data']) && dt.isBefore(dataLimiteTabela, 'day')) {
                         addDay = true;
                     }
 
@@ -157,7 +161,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         };
 
 
-        if (this.sportId == 48242) {
+        if (this.sportId == sportsIds.BASKETBALL_ID) {
             this.campeonatoService.getCampeonatosPorRegioes(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -186,7 +190,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
                 },
                 error => this.messageService.error(error)
             );
-        }        
+        }
     }
 
     receptorJogoSelecionadoId(jogoId) {
@@ -208,39 +212,39 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         this.contexto = 'esportes';
 
         switch (sportId) {
-            case '9':
+            case sportsIds.BOXING_ID:
                 this.esporte = 'combate';
                 this.odds = ['cmbt_casa', 'cmbt_fora'];
                 break;
-            case '12':
+            case sportsIds.AMERICAN_FOOTBALL_ID:
                 this.esporte = 'futebol-americano';
                 this.odds = ['futebol_americano_casa', 'futebol_americano_fora'];
                 break;
-            case '13':
+            case sportsIds.TENNIS_ID:
                 this.esporte = 'tenis';
                 this.odds = ['tenis_casa', 'tenis_fora'];
                 break;
-            case '17':
+            case sportsIds.ICE_HOCKEY_ID:
                 this.esporte = 'hoquei-gelo';
                 this.odds = ['hoquei_gelo_casa', 'hoquei_gelo_fora'];
                 break;
-            case '48242':
+            case sportsIds.BASKETBALL_ID:
                 this.esporte = 'basquete';
                 this.odds = ['bkt_casa', 'bkt_fora'];
                 break;
-            case '83':
+            case sportsIds.FUTSAL_ID:
                 this.esporte = 'futsal';
                 this.odds = ['futsal_casa', 'futsal_empate', 'futsal_fora'];
                 break;
-            case '91':
+            case sportsIds.VOLLEYBALL_ID:
                 this.esporte = 'volei';
                 this.odds = ['volei_casa', 'volei_fora'];
                 break;
-            case '92':
+            case sportsIds.TABLE_TENNIS_ID:
                 this.esporte = 'tenis-mesa';
                 this.odds = ['tenis_mesa_casa', 'tenis_mesa_fora'];
                 break;
-            case '151':
+            case sportsIds.E_SPORTS_ID:
                 this.esporte = 'esports';
                 this.odds = ['esports_casa', 'esports_fora'];
                 break;

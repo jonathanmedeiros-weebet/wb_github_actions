@@ -23,6 +23,7 @@
         "solicitarSaque": "Solicitar Saque",
         "dashboard": "Dashboard",
         "financeiro": "Financeiro",
+        "carteira": "Carteira",
         "validacao": "Validação",
         "apuracao": "Apuração",
         "aposta": "Aposta",
@@ -133,9 +134,11 @@
         "informacoesDeContato": "Informações de Contato",
         "telefone": "Telefone",
         "email": "E-mail",
+        "confirmarEmail": "Confirmar E-mail",
         "endereco": "Endereço",
         "cep": "CEP",
         "logradouro": "Logradouro",
+        "exLogradouro": "Rua, avenida, travessa, etc...",
         "bairro": "Bairro",
         "estado": "Estado",
         "cidade": "Cidade",
@@ -154,7 +157,7 @@
         "feminino": "Feminino",
         "codigoDeAfiliacao": "Código de afiliação(Opcional)",
         "certificoQueTenhoMais": "Certifico que tenho mais de 18 anos de idade e declaro que li e concordo com os",
-        "deAcordoComOsTermos1": "Ao cadastra-se você estará de acordo com os nossos",
+        "deAcordoComOsTermos1": "Ao cadastrar-se você estará de acordo com os nossos",
         "deAcordoComOsTermos2": "e nossa",
         "termosDeUso": "termos de uso",
         "cadastrar": "Cadastrar",
@@ -209,15 +212,15 @@
         "cadastroMenorDeIdade": "Cadastro permitido apenas para maiores de 18 anos.",
         "cadastro": "Cadastro",
         "tituloInformativoCookies": "Utilização de Cookies e Sessões",
-        "informativoCookies": "Este site utiliza cookies e sessões para aprimorar a sua experiência. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo que nos ajudam a manter você autenticado, personalizar recursos e configurações, bem como melhorar a funcionalidade do site. Ao continuar a usar este site, você concorda com o uso de cookies e sessões de acordo com a nossa Política de Privacidade.",
+        "informativoCookies": "Este site utiliza cookies e sessões para aprimorar a sua experiência. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo que nos ajudam a manter você autenticado, personalizar recursos e configurações, bem como melhorar a funcionalidade do site. Ao continuar a usar este site, você concorda com o uso de cookies e sessões de acordo com a nossa ",
+        "informativoCookiesLink": "Política de Privacidade.",
         "alertaChavePixCpf": "Ao solicitar o saque, ele será processado através da chave Pix associada ao seu CPF. Certifique-se de que o seu CPF esteja preenchido corretamente.",
         "esportivo": "esportivo",
-        "rodadaGratis": "Rodada grátis",
+        "rifa": "Rifa",
         "dataVencimento": "Data de vencimento",
         "quantidade": "Quantidade",
         "quantidadeUtilizada": "Qtd. Utilizada",
         "jogarAgora": "Jogar Agora",
-        "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
         "opcaoPromocao": "Selecione uma das opções para visualizar as promoções ativas.",
         "resultadosEncontradosComQuantidade": "Foram encontrados {{quantidade}} resultados",
         "selecioneChavePix": "Selecione a chave pix",
@@ -250,7 +253,9 @@
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
         "bonusCancelado": "Bônus cancelado",
-        "aguardando": "Aguardando"
+        "aguardando": "Aguardando",
+        "loginEmail": "E-mail",
+        "loginPhone": "Telefone"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -280,7 +285,8 @@
         "desafio": "DESAFIO",
         "acumuladao": "ACUMULADÃO",
         "loteria": "LOTERIA",
-        "promocao": "PROMOÇÕES"
+        "promocao": "PROMOÇÕES",
+        "rifas": "RIFAS"
     },
     "submenu": {
         "copa22": "Copa 2022",
@@ -321,6 +327,7 @@
         "cotacao": "Cotação",
         "aceitarAlteracoesDeOdds": "Aceitar alterações de odds",
         "apostar": "Apostar",
+        "comprar": "Comprar",
         "utilizarBonus": "Utilizar bônus",
         "algumasCotacoesMudaram": "Algumas cotações mudaram, verifique com atenção antes de confirmar a aposta",
         "algumasCotacoesMudaramPreAposta": "Algumas cotações mudaram desde que foi criada a pré-aposta, verifique com atenção antes realizar a validação.",
@@ -596,6 +603,7 @@
     },
     "botoes": {
         "aceitar": "Aceitar",
+        "entendi": "Entendi",
         "salvar_alteracoes": "Salvar Alterações",
         "voltar": "Voltar"
     },
@@ -653,5 +661,24 @@
             "definir_tempo": "Definir tempo de sessão",
             "desativado": "Desativado"
         }
+    },
+    "rodada_gratis":{
+        "resgatarPremio": "Resgatar Prêmio",
+        "rodadaGratis": "Rodada Grátis",
+        "nenhumaRodadaGratis": "Nenhuma rodada grátis encontrada.",
+        "todas": "Todas",
+        "ativa": "Ativa",
+        "expirada": "Expirada",
+        "concluida":"Concluída",
+        "cancelada":"Cancelada",
+        "premio": "Prêmio"
+    },
+    "cashback": {
+        "cashback": "Cashback",
+        "description": "Descrição",
+        "registrationDate": "Data de Cadastro",
+        "pending": "Pendente",
+        "redeemed": "Resgatado",
+        "redeem": "Resgatar"
     }
 }

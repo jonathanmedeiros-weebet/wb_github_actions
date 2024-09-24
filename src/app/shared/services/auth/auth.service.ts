@@ -95,14 +95,13 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('set', 'user_id', res.results.user.id);
+                        }
                     }
                     this.logadoSource.next(true);
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
-                    }
-                    if(this.xtremepushHabilitado()){
-                        xtremepush('set', 'user_id', res.results.user.id);
-                        xtremepush('event', 'login');
                     }
                 }),
                 catchError(this.errorService.handleError)
@@ -118,6 +117,7 @@ export class AuthService {
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
                     localStorage.setItem('token', res.results.token);
+                    localStorage.setItem('tokenBetby', res.results.tokenBetby);
                     localStorage.setItem('user', JSON.stringify(res.results.user));
 
                     if (res.results.user.tipo_usuario === 'cambista') {
@@ -126,17 +126,41 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('set', 'user_id', res.results.user.id);
+                        }
                     }
 
                     this.logadoSource.next(true);
-                    if (data.casino === undefined) {
-                        this.router.navigate(['esportes/futebol/jogos']);
-                    }
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
 
-                    if(this.xtremepushHabilitado()){
-                        xtremepush('set', 'user_id', res.results.user.id);
-                        xtremepush('event', 'login');
+    getTokenBetby(lang: string) {
+        const token = this.getToken();
+        const user = this.getUser();
+
+        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token, lang }, this.header.getRequestOptions(true))
+            .pipe(
+                map(res => {
+                    localStorage.setItem('tokenBetby', res.token);
+                    return res;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    refreshTokenBetby(lang: string) {
+        const token = this.getTokenBetbyStorage();
+
+        return this.http.post<any>(`${this.authLokiUrl}/betby/refresh-token`, { token, lang }, this.header.getRequestOptions())
+            .pipe(
+                map(res => {
+                    if (res.refresh) {
+                        localStorage.setItem('tokenBetby', res.token);
                     }
+                    return res;
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -238,6 +262,10 @@ export class AuthService {
         return localStorage.getItem('tokenCassino');
     }
 
+    getTokenBetbyStorage() {
+        return localStorage.getItem('tokenBetby');
+    }
+
     getUser() {
         return JSON.parse(localStorage.getItem('user'));
     }
@@ -298,6 +326,7 @@ export class AuthService {
     limparStorage() {
         localStorage.removeItem('token');
         localStorage.removeItem('tokenCassino');
+        localStorage.removeItem('tokenBetby');
         localStorage.removeItem('user');
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');

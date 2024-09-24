@@ -100,7 +100,7 @@
 .custom-td {
     min-width: 15%;
     white-space: nowrap;
-    text-align: right;
+    text-align: left;
 }
 
 .td-custom {
@@ -133,7 +133,7 @@
 
 .rodada-gratis-container {
     background-color: var(--header);
-    height: 220px;
+    height: 320px;
     padding: 16px;
     border-radius: 4px;
     margin-bottom: 15px;
@@ -159,6 +159,14 @@
 
 .icon-reorder {
     cursor: pointer;
+}
+
+.btn-custom-game{
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 7px;
 }
 
 @media only screen and (max-width: 834px) {
@@ -197,7 +205,7 @@
 
     #default-content {
         padding: 10px;
-        height: 100vh;
+        height: 100%;
         overflow: auto;
         position: relative;
     }
@@ -233,7 +241,7 @@
     }
 
     .btn-jogar-rodada {
-        min-width: 100%; 
+        min-width: 100%;
         margin-top: 10px;
     }
 }

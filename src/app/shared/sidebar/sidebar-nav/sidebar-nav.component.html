@@ -45,7 +45,7 @@
                 <a (click)="goTo(getRotaPorEsporteId(ligaPopular.sport_id), { campeonato: ligaPopular.api_id })">
                     <i [ngClass]="getIconClassLigasPopulares(ligaPopular.sport_id)"></i>
                     <span class="regiao-nome">
-                        <span *ngIf="ligaPopular.sport_id === 1 && ligaPopular.regiao_sigla"
+                        <span *ngIf="ligaPopular.sport_id === sportsIds.FOOTBALL_ID && ligaPopular.regiao_sigla"
                               class="flag-icon flag-icon-{{ligaPopular.regiao_sigla}}">
                         </span>
                         {{ligaPopular.nome}}
@@ -65,7 +65,7 @@
                         <li *ngFor="let campeonato of regiao.campeonatos"
                             (click)="goTo('/esportes/' + esporte, { campeonato: campeonato._id })">
                             <a>
-                                {{campeonato.nome.replace(regiao._id + ': ', '') | uppercase}}
+                                {{(campeonato.alias ? campeonato.alias : campeonato.nome).replace(regiao._id + ': ', '') | uppercase}}
                             </a>
                         </li>
                     </ul>
@@ -273,6 +273,12 @@
                     <span class="regiao-nome">{{'geral.financeiro' | translate}}</span>
                 </a>
             </li>
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/carteira']" routerLinkActive="router-link-active">
+                    <i class="material-symbols-outlined">account_balance_wallet</i>
+                    <span class="regiao-nome">{{'geral.carteira' | translate}}</span>
+                </a>
+            </li>
 
             <li class="cambista-item" routerLinkActive="router-link-active">
                 <a (click)="toggleSubTransacoes()">
@@ -320,6 +326,12 @@
                 <a [routerLink]="['/clientes/indique-ganhe']" routerLinkActive="router-link-active">
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
+                </a>
+            </li>
+            <li class="cambista-item">
+                <a [routerLink]="['/clientes/cashback']" routerLinkActive="router-link-active">
+                    <i class="fa fa-gift icone-generico"></i>
+                    <span class="regiao-nome">{{'cashback.cashback' | translate}}</span>
                 </a>
             </li>
         </ul>

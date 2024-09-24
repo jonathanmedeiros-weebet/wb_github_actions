@@ -161,4 +161,21 @@ export class FinanceiroService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    acceptOktoTerms() {
+        return this.http.post(`${this.financeiroUrl}/accept-okto-terms`, {}, this.header.getRequestOptions(true))
+        .pipe(
+            take(1),
+            catchError(this.errorService.handleError)
+        );
+    }
+
+    cancelarBonusAtivos() {
+        return this.http.post(`${this.financeiroUrl}/cancelar-bonus`,
+            {},this.header.getRequestOptions(true))
+            .pipe(
+                take(1),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

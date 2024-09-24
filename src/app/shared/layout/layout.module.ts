@@ -16,7 +16,9 @@ import {
     PagesNoNavLayoutComponent,
     SportLayoutComponent,
     VirtuaisLayoutComponent,
-    LiveSportLayoutComponent
+    LiveSportLayoutComponent,
+    RifaLayoutComponent,
+    BetbyLayoutComponent
 } from './app-layouts';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -75,6 +77,7 @@ import {NgxMaskModule} from 'ngx-mask';
 import {NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
+import {BilheteRifaComponent} from '../../rifas/bilhete/bilhete-rifa.component';
 import {SubmenuComponent} from './submenu/submenu.component';
 import {SidebarMenuComponent, SidebarNavComponent} from '../sidebar';
 
@@ -94,6 +97,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SkeletonModule } from './skeleton/skeleton.module';
 import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-modal/block-peer-attemps-modal.component';
 import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
+import { FreeSpinService } from '../services/clientes/free-spin.service';
+import { CashbackService } from '../services/clientes/cashback.service';
 
 @NgModule({
     imports: [
@@ -116,7 +122,7 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
             codeLength: 6
         }),
         NgHcaptchaModule.forRoot({
-            siteKey: '47a691c3-c623-4ae4-939a-37b44e09a9e8',
+            siteKey: '30aaf7ea-dc50-41d4-8866-d15e08ee3492',
             languageCode: 'pt'
         }),
         TranslateModule,
@@ -126,6 +132,7 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
     ],
     declarations: [
         MainLayoutComponent,
+        BetbyLayoutComponent,
         EmptyLayoutComponent,
         AuthLayoutComponent,
         HeaderComponent,
@@ -156,6 +163,7 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
         ApostaEncerramentoModalComponent,
         MenuFooterComponent,
         BilheteEsportivoComponent,
+        BilheteRifaComponent,
         SportLayoutComponent,
         PagesLayoutComponent,
         PagesNoNavLayoutComponent,
@@ -164,6 +172,7 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
         VirtuaisLayoutComponent,
         SubmenuComponent,
         LoteriaLayoutComponent,
+        RifaLayoutComponent,
         DesafioLayoutComponent,
         AcumuladaoLayoutComponent,
         LiveSportLayoutComponent,
@@ -189,6 +198,7 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
         CanceledBonusConfirmComponent,
         BlockPeerAttempsModalComponent,
         MultifactorConfirmationModalComponent,
+        ExibirBilheteRifaComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -200,13 +210,16 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
         ExibirBilheteDesafioComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
+        ExibirBilheteRifaComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
         BilheteEsportivoComponent,
+        BilheteRifaComponent,
         BannersComponent,
         WelcomePageComponent,
         SubmenuComponent,
-        SkeletonModule
+        SkeletonModule,
+        MenuFooterComponent
     ],
     providers: [
         ApostaEsportivaService,
@@ -221,6 +234,8 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
         JogoService,
         AcumuladaoService,
         IndiqueGanheService,
+        CashbackService,
+        FreeSpinService,
         {
             provide: RECAPTCHA_SETTINGS,
 

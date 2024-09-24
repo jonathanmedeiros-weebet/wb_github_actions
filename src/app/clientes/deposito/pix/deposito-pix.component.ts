@@ -8,7 +8,7 @@ import {ParametrosLocaisService} from '../../../shared/services/parametros-locai
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RegrasBonusModalComponent } from '../../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
+import { ConfirmModalComponent, RegrasBonusModalComponent } from '../../../shared/layout/modals';
 import { Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,11 +30,12 @@ import { TranslateService } from '@ngx-translate/core';
         <span class="tempo">{{ minute }}:{{ secondShow }}</span>
 
         <div class="qr-code" *ngIf="qrCodeBase64">
-            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag'].includes(selectedPaymentMethod)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '250px'}" *ngIf="!['sauto_pay', 'gerencianet', 'pagfast', 'paag','pixs'].includes(selectedPaymentMethod)" src="data:image/jpeg;base64,{{ qrCodeBase64 }}"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'gerencianet'" src="{{ qrCodeBase64 }}"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'sauto_pay'" [src]="sautoPayQr"/>
             <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'pagfast'" src="data:image/png;base64,{{ qrCodeBase64 }}"/>
             <img [ngStyle]="{'width': '170px', 'background-color':'#ffffff'}" *ngIf="selectedPaymentMethod === 'paag'" src="{{ qrCodeBase64 }}"/>
+            <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'pixs'" src="{{ qrCodeBase64 }}"/>
         </div>
         <div class="qr-code" *ngIf="!qrCodeBase64">
             <ngx-qrcode
@@ -149,6 +150,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     submitting = false;
     clearSetInterval;
 
+    modalRef;
+
     public valuesShortcuts: number[] = [10, 20, 50, 100, 500, 1000];
 
     constructor(
@@ -186,6 +189,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                     this.onlyOneModality = !(res.bonus_esportivo && res.bonus_cassino);
                     this.maxAmountSportsBonus = res.max_bonus_esportivo;
                     this.maxAmountCasinoBonus = res.max_bonus_cassino;
+                    this.checkOktoTermsAcceptance(res.accepted_okto_terms);
+
                     if (!res.permitir_bonificacao) {
                         this.form.get('bonus').patchValue('nenhum');
                         this.bonusOption = 'nenhum';
@@ -204,6 +209,32 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             paymentMethod: [this.paymentMethodSelected, Validators.required],
             promoCode: [""]
         });
+    }
+
+    checkOktoTermsAcceptance(acceptedOktoTerms = false) {
+        if (this.availablePaymentMethods.includes('okto') && !acceptedOktoTerms) {
+            this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
+            this.modalRef.componentInstance.title = 'Termos de uso Okto';
+            this.modalRef.componentInstance.msg = 'Para continuar com as movimentações financeiras, é necessário aceitar os termos de uso da instituição financeira Okto. Caso não aceite, não será possível prosseguir. Deseja aceitar os termos?';
+
+            this.modalRef.result.then(
+                (result) => {
+                    this.financeiroService.acceptOktoTerms().subscribe(
+                        res =>{
+                            this.messageService.success('Você aceitou os termos de uso. Agora, você pode realizar movimentações financeiras.');
+                        },
+                        error => {
+                            this.messageService.warning('Algo não saiu muito bem. Tente novamente mais tarde.');
+                            this.router.navigate(['/']);
+                        }
+                    )                    
+                },
+                (reason) => { 
+                    this.messageService.warning('Você não aceitou os termos de uso. Você será redirecionado para a página inicial.');
+                    this.router.navigate(['/']);
+                }
+            );
+        }
     }
 
     changePaymentMethodOption(paymentMethod: string) {

@@ -56,7 +56,7 @@ img{
 }
 
 .botao-contato-flutuante {
-    position: absolute;
+    position: fixed;
     right: 20px;
     bottom: 30px;
     z-index: 1000;
@@ -82,7 +82,6 @@ img{
 .idle-detector {
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 .accept-cookies {
@@ -119,7 +118,25 @@ img{
 }
 
 .accept-cookies .cookie-message .informativo-cookies :last-child {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     flex-direction: column;
+}
+
+.informativoCookiesLink {
+    width: fit-content;
+}
+
+@media screen and (max-width: 480px){
+    .accept-cookies .cookie-message .titulo-informativo-cookies {
+        font-size: 16px;
+    }
+
+    .accept-cookies .cookie-message .informativo-cookies {
+        font-size: 12px;
+    }
+
+    .btn-accept {
+        display: flex !important;
+    }
 }

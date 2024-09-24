@@ -1,13 +1,20 @@
-import {Component, Inject, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {AuthService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService} from '../../services';
-import {interval} from 'rxjs';
+import {AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService} from '../../services';
+import {interval, Subject} from 'rxjs';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalComponent, RegrasBonusModalComponent} from "../../shared/layout/modals";
+import {
+    CadastroModalComponent,
+    CanceledBonusConfirmComponent,
+    JogosLiberadosBonusModalComponent,
+    LoginModalComponent,
+    RegrasBonusModalComponent
+} from "../../shared/layout/modals";
+import {takeUntil} from "rxjs/operators";
 
 
 
@@ -17,6 +24,7 @@ import {CadastroModalComponent, JogosLiberadosBonusModalComponent, LoginModalCom
     styleUrls: ['./gameview.component.css']
 })
 export class GameviewComponent implements OnInit, OnDestroy {
+    @ViewChild('continuarJogandoModal', {static: true}) continuarJogandoModal;
     gameUrl: SafeUrl = '';
     gameId: String = '';
     gameMode: String = '';
@@ -33,6 +41,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
     removerBotaoFullscreen = false;
     isLoggedIn = false;
     backgroundImageUrl = '';
+    headerHeight = 92;
+    currentHeight = window.innerHeight - this.headerHeight;
+    posicaoFinanceira;
+    avisoCancelarBonus = false;
+    modalRef;
+    unsub$ = new Subject();
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -47,6 +61,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private utilsService: UtilsService,
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
+        private layoutService: LayoutService,
+        private cd: ChangeDetectorRef,
+        private el: ElementRef,
+        private financeiroService: FinanceiroService,
         @Inject(DOCUMENT) private document: any
     ) {}
 
@@ -57,12 +75,25 @@ export class GameviewComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
 
         this.isLoggedIn = this.auth.isLoggedIn();
+        if(this.isLoggedIn) {
+            this.getPosicaoFinanceira()
+        }
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
 
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'none');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'none');
         }
 
         if (window.innerWidth <= 1024) {
@@ -104,8 +135,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 isLoggedIn => {
                     if(isLoggedIn){
                         this.isLoggedIn = this.auth.isLoggedIn();
-
-                        this.loadGame();
+                        if(this.avisoCancelarBonus === false){
+                            this.loadGame();
+                        }
                     }
                 }
             );
@@ -117,11 +149,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             if (this.gameMode === 'REAL' && !this.isCliente) {
-                this.abriModalLogin();
-
+                if(!this.isMobile){
+                    this.abriModalLogin();
+                }
             } else {
-
-                this.loadGame();
+                if(this.avisoCancelarBonus === false){
+                    this.loadGame();
+                }
             }
             interval(3000)
                 .subscribe(() => {
@@ -131,6 +165,26 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.gameFornecedor === 'galaxsys') {
             this.appendScriptGalaxsys();
+        }
+    }
+
+    ngAfterViewInit(){
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(curHeaderHeight => {
+                this.headerHeight = curHeaderHeight;
+                this.changeGameviewHeight();
+                this.cd.detectChanges();
+            });
+    }
+
+    changeGameviewHeight() {
+        if(!this.isMobile){
+            const headerHeight = this.headerHeight;
+            const contentEl = this.el.nativeElement.querySelector('.game-frame');
+            const headerGameView = this.el.nativeElement.querySelector('.header-game-view').getBoundingClientRect().height;
+            const height = window.innerHeight - headerHeight - headerGameView;
+            this.renderer.setStyle(contentEl, 'height', `${height}px`);
         }
     }
 
@@ -156,16 +210,28 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     back(): void {
-        if (this.gameFornecedor === 'tomhorn') {
-            this.closeSessionGameTomHorn();
-        } else if(this.gameFornecedor === 'parlaybay') {
-            this.router.navigate(['pb']);
-        } else if (this.gameFornecedor === 'ezugi' || this.gameFornecedor === 'evolution') {
-            this.router.navigate(['live-casino']);
-        } else if(this.gameFornecedor === 'pascal' || this.gameFornecedor === 'galaxsys'){
-            this.router.navigate(['casino']);
-        }else{
-            this.location.back();
+        if(this.modalRef) {
+            this.modalRef.close();
+        }
+
+        switch (this.gameFornecedor) {
+            case 'tomhorn':
+                this.closeSessionGameTomHorn();
+                break;
+            case 'parlaybay':
+                this.router.navigate(['pb']);
+                break;
+            case 'ezugi':
+            case 'evolution':
+                this.router.navigate(['live-casino']);
+                break;
+            case 'pascal':
+            case 'galaxsys':
+            case 'pgsoft':
+                this.router.navigate(['casino']);
+                break;
+            default:
+                this.location.back();
         }
 
         if (this.fullscreen) {
@@ -189,6 +255,21 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (scriptGalaxsys) {
             scriptGalaxsys.remove();
+        }
+
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+        if (botaoContatoFlutuante) {
+            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
     }
 
@@ -269,7 +350,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             (result) => {
                 if(result) {
                     this.isLoggedIn = this.auth.isLoggedIn();
-                    this.loadGame();
+                    this.getPosicaoFinanceira()
                 }
             }
         );
@@ -285,5 +366,56 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
+    }
+
+    getPosicaoFinanceira() {
+        this.auth.getPosicaoFinanceira()
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                posicaoFinanceira => {
+                    this.posicaoFinanceira = posicaoFinanceira.bonus;
+                    if(this.posicaoFinanceira > 0 && this.posicaoFinanceira < 1) {
+                       this.avisoCancelarBonus = true;
+                       this.abriModalContinuarJogando();
+                    }
+                },
+                error => {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
+                        this.auth.logout();
+                    } else {
+                        this.handleError(error);
+                    }
+                }
+            );
+    }
+
+    abriModalContinuarJogando(){
+        this.modalRef =  this.modalService.open(
+            this.continuarJogandoModal,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-pop-up',
+                centered: true,
+            }
+        );
+    }
+
+    continuarBonus(){
+        this.avisoCancelarBonus = false;
+        this.modalRef.close();
+    }
+
+    continuarSaldoReal(){
+        this.financeiroService.cancelarBonusAtivos()
+            .subscribe(
+                response => {
+                    this.avisoCancelarBonus = false;
+                    this.modalRef.close();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+
     }
 }

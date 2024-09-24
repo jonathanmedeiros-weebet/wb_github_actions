@@ -1,9 +1,9 @@
 import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {IsActiveMatchOptions, Router} from '@angular/router';
+import {ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router} from '@angular/router';
 import {UntypedFormBuilder} from '@angular/forms';
 
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {filter, takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
 import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService} from './../../../services';
 import {Usuario} from './../../../models';
@@ -38,6 +38,7 @@ import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-ca
 import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
 import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
+import {CarteiraComponent} from "../../../clientes/carteira/carteira.component";
 
 declare var xtremepush: any;
 
@@ -100,7 +101,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     cassinoAtivo;
     virtuaisAtivo;
     parlaybayAtivo;
+    rifa = false;
     loteriaPopularAtiva;
+    betbyAtivo;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
     desafioHabilitado = false;
@@ -113,6 +116,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     notificationsXtremepushOpen = false;
     public showHeaderMobile: boolean = false;
     xtremepushHabilitado = false;
+
+    private currentRoute: string;
+
+    sportsIsActive = false;
+    sportsLiveIsActive = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -140,6 +148,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private modalService: NgbModal,
         private translate: TranslateService,
         private router: Router,
+        private route: ActivatedRoute,
         private connectionCheck: ConnectionCheckService,
         private renderer: Renderer2,
         private host: ElementRef,
@@ -147,6 +156,17 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private layoutService: LayoutService
     ) {
         super();
+    }
+
+    sportsActive(): void {
+        if (this.currentRoute.startsWith('/sports') && !this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
+            this.sportsIsActive = true;
+        } else if(this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
+            this.sportsLiveIsActive = true;
+        } else {
+            this.sportsLiveIsActive = false;
+            this.sportsIsActive = false;
+        }
     }
 
     get customCasinoName(): string {
@@ -164,6 +184,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngOnInit() {
+        this.currentRoute = this.router.url;
+        this.sportsActive();
+
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.currentRoute = event.urlAfterRedirects;
+                this.sportsActive();
+            }
+        });
 
         this.xtremepushHabilitado = this.paramsService.getOpcoes().xtremepush_habilitado;
         if(this.xtremepushHabilitado) {
@@ -237,6 +266,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.cassinoAtivo = this.paramsService.getOpcoes().casino;
         this.virtuaisAtivo = this.paramsService.getOpcoes().virtuais;
         this.parlaybayAtivo = this.paramsService.getOpcoes().parlaybay;
+        this.betbyAtivo = this.paramsService.getOpcoes().betby;
+        this.rifa = this.paramsService.getOpcoes().rifa;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
@@ -403,7 +434,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente'
+                windowClass: 'modal-500 modal-cadastro-cliente',
+                backdrop: 'static'
             }
         );
     }
@@ -461,6 +493,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirSaques() {
         this.modalService.open(SolicitacaoSaqueClienteComponent);
+    }
+
+    abrirCarteira() {
+        this.modalService.open(CarteiraComponent);
     }
 
     abrirDepositos() {
@@ -603,7 +639,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             }, (result) => {
                 for (let i = 0; i < result.items.length; i++) {
                     const xtremepushItem = result.items[i];
-
                     const date = new Date(xtremepushItem.create_time * 1000);
                     const formattedDate = date.toLocaleDateString('pt-BR', {
                         day: '2-digit',
@@ -615,19 +650,28 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
                     const xtremepushElement = document.createElement('div');
                     xtremepushElement.className = 'xtremepush-notification-item';
+                    xtremepushElement.style.width = '100%';
+                    const isTypeZero = xtremepushItem.message.style.type === 0;
+                    const imageStyle = isTypeZero ? 'width: 100%; height: auto;' : 'width: 100px; height: 100px;';
+                    const containerStyle = isTypeZero ? 'flex-direction: column;' : '';
+                    const titleStyle = isTypeZero ? 'margin-top: 10px; margin-bottom: 10px;' : '';
+                    const dateStyle = isTypeZero ? 'float: right; margin-top: auto;' : '';
+
                     xtremepushElement.innerHTML = `
                     <div class="xtremepush-card" style="
-                        border-bottom: 1px solid rgba(204, 204, 204, 0.5);
-                        padding-bottom: 10px;
-                    ">
-                        <img src="${xtremepushItem.message.icon}" class="xtremepush-card-img-top" alt="${xtremepushItem.message.title}">
-                        <div class="xtremepush-card-body">
-                            <h5 class="xtremepush-card-title">${xtremepushItem.message.title}</h5>
+                            width: 100%;
+                            border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+                            padding-bottom: 10px;
+                            display: flex;
+                            ${containerStyle}
+                        ">
+                        <img src="${xtremepushItem.message.icon}" class="xtremepush-card-img-top" style="padding: 0 10px; ${imageStyle} display: block;" alt="${xtremepushItem.message.title}">
+                        <div class="xtremepush-card-body" style="padding: 15px;">
+                            <h5 class="xtremepush-card-title" style="font-size: 1.25em; ${titleStyle}">${xtremepushItem.message.title}</h5>
                             <p class="xtremepush-card-text">${xtremepushItem.message.alert}</p>
-                            <p class="xtremepush-card-date">${formattedDate}</p>
+                            <p class="xtremepush-card-date" style="font-size: 0.875em; ${dateStyle}">${formattedDate}</p>
                         </div>
-                    </div>
-                `;
+                    </div>`;
 
                     xtremepushElement.addEventListener('click', () => {
                         xtremepush('inbox', 'message.action', {
@@ -641,16 +685,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                             console.log(err);
                         });
                     });
-
                     xtremepushNotificationContainer.appendChild(xtremepushElement);
                 }
             }, (err) => {
                 console.log(err);
             });
         };
-
         loadItems();
-
         this.notificationsXtremepushOpen = !this.notificationsXtremepushOpen;
     }
 

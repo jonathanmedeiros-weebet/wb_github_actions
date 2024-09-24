@@ -256,11 +256,12 @@
     background-color: var(--inputs-odds);
     color: var(--foreground-inputs-odds);
     padding: 8px 10px;
-    min-width: 80px;
+    min-width: 83.33px;
 
     margin: 0 2.5px;
 
     font-size: 11px; /* ajuste fonte */
+    position: relative;
 }
 
 .cotacoes .cotacao.selecionado {
@@ -338,6 +339,54 @@
 
 .loading-listagem .ld-campeonato .ld-jogo .ld-odds .ssc-square {
     border-radius: 4px;
+}
+
+.odd-up::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    right: 0;
+    top: 0;
+    position: absolute;
+    border-radius: 0 2px;
+    margin-top: 2px;
+    margin-right: 2px;
+    border-top: 12px solid #6DA544;
+    border-left: 12px solid transparent;
+    animation: blink 1s 3, hide 0s 2.5s forwards;
+}
+
+.odd-down::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    border-radius: 2px 0;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    border-bottom: 12px solid #F61A1A;
+    border-left: 12px solid transparent;
+    animation: blink 1s 3, hide 0s 2.5s forwards;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes hide {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        display: none;
+    }
 }
 
 /* Large devices (desktops, 1025 and up) */
