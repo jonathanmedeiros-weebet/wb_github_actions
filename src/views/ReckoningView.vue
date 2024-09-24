@@ -245,7 +245,7 @@ export default {
 
 .reckoning {
   color: #ffffff;
-  color: var(--foreground-league);
+  color: var(--foreground-header);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -265,7 +265,7 @@ export default {
   height: 30px;
   opacity: 0.5;
   color: #ffffff;
-  color: var(--foreground-league);
+  color: var(--foreground-header);
   background-color: #FFFFFF0D;
   padding: 10px;
   display: flex;
@@ -282,7 +282,7 @@ export default {
 
   &__title {
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-header);
     font-size: 14px;
     font-style: normal;
     display: flex;

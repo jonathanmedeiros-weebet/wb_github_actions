@@ -57,7 +57,7 @@ import CardEntryDashboard from './parts/CardEntryDashboard.vue'
 import CollapseDashboard from './parts/CollapseDashboard.vue'
 import ChartBar from './parts/ChartBar.vue'
 
-import { now, getAndroidVersion } from '@/utilities'
+import { now, isAndroid5 } from '@/utilities'
 import IconCalendar from '@/components/icons/IconCalendar.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
@@ -231,12 +231,6 @@ export default {
                         duration: 5000
                     })
                 });
-        },
-        isAndroid5() {
-            const androidVersion = getAndroidVersion();
-            if (!androidVersion) return false;
-            const version = parseInt(androidVersion.split('.')[0], 10);
-            return version <= 5;
         }
     },
     computed: {
@@ -253,7 +247,7 @@ export default {
             return !this.configClientStore.chartDeprecatedByAndroidVersion;
         },
         useHexColors() {
-            return this.isAndroid5() ? '#ffffff80' : 'var(--foreground-league-input)';
+            return isAndroid5() ? '#ffffff80' : 'var(--foreground-league-input)';
         }
     },
     mounted() {

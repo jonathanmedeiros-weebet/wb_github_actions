@@ -129,20 +129,20 @@ export default {
         align-items: start;
         font-size: 14px;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-game);
     }
 
     &__body-title-value {
         font-size: 24px;
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground-game);
         padding-bottom: 20px;
         margin-top: 12px;
     }
 
     &__body-icon {
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-game);
     }
 
     &__bars {
@@ -194,7 +194,7 @@ export default {
     &__categories-value {
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-game);
         margin: 0px 0px 0px 15px;
     }
 

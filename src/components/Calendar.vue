@@ -45,7 +45,7 @@ import {
   dateFormatInMonthAndYear,
   now,
   convertInMomentInstance,
-  getAndroidVersion
+  isAndroid5
 } from '@/utilities'
 import IconArrowLeft from './icons/IconArrowLeft.vue'
 import IconArrowRight from './icons/IconArrowRight.vue'
@@ -80,7 +80,7 @@ export default {
       return dateFormatInMonthAndYear(this.dateSelected) === this.currentMonthAndYear
     },
     useHexColors() {
-      return this.isAndroid5() ? '#0be58e' : 'var(--highlight)';
+      return isAndroid5() ? '#0be58e' : 'var(--highlight)';
     }
   },
   methods: {
@@ -129,14 +129,7 @@ export default {
       this.dateSelected = null;
       this.dateSelected = dateCustom;
       this.$emit('change', dateCustom)
-    },
-    isAndroid5() {
-      const androidVersion = getAndroidVersion();
-      if (!androidVersion) return false;
-      const version = parseInt(androidVersion.split('.')[0], 10);
-      return version <= 5;
     }
-
   },
 }
 </script>
@@ -147,12 +140,11 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     font-size: 16px;
     font-weight: 500;
     padding: 10px;
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--highlight);
   }
 
   &__body {
@@ -171,14 +163,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 10px 24px;
-
     color: #ffffff;
     color: var(--foreground-header);
     background: #0a0a0a;
     background: var(--background);
-
   }
 
   &__weeks {
@@ -200,12 +189,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 14px;
     font-weight: 500;
-
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--highlight);
 
     &--selected {
       background: #0be58e;

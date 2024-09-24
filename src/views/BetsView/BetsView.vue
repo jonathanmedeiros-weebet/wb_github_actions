@@ -538,7 +538,7 @@ export default {
   &__count-results {
     padding-top: 30px;
     color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: var(--foreground-header);
   }
 
   &__buttons-filters {

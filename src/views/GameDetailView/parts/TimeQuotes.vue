@@ -234,7 +234,7 @@ export default {
 
     &__value {
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground-inputs-odds);
         font-size: 14px;
         font-style: normal;
         font-weight: 500;

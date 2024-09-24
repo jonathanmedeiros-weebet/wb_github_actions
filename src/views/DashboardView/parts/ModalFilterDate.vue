@@ -92,9 +92,8 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground-header);
         font-size: 16px;
         font-weight: 400;
         padding-bottom: 20px;

@@ -30,3 +30,10 @@ export const getAndroidVersion = () => {
     
     return match ? match[1] : false;
 }
+
+export const isAndroid5 = () => {
+    const androidVersion = getAndroidVersion();
+    if (!androidVersion) return false;
+    const version = parseInt(androidVersion.split('.')[0], 10);
+    return version <= 5;
+}

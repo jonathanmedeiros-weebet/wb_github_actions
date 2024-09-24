@@ -124,7 +124,7 @@ export default {
 
   &__btnclose {
     display: flex;
-    align-items: center;  /* Centraliza verticalmente */
+    align-items: center;  
     justify-content: center; 
     background-color: #181818;
     background-color: var(--inputs-odds);

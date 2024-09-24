@@ -44,7 +44,7 @@ export default {
 
     &__subtitle {
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-highlight);
         margin-bottom: 10px;
     }
 

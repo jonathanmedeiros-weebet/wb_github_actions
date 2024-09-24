@@ -267,6 +267,8 @@ export default {
         border-radius: 4px;
         background: #0a0a0a;
         background: var(--inputs-odds);
+        color: #ffff;
+        color: var(--foreground-inputs-odds);
         &--selected {
             background: #0be58e;
             background: var(--highlight);

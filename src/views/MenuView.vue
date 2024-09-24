@@ -13,16 +13,16 @@
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
             R$ {{ isCreditoVisible ? '*******' : credit }}
-            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click.native="toggleCreditoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            <IconEye v-if="!isCreditoVisible" :color="'var(--foreground-inputs-odds)'" class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleCreditoVisibility" />
           </span>
         </div>
         <div class="wallet__item">
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
             R$ {{  isSaldoVisible ? '*******' : balance }}
-            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click.native="toggleSaldoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click.native="toggleSaldoVisibility" />
+            <IconEye v-if="!isSaldoVisible" class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleSaldoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleSaldoVisibility" />
           </span>
         </div>
         <div class="wallet__shortcuts">
@@ -192,7 +192,7 @@ export default {
 <style lang="scss" scoped>
 .menu {
   color: #ffffff;
-  color: var(--foreground-league);
+  color: var(--foreground-game);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -257,7 +257,7 @@ export default {
   &__label {
     display: flex;
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-game);
     opacity: 0.5;
     font-size: 13px; 
   }
@@ -274,7 +274,7 @@ export default {
     margin-left: 15px;
     cursor: pointer;
     color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: var(--foreground-league);
     opacity: 0.5;
   }
 
@@ -288,11 +288,11 @@ export default {
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    background-color: var(--highlight);
+    background-color: var(--background);
     border: none;
     border-radius: 18px;
     color: #0a0a0a;
-    color: var(--foreground-input-odds); 
+    color: var(--foreground-header); 
     padding: 7px;
     white-space: nowrap;
     font-size: 10px;
@@ -301,7 +301,7 @@ export default {
 
   &__icon {
     fill: #181818;
-    fill: var(--foreground-inputs-odds);
+    fill: var(--foreground-game);
     align-items: center;
   }
 }
@@ -340,7 +340,7 @@ export default {
 
   &__icon { 
     fill: #181818;
-    fill: var(--foreground-inputs-odds);
+    fill: var(--foreground-game);
     align-items: center;
   }
 

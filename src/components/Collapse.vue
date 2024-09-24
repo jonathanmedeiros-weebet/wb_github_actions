@@ -2,7 +2,7 @@
     <div class="collapse">
         <div class="collapse__item" @click="handleClick">
             <span class="collapse__title"><slot name="title"/></span>
-            <component :is="iconArrowDinamic"/>
+            <component :is="iconArrowDinamic" :color="iconColor"/>
         </div>
         <slot v-if="collapsed" />
     </div>
@@ -23,7 +23,8 @@ export default {
     },
     data() {
         return {
-            collapsed: this.initCollapsed
+            collapsed: this.initCollapsed,
+            iconColor: 'var(--highlight)'
         }
     },
     computed: {

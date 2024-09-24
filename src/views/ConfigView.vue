@@ -80,7 +80,7 @@ export default {
 
     &_description {
         font-size: 14px;
-        color: var(--foreground-league-input);
+        color: var(--foreground-highlight);
         margin-bottom: 20px;
     }
 }

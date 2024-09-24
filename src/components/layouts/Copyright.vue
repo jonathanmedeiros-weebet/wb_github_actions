@@ -26,7 +26,7 @@ export default {
       text-align: left;
       text-decoration: none;
       color: #FFFFFF;
-      color: var(--foreground-league);
+      color: var(--foreground-header);
     }
   }
 </style>

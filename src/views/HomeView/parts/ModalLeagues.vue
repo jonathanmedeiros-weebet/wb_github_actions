@@ -97,7 +97,7 @@ export default {
 .modal-leagues {
     &__title {
         color: #FFFFFF80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-league);
         font-size: 16px;
         font-weight: 500;
         min-height: 26px;
@@ -137,6 +137,7 @@ export default {
         min-height: 30px;
 
         color: #FFFFFF99;
+        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
         text-align: left;

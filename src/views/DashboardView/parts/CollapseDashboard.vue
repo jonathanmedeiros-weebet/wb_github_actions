@@ -56,7 +56,7 @@ export default {
         background: var(--inputs-odds);
         border-radius: 6px;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-inputs-odds);
     }
 
     &__title {
@@ -69,7 +69,7 @@ export default {
         font-size: 14px;
         font-weight: 400;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-inputs-odds);
     }
 
     &__title img {
@@ -80,7 +80,7 @@ export default {
 
     &__icon {
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-header);
     }
 }
 </style>

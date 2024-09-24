@@ -61,7 +61,7 @@ export default {
 
     &--secondary {
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground-header);
         background: #181818;
         background: var(--inputs-odds);
     }

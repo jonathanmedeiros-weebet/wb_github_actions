@@ -168,7 +168,7 @@ export default {
   height: 30px;
   opacity: 0.5;
   color: #ffffff;
-  color: var(--foreground-league);
+  color: var(--foreground-header);
   padding: 0px 10px;
   display: flex;
   align-items: center;

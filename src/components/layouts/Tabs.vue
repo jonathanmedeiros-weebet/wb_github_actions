@@ -26,7 +26,7 @@ import IconMenu from '../icons/IconMenu.vue'
 import IconTicket from '../icons/IconTicket.vue'
 import IconValidation from '../icons/IconValidation.vue'
 import { useTicketStore } from '@/stores'
-import { getAndroidVersion } from '@/utilities'
+import { isAndroid5 } from '@/utilities'
 
 export default {
   name: 'w-tabs',
@@ -81,18 +81,12 @@ export default {
       return Object.keys(useTicketStore().items).length;
     },
     useHexColors() {
-      return this.isAndroid5() ? '#ffffff' : 'var(--highlight)';
+      return isAndroid5() ? '#ffffff' : 'var(--highlight)';
     }
   },
   methods: {
     verifyIfRouteIsActived(routerName) {
       return this.$route.path === routerName;
-    },
-    isAndroid5() {
-      const androidVersion = getAndroidVersion();
-      if (!androidVersion) return false;
-      const version = parseInt(androidVersion.split('.')[0], 10);
-      return version <= 5;
     }
   }
 }
@@ -117,7 +111,7 @@ export default {
 
     height: 41px;
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-header);
     font-size: 12px;
     font-weight: 400;
     line-height: 14.06px;

@@ -54,7 +54,7 @@
 <script>
 import IconVisibility from '@/components/icons/IconVisibility.vue'
 import IconVisibilityOff from '@/components/icons/iconVisibilityOff.vue'
-import { getAndroidVersion } from '@/utilities';
+import { isAndroid5 } from '@/utilities';
 
 export default {
   name: 'w-input',
@@ -127,12 +127,6 @@ export default {
     },
     emitKeypress(event) {
       this.$emit('keypress', event);
-    },
-    isAndroid5() {
-      const androidVersion = getAndroidVersion();
-      if (!androidVersion) return false;
-      const version = parseInt(androidVersion.split('.')[0], 10);
-      return version <= 5;
     }
   },
   computed: {
@@ -143,7 +137,7 @@ export default {
       return !['email', 'number', 'date', 'password'].includes(this.initType);
     },
     useHexColors() {
-      const color = this.isAndroid5() ? '#fffff80' : 'var(--foreground-inputs-odds)';
+      const color = isAndroid5() ? '#fffff80' : 'var(--foreground-inputs-odds)';
       return color;
     }
   }
