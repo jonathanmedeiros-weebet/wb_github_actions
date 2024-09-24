@@ -36,6 +36,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     private unsub$: Subject<any> = new Subject();
     verifiedIdentity = false
     reconhecimentoFacialEnabled = true
+    reconhecimentoFacialRedefinicaoSenha = false
+    reconhecimentoFacialRedefinicaoSenhaValidado = false;
     
     legitimuzToken = "";
     dataUserCPF: string;
@@ -96,8 +98,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     ngOnInit() {
         this.currentLanguage = this.translate.currentLang;
         this.createForm();
-        this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramLocais.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
+       
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
             if (this.reconhecimentoFacialEnabled) {
@@ -111,29 +112,29 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.recoveryTokenStep1 = params.token;
                 if (Boolean(params.codigo)) {
                     this.form.get('verificacao').patchValue(params.codigo);
-                    this.authService.getUserResetPassword({verificacao:params.codigo, token:params.token}).subscribe({next: 
-                        (res)=>{
-                            // console.log(res.results.id)
+                    this.authService.getUserResetPassword({verificacao:params.codigo, token:params.token}).subscribe({ 
+                        next: (res) => {
                             this.clienteService.getReconhecimentoFacialCliente(res.results.id).subscribe({
-                                next: (res)=>{
-                                    console.log(res);
-                                if(res.verifiedIdentity == null){
+                                next: (res) => {
+                                if (res.verifiedIdentity == null) {
                                     this.dataUserCPF = res.cpf;
-                                    this.token = `reset ${res.cpf}`;
+                                    this.token = res.cpf;
                                     this.showLoading = false;
-                                    this.cd.detectChanges();
                                     this.disapprovedIdentity = false
-                                } else if(res.verifiedIdentity) {
+                                } else if (res.verifiedIdentity) {
+                                    this.dataUserCPF = res.cpf;
                                     this.verifiedIdentity = true
+                                    this.showLoading = false;
                                 } else {
                                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
                                 }
-                            }, error: (err) =>{
-                                console.log(err)
+                                this.cd.detectChanges();
+                            }, error: (error) =>{
+                                this.messageService.error(error)
                             }
                         })
-                    },error: (err)=> {
-                        console.log(err)
+                    },error: (error)=> {
+                        this.messageService.error(error)
             
                     }
                     });
@@ -143,6 +144,14 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             }
         });
 
+        this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
+        this.reconhecimentoFacialEnabled = Boolean(this.paramLocais.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
+        this.reconhecimentoFacialRedefinicaoSenha = Boolean(this.paramLocais.getOpcoes().reconhecimentoFacialRedefinicaoSenha && this.legitimuzToken);
+
+        if (!this.reconhecimentoFacialEnabled && !this.reconhecimentoFacialRedefinicaoSenha) {
+            this.reconhecimentoFacialRedefinicaoSenhaValidado = true;
+        }
+        
         this.layout
             .verificaRemocaoIndiqueGanhe
             .pipe(takeUntil(this.unsub$))

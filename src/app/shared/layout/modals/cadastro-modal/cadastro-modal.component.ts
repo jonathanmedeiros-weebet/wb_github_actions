@@ -66,6 +66,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     verifiedIdentity = false
     reconhecimentoFacialEnabled = true
+    reconhecimentoFacialCadastro = false
+    reconhecimentoFacialCadastroValidado = false;
     legitimuzToken = "";
     currentLanguage = 'pt';
     unsubLegitimuz$ = new Subject();
@@ -102,24 +104,27 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         console.log("token",this.token)
         console.log("Cpf Cliente",this.dataUserCPF)
         console.log("Legitimnuz Token",this.legitimuzToken)
+        this.reconhecimentoFacialCadastroValidado = true;
     }
 
     ngOnInit() {
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramsService.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
-        
-        if (this.reconhecimentoFacialEnabled) {
-            this.token = `cadastro`;
-          
+       
+        if (Boolean(this.paramsService.getOpcoes().reconhecimentoFacial && this.legitimuzToken) && Boolean(this.paramsService.getOpcoes().reconhecimentoFacialCadastro && this.legitimuzToken)) {
+            this.reconhecimentoFacialEnabled = true;
+            console.log('Reconhecimento facial ativo:',this.reconhecimentoFacialEnabled);   
+            this.token = this.dataUserCPF;  
+        } else {
+            this.reconhecimentoFacialCadastroValidado = true;
         }
+ 
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
             if (this.reconhecimentoFacialEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
         });   
-
 
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.getPromocoes();

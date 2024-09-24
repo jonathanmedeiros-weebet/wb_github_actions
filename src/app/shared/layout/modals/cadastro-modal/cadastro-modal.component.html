@@ -21,7 +21,8 @@
                                    (change)="validarCpf()"
                                    formControlName="cpf"
                                    [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
-                                   inputmode="numeric">
+                                   inputmode="numeric"
+                                   [readonly]="reconhecimentoFacialCadastroValidado">
                             <label for="cpf">{{'geral.cpf' | translate}}</label>
                         </div>
 
@@ -137,19 +138,21 @@
                     </div>
                 </div>
             </div>
-            <div #legitimuz id="legitimuz-container" *ngIf="(reconhecimentoFacialEnabled && !verifiedIdentity) && !showLoading">
-                <div id="legitimuz">
-                    <div id="verify-identity-text">
-                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+            <div class="col-12">
+                <div #legitimuz id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && !reconhecimentoFacialCadastroValidado">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
+                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                        <button (click)="printTeste()" id="legitimuz-action-verify" class="btn btn-custom btn-legitimuz" *ngIf="!disapprovedIdentity">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
                     </div>
-                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
-                    <input type="hidden" id="legitimuz-ref-id" [value]="token">
-                    <button (click)="printTeste()" id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
-                        {{'saques.identityVerify' | translate}}
-                        <i class="fa-solid fa-id-card"></i>
-                    </button>
+                    <div id="legitimuz-root"></div>
                 </div>
-                <div id="legitimuz-root"></div>
             </div>
             <div class="row">
                 <div class="col-12">

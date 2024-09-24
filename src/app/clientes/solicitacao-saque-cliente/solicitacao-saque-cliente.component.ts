@@ -107,8 +107,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.reconhecimentoFacialPrimeiroSaqueValidado = true;
         }
         if (this.reconhecimentoFacialEnabled && this.reconhecimentoFacialPrimeiroSaque) {
-            
-
             this.token = this.auth.getToken();
         }
 

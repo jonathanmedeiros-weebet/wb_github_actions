@@ -195,7 +195,15 @@ a.link-termos-politica {
 
 .btn-custom {
     margin-top: 10px;
-    width: 80%;
+    width: 100%;
+}
+
+.btn-legitimuz {
+    margin-bottom: 24px;
+}
+
+.btn-legitimuz i {
+    margin-right: 8px;
 }
 
 
