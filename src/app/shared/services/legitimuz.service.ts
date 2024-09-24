@@ -70,6 +70,10 @@ export class LegitimuzService {
         this.options.eventHandler = (eventName) => {
             console.log(eventName)
             console.log(this.options);
+            if (eventName === 'faceindex') {
+                console.log('faceindex: Success')
+                this.faceIndexSub.next(true)
+            }
         };
         this.options.eveneventHandler = (eventName) => {
             console.log(eventName)
@@ -82,8 +86,8 @@ export class LegitimuzService {
     }
 
     init() {
-        console.log(this.options)
         this.sdk = Legitimuz(this.options);    
+        console.log(this.options)
     }
 
     mount() {          

@@ -254,6 +254,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         this.messageService.success('Identidade verificada!');
                     }
                 });
+            this.legitimuzService.faceIndex.faceIndex.subscribe(faceIndex => {
+                    this.reconhecimentoFacialCadastroValidado = faceIndex;
+                    console.log('Faceindex Validado');
+                });
             // this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
             //     this.reconhecimentoFacialRedefinicaoSenhaValidado = faceIndex;
             //     console.log('Faceindex Validado');
@@ -406,11 +410,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (Object.keys(this.parameters).length) {
             values.parameters = this.parameters;
         }
-        if (this.reconhecimentoFacialEnabled && !this.verifiedIdentity) {
-            this.submitting = false;
-        } else {
-            this.submitting = true;
-        }
+
+       
         this.clientesService.cadastrarCliente(values)
             .subscribe(
                 (res) => {

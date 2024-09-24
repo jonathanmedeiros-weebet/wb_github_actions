@@ -71,8 +71,12 @@ export class LegitimuzFacialService {
       }
 
       this.options.eventHandler = (eventName) => {
-          console.log(eventName)
+          console.log(eventName);
           console.log(this.options);
+          if (eventName === 'faceindex') {
+            console.log('faceindex: Success')
+            this.faceIndexSub.next(true)
+        }
       };
       this.options.eveneventHandler = (eventName) => {
           console.log(eventName)
