@@ -4,7 +4,7 @@ import { Router} from '@angular/router';
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, MessageService, ParametrosLocaisService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
@@ -16,12 +16,14 @@ import { Geolocation, GeolocationService } from 'src/app/shared/services/geoloca
 import { FormValidations } from 'src/app/shared/utils';
 import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { SessionAlertModalComponent } from '../session-alert-modal/session-alert-modal.component';
 
 declare var xtremepush: any;
 
 enum LoginErrorCode {
     INACTIVE_REGISTER = 'cadastro_inativo',
-    CUSTOMER_BLOCKED = 'customerBlocked'
+    CUSTOMER_BLOCKED = 'customerBlocked',
+    ACTIVE_SESSION = 'activeSession'
 }
 
 @Component({
@@ -40,10 +42,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     mostrarSenha = false;
     authDoisFatoresHabilitado;
     modoClienteHabilitado;
+    AllowOnlyOneSessionPerLoginEnabled;
     LOGO = config.LOGO;
     loginGoogle = false;
     resgister_cancel = false;
     googleUser;
+    modalClose = true;
     private geolocation: Geolocation;
 
     constructor(
@@ -72,6 +76,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.createForm();
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
         this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
+        this.AllowOnlyOneSessionPerLoginEnabled = this.paramsLocais.getAllowOnlyOneSessionPerLogin();
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -187,7 +192,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         );
                 },
                 (error) => {
-                    this.handleError(error.message);
                     if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
                         sessionStorage.setItem('user', JSON.stringify(error.user));
                         this.openModalInactiveRegister();
@@ -196,6 +200,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
                         this.openModalBlockPeerAttemps();
                     }
+
+                    if (error.code === LoginErrorCode.ACTIVE_SESSION) {
+                        const modalRef = this.openModalSessioAlert();
+                        modalRef.componentInstance.confirmSessionTermination.subscribe(() => {
+                            this.terminateSessionAndLogin();
+                        });
+                        return
+                    }
+                    this.handleError(error.message);
                 }
             );
     }
@@ -223,6 +236,19 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         );
     }
 
+    private openModalSessioAlert(): NgbModalRef {
+        this.activeModal.dismiss();
+        this.modalClose = false;
+        const modalRef = this.modalService.open(SessionAlertModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true,
+            backdrop: 'static',
+            windowClass: 'modal-500'
+        });
+
+        return modalRef
+    }
+
     getUsuario() {
         this.usuario = this.auth.getUser();
     }
@@ -243,6 +269,33 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
+    }
+
+    private terminateSessionAndLogin() {
+        const data = {
+            username: this.form.value.username,
+            password: this.form.value.password,
+            terminateSession: true
+        };
+
+        this.auth.login(data)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                () => {
+                    this.getUsuario();
+                    if (this.usuario.tipo_usuario === 'cliente') {
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('event', 'login');
+                        }
+                        this.loginService.triggerEvent();
+                    } else {
+                        location.reload();
+                    }
+                    this.activeModal.dismiss();
+                    this.xtremepushBackgroundRemove();
+                },
+                error => this.handleError(error)
+            );
     }
 
     abrirRecuperarSenha() {

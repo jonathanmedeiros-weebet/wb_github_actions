@@ -250,7 +250,9 @@
         "computadoEm": "Computado em:",
         "alteracoesSucesso": "Alterações realizadas com sucesso!",
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
-        "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente."
+        "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
+        "session_alert": "Alerta de Sessão",
+        "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -600,7 +602,9 @@
         "aceitar": "Aceitar",
         "entendi": "Entendi",
         "salvar_alteracoes": "Salvar Alterações",
-        "voltar": "Voltar"
+        "voltar": "Voltar",
+        "logout_continue_login": "Sim, gostaria de encerrar a sessão",
+        "remain_active_session": "Não, continuar com a outra sessão"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
