@@ -185,6 +185,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
                         true);
                     return cotacao;
                 });
+                
                 if (!campeonato) {
                     campeonato = {
                         _id: jogo.campeonato._id,
