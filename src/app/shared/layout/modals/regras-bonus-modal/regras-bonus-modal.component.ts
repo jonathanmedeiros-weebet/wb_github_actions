@@ -27,12 +27,13 @@ export class RegrasBonusModalComponent implements OnInit {
     ngOnInit(): void {
         this.getPromocoes();
     }
-
+    
     getPromocoes(queryParams?: any) {
         this.financeiroService.getPromocoes(queryParams)
             .subscribe(
                 response => {
                     this.promocoes = response;
+                    this.sections = [];
                     this.promocoes.forEach(promocao => {
                         let title = ''
 
@@ -62,12 +63,12 @@ export class RegrasBonusModalComponent implements OnInit {
     toggleSection(clickedSection: any) {
         this.sections.forEach(section => {
             if (section !== clickedSection) {
-                section.isCollapsed = true;
+                section.isCollapsed = true; // Fecha outras seções
             }
         });
-
-        clickedSection.isCollapsed = !clickedSection.isCollapsed;
+        clickedSection.isCollapsed = !clickedSection.isCollapsed; // Alterna a seção clicada
     }
+    
 
     handleError(error: string) {
         this.messageService.error(error);
