@@ -8,6 +8,7 @@ import {config} from '../config';
 import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
+import * as sportsIds from '../constants/sports-ids';
 
 @Injectable({
     providedIn: 'root'
@@ -91,7 +92,7 @@ export class ParametrosLocaisService {
             );
     }
 
-    getCampeonatosBloqueados(sportId= 1) {
+    getCampeonatosBloqueados(sportId = sportsIds.FOOTBALL_ID) {
         const sport = 'sport_' + sportId;
         return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_bloqueados[sport]) : null;
     }

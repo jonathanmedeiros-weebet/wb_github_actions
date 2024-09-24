@@ -1,0 +1,42 @@
+<div class="mobile-modal-header margin-10" *ngIf="isMobile">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <div class="titulo">{{ 'geral.carteira' | translate }}</div>
+    <div class="botao-direito"></div>
+</div>
+<div id="default-content">
+    <div class="content-header hide-mobile">
+        <h2>{{ 'geral.carteira' | translate }} </h2>
+    </div>
+    <div class="content-body">
+        <div class="content">
+            <app-spinner *ngIf="showLoading"></app-spinner>
+
+            <div *ngIf="!showLoading" class="balance-container">
+                <div class="balance-header">
+                    <h2>Saldo Total</h2>
+                    <p class="balance-amount">{{ balance | currency }}</p>
+                </div>
+                <div class="balance-details">
+                    <div class="balance-item">
+                        <span>Saldo liberado para saque</span>
+                        <span>{{ withdrawAvailable | currency }}</span>
+                    </div>
+                    <div class="balance-item">
+                        <span>Saldo Bloqueado</span>
+                        <span>{{ withdrawBlocked | currency }}</span>
+                    </div>
+                    <div class="balance-item">
+                        <span>Bônus Esportes</span>
+                        <span>{{ bonusSport | currency }}</span>
+                    </div>
+                    <div class="balance-item">
+                        <span>Bônus Cassino</span>
+                        <span>{{ bonusCasino | currency }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
