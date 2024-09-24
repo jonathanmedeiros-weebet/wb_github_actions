@@ -305,7 +305,9 @@
         "puskasbet.com.br": "gulp puskasbet.com.br",
         "betagora.io": "gulp betagora.io",
         "tigre.bet": "gulp tigre.bet",
-        "mailing.bet": "gulp mailing.bet"
+        "mailing.bet": "gulp mailing.bet",
+        "bocamafra.bet": "gulp bocamafra.bet",
+        "sortte.bet": "gulp sortte.bet"
     },
     "private": true,
     "dependencies": {

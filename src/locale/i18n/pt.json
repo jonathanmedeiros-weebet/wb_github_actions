@@ -23,6 +23,7 @@
         "solicitarSaque": "Solicitar Saque",
         "dashboard": "Dashboard",
         "financeiro": "Financeiro",
+        "carteira": "Carteira",
         "validacao": "Validação",
         "apuracao": "Apuração",
         "aposta": "Aposta",
@@ -251,6 +252,8 @@
         "alteracoesSucesso": "Alterações realizadas com sucesso!",
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
+        "loginEmail": "E-mail",
+        "loginPhone": "Telefone",
         "session_alert": "Alerta de Sessão",
         "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?"
     },
@@ -671,5 +674,13 @@
         "concluida":"Concluída",
         "cancelada":"Cancelada",
         "premio": "Prêmio"
+    },
+    "cashback": {
+        "cashback": "Cashback",
+        "description": "Descrição",
+        "registrationDate": "Data de Cadastro",
+        "pending": "Pendente",
+        "redeemed": "Resgatado",
+        "redeem": "Resgatar"
     }
 }

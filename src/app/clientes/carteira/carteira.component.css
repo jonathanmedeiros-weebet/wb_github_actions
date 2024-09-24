@@ -1,0 +1,75 @@
+#default-content {
+    padding: 25px 38px;
+}
+
+.balance-container {
+    background-color: #0b0c10;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+}
+
+.balance-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.balance-amount {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+.balance-details {
+    margin-bottom: 20px;
+}
+
+.balance-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.balance-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.deposit-button {
+    background-color: #f0ad4e;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 1em;
+}
+
+.withdraw-button {
+    background-color: #d3d3d3;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    cursor: not-allowed;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    #default-content {
+        padding: 20px;
+    }
+
+    #withdrawal {
+        background: var(--background);
+        padding: 0;
+    }
+
+    .modal-body {
+        padding-top: 50px;
+    }
+
+    .balance-container{
+        width: 100%;
+    }
+}

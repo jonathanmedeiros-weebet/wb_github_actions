@@ -99,6 +99,7 @@ import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-moda
 import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
 import { FreeSpinService } from '../services/clientes/free-spin.service';
+import { CashbackService } from '../services/clientes/cashback.service';
 import { SessionAlertModalComponent } from './modals/session-alert-modal/session-alert-modal.component';
 
 @NgModule({
@@ -235,6 +236,7 @@ import { SessionAlertModalComponent } from './modals/session-alert-modal/session
         JogoService,
         AcumuladaoService,
         IndiqueGanheService,
+        CashbackService,
         FreeSpinService,
         {
             provide: RECAPTCHA_SETTINGS,

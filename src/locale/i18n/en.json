@@ -23,6 +23,7 @@
         "solicitarSaque": "Request Withdrawal",
         "dashboard": "Dashboard",
         "financeiro": "Financial",
+        "carteira": "Wallet",
         "validacao": "Validation",
         "apuracao": "Assessment",
         "aposta": "Bet",
@@ -249,6 +250,8 @@
         "alteracoesSucesso": "Changes made successfully!",
         "erroInesperado": "Something unexpected happened. Please try again later.",
         "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
+        "loginEmail": "Email",
+        "loginPhone": "Phone",
         "session_alert": "Session Alert",
         "session_alert_message": "There is currently an active session on another device. To continue access, would you like to close the other session?"
     },
@@ -669,5 +672,13 @@
         "concluida":"Completed",
         "cancelada":"Canceled",
         "premio": "Prize"
+    },
+    "cashback": {
+        "cashback": "Cashback",
+        "description": "Description",
+        "registrationDate": "Registration Date",
+        "pending": "Pending",
+        "redeemed": "Redeemed",
+        "redeem": "Redeem"
     }
 }
