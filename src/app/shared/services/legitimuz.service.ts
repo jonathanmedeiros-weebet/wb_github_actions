@@ -86,7 +86,7 @@ export class LegitimuzService {
     }
 
     init() {
-        this.sdk = Legitimuz(this.options);    
+        this.sdk = Legitimuz(this.options); 
         console.log(this.options)
     }
 
