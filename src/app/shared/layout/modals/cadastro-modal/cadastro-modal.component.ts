@@ -23,7 +23,7 @@ import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
     templateUrl: './cadastro-modal.component.html',
     styleUrls: ['./cadastro-modal.component.css'],
 })
-export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     
@@ -65,7 +65,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     bonusModalidade: string | null = null;
 
     verifiedIdentity = false
-    reconhecimentoFacialEnabled = true
+    reconhecimentoFacialEnabled = false
     reconhecimentoFacialCadastro = false
     reconhecimentoFacialCadastroValidado = false;
     legitimuzToken = "";
@@ -75,6 +75,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     token = '';
     dataUserCPF ='';
     showLoading = true;
+    
 
     
 
@@ -104,20 +105,23 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         console.log("token",this.token)
         console.log("Cpf Cliente",this.dataUserCPF)
         console.log("Legitimnuz Token",this.legitimuzToken)
-        this.reconhecimentoFacialCadastroValidado = true;
     }
 
     ngOnInit() {
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
-       
-        if (Boolean(this.paramsService.getOpcoes().reconhecimentoFacial && this.legitimuzToken) && Boolean(this.paramsService.getOpcoes().reconhecimentoFacialCadastro && this.legitimuzToken)) {
+        this.reconhecimentoFacialEnabled = Boolean(this.paramsService.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
+        this.reconhecimentoFacialCadastro = Boolean(this.paramsService.getOpcoes().reconhecimentoFacialCadastro === true);
+
+        if (this.reconhecimentoFacialEnabled === true && this.reconhecimentoFacialCadastro === true) {
             this.reconhecimentoFacialEnabled = true;
-            console.log('Reconhecimento facial ativo:',this.reconhecimentoFacialEnabled);   
-            this.token = this.dataUserCPF;  
         } else {
             this.reconhecimentoFacialCadastroValidado = true;
         }
+        console.log('ReconhecimentoFacialCadastro:',this.paramsService.getOpcoes().reconhecimentoFacialCadastro)
+        console.log('Reconhecimento facial ativo:',this.reconhecimentoFacialEnabled);  
+        console.log('Reconhecimento facial validado:',this.reconhecimentoFacialCadastroValidado);  
+        console.log('Reconhecimento facial Cadastro:',this.reconhecimentoFacialCadastro);  
  
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
@@ -140,6 +144,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.createForm();
         this.form.get('cpf')?.valueChanges.subscribe(cpf => {
             this.dataUserCPF = cpf;
+            this.token = cpf;
             this.showLoading = false;
           });
 
@@ -250,6 +255,16 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 });
         }   
+
+      
+            if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+              this.form.get('cpf')?.valueChanges.subscribe(value => {
+                  this.legitimuzService.init();
+                  this.legitimuzService.mount();  
+                })
+                
+            }
+      
     }
 
     getPromocoes(queryParams?: any) {
@@ -526,19 +541,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         event.preventDefault();
     }
 
-    ngAfterViewInit() {
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
-            this.legitimuz.changes
-                .pipe(takeUntil(this.unsubLegitimuz$))
-                .subscribe(() => {
-                    this.legitimuzService.init();
-                    this.legitimuzService.mount();
-
-                    this.unsubLegitimuz$.next();
-                    this.unsubLegitimuz$.complete();
-                });
-        }
-    }
+    
 
     
 }
