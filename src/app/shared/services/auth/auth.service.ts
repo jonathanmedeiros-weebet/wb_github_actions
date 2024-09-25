@@ -38,7 +38,7 @@ export class AuthService {
     }
 
     verificaDadosLogin(data: any): Observable<any> {
-        return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.AuthUrl}/verificarDadosLogin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
                     if (res.results.user) {
@@ -95,7 +95,7 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', res.results.user.id);
                         }
                     }
@@ -109,7 +109,7 @@ export class AuthService {
     }
 
     login(data: any): Observable<any> {
-        return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
 
@@ -168,15 +168,15 @@ export class AuthService {
 
     logout() {
         this.limparStorage();
-        if(this.xtremepushHabilitado()) {
+        if (this.xtremepushHabilitado()) {
             this.cleanXtremepushNotifications();
         }
         this.logadoSource.next(false);
         window.location.reload();
     }
 
-    cleanXtremepushNotifications(){
-        xtremepush('set', 'user_id', "");
+    cleanXtremepushNotifications() {
+        xtremepush('set', 'user_id', '');
         const xtremepushNotificationContainer = document.getElementById('xtremepushNotificationContainer');
         xtremepushNotificationContainer.innerHTML = '';
     }
@@ -313,7 +313,7 @@ export class AuthService {
     }
 
     getPosicaoFinanceira() {
-        const url = `${config.LOKI_URL}/financial/position`;
+        const url = `${config.BASE_URL}/financeiro/posicao`;
 
         return this.http
             .get(url, this.header.getRequestOptions(true))

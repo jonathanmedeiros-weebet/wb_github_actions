@@ -13,6 +13,7 @@ import { config } from '../../config';
 export class JogoService {
     private JogoUrl = `${config.CENTER_API}/jogos`;
     private JogosLokiUrl = `${config.LOKI_URL}/games`;
+    private JogoCentralUrl = `${config.BASE_URL}/jogos`;
 
     constructor(
         private http: HttpClient,
@@ -65,7 +66,7 @@ export class JogoService {
     }
 
     getJogosDestaque() {
-        const url = `${this.JogosLokiUrl}/highlighted-games`;
+        const url = `${this.JogoCentralUrl}/destaques`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(

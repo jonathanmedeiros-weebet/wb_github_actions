@@ -12,7 +12,7 @@ import { config } from '../config';
     providedIn: 'root'
 })
 export class BannerService {
-    private BannerUrl = `${config.LOKI_URL}/banners`;
+    private BannerUrl = `${config.BASE_URL}/banners`;
 
     synchronized = false;
     cachedBanners = [];
@@ -48,6 +48,6 @@ export class BannerService {
         } else {
             return this.cachedBanners.filter(banner => ['todas', pagina].includes(banner.pagina));
         }
-        
+
     }
 }
