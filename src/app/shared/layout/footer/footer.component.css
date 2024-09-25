@@ -109,8 +109,8 @@ footer {
 }
 
 .toTop {
-    position: absolute;
-    top: 20px;
+    position: fixed;
+    bottom: 12em;
     right: 20px;
 
     color: var(--foreground-inputs-odds);
@@ -200,5 +200,11 @@ footer {
 
     .info.pagamento h4 {
         margin-bottom: 4px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .toTop {
+        right: 400px;
     }
 }

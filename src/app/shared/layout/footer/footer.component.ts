@@ -48,6 +48,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
     slug: string;
     sharedUrl: string;
     linkYoutube;
+    isVisible;
 
     constructor(
         private authService: AuthService,
@@ -128,6 +129,17 @@ export class FooterComponent implements OnInit, AfterViewInit {
         if (appendReclameAqui) {
             this.appendReclameAqui(reclameAquiDataId);
         }
+
+        this.container.addEventListener('scroll', this.onScroll.bind(this));
+    }
+    
+    onScroll() {
+        const target = this.container;
+        this.isVisible = target.scrollTop > 100;
+    }
+    
+    scrollToTop() {
+        this.container.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     appendReclameAqui(dataId: string) {
