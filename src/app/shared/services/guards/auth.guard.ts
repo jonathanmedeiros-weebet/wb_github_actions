@@ -19,9 +19,14 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-        if(!this.auth.isLoggedIn() && exceptionRouteAuthGuard.includes(state.url)) {
+        if (this.auth.isExpired()) {
+            this.router.navigate(['/']);
+            return false;
+        }
+
+        if (!this.auth.isLoggedIn() && exceptionRouteAuthGuard.includes(state.url)) {
             const isLogged = await this.requestLogin();
-            if(isLogged) {
+            if (isLogged) {
                 location.reload();
                 return true;
             }
