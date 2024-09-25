@@ -114,7 +114,7 @@ export class AppComponent implements OnInit {
             const isCliente = this.auth.isCliente();
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
-                this.idleDetectService.startTimer(5000);
+                this.idleDetectService.startTimer(1800000);
 
             } else {
                 this.idleDetectService.stopTimer();
