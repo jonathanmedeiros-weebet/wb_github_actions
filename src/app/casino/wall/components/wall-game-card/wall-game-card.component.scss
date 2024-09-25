@@ -126,9 +126,11 @@
 
     &--lock {
         width: 60%;
-        height: 35%;
-        font-size: 50px;
+        height: 52px !important;
+        font-size: 40px;
         pointer-events: none;
+        padding-left: 10px;
+        padding-right: 12px;
     }
 
     &--lock i {
@@ -158,7 +160,6 @@
 
 .game-card__image {
     min-height: 146px;
-    min-width: 146px;
 }
 
 @media only screen and (min-width: 336px){
