@@ -16,7 +16,6 @@ import { Geolocation, GeolocationService } from 'src/app/shared/services/geoloca
 import { FormValidations } from 'src/app/shared/utils';
 import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { SessionAlertModalComponent } from '../session-alert-modal/session-alert-modal.component';
 
 declare var xtremepush: any;
 
@@ -48,6 +47,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     resgister_cancel = false;
     googleUser;
     modalClose = true;
+    modalTerminateSession = false;
     private geolocation: Geolocation;
     loginMode = 'email';
 
@@ -217,10 +217,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     }
 
                     if (error.code === LoginErrorCode.ACTIVE_SESSION) {
-                        const modalRef = this.openModalSessioAlert();
-                        modalRef.componentInstance.confirmSessionTermination.subscribe(() => {
-                            this.terminateSessionAndLogin();
-                        });
+                        this.openModalSessionAlert();
                         return
                     }
                     this.handleError(error.message);
@@ -251,17 +248,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         );
     }
 
-    private openModalSessioAlert(): NgbModalRef {
-        this.activeModal.dismiss();
+    openModalSessionAlert() {
         this.modalClose = false;
-        const modalRef = this.modalService.open(SessionAlertModalComponent, {
-            ariaLabelledBy: 'modal-basic-title',
-            centered: true,
-            backdrop: 'static',
-            windowClass: 'modal-500'
-        });
-
-        return modalRef
+        this.modalTerminateSession = true;
     }
 
     getUsuario() {
@@ -286,11 +275,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         );
     }
 
-    private terminateSessionAndLogin() {
+    cancelTerminateSession() {
+        this.modalTerminateSession = false;
+        this.modalClose = true;
+    }
+
+    terminateSession() {
         const data = {
             username: this.form.value.username,
             password: this.form.value.password,
-            terminateSession: true
         };
 
         this.auth.login(data)
