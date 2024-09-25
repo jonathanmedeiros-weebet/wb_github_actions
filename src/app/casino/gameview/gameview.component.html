@@ -13,7 +13,7 @@
                 <button class="btn" id="deposit-btn" (click)="openDeposit()">Depositar</button> 
             </ng-container>
             <ng-container>
-                <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullScreenMob()"><i class="fa fa-expand"></i></a>
+                <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreenMob()"><i class="fa fa-expand"></i></a>
                 <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="exitFullscreenMob()"><i class="fa fa-compress"></i></a>
             </ng-container>
             <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a>
@@ -82,8 +82,8 @@
                     <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
             </ng-container>
             <ng-container *ngIf="isTablet">
-                <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
-                <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
+                <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreenTablet()"><i class="fa fa-expand"></i></a>
+                <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreenTablet()"><i class="fa fa-compress"></i></a>
         </ng-container>
             <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a>
         </div>

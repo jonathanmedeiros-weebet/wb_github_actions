@@ -6,13 +6,11 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService, HeadersService} from '../../services';
 import {interval, Subject} from 'rxjs';
-import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
     CadastroModalComponent,
-    CanceledBonusConfirmComponent,
     JogosLiberadosBonusModalComponent,
     LoginModalComponent,
-    RegrasBonusModalComponent
 } from "../../shared/layout/modals";
 import {takeUntil} from "rxjs/operators";
 import { Fornecedor } from '../wall/wall.component';
@@ -349,6 +347,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
                 response => {
+                    if (response['error']) {
+                        this.router.navigate(['/']);
+                    };
+
                     if (typeof response.gameUrl !== 'undefined') {
                         this.gameCategory = response.category;
                         this.gameFornecedor = response.fornecedor;
@@ -368,13 +370,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 },
                 error => {
                     this.handleError(error);
+                    this.router.navigate(['/']);
                 });
     }
 
     handleError(error: string) {
         this.messageService.error(error);
     }
-
+    
     back(): void {
         if(this.modalRef) {
             this.modalRef.close();
@@ -406,7 +409,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-
+        
         if (this.gameFornecedor === 'tomhorn') {
             this.closeSessionGameTomHorn();
         }
@@ -454,6 +457,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if (this.isMobile && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
+            this.disableHeaderOptions();
             this.enableHeader();
         }
     }
@@ -466,7 +470,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
-    openFullScreenMob() {
+    openFullscreenMob() {
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
         const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
         const optionsHeaderHeight = optionsHeader.getBoundingClientRect().height;
@@ -481,6 +485,46 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.adjustFloatingButtons();
         
         this.fullscreen = true;
+    }
+
+    openFullscreenTablet() {
+        if (this.elem.requestFullscreen) {
+            this.elem.requestFullscreen();
+        } else if (this.elem.mozRequestFullScreen) {
+            /* Firefox */
+            this.elem.mozRequestFullScreen();
+        } else if (this.elem.webkitRequestFullscreen) {
+            /* Chrome, Safari and Opera */
+            this.elem.webkitRequestFullscreen();
+        } else if (this.elem.msRequestFullscreen) {
+            /* IE/Edge */
+            this.elem.msRequestFullscreen();
+        }
+
+        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+
+        if (gameFrame.classList.contains('in-game')) {
+            this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
+        }
+
+        this.fullscreen = true;
+    }
+
+    closeFullscreenTablet() {
+        if (this.document.exitFullscreen) {
+            this.document.exitFullscreen();
+        } else if (this.document.mozCancelFullScreen) {
+            /* Firefox */
+            this.document.mozCancelFullScreen();
+        } else if (this.document.webkitExitFullscreen) {
+            /* Chrome, Safari and Opera */
+            this.document.webkitExitFullscreen();
+        } else if (this.document.msExitFullscreen) {
+            /* IE/Edge */
+            this.document.msExitFullscreen();
+        }
+
+        this.fullscreen = false;
     }
     
     toggleGameFrameStylesMob(gameFrame: any, optionsHeader: any, calculatedGameHeight: string) {
@@ -563,7 +607,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     openFullscreen() {
-
         if (this.elem.requestFullscreen) {
             this.elem.requestFullscreen();
         } else if (this.elem.mozRequestFullScreen) {
@@ -586,10 +629,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
         
         const gameView = this.el.nativeElement.querySelector('.game-view');
+        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
 
         if (gameView) {
             this.renderer.addClass(gameView, 'desktop-fullscreen');
             this.renderer.setStyle(gameView, 'padding', '0');
+        } 
+
+        if (gameFrame.classList.contains('in-game')) {
+            this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
         }
         
         const footer = this.el.nativeElement.querySelector('.main-footer');
@@ -625,40 +673,42 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.document.msExitFullscreen();
         }
 
-        if (!this.isTablet) {
-            this.enableHeader();
-    
-            const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
-            
-            const gameView = this.el.nativeElement.querySelector('.game-view');
-            const gameFrame = this.el.nativeElement.querySelector('.game-frame');
-    
-            if (gameView) {
-                this.renderer.removeClass(gameView, 'desktop-fullscreen');
+        this.enableHeader();
+
+        const optionsHeader = this.el.nativeElement.querySelector('.header-game-view');
+        
+        const gameView = this.el.nativeElement.querySelector('.game-view');
+        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+
+        if (gameView) {
+            this.renderer.removeClass(gameView, 'desktop-fullscreen');
+        }
+        
+        if (gameView && !gameFrame.classList.contains('in-game')) {
+            if (!this.isTablet) {
+                this.renderer.setStyle(optionsHeader, 'margin', '0 20px');
             }
-            
-            if (gameView && !gameFrame.classList.contains('in-game')) {
-                if (!this.isTablet) {
-                    this.renderer.setStyle(optionsHeader, 'margin', '0 20px');
-                }
-                this.renderer.setStyle(gameView, 'padding', '30px');
-            }
-    
-            const footer = this.el.nativeElement.querySelector('.main-footer');
-            const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
-            const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
-    
-            if (footer) {
-                this.renderer.setStyle(footer, 'display', 'block');
-            }
-    
-            if (blocoProvider) {
-                this.renderer.setStyle(blocoProvider, 'display', 'block');
-            }
-    
-            if (blocoRelatedGames) {
-                this.renderer.setStyle(blocoRelatedGames, 'display', 'block');
-            }
+            this.renderer.setStyle(gameView, 'padding', '30px');
+        }
+
+        if (gameFrame.classList.contains('in-game')) {
+            this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 170px)');
+        }
+
+        const footer = this.el.nativeElement.querySelector('.main-footer');
+        const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
+        const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
+
+        if (footer) {
+            this.renderer.setStyle(footer, 'display', 'block');
+        }
+
+        if (blocoProvider) {
+            this.renderer.setStyle(blocoProvider, 'display', 'block');
+        }
+
+        if (blocoRelatedGames) {
+            this.renderer.setStyle(blocoRelatedGames, 'display', 'block');
         }
 
         this.fullscreen = false;
@@ -698,25 +748,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         bodyScript.append('window.addEventListener("message",(e) => {const { type, mainDomain } = e.data; if(type === "rgs-backToHome") {window.location.href = mainDomain;}});');
         bodyScript.id = 'galaxsysScript';
         body.appendChild(bodyScript);
-    }
-
-    abriModal(){
-        const modalRef = this.modalService.open(
-            LoginModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350 modal-login',
-                centered: true,
-            }
-        );
-        modalRef.result.then(
-            (result) => {
-                if(result) {
-                    this.isLoggedIn = this.auth.isLoggedIn();
-                    this.getPosicaoFinanceira()
-                }
-            }
-        );
     }
 
     abrirCadastro(){
@@ -894,29 +925,29 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     private fixTabletAndDesktopScreen() {
-        console.log('table', this.isTablet);
-        console.log('mobie', this.isMobile);
-        console.log('desktp', this.isDesktop);
-        
-        
+        const gameView = this.el.nativeElement.querySelector('.game-view');
+        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+
         if (this.isTablet) {
-            const gameView = this.el.nativeElement.querySelector('.game-view');
-            const gameFrame = this.el.nativeElement.querySelector('.game-frame');
-            
-            console.log(gameView);
-            console.log(gameFrame);
-    
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
-                this.renderer.setStyle(gameView, 'padding', '0');
+                this.renderer.setStyle(gameView, 'padding-top', '50px');
                 this.renderer.setStyle(gameView, 'position', 'fixed');
             }
         }
 
-        if (!this.isTablet && this.isDesktop) {
+        if ((!this.isTablet  && this.isDesktop) && (gameView.classList.contains('in-game'))) {
+            if (gameFrame) {
+                this.renderer.setStyle(gameFrame, 'position', 'fixed');
+                this.renderer.setStyle(gameFrame, 'margin-top', '50px');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 180px)');
+            }
+        }
+
+        if ((!this.isTablet  && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
             const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
 
             if (headerOptions) {
-                this.renderer.setStyle(headerOptions, 'margin', '0 20px');
+                this.renderer.setStyle(headerOptions, 'margin', '0 18px');
             }
         }
     }
