@@ -47,7 +47,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     ngOnInit() {
         this.createForm();
 
-        if(this.isCliente) {
+        if (this.isCliente) {
             this.sidebarService.changeItens({contexto: 'cliente'});
         } else {
             this.sidebarService.changeItens({contexto: 'cambista'});
@@ -108,7 +108,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 codigo: this.codigoMultifator
             }
         }
-        
+
         if (this.isCliente) {
             this.clienteService.alterarSenha(values)
                 .pipe(takeUntil(this.unsub$))
@@ -153,7 +153,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 backdrop: 'static'
             }
         );
- 
+
         modalref.componentInstance.senha = this.form.get('senha_atual').value;
         modalref.result.then(
             (result) => {

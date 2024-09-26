@@ -9,6 +9,8 @@ import * as moment from 'moment';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FutebolJogoComponent} from '../jogo/futebol-jogo.component';
 
+import { FOOTBALL_ID } from '../../../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-futebol-default-wrapper',
     templateUrl: 'futebol-default-wrapper.component.html',
@@ -110,14 +112,14 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     if (params['regiao_nome']) {
                         queryParams = {
                             odds: this.oddsPrincipais,
-                            campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(1),
+                            campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID),
                             data_final: dataLimiteTabela,
                             regiao_nome: params['regiao_nome']
                         };
                     } else {
                         queryParams = {
-                            'sport_id': 1,
-                            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(1),
+                            'sport_id': FOOTBALL_ID,
+                            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID),
                             'ligas_populares': this.ligasPopulares,
                             'odds': this.oddsPrincipais
                         };
@@ -174,7 +176,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
 
                                 this.campeonatos = this.campeonatos.filter(campeonato => {
                                     const jogosAtivos = campeonato.jogos.filter(jogo => !this.jogosBloqueados.includes(jogo.event_id));
-                                    if (jogosAtivos.length > 0) {
+                                    const jogosComOdds = campeonato.jogos.filter(jogo => jogo.cotacoes.length > 0);
+                                    if (jogosAtivos.length > 0 && jogosComOdds.length > 0) {
                                         return campeonato;
                                     }
                                 });
@@ -193,10 +196,10 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     getCampeonatos2Sidebar() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(1);
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID);
         const opcoes = this.paramsService.getOpcoes();
         const params = {
-            'sport_id': 1,
+            'sport_id': FOOTBALL_ID,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'data_final': opcoes.data_limite_tabela,
         };

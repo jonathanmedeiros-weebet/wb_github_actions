@@ -25,6 +25,10 @@ const routes: Routes = [{
             loadChildren: () => import('./financeiro/financeiro.module').then(f => f.FinanceiroModule)
         },
         {
+            path: 'carteira',
+            loadChildren: () => import('./carteira/carteira.module').then(f => f.Carteira)
+        },
+        {
             path: 'apostas',
             loadChildren: () => import('./apostas-cliente/apostas-cliente.module').then(a => a.ApostasClienteModule)
         },
@@ -53,6 +57,10 @@ const routes: Routes = [{
             path: 'indique-ganhe',
             loadChildren: () => import('./indique-ganhe/indique-ganhe.module').then(i => i.IndiqueGanheModule),
             canActivate: [IndiqueGanheGuard]
+        },
+        {
+            path: 'cashback',
+            loadChildren: () => import('./cashback/cashback.module').then(i => i.CashbackModule)
         },
         {
             path: 'rodada-gratis',
