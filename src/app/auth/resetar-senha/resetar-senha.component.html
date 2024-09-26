@@ -6,7 +6,7 @@
             <h2>{{'geral.resetarSenha' | translate}}</h2>
         </div>
         <div class="content-body">
-            <div class="content" *ngIf="!reconhecimentoFacialRedefinicaoSenha || reconhecimentoFacialRedefinicaoSenhaValidado">
+            <div class="content" *ngIf="!faceMatchResetPasswordEnabled || faceMatchChangePasswordValidated">
                 <div class="row">
                     <div class="col col-md-12">
                         <h2>{{'senhas.redefinirSenha' | translate}}</h2>
@@ -113,7 +113,7 @@
                     </div>
                 </form>
             </div>
-            <div #legitimuz id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && reconhecimentoFacialRedefinicaoSenha && !reconhecimentoFacialRedefinicaoSenhaValidado && !verifiedIdentity">
+            <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && faceMatchResetPasswordEnabled && !faceMatchChangePasswordValidated && !verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
@@ -127,7 +127,7 @@
                 </div>
                 <div id="legitimuz-root"></div>
             </div>
-            <div #legitimuzLiveness id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && reconhecimentoFacialRedefinicaoSenha && !reconhecimentoFacialRedefinicaoSenhaValidado && verifiedIdentity">
+            <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && faceMatchResetPasswordEnabled && !faceMatchChangePasswordValidated && verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}

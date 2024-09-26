@@ -7,7 +7,7 @@
             <h2>{{'geral.alterarSenha' | translate}}</h2>
         </div>
         <div class="content-body">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate *ngIf="reconhecimentoFacialAlteracaoSenhaValidado">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate *ngIf="faceMatchChangePasswordValidated">
                 <div class="row">
                     <div class="col-md-2">
                         <label >
@@ -112,7 +112,7 @@
                 </button>
             </div>
             </form>
-            <div #legitimuz id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && reconhecimentoFacialAlteracaoSenha && !reconhecimentoFacialAlteracaoSenhaValidado && !verifiedIdentity">
+            <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && faceMatchChangePassword && !faceMatchChangePasswordValidated && !verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
@@ -126,7 +126,7 @@
                 </div>
                 <div id="legitimuz-root"></div>
             </div>
-            <div #legitimuzLiveness id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && reconhecimentoFacialAlteracaoSenha && !reconhecimentoFacialAlteracaoSenhaValidado && verifiedIdentity">
+            <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && faceMatchChangePassword && !faceMatchChangePasswordValidated && verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}

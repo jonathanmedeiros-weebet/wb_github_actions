@@ -31,9 +31,9 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     private codigoMultifator: string;
     currentLanguage = 'pt';
     cliente: Cliente;
-    reconhecimentoFacialEnabled = false;
-    reconhecimentoFacialAlteracaoSenha = false;
-    reconhecimentoFacialAlteracaoSenhaValidado = false;
+    faceMatchEnabled = false;
+    faceMatchChangePassword = false;
+    faceMatchChangePasswordValidated = false;
     legitimuzToken = "";
     unsubLegitimuz$ = new Subject();
     verifiedIdentity = false;
@@ -80,24 +80,21 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
-        this.reconhecimentoFacialAlteracaoSenha = Boolean(this.paramsLocais.getOpcoes().reconhecimentoFacialAlteracaoSenha && this.legitimuzToken);
-        console.log(this.verifiedIdentity)
-        console.log(this.reconhecimentoFacialEnabled)
-        console.log(this.reconhecimentoFacialAlteracaoSenha)
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken);
+        this.faceMatchChangePassword = Boolean(this.paramsLocais.getOpcoes().faceMatchChangePassword && this.legitimuzToken);
 
-        if (!this.reconhecimentoFacialAlteracaoSenha) {
-            this.reconhecimentoFacialAlteracaoSenhaValidado = true
+        if (!this.faceMatchChangePassword) {
+            this.faceMatchChangePasswordValidated = true;
         }
         
 
-        if (this.reconhecimentoFacialEnabled) {
+        if (this.faceMatchEnabled) {
             this.token = this.auth.getToken();
         }
 
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
-            if (this.reconhecimentoFacialEnabled) {
+            if (this.faceMatchEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
         });   
@@ -115,9 +112,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 }
             
             );
-            if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
+            if (this.faceMatchEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
                 this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
-                        console.log(curCustomerIsVerified)
                         this.verifiedIdentity = curCustomerIsVerified;
                         this.cd.detectChanges();
                         if (this.verifiedIdentity) {
@@ -126,14 +122,13 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                         }
                     });
                 this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                    console.log('Faceindex Validado');
-                    this.reconhecimentoFacialAlteracaoSenhaValidado = faceIndex;
+                    this.faceMatchChangePasswordValidated = faceIndex;
                     this.LegitimuzFacialService.closeModal();
                 })
             }   
     }
     ngAfterViewInit() {
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
@@ -266,6 +261,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         );
     }
     toogleValidado() {
-        this.reconhecimentoFacialAlteracaoSenhaValidado = !this.reconhecimentoFacialAlteracaoSenhaValidado;
+        this.faceMatchChangePasswordValidated = !this.faceMatchChangePasswordValidated;
     }
     }

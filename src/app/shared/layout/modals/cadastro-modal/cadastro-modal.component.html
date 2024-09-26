@@ -22,7 +22,7 @@
                                    formControlName="cpf"
                                    [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
                                    inputmode="numeric"
-                                   [readonly]="(reconhecimentoFacialEnabled && reconhecimentoFacialCadastro && reconhecimentoFacialCadastroValidado === true)">
+                                   [readonly]="faceMatchRequested">
                             <label for="cpf">{{'geral.cpf' | translate}}</label>
                         </div>
 
@@ -138,14 +138,14 @@
                     </div>
                 </div>
             </div>
-            <div #legitimuz id="legitimuz-container" *ngIf="reconhecimentoFacialEnabled && !reconhecimentoFacialCadastroValidado">
+            <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchRegisterValidated">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                     </div>
                     <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
                     <input type="hidden" id="legitimuz-ref-id" [value]="token">
-                    <button (click)="printTeste()" id="legitimuz-action-verify" class="btn btn-custom btn-legitimuz" *ngIf="!disapprovedIdentity">
+                    <button (click)="faceMatch()" id="legitimuz-action-verify" class="btn btn-custom btn-legitimuz" *ngIf="!disapprovedIdentity" [disabled]="faceMatchRequested">
                         <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                     </button>
@@ -215,7 +215,7 @@
             <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
 
             <div class="col-12">
-                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="reconhecimentoFacialEnabled && !reconhecimentoFacialCadastroValidado">{{'geral.cadastrar' | translate}}</button>
+                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="faceMatchEnabled && !faceMatchRegisterValidated">{{'geral.cadastrar' | translate}}</button>
             </div>
             <div class="login">
                 {{'geral.jaPossuiUmaConta' | translate}}

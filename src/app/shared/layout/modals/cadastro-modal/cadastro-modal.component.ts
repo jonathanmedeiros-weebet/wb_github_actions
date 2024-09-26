@@ -64,10 +64,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
 
-    verifiedIdentity = false
-    reconhecimentoFacialEnabled = false
-    reconhecimentoFacialCadastro = false
-    reconhecimentoFacialCadastroValidado = false;
+    verifiedIdentity = false;
+    faceMatchEnabled = false;
+    faceMatchRegister = false;
+    faceMatchRegisterValidated = false;
     legitimuzToken = "";
     currentLanguage = 'pt';
     unsubLegitimuz$ = new Subject();
@@ -75,6 +75,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     token = '';
     dataUserCPF ='';
     showLoading = true;
+    faceMatchRequested = false;
     
 
     
@@ -99,33 +100,22 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     ) {
         super();
     }
-    printTeste(){
-        console.log("Disaprove identity",this.disapprovedIdentity)
-        console.log("Reconhecimento Facial",this.reconhecimentoFacialEnabled)
-        console.log("token",this.token)
-        console.log("Cpf Cliente",this.dataUserCPF)
-        console.log("Legitimnuz Token",this.legitimuzToken)
-    }
 
     ngOnInit() {
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramsService.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
-        this.reconhecimentoFacialCadastro = Boolean(this.paramsService.getOpcoes().reconhecimentoFacialCadastro === true);
+        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken);
+        this.faceMatchRegister = Boolean(this.paramsService.getOpcoes().faceMatchRegister === true);
 
-        if (this.reconhecimentoFacialEnabled === true && this.reconhecimentoFacialCadastro === true) {
-            this.reconhecimentoFacialEnabled = true;
+        if (this.faceMatchEnabled === true && this.faceMatchRegister === true) {
+            this.faceMatchEnabled = true;
         } else {
-            this.reconhecimentoFacialCadastroValidado = true;
+            this.faceMatchRegisterValidated = true;
         }
-        console.log('ReconhecimentoFacialCadastro:',this.paramsService.getOpcoes().reconhecimentoFacialCadastro)
-        console.log('Reconhecimento facial ativo:',this.reconhecimentoFacialEnabled);  
-        console.log('Reconhecimento facial validado:',this.reconhecimentoFacialCadastroValidado);  
-        console.log('Reconhecimento facial Cadastro:',this.reconhecimentoFacialCadastro);  
  
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
-            if (this.reconhecimentoFacialEnabled) {
+            if (this.faceMatchEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
         });   
@@ -242,11 +232,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 );
         }
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
-                    console.log(curCustomerIsVerified)
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
@@ -254,18 +243,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         this.messageService.success('Identidade verificada!');
                     }
                 });
-            this.legitimuzService.faceIndex.faceIndex.subscribe(faceIndex => {
-                    this.reconhecimentoFacialCadastroValidado = faceIndex;
+            this.legitimuzService.faceIndex.subscribe(faceIndex => {
+                    this.faceMatchRegisterValidated = faceIndex;
                     console.log('Faceindex Validado');
                 });
-            // this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-            //     this.reconhecimentoFacialRedefinicaoSenhaValidado = faceIndex;
-            //     console.log('Faceindex Validado');
-            // })
         }   
 
       
-            if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+            if (this.faceMatchEnabled && !this.disapprovedIdentity) {
               this.form.get('cpf')?.valueChanges.subscribe(value => {
                   this.legitimuzService.init();
                   this.legitimuzService.mount();  
@@ -546,7 +531,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         event.preventDefault();
     }
 
-    
+    faceMatch(){
+        this.faceMatchRequested = true;
+        this.cd.detectChanges();
+        console.log(this.faceMatchRequested);
+    }
 
     
 }

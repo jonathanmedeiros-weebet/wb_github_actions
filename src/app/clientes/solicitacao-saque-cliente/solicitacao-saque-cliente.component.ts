@@ -56,9 +56,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     isMobile = false;
     permitirQualquerChavePix = false;
     submitting;
-    reconhecimentoFacialEnabled = false;
-    reconhecimentoFacialPrimeiroSaque = false;
-    reconhecimentoFacialPrimeiroSaqueValidado = false;
+    faceMatchEnabled = false;
+    faceMatchFirstWithdraw = false;
+    faceMatchFirstWithdrawValidated = false;
     legitimuzToken = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
@@ -101,18 +101,18 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.currentLanguage = this.translate.currentLang;
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramsLocais.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
-        this.reconhecimentoFacialPrimeiroSaque = Boolean(this.paramsLocais.getOpcoes().reconhecimentoFacialPrimeiroSaque && this.legitimuzToken);
-        if (!this.reconhecimentoFacialEnabled && !this.reconhecimentoFacialPrimeiroSaque) {
-            this.reconhecimentoFacialPrimeiroSaqueValidado = true;
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken);
+        this.faceMatchFirstWithdraw = Boolean(this.paramsLocais.getOpcoes().faceMatchFirstWithdraw && this.legitimuzToken);
+        if (!this.faceMatchEnabled && !this.faceMatchFirstWithdraw) {
+            this.faceMatchFirstWithdrawValidated = true;
         }
-        if (this.reconhecimentoFacialEnabled && this.reconhecimentoFacialPrimeiroSaque) {
+        if (this.faceMatchEnabled && this.faceMatchFirstWithdraw) {
             this.token = this.auth.getToken();
         }
 
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
-            if (this.reconhecimentoFacialEnabled) {
+            if (this.faceMatchEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
         });
@@ -181,7 +181,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.reconhecimentoFacialEnabled && this.reconhecimentoFacialPrimeiroSaque && !this.disapprovedIdentity && !this.verifiedIdentity) {
+        if (this.faceMatchEnabled && this.faceMatchFirstWithdraw && !this.disapprovedIdentity && !this.verifiedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -193,15 +193,14 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     }
                 });
             this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                console.log('Faceindex Validado');
-                this.reconhecimentoFacialPrimeiroSaqueValidado = faceIndex;
+                this.faceMatchFirstWithdrawValidated = faceIndex;
                 this.LegitimuzFacialService.closeModal();
             })
         }
     }
 
     ngAfterViewInit() {
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {

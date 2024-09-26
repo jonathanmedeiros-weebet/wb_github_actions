@@ -83,8 +83,8 @@ export class ClienteService {
             );
     }
 
-    getReconhecimentoFacialCliente(id) {
-        return this.http.get(`${this.clienteUrl}/getReconhecimentoFacialCliente/${id}`, this.headers.getRequestOptions(true))
+    getFaceMatchClient(id) {
+        return this.http.get(`${this.clienteUrl}/getFaceMatchClient/${id}`, this.headers.getRequestOptions(true))
             .pipe(             
                 map((res: any) => { return res.results}), (error => {
                     return error}),

@@ -34,10 +34,10 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     public mostrarSenhaConfirmar: boolean = false;
     public indiqueGanheRemovido: boolean = false;
     private unsub$: Subject<any> = new Subject();
-    verifiedIdentity = false
-    reconhecimentoFacialEnabled = true
-    reconhecimentoFacialRedefinicaoSenha = false
-    reconhecimentoFacialRedefinicaoSenhaValidado = false;
+    verifiedIdentity = false;
+    faceMatchEnabled = true;
+    faceMatchResetPasswordEnabled = false;
+    faceMatchChangePasswordValidated = false;
     
     legitimuzToken = "";
     dataUserCPF: string;
@@ -87,13 +87,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         return this.step === RecoveryStep.TWO_STEP;
     }
 
-    printTeste(){
-        console.log("Disaprove identity",this.disapprovedIdentity)
-        console.log("Reconhecimento Facial",this.reconhecimentoFacialEnabled)
-        console.log("token",this.token)
-        console.log("Cpf Cliente",this.dataUserCPF)
-        console.log("Legitimnuz Token",this.legitimuzToken)
-    }
 
     ngOnInit() {
         this.currentLanguage = this.translate.currentLang;
@@ -101,7 +94,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
        
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
-            if (this.reconhecimentoFacialEnabled) {
+            if (this.faceMatchEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
         });   
@@ -114,7 +107,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                     this.form.get('verificacao').patchValue(params.codigo);
                     this.authService.getUserResetPassword({verificacao:params.codigo, token:params.token}).subscribe({ 
                         next: (res) => {
-                            this.clienteService.getReconhecimentoFacialCliente(res.results.id).subscribe({
+                            this.clienteService.getFaceMatchClient(res.results.id).subscribe({
                                 next: (res) => {
                                 if (res.verifiedIdentity == null) {
                                     this.dataUserCPF = res.cpf;
@@ -145,11 +138,11 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         });
 
         this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
-        this.reconhecimentoFacialEnabled = Boolean(this.paramLocais.getOpcoes().reconhecimentoFacial && this.legitimuzToken);
-        this.reconhecimentoFacialRedefinicaoSenha = Boolean(this.paramLocais.getOpcoes().reconhecimentoFacialRedefinicaoSenha && this.legitimuzToken);
+        this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.legitimuzToken);
+        this.faceMatchResetPasswordEnabled = Boolean(this.paramLocais.getOpcoes().faceMatchResetPasswordEnabled && this.legitimuzToken);
 
-        if (!this.reconhecimentoFacialEnabled && !this.reconhecimentoFacialRedefinicaoSenha) {
-            this.reconhecimentoFacialRedefinicaoSenhaValidado = true;
+        if (!this.faceMatchEnabled && !this.faceMatchResetPasswordEnabled) {
+            this.faceMatchChangePasswordValidated = true;
         }
         
         this.layout
@@ -159,9 +152,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.indiqueGanheRemovido = statusIndiqueGanhe;
             });
         
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
-                    console.log(curCustomerIsVerified)
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
@@ -170,8 +162,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                     }
                 });
             this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                console.log('Faceindex Validado');
-                this.reconhecimentoFacialRedefinicaoSenhaValidado = faceIndex;
+                this.faceMatchChangePasswordValidated = faceIndex;
                 this.LegitimuzFacialService.closeModal();
             })
         }   
@@ -249,7 +240,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngAfterViewInit() {
-        if (this.reconhecimentoFacialEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
                 .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
