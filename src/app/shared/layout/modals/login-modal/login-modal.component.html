@@ -1,4 +1,4 @@
-<div *ngIf="modalClose">
+<div *ngIf="showModalLogin">
     <div class="modal-header">
         <img class="logo-modal" [src]="LOGO" alt="">
         <a type="button" class="btn-close" aria-label="Close" (click)="toClose()">
@@ -67,7 +67,7 @@
     </div>
 </div>
 
-<div class="modal" *ngIf="modalTerminateSession">
+<div class="modal" *ngIf="showModalTerminateSession">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header-he">
@@ -80,7 +80,7 @@
                 <p>{{'geral.session_alert_message' | translate}}</p>
             </div>
             <div class="modal-footer-he">
-                <button type="button" class="btn btn-custom btn-block btn-terminate" (click)="terminateSession()">{{'botoes.logout_continue_login' | translate}}</button>
+                <button type="button" class="btn btn-custom btn-block btn-terminate" (click)="handleLogin()">{{'botoes.logout_continue_login' | translate}}</button>
                 <button type="button" class="btn btn-secondary btn-cancel" (click)="cancelTerminateSession()">{{'botoes.remain_active_session' | translate}}</button>
             </div>
         </div>

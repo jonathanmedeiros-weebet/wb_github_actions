@@ -46,8 +46,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     loginGoogle = false;
     resgister_cancel = false;
     googleUser;
-    modalClose = true;
-    modalTerminateSession = false;
+    showModalLogin: Boolean = true;
+    showModalTerminateSession: Boolean = false;
     private geolocation: Geolocation;
     loginMode = 'email';
 
@@ -181,30 +181,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     }
 
                     this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                    const data = {
-                        ...this.form.value,
-                        cookie: this.auth.getCookie(this.usuario.cookie),
-                        geolocation: this.geolocation
-                    };
-
-                    this.auth.login(data)
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            () => {
-                                this.getUsuario();
-                                if (this.usuario.tipo_usuario === 'cliente') {
-                                    if(this.xtremepushHabilitado()){
-                                        xtremepush('event', 'login');
-                                    }
-                                    this.loginService.triggerEvent();
-                                } else {
-                                    location.reload();
-                                }
-                                this.activeModal.dismiss();
-                                this.xtremepushBackgroundRemove();
-                            },
-                            error => this.handleError(error)
-                        );
+                    this.handleLogin();
                 },
                 (error) => {
                     if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
@@ -249,8 +226,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     openModalSessionAlert() {
-        this.modalClose = false;
-        this.modalTerminateSession = true;
+        this.showModalLogin = false;
+        this.showModalTerminateSession = true;
     }
 
     getUsuario() {
@@ -276,14 +253,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     cancelTerminateSession() {
-        this.modalTerminateSession = false;
-        this.modalClose = true;
+        this.showModalTerminateSession = false;
+        this.showModalLogin = true;
     }
 
-    terminateSession() {
+    handleLogin() {
         const data = {
-            username: this.form.value.username,
-            password: this.form.value.password,
+            ...this.form.value,
+                cookie: this.auth.getCookie(this.usuario.cookie),
+                geolocation: this.geolocation
         };
 
         this.auth.login(data)
