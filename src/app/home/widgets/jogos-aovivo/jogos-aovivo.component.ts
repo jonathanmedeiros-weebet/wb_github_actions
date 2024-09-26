@@ -199,7 +199,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
 
                 let valido = true;
 
-                if (jogo.sport_id && jogo.sport_id !== 1) {
+                if (jogo.sport_id && jogo.sport_id !== FOOTBALL_ID) {
                     valido = false;
                 }
 
