@@ -132,9 +132,6 @@ export class AuthService {
                     }
 
                     this.logadoSource.next(true);
-                    if (data.casino === undefined) {
-                        this.router.navigate(['esportes/futebol/jogos']);
-                    }
                 }),
                 catchError(this.errorService.handleError)
             );
@@ -144,7 +141,7 @@ export class AuthService {
         const token = this.getToken();
         const user = this.getUser();
 
-        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token, lang }, this.header.getRequestOptions())
+        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token, lang }, this.header.getRequestOptions(true))
             .pipe(
                 map(res => {
                     localStorage.setItem('tokenBetby', res.token);

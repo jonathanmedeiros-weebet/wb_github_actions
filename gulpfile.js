@@ -2889,3 +2889,30 @@ gulp.task('tigre.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('mailing.bet', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "mailing.bet",
+        banca: "MAILING.BET",
+        styles: "",
+    });
+});
+
+gulp.task('bocamafra.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bocamafra.bet",
+        banca: "BOCAMAFRA.BET",
+        styles: "",
+    });
+});
+
+gulp.task('sortte.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "sortte.bet",
+        banca: "SORTTE.BET",
+        styles: "",
+    });
+});

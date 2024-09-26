@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import {UntypedFormBuilder, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
@@ -15,6 +15,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { FormValidations } from 'src/app/shared/utils';
 import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
+import { LoginService } from 'src/app/shared/services/login.service';
 
 declare var xtremepush: any;
 
@@ -44,6 +45,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     resgister_cancel = false;
     googleUser;
     private geolocation: Geolocation;
+    loginMode = 'email';
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -54,7 +56,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private socialAuth: SocialAuthService,
         private router: Router,
         private modalService: NgbModal,
-        private geolocationService: GeolocationService
+        private geolocationService: GeolocationService,
+        private loginService: LoginService,
     ) {
         super();
     }
@@ -118,8 +121,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             username: [''],
             password: [''],
             googleId: [''],
-            googleIdToken: ['']
+            googleIdToken: [''],
+            loginMode: ['email']
         });
+    }
+
+    setLoginMode(mode: 'email' | 'phone') {
+        this.form.get('loginMode').setValue(mode);
+        this.loginMode = mode;
+        this.form.get('username').reset();
     }
 
     ngOnDestroy() {
@@ -131,7 +141,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     submit() {
-        this.auth.verificaDadosLogin(this.form.value)
+
+        const formData = this.form.value;
+
+        if (this.loginMode === 'phone') {
+            formData.username = formData.username.replace(/\s+/g, '');
+        }
+
+        this.auth.verificaDadosLogin(formData)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (res) => {
@@ -174,6 +191,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                                     if(this.xtremepushHabilitado()){
                                         xtremepush('event', 'login');
                                     }
+                                    this.loginService.triggerEvent();
                                 } else {
                                     location.reload();
                                 }
