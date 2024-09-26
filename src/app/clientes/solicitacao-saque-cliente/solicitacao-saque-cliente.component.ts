@@ -126,7 +126,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.auth.getPosicaoFinanceira()
             .subscribe(
                 posicaoFinanceira => {
-                    this.saldo = posicaoFinanceira.saldo;
+                    this.saldo = posicaoFinanceira.saldo - posicaoFinanceira.saldoBloqueado;
                     if (posicaoFinanceira.saldo == 0) {
                         this.disableButton = true;
                     }
@@ -396,9 +396,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                             this.messageService.warning('Algo não saiu muito bem. Tente novamente mais tarde.');
                             this.router.navigate(['/']);
                         }
-                    )                    
+                    )
                 },
-                (reason) => { 
+                (reason) => {
                     this.messageService.warning('Você não aceitou os termos de uso. Você será redirecionado para a página inicial.');
                     this.router.navigate(['/']);
                 }

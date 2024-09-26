@@ -23,6 +23,7 @@
         "solicitarSaque": "Solicitar retiro",
         "dashboard": "Tablero",
         "financeiro": "Financiero",
+        "carteira": "Cartera",
         "validacao": "Validación",
         "apuracao": "Evaluación",
         "aposta": "Apuesta",
@@ -245,7 +246,9 @@
         "alteracoesSucesso": "¡Cambios realizados con éxito!",
         "erroInesperado": "Algo inesperado ocurrió. Inténtalo de nuevo más tarde.",
         "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
-        "resetarSenha": "Reiniciar a senha"
+        "resetarSenha": "Reiniciar a senha",
+        "loginEmail": "Correo electrónico",
+        "loginPhone": "Teléfono"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
@@ -658,5 +661,13 @@
         "concluida":"Terminado",
         "cancelada":"Cancelado",
         "premio": "Premio"
+    },
+    "cashback": {
+        "cashback": "Devolución de dinero",
+        "description": "Descripción",
+        "registrationDate": "Fecha de registro",
+        "pending": "Pendiente",
+        "redeemed": "Canjeado",
+        "redeem": "Canjear"
     }
 }
