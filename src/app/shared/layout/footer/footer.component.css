@@ -202,9 +202,3 @@ footer {
         margin-bottom: 4px;
     }
 }
-
-@media screen and (min-width: 1024px) {
-    .toTop {
-        right: 400px;
-    }
-}

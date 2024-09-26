@@ -48,7 +48,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
     slug: string;
     sharedUrl: string;
     linkYoutube;
-    isVisible;
+    isToTopBtnVisible;
 
     constructor(
         private authService: AuthService,
@@ -131,11 +131,19 @@ export class FooterComponent implements OnInit, AfterViewInit {
         }
 
         this.container.addEventListener('scroll', this.onScroll.bind(this));
+        const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
+
+        if (bilheteContainer) {
+            const toTopElement = document.querySelector('.toTop') as HTMLElement;
+            if(toTopElement){
+                toTopElement.style.right = `calc(20px + ${bilheteContainer.clientWidth}px)`;
+            }
+        }
     }
     
     onScroll() {
         const target = this.container;
-        this.isVisible = target.scrollTop > 100;
+        this.isToTopBtnVisible = target.scrollTop > 50;
     }
     
     scrollToTop() {
