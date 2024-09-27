@@ -133,7 +133,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.container.addEventListener('scroll', this.onScroll.bind(this));
         const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
 
-        if (bilheteContainer) {
+        if (bilheteContainer && !this.isMobile) {
             const toTopElement = document.querySelector('.toTop') as HTMLElement;
             if(toTopElement){
                 toTopElement.style.right = `calc(20px + ${bilheteContainer.clientWidth}px)`;
