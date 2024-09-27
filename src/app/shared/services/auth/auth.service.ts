@@ -319,17 +319,10 @@ export class AuthService {
         localStorage.removeItem('app-mobile');
     }
 
-    isExpired(): boolean {
+    isExpired() {
         const expires = localStorage.getItem('expires');
-
         // +expired converte a string para inteiro
-        if (moment(+expires).isBefore(new Date())) {
-            if (moment(+expires).isBefore(new Date())) {
-                this.performLogout('expired session');
-                return true;
-            }
-            return false;
-        }
+        return moment(+expires).isBefore(new Date());
     }
 
     getPosicaoFinanceira() {

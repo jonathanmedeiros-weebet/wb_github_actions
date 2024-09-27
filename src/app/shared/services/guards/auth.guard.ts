@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         if (this.auth.isExpired()) {
-            this.router.navigate(['/']);
+            this.auth.performLogout('expired session');
             return false;
         }
 
