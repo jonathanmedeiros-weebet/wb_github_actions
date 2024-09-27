@@ -66,7 +66,7 @@
             @focus="handleInitializeBetValue"
           >
             <template #icon>
-              <span style="color: #ffffff80;">R$</span>
+              <span style="color: var(--foreground-inputs-odds);">R$</span>
             </template>
           </w-input>
         </div>
@@ -381,6 +381,13 @@ export default {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    color: #ffff;
+    color: var(--foreground-header);
+  }
+
+  &__text {
+    color: #ffff;
+    color: var(--foreground-header);
   }
 
   &__delete {
@@ -404,7 +411,9 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative; 
-  
+  color: #ffff;
+  color: var(--foreground-header);
+
   &::after { 
     content: '';
     position: absolute;

@@ -41,6 +41,7 @@ export default {
         top: -5px;
         right: -5px;
         background-color: #0be58e;
+        background-color: var(--highlight);
         color: #181818;
         padding: 2px 6px;
         border-radius: 50%;

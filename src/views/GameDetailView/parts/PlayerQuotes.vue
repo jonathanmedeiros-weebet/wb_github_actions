@@ -234,11 +234,12 @@ export default {
     &__item {
         display: flex;
         gap: 5px;
+        
     }
 }
 
 ::v-deep .collapse__item {
-    background: var(--background);
+    background: var(--game);
     padding: 13px 24px;
 }
 </style>

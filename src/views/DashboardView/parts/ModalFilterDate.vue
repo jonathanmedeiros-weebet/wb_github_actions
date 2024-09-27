@@ -76,6 +76,7 @@ export default {
 .modal-modalities {
     &__title {
         color: #FFFFFF80;
+        color: var(--foreground-inputs-odds);
         font-size: 16px;
         font-weight: 500;
     }
@@ -93,8 +94,9 @@ export default {
         align-items: center;
         justify-content: center;
         color: #ffffff;
-        color: var(--foreground-header);
+        color: var(--foreground-inputs-odds);
         font-size: 16px;
+        
         font-weight: 400;
         padding-bottom: 20px;
     }

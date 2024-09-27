@@ -455,17 +455,16 @@ export default {
 
   &__add {
     display: flex;
-    width: calc(50%/3 - 8px);
+    width: calc(16.6666666667% - 8px);
     padding: 18px;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
     background: var(--inputs-odds);
-    color: #ffffff80;
-    color: var(--background);
+    color: rgba(255, 255, 255, 0.5019607843);
+    color: var(--foreground-inputs-odds);
     font-size: 14px;
-    border: none; 
-    margin-right: 8px;
+    margin-right: 8px
   }
 
   &__balance-input{

@@ -139,6 +139,7 @@ export default {
     useHexColors() {
       const color = isAndroid5() ? '#fffff80' : 'var(--foreground-inputs-odds)';
       return color;
+      
     }
   }
 }
@@ -197,6 +198,7 @@ input {
   &__icon {
     display: flex;
     align-items: center;
+
   }
 
   &__icon__right {

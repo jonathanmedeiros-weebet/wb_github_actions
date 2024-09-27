@@ -84,7 +84,7 @@ export default {
     color: #ffffff;
     color: var(--foreground-league);
     background: #181818;
-    background: var(--inputs-odds);
+    background: var(--game);
   }
 }
 

@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             collapsed: this.initCollapsed,
-            iconColor: 'var(--highlight)'
+            iconColor: 'var(--foreground-sidebars)'
         }
     },
     computed: {

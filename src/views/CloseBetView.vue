@@ -114,7 +114,7 @@
               :disabled="buttonDisable"
             >
               <template #icon-left>
-                <IconShare :size="20"/>
+                <IconShare :size="20" color="var(--foreground-league)"/>
               </template>
             </w-button>
             <div class="button-spacer"></div>
@@ -125,7 +125,7 @@
               :disabled="buttonDisable"
             >
               <template #icon-left>
-                <IconPrinter :size="20"/>
+                <IconPrinter :size="20" color="var(--foreground-highlight)"/>
               </template>
             </w-button>
           </template>
@@ -390,7 +390,7 @@ export default {
     padding: 19px 15px;
     width: 100%;
     background: #181818;
-    background: var(--inputs-odds);
+    background: var(--game);
     border-radius: 2px;
   }
 }
@@ -402,7 +402,7 @@ export default {
   &__text {
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground-league);
   }
   &__date {
     color: #ffffff80;
@@ -437,7 +437,7 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground-league);
   }
 
   &__strikethrough {

@@ -610,4 +610,9 @@ export default {
 .button-spacer {
   width: 10px; 
 }
+#btn-view,
+#btn-cancel {
+  color: var(--foreground-header);
+}
+
 </style>
