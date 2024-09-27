@@ -170,11 +170,17 @@ export class AuthService {
             next: (response) => {
                 this.limparStorage();
                 window.location.reload();
+                if (this.xtremepushHabilitado()) {
+                    this.cleanXtremepushNotifications();
+                }
             },
             error: (error) => {
                 if (error.status === 401) {
                     this.limparStorage();
                     window.location.reload();
+                    if (this.xtremepushHabilitado()) {
+                        this.cleanXtremepushNotifications();
+                    }
                 }
             }
         });
