@@ -41,7 +41,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     mostrarSenha = false;
     authDoisFatoresHabilitado;
     modoClienteHabilitado;
-    AllowOnlyOneSessionPerLoginEnabled;
     LOGO = config.LOGO;
     loginGoogle = false;
     resgister_cancel = false;
@@ -77,7 +76,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.createForm();
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
         this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
-        this.AllowOnlyOneSessionPerLoginEnabled = this.paramsLocais.getAllowOnlyOneSessionPerLogin();
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -260,8 +258,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     handleLogin() {
         const data = {
             ...this.form.value,
-                cookie: this.auth.getCookie(this.usuario.cookie),
-                geolocation: this.geolocation
+            cookie: this.auth.getCookie(this.usuario.cookie),
+            geolocation: this.geolocation
         };
 
         this.auth.login(data)
