@@ -27,7 +27,7 @@
                     <ng-container *ngIf="campeonatoPermitido(campeonato.value._id)">
                         <div class="header">
                             <span class="flag-icon flag-icon-{{campeonato.value.regiao_sigla}} flag-icon-squared"></span>
-                            <span class="campeonato-nome">{{campeonato.value.nome}}</span>
+                            <span class="campeonato-nome">{{campeonato.value.regiao | uppercase}}: {{campeonato.value.nome}}</span>
                         </div>
                         <div class="jogos">
                             <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
