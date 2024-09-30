@@ -1,6 +1,7 @@
 import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
 import {BannerService, MessageService} from '../../../services';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import {filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-banners',
@@ -10,6 +11,7 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class BannersComponent implements OnInit {
     banners = [];
+    hideBanner = false;
     bannersModal = [];
     showLoadingIndicator = true;
     isMobileView = false;
@@ -48,8 +50,8 @@ export class BannersComponent implements OnInit {
         this.showLoadingIndicator = true;
         
         this.bannerService.requestBanners(this.pagina);
-        this.bannerService.banners.subscribe(banners => {
-        
+        this.bannerService.banners.pipe(
+            filter(banners => banners.length > 0)).subscribe(banners => {
             this.showLoadingIndicator = true;
             
             let source = 'src';
@@ -60,10 +62,14 @@ export class BannersComponent implements OnInit {
                     this.banners.push(banner);
                 }
             }
+
             if (this.banners.length > 1) {
                 this.showNavigationArrows = true;
+            } else if (this.banners.length == 0) {
+                this.hideBanner = true;
             }
-            this.showLoadingIndicator = false;      
+
+            this.showLoadingIndicator = false;
             this.cd.markForCheck();    
         });
     }
@@ -73,8 +79,7 @@ export class BannersComponent implements OnInit {
         this.showLoadingIndicator = true;
 
         this.bannerService.requestBanners(this.pagina);
-        this.bannerService.banners.subscribe(banners => {
-
+        this.bannerService.banners.pipe(filter(banners => banners.length > 0)).subscribe(banners => {
             this.showLoadingIndicator = true;
             
             let source = 'src';
@@ -88,6 +93,8 @@ export class BannersComponent implements OnInit {
 
             if (this.bannersModal.length > 1) {
                 this.showNavigationArrowsInModal = true;
+            } else if(this.bannersModal.length == 0) {
+                this.hideBanner = true;
             }
             
             this.showLoadingIndicator = false;
