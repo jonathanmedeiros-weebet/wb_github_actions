@@ -308,7 +308,8 @@
         "megapix.bet": "gulp megapix.bet",
         "pinbet.io": "gulp pinbet.io",
         "clbet.com": "gulp clbet.com",
-        "leaobet.com": "gulp leaobet.com"
+        "leaobet.com": "gulp leaobet.com",
+        "emirates365.bet": "gulp emirates365.bet"
     },
     "private": true,
     "dependencies": {

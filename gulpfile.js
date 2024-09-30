@@ -2929,3 +2929,12 @@ gulp.task('leaobet.com', function (done) {
         dominioTemp: "leaobet.wee.bet"
     });
 });
+
+gulp.task('emirates365.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "emirates365.bet",
+        banca: "LEÃO BET",
+        styles: "",
+    });
+});
