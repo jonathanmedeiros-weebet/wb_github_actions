@@ -12,7 +12,7 @@ import {
     Output,
     Renderer2
 } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 
 import {Jogo} from './../../../../models';
 import {BilheteEsportivoService, CampeonatoService, HelperService, JogoService, MessageService, ParametrosLocaisService, SidebarService} from './../../../../services';
@@ -59,6 +59,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     theSportUrl: SafeResourceUrl;
     loadedFrame: boolean;
+    cameFromHome: boolean = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -79,7 +80,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private cd: ChangeDetectorRef,
         private activeModal: NgbActiveModal,
         private sidebarService: SidebarService,
-        private campeonatoService : CampeonatoService
+        private campeonatoService : CampeonatoService,
+        private router: Router
     ) {
     }
 
@@ -135,7 +137,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
         this.route.paramMap.subscribe(params => {
             if (!this.jogoId) {
-                this.jogoId = params.get('jogoDestaqueId')
+                const jogoDestaqueId = params.get('jogoDestaqueId')
+                this.jogoId = jogoDestaqueId
+                this.cameFromHome = jogoDestaqueId ? true : false;
             }
         });
 
@@ -239,6 +243,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     back() {
+        if(this.cameFromHome){
+            this.router.navigate(['/'])
+        }
+
         if (this.isMobile) {
             this.activeModal.close();
         } else {
