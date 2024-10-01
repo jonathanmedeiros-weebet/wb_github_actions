@@ -1,18 +1,18 @@
-.banner-container{
+.banner-container {
     background-color: rgb(15, 15, 15);
 }
 
-.resolution16x2{
+.resolution16x2 {
     width: 100%;
     aspect-ratio: 16/2;
 }
 
-.resolution16x4{
+.resolution16x4 {
     width: 100%;
     aspect-ratio: 16/4;
 }
 
-.banners img{
+.banners img {
     width: 100%;
 }
 
@@ -38,11 +38,11 @@
         margin: 0;
     }
     
-    .resolution16x2{
+    .resolution16x2 {
         aspect-ratio: 16/6;
     }
     
-    .resolution16x4{
+    .resolution16x4 {
         aspect-ratio: 16/8;
     }
 }

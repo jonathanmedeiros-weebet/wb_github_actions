@@ -50,8 +50,9 @@ export class BannersComponent implements OnInit {
         this.showLoadingIndicator = true;
         
         this.bannerService.requestBanners(this.pagina);
-        this.bannerService.banners.pipe(
-            filter(banners => banners.length > 0)).subscribe(banners => {
+        this.bannerService.banners
+        .pipe(filter(banners => banners.length > 0))
+        .subscribe(banners => {
             this.showLoadingIndicator = true;
             
             let source = 'src';
@@ -79,13 +80,15 @@ export class BannersComponent implements OnInit {
         this.showLoadingIndicator = true;
 
         this.bannerService.requestBanners(this.pagina);
-        this.bannerService.banners.pipe(filter(banners => banners.length > 0)).subscribe(banners => {
+        this.bannerService.banners
+        .pipe(filter(banners => banners.length > 0))
+        .subscribe(banners => {
             this.showLoadingIndicator = true;
             
             let source = 'src';
             this.isMobileView && (source = 'src_mobile');
 
-            for (const banner of banners ) {
+            for (const banner of banners) {
                 if (banner[source] && banner['pagina'] === 'deposito') {
                     this.bannersModal.push(banner);
                 }
@@ -93,7 +96,7 @@ export class BannersComponent implements OnInit {
 
             if (this.bannersModal.length > 1) {
                 this.showNavigationArrowsInModal = true;
-            } else if(this.bannersModal.length == 0) {
+            } else if (this.bannersModal.length == 0) {
                 this.hideBanner = true;
             }
             

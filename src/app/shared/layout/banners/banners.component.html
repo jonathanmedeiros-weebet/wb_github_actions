@@ -1,6 +1,6 @@
 <div *ngIf="!hideBanner" class="banner-container" [ngClass]="{'resolution16x2':pagina === 'deposito','resolution16x4':pagina != 'deposito'}">
     <ng-container *ngIf="!isMobileView || pagina != 'deposito' else isModal">
-        <div  *ngIf="banners.length > 0" class="banners" [hidden]="showLoadingIndicator">
+        <div *ngIf="banners.length > 0" class="banners" [hidden]="showLoadingIndicator">
             <ngb-carousel [showNavigationArrows]="showNavigationArrows">
                 <ng-template *ngFor="let banner of banners" ngbSlide>
                     <div class="picsum-img-wrapper">
@@ -18,7 +18,7 @@
         </div>
     </ng-container>
     <ng-template #isModal>
-        <div  *ngIf="bannersModal.length > 0" class="banners" [hidden]="showLoadingIndicator">
+        <div *ngIf="bannersModal.length > 0" class="banners" [hidden]="showLoadingIndicator">
             <ngb-carousel [showNavigationArrows]="showNavigationArrowsInModal">
                 <ng-template *ngFor="let banner of bannersModal" ngbSlide>
                     <div class="picsum-img-wrapper">
