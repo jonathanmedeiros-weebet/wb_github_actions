@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 import { BilheteEsportivoService, HelperService, JogoService, LiveService, ParametrosLocaisService } from 'src/app/services';
+import { FOOTBALL_ID } from 'src/app/shared/constants/sports-ids';
 
 @Component({
     selector: 'app-jogos-aovivo',
@@ -103,7 +104,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
                                 if (totalJogos < 5) {
                                     let valido = true;
 
-                                    if (jogo.sport_id !== 1) {
+                                    if (jogo.sport_id !== FOOTBALL_ID) {
                                         valido = false;
                                     }
 
@@ -186,7 +187,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
                         true);
                     return cotacao;
                 });
-
+                
                 if (!campeonato) {
                     campeonato = {
                         _id: jogo.campeonato._id,
@@ -200,7 +201,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
 
                 let valido = true;
 
-                if (jogo.sport_id && jogo.sport_id !== 1) {
+                if (jogo.sport_id && jogo.sport_id !== FOOTBALL_ID) {
                     valido = false;
                 }
 

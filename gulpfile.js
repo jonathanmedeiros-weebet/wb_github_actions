@@ -2824,6 +2824,7 @@ gulp.task('betinha.com', function (done) {
         host: "betinha.com",
         banca: "betinha.com",
         styles: "",
+        xtremepush_sdk: "Td-K8QujD1c4wTfQsFsmNZ78iX7J-56k"
     });
 });
 
@@ -2905,6 +2906,44 @@ gulp.task('pinbet.io', function (done) {
         server: "front5.wee.bet",
         host: "pinbet.io",
         banca: "PINBET",
+        styles: "",
+    });
+});
+
+gulp.task('clbet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "clbet.com",
+        banca: "CLBET",
+        styles: "",
+        dominioTemp: "clbet.wee.bet"
+    });
+});
+
+gulp.task('leaobet.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "leaobet.com",
+        banca: "LEÃO BET",
+        styles: "",
+        dominioTemp: "leaobet.wee.bet"
+    });
+});
+
+gulp.task('emirates365.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "emirates365.bet",
+        banca: "EMIRATES 365",
+        styles: "",
+    });
+});
+
+gulp.task('12bets.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "12bets.bet",
+        banca: "12 BETS",
         styles: "",
     });
 });
