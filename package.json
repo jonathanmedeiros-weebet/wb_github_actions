@@ -309,7 +309,8 @@
         "pinbet.io": "gulp pinbet.io",
         "clbet.com": "gulp clbet.com",
         "leaobet.com": "gulp leaobet.com",
-        "emirates365.bet": "gulp emirates365.bet"
+        "emirates365.bet": "gulp emirates365.bet",
+        "12bets.bet": "gulp 12bets.bet"
     },
     "private": true,
     "dependencies": {

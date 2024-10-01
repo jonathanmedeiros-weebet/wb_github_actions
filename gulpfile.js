@@ -2938,3 +2938,12 @@ gulp.task('emirates365.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('12bets.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "12bets.bet",
+        banca: "12 BETS",
+        styles: "",
+    });
+});
