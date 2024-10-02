@@ -2852,6 +2852,7 @@ gulp.task('betagora.io', function (done) {
         host: "betagora.io",
         banca: "BET AGORA",
         styles: "",
+        scripts: "<!-- Start of betagora Zendesk Widget script --><script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key=0afeed60-0582-416d-a66b-e4bbc408ad93'></script><!-- End of betagora Zendesk Widget script -->"
     });
 });
 
