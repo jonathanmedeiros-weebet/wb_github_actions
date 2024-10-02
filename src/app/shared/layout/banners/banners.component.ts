@@ -11,8 +11,10 @@ import {filter} from 'rxjs/operators';
 })
 export class BannersComponent implements OnInit {
     banners = [];
-    hideBanner = false;
     bannersModal = [];
+    hideBanner = false;
+    hideModalBanner = false;
+   
     showLoadingIndicator = true;
     isMobileView = false;
     showNavigationArrows = false;
@@ -35,6 +37,7 @@ export class BannersComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.isModal)
         if (window.innerWidth <= 667) {
             this.isMobileView = true;
         }
@@ -51,27 +54,29 @@ export class BannersComponent implements OnInit {
         
         this.bannerService.requestBanners(this.pagina);
         this.bannerService.banners
-        .pipe(filter(banners => banners.length > 0))
-        .subscribe(banners => {
+        .pipe(filter(banners => typeof banners != 'undefined'))
+        .subscribe((banners: []) => {
+            if (banners.length == 0) {
+                this.hideBanner = true;
+                return;
+            }
             this.showLoadingIndicator = true;
-            
+
             let source = 'src';
             this.isMobileView && (source = 'src_mobile');
-            
+
             for (const banner of banners) {
                 if (banner[source] && !(banner['pagina'] === 'deposito' && this.isMobileView)) {
                     this.banners.push(banner);
                 }
             }
 
-            if (this.banners.length > 1) {
+            if (banners.length > 1) {
                 this.showNavigationArrows = true;
-            } else if (this.banners.length == 0) {
-                this.hideBanner = true;
             }
 
             this.showLoadingIndicator = false;
-            this.cd.markForCheck();    
+            this.cd.markForCheck();  
         });
     }
 
@@ -81,8 +86,12 @@ export class BannersComponent implements OnInit {
 
         this.bannerService.requestBanners(this.pagina);
         this.bannerService.banners
-        .pipe(filter(banners => banners.length > 0))
-        .subscribe(banners => {
+        .pipe(filter(banners => typeof banners != 'undefined'))
+        .subscribe(banners => { 
+            if (banners.length == 0) {
+                this.hideModalBanner = true;
+                return;
+            }
             this.showLoadingIndicator = true;
             
             let source = 'src';
@@ -96,9 +105,7 @@ export class BannersComponent implements OnInit {
 
             if (this.bannersModal.length > 1) {
                 this.showNavigationArrowsInModal = true;
-            } else if (this.bannersModal.length == 0) {
-                this.hideBanner = true;
-            }
+            } 
             
             this.showLoadingIndicator = false;
             this.cd.markForCheck();

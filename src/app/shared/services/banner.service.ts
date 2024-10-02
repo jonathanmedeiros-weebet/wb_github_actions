@@ -17,7 +17,7 @@ export class BannerService {
     synchronized = false;
     cachedBanners = [];
 
-    private bannersSource = new BehaviorSubject<any[]>([]);
+    private bannersSource = new BehaviorSubject<any[]>(undefined);
     public banners = this.bannersSource.asObservable();
 
     constructor(
