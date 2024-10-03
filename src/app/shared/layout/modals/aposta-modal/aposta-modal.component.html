@@ -2,14 +2,6 @@
     <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
     <div>
         <h5 class="modal-title-mobile" id="modal-basic-title">Aposta</h5>
-        <span *ngIf="aposta.tipo == 'esportes'">
-            <h5 class="modal-esportes-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5>
-            <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6>
-            <h6 class="computado" *ngIf="aposta?.data_liquidacao">
-                <b>{{'geral.computadoEm' | translate}}</b>
-                <span> {{aposta.data_liquidacao | moment: 'DD/MM/YYYY HH:mm'}}</span>
-            </h6>    
-        </span>
     </div>
     <div class="action-buttons">
         <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >

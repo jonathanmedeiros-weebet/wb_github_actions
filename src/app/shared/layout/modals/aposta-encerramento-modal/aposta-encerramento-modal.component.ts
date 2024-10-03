@@ -49,7 +49,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     encerrando = false;
     isCliente;
     isMobile;
-    urlBilheteAoVivo ;
+    urlBilheteAoVivo;
     origin;
     process = false;
     delay = 0;
@@ -77,12 +77,12 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.isMobile = window.innerWidth <=1024;
+        this.isMobile = window.innerWidth <= 1024;
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
         this.isCliente = this.auth.isCliente();
-        this.origin = this.appMobile ? '?origin=app':'';
+        this.origin = this.appMobile ? '?origin=app' : '';
         this.urlBilheteAoVivo = `https://${config.SLUG}/bilhete/${this.aposta.codigo}${this.origin}`;
 
         this.opcoes = this.paramsLocais.getOpcoes();
@@ -168,7 +168,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     async confirmarEncerramento() {
         if (this.itemSelecionado != null) {
             const aovivo = await this.temAoVivo(this.itemSelecionado);
-            if(aovivo) {
+            if (aovivo) {
                 this.setDelay();
 
                 let token_aovivo = null;
@@ -189,7 +189,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                         }),
                         delay(this.delayReal * 1000),
                         switchMap(() => {
-                            return this.apostaService.encerrarAposta({token: token_aovivo, apostaId: aposta.id, version: version});
+                            return this.apostaService.encerrarAposta({ token: token_aovivo, apostaId: aposta.id, version: version });
                         }),
                         takeUntil(this.unsub$)
                     )
@@ -231,7 +231,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         let result = false;
 
         const found = aposta.itens.find((item: any) => item.ao_vivo);
-        if(found) {
+        if (found) {
             return true;
         }
 
@@ -241,7 +241,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
 
         const retorno = await this.jogoService.verficarAoVivo(itensID).toPromise();
 
-        if(retorno) {
+        if (retorno) {
             result = true;
         }
 
@@ -307,7 +307,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
 
     shared() {
         if (this.appMobile) {
-            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal,{
+            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal, {
                 ariaLabelledBy: 'modal-basic-title',
                 windowClass: 'modal-pop-up',
                 centered: true,
@@ -376,7 +376,8 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                 this.messageService.success('Bilhete compartilhado com sucesso!');
             });
         } else {
-            this.copyToClipboard(`https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`);
+            this.copyToClipboard(`https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`, false);
+            this.messageService.success('Link copiado para a área de transferência!');
         }
     }
 
@@ -404,10 +405,12 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         this.repeating = false;
     }
 
-    async copyToClipboard(codigo: string) {
+    async copyToClipboard(codigo: string, message = true) {
         try {
             await navigator.clipboard.writeText(codigo);
-            this.messageService.success('Código copiado para a área de transferência!');
+            if (message) {
+                this.messageService.success('Código copiado para a área de transferência!');
+            }
         } catch (err) {
             this.messageService.error('Falha ao copiar o código para a área de transferência.');
         }
@@ -459,34 +462,34 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     }
 
     podeEncerrar(aposta) {
-        const strategy = this.paramsLocais.getOpcoes().closure_strategy;     
+        const strategy = this.paramsLocais.getOpcoes().closure_strategy;
 
         if (strategy === 'probability') {
             const itemSemProbabilidade = aposta.itens.find((item: any) => item.probabilidade == null);
-    
+
             if (itemSemProbabilidade || (new Date(aposta.horario) < new Date('2024-05-08 13:00:00'))) {
                 return false;
             }
         }
 
         const found = aposta.itens.find((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
-        if(!found) {
+        if (!found) {
             return false;
         }
 
-        if(aposta.resultado) {
+        if (aposta.resultado) {
             return false;
         }
 
-        if(this.encerrando) {
+        if (this.encerrando) {
             return false;
         }
 
-        if(this.itemSelecionado && !this.simulando) {
+        if (this.itemSelecionado && !this.simulando) {
             return false;
         }
 
-        if(this.process) {
+        if (this.process) {
             return false;
         }
 
