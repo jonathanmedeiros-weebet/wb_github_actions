@@ -131,16 +131,17 @@ export class FooterComponent implements OnInit, AfterViewInit {
         }
 
         this.container.addEventListener('scroll', this.onScroll.bind(this));
-        const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
-
-        setTimeout(() => {
+        const observer = new MutationObserver(() => {
+            const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
             if (bilheteContainer && !this.isMobile) {
                 const toTopElement = document.querySelector('.toTop') as HTMLElement;
                 if (toTopElement) {
                     toTopElement.style.right = `calc(20px + ${bilheteContainer.clientWidth}px)`;
                 }
             }
-        }, 0);
+        });
+    
+        observer.observe(document.body, { childList: true, subtree: true });
     }
     
     onScroll() {
