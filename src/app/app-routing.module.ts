@@ -14,6 +14,7 @@ import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page
 import { HomeComponent } from './home/home.component';
 import { BetbyComponent } from './betby/betby.component';
 import {RifaGuard} from './shared/services/guards/rifa.guard';
+import { CompartilharBilheteComponent } from './cupom/compartilhar-bilhete/compartilhar-bilhete.component';
 
 const appRoutes: Routes = [
     {
@@ -138,6 +139,10 @@ const appRoutes: Routes = [
     {
         path: 'bilhete/:codigo',
         component: CupomComponent
+    },
+    {
+        path: 'compartilhar-bilhete/:codigo',
+        component: CompartilharBilheteComponent
     },
     {
         path: 'welcome',

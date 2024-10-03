@@ -1,62 +1,12 @@
 <div id="cupom" #cupom>
     <div class="conteudo">
-        <div style="text-align: center;">
-            <img [src]="LOGO">
-        </div>
-        <h1 class="numero">
-            {{aposta.codigo}}
-        </h1>
-        <hr>
-        <hr>
-        <div class="informacoes">
-            <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-                <p>
-                    <b>CLIENTE: </b><span>{{aposta.apostador}}</span>
-                </p>
-            </div>
-            <ng-template #exibicaoPadrao>
-                <p>
-                    <b>CAMBISTA:</b> {{aposta.passador.nome}}
-                </p>
-                <p>
-                    <b>APOSTADOR: </b><span>{{aposta.apostador}}</span>
-                </p>
-            </ng-template>
-            <p>
-                <b>HORÁRIO: </b><span>{{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
-            </p>
-            <p class="resultado">
-                <b>RESULTADO: </b>
-                <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
-                <span *ngIf="!aposta.resultado">aguardando</span>
-            </p>
-        </div>
-        <hr>
-        <hr>
-        <div class="acumuladao">
-            <div class="nome">
-                <b>{{aposta.acumuladao.nome}}</b>
-            </div>
-            <ng-container *ngIf="aposta.resultado; else resultadoPendente">
-                <div>
-                    <b>Total Acertos:</b> {{aposta.quantidade_acertos}}
-                </div>
-                <div>
-                    <b> Prêmio Recebido:</b> {{aposta.premio | currency}}
-                </div>
-            </ng-container>
-            <ng-template #resultadoPendente>
-                <div class="premio" *ngFor="let premio of aposta.acumuladao.premios">
-                    <b>Possível Prêmio {{premio.quantidade_acertos}} acertos:</b>
-                    {{premio.valor | currency}}
-                </div>
-            </ng-template>
-        </div>
-        <hr>
         <ng-container *ngFor="let item of aposta.itens; let i=index;">
             <div class="item">
-                <p class="">
-                    PARTIDA {{i+1}}
+                <div *ngIf="i == 0" class="nome">
+                    <b>{{aposta.acumuladao.nome}}</b>
+                </div>
+                <p style="font-weight: bold;">
+                    Partida {{i+1}}
                 </p>
                 <p class="horario">
                     {{item.jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
@@ -67,15 +17,33 @@
                     {{item.jogo.time_b_nome}}
                 </p>
                 <p class="palpite" [ngClass]="resultadoClass(item)">
-                    PALPITE: {{item.time_a_resultado}} x {{item.time_b_resultado}}
+                    Palpite: {{item.time_a_resultado}} x {{item.time_b_resultado}}
                 </p>
                 <p class="jogo-resultado">
                     {{item.resultado}}
                 </p>
             </div>
-            <hr>
         </ng-container>
-        <hr>
+        <div class="acumuladao">
+            <ng-container *ngIf="aposta.resultado; else resultadoPendente">
+                <div>
+                    <b>Total Acertos:</b> {{aposta.quantidade_acertos}}
+                </div>
+                <div>
+                    <b> Prêmio Recebido:</b> {{aposta.premio | currency}}
+                </div>
+            </ng-container>
+            <ng-template #resultadoPendente>
+                <div class="footer-info">
+                    <p>Resultado: </p>
+                    <p>{{aposta.resultado ?? "Aguardando" }}</p>
+                </div>
+                <div class="premio footer-info" *ngFor="let premio of aposta.acumuladao.premios">
+                    <p>Possível prêmio {{premio.quantidade_acertos}} acerto(s):</p>
+                    <p>{{premio.valor | currency}}</p>
+                </div>
+            </ng-template>
+        </div>
         <p class="rodape">
             Caso o ACUMULADÃO tenha mais de um ganhador, o prêmio será dividido em partes iguais entre todos os
             vencedores.

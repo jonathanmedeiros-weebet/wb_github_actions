@@ -100,6 +100,7 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
 import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
 import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
+import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 
 @NgModule({
     imports: [
@@ -198,7 +199,8 @@ import { CashbackService } from '../services/clientes/cashback.service';
         CanceledBonusConfirmComponent,
         BlockPeerAttempsModalComponent,
         MultifactorConfirmationModalComponent,
-        ExibirBilheteRifaComponent
+        ExibirBilheteRifaComponent,
+        ExibirBilheteCassinoComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -219,7 +221,8 @@ import { CashbackService } from '../services/clientes/cashback.service';
         WelcomePageComponent,
         SubmenuComponent,
         SkeletonModule,
-        MenuFooterComponent
+        MenuFooterComponent,
+        ExibirBilheteCassinoComponent
     ],
     providers: [
         ApostaEsportivaService,

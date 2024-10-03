@@ -9,11 +9,14 @@
     margin-bottom: 4px;
 }
 .modal-body {
+    background: var(--game);
+    padding: 10px;
+    border-bottom: 2px dotted var(--bottom-bar);
     max-height: 400px;
     overflow: auto;
 }
 .modal-header {
-    background-color: var(--game);
+    background: var(--game);
     border: none;
     color: var(--foreground-game);
 }
@@ -42,7 +45,7 @@
     font-weight: normal;
 }
 .cupom-ativo{
-    background: var(--background);
+    font-size: 12px;
     margin-bottom: 0;
     color: var(--foreground-game);
 }
@@ -95,16 +98,16 @@ hr {
     margin: 1px;
     font-size: 12px;
 }
-.valores .aposta, .valores .ganho, .valores .cambista-paga, .valores .resultado {
+.valores, .valores .ganho, .valores .cambista-paga, .valores {
     margin: 4px 1px 1px 1px;
     font-weight: bold;
     font-size: 12px;
     display: flex;
 }
 .total-jogos {
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 12px;
-    display: flex;
+    /* display: flex; */
     margin: 0;
 }
 .codigo-aposta, .aposta-horario {
@@ -150,53 +153,17 @@ hr {
     font-size: 14px;
     font-weight: 650;
 }
-.table {
-    color: var(--foreground-game);
-    margin-top: 10px;
-    margin-bottom: -11px;
-    border-collapse: collapse;
-    width: 100%;
-}
-.table thead th {
-    background-color: var(--game);
-    color: var(--foreground-game);
-    border-top: 0;
-    border-bottom: 3px solid var(--background);
-    padding: 8px;
-}
-.table tbody td {
-    background: var(--game);
-    border-top: 0;
-    border-bottom: 1px solid var(--background);
-}
-.table thead {
-    background-color: var(--game);
-    border-radius: 10px 10px 0 0;
-    overflow: hidden;
-}
-tbody tr:last-child td:last-child {
-    border-radius: 0 0 6px 0;
-}
-tbody tr:last-child td:first-child {
-    border-radius: 0 0 0 3px;
-}
-
-table th:first-child,
-table tr td:first-child {
-    max-width: 45px;
-}
-table tr td:nth-child(2) {
-    word-wrap: break-word;
-    max-width: 50px;
-}
-table th:nth-child(3),
-table tr td:nth-child(3) {
-    max-width: 35px;
-}
 .modal-footer {
     justify-content: center;
     background: var(--background);
     border-top: none;
+    padding: 10px;
+}
+.cupom-footer {
+    font-size: 12px;
+    padding: 10px;
+    background: var(--game);
+    border-bottom: 2px dotted var(--bottom-bar);
 }
 .button-container {
     display: flex;
@@ -233,7 +200,7 @@ table tr td:nth-child(3) {
         min-height: 100vh;
         overflow: auto;
     }
-    .total-jogos, .aposta, .ganho, .cambista-paga, .resultado {
+    .ganho, .cambista-paga {
         display: flex;
         justify-content: space-between;
     }
@@ -248,7 +215,7 @@ table tr td:nth-child(3) {
         display: block;
     }
     .action-buttons button, .action-buttons a {
-        padding: 12px;
+        padding: 15px;
     }
     .informacoes .codigo-aposta span {
         margin-left: 2px;

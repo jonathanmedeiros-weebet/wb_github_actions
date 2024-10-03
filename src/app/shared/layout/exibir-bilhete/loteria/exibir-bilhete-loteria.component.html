@@ -1,27 +1,13 @@
 <div id="cupom-center">
     <div id="cupom" #cupom>
         <div class="conteudo">
-            <div class="text-center">
-                <img src="{{LOGO}}" alt="LOGO">
-            </div>
-            <h1>{{aposta.codigo}}</h1>
-            <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-                <p class="informacoes-gerais">CLIENTE: {{aposta.apostador}}</p>
-            </div>
-            <ng-template #exibicaoPadrao>
-                <p class="informacoes-gerais">CAMBISTA: {{aposta.passador.nome}}</p>
-                <p class="informacoes-gerais">APOSTADOR: {{aposta.apostador}}</p>
-            </ng-template>
-            <p class="informacoes-gerais">HORÁRIO: {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
-            <p class="informacoes-gerais">MODALIDADE: {{aposta.modalidade | sorteioTipo}}</p>
-            <hr />
             <ng-container *ngFor="let item of aposta.itens">
-                <p class="informacoes-item">
-                    {{sorteioNome(item.sorteio_id)}}
+                <p class="informacoes-item" id="modalidade">
+                    MODALIDADE: {{sorteioNome(item.tipo)}}
                 </p>
-                <p class="informacoes-item">
+                <!-- <p class="informacoes-item">
                     VALOR: {{item.valor | currency}}
-                </p>
+                </p> -->
                 <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
                     Retorno 6: {{calcularPremioLoteria(item.valor, item.cotacao6) | currency}}
                     <br>
@@ -50,23 +36,36 @@
                         Retorno líquido 3: {{calcularPremioLiquidoLoteria(item.valor, item.cotacao3, aposta.passador.percentualPremio) | currency}}
                     </span>
                 </p>
-                <p class="informacoes-item">
-                    DEZENAS: {{item.numeros}}
-                </p>
-                <p class="informacoes-item">
+                <div class="dezenas-info">
+                    <div class="dezenas-title">
+                        <p class="informacoes-item">
+                            DEZENAS:
+                        </p>
+                    </div>
+                    <div class="dezenas-apostadas">
+                        <ng-container *ngFor="let numeros of item.numeros">
+                            <div>{{numeros}}</div>
+                        </ng-container>
+                    </div>
+                </div>
+                <!-- <p class="informacoes-item">
                     <strong *ngIf="item.status != 'ganhou'; else ganhou">{{item.status}}</strong>
                     <ng-template #ganhou>
                         <strong>{{item.status}} {{item.tipo_premio}}</strong>
                     </ng-template>
-                </p>
-                <hr />
+                </p> -->
             </ng-container>
-            <p class="valor-aposta">
-                VALOR TOTAL: {{aposta.valor | currency}}
+        </div>
+        <div class="footer-cupom">
+            <p>
+                Resultado: <span style="float: right;">{{aposta.resultado ?? "Aguardando"}}</span>
             </p>
-            <p class="mensagem-rodape">
-                {{informativoRodape}}
+            <p class="valor-aposta">
+                Valor total: <span style="float: right;">{{aposta.valor | currency}}</span>
             </p>
         </div>
+        <p class="mensagem-rodape">
+            {{informativoRodape}}
+        </p>
     </div>
 </div>

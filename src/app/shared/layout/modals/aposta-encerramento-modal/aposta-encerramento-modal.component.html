@@ -1,9 +1,9 @@
 <app-bilhete-compartilhamento #bilheteCompartilhamento [aposta]="aposta"></app-bilhete-compartilhamento>
 <div class="modal-header">
     <div>
-        <h5 class="modal-title-mobile" id="modal-basic-title">Aposta</h5>
-        <h5 class="modal-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5>
-        <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6>
+        <h5 id="modal-basic-title">Aposta</h5>
+        <!-- <h5 class="modal-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5> -->
+        <!-- <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6> -->
     </div>
     <div class="action-buttons">
         <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
@@ -15,7 +15,7 @@
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
             <i class="fa fa-money"></i>
         </button>
-        <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shared()" class="shared-ticket" title="COMPARTILHAR">
+        <button type="button" (click)="compartilhamentoPermitido() ? shared() : shareBetLink(aposta)" class="shared-ticket" title="COMPARTILHAR">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -25,77 +25,44 @@
 </div>
 <div class="modal-body cupom-ativo">
     <div class="cupom-header">
-            <p class="codigo-aposta">
-                <b>Código da aposta:</b><span> {{aposta.codigo}}</span>
-            </p>
-            <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-                <p>
-                    <b>Cliente:</b><span>{{aposta.apostador}}</span>
+            <div style="display: flex; flex-direction: column; justify-items: center; text-align: center;">
+                <p>{{aposta.tipo | titlecase}}</p>
+                <p style="font-size: 1.5rem">{{aposta.codigo}} 
+                    <i style="cursor: pointer; margin-left: 0.25rem;" (click)="copyToClipboard(aposta.codigo)" class="far fa-copy"></i>
+                </p>
+                <p>Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
+                <p *ngIf="aposta?.data_liquidacao">
+                    <b>{{'geral.computadoEm' | translate}}</b>
+                    <span> {{aposta.data_liquidacao | moment: 'DD/MM/YYYY [às] HH:mm'}}</span>
                 </p>
             </div>
-            <ng-template #exibicaoPadrao>
-                <p>
-                    <b>Cambista:</b><span>{{aposta.passador.nome}}</span>
-                </p>
-                <p>
-                    <b>Apostador:</b><span>{{aposta.apostador}}</span>
-                </p>
-            </ng-template>
-            <p>
-                <b>{{'geral.status' | translate}}: </b>
-                <span>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</span>
-            </p>
-            <p class="aposta-horario">
-                <b>Horário:</b><span>{{aposta.horario | moment: 'DD/MM HH:mm'}}</span>
-            </p>
-            <p class="total-jogos">
-                Quantidade de jogos:<span style="margin-left: 3px;">{{aposta.itens.length}}</span>
-            </p>
-            <p class="aposta">
-                Cotação:
-                <span>
-                    {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}
-                </span>
-            </p>
-            <p class="aposta">
-                Valor apostado:<span><span *ngIf="aposta.is_bonus"> ({{'geral.bonus' | translate | lowercase}})</span>{{aposta.valor | currency}}</span>
-            </p>
-            <p class="ganho">
-                Possível retorno:
-                <span style="white-space: nowrap;">
-                    <span class="{{!novaPossibilidadeGanho || falhaSimulacao ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho | currency}}</span>
-                    <span class="dados-simulacao" *ngIf="!falhaSimulacao">{{novaPossibilidadeGanho | currency}}</span>
-                </span>
-            </p>
-            <p class="resultado">
-                <b>Resultados:</b>
-                <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
-                <span *ngIf="!aposta.resultado">Aguardando</span>
-            </p>
-            <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
-                {{'geral.premio' | translate}}:<span>{{aposta.premio | currency}}</span>
-            </p>
-            <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-                Cambista paga:<span>{{cambistaPaga|currency}}</span>
-            </p>
     </div>
     <div class="table-container">
         <table class="table">
-            <thead>
+            <!-- <thead>
                 <tr>
                     <th style="padding-left: 14px;">Data/Horário</th>
                     <th>Evento/Mercado</th>
                     <th>Status</th>
                 </tr>
-            </thead>
+            </thead> -->
             <tbody>
                 <ng-container *ngFor="let item of aposta.itens">
-                    <tr class="cupom">
-                        <td class="item"><p class="info-cupom" style="padding-left: 10px;">{{item.jogo_horario | moment: 'DD/MM HH:mm'}}</p></td>
+                    <tr class="cupom" style="border-bottom: 2px dotted black;">
+                        <td class="item" style="min-width: 3rem; max-width: 5rem; position: relative">
+                            <div style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <p class="info-cupom" style="margin-bottom: 0">
+                                    {{item.jogo_horario | moment: 'DD/MM'}}
+                                </p>
+                                <p class="info-cupom" style="margin-bottom: 0">
+                                    {{item.jogo_horario | moment: 'HH:mm'}}
+                                </p>    
+                            </div>
+                        </td>
                         <td class="item">
                             <div style="max-width: 97%;">
-                                <p class="campeonato info-cupom">
-                                    {{item.campeonato_nome}}
+                                <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                    <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                                 </p>
                                 <p class="nome info-priority-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                                     {{item.time_a_nome}}
@@ -134,12 +101,96 @@
                         </td>
                     </tr>
                 </ng-container>
+                <tr class="cupom" style="margin-top: 10px">
+                    <td colspan="2" class="item" style="margin-left: 10px;">
+                        <p class="codigo-aposta">
+                            <b>Código da aposta:</b>
+                        </p>
+                        <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+                            <p>
+                                <b>Cliente:</b>
+                            </p>
+                        </div>
+                        <ng-template #exibicaoPadrao>
+                            <p>
+                                <b>Cambista:</b>
+                            </p>
+                            <p>
+                                <b>Apostador:</b>
+                            </p>
+                        </ng-template>
+                        <p>
+                            <b>{{'geral.status' | translate}}: </b>
+                        </p>
+                        <!-- <p class="total-jogos">
+                            Quantidade de jogos:<span style="margin-left: 3px;">{{aposta.itens.length}}</span>
+                        </p> -->
+                        <!-- <p class="aposta">
+                            Cotação:
+                            <span>
+                                {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}
+                            </span>
+                        </p> -->
+                        <p class="aposta">
+                            Valor apostado:
+                        </p>
+                        <p class="ganho">
+                            Possível retorno:
+                        </p>
+                        <p class="resultado">
+                            <b>Resultados:</b>
+                        </p>
+                        <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
+                            {{'geral.premio' | translate}}:
+                        </p>
+                        <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
+                            Cambista paga:
+                        </p>
+                    </td>
+                    <td style="text-align: right; margin-right: 10px;" class="item">
+                        <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+                            <p>
+                                <span>{{aposta.apostador}}</span>
+                            </p>
+                        </div>
+                        <ng-template #exibicaoPadrao>
+                            <p>
+                                <span>{{aposta.passador.nome}}</span>
+                            </p>
+                            <p>
+                                <span>{{aposta.apostador}}</span>
+                            </p>
+                        </ng-template>
+                        <p>
+                            <span>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</span>
+                        </p>
+                        <p class="aposta">
+                            <span><span *ngIf="aposta.is_bonus"> ({{'geral.bonus' | translate | lowercase}})</span>{{aposta.valor | currency}}</span>
+                        </p>
+                        <p class="ganho">
+                            <span style="white-space: nowrap;">
+                                <span class="{{!novaPossibilidadeGanho || falhaSimulacao ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho | currency}}</span>
+                                <span class="dados-simulacao" *ngIf="!falhaSimulacao">{{novaPossibilidadeGanho | currency}}</span>
+                            </span>
+                        </p>
+                        <p class="resultado">
+                            <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
+                            <span *ngIf="!aposta.resultado">Aguardando</span>
+                        </p>
+                        <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
+                            <span>{{aposta.premio | currency}}</span>
+                        </p>
+                        <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
+                            <span>{{cambistaPaga|currency}}</span>
+                        </p>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
     <ng-container *ngFor="let item of aposta.itens">
         <div class="cupom-container">
-            <div id="cupom">
+            <div id="cupom" style="margin-top: 10px;">
                 <div class="conteudo">
                     <div class="item">
                         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
@@ -147,8 +198,8 @@
                                 <p class="horario info-cupom">
                                     {{item.jogo_horario | moment: 'DD/MM HH:mm'}}
                                 </p>
-                                <p class="campeonato info-cupom">
-                                    {{item.campeonato_nome}}
+                                <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                    <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                                 </p>
                                 <p class="nome info-priority-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                                     {{item.time_a_nome}}
@@ -188,6 +239,60 @@
             </div>
         </div>    
     </ng-container>
+    <div class="footer-container">
+        <div class="cupom" style="padding: 10px; margin-top: 10px; display: flex; justify-content: space-between;">
+            <div class="item" style="flex: 1;">
+                <!-- <p class="codigo-aposta"><b>Código da aposta:</b></p> -->
+                <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+                    <p><b>Cliente:</b></p>
+                </div>
+                <ng-template #exibicaoPadrao>
+                    <p><b>Cambista:</b></p>
+                    <p><b>Apostador:</b></p>
+                </ng-template>
+                <p><b>{{'geral.status' | translate}}:</b></p>
+                <p class="aposta">Valor apostado:</p>
+                <p class="ganho">Possível retorno:</p>
+                <p class="resultado"><b>Resultados:</b></p>
+                <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">{{'geral.premio' |
+                    translate}}:</p>
+                <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">Cambista paga:</p>
+            </div>
+            <div class="item" style="flex: 1; justify-content: right; text-align: right;">
+                <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+                    <p><span>{{aposta.apostador}}</span></p>
+                </div>
+                <ng-template #exibicaoPadrao>
+                    <p>{{aposta.passador.nome}}</p>
+                    <p>{{aposta.apostador}}</p>
+                </ng-template>
+                <p>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</p>
+                <p class="aposta" style="justify-content: right;">
+                    <span><span *ngIf="aposta.is_bonus"> ({{'geral.bonus' | translate | lowercase}})</span>{{aposta.valor |
+                        currency}}</span>
+                </p>
+                <p class="ganho" style="justify-content: right;">
+                    <span style="white-space: nowrap;">
+                        <span class="{{!novaPossibilidadeGanho || falhaSimulacao ? '' : 'cancelado'}}">
+                            {{aposta.possibilidade_ganho | currency}}
+                        </span>
+                        <span class="dados-simulacao" *ngIf="!falhaSimulacao">{{novaPossibilidadeGanho | currency}}</span>
+                    </span>
+                </p>
+                <p class="resultado" style="justify-content: right;">
+                    <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
+                    <span *ngIf="!aposta.resultado">Aguardando</span>
+                </p>
+                <p class="ganho" style="justify-content: right;" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
+                    <span>{{aposta.premio | currency}}</span>
+                </p>
+                <p *ngIf="aposta.passador.percentualPremio > 0" style="justify-content: right;" class="cambista-paga">
+                    <span>{{cambistaPaga | currency}}</span>
+                </p>
+            </div>
+        </div>
+    
+    </div>
 </div>
 <div class="modal-footer">
     <div class="rodape dados-simulacao" *ngIf="novaPossibilidadeGanho && !falhaSimulacao">
@@ -198,15 +303,21 @@
             <span class="dados-simulacao">Essa aposta não pode ser encerrada.</span>
         </p>
     </div>
-    <div class="button-container">
-        <button class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)" [disabled]="simulando" *ngIf="podeEncerrar(aposta)">
+    <div class="button-container" style="display: flex; flex-direction: row; justify-content: space-around;">
+        <button *ngIf="podeEncerrar(aposta)" class="secondary-btn btn" (click)="repetirAposta(aposta)"
+            [disabled]="simulando || repeating">
+            {{repeating ? "Repetindo..." : 'Repetir aposta'}}
+        </button>
+        <button *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
+            [disabled]="simulando || repeating">
             {{ simulando ? 'Calculando...' : 'Encerrar Aposta' }}
         </button>
-        <button class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao" (click)="descartar()">
+        <button class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
+            (click)="descartar()">
             Cancelar
         </button>
         <button class="btn btn-custom" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
-                (click)="confirmarEncerramento()">
+            (click)="confirmarEncerramento()">
             Confirmar
         </button>
         <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && encerrando;">

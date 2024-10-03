@@ -1,65 +1,40 @@
 <div id="cupom" #cupom>
     <div class="conteudo">
-        <div style="text-align: center;">
-            <img [src]="LOGO">
-        </div>
-        <h1 class="numero">
-            {{aposta.codigo}}
-        </h1>
-        <hr>
-        <hr>
-        <div class="informacoes">
-            <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-                <p>
-                    <b>CLIENTE: </b><span>{{aposta.apostador}}</span>
-                </p>
+        <!-- <div class="informacoes">
+        </div> -->
+        <ng-container *ngFor="let item of aposta.itens">
+            <div id="jogo-table">
+                <div class="jogo-horario">
+                    <p style="margin: 0">{{aposta.horario | moment: 'DD/MM'}}</p>
+                    <p style="margin: 0">{{aposta.horario | moment: 'HH:mm'}}</p>
+                </div>
+                <div class="item">
+                    <p style="margin: 0" class="campeonato">
+                        {{item.odd.desafio.categoria.nome}}
+                    </p>
+                    <p class="nome" [ngClass]="resultadoClass(item)">
+                        {{item.odd.desafio.nome}}
+                    </p>
+                    <p class="cotacao" [ngClass]="resultadoClass(item)">
+                        Resposta:
+                        {{item.odd_nome}}
+                        ({{item.cotacao}})
+                    </p>
+                    <p class="jogo-resultado">
+                        <span *ngIf="item.removido; else resultado">cancelado</span>
+                        <ng-template #resultado>{{item.resultado}}</ng-template>
+                    </p>
+                </div>    
             </div>
-            <ng-template #exibicaoPadrao>
-                <p>
-                    <b>CAMBISTA:</b> {{aposta.passador.nome}}
-                </p>
-                <p>
-                    <b>APOSTADOR: </b><span>{{aposta.apostador}}</span>
-                </p>
-            </ng-template>
-            <p>
-                <b>HORÁRIO:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}
-            </p>
+        </ng-container>
+        <div class="valores">
             <p id="resultado-final">
                 <b>RESULTADO: </b>
-                <span *ngIf="aposta.resultado" class="{{aposta.resultado}}">{{aposta.resultado}}</span>
-                <span *ngIf="!aposta.resultado">aguardando</span>
-            </p>
-        </div>
-        <hr>
-        <hr>
-        <ng-container *ngFor="let item of aposta.itens">
-            <div class="item">
-                <p class="campeonato">
-                    {{item.odd.desafio.categoria.nome}}
-                </p>
-                <p class="nome" [ngClass]="resultadoClass(item)">
-                    {{item.odd.desafio.nome}}
-                </p>
-                <p class="cotacao" [ngClass]="resultadoClass(item)">
-                    Resposta:
-                    {{item.odd_nome}}
-                    ({{item.cotacao}})
-                </p>
-                <p class="jogo-resultado">
-                    <span *ngIf="item.removido; else resultado">cancelado</span>
-                    <ng-template #resultado>{{item.resultado}}</ng-template>
-                </p>
-            </div>
-            <hr>
-        </ng-container>
-        <hr>
-        <div class="valores">
-            <p class="total-desafios">
-                QUANTIDADE DE DESAFIOS: <span style="float:right">{{aposta.itens.length}}</span>
+                <span style="float:right" *ngIf="aposta.resultado" class="{{aposta.resultado}}">{{aposta.resultado}}</span>
+                <span style="float:right" *ngIf="!aposta.resultado">Aguardando</span>
             </p>
             <p class="aposta">
-                COTAÇÃO: <span style="float:right">{{aposta.premio / aposta.valor | number:'1.0-3' }}</span>
+                COTAÇÃO: <span style="float:right">{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
             </p>
             <p class="aposta">
                 VALOR APOSTADO: <span style="float:right">{{aposta.valor | currency}}</span>
@@ -75,8 +50,6 @@
             <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
                 CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
             </p>
-            <hr>
-            <hr>
         </div>
         <p class="rodape">
             {{opcoes.informativo_rodape}}

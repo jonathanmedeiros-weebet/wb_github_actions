@@ -1,48 +1,71 @@
 #cupom {
-    /* width: 19.27em; */
-    background: #f3f5d3;
-    color: #1e282c;
-    /* margin: 2em auto; */
-    font-size: 12px;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
+    font-size: 12px;
 }
 
-hr {
-    display: block;
-    width: 100%;
-    border: 1px dashed var(--foreground);
-}
-
-#cupom img{
-    max-height: 90px;
-    max-width: 150px;
-}
 #cupom h1{
     text-align: center;
     font-weight: bold;
 }
 #cupom .informacoes-gerais{
     margin: 1px;
-    font-size: 12px;
 }
 #cupom .informacoes-item{
     margin: 1px;
-    font-size: 12px;
     text-transform: uppercase;
-    word-break: break-all;
 }
 #cupom .valor-aposta{
-    text-align: center;
     margin: 1px;
     font-weight: bold;
-    font-size: 12px;
 }
 #cupom .mensagem-rodape{
     margin: 15px 1px 1px 1px;
-    font-weight: bold;
-    font-size: 14px;
     text-align: center
+}
+
+.dezenas-apostadas, .dezenas-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dezenas-apostadas {
+    flex-direction: row;
+    width: 80%;
+}
+
+.dezenas-info {
+    flex-direction: row;
+    font-weight: bold;
+}
+
+.dezenas-title {
+    margin: 10px 10px 0 0;
+}
+
+.footer-cupom, .conteudo {
+    background: var(--game);
+    border-bottom: 2px dotted var(--bottom-bar);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#modalidade {
+    font-size: 12px;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.dezenas-apostadas > div {
+    background: var(--bottom-bar);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin: 5px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 #cupom .ganhou{

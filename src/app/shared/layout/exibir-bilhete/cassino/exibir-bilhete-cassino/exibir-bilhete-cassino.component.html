@@ -1,0 +1,20 @@
+<div id="cupom" [ngStyle]="{'border-radius': playButton ? '10px' : ''}">
+    <div class="cupom-body">
+        <div id="game-image">
+            <img src="{{gameImageUrl}}" alt="Teste">
+        </div>
+        <div id="cupom-info">
+            <p>{{aposta.game}}</p>
+            <p style="font-size: 16px">{{aposta.codigo}} <i *ngIf="!playButton" (click)="copyToClipboard(aposta.codigo)" style="cursor: pointer; margin-left: 0.25rem;" class="far fa-copy"></i></p>
+            <p>Apostado por {{aposta.apostador}}</p>
+            <p>Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
+        </div>
+    </div>
+    <div class="cupom-footer">
+        <p>Valor: <span style="float: right;">{{aposta.valor | currency}}</span></p>
+        <p>Prêmio: <span style="float: right;">{{aposta.premio | currency}}</span></p>
+    </div>
+    <button class="btn btn-custom" id="play-button" [routerLink]="['/casino/' + aposta.fornecedor + '/' + aposta.gameID]" *ngIf="playButton">
+        Jogar {{aposta.game}}
+    </button>
+</div>

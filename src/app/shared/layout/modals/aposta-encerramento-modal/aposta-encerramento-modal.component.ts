@@ -8,15 +8,18 @@ import {
     MessageService,
     ApostaService,
     UtilsService,
-    PrintService
+    PrintService,
+    BilheteEsportivoService
 } from '../../../../services';
 import { config } from '../../../config';
 import * as moment from 'moment';
 import { ApostaEsportivaService } from 'src/app/shared/services/aposta-esportiva/aposta-esportiva.service';
-import { switchMap, takeUntil, delay, tap } from 'rxjs/operators';
+import { switchMap, takeUntil, delay, tap, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CompatilhamentoBilheteModal } from '../compartilhamento-bilhete-modal/compartilhamento-bilhete-modal.component';
 import { JogoService } from 'src/app/shared/services/aposta-esportiva/jogo.service';
+import * as sportsIds from '../../../constants/sports-ids';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-aposta-encerramento-modal',
@@ -42,6 +45,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     apostaVersion;
     showLoading = false;
     simulando = false;
+    repeating = false;
     encerrando = false;
     isCliente;
     isMobile;
@@ -66,6 +70,8 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         private printService: PrintService,
         private auth: AuthService,
         private jogoService: JogoService,
+        private router: Router,
+        private bilheteEsportivo: BilheteEsportivoService,
         private modalService: NgbModal
     ) {
     }
@@ -358,6 +364,98 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         }
 
         return result;
+    }
+
+    async shareBetLink(aposta) {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Bilhete de Aposta',
+                text: 'Acesse o link para visualizar o bilhete de aposta.',
+                url: `https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`
+            }).then(() => {
+                this.messageService.success('Bilhete compartilhado com sucesso!');
+            });
+        } else {
+            this.copyToClipboard(`https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`);
+        }
+    }
+
+    public async convertItemToBet(itens) {
+        try {
+            return await this.jogoService.convertItemToBet(itens);
+        } catch (error) {
+            this.handleError(error.message);
+            return [];
+        }
+    }
+
+
+    async repetirAposta(aposta) {
+        this.repeating = true;
+        let convertedItemToBet = await this.convertItemToBet(aposta.itens);
+        if (convertedItemToBet.length) {
+            this.bilheteEsportivo.atualizarItens(convertedItemToBet);
+            this.activeModal.close();
+            this.router.navigate(['/esportes']);
+            this.messageService.success('Aposta repetida com sucesso!');
+            return;
+        }
+        this.messageService.warning('A aposta não pôde ser repetida.');
+        this.repeating = false;
+    }
+
+    async copyToClipboard(codigo: string) {
+        try {
+            await navigator.clipboard.writeText(codigo);
+            this.messageService.success('Código copiado para a área de transferência!');
+        } catch (err) {
+            this.messageService.error('Falha ao copiar o código para a área de transferência.');
+        }
+    }
+
+    sportIcon(sportId) {
+        let className = 'icon-futebol wbicon';
+
+        switch (sportId) {
+            case sportsIds.FOOTBALL_ID: {
+                className = 'wbicon icon-futebol';
+                break;
+            }
+            case sportsIds.BOXING_ID: {
+                className = 'wbicon icon-luta';
+                break;
+            }
+            case sportsIds.AMERICAN_FOOTBALL_ID: {
+                className = 'wbicon icon-futebol-americano';
+                break;
+            }
+            case sportsIds.TENNIS_ID: {
+                className = 'wbicon icon-tenis';
+                break;
+            }
+            case sportsIds.ICE_HOCKEY_ID: {
+                className = 'wbicon icon-hoquei-no-gelo';
+                break;
+            }
+            case sportsIds.BASKETBALL_ID: {
+                className = 'wbicon icon-basquete';
+                break;
+            }
+            case sportsIds.FUTSAL_ID: {
+                className = 'wbicon icon-futsal';
+                break;
+            }
+            case sportsIds.VOLLEYBALL_ID: {
+                className = 'wbicon icon-volei';
+                break;
+            }
+            case sportsIds.E_SPORTS_ID: {
+                className = 'wbicon icon-e-sports';
+                break;
+            }
+        }
+
+        return className;
     }
 
     podeEncerrar(aposta) {

@@ -5,8 +5,9 @@ import { BilheteAcumuladaoComponent } from '../../exibir-bilhete/acumuladao/bilh
 import { ExibirBilheteDesafioComponent } from '../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
 import { ExibirBilheteLoteriaComponent } from '../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { ExibirBilheteRifaComponent} from '../../exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
+import { ExibirBilheteCassinoComponent } from '../../exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { HelperService, AuthService, ParametrosLocaisService } from '../../../../services';
+import { HelperService, AuthService, ParametrosLocaisService, MessageService } from '../../../../services';
 import { config } from '../../../config';
 
 @Component({
@@ -20,6 +21,7 @@ export class ApostaModalComponent implements OnInit {
     @ViewChild(ExibirBilheteDesafioComponent) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
     @ViewChild(BilheteAcumuladaoComponent) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     @ViewChild(ExibirBilheteRifaComponent) bilheteRifaComponent: ExibirBilheteRifaComponent;
+    @ViewChild(ExibirBilheteCassinoComponent) bilheteCassinoComponent: ExibirBilheteCassinoComponent;
     @Input() aposta;
     @Input() showCancel = false;
     @Input() primeiraImpressao = false;
@@ -37,7 +39,8 @@ export class ApostaModalComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private helperService: HelperService,
         private paramsLocais: ParametrosLocaisService,
-        private auth: AuthService
+        private auth: AuthService,
+        private messageService: MessageService
     ) { }
 
     ngOnInit() {
@@ -80,6 +83,22 @@ export class ApostaModalComponent implements OnInit {
         }
     }
 
+    async shareBetLink(aposta) {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Bilhete de Aposta',
+                text: 'Acesse o link para visualizar o bilhete de aposta.',
+                url: `https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`
+            }).then(() => {
+                this.messageService.success('Bilhete compartilhado com sucesso!');
+            });
+        } else {
+            this.copyToClipboard(`https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`, false);
+            this.messageService.success('Link copiado para a área de transferência!');
+        }
+    }
+
+
     cancel() {
         this.activeModal.close('cancel');
     }
@@ -111,6 +130,36 @@ export class ApostaModalComponent implements OnInit {
         const opcoes = this.paramsLocais.getOpcoes();
 
         return opcoes.habilitar_compartilhamento_comprovante;
+    }
+    
+    async copyToClipboard(codigo: string, message = true) {
+        try {
+            await navigator.clipboard.writeText(codigo);
+            if(message) {
+                this.messageService.success('Código copiado para a área de transferência!');
+            }
+        } catch (err) {
+            this.messageService.error('Falha ao copiar o código para a área de transferência.');
+        }
+    }
+
+    convertDate(date: string) {
+        const [day, month, year, hour, minute, second] = date.split(/[/\s:]/);
+        const formattedDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
+
+        if (isNaN(formattedDate.getTime())) {
+            console.error('Invalid date:', date);
+            return 'Invalid date';
+        }
+
+        return formattedDate.toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }).replace(',', ' às');
     }
 
     impressaoPermitida() {

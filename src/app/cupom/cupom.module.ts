@@ -6,6 +6,7 @@ import { StatsService, ResultadoService } from '../services';
 import { CupomAcumuladaoComponent } from './acumuladao/cupom-acumuladao.component';
 import { CupomDesafioComponent } from './desafio/cupom-desafio.component';
 import { CupomEsportesComponent } from './esportes/cupom-esportes.component';
+import { CompartilharBilheteComponent } from './compartilhar-bilhete/compartilhar-bilhete.component';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { CupomEsportesComponent } from './esportes/cupom-esportes.component';
         CupomComponent,
         CupomAcumuladaoComponent,
         CupomDesafioComponent,
-        CupomEsportesComponent
+        CupomEsportesComponent,
+        CompartilharBilheteComponent
     ],
     providers: [StatsService, ResultadoService]
 })
