@@ -642,8 +642,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     checkBlockedGame() {
         const bloqueados = this.paramsService.getJogosBloqueados();
+        const campeonadosBloqueados = this.paramsService.getCampeonatosBloqueados();
         this.itens.value.forEach((element, index) =>{
-            if(bloqueados.includes(element.jogo_id)){
+            if(bloqueados.includes(element.jogo_id) || campeonadosBloqueados.includes(element.jogo.campeonato._id) ){
                this.itens.removeAt(index)
             }
         })
