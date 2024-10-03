@@ -138,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchRegisterValidated">
+            <div #legitimuz id="legitimuz-container" *ngIf="!faceMatchRegisterValidated">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}

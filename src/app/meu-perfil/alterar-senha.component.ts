@@ -1,3 +1,4 @@
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, AfterViewChecked, AfterContentChecked, AfterContentInit, AfterViewInit } from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
@@ -55,6 +56,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private LegitimuzFacialService: LegitimuzFacialService,
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
+        private faceMatchService : FaceMatchService
     ) {
         super();
     }
@@ -81,14 +83,13 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken);
-        this.faceMatchChangePassword = Boolean(this.paramsLocais.getOpcoes().faceMatchChangePassword && this.legitimuzToken);
-
+        this.faceMatchChangePassword = Boolean(this.paramsLocais.getOpcoes().faceMatchChangePassword && Boolean(this.paramsLocais.getOpcoes().faceMatch));
         if (!this.faceMatchChangePassword) {
             this.faceMatchChangePasswordValidated = true;
         }
         
 
-        if (this.faceMatchEnabled) {
+        if (this.faceMatchEnabled && !this.faceMatchChangePasswordValidated) {
             this.token = this.auth.getToken();
         }
 
@@ -112,18 +113,36 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 }
             
             );
-            if (this.faceMatchEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity && !this.verifiedIdentity && !this.faceMatchChangePasswordValidated) {
                 this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
                         this.verifiedIdentity = curCustomerIsVerified;
                         this.cd.detectChanges();
                         if (this.verifiedIdentity) {
                             this.legitimuzService.closeModal();
                             this.messageService.success('Identidade verificada!');
+                            this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe()
+                            this.faceMatchChangePasswordValidated = true;
+                        } else {
+                            this.legitimuzService.closeModal();
+                            this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                            this.faceMatchChangePasswordValidated = false;
                         }
                     });
                 this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                    this.faceMatchChangePasswordValidated = faceIndex;
-                    this.LegitimuzFacialService.closeModal();
+                    if (faceIndex) {
+                        this.faceMatchChangePasswordValidated = faceIndex;
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
+                            next: (res) => {
+
+                                this.LegitimuzFacialService.closeModal();
+                                this.messageService.success('Identidade verificada!');
+                                this.faceMatchChangePasswordValidated = true;
+                            }, error: (error) => {
+                                this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                                this.faceMatchChangePasswordValidated = false;
+                            }
+                        })
+                    }
                 })
             }   
     }

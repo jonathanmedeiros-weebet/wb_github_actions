@@ -1,3 +1,4 @@
+import { FaceMatchService } from './../../../services/face-match.service';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
@@ -97,6 +98,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
         private legitimuzService: LegitimuzService,
+        private faceMatchService: FaceMatchService
     ) {
         super();
     }
@@ -105,9 +107,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken);
-        this.faceMatchRegister = Boolean(this.paramsService.getOpcoes().faceMatchRegister === true);
+        this.faceMatchRegister = Boolean(this.paramsService.getOpcoes().faceMatchRegister && Boolean(this.paramsService.getOpcoes().faceMatch));
 
-        if (this.faceMatchEnabled === true && this.faceMatchRegister === true) {
+        if (this.faceMatchRegister) {
             this.faceMatchEnabled = true;
         } else {
             this.faceMatchRegisterValidated = true;
@@ -237,15 +239,20 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
                     this.verifiedIdentity = curCustomerIsVerified;
+                    console.log(this.faceMatchRequested)
                     this.cd.detectChanges();
-                    if (this.verifiedIdentity) {
+                    if (!this.verifiedIdentity) {
+                        this.faceMatchService.createFacematch({ document: this.dataUserCPF }).subscribe({
+                            next: (res) => {
+                                this.faceMatchRequested = true;
+                                console.log(res);
+                            }, error: (error) => {
+                                console.log(error);
+                            }
+                        })
                         this.legitimuzService.closeModal();
                         this.messageService.success('Identidade verificada!');
                     }
-                });
-            this.legitimuzService.faceIndex.subscribe(faceIndex => {
-                    this.faceMatchRegisterValidated = faceIndex;
-                    console.log('Faceindex Validado');
                 });
         }   
 
@@ -400,6 +407,15 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.clientesService.cadastrarCliente(values)
             .subscribe(
                 (res) => {
+                    if (this.faceMatchRegister) {
+                        this.clientesService.updateVerifiedIdentity(true).subscribe({
+                            next: (res) => {
+                                console.log(res);
+                            }, error: (error) => {
+                                console.log(error);
+                            }
+                        })
+                    }
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
 
                     this.activeModal.dismiss();
@@ -530,12 +546,5 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
     }
-
-    faceMatch(){
-        this.faceMatchRequested = true;
-        this.cd.detectChanges();
-        console.log(this.faceMatchRequested);
-    }
-
     
 }

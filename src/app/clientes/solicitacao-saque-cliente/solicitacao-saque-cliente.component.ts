@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -83,7 +84,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private layoutService: LayoutService,
         private renderer: Renderer2,
         private legitimuzService: LegitimuzService,
-        private LegitimuzFacialService : LegitimuzFacialService
+        private LegitimuzFacialService : LegitimuzFacialService,
+        private faceMatchService : FaceMatchService
     ) {
         super();
     }
@@ -102,8 +104,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken);
-        this.faceMatchFirstWithdraw = Boolean(this.paramsLocais.getOpcoes().faceMatchFirstWithdraw && this.legitimuzToken);
-        if (!this.faceMatchEnabled && !this.faceMatchFirstWithdraw) {
+        this.faceMatchFirstWithdraw = Boolean(this.paramsLocais.getOpcoes().faceMatchFirstWithdraw && Boolean(this.paramsLocais.getOpcoes().faceMatch));
+        if (!this.faceMatchFirstWithdraw) {
             this.faceMatchFirstWithdrawValidated = true;
         }
         if (this.faceMatchEnabled && this.faceMatchFirstWithdraw) {
@@ -190,11 +192,28 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (this.verifiedIdentity) {
                         this.legitimuzService.closeModal();
                         this.messageService.success('Identidade verificada!');
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
+                        this.faceMatchFirstWithdrawValidated = true;
+                    } else {
+                        this.legitimuzService.closeModal();
+                        this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                        this.faceMatchFirstWithdrawValidated = false;
                     }
                 });
             this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                this.faceMatchFirstWithdrawValidated = faceIndex;
-                this.LegitimuzFacialService.closeModal();
+                if (faceIndex) {
+                    this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
+                        next: (res) => {
+                            this.LegitimuzFacialService.closeModal();
+                            this.messageService.success('Identidade verificada!');
+                            this.faceMatchFirstWithdrawValidated = true;
+                        }, error: (error) => {
+                            this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                            this.faceMatchFirstWithdrawValidated = false;
+                        }
+                    })
+
+                }
             })
         }
     }

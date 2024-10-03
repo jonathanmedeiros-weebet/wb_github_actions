@@ -13,7 +13,7 @@
         </div>
         <div class="content-body">
             <div class="content">
-                <div id="withdrawal" *ngIf="cadastroCompleto && !respostaSolicitacao && (!faceMatchFirstWithdraw || faceMatchFirstWithdrawValidated)">
+                <div id="withdrawal" *ngIf="cadastroCompleto && !respostaSolicitacao && faceMatchFirstWithdrawValidated">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div id="withdrawal-container">
@@ -197,7 +197,7 @@
                         </div>
                         <input *ngIf="cliente?.cpf" id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
                         <input type="hidden" id="legitimuz-ref-id" [value]="token">
-                        <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                        <button (click)="update()" id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                         </button>

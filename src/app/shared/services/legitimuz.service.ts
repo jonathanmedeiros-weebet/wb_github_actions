@@ -49,18 +49,23 @@ export class LegitimuzService {
             this.options.onSuccess = (eventName) => {
                 if (eventName === 'facematch') {
                     setTimeout(() => {
-                        this.clienteService.getCliente(user.id)
-                        .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
+                        if (user.id) {
+
+                            this.clienteService.getCliente(user.id)
+                                .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
+                        } else {
+                            this.curCustomerIsVerifiedSub.next(false);
+                        }
                     }, 1000);
                 }
-                if (eventName === 'faceindex') {
+                if (eventName.name === 'faceindex' && eventName.type === 'success') {
                     console.log('faceindex: Success')
                     this.faceIndexSub.next(true)
                 }
             };
         } else {
             this.options.onSuccess = (eventName) => {
-                if (eventName === 'faceindex') {
+                if (eventName.name === 'faceindex' && eventName.type === 'success') {
                     console.log('faceindex: Success')
                     this.faceIndexSub.next(true)
                 }
@@ -69,8 +74,7 @@ export class LegitimuzService {
 
         this.options.eventHandler = (eventName) => {
             console.log(eventName)
-            console.log(this.options);
-            if (eventName === 'faceindex') {
+            if (eventName.name === 'faceindex' && eventName.type === 'success') {
                 console.log('faceindex: Success')
                 this.faceIndexSub.next(true)
             }

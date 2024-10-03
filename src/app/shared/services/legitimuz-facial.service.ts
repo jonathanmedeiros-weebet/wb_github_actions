@@ -40,51 +40,22 @@ export class LegitimuzFacialService {
       private paramsService: ParametrosLocaisService
   ) {
       this.options.token = this.paramsService.getOpcoes().legitimuz_token; 
-      
       this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
       this.faceIndex = this.faceIndexSub.asObservable();
-      if (JSON.parse(localStorage.getItem('user'))){
-
-          const user = JSON.parse(localStorage.getItem('user'));
-          
-          this.options.onSuccess = (eventName) => {
-              console.log(eventName)
-              if (eventName === 'facematch') {
-                  setTimeout(() => {
-                      this.clienteService.getCliente(user.id)
-                      .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
-                  }, 1000);
-              }
-              if (eventName === 'faceindex') {
-               console.log('faceindex: Success');
-               this.faceIndexSub.next(true)
-              }
-          };
-      } else {
-          this.options.onSuccess = (eventName) => {console.log(eventName)
-            if (eventName === 'faceindex') {
-              console.log('faceindex: Success');
-              this.faceIndexSub.next(true)
-             }
-        
+      this.options.onSuccess = (eventName) => {console.log(eventName)
+        if (eventName.name === 'faceindex' && eventName.type === 'success') {
+          console.log('faceindex: Success');
+          this.faceIndexSub.next(true)
           }
       }
 
       this.options.eventHandler = (eventName) => {
           console.log(eventName);
           console.log(this.options);
-          if (eventName === 'faceindex') {
+          if (eventName.name === 'faceindex' && eventName.type === 'success') {
             console.log('faceindex: Success')
             this.faceIndexSub.next(true)
         }
-      };
-      this.options.eveneventHandler = (eventName) => {
-          console.log(eventName)
-          console.log(this.options);
-      };
-      this.options.error = (eventName) => {
-          console.log(eventName)
-          console.log(this.options);
       };
   }
 

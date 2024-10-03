@@ -272,4 +272,14 @@ export class ClienteService {
             clearInterval(intervalId);
         }, 3000);
     }
+    updateVerifiedIdentity(verifiedIdentity: boolean) {
+        return this.http.post(`${this.clienteUrl}/update-verified-identity`, verifiedIdentity, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+
+    }
 }
