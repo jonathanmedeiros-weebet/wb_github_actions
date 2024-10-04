@@ -206,14 +206,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     atualizarSubmenu() {
         this.submenu = [
             {
-                id: 'aovivo',
-                name: this.translate.instant('submenu.aoVivo'),
-                link: '/live',
-                icon_class: 'fa fa-circle blink_me',
-                category: 'esporte',
-                active: this.isMobile ? false : this.paramsService.getOpcoes().aovivo
-            },
-            {
                 id: 'futebol',
                 name: this.translate.instant('submenu.futebol'),
                 link: '/esportes/futebol',
