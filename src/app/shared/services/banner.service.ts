@@ -31,23 +31,14 @@ export class BannerService {
             this.http.get(`${this.BannerUrl}`, this.header.getRequestOptions(false))
                 .subscribe((res: any) => {
                         this.cachedBanners = res.results;
-                        this.bannersSource.next(this.filterBanners(pagina));
+                        this.bannersSource.next(this.cachedBanners);
                         this.synchronized = true;
                     },
                     error => {
                         catchError(this.errorService.handleError);
                     });
         } else {
-            this.bannersSource.next(this.filterBanners(pagina));
+            this.bannersSource.next(this.cachedBanners);
         }
-    }
-
-    filterBanners(pagina) {
-        if (pagina === 'deposito') {
-            return this.cachedBanners.filter(banner => banner.pagina == pagina);
-        } else {
-            return this.cachedBanners.filter(banner => ['todas', pagina].includes(banner.pagina));
-        }
-        
     }
 }
