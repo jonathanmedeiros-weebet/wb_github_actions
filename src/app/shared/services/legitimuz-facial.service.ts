@@ -13,7 +13,7 @@ export class LegitimuzFacialService {
   private sdk;
 
   private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
-  private static API_LEGITIMUZ_LIVENESS: String = "https://liveness.legitimuz.com";
+  private static API_LEGITIMUZ_LIVENESS: String = "https://widget.legitimuz.com";
 
   private options:any = {
       host: LegitimuzFacialService.API_LEGITIMUZ,
