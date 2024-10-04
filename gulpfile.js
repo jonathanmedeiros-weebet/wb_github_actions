@@ -2868,6 +2868,7 @@ gulp.task('puskasbet.com.br', function (done) {
         host: "puskasbet.com.br",
         banca: "PUSKAS BET",
         styles: "",
+        xtremepush_sdk: "U4khpg3OiiSAmb15QwVyVUFFXzvEv20ki"
     });
 });
 
