@@ -2949,3 +2949,30 @@ gulp.task('12bets.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('bettotal.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bettotal.bet",
+        banca: "BET TOTAL",
+        styles: "",
+    });
+});
+
+gulp.task('topbets.site', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "topbets.site",
+        banca: "VIA BET",
+        styles: "",
+    });
+});
+
+gulp.task('via-bet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "via-bet.com",
+        banca: "VIA BET",
+        styles: "",
+    });
+});

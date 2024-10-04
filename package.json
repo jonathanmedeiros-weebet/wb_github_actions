@@ -310,7 +310,10 @@
         "clbet.com": "gulp clbet.com",
         "leaobet.com": "gulp leaobet.com",
         "emirates365.bet": "gulp emirates365.bet",
-        "12bets.bet": "gulp 12bets.bet"
+        "12bets.bet": "gulp 12bets.bet",
+        "bettotal.bet": "gulp bettotal.bet",
+        "topbets.site": "gulp topbets.site",
+        "via-bet.com": "gulp via-bet.com"
     },
     "private": true,
     "dependencies": {
