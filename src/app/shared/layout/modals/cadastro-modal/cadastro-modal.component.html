@@ -49,7 +49,8 @@
                         <div class="input-md">
                             <input type="text" id="dataNascimento" class="form-control inverted-out" mask="d0/M0/0000"
                                 formControlName="nascimento"
-                                [ngClass]="applyCssInputError('nascimento')" placeholder=" ">
+                                [ngClass]="applyCssInputError('nascimento')" placeholder=" "
+                                [readonly]="faceMatchRequested">
                             <label for="dataNascimento">{{'geral.dataDeNascimento' | translate}}</label>
                         </div>
 
@@ -200,7 +201,7 @@
             <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
 
                 <div class="col-12">
-                    <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+                    <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting || (faceMatchEnabled && !faceMatchRequested)">{{'geral.cadastrar' | translate}}</button>
                 </div>
             </div>
 
@@ -211,11 +212,9 @@
                 <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de Privacidade</a> do Google e os
                 <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de Serviço</a> se aplicam.
             </div>
-
             <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
-
             <div class="col-12">
-                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="faceMatchEnabled && !faceMatchRegisterValidated">{{'geral.cadastrar' | translate}}</button>
+                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting || (faceMatchEnabled && !faceMatchRequested)">{{'geral.cadastrar' | translate}}</button>
             </div>
             <div class="login">
                 {{'geral.jaPossuiUmaConta' | translate}}

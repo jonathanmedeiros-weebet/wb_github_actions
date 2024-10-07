@@ -176,7 +176,7 @@
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
                     {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
                 </div>
-                <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && faceMatchFirstWithdraw && !faceMatchFirstWithdrawValidated && !verifiedIdentity">
+                <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchFirstWithdrawValidated && !verifiedIdentity">
                     <div id="legitimuz">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
@@ -190,7 +190,7 @@
                     </div>
                     <div id="legitimuz-root"></div>
                 </div>
-                <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && faceMatchFirstWithdraw && !faceMatchFirstWithdrawValidated && verifiedIdentity">
+                <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchFirstWithdrawValidated && verifiedIdentity">
                     <div id="legitimuz">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}

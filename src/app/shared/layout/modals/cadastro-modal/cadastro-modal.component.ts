@@ -403,6 +403,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             values.parameters = this.parameters;
         }
 
+        this.submitting = true
        
         this.clientesService.cadastrarCliente(values)
             .subscribe(
@@ -545,6 +546,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
+    }
+
+    faceMatch() {
+        this.faceMatchService.createFacematch({ document: this.dataUserCPF }).subscribe({
+            next: (res) => {
+                this.faceMatchRequested = true;
+                this.cd.detectChanges();
+                console.log(res);
+            }, error: (error) => {
+                console.log(error);
+            }
+        })
     }
     
 }

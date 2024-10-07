@@ -103,12 +103,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.currentLanguage = this.translate.currentLang;
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken);
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken) && Boolean(this.paramsLocais.getOpcoes().faceMatchFirstWithdraw);
         this.faceMatchFirstWithdraw = Boolean(this.paramsLocais.getOpcoes().faceMatchFirstWithdraw && Boolean(this.paramsLocais.getOpcoes().faceMatch));
-        if (!this.faceMatchFirstWithdraw) {
+        if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
         }
-        if (this.faceMatchEnabled && this.faceMatchFirstWithdraw) {
+        if (this.faceMatchEnabled) {
             this.token = this.auth.getToken();
         }
 
@@ -164,6 +164,16 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.rotaCompletarCadastro = '/clientes/perfil';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
+                    this.faceMatchService.getFaceMatch({ document: this.cliente.cpf, id: user.id }).subscribe({
+                        next: (res) => {
+                            console.log(res)
+                            if (res.document == this.cliente.cpf && (res.first_withdraw != null)) {
+                                this.faceMatchFirstWithdrawValidated = true;
+                            } else {
+                                console.log('NãoTemFirst')
+                            }
+                        }, error: (error) => { console.log(error) }
+                    })
 
                     this.onChavePixChange();
                     this.showLoading = false;
@@ -183,7 +193,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.faceMatchEnabled && this.faceMatchFirstWithdraw && !this.disapprovedIdentity && !this.verifiedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {

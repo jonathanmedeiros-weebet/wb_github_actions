@@ -16,17 +16,17 @@ export class LegitimuzService {
 
     private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
 
-    private options:any = {
+    private options: any = {
         host: LegitimuzService.API_LEGITIMUZ,
         token: '',
         lang: 'pt',
         enableRedirect: false,
         autoOpenValidation: false,
-        onlyLiveness : false,
+        onlyLiveness: false,
         onSuccess: (eventName) => console.log(eventName),
         onError: (eventName) => console.log(eventName),
-        eventHandler:(eventName) => console.log(eventName),
-        eveneventHandler:(eventName) => console.log(eventName),
+        eventHandler: (eventName) => console.log(eventName),
+        eveneventHandler: (eventName) => console.log(eventName),
     };
 
     private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
@@ -34,7 +34,7 @@ export class LegitimuzService {
     private faceIndexSub = new BehaviorSubject<boolean>(false);
     faceIndex;
 
-    constructor (
+    constructor(
         private clienteService: ClienteService,
         private paramsService: ParametrosLocaisService
     ) {
@@ -42,15 +42,16 @@ export class LegitimuzService {
 
         this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
         this.faceIndex = this.faceIndexSub.asObservable();
-        if (JSON.parse(localStorage.getItem('user'))){
+        if (JSON.parse(localStorage.getItem('user'))) {
 
             const user = JSON.parse(localStorage.getItem('user'));
-            
+
             this.options.onSuccess = (eventName) => {
+                console.log(eventName);
                 if (eventName === 'facematch') {
                     setTimeout(() => {
                         if (user.id) {
-
+                            console.log('facematch: Success')
                             this.clienteService.getCliente(user.id)
                                 .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
                         } else {
@@ -59,12 +60,14 @@ export class LegitimuzService {
                     }, 1000);
                 }
                 if (eventName.name === 'faceindex' && eventName.type === 'success') {
+                    console.log(eventName);
                     console.log('faceindex: Success')
                     this.faceIndexSub.next(true)
                 }
             };
         } else {
             this.options.onSuccess = (eventName) => {
+                console.log(eventName);
                 if (eventName.name === 'faceindex' && eventName.type === 'success') {
                     console.log('faceindex: Success')
                     this.faceIndexSub.next(true)
@@ -90,13 +93,13 @@ export class LegitimuzService {
     }
 
     init() {
-        this.sdk = Legitimuz(this.options); 
+        this.sdk = Legitimuz(this.options);
         console.log(this.options)
     }
 
-    mount() {          
+    mount() {
         this.sdk.mount();
-    }     
+    }
 
     changeLang(lang: string) {
         this.sdk.setLang(lang);

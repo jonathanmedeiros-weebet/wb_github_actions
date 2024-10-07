@@ -24,17 +24,28 @@ export class FaceMatchService {
   }
 
   createFacematch(data: any): Observable<any> {
-    return this.http.post(`${this.faceMatchUrl}/cadastro`, data, this.header.getRequestOptions())
+    return this.http.post(`${this.faceMatchUrl}/cadastro`, data)
       .pipe(
-        map((res: any) => { console.log(res); return res }),
+        map((res: any) => { return res.results }),
         catchError(this.errorService.handleError)
       );
   }
 
   updadeFacematch(data: any): Observable<any> {
-    return this.http.post(`${this.faceMatchUrl}/update-facematch`, data, this.header.getRequestOptions())
+    return this.http.post(`${this.faceMatchUrl}/update-facematch`, data)
       .pipe(
-        map((res: any) => { console.log(res); return res }),
+        map((res: any) => { return res.results }),
+        catchError(this.errorService.handleError)
+      );
+  }
+
+  getFaceMatch(data: any): Observable<any> {
+
+    console.log(data)
+
+    return this.http.post(`${this.faceMatchUrl}/facematch`, data)
+      .pipe(
+        map((res: any) => { console.log(res); return res.results }),
         catchError(this.errorService.handleError)
       );
   }
