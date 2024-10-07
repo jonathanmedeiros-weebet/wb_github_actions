@@ -2889,14 +2889,14 @@ gulp.task('topbets.site', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "topbets.site",
-        banca: "VIA BET",
+        banca: "TOP BETS",
         styles: "",
     });
 });
 
 gulp.task('via-bet.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "54.232.141.48",
         host: "via-bet.com",
         banca: "VIA BET",
         styles: "",
