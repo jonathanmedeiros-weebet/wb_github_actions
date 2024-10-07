@@ -53,11 +53,23 @@ export const printTicket = async (bet: any) => {
                 .text('CAMBISTA:')
                 .bold(false)
                 .text(removerAcentos(bet.passador.nome))
-                .newline()
-                .bold(true)
-                .text('APOSTADOR:')
-                .bold(false)
-                .text(removerAcentos(bet.apostador));
+                .newline();
+
+            if(bet.apostador) {
+                ticketEscPos
+                    .bold(true)
+                    .text('APOSTADOR:')
+                    .bold(false)
+                    .text(removerAcentos(bet.apostador));
+            }
+
+            if(bet.bettor_document_number) {
+                ticketEscPos
+                    .bold(true)
+                    .text('CPF DO APOSTADOR:')
+                    .bold(false)
+                    .text(bet.bettor_document_number);
+            }
         }
 
         ticketEscPos
