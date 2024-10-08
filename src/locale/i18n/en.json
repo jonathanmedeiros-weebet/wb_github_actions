@@ -196,7 +196,7 @@
         "resultadosFutebol": "Football Results",
         "resultadosLoterias": "Lottery Results",
         "contato": "Contact",
-        "requisitosSenha": "Password must have at least 6 characters.",
+        "requisitosSenha": "Password must have at least 8 characters.",
         "nomeJogoCassino": "Game",
         "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
         "historicoDeApostas": "Betting History",
@@ -376,7 +376,11 @@
         "reenviaCodigoDeVerificacao": "Resend Verification Code",
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
-        "digiteSuaSenha": "Type your password"
+        "digiteSuaSenha": "Type your password",
+        "minimumCharactersPassword": "Minimum 8 characters",
+        "lowercaseLetter": "Minimum of one lowercase letter",
+        "uppercaseLetter": "Minimum of one uppercase letter",
+        "specialChar": "Minimum of one special character (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Enter the amount for the withdrawal",

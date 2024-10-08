@@ -196,7 +196,7 @@
         "resultadosFutebol": "Resultados Futebol",
         "resultadosLoterias": "Resultados Loterias",
         "contato": "Contato",
-        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres.",
+        "requisitosSenha": "Senha deve possuir no mínimo 8 caracteres.",
         "nomeJogoCassino": "Jogo",
         "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}",
         "historicoDeApostas": "Histórico de Apostas",
@@ -378,7 +378,11 @@
         "reenviaCodigoDeVerificacao": "Reenviar Código de Verificação",
         "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
         "solicitarCodigoRedefinicao": "Solicitar código de redefinição",
-        "digiteSuaSenha": "Digite sua senha"
+        "digiteSuaSenha": "Digite sua senha",
+        "minimumCharactersPassword": "Mínimo de 8 caracteres",
+        "lowercaseLetter": "Mínimo de uma letra minúscula",
+        "uppercaseLetter": "Mínimo de uma letra maiúscula",
+        "specialChar": "Mínimo de um caractere especial (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",
