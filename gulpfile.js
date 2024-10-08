@@ -1016,17 +1016,6 @@ gulp.task('sportingol.bet', function (done) {
     });
 });
 
-gulp.task('deugreen.me', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "deugreen.me",
-        banca: "deugreen - Apostas Desportivas Online",
-        styles: "",
-        pixel: "<meta name='keywords' content='Apostas Esportivas, Ao-Vivo e Em tempo real, Transmissão Ao-Vivo, Melhores odds garantidas, bônus 100% Ligas Europeias, Fazer Aposta, Destaques de Futebol, Premier League, UEFA Liga dos Campeões, Jogos'\>",
-        description: "deugreen - A casa de apostas online mais popular do mundo. Oferecemos o serviço Ao-Vivo mais completo. Assista Esportes Ao-Vivo. Transmissão Ao-Vivo disponível para PC, celular e tablet. Aposte em Esportes. Aposte já em Esportes, incluindo Futebol, Tênis e Basquete."
-    });
-});
-
 gulp.task('betsesporte.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1775,15 +1764,6 @@ gulp.task('apostai.net', function (done) {
     });
 });
 
-gulp.task('sortegrande.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "sortegrande.bet",
-        banca: "SORTE GRANDE",
-        styles: "",
-    });
-});
-
 gulp.task('winsport.vip', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2054,15 +2034,6 @@ gulp.task('moneybets.net', function (done) {
     });
 });
 
-gulp.task('ciaaonline.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "ciaaonline.com",
-        banca: "CIA A ONLINE",
-        styles: "",
-    });
-});
-
 gulp.task('bnrbet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2132,15 +2103,6 @@ gulp.task('mczbet.com', function (done) {
         host: "mczbet.com",
         banca: "MCZ BET",
         styles: ""
-    });
-});
-
-gulp.task('smartbet.cash', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "smartbet.cash",
-        banca: "SMART BET",
-        styles: "",
     });
 });
 
@@ -2426,15 +2388,6 @@ gulp.task('brinksbet.com', function (done) {
     });
 });
 
-gulp.task('riquinhobet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "riquinhobet.com",
-        banca: "RIQUINHO BET",
-        styles: ""
-    });
-});
-
 gulp.task('betbastet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2541,15 +2494,6 @@ gulp.task('camaraobet.com', function (done) {
         server: "front2.wee.bet",
         host: "camaraobet.com",
         banca: "CAMARÃO BET",
-        styles: ""
-    });
-});
-
-gulp.task('7copas.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "7copas.bet",
-        banca: "7 COPAS",
         styles: ""
     });
 });
@@ -2763,15 +2707,6 @@ gulp.task('amurel.bet', function (done) {
     });
 });
 
-gulp.task('bellagames.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "bellagames.bet",
-        banca: "BELLA GAMES",
-        styles: ""
-    });
-});
-
 gulp.task('tourodasorte.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2800,15 +2735,6 @@ gulp.task('bigdaybet.com', function (done) {
     });
 });
 
-gulp.task('oraculo.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "oraculo.bet",
-        banca: "ORACULO.BET",
-        styles: "",
-    });
-});
-
 gulp.task('priv8bet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2824,7 +2750,8 @@ gulp.task('betinha.com', function (done) {
         host: "betinha.com",
         banca: "betinha.com",
         styles: "",
-        xtremepush_sdk: "Td-K8QujD1c4wTfQsFsmNZ78iX7J-56k"
+        xtremepush_sdk: "Td-K8QujD1c4wTfQsFsmNZ78iX7J-56k",
+        scripts: "<script> window.$chatwoot.toggle(); </script>"
     });
 });
 
@@ -2945,6 +2872,33 @@ gulp.task('12bets.bet', function (done) {
         server: "front3.wee.bet",
         host: "12bets.bet",
         banca: "12 BETS",
+        styles: "",
+    });
+});
+
+gulp.task('bettotal.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bettotal.bet",
+        banca: "BET TOTAL",
+        styles: "",
+    });
+});
+
+gulp.task('topbets.site', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "topbets.site",
+        banca: "VIA BET",
+        styles: "",
+    });
+});
+
+gulp.task('via-bet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "via-bet.com",
+        banca: "VIA BET",
         styles: "",
     });
 });

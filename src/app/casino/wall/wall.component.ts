@@ -95,7 +95,9 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get blink(): string {
-        return this.router.url.split('/')[1] ?? 'casino';
+        const urlTree = this.router.parseUrl(this.router.url);
+        const pathSegments = urlTree.root.children['primary'].segments;
+        return Boolean(pathSegments.length) ? pathSegments[0].path : 'casino';
     }
 
     get isHomeCassino(): boolean {
