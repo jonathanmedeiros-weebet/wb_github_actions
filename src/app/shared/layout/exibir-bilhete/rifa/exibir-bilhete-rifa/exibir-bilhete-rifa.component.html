@@ -41,7 +41,7 @@
     <p style="margin: 0" class="resultado">
         <span>Resultado: </span>
         <span style="float: right;" *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
-        <span style="float: right;" *ngIf="!aposta.resultado">Aguardando</span>
+        <span style="float: right;" *ngIf="!aposta.resultado">{{ 'compartilhar_aposta.aguardando' }}</span>
     </p>
     <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
         {{'geral.premio' | translate}}: <span style="float: right;">{{aposta.premio | currency}}</span>
