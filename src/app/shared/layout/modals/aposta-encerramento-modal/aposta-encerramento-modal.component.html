@@ -281,7 +281,7 @@
     </div>
     <div class="rodape">
         <p *ngIf="falhaSimulacao">
-            <span class="dados-simulacao">{{ 'comartilhar_aposta.apostaNaoPodeSerEncerrada' | translate }}</span>
+            <span class="dados-simulacao">{{ 'compartilhar_aposta.apostaNaoPodeSerEncerrada' | translate }}</span>
         </p>
     </div>
     <div class="button-container" style="display: flex; flex-direction: row; justify-content: space-around;">
@@ -291,7 +291,7 @@
         </button>
         <button *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
             [disabled]="simulando || repeating">
-            {{ (simulando ? 'compartilhar_aposta.calculando' : 'compartilhar_aposta.encerrarAposta') }}
+            {{ (simulando ? 'compartilhar_aposta.calculando' : 'compartilhar_aposta.encerrarAposta') | translate }}
         </button>
         <button class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
             (click)="descartar()">
