@@ -40,7 +40,7 @@
         </p>
         <p class="resultado">
             <b>Resultados: </b>
-            <span *ngIf="aposta.resultado">{{aposta.resultado || titlecase}}</span>
+            <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
             <span *ngIf="!aposta.resultado">Aguardando</span>
         </p>
         <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">

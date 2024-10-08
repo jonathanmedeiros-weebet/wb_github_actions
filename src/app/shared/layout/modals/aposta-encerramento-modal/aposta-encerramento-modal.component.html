@@ -2,8 +2,6 @@
 <div class="modal-header">
     <div>
         <h5 id="modal-basic-title">Aposta</h5>
-        <!-- <h5 class="modal-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5> -->
-        <!-- <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6> -->
     </div>
     <div class="action-buttons">
         <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
@@ -39,13 +37,6 @@
     </div>
     <div class="table-container">
         <table class="table">
-            <!-- <thead>
-                <tr>
-                    <th style="padding-left: 14px;">Data/Horário</th>
-                    <th>Evento/Mercado</th>
-                    <th>Status</th>
-                </tr>
-            </thead> -->
             <tbody>
                 <ng-container *ngFor="let item of aposta.itens">
                     <tr class="cupom" style="border-bottom: 2px dotted black;">
@@ -122,15 +113,6 @@
                         <p>
                             <b>{{'geral.status' | translate}}: </b>
                         </p>
-                        <!-- <p class="total-jogos">
-                            Quantidade de jogos:<span style="margin-left: 3px;">{{aposta.itens.length}}</span>
-                        </p> -->
-                        <!-- <p class="aposta">
-                            Cotação:
-                            <span>
-                                {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}
-                            </span>
-                        </p> -->
                         <p class="aposta">
                             Valor apostado:
                         </p>
@@ -242,7 +224,6 @@
     <div class="footer-container">
         <div class="cupom" style="padding: 10px; margin-top: 10px; display: flex; justify-content: space-between;">
             <div class="item" style="flex: 1;">
-                <!-- <p class="codigo-aposta"><b>Código da aposta:</b></p> -->
                 <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                     <p><b>Cliente:</b></p>
                 </div>
@@ -300,32 +281,32 @@
     </div>
     <div class="rodape">
         <p *ngIf="falhaSimulacao">
-            <span class="dados-simulacao">Essa aposta não pode ser encerrada.</span>
+            <span class="dados-simulacao">{{ 'comartilhar_aposta.apostaNaoPodeSerEncerrada' | translate }}</span>
         </p>
     </div>
     <div class="button-container" style="display: flex; flex-direction: row; justify-content: space-around;">
         <button *ngIf="podeEncerrar(aposta)" class="secondary-btn btn" (click)="repetirAposta(aposta)"
             [disabled]="simulando || repeating">
-            {{repeating ? "Repetindo..." : 'Repetir aposta'}}
+            {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate }}
         </button>
         <button *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
             [disabled]="simulando || repeating">
-            {{ simulando ? 'Calculando...' : 'Encerrar Aposta' }}
+            {{ (simulando ? 'compartilhar_aposta.calculando' : 'compartilhar_aposta.encerrarAposta') }}
         </button>
         <button class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
             (click)="descartar()">
-            Cancelar
+            {{ 'geral.cancelar' | translate }}
         </button>
         <button class="btn btn-custom" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
             (click)="confirmarEncerramento()">
-            Confirmar
+            {{ 'geral.confirmar' | translate }}
         </button>
         <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && encerrando;">
-            Encerrando...
+            {{ 'compartilhar_aposta.encerrando' | translate }}
             <i class="fa fa-spinner fa-spin"></i>
         </button>
         <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && process;">
-            {{'geral.processando' | translate}}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+            {{ 'geral.processando' | translate }}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
             <i class="fa fa-spinner fa-spin"></i>
         </button>
     </div>

@@ -20,6 +20,7 @@ import { CompatilhamentoBilheteModal } from '../compartilhamento-bilhete-modal/c
 import { JogoService } from 'src/app/shared/services/aposta-esportiva/jogo.service';
 import * as sportsIds from '../../../constants/sports-ids';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-aposta-encerramento-modal',
@@ -72,7 +73,8 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         private jogoService: JogoService,
         private router: Router,
         private bilheteEsportivo: BilheteEsportivoService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private translate: TranslateService
     ) {
     }
 
@@ -369,15 +371,15 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     async shareBetLink(aposta) {
         if (navigator.share) {
             navigator.share({
-                title: 'Bilhete de Aposta',
-                text: 'Acesse o link para visualizar o bilhete de aposta.',
+                title: this.translate.instant('compartilhar_aposta.mensagemTitle'),
+                text: this.translate.instant('compartilhar_aposta.mensagemBody'),
                 url: `https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`
             }).then(() => {
-                this.messageService.success('Bilhete compartilhado com sucesso!');
+                this.messageService.success(this.translate.instant('compartilhar_aposta.bilheteCompartilhado'));
             });
         } else {
             this.copyToClipboard(`https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`, false);
-            this.messageService.success('Link copiado para a área de transferência!');
+            this.messageService.success(this.translate.instant('compartilhar_aposta.linkCopiado'));
         }
     }
 
@@ -398,10 +400,10 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             this.bilheteEsportivo.atualizarItens(convertedItemToBet);
             this.activeModal.close();
             this.router.navigate(['/esportes']);
-            this.messageService.success('Aposta repetida com sucesso!');
+            this.messageService.success(this.translate.instant('compartilhar_aposta.apostaRepetida'));
             return;
         }
-        this.messageService.warning('A aposta não pôde ser repetida.');
+        this.messageService.warning(this.translate.instant('compartilhar_aposta.apostaRepetidaErro'));
         this.repeating = false;
     }
 
@@ -409,10 +411,10 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         try {
             await navigator.clipboard.writeText(codigo);
             if (message) {
-                this.messageService.success('Código copiado para a área de transferência!');
+                this.messageService.success(this.translate.instant('compartilhar_aposta.codigoCopiado'));
             }
         } catch (err) {
-            this.messageService.error('Falha ao copiar o código para a área de transferência.');
+            this.messageService.error(this.translate.instant('compartilhar_aposta.codigoCopiadoErro'));
         }
     }
 

@@ -105,9 +105,7 @@ hr {
     display: flex;
 }
 .total-jogos {
-    /* font-weight: bold; */
     font-size: 12px;
-    /* display: flex; */
     margin: 0;
 }
 .codigo-aposta, .aposta-horario {

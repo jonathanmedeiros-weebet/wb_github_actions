@@ -5,9 +5,6 @@
                 <p class="informacoes-item" id="modalidade">
                     MODALIDADE: {{sorteioNome(item.tipo)}}
                 </p>
-                <!-- <p class="informacoes-item">
-                    VALOR: {{item.valor | currency}}
-                </p> -->
                 <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
                     Retorno 6: {{calcularPremioLoteria(item.valor, item.cotacao6) | currency}}
                     <br>
@@ -48,12 +45,6 @@
                         </ng-container>
                     </div>
                 </div>
-                <!-- <p class="informacoes-item">
-                    <strong *ngIf="item.status != 'ganhou'; else ganhou">{{item.status}}</strong>
-                    <ng-template #ganhou>
-                        <strong>{{item.status}} {{item.tipo_premio}}</strong>
-                    </ng-template>
-                </p> -->
             </ng-container>
         </div>
         <div class="footer-cupom">

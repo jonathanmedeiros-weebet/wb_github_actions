@@ -676,5 +676,22 @@
         "pending": "Pending",
         "redeemed": "Redeemed",
         "redeem": "Redeem"
+    },
+    "compartilhar_aposta": {
+        "linkCopiado": "Link copied to clipboard!",
+        "bilheteCompartilhado": "Ticket shared successfully!",
+        "apostaRepetida": "Bet repeated successfully!",
+        "apostaRepetidaErro": "Error repeating the bet, please try again later.",
+        "codigoCopiado": "Code copied to clipboard!",
+        "codigoCopiadoErro": "Error copying the code.",
+        "mensagemTitle": "Bet Ticket",
+        "mensagemBody": "Access the link to view the bet ticket.",
+        "repetindoAposta": "Repeating bet...",
+        "repetirAposta": "Repeat bet",
+        "aguardando": "Waiting",
+        "calculando": "Calculating...",
+        "encerrarAposta": "End bet",
+        "encerrando": "Ending...",
+        "apostaNaoPodeSerEncerrada": "The bet cannot be ended."
     }
 }

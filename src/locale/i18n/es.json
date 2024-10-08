@@ -668,5 +668,22 @@
         "pending": "Pendiente",
         "redeemed": "Canjeado",
         "redeem": "Canjear"
+    },
+    "compartilhar_aposta": {
+        "linkCopiado": "¡Enlace copiado al portapapeles!",
+        "bilheteCompartilhado": "¡Boleto compartido con éxito!",
+        "apostaRepetida": "¡Apuesta repetida con éxito!",
+        "apostaRepetidaErro": "Error al repetir la apuesta, intente nuevamente más tarde.",
+        "codigoCopiado": "¡Código copiado al portapapeles!",
+        "codigoCopiadoErro": "Error al copiar el código.",
+        "mensagemTitle": "Boleto de Apuesta",
+        "mensagemBody": "Acceda al enlace para ver el boleto de apuesta.",
+        "repetindoAposta": "Repitiendo apuesta...",
+        "repetirAposta": "Repetir apuesta",
+        "aguardando": "Esperando",
+        "calculando": "Calculando...",
+        "encerrarAposta": "Finalizar apuesta",
+        "encerrando": "Finalizando...",
+        "apostaNaoPodeSerEncerrada": "La apuesta no se puede finalizar."
     }
 }
