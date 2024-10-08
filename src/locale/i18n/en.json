@@ -253,7 +253,9 @@
         "bonusCancelado": "Bonus canceled",
         "aguardando": "Pending",
         "loginEmail": "Email",
-        "loginPhone": "Phone"
+        "loginPhone": "Phone",
+        "session_alert": "Session Alert",
+        "session_alert_message": "There is currently an active session on another device. To continue access, would you like to close the other session?"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -607,7 +609,9 @@
         "aceitar": "Accept",
         "entendi": "Got it",
         "salvar_alteracoes": "Save Changes",
-        "voltar": "Back"
+        "voltar": "Back",
+        "logout_continue_login": "Yes, I would like to close the session",
+        "remain_active_session": "No, keep the other session active"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",

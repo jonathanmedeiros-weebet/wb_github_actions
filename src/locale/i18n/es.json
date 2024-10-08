@@ -249,7 +249,9 @@
         "bonusCancelado": "Bono cancelado",
         "aguardando": "Pendiente",
         "loginEmail": "Correo electrónico",
-        "loginPhone": "Teléfono"
+        "loginPhone": "Teléfono",
+        "session_alert": "Alerta de Sesión",
+        "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
@@ -599,7 +601,9 @@
         "aceitar": "Aceptar",
         "entendi": "Lo tengo",
         "salvar_alteracoes": "Guardar Cambios",
-        "voltar": "Volver"
+        "voltar": "Volver",
+        "logout_continue_login": "Sí, me gustaría cerrar la sesión.",
+        "remain_active_session": "No, seguir con la otra sesión activa"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",
