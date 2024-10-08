@@ -55,7 +55,7 @@
 }
 
 .games-search--actived .games-search__content {
-    padding-bottom: 100px;
+    padding-bottom: 24px;
 }
 
 :host ::ng-deep .games-search--actived .games-search__input .search-box__icon--clear {
@@ -115,6 +115,10 @@
     }
 }
 
+.search-recents__body{
+    flex-direction: row;
+}
+
 .search-results {
     display: flex;
     flex-direction: column;
@@ -152,7 +156,7 @@
 
     &__list {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
         gap: 10px;
     }
 
@@ -189,12 +193,8 @@
     }
 
     .search-results__list {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
         gap: 15px;
-    }
-
-    .search-recents__body{
-        flex-direction: row;
     }
 }
 
@@ -271,7 +271,7 @@
     }
 
     .search-results__list {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
         gap: 15px;
     }
 }

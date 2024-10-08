@@ -11,6 +11,7 @@ import { JogosDestaqueComponent } from './widgets/jogos-destaque/jogos-destaque.
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BilheteComponent } from './bilhete/bilhete.component';
 import { CasinoModule } from '../casino/casino.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { CasinoModule } from '../casino/casino.module';
         NgbModule,
         HomeRoutingModule,
         CarouselModule,
+        NgxMaskModule,
     ],
     exports: [
         JogosDestaqueComponent
