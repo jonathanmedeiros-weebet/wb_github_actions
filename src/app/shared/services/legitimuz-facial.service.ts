@@ -27,7 +27,6 @@ export class LegitimuzFacialService {
       onSuccess: (eventName) => console.log(eventName),
       onError: (eventName) => console.log(eventName),
       eventHandler:(eventName) => console.log(eventName),
-      eveneventHandler:(eventName) => console.log(eventName),
   };
 
   private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
@@ -42,7 +41,8 @@ export class LegitimuzFacialService {
       this.options.token = this.paramsService.getOpcoes().legitimuz_token; 
       this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
       this.faceIndex = this.faceIndexSub.asObservable();
-      this.options.onSuccess = (eventName) => {console.log(eventName)
+      this.options.onSuccess = (eventName) => {
+        console.log(eventName);
         if (eventName.name === 'faceindex' && eventName.type === 'success') {
           console.log('faceindex: Success');
           this.faceIndexSub.next(true)

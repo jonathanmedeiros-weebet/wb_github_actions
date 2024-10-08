@@ -25,8 +25,7 @@ export class LegitimuzService {
         onlyLiveness: false,
         onSuccess: (eventName) => console.log(eventName),
         onError: (eventName) => console.log(eventName),
-        eventHandler: (eventName) => console.log(eventName),
-        eveneventHandler: (eventName) => console.log(eventName),
+        eventHandler: (eventName) => console.log(eventName)
     };
 
     private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
@@ -81,10 +80,6 @@ export class LegitimuzService {
                 console.log('faceindex: Success')
                 this.faceIndexSub.next(true)
             }
-        };
-        this.options.eveneventHandler = (eventName) => {
-            console.log(eventName)
-            console.log(this.options);
         };
         this.options.error = (eventName) => {
             console.log(eventName)
