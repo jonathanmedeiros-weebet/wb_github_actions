@@ -2902,3 +2902,23 @@ gulp.task('via-bet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('amabet.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "amabet.bet",
+        banca: "AMA BET",
+        styles: "",
+        dominioTemp: "amabet.wee.bet"
+    });
+});
+
+gulp.task('bigwinfree.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bigwinfree.com",
+        banca: "AMA BET",
+        styles: "",
+        dominioTemp: "bigwinfree.wee.bet"
+    });
+});

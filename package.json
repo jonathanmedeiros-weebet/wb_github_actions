@@ -305,7 +305,9 @@
         "12bets.bet": "gulp 12bets.bet",
         "bettotal.bet": "gulp bettotal.bet",
         "topbets.site": "gulp topbets.site",
-        "via-bet.com": "gulp via-bet.com"
+        "via-bet.com": "gulp via-bet.com",
+        "amabet.bet": "gulp amabet.bet",
+        "bigwinfree.com": "gulp bigwinfree.com"
     },
     "private": true,
     "dependencies": {
