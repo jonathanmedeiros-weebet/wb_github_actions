@@ -250,6 +250,8 @@
         "alteracoesSucesso": "Changes made successfully!",
         "erroInesperado": "Something unexpected happened. Please try again later.",
         "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
+        "bonusCancelado": "Bonus canceled",
+        "aguardando": "Pending",
         "loginEmail": "Email",
         "loginPhone": "Phone"
     },
