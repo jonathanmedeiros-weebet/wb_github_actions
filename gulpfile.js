@@ -2917,7 +2917,7 @@ gulp.task('bigwinfree.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "bigwinfree.com",
-        banca: "AMA BET",
+        banca: "BIG WIN FREE",
         styles: "",
         dominioTemp: "bigwinfree.wee.bet"
     });
