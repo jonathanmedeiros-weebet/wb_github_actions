@@ -9,6 +9,7 @@ import { ExibirBilheteCassinoComponent } from '../../exibir-bilhete/cassino/exib
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService, AuthService, ParametrosLocaisService, MessageService } from '../../../../services';
 import { config } from '../../../config';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -40,7 +41,8 @@ export class ApostaModalComponent implements OnInit {
         private helperService: HelperService,
         private paramsLocais: ParametrosLocaisService,
         private auth: AuthService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private translate: TranslateService
     ) { }
 
     ngOnInit() {
@@ -86,15 +88,15 @@ export class ApostaModalComponent implements OnInit {
     async shareBetLink(aposta) {
         if (navigator.share) {
             navigator.share({
-                title: 'Bilhete de Aposta',
-                text: 'Acesse o link para visualizar o bilhete de aposta.',
+                title: this.translate.instant('compartilhar_aposta.mensagemTitle'),
+                text: this.translate.instant('compartilhar_aposta.mensagemBody'),
                 url: `https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`
             }).then(() => {
-                this.messageService.success('Bilhete compartilhado com sucesso!');
+                this.messageService.success(this.translate.instant('compartilhar_aposta.bilheteCompartilhado'));
             });
         } else {
             this.copyToClipboard(`https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`, false);
-            this.messageService.success('Link copiado para a área de transferência!');
+            this.messageService.success(this.translate.instant('compartilhar_aposta.linkCopiado'));
         }
     }
 
@@ -136,10 +138,10 @@ export class ApostaModalComponent implements OnInit {
         try {
             await navigator.clipboard.writeText(codigo);
             if(message) {
-                this.messageService.success('Código copiado para a área de transferência!');
+                this.messageService.success(this.translate.instant('compartilhar_aposta.codigoCopiado'));
             }
         } catch (err) {
-            this.messageService.error('Falha ao copiar o código para a área de transferência.');
+            this.messageService.error(this.translate.instant('compartilhar_aposta.codigoCopiadoErro'));
         }
     }
 

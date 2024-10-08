@@ -2,6 +2,7 @@ import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AuthService, MessageService } from 'src/app/services';
 import { config } from '../../../../config';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-exibir-bilhete-cassino',
@@ -17,7 +18,8 @@ export class ExibirBilheteCassinoComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void { }
@@ -29,9 +31,9 @@ export class ExibirBilheteCassinoComponent implements OnInit {
   async copyToClipboard(codigo: string) {
     try {
       await navigator.clipboard.writeText(codigo);
-      this.messageService.success('Código copiado para a área de transferência!');
+      this.messageService.success(this.translate.instant('compartilhar_aposta.codigoCopiado'));
     } catch (err) {
-      this.messageService.error('Falha ao copiar o código para a área de transferência.');
+      this.messageService.error(this.translate.instant('compartilhar_aposta.codigoCopiadoErro'));
     }
   }
 
