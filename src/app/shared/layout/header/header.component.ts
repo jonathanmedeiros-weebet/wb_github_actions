@@ -388,7 +388,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     logout() {
         this.auth.logout();
-        this.getUsuario();
+
     }
 
     getUsuario() {
