@@ -2896,7 +2896,7 @@ gulp.task('topbets.site', function (done) {
 
 gulp.task('via-bet.com', function (done) {
     tasks(done, {
-        server: "54.232.141.48",
+        server: "front3.wee.bet",
         host: "via-bet.com",
         banca: "VIA BET",
         styles: "",
