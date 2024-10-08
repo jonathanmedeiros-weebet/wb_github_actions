@@ -155,6 +155,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (res) => {
+                    let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
                     this.getUsuario();
 
                     if (
@@ -171,7 +172,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         Boolean(this.usuario) &&
                         this.usuario.tipo_usuario === 'cliente' &&
                         this.authDoisFatoresHabilitado &&
-                        !Boolean(this.auth.getCookie(this.usuario.cookie)) &&
+                        (!Boolean(this.auth.getCookie(this.usuario.cookie)) || isLastAuthOlderThan7Days) &&
                         this.usuario.login !== 'suporte@wee.bet'
                     ) {
                         this.abrirModalAuthDoisFatores();
