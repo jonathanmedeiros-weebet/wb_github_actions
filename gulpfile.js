@@ -2750,7 +2750,7 @@ gulp.task('betinha.com', function (done) {
         host: "betinha.com",
         banca: "betinha.com",
         styles: "",
-        xtremepush_sdk: "Td-K8QujD1c4wTfQsFsmNZ78iX7J-56k",
+        xtremepush_sdk: "0F-o4hhQ-HQJhCjSdyAHUcYutoxcrqYB",
         scripts: "<script> window.$chatwoot.toggle(); </script>"
     });
 });
