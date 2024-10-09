@@ -169,7 +169,13 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
 
                 },
-                error => this.handleError(error)
+                error => {
+                    if(!error) {
+                        this.exibirMaisCotacoes.emit(false);
+                        return;
+                    }
+                    this.handleError(error);
+                }
             );
     }
 
