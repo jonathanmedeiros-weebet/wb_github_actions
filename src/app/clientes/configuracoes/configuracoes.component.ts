@@ -52,6 +52,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     sectionTemporizadorSessao = false;
     sectionPeriodoPausa = false;
     sectionExclusaoConta = false;
+    sectionLimiteTempoAtividade = false;
 
     showConfirmarExclusao = false;
     showMotivoExclusaoConta = false;
@@ -61,6 +62,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     formLimiteDeposito: UntypedFormGroup;
     formPeriodoPausa: UntypedFormGroup;
     formExclusaoConta: UntypedFormGroup;
+    formLimiteTempoAtividade: UntypedFormGroup;
 
     infoPeriodoPausa = '';
     configuracoes: any;
@@ -115,6 +117,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                     limiteMensal: resp.limiteDepositoMensal ?? 0,
                 });
 
+                this.formLimiteTempoAtividade.setValue({
+                    limiteTempoAtividade: this.formatterLimiteTempoAtividade(resp.limiteTempoAtividade) ?? ''
+                });
+
                 if(resp.infoPeriodoPausa) {
                     this.infoPeriodoPausa = resp.infoPeriodoPausa;
                 }
@@ -142,6 +148,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             limiteDiario: [''],
             limiteSemanal: [''],
             limiteMensal: [''],
+        });
+
+        this.formLimiteTempoAtividade = this.fb.group({
+            limiteTempoAtividade: ['']
         });
 
         this.formPeriodoPausa = this.fb.group({
@@ -229,6 +239,27 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         )
     }
 
+    onSubmitLimiteTempoAtividade() {
+        let data = this.formLimiteTempoAtividade.value;
+
+        if (this.twoFactorInProfileChangeEnabled) {
+            data = {
+                ...data,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+
+        this.clienteService.configLimiteTempoAtividade(data).subscribe(
+            result => {
+                this.messageService.success(result.message);
+            },
+            error => {
+                this.handleError(error)
+            }
+        )
+    }
+
     onSubmitPeriodoPausa() {
         let data = this.formPeriodoPausa.value;
 
@@ -286,7 +317,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             this.sectionPeriodoPausa = false;
         }
         if(this.sectionExclusaoConta && section != 'exclusaoConta') {
-             this.sectionExclusaoConta = false;
+            this.sectionExclusaoConta = false;
+        }
+        if(this.sectionLimiteTempoAtividade && section != 'limiteTempoAtividade') {
+            this.sectionLimiteTempoAtividade = false;
         }
 
         switch (section) {
@@ -304,6 +338,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 break;
             case 'exclusaoConta':
                 this.sectionExclusaoConta = !this.sectionExclusaoConta;
+                break;
+            case 'limiteTempoAtividade':
+                this.sectionLimiteTempoAtividade = !this.sectionLimiteTempoAtividade;
                 break;
             default:
                 break;
@@ -363,5 +400,22 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     toClose() {
         this.activeModal.dismiss('Cross click');
+    }
+
+    formatterLimiteTempoAtividade = (input: string) => {
+        switch(input){
+            case '00:30':
+                return '30minutos';
+            case '00:45':
+                return '45minutos';
+            case '01:00':
+                return '1hora';
+            case '02:00':
+                return '2horas';
+            case '03:00':
+                return '3horas';
+            case '04:00':
+                return '4horas';
+        }
     }
 }

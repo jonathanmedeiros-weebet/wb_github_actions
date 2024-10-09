@@ -190,6 +190,16 @@ export class ClienteService {
             )
     }
 
+    configLimiteTempoAtividade(limites:any) {
+        return this.http.post(`${this.clienteUrl}/limites-tempo`, limites, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
+
     configPeriodoPausa(data: any) {
         return this.http.post(`${this.clienteUrl}/periodo-pausa`, data, this.headers.getRequestOptions(true))
             .pipe(
