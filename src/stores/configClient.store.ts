@@ -70,7 +70,7 @@ export const useConfigClient = defineStore('configClient', {
     deadlineTable: (state) => state.params?.data_limite_tabela ?? null,
 
     hasParams: (state) => Boolean(Object.values(state.params).length),
-
+    bettorDocumentNumberEnabled: (state) => Boolean(state.params?.opcoes?.allow_bettor_document_number_on_the_ticket),
     chartDeprecatedByAndroidVersion: () => {
       try {
         const androidVersion = String(getAndroidVersion()).split('.')[0];

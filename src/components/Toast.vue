@@ -70,7 +70,7 @@ export default {
     left: 5%;
     top: 2%;
 
-    z-index: 3;
+    z-index: 6;
 
     &--success {
         background-color: #6da544;

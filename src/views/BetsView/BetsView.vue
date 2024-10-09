@@ -9,9 +9,22 @@
           label="Apostador"
           name="apostador"
           placeholder="Apostador"
-          type="email"
+          type="text"
           v-model="apostador"
+          v-if="showBettorName"
         />
+
+        <w-input
+          id="inputBettorDocumentNumber"
+          label="CPF do apostador"
+          name="bettorDocumentNumber"
+          placeholder="XXX.XXX.XXX-XX"
+          type="text"
+          mask="XXX.XXX.XXX-XX"
+          v-model="apostador"
+          v-if="showBettorDocumentNumber"
+        />
+
         <w-input
           id="inputCode"
           label="Código"
@@ -89,7 +102,8 @@
               <p>HORÁRIO: {{ formateDateTime(bet.horario) }}</p>
             </template>
             <template #body>
-              <p>Apostador: {{ bet.apostador }}</p>
+              <p v-if="bet.apostador">Apostador: {{ bet.apostador }}</p>
+              <p v-if="bet.bettor_document_number">CPF do apostador: {{ bet.bettor_document_number }}</p>
               <table class="table">
                 <tbody>
                   <tr>
@@ -268,10 +282,6 @@ export default {
     ModalCalendar,
     Toast
   },
-  mounted() {
-    const { options } = useConfigClient();
-    this.options = options;
-  },
   data() {
     return {
       code: '',
@@ -298,8 +308,12 @@ export default {
       permitir_encerrar_aposta: false,
       options: null,
       toastStore: useToastStore(),
+      configClientStore: useConfigClient(),
       isLastBet: false,
     }
+  },
+  mounted() {
+    this.options = this.configClientStore.options;
   },
   watch: {
     activeButton(newValue, oldValue){
@@ -312,7 +326,13 @@ export default {
       const initialDate = convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY");
       const finalDate = convertInMomentInstance(this.finalDateFilter).format("DD/MM/YYYY");
       return `${initialDate} - ${finalDate}`;
-    }
+    },
+    showBettorDocumentNumber() {
+      return this.configClientStore.bettorDocumentNumberEnabled;
+    },
+    showBettorName() {
+      return !this.configClientStore.bettorDocumentNumberEnabled;
+    },
   },
   methods: {
     handleOpenPayModal(bet){
@@ -372,24 +392,26 @@ export default {
       this.parametros.status = this.activeButton == 'todos' ? '' : this.activeButton;
       this.parametros.apostador = this.apostador;
       this.parametros.sort = '-horario'
-      
+
       this.getApiBets();
     },
     async getApiBets() {
       this.bets = [];
       this.showResults = false;
-      findBet(this.parametros)
-      .then(resp => {
-        this.bets = resp.results;
-        this.showResults = true;
-      })
-      .catch(error => {
-        this.toastStore.setToastConfig({
-          message: error.errors.message,
-          type: ToastType.DANGER,
-          duration: 5000
+
+      const params = { ...this.parametros };
+      findBet(params)
+        .then(resp => {
+          this.bets = resp.results;
+          this.showResults = true;
         })
-      })
+        .catch(error => {
+          this.toastStore.setToastConfig({
+            message: error.errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+        })
     },
     goToTickets(bet, action) {
       this.$router.push({ 

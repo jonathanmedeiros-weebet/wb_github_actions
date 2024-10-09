@@ -10,7 +10,8 @@
           </div>
           <div class="info">
             <span class="info__text">Cambista: {{ bet.passador.nome }}</span>
-            <span class="info__text">Apostador: {{ bet.apostador }}</span>
+            <span class="info__text" v-if="bet.apostador">Apostador: {{ bet.apostador }}</span>
+            <span class="info__text" v-if="bet.bettor_document_number">CPF do apostador: {{ bet.bettor_document_number }}</span>
             <span class="info__text">Status: {{ bet.ativo === true ? 'Ativo' : 'Inativo' }}</span>
           </div>
           <div class="gain">

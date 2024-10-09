@@ -45,7 +45,19 @@
             name="bettor_name"
             placeholder="Informe o nome do apostador"
             type="text"
+            v-if="showBettorName"
             v-model="bettorName"
+          />
+
+          <w-input
+            label="CPF"
+            class="finish__input"
+            name="bettor_name"
+            placeholder="Informe o cpf do apostador"
+            type="text"
+            mask="XXX.XXX.XXX-XX"
+            v-if="showBettorDocumentNumber"
+            v-model="bettorDocumentNumber"
           />
         </div>
       </div>
@@ -153,6 +165,7 @@ export default {
     return {  
       ticketStore: useTicketStore(),
       toastStore: useToastStore(),
+      configClientStore: useConfigClient(),
       submitting: false,
       icons: {
         1: IconFootball,
@@ -221,6 +234,14 @@ export default {
         this.ticketStore.setBettor(value);
       }
     },
+    bettorDocumentNumber: {
+      get() {
+        return this.ticketStore.bettorDocumentNumber;
+      },
+      set(value) {
+        this.ticketStore.setBettorDocumentNumber(value);
+      }
+    },
     betValue: {
       get() {
         return this.ticketStore.value;
@@ -238,8 +259,12 @@ export default {
       }
     },
     buttonDisable() {
+      const bettorField = this.showBettorName
+        ? this.bettorName
+        : this.bettorDocumentNumber;
+        
       return (
-        !Boolean(this.bettorName)
+        !Boolean(bettorField)
         || !Boolean(this.betValue)
         || !Boolean(this.items.length)
         || this.submitting
@@ -247,7 +272,13 @@ export default {
     },
     buttonText() {
       return this.submitting ? 'Processando...' : 'Finalizar Aposta'
-    }
+    },
+    showBettorDocumentNumber() {
+      return this.configClientStore.bettorDocumentNumberEnabled;
+    },
+    showBettorName() {
+      return !this.configClientStore.bettorDocumentNumberEnabled;
+    },
   },
   methods: {
     formatDateTimeBR,
@@ -286,9 +317,10 @@ export default {
         this.submitting = false;
       }
 
-      const {items, bettor, value, accepted} = this.ticketStore;
+      const {items, bettor, bettorDocumentNumber, value, accepted} = this.ticketStore;
       const data = {
         apostador: bettor,
+        bettorDocumentNumber,
         valor: value,
         utilizar_bonus: false,
         aceitar_alteracoes_odds: accepted,

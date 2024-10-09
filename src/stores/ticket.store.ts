@@ -6,6 +6,7 @@ import { ToastType } from "@/enums";
 export const useTicketStore = defineStore('ticket', {
     state: () => ({
         bettor: '',
+        bettorDocumentNumber: '',
         value: 0,
         items: {} as any,
         championshipOpened: [] as any[],
@@ -18,6 +19,9 @@ export const useTicketStore = defineStore('ticket', {
         },
         setBettor(bettor: string) {
             this.bettor = bettor;
+        },
+        setBettorDocumentNumber(bettorDocumentNumber: string) {
+            this.bettorDocumentNumber = bettorDocumentNumber;
         },
         setValue(value: number) {
             this.value = value;
