@@ -250,6 +250,7 @@
         "aguardando": "Pendiente",
         "loginEmail": "Correo electrónico",
         "loginPhone": "Teléfono",
+        "jogosRelacionados": "juegos relacionados",
         "session_alert": "Alerta de Sesión",
         "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?"
     },

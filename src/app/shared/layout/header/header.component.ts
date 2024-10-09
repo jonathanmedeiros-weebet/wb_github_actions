@@ -5,7 +5,7 @@ import {UntypedFormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {filter, takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -116,6 +116,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     notificationsXtremepushOpen = false;
     public showHeaderMobile: boolean = false;
     xtremepushHabilitado = false;
+    isCasinoGameFullScreen: boolean;
 
     private currentRoute: string;
 
@@ -153,7 +154,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private renderer: Renderer2,
         private host: ElementRef,
         private clienteService: ClienteService,
-        private layoutService: LayoutService
+        private layoutService: LayoutService,
+        private headerService: HeadersService
     ) {
         super();
     }
@@ -186,6 +188,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     ngOnInit() {
         this.currentRoute = this.router.url;
         this.sportsActive();
+
+        this.headerService.fullScreenCasinoGameState$.subscribe(isFullScreen => {
+            this.isCasinoGameFullScreen = isFullScreen;
+          });
 
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {

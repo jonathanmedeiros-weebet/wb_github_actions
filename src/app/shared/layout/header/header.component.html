@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div class="header">
+<div class="header" [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
     <div class="side side-left">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">
@@ -754,12 +754,15 @@
     </div>
 </div>
 
-<nav class="mobile" *ngIf="showHeaderMobile" [ngClass]="{'centered': centered}" #scrollMenu>
-    <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
-</nav>
+<div [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
+    <nav class="mobile" *ngIf="showHeaderMobile" [ngClass]="{'centered': centered}" #scrollMenu>
+        <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
+    </nav>
+</div>
 
+<div [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
 <ng-template #menuTemplate>
-    <div #menu class="d-flex">
+    <div #menu [ngClass]="{'hidden-header': isCasinoGameFullScreen, 'd-flex': !isCasinoGameFullScreen}">
         <div class="category" *ngIf="aoVivoAtivo && !betbyAtivo">
             <a [routerLink]="['/live']" routerLinkActive="active">
                 <span>{{ 'menu.aoVivo' | translate }}</span>
