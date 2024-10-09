@@ -99,7 +99,7 @@ import { BlockPeerAttempsModalComponent } from './modals/block-peer-attemps-moda
 import { MultifactorConfirmationModalComponent } from './modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
 import { FreeSpinService } from '../services/clientes/free-spin.service';
-
+import { CashbackService } from '../services/clientes/cashback.service';
 @NgModule({
     imports: [
         CommonModule,
@@ -233,6 +233,7 @@ import { FreeSpinService } from '../services/clientes/free-spin.service';
         JogoService,
         AcumuladaoService,
         IndiqueGanheService,
+        CashbackService,
         FreeSpinService,
         {
             provide: RECAPTCHA_SETTINGS,

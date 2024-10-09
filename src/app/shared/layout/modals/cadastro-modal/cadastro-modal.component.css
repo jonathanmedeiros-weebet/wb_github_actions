@@ -144,8 +144,9 @@ a.link-termos-politica {
     justify-content: center;
     align-items: center;
 }
+
 .modal-content {
-    background-color: #181818;
+    background-color: var(--background);
     padding: 20px;
     border-radius: 4px;
     width: 100%;
@@ -197,6 +198,21 @@ a.link-termos-politica {
     width: 80%;
 }
 
+.requirements-password {
+    margin: 0;
+    padding: 8px;
+    padding-bottom: 4px;
+    list-style-type: none;
+}
+
+.fulfilled {
+    color: green;
+    text-decoration: line-through;
+}
+
+.unfulfilled {
+    opacity: 0.6;
+}
 
 @media only screen and (max-width: 1024px) {
     .modal-body {

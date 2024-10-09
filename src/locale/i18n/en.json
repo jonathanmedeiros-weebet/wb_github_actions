@@ -23,6 +23,7 @@
         "solicitarSaque": "Request Withdrawal",
         "dashboard": "Dashboard",
         "financeiro": "Financial",
+        "carteira": "Wallet",
         "validacao": "Validation",
         "apuracao": "Assessment",
         "aposta": "Bet",
@@ -195,7 +196,7 @@
         "resultadosFutebol": "Football Results",
         "resultadosLoterias": "Lottery Results",
         "contato": "Contact",
-        "requisitosSenha": "Password must have at least 6 characters.",
+        "requisitosSenha": "Password must have at least 8 characters.",
         "nomeJogoCassino": "Game",
         "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
         "historicoDeApostas": "Betting History",
@@ -248,7 +249,13 @@
         "computadoEm": "Computed in:",
         "alteracoesSucesso": "Changes made successfully!",
         "erroInesperado": "Something unexpected happened. Please try again later.",
-        "enderecoNaoEncontrado": "Address not found, please fill it in manually."
+        "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
+        "bonusCancelado": "Bonus canceled",
+        "aguardando": "Pending",
+        "loginEmail": "Email",
+        "loginPhone": "Phone",
+        "session_alert": "Session Alert",
+        "session_alert_message": "There is currently an active session on another device. To continue access, would you like to close the other session?"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -371,7 +378,11 @@
         "reenviaCodigoDeVerificacao": "Resend Verification Code",
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
-        "digiteSuaSenha": "Type your password"
+        "digiteSuaSenha": "Type your password",
+        "minimumCharactersPassword": "Minimum 8 characters",
+        "lowercaseLetter": "Minimum of one lowercase letter",
+        "uppercaseLetter": "Minimum of one uppercase letter",
+        "specialChar": "Minimum of one special character (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Enter the amount for the withdrawal",
@@ -598,7 +609,9 @@
         "aceitar": "Accept",
         "entendi": "Got it",
         "salvar_alteracoes": "Save Changes",
-        "voltar": "Back"
+        "voltar": "Back",
+        "logout_continue_login": "Yes, I would like to close the session",
+        "remain_active_session": "No, keep the other session active"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -665,5 +678,13 @@
         "concluida":"Completed",
         "cancelada":"Canceled",
         "premio": "Prize"
+    },
+    "cashback": {
+        "cashback": "Cashback",
+        "description": "Description",
+        "registrationDate": "Registration Date",
+        "pending": "Pending",
+        "redeemed": "Redeemed",
+        "redeem": "Redeem"
     }
 }

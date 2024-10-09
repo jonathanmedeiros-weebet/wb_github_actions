@@ -1,6 +1,8 @@
-import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, Input, HostListener} from '@angular/core';
 import {BannerService, MessageService} from '../../../services';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import {filter, take} from 'rxjs/operators';
+import { xor } from 'lodash';
 
 @Component({
     selector: 'app-banners',
@@ -10,15 +12,12 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class BannersComponent implements OnInit {
     banners = [];
-    bannersModal = [];
+    hideBanner = false;
+    mobileScreen: boolean;
+
     showLoadingIndicator = true;
-    isMobileView = false;
     showNavigationArrows = false;
-    showNavigationArrowsInModal = false;
     @Input() pagina = 'futebol';
-    @Input() showSkeleton = false;
-    @Input() type = 'banner';
-    @Input() isModal = false;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -33,61 +32,49 @@ export class BannersComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (window.innerWidth <= 667) {
-            this.isMobileView = true;
-        }
-        if (!this.isModal) {
-            this.loadBanner();
-        } else {
-            this.loadBannerModal();
-        }
+        this.mobileScreen = window.innerWidth <= 1024;
+        this.loadBanner();
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.mobileScreen = event.target.innerWidth <= 1024;
     }
 
     loadBanner() {
         this.banners = [];
         this.showLoadingIndicator = true;
-        
         this.bannerService.requestBanners(this.pagina);
-        this.bannerService.banners.subscribe(banners => {
-        
+        this.bannerService.banners
+        .pipe(filter(banners => typeof banners != 'undefined'),take(1))
+        .subscribe((banners: []) => {
+            if (banners.length == 0) {
+                this.hideBanner = true;
+                return;
+            }
             this.showLoadingIndicator = true;
-            
+
             let source = 'src';
-            this.isMobileView && (source = 'src_mobile');
-            
-            for (const banner of banners) {
-                if (banner[source] && !(banner['pagina'] === 'deposito' && this.isMobileView)) {
-                    this.banners.push(banner);
+            if (this.mobileScreen) {
+                source = 'src_mobile';
+            }
+            for (const banner of banners) { 
+                if (banner[source]) {
+                    if (this.pagina === 'deposito' && banner['pagina'] === 'deposito') {
+                        this.banners.push(banner);
+                    } else if (banner['pagina'] === this.pagina || (banner['pagina'] === 'todas' && this.pagina != 'deposito')) {
+                        this.banners.push(banner);
+                    }
                 }
             }
+
             if (this.banners.length > 1) {
                 this.showNavigationArrows = true;
+            } else if (this.banners.length == 0) {
+                this.hideBanner = true;
+                return;
             }
-            this.showLoadingIndicator = false;      
-            this.cd.markForCheck();    
-        });
-    }
 
-    loadBannerModal() {
-        this.bannersModal = [];
-        this.showLoadingIndicator = true;
-
-        this.bannerService.requestBanners(this.pagina);
-        this.bannerService.banners.subscribe(banners => {
-
-            this.showLoadingIndicator = true;
-            
-            let source = 'src';
-            this.isMobileView && (source = 'src_mobile');
-
-            for (const banner of banners) {
-                if (banner[source]) {
-                    this.bannersModal.push(banner);
-                }
-            }
-            if (this.bannersModal.length > 1) {
-                this.showNavigationArrowsInModal = true;
-            }
             this.showLoadingIndicator = false;
             this.cd.markForCheck();
         });

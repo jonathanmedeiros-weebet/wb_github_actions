@@ -5,6 +5,8 @@ import { AuthService, HelperService, MessageService, ParametrosLocaisService } f
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepositoComponent } from '../clientes/deposito/deposito.component';
 import { TranslateService } from '@ngx-translate/core';
+import { LoginService } from '../shared/services/login.service';
+import { Subscription } from 'rxjs';
 
 declare function BTRenderer(): void;
 
@@ -16,6 +18,7 @@ declare function BTRenderer(): void;
 
 export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     private resizeObserver: ResizeObserver;
+    private loginSubscription: Subscription;
     private bt: any;
     private queryParamsSubscription: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
@@ -31,7 +34,8 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         private translate: TranslateService,
         private params: ParametrosLocaisService,
         private renderer: Renderer2,
-        private elementRef: ElementRef
+        private elementRef: ElementRef,
+        private loginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -52,7 +56,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             this.authService.getTokenBetby(currentLang).subscribe(
                 (res) => {
                     this.betbyInitialize(res.token, currentLang);
-                } ,
+                },
                 (_) => {
                     this.messageService.error(this.translate.instant('geral.erroInesperado').toLowerCase());
                 }
@@ -63,15 +67,19 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.queryParamsSubscription = this.route.queryParams.subscribe(params => {
             if (this.bt && (params['bt-path'] == '/' || params['bt-path'] == '/live')) {
-                this.bt.updateOptions({url: params['bt-path']})
+                this.bt.updateOptions({ url: params['bt-path'] });
             }
         });
 
         this.translate.onLangChange.subscribe(
             change => {
-                this.onChangeLang(change.lang);
+                this.refreshBetby(change.lang);
             }
         );
+
+        this.loginSubscription = this.loginService.event$.subscribe(() => {
+            this.refreshBetby();
+        })
     }
 
     ngAfterViewInit() {
@@ -95,7 +103,6 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             this.hideGtmElements();
         }, 1200);
     }
-
 
     hideGtmElements() {
         const elementChat = document.querySelector('#chat-widget-container');
@@ -144,14 +151,16 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             this.resizeObserver.disconnect();
         }
         this.showGtmElements();
+        this.loginSubscription.unsubscribe();
     }
 
-    onChangeLang(lang: string) {
+    refreshBetby(lang: string = null) {
         if (this.bt) {
+            const currentLang = lang ?? this.translate.currentLang;
             this.bt.kill();
-            this.authService.getTokenBetby(lang).subscribe(
+            this.authService.getTokenBetby(currentLang).subscribe(
                 (res) => {
-                    this.betbyInitialize(res.token, lang);
+                    this.betbyInitialize(res.token, currentLang);
                 }
             );
         }

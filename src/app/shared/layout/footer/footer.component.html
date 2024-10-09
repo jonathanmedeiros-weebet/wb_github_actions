@@ -1,5 +1,5 @@
 <footer>
-    <a class="toTop" (click)="container.scrollTop = 0" *ngIf="container">
+    <a class="toTop" (click)="scrollToTop()" [ngStyle]="{'display': isToTopBtnVisible ? 'flex' : 'none'}">
         <i class="fa fa-angle-up"></i>
     </a>
     <div class="container">
@@ -21,7 +21,7 @@
                     <div id="anj-cd823ed6-bffb-4764-9e1b-05566f369c8c" data-anj-seal-id="cd823ed6-bffb-4764-9e1b-05566f369c8c"
                          data-anj-image-size="128" data-anj-image-type="basic-small" style="width: 50px"></div>
                 </ng-container>
-                <div style="margin-left: 10px" id="ra-verified-seal"></div>
+                <div *ngIf="this.slug == 'saqbet.tv'" style="margin-left: 10px" id="ra-verified-seal"></div>
             </div>
             <h4 class="title">{{'footer.jogueComResponsabilidade' | translate}}</h4>
             <div class="icons" *ngIf="slug == 'ragnar.bet'">

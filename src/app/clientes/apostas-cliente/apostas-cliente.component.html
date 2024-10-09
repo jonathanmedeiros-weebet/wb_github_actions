@@ -49,7 +49,7 @@
                                         </span>
                         </ng-template>
                         <div class="input-group datepicker-group">
-                            <i class="fa fa-calendar"></i>
+                            <i class="fa fa-calendar" (click)="datepicker.toggle()"></i>
                             <input
                                 type="text"
                                 class="form-control inverted-out"
@@ -69,18 +69,46 @@
                         <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
                     </div>
                 </form>
-
-                <div class="info-resultado">
-                    <div class="item">
-                        <label>{{'geral.qtdApostas' | translate}}:</label> {{ apostas.length }}
+                <ng-container *ngIf="!totais.valorBonus || totais.premioBonus else showInfoWithBonus;">
+                    <div class="info-resultado">
+                        <div class="item">
+                            <label>{{'geral.qtdApostas' | translate}}:</label> {{ apostas.length }}
+                        </div>
+                        <div class="item">
+                            <label>{{'geral.totalApostado' | translate}}:</label> {{ totais.valor | currency }}
+                        </div>
+                        <div class="item">
+                            <label>{{'geral.totalPremios' | translate}}:</label> {{ totais.premio | currency }}
+                        </div>
                     </div>
-                    <div class="item">
-                        <label>{{'geral.totalApostado' | translate}} :</label> {{ totais.valor | currency }}
+                </ng-container>
+                <ng-template #showInfoWithBonus>
+                    <div class="info-colunm">
+                        <div class="info-resultado">
+                            <div class="item">
+                                <label>{{'geral.qtdApostas' | translate}}: </label> {{ apostas.length }}
+                            </div>
+                            <div class="item">
+                                <label>{{'geral.totalApostado' | translate}} (Real):</label> {{ totais.valor | currency }}
+                            </div>
+                            <div class="item">
+                                <label>{{'geral.totalPremios' | translate}} (Real):</label> {{ totais.premio | currency }}
+                            </div>
+                        </div>
+                        <div class="info-resultado">
+                            <div class="item spacing" style="color: transparent;">
+                                <label>-</label> 
+                            </div>
+                            <div class="item">
+                                <label>{{'geral.totalApostado' | translate}} ({{'geral.bonus' | translate}}):</label> {{ totais.valorBonus | currency }}
+                            </div>
+                            <div class="item">
+                                <label>{{'geral.totalPremios' | translate}} ({{'geral.bonus' | translate}}):</label> {{ totais.premioBonus | currency }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="item">
-                        <label>{{'geral.totalPremios' | translate}}:</label> {{ totais.premio | currency }}
-                    </div>
-                </div>
+                    
+                </ng-template>
 
                 <div class="table-responsive">
                     <table class="table">
@@ -92,6 +120,7 @@
                             <th>{{'geral.horario' | translate}}</th>
                             <th>{{'geral.valor' | translate}}</th>
                             <th>{{'geral.premio' | translate}} </th>
+                            <th>{{'geral.estado' | translate}}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -108,6 +137,11 @@
                             <td>{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm' }}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td>{{ aposta.premio | currency }}</td>
+                            <td>
+                                <div *ngIf="aposta.rollover_status == 'cancelado'"><th>{{'geral.bonusCancelado' | translate}}</th></div>
+                                <div *ngIf="aposta.resultado == null && aposta.rollover_status != 'cancelado'"><th>{{'geral.aguardando' | translate}}</th></div>
+                                <div *ngIf="aposta.rollover_status != 'cancelado' && aposta.resultado != null">{{aposta.resultado}}</div>
+                            </td>
                             <td class="acoes-aposta" *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'">
                                 <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}{{origin}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
                                     <i class="fa fa-external-link"></i>
@@ -117,6 +151,11 @@
                                 </a>
                             </td>
                         </tr>
+                        <div class="loading-scroll" *ngIf="loadingScroll">
+                            <div class="alert alert-warning text-center" role="alert">
+                                Carregando...
+                            </div>
+                        </div>
                         </tbody>
                     </table>
                 </div>

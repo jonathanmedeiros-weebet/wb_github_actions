@@ -1,15 +1,15 @@
-import {ChangeDetectorRef, Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import {AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService} from './services';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {config} from './shared/config';
+import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService } from './services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {CadastroModalComponent} from './shared/layout/modals';
-import {LoginModalComponent} from './shared/layout/modals';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { CadastroModalComponent } from './shared/layout/modals';
+import { LoginModalComponent } from './shared/layout/modals';
 
-import {TranslateService} from '@ngx-translate/core';
-import {IdleDetectService} from './shared/services/idle-detect.service';
+import { TranslateService } from '@ngx-translate/core';
+import { IdleDetectService } from './shared/services/idle-detect.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -17,10 +17,10 @@ declare var xtremepush;
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    @ViewChild('demoModal', {static: true}) demoModal;
-    @ViewChild('inicialModal', {static: true}) inicialModal;
-    @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
-    @ViewChild('wrongVersionModal', {static: true}) wrongVersionModal;
+    @ViewChild('demoModal', { static: true }) demoModal;
+    @ViewChild('inicialModal', { static: true }) inicialModal;
+    @ViewChild('ativacaoCadastroModal', { static: true }) ativacaoCadastroModal;
+    @ViewChild('wrongVersionModal', { static: true }) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     imagemInicial;
     mobileScreen = false;
@@ -74,56 +74,11 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
-        this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
-        this.checkNotificationPermission();
-        this.auth.logado.subscribe((isLogged) => {
-            const logoutByInactivityIsEnabled =  Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
-            const isCliente = this.auth.isCliente();
-
-            if(isLogged && isCliente && logoutByInactivityIsEnabled) {
-                this.idleDetectService.startTimer(1800000);
-            } else {
-                this.idleDetectService.stopTimer();
-            }
-        })
-
-        this.idleDetectService
-            .watcher()
-            .subscribe(isExpired => {
-                if (isExpired) {
-                    if (this.auth.isLoggedIn()) {
-                        this.auth.logout();
-                    }
-                }
-            });
-
-        this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
-        if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
-            this.modalService.open(CadastroModalComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente'
-            });
-            this.router.navigate(['/']);
-        }
-        if (this.router.url.includes('/login')) {
-
-            this.modalService.open(LoginModalComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente'
-            });
-
-            this.router.navigate(['esportes/futebol']);
-        }
-
         this.route.queryParams
             .subscribe((params) => {
                 if (params.token) {
                     this.ativacaoCadastro = true;
+
                     this.auth.ativacaoCadastro({ token: params.token })
                         .subscribe(
                             (res) => {
@@ -149,12 +104,64 @@ export class AppComponent implements OnInit {
                 }
             });
 
+        this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
+        this.acceptedCookies = localStorage.getItem('accepted_cookies') === 'true';
+
+        this.eventPushXtremepush();
+
+        this.auth.logado.subscribe((isLogged) => {
+            const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity);
+            const isCliente = this.auth.isCliente();
+
+            if (isLogged && isCliente && logoutByInactivityIsEnabled) {
+                this.idleDetectService.startTimer(1800000);
+
+            } else {
+                this.idleDetectService.stopTimer();
+            }
+        });
+
+        this.idleDetectService
+            .watcher()
+            .subscribe(isExpired => {
+                if (isExpired) {
+                    if (this.auth.isLoggedIn()) {
+                        this.auth.expiredByInactive();
+                    }
+                }
+            });
+
+        this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
+
+        if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
+            this.modalService.open(CadastroModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            });
+
+            this.router.navigate(['/']);
+        }
+
+        if (this.router.url.includes('/login')) {
+            this.modalService.open(LoginModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            });
+
+            this.router.navigate(['esportes/futebol']);
+        }
+
         const params = new URLSearchParams(location.search);
 
         if (params.get('app')) {
             this.auth.setAppMobile();
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
             localStorage.setItem('app_version', String(appVersion));
+
             if (appVersion < 2) {
                 this.modalService.open(
                     this.wrongVersionModal,
@@ -298,23 +305,6 @@ export class AppComponent implements OnInit {
         const xtremepushHabilitado = this.paramLocais.getOpcoes().xtremepush_habilitado;
         if (xtremepushHabilitado) {
             xtremepush('event', 'push');
-        }
-    }
-
-    checkAndExecuteEventPush() {
-        const lastExecution = localStorage.getItem('lastEventPushXtremepush');
-        const currentTime = new Date().getTime();
-
-        if (!lastExecution || (currentTime - parseInt(lastExecution, 10)) >= 3600000) {
-            this.eventPushXtremepush();
-            localStorage.setItem('lastEventPushXtremepush', currentTime.toString());
-        }
-    }
-
-    checkNotificationPermission() {
-        const permission = Notification.permission;
-        if (permission === 'denied' || permission === 'default') {
-            this.checkAndExecuteEventPush();
         }
     }
 }
