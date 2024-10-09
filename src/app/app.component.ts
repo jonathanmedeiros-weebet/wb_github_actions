@@ -109,14 +109,28 @@ export class AppComponent implements OnInit {
 
         this.eventPushXtremepush();
 
+        this.idleDetectService.getActivityTimeConfig().subscribe((activityTimeGoal) => {
+            console.log(`Meta de tempo de atividade configurada: ${activityTimeGoal} ms`);
+        });
+
         this.auth.logado.subscribe((isLogged) => {
             const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
+            const activityUserConfig = this.paramsLocais.getOpcoes()?.limiteTempoAtividade;
+            const activityUserConfigIsEnabled = Boolean(activityUserConfig);
             const isCliente = this.auth.isCliente();
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
                 this.idleDetectService.startTimer(1800000);
             } else {
                 this.idleDetectService.stopTimer();
+            }
+
+            if (isLogged && isCliente && activityUserConfigIsEnabled) {
+                console.log('Iniciando o temporizador de atividade...');
+                this.idleDetectService.startActivityTimer();
+            } else {
+                console.log('Parando o temporizador de atividade...');
+                this.idleDetectService.stopActivityTimer();
             }
         })
 
@@ -129,6 +143,16 @@ export class AppComponent implements OnInit {
                     }
                 }
             });
+
+        this.idleDetectService.activityTimeWatcher().subscribe(activityTime => {
+            console.log(`Tempo de atividade atual: ${activityTime} ms`);
+        
+            this.idleDetectService.getActivityTimeConfig().subscribe(activityTimeGoal => {
+                if (activityTime >= activityTimeGoal) {
+                    console.log('Meta de tempo de atividade atingida!');
+                }
+            });
+        });
 
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
 
