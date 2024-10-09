@@ -100,7 +100,6 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
 import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
 import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
-
 @NgModule({
     imports: [
         CommonModule,

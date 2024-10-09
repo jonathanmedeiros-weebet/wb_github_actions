@@ -22,7 +22,7 @@ import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
-import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
+import { BASKETBALL_ID, FOOTBALL_ID } from '../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -71,6 +71,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showFrame = true;
     headerHeight = 92;
     footballId = FOOTBALL_ID;
+    BasketballId = BASKETBALL_ID;
+
+    sportId:number;
+    liveUrl:string;
+
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -94,10 +99,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     }
 
     ngOnInit() {
+        this.bilheteService.sportId.subscribe(id => this.sportId = id);
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
         const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
-
+        
         this.createForm();
         this.definirAltura();
         this.opcoes = this.paramsService.getOpcoes();
@@ -161,14 +167,24 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 (response: any) => {
                     if (response) {
-                        if(habilitar_live_stream) {
-                            this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + response);
-                            this.showStreamFrame();
-                        }
+                        if (this.sportId) {
+                            if (this.sportId == this.footballId) {
+                                this.liveUrl = 'https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=';
+                            }
 
-                        if(habilitar_live_tracker) {
-                            this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=' + response);
-                            this.showCampinhoFrame();
+                            if (this.sportId == this.BasketballId) {
+                                this.liveUrl = 'https://stream.raysports.live/br/basketball?token=5oq66hkn0cwunq7&uuid=';
+                            }
+
+                            if (habilitar_live_stream) {
+                                this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.liveUrl + response);
+                                this.showStreamFrame();
+                            }
+    
+                            if (habilitar_live_tracker) {
+                                this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.liveUrl + response);
+                                this.showCampinhoFrame();
+                            }
                         }
                     } else {
                         this.liveTrackerUrl = null;

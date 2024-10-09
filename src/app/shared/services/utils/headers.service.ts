@@ -13,6 +13,7 @@ export class HeadersService {
     fullScreenCasinoGameState$ = this.fullScreenCasinoGame.asObservable();
 
     currentLanguage = 'pt';
+    
     constructor(private translate: TranslateService) {
         this.currentLanguage = this.translate.currentLang ?? localStorage.getItem('linguagem') ?? 'pt';
         this.translate.onLangChange.subscribe(res => {
