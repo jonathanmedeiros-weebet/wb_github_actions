@@ -1,8 +1,18 @@
-div.p-0{
-    padding: 0;
+.banner-container {
+    background-color: rgb(15, 15, 15);
 }
 
-.banners img{
+.resolution16x2 {
+    width: 100%;
+    aspect-ratio: 16/2;
+}
+
+.resolution16x4 {
+    width: 100%;
+    aspect-ratio: 16/4;
+}
+
+.banners img {
     width: 100%;
 }
 
@@ -20,13 +30,20 @@ div.p-0{
 }
 
 @media only screen and (max-width: 1024px) {
-
     .banners img{
         width: 100%;
     }
 
     .banners.cassino {
         margin: 0;
+    }
+    
+    .resolution16x2 {
+        aspect-ratio: 16/6;
+    }
+    
+    .resolution16x4 {
+        aspect-ratio: 16/8;
     }
 }
 

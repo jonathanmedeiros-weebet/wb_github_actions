@@ -43,7 +43,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
 
     constructor(
         private jogoService: JogoService,
-        private helperService: HelperService,
+        protected helperService: HelperService,
         private cd: ChangeDetectorRef,
         private bilheteService: BilheteEsportivoService,
         private paramsService: ParametrosLocaisService,

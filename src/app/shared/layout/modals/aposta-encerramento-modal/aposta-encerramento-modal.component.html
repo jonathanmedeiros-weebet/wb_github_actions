@@ -58,7 +58,7 @@
                 </span>
             </p>
             <p class="aposta">
-                Valor apostado:<span><span *ngIf="aposta.is_bonus"> ({{'geral.bonus' | translate | lowercase}})</span>{{aposta.valor | currency}}</span>
+                Valor apostado:<span><span *ngIf="aposta.is_bonus"> ({{'geral.bonus' | translate | lowercase}}) </span>{{aposta.valor | currency}}</span>
             </p>
             <p class="ganho">
                 Possível retorno:
@@ -68,9 +68,12 @@
                 </span>
             </p>
             <p class="resultado">
-                <b>Resultados:</b>
-                <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
-                <span *ngIf="!aposta.resultado">Aguardando</span>
+                <span *ngIf="!(aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado')">
+                    <b>Resultados:</b>
+                    <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
+                    <span *ngIf="!aposta.resultado">{{'geral.aguardando' | translate}}</span>
+                </span>
+                <span *ngIf="aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado'">{{'geral.bonusCancelado' | translate}}</span>
             </p>
             <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
                 {{'geral.premio' | translate}}:<span>{{aposta.premio | currency}}</span>

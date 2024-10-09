@@ -9,7 +9,8 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
+import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 
 @Component({
     selector: 'app-acumuladao-form',
@@ -35,6 +36,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     unsub$ = new Subject();
     headerHeight;
     mobileScreen;
+    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
         private router: Router,
@@ -50,13 +52,14 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         private cd: ChangeDetectorRef,
         private renderer: Renderer2,
         private el: ElementRef,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
 
     ngOnInit() {
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
-        this.mobileScreen = window.innerWidth <=1024;
+        this.mobileScreen = window.innerWidth <= 1024;
         this.opcoes = this.paramsService.getOpcoes();
         this.auth.logado
             .subscribe(
@@ -134,13 +137,16 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         });
     }
 
-    submit() {
+    async submit() {
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
+            const location = await this.geolocationService.getGeolocation();
+            this.geolocation.next(location);
             let msg = '';
             let valid = true;
             this.dados = {
+                geolocation: this.geolocation.value,
                 apostador: this.form.value.apostador,
                 acumuladao_id: this.acumuladao.id,
                 jogos: [],

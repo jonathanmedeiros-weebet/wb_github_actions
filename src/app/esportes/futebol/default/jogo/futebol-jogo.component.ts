@@ -20,7 +20,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { FOOTBALL_ID } from '../../../../shared/constants/sports-ids';
+import { FOOTBALL_ID } from 'src/app/shared/constants/sports-ids';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -59,6 +59,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     theSportUrl: SafeResourceUrl;
     loadedFrame: boolean;
+    footballId = FOOTBALL_ID;
     cameFromHome: boolean = false;
 
     @HostListener('window:resize', ['$event'])
@@ -86,6 +87,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnInit() {
+        this.setSportId(this.footballId);
         const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
@@ -200,6 +202,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.setSportId(null);
         this.bilheteService.sendId(null)
         this.unsub$.next();
         this.unsub$.complete();
@@ -637,5 +640,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     handleError(msg: any) {
         this.messageService.error(msg);
+    }
+
+    setSportId(id: number) {
+        this.bilheteService.setSportId(id);
     }
 }

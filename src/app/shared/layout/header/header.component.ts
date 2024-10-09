@@ -5,7 +5,7 @@ import {UntypedFormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {filter, takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService} from './../../../services';
+import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService} from './../../../services';
 import {Usuario} from './../../../models';
 import {config} from '../../config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -116,6 +116,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     notificationsXtremepushOpen = false;
     public showHeaderMobile: boolean = false;
     xtremepushHabilitado = false;
+    isCasinoGameFullScreen: boolean;
 
     private currentRoute: string;
 
@@ -153,7 +154,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private renderer: Renderer2,
         private host: ElementRef,
         private clienteService: ClienteService,
-        private layoutService: LayoutService
+        private layoutService: LayoutService,
+        private headerService: HeadersService
     ) {
         super();
     }
@@ -186,6 +188,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     ngOnInit() {
         this.currentRoute = this.router.url;
         this.sportsActive();
+
+        this.headerService.fullScreenCasinoGameState$.subscribe(isFullScreen => {
+            this.isCasinoGameFullScreen = isFullScreen;
+          });
 
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
@@ -388,7 +394,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     logout() {
         this.auth.logout();
-        this.getUsuario();
+
     }
 
     getUsuario() {
@@ -652,10 +658,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     xtremepushElement.className = 'xtremepush-notification-item';
                     xtremepushElement.style.width = '100%';
                     const isTypeZero = xtremepushItem.message.style.type === 0;
-                    const imageStyle = isTypeZero ? 'width: 100%; height: auto;' : 'width: 100px; height: 100px;';
-                    const containerStyle = isTypeZero ? 'flex-direction: column;' : '';
-                    const titleStyle = isTypeZero ? 'margin-top: 10px; margin-bottom: 10px;' : '';
-                    const dateStyle = isTypeZero ? 'float: right; margin-top: auto;' : '';
+                    const imageStyle = isTypeZero ? 'width: 100px; height: 100px;' : 'width: 100%; height: auto;';
+                    const containerStyle = isTypeZero ? '' : 'flex-direction: column;';
+                    const titleStyle = isTypeZero ? '' : 'margin-top: 10px; margin-bottom: 10px;';
+                    const dateStyle = isTypeZero ? '' : 'float: right; margin-top: auto;';
 
                     xtremepushElement.innerHTML = `
                     <div class="xtremepush-card" style="

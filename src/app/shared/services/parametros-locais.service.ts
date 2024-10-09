@@ -260,4 +260,8 @@ export class ParametrosLocaisService {
             ? wordToReplace.replace(casinoDefault, customCasinoName)
             : customCasinoName;
     }
+
+    getAllowOnlyOneSessionPerLogin() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.allow_single_session : null;
+    }
 }
