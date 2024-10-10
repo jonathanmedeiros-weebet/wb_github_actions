@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnDestroy, ElementRef, DoCheck } from '@angular/core';
+import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 import { BilheteEsportivoService, HelperService, JogoService, LiveService, ParametrosLocaisService } from 'src/app/services';
+import { FOOTBALL_ID } from 'src/app/shared/constants/sports-ids';
 
 @Component({
     selector: 'app-jogos-aovivo',
@@ -58,7 +60,8 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
         private helperService: HelperService,
         private cd: ChangeDetectorRef,
         private bilheteService: BilheteEsportivoService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -101,7 +104,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
                                 if (totalJogos < 5) {
                                     let valido = true;
 
-                                    if (jogo.sport_id !== 1) {
+                                    if (jogo.sport_id !== FOOTBALL_ID) {
                                         valido = false;
                                     }
 
@@ -184,7 +187,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
                         true);
                     return cotacao;
                 });
-
+                
                 if (!campeonato) {
                     campeonato = {
                         _id: jogo.campeonato._id,
@@ -198,7 +201,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
 
                 let valido = true;
 
-                if (jogo.sport_id && jogo.sport_id !== 1) {
+                if (jogo.sport_id && jogo.sport_id !== FOOTBALL_ID) {
                     valido = false;
                 }
 
@@ -323,5 +326,9 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
             default:
                 return '';
         };
+    }
+
+    redirectToGame(gameId) {
+        this.router.navigate(['live/all'], { queryParams: { gameId: gameId } });
     }
 }

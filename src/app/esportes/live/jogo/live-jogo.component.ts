@@ -18,6 +18,8 @@ import {
 } from '../../../services';
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
+import { FOOTBALL_ID, BASKETBALL_ID } from '../../../shared/constants/sports-ids';
+
 @Component({
     selector: 'app-live-jogo',
     templateUrl: 'live-jogo.component.html',
@@ -44,6 +46,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     theSportStreamUrl: SafeResourceUrl;
     showCampinho = true;
     showStream = false;
+
+    footballId = FOOTBALL_ID;
+    basketballId = BASKETBALL_ID;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -164,7 +169,13 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
 
 
                 },
-                error => this.handleError(error)
+                error => {
+                    if(!error) {
+                        this.exibirMaisCotacoes.emit(false);
+                        return;
+                    }
+                    this.handleError(error);
+                }
             );
     }
 

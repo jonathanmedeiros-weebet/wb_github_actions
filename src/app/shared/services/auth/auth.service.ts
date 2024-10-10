@@ -141,7 +141,7 @@ export class AuthService {
         const token = this.getToken();
         const user = this.getUser();
 
-        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token, lang }, this.header.getRequestOptions())
+        return this.http.post<any>(`${this.authLokiUrl}/betby/token`, { token, lang }, this.header.getRequestOptions(true))
             .pipe(
                 map(res => {
                     localStorage.setItem('tokenBetby', res.token);

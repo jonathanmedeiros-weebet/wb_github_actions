@@ -1,4 +1,4 @@
-<app-skeleton *ngIf="showSkeleton && showLoadingIndicator" type="{{type}}"/>
+<app-skeleton *ngIf="showSkeleton && showLoadingIndicator" type="{{type}}" />
 
 <ng-container *ngIf="!isMobileView || pagina != 'deposito' else isModal">
     <div  *ngIf="banners.length > 0" class="banners" [ngClass]="{'p-0':pagina === 'deposito'}" [hidden]="showLoadingIndicator">

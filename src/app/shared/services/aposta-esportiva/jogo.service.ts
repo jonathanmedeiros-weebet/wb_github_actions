@@ -58,7 +58,7 @@ export class JogoService {
     getJogosAoVivo() {
         const url = `${this.JogoUrl}/ao-vivo`;
 
-        return this.http.get(url, this.header.getRequestOptions(true))
+        return this.http.get(url, this.header.getRequestOptions(true, {new_api: true}))
             .pipe(
                 map((res: any) => res.result),
                 catchError(this.errorService.handleError)
