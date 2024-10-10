@@ -593,15 +593,6 @@ gulp.task('lbbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('top10sportsvip.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "top10sportsvip.com",
-        banca: "TOP 10 SPORTS VIP",
-        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;--league: #35cc96; --foreground-league: #fff;",
-    });
-});
-
 gulp.task('garanhunsbet.site', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1016,17 +1007,6 @@ gulp.task('sportingol.bet', function (done) {
     });
 });
 
-gulp.task('deugreen.me', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "deugreen.me",
-        banca: "deugreen - Apostas Desportivas Online",
-        styles: "",
-        pixel: "<meta name='keywords' content='Apostas Esportivas, Ao-Vivo e Em tempo real, Transmissão Ao-Vivo, Melhores odds garantidas, bônus 100% Ligas Europeias, Fazer Aposta, Destaques de Futebol, Premier League, UEFA Liga dos Campeões, Jogos'\>",
-        description: "deugreen - A casa de apostas online mais popular do mundo. Oferecemos o serviço Ao-Vivo mais completo. Assista Esportes Ao-Vivo. Transmissão Ao-Vivo disponível para PC, celular e tablet. Aposte em Esportes. Aposte já em Esportes, incluindo Futebol, Tênis e Basquete."
-    });
-});
-
 gulp.task('betsesporte.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1366,15 +1346,6 @@ gulp.task('megasports.bet', function (done) {
         server: "front4.wee.bet",
         host: "megasports.bet",
         banca: "MEGA SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('bet101.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "bet101.bet",
-        banca: "BET 101",
         styles: "",
     });
 });
@@ -1775,15 +1746,6 @@ gulp.task('apostai.net', function (done) {
     });
 });
 
-gulp.task('sortegrande.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "sortegrande.bet",
-        banca: "SORTE GRANDE",
-        styles: "",
-    });
-});
-
 gulp.task('winsport.vip', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2054,15 +2016,6 @@ gulp.task('moneybets.net', function (done) {
     });
 });
 
-gulp.task('ciaaonline.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "ciaaonline.com",
-        banca: "CIA A ONLINE",
-        styles: "",
-    });
-});
-
 gulp.task('bnrbet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2132,15 +2085,6 @@ gulp.task('mczbet.com', function (done) {
         host: "mczbet.com",
         banca: "MCZ BET",
         styles: ""
-    });
-});
-
-gulp.task('smartbet.cash', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "smartbet.cash",
-        banca: "SMART BET",
-        styles: "",
     });
 });
 
@@ -2267,15 +2211,6 @@ gulp.task('bosscassino.bet', function (done) {
         server: "front1.wee.bet",
         host: "bosscassino.bet",
         banca: "BOSS CASSINO",
-        styles: "",
-    });
-});
-
-gulp.task('foxplay.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "foxplay.bet",
-        banca: "FOX PLAY",
         styles: "",
     });
 });
@@ -2426,15 +2361,6 @@ gulp.task('brinksbet.com', function (done) {
     });
 });
 
-gulp.task('riquinhobet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "riquinhobet.com",
-        banca: "RIQUINHO BET",
-        styles: ""
-    });
-});
-
 gulp.task('betbastet.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2458,15 +2384,6 @@ gulp.task('asortebets.com', function (done) {
         server: "front4.wee.bet",
         host: "asortebets.com",
         banca: "A SORTE BETS",
-        styles: ""
-    });
-});
-
-gulp.task('brazlotto.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "brazlotto.bet",
-        banca: "BRAZLOTTO",
         styles: ""
     });
 });
@@ -2541,15 +2458,6 @@ gulp.task('camaraobet.com', function (done) {
         server: "front2.wee.bet",
         host: "camaraobet.com",
         banca: "CAMARÃO BET",
-        styles: ""
-    });
-});
-
-gulp.task('7copas.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "7copas.bet",
-        banca: "7 COPAS",
         styles: ""
     });
 });
@@ -2696,7 +2604,8 @@ gulp.task('riojogos.com', function (done) {
         host: "riojogos.com",
         banca: "Rio Jogos",
         styles: "",
-        scripts: "<!-- Start of LiveChat (www.livechatinc.com) code --><script type='text/javascript'>  window.__lc = window.__lc || {};  window.__lc.license = 14406369;  window.__lc.chat_between_groups = false; ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)};  var e={_q:[],_h:null,_v:'2.0',on:function(){i(['on',c.call(arguments)])},once:function(){  i(['once',c.call(arguments)])},off:function(){i(['off',c.call(arguments)])},  get:function(){if(!e._h)throw new Error('[LiveChatWidget] You cant use getters before load.');  return i(['get',c.call(arguments)])},call:function(){i(['call',c.call(arguments)])},init:function(){  var n=t.createElement('script');  n.async=!0,n.type='text/javascript',  n.src='https://cdn.livechatinc.com/tracking.js',t.head.appendChild(n)}};  !n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))</script><noscript><a href='https://www.livechatinc.com/chat-with/14406369/' rel='nofollow'>Chat with us</a>,powered by <a href='https://www.livechatinc.com/?welcome' rel='noopener nofollow' target='_blank'>LiveChat</a></noscript><!-- End of LiveChat code -->"
+        scripts: "<!-- Start of LiveChat (www.livechatinc.com) code --><script type='text/javascript'>  window.__lc = window.__lc || {};  window.__lc.license = 14406369;  window.__lc.chat_between_groups = false; ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)};  var e={_q:[],_h:null,_v:'2.0',on:function(){i(['on',c.call(arguments)])},once:function(){  i(['once',c.call(arguments)])},off:function(){i(['off',c.call(arguments)])},  get:function(){if(!e._h)throw new Error('[LiveChatWidget] You cant use getters before load.');  return i(['get',c.call(arguments)])},call:function(){i(['call',c.call(arguments)])},init:function(){  var n=t.createElement('script');  n.async=!0,n.type='text/javascript',  n.src='https://cdn.livechatinc.com/tracking.js',t.head.appendChild(n)}};  !n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))</script><noscript><a href='https://www.livechatinc.com/chat-with/14406369/' rel='nofollow'>Chat with us</a>,powered by <a href='https://www.livechatinc.com/?welcome' rel='noopener nofollow' target='_blank'>LiveChat</a></noscript><!-- End of LiveChat code -->",
+        xtremepush_sdk: "WQRciE4QqacZFCg2gAUq1shLOVSiRa-n"
     });
 });
 
@@ -2763,15 +2672,6 @@ gulp.task('amurel.bet', function (done) {
     });
 });
 
-gulp.task('bellagames.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "bellagames.bet",
-        banca: "BELLA GAMES",
-        styles: ""
-    });
-});
-
 gulp.task('tourodasorte.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2800,15 +2700,6 @@ gulp.task('bigdaybet.com', function (done) {
     });
 });
 
-gulp.task('oraculo.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "oraculo.bet",
-        banca: "ORACULO.BET",
-        styles: "",
-    });
-});
-
 gulp.task('priv8bet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2824,7 +2715,8 @@ gulp.task('betinha.com', function (done) {
         host: "betinha.com",
         banca: "betinha.com",
         styles: "",
-        xtremepush_sdk: "Td-K8QujD1c4wTfQsFsmNZ78iX7J-56k"
+        xtremepush_sdk: "0F-o4hhQ-HQJhCjSdyAHUcYutoxcrqYB",
+        scripts: "<script> window.$chatwoot.toggle(); </script>"
     });
 });
 
@@ -2852,6 +2744,8 @@ gulp.task('betagora.io', function (done) {
         host: "betagora.io",
         banca: "BET AGORA",
         styles: "",
+        scripts: "<!-- Start of betagora Zendesk Widget script --><script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key=0afeed60-0582-416d-a66b-e4bbc408ad93'></script><!-- End of betagora Zendesk Widget script -->",
+        xtremepush_sdk: "E5ilOYbc5X95iSCWM5gf_0K-_turnLxj"
     });
 });
 
@@ -2869,15 +2763,6 @@ gulp.task('mailing.bet', function (done) {
         server: "front4.wee.bet",
         host: "mailing.bet",
         banca: "MAILING.BET",
-        styles: "",
-    });
-});
-
-gulp.task('bocamafra.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bocamafra.bet",
-        banca: "BOCAMAFRA.BET",
         styles: "",
     });
 });
@@ -2927,5 +2812,70 @@ gulp.task('leaobet.com', function (done) {
         banca: "LEÃO BET",
         styles: "",
         dominioTemp: "leaobet.wee.bet"
+    });
+});
+
+gulp.task('emirates365.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "emirates365.bet",
+        banca: "EMIRATES 365",
+        styles: "",
+    });
+});
+
+gulp.task('12bets.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "12bets.bet",
+        banca: "12 BETS",
+        styles: "",
+    });
+});
+
+gulp.task('bettotal.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bettotal.bet",
+        banca: "BET TOTAL",
+        styles: "",
+    });
+});
+
+gulp.task('topbets.site', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "topbets.site",
+        banca: "TOP BETS",
+        styles: "",
+    });
+});
+
+gulp.task('via-bet.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "via-bet.com",
+        banca: "VIA BET",
+        styles: "",
+    });
+});
+
+gulp.task('amabet.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "amabet.bet",
+        banca: "AMA BET",
+        styles: "",
+        dominioTemp: "amabet.wee.bet"
+    });
+});
+
+gulp.task('bigwinfree.com', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bigwinfree.com",
+        banca: "BIG WIN FREE",
+        styles: "",
+        dominioTemp: "bigwinfree.wee.bet"
     });
 });

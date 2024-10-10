@@ -3,7 +3,7 @@
 }
 
 .balance-container {
-    background-color: #0b0c10;
+    background-color: var(--sidebars);
     padding: 20px;
     border-radius: 8px;
     width: 500px;
