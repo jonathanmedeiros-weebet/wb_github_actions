@@ -593,15 +593,6 @@ gulp.task('lbbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('top10sportsvip.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "top10sportsvip.com",
-        banca: "TOP 10 SPORTS VIP",
-        styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;--league: #35cc96; --foreground-league: #fff;",
-    });
-});
-
 gulp.task('garanhunsbet.site', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1355,15 +1346,6 @@ gulp.task('megasports.bet', function (done) {
         server: "front4.wee.bet",
         host: "megasports.bet",
         banca: "MEGA SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('bet101.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "bet101.bet",
-        banca: "BET 101",
         styles: "",
     });
 });
@@ -2233,15 +2215,6 @@ gulp.task('bosscassino.bet', function (done) {
     });
 });
 
-gulp.task('foxplay.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "foxplay.bet",
-        banca: "FOX PLAY",
-        styles: "",
-    });
-});
-
 gulp.task('baraocassino.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2411,15 +2384,6 @@ gulp.task('asortebets.com', function (done) {
         server: "front4.wee.bet",
         host: "asortebets.com",
         banca: "A SORTE BETS",
-        styles: ""
-    });
-});
-
-gulp.task('brazlotto.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "brazlotto.bet",
-        banca: "BRAZLOTTO",
         styles: ""
     });
 });
@@ -2799,15 +2763,6 @@ gulp.task('mailing.bet', function (done) {
         server: "front4.wee.bet",
         host: "mailing.bet",
         banca: "MAILING.BET",
-        styles: "",
-    });
-});
-
-gulp.task('bocamafra.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bocamafra.bet",
-        banca: "BOCAMAFRA.BET",
         styles: "",
     });
 });
