@@ -23,65 +23,18 @@
 </div>
 <div class="modal-body cupom-ativo">
     <div class="cupom-header">
-            <div style="display: flex; flex-direction: column; justify-items: center; text-align: center;">
-                <p>{{aposta.tipo | titlecase}}</p>
-                <p style="font-size: 1.5rem">{{aposta.codigo}} 
-                    <i style="cursor: pointer; margin-left: 0.25rem;" (click)="copyToClipboard(aposta.codigo)" class="far fa-copy"></i>
-                </p>
-                <p>Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
-                <p *ngIf="aposta?.data_liquidacao">
-                    <b>{{'geral.computadoEm' | translate}}</b>
-                    <span> {{aposta.data_liquidacao | moment: 'DD/MM/YYYY [às] HH:mm'}}</span>
-                </p>
-            </div>
-            <ng-template #exibicaoPadrao>
-                <p>
-                    <b>Cambista:</b><span>{{aposta.passador.nome}}</span>
-                </p>
-                <p>
-                    <b>Apostador:</b><span>{{aposta.apostador}}</span>
-                </p>
-            </ng-template>
-            <p>
-                <b>{{'geral.status' | translate}}: </b>
-                <span>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</span>
+        <div style="display: flex; flex-direction: column; justify-items: center; text-align: center;">
+            <p>{{aposta.tipo | titlecase}}</p>
+            <p style="font-size: 1.5rem">{{aposta.codigo}}
+                <i style="cursor: pointer; margin-left: 0.25rem;" (click)="copyToClipboard(aposta.codigo)"
+                    class="far fa-copy"></i>
             </p>
-            <p class="aposta-horario">
-                <b>Horário:</b><span>{{aposta.horario | moment: 'DD/MM HH:mm'}}</span>
+            <p>Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
+            <p *ngIf="aposta?.data_liquidacao">
+                <b>{{'geral.computadoEm' | translate}}</b>
+                <span> {{aposta.data_liquidacao | moment: 'DD/MM/YYYY [às] HH:mm'}}</span>
             </p>
-            <p class="total-jogos">
-                Quantidade de jogos:<span style="margin-left: 3px;">{{aposta.itens.length}}</span>
-            </p>
-            <p class="aposta">
-                Cotação:
-                <span>
-                    {{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3'}}
-                </span>
-            </p>
-            <p class="aposta">
-                Valor apostado:<span><span *ngIf="aposta.is_bonus"> ({{'geral.bonus' | translate | lowercase}}) </span>{{aposta.valor | currency}}</span>
-            </p>
-            <p class="ganho">
-                Possível retorno:
-                <span style="white-space: nowrap;">
-                    <span class="{{!novaPossibilidadeGanho || falhaSimulacao ? '' : 'cancelado'}}">{{aposta.possibilidade_ganho | currency}}</span>
-                    <span class="dados-simulacao" *ngIf="!falhaSimulacao">{{novaPossibilidadeGanho | currency}}</span>
-                </span>
-            </p>
-            <p class="resultado">
-                <span *ngIf="!(aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado')">
-                    <b>Resultados:</b>
-                    <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
-                    <span *ngIf="!aposta.resultado">{{'geral.aguardando' | translate}}</span>
-                </span>
-                <span *ngIf="aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado'">{{'geral.bonusCancelado' | translate}}</span>
-            </p>
-            <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
-                {{'geral.premio' | translate}}:<span>{{aposta.premio | currency}}</span>
-            </p>
-            <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-                Cambista paga:<span>{{cambistaPaga|currency}}</span>
-            </p>
+        </div>
     </div>
     <div class="table-container">
         <table class="table">
@@ -204,8 +157,12 @@
                             </span>
                         </p>
                         <p class="resultado">
-                            <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
-                            <span *ngIf="!aposta.resultado">Aguardando</span>
+                            <span *ngIf="!(aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado')">
+                                <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
+                                <span *ngIf="!aposta.resultado">{{'geral.aguardando' | translate}}</span>
+                            </span>
+                            <span *ngIf="aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado'">{{'geral.bonusCancelado' |
+                                translate}}</span>
                         </p>
                         <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
                             <span>{{aposta.premio | currency}}</span>
