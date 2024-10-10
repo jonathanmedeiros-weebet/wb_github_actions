@@ -1053,3 +1053,10 @@ body .change-theme {
 #badge-xtremepush.show-badge {
     display: block;
 }
+
+.hidden-header {
+    display: none !important;
+    header-submenu {
+        display: none !important;
+    }
+}

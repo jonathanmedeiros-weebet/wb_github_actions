@@ -6,12 +6,12 @@ a{
     text-decoration: none;
 }
 .close-imagem-inicial,.close-imagem-inicial-demo{
-    border-radius: 100%;
     position: absolute;
     display: flex;
-    top: 4px;
-    right: 5px;
+    top: 0px;
+    right: 0px;
     cursor: pointer;
+    padding: 7px 10px 15px 20px;
 }
 .close-imagem-inicial i{
     color: white;

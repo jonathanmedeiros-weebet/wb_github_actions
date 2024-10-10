@@ -165,14 +165,33 @@ export class AuthService {
                 catchError(this.errorService.handleError)
             );
     }
+    performLogout(logoutType: string) {
+        this.http.post(`${this.authLokiUrl}/logout`, { logout_type: logoutType }, this.header.getRequestOptions(true)).subscribe({
+            next: (response) => {
+                this.limparStorage();
+                window.location.reload();
+                if (this.xtremepushHabilitado()) {
+                    this.cleanXtremepushNotifications();
+                }
+            },
+            error: (error) => {
+                if (error.status === 401) {
+                    this.limparStorage();
+                    window.location.reload();
+                    if (this.xtremepushHabilitado()) {
+                        this.cleanXtremepushNotifications();
+                    }
+                }
+            }
+        });
+    }
 
     logout() {
-        this.limparStorage();
-        if(this.xtremepushHabilitado()) {
-            this.cleanXtremepushNotifications();
-        }
-        this.logadoSource.next(false);
-        window.location.reload();
+        this.performLogout('manual');
+    }
+
+    expiredByInactive() {
+        this.performLogout('expired by inactivity');
     }
 
     cleanXtremepushNotifications(){

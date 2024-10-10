@@ -1,39 +1,16 @@
-<app-skeleton *ngIf="showSkeleton && showLoadingIndicator" type="{{type}}" />
-
-<ng-container *ngIf="!isMobileView || pagina != 'deposito' else isModal">
-    <div  *ngIf="banners.length > 0" class="banners" [ngClass]="{'p-0':pagina === 'deposito'}" [hidden]="showLoadingIndicator">
-        <ngb-carousel [showNavigationArrows]="showNavigationArrows">
-            <ng-template *ngFor="let banner of banners" ngbSlide>
-                <div class="picsum-img-wrapper">
-                    <a *ngIf="banner.link" [href]="banner.link" [target]="banner.link_blank? '_blank' : ''">
-                        <img *ngIf="!isMobileView" [src]="banner.src" [alt]="banner.titulo">
-                        <img *ngIf="isMobileView" [src]="banner.src_mobile" [alt]="banner.titulo">
-                    </a>
-                    <div *ngIf="!banner.link">
-                        <img *ngIf="!isMobileView" [src]="banner.src" [alt]="banner.titulo">
-                        <img *ngIf="isMobileView" [src]="banner.src_mobile" [alt]="banner.titulo">
-                    </div>
+<div class="banners banner-container" [ngClass]="{'resolution16x2':pagina === 'deposito','resolution16x4':pagina != 'deposito'}" [hidden]="hideBanner">
+    <ngb-carousel [showNavigationArrows]="showNavigationArrows">
+        <ng-template *ngFor="let banner of banners" ngbSlide>
+            <div class="picsum-img-wrapper">
+                <a *ngIf="banner.link" [href]="banner.link" [target]="banner.link_blank? '_blank' : ''">
+                    <img *ngIf="!mobileScreen" [src]="banner.src" [alt]="banner.titulo">
+                    <img *ngIf="mobileScreen" [src]="banner.src_mobile" [alt]="banner.titulo">
+                </a>
+                <div *ngIf="!banner.link">
+                    <img *ngIf="!mobileScreen" [src]="banner.src" [alt]="banner.titulo">
+                    <img *ngIf="mobileScreen" [src]="banner.src_mobile" [alt]="banner.titulo">
                 </div>
-            </ng-template>
-        </ngb-carousel>
-    </div>
-</ng-container>
-
-<ng-template #isModal>
-    <div  *ngIf="bannersModal.length > 0" class="banners" [ngClass]="{'p-0':pagina === 'deposito'}" [hidden]="showLoadingIndicator">
-        <ngb-carousel [showNavigationArrows]="showNavigationArrowsInModal">
-            <ng-template *ngFor="let banner of bannersModal" ngbSlide>
-                <div class="picsum-img-wrapper">
-                    <a *ngIf="banner.link" [href]="banner.link" [target]="banner.link_blank? '_blank' : ''">
-                        <img *ngIf="!isMobileView" [src]="banner.src" [alt]="banner.titulo">
-                        <img *ngIf="isMobileView" [src]="banner.src_mobile" [alt]="banner.titulo">
-                    </a>
-                    <div *ngIf="!banner.link">
-                        <img *ngIf="!isMobileView" [src]="banner.src" [alt]="banner.titulo">
-                        <img *ngIf="isMobileView" [src]="banner.src_mobile" [alt]="banner.titulo">
-                    </div>
-                </div>
-            </ng-template>
-        </ngb-carousel>
-    </div>
-</ng-template>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</div>
