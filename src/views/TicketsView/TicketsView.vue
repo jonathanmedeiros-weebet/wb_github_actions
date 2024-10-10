@@ -90,7 +90,7 @@
         </div>
         <div class="cotacao__ganhos">
           <span>Possíveis ganhos:</span>
-          <span>{{ possibilityAward }}</span>
+          <span>R$ {{ possibilityAward }}</span>
         </div>
         <div class="cotacao__alteracao">
           <input

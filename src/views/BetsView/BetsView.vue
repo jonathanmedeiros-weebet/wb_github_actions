@@ -108,15 +108,15 @@
                 <tbody>
                   <tr>
                     <td class="table__line--left">Valor apostado:</td>
-                    <td class="table__line--right">{{ formatCurrencyMoney(bet.valor) }}</td>
+                    <td class="table__line--right">R$ {{ formatCurrencyMoney(bet.valor) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Comissão:</td>
-                    <td class="table__line--right">{{ formatCurrencyMoney(bet.comissao) }}</td>
+                    <td class="table__line--right">R$ {{ formatCurrencyMoney(bet.comissao) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Prêmio:</td>
-                    <td class="table__line--right">{{ formatCurrencyMoney(bet.premio) }}</td>
+                    <td class="table__line--right">R$ {{ formatCurrencyMoney(bet.premio) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Status:</td>
@@ -127,7 +127,7 @@
                   </tr>
                   <tr>
                     <td class="table__line--left">Pagamento:</td>
-                    <td class="table__line--right">{{ bet.status_pagamento ?? '-' }}</td>
+                    <td class="table__line--right">R$ {{ bet.status_pagamento ?? '-' }}</td>
                   </tr>
                 </tbody>  
               </table>
