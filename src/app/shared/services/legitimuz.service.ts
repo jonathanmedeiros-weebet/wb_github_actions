@@ -61,8 +61,8 @@ export class LegitimuzService {
             };
         } else {
             this.options.onSuccess = (eventName) => {
-                this.closeModal();
                 console.log(eventName);
+                this.closeModal();
             }
         }
 

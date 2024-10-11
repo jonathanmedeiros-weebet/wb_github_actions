@@ -50,10 +50,13 @@ export class LegitimuzFacialService {
       }
 
       this.options.eventHandler = (eventName) => {
-            console.log('1',eventName.name);
-            console.log('1',eventName.type);
-          if (eventName == 'faceindex') {
-            console.log(eventName);
+            console.log('1 Event:',eventName);
+            console.log('1 Event.Name:',eventName.name);
+            console.log('1 Event.type',eventName.type);
+          if (eventName.name == 'faceindex') {
+            console.log('faceindex:',eventName);
+            console.log('2 Event.name:',eventName.name);
+            console.log('2 Event.type',eventName.type);
           } else {
             console.log('Else',eventName.name);
             console.log('Else',eventName.type);
