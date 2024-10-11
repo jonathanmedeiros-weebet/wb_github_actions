@@ -197,7 +197,7 @@
                         </div>
                         <input *ngIf="cliente?.cpf" id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
                         <input type="hidden" id="legitimuz-ref-id" [value]="token">
-                        <button (click)="update()" id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                        <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                         </button>

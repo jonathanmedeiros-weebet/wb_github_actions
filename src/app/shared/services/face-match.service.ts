@@ -40,9 +40,6 @@ export class FaceMatchService {
   }
 
   getFaceMatch(data: any): Observable<any> {
-
-    console.log(data)
-
     return this.http.post(`${this.faceMatchUrl}/facematch`, data)
       .pipe(
         map((res: any) => { console.log(res); return res.results }),

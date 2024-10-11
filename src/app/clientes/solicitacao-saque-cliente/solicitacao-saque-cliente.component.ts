@@ -58,7 +58,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     permitirQualquerChavePix = false;
     submitting;
     faceMatchEnabled = false;
-    faceMatchFirstWithdraw = false;
     faceMatchFirstWithdrawValidated = false;
     legitimuzToken = "";
     verifiedIdentity = false;
@@ -104,7 +103,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken) && Boolean(this.paramsLocais.getOpcoes().faceMatchFirstWithdraw);
-        this.faceMatchFirstWithdraw = Boolean(this.paramsLocais.getOpcoes().faceMatchFirstWithdraw && Boolean(this.paramsLocais.getOpcoes().faceMatch));
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
         }
@@ -164,16 +162,18 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.rotaCompletarCadastro = '/clientes/perfil';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
-                    this.faceMatchService.getFaceMatch({ document: this.cliente.cpf, id: user.id }).subscribe({
-                        next: (res) => {
-                            console.log(res)
-                            if (res.document == this.cliente.cpf && (res.first_withdraw != null)) {
-                                this.faceMatchFirstWithdrawValidated = true;
-                            } else {
-                                console.log('NãoTemFirst')
-                            }
-                        }, error: (error) => { console.log(error) }
-                    })
+                    if(this.faceMatchEnabled){
+                        this.faceMatchService.getFaceMatch({document: this.cliente.cpf}).subscribe({
+                            next: (res) => {
+                                console.log(res)
+                                if (res.document == this.cliente.cpf && (res.first_withdraw != null)) {
+                                    this.faceMatchFirstWithdrawValidated = true;
+                                } else {
+                                    console.log('NãoTemFirst')
+                                }
+                            }, error: (error) => { console.log(error) }
+                        })
+                    }
 
                     this.onChavePixChange();
                     this.showLoading = false;
@@ -231,13 +231,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
-                .pipe(takeUntil(this.unsubLegitimuz$))
+                .pipe()
                 .subscribe(() => {
                         this.legitimuzService.init();
                         this.legitimuzService.mount();                  
                 });
             this.legitimuzLiveness.changes
-                .pipe(takeUntil(this.unsubLegitimuz$))
+                .pipe()
                 .subscribe(() => {
                         this.LegitimuzFacialService.init();
                         this.LegitimuzFacialService.mount();                  

@@ -28,9 +28,9 @@ export class LegitimuzService {
         eventHandler: (eventName) => console.log(eventName)
     };
 
-    private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
+    private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(null);
     curCustomerIsVerified;
-    private faceIndexSub = new BehaviorSubject<boolean>(false);
+    private faceIndexSub = new BehaviorSubject<boolean>(null);
     faceIndex;
 
     constructor(
@@ -58,38 +58,25 @@ export class LegitimuzService {
                         }
                     }, 1000);
                 }
-                if (eventName.name === 'faceindex' && eventName.type === 'success') {
-                    console.log(eventName);
-                    console.log('faceindex: Success')
-                    this.faceIndexSub.next(true)
-                }
             };
         } else {
             this.options.onSuccess = (eventName) => {
+                this.closeModal();
                 console.log(eventName);
-                if (eventName.name === 'faceindex' && eventName.type === 'success') {
-                    console.log('faceindex: Success')
-                    this.faceIndexSub.next(true)
-                }
             }
         }
 
         this.options.eventHandler = (eventName) => {
             console.log(eventName)
-            if (eventName.name === 'faceindex' && eventName.type === 'success') {
-                console.log('faceindex: Success')
-                this.faceIndexSub.next(true)
-            }
         };
+
         this.options.error = (eventName) => {
             console.log(eventName)
-            console.log(this.options);
         };
     }
 
     init() {
         this.sdk = Legitimuz(this.options);
-        console.log(this.options)
     }
 
     mount() {

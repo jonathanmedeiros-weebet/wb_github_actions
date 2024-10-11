@@ -43,16 +43,22 @@ export class LegitimuzFacialService {
       this.faceIndex = this.faceIndexSub.asObservable();
       this.options.onSuccess = (eventName) => {
         console.log(eventName);
-        if (eventName.name === 'faceindex' && eventName.type === 'success') {
+        if (eventName.name == 'faceindex' && eventName.type == 'success') {
           console.log('faceindex: Success');
           this.faceIndexSub.next(true)
           }
       }
 
       this.options.eventHandler = (eventName) => {
-          console.log(eventName);
-          console.log(this.options);
-          if (eventName.name === 'faceindex' && eventName.type === 'success') {
+            console.log('1',eventName.name);
+            console.log('1',eventName.type);
+          if (eventName == 'faceindex') {
+            console.log(eventName);
+          } else {
+            console.log('Else',eventName.name);
+            console.log('Else',eventName.type);
+          }
+          if (eventName.name == 'faceindex' && eventName.type == 'success') {
             console.log('faceindex: Success')
             this.faceIndexSub.next(true)
         }
