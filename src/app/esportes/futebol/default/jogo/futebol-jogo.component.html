@@ -280,7 +280,7 @@
                                      *ngFor="let chave of objectKeys(mercados1T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados1T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados1T[chave])}">
-                                            {{mercados1T[chave].nome}}
+                                            {{mercados1T[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados1T[chave])">
@@ -323,7 +323,7 @@
                                      *ngFor="let chave of objectKeys(mercados1T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i, true)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados1T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados1T[chave])}">
-                                            {{mercados1T[chave].nome}}
+                                            {{mercados1T[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados1T[chave])">
@@ -376,7 +376,7 @@
                                      *ngFor="let chave of objectKeys(mercados2T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados2T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados2T[chave])}">
-                                            {{mercados2T[chave].nome}}
+                                            {{mercados2T[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados2T[chave])">
@@ -419,7 +419,7 @@
                                      *ngFor="let chave of objectKeys(mercados2T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i, true)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados2T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados2T[chave])}">
-                                            {{mercados2T[chave].nome}}
+                                            {{mercados2T[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados2T[chave])">
