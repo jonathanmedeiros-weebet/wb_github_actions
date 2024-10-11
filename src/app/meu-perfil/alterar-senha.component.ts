@@ -119,38 +119,42 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             
             );
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
-                this.verifiedIdentity = curCustomerIsVerified;
-                if (this.verifiedIdentity) {
-                    this.messageService.success('Identidade verificada!');
-                    this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
-                        next: (res) => {
-                            this.LegitimuzFacialService.closeModal();
-                            this.messageService.success('Identidade verificada!');
-                            this.faceMatchChangePasswordValidated = true;
-                            this.cd.detectChanges();
-                        }, error: (error) => {
-                            this.messageService.error('Identidade não verificada, entre em contato como o suporte');
-                            this.faceMatchChangePasswordValidated = false;
-                        }
-                    })
-                }
-            });
-            this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                if (faceIndex) {
-                    this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
-                        next: (res) => {
-                            this.LegitimuzFacialService.closeModal();
-                            this.messageService.success('Identidade verificada!');
-                            this.faceMatchChangePasswordValidated = true;
-                            this.cd.detectChanges();
-                        }, error: (error) => {
-                            this.messageService.error('Identidade não verificada, entre em contato como o suporte');
-                            this.faceMatchChangePasswordValidated = false;
-                        }
-                    })
-                }
-            })
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    if (this.verifiedIdentity) {
+                        this.messageService.success('Identidade verificada!');
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
+                            next: (res) => {
+                                this.LegitimuzFacialService.closeModal();
+                                this.messageService.success('Identidade verificada!');
+                                this.faceMatchChangePasswordValidated = true;
+                                this.cd.detectChanges();
+                            }, error: (error) => {
+                                this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                                this.faceMatchChangePasswordValidated = false;
+                            }
+                        })
+                    }
+                });
+            this.LegitimuzFacialService.faceIndex
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(faceIndex => {
+                    if (faceIndex) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
+                            next: (res) => {
+                                this.LegitimuzFacialService.closeModal();
+                                this.messageService.success('Identidade verificada!');
+                                this.faceMatchChangePasswordValidated = true;
+                                this.cd.detectChanges();
+                            }, error: (error) => {
+                                this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                                this.faceMatchChangePasswordValidated = false;
+                            }
+                        })
+                    }
+                })
         }
     }
     ngAfterViewInit() {

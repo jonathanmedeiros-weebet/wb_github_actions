@@ -162,16 +162,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.rotaCompletarCadastro = '/clientes/perfil';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
-                    if(this.faceMatchEnabled){
-                        this.faceMatchService.getFaceMatch({document: this.cliente.cpf}).subscribe({
+                    if (this.faceMatchEnabled) {
+                        this.faceMatchService.getFaceMatch({ document: this.cliente.cpf }).subscribe({
                             next: (res) => {
-                                console.log(res)
                                 if (res.document == this.cliente.cpf && (res.first_withdraw != null)) {
                                     this.faceMatchFirstWithdrawValidated = true;
-                                } else {
-                                    console.log('NãoTemFirst')
                                 }
-                            }, error: (error) => { console.log(error) }
+                            }, error: (error) => {this.messageService.error(error)}
                         })
                     }
 
@@ -193,7 +190,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.faceMatchEnabled && !this.disapprovedIdentity && !this.verifiedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -210,21 +207,23 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.faceMatchFirstWithdrawValidated = false;
                     }
                 });
-            this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                if (faceIndex) {
-                    this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
-                        next: (res) => {
-                            this.LegitimuzFacialService.closeModal();
-                            this.messageService.success('Identidade verificada!');
-                            this.faceMatchFirstWithdrawValidated = true;
-                        }, error: (error) => {
-                            this.messageService.error('Identidade não verificada, entre em contato como o suporte');
-                            this.faceMatchFirstWithdrawValidated = false;
-                        }
-                    })
+            this.LegitimuzFacialService.faceIndex
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(faceIndex => {
+                    if (faceIndex) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
+                            next: (res) => {
+                                this.LegitimuzFacialService.closeModal();
+                                this.messageService.success('Identidade verificada!');
+                                this.faceMatchFirstWithdrawValidated = true;
+                            }, error: (error) => {
+                                this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                                this.faceMatchFirstWithdrawValidated = false;
+                            }
+                        })
 
-                }
-            })
+                    }
+                })
         }
     }
 

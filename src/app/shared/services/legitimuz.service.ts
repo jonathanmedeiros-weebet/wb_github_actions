@@ -62,6 +62,7 @@ export class LegitimuzService {
         } else {
             this.options.onSuccess = (eventName) => {
                 console.log(eventName);
+                this.curCustomerIsVerifiedSub.next(false);
                 this.closeModal();
             }
         }

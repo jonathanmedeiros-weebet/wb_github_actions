@@ -1,3 +1,4 @@
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
@@ -62,6 +63,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         private translate: TranslateService,
         private legitimuzService: LegitimuzService,
         private LegitimuzFacialService: LegitimuzFacialService,
+        private faceMatchService: FaceMatchService
 
     ) {
         super();
@@ -138,10 +140,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         });
 
         this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.legitimuzToken);
-        this.faceMatchResetPasswordEnabled = Boolean(this.paramLocais.getOpcoes().faceMatchResetPasswordEnabled && this.legitimuzToken);
-
-        if (!this.faceMatchEnabled && !this.faceMatchResetPasswordEnabled) {
+        this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.legitimuzToken) && Boolean(this.paramLocais.getOpcoes().faceMatchResetPassword);
+        if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
         }
         
@@ -151,22 +151,43 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             .subscribe(statusIndiqueGanhe => {
                 this.indiqueGanheRemovido = statusIndiqueGanhe;
             });
-        
+
+
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            this.legitimuzService.curCustomerIsVerified.subscribe(curCustomerIsVerified => {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
                         this.legitimuzService.closeModal();
                         this.messageService.success('Identidade verificada!');
+                        this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, last_reset_password: true }).subscribe()
+                        this.faceMatchChangePasswordValidated = true;
+                    } else {
+                        this.legitimuzService.closeModal();
+                        this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                        this.faceMatchChangePasswordValidated = false;
                     }
                 });
-            this.LegitimuzFacialService.faceIndex.subscribe(faceIndex => {
-                this.faceMatchChangePasswordValidated = faceIndex;
-                this.LegitimuzFacialService.closeModal();
-            })
-        }   
-                
+            this.LegitimuzFacialService.faceIndex
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(faceIndex => {
+                    if (faceIndex) {
+                        this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, last_reset_password: true }).subscribe({
+                            next: (res) => {
+                                this.LegitimuzFacialService.closeModal();
+                                this.messageService.success('Identidade verificada!');
+                                this.faceMatchChangePasswordValidated = true;
+                            }, error: (error) => {
+                                this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                                this.faceMatchChangePasswordValidated = false;
+                            }
+                        })
+
+                    }
+                })
+        }         
     }
 
     createForm() {
@@ -240,18 +261,20 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngAfterViewInit() {
+        console.log(this.faceMatchEnabled);
+        console.log(this.faceMatchChangePasswordValidated)
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
-                .pipe(takeUntil(this.unsubLegitimuz$))
+                .pipe()
                 .subscribe(() => {
                         this.legitimuzService.init();
                         this.legitimuzService.mount();                  
                 });
             this.legitimuzLiveness.changes
-                .pipe(takeUntil(this.unsubLegitimuz$))
-                   .subscribe(() => {
+                .pipe()
+                .subscribe(() => {
                         this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();    
+                        this.LegitimuzFacialService.mount();                  
                 });
         }
     }

@@ -1,5 +1,5 @@
 import { FaceMatchService } from './../../../services/face-match.service';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, OnChanges } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -106,15 +106,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     ngOnInit() {
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken);
-        this.faceMatchRegister = Boolean(this.paramsService.getOpcoes().faceMatchRegister && Boolean(this.paramsService.getOpcoes().faceMatch));
+        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken) && Boolean(this.paramsService.getOpcoes().faceMatchRegister);
 
-        if (this.faceMatchRegister) {
-            this.faceMatchEnabled = true;
-        } else {
+        if (!this.faceMatchEnabled) {
             this.faceMatchRegisterValidated = true;
         }
- 
+
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
             if (this.faceMatchEnabled) {
@@ -134,11 +131,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
 
         this.createForm();
-        this.form.get('cpf')?.valueChanges.subscribe(cpf => {
-            this.dataUserCPF = cpf;
-            this.token = cpf;
-            this.showLoading = false;
-          });
+        this.form.valueChanges.subscribe(form => {
+            if ((form.cpf != null && form.cpf.length == 14) && (form.nascimento != null && form.nascimento.length > 7) ){
+                this.showLoading = false;
+                this.cd.detectChanges();
+            }
+        })
 
         this.hCaptchaLanguage = this.translate.currentLang;
 
@@ -239,17 +237,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
                     this.verifiedIdentity = curCustomerIsVerified;
-                    console.log(this.faceMatchRequested)
                     this.cd.detectChanges();
-                    if (!this.verifiedIdentity) {
-                        this.faceMatchService.createFacematch({ document: this.dataUserCPF }).subscribe({
-                            next: (res) => {
-                                this.faceMatchRequested = true;
-                                console.log(res);
-                            }, error: (error) => {
-                                console.log(error);
-                            }
-                        })
+                    if (this.verifiedIdentity) {
+                        this.faceMatchRequested = true;
+                        this.showLoading = false
                         this.legitimuzService.closeModal();
                         this.messageService.success('Identidade verificada!');
                     }
@@ -258,9 +249,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
       
             if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-              this.form.get('cpf')?.valueChanges.subscribe(value => {
+              this.form.get('cpf')?.valueChanges.subscribe(cpf => {
+                  this.dataUserCPF = cpf;
+                  this.token = cpf; 
                   this.legitimuzService.init();
-                  this.legitimuzService.mount();  
+                  this.legitimuzService.mount(); 
                 })
                 
             }
@@ -548,16 +541,4 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         event.preventDefault();
     }
 
-    faceMatch() {
-        this.faceMatchService.createFacematch({ document: this.dataUserCPF }).subscribe({
-            next: (res) => {
-                this.faceMatchRequested = true;
-                this.cd.detectChanges();
-                console.log(res);
-            }, error: (error) => {
-                console.log(error);
-            }
-        })
-    }
-    
 }
