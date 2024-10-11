@@ -43,11 +43,21 @@ export class AuthService {
                 map(res => {
                     if (res.results.user) {
                         localStorage.setItem('user', JSON.stringify(res.results.user));
+                        this.sendGa4Event();
                     }
                     return res;
                 }),
                 catchError(this.errorService.handleErrorLogin),
             );
+    }
+
+    sendGa4Event() {
+        const dataLayer = (window as any).dataLayer || [];
+        if (dataLayer) {
+            dataLayer.push({
+            event: 'login'
+          });
+        }
     }
 
     enviarCodigoEmail(data: any): Observable<any> {

@@ -64,11 +64,23 @@ export class ClienteService {
                             this.xtremepushBackgroundRemove();
                         }
                     }
-
+                    this.sendGa4Event(dataUser.user.nome_usuario, dataUser.user.email_usuario, dataUser.user.telefone_usuario,);
                     return response.results;
                 }),
                 catchError(this.errorService.handleError)
             );
+    }
+
+    sendGa4Event(clientName, email, telefone) {
+        const dataLayer = (window as any).dataLayer || [];
+        if (dataLayer) {
+            dataLayer.push({
+            event: 'cadastro',
+            nome_usuario : clientName,
+            email_usuario : email,
+            telefone_usuario : telefone
+          });
+        }
     }
 
     getCliente(id) {
