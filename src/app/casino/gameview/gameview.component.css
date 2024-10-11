@@ -21,6 +21,15 @@
     flex-flow: column;
 }
 
+.opacity50 {
+    color: #ffffff8c;
+    text-align: center;
+}
+
+.bonus {
+    line-height: 52px;
+}
+
 .aviso h4{
     margin: 20px;
 }
@@ -135,7 +144,8 @@ iframe{
 
 .close-modal-continuar-jogando i{
     color: var(--highlight);
-    font-size: medium;
+    font-size: 24px;
+    padding-right: 8px;
 }
 
 .btn-custom, .btn-custom2 {
@@ -180,6 +190,10 @@ iframe{
     .overlay {
         height: calc(100% - 45px);
         margin-top: 45px;
+    }
+
+    .modal-body {
+        padding: 0 30px 50px 30px !important;
     }
 }
 
@@ -291,8 +305,12 @@ iframe{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 60px 60px 60px;
+    padding: 0 50px 50px 50px;
 }
 
-
+.modal-body h4 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
 
