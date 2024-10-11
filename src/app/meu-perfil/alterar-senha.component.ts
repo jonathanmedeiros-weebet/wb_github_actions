@@ -16,6 +16,7 @@ import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/m
 export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     public isCollapsed = false;
     private unsub$ = new Subject();
+    loading = false;
     public mostrarSenhaAtual: boolean = false;
     public mostrarSenhaNova: boolean = false;
     public mostrarSenhaConfirmacao: boolean = false;
@@ -115,6 +116,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     submit() {
+        this.loading = true;
         let values = this.form.value;
 
         if(this.twoFactorInProfileChangeEnabled) {
@@ -133,7 +135,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.form.reset();
                         this.success();
                     },
-                    error => this.handleError(error)
+                    error => this.handleError(error),
+                    () => this.loading = false
                 );
         } else {
             this.auth.changePassword(values)
@@ -143,7 +146,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.form.reset();
                         this.success();
                     },
-                    error => this.handleError(error)
+                    error => this.handleError(error),
+                    () => this.loading = false
                 );
         }
     }
@@ -161,6 +165,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     private validacaoMultifator() {
+        this.loading = true;
         const modalref = this.modalService.open(
             MultifactorConfirmationModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
@@ -177,8 +182,9 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.codigoMultifator = result.codigo;
 
                 if (result.checked) {
-                    this.submit();
+                    return this.submit();
                 }
+                this.loading = false;
             }
         );
     }
