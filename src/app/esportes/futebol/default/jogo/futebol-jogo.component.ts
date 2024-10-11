@@ -20,6 +20,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -49,6 +50,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     unicaColuna = false;
     unsub$ = new Subject();
     oddsAberto = [];
+    currentLanguage: string = 'pt';
 
     multiMarcadores = true;
     marcadores = true;
@@ -76,7 +78,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
         private cd: ChangeDetectorRef,
-        private activeModal: NgbActiveModal
+        private activeModal: NgbActiveModal,
+        private translate: TranslateService
     ) {
     }
 
@@ -89,6 +92,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
             const containerJogoEl = this.el.nativeElement.querySelector('.jogo-container');
             this.renderer.setStyle(containerJogoEl, 'height', `${altura}px`);
         }
+
+        this.currentLanguage = this.translate.currentLang;
+
+        this.translate.onLangChange.subscribe(res => this.currentLanguage = res.lang);
 
         this.definirAltura();
         this.tiposAposta = this.paramsService.getTiposAposta();
@@ -161,7 +168,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                         this.jogo = jogo;
                         this.mapearOdds(jogo.cotacoes);
 
-                        if(habilitar_live_tracker && jogo.live_track_id) {
+                        if (habilitar_live_tracker && jogo.live_track_id) {
                             if (this.exibindoMaisCotacoes) {
                                 this.bilheteService.sendId(jogo.live_track_id);
                             } else {
@@ -177,7 +184,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.bilheteService.sendId(null)
+        this.bilheteService.sendId(null);
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -249,6 +256,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 odd.posicaoXMobile = tipoAposta.posicao_x_mobile;
                 odd.posicaoYMobile = tipoAposta.posicao_y_mobile;
                 odd.label = tipoAposta.nome;
+                odd.label_pt = tipoAposta.nome_pt ?? tipoAposta.nome;
+                odd.label_en = tipoAposta.nome_en ?? tipoAposta.nome;
+                odd.label_es = tipoAposta.nome_es ?? tipoAposta.nome;
                 odd.valorFinal = this.helperService.calcularCotacao2String(
                     odd.valor,
                     odd.chave,
@@ -307,6 +317,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             const cotacao = {
                                 chave: chave,
                                 label: tipoAposta.nome,
+                                label_pt: tipoAposta.nome_pt ?? tipoAposta.nome,
+                                label_en: tipoAposta.nome_en ?? tipoAposta.nome,
+                                label_es: tipoAposta.nome_es ?? tipoAposta.nome,
                                 valor: cotacaoLocal.valor,
                                 valorFinal: this.helperService.calcularCotacao2String(
                                     cotacaoLocal.valor,

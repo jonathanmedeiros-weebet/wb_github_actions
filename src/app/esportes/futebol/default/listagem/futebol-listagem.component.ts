@@ -78,6 +78,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     campeonatosTemp = [];
     campeonatosFiltrados = [];
     headerHeight = 92;
+    currentLanguage: string = 'pt'
 
     nomesCotacoes = [];
 
@@ -171,10 +172,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
+        this.currentLanguage = this.translate.currentLang;
 
-        this.atualizarDatasJogosFuturos(this.translate.currentLang);
+        this.atualizarDatasJogosFuturos(this.currentLanguage);
 
         this.translate.onLangChange.subscribe((res) => {
+            this.currentLanguage = res.lang;
             this.atualizarDatasJogosFuturos(res.lang);
         });
 
@@ -415,6 +418,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                     jogo.favorito,
                     false);
                 cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                cotacao.nome_pt = this.helperService.apostaTipoLabel(cotacao.chave, null, 'pt');
+                cotacao.nome_en = this.helperService.apostaTipoLabel(cotacao.chave, null, 'en');
+                cotacao.nome_es = this.helperService.apostaTipoLabel(cotacao.chave, null, 'es');
             });
 
             this.oddsPrincipais.forEach(oddPrincipal => {
@@ -429,6 +435,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                         jogoId: jogo._id,
                         label: this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'),
                         nome: this.helperService.apostaTipoLabel(oddPrincipal),
+                        nome_pt: this.helperService.apostaTipoLabel(oddPrincipal, null, 'pt'),
+                        nome_en: this.helperService.apostaTipoLabel(oddPrincipal, null, 'en'),
+                        nome_es: this.helperService.apostaTipoLabel(oddPrincipal, null, 'es'),
                         valor: cotacaoLocal ? cotacaoLocal.valor : 0,
                         valorFinal: this.helperService.calcularCotacao2String(
                             cotacaoLocal ? cotacaoLocal.valor : 0,
