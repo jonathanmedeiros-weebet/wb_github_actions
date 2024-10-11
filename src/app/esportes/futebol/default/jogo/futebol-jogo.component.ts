@@ -241,6 +241,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     // categoria
                     mercado = {
                         'nome': tipoAposta.cat_nome,
+                        'nome_pt': tipoAposta.cat_nome_pt ?? tipoAposta.cat_nome,
+                        'nome_en': tipoAposta.cat_nome_en ?? tipoAposta.cat_nome,
+                        'nome_es': tipoAposta.cat_nome_es ?? tipoAposta.cat_nome,
                         'tempo': tipoAposta.tempo,
                         'principal': tipoAposta.p,
                         'posicao': tipoAposta.cat_posicao,
@@ -304,6 +307,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                             if (!mercado) {
                                 mercado = {
                                     'nome': tipoAposta.cat_nome,
+                                    'nome_pt': tipoAposta.cat_nome_pt ?? tipoAposta.cat_nome,
+                                    'nome_en': tipoAposta.cat_nome_en ?? tipoAposta.cat_nome,
+                                    'nome_es': tipoAposta.cat_nome_es ?? tipoAposta.cat_nome,
                                     'tempo': tipoAposta.tempo,
                                     'principal': tipoAposta.p,
                                     'posicao': tipoAposta.cat_posicao,

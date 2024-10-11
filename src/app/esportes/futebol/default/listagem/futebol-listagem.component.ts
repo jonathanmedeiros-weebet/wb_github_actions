@@ -78,7 +78,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     campeonatosTemp = [];
     campeonatosFiltrados = [];
     headerHeight = 92;
-    currentLanguage: string = 'pt'
+    currentLanguage = 'pt';
 
     nomesCotacoes = [];
 
