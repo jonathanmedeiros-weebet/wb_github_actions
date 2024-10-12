@@ -2534,10 +2534,11 @@ gulp.task('stargoldbet.app', function (done) {
     });
 });
 
-gulp.task('goalbet.com.br', function (done) {
+// Old goalbet.com.br
+gulp.task('goalb.net', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
-        host: "goalbet.com.br",
+        host: "goalb.net",
         banca: "GOAL BET",
         styles: ""
     });
