@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login__container">
-      <img class="login__image" src="@/assets/images/weebet_logo_verde.png">
+      <img class="login__image" :src="imageClient">
       <div class="login__header">
         <h1 class="login__title">Bem-vindo <img class="login__emogi" src="@/assets/images/hand.png"></h1>
         <p class="login__description">Insira seus dados para acessar o aplicativo </p>
@@ -49,7 +49,7 @@ import WButton from '@/components/Button.vue'
 import IconUserLine from '@/components/icons/IconUserLine.vue'
 import IconPassword from '@/components/icons/IconPassword.vue'
 import { authUser } from '@/services'
-import { useToastStore } from '@/stores'
+import { useConfigClient, useToastStore } from '@/stores'
 import { ToastType } from '@/enums'
 
 export default {
@@ -64,7 +64,13 @@ export default {
     return {
       username: '',
       password: '',
-      toastStore: useToastStore()
+      toastStore: useToastStore(),
+      configClient: useConfigClient()
+    }
+  },
+  computed: {
+    imageClient(){
+      return this.configClient.logo;
     }
   },
   methods: {    
@@ -94,7 +100,7 @@ export default {
         })
       }
     }
-  }
+  },
 }
 </script>
 
@@ -107,12 +113,12 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-top: 90px;
+    padding-top: 60px;
   }
 
   &__image {
-    width: 101.67px;
-    height: 21.17px;
+    width: 70px;
+    height: auto;
     margin-bottom: 32px;
   }
 

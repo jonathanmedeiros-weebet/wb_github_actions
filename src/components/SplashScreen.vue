@@ -16,8 +16,7 @@ export default {
   computed: {
     imageClient(){
       const configClient =  useConfigClient();
-      const slug = configClient.slug;
-      return `https://weebet.s3.amazonaws.com/${slug}/logos/logo_banca.png`;
+      return configClient.logo;
     }
   }
 }
