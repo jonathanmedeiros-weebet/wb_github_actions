@@ -336,7 +336,7 @@ export default {
         }
     },
     formatNumber(value, minFractionDigits, maxFractionDigits) {
-        return 'R$ ' + new Intl.NumberFormat('pt-BR', {
+        return new Intl.NumberFormat('pt-BR', {
             minimumFractionDigits: minFractionDigits,
             maximumFractionDigits: maxFractionDigits
         }).format(value);
