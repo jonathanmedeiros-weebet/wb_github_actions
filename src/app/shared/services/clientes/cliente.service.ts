@@ -64,21 +64,19 @@ export class ClienteService {
                             this.xtremepushBackgroundRemove();
                         }
                     }
-                    this.sendGa4Event(dataUser.user.nome_usuario, dataUser.user.email_usuario, dataUser.user.telefone_usuario,);
+                    this.sendGa4Event(dataUser.user.registrationMethod);
                     return response.results;
                 }),
                 catchError(this.errorService.handleError)
             );
     }
 
-    sendGa4Event(clientName, email, telefone) {
+    sendGa4Event(registrationMethod) {
         const dataLayer = (window as any).dataLayer || [];
         if (dataLayer) {
             dataLayer.push({
-            event: 'cadastro',
-            nome_usuario : clientName,
-            email_usuario : email,
-            telefone_usuario : telefone
+            event: 'sign_up',
+            method : registrationMethod,
           });
         }
     }
