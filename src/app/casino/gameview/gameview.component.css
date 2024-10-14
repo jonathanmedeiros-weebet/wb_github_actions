@@ -22,8 +22,13 @@
 }
 
 .opacity50 {
-    color: #ffffff8c;
+    color: var(--foreground);
     text-align: center;
+    opacity: 0.55;
+}
+
+a.opacity50:hover {
+    opacity: 1;
 }
 
 .bonus {
