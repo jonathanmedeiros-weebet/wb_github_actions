@@ -42,7 +42,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     token = '';
     showLoading = true;
 
-
     constructor(
         private messageService: MessageService,
         private auth: AuthService,
@@ -56,12 +55,12 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private LegitimuzFacialService: LegitimuzFacialService,
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
-        private faceMatchService : FaceMatchService
+        private faceMatchService: FaceMatchService
     ) {
         super();
     }
     ngAfterContentChecked(): void {
-        this.cd.detectChanges();    
+        this.cd.detectChanges();
     }
 
     get isCliente() {
@@ -76,9 +75,9 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.createForm();
 
         if (this.isCliente) {
-            this.sidebarService.changeItens({contexto: 'cliente'});
+            this.sidebarService.changeItens({ contexto: 'cliente' });
         } else {
-            this.sidebarService.changeItens({contexto: 'cambista'});
+            this.sidebarService.changeItens({ contexto: 'cambista' });
         }
 
         this.menuFooterService.setIsPagina(true);
@@ -90,7 +89,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         if (!this.faceMatchChangePassword) {
             this.faceMatchChangePasswordValidated = true;
         }
-        
 
         if (this.faceMatchEnabled && !this.faceMatchChangePasswordValidated) {
             this.token = this.auth.getToken();
@@ -101,7 +99,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             if (this.faceMatchEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
-        });   
+        });
 
         const user = JSON.parse(localStorage.getItem('user'));
         this.clienteService.getCliente(user.id)
@@ -116,7 +114,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 error => {
                     this.handleError(error);
                 }
-            
+
             );
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
@@ -162,14 +160,14 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             this.legitimuz.changes
                 .pipe()
                 .subscribe(() => {
-                        this.legitimuzService.init();
-                        this.legitimuzService.mount();                  
+                    this.legitimuzService.init();
+                    this.legitimuzService.mount();
                 });
             this.legitimuzLiveness.changes
                 .pipe()
-                   .subscribe(() => {
-                        this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();    
+                .subscribe(() => {
+                    this.LegitimuzFacialService.init();
+                    this.LegitimuzFacialService.mount();
                 });
         }
     }
@@ -203,12 +201,12 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             senha_atual: ['', Validators.required],
             senha_nova: ['', [Validators.required, Validators.minLength(3)]],
             senha_confirmacao: ['', [Validators.required, Validators.minLength(3)]]
-        }, {validator: PasswordValidation.MatchPassword});
+        }, { validator: PasswordValidation.MatchPassword });
     }
 
     onSubmit() {
         if (this.form.valid) {
-            if(this.twoFactorInProfileChangeEnabled) {
+            if (this.twoFactorInProfileChangeEnabled) {
                 this.validacaoMultifator();
             } else {
                 this.submit();
@@ -221,7 +219,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     submit() {
         let values = this.form.value;
 
-        if(this.twoFactorInProfileChangeEnabled) {
+        if (this.twoFactorInProfileChangeEnabled) {
             values = {
                 ...values,
                 token: this.tokenMultifator,
@@ -232,16 +230,14 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         if (this.isCliente) {
             if (this.verifiedIdentity) {
                 this.clienteService.alterarSenha(values)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    res => {
-                        this.form.reset();
-                        this.success();
-                    },
-                    error => this.handleError(error)
-                );
-            } else {
-                console.log('error')
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        res => {
+                            this.form.reset();
+                            this.success();
+                        },
+                        error => this.handleError(error)
+                    );
             }
         } else {
             this.auth.changePassword(values)
@@ -271,11 +267,11 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     private validacaoMultifator() {
         const modalref = this.modalService.open(
             MultifactorConfirmationModalComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
-                centered: true,
-                backdrop: 'static'
-            }
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-550 modal-h-350',
+            centered: true,
+            backdrop: 'static'
+        }
         );
 
         modalref.componentInstance.senha = this.form.get('senha_atual').value;
@@ -293,4 +289,4 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     toogleValidado() {
         this.faceMatchChangePasswordValidated = !this.faceMatchChangePasswordValidated;
     }
-    }
+}

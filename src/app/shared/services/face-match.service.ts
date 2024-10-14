@@ -42,7 +42,7 @@ export class FaceMatchService {
   getFaceMatch(data: any): Observable<any> {
     return this.http.post(`${this.faceMatchUrl}/facematch`, data)
       .pipe(
-        map((res: any) => { console.log(res); return res.results }),
+        map((res: any) => {return res.results }),
         catchError(this.errorService.handleError)
       );
   }

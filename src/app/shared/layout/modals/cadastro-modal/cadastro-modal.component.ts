@@ -132,9 +132,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.createForm();
         this.form.valueChanges.subscribe(form => {
-            if ((form.cpf != null && form.cpf.length == 14) && (form.nascimento != null && form.nascimento.length > 7) ){
+            if ((form.cpf != null && form.cpf.length == 14) && (form.nascimento != null && form.nascimento.length > 7)) {
                 this.showLoading = false;
                 this.cd.detectChanges();
+            } else {
+                this.showLoading = true;
             }
         })
 
@@ -153,62 +155,59 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.route.queryParams
             .subscribe((params) => {
 
-
-            if (params.ref || params.afiliado) {
-                const codigoAfiliado = params.ref ?? params.afiliado;
-
-                this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
-                localStorage.setItem('codigoAfiliado', codigoAfiliado);
-            } else {
-                const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
-                if (storagedCodigoAfiliado) {
-                    this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
+                if (params.ref || params.afiliado) {
+                    const codigoAfiliado = params.ref ?? params.afiliado;
+                    this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
+                    localStorage.setItem('codigoAfiliado', codigoAfiliado);
+                } else {
+                    const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
+                    if (storagedCodigoAfiliado) {
+                        this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
+                    }
                 }
-            }
 
-            if (params.btag) {
-                localStorage.setItem('btag', params.btag);
-            } else {
-                const storagedBtag = localStorage.getItem('btag');
-                if (storagedBtag) {
-                    this.form.patchValue({btag: storagedBtag});
+                if (params.btag) {
+                    localStorage.setItem('btag', params.btag);
+                } else {
+                    const storagedBtag = localStorage.getItem('btag');
+                    if (storagedBtag) {
+                        this.form.patchValue({ btag: storagedBtag });
+                    }
                 }
-            }
 
-            if (params.refId) {
-                localStorage.setItem('refId', params.refId);
-            } else {
-                const storagedRefId = localStorage.getItem('refId');
-                if (storagedRefId) {
-                    this.form.patchValue({refId: storagedRefId});
+                if (params.refId) {
+                    localStorage.setItem('refId', params.refId);
+                } else {
+                    const storagedRefId = localStorage.getItem('refId');
+                    if (storagedRefId) {
+                        this.form.patchValue({ refId: storagedRefId });
+                    }
                 }
-            }
 
-            if (params.c) {
-                this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
+                if (params.c) {
+                    this.campanhaService.computarAcesso({ campRef: params.c, fonte: params.s }).subscribe();
 
-                localStorage.setItem('campRef', params.c);
-                localStorage.setItem('campFonte', params.s);
-            } else {
-                const campRef = localStorage.getItem('campRef');
-                const campFonte = localStorage.getItem('campFonte');
-
-                if (campRef) {
-                    this.form.patchValue({campRef: campRef, campFonte: campFonte});
+                    localStorage.setItem('campRef', params.c);
+                    localStorage.setItem('campFonte', params.s);
+                } else {
+                    const campRef = localStorage.getItem('campRef');
+                    const campFonte = localStorage.getItem('campFonte');
+                    if (campRef) {
+                        this.form.patchValue({ campRef: campRef, campFonte: campFonte });
+                    }
                 }
-            }
 
-            if (this.clientesService.codigoFiliacaoCadastroTemp) {
-                this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
-                this.possuiCodigoAfiliado = true;
-            }
-
-            this.parametersList.forEach(param => {
-                if (params[param]) {
-                    this.parameters[param] = params[param];
+                if (this.clientesService.codigoFiliacaoCadastroTemp) {
+                    this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
+                    this.possuiCodigoAfiliado = true;
                 }
+
+                this.parametersList.forEach(param => {
+                    if (params[param]) {
+                        this.parameters[param] = params[param];
+                    }
+                });
             });
-        });
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
             this.loginGoogleAtivo = true;
@@ -224,10 +223,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                                 googleId: user.id,
                                 googleIdToken: user.idToken,
                             });
-
                             this.clearValidators();
                         }
-
                         this.user = user;
                     }
                 );
@@ -245,19 +242,16 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         this.messageService.success('Identidade verificada!');
                     }
                 });
-        }   
+        }
 
-      
-            if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-              this.form.get('cpf')?.valueChanges.subscribe(cpf => {
-                  this.dataUserCPF = cpf;
-                  this.token = cpf; 
-                  this.legitimuzService.init();
-                  this.legitimuzService.mount(); 
-                })
-                
-            }
-      
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.form.get('cpf')?.valueChanges.subscribe(cpf => {
+                this.dataUserCPF = cpf;
+                this.token = cpf;
+                this.legitimuzService.init();
+                this.legitimuzService.mount();
+            })
+        }
     }
 
     getPromocoes(queryParams?: any) {
@@ -401,15 +395,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.clientesService.cadastrarCliente(values)
             .subscribe(
                 (res) => {
-                    if (this.faceMatchRegister) {
-                        this.clientesService.updateVerifiedIdentity(true).subscribe({
-                            next: (res) => {
-                                console.log(res);
-                            }, error: (error) => {
-                                console.log(error);
-                            }
-                        })
-                    }
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
 
                     this.activeModal.dismiss();

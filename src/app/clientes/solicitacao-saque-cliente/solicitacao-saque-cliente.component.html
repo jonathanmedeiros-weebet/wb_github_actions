@@ -181,7 +181,7 @@
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                         </div>
-                        <input *ngIf="cliente?.cpf" id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
                         <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
                             <i class="fa-solid fa-id-card"></i>
@@ -195,7 +195,7 @@
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                         </div>
-                        <input *ngIf="cliente?.cpf" id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
                         <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
                             <i class="fa-solid fa-id-card"></i>
@@ -207,7 +207,6 @@
                 <div class="alert alert-info" *ngIf="respostaSolicitacao">
                     {{respostaSolicitacao}}
                 </div>
-                
             </div>
         </div>
     </ng-container>

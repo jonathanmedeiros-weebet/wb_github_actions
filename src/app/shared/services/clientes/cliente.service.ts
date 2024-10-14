@@ -85,10 +85,11 @@ export class ClienteService {
 
     getFaceMatchClient(id) {
         return this.http.get(`${this.clienteUrl}/getFaceMatchClient/${id}`, this.headers.getRequestOptions(true))
-            .pipe(             
-                map((res: any) => { return res.results}), (error => {
-                    return error}),
-                    catchError(this.errorService.handleError)
+            .pipe(
+                map((res: any) => { return res.results }), (error => {
+                    return error
+                }),
+                catchError(this.errorService.handleError)
             );
     }
 
@@ -271,15 +272,5 @@ export class ClienteService {
         setTimeout(() => {
             clearInterval(intervalId);
         }, 3000);
-    }
-    updateVerifiedIdentity(verifiedIdentity: boolean) {
-        return this.http.post(`${this.clienteUrl}/update-verified-identity`, verifiedIdentity, this.headers.getRequestOptions(true))
-            .pipe(
-                map((response: any) => {
-                    return response.results;
-                }),
-                catchError(this.errorService.handleError)
-            )
-
     }
 }

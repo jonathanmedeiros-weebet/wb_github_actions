@@ -221,7 +221,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                                 this.faceMatchFirstWithdrawValidated = false;
                             }
                         })
-
                     }
                 })
         }
@@ -233,16 +232,15 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 .pipe()
                 .subscribe(() => {
                         this.legitimuzService.init();
-                        this.legitimuzService.mount();                  
+                        this.legitimuzService.mount();
                 });
             this.legitimuzLiveness.changes
                 .pipe()
                 .subscribe(() => {
                         this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();                  
+                        this.LegitimuzFacialService.mount();
                 });
         }
-
     }
 
     closeAlert(id) {

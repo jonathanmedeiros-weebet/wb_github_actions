@@ -89,11 +89,9 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         return this.step === RecoveryStep.TWO_STEP;
     }
 
-
     ngOnInit() {
         this.currentLanguage = this.translate.currentLang;
         this.createForm();
-       
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
             if (this.faceMatchEnabled) {
@@ -144,15 +142,12 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
         }
-        
         this.layout
             .verificaRemocaoIndiqueGanhe
             .pipe(takeUntil(this.unsub$))
             .subscribe(statusIndiqueGanhe => {
                 this.indiqueGanheRemovido = statusIndiqueGanhe;
             });
-
-
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
@@ -184,7 +179,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                                 this.faceMatchChangePasswordValidated = false;
                             }
                         })
-
                     }
                 })
         }         
@@ -261,8 +255,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngAfterViewInit() {
-        console.log(this.faceMatchEnabled);
-        console.log(this.faceMatchChangePasswordValidated)
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
                 .pipe()
