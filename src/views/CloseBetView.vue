@@ -115,7 +115,7 @@
               :disabled="buttonDisable"
             >
               <template #icon-left>
-                <IconShare :size="20"/>
+                <IconShare :size="20" color="var(--foreground-league)"/>
               </template>
             </w-button>
             <div class="button-spacer"></div>
@@ -126,7 +126,7 @@
               :disabled="buttonDisable"
             >
               <template #icon-left>
-                <IconPrinter :size="20"/>
+                <IconPrinter :size="20" color="var(--foreground-highlight)"/>
               </template>
             </w-button>
           </template>
@@ -391,7 +391,7 @@ export default {
     padding: 19px 15px;
     width: 100%;
     background: #181818;
-    background: var(--color-background-input);
+    background: var(--game);
     border-radius: 2px;
   }
 }
@@ -403,11 +403,11 @@ export default {
   &__text {
     font-size: 14px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
   }
   &__date {
     color: #ffffff80;
-    color: var(--color-text-input)
+    color: var(--foreground-league-input)
   }
 }
 
@@ -438,7 +438,7 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
   }
 
   &__strikethrough {
@@ -457,7 +457,7 @@ export default {
   flex-direction: column;
   padding: 10px;
   background: #0a0a0a;
-  background: var(--color-background);
+  background: var(--background);
   border-radius: 4px;
   margin-bottom: -9px;
 
@@ -471,7 +471,7 @@ export default {
   &__team {
     font-size: 14px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-header);
     display: flex;          
     align-items: center;   
   }
@@ -484,21 +484,21 @@ export default {
     font-size: 14px;
     color: #bbbbbb;
     justify-content: space-between;
-    color: var(--color-text);
+    color: var(--foreground-header);
     font-weight: 500;
   }
 
   &__select {
     font-size: 14px;
     color: #bbbbbb;
-    color: var(--color-text);
+    color: var(--foreground-header);
     font-weight: 500;
   }
 
   &__odd {
     font-size: 14px;
     color: #cccccc;
-    color: var(--color-text);
+    color: var(--foreground-header);
     font-weight: 500;
   }
 

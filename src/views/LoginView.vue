@@ -125,12 +125,12 @@ export default {
     margin-top: 10px;
 
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-header);
   }
 
   &__description {
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-header);
     font-size: 16px;
     font-weight: 400;
     line-height: 18.75px;

@@ -28,7 +28,7 @@ export default {
 .card {
 
     background-color: #181818;
-    background-color: var(--color-background-input);
+    background-color: var(--game);
     font-size: 14px;
     font-weight: 400;
     text-align: left;
@@ -40,11 +40,12 @@ export default {
 
     &__title {
         text-align: left;
+        color: var(--foreground-game);
     }
 
     &__subtitle {
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-game);
         margin-bottom: 10px;
     }
 

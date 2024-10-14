@@ -560,7 +560,7 @@ export default {
   &__count-results {
     padding-top: 30px;
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-header);
   }
 
   &__buttons-filters {
@@ -595,7 +595,7 @@ export default {
 
   &__text-light {
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-league-input);
   }
   
 }
@@ -632,4 +632,9 @@ export default {
 .button-spacer {
   width: 10px; 
 }
+#btn-view,
+#btn-cancel {
+  color: var(--foreground-header);
+}
+
 </style>

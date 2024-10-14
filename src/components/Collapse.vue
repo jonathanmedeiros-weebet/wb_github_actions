@@ -2,7 +2,7 @@
     <div class="collapse">
         <div class="collapse__item" @click="handleClick">
             <span class="collapse__title"><slot name="title"/></span>
-            <component :is="iconArrowDinamic"/>
+            <component :is="iconArrowDinamic" :color="iconColor"/>
         </div>
         <slot v-if="collapsed" />
     </div>
@@ -23,7 +23,8 @@ export default {
     },
     data() {
         return {
-            collapsed: this.initCollapsed
+            collapsed: this.initCollapsed,
+            iconColor: 'var(--foreground-sidebars)'
         }
     },
     computed: {
@@ -54,14 +55,12 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         height: 40px;
         padding: 8px 16px;
         background: #181818;
-        background: var(--color-background-input);
-
+        background: var(--league);
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
     }
 
     &__title {
@@ -70,7 +69,7 @@ export default {
         justify-content: flex-start;
 
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
 

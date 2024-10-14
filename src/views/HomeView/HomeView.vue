@@ -27,7 +27,7 @@
           @click="handleOpenLeaguesModal"
         >
           <img v-if="league.image" :src="league.image"  @error="changeSrcWhenImageError">
-          <component v-if="league.icon" :is="league.icon" color="var(--color-primary)" />
+          <component v-if="league.icon" :is="league.icon" color="var(--highlight)" />
 
           <span>{{ league.label }}</span>
         </SelectFake>

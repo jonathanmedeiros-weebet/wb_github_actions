@@ -185,11 +185,11 @@ export default {
     align-items: flex-start;
     padding: 13px 16px;
     background: #181818;
-    background: var(--color-background-input);
+    background: var(--league);
     margin-top: 1px;
 
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
 
     &__teams {
         display: flex;
@@ -200,7 +200,7 @@ export default {
         display: flex;
         align-items: center;
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
         line-height: 14px;
@@ -235,10 +235,10 @@ export default {
         line-height: 10px;
         font-weight: 400;
         color: #0be58e;
-        color: var(--color-primary);
+        color: var(--highlight);
 
         border: 0.5px solid #0be58e;
-        border: 0.5px solid var(--color-primary);
+        border: 0.5px solid var(--highlight);
         border-radius: 2px;
         padding: 0 5px;
 
@@ -266,12 +266,14 @@ export default {
         height: 54px;
         border-radius: 4px;
         background: #0a0a0a;
-        background: var(--color-background);
+        background: var(--inputs-odds);
+        color: #ffff;
+        color: var(--foreground-inputs-odds);
         &--selected {
             background: #0be58e;
-            background: var(--color-primary);
+            background: var(--highlight);
             color: #0a0a0a;
-            color: var(--color-background);
+            color: var(--background);
         }
     }
 
@@ -297,7 +299,7 @@ export default {
 
     &__time {
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
         font-size: 12px;
         font-style: normal;
         font-weight: 300;

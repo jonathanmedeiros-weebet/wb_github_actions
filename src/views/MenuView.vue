@@ -13,16 +13,16 @@
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
             R$ {{ isCreditoVisible ? '*******' : credit }}
-            <IconEye v-if="!isCreditoVisible" class="wallet__eye" @click.native="toggleCreditoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            <IconEye v-if="!isCreditoVisible" :color="'var(--foreground-inputs-odds)'" class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleCreditoVisibility" />
           </span>
         </div>
         <div class="wallet__item">
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
             R$ {{  isSaldoVisible ? '*******' : balance }}
-            <IconEye v-if="!isSaldoVisible" class="wallet__eye" @click.native="toggleSaldoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" @click.native="toggleSaldoVisibility" />
+            <IconEye v-if="!isSaldoVisible" class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleSaldoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleSaldoVisibility" />
           </span>
         </div>
         <div class="wallet__shortcuts">
@@ -192,7 +192,7 @@ export default {
 <style lang="scss" scoped>
 .menu {
   color: #ffffff;
-  color: var(--color-text);
+  color: var(--foreground-game);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -227,7 +227,8 @@ export default {
     font-size: 24px;
     font-weight: 500;
     line-height: 24px;
-    
+    color: #ffffff80;
+    color: var(--foreground-header);
   }
 
   &__greeting {
@@ -235,7 +236,7 @@ export default {
     font-weight: 400;
     line-height: 16px;
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-header);  
   }
 }
 
@@ -244,7 +245,7 @@ export default {
   height: auto;
   margin-top: 18px;
   background-color: #181818;
-  background-color: var(--color-background-input);
+  background-color: var(--game);
   border-radius: 10px;
   padding: 22px 18px;
   padding-top: 16px;
@@ -256,7 +257,7 @@ export default {
   &__label {
     display: flex;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-game);
     opacity: 0.5;
     font-size: 13px; 
   }
@@ -265,7 +266,7 @@ export default {
     display: flex;
     align-items: center;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-league);
     font-size: 20px; 
   }
 
@@ -273,7 +274,7 @@ export default {
     margin-left: 15px;
     cursor: pointer;
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-league);
     opacity: 0.5;
   }
 
@@ -287,11 +288,11 @@ export default {
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    background-color: var(--color-text);
+    background-color: var(--background);
     border: none;
     border-radius: 18px;
     color: #0a0a0a;
-    color: var(--color-background); 
+    color: var(--foreground-header); 
     padding: 7px;
     white-space: nowrap;
     font-size: 10px;
@@ -300,7 +301,7 @@ export default {
 
   &__icon {
     fill: #181818;
-    fill: var(--color-background-input);
+    fill: var(--foreground-game);
     align-items: center;
   }
 }
@@ -311,7 +312,7 @@ export default {
 
   &__text {
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-header);
     font-size: 16px;
     padding-bottom: 10px;
   }
@@ -319,13 +320,12 @@ export default {
   &__card {
     width: 100%;
     background-color: #181818;
-    background-color: var(--color-background-input);
+    background-color: var(--game);
     padding: 18px 8px;
     padding-top: 8px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    
   }
 
   &__item {
@@ -337,6 +337,13 @@ export default {
     padding-top: 10px;
     font-size: 14px;
   }
+
+  &__icon { 
+    fill: #181818;
+    fill: var(--foreground-game);
+    align-items: center;
+  }
+
   &__text-icon {
     margin-left: 10px;
   }

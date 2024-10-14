@@ -78,7 +78,7 @@
             @focus="handleInitializeBetValue"
           >
             <template #icon>
-              <span style="color: #ffffff80;">R$</span>
+              <span style="color: var(--foreground-inputs-odds);">R$</span>
             </template>
           </w-input>
         </div>
@@ -396,6 +396,8 @@ export default {
   &__message {
     margin-top: 10px;
     font-size: 12px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 }
 
@@ -411,6 +413,13 @@ export default {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    color: #ffff;
+    color: var(--foreground-header);
+  }
+
+  &__text {
+    color: #ffff;
+    color: var(--foreground-header);
   }
 
   &__delete {
@@ -434,7 +443,9 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative; 
-  
+  color: #ffff;
+  color: var(--foreground-header);
+
   &::after { 
     content: '';
     position: absolute;
@@ -501,6 +512,8 @@ export default {
 
   &__balance-text {
     font-size: 14px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__balance {
@@ -515,12 +528,10 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: var(--color-background-input);
-    background: #181818;
-    color: var(--color-text-input);
+    background: var(--inputs-odds);
     color: #ffffff80;
+    color: var(--foreground-inputs-odds);
     font-size: 14px;
-    border: none; 
     margin-right: 8px;
   }
 
@@ -543,12 +554,16 @@ export default {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__ganhos {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__checkbox {
@@ -564,8 +579,8 @@ export default {
   }
 
   &__checkbox:checked {
-    background-color: var(--color-primary);
     background-color: #0be58e;
+    background-color: var(--highlight);
   }
 
   &__checkbox::after {
@@ -575,13 +590,15 @@ export default {
     left: 4px;
     width: 5px;
     height: 9px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__alteracao {
     display: flex;
     align-items: center;
-    color: #ffffff;
-    color: var(--color-text)
+    color:#ffff;
+    color: var(--foreground-header);
   }
 
   &__finalizar {

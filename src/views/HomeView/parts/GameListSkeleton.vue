@@ -67,16 +67,16 @@ export default {
         align-items: center;
         &--primary {
             background: #0a0a0a;
-            background: var(--color-background);
+            background: var(--background);
             color: #ffffff;
-            color: var(--color-text);
+            color: var(--foreground-league);
         }
 
         &--secondary {
             background: #181818;
-            background: var(--color-background-input);
+            background: var(--inputs-odds);
             color: #ffffff;
-            color: var(--color-text);
+            color: var(--foreground-league);
         }
     }
 
@@ -98,14 +98,14 @@ export default {
         flex-direction: column;
         gap: 2px;
         background: #0a0a0a;
-        background: var(--color-background);
+        background: var(--background);
     }
 
     &__game-item {
         display: flex;
         justify-content: space-between;
         background: #181818;
-        background: var(--color-background-input);
+        background: var(--inputs-odds);
         width: 100%;
         padding: 16px 13px;
         

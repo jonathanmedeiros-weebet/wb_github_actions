@@ -41,7 +41,7 @@ export default {
   flex-direction: column;
   height: 100%;
   background: #181818;
-  background: var(--color-background-input);
+  background: var(--inputs-odds);
   
   &__items {
     align-items: center;
@@ -92,7 +92,7 @@ export default {
   &__scores--secondary {
     font-size: 12px;
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-league-input);
     padding-top: 0;
   }
 

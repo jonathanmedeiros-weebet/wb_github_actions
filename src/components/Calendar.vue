@@ -2,11 +2,11 @@
   <div class="calendar">
     <div class="calendar__header">
       <button class="calendar__actions" @click="prevMonth">
-        <IconArrowLeft :size="28" color="#0be58e"/>
+        <IconArrowLeft :size="28" :color="useHexColors"/>
       </button>
       {{ currentMonthAndYear }}
       <button class="calendar__actions" @click="nextMonth">
-        <IconArrowRight :size="28" color="#0be58e"/>
+        <IconArrowRight :size="28" :color="useHexColors"/>
       </button>
     </div>
     <div class="calendar__body">
@@ -44,7 +44,8 @@
 import {
   dateFormatInMonthAndYear,
   now,
-  convertInMomentInstance
+  convertInMomentInstance,
+  isAndroid5
 } from '@/utilities'
 import IconArrowLeft from './icons/IconArrowLeft.vue'
 import IconArrowRight from './icons/IconArrowRight.vue'
@@ -77,6 +78,9 @@ export default {
     },
     isMonthSelected() {
       return dateFormatInMonthAndYear(this.dateSelected) === this.currentMonthAndYear
+    },
+    useHexColors() {
+      return isAndroid5() ? '#0be58e' : 'var(--highlight)';
     }
   },
   methods: {
@@ -136,12 +140,11 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     font-size: 16px;
     font-weight: 500;
     padding: 10px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--highlight);
   }
 
   &__body {
@@ -160,13 +163,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 10px 24px;
-
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-header);
     background: #0a0a0a;
-    background: var(--color-background);
+    background: var(--background);
   }
 
   &__weeks {
@@ -188,18 +189,16 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 14px;
     font-weight: 500;
-
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--highlight);
 
     &--selected {
       background: #0be58e;
-      background: var(--color-primary);
+      background: var(--highlight);
       color: #181818;
-      color: var(--color-background-input);
+      color: var(--inputs-odds);
       border-radius: 50px;
     }
   }

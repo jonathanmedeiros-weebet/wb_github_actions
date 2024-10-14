@@ -237,6 +237,8 @@ export default {
   }
 
   &__dates-buttons {
+    color: #ffffff80;
+    color: var(--foreground-header);
     display: inline-block;
   }
 
@@ -244,12 +246,20 @@ export default {
     display:  flex;
     flex-direction: column;
     padding: 10px 20px;
+    
+    &-label {
+      color: #ffffff;
+      color: var(--foreground-header);
+    }
+
   }
+
+
 
   &__count-modalities {
     margin: 5px 20px;
     color: #ffffff80;
-    color: var(--color-text-input);
+    color: var(--foreground-header);
   }
 
   &__modalities-modal {

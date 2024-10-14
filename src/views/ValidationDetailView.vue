@@ -478,18 +478,16 @@ export default {
 
   &__add {
     display: flex;
-    width: calc(50%/3 - 8px);
+    width: calc(16.6666666667% - 8px);
     padding: 18px;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: #181818;
-    background: var(--color-background-input);
-    color: #ffffff80;
-    color: var(--color-text-input);
+    background: var(--inputs-odds);
+    color: rgba(255, 255, 255, 0.5019607843);
+    color: var(--foreground-inputs-odds);
     font-size: 14px;
-    border: none; 
-    margin-right: 8px;
+    margin-right: 8px
   }
 
   &__balance-input{
@@ -533,7 +531,7 @@ export default {
     width: 15px;
     height: 15px;
     border: 1px solid #ffffff80;
-    border: 1px solid var(--color-text-input);
+    border: 1px solid var(--foreground-league-input);
     background-color: transparent;
     cursor: pointer;
     border-radius: 3px;
@@ -542,7 +540,7 @@ export default {
   
   &__checkbox:checked {
     background-color: #0be58e;
-    background-color: var(--color-primary);
+    background-color: var(--highlight);
   }
   &__checkbox::after {
     content: '';

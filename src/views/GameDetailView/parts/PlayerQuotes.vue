@@ -50,7 +50,7 @@
                                 />
                             </template>
                         
-                            <IconLock v-else :size="14" color="var(--color-text-input)"/>
+                            <IconLock v-else :size="14" color="var(--foreground-league-input)"/>
                         </button>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ export default {
     z-index: 1;
     height: calc(100vh - 100px);
     background: #0a0a0a;
-    background: var(--color-background);
+    background: var(--background);
 
     &__message {
         display: flex;
@@ -148,7 +148,7 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 }
 
@@ -162,7 +162,7 @@ export default {
 
         padding: 5px;
         background: #ffffff80;
-        background: var(--color-background-input);
+        background: var(--inputs-odds);
 
         &--three-column {
             width: 200px;
@@ -182,7 +182,7 @@ export default {
     &__option {
         min-width: calc(150px / 3);
         background: #0a0a0a;
-        background: var(--color-background);
+        background: var(--background);
         border: none;
         border-radius: 4px;
 
@@ -197,7 +197,7 @@ export default {
 
         &--selected {
             background: #0be58e;
-            background: var(--color-primary);
+            background: var(--highlight);
         }
     }
 
@@ -224,7 +224,7 @@ export default {
 
     &__value {
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
@@ -234,11 +234,12 @@ export default {
     &__item {
         display: flex;
         gap: 5px;
+        
     }
 }
 
 ::v-deep .collapse__item {
-    background: var(--color-background);
+    background: var(--game);
     padding: 13px 24px;
 }
 </style>

@@ -308,7 +308,7 @@ export default {
 
         border-bottom: 1px solid #ffffff1a;
         background: #181818;
-        background: var(--color-background-input);
+        background: var(--game);
     }
 
     &__filters::-webkit-scrollbar {
@@ -326,10 +326,13 @@ export default {
         white-space: nowrap;
 
         color: #ffffff80;
+        color: var(--foreground-game);
         border-bottom: 3px solid transparent;
         &--selected {
             color: #0AAF6D;
+            color: var(--highlight);
             border-color: #0AAF6D;
+            border-color: var(--highlight);
         }
     }
 

@@ -155,7 +155,7 @@ export default {
         align-items: center;
         justify-content: center;
         color: #FFFFFF80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
 
         &--second {
             margin: 0 8px;
@@ -183,7 +183,7 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 }
 </style>

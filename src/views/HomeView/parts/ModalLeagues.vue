@@ -97,7 +97,7 @@ export default {
 .modal-leagues {
     &__title {
         color: #FFFFFF80;
-        color: var(--color-text-input);
+        color: var(--foreground-league);
         font-size: 16px;
         font-weight: 500;
         min-height: 26px;
@@ -120,7 +120,7 @@ export default {
         min-height: 30px;
 
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 16px;
         font-weight: 400;
         text-align: left;
@@ -137,6 +137,7 @@ export default {
         min-height: 30px;
 
         color: #FFFFFF99;
+        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
         text-align: left;
@@ -155,7 +156,7 @@ export default {
         background-position: 50%;
         background-repeat: no-repeat;
         background-color: #0be58e;
-        background-color: var(--color-primary);
+        background-color: var(--highlight);
 
         clip-path: circle();
     }

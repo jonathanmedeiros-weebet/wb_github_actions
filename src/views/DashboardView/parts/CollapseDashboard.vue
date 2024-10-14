@@ -53,10 +53,10 @@ export default {
         height: 40px;
         padding: 8px 14px;
         background: #181818;
-        background: var(--color-background-input);
+        background: var(--inputs-odds);
         border-radius: 6px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-inputs-odds);
     }
 
     &__title {
@@ -65,11 +65,11 @@ export default {
         justify-content: flex-start;
 
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-inputs-odds);
     }
 
     &__title img {
@@ -80,7 +80,7 @@ export default {
 
     &__icon {
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-header);
     }
 }
 </style>

@@ -150,7 +150,7 @@ export default {
         z-index: 2;
         width: 100%;
         background: #0a0a0a;
-        background: var(--color-background);
+        background: var(--background);
     }
 
     &__container {
@@ -225,7 +225,7 @@ export default {
 
     &__name {
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         text-align: center;
         font-size: 14px;
         font-style: normal;
@@ -238,7 +238,7 @@ export default {
         font-weight: 400;
         margin-top: 16px;
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
 
         display: flex;
         flex-direction: column;
@@ -249,7 +249,7 @@ export default {
 
     &__time {
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
         font-size: 12px;
         font-style: normal;
         font-weight: 400;
@@ -258,7 +258,7 @@ export default {
 
     &__score {
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
         font-size: 20px;
         font-style: normal;
         font-weight: 400;

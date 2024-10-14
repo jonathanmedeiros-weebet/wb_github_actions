@@ -51,13 +51,15 @@ export default {
   font-weight: 500;
   padding: 16px 10px;
   color: #ffffff80;
-  color: var(--color-text-input);
+  color: var(--foreground-league-input);
   outline: none;
 
   &--active {
     color: #0be58e;
-    color: var(--color-primary);
+    color: var(--highlight);
     border-bottom: 1px solid #0be58e;
+    border-bottom: 1px solid var(--highlight);
+
   }
 
   &:focus {

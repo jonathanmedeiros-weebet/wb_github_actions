@@ -4,7 +4,7 @@
   width: 100%;
   height: 100vh;
   background: #0a0a0a;
-  background: var(--color-background);
+  background: var(--background);
 }
 
 // reset css
@@ -19,9 +19,9 @@
 body {
   min-height: 100vh;
   color: #ffffff;
-  color: var(--color-text);
+  color: var(--foreground-league);
   background: #0a0a0a;
-  background: var(--color-background);
+  background: var(--background);
   margin: 0;
   padding: 0;
   transition:

@@ -59,7 +59,7 @@ export default {
         justify-content: flex-start;
         padding: 0 16px;
         background: #181818;
-        background: var(--color-background-input);
+        background: var(--inputs-odds);
     }
 
     &__collapse {
@@ -70,9 +70,9 @@ export default {
         justify-content: space-between;
         align-items: center;
         background: #0a0a0a;
-        background: var(--color-background);
+        background: var(--background);
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-league);
     }
 
     &__quotes {

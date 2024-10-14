@@ -38,7 +38,7 @@
                     </template>
                     <template v-else>
                         <span class="collapse__label">{{ odd.label }}</span>
-                        <IconLock :size="14" color="var(--color-text-input)"/>
+                        <IconLock :size="14" color="var(--foreground-league-input)"/>
                     </template>
                 </button>
             </div>
@@ -126,14 +126,14 @@ export default {
     z-index: 1;
     height: calc(100vh - 100px);
     background: #0a0a0a;
-    background: var(--color-background);
+    background: var(--background);
     &__message {
         display: flex;
         width: 100%;
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-league-input);
     }
 }
 
@@ -144,8 +144,8 @@ export default {
         align-items: flex-start;
         gap: 10px;
         padding: 13px 16px;
-        background: #181818 ;
-        background: var(--color-background-input);
+        background: #181818;
+        background: var(--game);
 
         &--grid {
             display: flex;
@@ -157,7 +157,7 @@ export default {
         height: 54px;
         width: 100%;
         background: #0a0a0a;
-        background: var(--color-background);
+        background-color: var(--inputs-odds);
         border: none;
         border-radius: 4px;
 
@@ -177,7 +177,7 @@ export default {
 
         &--selected {
             background: #0be58e;
-            background: var(--color-primary);
+            background: var(--highlight);
         }
     }
 
@@ -214,7 +214,7 @@ export default {
     &__option--selected &__label,
     &__option--selected &__value {
         color: #0a0a0a;
-        color: var(--color-background);
+        color: var(--background);
     }
 
     &__icon-option {
@@ -224,6 +224,7 @@ export default {
     &__label {
         overflow: hidden;
         color: #f2f2f280;
+        color: var(--foreground-inputs-odds);
         text-overflow: ellipsis;
         font-size: 12px;
         font-style: normal;
@@ -233,7 +234,7 @@ export default {
 
     &__value {
         color: #ffffff;
-        color: var(--color-text);
+        color: var(--foreground-inputs-odds);
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -242,8 +243,7 @@ export default {
 }
 
 ::v-deep .collapse__item {
-    background: #0a0a0a;
-    background: var(--color-background);
+    background: var(--game);
     padding: 13px 24px;
 }
 </style>

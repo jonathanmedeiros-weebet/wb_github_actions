@@ -49,7 +49,7 @@ export default {
     border-radius: 8px;
     padding: 18px 15px;
     background: #181818;
-    background: var(--color-background-input);
+    background: var(--inputs-odds);
     margin: 4px 0px 4px 0px;
 
     &__description {
@@ -85,7 +85,7 @@ export default {
     &__date {
         font-size: 14px;
         color: #ffffff80;        
-        color: var(--color-text-input);        
+        color: var(--foreground-league-input);        
     }
 
     &__subtitle {
@@ -98,7 +98,7 @@ export default {
         align-items: center;
         margin-right: 13px;
         background-color: #0a0a0a;
-        background-color: var(--color-background);
+        background-color: var(--background);
         width: 24px;
         height: 24px;
         border-radius: 100%;

@@ -1,12 +1,27 @@
-
 /* semantic color variables for this project */
 :root {
-  --color-background: #0a0a0a;
-  --color-primary: #0be58e;
-  --color-text: #ffffff;
-  --color-text-input: #ffffff80;
-  --color-background-input: #181818;
-  --color-success: #6da544;
+  --header:#0a0a09; 
+  --foreground-header:#ffffff;
+  --sub-nav:#181818;
+  --foreground-sub-nav:#ffffff;
+  --sidebars:#0a0a09;
+  --foreground-sidebars:#ffffff;
+  --highlight:#35cd96;
+  --highlight-rgb:53,205,150;
+  --foreground-highlight:#181818;
+  --inputs-odds:#181818;
+  --foreground-inputs-odds:#ffffff;
+  --game:#0a0a09;
+  --foreground-game:#ffffff;
+  --background:#181818;
+  --background-rgb:24,24,24;
+  --foreground:#ffffff;
+  --league:#0a0a09;
+  --foreground-league:#ffffff;
+  --wb-warning:#ff0000;
+  --bottom-bar:#282828;
+  --foreground-bottom-bar:#ffffff;
   --color-danger: #f61a1a;
   --color-warning: #c09516;
+  --color-success: #6da544;
 }

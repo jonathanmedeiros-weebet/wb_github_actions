@@ -28,7 +28,7 @@
 
             <div class="dashboard__movements-dates">
                 <label class="dashboard__movements-icon-range-dates">
-                    <IconCalendar class="dashboard__movements-icon-calendar" :color="'#ffffff80'"/>
+                    <IconCalendar class="dashboard__movements-icon-calendar" :color="useHexColors"/>
                     {{ dateFilterIni.format('DD/MM/YYYY') }} - {{ dateFilterEnd.format('DD/MM/YYYY') }}
                 </label>  
             </div>
@@ -57,7 +57,7 @@ import CardEntryDashboard from './parts/CardEntryDashboard.vue'
 import CollapseDashboard from './parts/CollapseDashboard.vue'
 import ChartBar from './parts/ChartBar.vue'
 
-import { now } from '@/utilities'
+import { now, isAndroid5 } from '@/utilities'
 import IconCalendar from '@/components/icons/IconCalendar.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
@@ -245,6 +245,9 @@ export default {
         },
         showChart() {
             return !this.configClientStore.chartDeprecatedByAndroidVersion;
+        },
+        useHexColors() {
+            return isAndroid5() ? '#ffffff80' : 'var(--foreground-header)';
         }
     },
     mounted() {
@@ -279,6 +282,8 @@ export default {
     &__chart-header-title {
         font-size: 16px;
         width: 80%;
+        color: #ffff;
+        color: var(--foreground-header);
     }
 
     &__movements {
@@ -291,12 +296,14 @@ export default {
 
     &__movements-title {
         font-size: 16px;
+        color: #ffff;
+        color: var(--foreground-header);
     }
 
     &__movements-filter {
         font-size: 12px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-header);
     }
 
     &__movements-dates {
@@ -306,7 +313,7 @@ export default {
         padding: 8px 0px;
         font-size: 14px;
         color: #ffffff80;
-        color: var(--color-text-input);
+        color: var(--foreground-header);
     }
 
     &__movements-icon-calendar {
@@ -322,12 +329,9 @@ export default {
         width: fit-content;
         padding: 8px 14px;
         border-radius: 6px;
-
         color: #ffffff80;
-        color: var(--color-text-input);
-
-        background: #181818;
-        background: var(--color-background-input);
+        color: var(--foreground-header);
+        background: var(--input-odds);
     }
 }
 </style>

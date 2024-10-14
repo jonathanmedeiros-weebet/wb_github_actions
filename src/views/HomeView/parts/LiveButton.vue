@@ -32,10 +32,10 @@ export default {
     border: 0;
     border-radius: 3px;
     background: #ffffff;
-    background: var(--color-text);
+    
 
     color: #f61a1a;
-    color: var(--color-danger);
+    
 
     font-size: 12px;
     font-style: normal;
@@ -46,7 +46,7 @@ export default {
         background: #f61a1a;
         background: var(--color-danger);
         color: #ffffff;
-        color: var(--color-text);
+        
     }
 
     &--actived &__icon {

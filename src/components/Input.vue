@@ -44,8 +44,8 @@
         :inputmode="type"
       />
       <div class="input__icon__right" v-if="initType == 'password'" @click="passWordVisible">
-        <IconVisibility v-if="showPassword" :color="'#ffffff80'" />
-        <IconVisibilityOff v-else :color="'#fffff80'" />
+        <IconVisibility v-if="showPassword" :color="useHexColors" />
+        <IconVisibilityOff v-else :color="useHexColors" />
       </div>
     </div>
   </div>
@@ -54,6 +54,7 @@
 <script>
 import IconVisibility from '@/components/icons/IconVisibility.vue'
 import IconVisibilityOff from '@/components/icons/iconVisibilityOff.vue'
+import { isAndroid5 } from '@/utilities';
 
 export default {
   name: 'w-input',
@@ -134,6 +135,11 @@ export default {
     },
     canMask() {
       return !['email', 'number', 'date', 'password'].includes(this.initType);
+    },
+    useHexColors() {
+      const color = isAndroid5() ? '#fffff80' : 'var(--foreground-inputs-odds)';
+      return color;
+      
     }
   }
 }
@@ -143,7 +149,7 @@ export default {
 
 input {
   background-color: #181818;
-  background-color: var(--color-background-input);
+  background-color: var(--inputs-odds);
   box-sizing: border-box;
   border: none;
   border-radius: 5px;
@@ -156,7 +162,7 @@ input {
   font-size: 14px;
   font-weight: 400;
   color: #ffffff80;
-  color: var(--color-text-input);
+  color: var(--foreground-inputs-odds);
 }
 
 .input {
@@ -168,7 +174,7 @@ input {
     font-weight: 400;
     font-size: 16px;
     color: #ffffff;
-    color: var(--color-text);
+    color: var(--foreground-header);
     margin-bottom: 8px;
   }
 
@@ -177,20 +183,22 @@ input {
     align-items: center;
     padding-left: 10px;
     background-color: #181818;
-    background-color: var(--color-background-input);
+    background-color: var(--inputs-odds);
     border-radius: 5px;
     border: 2px solid #181818;
-    border: 2px solid var(--color-background-input);
-
+    border: 0.5px solid var(--foreground-inputs-odds);
+    transition: 0.5s;
+    
     &--focused {
       border-color: #0be58e;
-      border-color: var(--color-primary);
+      border-color: var(--highlight);
     }
   }
 
   &__icon {
     display: flex;
     align-items: center;
+
   }
 
   &__icon__right {
@@ -206,9 +214,9 @@ input {
     font-size: 14px;
     font-weight: 400;
     color: #ffffff;
-    color: var(--color-text-input);
+    color: var(--foreground-inputs-odds);
     padding-left: 10px;
-    background: transparent;
+    background: var(--inputs-odds);
   }
 }
 </style>
