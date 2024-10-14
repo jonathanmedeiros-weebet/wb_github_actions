@@ -325,12 +325,25 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         this.pix = res;
                         this.openPixModal();
                         this.submitting = false;
+                        if(detalhesPagamento.promoCode !== ''){
+                            this.sendGa4Event(detalhesPagamento.promoCode);
+                        }
                     },
                     error => {
                         this.handleError(error);
                         this.submitting = false;
                     }
                 );
+    }
+
+    sendGa4Event(couponCode) {
+        const dataLayer = (window as any).dataLayer || [];
+        if (dataLayer) {
+            dataLayer.push({
+            event: 'earn_virtual_currency',
+            couponCode: couponCode,
+          });
+        }
     }
 
     openPixModal() {
