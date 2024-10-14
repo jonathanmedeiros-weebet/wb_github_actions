@@ -42,16 +42,13 @@ export class LegitimuzFacialService {
       this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
       this.faceIndex = this.faceIndexSub.asObservable();
       this.options.onSuccess = (eventName) => {
-        console.log(eventName);
         if (eventName.name == 'faceindex' && eventName.status == 'success') {
-          console.log('faceindex: Success onSucecess');
           this.faceIndexSub.next(true)
           }
       }
 
       this.options.eventHandler = (eventName) => {
         if (eventName.name == 'faceindex' && eventName.status == 'success') {
-          console.log('faceindex: Success Event Handler')
           this.faceIndexSub.next(true)
         }
       };
