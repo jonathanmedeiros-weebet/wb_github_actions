@@ -8,6 +8,8 @@ import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct, NgbModal} from '@
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MultifactorConfirmationModalComponent } from 'src/app/shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { IdleDetectService } from 'src/app/shared/services/idle-detect.service';
+import { ActivityDetectService } from '../../shared/services/activity-detect.service';
 
 /**
  * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
@@ -82,6 +84,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private activeModal: NgbActiveModal,
         private modalService: NgbModal,
+        private activityDetectService: ActivityDetectService
     ) {}
 
     get twoFactorInProfileChangeEnabled(): boolean {
@@ -252,6 +255,11 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
         this.clienteService.configLimiteTempoAtividade(data).subscribe(
             result => {
+                this.activityDetectService.resetActivity();
+                
+                this.activityDetectService.loadDailyActivityTime();
+                this.activityDetectService.initializeActivityConfig();
+
                 this.messageService.success(result.message);
             },
             error => {

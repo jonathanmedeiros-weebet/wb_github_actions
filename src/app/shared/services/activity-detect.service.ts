@@ -85,8 +85,6 @@ export class ActivityDetectService implements OnDestroy {
     }
     
     private evaluateActivityTimeGoal() {
-        console.log(this.dailyActivityTime);
-        console.log('goal: ',this.activityTimeGoalInMilliseconds)
         if (this.dailyActivityTime >= this.activityTimeGoalInMilliseconds) {
             this.activityGoalReached.next();
             this.setActivityGoalMetDate(new Date().toISOString());
