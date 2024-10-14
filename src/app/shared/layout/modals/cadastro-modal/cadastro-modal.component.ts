@@ -71,15 +71,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     faceMatchRegisterValidated = false;
     legitimuzToken = "";
     currentLanguage = 'pt';
-    unsubLegitimuz$ = new Subject();
     disapprovedIdentity = false;
     token = '';
     dataUserCPF ='';
     showLoading = true;
     faceMatchRequested = false;
-    
-
-    
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -243,7 +239,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 });
         }
-
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.form.get('cpf')?.valueChanges.subscribe(cpf => {
                 this.dataUserCPF = cpf;
@@ -515,7 +510,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 });
             }
         }
-
     }
 
     onBeforeInput(e : InputEvent, inputName){
@@ -525,5 +519,4 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
     }
-
 }

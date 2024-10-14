@@ -37,18 +37,13 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     private unsub$: Subject<any> = new Subject();
     verifiedIdentity = false;
     faceMatchEnabled = true;
-    faceMatchResetPasswordEnabled = false;
     faceMatchChangePasswordValidated = false;
-    
     legitimuzToken = "";
     dataUserCPF: string;
     currentLanguage = 'pt';
-    unsubLegitimuz$ = new Subject();
     disapprovedIdentity = false;
     token = '';
     showLoading = true;
-    respostaLegitimus
-    
 
     constructor(
         private route: ActivatedRoute,
@@ -64,13 +59,12 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         private legitimuzService: LegitimuzService,
         private LegitimuzFacialService: LegitimuzFacialService,
         private faceMatchService: FaceMatchService
-
     ) {
         super();
     }
     ngOnDestroy(): void {
-        this.unsubLegitimuz$.next();
-        this.unsubLegitimuz$.complete();
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     get enableTwoFactorPasswordRecovery(): boolean {
@@ -128,7 +122,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                         })
                     },error: (error)=> {
                         this.messageService.error(error)
-            
                     }
                     });
                 }

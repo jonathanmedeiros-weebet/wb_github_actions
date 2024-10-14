@@ -28,7 +28,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
 
     unsub$ = new Subject();
-    unsubLegitimuz$ = new Subject();
     cliente: Cliente;
     modalRef;
 
@@ -258,8 +257,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.menuFooterService.setIsPagina(false);
         this.unsub$.next();
         this.unsub$.complete();
-        this.unsubLegitimuz$.next();
-        this.unsubLegitimuz$.complete();
     }
 
     createForm() {

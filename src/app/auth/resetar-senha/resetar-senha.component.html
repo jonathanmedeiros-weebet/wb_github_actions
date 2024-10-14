@@ -1,147 +1,123 @@
 <div id="default-content" [ngClass]="indiqueGanheRemovido == false ? 'ajusta-botao-alterar-senha' : ''">
     <app-spinner *ngIf="showLoading"></app-spinner>
     <ng-container *ngIf="!showLoading">
-    <div class="internal-container-out">
-        <div class="content-header">
-            <h2>{{'geral.resetarSenha' | translate}}</h2>
-        </div>
-        <div class="content-body">
-            <div class="content" *ngIf="faceMatchChangePasswordValidated">
-                <div class="row">
-                    <div class="col col-md-12">
-                        <h2>{{'senhas.redefinirSenha' | translate}}</h2>
-                    </div>
-                </div>
-                <form [formGroup]="form" (ngSubmit)="nextStep()">
-                    <app-spinner *ngIf="submitting"></app-spinner>
-                    <div class="inputs" *ngIf="stepIsOne">
-                        <div class="row">
-                            <div class="col col-sm-2">
-                                <div class="form-group required">
-                                    <label class="label">
-                                        {{'senhas.codigoDeVerificacao' | translate}}
-                                    </label>
-                                    <input
-                                        type="text"
-                                        formControlName="verificacao"
-                                        class="form-control inverted-out"
-                                        maxlength="5"
-                                    >
-                                </div>
-                                <app-error-msg [control]="form.get('verificacao')"></app-error-msg>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-sm-4">
-                                <label class="label">
-                                    {{'senhas.novaSenha' | translate}}
-                                </label>
-                                <div class="form-group required">
-                                    <input
-                                        [type]="mostrarSenha ? 'text' : 'password'"
-                                        formControlName="nova_senha"
-                                        class="form-control inverted-out"
-                                    >
-                                    <i
-                                        class="fa showPassword"
-                                        [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
-                                        (click)="mostrarSenha = !mostrarSenha"
-                                    ></i>
-                                </div>
-                                <app-error-msg [control]="form.get('nova_senha')"></app-error-msg>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-sm-4">
-                                <label class="label">{{'senhas.confirmarSenha' | translate}}</label>
-                                <div class="form-group required">
-                                    <input
-                                        [type]="mostrarSenhaConfirmar ? 'text' : 'password'"
-                                        formControlName="senha_confirmacao"
-                                        class="form-control inverted-out"
-                                    >
-                                    <i
-                                        class="fa showPassword"
-                                        [ngClass]="mostrarSenhaConfirmar ? 'fa-eye-slash' : 'fa-eye'"
-                                        (click)="mostrarSenhaConfirmar = !mostrarSenhaConfirmar"
-                                    ></i>
-                                </div>
-                                <app-error-msg [control]="form.get('senha_confirmacao')"></app-error-msg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="inputs" *ngIf="stepIsTwo">
-                        <div class="row">
-                            <div class="col col-sm-2">
-                                <div class="form-group required">
-                                    <label class="label">
-                                        {{'senhas.codigoDeVerificacaoPorSms' | translate}}
-                                    </label>
-                                    <input
-                                        type="text"
-                                        formControlName="verificacao2"
-                                        class="form-control inverted-out"
-                                        maxlength="5"
-                                        [readOnly]="submitting"
-                                    >
-                                </div>
-                                <app-error-msg [control]="form.get('verificacao2')"></app-error-msg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row buttons">
+        <div class="internal-container-out">
+            <div class="content-header">
+                <h2>{{'geral.resetarSenha' | translate}}</h2>
+            </div>
+            <div class="content-body">
+                <div class="content" *ngIf="faceMatchChangePasswordValidated">
+                    <div class="row">
                         <div class="col col-md-12">
-                            <div class="form-group">
-                                <button
-                                    *ngIf="stepIsTwo"
-                                    class="btn btn-custom margin-right-10"
-                                    (click)="toBack()"
-                                >
-                                    {{'botoes.voltar' | translate}}
-                                </button>
-                                <button
-                                    class="btn btn-custom"
-                                    type="submit"
-                                    [disabled]="submitting"
-                                >
-                                    {{'geral.alterarSenha' | translate}}
-                                </button>
-                            </div>
+                            <h2>{{'senhas.redefinirSenha' | translate}}</h2>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && !verifiedIdentity">
-                <div id="legitimuz">
-                    <div id="verify-identity-text">
-                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
-                    </div>
-                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
-                    <input type="hidden" id="legitimuz-ref-id" [value]="token">
-                    <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
-                        <i class="fa-solid fa-id-card"></i>
-                        {{'saques.identityVerify' | translate}}
-                    </button>
+                    <form [formGroup]="form" (ngSubmit)="nextStep()">
+                        <app-spinner *ngIf="submitting"></app-spinner>
+                        <div class="inputs" *ngIf="stepIsOne">
+                            <div class="row">
+                                <div class="col col-sm-2">
+                                    <div class="form-group required">
+                                        <label class="label">
+                                            {{'senhas.codigoDeVerificacao' | translate}}
+                                        </label>
+                                        <input type="text" formControlName="verificacao"
+                                            class="form-control inverted-out" maxlength="5">
+                                    </div>
+                                    <app-error-msg [control]="form.get('verificacao')"></app-error-msg>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-sm-4">
+                                    <label class="label">
+                                        {{'senhas.novaSenha' | translate}}
+                                    </label>
+                                    <div class="form-group required">
+                                        <input [type]="mostrarSenha ? 'text' : 'password'" formControlName="nova_senha"
+                                            class="form-control inverted-out">
+                                        <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
+                                            (click)="mostrarSenha = !mostrarSenha"></i>
+                                    </div>
+                                    <app-error-msg [control]="form.get('nova_senha')"></app-error-msg>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-sm-4">
+                                    <label class="label">{{'senhas.confirmarSenha' | translate}}</label>
+                                    <div class="form-group required">
+                                        <input [type]="mostrarSenhaConfirmar ? 'text' : 'password'"
+                                            formControlName="senha_confirmacao" class="form-control inverted-out">
+                                        <i class="fa showPassword"
+                                            [ngClass]="mostrarSenhaConfirmar ? 'fa-eye-slash' : 'fa-eye'"
+                                            (click)="mostrarSenhaConfirmar = !mostrarSenhaConfirmar"></i>
+                                    </div>
+                                    <app-error-msg [control]="form.get('senha_confirmacao')"></app-error-msg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inputs" *ngIf="stepIsTwo">
+                            <div class="row">
+                                <div class="col col-sm-2">
+                                    <div class="form-group required">
+                                        <label class="label">
+                                            {{'senhas.codigoDeVerificacaoPorSms' | translate}}
+                                        </label>
+                                        <input type="text" formControlName="verificacao2"
+                                            class="form-control inverted-out" maxlength="5" [readOnly]="submitting">
+                                    </div>
+                                    <app-error-msg [control]="form.get('verificacao2')"></app-error-msg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row buttons">
+                            <div class="col col-md-12">
+                                <div class="form-group">
+                                    <button *ngIf="stepIsTwo" class="btn btn-custom margin-right-10" (click)="toBack()">
+                                        {{'botoes.voltar' | translate}}
+                                    </button>
+                                    <button class="btn btn-custom" type="submit" [disabled]="submitting">
+                                        {{'geral.alterarSenha' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div id="legitimuz-root"></div>
-            </div>
-            <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && verifiedIdentity">
-                <div id="legitimuz">
-                    <div id="verify-identity-text">
-                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                <div #legitimuz id="legitimuz-container"
+                    *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && !verifiedIdentity">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                            ('saques.identityVerifyNeeded' | translate)}}
+                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                            [value]="dataUserCPF" />
+                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                        <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
                     </div>
-                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
-                    <input type="hidden" id="legitimuz-ref-id" [value]="token">
-                    <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
-                        <i class="fa-solid fa-id-card"></i>
-                        {{'saques.identityVerify' | translate}}
-                    </button>
+                    <div id="legitimuz-root"></div>
                 </div>
-                <div id="legitimuz-root"></div>
+                <div #legitimuzLiveness id="legitimuz-container"
+                    *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && verifiedIdentity">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                            ('saques.identityVerifyNeeded' | translate)}}
+                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                            [value]="dataUserCPF" />
+                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                        <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
+                    </div>
+                    <div id="legitimuz-root"></div>
+                </div>
             </div>
         </div>
-    </div>
     </ng-container>
 </div>

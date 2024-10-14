@@ -36,7 +36,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     faceMatchChangePassword = false;
     faceMatchChangePasswordValidated = false;
     legitimuzToken = "";
-    unsubLegitimuz$ = new Subject();
     verifiedIdentity = null;
     disapprovedIdentity = false;
     token = '';
@@ -191,8 +190,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
-        this.unsubLegitimuz$.next();
-        this.unsubLegitimuz$.complete();
         this.menuFooterService.setIsPagina(false);
     }
 
