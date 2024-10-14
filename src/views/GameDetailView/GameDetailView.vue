@@ -85,7 +85,7 @@ export default {
             return Boolean(this.options.length);
         },
         isFutebolModality() {
-            return this.game.sport_id === Modalities.SOCCER;
+            return this.game.sport_id === Modalities.FOOTBALL;
         },
         filteredPerPlayer() {
             return this.filterSelected == MarketTime.PLAYERS;

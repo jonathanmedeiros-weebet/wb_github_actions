@@ -218,13 +218,13 @@ export default {
     },
     // TODO: Rever essa logica. Pois precisa cobrir todos.
     MODALITY_SPORT_FUTEBOL() {
-      return Modalities.SOCCER;
+      return Modalities.FOOTBALL;
     },
     MODALITY_SPORT_VOLEI() {
-      return Modalities.VOLEIBALL;
+      return Modalities.VOLLEYBALL;
     },
     MODALITY_SPORT_E_SPORTS() {
-      return Modalities.E_SPORT;
+      return Modalities.E_SPORTS;
     },
     buttonDisable() {
       return this.submitting == true;

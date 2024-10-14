@@ -7,7 +7,7 @@ export const modalityList = (): ModalityOption[] => {
     const modalities = [
         {
             name: 'Futebol',
-            id: Modalities.SOCCER,
+            id: Modalities.FOOTBALL,
             show: true,
             hasLive: Boolean(options.futebol_aovivo),
         },
@@ -19,7 +19,7 @@ export const modalityList = (): ModalityOption[] => {
         },
         {
             name: 'Futebol Americano',
-            id: Modalities.AMERICAN_SOCCER,
+            id: Modalities.AMERICAN_FOOTBALL,
             show: Boolean(options.futebol_americano),
             hasLive: false
         },
@@ -31,13 +31,13 @@ export const modalityList = (): ModalityOption[] => {
         },
         {
             name: 'Hóquei no Gelo',
-            id: Modalities.HOCKEY,
+            id: Modalities.ICE_HOCKEY,
             show: Boolean(options.hoquei_gelo),
             hasLive: false
         },
         {
             name: 'Basquete',
-            id: Modalities.BACKETBALL,
+            id: Modalities.BASKETBALL,
             show: Boolean(options.basquete),
             hasLive: Boolean(options.basquete_aovivo)
         },
@@ -49,7 +49,7 @@ export const modalityList = (): ModalityOption[] => {
         },
         {
             name: 'Volei',
-            id: Modalities.VOLEIBALL,
+            id: Modalities.VOLLEYBALL,
             show: Boolean(options.volei),
             hasLive: false
         },
@@ -61,7 +61,7 @@ export const modalityList = (): ModalityOption[] => {
         },
         {
             name: 'e-Sports',
-            id: Modalities.E_SPORT,
+            id: Modalities.E_SPORTS,
             show: Boolean(options.esports),
             hasLive: false
         },
@@ -91,16 +91,16 @@ export const modalityList = (): ModalityOption[] => {
 export const modalityOdds = () => {
     const { mainOdds } = useConfigClient();
     return {
-        [Modalities.SOCCER]: mainOdds,
-        [Modalities.AMERICAN_SOCCER]: ['futebol_americano_casa', 'futebol_americano_fora'],
-        [Modalities.BACKETBALL]: ['bkt_casa', 'bkt_fora'],
+        [Modalities.FOOTBALL]: mainOdds,
+        [Modalities.AMERICAN_FOOTBALL]: ['futebol_americano_casa', 'futebol_americano_fora'],
+        [Modalities.BASKETBALL]: ['bkt_casa', 'bkt_fora'],
         [Modalities.COMBAT]: ['cmbt_casa', 'cmbt_fora'],
-        [Modalities.E_SPORT]: ['esports_casa', 'esports_fora'],
+        [Modalities.E_SPORTS]: ['esports_casa', 'esports_fora'],
         [Modalities.FUTSAL]: ['futsal_casa', 'futsal_empate', 'futsal_fora'],
-        [Modalities.HOCKEY]: ['hoquei_gelo_casa', 'hoquei_gelo_fora'],
+        [Modalities.ICE_HOCKEY]: ['hoquei_gelo_casa', 'hoquei_gelo_fora'],
         [Modalities.TABLE_TENNIS]: ['tenis_mesa_casa', 'tenis_mesa_fora'],
         [Modalities.TENNIS]: ['tenis_casa', 'tenis_fora'],
-        [Modalities.VOLEIBALL]: ['volei_casa', 'volei_fora'],
+        [Modalities.VOLLEYBALL]: ['volei_casa', 'volei_fora'],
         [Modalities.POPULAR_LOTTERY]: [],
         [Modalities.ACCUMULATION]: [],
         [Modalities.CHALLENGE]: [],

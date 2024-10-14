@@ -134,7 +134,7 @@ export default {
   },
   created() {
     if(!Boolean(this.modality)) {
-      const modality = this.modalityList.find(modality => modality.id === Modalities.SOCCER);
+      const modality = this.modalityList.find(modality => modality.id === Modalities.FOOTBALL);
       this.homeStore.setModality(modality);
     }
 
@@ -152,8 +152,8 @@ export default {
       const { options } = useConfigClient();
       if(!options.aovivo) return false;
 
-      if(this.modality.id == Modalities.SOCCER && options.futebol_aovivo) return true;
-      if(this.modality.id == Modalities.BACKETBALL && options.basquete_aovivo) return true;
+      if(this.modality.id == Modalities.FOOTBALL && options.futebol_aovivo) return true;
+      if(this.modality.id == Modalities.BASKETBALL && options.basquete_aovivo) return true;
       
       return false;
     },
@@ -242,7 +242,7 @@ export default {
         this.homeStore.setLeague(league);
       }
 
-      if(this.modality.id !== Modalities.SOCCER) {
+      if(this.modality.id !== Modalities.FOOTBALL) {
         this.prepareChampionshipPerRegionListForModalityOtherThanFootball();
       }
     },
