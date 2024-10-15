@@ -55,6 +55,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     cotacoesFaltando = {};
     cotacoesLocais;
     jogosBloqueados;
+    campeonatosBloqueados;
     dataLimiteTabela;
     contentSportsEl;
     start;
@@ -172,6 +173,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
+        this.campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
         this.currentLanguage = this.translate.currentLang;
 
         this.atualizarDatasJogosFuturos(this.currentLanguage);
@@ -576,7 +578,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     campeonatoAberto(campeonatoId) {
-        return this.campeonatosAbertos.includes(campeonatoId);
+        if(this.campeonatosBloqueados.includes(campeonatoId)){
+            return false;
+        }else{
+            return this.campeonatosAbertos.includes(campeonatoId);
+        }
     }
 
     // Extrai id do primeiro jogo do primeiro campeonato
