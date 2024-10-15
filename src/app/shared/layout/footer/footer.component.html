@@ -34,7 +34,7 @@
                 <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
                     <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/mais_18.svg'" [svgStyle]="svgStyleMaiorIdade()"></svg-icon>
                 </a>
-                <a href="https://sigap.fazenda.gov.br/consulta-publica/lista-solicitacoes" *ngIf="slug == 'puskasbet.com.br'">
+                <a *ngIf="slug == 'puskasbet.com.br'" href="https://sigap.fazenda.gov.br/consulta-publica/lista-solicitacoes" target="_blank">
                     <img src="https://cdn.wee.bet/img/sigap.png" width="130" border="0" alt="SIGAP">
                 </a>
                 <div class="info pagamento" *ngIf="hasApiPagamentos">
