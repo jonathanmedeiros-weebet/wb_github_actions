@@ -14,6 +14,7 @@ import {
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
 import { FOOTBALL_ID, BASKETBALL_ID } from 'src/app/shared/constants/sports-ids';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-live-listagem',
@@ -61,7 +62,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         private renderer: Renderer2,
         private paramsService: ParametrosLocaisService,
         private layoutService: LayoutService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private activatedRoute: ActivatedRoute,
+        private route: Router
     ) {
         this.chavesMercadosPrincipais[FOOTBALL_ID] = {
             casa: 'casa_90',
@@ -75,6 +78,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     }
 
     ngOnInit() {
+        let gameIdParams = this.activatedRoute.snapshot.queryParams.gameId;
+        if (gameIdParams) {
+            this.maisCotacoes(gameIdParams);
+            this.route.navigate([], { queryParams: { gameId: null }, queryParamsHandling: 'merge' });
+        }
         this.mobileScreen = window.innerWidth <= 1024;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
 
