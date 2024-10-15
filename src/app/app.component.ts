@@ -156,6 +156,9 @@ export class AppComponent implements OnInit {
         }
 
         if (this.router.url.includes('/esqueceu-senha')) {
+            if (this.auth.isLoggedIn()) {
+                return this.router.navigate(['/alterar-senha']);
+            }
             this.modalService.open(EsqueceuSenhaModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
