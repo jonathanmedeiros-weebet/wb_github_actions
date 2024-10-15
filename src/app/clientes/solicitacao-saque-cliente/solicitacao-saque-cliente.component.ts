@@ -250,12 +250,23 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 res => {
                     this.respostaSolicitacao = res;
                     this.submitting = false;
+                    this.sendGa4Event(this.cliente.nome +' '+ this.cliente.sobrenome );
                 },
                 error => {
                     this.handleError(error);
                     this.submitting = false;
                 }
             );
+    }
+
+    sendGa4Event(username) {
+        const dataLayer = (window as any).dataLayer || [];
+        if (dataLayer) {
+            dataLayer.push({
+            event: 'generate_saque',
+            username: username,
+          });
+        }
     }
 
     cancelarSolicitacaoSaque(solicitacaoSaqueId) {

@@ -326,8 +326,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         this.openPixModal();
                         this.submitting = false;
                         if(detalhesPagamento.promoCode !== ''){
-                            this.sendGa4Event(detalhesPagamento.promoCode);
+                            this.sendGa4Event('earn_virtual_currency', detalhesPagamento.promoCode, null);
                         }
+                        this.sendGa4Event('generate_pix',null, res.cliente);
                     },
                     error => {
                         this.handleError(error);
@@ -336,13 +337,21 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 );
     }
 
-    sendGa4Event(couponCode) {
+    sendGa4Event(eventType, couponCode = null, cliente = null) {
         const dataLayer = (window as any).dataLayer || [];
+
         if (dataLayer) {
-            dataLayer.push({
-            event: 'earn_virtual_currency',
-            couponCode: couponCode,
-          });
+            if (eventType == 'earn_virtual_currency') {
+                dataLayer.push({
+                    event: 'earn_virtual_currency',
+                    couponCode: couponCode,
+                });
+            } else if (eventType == 'generate_pix') {
+                dataLayer.push({
+                    event: 'generate_pix',
+                    username: cliente,
+                });
+            }
         }
     }
 
