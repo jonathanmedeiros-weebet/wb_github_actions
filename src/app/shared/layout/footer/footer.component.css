@@ -109,8 +109,8 @@ footer {
 }
 
 .toTop {
-    position: absolute;
-    top: 20px;
+    position: fixed;
+    bottom: 12em;
     right: 20px;
 
     color: var(--foreground-inputs-odds);

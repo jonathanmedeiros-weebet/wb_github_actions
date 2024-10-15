@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
         this.eventPushXtremepush();
 
         this.auth.logado.subscribe((isLogged) => {
-            const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
+            const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity);
             const activityUserConfig = Boolean(this.activityDetectService.getActivityTimeConfig());
             const isCliente = this.auth.isCliente();
 
@@ -125,6 +125,7 @@ export class AppComponent implements OnInit {
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
                 this.idleDetectService.startTimer(1800000);
+
             } else {
                 this.idleDetectService.stopTimer();
             }
@@ -138,14 +139,14 @@ export class AppComponent implements OnInit {
                     }
                 });
             }
-        })
+        });
 
         this.idleDetectService
             .watcher()
             .subscribe(isExpired => {
                 if (isExpired) {
                     if (this.auth.isLoggedIn()) {
-                        this.auth.logout();
+                        this.auth.expiredByInactive();
                     }
                 }
             });
@@ -180,7 +181,7 @@ export class AppComponent implements OnInit {
             this.auth.setAppMobile();
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
             localStorage.setItem('app_version', String(appVersion));
-            
+
             if (appVersion < 2) {
                 this.modalService.open(
                     this.wrongVersionModal,

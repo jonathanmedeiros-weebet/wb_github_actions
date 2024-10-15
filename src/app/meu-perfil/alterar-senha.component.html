@@ -33,14 +33,14 @@
                         ></app-error-msg>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" [ngStyle]="{'margin-bottom': isStrengthPassword ? '0' : ''}">
                     <div class="col-md-2">
                         <label >
                             {{'senhas.novaSenha' | translate}}
                         </label>
                     </div>
                     <div class="col-md-10 col-lg-4 align-items-center">
-                        <div class="form-group">
+                        <div class="form-group" [ngStyle]="{'margin-bottom': isStrengthPassword ? '0' : ''}">
                             <input
                                 type="password"
                                 class="inverted-out form-control"
@@ -48,6 +48,7 @@
                                 formControlName="senha_nova"
                                 [ngClass]="applyCssInputError('senha_nova')"
                                 [type]="mostrarSenhaNova ? 'text' : 'password'"
+                                (input)="isStrengthPassword ? checkPassword() : null"
                             >
                             <i
                                 class="fa"
@@ -59,6 +60,21 @@
                             [control]="form.get('senha_nova')"
                             label="{{'senhas.novaSenha' | translate}}"
                         ></app-error-msg>
+
+                        <ul class="requirements-password" *ngIf="isStrengthPassword">
+                            <li [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i> {{'senhas.minimumCharactersPassword' | translate}}
+                            </li>
+                            <li [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i> {{'senhas.lowercaseLetter' | translate}}
+                            </li>
+                            <li [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i> {{'senhas.uppercaseLetter' | translate}}
+                            </li>
+                            <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i> {{'senhas.specialChar' | translate}}
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="row">
