@@ -7,14 +7,11 @@ import { AuthService } from 'src/app/services';
   templateUrl: './configuracao-limite-tempo-modal.component.html',
   styleUrls: ['./configuracao-limite-tempo-modal.component.css']
 })
-export class ConfiguracaoLimiteTempoModalComponent implements OnInit {
+export class ConfiguracaoLimiteTempoModalComponent {
   constructor(
     public activeModal: NgbActiveModal,
     private auth: AuthService
   ) { }
-
-  ngOnInit() {
-  }
 
   back () {
     this.activeModal.close();
