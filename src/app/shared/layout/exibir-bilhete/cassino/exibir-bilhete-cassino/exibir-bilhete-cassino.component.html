@@ -15,6 +15,6 @@
         <p>Prêmio: <span style="float: right;">{{aposta.premio | currency}}</span></p>
     </div>
     <button class="btn btn-custom" id="play-button" [routerLink]="['/casino/' + aposta.fornecedor + '/' + aposta.gameID]" *ngIf="playButton">
-        {{ 'geral.play'| translate }} {{aposta.game}}
+        {{ 'geral.jogar'| translate }} {{aposta.game}}
     </button>
 </div>
