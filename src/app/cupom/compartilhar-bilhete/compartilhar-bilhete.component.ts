@@ -61,6 +61,9 @@ export class CompartilharBilheteComponent implements OnInit {
         this.apostaService.getApostaByCodigoCassino(this.params).subscribe(async aposta => {
           this.aposta = aposta;
           this.loading = false;
+        }, error => {
+          this.router.navigate(['/']);
+          this.messageService.error('Aposta não encontrada');
         })
       })
     }
@@ -80,8 +83,10 @@ export class CompartilharBilheteComponent implements OnInit {
         this.messageService.success('Aposta repetida com sucesso!');
         return;
       }
+      this.router.navigate(['/esportes']);
       this.messageService.warning('A aposta não pôde ser repetida.');
     } catch (error) {
+      this.router.navigate(['/esportes']);
       this.messageService.error('Erro ao converter aposta');
     }
   }
