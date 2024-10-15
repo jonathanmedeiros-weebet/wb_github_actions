@@ -259,11 +259,13 @@ gulp.task('apostapremiada.bet', function (done) {
     });
 });
 
-gulp.task('bet1.wee.bet', function (done) {
+
+// Old bet1.wee.bet
+gulp.task('mrsports.club', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "bet1.wee.bet",
-        banca: "WEEBET",
+        host: "mrsports.club",
+        banca: "MR SPORTS",
         styles: ""
     });
 });
