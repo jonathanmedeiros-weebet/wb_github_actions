@@ -34,6 +34,9 @@
                 <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
                     <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/mais_18.svg'" [svgStyle]="svgStyleMaiorIdade()"></svg-icon>
                 </a>
+                <a href="">
+                    <img *ngIf="slug == 'puskasbet.com.br'" src="https://cdn.wee.bet/img/sigap.png" width="130" border="0" alt="SIGAP">
+                </a>
                 <div class="info pagamento" *ngIf="hasApiPagamentos">
                     <h4 class="title">{{'footer.metodosDePagamento' | translate}}</h4>
                     <p>
