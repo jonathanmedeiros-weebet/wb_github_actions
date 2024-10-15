@@ -49,6 +49,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     showModalTerminateSession: Boolean = false;
     private geolocation: Geolocation;
     loginMode = 'email';
+    inputFocused: boolean;
+    inputLoginValue: string;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -133,6 +135,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.form.get('loginMode').setValue(mode);
         this.loginMode = mode;
         this.form.get('username').reset();
+        this.clearInputLoginValue();
     }
 
     ngOnDestroy() {
@@ -355,5 +358,22 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         setTimeout(() => {
             clearInterval(intervalId);
         }, 3000);
+    }
+
+    onFocus() {
+        this.inputFocused = true;
+    }
+
+    onBlur() {
+        this.inputFocused = false;
+    }
+
+    onInput(event: Event) {
+        const inputElement = event.target as HTMLInputElement;
+        this.inputLoginValue = inputElement.value;
+    }
+
+    clearInputLoginValue(){
+        this.inputLoginValue = '';
     }
 }
