@@ -495,6 +495,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+
+        this.dispararEventoAddToCartGa4('add_to_cart', item.jogo_nome, cotacao.chave, cotacao.valorFinal);
     }
 
     // Coloca as cotações faltando nos jogos
@@ -734,5 +736,33 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
         this.hasFeaturedMatches = hasFeaturedMatches;
+    }
+
+    eventoSearch(e){
+        if(e.target.value){
+            this.dispararEventoGa4('search', e.target.value);
+        }
+    }
+
+    dispararEventoGa4(nomeEvento, search_term){
+        const dataLayer = (window as any).dataLayer || [];
+        if (dataLayer) {
+            dataLayer.push({
+            event: nomeEvento,
+            search_term: search_term
+          });
+        }
+    }
+
+    dispararEventoAddToCartGa4(nomeEvento, nomeJogo, timeApostado, valorCotacao){
+        const dataLayer = (window as any).dataLayer || [];
+        if (dataLayer) {
+            dataLayer.push({
+            event: nomeEvento,
+            game: nomeJogo,
+            team_bet:timeApostado,
+            value:valorCotacao
+          });
+        }
     }
 }
