@@ -416,10 +416,11 @@ gulp.task('alfasports.net', function (done) {
     });
 });
 
-gulp.task('esportebets.bet', function (done) {
+// Old esportebets.bet
+gulp.task('esporte.fit', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "esportebets.bet",
+        host: "esporte.fit",
         banca: "ESPORTE BETS",
         styles: ""
     });
