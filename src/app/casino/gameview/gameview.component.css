@@ -155,7 +155,8 @@ iframe{
 
 .btn-custom, .btn-custom2 {
     margin: 10px 0;
-    padding: 10px;
+    padding: 0 10px;
+    height: 38px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
