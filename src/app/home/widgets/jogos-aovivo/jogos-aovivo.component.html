@@ -27,11 +27,11 @@
                     <ng-container *ngIf="campeonatoPermitido(campeonato.value._id)">
                         <div class="header">
                             <span class="flag-icon flag-icon-{{campeonato.value.regiao_sigla}} flag-icon-squared"></span>
-                            <span class="campeonato-nome">{{campeonato.value.nome}}</span>
+                            <span class="campeonato-nome">{{campeonato.value.regiao | uppercase}}: {{campeonato.value.nome}}</span>
                         </div>
                         <div class="jogos">
                             <div class="jogo" *ngFor="let jogo of campeonato.value.jogos | keyvalue; trackBy: trackById">
-                                <div class="tempo-box">
+                                <div class="tempo-box" style="cursor: pointer;" (click)="redirectToGame(jogo.value._id)">
                                     <div class="aovivo-label">
                                         <i class="fa fa-circle blink_me"></i> {{'geral.aoVivo' | translate | uppercase}}
                                     </div>
@@ -39,7 +39,7 @@
                                         {{jogo.value.info.minutos}}'
                                     </div>
                                 </div>
-                                <div class="times-placar">
+                                <div class="times-placar" style="cursor: pointer;" (click)="redirectToGame(jogo.value._id)">
                                     <div class="time time-a">
                                         <div class="time-a-nome">
                                             <ng-container *ngIf="jogo.value.time_a_img; else defaulImageA" class="escudo">

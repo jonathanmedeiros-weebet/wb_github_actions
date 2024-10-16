@@ -116,7 +116,7 @@
                 <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span [ngClass]="['modalidade-icon', iconesGenericos[esporte]]"></span>
                     <span class="campeonato-nome">
-                        <ng-template [ngIf]="sportId == basketballId"> {{campeonato.regiao | uppercase}} - </ng-template> {{campeonato.nome | uppercase}}
+                        <ng-template [ngIf]="sportId == basketballId"> </ng-template> {{campeonato.regiao | uppercase}}: {{campeonato.nome | uppercase}} 
                     </span>
 
                     <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">
