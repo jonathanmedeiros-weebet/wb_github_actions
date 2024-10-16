@@ -2786,3 +2786,12 @@ gulp.task('bigwinfree.com', function (done) {
         dominioTemp: "bigwinfree.wee.bet"
     });
 });
+
+gulp.task('jjsports.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "jjsports.vip",
+        banca: "JJ SPORTS",
+        styles: "",
+    });
+});

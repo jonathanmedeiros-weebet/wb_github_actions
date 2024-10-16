@@ -292,7 +292,8 @@
         "topbets.site": "gulp topbets.site",
         "via-bet.com": "gulp via-bet.com",
         "amabet.bet": "gulp amabet.bet",
-        "bigwinfree.com": "gulp bigwinfree.com"
+        "bigwinfree.com": "gulp bigwinfree.com",
+        "jjsports.vip": "gulp jjsports.vip"
     },
     "private": true,
     "dependencies": {
