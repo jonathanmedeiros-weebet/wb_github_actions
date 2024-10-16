@@ -1913,6 +1913,18 @@ ngb-datepicker-month {
     }
 }
 
+.custom-modal-force-password .modal-dialog > .modal-content {
+    height: auto; 
+}
+
+.d-none-alterar-senha .botao-esquerdo{
+    display: none;
+}
+
+.d-block-header-alterar-senha .mobile-modal-header{
+    display: block;
+}
+
 .tooltip-custom .tooltip-inner {
     font-size: 14px;
 }
