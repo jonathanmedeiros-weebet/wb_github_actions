@@ -162,6 +162,11 @@ footer {
         footer {
             margin-bottom: 38px;
         }
+        
+    }
+    .info-jogo .icons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }
 

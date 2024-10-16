@@ -74,14 +74,15 @@
                 </a>
             </div>
             <div class="modal-body">
-                <h4>Continuar Jogando...</h4>
-                <p>
+                <h4 class="titulo-modal">Continuar Jogando...</h4>
+                <p class="bonus">Saldo bônus: {{posicaoFinanceira | currency:'BRL':'symbol':'1.2-2'}}</p>
+                <p class="opacity50">
                     Seu bônus está quase acabando! Deseja cancelar seu saldo bônus e trocar para o seu saldo real para continuar jogando?
                 </p>
                 <a class="btn btn-custom" (click)="continuarSaldoReal()">
                   Sim, cancelar bônus e usar saldo real
                 </a>
-                <a class="btn btn-custom2 " (click)="continuarBonus()">
+                <a class="btn opacity50" (click)="continuarBonus()">
                   Continuar com bônus
                 </a>
             </div>
