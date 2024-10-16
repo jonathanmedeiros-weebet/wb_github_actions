@@ -35,7 +35,7 @@ export class HelperService {
         }
 
         if (language) {
-            return tipoAposta['nome_' + language];
+            return tipoAposta[`nome_${language}`] ?? tipoAposta[`nome_pt`];
         }
 
         return tipoAposta[field];
