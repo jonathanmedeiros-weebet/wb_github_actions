@@ -244,7 +244,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             (scrolls) => this.scrolls = scrolls.toArray()
         );
         
-        
         if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMobile) {
             this.disableHeaderOptions();
             const gameView = this.el.nativeElement.querySelector('.game-view');
