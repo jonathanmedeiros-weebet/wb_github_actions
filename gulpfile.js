@@ -2795,3 +2795,30 @@ gulp.task('jjsports.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('footbet.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "footbet.bet",
+        banca: "FOOTBET",
+        styles: "",
+    });
+});
+
+gulp.task('shelbybet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "shelbybet.com.br",
+        banca: "SHEBLBY BET",
+        styles: "",
+    });
+});
+
+gulp.task('lostigre.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "lostigre.com",
+        banca: "LOS TIGRE",
+        styles: "",
+    });
+});
