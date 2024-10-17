@@ -38,7 +38,7 @@ export class AuthService {
     }
 
     verificaDadosLogin(data: any): Observable<any> {
-        return this.http.post<any>(`${this.AuthUrl}/verificarDadosLogin`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
                     if (res.results.user) {
@@ -109,7 +109,7 @@ export class AuthService {
     }
 
     login(data: any): Observable<any> {
-        return this.http.post<any>(`${this.AuthUrl}/signin`, JSON.stringify(data), this.header.getRequestOptions())
+        return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
 
@@ -313,7 +313,7 @@ export class AuthService {
     }
 
     getPosicaoFinanceira() {
-        const url = `${config.BASE_URL}/financeiro/posicao`;
+        const url = `${config.LOKI_URL}/financial/position`;
 
         return this.http
             .get(url, this.header.getRequestOptions(true))

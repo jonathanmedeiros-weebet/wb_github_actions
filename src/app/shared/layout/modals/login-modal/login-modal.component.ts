@@ -188,7 +188,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             () => {
                                 this.getUsuario();
                                 if (this.usuario.tipo_usuario === 'cliente') {
-                                    if(this.xtremepushHabilitado()) {
+                                    if (this.xtremepushHabilitado()) {
                                         xtremepush('event', 'login');
                                     }
                                     this.loginService.triggerEvent();
@@ -202,7 +202,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         );
                 },
                 (error) => {
-                    console.log('caiu aqui');
                     this.handleError(error.message);
                     if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
                         sessionStorage.setItem('user', JSON.stringify(error.user));

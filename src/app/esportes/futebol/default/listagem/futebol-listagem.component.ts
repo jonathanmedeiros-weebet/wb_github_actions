@@ -578,9 +578,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     campeonatoAberto(campeonatoId) {
-        if(this.campeonatosBloqueados.includes(campeonatoId)){
+        if (this.campeonatosBloqueados.includes(campeonatoId)) {
             return false;
-        }else{
+        } else {
             return this.campeonatosAbertos.includes(campeonatoId);
         }
     }

@@ -411,9 +411,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     }
                 },
                 error => {
-                    this.handleError(error);
-                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.' || error === 'Login expirado.') {
+                    if (error === 'Não autorizado.' || error === 'Login expirou, entre novamente.') {
                         this.auth.logout();
+                    } else {
+                        this.handleError(error);
                     }
                 }
             );

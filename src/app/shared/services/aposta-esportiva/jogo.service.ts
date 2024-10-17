@@ -66,7 +66,7 @@ export class JogoService {
     }
 
     getJogosDestaque() {
-        const url = `${this.JogoCentralUrl}/destaques`;
+        const url = `${this.JogosLokiUrl}/highlighted-games`;
 
         return this.http.get(url, this.header.getRequestOptions(true))
             .pipe(

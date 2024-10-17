@@ -13,7 +13,7 @@ import { config } from '../config';
     providedIn: 'root'
 })
 export class ImagemInicialService {
-    private ImagemInicialUrl = `${config.BASE_URL}/imagem-inicial`;
+    private ImagemInicialUrl = `${config.LOKI_URL}/splash-image`;
 
     constructor(
         private http: HttpClient,

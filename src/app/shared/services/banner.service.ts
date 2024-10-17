@@ -12,7 +12,7 @@ import { config } from '../config';
     providedIn: 'root'
 })
 export class BannerService {
-    private BannerUrl = `${config.BASE_URL}/banners`;
+    private BannerUrl = `${config.LOKI_URL}/banners`;
 
     synchronized = false;
     cachedBanners = [];
