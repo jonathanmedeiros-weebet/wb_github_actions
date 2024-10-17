@@ -2822,3 +2822,12 @@ gulp.task('lostigre.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('brabet.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "brabet.club",
+        banca: "BRABET",
+        styles: "",
+    });
+});
