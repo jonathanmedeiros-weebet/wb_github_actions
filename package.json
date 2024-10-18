@@ -297,7 +297,8 @@
         "footbet.bet": "gulp footbet.bet",
         "shelbybet.com.br": "gulp shelbybet.com.br",
         "lostigre.com": "gulp lostigre.com",
-        "brabet.club": "gulp brabet.club"
+        "brabet.club": "gulp brabet.club",
+        "fortunaplay.bet": "gulp fortunaplay.bet"
     },
     "private": true,
     "dependencies": {

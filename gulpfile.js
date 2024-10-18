@@ -2831,3 +2831,12 @@ gulp.task('brabet.club', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fortunaplay.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fortunaplay.bet",
+        banca: "FORTUNA PLAY",
+        styles: "",
+    });
+});
