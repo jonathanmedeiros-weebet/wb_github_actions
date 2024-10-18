@@ -95,7 +95,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'none');
         }
-
+        
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement
+        if (TawkChat) {
+            const TawkChatBtn = TawkChat.firstElementChild as HTMLElement
+            if (TawkChatBtn && TawkChatBtn.getAttribute('title') === 'chat widget') {
+                this.renderer.setStyle(TawkChatBtn, 'display', 'none')
+            }
+        }
+        
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
         }
@@ -270,6 +278,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const liveChatBtn = this.document.getElementById('chat-widget-container');
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
+        }
+
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement
+        if (TawkChat) {
+            const TawkChatBtn = TawkChat.firstElementChild as HTMLElement
+            this.renderer.setStyle(TawkChatBtn, 'display', 'block')
         }
     }
 
