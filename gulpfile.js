@@ -767,17 +767,6 @@ gulp.task('betfacil123.app', function (done) {
     });
 });
 
-gulp.task('startbetbrasil.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "startbetbrasil.com",
-        banca: "START BET BRASIL",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-MC4BCH9');</script> <!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --> <noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-MC4BCH9' height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript> <!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('goldeplaca.wee.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2277,15 +2266,6 @@ gulp.task('bet10.bet', function (done) {
     });
 });
 
-gulp.task('luckybets.vip', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "luckybets.vip",
-        banca: "LUCKYBETS",
-        styles: "",
-    });
-});
-
 gulp.task('decolar.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2742,16 +2722,6 @@ gulp.task('clbet.com', function (done) {
     });
 });
 
-gulp.task('leaobet.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "leaobet.com",
-        banca: "LEÃO BET",
-        styles: "",
-        dominioTemp: "leaobet.wee.bet"
-    });
-});
-
 gulp.task('emirates365.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2814,5 +2784,59 @@ gulp.task('bigwinfree.com', function (done) {
         banca: "BIG WIN FREE",
         styles: "",
         dominioTemp: "bigwinfree.wee.bet"
+    });
+});
+
+gulp.task('jjsports.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "jjsports.vip",
+        banca: "JJ SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('footbet.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "footbet.bet",
+        banca: "FOOTBET",
+        styles: "",
+    });
+});
+
+gulp.task('shelbybet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "shelbybet.com.br",
+        banca: "SHEBLBY BET",
+        styles: "",
+    });
+});
+
+gulp.task('lostigre.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "lostigre.com",
+        banca: "LOS TIGRE",
+        styles: "",
+    });
+});
+
+gulp.task('brabet.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "brabet.club",
+        banca: "BRABET",
+        styles: "",
+    });
+});
+
+gulp.task('fortunaplay.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fortunaplay.bet",
+        banca: "FORTUNA PLAY",
+        styles: "",
     });
 });
