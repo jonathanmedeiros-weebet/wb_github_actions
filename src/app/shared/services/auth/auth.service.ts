@@ -175,7 +175,7 @@ export class AuthService {
                 }
             },
             error: (error) => {
-                if (error.status === 401) {
+                if (error.status === 401 || error.status === 404) {
                     this.limparStorage();
                     window.location.reload();
                     if (this.xtremepushHabilitado()) {
