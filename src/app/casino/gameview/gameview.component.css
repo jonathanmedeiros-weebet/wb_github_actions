@@ -1,4 +1,103 @@
-.card-info-game-name {
+.game-view {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.aviso h4{
+    margin: 40px !important;
+}
+
+.game-frame {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.aviso{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.opacity50 {
+    color: var(--foreground);
+    text-align: center;
+    opacity: 0.55;
+}
+
+a.opacity50:hover {
+    opacity: 1;
+}
+
+.bonus {
+    line-height: 52px;
+}
+
+.aviso h4{
+    margin: 20px;
+}
+
+.acoes{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ver-bonus {
+    margin: 20px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    color: var(--header);
+    background-color: var(--highlight);
+    width: 150px;
+    height: 42px;
+}
+
+.ver-jogos {
+    margin: 20px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    border: var(--highlight);
+    color: var(--highlight);
+    border-style: solid;
+    border-width: 1px;
+    width: 150px;
+    height: 42px;
+}
+
+iframe{
+    width: 100%;
+    border:none;
+}
+
+.header-game-view {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* height: 51px; */
+    /* margin-bottom: 12px; */
+    border: 1px solid #1B1B1B;
+}
+
+.header-game-view > div {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.header-game-view .game-name {
+    justify-content: left;
+}
+
+.header-game-view .buttons-game-view {
+    justify-content: right;
+}
+
+.game-name span {
     font-size: 16px;
     font-weight: 600;
     margin-top: 6px;
@@ -140,7 +239,8 @@
 
 .close-modal-continuar-jogando i{
     color: var(--highlight);
-    font-size: medium;
+    font-size: 24px;
+    padding-right: 8px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -788,5 +888,5 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 60px 60px 60px;
+    padding: 0 50px 50px 50px;
 }

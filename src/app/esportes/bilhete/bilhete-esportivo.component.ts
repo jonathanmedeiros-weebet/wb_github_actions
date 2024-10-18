@@ -216,6 +216,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.definirAltura();
                 this.cd.detectChanges();
             });
+        this.checkBlockedGame();
     }
 
     private scrollToBottom(): void {
@@ -485,7 +486,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     handleError(error) {
         this.enableSubmit();
         this.stopDelayInterval();
-
         if (typeof error === 'string') {
             this.messageService.error(error);
         } else {
@@ -504,6 +504,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.bilheteService.atualizarItens(this.itens.value);
                 this.calcularPossibilidadeGanho(this.form.value.valor);
                 this.mudancas = true;
+            }
+            if (error.code === 0 ) {
+                this.messageService.error(error.message);
+                setInterval(() => {
+                    window.location.reload();
+                }, 1000);
             }
         }
     }
@@ -657,4 +663,16 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 }
             );
     }
+
+    checkBlockedGame() {
+        const bloqueados = this.paramsService.getJogosBloqueados();
+        const campeonadosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        this.itens.value.forEach((element, index) =>{
+            if(bloqueados.includes(element.jogo_id) || campeonadosBloqueados.includes(element.jogo.campeonato._id) ){
+               this.itens.removeAt(index)
+            }
+        })
+        this.bilheteService.atualizarItens(this.itens.value);
+    }
+
 }

@@ -641,8 +641,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         xtremepushNotificationContainer.innerHTML = '';
 
         const loadItems = () => {
-            xtremepush('inbox', 'message.list', {
-            }, (result) => {
+            xtremepush('inbox', 'message.list', {}, (result) => {
                 for (let i = 0; i < result.items.length; i++) {
                     const xtremepushItem = result.items[i];
                     const date = new Date(xtremepushItem.create_time * 1000);
@@ -679,18 +678,35 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                         </div>
                     </div>`;
 
-                    xtremepushElement.addEventListener('click', () => {
-                        xtremepush('inbox', 'message.action', {
-                            id: xtremepushItem.id,
-                            open: 1
-                        }, (result) => {
-                            // if (result.badge !== undefined) {
-                            //     this.atualizarBadge(result.badge);
-                            // }
-                        }, (err) => {
-                            console.log(err);
+                    if (xtremepushItem.message.url) {
+                        const url = xtremepushItem.message.url;
+                        const urlObject = new URL(url);
+                        const searchParams = new URLSearchParams(urlObject.search);
+                        const extractedUrl = searchParams.get('url');
+                        const openInNewTab = xtremepushItem.message.url_blank;
+                        xtremepushElement.style.cursor = 'pointer';
+                        xtremepushElement.addEventListener('click', () => {
+                            xtremepush('inbox', 'message.action', {
+                                id: xtremepushItem.id,
+                                open: 1
+                            });
+                            if (extractedUrl) {
+                                if (openInNewTab) {
+                                    window.open(extractedUrl, '_blank');
+                                } else {
+                                    window.location.href = extractedUrl;
+                                }
+                            }
                         });
-                    });
+                    } else {
+                        xtremepushElement.addEventListener('click', () => {
+                            xtremepush('inbox', 'message.action', {
+                                id: xtremepushItem.id,
+                                open: 1
+                            });
+                        });
+                    }
+
                     xtremepushNotificationContainer.appendChild(xtremepushElement);
                 }
             }, (err) => {
