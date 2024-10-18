@@ -255,7 +255,8 @@
         "loginEmail": "Email",
         "loginPhone": "Phone",
         "session_alert": "Session Alert",
-        "session_alert_message": "There is currently an active session on another device. To continue access, would you like to close the other session?"
+        "session_alert_message": "There is currently an active session on another device. To continue access, would you like to close the other session?",
+        "jogoResponsavel": "Responsible Gaming"
     },
     "bet": {
         "sportsBetting": "Sports betting",
