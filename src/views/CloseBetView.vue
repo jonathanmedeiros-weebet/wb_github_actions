@@ -25,14 +25,14 @@
             </div>
             <div class="gain__item">
               <span>Valor Apostado:</span>
-              <span class="gain__value">{{ formatCurrencyMoney(bet.valor) }}</span>
+              <span class="gain__value">R$ {{ formatCurrencyMoney(bet.valor) }}</span>
             </div>
             <div class="gain__item">
               <span>Possível Retorno:</span>
-              <span v-if="newEarningPossibility == null" class="gain__value">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
+              <span v-if="newEarningPossibility == null" class="gain__value">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
               <span v-else class="gain__value">
-                <span class="gain__strikethrough">{{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
-                <span class="gain--danger"> {{ formatCurrencyMoney(newEarningPossibility) }}</span>
+                <span class="gain__strikethrough">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
+                <span class="gain--danger">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
               </span>
             </div>
             <div class="gain__item">
@@ -41,7 +41,7 @@
             </div>
             <div class="gain__item">
               <span>Prêmio:</span>
-              <span class="gain__value">{{ formatCurrencyMoney(bet.premio) }}</span>
+              <span class="gain__value">R$ {{ formatCurrencyMoney(bet.premio) }}</span>
             </div>
           </div>
           <div 
@@ -336,7 +336,7 @@ export default {
         }
     },
     formatNumber(value, minFractionDigits, maxFractionDigits) {
-        return 'R$ ' + new Intl.NumberFormat('pt-BR', {
+        return new Intl.NumberFormat('pt-BR', {
             minimumFractionDigits: minFractionDigits,
             maximumFractionDigits: maxFractionDigits
         }).format(value);

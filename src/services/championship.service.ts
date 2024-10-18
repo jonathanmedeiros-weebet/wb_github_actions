@@ -72,11 +72,9 @@ const getOddsBySportId = (sportId: string | number) =>{
     return sportOdds[sportId as Modalities] ?? []
 }
 
-export const getChampionshipRegionBySportId = async (sportId: string) => {
-    const { blockedChampionships, deadlineTable, centerUrl } = useConfigClient();
-    const newDeadlineTable = convertInMomentInstance(deadlineTable).diff(now()) < 1
-        ? now().format('YYYY-MM-DD')
-        : deadlineTable;
+export const getChampionshipRegionBySportId = async (sportId: string, dateSelected: string) => {
+    const { blockedChampionships, centerUrl } = useConfigClient();
+    const newDeadlineTable = convertInMomentInstance(dateSelected).format('YYYY-MM-DD');
 
     const params = {
         sport_id: sportId,

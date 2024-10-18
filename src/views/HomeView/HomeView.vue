@@ -192,7 +192,7 @@ export default {
     async prepareChampionshipPerRegionList(modalityId) {
       if(this.liveActived) return [];
 
-      const championshipPerRegion = await getChampionshipRegionBySportId(modalityId);
+      const championshipPerRegion = await getChampionshipRegionBySportId(modalityId, this.dateSelected);
       const championshipPerRegionList = championshipPerRegion.result.map((region) => {
         const isIcon = ['ww', 'all'].includes(region.sigla);
         const iconComponent = region.sigla === 'ww' ? IconGlobal : IconTrophy;
@@ -409,9 +409,10 @@ export default {
       this.loading = true;
       this.homeStore.setDate(dateTime);
       this.handleCloseCalendarModal();
-
+      
       await this.prepareChampionshipListByLeague();
-
+      await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
+      
       this.loading = false;
     },
 

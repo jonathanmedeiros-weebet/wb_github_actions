@@ -86,7 +86,7 @@
         <div class="cotacao">
           <div class="cotacao__ganhos">
             <span>Possíveis Ganhos:</span>
-            <span>{{ formatCurrencyMoney(gainEstimate) }}</span>
+            <span>R$ {{ formatCurrencyMoney(gainEstimate) }}</span>
           </div>
           <div class="cotacao__alteracao">
             <input class="cotacao__checkbox" type="checkbox" v-model="acceptChangesOdds" id="accept-changes" />

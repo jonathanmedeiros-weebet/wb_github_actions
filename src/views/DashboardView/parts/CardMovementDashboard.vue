@@ -9,7 +9,7 @@
             <p class="card__date">{{ movement.date }}</p>
         </div>
         <div class="card__value" :class="typeColor(movement.type)">
-            <p>{{ formatCurrencyMoney(movement.value) }}</p>
+            <p>R$ {{ formatCurrencyMoney(movement.value) }}</p>
         </div>
     </div>
 </template>
