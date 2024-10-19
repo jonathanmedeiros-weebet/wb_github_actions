@@ -2840,3 +2840,12 @@ gulp.task('fortunaplay.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('apostoubrasil.vip', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "apostoubrasil.vip",
+        banca: "APOSTOU BRASIL",
+        styles: "",
+    });
+});
