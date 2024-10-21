@@ -162,7 +162,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
-    
+
                 this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
                 localStorage.setItem('codigoAfiliado', codigoAfiliado);
             } else {
@@ -174,7 +174,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
             if (params.btag) {
                 localStorage.setItem('btag', params.btag);
-             } else {
+            } else {
                 const storagedBtag = localStorage.getItem('btag');
                 if (storagedBtag) {
                     this.form.patchValue({btag: storagedBtag});
@@ -183,7 +183,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
             if (params.refId) {
                 localStorage.setItem('refId', params.refId);
-             } else {
+            } else {
                 const storagedRefId = localStorage.getItem('refId');
                 if (storagedRefId) {
                     this.form.patchValue({refId: storagedRefId});
@@ -192,13 +192,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
             if (params.c) {
                 this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
-    
+
                 localStorage.setItem('campRef', params.c);
                 localStorage.setItem('campFonte', params.s);
             } else {
                 const campRef = localStorage.getItem('campRef');
                 const campFonte = localStorage.getItem('campFonte');
-    
+
                 if (campRef) {
                     this.form.patchValue({campRef: campRef, campFonte: campFonte});
                 }
@@ -528,8 +528,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     dadosCriptografados: null
                 });
             }
-
         }
+
     }
 
     onBeforeInput(e : InputEvent, inputName){
