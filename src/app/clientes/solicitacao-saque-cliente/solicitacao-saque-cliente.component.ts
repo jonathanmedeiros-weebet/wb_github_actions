@@ -31,7 +31,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     cliente: Cliente;
     modalRef;
 
-    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M', 'OKTO', 'PIXS'];
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M', 'OKTO', 'PIXS', 'BIGPAGV3'];
     respostaSolicitacao;
 
     rotaCompletarCadastro: string;

@@ -6,7 +6,7 @@ import {AuthService, ClienteService, MenuFooterService, MessageService, Parametr
 import {BaseFormComponent} from '../shared/layout/base-form/base-form.component';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {PasswordValidation} from '../shared/utils';
+import {FormValidations, PasswordValidation} from '../shared/utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 import { Cliente } from '../shared/models/clientes/cliente';
@@ -27,6 +27,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     public mostrarSenhaAtual: boolean = false;
     public mostrarSenhaNova: boolean = false;
     public mostrarSenhaConfirmacao: boolean = false;
+    public isStrengthPassword: boolean | null;
 
     private tokenMultifator: string;
     private codigoMultifator: string;
@@ -40,6 +41,14 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     disapprovedIdentity = false;
     token = '';
     showLoading = true;
+
+    validPassword: boolean = false;
+    requirements = {
+        minimumCharacters: false,
+        uppercaseLetter: false,
+        lowercaseLetter: false,
+        specialChar: false,
+    };
 
     constructor(
         private messageService: MessageService,
@@ -71,6 +80,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngOnInit() {
+        this.isStrengthPassword = this.paramsLocais.getOpcoes().isStrengthPassword;
         this.createForm();
 
         if (this.isCliente) {
@@ -196,9 +206,15 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     createForm() {
         this.form = this.fb.group({
             senha_atual: ['', Validators.required],
-            senha_nova: ['', [Validators.required, Validators.minLength(3)]],
-            senha_confirmacao: ['', [Validators.required, Validators.minLength(3)]]
-        }, { validator: PasswordValidation.MatchPassword });
+            senha_nova: ['', [Validators.required, Validators.minLength(8)]],
+            senha_confirmacao: ['', [Validators.required, Validators.minLength(8)]]
+        }, {validator: PasswordValidation.MatchPassword});
+        
+        if (this.isStrengthPassword) {
+            this.form.controls.senha_nova.clearValidators();
+            this.form.controls.senha_nova.addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls.senha_nova.updateValueAndValidity();
+        }
     }
 
     onSubmit() {
@@ -283,7 +299,21 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             }
         );
     }
-    toogleValidado() {
-        this.faceMatchChangePasswordValidated = !this.faceMatchChangePasswordValidated;
+
+    checkPassword() {
+        const passwordValue = this.form.controls.senha_nova.value;
+        const lengthCheck = passwordValue.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(passwordValue);
+        const hasLowerCase = /[a-z]/.test(passwordValue);
+        const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
+        
+        this.requirements = {
+          minimumCharacters: lengthCheck,
+          uppercaseLetter: hasUpperCase,
+          lowercaseLetter: hasLowerCase,
+          specialChar: hasSpecialChar,
+        };
+
+        this.validPassword = Object.values(this.requirements).every(Boolean);
     }
 }

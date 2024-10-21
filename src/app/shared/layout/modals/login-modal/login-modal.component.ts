@@ -4,7 +4,7 @@ import { Router} from '@angular/router';
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, MessageService, ParametrosLocaisService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
@@ -21,7 +21,8 @@ declare var xtremepush: any;
 
 enum LoginErrorCode {
     INACTIVE_REGISTER = 'cadastro_inativo',
-    CUSTOMER_BLOCKED = 'customerBlocked'
+    CUSTOMER_BLOCKED = 'customerBlocked',
+    ACTIVE_SESSION = 'activeSession'
 }
 
 @Component({
@@ -44,6 +45,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     loginGoogle = false;
     resgister_cancel = false;
     googleUser;
+    showModalLogin: Boolean = true;
+    showModalTerminateSession: Boolean = false;
     private geolocation: Geolocation;
     loginMode = 'email';
 
@@ -152,6 +155,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 (res) => {
+                    let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
                     this.getUsuario();
 
                     if (
@@ -168,7 +172,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         Boolean(this.usuario) &&
                         this.usuario.tipo_usuario === 'cliente' &&
                         this.authDoisFatoresHabilitado &&
-                        !Boolean(this.auth.getCookie(this.usuario.cookie)) &&
+                        (!Boolean(this.auth.getCookie(this.usuario.cookie)) || isLastAuthOlderThan7Days) &&
                         this.usuario.login !== 'suporte@wee.bet'
                     ) {
                         this.abrirModalAuthDoisFatores();
@@ -176,33 +180,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     }
 
                     this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                    const data = {
-                        ...this.form.value,
-                        cookie: this.auth.getCookie(this.usuario.cookie),
-                        geolocation: this.geolocation
-                    };
-
-                    this.auth.login(data)
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            () => {
-                                this.getUsuario();
-                                if (this.usuario.tipo_usuario === 'cliente') {
-                                    if(this.xtremepushHabilitado()){
-                                        xtremepush('event', 'login');
-                                    }
-                                    this.loginService.triggerEvent();
-                                } else {
-                                    location.reload();
-                                }
-                                this.activeModal.dismiss();
-                                this.xtremepushBackgroundRemove();
-                            },
-                            error => this.handleError(error)
-                        );
+                    this.handleLogin();
                 },
                 (error) => {
-                    this.handleError(error.message);
                     if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
                         sessionStorage.setItem('user', JSON.stringify(error.user));
                         this.openModalInactiveRegister();
@@ -211,6 +191,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
                         this.openModalBlockPeerAttemps();
                     }
+
+                    if (error.code === LoginErrorCode.ACTIVE_SESSION) {
+                        this.openModalSessionAlert();
+                        return
+                    }
+                    this.handleError(error.message);
                 }
             );
     }
@@ -238,6 +224,11 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         );
     }
 
+    openModalSessionAlert() {
+        this.showModalLogin = false;
+        this.showModalTerminateSession = true;
+    }
+
     getUsuario() {
         this.usuario = this.auth.getUser();
     }
@@ -258,6 +249,38 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 windowClass: 'modal-500 modal-cadastro-cliente'
             }
         );
+    }
+
+    cancelTerminateSession() {
+        this.showModalTerminateSession = false;
+        this.showModalLogin = true;
+    }
+
+    handleLogin() {
+        const data = {
+            ...this.form.value,
+            cookie: this.auth.getCookie(this.usuario.cookie),
+            geolocation: this.geolocation
+        };
+
+        this.auth.login(data)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                () => {
+                    this.getUsuario();
+                    if (this.usuario.tipo_usuario === 'cliente') {
+                        if(this.xtremepushHabilitado()){
+                            xtremepush('event', 'login');
+                        }
+                        this.loginService.triggerEvent();
+                    } else {
+                        location.reload();
+                    }
+                    this.activeModal.dismiss();
+                    this.xtremepushBackgroundRemove();
+                },
+                error => this.handleError(error)
+            );
     }
 
     abrirRecuperarSenha() {

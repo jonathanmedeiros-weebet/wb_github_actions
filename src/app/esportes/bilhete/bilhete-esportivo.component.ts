@@ -1,7 +1,7 @@
-import { ChangeDetectorRef,Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
-import { Subject, Observable, of } from 'rxjs';
+import { Subject, Observable, of, BehaviorSubject } from 'rxjs';
 import { takeUntil, switchMap, delay, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { PreApostaModalComponent, ApostaModalComponent, LoginModalComponent } from '../../shared/layout/modals';
@@ -22,7 +22,8 @@ import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
-import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
+import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { BASKETBALL_ID, FOOTBALL_ID } from '../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -31,7 +32,7 @@ import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
 })
 export class BilheteEsportivoComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('apostaDeslogadoModal', { static: false }) apostaDeslogadoModal;
-    @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
+    @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
     mudancas = false;
     modalRef;
     possibilidadeGanho = 0;
@@ -71,6 +72,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showFrame = true;
     headerHeight = 92;
     footballId = FOOTBALL_ID;
+    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
+    BasketballId = BASKETBALL_ID;
+
+    sportId:number;
+    liveUrl:string;
+
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -88,16 +95,18 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private menuFooterService: MenuFooterService,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
-        private layoutService: LayoutService
+        private layoutService: LayoutService,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
 
     ngOnInit() {
+        this.bilheteService.sportId.subscribe(id => this.sportId = id);
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
         const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
-
+        
         this.createForm();
         this.definirAltura();
         this.opcoes = this.paramsService.getOpcoes();
@@ -161,14 +170,24 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             .subscribe(
                 (response: any) => {
                     if (response) {
-                        if(habilitar_live_stream) {
-                            this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=' + response);
-                            this.showStreamFrame();
-                        }
+                        if (this.sportId) {
+                            if (this.sportId == this.footballId) {
+                                this.liveUrl = 'https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=';
+                            }
 
-                        if(habilitar_live_tracker) {
-                            this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://widgets-v2.thesports01.com/br/pro/football?profile=5oq66hkn0cwunq7&uuid=' + response);
-                            this.showCampinhoFrame();
+                            if (this.sportId == this.BasketballId) {
+                                this.liveUrl = 'https://stream.raysports.live/br/basketball?token=5oq66hkn0cwunq7&uuid=';
+                            }
+
+                            if (habilitar_live_stream) {
+                                this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.liveUrl + response);
+                                this.showStreamFrame();
+                            }
+    
+                            if (habilitar_live_tracker) {
+                                this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.liveUrl + response);
+                                this.showCampinhoFrame();
+                            }
                         }
                     } else {
                         this.liveTrackerUrl = null;
@@ -197,6 +216,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.definirAltura();
                 this.cd.detectChanges();
             });
+        this.checkBlockedGame();
     }
 
     private scrollToBottom(): void {
@@ -346,7 +366,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         );
     }
 
-    submit() {
+    async submit() {
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
@@ -372,7 +392,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
             if (valido) {
                 if (this.isLoggedIn) {
-                    const values = this.ajustarDadosParaEnvio();
+                    const values = await this.ajustarDadosParaEnvio();
                     this.salvarAposta(values);
                 } else {
                     this.enableSubmit();
@@ -428,7 +448,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
-        let typeWindow = aposta.tipo == 'esportes'? 'modal-700' : '';
+        let typeWindow = aposta.tipo == 'esportes' ? 'modal-700' : '';
 
         this.modalRef = this.modalService.open(ApostaModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
@@ -466,7 +486,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     handleError(error) {
         this.enableSubmit();
         this.stopDelayInterval();
-
         if (typeof error === 'string') {
             this.messageService.error(error);
         } else {
@@ -485,6 +504,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.bilheteService.atualizarItens(this.itens.value);
                 this.calcularPossibilidadeGanho(this.form.value.valor);
                 this.mudancas = true;
+            }
+            if (error.code === 0 ) {
+                this.messageService.error(error.message);
+                setInterval(() => {
+                    window.location.reload();
+                }, 1000);
             }
         }
     }
@@ -553,10 +578,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
     }
 
-    finalizarApostaDeslogado() {
+    async finalizarApostaDeslogado() {
         this.disabledSubmit();
 
-        const values = this.ajustarDadosParaEnvio();
+        const values = await this.ajustarDadosParaEnvio();
 
         if (this.tipoApostaDeslogado === 'preaposta') {
             this.preApostaService.create(values)
@@ -604,9 +629,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.mudancas = false;
     }
 
-    ajustarDadosParaEnvio() {
+    async ajustarDadosParaEnvio() {
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
+        
+        const location = await this.geolocationService.getGeolocation();
+        this.geolocation.next(location);
+
         const values = clone(this.form.value);
+        values['geolocation'] = this.geolocation.value;
         values.itens.map(item => {
             // Cotacação Local
             if (cotacoesLocais[item.jogo_event_id] && cotacoesLocais[item.jogo_event_id][item.cotacao.chave]) {
@@ -633,4 +663,16 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 }
             );
     }
+
+    checkBlockedGame() {
+        const bloqueados = this.paramsService.getJogosBloqueados();
+        const campeonadosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        this.itens.value.forEach((element, index) =>{
+            if(bloqueados.includes(element.jogo_id) || campeonadosBloqueados.includes(element.jogo.campeonato._id) ){
+               this.itens.removeAt(index)
+            }
+        })
+        this.bilheteService.atualizarItens(this.itens.value);
+    }
+
 }

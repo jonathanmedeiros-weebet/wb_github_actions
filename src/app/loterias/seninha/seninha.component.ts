@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ChangeDetectorRef} 
 import {getCurrencySymbol} from '@angular/common';
 import {UntypedFormBuilder, UntypedFormArray, Validators} from '@angular/forms';
 
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -18,6 +18,7 @@ import {TipoAposta, Aposta, Sorteio} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as range from 'lodash.range';
 import { random } from 'lodash';
+import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 
 @Component({
     selector: 'app-seninha',
@@ -43,6 +44,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     mobileScreen = false;
     modoCambista = false;
     headerHeight = 92;
+    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
         private sidebarService: SidebarService,
@@ -60,7 +62,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         public layoutService: LayoutService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
@@ -230,8 +233,15 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     }
 
     /* Finalizar aposta */
-    create() {
+    async create() {
         this.disabledSubmit();
+
+        this.disabledSubmit();
+
+        const location = await this.geolocationService.getGeolocation();
+        this.geolocation.next(location);
+
+        this.aposta['geolocation'] = this.geolocation.value
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {

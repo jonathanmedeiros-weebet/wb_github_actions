@@ -193,7 +193,7 @@
         "resultadosFutebol": "Resultados de fútbol",
         "resultadosLoterias": "Resultados de loterías",
         "contato": "Contacto",
-        "requisitosSenha": "La contraseña debe tener al menos 6 caracteres.",
+        "requisitosSenha": "La contraseña debe tener al menos 8 caracteres.",
         "nomeJogoCassino": "Juego",
         "apostouEmAs": "{{apostador}} apostó el {{data}} a las {{hora}}",
         "historicoDeApostas": "Historial de apuestas",
@@ -246,9 +246,14 @@
         "alteracoesSucesso": "¡Cambios realizados con éxito!",
         "erroInesperado": "Algo inesperado ocurrió. Inténtalo de nuevo más tarde.",
         "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
+        "bonusCancelado": "Bono cancelado",
+        "aguardando": "Pendiente",
         "resetarSenha": "Reiniciar a senha",
         "loginEmail": "Correo electrónico",
-        "loginPhone": "Teléfono"
+        "loginPhone": "Teléfono",
+        "jogosRelacionados": "juegos relacionados",
+        "session_alert": "Alerta de Sesión",
+        "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
@@ -370,7 +375,11 @@
         "reenviaCodigoDeVerificacao": "Reenviar código de verificación",
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
-        "digiteSuaSenha": "Ingrese su contraseña"
+        "digiteSuaSenha": "Ingrese su contraseña",
+        "minimumCharactersPassword": "Mínimo 8 caracteres",
+        "lowercaseLetter": "Mínimo una letra minúscula",
+        "uppercaseLetter": "Mínimo una letra mayúscula",
+        "specialChar": "Mínimo un carácter especial (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Ingrese el monto para el retiro",
@@ -594,7 +603,9 @@
         "aceitar": "Aceptar",
         "entendi": "Lo tengo",
         "salvar_alteracoes": "Guardar Cambios",
-        "voltar": "Volver"
+        "voltar": "Volver",
+        "logout_continue_login": "Sí, me gustaría cerrar la sesión.",
+        "remain_active_session": "No, seguir con la otra sesión activa"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",

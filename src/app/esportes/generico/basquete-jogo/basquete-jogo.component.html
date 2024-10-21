@@ -129,7 +129,7 @@
     </div>
 
     <section class="wrap-sticky" [hidden]="!jogo || showLoadingIndicator">
-        <div class="indentificacao">
+        <div *ngIf="(loadedFrame && (isMobile && !theSportUrl)) || !isMobile" class="indentificacao">
             <div class="horario">
                 <div>{{jogo?.horario | moment: '' : true}} / {{jogo?.horario | moment: 'HH:mm'}}</div>
             </div>
@@ -171,7 +171,9 @@
             </div>
         </div>
     </section>
-
+    <div *ngIf="loadedFrame && (isMobile && theSportUrl)" class="iframe-responsive hide-desktop">
+            <iframe [src]="theSportUrl" scrolling="no" frameborder="0" width="320" height="200"></iframe>
+        </div>
     <section class="content-sports inside-event">
         <div class="jogo" [hidden]="!jogo || showLoadingIndicator">
             <div class="tipo-apostas">

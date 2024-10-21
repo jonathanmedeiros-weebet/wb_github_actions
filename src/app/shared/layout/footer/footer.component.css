@@ -109,8 +109,8 @@ footer {
 }
 
 .toTop {
-    position: absolute;
-    top: 20px;
+    position: fixed;
+    bottom: 12em;
     right: 20px;
 
     color: var(--foreground-inputs-odds);
@@ -162,6 +162,11 @@ footer {
         footer {
             margin-bottom: 38px;
         }
+        
+    }
+    .info-jogo .icons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }
 

@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorService } from '../utils/error.service';
 import { HeadersService } from '../utils/headers.service';
 import {catchError, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import { config } from '../../config';
 import { UrlSerializer } from '@angular/router';
 @Injectable({
@@ -148,6 +148,16 @@ export class CasinoApiService {
             catchError(this.errorService.handleError)
         );
 
+    }
+
+    getCasinoGamesRelated(category: string, currentGameIds: string[], missingGames: number) {
+        const queryParams = { category, currentGameIds, missingGames };
+        const requestOptions = this.header.getRequestOptions(false, queryParams);
+    
+        return this.http.get(`${this.central_url}/games/relatedGames`, requestOptions).pipe(
+            map((res: any) => res),
+            catchError(this.errorService.handleError)
+        );
     }
 
     closeSessionTomHorn(sessionId) {

@@ -1,72 +1,92 @@
 <div id="default-content">
     <app-spinner *ngIf="showLoading"></app-spinner>
     <ng-container *ngIf="!showLoading">
-        <div class="internal-container-out">
-            <div class="content-header">
-                <h2>{{'geral.alterarSenha' | translate}}</h2>
-            </div>
-            <div class="content-body">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate *ngIf="faceMatchChangePasswordValidated">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label>
-                                {{'senhas.senhaAtual' | translate}}
-                            </label>
-                        </div>
-                        <div class="col-md-10 col-lg-4 align-items-center">
-                            <div class="form-group">
-                                <input type="password" class="inverted-out form-control"
-                                    placeholder="{{'senhas.digiteSuaSenha' | translate}}" formControlName="senha_atual"
-                                    [ngClass]="applyCssInputError('senha_atual')"
-                                    [type]="mostrarSenhaAtual ? 'text' : 'password'">
-                                <i class="fa"
-                                    [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }"
-                                    (click)="toggleMostrarSenha('senhaAtual')"></i>
-                            </div>
-                            <app-error-msg [control]="form.get('senha_atual')"
-                                label="{{'senhas.senhaAtual' | translate}}"></app-error-msg>
-                        </div>
+    <div class="internal-container-out">
+        <div class="content-header">
+            <h2>{{'geral.alterarSenha' | translate}}</h2>
+        </div>
+        <div class="content-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate *ngIf="faceMatchChangePasswordValidated">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label >
+                            {{'senhas.senhaAtual' | translate}}
+                        </label>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label>
-                                {{'senhas.novaSenha' | translate}}
-                            </label>
+                    <div class="col-md-10 col-lg-4 align-items-center">
+                        <div class="form-group">
+                            <input
+                                type="password"
+                                class="inverted-out form-control"
+                                placeholder="{{'senhas.digiteSuaSenha' | translate}}"
+                                formControlName="senha_atual"
+                                [ngClass]="applyCssInputError('senha_atual')"
+                                [type]="mostrarSenhaAtual ? 'text' : 'password'"
+                            >
+                            <i
+                                class="fa"
+                                [ngClass]="{ 'fa-eye-slash': mostrarSenhaAtual, 'fa-eye': !mostrarSenhaAtual }"
+                                (click)="toggleMostrarSenha('senhaAtual')"
+                            ></i>
                         </div>
-                        <div class="col-md-10 col-lg-4 align-items-center">
-                            <div class="form-group">
-                                <input type="password" class="inverted-out form-control"
-                                    placeholder="{{'senhas.novaSenha' | translate}}" formControlName="senha_nova"
-                                    [ngClass]="applyCssInputError('senha_nova')"
-                                    [type]="mostrarSenhaNova ? 'text' : 'password'">
-                                <i class="fa"
-                                    [ngClass]="{ 'fa-eye-slash': mostrarSenhaNova, 'fa-eye': !mostrarSenhaNova }"
-                                    (click)="toggleMostrarSenha('senhaNova')"></i>
-                            </div>
-                            <app-error-msg [control]="form.get('senha_nova')"
-                                label="{{'senhas.novaSenha' | translate}}"></app-error-msg>
-                        </div>
+                        <app-error-msg
+                            [control]="form.get('senha_atual')"
+                            label="{{'senhas.senhaAtual' | translate}}"
+                        ></app-error-msg>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label>
-                                {{'senhas.confirmarNovaSenha' | translate}}
-                            </label>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label >
+                            {{'senhas.novaSenha' | translate}}
+                        </label>
+                    </div>
+                    <div class="col-md-10 col-lg-4 align-items-center">
+                        <div class="form-group">
+                            <input
+                                type="password"
+                                class="inverted-out form-control"
+                                placeholder="{{'senhas.novaSenha' | translate}}"
+                                formControlName="senha_nova"
+                                [ngClass]="applyCssInputError('senha_nova')"
+                                [type]="mostrarSenhaNova ? 'text' : 'password'"
+                            >
+                            <i
+                                class="fa"
+                                [ngClass]="{ 'fa-eye-slash': mostrarSenhaNova, 'fa-eye': !mostrarSenhaNova }"
+                                (click)="toggleMostrarSenha('senhaNova')"
+                            ></i>
                         </div>
-                        <div class="col-md-10 col-lg-4 align-items-center">
-                            <div class="form-group">
-                                <input class="inverted-out form-control"
-                                    placeholder="{{'senhas.confirmarNovaSenha' | translate}}"
-                                    formControlName="senha_confirmacao"
-                                    [ngClass]="applyCssInputError('senha_confirmacao')"
-                                    [type]="mostrarSenhaConfirmacao ? 'text' : 'password'">
-                                <i class="fa" [ngClass]="{
-                                                'fa-eye-slash': mostrarSenhaConfirmacao,
-                                                'fa-eye': !mostrarSenhaConfirmacao
-                                            }" (click)="toggleMostrarSenha('senhaConfirmacao')"></i>
+                        <app-error-msg
+                            [control]="form.get('senha_nova')"
+                            label="{{'senhas.novaSenha' | translate}}"
+                        ></app-error-msg>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label >
+                            {{'senhas.confirmarNovaSenha' | translate}}
+                        </label>
+                    </div>
+                    <div class="col-md-10 col-lg-4 align-items-center">
+                        <div class="form-group">
+                            <input
+                                class="inverted-out form-control"
+                                placeholder="{{'senhas.confirmarNovaSenha' | translate}}"
+                                formControlName="senha_confirmacao"
+                                [ngClass]="applyCssInputError('senha_confirmacao')"
+                                [type]="mostrarSenhaConfirmacao ? 'text' : 'password'"
+                            >
+                            <i
+                                class="fa"
+                                [ngClass]="{
+                                    'fa-eye-slash': mostrarSenhaConfirmacao,
+                                    'fa-eye': !mostrarSenhaConfirmacao
+                                }"
+                                (click)="toggleMostrarSenha('senhaConfirmacao')"
+                            ></i>
                             </div>
-                            <app-error-msg [control]="form.get('senha_confirmacao')"
-                                label="{{'senhas.confirmarSenha' | translate}}"></app-error-msg>
                         </div>
                     </div>
                     <div class="buttons">

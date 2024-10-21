@@ -97,14 +97,30 @@
                         <div class="input-md">
                             <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
                                    class="form-control inverted-out" [ngClass]="applyCssInputError('senha')"
-                                   formControlName="senha" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
+                                   formControlName="senha" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')" (input)="isStrengthPassword ? checkPassword() : null">
                             <label for="password">{{'geral.senha' | translate}}</label>
                             <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                                (click)="mostrarSenha = !mostrarSenha"></i>
                         </div>
 
                         <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
-                        <small class="form-text text-muted">{{'geral.requisitosSenha' | translate}}</small>
+
+                        <ul class="requirements-password" *ngIf="isStrengthPassword">
+                            <li [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i> {{'senhas.minimumCharactersPassword' | translate}}
+                            </li>
+                            <li [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i> {{'senhas.lowercaseLetter' | translate}}
+                            </li>
+                            <li [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i> {{'senhas.uppercaseLetter' | translate}}
+                            </li>
+                            <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i> {{'senhas.specialChar' | translate}}
+                            </li>
+                        </ul>
+
+                        <small *ngIf="!isStrengthPassword" class="form-text text-muted">{{'geral.requisitosSenha' | translate}}</small>
                     </div>
                 </div>
             </div>

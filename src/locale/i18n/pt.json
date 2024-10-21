@@ -196,7 +196,7 @@
         "resultadosFutebol": "Resultados Futebol",
         "resultadosLoterias": "Resultados Loterias",
         "contato": "Contato",
-        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres.",
+        "requisitosSenha": "Senha deve possuir no mínimo 8 caracteres.",
         "nomeJogoCassino": "Jogo",
         "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}",
         "historicoDeApostas": "Histórico de Apostas",
@@ -252,9 +252,13 @@
         "alteracoesSucesso": "Alterações realizadas com sucesso!",
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
+        "bonusCancelado": "Bônus cancelado",
+        "aguardando": "Aguardando",
         "resetarSenha": "Resetar senha",
         "loginEmail": "E-mail",
-        "loginPhone": "Telefone"
+        "loginPhone": "Telefone",
+        "session_alert": "Alerta de Sessão",
+        "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -351,7 +355,8 @@
         "virtuais": "Virtuais",
         "aoVivo": "Ao Vivo",
         "bingo": "Bingo",
-        "news": "Novidades"
+        "news": "Novidades",
+        "jogosRelacionados": "Jogos relacionados"
     },
     "cartoes": {
         "titulo": "Cartões",
@@ -377,7 +382,11 @@
         "reenviaCodigoDeVerificacao": "Reenviar Código de Verificação",
         "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
         "solicitarCodigoRedefinicao": "Solicitar código de redefinição",
-        "digiteSuaSenha": "Digite sua senha"
+        "digiteSuaSenha": "Digite sua senha",
+        "minimumCharactersPassword": "Mínimo de 8 caracteres",
+        "lowercaseLetter": "Mínimo de uma letra minúscula",
+        "uppercaseLetter": "Mínimo de uma letra maiúscula",
+        "specialChar": "Mínimo de um caractere especial (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",
@@ -604,7 +613,9 @@
         "aceitar": "Aceitar",
         "entendi": "Entendi",
         "salvar_alteracoes": "Salvar Alterações",
-        "voltar": "Voltar"
+        "voltar": "Voltar",
+        "logout_continue_login": "Sim, gostaria de encerrar a sessão",
+        "remain_active_session": "Não, continuar com a outra sessão"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",

@@ -76,6 +76,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     dataUserCPF ='';
     showLoading = true;
     faceMatchRequested = false;
+    isStrengthPassword: boolean | null;
+    validPassword: boolean = false;
+    requirements = {
+        minimumCharacters: false,
+        uppercaseLetter: false,
+        lowercaseLetter: false,
+        specialChar: false,
+    };
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -121,6 +129,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+        this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
 
         if (this.isLoterj) {
             this.aplicarCssTermo = true;
@@ -306,8 +315,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(6)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]],
+            senha: [null, [Validators.required, Validators.minLength(8)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(8), FormValidations.equalsTo('senha')]],
             nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
@@ -325,6 +334,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             dadosCriptografados: [null]
         });
 
+        if (this.isStrengthPassword) {
+            this.form.controls.senha.clearValidators();
+            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls.senha.updateValueAndValidity();
+        }
+        
         if (this.isLoterj) {
             this.form.addControl('termosUso', this.fb.control(null, [
                 Validators.requiredTrue,
@@ -518,5 +533,22 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
+    }
+    
+    checkPassword() {
+        const passwordValue = this.form.controls.senha.value;
+        const lengthCheck = passwordValue.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(passwordValue);
+        const hasLowerCase = /[a-z]/.test(passwordValue);
+        const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
+        
+        this.requirements = {
+          minimumCharacters: lengthCheck,
+          uppercaseLetter: hasUpperCase,
+          lowercaseLetter: hasLowerCase,
+          specialChar: hasSpecialChar,
+        };
+
+        this.validPassword = Object.values(this.requirements).every(Boolean);
     }
 }

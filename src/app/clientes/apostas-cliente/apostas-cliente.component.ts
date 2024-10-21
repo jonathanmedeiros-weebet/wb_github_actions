@@ -38,12 +38,16 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     showLoadingModal = true;
     encerramentoPermitido;
 
+    hasBonus = true;
+
     modalRef;
     unsub$ = new Subject();
 
     totais = {
         valor: 0,
         premio: 0,
+        valorBonus: 0,
+        premioBonus: 0,
     };
 
     loading = false;
@@ -247,19 +251,33 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
         this.totais.valor = 0;
         this.totais.premio = 0;
+        this.totais.valorBonus = 0;
+        this.totais.premioBonus = 0;
 
         response.forEach(aposta => {
+           
             if (!aposta.cartao_aposta) {
-                this.totais.valor += aposta.valor;
-                if (aposta.tipo === 'loteria') {
-                    aposta.itens.forEach(lotteryItem => {
-                        if (lotteryItem.status === 'ganhou') {
-                            this.totais.premio += lotteryItem.premio;
+                if(aposta.rollover_status != 'cancelado'){
+                    if (aposta.is_bonus == 0) { 
+                        this.totais.valor += parseFloat(aposta.valor);
+                    } else {
+                        this.totais.valorBonus += parseFloat(aposta.valor);
+                    }
+                    
+                    if (aposta.tipo === 'loteria') {
+                        aposta.itens.forEach(lotteryItem => {
+                            if (lotteryItem.status === 'ganhou') {
+                                this.totais.premio += lotteryItem.premio;
+                            }
+                        });
+                    } else {
+                        if (aposta.resultado === 'ganhou') {
+                            if (aposta.is_bonus == 0){
+                                this.totais.premio += aposta.premio;
+                            } else {
+                                this.totais.premioBonus += aposta.premio;
+                            }
                         }
-                    });
-                } else {
-                    if (aposta.resultado === 'ganhou') {
-                        this.totais.premio += aposta.premio;
                     }
                 }
             }
@@ -302,15 +320,19 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             resultado = aposta.resultado;
         }
-
-        switch (resultado) {
-            case 'ganhou':
-                return 'green';
-            case 'perdeu':
-                return 'red';
-            default:
-                return 'default';
+        if (aposta.rollover_status != 'cancelado') {
+            switch (resultado) {
+                case 'ganhou':
+                    return 'green';
+                case 'perdeu':
+                    return 'red';
+                default:
+                    return 'default';
+            }
+        } else {
+            return 'red';
         }
+        
     }
 
     onDateSelection(date: NgbDate, datepicker: any) {
