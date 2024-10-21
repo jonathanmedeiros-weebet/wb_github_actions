@@ -96,14 +96,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'none');
         }
         
-        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
         if (TawkChat) {
-            const TawkChatBtn = TawkChat.firstElementChild as HTMLElement
-            if (TawkChatBtn && TawkChatBtn.getAttribute('title') === 'chat widget') {
-                this.renderer.setStyle(TawkChatBtn, 'display', 'none')
-            }
-        }
-        
+            this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
+                this.renderer.setStyle(iframeChat, 'display', 'none');
+            });
+        } 
+
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
         }
@@ -280,11 +279,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
 
-        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
         if (TawkChat) {
-            const TawkChatBtn = TawkChat.firstElementChild as HTMLElement
-            this.renderer.setStyle(TawkChatBtn, 'display', 'block')
-        }
+            this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
+                this.renderer.setStyle(iframeChat, 'display', 'block');
+            });
+        } 
     }
 
     openFullscreen() {
