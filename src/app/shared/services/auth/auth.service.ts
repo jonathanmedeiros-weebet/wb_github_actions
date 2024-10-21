@@ -175,7 +175,6 @@ export class AuthService {
             }
             window.location.reload();
         }).catch((error) => {
-            console.log(error);
             if (error.status === 401 || error.status === 404) {
                 this.limparStorage();
                 this.logadoSource.next(false);
@@ -188,7 +187,6 @@ export class AuthService {
     }
 
     logout() {
-        console.log('chamou o perform');
         this.performLogout('manual');
     }
 
