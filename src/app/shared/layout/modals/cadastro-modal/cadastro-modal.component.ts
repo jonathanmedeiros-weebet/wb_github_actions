@@ -161,58 +161,58 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             .subscribe((params) => {
 
             if (params.ref || params.afiliado) {
-                    const codigoAfiliado = params.ref ?? params.afiliado;
+                const codigoAfiliado = params.ref ?? params.afiliado;
     
-                    this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
-                    localStorage.setItem('codigoAfiliado', codigoAfiliado);
+                this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
+                localStorage.setItem('codigoAfiliado', codigoAfiliado);
             } else {
-                    const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
-                    if (storagedCodigoAfiliado) {
-                        this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
-                    }
+                const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
+                if (storagedCodigoAfiliado) {
+                    this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
+                }
             }
-    
+
             if (params.btag) {
-                    localStorage.setItem('btag', params.btag);
+                localStorage.setItem('btag', params.btag);
              } else {
-                    const storagedBtag = localStorage.getItem('btag');
-                    if (storagedBtag) {
-                        this.form.patchValue({btag: storagedBtag});
-                    }
+                const storagedBtag = localStorage.getItem('btag');
+                if (storagedBtag) {
+                    this.form.patchValue({btag: storagedBtag});
+                }
             }
-    
+
             if (params.refId) {
-                    localStorage.setItem('refId', params.refId);
+                localStorage.setItem('refId', params.refId);
              } else {
-                    const storagedRefId = localStorage.getItem('refId');
-                    if (storagedRefId) {
-                        this.form.patchValue({refId: storagedRefId});
-                    }
+                const storagedRefId = localStorage.getItem('refId');
+                if (storagedRefId) {
+                    this.form.patchValue({refId: storagedRefId});
+                }
             }
-    
+
             if (params.c) {
-                    this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
+                this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
     
-                    localStorage.setItem('campRef', params.c);
-                    localStorage.setItem('campFonte', params.s);
+                localStorage.setItem('campRef', params.c);
+                localStorage.setItem('campFonte', params.s);
             } else {
-                    const campRef = localStorage.getItem('campRef');
-                    const campFonte = localStorage.getItem('campFonte');
+                const campRef = localStorage.getItem('campRef');
+                const campFonte = localStorage.getItem('campFonte');
     
-                    if (campRef) {
-                        this.form.patchValue({campRef: campRef, campFonte: campFonte});
-                    }
+                if (campRef) {
+                    this.form.patchValue({campRef: campRef, campFonte: campFonte});
+                }
             }
-    
+
             if (this.clientesService.codigoFiliacaoCadastroTemp) {
-                    this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
-                    this.possuiCodigoAfiliado = true;
+                this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
+                this.possuiCodigoAfiliado = true;
             }
-    
+
             this.parametersList.forEach(param => {
-                    if (params[param]) {
-                        this.parameters[param] = params[param];
-                    }
+                if (params[param]) {
+                    this.parameters[param] = params[param];
+                }
             });
         });
 
@@ -230,8 +230,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                                 googleId: user.id,
                                 googleIdToken: user.idToken,
                             });
+
                             this.clearValidators();
                         }
+
                         this.user = user;
                     }
                 );
@@ -402,7 +404,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             values.parameters = this.parameters;
         }
 
-        this.submitting = true
+        this.submitting = true;
        
         this.clientesService.cadastrarCliente(values)
             .subscribe(
@@ -526,6 +528,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     dadosCriptografados: null
                 });
             }
+
         }
     }
 
