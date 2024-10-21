@@ -252,6 +252,7 @@
         "alteracoesSucesso": "Alterações realizadas com sucesso!",
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
+        "loginCambista": "Login",
         "loginEmail": "E-mail",
         "loginPhone": "Telefone"
     },

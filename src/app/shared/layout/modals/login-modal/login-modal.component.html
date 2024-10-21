@@ -16,8 +16,10 @@
                 <label>
                     <input type="radio" formControlName="loginMode" value="email" (change)="setLoginMode('email')">
                     <span class="radio-custom"></span>
-                    {{ 'geral.loginEmail' | translate }}
-                </label>
+                    {{ (modoCambistaHabilitado && !modoClienteHabilitado) 
+                        ? ('geral.loginCambista' | translate) 
+                        : ('geral.loginEmail' | translate) }}
+                  </label>                  
                 <label>
                     <input type="radio" formControlName="loginMode" value="phone" (change)="setLoginMode('phone')">
                     <span class="radio-custom"></span>
@@ -37,9 +39,14 @@
                            [style.paddingLeft]="loginMode === 'phone' ? '44px' : null"
 
                     />
-                    <label for="username">{{ loginMode === 'phone' ? ('geral.loginPhone' | translate) : ('geral.loginEmail' | translate) }}</label>
+                    <label for="username" *ngIf="modoClienteHabilitado || modoCambistaHabilitado">
+                        {{ loginMode === 'phone' 
+                            ? ('geral.loginPhone' | translate) 
+                            : (modoClienteHabilitado ? ('geral.loginEmail' | translate) : ('geral.loginCambista' | translate))
+                        }}
+                    </label>                      
                 </div>
-                <app-error-msg [control]="form.get('username')" label="{{ loginMode === 'phone' ? ('geral.loginPhone' | translate) : ('geral.loginEmail' | translate) }}" class="text-left"></app-error-msg>
+                <app-error-msg [control]="form.get('username')" label="{{ (modoCambistaHabilitado && !modoClienteHabilitado) ? ('geral.loginCambista' | translate) : ('geral.loginEmail' | translate) }}" class="text-left"></app-error-msg>
             </div>
 
             <div class="form-group" [ngClass]="applyCssDivError('password')">
