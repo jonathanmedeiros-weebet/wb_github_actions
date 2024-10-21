@@ -160,61 +160,61 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.route.queryParams
             .subscribe((params) => {
 
-                if (params.ref || params.afiliado) {
+            if (params.ref || params.afiliado) {
                     const codigoAfiliado = params.ref ?? params.afiliado;
     
                     this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
                     localStorage.setItem('codigoAfiliado', codigoAfiliado);
-                } else {
+            } else {
                     const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
                     if (storagedCodigoAfiliado) {
                         this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
                     }
-                }
+            }
     
-                if (params.btag) {
+            if (params.btag) {
                     localStorage.setItem('btag', params.btag);
-                } else {
+             } else {
                     const storagedBtag = localStorage.getItem('btag');
                     if (storagedBtag) {
                         this.form.patchValue({btag: storagedBtag});
                     }
-                }
+            }
     
-                if (params.refId) {
+            if (params.refId) {
                     localStorage.setItem('refId', params.refId);
-                } else {
+             } else {
                     const storagedRefId = localStorage.getItem('refId');
                     if (storagedRefId) {
                         this.form.patchValue({refId: storagedRefId});
                     }
-                }
+            }
     
-                if (params.c) {
+            if (params.c) {
                     this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
     
                     localStorage.setItem('campRef', params.c);
                     localStorage.setItem('campFonte', params.s);
-                } else {
+            } else {
                     const campRef = localStorage.getItem('campRef');
                     const campFonte = localStorage.getItem('campFonte');
     
                     if (campRef) {
                         this.form.patchValue({campRef: campRef, campFonte: campFonte});
                     }
-                }
+            }
     
-                if (this.clientesService.codigoFiliacaoCadastroTemp) {
+            if (this.clientesService.codigoFiliacaoCadastroTemp) {
                     this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                     this.possuiCodigoAfiliado = true;
-                }
+            }
     
-                this.parametersList.forEach(param => {
+            this.parametersList.forEach(param => {
                     if (params[param]) {
                         this.parameters[param] = params[param];
                     }
-                });
             });
+        });
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
             this.loginGoogleAtivo = true;
