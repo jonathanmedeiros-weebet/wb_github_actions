@@ -40,7 +40,7 @@
                     <div class="jogo-destaque">
                         <div class="header">
                             <span class="campeonato-nome" [title]="jogoDestaque.campeonato?.nome">
-                                {{ jogoDestaque.campeonato?.nome }}
+                                {{ jogoDestaque.campeonato?.regiao | uppercase }}: {{ jogoDestaque.campeonato?.nome | uppercase }}
                             </span>
                             <span>
                                 {{ jogoDestaque.horario | moment: '' : true}}{{ jogoDestaque.horario | moment:"/ H:mm"}}
