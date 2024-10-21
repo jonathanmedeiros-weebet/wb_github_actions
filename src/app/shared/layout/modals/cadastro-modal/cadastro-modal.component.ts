@@ -162,6 +162,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
                 if (params.ref || params.afiliado) {
                     const codigoAfiliado = params.ref ?? params.afiliado;
+    
                     this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
                     localStorage.setItem('codigoAfiliado', codigoAfiliado);
                 } else {
@@ -170,43 +171,44 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
                     }
                 }
-
+    
                 if (params.btag) {
                     localStorage.setItem('btag', params.btag);
                 } else {
                     const storagedBtag = localStorage.getItem('btag');
                     if (storagedBtag) {
-                        this.form.patchValue({ btag: storagedBtag });
+                        this.form.patchValue({btag: storagedBtag});
                     }
                 }
-
+    
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {
                     const storagedRefId = localStorage.getItem('refId');
                     if (storagedRefId) {
-                        this.form.patchValue({ refId: storagedRefId });
+                        this.form.patchValue({refId: storagedRefId});
                     }
                 }
-
+    
                 if (params.c) {
-                    this.campanhaService.computarAcesso({ campRef: params.c, fonte: params.s }).subscribe();
-
+                    this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
+    
                     localStorage.setItem('campRef', params.c);
                     localStorage.setItem('campFonte', params.s);
                 } else {
                     const campRef = localStorage.getItem('campRef');
                     const campFonte = localStorage.getItem('campFonte');
+    
                     if (campRef) {
-                        this.form.patchValue({ campRef: campRef, campFonte: campFonte });
+                        this.form.patchValue({campRef: campRef, campFonte: campFonte});
                     }
                 }
-
+    
                 if (this.clientesService.codigoFiliacaoCadastroTemp) {
                     this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
                     this.possuiCodigoAfiliado = true;
                 }
-
+    
                 this.parametersList.forEach(param => {
                     if (params[param]) {
                         this.parameters[param] = params[param];
@@ -534,7 +536,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
     }
-    
+
     checkPassword() {
         const passwordValue = this.form.controls.senha.value;
         const lengthCheck = passwordValue.length >= 8;
