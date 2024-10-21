@@ -173,7 +173,7 @@ export class AuthService {
             if (this.xtremepushHabilitado()) {
                 this.cleanXtremepushNotifications();
             }
-            window.location.reload();
+            location.reload();
         }).catch((error) => {
             if (error.status === 401 || error.status === 404) {
                 this.limparStorage();
@@ -181,7 +181,7 @@ export class AuthService {
                 if (this.xtremepushHabilitado()) {
                     this.cleanXtremepushNotifications();
                 }
-                window.location.reload();
+                location.reload();
             }
         });
     }
