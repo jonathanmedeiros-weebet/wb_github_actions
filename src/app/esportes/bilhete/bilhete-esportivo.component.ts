@@ -71,6 +71,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showFrame = true;
     headerHeight = 92;
     footballId = FOOTBALL_ID;
+    language
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -488,9 +489,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             }
             if (error.code === 0 ) {
                 this.messageService.error(error.message);
-                setInterval(() => {
-                    window.location.reload();
-                }, 1000);
+                const text = 'não está mais disponível para apostas.'
+                const textEnglish = 'is no longer available for betting.'
+                if (error.message.includes(text) || error.message.includes(textEnglish)) {
+                    setInterval(() => {
+                        window.location.reload();
+                    }, 1000);
+                }
             }
         }
     }
