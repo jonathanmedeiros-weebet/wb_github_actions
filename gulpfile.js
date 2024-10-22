@@ -2743,7 +2743,6 @@ gulp.task('amabet.bet', function (done) {
         host: "amabet.bet",
         banca: "AMA BET",
         styles: "",
-        dominioTemp: "amabet.wee.bet"
     });
 });
 
