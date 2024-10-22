@@ -15,14 +15,13 @@ import {
     MessageService,
     ParametrosLocaisService,
     PreApostaEsportivaService,
+    SportIdService,
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-
-import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-bilhete',
@@ -73,7 +72,7 @@ export class BilheteComponent extends BaseFormComponent implements OnInit, OnDes
 
     showBilhete = false;
 
-    footballId = FOOTBALL_ID;
+    footballId;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -91,9 +90,12 @@ export class BilheteComponent extends BaseFormComponent implements OnInit, OnDes
         private menuFooterService: MenuFooterService,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
-        private layoutService: LayoutService
+        private layoutService: LayoutService,
+        private sportIdService: SportIdService,
     ) {
         super();
+
+        this.footballId = this.sportIdService.footballId;
     }
 
     ngOnInit() {
