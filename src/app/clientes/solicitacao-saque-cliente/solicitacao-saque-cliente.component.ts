@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -78,7 +79,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private el: ElementRef,
         private layoutService: LayoutService,
         private renderer: Renderer2,
-        private legitimuzService: LegitimuzService
+        private legitimuzService: LegitimuzService,
+        private ga4Service: Ga4Service,
     ) {
         super();
     }
@@ -250,23 +252,19 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 res => {
                     this.respostaSolicitacao = res;
                     this.submitting = false;
-                    this.sendGa4Event(this.cliente.nome +' '+ this.cliente.sobrenome );
+
+                    const dataLayer = (window as any).dataLayer || [];
+                    dataLayer.push({
+                        username: this.cliente.nome +' '+ this.cliente.sobrenome
+                    });
+
+                    this.ga4Service.triggerGa4Event(EventGa4Types.GENERATE_SAQUE, dataLayer);
                 },
                 error => {
                     this.handleError(error);
                     this.submitting = false;
                 }
             );
-    }
-
-    sendGa4Event(username) {
-        const dataLayer = (window as any).dataLayer || [];
-        if (dataLayer) {
-            dataLayer.push({
-            event: 'generate_saque',
-            username: username,
-          });
-        }
     }
 
     cancelarSolicitacaoSaque(solicitacaoSaqueId) {

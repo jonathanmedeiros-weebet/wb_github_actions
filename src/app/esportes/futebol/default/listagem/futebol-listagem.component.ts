@@ -29,6 +29,7 @@ import 'moment/min/locales';
 
 import { TranslateService } from '@ngx-translate/core';
 import { has } from 'lodash';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -113,7 +114,8 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         private jogoService: JogoService,
         private router: Router,
         private translate: TranslateService,
-        public layoutService: LayoutService
+        public layoutService: LayoutService,
+        private ga4Service: Ga4Service,
     ) {
     }
 
@@ -496,7 +498,14 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             this.bilheteService.atualizarItens(this.itens);
         }
 
-        this.dispararEventoAddToCartGa4('add_to_cart', item.jogo_nome, cotacao.chave, cotacao.valorFinal);
+        const dataLayerGa4 = (window as any).dataLayer || [];
+        dataLayerGa4.push({
+            game: item.jogo_nome,
+            team_bet: cotacao.chave,
+            value: cotacao.valorFinal
+        });
+
+        this.ga4Service.triggerGa4Event(EventGa4Types.ADD_TO_CART, dataLayerGa4);
     }
 
     // Coloca as cotações faltando nos jogos
@@ -618,6 +627,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.jogoIdAtual = jogoId;
         this.jogoSelecionadoId.emit(jogoId);
         this.exibirMaisCotacoes.emit(true);
+        this.ga4Service.triggerGa4Event(EventGa4Types.VIEW_ITEM);
     }
 
     mudarData(dia = 'hoje') {
@@ -740,29 +750,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     eventoSearch(e){
         if(e.target.value){
-            this.dispararEventoGa4('search', e.target.value);
-        }
-    }
-
-    dispararEventoGa4(nomeEvento, search_term){
-        const dataLayer = (window as any).dataLayer || [];
-        if (dataLayer) {
+            const dataLayer = (window as any).dataLayer || [];
             dataLayer.push({
-            event: nomeEvento,
-            search_term: search_term
-          });
-        }
-    }
+                search_term: e.target.value,
+            });
 
-    dispararEventoAddToCartGa4(nomeEvento, nomeJogo, timeApostado, valorCotacao){
-        const dataLayer = (window as any).dataLayer || [];
-        if (dataLayer) {
-            dataLayer.push({
-            event: nomeEvento,
-            game: nomeJogo,
-            team_bet:timeApostado,
-            value:valorCotacao
-          });
+            this.ga4Service.triggerGa4Event(EventGa4Types.SEARCH, dataLayer);
         }
     }
 }

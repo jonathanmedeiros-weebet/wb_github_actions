@@ -12,6 +12,7 @@ import { ConfirmModalComponent, RegrasBonusModalComponent } from '../../../share
 import { Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 
 @Component({
@@ -165,7 +166,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private paramsLocais: ParametrosLocaisService,
         private renderer: Renderer2,
         private router: Router,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private ga4Service: Ga4Service,
     ) {
         super();
     }
@@ -326,33 +328,26 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         this.openPixModal();
                         this.submitting = false;
                         if(detalhesPagamento.promoCode !== ''){
-                            this.sendGa4Event('earn_virtual_currency', detalhesPagamento.promoCode, null);
+                            const dataLayer = (window as any).dataLayer || [];
+                            dataLayer.push({
+                                couponCode: detalhesPagamento.promoCode
+                            });
+
+                            this.ga4Service.triggerGa4Event(EventGa4Types.EARN_VIRTUAL_CURRENCY, dataLayer);
                         }
-                        this.sendGa4Event('generate_pix',null, res.cliente);
+
+                        const dataLayerGa4 = (window as any).dataLayer || [];
+                        dataLayerGa4.push({
+                            username: res.cliente
+                        });
+
+                        this.ga4Service.triggerGa4Event(EventGa4Types.GENERATE_PIX, dataLayerGa4);
                     },
                     error => {
                         this.handleError(error);
                         this.submitting = false;
                     }
                 );
-    }
-
-    sendGa4Event(eventType, couponCode = null, cliente = null) {
-        const dataLayer = (window as any).dataLayer || [];
-
-        if (dataLayer) {
-            if (eventType == 'earn_virtual_currency') {
-                dataLayer.push({
-                    event: 'earn_virtual_currency',
-                    couponCode: couponCode,
-                });
-            } else if (eventType == 'generate_pix') {
-                dataLayer.push({
-                    event: 'generate_pix',
-                    username: cliente,
-                });
-            }
-        }
     }
 
     openPixModal() {

@@ -9,6 +9,8 @@ import {Observable, BehaviorSubject} from 'rxjs';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
 import {ParametrosLocaisService} from "../parametros-locais.service";
+import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
+
 
 declare var xtremepush: any;
 
@@ -28,6 +30,7 @@ export class ClienteService {
         private headers: HeadersService,
         private router: Router,
         private paramsService: ParametrosLocaisService,
+        private ga4Service: Ga4Service,
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -64,21 +67,17 @@ export class ClienteService {
                             this.xtremepushBackgroundRemove();
                         }
                     }
-                    this.sendGa4Event(dataUser.user.registrationMethod);
+
+                    this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
+
+                    const dataLayer = (window as any).dataLayer || [];
+                    dataLayer.push({method : dataUser.user.registrationMethod});
+                    this.ga4Service.triggerGa4Event(EventGa4Types.SIGN_UP, dataLayer);
+
                     return response.results;
                 }),
                 catchError(this.errorService.handleError)
             );
-    }
-
-    sendGa4Event(registrationMethod) {
-        const dataLayer = (window as any).dataLayer || [];
-        if (dataLayer) {
-            dataLayer.push({
-            event: 'sign_up',
-            method : registrationMethod,
-          });
-        }
     }
 
     getCliente(id) {

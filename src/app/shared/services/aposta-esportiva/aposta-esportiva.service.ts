@@ -8,6 +8,7 @@ import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
 import { ApostaEsportiva } from './../../../models';
 import { config } from '../../config';
+import { Ga4Service, EventGa4Types} from '../ga4/ga4.service';
 
 @Injectable()
 export class ApostaEsportivaService {
@@ -17,7 +18,8 @@ export class ApostaEsportivaService {
     constructor(
         private http: HttpClient,
         private header: HeadersService,
-        private errorService: ErrorService
+        private errorService: ErrorService,
+        private ga4Service: Ga4Service,
     ) { }
 
     getApostas(queryParams?: any): Observable<any> {
@@ -56,7 +58,24 @@ export class ApostaEsportivaService {
     create(aposta): Observable<any> {
         return this.http.post(this.ApostaEsportivaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
-                map((res: any) => res.results),
+                map((res: any) => {
+                    const dataLayer = (window as any).dataLayer || [];
+                    dataLayer.push({
+                        player : res.results.passador.nome+' '+res.results.passador.sobrenome,
+                        codeBet : res.results.codigo,
+                        value : res.results.valor,
+                        type : res.results.tipo
+                    });
+
+                    this.ga4Service.triggerGa4Event(EventGa4Types.PURCHASE, dataLayer);
+
+                    if (res.results.is_bonus) {
+                        this.ga4Service.triggerGa4Event(EventGa4Types.PURCHASE_BET_PLAYER_BONUS);
+                    }
+
+                    this.ga4Service.triggerGa4Event(EventGa4Types.PURCHASE_BET_PLAYER_PLACEBET);
+                    return res.results
+                }),
                 catchError(this.errorService.handleError)
             );
     }
