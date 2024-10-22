@@ -469,13 +469,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.stopDelayInterval();
         if (typeof error === 'string') {
             this.messageService.error(error);
-            const text = 'não está mais disponível para apostas.'
-            const textEnglish = 'is no longer available for betting.'
-            if (error.includes(text) || error.includes(textEnglish)) {
-                setInterval(() => {
-                    window.location.reload();
-                }, 1000);
-            }
         } else {
             if (error.code === 17) {
                 error.data.forEach(item => {
@@ -493,6 +486,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.calcularPossibilidadeGanho(this.form.value.valor);
                 this.mudancas = true;
             }
+            if (error.code === 18) {
+                this.messageService.error(error.message);
+                    setInterval(() => {
+                        window.location.reload();
+                    }, 2000);
+            }
+
         }
     }
 
