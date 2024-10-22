@@ -488,12 +488,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.calcularPossibilidadeGanho(this.form.value.valor);
                 this.mudancas = true;
             }
-            if (error.code === 0 ) {
+            if (error.code === 18) {
                 this.messageService.error(error.message);
-                setInterval(() => {
-                    window.location.reload();
-                }, 1000);
+                    setInterval(() => {
+                        window.location.reload();
+                    }, 2000);
             }
+
         }
     }
 
