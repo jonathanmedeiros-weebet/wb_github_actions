@@ -237,7 +237,6 @@
         "playnopix.com": "gulp playnopix.com",
         "superesportiva.com": "gulp superesportiva.com",
         "bet10.bet": "gulp bet10.bet",
-        "decolar.bet": "gulp decolar.bet",
         "betstar.vip": "gulp betstar.vip",
         "multisports.bet": "gulp multisports.bet",
         "betcampea.com": "gulp betcampea.com",
@@ -263,7 +262,6 @@
         "stargoldbet.app": "gulp stargoldbet.app",
         "goalb.net": "gulp goalb.net",
         "sortegol.com": "gulp sortegol.com",
-        "canela.bet": "gulp canela.bet",
         "curitiba.bet": "gulp curitiba.bet",
         "portoalegre.bet": "gulp portoalegre.bet",
         "rio.bet": "gulp rio.bet",
@@ -275,7 +273,6 @@
         "floripa.bet": "gulp floripa.bet",
         "appjetbet365.com": "gulp appjetbet365.com",
         "tourodasorte.bet": "gulp tourodasorte.bet",
-        "decola.bet": "gulp decola.bet",
         "priv8bet.com": "gulp priv8bet.com",
         "betinha.com": "gulp betinha.com",
         "goldeplaca.online": "gulp goldeplaca.online",
@@ -293,7 +290,13 @@
         "via-bet.com": "gulp via-bet.com",
         "amabet.bet": "gulp amabet.bet",
         "bigwinfree.com": "gulp bigwinfree.com",
-        "jjsports.vip": "gulp jjsports.vip"
+        "jjsports.vip": "gulp jjsports.vip",
+        "footbet.bet": "gulp footbet.bet",
+        "shelbybet.com.br": "gulp shelbybet.com.br",
+        "lostigre.com": "gulp lostigre.com",
+        "brabet.club": "gulp brabet.club",
+        "fortunaplay.bet": "gulp fortunaplay.bet",
+        "apostoubrasil.vip": "gulp apostoubrasil.vip"
     },
     "private": true,
     "dependencies": {

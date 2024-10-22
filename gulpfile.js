@@ -1983,8 +1983,6 @@ gulp.task('bnrbet.com', function (done) {
         host: "bnrbet.com",
         banca: "BNR BET",
         styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KVT8RKHH');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-KVT8RKHH'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
     });
 });
 
@@ -2266,15 +2264,6 @@ gulp.task('bet10.bet', function (done) {
     });
 });
 
-gulp.task('decolar.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "decolar.bet",
-        banca: "DECOLAR.BET",
-        styles: "",
-    });
-});
-
 gulp.task('betstar.vip', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2506,15 +2495,6 @@ gulp.task('sortegol.com', function (done) {
     });
 });
 
-gulp.task('canela.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "canela.bet",
-        banca: "CANELA BET",
-        styles: ""
-    });
-});
-
 gulp.task('curitiba.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2613,16 +2593,6 @@ gulp.task('tourodasorte.bet', function (done) {
         host: "tourodasorte.bet",
         banca: "TOURO DA SORTE",
         styles: ""
-    });
-});
-
-gulp.task('decola.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "decola.bet",
-        banca: "DECOLA.BET",
-        styles: "",
-        description: "As melhores ofertas hoje: 100% até R$1000 em Apostas Esportivas e todos os Games. Aproveite as apostas no futebol, basquete, Esoccer, NBA e demais jogos. Dobramos seu depósito de até R$1000. Saque Rápido & Seguro."
     });
 });
 
@@ -2792,6 +2762,60 @@ gulp.task('jjsports.vip', function (done) {
         server: "front3.wee.bet",
         host: "jjsports.vip",
         banca: "JJ SPORTS",
+        styles: "",
+    });
+});
+
+gulp.task('footbet.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "footbet.bet",
+        banca: "FOOTBET",
+        styles: "",
+    });
+});
+
+gulp.task('shelbybet.com.br', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "shelbybet.com.br",
+        banca: "SHEBLBY BET",
+        styles: "",
+    });
+});
+
+gulp.task('lostigre.com', function (done) {
+    tasks(done, {
+        server: "front4.wee.bet",
+        host: "lostigre.com",
+        banca: "LOS TIGRE",
+        styles: "",
+    });
+});
+
+gulp.task('brabet.club', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "brabet.club",
+        banca: "BRABET",
+        styles: "",
+    });
+});
+
+gulp.task('fortunaplay.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "fortunaplay.bet",
+        banca: "FORTUNA PLAY",
+        styles: "",
+    });
+});
+
+gulp.task('apostoubrasil.vip', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "apostoubrasil.vip",
+        banca: "APOSTOU BRASIL",
         styles: "",
     });
 });
