@@ -29,55 +29,55 @@ export const routes: Routes = [
             },
             {
                 path: 'combate',
-                data: { sportId: sportsIds.BOXING_ID },
+                data: { sport: 'boxing' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [CombateGuard]
             },
             {
                 path: 'futebol-americano',
-                data: { sportId: sportsIds.AMERICAN_FOOTBALL_ID },
+                data: { sport: 'americanFootball' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [FutebolAmericanoGuard]
             },
             {
                 path: 'tenis',
-                data: { sportId: sportsIds.TENNIS_ID },
+                data: { sport: 'tennis' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [TenisGuard]
             },
             {
                 path: 'hoquei-gelo',
-                data: { sportId: sportsIds.ICE_HOCKEY_ID },
+                data: { sport: 'iceHockey' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [HoqueiGeloGuard]
             },
             {
                 path: 'basquete',
-                data: { sportId: sportsIds.BASKETBALL_ID },
+                data: { sport: 'basketball' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [BasqueteGuard]
             },
             {
                 path: 'futsal',
-                data: { sportId: sportsIds.FUTSAL_ID },
+                data: { sport: 'futsal' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [FutsalGuard]
             },
             {
                 path: 'volei',
-                data: { sportId: sportsIds.VOLLEYBALL_ID },
+                data: { sport: 'volleyball' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [VoleiGuard]
             },
             {
                 path: 'tenis-mesa',
-                data: { sportId: sportsIds.TABLE_TENNIS_ID },
+                data: { sport: 'tableTennis' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [TenisMesaGuard]
             },
             {
                 path: 'esports',
-                data: { sportId: sportsIds.E_SPORTS_ID },
+                data: { sport: 'eSports' },
                 loadChildren: () => import('./generico/generico.module').then(m => m.GenericoModule),
                 canActivate: [EsportsGuard]
             }
