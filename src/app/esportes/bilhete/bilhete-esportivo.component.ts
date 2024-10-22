@@ -71,7 +71,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showFrame = true;
     headerHeight = 92;
     footballId = FOOTBALL_ID;
-    language
 
     constructor(
         public sanitizer: DomSanitizer,
