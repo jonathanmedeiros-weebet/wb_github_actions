@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService } from './services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
     modalPush;
     xtremepushHabilitado = false;
     hasPoliticaPrivacidade = false;
+    showCookieMessage = false;
 
     constructor(
         private auth: AuthService,
@@ -160,7 +161,7 @@ export class AppComponent implements OnInit {
             this.auth.setAppMobile();
             const appVersion = params.get('app_version') ? parseInt(params.get('app_version'), 10) : null;
             localStorage.setItem('app_version', String(appVersion));
-            
+
             if (appVersion < 2) {
                 this.modalService.open(
                     this.wrongVersionModal,
@@ -271,6 +272,10 @@ export class AppComponent implements OnInit {
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+
+        this.router.events.subscribe(() => {
+            this.showCookieMessage = this.router.url.includes('/welcome');
+        });
     }
 
     downloadApp() {
