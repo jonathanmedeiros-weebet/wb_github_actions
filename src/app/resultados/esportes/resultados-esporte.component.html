@@ -14,15 +14,15 @@
                                 <div class="col-xs-6 col-lg-3">
                                     <label>{{'geral.esporte' | translate}} </label>
                                     <select class="form-control" formControlName="sport_id">
-                                        <option [value]="sportsIds.FOOTBALL_ID">{{'submenu.futebol' | translate}} </option>
-                                        <option *ngIf="basqueteHabilitado" [value]="sportsIds.BASKETBALL_ID">{{'submenu.basquete' | translate}}</option>
-                                        <option *ngIf="tenisHabilitado" [value]="sportsIds.TENNIS_ID">{{'submenu.tenis' | translate}}</option>
-                                        <option *ngIf="combateHabilitado" [value]="sportsIds.BOXING_ID">{{'submenu.combate' | translate}}</option>
-                                        <option *ngIf="voleiHabilitado" [value]="sportsIds.VOLLEYBALL_ID">{{'submenu.volei' | translate}}</option>
-                                        <option *ngIf="futebolAmericanoHabilitado" [value]="sportsIds.AMERICAN_FOOTBALL_ID">{{'submenu.futebolAmericano' | translate}}</option>
-                                        <option *ngIf="futsalHabilitado" [value]="sportsIds.FUTSAL_ID">{{'submenu.futsal' | translate}}</option>
-                                        <option *ngIf="hoqueiGeloHabilitado" [value]="sportsIds.ICE_HOCKEY_ID">{{'submenu.hoquei' | translate}}</option>
-                                        <option *ngIf="esportsHabilitado" [value]="sportsIds.E_SPORTS_ID">{{'submenu.esports' | translate}}</option>
+                                        <option [value]="footballId">{{'submenu.futebol' | translate}} </option>
+                                        <option *ngIf="basqueteHabilitado" [value]="basketballId">{{'submenu.basquete' | translate}}</option>
+                                        <option *ngIf="tenisHabilitado" [value]="tennisId">{{'submenu.tenis' | translate}}</option>
+                                        <option *ngIf="combateHabilitado" [value]="boxingId">{{'submenu.combate' | translate}}</option>
+                                        <option *ngIf="voleiHabilitado" [value]="volleyballId">{{'submenu.volei' | translate}}</option>
+                                        <option *ngIf="futebolAmericanoHabilitado" [value]="americanFootballId">{{'submenu.futebolAmericano' | translate}}</option>
+                                        <option *ngIf="futsalHabilitado" [value]="futsalId">{{'submenu.futsal' | translate}}</option>
+                                        <option *ngIf="hoqueiGeloHabilitado" [value]="iceHockeyId">{{'submenu.hoquei' | translate}}</option>
+                                        <option *ngIf="esportsHabilitado" [value]="eSportsId">{{'submenu.esports' | translate}}</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-6 col-lg-3">
@@ -50,7 +50,7 @@
                                 <span
                                     *ngIf="jogo.resultado; else semResultado">
                                     <b>{{jogo.resultado.casa}} - {{jogo.resultado.fora}}</b>
-                                    <ng-container *ngIf="sport == sportsIds.FOOTBALL_ID">
+                                    <ng-container *ngIf="sport == footballId">
                                          ({{jogo.resultado.casa_1t}} - {{jogo.resultado.fora_1t}})
                                     </ng-container>
                                 </span>

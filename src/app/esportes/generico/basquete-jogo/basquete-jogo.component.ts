@@ -19,7 +19,8 @@ import {
     HelperService,
     JogoService,
     MessageService,
-    ParametrosLocaisService
+    ParametrosLocaisService,
+    SportIdService
 } from './../../../services';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -46,6 +47,8 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
     contentSportsEl;
     unsub$ = new Subject();
 
+    teamShieldsFolder;
+
     constructor(
         private jogoService: JogoService,
         private bilheteService: BilheteEsportivoService,
@@ -56,8 +59,11 @@ export class BasqueteJogoComponent implements OnInit, OnChanges, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
         private cd: ChangeDetectorRef,
-        private activeModal: NgbActiveModal
-    ) { }
+        private activeModal: NgbActiveModal,
+        private sportIdService: SportIdService,
+    ) {
+        this.teamShieldsFolder = this.sportIdService.teamShieldsFolder(this.sportIdService.basketballId);
+    }
 
     ngOnInit() {
         if (window.innerWidth <= 1024) {

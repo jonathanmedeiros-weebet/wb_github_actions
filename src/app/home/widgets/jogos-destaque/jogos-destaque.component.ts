@@ -2,9 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, OnChanges, 
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService, ParametrosLocaisService } from 'src/app/services';
-
-import { FOOTBALL_ID } from '../../../shared/constants/sports-ids';
+import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService, ParametrosLocaisService, SportIdService } from 'src/app/services';
 
 @Component({
     selector: 'app-jogos-destaque',
@@ -27,6 +25,8 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     widthCard = 300;
     showLoadingIndicator = true;
 
+    teamShieldsFolder;
+
     customOptions: OwlOptions = {
         loop: false,
         autoplay: true,
@@ -46,7 +46,10 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         private bilheteService: BilheteEsportivoService,
         private paramsService: ParametrosLocaisService,
         private campeonatoService: CampeonatoService,
-    ) { }
+        private sportIdService: SportIdService,
+    ) {
+        this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
+    }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
@@ -79,8 +82,8 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         const opcoes = this.paramsService.getOpcoes();
 
         let queryParams = {
-            'sport_id': FOOTBALL_ID,
-            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID),
+            'sport_id': this.sportIdService.footballId,
+            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId),
             'odds': ['casa_90', 'empate_90', 'fora_90'],
             'data_final': opcoes.data_limite_tabela,
             'games_ids': this.jogosDestaquesIds
