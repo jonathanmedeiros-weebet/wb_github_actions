@@ -188,15 +188,11 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             () => {
                                 this.getUsuario();
                                 if (this.usuario.tipo_usuario === 'cliente') {
-                                    if(this.xtremepushHabilitado()){
-                                        xtremepush('event', 'login');
-                                    }
                                     this.loginService.triggerEvent();
                                 } else {
                                     location.reload();
                                 }
                                 this.activeModal.dismiss();
-                                this.xtremepushBackgroundRemove();
                             },
                             error => this.handleError(error)
                         );
