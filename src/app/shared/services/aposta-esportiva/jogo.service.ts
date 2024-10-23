@@ -59,9 +59,13 @@ export class JogoService {
     getJogosAoVivo() {
         const url = `${this.JogoUrl}/ao-vivo`;
 
-        const newApi = this.paramsLocaisService.getOpcoes().sportbook == 'lsports';
+        let params = {};
 
-        return this.http.get(url, this.header.getRequestOptions(true, {new_api: newApi}))
+        if (this.paramsLocaisService.getOpcoes().sportbook == 'lsports') {
+            params['new_api'] = true;
+        }
+
+        return this.http.get(url, this.header.getRequestOptions(true, params))
             .pipe(
                 map((res: any) => res.result),
                 catchError(this.errorService.handleError)
