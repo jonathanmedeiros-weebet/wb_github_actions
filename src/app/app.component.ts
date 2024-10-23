@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
     modalPush;
     xtremepushHabilitado = false;
     hasPoliticaPrivacidade = false;
-    showCookieMessage = false;
 
     constructor(
         private auth: AuthService,
@@ -272,10 +271,6 @@ export class AppComponent implements OnInit {
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
-
-        this.router.events.subscribe(() => {
-            this.showCookieMessage = this.router.url.includes('/welcome');
-        });
     }
 
     downloadApp() {
