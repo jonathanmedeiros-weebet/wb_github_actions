@@ -168,7 +168,7 @@
                                 class="flag-icon flag-icon-{{campeonato.value.regiao_sigla}} flag-icon-squared"></span>
                             <span class="campeonato-nome">
                                 <ng-template *ngIf="sportId == footballId">{{campeonato.value.regiao}}: </ng-template>
-                                {{campeonato.value.regiao | uppercase}}: {{campeonato.value.nome}}
+                                <span *ngIf="campeonato.regiao && (sportbook == 'lsports' || sportId == basketballId)">{{campeonato.regiao | uppercase}}: </span>{{campeonato.value.nome}}
                             </span>
                         </span>
 

@@ -42,6 +42,8 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
     unsub$ = new Subject();
     term = '';
 
+    sportbook;
+
     customOptions: OwlOptions = {
         loop: false,
         autoplay: false,
@@ -62,7 +64,9 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
         private paramsService: ParametrosLocaisService,
         private router: Router,
         private sportIdService: SportIdService,
-    ) { }
+    ) {
+        this.sportbook = this.paramsService.getOpcoes().sportbook;
+    }
 
     ngOnInit() {
         this.liveService.connect();

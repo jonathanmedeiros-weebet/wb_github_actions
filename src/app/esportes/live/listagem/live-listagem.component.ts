@@ -49,6 +49,8 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     headerHeight = 92;
 
+    sportbook;
+
     footballId;
     basketballId;
 
@@ -67,6 +69,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         private route: Router,
         private sportIdService: SportIdService,
     ) {
+        this.sportbook = this.paramsService.getOpcoes().sportbook;
         this.esportesAbertos = [this.sportIdService.footballId, this.sportIdService.basketballId];
         this.footballId = this.sportIdService.footballId;
         this.basketballId = this.sportIdService.basketballId;
