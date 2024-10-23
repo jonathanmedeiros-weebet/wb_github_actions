@@ -59,15 +59,15 @@ export class ApostaEsportivaService {
         return this.http.post(this.ApostaEsportivaUrl, JSON.stringify(aposta), this.header.getRequestOptions(true))
             .pipe(
                 map((res: any) => {
-                    const dataLayer = (window as any).dataLayer || [];
-                    dataLayer.push({
-                        player : res.results.passador.nome+' '+res.results.passador.sobrenome,
-                        codeBet : res.results.codigo,
-                        value : res.results.valor,
-                        type : res.results.tipo
-                    });
-
-                    this.ga4Service.triggerGa4Event(EventGa4Types.PURCHASE, dataLayer);
+                    this.ga4Service.triggerGa4Event(
+                        EventGa4Types.PURCHASE,
+                        {
+                            player: res.results.passador.nome+' '+res.results.passador.sobrenome,
+                            codeBet: res.results.codigo,
+                            value: res.results.valor,
+                            type: res.results.tipo
+                        }
+                    );
 
                     if (res.results.is_bonus) {
                         this.ga4Service.triggerGa4Event(EventGa4Types.PURCHASE_BET_PLAYER_BONUS);

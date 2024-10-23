@@ -26,7 +26,7 @@ export enum EventGa4Types {
 
 export class Ga4Service {
 
-    triggerGa4Event(type: EventGa4Types, data: any = null){
+    triggerGa4Event(type: EventGa4Types, data: any = {}){
         const dataLayer = (window as any).dataLayer || [];
 
         if (dataLayer) {

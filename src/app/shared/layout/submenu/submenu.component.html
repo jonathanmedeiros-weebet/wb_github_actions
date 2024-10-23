@@ -7,7 +7,7 @@
                 <i class="fa fa-angle-left fa-left"></i>
             </div>
             <div class="subcategory" *ngFor="let item of submenuItems; let i = index">
-                <a (click)=eventClickGa4() routerLink="{{item.link}}" routerLinkActive="active" id="{{item.id}}" *ngIf="!item.svgIcon" [queryParams]="item.queryParams">
+                <a (click)="eventClickGa4()" routerLink="{{item.link}}" routerLinkActive="active" id="{{item.id}}" *ngIf="!item.svgIcon" [queryParams]="item.queryParams">
                     <i class="{{item.icon_class}}"></i>
                     <span>{{item.name}}</span>
                 </a>

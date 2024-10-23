@@ -24,7 +24,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { BASKETBALL_ID, FOOTBALL_ID } from '../../shared/constants/sports-ids';
-import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
 import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({

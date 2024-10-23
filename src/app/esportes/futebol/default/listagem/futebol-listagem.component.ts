@@ -498,14 +498,14 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             this.bilheteService.atualizarItens(this.itens);
         }
 
-        const dataLayerGa4 = (window as any).dataLayer || [];
-        dataLayerGa4.push({
-            game: item.jogo_nome,
-            team_bet: cotacao.chave,
-            value: cotacao.valorFinal
-        });
-
-        this.ga4Service.triggerGa4Event(EventGa4Types.ADD_TO_CART, dataLayerGa4);
+        this.ga4Service.triggerGa4Event(
+            EventGa4Types.ADD_TO_CART,
+            {
+                game: item.jogo_nome,
+                team_bet: cotacao.chave,
+                value: cotacao.valorFinal
+            }
+        );
     }
 
     // Coloca as cotações faltando nos jogos
@@ -750,12 +750,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     eventoSearch(e){
         if(e.target.value){
-            const dataLayer = (window as any).dataLayer || [];
-            dataLayer.push({
-                search_term: e.target.value,
-            });
-
-            this.ga4Service.triggerGa4Event(EventGa4Types.SEARCH, dataLayer);
+            this.ga4Service.triggerGa4Event(
+                EventGa4Types.SEARCH,
+                {
+                    search_term: e.target.value,
+                }
+            );
         }
     }
 }

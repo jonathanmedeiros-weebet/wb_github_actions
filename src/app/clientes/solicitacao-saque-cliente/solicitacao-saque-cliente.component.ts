@@ -253,12 +253,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.respostaSolicitacao = res;
                     this.submitting = false;
 
-                    const dataLayer = (window as any).dataLayer || [];
-                    dataLayer.push({
-                        username: this.cliente.nome +' '+ this.cliente.sobrenome
-                    });
-
-                    this.ga4Service.triggerGa4Event(EventGa4Types.GENERATE_SAQUE, dataLayer);
+                    this.ga4Service.triggerGa4Event(
+                        EventGa4Types.GENERATE_SAQUE,
+                        {
+                            username: this.cliente.nome +' '+ this.cliente.sobrenome
+                        }
+                    );
                 },
                 error => {
                     this.handleError(error);

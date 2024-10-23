@@ -70,9 +70,12 @@ export class ClienteService {
 
                     this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
 
-                    const dataLayer = (window as any).dataLayer || [];
-                    dataLayer.push({method : dataUser.user.registrationMethod});
-                    this.ga4Service.triggerGa4Event(EventGa4Types.SIGN_UP, dataLayer);
+                    this.ga4Service.triggerGa4Event(
+                        EventGa4Types.SIGN_UP,
+                        {
+                            method : dataUser.user.registrationMethod
+                        }
+                    );
 
                     return response.results;
                 }),
