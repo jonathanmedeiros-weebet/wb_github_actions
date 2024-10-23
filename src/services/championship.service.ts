@@ -78,7 +78,7 @@ export const getChampionshipRegionBySportId = async (sportId: string, dateSelect
 
     const params = {
         sport_id: sportId,
-        campeonatos_bloqueados: Boolean(blockedChampionships[sportId]) ? blockedChampionships[sportId].join(',') : '',
+        campeonatos_bloqueados: Boolean(blockedChampionships[`sport_${sportId}`]) ? blockedChampionships[`sport_${sportId}`].join(',') : '',
         data_final: newDeadlineTable
     }
     const url = `${centerUrl}/campeonatos/regioes`;
