@@ -2751,3 +2751,22 @@ gulp.task('apostoubrasil.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('clazebet.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "clazebet.net",
+        banca: "CLAZEBET",
+        styles: "",
+    });
+});
+
+gulp.task('cruze.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "cruze.bet",
+        banca: "CRUZE.BET",
+        styles: "",
+        dominioTemp: "cruzebet.wee.bet"
+    });
+});
