@@ -12,7 +12,7 @@
         </div>
 
         <div class="tabs hide-mobile">
-            <ng-container *ngFor="let tab of getTabs()">
+            <ng-container *ngFor="let tab of tabs">
                 <a [ngClass]="{'active': tabSelected === tab.id}" (click)="changeTab(tab.id)">
                     {{ tab.label | translate }}
                 </a>
