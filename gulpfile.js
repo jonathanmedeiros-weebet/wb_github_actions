@@ -2778,3 +2778,12 @@ gulp.task('bocamafra.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('voidr.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "voidr.wee.bet",
+        banca: "Voidr Sandbox",
+        styles: ""
+    });
+});

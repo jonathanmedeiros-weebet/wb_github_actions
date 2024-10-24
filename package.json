@@ -292,7 +292,8 @@
         "apostoubrasil.vip": "gulp apostoubrasil.vip",
         "clazebet.net": "gulp clazebet.net",
         "cruze.bet": "gulp cruze.bet",
-        "bocamafra.bet": "gulp bocamafra.bet"
+        "bocamafra.bet": "gulp bocamafra.bet",
+        "voidr.wee.bet": "gulp voidr.wee.bet"
     },
     "private": true,
     "dependencies": {
