@@ -291,7 +291,8 @@
         "fortunaplay.bet": "gulp fortunaplay.bet",
         "apostoubrasil.vip": "gulp apostoubrasil.vip",
         "clazebet.net": "gulp clazebet.net",
-        "cruze.bet": "gulp cruze.bet"
+        "cruze.bet": "gulp cruze.bet",
+        "bocamafra.bet": "gulp bocamafra.bet"
     },
     "private": true,
     "dependencies": {

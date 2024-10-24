@@ -2769,3 +2769,12 @@ gulp.task('cruze.bet', function (done) {
         dominioTemp: "cruzebet.wee.bet"
     });
 });
+
+gulp.task('bocamafra.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bocamafra.bet",
+        banca: "BOCAMAFRA.BET",
+        styles: ""
+    });
+});
