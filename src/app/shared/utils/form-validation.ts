@@ -165,7 +165,7 @@ export class FormValidations {
                 regex = /^[a-zA-ZÀ-ÿ ]*$/;
                 break;
             case 'email':
-                regex = /^[a-zA-ZÀ-ÿ0-9_.@]$/;
+                regex = /^[a-zA-ZÀ-ÿ0-9_.@-]$/;
                 break;
             case 'password':
                 regex = /^\S*$/;
