@@ -2600,7 +2600,7 @@ gulp.task('megapix.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
         host: "megapix.bet",
-        banca: "MEGAPIX.BET",
+        banca: "Apostas Esportivas | Cassino | Bônus de 100% | MEGAPIX.bet",
         styles: "",
     });
 });
