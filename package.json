@@ -293,7 +293,8 @@
         "clazebet.net": "gulp clazebet.net",
         "cruze.bet": "gulp cruze.bet",
         "bocamafra.bet": "gulp bocamafra.bet",
-        "voidr.wee.bet": "gulp voidr.wee.bet"
+        "voidr.wee.bet": "gulp voidr.wee.bet",
+        "lidersports.vip": "gulp lidersports.vip"
     },
     "private": true,
     "dependencies": {

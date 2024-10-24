@@ -2787,3 +2787,12 @@ gulp.task('voidr.wee.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('lidersports.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "lidersports.vip",
+        banca: "LÍDER SPORTS",
+        styles: ""
+    });
+});
