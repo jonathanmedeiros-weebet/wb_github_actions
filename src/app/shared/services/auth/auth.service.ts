@@ -165,6 +165,7 @@ export class AuthService {
                 catchError(this.errorService.handleError)
             );
     }
+
     performLogout(logoutType: string) {
         this.http.post(`${this.authLokiUrl}/logout`, { logout_type: logoutType }, this.header.getRequestOptions(true))
             .toPromise().then((response) => {
