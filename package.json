@@ -294,7 +294,8 @@
         "cruze.bet": "gulp cruze.bet",
         "bocamafra.bet": "gulp bocamafra.bet",
         "voidr.wee.bet": "gulp voidr.wee.bet",
-        "lidersports.vip": "gulp lidersports.vip"
+        "lidersports.vip": "gulp lidersports.vip",
+        "newbet.one": "gulp newbet.one"
     },
     "private": true,
     "dependencies": {
