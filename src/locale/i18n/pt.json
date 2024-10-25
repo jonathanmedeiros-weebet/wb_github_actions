@@ -253,7 +253,8 @@
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
         "loginEmail": "E-mail",
-        "loginPhone": "Telefone"
+        "loginPhone": "Telefone",
+        "or": "OU"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -678,5 +679,22 @@
         "pending": "Pendente",
         "redeemed": "Resgatado",
         "redeem": "Resgatar"
+    },
+    "register": { 
+        "signupWith": "Inscrever-se com Google",
+        "registerGoogleAccount": "Cadastre-se com sua conta do google",
+        "fillToRegister": "Preencha os campos para realizar o seu cadastro",
+        "protectedByReCaptchaPart1": "Este site é protegido por reCAPTCHA e a",
+        "protectedByReCaptchaPart2": "Política de Privacidade",
+        "protectedByReCaptchaPart3": "do Google e os",
+        "protectedByReCaptchaPart4": "Termos de Serviço",
+        "protectedByReCaptchaPart5": "se aplicam."
+    },
+    "registerCancel": {
+        "titleCancelRegister": "Tem certeza que deseja cancelar seu registro?",
+        "dontMissOut": "Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até ",
+        "youreAlmostThere": "Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.",
+        "continue": "Continuar",
+        "cancel": "Sim, quero cancelar"
     }
 }
