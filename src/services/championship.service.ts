@@ -3,6 +3,7 @@ import { axiosInstance } from "./axiosInstance"
 import { modalityOdds } from "@/constants";
 import { QuotaStatus, type Modalities } from "@/enums";
 import { convertInMomentInstance, now } from "@/utilities";
+import type { AxiosResponse } from "axios";
 
 interface CalculateQuotaParams {
     key: string;
@@ -24,62 +25,68 @@ export const getChampionship = async (championshipId: string = '', startDate: st
 }
 
 export const getChampionshipBySportId = async (
-    sportId: string = '',
-    regionName: string = '',
-    startDate: string = '',
-    isPopularLeagues: boolean = false,
+    sportId = '',
+    regionName = '',
+    startDate = '',
+    isPopularLeagues = false,
 ) => {
+    const configClientStore = useConfigClient(); 
     const {
-        blockedChampionships,
-        centerUrl,
-        blockedGames, 
-        popularLeagues
-    } = useConfigClient();
+      blockedChampionships,
+      centerUrl,
+      blockedGames, 
+      popularLeagues,
+    } = configClientStore;
 
     const popularLeagueIds = isPopularLeagues
-        ? popularLeagues
-            .filter((game: any) => game.sport_id == sportId)
-            .map((game: any) => game.api_id)
-            .join(',')
-        : '';
-
+      ? popularLeagues
+          .filter((game: any) => game.sport_id == sportId)
+          .map((game: any) => game.api_id)
+          .join(',')
+      : '';
+  
     const params = {
-        sport_id: sportId,
-        campeonatos_bloqueados: Boolean(blockedChampionships[`sport_${sportId}`]) ? blockedChampionships[`sport_${sportId}`].join(',') : '',
-        data: startDate,
-        data_final: startDate,
-        odds: getOddsBySportId(sportId).join(','),
-        regiao_nome: regionName ?? '',
-        ligas_populares: popularLeagueIds
-    }
-
+      sport_id: sportId,
+      campeonatos_bloqueados: Boolean(blockedChampionships[`sport_${sportId}`]) 
+        ? blockedChampionships[`sport_${sportId}`].join(',') 
+        : '',
+      data: startDate,
+      data_final: startDate,
+      odds: getOddsBySportId(sportId).join(','),
+      regiao_nome: regionName ?? '',
+      ligas_populares: popularLeagueIds
+    };
+  
     const url = `${centerUrl}/campeonatos`;
     const response: any = await axiosInstance().get(url, { params });
-
+  
     const result = response.result;
+    const displayedIds: string[] = []; 
 
     const filteredResult = result
-        .map((championship: any) => {
-            const filteredGames = championship.jogos.filter((game: any) => 
-                !blockedGames.includes(game.event_id)
-            );
-
-            if (filteredGames.length > 0) {
-                return {
-                    ...championship,
-                    jogos: filteredGames 
-                };
-            }
-            
-            return null;
-        })
-
-        .filter((championship: any) =>
-            championship !== null && 
-            !blockedChampionships[`sport_${sportId}`]?.includes(championship.api_id)
+      .filter((championship: any) => {
+        const filteredGames = championship.jogos.filter((game: any) =>
+          !blockedGames.includes(game.event_id)
         );
-    return filteredResult; 
-}
+
+        if (filteredGames.length > 0) {
+          championship.jogos = filteredGames;
+          return true; 
+        } else {
+            displayedIds.push(championship._id);
+            return false; 
+        }
+    });
+
+    const existingBlockedIds = blockedChampionships[`sport_${sportId}`] || [];
+    const combinedBlockedIds = [...new Set([...existingBlockedIds, ...displayedIds])];
+
+    configClientStore.setBlockedChampionships(sportId, combinedBlockedIds); 
+
+    return filteredResult;
+};
+
+
 
 export const getChampionshipRegionBySportId = async (sportId: string, dateSelected: string) => {
     const { blockedChampionships, centerUrl } = useConfigClient();
@@ -89,38 +96,10 @@ export const getChampionshipRegionBySportId = async (sportId: string, dateSelect
         sport_id: sportId,
         campeonatos_bloqueados: Boolean(blockedChampionships[`sport_${sportId}`]) ? blockedChampionships[`sport_${sportId}`].join(',') : '',
         data_final: newDeadlineTable,
-        data: newDeadlineTable
+        data: newDeadlineTable,
     };
-
-    const resultados: { _id: any; jogos: any[] }[] = await getChampionshipBySportId(sportId, '', newDeadlineTable);
     const url = `${centerUrl}/campeonatos/regioes`;
-
-    const response: any = await axiosInstance().get(url, { params });
-
-    let param = response.result;
-
-    const filteredResults = resultados.filter((championship: any) => {
-        const isChampionshipBlocked = blockedChampionships[`sport_${sportId}`]?.includes(championship._id);
-        
-        const filteredGames = championship.jogos.filter((game: any) => {
-            return !blockedChampionships[`sport_${sportId}`]?.includes(game.event_id);
-        });
-
-        championship.jogos = filteredGames;
-        return !isChampionshipBlocked && filteredGames.length > 0;
-    });
-
-    const filteredParam = param.filter((region: any) => {
-        region.campeonatos = region.campeonatos.filter((championship: any) => {
-            return filteredResults.some((result: any) => result.jogos.some((game: any) => game.campeonato.nome === championship.nome));
-        });
-        return region.campeonatos.length > 0; 
-    });
-
-    return {
-        result: filteredParam, 
-        championships: filteredResults 
-    }; 
+    return await axiosInstance().get(url, { params });
 };
 
 export const getLiveChampionship = async (sportId: number | string) => {
