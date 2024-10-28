@@ -2796,3 +2796,12 @@ gulp.task('lidersports.vip', function (done) {
         styles: ""
     });
 });
+
+gulp.task('newbet.one', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "newbet.one",
+        banca: "NEW BET",
+        styles: ""
+    });
+});
