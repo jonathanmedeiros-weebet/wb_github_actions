@@ -648,19 +648,19 @@
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/rodada-gratis']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
-                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{
-                                        'rodada_gratis.rodadaGratis' | translate }}</span>
+                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
+                                    {{ 'rodada_gratis.rodadaGratis' | translate }}</span>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/indique-ganhe']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente && indiqueGanheHabilitado">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
-                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{
-                                        'indique_ganhe.indiqueGanhe' | translate }}</span>
+                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
+                                    {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/configuracoes']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente">
                                     <i class="fa fa-solid fa-cogs mb-2"></i>
-                                    {{ 'geral.jogoResponsavel' | translate }}
+                                    <div [innerHTML]="'geral.jogoResponsavel' | translate | breakLineWithSpacing"></div>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/alterar-senha']"
                                     routerLinkActive="router-link-active" *ngIf="!isCliente">
