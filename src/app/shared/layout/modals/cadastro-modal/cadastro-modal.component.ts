@@ -136,7 +136,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.createForm();
         this.form.valueChanges.subscribe(form => {
-            if ((form.cpf != null && form.cpf.length == 14) && (form.nascimento != null && form.nascimento.length > 7)) {
+            if ((form.cpf != null && form.cpf.length == 14)) {
                 this.showLoading = false;
                 this.cd.detectChanges();
             } else {
