@@ -403,8 +403,7 @@ export default {
       this.handleCloseCalendarModal();
       
       await this.prepareChampionshipListByLeague();
-      await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
-      
+      this.prepareChampionshipPerRegionList(this.modality.id)
       this.loading = false;
     },
 

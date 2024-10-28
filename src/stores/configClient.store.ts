@@ -58,7 +58,7 @@ export const useConfigClient = defineStore('configClient', {
     config: (state) => state,
     logo: (state) => `https://weebet.s3.amazonaws.com/${state.slug}/logos/logo_banca.png`,
     paramUrl: (state) => `https://weebet.s3.amazonaws.com/${state.slug}/param/parametros.json?${+ new Date()}`,
-
+    clientCenterUrl: (state) => state.apiUrl.replace('/api', ''),
     options: (state) => state.params?.opcoes ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
     mainOdds: (state) => state.params?.odds_principais ?? [],

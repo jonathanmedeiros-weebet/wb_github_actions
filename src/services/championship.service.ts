@@ -27,11 +27,12 @@ export const getChampionshipBySportId = async (
     sportId: string = '',
     regionName: string = '',
     startDate: string = '',
-    isPopularLeagues: boolean = false
+    isPopularLeagues: boolean = false,
 ) => {
     const {
         blockedChampionships,
         centerUrl,
+        blockedGames, 
         popularLeagues
     } = useConfigClient();
 
@@ -51,10 +52,76 @@ export const getChampionshipBySportId = async (
         regiao_nome: regionName ?? '',
         ligas_populares: popularLeagueIds
     }
+
     const url = `${centerUrl}/campeonatos`;
-    const response: any = await axiosInstance().get(url , {params})
-    return response.result;
+    const response: any = await axiosInstance().get(url, { params });
+
+    const result = response.result;
+
+    const filteredResult = result
+        .map((championship: any) => {
+            const filteredGames = championship.jogos.filter((game: any) => 
+                !blockedGames.includes(game.event_id)
+            );
+
+            if (filteredGames.length > 0) {
+                return {
+                    ...championship,
+                    jogos: filteredGames 
+                };
+            }
+            
+            return null;
+        })
+
+        .filter((championship: any) =>
+            championship !== null && 
+            !blockedChampionships[`sport_${sportId}`]?.includes(championship.api_id)
+        );
+    return filteredResult; 
 }
+
+export const getChampionshipRegionBySportId = async (sportId: string, dateSelected: string) => {
+    const { blockedChampionships, centerUrl } = useConfigClient();
+    const newDeadlineTable = convertInMomentInstance(dateSelected).format('YYYY-MM-DD');
+
+    const params = {
+        sport_id: sportId,
+        campeonatos_bloqueados: Boolean(blockedChampionships[`sport_${sportId}`]) ? blockedChampionships[`sport_${sportId}`].join(',') : '',
+        data_final: newDeadlineTable,
+        data: newDeadlineTable
+    };
+
+    const resultados: { _id: any; jogos: any[] }[] = await getChampionshipBySportId(sportId, '', newDeadlineTable);
+    const url = `${centerUrl}/campeonatos/regioes`;
+
+    const response: any = await axiosInstance().get(url, { params });
+
+    let param = response.result;
+
+    const filteredResults = resultados.filter((championship: any) => {
+        const isChampionshipBlocked = blockedChampionships[`sport_${sportId}`]?.includes(championship._id);
+        
+        const filteredGames = championship.jogos.filter((game: any) => {
+            return !blockedChampionships[`sport_${sportId}`]?.includes(game.event_id);
+        });
+
+        championship.jogos = filteredGames;
+        return !isChampionshipBlocked && filteredGames.length > 0;
+    });
+
+    const filteredParam = param.filter((region: any) => {
+        region.campeonatos = region.campeonatos.filter((championship: any) => {
+            return filteredResults.some((result: any) => result.jogos.some((game: any) => game.campeonato.nome === championship.nome));
+        });
+        return region.campeonatos.length > 0; 
+    });
+
+    return {
+        result: filteredParam, 
+        championships: filteredResults 
+    }; 
+};
 
 export const getLiveChampionship = async (sportId: number | string) => {
     try {
@@ -72,18 +139,6 @@ const getOddsBySportId = (sportId: string | number) =>{
     return sportOdds[sportId as Modalities] ?? []
 }
 
-export const getChampionshipRegionBySportId = async (sportId: string, dateSelected: string) => {
-    const { blockedChampionships, centerUrl } = useConfigClient();
-    const newDeadlineTable = convertInMomentInstance(dateSelected).format('YYYY-MM-DD');
-
-    const params = {
-        sport_id: sportId,
-        campeonatos_bloqueados: Boolean(blockedChampionships[`sport_${sportId}`]) ? blockedChampionships[`sport_${sportId}`].join(',') : '',
-        data_final: newDeadlineTable
-    }
-    const url = `${centerUrl}/campeonatos/regioes`;
-    return await axiosInstance().get(url , {params})
-}
 
 export const getGame = async (gameId: string) => {
     const { centerUrl } = useConfigClient();
