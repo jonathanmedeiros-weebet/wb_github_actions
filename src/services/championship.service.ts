@@ -26,7 +26,7 @@ export const getChampionshipBySportId = async (
     sportId: string = '',
     regionName: string = '',
     startDate: string = '',
-    isPopularLeagues: boolean = false,
+    isPopularLeagues: boolean = false
 ) => {
     const configClientStore = useConfigClient(); 
     const {
