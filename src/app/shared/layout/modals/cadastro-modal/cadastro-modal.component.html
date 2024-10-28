@@ -162,7 +162,6 @@
                     </div>
                     <button (click)="faceMatch()" id="legitimuz-action-verify" class="btn btn-custom btn-legitimuz" *ngIf="!disapprovedIdentity" [disabled]="faceMatchRequested || this.showLoading">
                         <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
-                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                     </button>

@@ -182,7 +182,6 @@
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                         </div>
                         <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
@@ -196,7 +195,6 @@
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                         </div>
                         <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}

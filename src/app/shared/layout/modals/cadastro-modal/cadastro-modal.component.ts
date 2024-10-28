@@ -72,7 +72,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     legitimuzToken = "";
     currentLanguage = 'pt';
     disapprovedIdentity = false;
-    token = '';
     dataUserCPF ='';
     showLoading = true;
     faceMatchRequested = false;
@@ -110,7 +109,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     ngOnInit() {
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken) && Boolean(this.paramsService.getOpcoes().faceMatchRegister);
+        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchRegister);
 
         if (!this.faceMatchEnabled) {
             this.faceMatchRegisterValidated = true;
@@ -248,14 +247,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         this.faceMatchRequested = true;
                         this.showLoading = false
                         this.legitimuzService.closeModal();
-                        this.messageService.success('Identidade verificada!');
+                        this.messageService.success(this.translate.instant('face_match.verified_identity'));
                     }
                 });
         }
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.form.get('cpf')?.valueChanges.subscribe(cpf => {
                 this.dataUserCPF = cpf;
-                this.token = cpf;
                 this.legitimuzService.init();
                 this.legitimuzService.mount();
             })

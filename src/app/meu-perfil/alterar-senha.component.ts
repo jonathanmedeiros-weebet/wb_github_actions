@@ -39,7 +39,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     legitimuzToken = "";
     verifiedIdentity = null;
     disapprovedIdentity = false;
-    token = '';
     showLoading = true;
 
     validPassword: boolean = false;
@@ -93,14 +92,9 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
         this.currentLanguage = this.translate.currentLang;
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken);
-        this.faceMatchChangePassword = Boolean(this.paramsLocais.getOpcoes().faceMatchChangePassword && Boolean(this.paramsLocais.getOpcoes().faceMatch));
-        if (!this.faceMatchChangePassword) {
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+        if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
-        }
-
-        if (this.faceMatchEnabled && !this.faceMatchChangePasswordValidated) {
-            this.token = this.auth.getToken();
         }
 
         this.translate.onLangChange.subscribe(change => {
@@ -131,15 +125,14 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 .subscribe(curCustomerIsVerified => {
                     this.verifiedIdentity = curCustomerIsVerified;
                     if (this.verifiedIdentity) {
-                        this.messageService.success('Identidade verificada!');
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
                             next: (res) => {
                                 this.LegitimuzFacialService.closeModal();
-                                this.messageService.success('Identidade verificada!');
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                 this.faceMatchChangePasswordValidated = true;
                                 this.cd.detectChanges();
                             }, error: (error) => {
-                                this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                                 this.faceMatchChangePasswordValidated = false;
                             }
                         })
@@ -152,11 +145,11 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
                             next: (res) => {
                                 this.LegitimuzFacialService.closeModal();
-                                this.messageService.success('Identidade verificada!');
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                 this.faceMatchChangePasswordValidated = true;
                                 this.cd.detectChanges();
                             }, error: (error) => {
-                                this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                                 this.faceMatchChangePasswordValidated = false;
                             }
                         })
@@ -167,13 +160,11 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
-                .pipe()
                 .subscribe(() => {
                     this.legitimuzService.init();
                     this.legitimuzService.mount();
                 });
             this.legitimuzLiveness.changes
-                .pipe()
                 .subscribe(() => {
                     this.LegitimuzFacialService.init();
                     this.LegitimuzFacialService.mount();

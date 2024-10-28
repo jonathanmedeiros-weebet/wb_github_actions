@@ -690,5 +690,9 @@
         "pending": "Pendente",
         "redeemed": "Resgatado",
         "redeem": "Resgatar"
+    },
+    "face_match": {
+        "verified_identity": "Identidade verificada!",
+        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte."
     }
 }

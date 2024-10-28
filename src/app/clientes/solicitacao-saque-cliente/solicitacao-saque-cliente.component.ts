@@ -101,11 +101,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.currentLanguage = this.translate.currentLang;
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken) && Boolean(this.paramsLocais.getOpcoes().faceMatchFirstWithdraw);
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw);
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
-        }
-        if (this.faceMatchEnabled) {
+        } else {
             this.token = this.auth.getToken();
         }
 
@@ -167,7 +166,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                                 if (res.document == this.cliente.cpf && (res.first_withdraw != null)) {
                                     this.faceMatchFirstWithdrawValidated = true;
                                 }
-                            }, error: (error) => {this.messageService.error(error)}
+                            }, error: (error) => {}
                         })
                     }
 
@@ -197,12 +196,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
                         this.legitimuzService.closeModal();
-                        this.messageService.success('Identidade verificada!');
+                        this.messageService.success(this.translate.instant('face_match.verified_identity'));
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
                         this.faceMatchFirstWithdrawValidated = true;
                     } else {
                         this.legitimuzService.closeModal();
-                        this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                        this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                         this.faceMatchFirstWithdrawValidated = false;
                     }
                 });
@@ -213,10 +212,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
                             next: (res) => {
                                 this.LegitimuzFacialService.closeModal();
-                                this.messageService.success('Identidade verificada!');
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                 this.faceMatchFirstWithdrawValidated = true;
                             }, error: (error) => {
-                                this.messageService.error('Identidade não verificada, entre em contato como o suporte');
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                                 this.faceMatchFirstWithdrawValidated = false;
                             }
                         })
@@ -228,13 +227,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
-                .pipe()
                 .subscribe(() => {
                         this.legitimuzService.init();
                         this.legitimuzService.mount();
                 });
             this.legitimuzLiveness.changes
-                .pipe()
                 .subscribe(() => {
                         this.LegitimuzFacialService.init();
                         this.LegitimuzFacialService.mount();

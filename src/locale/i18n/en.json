@@ -688,5 +688,9 @@
         "pending": "Pending",
         "redeemed": "Redeemed",
         "redeem": "Redeem"
+    },
+    "face_match": {
+        "verified_identity": "Verified identity!",
+        "Identity_not_verified": "Identity not verified, please contact support."
     }
 }
