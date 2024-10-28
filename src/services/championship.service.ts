@@ -3,8 +3,6 @@ import { axiosInstance } from "./axiosInstance"
 import { modalityOdds } from "@/constants";
 import { QuotaStatus, type Modalities } from "@/enums";
 import { convertInMomentInstance, now } from "@/utilities";
-import type { AxiosResponse } from "axios";
-
 interface CalculateQuotaParams {
     key: string;
     value: number;
@@ -25,10 +23,10 @@ export const getChampionship = async (championshipId: string = '', startDate: st
 }
 
 export const getChampionshipBySportId = async (
-    sportId = '',
-    regionName = '',
-    startDate = '',
-    isPopularLeagues = false,
+    sportId: string = '',
+    regionName: string = '',
+    startDate: string = '',
+    isPopularLeagues: boolean = false,
 ) => {
     const configClientStore = useConfigClient(); 
     const {
@@ -85,8 +83,6 @@ export const getChampionshipBySportId = async (
 
     return filteredResult;
 };
-
-
 
 export const getChampionshipRegionBySportId = async (sportId: string, dateSelected: string) => {
     const { blockedChampionships, centerUrl } = useConfigClient();

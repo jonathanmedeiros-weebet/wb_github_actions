@@ -119,6 +119,6 @@ export const useConfigClient = defineStore('configClient', {
         this.params.campeonatos_bloqueados = {};
       }
       this.params.campeonatos_bloqueados[`sport_${sportId}`] = ids;
-    },
+    }
   },
 })
