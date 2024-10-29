@@ -2814,3 +2814,21 @@ gulp.task('sts13.vip', function (done) {
         styles: ""
     });
 });
+
+gulp.task('maxbetbrasil.net', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "maxbetbrasil.net",
+        banca: "MAX BET BRASIL",
+        styles: ""
+    });
+});
+
+gulp.task('apostefacil.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "apostefacil.bet",
+        banca: "APOSTE FÁCIL",
+        styles: ""
+    });
+});

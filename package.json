@@ -296,7 +296,9 @@
         "voidr.wee.bet": "gulp voidr.wee.bet",
         "lidersports.vip": "gulp lidersports.vip",
         "newbet.one": "gulp newbet.one",
-        "sts13.vip": "gulp sts13.vip"
+        "sts13.vip": "gulp sts13.vip",
+        "maxbetbrasil.net": "gulp maxbetbrasil.net",
+        "apostefacil.bet": "gulp apostefacil.bet"
     },
     "private": true,
     "dependencies": {
