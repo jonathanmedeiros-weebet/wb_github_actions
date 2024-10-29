@@ -31,7 +31,7 @@ export class LegitimuzService {
     private faceIndexSub = new BehaviorSubject<boolean>(null);
     faceIndex;
 
-    constructor(
+    constructor (
         private clienteService: ClienteService,
         private paramsService: ParametrosLocaisService
     ) {
