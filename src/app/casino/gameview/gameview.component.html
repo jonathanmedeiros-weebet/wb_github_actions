@@ -1,3 +1,6 @@
+<app-back-page>
+</app-back-page>
+
 <div class="game-view" *ngIf="isMobile">
     <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
         <div class="game-name">
@@ -78,14 +81,14 @@
         </div>
         <div class="buttons-game-view">
             <ng-container *ngIf="!isTablet">
-                    <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
-                    <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
+                <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
+                <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
             </ng-container>
             <ng-container *ngIf="isTablet">
                 <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreenTablet()"><i class="fa fa-expand"></i></a>
                 <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreenTablet()"><i class="fa fa-compress"></i></a>
         </ng-container>
-            <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a>
+            <!-- <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a> -->
         </div>
     </div>
     <ng-container>

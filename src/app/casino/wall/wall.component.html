@@ -110,6 +110,7 @@
         <ng-template #cassinoGameList>
             <div class="bloco">
                 <div class="titulo" *ngIf="gameList && gameList.length">
+                    <app-back-page [showText]="false"></app-back-page>
                     {{gameTitle | titlecase}}
                 </div>
                 <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">

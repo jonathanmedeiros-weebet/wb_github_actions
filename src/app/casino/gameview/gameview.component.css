@@ -556,6 +556,13 @@ iframe{
     .btn-custom2 {
         margin-top: 1rem;
     }
+
+    app-back-page {
+        padding: 0 35px 0 35px;
+        display: flex;
+        margin-top: 16px;
+        align-items: center;
+    }
 }
 
 @media (min-width: 483px){
@@ -565,7 +572,7 @@ iframe{
         flex-wrap: wrap;
         width: 100%;
         height: auto;
-        padding: 30px 30px;
+        padding: 16px 30px;
     }
 
     .card-centered {
@@ -875,6 +882,13 @@ iframe{
             padding: 0;
         }
     }
+
+    app-back-page {
+        padding: 0 50px 0 50px;
+        display: flex;
+        margin-top: 16px;
+        align-items: center;
+    }
 }
 
 .modal-header{
@@ -890,3 +904,5 @@ iframe{
     align-items: center;
     padding: 0 50px 50px 50px;
 }
+
+
