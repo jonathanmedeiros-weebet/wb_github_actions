@@ -9,7 +9,7 @@
     margin-bottom: 4px;
 }
 .modal-body {
-    max-height: 400px;
+    padding: 10px;
     overflow: auto;
 }
 .modal-header {
@@ -25,11 +25,10 @@
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
+    background-color: var(--game);
+    padding: 10px;
     color: var(--foreground);
     font-size: 12px;
-    margin-bottom: 13px;
-    max-height: 91px;
-    column-count: 3;
 }
 .cupom-header p {
     font-size: 12px;
@@ -61,7 +60,16 @@
     font-size: 12px;
     font-weight: bold;
     margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
+.cupom-header > p > span {
+    float: right;
+}
+
 hr {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -73,6 +81,11 @@ hr {
     margin-bottom: 5px;
     margin-top:15px;
 }
+
+.item:has(.jogo-resultado) {
+    position: relative;
+}
+
 .item .campeonato{
     margin: 1px;
     font-size: 12px;
@@ -149,6 +162,7 @@ hr {
     opacity: 0.7;
 }
 .info-cupom {
+    position: relative;
     font-size: 12px;
     color: var(--foreground-game);
 }

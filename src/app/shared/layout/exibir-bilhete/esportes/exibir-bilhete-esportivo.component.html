@@ -1,77 +1,22 @@
 <app-bilhete-compartilhamento #bilheteCompartilhamento [aposta]="aposta"></app-bilhete-compartilhamento>
 <div class="modal-body cupom-ativo">
-    <div class="cupom-header">
-        <div>
-            <p class="codigo-aposta">
-                <b>Código da aposta:</b><span> {{aposta.codigo}}</span>
-            </p>
-        </div>
-        <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-            <p class="aposta">
-                <b>Cliente: </b><span>{{aposta.apostador}}</span>
-            </p>
-        </div>
-        <ng-template #exibicaoPadrao>
-            <p class="aposta">
-                <b>Cambista:</b> {{aposta.passador.nome}}
-            </p>
-            <p class="aposta">
-                <b>Apostador: </b><span>{{aposta.apostador}}</span>
-            </p>
-        </ng-template>
-        <p class="aposta">
-            <b>{{'geral.status' | translate}}: </b>
-            <span>{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</span>
-        </p>
-        <p class="aposta-horario">
-            <b>Horário:</b><span> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
-        </p>
-        <p class="total-jogos">
-            Quantidade de jogos:<span>{{aposta.itens.length}}</span>
-        </p>
-        <p class="aposta">
-            Cotação: <span>{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
-        </p>
-        <p class="aposta">
-            Valor apostado: <span> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
-        </p>
-        <p class="ganho">
-            Possível retorno: <span>{{aposta.possibilidade_ganho | currency}}</span>
-        </p>
-        <p class="resultado">
-            <b>Resultados: </b>
-            <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
-            <span *ngIf="!aposta.resultado">Aguardando</span>
-        </p>
-        <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
-            {{'geral.premio' | translate}}: <span>{{aposta.premio | currency}}</span>
-        </p>
-        <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-            Cambista paga: <span>{{cambistaPaga | currency}}</span>
-        </p>
-        <p class="computado" *ngIf="aposta?.data_liquidacao">
-            {{'geral.computadoEm' | translate}} <span>{{aposta.data_liquidacao | moment: 'DD/MM/YYYY HH:mm'}}</span>
-        </p>
-    </div>
     <div class="table-container">
         <table class="table">
-            <thead>
-                <tr>
-                    <th style="padding-left: 14px;">Data/Horário</th>
-                    <th>Evento/Mercado</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
             <tbody>
                 <ng-container *ngFor="let item of aposta.itens">
                     <tr class="cupom">
-                        <td class="item"><p class="info-cupom" style="padding-left: 10px;">{{item.jogo_horario | moment: 'DD/MM HH:mm'}}</p></td>
+                        <td class="item info-cupom" style="max-width: 5rem;">
+                            <div style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <p class="info-cupom" style="margin-bottom: 0;"> {{item.jogo_horario | moment: 'DD/MM'}} </p>
+                                <p class="info-cupom" style="margin-bottom: 0;"> {{item.jogo_horario | moment: 'HH:mm'}} </p>
+                            </div>
+                        </td>
                         <td class="item">
                             <div style="max-width: 97%;">
                                 <p class="campeonato info-cupom">
                                     {{item.campeonato_nome}}
                                 </p>
-                                <p class="nome info-priority-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                                     {{item.time_a_nome}}
                                     {{item.time_a_resultado}} x {{item.time_b_resultado}}
                                     {{item.time_b_nome}}
@@ -80,11 +25,11 @@
                                     <span class="info-cupom">
                                         {{item.categoria_nome}}:
                                     </span>
-                                    <span class="info-priority-cupom">
+                                    <span class="">
                                         {{item.odd_nome}}
                                         ({{item.cotacao}})
                                     </span>
-                                    <span *ngIf="item.ao_vivo" class="info-priority-cupom"> | AO VIVO</span>
+                                    <span *ngIf="item.ao_vivo" class=""> | AO VIVO</span>
                                 </p>
                             </div>
                         </td>
@@ -124,7 +69,7 @@
                                 <p class="campeonato info-cupom">
                                     {{item.campeonato_nome}}
                                 </p>
-                                <p class="nome info-priority-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                <p class="nome  {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                                     {{item.time_a_nome}}
                                     {{item.time_a_resultado}} x {{item.time_b_resultado}}
                                     {{item.time_b_nome}}
@@ -133,7 +78,7 @@
                                     <span class="info-cupom">
                                         {{item.categoria_nome}}:
                                     </span>
-                                    <span class="info-priority-cupom">
+                                    <span class="">
                                         {{item.odd_nome}}
                                         ({{item.cotacao}})
                                     </span>
@@ -162,6 +107,25 @@
             </div>
         </div>
     </ng-container>
+    <div class="cupom-header">
+        <p class="resultado">
+            Resultado:
+            <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
+            <span *ngIf="!aposta.resultado">Aguardando</span>
+        </p>
+        <p class="aposta">
+            Valor apostado: <span> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
+        </p>
+        <p class="ganho">
+            Possível retorno: <span>{{aposta.possibilidade_ganho | currency}}</span>
+        </p>
+        <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
+            {{'geral.premio' | translate}}: <span>{{aposta.premio | currency}}</span>
+        </p>
+        <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
+            Cambista paga: <span>{{cambistaPaga | currency}}</span>
+        </p>
+    </div>
 </div>
 <div class="modal-footer">
 </div>

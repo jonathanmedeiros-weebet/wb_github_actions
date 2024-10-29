@@ -34,6 +34,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     @Input() showCancel = false;
     @ViewChild('bilheteCompartilhamento', { static: false }) bilheteCompartilhamento;
     @Input() aposta;
+    @Input() isShared = false;
     appMobile;
     casaDasApostasId;
     isLoggedIn;
