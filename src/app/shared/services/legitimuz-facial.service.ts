@@ -25,8 +25,7 @@ export class LegitimuzFacialService {
       autoOpenValidation: false,
       onlyLiveness : true,
       onSuccess: (eventName) => console.log(eventName),
-      onError: (eventName) => console.log(eventName),
-      eventHandler:(eventName) => console.log(eventName),
+      eventHandler:(eventName) => console.log(eventName)
   };
 
   private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);

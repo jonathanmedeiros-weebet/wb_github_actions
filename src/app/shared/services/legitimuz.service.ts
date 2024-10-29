@@ -23,9 +23,7 @@ export class LegitimuzService {
         enableRedirect: false,
         autoOpenValidation: false,
         onlyLiveness: false,
-        onSuccess: (eventName) => console.log(eventName),
-        onError: (eventName) => console.log(eventName),
-        eventHandler: (eventName) => console.log(eventName)
+        onSuccess: (eventName) => console.log(eventName)
     };
 
     private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(null);
