@@ -5,6 +5,7 @@ import {FinanceiroService} from '../../../services/financeiro.service';
 import {MessageService} from '../../../services/utils/message.service';
 import {Promocao} from '../../../../models';
 import {JogosLiberadosBonusModalComponent} from "../jogos-liberados-bonus-modal/jogos-liberados-bonus-modal.component";
+import { upperCase } from 'lodash';
 @Component({
   selector: 'app-regras-bonus-modal',
   templateUrl: './regras-bonus-modal.component.html',
@@ -13,6 +14,7 @@ import {JogosLiberadosBonusModalComponent} from "../jogos-liberados-bonus-modal/
 export class RegrasBonusModalComponent implements OnInit {
 
     promocoes: Promocao[] = [];
+    sections = [];
 
 	constructor(
 		public activeModal: NgbActiveModal,
@@ -25,19 +27,48 @@ export class RegrasBonusModalComponent implements OnInit {
     ngOnInit(): void {
         this.getPromocoes();
     }
-
+    
     getPromocoes(queryParams?: any) {
         this.financeiroService.getPromocoes(queryParams)
             .subscribe(
                 response => {
                     this.promocoes = response;
-                    console.log(this.promocoes);
+                    this.sections = [];
+                    this.promocoes.forEach(promocao => {
+                        let title = ''
+
+                        switch(promocao.tipo){
+                            case 'primeiro_deposito_bonus': 
+                                title = `BÔNUS DE PRIMEIRO DEPÓSITO - APOSTAS ${upperCase(promocao.bonusModalidade)}`
+                                break;
+                            case 'deposito_bonus':
+                                title = `BÔNUS DE DEPÓSITO - APOSTAS ${upperCase(promocao.bonusModalidade)}`
+                                break;
+                            case 'cadastro_bonus':
+                                title = `BÔNUS DE CADASTRO - APOSTAS ${upperCase(promocao.bonusModalidade)}`
+                                break;
+                            default:
+                                title = promocao.nome
+                                break;
+                        }
+                        this.sections.push({title: title, isCollapsed: true})
+                    })
                 },
                 error => {
                     this.handleError(error);
                 }
             );
     }
+
+    toggleSection(clickedSection: any) {
+        this.sections.forEach(section => {
+            if (section !== clickedSection) {
+                section.isCollapsed = true; // Fecha outras seções
+            }
+        });
+        clickedSection.isCollapsed = !clickedSection.isCollapsed; // Alterna a seção clicada
+    }
+    
 
     handleError(error: string) {
         this.messageService.error(error);

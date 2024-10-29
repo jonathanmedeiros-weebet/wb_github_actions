@@ -10,3 +10,12 @@
     width: 150px;
     height: 42px;
 }
+
+.field {
+    padding: 25px;
+    cursor: pointer;
+    margin: 0.3em 0;
+    color: var(--foreground);
+    display: flex;
+    justify-content: space-between;
+}

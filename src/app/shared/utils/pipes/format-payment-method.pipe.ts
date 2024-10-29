@@ -29,6 +29,8 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return 'Okto';
             case 'pixs':
                 return 'Pixs';
+            case 'bigpagv3':
+                return "BigPagV3";
 		}
 
         return "";
