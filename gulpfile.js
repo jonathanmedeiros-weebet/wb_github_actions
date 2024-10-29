@@ -2805,3 +2805,12 @@ gulp.task('newbet.one', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sts13.vip', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "sts13.vip",
+        banca: "STS 13",
+        styles: ""
+    });
+});
