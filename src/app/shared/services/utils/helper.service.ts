@@ -6,7 +6,7 @@ import { config } from './../../config';
 import * as moment from 'moment';
 
 import { ParametrosLocaisService } from '../parametros-locais.service';
-import { FOOTBALL_ID } from '../../constants/sports-ids';
+import { SportIdService } from './sport-id.service';
 
 declare var WeebetMessage: any;
 
@@ -20,7 +20,10 @@ export class HelperService {
     CURRENCY_SYMBOL = getCurrencySymbol(environment.currencyCode, 'wide');
     casaDasApostasId;
 
-    constructor(private paramsService: ParametrosLocaisService) {
+    constructor(
+        private paramsService: ParametrosLocaisService,
+        private sportIdService: SportIdService
+    ) {
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.tiposAposta = this.paramsService.getTiposAposta();
         this.opcoes = this.paramsService.getOpcoes();
@@ -41,14 +44,14 @@ export class HelperService {
         return tipoAposta[field];
     }
 
-    apostaTipoLabelCustom(value: any, timeA: string, timeB: string, sportId = FOOTBALL_ID): string {
+    apostaTipoLabelCustom(value: any, timeA: string, timeB: string, sportId = this.sportIdService.footballId): string {
         let result = '';
 
         if (this.tiposAposta[value]) {
             const nome = this.tiposAposta[value].nome;
             result = nome;
 
-            if (sportId !== FOOTBALL_ID) {
+            if (sportId !== this.sportIdService.footballId) {
                 if (nome.search(/casa/ig) >= 0) {
                     result = nome.replace(/casa/ig, timeA);
                 }

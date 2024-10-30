@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, OnCh
 import {OwlOptions} from 'ngx-owl-carousel-o';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {BilheteEsportivoService, HelperService, JogoService} from 'src/app/services';
+import {BilheteEsportivoService, HelperService, JogoService, ParametrosLocaisService, SportIdService} from 'src/app/services';
 
 @Component({
     selector: 'app-destaques',
@@ -22,6 +22,8 @@ export class DestaquesComponent implements OnInit, OnChanges {
     itens = [];
     itensSelecionados = {};
     isDragging = false;
+
+    teamShieldsFolder;
 
     customOptions: OwlOptions = {
         loop: false,
@@ -42,7 +44,11 @@ export class DestaquesComponent implements OnInit, OnChanges {
         protected helperService: HelperService,
         private cd: ChangeDetectorRef,
         private bilheteService: BilheteEsportivoService,
-    ) { }
+        private paramsLocaisService: ParametrosLocaisService,
+        private sportIdService: SportIdService,
+    ) {
+        this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
+    }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024 ? true : false;

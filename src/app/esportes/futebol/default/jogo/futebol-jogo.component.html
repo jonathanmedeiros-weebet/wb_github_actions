@@ -132,11 +132,11 @@
                     <div class="time-a">
                         <div *ngIf="!showLoadingIndicator">
                             <span *ngIf="jogo?.time_a_img; else defaulImageA"><img
-                                src="https://cdn.wee.bet/img/times_v2/m/{{jogo?.time_a_img}}.png" size="m"
+                                src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/{{jogo?.time_a_img}}.png" size="m"
                                 alt="Time A Logo">
                             </span>
                             <ng-template #defaulImageA class="escudo">
-                                <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="m" class="escudo-img"
+                                <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/default.png" size="m" class="escudo-img"
                                      alt="escudo padrão">
                             </ng-template>
                         </div>
@@ -150,11 +150,11 @@
                     <div class="time-b">
                         <div *ngIf="!showLoadingIndicator">
                             <span *ngIf="jogo?.time_b_img; else defaulImageB"><img
-                                src="https://cdn.wee.bet/img/times_v2/m/{{jogo?.time_b_img}}.png" size="m"
+                                src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/{{jogo?.time_b_img}}.png" size="m"
                                 alt="Time B Logo">
                             </span>
                             <ng-template #defaulImageB class="escudo">
-                                <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="m" class="escudo-img"
+                                <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/default.png" size="m" class="escudo-img"
                                      alt="escudo padrão">
                             </ng-template>
                         </div>

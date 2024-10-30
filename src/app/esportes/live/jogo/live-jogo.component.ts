@@ -14,11 +14,10 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { Jogo, ItemBilheteEsportivo } from '../../../models';
 import {
     ParametrosLocaisService, MessageService, JogoService,
-    LiveService, BilheteEsportivoService, HelperService
+    LiveService, BilheteEsportivoService, HelperService,
+    SportIdService
 } from '../../../services';
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
-
-import { FOOTBALL_ID, BASKETBALL_ID } from '../../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-live-jogo',
@@ -47,8 +46,8 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
     showCampinho = true;
     showStream = false;
 
-    footballId = FOOTBALL_ID;
-    basketballId = BASKETBALL_ID;
+    footballId;
+    basketballId;
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -64,7 +63,11 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
         private activeModal: NgbActiveModal,
         private auth: AuthService,
         private modalService: NgbModal,
-    ) { }
+        private sportIdService: SportIdService,
+    ) {
+        this.footballId = this.sportIdService.footballId;
+        this.basketballId = this.sportIdService.basketballId;
+    }
 
     ngOnInit() {
         if (window.innerWidth <= 1024) {
@@ -427,5 +430,9 @@ export class LiveJogoComponent implements OnInit, OnDestroy, DoCheck {
             default:
                 return '';
         };
+    }
+
+    teamShield(sportId?) {
+        return this.sportIdService.teamShieldsFolder(sportId);
     }
 }

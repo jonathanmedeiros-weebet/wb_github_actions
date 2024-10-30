@@ -50,6 +50,7 @@ export * from './shared/services/utils/surpresinha.service';
 export * from './shared/services/utils/utils.service';
 export * from './shared/services/utils/menu-footer.service';
 export * from './shared/services/utils/layout.service';
+export * from './shared/services/utils/sport-id.service';
 
 /* Authentication Services */
 export * from './shared/services/auth/auth.service';

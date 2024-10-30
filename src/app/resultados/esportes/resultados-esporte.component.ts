@@ -2,14 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-import {ResultadoService, MessageService, MenuFooterService, ParametrosLocaisService} from './../../services';
+import {ResultadoService, MessageService, MenuFooterService, ParametrosLocaisService, SportIdService} from './../../services';
 import { Campeonato } from './../../models';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as moment from 'moment';
-
-import * as sportsIds from '../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-resultados-esporte',
@@ -29,7 +27,17 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     tenisHabilitado = false;
     futebolAmericanoHabilitado = false;
     hoqueiGeloHabilitado = false;
-    sportsIds = sportsIds;
+
+    footballId: Number;
+    boxingId: Number;
+    volleyballId: Number;
+    tennisId: Number;
+    basketballId: Number;
+    americanFootballId: Number;
+    tableTennisId: Number;
+    futsalId: Number;
+    iceHockeyId: Number;
+    eSportsId: Number;
 
     constructor(
         private messageService: MessageService,
@@ -37,8 +45,20 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
         private fb: UntypedFormBuilder,
         private menuFooterService: MenuFooterService,
         private paramsService: ParametrosLocaisService,
+        private sportIdService: SportIdService,
     ) {
         super();
+
+        this.footballId = this.sportIdService.footballId;
+        this.boxingId = this.sportIdService.boxingId;
+        this.volleyballId = this.sportIdService.volleyballId;
+        this.tennisId = this.sportIdService.tennisId;
+        this.basketballId = this.sportIdService.basketballId;
+        this.americanFootballId = this.sportIdService.americanFootballId;
+        this.tableTennisId = this.sportIdService.tableTennisId;
+        this.futsalId = this.sportIdService.futsalId;
+        this.iceHockeyId = this.sportIdService.iceHockeyId;
+        this.eSportsId = this.sportIdService.eSportsId;
     }
 
     ngOnInit() {
@@ -65,7 +85,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     createForm() {
         this.form = this.fb.group({
             data: [moment().format('YYYY-MM-DD'), Validators.required],
-            sport_id: [sportsIds.FOOTBALL_ID, Validators.required]
+            sport_id: [this.footballId, Validators.required]
         });
     }
 
@@ -81,7 +101,7 @@ export class ResultadosEsporteComponent extends BaseFormComponent implements OnI
     getResultados(params?) {
         let queryParams: any = {
             'data': moment().format('YYYY-MM-DD'),
-            'sport': sportsIds.FOOTBALL_ID
+            'sport': this.footballId
         };
 
         if (params) {

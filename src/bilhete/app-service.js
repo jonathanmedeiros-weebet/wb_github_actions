@@ -169,9 +169,9 @@ function filterLiveItems(ticketItems, itemsWithResults) {
     ticketItems.forEach((item) => {
         var itemTimestamp = new Date(item.jogo_horario.replace(/-/g, "/")).getTime();
 
-        const footballId = 6046;
+        const footballIds = [1, 6046];
 
-        if (item.sport === footballId && this.checkMatchPeriod(itemTimestamp)) {
+        if (footballIds.includes(Number(item.sport)) && this.checkMatchPeriod(itemTimestamp)) {
             if (!itemsWithResults.includes(item.jogo_api_id)) {
                 liveItems.push({
                     jogo_api_id: item.jogo_api_id,
