@@ -29,6 +29,7 @@ export class ParametrosLocaisService {
             return this.http.get(paramUri)
                 .subscribe((response: any) => {
                     this.parametrosLocais = response;
+                    console.log(response)
 
                     const GTM_ID = response?.opcoes?.gtm_id_site
                     const head = this.document.getElementsByTagName('head')[0];
@@ -55,7 +56,7 @@ export class ParametrosLocaisService {
                         body.prepend(GTMScriptBody);
                     }
 
-                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.legitimuz_token);
+                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.legitimuz_token && response?.opcoes?.facematchType == 'legitimuz');
                     if (LEGITIMUZ_ENABLED) {
                         const LegitimuzScripSDK = this.document.createElement('script');
                         LegitimuzScripSDK.src = 'https://cdn.legitimuz.com/js/sdk/legitimuz-sdk.js';
@@ -63,7 +64,19 @@ export class ParametrosLocaisService {
                         LegitimuzScripSDKFaceIndex.src = 'https://cdn.legitimuz.com/js/sdk/faceindex.js';
 
                         head.appendChild(LegitimuzScripSDK);
-                        head.appendChild(LegitimuzScripSDKFaceIndex);
+                    }
+                    const DOCK_CHECK_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.dockCheck_token && response?.opcoes?.faceMatchType == 'docCheck');
+                    if (DOCK_CHECK_ENABLED) {
+                        const DockCheckScripSDK = this.document.createElement('script');
+                        DockCheckScripSDK.innerHTML = `window.ex_partner = {ex_doccheck_identity_key_id: "${response?.opcoes?.dockCheck_key_id}",};
+                            (function (w, d, src){var h = d.getElementsByTagName("head")[0];
+                                var s=d.createElement("script"); s.src = src;
+                                if (!w.exDocCheck) h.appendChild(s);
+                                else w.exDocCheck.init();
+                            })(window, document, "https://doccheck.exato.digital/doccheck.js");
+                        `;
+                        head.appendChild(DockCheckScripSDK);
+                        console.log(DockCheckScripSDK)  
                     }
 
                     const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key

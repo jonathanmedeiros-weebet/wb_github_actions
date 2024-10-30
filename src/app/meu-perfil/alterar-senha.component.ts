@@ -13,6 +13,14 @@ import { Cliente } from '../shared/models/clientes/cliente';
 import { LegitimuzService } from '../shared/services/legitimuz.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LegitimuzFacialService } from '../shared/services/legitimuz-facial.service';
+import * as CryptoJS from 'crypto-js';
+
+declare global {
+    interface Window {
+      ex_partner: any;
+      exDocCheck: any;
+    }
+  }
 
 @Component({
     selector: 'app-meu-perfil',
@@ -40,6 +48,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     verifiedIdentity = null;
     disapprovedIdentity = false;
     showLoading = true;
+    faceMatchType = null;
 
     validPassword: boolean = false;
     requirements = {
@@ -306,5 +315,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         };
 
         this.validPassword = Object.values(this.requirements).every(Boolean);
+    }
+    hmacHash(cpf) {
+        const concatenatedString = cpf+ this.paramsLocais.getOpcoes().dockCheck_secret_hash ;
+        const hash = CryptoJS.SHA256(concatenatedString);
+        return hash.toString(CryptoJS.enc.Hex);   
     }
 }
