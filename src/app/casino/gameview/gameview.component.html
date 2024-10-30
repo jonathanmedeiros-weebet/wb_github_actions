@@ -1,4 +1,4 @@
-<app-back-page>
+<app-back-page *ngIf="!isLoggedIn && gameMode == 'REAL'">
 </app-back-page>
 
 <div class="game-view" *ngIf="isMobile">
@@ -88,7 +88,9 @@
                 <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreenTablet()"><i class="fa fa-expand"></i></a>
                 <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreenTablet()"><i class="fa fa-compress"></i></a>
         </ng-container>
-            <!-- <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a> -->
+            <a *ngIf="isLoggedIn || gameMode !== 'REAL'" (click)="back()" class="btn-cassino game-close">
+                <i class="fa fa-times"></i>
+            </a>
         </div>
     </div>
     <ng-container>
