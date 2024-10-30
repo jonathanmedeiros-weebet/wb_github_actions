@@ -643,13 +643,6 @@
             "definir_limite_semanal": "Definir limite semanal de depósito",
             "definir_limite_mensal": "Definir limite mensal de depósito"
         },
-        "limite_perda": {
-            "titulo": "Limite de perdas",
-            "descricao": "A configuração de limite de perda é uma funcionalidade que permite você definir um valor máximo para os perdas que podem ser feitos em sua conta. Essa configuração visa ajudar a controlar o valor de dinheiro investido, prevenindo gastos excessivos e promovendo um jogo responsável. O limite de perda estabelecido impede que você deposite valores acima desse limite durante um determinado período de tempo (diário, semanal e mensal).",
-            "definir_limite_diario": "Definir limite diário de perda",
-            "definir_limite_semanal": "Definir limite semanal de perda",
-            "definir_limite_mensal": "Definir limite mensal de perda"
-        },
         "periodo_pausa": {
             "titulo": "Período de pausa",
             "descricao": "A funcionalidade de período de pausa de conta permite que você suspendam temporariamente o uso da sua conta na plataforma. Durante esse período, a conta fica inativa, impedindo o acesso e a realização de atividades como apostas, saques e depósitos. Essa opção é útil para fazer uma pausa temporária, sem excluir permanentemente a conta, preservando os dados e configurações para posterior reativação.",
