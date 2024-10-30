@@ -259,7 +259,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 this.messageService.success(result.message);
                 this.senhaAtual.patchValue('');
             },
-            error => this.handleError(error)
+            error => this.handleError(error.message)
         )
     }
 

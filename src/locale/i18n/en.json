@@ -627,6 +627,13 @@
             "definir_limite_semanal": "Set weekly betting limit",
             "definir_limite_mensal": "Set monthly betting limit"
         },
+        "limite_perdas": {
+            "titulo": "Loss limit",
+            "descricao": "The loss limit setting is a feature that allows you to set a maximum amount of losses you can have during a given period of time (daily, weekly and monthly). This setting is an important tool in promoting responsible gambling, helping control how much you are willing to lose, preventing excessive losses from affecting your budget and financial well-being. Once the established loss limit is reached, you will not be able to continue playing until the next defined period counted as a termination loss.",
+            "definir_limite_diario": "Set daily loss limit",
+            "definir_limite_semanal": "Set weekly loss limit",
+            "definir_limite_mensal": "Set monthly loss limit"
+        },
         "limite_depositos": {
             "titulo": "Deposit Limit",
             "descricao": "The deposit limit setting is a feature that allows you to set a maximum value for the deposits that can be made into your account. This setting aims to help control the amount of money invested, preventing excessive spending and promoting responsible gaming. The established deposit limit prevents you from depositing amounts above this limit for a certain period of time (daily, weekly, and monthly).",
