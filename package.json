@@ -298,7 +298,8 @@
         "newbet.one": "gulp newbet.one",
         "sts13.vip": "gulp sts13.vip",
         "maxbetbrasil.net": "gulp maxbetbrasil.net",
-        "apostefacil.bet": "gulp apostefacil.bet"
+        "apostefacil.bet": "gulp apostefacil.bet",
+        "viabet.com.br": "gulp viabet.com.br"
     },
     "private": true,
     "dependencies": {
