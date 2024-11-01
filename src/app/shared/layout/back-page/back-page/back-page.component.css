@@ -28,3 +28,7 @@
     font-weight: 600;
     margin: 0;
 }
+
+.back-page__text {
+    cursor: pointer;
+}
