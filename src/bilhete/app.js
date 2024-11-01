@@ -211,6 +211,8 @@ document.onreadystatechange = async function () {
                         }
 
                         if (ticketData.tipo == 'esportes') {
+                            const teamShieldFolder = [6046, 48242].includes(Number(ticketItem.sport)) ? 'times_v2' : 'times';
+
                             div.innerHTML = `
                             <div id="${ticketItem.jogo_api_id}_ticket_item" class="ticket-item">
                                 <div class="identification">
@@ -220,7 +222,7 @@ document.onreadystatechange = async function () {
                                 <div id="match">
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/times_v2/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/times_v2/m/default.png'">
+                                            <img src="https://cdn.wee.bet/img/${teamShieldFolder}/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/${teamShieldFolder}/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -239,7 +241,7 @@ document.onreadystatechange = async function () {
 
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/times_v2/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/times_v2/m/default.png'">
+                                            <img src="https://cdn.wee.bet/img/${teamShieldFolder}/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/${teamShieldFolder}/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_b_nome ? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -355,10 +357,10 @@ document.onreadystatechange = async function () {
                                 let live_track_id = ticketItem.live_track_id;
                                 let fieldLink;
 
-                                const footballId = 6046;
+                                const footballIds = [1, 6046];
                                 const basketballId = 48242;
 
-                                if (ticketItem.sport == footballId) {
+                                if (footballIds.includes(Number(ticketItem.sport))) {
                                     fieldLink = fieldLinkFootball;
                                 }
 

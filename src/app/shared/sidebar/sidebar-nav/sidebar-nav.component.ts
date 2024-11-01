@@ -20,8 +20,8 @@ import {
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/auth/auth.service';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
+import { SportIdService } from 'src/app/services';
 
-import * as sportsIds from '../../constants/sports-ids';
 @Component({
     selector: 'app-sidebar-nav',
     templateUrl: './sidebar-nav.component.html',
@@ -51,7 +51,16 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     subPromocoes = false;
     subTransacoes = false;
 
-    sportsIds = sportsIds;
+    footballId: Number;
+    boxingId: Number;
+    volleyballId: Number;
+    tennisId: Number;
+    basketballId: Number;
+    americanFootballId: Number;
+    tableTennisId: Number;
+    futsalId: Number;
+    iceHockeyId: Number;
+    eSportsId: Number;
 
     iconesGenericos = {
         'basquete': 'wbicon icon-basquete',
@@ -76,9 +85,21 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private renderer: Renderer2,
         private auth: AuthService,
-        private paramsLocais: ParametrosLocaisService
+        private paramsLocais: ParametrosLocaisService,
+        private sportIdService: SportIdService,
     ) {
         super();
+
+        this.footballId = this.sportIdService.footballId;
+        this.boxingId = this.sportIdService.boxingId;
+        this.volleyballId = this.sportIdService.volleyballId;
+        this.tennisId = this.sportIdService.tennisId;
+        this.basketballId = this.sportIdService.basketballId;
+        this.americanFootballId = this.sportIdService.americanFootballId;
+        this.tableTennisId = this.sportIdService.tableTennisId;
+        this.futsalId = this.sportIdService.futsalId;
+        this.iceHockeyId = this.sportIdService.iceHockeyId;
+        this.eSportsId = this.sportIdService.eSportsId;
     }
 
     ngOnInit() {
@@ -300,39 +321,39 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         let className = 'icon-futebol wbicon';
 
         switch (sportId) {
-            case sportsIds.FOOTBALL_ID: {
+            case this.footballId: {
                 className = 'wbicon icon-futebol';
                 break;
             }
-            case sportsIds.BOXING_ID: {
+            case this.boxingId: {
                 className = 'wbicon icon-luta';
                 break;
             }
-            case sportsIds.AMERICAN_FOOTBALL_ID: {
+            case this.americanFootballId: {
                 className = 'wbicon icon-futebol-americano';
                 break;
             }
-            case sportsIds.TENNIS_ID: {
+            case this.tennisId: {
                 className = 'wbicon icon-tenis';
                 break;
             }
-            case sportsIds.ICE_HOCKEY_ID: {
+            case this.iceHockeyId: {
                 className = 'wbicon icon-hoquei-no-gelo';
                 break;
             }
-            case sportsIds.BASKETBALL_ID: {
+            case this.basketballId: {
                 className = 'wbicon icon-basquete';
                 break;
             }
-            case sportsIds.FUTSAL_ID: {
+            case this.futsalId: {
                 className = 'wbicon icon-futsal';
                 break;
             }
-            case sportsIds.VOLLEYBALL_ID: {
+            case this.volleyballId: {
                 className = 'wbicon icon-volei';
                 break;
             }
-            case sportsIds.E_SPORTS_ID: {
+            case this.eSportsId: {
                 className = 'wbicon icon-e-sports';
                 break;
             }
@@ -344,15 +365,15 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     getRotaPorEsporteId(sportId) {
         const routeBySportId = {};
 
-        routeBySportId[sportsIds.FOOTBALL_ID] = '/esportes/futebol';
-        routeBySportId[sportsIds.BOXING_ID] = '/esportes/combate';
-        routeBySportId[sportsIds.AMERICAN_FOOTBALL_ID] = '/esportes/futebol-americano';
-        routeBySportId[sportsIds.TENNIS_ID] = '/esportes/tenis';
-        routeBySportId[sportsIds.ICE_HOCKEY_ID] = '/esportes/hoquei-gelo';
-        routeBySportId[sportsIds.BASKETBALL_ID] = '/esportes/basquete';
-        routeBySportId[sportsIds.FUTSAL_ID] = '/esportes/futsal';
-        routeBySportId[sportsIds.VOLLEYBALL_ID] = '/esportes/volei';
-        routeBySportId[sportsIds.E_SPORTS_ID] = '/esportes/esports';
+        routeBySportId[String(this.footballId)] = '/esportes/futebol';
+        routeBySportId[String(this.boxingId)] = '/esportes/combate';
+        routeBySportId[String(this.americanFootballId)] = '/esportes/futebol-americano';
+        routeBySportId[String(this.tennisId)] = '/esportes/tenis';
+        routeBySportId[String(this.iceHockeyId)] = '/esportes/hoquei-gelo';
+        routeBySportId[String(this.basketballId)] = '/esportes/basquete';
+        routeBySportId[String(this.futsalId)] = '/esportes/futsal';
+        routeBySportId[String(this.volleyballId)] = '/esportes/volei';
+        routeBySportId[String(this.eSportsId)] = '/esportes/esports';
 
         return routeBySportId[sportId] ?? '/esportes/futebol';
     }

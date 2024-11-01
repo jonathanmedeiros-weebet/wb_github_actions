@@ -20,7 +20,7 @@ import {
 import { NavigationExtras, Router } from '@angular/router';
 
 import { Campeonato, Jogo } from './../../../../models';
-import { BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService, JogoService, LayoutService } from './../../../../services';
+import { BilheteEsportivoService, HelperService, ParametrosLocaisService, SidebarService, JogoService, LayoutService, SportIdService } from './../../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -55,6 +55,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     cotacoesFaltando = {};
     cotacoesLocais;
     jogosBloqueados;
+    campeonatosBloqueados;
     dataLimiteTabela;
     contentSportsEl;
     start;
@@ -96,6 +97,10 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     hasFeaturedMatches = true;
 
+    sportbook;
+
+    teamShieldsFolder;
+
     @HostListener('window:resize', ['$event'])
     onResize() {
         this.detectScrollOddsWidth();
@@ -112,8 +117,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         private jogoService: JogoService,
         private router: Router,
         private translate: TranslateService,
-        public layoutService: LayoutService
+        public layoutService: LayoutService,
+        private sportIdService: SportIdService,
     ) {
+        this.sportbook = this.paramsService.getOpcoes().sportbook;
+        this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
     }
 
     ngAfterViewInit(): void {
@@ -171,6 +179,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.offset = this.exibirCampeonatosExpandido ? 7 : 20;
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
+        this.campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId);
 
         this.atualizarDatasJogosFuturos(this.translate.currentLang);
 
@@ -567,7 +576,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     campeonatoAberto(campeonatoId) {
-        return this.campeonatosAbertos.includes(campeonatoId);
+        if(this.campeonatosBloqueados.includes(campeonatoId)){
+            return false;
+        }else{
+            return this.campeonatosAbertos.includes(campeonatoId);
+        }
     }
 
     // Extrai id do primeiro jogo do primeiro campeonato

@@ -203,7 +203,7 @@
                 <div class="campeonato-header" (click)="toggleCampeonato(campeonato._id)">
                     <span class="column-left">
                         <span class="flag-icon flag-icon-{{campeonato.regiao_sigla}} flag-icon-squared"></span>
-                        <span class="campeonato-nome">{{(campeonato.alias ? campeonato.alias : campeonato.nome) | uppercase}}</span>
+                        <span class="campeonato-nome"><span *ngIf="campeonato.regiao && sportbook == 'lsports'">{{campeonato.regiao | uppercase}}: </span>{{(campeonato.alias ? campeonato.alias : campeonato.nome) | uppercase}}</span>
                     </span>
                     <span *ngIf="campeonatoAberto(campeonato._id); else downIcon">
                         <i class="fa fa-angle-up"></i>
@@ -228,12 +228,12 @@
                                 <div class="nome" [ngStyle]="{'width.px': nomesJogoWidth}">
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_a_img; else defaulImage" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times_v2/m/{{jogo.time_a_img}}.png" size="s"
+                                            <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/{{jogo.time_a_img}}.png" size="s"
                                                  class="escudo-img">
                                         </span>
                                         <ng-template #defaulImage>
                                             <span class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="s"
+                                                <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/default.png" size="s"
                                                     class="escudo-img">
                                             </span>
                                         </ng-template>
@@ -243,12 +243,12 @@
                                     </div>
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_b_img; else defaulImageB" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/times_v2/m/{{jogo.time_b_img}}.png" size="s"
+                                            <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/{{jogo.time_b_img}}.png" size="s"
                                                  class="escudo-img">
                                         </span>
                                         <ng-template #defaulImageB>
                                             <span class="escudo">
-                                                <img src="https://cdn.wee.bet/img/times_v2/m/default.png" size="s"
+                                                <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/default.png" size="s"
                                                     class="escudo-img">
                                             </span>
                                         </ng-template>
