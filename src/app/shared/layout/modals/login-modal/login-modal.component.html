@@ -4,6 +4,7 @@
         <i class="fa fa-times"></i>
     </a>
 </div>
+
 <div class="modal-body" [ngStyle]="{'padding-top': loginGoogle ? '10px' : '40px'}">
     <div class="modal-body-content">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
@@ -49,27 +50,27 @@
                 <app-error-msg [control]="form.get('username')" label="{{ 'geral.field' | translate }}" class="text-left"></app-error-msg>
             </div>
 
-                <div class="form-group" [ngClass]="applyCssDivError('password')">
-                    <div class="input-md">
-                        <input [type]=" mostrarSenha ? 'text' : 'password' " id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('password')"
-                            formControlName="password" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
-                        <label for="password">{{'geral.senha' | translate}}</label>
-                        <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="toogleSenha()"></i>
-                    </div>
-                    <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
+            <div class="form-group" [ngClass]="applyCssDivError('password')">
+                <div class="input-md">
+                    <input [type]=" mostrarSenha ? 'text' : 'password' " id="password" class="form-control inverted-out" [ngClass]="applyCssInputError('password')"
+                        formControlName="password" placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
+                    <label for="password">{{'geral.senha' | translate}}</label>
+                    <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="toogleSenha()"></i>
                 </div>
-                <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
-            </form>
+                <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
+            </div>
+            
+            <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
+        </form>
 
-            <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">
-                {{'geral.esqueceuASenha' | translate}}
-            </a>
-        </div>
+        <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">
+            {{'geral.esqueceuASenha' | translate}}
+        </a>
+    </div>
 
-        <div class="registrar" *ngIf="modoClienteHabilitado">
-            {{'geral.naoPossuiUmaConta' | translate}}
-            <a (click)="abrirCadastro()" style="cursor: pointer" class="">{{'geral.registreSe' | translate}}</a>
-        </div>
+    <div class="registrar" *ngIf="modoClienteHabilitado">
+        {{'geral.naoPossuiUmaConta' | translate}}
+        <a (click)="abrirCadastro()" style="cursor: pointer" class="">{{'geral.registreSe' | translate}}</a>
     </div>
 </div>
 
