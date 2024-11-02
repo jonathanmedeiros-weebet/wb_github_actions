@@ -159,11 +159,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 if(!this.isMobile){
                     this.abriModalLogin();
                 }
-            } else {
-                if(this.avisoCancelarBonus === false){
-                    this.loadGame();
-                }
             }
+            
             interval(3000)
                 .subscribe(() => {
                     this.showLoadingIndicator = false;
