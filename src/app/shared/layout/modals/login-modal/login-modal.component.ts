@@ -40,6 +40,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     mostrarSenha = false;
     authDoisFatoresHabilitado;
     modoClienteHabilitado;
+    modoCambistaHabilitado;
     LOGO = config.LOGO;
     loginGoogle = false;
     resgister_cancel = false;
@@ -73,6 +74,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.createForm();
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
         this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
+        this.modoCambistaHabilitado = this.paramsLocais.getOpcoes().modo_cambista;
         this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
