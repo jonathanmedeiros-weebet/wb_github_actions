@@ -95,6 +95,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'none');
         }
+        
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
+                this.renderer.setStyle(iframeChat, 'display', 'none');
+            });
+        } 
 
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
@@ -271,6 +278,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
+
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
+                this.renderer.setStyle(iframeChat, 'display', 'block');
+            });
+        } 
     }
 
     openFullscreen() {
