@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
@@ -29,6 +29,7 @@ export class CashbackComponent extends BaseFormComponent implements OnInit {
     cashbacks = [];
 
     constructor(
+        protected activeModal: NgbActiveModal,
         private authService: AuthService,
         private calendar: NgbCalendar,
         private fb: UntypedFormBuilder,
