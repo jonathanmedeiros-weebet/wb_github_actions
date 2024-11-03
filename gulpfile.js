@@ -2833,3 +2833,12 @@ gulp.task('apostefacil.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('viabet.com.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "viabet.com.br",
+        banca: "VIA BET",
+        styles: "",
+    });
+});

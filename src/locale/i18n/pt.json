@@ -253,7 +253,9 @@
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
         "loginEmail": "E-mail",
-        "loginPhone": "Telefone"
+        "loginPhone": "Telefone",
+        "loginUsername": "Nome de usuário",
+        "field": "Campo"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",

@@ -251,7 +251,9 @@
         "erroInesperado": "Something unexpected happened. Please try again later.",
         "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
         "loginEmail": "Email",
-        "loginPhone": "Phone"
+        "loginPhone": "Phone",
+        "loginUsername": "Username",
+        "field": "Field"
     },
     "bet": {
         "sportsBetting": "Sports betting",
