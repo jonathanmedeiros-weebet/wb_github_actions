@@ -796,6 +796,7 @@ iframe{
         height: 40px;
         align-items: flex-start;
         gap: 32px;
+        margin-top: 30px;
     }
 
     .register-btn {
@@ -809,9 +810,10 @@ iframe{
         justify-content: center;
         align-items: center;
         gap: 20px;
-        color: white;
+        color: black;
         cursor: pointer;
         transition: background 0.3s ease;
+        text-transform: uppercase;
     }
 
     .register-btn:hover {
@@ -832,16 +834,12 @@ iframe{
         color: #0BF197;
         cursor: pointer;
         transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    .login-btn:hover {
-        background: #0BF197;
-        color: white;
+        text-transform: uppercase;
     }
 
     .bloco {
         position: relative;
-        padding: 0 20px 24px 20px;
+        padding: 0 48px 24px 50px;
         margin: 0 auto;
         width: 100%;
     }

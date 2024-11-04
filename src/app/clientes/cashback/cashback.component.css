@@ -149,6 +149,10 @@
     .only-desktop {
         display: none;
     }
+
+    .mobile-modal-header{
+        padding: 12px 0;
+    }
 }
 
 @media only screen and (max-width: 1024px) {

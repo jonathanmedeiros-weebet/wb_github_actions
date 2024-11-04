@@ -39,6 +39,7 @@ import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ga
 import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
 import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
 import {CarteiraComponent} from "../../../clientes/carteira/carteira.component";
+import { CashbackComponent } from 'src/app/clientes/cashback/cashback.component';
 
 declare var xtremepush: any;
 
@@ -117,7 +118,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     public showHeaderMobile: boolean = false;
     xtremepushHabilitado = false;
     isCasinoGameFullScreen: boolean;
-
+    cashbackEnabled;
     private currentRoute: string;
 
     sportsIsActive = false;
@@ -275,6 +276,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.betbyAtivo = this.paramsService.getOpcoes().betby;
         this.rifa = this.paramsService.getOpcoes().rifa;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
+        this.cashbackEnabled = this.paramsService.cashbackEnabled();
         this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
 
         this.valorGanhoPorIndicacao = (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
@@ -527,6 +529,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirIndiqueGanhe() {
         this.modalService.open(IndiqueGanheComponent);
+    }
+
+    openCashback() {
+        this.modalService.open(CashbackComponent);
     }
 
     abrirCambistaDashboard() {

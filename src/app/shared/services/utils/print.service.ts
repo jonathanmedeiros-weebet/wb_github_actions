@@ -9,8 +9,7 @@ import * as moment from 'moment';
 
 import EscPosEncoder from 'node_modules/esc-pos-encoder/dist/esc-pos-encoder.esm.js';
 import { ImagensService } from './imagens.service';
-
-import { BOXING_ID } from '../../constants/sports-ids';
+import { SportIdService } from './sport-id.service';
 
 declare var WeebetMessage: any;
 
@@ -30,7 +29,8 @@ export class PrintService {
         private auth: AuthService,
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
-        private imagensService: ImagensService
+        private imagensService: ImagensService,
+        private sportIdService: SportIdService,
     ) {
         this.getPrinterSettings();
 
@@ -2198,7 +2198,7 @@ export class PrintService {
 
     getApostaTipoNome(apostaTipo, jogo) {
         let result = apostaTipo.nome;
-        if (jogo.sport == BOXING_ID) {
+        if (jogo.sport == this.sportIdService.boxingId) {
             if (result.search(/casa/ig) >= 0) {
                 result = result.replace(/casa/ig, jogo.time_a_nome);
             }

@@ -8,8 +8,6 @@ import {config} from '../config';
 import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
-import * as sportsIds from '../constants/sports-ids';
-
 @Injectable({
     providedIn: 'root'
 })
@@ -95,7 +93,7 @@ export class ParametrosLocaisService {
             );
     }
 
-    getCampeonatosBloqueados(sportId = sportsIds.FOOTBALL_ID) {
+    getCampeonatosBloqueados(sportId) {
         const sport = 'sport_' + sportId;
         return this.parametrosLocais ? Object.assign([], this.parametrosLocais.campeonatos_bloqueados[sport]) : null;
     }
@@ -251,6 +249,10 @@ export class ParametrosLocaisService {
 
     indiqueGanheHabilitado() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.indique_ganhe_habilitado : null;
+    }
+
+    cashbackEnabled() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.cashback_enabled : null;
     }
 
     getCustomCasinoName(wordToReplace: string = '', casinoDefault: string = this.translate.instant('geral.cassino')) {

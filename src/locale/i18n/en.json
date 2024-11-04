@@ -255,6 +255,8 @@
         "resetarSenha": "Password reset",
         "loginEmail": "Email",
         "loginPhone": "Phone",
+        "loginUsername": "Username",
+        "field": "Field",
         "session_alert": "Session Alert",
         "session_alert_message": "There is currently an active session on another device. To continue access, would you like to close the other session?"
     },
