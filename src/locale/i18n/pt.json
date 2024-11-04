@@ -256,6 +256,8 @@
         "aguardando": "Aguardando",
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
+        "loginUsername": "Nome de usuário",
+        "field": "Campo",
         "session_alert": "Alerta de Sessão",
         "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?"
     },
