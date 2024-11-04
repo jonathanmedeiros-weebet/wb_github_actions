@@ -163,7 +163,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (this.faceMatchEnabled) {
                         this.faceMatchService.getFaceMatch({ document: this.cliente.cpf }).subscribe({
                             next: (res) => {
-                                if (res.document == this.cliente.cpf && (res.first_withdraw != null)) {
+                                if (res.first_withdraw != null && this.cliente.verifiedIdentity) {
                                     this.faceMatchFirstWithdrawValidated = true;
                                 }
                             }, error: (error) => {}
