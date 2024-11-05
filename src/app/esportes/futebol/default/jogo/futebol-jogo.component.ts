@@ -15,12 +15,11 @@ import {
 import {ActivatedRoute, Route, Router} from '@angular/router';
 
 import {Jogo} from './../../../../models';
-import {BilheteEsportivoService, CampeonatoService, HelperService, JogoService, MessageService, ParametrosLocaisService, SidebarService} from './../../../../services';
+import {BilheteEsportivoService, CampeonatoService, HelperService, JogoService, MessageService, ParametrosLocaisService, SidebarService, SportIdService} from './../../../../services';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { FOOTBALL_ID } from 'src/app/shared/constants/sports-ids';
 
 @Component({
     selector: 'app-futebol-jogo',
@@ -59,8 +58,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     theSportUrl: SafeResourceUrl;
     loadedFrame: boolean;
-    footballId = FOOTBALL_ID;
+    footballId;
     cameFromHome: boolean = false;
+
+    teamShieldsFolder;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -82,8 +83,11 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private activeModal: NgbActiveModal,
         private sidebarService: SidebarService,
         private campeonatoService : CampeonatoService,
-        private router: Router
+        private router: Router,
+        private sportIdService: SportIdService,
     ) {
+        this.footballId = this.sportIdService.footballId;
+        this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
     }
 
     ngOnInit() {
@@ -130,7 +134,7 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                     }
                 }
         );
-            
+
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
@@ -209,10 +213,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     getCampeonatos2Sidebar() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID);
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.footballId);
         const opcoes = this.paramsService.getOpcoes();
         const params = {
-            'sport_id': FOOTBALL_ID,
+            'sport_id': this.footballId,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'data_final': opcoes.data_limite_tabela,
         };

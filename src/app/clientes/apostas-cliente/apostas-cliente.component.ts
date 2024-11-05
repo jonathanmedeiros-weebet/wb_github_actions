@@ -33,6 +33,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     loteriaPopularHabilitada;
     rifaHabilitada;
     activeId = 'esporte';
+    tabs;
     paginaPrincipal: string;
 
     showLoading = true;
@@ -130,6 +131,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             this.tabSelected = this.paginaPrincipal;
         }
+        this.tabs = this.getTabs();
 
         this.getApostas();
 
