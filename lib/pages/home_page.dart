@@ -17,11 +17,17 @@ class HomePage extends StatefulWidget {
   final String host;
   final String title;
   final int bgColor;
+  final String name;
+  final String slug;
+  final String centralUrl;
 
   const HomePage(
       {super.key,
       required this.title,
       required this.host,
+      required this.name,
+      required this.slug,
+      required this.centralUrl,
       required this.bgColor});
 
   @override
@@ -53,7 +59,7 @@ class _HomePageState extends State<HomePage> {
 
     webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse('${widget.host}/?app=TRUE&app_version=4'))
+      ..loadRequest(Uri.parse('${widget.host}?host=${widget.centralUrl}&name=${widget.name}&slug=${widget.slug}'))
       ..setNavigationDelegate(NavigationDelegate(
         onNavigationRequest: (NavigationRequest request) {
           final sanitizedHost =
@@ -76,7 +82,7 @@ class _HomePageState extends State<HomePage> {
 
     _webViewController = webViewController;
 
-    _saveLogoBytes(widget.host.replaceAll(RegExp('^(?:https?://)'), ''));
+    _saveLogoBytes(widget.slug);
     _getConfiguredPrinter();
     _sendApkVersion();
     _sendRollWidth(printerRollWidth);
