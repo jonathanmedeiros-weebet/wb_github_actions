@@ -60,7 +60,9 @@ export class ClienteService {
                         this.logadoSource.next(true);
                         if(this.xtremepushHabilitado()){
                             xtremepush('set', 'user_id', dataUser.user.id);
-                            xtremepush('event', 'login');
+                            setTimeout(function() {
+                                xtremepush('event', 'login');
+                            }, 100);
                             this.xtremepushBackgroundRemove();
                         }
                     }

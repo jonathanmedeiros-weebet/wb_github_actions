@@ -4,7 +4,8 @@ import {
     CampeonatoService,
     ParametrosLocaisService,
     PrintService,
-    HelperService
+    HelperService,
+    SportIdService
 } from 'src/app/services';
 
 import * as moment from 'moment';
@@ -30,6 +31,7 @@ export class TabelaComponent implements OnInit {
         private printService: PrintService,
         public activeModal: NgbActiveModal,
         private helperService: HelperService,
+        private sportIdService: SportIdService,
     ) { }
 
     ngOnInit(): void {
@@ -40,7 +42,7 @@ export class TabelaComponent implements OnInit {
         }
 
         const odds = this.paramsService.getOddsImpressao();
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId);
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
@@ -85,7 +87,7 @@ export class TabelaComponent implements OnInit {
 
     imprimirTabela() {
         const jogos = [{ data_grupo: moment().format('DD [de] MMMM [de] YYYY'), camps: this.getCampeonatosSelecionados() }];
-        
+
         let campeonato = this.getCampeonatosSelecionados();
         let slice = campeonato.slice();
 
@@ -94,7 +96,7 @@ export class TabelaComponent implements OnInit {
         });
         this.printService.games(jogos);
     }
-    
+
     getCotacaoLocal(jogo) {
         const cotacoesLocais = this.cotacoesLocais[jogo.event_id];
 

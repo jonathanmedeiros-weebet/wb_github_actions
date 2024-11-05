@@ -11,7 +11,7 @@
             </div>
 
             <div class="tabs">
-                <ng-container *ngFor="let tab of getTabs()">
+                <ng-container *ngFor="let tab of tabs">
                     <a
                         [ngClass]="{'active': tab.habilitado && tabSelected === tab.id}"
                         (click)="changeTab(tab.id)"

@@ -3,13 +3,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Observable, Subject} from 'rxjs';
 import {switchMap, takeUntil} from 'rxjs/operators';
-import {CampeonatoService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService} from './../../../../services';
+import {CampeonatoService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService, SportIdService} from './../../../../services';
 import {Campeonato} from '../../../../models';
 import * as moment from 'moment';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FutebolJogoComponent} from '../jogo/futebol-jogo.component';
-
-import { FOOTBALL_ID } from '../../../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-futebol-default-wrapper',
@@ -40,7 +38,8 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         private modalService: NgbModal,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private sportIdService: SportIdService
     ) {
     }
 
@@ -112,14 +111,14 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
                     if (params['regiao_nome']) {
                         queryParams = {
                             odds: this.oddsPrincipais,
-                            campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID),
+                            campeonatos_bloqueados: this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId),
                             data_final: dataLimiteTabela,
                             regiao_nome: params['regiao_nome']
                         };
                     } else {
                         queryParams = {
-                            'sport_id': FOOTBALL_ID,
-                            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID),
+                            'sport_id': this.sportIdService.footballId,
+                            'campeonatos_bloqueados': this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId),
                             'ligas_populares': this.ligasPopulares,
                             'odds': this.oddsPrincipais
                         };
@@ -196,10 +195,10 @@ export class FutebolDefaultWrapperComponent implements OnInit, OnDestroy {
     }
 
     getCampeonatos2Sidebar() {
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(FOOTBALL_ID);
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId);
         const opcoes = this.paramsService.getOpcoes();
         const params = {
-            'sport_id': FOOTBALL_ID,
+            'sport_id': this.sportIdService.footballId,
             'campeonatos_bloqueados': campeonatosBloqueados,
             'data_final': opcoes.data_limite_tabela,
         };

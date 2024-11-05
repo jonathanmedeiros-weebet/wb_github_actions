@@ -241,7 +241,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         }
 
         if (this.isCliente) {
-            if (this.verifiedIdentity) {
                 this.clienteService.alterarSenha(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
@@ -251,7 +250,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                         },
                         error => this.handleError(error)
                     );
-            }
         } else {
             this.auth.changePassword(values)
                 .pipe(takeUntil(this.unsub$))

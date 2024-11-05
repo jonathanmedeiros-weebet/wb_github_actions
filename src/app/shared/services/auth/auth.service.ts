@@ -97,6 +97,10 @@ export class AuthService {
                         this.setIsCliente(true);
                         if(this.xtremepushHabilitado()){
                             xtremepush('set', 'user_id', res.results.user.id);
+                            setTimeout(function() {
+                                xtremepush('event', 'login');
+                            }, 100);
+                            this.xtremepushBackgroundRemove();
                         }
                     }
                     this.logadoSource.next(true);
@@ -128,6 +132,10 @@ export class AuthService {
                         this.setIsCliente(true);
                         if(this.xtremepushHabilitado()){
                             xtremepush('set', 'user_id', res.results.user.id);
+                            setTimeout(function() {
+                                xtremepush('event', 'login');
+                            }, 100);
+                            this.xtremepushBackgroundRemove();
                         }
                     }
 
@@ -165,23 +173,24 @@ export class AuthService {
                 catchError(this.errorService.handleError)
             );
     }
+
     performLogout(logoutType: string) {
-        this.http.post(`${this.authLokiUrl}/logout`, { logout_type: logoutType }, this.header.getRequestOptions(true)).subscribe({
-            next: (response) => {
+        this.http.post(`${this.authLokiUrl}/logout`, { logout_type: logoutType }, this.header.getRequestOptions(true))
+            .toPromise().then((response) => {
+            this.limparStorage();
+            this.logadoSource.next(false);
+            if (this.xtremepushHabilitado()) {
+                this.cleanXtremepushNotifications();
+            }
+            location.reload();
+        }).catch((error) => {
+            if (error.status === 401 || error.status === 404) {
                 this.limparStorage();
-                window.location.reload();
+                this.logadoSource.next(false);
                 if (this.xtremepushHabilitado()) {
                     this.cleanXtremepushNotifications();
                 }
-            },
-            error: (error) => {
-                if (error.status === 401) {
-                    this.limparStorage();
-                    window.location.reload();
-                    if (this.xtremepushHabilitado()) {
-                        this.cleanXtremepushNotifications();
-                    }
-                }
+                location.reload();
             }
         });
     }
@@ -413,6 +422,22 @@ export class AuthService {
             .pipe(
                 catchError(this.errorService.handleError)
             );
+    }
+
+    xtremepushBackgroundRemove() {
+        let intervalId = setInterval(() => {
+            const element = document.querySelector('.webpush-swal2-popup.webpush-swal2-modal.webpush-swal2-show');
+
+            if (element) {
+                (element as HTMLElement).style.visibility = 'hidden';
+                (element as HTMLElement).style.background = 'none';
+                (element as HTMLElement).style.visibility = 'visible';
+                clearInterval(intervalId);
+            }
+        }, 100);
+        setTimeout(() => {
+            clearInterval(intervalId);
+        }, 3000);
     }
 
 }
