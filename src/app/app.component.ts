@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { CadastroModalComponent } from './shared/layout/modals';
+import { CadastroModalComponent, EsqueceuSenhaModalComponent } from './shared/layout/modals';
 import { LoginModalComponent } from './shared/layout/modals';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -153,6 +153,20 @@ export class AppComponent implements OnInit {
             });
 
             this.router.navigate(['esportes/futebol']);
+        }
+
+        if (this.router.url.includes('/esqueceu-senha')) {
+            if (this.auth.isLoggedIn()) {
+                return this.router.navigate(['/alterar-senha']);
+            }
+            this.modalService.open(EsqueceuSenhaModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            });
+
+            this.router.navigate(['/']);
         }
 
         const params = new URLSearchParams(location.search);
