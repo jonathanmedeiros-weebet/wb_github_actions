@@ -45,7 +45,13 @@ export class AuthService {
                 map(res => {
                     if (res.results.user) {
                         localStorage.setItem('user', JSON.stringify(res.results.user));
-                        this.ga4Service.triggerGa4Event(EventGa4Types.LOGIN);
+                        this.ga4Service.triggerGa4Event(
+                            EventGa4Types.LOGIN,{
+                                name : res.results.user.name,
+                                email : res.results.user.login,
+                                phone : res.results.user.phone
+                            }
+                        );
                     }
                     return res;
                 }),
