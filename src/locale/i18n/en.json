@@ -607,7 +607,8 @@
         "dezembro": "December"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Select an option"
+        "selecione_uma_opcao": "Select an option",
+        "opcao_desabilitado": "Disabled"
     },
     "botoes": {
         "aceitar": "Accept",
@@ -670,6 +671,17 @@
             "descricao": "The session timer is a setting that allows you to set a time limit for platform usage. It helps control the time spent, alerting you when the limit is reached and automatically ending your session, promoting balanced and conscious use. For example, you can choose to limit your sessions to 30 minutes, 1 hour, or any other suitable interval for you, and also disable this feature as desired. When the session time limit is reached, our system will automatically end your session and log you out of your account. This helps ensure that you respect your predefined time limits.",
             "definir_tempo": "Set session time",
             "desativado": "Disabled"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Time limit",
+            "descricao": "The time limit setting allows you to set a maximum time to play. This setting helps you control the time you spend, preventing overuse and promoting a healthy gaming experience. You can set a daily limit. When the stipulated time is reached, a warning will appear informing you that the limit has been reached, helping to ensure breaks and avoid prolonged use.",
+            "definir_limite_diario": "Set a daily time limit",
+            "30minutos": "30 minutes",
+            "45minutos": "45 minutes",
+            "1hora": "1 hour",
+            "2horas": "2 hours",
+            "3horas": "3 hours",
+            "4horas": "4 hours"
         }
     },
     "rodada_gratis":{

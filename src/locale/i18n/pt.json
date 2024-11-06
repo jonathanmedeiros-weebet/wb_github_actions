@@ -609,7 +609,8 @@
         "dezembro": "Dezembro"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Selecione uma opção"
+        "selecione_uma_opcao": "Selecione uma opção",
+        "opcao_desabilitado": "Desabilitado"
     },
     "botoes": {
         "aceitar": "Aceitar",
@@ -672,6 +673,17 @@
             "descricao": "O temporizador de sessão é uma configuração no qual permite você definir um limite de tempo para o uso da plataforma. Ela ajuda a controlar o tempo gasto, alertando  você quando o limite é atingido e encerrando a sua sessão automaticamente, promovendo um uso equilibrado e consciente.  Por exemplo, você pode escolher limitar suas sessões a 30 minutos, 1 hora ou qualquer outro intervalo adequado para você e também desativar essa funcionalidade assim que desejar. Quando o limite de tempo da sessão for atingido, nosso sistema encerrará automaticamente sua sessão e fará o logout de sua conta. Isso ajuda a garantir que você respeite seus limites de tempo predefinidos.",
             "definir_tempo": "Definir tempo de sessão",
             "desativado": "Desativado"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Limite de tempo",
+            "descricao": "A configuração de limite de tempo permite que você defina um tempo máximo para jogar. Essa configuração ajuda a controlar o tempo gasto, evitando o uso excessivo e promovendo uma experiência de jogo saudável. Você pode configurar um limite diário. Quando o tempo estipulado for atingido, um aviso aparecerá informando que o limite foi alcançado, ajudando a garantir pausas e evitar o uso prolongado.",
+            "definir_limite_diario": "Definir limite diário de tempo",
+            "30minutos": "30 minutos",
+            "45minutos": "45 minutos",
+            "1hora": "1 hora",
+            "2horas": "2 horas",
+            "3horas": "3 horas",
+            "4horas": "4 horas"
         }
     },
     "rodada_gratis":{
