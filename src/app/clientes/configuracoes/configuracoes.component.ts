@@ -51,6 +51,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     sectionLimiteApostas = false;
     sectionLimiteDeposito = false;
+    sectionLimitePerdas = false;
     sectionTemporizadorSessao = false;
     sectionPeriodoPausa = false;
     sectionExclusaoConta = false;
@@ -62,6 +63,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     formLimiteApostas: UntypedFormGroup;
     formLimiteDeposito: UntypedFormGroup;
+    formLimitePerda: UntypedFormGroup;
     formPeriodoPausa: UntypedFormGroup;
     formExclusaoConta: UntypedFormGroup;
     formLimiteTempoAtividade: UntypedFormGroup;
@@ -120,6 +122,12 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                     limiteMensal: resp.limiteDepositoMensal ?? 0,
                 });
 
+                this.formLimitePerda.setValue({
+                    limiteDiario: resp.limitePerdaDiario ?? 0,
+                    limiteSemanal: resp.limitePerdaSemanal ?? 0,
+                    limiteMensal: resp.limitePerdaMensal ?? 0,
+                });
+
                 this.formLimiteTempoAtividade.setValue({
                     limiteTempoAtividade: this.formatterLimiteTempoAtividade(resp.limiteTempoAtividade) ?? ''
                 });
@@ -148,6 +156,12 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         });
 
         this.formLimiteDeposito = this.fb.group({
+            limiteDiario: [''],
+            limiteSemanal: [''],
+            limiteMensal: [''],
+        });
+
+        this.formLimitePerda = this.fb.group({
             limiteDiario: [''],
             limiteSemanal: [''],
             limiteMensal: [''],
@@ -187,7 +201,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 backdrop: 'static'
             }
         );
-         
+
         modalRef.componentInstance.senha = this.senhaAtual.value;
 
         modalRef.result.then(
@@ -241,6 +255,24 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             error => this.handleError(error)
         )
     }
+    onSubmitLimitePerda() {
+        let data = this.formLimitePerda.value;
+        if(this.twoFactorInProfileChangeEnabled){
+            data = {
+                ...data,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+        this.clienteService.configLimitePerda(data).subscribe(
+            result => {
+                this.messageService.success(result.message);
+                this.senhaAtual.patchValue('');
+            },
+            error => this.handleError(error)
+        )
+    }
+
 
     onSubmitLimiteTempoAtividade() {
         let data = this.formLimiteTempoAtividade.value;
@@ -256,7 +288,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         this.clienteService.configLimiteTempoAtividade(data).subscribe(
             result => {
                 this.activityDetectService.resetActivity();
-                
+
                 this.activityDetectService.loadDailyActivityTime();
                 this.activityDetectService.initializeActivityConfig();
 
@@ -291,7 +323,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     onSubmitExclusaoConta() {
         const { motivoExclusao, confirmarExclusao, opcao} = this.formExclusaoConta.value;
-        
+
         const multifator = this.twoFactorInProfileChangeEnabled
             ? {codigo: this.codigoMultifator, token: this.tokenMultifator}
             : {};
@@ -318,6 +350,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         if(this.sectionLimiteDeposito && section != 'limiteDeposito') {
             this.sectionLimiteDeposito = false;
         }
+        if(this.sectionLimitePerdas && section != 'limitePerdas') {
+            this.sectionLimitePerdas = false;
+        }
         if(this.sectionTemporizadorSessao && section != 'temporizadorSessao') {
             this.sectionTemporizadorSessao = false;
         }
@@ -338,6 +373,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             case 'limiteDeposito':
                 this.sectionLimiteDeposito = !this.sectionLimiteDeposito;
                 break;
+            case 'limitePerdas':
+                    this.sectionLimitePerdas = !this.sectionLimitePerdas;
+                    break;
             case 'temporizadorSessao':
                 this.sectionTemporizadorSessao = !this.sectionTemporizadorSessao;
                 break;

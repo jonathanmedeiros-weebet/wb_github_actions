@@ -204,6 +204,16 @@ export class ClienteService {
             )
     }
 
+    configLimitePerda(limites: any) {
+        return this.http.post(`${this.clienteUrl}/limites-perdas`, limites, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
+
     configLimiteTempoAtividade(limites:any) {
         return this.http.post(`${this.clienteUrl}/limites-tempo`, limites, this.headers.getRequestOptions(true))
             .pipe(
