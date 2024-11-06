@@ -8,6 +8,8 @@ import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct, NgbModal} from '@
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MultifactorConfirmationModalComponent } from 'src/app/shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { IdleDetectService } from 'src/app/shared/services/idle-detect.service';
+import { ActivityDetectService } from '../../shared/services/activity-detect.service';
 
 /**
  * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
@@ -53,6 +55,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     sectionTemporizadorSessao = false;
     sectionPeriodoPausa = false;
     sectionExclusaoConta = false;
+    sectionLimiteTempoAtividade = false;
 
     showConfirmarExclusao = false;
     showMotivoExclusaoConta = false;
@@ -63,6 +66,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     formLimitePerda: UntypedFormGroup;
     formPeriodoPausa: UntypedFormGroup;
     formExclusaoConta: UntypedFormGroup;
+    formLimiteTempoAtividade: UntypedFormGroup;
 
     infoPeriodoPausa = '';
     configuracoes: any;
@@ -82,6 +86,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private activeModal: NgbActiveModal,
         private modalService: NgbModal,
+        private activityDetectService: ActivityDetectService
     ) {}
 
     get twoFactorInProfileChangeEnabled(): boolean {
@@ -123,6 +128,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                     limiteMensal: resp.limitePerdaMensal ?? 0,
                 });
 
+                this.formLimiteTempoAtividade.setValue({
+                    limiteTempoAtividade: this.formatterLimiteTempoAtividade(resp.limiteTempoAtividade) ?? ''
+                });
+
                 if(resp.infoPeriodoPausa) {
                     this.infoPeriodoPausa = resp.infoPeriodoPausa;
                 }
@@ -156,6 +165,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             limiteDiario: [''],
             limiteSemanal: [''],
             limiteMensal: [''],
+        });
+
+        this.formLimiteTempoAtividade = this.fb.group({
+            limiteTempoAtividade: ['']
         });
 
         this.formPeriodoPausa = this.fb.group({
@@ -242,10 +255,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             error => this.handleError(error)
         )
     }
-
     onSubmitLimitePerda() {
         let data = this.formLimitePerda.value;
-
         if(this.twoFactorInProfileChangeEnabled){
             data = {
                 ...data,
@@ -253,13 +264,39 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 codigo: this.codigoMultifator
             }
         }
-
         this.clienteService.configLimitePerda(data).subscribe(
             result => {
                 this.messageService.success(result.message);
                 this.senhaAtual.patchValue('');
             },
-            error => this.handleError(error.message)
+            error => this.handleError(error)
+        )
+    }
+
+
+    onSubmitLimiteTempoAtividade() {
+        let data = this.formLimiteTempoAtividade.value;
+
+        if (this.twoFactorInProfileChangeEnabled) {
+            data = {
+                ...data,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+
+        this.clienteService.configLimiteTempoAtividade(data).subscribe(
+            result => {
+                this.activityDetectService.resetActivity();
+
+                this.activityDetectService.loadDailyActivityTime();
+                this.activityDetectService.initializeActivityConfig();
+
+                this.messageService.success(result.message);
+            },
+            error => {
+                this.handleError(error)
+            }
         )
     }
 
@@ -323,7 +360,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             this.sectionPeriodoPausa = false;
         }
         if(this.sectionExclusaoConta && section != 'exclusaoConta') {
-             this.sectionExclusaoConta = false;
+            this.sectionExclusaoConta = false;
+        }
+        if(this.sectionLimiteTempoAtividade && section != 'limiteTempoAtividade') {
+            this.sectionLimiteTempoAtividade = false;
         }
 
         switch (section) {
@@ -344,6 +384,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 break;
             case 'exclusaoConta':
                 this.sectionExclusaoConta = !this.sectionExclusaoConta;
+                break;
+            case 'limiteTempoAtividade':
+                this.sectionLimiteTempoAtividade = !this.sectionLimiteTempoAtividade;
                 break;
             default:
                 break;
@@ -403,5 +446,22 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     toClose() {
         this.activeModal.dismiss('Cross click');
+    }
+
+    formatterLimiteTempoAtividade = (input: string) => {
+        switch(input){
+            case '00:30':
+                return '30minutos';
+            case '00:45':
+                return '45minutos';
+            case '01:00':
+                return '1hora';
+            case '02:00':
+                return '2horas';
+            case '03:00':
+                return '3horas';
+            case '04:00':
+                return '4horas';
+        }
     }
 }

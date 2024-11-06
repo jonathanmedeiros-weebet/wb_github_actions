@@ -10,4 +10,6 @@ export class Cliente {
     telefone: string;
     newsletter: boolean;
     chave_pix: string;
+    nome: string;
+    sobrenome: string;
 }

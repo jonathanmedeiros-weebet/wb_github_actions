@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LayoutService } from './../../../services';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Ga4Service , EventGa4Types} from '../../services/ga4/ga4.service';
 
 @Component({
     selector: 'app-submenu',
@@ -46,7 +47,8 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
         private translate: TranslateService,
         private el: ElementRef,
         private layoutService: LayoutService,
-        private renderer: Renderer2
+        private renderer: Renderer2,
+        private ga4Service: Ga4Service
     ) {
     }
 
@@ -458,5 +460,9 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public handleClick(menuId: string) {
         this.onClick.emit(menuId)
+    }
+
+    public eventClickGa4(){
+        this.ga4Service.triggerGa4Event(EventGa4Types.SELECT_CONTENT);
     }
 }

@@ -24,6 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -98,7 +99,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private cd: ChangeDetectorRef,
         private layoutService: LayoutService,
         private geolocationService: GeolocationService,
-        private sportIdService: SportIdService
+        private sportIdService: SportIdService,
+        private ga4Service: Ga4Service,
     ) {
         super();
 
@@ -306,6 +308,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
 
         this.bilheteService.atualizarItens(this.itens.value);
+        this.ga4Service.triggerGa4Event(EventGa4Types.REMOVE_FROM_CART);
     }
 
     removerItens() {

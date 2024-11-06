@@ -43,6 +43,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     enabledBettorPix = false;
     modoCambista = true;
     indiqueGanheHabilitado = false;
+    cashbackEnabled = false;
     permitirQualquerChavePix = false;
     desafioNome: string;
 
@@ -107,6 +108,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.enabledBettorPix = Boolean(this.paramsLocais.getOpcoes().payment_methods_available_for_bettors.length);
         this.modoCambista = this.paramsLocais.getOpcoes().modo_cambista;
         this.indiqueGanheHabilitado = this.paramsLocais.indiqueGanheHabilitado();
+        this.cashbackEnabled = this.paramsLocais.cashbackEnabled();
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
         this.desafioNome = this.paramsLocais.getOpcoes().desafio_nome;
 

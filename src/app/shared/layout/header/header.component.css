@@ -284,9 +284,10 @@ nav::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     align-items: center;
-    width: calc((100% / 3) - 8px);
-    height: 65px;
+    width: calc((100% / 3) - 4px);
+    height: 70px;
     text-decoration: none;
     font-size: 12px;
     border-radius: 5px;
@@ -295,6 +296,7 @@ nav::-webkit-scrollbar {
     background-color: var(--inputs-odds);
     margin-bottom: 6px;
     margin-left: 6px;
+    line-height: 13px;
 }
 
 .dropdown-btn-filled:first-of-type, .dropdown-btn-filled:nth-child(3n + 1) {

@@ -14,6 +14,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { MultifactorConfirmationModalComponent } from 'src/app/shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -43,6 +44,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         private modalService: NgbModal,
         private translate: TranslateService,
         private paramsLocais: ParametrosLocaisService,
+        private ga4Service: Ga4Service,
     ) {
         super();
         this.cidades = [];
@@ -197,6 +199,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                     } else {
                         this.handleError(this.translate.instant('geral.enderecoNaoEncontrado'));
                     }
+
+                    this.ga4Service.triggerGa4Event(EventGa4Types.ADD_SHIPPING_INFO);
                 },
             );
         }
