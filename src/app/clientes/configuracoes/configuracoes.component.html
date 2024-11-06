@@ -99,7 +99,7 @@
                         <p class="descricao">{{ 'jogo_responsavel.limite_perdas.descricao' | translate }}</p>
                         <form [formGroup]="formLimitePerda" (ngSubmit)="handleSubmit('onSubmitLimitePerda')">
                             <div class="field">
-                                <label for="">{{ 'jogo_responsavel.limite_perda.definir_limite_diario' | translate }}</label>
+                                <label for="">{{ 'jogo_responsavel.limite_perdas.definir_limite_diario' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
@@ -107,7 +107,7 @@
                                 >
                             </div>
                             <div class="field">
-                                <label for="">{{ 'jogo_responsavel.limite_perda.definir_limite_semanal' | translate }}</label>
+                                <label for="">{{ 'jogo_responsavel.limite_perdas.definir_limite_semanal' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
@@ -115,7 +115,7 @@
                                 >
                             </div>
                             <div class="field">
-                                <label for="">{{ 'jogo_responsavel.limite_perda.definir_limite_mensal' | translate }}</label>
+                                <label for="">{{ 'jogo_responsavel.limite_perdas.definir_limite_mensal' | translate }}</label>
                                 <input currencyMask
                                     [ngClass]="'form-control inverted-out'"
                                     [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
