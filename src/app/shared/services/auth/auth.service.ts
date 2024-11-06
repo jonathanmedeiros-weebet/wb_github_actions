@@ -10,6 +10,7 @@ import {config} from './../../config';
 
 import * as moment from 'moment';
 import {Router} from '@angular/router';
+import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
 
 declare var xtremepush: any;
 
@@ -29,7 +30,8 @@ export class AuthService {
         private header: HeadersService,
         private errorService: ErrorService,
         private paramsService: ParametrosLocaisService,
-        private router: Router
+        private router: Router,
+        private ga4Service: Ga4Service,
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
@@ -43,6 +45,13 @@ export class AuthService {
                 map(res => {
                     if (res.results.user) {
                         localStorage.setItem('user', JSON.stringify(res.results.user));
+                        this.ga4Service.triggerGa4Event(
+                            EventGa4Types.LOGIN,{
+                                name : res.results.user.name,
+                                email : res.results.user.login,
+                                phone : res.results.user.phone
+                            }
+                        );
                     }
                     return res;
                 }),
