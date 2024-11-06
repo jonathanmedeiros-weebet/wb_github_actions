@@ -842,7 +842,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public redirectToFilteredProviders(provider) {
         const providerName = provider.gameFornecedor;
 
-        this.router.navigate(['/casino', providerName]);
+        this.router.navigate(['/casino'], { queryParams: { provider: providerName, category: 'todos' } });
     }
 
     public showMoreGames() {
@@ -865,7 +865,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             return;
         }
     
-        this.router.navigate(['casino/wallFiltered'], { queryParams: { category } });
+        this.router.navigate(['casino'], { queryParams: { category: category, providerName: 'todos' } });
     }
 
     private filterDestaques(games: GameCasino[], category: string): Promise<GameCasino[]> {

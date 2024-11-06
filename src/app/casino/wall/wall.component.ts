@@ -7,6 +7,7 @@ import { LoginModalComponent } from '../../shared/layout/modals';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { WallProviderFilterModalComponent } from './components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 
 export interface Fornecedor {
     gameFornecedor: string;
@@ -80,7 +81,8 @@ export class WallComponent implements OnInit, AfterViewInit {
         private el: ElementRef,
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private navigationHistoryService: NavigationHistoryService
     ) {
     }
 
@@ -135,18 +137,10 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.route.queryParamMap.subscribe(params => {
-            this.filteredCategory = params.get('category');
-            if (this.filteredCategory == 'roulette') {
-                this.filteredCategory = 'roleta';
-            } else if(this.filteredCategory == 'table') {
-                this.filteredCategory = 'mesa';
-            } else if(this.filteredCategory == 'scratchcard') {
-                this.filteredCategory = 'raspadinha';
-            }
+        this.navigationHistoryService.limparFiltro$.subscribe(() => {
+            this.clearFilters();
+        });
 
-            this.filterGames(null, this.filteredCategory);
-          });
         this.cd.detectChanges();
         this.onTranslateChange();
         this.getGameList();
@@ -257,11 +251,22 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameList = this.gamesCassino;
         this.gameTitle = this.translate.instant('geral.todos');
 
-        const paramValue = this.route.snapshot.params["game_fornecedor"];
-        const providerParam = (paramValue === undefined || paramValue === null || paramValue === 'wallFiltered') ? null : paramValue;
-        if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
-            this.filterGames(providerParam, this.categorySelected, true);
-        }
+        this.route.queryParamMap.subscribe(params => {
+            const provider = params.get('provider');
+            this.categorySelected = params.get('category');
+
+            if (this.categorySelected == 'roulette') {
+                this.categorySelected = 'roleta';
+            } else if(this.categorySelected == 'table') {
+                this.categorySelected = 'mesa';
+            } else if(this.categorySelected == 'scratchcard') {
+                this.categorySelected = 'raspadinha';
+            }
+
+            if (provider && !['c', 'cl', 'v'].includes(provider)) {
+                this.filterGames(provider ?? null, this.categorySelected ?? null);
+            }
+        });
 
         this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
@@ -331,11 +336,22 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameList = this.gamesCassino;
         this.gameTitle = this.translate.instant('geral.todos');
 
-        const paramValue = this.route.snapshot.params["game_fornecedor"];
-        const providerParam = (paramValue === undefined || paramValue === null || paramValue === 'wallFiltered') ? null : paramValue;
-        if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
-            this.filterGames(providerParam, this.categorySelected, true);
-        }
+        this.route.queryParamMap.subscribe(params => {
+            const provider = params.get('provider');
+            this.categorySelected = params.get('category');
+
+            if (this.categorySelected == 'roulette') {
+                this.categorySelected = 'roleta';
+            } else if(this.categorySelected == 'table') {
+                this.categorySelected = 'mesa';
+            } else if(this.categorySelected == 'scratchcard') {
+                this.categorySelected = 'raspadinha';
+            }
+
+            if (provider && !['c', 'cl', 'v'].includes(provider)) {
+                this.filterGames(provider ?? null, this.categorySelected ?? null);
+            }
+        });
 
         this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
@@ -409,6 +425,9 @@ export class WallComponent implements OnInit, AfterViewInit {
     ) {
         let providerName = provider ?? this.gameFornecedor;
         let categoryName = this.getCategorySlug(category ?? this.categorySelected);
+
+        this.navigationHistoryService.setCategory(categoryName);
+        this.navigationHistoryService.setProvider(providerName);
 
         this.categorySelected = category ?? 'cassino';
         let gamesCassinoList = this.gamesCassino;
@@ -529,5 +548,12 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     public exibirMais() {
         this.qtdItens += 3;
+    }
+
+    public clearFilters() {
+        this.categorySelected = 'todos';
+        this.gameFornecedor = null;
+        this.navigationHistoryService.setCategory(null);
+        this.navigationHistoryService.setProvider(null);
     }
 }

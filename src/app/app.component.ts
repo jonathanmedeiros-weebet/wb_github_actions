@@ -10,6 +10,7 @@ import { LoginModalComponent } from './shared/layout/modals';
 
 import { TranslateService } from '@ngx-translate/core';
 import { IdleDetectService } from './shared/services/idle-detect.service';
+import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit {
         private translate: TranslateService,
         private idleDetectService: IdleDetectService,
         private utilsService: UtilsService,
+        private navigationHistoryService: NavigationHistoryService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
