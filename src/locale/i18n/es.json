@@ -47,6 +47,7 @@
         "saldo": "Saldo",
         "minhaConta": "Mi cuenta",
         "salvar": "Guardar",
+        "salvando": "Guardando",
         "cancelar": "Cancelar",
         "fechar": "Cerrar",
         "todos": "Todos",
@@ -250,6 +251,8 @@
         "aguardando": "Pendiente",
         "loginEmail": "Correo electrónico",
         "loginPhone": "Teléfono",
+        "loginUsername": "Username",
+        "field": "Campo",
         "jogosRelacionados": "juegos relacionados",
         "session_alert": "Alerta de Sesión",
         "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?"

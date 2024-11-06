@@ -6,7 +6,7 @@ import {
 import { Router, NavigationExtras } from '@angular/router';
 
 import { Campeonato, Jogo } from '../../../models';
-import { ParametrosLocaisService, BilheteEsportivoService, HelperService, LayoutService } from '../../../services';
+import { ParametrosLocaisService, BilheteEsportivoService, HelperService, LayoutService, SportIdService } from '../../../services';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,8 +16,6 @@ import 'moment/min/locales';
 import { BasqueteJogoComponent } from '../basquete-jogo/basquete-jogo.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-
-import * as sportsIds from '../../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-generico-listagem',
@@ -70,8 +68,10 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
 
     tabSelected;
 
-    basketballId = sportsIds.BASKETBALL_ID;
-    futsalId = sportsIds.FUTSAL_ID;
+    basketballId;
+    futsalId;
+
+    teamShieldsFolder;
 
     iconesGenericos = {
         'basquete': 'wbicon icon-basquete',
@@ -94,8 +94,12 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         private router: Router,
         private modalService: NgbModal,
         private translate: TranslateService,
-        public layoutService: LayoutService
-    ) { }
+        public layoutService: LayoutService,
+        private sportIdService: SportIdService,
+    ) {
+        this.basketballId = this.sportIdService.basketballId;
+        this.futsalId = this.sportIdService.futsalId;
+    }
 
     ngOnInit() {
         this.mobileScreen = window.innerWidth <= 1024;
@@ -104,6 +108,7 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
         this.cotacoesLocais = this.paramsService.getCotacoesLocais();
         this.dataLimiteTabela = this.paramsService.getOpcoes().data_limite_tabela;
         this.exibirCampeonatosExpandido = this.paramsService.getExibirCampeonatosExpandido();
+        this.teamShieldsFolder = this.sportIdService.teamShieldsFolder(this.sportId);
 
         this.limiteDiasTabela = moment(this.dataLimiteTabela).diff(moment().set({ 'hour': 0, 'minute': 0, 'seconds': 0, 'millisecond': 0 }), 'days');
 
@@ -419,11 +424,11 @@ export class GenericoListagemComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     exibirEscudo() {
-        return (this.sportId !== sportsIds.TENNIS_ID && this.sportId !== sportsIds.BOXING_ID && this.sportId !== sportsIds.E_SPORTS_ID);
+        return (this.sportId !== this.sportIdService.tennisId && this.sportId !== this.sportIdService.boxingId && this.sportId !== this.sportIdService.eSportsId);
     }
 
     exibirTotalOdds() {
-        return this.sportId === sportsIds.BASKETBALL_ID;
+        return this.sportId === this.sportIdService.basketballId;
     }
 
     toggleCampeonato(campeonatoId) {

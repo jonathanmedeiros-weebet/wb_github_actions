@@ -47,6 +47,7 @@
         "saldo": "Balance",
         "minhaConta": "My Account",
         "salvar": "Save",
+        "salvando": "Saving",
         "cancelar": "Cancel",
         "fechar": "Close",
         "todos": "All",
@@ -254,6 +255,8 @@
         "aguardando": "Pending",
         "loginEmail": "Email",
         "loginPhone": "Phone",
+        "loginUsername": "Username",
+        "field": "Field",
         "session_alert": "Session Alert",
         "session_alert_message": "There is currently an active session on another device. To continue access, would you like to close the other session?"
     },
