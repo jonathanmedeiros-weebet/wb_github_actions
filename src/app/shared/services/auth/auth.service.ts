@@ -1,18 +1,20 @@
-import {Injectable, EventEmitter, Output} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, BehaviorSubject} from 'rxjs';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import { Injectable, EventEmitter, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import {HeadersService} from './../utils/headers.service';
-import {ErrorService} from './../utils/error.service';
-import {ParametrosLocaisService} from './../parametros-locais.service';
-import {config} from './../../config';
+import { HeadersService } from './../utils/headers.service';
+import { ErrorService } from './../utils/error.service';
+import { ParametrosLocaisService } from './../parametros-locais.service';
+import { config } from './../../config';
 
 import * as moment from 'moment';
-import {Router} from '@angular/router';
-import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
+import { Router } from '@angular/router';
+import { Ga4Service, EventGa4Types } from '../ga4/ga4.service';
 
 declare var xtremepush: any;
+
+const INTERCOM_HMAC_COOKIE = 'intercom_hmac';
 
 @Injectable({
     providedIn: 'root',
@@ -46,11 +48,11 @@ export class AuthService {
                     if (res.results.user) {
                         localStorage.setItem('user', JSON.stringify(res.results.user));
                         this.ga4Service.triggerGa4Event(
-                            EventGa4Types.LOGIN,{
-                                name : res.results.user.name,
-                                email : res.results.user.login,
-                                phone : res.results.user.phone
-                            }
+                            EventGa4Types.LOGIN, {
+                            name: res.results.user.name,
+                            email: res.results.user.login,
+                            phone: res.results.user.phone
+                        }
                         );
                     }
                     return res;
@@ -104,14 +106,19 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', res.results.user.id);
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 xtremepush('event', 'login');
                             }, 100);
                             this.xtremepushBackgroundRemove();
                         }
                     }
+
+                    if (Boolean(res.results?.intercomHmac)) {
+                        this.setCookie(res.results.intercomHmac, INTERCOM_HMAC_COOKIE);
+                    }
+
                     this.logadoSource.next(true);
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
@@ -139,13 +146,17 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', res.results.user.id);
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 xtremepush('event', 'login');
                             }, 100);
                             this.xtremepushBackgroundRemove();
                         }
+                    }
+
+                    if (Boolean(res.results?.intercomHmac)) {
+                        this.setCookie(res.results.intercomHmac, INTERCOM_HMAC_COOKIE);
                     }
 
                     this.logadoSource.next(true);
@@ -185,23 +196,21 @@ export class AuthService {
 
     performLogout(logoutType: string) {
         this.http.post(`${this.authLokiUrl}/logout`, { logout_type: logoutType }, this.header.getRequestOptions(true))
-            .toPromise().then((response) => {
-            this.limparStorage();
-            this.logadoSource.next(false);
-            if (this.xtremepushHabilitado()) {
-                this.cleanXtremepushNotifications();
-            }
-            location.reload();
-        }).catch((error) => {
-            if (error.status === 401 || error.status === 404) {
-                this.limparStorage();
-                this.logadoSource.next(false);
-                if (this.xtremepushHabilitado()) {
-                    this.cleanXtremepushNotifications();
-                }
-                location.reload();
-            }
-        });
+            .pipe(
+                map(res => {
+                    this.limparStorage();                    
+                    this.deleteCookie(INTERCOM_HMAC_COOKIE);
+
+                    this.logadoSource.next(false);
+
+                    if (this.xtremepushHabilitado()) {
+                        this.cleanXtremepushNotifications();
+                    }
+
+                    location.reload();
+                }),
+                catchError(this.errorService.handleError)
+            );
     }
 
     logout() {
@@ -212,7 +221,7 @@ export class AuthService {
         this.performLogout('expired by inactivity');
     }
 
-    cleanXtremepushNotifications(){
+    cleanXtremepushNotifications() {
         xtremepush('set', 'user_id', "");
         const xtremepushNotificationContainer = document.getElementById('xtremepushNotificationContainer');
         xtremepushNotificationContainer.innerHTML = '';
@@ -271,7 +280,7 @@ export class AuthService {
 
     requestEmailMultifator(senha) {
         const url = `${this.AuthUrl}/requestMultifatorEmail`;
-        const data  = { senha };
+        const data = { senha };
         return this.http
             .post(url, data, this.header.getRequestOptions(true))
             .pipe(
@@ -401,11 +410,13 @@ export class AuthService {
             );
     }
 
-    setCookie(valor) {
+    setCookie(value, name = null) {
         const d = new Date();
         d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
         const expires = 'expires=' + d.toUTCString();
-        document.cookie = valor + '=' + valor + ';' + expires + ';';
+
+        const cname = name ? name : value;
+        document.cookie = `${cname}=${value};${expires};`;
     }
 
     getCookie(cname) {
@@ -440,4 +451,7 @@ export class AuthService {
         }, 3000);
     }
 
+    deleteCookie(name) {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    }
 }
