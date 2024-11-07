@@ -1,7 +1,7 @@
 import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
 import { modalityOdds } from "@/constants";
-import { QuotaStatus, type Modalities } from "@/enums";
+import { QuotaStatus } from "@/enums";
 import { convertInMomentInstance, now } from "@/utilities";
 
 interface CalculateQuotaParams {
@@ -69,7 +69,7 @@ export const getLiveChampionship = async (sportId: number | string) => {
 
 const getOddsBySportId = (sportId: string | number) =>{
     const sportOdds = modalityOdds();
-    return sportOdds[sportId as Modalities] ?? []
+    return sportOdds[sportId as any] ?? []
 }
 
 export const getChampionshipRegionBySportId = async (sportId: string, dateSelected: string) => {

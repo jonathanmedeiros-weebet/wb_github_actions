@@ -158,10 +158,10 @@ import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
 import { checkLive, closeBet, getBetById, printTicket, sharedTicket, simulateBetClosure, tokenLiveClosing } from '@/services'
 import { formatDateTimeBR, formatDateBR, formatCurrency, delay } from '@/utilities'
-import { Modalities } from '@/enums';
 import { useConfigClient, useToastStore } from '@/stores';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
+import { getModalitiesEnum } from '@/constants';
 
 export default {
   name: 'close-bet',
@@ -218,13 +218,16 @@ export default {
     },
     // TODO: Rever essa logica. Pois precisa cobrir todos.
     MODALITY_SPORT_FUTEBOL() {
-      return Modalities.FOOTBALL;
+      return this.Modalities.FOOTBALL;
     },
     MODALITY_SPORT_VOLEI() {
-      return Modalities.VOLLEYBALL;
+      return this.Modalities.VOLLEYBALL;
     },
     MODALITY_SPORT_E_SPORTS() {
-      return Modalities.E_SPORTS;
+      return this.Modalities.E_SPORTS;
+    },
+    Modalities() {
+      return getModalitiesEnum();
     },
     buttonDisable() {
       return this.submitting == true;

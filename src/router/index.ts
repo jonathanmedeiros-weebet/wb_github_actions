@@ -150,7 +150,11 @@ const router = new VueRouter({
         auth: production
       }
     },
-  ]
+    {
+      path: '*',
+      redirect: '/'
+    }
+  ],
 })
 
 router.beforeEach(async (to, from, next) => {

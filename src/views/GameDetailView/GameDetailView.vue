@@ -32,7 +32,7 @@
 <script>
 import Header from '@/components/layouts/Header.vue'
 import GameDetailHeader from './parts/GameDetailHeader.vue'
-import { MarketTime, Modalities, QuotaStatus } from '@/enums'
+import { MarketTime, QuotaStatus } from '@/enums'
 import Collapse from '@/components/Collapse.vue'
 import Button from '@/components/Button.vue'
 import { getGame, hasQuotaPermission, calculateQuota, SocketService, prepareLiveQuote } from '@/services'
@@ -40,6 +40,7 @@ import { useConfigClient, useToastStore } from '@/stores'
 import TimeQuotes from './parts/TimeQuotes.vue'
 import PlayerQuotes from './parts/PlayerQuotes.vue'
 import GameDetailSkeleton from './parts/GameDetailSkeleton.vue'
+import { getModalitiesEnum } from '@/constants'
 
 export default {
     components: {
@@ -85,7 +86,7 @@ export default {
             return Boolean(this.options.length);
         },
         isFutebolModality() {
-            return this.game.sport_id === Modalities.FOOTBALL;
+            return this.game.sport_id === this.Modalities.FOOTBALL;
         },
         filteredPerPlayer() {
             return this.filterSelected == MarketTime.PLAYERS;
@@ -124,6 +125,9 @@ export default {
         },
         options() {
             return this.markets[this.filterSelected]
+        },
+        Modalities() {
+            return getModalitiesEnum();
         },
     },
     methods: {

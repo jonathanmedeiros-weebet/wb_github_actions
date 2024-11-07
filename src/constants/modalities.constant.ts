@@ -1,9 +1,23 @@
-import { Modalities } from "@/enums";
+import { ModalitiesBetsApi, ModalitiesLSport } from "@/enums";
 import type { ModalityOption } from "@/interfaces";
 import { useConfigClient } from "@/stores";
 
+export const getModalitiesEnum = () => {
+    const { sportbook } = useConfigClient();
+
+    switch (sportbook) {
+        case 'betsapi':
+            return ModalitiesBetsApi;
+        case 'lsport':
+            return ModalitiesLSport;
+        default:
+            return ModalitiesBetsApi;
+    }
+}
+
 export const modalityList = (): ModalityOption[] => {
     const { options, popularLotteryDeprecatedByAndroidVersion } = useConfigClient();
+    const Modalities = getModalitiesEnum();
     const modalities = [
         {
             name: 'Futebol',
@@ -90,6 +104,8 @@ export const modalityList = (): ModalityOption[] => {
 
 export const modalityOdds = () => {
     const { mainOdds } = useConfigClient();
+    const Modalities = getModalitiesEnum();
+    
     return {
         [Modalities.FOOTBALL]: mainOdds,
         [Modalities.AMERICAN_FOOTBALL]: ['futebol_americano_casa', 'futebol_americano_fora'],

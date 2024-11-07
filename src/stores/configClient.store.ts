@@ -68,6 +68,7 @@ export const useConfigClient = defineStore('configClient', {
     blockedChampionships: (state) => state.params?.campeonatos_bloqueados ?? null,
     localQuotes: (state) => state.params?.cotacoes_local ?? [],
     deadlineTable: (state) => state.params?.data_limite_tabela ?? null,
+    sportbook: (state) => state.params?.sportbook ?? 'betsapi',
 
     hasParams: (state) => Boolean(Object.values(state.params).length),
     bettorDocumentNumberEnabled: (state) => Boolean(state.params?.opcoes?.allow_bettor_document_number_on_the_ticket),

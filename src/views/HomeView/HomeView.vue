@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { modalityList, countriesWithFemaleNames } from '@/constants'
+import { modalityList, countriesWithFemaleNames, getModalitiesEnum } from '@/constants'
 import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship, prepareLiveQuote, SocketService } from '@/services'
 import { useConfigClient, useHomeStore, useToastStore } from '@/stores'
 
@@ -89,7 +89,6 @@ import IconBasketball from '@/components/icons/IconBasketball.vue'
 import IconFutsal from '@/components/icons/IconFutsal.vue'
 import IconVoleiball from '@/components/icons/IconVoleiball.vue'
 import IconESport from '@/components/icons/IconESport.vue'
-import { Modalities } from '@/enums'
 import LiveButton from './parts/LiveButton.vue'
 import Toast from '@/components/Toast.vue'
 
@@ -134,7 +133,7 @@ export default {
   },
   created() {
     if(!Boolean(this.modality)) {
-      const modality = this.modalityList.find(modality => modality.id === Modalities.FOOTBALL);
+      const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
       this.homeStore.setModality(modality);
     }
 
@@ -152,8 +151,8 @@ export default {
       const { options } = useConfigClient();
       if(!options.aovivo) return false;
 
-      if(this.modality.id == Modalities.FOOTBALL && options.futebol_aovivo) return true;
-      if(this.modality.id == Modalities.BASKETBALL && options.basquete_aovivo) return true;
+      if(this.modality.id == this.Modalities.FOOTBALL && options.futebol_aovivo) return true;
+      if(this.modality.id == this.Modalities.BASKETBALL && options.basquete_aovivo) return true;
       
       return false;
     },
@@ -168,6 +167,9 @@ export default {
     },
     dateSelected() {
       return this.homeStore.date;
+    },
+    Modalities() {
+      return getModalitiesEnum();
     },
   },
   methods: {
@@ -242,7 +244,7 @@ export default {
         this.homeStore.setLeague(league);
       }
 
-      if(this.modality.id !== Modalities.FOOTBALL) {
+      if(this.modality.id !== this.Modalities.FOOTBALL) {
         this.prepareChampionshipPerRegionListForModalityOtherThanFootball();
       }
     },
@@ -351,7 +353,7 @@ export default {
     async handleModality(modalityId) {
       this.loading = true;
 
-      if(modalityId === Modalities.POPULAR_LOTTERY){
+      if(modalityId === this.Modalities.POPULAR_LOTTERY){
         this.$router.push({ name: 'popular-lottery' });
         return; 
       }
