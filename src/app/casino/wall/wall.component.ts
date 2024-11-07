@@ -263,8 +263,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.categorySelected = 'raspadinha';
             }
 
-            if (provider && !['c', 'cl', 'v'].includes(provider)) {
-                this.filterGames(provider ?? null, this.categorySelected ?? null);
+            if (provider && typeof provider === 'string' && !['c', 'cl', 'v'].includes(provider)) {
+                this.filterGames(provider, this.categorySelected ?? null);
+            } else {
+                this.filterGames(null, this.categorySelected ?? null);
             }
         });
 
@@ -348,8 +350,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                 this.categorySelected = 'raspadinha';
             }
 
-            if (provider && !['c', 'cl', 'v'].includes(provider)) {
+            if (provider && typeof provider === 'string' && !['c', 'cl', 'v'].includes(provider)) {
                 this.filterGames(provider ?? null, this.categorySelected ?? null);
+            } else {
+                this.filterGames(null, this.categorySelected ?? null);
             }
         });
 
