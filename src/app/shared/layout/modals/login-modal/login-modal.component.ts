@@ -5,7 +5,7 @@ import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../..
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { AuthService, ClienteService, MessageService, ParametrosLocaisService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
@@ -64,6 +64,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private modalService: NgbModal,
         private geolocationService: GeolocationService,
         private loginService: LoginService,
+        private clienteService: ClienteService
     ) {
         super();
     }
@@ -193,6 +194,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
                     this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
                     this.handleLogin();
+                    this.clienteService.checkPasswordExpirationDays(this.usuario.id)
                 },
                 (error) => {
                     if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
