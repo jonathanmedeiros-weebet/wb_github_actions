@@ -17,6 +17,7 @@ import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-gameview',
@@ -87,6 +88,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private financeiroService: FinanceiroService,
         private headerService: HeadersService,
+        private translate: TranslateService,
         @Inject(DOCUMENT) private document: any
     ) {
         this.currentUrl = window.location.href;
@@ -357,7 +359,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
                 response => {
-                    if (response['error']) {
+                    if (response['error'] == 1) {
+                        this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
 
@@ -379,7 +382,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.getRelatedAndPopularGames(response.category);
                 },
                 error => {
-                    this.handleError(error);
+                    this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                     this.router.navigate(['/']);
                 });
     }
