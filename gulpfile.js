@@ -2417,16 +2417,6 @@ gulp.task('pinbet.io', function (done) {
     });
 });
 
-gulp.task('clbet.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "clbet.com",
-        banca: "CLBET",
-        styles: "",
-        dominioTemp: "clbet.wee.bet"
-    });
-});
-
 gulp.task('emirates365.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
