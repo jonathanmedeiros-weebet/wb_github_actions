@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
         private translate: TranslateService,
         private idleDetectService: IdleDetectService,
         private utilsService: UtilsService,
-        private activityDetectService: ActivityDetectService
+        private activityDetectService: ActivityDetectService,
         private clienteService: ClienteService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
