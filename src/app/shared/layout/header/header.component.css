@@ -1056,9 +1056,6 @@ body .change-theme {
     display: block;
 }
 
-.hidden-header {
+.hidden-header, .header-submenu {
     display: none !important;
-    header-submenu {
-        display: none !important;
-    }
 }
