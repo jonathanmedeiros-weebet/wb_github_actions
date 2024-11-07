@@ -2481,16 +2481,6 @@ gulp.task('amabet.bet', function (done) {
     });
 });
 
-gulp.task('bigwinfree.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bigwinfree.com",
-        banca: "BIG WIN FREE",
-        styles: "",
-        dominioTemp: "bigwinfree.wee.bet"
-    });
-});
-
 gulp.task('jjsports.vip', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
