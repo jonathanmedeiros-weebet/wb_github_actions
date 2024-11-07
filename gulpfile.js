@@ -2453,15 +2453,6 @@ gulp.task('topbets.site', function (done) {
     });
 });
 
-gulp.task('via-bet.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "via-bet.com",
-        banca: "VIA BET",
-        styles: "",
-    });
-});
-
 gulp.task('amabet.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
