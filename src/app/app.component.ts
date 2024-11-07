@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService } from './services';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService, ClienteService } from './services';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IdleDetectService } from './shared/services/idle-detect.service';
 import { ConfiguracaoLimiteTempoModalComponent } from './shared/layout/modals/configuracao-limite-tempo-modal/configuracao-limite-tempo-modal.component';
 import { ActivityDetectService } from './shared/services/activity-detect.service';
+import { Subscription } from 'rxjs';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -38,6 +39,9 @@ export class AppComponent implements OnInit {
     modalPush;
     xtremepushHabilitado = false;
     hasPoliticaPrivacidade = false;
+    passwordExpired: Boolean;
+    modalRef: NgbModalRef;
+    subscription: Subscription;
 
     constructor(
         private auth: AuthService,
@@ -55,6 +59,7 @@ export class AppComponent implements OnInit {
         private idleDetectService: IdleDetectService,
         private utilsService: UtilsService,
         private activityDetectService: ActivityDetectService
+        private clienteService: ClienteService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -305,6 +310,28 @@ export class AppComponent implements OnInit {
 
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
+        }
+        
+        this.subscription = this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                if (event.url !== '/alterar-senha') { 
+                    this.verifyForceChangePassword();
+                }
+            }
+        });
+    }
+
+    ngOnDestroy(): void {        
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+    
+    private verifyForceChangePassword() {
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        if (user && this.paramsLocais.getOpcoes().enableForceChangePassword) {
+            this.clienteService.checkPasswordExpirationDays(user.id)
         }
     }
 
