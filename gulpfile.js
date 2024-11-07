@@ -2390,15 +2390,6 @@ gulp.task('betagora.io', function (done) {
     });
 });
 
-gulp.task('tigre.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "tigre.bet",
-        banca: "TIGRE BET",
-        styles: "",
-    });
-});
-
 gulp.task('sortte.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
