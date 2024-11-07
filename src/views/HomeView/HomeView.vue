@@ -205,14 +205,6 @@ export default {
           icon: isIcon ? iconComponent : null
         }));
 
-        championships.unshift({
-          id: `region_${region._id}`,
-          name: `TODOS OS CAMPEONATOS ${this.prepareCountryName(region._id)}`.toUpperCase(),
-          label: region._id.toUpperCase(),
-          image: !isIcon ? `https://cdn.wee.bet/flags/1x1/${region.sigla}.svg` : null,
-          icon: isIcon ? iconComponent : null
-        })
-
         return {
           id: `region_${region._id}`,
           name: region._id.toUpperCase(),
@@ -411,8 +403,7 @@ export default {
       this.handleCloseCalendarModal();
       
       await this.prepareChampionshipListByLeague();
-      await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'));
-      
+      this.prepareChampionshipPerRegionList(this.modality.id)
       this.loading = false;
     },
 

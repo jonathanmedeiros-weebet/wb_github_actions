@@ -113,6 +113,12 @@ export const useConfigClient = defineStore('configClient', {
         ...this.printerSetting,
         ...setting
       }
+    },
+    setBlockedChampionships(sportId: string, ids: string[]) {
+      if (!this.params.campeonatos_bloqueados) {
+        this.params.campeonatos_bloqueados = {};
+      }
+      this.params.campeonatos_bloqueados[`sport_${sportId}`] = ids;
     }
   },
 })
