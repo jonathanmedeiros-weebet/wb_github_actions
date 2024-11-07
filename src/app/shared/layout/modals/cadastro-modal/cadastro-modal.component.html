@@ -33,7 +33,7 @@
                 <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial)">
                     <div class="form-group mb-4">
                         <div class="input-md">
-                            <input type="text" id="nome" class="form-control inverted-out"  (beforeinput)="onBeforeInput($event, 'name')" formControlName="nome"
+                            <input type="text" id="nome" class="form-control inverted-out" (blur)="onBlurGa4Name($event)" (beforeinput)="onBeforeInput($event, 'name')" formControlName="nome"
                                 [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento">
                             <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
                         </div>

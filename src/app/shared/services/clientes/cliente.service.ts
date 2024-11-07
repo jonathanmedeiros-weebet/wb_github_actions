@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { ParametrosLocaisService } from "../parametros-locais.service";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
+import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
+
 
 declare var xtremepush: any;
 
@@ -31,6 +33,7 @@ export class ClienteService {
         private headers: HeadersService,
         private router: Router,
         private paramsService: ParametrosLocaisService,
+        private ga4Service: Ga4Service,
         private modalService: NgbModal
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
@@ -64,10 +67,21 @@ export class ClienteService {
                         this.logadoSource.next(true);
                         if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', dataUser.user.id);
-                            xtremepush('event', 'login');
+                            setTimeout(function() {
+                                xtremepush('event', 'login');
+                            }, 100);
                             this.xtremepushBackgroundRemove();
                         }
                     }
+
+                    this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
+
+                    this.ga4Service.triggerGa4Event(
+                        EventGa4Types.SIGN_UP,
+                        {
+                            method : dataUser.user.registrationMethod
+                        }
+                    );
 
                     return response.results;
                 }),
@@ -186,6 +200,26 @@ export class ClienteService {
 
     configLimiteDesposito(limites: any) {
         return this.http.post(`${this.clienteUrl}/limites-depositos`, limites, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
+
+    configLimitePerda(limites: any) {
+        return this.http.post(`${this.clienteUrl}/limites-perdas`, limites, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
+
+    configLimiteTempoAtividade(limites:any) {
+        return this.http.post(`${this.clienteUrl}/limites-tempo`, limites, this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
                     return response.results;

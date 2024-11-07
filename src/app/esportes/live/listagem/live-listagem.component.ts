@@ -9,11 +9,11 @@ import {
     LayoutService,
     LiveService,
     MessageService,
-    ParametrosLocaisService
+    ParametrosLocaisService,
+    SportIdService
 } from '../../../services';
 import { CotationPriceChange } from 'src/app/enums/cotation-price-change.enum';
 
-import { FOOTBALL_ID, BASKETBALL_ID } from 'src/app/shared/constants/sports-ids';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -39,7 +39,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
     mobileScreen = false;
     term = '';
     itens;
-    esportesAbertos = [BASKETBALL_ID, FOOTBALL_ID];
+    esportesAbertos;
     qtdJogosFutebol = 0;
     qtdJogosBasquete = 0;
     futebolAoVivohabilitado = false;
@@ -49,8 +49,10 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     headerHeight = 92;
 
-    footballId = FOOTBALL_ID;
-    basketballId = BASKETBALL_ID;
+    sportbook;
+
+    footballId;
+    basketballId;
 
     constructor(
         private messageService: MessageService,
@@ -64,14 +66,20 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
         private layoutService: LayoutService,
         private cd: ChangeDetectorRef,
         private activatedRoute: ActivatedRoute,
-        private route: Router
+        private route: Router,
+        private sportIdService: SportIdService,
     ) {
-        this.chavesMercadosPrincipais[FOOTBALL_ID] = {
+        this.sportbook = this.paramsService.getOpcoes().sportbook;
+        this.esportesAbertos = [this.sportIdService.footballId, this.sportIdService.basketballId];
+        this.footballId = this.sportIdService.footballId;
+        this.basketballId = this.sportIdService.basketballId;
+
+        this.chavesMercadosPrincipais[String(this.sportIdService.footballId)] = {
             casa: 'casa_90',
             empate: 'empate_90',
             fora: 'fora_90'
         };
-        this.chavesMercadosPrincipais[BASKETBALL_ID] = {
+        this.chavesMercadosPrincipais[String(this.sportIdService.basketballId)] = {
             casa: 'bkt_casa',
             fora: 'bkt_fora'
         };
@@ -132,12 +140,12 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                             let valido = true;
 
                             if (this.minutoEncerramentoAoVivo > 0) {
-                                if (jogo.sport_id === FOOTBALL_ID && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                                if (jogo.sport_id === this.sportIdService.footballId && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                                     valido = false;
                                 }
                             }
 
-                            if (jogo.sport_id === BASKETBALL_ID && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
+                            if (jogo.sport_id === this.sportIdService.basketballId && jogo.info.minutos === 0 && jogo.info.tempo === 4) {
                                 valido = false;
                             }
 
@@ -172,11 +180,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
                         const campeonatoPermitido = this.campeonatoPermitido(campeonato._id);
 
-                        if (campeonatoPermitido && (campeonato.sport_id === FOOTBALL_ID || !campeonato.sport_id)) {
+                        if (campeonatoPermitido && (campeonato.sport_id === this.sportIdService.footballId || !campeonato.sport_id)) {
                             this.qtdJogosFutebol += qtdJogosValidos;
                         }
 
-                        if (campeonatoPermitido && campeonato.sport_id === BASKETBALL_ID) {
+                        if (campeonatoPermitido && campeonato.sport_id === this.sportIdService.basketballId) {
                             this.qtdJogosBasquete += qtdJogosValidos;
                         }
 
@@ -227,7 +235,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let inserirCampeonato = false;
 
                 if (jogo.sport_id == 1) {
-                    jogo.sport_id = FOOTBALL_ID;
+                    jogo.sport_id = this.sportIdService.footballId;
                 }
 
                 jogo.cotacoes.map(cotacao => {
@@ -262,12 +270,12 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let valido = true;
 
                 if (this.minutoEncerramentoAoVivo > 0) {
-                    if (jogo.sport_id === FOOTBALL_ID && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
+                    if (jogo.sport_id === this.sportIdService.footballId && jogo.info.minutos > this.minutoEncerramentoAoVivo) {
                         valido = false;
                     }
                 }
 
-                if (jogo.sport_id === BASKETBALL_ID && jogo.info.minutos === 0 && jogo.info.tempo == 'fim de jogo') {
+                if (jogo.sport_id === this.sportIdService.basketballId && jogo.info.minutos === 0 && jogo.info.tempo == 'fim de jogo') {
                     valido = false;
                 }
 
@@ -288,11 +296,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                         this.campeonatosAbertos = this.campeonatosAbertos.concat(jogo.campeonato._id);
                     }
 
-                    if (gamePlacedNow && (jogo.sport_id === FOOTBALL_ID || !jogo.sport_id)) {
+                    if (gamePlacedNow && (jogo.sport_id === this.sportIdService.footballId || !jogo.sport_id)) {
                         this.qtdJogosFutebol++;
                     }
 
-                    if (gamePlacedNow && jogo.sport_id === BASKETBALL_ID) {
+                    if (gamePlacedNow && jogo.sport_id === this.sportIdService.basketballId) {
                         this.qtdJogosBasquete++;
                     }
                 } else {
@@ -305,11 +313,11 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                             this.campeonatos.delete(campeonato._id);
                         }
 
-                        if (jogo.sport_id === FOOTBALL_ID || !jogo.sport_id) {
+                        if (jogo.sport_id === this.sportIdService.footballId || !jogo.sport_id) {
                             this.qtdJogosFutebol--;
                         }
 
-                        if (jogo.sport_id === BASKETBALL_ID) {
+                        if (jogo.sport_id === this.sportIdService.basketballId) {
                             this.qtdJogosBasquete--;
                         }
                     }
@@ -438,7 +446,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             lock: false
         });
 
-        if (sportId === FOOTBALL_ID) {
+        if (sportId === this.sportIdService.footballId) {
             mercadosPrincipais.push(cotacoes.find(k => k.chave === this.chavesMercadosPrincipais[sportId]['empate']) ?? {
                 nome: 'Empate',
                 lock: true
@@ -472,5 +480,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
             default:
                 return ''
         };
+    }
+
+    teamShield(sportId?) {
+        return this.sportIdService.teamShieldsFolder(sportId);
     }
 }

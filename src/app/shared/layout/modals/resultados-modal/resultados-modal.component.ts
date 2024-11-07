@@ -4,7 +4,7 @@ import {UntypedFormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ApostaService, MessageService, ParametrosLocaisService, ResultadoService } from './../../../../services';
+import { AuthService, ApostaService, MessageService, ParametrosLocaisService, ResultadoService, SportIdService } from './../../../../services';
 import {BaseFormComponent} from '../../base-form/base-form.component';
 import {Router} from '@angular/router';
 import {Usuario} from '../../../models/usuario';
@@ -12,8 +12,6 @@ import {Usuario} from '../../../models/usuario';
 import * as moment from 'moment';
 import { Campeonato } from 'src/app/models';
 import {config} from '../../../config';
-
-import * as sportsIds from '../../../constants/sports-ids';
 
 @Component({
     selector: 'app-resultados-modal',
@@ -29,7 +27,6 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
 
     showLoadingIndicator = true;
 
-    sportsIds = sportsIds;
     sport;
     campeonatos: Campeonato[] = [];
 
@@ -41,6 +38,17 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     tenisHabilitado = false;
     futebolAmericanoHabilitado = false;
     hoqueiGeloHabilitado = false;
+
+    footballId: Number;
+    boxingId: Number;
+    volleyballId: Number;
+    tennisId: Number;
+    basketballId: Number;
+    americanFootballId: Number;
+    tableTennisId: Number;
+    futsalId: Number;
+    iceHockeyId: Number;
+    eSportsId: Number;
 
     hoveredDate: NgbDate | null = null;
     selectedDate: string = '';
@@ -62,11 +70,23 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
         private router: Router,
         private calendar: NgbCalendar,
         public formatter: NgbDateParserFormatter,
+        private sportIdService: SportIdService,
     ) {
         super();
 
         this.fromDate = calendar.getNext(calendar.getToday(), 'd', -6);
         this.toDate = calendar.getToday();
+
+        this.footballId = this.sportIdService.footballId;
+        this.boxingId = this.sportIdService.boxingId;
+        this.volleyballId = this.sportIdService.volleyballId;
+        this.tennisId = this.sportIdService.tennisId;
+        this.basketballId = this.sportIdService.basketballId;
+        this.americanFootballId = this.sportIdService.americanFootballId;
+        this.tableTennisId = this.sportIdService.tableTennisId;
+        this.futsalId = this.sportIdService.futsalId;
+        this.iceHockeyId = this.sportIdService.iceHockeyId;
+        this.eSportsId = this.sportIdService.eSportsId;
     }
 
     ngOnInit() {
@@ -89,7 +109,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     createForm() {
         this.form = this.fb.group({
             data: [moment().format('YYYY-MM-DD'), Validators.required],
-            sport_id: [sportsIds.FOOTBALL_ID, Validators.required]
+            sport_id: [this.footballId, Validators.required]
         });
     }
 
@@ -110,7 +130,7 @@ export class ResultadosModalComponent extends BaseFormComponent implements OnIni
     getResultados(params?) {
         let queryParams: any = {
             'data': moment().format('YYYY-MM-DD'),
-            'sport': sportsIds.FOOTBALL_ID
+            'sport': this.footballId
         };
 
         if (params) {

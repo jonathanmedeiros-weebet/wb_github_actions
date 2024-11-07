@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ParametrosLocaisService, HelperService, CampeonatoService, PrintService } from './../../../../services';
+import { ParametrosLocaisService, HelperService, CampeonatoService, PrintService, SportIdService } from './../../../../services';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
@@ -19,12 +19,13 @@ export class TabelaModalComponent implements OnInit {
         private paramsService: ParametrosLocaisService,
         private helperService: HelperService,
         private campeonatoService: CampeonatoService,
-        private printService: PrintService
+        private printService: PrintService,
+        private sportIdService: SportIdService,
     ) { }
 
     ngOnInit() {
         const odds = this.paramsService.getOddsImpressao();
-        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId);
 
         const queryParams: any = {
             'campeonatos_bloqueados': campeonatosBloqueados,

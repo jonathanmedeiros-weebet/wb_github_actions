@@ -111,6 +111,7 @@ export class CasinoApiService {
         }
 
         switch ($gameFornecedor) {
+            case "cpgames":
             case "jvm":
                 return this.http.get(`${config.HOST}/api-reverse/game-url`, requestOptions).pipe(
                     map((res: any) => {

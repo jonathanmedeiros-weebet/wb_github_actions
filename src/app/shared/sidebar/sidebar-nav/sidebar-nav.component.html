@@ -45,7 +45,7 @@
                 <a (click)="goTo(getRotaPorEsporteId(ligaPopular.sport_id), { campeonato: ligaPopular.api_id })">
                     <i [ngClass]="getIconClassLigasPopulares(ligaPopular.sport_id)"></i>
                     <span class="regiao-nome">
-                        <span *ngIf="ligaPopular.sport_id === sportsIds.FOOTBALL_ID && ligaPopular.regiao_sigla"
+                        <span *ngIf="ligaPopular.sport_id === footballId && ligaPopular.regiao_sigla"
                               class="flag-icon flag-icon-{{ligaPopular.regiao_sigla}}">
                         </span>
                         {{ligaPopular.nome}}
@@ -263,7 +263,7 @@
              <li class="cambista-item">
                 <a [routerLink]="['/clientes/configuracoes']" routerLinkActive="router-link-active">
                     <i class="fa fa-cogs icone-generico"></i>
-                    <span class="regiao-nome">{{'geral.configuracoes' | translate}}</span>
+                    <span class="regiao-nome">{{'geral.jogoResponsavel' | translate}}</span>
                 </a>
             </li>
 
@@ -324,13 +324,13 @@
                     <span class="regiao-nome">{{'geral.promocoes' | translate}}</span>
                 </a>
             </li>
-            <li class="cambista-item">
+            <li class="cambista-item" *ngIf="indiqueGanheHabilitado">
                 <a [routerLink]="['/clientes/indique-ganhe']" routerLinkActive="router-link-active">
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
                 </a>
             </li>
-            <li class="cambista-item">
+            <li class="cambista-item" *ngIf="cashbackEnabled">
                 <a [routerLink]="['/clientes/cashback']" routerLinkActive="router-link-active">
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'cashback.cashback' | translate}}</span>

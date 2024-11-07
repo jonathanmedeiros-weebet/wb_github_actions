@@ -5,13 +5,13 @@
             <a (click)="toClose()" class="botao-esquerdo">
                 <i class="fa fa-arrow-left"></i>
             </a>
-            <div class="titulo">{{'geral.configuracoes' | translate}}</div>
+            <div class="titulo">{{'geral.jogoResponsavel' | translate}}</div>
             <div class="botao-direito"></div>
         </div>
 
         <div class="internal-container-out">
             <div class="content-header hide-mobile">
-                <h2>{{'geral.configuracoes' | translate}}</h2>
+                <h2>{{'geral.jogoResponsavel' | translate}}</h2>
             </div>
 
             <div class="content-body">
@@ -86,6 +86,68 @@
                                 >
                             </div>
                             <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
+                        </form>
+                    </div>
+                </section>
+                <section class="limite-perdas">
+                    <div class="section-header" (click)="toggleSections('limitePerdas')">
+                        <h3>{{ 'jogo_responsavel.limite_perdas.titulo' | translate }}</h3>
+                        <i class="fa {{sectionLimitePerdas ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+                    </div>
+                    <div class="section-body" *ngIf="sectionLimitePerdas">
+                        <p class="descricao">{{ 'jogo_responsavel.limite_perdas.descricao' | translate }}</p>
+                        <form [formGroup]="formLimitePerda" (ngSubmit)="handleSubmit('onSubmitLimitePerda')">
+                            <div class="field">
+                                <label for="">{{ 'jogo_responsavel.limite_perdas.definir_limite_diario' | translate }}</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteDiario"
+                                >
+                            </div>
+                            <div class="field">
+                                <label for="">{{ 'jogo_responsavel.limite_perdas.definir_limite_semanal' | translate }}</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteSemanal"
+                                >
+                            </div>
+                            <div class="field">
+                                <label for="">{{ 'jogo_responsavel.limite_perdas.definir_limite_mensal' | translate }}</label>
+                                <input currencyMask
+                                    [ngClass]="'form-control inverted-out'"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                    formControlName="limiteMensal"
+                                >
+                            </div>
+                            <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
+                        </form>
+                    </div>
+                </section>
+                <section class="limite-tempo-atividade">
+                    <div class="section-header" (click)="toggleSections('limiteTempoAtividade')">
+                        <h3>{{ 'jogo_responsavel.limite_tempo_atividade.titulo' | translate }}</h3>
+                        <i class="fa {{sectionLimiteTempoAtividade ? 'fa-chevron-up' : 'fa-chevron-down'}}" ></i>
+                    </div>
+                    <div class="section-body" *ngIf="sectionLimiteTempoAtividade">
+                        <p class="descricao">{{ 'jogo_responsavel.limite_tempo_atividade.descricao' | translate }}</p>
+                        <form [formGroup]="formLimiteTempoAtividade" (ngSubmit)="handleSubmit('onSubmitLimiteTempoAtividade')">
+                            <div class="field">
+                                <label for="">{{ 'jogo_responsavel.limite_tempo_atividade.definir_limite_diario' | translate }}</label>
+                                    <select class="form-control inverted-out" formControlName="limiteTempoAtividade">
+                                        <option value="">{{ 'placeholders.opcao_desabilitado' | translate }}</option>
+                                        <option value="30minutos">{{ 'jogo_responsavel.limite_tempo_atividade.30minutos' | translate }}</option>
+                                        <option value="45minutos">{{ 'jogo_responsavel.limite_tempo_atividade.45minutos' | translate }}</option>
+                                        <option value="1hora">{{ 'jogo_responsavel.limite_tempo_atividade.1hora' | translate }}</option>
+                                        <option value="2horas">{{ 'jogo_responsavel.limite_tempo_atividade.2horas' | translate }}</option>
+                                        <option value="3horas">{{ 'jogo_responsavel.limite_tempo_atividade.3horas' | translate }}</option>
+                                        <option value="4horas">{{ 'jogo_responsavel.limite_tempo_atividade.4horas' | translate }}</option>
+                                    </select>
+                                <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
+                            </div>
                             <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
