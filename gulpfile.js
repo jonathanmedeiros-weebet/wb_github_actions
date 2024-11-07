@@ -1035,15 +1035,6 @@ gulp.task('easybets.club', function (done) {
     });
 });
 
-gulp.task('belabets.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "belabets.com",
-        banca: "BELA BETS",
-        styles: "",
-    });
-});
-
 gulp.task('apostasmax.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2218,15 +2209,6 @@ gulp.task('gramado.bet', function (done) {
         server: "front3.wee.bet",
         host: "gramado.bet",
         banca: "GRAMADO.BET",
-        styles: ""
-    });
-});
-
-gulp.task('avante.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "avante.bet",
-        banca: "AVANTE.BET",
         styles: ""
     });
 });
