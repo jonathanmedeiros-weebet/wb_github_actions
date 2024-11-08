@@ -255,7 +255,9 @@
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
         "loginUsername": "Nome de usuário",
-        "field": "Campo"
+        "field": "Campo",
+        "lastAccesses": "Últimos acessos",
+        "action": "Ação"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",

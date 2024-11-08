@@ -99,6 +99,11 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'ultimos-acessos',
+                loadChildren: () => import('./acessos-clientes/last-accesses.module').then(m => m.LastAccessesModule),
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'validar-aposta',
                 loadChildren: () => import('./validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
                 canActivate: [AuthGuard, CambistaGuard]
