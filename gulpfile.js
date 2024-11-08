@@ -646,15 +646,6 @@ gulp.task('ligabet.wee.bet', function (done) {
     });
 });
 
-gulp.task('futsport.net', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "futsport.net",
-        banca: "FUT SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('trandbets.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1413,15 +1404,6 @@ gulp.task('faithbets.bet', function (done) {
     });
 });
 
-gulp.task('chama.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "chama.bet",
-        banca: "CHAMA.BET",
-        styles: "",
-    });
-});
-
 gulp.task('sportilha.online', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1814,27 +1796,6 @@ gulp.task('bnrbet.com', function (done) {
     });
 });
 
-gulp.task('valeno.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "valeno.bet",
-        banca: "VALENO",
-        styles: "",
-        description: "Viva a emoção do jogo em nosso universo de apostas esportivas e cassino, oferecemos a combinação perfeita de diversão e oportunidades de vitória"
-    });
-});
-
-gulp.task('dentrodaaposta.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "dentrodaaposta.com",
-        banca: "DENTRO DA APOSTA",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WXPHXCMZ');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WXPHXCMZ'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('xico.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1948,29 +1909,11 @@ gulp.task('maxbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('greenp1x.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "greenp1x.com",
-        banca: "GREEN P1X",
-        styles: "",
-    });
-});
-
 gulp.task('bosscassino.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "bosscassino.bet",
         banca: "BOSS CASSINO",
-        styles: "",
-    });
-});
-
-gulp.task('baraocassino.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "baraocassino.com",
-        banca: "BARÃO CASSINO",
         styles: "",
     });
 });
@@ -2159,15 +2102,6 @@ gulp.task('jrsports.io', function (done) {
     });
 });
 
-gulp.task('camaraobet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "camaraobet.com",
-        banca: "CAMARÃO BET",
-        styles: ""
-    });
-});
-
 gulp.task('miamipix.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2209,15 +2143,6 @@ gulp.task('gramado.bet', function (done) {
         server: "front3.wee.bet",
         host: "gramado.bet",
         banca: "GRAMADO.BET",
-        styles: ""
-    });
-});
-
-gulp.task('26sports.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "26sports.bet",
-        banca: "26 SPORTS",
         styles: ""
     });
 });
@@ -2328,15 +2253,6 @@ gulp.task('appjetbet365.com', function (done) {
         server: "front3.wee.bet",
         host: "appjetbet365.com",
         banca: "APP JETBET365",
-        styles: ""
-    });
-});
-
-gulp.task('tourodasorte.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "tourodasorte.bet",
-        banca: "TOURO DA SORTE",
         styles: ""
     });
 });
