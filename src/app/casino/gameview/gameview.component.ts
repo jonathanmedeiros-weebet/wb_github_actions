@@ -884,8 +884,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
             console.error('Categoria do jogo não está definida');
             return;
         }
-    
-        this.router.navigate(['casino'], { queryParams: { category: category, providerName: 'todos' } });
+
+        if (this.router.url.startsWith('/live-casino/')) {
+            this.router.navigate(['live-casino'], { queryParams: { category: category, providerName: 'todos' } });
+        }
+
+        if (this.router.url.startsWith('/casino/')) {
+            this.router.navigate(['casino'], { queryParams: { category: category, providerName: 'todos' } });
+        }
     }
 
     private filterDestaques(games: GameCasino[], category: string): Promise<GameCasino[]> {
