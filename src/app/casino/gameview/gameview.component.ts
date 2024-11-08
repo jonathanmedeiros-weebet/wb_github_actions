@@ -845,7 +845,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const response = await this.casinoApi.getGamesList(false).toPromise();
 
         this.gameList = await this.filterDestaques(response.gameList, category);
-
     }
 
     private async getFornecedores() {
@@ -898,16 +897,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return new Promise((resolve) => {
             let filteredGames = games
                 .filter((game) => {
-                    if (game.modalidade === category && game.gameID !== this.gameId) {
+                    if (game.category === category && game.gameID !== this.gameId) {
                         this.popularGamesIds.push(game.gameID);
                         return true;
                     }
                     return false;
                 });
-
+    
             if (filteredGames.length < this.casinoRelatedGamesQuantity) {
                 let missingGamesCalc = this.casinoRelatedGamesQuantity - filteredGames.length;
-
+    
                 this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
                     response => {
                         filteredGames = filteredGames.concat(response);
@@ -916,7 +915,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             } else {
-                resolve(filteredGames);
+                resolve(filteredGames.slice(0, 15));
             }
         });
     }

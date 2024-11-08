@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationHistoryService } from '../../../services/navigation-history.service';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-back-page',
