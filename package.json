@@ -267,7 +267,8 @@
         "sts13.vip": "gulp sts13.vip",
         "maxbetbrasil.net": "gulp maxbetbrasil.net",
         "apostefacil.bet": "gulp apostefacil.bet",
-        "viabet.com.br": "gulp viabet.com.br"
+        "viabet.com.br": "gulp viabet.com.br",
+        "majovip.net": "gulp majovip.net"
     },
     "private": true,
     "dependencies": {

@@ -2531,3 +2531,12 @@ gulp.task('viabet.com.br', function (done) {
         styles: "",
     });
 });
+
+gulp.task('majovip.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "majovip.net",
+        banca: "MAJO VIP",
+        styles: "",
+    });
+});
