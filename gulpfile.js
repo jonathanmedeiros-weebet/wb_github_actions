@@ -1442,10 +1442,10 @@ gulp.task('favelabett.com', function (done) {
     });
 });
 
-gulp.task('kwbet.bet', function (done) {
+gulp.task('kwbet.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "kwbet.bet",
+        host: "kwbet.net",
         banca: "KW BET",
         styles: "",
         pixel: "",
