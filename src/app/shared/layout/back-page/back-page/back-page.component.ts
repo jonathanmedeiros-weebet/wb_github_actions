@@ -28,8 +28,6 @@ export class BackPageComponent implements OnInit{
   back() {
     let previousUrl = this.navigationHistoryService.getPreviousUrl();
 
-    console.log(previousUrl);
-
     this.determineBaseUrlAndNavigate(previousUrl);
   }
 
@@ -50,7 +48,8 @@ export class BackPageComponent implements OnInit{
       };
       this.router.navigate([baseUrl], { queryParams: params });
     } else if (
-        (this.router.url.startsWith(`/${baseUrl}`)  && !this.router.url.startsWith(baseInGameUrl)) ||
+        (this.router.url.startsWith(`/${baseUrl}
+          `)  && !this.router.url.startsWith(baseInGameUrl)) ||
         previousUrl.includes("category=") ||
         previousUrl.includes("provider=")
     ) {
