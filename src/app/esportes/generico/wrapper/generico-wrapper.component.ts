@@ -8,11 +8,10 @@ import {
     MessageService,
     ParametrosLocaisService,
     SidebarService,
-    MenuFooterService
+    MenuFooterService,
+    SportIdService
 } from '../../../services';
 import * as moment from 'moment';
-
-import * as sportsIds from '../../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-generico-wrapper',
@@ -37,7 +36,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
     ordemExibicaoCampeonatos = 'alfabetica';
     unsub$ = new Subject();
 
-    basketballId = sportsIds.BASKETBALL_ID;
+    basketballId;
 
     constructor(
         private campeonatoService: CampeonatoService,
@@ -46,7 +45,9 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         private route: ActivatedRoute,
+        private sportIdService: SportIdService
     ) {
+        this.basketballId = this.sportIdService.basketballId;
     }
 
     ngOnInit() {
@@ -64,9 +65,10 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         this.route.data
             .pipe(
                 switchMap((data: any) => {
-                    this.setContextoPorEsporte(data.sportId);
-                    this.sportId = data.sportId;
-                    this.campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportId);
+                    const sportId = this.sportIdService.sportIdByName(data.sport);
+                    this.setContextoPorEsporte(sportId);
+                    this.sportId = sportId;
+                    this.campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(sportId);
                     this.getCampeonatos2Sidebar();
 
                     return this.route.queryParams;
@@ -161,7 +163,7 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         };
 
 
-        if (this.sportId == sportsIds.BASKETBALL_ID) {
+        if (this.sportId == this.sportIdService.basketballId) {
             this.campeonatoService.getCampeonatosPorRegioes(params)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
@@ -212,39 +214,39 @@ export class GenericoWrapperComponent implements OnInit, OnDestroy {
         this.contexto = 'esportes';
 
         switch (sportId) {
-            case sportsIds.BOXING_ID:
+            case this.sportIdService.boxingId:
                 this.esporte = 'combate';
                 this.odds = ['cmbt_casa', 'cmbt_fora'];
                 break;
-            case sportsIds.AMERICAN_FOOTBALL_ID:
+            case this.sportIdService.americanFootballId:
                 this.esporte = 'futebol-americano';
                 this.odds = ['futebol_americano_casa', 'futebol_americano_fora'];
                 break;
-            case sportsIds.TENNIS_ID:
+            case this.sportIdService.tennisId:
                 this.esporte = 'tenis';
                 this.odds = ['tenis_casa', 'tenis_fora'];
                 break;
-            case sportsIds.ICE_HOCKEY_ID:
+            case this.sportIdService.iceHockeyId:
                 this.esporte = 'hoquei-gelo';
                 this.odds = ['hoquei_gelo_casa', 'hoquei_gelo_fora'];
                 break;
-            case sportsIds.BASKETBALL_ID:
+            case this.sportIdService.basketballId:
                 this.esporte = 'basquete';
                 this.odds = ['bkt_casa', 'bkt_fora'];
                 break;
-            case sportsIds.FUTSAL_ID:
+            case this.sportIdService.futsalId:
                 this.esporte = 'futsal';
                 this.odds = ['futsal_casa', 'futsal_empate', 'futsal_fora'];
                 break;
-            case sportsIds.VOLLEYBALL_ID:
+            case this.sportIdService.volleyballId:
                 this.esporte = 'volei';
                 this.odds = ['volei_casa', 'volei_fora'];
                 break;
-            case sportsIds.TABLE_TENNIS_ID:
+            case this.sportIdService.tableTennisId:
                 this.esporte = 'tenis-mesa';
                 this.odds = ['tenis_mesa_casa', 'tenis_mesa_fora'];
                 break;
-            case sportsIds.E_SPORTS_ID:
+            case this.sportIdService.eSportsId:
                 this.esporte = 'esports';
                 this.odds = ['esports_casa', 'esports_fora'];
                 break;

@@ -13,6 +13,8 @@ import {Router} from '@angular/router';
 
 declare var xtremepush: any;
 
+const INTERCOM_HMAC_COOKIE = 'intercom_hmac';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -97,8 +99,17 @@ export class AuthService {
                         this.setIsCliente(true);
                         if(this.xtremepushHabilitado()){
                             xtremepush('set', 'user_id', res.results.user.id);
+                            setTimeout(function() {
+                                xtremepush('event', 'login');
+                            }, 100);
+                            this.xtremepushBackgroundRemove();
                         }
                     }
+
+                    if (Boolean(res.results?.intercomHmac)) {
+                        this.setCookie(res.results.intercomHmac, INTERCOM_HMAC_COOKIE);
+                    }
+
                     this.logadoSource.next(true);
                     if (data.casino === undefined) {
                         this.router.navigate(['esportes/futebol/jogos']);
@@ -128,7 +139,15 @@ export class AuthService {
                         this.setIsCliente(true);
                         if(this.xtremepushHabilitado()){
                             xtremepush('set', 'user_id', res.results.user.id);
+                            setTimeout(function() {
+                                xtremepush('event', 'login');
+                            }, 100);
+                            this.xtremepushBackgroundRemove();
                         }
+                    }
+
+                    if (Boolean(res.results?.intercomHmac)) {
+                        this.setCookie(res.results.intercomHmac, INTERCOM_HMAC_COOKIE);
                     }
 
                     this.logadoSource.next(true);
@@ -168,6 +187,9 @@ export class AuthService {
 
     logout() {
         this.limparStorage();
+
+        this.deleteCookie(INTERCOM_HMAC_COOKIE);
+
         if(this.xtremepushHabilitado()) {
             this.cleanXtremepushNotifications();
         }
@@ -364,11 +386,13 @@ export class AuthService {
             );
     }
 
-    setCookie(valor) {
+    setCookie(value, name = null) {
         const d = new Date();
         d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
         const expires = 'expires=' + d.toUTCString();
-        document.cookie = valor + '=' + valor + ';' + expires + ';';
+
+        const cname = name ? name : value;
+        document.cookie = `${cname}=${value};${expires};`;
     }
 
     getCookie(cname) {
@@ -387,4 +411,23 @@ export class AuthService {
         return '';
     }
 
+    xtremepushBackgroundRemove() {
+        let intervalId = setInterval(() => {
+            const element = document.querySelector('.webpush-swal2-popup.webpush-swal2-modal.webpush-swal2-show');
+
+            if (element) {
+                (element as HTMLElement).style.visibility = 'hidden';
+                (element as HTMLElement).style.background = 'none';
+                (element as HTMLElement).style.visibility = 'visible';
+                clearInterval(intervalId);
+            }
+        }, 100);
+        setTimeout(() => {
+            clearInterval(intervalId);
+        }, 3000);
+    }
+
+    deleteCookie(name) {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    }
 }

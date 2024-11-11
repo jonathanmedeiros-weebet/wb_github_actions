@@ -15,7 +15,7 @@ import {
 import {ActivatedRoute} from '@angular/router';
 
 import {Jogo} from './../../../../models';
-import {BilheteEsportivoService, HelperService, JogoService, MessageService, ParametrosLocaisService} from './../../../../services';
+import {BilheteEsportivoService, HelperService, JogoService, MessageService, ParametrosLocaisService, SportIdService} from './../../../../services';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
@@ -59,6 +59,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     theSportUrl: SafeResourceUrl;
     loadedFrame: boolean;
 
+    teamShieldsFolder;
+
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         this.definirAltura();
@@ -76,8 +78,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private paramsService: ParametrosLocaisService,
         private route: ActivatedRoute,
         private cd: ChangeDetectorRef,
-        private activeModal: NgbActiveModal
+        private activeModal: NgbActiveModal,
+        private sportIdService: SportIdService,
     ) {
+        this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
     }
 
     ngOnInit() {

@@ -15,11 +15,10 @@ import {
     MessageService,
     ApostaEsportivaService,
     HelperService,
-    ParametrosLocaisService
+    ParametrosLocaisService,
+    SportIdService
 } from '../../services';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
-
-import { FOOTBALL_ID } from '../../shared/constants/sports-ids';
 
 @Component({
     selector: 'app-validar-aposta-esportes',
@@ -42,16 +41,19 @@ export class ValidarApostaEsportesComponent extends BaseFormComponent implements
     opcoes;
     unsub$ = new Subject();
 
-    footballId = FOOTBALL_ID;
+    footballId;
 
     constructor(
         private apostaEsportivaService: ApostaEsportivaService,
         private messageService: MessageService,
         private fb: UntypedFormBuilder,
         private helper: HelperService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private sportIdService: SportIdService,
     ) {
         super();
+
+        this.footballId = this.sportIdService.footballId;
     }
 
     ngOnInit() {
