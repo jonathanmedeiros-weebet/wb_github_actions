@@ -879,11 +879,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public handleSeeAllGames() {
         const category = this.gameCategory;
 
-        if (!category) {
-            console.error('Categoria do jogo não está definida');
-            return;
-        }
-
         if (this.router.url.startsWith('/live-casino/')) {
             this.router.navigate(['live-casino'], { queryParams: { category: category, providerName: 'todos' } });
         }

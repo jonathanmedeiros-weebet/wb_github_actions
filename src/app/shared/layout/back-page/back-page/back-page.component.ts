@@ -28,32 +28,39 @@ export class BackPageComponent implements OnInit{
   back() {
     let previousUrl = this.navigationHistoryService.getPreviousUrl();
 
+    console.log(previousUrl);
+
     this.determineBaseUrlAndNavigate(previousUrl);
   }
 
   navigateBasedOnUrl(baseUrl: string, baseInGameUrl: string, previousUrl: string, provider: string | null, category: string | null): void {
     if (previousUrl === "/" && this.router.url.startsWith(baseInGameUrl)) {
-        this.router.navigate([previousUrl]);
+      this.router.navigate([previousUrl]);
     } else if (!previousUrl && this.router.url.startsWith(baseInGameUrl)) {
-        this.router.navigate([baseUrl]);
+      this.router.navigate([baseUrl]);
     } else if (
         (previousUrl === `/${baseUrl}` ||
             previousUrl.includes("?category=") ||
             previousUrl.includes("provider=")) &&
         this.router.url.startsWith(baseInGameUrl)
     ) {
-        const params = {
-            ...(provider ? { provider } : {}),
-            ...(category ? { category } : {}),
-        };
-        this.router.navigate([baseUrl], { queryParams: params });
+      const params = {
+          ...(provider ? { provider } : {}),
+          ...(category ? { category } : {}),
+      };
+      this.router.navigate([baseUrl], { queryParams: params });
     } else if (
-        this.router.url === `/${baseUrl}` ||
+        (this.router.url.startsWith(`/${baseUrl}`)  && !this.router.url.startsWith(baseInGameUrl)) ||
         previousUrl.includes("category=") ||
-        previousUrl.includes("provider=") ||
-        previousUrl.startsWith(`/${baseUrl}/`)
+        previousUrl.includes("provider=")
     ) {
-        this.navigationHistoryService.emitClearFilters();
+      this.navigationHistoryService.emitClearFilters();
+    } else if (previousUrl.startsWith(`/${baseUrl}/`) && this.router.url.startsWith(baseInGameUrl)) {
+      const params = {
+        ...(provider ? { provider } : {}),
+        ...(category ? { category } : {}),
+      };
+      this.router.navigate([baseUrl], { queryParams: params });
     }
   }
 
