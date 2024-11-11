@@ -248,6 +248,8 @@
         "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
         "loginEmail": "Correo electrónico",
         "loginPhone": "Teléfono",
+        "loginUsername": "Username",
+        "field": "Campo",
         "or": "O"
     },
     "bet": {
@@ -554,7 +556,7 @@
         "lista_como_indicar": "Cómo referir",
         "lista_como_indicar_text": "Para referir a un nuevo usuario, debes compartir el enlace de referencia en la sección 'Recomienda y Gana' de tu cuenta, ubicada en el menú de Promociones. El usuario referido debe registrarse utilizando tu enlace de referencia. El recomendador tendrá un total de {{limiteIndicacoes}} referencias elegibles para la comisión; cualquier referencia que exceda esta cantidad no será elegible para la comisión.",
         "lista_bonus_indicador": "Bono para el recomendador",
-        "lista_bonus_indicador_text": "Por cada usuario que refieras que se registre, haga un depósito de al menos R${{valorMinDepositado}} y coloque apuestas que sumen al menos R${{valorMinApostado}} dentro de los {{qtdDiasRequisitos}} días, ganarás R${{valorGanhoPorIndicacao}} en saldo {{tipoSaldoGanho}}. Este saldo se liberará para su retiro en la sección 'Mis Referencias' dentro de las 24 horas después de que el USUARIO REFERIDO cumpla con las reglas de la promoción. Tendrás un período de {{prazoResgateSaldo}} días para canjear.",
+        "lista_bonus_indicador_text": "Por cada usuario que refieras que se registre, haga un depósito de al menos R${{valorMinDepositado}} y coloque apuestas que sumen al menos R${{valorMinApostado}} dentro de los {{qtdDiasRequisitos}} día(s), ganarás R${{valorGanhoPorIndicacao}} en saldo {{tipoSaldoGanho}}. Este saldo se liberará para su retiro en la sección 'Mis Referencias' dentro de las 24 horas después de que el USUARIO REFERIDO cumpla con las reglas de la promoción. Tendrás un período de {{prazoResgateSaldo}} días para canjear.",
         "real_sacavel": "real (retirable)",
         "lista_deposito_indicado": "Depósito del referido",
         "lista_deposito_indicado_text": "El usuario referido debe realizar un depósito mínimo de R${{valorMinDepositado}} en su cuenta y colocar una apuesta mínima de R${{valorMinApostado}} para que el saldo de R${{valorGanhoPorIndicacao}} se acredite en la cuenta del recomendador.",

@@ -252,6 +252,8 @@
         "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
         "loginEmail": "Email",
         "loginPhone": "Phone",
+        "loginUsername": "Username",
+        "field": "Field",
         "or": "OR"
     },
     "bet": {
@@ -562,7 +564,7 @@
         "lista_como_indicar": "How to refer",
         "lista_como_indicar_text": "To refer a new user, you should share the referral link in the 'Refer and Earn' section of your account, located in the Promotions menu. The referred user must register using your referral link. The referrer will have a total of {{limiteIndicacoes}} eligible referrals for commissioning; any referrals exceeding this quantity will not be eligible for commission.",
         "lista_bonus_indicador": "Referrer Bonus",
-        "lista_bonus_indicador_text": "For each user you refer who registers, makes a deposit of at least R${{valorMinDepositado}}, and places bets totaling at least R${{valorMinApostado}} within {{qtdDiasRequisitos}} days, you will earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance. This balance will be released for withdrawal in the 'My Referrals' section within 24 hours after the REFERRED user fulfills the promotion rules. You will have a period of {{prazoResgateSaldo}} days to redeem.",
+        "lista_bonus_indicador_text": "For each user you refer who registers, makes a deposit of at least R${{valorMinDepositado}}, and places bets totaling at least R${{valorMinApostado}} within {{qtdDiasRequisitos}} day(s), you will earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance. This balance will be released for withdrawal in the 'My Referrals' section within 24 hours after the REFERRED user fulfills the promotion rules. You will have a period of {{prazoResgateSaldo}} days to redeem.",
         "real_sacavel": "real (withdrawable)",
         "lista_deposito_indicado": "Referee's Deposit",
         "lista_deposito_indicado_text": "The referred user must make a minimum deposit of R${{valorMinDepositado}} into their account and place a minimum bet of R${{valorMinApostado}} for the balance of R${{valorGanhoPorIndicacao}} to be credited to the referrer's account.",

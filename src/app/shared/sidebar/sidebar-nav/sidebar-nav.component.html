@@ -324,13 +324,13 @@
                     <span class="regiao-nome">{{'geral.promocoes' | translate}}</span>
                 </a>
             </li>
-            <li class="cambista-item">
+            <li class="cambista-item" *ngIf="indiqueGanheHabilitado">
                 <a [routerLink]="['/clientes/indique-ganhe']" routerLinkActive="router-link-active">
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
                 </a>
             </li>
-            <li class="cambista-item">
+            <li class="cambista-item" *ngIf="cashbackEnabled">
                 <a [routerLink]="['/clientes/cashback']" routerLinkActive="router-link-active">
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'cashback.cashback' | translate}}</span>
