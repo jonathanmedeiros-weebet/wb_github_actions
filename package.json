@@ -151,7 +151,7 @@
         "ccaesportes.club": "gulp ccaesportes.club",
         "lucromaster.net": "gulp lucromaster.net",
         "favelabett.com": "gulp favelabett.com",
-        "kwbet.bet": "gulp kwbet.bet",
+        "kwbet.net": "gulp kwbet.net",
         "vitoriasports.vip": "gulp vitoriasports.vip",
         "favoritao.com": "gulp favoritao.com",
         "085.bet": "gulp 085.bet",
@@ -267,7 +267,8 @@
         "sts13.vip": "gulp sts13.vip",
         "maxbetbrasil.net": "gulp maxbetbrasil.net",
         "apostefacil.bet": "gulp apostefacil.bet",
-        "viabet.com.br": "gulp viabet.com.br"
+        "viabet.com.br": "gulp viabet.com.br",
+        "majovip.net": "gulp majovip.net"
     },
     "private": true,
     "dependencies": {

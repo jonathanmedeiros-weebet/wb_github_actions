@@ -1442,10 +1442,10 @@ gulp.task('favelabett.com', function (done) {
     });
 });
 
-gulp.task('kwbet.bet', function (done) {
+gulp.task('kwbet.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "kwbet.bet",
+        host: "kwbet.net",
         banca: "KW BET",
         styles: "",
         pixel: "",
@@ -2528,6 +2528,15 @@ gulp.task('viabet.com.br', function (done) {
         server: "front3.wee.bet",
         host: "viabet.com.br",
         banca: "VIA BET",
+        styles: "",
+    });
+});
+
+gulp.task('majovip.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "majovip.net",
+        banca: "MAJO VIP",
         styles: "",
     });
 });
