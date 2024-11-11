@@ -2529,6 +2529,7 @@ gulp.task('viabet.com.br', function (done) {
         host: "viabet.com.br",
         banca: "VIA BET",
         styles: "",
+        xtremepush_sdk: "l7zEE_Rg3aNOlDmX92zgIeynDPLPsCKy"
     });
 });
 
