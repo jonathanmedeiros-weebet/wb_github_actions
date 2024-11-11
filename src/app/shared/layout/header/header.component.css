@@ -1058,7 +1058,8 @@ body .change-theme {
 
 .hidden-header {
     display: none !important;
-    header-submenu {
-        display: none !important;
-    }
+}
+
+.hidden-header .header-submenu {
+    display: none !important;
 }
