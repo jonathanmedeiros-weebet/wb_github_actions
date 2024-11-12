@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
         private translate: TranslateService,
         private idleDetectService: IdleDetectService,
         private utilsService: UtilsService,
-        private activityDetectService: ActivityDetectService
+        private activityDetectService: ActivityDetectService,
         private clienteService: ClienteService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
@@ -311,22 +311,22 @@ export class AppComponent implements OnInit {
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
-        
+
         this.subscription = this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                if (event.url !== '/alterar-senha') { 
+                if (event.url !== '/alterar-senha') {
                     this.verifyForceChangePassword();
                 }
             }
         });
     }
 
-    ngOnDestroy(): void {        
+    ngOnDestroy(): void {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
     }
-    
+
     private verifyForceChangePassword() {
         const user = JSON.parse(localStorage.getItem('user'))
 

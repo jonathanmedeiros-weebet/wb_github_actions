@@ -101,6 +101,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
 import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
+import { ConfiguracaoLimitePerdasModalComponent } from './modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -199,7 +200,8 @@ import { PasswordExpiredModalComponent } from './modals/password-expired-modal/p
         BlockPeerAttempsModalComponent,
         MultifactorConfirmationModalComponent,
         ExibirBilheteRifaComponent,
-        PasswordExpiredModalComponent
+        PasswordExpiredModalComponent,
+        ConfiguracaoLimitePerdasModalComponent
     ],
     exports: [
         MainLayoutComponent,

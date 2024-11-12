@@ -11,12 +11,15 @@ import {
     CadastroModalComponent,
     JogosLiberadosBonusModalComponent,
     LoginModalComponent,
+
 } from "../../shared/layout/modals";
-import { takeUntil } from "rxjs/operators";
+import { ConfiguracaoLimitePerdasModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
+import { catchError, takeUntil } from "rxjs/operators";
 import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 
 @Component({
     selector: 'app-gameview',
@@ -64,6 +67,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public qtdProviders: number = 10;
     public popularGamesIds: string[] = [];
     private casinoRelatedGamesQuantity: number = 15;
+    showModalFlag: boolean = false;
+    modalMessage: string = '';
     posicaoFinanceira;
     avisoCancelarBonus = false;
     modalRef;
@@ -87,6 +92,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private financeiroService: FinanceiroService,
         private headerService: HeadersService,
+        private clienteService: ClienteService,
         @Inject(DOCUMENT) private document: any
     ) {
         this.currentUrl = window.location.href;
@@ -142,7 +148,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         //     this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
         //         this.renderer.setStyle(iframeChat, 'display', 'none');
         //     });
-        // } 
+        // }
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
@@ -185,8 +191,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                 this.loadGame();
                             }
                         }
-
-                        this.loadGame();
                     }
                 );
 
@@ -196,10 +200,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.isCliente = isCliente;
                     }
                 );
-
-            if (this.avisoCancelarBonus === false) {
-                this.loadGame();
-            }
 
             interval(3000)
                 .subscribe(() => {
@@ -353,6 +353,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
+    showModal(message: string) {
+        const modalRef = this.modalService.open(ConfiguracaoLimitePerdasModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+
+        modalRef.componentInstance.message = message;
+    }
+
     loadGame() {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
@@ -360,6 +371,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     if (response['error']) {
                         this.router.navigate(['/']);
                     };
+
+                    if (response.loss_limit.error) {
+                        this.showModal(response.loss_limit.message);
+                    }
 
                     if (typeof response.gameUrl !== 'undefined') {
                         this.gameCategory = response.category;
@@ -471,7 +486,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         //     this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
         //         this.renderer.setStyle(iframeChat, 'display', 'block');
         //     });
-        // } 
+        // }
 
         if (this.isMobile && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
             this.disableHeaderOptions();
