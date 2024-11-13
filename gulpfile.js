@@ -1417,7 +1417,7 @@ gulp.task('ccaesportes.club', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "ccaesportes.club",
-        banca: "CCA ESPORTES",
+        banca: "totalbet.win",
         styles: "",
     });
 });
