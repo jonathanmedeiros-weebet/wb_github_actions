@@ -251,7 +251,8 @@
         "loginUsername": "Username",
         "field": "Campo",
         "or": "O",
-        "lastAccesses": "Últimos accesos"
+        "lastAccesses": "Últimos accesos",
+        "action": "Acción"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
