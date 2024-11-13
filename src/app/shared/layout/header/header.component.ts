@@ -82,6 +82,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     clienteWidth;
     scrollWidth;
     valorGanhoPorIndicacao;
+    barraIndiqueGanhe = '';
 
     isOpen = false;
     appMobile;
@@ -276,6 +277,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.valorGanhoPorIndicacao = (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
         this.bonusBalanceReferAndEarn = this.paramsService.getOpcoes().indique_ganhe_tipo_saldo_ganho == 'bonus' ? "indique_ganhe.inBonus" : "";
+        this.barraIndiqueGanhe = this.paramsService.barraIndiqueGanhe();
 
         this.modoClienteAtivo = this.paramsService.getOpcoes().modo_cliente;
         this.enabledBettorPix = Boolean(this.paramsService.getOpcoes().payment_methods_available_for_bettors.length);
