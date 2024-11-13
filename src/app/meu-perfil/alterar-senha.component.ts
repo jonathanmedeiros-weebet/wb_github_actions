@@ -135,7 +135,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.form.reset();
                         this.success();
                     },
-                    error => this.handleError(error),
+                    error => {
+                        this.handleError(error)
+                        this.loading = false;
+                    },
                     () => this.loading = false
                 );
         } else {
