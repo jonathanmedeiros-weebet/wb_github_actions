@@ -397,7 +397,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         }
                     }
 
-                    this.getRelatedAndPopularGames(response.category);
+                    this.getRelatedAndPopularGames(response.category, this.isCassinoAoVivoPage ? true : false);
                 },
                 error => {
                     this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
@@ -859,8 +859,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     }
 
-    private async getRelatedAndPopularGames(category: string) {
-        const response = await this.casinoApi.getGamesList(false).toPromise();
+    private async getRelatedAndPopularGames(category: string, live: boolean = false) {
+        const response = await this.casinoApi.getGamesList(live).toPromise();
 
         this.gameList = await this.filterDestaques(response.gameList, category);
     }
