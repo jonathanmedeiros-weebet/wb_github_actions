@@ -55,7 +55,7 @@
             name="bettor_name"
             placeholder="Informe o cpf do apostador"
             type="tel"
-            @keypress.native="handleKeyPress"
+            @keypress.native="handleNotAllowLyrics"
             mask="XXX.XXX.XXX-XX"
             v-if="showBettorDocumentNumber"
             v-model="bettorDocumentNumber"
@@ -282,7 +282,7 @@ export default {
     },
   },
   methods: {
-    handleKeyPress(event) {
+    handleNotAllowLyrics(event) {
       const char = String.fromCharCode(event.charCode);
       if (!/\d/.test(char)) {
         event.preventDefault(); 
