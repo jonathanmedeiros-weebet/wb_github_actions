@@ -47,6 +47,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     avisoCancelarBonus = false;
     modalRef;
     unsub$ = new Subject();
+    tawakChatClicked: boolean = false;
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -96,12 +97,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'none');
         }
         
-        // const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
-        // if (TawkChat) {
-        //     this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
-        //         this.renderer.setStyle(iframeChat, 'display', 'none');
-        //     });
-        // } 
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            const tawakIframes = this.document.querySelectorAll('[title="chat widget"]')
+            this.tawakChatClicked = tawakIframes[1].style.display == 'block'
+            
+            tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
+        } 
 
         if (window.innerWidth <= 1024) {
             this.isMobile = 1;
@@ -276,12 +278,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
 
-        // const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
-        // if (TawkChat) {
-        //     this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
-        //         this.renderer.setStyle(iframeChat, 'display', 'block');
-        //     });
-        // } 
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
+                if (key != 1 || this.tawakChatClicked) {
+                    this.renderer.setStyle(iframeChat, 'display', 'block');
+                }
+            });
+        }  
     }
 
     openFullscreen() {
