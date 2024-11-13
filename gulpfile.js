@@ -1417,7 +1417,7 @@ gulp.task('ccaesportes.club', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "ccaesportes.club",
-        banca: "CCA ESPORTES",
+        banca: "totalbet.win",
         styles: "",
     });
 });
@@ -1442,10 +1442,10 @@ gulp.task('favelabett.com', function (done) {
     });
 });
 
-gulp.task('kwbet.bet', function (done) {
+gulp.task('kwbet.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
-        host: "kwbet.bet",
+        host: "kwbet.net",
         banca: "KW BET",
         styles: "",
         pixel: "",
@@ -2292,6 +2292,7 @@ gulp.task('puskasbet.com.br', function (done) {
         host: "puskasbet.com.br",
         banca: "PUSKAS BET",
         styles: "",
+        xtremepush_sdk: "U4khpg3OiiSAmb15QwVyVUFFXzvEv20k"
     });
 });
 
@@ -2330,6 +2331,7 @@ gulp.task('pinbet.io', function (done) {
         host: "pinbet.io",
         banca: "PINBET",
         styles: "",
+        xtremepush_sdk: "l5zlJi7majbIVZTxwtIgEYppdmK4KazO"
     });
 });
 
@@ -2528,6 +2530,16 @@ gulp.task('viabet.com.br', function (done) {
         server: "front3.wee.bet",
         host: "viabet.com.br",
         banca: "VIA BET",
+        styles: "",
+        xtremepush_sdk: "l7zEE_Rg3aNOlDmX92zgIeynDPLPsCKy"
+    });
+});
+
+gulp.task('majovip.net', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "majovip.net",
+        banca: "MAJO VIP",
         styles: "",
     });
 });
