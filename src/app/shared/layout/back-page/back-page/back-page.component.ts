@@ -33,33 +33,27 @@ export class BackPageComponent implements OnInit{
 
   navigateBasedOnUrl(baseUrl: string, baseInGameUrl: string, previousUrl: string, provider: string | null, category: string | null): void {
     if (previousUrl === "/" && this.router.url.startsWith(baseInGameUrl)) {
-      this.router.navigate([previousUrl]);
+        this.router.navigate([previousUrl]);
     } else if (!previousUrl && this.router.url.startsWith(baseInGameUrl)) {
-      this.router.navigate([baseUrl]);
+        this.router.navigate([baseUrl]);
     } else if (
         (previousUrl === `/${baseUrl}` ||
+            previousUrl.startsWith(`/${baseUrl}/`) ||
             previousUrl.includes("?category=") ||
             previousUrl.includes("provider=")) &&
         this.router.url.startsWith(baseInGameUrl)
     ) {
-      const params = {
-          ...(provider ? { provider } : {}),
-          ...(category ? { category } : {}),
-      };
-      this.router.navigate([baseUrl], { queryParams: params });
+        const params = {
+            ...(provider ? { provider } : {}),
+            ...(category ? { category } : {}),
+        };
+        this.router.navigate([baseUrl], { queryParams: params });
     } else if (
-        (this.router.url.startsWith(`/${baseUrl}
-          `)  && !this.router.url.startsWith(baseInGameUrl)) ||
+      (this.router.url.startsWith(`/${baseUrl}`) && !this.router.url.includes(baseInGameUrl)) ||
         previousUrl.includes("category=") ||
         previousUrl.includes("provider=")
     ) {
-      this.navigationHistoryService.emitClearFilters();
-    } else if (previousUrl.startsWith(`/${baseUrl}/`) && this.router.url.startsWith(baseInGameUrl)) {
-      const params = {
-        ...(provider ? { provider } : {}),
-        ...(category ? { category } : {}),
-      };
-      this.router.navigate([baseUrl], { queryParams: params });
+        this.navigationHistoryService.emitClearFilters();
     }
   }
 
