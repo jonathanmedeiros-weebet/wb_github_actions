@@ -98,6 +98,24 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return this.paramsService.getCustomCasinoName();
     }
 
+    get blink(): string {
+        const urlTree = this.router.parseUrl(this.router.url);
+        const pathSegments = urlTree.root.children['primary'].segments;
+        return Boolean(pathSegments.length) ? pathSegments[0].path : 'casino';
+    }
+
+    get isVirtualPage(): boolean {
+        return this.blink === 'virtual-sports';
+    }
+
+    get isCassinoAoVivoPage(): boolean {
+        return this.blink === 'live-casino'
+    }
+
+    get isCassinoPage(): boolean {
+        return this.blink === 'casino'
+    }
+
     ngOnInit(): void {
         if (window.innerWidth <= 482) {
             this.scrollStep = 200;
@@ -115,7 +133,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.linkTelegram = `https://telegram.me/share/url?url=${encodeURIComponent(this.currentUrl)}&text=${this.sharedMsg}`;
         }
 
-        this.getFornecedores();
+        this.getGameList();
         this.isLoggedIn = this.auth.isLoggedIn();
         if (this.isLoggedIn) {
             this.getPosicaoFinanceira()
@@ -847,7 +865,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.gameList = await this.filterDestaques(response.gameList, category);
     }
 
-    private async getFornecedores() {
+    private async getProviders() {
         const {
             fornecedores,
         } = await this.casinoApi.getGamesList(false).toPromise();
@@ -858,10 +876,31 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }));
     }
 
+    private async getLiveProviders() {
+        const {
+            fornecedores,
+        } = await this.casinoApi.getGamesList(true).toPromise();
+
+        this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
+            ...fornecedor,
+            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+        }));
+    }
+
     public redirectToFilteredProviders(provider) {
         const providerName = provider.gameFornecedor;
 
-        this.router.navigate(['/casino'], { queryParams: { provider: providerName, category: 'todos' } });
+        if (this.router.url.startsWith('/live-casino/')) {
+            this.router.navigate(['live-casino'], { queryParams: { category: 'todos', provider: providerName } }).then(() => {
+                this.location.replaceState('live-casino');
+            });
+        }
+
+        if (this.router.url.startsWith('/casino/')) {
+            this.router.navigate(['casino'], { queryParams: { category: 'todos', provider: providerName } }).then(() => {
+                this.location.replaceState('casino');
+            });
+        }
     }
 
     public showMoreGames() {
@@ -872,19 +911,19 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.qtdProviders += 3;
     }
 
-    get blink(): string {
-        return this.router.url.split('/')[1] ?? 'casino';
-    }
-
     public handleSeeAllGames() {
         const category = this.gameCategory;
 
         if (this.router.url.startsWith('/live-casino/')) {
-            this.router.navigate(['live-casino'], { queryParams: { category: category, providerName: 'todos' } });
+            this.router.navigate(['live-casino'], { queryParams: { category: category, providerName: 'todos' } }).then(() => {
+                this.location.replaceState('live-casino');
+            });
         }
 
         if (this.router.url.startsWith('/casino/')) {
-            this.router.navigate(['casino'], { queryParams: { category: category, providerName: 'todos' } });
+            this.router.navigate(['casino'], { queryParams: { category: category, providerName: 'todos' } }).then(() => {
+                this.location.replaceState('casino');
+            })
         }
     }
 
@@ -969,6 +1008,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (headerOptions) {
                 this.renderer.setStyle(headerOptions, 'margin', '0 18px');
             }
+        }
+    }
+
+    private getGameList() {
+        if (this.isCassinoPage || this.isVirtualPage) {
+            this.getProviders();
+        }
+
+        if(this.isCassinoAoVivoPage) {
+            this.getLiveProviders();
         }
     }
 }

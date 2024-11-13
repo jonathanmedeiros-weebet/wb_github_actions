@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationHistoryService } from '../../../services/navigation-history.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-back-page',
@@ -17,7 +18,8 @@ export class BackPageComponent implements OnInit{
 
   constructor(
     private navigationHistoryService: NavigationHistoryService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +49,9 @@ export class BackPageComponent implements OnInit{
             ...(provider ? { provider } : {}),
             ...(category ? { category } : {}),
         };
-        this.router.navigate([baseUrl], { queryParams: params });
+        this.router.navigate([baseUrl], { queryParams: params }).then(() => {
+          this.location.replaceState(baseUrl);
+        });
     } else if (
       (this.router.url.startsWith(`/${baseUrl}`) && !this.router.url.includes(baseInGameUrl)) ||
         previousUrl.includes("category=") ||
