@@ -887,7 +887,7 @@ export class PrintService {
             <div class="conteudo">
                 <div style="text-align: center;">
                     <img style="max-height: 80px; max-width: 190px;"
-                    alt="${config.BANCA_NOME}" src="${config.LOGO_IMPRESSAO}" />
+                    alt="${config.BANCA_NOME}" src="${config.LOGO_IMPRESSAO ?? config.LOGO}" />
                 </div>
                 <h1 class="numero">
                     ${aposta.codigo}

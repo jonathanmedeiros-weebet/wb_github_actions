@@ -20,7 +20,7 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     chaves = {};
     cambistaPaga;
     clientesBilheteAoVivo = ['amigosdabola.wee.bet'];
-    LOGO = config.LOGO;
+    LOGO = config.LOGO_IMPRESSAO;
     unsub$ = new Subject();
 
     constructor(
