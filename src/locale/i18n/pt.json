@@ -255,7 +255,8 @@
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
         "loginUsername": "Nome de usuário",
-        "field": "Campo"
+        "field": "Campo",
+        "or": "OU"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -563,9 +564,9 @@
         "lista_elegibilidade": "Elegibilidade",
         "lista_elegibilidade_text": "Para participar do programa de Indique e Ganhe você deve ser um membro registrado do site. Ao indicar usuários, você estará concordando com estes termos e condições.",
         "lista_como_indicar": "Como indicar",
-        "lista_como_indicar_text": "Para indicar um novo usuário, você deverá compartilhar o link de indicação na seção \"Indique e ganhe\" da sua conta, localizada no menu Promoções. O usuário indicado deverá se registrar usando seu link de indicação. O indicador terá um total de {{limiteIndicacoes}} indicações ao qual serão legíveis de comissionamento as demais que ultrapassarem essa quantidade não serão comissionadas.",
+        "lista_como_indicar_text": "Para indicar um novo usuário, você deverá compartilhar o link de indicação na seção \"Indique e ganhe\" da sua conta, localizada no menu Promoções. O usuário indicado deverá se registrar usando seu link de indicação. O indicador terá um total de {{limiteIndicacoes}} indicações ao qual serão elegíveis de comissionamento; as demais que ultrapassarem essa quantidade não serão comissionadas.",
         "lista_bonus_indicador": "Bônus para o Indicador",
-        "lista_bonus_indicador_text": "A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar apostas de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dias, você ganhará R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho}}. Este saldo será liberado para resgate na aba minhas indicações em até 24 horas após o INDICADO cumprir as regras da promoção, você terá um prazo de {{prazoResgateSaldo}} dias para resgatar.",
+        "lista_bonus_indicador_text": "A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar apostas de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dia(s), você ganhará R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho}}. Este saldo será liberado para resgate na aba minhas indicações em até 24 horas após o INDICADO cumprir as regras da promoção, você terá um prazo de {{prazoResgateSaldo}} dias para resgatar.",
         "real_sacavel": "real (sacável)",
         "lista_deposito_indicado": "Depósito do Indicado",
         "lista_deposito_indicado_text": "O usuário indicado deve realizar um depósito de no mínimo R${{valorMinDepositado}} na sua conta e fazer uma aposta de no mínimo R${{valorMinApostado}} para que o saldo de R${{valorGanhoPorIndicacao}} seja creditado na conta do indicador.",
@@ -648,7 +649,7 @@
             "motivo_1": "Uma segunda conta foi criada",
             "motivo_2": "Ocupa muito meu tempo/desvia muito minha atenção",
             "motivo_3": "Não tenho mais interesse em realizar apostas neste site",
-            "motivo_4": "Não estou mais usando está conta",
+            "motivo_4": "Não estou mais usando esta conta",
             "motivo_5": "Problemas ao utilizar o sistema",
             "motivo_6": "Outros motivos",
             "digite_para_continuar": "Digite \"<b>EXCLUIR PERMANENTEMENTE</b>\" para confirmar a ação de exclusão.",
@@ -680,5 +681,22 @@
         "pending": "Pendente",
         "redeemed": "Resgatado",
         "redeem": "Resgatar"
+    },
+    "register": { 
+        "signupWith": "Inscrever-se com Google",
+        "registerGoogleAccount": "Cadastre-se com sua conta do google",
+        "fillToRegister": "Preencha os campos para realizar o seu cadastro",
+        "protectedByReCaptchaPart1": "Este site é protegido por reCAPTCHA e a",
+        "protectedByReCaptchaPart2": "Política de Privacidade",
+        "protectedByReCaptchaPart3": "do Google e os",
+        "protectedByReCaptchaPart4": "Termos de Serviço",
+        "protectedByReCaptchaPart5": "se aplicam."
+    },
+    "registerCancel": {
+        "titleCancelRegister": "Tem certeza que deseja cancelar seu registro?",
+        "dontMissOut": "Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até ",
+        "youreAlmostThere": "Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.",
+        "continue": "Continuar",
+        "cancel": "Sim, quero cancelar"
     }
 }
