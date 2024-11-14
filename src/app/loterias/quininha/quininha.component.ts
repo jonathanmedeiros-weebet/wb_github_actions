@@ -18,6 +18,7 @@ import {TipoAposta, Aposta, Sorteio} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as range from 'lodash.range';
 import { random } from 'lodash';
+import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 
 @Component({
     selector: 'app-quininha',
@@ -60,7 +61,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         public layoutService: LayoutService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private geolocationService: GeolocationService
     ) {
         super();
     }
@@ -229,6 +231,17 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Finalizar aposta */
     create() {
         this.disabledSubmit();
+
+        this.aposta['cidadeIbge'] = sessionStorage.getItem('codigo_ibge');
+        this.aposta['cidade'] = sessionStorage.getItem('cidade');
+        this.aposta['estado'] = sessionStorage.getItem('estado');
+
+        if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
+            this.enableSubmit();
+            this.handleError('Por favor, verifique a configuração de localização do seu navegador e tente novamente.');
+            this.geolocationService.getGeolocation();
+            return;
+        }
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {

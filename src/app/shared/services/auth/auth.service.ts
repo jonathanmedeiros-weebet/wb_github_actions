@@ -10,6 +10,7 @@ import {config} from './../../config';
 
 import * as moment from 'moment';
 import {Router} from '@angular/router';
+import { GeolocationService } from '../geolocation.service';
 
 declare var xtremepush: any;
 
@@ -31,7 +32,8 @@ export class AuthService {
         private header: HeadersService,
         private errorService: ErrorService,
         private paramsService: ParametrosLocaisService,
-        private router: Router
+        private router: Router,
+        private geolocation: GeolocationService
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
@@ -86,6 +88,7 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/two-factor-auth-login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
+                    this.geolocation.getGeolocation();
                     this.setCookie(res.results.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
@@ -123,7 +126,7 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-
+                    this.geolocation.getGeolocation();
                     this.setCookie(res.results.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
@@ -353,6 +356,9 @@ export class AuthService {
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');
         localStorage.removeItem('exibirSaldo');
+        sessionStorage.removeItem('codigo_ibge');
+        sessionStorage.removeItem('cidade');
+        sessionStorage.removeItem('estado');
     }
 
     isCliente(): boolean {

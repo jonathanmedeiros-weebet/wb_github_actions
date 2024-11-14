@@ -262,4 +262,8 @@ export class ParametrosLocaisService {
             ? wordToReplace.replace(casinoDefault, customCasinoName)
             : customCasinoName;
     }
+
+    getSIGAPHabilitado() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.SIGAP_habilitado : null;
+    }
 }
