@@ -54,7 +54,8 @@
             class="finish__input"
             name="bettor_name"
             placeholder="Informe o cpf do apostador"
-            type="text"
+            type="tel"
+            @keypress.native="handleNotAllowLyrics"
             mask="XXX.XXX.XXX-XX"
             v-if="showBettorDocumentNumber"
             v-model="bettorDocumentNumber"
@@ -281,6 +282,12 @@ export default {
     },
   },
   methods: {
+    handleNotAllowLyrics(event) {
+      const char = String.fromCharCode(event.charCode);
+      if (!/\d/.test(char)) {
+        event.preventDefault(); 
+      }
+    },
     formatDateTimeBR,
     handleBetValueClick(valueAditional) {
       this.betValue = parseFloat(this.betValue || 0) + Number(valueAditional);
