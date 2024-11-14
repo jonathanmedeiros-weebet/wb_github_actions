@@ -21,7 +21,7 @@
 </div>
 
 <div class="indique-ganhe-card" #indiqueGanheCard
-    *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente) && !activeGameCassinoMobile()">
+    *ngIf="isIndiqueGanheVisible">
     <div class="indique-ganhe-card-content">
         <div>
             {{
