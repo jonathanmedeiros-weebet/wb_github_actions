@@ -234,9 +234,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
                 let inserirCampeonato = false;
 
-                if (jogo.sport_id == 1) {
-                    jogo.sport_id = this.sportIdService.footballId;
-                }
+                jogo.sport_id = this.sportIdService.footballId;
 
                 jogo.cotacoes.map(cotacao => {
                     cotacao.nome = this.helperService.apostaTipoLabelCustom(
@@ -283,7 +281,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     valido = false;
                 }
 
-                if (!jogo.cotacoes.length) {
+                if (!Number(jogo.total_cotacoes)) {
                     valido = false;
                 }
 
