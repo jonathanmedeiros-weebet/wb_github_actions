@@ -80,7 +80,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.getPosicaoFinanceira()
         }
         const routeParams = this.route.snapshot.params;
-        this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
+        this.backgroundImageUrl = `https://wb-assets.com/img/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
 
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
         if (botaoContatoFlutuante) {

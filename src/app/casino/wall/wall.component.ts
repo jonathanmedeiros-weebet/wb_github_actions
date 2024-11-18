@@ -172,7 +172,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
             ...fornecedor,
-            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+            imagem: `https://wb-assets.com/img/logos/providers/${fornecedor.gameFornecedor}.png`
         }));
 
         if (this.isVirtualPage) {
@@ -262,7 +262,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
             ...fornecedor,
-            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+            imagem: `https://wb-assets.com/img/logos/providers/${fornecedor.gameFornecedor}.png`
         }));
 
         this.gamesCassino = gameList.filter( (game: GameCasino) => game.dataType !== 'VSB');
