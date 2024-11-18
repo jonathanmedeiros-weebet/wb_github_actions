@@ -381,7 +381,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     
             if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
                 valido = false;
-                msg = 'Por favor, verifique a configuração de localização do seu navegador e tente novamente.';
+                msg = this.translate.instant('geral.geolocationError');
                 this.geolocationService.getGeolocation();
             }
 
@@ -582,7 +582,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
             this.geolocationService.getGeolocation();
             this.enableSubmit();
-            return this.handleError('Por favor, verifique a configuração de localização do seu navegador e tente novamente.');
+            return this.handleError(this.translate.instant('geral.geolocationError'));
         }
 
         let values = this.ajustarDadosParaEnvio();

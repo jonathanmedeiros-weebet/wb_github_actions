@@ -254,7 +254,8 @@
         "loginPhone": "Phone",
         "loginUsername": "Username",
         "field": "Field",
-        "or": "OR"
+        "or": "OR",
+        "geolocationError": "Please check your browser's location settings and try again."
     },
     "bet": {
         "sportsBetting": "Sports betting",

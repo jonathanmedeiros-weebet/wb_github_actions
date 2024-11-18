@@ -16,6 +16,7 @@ import {
 } from '../../services';
 import * as clone from 'clone';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-desafios-bilhete',
@@ -57,7 +58,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private menuFooterService: MenuFooterService,
         private layoutService: LayoutService,
         private cd: ChangeDetectorRef,
-        private geolocationService: GeolocationService
+        private geolocationService: GeolocationService,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -216,7 +218,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
             if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
                 valido = false;
-                msg = 'Por favor, verifique a configuração de localização do seu navegador e tente novamente.';
+                msg = this.translate.instant('geral.geolocationError');
                 this.geolocationService.getGeolocation();
             }
 

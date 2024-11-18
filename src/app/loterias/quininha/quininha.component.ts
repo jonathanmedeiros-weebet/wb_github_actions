@@ -19,6 +19,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as range from 'lodash.range';
 import { random } from 'lodash';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-quininha',
@@ -62,7 +63,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private menuFooterService: MenuFooterService,
         public layoutService: LayoutService,
         private cd: ChangeDetectorRef,
-        private geolocationService: GeolocationService
+        private geolocationService: GeolocationService,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -238,7 +240,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
         if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
             this.enableSubmit();
-            this.handleError('Por favor, verifique a configuração de localização do seu navegador e tente novamente.');
+            this.handleError(this.translate.instant('geral.geolocationError'));
             this.geolocationService.getGeolocation();
             return;
         }

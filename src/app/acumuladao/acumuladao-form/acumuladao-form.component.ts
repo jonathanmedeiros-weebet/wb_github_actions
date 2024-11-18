@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-acumuladao-form',
@@ -51,7 +52,8 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         private cd: ChangeDetectorRef,
         private renderer: Renderer2,
         private el: ElementRef,
-        private geolocationService: GeolocationService
+        private geolocationService: GeolocationService,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -153,7 +155,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
 
             if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
                 valid = false;
-                msg = 'Por favor, verifique a configuração de localização do seu navegador e tente novamente.';
+                msg = this.translate.instant('geral.geolocationError');
                 this.geolocationService.getGeolocation();
             }
 

@@ -250,7 +250,8 @@
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
         "field": "Campo",
-        "or": "O"
+        "or": "O",
+        "geolocationError": "Por favor, verifique la configuración de ubicación de su navegador y intente nuevamente."
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
