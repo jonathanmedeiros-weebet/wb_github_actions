@@ -868,10 +868,8 @@ iframe{
         height: 600px;
     }
 
-    .game-frame.in-game-is-tablet {
-        .game-view.in-game {
-            padding: 0;
-        }
+    .game-frame.in-game-is-tablet .game-view.in-game {
+        padding: 0;
     }
 }
 

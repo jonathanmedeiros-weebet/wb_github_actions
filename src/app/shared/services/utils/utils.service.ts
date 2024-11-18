@@ -65,4 +65,24 @@ export class UtilsService {
 
         return 'unknown';
     }
+
+    isToday(dateString: string | null): boolean {
+        if (!dateString) return false;
+        const date = new Date(dateString);
+        const today = new Date();
+        return date.getFullYear() === today.getFullYear() &&
+               date.getMonth() === today.getMonth() &&
+               date.getDate() === today.getDate();
+    }
+
+    timeStringToMilliseconds(time: string): number {
+        const [hours, minutes] = time.split(':').map(Number);
+        return (hours * 60 + minutes) * 60 * 1000;
+    }
+
+    isValidDate(dateString: string | null): boolean {
+        if (!dateString) return false;
+        const date = new Date(dateString);
+        return date instanceof Date && !isNaN(date.getTime());
+    }
 }

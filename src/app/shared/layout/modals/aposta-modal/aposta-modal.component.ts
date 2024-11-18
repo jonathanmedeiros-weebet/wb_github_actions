@@ -8,6 +8,7 @@ import { ExibirBilheteRifaComponent} from '../../exibir-bilhete/rifa/exibir-bilh
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService, AuthService, ParametrosLocaisService } from '../../../../services';
 import { config } from '../../../config';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -37,7 +38,8 @@ export class ApostaModalComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private helperService: HelperService,
         private paramsLocais: ParametrosLocaisService,
-        private auth: AuthService
+        private auth: AuthService,
+        private ga4Service: Ga4Service,
     ) { }
 
     ngOnInit() {
@@ -78,6 +80,8 @@ export class ApostaModalComponent implements OnInit {
         if (this.aposta.tipo === 'desafio') {
             this.bilheteDesafioComponent.shared();
         }
+
+        this.ga4Service.triggerGa4Event(EventGa4Types.SHARE);
     }
 
     cancel() {

@@ -181,6 +181,7 @@
                        (keyup)="filtrarCampeonatos()"
                        (focusin)="focusPesquisa(true)"
                        (focusout)="focusPesquisa(false)"
+                       (blur)="eventoSearch($event)"
                 >
                 <i class="fa fa-close" (click)="limparPesquisa()" *ngIf="term"></i>
             </div>

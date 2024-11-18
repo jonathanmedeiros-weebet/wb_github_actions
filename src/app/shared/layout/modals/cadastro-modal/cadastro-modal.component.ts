@@ -17,6 +17,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 
 @Component({
@@ -100,6 +101,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
+        private ga4Service: Ga4Service,
         private legitimuzService: LegitimuzService,
         private faceMatchService: FaceMatchService
     ) {
@@ -553,5 +555,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         };
 
         this.validPassword = Object.values(this.requirements).every(Boolean);
+    }
+
+    onBlurGa4Name(event: any): void {
+        const value = event.target.value;
+        if(value){
+            this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
+        }
     }
 }
