@@ -261,10 +261,10 @@ gulp.task('apostapremiada.bet', function (done) {
 
 
 // Old bet1.wee.bet
-gulp.task('mrsports.club', function (done) {
+gulp.task('bet1.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "mrsports.club",
+        host: "bet1.wee.bet",
         banca: "MR SPORTS",
         styles: ""
     });
@@ -1540,15 +1540,6 @@ gulp.task('palpitei.bet', function (done) {
     });
 });
 
-gulp.task('winsport.vip', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "winsport.vip",
-        banca: "WIN SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('betbras.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1988,16 +1979,6 @@ gulp.task('multisports.bet', function (done) {
         banca: "MULTISPORTS",
         styles: "",
         dominioTemp: "multisports.wee.bet"
-    });
-});
-
-gulp.task('betcampea.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betcampea.com",
-        banca: "BET CAMPEÃ",
-        styles: "",
-        scripts: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '470832182024876');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=470832182024876&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->"
     });
 });
 
