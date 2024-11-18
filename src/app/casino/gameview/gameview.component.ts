@@ -17,6 +17,7 @@ import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { config } from 'src/app/shared/config';
 
 @Component({
     selector: 'app-gameview',
@@ -365,7 +366,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameCategory = response.category;
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
-                        this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${response.fornecedor}/${response.gameId}.png`;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
