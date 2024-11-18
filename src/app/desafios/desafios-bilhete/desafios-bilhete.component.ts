@@ -218,7 +218,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
 
             if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
                 valido = false;
-                msg = this.translate.instant('geral.geolocationError');
+                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
                 this.geolocationService.getGeolocation();
             }
 

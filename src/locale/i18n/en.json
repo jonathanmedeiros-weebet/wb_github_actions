@@ -255,7 +255,8 @@
         "loginUsername": "Username",
         "field": "Field",
         "or": "OR",
-        "geolocationError": "Please check your browser's location settings and try again."
+        "geolocationError": "Please check your browser's location settings and try again.",
+        "restricaoDeLocalizacao": "This feature is available only to users in Brazil."
     },
     "bet": {
         "sportsBetting": "Sports betting",

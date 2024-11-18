@@ -155,7 +155,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
 
             if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
                 valid = false;
-                msg = this.translate.instant('geral.geolocationError');
+                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
                 this.geolocationService.getGeolocation();
             }
 

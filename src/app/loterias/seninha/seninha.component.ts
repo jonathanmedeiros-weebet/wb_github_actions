@@ -239,7 +239,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
         if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
             this.enableSubmit();
-            this.handleError(this.translate.instant('geolocation.error'));
+            this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
             this.geolocationService.getGeolocation();
             return;
         }

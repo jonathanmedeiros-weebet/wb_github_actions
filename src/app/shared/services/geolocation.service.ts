@@ -14,6 +14,7 @@ export interface ReverseGeolocation {
     codigo_ibge: string;
     cidade: string;
     estado: string;
+    pais: string;
 }
 
 @Injectable({
@@ -91,6 +92,7 @@ export class GeolocationService {
                     sessionStorage.setItem('codigo_ibge', res.codigo_ibge ?? null);
                     sessionStorage.setItem('cidade', res.cidade ?? null);
                     sessionStorage.setItem('estado', res.estado ?? null);
+                    sessionStorage.setItem('pais', res.pais == 'Brasil' || res.pais == 'Brazil' ? 'Brasil' : `Internacional - ${res.pais}`);
                     return res;
                 },
                 error: () => {
@@ -109,7 +111,8 @@ export class GeolocationService {
                 error: true,
                 codigo_ibge: '',
                 cidade: '',
-                estado: ''
+                estado: '',
+                pais: ''
             }
         }
     }
@@ -144,6 +147,11 @@ export class GeolocationService {
         const codigoIbge = (sessionStorage.getItem('codigo_ibge') === 'null' || sessionStorage.getItem('codigo_ibge') === 'undefined') ? null : sessionStorage.getItem('codigo_ibge');
         const cidade = (sessionStorage.getItem('cidade') === 'null' || sessionStorage.getItem('cidade') === 'undefined') ? null : sessionStorage.getItem('cidade');
         const estado = (sessionStorage.getItem('estado') === 'null' || sessionStorage.getItem('estado') === 'undefined') ? null : sessionStorage.getItem('estado');
+        const pais = (sessionStorage.getItem('pais') === 'null' || sessionStorage.getItem('pais') === 'undefined') ? null : sessionStorage.getItem('pais');
+
+        if (pais != 'Brasil' && pais == 'Brazil') {
+            return false;
+        }
 
         if (!codigoIbge || !cidade || !estado) {
             return false;
@@ -164,5 +172,14 @@ export class GeolocationService {
         } else {
             return false;
         }
+    }
+
+    public isInternational(): Boolean {
+        const pais = (sessionStorage.getItem('pais') === 'null' || sessionStorage.getItem('pais') === 'undefined') ? null : sessionStorage.getItem('pais');
+
+        if (pais == null || pais == 'Brasil' || pais == 'Brazil') {
+            return false;
+        } 
+        return true;
     }
 }

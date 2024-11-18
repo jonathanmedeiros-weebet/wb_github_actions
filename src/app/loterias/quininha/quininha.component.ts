@@ -240,7 +240,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
         if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
             this.enableSubmit();
-            this.handleError(this.translate.instant('geral.geolocationError'));
+            this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
             this.geolocationService.getGeolocation();
             return;
         }

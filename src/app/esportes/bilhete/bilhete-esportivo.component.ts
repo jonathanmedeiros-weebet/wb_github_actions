@@ -381,7 +381,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     
             if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
                 valido = false;
-                msg = this.translate.instant('geral.geolocationError');
+                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
                 this.geolocationService.getGeolocation();
             }
 
@@ -582,7 +582,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
             this.geolocationService.getGeolocation();
             this.enableSubmit();
-            return this.handleError(this.translate.instant('geral.geolocationError'));
+            return this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
         }
 
         let values = this.ajustarDadosParaEnvio();
