@@ -6,8 +6,8 @@ export const getCashFlow = async ( params = {} ) => {
     const url = `${lokiUrl}/financial/cash-flow`;
     const queryString = new URLSearchParams(params).toString();
     const fullUrl = queryString ? `${url}?${queryString}` : url;
-
-    return await axiosInstance().get(fullUrl);
+    const response: any = await axiosInstance().get(fullUrl);
+    return response.results
 }
 
 export const getFinancial = async ( params = {} ) => {
@@ -15,8 +15,8 @@ export const getFinancial = async ( params = {} ) => {
     const url = `${lokiUrl}/financial/position`;
     const queryString = new URLSearchParams(params).toString();
     const fullUrl = queryString ? `${url}?${queryString}` : url;
-
-    return await axiosInstance().get(fullUrl);
+    const response: any = await axiosInstance().get(fullUrl);
+    return response.results;
 }
 
 export const listMovements = async ( params = {} ) => {
@@ -24,7 +24,7 @@ export const listMovements = async ( params = {} ) => {
     const url = `${lokiUrl}/financial/movements`;
     const queryString = new URLSearchParams(params).toString();
     const fullUrl = queryString ? `${url}?${queryString}` : url;
-
-    return await axiosInstance().get(fullUrl);
+    const response: any = await axiosInstance().get(fullUrl);
+    return response.results;
 }
 

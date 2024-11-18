@@ -115,8 +115,8 @@ export default {
           'periodoDe': this.startDate,
           'periodoAte': this.endDate
         }
-        const res = await listMovements(queryParams);
-        this.balanceData = this.groupMovementsByDate(res.movimentacoes);
+        const { movimentacoes } = await listMovements(queryParams);
+        this.balanceData = this.groupMovementsByDate(movimentacoes);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

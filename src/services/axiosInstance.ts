@@ -33,7 +33,7 @@ export const axiosInstance = () => {
   );
 
   axiosInstance.interceptors.response.use(
-    (response: any) => response?.data?.results ?? response.data,
+    (response: any) => response.data,
     (error: any) => {
       if (error.response && error.response.status === 401) {
         localStorageService.removeAuth();
