@@ -49,7 +49,7 @@ import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.servic
 
         <div class="buttons">
             <button class="btn btn-custom2 btn-w-100" (click)="compartilhar()"><i class="fa fa-share"></i> Compartilhar QR Code</button>
-            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
+            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode" (click)="copyCode()"><i class="fa fa-copy"></i>{{ copyButtonText }}</button>
         </div>
     </div>
     `
@@ -63,6 +63,7 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
+    copyButtonText; 
 
     constructor(
         public modal: NgbActiveModal,
@@ -99,10 +100,17 @@ export class NgbdModalContent {
                 clearInterval(timer);
             }
         }, 1000);
+        this.copyButtonText = this.translate.instant('deposito.copyCode');
     }
 
-    copyCode(code) {
-        console.log('Copiado: ', code);
+    copyCode() {
+        this.translate.get('deposito.copied').subscribe((translatedText) => {
+            this.copyButtonText = translatedText; 
+
+            setTimeout(() => {
+                this.copyButtonText = this.translate.instant('deposito.copyCode');
+            }, 1000);
+        }); 
     }
 
     compartilhar() {
