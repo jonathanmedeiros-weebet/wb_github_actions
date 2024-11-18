@@ -149,7 +149,7 @@ export class GeolocationService {
         const estado = (sessionStorage.getItem('estado') === 'null' || sessionStorage.getItem('estado') === 'undefined') ? null : sessionStorage.getItem('estado');
         const pais = (sessionStorage.getItem('pais') === 'null' || sessionStorage.getItem('pais') === 'undefined') ? null : sessionStorage.getItem('pais');
 
-        if (pais != 'Brasil' && pais == 'Brazil') {
+        if (pais != 'Brasil' && pais != 'Brazil') {
             return false;
         }
 
