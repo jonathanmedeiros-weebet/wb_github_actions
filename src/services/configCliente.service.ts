@@ -16,7 +16,7 @@ export const prepareConfigClient = async (route: any) => {
         setConfig({
             name: name as string,
             slug: slug as string,
-            apiUrl: host as string
+            host: host as string
         });
     }
    

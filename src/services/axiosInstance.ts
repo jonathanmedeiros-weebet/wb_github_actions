@@ -4,7 +4,7 @@ import { localStorageService } from "./storage.service";
 import router from "@/router";
 
 export const axiosInstance = () => {
-  const { apiUrl } = useConfigClient();
+  const { apiUrl, clientCenterUrl } = useConfigClient();
   const axiosInstance = axios.create({
     baseURL: apiUrl,
     headers: {
@@ -19,6 +19,12 @@ export const axiosInstance = () => {
       if (token && !awsRouteException) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
+
+      const clientOriginException = config.url.includes('center7') || config.url.includes('hermes');
+      if (!clientOriginException) {
+        config.headers['Client-Origin'] = clientCenterUrl;
+      }
+
       return config;
     },
     (error: any) => {
@@ -27,7 +33,7 @@ export const axiosInstance = () => {
   );
 
   axiosInstance.interceptors.response.use(
-    (response: any) => response.data,
+    (response: any) => response?.data?.results ?? response.data,
     (error: any) => {
       if (error.response && error.response.status === 401) {
         localStorageService.removeAuth();

@@ -6,7 +6,7 @@ export const authUser = async (
     username: string,
     password: string,
 ) => {
-    const { lokiUrl, clientCenterUrl } = useConfigClient();
+    const { lokiUrl } = useConfigClient();
     const url = `${lokiUrl}/auth/login`;
     
     const user = {
@@ -14,14 +14,8 @@ export const authUser = async (
         password: password
     }
     try {
-        const resp: any = await axiosInstance().post(url, user, {
-            headers: {
-                'Client-Origin': clientCenterUrl
-            }
-        }); 
-
+        const resp: any = await axiosInstance().post(url, user); 
         if(resp.success){
-            
             if(resp.results.user.tipo_usuario == 'cambista'){
                 localStorageService.set(LocalStorageKey.TOKEN, resp.results.token);
                 localStorageService.set(LocalStorageKey.USER, resp.results.user);

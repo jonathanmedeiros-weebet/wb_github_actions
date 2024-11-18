@@ -2,27 +2,17 @@ import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
 
 export const getCashFlow = async ( params = {} ) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/cambistas/fluxoCaixa`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/financial/cash-flow`;
     const queryString = new URLSearchParams(params).toString();
     const fullUrl = queryString ? `${url}?${queryString}` : url;
 
     return await axiosInstance().get(fullUrl);
 }
-
 
 export const getFinancial = async ( params = {} ) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/cambistas/financeiro`;
-    const queryString = new URLSearchParams(params).toString();
-    const fullUrl = queryString ? `${url}?${queryString}` : url;
-
-    return await axiosInstance().get(fullUrl);
-}
-
-export const getQtdBets = async ( params = {} ) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/cambistas/quantidadeApostas`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/financial/position`;
     const queryString = new URLSearchParams(params).toString();
     const fullUrl = queryString ? `${url}?${queryString}` : url;
 
@@ -30,8 +20,8 @@ export const getQtdBets = async ( params = {} ) => {
 }
 
 export const listMovements = async ( params = {} ) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/cambistas/listar-movimentacoes`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/financial/movements`;
     const queryString = new URLSearchParams(params).toString();
     const fullUrl = queryString ? `${url}?${queryString}` : url;
 

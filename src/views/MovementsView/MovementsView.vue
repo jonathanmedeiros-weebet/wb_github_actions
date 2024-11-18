@@ -50,7 +50,7 @@ import MovementItem from './parts/MovementItem.vue';
 import Header from '@/components/layouts/Header.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
-import { getMovements } from '@/services';
+import { listMovements } from '@/services';
 import { formatCurrency, now, formatDateBR } from '@/utilities';
 import ModalCalendar from './../HomeView/parts/ModalCalendar.vue';
 
@@ -111,7 +111,11 @@ export default {
     },
     async getBalance() {
       try {
-        const res = await getMovements(this.startDate, this.endDate);
+        const queryParams = {
+          'periodoDe': this.startDate,
+          'periodoAte': this.endDate
+        }
+        const res = await listMovements(queryParams);
         this.balanceData = this.groupMovementsByDate(res.movimentacoes);
       } catch (error) {
         console.error('Error fetching data:', error);

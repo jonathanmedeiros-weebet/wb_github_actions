@@ -86,7 +86,7 @@ import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
-import { logout, getBalance, getBetByCode } from '@/services';
+import { logout, getBetByCode, getFinancial } from '@/services';
 import { formatCurrency, wbPostMessage } from '@/utilities';
 import { localStorageService } from "@/services";
 import Toast from '@/components/Toast.vue';
@@ -158,7 +158,7 @@ export default {
     },
     async getData() {
       try {
-        const res = await getBalance();
+        const res = await getFinancial();
         this.balanceData = res;
       } catch (error) {
         console.error('Error fetching data:', error);
