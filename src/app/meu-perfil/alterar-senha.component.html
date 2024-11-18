@@ -160,7 +160,6 @@
                 </div>
                 </div>
                 <div *ngIf="faceMatchType == 'docCheck'">
-                    
                     <div id="legitimuz">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
@@ -168,7 +167,9 @@
                         </div>
                         <button id="exDocCheckAction"
                             [data-ex-doccheck-document]="cliente.cpf"
-                            [data-ex-doccheck-document-hmac-hash]="hmacHash(cliente.cpf)" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            [data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom" *ngIf="!disapprovedIdentity"
+                            [data-ex-doccheck-force-enrollment]="cliente.verifiedIdentity ? false : true"
+                            >
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                         </button>

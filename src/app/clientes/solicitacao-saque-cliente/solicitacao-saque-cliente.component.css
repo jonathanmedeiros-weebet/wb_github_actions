@@ -281,7 +281,7 @@
     gap: 16px;
 }
 
-#legitimuz-action-verify, #legitimuz-action-faceindex {
+#legitimuz-action-faceindex, #legitimuz-action-verify, #exDocCheckAction {
     flex: 1;
     width: 25%;
 }

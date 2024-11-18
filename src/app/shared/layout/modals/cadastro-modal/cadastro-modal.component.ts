@@ -1,3 +1,4 @@
+import { DocCheckService } from './../../../services/doc-check.service';
 import { FaceMatchService } from './../../../services/face-match.service';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, OnChanges } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
@@ -19,6 +20,13 @@ import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+
+declare global {
+    interface Window {
+      ex_partner: any;
+      exDocCheck: any;
+    }
+  }
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -70,10 +78,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     faceMatchEnabled = false;
     faceMatchRegister = false;
     faceMatchRegisterValidated = false;
+    faceMatchType = null;
     legitimuzToken = "";
     currentLanguage = 'pt';
     disapprovedIdentity = false;
     dataUserCPF ='';
+    docCheckToken = '';
+    secretHash = '';
     showLoading = true;
     faceMatchRequested = false;
     isStrengthPassword: boolean | null;
@@ -103,15 +114,29 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private financeiroService: FinanceiroService,
         private ga4Service: Ga4Service,
         private legitimuzService: LegitimuzService,
-        private faceMatchService: FaceMatchService
+        private docCheck: DocCheckService,
     ) {
         super();
     }
 
     ngOnInit() {
+        this.faceMatchType = this.paramsService.getOpcoes().faceMatchType;
         this.currentLanguage = this.translate.currentLang;
-        this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchRegister);
+        switch(this.faceMatchType) {
+            case 'legitimuz':
+                this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
+                this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchChangePassword);
+                break;
+            case 'docCheck':
+                this.docCheckToken = this.paramsService.getOpcoes().dockCheck_token;
+                this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.docCheckToken && this.paramsService.getOpcoes().faceMatchChangePassword);
+                this.docCheck.iframeMessage$.subscribe(message => {
+                    console.log(message)
+                })
+                break;
+            default:
+                break;            
+        }  
 
         if (!this.faceMatchEnabled) {
             this.faceMatchRegisterValidated = true;
@@ -256,8 +281,19 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.form.get('cpf')?.valueChanges.subscribe(cpf => {
                 this.dataUserCPF = cpf;
-                this.legitimuzService.init();
-                this.legitimuzService.mount();
+                switch(this.faceMatchType) {
+                    case 'legitimuz':
+                        this.legitimuzService.init();
+                        this.legitimuzService.mount();
+                        break;
+                    case 'docCheck':
+                        this.secretHash = this.docCheck.hmacHash(this.dataUserCPF, this.paramsService.getOpcoes().dockCheck_secret_hash)
+                        break;
+                    default:
+                        break;            
+                }  
+               
+               
             })
         }
     }

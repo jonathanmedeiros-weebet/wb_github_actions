@@ -13,6 +13,7 @@ import { ClienteService, ParametrosLocaisService } from 'src/app/services';
 import { TranslateService } from '@ngx-translate/core';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
+import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 
 enum RecoveryStep {
     ONE_STEP = 1,
@@ -43,6 +44,9 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     currentLanguage = 'pt';
     disapprovedIdentity = false;
     showLoading = true;
+    faceMatchType = null;
+    docCheckToken = "";
+    secretHash = ""
 
     constructor(
         private route: ActivatedRoute,
@@ -57,7 +61,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         private translate: TranslateService,
         private legitimuzService: LegitimuzService,
         private LegitimuzFacialService: LegitimuzFacialService,
-        private faceMatchService: FaceMatchService
+        private faceMatchService: FaceMatchService,
+        private docCheck: DocCheckService
     ) {
         super();
     }
@@ -83,6 +88,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngOnInit() {
+        this.faceMatchType = this.paramLocais.getOpcoes().faceMatchType;
         this.currentLanguage = this.translate.currentLang;
         this.createForm();
         this.translate.onLangChange.subscribe(change => {
@@ -104,6 +110,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                                     next: (res) => {
                                         if (res.verifiedIdentity == null) {
                                             this.dataUserCPF = res.cpf;
+                                            this.secretHash = this.docCheck.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash)
                                             this.showLoading = false;
                                             this.disapprovedIdentity = false
                                         } else if (res.verifiedIdentity) {
@@ -129,7 +136,21 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             });
 
         this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramLocais.getOpcoes().faceMatchResetPassword);
+        switch(this.faceMatchType) {
+            case 'legitimuz':
+                this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
+                this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramLocais.getOpcoes().faceMatchChangePassword);
+                break;
+            case 'docCheck':
+                this.docCheckToken = this.paramLocais.getOpcoes().dockCheck_token;
+                this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramLocais.getOpcoes().faceMatchChangePassword);
+                this.docCheck.iframeMessage$.subscribe(message => {
+                    console.log(message)
+                })
+                break;
+            default:
+                break;            
+        }  
         if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
         }
@@ -247,16 +268,18 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            this.legitimuz.changes
-                .subscribe(() => {
+            if (this.faceMatchType == 'legitimuz') {
+                this.legitimuz.changes
+                    .subscribe(() => {
                         this.legitimuzService.init();
-                        this.legitimuzService.mount();                  
-                });
-            this.legitimuzLiveness.changes
-                .subscribe(() => {
+                        this.legitimuzService.mount();
+                    });
+                this.legitimuzLiveness.changes
+                    .subscribe(() => {
                         this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();                  
-                });
+                        this.LegitimuzFacialService.mount();
+                    });
+            }
         }
     }
 }

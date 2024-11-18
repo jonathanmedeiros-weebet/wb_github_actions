@@ -18,6 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
+import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -59,7 +60,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     submitting;
     faceMatchEnabled = false;
     faceMatchFirstWithdrawValidated = false;
+    faceMatchType = null;
     legitimuzToken = "";
+    docCheckToken = "";
+    secretHash = ""
     verifiedIdentity = false;
     disapprovedIdentity = false;
 
@@ -85,7 +89,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private legitimuzService: LegitimuzService,
         private ga4Service: Ga4Service,
         private LegitimuzFacialService : LegitimuzFacialService,
-        private faceMatchService : FaceMatchService
+        private faceMatchService : FaceMatchService,
+        private docCheck: DocCheckService
     ) {
         super();
     }
@@ -98,12 +103,28 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.menuFooterService.setIsPagina(true);
         }
 
+        this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
+
         this.getRollovers();
 
         this.currentLanguage = this.translate.currentLang;
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw);
+        switch(this.faceMatchType) {
+            case 'legitimuz':
+                this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+                break;
+            case 'docCheck':
+                this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+                this.docCheck.iframeMessage$.subscribe(message => {
+                    console.log(message)
+                })
+                break;
+            default:
+                break;            
+        }  
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
         } else {
@@ -147,6 +168,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+                    this.secretHash = this.docCheck.hmacHash(this.cliente.cpf, this.paramsLocais.getOpcoes().dockCheck_secret_hash)
                     this.cd.detectChanges();
 
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
@@ -228,16 +250,18 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            this.legitimuz.changes
-                .subscribe(() => {
+            if (this.faceMatchType == 'legitimuz') {
+                this.legitimuz.changes
+                    .subscribe(() => {
                         this.legitimuzService.init();
                         this.legitimuzService.mount();
-                });
-            this.legitimuzLiveness.changes
-                .subscribe(() => {
+                    });
+                this.legitimuzLiveness.changes
+                    .subscribe(() => {
                         this.LegitimuzFacialService.init();
                         this.LegitimuzFacialService.mount();
-                });
+                    });
+            }
         }
     }
 

@@ -1,3 +1,4 @@
+import { DocCheckService } from './../shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, AfterViewChecked, AfterContentChecked, AfterContentInit, AfterViewInit } from '@angular/core';
@@ -13,7 +14,6 @@ import { Cliente } from '../shared/models/clientes/cliente';
 import { LegitimuzService } from '../shared/services/legitimuz.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LegitimuzFacialService } from '../shared/services/legitimuz-facial.service';
-import * as CryptoJS from 'crypto-js';
 
 declare global {
     interface Window {
@@ -46,6 +46,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     faceMatchChangePassword = false;
     faceMatchChangePasswordValidated = false;
     legitimuzToken = "";
+    docCheckToken = "";
+    secretHash = ""
     verifiedIdentity = null;
     disapprovedIdentity = false;
     showLoading = true;
@@ -72,7 +74,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private LegitimuzFacialService: LegitimuzFacialService,
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
-        private faceMatchService: FaceMatchService
+        private faceMatchService: FaceMatchService,
+        private docCheck: DocCheckService
     ) {
         super();
     }
@@ -90,6 +93,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     ngOnInit() {
         this.isStrengthPassword = this.paramsLocais.getOpcoes().isStrengthPassword;
+        this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
         this.createForm();
 
         if (this.isCliente) {
@@ -101,8 +105,21 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.menuFooterService.setIsPagina(true);
 
         this.currentLanguage = this.translate.currentLang;
-        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+        switch(this.faceMatchType) {
+            case 'legitimuz':
+                this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+                break;
+            case 'docCheck':
+                this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+                this.docCheck.iframeMessage$.subscribe(message => {
+                    console.log(message)
+                })
+                break;
+            default:
+                break;            
+        }  
         if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
         }
@@ -119,6 +136,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             .subscribe(
                 res => {
                     this.cliente = res;
+                    this.secretHash = this.docCheck.hmacHash(this.cliente.cpf, this.paramsLocais.getOpcoes().dockCheck_secret_hash)
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
                     this.showLoading = false;
@@ -169,16 +187,18 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            this.legitimuz.changes
+            if (this.faceMatchType == 'legitimuz') {
+                this.legitimuz.changes
                 .subscribe(() => {
                     this.legitimuzService.init();
                     this.legitimuzService.mount();
                 });
-            this.legitimuzLiveness.changes
+                this.legitimuzLiveness.changes
                 .subscribe(() => {
                     this.LegitimuzFacialService.init();
                     this.LegitimuzFacialService.mount();
                 });
+            }
         }
     }
 
@@ -322,10 +342,5 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         };
 
         this.validPassword = Object.values(this.requirements).every(Boolean);
-    }
-    hmacHash(cpf) {
-        const concatenatedString = cpf+ this.paramsLocais.getOpcoes().dockCheck_secret_hash ;
-        const hash = CryptoJS.SHA256(concatenatedString);
-        return hash.toString(CryptoJS.enc.Hex);   
     }
 }
