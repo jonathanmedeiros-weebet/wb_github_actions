@@ -234,8 +234,6 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                 let campeonato = this.campeonatos.get(jogo.campeonato._id);
                 let inserirCampeonato = false;
 
-                jogo.sport_id = this.sportIdService.footballId;
-
                 jogo.cotacoes.map(cotacao => {
                     cotacao.nome = this.helperService.apostaTipoLabelCustom(
                         cotacao.chave,
