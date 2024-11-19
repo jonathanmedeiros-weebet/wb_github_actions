@@ -423,39 +423,45 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         let className = 'icon-futebol wbicon';
 
         switch (sportId) {
-            case sportsIds.FOOTBALL_ID: {
+            case sportsIds.BETSAPI_FOOTBALL_ID:
+            case sportsIds.LSPORTS_FOOTBALL_ID: {
                 className = 'wbicon icon-futebol';
                 break;
             }
-            case sportsIds.BOXING_ID: {
+            case sportsIds.BETSAPI_BOXING_ID:
+            case sportsIds.LSPORTS_BOXING_ID: {
                 className = 'wbicon icon-luta';
                 break;
             }
-            case sportsIds.AMERICAN_FOOTBALL_ID: {
+            case sportsIds.BETSAPI_AMERICAN_FOOTBALL_ID: {
                 className = 'wbicon icon-futebol-americano';
                 break;
             }
-            case sportsIds.TENNIS_ID: {
+            case sportsIds.BETSAPI_TABLE_TENNIS_ID:
+            case sportsIds.BETSAPI_TENNIS_ID:
+            case sportsIds.LSPORTS_TENNIS_ID: {
                 className = 'wbicon icon-tenis';
                 break;
             }
-            case sportsIds.ICE_HOCKEY_ID: {
+            case sportsIds.BETSAPI_ICE_HOCKEY_ID: {
                 className = 'wbicon icon-hoquei-no-gelo';
                 break;
             }
-            case sportsIds.BASKETBALL_ID: {
+            case sportsIds.BETSAPI_BASKETBALL_ID:
+            case sportsIds.LSPORTS_BASKETBALL_ID: {
                 className = 'wbicon icon-basquete';
                 break;
             }
-            case sportsIds.FUTSAL_ID: {
+            case sportsIds.BETSAPI_FUTSAL_ID: {
                 className = 'wbicon icon-futsal';
                 break;
             }
-            case sportsIds.VOLLEYBALL_ID: {
+            case sportsIds.BETSAPI_VOLLEYBALL_ID:
+            case sportsIds.LSPORTS_VOLLEYBALL_ID: {
                 className = 'wbicon icon-volei';
                 break;
             }
-            case sportsIds.E_SPORTS_ID: {
+            case sportsIds.BETSAPI_E_SPORTS_ID: {
                 className = 'wbicon icon-e-sports';
                 break;
             }
@@ -493,6 +499,26 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         }
 
         if (this.process) {
+            return false;
+        }
+
+        return true;
+    }
+
+    podeRepetir(aposta) {
+        const strategy = this.paramsLocais.getOpcoes().closure_strategy;
+
+        if (strategy === 'probability') {
+            const itemSemProbabilidade = aposta.itens.find((item: any) => item.probabilidade == null);
+
+            if (itemSemProbabilidade || (new Date(aposta.horario) < new Date('2024-05-08 13:00:00'))) {
+                return false;
+            }
+        }
+
+        const podeEncerrarItem = aposta.itens.some((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
+
+        if (!podeEncerrarItem || aposta.resultado || this.encerrando || (this.itemSelecionado && !this.simulando) || this.process) {
             return false;
         }
 

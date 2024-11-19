@@ -5,6 +5,8 @@ import { ExibirBilheteCassinoComponent } from 'src/app/shared/layout/exibir-bilh
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { LayoutModule } from 'src/app/shared/layout/layout.module';
 import { TitleCasePipe } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApostaEncerramentoModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
   selector: 'app-compartilhar-bilhete',
@@ -19,7 +21,7 @@ export class CompartilharBilheteComponent implements OnInit {
   private params = this.activatedRoute.snapshot.params['codigo'];
   loading = true;
   aposta;
-
+  modalRef;
 
   constructor(
     private bilheteEsportivo: BilheteEsportivoService,
@@ -29,7 +31,8 @@ export class CompartilharBilheteComponent implements OnInit {
     private messageService: MessageService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private titleCasePipe: TitleCasePipe
+    private titleCasePipe: TitleCasePipe,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -76,15 +79,16 @@ export class CompartilharBilheteComponent implements OnInit {
         this.messageService.error('Aposta não encontrada');
         return;
       }
-      let bet = await this.jogoService.convertItemToBet(aposta.itens);
-      if (bet.length) {
-        this.bilheteEsportivo.atualizarItens(bet);
-        this.router.navigate(['/esportes']);
-        this.messageService.success('Aposta repetida com sucesso!');
-        return;
-      }
+      let modal = ApostaEncerramentoModalComponent;
+      this.modalRef = this.modalService.open(modal, {
+        ariaLabelledBy: 'modal-basic-title',
+        centered: true
+      });
+      this.modalRef.componentInstance.aposta = aposta;
+      this.modalRef.componentInstance.showCancel = false;
+      this.modalRef.componentInstance.isShared = true;
+
       this.router.navigate(['/esportes']);
-      this.messageService.warning('A aposta não pôde ser repetida.');
     } catch (error) {
       this.router.navigate(['/esportes']);
       this.messageService.error('Erro ao converter aposta');

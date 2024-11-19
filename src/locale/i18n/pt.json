@@ -746,6 +746,7 @@
         "calculando": "Calculando...",
         "encerrarAposta": "Encerrar aposta",
         "encerrando": "Encerrando...",
-        "apostaNaoPodeSerEncerrada": "A aposta não pode ser encerrada."
+        "apostaNaoPodeSerEncerrada": "A aposta não pode ser encerrada.",
+        "apostaNaoPodeSerRepetida": "Não é possível repetir a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas."
     }
 }
