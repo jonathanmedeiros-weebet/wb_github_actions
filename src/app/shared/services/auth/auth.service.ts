@@ -195,36 +195,40 @@ export class AuthService {
     }
 
     performLogout(logoutType: string) {
-        this.http.post(`${this.authLokiUrl}/logout`, {logout_type: logoutType}, this.header.getRequestOptions(true))
-            .toPromise().then((response) => {
-            this.limparStorage();
-            this.deleteCookie(INTERCOM_HMAC_COOKIE);
-            this.logadoSource.next(false);
-            if (this.xtremepushHabilitado()) {
-                this.cleanXtremepushNotifications();
-            }
-            location.reload();
-
-        }).catch((error) => {
-
-            if (error.status === 401 || error.status === 404) {
-                this.limparStorage();
-                this.deleteCookie(INTERCOM_HMAC_COOKIE);
-                this.logadoSource.next(false);
-                if (this.xtremepushHabilitado()) {
-                    this.cleanXtremepushNotifications();
+        return this.http.post<any>(
+            `${this.authLokiUrl}/logout`,
+            { logout_type: logoutType },
+            this.header.getRequestOptions(true)
+        ).pipe(
+            map(res => {
+                this.handleLogoutCleanup();
+                return res;
+            }),
+            catchError(error => {
+                if (error.status === 401 || error.status === 404) {
+                    this.handleLogoutCleanup();
                 }
-                location.reload();
-            }
-        });
+                throw error;
+            })
+        );
+    }
+
+    private handleLogoutCleanup() {
+        this.limparStorage();
+        this.deleteCookie(INTERCOM_HMAC_COOKIE);
+        this.logadoSource.next(false);
+        if (this.xtremepushHabilitado()) {
+            this.cleanXtremepushNotifications();
+        }
+        location.reload();
     }
 
     logout() {
-        this.performLogout('manual');
+        this.performLogout('manual').subscribe();
     }
 
     expiredByInactive() {
-        this.performLogout('expired by inactivity');
+        this.performLogout('expired by inactivity').subscribe();
     }
 
     cleanXtremepushNotifications() {
