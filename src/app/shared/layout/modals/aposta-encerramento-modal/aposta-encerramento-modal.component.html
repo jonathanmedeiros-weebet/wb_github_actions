@@ -287,9 +287,9 @@
             </button>
         </ng-container>
         <ng-container #redoSharedBet>
-            <button class="btn btn-custom btn-block" (click)="repetirAposta(aposta)" *ngIf="podeRepetir(aposta); else cantRepeat"
+            <button class="btn btn-custom btn-block" (click)="repetirAposta(aposta)" *ngIf="podeReutilizar(aposta); else cantRepeat"
                 [disabled]="simulando || repeating">
-                {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate }}
+                {{ (repeating ? 'compartilhar_aposta.reutilizandoAposta' : 'compartilhar_aposta.reutilizarAposta') | translate }}
             </button>
             <ng-template #cantRepeat>
                 <p style="text-align: center;">{{ 'compartilhar_aposta.apostaNaoPodeSerRepetida' | translate }}</p>

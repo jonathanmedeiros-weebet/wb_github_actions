@@ -737,11 +737,13 @@
         "mensagemBody": "Access the link to view the bet ticket.",
         "repetindoAposta": "Repeating bet...",
         "repetirAposta": "Repeat bet",
+        "reutilizarAposta": "Reuse bet",
+        "reutilizandoAposta": "Reusing bet...",
         "aguardando": "Waiting",
         "calculando": "Calculating...",
         "encerrarAposta": "End bet",
         "encerrando": "Ending...",
         "apostaNaoPodeSerEncerrada": "The bet cannot be ended.",
-        "apostaNaoPodeSerRepetida": "The bet cannot be repeated at the moment. Please try again later or check the status of the matches."
+        "apostaNaoPodeSerReutilizada": "The bet cannot be reused at the moment. Please try again later or check the status of the matches."
     }
 }

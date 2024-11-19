@@ -732,11 +732,13 @@
         "mensagemBody": "Acceda al enlace para ver el boleto de apuesta.",
         "repetindoAposta": "Repitiendo apuesta...",
         "repetirAposta": "Repetir apuesta",
+        "reutilizarAposta": "Reutilizar apuesta",
+        "reutilizandoAposta": "Reutilizando apuesta...",
         "aguardando": "Esperando",
         "calculando": "Calculando...",
         "encerrarAposta": "Finalizar apuesta",
         "encerrando": "Finalizando...",
         "apostaNaoPodeSerEncerrada": "La apuesta no se puede finalizar.",
-        "apostaNaoPodeSerRepetida": "No es posible repetir la apuesta en este momento. Inténtelo de nuevo más tarde o verifique el progreso de los partidos."
+        "apostaNaoPodeSerReutilizada": "No es posible reutilizar la apuesta en este momento. Inténtelo de nuevo más tarde o verifique el progreso de los partidos."
     }
 }

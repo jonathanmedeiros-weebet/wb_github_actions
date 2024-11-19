@@ -505,7 +505,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         return true;
     }
 
-    podeRepetir(aposta) {
+    podeReutilizar(aposta) {
         const strategy = this.paramsLocais.getOpcoes().closure_strategy;
 
         if (strategy === 'probability') {
@@ -516,9 +516,9 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             }
         }
 
-        const podeEncerrarItem = aposta.itens.some((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
+        const podeReutilizarItem = aposta.itens.some((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
 
-        if (!podeEncerrarItem || aposta.resultado || this.encerrando || (this.itemSelecionado && !this.simulando) || this.process) {
+        if (!podeReutilizarItem || aposta.resultado || this.encerrando || (this.itemSelecionado && !this.simulando) || this.process) {
             return false;
         }
 

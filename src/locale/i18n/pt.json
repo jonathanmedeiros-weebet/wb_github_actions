@@ -742,11 +742,13 @@
         "mensagemBody": "Acesse o link para visualizar o bilhete de aposta.",
         "repetindoAposta": "Repetindo aposta...",
         "repetirAposta": "Repetir aposta",
+        "reutilizarAposta": "Reutilizar aposta",
+        "reutilizandoAposta": "Reutilizando aposta...",
         "aguardando": "Aguardando",
         "calculando": "Calculando...",
         "encerrarAposta": "Encerrar aposta",
         "encerrando": "Encerrando...",
         "apostaNaoPodeSerEncerrada": "A aposta não pode ser encerrada.",
-        "apostaNaoPodeSerRepetida": "Não é possível repetir a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas."
+        "apostaNaoPodeSerReutilizada": "Não é possível reutilizar a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas."
     }
 }
