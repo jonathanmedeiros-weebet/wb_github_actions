@@ -20,6 +20,14 @@ import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 
+declare global {
+    interface Window {
+      ex_partner: any;
+      exDocCheck: any;
+      exDocCheckAction: any;
+    }
+  }
+
 @Component({
     selector: 'app-solicitacao-saque-cliente',
     templateUrl: './solicitacao-saque-cliente.component.html',
@@ -28,6 +36,7 @@ import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
+    @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
 
     unsub$ = new Subject();
     cliente: Cliente;
@@ -90,7 +99,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private ga4Service: Ga4Service,
         private LegitimuzFacialService : LegitimuzFacialService,
         private faceMatchService : FaceMatchService,
-        private docCheck: DocCheckService
+        private docCheckService: DocCheckService
     ) {
         super();
     }
@@ -109,7 +118,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.currentLanguage = this.translate.currentLang;
 
-        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
@@ -118,7 +127,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
-                this.docCheck.iframeMessage$.subscribe(message => {
+                this.docCheckService.iframeMessage$.subscribe(message => {
                     console.log(message)
                 })
                 break;
@@ -168,7 +177,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
-                    this.secretHash = this.docCheck.hmacHash(this.cliente.cpf, this.paramsLocais.getOpcoes().dockCheck_secret_hash)
+                    this.secretHash = this.docCheckService.hmacHash(this.cliente.cpf, this.paramsLocais.getOpcoes().dockCheck_secret_hash)
                     this.cd.detectChanges();
 
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
@@ -212,7 +221,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -261,7 +270,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.LegitimuzFacialService.init();
                         this.LegitimuzFacialService.mount();
                     });
-            }
+                } else {
+                    this.docCheck.changes
+                    .subscribe(() => {
+                        this.docCheckService.init();
+                    });
+                }
         }
     }
 

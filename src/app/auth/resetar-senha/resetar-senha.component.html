@@ -121,7 +121,7 @@
                     </div>
 
                 <div *ngIf="faceMatchType == 'docCheck'">
-                    <div id="legitimuz">
+                    <div #docCheck id="legitimuz">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
                             ('saques.identityVerifyNeeded' | translate)}}

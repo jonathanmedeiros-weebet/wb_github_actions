@@ -19,6 +19,7 @@ declare global {
     interface Window {
       ex_partner: any;
       exDocCheck: any;
+      exDocCheckAction: any;
     }
   }
 
@@ -30,6 +31,8 @@ declare global {
 export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
+    @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
+    
     public isCollapsed = false;
     private unsub$ = new Subject();
     loading = false;
@@ -75,9 +78,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
         private faceMatchService: FaceMatchService,
-        private docCheck: DocCheckService
+        private docCheckService: DocCheckService
     ) {
         super();
+        
     }
     ngAfterContentChecked(): void {
         this.cd.detectChanges();
@@ -92,8 +96,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngOnInit() {
-        this.isStrengthPassword = this.paramsLocais.getOpcoes().isStrengthPassword;
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
+        console.log(this.faceMatchType);
+        this.cd.detectChanges();
+        this.isStrengthPassword = this.paramsLocais.getOpcoes().isStrengthPassword;
         this.createForm();
 
         if (this.isCliente) {
@@ -113,7 +119,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
-                this.docCheck.iframeMessage$.subscribe(message => {
+                this.docCheckService.iframeMessage$.subscribe(message => {
                     console.log(message)
                 })
                 break;
@@ -136,7 +142,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             .subscribe(
                 res => {
                     this.cliente = res;
-                    this.secretHash = this.docCheck.hmacHash(this.cliente.cpf, this.paramsLocais.getOpcoes().dockCheck_secret_hash)
+                    this.secretHash = this.docCheckService.hmacHash(this.cliente.cpf, this.paramsLocais.getOpcoes().dockCheck_secret_hash)
+                    this.docCheckService.init();
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
                     this.showLoading = false;
@@ -147,7 +154,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 }
 
             );
-        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -197,6 +204,11 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 .subscribe(() => {
                     this.LegitimuzFacialService.init();
                     this.LegitimuzFacialService.mount();
+                });
+            } else {
+                this.docCheck.changes
+                .subscribe(() => {
+                    this.docCheckService.init();
                 });
             }
         }

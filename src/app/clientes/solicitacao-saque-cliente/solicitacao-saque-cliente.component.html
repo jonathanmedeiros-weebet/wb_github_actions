@@ -205,7 +205,7 @@
                     </div>
                 </div>
                 <div *ngIf="faceMatchType == 'docCheck'">
-                    <div id="docCheck"
+                    <div #docCheck id="docCheck"
                     *ngIf="faceMatchEnabled && !faceMatchFirstWithdrawValidated && verifiedIdentity">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :

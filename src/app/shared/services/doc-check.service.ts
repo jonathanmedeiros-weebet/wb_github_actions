@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 import { Subject } from 'rxjs';
 
+declare var exDocCheck: any;
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +15,7 @@ export class DocCheckService {
   iframeMessage$ = this.iframeMessageSubject.asObservable();
 
   constructor() {
+
     window.addEventListener('message', this.handleMessage.bind(this), false);
    }
 
@@ -21,9 +25,13 @@ export class DocCheckService {
     const hash = CryptoJS.SHA256(concatenatedString);
     return hash.toString(CryptoJS.enc.Hex);
   }
+  
+  init() {
+    exDocCheck.init();
+  }
 
   private handleMessage(event: MessageEvent) {
-    if (event.origin !== '"https://doccheck.exato.digital') {
+    if (event.origin !== 'https://doccheck.exato.digital') {
       return; 
     }
     if (event.data.StatusPostMessage) {

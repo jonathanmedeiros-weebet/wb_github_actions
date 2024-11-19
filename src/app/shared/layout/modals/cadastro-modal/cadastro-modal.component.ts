@@ -25,6 +25,7 @@ declare global {
     interface Window {
       ex_partner: any;
       exDocCheck: any;
+      exDocCheckAction: any;
     }
   }
 
@@ -264,7 +265,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 );
         }
-        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -288,6 +289,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         break;
                     case 'docCheck':
                         this.secretHash = this.docCheck.hmacHash(this.dataUserCPF, this.paramsService.getOpcoes().dockCheck_secret_hash)
+                        this.docCheck.init();
                         break;
                     default:
                         break;            

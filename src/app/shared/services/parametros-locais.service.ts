@@ -70,11 +70,12 @@ export class ParametrosLocaisService {
                             (function (w, d, src){var h = d.getElementsByTagName("head")[0];
                                 var s=d.createElement("script"); s.src = src;
                                 if (!w.exDocCheck) h.appendChild(s);
-                                else w.exDocCheck.init();
+                                
                             })(window, document, "https://doccheck.exato.digital/doccheck.js");
                         `;
                         head.appendChild(DockCheckScripSDK);
-                        console.log(DockCheckScripSDK)  
+                        console.log(DockCheckScripSDK) 
+                        console.log('teste') 
                     }
 
                     const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key

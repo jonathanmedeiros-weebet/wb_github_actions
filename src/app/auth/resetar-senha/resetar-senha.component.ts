@@ -20,6 +20,14 @@ enum RecoveryStep {
     TWO_STEP = 2
 }
 
+declare global {
+    interface Window {
+      ex_partner: any;
+      exDocCheck: any;
+      exDocCheckAction: any;
+    }
+  }
+
 @Component({
     selector: 'app-resetar-senha',
     templateUrl: './resetar-senha.component.html',
@@ -28,6 +36,8 @@ enum RecoveryStep {
 export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
+    @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
+
     private recoveryTokenStep1: string;
     private recoveryTokenStep2: string;
     public step: number = RecoveryStep.ONE_STEP;
@@ -62,7 +72,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         private legitimuzService: LegitimuzService,
         private LegitimuzFacialService: LegitimuzFacialService,
         private faceMatchService: FaceMatchService,
-        private docCheck: DocCheckService
+        private docCheckService: DocCheckService
     ) {
         super();
     }
@@ -110,7 +120,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                                     next: (res) => {
                                         if (res.verifiedIdentity == null) {
                                             this.dataUserCPF = res.cpf;
-                                            this.secretHash = this.docCheck.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash)
+                                            this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash)
                                             this.showLoading = false;
                                             this.disapprovedIdentity = false
                                         } else if (res.verifiedIdentity) {
@@ -144,7 +154,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             case 'docCheck':
                 this.docCheckToken = this.paramLocais.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramLocais.getOpcoes().faceMatchChangePassword);
-                this.docCheck.iframeMessage$.subscribe(message => {
+                this.docCheckService.iframeMessage$.subscribe(message => {
                     console.log(message)
                 })
                 break;
@@ -160,7 +170,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             .subscribe(statusIndiqueGanhe => {
                 this.indiqueGanheRemovido = statusIndiqueGanhe;
             });
-        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -279,7 +289,12 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.LegitimuzFacialService.init();
                         this.LegitimuzFacialService.mount();
                     });
-            }
+                } else {
+                    this.docCheck.changes
+                    .subscribe(() => {
+                        this.docCheckService.init();
+                    });
+                }
         }
     }
 }
