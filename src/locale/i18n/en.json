@@ -47,6 +47,7 @@
         "saldo": "Balance",
         "minhaConta": "My Account",
         "salvar": "Save",
+        "salvando": "Saving",
         "cancelar": "Cancel",
         "fechar": "Close",
         "todos": "All",
@@ -254,8 +255,9 @@
         "aguardando": "Pending",
         "loginEmail": "Email",
         "loginPhone": "Phone",
-        "session_alert": "Session Alert",
-        "session_alert_message": "There is currently an active session on another device. To continue access, would you like to close the other session?"
+        "loginUsername": "Username",
+        "field": "Field",
+        "or": "OR"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -570,7 +572,7 @@
         "lista_como_indicar": "How to refer",
         "lista_como_indicar_text": "To refer a new user, you should share the referral link in the 'Refer and Earn' section of your account, located in the Promotions menu. The referred user must register using your referral link. The referrer will have a total of {{limiteIndicacoes}} eligible referrals for commissioning; any referrals exceeding this quantity will not be eligible for commission.",
         "lista_bonus_indicador": "Referrer Bonus",
-        "lista_bonus_indicador_text": "For each user you refer who registers, makes a deposit of at least R${{valorMinDepositado}}, and places bets totaling at least R${{valorMinApostado}} within {{qtdDiasRequisitos}} days, you will earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance. This balance will be released for withdrawal in the 'My Referrals' section within 24 hours after the REFERRED user fulfills the promotion rules. You will have a period of {{prazoResgateSaldo}} days to redeem.",
+        "lista_bonus_indicador_text": "For each user you refer who registers, makes a deposit of at least R${{valorMinDepositado}}, and places bets totaling at least R${{valorMinApostado}} within {{qtdDiasRequisitos}} day(s), you will earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance. This balance will be released for withdrawal in the 'My Referrals' section within 24 hours after the REFERRED user fulfills the promotion rules. You will have a period of {{prazoResgateSaldo}} days to redeem.",
         "real_sacavel": "real (withdrawable)",
         "lista_deposito_indicado": "Referee's Deposit",
         "lista_deposito_indicado_text": "The referred user must make a minimum deposit of R${{valorMinDepositado}} into their account and place a minimum bet of R${{valorMinApostado}} for the balance of R${{valorGanhoPorIndicacao}} to be credited to the referrer's account.",
@@ -604,7 +606,8 @@
         "dezembro": "December"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Select an option"
+        "selecione_uma_opcao": "Select an option",
+        "opcao_desabilitado": "Disabled"
     },
     "botoes": {
         "aceitar": "Accept",
@@ -626,6 +629,13 @@
             "definir_limite_diario": "Set daily betting limit",
             "definir_limite_semanal": "Set weekly betting limit",
             "definir_limite_mensal": "Set monthly betting limit"
+        },
+        "limite_perdas": {
+            "titulo": "Loss limit",
+            "descricao": "The loss limit setting is a feature that allows you to set a maximum amount of losses you can have during a given period of time (daily, weekly and monthly). This setting is an important tool in promoting responsible gambling, helping control how much you are willing to lose, preventing excessive losses from affecting your budget and financial well-being. Once the established loss limit is reached, you will not be able to continue playing until the next defined period counted as a termination loss.",
+            "definir_limite_diario": "Set daily loss limit",
+            "definir_limite_semanal": "Set weekly loss limit",
+            "definir_limite_mensal": "Set monthly loss limit"
         },
         "limite_depositos": {
             "titulo": "Deposit Limit",
@@ -667,6 +677,17 @@
             "descricao": "The session timer is a setting that allows you to set a time limit for platform usage. It helps control the time spent, alerting you when the limit is reached and automatically ending your session, promoting balanced and conscious use. For example, you can choose to limit your sessions to 30 minutes, 1 hour, or any other suitable interval for you, and also disable this feature as desired. When the session time limit is reached, our system will automatically end your session and log you out of your account. This helps ensure that you respect your predefined time limits.",
             "definir_tempo": "Set session time",
             "desativado": "Disabled"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Time limit",
+            "descricao": "The time limit setting allows you to set a maximum time to play. This setting helps you control the time you spend, preventing overuse and promoting a healthy gaming experience. You can set a daily limit. When the stipulated time is reached, a warning will appear informing you that the limit has been reached, helping to ensure breaks and avoid prolonged use.",
+            "definir_limite_diario": "Set a daily time limit",
+            "30minutos": "30 minutes",
+            "45minutos": "45 minutes",
+            "1hora": "1 hour",
+            "2horas": "2 hours",
+            "3horas": "3 hours",
+            "4horas": "4 hours"
         }
     },
     "rodada_gratis":{
@@ -687,6 +708,23 @@
         "pending": "Pending",
         "redeemed": "Redeemed",
         "redeem": "Redeem"
+    },
+    "register": {
+        "signupWith": "Sign up with Google",
+        "registerGoogleAccount": "Sign up with your google account",
+        "fillToRegister": "Fill in the fields to register",
+        "protectedByReCaptchaPart1": "This site is protected by reCAPTCHA and the Goggle",
+        "protectedByReCaptchaPart2": "Privacy Policy",
+        "protectedByReCaptchaPart3": "and the",
+        "protectedByReCaptchaPart4": "Terms of Service",
+        "protectedByReCaptchaPart5": "apply."
+    },
+    "registerCancel": {
+        "titleCancelRegister": "Are you sure you want to cancel your registration?",
+        "dontMissOut": "Don't miss out! Sign up and deposit now and we'll double your deposit up to ",
+        "youreAlmostThere": "You're almost there! Register and deposit now and experience the best of entertainment in the palm of your hand.",
+        "continue": "Continue",
+        "cancel": "Yes, I want to cancel"
     },
     "compartilhar_aposta": {
         "linkCopiado": "Link copied to clipboard!",

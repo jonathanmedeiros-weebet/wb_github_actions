@@ -13,6 +13,7 @@ import { AuthService } from '../../services'
 import { config } from '../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
 import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
+import {Ga4Service, EventGa4Types} from '../../shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -32,6 +33,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     loteriaPopularHabilitada;
     rifaHabilitada;
     activeId = 'esporte';
+    tabs;
     paginaPrincipal: string;
 
     showLoading = true;
@@ -89,7 +91,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         public activeModal: NgbActiveModal,
         private auth: AuthService,
         private translate: TranslateService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private ga4Service: Ga4Service
     ) {
         super();
 
@@ -128,6 +131,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             this.tabSelected = this.paginaPrincipal;
         }
+        this.tabs = this.getTabs();
 
         this.getApostas();
 
@@ -425,6 +429,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                 },
                 error => this.handleError(error)
             );
+
+            this.ga4Service.triggerGa4Event(EventGa4Types.VIEW_CART);
     }
 
     formateDate(data) {

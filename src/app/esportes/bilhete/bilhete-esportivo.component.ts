@@ -15,6 +15,7 @@ import {
     MessageService,
     ParametrosLocaisService,
     PreApostaEsportivaService,
+    SportIdService,
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -23,7 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
-import { BASKETBALL_ID, FOOTBALL_ID } from '../../shared/constants/sports-ids';
+import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -71,13 +72,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showStream = false;
     showFrame = true;
     headerHeight = 92;
-    footballId = FOOTBALL_ID;
-    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
-    BasketballId = BASKETBALL_ID;
+
+    footballId;
+    basketballId;
 
     sportId:number;
     liveUrl:string;
 
+    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -96,9 +98,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
         private layoutService: LayoutService,
-        private geolocationService: GeolocationService
+        private geolocationService: GeolocationService,
+        private sportIdService: SportIdService,
+        private ga4Service: Ga4Service,
     ) {
         super();
+
+        this.footballId = this.sportIdService.footballId;
+        this.basketballId = this.sportIdService.basketballId;
     }
 
     ngOnInit() {
@@ -106,7 +113,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
         const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
-        
+
         this.createForm();
         this.definirAltura();
         this.opcoes = this.paramsService.getOpcoes();
@@ -175,7 +182,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                                 this.liveUrl = 'https://stream.raysports.live/br/football?token=5oq66hkn0cwunq7&uuid=';
                             }
 
-                            if (this.sportId == this.BasketballId) {
+                            if (this.sportId == this.basketballId) {
                                 this.liveUrl = 'https://stream.raysports.live/br/basketball?token=5oq66hkn0cwunq7&uuid=';
                             }
 
@@ -183,7 +190,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                                 this.liveStreamUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.liveUrl + response);
                                 this.showStreamFrame();
                             }
-    
+
                             if (habilitar_live_tracker) {
                                 this.liveTrackerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.liveUrl + response);
                                 this.showCampinhoFrame();
@@ -301,6 +308,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
 
         this.bilheteService.atualizarItens(this.itens.value);
+        this.ga4Service.triggerGa4Event(EventGa4Types.REMOVE_FROM_CART);
     }
 
     removerItens() {
@@ -505,12 +513,13 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 this.calcularPossibilidadeGanho(this.form.value.valor);
                 this.mudancas = true;
             }
-            if (error.code === 0 ) {
+            if (error.code === 18) {
                 this.messageService.error(error.message);
-                setInterval(() => {
-                    window.location.reload();
-                }, 1000);
+                    setInterval(() => {
+                        window.location.reload();
+                    }, 2000);
             }
+
         }
     }
 
@@ -631,7 +640,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     async ajustarDadosParaEnvio() {
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
-        
+
         const location = await this.geolocationService.getGeolocation();
         this.geolocation.next(location);
 
@@ -666,7 +675,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     checkBlockedGame() {
         const bloqueados = this.paramsService.getJogosBloqueados();
-        const campeonadosBloqueados = this.paramsService.getCampeonatosBloqueados();
+        const campeonadosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId);
         this.itens.value.forEach((element, index) =>{
             if(bloqueados.includes(element.jogo_id) || campeonadosBloqueados.includes(element.jogo.campeonato._id) ){
                this.itens.removeAt(index)

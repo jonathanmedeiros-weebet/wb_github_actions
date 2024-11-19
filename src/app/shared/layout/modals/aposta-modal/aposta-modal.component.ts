@@ -9,6 +9,7 @@ import { ExibirBilheteCassinoComponent } from '../../exibir-bilhete/cassino/exib
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService, AuthService, ParametrosLocaisService, MessageService } from '../../../../services';
 import { config } from '../../../config';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -42,7 +43,8 @@ export class ApostaModalComponent implements OnInit {
         private paramsLocais: ParametrosLocaisService,
         private auth: AuthService,
         private messageService: MessageService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private ga4Service: Ga4Service,
     ) { }
 
     ngOnInit() {
@@ -83,6 +85,8 @@ export class ApostaModalComponent implements OnInit {
         if (this.aposta.tipo === 'desafio') {
             this.bilheteDesafioComponent.shared();
         }
+
+        this.ga4Service.triggerGa4Event(EventGa4Types.SHARE);
     }
 
     async shareBetLink(aposta) {

@@ -100,6 +100,7 @@ import { MultifactorConfirmationModalComponent } from './modals/multifactor-conf
 import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
 import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
+import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
 import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 
 @NgModule({
@@ -200,6 +201,7 @@ import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-b
         BlockPeerAttempsModalComponent,
         MultifactorConfirmationModalComponent,
         ExibirBilheteRifaComponent,
+        PasswordExpiredModalComponent,
         ExibirBilheteCassinoComponent
     ],
     exports: [

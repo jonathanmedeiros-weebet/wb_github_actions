@@ -8,6 +8,8 @@ import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
 import { Jogo, Cotacao, Campeonato } from './../../../models';
 import { config } from '../../config';
+import { ParametrosLocaisService } from '../parametros-locais.service';
+
 type iBilheteEsportivo = {
     ao_vivo: boolean;
     jogo_id: string;
@@ -56,7 +58,8 @@ export class JogoService {
     constructor(
         private http: HttpClient,
         private header: HeadersService,
-        private errorService: ErrorService
+        private errorService: ErrorService,
+        private paramsLocaisService: ParametrosLocaisService,
     ) { }
 
     getJogo(id: Number): Observable<any> {
@@ -96,7 +99,13 @@ export class JogoService {
     getJogosAoVivo() {
         const url = `${this.JogoUrl}/ao-vivo`;
 
-        return this.http.get(url, this.header.getRequestOptions(true, {new_api: true}))
+        let params = {};
+
+        if (this.paramsLocaisService.getOpcoes().sportbook == 'lsports') {
+            params['new_api'] = true;
+        }
+
+        return this.http.get(url, this.header.getRequestOptions(true, params))
             .pipe(
                 map((res: any) => res.result),
                 catchError(this.errorService.handleError)

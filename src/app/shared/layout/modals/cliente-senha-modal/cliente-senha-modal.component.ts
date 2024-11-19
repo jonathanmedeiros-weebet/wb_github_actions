@@ -89,6 +89,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
                 .subscribe(
                     res => {
                         this.form.reset();
+                        this.activeModal.dismiss();
                         this.handleSuccess();
                     },
                     error => this.handleError(error)

@@ -219,7 +219,7 @@
                         </a>
                         <div class="hide-desktop" *ngIf="!isCliente">
                             <div class="info-profile">
-                                <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
+                                <img src="https://wb-assets.com/img/blank-profile-picture.png" width="40">
                                 <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                             </div>
                             <div class="saldos-container">
@@ -374,7 +374,7 @@
                                     <span>
                                         <i class="fa fa-solid fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -400,7 +400,7 @@
                         </div>
                         <div class="hide-desktop" *ngIf="isCliente">
                             <div class="info-profile" *ngIf="isCliente">
-                                <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
+                                <img src="https://wb-assets.com/img/blank-profile-picture.png" width="40">
                                 <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                             </div>
                             <div class="saldos-container">
@@ -462,7 +462,7 @@
                                     <span>
                                         <i class="fa fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -541,11 +541,20 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
+                                <a (click)="openCashback()" *ngIf="isCliente && cashbackEnabled">
+                                    <span>
+                                        <i class="fa fa-solid fa-gift"></i>
+                                    </span>
+                                        {{'cashback.cashback' | translate}}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
                                 <a (click)="listPrinters()" *ngIf="appMobile">
                                     <span>
                                         <i class="fa fa-solid fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -571,11 +580,11 @@
                         </div>
                         <div class="hide-mobile">
                             <div class="info-profile" *ngIf="isCliente">
-                                <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
+                                <img src="https://wb-assets.com/img/blank-profile-picture.png" width="40">
                                 <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                             </div>
                             <div class="info-profile" *ngIf="!isCliente">
-                                <img src="https://cdn.wee.bet/img/blank-profile-picture.png" width="40">
+                                <img src="https://wb-assets.com/img/blank-profile-picture.png" width="40">
                                 <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                             </div>
                             <div class="saldos-container">
@@ -648,19 +657,25 @@
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/rodada-gratis']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
-                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{
-                                        'rodada_gratis.rodadaGratis' | translate }}</span>
+                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
+                                    {{ 'rodada_gratis.rodadaGratis' | translate }}</span>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/indique-ganhe']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente && indiqueGanheHabilitado">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
+                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
+                                    {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
+                                </a>
+                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/cashback']"
+                                    routerLinkActive="router-link-active" *ngIf="isCliente && cashbackEnabled">
+                                    <i class="fa fa-solid fa-gift mb-2"></i>
                                     <span style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{
-                                        'indique_ganhe.indiqueGanhe' | translate }}</span>
+                                        'cashback.cashback' | translate }}</span>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/configuracoes']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente">
                                     <i class="fa fa-solid fa-cogs mb-2"></i>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    <div [innerHTML]="'geral.jogoResponsavel' | translate | breakLineWithSpacing"></div>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/alterar-senha']"
                                     routerLinkActive="router-link-active" *ngIf="!isCliente">
@@ -704,10 +719,10 @@
                                                             </a>-->
                                 <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
                                     <i class="fa fa-solid fa-cogs"></i>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                 </a>
                             </div>
-                            <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
+                            <a (click)="logout()" class="dropdown-btn btn-sair">
                                 <i class="fa fa-sign-out mr-2"></i>
                                 <span class="dados">{{ 'geral.sair' | translate }}</span>
                             </a>
