@@ -142,7 +142,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     }
 
     exibirMais() {
-        if(this.movimentacoesFinanceiras.length < this.totalMovimentacoes && this.loadingScroll === false) {
+        if (this.movimentacoesFinanceiras.length < this.totalMovimentacoes && this.loadingScroll === false) {
             this.loadingScroll = true;
             const queryParams: any = {
                 'periodo': this.queryParams.periodo,
