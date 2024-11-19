@@ -297,10 +297,38 @@ gulp.task('bet5.wee.bet', function (done) {
     });
 });
 
+gulp.task('bet7.wee.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "bet7.wee.bet",
+        banca: "WEEBET",
+        styles: ""
+    });
+});
+
 gulp.task('bet9.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "bet9.wee.bet",
+        banca: "WEEBET",
+        styles: ""
+    });
+});
+
+gulp.task('qa1.wee.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "qa1.wee.bet",
+        banca: "WEEBET",
+        styles: ""
+    });
+});
+
+
+gulp.task('qa2.wee.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "qa2.wee.bet",
         banca: "WEEBET",
         styles: ""
     });
