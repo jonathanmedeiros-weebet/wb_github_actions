@@ -2311,7 +2311,7 @@ gulp.task('betagora.io', function (done) {
         host: "betagora.io",
         banca: "BET AGORA",
         styles: "",
-        scripts: "<!-- Start of betagora Zendesk Widget script --><script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key=0afeed60-0582-416d-a66b-e4bbc408ad93'></script><!-- End of betagora Zendesk Widget script -->",
+        scripts: "<script type='text/javascript'>	function initEmbeddedMessaging() {		try {			embeddedservice_bootstrap.settings.language = 'pt_BR'; // For example, enter 'en' or 'en-US'			embeddedservice_bootstrap.init(				'00DKd0000052tg8',				'CA_ChatBotBetAgora',				'https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106',				{					scrt2URL: 'https://lemagroup.my.salesforce-scrt.com'				}			);		} catch (err) {			console.error('Error loading Embedded Messaging: ', err);		}	};</script><script type='text/javascript' src='https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>",
         xtremepush_sdk: "E5ilOYbc5X95iSCWM5gf_0K-_turnLxj"
     });
 });
