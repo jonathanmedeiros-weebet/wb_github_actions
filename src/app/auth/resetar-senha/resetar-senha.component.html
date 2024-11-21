@@ -126,11 +126,9 @@
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
                             ('saques.identityVerifyNeeded' | translate)}}
                         </div>
-                        <button id="exDocCheckAction"
-                            [data-ex-doccheck-document]="cliente.cpf"
-                            [data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom" *ngIf="!disapprovedIdentity"
-                            [data-ex-doccheck-force-enrollment]="cliente.verifiedIdentity ? false : true"
-                            >
+                        <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
+                            [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                            [attr.data-ex-doccheck-force-enrollment]="cliente.verifiedIdentity ? false : true">
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                         </button>

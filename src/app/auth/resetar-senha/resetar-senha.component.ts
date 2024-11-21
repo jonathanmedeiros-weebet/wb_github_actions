@@ -119,8 +119,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                                 this.clienteService.getFaceMatchClient(res.results.id).subscribe({
                                     next: (res) => {
                                         if (res.verifiedIdentity == null) {
-                                            this.dataUserCPF = res.cpf;
-                                            this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash)
+                                            this.dataUserCPF = String(res.cpf).replace(/[.\-]/g, '');
+                                            this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash);
                                             this.showLoading = false;
                                             this.disapprovedIdentity = false
                                         } else if (res.verifiedIdentity) {

@@ -50,11 +50,12 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     faceMatchChangePasswordValidated = false;
     legitimuzToken = "";
     docCheckToken = "";
-    secretHash = ""
+    secretHash = "";
     verifiedIdentity = null;
     disapprovedIdentity = false;
     showLoading = true;
     faceMatchType = null;
+    dataUserCPF = "";
 
     validPassword: boolean = false;
     requirements = {
@@ -142,7 +143,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             .subscribe(
                 res => {
                     this.cliente = res;
-                    this.secretHash = this.docCheckService.hmacHash(this.cliente.cpf, this.paramsLocais.getOpcoes().dockCheck_secret_hash)
+                    this.dataUserCPF = String(this.cliente.cpf).replace(/[.\-]/g, '');
+                    this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
                     this.docCheckService.init();
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;

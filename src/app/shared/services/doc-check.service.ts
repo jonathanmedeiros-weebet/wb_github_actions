@@ -19,10 +19,8 @@ export class DocCheckService {
     window.addEventListener('message', this.handleMessage.bind(this), false);
    }
 
-
   hmacHash(cpf, secret_key) {
-    const concatenatedString = cpf + secret_key;
-    const hash = CryptoJS.SHA256(concatenatedString);
+    const hash = CryptoJS.HmacSHA256(cpf , secret_key);
     return hash.toString(CryptoJS.enc.Hex);
   }
   

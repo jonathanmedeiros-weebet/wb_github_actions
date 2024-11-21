@@ -282,20 +282,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.form.get('cpf')?.valueChanges.subscribe(cpf => {
                 this.dataUserCPF = cpf;
-                switch(this.faceMatchType) {
+                switch (this.faceMatchType) {
                     case 'legitimuz':
                         this.legitimuzService.init();
                         this.legitimuzService.mount();
                         break;
                     case 'docCheck':
-                        this.secretHash = this.docCheck.hmacHash(this.dataUserCPF, this.paramsService.getOpcoes().dockCheck_secret_hash)
+                        this.secretHash = this.docCheck.hmacHash(this.dataUserCPF, this.paramsService.getOpcoes().dockCheck_secret_hash);
                         this.docCheck.init();
                         break;
                     default:
-                        break;            
-                }  
-               
-               
+                        break;
+                }
             })
         }
     }

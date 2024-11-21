@@ -73,6 +73,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     legitimuzToken = "";
     docCheckToken = "";
     secretHash = ""
+    dataUserCPF = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
 
@@ -177,7 +178,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
-                    this.secretHash = this.docCheckService.hmacHash(this.cliente.cpf, this.paramsLocais.getOpcoes().dockCheck_secret_hash)
+                    this.dataUserCPF = String(this.cliente.cpf).replace(/[.\-]/g, '');
+                    this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
                     this.cd.detectChanges();
 
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';

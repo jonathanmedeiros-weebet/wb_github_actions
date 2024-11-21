@@ -159,22 +159,20 @@
                     <div id="legitimuz-root"></div>
                 </div>
                 </div>
-                <!-- <div *ngIf="faceMatchType == 'docCheck'"> -->
+                <div *ngIf="faceMatchType == 'docCheck'">
                     <div #docCheck id="legitimuz">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
                             ('saques.identityVerifyNeeded' | translate)}}
                         </div>
-                        <button id="exDocCheckAction"
-                            [data-ex-doccheck-document]="cliente.cpf"
-                            [data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom" *ngIf="!disapprovedIdentity"
-                            [data-ex-doccheck-force-enrollment]="cliente.verifiedIdentity ? false : true"
-                            >
+                        <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
+                            [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                            [attr.data-ex-doccheck-force-enrollment]="cliente.verifiedIdentity ? false : true">
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                         </button>
                     </div>
-                <!-- </div> -->
+                </div>
             </div>
         </div>
     </ng-container>
