@@ -7,8 +7,8 @@ export const changePassword = async (
     confirmPass: string
 ) => {
 
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/usuarios/alterar_senha`
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/user/change-password`
     
     const payload = {
         senha_atual: currentPass,

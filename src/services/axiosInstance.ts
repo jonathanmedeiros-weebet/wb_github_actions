@@ -4,9 +4,9 @@ import { localStorageService } from "./storage.service";
 import router from "@/router";
 
 export const axiosInstance = () => {
-  const { apiUrl, clientCenterUrl } = useConfigClient();
+  const { lokiUrl, clientCenterUrl } = useConfigClient();
   const axiosInstance = axios.create({
-    baseURL: apiUrl,
+    baseURL: lokiUrl,
     headers: {
       'Content-Type': 'application/json',
     },

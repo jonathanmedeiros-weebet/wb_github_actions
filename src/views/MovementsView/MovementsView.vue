@@ -53,6 +53,8 @@ import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
 import { listMovements } from '@/services';
 import { formatCurrency, now, formatDateBR } from '@/utilities';
 import ModalCalendar from './../HomeView/parts/ModalCalendar.vue';
+import { useToastStore } from '@/stores';
+import { ToastType } from '@/enums';
 
 export default {
   name: 'movements',
@@ -81,6 +83,7 @@ export default {
       endDate: this.dateEnd ?? now().format('YYYY-MM-DD'),
       title: 'Movimentações',
       balanceData: {},
+      tostStore: useToastStore()
     };
   },
   computed: {
@@ -110,16 +113,23 @@ export default {
       this.getBalance();
     },
     async getBalance() {
-      try {
-        const queryParams = {
-          'periodoDe': this.startDate,
-          'periodoAte': this.endDate
-        }
-        const { movimentacoes } = await listMovements(queryParams);
-        this.balanceData = this.groupMovementsByDate(movimentacoes);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      const queryParams = {
+        'periodoDe': this.startDate,
+        'periodoAte': this.endDate
       }
+      listMovements(queryParams)
+        .then(({ movimentacoes }) => {
+          this.balanceData = this.groupMovementsByDate(movimentacoes);
+        })
+        .catch(({ errors }) => {
+          this.tostStore.setToastConfig({
+            message: errors?.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+
+          this.resetDateToCurrent();
+        })
     },
     resetDateToCurrent() {
       this.startDate = this.dateIni ?? now().format('YYYY-MM-DD');

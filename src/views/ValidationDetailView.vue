@@ -129,7 +129,7 @@ import { getPreBetByCode } from '@/services/preBet.service';
 import { useConfigClient, useToastStore } from '@/stores';
 import { delay, formatCurrency } from '@/utilities';
 import IconWarning from '@/components/icons/IconWarning.vue';
-import { createBetSport } from '@/services/sport.service';
+import { createBetSport } from '@/services';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import { createLiveToken } from '@/services';
@@ -288,16 +288,16 @@ export default {
         }
 
         createBetSport(values)
-          .then(resp => {
+          .then(response => {
             this.toastStore.setToastConfig({
-              message: resp.results.message ?? 'Validado com sucesso!',
+              message: response.message ?? 'Validado com sucesso!',
               type: ToastType.SUCCESS,
               duration: 5000
             })
             this.$router.push({ 
               name: 'close-bet',
               params: {
-                id: resp.results.id,
+                id: response.id,
                 action: 'view'
               }
             });

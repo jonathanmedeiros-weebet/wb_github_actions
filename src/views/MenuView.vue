@@ -177,12 +177,12 @@ export default {
           });
         }
       } catch (error) {
+        this.handleCloseConsultTicketModal();
         this.toastStore.setToastConfig({
           message: error.errors.message,
           type: ToastType.DANGER,
           duration: 5000
         });
-        this.handleCloseConsultTicketModal();
       }
     }
   }

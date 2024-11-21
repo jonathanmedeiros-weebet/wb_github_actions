@@ -127,7 +127,7 @@ import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 import { useConfigClient, useTicketStore, useToastStore } from '@/stores';
 import { delay, formatCurrency, formatDateTimeBR } from '@/utilities';
-import { calculateQuota, createLiveToken, createPrebet } from '@/services';
+import { calculateQuota, createLiveToken, createBetSport } from '@/services';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import IconFootball from '@/components/icons/IconFootball.vue';
@@ -348,7 +348,7 @@ export default {
         await delay(10000);
       }
 
-      createPrebet(data)
+      createBetSport(data)
         .then(({id}) => {
           this.toastStore.setToastConfig({
             message: 'Aposta realizada com sucesso!',
@@ -356,7 +356,6 @@ export default {
             duration: 5000
           })
           this.handleAllRemove();
-
           this.$router.push({
             name: 'close-bet',
             params: {

@@ -317,9 +317,9 @@ export default {
       .then(resp => {
         this.bet = resp.results;
       })
-      .catch(error => {
+      .catch(({errors}) => {
         this.toastStore.setToastConfig({
-          message: error.errors.message,
+          message: errors.message,
           type: ToastType.DANGER,
           duration: 5000
         })
