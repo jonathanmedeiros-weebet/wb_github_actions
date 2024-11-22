@@ -17,6 +17,7 @@ import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { config } from 'src/app/shared/config';
 
 @Component({
     selector: 'app-gameview',
@@ -27,10 +28,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
     gameUrl: SafeUrl = '';
-    gameId: String = '';
-    gameMode: String = '';
-    gameFornecedor: String = '';
-    gameName: String = '';
+    gameId: string = '';
+    gameMode: string = '';
+    gameFornecedor: string = '';
+    gameName: string = '';
     params: any = [];
     mobileScreen;
     fullscreen;
@@ -368,7 +369,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameCategory = response.category;
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
-                        this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${response.fornecedor}/${response.gameId}.png`;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
@@ -846,8 +847,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private async getRelatedAndPopularGames(category: string) {
         const response = await this.casinoApi.getGamesList(false).toPromise();
 
-        this.gameList = await this.filterDestaques(response.gameList, category);
-
+        this.gameList = await this.filterDestaques(response.populares, category);
     }
 
     private async getFornecedores() {
@@ -894,14 +894,19 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return new Promise((resolve) => {
             let filteredGames = games
                 .filter((game) => {
-                    if (game.modalidade === category && game.gameID !== this.gameId) {
-                        this.popularGamesIds.push(game.gameID);
+                    if (game.category === category && game.gameID !== this.gameId) {
+                        if (!this.popularGamesIds.includes(game.gameID)) {
+                            this.popularGamesIds.push(game.gameID);
+                        }
                         return true;
                     }
                     return false;
                 });
 
             if (filteredGames.length < this.casinoRelatedGamesQuantity) {
+                if (!this.popularGamesIds.includes(this.gameId)) {
+                    this.popularGamesIds.push(this.gameId);
+                }
                 let missingGamesCalc = this.casinoRelatedGamesQuantity - filteredGames.length;
 
                 this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
