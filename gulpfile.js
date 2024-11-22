@@ -2438,7 +2438,7 @@ gulp.task('fortunaplay.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "fortunaplay.bet",
-        banca: "FORTUNA PLAY",
+        banca: "FortunaPlay",
         styles: "",
     });
 });
