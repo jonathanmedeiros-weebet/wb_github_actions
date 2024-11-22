@@ -222,7 +222,7 @@ document.onreadystatechange = async function () {
                                 <div id="match">
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/${teamShieldFolder}/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/${teamShieldFolder}/m/default.png'">
+                                            <img src="https://wb-assets.com/img/${teamShieldFolder}/m/${ticketItem.time_a_img}.png" onerror="this.src='https://wb-assets.com/img/${teamShieldFolder}/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -241,7 +241,7 @@ document.onreadystatechange = async function () {
 
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/${teamShieldFolder}/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/${teamShieldFolder}/m/default.png'">
+                                            <img src="https://wb-assets.com/img/${teamShieldFolder}/m/${ticketItem.time_b_img}.png" onerror="this.src='https://wb-assets.com/img/${teamShieldFolder}/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_b_nome ? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
