@@ -121,7 +121,7 @@ footer {
     align-items: center;
     justify-content: center;
 
-    background: var(--inputs-odds);
+    background: #232629;
     border-radius: 4px;
 
     height: 45px;
