@@ -388,6 +388,13 @@ iframe{
         flex-grow: 1;
         font-size: 18px;
         color: #fff;
+        margin: 0;
+    }
+
+    .game-name span {
+        margin: 0;
+        justify-content: start;
+        align-items: center;
     }
 
     .buttons-game-view {
@@ -402,6 +409,16 @@ iframe{
         border: none;
         color: #fff;
         font-size: 16px;
+    }
+
+    .btn-cassino .game-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #close-btn-game{
+        font-size: 18.555px !important;
     }
 
     .game-frame {
@@ -535,7 +552,6 @@ iframe{
 
     #deposit-btn{
         display: flex;
-        margin-top: .5rem;
         max-height: 23px;
         background-color: var(--highlight);
         color: var(--foreground-highlight);
@@ -547,6 +563,7 @@ iframe{
         gap: 10px;
         border-radius: 2px;
         font-size: 12px;
+        margin-top: 3.5px;
     }
 
     .btn-custom, .btn-custom2 {
