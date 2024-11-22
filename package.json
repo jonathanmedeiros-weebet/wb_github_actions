@@ -269,7 +269,8 @@
         "maxbetbrasil.net": "gulp maxbetbrasil.net",
         "apostefacil.bet": "gulp apostefacil.bet",
         "viabet.com.br": "gulp viabet.com.br",
-        "majovip.net": "gulp majovip.net"
+        "majovip.net": "gulp majovip.net",
+        "playnabet.com": "gulp playnabet.com"
     },
     "private": true,
     "dependencies": {
