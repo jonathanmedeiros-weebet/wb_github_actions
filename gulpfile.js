@@ -516,10 +516,10 @@ gulp.task('dolarbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('slsports.wee.bet', function (done) {
+gulp.task('slsports.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "slsports.wee.bet",
+        host: "slsports.bet",
         banca: "SL SPORTS",
         styles: "--header: #006600; --foreground-header: #fff; --sidebar-right:#7fb96a; --foreground-sidebar-right: #fff; --sidebar-left: #7fb96a; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #4cbca3; --event-time: yellow; --fg-event-time: #000;",
         scripts: "<!--Start of Tawk.to Script--> <script type='text/javascript'> var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); (function(){ var s1=document.createElement('script'),s0=document.getElementsByTagName('script')[0]; s1.async=true; s1.src='https://embed.tawk.to/5efb694c9e5f69442291993e/default'; s1.charset='UTF-8'; s1.setAttribute('crossorigin','*'); s0.parentNode.insertBefore(s1,s0); })(); </script> <!--End of Tawk.to Script-->"
