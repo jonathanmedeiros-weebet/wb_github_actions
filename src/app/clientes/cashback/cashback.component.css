@@ -49,6 +49,7 @@
     border-top: 0;
     border-bottom: 1px solid var(--game);
     vertical-align: middle;
+    padding: 15px 10px;
 }
 
 .table tbody tr td:first-child span {
@@ -198,7 +199,7 @@
     }
 
     #btn-redeem {
-        height: 36px !important;
+        height: 32px !important;
         display: flex;
         align-items: center;
         padding: 0 10px;
