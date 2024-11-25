@@ -49,3 +49,34 @@ h5 {
         margin: 0 !important;
     }
 }
+
+@media only screen and (max-width: 480px) {
+    input {
+        min-height: 50px;
+    }
+
+    .input-md.placeholder-active label {
+        top: 12px;
+    }
+
+    .input-md select {
+        padding-top: 17px;
+    }
+
+    .input-md .showPassword {
+        position: absolute;
+        top: 10px;
+    }
+
+    .input-md label {
+        transform: translateY(-45%);
+        transition: all 0.2s ease-out;
+        pointer-events: none;
+    }
+
+    .input-md input:focus + label,
+    .input-md input:not(:placeholder-shown) + label {
+        top: 12px;
+        font-size: 12px;
+    }
+}
