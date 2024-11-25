@@ -130,7 +130,7 @@
                   <tr>
                     <td class="table__line--left">Pagamento:</td>
                     <td class="table__line--right">
-                      <span v-if="Boolean(bet.status_pagamento)">R$ {{ bet.status_pagamento ?? '-' }}</span>
+                      <span v-if="Boolean(bet.status_pagamento)">{{ capitalizeFirstLetter(bet.status_pagamento) }}</span>
                     </td>
                   </tr>
                 </tbody>  
