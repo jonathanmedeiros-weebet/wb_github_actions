@@ -105,15 +105,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (window.innerWidth > 482 && window.innerWidth <= 1024) {
             this.isTablet = true;
-        }
-
-        if (!this.isLoggedIn && this.gameMode === 'REAL') {
-            this.sharedMsg = encodeURIComponent("Confira este jogo incrível agora mesmo e teste sua sorte! \nBoa diversão! 🎲");
-
-            this.linkFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.currentUrl)}`;
-            this.linkWhatsapp = `https://api.whatsapp.com/send/?text=${this.sharedMsg}%0A${encodeURIComponent(this.currentUrl)}&type=custom_url&app_absent=0`;
-            this.linkTelegram = `https://telegram.me/share/url?url=${encodeURIComponent(this.currentUrl)}&text=${this.sharedMsg}`;
-        }
+        } 
 
         this.getFornecedores();
         this.isLoggedIn = this.auth.isLoggedIn();
@@ -219,6 +211,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if ((this.isMobile || this.isTablet) && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
             this.disableHeader();
+        }
+
+        if (!this.isLoggedIn && this.isMobile && this.gameMode === 'REAL') {
+            this.sharedMsg = encodeURIComponent("Confira este jogo incrível agora mesmo e teste sua sorte! \nBoa diversão! 🎲");
+
+            this.linkFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.currentUrl)}`;
+            this.linkWhatsapp = `https://api.whatsapp.com/send/?text=${this.sharedMsg}%0A${encodeURIComponent(this.currentUrl)}&type=custom_url&app_absent=0`;
+            this.linkTelegram = `https://telegram.me/share/url?url=${encodeURIComponent(this.currentUrl)}&text=${this.sharedMsg}`;
         }
     }
 
