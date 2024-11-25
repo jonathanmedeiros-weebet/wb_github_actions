@@ -29,7 +29,7 @@
             </div>
             <div class="gain__item">
               <span>Possível Retorno:</span>
-              <span v-if="!newEarningPossibility" class="gain__value">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
+              <span v-if="newEarningPossibility == null" class="gain__value">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
               <span v-else class="gain__value">
                 <span class="gain__strikethrough" v-if="bet.possibilidade_ganho">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
                 <span class="gain--danger" v-if="newEarningPossibility">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
