@@ -123,11 +123,15 @@
                     <td 
                       class="table__line--right"
                       :class="{ 'table__status--success': bet.resultado === 'ganhou', 'table__status--danger': bet.resultado === 'perdeu' }"
-                    >{{ capitalizeFirstLetter(bet.resultado) }}</td>
+                    >
+                      {{ capitalizeFirstLetter(bet.resultado) }}
+                    </td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Pagamento:</td>
-                    <td class="table__line--right">R$ {{ bet.status_pagamento ?? '-' }}</td>
+                    <td class="table__line--right">
+                      <span v-if="Boolean(bet.status_pagamento)">R$ {{ bet.status_pagamento ?? '-' }}</span>
+                    </td>
                   </tr>
                 </tbody>  
               </table>
