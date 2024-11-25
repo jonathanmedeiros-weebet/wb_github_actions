@@ -10,7 +10,7 @@
         </div>
         <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="buttons-game-view">
             <ng-container *ngIf="isLoggedIn && gameMode === 'REAL'">
-                <button class="btn" id="deposit-btn" (click)="openDeposit()">Depositar</button> 
+                <button class="btn" id="deposit-btn" (click)="openDeposit()">Depositar</button>
             </ng-container>
             <ng-container>
                 <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreenMob()"><i class="fa fa-expand"></i></a>
@@ -44,7 +44,7 @@
                             <ng-template #nomeOficialGame>
                                 <h2 class="card-info-game-name">{{ gameName }}</h2>
                             </ng-template>
-                            <p class="game-provider">{{ gameFornecedor }}</p>
+                            <p class="game-provider">{{ gameProviderName }}</p>
                             <div class="social-buttons-container">
                                 <a href="{{linkWhatsapp}}" target="_blank" class="social-buttons whatsapp"></a>
                                 <a href="{{linkFacebook}}" target="_blank" class="social-buttons facebook"></a>
@@ -63,8 +63,8 @@
     </ng-container>
 </div>
 
-<div class="game-view" 
-    *ngIf="isDesktop || isTablet" 
+<div class="game-view"
+    *ngIf="isDesktop || isTablet"
     [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }"
 >
     <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }">
