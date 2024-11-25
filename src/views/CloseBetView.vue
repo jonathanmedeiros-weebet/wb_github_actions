@@ -516,7 +516,7 @@ export default {
   }
 
   &__message {
-    margin-top: 10px;
+    margin-top: 20px;
   }
 }
 
