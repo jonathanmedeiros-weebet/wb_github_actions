@@ -35,7 +35,7 @@
         <div class="card__footer">
             <div 
                 class="card__categories" 
-                v-for="(item, categoryIndex) in data.categories" 
+                v-for="(item, categoryIndex) in categories" 
                 :key="categoryIndex"
                  
             >
@@ -48,7 +48,7 @@
                         height="10.465px"
                         
                         :fill="colors[categoryIndex]"
-                        />{{ capitalizeFirstLetter(item.title) }}</p>
+                        />{{ item.label }}</p>
                 </div>
 
                 <div class="card__categories-value">
@@ -99,6 +99,22 @@ export default {
         }
     },
     computed: {
+        categories() {
+            const labelTransformed = {
+                'credito': 'Crédito',
+                'saldo': 'Saldo',
+                'bonus' : 'Bônus',
+                'comissao': 'Comissão',
+                'saida': 'Saída'
+            };
+
+            if(!this.data.categories.length) return [];
+            console.log(this.data.categories)
+            return this.data.categories.map((category) => ({
+                ...category,
+                label: labelTransformed[category.title]
+            }))
+        },
         totalValue() {
             return this.data.categories.reduce((sum, category) => {
                 return sum + category.value;
