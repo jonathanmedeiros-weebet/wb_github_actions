@@ -2560,3 +2560,12 @@ gulp.task('playnabet.com', function (done) {
         styles: "",
     });
 });
+
+gulp.task('poc.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "poc.wee.bet",
+        banca: "POC LOTEP",
+        styles: "",
+    });
+});

@@ -270,7 +270,8 @@
         "apostefacil.bet": "gulp apostefacil.bet",
         "viabet.com.br": "gulp viabet.com.br",
         "majovip.net": "gulp majovip.net",
-        "playnabet.com": "gulp playnabet.com"
+        "playnabet.com": "gulp playnabet.com",
+        "poc.wee.bet": "gulp poc.wee.bet"
     },
     "private": true,
     "dependencies": {
