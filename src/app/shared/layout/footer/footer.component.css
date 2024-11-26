@@ -112,13 +112,13 @@ footer {
     position: fixed;
     bottom: 12em;
     right: 20px;
-    color: var(--highlight);
+    color: var(--foreground-inputs-odds);
     text-decoration: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #232629;
+    background: var(--highlight);
     border-radius: 4px;
     border: 2px solid var(--highlight);
     height: 45px;
