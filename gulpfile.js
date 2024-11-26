@@ -2529,7 +2529,8 @@ gulp.task('apostefacil.bet', function (done) {
         server: "front5.wee.bet",
         host: "apostefacil.bet",
         banca: "APOSTE FÁCIL",
-        styles: ""
+        styles: "",
+        xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS"
     });
 });
 
