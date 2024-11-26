@@ -96,13 +96,16 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
                 this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
                 console.log(this.faceMatchEnabled);
                 this.docCheckService.iframeMessage$.subscribe(message => {
-                    console.log(message)
+                    if (message.status == 'APROVACAO_AUTOMATICA' || message.status == 'APROVACAO_MANUAL') {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe()
+                        this.faceMatchChangePasswordValidated = true;
+                    }
                 })
                 break;
             default:
                 break;            
         }  
-        console.log(this.faceMatchEnabled)
+        
         if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
         }

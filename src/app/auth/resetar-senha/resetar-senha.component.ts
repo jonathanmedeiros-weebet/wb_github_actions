@@ -155,7 +155,10 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.docCheckToken = this.paramLocais.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramLocais.getOpcoes().faceMatchResetPassword);
                 this.docCheckService.iframeMessage$.subscribe(message => {
-                    console.log(message)
+                    if (message.status == 'APROVACAO_AUTOMATICA' || message.status == 'APROVACAO_MANUAL') {
+                        this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, last_reset_password: true }).subscribe()
+                        this.faceMatchChangePasswordValidated = true;
+                    }
                 })
                 break;
             default:

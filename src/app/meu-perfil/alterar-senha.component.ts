@@ -98,7 +98,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     ngOnInit() {
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
-        console.log(this.faceMatchType);
         this.cd.detectChanges();
         this.isStrengthPassword = this.paramsLocais.getOpcoes().isStrengthPassword;
         this.createForm();
@@ -121,7 +120,10 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
                 this.docCheckService.iframeMessage$.subscribe(message => {
-                    console.log(message)
+                    if (message.status == 'APROVACAO_AUTOMATICA' || message.status == 'APROVACAO_MANUAL') {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe()
+                        this.faceMatchChangePasswordValidated = true;
+                    }
                 })
                 break;
             default:
