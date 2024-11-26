@@ -53,7 +53,7 @@
         "lancebet.wee.bet": "gulp lancebet.wee.bet",
         "betsgol.bet": "gulp betsgol.bet",
         "dolarbets.wee.bet": "gulp dolarbets.wee.bet",
-        "slsports.wee.bet": "gulp slsports.wee.bet",
+        "slsports.bet": "gulp slsports.bet",
         "betdez.net": "gulp betdez.net",
         "resenhaesportiva.site": "gulp resenhaesportiva.site",
         "topbets.website": "gulp topbets.website",
@@ -269,7 +269,9 @@
         "maxbetbrasil.net": "gulp maxbetbrasil.net",
         "apostefacil.bet": "gulp apostefacil.bet",
         "viabet.com.br": "gulp viabet.com.br",
-        "majovip.net": "gulp majovip.net"
+        "majovip.net": "gulp majovip.net",
+        "playnabet.com": "gulp playnabet.com",
+        "poc.wee.bet": "gulp poc.wee.bet"
     },
     "private": true,
     "dependencies": {
