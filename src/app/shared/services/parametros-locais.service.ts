@@ -27,7 +27,6 @@ export class ParametrosLocaisService {
             return this.http.get(paramUri)
                 .subscribe((response: any) => {
                     this.parametrosLocais = response;
-                    console.log(response)
 
                     const GTM_ID = response?.opcoes?.gtm_id_site
                     const head = this.document.getElementsByTagName('head')[0];
@@ -74,8 +73,6 @@ export class ParametrosLocaisService {
                             })(window, document, "https://doccheck.exato.digital/doccheck.js");
                         `;
                         head.appendChild(DockCheckScripSDK);
-                        console.log(DockCheckScripSDK) 
-                        console.log('teste') 
                     }
 
                     const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key

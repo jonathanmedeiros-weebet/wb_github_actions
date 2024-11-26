@@ -126,11 +126,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
-                this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchChangePassword);
+                this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchRegister);
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramsService.getOpcoes().dockCheck_token;
-                this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.docCheckToken && this.paramsService.getOpcoes().faceMatchChangePassword);
+                this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.docCheckToken && this.paramsService.getOpcoes().faceMatchRegister);
                 this.docCheck.iframeMessage$.subscribe(message => {
                     console.log(message)
                 })

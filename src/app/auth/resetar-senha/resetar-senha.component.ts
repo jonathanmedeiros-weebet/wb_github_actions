@@ -149,11 +149,11 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
-                this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramLocais.getOpcoes().faceMatchChangePassword);
+                this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramLocais.getOpcoes().faceMatchResetPassword);
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramLocais.getOpcoes().dockCheck_token;
-                this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramLocais.getOpcoes().faceMatchChangePassword);
+                this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramLocais.getOpcoes().faceMatchResetPassword);
                 this.docCheckService.iframeMessage$.subscribe(message => {
                     console.log(message)
                 })
