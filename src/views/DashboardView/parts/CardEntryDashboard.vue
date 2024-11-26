@@ -48,7 +48,7 @@
                         height="10.465px"
                         
                         :fill="colors[categoryIndex]"
-                        />{{ item.title }}</p>
+                        />{{ capitalizeFirstLetter(item.title) }}</p>
                 </div>
 
                 <div class="card__categories-value">
@@ -64,7 +64,7 @@
 
 import IconRestart from '@/components/icons/IconRestart.vue'
 import IconCircle from '@/components/icons/IconCircle.vue';
-import { formatCurrency } from '@/utilities'
+import { capitalizeFirstLetter, formatCurrency } from '@/utilities'
 
 export default {
   components: { IconRestart, IconCircle },
@@ -81,6 +81,7 @@ export default {
         }
     },
     methods: {
+        capitalizeFirstLetter,
         percentage(part) {
             return ((part / this.totalValue) * 100).toFixed(2);
         },

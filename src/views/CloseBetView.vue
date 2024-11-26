@@ -157,7 +157,7 @@ import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
 import { checkLive, closeBet, getBetById, printTicket, sharedTicket, simulateBetClosure, tokenLiveClosing } from '@/services'
-import { formatDateTimeBR, formatDateBR, formatCurrency, delay } from '@/utilities'
+import { formatDateTimeBR, formatDateBR, formatCurrency, delay, capitalizeFirstLetter } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
@@ -234,6 +234,7 @@ export default {
     }
   },
   methods: {
+    capitalizeFirstLetter,
     formatDate(date) {
       return formatDateBR(date);
     },
@@ -330,13 +331,6 @@ export default {
     },
     formateDateTime(datetime) {
         return formatDateTimeBR(datetime);
-    },
-    capitalizeFirstLetter(str) {
-        if(str){
-            return str.charAt(0).toUpperCase() + str.slice(1);
-        }else{
-            return str;
-        }
     },
     formatNumber(value, minFractionDigits, maxFractionDigits) {
         return new Intl.NumberFormat('pt-BR', {
