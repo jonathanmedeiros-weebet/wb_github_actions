@@ -154,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="faceMatchType == 'legitimuz'">
+            <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
                 <div #legitimuz id="legitimuz-container" *ngIf="!faceMatchRegisterValidated">
                     <div id="legitimuz">
                         <div id="verify-identity-text">
@@ -169,8 +169,8 @@
                     <div id="legitimuz-root"></div>
                 </div>
             </div>
-            <div *ngIf="faceMatchType == 'docCheck'">
-                <div id="legitimuz">
+            <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+                <div id="docCheck">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
                         ('saques.identityVerifyNeeded' | translate)}}

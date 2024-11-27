@@ -176,8 +176,8 @@
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
                     {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
                 </div>
-                <div *ngIf="faceMatchType == 'legitimuz'">
-                    <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchFirstWithdrawValidated && !verifiedIdentity">
+                <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
+                    <div #legitimuz id="legitimuz-container" *ngIf="!faceMatchFirstWithdrawValidated && !verifiedIdentity">
                         <div id="legitimuz">
                             <div id="verify-identity-text">
                                 {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
@@ -190,7 +190,7 @@
                         </div>
                         <div id="legitimuz-root"></div>
                     </div>
-                    <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchFirstWithdrawValidated && verifiedIdentity">
+                    <div #legitimuzLiveness id="legitimuz-container" *ngIf="!faceMatchFirstWithdrawValidated && verifiedIdentity">
                         <div id="legitimuz">
                             <div id="verify-identity-text">
                                 {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
@@ -204,9 +204,9 @@
                         <div id="legitimuz-root"></div>
                     </div>
                 </div>
-                <div *ngIf="faceMatchType == 'docCheck'">
+                <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
                     <div #docCheck id="docCheck"
-                    *ngIf="faceMatchEnabled && !faceMatchFirstWithdrawValidated && verifiedIdentity">
+                    *ngIf="!faceMatchFirstWithdrawValidated">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
                             ('saques.identityVerifyNeeded' | translate)}}

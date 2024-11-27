@@ -83,9 +83,9 @@
                         </div>
                     </form>
                 </div>
-                <div *ngIf="faceMatchType == 'legitimuz'">
+                <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
                     <div #legitimuz id="legitimuz-container"
-                        *ngIf="faceMatchEnabled && faceMatchChangePassword && !faceMatchChangePasswordValidated && !verifiedIdentity">
+                        *ngIf="!faceMatchChangePasswordValidated && !verifiedIdentity">
                         <div id="legitimuz">
                             <div id="verify-identity-text">
                                 {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
@@ -102,7 +102,7 @@
                         <div id="legitimuz-root"></div>
                     </div>
                     <div #legitimuzLiveness id="legitimuz-container"
-                        *ngIf="faceMatchEnabled && faceMatchChangePassword && !faceMatchChangePasswordValidated && verifiedIdentity">
+                        *ngIf="!faceMatchChangePasswordValidated && verifiedIdentity">
                         <div id="legitimuz">
                             <div id="verify-identity-text">
                                 {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
@@ -120,8 +120,9 @@
                     </div>
                     </div>
 
-                <div *ngIf="faceMatchType == 'docCheck'">
-                    <div #docCheck id="legitimuz">
+                <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+                    <div #docCheck id="legitimuz"
+                            *ngIf="!faceMatchChangePasswordValidated">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
                             ('saques.identityVerifyNeeded' | translate)}}

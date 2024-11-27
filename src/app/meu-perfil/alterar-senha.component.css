@@ -68,7 +68,7 @@ label {
     padding: 30px 20px;
 }
 
-#legitimuz {
+#legitimuz, #docCheck {
     display: flex;
     flex-direction: column;
     gap: 16px;

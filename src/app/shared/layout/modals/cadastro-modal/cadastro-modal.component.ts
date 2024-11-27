@@ -132,7 +132,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.docCheckToken = this.paramsService.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.docCheckToken && this.paramsService.getOpcoes().faceMatchRegister);
                 this.docCheck.iframeMessage$.subscribe(message => {
-                    if (message.status == 'APROVACAO_AUTOMATICA' || message.status == 'APROVACAO_MANUAL') {
+                    if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         this.faceMatchRequested = true;
                         this.showLoading = false
                     }

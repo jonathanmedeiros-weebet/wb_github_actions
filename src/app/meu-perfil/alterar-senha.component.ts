@@ -120,7 +120,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
                 this.docCheckService.iframeMessage$.subscribe(message => {
-                    if (message.status == 'APROVACAO_AUTOMATICA' || message.status == 'APROVACAO_MANUAL') {
+                    if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe()
                         this.faceMatchChangePasswordValidated = true;
                     }
