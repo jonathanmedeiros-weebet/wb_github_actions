@@ -26,7 +26,9 @@ import { config } from 'src/app/shared/config';
 })
 export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
+    @ViewChild('iframeElement', { static: false }) iframe: ElementRef<HTMLIFrameElement>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
+    htmlGameUrl;
     gameUrl: SafeUrl = '';
     gameId: string = '';
     gameMode: string = '';
@@ -371,7 +373,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameName = response.gameName;
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
-                        this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        if(this.gameFornecedor !== 'pgsoft') {
+                            this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        } else {
+                            this.htmlGameUrl = response.gameURL;
+                        }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
                             this.gameName = response.gameName.split("- 9", 1) || "";
@@ -386,6 +392,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.handleError(error);
                     this.router.navigate(['/']);
                 });
+    }
+
+    onIframeLoad(iframe: HTMLIFrameElement) {
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.open();
+        doc.write(this.htmlGameUrl);
+        doc.close();
     }
 
     handleError(error: string) {
