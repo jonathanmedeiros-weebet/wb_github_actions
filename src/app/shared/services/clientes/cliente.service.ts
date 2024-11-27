@@ -101,6 +101,16 @@ export class ClienteService {
             );
     }
 
+    getFaceMatchClient(id) {
+        return this.http.get(`${this.clienteUrl}/getFaceMatchClient/${id}`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => { return res.results }), (error => {
+                    return error
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     validarCpf(cpf: any) {
         return this.http.get(`${this.clienteUrl}/consultar-cpf`, this.headers.getRequestOptions(true, { cpf }))
             .pipe(

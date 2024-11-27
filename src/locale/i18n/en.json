@@ -253,6 +253,7 @@
         "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
         "bonusCancelado": "Bonus canceled",
         "aguardando": "Pending",
+        "resetarSenha": "Password reset",
         "loginEmail": "Email",
         "loginPhone": "Phone",
         "loginUsername": "Username",
@@ -410,7 +411,7 @@
         "dailyMaximum": "Daily maximum",
         "monthlyMaximum": "Monthly maximum",
         "identityVerify": "Verify identity",
-        "identityVerifyNeeded": "To proceed with the withdrawal, it will be necessary to perform identity verification beforehand.",
+        "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
         "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support."
     },
     "ativacaoEmail": {
@@ -710,6 +711,10 @@
         "pending": "Pending",
         "redeemed": "Redeemed",
         "redeem": "Redeem"
+    },
+    "face_match": {
+        "verified_identity": "Verified identity!",
+        "Identity_not_verified": "Identity not verified, please contact support."
     },
     "register": {
         "signupWith": "Sign up with Google",

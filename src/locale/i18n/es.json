@@ -249,6 +249,7 @@
         "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
         "bonusCancelado": "Bono cancelado",
         "aguardando": "Pendiente",
+        "resetarSenha": "Reiniciar a senha",
         "loginEmail": "Correo electrónico",
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
@@ -705,6 +706,10 @@
         "pending": "Pendiente",
         "redeemed": "Canjeado",
         "redeem": "Canjear"
+    },
+    "face_match": {
+        "verified_identity": "Identidad verificada!",
+        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
     },
     "register": {
         "signupWith": "Regístrate en Google",

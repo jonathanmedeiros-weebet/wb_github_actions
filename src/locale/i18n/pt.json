@@ -255,6 +255,7 @@
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
         "bonusCancelado": "Bônus cancelado",
         "aguardando": "Aguardando",
+        "resetarSenha": "Resetar senha",
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
         "loginUsername": "Nome de usuário",
@@ -415,7 +416,7 @@
         "dailyMaximum": "Máximo diário",
         "monthlyMaximum": "Máximo mensal",
         "identityVerify": "Verificar identidade",
-        "identityVerifyNeeded": "Para prosseguir com o saque será necessário realizar a verificação de identidade antes.",
+        "identityVerifyNeeded": "Para prosseguir será necessário realizar a verificação de identidade antes.",
         "disapprovedIdentity": "Sua verificação de identidade foi reprovada. Para a realização de uma análise manual, por favor, entre em contato com o suporte."
     },
     "ativacaoEmail": {
@@ -715,6 +716,10 @@
         "pending": "Pendente",
         "redeemed": "Resgatado",
         "redeem": "Resgatar"
+    },
+    "face_match": {
+        "verified_identity": "Identidade verificada!",
+        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte."
     },
     "register": {
         "signupWith": "Inscrever-se com Google",
