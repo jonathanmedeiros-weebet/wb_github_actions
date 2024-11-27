@@ -10,5 +10,7 @@ export class Cliente {
     telefone: string;
     newsletter: boolean;
     chave_pix: string;
-    verifiedIdentity: boolean
+    verifiedIdentity: boolean;
+    nome: string;
+    sobrenome: string;
 }

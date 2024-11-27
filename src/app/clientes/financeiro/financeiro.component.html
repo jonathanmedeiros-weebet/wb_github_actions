@@ -1,4 +1,4 @@
-<div id="default-content">
+<div id="default-content"  #listagem infiniteScroll (scrolled)="exibirMais()">
     <app-spinner *ngIf="showLoading"></app-spinner>
 
     <ng-container *ngIf="!showLoading">
@@ -91,6 +91,9 @@
                     </ng-container>
                     </tbody>
                 </table>
+                <div *ngIf="loadingScroll">
+                    Carregando...
+                </div>
             </div>
         </div>
     </ng-container>

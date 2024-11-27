@@ -48,6 +48,7 @@
         "saldo": "Saldo",
         "minhaConta": "Minha Conta",
         "salvar": "Salvar",
+        "salvando": "Salvando",
         "cancelar": "Cancelar",
         "fechar": "Fechar",
         "todos": "Todos",
@@ -259,8 +260,12 @@
         "loginPhone": "Telefone",
         "loginUsername": "Nome de usuário",
         "field": "Campo",
+        "or": "OU",
+        "lastAccesses": "Últimos acessos",
+        "action": "Ação",
         "session_alert": "Alerta de Sessão",
-        "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?"
+        "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?",
+        "jogoResponsavel": "Jogo responsável"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -573,9 +578,9 @@
         "lista_elegibilidade": "Elegibilidade",
         "lista_elegibilidade_text": "Para participar do programa de Indique e Ganhe você deve ser um membro registrado do site. Ao indicar usuários, você estará concordando com estes termos e condições.",
         "lista_como_indicar": "Como indicar",
-        "lista_como_indicar_text": "Para indicar um novo usuário, você deverá compartilhar o link de indicação na seção \"Indique e ganhe\" da sua conta, localizada no menu Promoções. O usuário indicado deverá se registrar usando seu link de indicação. O indicador terá um total de {{limiteIndicacoes}} indicações ao qual serão legíveis de comissionamento as demais que ultrapassarem essa quantidade não serão comissionadas.",
+        "lista_como_indicar_text": "Para indicar um novo usuário, você deverá compartilhar o link de indicação na seção \"Indique e ganhe\" da sua conta, localizada no menu Promoções. O usuário indicado deverá se registrar usando seu link de indicação. O indicador terá um total de {{limiteIndicacoes}} indicações ao qual serão elegíveis de comissionamento; as demais que ultrapassarem essa quantidade não serão comissionadas.",
         "lista_bonus_indicador": "Bônus para o Indicador",
-        "lista_bonus_indicador_text": "A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar apostas de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dias, você ganhará R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho}}. Este saldo será liberado para resgate na aba minhas indicações em até 24 horas após o INDICADO cumprir as regras da promoção, você terá um prazo de {{prazoResgateSaldo}} dias para resgatar.",
+        "lista_bonus_indicador_text": "A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar apostas de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dia(s), você ganhará R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho}}. Este saldo será liberado para resgate na aba minhas indicações em até 24 horas após o INDICADO cumprir as regras da promoção, você terá um prazo de {{prazoResgateSaldo}} dias para resgatar.",
         "real_sacavel": "real (sacável)",
         "lista_deposito_indicado": "Depósito do Indicado",
         "lista_deposito_indicado_text": "O usuário indicado deve realizar um depósito de no mínimo R${{valorMinDepositado}} na sua conta e fazer uma aposta de no mínimo R${{valorMinApostado}} para que o saldo de R${{valorGanhoPorIndicacao}} seja creditado na conta do indicador.",
@@ -609,7 +614,8 @@
         "dezembro": "Dezembro"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Selecione uma opção"
+        "selecione_uma_opcao": "Selecione uma opção",
+        "opcao_desabilitado": "Desabilitado"
     },
     "botoes": {
         "aceitar": "Aceitar",
@@ -631,6 +637,13 @@
             "definir_limite_diario": "Definir limite diário de apostas",
             "definir_limite_semanal": "Definir limite semanal de apostas",
             "definir_limite_mensal": "Definir limite mensal de apostas"
+        },
+        "limite_perdas": {
+            "titulo": "Limite de perdas",
+            "descricao": "A configuração de limite de perdas é uma funcionalidade que permite definir um valor máximo de perdas que você pode ter durante um determinado período de tempo (diário, semanal e mensal). Essa configuração é uma ferramenta importante para promover o jogo responsável, ajudando a controlar quanto você está disposto a perder, evitando que perdas excessivas afetem seu orçamento e bem-estar financeiro. Uma vez atingido o limite de perdas estabelecido, você não poderá continuar jogando até o próximo período definido. É importante frisar que as apostas abertas estarão sendo contabilizadas como perda até a sua finalização.",
+            "definir_limite_diario": "Definir limite diário de perdas",
+            "definir_limite_semanal": "Definir limite semanal de perdas",
+            "definir_limite_mensal": "Definir limite mensal de perdas"
         },
         "limite_depositos": {
             "titulo": "Limite de depósitos",
@@ -660,7 +673,7 @@
             "motivo_1": "Uma segunda conta foi criada",
             "motivo_2": "Ocupa muito meu tempo/desvia muito minha atenção",
             "motivo_3": "Não tenho mais interesse em realizar apostas neste site",
-            "motivo_4": "Não estou mais usando está conta",
+            "motivo_4": "Não estou mais usando esta conta",
             "motivo_5": "Problemas ao utilizar o sistema",
             "motivo_6": "Outros motivos",
             "digite_para_continuar": "Digite \"<b>EXCLUIR PERMANENTEMENTE</b>\" para confirmar a ação de exclusão.",
@@ -672,6 +685,17 @@
             "descricao": "O temporizador de sessão é uma configuração no qual permite você definir um limite de tempo para o uso da plataforma. Ela ajuda a controlar o tempo gasto, alertando  você quando o limite é atingido e encerrando a sua sessão automaticamente, promovendo um uso equilibrado e consciente.  Por exemplo, você pode escolher limitar suas sessões a 30 minutos, 1 hora ou qualquer outro intervalo adequado para você e também desativar essa funcionalidade assim que desejar. Quando o limite de tempo da sessão for atingido, nosso sistema encerrará automaticamente sua sessão e fará o logout de sua conta. Isso ajuda a garantir que você respeite seus limites de tempo predefinidos.",
             "definir_tempo": "Definir tempo de sessão",
             "desativado": "Desativado"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Limite de tempo",
+            "descricao": "A configuração de limite de tempo permite que você defina um tempo máximo para jogar. Essa configuração ajuda a controlar o tempo gasto, evitando o uso excessivo e promovendo uma experiência de jogo saudável. Você pode configurar um limite diário. Quando o tempo estipulado for atingido, um aviso aparecerá informando que o limite foi alcançado, ajudando a garantir pausas e evitar o uso prolongado.",
+            "definir_limite_diario": "Definir limite diário de tempo",
+            "30minutos": "30 minutos",
+            "45minutos": "45 minutos",
+            "1hora": "1 hora",
+            "2horas": "2 horas",
+            "3horas": "3 horas",
+            "4horas": "4 horas"
         }
     },
     "rodada_gratis":{
@@ -696,5 +720,22 @@
     "face_match": {
         "verified_identity": "Identidade verificada!",
         "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte."
+    },
+    "register": {
+        "signupWith": "Inscrever-se com Google",
+        "registerGoogleAccount": "Cadastre-se com sua conta do google",
+        "fillToRegister": "Preencha os campos para realizar o seu cadastro",
+        "protectedByReCaptchaPart1": "Este site é protegido por reCAPTCHA e a",
+        "protectedByReCaptchaPart2": "Política de Privacidade",
+        "protectedByReCaptchaPart3": "do Google e os",
+        "protectedByReCaptchaPart4": "Termos de Serviço",
+        "protectedByReCaptchaPart5": "se aplicam."
+    },
+    "registerCancel": {
+        "titleCancelRegister": "Tem certeza que deseja cancelar seu registro?",
+        "dontMissOut": "Não perca essa oportunidade! Cadastre-se e deposite agora que dobraremos o seu depósito até ",
+        "youreAlmostThere": "Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.",
+        "continue": "Continuar",
+        "cancel": "Sim, quero cancelar"
     }
 }

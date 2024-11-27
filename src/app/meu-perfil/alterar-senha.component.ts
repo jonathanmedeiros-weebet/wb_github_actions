@@ -24,6 +24,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
     public isCollapsed = false;
     private unsub$ = new Subject();
+    loading = false;
     public mostrarSenhaAtual: boolean = false;
     public mostrarSenhaNova: boolean = false;
     public mostrarSenhaConfirmacao: boolean = false;
@@ -200,7 +201,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
             senha_nova: ['', [Validators.required, Validators.minLength(8)]],
             senha_confirmacao: ['', [Validators.required, Validators.minLength(8)]]
         }, {validator: PasswordValidation.MatchPassword});
-        
+
         if (this.isStrengthPassword) {
             this.form.controls.senha_nova.clearValidators();
             this.form.controls.senha_nova.addValidators(FormValidations.strongPasswordValidator())
@@ -221,6 +222,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     submit() {
+        this.loading = true;
         let values = this.form.value;
 
         if (this.twoFactorInProfileChangeEnabled) {
@@ -232,15 +234,19 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         }
 
         if (this.isCliente) {
-                this.clienteService.alterarSenha(values)
-                    .pipe(takeUntil(this.unsub$))
-                    .subscribe(
-                        res => {
-                            this.form.reset();
-                            this.success();
-                        },
-                        error => this.handleError(error)
-                    );
+            this.clienteService.alterarSenha(values)
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(
+                    res => {
+                        this.form.reset();
+                        this.success();
+                    },
+                    error => {
+                        this.handleError(error)
+                        this.loading = false;
+                    },
+                    () => this.loading = false
+                );
         } else {
             this.auth.changePassword(values)
                 .pipe(takeUntil(this.unsub$))
@@ -249,7 +255,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.form.reset();
                         this.success();
                     },
-                    error => this.handleError(error)
+                    error => this.handleError(error),
+                    () => this.loading = false
                 );
         }
     }
@@ -267,6 +274,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     private validacaoMultifator() {
+        this.loading = true;
         const modalref = this.modalService.open(
             MultifactorConfirmationModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
@@ -283,8 +291,9 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                 this.codigoMultifator = result.codigo;
 
                 if (result.checked) {
-                    this.submit();
+                    return this.submit();
                 }
+                this.loading = false;
             }
         );
     }
@@ -295,7 +304,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
         const hasUpperCase = /[A-Z]/.test(passwordValue);
         const hasLowerCase = /[a-z]/.test(passwordValue);
         const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
-        
+
         this.requirements = {
           minimumCharacters: lengthCheck,
           uppercaseLetter: hasUpperCase,

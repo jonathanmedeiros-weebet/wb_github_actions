@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subject, Observable, of, BehaviorSubject } from 'rxjs';
@@ -24,6 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -71,13 +72,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showStream = false;
     showFrame = true;
     headerHeight = 92;
-
     footballId;
+    currentLanguage = 'pt';
     basketballId;
-
     sportId:number;
     liveUrl:string;
-
     private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
@@ -98,7 +97,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private cd: ChangeDetectorRef,
         private layoutService: LayoutService,
         private geolocationService: GeolocationService,
-        private sportIdService: SportIdService
+        private sportIdService: SportIdService,
+        private ga4Service: Ga4Service,
     ) {
         super();
 
@@ -111,6 +111,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
         const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
+
+        this.currentLanguage = this.translate.currentLang;
+
+        this.translate.onLangChange.subscribe(res => this.currentLanguage = res.lang);
 
         this.createForm();
         this.definirAltura();
@@ -306,6 +310,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
 
         this.bilheteService.atualizarItens(this.itens.value);
+        this.ga4Service.triggerGa4Event(EventGa4Types.REMOVE_FROM_CART);
     }
 
     removerItens() {

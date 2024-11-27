@@ -39,6 +39,10 @@ const appRoutes: Routes = [
                 component: AppComponent
             },
             {
+                path: 'esqueceu-senha',
+                component: AppComponent
+            },
+            {
                 path: 'acumuladao',
                 loadChildren: () => import('./acumuladao/acumuladao.module').then(m => m.AcumuladaoModule),
             },
@@ -96,6 +100,11 @@ const appRoutes: Routes = [
             {
                 path: 'alterar-senha',
                 loadChildren: () => import('./meu-perfil/alterar-senha.module').then(m => m.AlterarSenhaModule),
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'ultimos-acessos',
+                loadChildren: () => import('./acessos-clientes/last-accesses.module').then(m => m.LastAccessesModule),
                 canActivate: [AuthGuard]
             },
             {

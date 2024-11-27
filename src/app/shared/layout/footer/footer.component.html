@@ -1,6 +1,7 @@
 <footer>
     <a class="toTop" (click)="scrollToTop()" [ngStyle]="{'display': isToTopBtnVisible ? 'flex' : 'none'}">
         <i class="fa fa-angle-up"></i>
+        <i class="fa fa-angle-up"></i>
     </a>
     <div class="container">
         <div class="logo">
@@ -17,7 +18,7 @@
         <div class="info-jogo">
             <div *ngIf="this.slug == 'zilionz.com' || slug == 'saqbet.tv'" class="icons" style="margin-bottom: 30px; gap: 0">
                 <ng-container *ngIf="slug == 'zilionz.com'">
-                    <img src="https://cdn.wee.bet/img/curacao.png" width="150" height="50" border="0" alt="Gaming Curacao">
+                    <img src="https://wb-assets.com/img/curacao.png" width="150" height="50" border="0" alt="Gaming Curacao">
                     <div id="anj-cd823ed6-bffb-4764-9e1b-05566f369c8c" data-anj-seal-id="cd823ed6-bffb-4764-9e1b-05566f369c8c"
                          data-anj-image-size="128" data-anj-image-type="basic-small" style="width: 50px"></div>
                 </ng-container>
@@ -25,7 +26,7 @@
             </div>
             <h4 class="title">{{'footer.jogueComResponsabilidade' | translate}}</h4>
             <div class="icons" *ngIf="slug == 'ragnar.bet'">
-                <img src="https://cdn.wee.bet/img/curacao.png" width="150" height="50" border="0" alt="Gaming Curacao">
+                <img src="https://wb-assets.com/img/curacao.png" width="150" height="50" border="0" alt="Gaming Curacao">
             </div>
             <div class="icons">
                 <a href="https://www.gamblingtherapy.org/pt-br/" target="_blank">
@@ -33,9 +34,6 @@
                 </a>
                 <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
                     <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/mais_18.svg'" [svgStyle]="svgStyleMaiorIdade()"></svg-icon>
-                </a>
-                <a *ngIf="slug == 'puskasbet.com.br'" href="https://sigap.fazenda.gov.br/consulta-publica/lista-solicitacoes" target="_blank">
-                    <img src="https://cdn.wee.bet/img/sigap.png" width="130" border="0" alt="SIGAP">
                 </a>
                 <div class="info pagamento" *ngIf="hasApiPagamentos">
                     <h4 class="title">{{'footer.metodosDePagamento' | translate}}</h4>
@@ -75,7 +73,7 @@
 <!--        <div class="info">-->
 <!--            <h4 class="title">Patrocinador oficial</h4>-->
 <!--            <p>-->
-<!--                <img src="https://cdn.wee.bet/img/logo-sportivedata.png" class="image">-->
+<!--                <img src="https://wb-assets.com/img/logo-sportivedata.png" class="image">-->
 <!--            </p>-->
 <!--        </div>-->
 

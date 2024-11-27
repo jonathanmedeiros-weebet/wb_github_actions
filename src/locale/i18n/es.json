@@ -47,6 +47,7 @@
         "saldo": "Saldo",
         "minhaConta": "Mi cuenta",
         "salvar": "Guardar",
+        "salvando": "Guardando",
         "cancelar": "Cancelar",
         "fechar": "Cerrar",
         "todos": "Todos",
@@ -253,9 +254,13 @@
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
         "field": "Campo",
+        "or": "O",
+        "lastAccesses": "Últimos accesos",
+        "action": "Acción",
         "jogosRelacionados": "juegos relacionados",
         "session_alert": "Alerta de Sesión",
-        "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?"
+        "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?",
+        "jogoResponsavel": "Juego responsable"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
@@ -565,7 +570,7 @@
         "lista_como_indicar": "Cómo referir",
         "lista_como_indicar_text": "Para referir a un nuevo usuario, debes compartir el enlace de referencia en la sección 'Recomienda y Gana' de tu cuenta, ubicada en el menú de Promociones. El usuario referido debe registrarse utilizando tu enlace de referencia. El recomendador tendrá un total de {{limiteIndicacoes}} referencias elegibles para la comisión; cualquier referencia que exceda esta cantidad no será elegible para la comisión.",
         "lista_bonus_indicador": "Bono para el recomendador",
-        "lista_bonus_indicador_text": "Por cada usuario que refieras que se registre, haga un depósito de al menos R${{valorMinDepositado}} y coloque apuestas que sumen al menos R${{valorMinApostado}} dentro de los {{qtdDiasRequisitos}} días, ganarás R${{valorGanhoPorIndicacao}} en saldo {{tipoSaldoGanho}}. Este saldo se liberará para su retiro en la sección 'Mis Referencias' dentro de las 24 horas después de que el USUARIO REFERIDO cumpla con las reglas de la promoción. Tendrás un período de {{prazoResgateSaldo}} días para canjear.",
+        "lista_bonus_indicador_text": "Por cada usuario que refieras que se registre, haga un depósito de al menos R${{valorMinDepositado}} y coloque apuestas que sumen al menos R${{valorMinApostado}} dentro de los {{qtdDiasRequisitos}} día(s), ganarás R${{valorGanhoPorIndicacao}} en saldo {{tipoSaldoGanho}}. Este saldo se liberará para su retiro en la sección 'Mis Referencias' dentro de las 24 horas después de que el USUARIO REFERIDO cumpla con las reglas de la promoción. Tendrás un período de {{prazoResgateSaldo}} días para canjear.",
         "real_sacavel": "real (retirable)",
         "lista_deposito_indicado": "Depósito del referido",
         "lista_deposito_indicado_text": "El usuario referido debe realizar un depósito mínimo de R${{valorMinDepositado}} en su cuenta y colocar una apuesta mínima de R${{valorMinApostado}} para que el saldo de R${{valorGanhoPorIndicacao}} se acredite en la cuenta del recomendador.",
@@ -599,7 +604,8 @@
         "dezembro": "Diciembre"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Seleccione una opción"
+        "selecione_uma_opcao": "Seleccione una opción",
+        "opcao_desabilitado": "Desactivado"
     },
     "botoes": {
         "aceitar": "Aceptar",
@@ -621,6 +627,13 @@
             "definir_limite_diario": "Establecer límite diario de apuestas",
             "definir_limite_semanal": "Establecer límite semanal de apuestas",
             "definir_limite_mensal": "Establecer límite mensual de apuestas"
+        },
+        "limite_perdas": {
+            "titulo": "Límite de pérdida",
+            "descricao": "La configuración del límite de pérdidas es una característica que le permite establecer una cantidad máxima de pérdidas que puede tener durante un período de tiempo determinado (diario, semanal y mensual). Esta configuración es una herramienta importante para promover el juego responsable, ayudando a controlar cuánto estás dispuesto a perder, evitando que pérdidas excesivas afecten tu presupuesto y bienestar financiero. Una vez alcanzado el límite de pérdidas establecido, no podrás seguir jugando hasta el siguiente período definido contabilizado como pérdida. terminación.",
+            "definir_limite_diario": "Establecer límite de pérdida diaria",
+            "definir_limite_semanal": "Establecer límite de pérdida semanal",
+            "definir_limite_mensal": "Establecer límite de pérdida mensual"
         },
         "limite_depositos": {
             "titulo": "Límite de depósitos",
@@ -662,6 +675,17 @@
             "descricao": "El temporizador de sesión es una configuración que le permite establecer un límite de tiempo para el uso de la plataforma. Ayuda a controlar el tiempo empleado, alertándole cuando se alcanza el límite y finalizando automáticamente su sesión, promoviendo un uso equilibrado y consciente. Por ejemplo, puede optar por limitar sus sesiones a 30 minutos, 1 hora o cualquier otro intervalo adecuado para usted, y también desactivar esta función según lo desee. Cuando se alcanza el límite de tiempo de la sesión, nuestro sistema finalizará automáticamente su sesión y cerrará la sesión de su cuenta. Esto ayuda a garantizar que respete sus límites de tiempo predefinidos.",
             "definir_tempo": "Establecer tiempo de sesión",
             "desativado": "Desactivado"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Límite de tiempo",
+            "descricao": "El ajuste de límite de tiempo te permite establecer un tiempo máximo para jugar. Este ajuste te ayuda a controlar el tiempo que pasas, evitando el uso excesivo y promoviendo una experiencia de juego saludable. Puedes establecer un límite diario. Cuando se alcance el tiempo estipulado, aparecerá una advertencia informándote de que se ha llegado al límite, lo que ayuda a garantizar los descansos y a evitar un uso prolongado.",
+            "definir_limite_diario": "Establecer un límite de tiempo diario",
+            "30minutos": "30 minutos",
+            "45minutos": "45 minutos",
+            "1hora": "1 hora",
+            "2horas": "2 horas",
+            "3horas": "3 horas",
+            "4horas": "4 horas"
         }
     },
     "rodada_gratis":{
@@ -686,5 +710,22 @@
     "face_match": {
         "verified_identity": "Identidad verificada!",
         "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
+    },
+    "register": {
+        "signupWith": "Regístrate en Google",
+        "registerGoogleAccount": "Regístrate con tu cuenta de google",
+        "fillToRegister": "Rellene los campos para completar su registro",
+        "protectedByReCaptchaPart1": "Este sitio está protegido por reCAPTCHA se aplican la",
+        "protectedByReCaptchaPart2": "Política de privacidad",
+        "protectedByReCaptchaPart3": "y las",
+        "protectedByReCaptchaPart4": "Condiciones del servicio",
+        "protectedByReCaptchaPart5": "de Google."
+    },
+    "registerCancel": {
+        "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",
+        "dontMissOut": "¡No pierdas esta oportunidad! Regístrese y deposite ahora y duplicaremos su depósito hasta ",
+        "youreAlmostThere": "¡Ya casi ha llegado! Regístrese y deposite ahora y experimente lo mejor del entretenimiento en la palma de su mano.",
+        "continue": "Continúe en",
+        "cancel": "Sí, quiero cancelar"
     }
 }

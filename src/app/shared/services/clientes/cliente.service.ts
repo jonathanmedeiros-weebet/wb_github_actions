@@ -1,14 +1,18 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import {config} from '../../config';
-import {ErrorService} from '../utils/error.service';
-import {HeadersService} from '../utils/headers.service';
-import {catchError, map} from 'rxjs/operators';
-import {Observable, BehaviorSubject} from 'rxjs';
+import { config } from '../../config';
+import { ErrorService } from '../utils/error.service';
+import { HeadersService } from '../utils/headers.service';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 import * as moment from 'moment';
-import {Router} from '@angular/router';
-import {ParametrosLocaisService} from "../parametros-locais.service";
+import { Router } from '@angular/router';
+import { ParametrosLocaisService } from "../parametros-locais.service";
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
+import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
+
 
 declare var xtremepush: any;
 
@@ -21,6 +25,7 @@ export class ClienteService {
     logadoSource;
     logado;
     clienteSource;
+    modalRef: NgbModalRef;
 
     constructor(
         private http: HttpClient,
@@ -28,6 +33,8 @@ export class ClienteService {
         private headers: HeadersService,
         private router: Router,
         private paramsService: ParametrosLocaisService,
+        private ga4Service: Ga4Service,
+        private modalService: NgbModal
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -58,7 +65,7 @@ export class ClienteService {
                         this.setIsCliente(true);
                         localStorage.setItem('tokenCassino', dataUser.tokenCassino);
                         this.logadoSource.next(true);
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', dataUser.user.id);
                             setTimeout(function() {
                                 xtremepush('event', 'login');
@@ -66,6 +73,15 @@ export class ClienteService {
                             this.xtremepushBackgroundRemove();
                         }
                     }
+
+                    this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
+
+                    this.ga4Service.triggerGa4Event(
+                        EventGa4Types.SIGN_UP,
+                        {
+                            method : dataUser.user.registrationMethod
+                        }
+                    );
 
                     return response.results;
                 }),
@@ -112,8 +128,8 @@ export class ClienteService {
             this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
-                        return response.results.result;
-                    }
+                    return response.results.result;
+                }
                 ),
                 catchError(this.errorService.handleError)
             );
@@ -124,8 +140,8 @@ export class ClienteService {
             this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
-                        return response.results.result;
-                    }
+                    return response.results.result;
+                }
                 ),
                 catchError(this.errorService.handleError)
             );
@@ -136,8 +152,8 @@ export class ClienteService {
             this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
-                        return response.results;
-                    }
+                    return response.results;
+                }
                 ),
                 catchError(this.errorService.handleError)
             );
@@ -164,7 +180,11 @@ export class ClienteService {
     }
 
     getConfigs() {
-        return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true)).pipe(map((res: any) => res.results));
+        return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
     }
 
     excluirConta(motivo: string, confirmarExclusao: string, multifator = {}) {
@@ -194,6 +214,26 @@ export class ClienteService {
 
     configLimiteDesposito(limites: any) {
         return this.http.post(`${this.clienteUrl}/limites-depositos`, limites, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
+
+    configLimitePerda(limites: any) {
+        return this.http.post(`${this.clienteUrl}/limites-perdas`, limites, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            )
+    }
+
+    configLimiteTempoAtividade(limites:any) {
+        return this.http.post(`${this.clienteUrl}/limites-tempo`, limites, this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
                     return response.results;
@@ -274,5 +314,29 @@ export class ClienteService {
         setTimeout(() => {
             clearInterval(intervalId);
         }, 3000);
+    }
+
+
+    checkPasswordExpirationDays(id) {
+        this.http.get(`${this.clienteUrl}/checkPasswordExpirationDays?id=${id}`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            ).subscribe(data => {
+                if (data.expired || data.showMessage) {
+                    this.modalRef = this.modalService.open(PasswordExpiredModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        centered: true,
+                        windowClass: 'custom-modal-force-password'
+                    });
+
+                    this.modalRef.componentInstance.data = {
+                        expired: data.expired,
+                        daysRemaining: data.daysRemaining,
+                    }
+                }
+            },
+                error => console.error(error)
+            )
     }
 }
