@@ -70,6 +70,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     modalRef;
     unsub$ = new Subject();
     tawakChatClicked: boolean = false;
+    gameProviderName: string = '';
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -117,7 +118,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.elem = this.el.nativeElement.querySelector('.game-frame');
         window.addEventListener('resize', () => this.checkIfMobileOrDesktopOrTablet());
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
-        
+
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
         }
@@ -131,14 +132,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'none');
         }
-        
+
         const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
         if (TawkChat) {
             const tawakIframes = this.document.querySelectorAll('[title="chat widget"]')
             this.tawakChatClicked = tawakIframes[1].style.display == 'block'
-            
+
             tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
-        } 
+        }
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
@@ -369,6 +370,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameCategory = response.category;
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
+                        this.gameProviderName = response.gameFornecedorExibicao;
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
@@ -912,7 +914,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
                     response => {
                         filteredGames = filteredGames.concat(response);
-
                         resolve(filteredGames);
                     }
                 );

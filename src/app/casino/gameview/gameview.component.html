@@ -58,7 +58,7 @@
                             <ng-template #nomeOficialGame>
                                 <h2 class="card-info-game-name">{{ gameName }}</h2>
                             </ng-template>
-                            <p class="game-provider">{{ gameFornecedor }}</p>
+                            <p class="game-provider">{{ gameProviderName }}</p>
                             <div class="social-buttons-container">
                                 <a href="{{linkWhatsapp}}" target="_blank" rel="noopener noreferrer" class="social-buttons whatsapp"></a>
                                 <a href="{{linkFacebook}}" target="_blank" rel="noopener noreferrer" class="social-buttons facebook"></a>
@@ -77,8 +77,8 @@
     </ng-container>
 </div>
 
-<div class="game-view" 
-    *ngIf="isDesktop || isTablet" 
+<div class="game-view"
+    *ngIf="isDesktop || isTablet"
     [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }"
 >
     <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }">
