@@ -6,8 +6,10 @@ import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
 import {ParametrosLocaisService} from '../../../shared/services/parametros-locais.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HelperService } from 'src/app/services';
+import { AuthService, HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
+
+declare var WeebetMessage: any;
 
 @Component({
     selector: 'ngbd-modal-content',
@@ -56,12 +58,16 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
+    isAppMobile;
+
     constructor(
         public modal: NgbActiveModal,
         private _sanitizer: DomSanitizer,
         private _helper: HelperService,
         private paramsLocais: ParametrosLocaisService,
         private domSanitizer: DomSanitizer,
+        private authService: AuthService,
+        private messageService: MessageService
     ) {}
 
     ngOnInit() {
@@ -83,6 +89,7 @@ export class NgbdModalContent {
                 clearInterval(timer)
             }
         }, 1000);
+        this.isAppMobile = this.authService.isAppMobile();
     }
 
     copyCode(code) {
@@ -91,7 +98,26 @@ export class NgbdModalContent {
 
     compartilhar() {
         const imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + this.qrCodeBase64);
-        this._helper.sharedDepositoPix(imagePath);
+        const dataToSend = {
+            message: `Deposito PIX`,
+            file: imagePath,
+            data: `Qrcode para deposito PIX`,
+            action: 'shareURL'
+        };
+
+        if (this.isAppMobile) {
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
+        } else {
+            if (window.navigator.share) {
+                window.navigator.share({
+                    title: dataToSend.message,
+                    text: dataToSend.data,
+                    url: this.qrCodeBase64 
+                })            
+            } else {
+                this.messageService.error('Compartilhamento não suportado pelo seu navegador');
+            }
+        }    
     }
 }
 @Component({
