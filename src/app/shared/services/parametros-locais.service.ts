@@ -53,12 +53,15 @@ export class ParametrosLocaisService {
                         body.prepend(GTMScriptBody);
                     }
 
-                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.legitimuz_enabled && response?.opcoes?.legitimuz_token);
+                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.legitimuz_token);
                     if (LEGITIMUZ_ENABLED) {
                         const LegitimuzScripSDK = this.document.createElement('script');
                         LegitimuzScripSDK.src = 'https://cdn.legitimuz.com/js/sdk/legitimuz-sdk.js';
+                        const LegitimuzScripSDKFaceIndex = this.document.createElement('script');
+                        LegitimuzScripSDKFaceIndex.src = 'https://cdn.legitimuz.com/js/sdk/faceindex.js';
 
                         head.appendChild(LegitimuzScripSDK);
+                        head.appendChild(LegitimuzScripSDKFaceIndex);
                     }
 
                     const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key

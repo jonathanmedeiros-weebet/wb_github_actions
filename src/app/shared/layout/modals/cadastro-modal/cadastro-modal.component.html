@@ -21,7 +21,8 @@
                                    (change)="validarCpf()"
                                    formControlName="cpf"
                                    [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
-                                   inputmode="numeric">
+                                   inputmode="numeric"
+                                   [readonly]="faceMatchRequested">
                             <label for="cpf">{{'geral.cpf' | translate}}</label>
                         </div>
 
@@ -153,6 +154,19 @@
                     </div>
                 </div>
             </div>
+            <div #legitimuz id="legitimuz-container" *ngIf="!faceMatchRegisterValidated">
+                <div id="legitimuz">
+                    <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                    </div>
+                    <button id="legitimuz-action-verify" class="btn btn-custom btn-legitimuz" *ngIf="!disapprovedIdentity" [disabled]="faceMatchRequested || this.showLoading">
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
+                        <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                    </button>
+                </div>
+                <div id="legitimuz-root"></div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <label *ngIf="!isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
@@ -201,7 +215,7 @@
             <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
 
                 <div class="col-12">
-                    <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+                    <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting || (faceMatchEnabled && !faceMatchRequested)">{{'geral.cadastrar' | translate}}</button>
                 </div>
             </div>
 
@@ -212,11 +226,9 @@
                 <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">{{ 'register.protectedByReCaptchaPart2' | translate }}</a> {{ 'register.protectedByReCaptchaPart3' | translate }}
                 <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">{{ 'register.protectedByReCaptchaPart4' | translate }}</a> {{ 'register.protectedByReCaptchaPart5' | translate }}
             </div>
-
             <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
-
             <div class="col-12">
-                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
+                <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting || (faceMatchEnabled && !faceMatchRequested)">{{'geral.cadastrar' | translate}}</button>
             </div>
             <div class="login">
                 {{'geral.jaPossuiUmaConta' | translate}}
