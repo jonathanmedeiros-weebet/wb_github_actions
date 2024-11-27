@@ -583,6 +583,13 @@ iframe{
     .btn-custom2 {
         margin-top: 1rem;
     }
+
+    app-back-page {
+        padding: 0 35px 0 35px;
+        display: flex;
+        margin-top: 16px;
+        align-items: center;
+    }
 }
 
 @media (min-width: 483px){
@@ -894,6 +901,12 @@ iframe{
         padding: 0;
     }
 
+    app-back-page {
+        padding: 0 50px 0 50px;
+        display: flex;
+        margin-top: 16px;
+        align-items: center;
+    }
     #expanded-btn-game-opened-desktop, #expanded-btn-game-closed-desktop, 
     #expanded-btn-game-opened-tablet, #expanded-btn-game-closed-tablet
     {
@@ -921,3 +934,5 @@ iframe{
     align-items: center;
     padding: 0 50px 50px 50px;
 }
+
+

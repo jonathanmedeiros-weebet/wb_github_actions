@@ -101,6 +101,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
 import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
+import { BackPageComponent } from './back-page/back-page/back-page.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -199,7 +200,8 @@ import { PasswordExpiredModalComponent } from './modals/password-expired-modal/p
         BlockPeerAttempsModalComponent,
         MultifactorConfirmationModalComponent,
         ExibirBilheteRifaComponent,
-        PasswordExpiredModalComponent
+        PasswordExpiredModalComponent,
+        BackPageComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -220,7 +222,8 @@ import { PasswordExpiredModalComponent } from './modals/password-expired-modal/p
         WelcomePageComponent,
         SubmenuComponent,
         SkeletonModule,
-        MenuFooterComponent
+        MenuFooterComponent,
+        BackPageComponent
     ],
     providers: [
         ApostaEsportivaService,

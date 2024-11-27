@@ -1,0 +1,11 @@
+<div class="back-page">
+    <div *ngIf="showBtn" class="back-page__button">
+        <button (click)="back()">
+            <img src="https://weebet.s3.amazonaws.com/cdn/img/icons/iconamoon_arrow-left-2.svg" alt="">
+        </button>
+    </div>
+
+    <div class="back-page__text" (click)="back()">
+        <h4>{{text.length > 0 ? text : 'Voltar'}}</h4>
+    </div>
+</div>
