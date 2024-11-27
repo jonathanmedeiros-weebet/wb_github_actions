@@ -195,30 +195,40 @@ export class AuthService {
     }
 
     performLogout(logoutType: string) {
-        this.http.post(`${this.authLokiUrl}/logout`, { logout_type: logoutType }, this.header.getRequestOptions(true))
-            .pipe(
-                map(res => {
-                    this.limparStorage();                    
-                    this.deleteCookie(INTERCOM_HMAC_COOKIE);
+        return this.http.post<any>(
+            `${this.authLokiUrl}/logout`,
+            { logout_type: logoutType },
+            this.header.getRequestOptions(true)
+        ).pipe(
+            map(res => {
+                this.handleLogoutCleanup();
+                return res;
+            }),
+            catchError(error => {
+                if (error.status === 401 || error.status === 404) {
+                    this.handleLogoutCleanup();
+                }
+                throw error;
+            })
+        );
+    }
 
-                    this.logadoSource.next(false);
-
-                    if (this.xtremepushHabilitado()) {
-                        this.cleanXtremepushNotifications();
-                    }
-
-                    location.reload();
-                }),
-                catchError(this.errorService.handleError)
-            );
+    private handleLogoutCleanup() {
+        this.limparStorage();
+        this.deleteCookie(INTERCOM_HMAC_COOKIE);
+        this.logadoSource.next(false);
+        if (this.xtremepushHabilitado()) {
+            this.cleanXtremepushNotifications();
+        }
+        location.reload();
     }
 
     logout() {
-        this.performLogout('manual');
+        this.performLogout('manual').subscribe();
     }
 
     expiredByInactive() {
-        this.performLogout('expired by inactivity');
+        this.performLogout('expired by inactivity').subscribe();
     }
 
     cleanXtremepushNotifications() {
@@ -369,6 +379,17 @@ export class AuthService {
             );
     }
 
+    getLastAccesses(filters: { userId: number; dateFrom: string; dateTo: string; type: string }): Observable<any> {
+        const url = `${this.authLokiUrl}/last-accesses`;
+
+        return this.http
+            .post<any>(url, filters, this.header.getRequestOptions(true))
+            .pipe(
+                map(response => response),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     limparStorage() {
         localStorage.removeItem('token');
         localStorage.removeItem('tokenCassino');
@@ -433,6 +454,15 @@ export class AuthService {
             }
         }
         return '';
+    }
+    
+    getUserResetPassword(data: any): Observable<any> {
+        const url = `${this.AuthUrl}/getUserResetPassword`;
+        return this.http
+            .post(url, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 
     xtremepushBackgroundRemove() {

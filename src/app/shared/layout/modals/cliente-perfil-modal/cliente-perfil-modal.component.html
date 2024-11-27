@@ -31,7 +31,7 @@
 
                     <h5>{{'geral.informacoesDeContato' | translate}}</h5>
 
-                    <div class="form-group input-md">
+                    <div class="form-group input-md placeholder-active">
                         <input
                             type="text"
                             formControlName="telefone"
@@ -65,7 +65,7 @@
                         <app-error-msg [control]="form.get('cep')"></app-error-msg>
                     </div>
 
-                    <div class="form-group input-md">
+                    <div class="form-group input-md placeholder-active">
                         <input type="text" placeholder="{{'geral.exLogradouro' | translate}}" formControlName="logradouro" class="form-control inverted-out">
                         <label for="nome">{{'geral.logradouro' | translate}}</label>
                         <app-error-msg [control]="form.get('logradouro')"></app-error-msg>
@@ -83,7 +83,7 @@
                         <app-error-msg [control]="form.get('bairro')"></app-error-msg>
                     </div>
 
-                    <div class="form-group input-md">
+                    <div class="form-group input-md placeholder-active">
                         <select formControlName="estado" type="text" class="form-control inverted-out"
                             (change)="getCidades($event)">
                             <option value="">{{'geral.selecione' | translate}}</option>
@@ -94,7 +94,7 @@
                         <app-error-msg [control]="form.get('estado')"></app-error-msg>
                     </div>
 
-                    <div class="form-group input-md">
+                    <div class="form-group input-md placeholder-active">
                         <select formControlName="cidade" class="form-control inverted-out">
                             <option value="">{{'geral.selecioneACidade' | translate}}</option>
                             <option *ngFor="let cidade of cidades" [value]="cidade.id"

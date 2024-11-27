@@ -229,12 +229,12 @@
                                 <div class="nome" [ngStyle]="{'width.px': nomesJogoWidth}">
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_a_img; else defaulImage" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/{{jogo.time_a_img}}.png" size="s"
+                                            <img src="https://wb-assets.com/img/{{teamShieldsFolder}}/m/{{jogo.time_a_img}}.png" size="s"
                                                  class="escudo-img">
                                         </span>
                                         <ng-template #defaulImage>
                                             <span class="escudo">
-                                                <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/default.png" size="s"
+                                                <img src="https://wb-assets.com/img/{{teamShieldsFolder}}/m/default.png" size="s"
                                                     class="escudo-img">
                                             </span>
                                         </ng-template>
@@ -244,12 +244,12 @@
                                     </div>
                                     <div class="escudo-container">
                                         <span *ngIf="jogo.time_b_img; else defaulImageB" class="escudo">
-                                            <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/{{jogo.time_b_img}}.png" size="s"
+                                            <img src="https://wb-assets.com/img/{{teamShieldsFolder}}/m/{{jogo.time_b_img}}.png" size="s"
                                                  class="escudo-img">
                                         </span>
                                         <ng-template #defaulImageB>
                                             <span class="escudo">
-                                                <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/default.png" size="s"
+                                                <img src="https://wb-assets.com/img/{{teamShieldsFolder}}/m/default.png" size="s"
                                                     class="escudo-img">
                                             </span>
                                         </ng-template>
@@ -275,7 +275,7 @@
                                                 class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
                                                 (click)="addCotacao(jogo, cotacao); $event.stopPropagation()">
                                             <span class="nome-odd">
-                                                {{cotacao.label}}
+                                                {{cotacao['nome_' + currentLanguage]}}
                                             </span>
                                             <span class="valor">
                                                 {{cotacao.valorFinal}}

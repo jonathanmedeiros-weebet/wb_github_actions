@@ -1,10 +1,12 @@
 <div id="default-content">
+    <app-spinner *ngIf="showLoading"></app-spinner>
+    <ng-container *ngIf="!showLoading">
     <div class="internal-container-out">
         <div class="content-header">
             <h2>{{'geral.alterarSenha' | translate}}</h2>
         </div>
         <div class="content-body">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate *ngIf="faceMatchChangePasswordValidated">
                 <div class="row">
                     <div class="col-md-2">
                         <label >
@@ -100,12 +102,57 @@
                                 }"
                                 (click)="toggleMostrarSenha('senhaConfirmacao')"
                             ></i>
+                            </div>
                         </div>
                         <app-error-msg
                             [control]="form.get('senha_confirmacao')"
                             label="{{'senhas.confirmarSenha' | translate}}"
                         ></app-error-msg>
                     </div>
+                    <div class="buttons">
+                        <button
+                            class="btn btn-custom2 w-150 mr-4"
+                            type="button"
+                            (click)="resetarForm()"
+                        >
+                            {{'geral.cancelar' | translate}}
+                        </button>
+                        <button class="btn btn-custom w-150" type="submit">
+                            {{'geral.salvar' | translate}}
+                        </button>
+                    </div>
+                </form>
+                <div #legitimuz id="legitimuz-container"
+                    *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && !verifiedIdentity">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                            ('saques.identityVerifyNeeded' | translate)}}
+                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                            [value]="cliente.cpf" />
+                        <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
+                    </div>
+                    <div id="legitimuz-root"></div>
+                </div>
+                <div #legitimuzLiveness id="legitimuz-container"
+                    *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && verifiedIdentity">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                            ('saques.identityVerifyNeeded' | translate)}}
+                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                            [value]="cliente.cpf" />
+                        <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
+                    </div>
+                    <div id="legitimuz-root"></div>
                 </div>
 
                 <div class="buttons">
@@ -121,7 +168,7 @@
                         {{(loading ? 'geral.salvando' : 'geral.salvar') | translate}}
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </ng-container>
 </div>

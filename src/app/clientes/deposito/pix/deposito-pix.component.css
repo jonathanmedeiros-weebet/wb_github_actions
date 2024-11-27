@@ -379,6 +379,22 @@ label.label-tempo {
     border-radius: 5px;
 }
 
+.modal-body {
+    padding: 32px;
+}
+
+.modal-body .btn-close{
+    margin: 24px 24px 0 0
+}
+
+.modal-body .modal-title {
+    margin-top: 16px;
+}
+
+.modal-body > div.buttons > button:nth-child(1) {
+    margin-right: 8px;
+} 
+
 @media only screen and (max-width: 1024px) {
     .modal-body {
         padding-top: 50px;
@@ -458,4 +474,8 @@ label.label-tempo {
     .details-submit {
         width: 100%;
     }
+
+    .modal-body > div.buttons > button:nth-child(1) {
+        margin-right: 0;
+    } 
 }

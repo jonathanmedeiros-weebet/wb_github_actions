@@ -72,16 +72,16 @@ export class ClienteService {
                             }, 100);
                             this.xtremepushBackgroundRemove();
                         }
+
+                        this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
+
+                        this.ga4Service.triggerGa4Event(
+                            EventGa4Types.SIGN_UP,
+                            {
+                                method : dataUser.user.registrationMethod
+                            }
+                        );
                     }
-
-                    this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
-
-                    this.ga4Service.triggerGa4Event(
-                        EventGa4Types.SIGN_UP,
-                        {
-                            method : dataUser.user.registrationMethod
-                        }
-                    );
 
                     return response.results;
                 }),
@@ -97,6 +97,16 @@ export class ClienteService {
                         return response.results;
                     }
                 ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    getFaceMatchClient(id) {
+        return this.http.get(`${this.clienteUrl}/getFaceMatchClient/${id}`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => { return res.results }), (error => {
+                    return error
+                }),
                 catchError(this.errorService.handleError)
             );
     }
@@ -170,7 +180,11 @@ export class ClienteService {
     }
 
     getConfigs() {
-        return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true)).pipe(map((res: any) => res.results));
+        return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
     }
 
     excluirConta(motivo: string, confirmarExclusao: string, multifator = {}) {
@@ -315,7 +329,7 @@ export class ClienteService {
                         centered: true,
                         windowClass: 'custom-modal-force-password'
                     });
-                    
+
                     this.modalRef.componentInstance.data = {
                         expired: data.expired,
                         daysRemaining: data.daysRemaining,
