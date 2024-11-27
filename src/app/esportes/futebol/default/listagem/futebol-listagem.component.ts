@@ -29,6 +29,7 @@ import 'moment/min/locales';
 
 import { TranslateService } from '@ngx-translate/core';
 import { has } from 'lodash';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -79,6 +80,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     campeonatosTemp = [];
     campeonatosFiltrados = [];
     headerHeight = 92;
+    currentLanguage = 'pt';
 
     nomesCotacoes = [];
 
@@ -119,6 +121,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         private translate: TranslateService,
         public layoutService: LayoutService,
         private sportIdService: SportIdService,
+        private ga4Service: Ga4Service,
     ) {
         this.sportbook = this.paramsService.getOpcoes().sportbook;
         this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
@@ -180,10 +183,12 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.oddsPrincipais = this.paramsService.getOddsPrincipais();
         this.qtdOddsPrincipais = this.oddsPrincipais.length;
         this.campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId);
+        this.currentLanguage = this.translate.currentLang;
 
-        this.atualizarDatasJogosFuturos(this.translate.currentLang);
+        this.atualizarDatasJogosFuturos(this.currentLanguage);
 
         this.translate.onLangChange.subscribe((res) => {
+            this.currentLanguage = res.lang;
             this.atualizarDatasJogosFuturos(res.lang);
         });
 
@@ -424,6 +429,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                     jogo.favorito,
                     false);
                 cotacao.label = this.helperService.apostaTipoLabel(cotacao.chave, 'sigla');
+                cotacao.nome_pt = this.helperService.apostaTipoLabel(cotacao.chave, null, 'pt');
+                cotacao.nome_en = this.helperService.apostaTipoLabel(cotacao.chave, null, 'en');
+                cotacao.nome_es = this.helperService.apostaTipoLabel(cotacao.chave, null, 'es');
             });
 
             this.oddsPrincipais.forEach(oddPrincipal => {
@@ -438,6 +446,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
                         jogoId: jogo._id,
                         label: this.helperService.apostaTipoLabel(oddPrincipal, 'sigla'),
                         nome: this.helperService.apostaTipoLabel(oddPrincipal),
+                        nome_pt: this.helperService.apostaTipoLabel(oddPrincipal, null, 'pt'),
+                        nome_en: this.helperService.apostaTipoLabel(oddPrincipal, null, 'en'),
+                        nome_es: this.helperService.apostaTipoLabel(oddPrincipal, null, 'es'),
                         valor: cotacaoLocal ? cotacaoLocal.valor : 0,
                         valorFinal: this.helperService.calcularCotacao2String(
                             cotacaoLocal ? cotacaoLocal.valor : 0,
@@ -502,6 +513,15 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+
+        this.ga4Service.triggerGa4Event(
+            EventGa4Types.ADD_TO_CART,
+            {
+                game: item.jogo_nome,
+                team_bet: cotacao.chave,
+                value: cotacao.valorFinal
+            }
+        );
     }
 
     // Coloca as cotações faltando nos jogos
@@ -576,9 +596,9 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     campeonatoAberto(campeonatoId) {
-        if(this.campeonatosBloqueados.includes(campeonatoId)){
+        if (this.campeonatosBloqueados.includes(campeonatoId)) {
             return false;
-        }else{
+        } else {
             return this.campeonatosAbertos.includes(campeonatoId);
         }
     }
@@ -623,6 +643,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.jogoIdAtual = jogoId;
         this.jogoSelecionadoId.emit(jogoId);
         this.exibirMaisCotacoes.emit(true);
+        this.ga4Service.triggerGa4Event(EventGa4Types.VIEW_ITEM);
     }
 
     mudarData(dia = 'hoje') {
@@ -741,5 +762,16 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
         this.hasFeaturedMatches = hasFeaturedMatches;
+    }
+
+    eventoSearch(e){
+        if(e.target.value){
+            this.ga4Service.triggerGa4Event(
+                EventGa4Types.SEARCH,
+                {
+                    search_term: e.target.value,
+                }
+            );
+        }
     }
 }

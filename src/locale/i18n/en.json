@@ -47,6 +47,7 @@
         "saldo": "Balance",
         "minhaConta": "My Account",
         "salvar": "Save",
+        "salvando": "Saving",
         "cancelar": "Cancel",
         "fechar": "Close",
         "todos": "All",
@@ -196,7 +197,7 @@
         "resultadosFutebol": "Football Results",
         "resultadosLoterias": "Lottery Results",
         "contato": "Contact",
-        "requisitosSenha": "Password must have at least 6 characters.",
+        "requisitosSenha": "Password must have at least 8 characters.",
         "nomeJogoCassino": "Game",
         "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
         "historicoDeApostas": "Betting History",
@@ -250,6 +251,8 @@
         "alteracoesSucesso": "Changes made successfully!",
         "erroInesperado": "Something unexpected happened. Please try again later.",
         "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
+        "bonusCancelado": "Bonus canceled",
+        "aguardando": "Pending",
         "loginEmail": "Email",
         "loginPhone": "Phone",
         "loginUsername": "Username",
@@ -353,7 +356,8 @@
         "virtuais": "Virtuals",
         "aoVivo": "Live Casino",
         "bingo": "Bingo",
-        "news": "News"
+        "news": "News",
+        "jogosRelacionados": "Related games"
     },
     "cartoes": {
         "titulo": "Cards",
@@ -379,7 +383,11 @@
         "reenviaCodigoDeVerificacao": "Resend Verification Code",
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
-        "digiteSuaSenha": "Type your password"
+        "digiteSuaSenha": "Type your password",
+        "minimumCharactersPassword": "Minimum 8 characters",
+        "lowercaseLetter": "Minimum of one lowercase letter",
+        "uppercaseLetter": "Minimum of one uppercase letter",
+        "specialChar": "Minimum of one special character (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Enter the amount for the withdrawal",
@@ -600,13 +608,16 @@
         "dezembro": "December"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Select an option"
+        "selecione_uma_opcao": "Select an option",
+        "opcao_desabilitado": "Disabled"
     },
     "botoes": {
         "aceitar": "Accept",
         "entendi": "Got it",
         "salvar_alteracoes": "Save Changes",
-        "voltar": "Back"
+        "voltar": "Back",
+        "logout_continue_login": "Yes, I would like to close the session",
+        "remain_active_session": "No, keep the other session active"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -620,6 +631,13 @@
             "definir_limite_diario": "Set daily betting limit",
             "definir_limite_semanal": "Set weekly betting limit",
             "definir_limite_mensal": "Set monthly betting limit"
+        },
+        "limite_perdas": {
+            "titulo": "Loss limit",
+            "descricao": "The loss limit setting is a feature that allows you to set a maximum amount of losses you can have during a given period of time (daily, weekly and monthly). This setting is an important tool in promoting responsible gambling, helping control how much you are willing to lose, preventing excessive losses from affecting your budget and financial well-being. Once the established loss limit is reached, you will not be able to continue playing until the next defined period counted as a termination loss.",
+            "definir_limite_diario": "Set daily loss limit",
+            "definir_limite_semanal": "Set weekly loss limit",
+            "definir_limite_mensal": "Set monthly loss limit"
         },
         "limite_depositos": {
             "titulo": "Deposit Limit",
@@ -661,6 +679,17 @@
             "descricao": "The session timer is a setting that allows you to set a time limit for platform usage. It helps control the time spent, alerting you when the limit is reached and automatically ending your session, promoting balanced and conscious use. For example, you can choose to limit your sessions to 30 minutes, 1 hour, or any other suitable interval for you, and also disable this feature as desired. When the session time limit is reached, our system will automatically end your session and log you out of your account. This helps ensure that you respect your predefined time limits.",
             "definir_tempo": "Set session time",
             "desativado": "Disabled"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Time limit",
+            "descricao": "The time limit setting allows you to set a maximum time to play. This setting helps you control the time you spend, preventing overuse and promoting a healthy gaming experience. You can set a daily limit. When the stipulated time is reached, a warning will appear informing you that the limit has been reached, helping to ensure breaks and avoid prolonged use.",
+            "definir_limite_diario": "Set a daily time limit",
+            "30minutos": "30 minutes",
+            "45minutos": "45 minutes",
+            "1hora": "1 hour",
+            "2horas": "2 hours",
+            "3horas": "3 hours",
+            "4horas": "4 hours"
         }
     },
     "rodada_gratis":{

@@ -1,15 +1,18 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService } from './services';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService, ClienteService } from './services';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { CadastroModalComponent } from './shared/layout/modals';
+import { CadastroModalComponent, EsqueceuSenhaModalComponent } from './shared/layout/modals';
 import { LoginModalComponent } from './shared/layout/modals';
 
 import { TranslateService } from '@ngx-translate/core';
 import { IdleDetectService } from './shared/services/idle-detect.service';
+import { ConfiguracaoLimiteTempoModalComponent } from './shared/layout/modals/configuracao-limite-tempo-modal/configuracao-limite-tempo-modal.component';
+import { ActivityDetectService } from './shared/services/activity-detect.service';
+import { Subscription } from 'rxjs';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -36,6 +39,9 @@ export class AppComponent implements OnInit {
     modalPush;
     xtremepushHabilitado = false;
     hasPoliticaPrivacidade = false;
+    passwordExpired: Boolean;
+    modalRef: NgbModalRef;
+    subscription: Subscription;
 
     constructor(
         private auth: AuthService,
@@ -52,6 +58,8 @@ export class AppComponent implements OnInit {
         private translate: TranslateService,
         private idleDetectService: IdleDetectService,
         private utilsService: UtilsService,
+        private activityDetectService: ActivityDetectService,
+        private clienteService: ClienteService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -110,22 +118,40 @@ export class AppComponent implements OnInit {
         this.eventPushXtremepush();
 
         this.auth.logado.subscribe((isLogged) => {
-            const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity)
+            const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity);
+            const activityUserConfig = Boolean(this.activityDetectService.getActivityTimeConfig());
             const isCliente = this.auth.isCliente();
+
+            if (isLogged && isCliente) {
+                this.activityDetectService.getActivityGoalReached().subscribe(() => {
+                    this.openModalTimeLimit();
+                });
+            }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
                 this.idleDetectService.startTimer(1800000);
+
             } else {
                 this.idleDetectService.stopTimer();
             }
-        })
+
+            if (isLogged && isCliente && activityUserConfig) {
+                this.activityDetectService.getActivityTimeConfig().subscribe((timeGoal) => {
+                    if (timeGoal > 0) {
+                        this.activityDetectService.startActivityTimer(this.activityDetectService.HALF_MINUTE_IN_MS);
+                    } else {
+                        this.activityDetectService.stopActivityTimer();
+                    }
+                });
+            }
+        });
 
         this.idleDetectService
             .watcher()
             .subscribe(isExpired => {
                 if (isExpired) {
                     if (this.auth.isLoggedIn()) {
-                        this.auth.logout();
+                        this.auth.expiredByInactive();
                     }
                 }
             });
@@ -152,6 +178,20 @@ export class AppComponent implements OnInit {
             });
 
             this.router.navigate(['esportes/futebol']);
+        }
+
+        if (this.router.url.includes('/esqueceu-senha')) {
+            if (this.auth.isLoggedIn()) {
+                return this.router.navigate(['/alterar-senha']);
+            }
+            this.modalService.open(EsqueceuSenhaModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: 'modal-500 modal-cadastro-cliente'
+            });
+
+            this.router.navigate(['/']);
         }
 
         const params = new URLSearchParams(location.search);
@@ -271,6 +311,28 @@ export class AppComponent implements OnInit {
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+        
+        this.subscription = this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                if (event.url !== '/alterar-senha') { 
+                    this.verifyForceChangePassword();
+                }
+            }
+        });
+    }
+
+    ngOnDestroy(): void {        
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+    
+    private verifyForceChangePassword() {
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        if (user && this.paramsLocais.getOpcoes().enableForceChangePassword) {
+            this.clienteService.checkPasswordExpirationDays(user.id)
+        }
     }
 
     downloadApp() {
@@ -305,5 +367,14 @@ export class AppComponent implements OnInit {
         if (xtremepushHabilitado) {
             xtremepush('event', 'push');
         }
+    }
+
+    openModalTimeLimit() {
+        this.modalService.open(ConfiguracaoLimiteTempoModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
     }
 }

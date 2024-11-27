@@ -48,6 +48,7 @@
         "saldo": "Saldo",
         "minhaConta": "Minha Conta",
         "salvar": "Salvar",
+        "salvando": "Salvando",
         "cancelar": "Cancelar",
         "fechar": "Fechar",
         "todos": "Todos",
@@ -196,7 +197,7 @@
         "resultadosFutebol": "Resultados Futebol",
         "resultadosLoterias": "Resultados Loterias",
         "contato": "Contato",
-        "requisitosSenha": "Senha deve possuir no mínimo 6 caracteres.",
+        "requisitosSenha": "Senha deve possuir no mínimo 8 caracteres.",
         "nomeJogoCassino": "Jogo",
         "apostouEmAs": "{{apostador}} apostou em {{data}} às {{hora}}",
         "historicoDeApostas": "Histórico de Apostas",
@@ -252,13 +253,18 @@
         "alteracoesSucesso": "Alterações realizadas com sucesso!",
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
+        "bonusCancelado": "Bônus cancelado",
+        "aguardando": "Aguardando",
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
         "loginUsername": "Nome de usuário",
         "field": "Campo",
         "or": "OU",
         "lastAccesses": "Últimos acessos",
-        "action": "Ação"
+        "action": "Ação",
+        "session_alert": "Alerta de Sessão",
+        "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?",
+        "jogoResponsavel": "Jogo responsável"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -355,7 +361,8 @@
         "virtuais": "Virtuais",
         "aoVivo": "Ao Vivo",
         "bingo": "Bingo",
-        "news": "Novidades"
+        "news": "Novidades",
+        "jogosRelacionados": "Jogos relacionados"
     },
     "cartoes": {
         "titulo": "Cartões",
@@ -381,7 +388,11 @@
         "reenviaCodigoDeVerificacao": "Reenviar Código de Verificação",
         "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
         "solicitarCodigoRedefinicao": "Solicitar código de redefinição",
-        "digiteSuaSenha": "Digite sua senha"
+        "digiteSuaSenha": "Digite sua senha",
+        "minimumCharactersPassword": "Mínimo de 8 caracteres",
+        "lowercaseLetter": "Mínimo de uma letra minúscula",
+        "uppercaseLetter": "Mínimo de uma letra maiúscula",
+        "specialChar": "Mínimo de um caractere especial (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",
@@ -602,13 +613,16 @@
         "dezembro": "Dezembro"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Selecione uma opção"
+        "selecione_uma_opcao": "Selecione uma opção",
+        "opcao_desabilitado": "Desabilitado"
     },
     "botoes": {
         "aceitar": "Aceitar",
         "entendi": "Entendi",
         "salvar_alteracoes": "Salvar Alterações",
-        "voltar": "Voltar"
+        "voltar": "Voltar",
+        "logout_continue_login": "Sim, gostaria de encerrar a sessão",
+        "remain_active_session": "Não, continuar com a outra sessão"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -622,6 +636,13 @@
             "definir_limite_diario": "Definir limite diário de apostas",
             "definir_limite_semanal": "Definir limite semanal de apostas",
             "definir_limite_mensal": "Definir limite mensal de apostas"
+        },
+        "limite_perdas": {
+            "titulo": "Limite de perdas",
+            "descricao": "A configuração de limite de perdas é uma funcionalidade que permite definir um valor máximo de perdas que você pode ter durante um determinado período de tempo (diário, semanal e mensal). Essa configuração é uma ferramenta importante para promover o jogo responsável, ajudando a controlar quanto você está disposto a perder, evitando que perdas excessivas afetem seu orçamento e bem-estar financeiro. Uma vez atingido o limite de perdas estabelecido, você não poderá continuar jogando até o próximo período definido. É importante frisar que as apostas abertas estarão sendo contabilizadas como perda até a sua finalização.",
+            "definir_limite_diario": "Definir limite diário de perdas",
+            "definir_limite_semanal": "Definir limite semanal de perdas",
+            "definir_limite_mensal": "Definir limite mensal de perdas"
         },
         "limite_depositos": {
             "titulo": "Limite de depósitos",
@@ -663,6 +684,17 @@
             "descricao": "O temporizador de sessão é uma configuração no qual permite você definir um limite de tempo para o uso da plataforma. Ela ajuda a controlar o tempo gasto, alertando  você quando o limite é atingido e encerrando a sua sessão automaticamente, promovendo um uso equilibrado e consciente.  Por exemplo, você pode escolher limitar suas sessões a 30 minutos, 1 hora ou qualquer outro intervalo adequado para você e também desativar essa funcionalidade assim que desejar. Quando o limite de tempo da sessão for atingido, nosso sistema encerrará automaticamente sua sessão e fará o logout de sua conta. Isso ajuda a garantir que você respeite seus limites de tempo predefinidos.",
             "definir_tempo": "Definir tempo de sessão",
             "desativado": "Desativado"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Limite de tempo",
+            "descricao": "A configuração de limite de tempo permite que você defina um tempo máximo para jogar. Essa configuração ajuda a controlar o tempo gasto, evitando o uso excessivo e promovendo uma experiência de jogo saudável. Você pode configurar um limite diário. Quando o tempo estipulado for atingido, um aviso aparecerá informando que o limite foi alcançado, ajudando a garantir pausas e evitar o uso prolongado.",
+            "definir_limite_diario": "Definir limite diário de tempo",
+            "30minutos": "30 minutos",
+            "45minutos": "45 minutos",
+            "1hora": "1 hora",
+            "2horas": "2 horas",
+            "3horas": "3 horas",
+            "4horas": "4 horas"
         }
     },
     "rodada_gratis":{

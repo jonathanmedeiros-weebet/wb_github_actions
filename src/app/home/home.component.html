@@ -1,13 +1,13 @@
-<div class="home-container" [ngStyle]="{'max-height': 'calc(100vh - ' +headerHeight+'px)'}">
+<div #topHome class="home-container" [ngStyle]="{'max-height': 'calc(100vh - ' +headerHeight+'px)'}">
     <app-banners class="banner" pagina="home"/>
     <ng-container *ngFor="let widget of widgets">
         <app-cassino class="widgets" linkAll="/casino" [games]="gamesPopulares" *ngIf="widget.nome == 'Cassino'" [showLoadingIndicator]="loadingCassino"/>
         <app-cassino class="widgets" linkAll="/live-casino" [games]="gamesPopularesAoVivo" [title]="'geral.cassinoAoVivo' | translate" *ngIf="widget.nome == 'Cassino Ao Vivo'" [showLoadingIndicator]="loadingCassinoAoVivo"/>
         <app-jogos-aovivo class="widgets" *ngIf="!betby && liveFootballIsActive && widget.nome == 'Jogos Ao Vivo'"/>
-        <app-jogos-destaque class="widgets" *ngIf="!betby && widget.nome == 'Jogos Destaque' && hasFeaturedMatches" (hasFeaturedMatches)="changeDisplayFeaturedMatches($event)"/>
+        <app-jogos-destaque class="widgets" *ngIf="!betby && widget.nome == 'Jogos Destaque' && hasFeaturedMatches" (hasFeaturedMatches)="changeDisplayFeaturedMatches($event)" [isHome]="true"/>
         <div class="widgets" id="betby" *ngIf="betby && widget.nome == 'Jogos Destaque'"></div>
     </ng-container>
-    <app-footer/>
+    <app-footer [container]="topHome"/>
 </div>
 
 <app-bilhete/>
