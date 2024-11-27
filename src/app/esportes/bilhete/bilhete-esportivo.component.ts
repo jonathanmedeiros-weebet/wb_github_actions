@@ -1,4 +1,4 @@
-import { ChangeDetectorRef,Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { Component, ChangeDetectorRef, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subject, Observable, of } from 'rxjs';
@@ -70,6 +70,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showFrame = true;
     headerHeight = 92;
     footballId;
+    currentLanguage = 'pt';
 
     constructor(
         public sanitizer: DomSanitizer,
@@ -99,6 +100,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
         const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
+
+        this.currentLanguage = this.translate.currentLang;
+
+        this.translate.onLangChange.subscribe(res => this.currentLanguage = res.lang);
 
         this.createForm();
         this.definirAltura();

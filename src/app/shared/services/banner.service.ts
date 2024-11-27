@@ -48,6 +48,6 @@ export class BannerService {
         } else {
             return this.cachedBanners.filter(banner => ['todas', pagina].includes(banner.pagina));
         }
-        
+
     }
 }
