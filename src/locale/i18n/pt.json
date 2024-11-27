@@ -259,10 +259,12 @@
         "loginPhone": "Telefone",
         "loginUsername": "Nome de usuário",
         "field": "Campo",
+        "or": "OU",
+        "lastAccesses": "Últimos acessos",
+        "action": "Ação",
         "session_alert": "Alerta de Sessão",
         "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?",
-        "jogoResponsavel": "Jogo responsável",
-        "or": "OU"
+        "jogoResponsavel": "Jogo responsável"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -714,7 +716,7 @@
         "redeemed": "Resgatado",
         "redeem": "Resgatar"
     },
-    "register": { 
+    "register": {
         "signupWith": "Inscrever-se com Google",
         "registerGoogleAccount": "Cadastre-se com sua conta do google",
         "fillToRegister": "Preencha os campos para realizar o seu cadastro",

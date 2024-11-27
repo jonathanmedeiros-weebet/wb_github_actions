@@ -379,6 +379,17 @@ export class AuthService {
             );
     }
 
+    getLastAccesses(filters: { userId: number; dateFrom: string; dateTo: string; type: string }): Observable<any> {
+        const url = `${this.authLokiUrl}/last-accesses`;
+
+        return this.http
+            .post<any>(url, filters, this.header.getRequestOptions(true))
+            .pipe(
+                map(response => response),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     limparStorage() {
         localStorage.removeItem('token');
         localStorage.removeItem('tokenCassino');

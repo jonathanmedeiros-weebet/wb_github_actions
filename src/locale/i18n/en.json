@@ -257,7 +257,9 @@
         "loginPhone": "Phone",
         "loginUsername": "Username",
         "field": "Field",
-        "or": "OR"
+        "or": "OR",
+        "lastAccesses": "Last accesses",
+        "action": "Action"
     },
     "bet": {
         "sportsBetting": "Sports betting",
