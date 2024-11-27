@@ -12,6 +12,7 @@ import { ConfirmModalComponent, RegrasBonusModalComponent } from '../../../share
 import { Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 
 @Component({
@@ -165,7 +166,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private paramsLocais: ParametrosLocaisService,
         private renderer: Renderer2,
         private router: Router,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private ga4Service: Ga4Service,
     ) {
         super();
     }
@@ -325,6 +327,17 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         this.pix = res;
                         this.openPixModal();
                         this.submitting = false;
+                        if(detalhesPagamento.promoCode !== ''){
+                            this.ga4Service.triggerGa4Event(
+                                EventGa4Types.EARN_VIRTUAL_CURRENCY,
+                                {couponCode: detalhesPagamento.promoCode}
+                            );
+                        }
+
+                        this.ga4Service.triggerGa4Event(
+                            EventGa4Types.GENERATE_PIX,
+                            {username: res.cliente}
+                        );
                     },
                     error => {
                         this.handleError(error);

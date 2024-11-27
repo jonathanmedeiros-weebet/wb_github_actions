@@ -1,5 +1,6 @@
 <footer>
-    <a class="toTop" (click)="container.scrollTop = 0" *ngIf="container">
+    <a class="toTop" (click)="scrollToTop()" [ngStyle]="{'display': isToTopBtnVisible ? 'flex' : 'none'}">
+        <i class="fa fa-angle-up"></i>
         <i class="fa fa-angle-up"></i>
     </a>
     <div class="container">

@@ -16,6 +16,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -60,6 +61,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     promocaoAtiva = false;
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
+    isStrengthPassword: boolean | null;
+    validPassword: boolean = false;
+    requirements = {
+        minimumCharacters: false,
+        uppercaseLetter: false,
+        lowercaseLetter: false,
+        specialChar: false,
+    };
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -77,6 +86,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
+        private ga4Service: Ga4Service,
     ) {
         super();
     }
@@ -88,6 +98,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+        this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
 
         if (this.isLoterj) {
@@ -248,8 +259,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(6)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]],
+            senha: [null, [Validators.required, Validators.minLength(8)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(8), FormValidations.equalsTo('senha')]],
             nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
@@ -267,6 +278,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             dadosCriptografados: [null]
         });
 
+        if (this.isStrengthPassword) {
+            this.form.controls.senha.clearValidators();
+            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls.senha.updateValueAndValidity();
+        }
+        
         if (this.isLoterj) {
             this.form.addControl('termosUso', this.fb.control(null, [
                 Validators.requiredTrue,
@@ -460,5 +477,29 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
+    }
+
+    checkPassword() {
+        const passwordValue = this.form.controls.senha.value;
+        const lengthCheck = passwordValue.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(passwordValue);
+        const hasLowerCase = /[a-z]/.test(passwordValue);
+        const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
+        
+        this.requirements = {
+          minimumCharacters: lengthCheck,
+          uppercaseLetter: hasUpperCase,
+          lowercaseLetter: hasLowerCase,
+          specialChar: hasSpecialChar,
+        };
+
+        this.validPassword = Object.values(this.requirements).every(Boolean);
+    }
+
+    onBlurGa4Name(event: any): void {
+        const value = event.target.value;
+        if(value){
+            this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
+        }
     }
 }

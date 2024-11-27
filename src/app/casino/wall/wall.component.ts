@@ -67,6 +67,8 @@ export class WallComponent implements OnInit, AfterViewInit {
     public categorySelected: string = 'cassino';
     public gameTitle: string;
 
+    public filteredCategory: string;
+
     constructor(
         private casinoApi: CasinoApiService,
         private auth: AuthService,
@@ -91,7 +93,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     get isDemo(): boolean {
-        return location.host === 'demo.wee.bet';
+        return false;
     }
 
     get blink(): string {
@@ -133,6 +135,18 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        this.route.queryParamMap.subscribe(params => {
+            this.filteredCategory = params.get('category');
+            if (this.filteredCategory == 'roulette') {
+                this.filteredCategory = 'roleta';
+            } else if(this.filteredCategory == 'table') {
+                this.filteredCategory = 'mesa';
+            } else if(this.filteredCategory == 'scratchcard') {
+                this.filteredCategory = 'raspadinha';
+            }
+
+            this.filterGames(null, this.filteredCategory);
+          });
         this.cd.detectChanges();
         this.onTranslateChange();
         this.getGameList();
@@ -147,7 +161,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     private onTranslateChange() {
         this.translate.onLangChange.subscribe(() => {
-            this.filterGames(this.gameFornecedor, this.categorySelected, false)
+            this.filterGames(this.gameFornecedor, this.categorySelected, false);
             this.cd.detectChanges();
         });
     }
@@ -243,7 +257,8 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameList = this.gamesCassino;
         this.gameTitle = this.translate.instant('geral.todos');
 
-        const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
+        const paramValue = this.route.snapshot.params["game_fornecedor"];
+        const providerParam = (paramValue === undefined || paramValue === null || paramValue === 'wallFiltered') ? null : paramValue;
         if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
             this.filterGames(providerParam, this.categorySelected, true);
         }
@@ -316,7 +331,8 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameList = this.gamesCassino;
         this.gameTitle = this.translate.instant('geral.todos');
 
-        const providerParam = this.route.snapshot.params["game_fornecedor"] ?? null
+        const paramValue = this.route.snapshot.params["game_fornecedor"];
+        const providerParam = (paramValue === undefined || paramValue === null || paramValue === 'wallFiltered') ? null : paramValue;
         if (providerParam && !['c', 'cl', 'v'].includes(providerParam)) {
             this.filterGames(providerParam, this.categorySelected, true);
         }

@@ -4,6 +4,7 @@
         <i class="fa fa-times"></i>
     </a>
 </div>
+
 <div class="modal-body" [ngStyle]="{'padding-top': loginGoogle ? '10px' : '40px'}">
     <div class="modal-body-content">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
@@ -58,6 +59,7 @@
                 </div>
                 <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
             </div>
+            
             <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
         </form>
 
@@ -72,3 +74,22 @@
     </div>
 </div>
 
+<div class="modal" *ngIf="showModalTerminateSession">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header-he">
+                <h3 class="modal-title">{{'geral.session_alert' | translate}}</h3>
+                <a class="close-modal" aria-label="Close" (click)="close()">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <div class="modal-body-custom">
+                <p>{{'geral.session_alert_message' | translate}}</p>
+            </div>
+            <div class="modal-footer-he">
+                <button type="button" class="btn btn-custom btn-block btn-terminate" (click)="handleLogin()">{{'botoes.logout_continue_login' | translate}}</button>
+                <button type="button" class="btn btn-secondary btn-cancel" (click)="cancelTerminateSession()">{{'botoes.remain_active_session' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

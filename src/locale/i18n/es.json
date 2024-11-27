@@ -47,6 +47,7 @@
         "saldo": "Saldo",
         "minhaConta": "Mi cuenta",
         "salvar": "Guardar",
+        "salvando": "Guardando",
         "cancelar": "Cancelar",
         "fechar": "Cerrar",
         "todos": "Todos",
@@ -193,7 +194,7 @@
         "resultadosFutebol": "Resultados de fútbol",
         "resultadosLoterias": "Resultados de loterías",
         "contato": "Contacto",
-        "requisitosSenha": "La contraseña debe tener al menos 6 caracteres.",
+        "requisitosSenha": "La contraseña debe tener al menos 8 caracteres.",
         "nomeJogoCassino": "Juego",
         "apostouEmAs": "{{apostador}} apostó el {{data}} a las {{hora}}",
         "historicoDeApostas": "Historial de apuestas",
@@ -246,10 +247,16 @@
         "alteracoesSucesso": "¡Cambios realizados con éxito!",
         "erroInesperado": "Algo inesperado ocurrió. Inténtalo de nuevo más tarde.",
         "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
+        "bonusCancelado": "Bono cancelado",
+        "aguardando": "Pendiente",
         "loginEmail": "Correo electrónico",
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
         "field": "Campo",
+        "jogosRelacionados": "juegos relacionados",
+        "session_alert": "Alerta de Sesión",
+        "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?",
+        "jogoResponsavel": "Juego responsable",
         "or": "O"
     },
     "bet": {
@@ -372,7 +379,11 @@
         "reenviaCodigoDeVerificacao": "Reenviar código de verificación",
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
-        "digiteSuaSenha": "Ingrese su contraseña"
+        "digiteSuaSenha": "Ingrese su contraseña",
+        "minimumCharactersPassword": "Mínimo 8 caracteres",
+        "lowercaseLetter": "Mínimo una letra minúscula",
+        "uppercaseLetter": "Mínimo una letra mayúscula",
+        "specialChar": "Mínimo un carácter especial (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Ingrese el monto para el retiro",
@@ -590,13 +601,16 @@
         "dezembro": "Diciembre"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Seleccione una opción"
+        "selecione_uma_opcao": "Seleccione una opción",
+        "opcao_desabilitado": "Desactivado"
     },
     "botoes": {
         "aceitar": "Aceptar",
         "entendi": "Lo tengo",
         "salvar_alteracoes": "Guardar Cambios",
-        "voltar": "Volver"
+        "voltar": "Volver",
+        "logout_continue_login": "Sí, me gustaría cerrar la sesión.",
+        "remain_active_session": "No, seguir con la otra sesión activa"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",
@@ -610,6 +624,13 @@
             "definir_limite_diario": "Establecer límite diario de apuestas",
             "definir_limite_semanal": "Establecer límite semanal de apuestas",
             "definir_limite_mensal": "Establecer límite mensual de apuestas"
+        },
+        "limite_perdas": {
+            "titulo": "Límite de pérdida",
+            "descricao": "La configuración del límite de pérdidas es una característica que le permite establecer una cantidad máxima de pérdidas que puede tener durante un período de tiempo determinado (diario, semanal y mensual). Esta configuración es una herramienta importante para promover el juego responsable, ayudando a controlar cuánto estás dispuesto a perder, evitando que pérdidas excesivas afecten tu presupuesto y bienestar financiero. Una vez alcanzado el límite de pérdidas establecido, no podrás seguir jugando hasta el siguiente período definido contabilizado como pérdida. terminación.",
+            "definir_limite_diario": "Establecer límite de pérdida diaria",
+            "definir_limite_semanal": "Establecer límite de pérdida semanal",
+            "definir_limite_mensal": "Establecer límite de pérdida mensual"
         },
         "limite_depositos": {
             "titulo": "Límite de depósitos",
@@ -651,6 +672,17 @@
             "descricao": "El temporizador de sesión es una configuración que le permite establecer un límite de tiempo para el uso de la plataforma. Ayuda a controlar el tiempo empleado, alertándole cuando se alcanza el límite y finalizando automáticamente su sesión, promoviendo un uso equilibrado y consciente. Por ejemplo, puede optar por limitar sus sesiones a 30 minutos, 1 hora o cualquier otro intervalo adecuado para usted, y también desactivar esta función según lo desee. Cuando se alcanza el límite de tiempo de la sesión, nuestro sistema finalizará automáticamente su sesión y cerrará la sesión de su cuenta. Esto ayuda a garantizar que respete sus límites de tiempo predefinidos.",
             "definir_tempo": "Establecer tiempo de sesión",
             "desativado": "Desactivado"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Límite de tiempo",
+            "descricao": "El ajuste de límite de tiempo te permite establecer un tiempo máximo para jugar. Este ajuste te ayuda a controlar el tiempo que pasas, evitando el uso excesivo y promoviendo una experiencia de juego saludable. Puedes establecer un límite diario. Cuando se alcance el tiempo estipulado, aparecerá una advertencia informándote de que se ha llegado al límite, lo que ayuda a garantizar los descansos y a evitar un uso prolongado.",
+            "definir_limite_diario": "Establecer un límite de tiempo diario",
+            "30minutos": "30 minutos",
+            "45minutos": "45 minutos",
+            "1hora": "1 hora",
+            "2horas": "2 horas",
+            "3horas": "3 horas",
+            "4horas": "4 horas"
         }
     },
     "rodada_gratis":{

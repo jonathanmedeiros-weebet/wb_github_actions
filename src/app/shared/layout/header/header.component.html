@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div class="header">
+<div class="header" [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
     <div class="side side-left">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">
@@ -374,7 +374,7 @@
                                     <span>
                                         <i class="fa fa-solid fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -462,7 +462,7 @@
                                     <span>
                                         <i class="fa fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -554,7 +554,7 @@
                                     <span>
                                         <i class="fa fa-solid fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -657,14 +657,14 @@
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/rodada-gratis']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
-                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{
-                                        'rodada_gratis.rodadaGratis' | translate }}</span>
+                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
+                                    {{ 'rodada_gratis.rodadaGratis' | translate }}</span>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/indique-ganhe']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente && indiqueGanheHabilitado">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
-                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{
-                                        'indique_ganhe.indiqueGanhe' | translate }}</span>
+                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
+                                    {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/cashback']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente && cashbackEnabled">
@@ -675,7 +675,7 @@
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/configuracoes']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente">
                                     <i class="fa fa-solid fa-cogs mb-2"></i>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    <div [innerHTML]="'geral.jogoResponsavel' | translate | breakLineWithSpacing"></div>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/alterar-senha']"
                                     routerLinkActive="router-link-active" *ngIf="!isCliente">
@@ -719,10 +719,10 @@
                                                             </a>-->
                                 <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
                                     <i class="fa fa-solid fa-cogs"></i>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                 </a>
                             </div>
-                            <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
+                            <a (click)="logout()" class="dropdown-btn btn-sair">
                                 <i class="fa fa-sign-out mr-2"></i>
                                 <span class="dados">{{ 'geral.sair' | translate }}</span>
                             </a>
@@ -769,12 +769,15 @@
     </div>
 </div>
 
-<nav class="mobile" *ngIf="showHeaderMobile" [ngClass]="{'centered': centered}" #scrollMenu>
-    <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
-</nav>
+<div [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
+    <nav class="mobile" *ngIf="showHeaderMobile" [ngClass]="{'centered': centered}" #scrollMenu>
+        <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
+    </nav>
+</div>
 
+<div [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
 <ng-template #menuTemplate>
-    <div #menu class="d-flex">
+    <div #menu [ngClass]="{'hidden-header': isCasinoGameFullScreen, 'd-flex': !isCasinoGameFullScreen}">
         <div class="category" *ngIf="aoVivoAtivo && !betbyAtivo">
             <a [routerLink]="['/live']" routerLinkActive="active">
                 <span>{{ 'menu.aoVivo' | translate }}</span>
