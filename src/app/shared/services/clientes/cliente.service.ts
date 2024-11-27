@@ -72,16 +72,16 @@ export class ClienteService {
                             }, 100);
                             this.xtremepushBackgroundRemove();
                         }
+
+                        this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
+
+                        this.ga4Service.triggerGa4Event(
+                            EventGa4Types.SIGN_UP,
+                            {
+                                method : dataUser.user.registrationMethod
+                            }
+                        );
                     }
-
-                    this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
-
-                    this.ga4Service.triggerGa4Event(
-                        EventGa4Types.SIGN_UP,
-                        {
-                            method : dataUser.user.registrationMethod
-                        }
-                    );
 
                     return response.results;
                 }),
