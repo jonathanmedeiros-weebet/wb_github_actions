@@ -2,15 +2,15 @@ import { useConfigClient } from "@/stores";
 import { axiosInstance } from "./axiosInstance"
 
 export const getBetByCode = async ( code: string ) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/apostas-por-codigo/${code}`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/bets/code/${code}`;
     
     return await axiosInstance().get(url);        
 }
 
 export const getBetById = async ( id: number, params = {}) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/apostas/${id}`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/bets/${id}`;
     const queryString = new URLSearchParams(params).toString();
     const fullUrl = queryString ? `${url}?${queryString}` : url;
 
@@ -19,8 +19,8 @@ export const getBetById = async ( id: number, params = {}) => {
 
 export const findBet = async ( parametros: any ) => {
 
-    const { apiUrl } = useConfigClient();
-    let url = `${apiUrl}/esportes/apostas`;
+    const { lokiUrl } = useConfigClient();
+    let url = `${lokiUrl}/sport/bets`;
     
     const params = new URLSearchParams();
 
@@ -40,8 +40,8 @@ export const findBet = async ( parametros: any ) => {
 }
 
 export const cancelBet = async ( bet: any ) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/apostas/${bet.id}/cancelar`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/bets/${bet.id}/cancel`;
 
     const payload = {
         version: bet.version
@@ -51,29 +51,36 @@ export const cancelBet = async ( bet: any ) => {
 }
 
 export const payBet = async ( id: number ) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/apostas/${id}/pagamento`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/bets/${id}/pay`;
         
     return await axiosInstance().post(url, {});
 }
 
 export const simulateBetClosure = async ( id: number ) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/apostas/simular-encerramento?aposta=${id}`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/sport/bets/${id}/close-simulate`;
         
     return await axiosInstance().get(url);
 }
 
 export const tokenLiveClosing = async (id: any) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/token-aovivo-encerramento`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/sport/bets/live-token-close`;
         
     return await axiosInstance().post(url, { aposta: id });
 }
 
 export const closeBet = async (payload: any) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/apostas/encerrar-aposta`;
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/sport/bets/close`;
         
     return await axiosInstance().post(url, payload);
+}
+
+export const createBetSport = async (payload: {}) => {
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/sport/bets`;
+    const response: any = await axiosInstance().post(url, payload);
+    return response.results;
 }

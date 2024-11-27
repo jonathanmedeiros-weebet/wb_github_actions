@@ -1,40 +1,67 @@
-# tesree2
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+### Passos para instalar:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
+### Passos para rodar a aplicação:
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
+### Passos para buildar a aplicação:
 ```sh
 npm run build
 ```
+
+### Passos para configurar a aplicação do cambista com a central e o loki:
+
+1 - Central:
+
+Rodar o ngrok na porta que o projeto central esta rodando, normalmente é a porta 80;
+```sh
+ngrok http 80
+```
+
+2 - Aplicação cambista:
+
+Alterar a constante production em src>stores>configClient.store.ts de true para false;
+
+Rodar nova aplicação do cambista, 
+```sh
+npm run dev 
+```
+
+Acessar seguinte url: http://localhost:[porta da aplicação]?host=[url https gerado no ngrok]&slug=[seu slug]&name=[qualquer nome]
+
+3 - Loki:
+
+Configurar os arquivos: app/Http/Middleware>MultiSystemWithFile.php e storage>app>services.json
+
+MultiSystemWithFile:
+
+Alterar a constante APP_CAMBISTA_ORIGIN de 'app.weebet.tech' para  a porta que a aplicação do cambista esta sendo executada, normalmente é a 'localhost:7000';
+
+services.json : 
+
+"url https gerada pelo ngrok": {
+    "database": {
+        "hostname": "mesmo host da central",
+        "schema": "mesmo schema da central",
+        "username": "mesmo user name da central",
+        "password": "mesmo password da central",
+        "port": "3306"
+    }
+}
+
+Por fim executar:
+```sh
+php artisan cache:clear & php artisan config:clear & php artisan route:clear
+```
+
+
+
+
+
+
+

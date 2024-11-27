@@ -2,16 +2,9 @@ import { useConfigClient } from "@/stores"
 import { axiosInstance } from "./axiosInstance";
 import { wbPostMessage } from "@/utilities";
 
-export const createPrebet = async(payload: any) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas`
-    const response: any = await axiosInstance().post(url, payload);
-    return response.results;
-}
-
 export const createLiveToken = async(payload: any) => {
-    const { apiUrl } = useConfigClient();
-    const url = `${apiUrl}/esportes/apostas/token-aovivo`
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/sport/bets/live-token`
     const response: any = await axiosInstance().post(url, payload);
     return response.results;
 }

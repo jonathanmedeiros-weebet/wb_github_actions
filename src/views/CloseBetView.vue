@@ -31,8 +31,8 @@
               <span>Possível Retorno:</span>
               <span v-if="newEarningPossibility == null" class="gain__value">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
               <span v-else class="gain__value">
-                <span class="gain__strikethrough">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
-                <span class="gain--danger">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
+                <span class="gain__strikethrough" v-if="bet.possibilidade_ganho">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
+                <span class="gain--danger" v-if="newEarningPossibility">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
               </span>
             </div>
             <div class="gain__item">
@@ -157,7 +157,7 @@ import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
 import { checkLive, closeBet, getBetById, printTicket, sharedTicket, simulateBetClosure, tokenLiveClosing } from '@/services'
-import { formatDateTimeBR, formatDateBR, formatCurrency, delay } from '@/utilities'
+import { formatDateTimeBR, formatDateBR, formatCurrency, delay, capitalizeFirstLetter } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
@@ -234,6 +234,7 @@ export default {
     }
   },
   methods: {
+    capitalizeFirstLetter,
     formatDate(date) {
       return formatDateBR(date);
     },
@@ -317,9 +318,9 @@ export default {
       .then(resp => {
         this.bet = resp.results;
       })
-      .catch(error => {
+      .catch(({errors}) => {
         this.toastStore.setToastConfig({
-          message: error.errors.message,
+          message: errors.message,
           type: ToastType.DANGER,
           duration: 5000
         })
@@ -330,13 +331,6 @@ export default {
     },
     formateDateTime(datetime) {
         return formatDateTimeBR(datetime);
-    },
-    capitalizeFirstLetter(str) {
-        if(str){
-            return str.charAt(0).toUpperCase() + str.slice(1);
-        }else{
-            return str;
-        }
     },
     formatNumber(value, minFractionDigits, maxFractionDigits) {
         return new Intl.NumberFormat('pt-BR', {
@@ -513,6 +507,10 @@ export default {
   &__status--danger {
     color: #f61a1a;
     color: var(--color-danger);
+  }
+
+  &__message {
+    margin-top: 20px;
   }
 }
 

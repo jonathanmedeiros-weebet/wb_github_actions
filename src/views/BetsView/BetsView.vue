@@ -123,11 +123,15 @@
                     <td 
                       class="table__line--right"
                       :class="{ 'table__status--success': bet.resultado === 'ganhou', 'table__status--danger': bet.resultado === 'perdeu' }"
-                    >{{ capitalizeFirstLetter(bet.resultado) }}</td>
+                    >
+                      {{ capitalizeFirstLetter(bet.resultado) }}
+                    </td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Pagamento:</td>
-                    <td class="table__line--right">R$ {{ bet.status_pagamento ?? '-' }}</td>
+                    <td class="table__line--right">
+                      <span v-if="Boolean(bet.status_pagamento)">{{ capitalizeFirstLetter(bet.status_pagamento) }}</span>
+                    </td>
                   </tr>
                 </tbody>  
               </table>
@@ -265,7 +269,7 @@ import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 import { cancelBet, findBet, getBetById, payBet } from '@/services'
-import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now } from '@/utilities'
+import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now, capitalizeFirstLetter } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums';
@@ -335,6 +339,7 @@ export default {
     },
   },
   methods: {
+    capitalizeFirstLetter,
     handleOpenPayModal(bet){
       this.betSelected = bet;
       this.showModalPay = true;
@@ -454,13 +459,6 @@ export default {
     },
     formateDateTime(datetime) {
       return formatDateTimeBR(datetime);
-    },
-    capitalizeFirstLetter(str) {
-      if(str){
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      }else{
-        return str;
-      }
     },
     canClose(bet) {
       const strategy = this.options.closure_strategy;     

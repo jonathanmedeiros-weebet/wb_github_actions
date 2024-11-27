@@ -5,13 +5,13 @@
       class="input-search__field"
       type="text"
       :placeholder="placeholder"
-      :value="inputValue"  
+      :value="inputValue"
       @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur"
       ref="myInput" 
     />
-    <div class="input-search__icon--right">
+    <div class="input-search__icon--right" v-if="inputValue">
       <IconClose :size="14" @click="handleClear"/>
     </div>
   </div>

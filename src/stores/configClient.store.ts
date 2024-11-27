@@ -5,7 +5,7 @@ import { defineStore } from "pinia"
 interface ConfigClient {
   name: string;
   slug: string;
-  apiUrl: string;
+  host: string;
 }
 
 interface PrinterSetting {
@@ -15,8 +15,8 @@ interface PrinterSetting {
 }
 
 const production = true;
-const _host = production ? 'https://central.demo.wee.bet' : '//localhost';
-const _loki = production ? 'https://loki1.weebet.tech' : '//localhost:8000';
+const _host = production ? 'https://central.demo.wee.bet' : 'http://localhost';
+const _loki = production ? 'https://loki1.weebet.tech' : 'http://localhost:8000';
 const _center = production ? 'https://center7.wee.bet' : 'https://hermes.wee.bet';
 const _live = 'https://streaming.wee.bet';
 const _name = 'DEMO';
@@ -58,7 +58,10 @@ export const useConfigClient = defineStore('configClient', {
     config: (state) => state,
     logo: (state) => `https://weebet.s3.amazonaws.com/${state.slug}/logos/logo_banca.png`,
     paramUrl: (state) => `https://weebet.s3.amazonaws.com/${state.slug}/param/parametros.json?${+ new Date()}`,
-    clientCenterUrl: (state) => state.apiUrl.replace('/api', ''),
+    clientCenterUrl: () => {
+      const configClient = localStorageService.get(LocalStorageKey.CONFIG_CLIENT);
+      return Boolean(configClient) ? configClient.host : _host
+    },
     options: (state) => state.params?.opcoes ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
     mainOdds: (state) => state.params?.odds_principais ?? [],
@@ -92,15 +95,14 @@ export const useConfigClient = defineStore('configClient', {
     }
   },
   actions: {
-    setConfig(config: ConfigClient) {
-      this.name = config.name;
-      this.slug = config.slug;
-      this.apiUrl = `${config.apiUrl}/api`;
+    setConfig({host, name, slug}: ConfigClient) {
+      this.name = name;
+      this.slug = slug;
 
       localStorageService.set(LocalStorageKey.CONFIG_CLIENT, {
         name: this.name,
         slug: this.slug,
-        apiUrl: this.apiUrl,
+        host
       })
     },
     setParams(params: any) {

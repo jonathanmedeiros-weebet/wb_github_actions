@@ -4,9 +4,9 @@ import { localStorageService } from "./storage.service";
 import router from "@/router";
 
 export const axiosInstance = () => {
-  const { apiUrl } = useConfigClient();
+  const { lokiUrl, clientCenterUrl } = useConfigClient();
   const axiosInstance = axios.create({
-    baseURL: apiUrl,
+    baseURL: lokiUrl,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -19,6 +19,12 @@ export const axiosInstance = () => {
       if (token && !awsRouteException) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
+
+      const clientOriginException = config.url.includes('center7') || config.url.includes('hermes');
+      if (!clientOriginException) {
+        config.headers['Client-Origin'] = clientCenterUrl;
+      }
+
       return config;
     },
     (error: any) => {

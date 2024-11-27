@@ -125,6 +125,8 @@ import IconRemove from '@/components/icons/IconRemove.vue'
 import { getCalculationValue } from '@/services'
 import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
+import { ToastType } from '@/enums'
+import { useToastStore } from '@/stores'
 
 export default {
   name: 'reckoning',
@@ -158,7 +160,8 @@ export default {
       sports: 0,
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
-      collapsedExits: this.initCollapsed
+      collapsedExits: this.initCollapsed,
+      tostStore: useToastStore()
     }
   },
   computed: {
@@ -227,8 +230,13 @@ export default {
         this.resultDate = formatCurrency(
           Number(res.total_apostado + res.cartao - res.saque - res.total_comissao - res.total_premios)
         );
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      } catch ({ errors }) {
+        this.tostStore.setToastConfig({
+          message: errors?.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        })
+        this.resetDateToCurrent();
       }
     },
     resetDateToCurrent() {

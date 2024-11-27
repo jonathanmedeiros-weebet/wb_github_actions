@@ -166,12 +166,12 @@ export default {
                 periodo: this.filterDate.slug
             }
             getCashFlow(filter)
-                .then(resp => {
+                .then(({entrada, saida}) => {
                     this.chartData = {
                         labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
                         datasets: [
-                        { ...this.chartData.datasets[0], data: resp.results.entrada },
-                        { ...this.chartData.datasets[1], data: resp.results.saida }
+                        { ...this.chartData.datasets[0], data: entrada },
+                        { ...this.chartData.datasets[1], data: saida }
                         ]
                     }
                 })
@@ -187,7 +187,7 @@ export default {
             getFinancial()
                 .then(resp => {
                     this.entryData.categories = [];
-                    for (let [title, value] of Object.entries(resp.results)) {
+                    for (let [title, value] of Object.entries(resp)) {
                         if(title !== 'saldo') {
                             this.entryData.categories.push({
                                 title: title,
@@ -213,9 +213,9 @@ export default {
                 'periodoAte': this.dateFilterEnd.format('YYYY-MM-DD')
             }
             listMovements(queryParams)
-                .then(resp => {
+                .then(({ movimentacoes }) => {
                     this.movements.results = [];
-                    for (let [key, item]  of Object.entries(resp.results.movimentacoes)) {
+                    for (let [key, item]  of Object.entries(movimentacoes)) {
                         this.movements.results.push({
                             date: item.data,
                             title: 'Comissão',

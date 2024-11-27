@@ -62,7 +62,7 @@ export const modalityList = (): ModalityOption[] => {
             hasLive: false
         },
         {
-            name: 'Volei',
+            name: 'Vôlei',
             id: Modalities.VOLLEYBALL,
             show: Boolean(options.volei),
             hasLive: false
@@ -92,7 +92,7 @@ export const modalityList = (): ModalityOption[] => {
             hasLive: false
         },
         {
-            name: 'Loteria popular',
+            name: 'Loteria Popular',
             id: Modalities.POPULAR_LOTTERY,
             show: Boolean(options.loteriaPopular) && !popularLotteryDeprecatedByAndroidVersion,
             hasLive: false
