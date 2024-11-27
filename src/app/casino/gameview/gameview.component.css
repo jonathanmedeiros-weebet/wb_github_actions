@@ -118,7 +118,7 @@ iframe{
     gap: 10px;
     flex-wrap: wrap;
     -ms-overflow-style: none;
-    scrollbar-width: none; 
+    scrollbar-width: none;
     padding-left: 18px;
     margin-left: -18px;
 }
@@ -203,12 +203,12 @@ iframe{
     fill: #24CC63;
     margin-left: 0;
     background-color: rgba(36, 204, 99, 0.20);;
-    background-image: url('https://cdn.wee.bet/img/icons/whatsapp.svg'); 
+    background-image: url('https://cdn.wee.bet/img/icons/whatsapp.svg');
     background-size: 58%;
     background-repeat: no-repeat;
     background-position: center;
   }
-  
+
 .facebook {
     fill: #395694;
     background-color: rgba(57, 86, 148, 0.20);
@@ -530,7 +530,7 @@ iframe{
     }
 
     .bloco {
-        padding: 0 10px 24px 10px
+        padding: 0px 30px 24px 30px;
     }
 
     #deposit-btn{
@@ -765,11 +765,11 @@ iframe{
         background-size: cover;
         filter: blur(60px);
     }
-    
+
     .overlay-content {
         position: relative;
     }
-    
+
     .overlay-content__title {
         color: #FFF;
         text-align: center;
@@ -780,7 +780,7 @@ iframe{
         line-height: normal;
         margin-bottom: 20px;
     }
-    
+
     .overlay-content__text {
         color: rgba(255, 255, 255, 0.50);
         text-align: center;
@@ -843,7 +843,7 @@ iframe{
         margin: 0 auto;
         width: 100%;
     }
-    
+
     .bloco .titulo {
         text-align: left;
         font-size: 18px;
