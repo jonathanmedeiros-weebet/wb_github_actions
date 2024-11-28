@@ -1973,3 +1973,7 @@ label {
 .webpush-swal2-popup .webpush-swal2-modal .webpush-swal2-show {
     background: none !important;
 }
+
+#ex-doccheck-dialog {
+    z-index: 90003 !important;
+}
