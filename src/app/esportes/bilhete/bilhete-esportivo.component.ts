@@ -22,7 +22,6 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -90,8 +89,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
         private layoutService: LayoutService,
-        private sportIdService: SportIdService,
-        private geolocationService: GeolocationService
+        private sportIdService: SportIdService
     ) {
         super();
 
@@ -380,22 +378,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
-            let codigoIbge = sessionStorage.getItem('codigo_ibge');
-            let cidade = sessionStorage.getItem('cidade');
-            let estado = sessionStorage.getItem('estado');
-    
-            if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
-                valido = false;
-                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
-                this.geolocationService.getGeolocation();
-            }
-
             if (valido) {
                 if (this.isLoggedIn) {
-                    let values = this.ajustarDadosParaEnvio();
-                    values['codigoIbge'] = codigoIbge;
-                    values['cidade'] = cidade;
-                    values['estado'] = estado;
+                    const values = this.ajustarDadosParaEnvio();
                     this.salvarAposta(values);
                 } else {
                     this.enableSubmit();
@@ -541,6 +526,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     salvarAposta(dados) {
         if (this.apostaAoVivo) {
             this.setDelay();
+
             this.apostaEsportivaService.tokenAoVivo(dados)
                 .pipe(
                     tap(token => {
@@ -584,16 +570,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     finalizarApostaDeslogado() {
         this.disabledSubmit();
 
-        if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
-            this.geolocationService.getGeolocation();
-            this.enableSubmit();
-            return this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
-        }
-
-        let values = this.ajustarDadosParaEnvio();
-        values['codigoIbge'] = sessionStorage.getItem('codigo_ibge');
-        values['cidade'] = sessionStorage.getItem('cidade');
-        values['estado'] = sessionStorage.getItem('estado');
+        const values = this.ajustarDadosParaEnvio();
 
         if (this.tipoApostaDeslogado === 'preaposta') {
             this.preApostaService.create(values)

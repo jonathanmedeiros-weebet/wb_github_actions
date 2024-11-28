@@ -114,7 +114,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         }
 
         this.geolocationService
-            .getGeolocation(false)
+            .getGeolocation()
             .then((geolocation) => this.geolocation = geolocation)
     }
 
