@@ -23,6 +23,7 @@ export class TransacoesHistoricoComponent extends BaseFormComponent implements O
     withdrawals = [];
     deposits = [];
     queryParams;
+    tabs;
 
     statusFilterOptions;
 
@@ -110,6 +111,7 @@ export class TransacoesHistoricoComponent extends BaseFormComponent implements O
         this.sidebarService.changeItens({ contexto: 'cliente' });
 
         this.getDeposits();
+        this.tabs = this.getTabs();
         this.statusFilterOptions = this.statusDepositOptions;
 
         this.createForm();

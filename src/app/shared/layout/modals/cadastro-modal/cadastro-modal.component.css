@@ -195,9 +195,33 @@ a.link-termos-politica {
 
 .btn-custom {
     margin-top: 10px;
-    width: 80%;
+    width: 100%;
 }
 
+.btn-legitimuz {
+    margin-bottom: 18px;
+    margin-top: 8px;
+}
+
+.btn-legitimuz i {
+    margin-right: 8px;
+}
+
+.requirements-password {
+    margin: 0;
+    padding: 8px;
+    padding-bottom: 4px;
+    list-style-type: none;
+}
+
+.fulfilled {
+    color: green;
+    text-decoration: line-through;
+}
+
+.unfulfilled {
+    opacity: 0.6;
+}
 
 @media only screen and (max-width: 1024px) {
     .modal-body {

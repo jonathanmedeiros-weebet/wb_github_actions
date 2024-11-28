@@ -124,7 +124,7 @@ export class GeolocationService {
 
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        if (!position) throw new Error('Unable to find current position')
+                        if (!position) throw new Error('Unable to find current position');
     
                         resolve({
                             error: false,
@@ -133,9 +133,8 @@ export class GeolocationService {
                         });
                     },
                     (error) => {
-                        throw error
-                    },
-                    this.options
+                        reject(error);
+                    }
                 );
             } catch (error) {
                 reject(error)

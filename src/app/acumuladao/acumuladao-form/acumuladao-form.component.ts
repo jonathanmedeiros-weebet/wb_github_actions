@@ -9,8 +9,8 @@ import {BaseFormComponent} from '../../shared/layout/base-form/base-form.compone
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
-import { GeolocationService } from 'src/app/shared/services/geolocation.service';
+import {BehaviorSubject, Subject} from 'rxjs';
+import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -37,6 +37,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
     unsub$ = new Subject();
     headerHeight;
     mobileScreen;
+    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
         private router: Router,
@@ -138,13 +139,16 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         });
     }
 
-    submit() {
+    async submit() {
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
+            const location = await this.geolocationService.getGeolocation();
+            this.geolocation.next(location);
             let msg = '';
             let valid = true;
             this.dados = {
+                geolocation: this.geolocation.value,
                 apostador: this.form.value.apostador,
                 acumuladao_id: this.acumuladao.id,
                 jogos: [],

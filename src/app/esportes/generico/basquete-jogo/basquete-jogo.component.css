@@ -70,7 +70,7 @@
     position: relative;
     height: 20vh;
     max-height: 300px;
-    background-image: url("https://cdn.wee.bet/img/quadra-basquete-background.png");
+    background-image: url("https://wb-assets.com/img/quadra-basquete-background.png");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -368,6 +368,30 @@
         flex: 1;
         flex-direction: column;
         align-items: center;
+    }
+
+    .wrap-sticky {
+        padding: 0;
+    }
+    
+    .content-sports.inside-event {
+        padding-top: 0;
+    }
+
+    .iframe-responsive {
+        max-width: 100%;
+        padding-top: 64%;
+        position: relative;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .iframe-responsive iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100%);
+        height: 100%;
     }
 }
 

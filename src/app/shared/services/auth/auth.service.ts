@@ -1,16 +1,17 @@
-import {Injectable, EventEmitter, Output} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, BehaviorSubject} from 'rxjs';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import { Injectable, EventEmitter, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import {HeadersService} from './../utils/headers.service';
-import {ErrorService} from './../utils/error.service';
-import {ParametrosLocaisService} from './../parametros-locais.service';
-import {config} from './../../config';
+import { HeadersService } from './../utils/headers.service';
+import { ErrorService } from './../utils/error.service';
+import { ParametrosLocaisService } from './../parametros-locais.service';
+import { config } from './../../config';
 
 import * as moment from 'moment';
-import {Router} from '@angular/router';
 import { GeolocationService } from '../geolocation.service';
+import { Ga4Service, EventGa4Types } from '../ga4/ga4.service';
 
 declare var xtremepush: any;
 
@@ -33,7 +34,8 @@ export class AuthService {
         private errorService: ErrorService,
         private paramsService: ParametrosLocaisService,
         private router: Router,
-        private geolocation: GeolocationService
+        private geolocation: GeolocationService,
+        private ga4Service: Ga4Service,
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
@@ -47,6 +49,13 @@ export class AuthService {
                 map(res => {
                     if (res.results.user) {
                         localStorage.setItem('user', JSON.stringify(res.results.user));
+                        this.ga4Service.triggerGa4Event(
+                            EventGa4Types.LOGIN, {
+                            name: res.results.user.name,
+                            email: res.results.user.login,
+                            phone: res.results.user.phone
+                        }
+                        );
                     }
                     return res;
                 }),
@@ -100,9 +109,9 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', res.results.user.id);
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 xtremepush('event', 'login');
                             }, 100);
                             this.xtremepushBackgroundRemove();
@@ -140,9 +149,9 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', res.results.user.id);
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 xtremepush('event', 'login');
                             }, 100);
                             this.xtremepushBackgroundRemove();
@@ -188,19 +197,44 @@ export class AuthService {
             );
     }
 
-    logout() {
-        this.limparStorage();
-
-        this.deleteCookie(INTERCOM_HMAC_COOKIE);
-
-        if(this.xtremepushHabilitado()) {
-            this.cleanXtremepushNotifications();
-        }
-        this.logadoSource.next(false);
-        window.location.reload();
+    performLogout(logoutType: string) {
+        return this.http.post<any>(
+            `${this.authLokiUrl}/logout`,
+            { logout_type: logoutType },
+            this.header.getRequestOptions(true)
+        ).pipe(
+            map(res => {
+                this.handleLogoutCleanup();
+                return res;
+            }),
+            catchError(error => {
+                if (error.status === 401 || error.status === 404) {
+                    this.handleLogoutCleanup();
+                }
+                throw error;
+            })
+        );
     }
 
-    cleanXtremepushNotifications(){
+    private handleLogoutCleanup() {
+        this.limparStorage();
+        this.deleteCookie(INTERCOM_HMAC_COOKIE);
+        this.logadoSource.next(false);
+        if (this.xtremepushHabilitado()) {
+            this.cleanXtremepushNotifications();
+        }
+        location.reload();
+    }
+
+    logout() {
+        this.performLogout('manual').subscribe();
+    }
+
+    expiredByInactive() {
+        this.performLogout('expired by inactivity').subscribe();
+    }
+
+    cleanXtremepushNotifications() {
         xtremepush('set', 'user_id', "");
         const xtremepushNotificationContainer = document.getElementById('xtremepushNotificationContainer');
         xtremepushNotificationContainer.innerHTML = '';
@@ -259,7 +293,7 @@ export class AuthService {
 
     requestEmailMultifator(senha) {
         const url = `${this.AuthUrl}/requestMultifatorEmail`;
-        const data  = { senha };
+        const data = { senha };
         return this.http
             .post(url, data, this.header.getRequestOptions(true))
             .pipe(
@@ -348,6 +382,17 @@ export class AuthService {
             );
     }
 
+    getLastAccesses(filters: { userId: number; dateFrom: string; dateTo: string; type: string }): Observable<any> {
+        const url = `${this.authLokiUrl}/last-accesses`;
+
+        return this.http
+            .post<any>(url, filters, this.header.getRequestOptions(true))
+            .pipe(
+                map(response => response),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     limparStorage() {
         localStorage.removeItem('token');
         localStorage.removeItem('tokenCassino');
@@ -415,6 +460,15 @@ export class AuthService {
             }
         }
         return '';
+    }
+
+    getUserResetPassword(data: any): Observable<any> {
+        const url = `${this.AuthUrl}/getUserResetPassword`;
+        return this.http
+            .post(url, JSON.stringify(data), this.header.getRequestOptions())
+            .pipe(
+                catchError(this.errorService.handleError)
+            );
     }
 
     xtremepushBackgroundRemove() {

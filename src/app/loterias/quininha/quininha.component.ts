@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy, Renderer2, ElementRef, ChangeDetectorRef} 
 import {getCurrencySymbol} from '@angular/common';
 import {UntypedFormBuilder, UntypedFormArray, Validators} from '@angular/forms';
 
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
@@ -18,7 +18,7 @@ import {TipoAposta, Aposta, Sorteio} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as range from 'lodash.range';
 import { random } from 'lodash';
-import { GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -45,7 +45,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     mobileScreen = false;
     modoCambista = false;
     headerHeight = 92;
-
+    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
+    
     constructor(
         private sidebarService: SidebarService,
         private auth: AuthService,
@@ -231,19 +232,22 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     }
 
     /* Finalizar aposta */
-    create() {
+    async create() {
         this.disabledSubmit();
 
-        this.aposta['cidadeIbge'] = sessionStorage.getItem('codigo_ibge');
-        this.aposta['cidade'] = sessionStorage.getItem('cidade');
-        this.aposta['estado'] = sessionStorage.getItem('estado');
+        const location = await this.geolocationService.getGeolocation();
+        this.geolocation.next(location);
+        this.aposta['geolocation'] = this.geolocation.value       
 
         if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
             this.enableSubmit();
             this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
-            this.geolocationService.getGeolocation();
             return;
         }
+
+        this.aposta['cidadeIbge'] = sessionStorage.getItem('codigo_ibge');
+        this.aposta['cidade'] = sessionStorage.getItem('cidade');
+        this.aposta['estado'] = sessionStorage.getItem('estado');
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {

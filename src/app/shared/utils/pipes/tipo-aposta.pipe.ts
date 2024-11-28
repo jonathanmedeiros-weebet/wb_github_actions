@@ -9,8 +9,17 @@ export class TipoApostaPipe implements PipeTransform {
 
     constructor(private paramsService: ParametrosLocaisService) { }
 
-    transform(value: any, field = 'nome'): any {
+    transform(value: any, field = 'nome', language?: string): any {
         const tiposAposta = this.paramsService.getTiposAposta();
-        return tiposAposta[value] ? tiposAposta[value][field] : '';
+
+        if (!tiposAposta[value]) {
+            return '';
+        }
+
+        if (language) {
+            return tiposAposta[value][`nome_${language}`] ?? tiposAposta[value][`nome_pt`];
+        }
+
+        return tiposAposta[value][field];
     }
 }

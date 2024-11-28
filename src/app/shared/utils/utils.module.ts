@@ -20,7 +20,8 @@ import {
     DepositoStatusPixPipePipe,
     SafeIframePipe,
     FormatPaymentMethodPipe,
-    IdleDetectDirective
+    IdleDetectDirective,
+    BreakLineWithSpacingPipe
 } from './index';
 
 @NgModule({
@@ -44,7 +45,8 @@ import {
         CotacaoPipe,
         SafeIframePipe,
         FormatPaymentMethodPipe,
-        IdleDetectDirective
+        IdleDetectDirective,
+        BreakLineWithSpacingPipe
     ],
     exports: [
         MomentPipe,
@@ -66,7 +68,8 @@ import {
         CotacaoPipe,
         SafeIframePipe,
         FormatPaymentMethodPipe,
-        IdleDetectDirective
+        IdleDetectDirective,
+        BreakLineWithSpacingPipe
     ]
 })
 export class UtilsModule { }

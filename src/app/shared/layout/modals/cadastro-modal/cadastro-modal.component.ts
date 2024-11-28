@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FaceMatchService } from './../../../services/face-match.service';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, OnChanges } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -16,6 +17,8 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
+import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -24,6 +27,8 @@ import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afilia
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+
     appMobile;
     isMobile = false;
     unsub$ = new Subject();
@@ -61,6 +66,25 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
 
+    verifiedIdentity = false;
+    faceMatchEnabled = false;
+    faceMatchRegister = false;
+    faceMatchRegisterValidated = false;
+    legitimuzToken = "";
+    currentLanguage = 'pt';
+    disapprovedIdentity = false;
+    dataUserCPF ='';
+    showLoading = true;
+    faceMatchRequested = false;
+    isStrengthPassword: boolean | null;
+    validPassword: boolean = false;
+    requirements = {
+        minimumCharacters: false,
+        uppercaseLetter: false,
+        lowercaseLetter: false,
+        specialChar: false,
+    };
+
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -77,17 +101,36 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
+        private legitimuzService: LegitimuzService,
+        private faceMatchService: FaceMatchService,
+        private ga4Service: Ga4Service,
     ) {
         super();
     }
 
     ngOnInit() {
+        this.currentLanguage = this.translate.currentLang;
+        this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
+        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchRegister);
+
+        if (!this.faceMatchEnabled) {
+            this.faceMatchRegisterValidated = true;
+        }
+
+        this.translate.onLangChange.subscribe(change => {
+            this.currentLanguage = change.lang;
+            if (this.faceMatchEnabled) {
+                this.legitimuzService.changeLang(change.lang);
+            }
+        });
+
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.getPromocoes();
         this.appMobile = this.auth.isAppMobile();
         this.isMobile = window.innerWidth <= 1024;
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
+        this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
 
         if (this.isLoterj) {
@@ -95,6 +138,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
 
         this.createForm();
+        this.form.valueChanges.subscribe(form => {
+            if ((form.cpf != null && form.cpf.length == 14)) {
+                this.showLoading = false;
+                this.cd.detectChanges();
+            } else {
+                this.showLoading = true;
+            }
+        })
 
         this.hCaptchaLanguage = this.translate.currentLang;
 
@@ -109,7 +160,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.route.queryParams
             .subscribe((params) => {
-
 
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
@@ -189,6 +239,27 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 );
         }
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    this.cd.detectChanges();
+                    if (this.verifiedIdentity) {
+                        this.faceMatchRequested = true;
+                        this.showLoading = false
+                        this.legitimuzService.closeModal();
+                        this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                    }
+                });
+        }
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.form.get('cpf')?.valueChanges.subscribe(cpf => {
+                this.dataUserCPF = cpf;
+                this.legitimuzService.init();
+                this.legitimuzService.mount();
+            })
+        }
     }
 
     getPromocoes(queryParams?: any) {
@@ -248,8 +319,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            senha: [null, [Validators.required, Validators.minLength(6)]],
-            senha_confirmacao: [null, [Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]],
+            senha: [null, [Validators.required, Validators.minLength(8)]],
+            senha_confirmacao: [null, [Validators.required, Validators.minLength(8), FormValidations.equalsTo('senha')]],
             nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
@@ -266,6 +337,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null]
         });
+
+        if (this.isStrengthPassword) {
+            this.form.controls.senha.clearValidators();
+            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls.senha.updateValueAndValidity();
+        }
 
         if (this.isLoterj) {
             this.form.addControl('termosUso', this.fb.control(null, [
@@ -328,6 +405,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
 
         this.submitting = true;
+
         this.clientesService.cadastrarCliente(values)
             .subscribe(
                 (res) => {
@@ -460,5 +538,29 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     blockPaste(event: ClipboardEvent): void {
         event.preventDefault();
+    }
+
+    checkPassword() {
+        const passwordValue = this.form.controls.senha.value;
+        const lengthCheck = passwordValue.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(passwordValue);
+        const hasLowerCase = /[a-z]/.test(passwordValue);
+        const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
+
+        this.requirements = {
+          minimumCharacters: lengthCheck,
+          uppercaseLetter: hasUpperCase,
+          lowercaseLetter: hasLowerCase,
+          specialChar: hasSpecialChar,
+        };
+
+        this.validPassword = Object.values(this.requirements).every(Boolean);
+    }
+
+    onBlurGa4Name(event: any): void {
+        const value = event.target.value;
+        if(value){
+            this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
+        }
     }
 }
