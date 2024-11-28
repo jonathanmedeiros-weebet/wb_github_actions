@@ -90,9 +90,9 @@ export class GeolocationService {
                 next: (res: ReverseGeolocation) => {
                     this.requestOnGoing = false;
                     sessionStorage.setItem('ibge_code', res.ibge_code ?? null);
-                    sessionStorage.setItem('location_city', res.city ?? null);
-                    sessionStorage.setItem('location_state', res.state ?? null);
-                    sessionStorage.setItem('location_country', res.country == 'Brasil' || res.country == 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
+                    sessionStorage.setItem('locale_city', res.city ?? null);
+                    sessionStorage.setItem('locale_state', res.state ?? null);
+                    sessionStorage.setItem('locale_country', res.country == 'Brasil' || res.country == 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
                     return res;
                 },
                 error: () => {
