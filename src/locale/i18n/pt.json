@@ -256,7 +256,9 @@
         "loginPhone": "Telefone",
         "loginUsername": "Nome de usuário",
         "field": "Campo",
-        "or": "OU"
+        "or": "OU",
+        "geolocationError": "Por favor, verifique a configuração de localização do seu navegador e tente novamente.",
+        "restricaoDeLocalizacao": "Este recurso está disponível apenas para usuários no Brasil."
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",

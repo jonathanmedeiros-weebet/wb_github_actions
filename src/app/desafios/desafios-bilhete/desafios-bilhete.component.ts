@@ -15,6 +15,8 @@ import {
     ParametrosLocaisService
 } from '../../services';
 import * as clone from 'clone';
+import { GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-desafios-bilhete',
@@ -55,7 +57,9 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private modalService: NgbModal,
         private menuFooterService: MenuFooterService,
         private layoutService: LayoutService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private geolocationService: GeolocationService,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -212,6 +216,12 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
+            if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
+                valido = false;
+                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
+                this.geolocationService.getGeolocation();
+            }
+
             if (valido) {
                 if (this.isLoggedIn) {
                     const values = clone(this.form.value);
@@ -219,6 +229,9 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                         delete item.desafio;
                         delete item.odd;
                     });
+                    values['cidadeIbge'] = sessionStorage.getItem('codigo_ibge');
+                    values['cidade'] = sessionStorage.getItem('cidade');
+                    values['estado'] = sessionStorage.getItem('estado');
 
                     this.salvarAposta(values);
                 } else {
