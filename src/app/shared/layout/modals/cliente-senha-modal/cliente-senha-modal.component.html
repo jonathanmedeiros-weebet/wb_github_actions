@@ -111,7 +111,7 @@
                         </div>
                         <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
                             [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
-                            [attr.data-ex-doccheck-force-enrollment]="cliente.verifiedIdentity ? false : true">
+                            [attr.data-ex-doccheck-force-enrollment]="false">
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                         </button>
