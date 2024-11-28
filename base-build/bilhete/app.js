@@ -16,7 +16,12 @@ document.onreadystatechange = async function () {
                 appCssLink.parentElement.insertBefore(linkTag, appCssLink);
 
                 const image = this.createElement('img');
-                image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_banca.png`
+                image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_impressao.png`
+
+                image.onerror = () => {
+                    image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_banca.png`;
+                };
+
                 const logoDiv = this.getElementById('logo-frame');
                 logoDiv.appendChild(image);
 
@@ -222,7 +227,7 @@ document.onreadystatechange = async function () {
                                 <div id="match">
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/${teamShieldFolder}/m/${ticketItem.time_a_img}.png" onerror="this.src='https://cdn.wee.bet/img/${teamShieldFolder}/m/default.png'">
+                                            <img src="https://wb-assets.com/img/${teamShieldFolder}/m/${ticketItem.time_a_img}.png" onerror="this.src='https://wb-assets.com/img/${teamShieldFolder}/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_a_nome ? ticketItem.time_a_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
@@ -241,7 +246,7 @@ document.onreadystatechange = async function () {
 
                                     <div>
                                         <div>
-                                            <img src="https://cdn.wee.bet/img/${teamShieldFolder}/m/${ticketItem.time_b_img}.png" onerror="this.src='https://cdn.wee.bet/img/${teamShieldFolder}/m/default.png'">
+                                            <img src="https://wb-assets.com/img/${teamShieldFolder}/m/${ticketItem.time_b_img}.png" onerror="this.src='https://wb-assets.com/img/${teamShieldFolder}/m/default.png'">
                                         </div>
                                         <div>
                                             ${ticketItem.time_b_nome ? ticketItem.time_b_nome.toUpperCase() : ticketItem.odd_nome.toUpperCase()}
