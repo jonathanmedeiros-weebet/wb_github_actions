@@ -10,8 +10,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import { GeolocationService } from 'src/app/shared/services/geolocation.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-acumuladao-form',
@@ -52,8 +50,6 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         private cd: ChangeDetectorRef,
         private renderer: Renderer2,
         private el: ElementRef,
-        private geolocationService: GeolocationService,
-        private translate: TranslateService
     ) {
         super();
     }
@@ -148,16 +144,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
                 apostador: this.form.value.apostador,
                 acumuladao_id: this.acumuladao.id,
                 jogos: [],
-                cidadeIbge: sessionStorage.getItem('codigo_ibge'),
-                cidade: sessionStorage.getItem('cidade'),
-                estado: sessionStorage.getItem('estado')
             };
-
-            if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
-                valid = false;
-                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
-                this.geolocationService.getGeolocation();
-            }
 
             this.acumuladao.jogos.forEach(j => {
                 if ((j.time_a_resultado != null) && (j.time_b_resultado != null)) {

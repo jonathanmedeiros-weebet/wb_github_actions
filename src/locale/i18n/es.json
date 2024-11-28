@@ -250,9 +250,7 @@
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
         "field": "Campo",
-        "or": "O",
-        "geolocationError": "Por favor, verifique la configuración de ubicación de su navegador y intente nuevamente.",
-        "restricaoDeLocalizacao": "Este recurso está disponible solo para usuarios en Brasil."
+        "or": "O"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",

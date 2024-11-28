@@ -18,8 +18,6 @@ import {TipoAposta, Aposta, Sorteio} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import * as range from 'lodash.range';
 import { random } from 'lodash';
-import { GeolocationService } from 'src/app/shared/services/geolocation.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-seninha',
@@ -62,9 +60,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private paramsService: ParametrosLocaisService,
         private menuFooterService: MenuFooterService,
         public layoutService: LayoutService,
-        private cd: ChangeDetectorRef,
-        private geolocationService: GeolocationService,
-        private translate: TranslateService
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -236,17 +232,6 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     /* Finalizar aposta */
     create() {
         this.disabledSubmit();
-
-        if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
-            this.enableSubmit();
-            this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
-            this.geolocationService.getGeolocation();
-            return;
-        }
-
-        this.aposta['cidadeIbge'] = sessionStorage.getItem('codigo_ibge');
-        this.aposta['cidade'] = sessionStorage.getItem('cidade');
-        this.aposta['estado'] = sessionStorage.getItem('estado');
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
