@@ -16,7 +16,6 @@ import {
 } from '../../services';
 import { GeolocationService, Geolocation} from 'src/app/shared/services/geolocation.service';
 import * as clone from 'clone';
-import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
