@@ -34,7 +34,6 @@ export class DocCheckService {
     }
     if (event.data.StatusPostMessage) {
       this.iframeMessageSubject.next(event.data);
-      console.log(event.data.StatusPostMessage);
     }
   }
   
