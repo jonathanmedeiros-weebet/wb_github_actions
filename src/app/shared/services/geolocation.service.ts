@@ -12,9 +12,9 @@ export interface Geolocation {
 export interface ReverseGeolocation {
     error: boolean;
     ibge_code: string;
-    location_city: string;
-    location_state: string;
-    location_country: string;
+    city: string;
+    state: string;
+    country: string;
 }
 
 @Injectable({
@@ -90,9 +90,9 @@ export class GeolocationService {
                 next: (res: ReverseGeolocation) => {
                     this.requestOnGoing = false;
                     sessionStorage.setItem('ibge_code', res.ibge_code ?? null);
-                    sessionStorage.setItem('location_city', res.location_city ?? null);
-                    sessionStorage.setItem('location_state', res.location_state ?? null);
-                    sessionStorage.setItem('location_country', res.location_country == 'Brasil' || res.location_country == 'Brazil' ? 'Brasil' : `Internacional - ${res.location_country}`);
+                    sessionStorage.setItem('location_city', res.city ?? null);
+                    sessionStorage.setItem('location_state', res.state ?? null);
+                    sessionStorage.setItem('location_country', res.country == 'Brasil' || res.country == 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
                     return res;
                 },
                 error: () => {
@@ -100,8 +100,9 @@ export class GeolocationService {
                     return {
                         error: true,
                         ibge_code: '',
-                        location_state: '',
-                        location_country: ''
+                        city: '',
+                        state: '',
+                        country: ''
                     };
                 }
             });
@@ -110,9 +111,9 @@ export class GeolocationService {
             return {
                 error: true,
                 ibge_code: '',
-                location_city: '',
-                location_state: '',
-                location_country: ''
+                city: '',
+                state: '',
+                country: ''
             }
         }
     }
