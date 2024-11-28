@@ -16,6 +16,7 @@ import {
 } from '../../services';
 import { GeolocationService, Geolocation} from 'src/app/shared/services/geolocation.service';
 import * as clone from 'clone';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-desafios-bilhete',
@@ -58,7 +59,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private menuFooterService: MenuFooterService,
         private layoutService: LayoutService,
         private cd: ChangeDetectorRef,
-        private geolocationService : GeolocationService
+        private geolocationService: GeolocationService,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -215,6 +217,11 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
+            if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
+                valido = false;
+                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
+            }
+
             if (valido) {
                 if (this.isLoggedIn) {
                     const values = clone(this.form.value);
@@ -222,9 +229,14 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                         delete item.desafio;
                         delete item.odd;
                     });
+
                     const location = await this.geolocationService.getGeolocation();
                     this.geolocation.next(location);
                     values['geolocation'] = this.geolocation.value
+
+                    values['cidadeIbge'] = sessionStorage.getItem('codigo_ibge');
+                    values['cidade'] = sessionStorage.getItem('cidade');
+                    values['estado'] = sessionStorage.getItem('estado');                 
 
                     this.salvarAposta(values);
                 } else {

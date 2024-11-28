@@ -261,6 +261,8 @@
         "loginUsername": "Nome de usuário",
         "field": "Campo",
         "or": "OU",
+        "geolocationError": "Por favor, verifique a configuração de localização do seu navegador e tente novamente.",
+        "restricaoDeLocalizacao": "Este recurso está disponível apenas para usuários no Brasil.",
         "lastAccesses": "Últimos acessos",
         "action": "Ação",
         "session_alert": "Alerta de Sessão",
