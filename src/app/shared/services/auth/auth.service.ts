@@ -402,9 +402,9 @@ export class AuthService {
         localStorage.removeItem('tipos_aposta');
         localStorage.removeItem('exibirSaldo');
         sessionStorage.removeItem('ibge_code');
-        sessionStorage.removeItem('location_city');
-        sessionStorage.removeItem('location_state');
-        sessionStorage.removeItem('location_country');
+        sessionStorage.removeItem('locale_city');
+        sessionStorage.removeItem('locale_state');
+        sessionStorage.removeItem('locale_country');
     }
 
     isCliente(): boolean {
