@@ -234,9 +234,9 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                     this.geolocation.next(location);
                     values['geolocation'] = this.geolocation.value
 
-                    values['cidadeIbge'] = sessionStorage.getItem('ibge_code');
-                    values['cidade'] = sessionStorage.getItem('cidade');
-                    values['estado'] = sessionStorage.getItem('estado');                 
+                    values['ibge_code'] = sessionStorage.getItem('ibge_code');
+                    values['locale_city'] = sessionStorage.getItem('locale_city');
+                    values['locale_state'] = sessionStorage.getItem('locale_state');                 
 
                     this.salvarAposta(values);
                 } else {

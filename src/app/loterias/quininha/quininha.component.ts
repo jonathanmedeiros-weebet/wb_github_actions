@@ -245,9 +245,9 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
             return;
         }
 
-        this.aposta['cidadeIbge'] = sessionStorage.getItem('ibge_code');
-        this.aposta['cidade'] = sessionStorage.getItem('cidade');
-        this.aposta['estado'] = sessionStorage.getItem('estado');
+        this.aposta['ibge_code'] = sessionStorage.getItem('ibge_code');
+        this.aposta['locale_city'] = sessionStorage.getItem('locale_city');
+        this.aposta['locale_state'] = sessionStorage.getItem('locale_state');
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {

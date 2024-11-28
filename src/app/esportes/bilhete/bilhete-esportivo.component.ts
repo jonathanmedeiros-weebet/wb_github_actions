@@ -400,8 +400,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             }
 
             let ibgeCode = sessionStorage.getItem('ibge_code');
-            let cidade = sessionStorage.getItem('cidade');
-            let estado = sessionStorage.getItem('estado');
+            let localeCity = sessionStorage.getItem('locale_city');
+            let localeState = sessionStorage.getItem('locale_state');
     
             if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
                 valido = false;
@@ -412,9 +412,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             if (valido) {
                 if (this.isLoggedIn) {
                     let values = await this.ajustarDadosParaEnvio();
-                    values['ibgeCode'] = ibgeCode;
-                    values['cidade'] = cidade;
-                    values['estado'] = estado;
+                    values['ibge_code'] = ibgeCode;
+                    values['locale_city'] = localeCity;
+                    values['locale_state'] = localeState;
                     this.salvarAposta(values);
                 } else {
                     this.enableSubmit();
@@ -610,9 +610,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
 
         let values = await this.ajustarDadosParaEnvio();
-        values['ibgeCode'] = sessionStorage.getItem('ibge_code');
-        values['cidade'] = sessionStorage.getItem('cidade');
-        values['estado'] = sessionStorage.getItem('estado');
+        values['ibge_code'] = sessionStorage.getItem('ibge_code');
+        values['locale_city'] = sessionStorage.getItem('locale_city');
+        values['locale_state'] = sessionStorage.getItem('locale_state');
 
         if (this.tipoApostaDeslogado === 'preaposta') {
             this.preApostaService.create(values)

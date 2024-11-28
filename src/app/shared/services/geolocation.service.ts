@@ -12,9 +12,9 @@ export interface Geolocation {
 export interface ReverseGeolocation {
     error: boolean;
     ibge_code: string;
-    cidade: string;
-    estado: string;
-    pais: string;
+    location_city: string;
+    location_state: string;
+    location_country: string;
 }
 
 @Injectable({
@@ -90,9 +90,9 @@ export class GeolocationService {
                 next: (res: ReverseGeolocation) => {
                     this.requestOnGoing = false;
                     sessionStorage.setItem('ibge_code', res.ibge_code ?? null);
-                    sessionStorage.setItem('cidade', res.cidade ?? null);
-                    sessionStorage.setItem('estado', res.estado ?? null);
-                    sessionStorage.setItem('pais', res.pais == 'Brasil' || res.pais == 'Brazil' ? 'Brasil' : `Internacional - ${res.pais}`);
+                    sessionStorage.setItem('location_city', res.location_city ?? null);
+                    sessionStorage.setItem('location_state', res.location_state ?? null);
+                    sessionStorage.setItem('location_country', res.location_country == 'Brasil' || res.location_country == 'Brazil' ? 'Brasil' : `Internacional - ${res.location_country}`);
                     return res;
                 },
                 error: () => {
@@ -100,8 +100,8 @@ export class GeolocationService {
                     return {
                         error: true,
                         ibge_code: '',
-                        cidade: '',
-                        estado: ''
+                        location_state: '',
+                        location_country: ''
                     };
                 }
             });
@@ -110,9 +110,9 @@ export class GeolocationService {
             return {
                 error: true,
                 ibge_code: '',
-                cidade: '',
-                estado: '',
-                pais: ''
+                location_city: '',
+                location_state: '',
+                location_country: ''
             }
         }
     }
@@ -144,15 +144,15 @@ export class GeolocationService {
 
     public checkGeolocation(): Boolean {
         const ibgeCode = (sessionStorage.getItem('ibge_code') === 'null' || sessionStorage.getItem('ibge_code') === 'undefined') ? null : sessionStorage.getItem('ibge_code');
-        const cidade = (sessionStorage.getItem('cidade') === 'null' || sessionStorage.getItem('cidade') === 'undefined') ? null : sessionStorage.getItem('cidade');
-        const estado = (sessionStorage.getItem('estado') === 'null' || sessionStorage.getItem('estado') === 'undefined') ? null : sessionStorage.getItem('estado');
-        const pais = (sessionStorage.getItem('pais') === 'null' || sessionStorage.getItem('pais') === 'undefined') ? null : sessionStorage.getItem('pais');
+        const localeCity = (sessionStorage.getItem('locale_city') === 'null' || sessionStorage.getItem('locale_city') === 'undefined') ? null : sessionStorage.getItem('locale_city');
+        const localeState = (sessionStorage.getItem('locale_state') === 'null' || sessionStorage.getItem('locale_state') === 'undefined') ? null : sessionStorage.getItem('locale_state');
+        const localeCountry = (sessionStorage.getItem('locale_country') === 'null' || sessionStorage.getItem('locale_country') === 'undefined') ? null : sessionStorage.getItem('locale_country');
 
-        if (pais != 'Brasil' && pais != 'Brazil') {
+        if (localeCountry != 'Brasil' && localeCountry != 'Brazil') {
             return false;
         }
 
-        if (!ibgeCode || !cidade || !estado) {
+        if (!ibgeCode || !localeCity || !localeState) {
             return false;
         }
         // Check if the IBGE code is valid. Ref: https://medium.com/@salibi/como-validar-o-c%C3%B3digo-de-munic%C3%ADpio-do-ibge-90dc545cc533;
@@ -166,7 +166,7 @@ export class GeolocationService {
         const digit = (10 - (digito1 + digito2 + digito3 + digito4 + digito5 + digito6) % 10) % 10;
         const estadoValido = this.Estados.find((e) => e.codigo === parseInt(ibgeCode.substring(0, 2)));
 
-        if (digitoVerificador == digit && estadoValido.nome == estado) {
+        if (digitoVerificador == digit && estadoValido.nome == localeState) {
             return true;
         } else {
             return false;
@@ -174,9 +174,9 @@ export class GeolocationService {
     }
 
     public isInternational(): Boolean {
-        const pais = (sessionStorage.getItem('pais') === 'null' || sessionStorage.getItem('pais') === 'undefined') ? null : sessionStorage.getItem('pais');
+        const localeCountry = (sessionStorage.getItem('locale_country') === 'null' || sessionStorage.getItem('locale_country') === 'undefined') ? null : sessionStorage.getItem('locale_country');
 
-        if (pais == null || pais == 'Brasil' || pais == 'Brazil') {
+        if (localeCountry == null || localeCountry == 'Brasil' || localeCountry == 'Brazil') {
             return false;
         } 
         return true;
