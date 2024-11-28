@@ -248,7 +248,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
             return;
         }
 
-        this.aposta['cidadeIbge'] = sessionStorage.getItem('codigo_ibge');
+        this.aposta['cidadeIbge'] = sessionStorage.getItem('ibge_code');
         this.aposta['cidade'] = sessionStorage.getItem('cidade');
         this.aposta['estado'] = sessionStorage.getItem('estado');
 

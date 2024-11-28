@@ -152,7 +152,7 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
                 apostador: this.form.value.apostador,
                 acumuladao_id: this.acumuladao.id,
                 jogos: [],
-                cidadeIbge: sessionStorage.getItem('codigo_ibge'),
+                cidadeIbge: sessionStorage.getItem('ibge_code'),
                 cidade: sessionStorage.getItem('cidade'),
                 estado: sessionStorage.getItem('estado')
             };

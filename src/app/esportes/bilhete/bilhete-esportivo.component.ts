@@ -399,7 +399,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
-            let codigoIbge = sessionStorage.getItem('codigo_ibge');
+            let ibgeCode = sessionStorage.getItem('ibge_code');
             let cidade = sessionStorage.getItem('cidade');
             let estado = sessionStorage.getItem('estado');
     
@@ -412,7 +412,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             if (valido) {
                 if (this.isLoggedIn) {
                     let values = await this.ajustarDadosParaEnvio();
-                    values['codigoIbge'] = codigoIbge;
+                    values['ibgeCode'] = ibgeCode;
                     values['cidade'] = cidade;
                     values['estado'] = estado;
                     this.salvarAposta(values);
@@ -610,7 +610,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         }
 
         let values = await this.ajustarDadosParaEnvio();
-        values['codigoIbge'] = sessionStorage.getItem('codigo_ibge');
+        values['ibgeCode'] = sessionStorage.getItem('ibge_code');
         values['cidade'] = sessionStorage.getItem('cidade');
         values['estado'] = sessionStorage.getItem('estado');
 

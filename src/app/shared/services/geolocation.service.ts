@@ -11,7 +11,7 @@ export interface Geolocation {
 
 export interface ReverseGeolocation {
     error: boolean;
-    codigo_ibge: string;
+    ibge_code: string;
     cidade: string;
     estado: string;
     pais: string;
@@ -89,7 +89,7 @@ export class GeolocationService {
             this.http.post(`${this.central_url}/reverseGeolocation`, latlng, this.header.getRequestOptions(true)).subscribe({
                 next: (res: ReverseGeolocation) => {
                     this.requestOnGoing = false;
-                    sessionStorage.setItem('codigo_ibge', res.codigo_ibge ?? null);
+                    sessionStorage.setItem('ibge_code', res.ibge_code ?? null);
                     sessionStorage.setItem('cidade', res.cidade ?? null);
                     sessionStorage.setItem('estado', res.estado ?? null);
                     sessionStorage.setItem('pais', res.pais == 'Brasil' || res.pais == 'Brazil' ? 'Brasil' : `Internacional - ${res.pais}`);
@@ -99,7 +99,7 @@ export class GeolocationService {
                     this.requestOnGoing = false;
                     return {
                         error: true,
-                        codigo_ibge: '',
+                        ibge_code: '',
                         cidade: '',
                         estado: ''
                     };
@@ -109,7 +109,7 @@ export class GeolocationService {
             this.requestOnGoing = false;
             return {
                 error: true,
-                codigo_ibge: '',
+                ibge_code: '',
                 cidade: '',
                 estado: '',
                 pais: ''
@@ -143,7 +143,7 @@ export class GeolocationService {
     }
 
     public checkGeolocation(): Boolean {
-        const codigoIbge = (sessionStorage.getItem('codigo_ibge') === 'null' || sessionStorage.getItem('codigo_ibge') === 'undefined') ? null : sessionStorage.getItem('codigo_ibge');
+        const ibgeCode = (sessionStorage.getItem('ibge_code') === 'null' || sessionStorage.getItem('ibge_code') === 'undefined') ? null : sessionStorage.getItem('ibge_code');
         const cidade = (sessionStorage.getItem('cidade') === 'null' || sessionStorage.getItem('cidade') === 'undefined') ? null : sessionStorage.getItem('cidade');
         const estado = (sessionStorage.getItem('estado') === 'null' || sessionStorage.getItem('estado') === 'undefined') ? null : sessionStorage.getItem('estado');
         const pais = (sessionStorage.getItem('pais') === 'null' || sessionStorage.getItem('pais') === 'undefined') ? null : sessionStorage.getItem('pais');
@@ -152,19 +152,19 @@ export class GeolocationService {
             return false;
         }
 
-        if (!codigoIbge || !cidade || !estado) {
+        if (!ibgeCode || !cidade || !estado) {
             return false;
         }
         // Check if the IBGE code is valid. Ref: https://medium.com/@salibi/como-validar-o-c%C3%B3digo-de-munic%C3%ADpio-do-ibge-90dc545cc533;
-        const digito1 = parseInt(codigoIbge[0]);
-        const digito2 = (parseInt(codigoIbge[1]) * 2) % 10 + Math.floor((parseInt(codigoIbge[1]) * 2) / 10);
-        const digito3 = parseInt(codigoIbge[2]);
-        const digito4 = (parseInt(codigoIbge[3]) * 2) % 10 + Math.floor((parseInt(codigoIbge[3]) * 2) / 10);
-        const digito5 = parseInt(codigoIbge[4]);
-        const digito6 = (parseInt(codigoIbge[5]) * 2) % 10 + Math.floor((parseInt(codigoIbge[5]) * 2) / 10);
-        const digitoVerificador = parseInt(codigoIbge[6]);
+        const digito1 = parseInt(ibgeCode[0]);
+        const digito2 = (parseInt(ibgeCode[1]) * 2) % 10 + Math.floor((parseInt(ibgeCode[1]) * 2) / 10);
+        const digito3 = parseInt(ibgeCode[2]);
+        const digito4 = (parseInt(ibgeCode[3]) * 2) % 10 + Math.floor((parseInt(ibgeCode[3]) * 2) / 10);
+        const digito5 = parseInt(ibgeCode[4]);
+        const digito6 = (parseInt(ibgeCode[5]) * 2) % 10 + Math.floor((parseInt(ibgeCode[5]) * 2) / 10);
+        const digitoVerificador = parseInt(ibgeCode[6]);
         const digit = (10 - (digito1 + digito2 + digito3 + digito4 + digito5 + digito6) % 10) % 10;
-        const estadoValido = this.Estados.find((e) => e.codigo === parseInt(codigoIbge.substring(0, 2)));
+        const estadoValido = this.Estados.find((e) => e.codigo === parseInt(ibgeCode.substring(0, 2)));
 
         if (digitoVerificador == digit && estadoValido.nome == estado) {
             return true;

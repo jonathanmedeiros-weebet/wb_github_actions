@@ -401,7 +401,7 @@ export class AuthService {
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');
         localStorage.removeItem('exibirSaldo');
-        sessionStorage.removeItem('codigo_ibge');
+        sessionStorage.removeItem('ibge_code');
         sessionStorage.removeItem('cidade');
         sessionStorage.removeItem('estado');
     }
