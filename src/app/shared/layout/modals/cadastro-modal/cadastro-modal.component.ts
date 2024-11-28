@@ -160,6 +160,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
+        this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
 
         if (this.isLoterj) {
             this.aplicarCssTermo = true;
@@ -185,7 +186,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
-        this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
 
         this.route.queryParams
             .subscribe((params) => {
@@ -365,7 +365,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required, Validators.email]],
             afiliado: [null, [Validators.maxLength(50)]],
-            captcha: [null, [Validators.required]],
+            captcha: [null, this.provedorCaptcha ? Validators.required : null],
             check_1: [''],
             check_2: [''],
             googleId: [''],

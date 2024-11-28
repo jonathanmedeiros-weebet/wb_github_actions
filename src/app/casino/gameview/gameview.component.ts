@@ -17,6 +17,7 @@ import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { config } from 'src/app/shared/config';
 
 @Component({
     selector: 'app-gameview',
@@ -27,10 +28,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
     gameUrl: SafeUrl = '';
-    gameId: String = '';
-    gameMode: String = '';
-    gameFornecedor: String = '';
-    gameName: String = '';
+    gameId: string = '';
+    gameMode: string = '';
+    gameFornecedor: string = '';
+    gameName: string = '';
     params: any = [];
     mobileScreen;
     fullscreen;
@@ -68,6 +69,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
     avisoCancelarBonus = false;
     modalRef;
     unsub$ = new Subject();
+    tawakChatClicked: boolean = false;
+    gameProviderName: string = '';
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -103,15 +106,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (window.innerWidth > 482 && window.innerWidth <= 1024) {
             this.isTablet = true;
-        }
-
-        if (!this.isLoggedIn && this.gameMode === 'REAL') {
-            this.sharedMsg = encodeURIComponent("Confira este jogo incrível agora mesmo e teste sua sorte! \nBoa diversão! 🎲");
-
-            this.linkFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.currentUrl)}`;
-            this.linkWhatsapp = `https://api.whatsapp.com/send/?text=${this.sharedMsg}%0A${encodeURIComponent(this.currentUrl)}&type=custom_url&app_absent=0`;
-            this.linkTelegram = `https://telegram.me/share/url?url=${encodeURIComponent(this.currentUrl)}&text=${this.sharedMsg}`;
-        }
+        } 
 
         this.getFornecedores();
         this.isLoggedIn = this.auth.isLoggedIn();
@@ -119,10 +114,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.getPosicaoFinanceira()
         }
         const routeParams = this.route.snapshot.params;
-        this.backgroundImageUrl = `https://cdn.wee.bet/img/casino/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
+        this.backgroundImageUrl = `https://wb-assets.com/img/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
         window.addEventListener('resize', () => this.checkIfMobileOrDesktopOrTablet());
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+
         if (botaoContatoFlutuante) {
             this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
         }
@@ -137,12 +133,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'none');
         }
 
-        // const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
-        // if (TawkChat) {
-        //     this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
-        //         this.renderer.setStyle(iframeChat, 'display', 'none');
-        //     });
-        // } 
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            const tawakIframes = this.document.querySelectorAll('[title="chat widget"]')
+            this.tawakChatClicked = tawakIframes[1].style.display == 'block'
+
+            tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
+        }
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
@@ -215,6 +212,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if ((this.isMobile || this.isTablet) && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
             this.disableHeader();
+        }
+
+        if (!this.isLoggedIn && this.isMobile && this.gameMode === 'REAL') {
+            this.sharedMsg = encodeURIComponent("Confira este jogo incrível agora mesmo e teste sua sorte! \nBoa diversão! 🎲");
+
+            this.linkFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.currentUrl)}`;
+            this.linkWhatsapp = `https://api.whatsapp.com/send/?text=${this.sharedMsg}%0A${encodeURIComponent(this.currentUrl)}&type=custom_url&app_absent=0`;
+            this.linkTelegram = `https://telegram.me/share/url?url=${encodeURIComponent(this.currentUrl)}&text=${this.sharedMsg}`;
         }
     }
 
@@ -365,7 +370,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameCategory = response.category;
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
-                        this.backgroundImageUrl = `https://cdn.wee.bet/img/cassino/${response.fornecedor}/${response.gameId}.png`;
+                        this.gameProviderName = response.gameFornecedorExibicao;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
@@ -466,12 +472,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
 
-        // const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
-        // if (TawkChat) {
-        //     this.document.querySelectorAll('[title="chat widget"]').forEach(iframeChat => {
-        //         this.renderer.setStyle(iframeChat, 'display', 'block');
-        //     });
-        // } 
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
+                if (key != 1 || this.tawakChatClicked) {
+                    this.renderer.setStyle(iframeChat, 'display', 'block');
+                }
+            });
+        }
 
         if (this.isMobile && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
             this.disableHeaderOptions();
@@ -841,8 +849,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private async getRelatedAndPopularGames(category: string) {
         const response = await this.casinoApi.getGamesList(false).toPromise();
 
-        this.gameList = await this.filterDestaques(response.gameList, category);
-
+        this.gameList = await this.filterDestaques(response.populares, category);
     }
 
     private async getFornecedores() {
@@ -889,20 +896,24 @@ export class GameviewComponent implements OnInit, OnDestroy {
         return new Promise((resolve) => {
             let filteredGames = games
                 .filter((game) => {
-                    if (game.modalidade === category && game.gameID !== this.gameId) {
-                        this.popularGamesIds.push(game.gameID);
+                    if (game.category === category && game.gameID !== this.gameId) {
+                        if (!this.popularGamesIds.includes(game.gameID)) {
+                            this.popularGamesIds.push(game.gameID);
+                        }
                         return true;
                     }
                     return false;
                 });
 
             if (filteredGames.length < this.casinoRelatedGamesQuantity) {
+                if (!this.popularGamesIds.includes(this.gameId)) {
+                    this.popularGamesIds.push(this.gameId);
+                }
                 let missingGamesCalc = this.casinoRelatedGamesQuantity - filteredGames.length;
 
                 this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
                     response => {
                         filteredGames = filteredGames.concat(response);
-
                         resolve(filteredGames);
                     }
                 );

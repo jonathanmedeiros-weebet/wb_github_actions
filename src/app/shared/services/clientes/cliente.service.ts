@@ -180,7 +180,11 @@ export class ClienteService {
     }
 
     getConfigs() {
-        return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true)).pipe(map((res: any) => res.results));
+        return this.http.get(`${this.clienteUrl}/configs`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
     }
 
     excluirConta(motivo: string, confirmarExclusao: string, multifator = {}) {
@@ -325,7 +329,7 @@ export class ClienteService {
                         centered: true,
                         windowClass: 'custom-modal-force-password'
                     });
-                    
+
                     this.modalRef.componentInstance.data = {
                         expired: data.expired,
                         daysRemaining: data.daysRemaining,
