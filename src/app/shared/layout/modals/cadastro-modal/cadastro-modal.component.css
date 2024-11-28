@@ -262,3 +262,7 @@ a.link-termos-politica {
     height: 16px;
     margin-right: 10px;
 }
+
+select {
+    padding: 15px 15px 0px 15px;
+}

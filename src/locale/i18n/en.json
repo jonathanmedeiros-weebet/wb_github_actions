@@ -143,6 +143,10 @@
         "bairro": "Neighborhood",
         "estado": "State",
         "cidade": "City",
+        "numero": "Number",
+        "genero": "Gender",
+        "nacionalidade": "Nationality",
+        "documentoIdentificacao": "Identification document (Nacional ID or passport)",
         "selecione": "Select",
         "selecioneACidade": "Select the city",
         "atualizar": "Update",
@@ -734,5 +738,10 @@
         "youreAlmostThere": "You're almost there! Register and deposit now and experience the best of entertainment in the palm of your hand.",
         "continue": "Continue",
         "cancel": "Yes, I want to cancel"
+    },
+    "genero": {
+        "masculino": "Masculine",
+        "feminino": "Feminine",
+        "outros": "Others"
     }
 }
