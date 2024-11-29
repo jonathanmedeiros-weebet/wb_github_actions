@@ -532,7 +532,10 @@
         "valorMaximoSaqueMensal" : "Valor máximo de saque mensal",
         "receberBonusCassino": "Receber Bônus - Cassino",
         "transactions": "Transações",
-        "paymentGateway": "Gateway de pagamento"
+        "paymentGateway": "Gateway de pagamento",
+        "balance": "Saldo",
+        "previousBalance": "Saldo anterior",
+        "subsequentBalance": "Saldo posterior"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
