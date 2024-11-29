@@ -97,7 +97,7 @@ export class AuthService {
                     } else {
                         localStorage.setItem('tokenCassino', res.results.tokenCassino);
                         this.setIsCliente(true);
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('set', 'user_id', res.results.user.id);
                             setTimeout(function() {
                                 xtremepush('event', 'login');
@@ -190,15 +190,15 @@ export class AuthService {
 
         this.deleteCookie(INTERCOM_HMAC_COOKIE);
 
-        if(this.xtremepushHabilitado()) {
+        if (this.xtremepushHabilitado()) {
             this.cleanXtremepushNotifications();
         }
         this.logadoSource.next(false);
         window.location.reload();
     }
 
-    cleanXtremepushNotifications(){
-        xtremepush('set', 'user_id', "");
+    cleanXtremepushNotifications() {
+        xtremepush('set', 'user_id', '');
         const xtremepushNotificationContainer = document.getElementById('xtremepushNotificationContainer');
         xtremepushNotificationContainer.innerHTML = '';
     }

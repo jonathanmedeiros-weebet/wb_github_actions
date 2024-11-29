@@ -132,11 +132,11 @@
                     <div class="time-a">
                         <div *ngIf="!showLoadingIndicator">
                             <span *ngIf="jogo?.time_a_img; else defaulImageA"><img
-                                src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/{{jogo?.time_a_img}}.png" size="m"
+                                src="https://wb-assets.com/img/{{teamShieldsFolder}}/m/{{jogo?.time_a_img}}.png" size="m"
                                 alt="Time A Logo">
                             </span>
                             <ng-template #defaulImageA class="escudo">
-                                <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/default.png" size="m" class="escudo-img"
+                                <img src="https://wb-assets.com/img/{{teamShieldsFolder}}/m/default.png" size="m" class="escudo-img"
                                      alt="escudo padrão">
                             </ng-template>
                         </div>
@@ -150,11 +150,11 @@
                     <div class="time-b">
                         <div *ngIf="!showLoadingIndicator">
                             <span *ngIf="jogo?.time_b_img; else defaulImageB"><img
-                                src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/{{jogo?.time_b_img}}.png" size="m"
+                                src="https://wb-assets.com/img/{{teamShieldsFolder}}/m/{{jogo?.time_b_img}}.png" size="m"
                                 alt="Time B Logo">
                             </span>
                             <ng-template #defaulImageB class="escudo">
-                                <img src="https://cdn.wee.bet/img/{{teamShieldsFolder}}/m/default.png" size="m" class="escudo-img"
+                                <img src="https://wb-assets.com/img/{{teamShieldsFolder}}/m/default.png" size="m" class="escudo-img"
                                      alt="escudo padrão">
                             </ng-template>
                         </div>
@@ -182,7 +182,7 @@
                                      *ngFor="let chave of objectKeys(mercados90); let i = index">
                                     <div *ngIf="verificarColunaMercado(i)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados90[chave])" [ngClass]="{'collapsed' : oddAberto(mercados90[chave])}">
-                                            {{mercados90[chave].nome}}
+                                            {{mercados90[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados90[chave])">
@@ -197,7 +197,7 @@
                                                                  [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
                                                                  (click)="addCotacao(jogo, odd)">
                                                                                 <span class="nome-odd">
-                                                                                    {{odd.label}}
+                                                                                    {{odd['label_' + currentLanguage]}}
                                                                                 </span>
                                                                 <span class="valor">
                                                                                     {{odd.valorFinal}}
@@ -207,7 +207,7 @@
                                                         <ng-template #cotacaoBloqueada>
                                                             <div class="inner-odd odd-disabled">
                                                                                 <span class="nome">
-                                                                                    {{odd.label}}
+                                                                                    {{odd['label_' + currentLanguage]}}
                                                                                 </span>
                                                                 <span class="valor">
                                                                                     <i class="fa fa-lock"></i>
@@ -241,7 +241,7 @@
                                                                  [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
                                                                  (click)="addCotacao(jogo, odd)">
                                                                                 <span class="nome-odd">
-                                                                                    {{odd.label}}
+                                                                                    {{odd['label_' + currentLanguage]}}
                                                                                 </span>
                                                                 <span class="valor">
                                                                                     {{odd.valorFinal}}
@@ -251,7 +251,7 @@
                                                         <ng-template #cotacaoBloqueada>
                                                             <div class="inner-odd odd-disabled">
                                                                                 <span class="nome">
-                                                                                    {{odd.label}}
+                                                                                    {{odd['label_' + currentLanguage]}}
                                                                                 </span>
                                                                 <span class="valor">
                                                                                     <i class="fa fa-lock"></i>
@@ -280,7 +280,7 @@
                                      *ngFor="let chave of objectKeys(mercados1T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados1T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados1T[chave])}">
-                                            {{mercados1T[chave].nome}}
+                                            {{mercados1T[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados1T[chave])">
@@ -294,7 +294,7 @@
                                                                  [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
                                                                  (click)="addCotacao(jogo, odd)">
                                                                                     <span class="nome-odd">
-                                                                                        {{odd.label}}
+                                                                                        {{odd['label_' + currentLanguage]}}
                                                                                     </span>
                                                                 <span class="valor">
                                                                                         {{odd.valorFinal}}
@@ -304,7 +304,7 @@
                                                         <ng-template #cotacaoBloqueada>
                                                             <div class="inner-odd odd-disabled">
                                                                                     <span class="nome-odd">
-                                                                                        {{odd.label}}
+                                                                                        {{odd['label_' + currentLanguage]}}
                                                                                     </span>
                                                                 <span class="valor">
                                                                                         <i class="fa fa-lock"></i>
@@ -323,7 +323,7 @@
                                      *ngFor="let chave of objectKeys(mercados1T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i, true)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados1T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados1T[chave])}">
-                                            {{mercados1T[chave].nome}}
+                                            {{mercados1T[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados1T[chave])">
@@ -337,7 +337,7 @@
                                                                  [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
                                                                  (click)="addCotacao(jogo, odd)">
                                                                                     <span class="nome-odd">
-                                                                                        {{odd.label}}
+                                                                                        {{odd['label_' + currentLanguage]}}
                                                                                     </span>
                                                                 <span class="valor">
                                                                                         {{odd.valorFinal}}
@@ -347,7 +347,7 @@
                                                         <ng-template #cotacaoBloqueada>
                                                             <div class="inner-odd odd-disabled">
                                                                                     <span class="nome-odd">
-                                                                                        {{odd.label}}
+                                                                                        {{odd['label_' + currentLanguage]}}
                                                                                     </span>
                                                                 <span class="valor">
                                                                                         <i class="fa fa-lock"></i>
@@ -376,7 +376,7 @@
                                      *ngFor="let chave of objectKeys(mercados2T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados2T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados2T[chave])}">
-                                            {{mercados2T[chave].nome}}
+                                            {{mercados2T[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados2T[chave])">
@@ -390,7 +390,7 @@
                                                                  [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
                                                                  (click)="addCotacao(jogo, odd)">
                                                                                     <span class="nome-odd">
-                                                                                        {{odd.label}}
+                                                                                        {{odd['label_' + currentLanguage]}}
                                                                                     </span>
                                                                 <span class="valor">
                                                                                         {{odd.valorFinal}}
@@ -400,7 +400,7 @@
                                                         <ng-template #cotacaoBloqueada>
                                                             <div class="inner-odd odd-disabled">
                                                                                     <span class="nome-odd">
-                                                                                        {{odd.label}}
+                                                                                        {{odd['label_' + currentLanguage]}}
                                                                                     </span>
                                                                 <span class="valor">
                                                                                         <i class="fa fa-lock"></i>
@@ -419,7 +419,7 @@
                                      *ngFor="let chave of objectKeys(mercados2T); let i = index">
                                     <div *ngIf="verificarColunaMercado(i, true)">
                                         <div class="header-tipo-aposta" (click)="toggleOdd(mercados2T[chave])" [ngClass]="{'collapsed' : oddAberto(mercados2T[chave])}">
-                                            {{mercados2T[chave].nome}}
+                                            {{mercados2T[chave]['nome_' + currentLanguage]}}
                                             <i class="fa fa-angle-down"></i>
                                         </div>
                                         <div class="odds-tipo-aposta" *ngIf="oddAberto(mercados2T[chave])">
@@ -433,7 +433,7 @@
                                                                  [ngClass]="{'selecionado': itemSelecionado(jogo, odd)}"
                                                                  (click)="addCotacao(jogo, odd)">
                                                                                     <span class="nome-odd">
-                                                                                        {{odd.label}}
+                                                                                        {{odd['label_' + currentLanguage]}}
                                                                                     </span>
                                                                 <span class="valor">
                                                                                         {{odd.valorFinal}}
@@ -443,7 +443,7 @@
                                                         <ng-template #cotacaoBloqueada>
                                                             <div class="inner-odd odd-disabled">
                                                                                     <span class="nome-odd">
-                                                                                        {{odd.label}}
+                                                                                        {{odd['label_' + currentLanguage]}}
                                                                                     </span>
                                                                 <span class="valor">
                                                                                         <i class="fa fa-lock"></i>
