@@ -320,7 +320,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             return;
         }
         if (this.validarBeneficioProgramaSocial && this.beneficiarioProgramaSocial) {
-            this.messageService.error('Beneficiários de programas sociais não podem se cadastrar');
+            this.messageService.error(this.translate.instant('register.registrationBeneficiariesSocialPrograms'));
             return;
         }
 
@@ -420,10 +420,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
                         if (res.validarCpfAtivado) {
+                            const dataTresMesesAntes = new Date();
+                            dataTresMesesAntes.setMonth(dataTresMesesAntes.getMonth() - 3);
                             this.autoPreenchimento = true;
                             this.cpfValidado = true;
                             this.menorDeIdade = res.menorDeIdade;
-                            this.beneficiarioProgramaSocial = res.beneficios.DataRecebimentoMaisRecente == null ? false : true
+                            this.beneficiarioProgramaSocial = res.beneficios.DataRecebimentoMaisRecente >= dataTresMesesAntes.toISOString();
                             this.form.controls['nascimento'].clearValidators();
                             this.form.controls['nascimento'].updateValueAndValidity();
                             this.form.patchValue({
