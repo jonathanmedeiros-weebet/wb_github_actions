@@ -30,7 +30,7 @@ export class UtilsService {
         return this.http.get(`${this.utilsUrl}/getEstados`, this.headers.getRequestOptions())
             .pipe(
                 map((res: any) => res.results),
-                catchError(this.errorService.handleError)
+                catchError(() => [])
             );
     }
 
@@ -38,7 +38,15 @@ export class UtilsService {
         return this.http.get(`${this.utilsUrl}/getCidades/${estado}`, this.headers.getRequestOptions())
             .pipe(
                 map((res: any) => res.results),
-                catchError(this.errorService.handleError)
+                catchError(() => [])
+            );
+    }
+
+    getCountries() {
+        return this.http.get('https://weebet.s3.us-east-1.amazonaws.com/cdn/json/countries.json')
+            .pipe(
+                map((response: any) => response),
+                catchError(() => [])
             );
     }
 

@@ -140,6 +140,10 @@
         "bairro": "Barrio",
         "estado": "Estado",
         "cidade": "Ciudad",
+        "numero": "Número",
+        "genero": "Género",
+        "nacionalidade": "Nacionalidad",
+        "documentoIdentificacao": "Documento de identificación (DNI o pasaporte)",
         "selecione": "Seleccionar",
         "selecioneACidade": "Selecciona la ciudad",
         "atualizar": "Actualizar",
@@ -730,5 +734,10 @@
         "youreAlmostThere": "¡Ya casi ha llegado! Regístrese y deposite ahora y experimente lo mejor del entretenimiento en la palma de su mano.",
         "continue": "Continúe en",
         "cancel": "Sí, quiero cancelar"
+    },
+    "genero": {
+        "masculino": "Masculino",
+        "feminino": "Femenino",
+        "outros": "Otros"
     }
 }

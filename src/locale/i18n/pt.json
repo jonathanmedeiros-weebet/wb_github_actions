@@ -143,6 +143,10 @@
         "bairro": "Bairro",
         "estado": "Estado",
         "cidade": "Cidade",
+        "numero": "Número",
+        "genero": "Gênero",
+        "nacionalidade": "Nacionalidade",
+        "documentoIdentificacao": "Documento de identificação (RG ou Passaporte)",
         "selecione": "Selecione",
         "selecioneACidade": "Selecione a cidade",
         "atualizar": "Atualizar",
@@ -740,5 +744,10 @@
         "youreAlmostThere": "Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.",
         "continue": "Continuar",
         "cancel": "Sim, quero cancelar"
+    },
+    "genero": {
+        "masculino": "Masculino",
+        "feminino": "Feminino",
+        "outros": "Outros"
     }
 }
