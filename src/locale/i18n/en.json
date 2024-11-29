@@ -527,7 +527,10 @@
         "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
         "receberBonusCassino": "Receive Bonus - Casino",
         "transactions": "Transactions",
-        "paymentGateway": "Payment gateway"
+        "paymentGateway": "Payment gateway",
+        "balance": "Balance",
+        "previousBalance": "Previous balance",
+        "subsequentBalance": "Subsequent balance"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
