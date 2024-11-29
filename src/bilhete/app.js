@@ -19,10 +19,9 @@ document.onreadystatechange = async function () {
                 image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_impressao.png`
 
                 image.onerror = (e) => {
-                    console.log(e)
                     image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_banca.png`;
                 };
-                
+
                 const logoDiv = this.getElementById('logo-frame');
                 logoDiv.appendChild(image);
 

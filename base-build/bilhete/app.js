@@ -18,8 +18,7 @@ document.onreadystatechange = async function () {
                 const image = this.createElement('img');
                 image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_impressao.png`
 
-                image.onerror = (e) => {
-                    console.log(e)
+                image.onerror = () => {
                     image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_banca.png`;
                 };
 
