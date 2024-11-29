@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { throwError } from 'rxjs';
 import { SidebarService, CartaoService, MessageService, ErrorService } from 'src/app/services';
 import { ConfirmModalComponent } from 'src/app/shared/layout/modals';
 
