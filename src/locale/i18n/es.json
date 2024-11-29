@@ -266,7 +266,8 @@
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
-        "casinoBetting": "Apuestas de casino"
+        "casinoBetting": "Apuestas de casino",
+        "incomeTaxOnPrize": "Impuesto sobre la renta del premio"
     },
     "dias": {
         "ontem": "Ayer",
