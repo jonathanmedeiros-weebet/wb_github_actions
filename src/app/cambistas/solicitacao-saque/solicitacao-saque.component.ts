@@ -128,9 +128,7 @@ export class SolicitacaoSaqueComponent implements OnInit {
                             this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
                             this.getSolicitacoesSaque();
                         },
-                        (error) => {
-                            this.messageService.error(error);
-                        }
+                        error => this.handleError(error)
                     );
             },
             (reason) => { }
@@ -154,6 +152,6 @@ export class SolicitacaoSaqueComponent implements OnInit {
     }
 
     handleError(error) {
-        console.log(error)
+        this.messageService.error(error);
     }
 }
