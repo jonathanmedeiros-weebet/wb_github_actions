@@ -266,7 +266,8 @@
         "geolocationError": "Please check your browser's location settings and try again.",
         "restricaoDeLocalizacao": "This feature is available only to users in Brazil.",
         "lastAccesses": "Last accesses",
-        "action": "Action"
+        "action": "Action",
+        "tax": "Tax"
     },
     "bet": {
         "sportsBetting": "Sports betting",
