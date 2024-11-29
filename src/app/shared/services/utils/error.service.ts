@@ -24,7 +24,7 @@ export class ErrorService {
             } else if (error.error.errors) {
                 message = error.error.erros.message;
             } else {
-                message = 'Ocorreu um erro inesperado, entre em contato com o suporte.'
+                message = 'Ocorreu um problema inesperado, entre em contato com o suporte.';
             }
         }
 
