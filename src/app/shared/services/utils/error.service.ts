@@ -19,12 +19,15 @@ export class ErrorService {
             // The backend returned an unsuccessful response code.
             // The response body may contain clues as to what went wrong,
             // console.error(`Backend returned code ${error.status}, ` + `body was: ${error.message}`);
-            if (error.error.errors) {
+            if (error?.error as any) {
                 message = error.error.errors.message;
+            } else if (error.error.errors) {
+                message = error.error.erros.message;
             } else {
-                message = 'Ocorreu um problema inesperado, entre em contato com o suporte.';
+                message = 'Ocorreu um erro inesperado, entre em contato com o suporte.'
             }
         }
+
 
         let result;
 
@@ -43,7 +46,7 @@ export class ErrorService {
 
         array['code'] = error.error.errors.code;
         array['message'] = error.error.errors.message;
-        
+
         if (error.error.errors.user){
             array['user'] = error.error.errors.user;
         }else{

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarService, CartaoService, MessageService } from 'src/app/services';
+import { throwError } from 'rxjs';
+import { SidebarService, CartaoService, MessageService, ErrorService } from 'src/app/services';
 import { ConfirmModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
@@ -33,6 +34,7 @@ export class SolicitacaoSaqueComponent implements OnInit {
         private messageService: MessageService,
         public activeModal: NgbActiveModal,
         private modalService: NgbModal,
+        private errorService: ErrorService,
     ) {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
@@ -117,7 +119,7 @@ export class SolicitacaoSaqueComponent implements OnInit {
     setPagamento(solicitacao) {
         this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Pagamento';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja confirma o pagamento?';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja confirmar o pagamento?';
 
         this.modalRef.result.then(
             (result) => {
@@ -127,7 +129,9 @@ export class SolicitacaoSaqueComponent implements OnInit {
                             this.messageService.success('PAGAMENTO REGISTRADO COM SUCESSO!');
                             this.getSolicitacoesSaque();
                         },
-                        error => this.handleError(error)
+                        (error) => {
+                            this.messageService.error(error);
+                        }
                     );
             },
             (reason) => { }
