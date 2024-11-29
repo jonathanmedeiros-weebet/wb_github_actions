@@ -266,11 +266,13 @@
         "jogosRelacionados": "juegos relacionados",
         "session_alert": "Alerta de Sesión",
         "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?",
-        "jogoResponsavel": "Juego responsable"
+        "jogoResponsavel": "Juego responsable",
+        "tax": "Impuesto"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
-        "casinoBetting": "Apuestas de casino"
+        "casinoBetting": "Apuestas de casino",
+        "incomeTaxOnPrize": "Impuesto sobre la renta del premio"
     },
     "dias": {
         "ontem": "Ayer",

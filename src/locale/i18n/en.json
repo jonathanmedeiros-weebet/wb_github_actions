@@ -266,11 +266,13 @@
         "geolocationError": "Please check your browser's location settings and try again.",
         "restricaoDeLocalizacao": "This feature is available only to users in Brazil.",
         "lastAccesses": "Last accesses",
-        "action": "Action"
+        "action": "Action",
+        "tax": "Tax"
     },
     "bet": {
         "sportsBetting": "Sports betting",
-        "casinoBetting": "Casino betting"
+        "casinoBetting": "Casino betting",
+        "incomeTaxOnPrize": "Income tax on prize"
     },
     "dias": {
         "ontem": "Yesterday",
