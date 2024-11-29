@@ -1118,15 +1118,6 @@ gulp.task('megasporte.com', function (done) {
     });
 });
 
-gulp.task('openbets.vip', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "openbets.vip",
-        banca: "OPEN BETS",
-        styles: "",
-    });
-});
-
 gulp.task('imperiopix.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1505,15 +1496,6 @@ gulp.task('085.bet', function (done) {
     });
 });
 
-gulp.task('apostacerta.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "apostacerta.bet",
-        banca: "APOSTA CERTA",
-        styles: "",
-    });
-});
-
 gulp.task('apostenasorte.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -1691,16 +1673,6 @@ gulp.task('federalsports.bet', function (done) {
         host: "federalsports.bet",
         banca: "FEDERAL SPORTS",
         styles: "",
-    });
-});
-
-gulp.task('eskybet.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "eskybet.com",
-        banca: "Casa de Apostas Eskybet | Os Melhores Jogos de Cassino Online com Bônus de Cadastro",
-        styles: "",
-        description: "Cadastre-se e Jogue os Melhores Jogos de Cassino Online, realize sua Aposta Online na Eskybet a Melhor Plataforma com Pagamento via Pix",
     });
 });
 
@@ -1909,16 +1881,6 @@ gulp.task('beton.club', function (done) {
     });
 });
 
-gulp.task('maxbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "maxbet.wee.bet",
-        shared_url: "maxbetbrasil.com",
-        banca: "MAX BET",
-        styles: "",
-    });
-});
-
 gulp.task('bosscassino.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1951,15 +1913,6 @@ gulp.task('sortepix.tv', function (done) {
         server: "front2.wee.bet",
         host: "sortepix.tv",
         banca: "SORTE PIX",
-        styles: "",
-    });
-});
-
-gulp.task('lovebetz.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "lovebetz.com",
-        banca: "LOVE BETZ",
         styles: "",
     });
 });
@@ -2189,15 +2142,6 @@ gulp.task('rio.bet', function (done) {
         server: "front4.wee.bet",
         host: "rio.bet",
         banca: "RIO BET",
-        styles: ""
-    });
-});
-
-gulp.task('riojogos.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "riojogos.bet",
-        banca: "Rio Jogos",
         styles: ""
     });
 });
