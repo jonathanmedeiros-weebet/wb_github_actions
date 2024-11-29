@@ -37,7 +37,6 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
                 this.cambistaPaga = this.aposta.possibilidade_ganho * ((100 - this.aposta.passador.percentualPremio) / 100);
             }
         }
-        console.log(config.LOGO_IMPRESSAO)
     }
 
     ngOnDestroy() {
