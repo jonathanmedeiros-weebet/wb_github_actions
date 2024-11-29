@@ -26,7 +26,6 @@ export class ErrorService {
             }
         }
 
-
         let result;
 
         if (error.error.errors && error.error.errors.code) {

@@ -33,7 +33,6 @@ export class SolicitacaoSaqueComponent implements OnInit {
         private messageService: MessageService,
         public activeModal: NgbActiveModal,
         private modalService: NgbModal,
-        private errorService: ErrorService,
     ) {
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
