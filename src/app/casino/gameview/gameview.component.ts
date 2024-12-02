@@ -689,6 +689,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const footer = this.el.nativeElement.querySelector('.main-footer');
         const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
         const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
+        const backButton = this.el.nativeElement.querySelector('app-back-page');
+
 
         if (footer) {
             this.renderer.setStyle(footer, 'display', 'none');
@@ -700,6 +702,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (blocoRelatedGames) {
             this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
+        }
+        
+        if (backButton) {
+            this.renderer.setStyle(backButton, 'display', 'none');
         }
 
         this.fullscreen = true;
@@ -734,7 +740,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (!this.isTablet) {
                 this.renderer.setStyle(optionsHeader, 'margin', '0 20px');
             }
-            this.renderer.setStyle(gameView, 'padding', '30px');
+            this.renderer.setStyle(gameView, 'padding', '12px 12px 0px 12px');
         }
 
         if (gameFrame.classList.contains('in-game')) {
@@ -744,6 +750,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const footer = this.el.nativeElement.querySelector('.main-footer');
         const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
         const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
+        const backButton = this.el.nativeElement.querySelector('app-back-page');
+
+        if (backButton) {
+            this.renderer.setStyle(backButton, 'display', 'flex');
+        }
 
         if (footer) {
             this.renderer.setStyle(footer, 'display', 'block');
