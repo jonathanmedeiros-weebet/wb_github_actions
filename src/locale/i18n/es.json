@@ -522,7 +522,10 @@
         "valorMaximoSaqueMensal" : "Monto máximo de retiro mensual",
         "receberBonusCassino": "Recibir bono - Casino",
         "transactions": "Transacciones",
-        "paymentGateway": "Pasarela de pago"
+        "paymentGateway": "Pasarela de pago",
+        "balance": "Saldo",
+        "previousBalance": "Saldo anterior",
+        "subsequentBalance": "Saldo posterior"
     },
     "rollover": {
         "nenhumRollover": "Sin rollover.",
