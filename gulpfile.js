@@ -97,14 +97,74 @@ gulp.task('prepare-build', function () {
     });
 });
 
-gulp.task('build-bet4.wee.bet', function (done) {
+gulp.task('bet9.wee.bet', function (done) {
     return prepare({
-        app_id: "bet.wee.bet4",
+        app_id: "bet.wee.bet9",
         url: "https://app.weebet.tech",
-        nome: "APP BET4",
-        slug: "bet4.wee.bet",
-        centralUrl: 'https://central.bet4.wee.bet',
+        nome: "APP BET9",
+        slug: "bet9.wee.bet",
+        centralUrl: 'https://central.bet9.wee.bet',
         splash_color: "#002458",
-        pkg_folder: ('bet.wee.bet4').split('.').join('/')
+        pkg_folder: ('bet.wee.bet9').split('.').join('/')
+    });
+});
+
+gulp.task('ragnar.bet', function (done) {
+    return prepare({
+        app_id: "bet.ragnar",
+        url: "https://app.weebet.tech",
+        nome: "APP ragnar",
+        slug: "ragnar.bet",
+        centralUrl: 'https://central.ragnar.bet',
+        splash_color: "#002458",
+        pkg_folder: ('bet.ragnar').split('.').join('/')
+    });
+});
+
+gulp.task('betboladavez.wee.bet', function (done) {
+    return prepare({
+        app_id: "bet.wee.betboladavez",
+        url: "https://app.weebet.tech",
+        nome: "APP Betboladavez",
+        slug: "betboladavez.wee.bet",
+        centralUrl: 'https://central.betboladavez.online',
+        splash_color: "#002458",
+        pkg_folder: ('bet.wee.betboladavez').split('.').join('/')
+    });
+});
+
+gulp.task('redblue.bet', function (done) {
+    return prepare({
+        app_id: "bet.wee.redblue",
+        url: "https://app.weebet.tech",
+        nome: "Red Blue",
+        slug: "redblue.wee.bet",
+        centralUrl: 'https://central.redblue.bet',
+        splash_color: "#002458",
+        pkg_folder: ('bet.wee.redblue').split('.').join('/')
+    });
+});
+
+gulp.task('majovip.net', function (done) {
+    return prepare({
+        app_id: "net.majovip",
+        url: "https://app.weebet.tech",
+        nome: "Majo Vip",
+        slug: "majovip.net",
+        centralUrl: 'https://central.majovip.net',
+        splash_color: "#002458",
+        pkg_folder: ('net.majovip').split('.').join('/')
+    });
+});
+
+gulp.task('asortebets.com', function (done) {
+    return prepare({
+        app_id: "com.asortebets",
+        url: "https://app.weebet.tech",
+        nome: "A Sorte Bets",
+        slug: "asortebets.com",
+        centralUrl: 'https://central.asortebets.com',
+        splash_color: "#002458",
+        pkg_folder: ('com.asortebets').split('.').join('/')
     });
 });
