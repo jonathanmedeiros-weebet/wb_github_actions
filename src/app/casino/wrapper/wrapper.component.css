@@ -13,10 +13,9 @@
 
 @media only screen and (max-width: 1024px) {
     .casino-content {
-        height: 100vh;
+        height: calc(100vh - 101px);
         padding: 0;
     }
-
     .casino-content.virtual {
         height: calc(100vh - 101px);
         padding: 0;
