@@ -363,11 +363,10 @@ iframe{
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding: 10px;
     }
 
     .game-view-mobile {
-        width: calc(100% - 20px);
+        width: 100%;
         height: 100%;
     }
 
@@ -376,6 +375,7 @@ iframe{
         top: 0;
         left: 0;
         width: 100%;
+        height: 57px;
     }
 
     .game-view-mobile.in-game {
