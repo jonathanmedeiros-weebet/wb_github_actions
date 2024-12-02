@@ -1,6 +1,6 @@
 
-const _host = '//central.demo.wee.bet';
-const _center = 'https://center7.wee.bet';
+const _host = '//central.weebet.eme:8080';
+const _center = 'https://hermes.wee.bet';
 const _live = 'https://streaming.wee.bet';
 const _stats = 'https://stats.wee.bet';
 
@@ -16,7 +16,7 @@ export const config: any = {
     CENTER_API: `${_center}/v1`,
     SPORTS_URL: `${_host}/api/esportes`,
     LOTTERIES_URL: `${_host}/api/loteria`,
-    SLUG: 'demo.wee.bet',
+    SLUG: 'weebet.eme',
     // LOGO: _host.replace('central.', '')+'/assets/images/logo_banca.png',
     LOGO: 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png',
     LOGO_IMPRESSAO: 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_impressao.png',

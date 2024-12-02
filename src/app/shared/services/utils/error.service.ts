@@ -46,11 +46,11 @@ export class ErrorService {
 
         if (error.error.errors.user){
             array['user'] = error.error.errors.user;
-        }else{
+        } else {
             array['user'] = null;
         }
 
-        if(error.error.errors.bloqueio) {
+        if (error.error.errors.bloqueio) {
             array['bloqueio'] = error.error.errors.bloqueio;
         }
 

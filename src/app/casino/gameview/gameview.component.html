@@ -1,3 +1,6 @@
+<app-back-page *ngIf="!isLoggedIn && gameMode == 'REAL'">
+</app-back-page>
+
 <div class="game-view" *ngIf="isMobile">
     <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
         <div class="game-name">

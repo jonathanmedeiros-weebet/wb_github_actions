@@ -757,15 +757,6 @@ gulp.task('betsnordeste.wee.bet', function (done) {
     });
 });
 
-gulp.task('bets084.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "bets084.com",
-        banca: "BETS 084",
-        styles: "",
-    });
-});
-
 gulp.task('betson.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2557,6 +2548,24 @@ gulp.task('playnabet.com', function (done) {
         server: "front2.wee.bet",
         host: "playnabet.com",
         banca: "PLAY NA BET",
+        styles: "",
+    });
+});
+
+gulp.task('poc.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "poc.wee.bet",
+        banca: "POC LOTEP",
+        styles: "",
+    });
+});
+
+gulp.task('bet10.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bet10.bet",
+        banca: "BET10",
         styles: "",
     });
 });

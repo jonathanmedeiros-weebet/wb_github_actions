@@ -275,7 +275,7 @@
                                                 class="inner-odd odd-enabled {{itensSelecionados[jogo._id + '_'+ cotacao.chave] ? 'selecionado' : ''}}"
                                                 (click)="addCotacao(jogo, cotacao); $event.stopPropagation()">
                                             <span class="nome-odd">
-                                                {{cotacao.label}}
+                                                {{cotacao['nome_' + currentLanguage]}}
                                             </span>
                                             <span class="valor">
                                                 {{cotacao.valorFinal}}

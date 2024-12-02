@@ -195,7 +195,16 @@ a.link-termos-politica {
 
 .btn-custom {
     margin-top: 10px;
-    width: 80%;
+    width: 100%;
+}
+
+.btn-legitimuz {
+    margin-bottom: 18px;
+    margin-top: 8px;
+}
+
+.btn-legitimuz i {
+    margin-right: 8px;
 }
 
 .requirements-password {
@@ -252,4 +261,8 @@ a.link-termos-politica {
     width: 31px;
     height: 16px;
     margin-right: 10px;
+}
+
+select {
+    padding: 15px 15px 0px 15px;
 }

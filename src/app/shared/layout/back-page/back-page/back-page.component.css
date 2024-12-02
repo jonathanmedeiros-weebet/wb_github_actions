@@ -1,0 +1,34 @@
+.back-page {
+    display: inline-flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.back-page__button button {
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.back-page__button button img {
+    padding-bottom: 2px;
+}
+
+.back-page__text {
+    width: 100%;
+    height: 100%;
+}
+
+.back-page__text h4 {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.back-page__text {
+    cursor: pointer;
+}

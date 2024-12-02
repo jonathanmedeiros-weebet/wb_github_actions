@@ -1,3 +1,4 @@
+import { LegitimuzFacialService } from './../../shared/services/legitimuz-facial.service';
 import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
@@ -15,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
@@ -24,9 +26,9 @@ import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.servic
 })
 export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
 
     unsub$ = new Subject();
-    unsubLegitimuz$ = new Subject();
     cliente: Cliente;
     modalRef;
 
@@ -55,7 +57,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     isMobile = false;
     permitirQualquerChavePix = false;
     submitting;
-    legitimuzEnabled = false;
+    faceMatchEnabled = false;
+    faceMatchFirstWithdrawValidated = false;
     legitimuzToken = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
@@ -80,6 +83,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private layoutService: LayoutService,
         private renderer: Renderer2,
         private legitimuzService: LegitimuzService,
+        private LegitimuzFacialService : LegitimuzFacialService,
+        private faceMatchService : FaceMatchService,
         private ga4Service: Ga4Service,
     ) {
         super();
@@ -98,15 +103,16 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.currentLanguage = this.translate.currentLang;
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.legitimuzEnabled = Boolean(this.paramsLocais.getOpcoes().legitimuz_enabled && this.legitimuzToken);
-
-        if (this.legitimuzEnabled) {
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw);
+        if (!this.faceMatchEnabled) {
+            this.faceMatchFirstWithdrawValidated = true;
+        } else {
             this.token = this.auth.getToken();
         }
 
         this.translate.onLangChange.subscribe(change => {
             this.currentLanguage = change.lang;
-            if (this.legitimuzEnabled) {
+            if (this.faceMatchEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
         });
@@ -135,12 +141,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             );
 
         this.clienteService.getCliente(user.id)
-            .subscribe(
-                res => {
+            .subscribe({
+                next: (res) => {
                     this.cliente = res;
 
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+                    this.cd.detectChanges();
 
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
@@ -155,14 +162,23 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.rotaCompletarCadastro = '/clientes/perfil';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
+                    if (this.faceMatchEnabled) {
+                        this.faceMatchService.getFaceMatch({ document: this.cliente.cpf }).subscribe({
+                            next: (res) => {
+                                if (res.first_withdraw != null && this.cliente.verifiedIdentity) {
+                                    this.faceMatchFirstWithdrawValidated = true;
+                                }
+                            }, error: (error) => {}
+                        })
+                    }
 
                     this.onChavePixChange();
                     this.showLoading = false;
                 },
-                error => {
+                error: (error) => {
                     this.handleError(error);
                 }
-            );
+            });
 
         if (!this.isMobile) {
             this.layoutService.currentHeaderHeight
@@ -174,7 +190,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.legitimuzEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -182,22 +198,45 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
                         this.legitimuzService.closeModal();
-                        this.messageService.success('Identidade verificada!');
+                        this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
+                        this.faceMatchFirstWithdrawValidated = true;
+                    } else {
+                        this.legitimuzService.closeModal();
+                        this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                        this.faceMatchFirstWithdrawValidated = false;
                     }
                 });
+            this.LegitimuzFacialService.faceIndex
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(faceIndex => {
+                    if (faceIndex) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
+                            next: (res) => {
+                                this.LegitimuzFacialService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchFirstWithdrawValidated = true;
+                            }, error: (error) => {
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchFirstWithdrawValidated = false;
+                            }
+                        })
+                    }
+                })
         }
     }
 
     ngAfterViewInit() {
-        if (this.legitimuzEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
-                .pipe(takeUntil(this.unsubLegitimuz$))
                 .subscribe(() => {
-                    this.legitimuzService.init();
-                    this.legitimuzService.mount();
-
-                    this.unsubLegitimuz$.next();
-                    this.unsubLegitimuz$.complete();
+                        this.legitimuzService.init();
+                        this.legitimuzService.mount();
+                });
+            this.legitimuzLiveness.changes
+                .subscribe(() => {
+                        this.LegitimuzFacialService.init();
+                        this.LegitimuzFacialService.mount();
                 });
         }
     }

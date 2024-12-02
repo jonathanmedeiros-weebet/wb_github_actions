@@ -78,7 +78,6 @@
         "goldeplaca.wee.bet": "gulp goldeplaca.wee.bet",
         "xbetsports.net": "gulp xbetsports.net",
         "betsnordeste.wee.bet": "gulp betsnordeste.wee.bet",
-        "bets084.com": "gulp bets084.com",
         "betson.wee.bet": "gulp betson.wee.bet",
         "esportebet.wee.bet": "gulp esportebet.wee.bet",
         "i2bets.com": "gulp i2bets.com",
@@ -270,7 +269,9 @@
         "apostefacil.bet": "gulp apostefacil.bet",
         "viabet.com.br": "gulp viabet.com.br",
         "majovip.net": "gulp majovip.net",
-        "playnabet.com": "gulp playnabet.com"
+        "playnabet.com": "gulp playnabet.com",
+        "poc.wee.bet": "gulp poc.wee.bet",
+        "bet10.bet": "gulp bet10.bet"
     },
     "private": true,
     "dependencies": {

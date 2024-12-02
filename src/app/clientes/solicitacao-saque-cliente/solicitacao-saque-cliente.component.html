@@ -13,7 +13,7 @@
         </div>
         <div class="content-body">
             <div class="content">
-                <div id="withdrawal" *ngIf="cadastroCompleto && !respostaSolicitacao && (!legitimuzEnabled || verifiedIdentity)">
+                <div id="withdrawal" *ngIf="cadastroCompleto && !respostaSolicitacao && faceMatchFirstWithdrawValidated">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
                         <app-spinner *ngIf="submitting"></app-spinner>
                         <div id="withdrawal-container">
@@ -176,16 +176,28 @@
                 <div class="alert alert-danger" *ngIf="!cadastroCompleto">
                     {{errorMessage}} <a class="btn-link pointer" (click)="completarCadatro()">{{'geral.cliqueAquiParaContinuar' | translate}}.</a>
                 </div>
-                <div #legitimuz id="legitimuz-container" *ngIf="cadastroCompleto && legitimuzEnabled && !verifiedIdentity">
+                <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchFirstWithdrawValidated && !verifiedIdentity">
                     <div id="legitimuz">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                         </div>
                         <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                        <input type="hidden" id="legitimuz-ref-id" [value]="token">
                         <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
-                            {{'saques.identityVerify' | translate}}
                             <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
+                    </div>
+                    <div id="legitimuz-root"></div>
+                </div>
+                <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchFirstWithdrawValidated && verifiedIdentity">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                        <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
                         </button>
                     </div>
                     <div id="legitimuz-root"></div>
