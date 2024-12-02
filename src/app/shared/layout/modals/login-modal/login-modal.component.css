@@ -248,7 +248,7 @@ button {
 
 .btn-custom {
     margin-top: 10px;
-    width: 80%;
+    width: 100%;
 }
 
 .btn-cancel {
@@ -257,6 +257,10 @@ button {
     color: rgba(255, 255, 255, 0.5);
     border: none;
     margin-top: 20px;
+    width: 80%;
+}
+
+.btn-terminate {
     width: 80%;
 }
 
