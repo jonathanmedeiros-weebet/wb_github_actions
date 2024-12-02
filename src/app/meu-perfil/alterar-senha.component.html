@@ -109,18 +109,6 @@
                             label="{{'senhas.confirmarSenha' | translate}}"
                         ></app-error-msg>
                     </div>
-                    <div class="buttons">
-                        <button
-                            class="btn btn-custom2 w-150 mr-4"
-                            type="button"
-                            (click)="resetarForm()"
-                        >
-                            {{'geral.cancelar' | translate}}
-                        </button>
-                        <button class="btn btn-custom w-150" type="submit">
-                            {{'geral.salvar' | translate}}
-                        </button>
-                    </div>
                 </form>
                 <div #legitimuz id="legitimuz-container"
                     *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && !verifiedIdentity">
