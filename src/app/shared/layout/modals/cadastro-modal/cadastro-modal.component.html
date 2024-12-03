@@ -30,11 +30,11 @@
                 </div>
             </div>
             <div class="row" *ngIf="!isLoterj">
-                <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial)">
+                <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial) || (validarBeneficioProgramaSocial && !cpfValidado)">
                     <div class="form-group mb-4">
                         <div class="input-md">
                             <input type="text" id="nome" class="form-control inverted-out"  (beforeinput)="onBeforeInput($event, 'name')" formControlName="nome"
-                                [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento">
+                                [ngClass]="applyCssInputError('nome')" placeholder=" " [readonly]="autoPreenchimento || validarBeneficioProgramaSocial">
                             <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
                         </div>
                         <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
@@ -43,7 +43,7 @@
                 <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">
             </div>
             <div class="row" *ngIf="!isLoterj">
-                <div class="col-md-12" [hidden]="autoPreenchimento">
+                <div class="col-md-12" [hidden]="autoPreenchimento || validarBeneficioProgramaSocial">
                     <div class="form-group mb-4">
                         <div class="input-md">
                             <input type="text" id="dataNascimento" class="form-control inverted-out" mask="d0/M0/0000"

@@ -757,15 +757,6 @@ gulp.task('betsnordeste.wee.bet', function (done) {
     });
 });
 
-gulp.task('bets084.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "bets084.com",
-        banca: "BETS 084",
-        styles: "",
-    });
-});
-
 gulp.task('betson.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -2310,7 +2301,7 @@ gulp.task('betagora.io', function (done) {
         host: "betagora.io",
         banca: "BET AGORA",
         styles: "",
-        scripts: "<script type='text/javascript'>	function initEmbeddedMessaging() {		try {			embeddedservice_bootstrap.settings.language = 'pt_BR'; // For example, enter 'en' or 'en-US'			embeddedservice_bootstrap.init(				'00DKd0000052tg8',				'CA_ChatBotBetAgora',				'https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106',				{					scrt2URL: 'https://lemagroup.my.salesforce-scrt.com'				}			);		} catch (err) {			console.error('Error loading Embedded Messaging: ', err);		}	};</script><script type='text/javascript' src='https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>",
+        scripts: "<script>function initEmbeddedMessaging(){try{embeddedservice_bootstrap.settings.language='pt_BR',embeddedservice_bootstrap.init('00DKd0000052tg8','CA_ChatBotBetAgora','https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106',{scrt2URL:'https://lemagroup.my.salesforce-scrt.com'})}catch(e){console.error('Error loading Embedded Messaging: ',e)}}</script><script onload=initEmbeddedMessaging() src=https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106/assets/js/bootstrap.min.js></script>",
         xtremepush_sdk: "E5ilOYbc5X95iSCWM5gf_0K-_turnLxj"
     });
 });
@@ -2566,6 +2557,15 @@ gulp.task('poc.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "poc.wee.bet",
         banca: "POC LOTEP",
+        styles: "",
+    });
+});
+
+gulp.task('bet10.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bet10.bet",
+        banca: "BET10",
         styles: "",
     });
 });

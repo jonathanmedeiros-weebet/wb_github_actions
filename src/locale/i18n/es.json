@@ -680,7 +680,8 @@
         "protectedByReCaptchaPart2": "Política de privacidad",
         "protectedByReCaptchaPart3": "y las",
         "protectedByReCaptchaPart4": "Condiciones del servicio",
-        "protectedByReCaptchaPart5": "de Google."
+        "protectedByReCaptchaPart5": "de Google.",
+        "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse."
     },
     "registerCancel": {
         "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",

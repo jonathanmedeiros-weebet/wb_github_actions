@@ -42,6 +42,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     provedorCaptcha;
     validacaoEmailObrigatoria;
     autoPreenchimento = true;
+    validarBeneficioProgramaSocial = '';
+    beneficiarioProgramaSocial = null;
     cpfValidado = false;
     menorDeIdade = false;
     possuiCodigoAfiliado = false;
@@ -99,6 +101,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.hCaptchaLanguage = this.translate.currentLang;
 
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
+
+        this.validarBeneficioProgramaSocial = this.paramsService.getOpcoes().social_programs;
 
         this.translate.onLangChange.subscribe(res => {
             this.hCaptchaLanguage = res.lang;
@@ -315,6 +319,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
             return;
         }
+        if (this.validarBeneficioProgramaSocial && this.beneficiarioProgramaSocial) {
+            this.messageService.error(this.translate.instant('register.registrationBeneficiariesSocialPrograms'));
+            return;
+        }
 
         const values = this.form.value;
 
@@ -407,14 +415,17 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     validarCpf() {
         const { cpf } = this.form.value;
 
-        if (this.autoPreenchimento) {
+        if (this.validarBeneficioProgramaSocial || this.autoPreenchimento) {
             if (this.form.get('cpf').valid) {
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
                         if (res.validarCpfAtivado) {
+                            const dataTresMesesAntes = new Date();
+                            dataTresMesesAntes.setMonth(dataTresMesesAntes.getMonth() - 3);
                             this.autoPreenchimento = true;
                             this.cpfValidado = true;
                             this.menorDeIdade = res.menorDeIdade;
+                            this.beneficiarioProgramaSocial = res.beneficios.DataRecebimentoMaisRecente >= dataTresMesesAntes.toISOString();
                             this.form.controls['nascimento'].clearValidators();
                             this.form.controls['nascimento'].updateValueAndValidity();
                             this.form.patchValue({
