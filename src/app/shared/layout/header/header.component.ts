@@ -120,6 +120,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     isCasinoGameFullScreen: boolean;
     cashbackEnabled;
     private currentRoute: string;
+    showIndiqueGanhe: boolean = true;
+    isIndiqueGanheVisible: boolean;
 
     sportsIsActive = false;
     sportsLiveIsActive = false;
@@ -348,6 +350,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         if(!this.indiqueGanheHabilitado){
             this.layoutService.indiqueGanheRemovido(true);
         }
+
+        this.isIndiqueGanheVisible = this.verifyIndiqueGanheVisible();
     }
 
     verificarNotificacoes(){
@@ -625,6 +629,26 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         }
     }
 
+    verifyIndiqueGanheWasClosed() {
+        const indiqueGanheClosed = localStorage.getItem('indiqueGanheClosed');
+        if (!indiqueGanheClosed) {
+            return false;
+        }
+
+        const now = new Date().getTime();
+        const oneDayInMs = 24 * 60 * 60 * 1000; 
+        const timeDifference = now - parseInt(indiqueGanheClosed, 10);
+
+        return timeDifference < oneDayInMs;
+    }
+
+    verifyIndiqueGanheVisible(): boolean {
+        return this.indiqueGanheHabilitado &&
+               (!this.isLoggedIn || this.isCliente) &&
+               !this.activeGameCassinoMobile() &&
+               !this.verifyIndiqueGanheWasClosed();
+    }
+
     removerIndiqueGanheCard() {
         this.removendoIndiqueGanheCard = true;
         let card = this.indiqueGanheCard.nativeElement;
@@ -633,6 +657,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         setTimeout(() => { this.renderer.removeChild(this.host.nativeElement, card); }, 1000);
         setTimeout(() => { this.layoutService.changeIndiqueGanheCardHeight(0); }, 300);
         this.layoutService.indiqueGanheRemovido(true);
+
+        const now = new Date().getTime().toString();
+        localStorage.setItem("indiqueGanheClosed", now);
     }
 
     private onShowHeaderMobile() {
