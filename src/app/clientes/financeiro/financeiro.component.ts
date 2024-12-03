@@ -8,7 +8,7 @@ import {ParametrosLocaisService} from '../../shared/services/parametros-locais.s
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import {curveBumpX} from 'd3-shape';
 import {FinanceiroService} from '../../shared/services/financeiro.service';
-import { SidebarService } from 'src/app/services';
+import {LayoutService, SidebarService } from 'src/app/services';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -27,6 +27,8 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     showLoading = true;
     smallScreen = false;
     page = 1;
+    start;
+    offset = 50;
     movimentacoesContent;
     saldo;
     whatsapp;
@@ -70,6 +72,7 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     ];
 
     view: any[] = [666];
+    loadingScroll = false;
 
     constructor(
         private clienteService: ClienteService,
@@ -81,7 +84,8 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
         private menuFooterService: MenuFooterService,
         private finairoService: FinanceiroService,
         private sidebarService: SidebarService,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        public layoutService: LayoutService
     ) {
         super();
     }
@@ -107,21 +111,26 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     }
 
     getMovimentacoes(queryParams?: any) {
-        this.showLoading = true;
+        if (this.movimentacoesFinanceiras.length === 0) {
+            this.showLoading = true;
+        }
         this.clienteService.getMovimentacaoFinanceira(queryParams)
             .pipe()
             .subscribe(
                 response => {
-                    this.movimentacoesFinanceiras = response.results.movimentacoes;
+                    this.movimentacoesFinanceiras = [...this.movimentacoesFinanceiras, ...response.results.movimentacoes];
                     this.totalMovimentacoes = response.pagination.total;
                     this.dataInicial = response.results.data_inicial;
                     this.dataFinal = response.results.data_final;
+                    this.page++;
                     this.showLoading = false;
+                    this.loadingScroll = false;
                 },
                 error => {
                     this.handleError(error);
                     this.movimentacoesFinanceiras = [];
                     this.showLoading = false;
+                    this.loadingScroll = false;
                 }
             );
     }
@@ -132,12 +141,24 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
         // this.renderer.setStyle(this.movimentacoesContent, 'height', `${altura}px`);
     }
 
+    exibirMais() {
+        if (this.movimentacoesFinanceiras.length < this.totalMovimentacoes && this.loadingScroll === false) {
+            this.loadingScroll = true;
+            const queryParams: any = {
+                'periodo': this.queryParams.periodo,
+                'tipo': this.queryParams.tipo,
+                'page': this.page
+            };
+            this.getMovimentacoes(queryParams);
+            this.start = (this.page * this.offset);
+        }
+    }
+
     createForm() {
         this.form = this.fb.group({
             periodo: ['semana_atual'],
             tipo: [''],
         });
-
         this.submit();
     }
 
@@ -146,6 +167,8 @@ export class FinanceiroComponent extends BaseFormComponent implements OnInit, On
     }
 
     submit() {
+        this.page = 1;
+        this.movimentacoesFinanceiras = [];
         this.queryParams = this.form.value;
         const queryParams: any = {
             'periodo': this.queryParams.periodo,
