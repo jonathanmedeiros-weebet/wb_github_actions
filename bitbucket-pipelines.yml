@@ -5,7 +5,7 @@ pipelines:
     custom-api-deploy: #name of this pipeline
       - variables: #list variable names under here
           - name: APP_ID
-          - name: CLIENT_URL
+          - name: CLIENT_CENTER_URL
           - name: CLIENT_NAME
           - name: APP_SLUG
           - name: APP_SPLASH_COLOR

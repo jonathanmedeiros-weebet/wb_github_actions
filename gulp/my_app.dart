@@ -9,14 +9,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '[NOME_BANCA]',
-      color: const Color(0xFF000000),
+      color: const Color(0xFF[SPLASH_COLOR]),
       home: const HomePage(
         title: '[NOME_BANCA]',
         host: '[HOST]',
         slug: '[SLUG]',
         name: '[NOME_BANCA]',
         centralUrl: '[CENTRAL_URL]',
-        bgColor: 0xFF000000,
+        bgColor: 0xFF[SPLASH_COLOR],
       ),
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
