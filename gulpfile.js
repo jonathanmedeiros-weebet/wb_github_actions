@@ -2326,15 +2326,6 @@ gulp.task('apostoubrasil.vip', function (done) {
     });
 });
 
-gulp.task('clazebet.net', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "clazebet.net",
-        banca: "CLAZEBET",
-        styles: "",
-    });
-});
-
 gulp.task('cruze.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -2342,15 +2333,6 @@ gulp.task('cruze.bet', function (done) {
         banca: "CRUZE.BET",
         styles: "",
         dominioTemp: "cruzebet.wee.bet"
-    });
-});
-
-gulp.task('bocamafra.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bocamafra.bet",
-        banca: "BOCAMAFRA.BET",
-        styles: ""
     });
 });
 
