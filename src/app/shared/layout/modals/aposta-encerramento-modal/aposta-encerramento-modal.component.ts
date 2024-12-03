@@ -54,6 +54,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     refreshIntervalId: any;
     unsub$ = new Subject();
     modalCompartilhamentoRef;
+    valorEncerramento = 0;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -89,6 +90,8 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             }
         }
 
+        this.simulando = true;
+        this.simularEncerramento(this.aposta);
         this.setDelay();
     }
 
@@ -127,10 +130,9 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     }
 
     encerrarAposta(aposta) {
-        this.simulando = true;
         this.itemSelecionado = aposta;
         this.apostaVersion = aposta.version;
-        this.simularEncerramento(aposta);
+        this.novaPossibilidadeGanho = this.valorEncerramento;
     }
 
     jogoComecou(item) {
@@ -149,7 +151,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
             .subscribe(
                 simulacao => {
                     this.simulando = false;
-                    this.novaPossibilidadeGanho = simulacao.nova_possibilidade_ganho;
+                    this.valorEncerramento = simulacao.nova_possibilidade_ganho;
                     this.falhaSimulacao = simulacao.falha_simulacao;
                 },
                 error => {
@@ -361,11 +363,11 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     }
 
     podeEncerrar(aposta) {
-        const strategy = this.paramsLocais.getOpcoes().closure_strategy;     
+        const strategy = this.paramsLocais.getOpcoes().closure_strategy;
 
         if (strategy === 'probability') {
             const itemSemProbabilidade = aposta.itens.find((item: any) => item.probabilidade == null);
-    
+
             if (itemSemProbabilidade || (new Date(aposta.horario) < new Date('2024-05-08 13:00:00'))) {
                 return false;
             }
