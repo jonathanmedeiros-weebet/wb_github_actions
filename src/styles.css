@@ -1037,11 +1037,11 @@ button {
 
 @font-face {
     font-family: 'icomoon';
-    src: url('https://cdn.wee.bet/fonts/icomoon.eot?aeroyc');
-    src: url('https://cdn.wee.bet/fonts/icomoon.eot?aeroyc#iefix') format('embedded-opentype'),
-        url('https://cdn.wee.bet/fonts/icomoon.ttf?aeroyc') format('truetype'),
-        url('https://cdn.wee.bet/fonts/icomoon.woff?aeroyc') format('woff'),
-        url('https://cdn.wee.bet/fonts/icomoon.svg?aeroyc#icomoon') format('svg');
+    src: url('https://wb-assets.com/fonts/icomoon.eot?aeroyc');
+    src: url('https://wb-assets.com/fonts/icomoon.eot?aeroyc#iefix') format('embedded-opentype'),
+        url('https://wb-assets.com/fonts/icomoon.ttf?aeroyc') format('truetype'),
+        url('https://wb-assets.com/fonts/icomoon.woff?aeroyc') format('woff'),
+        url('https://wb-assets.com/fonts/icomoon.svg?aeroyc#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;

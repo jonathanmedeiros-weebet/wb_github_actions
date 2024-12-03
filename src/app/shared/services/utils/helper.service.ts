@@ -30,9 +30,18 @@ export class HelperService {
         this.casaDasApostasId = this.paramsService.getOpcoes().casa_das_apostas_id;
     }
 
-    apostaTipoLabel(chave: string, field = 'nome'): string {
+    apostaTipoLabel(chave: string, field = 'nome', language?: string ): string {
         const tipoAposta = this.tiposAposta[chave];
-        return tipoAposta ? tipoAposta[field] : '';
+
+        if (!tipoAposta) {
+            return '';
+        }
+
+        if (language) {
+            return tipoAposta[`nome_${language}`] ?? tipoAposta[`nome_pt`];
+        }
+
+        return tipoAposta[field];
     }
 
     apostaTipoLabelCustom(value: any, timeA: string, timeB: string, sportId = this.sportIdService.footballId): string {

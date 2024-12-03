@@ -249,7 +249,8 @@
         "loginEmail": "Correo electrónico",
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
-        "field": "Campo"
+        "field": "Campo",
+        "or": "O"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
@@ -670,5 +671,23 @@
         "pending": "Pendiente",
         "redeemed": "Canjeado",
         "redeem": "Canjear"
+    },
+    "register": {
+        "signupWith": "Regístrate en Google",
+        "registerGoogleAccount": "Regístrate con tu cuenta de google",
+        "fillToRegister": "Rellene los campos para completar su registro",
+        "protectedByReCaptchaPart1": "Este sitio está protegido por reCAPTCHA se aplican la",
+        "protectedByReCaptchaPart2": "Política de privacidad",
+        "protectedByReCaptchaPart3": "y las",
+        "protectedByReCaptchaPart4": "Condiciones del servicio",
+        "protectedByReCaptchaPart5": "de Google.",
+        "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse."
+    },
+    "registerCancel": {
+        "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",
+        "dontMissOut": "¡No pierdas esta oportunidad! Regístrese y deposite ahora y duplicaremos su depósito hasta ",
+        "youreAlmostThere": "¡Ya casi ha llegado! Regístrese y deposite ahora y experimente lo mejor del entretenimiento en la palma de su mano.",
+        "continue": "Continúe en",
+        "cancel": "Sí, quiero cancelar"
     }
 }
