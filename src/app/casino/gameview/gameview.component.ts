@@ -283,7 +283,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMobile) {
             this.disableHeaderOptions();
             const gameView = this.el.nativeElement.querySelector('.game-view');
-            this.renderer.setStyle(gameView, 'max-height', '300px');
+            this.renderer.setStyle(gameView, 'max-height', '260px');
         }
 
         this.layoutService.currentHeaderHeight
@@ -1022,14 +1022,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '50px');
                 this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 180px)');
-            }
-        }
-
-        if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
-            const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
-
-            if (headerOptions) {
-                this.renderer.setStyle(headerOptions, 'margin', '0 18px');
             }
         }
     }
