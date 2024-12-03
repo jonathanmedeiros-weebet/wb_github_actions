@@ -89,7 +89,8 @@ async function prepare(config) {
 gulp.task('prepare-build', function () {
     return prepare({
         app_id: process.env.APP_ID,
-        url: process.env.CLIENT_URL,
+        url: "https://app.weebet.tech",
+        centralUrl: process.env.CENTER_URL,
         nome: process.env.CLIENT_NAME,
         slug: process.env.APP_SLUG,
         splash_color: process.env.APP_SPLASH_COLOR,
