@@ -46,7 +46,7 @@
             </ng-container>
             <p>Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
             <p *ngIf="aposta?.data_liquidacao">
-                <b>{{'geral.computadoEm' | translate}}</b>
+                <b>{{'geral.liquidadoEm' | translate}}</b>
                 <span> {{aposta.data_liquidacao | moment: 'DD/MM/YYYY [às] HH:mm'}}</span>
             </p>
         </div>
@@ -90,7 +90,7 @@
                         </td>
                         <td class="item">
                             <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
-                                Encerrado <br />
+                                ENCERRADO <br />
                                 <span [ngClass]="resultadoClass(item)">
                                     <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
                                         ( {{item.resultado}} )
@@ -190,7 +190,7 @@
                                     <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                                 </p>
                                 <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
-                                    Encerrado
+                                    ENCERRADO
                                     <span [ngClass]="resultadoClass(item)">
                                         <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
                                             ( {{item.resultado}} )
@@ -260,7 +260,7 @@
         </p>
     </div>
     <div class="button-container" style="display: flex; flex-direction: row; justify-content: space-around;">
-        <ng-container *ngIf="!isShared; else redoSharedBet">
+        <ng-container *ngIf="!isShared">
             <button *ngIf="podeEncerrar(aposta)" class="secondary-btn btn" (click)="repetirAposta(aposta)"
                 [disabled]="simulando || repeating">
                 {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate }}
@@ -286,7 +286,7 @@
                 <i class="fa fa-spinner fa-spin"></i>
             </button>
         </ng-container>
-        <ng-container #redoSharedBet>
+        <ng-container *ngIf="isShared">
             <button class="btn btn-custom btn-block" (click)="repetirAposta(aposta)" *ngIf="podeReutilizar(aposta); else cantRepeat"
                 [disabled]="simulando || repeating">
                 {{ (repeating ? 'compartilhar_aposta.reutilizandoAposta' : 'compartilhar_aposta.reutilizarAposta') | translate }}

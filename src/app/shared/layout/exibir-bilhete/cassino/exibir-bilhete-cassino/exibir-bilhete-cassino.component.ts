@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ExibirBilheteCassinoComponent implements OnInit {
   @Input() aposta: any;
-  @Input() playButton: boolean = false;
+  @Input() playButton: boolean = true;
   unsub$ = new Subject();
 
   isLoggedIn;

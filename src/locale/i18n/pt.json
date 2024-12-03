@@ -250,6 +250,7 @@
         "nenhumJogoDisponivel": "Nenhum jogo disponível no momento",
         "loginGoogle" : "Realize o login com a conta do google",
         "computadoEm": "Computado em:",
+        "liquidadoEm": "Liquidado em:",
         "alteracoesSucesso": "Alterações realizadas com sucesso!",
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
@@ -749,6 +750,7 @@
         "encerrarAposta": "Encerrar aposta",
         "encerrando": "Encerrando...",
         "apostaNaoPodeSerEncerrada": "A aposta não pode ser encerrada.",
-        "apostaNaoPodeSerReutilizada": "Não é possível reutilizar a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas."
+        "apostaNaoPodeSerReutilizada": "Não é possível reutilizar a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas.",
+        "apostaNaoPodeSerRepetida": "Não é possível repetir a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas."
     }
 }

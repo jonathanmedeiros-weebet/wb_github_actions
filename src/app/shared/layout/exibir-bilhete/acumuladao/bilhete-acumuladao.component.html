@@ -6,7 +6,7 @@
                     <b>{{aposta.acumuladao.nome}}</b>
                 </div>
                 <p style="font-weight: bold;">
-                    Partida {{i+1}}
+                    PARTIDA {{i+1}}
                 </p>
                 <p class="horario">
                     {{item.jogo.horario | moment: 'DD/MM/YYYY HH:mm'}}
@@ -27,10 +27,10 @@
         <div class="acumuladao">
             <ng-container *ngIf="aposta.resultado; else resultadoPendente">
                 <div>
-                    <b>Total Acertos:</b> {{aposta.quantidade_acertos}}
+                    <p>Total Acertos:</p> {{aposta.quantidade_acertos}}
                 </div>
                 <div>
-                    <b> Prêmio Recebido:</b> {{aposta.premio | currency}}
+                    <p> Prêmio Recebido:</p> {{aposta.premio | currency}}
                 </div>
             </ng-container>
             <ng-template #resultadoPendente>

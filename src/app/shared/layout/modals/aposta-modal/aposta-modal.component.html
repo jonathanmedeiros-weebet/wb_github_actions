@@ -28,7 +28,7 @@
         <p style="font-size: 16px">{{aposta.codigo}} <i (click)="copyToClipboard(aposta.codigo)" style="cursor: pointer; margin-left: 0.25rem;" class="far fa-copy"></i></p>
         <p style="font-weight: 400;">Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
         <p *ngIf="aposta?.data_liquidacao">
-            <span>{{'geral.computadoEm' | translate}}</span>
+            <span>{{'geral.liquidadoEm' | translate}}</span>
             <span> {{convertDate(aposta.data_liquidacao)}}</span>
         </p>
     </div>
