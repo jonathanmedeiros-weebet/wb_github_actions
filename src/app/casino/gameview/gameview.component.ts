@@ -200,6 +200,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
                                 this.loadGame();
+
+                                if (this.isMobile && this.gameMode === 'REAL') {
+                                    this.disableHeader();
+                                    this.fixMobileHeader();
+                                }
+
+                                if (this.isTablet && this.gameMode === 'REAL') {
+                                    this.disableHeader();
+                                    this.fixTabletHeader();
+                                }
                             }
                         }
 
@@ -501,10 +511,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 }
             });
         }
-
-        if (this.isMobile && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
+        
+        if (this.headerService.getIsHeaderDisabled) {
             this.disableHeaderOptions();
             this.enableHeader();
+        }
+
+        if (!this.headerService.getIsHeaderDisabled) {
+            this.disableHeaderOptions();
         }
     }
 
@@ -878,6 +892,28 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     }
 
+    private fixMobileHeader() {
+        const gameViewHeader = this.el.nativeElement.querySelector('.header-game-view');
+
+        if (gameViewHeader) {
+            this.renderer.setStyle(gameViewHeader, 'display', 'flex');      
+        }
+    }
+
+    private fixTabletHeader() {
+        const gameViewHeader = this.el.nativeElement.querySelector('.header-game-view');
+        const gameView = this.el.nativeElement.querySelector('.game-view');
+
+        if (gameViewHeader) {
+            this.renderer.setStyle(gameViewHeader, 'display', 'flex');
+        }
+        
+        if (gameView) {
+            this.renderer.setStyle(gameView, 'padding-top', '50px');
+            this.renderer.setStyle(gameView, 'position', 'fixed');
+        }
+    }
+
     private async getRelatedAndPopularGames(category: string, live: boolean = false) {
         const response = await this.casinoApi.getGamesList(live).toPromise();
 
@@ -1009,6 +1045,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private fixTabletAndDesktopScreen() {
         const gameView = this.el.nativeElement.querySelector('.game-view');
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+        const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
 
         if (this.isTablet) {
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
@@ -1026,8 +1063,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
-            const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
-
             if (headerOptions) {
                 this.renderer.setStyle(headerOptions, 'margin', '0 18px');
             }
