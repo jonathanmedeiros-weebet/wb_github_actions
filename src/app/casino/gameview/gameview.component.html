@@ -1,4 +1,4 @@
-<div class="bloco bloco-container-gameview">
+<div class="bloco bloco-container-gameview" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
     <app-back-page *ngIf="!isLoggedIn && gameMode == 'REAL'">
     </app-back-page>
 

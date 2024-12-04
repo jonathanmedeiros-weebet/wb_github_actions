@@ -193,6 +193,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 return;
             }
 
+            this.checkIfMobileOrDesktopOrTablet();
+
             this.auth.logado
                 .subscribe(
                     isLoggedIn => {
@@ -205,7 +207,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                     this.disableHeader();
                                     this.fixMobileHeader();
                                 }
-
+                                
                                 if (this.isTablet && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixTabletHeader();
@@ -233,8 +235,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.showLoadingIndicator = false;
                 });
         });
-
-        this.checkIfMobileOrDesktopOrTablet();
 
         if (this.gameFornecedor === 'galaxsys') {
             this.appendScriptGalaxsys();
@@ -307,6 +307,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (this.isTablet || this.isDesktop) {
             this.fixTabletAndDesktopScreen();
         }
+
+        this.fixInGameSpacings();
     }
 
     public copyLink() {
@@ -909,6 +911,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (gameView) {
             this.renderer.setStyle(gameView, 'padding-top', '50px');
             this.renderer.setStyle(gameView, 'position', 'fixed');
+        }
+    }
+
+    private fixInGameSpacings() {
+        const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
+
+        if (blocoContainer && blocoContainer.classList.contains('in-game')) {
+            this.renderer.setStyle(blocoContainer, 'padding', '0');
         }
     }
 
