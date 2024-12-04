@@ -169,3 +169,15 @@ gulp.task('asortebets.com', function (done) {
         pkg_folder: ('com.asortebets').split('.').join('/')
     });
 });
+
+gulp.task('arena-esportiva.com', function (done) {
+    return prepare({
+        app_id: "com.arenaesportiva",
+        url: "https://app.weebet.tech",
+        nome: "Arena Esportiva",
+        slug: "arena-esportiva.com",
+        centralUrl: 'https://central.arena-esportiva.com',
+        splash_color: "#002458",
+        pkg_folder: ('com.arenaesportiva').split('.').join('/')
+    });
+});
