@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      hideCopyrightWhenKeyboardWasDisplayed: false
+      hideCopyrightWhenKeyboardWasDisplayed: true
     }
   },
   mounted() {
@@ -44,7 +44,8 @@ export default {
       ].includes(this.$route.name)
     },
     showCopyright() {
-      return ['login'].includes(this.$route.name) && !this.hideCopyrightWhenKeyboardWasDisplayed
+      return false;
+      // return ['login'].includes(this.$route.name) && !this.hideCopyrightWhenKeyboardWasDisplayed
     }
   }
 }
