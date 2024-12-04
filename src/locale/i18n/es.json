@@ -444,7 +444,9 @@
         "depositDetails": "Detalles del depósito",
         "depositText": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación, seleccione si desea recibir el {{bonusType}}, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
         "depositTextWithoutBonus": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
-        "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago."
+        "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
+        "copyCode": "Copiar código",
+        "copied": "Copiado!"
     },
     "footer": {
         "afiliados": "Asociaciones",

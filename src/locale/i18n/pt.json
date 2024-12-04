@@ -454,7 +454,9 @@
         "depositDetails": "Detalhes do depósito",
         "depositText": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, selecione se deseja receber o {{bonusType}}, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
         "depositTextWithoutBonus": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
-        "depositTextWithoutBonusAndPromocode": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento."
+        "depositTextWithoutBonusAndPromocode": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
+        "copyCode": "Copiar código",
+        "copied": "Copiado!"
     },
     "footer": {
         "afiliados": "Afiliados",

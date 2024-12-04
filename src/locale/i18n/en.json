@@ -449,7 +449,9 @@
         "depositDetails": "Deposit details",
         "depositText": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, select whether you want to receive the {{bonusType}}, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "depositTextWithoutBonus": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
-        "depositTextWithoutBonusAndPromocode": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment."
+        "depositTextWithoutBonusAndPromocode": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
+        "copyCode": "Copy code",
+        "copied": "Copied!"
     },
     "footer": {
         "afiliados": "Partnership",
