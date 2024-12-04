@@ -917,9 +917,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private fixInGameSpacings() {
         const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
 
-        console.log('blocoContainer: ', blocoContainer);
-        console.log(blocoContainer.classList.contains('in-game'));
-
         if (blocoContainer && blocoContainer.classList.contains('in-game')) {
             this.renderer.setStyle(blocoContainer, 'padding', '0');
         }
