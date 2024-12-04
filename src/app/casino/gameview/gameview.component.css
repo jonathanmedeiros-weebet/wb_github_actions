@@ -316,8 +316,8 @@ iframe{
     }
 
     .game-view-mobile.in-game {
-       position: fixed;
-       top: 57px;
+        top: 57px;
+        position: fixed;
     }
 
     .game-frame {
@@ -337,6 +337,10 @@ iframe{
 
     .bloco-relatedGames {
         margin-top: 40px;
+    }
+
+    app-back-page {
+        padding: 0 16px !important;
     }
 }
 
