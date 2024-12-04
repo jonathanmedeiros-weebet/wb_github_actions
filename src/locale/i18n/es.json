@@ -140,6 +140,10 @@
         "bairro": "Barrio",
         "estado": "Estado",
         "cidade": "Ciudad",
+        "numero": "Número",
+        "genero": "Género",
+        "nacionalidade": "Nacionalidad",
+        "documentoIdentificacao": "Documento de identificación (DNI o pasaporte)",
         "selecione": "Seleccionar",
         "selecioneACidade": "Selecciona la ciudad",
         "atualizar": "Actualizar",
@@ -254,15 +258,21 @@
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
         "field": "Campo",
+        "or": "O",
+        "geolocationError": "Por favor, verifique la configuración de ubicación de su navegador y intente nuevamente.",
+        "restricaoDeLocalizacao": "Este recurso está disponible solo para usuarios en Brasil.",
+        "lastAccesses": "Últimos accesos",
+        "action": "Acción",
         "jogosRelacionados": "juegos relacionados",
         "session_alert": "Alerta de Sesión",
         "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?",
         "jogoResponsavel": "Juego responsable",
-        "or": "O"
+        "tax": "Impuesto"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
-        "casinoBetting": "Apuestas de casino"
+        "casinoBetting": "Apuestas de casino",
+        "incomeTaxOnPrize": "Impuesto sobre la renta del premio"
     },
     "dias": {
         "ontem": "Ayer",
@@ -434,7 +444,9 @@
         "depositDetails": "Detalles del depósito",
         "depositText": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación, seleccione si desea recibir el {{bonusType}}, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
         "depositTextWithoutBonus": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
-        "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago."
+        "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
+        "copyCode": "Copiar código",
+        "copied": "Copiado!"
     },
     "footer": {
         "afiliados": "Asociaciones",
@@ -512,7 +524,10 @@
         "valorMaximoSaqueMensal" : "Monto máximo de retiro mensual",
         "receberBonusCassino": "Recibir bono - Casino",
         "transactions": "Transacciones",
-        "paymentGateway": "Pasarela de pago"
+        "paymentGateway": "Pasarela de pago",
+        "balance": "Saldo",
+        "previousBalance": "Saldo anterior",
+        "subsequentBalance": "Saldo posterior"
     },
     "rollover": {
         "nenhumRollover": "Sin rollover.",
@@ -705,6 +720,10 @@
         "redeemed": "Canjeado",
         "redeem": "Canjear"
     },
+    "face_match": {
+        "verified_identity": "Identidad verificada!",
+        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
+    },
     "register": {
         "signupWith": "Regístrate en Google",
         "registerGoogleAccount": "Regístrate con tu cuenta de google",
@@ -722,8 +741,9 @@
         "continue": "Continúe en",
         "cancel": "Sí, quiero cancelar"
     },
-    "face_match": {
-        "verified_identity": "Identidad verificada!",
-        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
+    "genero": {
+        "masculino": "Masculino",
+        "feminino": "Femenino",
+        "outros": "Otros"
     }
 }

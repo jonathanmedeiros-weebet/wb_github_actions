@@ -43,9 +43,9 @@
                            [style.paddingLeft]="loginMode == 'phone' ? '44px' : null"
 
                     />
-                    <label for="username" *ngIf="loginMode == 'email'">{{'geral.loginEmail' | translate}}</label>         
-                    <label for="username" *ngIf="loginMode == 'phone'">{{'geral.loginPhone' | translate}}</label>         
-                    <label for="username" *ngIf="loginMode == 'agent'">{{'geral.loginUsername' | translate}}</label>              
+                    <label for="username" *ngIf="loginMode == 'email'">{{'geral.loginEmail' | translate}}</label>
+                    <label for="username" *ngIf="loginMode == 'phone'">{{'geral.loginPhone' | translate}}</label>
+                    <label for="username" *ngIf="loginMode == 'agent'">{{'geral.loginUsername' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('username')" label="{{ 'geral.field' | translate }}" class="text-left"></app-error-msg>
             </div>
@@ -59,7 +59,7 @@
                 </div>
                 <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
             </div>
-            
+
             <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
         </form>
 
@@ -79,7 +79,7 @@
         <div class="modal-content">
             <div class="modal-header-he">
                 <h3 class="modal-title">{{'geral.session_alert' | translate}}</h3>
-                <a class="close-modal" aria-label="Close" (click)="close()">
+                <a class="close-modal" aria-label="Close" (click)="cancelTerminateSession()">
                     <i class="fa fa-times"></i>
                 </a>
             </div>

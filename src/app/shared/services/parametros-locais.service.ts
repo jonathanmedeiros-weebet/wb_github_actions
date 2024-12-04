@@ -266,6 +266,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.cashback_enabled : null;
     }
 
+    barraIndiqueGanhe() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.barra_indique_ganhe : null;
+    }
+
     getCustomCasinoName(wordToReplace: string = '', casinoDefault: string = this.translate.instant('geral.cassino')) {
         const currentLang = this.translate.currentLang;
 
@@ -277,6 +281,10 @@ export class ParametrosLocaisService {
             : customCasinoName;
     }
 
+    getSIGAPHabilitado() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.SIGAP_habilitado : null;
+    }
+    
     getAllowOnlyOneSessionPerLogin() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.allow_single_session : null;
     }

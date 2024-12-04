@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
@@ -9,7 +10,7 @@ import { ParametrosLocaisService } from './../parametros-locais.service';
 import { config } from './../../config';
 
 import * as moment from 'moment';
-import { Router } from '@angular/router';
+import { GeolocationService } from '../geolocation.service';
 import { Ga4Service, EventGa4Types } from '../ga4/ga4.service';
 
 declare var xtremepush: any;
@@ -33,6 +34,7 @@ export class AuthService {
         private errorService: ErrorService,
         private paramsService: ParametrosLocaisService,
         private router: Router,
+        private geolocation: GeolocationService,
         private ga4Service: Ga4Service,
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -95,6 +97,7 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/two-factor-auth-login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
+                    this.geolocation.getGeolocation();
                     this.setCookie(res.results.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
@@ -132,7 +135,7 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-
+                    this.geolocation.getGeolocation();
                     this.setCookie(res.results.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
@@ -379,6 +382,17 @@ export class AuthService {
             );
     }
 
+    getLastAccesses(filters: { userId: number; dateFrom: string; dateTo: string; type: string }): Observable<any> {
+        const url = `${this.authLokiUrl}/last-accesses`;
+
+        return this.http
+            .post<any>(url, filters, this.header.getRequestOptions(true))
+            .pipe(
+                map(response => response),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     limparStorage() {
         localStorage.removeItem('token');
         localStorage.removeItem('tokenCassino');
@@ -387,6 +401,10 @@ export class AuthService {
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');
         localStorage.removeItem('exibirSaldo');
+        sessionStorage.removeItem('ibge_code');
+        sessionStorage.removeItem('locale_city');
+        sessionStorage.removeItem('locale_state');
+        sessionStorage.removeItem('locale_country');
     }
 
     isCliente(): boolean {
@@ -444,7 +462,7 @@ export class AuthService {
         }
         return '';
     }
-    
+
     getUserResetPassword(data: any): Observable<any> {
         const url = `${this.AuthUrl}/getUserResetPassword`;
         return this.http

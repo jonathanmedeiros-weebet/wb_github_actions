@@ -180,7 +180,7 @@ iframe{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
+    width: 90%;
 }
 
 .social-buttons{
@@ -252,7 +252,7 @@ iframe{
     }
 }
 
-@media only screen and (min-width:482px) and (max-width: 1024px) {
+@media only screen and (min-width: 482px) and (max-width: 1024px) {
     .provider-list {
         flex-wrap: nowrap;
         overflow: scroll;
@@ -291,7 +291,6 @@ iframe{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 10px;
         background-color: #000;
         color: #fff;
         margin: 0;
@@ -364,7 +363,6 @@ iframe{
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding: 10px;
     }
 
     .game-view-mobile {
@@ -375,7 +373,9 @@ iframe{
     .header-game-view.in-game {
         position: fixed;
         top: 0;
+        left: 0;
         width: 100%;
+        height: 57px;
     }
 
     .game-view-mobile.in-game {
@@ -446,7 +446,7 @@ iframe{
     }
 
     .card-small {
-        width: 350px;
+        width: 100%;
         height: auto;
         margin: 24px auto;
         position: relative;
@@ -457,7 +457,7 @@ iframe{
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px 30px;
+        padding: 20px 15px;
     }
 
     .card-content {
@@ -486,7 +486,7 @@ iframe{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-bottom: 40px;
+        margin-bottom: 10px;
     }
 
     .game-title {
@@ -532,7 +532,7 @@ iframe{
         padding: 10px;
         border-radius: 5px;
         cursor: pointer;
-        width: 137px;
+        width: 170px;
         height: 40px;
     }
 
@@ -559,6 +559,19 @@ iframe{
         padding: 0px 30px 24px 30px;
     }
 
+    .bloco-relatedGames{
+        padding: 0 0 22px 16px;
+        padding-top: 12px;
+    }
+
+    .bloco-container-gameview{
+        padding: 0 12px;
+    }
+
+    .bloco-providers{
+        padding: 0 0 22px 16px;
+    }
+
     #deposit-btn{
         display: flex;
         max-height: 23px;
@@ -583,6 +596,14 @@ iframe{
     .btn-custom2 {
         margin-top: 1rem;
     }
+
+    app-back-page {
+        display: flex;
+        height: auto;
+        margin: 16px auto -16px auto;
+        position: relative;
+        align-items: center;
+    }
 }
 
 @media (min-width: 483px){
@@ -592,7 +613,7 @@ iframe{
         flex-wrap: wrap;
         width: 100%;
         height: auto;
-        padding: 12px 12px 0 12px;
+        padding: 12px 0 0 0;
     }
 
     .card-centered {
@@ -605,6 +626,9 @@ iframe{
         margin: 0 auto;
     }
 
+    .social-buttons-container {
+        width: 80%;
+    }
 
     .inline-button {
         display: flex;
@@ -620,7 +644,7 @@ iframe{
 
     .game-frame {
         width: 100%;
-        margin: 0 20px;
+        margin: 0;
         margin-bottom: 30px;
         height: 780px;
     }
@@ -861,9 +885,13 @@ iframe{
 
     .bloco {
         position: relative;
-        padding: 0 30px 24px 30px;
+        padding: 0 0 24px 14px;
         margin: 0 auto;
         width: 100%;
+    }
+
+    .bloco-container-gameview {
+        padding: 0 14px 24px 14px;
     }
 
     .bloco .titulo {
@@ -882,7 +910,7 @@ iframe{
     }
 
     .header-game-view.is-tablet {
-        margin: 0;
+        margin: 0 !important;
     }
 
     .game-frame.is-tablet {
@@ -894,6 +922,12 @@ iframe{
         padding: 0;
     }
 
+    app-back-page {
+        padding: 0 32px 0 0;
+        display: flex;
+        margin-top: 16px;
+        align-items: center;
+    }
     #expanded-btn-game-opened-desktop, #expanded-btn-game-closed-desktop, 
     #expanded-btn-game-opened-tablet, #expanded-btn-game-closed-tablet
     {
@@ -906,6 +940,32 @@ iframe{
         display: flex;
     }
 
+}
+
+@media (min-width: 1024px) {
+    .bloco-relatedGames, .bloco-providers{
+        padding: 0 0 24px 30px;
+    }
+}
+
+@media only screen and (min-width: 350px) {
+    .social-buttons-container {
+        width: 70%;
+    }
+
+    .bloco-relatedGames{
+        padding-top: 12px;
+    }
+
+    .card-info{
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .social-buttons-container {
+        width: 60%;
+    }
 }
 
 .modal-header{
@@ -921,3 +981,5 @@ iframe{
     align-items: center;
     padding: 0 50px 50px 50px;
 }
+
+

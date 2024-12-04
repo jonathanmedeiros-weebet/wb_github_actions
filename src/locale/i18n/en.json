@@ -143,6 +143,10 @@
         "bairro": "Neighborhood",
         "estado": "State",
         "cidade": "City",
+        "numero": "Number",
+        "genero": "Gender",
+        "nacionalidade": "Nationality",
+        "documentoIdentificacao": "Identification document (Nacional ID or passport)",
         "selecione": "Select",
         "selecioneACidade": "Select the city",
         "atualizar": "Update",
@@ -258,11 +262,17 @@
         "loginPhone": "Phone",
         "loginUsername": "Username",
         "field": "Field",
-        "or": "OR"
+        "or": "OR",
+        "geolocationError": "Please check your browser's location settings and try again.",
+        "restricaoDeLocalizacao": "This feature is available only to users in Brazil.",
+        "lastAccesses": "Last accesses",
+        "action": "Action",
+        "tax": "Tax"
     },
     "bet": {
         "sportsBetting": "Sports betting",
-        "casinoBetting": "Casino betting"
+        "casinoBetting": "Casino betting",
+        "incomeTaxOnPrize": "Income tax on prize"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -439,7 +449,9 @@
         "depositDetails": "Deposit details",
         "depositText": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, select whether you want to receive the {{bonusType}}, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "depositTextWithoutBonus": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
-        "depositTextWithoutBonusAndPromocode": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment."
+        "depositTextWithoutBonusAndPromocode": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
+        "copyCode": "Copy code",
+        "copied": "Copied!"
     },
     "footer": {
         "afiliados": "Partnership",
@@ -517,7 +529,10 @@
         "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
         "receberBonusCassino": "Receive Bonus - Casino",
         "transactions": "Transactions",
-        "paymentGateway": "Payment gateway"
+        "paymentGateway": "Payment gateway",
+        "balance": "Balance",
+        "previousBalance": "Previous balance",
+        "subsequentBalance": "Subsequent balance"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
@@ -710,6 +725,10 @@
         "redeemed": "Redeemed",
         "redeem": "Redeem"
     },
+    "face_match": {
+        "verified_identity": "Verified identity!",
+        "Identity_not_verified": "Identity not verified, please contact support."
+    },
     "register": {
         "signupWith": "Sign up with Google",
         "registerGoogleAccount": "Sign up with your google account",
@@ -727,8 +746,9 @@
         "continue": "Continue",
         "cancel": "Yes, I want to cancel"
     },
-    "face_match": {
-        "verified_identity": "Verified identity!",
-        "Identity_not_verified": "Identity not verified, please contact support."
+    "genero": {
+        "masculino": "Masculine",
+        "feminino": "Feminine",
+        "outros": "Others"
     }
 }

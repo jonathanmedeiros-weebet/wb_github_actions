@@ -17,6 +17,7 @@ import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
 
 @Component({
@@ -90,6 +91,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private financeiroService: FinanceiroService,
         private headerService: HeadersService,
+        private translate: TranslateService,
         @Inject(DOCUMENT) private document: any
     ) {
         this.currentUrl = window.location.href;
@@ -97,6 +99,24 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     get customCasinoName(): string {
         return this.paramsService.getCustomCasinoName();
+    }
+
+    get blink(): string {
+        const urlTree = this.router.parseUrl(this.router.url);
+        const pathSegments = urlTree.root.children['primary'].segments;
+        return Boolean(pathSegments.length) ? pathSegments[0].path : 'casino';
+    }
+
+    get isVirtualPage(): boolean {
+        return this.blink === 'virtual-sports';
+    }
+
+    get isCassinoAoVivoPage(): boolean {
+        return this.blink === 'live-casino'
+    }
+
+    get isCassinoPage(): boolean {
+        return this.blink === 'casino'
     }
 
     ngOnInit(): void {
@@ -108,7 +128,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.isTablet = true;
         } 
 
-        this.getFornecedores();
+        this.getGameList();
         this.isLoggedIn = this.auth.isLoggedIn();
         if (this.isLoggedIn) {
             this.getPosicaoFinanceira()
@@ -263,7 +283,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMobile) {
             this.disableHeaderOptions();
             const gameView = this.el.nativeElement.querySelector('.game-view');
-            this.renderer.setStyle(gameView, 'max-height', '300px');
+            this.renderer.setStyle(gameView, 'max-height', '260px');
         }
 
         this.layoutService.currentHeaderHeight
@@ -362,7 +382,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
                 response => {
-                    if (response['error']) {
+                    if (response['error'] == 1) {
+                        this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
 
@@ -382,10 +403,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         }
                     }
 
-                    this.getRelatedAndPopularGames(response.category);
+                    this.getRelatedAndPopularGames(response.category, this.isCassinoAoVivoPage ? true : false);
                 },
                 error => {
-                    this.handleError(error);
+                    this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                     this.router.navigate(['/']);
                 });
     }
@@ -668,6 +689,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const footer = this.el.nativeElement.querySelector('.main-footer');
         const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
         const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
+        const backButton = this.el.nativeElement.querySelector('app-back-page');
+
 
         if (footer) {
             this.renderer.setStyle(footer, 'display', 'none');
@@ -679,6 +702,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (blocoRelatedGames) {
             this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
+        }
+        
+        if (backButton) {
+            this.renderer.setStyle(backButton, 'display', 'none');
         }
 
         this.fullscreen = true;
@@ -713,7 +740,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (!this.isTablet) {
                 this.renderer.setStyle(optionsHeader, 'margin', '0 20px');
             }
-            this.renderer.setStyle(gameView, 'padding', '30px');
+            this.renderer.setStyle(gameView, 'padding', '12px 12px 0px 12px');
         }
 
         if (gameFrame.classList.contains('in-game')) {
@@ -723,6 +750,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const footer = this.el.nativeElement.querySelector('.main-footer');
         const blocoProvider = this.el.nativeElement.querySelector('.bloco-providers');
         const blocoRelatedGames = this.el.nativeElement.querySelector('.bloco-relatedGames');
+        const backButton = this.el.nativeElement.querySelector('app-back-page');
+
+        if (backButton) {
+            this.renderer.setStyle(backButton, 'display', 'flex');
+        }
 
         if (footer) {
             this.renderer.setStyle(footer, 'display', 'block');
@@ -846,13 +878,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     }
 
-    private async getRelatedAndPopularGames(category: string) {
-        const response = await this.casinoApi.getGamesList(false).toPromise();
+    private async getRelatedAndPopularGames(category: string, live: boolean = false) {
+        const response = await this.casinoApi.getGamesList(live).toPromise();
 
         this.gameList = await this.filterDestaques(response.populares, category);
     }
 
-    private async getFornecedores() {
+    private async getProviders() {
         const {
             fornecedores,
         } = await this.casinoApi.getGamesList(false).toPromise();
@@ -863,10 +895,31 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }));
     }
 
+    private async getLiveProviders() {
+        const {
+            fornecedores,
+        } = await this.casinoApi.getGamesList(true).toPromise();
+
+        this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
+            ...fornecedor,
+            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+        }));
+    }
+
     public redirectToFilteredProviders(provider) {
         const providerName = provider.gameFornecedor;
 
-        this.router.navigate(['/casino', providerName]);
+        if (this.router.url.startsWith('/live-casino/')) {
+            this.router.navigate(['live-casino'], { queryParams: { category: 'todos', provider: providerName } }).then(() => {
+                this.location.replaceState('live-casino');
+            });
+        }
+
+        if (this.router.url.startsWith('/casino/')) {
+            this.router.navigate(['casino'], { queryParams: { category: 'todos', provider: providerName } }).then(() => {
+                this.location.replaceState('casino');
+            });
+        }
     }
 
     public showMoreGames() {
@@ -877,19 +930,20 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.qtdProviders += 3;
     }
 
-    get blink(): string {
-        return this.router.url.split('/')[1] ?? 'casino';
-    }
-
     public handleSeeAllGames() {
         const category = this.gameCategory;
 
-        if (!category) {
-            console.error('Categoria do jogo não está definida');
-            return;
+        if (this.router.url.startsWith('/live-casino/')) {
+            this.router.navigate(['live-casino'], { queryParams: { category: category, providerName: 'todos' } }).then(() => {
+                this.location.replaceState('live-casino');
+            });
         }
 
-        this.router.navigate(['casino/wallFiltered'], { queryParams: { category } });
+        if (this.router.url.startsWith('/casino/')) {
+            this.router.navigate(['casino'], { queryParams: { category: category, providerName: 'todos' } }).then(() => {
+                this.location.replaceState('casino');
+            })
+        }
     }
 
     private filterDestaques(games: GameCasino[], category: string): Promise<GameCasino[]> {
@@ -904,13 +958,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                     return false;
                 });
-
+    
             if (filteredGames.length < this.casinoRelatedGamesQuantity) {
                 if (!this.popularGamesIds.includes(this.gameId)) {
                     this.popularGamesIds.push(this.gameId);
                 }
                 let missingGamesCalc = this.casinoRelatedGamesQuantity - filteredGames.length;
-
+    
                 this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
                     response => {
                         filteredGames = filteredGames.concat(response);
@@ -918,7 +972,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
             } else {
-                resolve(filteredGames);
+                resolve(filteredGames.slice(0, 15));
             }
         });
     }
@@ -970,13 +1024,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 180px)');
             }
         }
+    }
 
-        if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
-            const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
+    private getGameList() {
+        if (this.isCassinoPage || this.isVirtualPage) {
+            this.getProviders();
+        }
 
-            if (headerOptions) {
-                this.renderer.setStyle(headerOptions, 'margin', '0 18px');
-            }
+        if(this.isCassinoAoVivoPage) {
+            this.getLiveProviders();
         }
     }
 }
