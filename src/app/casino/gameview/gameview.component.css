@@ -340,7 +340,7 @@ iframe{
     }
 
     app-back-page {
-        padding: 0 16px !important;
+        padding: 0 !important;
     }
 }
 
@@ -648,7 +648,7 @@ iframe{
 
     .game-frame {
         width: 100%;
-        margin: 0;
+        margin: 0 20px;
         margin-bottom: 30px;
         height: 780px;
     }
@@ -927,7 +927,7 @@ iframe{
     }
 
     app-back-page {
-        padding: 0 32px 0 0;
+        padding: 0 20px;
         display: flex;
         margin-top: 16px;
         align-items: center;
