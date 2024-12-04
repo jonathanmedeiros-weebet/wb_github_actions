@@ -53,12 +53,15 @@ export class ParametrosLocaisService {
                         body.prepend(GTMScriptBody);
                     }
 
-                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.legitimuz_enabled && response?.opcoes?.legitimuz_token);
+                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.legitimuz_token);
                     if (LEGITIMUZ_ENABLED) {
                         const LegitimuzScripSDK = this.document.createElement('script');
                         LegitimuzScripSDK.src = 'https://cdn.legitimuz.com/js/sdk/legitimuz-sdk.js';
+                        const LegitimuzScripSDKFaceIndex = this.document.createElement('script');
+                        LegitimuzScripSDKFaceIndex.src = 'https://cdn.legitimuz.com/js/sdk/faceindex.js';
 
                         head.appendChild(LegitimuzScripSDK);
+                        head.appendChild(LegitimuzScripSDKFaceIndex);
                     }
 
                     const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key
@@ -252,6 +255,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.cashback_enabled : null;
     }
 
+    barraIndiqueGanhe() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.barra_indique_ganhe : null;
+    }
+
     getCustomCasinoName(wordToReplace: string = '', casinoDefault: string = this.translate.instant('geral.cassino')) {
         const currentLang = this.translate.currentLang;
 
@@ -263,6 +270,10 @@ export class ParametrosLocaisService {
             : customCasinoName;
     }
 
+    getSIGAPHabilitado() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.SIGAP_habilitado : null;
+    }
+    
     getAllowOnlyOneSessionPerLogin() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.allow_single_session : null;
     }

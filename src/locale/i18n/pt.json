@@ -143,6 +143,10 @@
         "bairro": "Bairro",
         "estado": "Estado",
         "cidade": "Cidade",
+        "numero": "Número",
+        "genero": "Gênero",
+        "nacionalidade": "Nacionalidade",
+        "documentoIdentificacao": "Documento de identificação (RG ou Passaporte)",
         "selecione": "Selecione",
         "selecioneACidade": "Selecione a cidade",
         "atualizar": "Atualizar",
@@ -255,18 +259,25 @@
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
         "bonusCancelado": "Bônus cancelado",
         "aguardando": "Aguardando",
+        "resetarSenha": "Resetar senha",
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
         "loginUsername": "Nome de usuário",
         "field": "Campo",
+        "or": "OU",
+        "geolocationError": "Por favor, verifique a configuração de localização do seu navegador e tente novamente.",
+        "restricaoDeLocalizacao": "Este recurso está disponível apenas para usuários no Brasil.",
+        "lastAccesses": "Últimos acessos",
+        "action": "Ação",
         "session_alert": "Alerta de Sessão",
         "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?",
         "jogoResponsavel": "Jogo responsável",
-        "or": "OU"
+        "tax": "Imposto"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
-        "casinoBetting": "Apostas cassino"
+        "casinoBetting": "Apostas cassino",
+        "incomeTaxOnPrize": "Imposto de renda sobre prêmio"
     },
     "dias": {
         "ontem": "Ontem",
@@ -413,7 +424,7 @@
         "dailyMaximum": "Máximo diário",
         "monthlyMaximum": "Máximo mensal",
         "identityVerify": "Verificar identidade",
-        "identityVerifyNeeded": "Para prosseguir com o saque será necessário realizar a verificação de identidade antes.",
+        "identityVerifyNeeded": "Para prosseguir será necessário realizar a verificação de identidade antes.",
         "disapprovedIdentity": "Sua verificação de identidade foi reprovada. Para a realização de uma análise manual, por favor, entre em contato com o suporte."
     },
     "ativacaoEmail": {
@@ -443,7 +454,9 @@
         "depositDetails": "Detalhes do depósito",
         "depositText": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, selecione se deseja receber o {{bonusType}}, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
         "depositTextWithoutBonus": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
-        "depositTextWithoutBonusAndPromocode": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento."
+        "depositTextWithoutBonusAndPromocode": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
+        "copyCode": "Copiar código",
+        "copied": "Copiado!"
     },
     "footer": {
         "afiliados": "Afiliados",
@@ -521,7 +534,10 @@
         "valorMaximoSaqueMensal" : "Valor máximo de saque mensal",
         "receberBonusCassino": "Receber Bônus - Cassino",
         "transactions": "Transações",
-        "paymentGateway": "Gateway de pagamento"
+        "paymentGateway": "Gateway de pagamento",
+        "balance": "Saldo",
+        "previousBalance": "Saldo anterior",
+        "subsequentBalance": "Saldo posterior"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
@@ -714,7 +730,11 @@
         "redeemed": "Resgatado",
         "redeem": "Resgatar"
     },
-    "register": { 
+    "face_match": {
+        "verified_identity": "Identidade verificada!",
+        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte."
+    },
+    "register": {
         "signupWith": "Inscrever-se com Google",
         "registerGoogleAccount": "Cadastre-se com sua conta do google",
         "fillToRegister": "Preencha os campos para realizar o seu cadastro",
@@ -730,5 +750,10 @@
         "youreAlmostThere": "Você está quase lá! Cadastre-se e deposite agora e experimente o melhor do entretenimento na palma da sua mão.",
         "continue": "Continuar",
         "cancel": "Sim, quero cancelar"
+    },
+    "genero": {
+        "masculino": "Masculino",
+        "feminino": "Feminino",
+        "outros": "Outros"
     }
 }
