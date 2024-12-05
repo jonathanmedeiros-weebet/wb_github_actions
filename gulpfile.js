@@ -2533,3 +2533,12 @@ gulp.task('bet10.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pintou.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pintou.bet",
+        banca: "PINTOU.BET",
+        styles: "",
+    });
+});

@@ -253,7 +253,8 @@
         "majovip.net": "gulp majovip.net",
         "playnabet.com": "gulp playnabet.com",
         "poc.wee.bet": "gulp poc.wee.bet",
-        "bet10.bet": "gulp bet10.bet"
+        "bet10.bet": "gulp bet10.bet",
+        "pintou.bet": "gulp pintou.bet"
     },
     "private": true,
     "dependencies": {
