@@ -146,7 +146,7 @@
                                     <div *ngIf="aposta.resultado == null && aposta.rollover_status != 'cancelado'"><th>{{'geral.aguardando' | translate}}</th></div>
                                     <div *ngIf="aposta.rollover_status != 'cancelado' && aposta.resultado != null">{{aposta.resultado}}</div>
                                 </td>
-                                <td class="acoes-aposta" *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'">
+                                <td class="acoes-aposta" *ngIf="tabSelected !== 'loteria-popular'">
                                     <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}{{origin}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
                                         <i class="fa fa-external-link"></i>
                                     </a>
