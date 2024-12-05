@@ -1324,15 +1324,6 @@ gulp.task('cassinoaovivo.bet', function (done) {
     });
 });
 
-gulp.task('n7futmix.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "n7futmix.com",
-        banca: "N7 FUTMIX",
-        styles: "",
-    });
-});
-
 gulp.task('sortebet777.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1523,15 +1514,6 @@ gulp.task('apostenasorte.bet', function (done) {
     });
 });
 
-gulp.task('betmaniapix.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betmaniapix.com",
-        banca: "BET MANIA PIX",
-        styles: "",
-    });
-});
-
 gulp.task('ultrabetss.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1634,15 +1616,6 @@ gulp.task('suasortebet.com', function (done) {
     });
 });
 
-gulp.task('betsrio.online', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "betsrio.online",
-        banca: "BETS RIO",
-        styles: "",
-    });
-});
-
 gulp.task('rc.wee.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1709,15 +1682,6 @@ gulp.task('showbets21.com', function (done) {
         server: "front5.wee.bet",
         host: "showbets21.com",
         banca: "SHOW BETS 21",
-        styles: "",
-    });
-});
-
-gulp.task('agorabets.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "agorabets.com",
-        banca: "AGORA BETS",
         styles: "",
     });
 });
