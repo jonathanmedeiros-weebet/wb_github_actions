@@ -84,6 +84,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         specialChar: false,
     };
 
+    fullRegistration = true;
+
     public countries: any = [];
     public states: any = [];
     public cities: any = [];
@@ -135,6 +137,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
+        this.fullRegistration = this.paramsService.getOpcoes().enable_full_registration;
 
         if (this.isLoterj) {
             this.aplicarCssTermo = true;
@@ -333,9 +336,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required, Validators.email]],
-            genero: ['', [Validators.required]],
-            nationality: ['Brasil', [Validators.required]],
-            documentNumber: ['', [Validators.required]],
+            genero: ['', this.fullRegistration ? Validators.required : null],
+            nationality: ['Brasil', this.fullRegistration ? Validators.required : null],
+            documentNumber: ['', this.fullRegistration ? Validators.required : null],
             afiliado: [null, [Validators.maxLength(50)]],
             captcha: [null, this.provedorCaptcha ? Validators.required : null],
             check_1: [''],
@@ -348,12 +351,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null],
 
-            logradouro: ['', Validators.required],
-            numero: ['', Validators.required],
-            bairro: ['', Validators.required],
-            cidade: ['', Validators.required],
-            estado: ['', Validators.required],
-            cep: ['', [Validators.required]],
+            logradouro: ['', this.fullRegistration ? Validators.required : null],
+            numero: ['', this.fullRegistration ? Validators.required : null],
+            bairro: ['', this.fullRegistration ? Validators.required : null],
+            cidade: ['', this.fullRegistration ? Validators.required : null],
+            estado: ['', this.fullRegistration ? Validators.required : null],
+            cep: ['', this.fullRegistration ? Validators.required : null],
         });
 
         if (this.isStrengthPassword) {
@@ -435,7 +438,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         delete values.cidade;
         delete values.estado;
         delete values.cep;
-        
+
         return values;
     }
 
