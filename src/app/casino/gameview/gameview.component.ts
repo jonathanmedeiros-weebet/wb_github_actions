@@ -218,11 +218,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                 if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
                                     this.fixTabletAndDesktopScreen();
                                 }
-
-                               this.fixInGameSpacings();
+                                
+                                if (this.inGame) {
+                                   this.fixInGameSpacings();
+                                }
                             }
                         }
-
                         this.loadGame();
                     }
                 );
@@ -316,7 +317,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.fixTabletAndDesktopScreen();
         }
 
-        this.fixInGameSpacings();
+        if (this.inGame && this.isLoggedIn) {
+            this.fixInGameSpacings();
+         }
     }
 
     public copyLink() {
@@ -924,15 +927,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     private fixInGameSpacings() {
         const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
-        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
 
         if (blocoContainer) {
             this.renderer.setStyle(blocoContainer, 'padding', '0');
-            if (this.isDesktop && !this.isTablet && this.inGame) {
-                this.renderer.setStyle(gameFrame, 'position', 'fixed');
-                this.renderer.setStyle(gameFrame, 'margin-top', '50px');
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 170px)');
-            }
         }
     }
 
@@ -1078,8 +1075,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
-                console.log('testdaae');
-
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '50px');
                 this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 170px)');

@@ -987,4 +987,8 @@ iframe{
     padding: 0 50px 50px 50px;
 }
 
-
+.desktopIsloggedIn {
+    position: fixed;
+    margin-top: 50px !important;
+    height: calc(100% - 170px);
+}
