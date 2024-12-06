@@ -14,7 +14,7 @@ import {
 
 } from "../../shared/layout/modals";
 import { ConfiguracaoLimitePerdasModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
-import { catchError, takeUntil } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
 import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
@@ -22,8 +22,7 @@ import { WallProviderFilterModalComponent } from '../wall/components/wall-provid
 import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
-import { TranslateService } from '@ngx-translate/core';
-import { config } from 'src/app/shared/config';
+
 
 @Component({
     selector: 'app-gameview',
@@ -731,10 +730,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (blocoRelatedGames) {
             this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
-        }
-
-        if (backButton) {
-            this.renderer.setStyle(backButton, 'display', 'none');
         }
 
         if (backButton) {
