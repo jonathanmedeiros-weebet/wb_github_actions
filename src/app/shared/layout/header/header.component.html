@@ -847,7 +847,7 @@
                 <span>{{ 'menu.loteria' | translate }}</span>
             </a>
         </div>
-        <div class="category">
+        <div class="category" *ngIf="paginaPromocaoHabilitado">
             <a [routerLink]="['/promocao']" routerLinkActive="active">
                 <span>{{ 'geral.promocoes' | translate }}</span>
             </a>
