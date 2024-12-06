@@ -16,6 +16,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -63,6 +64,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
 
+    private previousUrl: string;
+
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
@@ -79,11 +82,40 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
+        private location: Location
     ) {
         super();
     }
 
     ngOnInit() {
+        let queryString = '';
+        if (this.router.url.includes('/cadastro')) {
+            const pages = {
+                esporte: 'esportes',
+                cassino: 'casino',
+                virtual: 'vitual-sports',
+                desafio: 'desafios',
+                acumuladao: 'acumuladao',
+                loteria: 'loterias',
+                cassino_ao_vivo: 'live-casino',
+                rifas: 'rifas/wall'
+            }
+
+            const queryParams = this.route.snapshot.queryParams;
+            queryString = "?" + new URLSearchParams(queryParams).toString();
+
+            const { pagina_inicial, betby } = this.paramsService.getOpcoes();
+
+            if (betby) {
+                pages.esporte = 'sports';
+            }
+
+            this.previousUrl = '/' + (pages[pagina_inicial] ?? '');
+        } else {
+            this.previousUrl = this.router.url;
+        }
+        this.location.replaceState(`/cadastro${queryString}`);
+
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.getPromocoes();
         this.appMobile = this.auth.isAppMobile();
@@ -287,8 +319,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
     }
 
-
     ngOnDestroy() {
+        this.location.replaceState(this.previousUrl);
+
         this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();

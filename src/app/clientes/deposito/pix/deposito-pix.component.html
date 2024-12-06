@@ -31,7 +31,7 @@
                 </div>
             </section>
             <section id="deposit-details">
-                <div class="deposit-details-title"> 
+                <div class="deposit-details-title">
                     <h3 class="hide-mobile">{{'deposito.depositDetails' | translate}}</h3>
                 </div>
                 <div id="details-wrapper">
@@ -39,8 +39,8 @@
                         <div class="details-text">
                             {{
                             permitirBonusPrimeiroDeposito ?
-                            ('deposito.depositText' | translate:{'paymentMethod': (paymentMethodSelected | formatPaymentMethod), 'bonusType': (bonusType | translate)}) :
-                            ('deposito.depositTextWithoutBonus' | translate:{'paymentMethod': (paymentMethodSelected | formatPaymentMethod)})
+                            ('deposito.depositText' | translate:{'bonusType': (bonusType | translate)}) :
+                            ('deposito.depositTextWithoutBonus' | translate)
                             }}
                         </div>
                         <div class="hide-desktop details-payment-method" *ngIf="availablePaymentMethods.length > 1">
@@ -71,7 +71,7 @@
                                     class="btn"
                                     (click)="changeAmount(value)"
                                 >
-                                    +{{ value }} 
+                                    +{{ value }}
                                 </button>
                             </div>
                         </div>
