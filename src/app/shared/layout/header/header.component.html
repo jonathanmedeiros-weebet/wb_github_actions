@@ -15,8 +15,8 @@
 
 <div class="info-connection-card hide">
     <div class="info-connection-card-content">
-        <span><i class="fa fa-exclamation-triangle" style="margin-right: 5px; color: black;"></i></span> {{
-        messageConnection }}
+        <span><i class="fa fa-exclamation-triangle" style="margin-right: 5px; color: black;"></i>
+        </span> {{ messageConnection }}
     </div>
 </div>
 
@@ -843,6 +843,11 @@
         <div class="category" *ngIf="(loteriasHabilitado && (seninhaAtiva || quininhaAtiva)) || loteriaPopularAtiva">
             <a [routerLink]="['/loterias']" routerLinkActive="active">
                 <span>{{ 'menu.loteria' | translate }}</span>
+            </a>
+        </div>
+        <div class="category" *ngIf="paginaPromocaoHabilitado">
+            <a [routerLink]="['/promocao']" routerLinkActive="active">
+                <span>{{ 'geral.promocoes' | translate }}</span>
             </a>
         </div>
     </div>
