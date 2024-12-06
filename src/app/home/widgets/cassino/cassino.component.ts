@@ -14,6 +14,7 @@ export class CassinoComponent implements OnInit {
     @Input() title: string;
     @Input() linkAll: string;
     @Input() showLoadingIndicator: boolean;
+    @Input() showLoginModal: boolean = true;
 
     isMobile = false;
     modalRef: NgbModalRef;
@@ -108,14 +109,16 @@ export class CassinoComponent implements OnInit {
     }
 
     abrirModalLogin() {
-        this.modalRef = this.modalService.open(
-            LoginModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350 modal-login',
-                centered: true,
-            }
-        );
+        if (this.showLoginModal) {
+            this.modalRef = this.modalService.open(
+                LoginModalComponent,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    windowClass: 'modal-550 modal-h-350 modal-login',
+                    centered: true,
+                }
+            );
+        }
     }
 
     get isDemo(): boolean {

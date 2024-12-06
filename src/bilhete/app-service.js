@@ -1,9 +1,9 @@
-const HERMES = 'https://hermes.wee.bet/v1';
+const CENTER = 'https://center7.wee.bet/v1';
 
 async function getParams() {
     var url = window.location.pathname;
 
-    var slug = '[HOST]';
+    var slug = 'demo.wee.bet';
     var centerUrl = 'central.' + slug;
     var ticketId = url.substring(url.lastIndexOf('/') + 1);
     let timestamp = Date.now();
@@ -74,7 +74,7 @@ function getFormatedDate(date) {
 async function getResults(ids) {
     try {
         paramIds = ids.join(',');
-        const request = await fetch(`${HERMES}/resultados/detalhado?ids=${paramIds}`)
+        const request = await fetch(`${CENTER}/resultados/detalhado?ids=${paramIds}`)
         const results = await request.json();
 
         if (request.status == 404 || request.status == 500) {
@@ -101,7 +101,7 @@ function displayError(message) {
 
 async function getLiveItems(items) {
     try {
-        const request = await fetch(`${HERMES}/resultados/live`, {
+        const request = await fetch(`${CENTER}/resultados/live`, {
             method: "POST",
             body: JSON.stringify(items),
             headers: { "Content-type": "application/json; charset=UTF-8" }

@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApostaService, AuthService, ClienteService, FinanceiroService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { AuthService, ClienteService, FinanceiroService, MessageService, ParametrosLocaisService, UtilsService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario';
@@ -16,6 +16,7 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
+import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
@@ -25,6 +26,8 @@ import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.servic
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+
     appMobile;
     isMobile = false;
     unsub$ = new Subject();
@@ -61,6 +64,17 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     promocaoAtiva = false;
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
+
+    verifiedIdentity = false;
+    faceMatchEnabled = false;
+    faceMatchRegister = false;
+    faceMatchRegisterValidated = false;
+    legitimuzToken = "";
+    currentLanguage = 'pt';
+    disapprovedIdentity = false;
+    dataUserCPF ='';
+    showLoading = true;
+    faceMatchRequested = false;
     isStrengthPassword: boolean | null;
     validPassword: boolean = false;
     requirements = {
@@ -70,11 +84,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         specialChar: false,
     };
 
+    public countries: any = [];
+    public states: any = [];
+    public cities: any = [];
+
     constructor(
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
         private fb: UntypedFormBuilder,
-        private apostaService: ApostaService,
         private campanhaService: CampanhaAfiliadoService,
         private messageService: MessageService,
         private auth: AuthService,
@@ -86,12 +103,30 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private cd: ChangeDetectorRef,
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
+        private legitimuzService: LegitimuzService,
         private ga4Service: Ga4Service,
+        private utilitiesService: UtilsService
     ) {
         super();
     }
 
     ngOnInit() {
+        this.getAddressOptions();
+        this.currentLanguage = this.translate.currentLang;
+        this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
+        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchRegister);
+
+        if (!this.faceMatchEnabled) {
+            this.faceMatchRegisterValidated = true;
+        }
+
+        this.translate.onLangChange.subscribe(change => {
+            this.currentLanguage = change.lang;
+            if (this.faceMatchEnabled) {
+                this.legitimuzService.changeLang(change.lang);
+            }
+        });
+
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.getPromocoes();
         this.appMobile = this.auth.isAppMobile();
@@ -99,12 +134,21 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
+        this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
 
         if (this.isLoterj) {
             this.aplicarCssTermo = true;
         }
 
         this.createForm();
+        this.form.valueChanges.subscribe(form => {
+            if ((form.cpf != null && form.cpf.length == 14)) {
+                this.showLoading = false;
+                this.cd.detectChanges();
+            } else {
+                this.showLoading = true;
+            }
+        })
 
         this.hCaptchaLanguage = this.translate.currentLang;
 
@@ -116,11 +160,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         });
 
         this.afiliadoHabilitado = this.paramsService.getOpcoes().afiliado;
-        this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
 
         this.route.queryParams
             .subscribe((params) => {
-
 
             if (params.ref || params.afiliado) {
                 const codigoAfiliado = params.ref ?? params.afiliado;
@@ -200,6 +242,32 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 );
         }
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    this.cd.detectChanges();
+                    if (this.verifiedIdentity) {
+                        this.faceMatchRequested = true;
+                        this.showLoading = false
+                        this.legitimuzService.closeModal();
+                        this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                    }
+                });
+        }
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.form.get('cpf')?.valueChanges.subscribe(cpf => {
+                this.dataUserCPF = cpf;
+                this.legitimuzService.init();
+                this.legitimuzService.mount();
+            })
+        }
+    }
+
+    private async getAddressOptions() {
+        this.countries = await this.utilitiesService.getCountries().toPromise();
+        this.states = await this.utilitiesService.getEstados().toPromise();
     }
 
     getPromocoes(queryParams?: any) {
@@ -265,8 +333,11 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required, Validators.email]],
+            genero: ['', [Validators.required]],
+            nationality: ['Brasil', [Validators.required]],
+            documentNumber: ['', [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
-            captcha: [null, [Validators.required]],
+            captcha: [null, this.provedorCaptcha ? Validators.required : null],
             check_1: [''],
             check_2: [''],
             googleId: [''],
@@ -275,7 +346,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             refId: [this.route.snapshot.queryParams.refId],
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
-            dadosCriptografados: [null]
+            dadosCriptografados: [null],
+
+            logradouro: ['', Validators.required],
+            numero: ['', Validators.required],
+            bairro: ['', Validators.required],
+            cidade: ['', Validators.required],
+            estado: ['', Validators.required],
+            cep: ['', [Validators.required]],
         });
 
         if (this.isStrengthPassword) {
@@ -283,7 +361,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
             this.form.controls.senha.updateValueAndValidity();
         }
-        
+
         if (this.isLoterj) {
             this.form.addControl('termosUso', this.fb.control(null, [
                 Validators.requiredTrue,
@@ -327,13 +405,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         super.onSubmit();
     }
 
-    submit() {
-        if (this.menorDeIdade) {
-            this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
-            return;
-        }
-
-        const values = this.form.value;
+    private async prepareSubmitData() {
+        let values = this.form.value;
 
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         if (!this.autoPreenchimento) {
@@ -344,8 +417,39 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             values.parameters = this.parameters;
         }
 
+        values = {
+            ...values,
+            endereco: {
+                logradouro: values.logradouro,
+                numero: values.numero,
+                bairro: values.bairro,
+                cidadeId: values.cidade,
+                estadoId: values.estado,
+                cep: values.cep
+            }
+        }
+
+        delete values.logradouro;
+        delete values.numero;
+        delete values.bairro;
+        delete values.cidade;
+        delete values.estado;
+        delete values.cep;
+        
+        return values;
+    }
+
+    async submit() {
+        if (this.menorDeIdade) {
+            this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
+            return;
+        }
+
+        const values = await this.prepareSubmitData();
         this.submitting = true;
-        this.clientesService.cadastrarCliente(values)
+
+        this.clientesService
+            .cadastrarCliente(values)
             .subscribe(
                 (res) => {
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
@@ -485,7 +589,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const hasUpperCase = /[A-Z]/.test(passwordValue);
         const hasLowerCase = /[a-z]/.test(passwordValue);
         const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
-        
+
         this.requirements = {
           minimumCharacters: lengthCheck,
           uppercaseLetter: hasUpperCase,
@@ -500,6 +604,14 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const value = event.target.value;
         if(value){
             this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
+        }
+    }
+
+    public async getCities(event: any) {
+        const stateId = event.target.value;
+        if (stateId) {
+            this.cities = await this.utilitiesService.getCidades(stateId).toPromise();
+            this.form.controls['cidade'].setValue('');
         }
     }
 }

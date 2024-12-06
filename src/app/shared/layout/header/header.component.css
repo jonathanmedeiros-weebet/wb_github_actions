@@ -210,6 +210,7 @@ nav::-webkit-scrollbar {
 .btn-sair {
     margin: 40px 20px 20px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .dropdown-menu {
@@ -1058,7 +1059,8 @@ body .change-theme {
 
 .hidden-header {
     display: none !important;
-    header-submenu {
-        display: none !important;
-    }
+}
+
+.hidden-header .header-submenu {
+    display: none !important;
 }

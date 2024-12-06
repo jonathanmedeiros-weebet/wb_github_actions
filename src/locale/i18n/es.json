@@ -140,6 +140,10 @@
         "bairro": "Barrio",
         "estado": "Estado",
         "cidade": "Ciudad",
+        "numero": "Número",
+        "genero": "Género",
+        "nacionalidade": "Nacionalidad",
+        "documentoIdentificacao": "Documento de identificación (DNI o pasaporte)",
         "selecione": "Seleccionar",
         "selecioneACidade": "Selecciona la ciudad",
         "atualizar": "Actualizar",
@@ -249,18 +253,26 @@
         "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
         "bonusCancelado": "Bono cancelado",
         "aguardando": "Pendiente",
+        "resetarSenha": "Reiniciar a senha",
         "loginEmail": "Correo electrónico",
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
         "field": "Campo",
+        "or": "O",
+        "geolocationError": "Por favor, verifique la configuración de ubicación de su navegador y intente nuevamente.",
+        "restricaoDeLocalizacao": "Este recurso está disponible solo para usuarios en Brasil.",
+        "lastAccesses": "Últimos accesos",
+        "action": "Acción",
         "jogosRelacionados": "juegos relacionados",
         "session_alert": "Alerta de Sesión",
         "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?",
-        "jogoResponsavel": "Juego responsable"
+        "jogoResponsavel": "Juego responsable",
+        "tax": "Impuesto"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
-        "casinoBetting": "Apuestas de casino"
+        "casinoBetting": "Apuestas de casino",
+        "incomeTaxOnPrize": "Impuesto sobre la renta del premio"
     },
     "dias": {
         "ontem": "Ayer",
@@ -432,7 +444,9 @@
         "depositDetails": "Detalles del depósito",
         "depositText": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación, seleccione si desea recibir el {{bonusType}}, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
         "depositTextWithoutBonus": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
-        "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago."
+        "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
+        "copyCode": "Copiar código",
+        "copied": "Copiado!"
     },
     "footer": {
         "afiliados": "Asociaciones",
@@ -510,7 +524,10 @@
         "valorMaximoSaqueMensal" : "Monto máximo de retiro mensual",
         "receberBonusCassino": "Recibir bono - Casino",
         "transactions": "Transacciones",
-        "paymentGateway": "Pasarela de pago"
+        "paymentGateway": "Pasarela de pago",
+        "balance": "Saldo",
+        "previousBalance": "Saldo anterior",
+        "subsequentBalance": "Saldo posterior"
     },
     "rollover": {
         "nenhumRollover": "Sin rollover.",
@@ -566,7 +583,7 @@
         "lista_como_indicar": "Cómo referir",
         "lista_como_indicar_text": "Para referir a un nuevo usuario, debes compartir el enlace de referencia en la sección 'Recomienda y Gana' de tu cuenta, ubicada en el menú de Promociones. El usuario referido debe registrarse utilizando tu enlace de referencia. El recomendador tendrá un total de {{limiteIndicacoes}} referencias elegibles para la comisión; cualquier referencia que exceda esta cantidad no será elegible para la comisión.",
         "lista_bonus_indicador": "Bono para el recomendador",
-        "lista_bonus_indicador_text": "Por cada usuario que refieras que se registre, haga un depósito de al menos R${{valorMinDepositado}} y coloque apuestas que sumen al menos R${{valorMinApostado}} dentro de los {{qtdDiasRequisitos}} días, ganarás R${{valorGanhoPorIndicacao}} en saldo {{tipoSaldoGanho}}. Este saldo se liberará para su retiro en la sección 'Mis Referencias' dentro de las 24 horas después de que el USUARIO REFERIDO cumpla con las reglas de la promoción. Tendrás un período de {{prazoResgateSaldo}} días para canjear.",
+        "lista_bonus_indicador_text": "Por cada usuario que refieras que se registre, haga un depósito de al menos R${{valorMinDepositado}} y coloque apuestas que sumen al menos R${{valorMinApostado}} dentro de los {{qtdDiasRequisitos}} día(s), ganarás R${{valorGanhoPorIndicacao}} en saldo {{tipoSaldoGanho}}. Este saldo se liberará para su retiro en la sección 'Mis Referencias' dentro de las 24 horas después de que el USUARIO REFERIDO cumpla con las reglas de la promoción. Tendrás un período de {{prazoResgateSaldo}} días para canjear.",
         "real_sacavel": "real (retirable)",
         "lista_deposito_indicado": "Depósito del referido",
         "lista_deposito_indicado_text": "El usuario referido debe realizar un depósito mínimo de R${{valorMinDepositado}} en su cuenta y colocar una apuesta mínima de R${{valorMinApostado}} para que el saldo de R${{valorGanhoPorIndicacao}} se acredite en la cuenta del recomendador.",
@@ -702,5 +719,31 @@
         "pending": "Pendiente",
         "redeemed": "Canjeado",
         "redeem": "Canjear"
+    },
+    "face_match": {
+        "verified_identity": "Identidad verificada!",
+        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
+    },
+    "register": {
+        "signupWith": "Regístrate en Google",
+        "registerGoogleAccount": "Regístrate con tu cuenta de google",
+        "fillToRegister": "Rellene los campos para completar su registro",
+        "protectedByReCaptchaPart1": "Este sitio está protegido por reCAPTCHA se aplican la",
+        "protectedByReCaptchaPart2": "Política de privacidad",
+        "protectedByReCaptchaPart3": "y las",
+        "protectedByReCaptchaPart4": "Condiciones del servicio",
+        "protectedByReCaptchaPart5": "de Google."
+    },
+    "registerCancel": {
+        "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",
+        "dontMissOut": "¡No pierdas esta oportunidad! Regístrese y deposite ahora y duplicaremos su depósito hasta ",
+        "youreAlmostThere": "¡Ya casi ha llegado! Regístrese y deposite ahora y experimente lo mejor del entretenimiento en la palma de su mano.",
+        "continue": "Continúe en",
+        "cancel": "Sí, quiero cancelar"
+    },
+    "genero": {
+        "masculino": "Masculino",
+        "feminino": "Femenino",
+        "outros": "Otros"
     }
 }

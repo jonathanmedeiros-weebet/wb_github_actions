@@ -19,6 +19,8 @@ import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
+import { TranslateService } from '@ngx-translate/core';
+import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
@@ -213,7 +215,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                     this.disableHeader();
                                     this.fixMobileHeader();
                                 }
-
                                 if (this.isTablet && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixTabletHeader();
@@ -528,7 +529,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 }
             });
         }
-
         if (this.headerService.getIsHeaderDisabled) {
             this.disableHeaderOptions();
             this.enableHeader();
@@ -737,6 +737,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(backButton, 'display', 'none');
         }
 
+        if (backButton) {
+            this.renderer.setStyle(backButton, 'display', 'none');
+        }
+
         this.fullscreen = true;
     }
 
@@ -922,7 +926,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (gameViewHeader) {
             this.renderer.setStyle(gameViewHeader, 'display', 'flex');
         }
-
         if (gameView) {
             this.renderer.setStyle(gameView, 'padding-top', '50px');
             this.renderer.setStyle(gameView, 'position', 'fixed');

@@ -122,7 +122,9 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
         this.clienteService.getCodigoIndicacao()
             .subscribe(
                 response => {
-                    this.linkIndicacao = `${location.origin}/cadastro?refId=${response.codigoIndicacao}`;
+                    const origin = location.origin + location.pathname.replace('/clientes/indique-ganhe', '');
+
+                    this.linkIndicacao = `${origin}/cadastro?refId=${response.codigoIndicacao}`;
 
                     let indicacaoMsg = encodeURIComponent("Quer ganhar uma graninha extra e se divertir?\nÉ só criar uma conta através deste link e aproveitar!");
 

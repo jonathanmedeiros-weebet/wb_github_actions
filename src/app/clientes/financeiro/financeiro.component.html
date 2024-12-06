@@ -1,4 +1,4 @@
-<div id="default-content">
+<div id="default-content"  #listagem infiniteScroll (scrolled)="exibirMais()">
     <app-spinner *ngIf="showLoading"></app-spinner>
 
     <ng-container *ngIf="!showLoading">
@@ -48,7 +48,8 @@
                     <tr>
                         <th style="width: 70%">{{'financeiro.natureza' | translate}}</th>
                         <th class="custom-td">{{'geral.valor' | translate}}</th>
-                        <th class="custom-td">{{'geral.saldo' | translate}}</th>
+                        <th class="custom-td">{{'financeiro.previousBalance' | translate}}</th>
+                        <th class="custom-td">{{'financeiro.subsequentBalance' | translate}}</th>
                     </tr>
                     </thead>
                     <tbody *ngIf="!showLoading">
@@ -84,13 +85,20 @@
                                 <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
                             </td>
                             <td class="custom-td">
-                                {{movimentacao.saldo | currency}}
+                                {{movimentacao.previous_balance | currency}}
+                                <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
+                            </td>
+                            <td class="custom-td">
+                                {{movimentacao.subsequent_balance | currency}}
                                 <small *ngIf="movimentacao.is_bonus"><br>{{'geral.bonus' | translate | lowercase}}</small>
                             </td>
                         </tr>
                     </ng-container>
                     </tbody>
                 </table>
+                <div *ngIf="loadingScroll">
+                    Carregando...
+                </div>
             </div>
         </div>
     </ng-container>

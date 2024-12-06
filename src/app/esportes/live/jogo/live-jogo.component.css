@@ -88,7 +88,7 @@ section.jogo {
     height: 30vh;
     max-height: 300px;
     background-color: #181818;
-    background-image: url("https://cdn.wee.bet/img/stadium-background.png");
+    background-image: url("https://wb-assets.com/img/stadium-background.png");
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -97,7 +97,7 @@ section.jogo {
 }
 
 .indentificacao-jogo-basquete {
-    background-image: url("https://cdn.wee.bet/img/quadra-basquete-background.png");
+    background-image: url("https://wb-assets.com/img/quadra-basquete-background.png");
 }
 
 .indentificacao-jogo .info-jogo {

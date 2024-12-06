@@ -69,95 +69,102 @@
                         <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
                     </div>
                 </form>
-                <ng-container *ngIf="!totais.valorBonus || totais.premioBonus else showInfoWithBonus;">
-                    <div class="info-resultado">
-                        <div class="item">
-                            <label>{{'geral.qtdApostas' | translate}}:</label> {{ apostas.length }}
-                        </div>
-                        <div class="item">
-                            <label>{{'geral.totalApostado' | translate}}:</label> {{ totais.valor | currency }}
-                        </div>
-                        <div class="item">
-                            <label>{{'geral.totalPremios' | translate}}:</label> {{ totais.premio | currency }}
-                        </div>
-                    </div>
-                </ng-container>
-                <ng-template #showInfoWithBonus>
-                    <div class="info-colunm">
+                <div *ngIf="!apostas.length" class="alert alert-warning text-center margin-top-15" role="alert">
+                    Nenhuma aposta realizada no período.
+                </div>
+                <div *ngIf="apostas.length > 0">
+                    <ng-container *ngIf="!totais.valorBonus || totais.premioBonus else showInfoWithBonus;">
                         <div class="info-resultado">
                             <div class="item">
-                                <label>{{'geral.qtdApostas' | translate}}: </label> {{ apostas.length }}
+                                <label>{{'geral.qtdApostas' | translate}}:</label> {{ apostas.length }}
                             </div>
                             <div class="item">
-                                <label>{{'geral.totalApostado' | translate}} (Real):</label> {{ totais.valor | currency }}
+                                <label>{{'geral.totalApostado' | translate}}:</label> {{ totais.valor | currency }}
                             </div>
                             <div class="item">
-                                <label>{{'geral.totalPremios' | translate}} (Real):</label> {{ totais.premio | currency }}
+                                <label>{{'geral.totalPremios' | translate}}:</label> {{ totais.premio | currency }}
                             </div>
                         </div>
-                        <div class="info-resultado">
-                            <div class="item spacing" style="color: transparent;">
-                                <label>-</label> 
+                    </ng-container>
+                    <ng-template #showInfoWithBonus>
+                        <div class="info-colunm">
+                            <div class="info-resultado">
+                                <div class="item">
+                                    <label>{{'geral.qtdApostas' | translate}}: </label> {{ apostas.length }}
+                                </div>
+                                <div class="item">
+                                    <label>{{'geral.totalApostado' | translate}} (Real):</label> {{ totais.valor | currency }}
+                                </div>
+                                <div class="item">
+                                    <label>{{'geral.totalPremios' | translate}} (Real):</label> {{ totais.premio | currency }}
+                                </div>
                             </div>
-                            <div class="item">
-                                <label>{{'geral.totalApostado' | translate}} ({{'geral.bonus' | translate}}):</label> {{ totais.valorBonus | currency }}
-                            </div>
-                            <div class="item">
-                                <label>{{'geral.totalPremios' | translate}} ({{'geral.bonus' | translate}}):</label> {{ totais.premioBonus | currency }}
+                            <div class="info-resultado">
+                                <div class="item spacing" style="color: transparent;">
+                                    <label>-</label>
+                                </div>
+                                <div class="item">
+                                    <label>{{'geral.totalApostado' | translate}} ({{'geral.bonus' | translate}}):</label> {{ totais.valorBonus | currency }}
+                                </div>
+                                <div class="item">
+                                    <label>{{'geral.totalPremios' | translate}} ({{'geral.bonus' | translate}}):</label> {{ totais.premioBonus | currency }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                </ng-template>
 
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th width="100">{{'geral.codigo' | translate}}</th>
-                            <th *ngIf="tabSelected == 'cassino'">{{'geral.nomeJogoCassino' | translate}}</th>
-                            <th *ngIf="tabSelected == 'rifa'">{{'loteria.sorteio' | translate}}</th>
-                            <th>{{'geral.horario' | translate}}</th>
-                            <th>{{'geral.valor' | translate}}</th>
-                            <th>{{'geral.premio' | translate}} </th>
-                            <th>{{'geral.estado' | translate}}</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tr *ngIf="loading">
-                            <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
-                                {{'geral.carregando' | translate}}
-                            </td>
-                        </tr>
-                        <tbody *ngIf="!loading">
-                        <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta) }}">
-                            <td>{{ aposta.codigo }}</td>
-                            <td *ngIf="tabSelected == 'cassino'">{{ aposta.game }}</td>
-                            <td *ngIf="tabSelected == 'rifa'">{{ aposta.sorteio_nome }}</td>
-                            <td>{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm' }}</td>
-                            <td>{{ aposta.valor | currency}}</td>
-                            <td>{{ aposta.premio | currency }}</td>
-                            <td>
-                                <div *ngIf="aposta.rollover_status == 'cancelado'"><th>{{'geral.bonusCancelado' | translate}}</th></div>
-                                <div *ngIf="aposta.resultado == null && aposta.rollover_status != 'cancelado'"><th>{{'geral.aguardando' | translate}}</th></div>
-                                <div *ngIf="aposta.rollover_status != 'cancelado' && aposta.resultado != null">{{aposta.resultado}}</div>
-                            </td>
-                            <td class="acoes-aposta" *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'">
-                                <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}{{origin}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
-                                    <i class="fa fa-external-link"></i>
-                                </a>
-                                <a title="{{'geral.exibir' | translate}}" (click)="openModal(aposta)">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <div class="loading-scroll" *ngIf="loadingScroll">
-                            <div class="alert alert-warning text-center" role="alert">
-                                Carregando...
+                    </ng-template>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th width="100">{{'geral.codigo' | translate}}</th>
+                                <th *ngIf="tabSelected == 'cassino'">{{'geral.nomeJogoCassino' | translate}}</th>
+                                <th *ngIf="tabSelected == 'rifa'">{{'loteria.sorteio' | translate}}</th>
+                                <th>{{'geral.horario' | translate}}</th>
+                                <th>{{'geral.valor' | translate}}</th>
+                                <th>{{'geral.premio' | translate}} </th>
+                                <th>{{'bet.incomeTaxOnPrize' | translate}} </th>
+                                <th>{{'geral.estado' | translate}}</th>
+                                <th *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'"></th>
+                            </tr>
+                            </thead>
+                            <tr *ngIf="loading">
+                                <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
+                                    {{'geral.carregando' | translate}}
+                                </td>
+                            </tr>
+                            <tbody *ngIf="!loading">
+                            <tr *ngFor="let aposta of apostas" class="{{ classNameAposta(aposta) }}">
+                                <td>{{ aposta.codigo }}</td>
+                                <td *ngIf="tabSelected == 'cassino'">{{ aposta.game }}</td>
+                                <td *ngIf="tabSelected == 'rifa'">{{ aposta.sorteio_nome }}</td>
+                                <td>{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm' }}</td>
+                                <td>{{ aposta.valor | currency}}</td>
+                                <td>{{ aposta.premio | currency }}</td>
+                                <td>{{ aposta.incomeTaxOnPrize | currency }}</td>
+                                <td>
+                                    <div *ngIf="aposta.rollover_status == 'cancelado'"><th>{{'geral.bonusCancelado' | translate}}</th></div>
+                                    <div *ngIf="aposta.resultado == null && aposta.rollover_status != 'cancelado'"><th>{{'geral.aguardando' | translate}}</th></div>
+                                    <div *ngIf="aposta.rollover_status != 'cancelado' && aposta.resultado != null">{{aposta.resultado}}</div>
+                                </td>
+                                <td class="acoes-aposta" *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'">
+                                    <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}{{origin}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a title="{{'geral.exibir' | translate}}" (click)="openModal(aposta)">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <div class="loading-scroll" *ngIf="loadingScroll">
+                                <div class="alert alert-warning text-center" role="alert">
+                                    Carregando...
+                                </div>
                             </div>
-                        </div>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
