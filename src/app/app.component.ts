@@ -13,6 +13,7 @@ import { IdleDetectService } from './shared/services/idle-detect.service';
 import { ConfiguracaoLimiteTempoModalComponent } from './shared/layout/modals/configuracao-limite-tempo-modal/configuracao-limite-tempo-modal.component';
 import { ActivityDetectService } from './shared/services/activity-detect.service';
 import { Subscription } from 'rxjs';
+import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -59,7 +60,8 @@ export class AppComponent implements OnInit {
         private idleDetectService: IdleDetectService,
         private utilsService: UtilsService,
         private activityDetectService: ActivityDetectService,
-        private clienteService: ClienteService
+        private clienteService: ClienteService,
+        private navigationHistoryService: NavigationHistoryService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');

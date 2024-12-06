@@ -102,6 +102,7 @@ import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
 import { ConfiguracaoLimitePerdasModalComponent } from './modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
+import { BackPageComponent } from './back-page/back-page/back-page.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -201,7 +202,8 @@ import { ConfiguracaoLimitePerdasModalComponent } from './modals/configuracao-li
         MultifactorConfirmationModalComponent,
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
-        ConfiguracaoLimitePerdasModalComponent
+        ConfiguracaoLimitePerdasModalComponent,
+        BackPageComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -222,7 +224,8 @@ import { ConfiguracaoLimitePerdasModalComponent } from './modals/configuracao-li
         WelcomePageComponent,
         SubmenuComponent,
         SkeletonModule,
-        MenuFooterComponent
+        MenuFooterComponent,
+        BackPageComponent
     ],
     providers: [
         ApostaEsportivaService,
