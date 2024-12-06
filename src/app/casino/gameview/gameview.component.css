@@ -97,7 +97,6 @@ iframe{
 }
 
 .game-name span {
-    font-size: 16px;
     font-weight: 600;
     margin-top: 6px;
     margin-bottom: 0;
@@ -989,6 +988,6 @@ iframe{
 
 .desktopIsloggedIn {
     position: fixed;
-    margin-top: 50px !important;
+    margin-top: 43px !important;
     height: calc(100% - 140px);
 }
