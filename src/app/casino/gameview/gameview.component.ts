@@ -203,8 +203,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
                                 this.loadGame();
-                                this.inGame = true;
-
+                                
                                 if (this.isMobile && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixMobileHeader();
@@ -214,15 +213,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                     this.disableHeader();
                                     this.fixTabletHeader();
                                 }
-
+                                
                                 if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
                                     this.fixTabletAndDesktopScreen();
                                 }
-                                
-                                if (this.inGame) {
-                                   this.fixInGameSpacings();
-                                }
                             }
+                        }
+                        if (isLoggedIn || this.gameMode !== 'REAL') {
+                            this.inGame = true;
+                            this.fixInGameSpacings();
                         }
                         this.loadGame();
                     }
@@ -317,9 +316,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.fixTabletAndDesktopScreen();
         }
 
-        if (this.inGame && this.isLoggedIn) {
+        if (this.inGame || (this.isLoggedIn || this.gameMode !== 'REAL')) {
             this.fixInGameSpacings();
-         }
+        }
     }
 
     public copyLink() {
@@ -928,7 +927,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private fixInGameSpacings() {
         const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
 
-        if (blocoContainer) {
+        if (blocoContainer && (this.inGame || this.gameMode !== 'REAL')) {
             this.renderer.setStyle(blocoContainer, 'padding', '0');
         }
     }
