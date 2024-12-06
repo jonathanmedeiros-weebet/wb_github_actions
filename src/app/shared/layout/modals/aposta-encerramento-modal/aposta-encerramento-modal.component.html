@@ -206,7 +206,7 @@
     </div>
     <div class="button-container">
         <button class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)" [disabled]="simulando" *ngIf="podeEncerrar(aposta)">
-            {{ simulando ? 'Calculando...' : 'Encerrar Aposta' }}
+            {{ simulando ? 'Calculando...' : 'Encerrar aposta no valor de ' + (valorEncerramento | currency) }}
         </button>
         <button class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao" (click)="descartar()">
             Cancelar

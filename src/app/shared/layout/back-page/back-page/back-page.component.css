@@ -32,3 +32,9 @@
 .back-page__text {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 350px) {
+    .card-small{
+        width: 300px;
+    }
+}

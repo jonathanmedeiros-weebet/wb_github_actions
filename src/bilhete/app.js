@@ -16,7 +16,12 @@ document.onreadystatechange = async function () {
                 appCssLink.parentElement.insertBefore(linkTag, appCssLink);
 
                 const image = this.createElement('img');
-                image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_banca.png`
+                image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_impressao.png`
+
+                image.onerror = (e) => {
+                    image.src = `https://weebet.s3.amazonaws.com/${params.slug}/logos/logo_banca.png`;
+                };
+
                 const logoDiv = this.getElementById('logo-frame');
                 logoDiv.appendChild(image);
 
