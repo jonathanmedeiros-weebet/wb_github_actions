@@ -119,15 +119,30 @@ export class NgbdModalContent {
             action: 'shareURL'
         };
 
+        const base64ToBlob = (base64: string, contentType: string): Blob => {
+            const byteCharacters = atob(base64); 
+            const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
+            const byteArray = new Uint8Array(byteNumbers);
+            return new Blob([byteArray], { type: contentType });
+        };
+        
+        const contentType = "image/png";
+        const base64Data = this.qrCodeBase64.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+        const blob = base64ToBlob(base64Data, contentType);
+        const file = new File([blob], "shared-image.png", { type: contentType });
+
         if (this.isAppMobile) {
             WeebetMessage.postMessage(JSON.stringify(dataToSend));
         } else {
             if (window.navigator.share) {
                 window.navigator.share({
+                    files: [file],
                     title: dataToSend.message,
-                    text: dataToSend.data,
-                    url: this.qrCodeBase64 
-                })            
+                    text: "Veja o QR Code"
+                }).catch(error => {
+                    console.error("Erro no compartilhamento:", error);
+                    this.messageService.error('Erro ao compartilhar a imagem.');
+                });
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
             }
