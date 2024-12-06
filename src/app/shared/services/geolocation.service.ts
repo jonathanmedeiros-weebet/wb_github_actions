@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-import { config } from '../config';
-import { HttpClient } from '@angular/common/http';
-import { HeadersService } from './utils/headers.service';
 
 export interface Geolocation {
     error: boolean;
@@ -21,58 +18,10 @@ export interface ReverseGeolocation {
     providedIn: 'root'
 })
 export class GeolocationService {
-
-    private Estados = [
-        { nome: 'Acre', codigo: 12 },
-        { nome: 'Alagoas', codigo: 27 },
-        { nome: 'Amapá', codigo: 16 },
-        { nome: 'Amazonas', codigo: 13 },
-        { nome: 'Bahia', codigo: 29 },
-        { nome: 'Ceará', codigo: 23 },
-        { nome: 'Distrito Federal', codigo: 53 },
-        { nome: 'Espírito Santo', codigo: 32 },
-        { nome: 'Goiás', codigo: 52 },
-        { nome: 'Maranhão', codigo: 21 },
-        { nome: 'Mato Grosso', codigo: 51 },
-        { nome: 'Mato Grosso do Sul', codigo: 50 },
-        { nome: 'Minas Gerais', codigo: 31 },
-        { nome: 'Pará', codigo: 15 },
-        { nome: 'Paraíba', codigo: 25 },
-        { nome: 'Paraná', codigo: 41 },
-        { nome: 'Pernambuco', codigo: 26 },
-        { nome: 'Piauí', codigo: 22 },
-        { nome: 'Rio Grande do Norte', codigo: 24 },
-        { nome: 'Rio Grande do Sul', codigo: 43 },
-        { nome: 'Rio de Janeiro', codigo: 33 },
-        { nome: 'Rondônia', codigo: 11 },
-        { nome: 'Roraima', codigo: 14 },
-        { nome: 'Santa Catarina', codigo: 42 },
-        { nome: 'São Paulo', codigo: 35 },
-        { nome: 'Sergipe', codigo: 28 },
-        { nome: 'Tocantins', codigo: 17 }
-    ];
-    private options = {
-        enableHighAccuracy: false,
-        timeout: 3000,
-        // Cache time = 10min
-        maximumAge: 1000 * 60 * 10,
-    };
-    private central_url = `${config.HOST}/api/geolocation`;
-    private requestOnGoing = false;
-
-    constructor(private http: HttpClient, private header: HeadersService) { }
-
-    async getGeolocation(isReverse = true): Promise<Geolocation> {
+    async getGeolocation(): Promise<Geolocation> {
         try {
-            if (this.requestOnGoing) return; // Avoid multiple requests
-            this.requestOnGoing = isReverse ? true : false;
-            let currentPosition = await this.getCurrentPosition() as Geolocation;
-
-            if (isReverse) this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
-
-            return currentPosition;
+            return await this.getCurrentPosition() as Geolocation;
         } catch (error) {
-            this.requestOnGoing = false;
             return {
                 error: true,
                 lat: 0,
@@ -122,7 +71,7 @@ export class GeolocationService {
         return new Promise((resolve, reject) => {
             try {
                 if (!navigator.geolocation) throw new Error('Geolocation not allowed.');
-
+                
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         if (!position) throw new Error('Unable to find current position');

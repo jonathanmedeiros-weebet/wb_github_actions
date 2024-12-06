@@ -97,7 +97,6 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/two-factor-auth-login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    this.geolocation.getGeolocation();
                     this.setCookie(res.results.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
@@ -135,7 +134,7 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-                    this.geolocation.getGeolocation();
+
                     this.setCookie(res.results.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);

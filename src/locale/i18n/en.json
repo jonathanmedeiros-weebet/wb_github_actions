@@ -737,7 +737,8 @@
         "protectedByReCaptchaPart2": "Privacy Policy",
         "protectedByReCaptchaPart3": "and the",
         "protectedByReCaptchaPart4": "Terms of Service",
-        "protectedByReCaptchaPart5": "apply."
+        "protectedByReCaptchaPart5": "apply.",
+        "registrationBeneficiariesSocialPrograms": "Beneficiaries of social programs cannot register."
     },
     "registerCancel": {
         "titleCancelRegister": "Are you sure you want to cancel your registration?",
