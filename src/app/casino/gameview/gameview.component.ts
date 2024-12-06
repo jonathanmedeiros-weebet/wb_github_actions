@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild, RendererStyleFlags2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
@@ -72,6 +72,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     tawakChatClicked: boolean = false;
     gameProviderName: string = '';
+    private inGame : boolean = false
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -202,6 +203,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
                                 this.loadGame();
+                                this.inGame = true;
 
                                 if (this.isMobile && this.gameMode === 'REAL') {
                                     this.disableHeader();
@@ -212,6 +214,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                     this.disableHeader();
                                     this.fixTabletHeader();
                                 }
+
+                                if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
+                                    this.fixTabletAndDesktopScreen();
+                                }
+
+                               this.fixInGameSpacings();
                             }
                         }
 
@@ -916,9 +924,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     private fixInGameSpacings() {
         const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
+        const gameFrame = this.el.nativeElement.querySelector('.game-frame');
 
-        if (blocoContainer && blocoContainer.classList.contains('in-game')) {
+        if (blocoContainer) {
             this.renderer.setStyle(blocoContainer, 'padding', '0');
+            if (this.isDesktop && !this.isTablet && this.inGame) {
+                this.renderer.setStyle(gameFrame, 'position', 'fixed');
+                this.renderer.setStyle(gameFrame, 'margin-top', '50px');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 170px)');
+            }
         }
     }
 
@@ -1062,11 +1076,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && this.isDesktop) && (gameView.classList.contains('in-game'))) {
+        if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
+                console.log('testdaae');
+
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '50px');
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 180px)');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 170px)');
             }
         }
 

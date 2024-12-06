@@ -743,6 +743,7 @@ iframe{
     .game-name span {
         font-size: 16px;
         margin-left: 16px;
+        margin-top: 0;
     }
 
     .btn-cassino {
