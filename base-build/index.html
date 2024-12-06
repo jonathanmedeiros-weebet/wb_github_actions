@@ -142,18 +142,28 @@
             return location.search.includes(`force=${appVersion}`);
         }
 
+        const getAndroidVersion = (e) => {
+            e = (e || navigator.userAgent).toLowerCase();
+            var match = e.match(/android\s([0-9\.]*)/i);
+
+            return match ? match[1] : undefined;
+        }
+        
+        const forceV2AppByAndroidVersion = parseInt(getAndroidVersion()) >= 14;
+
         const initApp = () => {
             // v1 -> light
             // v2 -> site do client;
             // v3 -> novo app;
             if (!isApp()) return;
+
             const v1Url = 'https://[S3_FOLDER]/client-light/?config=true&host=[HOST]&slug=[S3_FOLDER]&nome=[BANCA]';
             const v3Url = 'https://[S3_FOLDER]/app-cambista/?host=https://[HOST]&slug=[S3_FOLDER]&name=[BANCA]';
             if (verifyAppForce('v1')) {
                 window.location.href = v1Url;
                 return;
             }
-            if (verifyAppForce('v2')) {
+            if (verifyAppForce('v2') || forceV2AppByAndroidVersion) {
                 return;
             }
 
