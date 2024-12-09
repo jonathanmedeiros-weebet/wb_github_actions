@@ -99,8 +99,7 @@
                         <tr *ngFor="let solicitacao of solicitacoes">
                             <td>{{solicitacao.id}}</td>
                             <td>{{solicitacao.cartao_aposta_chave}}</td>
-                            <td>
-                                {{solicitacao.cartao_aposta.saldo | currency}}</td>
+                            <td>{{solicitacao.cartao_aposta.saldo | currency}}</td>
                             <td>{{solicitacao.cartao_aposta.apostador}}</td>
                             <td >{{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</td>
                             <td>{{solicitacao.valor | currency}}</td>
@@ -108,7 +107,7 @@
                             <td>{{solicitacao.pago ? 'PAGO' : ''}}</td>
                             <td>
                                 <button *ngIf="solicitacao.aprovado && !solicitacao.pago" type="button"
-                                    class="btn btn-primary" (click)="setPagamento(solicitacao)">
+                                    class="btn btn-success" (click)="setPagamento(solicitacao)">
                                     <i class="fa fa-check" style="color: white;"></i>
                                 </button>
                             </td>
