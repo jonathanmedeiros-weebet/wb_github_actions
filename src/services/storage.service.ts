@@ -1,6 +1,6 @@
 export enum LocalStorageKey {
     CONFIG_CLIENT = 'config_client',
-    TOKEN = 'token',
+    TOKEN = 'cToken',
     USER = 'user'
 }
 

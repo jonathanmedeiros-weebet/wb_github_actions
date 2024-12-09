@@ -86,7 +86,7 @@ import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
-import { logout, getBetByCode, getFinancial } from '@/services';
+import { logout, getBetByCode, getFinancial, LocalStorageKey } from '@/services';
 import { formatCurrency, wbPostMessage } from '@/utilities';
 import { localStorageService } from "@/services";
 import Toast from '@/components/Toast.vue';
@@ -129,7 +129,7 @@ export default {
       return formatCurrency(Number(this.balanceData?.credito ?? 0));
     },
     userName() {
-      const user = localStorageService.get('user');
+      const user = localStorageService.get(LocalStorageKey.USER);
       return user ? user.nome : '';
     }
   },

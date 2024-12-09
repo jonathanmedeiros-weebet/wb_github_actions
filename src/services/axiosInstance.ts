@@ -1,6 +1,6 @@
 import { useConfigClient } from "@/stores";
 import axios from "axios";
-import { localStorageService } from "./storage.service";
+import { LocalStorageKey, localStorageService } from "./storage.service";
 import router from "@/router";
 
 export const axiosInstance = () => {
@@ -15,7 +15,7 @@ export const axiosInstance = () => {
   axiosInstance.interceptors.request.use(
     (config: any) => {
       const awsRouteException = config.url.includes('s3.amazonaws');
-      const token = localStorageService.get('token');
+      const token = localStorageService.get(LocalStorageKey.TOKEN);
       if (token && !awsRouteException) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }

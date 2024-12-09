@@ -12,7 +12,7 @@ import ReckoningView from '@/views/ReckoningView.vue'
 import ResultsView from '@/views/ResultsView/ResultsView.vue'
 import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
-import { checkToken, localStorageService, prepareConfigClient, verifyToken } from "@/services";
+import { LocalStorageKey, localStorageService, prepareConfigClient } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
 import CloseBetView from '@/views/CloseBetView.vue'
 import PopularLotteryView from '@/views/PopularLotteryView.vue'
@@ -158,12 +158,11 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const hasToken = localStorageService.get('token');
+  const hasToken = localStorageService.get(LocalStorageKey.TOKEN);
   window.scrollTo(0,0);
 
   if(!Boolean(from.name)) {
     prepareConfigClient(to)
-    // checkToken(); // TODO: verificar endpoint de verificar token
   }
 
   if (Boolean(to.meta?.auth)) {

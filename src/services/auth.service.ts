@@ -33,7 +33,7 @@ export const verifyToken = async () => {
 
     const { lokiUrl } = useConfigClient();
     const url = `${lokiUrl}/auth/verify-token`;
-    const token = localStorageService.get('token');
+    const token = localStorageService.get(LocalStorageKey.TOKEN);
   
     if (!token) {
         return false
@@ -61,7 +61,7 @@ export const logout = () => {
 }
 
 export const checkToken = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(LocalStorageKey.TOKEN);
     if(!token) {
         localStorageService.removeAll();
         return false;
