@@ -73,7 +73,6 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.exibirLinkAfiliado = this.paramsLocais.getOpcoes().exibir_link_afiliado;
         this.slug = config.SLUG;
         this.sharedUrl = config.SHARED_URL;
-
         this.linkTwitter = this.paramsLocais.getOpcoes().linkTwitter;
         this.linkTikTok = this.paramsLocais.getOpcoes().linkTikTok;
         this.linkTelegram = this.paramsLocais.getOpcoes().linkTelegram;
