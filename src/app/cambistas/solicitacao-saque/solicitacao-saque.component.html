@@ -97,13 +97,13 @@
                     </tr>
                     <tbody *ngIf="!loading">
                         <tr *ngFor="let solicitacao of solicitacoes">
-                            <td class="text-right">{{solicitacao.id}}</td>
-                            <td class="text-right">{{solicitacao.cartao_aposta_chave}}</td>
-                            <td class="text-right">
+                            <td>{{solicitacao.id}}</td>
+                            <td>{{solicitacao.cartao_aposta_chave}}</td>
+                            <td>
                                 {{solicitacao.cartao_aposta.saldo | currency}}</td>
                             <td>{{solicitacao.cartao_aposta.apostador}}</td>
-                            <td>{{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</td>
-                            <td class="text-right">{{solicitacao.valor | currency}}</td>
+                            <td >{{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td>{{solicitacao.valor | currency}}</td>
                             <td>{{solicitacao.aprovado ? 'SIM' : 'NÃO'}}</td>
                             <td>{{solicitacao.pago ? 'PAGO' : ''}}</td>
                             <td>
