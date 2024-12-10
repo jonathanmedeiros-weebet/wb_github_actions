@@ -71,6 +71,10 @@
     cursor: pointer;
 }
 
+.natureza-td span {
+    white-space: nowrap;
+}
+
 @media only screen and (max-width: 1024px) {
     #default-content {
         padding: 10px;
@@ -95,6 +99,11 @@
     }
 }
 
+@media (max-width: 482px) {
+    #valor-th {
+        padding-left: 50px;
+    }
+}
 
 /*.fin-card {*/
 /*    background-color: var(--header);*/
