@@ -150,6 +150,8 @@ export default {
             const quotes = Boolean(this.game.ao_vivo)
                 ? this.game.cotacoes_aovivo ?? []
                 : this.game.cotacoes ?? [];
+            
+                console.log(quotes)
 
             const markets = {
                 [MarketTime.FULL_TIME]: {},
@@ -192,7 +194,8 @@ export default {
                     id: quote._id,
                     finalValue,
                     status: quote.status ?? QuotaStatus.DEFAULT,
-                    hasPermission: hasQuotaPermission(finalValue)
+                    hasPermission: hasQuotaPermission(finalValue),
+                    position: betType.posicao_x_mobile
                 });
             }
 
@@ -204,6 +207,10 @@ export default {
         },
         prepareTimeQuotes(quotes) {
             quotes = Object.values(quotes);
+            quotes = quotes.map((quote) => ({
+                ...quote,
+                odds: quote.odds.sort((oddA, oddB) => oddA.position - oddB.position)
+            }))
             return quotes.sort((quoteA, quoteB) => quoteA.position - quoteB.position);
         },
         preparePlayerQuotes(quotes) {
