@@ -179,7 +179,7 @@ export default {
       if(Boolean(this.league)) {
         await this.handleLeague(this.league)
       } else {
-        await this.prepareChampionshipList(this.modality.id, true, null, this.dateSelected.format('YYYY-MM-DD'))
+        await this.prepareChampionshipList(this.modality.id, null, this.dateSelected.format('YYYY-MM-DD'))
       }
        
       await this.prepareChampionshipPerRegionList(this.modality.id)
@@ -272,17 +272,19 @@ export default {
     },
     async prepareChampionshipList(
       modalityId,
-      popularLeague = false,
       regionName = null,
       dateSelected= null
     ) {
+      const { options } = useConfigClient();
+      
+      const isPopularLeague = options?.ordem_exibicao_campeonatos == 'populares';
       const championships = this.liveActived
         ? await getLiveChampionship(modalityId)
         : await getChampionshipBySportId(
           modalityId,
           regionName,
           dateSelected,
-          popularLeague
+          isPopularLeague
         );
 
       this.homeStore.setChampionshipList(championships);
@@ -355,7 +357,7 @@ export default {
 
       this.handleCloseModalitiesModal();
 
-      await this.prepareChampionshipList(modalityId, false, null, this.dateSelected.format('YYYY-MM-DD'));
+      await this.prepareChampionshipList(modalityId, null, this.dateSelected.format('YYYY-MM-DD'));
       await this.prepareChampionshipPerRegionList(modalityId);
       this.loading = false;
     },
@@ -387,7 +389,7 @@ export default {
         regionName = regionName != 'ALL' ? regionName : null;
 
         this.regionSelected = regionName;
-        await this.prepareChampionshipList(this.modality.id, false, regionName, this.dateSelected.format('YYYY-MM-DD'));
+        await this.prepareChampionshipList(this.modality.id, regionName, this.dateSelected.format('YYYY-MM-DD'));
       } else {
         await this.prepareChampionship(this.league.id, this.dateSelected.format('YYYY-MM-DD'));
       }
