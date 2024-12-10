@@ -352,7 +352,9 @@ export default {
       if(this.hasLiveBet) {
         const liveToken = await createLiveToken(data);
         data.token_aovivo = liveToken;
-        await delay(10000);
+
+        const timeDelay = options?.delay_aposta_aovivo ?? 10;
+        await delay(timeDelay * 1000);
       }
 
       createBetSport(data)
