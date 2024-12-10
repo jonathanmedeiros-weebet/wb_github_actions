@@ -32,7 +32,7 @@
                 <div id="details-wrapper">
                     <div class="details-container">
                         <div class="details-text">
-                            {{('deposito.depositTextWithoutBonusAndPromocode' | translate:{'paymentMethod': (paymentMethodSelected | formatPaymentMethod)})}}
+                            {{('deposito.depositTextWithoutBonusAndPromocode' | translate)}}
                         </div>
                         <div class="hide-desktop details-payment-method" *ngIf="availablePaymentMethods.length > 1">
                             <h3>{{'financeiro.paymentGateway' | translate}}</h3>

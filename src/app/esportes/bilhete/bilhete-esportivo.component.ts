@@ -560,6 +560,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     salvarAposta(dados) {
         if (this.apostaAoVivo) {
             this.setDelay();
+
             this.apostaEsportivaService.tokenAoVivo(dados)
                 .pipe(
                     tap(token => {

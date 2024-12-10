@@ -161,14 +161,14 @@ export class AppComponent implements OnInit {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
 
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
+            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
+
             this.modalService.open(CadastroModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
                 windowClass: 'modal-500 modal-cadastro-cliente'
             });
-
-            this.router.navigate(['/']);
         }
 
         if (this.router.url.includes('/login')) {

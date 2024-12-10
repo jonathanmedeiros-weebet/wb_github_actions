@@ -23,11 +23,20 @@ export class HomeGuard implements CanActivate {
         private router: Router
     ) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    canActivate(route: ActivatedRouteSnapshot, routerState: RouterStateSnapshot) {
         const { pagina_inicial, casino, esporte, betby } = this.paramsService.getOpcoes();
 
         if (betby) {
             this.pages.esporte = 'sports';
+        }
+
+        const navigation = this.router.getCurrentNavigation();
+        const state = navigation?.extras?.state;
+
+        let navigateOptions = { queryParams: route.queryParams };
+
+        if (state?.fromRegistration) {
+            navigateOptions['skipLocationChange'] = true;
         }
 
         if (pagina_inicial) {
@@ -35,11 +44,11 @@ export class HomeGuard implements CanActivate {
                 return true;
             }
 
-            this.router.navigate([this.pages[pagina_inicial]], { queryParams: route.queryParams });
+            this.router.navigate([this.pages[pagina_inicial]], navigateOptions);
             return false;
         }
 
-        this.router.navigate([this.pages['esporte']], { queryParams: route.queryParams });
+        this.router.navigate([this.pages['esporte']], navigateOptions);
         return false;
     }
 }
