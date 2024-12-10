@@ -9,7 +9,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ConfirmModalComponent, RegrasBonusModalComponent } from '../../../shared/layout/modals';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
@@ -49,7 +49,7 @@ import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.servic
 
         <div class="buttons">
             <button class="btn btn-custom2 btn-w-100" (click)="compartilhar()"><i class="fa fa-share"></i> Compartilhar QR Code</button>
-            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
+            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode" (click)="copyCode()"><i class="fa fa-copy"></i>{{ copyButtonText }}</button>
         </div>
     </div>
     `
@@ -63,6 +63,7 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
+    copyButtonText; 
 
     constructor(
         public modal: NgbActiveModal,
@@ -99,10 +100,17 @@ export class NgbdModalContent {
                 clearInterval(timer);
             }
         }, 1000);
+        this.copyButtonText = this.translate.instant('deposito.copyCode');
     }
 
-    copyCode(code) {
-        console.log('Copiado: ', code);
+    copyCode() {
+        this.translate.get('deposito.copied').subscribe((translatedText) => {
+            this.copyButtonText = translatedText; 
+
+            setTimeout(() => {
+                this.copyButtonText = this.translate.instant('deposito.copyCode');
+            }, 1000);
+        }); 
     }
 
     compartilhar() {
@@ -165,6 +173,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private modalService: NgbModal,
         private paramsLocais: ParametrosLocaisService,
         private renderer: Renderer2,
+        private route: ActivatedRoute,
         private router: Router,
         public activeModal: NgbActiveModal,
         private ga4Service: Ga4Service,
@@ -202,6 +211,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 },
                 error => this.handleError(error)
             );
+
+        const promoCode = this.route.snapshot.queryParams['promo'] || null;
+        this.form.patchValue({ promoCode: promoCode });
     }
 
     createForm() {
@@ -229,9 +241,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                             this.messageService.warning('Algo não saiu muito bem. Tente novamente mais tarde.');
                             this.router.navigate(['/']);
                         }
-                    )                    
+                    )
                 },
-                (reason) => { 
+                (reason) => {
                     this.messageService.warning('Você não aceitou os termos de uso. Você será redirecionado para a página inicial.');
                     this.router.navigate(['/']);
                 }

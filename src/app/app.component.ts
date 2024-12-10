@@ -13,6 +13,7 @@ import { IdleDetectService } from './shared/services/idle-detect.service';
 import { ConfiguracaoLimiteTempoModalComponent } from './shared/layout/modals/configuracao-limite-tempo-modal/configuracao-limite-tempo-modal.component';
 import { ActivityDetectService } from './shared/services/activity-detect.service';
 import { Subscription } from 'rxjs';
+import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -59,7 +60,8 @@ export class AppComponent implements OnInit {
         private idleDetectService: IdleDetectService,
         private utilsService: UtilsService,
         private activityDetectService: ActivityDetectService,
-        private clienteService: ClienteService
+        private clienteService: ClienteService,
+        private navigationHistoryService: NavigationHistoryService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -159,14 +161,14 @@ export class AppComponent implements OnInit {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
 
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
+            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
+
             this.modalService.open(CadastroModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
                 windowClass: 'modal-500 modal-cadastro-cliente'
             });
-
-            this.router.navigate(['/']);
         }
 
         if (this.router.url.includes('/login')) {

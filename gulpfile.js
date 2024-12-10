@@ -757,15 +757,6 @@ gulp.task('betsnordeste.wee.bet', function (done) {
     });
 });
 
-gulp.task('bets084.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "bets084.com",
-        banca: "BETS 084",
-        styles: "",
-    });
-});
-
 gulp.task('betson.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1333,15 +1324,6 @@ gulp.task('cassinoaovivo.bet', function (done) {
     });
 });
 
-gulp.task('n7futmix.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "n7futmix.com",
-        banca: "N7 FUTMIX",
-        styles: "",
-    });
-});
-
 gulp.task('sortebet777.com', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
@@ -1532,15 +1514,6 @@ gulp.task('apostenasorte.bet', function (done) {
     });
 });
 
-gulp.task('betmaniapix.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betmaniapix.com",
-        banca: "BET MANIA PIX",
-        styles: "",
-    });
-});
-
 gulp.task('ultrabetss.com', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1643,15 +1616,6 @@ gulp.task('suasortebet.com', function (done) {
     });
 });
 
-gulp.task('betsrio.online', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "betsrio.online",
-        banca: "BETS RIO",
-        styles: "",
-    });
-});
-
 gulp.task('rc.wee.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1718,15 +1682,6 @@ gulp.task('showbets21.com', function (done) {
         server: "front5.wee.bet",
         host: "showbets21.com",
         banca: "SHOW BETS 21",
-        styles: "",
-    });
-});
-
-gulp.task('agorabets.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "agorabets.com",
-        banca: "AGORA BETS",
         styles: "",
     });
 });
@@ -2310,7 +2265,7 @@ gulp.task('betagora.io', function (done) {
         host: "betagora.io",
         banca: "BET AGORA",
         styles: "",
-        scripts: "<script type='text/javascript'>	function initEmbeddedMessaging() {		try {			embeddedservice_bootstrap.settings.language = 'pt_BR'; // For example, enter 'en' or 'en-US'			embeddedservice_bootstrap.init(				'00DKd0000052tg8',				'CA_ChatBotBetAgora',				'https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106',				{					scrt2URL: 'https://lemagroup.my.salesforce-scrt.com'				}			);		} catch (err) {			console.error('Error loading Embedded Messaging: ', err);		}	};</script><script type='text/javascript' src='https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>",
+        scripts: "<script>function initEmbeddedMessaging(){try{embeddedservice_bootstrap.settings.language='pt_BR',embeddedservice_bootstrap.init('00DKd0000052tg8','CA_ChatBotBetAgora','https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106',{scrt2URL:'https://lemagroup.my.salesforce-scrt.com'})}catch(e){console.error('Error loading Embedded Messaging: ',e)}}</script><script onload=initEmbeddedMessaging() src=https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106/assets/js/bootstrap.min.js></script>",
         xtremepush_sdk: "E5ilOYbc5X95iSCWM5gf_0K-_turnLxj"
     });
 });
@@ -2529,7 +2484,8 @@ gulp.task('apostefacil.bet', function (done) {
         server: "front5.wee.bet",
         host: "apostefacil.bet",
         banca: "APOSTE FÁCIL",
-        styles: ""
+        styles: "",
+        xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS"
     });
 });
 
@@ -2557,6 +2513,33 @@ gulp.task('playnabet.com', function (done) {
         server: "front2.wee.bet",
         host: "playnabet.com",
         banca: "PLAY NA BET",
+        styles: "",
+    });
+});
+
+gulp.task('poc.wee.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "poc.wee.bet",
+        banca: "POC LOTEP",
+        styles: "",
+    });
+});
+
+gulp.task('bet10.bet', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "bet10.bet",
+        banca: "BET10",
+        styles: "",
+    });
+});
+
+gulp.task('pintou.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pintou.bet",
+        banca: "PINTOU.BET",
         styles: "",
     });
 });

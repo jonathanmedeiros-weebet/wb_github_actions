@@ -140,6 +140,10 @@
         "bairro": "Barrio",
         "estado": "Estado",
         "cidade": "Ciudad",
+        "numero": "Número",
+        "genero": "Género",
+        "nacionalidade": "Nacionalidad",
+        "documentoIdentificacao": "Documento de identificación (DNI o pasaporte)",
         "selecione": "Seleccionar",
         "selecioneACidade": "Selecciona la ciudad",
         "atualizar": "Actualizar",
@@ -250,19 +254,26 @@
         "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
         "bonusCancelado": "Bono cancelado",
         "aguardando": "Pendiente",
+        "resetarSenha": "Reiniciar a senha",
         "loginEmail": "Correo electrónico",
         "loginPhone": "Teléfono",
         "loginUsername": "Username",
         "field": "Campo",
+        "or": "O",
+        "geolocationError": "Por favor, verifique la configuración de ubicación de su navegador y intente nuevamente.",
+        "restricaoDeLocalizacao": "Este recurso está disponible solo para usuarios en Brasil.",
+        "lastAccesses": "Últimos accesos",
+        "action": "Acción",
         "jogosRelacionados": "juegos relacionados",
         "session_alert": "Alerta de Sesión",
         "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?",
         "jogoResponsavel": "Juego responsable",
-        "or": "O"
+        "tax": "Impuesto"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
-        "casinoBetting": "Apuestas de casino"
+        "casinoBetting": "Apuestas de casino",
+        "incomeTaxOnPrize": "Impuesto sobre la renta del premio"
     },
     "dias": {
         "ontem": "Ayer",
@@ -432,9 +443,11 @@
         "soliciteEntrandoEmContatoCom": "Solicite un depósito poniéndose en contacto con nosotros a través de Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Depósitos recientes",
         "depositDetails": "Detalles del depósito",
-        "depositText": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación, seleccione si desea recibir el {{bonusType}}, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
-        "depositTextWithoutBonus": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
-        "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de {{paymentMethod}}, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago."
+        "depositText": "Para hacer un depósito a través de PIX, ingrese el monto deseado en el campo a continuación, seleccione si desea recibir el {{bonusType}}, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
+        "depositTextWithoutBonus": "Para hacer un depósito a través de PIX, ingrese el monto deseado en el campo a continuación, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
+        "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de PIX, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
+        "copyCode": "Copiar código",
+        "copied": "Copiado!"
     },
     "footer": {
         "afiliados": "Asociaciones",
@@ -512,7 +525,10 @@
         "valorMaximoSaqueMensal" : "Monto máximo de retiro mensual",
         "receberBonusCassino": "Recibir bono - Casino",
         "transactions": "Transacciones",
-        "paymentGateway": "Pasarela de pago"
+        "paymentGateway": "Pasarela de pago",
+        "balance": "Saldo",
+        "previousBalance": "Saldo anterior",
+        "subsequentBalance": "Saldo posterior"
     },
     "rollover": {
         "nenhumRollover": "Sin rollover.",
@@ -705,6 +721,10 @@
         "redeemed": "Canjeado",
         "redeem": "Canjear"
     },
+    "face_match": {
+        "verified_identity": "Identidad verificada!",
+        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
+    },
     "register": {
         "signupWith": "Regístrate en Google",
         "registerGoogleAccount": "Regístrate con tu cuenta de google",
@@ -713,7 +733,8 @@
         "protectedByReCaptchaPart2": "Política de privacidad",
         "protectedByReCaptchaPart3": "y las",
         "protectedByReCaptchaPart4": "Condiciones del servicio",
-        "protectedByReCaptchaPart5": "de Google."
+        "protectedByReCaptchaPart5": "de Google.",
+        "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse."
     },
     "registerCancel": {
         "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",
@@ -721,6 +742,11 @@
         "youreAlmostThere": "¡Ya casi ha llegado! Regístrese y deposite ahora y experimente lo mejor del entretenimiento en la palma de su mano.",
         "continue": "Continúe en",
         "cancel": "Sí, quiero cancelar"
+    },
+    "genero": {
+        "masculino": "Masculino",
+        "feminino": "Femenino",
+        "outros": "Otros"
     },
     "compartilhar_aposta": {
         "linkCopiado": "¡Enlace copiado al portapapeles!",

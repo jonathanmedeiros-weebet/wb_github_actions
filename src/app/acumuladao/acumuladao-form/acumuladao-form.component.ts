@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import {takeUntil} from 'rxjs/operators';
 import {BehaviorSubject, Subject} from 'rxjs';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-acumuladao-form',
@@ -150,6 +151,9 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
                 apostador: this.form.value.apostador,
                 acumuladao_id: this.acumuladao.id,
                 jogos: [],
+                ibge_code: sessionStorage.getItem('ibge_code'),
+                locale_city: sessionStorage.getItem('locale_city'),
+                locale_state: sessionStorage.getItem('locale_state')
             };
 
             this.acumuladao.jogos.forEach(j => {

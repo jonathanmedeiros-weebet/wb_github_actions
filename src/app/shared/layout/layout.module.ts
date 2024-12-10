@@ -101,6 +101,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
 import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
+import { BackPageComponent } from './back-page/back-page/back-page.component';
 import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 
 @NgModule({
@@ -202,6 +203,7 @@ import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-b
         MultifactorConfirmationModalComponent,
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
+        BackPageComponent,
         ExibirBilheteCassinoComponent
     ],
     exports: [
@@ -224,6 +226,7 @@ import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-b
         SubmenuComponent,
         SkeletonModule,
         MenuFooterComponent,
+        BackPageComponent,
         ExibirBilheteCassinoComponent
     ],
     providers: [

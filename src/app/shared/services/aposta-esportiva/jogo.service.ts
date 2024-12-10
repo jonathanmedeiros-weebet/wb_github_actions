@@ -54,6 +54,7 @@ type iBilheteEsportivo = {
 export class JogoService {
     private JogoUrl = `${config.CENTER_API}/jogos`;
     private JogosLokiUrl = `${config.LOKI_URL}/games`;
+    private JogoCentralUrl = `${config.BASE_URL}/jogos`;
 
     constructor(
         private http: HttpClient,

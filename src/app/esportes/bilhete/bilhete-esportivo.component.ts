@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subject, Observable, of, BehaviorSubject } from 'rxjs';
@@ -22,7 +22,6 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 
@@ -72,13 +71,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     showStream = false;
     showFrame = true;
     headerHeight = 92;
-
     footballId;
+    currentLanguage = 'pt';
     basketballId;
-
     sportId:number;
     liveUrl:string;
-
     private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
@@ -113,6 +110,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.modoCambista = this.paramsService.getOpcoes().modo_cambista;
         this.mobileScreen = window.innerWidth <= 1024;
         const { habilitar_live_tracker, habilitar_live_stream } = this.paramsService.getOpcoes();
+
+        this.currentLanguage = this.translate.currentLang;
+
+        this.translate.onLangChange.subscribe(res => this.currentLanguage = res.lang);
 
         this.createForm();
         this.definirAltura();
@@ -398,9 +399,22 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
+            let ibgeCode = sessionStorage.getItem('ibge_code');
+            let localeCity = sessionStorage.getItem('locale_city');
+            let localeState = sessionStorage.getItem('locale_state');
+    
+            if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
+                valido = false;
+                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
+                this.geolocationService.getGeolocation();
+            }
+
             if (valido) {
                 if (this.isLoggedIn) {
-                    const values = await this.ajustarDadosParaEnvio();
+                    let values = await this.ajustarDadosParaEnvio();
+                    values['ibge_code'] = ibgeCode;
+                    values['locale_city'] = localeCity;
+                    values['locale_state'] = localeState;
                     this.salvarAposta(values);
                 } else {
                     this.enableSubmit();
@@ -590,7 +604,16 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     async finalizarApostaDeslogado() {
         this.disabledSubmit();
 
-        const values = await this.ajustarDadosParaEnvio();
+        if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
+            this.geolocationService.getGeolocation();
+            this.enableSubmit();
+            return this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
+        }
+
+        let values = await this.ajustarDadosParaEnvio();
+        values['ibge_code'] = sessionStorage.getItem('ibge_code');
+        values['locale_city'] = sessionStorage.getItem('locale_city');
+        values['locale_state'] = sessionStorage.getItem('locale_state');
 
         if (this.tipoApostaDeslogado === 'preaposta') {
             this.preApostaService.create(values)

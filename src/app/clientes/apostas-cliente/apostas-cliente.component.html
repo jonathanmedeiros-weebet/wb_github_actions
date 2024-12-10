@@ -101,7 +101,7 @@
                             </div>
                             <div class="info-resultado">
                                 <div class="item spacing" style="color: transparent;">
-                                    <label>-</label> 
+                                    <label>-</label>
                                 </div>
                                 <div class="item">
                                     <label>{{'geral.totalApostado' | translate}} ({{'geral.bonus' | translate}}):</label> {{ totais.valorBonus | currency }}
@@ -111,9 +111,9 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </ng-template>
-    
+
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -124,8 +124,9 @@
                                 <th>{{'geral.horario' | translate}}</th>
                                 <th>{{'geral.valor' | translate}}</th>
                                 <th>{{'geral.premio' | translate}} </th>
+                                <th>{{'bet.incomeTaxOnPrize' | translate}} </th>
                                 <th>{{'geral.estado' | translate}}</th>
-                                <th></th>
+                                <th *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'"></th>
                             </tr>
                             </thead>
                             <tr *ngIf="loading">
@@ -141,6 +142,7 @@
                                 <td>{{ aposta.horario | moment: 'DD/MM/YYYY HH:mm' }}</td>
                                 <td>{{ aposta.valor | currency}}</td>
                                 <td>{{ aposta.premio | currency }}</td>
+                                <td>{{ aposta.incomeTaxOnPrize | currency }}</td>
                                 <td>
                                     <div *ngIf="aposta.rollover_status == 'cancelado'"><th>{{'geral.bonusCancelado' | translate}}</th></div>
                                     <div *ngIf="aposta.resultado == null && aposta.rollover_status != 'cancelado'"><th>{{'geral.aguardando' | translate}}</th></div>
@@ -164,7 +166,6 @@
                         </table>
                     </div>
                 </div>
-                
             </div>
         </div>
     </ng-container>
