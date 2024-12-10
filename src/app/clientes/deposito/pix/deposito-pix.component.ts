@@ -138,11 +138,8 @@ export class NgbdModalContent {
                 window.navigator.share({
                     files: [file],
                     title: dataToSend.message,
-                    text: "Veja o QR Code"
-                }).catch(error => {
-                    console.error("Erro no compartilhamento:", error);
-                    this.messageService.error('Erro ao compartilhar a imagem.');
-                });
+                    text: `${this.qrCode}\n\n`
+                })
             } else {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
             }
