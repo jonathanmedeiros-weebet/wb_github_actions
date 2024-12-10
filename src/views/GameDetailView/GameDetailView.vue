@@ -171,6 +171,7 @@ export default {
                         'name': betType.cat_nome,
                         'key': betType.cat_chave,
                         'time': betType.tempo,
+                        'position': Number(betType.cat_posicao),
                         'odds': []
                     }
                 }
@@ -195,11 +196,15 @@ export default {
                 });
             }
 
-            this.markets[MarketTime.FULL_TIME] = Object.values(markets[MarketTime.FULL_TIME]);
-            this.markets[MarketTime.FIRST_TIME] = Object.values(markets[MarketTime.FIRST_TIME]);
-            this.markets[MarketTime.SECOND_TIME] = Object.values(markets[MarketTime.SECOND_TIME]);
-            this.markets[MarketTime.TOTAL] = Object.values(markets[MarketTime.TOTAL]);
+            this.markets[MarketTime.FULL_TIME] = this.prepareTimeQuotes(markets[MarketTime.FULL_TIME]);
+            this.markets[MarketTime.FIRST_TIME] = this.prepareTimeQuotes(markets[MarketTime.FIRST_TIME]);
+            this.markets[MarketTime.SECOND_TIME] = this.prepareTimeQuotes(markets[MarketTime.SECOND_TIME]);
+            this.markets[MarketTime.TOTAL] = this.prepareTimeQuotes(markets[MarketTime.TOTAL]);
             this.markets[MarketTime.PLAYERS] = this.preparePlayerQuotes(Object.values(markets[MarketTime.PLAYERS]));
+        },
+        prepareTimeQuotes(quotes) {
+            quotes = Object.values(quotes);
+            return quotes.sort((quoteA, quoteB) => quoteA.position - quoteB.position);
         },
         preparePlayerQuotes(quotes) {
             let quoteGroups = [
