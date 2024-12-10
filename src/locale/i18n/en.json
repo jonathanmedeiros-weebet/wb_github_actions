@@ -768,7 +768,7 @@
         "reutilizandoAposta": "Reusing bet...",
         "aguardando": "Waiting",
         "calculando": "Calculating...",
-        "encerrarAposta": "End bet",
+        "encerrarAposta": "End bet at the amount of ",
         "encerrando": "Ending...",
         "apostaNaoPodeSerEncerrada": "The bet cannot be ended.",
         "apostaNaoPodeSerReutilizada": "The bet cannot be reused at the moment. Please try again later or check the status of the matches."

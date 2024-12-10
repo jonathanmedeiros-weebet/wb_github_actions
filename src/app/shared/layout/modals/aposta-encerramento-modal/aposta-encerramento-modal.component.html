@@ -267,7 +267,7 @@
             </button>
             <button *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
                 [disabled]="simulando || repeating">
-                {{ (simulando ? 'compartilhar_aposta.calculando' : 'compartilhar_aposta.encerrarAposta') | translate }}
+                {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' | translate) + (valorEncerramento | currency) }}
             </button>
             <button class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
                 (click)="descartar()">

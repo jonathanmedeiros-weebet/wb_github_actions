@@ -773,7 +773,7 @@
         "reutilizandoAposta": "Reutilizando aposta...",
         "aguardando": "Aguardando",
         "calculando": "Calculando...",
-        "encerrarAposta": "Encerrar aposta",
+        "encerrarAposta": "Encerrar aposta no valor de ",
         "encerrando": "Encerrando...",
         "apostaNaoPodeSerEncerrada": "A aposta não pode ser encerrada.",
         "apostaNaoPodeSerReutilizada": "Não é possível reutilizar a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas.",
