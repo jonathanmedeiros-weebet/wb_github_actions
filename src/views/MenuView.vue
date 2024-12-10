@@ -40,6 +40,33 @@
           </button>
         </div>
       </div>
+
+      <div class="more-options">
+        <span class="more-options__text">Cartão</span>
+        <div class="more-options__card">
+          <button class="more-options__item" @click="handleNavigate('/card-verify')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Consultar</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/create-card')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Criar</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/list-cards')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Listagem</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/card-withdrawal-requests')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Solicitações de saque</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/recharge-card')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Recarga</span>
+          </button>
+        </div>
+      </div> 
+
       <div class="more-options">
         <span class="more-options__text">Mais opções</span>
         <div class="more-options__card">
@@ -92,6 +119,7 @@ import { localStorageService } from "@/services";
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import { useToastStore } from '@/stores';
+import IconCreditCard from '@/components/icons/IconCreditCard.vue';
 
 export default {
   name: 'userMenu',
@@ -105,6 +133,7 @@ export default {
     IconFactCheck,
     IconManageSearch,
     IconInsertChart,
+    IconCreditCard,
     ModalConsultTicket,
     Toast
   },
@@ -309,6 +338,7 @@ export default {
 .more-options {
   display: flex;
   flex-direction: column;
+  margin-top: 16px;
 
   &__text {
     color: #ffffff;
