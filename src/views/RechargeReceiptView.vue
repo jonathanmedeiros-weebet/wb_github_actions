@@ -1,26 +1,27 @@
 <template>
     <div class="recharge-card">
-    <Header title="Comprovante" :showBackButton="true" />
+        <Header title="Comprovante" :showBackButton="true" />
         <div class="recharge-card__container">
             <div class="recharge-card__info">
                 <div class="code">
-                    <img class="logo__image" :src="imageClient">
+                    <img class="logo__image" :src="imageClient" @error="changeSrcWhenImageError">
                 </div>
                 <div class="code__text">
                     <span>Comprovante de recarga</span>
                 </div>
                 <div class="code">
-                    <span>Cartão: 62A-789-410</span>
-                    <span>Cambista: Marcos</span>
-                    <span>Valor: R$20,00</span>
-                    <span>Data/Hora: 10/12/2024 11:51</span>
-                    <span>72525ds5fd5sf5ds5f5ds5fd5sf5ds86</span>
+                    <span>Cartão: {{ rechargeCode }}</span>
+                    <span>Cambista: {{ rechargeBettor }}</span>
+                    <span>Valor: {{ rechargeValue }}</span>
+                    <span>Data/Hora: {{ rechargeDate }}</span>
+                    <span>{{ rechargeAuthentication }}</span>
                 </div>
             </div>
             <div class="buttons">
                 <w-button
                     text="Fechar"
                     color="secondary-light"
+                    @click="handleClose"
                 >
                 </w-button>
 
@@ -29,6 +30,7 @@
                 <w-button
                     text="Imprimir"
                     class="button__confirm"
+                    @click="handlePrint"
                 >
                 </w-button>
             </div>
@@ -36,18 +38,26 @@
     </div>
 </template>
 
-
 <script>
-
 import WInput from '@/components/Input.vue';
 import Header from '@/components/layouts/Header.vue';
 import WButton from '@/components/Button.vue';   
 import { useConfigClient } from '@/stores'
+import { formatCurrency, formatDateTimeBR } from '@/utilities';
+import { printRechargeReceipt } from '@/services';
 
 export default {
-    name: 'recharge-card',
-    components: { WInput,
-        Header, WButton
+    name: 'recharge-receipt-view',
+    components: {
+        WInput,
+        Header,
+        WButton
+    },
+    props: {
+        cardBet: {
+            type: Object,
+            required: true
+        }
     },
     data() {
         return {
@@ -55,12 +65,36 @@ export default {
         }
     },
     computed: {
+        rechargeCode() {
+            return this.cardBet?.cartao_aposta ?? ''
+        },
+        rechargeAuthentication() {
+            return this.cardBet?.autenticacao ?? ''
+        },
+        rechargeDate() {
+            return this.cardBet?.data ? formatDateTimeBR(this.cardBet?.data) : ''
+        },
+        rechargeBettor() {
+            return this.cardBet?.passador ?? ''
+        },
+        rechargeValue() {
+            return `R$ ${this.cardBet?.valor ? formatCurrency(this.cardBet?.valor) : ''}`;
+        },
         imageClient(){
-            return this.configClient.logo;
+            const configClient = useConfigClient();
+            return configClient.logo;
         }
     },
     methods: {
-       
+        changeSrcWhenImageError (event) {
+            event.target.src = 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png';
+        },
+        handleClose() {
+            this.$router.back();
+        },
+        handlePrint() {
+            printRechargeReceipt(this.cardBet);
+        }
     }
 }
 
@@ -118,5 +152,11 @@ export default {
 
 .button-spacer {
     width: 20px; 
+}
+
+.logo__image {
+    margin: auto;
+    width: 80%;
+    height: auto;
 }
 </style>
