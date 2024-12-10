@@ -2543,3 +2543,12 @@ gulp.task('pintou.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('boaaposta.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "boaaposta.com",
+        banca: "BOA APOSTA",
+        styles: "",
+    });
+});
