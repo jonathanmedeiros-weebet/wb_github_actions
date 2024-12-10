@@ -185,11 +185,11 @@ export default {
     align-items: flex-start;
     padding: 13px 16px;
     background: #181818;
-    background: var(--league);
+    background: var(--game);
     margin-top: 1px;
 
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-game);
 
     &__teams {
         display: flex;
@@ -200,7 +200,7 @@ export default {
         display: flex;
         align-items: center;
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground-game);
         font-size: 14px;
         font-weight: 400;
         line-height: 14px;
@@ -299,7 +299,7 @@ export default {
 
     &__time {
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-game);
         font-size: 12px;
         font-style: normal;
         font-weight: 300;

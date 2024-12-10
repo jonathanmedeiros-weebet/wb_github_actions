@@ -99,7 +99,8 @@ export default {
             });
         },
         allCollapsed() {
-            return Boolean(this.homeStore.inSearch);
+            // return Boolean(this.homeStore.inSearch); TODO: Apagar posteriormente
+            return true;
         }
     },
     methods: {
