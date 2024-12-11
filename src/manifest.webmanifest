@@ -8,13 +8,13 @@
     "start_url": "./",
     "icons": [
         {
-            "src": "assets/icons/icon-512x512.png",
+            "src": "https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "assets/icons/icon-maskable-512x512.png",
+            "src": "https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
