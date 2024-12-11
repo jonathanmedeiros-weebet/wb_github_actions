@@ -16,6 +16,8 @@ import { LocalStorageKey, localStorageService, prepareConfigClient } from "@/ser
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
 import CloseBetView from '@/views/CloseBetView.vue'
 import PopularLotteryView from '@/views/PopularLotteryView.vue'
+import RechargeCardView from '@/views/RechargeCardView.vue'
+import RechargeReceiptView from '@/views/RechargeReceiptView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -141,6 +143,23 @@ const router = new VueRouter({
       meta: {
         auth: production
       }
+    },
+    {
+      path: '/recharge-card',
+      name: 'recharge-card',
+      component: RechargeCardView,
+      meta: {
+        auth: production
+      }
+    },
+    {
+      path: '/recharge-receipt/:cardBet',
+      name: 'recharge-receipt',
+      component: RechargeReceiptView,
+      meta: {
+        auth: production
+      },
+      props: true
     },
     {
       path: '/popular-lottery',
