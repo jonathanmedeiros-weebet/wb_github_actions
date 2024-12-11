@@ -84,7 +84,7 @@
       <div class="result">
         <span>Resultado {{dateFormated}}</span>
         <div class="result__date">
-          <span class="result__value">R$ {{resultDate}}</span>
+          <span :class="`result__value--${resultDateStatus}`">R$ {{resultDate}}</span>
         </div>
       </div>
       <div class="collapse__line"></div>
@@ -107,7 +107,7 @@
       <div class="balance">
         <span>Saldo</span>
         <div class="balance__date">
-          <span class="balance__value">R$ {{ balance }}</span>
+          <span :class="`balance__value--${balanceStatus}`">R$ {{ balance }}</span>
         </div>
       </div>
     </div>
@@ -148,6 +148,7 @@ export default {
       endDate: now().format('YYYY-MM-DD'),
       totalBet: 0,
       resultDate: 0,
+      resultDateStatus: 'positive',
       rechargeCard: 0,
       entry: 0,
       comissao: 0,
@@ -157,6 +158,7 @@ export default {
       credit: 0,
       debit: 0,
       balance: 0,
+      balanceStatus: 'positive',
       sports: 0,
       collapsedInputs: this.initCollapsed,
       collapsedBet: this.initCollapsed,
@@ -227,9 +229,10 @@ export default {
         this.credit = formatCurrency(Number(res.creditos ?? 0));
         this.debit = formatCurrency(Number(res.debitos ?? 0));
         this.balance = formatCurrency(Number(res.saldo ?? 0));
-        this.resultDate = formatCurrency(
-          Number(res.total_apostado + res.cartao - res.saque - res.total_comissao - res.total_premios)
-        );
+        this.balanceStatus = Number(res.saldo ?? 0) >= 0 ? 'positive' : 'negative';
+        const resultDate = Number(res.total_apostado + res.cartao - res.saque - res.total_comissao - res.total_premios);
+        this.resultDate = formatCurrency(resultDate);
+        this.resultDateStatus = resultDate >= 0 ? 'positive' : 'negative';
       } catch ({ errors }) {
         this.tostStore.setToastConfig({
           message: errors?.message,
@@ -388,10 +391,16 @@ export default {
   &__value {
     display: flex;
     align-items: center;
-    color: #6da544;
-    color: var(--color-success);
-  }
+    &--positive {
+      color: #6da544;
+      color: var(--color-success);
+    }
 
+    &--negative {
+      color: #f61a1a;
+      color: var(--color-danger);
+    }
+  }
 }
 
 .credit {
@@ -448,8 +457,15 @@ export default {
   }
   
   &__value {
-    color: #6da544;
-    color: var(--color-success);
+    &--positive {
+      color: #6da544;
+      color: var(--color-success);
+    }
+
+    &--negative {
+      color: #f61a1a;
+      color: var(--color-danger);
+    }
   }
 }
 </style>

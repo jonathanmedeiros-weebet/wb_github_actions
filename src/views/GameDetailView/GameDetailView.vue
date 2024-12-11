@@ -150,6 +150,8 @@ export default {
             const quotes = Boolean(this.game.ao_vivo)
                 ? this.game.cotacoes_aovivo ?? []
                 : this.game.cotacoes ?? [];
+            
+                console.log(quotes)
 
             const markets = {
                 [MarketTime.FULL_TIME]: {},
@@ -171,6 +173,7 @@ export default {
                         'name': betType.cat_nome,
                         'key': betType.cat_chave,
                         'time': betType.tempo,
+                        'position': Number(betType.cat_posicao),
                         'odds': []
                     }
                 }
@@ -191,15 +194,24 @@ export default {
                     id: quote._id,
                     finalValue,
                     status: quote.status ?? QuotaStatus.DEFAULT,
-                    hasPermission: hasQuotaPermission(finalValue)
+                    hasPermission: hasQuotaPermission(finalValue),
+                    position: betType.posicao_x_mobile
                 });
             }
 
-            this.markets[MarketTime.FULL_TIME] = Object.values(markets[MarketTime.FULL_TIME]);
-            this.markets[MarketTime.FIRST_TIME] = Object.values(markets[MarketTime.FIRST_TIME]);
-            this.markets[MarketTime.SECOND_TIME] = Object.values(markets[MarketTime.SECOND_TIME]);
-            this.markets[MarketTime.TOTAL] = Object.values(markets[MarketTime.TOTAL]);
+            this.markets[MarketTime.FULL_TIME] = this.prepareTimeQuotes(markets[MarketTime.FULL_TIME]);
+            this.markets[MarketTime.FIRST_TIME] = this.prepareTimeQuotes(markets[MarketTime.FIRST_TIME]);
+            this.markets[MarketTime.SECOND_TIME] = this.prepareTimeQuotes(markets[MarketTime.SECOND_TIME]);
+            this.markets[MarketTime.TOTAL] = this.prepareTimeQuotes(markets[MarketTime.TOTAL]);
             this.markets[MarketTime.PLAYERS] = this.preparePlayerQuotes(Object.values(markets[MarketTime.PLAYERS]));
+        },
+        prepareTimeQuotes(quotes) {
+            quotes = Object.values(quotes);
+            quotes = quotes.map((quote) => ({
+                ...quote,
+                odds: quote.odds.sort((oddA, oddB) => oddA.position - oddB.position)
+            }))
+            return quotes.sort((quoteA, quoteB) => quoteA.position - quoteB.position);
         },
         preparePlayerQuotes(quotes) {
             let quoteGroups = [
