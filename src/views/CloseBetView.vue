@@ -526,7 +526,7 @@ export default {
 }
 
 .button-share {
-  width: 80%;
+  border: 1px solid white;
 }
 
 .finish {
