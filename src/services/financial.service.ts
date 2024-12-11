@@ -16,7 +16,8 @@ export const getFinancial = async ( params = {} ) => {
     const queryString = new URLSearchParams(params).toString();
     const fullUrl = queryString ? `${url}?${queryString}` : url;
     const response: any = await axiosInstance().get(fullUrl);
-    return response.results;
+    const { bonus, ...filteredResults } = response.results;
+    return filteredResults;
 }
 
 export const listMovements = async ( params = {} ) => {
