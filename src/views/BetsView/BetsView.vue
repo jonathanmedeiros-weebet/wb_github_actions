@@ -295,7 +295,7 @@ export default {
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
-      dateFilter: now(),
+      dateFilter: now().startOf('week').add(1, 'days'),
       finalDateFilter: now(),
       activeButton: 'todos',
       apostador: '',

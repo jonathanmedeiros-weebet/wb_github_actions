@@ -67,7 +67,7 @@
                   <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
                 </div>
               </span>
-              <template v-if="showFinished">
+              <template>
                 <p :class="{ 
                   'bet__status--success': betItem.resultado === 'ganhou', 
                   'bet__status--danger': betItem.resultado === 'perdeu',
@@ -81,7 +81,7 @@
             </div>
             <div class="bet__text">
               <span class="bet__select" :class="{'gain__strikethrough': newEarningPossibility !== null}">
-                {{ betItem.encerrado ? 'Resultado Final' : 'Para ganhar' }} : {{ betItem.odd_nome }}
+                {{ betItem.categoria_nome }} : {{ betItem.aposta_tipo.nome }}
               </span>
               <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
             </div>
@@ -113,6 +113,7 @@
               color="secondary-light"
               @click="handleOpenModalSharedBet"
               :disabled="buttonDisable"
+              class="button-share"
             >
               <template #icon-left>
                 <IconShare :size="20" color="var(--foreground-league)"/>
@@ -546,6 +547,10 @@ export default {
 
 .button-spacer {
   width: 20px; 
+}
+
+.button-share {
+  border: 1px solid white;
 }
 
 .finish {

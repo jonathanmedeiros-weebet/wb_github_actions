@@ -103,7 +103,6 @@ export default {
             const labelTransformed = {
                 'credito': 'Crédito',
                 'saldo': 'Saldo',
-                'bonus' : 'Bônus',
                 'comissao': 'Comissão',
                 'saida': 'Saída'
             };
