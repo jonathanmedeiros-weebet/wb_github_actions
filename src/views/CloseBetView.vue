@@ -113,6 +113,7 @@
               color="secondary-light"
               @click="handleShared"
               :disabled="buttonDisable"
+              class="button-share"
             >
               <template #icon-left>
                 <IconShare :size="20" color="var(--foreground-league)"/>
@@ -522,6 +523,10 @@ export default {
 
 .button-spacer {
   width: 20px; 
+}
+
+.button-share {
+  border: 1px solid white;
 }
 
 .finish {
