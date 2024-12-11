@@ -268,6 +268,7 @@
     "@angular/platform-browser": "^15.2.10",
     "@angular/platform-browser-dynamic": "^15.2.10",
     "@angular/router": "^15.2.10",
+    "@angular/service-worker": "^15.2.10",
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@iconscout/unicons": "^4.0.1",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
