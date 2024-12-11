@@ -14,7 +14,7 @@ import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 import { LocalStorageKey, localStorageService, prepareConfigClient } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
-import CloseBetView from '@/views/CloseBetView.vue'
+import CloseBetView from '@/views/CloseBetView/CloseBetView.vue'
 import PopularLotteryView from '@/views/PopularLotteryView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
