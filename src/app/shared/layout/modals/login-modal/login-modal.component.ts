@@ -202,7 +202,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                                 } else {
                                     location.reload();
                                 }
-                                this.activeModal.dismiss();
+                                this.activeModal.close();
                             },
                             error => this.handleError(error)
                         );
@@ -317,7 +317,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     public toClose() {
-        this.activeModal.dismiss('Cross click')
+        this.activeModal.close();
     }
 
     xtremepushHabilitado() {
