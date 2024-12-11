@@ -79,7 +79,7 @@ export default {
   data() {
     return {  
       showModalCalendar: false,
-      startDate: this.dateIni ?? now().format('YYYY-MM-DD'),
+      startDate: this.dateIni ?? now().startOf('week').format('YYYY-MM-DD'),
       endDate: this.dateEnd ?? now().format('YYYY-MM-DD'),
       title: 'Movimentações',
       balanceData: {},
