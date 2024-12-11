@@ -19,6 +19,7 @@
                 placeholder="Informe a chave do cartão"
                 type="text"
                 name="carkey"
+                mask="XXX-XXX-XXX"
                 v-model="cardKey"
             >
             </w-input>
@@ -82,7 +83,8 @@ export default {
                 return;
             }
 
-            recharge(this.cardKey, cardValueNumber)
+            const cardKey = this.cardKey.toUpperCase();
+            recharge(cardKey, cardValueNumber)
                 .then((cardBet) => {
                     this.toastStore.setToastConfig({
                         message: 'Recarga realizada com sucesso!',
