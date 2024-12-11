@@ -34,6 +34,11 @@ function tasks(done, config) {
         .pipe(replace('[TIMESTAMP]', Math.floor((new Date().getTime() / 1000))))
         .pipe(gulp.dest('src/'));
 
+    gulp.src(['base-build/manifest.webmanifest'])
+        .pipe(replace('[BANCA]', config.banca))
+        .pipe(replace('[S3_FOLDER]', config.host))
+        .pipe(gulp.dest('src/'));
+
     gulp.src(['base-build/bilhete/index.html'])
         .pipe(replace('[S3_FOLDER]', config.host))
         .pipe(gulp.dest('src/bilhete/'));
