@@ -103,8 +103,7 @@ hr {
 
 .valores .total-desafios, .valores .aposta, .valores .ganho, .valores .cambista-paga{
     text-align: left;
-    margin: 3px 1px 1px 1px;
-    font-weight: bold;
+    margin: 3px 1px 1px 10px;
     font-size: 12px;
 }
 

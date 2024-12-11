@@ -63,7 +63,9 @@
 .jogo-resultado{
     font-size: 12px;
     font-weight: bold;
-    margin: 0;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
 }
 hr {
     margin-top: 5px;

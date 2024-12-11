@@ -5,7 +5,7 @@
         </div>
         <div id="cupom-info">
             <p>{{aposta.game}}</p>
-            <p style="font-size: 16px">{{aposta.codigo}} <i *ngIf="!playButton" (click)="copyToClipboard(aposta.codigo)" style="cursor: pointer; margin-left: 0.25rem;" class="far fa-copy"></i></p>
+            <p style="font-size: 16px">{{aposta.codigo}} <i (click)="copyToClipboard(aposta.codigo)" style="cursor: pointer; margin-left: 0.25rem;" class="far fa-copy"></i></p>
             <p>Apostador: {{aposta.apostador}}</p>
             <p>Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
         </div>

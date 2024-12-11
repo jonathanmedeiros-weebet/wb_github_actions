@@ -18,6 +18,10 @@
 .cupom-header {
     color: var(--foreground);
     background: var(--game);
+    font-size: 14px !important;
+}
+
+.cupom-header .modal-body .cupom-header {
     font-size: 14px;
 }
 

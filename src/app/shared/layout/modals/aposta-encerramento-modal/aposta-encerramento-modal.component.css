@@ -50,9 +50,10 @@
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
+    background-color: var(--game);
     color: var(--foreground);
     font-size: 12px;
-    margin-bottom: 13px;
+    padding: 10px;
 }
 .cupom-ativo{
     background: var(--background);
@@ -77,7 +78,9 @@ img{
 .jogo-resultado{
     font-size: 12px;
     font-weight: bold;
-    margin: 0;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
 }
 hr {
     margin-top: 5px;
@@ -122,6 +125,10 @@ hr {
 .item .cotacao{
     margin: 1px;
     font-size: 12px;
+}
+.item p {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .cupom-header span {
     margin-left: 3px;
@@ -231,7 +238,7 @@ tbody tr:last-child td:first-child {
         margin: 0 5px;
         max-height: none;
         column-count: 1;
-        margin-bottom: 15px;
+        /* margin-bottom: 15px; */
     }
     .table-container,
     .modal-header .info-horario {
