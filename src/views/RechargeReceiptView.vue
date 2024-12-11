@@ -19,15 +19,6 @@
             </div>
             <div class="buttons">
                 <w-button
-                    text="Fechar"
-                    color="secondary-light"
-                    @click="handleClose"
-                >
-                </w-button>
-
-                <div class="button-spacer"></div>
-
-                <w-button
                     text="Imprimir"
                     class="button__confirm"
                     @click="handlePrint"
@@ -88,9 +79,6 @@ export default {
     methods: {
         changeSrcWhenImageError (event) {
             event.target.src = 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png';
-        },
-        handleClose() {
-            this.$router.back();
         },
         handlePrint() {
             printRechargeReceipt(this.cardBet);
