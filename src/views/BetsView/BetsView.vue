@@ -56,7 +56,9 @@
       </div>
       
       <div class="bets__results" v-if="showResults">
-        <p class="bets__count-results">{{ bets.length }} apostas encontradas</p>
+        <p class="bets__count-results">Quantidade de apostas: {{ bets.length }}</p>
+        <p class="bets__count-results">Total apostado: R$ {{ formatCurrencyMoney(amountBets) }}</p>
+        <p class="bets__count-results">Total prêmios: R$ {{ formatCurrencyMoney(rewardBets) }}</p>
   
         <div class="bets__buttons-filters">
           <tag-button
@@ -314,6 +316,8 @@ export default {
       toastStore: useToastStore(),
       configClientStore: useConfigClient(),
       isLastBet: false,
+      amountBets: 0,
+      rewardBets: 0
     }
   },
   mounted() {
@@ -406,8 +410,9 @@ export default {
 
       const params = { ...this.parametros };
       findBet(params)
-        .then(resp => {
+        .then(async (resp) => {
           this.bets = resp.results;
+          await this.calculateBetInfo();
           this.showResults = true;
         })
         .catch(error => {
@@ -417,6 +422,19 @@ export default {
             duration: 5000
           })
         })
+    },
+    async calculateBetInfo() {
+      this.amountBets = 0;
+      this.rewardBets = 0;
+
+      for await (const bet of this.bets) {
+        if (!bet.cartao_aposta) {
+          this.amountBets += bet.valor;
+          if (bet.resultado === 'ganhou') {
+            this.rewardBets += bet.premio;
+          }
+        }
+      }
     },
     goToTickets(bet, action) {
       this.$router.push({ 
@@ -556,7 +574,6 @@ export default {
   }
 
   &__count-results {
-    padding-top: 30px;
     color: #ffffff80;
     color: var(--foreground-header);
   }
