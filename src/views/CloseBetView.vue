@@ -85,6 +85,11 @@
               </span>
               <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
             </div>
+            <div class="bet__result">
+                <span :style="{ color: betItem.resultado === 'ganhou' ? 'green' : 'red' }">
+                    {{ betItem.resultado}}
+                </span>      
+            </div>
           </div>
           <div class="bet__message" v-if="showConfirmCancelButtons">
             <p>
