@@ -212,7 +212,7 @@ export default {
       newEarningPossibility: null,
       closeRequesterd: false,
       toastStore: useToastStore(),
-      option: useConfigClient().options,
+      configClientStore: useConfigClient(),
       textButtonConfirm: 'Confirmar',
       textButtonCloseBet: 'Encerrar Aposta',
       showModalShared: false
@@ -296,7 +296,7 @@ export default {
                 duration: 5000
               })
             });
-          const timeDelay = this.option.delay_aposta_aovivo ?? 10;
+          const timeDelay = this.configClientStore.delayLiveBet;
           await delay((timeDelay * 1000));
         }
 
