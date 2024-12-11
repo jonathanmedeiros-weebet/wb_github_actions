@@ -81,7 +81,7 @@
             </div>
             <div class="bet__text">
               <span class="bet__select" :class="{'gain__strikethrough': newEarningPossibility !== null}">
-                {{ betItem.encerrado ? 'Resultado Final' : 'Para ganhar' }} : {{ betItem.odd_nome }}
+                {{ betItem.encerrado ? 'Resultado Final' : betItem.categoria_nome }} : {{ betItem.odd_nome }}
               </span>
               <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
             </div>
