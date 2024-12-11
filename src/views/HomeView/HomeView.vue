@@ -309,7 +309,7 @@ export default {
         } = event;
 
         const championshipList = [ ...this.homeStore.championshipList ];
-        const championshipIndex = championshipList.findIndex((championship) => championship._id == campeonato._id);
+        let championshipIndex = championshipList.findIndex((championship) => championship._id == campeonato._id);
         const hasChampionship = championshipIndex =! -1;
 
         if(hasChampionship) {
