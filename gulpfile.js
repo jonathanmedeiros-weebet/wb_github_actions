@@ -1819,15 +1819,6 @@ gulp.task('bullbets.com.br', function (done) {
     });
 });
 
-gulp.task('starbetfc.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "starbetfc.com",
-        banca: "Starbet FC",
-        styles: "",
-    });
-});
-
 gulp.task('betypix.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -2144,24 +2135,6 @@ gulp.task('portoalegre.bet', function (done) {
         server: "front4.wee.bet",
         host: "portoalegre.bet",
         banca: "PORTO ALEGRE BET",
-        styles: ""
-    });
-});
-
-gulp.task('rio.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "rio.bet",
-        banca: "RIO BET",
-        styles: ""
-    });
-});
-
-gulp.task('riojogos.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "riojogos.bet",
-        banca: "Rio Jogos",
         styles: ""
     });
 });
