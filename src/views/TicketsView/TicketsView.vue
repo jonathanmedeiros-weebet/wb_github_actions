@@ -304,7 +304,7 @@ export default {
     async handleFinalizeBet() {
       this.submitting = true;
 
-      const { options } = useConfigClient();
+      const { options, delayLiveBet } = useConfigClient();
 
       if (this.items.length < options.quantidade_min_jogos_bilhete) {
         this.toastStore.setToastConfig({
@@ -352,8 +352,8 @@ export default {
       if(this.hasLiveBet) {
         const liveToken = await createLiveToken(data);
         data.token_aovivo = liveToken;
-
-        const timeDelay = options?.delay_aposta_aovivo ?? 10;
+      
+        const timeDelay = delayLiveBet;
         await delay(timeDelay * 1000);
       }
 

@@ -283,7 +283,7 @@ export default {
       if (values.itens.length) {
         if (this.betLive) {
           values.token_aovivo = await createLiveToken(values);
-          const timeDelay = this.configClientStore.options.delay_aposta_aovivo ? this.configClientStore.options.delay_aposta_aovivo : 10;
+          const timeDelay = this.configClientStore.delayLiveBet;
           await delay(timeDelay * 1000);
         }
 
