@@ -53,6 +53,7 @@
     <ModalCalendar
       v-if="showModalCalendar"
       :initialDate="dateSelected"
+      :maxDate="tablelimiteDate"
       @closeModal="handleCloseCalendarModal"
       @change="handleCalendar"
     />
@@ -173,6 +174,10 @@ export default {
     Modalities() {
       return getModalitiesEnum();
     },
+    tablelimiteDate () {
+      const { options } = useConfigClient();
+      return options?.data_limite_tabela ?? 1
+    }
   },
   methods: {
     async pageLoad() {
