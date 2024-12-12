@@ -48,6 +48,7 @@ export class LegitimuzService {
                 if (eventName === 'facematch') {
                     setTimeout(() => {
                         if (user.id) {
+                            console.log(user.id);
                             this.clienteService.getCliente(user.id)
                                 .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
                         } else {
@@ -58,7 +59,7 @@ export class LegitimuzService {
             };
         } else {
             this.options.onSuccess = (eventName) => {
-                console.log(eventName);
+                console.log('else');
                 if (eventName === 'facematch') {
                     this.curCustomerIsVerifiedSub.next(true);
                     this.closeModal();
