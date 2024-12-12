@@ -191,20 +191,17 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         }
 
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            console.log('chegou aqui');
             this.legitimuzService.curCustomerIsVerified
                 .subscribe(curCustomerIsVerified => {
-                    console.log('passou aqui1, curCustomerIsVerified:', curCustomerIsVerified);
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
-                    console.log('passou aqui, verifiedIdentity:', this.verifiedIdentity);
                     if (this.verifiedIdentity) {
                         this.legitimuzService.closeModal();
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
                         this.faceMatchFirstWithdrawValidated = true;
-                    } else {
-                        // this.legitimuzService.closeModal();
+                    } else if (!this.verifiedIdentity) {
+                        this.legitimuzService.closeModal();
                         this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                         this.faceMatchFirstWithdrawValidated = false;
                     }

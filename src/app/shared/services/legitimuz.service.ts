@@ -44,13 +44,11 @@ export class LegitimuzService {
             const user = JSON.parse(localStorage.getItem('user'));
 
             this.options.onSuccess = (eventName) => {
-                console.log(eventName);
                 if (eventName === 'facematch') {
                     setTimeout(() => {
                         if (user.id) {
-                            console.log(user.id);
                             this.clienteService.getCliente(user.id)
-                                .subscribe(customer => {console.log('Custumer: ' + customer, 'Custumer verified: ' + customer.verifiedIdentity);this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity)});
+                                .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
                         } else {
                             this.curCustomerIsVerifiedSub.next(false);
                         }
@@ -59,7 +57,6 @@ export class LegitimuzService {
             };
         } else {
             this.options.onSuccess = (eventName) => {
-                console.log('else');
                 if (eventName === 'facematch') {
                     this.curCustomerIsVerifiedSub.next(true);
                     this.closeModal();
