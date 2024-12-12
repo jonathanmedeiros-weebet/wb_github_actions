@@ -193,7 +193,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             console.log('chegou aqui');
             this.legitimuzService.curCustomerIsVerified
-                .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
                     console.log('passou aqui1, curCustomerIsVerified:', curCustomerIsVerified);
                     this.verifiedIdentity = curCustomerIsVerified;

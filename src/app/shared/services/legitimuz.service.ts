@@ -50,7 +50,7 @@ export class LegitimuzService {
                         if (user.id) {
                             console.log(user.id);
                             this.clienteService.getCliente(user.id)
-                                .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
+                                .subscribe(customer => {console.log('Custumer: ' + customer, 'Custumer verified: ' + customer.verifiedIdentity);this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity)});
                         } else {
                             this.curCustomerIsVerifiedSub.next(false);
                         }
