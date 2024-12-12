@@ -127,7 +127,7 @@
                 cambistaPaga: false
             }
         },
-        mounted() {
+        activated() {
             if (this.bet?.passador?.percentualPremio > 0) {
                 if (this.bet?.resultado) {
                     this.cambistaPaga = this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100);
@@ -197,7 +197,8 @@
 
 <style lang="scss" scoped>
     .bet-shared {
-        visibility: hidden;
+        left: -10000px;
+        position: absolute;
         width: 800px;
         padding: 1em;
         background: #f3f5d3;

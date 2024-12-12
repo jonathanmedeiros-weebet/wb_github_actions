@@ -96,7 +96,7 @@ export default {
       return Object.keys(this.balanceData).length === 0;
     }
   },
-  mounted(){
+  activated(){
     this.getBalance();
   },
   methods: {

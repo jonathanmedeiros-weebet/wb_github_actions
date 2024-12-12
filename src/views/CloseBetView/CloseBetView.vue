@@ -219,7 +219,7 @@ export default {
       showModalShared: false
     };
   },
-  mounted() {
+  activated() {
     this.fetchBetDetails();
   },
   computed: {

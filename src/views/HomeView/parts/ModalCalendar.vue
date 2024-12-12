@@ -4,6 +4,7 @@
         <template v-if="!isMultiDate">
           <Calendar
             class="calendar"
+            :maxDate="maxDate"
             @change="handleCalendarChange"
             :initialDate="initialDate"
           />
@@ -43,6 +44,10 @@ export default {
       isMultiDate: {
         type: Boolean,
         default: false
+      },
+      maxDate: {
+        type: [String, null, Object],
+        default: null
       }
     },
     methods: {

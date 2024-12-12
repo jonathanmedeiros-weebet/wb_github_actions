@@ -173,7 +173,7 @@ export default {
       textButtonFinalizeBet: "Finalizar aposta"
     };
   },
-  mounted() {
+  activated() {
     this.fetchData();
   },
   methods: {

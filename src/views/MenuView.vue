@@ -147,7 +147,7 @@ export default {
       toastStore: useToastStore()
     };
   },
-  mounted() {
+  activated() {
     this.getData();
   },
   computed: {

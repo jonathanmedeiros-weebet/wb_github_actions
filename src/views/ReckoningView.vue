@@ -185,7 +185,7 @@ export default {
       return `${startDateFormatted} - ${endDateFormatted}`;
     }
   },
-  mounted() {
+  activated() {
     this.getValue()
   },
   methods: {

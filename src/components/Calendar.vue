@@ -25,15 +25,16 @@
           v-for='(week, index) in calendar'
           :key="index"
         >
-          <div
+          <button
             class="calendar__day"
-            v-for="(day, indexDay) in week"
+            v-for="({day, disabled}, indexDay) in week"
             :class="{'calendar__day--selected': day == daySelected && isMonthSelected}"
             :key="`${indexDay}-${index}`"
+            :disabled="disabled"
             @click="handleClick(day)"
           >
             {{ day }}
-          </div>
+        </button>
         </div>
       </div>
     </div>
@@ -57,6 +58,10 @@ export default {
     initialDate: {
       type: [String, Object],
       default: () => now()
+    },
+    maxDate: {
+      type: [String, null, Object],
+      default: null
     }
   },
   data() {
@@ -101,6 +106,8 @@ export default {
       const startMonthDate = startMonthDay.date()
       const endMonthDate = endMonthDay.date()
 
+      const maxDate = this.maxDate ? convertInMomentInstance(this.maxDate) : null;
+
       const calendar = []
       let date = startMonthDay
       let week = ['', '', '', '', '', '', '']
@@ -110,7 +117,10 @@ export default {
         const weekday = date.format('ddd').toLowerCase();
         const weekIndex = weekdays[weekday];
         
-        week[weekIndex] = dateNumber;
+        console.log(maxDate.format('YYYY-MM-DD'))
+        console.log(date.format('YYYY-MM-DD'))
+        const disabled = maxDate && maxDate.format('YYYY-MM-DD') < date.format('YYYY-MM-DD') ? true : false; 
+        week[weekIndex] = { day: dateNumber, disabled };
 
         if(weekday === 'sat' || dateNumber === endMonthDate) {
           calendar.push(week)
@@ -193,6 +203,12 @@ export default {
     font-weight: 500;
     color: #ffffff;
     color: var(--highlight);
+    background: transparent;
+    border: 0;
+
+    &:disabled {
+      opacity: .3;
+    }
 
     &--selected {
       background: #0be58e;
