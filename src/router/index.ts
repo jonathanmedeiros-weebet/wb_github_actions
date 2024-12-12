@@ -18,6 +18,8 @@ import CloseBetView from '@/views/CloseBetView.vue'
 import PopularLotteryView from '@/views/PopularLotteryView.vue'
 import RechargeCardView from '@/views/RechargeCardView.vue'
 import RechargeReceiptView from '@/views/RechargeReceiptView.vue'
+import CreateCardView from '@/views/CreateCardView.vue'
+import CreateCardReceiptView from '@/views/CreateCardReceiptView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -156,6 +158,23 @@ const router = new VueRouter({
       path: '/recharge-receipt/:cardBet',
       name: 'recharge-receipt',
       component: RechargeReceiptView,
+      meta: {
+        auth: production
+      },
+      props: true
+    },
+    {
+      path: '/create-card',
+      name: 'create-card',
+      component: CreateCardView,
+      meta: {
+        auth: production
+      }
+    },
+    {
+      path: '/create-receipt',
+      name: 'create-receipt',
+      component: CreateCardReceiptView,
       meta: {
         auth: production
       },
