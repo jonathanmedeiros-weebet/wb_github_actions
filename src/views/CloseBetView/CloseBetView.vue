@@ -150,8 +150,9 @@
       @close="handleCloseModalSharedBet"
       @click="handleShared"
     />
-
-    <BetSharedPreview v-if="bet" :bet="bet"/>
+    <div ref="bet-shared">
+      <BetSharedPreview v-if="bet" :bet="bet"/>
+    </div>
   </div>
 </template>
 
@@ -378,7 +379,8 @@ export default {
       if(type == 'link') {
         sharedTicket(this.bet);
       } else {
-        const dataUrl = await toPng();
+        const file = await this.generateBetImage();
+        sharedTicket(this.bet, file);
       }
     },
     handlePrint() {
@@ -389,7 +391,17 @@ export default {
     },
     handleCloseModalSharedBet() {
       this.showModalShared = false;
-    }
+    },
+    async generateBetImage() {
+      try {
+        await this.$nextTick();
+        const element = this.$refs['bet-shared'];
+        return await toPng(element);
+      } catch (error) {
+        console.error('Erro ao gerar a imagem:', error);
+        return '';
+      }
+    },
   },
 }
 </script>
