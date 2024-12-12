@@ -149,8 +149,6 @@
             return match ? match[1] : undefined;
         }
         
-        const forceV2AppByAndroidVersion = parseInt(getAndroidVersion()) >= 14;
-
         const initApp = () => {
             // v1 -> light
             // v2 -> site do client;
@@ -163,7 +161,7 @@
                 window.location.href = v1Url;
                 return;
             }
-            if (verifyAppForce('v2') || forceV2AppByAndroidVersion) {
+            if (verifyAppForce('v2')) {
                 return;
             }
 
