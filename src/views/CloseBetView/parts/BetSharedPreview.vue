@@ -197,8 +197,6 @@
 
 <style lang="scss" scoped>
     .bet-shared {
-        left: -10000px;
-        position: absolute;
         width: 800px;
         padding: 1em;
         background: #f3f5d3;

@@ -150,7 +150,7 @@
       @close="handleCloseModalSharedBet"
       @click="handleShared"
     />
-    <div ref="bet-shared">
+    <div ref="bet-shared" style="left: -10000px; position: absolute;">
       <BetSharedPreview v-if="bet" :bet="bet"/>
     </div>
   </div>

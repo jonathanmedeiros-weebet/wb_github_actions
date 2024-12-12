@@ -10,6 +10,7 @@
           color="secondary-light"
           @click="handleShared('link')"
         />
+        <br>
         <w-button
           text="Imagem"
           color="secondary-light"
@@ -50,7 +51,6 @@ export default {
   &__items {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     padding-bottom: 20px;
   }
 
