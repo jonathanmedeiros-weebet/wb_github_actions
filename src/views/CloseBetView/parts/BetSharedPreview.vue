@@ -127,7 +127,7 @@
                 cambistaPaga: false
             }
         },
-        mounted() {
+        activated() {
             if (this.bet?.passador?.percentualPremio > 0) {
                 if (this.bet?.resultado) {
                     this.cambistaPaga = this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100);

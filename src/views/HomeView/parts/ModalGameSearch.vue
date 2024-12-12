@@ -48,7 +48,7 @@ export default {
   created() {
     this.modality = this.modalityList[0];
   },
-  mounted() {
+  activated() {
     this.championshipList = this.homeStore.championshipList;
     setTimeout(() => this.loading = false, 1000);
     this.$refs.InputSerachComponent.forcusInInput();

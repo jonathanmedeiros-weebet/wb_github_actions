@@ -20,7 +20,7 @@ export default {
       hideCopyrightWhenKeyboardWasDisplayed: true
     }
   },
-  mounted() {
+  activated() {
     const userNameElement = document.getElementById('user_name');
     if(userNameElement) {
       userNameElement.addEventListener('focus', () => this.hideCopyrightWhenKeyboardWasDisplayed = true)

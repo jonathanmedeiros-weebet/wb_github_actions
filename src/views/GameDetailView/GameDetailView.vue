@@ -70,7 +70,7 @@ export default {
             toastStore: useToastStore(),
         }
     },
-    async created() {
+    async activated() {
         this.loading = true;
         await this.prepareGameDetail();
         await this.prepareQuotes();

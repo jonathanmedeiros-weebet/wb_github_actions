@@ -40,7 +40,7 @@ export default {
             isFullscreen: false
         }
     },
-    mounted() {
+    activated() {
         if(this.options.loteriaPopular){
             this.getGameUrl();
             document.addEventListener('fullscreenchange', this.onFullScreenChange);

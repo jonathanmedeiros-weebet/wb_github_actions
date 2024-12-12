@@ -275,9 +275,11 @@ import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now, capital
 import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums';
+import scrollMixin from '@/mixins/scroll.mixin'
 
 export default {
   name: 'bets',
+  mixins: [scrollMixin],
   components: { 
     Header,
     WInput,

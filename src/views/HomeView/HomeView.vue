@@ -91,9 +91,11 @@ import IconVoleiball from '@/components/icons/IconVoleiball.vue'
 import IconESport from '@/components/icons/IconESport.vue'
 import LiveButton from './parts/LiveButton.vue'
 import Toast from '@/components/Toast.vue'
+import scrollMixin from '@/mixins/scroll.mixin'
 
 export default {
   name: 'home',
+  mixins: [scrollMixin],
   components: {
     Header,
     SelectFake,

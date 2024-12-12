@@ -250,7 +250,7 @@ export default {
             return isAndroid5() ? '#ffffff80' : 'var(--foreground-header)';
         }
     },
-    mounted() {
+    activated() {
         this.fetchDataCashFlow();
         this.fetchFinancial();
         this.fetchhMoviments();
