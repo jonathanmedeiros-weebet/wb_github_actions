@@ -44,6 +44,7 @@ export class LegitimuzService {
             const user = JSON.parse(localStorage.getItem('user'));
 
             this.options.onSuccess = (eventName) => {
+                console.log(eventName);
                 if (eventName === 'facematch') {
                     setTimeout(() => {
                         if (user.id) {
@@ -57,6 +58,7 @@ export class LegitimuzService {
             };
         } else {
             this.options.onSuccess = (eventName) => {
+                console.log(eventName);
                 if (eventName === 'facematch') {
                     this.curCustomerIsVerifiedSub.next(true);
                     this.closeModal();
