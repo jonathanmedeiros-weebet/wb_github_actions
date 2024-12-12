@@ -38,7 +38,7 @@ export default {
       modalHeight: 0
     }
   },
-  activated() {
+  mounted() {
     document.body.style.overflow = 'hidden'
 
     const modalRef = this.$refs['modal'];
