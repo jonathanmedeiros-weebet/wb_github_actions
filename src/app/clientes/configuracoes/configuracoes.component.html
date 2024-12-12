@@ -237,6 +237,20 @@
                         </p>
                         <form [formGroup]="formExclusaoConta" (ngSubmit)="handleSubmit('onSubmitExclusaoConta')">
                             <div class="field w-500">
+                                <label for="">{{ 'jogo_responsavel.exclusao_conta.exclusionPeriodLabel' | translate }}</label>
+                                <select class="form-control inverted-out" formControlName="exclusionPeriod">
+                                    <option value="">{{ 'placeholders.selecione_uma_opcao' | translate }}</option>
+                                    <option value="3-months">{{ 'jogo_responsavel.exclusao_conta.3months' | translate }}</option>
+                                    <option value="6-months">{{ 'jogo_responsavel.exclusao_conta.6months' | translate }}</option>
+                                    <option value="12-months">{{ 'jogo_responsavel.exclusao_conta.12months' | translate }}</option>
+                                    <option value="24-months">{{ 'jogo_responsavel.exclusao_conta.24months' | translate }}</option>
+                                    <option value="36-months">{{ 'jogo_responsavel.exclusao_conta.36months' | translate }}</option>
+                                    <option value="48-months">{{ 'jogo_responsavel.exclusao_conta.48months' | translate }}</option>
+                                    <option value="60-months">{{ 'jogo_responsavel.exclusao_conta.60months' | translate }}</option>
+                                    <option value="permanently">{{ 'jogo_responsavel.exclusao_conta.permanently' | translate }}</option>
+                                </select>
+                            </div>
+                            <div class="field w-500">
                                 <label for="">{{ 'jogo_responsavel.exclusao_conta.informe_motivo' | translate }}</label>
                                 <select class="form-control inverted-out" (change)="changeOpcaoExclusao()" formControlName="opcao">
                                     <option value="">{{ 'placeholders.selecione_uma_opcao' | translate }}</option>
