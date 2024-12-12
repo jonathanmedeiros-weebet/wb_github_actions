@@ -1,5 +1,6 @@
 import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
@@ -86,7 +87,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private activeModal: NgbActiveModal,
         private modalService: NgbModal,
-        private activityDetectService: ActivityDetectService
+        private activityDetectService: ActivityDetectService,
+        private translate: TranslateService,
     ) {}
 
     get twoFactorInProfileChangeEnabled(): boolean {
@@ -177,6 +179,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         });
 
         this.formExclusaoConta = this.fb.group({
+            exclusionPeriod: [''],
             motivoExclusao: [''],
             opcao: [''],
             confirmarExclusao: [''],
@@ -322,14 +325,19 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     onSubmitExclusaoConta() {
-        const { motivoExclusao, confirmarExclusao, opcao} = this.formExclusaoConta.value;
+        const { exclusionPeriod, motivoExclusao, confirmarExclusao, opcao } = this.formExclusaoConta.value;
 
         const multifator = this.twoFactorInProfileChangeEnabled
             ? {codigo: this.codigoMultifator, token: this.tokenMultifator}
             : {};
 
+        if (exclusionPeriod == '') {
+            this.handleError(this.translate.instant('jogo_responsavel.exclusao_conta.periodIsMissing'));
+            return;
+        }
+
         if (this.validarExclusao(confirmarExclusao) || opcao == '') {
-            this.clienteService.excluirConta(motivoExclusao, confirmarExclusao, multifator).subscribe(
+            this.clienteService.excluirConta(exclusionPeriod, motivoExclusao, confirmarExclusao, multifator).subscribe(
                 result => {
                     this.messageService.success(result.message);
                     this.authService.logout();
@@ -339,7 +347,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 }
             )
         } else {
-            this.handleError('Digite exatamente a frase "EXCLUIR PERMANENTEMENTE" para confirmar a exclusão da conta.');
+            this.handleError(this.translate.instant('jogo_responsavel.exclusao_conta.exclusionConfirmationError'));
+            return;
         }
     }
 
@@ -404,29 +413,29 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     changeOpcaoExclusao() {
-        const { opcao } = this.formExclusaoConta.value;
+        const { exclusionPeriod, opcao } = this.formExclusaoConta.value;
         this.showConfirmarExclusao = true;
 
         if(opcao == '6') {
-            this.formExclusaoConta.setValue({ motivoExclusao: "", opcao: opcao, confirmarExclusao: ""});
+            this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "", opcao: opcao, confirmarExclusao: ""});
             this.showMotivoExclusaoConta = true;
         } else {
             this.showMotivoExclusaoConta = false;
             switch (opcao) {
                 case '1':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Uma segunda conta foi criada", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Uma segunda conta foi criada", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '2':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Ocupa muito meu tempo/desvia muito minha atenção", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Ocupa muito meu tempo/desvia muito minha atenção", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '3':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Não tenho mais interesse em realizar apostas neste site", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Não tenho mais interesse em realizar apostas neste site", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '4':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Não estou mais usando está conta", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Não estou mais usando está conta", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '5':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Problemas ao utilizar o sistema", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Problemas ao utilizar o sistema", opcao: opcao, confirmarExclusao: ""});
                     break;
                 default:
                     this.showConfirmarExclusao = false;
@@ -436,7 +445,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     validarExclusao(input: string): boolean {
-        const textoEsperado = ['EXCLUIR PERMANENTEMENTE', 'PERMANENTLY DELETE', 'ELIMINAR PERMANENTEMENTE'];
+        const textoEsperado = ['EXCLUIR CONTA', 'DELETE ACCOUNT', 'ELIMINAR CUENTA'];
         return textoEsperado.includes(input);
     }
 

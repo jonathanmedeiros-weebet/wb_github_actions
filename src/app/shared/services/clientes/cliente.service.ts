@@ -187,9 +187,10 @@ export class ClienteService {
             );
     }
 
-    excluirConta(motivo: string, confirmarExclusao: string, multifator = {}) {
+    excluirConta(exclusionPeriod: string, motivo: string, confirmarExclusao: string, multifator = {}) {
         const url = `${this.clienteUrl}/excluir-conta`;
         const data = {
+            exclusionPeriod,
             motivo,
             confirmarExclusao,
             ...multifator
