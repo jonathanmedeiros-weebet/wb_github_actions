@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { AuthService, MessageService } from 'src/app/services';
 import { config } from '../../../../config';
 import { TranslateService } from '@ngx-translate/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-exibir-bilhete-cassino',
@@ -18,6 +19,7 @@ export class ExibirBilheteCassinoComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    public activeModal: NgbActiveModal,
     private messageService: MessageService,
     private translate: TranslateService
   ) { }
@@ -35,6 +37,11 @@ export class ExibirBilheteCassinoComponent implements OnInit {
     } catch (err) {
       this.messageService.error(this.translate.instant('compartilhar_aposta.codigoCopiadoErro'));
     }
+  }
+
+  playGame(aposta) {
+    this.activeModal.close();
+    window.location.href = `/casino/${aposta.fornecedor}/${aposta.gameID}`;
   }
 
 }

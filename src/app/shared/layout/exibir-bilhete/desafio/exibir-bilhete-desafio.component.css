@@ -101,7 +101,7 @@ hr {
     border-bottom: 2px dotted var(--bottom-bar);
 }
 
-.valores .total-desafios, .valores .aposta, .valores .ganho, .valores .cambista-paga{
+.valores .total-desafios, .valores .aposta, .valores .ganho, .valores .cambista-paga, .valores #resultado-final {
     text-align: left;
     margin: 3px 1px 1px 10px;
     font-size: 12px;

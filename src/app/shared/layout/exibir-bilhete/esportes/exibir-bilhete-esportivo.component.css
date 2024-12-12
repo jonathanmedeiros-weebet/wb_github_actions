@@ -29,6 +29,7 @@
     padding: 10px;
     color: var(--foreground);
     font-size: 12px;
+    padding-top: 25px;
 }
 .cupom-header p {
     font-size: 13px;

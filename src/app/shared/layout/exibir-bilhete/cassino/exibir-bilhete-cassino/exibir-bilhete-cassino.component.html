@@ -14,7 +14,7 @@
         <p>Valor: <span style="float: right;">{{aposta.valor | currency}}</span></p>
         <p>Prêmio: <span style="float: right;">{{aposta.premio | currency}}</span></p>
     </div>
-    <button class="btn btn-custom" id="play-button" [routerLink]="['/casino/' + aposta.fornecedor + '/' + aposta.gameID]">
+    <button class="btn btn-custom" id="play-button" (click)="playGame(aposta)">
         {{ 'geral.jogar'| translate }} {{aposta.game}}
     </button>
 </div>
