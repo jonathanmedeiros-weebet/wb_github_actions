@@ -201,7 +201,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
                         this.faceMatchFirstWithdrawValidated = true;
-                    } else if (!this.verifiedIdentity) {
+                    } else if (!this.verifiedIdentity && this.verifiedIdentity !== null) {
                         this.legitimuzService.closeModal();
                         this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                         this.faceMatchFirstWithdrawValidated = false;
