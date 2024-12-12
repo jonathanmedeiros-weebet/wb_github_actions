@@ -2,7 +2,7 @@
     <div class="bet-shared" ref="ticket">
         <div class="bet-shared__container">
             <div class="bet-shared__logo">
-                <img :src="logoImage" @error="changeSrcWhenImageError">
+                <!-- <img :src="logoImage" @error="changeSrcWhenImageError"> -->
             </div>
             <h1 class="bet-shared__code">
                 {{ betCode }}
@@ -157,7 +157,7 @@
             },
             logoImage() {
                 const { logo } = useConfigClient();
-                return logo;
+                return logo ?? 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png';
             },
             betItens() {
                 return this.bet?.itens ?? [];
@@ -197,8 +197,6 @@
 
 <style lang="scss" scoped>
     .bet-shared {
-        left: -10000px;
-        position: absolute;
         width: 800px;
         padding: 1em;
         background: #f3f5d3;
