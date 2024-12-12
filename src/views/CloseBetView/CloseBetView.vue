@@ -111,7 +111,7 @@
             <w-button
               text="Compartilhar"
               color="secondary-light"
-              @click="handleShared"
+              @click="handleOpenModalSharedBet"
               :disabled="buttonDisable"
               class="button-share"
             >
@@ -144,6 +144,15 @@
         </div>
       </template>
     </div>
+
+    <ModalSharedOptions
+      v-if="showModalShared"
+      @close="handleCloseModalSharedBet"
+      @click="handleShared"
+    />
+    <div ref="bet-shared">
+      <BetSharedPreview v-if="bet" :bet="bet"/>
+    </div>
   </div>
 </template>
 
@@ -163,6 +172,9 @@ import { useConfigClient, useToastStore } from '@/stores';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import { getModalitiesEnum } from '@/constants';
+import ModalSharedOptions from './parts/ModalSharedOptions.vue';
+import { toPng } from 'html-to-image';
+import BetSharedPreview from './parts/BetSharedPreview.vue';
 
 export default {
   name: 'close-bet',
@@ -176,7 +188,9 @@ export default {
     IconFootball,
     IconShare,
     IconPrinter,
-    Toast
+    Toast,
+    ModalSharedOptions,
+    BetSharedPreview
   },
   props: {
     id: {
@@ -201,7 +215,8 @@ export default {
       toastStore: useToastStore(),
       configClientStore: useConfigClient(),
       textButtonConfirm: 'Confirmar',
-      textButtonCloseBet: 'Encerrar Aposta'
+      textButtonCloseBet: 'Encerrar Aposta',
+      showModalShared: false
     };
   },
   mounted() {
@@ -360,12 +375,33 @@ export default {
 
       return result;
     },
-    handleShared() {
-      sharedTicket(this.bet);
+    async handleShared(type) {
+      if(type == 'link') {
+        sharedTicket(this.bet);
+      } else {
+        const file = await this.generateBetImage();
+        sharedTicket(this.bet, file);
+      }
     },
     handlePrint() {
       printTicket(this.bet)
-    }
+    },
+    handleOpenModalSharedBet() {
+      this.showModalShared = true;
+    },
+    handleCloseModalSharedBet() {
+      this.showModalShared = false;
+    },
+    async generateBetImage() {
+      try {
+        await this.$nextTick();
+        const element = this.$refs['bet-shared'];
+        return await toPng(element);
+      } catch (error) {
+        console.error('Erro ao gerar a imagem:', error);
+        return '';
+      }
+    },
   },
 }
 </script>
