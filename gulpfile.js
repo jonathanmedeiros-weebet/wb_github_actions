@@ -2521,7 +2521,8 @@ gulp.task('boaaposta.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "boaaposta.com",
-        banca: "BOA APOSTA",
+        banca: "Boa aposta: A sua melhor escolha | Apostas esportivas e Jogos ao vivo ",
         styles: "",
+        description: "Descubra o site de apostas ideal para quem busca diversão e grandes oportunidades! Apostas esportivas, cassino online, bônus exclusivos e muito mais. Jogue com segurança e emoção. Cadastre-se agora!"
     });
 });
