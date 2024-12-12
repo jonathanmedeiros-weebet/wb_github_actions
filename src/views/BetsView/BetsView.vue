@@ -275,9 +275,11 @@ import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now, capital
 import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums';
+import scrollMixin from '@/mixins/scroll.mixin'
 
 export default {
   name: 'bets',
+  mixins: [scrollMixin],
   components: { 
     Header,
     WInput,
@@ -295,7 +297,7 @@ export default {
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
-      dateFilter: now(),
+      dateFilter: now().startOf('week').add(1, 'days'),
       finalDateFilter: now(),
       activeButton: 'todos',
       apostador: '',

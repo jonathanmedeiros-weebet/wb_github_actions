@@ -144,7 +144,7 @@ export default {
     return {
       showModalCalendar: false,
       balanceCalculation: null,
-      startDate: now().format('YYYY-MM-DD'),
+      startDate: now().startOf('week').add(1, 'days').format('YYYY-MM-DD'),
       endDate: now().format('YYYY-MM-DD'),
       totalBet: 0,
       resultDate: 0,
@@ -185,7 +185,7 @@ export default {
       return `${startDateFormatted} - ${endDateFormatted}`;
     }
   },
-  mounted() {
+  activated() {
     this.getValue()
   },
   methods: {

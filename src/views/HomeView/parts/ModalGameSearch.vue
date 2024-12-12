@@ -10,7 +10,7 @@
         <GameListSkeleton v-if="loading" :showFirstCollapse="false"/>
         <GameList
           v-else
-          @click="handleClick"
+          @gameClick="handleClick"
         />
       </div>
     </div>
@@ -45,10 +45,8 @@ export default {
       homeStore: useHomeStore()
     }
   },
-  created() {
-    this.modality = this.modalityList[0];
-  },
   mounted() {
+    this.modality = this.modalityList[0];
     this.championshipList = this.homeStore.championshipList;
     setTimeout(() => this.loading = false, 1000);
     this.$refs.InputSerachComponent.forcusInInput();

@@ -79,7 +79,7 @@ export default {
   data() {
     return {  
       showModalCalendar: false,
-      startDate: this.dateIni ?? now().format('YYYY-MM-DD'),
+      startDate: this.dateIni ?? now().startOf('week').add(1, 'days').format('YYYY-MM-DD'),
       endDate: this.dateEnd ?? now().format('YYYY-MM-DD'),
       title: 'Movimentações',
       balanceData: {},
@@ -96,7 +96,7 @@ export default {
       return Object.keys(this.balanceData).length === 0;
     }
   },
-  mounted(){
+  activated(){
     this.getBalance();
   },
   methods: {
