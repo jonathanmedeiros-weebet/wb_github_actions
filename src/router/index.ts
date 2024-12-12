@@ -18,6 +18,7 @@ import CloseBetView from '@/views/CloseBetView.vue'
 import PopularLotteryView from '@/views/PopularLotteryView.vue'
 import RechargeCardView from '@/views/RechargeCardView.vue'
 import RechargeReceiptView from '@/views/RechargeReceiptView.vue'
+import CardListView from '@/views/CardListView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -143,6 +144,15 @@ const router = new VueRouter({
       meta: {
         auth: production
       }
+    },
+    {
+      path: '/list-cards',
+      name: 'list-cards',
+      component: CardListView,
+      meta: {
+        auth: production
+      }
+
     },
     {
       path: '/recharge-card',
