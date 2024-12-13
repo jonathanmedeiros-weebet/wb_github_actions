@@ -16,7 +16,7 @@ export const now = () => {
     return moment()
 }
 
-export const convertInMomentInstance = (date: string | Moment, formatDate = "YYYY-MM-DD") => moment(date,formatDate);
+export const convertInMomentInstance = (date: string | Moment, formatDate = "YYYY-MM-DD") => moment(date, formatDate);
 
 export const formatDateBR = (date: string | Moment) => {
     return moment(date).locale('pt-br').format('DD/MM/YYYY');
