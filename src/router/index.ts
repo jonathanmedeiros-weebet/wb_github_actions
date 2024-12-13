@@ -18,7 +18,6 @@ import CloseBetView from '@/views/CloseBetView/CloseBetView.vue'
 import PopularLotteryView from '@/views/PopularLotteryView.vue'
 import RechargeCardView from '@/views/RechargeCardView.vue'
 import RechargeReceiptView from '@/views/RechargeReceiptView.vue'
-import ConsultCardView from '@/views/ConsultCardView.vue'
 import CreateCardView from '@/views/CreateCardView.vue'
 import DetailedCardView from '@/views/DetailedCardView.vue'
 
@@ -151,14 +150,6 @@ const router = new VueRouter({
       path: '/recharge-card',
       name: 'recharge-card',
       component: RechargeCardView,
-      meta: {
-        auth: production
-      }
-    },
-    {
-      path: '/consult-card',
-      name: 'consult-card',
-      component: ConsultCardView,
       meta: {
         auth: production
       }
