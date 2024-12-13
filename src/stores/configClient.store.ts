@@ -72,7 +72,10 @@ export const useConfigClient = defineStore('configClient', {
     localQuotes: (state) => state.params?.cotacoes_local ?? [],
     deadlineTable: (state) => state.params?.data_limite_tabela ?? null,
     sportbook: (state) => state.params?.sportbook ?? 'betsapi',
-
+    delayLiveBet: (state) => {
+      const delay = Number(state.params?.opcoes?.delay_aposta_aovivo ?? 10);
+      return delay < 10 ? 10 : delay;
+    },
     hasParams: (state) => Boolean(Object.values(state.params).length),
     bettorDocumentNumberEnabled: (state) => Boolean(state.params?.opcoes?.allow_bettor_document_number_on_the_ticket),
     chartDeprecatedByAndroidVersion: () => {

@@ -67,7 +67,7 @@
                   <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
                 </div>
               </span>
-              <template v-if="showFinished">
+              <template>
                 <p :class="{ 
                   'bet__status--success': betItem.resultado === 'ganhou', 
                   'bet__status--danger': betItem.resultado === 'perdeu',
@@ -81,7 +81,7 @@
             </div>
             <div class="bet__text">
               <span class="bet__select" :class="{'gain__strikethrough': newEarningPossibility !== null}">
-                {{ betItem.encerrado ? 'Resultado Final' : 'Para ganhar' }} : {{ betItem.odd_nome }}
+                {{ betItem.categoria_nome }} : {{ betItem.aposta_tipo.nome }}
               </span>
               <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
             </div>
@@ -111,8 +111,9 @@
             <w-button
               text="Compartilhar"
               color="secondary-light"
-              @click="handleShared"
+              @click="handleOpenModalSharedBet"
               :disabled="buttonDisable"
+              class="button-share"
             >
               <template #icon-left>
                 <IconShare :size="20" color="var(--foreground-league)"/>
@@ -143,6 +144,19 @@
         </div>
       </template>
     </div>
+
+    <ModalSharedOptions
+      v-if="showModalShared"
+      @close="handleCloseModalSharedBet"
+      @click="handleShared"
+    />
+    
+    <div style="position: absolute; top: -9999px; left: -9999px;">
+      <div v-if="bet" ref="bet-shared" >
+        <BetSharedPreview :bet="bet" />
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -162,6 +176,9 @@ import { useConfigClient, useToastStore } from '@/stores';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import { getModalitiesEnum } from '@/constants';
+import ModalSharedOptions from './parts/ModalSharedOptions.vue';
+import { toPng } from 'html-to-image';
+import BetSharedPreview from './parts/BetSharedPreview.vue';
 
 export default {
   name: 'close-bet',
@@ -175,7 +192,9 @@ export default {
     IconFootball,
     IconShare,
     IconPrinter,
-    Toast
+    Toast,
+    ModalSharedOptions,
+    BetSharedPreview
   },
   props: {
     id: {
@@ -198,12 +217,14 @@ export default {
       newEarningPossibility: null,
       closeRequesterd: false,
       toastStore: useToastStore(),
-      option: useConfigClient().options,
+      configClientStore: useConfigClient(),
       textButtonConfirm: 'Confirmar',
-      textButtonCloseBet: 'Encerrar Aposta'
+      textButtonCloseBet: 'Encerrar Aposta',
+      showModalShared: false
     };
   },
-  mounted() {
+  activated() {
+
     this.fetchBetDetails();
   },
   computed: {
@@ -281,7 +302,7 @@ export default {
                 duration: 5000
               })
             });
-          const timeDelay = this.option.delay_aposta_aovivo ?? 10;
+          const timeDelay = this.configClientStore.delayLiveBet;
           await delay((timeDelay * 1000));
         }
 
@@ -359,12 +380,33 @@ export default {
 
       return result;
     },
-    handleShared() {
-      sharedTicket(this.bet);
+    async handleShared(type) {
+      if(type == 'link') {
+        sharedTicket(this.bet);
+      } else {
+        const file = await this.generateBetImage();
+        sharedTicket(this.bet, file);
+      }
     },
     handlePrint() {
       printTicket(this.bet)
-    }
+    },
+    handleOpenModalSharedBet() {
+      this.showModalShared = true;
+    },
+    handleCloseModalSharedBet() {
+      this.showModalShared = false;
+    },
+    async generateBetImage() {
+      try {
+        await this.$nextTick();
+        const element = this.$refs['bet-shared'];
+        return await toPng(element);
+      } catch (error) {
+        console.error('Erro ao gerar a imagem:', error);
+        return '';
+      }
+    },
   },
 }
 </script>
@@ -522,6 +564,10 @@ export default {
 
 .button-spacer {
   width: 20px; 
+}
+
+.button-share {
+  border: 1px solid white;
 }
 
 .finish {

@@ -44,19 +44,19 @@
       <div class="more-options">
         <span class="more-options__text">Cartão</span>
         <div class="more-options__card">
-          <button class="more-options__item" @click="handleNavigate('/card-verify')">
+          <button v-if="false" class="more-options__item" @click="handleNavigate('/card-verify')">
             <IconCreditCard class="more-options__icon" />
             <span class="more-options__text-icon">Consultar</span>
           </button>
-          <button class="more-options__item" @click="handleNavigate('/create-card')">
+          <button v-if="false" class="more-options__item" @click="handleNavigate('/create-card')">
             <IconCreditCard class="more-options__icon" />
             <span class="more-options__text-icon">Criar</span>
           </button>
-          <button class="more-options__item" @click="handleNavigate('/list-cards')">
+          <button v-if="false" class="more-options__item" @click="handleNavigate('/list-cards')">
             <IconCreditCard class="more-options__icon" />
             <span class="more-options__text-icon">Listagem</span>
           </button>
-          <button class="more-options__item" @click="handleNavigate('/card-withdrawal-requests')">
+          <button v-if="false" class="more-options__item" @click="handleNavigate('/card-withdrawal-requests')">
             <IconCreditCard class="more-options__icon" />
             <span class="more-options__text-icon">Solicitações de saque</span>
           </button>
@@ -147,7 +147,7 @@ export default {
       toastStore: useToastStore()
     };
   },
-  mounted() {
+  activated() {
     this.getData();
   },
   computed: {
