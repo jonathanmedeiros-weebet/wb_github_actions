@@ -56,7 +56,7 @@
             <IconCreditCard class="more-options__icon" />
             <span class="more-options__text-icon">Listagem</span>
           </button>
-          <button v-if="false" class="more-options__item" @click="handleNavigate('/card-withdrawal-requests')">
+          <button class="more-options__item" @click="handleNavigate('/withdrawal')">
             <IconCreditCard class="more-options__icon" />
             <span class="more-options__text-icon">Solicitações de saque</span>
           </button>
