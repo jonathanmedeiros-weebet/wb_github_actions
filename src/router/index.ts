@@ -19,7 +19,7 @@ import PopularLotteryView from '@/views/PopularLotteryView.vue'
 import RechargeCardView from '@/views/RechargeCardView.vue'
 import RechargeReceiptView from '@/views/RechargeReceiptView.vue'
 import CreateCardView from '@/views/CreateCardView.vue'
-import CreateCardReceiptView from '@/views/CreateCardReceiptView.vue'
+import DetailedCardView from '@/views/DetailedCardView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -172,9 +172,9 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/create-receipt',
-      name: 'create-receipt',
-      component: CreateCardReceiptView,
+      path: '/detailed-card-/:code/:pin',
+      name: 'detailed-card',
+      component: DetailedCardView,
       meta: {
         auth: production
       },

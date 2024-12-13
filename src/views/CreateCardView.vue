@@ -127,9 +127,10 @@ export default {
                 });
 
                 this.$router.push({
-                    name: 'create-receipt',
+                    name: 'detailed-card',
                     params: {
-                        cardBet
+                        code: cardBet.chave,
+                        pin: this.cardPin
                     }
                 });
             })
