@@ -31,9 +31,12 @@
           <div class="bet__text">
             <span>{{ item.quoteGroupName }}</span>
           </div>
-          <div class="bet__result">
+          <div class="bet__result" :class="{ 'bet__result--border': item.hasChanges }">
             <span>{{ item.quoteName }}</span>
-            <span>{{ item.quoteValue }}</span>
+            <span>
+              {{ item.quoteValue }}
+              <span v-if="item.previousQuoteValue" class="bet__previous-quote">({{ item.previousQuoteValue }})</span>
+            </span>
           </div>
         </div>
       </template>
@@ -102,7 +105,7 @@
           />
           <label for="accept-changes">Aceitar alterações de odds</label>
         </div>
-        <div class="cotacao__finalizar">
+        <div class="cotacao__finalizar" v-if="!hasChanges">
           <w-button
             id="btn-entrar"
             :text="buttonText"
@@ -111,6 +114,18 @@
             name="btn-entrar"
             :disabled="buttonDisable"
             @click="handleFinalizeBet"
+          />
+        </div>
+        <div class="cotacao__aceitar-alteracoes" v-if="hasChanges">
+          <p>Algumas cotações mudaram, verifique com atenção antes de confirmar a aposta </p>
+          <w-button
+            id="btn-aceitar-alteracoes"
+            text="Aceitar alterações"
+            value="aceitar"
+            class="cotacao__finalizar-button"
+            name="btn-aceitar"
+            :disabled="buttonDisable"
+            @click="handleAcceptChanges"
           />
         </div>
       </div>
@@ -179,7 +194,8 @@ export default {
         91: IconVoleiball,
         92: IconTennis,
         151: IconESport
-      }
+      },
+      hasChanges: false
     };
   },
   computed: {
@@ -217,7 +233,9 @@ export default {
       return Object.values(this.ticketStore.items).map(item => ({
         ...item,
         icon: this.icons[item.modalityId],
-        quoteValue: item.quoteValue.toFixed(2)
+        quoteValue: item.quoteValue.toFixed(2),
+        previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
+        hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
       }));
     },
     hasLiveBet() {
@@ -374,6 +392,22 @@ export default {
           });
         })
         .catch(({ errors }) => {
+          if(errors.code == 17) { // Código de cotação alterada.
+            errors.data.forEach(({jogo_event_id, valor}) => {
+              const items = { ...this.ticketStore.items};
+              const ticketItem = Object.values(items).find(({eventId}) => eventId == jogo_event_id);
+              if(ticketItem) {
+                this.ticketStore.addQuote({
+                  ...ticketItem,
+                  previousQuoteValue: ticketItem.quoteValue,
+                  quoteValue: valor,
+                });
+
+                this.hasChanges = true;
+              }
+            });
+          }
+
           this.toastStore.setToastConfig({
             message: errors.message,
             type: ToastType.DANGER,
@@ -384,6 +418,9 @@ export default {
     },
     formatCurrency(value) {
       return formatCurrency(value);
+    },
+    handleAcceptChanges() {
+      this.hasChanges = false;
     }
   }
 }
@@ -508,6 +545,16 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
+
+    &--border {
+      border: 1px solid var(--highlight);
+      padding: 5px;
+    }
+  }
+
+  &__previous-quote {
+    text-decoration: line-through;
+    padding-left: 5px;
   }
 }
 
@@ -615,6 +662,21 @@ export default {
 
   &__finalizar-button {
     width: 100%;
+  }
+
+  &__aceitar-alteracoes {
+   display: flex;
+   flex-direction: column;
+  }
+
+  &__aceitar-alteracoes p{
+    box-sizing: border-box;
+    border-radius: .25rem;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 15px;
+    color:#ffff;
+    color: var(--foreground-header);
   }
 }
 </style>

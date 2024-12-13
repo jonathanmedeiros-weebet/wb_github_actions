@@ -24,3 +24,10 @@ export const sharedTicket = (aposta: any, file: any = null) => {
 
     wbPostMessage('shareURL', url, message, file)
 }
+
+export const getLogoTicket = async () => {
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/ticket-logo`
+    const response: any = await axiosInstance().get(url);
+    return response.results;
+}
