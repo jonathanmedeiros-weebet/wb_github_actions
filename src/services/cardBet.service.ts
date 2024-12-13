@@ -28,5 +28,5 @@ export const FindCardBet = async ( parametros: any) => {
         url += `?${params.toString()}`;
     }
     
-    return await axiosInstance().post(url); 
+    return await axiosInstance().get(url); 
 }

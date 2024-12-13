@@ -33,36 +33,36 @@
         />
       </div>
       
-      <div class="bets-cards__results" v-if="bets.length > 0">
-        <p class="bets-cards__count-results">Quantidade de cartões: {{ bets.length }}</p>
+      <div class="bets-cards__results" v-if="showResults">
+        <p class="bets-cards__count-results">Quantidade de cartões: {{ cards.length }}</p>
   
-        <div class="bets-cards__content-filters" v-for="bet in bets" :key="bets.id">
+        <div class="bets-cards__content-filters" v-for="(card, index) in cards" :key="index">
           <card-bets>
             <template #title>
-              <p>Código da Aposta: {{ bet.chave }}</p>
+              <p>Código do cartão de Aposta: {{ card.chave }}</p>
             </template>
             <template #subtitle>
-              <p>HORÁRIO: {{ formateDateTime(bet.data_registro) }}</p>
+              <p>HORÁRIO: {{ formateDateTime(card.data_registro) }}</p>
             </template>
             <template #body>
-              <p v-if="bet.apostador">Apostador: {{ bet.apostador }}</p>
+              <p v-if="card.apostador">Apostador: {{ card.apostador }}</p>
               <table class="table">
                 <tbody>
                   <tr>
                     <td class="table__line--left">Crédito:</td>
-                    <td class="table__line--right">R$ {{ bet.total_creditos }}</td>
+                    <td class="table__line--right">R$ {{ formatCurrencyMoney(card.total_creditos) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Prêmio:</td>
-                    <td class="table__line--right">R$ {{ bet.premio }}</td>
+                    <td class="table__line--right">R$ {{ formatCurrencyMoney(card.premios) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Saques:</td>
-                    <td class="table__line--right">R$ {{ bet.total_saques }}</td>
+                    <td class="table__line--right">R$ {{ formatCurrencyMoney(card.total_saques) }}</td>
                   </tr>
                   <tr>
                     <td class="table__line--left">Saldo:</td>
-                    <td class="table__line--right">R$ {{ bet.saldo }}</td>
+                    <td class="table__line--right">R$ {{ formatCurrencyMoney(card.saldo) }}</td>
                   </tr>
                 </tbody>  
               </table>
@@ -119,7 +119,7 @@ export default {
       dateFilter: now(),
       finalDateFilter: now(),
       apostador: '',
-      bets: {},
+      cards: [],
       betSelected: null,
       parametros: {
         dataInicial: '',
@@ -176,20 +176,18 @@ export default {
       this.parametros.dataInicial = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
       this.parametros.dataFinal = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.parametros.dataInicial;
       this.parametros.apostador = this.apostador;
-      this.parametros.sort = '-horario'
+      this.parametros.sort = '-dataRegistro'
 
       this.getCardBets();
     },
     async getCardBets() {
-      this.bets = [];
+      this.cards = [];
       this.showResults = false;
       
       const params = { ...this.parametros };
       FindCardBet(params)
       .then(async (resp) => {
-        console.log('Resposta da API:', resp);
-        this.bets = resp.results;
-        console.log('ARRAY',this.bets);
+        this.cards = resp.results;
           this.showResults = true;
         })
         .catch(error => {
@@ -199,15 +197,6 @@ export default {
             duration: 5000
           })
         })
-    },
-    goToTickets(bet, action) {
-      this.$router.push({ 
-        name: 'close-bet',
-        params: {
-          id: bet.id,
-          action: action
-        }
-      });
     },
     formateDateTime(datetime) {
       return formatDateTimeBR(datetime);
@@ -230,7 +219,7 @@ export default {
   }
 
   &__content {
-    min-height: 390px;
+    min-height: 290px;
     display: flex;
     flex-direction: column;
   }
