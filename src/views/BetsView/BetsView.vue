@@ -414,7 +414,6 @@ export default {
       findBet(params)
         .then(async (resp) => {
           this.bets = resp.results;
-          console.log(this.bets);
           await this.calculateBetInfo();
           this.showResults = true;
         })
