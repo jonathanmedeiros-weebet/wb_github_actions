@@ -42,7 +42,8 @@ export const useTicketStore = defineStore('ticket', {
             quoteGroupName,
             favorite,
             modalityId,
-            championshipId
+            championshipId,
+            previousQuoteValue = null
         }: any) {
             const items = { ...this.items };
 
@@ -70,6 +71,7 @@ export const useTicketStore = defineStore('ticket', {
                 live,
                 quoteKey,
                 quoteValue,
+                previousQuoteValue,
                 quoteName,
                 quoteGroupName,
                 favorite,
