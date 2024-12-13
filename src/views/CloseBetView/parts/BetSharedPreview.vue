@@ -2,7 +2,7 @@
     <div class="bet-shared" ref="ticket">
         <div class="bet-shared__container">
             <div class="bet-shared__logo">
-                <img :src="logoImage" @error="changeSrcWhenImageError">
+                <img v-if="logo" :src="logo">
             </div>
             <h1 class="bet-shared__code">
                 {{ betCode }}
@@ -109,6 +109,7 @@
 </template>
   
 <script>
+    import { getLogoTicket } from '@/services';
     import { useConfigClient } from '@/stores';
     import { formatCurrency, formatDateTimeBR } from '@/utilities';
   
@@ -124,8 +125,18 @@
         },
         data() {
             return {
-                cambistaPaga: false
+                cambistaPaga: false,
+                logo: null
             }
+        },
+        async created() {
+            getLogoTicket()
+                .then((imageBase64) => {
+                    if(imageBase64) {
+                        this.logo = `data:image/png;base64,${imageBase64}`
+                    }
+                })
+                .catch(() => this.logo = null);
         },
         activated() {
             if (this.bet?.passador?.percentualPremio > 0) {
@@ -155,10 +166,6 @@
             betResult() {
                 return this.bet?.resultado ?? '';
             },
-            logoImage() {
-                const { logo } = useConfigClient();
-                return logo;
-            },
             betItens() {
                 return this.bet?.itens ?? [];
             },
@@ -187,9 +194,6 @@
                     minimumFractionDigits: minFractionDigits,
                     maximumFractionDigits: maxFractionDigits
                 }).format(value);
-            },
-            changeSrcWhenImageError (event) {
-                event.target.src = 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png';
             }
         }
     }
@@ -197,8 +201,6 @@
 
 <style lang="scss" scoped>
     .bet-shared {
-        left: -10000px;
-        position: absolute;
         width: 800px;
         padding: 1em;
         background: #f3f5d3;

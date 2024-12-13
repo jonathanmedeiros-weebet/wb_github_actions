@@ -98,7 +98,8 @@ export default {
             return this.game?.campeonato?.nome ?? ''
         },
         dateTime() {
-            return convertInMomentInstance(this.game.horario).format('DD/MM hh:mm');
+            const formatDateOrigin = this.isLive ? "ddd, DD MMM YYYY HH:mm:ss [GMT]" : 'YYYY-MM-DD HH:mm:ss';
+            return convertInMomentInstance(this.game.horario, formatDateOrigin).format('DD/MM HH:mm');
         },
         teamA() {
             return {
