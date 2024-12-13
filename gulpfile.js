@@ -158,6 +158,18 @@ gulp.task('majovip.net', function (done) {
     });
 });
 
+gulp.task('kwbet.net', function (done) {
+    return prepare({
+        app_id: "net.kwbet.app",
+        url: "https://app.weebet.tech",
+        nome: "KW Bet",
+        slug: "kwbet.net",
+        centralUrl: 'https://central.kwbet.net',
+        splash_color: "#000000",
+        pkg_folder: ('net.kwbet.app').split('.').join('/')
+    });
+});
+
 gulp.task('asortebets.com', function (done) {
     return prepare({
         app_id: "com.asortebets",
