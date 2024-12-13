@@ -184,7 +184,7 @@ export default {
       }
     }
   },
-  mounted() {
+  activated() {
     this.getSports();
     this.$nextTick(() => {
       if (this.$refs.todayButton && this.$refs.todayButton[0]) {

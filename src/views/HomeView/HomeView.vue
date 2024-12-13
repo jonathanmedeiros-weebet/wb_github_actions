@@ -53,6 +53,7 @@
     <ModalCalendar
       v-if="showModalCalendar"
       :initialDate="dateSelected"
+      :maxDate="tablelimiteDate"
       @closeModal="handleCloseCalendarModal"
       @change="handleCalendar"
     />
@@ -91,9 +92,11 @@ import IconVoleiball from '@/components/icons/IconVoleiball.vue'
 import IconESport from '@/components/icons/IconESport.vue'
 import LiveButton from './parts/LiveButton.vue'
 import Toast from '@/components/Toast.vue'
+import scrollMixin from '@/mixins/scroll.mixin'
 
 export default {
   name: 'home',
+  mixins: [scrollMixin],
   components: {
     Header,
     SelectFake,
@@ -171,6 +174,10 @@ export default {
     Modalities() {
       return getModalitiesEnum();
     },
+    tablelimiteDate () {
+      const { options } = useConfigClient();
+      return options?.data_limite_tabela ?? 1
+    }
   },
   methods: {
     async pageLoad() {
@@ -309,7 +316,7 @@ export default {
         } = event;
 
         const championshipList = [ ...this.homeStore.championshipList ];
-        const championshipIndex = championshipList.findIndex((championship) => championship._id == campeonato._id);
+        let championshipIndex = championshipList.findIndex((championship) => championship._id == campeonato._id);
         const hasChampionship = championshipIndex =! -1;
 
         if(hasChampionship) {

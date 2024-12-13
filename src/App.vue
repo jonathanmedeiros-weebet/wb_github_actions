@@ -3,7 +3,9 @@
     <SplashScreen v-if="showSplashScreen"/>
     <template v-else>
       <Toast />
-      <RouterView />
+      <KeepAlive>
+        <RouterView :key="$route.fullPath"/>
+      </KeepAlive>
       <WFooter />
     </template>
   </div>
@@ -22,7 +24,7 @@ export default {
     RouterView,
     WFooter,
     SplashScreen,
-    Toast
+    Toast,
   },
   data() {
     return {
