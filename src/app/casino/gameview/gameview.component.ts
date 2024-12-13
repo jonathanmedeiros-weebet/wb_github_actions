@@ -29,7 +29,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
     @ViewChild('iframeElement', { static: false }) iframe: ElementRef<HTMLIFrameElement>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
-    htmlGameUrl;
+    htmlGame;
     gameUrl: SafeUrl = '';
     gameId: string = '';
     gameMode: string = '';
@@ -421,7 +421,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         if(this.gameFornecedor !== 'pgsoft') {
                             this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         } else {
-                            this.htmlGameUrl = response.gameURL;
+                            this.htmlGame = response.htmlGame;
                         }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
@@ -442,7 +442,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     onIframeLoad(iframe: HTMLIFrameElement) {
         var doc = iframe.contentDocument || iframe.contentWindow.document;
         doc.open();
-        doc.write(this.htmlGameUrl);
+        doc.write(this.htmlGame);
         doc.close();
     }
 

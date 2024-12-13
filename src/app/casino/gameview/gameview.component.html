@@ -41,17 +41,17 @@
             <div class="game-view-mobile" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }" *ngIf="isLoggedIn || gameMode != 'REAL'" >
                 <div class="game-frame" >
                     <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-                    <ng-container *ngIf="mobileScreen">
+                    <ng-container *ngIf="mobileScreen && !htmlGame">
                         <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
                     </ng-container>
-                    <ng-container *ngIf="!mobileScreen">
+                    <ng-container *ngIf="!mobileScreen && !htmlGame">
                         <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allow="fullscreen"></iframe>
                     </ng-container>
                     <ng-container *ngIf="mobileScreen">
-                        <iframe *ngIf="htmlGameUrl != ''" #iframe [srcdoc]="htmlGameUrl" (load)="onIframeLoad(iframe)"></iframe>
+                        <iframe *ngIf="htmlGame != ''" #iframe [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)"></iframe>
                     </ng-container>                     
-                    <ng-container *ngIf="mobileScreen">
-                        <iframe *ngIf="htmlGameUrl != ''" #iframe [srcdoc]="htmlGameUrl" (load)="onIframeLoad(iframe)" allow="fullscreen"></iframe>
+                    <ng-container *ngIf="!mobileScreen">
+                        <iframe *ngIf="htmlGame != ''" #iframe [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)" allow="fullscreen"></iframe>
                     </ng-container> 
                 </div>
             </div>
