@@ -349,6 +349,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     closeModal() {
         this.modalClose = false;
         this.registerCancel = true;
+        this.faceMatchRequested = false;
     }
 
     cancelModal() {
