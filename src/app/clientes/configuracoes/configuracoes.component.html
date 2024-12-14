@@ -278,7 +278,37 @@
                             <div class="field w-full" *ngIf="showMotivoExclusaoConta">
                                 <textarea rows="3" class="inverted-out" placeholder="{{ 'jogo_responsavel.exclusao_conta.explique_motivo' | translate }}" formControlName="motivoExclusao"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-custom">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
+                            <div #legitimuz id="legitimuz-container"
+                                *ngIf="faceMatchEnabled && !faceMatchDeletedAccountValidated && !verifiedIdentity">
+                                <div id="legitimuz">
+                                    <div id="verify-identity-text">
+                                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                                        ('saques.identityVerifyNeeded' | translate)}}
+                                    </div>
+                                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf" />
+                                    <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                                        <i class="fa-solid fa-id-card"></i>
+                                        {{'saques.identityVerify' | translate}}
+                                    </button>
+                                </div>
+                                <div id="legitimuz-root"></div>
+                            </div>
+                            <div #legitimuzLiveness id="legitimuz-container"
+                                *ngIf="faceMatchEnabled && !faceMatchDeletedAccountValidated && verifiedIdentity">
+                                <div id="legitimuz">
+                                    <div id="verify-identity-text">
+                                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                                        ('saques.identityVerifyNeeded' | translate)}}
+                                    </div>
+                                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf" />
+                                    <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                                        <i class="fa-solid fa-id-card"></i>
+                                        {{'saques.identityVerify' | translate}}
+                                    </button>
+                                </div>
+                                <div id="legitimuz-root"></div>
+                            </div>
+                            <button [disabled]="!faceMatchDeleteAccountValidated" type="submit" class="btn btn-custom" [ngStyle]="{'margin-top': faceMatchEnabled ? '15px' : '0px'}">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
                         </form>
                     </div>
                 </section>

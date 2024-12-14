@@ -1,4 +1,4 @@
-import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Injectable, OnDestroy, OnInit, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
 import {FormControl, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import {MessageService} from '../../shared/services/utils/message.service';
@@ -11,6 +11,11 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MultifactorConfirmationModalComponent } from 'src/app/shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 import { IdleDetectService } from 'src/app/shared/services/idle-detect.service';
 import { ActivityDetectService } from '../../shared/services/activity-detect.service';
+import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
+import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
+import { takeUntil } from 'rxjs/operators';
+import { Cliente } from 'src/app/shared/models/clientes/cliente';
 
 /**
  * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
@@ -44,12 +49,14 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 		{ provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
 	],
 })
-export class ConfiguracoesComponent implements OnInit, OnDestroy {
+export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit {
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
     queryParams: any;
     showLoading = true;
     blocked = false;
     opcaoExclusao = '';
-
+    cliente: Cliente;
     sectionLimiteApostas = false;
     sectionLimiteDeposito = false;
     sectionLimitePerdas = false;
@@ -72,6 +79,13 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     infoPeriodoPausa = '';
     configuracoes: any;
 
+    faceMatchEnabled = false;
+    faceMatchAccountDeletion = false;
+    faceMatchAccountDeletionValidated = false;
+    legitimuzToken = "";
+    verifiedIdentity = null;
+    disapprovedIdentity = false;
+
     public mostrarSenha: boolean = false;
     private tokenMultifator: string;
     private codigoMultifator: string;
@@ -89,6 +103,11 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         private modalService: NgbModal,
         private activityDetectService: ActivityDetectService,
         private translate: TranslateService,
+        private legitimuzService: LegitimuzService,
+        private legitimuzFacialService: LegitimuzFacialService,
+        private faceMatchService: FaceMatchService,
+        private cd : ChangeDetectorRef
+
     ) {}
 
     get twoFactorInProfileChangeEnabled(): boolean {
@@ -107,6 +126,61 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
         this.getClientConfigs();
         this.createForms();
+        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchAccountDeletion);
+        if (!this.faceMatchEnabled) {
+            this.faceMatchAccountDeletionValidated = true;
+        }
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.clienteService.getCliente(user.id)
+            .subscribe(
+                res => {
+                    this.cliente = res;
+                    this.verifiedIdentity = res.verifiedIdentity;
+                    this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+                    this.showLoading = false;
+                    this.cd.detectChanges();
+                },
+                error => {
+                    this.handleError(error);
+                }
+
+            );
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    if (this.verifiedIdentity) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, account_deletion: true }).subscribe({
+                            next: (res) => {
+                                this.legitimuzService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchAccountDeletionValidated = true;
+                                this.cd.detectChanges();
+                            }, error: (error) => {
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchAccountDeletionValidated = false;
+                            }
+                        })
+                    }
+                });
+            this.legitimuzFacialService.faceIndex
+                .subscribe(faceIndex => {
+                    if (faceIndex) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, account_deletion: true }).subscribe({
+                            next: (res) => {
+                                this.legitimuzFacialService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchAccountDeletionValidated = true;
+                                this.cd.detectChanges();
+                            }, error: (error) => {
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchAccountDeletionValidated = false;
+                            }
+                        })
+                    }
+                })
+        }
     }
 
     private getClientConfigs() {
@@ -471,6 +545,20 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 return '3horas';
             case '04:00':
                 return '4horas';
+        }
+    }
+    ngAfterViewInit() {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuz.changes
+                .subscribe(() => {
+                    this.legitimuzService.init();
+                    this.legitimuzService.mount();
+                });
+            this.legitimuzLiveness.changes
+                .subscribe(() => {
+                    this.legitimuzFacialService.init();
+                    this.legitimuzFacialService.mount();
+                });
         }
     }
 }
