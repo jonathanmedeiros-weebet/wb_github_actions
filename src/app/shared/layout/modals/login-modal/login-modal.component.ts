@@ -16,6 +16,7 @@ import { Geolocation, GeolocationService } from 'src/app/shared/services/geoloca
 import { FormValidations } from 'src/app/shared/utils';
 import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { FaceMatchModalComponent } from '../face-match-modal/face-match-modal/face-match-modal.component';
 
 declare var xtremepush: any;
 
@@ -167,9 +168,18 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.auth.verificaDadosLogin(formData)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                (res) => {
+                async (res) => {
+                    const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.paramsLocais.getOpcoes().legitimuz_token);
                     let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
                     this.getUsuario();
+
+                    if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
+                        const faceMatchResult = await this.abrirModalFaceMatch(this.usuario);
+                        console.log("FaceMatchResult: ", faceMatchResult);
+                        if (!faceMatchResult) {
+                            return;
+                        }
+                    }
 
                     if (
                         Boolean(res) &&
@@ -194,7 +204,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
                     this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
                     this.handleLogin();
-                    this.clienteService.checkPasswordExpirationDays(this.usuario.id)
+                    if (this.paramsLocais.getOpcoes().enableForceChangePassword) {
+                        this.clienteService.checkPasswordExpirationDays(this.usuario.id)
+                    }
                 },
                 (error) => {
                     if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
@@ -276,6 +288,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             cookie: this.auth.getCookie(this.usuario.cookie),
             geolocation: this.geolocation
         };
+        console.log("Data: ", data);
 
         this.auth.login(data)
             .pipe(takeUntil(this.unsub$))
@@ -316,6 +329,31 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.modalRef = this.modalService.open(
             EsqueceuSenhaModalComponent, options
         );
+    }
+
+    async abrirModalFaceMatch(user) {
+        this.activeModal.dismiss();
+        this.modalRef = this.modalService.open(
+            FaceMatchModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+                backdrop: 'static',
+                windowClass: 'modal-600'
+            }
+        );
+
+        this.modalRef.componentInstance.user = user;
+
+        return await this.modalRef.result
+            .then(
+                result => {
+                    return true;
+                },
+                reason => {
+                    return false;
+                }
+            );
     }
 
     abrirModalAuthDoisFatores() {
