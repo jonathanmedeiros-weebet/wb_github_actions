@@ -43,10 +43,7 @@ export class FaceMatchModalComponent implements OnInit, AfterViewInit {
         console.log(curCustomerIsVerified);
         this.verifiedIdentity = curCustomerIsVerified;
         if (this.verifiedIdentity) {
-          this.faceMatchService.updadeFacematch({
-            document: this.user.cpf,
-            // NOVACOLUNA: true
-          }).subscribe({
+          this.faceMatchService.updadeFacematch({document: this.user.cpf, periodic_validation: true}).subscribe({
             next: () => {
               this.legitimuzService.closeModal();
               this.messageService.success(this.translate.instant('face_match.verified_identity'));
