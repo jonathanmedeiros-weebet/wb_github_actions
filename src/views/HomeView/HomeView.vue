@@ -131,20 +131,22 @@ export default {
       regionSelected: '',
       homeStore: useHomeStore(),
       toastStore: useToastStore(),
-      socket: new SocketService()
+      socket: new SocketService(),
+      pauseActivatedHook: false
     }
   },
   created() {
-    if(!Boolean(this.modality)) {
-      const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
-      this.homeStore.setModality(modality);
-    }
-
-    if(this.liveActived) {
-      this.prepareSocket();
-    }
-
-    this.pageLoad();
+    this.pauseActivatedHook = true;
+    this.onInit(true);
+  },
+  mounted() {
+    setTimeout(() => {
+      this.pauseActivatedHook = false;
+    }, 5000);
+  },
+  activated() {
+    if(this.pauseActivatedHook) return
+    this.onInit(false);
   },
   computed: {
     championshipPerRegionList() {
@@ -180,8 +182,20 @@ export default {
     }
   },
   methods: {
-    async pageLoad() {
-      this.loading = true;
+    onInit(forceLoading = true) {
+      if(!Boolean(this.modality)) {
+        const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
+        this.homeStore.setModality(modality);
+      }
+
+      if(this.liveActived) {
+        this.prepareSocket();
+      }
+
+      this.pageLoad(forceLoading);
+    },
+    async pageLoad(forceLoading = true) {
+      this.loading = forceLoading;
 
       if(Boolean(this.league)) {
         await this.handleLeague(this.league)
@@ -471,7 +485,7 @@ export default {
       this.toastStore.setToastConfig({ message: '' });
     }
   },
-  destroyed() {
+  beforeDestroy() {
     this.eventSocketDisconnect();
   }
 }
