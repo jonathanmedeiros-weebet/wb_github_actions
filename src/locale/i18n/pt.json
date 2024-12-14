@@ -278,11 +278,13 @@
     "bankAccounts": {
         "title" : "Contas Bancárias",
         "Bank": "Banco",
+        "OptionBank": "Selecione o banco",
         "AgencyNumber": "Número da agência",
         "AccountNumber": "Número da conta",
         "AccountType": "Tipo de conta",
         "CurrentAccount": "Conta corrente",
-        "SavingsAccount": "Conta poupança"
+        "SavingsAccount": "Conta poupança",
+        "optionAccountType":"Selecione o tipo de conta"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",

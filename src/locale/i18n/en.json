@@ -271,12 +271,14 @@
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
-        "Bank": "Bank",
+        "Bank":"Bank",
+        "OptionBank": "Select the bank",
         "AgencyNumber": "Agency number",
         "AccountNumber": "Account number",
         "AccountType": "Account type",
         "CurrentAccount": "Current account",
-        "SavingsAccount": "Savings account"
+        "SavingsAccount": "Savings account",
+        "optionAccountType":"Select account type"
     },
     "bet": {
         "sportsBetting": "Sports betting",

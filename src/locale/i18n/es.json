@@ -272,11 +272,13 @@
     "bankAccounts": {
         "title" : "Bank Accounts",
         "Bank": "Banco",
+        "OptionBank": "Seleccione el banco",
         "AgencyNumber": "Número de agencia",
         "AccountNumber": "Número de cuenta",
         "AccountType": "Tipo de cuenta",
         "CurrentAccount": "Cuenta corriente",
-        "SavingsAccount": "Cuenta de ahorros"
+        "SavingsAccount": "Cuenta de ahorros",
+        "optionAccountType":"Seleccione el tipo de cuenta"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
