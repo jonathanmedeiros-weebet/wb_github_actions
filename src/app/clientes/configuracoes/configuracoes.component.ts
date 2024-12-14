@@ -144,7 +144,6 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
                 error => {
                     this.handleError(error);
                 }
-
             );
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
