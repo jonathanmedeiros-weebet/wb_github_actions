@@ -269,6 +269,15 @@
         "jogoResponsavel": "Juego responsable",
         "tax": "Impuesto"
     },
+    "bankAccounts": {
+        "title" : "Bank Accounts",
+        "Bank": "Banco",
+        "AgencyNumber": "Número de agencia",
+        "AccountNumber": "Número de cuenta",
+        "AccountType": "Tipo de cuenta",
+        "CurrentAccount": "Cuenta corriente",
+        "SavingsAccount": "Cuenta de ahorros"
+    },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
         "casinoBetting": "Apuestas de casino",
