@@ -27,8 +27,6 @@ export class FaceMatchModalComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.activeModal.close('success');
-
     this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
 
     this.clientService.getFaceMatchClient(this.user.id).subscribe((customer) => {
