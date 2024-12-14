@@ -107,7 +107,6 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
         private legitimuzFacialService: LegitimuzFacialService,
         private faceMatchService: FaceMatchService,
         private cd : ChangeDetectorRef
-
     ) {}
 
     get twoFactorInProfileChangeEnabled(): boolean {
@@ -546,6 +545,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
                 return '4horas';
         }
     }
+    
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes
