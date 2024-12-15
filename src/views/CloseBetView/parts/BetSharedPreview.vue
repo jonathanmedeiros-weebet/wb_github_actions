@@ -125,7 +125,7 @@
         },
         data() {
             return {
-                cambistaPaga: false,
+                cambistaPaga: 0,
                 logo: null
             }
         },

@@ -233,6 +233,72 @@ export const printRechargeReceipt = async (recharge: any) => {
     wbPostMessage('printCard', data)
 }
 
+export const printDetailedCard = async (card: any) => {
+    const { options } = useConfigClient();
+
+    const {
+        apkVersion,
+        printGraphics,
+        printLogo,
+        separator
+    } = await getPrinterSettings();
+    const encoder = new EscPosEncoder();
+    const cardEscPos = encoder.initialize();
+
+    if (printGraphics) {
+        if (apkVersion < 3) {
+            cardEscPos.image(printLogo, 376, 136, 'atkinson');
+        }
+    } else {
+        cardEscPos
+            .align('center')
+            .raw([0x1d, 0x21, 0x10])
+            .line(options.banca_nome)
+            .raw([0x1d, 0x21, 0x00]);
+    }
+
+    cardEscPos
+        .newline()
+        .bold(true)
+        .align('left')
+        .size('normal')
+        .line(separator)
+        .bold(true)
+        .text('Cartao: ')
+        .bold(false)
+        .text(card.chave)
+        .newline()
+        .bold(true)
+        .text('Apostador: ')
+        .bold(false)
+        .text(removerAcentos(card.apostador))
+        .newline()
+        .newline()
+        .bold(true)
+        .text('Cambista: ')
+        .bold(false)
+        .text(removerAcentos(card.passador.nome))
+        .newline()
+        .bold(true)
+        .text('Saldo atual: ')
+        .bold(false)
+        .text(`R$ ${formatCurrency(card.saldo)}`)
+        .newline()
+        .bold(true)
+        .text('Data/Hora: ')
+        .bold(false)
+        .text(formatDateTimeBR(card.data_registro))
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline();
+
+    const data = Array.from(cardEscPos.encode());
+    wbPostMessage('printCard', data)
+}
+
 const getPrinterSettings = async () => {
     const { printerSetting } = useConfigClient();
 
