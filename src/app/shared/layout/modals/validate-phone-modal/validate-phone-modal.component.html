@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <img
+        [src]="logo"
+        class="logo-modal"
+        alt="logo-modal"
+    >
+</div>
+<div class="modal-body">
+    <app-spinner *ngIf="submitting"></app-spinner>
+    <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        novalidate
+    >
+        <div class="d-flex flex-column justify-content-center p-4">
+            <br>
+            <label for="codigo">
+                {{'senhas.codigoDeVerificacaoPorEmail' | translate }}
+            </label>
+            <br>
+            <input
+                type="number"
+                id="validation_code"
+                class="form-control inverted-out"
+                formControlName="validation_code"
+                [ngClass]="applyCssInputError('validation_code')"
+                placeholder=" "
+            >
+            <br>
+            <div class="d-flex">
+                <button
+                    (click)="cancelar()"
+                    class="btn btn-custom2 btn-block margin-right-10"
+                    [disabled]="submitting"
+                >
+                    {{'geral.cancelar' | translate}}
+                </button>
+                <button
+                    type="submit"
+                    class="btn btn-custom btn-block btn-cadastrar margin-left-10"
+                    [disabled]="submitting"
+                >
+                    {{'geral.confirmar' | translate}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
