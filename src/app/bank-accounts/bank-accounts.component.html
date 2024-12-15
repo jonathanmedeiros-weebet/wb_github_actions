@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-10 col-lg-9 col-xl-4">
                                 <div class="form-group">
-                                    <input type="text" formControlName="agencyNumber" class="form-control inverted-out" maxlength="10">
+                                    <input type="text" formControlName="agencyNumber" class="form-control inverted-out" maxlength="10" required pattern="^\S*$">
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-10 col-lg-9 col-xl-4">
                                 <div class="form-group">
-                                    <input type="text" formControlName="accountNumber" class="form-control inverted-out" maxlength="15">
+                                    <input type="text" formControlName="accountNumber" class="form-control inverted-out" maxlength="15" required pattern="^\S*$">
                                 </div>
                             </div>
                         </div>
