@@ -172,13 +172,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.paramsLocais.getOpcoes().legitimuz_token);
                     let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
                     this.getUsuario();
-
                     if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
-                        const faceMatchResult = await this.abrirModalFaceMatch(this.usuario);
+                        const holdUser = this.usuario;
+                        localStorage.removeItem('user');
+                        const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
                         console.log("FaceMatchResult: ", faceMatchResult);
                         if (!faceMatchResult) {
                             return;
                         }
+                        localStorage.setItem('user', JSON.stringify(holdUser));
                     }
 
                     if (
