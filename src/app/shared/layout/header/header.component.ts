@@ -533,8 +533,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             (result) => {
                 this.userPhoneValidated = this.auth.getUser().phone_validated;
                 this.cd.detectChanges();
-            },
-            (reason) => {console.log(reason);
             }
         );
     }
