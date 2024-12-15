@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -33,6 +33,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { BetbyModule } from './betby/betby.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 // Interceptors
 import { AuthInterceptor } from './auth/auth-interceptor.service';
@@ -105,7 +106,13 @@ export function googleFactory(service: ParametrosLocaisService) {
             timeOut: 7000
         }),
         NgxPaginationModule,
-        SharedModule
+        SharedModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: !isDevMode(),
+          // Register the ServiceWorker as soon as the application is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [
         APP_TOKENS,
