@@ -44,9 +44,11 @@ export class LegitimuzService {
             const user = JSON.parse(localStorage.getItem('user'));
 
             this.options.onSuccess = (eventName) => {
+                console.log("LEGITIMUZ w/ user - Success: ", eventName);
                 if (eventName === 'facematch') {
                     setTimeout(() => {
                         if (user.id) {
+                            console.log("USER.ID LEGITIMUZ: ", user.id);
                             this.clienteService.getCliente(user.id)
                                 .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
                         } else {
@@ -57,7 +59,9 @@ export class LegitimuzService {
             };
         } else {
             this.options.onSuccess = (eventName) => {
+                console.log("LEGITIMUZ - Success: ", eventName);
                 if (eventName === 'facematch') {
+                    console.log("OK FACEMATCH");
                     this.curCustomerIsVerifiedSub.next(true);
                     this.closeModal();
                 }

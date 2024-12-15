@@ -40,15 +40,18 @@ export class FaceMatchModalComponent implements OnInit, AfterViewInit {
 
     this.legitimuzService.curCustomerIsVerified
       .subscribe(curCustomerIsVerified => {
-        console.log(curCustomerIsVerified);
+        console.log("customer is verified: ", curCustomerIsVerified);
         this.verifiedIdentity = curCustomerIsVerified;
         if (this.verifiedIdentity) {
+          console.log("Verified identity: ", this.verifiedIdentity);
           this.faceMatchService.updadeFacematch({document: this.user.cpf, periodic_validation: true}).subscribe({
             next: () => {
+              console.log("FaceMatch updated");
               this.legitimuzService.closeModal();
               this.messageService.success(this.translate.instant('face_match.verified_identity'));
               this.activeModal.close('success');
             }, error: () => {
+              console.error("Error updating FaceMatch");
               this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
               this.activeModal.dismiss('error');
             }
@@ -57,14 +60,5 @@ export class FaceMatchModalComponent implements OnInit, AfterViewInit {
       });
   }
 
-  ngAfterViewInit(): void {
-    // this.legitimuz.changes
-    //   .subscribe(() => {
-    //     this.legitimuzService.init();
-    //     this.legitimuzService.mount();
-    //   });
-  }
-
-  updateFaceMatch() {
-  }
+  ngAfterViewInit(): void { }
 }
