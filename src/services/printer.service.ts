@@ -168,6 +168,71 @@ export const printTicket = async (bet: any) => {
     }
 }
 
+export const printRechargeReceipt = async (recharge: any) => {
+    const { options } = useConfigClient();
+
+    const {
+        apkVersion,
+        printGraphics,
+        printLogo,
+        separator
+    } = await getPrinterSettings();
+    const encoder = new EscPosEncoder();
+    const rechargeEscPos = encoder.initialize();
+
+    if (printGraphics) {
+        if (apkVersion < 3) {
+            rechargeEscPos.image(printLogo, 376, 136, 'atkinson');
+        }
+    } else {
+        rechargeEscPos
+            .align('center')
+            .raw([0x1d, 0x21, 0x10])
+            .line(options.banca_nome)
+            .raw([0x1d, 0x21, 0x00]);
+    }
+
+    rechargeEscPos
+        .newline()
+        .bold(true)
+        .align('left')
+        .size('normal')
+        .line(separator)
+        .bold(true)
+        .text('Cartao: ')
+        .bold(false)
+        .text(recharge.cartao_aposta)
+        .newline()
+        .bold(true)
+        .text('Cambista: ')
+        .bold(false)
+        .text(removerAcentos(recharge.passador))
+        .newline()
+        .bold(true)
+        .text('Valor: ')
+        .bold(false)
+        .text(`R$ ${formatCurrency(recharge.valor)}`)
+        .newline()
+        .bold(true)
+        .text('Data/Hora: ')
+        .bold(false)
+        .text(formatDateTimeBR(recharge.data))
+        .newline()
+        .align('center')
+        .size('small')
+        .bold(true)
+        .text(recharge.autenticacao)
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline();
+
+    const data = Array.from(rechargeEscPos.encode());
+    wbPostMessage('printCard', data)
+}
+
 const getPrinterSettings = async () => {
     const { printerSetting } = useConfigClient();
 
