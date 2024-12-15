@@ -198,7 +198,7 @@ export default {
       this.loading = forceLoading;
 
       if(Boolean(this.league)) {
-        await this.handleLeague(this.league)
+        await this.handleLeague(this.league, forceLoading)
       } else {
         await this.prepareChampionshipList(this.modality.id, null, this.dateSelected.format('YYYY-MM-DD'))
       }
@@ -389,8 +389,8 @@ export default {
     handleCloseLeaguesModal() {
       this.showModalLeagues = false;
     },
-    async handleLeague(regionOrChampionship) {
-      this.loading = true;
+    async handleLeague(regionOrChampionship, forceLoading) {
+      this.loading = forceLoading;
       this.regionSelected = '';
       this.handleCloseLeaguesModal();
 
