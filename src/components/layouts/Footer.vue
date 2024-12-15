@@ -40,7 +40,13 @@ export default {
         'change-password',
         'game-detail',
         'config',
-        'close-bet'
+        'close-bet',
+        'detailed-card',
+        'reckoning',
+        'dashboard',
+        'recharge-card',
+        'movements',
+        'results'
       ].includes(this.$route.name)
     },
     showCopyright() {
@@ -53,6 +59,7 @@ export default {
 
 <style lang="scss" scoped>
   .footer {
+    z-index: 1;
     bottom: 0;
     position: fixed;
     width: 100%;
