@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, UntypedFormBuilder } from '@angular/forms';
 import { Bank } from '../shared/models/bankAccounts/bank';
-import { AuthService, MenuFooterService, MessageService, SidebarService, UtilsService } from '../services';
+import { AuthService, ClienteService, MenuFooterService, MessageService, SidebarService, UtilsService } from '../services';
 import { Subject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-bank-accounts',
@@ -24,8 +25,9 @@ export class BankAccountsComponent implements OnInit, OnDestroy {
         private messageService: MessageService,
         private auth: AuthService,
         private menuFooterService: MenuFooterService,
+        private translate: TranslateService,
+        private clienteService: ClienteService,
     ){
-        // super();
         this.banks = [];
         this.bankSelected = 0;
     }
@@ -49,23 +51,11 @@ export class BankAccountsComponent implements OnInit, OnDestroy {
 
     createForm() {
         this.form = this.fb.group({
-            bank: [''],
+            bank: [0],
             agencyNumber: [''],
             accountNumber: [''],
-            accountType: ['']
+            accountType: [0]
         });
-    }
-
-    onSubmit() {
-      // if (this.form.valid) {
-      //     if(this.twoFactorInProfileChangeEnabled) {
-      //         this.validacaoMultifator();
-      //     } else {
-      //         this.submit();
-      //     }
-      // } else {
-      //     this.checkFormValidations(this.form);
-      // }
     }
 
     getBanks() {
@@ -86,4 +76,28 @@ export class BankAccountsComponent implements OnInit, OnDestroy {
 
     }
 
+
+    onSubmit() {
+        if (this.form.valid) {
+            let values = this.form.value;
+
+            this.clienteService
+                .registerBankAccount(values)
+                .subscribe(
+                    () => {
+                        this.messageService.success(this.translate.instant('geral.savedSuccessfully'))
+                        this.resetForm();
+                    } ,
+                error => this.handleError(error)
+            );
+        }
+    }
+
+    resetForm() {
+        this.form.reset();
+        this.banks = [];
+        this.getBanks() ;
+        this.form.controls['bank'].setValue('0');
+        this.form.controls['accountType'].setValue('0');
+    }
 }

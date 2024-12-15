@@ -14,7 +14,7 @@
                             <div class="col-12 col-sm-12 col-md-10 col-lg-9 col-xl-4">
                                 <div class="form-group">
                                     <select formControlName="bank" class="form-control inverted-out">
-                                        <option value="">{{'bankAccounts.OptionBank' | translate}}</option>
+                                        <option value="0">{{'bankAccounts.OptionBank' | translate}}</option>
                                         <option *ngFor="let bank of banks" [value]="bank.id"
                                             [selected]="bank.id === bankSelected">{{bank.nome}}</option>
                                     </select>
@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-10 col-lg-9 col-xl-4">
                                 <div class="form-group">
-                                    <input type="text" formControlName="agencyNumber" class="form-control inverted-out">
+                                    <input type="text" formControlName="agencyNumber" class="form-control inverted-out" maxlength="10">
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-10 col-lg-9 col-xl-4">
                                 <div class="form-group">
-                                    <input type="text" formControlName="accountNumber" class="form-control inverted-out">
+                                    <input type="text" formControlName="accountNumber" class="form-control inverted-out" maxlength="15">
                                 </div>
                             </div>
                         </div>
@@ -49,9 +49,9 @@
                             <div class="col-12 col-sm-12 col-md-10 col-lg-9 col-xl-4">
                                 <div class="form-group">
                                     <select formControlName="accountType" type="text" class="form-control inverted-out">
-                                        <option value="">{{'bankAccounts.optionAccountType' | translate}}</option>
-                                        <option value="CurrentAccount">{{'bankAccounts.CurrentAccount' | translate}}</option>
-                                        <option value="SavingsAccount">{{'bankAccounts.SavingsAccount' | translate}}</option>
+                                        <option value="0">{{'bankAccounts.optionAccountType' | translate}}</option>
+                                        <option value="corrente">{{'bankAccounts.CurrentAccount' | translate}}</option>
+                                        <option value="poupanca">{{'bankAccounts.SavingsAccount' | translate}}</option>
                                     </select>
                                     <app-error-msg [control]="form.get('accountType')"></app-error-msg>
                                 </div>
@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col col-md-12">
                                 <div class="form-group text-right">
-                                    <button class="btn btn-custom2 w-150 mr-4 btn-cancell" type="button" (click)="resetarForm()">
+                                    <button class="btn btn-custom2 w-150 mr-4 btn-cancell" type="button" (click)="resetForm()">
                                         {{'geral.cancelar' | translate}}
                                     </button>
                                     <button

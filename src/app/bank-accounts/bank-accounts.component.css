@@ -33,6 +33,10 @@ label {
     position: relative;
 }
 
+.no-mobile, .hide-mobile {
+    display: block !important;
+}
+
 @media only screen and (max-width: 767px) {
     label {
         display: none;
