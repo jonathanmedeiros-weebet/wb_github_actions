@@ -62,6 +62,11 @@
                                         [dropSpecialCharacters]="false"
                                         [validation]="false"
                                     >
+                                    <i *ngIf="isMandatoryPhoneValidation" 
+                                    class="showPassword fa"
+                                    [ngClass]="userPhoneValidated ? 'fa-check' : 'fa-xmark'"
+                                    style="cursor: inherit;">
+                                    </i>
                                     <app-error-msg [control]="form.get('telefone')"></app-error-msg>
                                 </div>
                             </div>

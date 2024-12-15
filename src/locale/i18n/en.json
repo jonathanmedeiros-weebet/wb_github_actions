@@ -267,7 +267,8 @@
         "restricaoDeLocalizacao": "This feature is available only to users in Brazil.",
         "lastAccesses": "Last accesses",
         "action": "Action",
-        "tax": "Tax"
+        "tax": "Tax",
+        "validatePhone": "Phone Verification"
     },
     "bet": {
         "sportsBetting": "Sports betting",

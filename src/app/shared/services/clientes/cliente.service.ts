@@ -340,4 +340,34 @@ export class ClienteService {
                 error => console.error(error)
             )
     }
+
+    initiatePhoneValidation() {
+        return this.http
+            .post(
+                `${this.clienteUrl}/initiate-phone-validation`,
+                {},
+                this.headers.getRequestOptions(true)
+            )
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    validatePhone(validationCode: number) {
+        return this.http
+            .post(
+                `${this.clienteUrl}/validate-phone`,
+                { validation_code: validationCode },
+                this.headers.getRequestOptions(true)
+            )
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

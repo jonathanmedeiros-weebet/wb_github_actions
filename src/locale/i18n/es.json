@@ -267,7 +267,8 @@
         "session_alert": "Alerta de Sesión",
         "session_alert_message": "Actualmente hay una sesión activa en otro dispositivo. Para continuar con el acceso, ¿desea cerrar la otra sesión?",
         "jogoResponsavel": "Juego responsable",
-        "tax": "Impuesto"
+        "tax": "Impuesto",
+        "validatePhone": "Verificación telefónica"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
