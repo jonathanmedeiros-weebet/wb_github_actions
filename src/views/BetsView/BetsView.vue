@@ -297,7 +297,7 @@ export default {
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
-      dateFilter: now().startOf('week').add(1, 'days'),
+      dateFilter: null,
       finalDateFilter: now(),
       activeButton: 'todos',
       apostador: '',
@@ -321,6 +321,9 @@ export default {
       amountBets: 0,
       rewardBets: 0
     }
+  },
+  created() {
+    this.dateFilter = this.configClientStore.firstDayOfTheWeek;
   },
   mounted() {
     this.options = this.configClientStore.options;

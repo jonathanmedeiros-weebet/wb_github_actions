@@ -167,7 +167,7 @@ export default {
     return {
       showModalCalendar: false,
       balanceCalculation: null,
-      startDate: now().startOf('week').add(1, 'days').format('YYYY-MM-DD'),
+      startDate: null,
       endDate: now().format('YYYY-MM-DD'),
       totalBet: 0,
       resultDate: 0,
@@ -219,6 +219,10 @@ export default {
     previousBalanceDate() {
       return convertInMomentInstance(this.startDate).subtract(1, 'days').format('DD/MM');
     }
+  },
+  created() {
+    const { firstDayOfTheWeek } = useConfigClient();
+    this.startDate = this.dateIni ?? firstDayOfTheWeek.format('YYYY-MM-DD');
   },
   activated() {
     this.getValue()
