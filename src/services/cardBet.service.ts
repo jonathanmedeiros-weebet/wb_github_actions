@@ -12,12 +12,9 @@ export const recharge = async (code: any, value: any) => {
     return response.results; 
 };
 
-export const create = async (bettorName: string, value: number, cardPin: string, confirmCardPin: string) => {
+export const create = async (payload: any) => {
     const { lokiUrl } = useConfigClient();
-    const url = `${lokiUrl}/card-bets/`;
-
-    const payload = { apostador: bettorName, pin: cardPin, pin_confirmacao: confirmCardPin, valor: value };
-
+    const url = `${lokiUrl}/card-bets`;
     const response: any = await axiosInstance().post(url, payload);
     return response.results; 
 }
@@ -28,7 +25,7 @@ export const consultCard = async (chave: any, pin: any) => {
     const response: any = await axiosInstance().get(url, {
         params: { pin },
     });
-    return response.results ?? response.data.results;
+    return response.results;
 };
 
 export const sharedCard = async (chave: any, pin: any) => {
