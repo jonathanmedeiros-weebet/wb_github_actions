@@ -135,6 +135,18 @@ export class ClienteService {
             );
     }
 
+    registerBankAccount(registrationData) {
+        return this.http.post(`${this.clienteUrl}/registerBankAccount`, JSON.stringify(registrationData),
+        this.headers.getRequestOptions(true))
+        .pipe(
+            map((response: any) => {
+                return response.results.result;
+            }
+            ),
+            catchError(this.errorService.handleError)
+        );
+    }
+
     atualizarPix(dadosCadastrais) {
         return this.http.post(`${this.clienteUrl}/atualizarChavePix`, JSON.stringify(dadosCadastrais),
             this.headers.getRequestOptions(true))

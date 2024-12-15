@@ -273,7 +273,19 @@
         "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?",
         "jogoResponsavel": "Jogo responsável",
         "tax": "Imposto",
-        "validatePhone": "Verificação de Telefone"
+        "validatePhone": "Verificação de Telefone",
+        "savedSuccessfully":  "Salvo com sucesso!"
+    },
+    "bankAccounts": {
+        "title" : "Contas Bancárias",
+        "Bank": "Banco",
+        "OptionBank": "Selecione o banco",
+        "AgencyNumber": "Número da agência",
+        "AccountNumber": "Número da conta",
+        "AccountType": "Tipo de conta",
+        "CurrentAccount": "Conta corrente",
+        "SavingsAccount": "Conta poupança",
+        "optionAccountType":"Selecione o tipo de conta"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -467,6 +479,7 @@
         "metodosDePagamento": "Metódos de pagamento",
         "quemSomos": "Quem Somos",
         "downloadApp": "Download app",
+        "installPwa": "Instalar APP Cliente",
         "regras": "Regras",
         "resultados": "Resultados",
         "politicaDePrivacidade": "Política de privacidade",

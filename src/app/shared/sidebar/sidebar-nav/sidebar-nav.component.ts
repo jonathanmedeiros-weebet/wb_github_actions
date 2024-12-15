@@ -126,6 +126,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
             case '/clientes/perfil-pix':
             case '/alterar-senha':
             case '/ultimos-acessos':
+            case '/bank-accounts':
                 this.subPerfil = true;
                 break;
             case '/clientes/saque':
