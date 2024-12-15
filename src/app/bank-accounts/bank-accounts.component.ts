@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './bank-accounts.component.html',
   styleUrls: ['./bank-accounts.component.css']
 })
+
 export class BankAccountsComponent implements OnInit, OnDestroy {
     public collapsed = false;
     form: FormGroup;
@@ -73,9 +74,7 @@ export class BankAccountsComponent implements OnInit, OnDestroy {
         this.unsub$.next();
         this.unsub$.complete();
         this.menuFooterService.setIsPagina(false);
-
     }
-
 
     onSubmit() {
         if (this.form.valid) {
