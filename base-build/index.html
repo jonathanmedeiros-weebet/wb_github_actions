@@ -138,6 +138,8 @@
     <meta property="og:image:alt" content="LOGO [BANCA]">
     <meta name="description" content="[DESCRIPTION]">
 
+    <script src="https://cdn.legitimuz.com/js/sdk/antifraude.js"></script>
+
     <script>
         const isApp = () => location.search.includes('app');
         const verifyAppForce = (appVersion = 'v3') => {
@@ -150,7 +152,7 @@
 
             return match ? match[1] : undefined;
         }
-        
+
         const initApp = () => {
             // v1 -> light
             // v2 -> site do client;
@@ -173,7 +175,7 @@
             }
             window.location.href = v3Url;
         }
-        
+
         initApp();
     </script>
 </head>

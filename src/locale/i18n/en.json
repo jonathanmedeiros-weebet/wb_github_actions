@@ -119,7 +119,7 @@
         "jogo": "Game",
         "dataDeEncerramento": "Closing date",
         "configuracoes": "Settings",
-        "versao": "Version",
+            "versao": "Version",
         "solicitarDeposidto": "Request Deposit",
         "liberarCredito": "Release Credit",
         "bonus": "Bonus",
@@ -270,7 +270,8 @@
         "tax": "Tax",
         "validatePhone": "Phone Verification",
         "savedSuccessfully":  "Saved successfully!",
-        "successfullyDeleted": "Successfully deleted!"
+        "successfullyDeleted": "Successfully deleted!",
+        "vpn": "We have detected that you are accessing our website through a VPN. To ensure the security and integrity of the platform, we kindly ask you to disable the VPN or use a standard connection to proceed. If you believe this is an error, please contact support."
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",

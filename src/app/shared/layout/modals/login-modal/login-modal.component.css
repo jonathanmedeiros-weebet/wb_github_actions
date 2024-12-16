@@ -6,7 +6,7 @@
 
 .modal-dialog {
     max-width: 600px;
-  }
+}
 
 .modal-header {
     border-bottom-color: var(--foreground);
@@ -83,7 +83,8 @@ asl-google-signin-button {
 
 .showPassword {
     position: absolute;
-    top: calc(50% - 16px);;
+    top: calc(50% - 16px);
+    ;
     right: 0;
     color: var(--foreground-inputs-odds);
     cursor: pointer;
@@ -141,11 +142,11 @@ asl-google-signin-button {
     opacity: 0;
 }
 
-.login-mode input[type="radio"]:checked + .radio-custom {
+.login-mode input[type="radio"]:checked+.radio-custom {
     border-color: var(--highlight);
 }
 
-.login-mode input[type="radio"]:checked + .radio-custom::after {
+.login-mode input[type="radio"]:checked+.radio-custom::after {
     opacity: 1;
 }
 
@@ -279,4 +280,35 @@ button {
     margin: 10px;
     color: var(--highlight);
     font-size: 22px;
+}
+
+.modal-body {
+    min-height: fit-content;
+    height: 0px;
+    transition: height 1s ease-out;
+}
+
+.container-loader {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+        radial-gradient(farthest-side, var(--foreground) 94%, #0000) top/8px 8px no-repeat,
+        conic-gradient(#0000 30%, var(--foreground));
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+    animation: l13 1s infinite linear;
+}
+
+@keyframes l13 {
+    100% {
+        transform: rotate(1turn)
+    }
 }

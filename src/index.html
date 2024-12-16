@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DEMO</title>
+    <title>WEEBET</title>
     <base href="/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -25,14 +25,17 @@
 
     <!-- End Google Tag Manager -->
 
+    
+
+    
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
     <link rel="stylesheet" href="https://wb-assets.com/fonts/remix-icon/remixicon.css"/>
 
-    <link rel="apple-touch-icon" href="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png">
-    <link rel="shortcut icon" type="image/png" href="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png">
-    <link rel="icon" type="image/x-icon" href="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/favicon.ico">
+    <link rel="apple-touch-icon" href="https://weebet.s3.amazonaws.com/bet2.wee.bet/logos/icone_app.png">
+    <link rel="shortcut icon" type="image/png" href="https://weebet.s3.amazonaws.com/bet2.wee.bet/logos/icone_app.png">
+    <link rel="icon" type="image/x-icon" href="https://weebet.s3.amazonaws.com/bet2.wee.bet/logos/favicon.ico">
 
     <style>
         :root {
@@ -125,23 +128,55 @@
             --foreground-bottom-bar-rgb: 170, 170, 170;
         }
     </style>
-    <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/demo.wee.bet/param/cores.css?v=1731529874">
+    <link rel="stylesheet" href="https://weebet.s3.amazonaws.com/bet2.wee.bet/param/cores.css?v=1734359909">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="DEMO">
-    <meta property="og:description" content="DEMO é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website DEMO, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. DEMO apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.">
-    <meta property="og:url" content="central.demo.wee.bet">
-    <meta property="og:image" content="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png">
-    <meta property="og:image:alt" content="LOGO DEMO">
-    <meta name="description" content="DEMO é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website DEMO, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. DEMO apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.">
+    <meta property="og:title" content="WEEBET">
+    <meta property="og:description" content="WEEBET é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website WEEBET, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. WEEBET apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.">
+    <meta property="og:url" content="central.bet2.wee.bet">
+    <meta property="og:image" content="https://weebet.s3.amazonaws.com/bet2.wee.bet/logos/icone_app.png">
+    <meta property="og:image:alt" content="LOGO WEEBET">
+    <meta name="description" content="WEEBET é um site de entretenimento online que oferece a seus usuários uma experiência única em apostas. Ao acessar, continuar a utilizar ou navegar no website WEEBET, você aceita que utilizemos certos cookies de navegador visando melhorar a sua experiência enquanto utiliza nosso site. WEEBET apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.">
+
+    <script src="https://cdn.legitimuz.com/js/sdk/antifraude.js"></script>
 
     <script>
-        function getAndroidVersion(ua) {
-            ua = (ua || navigator.userAgent).toLowerCase();
-            var match = ua.match(/android\s([0-9\.]*)/i);
+        const isApp = () => location.search.includes('app');
+        const verifyAppForce = (appVersion = 'v3') => {
+            return location.search.includes(`force=${appVersion}`);
+        }
+
+        const getAndroidVersion = (e) => {
+            e = (e || navigator.userAgent).toLowerCase();
+            var match = e.match(/android\s([0-9\.]*)/i);
 
             return match ? match[1] : undefined;
         }
+
+        const initApp = () => {
+            // v1 -> light
+            // v2 -> site do client;
+            // v3 -> novo app;
+            if (!isApp()) return;
+
+            const v1Url = 'https://bet2.wee.bet/client-light/?config=true&host=central.bet2.wee.bet&slug=bet2.wee.bet&nome=WEEBET';
+            const v3Url = 'https://bet2.wee.bet/app-cambista/?host=https://central.bet2.wee.bet&slug=bet2.wee.bet&name=WEEBET';
+            if (verifyAppForce('v1')) {
+                window.location.href = v1Url;
+                return;
+            }
+            if (verifyAppForce('v2')) {
+                return;
+            }
+
+            if (verifyAppForce('v3')) {
+                window.location.href = v3Url;
+                return;
+            }
+            window.location.href = v3Url;
+        }
+
+        initApp();
     </script>
 </head>
 
@@ -150,7 +185,7 @@
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6CF4C5" height="0" width="0"
             style="display:none;visibility:hidden"></iframe>
-        </noscript>
+    </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     
@@ -158,7 +193,8 @@
     <app-root>
         <div style="position: absolute;left: 50%;top: 50%; transform: translate(-50%, -50%);color: #fff;">
             <div style="margin-bottom: 32px; display: flex;">
-                <img style="max-width: 250px; max-height: 164px;" src="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png" alt="">
+                <img style="max-width: 250px; max-height: 164px;"
+                    src="https://weebet.s3.amazonaws.com/bet2.wee.bet/logos/logo_banca.png" alt="">
             </div>
             <div class="loading-app" style="position: relative;">
                 <div class="lds-ring" style="left: 50%; margin-left: -32px; top: 0; margin-top: 0; position: inherit;">
@@ -170,13 +206,7 @@
             </div>
         </div>
     </app-root>
-
-    <script type="text/javascript" src="  https://webchat.voll360.com/voll-webchat.umd.cjs"></script>
-    <script>
-            if (location.host === 'demo.wee.bet') {
-                VollWebChat.init({    subdomain: 'sportive',    width: 300,    height: 400,    token: 'YjhjNDQwNjktYTQ1MC00MDg0LWEyYjItZDNjNmM4MTcxYWViOmRiYmFkMDFk\nZDYwYjkwODE1YTM5MTNkMjQ4ZjllMWJmNmNjMDc2MzY1NUJQazRrdTR6S0I4\ndnBURGh1MkhTRThiOUlPdURPSVpROXdGUGlPS3Q=',  });
-            }
-    </script>
+    
 
     <style>
         

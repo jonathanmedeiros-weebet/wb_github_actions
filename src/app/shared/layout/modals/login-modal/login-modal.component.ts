@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
-import { Router} from '@angular/router';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ClienteService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { AuthService, ClienteService, MessageService, ParametrosLocaisService, SecurityService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
@@ -54,6 +54,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     inputFocused: boolean;
     inputLoginValue: string;
 
+    public isVPN = false;
+
     constructor(
         public activeModal: NgbActiveModal,
         private fb: UntypedFormBuilder,
@@ -65,12 +67,33 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private modalService: NgbModal,
         private geolocationService: GeolocationService,
         private loginService: LoginService,
-        private clienteService: ClienteService
+        private clienteService: ClienteService,
+        private security: SecurityService,
     ) {
         super();
     }
 
-    ngOnInit() {
+    async ngOnInit() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    console.log("Latitude:", position.coords.latitude);
+                    console.log("Longitude:", position.coords.longitude);
+                },
+                (error) => {
+                    if (error.code === error.PERMISSION_DENIED) {
+                        console.log("Por favor, ative o GPS para continuar usando o site.");
+                    } else if (error.code === error.POSITION_UNAVAILABLE) {
+                        console.log("Não foi possível obter a localização. Verifique se o GPS está ativado.");
+                    } else if (error.code === error.TIMEOUT) {
+                        console.log("A solicitação de localização expirou. Tente novamente.");
+                    }
+                }
+            );
+        } else {
+            console.log("Geolocalização não é suportada no seu navegador.");
+        }
+
         this.appMobile = this.auth.isAppMobile();
 
         if (window.innerWidth > 1025) {
@@ -82,7 +105,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
         this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
         this.modoCambistaHabilitado = this.paramsLocais.getOpcoes().modo_cambista;
-        
+
         this.createForm();
 
         this.auth.logado
@@ -102,21 +125,21 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 isCliente => this.isCliente = isCliente
             );
 
-        if(this.paramsLocais.getOpcoes().habilitar_login_google) {
+        if (this.paramsLocais.getOpcoes().habilitar_login_google) {
             this.loginGoogle = true;
             this.socialAuth.authState
                 .pipe(takeUntil(this.unsub$))
                 .subscribe((user) => {
-                        if (user) {
-                            this.form.patchValue({
-                                googleId: user.id,
-                                googleIdToken: user.idToken
-                            });
-                            this.submit();
-                        }
-
-                        this.googleUser = user;
+                    if (user) {
+                        this.form.patchValue({
+                            googleId: user.id,
+                            googleIdToken: user.idToken
+                        });
+                        this.submit();
                     }
+
+                    this.googleUser = user;
+                }
                 );
         }
 
@@ -125,17 +148,17 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .then((geolocation) => this.geolocation = geolocation)
     }
 
-    registerCancel(){
+    registerCancel() {
         this.resgister_cancel = true;
     }
 
     createForm() {
         let loginMode = 'email';
 
-        if(this.modoCambistaHabilitado && !this.modoClienteHabilitado){
+        if (this.modoCambistaHabilitado && !this.modoClienteHabilitado) {
             this.loginMode = 'agent';
         }
-        
+
         this.form = this.fb.group({
             username: [''],
             password: [''],
@@ -158,7 +181,13 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.unsub$.complete();
     }
 
-    submit() {
+    async submit() {
+        this.isVPN = await this.security.isVPN();
+
+        if (this.isVPN) {
+            return false;
+        }
+
         const formData = this.form.value;
 
         if (this.loginMode === 'phone') {
@@ -296,7 +325,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 () => {
                     this.getUsuario();
                     if (this.usuario.tipo_usuario === 'cliente') {
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
@@ -381,7 +410,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.mostrarSenha = !this.mostrarSenha;
     }
 
-    onBeforeInput(e, inputName){
+    onBeforeInput(e, inputName) {
         FormValidations.blockInvalidCharacters(e, inputName);
     }
 
@@ -422,7 +451,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.inputLoginValue = inputElement.value;
     }
 
-    clearInputLoginValue(){
+    clearInputLoginValue() {
         this.inputLoginValue = '';
     }
+
+    refreshPage(): void {
+        window.location.reload();
+    }
 }
+
