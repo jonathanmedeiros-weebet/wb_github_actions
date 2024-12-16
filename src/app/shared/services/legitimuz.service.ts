@@ -57,8 +57,10 @@ export class LegitimuzService {
             };
         } else {
             this.options.onSuccess = (eventName) => {
-                this.curCustomerIsVerifiedSub.next(true);
-                this.closeModal();
+                if (eventName === 'facematch') {
+                    this.curCustomerIsVerifiedSub.next(true);
+                    this.closeModal();
+                }
             }
         }
     }

@@ -237,6 +237,20 @@
                         </p>
                         <form [formGroup]="formExclusaoConta" (ngSubmit)="handleSubmit('onSubmitExclusaoConta')">
                             <div class="field w-500">
+                                <label for="">{{ 'jogo_responsavel.exclusao_conta.exclusionPeriodLabel' | translate }}</label>
+                                <select class="form-control inverted-out" formControlName="exclusionPeriod">
+                                    <option value="">{{ 'placeholders.selecione_uma_opcao' | translate }}</option>
+                                    <option value="3-months">{{ 'jogo_responsavel.exclusao_conta.3months' | translate }}</option>
+                                    <option value="6-months">{{ 'jogo_responsavel.exclusao_conta.6months' | translate }}</option>
+                                    <option value="12-months">{{ 'jogo_responsavel.exclusao_conta.12months' | translate }}</option>
+                                    <option value="24-months">{{ 'jogo_responsavel.exclusao_conta.24months' | translate }}</option>
+                                    <option value="36-months">{{ 'jogo_responsavel.exclusao_conta.36months' | translate }}</option>
+                                    <option value="48-months">{{ 'jogo_responsavel.exclusao_conta.48months' | translate }}</option>
+                                    <option value="60-months">{{ 'jogo_responsavel.exclusao_conta.60months' | translate }}</option>
+                                    <option value="permanently">{{ 'jogo_responsavel.exclusao_conta.permanently' | translate }}</option>
+                                </select>
+                            </div>
+                            <div class="field w-500">
                                 <label for="">{{ 'jogo_responsavel.exclusao_conta.informe_motivo' | translate }}</label>
                                 <select class="form-control inverted-out" (change)="changeOpcaoExclusao()" formControlName="opcao">
                                     <option value="">{{ 'placeholders.selecione_uma_opcao' | translate }}</option>
@@ -264,7 +278,37 @@
                             <div class="field w-full" *ngIf="showMotivoExclusaoConta">
                                 <textarea rows="3" class="inverted-out" placeholder="{{ 'jogo_responsavel.exclusao_conta.explique_motivo' | translate }}" formControlName="motivoExclusao"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-custom">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
+                            <div #legitimuz id="legitimuz-container"
+                                *ngIf="faceMatchEnabled && !faceMatchDeletedAccountValidated && !verifiedIdentity">
+                                <div id="legitimuz">
+                                    <div id="verify-identity-text">
+                                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                                        ('saques.identityVerifyNeeded' | translate)}}
+                                    </div>
+                                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf" />
+                                    <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchAccountDeletionValidated">
+                                        <i class="fa-solid fa-id-card"></i>
+                                        {{'saques.identityVerify' | translate}}
+                                    </button>
+                                </div>
+                                <div id="legitimuz-root"></div>
+                            </div>
+                            <div #legitimuzLiveness id="legitimuz-container"
+                                *ngIf="faceMatchEnabled && !faceMatchDeletedAccountValidated && verifiedIdentity">
+                                <div id="legitimuz">
+                                    <div id="verify-identity-text">
+                                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                                        ('saques.identityVerifyNeeded' | translate)}}
+                                    </div>
+                                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf" />
+                                    <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchAccountDeletionValidated">
+                                        <i class="fa-solid fa-id-card"></i>
+                                        {{'saques.identityVerify' | translate}}
+                                    </button>
+                                </div>
+                                <div id="legitimuz-root"></div>
+                            </div>
+                            <button [disabled]="!faceMatchAccountDeletionValidated" type="submit" class="btn btn-custom" [ngStyle]="{'margin-top': faceMatchEnabled ? '15px' : '0px'}">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
                         </form>
                     </div>
                 </section>

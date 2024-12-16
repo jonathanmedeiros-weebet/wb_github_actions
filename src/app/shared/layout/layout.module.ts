@@ -70,7 +70,8 @@ import {
     CompatilhamentoBilheteModal,
     RegrasBonusModalComponent,
     JogosLiberadosBonusModalComponent,
-    CanceledBonusConfirmComponent
+    CanceledBonusConfirmComponent,
+    ValidatePhoneModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -102,6 +103,10 @@ import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
 import { BackPageComponent } from './back-page/back-page/back-page.component';
+import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-modal/face-match-modal.component';
+import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/add-bank-account-modal.component';
+import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accounts.component';
+
 import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 
 @NgModule({
@@ -204,7 +209,11 @@ import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-b
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
         BackPageComponent,
-        ExibirBilheteCassinoComponent
+        ExibirBilheteCassinoComponent,
+        FaceMatchModalComponent,
+        ValidatePhoneModalComponent,
+        AddBankAccountModalComponent,
+        ListBankAccountsComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -227,6 +236,8 @@ import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-b
         SkeletonModule,
         MenuFooterComponent,
         BackPageComponent,
+        ValidatePhoneModalComponent,
+        ListBankAccountsComponent,
         ExibirBilheteCassinoComponent
     ],
     providers: [
