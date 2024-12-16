@@ -38,13 +38,13 @@
         <div class="bets-cards__content-filters" v-for="(card, index) in cards" :key="index">
           <card-bets>
             <template #title>
-              <p>Código do cartão de aposta: {{ card.chave }}</p>
+              <p>Código do cartão: {{ card.chave }}</p>
             </template>
             <template #subtitle>
-              <p>HORÁRIO: {{ formateDateTime(card.data_registro) }}</p>
+              <p v-if="card.apostador">Apostador: {{ card.apostador }}</p>
+              <p>Horário: {{ formateDateTime(card.data_registro) }}</p>
             </template>
             <template #body>
-              <p v-if="card.apostador">Apostador: {{ card.apostador }}</p>
               <table class="table">
                 <tbody>
                   <tr>

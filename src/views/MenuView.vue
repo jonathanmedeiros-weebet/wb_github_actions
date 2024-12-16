@@ -52,7 +52,7 @@
             <IconCreditCard class="more-options__icon" />
             <span class="more-options__text-icon">Criar</span>
           </button>
-          <button v-if="false" class="more-options__item" @click="handleNavigate('/list-cards')">
+          <button class="more-options__item" @click="handleNavigate('/list-cards')">
             <IconCreditCard class="more-options__icon" />
             <span class="more-options__text-icon">Listagem</span>
           </button>
