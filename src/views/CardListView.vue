@@ -111,14 +111,12 @@ export default {
   },
   data() {
     return {
-      showModalCancel: false,
       showResults: false,
       showModalCalendar: false,
       dateFilter: now(),
       finalDateFilter: now(),
       gambler: '',
       cards: [],
-      betSelected: null,
       params: {
         initialDate: '',
         finalDate: '',
@@ -165,8 +163,8 @@ export default {
       
       const params = { ...this.params };
       findCardBet(params)
-      .then(async (resp) => {
-        this.cards = resp;
+        .then(async (resp) => {
+          this.cards = resp;
           this.showResults = true;
         })
         .catch(error => {
