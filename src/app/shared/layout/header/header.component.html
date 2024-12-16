@@ -473,7 +473,7 @@
                                 </a>
                                 <a (click)="openBankAccount()">
                                     <span>
-                                        <i class="fa fa-cogs"></i>
+                                        <i class="fa fa-bank"></i>
                                     </span>
                                     {{ 'bankAccounts.title' | translate }}
                                     <span class="arrow-nav">
@@ -500,20 +500,29 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirSaques()">
+                                <a (click)="abrirApostas()">
                                     <span>
-                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                        <i class="fa fa-solid fa-table-columns"></i>
                                     </span>
-                                    {{ 'geral.saque' | translate }}
+                                    {{ 'geral.apostas' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
-                                </a>
+                                </a>                                
                                 <a (click)="abrirDepositos()">
                                     <span>
                                         <i class="fa fa-solid fa-money-bill-transfer"></i>
                                     </span>
                                     {{ 'geral.deposito' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirSaques()">
+                                    <span>
+                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                    </span>
+                                    {{ 'geral.saque' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -526,16 +535,7 @@
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
-                                </a>
-                                <a (click)="abrirApostas()">
-                                    <span>
-                                        <i class="fa fa-solid fa-table-columns"></i>
-                                    </span>
-                                    {{ 'geral.apostas' | translate }}
-                                    <span class="arrow-nav">
-                                        <i class="fa-solid fa-angle-right"></i>
-                                    </span>
-                                </a>
+                                </a>                                
                                 <a (click)="abrirRollovers()">
                                     <span>
                                         <i class="fa fa-solid fa-gift"></i>
