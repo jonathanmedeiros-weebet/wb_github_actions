@@ -184,12 +184,21 @@ export default {
                 });
         },
         async fetchDetailedReport(){ 
-            detailedReport()
+            const { firstDayOfTheWeek } = useConfigClient();
+            const params = {
+                periodoDe: firstDayOfTheWeek.format('YYYY-MM-DD'),
+                periodoAte: now().format('YYYY-MM-DD')
+            }
+            detailedReport(params)
                 .then(resp => {
                     const dataCategorias = [
                         {
                             title: "esporte",
-                            value: parseFloat(resp[0]?.esporte.apostado ?? 0)
+                            value: parseFloat(resp[0]?.esporte.apostado_normal ?? 0)
+                        },
+                        {
+                            title: "aovivo",
+                            value: parseFloat(resp[0]?.esporte.aovivo ?? 0)
                         },
                         {
                             title: "desafio",

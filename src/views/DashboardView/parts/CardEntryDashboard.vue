@@ -75,7 +75,7 @@ export default {
     },
     data(){
         return {
-            colors: ['#3879EB', '#7BCDFC', '#79C8CC', '#A65AE5', '#5256D4']
+            colors: ['#3879EB', '#7BCDFC', '#7960CC', '#A65AE5', '#F1A923']
         }
     },
     methods: {
@@ -100,6 +100,7 @@ export default {
         categories() {
             const labelTransformed = {
                 'esporte': 'Esporte',
+                'aovivo': 'Ao vivo',
                 'desafio': 'Desafio',
                 'acumuladao': 'Acumuladão',
                 'loteria': 'Loteria'
