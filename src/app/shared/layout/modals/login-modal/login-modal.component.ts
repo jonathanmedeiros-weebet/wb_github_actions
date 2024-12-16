@@ -176,7 +176,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         const holdUser = this.usuario;
                         localStorage.removeItem('user');
                         const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
-                        console.log("FaceMatchResult: ", faceMatchResult);
                         if (!faceMatchResult) {
                             return;
                         }
@@ -290,7 +289,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             cookie: this.auth.getCookie(this.usuario.cookie),
             geolocation: this.geolocation
         };
-        console.log("Data: ", data);
 
         this.auth.login(data)
             .pipe(takeUntil(this.unsub$))
