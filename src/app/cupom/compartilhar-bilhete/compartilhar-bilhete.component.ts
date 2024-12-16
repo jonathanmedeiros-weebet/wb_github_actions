@@ -5,14 +5,14 @@ import { ExibirBilheteCassinoComponent } from 'src/app/shared/layout/exibir-bilh
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { LayoutModule } from 'src/app/shared/layout/layout.module';
 import { TitleCasePipe } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApostaEncerramentoModalComponent } from 'src/app/shared/layout/modals';
 
 @Component({
   selector: 'app-compartilhar-bilhete',
   templateUrl: './compartilhar-bilhete.component.html',
   styleUrls: ['./compartilhar-bilhete.component.css'],
-  providers: [TitleCasePipe]
+  providers: [TitleCasePipe, NgbActiveModal]
 })
 
 export class CompartilharBilheteComponent implements OnInit {
