@@ -19,7 +19,6 @@ export const consultCard = async (chave: any, pin: any) => {
     const response: any = await axiosInstance().get(url, {
         params: { pin },
     });
-
     return response.results ?? response.data.results;
 };
 
