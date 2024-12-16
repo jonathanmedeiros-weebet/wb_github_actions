@@ -11,7 +11,7 @@ import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
   templateUrl: './face-match-modal.component.html',
   styleUrls: ['./face-match-modal.component.css']
 })
-export class FaceMatchModalComponent implements OnInit, AfterViewInit {
+export class FaceMatchModalComponent implements OnInit {
   @Input() user;
   verifiedIdentity = null;
   legitimuzToken = '';
@@ -41,7 +41,7 @@ export class FaceMatchModalComponent implements OnInit, AfterViewInit {
       .subscribe(curCustomerIsVerified => {
         this.verifiedIdentity = curCustomerIsVerified;
         if (this.verifiedIdentity) {
-          this.faceMatchService.updadeFacematch({document: this.user.cpf, periodic_validation: true}).subscribe({
+          this.faceMatchService.updadeFacematch({ document: this.user.cpf, periodic_validation: true }).subscribe({
             next: () => {
               this.legitimuzService.closeModal();
               this.messageService.success(this.translate.instant('face_match.verified_identity'));
@@ -54,6 +54,4 @@ export class FaceMatchModalComponent implements OnInit, AfterViewInit {
         }
       });
   }
-
-  ngAfterViewInit(): void { }
 }
