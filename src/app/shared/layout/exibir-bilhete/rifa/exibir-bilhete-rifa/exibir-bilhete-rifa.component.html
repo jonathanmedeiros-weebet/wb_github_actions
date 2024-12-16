@@ -33,7 +33,7 @@
             Valor apostado: <span> <span *ngIf="aposta.is_bonus">({{'geral.bonus' | translate | lowercase}})</span> {{aposta.valor | currency}}</span>
         </p>
         <p class="resultado">
-            <b>Resultados: </b>
+            <b>{{ 'geral.resultado' | translate }}: </b>
             <span *ngIf="aposta.resultado">{{aposta.resultado || titlecase}}</span>
             <span *ngIf="!aposta.resultado">Aguardando</span>
         </p>
