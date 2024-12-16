@@ -231,10 +231,8 @@ export default {
     },
     async handleConsultCard(code,pin) {
       try {
-        // console.log(code,pin);
         const resp = await consultCard(code,pin);
         if(resp){
-          console.log('teste', resp);
           this.$router.push({ 
             name: 'detailed-card',
             params: {
