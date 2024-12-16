@@ -1,7 +1,8 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {BankAccountsComponent} from './bank-accounts.component';
-import {PagesLayoutComponent} from '../shared/layout/app-layouts';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { PagesLayoutComponent } from '../shared/layout/app-layouts';
+import { BankAccountsComponent } from './bank-accounts.component';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,4 @@ export const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class BankAccountsRoutingModule {
-}
+export class BankAccountsRoutingModule {}

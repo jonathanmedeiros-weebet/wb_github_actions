@@ -382,4 +382,12 @@ export class ClienteService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    public allBankAccounts() {
+        return this.http.get(`${this.clienteUrl}/allBankAccounts`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(() => [])
+            );
+    }
 }

@@ -104,6 +104,9 @@ import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
 import { BackPageComponent } from './back-page/back-page/back-page.component';
 import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-modal/face-match-modal.component';
+import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/add-bank-account-modal.component';
+import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accounts.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -205,7 +208,9 @@ import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-mo
         PasswordExpiredModalComponent,
         BackPageComponent,
         FaceMatchModalComponent,
-        ValidatePhoneModalComponent
+        ValidatePhoneModalComponent,
+        AddBankAccountModalComponent,
+        ListBankAccountsComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -228,7 +233,8 @@ import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-mo
         SkeletonModule,
         MenuFooterComponent,
         BackPageComponent,
-        ValidatePhoneModalComponent
+        ValidatePhoneModalComponent,
+        ListBankAccountsComponent
     ],
     providers: [
         ApostaEsportivaService,

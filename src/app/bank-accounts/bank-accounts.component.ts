@@ -1,102 +1,34 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, UntypedFormBuilder } from '@angular/forms';
-import { Bank } from '../shared/models/bankAccounts/bank';
-import { AuthService, ClienteService, MenuFooterService, MessageService, SidebarService, UtilsService } from '../services';
-import { Subject } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { AuthService, MenuFooterService, SidebarService } from '../services';
 
 @Component({
   selector: 'app-bank-accounts',
   templateUrl: './bank-accounts.component.html',
   styleUrls: ['./bank-accounts.component.css']
 })
-
 export class BankAccountsComponent implements OnInit, OnDestroy {
-    public collapsed = false;
-    form: FormGroup;
-    public showLoading = false;
-    public banks: Array<Bank>;
-    public bankSelected: number;
-    private unsub$ = new Subject();
 
-    constructor(
-        private fb: UntypedFormBuilder,
-        private utilsService: UtilsService,
-        private sidebarService: SidebarService,
-        private messageService: MessageService,
-        private auth: AuthService,
-        private menuFooterService: MenuFooterService,
-        private translate: TranslateService,
-        private clienteService: ClienteService,
-    ){
-        this.banks = [];
-        this.bankSelected = 0;
+  constructor(
+    private auth: AuthService,
+    private sidebarService: SidebarService,
+    private menuFooterService: MenuFooterService,
+  ) {}
+
+  get isCliente() {
+    return this.auth.isCliente();
+  }
+
+  ngOnInit() {
+    if (this.isCliente) {
+        this.sidebarService.changeItens({contexto: 'cliente'});
+    } else {
+        this.sidebarService.changeItens({contexto: 'cambista'});
     }
 
-    get isCliente() {
-        return this.auth.isCliente();
-    }
+    this.menuFooterService.setIsPagina(true);
+  }
 
-    ngOnInit(): void {
-        this.createForm();
-        this.getBanks();
-
-        if (this.isCliente) {
-            this.sidebarService.changeItens({contexto: 'cliente'});
-        } else {
-            this.sidebarService.changeItens({contexto: 'cambista'});
-        }
-
-        this.menuFooterService.setIsPagina(true);
-    }
-
-    createForm() {
-        this.form = this.fb.group({
-            bank: [0],
-            agencyNumber: [''],
-            accountNumber: [''],
-            accountType: [0]
-        });
-    }
-
-    getBanks() {
-        this.utilsService.getBanks().subscribe(
-            bank => this.banks = bank,
-            error => this.handleError(error)
-        );
-    }
-
-    handleError(mensagem: string) {
-        this.messageService.error(mensagem);
-    }
-
-    ngOnDestroy(): void {
-        this.unsub$.next();
-        this.unsub$.complete();
-        this.menuFooterService.setIsPagina(false);
-    }
-
-    onSubmit() {
-        if (this.form.valid) {
-            let values = this.form.value;
-
-            this.clienteService
-                .registerBankAccount(values)
-                .subscribe(
-                    () => {
-                        this.messageService.success(this.translate.instant('geral.savedSuccessfully'))
-                        this.resetForm();
-                    } ,
-                error => this.handleError(error)
-            );
-        }
-    }
-
-    resetForm() {
-        this.form.reset();
-        this.banks = [];
-        this.getBanks() ;
-        this.form.controls['bank'].setValue('0');
-        this.form.controls['accountType'].setValue('0');
-    }
+  ngOnDestroy(): void {
+    this.menuFooterService.setIsPagina(false);
+  }
 }

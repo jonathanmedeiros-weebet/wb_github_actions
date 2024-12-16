@@ -11,7 +11,6 @@ import { WelcomeGuard } from './shared/services/guards/welcome.guard';
 import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
-import { HomeComponent } from './home/home.component';
 import { BetbyComponent } from './betby/betby.component';
 import {RifaGuard} from './shared/services/guards/rifa.guard';
 
@@ -110,7 +109,7 @@ const appRoutes: Routes = [
             {
                 path: 'bank-accounts',
                 loadChildren: () => import('./bank-accounts/bank-accounts.module').then(m => m.BankAccountsModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, ClientGuard]
             },
             {
                 path: 'validar-aposta',
