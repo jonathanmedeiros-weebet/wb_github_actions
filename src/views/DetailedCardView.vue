@@ -2,21 +2,23 @@
     <div class="detailed-card">
         <Header title="Detalhes do cartão" :showBackButton="true"/>
         <div class="detailed-card__container">
-            <div class="detailed-card__key">
-                <h4>Chave cartão</h4>
-                <span>{{ cardKey }}</span>
-            </div>
-            <div class="detailed-card__infos">
-                <div>
-                    <span><b> Apostador: </b> {{ bettorName }}</span>
-                    <span><b> Recargas: </b> R$ {{ formatCurrencyMoney(recharges) }}</span>
-                    <span><b> Prêmios: </b> R$ {{ formatCurrencyMoney(prizes) }} </span>
-                    <span><b> Criação: </b>{{ formatDate(creationDate) }}</span>
+            <div class="detailed-card__card">
+                <div class="detailed-card__key">
+                    <h4>Chave cartão</h4>
+                    <span>{{ cardKey }}</span>
                 </div>
-                <div>
-                    <span><b> Cambista: </b>{{ moneyChangerName }}</span>
-                    <span><b> Saques: </b> R$ {{ formatCurrencyMoney(withdraws) }}</span>
-                    <span><b> Saldo atual: </b> R$ {{ formatCurrencyMoney(balance) }}</span>
+                <div class="detailed-card__infos">
+                    <div>
+                        <span><b> Apostador: </b> {{ bettorName }}</span>
+                        <span><b> Recargas: </b> R$ {{ formatCurrencyMoney(recharges) }}</span>
+                        <span><b> Prêmios: </b> R$ {{ formatCurrencyMoney(prizes) }} </span>
+                        <span><b> Criação: </b>{{ formatDate(creationDate) }}</span>
+                    </div>
+                    <div>
+                        <span><b> Cambista: </b>{{ moneyChangerName }}</span>
+                        <span><b> Saques: </b> R$ {{ formatCurrencyMoney(withdraws) }}</span>
+                        <span><b> Saldo atual: </b> R$ {{ formatCurrencyMoney(balance) }}</span>
+                    </div>
                 </div>
             </div>
             <div class="detailed-card__text">
@@ -217,11 +219,18 @@ export default {
         font-size: 14px;
     }
 
-    &__key {
-        margin-bottom: 20px;
+    &__card {
         background: var(--game);
-        padding: 16px;
         border-radius: 8px;
+        margin-bottom: 20px;
+        padding: 16px;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__key {
+        margin-bottom: 18px;
 
         h4 {
             font-weight: bold;
@@ -239,7 +248,7 @@ export default {
     &__content-text {
         font-size: 15px;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         margin-bottom: 10px;
         margin-top: 24px;
     }
@@ -253,7 +262,7 @@ export default {
             flex-direction: column;
             
             span {
-                margin-bottom: 18px;
+                margin-bottom: 10px;
 
                 b {
                     font-weight: bold;
@@ -281,7 +290,7 @@ export default {
 .buttons {
   display: flex;
   align-items: center;
-  padding-top: 25px;
+  margin-top: 50px;
 }
 
 .button-spacer {

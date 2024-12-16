@@ -61,9 +61,7 @@ export default {
     },
     handleConsult() {
       this.$emit('consult', this.code, this.pin);
-      this.$refs['wmodal'].handleClose();
     },
-    
   }
 };
 </script>

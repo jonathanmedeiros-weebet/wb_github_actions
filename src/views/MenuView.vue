@@ -233,6 +233,7 @@ export default {
       try {
         const resp = await consultCard(code,pin);
         if(resp){
+          this.handleCloseConsultCardModal();
           this.$router.push({ 
             name: 'detailed-card',
             params: {
