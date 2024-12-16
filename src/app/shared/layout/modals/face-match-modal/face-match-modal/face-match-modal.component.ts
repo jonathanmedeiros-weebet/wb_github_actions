@@ -34,8 +34,6 @@ export class FaceMatchModalComponent implements OnInit, AfterViewInit {
       this.user.cpf = customer.cpf;
       this.legitimuzService.init();
       this.legitimuzService.mount();
-    }, (err) => {
-      console.error(err);
     });
 
     this.legitimuzService.curCustomerIsVerified
