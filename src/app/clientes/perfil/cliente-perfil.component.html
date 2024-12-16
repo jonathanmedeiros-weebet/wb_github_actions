@@ -51,23 +51,10 @@
                             <div class="col-md-2">
                                 <label class="label">{{'geral.telefone' | translate}}</label>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col col-md-3">
                                 <div class="form-group">
-                                    <input
-                                        type="text"
-                                        formControlName="telefone"
-                                        placeholder="(00)00000-0000"
-                                        mask="(00)00000-0000"
-                                        class="form-control inverted-out"
-                                        [dropSpecialCharacters]="false"
-                                        [validation]="false"
-                                    >
-                                    <i *ngIf="isMandatoryPhoneValidation" 
-                                    class="showPassword fa"
-                                    [ngClass]="userPhoneValidated ? 'fa-check' : 'fa-xmark'"
-                                    style="cursor: inherit;">
-                                    </i>
-                                    <app-error-msg [control]="form.get('telefone')"></app-error-msg>
+                                    <input type="text" formControlName="telefone" placeholder="(00)00000-0000"
+                                    mask="(00) 00000-0000" class="form-control inverted-out" readonly>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +66,6 @@
                                 <div class="form-group">
                                     <input type="text" formControlName="email" class="form-control inverted-out"
                                         placeholder="exemplo@email.com" readonly>
-                                    <app-error-msg [control]="form.get('email')"></app-error-msg>
                                 </div>
                             </div>
                         </div>

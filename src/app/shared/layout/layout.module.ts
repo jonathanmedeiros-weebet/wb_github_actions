@@ -103,6 +103,7 @@ import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
 import { BackPageComponent } from './back-page/back-page/back-page.component';
+import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-modal/face-match-modal.component';
 import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/add-bank-account-modal.component';
 import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accounts.component';
 
@@ -206,6 +207,7 @@ import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accoun
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
         BackPageComponent,
+        FaceMatchModalComponent,
         ValidatePhoneModalComponent,
         AddBankAccountModalComponent,
         ListBankAccountsComponent
