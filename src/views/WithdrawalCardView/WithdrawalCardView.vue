@@ -29,9 +29,26 @@
                 @change="handleCalendar"
             />
         </div>
+        <div class="detailed-card__content-filters" v-for="(bet, index) in info.cartao_aposta" :key="index">
+          <card-bets>
+            <template #body>
+              <table class="table">
+                  <tbody>
+                      <tr>
+                          <td class="table__line--left">Apostador: {{info.apostador}}</td>
+                      </tr>
+                      <tr>
+                          <td class="table__line--left">Data Solicitação: {{info.data}}</td>
+                      </tr>
+                      <tr>
+                          <td class="table__line--left">Valor: R${{formatCurrencyMoney(info.valor)}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+            </template>
+          </card-bets>
+        </div>
     </div>
-        
-    
 </template>
 
 <script>
@@ -70,7 +87,7 @@ export default {
         showModalCalendar: false,
         dateFilter: now().startOf('week').add(1, 'days'),
         finalDateFilter: now(),
-        info: [],
+        info: {},
         params: {
             initialDate: '',
             endDate: '',
@@ -125,7 +142,7 @@ export default {
         })
         .catch(error => {
           this.toastStore.setToastConfig({
-            message: error.errors.message,
+            message: error.message,
             type: ToastType.DANGER,
             duration: 5000
           })
