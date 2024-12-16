@@ -12,12 +12,18 @@ export const recharge = async (code: any, value: any) => {
     return response.results; 
 };
 
-export const requestWithdrawal = async (status: any, value: any) => {
+export const requestWithdrawal = async (params: any) => {
     const { lokiUrl } = useConfigClient();
-    const url = `${lokiUrl}/card-bets/${status}/recharge`;
+    let url = `${lokiUrl}/card-bets/withdrawals`;
 
-    const payload = { valor: value };
+    const urlParams = new URLSearchParams();
 
-    const response: any = await axiosInstance().post(url, payload);
-    return response.results; 
+    urlParams.append('data-inicial', params.initialDate);
+    urlParams.append('data-final', params.endDate);
+    urlParams.append('aprovado', params.status);
+
+    url += `?${urlParams.toString()}`;
+
+    const response: any = await axiosInstance().get(url);
+    return response.results;
 };

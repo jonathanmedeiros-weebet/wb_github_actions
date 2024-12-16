@@ -18,6 +18,7 @@
                 value="filter"
                 name="btn-filter"
                 class="button--primary"
+                @click="getResults"
             />
             <ModalCalendar
                 v-if="showModalCalendar"
@@ -44,6 +45,7 @@ import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 import { convertInMomentInstance, formatCurrency, now } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
+import { requestWithdrawal } from '@/services'
 import { ToastType } from '@/enums';
 import scrollMixin from '@/mixins/scroll.mixin'
 import ModalFilterStatus from './parts/ModalFilterStatus.vue'
@@ -68,11 +70,11 @@ export default {
         showModalCalendar: false,
         dateFilter: now().startOf('week').add(1, 'days'),
         finalDateFilter: now(),
-        bets: [],
-        parametros: {
-            dataInicial: '',
-            dataFinal: '',
-            status: 'aprovado',
+        info: [],
+        params: {
+            initialDate: '',
+            endDate: '',
+            status: '1',
         },
         toastStore: useToastStore(),
         configClientStore: useConfigClient(),
@@ -105,9 +107,33 @@ export default {
         return formatCurrency(value);
     },  
     getResults() {
-        this.parametros.dataInicial = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
-        this.parametros.dataFinal = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.parametros.dataInicial;
+        this.params.initialDate = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
+        this.params.endDate = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.parametros.dataInicial;
+        this.params.status = this.params.status;
+        this.getWithdrawals();
     },
+    async getWithdrawals() {
+      this.info = [];
+      this.showResults = false;
+
+      const params = { ...this.params };
+      requestWithdrawal(params)
+      .then(async (resp) => {
+        this.info = resp;
+          this.showResults = true;
+          console.log(info);
+        })
+        .catch(error => {
+          this.toastStore.setToastConfig({
+            message: error.errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+        })
+    },
+     formateDateTime(datetime) {
+      return formatDateTimeBR(datetime);
+    }
   }
 }
 </script>
