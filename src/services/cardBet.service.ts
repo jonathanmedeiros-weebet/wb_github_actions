@@ -12,23 +12,22 @@ export const recharge = async (code: any, value: any) => {
     return response.results; 
 };
 
-export const FindCardBet = async ( parametros: any) => {
+export const findCardBet = async ( params: any) => {
 
     const { lokiUrl } = useConfigClient();
     let url = `${lokiUrl}/card-bets`;
 
-    const params = new URLSearchParams();
+    const urlParams = new URLSearchParams();
 
-    params.append('apostador', parametros.apostador);
-    params.append('data-inicial', parametros.dataInicial);
-    params.append('data-final', parametros.dataFinal);
-    params.append('sort', parametros.sort);
+    urlParams.append('apostador', params.gambler);
+    urlParams.append('data-inicial', params.initialDate);
+    urlParams.append('data-final', params.finalDate);
+    urlParams.append('sort', params.sort);
 
-    if (params.toString()) {
-        url += `?${params.toString()}`;
-    }
-    
-    return await axiosInstance().get(url); 
+    url += `?${urlParams.toString()}`;
+
+    const response: any = await axiosInstance().get(url);
+    return response.results;
 }
 
 export const create = async (payload: any) => {

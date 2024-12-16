@@ -1,6 +1,6 @@
 <template>
   <div class="bets-cards">
-    <Header title="Cartões de Aposta" :showBackButton="true" />
+    <Header title="Cartões de aposta" :showBackButton="true" />
     <div class="bets-cards__container">
       
       <div class="bets-cards__content">
@@ -10,8 +10,7 @@
           name="apostador"
           placeholder="Apostador"
           type="text"
-          v-model="apostador"
-          v-if="showBettorName"
+          v-model="gambler"
         />
         <w-input
           id="inputDate"
@@ -39,7 +38,7 @@
         <div class="bets-cards__content-filters" v-for="(card, index) in cards" :key="index">
           <card-bets>
             <template #title>
-              <p>Código do cartão de Aposta: {{ card.chave }}</p>
+              <p>Código do cartão de aposta: {{ card.chave }}</p>
             </template>
             <template #subtitle>
               <p>HORÁRIO: {{ formateDateTime(card.data_registro) }}</p>
@@ -93,7 +92,7 @@ import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now, capitalizeFirstLetter } from '@/utilities'
-import { FindCardBet } from '@/services'
+import { findCardBet } from '@/services'
 import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums';
@@ -113,18 +112,17 @@ export default {
   data() {
     return {
       showModalCancel: false,
-      showModalPay: false,
       showResults: false,
       showModalCalendar: false,
       dateFilter: now(),
       finalDateFilter: now(),
-      apostador: '',
+      gambler: '',
       cards: [],
       betSelected: null,
-      parametros: {
-        dataInicial: '',
-        dataFinal: '',
-        apostador: '',
+      params: {
+        initialDate: '',
+        finalDate: '',
+        gambler: '',
         sort: ''
       },
       showToast: false,
@@ -173,10 +171,10 @@ export default {
       return formatCurrency(value);
     },  
     getResults() {
-      this.parametros.dataInicial = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
-      this.parametros.dataFinal = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.parametros.dataInicial;
-      this.parametros.apostador = this.apostador;
-      this.parametros.sort = '-dataRegistro'
+      this.params.initialDate = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
+      this.params.finalDate = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.params.initialDate;
+      this.params.gambler = this.gambler;
+      this.params.sort = '-dataRegistro'
 
       this.getCardBets();
     },
@@ -184,10 +182,10 @@ export default {
       this.cards = [];
       this.showResults = false;
       
-      const params = { ...this.parametros };
-      FindCardBet(params)
+      const params = { ...this.params };
+      findCardBet(params)
       .then(async (resp) => {
-        this.cards = resp.results;
+        this.cards = resp;
           this.showResults = true;
         })
         .catch(error => {
