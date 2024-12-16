@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService, MenuFooterService, MessageService, SidebarService } from 'src/app/services';
 
-
 @Component({
   selector: 'app-last-accesses-modal',
   templateUrl: './last-accesses-modal.component.html',
@@ -94,10 +93,6 @@ export class LastAccessesModalComponent implements OnInit, OnDestroy{
                     this.currentPage = response.current_page;
                     this.qttAccessesFound = response.total;
                     this.showLoading = false;
-                    console.log(this.accesses);
-                    console.log(this.totalPages);
-                    console.log(this.currentPage);
-                    
                 },
                 error => {
                     this.messageService.error('Erro ao carregar os registros de acesso.');
