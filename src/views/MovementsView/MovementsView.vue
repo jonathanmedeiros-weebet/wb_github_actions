@@ -53,7 +53,7 @@ import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
 import { listMovements } from '@/services';
 import { formatCurrency, now, formatDateBR } from '@/utilities';
 import ModalCalendar from './../HomeView/parts/ModalCalendar.vue';
-import { useToastStore } from '@/stores';
+import { useConfigClient, useToastStore } from '@/stores';
 import { ToastType } from '@/enums';
 
 export default {
@@ -95,6 +95,10 @@ export default {
     isBalanceDataEmpty() {
       return Object.keys(this.balanceData).length === 0;
     }
+  },
+  created() {
+    const { firstDayOfTheWeek } = useConfigClient();
+    this.startDate = this.dateIni ?? firstDayOfTheWeek.format('YYYY-MM-DD');
   },
   activated(){
     this.getBalance();

@@ -61,7 +61,6 @@ export default {
         async getGameUrl(){
             getGameUrlPopularLottery()
                 .then(resp => {
-                    console.log(resp);
                     this.gameUrl = resp.gameUrl;
                 })
                 .catch(error => {
