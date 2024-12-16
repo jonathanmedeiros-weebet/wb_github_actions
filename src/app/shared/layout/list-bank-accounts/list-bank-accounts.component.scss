@@ -1,0 +1,59 @@
+#default-content {
+    padding: 0;
+}
+
+.content-header h2 {
+    font-size: 24px;
+    color: var(--foreground);
+}
+
+.content-body {
+    padding: 20px;
+}
+
+.list-accounts {
+    margin-top: 20px;
+}
+
+.list-accounts div {
+    margin-bottom: 10px;
+}
+
+.account__card {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--sidebars);
+    border-radius: 10px;
+}
+
+.new-account__card {
+    width: 100%;
+    min-height: 142px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+    color: var(--highlight);
+    border: 1px dashed var(--highlight);
+    border-radius: 10px;
+}
+
+.new-account__card:hover {
+    color: var(--foreground-highlight);
+    background-color: var(--highlight);
+    border: 1px solid var(--highlight);
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 660px) {
+    #default-content {
+        padding: 20px;
+    }
+}
