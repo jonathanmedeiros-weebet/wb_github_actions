@@ -68,8 +68,8 @@ export class AddBankAccountGenericComponent {
         );
     }
 
-    getBankAccountUser() {
-        this.clienteService.getBankAccountsUser().subscribe(
+    allBankAccounts() {
+        this.clienteService.allBankAccounts().subscribe(
             bank => this.banks = bank,
             error => this.handleError(error)
         );

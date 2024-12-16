@@ -383,8 +383,8 @@ export class ClienteService {
             );
     }
 
-    getBankAccountsUser() {
-        return this.http.get(`${this.clienteUrl}/getBankAccountsUser`, this.headers.getRequestOptions())
+    allBankAccounts() {
+        return this.http.get(`${this.clienteUrl}/allBankAccounts`, this.headers.getRequestOptions())
             .pipe(
                 map((res: any) => res.results),
                 catchError(() => [])
