@@ -103,6 +103,7 @@ import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
 import { BackPageComponent } from './back-page/back-page/back-page.component';
+import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-modal/face-match-modal.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -203,6 +204,7 @@ import { BackPageComponent } from './back-page/back-page/back-page.component';
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
         BackPageComponent,
+        FaceMatchModalComponent,
         ValidatePhoneModalComponent
     ],
     exports: [

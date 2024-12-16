@@ -134,7 +134,6 @@ export class AuthService {
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
-
                     this.setCookie(res.results.user.cookie);
                     const expires = moment().add(1, 'd').valueOf();
                     localStorage.setItem('expires', `${expires}`);
