@@ -19,6 +19,40 @@
                     <span><b> Saldo atual: </b> R$ {{ formatCurrencyMoney(balance) }}</span>
                 </div>
             </div>
+            <div class="detailed-card__text">
+                <span class="detailed-card__content-text">Histórico de apostas</span>
+            </div>
+            <div v-if="cardBet.apostas && cardBet.apostas.length > 0">
+                <div class="detailed-card__content-filters" v-for="(bet, index) in cardBet.apostas" :key="index">
+                        <card-bets>
+                            <template #body>
+                                <table class="table">
+                                    <p>{{bet.codigo}}</p>
+                                    <tbody>
+                                        <tr>
+                                            <td class="table__line--left">Horário: {{bet.horario}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table__line--left">Modalidade: {{bet.tipo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table__line--left">Valor: R${{formatCurrencyMoney(bet.valor)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table__line--left">Possível Retorno: R${{formatCurrencyMoney(bet.possibilidade_ganho)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table__line--left">Resultado: {{bet.resultado}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </template>
+                        </card-bets>
+                </div>
+            </div>
+            <div v-else>
+                <span>Nenhuma aposta encontrada</span>
+            </div>
             <div class="buttons">
                 <w-button
                     text="Compartilhar"
@@ -48,6 +82,7 @@
 import WInput from '@/components/Input.vue';
 import Header from '@/components/layouts/Header.vue';
 import WButton from '@/components/Button.vue';  
+import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import { ToastType } from '@/enums';
 import { useToastStore } from '@/stores';
 import { formatCurrency, formatDateTimeBR } from '@/utilities';
@@ -61,6 +96,7 @@ export default {
         WInput,
         Header,
         WButton,
+        CardBets,
         IconPrinter,
         IconShare
     },
@@ -77,7 +113,8 @@ export default {
     data() {
         return {
             toastStore: useToastStore(),
-            cardBet: {}
+            cardBet: {},
+            info: ''
         }
     },
     mounted() {
@@ -128,7 +165,7 @@ export default {
         },
         handleShared() {
             sharedCard(this.code, this.pin);
-        }
+        },
     },
     computed: {
         cardKey() {
@@ -196,6 +233,18 @@ export default {
         }
     }
 
+    &__content-filters { 
+        margin-top: 7px;
+    }
+
+    &__content-text {
+        font-size: 15px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        margin-top: 24px;
+    }
+
     &__infos {
         display: flex;
         justify-content: space-between;
@@ -213,6 +262,21 @@ export default {
             }
         }
     }
+}
+
+.table {
+  width: 100%;
+
+  &__line {   
+    
+    &--left {
+      text-align: left;
+    }
+
+    &--right {
+      text-align: right;
+    }
+  }
 }
 
 .buttons {

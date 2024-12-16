@@ -91,5 +91,11 @@ export default {
   }
 }
 
+.modal__body {
+  text-align: initial;
 
+  .modal-consult-ticket__items {
+    text-align: left;
+  }
+}
 </style>
