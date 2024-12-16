@@ -383,7 +383,7 @@ export class ClienteService {
             );
     }
 
-    allBankAccounts() {
+    public allBankAccounts() {
         return this.http.get(`${this.clienteUrl}/allBankAccounts`, this.headers.getRequestOptions(true))
             .pipe(
                 map((res: any) => res.results),
