@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { skip } from 'rxjs/operators';
 import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
@@ -37,8 +38,8 @@ export class FaceMatchModalComponent implements OnInit, AfterViewInit {
       console.error(err);
     });
 
-
     this.legitimuzService.curCustomerIsVerified
+      .pipe(skip(1))
       .subscribe(curCustomerIsVerified => {
         console.log("customer is verified: ", curCustomerIsVerified);
         this.verifiedIdentity = curCustomerIsVerified;
