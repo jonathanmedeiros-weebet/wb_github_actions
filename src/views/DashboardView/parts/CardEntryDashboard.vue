@@ -3,9 +3,7 @@
         <div class="card__body">
 
             <div class="card__body-title">
-                <!-- TODO: BUSCAR NA API O TOTAL DE ENTRADAS -->
-                <!-- <p class="card__body-title">Total de Entrada</p> -->
-                <p class="card__body-title">Saldo</p>
+                <p class="card__body-title">Total de entradas</p>
                 <p class="card__body-title-value">R$ {{ formatCurrencyMoney(data.balance) }}</p>
             </div>
             <div class="card__body-icon" @click="handleClick">
@@ -101,10 +99,10 @@ export default {
     computed: {
         categories() {
             const labelTransformed = {
-                'credito': 'Crédito',
-                'saldo': 'Saldo',
-                'comissao': 'Comissão',
-                'saida': 'Saída'
+                'esporte': 'Esporte',
+                'desafio': 'Desafio',
+                'acumuladao': 'Acumuladão',
+                'loteria': 'Loteria'
             };
 
             if(!this.data.categories.length) return [];

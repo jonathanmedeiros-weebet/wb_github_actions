@@ -62,7 +62,7 @@ import IconCalendar from '@/components/icons/IconCalendar.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
 import ModalFilterDate from './parts/ModalFilterDate.vue'
-import { getCashFlow, getFinancial, listMovements } from '@/services'
+import { getCashFlow, listMovements, detailedReport } from '@/services'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums'
 import { useConfigClient, useToastStore } from '@/stores'
@@ -146,8 +146,8 @@ export default {
         handleFluxo() {
             this.showModalChart = false;
         },
-        handleReloadEntry() {
-            this.fetchFinancial();
+        async handleReloadEntry() {
+            this.fetchDetailedReport();
         },
         handleOpenModalFilterDate() {
             this.showModalFilterDate = true;
@@ -183,25 +183,35 @@ export default {
                     })
                 });
         },
-        async fetchFinancial(){ 
-            getFinancial()
+        async fetchDetailedReport(){ 
+            detailedReport()
                 .then(resp => {
-                    this.entryData.categories = [];
-                    for (let [title, value] of Object.entries(resp)) {
-                        if(title !== 'saldo') {
-                            this.entryData.categories.push({
-                                title: title,
-                                value: parseFloat(value ?? 0)
-                            });
-                        }else{
-                            this.entryData.balance = parseFloat(value);
+                    const dataCategorias = [
+                        {
+                            title: "esporte",
+                            value: parseFloat(resp[0]?.esporte.apostado ?? 0)
+                        },
+                        {
+                            title: "desafio",
+                            value: parseFloat(resp[0]?.desafio.apostado ?? 0)
+                        },
+                        {
+                            title: "acumuladao",
+                            value: parseFloat(resp[0]?.acumuladao.apostado ?? 0)
+                        },
+                        {
+                            title: "loteria",
+                            value: parseFloat(resp[0]?.loteria.apostado ?? 0)
                         }
-                        
-                    }
+                    ];
+
+                    this.entryData.categories = [];
+                    this.entryData.categories = dataCategorias;
+                    this.entryData.balance = parseFloat(resp[0]?.total_entradas ?? 0)
                 })
                 .catch(error => {
                     this.toastStore.setToastConfig({
-                        message: error.errors.message,
+                        message: error.errors?.message ?? 'Erro inesperado',
                         type: ToastType.DANGER,
                         duration: 5000
                     })
@@ -252,8 +262,8 @@ export default {
     },
     activated() {
         this.fetchDataCashFlow();
-        this.fetchFinancial();
         this.fetchhMoviments();
+        this.fetchDetailedReport();
     }
 }
 </script>
