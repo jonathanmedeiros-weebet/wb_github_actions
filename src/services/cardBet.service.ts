@@ -23,13 +23,9 @@ export const consultCard = async (chave: any, pin: any) => {
     return response.results ?? response.data.results;
 };
 
-
-export const create = async (bettorName: string, value: number, cardPin: string, confirmCardPin: string) => {
+export const create = async (payload: any) => {
     const { lokiUrl } = useConfigClient();
-    const url = `${lokiUrl}/card-bets/`;
-
-    const payload = { apostador: bettorName, pin: cardPin, pin_confirmacao: confirmCardPin, valor: value };
-
+    const url = `${lokiUrl}/card-bets`;
     const response: any = await axiosInstance().post(url, payload);
     return response.results; 
 }

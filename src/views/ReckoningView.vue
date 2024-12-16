@@ -19,6 +19,18 @@
         {{ dateFormatedWithYear}}
         <IconClose class="date__close" @click.native="resetDateToCurrent" />
       </span>
+
+      <div class="previous-balance" v-if="currentAccountModeIsEnabled">
+          <span class="previous-balance__title">
+            Saldo em {{ previousBalanceDate }}
+            
+            <span class="previous-balance__value">
+              <IconAdd class="previous-balance__icon" />
+              R$ {{ previousBalance }}
+            </span>
+          </span>
+      </div>
+
       <div class="collapse" @click="toggleCollapse('input', $event)">
         <div class="collapse__item">
           <component :is="iconArrowDinamicInputs" />
@@ -43,6 +55,18 @@
                 <div class="collapse__section-item">
                   <span class="collapse__section-sports">Esportivas</span>
                   <span class="collapse__value-right">R$ {{sports}}</span>
+                </div>
+                <div class="collapse__section-item">
+                  <span class="collapse__section-sports">Loterias</span>
+                  <span class="collapse__value-right">R$ {{lotteries}}</span>
+                </div>
+                <div class="collapse__section-item">
+                  <span class="collapse__section-sports">Acumuladão</span>
+                  <span class="collapse__value-right">R$ {{accumulation}}</span>
+                </div>
+                <div class="collapse__section-item">
+                  <span class="collapse__section-sports">Desafio</span>
+                  <span class="collapse__value-right">R$ {{challenge}}</span>
                 </div>
               </div>
             </div>
@@ -123,10 +147,9 @@ import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 import { getCalculationValue } from '@/services'
-import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR } from '@/utilities'
+import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR, convertInMomentInstance } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
-import { ToastType } from '@/enums'
-import { useToastStore } from '@/stores'
+import { useConfigClient, useToastStore } from '@/stores'
 
 export default {
   name: 'reckoning',
@@ -154,15 +177,20 @@ export default {
       comissao: 0,
       totalExits: 0,
       award: 0,
+      commission: 0,
       withdraw: 0,
       credit: 0,
       debit: 0,
       balance: 0,
+      previousBalance: 0,
       balanceStatus: 'positive',
       sports: 0,
-      collapsedInputs: this.initCollapsed,
-      collapsedBet: this.initCollapsed,
-      collapsedExits: this.initCollapsed,
+      lotteries: 0,
+      challenge: 0,
+      accumulation: 0,
+      collapsedInputs: true,
+      collapsedBet: false,
+      collapsedExits: true,
       tostStore: useToastStore()
     }
   },
@@ -183,6 +211,13 @@ export default {
       const startDateFormatted = formatDateBR(this.startDate);
       const endDateFormatted = formatDateBR(this.endDate);
       return `${startDateFormatted} - ${endDateFormatted}`;
+    },
+    currentAccountModeIsEnabled() {
+      const { options } = useConfigClient();
+      return options?.modo_conta_corrente ?? false;
+    },
+    previousBalanceDate() {
+      return convertInMomentInstance(this.startDate).subtract(1, 'days').format('DD/MM');
     }
   },
   activated() {
@@ -219,6 +254,9 @@ export default {
       try {
         const res = await getCalculationValue(this.startDate, this.endDate);
         this.sports = formatCurrency(Number(res.esporte.apostado ?? 0));
+        this.accumulation = formatCurrency(Number(res.acumuladao.apostado ?? 0));
+        this.challenge = formatCurrency(Number(res.desafio.apostado ?? 0));
+        this.lotteries = formatCurrency(Number(res.loteria.apostado ?? 0));
         this.withdraw = formatCurrency(Number(res.saque ?? 0));
         this.commission = formatCurrency(Number(res.total_comissao ?? 0));
         this.award = formatCurrency(Number(res.total_premios ?? 0));
@@ -229,8 +267,9 @@ export default {
         this.credit = formatCurrency(Number(res.creditos ?? 0));
         this.debit = formatCurrency(Number(res.debitos ?? 0));
         this.balance = formatCurrency(Number(res.saldo ?? 0));
+        this.previousBalance = formatCurrency(Number(res.saldo_anterior ?? 0));
         this.balanceStatus = Number(res.saldo ?? 0) >= 0 ? 'positive' : 'negative';
-        const resultDate = Number(res.total_apostado + res.cartao - res.saque - res.total_comissao - res.total_premios);
+        const resultDate = (Number(res.total_apostado ?? 0) + Number(res.cartao ?? 0)) - Number(res.saque ?? 0) - Number(res.total_comissao ?? 0) - Number(res.total_premios ?? 0);
         this.resultDate = formatCurrency(resultDate);
         this.resultDateStatus = resultDate >= 0 ? 'positive' : 'negative';
       } catch ({ errors }) {
@@ -285,6 +324,37 @@ export default {
   
   &__close {
     cursor: pointer;
+  }
+}
+
+.previous-balance {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin-top: 25px;
+
+  &__title {
+    width: 100%;
+    color: #ffffff;
+    color: var(--foreground-header);
+    font-size: 14px;
+    font-style: normal;
+    display: flex;
+    padding: 5px 1px;
+    margin-left: 5px;
+  }
+
+  &__value {
+    display: flex;
+    align-items: center; 
+    margin-left: 25px;
+  }
+
+  &__icon {
+    fill: #0be58e;
+    fill: var(--highlight);
+    margin-right: 5px;
   }
 }
 
@@ -356,6 +426,7 @@ export default {
   &__section {
     display: flex;
     flex-direction: column;
+    padding-left: 25px;
   }
 
   &__icon {

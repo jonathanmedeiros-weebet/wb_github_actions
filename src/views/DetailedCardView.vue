@@ -4,7 +4,7 @@
         <div class="detailed-card__container">
             <div class="detailed-card__key">
                 <h4>Chave cartão</h4>
-                <span>Cartão {{ cardKey }}</span>
+                <span>{{ cardKey }}</span>
             </div>
             <div class="detailed-card__infos">
                 <div>

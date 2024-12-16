@@ -118,7 +118,14 @@ export default {
                 return;
             }
 
-            create(this.cardBettorName, cardValueNumber, this.cardPin, this.confirmCardPin)
+            const payload = {
+                apostador: this.cardBettorName,
+                pin: this.cardPin,
+                pin_confirmacao: this.confirmCardPin,
+                valor: cardValueNumber
+            };
+
+            create(payload)
             .then(cardBet => {
                 this.toastStore.setToastConfig({
                     message: 'Cartão criado com sucesso!',

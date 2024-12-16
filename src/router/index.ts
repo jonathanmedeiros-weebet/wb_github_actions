@@ -172,7 +172,7 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/detailed-card-/:code/:pin',
+      path: '/detailed-card/:code/:pin',
       name: 'detailed-card',
       component: DetailedCardView,
       meta: {
