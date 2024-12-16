@@ -22,6 +22,24 @@ export const consultCard = async (chave: any, pin: any) => {
     return response.results;
 };
 
+export const findCardBet = async ( params: any) => {
+
+    const { lokiUrl } = useConfigClient();
+    let url = `${lokiUrl}/card-bets`;
+
+    const urlParams = new URLSearchParams();
+
+    urlParams.append('apostador', params.gambler);
+    urlParams.append('data-inicial', params.initialDate);
+    urlParams.append('data-final', params.finalDate);
+    urlParams.append('sort', params.sort);
+
+    url += `?${urlParams.toString()}`;
+
+    const response: any = await axiosInstance().get(url);
+    return response.results;
+}
+
 export const create = async (payload: any) => {
     const { lokiUrl } = useConfigClient();
     const url = `${lokiUrl}/card-bets`;
