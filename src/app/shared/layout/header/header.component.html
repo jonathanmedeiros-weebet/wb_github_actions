@@ -15,8 +15,8 @@
 
 <div class="info-connection-card hide">
     <div class="info-connection-card-content">
-        <span><i class="fa fa-exclamation-triangle" style="margin-right: 5px; color: black;"></i></span> {{
-        messageConnection }}
+        <span><i class="fa fa-exclamation-triangle" style="margin-right: 5px; color: black;"></i>
+        </span> {{ messageConnection }}
     </div>
 </div>
 
@@ -444,6 +444,15 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
+                                <a (click)="openValidatePhoneModal()" *ngIf="isMandatoryPhoneValidation && !userPhoneValidated">
+                                    <span>
+                                        <i class="fa fa-solid fa-phone"></i>
+                                    </span>
+                                    {{ 'geral.validatePhone' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
                                 <a (click)="abrirAlterarSenha()">
                                     <span>
                                         <i class="fa fa-key"></i>
@@ -458,6 +467,15 @@
                                         <i class="fa fa-cogs"></i>
                                     </span>
                                     {{ 'geral.jogoResponsavel' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="openBankAccount()">
+                                    <span>
+                                        <i class="fa fa-bank"></i>
+                                    </span>
+                                    {{ 'bankAccounts.title' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -482,20 +500,29 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirSaques()">
+                                <a (click)="abrirApostas()">
                                     <span>
-                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                        <i class="fa fa-solid fa-table-columns"></i>
                                     </span>
-                                    {{ 'geral.saque' | translate }}
+                                    {{ 'geral.apostas' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
-                                </a>
+                                </a>                                
                                 <a (click)="abrirDepositos()">
                                     <span>
                                         <i class="fa fa-solid fa-money-bill-transfer"></i>
                                     </span>
                                     {{ 'geral.deposito' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirSaques()">
+                                    <span>
+                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                    </span>
+                                    {{ 'geral.saque' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -508,16 +535,7 @@
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
-                                </a>
-                                <a (click)="abrirApostas()">
-                                    <span>
-                                        <i class="fa fa-solid fa-table-columns"></i>
-                                    </span>
-                                    {{ 'geral.apostas' | translate }}
-                                    <span class="arrow-nav">
-                                        <i class="fa-solid fa-angle-right"></i>
-                                    </span>
-                                </a>
+                                </a>                                
                                 <a (click)="abrirRollovers()">
                                     <span>
                                         <i class="fa fa-solid fa-gift"></i>
@@ -843,6 +861,11 @@
         <div class="category" *ngIf="(loteriasHabilitado && (seninhaAtiva || quininhaAtiva)) || loteriaPopularAtiva">
             <a [routerLink]="['/loterias']" routerLinkActive="active">
                 <span>{{ 'menu.loteria' | translate }}</span>
+            </a>
+        </div>
+        <div class="category" *ngIf="paginaPromocaoHabilitado">
+            <a [routerLink]="['/promocao']" routerLinkActive="active">
+                <span>{{ 'geral.promocoes' | translate }}</span>
             </a>
         </div>
     </div>

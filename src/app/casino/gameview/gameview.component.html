@@ -127,7 +127,7 @@
             </div>
         </div>
         <ng-container>
-            <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame in-game" [ngClass]="{ 'is-tablet': isTablet }">
+            <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame in-game" [ngClass]="{ 'is-tablet': isTablet, desktopIsloggedIn: isLoggedIn } " >
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                 <ng-container *ngIf="mobileScreen">
                     <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>

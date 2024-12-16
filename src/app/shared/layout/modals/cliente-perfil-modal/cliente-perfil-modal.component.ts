@@ -56,7 +56,7 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
             sobrenome: [''],
             nascimento: [''],
             cpf: [''],
-            telefone: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
+            telefone: [''],
             email: [''],
             logradouro: ['', Validators.required],
             numero: ['', Validators.required],

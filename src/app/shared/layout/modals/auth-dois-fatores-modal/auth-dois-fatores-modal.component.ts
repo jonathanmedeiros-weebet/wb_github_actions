@@ -42,7 +42,7 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
         this.contagem();
 
         this.geolocationService
-            .getGeolocation(false)
+            .getGeolocation()
             .then((geolocation) => this.geolocation = geolocation)
     }
 

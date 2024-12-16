@@ -19,7 +19,6 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     stats = {};
     chaves = {};
     cambistaPaga;
-    clientesBilheteAoVivo = ['amigosdabola.wee.bet'];
     LOGO = config.LOGO_IMPRESSAO ?? config.LOGO;
     unsub$ = new Subject();
 
@@ -85,17 +84,6 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
                 estatistica.resultado = 'cancelado';
             }
         });
-
-        if (this.clientesBilheteAoVivo.includes(location.host)) {
-            if (eventosId.length > 0) {
-                this.statsService.connect();
-
-                eventosId.forEach(id => {
-                    this.statsService.entrarSalaStats(id);
-                    this.liveStats(id);
-                });
-            }
-        }
     }
 
     liveStats(jogoId) {
@@ -122,57 +110,6 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             index = apostaItem.jogo_fi;
         }
         return index;
-    }
-
-    verificarResultadoAposta() {
-        if (this.clientesBilheteAoVivo.includes(location.host)) {
-            if (!this.aposta.resultado) {
-                let aoMenosUmPerdeu = false;
-                let todosComResultados = true;
-                let acertouTodos = true;
-                let qtdResults = 0;
-
-                for (const id in this.stats) {
-                    if (this.stats.hasOwnProperty(id)) {
-                        const estatistica = this.stats[id];
-
-                        if (estatistica.removido) {
-                            continue;
-                        }
-                        if (!estatistica.resultado) {
-                            todosComResultados = false;
-                        }
-                        if (estatistica.resultado === 'ganhou' || estatistica.resultado === 'ganhando') {
-                            qtdResults++;
-                        }
-                        if (estatistica.resultado === 'perdeu' || estatistica.resultado === 'perdendo') {
-                            aoMenosUmPerdeu = true;
-                        }
-                    }
-                }
-
-                if (qtdResults < Object.keys(this.stats).length) {
-                    acertouTodos = false;
-                }
-
-                if (todosComResultados) {
-                    if (acertouTodos) {
-                        this.aposta.resultado = 'ganhando';
-                        this.aposta.premio = this.aposta.possibilidade_ganho;
-                    } else {
-                        if (aoMenosUmPerdeu) {
-                            this.aposta.resultado = 'perdendo';
-                            this.aposta.premio = 0;
-                        }
-                    }
-                } else {
-                    if (aoMenosUmPerdeu) {
-                        this.aposta.resultado = 'perdendo';
-                        this.aposta.premio = 0;
-                    }
-                }
-            }
-        }
     }
 
     vericarResultadoItem(jogoId) {
@@ -358,9 +295,8 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
             default:
                 break;
         }
-
-        this.verificarResultadoAposta();
     }
+    
     private ordenarApostaItensPorData(aposta: ApostaEsportiva): Array<ItemApostaEsportiva> {
         let itensOrdenados;
         itensOrdenados = aposta.itens.sort((a,b) => moment(a.jogo_horario).toDate().getTime() - moment(b.jogo_horario).toDate().getTime());

@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ 'saques.identityVerify' | translate }}</h4>
+
+    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('')">
+        <i class="fa fa-times"></i>
+    </a>
+</div>
+<div class="modal-body">
+    <div style="min-width: 143px;">
+        <div>
+            <p>Para sua segurança, é necessário refazer a verificação de identidade, pois você está há muito tempo sem
+                acessar sua conta ou já se passou 1 ano desde sua última verificação.</p>
+        </div>
+
+        <div class="actions">
+            <div #legitimuz id="legitimuz-container">
+                <div id="legitimuz">
+                    <div id="verify-identity-text">
+                        {{'saques.identityVerifyNeeded' | translate}}
+                    </div>
+                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                        [value]="user.cpf" />
+                    <button id="legitimuz-action-verify" class="btn btn-custom">
+                        <i class="fa-solid fa-id-card"></i>
+                        {{'saques.identityVerify' | translate}}
+                    </button>
+                </div>
+                <div id="legitimuz-root"></div>
+            </div>
+        </div>
+    </div>
+</div>

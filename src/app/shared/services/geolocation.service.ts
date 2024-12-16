@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { config } from '../config';
 import { HttpClient } from '@angular/common/http';
 import { HeadersService } from './utils/headers.service';
-
 export interface Geolocation {
     error: boolean;
     lat: number;
@@ -21,7 +20,6 @@ export interface ReverseGeolocation {
     providedIn: 'root'
 })
 export class GeolocationService {
-
     private Estados = [
         { nome: 'Acre', codigo: 12 },
         { nome: 'Alagoas', codigo: 27 },
@@ -62,17 +60,10 @@ export class GeolocationService {
 
     constructor(private http: HttpClient, private header: HeadersService) { }
 
-    async getGeolocation(isReverse = true): Promise<Geolocation> {
+    async getGeolocation(): Promise<Geolocation> {
         try {
-            if (this.requestOnGoing) return; // Avoid multiple requests
-            this.requestOnGoing = isReverse ? true : false;
-            let currentPosition = await this.getCurrentPosition() as Geolocation;
-
-            if (isReverse) this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
-
-            return currentPosition;
+            return await this.getCurrentPosition() as Geolocation;
         } catch (error) {
-            this.requestOnGoing = false;
             return {
                 error: true,
                 lat: 0,
@@ -86,6 +77,7 @@ export class GeolocationService {
             let latlng = {
                 latlng: `${lat},${lng}`
             }
+
             this.http.post(`${this.central_url}/reverseGeolocation`, latlng, this.header.getRequestOptions(true)).subscribe({
                 next: (res: ReverseGeolocation) => {
                     this.requestOnGoing = false;
@@ -126,7 +118,7 @@ export class GeolocationService {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         if (!position) throw new Error('Unable to find current position');
-    
+
                         resolve({
                             error: false,
                             lat: position.coords.latitude,
@@ -179,7 +171,7 @@ export class GeolocationService {
 
         if (localeCountry == null || localeCountry == 'Brasil' || localeCountry == 'Brazil') {
             return false;
-        } 
+        }
         return true;
     }
 }

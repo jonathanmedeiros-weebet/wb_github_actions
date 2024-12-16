@@ -135,6 +135,18 @@ export class ClienteService {
             );
     }
 
+    registerBankAccount(registrationData) {
+        return this.http.post(`${this.clienteUrl}/registerBankAccount`, JSON.stringify(registrationData),
+        this.headers.getRequestOptions(true))
+        .pipe(
+            map((response: any) => {
+                return response.results.result;
+            }
+            ),
+            catchError(this.errorService.handleError)
+        );
+    }
+
     atualizarPix(dadosCadastrais) {
         return this.http.post(`${this.clienteUrl}/atualizarChavePix`, JSON.stringify(dadosCadastrais),
             this.headers.getRequestOptions(true))
@@ -187,9 +199,10 @@ export class ClienteService {
             );
     }
 
-    excluirConta(motivo: string, confirmarExclusao: string, multifator = {}) {
+    excluirConta(exclusionPeriod: string, motivo: string, confirmarExclusao: string, multifator = {}) {
         const url = `${this.clienteUrl}/excluir-conta`;
         const data = {
+            exclusionPeriod,
             motivo,
             confirmarExclusao,
             ...multifator
@@ -338,5 +351,43 @@ export class ClienteService {
             },
                 error => console.error(error)
             )
+    }
+
+    initiatePhoneValidation() {
+        return this.http
+            .post(
+                `${this.clienteUrl}/initiate-phone-validation`,
+                {},
+                this.headers.getRequestOptions(true)
+            )
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    validatePhone(validationCode: number) {
+        return this.http
+            .post(
+                `${this.clienteUrl}/validate-phone`,
+                { validation_code: validationCode },
+                this.headers.getRequestOptions(true)
+            )
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    public allBankAccounts() {
+        return this.http.get(`${this.clienteUrl}/allBankAccounts`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.results),
+                catchError(() => [])
+            );
     }
 }

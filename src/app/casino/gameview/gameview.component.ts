@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild, RendererStyleFlags2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
@@ -78,6 +78,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     tawakChatClicked: boolean = false;
     gameProviderName: string = '';
+    private inGame : boolean = false
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -218,6 +219,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                     this.disableHeader();
                                     this.fixTabletHeader();
                                 }
+
+                                if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
+                                    this.fixTabletAndDesktopScreen();
+                                }
                             }
                         }
                     }
@@ -308,7 +313,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.fixTabletAndDesktopScreen();
         }
 
-        this.fixInGameSpacings();
+        if (this.inGame || (this.isLoggedIn || this.gameMode !== 'REAL')) {
+            this.fixInGameSpacings();
+        }
     }
 
     public copyLink() {
@@ -772,7 +779,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if (gameFrame.classList.contains('in-game')) {
-            this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 170px)');
+            this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 140px)');
         }
 
         const footer = this.el.nativeElement.querySelector('.main-footer');
@@ -930,7 +937,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private fixInGameSpacings() {
         const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
 
-        if (blocoContainer && blocoContainer.classList.contains('in-game')) {
+        if (blocoContainer && (this.inGame || this.gameMode !== 'REAL')) {
             this.renderer.setStyle(blocoContainer, 'padding', '0');
         }
     }
@@ -1075,11 +1082,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && this.isDesktop) && (gameView.classList.contains('in-game'))) {
+        if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '50px');
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 180px)');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 140px)');
             }
         }
 

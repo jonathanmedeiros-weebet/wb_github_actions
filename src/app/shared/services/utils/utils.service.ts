@@ -93,4 +93,12 @@ export class UtilsService {
         const date = new Date(dateString);
         return date instanceof Date && !isNaN(date.getTime());
     }
+
+    getBanks() {
+        return this.http.get(`${this.utilsUrl}/getBanks`, this.headers.getRequestOptions())
+            .pipe(
+                map((res: any) => res.results),
+                catchError(() => [])
+            );
+    }
 }

@@ -62,6 +62,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     legitimuzToken = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
+    faceMatchWithdraw = false;
 
     public valuesShortcuts: number[] = [10, 20, 50, 75, 100, 200];
 
@@ -103,7 +104,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.currentLanguage = this.translate.currentLang;
 
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw);
+        this.faceMatchWithdraw = this.paramsLocais.getOpcoes().faceMatchFirstWithdraw || this.paramsLocais.getOpcoes().faceMatchAllWithdraw;
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw);
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
         } else {
@@ -165,7 +167,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (this.faceMatchEnabled) {
                         this.faceMatchService.getFaceMatch({ document: this.cliente.cpf }).subscribe({
                             next: (res) => {
-                                if (res.first_withdraw != null && this.cliente.verifiedIdentity) {
+                                if (res.first_withdraw != null && this.cliente.verifiedIdentity && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw) {
                                     this.faceMatchFirstWithdrawValidated = true;
                                 }
                             }, error: (error) => {}
@@ -201,7 +203,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
                         this.faceMatchFirstWithdrawValidated = true;
-                    } else {
+                    } else if (!this.verifiedIdentity && this.verifiedIdentity !== null) {
                         this.legitimuzService.closeModal();
                         this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                         this.faceMatchFirstWithdrawValidated = false;
