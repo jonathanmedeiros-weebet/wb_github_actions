@@ -5,25 +5,22 @@
     </template>
     <template #body>
       <div class="modal-consult-ticket__items">
-        <span class="modal-consult-ticket__text">
-          
-        </span>
             <w-input
-                label="Chave do cartão"
-                placeholder="Informe a chave do cartão"
-                type="text"
-                name="code"
-                mask="XXX-XXX-XXX"
-                v-model="code"
+              label="Chave do cartão"
+              placeholder="Informe a chave do cartão"
+              type="text"
+              name="code"
+              mask="XXX-XXX-XXX"
+              v-model="code"
             >
             </w-input>
-            
+
             <w-input
-                label="PIN"
-                placeholder="Informe o pin do cartão"
-                type="password"
-                name="pin"
-                v-model="pin"
+              label="PIN"
+              placeholder="Informe o pin do cartão"
+              type="password"
+              name="pin"
+              v-model="pin"
             >
             </w-input>
         <w-button
@@ -31,6 +28,7 @@
           text="Consultar"
           value="salvar"
           name="btn-salvar"
+          :disabled="!formValid"
           @click="handleConsult"
         />
       </div>
@@ -44,7 +42,7 @@ import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 
 export default {
-  name: 'modal-consult-ticket',
+  name: ' modal-consult-card',
   components: { WModal, WInput, WButton },
   data() {
     return {

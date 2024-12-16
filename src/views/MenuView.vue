@@ -242,7 +242,6 @@ export default {
           });
         }
       } catch (error) {
-        this.handleCloseConsultCardModal();
         this.toastStore.setToastConfig({
           message: error.errors.message,
           type: ToastType.DANGER,

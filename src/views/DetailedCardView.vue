@@ -22,32 +22,32 @@
             <div class="detailed-card__text">
                 <span class="detailed-card__content-text">Histórico de apostas</span>
             </div>
-            <div v-if="cardBet.apostas && cardBet.apostas.length > 0">
+            <div v-if="Boolean(cardBet.apostas.length)">
                 <div class="detailed-card__content-filters" v-for="(bet, index) in cardBet.apostas" :key="index">
-                        <card-bets>
-                            <template #body>
-                                <table class="table">
-                                    <p>{{bet.codigo}}</p>
-                                    <tbody>
-                                        <tr>
-                                            <td class="table__line--left">Horário: {{bet.horario}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table__line--left">Modalidade: {{bet.tipo}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table__line--left">Valor: R${{formatCurrencyMoney(bet.valor)}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table__line--left">Possível Retorno: R${{formatCurrencyMoney(bet.possibilidade_ganho)}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table__line--left">Resultado: {{bet.resultado}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </template>
-                        </card-bets>
+                    <card-bets>
+                        <template #body>
+                            <table class="table">
+                                <p>{{bet.codigo}}</p>
+                                <tbody>
+                                    <tr>
+                                        <td class="table__line--left">Horário: {{bet.horario}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table__line--left">Modalidade: {{bet.tipo}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table__line--left">Valor: R${{formatCurrencyMoney(bet.valor)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table__line--left">Possível Retorno: R${{formatCurrencyMoney(bet.possibilidade_ganho)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table__line--left">Resultado: {{bet.resultado}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </template>
+                    </card-bets>
                 </div>
             </div>
             <div v-else>
@@ -113,8 +113,7 @@ export default {
     data() {
         return {
             toastStore: useToastStore(),
-            cardBet: {},
-            info: ''
+            cardBet: {}
         }
     },
     mounted() {
