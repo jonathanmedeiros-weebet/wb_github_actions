@@ -108,8 +108,8 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path: 'bank-accounts',
-                loadChildren: () => import('./bank-accounts/bank-accounts.module').then(m => m.BankAccountsModule),
+                path: 'add-bank-account',
+                loadChildren: () => import('./bank-accounts/add-bank-account/add-bank-account.module').then(m => m.AddBankAccountModule),
                 canActivate: [AuthGuard]
             },
             {

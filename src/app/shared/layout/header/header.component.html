@@ -462,6 +462,15 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
+                                <a (click)="openBankAccount()">
+                                    <span>
+                                        <i class="fa fa-cogs"></i>
+                                    </span>
+                                    {{ 'bankAccounts.title' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
                                 <hr />
                                 <label>{{ 'geral.maisOpcoes' | translate }}</label>
                                 <a (click)="abrirCarteira()">

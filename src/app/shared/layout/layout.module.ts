@@ -103,6 +103,8 @@ import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
 import { BackPageComponent } from './back-page/back-page/back-page.component';
+import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/add-bank-account-modal.component';
+import { AddBankAccountGenericComponent } from 'src/app/bank-accounts/parts/add-bank-account-generic/add-bank-account-generic.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -203,7 +205,9 @@ import { BackPageComponent } from './back-page/back-page/back-page.component';
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
         BackPageComponent,
-        ValidatePhoneModalComponent
+        ValidatePhoneModalComponent,
+        AddBankAccountModalComponent,
+        AddBankAccountGenericComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -226,7 +230,8 @@ import { BackPageComponent } from './back-page/back-page/back-page.component';
         SkeletonModule,
         MenuFooterComponent,
         BackPageComponent,
-        ValidatePhoneModalComponent
+        ValidatePhoneModalComponent,
+        AddBankAccountGenericComponent
     ],
     providers: [
         ApostaEsportivaService,

@@ -1,17 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, UntypedFormBuilder } from '@angular/forms';
-import { Bank } from '../shared/models/bankAccounts/bank';
-import { AuthService, ClienteService, MenuFooterService, MessageService, SidebarService, UtilsService } from '../services';
-import { Subject } from 'rxjs';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { Subject } from 'rxjs';
+import { AuthService, ClienteService, MenuFooterService, MessageService, SidebarService, UtilsService } from 'src/app/services';
+import { Bank } from 'src/app/shared/models/bankAccounts/bank';
 
 @Component({
-  selector: 'app-bank-accounts',
-  templateUrl: './bank-accounts.component.html',
-  styleUrls: ['./bank-accounts.component.css']
+  selector: 'app-add-bank-account-generic',
+  templateUrl: './add-bank-account-generic.component.html',
+  styleUrls: ['./add-bank-account-generic.component.css']
 })
-
-export class BankAccountsComponent implements OnInit, OnDestroy {
+export class AddBankAccountGenericComponent {
+    @Input() showHeader: boolean = false;
     public collapsed = false;
     form: FormGroup;
     public showLoading = false;
@@ -28,6 +29,7 @@ export class BankAccountsComponent implements OnInit, OnDestroy {
         private menuFooterService: MenuFooterService,
         private translate: TranslateService,
         private clienteService: ClienteService,
+        public activeModal: NgbActiveModal,
     ){
         this.banks = [];
         this.bankSelected = 0;
@@ -66,6 +68,13 @@ export class BankAccountsComponent implements OnInit, OnDestroy {
         );
     }
 
+    getBankAccountUser() {
+        this.clienteService.getBankAccountsUser().subscribe(
+            bank => this.banks = bank,
+            error => this.handleError(error)
+        );
+    }
+
     handleError(mensagem: string) {
         this.messageService.error(mensagem);
     }
@@ -98,5 +107,9 @@ export class BankAccountsComponent implements OnInit, OnDestroy {
         this.getBanks() ;
         this.form.controls['bank'].setValue('0');
         this.form.controls['accountType'].setValue('0');
+    }
+
+    toBack(){
+        this.activeModal.dismiss();
     }
 }

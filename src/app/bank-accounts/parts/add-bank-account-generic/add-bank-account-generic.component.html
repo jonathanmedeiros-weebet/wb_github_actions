@@ -1,4 +1,10 @@
 <div id="default-content">
+    <div class="mobile-modal-header" *ngIf="showHeader">
+        <a (click)="toBack()" class="botao-esquerdo">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <div class="botao-direito"></div>
+    </div>
     <ng-container *ngIf="!showLoading">
         <div class="content-header hide-mobile">
             <h2>{{'bankAccounts.title' | translate}}</h2>
