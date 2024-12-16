@@ -1,0 +1,36 @@
+{
+    "name": "[BANCA]",
+    "short_name": "[BANCA]",
+    "theme_color": "#181818",
+    "background_color": "#181818",
+    "display": "standalone",
+    "scope": "./",
+    "start_url": "./",
+    "icons": [
+        {
+            "src": "https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/icone_app.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "https://weebet.s3.amazonaws.com/[S3_FOLDER]/logos/icone_app.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "assets/screenshots/screenshot-desktop.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "assets/screenshots/screenshot-mobile.png",
+            "sizes": "720x1280",
+            "type": "image/png"
+        }
+    ]
+}

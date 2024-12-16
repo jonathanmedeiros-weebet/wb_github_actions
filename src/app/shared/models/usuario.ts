@@ -5,4 +5,5 @@ export class Usuario {
   tipo_usuario: string;
   cookie: string;
   validacao_email: boolean;
+  phone_validated: boolean;
 }

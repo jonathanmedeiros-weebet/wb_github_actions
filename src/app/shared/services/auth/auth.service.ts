@@ -489,4 +489,12 @@ export class AuthService {
     deleteCookie(name) {
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     }
+
+    updatePhoneValidationStatus(status: boolean) {
+        const user = this.getUser();
+
+        user.phone_validated = status;
+
+        localStorage.setItem('user', JSON.stringify(user));
+    }
 }

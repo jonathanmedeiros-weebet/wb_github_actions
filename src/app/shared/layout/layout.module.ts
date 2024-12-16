@@ -70,7 +70,8 @@ import {
     CompatilhamentoBilheteModal,
     RegrasBonusModalComponent,
     JogosLiberadosBonusModalComponent,
-    CanceledBonusConfirmComponent
+    CanceledBonusConfirmComponent,
+    ValidatePhoneModalComponent
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
@@ -203,7 +204,8 @@ import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-mo
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
         BackPageComponent,
-        FaceMatchModalComponent
+        FaceMatchModalComponent,
+        ValidatePhoneModalComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -225,7 +227,8 @@ import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-mo
         SubmenuComponent,
         SkeletonModule,
         MenuFooterComponent,
-        BackPageComponent
+        BackPageComponent,
+        ValidatePhoneModalComponent
     ],
     providers: [
         ApostaEsportivaService,

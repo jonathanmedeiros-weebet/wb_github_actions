@@ -108,6 +108,11 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'bank-accounts',
+                loadChildren: () => import('./bank-accounts/bank-accounts.module').then(m => m.BankAccountsModule),
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'validar-aposta',
                 loadChildren: () => import('./validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
                 canActivate: [AuthGuard, CambistaGuard]

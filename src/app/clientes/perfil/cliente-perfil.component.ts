@@ -29,6 +29,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     public showLoading = true;
     public mostrarSenha = false;
     public googleLogin = false;
+    public isMandatoryPhoneValidation = false;
+    public userPhoneValidated = false;
 
     private tokenMultifator: string;
     private codigoMultifator: string;
@@ -67,6 +69,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.loadCliente();
 
         this.menuFooterService.setIsPagina(true);
+
+        this.isMandatoryPhoneValidation = this.paramsLocais.isMandatoryPhoneValidation();
     }
 
     async loadCliente() {
@@ -76,6 +80,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             const cliente = await this.clienteService
                 .getCliente(user.id)
                 .toPromise();
+
+            this.userPhoneValidated = cliente.is_phone_validated;              
 
             this.form.patchValue({
                 nome: cliente.nome.toUpperCase(),
@@ -125,7 +131,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             sobrenome: [''],
             nascimento: [''],
             cpf: [''],
-            telefone: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
+            telefone: [''],
             email: [''],
             logradouro: ['', Validators.required],
             numero: ['', Validators.required],
