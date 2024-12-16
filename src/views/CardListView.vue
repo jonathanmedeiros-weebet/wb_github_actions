@@ -91,9 +91,9 @@ import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
-import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now, capitalizeFirstLetter } from '@/utilities'
+import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now } from '@/utilities'
 import { findCardBet } from '@/services'
-import { useConfigClient, useToastStore } from '@/stores'
+import { useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums';
 
@@ -125,36 +125,17 @@ export default {
         gambler: '',
         sort: ''
       },
-      showToast: false,
-      toastText: '',
-      options: null,
       toastStore: useToastStore(),
-      configClientStore: useConfigClient(),
     }
-  },
-  mounted() {
-    this.options = this.configClientStore.options;
   },
   computed: {
     dateFilterView() {
       const initialDate = convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY");
       const finalDate = convertInMomentInstance(this.finalDateFilter).format("DD/MM/YYYY");
       return `${initialDate} - ${finalDate}`;
-    },
-    showBettorName() {
-      return !this.configClientStore.bettorDocumentNumberEnabled;
-    },
+    }
   },
   methods: {
-    capitalizeFirstLetter,
-    handleCloseCancelModal() {
-      this.betSelected = null;
-      this.showModalCancel = false;
-    },
-    handleButtonNoCancelBet() {
-      this.$refs.modalCancel.handleClose();
-      this.handleCloseCancelModal();
-    },
     handleOpenCalendarModal() {    
       event.stopPropagation();
       this.showModalCalendar = true;
@@ -285,13 +266,6 @@ export default {
       text-align: right;
     }
   }
-}
-.button-spacer {
-  width: 10px; 
-}
-#btn-view,
-#btn-cancel {
-  color: var(--foreground-header);
 }
 
 </style>
