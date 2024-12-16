@@ -248,7 +248,7 @@ export default {
             return this.movements.results.slice(0,this.maxItems);
         },
         dateFilterIni() {
-            return now().subtract(6, 'd');
+            return this.configClientStore.firstDayOfTheWeek;
         },
         dateFilterEnd() { 
             return now();
