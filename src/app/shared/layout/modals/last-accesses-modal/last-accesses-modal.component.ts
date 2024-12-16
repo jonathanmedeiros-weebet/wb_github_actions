@@ -69,7 +69,6 @@ export class LastAccessesModalComponent implements OnInit, OnDestroy{
         this.unsub$.next();
         this.unsub$.complete();
         this.menuFooterService.setIsPagina(false);
-
     }
 
     loadAccessLogs() {
