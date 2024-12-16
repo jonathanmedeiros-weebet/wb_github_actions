@@ -197,6 +197,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     ngOnInit() {
         this.currentRoute = this.router.url;
         this.sportsActive();
+        this.isMandatoryPhoneValidation = this.paramsService.isMandatoryPhoneValidation();
 
         this.headerService.fullScreenCasinoGameState$.subscribe(isFullScreen => {
             this.isCasinoGameFullScreen = isFullScreen;
@@ -236,6 +237,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     if (isLoggedIn) {
                         this.getUsuario();
                         this.getPosicaoFinanceira();
+                        this.userPhoneValidated = this.usuario.phone_validated;
                     }
                 }
             );
