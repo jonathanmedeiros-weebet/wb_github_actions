@@ -1,5 +1,5 @@
 import { LocalStorageKey, localStorageService } from "@/services";
-import { getAndroidVersion } from "@/utilities";
+import { getAndroidVersion, now } from "@/utilities";
 import { defineStore } from "pinia"
 
 interface ConfigClient {
@@ -94,6 +94,20 @@ export const useConfigClient = defineStore('configClient', {
       } catch (error) {
         void error;
         return false; 
+      }
+    },
+    firstDayOfTheWeek: () => {
+      const currentDate = now();
+      const isSunday = currentDate.day() == 0;
+      if(isSunday) {
+        return currentDate
+          .startOf('week')
+          .subtract(1, 'week')
+          .add(1, 'days');
+      } else {
+        return currentDate
+          .startOf('week')
+          .add(1, 'days');
       }
     }
   },
