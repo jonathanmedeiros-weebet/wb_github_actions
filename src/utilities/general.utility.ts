@@ -1,3 +1,5 @@
+import { useConfigClient } from "@/stores";
+
 declare var WeebetMessage: any;
 
 export const delay = async (time: number) => {
@@ -44,4 +46,44 @@ export const capitalizeFirstLetter = (str: string) => {
     }else{
         return str;
     }
+}
+
+export const getOddAcronym = (key:any) => {
+    const { betOptions } = useConfigClient();
+
+    if (key) {
+        const betsOption = betOptions;
+        const sigla = `${betsOption[key].sigla}     `;
+        return sigla.substr(0, 5);
+    }
+    return '    ';
+}
+
+export const getOddValue = (key: any, odds: any) => {
+    const odd = odds.find((k: { chave: any; }) => k.chave == key);
+    if (odd) {
+        let res = odd.valor.toFixed(2);
+        if (odd.valor < 10) {
+            res = `${res} `;
+        }
+        return res;
+    }
+    return '     ';
+}
+
+export const getOddsToPrint = async() => {
+    const { betOptions } = useConfigClient();
+    const betTypes = betOptions;
+
+    const printOdds = [];
+    for (const key in betTypes) {
+        if (betTypes.hasOwnProperty(key)) {
+            const betType = betTypes[key];
+            if (parseInt(betType.exibirImpressao, 10)) {
+                printOdds.push(key);
+            }
+        }
+    }
+    
+    return printOdds;
 }

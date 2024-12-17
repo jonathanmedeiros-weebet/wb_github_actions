@@ -1,7 +1,8 @@
 import { useConfigClient } from '@/stores';
-import { formatCurrency, formatDateTimeBR, now, removerAcentos, wbPostMessage } from '@/utilities';
+import { formatCurrency, formatDateTimeBR, getOddAcronym, getOddValue, now, removerAcentos, wbPostMessage } from '@/utilities';
 import EscPosEncoder from 'esc-pos-encoder';
 import { axiosInstance } from './axiosInstance';
+import { getOddsToPrint } from '../utilities/general.utility';
 
 export const printTicket = async (bet: any) => {
     const { options } = useConfigClient();
@@ -231,6 +232,93 @@ export const printRechargeReceipt = async (recharge: any) => {
 
     const data = Array.from(rechargeEscPos.encode());
     wbPostMessage('printCard', data)
+}
+
+export const printTable = async (camps: any) => {
+    const { options } = useConfigClient();
+
+    const {
+        apkVersion,
+        printGraphics,
+        printLogo,
+        separator
+    } = await getPrinterSettings();
+    const encoder = new EscPosEncoder();
+    const tableEscPos = encoder.initialize();
+    const odds = await getOddsToPrint();
+    const cols = 5;
+    const lines = Math.ceil((await odds).length / cols);
+
+    if (printGraphics) {
+        if (apkVersion < 3) {
+            tableEscPos.image(printLogo, 376, 136, 'atkinson');
+        }
+    } else {
+        tableEscPos
+            .align('center')
+            .raw([0x1d, 0x21, 0x10])
+            .line(options.banca_nome)
+            .raw([0x1d, 0x21, 0x00]);
+    }
+
+    tableEscPos
+        .newline()
+        .bold(true)
+        .align('left')
+        .size('normal')
+        .line(separator)
+        .bold(true)
+        .text(formatDateTimeBR(now()))
+        .newline()
+
+    camps.forEach((camp: any) => {
+        tableEscPos
+            .newline()
+            .bold(true)
+            .text(removerAcentos(camp.nome))
+
+        camp.jogos.forEach((game: any) => {
+            const horarioObj = new Date(game.horario);
+            const horario = horarioObj.toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            tableEscPos
+                .newline()
+                .bold(false)
+                .text(horario + ' ' + removerAcentos(game.nome));
+
+            for (let i = 0; i < lines; i++) {
+                let start = i * cols;
+
+                const oddPos1 = odds[start];
+                const oddPos2 = odds[++start];
+                const oddPos3 = odds[++start];
+                const oddPos4 = odds[++start];
+                const oddPos5 = odds[++start];
+
+                tableEscPos
+                    .newline()
+                    .bold(true)
+                    .text(removerAcentos(`${getOddAcronym(oddPos1)} ${getOddAcronym(oddPos2)} ${getOddAcronym(oddPos3)} ${getOddAcronym(oddPos4)} ${getOddAcronym(oddPos5)}`))
+                    .newline()
+                    .bold(false)
+                    .text(`${getOddValue(oddPos1, game.cotacoes)} ${getOddValue(oddPos2, game.cotacoes)} ${getOddValue(oddPos3, game.cotacoes)} ${getOddValue(oddPos4, game.cotacoes)} ${getOddValue(oddPos5, game.cotacoes)}`)
+                    .newline();
+            }
+        });
+
+        tableEscPos
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
+    })
+
+    const data = Array.from(tableEscPos.encode());
+    wbPostMessage('printTable', data)
 }
 
 const getPrinterSettings = async () => {

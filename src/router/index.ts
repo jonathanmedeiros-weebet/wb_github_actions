@@ -18,6 +18,7 @@ import CloseBetView from '@/views/CloseBetView/CloseBetView.vue'
 import PopularLotteryView from '@/views/PopularLotteryView.vue'
 import RechargeCardView from '@/views/RechargeCardView.vue'
 import RechargeReceiptView from '@/views/RechargeReceiptView.vue'
+import TableView from '@/views/TableView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -165,6 +166,14 @@ const router = new VueRouter({
       path: '/popular-lottery',
       name: 'popular-lottery',
       component: PopularLotteryView,
+      meta: {
+        auth: production
+      }
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: TableView,
       meta: {
         auth: production
       }

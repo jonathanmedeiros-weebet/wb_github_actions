@@ -12,6 +12,11 @@ export const dateFormatInDayAndMonth = (datetime: string | Moment) => {
     return momentReserve.format('DD/MM')
 }
 
+export const dateFormatInDayAndMonthAndYearBR = (date: string | moment.Moment) => {
+    if (!date) return '';
+    return moment(date).locale('pt-br').format('DD [de] MMMM [de] YYYY');
+};
+
 export const now = () => {
     return moment()
 }
