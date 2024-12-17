@@ -323,7 +323,7 @@ export default {
         scrollbar-width: none;  
 
         border-bottom: 1px solid #ffffff1a;
-        background: #181818;
+        background: #0a0a09;
         background: var(--game);
     }
 
@@ -345,9 +345,9 @@ export default {
         color: var(--foreground-game);
         border-bottom: 3px solid transparent;
         &--selected {
-            color: #0AAF6D;
+            color: #35cd96;
             color: var(--highlight);
-            border-color: #0AAF6D;
+            border-color: #35cd96;
             border-color: var(--highlight);
         }
     }

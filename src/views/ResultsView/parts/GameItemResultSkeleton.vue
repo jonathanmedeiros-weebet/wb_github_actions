@@ -40,8 +40,8 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #181818;
-  background: var(--inputs-odds);
+  background: #0a0a09;
+  background: var(--league);
   
   &__items {
     align-items: center;
@@ -92,7 +92,7 @@ export default {
   &__scores--secondary {
     font-size: 12px;
     color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: var(--foreground-league);
     padding-top: 0;
   }
 

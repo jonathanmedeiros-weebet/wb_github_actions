@@ -35,6 +35,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #0a0a09;
+    background-color: var(--header);
 
     &__title {
         display: flex;
@@ -42,6 +44,7 @@ export default {
         margin-right: 10px;
         font-weight: 400;
         line-height: 23.44px;
+        
         color: #ffffff;
         color: var(--foreground-header);
 

@@ -64,7 +64,8 @@ export default {
     align-self: stretch;
     align-items: flex-start;
     border-radius: 8px;
-    background: #171717;   
+    background: #0a0a09;   
+    background: var(--league);   
     padding-bottom: 14px;
   }
   
@@ -99,7 +100,7 @@ export default {
 
   &__debit {
     color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: var(--foreground-league);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -108,7 +109,7 @@ export default {
 
   &__date { 
     color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: var(--foreground-league);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

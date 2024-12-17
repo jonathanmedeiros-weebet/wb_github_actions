@@ -282,8 +282,8 @@ export default {
     &__chart-header-title {
         font-size: 16px;
         width: 80%;
-        color: #ffff;
-        color: var(--foreground-header);
+        color: #ffffff;
+        color: var(--foreground);
     }
 
     &__movements {
@@ -296,14 +296,15 @@ export default {
 
     &__movements-title {
         font-size: 16px;
-        color: #ffff;
-        color: var(--foreground-header);
+        color: #ffffff;
+        color: var(--foreground);
     }
 
     &__movements-filter {
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-header);
+        color: var(--foreground);
+        opacity: 0.8;
     }
 
     &__movements-dates {
@@ -313,7 +314,7 @@ export default {
         padding: 8px 0px;
         font-size: 14px;
         color: #ffffff80;
-        color: var(--foreground-header);
+        color: var(--foreground);
     }
 
     &__movements-icon-calendar {
@@ -330,8 +331,9 @@ export default {
         padding: 8px 14px;
         border-radius: 6px;
         color: #ffffff80;
-        color: var(--foreground-header);
-        background: var(--input-odds);
+        color: var(--foreground-game);
+        background: #0a0a09;
+        background: var(--game);
     }
 }
 </style>

@@ -68,6 +68,8 @@ export default {
         margin: 0;
         font-size: 16px;
         font-weight: 400;
+        color: #ffffff;
+        color: var(--foreground);
         
     }
 
@@ -80,7 +82,9 @@ export default {
 
     &_description {
         font-size: 14px;
-        color: var(--foreground-highlight);
+        color: #ffffff;
+        color: var(--foreground);
+        opacity: 0.65;
         margin-bottom: 20px;
     }
 }

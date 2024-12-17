@@ -228,7 +228,7 @@ export default {
     font-weight: 500;
     line-height: 24px;
     color: #ffffff80;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__greeting {
@@ -236,7 +236,7 @@ export default {
     font-weight: 400;
     line-height: 16px;
     color: #ffffff80;
-    color: var(--foreground-header);  
+    color: var(--foreground);  
   }
 }
 
@@ -244,7 +244,7 @@ export default {
   width: 100%;
   height: auto;
   margin-top: 18px;
-  background-color: #181818;
+  background-color: #0a0a09;
   background-color: var(--game);
   border-radius: 10px;
   padding: 22px 18px;
@@ -266,7 +266,7 @@ export default {
     display: flex;
     align-items: center;
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-game);
     font-size: 20px; 
   }
 
@@ -274,7 +274,7 @@ export default {
     margin-left: 15px;
     cursor: pointer;
     color: #ffffff80;
-    color: var(--foreground-league);
+    color: var(--foreground-game);
     opacity: 0.5;
   }
 
@@ -287,11 +287,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
+    background-color: #181818;
     background-color: var(--background);
     border: none;
     border-radius: 18px;
-    color: #0a0a0a;
+    color: #ffffff;
     color: var(--foreground-header); 
     padding: 7px;
     white-space: nowrap;
@@ -300,7 +300,7 @@ export default {
   }
 
   &__icon {
-    fill: #181818;
+    fill: #ffffff;
     fill: var(--foreground-game);
     align-items: center;
   }
@@ -312,14 +312,14 @@ export default {
 
   &__text {
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     font-size: 16px;
     padding-bottom: 10px;
   }
 
   &__card {
     width: 100%;
-    background-color: #181818;
+    background-color: #0a0a09;
     background-color: var(--game);
     padding: 18px 8px;
     padding-top: 8px;
@@ -339,7 +339,7 @@ export default {
   }
 
   &__icon { 
-    fill: #181818;
+    fill: #ffffff;
     fill: var(--foreground-game);
     align-items: center;
   }

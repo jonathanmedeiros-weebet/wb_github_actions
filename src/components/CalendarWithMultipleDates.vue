@@ -92,7 +92,7 @@ export default {
       return dateFormatInMonthAndYear(this.finalDateSelected) === this.finalMonthAndYear
     },
     useHexColors() {
-      return isAndroid5() ? '#0be58e' : 'var(--highlight)';
+      return isAndroid5() ? '#35cd96' : 'var(--highlight)';
     }
   },
   methods: {
@@ -174,7 +174,7 @@ export default {
     font-size: 16px;
     font-weight: 500;
     padding: 10px;
-    color: #ffffff;
+    color: #35cd96;
     color: var(--highlight);
   }
 
@@ -198,9 +198,9 @@ export default {
     padding: 10px 24px;
 
     color: #ffffff;
-    color: var(--foreground-header);
-    background: #0a0a0a;
-    background: var(--color-background);
+    color: var(--foreground);
+    background: #181818;
+    background: var(--background);
   }
 
   &__weeks {
@@ -224,13 +224,13 @@ export default {
     align-items: center;
     font-size: 14px;
     font-weight: 500;
-    color: #ffffff;
+    color: #35cd96;
     color: var(--highlight);
 
     &--selected {
-      background: #0be58e;
+      background: #35cd96;
       background: var(--highlight);
-      color: #181818;
+      color: #ffffff;
       color: var(--foreground-inputs-odds);
       border-radius: 50px;
     }

@@ -256,7 +256,7 @@ export default {
 
 .reckoning {
   color: #ffffff;
-  color: var(--foreground-header);
+  color: var(--foreground);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -276,7 +276,7 @@ export default {
   height: 30px;
   opacity: 0.5;
   color: #ffffff;
-  color: var(--foreground-header);
+  color: var(--foreground);
   background-color: #FFFFFF0D;
   padding: 10px;
   display: flex;
@@ -293,7 +293,7 @@ export default {
 
   &__title {
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     display: flex;
@@ -329,7 +329,7 @@ export default {
 
   &__icon-add {
     padding: 1px;
-    fill: #0be58e;;
+    fill: #35cd96;
     fill: var(--highlight);
   }
 
@@ -359,7 +359,7 @@ export default {
   }
 
   &__icon {
-    fill: #0be58e;
+    fill: #35cd96;
     fill: var(--highlight);
     margin-right: 5px;
   }
@@ -374,7 +374,7 @@ export default {
     width: 100%;
     height: 1px;
     background: #ffffff;
-    background: var(--foreground-league);
+    background: var(--foreground);
     opacity: 0.1;
     margin-top: 5px;
   }
@@ -419,7 +419,7 @@ export default {
   }
 
   &__icon {
-    fill: #0be58e;
+    fill: #35cd96;
     fill: var(--highlight);
     margin-right: 5px;
   }

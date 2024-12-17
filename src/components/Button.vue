@@ -62,29 +62,29 @@ export default {
   font-weight: 400;
   line-height: 14px;
 
-  color: #0a0a0a;
+  color: #181818;
   color: var(--foreground-highlight);
-  background: #0be58e;
+  background: #35cd96;
   background: var(--highlight);
   
   &--primary {
-    color: #0a0a0a;
+    color: #181818;
     color: var(--foreground-highlight);
-    background: #0be58e;
+    background: #35cd96;
     background: var(--highlight);
   }
 
   &--secondary {
     color: #ffffff;
     color: var(--foreground-league);
-    background: #0a0a0a;
-    background: var(--background);
+    background: #0a0a09;
+    background: var(--league);
   }
   &--secondary-light {
     color: #ffffff;
-    color: var(--foreground-league);
-    background: #181818;
-    background: var(--game);
+    color: var(--foreground-header);
+    background: #0a0a09;
+    background: var(--header);
   }
 }
 

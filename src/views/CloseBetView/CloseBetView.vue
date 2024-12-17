@@ -116,7 +116,7 @@
               class="button-share"
             >
               <template #icon-left>
-                <IconShare :size="20" color="var(--foreground-league)"/>
+                <IconShare :size="20" color="var(--foreground-header)"/>
               </template>
             </w-button>
             <div class="button-spacer"></div>
@@ -424,7 +424,7 @@ export default {
     flex-direction: column;
     padding: 19px 15px;
     width: 100%;
-    background: #181818;
+    background: #0a0a09;
     background: var(--game);
     border-radius: 2px;
   }
@@ -437,11 +437,11 @@ export default {
   &__text {
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-game);
   }
   &__date {
     color: #ffffff80;
-    color: var(--foreground-league-input)
+    color: var(--foreground-game)
   }
 }
 
@@ -472,7 +472,7 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-game);
   }
 
   &__strikethrough {
@@ -490,7 +490,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  background: #0a0a0a;
+  background: #181818;
   background: var(--background);
   border-radius: 4px;
   margin-bottom: -9px;
@@ -505,7 +505,7 @@ export default {
   &__team {
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     display: flex;          
     align-items: center;   
   }
@@ -516,23 +516,23 @@ export default {
 
   &__date, &__text, &__result {
     font-size: 14px;
-    color: #bbbbbb;
+    color: #ffffff;
+    color: var(--foreground);
     justify-content: space-between;
-    color: var(--foreground-header);
     font-weight: 500;
   }
 
   &__select {
     font-size: 14px;
-    color: #bbbbbb;
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--foreground);
     font-weight: 500;
   }
 
   &__odd {
     font-size: 14px;
-    color: #cccccc;
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--foreground);
     font-weight: 500;
   }
 
@@ -562,7 +562,8 @@ export default {
 }
 
 .button-share {
-  border: 1px solid white;
+  border: 1px solid #0a0a09;
+  border: 1px solid var(--header);
 }
 
 .finish {

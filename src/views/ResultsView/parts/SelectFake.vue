@@ -37,6 +37,7 @@ export default {
     justify-content: space-between;
     background-color: #181818;
     background-color: var(--inputs-odds);
+    border: 0.5px solid #ffffff;
     border: 0.5px solid var(--foreground-inputs-odds);
     padding: 18px 16px;
 
@@ -47,7 +48,7 @@ export default {
         font-weight: 400;
         line-height: 23.44px;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-league);
 
         &--large {
             font-size: 20px;

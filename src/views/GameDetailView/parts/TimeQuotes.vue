@@ -38,7 +38,7 @@
                     </template>
                     <template v-else>
                         <span class="collapse__label">{{ odd.label }}</span>
-                        <IconLock :size="14" color="var(--foreground-league-input)"/>
+                        <IconLock :size="14" color="var(--foreground-league)"/>
                     </template>
                 </button>
             </div>
@@ -125,7 +125,7 @@ export default {
     position: relative;
     z-index: 1;
     height: calc(100vh - 100px);
-    background: #0a0a0a;
+    background: #181818;
     background: var(--background);
     &__message {
         display: flex;
@@ -133,7 +133,7 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-league);
     }
 }
 
@@ -144,7 +144,7 @@ export default {
         align-items: flex-start;
         gap: 10px;
         padding: 13px 16px;
-        background: #181818;
+        background: #0a0a09;
         background: var(--game);
 
         &--grid {
@@ -156,7 +156,7 @@ export default {
     &__option {
         height: 54px;
         width: 100%;
-        background: #0a0a0a;
+        background: #181818;
         background-color: var(--inputs-odds);
         border: none;
         border-radius: 4px;
@@ -176,7 +176,7 @@ export default {
         }
 
         &--selected {
-            background: #0be58e;
+            background: #35cd96;
             background: var(--highlight);
         }
     }
@@ -213,7 +213,7 @@ export default {
 
     &__option--selected &__label,
     &__option--selected &__value {
-        color: #0a0a0a;
+        color: #181818;
         color: var(--background);
     }
 
@@ -223,7 +223,7 @@ export default {
 
     &__label {
         overflow: hidden;
-        color: #f2f2f280;
+        color: #ffffff80;
         color: var(--foreground-inputs-odds);
         text-overflow: ellipsis;
         font-size: 12px;
@@ -243,6 +243,7 @@ export default {
 }
 
 ::v-deep .collapse__item {
+    background: #0a0a09;
     background: var(--game);
     padding: 13px 24px;
 }

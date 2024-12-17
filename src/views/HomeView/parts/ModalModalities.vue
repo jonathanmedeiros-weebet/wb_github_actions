@@ -72,7 +72,7 @@ export default {
 .modal-modalities {
     &__title {
         color: #FFFFFF80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-header);
         font-size: 16px;
         font-weight: 500;
     }
@@ -93,7 +93,7 @@ export default {
         margin-top: 20px;
 
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground-header);
         font-size: 16px;
         font-weight: 400;
     }

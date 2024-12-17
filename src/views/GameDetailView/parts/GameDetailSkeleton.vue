@@ -69,10 +69,10 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #0a0a0a;
+        background: #181818;
         background: var(--background);
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground);
     }
 
     &__quotes {

@@ -137,7 +137,7 @@ export default {
       return !['email', 'number', 'date', 'password'].includes(this.initType);
     },
     useHexColors() {
-      const color = isAndroid5() ? '#fffff80' : 'var(--foreground-inputs-odds)';
+      const color = isAndroid5() ? '#ffffff80' : 'var(--foreground-inputs-odds)';
       return color;
       
     }
@@ -165,6 +165,12 @@ input {
   color: var(--foreground-inputs-odds);
 }
 
+input::placeholder {
+  color: #ffffff80;
+  color: var(--foreground-inputs-odds);
+  opacity: 0.55;
+}
+
 .input {
   display: flex;
   flex-direction: column;
@@ -174,7 +180,7 @@ input {
     font-weight: 400;
     font-size: 16px;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     margin-bottom: 8px;
   }
 
@@ -185,12 +191,12 @@ input {
     background-color: #181818;
     background-color: var(--inputs-odds);
     border-radius: 5px;
-    border: 2px solid #181818;
+    border: 2px solid #ffffff;
     border: 0.5px solid var(--foreground-inputs-odds);
     transition: 0.5s;
     
     &--focused {
-      border-color: #0be58e;
+      border-color: #35cd96;
       border-color: var(--highlight);
     }
   }
@@ -216,6 +222,7 @@ input {
     color: #ffffff;
     color: var(--foreground-inputs-odds);
     padding-left: 10px;
+    background: #181818;
     background: var(--inputs-odds);
   }
 }

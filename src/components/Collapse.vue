@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             collapsed: this.initCollapsed,
-            iconColor: 'var(--foreground-sidebars)'
+            iconColor: 'var(--foreground-league)'
         }
     },
     computed: {
@@ -57,7 +57,7 @@ export default {
         align-items: center;
         height: 40px;
         padding: 8px 16px;
-        background: #181818;
+        background: #0a0a09;
         background: var(--league);
         color: #ffffff;
         color: var(--foreground-league);

@@ -97,8 +97,8 @@ export default {
 .modal {
   display: flex;
   flex-direction: column;
-  background-color: #181818;
-  background: var(--inputs-odds);
+  background-color: #0a0a09;
+  background: var(--header);
   border-radius: 24px 24px 0px 0px;
   width: 100%;
   height: auto;
@@ -115,8 +115,8 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-top: 18px;
-    background-color: #0a0a0a;
-    background-color: var(--background);
+    background-color: #ffffff;
+    background-color: var(--foreground-header);
     width: 49px;
     height: 5px;
     border-radius: 10px;
@@ -126,10 +126,10 @@ export default {
     display: flex;
     align-items: center;  
     justify-content: center; 
-    background-color: #181818;
-    background-color: var(--inputs-odds);
+    background-color: #0a0a09;
+    background-color: var(--header);
     color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: var(--foreground-header);
     border: none;
     font-size: 15px;
     margin-left: auto;

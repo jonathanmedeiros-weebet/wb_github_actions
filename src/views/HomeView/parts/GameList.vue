@@ -142,6 +142,8 @@ export default {
         justify-content: flex-end;
         align-items: center;
         padding: 0 16px;
+        color: #ffffff;
+        color: var(--foreground);
     }
 
     &__columns {
@@ -156,7 +158,7 @@ export default {
         align-items: center;
         justify-content: center;
         color: #FFFFFF80;
-        color: var(--foreground-league-input);
+        color: var(--foreground);
 
         &--second {
             margin: 0 8px;
@@ -184,7 +186,7 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground);
     }
 }
 </style>

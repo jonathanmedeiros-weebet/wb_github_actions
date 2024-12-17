@@ -371,7 +371,10 @@ export default {
 }
 .code {
   border-radius: 4px;
-  background: #181818;
+  background: #0a0a09;
+  background-color: var(--header);
+  color: #ffffff;
+  color: var(--foreground-header);
   display: flex;
   width: 100%;
   padding: 13px;
@@ -386,9 +389,7 @@ export default {
   &__number {
     font-size: 20px;
   }
-  
 }
-
 
 .bet {
   padding: 8px;
@@ -483,6 +484,7 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    background: #181818;
     background: var(--inputs-odds);
     color: rgba(255, 255, 255, 0.5019607843);
     color: var(--foreground-inputs-odds);
@@ -531,7 +533,7 @@ export default {
     width: 15px;
     height: 15px;
     border: 1px solid #ffffff80;
-    border: 1px solid var(--foreground-league-input);
+    border: 1px solid var(--foreground);
     background-color: transparent;
     cursor: pointer;
     border-radius: 3px;
@@ -539,7 +541,7 @@ export default {
   }
   
   &__checkbox:checked {
-    background-color: #0be58e;
+    background-color: #35cd96;
     background-color: var(--highlight);
   }
   &__checkbox::after {

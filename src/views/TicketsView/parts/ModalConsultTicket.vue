@@ -57,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 .modal-consult-ticket {
   &__title {
+    color: #ffffff;
     color: var(--foreground-header);
     font-size: 16px;
     font-weight: 500;
@@ -70,7 +71,8 @@ export default {
   }
 
   &__text {
-    color: var(--foreground-league-input);
+    color: #ffffff;
+    color: var(--foreground-header);
     font-size: 14px;
   }
 }

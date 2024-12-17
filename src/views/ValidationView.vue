@@ -96,7 +96,7 @@ export default {
 
   &__text {
     color: #ffffff80;
-    color: var(--foreground-header); 
+    color: var(--foreground); 
     font-size: 14px;
     text-align: center;
   }

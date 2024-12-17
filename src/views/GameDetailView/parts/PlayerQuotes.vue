@@ -50,7 +50,7 @@
                                 />
                             </template>
                         
-                            <IconLock v-else :size="14" color="var(--foreground-league-input)"/>
+                            <IconLock v-else :size="14" color="var(--foreground-league)"/>
                         </button>
                     </div>
                 </div>
@@ -139,7 +139,7 @@ export default {
     position: relative;
     z-index: 1;
     height: calc(100vh - 100px);
-    background: #0a0a0a;
+    background: #181818;
     background: var(--background);
 
     &__message {
@@ -148,7 +148,7 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-league);
     }
 }
 
@@ -161,7 +161,7 @@ export default {
         gap: 5px;
 
         padding: 5px;
-        background: #ffffff80;
+        background: #18181880;
         background: var(--inputs-odds);
 
         &--three-column {
@@ -181,7 +181,7 @@ export default {
 
     &__option {
         min-width: calc(150px / 3);
-        background: #0a0a0a;
+        background: #181818;
         background: var(--background);
         border: none;
         border-radius: 4px;
@@ -196,7 +196,7 @@ export default {
         }
 
         &--selected {
-            background: #0be58e;
+            background: #35cd96;
             background: var(--highlight);
         }
     }
@@ -239,6 +239,7 @@ export default {
 }
 
 ::v-deep .collapse__item {
+    background: #0a0a09;
     background: var(--game);
     padding: 13px 24px;
 }

@@ -65,7 +65,6 @@ export default {
         justify-content: flex-start;
 
         color: #ffffff;
-        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
         color: #ffffff80;
@@ -80,7 +79,7 @@ export default {
 
     &__icon {
         color: #ffffff80;
-        color: var(--foreground-header);
+        color: var(--foreground-inputs-odds);
     }
 }
 </style>

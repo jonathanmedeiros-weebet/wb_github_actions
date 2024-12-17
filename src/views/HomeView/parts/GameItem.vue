@@ -184,7 +184,7 @@ export default {
     justify-content: space-between;
     align-items: flex-start;
     padding: 13px 16px;
-    background: #181818;
+    background: #0a0a09;
     background: var(--game);
     margin-top: 1px;
 
@@ -226,7 +226,9 @@ export default {
         font-size: 12px;
         line-height: 12px;
         font-weight: 400;
-        color: #666666;
+        color: #ffffff;
+        color: var(--foreground-game);
+        opacity: 0.6;
         margin-top: 8px;
     }
 
@@ -234,10 +236,10 @@ export default {
         font-size: 10px;
         line-height: 10px;
         font-weight: 400;
-        color: #0be58e;
+        color: #35cd96;
         color: var(--highlight);
 
-        border: 0.5px solid #0be58e;
+        border: 0.5px solid #35cd96;
         border: 0.5px solid var(--highlight);
         border-radius: 2px;
         padding: 0 5px;
@@ -265,14 +267,14 @@ export default {
         width: 58px;
         height: 54px;
         border-radius: 4px;
-        background: #0a0a0a;
+        background: #181818;
         background: var(--inputs-odds);
-        color: #ffff;
+        color: #ffffff;
         color: var(--foreground-inputs-odds);
         &--selected {
-            background: #0be58e;
+            background: #35cd96;
             background: var(--highlight);
-            color: #0a0a0a;
+            color: #181818;
             color: var(--background);
         }
     }

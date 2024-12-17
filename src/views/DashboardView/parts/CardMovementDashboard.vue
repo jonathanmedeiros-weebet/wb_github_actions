@@ -85,7 +85,7 @@ export default {
     &__date {
         font-size: 14px;
         color: #ffffff80;        
-        color: var(--foreground-league-input);        
+        color: var(--foreground-input-odds);        
     }
 
     &__subtitle {
@@ -97,7 +97,7 @@ export default {
         justify-content: center;
         align-items: center;
         margin-right: 13px;
-        background-color: #0a0a0a;
+        background-color: #181818;
         background-color: var(--background);
         width: 24px;
         height: 24px;

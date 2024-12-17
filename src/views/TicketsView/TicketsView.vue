@@ -7,7 +7,7 @@
         <div class="game">
           <span class="game__select">Jogos selecionados</span>
           <div class="game__delete" @click="handleAllRemove">
-            <IconDelete class="game__icon" />
+            <IconDelete color="var(--foreground)" class="game__icon" />
             <span class="game__text">Excluir todos</span>
           </div>
         </div>
@@ -20,10 +20,10 @@
           <div class="bet__header">
             <span class="bet__team">
               <IconLive v-if="item.live" class="bet__icon-live"/>
-              <component :is="item.icon" :size="14" class="bet__icon-ball"/>
+              <component :is="item.icon" :size="14" color="var(--foreground)" class="bet__icon-ball"/>
               {{ item.gameName }}
             </span>
-            <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
+            <IconClose color="var(--foreground)" class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
           </div>
           <div class="bet__info">
             <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
@@ -404,8 +404,8 @@ export default {
   &__message {
     margin-top: 10px;
     font-size: 12px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 }
 
@@ -421,13 +421,13 @@ export default {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: #ffff;
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__text {
-    color: #ffff;
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__delete {
@@ -451,8 +451,8 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative; 
-  color: #ffff;
-  color: var(--foreground-header);
+  color: #ffffff;
+  color: var(--foreground);
 
   &::after { 
     content: '';
@@ -520,8 +520,8 @@ export default {
 
   &__balance-text {
     font-size: 14px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__balance {
@@ -536,6 +536,7 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    background: #181818;
     background: var(--inputs-odds);
     color: #ffffff80;
     color: var(--foreground-inputs-odds);
@@ -562,23 +563,24 @@ export default {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__ganhos {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__checkbox {
     appearance: none;
     width: 15px;
     height: 15px;
-    border: 1px solid #ffffff80;
+    border: 1px solid #ffffff;
+    border: 1px solid var(--foreground);
     background-color: transparent;
     cursor: pointer;
     border-radius: 3px;
@@ -587,7 +589,7 @@ export default {
   }
 
   &__checkbox:checked {
-    background-color: #0be58e;
+    background-color: #35cd96;
     background-color: var(--highlight);
   }
 
@@ -598,15 +600,15 @@ export default {
     left: 4px;
     width: 5px;
     height: 9px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__alteracao {
     display: flex;
     align-items: center;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__finalizar {

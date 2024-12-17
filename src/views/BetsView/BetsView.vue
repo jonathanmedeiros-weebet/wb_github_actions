@@ -577,7 +577,7 @@ export default {
 
   &__count-results {
     color: #ffffff80;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__buttons-filters {
@@ -612,7 +612,7 @@ export default {
 
   &__text-light {
     color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: var(--foreground);
   }
   
 }
@@ -651,6 +651,7 @@ export default {
 }
 #btn-view,
 #btn-cancel {
+  color: #ffffff;
   color: var(--foreground-header);
 }
 

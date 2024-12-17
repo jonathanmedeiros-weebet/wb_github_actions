@@ -17,7 +17,7 @@
     <div class="movements__container">
       <span class="date">
         {{ dateFormatedWithYear }}
-        <IconClose class="date__close" @click.native="resetDateToCurrent" />
+        <IconClose class="date__close" color="var(--foreground)" @click.native="resetDateToCurrent"/>
       </span>
       <div v-if="isBalanceDataEmpty" class="no-data">
         Nenhuma informação nesse período
@@ -172,7 +172,7 @@ export default {
 
 .no-data {
   color: #ffffff80;
-  color: var(--foreground-header);
+  color: var(--foreground);
 }
 
 .date {
@@ -182,7 +182,7 @@ export default {
   height: 30px;
   opacity: 0.5;
   color: #ffffff;
-  color: var(--foreground-header);
+  color: var(--foreground);
   padding: 0px 10px;
   display: flex;
   align-items: center;
@@ -204,7 +204,7 @@ export default {
 
   &__date {
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

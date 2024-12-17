@@ -111,8 +111,8 @@ export default {
   flex-direction: column;
 
   color: #ffffff;
-  color: var(--foreground-league);
-  background: #0a0a0a;
+  color: var(--foreground);
+  background: #181818;
   background: var(--background);
 
   &__header {

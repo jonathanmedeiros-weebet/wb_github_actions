@@ -129,7 +129,7 @@ export default {
     flex-direction: column;
     padding: 25px 12px;
     border-radius: 8px;
-    background: #181818;
+    background: #0a0a09;
     background: var(--game);
     
     &__body {
