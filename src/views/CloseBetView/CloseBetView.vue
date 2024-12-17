@@ -150,9 +150,13 @@
       @close="handleCloseModalSharedBet"
       @click="handleShared"
     />
-    <div ref="bet-shared">
-      <BetSharedPreview v-if="bet" :bet="bet"/>
+    
+    <div style="position: absolute; top: -9999px; left: -9999px;">
+      <div v-if="bet" ref="bet-shared" >
+        <BetSharedPreview :bet="bet" />
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -220,6 +224,7 @@ export default {
     };
   },
   activated() {
+
     this.fetchBetDetails();
   },
   computed: {
