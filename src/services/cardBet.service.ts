@@ -45,6 +45,32 @@ export const create = async (payload: any) => {
     const url = `${lokiUrl}/card-bets`;
     const response: any = await axiosInstance().post(url, payload);
     return response.results; 
+};
+
+export const requestWithdrawal = async (params: any) => {
+    const { lokiUrl } = useConfigClient();
+    let url = `${lokiUrl}/card-bets/withdrawals`;
+
+    const urlParams = new URLSearchParams();
+
+    urlParams.append('data-inicial', params.initialDate);
+    urlParams.append('data-final', params.endDate);
+    urlParams.append('aprovado', params.status);
+
+    url += `?${urlParams.toString()}`;
+
+    const response: any = await axiosInstance().get(url);
+    return response.results;
+};
+
+export const withdrawalPayment = async (id: any, version: any) => {
+    const { lokiUrl } = useConfigClient();
+
+    const url = `${lokiUrl}/card-bets/${id}/request-withdrawal`;
+    const payload = { id: id, version: version };
+
+    const response: any = await axiosInstance().post(url, payload);
+    return response.results; 
 }
 
 export const sharedCard = async (chave: any, pin: any) => {
