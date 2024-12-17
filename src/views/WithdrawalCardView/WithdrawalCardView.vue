@@ -36,6 +36,7 @@
         @closeModal="handleCloseCalendarModal"
         @change="handleCalendar"
       />
+      
       <div class="withdrawal-card___content-filters" v-for="(item, index) in info" :key="index">
         <div v-if="item.cartao_aposta">
           <card-bets>
