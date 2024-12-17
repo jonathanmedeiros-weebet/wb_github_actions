@@ -267,7 +267,20 @@
         "restricaoDeLocalizacao": "This feature is available only to users in Brazil.",
         "lastAccesses": "Last accesses",
         "action": "Action",
-        "tax": "Tax"
+        "tax": "Tax",
+        "validatePhone": "Phone Verification",
+        "savedSuccessfully":  "Saved successfully!"
+    },
+    "bankAccounts": {
+        "title" : "Cuentas bancarias",
+        "Bank":"Bank",
+        "OptionBank": "Select the bank",
+        "AgencyNumber": "Agency number",
+        "AccountNumber": "Account number",
+        "AccountType": "Account type",
+        "CurrentAccount": "Current account",
+        "SavingsAccount": "Savings account",
+        "optionAccountType":"Select account type"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -461,6 +474,7 @@
         "metodosDePagamento": "Payment methods",
         "quemSomos": "Who we are",
         "downloadApp": "Download app",
+        "installPwa": "Install Client APP",
         "regras": "Rules",
         "resultados": "Results",
         "politicaDePrivacidade": "Privacy Policy",

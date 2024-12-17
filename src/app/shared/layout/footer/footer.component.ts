@@ -8,6 +8,7 @@ import {ParametrosLocaisService} from '../../services/parametros-locais.service'
 import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { CartaoCadastroModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../modals';
+import { pwaInstallHandler } from 'pwa-install-handler';
 
 declare let anj_cd823ed6_bffb_4764_9e1b_05566f369c8c: any;
 
@@ -49,6 +50,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
     sharedUrl: string;
     linkYoutube;
     isToTopBtnVisible;
+    displayPwaInstallButton = false;
 
     constructor(
         private authService: AuthService,
@@ -58,6 +60,8 @@ export class FooterComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit() {
+        pwaInstallHandler.addListener((canInstall) => this.displayPwaInstallButton = canInstall);
+
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
         this.hasApiPagamentos = Boolean(this.paramsLocais.getOpcoes().available_payment_methods.length);
@@ -255,5 +259,9 @@ export class FooterComponent implements OnInit, AfterViewInit {
         }
 
         return cssClass;
+    }
+
+    installPwa() {
+        pwaInstallHandler.install();
     }
 }

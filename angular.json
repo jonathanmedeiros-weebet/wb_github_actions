@@ -30,13 +30,14 @@
                         "tsConfig": "tsconfig.app.json",
                         "polyfills": "src/polyfills.ts",
                         "assets": [
-                            "src/assets",
-                            "src/locale",
-                            "src/favicon.ico",
-                            "src/param",
-                            "src/bilhete",
-                            "src/apple-touch-icon.png",
-                            "src/apple-touch-icon-precomposed.png"
+                          "src/assets",
+                          "src/locale",
+                          "src/favicon.ico",
+                          "src/param",
+                          "src/bilhete",
+                          "src/apple-touch-icon.png",
+                          "src/apple-touch-icon-precomposed.png",
+                          "src/manifest.webmanifest"
                         ],
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.css",
@@ -55,7 +56,9 @@
                             "node_modules/jquery/dist/jquery.min.js",
                             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                             "node_modules/jstree/dist/jstree.min.js"
-                        ]
+                        ],
+                        "serviceWorker": true,
+                        "ngswConfigPath": "ngsw-config.json"
                     },
                     "configurations": {
                         "production": {
@@ -112,9 +115,10 @@
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
                         "assets": [
-                            "src/favicon.ico",
-                            "src/assets",
-                            "src/locale"
+                          "src/favicon.ico",
+                          "src/assets",
+                          "src/locale",
+                          "src/manifest.webmanifest"
                         ],
                         "styles": [
                             "src/styles.css"

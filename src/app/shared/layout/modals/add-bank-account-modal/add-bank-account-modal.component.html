@@ -1,0 +1,68 @@
+<div id="default-content">
+    <div class="mobile-modal-header" *ngIf="showHeader">
+        <a (click)="toBack()" class="botao-esquerdo">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+        <div class="titulo">{{'bankAccounts.title' | translate}}</div>
+        <div class="botao-direito"></div>
+    </div>
+
+    <div class="content-header hide-mobile">
+        <h2>{{'bankAccounts.title' | translate}}</h2>
+
+        <a type="button" class="btn-close" aria-label="Close" (click)="toBack()">
+            <i class="fa fa-times"></i>
+        </a>
+    </div>
+    
+    <div class="content-body">
+        <div class="content">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group input-md placeholder-active">
+                    <select formControlName="bank" class="form-control inverted-out">
+                        <option value="">{{'bankAccounts.OptionBank' | translate}}</option>
+                        <option *ngFor="let bank of banks" [value]="bank.id"
+                            [selected]="bank.id === bankSelected">{{bank.nome}}</option>
+                    </select>
+                    <label for="bank">{{'bankAccounts.Bank' | translate}}</label>
+                    <app-error-msg [control]="form.get('bank')"></app-error-msg>
+                </div>
+
+                <div class="form-group input-md">
+                    <input type="text" formControlName="agencyNumber" class="form-control inverted-out" maxlength="10" required pattern="^\S*$">
+                    <label class="label">{{'bankAccounts.AgencyNumber' | translate}}</label>
+                    <app-error-msg [control]="form.get('agencyNumber')"></app-error-msg>
+                </div>
+        
+                <div class="form-group input-md">
+                    <input type="text" formControlName="accountNumber" class="form-control inverted-out" maxlength="15" required pattern="^\S*$">
+                    <label class="label">{{'bankAccounts.AccountNumber' | translate}}</label>
+                    <app-error-msg [control]="form.get('accountNumber')"></app-error-msg>
+                </div>
+
+                <div class="form-group input-md placeholder-active">
+                    <select formControlName="accountType" class="form-control inverted-out">
+                        <option value="">{{'bankAccounts.optionAccountType' | translate}}</option>
+                        <option value="corrente">{{'bankAccounts.CurrentAccount' | translate}}</option>
+                        <option value="poupanca">{{'bankAccounts.SavingsAccount' | translate}}</option>
+                    </select>
+                    <label for="bank">{{'bankAccounts.AccountType' | translate}}</label>
+                    <app-error-msg [control]="form.get('accountType')"></app-error-msg>
+                </div>
+               
+                <div class="buttons">
+                    <button class="btn btn-custom2 w-150 mr-4 btn-cancell" type="button" (click)="resetForm()">
+                        {{'geral.cancelar' | translate}}
+                    </button>
+                    <button
+                        class="btn btn-custom w-150 btn-save"
+                        type="submit"
+                        [disabled]="form.invalid"
+                    >
+                        {{'geral.salvar' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
