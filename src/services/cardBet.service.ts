@@ -27,3 +27,13 @@ export const requestWithdrawal = async (params: any) => {
     const response: any = await axiosInstance().get(url);
     return response.results;
 };
+
+export const withdrawalPayment = async (id: any, version: any) => {
+    const { lokiUrl } = useConfigClient();
+
+    const url = `${lokiUrl}/card-bets/${id}/request-withdrawal`;
+    const payload = { id: id, version: version };
+
+    const response: any = await axiosInstance().post(url, payload);
+    return response.results; 
+};
