@@ -292,7 +292,7 @@ export default {
     border: none;
     border-radius: 18px;
     color: #ffffff;
-    color: var(--foreground-header); 
+    color: var(--foreground); 
     padding: 7px;
     white-space: nowrap;
     font-size: 10px;
@@ -301,7 +301,7 @@ export default {
 
   &__icon {
     fill: #ffffff;
-    fill: var(--foreground-game);
+    fill: var(--foreground);
     align-items: center;
   }
 }
