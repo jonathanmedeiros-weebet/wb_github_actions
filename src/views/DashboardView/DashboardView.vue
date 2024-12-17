@@ -191,32 +191,43 @@ export default {
             }
             detailedReport(params)
                 .then(resp => {
-                    const dataCategorias = [
-                        {
+                    const { options } = useConfigClient();
+                    const dataCategorias = [];
+
+                    if (options.esporte) {
+                        dataCategorias.push({
                             title: "esporte",
-                            value: parseFloat(resp[0]?.esporte.apostado_normal ?? 0)
-                        },
-                        {
+                            value: parseFloat(resp?.esporte.apostado_normal ?? 0)
+                        });
+                    }
+                    if (options.aovivo) {
+                        dataCategorias.push({
                             title: "aovivo",
-                            value: parseFloat(resp[0]?.esporte.aovivo ?? 0)
-                        },
-                        {
+                            value: parseFloat(resp?.esporte.aovivo ?? 0)
+                        });
+                    }
+                    if (options.desafio) {
+                        dataCategorias.push({
                             title: "desafio",
-                            value: parseFloat(resp[0]?.desafio.apostado ?? 0)
-                        },
-                        {
+                            value: parseFloat(resp?.desafio.apostado ?? 0)
+                        });
+                    }
+                    if (options.acumuladao) {
+                        dataCategorias.push({
                             title: "acumuladao",
-                            value: parseFloat(resp[0]?.acumuladao.apostado ?? 0)
-                        },
-                        {
+                            value: parseFloat(resp?.acumuladao.apostado ?? 0)
+                        });
+                    }
+                    if (options.loterias) {
+                        dataCategorias.push({
                             title: "loteria",
-                            value: parseFloat(resp[0]?.loteria.apostado ?? 0)
-                        }
-                    ];
+                            value: parseFloat(resp?.loteria.apostado ?? 0)
+                        });
+                    }
 
                     this.entryData.categories = [];
                     this.entryData.categories = dataCategorias;
-                    this.entryData.balance = parseFloat(resp[0]?.total_entradas ?? 0)
+                    this.entryData.balance = parseFloat(resp?.total_entradas ?? 0)
                 })
                 .catch(error => {
                     this.toastStore.setToastConfig({
