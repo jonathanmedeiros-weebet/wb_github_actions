@@ -103,7 +103,6 @@ import Toast from '@/components/Toast.vue'
 import { requestWithdrawal, withdrawalPayment } from '@/services'
 import { ToastType } from '@/enums';
 import scrollMixin from '@/mixins/scroll.mixin'
-import ModalFilterStatus from './parts/ModalFilterStatus.vue'
 import ModalConfirmPayment from './parts/ModalConfirmPayment.vue' 
 
 export default {
@@ -117,7 +116,6 @@ export default {
     CardBets,
     TagButton,
     ModalCalendar,
-    ModalFilterStatus,
     Toast,
     ModalConfirmPayment,
     WSelect
