@@ -93,7 +93,7 @@ import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 import { formatDateTimeBR, convertInMomentInstance, formatCurrency, now } from '@/utilities'
 import { findCardBet } from '@/services'
-import { useToastStore } from '@/stores'
+import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums';
 
@@ -113,7 +113,7 @@ export default {
     return {
       showResults: false,
       showModalCalendar: false,
-      dateFilter: now(),
+      dateFilter: null,
       finalDateFilter: now(),
       gambler: '',
       cards: [],
@@ -124,7 +124,11 @@ export default {
         sort: ''
       },
       toastStore: useToastStore(),
+      configClientStore: useConfigClient()
     }
+  },
+  created() {
+    this.dateFilter = this.configClientStore.firstDayOfTheWeek;
   },
   computed: {
     dateFilterView() {

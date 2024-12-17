@@ -15,9 +15,9 @@
       <w-select
         label="Status"
         name="status"
-        v-model="selectedOption"
-        isSelect
-        :options="[{ value: '1', text: 'Aprovado' }, { value: '1', text: 'Não Aprovado' }]"
+        :options="statusOptions"
+        :selectedOption="selectedOption"
+        @change="handleSelectStatus"
       >
       </w-select>
       <w-button
@@ -59,7 +59,12 @@
                     <tr>
                       <td class="table__line--left">Valor: R${{ formatCurrencyMoney(item.valor) }}</td>
                     </tr>
-                    <div class="table__line--payament" v-if="(!item.pago)">
+                    <tr v-if="item.pago">
+                      <td class="table__line--right">
+                        <span class="badge__success">Pago</span>
+                      </td>
+                    </tr>
+                    <div class="table__line--payament" v-if="(!item.pago && Boolean(item.aprovado))">
                       <w-button
                         id="btn-filter"
                         text="Confirmar Pagamento"
@@ -124,12 +129,12 @@ export default {
     return {
       showResults: false,
       showModalCalendar: false,
-      dateFilter: now().startOf('week').add(1, 'days'),
+      dateFilter: null,
       finalDateFilter: now(),
       isModalConfirmPaymentVisible: false, 
       modalItemId: '', 
       modalItemVersion: '', 
-      selectedOption: '',
+      selectedOption: '1',
       info: {
         cartao_aposta: [], 
       },        
@@ -142,7 +147,16 @@ export default {
       configClientStore: useConfigClient(),
     }
   },
+  created() {
+    this.dateFilter = this.configClientStore.firstDayOfTheWeek;
+  },
   computed: {
+    statusOptions() {
+      return [
+        { value: '1', text: 'Aprovado' },
+        { value: '0', text: 'Não Aprovado' }
+      ];
+    },
     dateFilterView() {
       const initialDate = convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY");
       const finalDate = convertInMomentInstance(this.finalDateFilter).format("DD/MM/YYYY");
@@ -150,6 +164,9 @@ export default {
     }
   },
   methods: {
+    handleSelectStatus(value) {
+      this.selectedOption = value;
+    },
     handleOpenWithdrawalCardModal() {
       this.isWithdrawalModalVisible = true;
     },
@@ -259,5 +276,12 @@ export default {
       margin-top: 20px;
     }
   }
+}
+
+.badge__success {
+  border-radius: 20px;
+  padding: 5px 10px;
+  background: var(--highlight);
+  color: var(--foreground-highlight);
 }
 </style>

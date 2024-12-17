@@ -1,7 +1,7 @@
 <template>
   <div class="input">
     <label class="input__label" v-if="label" :for="name">{{ label }}</label>
-    <div class="input__group" :class="{ 'input__group--focused': isFocused }">
+    <div class="input__group">
       <div class="input__icon" v-if="$slots['icon']">
         <slot name="icon"></slot>
       </div>
@@ -10,14 +10,18 @@
         <select
           :id="name"
           :name="name"
-          @input="handleInput"
+          @change="handleChange"
+          v-model="selectedOptionObserve"
           class="input__field"
-          :value="value"
           :readonly="readonly"
-          @focus="handleFocus"
-          @blur="handleBlur"
         >
-          <option v-for="(option, index) in options" :key="index" :value="option.value">{{ option.text }}</option>
+          <option
+            v-for="(option, index) in options"
+            :key="index"
+            :value="option.value"
+          >
+            {{ option.text }}
+          </option>
         </select>
         <div class="input__select-icon"></div> 
       </div>
@@ -37,10 +41,6 @@ export default {
       type: String,
       required: true
     },
-    value: {
-      type: String | Number,
-      default: ''
-    },
     options: {
       type: Array,
       required: true
@@ -48,23 +48,27 @@ export default {
     readonly: {
       type: Boolean,
       default: false
+    },
+    selectedOption: {
+      type: String | Number | null,
+      default: ''
     }
   },
-  data() {
-    return {
-      isFocused: false
-    };
+  computed: {
+    selectedOptionObserve: {
+      get() {
+        console.log(this.selectedOption);
+        return this.selectedOption;
+      },
+      set() {
+        this.$emit('change', event.target.value);
+      }
+    }
   },
   methods: {
-    handleInput(event) {
-      this.$emit('input', event.target.value);
+    handleChange(event) {
+      this.$emit('change', event.target.value);
     },
-    handleFocus() {
-      this.isFocused = true;
-    },
-    handleBlur() {
-      this.isFocused = false;
-    }
   }
 }
 </script>

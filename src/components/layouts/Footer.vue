@@ -45,6 +45,9 @@ export default {
         'reckoning',
         'dashboard',
         'recharge-card',
+        'create-card',
+        'list-cards',
+        'withdrawal-card',
         'movements',
         'results'
       ].includes(this.$route.name)
