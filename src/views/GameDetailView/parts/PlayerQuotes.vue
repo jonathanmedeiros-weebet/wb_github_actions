@@ -4,9 +4,11 @@
 
         <Collapse
             v-else
+            :iconColor="'var(--foreground-game)'"
             :initCollapsed="true"
             v-for="(option, index) in options"
-            :key="index"
+            :key="index" 
+            ref="collapse"
         > 
             <template #title>{{ option.title }}</template>
 
@@ -85,6 +87,10 @@ export default {
             ticketStore: useTicketStore()
         }
     },
+    created() {
+        this.$refs["collapse"].iconColor = '#ffffff';
+        console.log(this.$refs["collapse"].iconColor)
+    },
     computed: {
         hasQuotes() {
             return Boolean(this.quotes.length)
@@ -148,7 +154,7 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-league);
+        color: var(--foreground);
     }
 }
 
@@ -159,11 +165,8 @@ export default {
         justify-content: space-between;
         align-items: flex-start;
         gap: 5px;
-
         padding: 5px;
-        background: #18181880;
-        background: var(--inputs-odds);
-
+        
         &--three-column {
             width: 200px;
         }
@@ -182,10 +185,11 @@ export default {
     &__option {
         min-width: calc(150px / 3);
         background: #181818;
-        background: var(--background);
+        background: var(--inputs-odds);
         border: none;
         border-radius: 4px;
-
+        padding-top: 5px;
+        padding-bottom: 5px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -204,6 +208,7 @@ export default {
     &__option--selected &__label,
     &__option--selected &__value {
         color: #000;
+        color: var(--background);
     }
 
     &__icon-option {
@@ -220,11 +225,13 @@ export default {
         line-height: normal;
         max-width: 100px;
         margin-bottom: 7px;
+        color: #ffffff;
+        color: var(--foreground-game);
     }
 
     &__value {
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground-game);
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
@@ -234,7 +241,10 @@ export default {
     &__item {
         display: flex;
         gap: 5px;
-        
+    }
+    
+    &__item  &__title {
+        color: red;
     }
 }
 
@@ -242,5 +252,8 @@ export default {
     background: #0a0a09;
     background: var(--game);
     padding: 13px 24px;
+}
+::v-deep .collapse__title {
+    color: var(--foreground-game);
 }
 </style>

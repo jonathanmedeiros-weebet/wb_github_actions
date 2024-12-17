@@ -19,12 +19,15 @@ export default {
         initCollapsed: {
             type: Boolean,
             default: false
+        },
+        iconColor: {
+            type: String,
+            default: 'var(--foreground-league)'
         }
     },
     data() {
         return {
             collapsed: this.initCollapsed,
-            iconColor: 'var(--foreground-league)'
         }
     },
     computed: {
@@ -67,12 +70,10 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-
         color: #ffffff;
         color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
-
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;

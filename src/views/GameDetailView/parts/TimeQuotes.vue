@@ -4,6 +4,7 @@
         
         <Collapse
             v-else
+            :iconColor="'var(--foreground-game)'"
             :initCollapsed="true"
             v-for="(option, groupIndex) in options"
             :key="groupIndex"
@@ -133,11 +134,14 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-league);
+        color: var(--foreground);
     }
 }
 
 .collapse {
+    &__title {
+        color: red;
+    }
     &__options {
         display: flex;
         justify-content: space-between;
@@ -246,5 +250,9 @@ export default {
     background: #0a0a09;
     background: var(--game);
     padding: 13px 24px;
+}
+::v-deep .collapse__title {
+    color: #ffffff;
+    color: var(--foreground-game);
 }
 </style>
