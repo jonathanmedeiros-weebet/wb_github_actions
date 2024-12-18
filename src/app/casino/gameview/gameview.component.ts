@@ -419,7 +419,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
                         this.gameProviderName = response.gameFornecedorExibicao;
-                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
@@ -965,7 +965,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
             ...fornecedor,
-            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+            imagem: `https://wb-assets.com/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
         }));
     }
 
@@ -976,7 +976,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
             ...fornecedor,
-            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+            imagem: `https://wb-assets.com/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
         }));
     }
 
