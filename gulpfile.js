@@ -611,6 +611,7 @@ gulp.task('lbbet.wee.bet', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
         host: "lbbet.wee.bet",
+        shared_url: "lbbet.com.br",
         banca: "LBBET",
         styles: "--header: #3aaa35; --foreground-header: #fff; --sidebar-right:#3aaa35; --foreground-sidebar-right: #fff; --sidebar-left: #3aaa35; --foreground-sidebar-left: #fff; --odds: #5e5e5e;--foreground-highlight:#fff;",
     });
@@ -2040,15 +2041,6 @@ gulp.task('newbets.com.br', function (done) {
         server: "front2.wee.bet",
         host: "newbets.com.br",
         banca: "NEW BETS",
-        styles: ""
-    });
-});
-
-gulp.task('jupterbet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jupterbet.com",
-        banca: "JUPTERBET",
         styles: ""
     });
 });

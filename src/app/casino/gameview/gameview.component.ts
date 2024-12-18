@@ -169,6 +169,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
         }
 
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'none');
+        }
+
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
         }
@@ -510,6 +515,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (liveChatBtn) {
                 this.renderer.setStyle(liveChatBtn, 'display', 'block');
             }
+
+            const zendeskChat = this.document.querySelector('iframe#launcher');
+            if (zendeskChat) {
+                this.renderer.setStyle(zendeskChat, 'display', 'block');
+            }
         }
 
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
@@ -525,6 +535,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const liveChatBtn = this.document.getElementById('chat-widget-container');
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
         }
 
         const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
@@ -684,6 +699,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const liveChatBtn = this.document.getElementById('chat-widget-container');
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
         }
     }
 
