@@ -148,15 +148,6 @@ gulp.task('esportivatop.wee.bet', function (done) {
     });
 });
 
-gulp.task('eurosportbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "eurosportbet.wee.bet",
-        banca: "Euro Sport",
-        styles: ""
-    });
-});
-
 gulp.task('major.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
