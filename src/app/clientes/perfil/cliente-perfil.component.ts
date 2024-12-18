@@ -300,7 +300,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.clienteService
             .atualizarDadosCadastrais(values)
             .subscribe(
-                () => this.messageService.success(this.translate.instant('geral.alteracoesSucesso')),
+                () => {this.messageService.success(this.translate.instant('geral.alteracoesSucesso')); this.faceMatchfaceMatchProfileEdit = false},
                 error => this.handleError(error)
             );
     }

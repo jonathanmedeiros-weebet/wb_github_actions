@@ -165,7 +165,7 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
         this.clienteService
             .atualizarDadosCadastrais(values)
             .subscribe(
-                () => this.messageService.success(this.translate.instant('geral.alteracoesSucesso')),
+                () => {this.messageService.success(this.translate.instant('geral.alteracoesSucesso')); this.faceMatchfaceMatchProfileEdit = false},
                 error => this.handleError(error)
             );
     }
