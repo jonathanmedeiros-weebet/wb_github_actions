@@ -127,7 +127,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (window.innerWidth > 482 && window.innerWidth <= 1024) {
             this.isTablet = true;
-        } 
+        }
 
         this.getGameList();
         this.isLoggedIn = this.auth.isLoggedIn();
@@ -160,6 +160,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.tawakChatClicked = tawakIframes[1].style.display == 'block'
 
             tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'none');
         }
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
@@ -203,17 +208,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
                                 this.loadGame();
-                                
+
                                 if (this.isMobile && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixMobileHeader();
                                 }
-                                
+
                                 if (this.isTablet && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixTabletHeader();
                                 }
-                                
+
                                 if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
                                     this.fixTabletAndDesktopScreen();
                                 }
@@ -498,6 +503,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (liveChatBtn) {
                 this.renderer.setStyle(liveChatBtn, 'display', 'block');
             }
+
+            const zendeskChat = this.document.querySelector('iframe#launcher');
+            if (zendeskChat) {
+                this.renderer.setStyle(zendeskChat, 'display', 'block');
+            }
         }
 
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
@@ -515,6 +525,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
 
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
+
         const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
         if (TawkChat) {
             this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
@@ -523,7 +538,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 }
             });
         }
-        
+
         if (this.headerService.getIsHeaderDisabled) {
             this.disableHeaderOptions();
             this.enableHeader();
@@ -674,6 +689,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
     }
 
     openFullscreen() {
@@ -727,7 +747,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (blocoRelatedGames) {
             this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
         }
-        
+
         if (backButton) {
             this.renderer.setStyle(backButton, 'display', 'none');
         }
@@ -906,7 +926,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const gameViewHeader = this.el.nativeElement.querySelector('.header-game-view');
 
         if (gameViewHeader) {
-            this.renderer.setStyle(gameViewHeader, 'display', 'flex');      
+            this.renderer.setStyle(gameViewHeader, 'display', 'flex');
         }
     }
 
@@ -917,7 +937,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (gameViewHeader) {
             this.renderer.setStyle(gameViewHeader, 'display', 'flex');
         }
-        
+
         if (gameView) {
             this.renderer.setStyle(gameView, 'padding-top', '50px');
             this.renderer.setStyle(gameView, 'position', 'fixed');
@@ -1012,13 +1032,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                     return false;
                 });
-    
+
             if (filteredGames.length < this.casinoRelatedGamesQuantity) {
                 if (!this.popularGamesIds.includes(this.gameId)) {
                     this.popularGamesIds.push(this.gameId);
                 }
                 let missingGamesCalc = this.casinoRelatedGamesQuantity - filteredGames.length;
-    
+
                 this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
                     response => {
                         filteredGames = filteredGames.concat(response);
