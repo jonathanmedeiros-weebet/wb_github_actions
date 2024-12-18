@@ -485,12 +485,12 @@ gulp.task('betsports.wee.bet', function (done) {
     });
 });
 
-gulp.task('citybets.wee.bet', function (done) {
+// Database Name = citybets.wee.bet
+gulp.task('citybets.online', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
-        host: "citybets.wee.bet",
+        host: "citybets.online",
         banca: "CITY BETS",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #5a130f; --foreground-odds: #fff; --event-time: #cb151c; --league: #333; --foreground-league: #fff;",
     });
 });
 
