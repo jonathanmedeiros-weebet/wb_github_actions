@@ -137,7 +137,7 @@
                         <button
                             class="btn btn-custom w-150"
                             type="submit"
-                            [disabled]="form.invalid && !faceMatchfaceMatchProfileEdit"
+                            [disabled]="form.invalid || !faceMatchfaceMatchProfileEdit"
                         >
                             {{'geral.atualizar' | translate}}
                         </button>
