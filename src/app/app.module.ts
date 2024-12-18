@@ -37,6 +37,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 // Interceptors
 import { AuthInterceptor } from './auth/auth-interceptor.service';
+import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from './configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
 
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
@@ -84,7 +85,7 @@ export function googleFactory(service: ParametrosLocaisService) {
 }
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, ConfiguracaoLimitePerdasPorcentagemModalComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
