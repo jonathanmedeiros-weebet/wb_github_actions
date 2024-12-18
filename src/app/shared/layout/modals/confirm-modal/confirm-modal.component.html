@@ -10,9 +10,48 @@
     <div style="min-width: 143px;">
         <div><p>{{msg}}</p></div>
 
+        <div class="actions" *ngIf="faceMatchActive && !showLoading">
+            <div #legitimuz id="legitimuz-container"
+                *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && !verifiedIdentity">
+                <div id="legitimuz">
+                    <div id="verify-identity-text">
+                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                        ('saques.identityVerifyNeeded' | translate)}}
+                    </div>
+                    <div style="margin-top:20px">
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                        [value]="cliente.cpf" />
+                        <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
+                    </div>
+                </div>
+                <div id="legitimuz-root"></div>
+            </div>
+
+            <div #legitimuzLiveness id="legitimuz-container"
+                *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && verifiedIdentity">
+                <div id="legitimuz">
+                    <div id="verify-identity-text">
+                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                        ('saques.identityVerifyNeeded' | translate)}}
+                    </div>
+                    <div style="margin-top:20px">
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                        [value]="cliente.cpf" />
+                        <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
+                    </div>
+                </div>
+                <div id="legitimuz-root"></div>
+            </div>
+        </div>
         <div class="actions">
             <button type="button" class="btn btn-custom2" (click)="activeModal.dismiss('')" data-dismiss="modal">Não</button>
-            <button type="button" class="btn btn-custom" (click)="activeModal.close('')">Sim</button>
+            <button type="button" class="btn btn-custom" (click)="activeModal.close('')" [disabled]="faceMatchActive">Sim</button>
         </div>
     </div>
 </div>
