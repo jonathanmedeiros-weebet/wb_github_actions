@@ -208,6 +208,7 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
 
                     this.utilsService.getCidades(estadoLocal.id).subscribe(
                         cidades => {
+                            this.cidades = cidades;
                             for (let cidade of cidades) {
                                 if (cidade.nome == endereco.localidade.toUpperCase()) {
                                     this.cidadeSelecionada = cidade.id;

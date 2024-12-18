@@ -189,6 +189,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                         this.form.get('estado').patchValue(this.estadoSelecionado);
                         this.utilsService.getCidades(estadoLocal.id).subscribe(
                             cidades => {
+                                    this.cidades = cidades;
                                 for (let cidade of cidades) {
                                     if (cidade.nome == endereco.localidade.toUpperCase()) {
                                         this.cidadeSelecionada = cidade.id;
