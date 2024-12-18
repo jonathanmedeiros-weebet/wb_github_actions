@@ -16,7 +16,14 @@
             <div class="row list-accounts">
                 <div class="col-12 col-md-4" *ngFor="let accountItem of accounts">
                     <div class="account__card">
-                        <span class="account__bank-name"> {{ accountItem.nomeBanco }} </span>
+                        <div class="d-flex justify-content-between">
+                            <div class="name-bank-account">
+                                <span class="account__bank-name"> {{ accountItem.nomeBanco }} </span>
+                            </div>
+                            <div class="">
+                                <a href="javascript:void(0)" (click)="openConfirmModal(accountItem)"><i _ngcontent-iqi-c76="" class="fa fa-trash" style="text-decoration: none; color: var(--foreground-sidebars);"></i></a>
+                            </div>
+                        </div>
                         <span class="account__bank-agency">Agência: {{ accountItem.numeroAgencia }}</span>
                         <span class="account__bank-account">Conta: {{ accountItem.numeroConta }}</span>
                         <span class="account__account-type">Conta {{ accountItem.tipoConta }}</span>
@@ -24,7 +31,7 @@
                 </div>
                 <div class="col-12 col-md-4" *ngIf="accounts.length < 3">
                     <div class="new-account__card" (click)="openAddBankAccount()">
-                        <i class="fa fa-plus-circle new-account__icon" aria-hidden="true"></i>
+                        <i class="fa fa-plus-circle new-account__icon"></i>
                         <span class="new-account__label">Nova conta</span>
                     </div>
                 </div>

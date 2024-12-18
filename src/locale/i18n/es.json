@@ -269,7 +269,8 @@
         "jogoResponsavel": "Juego responsable",
         "tax": "Impuesto",
         "validatePhone": "Verificación telefónica",
-        "savedSuccessfully":  "Guardado exitosamente!"
+        "savedSuccessfully":  "Guardado exitosamente!",
+        "successfullyDeleted": "Eliminado con éxito!"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",

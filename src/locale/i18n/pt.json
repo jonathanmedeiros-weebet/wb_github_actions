@@ -274,7 +274,8 @@
         "jogoResponsavel": "Jogo responsável",
         "tax": "Imposto",
         "validatePhone": "Verificação de Telefone",
-        "savedSuccessfully":  "Salvo com sucesso!"
+        "savedSuccessfully":  "Salvo com sucesso!",
+        "successfullyDeleted": "Excluído com sucesso!"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
