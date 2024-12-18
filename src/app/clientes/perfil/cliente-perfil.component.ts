@@ -107,7 +107,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                     if (this.verifiedIdentity) {
                         this.legitimuzService.closeModal();
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, profile_edit: true }).subscribe()
                         this.faceMatchfaceMatchProfileEdit = true;
                     } else if (!this.verifiedIdentity && this.verifiedIdentity !== null) {
                         this.legitimuzService.closeModal();
@@ -119,7 +119,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(faceIndex => {
                     if (faceIndex) {
-                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, profile_edit: true }).subscribe({
                             next: (res) => {
                                 this.legitimuzFacialService.closeModal();
                                 this.messageService.success(this.translate.instant('face_match.verified_identity'));
