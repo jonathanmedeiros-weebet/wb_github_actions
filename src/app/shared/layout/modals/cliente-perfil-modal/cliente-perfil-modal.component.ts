@@ -204,23 +204,31 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                     }
 
                     this.estadoSelecionado = estadoLocal.id;
-                    this.form.get('estado').patchValue(this.estadoSelecionado);
-
+                    if (this.estadoSelecionado != this.form.get('estado').value) {
                     this.utilsService.getCidades(estadoLocal.id).subscribe(
                         cidades => {
                             this.cidades = cidades;
-                            for (let cidade of cidades) {
+                                for (let cidade of cidades) {
+                                    if (cidade.nome == endereco.localidade.toUpperCase()) {
+                                        this.cidadeSelecionada = cidade.id;
+                                        this.form.get('cidade').patchValue(this.cidadeSelecionada);
+                                    }
+                                }
+                        },
+                        error => this.handleError(error));
+                        } else {
+                            for (let cidade of this.cidades) {
                                 if (cidade.nome == endereco.localidade.toUpperCase()) {
                                     this.cidadeSelecionada = cidade.id;
                                     this.form.get('cidade').patchValue(this.cidadeSelecionada);
                                 }
                             }
-                        },
-                        error => this.handleError(error));
-                    this.form.patchValue({
-                        logradouro: endereco.logradouro,
-                        bairro: endereco.bairro,
-                    });
+                        }
+                        this.form.get('estado').patchValue(this.estadoSelecionado);
+                            this.form.patchValue({
+                                logradouro: endereco.logradouro,
+                                bairro: endereco.bairro,
+                            });
                 } else {
                     this.handleError('Endereço não encontrado, por favor preencha manualmente');
                 }
