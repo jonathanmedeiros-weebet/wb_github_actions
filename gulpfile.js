@@ -2499,3 +2499,21 @@ gulp.task('boaaposta.com', function (done) {
         description: "Descubra o site de apostas ideal para quem busca diversão e grandes oportunidades! Apostas esportivas, cassino online, bônus exclusivos e muito mais. Jogue com segurança e emoção. Cadastre-se agora!"
     });
 });
+
+gulp.task('jack77bet.com', function (done) {
+    tasks(done, {
+        server: "front1.wee.bet",
+        host: "jack77bet.com",
+        banca: "JACK77 ",
+        styles: "",
+    });
+});
+
+gulp.task('copasbet.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "copasbet.bet",
+        banca: "COPAS BET",
+        styles: "",
+    });
+});

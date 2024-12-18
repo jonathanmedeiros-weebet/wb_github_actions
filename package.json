@@ -250,7 +250,9 @@
     "poc.wee.bet": "gulp poc.wee.bet",
     "bet10.bet": "gulp bet10.bet",
     "pintou.bet": "gulp pintou.bet",
-    "boaaposta.com": "gulp boaaposta.com"
+    "boaaposta.com": "gulp boaaposta.com",
+    "jack77bet.com": "gulp jack77bet.com",
+    "copasbet.bet": "gulp copasbet.bet"
   },
   "private": true,
   "dependencies": {
