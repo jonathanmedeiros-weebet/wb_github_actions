@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="more-options">
+      <div class="more-options" v-if="showBetCardMenu">
         <span class="more-options__text">Cartão</span>
         <div class="more-options__card">
           <button class="more-options__item" @click="handleOpenConsultCardModal">
@@ -125,7 +125,7 @@ import { formatCurrency, wbPostMessage } from '@/utilities';
 import { localStorageService } from "@/services";
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
-import { useToastStore } from '@/stores';
+import { useConfigClient, useToastStore } from '@/stores';
 import IconCreditCard from '@/components/icons/IconCreditCard.vue';
 
 export default {
@@ -153,7 +153,8 @@ export default {
       isSaldoVisible: false,
       isConsultTicketModalVisible: false,
       isConsultCardModalVisible: false,
-      toastStore: useToastStore()
+      toastStore: useToastStore(),
+      configClientStore: useConfigClient(),
     };
   },
   activated() {
@@ -169,6 +170,9 @@ export default {
     userName() {
       const user = localStorageService.get(LocalStorageKey.USER);
       return user ? user.nome : '';
+    },
+    showBetCardMenu() {
+      return this.configClientStore?.options?.cartao_aposta ?? false
     }
   },
   methods: {
