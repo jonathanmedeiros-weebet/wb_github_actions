@@ -97,6 +97,12 @@ export const modalityList = (): ModalityOption[] => {
             show: Boolean(options.loteriaPopular) && !popularLotteryDeprecatedByAndroidVersion,
             hasLive: false
         },
+        {
+            name: 'Loterias',
+            id: Modalities.LOTTERY,
+            show: Boolean(options.loterias),
+            hasLive: false
+        }
     ];
 
     return modalities.filter(modality => modality.show);

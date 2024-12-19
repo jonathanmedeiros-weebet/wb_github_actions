@@ -12,6 +12,7 @@ export enum ModalitiesLSport {
     CHALLENGE = 'null1',
     ACCUMULATION = 'null2',
     POPULAR_LOTTERY = 'null3',
+    LOTTERY = 'nulll4'
 };
 
 export enum ModalitiesBetsApi {
@@ -28,6 +29,7 @@ export enum ModalitiesBetsApi {
     CHALLENGE = 'null1',
     ACCUMULATION = 'null2',
     POPULAR_LOTTERY = 'null3',
+    LOTTERY = 'nulll4'
 };
 
 export type Modalities = ModalitiesBetsApi | ModalitiesLSport;
