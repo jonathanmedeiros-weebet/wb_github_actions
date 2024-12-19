@@ -94,6 +94,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.isMandatoryPhoneValidation = this.paramsLocais.isMandatoryPhoneValidation();
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
+
         if (!this.faceMatchEnabled) {
             this.faceMatchProfileEditValidated = true;
         }
@@ -116,6 +117,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                         this.faceMatchProfileEditValidated = false;
                     }
                 });
+
             this.legitimuzFacialService.faceIndex
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(faceIndex => {
@@ -333,6 +335,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     handleError(mensagem: string) {
         this.messageService.error(mensagem);
     }
+    
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuz.changes

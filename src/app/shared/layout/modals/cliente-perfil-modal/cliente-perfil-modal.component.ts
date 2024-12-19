@@ -71,9 +71,11 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
         this.loadCliente();
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
+        
         if (!this.faceMatchEnabled) {
             this.faceMatchProfileEditValidated = true;
         }
+
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
                     this.legitimuzService.curCustomerIsVerified
                         .pipe(takeUntil(this.unsub$))
@@ -92,6 +94,7 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                                 this.faceMatchProfileEditValidated = false;
                             }
                         });
+
                     this.legitimuzFacialService.faceIndex
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(faceIndex => {
@@ -308,6 +311,7 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                 });
         }
     }
+
     ngOnDestroy() {
         this.unsub$.next();
         this.unsub$.complete();
