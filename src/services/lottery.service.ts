@@ -1,4 +1,4 @@
-import { useConfigClient } from "@/stores";
+import { useConfigClient, useTicketStore } from "@/stores";
 import { axiosInstance } from "./axiosInstance";
 
 export const findLotteryBets = async (parameters: any) => {
@@ -22,7 +22,7 @@ export const findLotteryBets = async (parameters: any) => {
 export const getLotteryBetsByType = async (parameters: any) => {
     //paramsEx = tipo:seninha sort:sort
     const { lokiUrl } = useConfigClient();
-    let url = `${lokiUrl}/lottery/bets/bet-type`;
+    let url = `${lokiUrl}/lottery/bets/type`;
     let params = new URLSearchParams();
 
     if (parameters) {
@@ -47,6 +47,15 @@ export const getLotteryDraw = async (parameters: any) => {
     }
  
     const response: any = await axiosInstance().get(url, { params });
+
+    return response.results;
+}
+
+export const copyLotteryBets = async (code: any) => {
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/lottery/bets/copy/${code}`;
+    
+    const response: any = await axiosInstance().get(url);
 
     return response.results;
 }
