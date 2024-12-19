@@ -12,7 +12,7 @@
 
         <div class="actions" *ngIf="faceMatchActive && !showLoading">
             <div #legitimuz id="legitimuz-container"
-                *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && !verifiedIdentity">
+                *ngIf="faceMatchEnabled && !faceMatchActive && !verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
@@ -31,7 +31,7 @@
             </div>
 
             <div #legitimuzLiveness id="legitimuz-container"
-                *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && verifiedIdentity">
+                *ngIf="faceMatchEnabled && !faceMatchActive && verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
