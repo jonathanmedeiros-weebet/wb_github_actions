@@ -50,26 +50,25 @@ export class ListBankAccountsComponent {
     }
 
     public openConfirmModal(accountItem) {
-            const modalConfirm = this.modalService.open(ConfirmModalComponent, { centered: true });
-            modalConfirm.componentInstance.title = 'Excluir Conta Bancária';
-            modalConfirm.componentInstance.msg = 'Tem certeza que deseja excluir a conta bancária ?';
+        const modalConfirm = this.modalService.open(ConfirmModalComponent, { centered: true });
+        modalConfirm.componentInstance.title = 'Excluir Conta Bancária';
+        modalConfirm.componentInstance.msg = 'Tem certeza que deseja excluir a conta bancária ?';
 
-            modalConfirm.result.then(
-                (result) => {
-                    this.clienteService.deleteBankAccount({ id: accountItem.id})
-                        .pipe(takeUntil(this.unsub$))
-                        .subscribe(
-                            () => {
-                                this.messageService.success(this.translate.instant('geral.successfullyDeleted'))
-                                this.activeModal.close({isReload: true}),
-                                this.loadPage()
-                            },
-                            error => this.handleError(error)
-                        );
-                },
-                (reason) => { }
-            );
-        }
+        modalConfirm.result.then(
+            (result) => {
+                this.clienteService.deleteBankAccount({ id: accountItem.id})
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        () => {
+                            this.messageService.success(this.translate.instant('geral.successfullyDeleted'))
+                            this.loadPage()
+                        },
+                        error => this.handleError(error)
+                    );
+            },
+            (reason) => { }
+        );
+    }
     
     handleError(mensagem: string) {
         this.messageService.error(mensagem);
