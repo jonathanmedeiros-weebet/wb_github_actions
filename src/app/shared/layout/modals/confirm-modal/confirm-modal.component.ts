@@ -78,11 +78,11 @@ export class ConfirmModalComponent implements OnInit {
                             next: (res) => {
                                 this.LegitimuzFacialService.closeModal();
                                 this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                                this.faceMatchActive = true;
+                                this.faceMatchActive = false;
                                 this.cd.detectChanges();
                             }, error: (error) => {
                                 this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                                this.faceMatchActive = false;
+                                this.faceMatchActive = true;
                             }
                         })
                     }
@@ -95,11 +95,11 @@ export class ConfirmModalComponent implements OnInit {
                         next: (res) => {
                             this.LegitimuzFacialService.closeModal();
                             this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                            this.faceMatchActive = true;
+                            this.faceMatchActive = false;
                             this.cd.detectChanges();
                         }, error: (error) => {
                             this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                            this.faceMatchActive = false;
+                            this.faceMatchActive = true;
                         }
                     })
                 }
