@@ -178,7 +178,7 @@
                                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                                     </div>
                                     <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                                    <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchfaceMatchProfileEdit">
+                                    <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
                                         <i class="fa-solid fa-id-card"></i>
                                         {{'saques.identityVerify' | translate}}
                                     </button>
@@ -191,7 +191,7 @@
                                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                                     </div>
                                     <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                                    <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchfaceMatchProfileEdit">
+                                    <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
                                         <i class="fa-solid fa-id-card"></i>
                                         {{'saques.identityVerify' | translate}}
                                     </button>
@@ -206,7 +206,7 @@
                             <button
                                 class="btn btn-custom w-150"
                                 type="submit"
-                                [disabled]="form.invalid || !faceMatchfaceMatchProfileEdit"
+                                [disabled]="form.invalid || !faceMatchProfileEdit"
                             >
                                 {{'geral.atualizar' | translate}}
                             </button>

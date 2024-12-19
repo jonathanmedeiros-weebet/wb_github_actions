@@ -45,11 +45,10 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     private codigoMultifator: string;
 
     faceMatchEnabled = false;
-    faceMatchfaceMatchProfileEdit = false;
+    faceMatchProfileEdit = false;
     legitimuzToken = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
-    faceMatchProfileEdit = false;
     cliente : Cliente;
 
     constructor(
@@ -95,7 +94,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
         if (!this.faceMatchEnabled) {
-            this.faceMatchfaceMatchProfileEdit = true;
+            this.faceMatchProfileEdit = true;
         }
 
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
@@ -108,11 +107,11 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                         this.legitimuzService.closeModal();
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, profile_edit: true }).subscribe()
-                        this.faceMatchfaceMatchProfileEdit = true;
+                        this.faceMatchProfileEdit = true;
                     } else if (!this.verifiedIdentity && this.verifiedIdentity !== null) {
                         this.legitimuzService.closeModal();
                         this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                        this.faceMatchfaceMatchProfileEdit = false;
+                        this.faceMatchProfileEdit = false;
                     }
                 });
             this.legitimuzFacialService.faceIndex
@@ -123,10 +122,10 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             next: (res) => {
                                 this.legitimuzFacialService.closeModal();
                                 this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                                this.faceMatchfaceMatchProfileEdit = true;
+                                this.faceMatchProfileEdit = true;
                             }, error: (error) => {
                                 this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                                this.faceMatchfaceMatchProfileEdit = false;
+                                this.faceMatchProfileEdit = false;
                             }
                         })
                     }
@@ -300,7 +299,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.clienteService
             .atualizarDadosCadastrais(values)
             .subscribe(
-                () => {this.messageService.success(this.translate.instant('geral.alteracoesSucesso')); this.faceMatchfaceMatchProfileEdit = false},
+                () => {this.messageService.success(this.translate.instant('geral.alteracoesSucesso')); this.faceMatchProfileEdit = false},
                 error => this.handleError(error)
             );
     }
