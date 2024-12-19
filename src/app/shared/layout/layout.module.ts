@@ -106,6 +106,8 @@ import { BackPageComponent } from './back-page/back-page/back-page.component';
 import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-modal/face-match-modal.component';
 import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/add-bank-account-modal.component';
 import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accounts.component';
+import { LastAccessesModalComponent } from './modals/last-accesses-modal/last-accesses-modal.component';
+import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.module';
 
 @NgModule({
     imports: [
@@ -134,7 +136,8 @@ import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accoun
         TranslateModule,
         RecaptchaModule,
         RecaptchaFormsModule,
-        SkeletonModule
+        SkeletonModule,
+        WeePaginationModule
     ],
     declarations: [
         MainLayoutComponent,
@@ -210,7 +213,8 @@ import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accoun
         FaceMatchModalComponent,
         ValidatePhoneModalComponent,
         AddBankAccountModalComponent,
-        ListBankAccountsComponent
+        ListBankAccountsComponent,
+        LastAccessesModalComponent,
     ],
     exports: [
         MainLayoutComponent,

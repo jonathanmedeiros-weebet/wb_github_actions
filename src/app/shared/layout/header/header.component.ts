@@ -42,6 +42,7 @@ import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-histor
 import {CarteiraComponent} from "../../../clientes/carteira/carteira.component";
 import { CashbackComponent } from 'src/app/clientes/cashback/cashback.component';
 import { ListBankAccountsComponent } from '../list-bank-accounts/list-bank-accounts.component';
+import { LastAccessesModalComponent } from '../modals/last-accesses-modal/last-accesses-modal.component';
 
 declare var xtremepush: any;
 
@@ -498,6 +499,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirAlterarSenha() {
         this.modalService.open(ClienteSenhaModalComponent);
+    }
+
+    openLastAccesses() {
+        this.modalService.open(LastAccessesModalComponent);
     }
 
     openBankAccount() {
