@@ -1,5 +1,5 @@
 import { useConfigClient } from '@/stores';
-import { formatCurrency, formatDateTimeBR, now, removerAcentos, wbPostMessage } from '@/utilities';
+import { calculateLotteryWinnings, calculateNetLotteryWinnings, formatCurrency, formatDateTimeBR, getNameModalityLottery, now, removerAcentos, wbPostMessage } from '@/utilities';
 import EscPosEncoder from 'esc-pos-encoder';
 import { axiosInstance } from './axiosInstance';
 
@@ -231,6 +231,179 @@ export const printRechargeReceipt = async (recharge: any) => {
 
     const data = Array.from(rechargeEscPos.encode());
     wbPostMessage('printCard', data)
+}
+
+export const printLottery = async (bet: any) => {
+    const { options } = useConfigClient();
+    const separatorLine = '================================'
+
+    const {
+        apkVersion,
+        printGraphics,
+        printLogo,
+        separator
+    } = await getPrinterSettings();
+    const encoder = new EscPosEncoder();
+    const lotteryEscPos = encoder.initialize();
+
+    if (printGraphics) {
+        if (apkVersion < 3) {
+            lotteryEscPos.image(printLogo, 376, 136, 'atkinson');
+        }
+    } else {
+        lotteryEscPos
+            .align('center')
+            .raw([0x1d, 0x21, 0x10])
+            .line(options.banca_nome)
+            .raw([0x1d, 0x21, 0x00]);
+    }
+
+    lotteryEscPos
+        .newline()
+        .bold(true)
+        .align('center')
+        .raw([0x1d, 0x21, 0x10])
+        .line(bet.codigo)
+        .raw([0x1d, 0x21, 0x00])
+        .align('left')
+        .size('normal')
+        .line(separatorLine)
+        .bold(true)
+        .text('Data: ')
+        .bold(false)
+        .text((formatDateTimeBR(bet.horario)));
+
+    if (bet.is_cliente) {
+        lotteryEscPos
+            .newline()
+            .bold(true)
+            .text('CLIENTE: ')
+            .bold(false)
+            .text(removerAcentos(bet.passador.nome))
+            .newline();
+    } else {
+        lotteryEscPos
+            .newline()
+            .bold(true)
+            .text('CAMBISTA: ')
+            .bold(false)
+            .text(removerAcentos(bet.passador.nome))
+            .newline()
+            .bold(true)
+            .text('APOSTADOR: ')
+            .bold(false)
+            .text(removerAcentos(bet.apostador))
+            .newline();
+    }
+
+    lotteryEscPos
+        .bold(true)
+        .text('MODALIDADE: ')
+        .bold(false)
+        .text(getNameModalityLottery(bet.modalidade))
+        .newline()
+        .bold(true)
+        .text('VALOR TOTAL: ')
+        .bold(false)
+        .text(formatCurrency(bet.valor))
+        .newline();
+
+    bet.itens.forEach((item: any) => {
+        lotteryEscPos
+            .newline()
+            .line(separatorLine)
+            .align('center')
+            .bold(true)
+            .line(removerAcentos(item.sorteio_nome))
+            .align('left')
+            .line('DEZENAS: ')
+            .bold(false)
+            .line(item.numeros.join('-'))
+            .bold(true)
+            .newline()
+            .text('VALOR: ')
+            .bold(false)
+            .text(formatCurrency(item.valor));
+        
+        if (item.tipo === 'seninha' && item.cotacao6 > 0) {
+            lotteryEscPos
+                .newline()
+                .bold(true)
+                .text('RETORNO 6: ')
+                .bold(false)
+                .text('' + calculateLotteryWinnings(item.valor, item.cotacao6));
+            if (!bet.is_cliente && bet.passador.percentualPremio > 0) {
+                lotteryEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO LIQUIDO 6: ')
+                    .bold(false)
+                    .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao6, bet.passador.percentualPremio));
+            }
+        }
+
+        if (item.cotacao5 > 0) {
+            lotteryEscPos
+                .newline()
+                .bold(true)
+                .text('RETORNO 5: ')
+                .bold(false)
+                .text('' + calculateLotteryWinnings(item.valor, item.cotacao5));
+            if (!bet.is_cliente && bet.passador.percentualPremio > 0) {
+                lotteryEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO LIQUIDO 5: ')
+                    .bold(false)
+                    .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao5, bet.passador.percentualPremio));
+            }
+        }
+        
+        if (item.cotacao4 > 0) {
+            lotteryEscPos
+                .newline()
+                .bold(true)
+                .text('RETORNO 4: ')
+                .bold(false)
+                .text('' + calculateLotteryWinnings(item.valor, item.cotacao4));
+            if (!bet.is_cliente && bet.passador.percentualPremio > 0) {
+                lotteryEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO LIQUIDO 4: ')
+                    .bold(false)
+                    .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao4, bet.passador.percentualPremio));
+            }
+        }
+
+        if (item.cotacao3 > 0) {
+            lotteryEscPos
+                .newline()
+                .bold(true)
+                .text('RETORNO 3: ')
+                .bold(false)
+                .text('' + calculateLotteryWinnings(item.valor, item.cotacao3));
+            if (!bet.is_cliente && bet.passador.percentualPremio > 0) {
+                lotteryEscPos
+                    .newline()
+                    .bold(true)
+                    .text('RETORNO LIQUIDO 3: ')
+                    .bold(false)
+                    .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao3, bet.passador.percentualPremio));
+            }
+        }
+    });
+
+    lotteryEscPos
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline();
+
+    const data = Array.from(lotteryEscPos.encode());
+    wbPostMessage('printLottery', data)
 }
 
 const getPrinterSettings = async () => {

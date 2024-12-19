@@ -63,6 +63,11 @@ export const useConfigClient = defineStore('configClient', {
       return Boolean(configClient) ? configClient.host : _host
     },
     options: (state) => state.params?.opcoes ?? null,
+    sportEnabled: (state) => state.params?.opcoes?.esporte ?? false,
+    lotteryEnabled: (state) => state.params?.opcoes?.loterias ?? false,
+    maxLotteryValue: (state) => state.params?.opcoes?.valor_max_premio_loterias,
+    getSenaName: (state) => state.params?.opcoes?.seninha_nome ?? null,
+    getQuinaName: (state) => state.params?.opcoes?.quininha_nome ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
     mainOdds: (state) => state.params?.odds_principais ?? [],
     popularLeagues: (state) => state.params?.ligas_populares ?? [],
