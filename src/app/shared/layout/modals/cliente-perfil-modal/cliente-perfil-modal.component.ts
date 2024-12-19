@@ -312,8 +312,4 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
         this.unsub$.next();
         this.unsub$.complete();
     }
-
-    test() {
-        this.faceMatchProfileEdit = true;
-    }
 }

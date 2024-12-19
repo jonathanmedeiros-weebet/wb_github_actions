@@ -102,14 +102,14 @@
                         <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
                     </div>
                     <div *ngIf="faceMatchEnabled">
-                        <h5 id="faceMatch">Reconhecimento Facial</h5>
+                        <h5 id="faceMatch">{{'face_match.label' | translate}}</h5>
                         <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !verifiedIdentity">
                             <div id="legitimuz">
                                 <div id="verify-identity-text">
                                     {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                                 </div>
                                 <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                                <button (click)="test()"id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
+                                <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
                                     <i class="fa-solid fa-id-card"></i>
                                     {{'saques.identityVerify' | translate}}
                                 </button>
@@ -122,7 +122,7 @@
                                     {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                                 </div>
                                 <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                                <button (click)="test()" id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
+                                <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
                                     <i class="fa-solid fa-id-card"></i>
                                     {{'saques.identityVerify' | translate}}
                                 </button>
@@ -138,7 +138,7 @@
                             class="btn btn-custom w-150"
                             type="submit"
                             (click)="onSubmit()"
-                            [disabled]="form.invalid || !faceMatchProfileEdit"
+                            [disabled]="form.invalid || (faceMatchEnabled && !faceMatchProfileEdit)"
                         >
                             {{'geral.atualizar' | translate}}
                         </button>

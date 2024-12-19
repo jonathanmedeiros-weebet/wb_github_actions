@@ -746,6 +746,7 @@
         "redeem": "Canjear"
     },
     "face_match": {
+        "label": "Reconocimiento facial",
         "verified_identity": "Identidad verificada!",
         "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
     },
