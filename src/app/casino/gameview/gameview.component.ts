@@ -231,6 +231,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                 }
                             }
                         }
+                        if (isLoggedIn || this.gameMode !== 'REAL') {
+                            this.inGame = true;
+                            this.fixInGameSpacings();
+                        }
+                        this.loadGame();
                     }
                 );
 
@@ -240,6 +245,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.isCliente = isCliente;
                     }
                 );
+
+            if (this.avisoCancelarBonus === false) {
+                this.loadGame();
+            }
 
             interval(3000)
                 .subscribe(() => {
