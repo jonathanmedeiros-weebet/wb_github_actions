@@ -1,11 +1,17 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { catchError, map, take } from 'rxjs/operators';
 
 import { HeadersService } from './utils/headers.service';
 import { ErrorService } from './utils/error.service';
 import { config } from '../config';
+import { GeolocationService } from './geolocation.service';
+import { AuthService } from './auth/auth.service';
+import { LogoutMessageModalComponent } from '../components/logout-message-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 declare const LegitimuzAntiFraude: any;
 
@@ -13,7 +19,7 @@ declare const LegitimuzAntiFraude: any;
     providedIn: 'root'
 })
 export class SecurityService {
-    private Security = `${config.LOKI_URL}/security`;
+    private loki_url = `${config.LOKI_URL}`;
 
     synchronized = false;
 
@@ -22,19 +28,45 @@ export class SecurityService {
 
     constructor(
         private http: HttpClient,
+        private auth: AuthService,
         private header: HeadersService,
-        private errorService: ErrorService
-    ) {}
+        private geolocation: GeolocationService,
+        private errorService: ErrorService,
+        private modalService: NgbModal,
+        private router: Router,
+        private translate: TranslateService
+    ) { }
 
-    analyseIp() {
-        this.http.get(`${this.Security}`, this.header.getRequestOptions(false))
-            .subscribe((res: any) => {
-                    return res.results;
-                },
-                error => {
-                    catchError(this.errorService.handleError);
-                }
-            );
+    analyzeGeoLocation() {
+        this.geolocation.getCurrentPosition()
+        .then(pos => {
+            if (!pos.error) {
+                this.http.get(
+                    `${this.loki_url}/geolocation/analyze`,
+                    this.header.getRequestOptions(true, { latitude: pos.lat, longitude: pos.lng } )
+                )
+                .pipe(
+                    map((res: any) => res.results),
+                    catchError(error => {
+                        this.showLogoutModal();
+                        return this.errorService.handleError(error);
+                    })
+                )
+                .subscribe(
+                    (res: any) => {
+                        if (!res.viable) {
+                            this.showLogoutModal();
+                        }
+                    }
+                );
+            } else {
+                this.showLogoutModal();
+            }
+        })
+        .catch(error => {
+            console.log('Geolocation Error:', error);
+            this.showLogoutModal(this.translate.instant('geral.geolocationError'));
+        })
     }
 
     async isVPN(): Promise<boolean> {
@@ -46,9 +78,8 @@ export class SecurityService {
                 enableRequestGeolocation: true
             });
 
-            sdkInstance.mount();
-            const legitiumuzResponse = await sdkInstance.sendAnalisys({ cpf: '11111111111' });
-            console.log('RESPONSE LEGITIMUZ:', legitiumuzResponse);
+            //sdkInstance.mount();
+            //const legitiumuzResponse = await sdkInstance.sendAnalisys({ cpf: '07281754442' });
 
             const response: any = await fetch(`https://proxycheck.io/v2/?key=${this.tokenProxyCheck}&vpn=1`);
             const responseData = await response.json();
@@ -61,5 +92,18 @@ export class SecurityService {
         } catch (error) {
             return false;
         }
+    }
+
+    private showLogoutModal(message: string = null) {
+        const modalRef = this.modalService.open(LogoutMessageModalComponent, { centered: true });
+        modalRef.result.then((result) => {
+            this.auth.logout();
+        }, (reason) => {
+            console.log('MODAL LOGOUT:', reason);
+            this.auth.logout();
+        });
+        modalRef.componentInstance.message = message ?? this.translate.instant('geral.logoutGeolocationErrorMessage');
+        modalRef.componentInstance.title = this.translate.instant('geral.logoutGeolocationErrorTitle');
+        modalRef.componentInstance.buttonLabel = this.translate.instant('geral.logoutGeolocationErrorButtonLabel');
     }
 }

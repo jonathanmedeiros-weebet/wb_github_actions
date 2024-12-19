@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { WallProviderFilterModalComponent } from './components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
+import { CronService } from 'src/app/shared/services/timer.service';
 
 export interface Fornecedor {
     gameFornecedor: string;
@@ -82,7 +83,8 @@ export class WallComponent implements OnInit, AfterViewInit {
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
         private paramsService: ParametrosLocaisService,
-        private navigationHistoryService: NavigationHistoryService
+        private navigationHistoryService: NavigationHistoryService,
+        private cron: CronService
     ) {
     }
 

@@ -110,7 +110,7 @@ export class GeolocationService {
         }
     }
 
-    private getCurrentPosition() {
+    public getCurrentPosition(): Promise<Geolocation> {
         return new Promise((resolve, reject) => {
             try {
                 if (!navigator.geolocation) throw new Error('Geolocation not allowed.');

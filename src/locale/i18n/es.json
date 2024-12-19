@@ -271,7 +271,10 @@
         "validatePhone": "Verificación telefónica",
         "savedSuccessfully":  "Guardado exitosamente!",
         "successfullyDeleted": "Eliminado con éxito!",
-        "vpn": "Hemos detectado que estás accediendo a nuestro sitio web a través de una VPN. Para garantizar la seguridad e integridad de la plataforma, te pedimos que desactives la VPN o utilices una conexión estándar para continuar. Si crees que esto es un error, por favor contacta al soporte."
+        "vpn": "Hemos detectado que estás accediendo a nuestro sitio web a través de una VPN. Para garantizar la seguridad e integridad de la plataforma, te pedimos que desactives la VPN o utilices una conexión estándar para continuar. Si crees que esto es un error, por favor contacta al soporte.",
+        "logoutGeolocationErrorMessage": "Has sido desconectado por razones de seguridad. Detectamos un cambio abrupto en tu ubicación que sería físicamente imposible de ocurrir en el intervalo de tiempo registrado. Si esto no fue causado por ti, te recomendamos verificar tu cuenta.",
+        "logoutGeolocationErrorTitle": "Acceso Interrumpido: Ubicación Inconsistente",
+        "logoutGeolocationErrorButtonLabel": "Cerrar"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",

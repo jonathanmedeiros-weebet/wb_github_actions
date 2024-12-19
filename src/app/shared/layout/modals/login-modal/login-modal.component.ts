@@ -74,25 +74,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     async ngOnInit() {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    console.log("Latitude:", position.coords.latitude);
-                    console.log("Longitude:", position.coords.longitude);
-                },
-                (error) => {
-                    if (error.code === error.PERMISSION_DENIED) {
-                        console.log("Por favor, ative o GPS para continuar usando o site.");
-                    } else if (error.code === error.POSITION_UNAVAILABLE) {
-                        console.log("Não foi possível obter a localização. Verifique se o GPS está ativado.");
-                    } else if (error.code === error.TIMEOUT) {
-                        console.log("A solicitação de localização expirou. Tente novamente.");
-                    }
-                }
-            );
-        } else {
-            console.log("Geolocalização não é suportada no seu navegador.");
-        }
 
         this.appMobile = this.auth.isAppMobile();
 
