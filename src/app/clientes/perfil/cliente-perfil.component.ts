@@ -49,7 +49,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     legitimuzToken = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
-    // faceMatchProfileEdit = false;
+    faceMatchProfileEdit = false;
     cliente : Cliente;
 
     constructor(
