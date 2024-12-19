@@ -10,9 +10,9 @@
     <div style="min-width: 143px;">
         <div><p>{{msg}}</p></div>
 
-        <div class="actions" *ngIf="faceMatchActive && !showLoading">
+        <div class="actions" *ngIf="faceMatchEnabled && faceMatchAccountDeletion && !showLoading">
             <div #legitimuz id="legitimuz-container"
-                *ngIf="faceMatchEnabled && !faceMatchActive && !verifiedIdentity">
+                *ngIf="faceMatchEnabled && faceMatchAccountDeletion && !verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
@@ -31,7 +31,7 @@
             </div>
 
             <div #legitimuzLiveness id="legitimuz-container"
-                *ngIf="faceMatchEnabled && !faceMatchActive && verifiedIdentity">
+                *ngIf="faceMatchEnabled && faceMatchAccountDeletion && verifiedIdentity">
                 <div id="legitimuz">
                     <div id="verify-identity-text">
                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
@@ -51,7 +51,7 @@
         </div>
         <div class="actions">
             <button type="button" class="btn btn-custom2" (click)="activeModal.dismiss('')" data-dismiss="modal">Não</button>
-            <button type="button" class="btn btn-custom" (click)="activeModal.close('')" [disabled]="faceMatchActive">Sim</button>
+            <button type="button" class="btn btn-custom" (click)="activeModal.close('')" [disabled]="!faceMatchActive">Sim</button>
         </div>
     </div>
 </div>

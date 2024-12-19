@@ -21,8 +21,6 @@ export class ConfirmModalComponent implements OnInit {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
     faceMatchEnabled = false;
-    faceMatchChangePassword = false;
-    faceMatchChangePasswordValidated = false;
     legitimuzToken = "";
     verifiedIdentity = null;
     disapprovedIdentity = false;
@@ -30,6 +28,7 @@ export class ConfirmModalComponent implements OnInit {
     showLoading = true;
     cliente: Cliente;
     faceMatchActive = false;
+    faceMatchAccountDeletion = false;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -48,9 +47,10 @@ export class ConfirmModalComponent implements OnInit {
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchAccountBankDeletion);
         if (!this.faceMatchEnabled) {
             this.faceMatchActive = true;
+            this.showLoading = false;
         }
 
-        this.faceMatchActive = this.paramsLocais.getOpcoes().faceMatchAccountBankDeletion;
+        this.faceMatchAccountDeletion = this.paramsLocais.getOpcoes().faceMatchAccountBankDeletion;
 
         const user = JSON.parse(localStorage.getItem('user'));
         this.clienteService.getCliente(user.id)
@@ -78,11 +78,11 @@ export class ConfirmModalComponent implements OnInit {
                             next: (res) => {
                                 this.LegitimuzFacialService.closeModal();
                                 this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                                this.faceMatchActive = false;
+                                this.faceMatchActive = true;
                                 this.cd.detectChanges();
                             }, error: (error) => {
                                 this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                                this.faceMatchActive = true;
+                                this.faceMatchActive = false;
                             }
                         })
                     }
@@ -95,11 +95,11 @@ export class ConfirmModalComponent implements OnInit {
                         next: (res) => {
                             this.LegitimuzFacialService.closeModal();
                             this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                            this.faceMatchActive = false;
+                            this.faceMatchActive = true;
                             this.cd.detectChanges();
                         }, error: (error) => {
                             this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                            this.faceMatchActive = true;
+                            this.faceMatchActive = false;
                         }
                     })
                 }
