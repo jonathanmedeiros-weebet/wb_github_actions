@@ -147,6 +147,17 @@ export class ClienteService {
         );
     }
 
+    deleteBankAccount(account) {
+        return this.http.post(`${this.clienteUrl}/deleteBankAccount`, JSON.stringify(account),
+        this.headers.getRequestOptions(true))
+        .pipe(
+            map((response: any) => {
+                return response.results.result
+            }),
+            catchError(this.errorService.handleError)
+        );
+    }
+
     atualizarPix(dadosCadastrais) {
         return this.http.post(`${this.clienteUrl}/atualizarChavePix`, JSON.stringify(dadosCadastrais),
             this.headers.getRequestOptions(true))

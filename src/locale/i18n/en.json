@@ -269,7 +269,8 @@
         "action": "Action",
         "tax": "Tax",
         "validatePhone": "Phone Verification",
-        "savedSuccessfully":  "Saved successfully!"
+        "savedSuccessfully":  "Saved successfully!",
+        "successfullyDeleted": "Successfully deleted!"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
