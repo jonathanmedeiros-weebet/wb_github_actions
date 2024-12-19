@@ -29,7 +29,7 @@ export class ConfirmModalComponent implements OnInit {
     private unsub$ = new Subject();
     showLoading = true;
     cliente: Cliente;
-    faceMatchActive = true;
+    faceMatchActive = false;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -47,8 +47,10 @@ export class ConfirmModalComponent implements OnInit {
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchAccountBankDeletion);
         if (!this.faceMatchEnabled) {
-            this.faceMatchChangePasswordValidated = true;
+            this.faceMatchActive = true;
         }
+
+        this.faceMatchActive = this.paramsLocais.getOpcoes().faceMatchAccountBankDeletion;
 
         const user = JSON.parse(localStorage.getItem('user'));
         this.clienteService.getCliente(user.id)
