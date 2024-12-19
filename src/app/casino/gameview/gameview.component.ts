@@ -22,6 +22,7 @@ import { WallProviderFilterModalComponent } from '../wall/components/wall-provid
 import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
+import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
 
 
 @Component({
@@ -413,6 +414,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.message = message;
     }
 
+    showModalPercentage(message_percentage: string) {
+        const modalRef = this.modalService.open(ConfiguracaoLimitePerdasPorcentagemModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+        modalRef.componentInstance.message = message_percentage;
+    }
+
     loadGame() {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
@@ -421,10 +432,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
-
-                    if (response.loss_limit.error) {
+                    if(!response.loss_limit.percentage && response.loss_limit.error){
                         this.showModal(response.loss_limit.message);
+                        this.router.navigate(['/']);
                     }
+                    if (response.loss_limit.percentage) {
+                        this.showModalPercentage(response.loss_limit.message_percentage);
+                    }
+
 
                     if (typeof response.gameUrl !== 'undefined') {
                         this.gameCategory = response.category;
