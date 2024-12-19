@@ -46,6 +46,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
 
     faceMatchEnabled = false;
     faceMatchProfileEdit = false;
+    faceMatchProfileEditValidated = false;
     legitimuzToken = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
@@ -94,7 +95,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
         if (!this.faceMatchEnabled) {
-            this.faceMatchProfileEdit = true;
+            this.faceMatchProfileEditValidated = true;
         }
 
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
@@ -107,11 +108,12 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                         this.legitimuzService.closeModal();
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, profile_edit: true }).subscribe()
+                        this.faceMatchProfileEditValidated = true;
                         this.faceMatchProfileEdit = true;
                     } else if (!this.verifiedIdentity && this.verifiedIdentity !== null) {
                         this.legitimuzService.closeModal();
                         this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                        this.faceMatchProfileEdit = false;
+                        this.faceMatchProfileEditValidated = false;
                     }
                 });
             this.legitimuzFacialService.faceIndex
@@ -122,10 +124,11 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             next: (res) => {
                                 this.legitimuzFacialService.closeModal();
                                 this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchProfileEditValidated = true;
                                 this.faceMatchProfileEdit = true;
                             }, error: (error) => {
                                 this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                                this.faceMatchProfileEdit = false;
+                                this.faceMatchProfileEditValidated = false;
                             }
                         })
                     }

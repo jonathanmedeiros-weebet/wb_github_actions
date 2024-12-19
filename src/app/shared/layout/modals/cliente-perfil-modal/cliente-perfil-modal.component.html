@@ -9,7 +9,7 @@
     <ng-container>
         <div class="content-body">
             <div class="content">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <form [formGroup]="form">
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="nome" class="form-control inverted-out" readonly>
                         <label class="disabled">{{'geral.nome' | translate}}</label>
@@ -103,26 +103,26 @@
                     </div>
                     <div *ngIf="faceMatchEnabled">
                         <h5 id="faceMatch">Reconhecimento Facial</h5>
-                        <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchProfileEdit && !verifiedIdentity">
+                        <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !verifiedIdentity">
                             <div id="legitimuz">
                                 <div id="verify-identity-text">
                                     {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                                 </div>
                                 <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                                <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
+                                <button (click)="test()"id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
                                     <i class="fa-solid fa-id-card"></i>
                                     {{'saques.identityVerify' | translate}}
                                 </button>
                             </div>
                             <div id="legitimuz-root"></div>
                         </div>
-                        <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchProfileEdit && verifiedIdentity">
+                        <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && verifiedIdentity">
                             <div id="legitimuz">
                                 <div id="verify-identity-text">
                                     {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
                                 </div>
                                 <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
-                                <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
+                                <button (click)="test()" id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
                                     <i class="fa-solid fa-id-card"></i>
                                     {{'saques.identityVerify' | translate}}
                                 </button>
@@ -137,6 +137,7 @@
                         <button
                             class="btn btn-custom w-150"
                             type="submit"
+                            (click)="onSubmit()"
                             [disabled]="form.invalid || !faceMatchProfileEdit"
                         >
                             {{'geral.atualizar' | translate}}

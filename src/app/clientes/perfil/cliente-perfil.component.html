@@ -7,7 +7,7 @@
         </div>
         <div class="content-body">
             <div class="content">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <form [formGroup]="form">
                     <fieldset>
                         <div class="row">
                             <div class="col-md-2">
@@ -172,7 +172,7 @@
                     <fieldset>
                         <div *ngIf="faceMatchEnabled">
                             <h5 id="faceMatch">Reconhecimento Facial</h5>
-                            <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchProfileEdit && !verifiedIdentity">
+                            <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !verifiedIdentity">
                                 <div id="legitimuz">
                                     <div id="verify-identity-text">
                                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
@@ -185,7 +185,7 @@
                                 </div>
                                 <div id="legitimuz-root"></div>
                             </div>
-                            <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && !faceMatchProfileEdit && verifiedIdentity">
+                            <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && verifiedIdentity">
                                 <div id="legitimuz">
                                     <div id="verify-identity-text">
                                         {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
@@ -206,7 +206,8 @@
                             <button
                                 class="btn btn-custom w-150"
                                 type="submit"
-                                [disabled]="form.invalid || !faceMatchProfileEdit"
+                                (click)="onSubmit()"
+                                [disabled]="form.invalid || (faceMatchEnabled && !faceMatchProfileEdit)"
                             >
                                 {{'geral.atualizar' | translate}}
                             </button>
