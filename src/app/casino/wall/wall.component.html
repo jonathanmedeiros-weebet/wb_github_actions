@@ -9,17 +9,19 @@
     }"
 >
     <ng-container *ngIf="showLoadingIndicator; else elseCasinoPage;">
-        <div class="bloco skeleton-group">
-            <app-skeleton type="banner"/>
+        <app-skeleton type="banner"/>
+        <div class="bloco">
             <app-skeleton type="casino-filter-bar"/>
-            <app-skeleton type="casino"/>
-            <app-skeleton type="casino"/>
-            <app-skeleton type="casino"/>
-            <app-skeleton type="casino"/>
-            <app-skeleton type="casino"/>
-            <app-skeleton type="casino"/>
-            <app-skeleton type="casino"/>
-            <app-skeleton type="provider"/>
+            <div class="skeleton-group">
+                <app-skeleton type="casino"/>
+                <app-skeleton type="casino"/>
+                <app-skeleton type="casino"/>
+                <app-skeleton type="casino"/>
+                <app-skeleton type="casino"/>
+                <app-skeleton type="casino"/>
+                <app-skeleton type="casino"/>
+                <app-skeleton type="provider"/>
+            </div>
         </div>
     </ng-container>
 
