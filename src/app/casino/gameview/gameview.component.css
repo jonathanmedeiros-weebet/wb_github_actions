@@ -201,7 +201,7 @@ iframe{
     fill: #24CC63;
     margin-left: 0;
     background-color: rgba(36, 204, 99, 0.20);;
-    background-image: url('https://cdn.wee.bet/img/icons/whatsapp.svg');
+    background-image: url('https://wb-assets.com/img/icons/whatsapp.svg');
     background-size: 58%;
     background-repeat: no-repeat;
     background-position: center;
@@ -210,7 +210,7 @@ iframe{
 .facebook {
     fill: #395694;
     background-color: rgba(57, 86, 148, 0.20);
-    background-image: url('https://cdn.wee.bet/img/icons/facebook.svg');
+    background-image: url('https://wb-assets.com/img/icons/facebook.svg');
     background-size: 36%;
     background-repeat: no-repeat;
     background-position: center;
@@ -219,7 +219,7 @@ iframe{
 .telegram {
     fill: #2FA3D4;
     background-color: rgba(47, 163, 212, 0.20);;
-    background-image: url('https://cdn.wee.bet/img/icons/telegram.svg');
+    background-image: url('https://wb-assets.com/img/icons/telegram.svg');
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
@@ -228,7 +228,7 @@ iframe{
 .copy {
     fill: #FFF;
     background-color: rgba(255, 255, 255, 0.20);
-    background-image: url('https://cdn.wee.bet/img/icons/copy.svg');
+    background-image: url('https://wb-assets.com/img/icons/copy.svg');
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
@@ -741,7 +741,6 @@ iframe{
 
     .game-name span {
         font-size: 16px;
-        margin-left: 16px;
         margin-top: 0;
     }
 

@@ -39,7 +39,7 @@
             Possível retorno: <span>{{aposta.possibilidade_ganho | currency}}</span>
         </p>
         <p class="resultado">
-            <b>Resultados: </b>
+            <b>{{ 'geral.resultado' | translate }}: </b>
             <span *ngIf="aposta.resultado">{{aposta.resultado || titlecase}}</span>
             <span *ngIf="!aposta.resultado">Aguardando</span>
         </p>
