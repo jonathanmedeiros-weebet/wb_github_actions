@@ -153,12 +153,16 @@ export default {
       isSaldoVisible: false,
       isConsultTicketModalVisible: false,
       isConsultCardModalVisible: false,
-      toastStore: useToastStore(),
       configClientStore: useConfigClient(),
+      toastStore: useToastStore(),
+      userName: null
     };
   },
   activated() {
     this.getData();
+
+    const user = localStorageService.get(LocalStorageKey.USER);
+    this.userName = user ? user.nome : '';
   },
   computed: {
     balance() {
@@ -166,10 +170,6 @@ export default {
     },
     credit() {
       return formatCurrency(Number(this.balanceData?.credito ?? 0));
-    },
-    userName() {
-      const user = localStorageService.get(LocalStorageKey.USER);
-      return user ? user.nome : '';
     },
     showBetCardMenu() {
       return this.configClientStore?.options?.cartao_aposta ?? false
