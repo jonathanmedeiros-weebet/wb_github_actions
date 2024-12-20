@@ -470,14 +470,14 @@ export const printLottery = async (bet: any) => {
                 .bold(true)
                 .text('RETORNO 6: ')
                 .bold(false)
-                .text('' + calculateLotteryWinnings(item.valor, item.cotacao6));
+                .text('' + formatCurrency(calculateLotteryWinnings(item.valor, item.cotacao6)));
             if (!bet.is_cliente && bet.passador.percentualPremio > 0) {
                 lotteryEscPos
                     .newline()
                     .bold(true)
                     .text('RETORNO LIQUIDO 6: ')
                     .bold(false)
-                    .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao6, bet.passador.percentualPremio));
+                    .text('' + formatCurrency(calculateNetLotteryWinnings(item.valor, item.cotacao6, bet.passador.percentualPremio)));
             }
         }
         if (item.cotacao5 > 0) {
@@ -486,14 +486,14 @@ export const printLottery = async (bet: any) => {
                 .bold(true)
                 .text('RETORNO 5: ')
                 .bold(false)
-                .text('' + calculateLotteryWinnings(item.valor, item.cotacao5));
+                .text('' + formatCurrency(calculateLotteryWinnings(item.valor, item.cotacao5)));
             if (!bet.is_cliente && bet.passador.percentualPremio > 0) {
                 lotteryEscPos
                     .newline()
                     .bold(true)
                     .text('RETORNO LIQUIDO 5: ')
                     .bold(false)
-                    .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao5, bet.passador.percentualPremio));
+                    .text('' + formatCurrency(calculateNetLotteryWinnings(item.valor, item.cotacao5, bet.passador.percentualPremio)));
             }
         }
         
@@ -503,14 +503,14 @@ export const printLottery = async (bet: any) => {
                 .bold(true)
                 .text('RETORNO 4: ')
                 .bold(false)
-                .text('' + calculateLotteryWinnings(item.valor, item.cotacao4));
+                .text('' + formatCurrency(calculateLotteryWinnings(item.valor, item.cotacao4)));
             if (!bet.is_cliente && bet.passador.percentualPremio > 0) {
                 lotteryEscPos
                     .newline()
                     .bold(true)
                     .text('RETORNO LIQUIDO 4: ')
                     .bold(false)
-                    .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao4, bet.passador.percentualPremio));
+                    .text('' + formatCurrency(calculateNetLotteryWinnings(item.valor, item.cotacao4, bet.passador.percentualPremio)));
             }
         }
         if (item.cotacao3 > 0) {
@@ -519,14 +519,14 @@ export const printLottery = async (bet: any) => {
                 .bold(true)
                 .text('RETORNO 3: ')
                 .bold(false)
-                .text('' + calculateLotteryWinnings(item.valor, item.cotacao3));
+                .text('' + formatCurrency(calculateLotteryWinnings(item.valor, item.cotacao3)));
             if (!bet.is_cliente && bet.passador.percentualPremio > 0) {
                 lotteryEscPos
                     .newline()
                     .bold(true)
                     .text('RETORNO LIQUIDO 3: ')
                     .bold(false)
-                    .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao3, bet.passador.percentualPremio));
+                    .text('' + formatCurrency(calculateNetLotteryWinnings(item.valor, item.cotacao3, bet.passador.percentualPremio)));
             }
         }
     });
