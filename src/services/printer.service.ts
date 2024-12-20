@@ -106,7 +106,7 @@ export const printTicket = async (bet: any) => {
             .bold(true)
             .text('QUANTIDADE DE JOGOS: ')
             .bold(false)
-            .text(bet.itens.length)
+            .text('' + bet.itens.length)
             .newline()
             .bold(true)
             .text('COTACAO: ')
