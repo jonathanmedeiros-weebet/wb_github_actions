@@ -48,6 +48,48 @@ export const capitalizeFirstLetter = (str: string) => {
     }
 }
 
+export const calculateTotalValueLottery = (bet: any) => {
+    return bet.itens.reduce((total: any, i: any) => {
+        return total + i.valor;
+    }, 0);
+}
+
+export const calculateLotteryWinnings = (valor: any, cotacao: any) => {
+    const { maxLotteryValue } = useConfigClient();
+
+    let result = valor * cotacao;
+
+    if (result > maxLotteryValue) {
+        result = maxLotteryValue;
+    }
+
+    return result;
+}
+
+export const calculateNetLotteryWinnings = (valor: any, cotacao: any, percentualPremio: any) => {
+    const { maxLotteryValue } = useConfigClient();
+
+    let result = valor * cotacao;
+
+    if (result > maxLotteryValue) {
+        result = maxLotteryValue;
+    }
+
+    result = result * (100 - percentualPremio) / 100;
+
+    return result;
+}
+
+export const getNameModalityLottery = (modalidade:any) => {
+    const { getSenaName, getQuinaName } = useConfigClient();
+
+    if (modalidade === 'seninha') {
+        return getSenaName;
+    } else {
+        return getQuinaName;
+    }
+}
+
 export const getOddAcronym = (key:any) => {
     const { betOptions } = useConfigClient();
 
