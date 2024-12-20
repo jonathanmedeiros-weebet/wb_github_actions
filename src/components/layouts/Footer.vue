@@ -40,7 +40,8 @@ export default {
         'change-password',
         'game-detail',
         'config',
-        'close-bet'
+        'close-bet',
+        'table'
       ].includes(this.$route.name)
     },
     showCopyright() {

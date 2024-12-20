@@ -26,10 +26,10 @@
                             >
                             Selecionar todos de {{ formatedDate }}
                         </label>
-                        <ul v-show="championships.length">
+                        <ul v-show="championshipList.length">
                             <i class="table__container-list-icon"></i>
                             <li
-                                v-for="(championship, index) in championships"
+                                v-for="(championship, index) in championshipList"
                                 class="table__list-item"
                                 :key="index"
                             >
@@ -70,6 +70,7 @@ import { useHomeStore, useToastStore } from '@/stores';
 import { getChampionshipBySportId, printTable } from '@/services';
 import IconSearch from '@/components/icons/IconSearch.vue';
 import { getOddsToPrint } from '../utilities/general.utility';
+import { getModalitiesEnum } from '@/constants';
 
 export default {
     name: 'table',
@@ -91,6 +92,10 @@ export default {
         };
     },
     computed: {
+        championshipList() {
+            if(!Boolean(this.tableChampionshipName)) return this.championships;
+            return this.championships.filter(championship => (championship.nome.toLowerCase()).includes(this.tableChampionshipName.toLowerCase()))
+        },
         formatedDate() {
             const date = dateFormatInDayAndMonthAndYearBR(this.today);
             return date;
@@ -102,9 +107,19 @@ export default {
         },
         async fetchChampionships() {
             if (this.oddsToPrint.length) {
-                await getChampionshipBySportId('1', '', now().format('YYYY-MM-DD'), false, this.oddsToPrint).then((campeonatos) => {
-                    this.championships = campeonatos;
-                }).catch(error => {
+                const modalities = getModalitiesEnum();
+                const currentDate = now().format('YYYY-MM-DD');
+                
+                await getChampionshipBySportId(
+                    modalities.FOOTBALL,
+                    '',
+                    currentDate,
+                    false,
+                    this.oddsToPrint
+                )
+                .then((campeonatos) => this.championships = campeonatos)
+                .catch(error => {
+                    console.error(error)
                     this.toastStore.setToastConfig({
                         message: 'Ocorreu algum erro ao buscar os campeonatos.',
                         type: ToastType.DANGER,
@@ -130,7 +145,7 @@ export default {
             const checkboxes = document.querySelectorAll('.checkbox-item');
 
             if (selectAll.checked) {
-                this.selectedChampionships = [...this.championships];
+                this.selectedChampionships = [...this.championshipList];
             } else {
                 this.selectedChampionships = [];
             }
@@ -144,7 +159,7 @@ export default {
 
             if (event.target.checked) {
                 if (!this.selectedChampionships.some(champ => champ._id === selectedId)) {
-                    const selectedChampionship = this.championships.find(champ => champ._id === selectedId);
+                    const selectedChampionship = this.championshipList.find(champ => champ._id === selectedId);
                     if (selectedChampionship) {
                         this.selectedChampionships.push(selectedChampionship);
                     }
@@ -154,7 +169,7 @@ export default {
             }
         }
     },
-    async mounted() {
+    async activated() {
         await this.fetchOddsToPrint();
         this.fetchChampionships();
     }
