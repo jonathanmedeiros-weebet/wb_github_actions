@@ -366,13 +366,7 @@ export const printTable = async (camps: any) => {
                     .newline();
             }
         });
-        tableEscPos
-            .newline()
-            .newline()
-            .newline()
-            .newline()
-            .newline()
-            .newline();
+        tableEscPos.newline();
     })
     const data = Array.from(tableEscPos.encode());
     wbPostMessage('printTable', data)
