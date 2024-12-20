@@ -1220,15 +1220,6 @@ gulp.task('81betpix.wee.bet', function (done) {
     });
 });
 
-gulp.task('sportpix.vip', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "sportpix.vip",
-        banca: "SPORTPIX",
-        styles: "",
-    });
-});
-
 gulp.task('alfasports.online', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
