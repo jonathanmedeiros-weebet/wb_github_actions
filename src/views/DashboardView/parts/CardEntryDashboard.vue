@@ -75,7 +75,7 @@ export default {
     },
     data(){
         return {
-            colors: ['#3879EB', '#7BCDFC', '#7960CC', '#A65AE5', '#F1A923']
+            colors: ['#3879EB', '#7BCDFC', '#7960CC', '#A65AE5', '#F1A923', '#A1A925' ]
         }
     },
     methods: {
@@ -103,7 +103,8 @@ export default {
                 'aovivo': 'Ao vivo',
                 'desafio': 'Desafio',
                 'acumuladao': 'Acumuladão',
-                'loteria': 'Loteria'
+                'loteria': 'Loteria',
+                'cartao_aposta': 'Vendas Cartões'
             };
 
             if(!this.data.categories.length) return [];

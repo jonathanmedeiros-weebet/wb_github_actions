@@ -224,6 +224,12 @@ export default {
                             value: parseFloat(resp?.loteria.apostado ?? 0)
                         });
                     }
+                    if (options.cartao_aposta) {
+                        dataCategorias.push({
+                            title: "cartao_aposta",
+                            value: parseFloat(resp?.cartao ?? 0)
+                        });
+                    }
 
                     this.entryData.categories = [];
                     this.entryData.categories = dataCategorias;
