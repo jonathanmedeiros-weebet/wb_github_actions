@@ -284,10 +284,10 @@ gulp.task('bet4.wee.bet', function (done) {
     });
 });
 
-gulp.task('bet5.wee.bet', function (done) {
+gulp.task('totalsorte.com.br', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "bet5.wee.bet",
+        host: "totalsorte.com.br",
         banca: "Total Sorte",
         styles: ""
     });
