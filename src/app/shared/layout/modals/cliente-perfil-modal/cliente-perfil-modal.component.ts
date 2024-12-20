@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Cliente } from './../../../models/clientes/cliente';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteService, MessageService, ParametrosLocaisService, UtilsService } from 'src/app/services';
@@ -7,25 +8,41 @@ import { Estado } from 'src/app/shared/models/endereco/estado';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import * as moment from 'moment';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MultifactorConfirmationModalComponent } from '../multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 import { TranslateService } from '@ngx-translate/core';
+import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
+import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-cliente-perfil-modal',
     templateUrl: './cliente-perfil-modal.component.html',
     styleUrls: ['./cliente-perfil-modal.component.css']
 })
-export class ClientePerfilModalComponent extends BaseFormComponent implements OnInit {
+export class ClientePerfilModalComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnDestroy {
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
+
+    unsub$ = new Subject();
     public estados: Array<Estado>;
     public cidades: Array<Cidade>;
     private estadoSelecionado: number;
     public cidadeSelecionada: number;
-    private showLoading = true;
+    showLoading = true;
     public mostrarSenha = false;
+    cliente : Cliente;
 
     private tokenMultifator: string;
     private codigoMultifator: string;
+
+    faceMatchEnabled = false;
+    faceMatchProfileEdit = false;
+    faceMatchProfileEditValidated = false;
+    legitimuzToken = "";
+    verifiedIdentity = false;
+    disapprovedIdentity = false;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -36,6 +53,10 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
         private modalService: NgbModal,
         private translate: TranslateService,
         private paramsLocais: ParametrosLocaisService,
+        private legitimuzService: LegitimuzService,
+        private legitimuzFacialService : LegitimuzFacialService,
+        private faceMatchService : FaceMatchService,
+        private cd: ChangeDetectorRef
     ) {
         super();
     }
@@ -48,6 +69,50 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
         this.createForm();
         this.utilsService.getEstados().subscribe(estados => this.estados = estados);
         this.loadCliente();
+        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
+        
+        if (!this.faceMatchEnabled) {
+            this.faceMatchProfileEditValidated = true;
+        }
+
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+                    this.legitimuzService.curCustomerIsVerified
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(curCustomerIsVerified => {
+                            this.verifiedIdentity = curCustomerIsVerified;
+                            this.cd.detectChanges();
+                            if (this.verifiedIdentity) {
+                                this.legitimuzService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, profile_edit: true }).subscribe()
+                                this.faceMatchProfileEditValidated = true;
+                                this.faceMatchProfileEdit = true;
+                            } else if (!this.verifiedIdentity && this.verifiedIdentity !== null) {
+                                this.legitimuzService.closeModal();
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchProfileEditValidated = false;
+                            }
+                        });
+
+                    this.legitimuzFacialService.faceIndex
+                        .pipe(takeUntil(this.unsub$))
+                        .subscribe(faceIndex => {
+                            if (faceIndex) {
+                                this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, profile_edit: true }).subscribe({
+                                    next: (res) => {
+                                        this.legitimuzFacialService.closeModal();
+                                        this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                        this.faceMatchProfileEditValidated = true;
+                                        this.faceMatchProfileEdit = true;
+                                    }, error: (error) => {
+                                        this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                        this.faceMatchProfileEditValidated = false;
+                                    }
+                                })
+                            }
+                        })
+                }
     }
 
     createForm() {
@@ -105,7 +170,7 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
         this.clienteService
             .atualizarDadosCadastrais(values)
             .subscribe(
-                () => this.messageService.success(this.translate.instant('geral.alteracoesSucesso')),
+                () => {this.messageService.success(this.translate.instant('geral.alteracoesSucesso')); this.faceMatchProfileEdit = false},
                 error => this.handleError(error)
             );
     }
@@ -140,7 +205,7 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
             const cliente = await this.clienteService
                 .getCliente(user.id)
                 .toPromise();
-
+            this.cliente = cliente;
             this.form.patchValue({
                 nome: cliente.nome.toUpperCase(),
                 sobrenome: cliente.sobrenome.toUpperCase(),
@@ -230,5 +295,25 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
 
     handleError(error: string) {
         this.messageService.error(error);
+    }
+
+    ngAfterViewInit() {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuz.changes
+                .subscribe(() => {
+                        this.legitimuzService.init();
+                        this.legitimuzService.mount();
+                });
+            this.legitimuzLiveness.changes
+                .subscribe(() => {
+                        this.legitimuzFacialService.init();
+                        this.legitimuzFacialService.mount();
+                });
+        }
+    }
+
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 }
