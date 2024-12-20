@@ -234,9 +234,74 @@ export const printRechargeReceipt = async (recharge: any) => {
     wbPostMessage('printCard', data)
 }
 
-export const printTable = async (camps: any) => {
+export const printDetailedCard = async (card: any) => {
     const { options } = useConfigClient();
 
+    const {
+        apkVersion,
+        printGraphics,
+        printLogo,
+        separator
+    } = await getPrinterSettings();
+    const encoder = new EscPosEncoder();
+    const cardEscPos = encoder.initialize();
+
+    if (printGraphics) {
+        if (apkVersion < 3) {
+            cardEscPos.image(printLogo, 376, 136, 'atkinson');
+        }
+    } else {
+        cardEscPos
+            .align('center')
+            .raw([0x1d, 0x21, 0x10])
+            .line(options.banca_nome)
+            .raw([0x1d, 0x21, 0x00]);
+    }
+
+    cardEscPos
+        .newline()
+        .bold(true)
+        .align('left')
+        .size('normal')
+        .line(separator)
+        .bold(true)
+        .text('Cartao: ')
+        .bold(false)
+        .text(card.chave)
+        .newline()
+        .bold(true)
+        .text('Apostador: ')
+        .bold(false)
+        .text(removerAcentos(card.apostador))
+        .newline()
+        .newline()
+        .bold(true)
+        .text('Cambista: ')
+        .bold(false)
+        .text(removerAcentos(card.passador.nome))
+        .newline()
+        .bold(true)
+        .text('Saldo atual: ')
+        .bold(false)
+        .text(`R$ ${formatCurrency(card.saldo)}`)
+        .newline()
+        .bold(true)
+        .text('Data/Hora: ')
+        .bold(false)
+        .text(formatDateTimeBR(card.data_registro))
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline();
+
+    const data = Array.from(cardEscPos.encode());
+    wbPostMessage('printCard', data)
+}
+
+export const printTable = async (camps: any) => {
+    const { options } = useConfigClient();
     const {
         apkVersion,
         printGraphics,
@@ -248,7 +313,6 @@ export const printTable = async (camps: any) => {
     const odds = await getOddsToPrint();
     const cols = 5;
     const lines = Math.ceil((await odds).length / cols);
-
     if (printGraphics) {
         if (apkVersion < 3) {
             tableEscPos.image(printLogo, 376, 136, 'atkinson');
@@ -260,7 +324,6 @@ export const printTable = async (camps: any) => {
             .line(options.banca_nome)
             .raw([0x1d, 0x21, 0x00]);
     }
-
     tableEscPos
         .newline()
         .bold(true)
@@ -270,13 +333,11 @@ export const printTable = async (camps: any) => {
         .bold(true)
         .text(formatDateTimeBR(now()))
         .newline()
-
     camps.forEach((camp: any) => {
         tableEscPos
             .newline()
             .bold(true)
             .text(removerAcentos(camp.nome))
-
         camp.jogos.forEach((game: any) => {
             const horarioObj = new Date(game.horario);
             const horario = horarioObj.toLocaleTimeString('pt-BR', {
@@ -287,16 +348,13 @@ export const printTable = async (camps: any) => {
                 .newline()
                 .bold(false)
                 .text(horario + ' ' + removerAcentos(game.nome));
-
             for (let i = 0; i < lines; i++) {
                 let start = i * cols;
-
                 const oddPos1 = odds[start];
                 const oddPos2 = odds[++start];
                 const oddPos3 = odds[++start];
                 const oddPos4 = odds[++start];
                 const oddPos5 = odds[++start];
-
                 tableEscPos
                     .newline()
                     .bold(true)
@@ -307,7 +365,6 @@ export const printTable = async (camps: any) => {
                     .newline();
             }
         });
-
         tableEscPos
             .newline()
             .newline()
@@ -316,7 +373,6 @@ export const printTable = async (camps: any) => {
             .newline()
             .newline();
     })
-
     const data = Array.from(tableEscPos.encode());
     wbPostMessage('printTable', data)
 }

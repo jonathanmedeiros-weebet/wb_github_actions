@@ -41,7 +41,16 @@ export default {
         'game-detail',
         'config',
         'close-bet',
-        'table'
+        'table',
+        'detailed-card',
+        'reckoning',
+        'dashboard',
+        'recharge-card',
+        'create-card',
+        'list-cards',
+        'withdrawal-card',
+        'movements',
+        'results'
       ].includes(this.$route.name)
     },
     showCopyright() {
@@ -54,6 +63,7 @@ export default {
 
 <style lang="scss" scoped>
   .footer {
+    z-index: 1;
     bottom: 0;
     position: fixed;
     width: 100%;
