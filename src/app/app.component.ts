@@ -123,7 +123,6 @@ export class AppComponent implements OnInit {
         this.eventPushXtremepush();
 
         this.auth.logado.subscribe((isLogged) => {
-            console.log('LOGADO:', isLogged);
             const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity);
             const activityUserConfig = Boolean(this.activityDetectService.getActivityTimeConfig());
             const isCliente = this.auth.isCliente();

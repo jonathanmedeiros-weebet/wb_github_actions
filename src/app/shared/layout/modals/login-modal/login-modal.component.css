@@ -84,7 +84,6 @@ asl-google-signin-button {
 .showPassword {
     position: absolute;
     top: calc(50% - 16px);
-    ;
     right: 0;
     color: var(--foreground-inputs-odds);
     cursor: pointer;
