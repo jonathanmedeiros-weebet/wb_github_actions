@@ -207,10 +207,12 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             }
                         }
                         this.form.get('estado').patchValue(this.estadoSelecionado);
-                            this.form.patchValue({
-                                logradouro: endereco.logradouro,
-                                bairro: endereco.bairro,
-                            });
+                        if (endereco.bairro) {
+                            this.form.get('bairro').patchValue(endereco.bairro);
+                        }
+                        if (endereco.logradouro) {
+                            this.form.get('logradouro').patchValue(endereco.logradouro);
+                        } 
                     } else {
                         this.handleError(this.translate.instant('geral.enderecoNaoEncontrado'));
                     }

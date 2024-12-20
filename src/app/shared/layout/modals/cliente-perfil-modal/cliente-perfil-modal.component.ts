@@ -216,19 +216,21 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                                 }
                         },
                         error => this.handleError(error));
-                        } else {
-                            for (let cidade of this.cidades) {
-                                if (cidade.nome == endereco.localidade.toUpperCase()) {
-                                    this.cidadeSelecionada = cidade.id;
-                                    this.form.get('cidade').patchValue(this.cidadeSelecionada);
-                                }
+                    } else {
+                        for (let cidade of this.cidades) {
+                            if (cidade.nome == endereco.localidade.toUpperCase()) {
+                                this.cidadeSelecionada = cidade.id;
+                                this.form.get('cidade').patchValue(this.cidadeSelecionada);
                             }
                         }
-                        this.form.get('estado').patchValue(this.estadoSelecionado);
-                            this.form.patchValue({
-                                logradouro: endereco.logradouro,
-                                bairro: endereco.bairro,
-                            });
+                    }
+                    this.form.get('estado').patchValue(this.estadoSelecionado);
+                    if (endereco.bairro) {
+                        this.form.get('bairro').patchValue(endereco.bairro);
+                    }
+                    if (endereco.logradouro) {
+                        this.form.get('logradouro').patchValue(endereco.logradouro);
+                    }     
                 } else {
                     this.handleError('Endereço não encontrado, por favor preencha manualmente');
                 }
