@@ -163,12 +163,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     async submit() {
-        this.isVPN = await this.security.isVPN();
-
-        if (this.isVPN) {
-            return false;
-        }
-
         const formData = this.form.value;
 
         if (this.loginMode === 'phone') {
