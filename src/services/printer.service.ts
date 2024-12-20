@@ -1,7 +1,9 @@
 import { useConfigClient } from '@/stores';
-import { calculateLotteryWinnings, calculateNetLotteryWinnings, formatCurrency, formatDateTimeBR, getNameModalityLottery, now, removerAcentos, wbPostMessage } from '@/utilities';
+import { calculateLotteryWinnings, calculateNetLotteryWinnings, getOddAcronym, getOddValue, formatCurrency, formatDateTimeBR, getNameModalityLottery, now, removerAcentos, wbPostMessage } from '@/utilities';
+
 import EscPosEncoder from 'esc-pos-encoder';
 import { axiosInstance } from './axiosInstance';
+import { getOddsToPrint } from '../utilities/general.utility';
 
 export const printTicket = async (bet: any) => {
     const { options } = useConfigClient();
@@ -233,9 +235,8 @@ export const printRechargeReceipt = async (recharge: any) => {
     wbPostMessage('printCard', data)
 }
 
-export const printLottery = async (bet: any) => {
+export const printDetailedCard = async (card: any) => {
     const { options } = useConfigClient();
-    const separatorLine = '================================'
 
     const {
         apkVersion,
@@ -244,8 +245,150 @@ export const printLottery = async (bet: any) => {
         separator
     } = await getPrinterSettings();
     const encoder = new EscPosEncoder();
-    const lotteryEscPos = encoder.initialize();
+    const cardEscPos = encoder.initialize();
 
+    if (printGraphics) {
+        if (apkVersion < 3) {
+            cardEscPos.image(printLogo, 376, 136, 'atkinson');
+        }
+    } else {
+        cardEscPos
+            .align('center')
+            .raw([0x1d, 0x21, 0x10])
+            .line(options.banca_nome)
+            .raw([0x1d, 0x21, 0x00]);
+    }
+
+    cardEscPos
+        .newline()
+        .bold(true)
+        .align('left')
+        .size('normal')
+        .line(separator)
+        .bold(true)
+        .text('Cartao: ')
+        .bold(false)
+        .text(card.chave)
+        .newline()
+        .bold(true)
+        .text('Apostador: ')
+        .bold(false)
+        .text(removerAcentos(card.apostador))
+        .newline()
+        .newline()
+        .bold(true)
+        .text('Cambista: ')
+        .bold(false)
+        .text(removerAcentos(card.passador.nome))
+        .newline()
+        .bold(true)
+        .text('Saldo atual: ')
+        .bold(false)
+        .text(`R$ ${formatCurrency(card.saldo)}`)
+        .newline()
+        .bold(true)
+        .text('Data/Hora: ')
+        .bold(false)
+        .text(formatDateTimeBR(card.data_registro))
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline()
+        .newline();
+
+    const data = Array.from(cardEscPos.encode());
+    wbPostMessage('printCard', data)
+}
+
+export const printTable = async (camps: any) => {
+    const { options } = useConfigClient();
+    const {
+        apkVersion,
+        printGraphics,
+        printLogo,
+        separator
+    } = await getPrinterSettings();
+    const encoder = new EscPosEncoder();
+    const tableEscPos = encoder.initialize();
+    const odds = await getOddsToPrint();
+    const cols = 5;
+    const lines = Math.ceil((await odds).length / cols);
+    if (printGraphics) {
+        if (apkVersion < 3) {
+            tableEscPos.image(printLogo, 376, 136, 'atkinson');
+        }
+    } else {
+        tableEscPos
+            .align('center')
+            .raw([0x1d, 0x21, 0x10])
+            .line(options.banca_nome)
+            .raw([0x1d, 0x21, 0x00]);
+    }
+    tableEscPos
+        .newline()
+        .bold(true)
+        .align('left')
+        .size('normal')
+        .line(separator)
+        .bold(true)
+        .text(formatDateTimeBR(now()))
+        .newline()
+    camps.forEach((camp: any) => {
+        tableEscPos
+            .newline()
+            .bold(true)
+            .text(removerAcentos(camp.nome))
+        camp.jogos.forEach((game: any) => {
+            const horarioObj = new Date(game.horario);
+            const horario = horarioObj.toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            tableEscPos
+                .newline()
+                .bold(false)
+                .text(horario + ' ' + removerAcentos(game.nome));
+            for (let i = 0; i < lines; i++) {
+                let start = i * cols;
+                const oddPos1 = odds[start];
+                const oddPos2 = odds[++start];
+                const oddPos3 = odds[++start];
+                const oddPos4 = odds[++start];
+                const oddPos5 = odds[++start];
+                tableEscPos
+                    .newline()
+                    .bold(true)
+                    .text(removerAcentos(`${getOddAcronym(oddPos1)} ${getOddAcronym(oddPos2)} ${getOddAcronym(oddPos3)} ${getOddAcronym(oddPos4)} ${getOddAcronym(oddPos5)}`))
+                    .newline()
+                    .bold(false)
+                    .text(`${getOddValue(oddPos1, game.cotacoes)} ${getOddValue(oddPos2, game.cotacoes)} ${getOddValue(oddPos3, game.cotacoes)} ${getOddValue(oddPos4, game.cotacoes)} ${getOddValue(oddPos5, game.cotacoes)}`)
+                    .newline();
+            }
+        });
+        tableEscPos
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline()
+            .newline();
+    })
+    const data = Array.from(tableEscPos.encode());
+    wbPostMessage('printTable', data)
+}
+
+export const printLottery = async (bet: any) => {
+    const { options } = useConfigClient();
+    const separatorLine = '================================'
+    const {
+        apkVersion,
+        printGraphics,
+        printLogo,
+        separator
+    } = await getPrinterSettings();
+    const encoder = new EscPosEncoder();
+    const lotteryEscPos = encoder.initialize();
     if (printGraphics) {
         if (apkVersion < 3) {
             lotteryEscPos.image(printLogo, 376, 136, 'atkinson');
@@ -257,7 +400,6 @@ export const printLottery = async (bet: any) => {
             .line(options.banca_nome)
             .raw([0x1d, 0x21, 0x00]);
     }
-
     lotteryEscPos
         .newline()
         .bold(true)
@@ -272,7 +414,6 @@ export const printLottery = async (bet: any) => {
         .text('Data: ')
         .bold(false)
         .text((formatDateTimeBR(bet.horario)));
-
     if (bet.is_cliente) {
         lotteryEscPos
             .newline()
@@ -295,7 +436,6 @@ export const printLottery = async (bet: any) => {
             .text(removerAcentos(bet.apostador))
             .newline();
     }
-
     lotteryEscPos
         .bold(true)
         .text('MODALIDADE: ')
@@ -307,7 +447,6 @@ export const printLottery = async (bet: any) => {
         .bold(false)
         .text(formatCurrency(bet.valor))
         .newline();
-
     bet.itens.forEach((item: any) => {
         lotteryEscPos
             .newline()
@@ -341,7 +480,6 @@ export const printLottery = async (bet: any) => {
                     .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao6, bet.passador.percentualPremio));
             }
         }
-
         if (item.cotacao5 > 0) {
             lotteryEscPos
                 .newline()
@@ -375,7 +513,6 @@ export const printLottery = async (bet: any) => {
                     .text('' + calculateNetLotteryWinnings(item.valor, item.cotacao4, bet.passador.percentualPremio));
             }
         }
-
         if (item.cotacao3 > 0) {
             lotteryEscPos
                 .newline()
@@ -393,7 +530,6 @@ export const printLottery = async (bet: any) => {
             }
         }
     });
-
     lotteryEscPos
         .newline()
         .newline()
@@ -401,7 +537,6 @@ export const printLottery = async (bet: any) => {
         .newline()
         .newline()
         .newline();
-
     const data = Array.from(lotteryEscPos.encode());
     wbPostMessage('printLottery', data)
 }

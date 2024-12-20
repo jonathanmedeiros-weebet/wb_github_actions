@@ -18,6 +18,11 @@ import CloseBetView from '@/views/CloseBetView/CloseBetView.vue'
 import PopularLotteryView from '@/views/PopularLotteryView.vue'
 import RechargeCardView from '@/views/RechargeCardView.vue'
 import RechargeReceiptView from '@/views/RechargeReceiptView.vue'
+import TableView from '@/views/TableView.vue'
+import WithdrawalCardView from '@/views/WithdrawalCardView/WithdrawalCardView.vue'
+import CardListView from '@/views/CardListView.vue'
+import CreateCardView from '@/views/CreateCardView.vue'
+import DetailedCardView from '@/views/DetailedCardView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -145,6 +150,15 @@ const router = new VueRouter({
       }
     },
     {
+      path: '/list-cards',
+      name: 'list-cards',
+      component: CardListView,
+      meta: {
+        auth: production
+      }
+
+    },
+    {
       path: '/recharge-card',
       name: 'recharge-card',
       component: RechargeCardView,
@@ -162,9 +176,39 @@ const router = new VueRouter({
       props: true
     },
     {
+      path: '/withdrawal',
+      name: 'withdrawal-card',
+      component: WithdrawalCardView,
+    },
+    {
+      path: '/create-card',
+      name: 'create-card',
+      component: CreateCardView,
+      meta: {
+        auth: production
+      }
+    },
+    {
+      path: '/detailed-card/:code/:pin',
+      name: 'detailed-card',
+      component: DetailedCardView,
+      meta: {
+        auth: production
+      },
+      props: true
+    },
+    {
       path: '/popular-lottery',
       name: 'popular-lottery',
       component: PopularLotteryView,
+      meta: {
+        auth: production
+      }
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: TableView,
       meta: {
         auth: production
       }
