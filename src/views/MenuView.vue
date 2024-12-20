@@ -86,6 +86,10 @@
             <IconFactCheck class="more-options__icon" />
             <span class="more-options__text-icon">Resultados</span>
           </button>
+          <button class="more-options__item" @click="handleNavigate('/table')">
+            <IconPrinter class="more-options__icon" color="var(--foreground-inputs-odds)" />
+            <span class="more-options__text-icon">Tabela</span>
+          </button>
           <button class="more-options__item" @click="handleLogout">
             <IconLogout class="more-options__icon" />
             <span class="more-options__text-icon">Sair</span>
@@ -127,6 +131,7 @@ import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import { useConfigClient, useToastStore } from '@/stores';
 import IconCreditCard from '@/components/icons/IconCreditCard.vue';
+import IconPrinter from '@/components/icons/IconPrinter.vue';
 
 export default {
   name: 'userMenu',
@@ -141,6 +146,7 @@ export default {
     IconManageSearch,
     IconInsertChart,
     IconCreditCard,
+    IconPrinter,
     ModalConsultTicket,
     ModalConsultCard,
     Toast

@@ -41,6 +41,7 @@ export default {
         'game-detail',
         'config',
         'close-bet',
+        'table',
         'detailed-card',
         'reckoning',
         'dashboard',
