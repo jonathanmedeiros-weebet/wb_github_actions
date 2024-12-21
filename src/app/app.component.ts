@@ -150,7 +150,8 @@ export class AppComponent implements OnInit {
                 });
             }
 
-            if (isLogged) {
+            const enableAnalyzeGeolocation = this.paramsLocais.getOpcoes().enable_analyze_geolocation;
+            if (isLogged && enableAnalyzeGeolocation) {
                 this.cron.startTime(() => this.security.analyzeGeoLocation(), 1000 * 60 * 30);
             }
         });
