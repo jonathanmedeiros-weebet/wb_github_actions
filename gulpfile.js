@@ -2413,7 +2413,8 @@ gulp.task('apostefacil.bet', function (done) {
         host: "apostefacil.bet",
         banca: "APOSTE FÁCIL",
         styles: "",
-        xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS"
+        xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS",
+        scripts: "<script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key=198ddc72-f816-4130-b077-3e3bd265be1c'> </script>"
     });
 });
 
