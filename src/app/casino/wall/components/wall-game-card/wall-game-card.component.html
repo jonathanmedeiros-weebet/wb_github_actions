@@ -5,21 +5,21 @@
 }">
     <ng-container>
         <div class="game-card__image-container">
-                <img
+            <img
                 class="game-card__image"
                 loading="lazy"
                 title="{{game.gameName}}"
                 [src]="gameImageUrl"
-                >
-                <div class="game-button">
-                    <div class="game-button__container">
-                        <ng-container *ngIf="!isDemo">
+            >
+            <div class="game-button">
+                <div class="game-button__container">
+                    <ng-container *ngIf="!isDemo">
                         <a
-                        *ngIf="game.gameDemo"
-                        [routerLink]="routerLinkDemo"
-                        class="btn btn-xs game-button--demo"
-                        >
-                            {{'geral.demo' | translate}}
+                            *ngIf="game.gameDemo"
+                            [routerLink]="routerLinkDemo"
+                            class="btn btn-xs game-button--demo"
+                            >
+                                {{'geral.demo' | translate}}
                         </a>
                         <ng-container *ngIf="isLoggedIn && isCliente">
                             <a
@@ -73,8 +73,8 @@
                             </a>
                         </ng-container>
                     </ng-container>
-                        </div>
-                         </div>
+                </div>
+            </div>
         </div>    
     </ng-container>
     

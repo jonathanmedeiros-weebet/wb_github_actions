@@ -1,0 +1,80 @@
+.loading-listagem .slider {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.loading-listagem .slider .title {
+    display: flex;
+    justify-content: space-between;
+    height: 27px;
+    margin: 18px 0;
+    width: 16em;
+}
+
+.loading-listagem .slider > .title .left {
+    height: 32px;
+    width: 100%;
+}
+
+.loading-listagem .slider .itens {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding-right: 10px;
+}
+
+.square-container {
+    min-width: 0;
+    height: auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.square-container .ssc-square.content {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    border-radius: 5px;
+    height: auto;
+}
+
+.square-container .title {
+    gap: 8px;
+    display: flex;
+    margin: 12px 0;
+    padding-left: 4px;
+    flex-direction: column;
+}
+
+.square-container .title-square,
+.square-container .sub-title-square {
+    height: 10px;
+    border-radius: 3px;
+}
+
+.title-square {
+    width: calc(100% - 60px);
+}
+
+.sub-title-square {
+    width: 58px;
+}
+
+@media only screen and (min-width: 425px) {
+    .loading-listagem .slider .itens {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .loading-listagem .slider .itens {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .loading-listagem .slider .itens {
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    }
+}
