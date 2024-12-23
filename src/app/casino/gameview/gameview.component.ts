@@ -441,12 +441,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
-                    if(!response.loss_limit.loss_risk && response.loss_limit.error){
+                    if(response.loss_limit.loss_hit && response.loss_limit.error){
                         this.showModal(response.loss_limit.message);
                         this.router.navigate(['/']);
                     }
-                    if (response.loss_limit.loss_risk) {
-                        this.showModalPercentage(response.loss_limit.message_percentage);
+                    if (!response.loss_limit.loss_hit && response.loss_limit.error ) {
+                        this.showModalPercentage(response.loss_limit.message);
                     }
 
 
