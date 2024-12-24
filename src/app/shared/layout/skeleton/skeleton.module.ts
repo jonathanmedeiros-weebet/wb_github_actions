@@ -6,6 +6,7 @@ import { SkeletonProviderComponent } from './types/skeleton-provider/skeleton-pr
 import { SkeletonCasinoFilterBarComponent } from './types/skeleton-casino-filter-bar/skeleton-casino-filter-bar.component';
 import { SkeletonBannerComponent } from './types/skeleton-banner/skeleton-banner.component';
 import { SkeletonSmallBannerComponent } from './types/skeleton-small-banner/skeleton-small-banner.component';
+import { SkeletonGameCasinoComponent } from './types/skeleton-game-casino/skeleton-game-casino.component';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { SkeletonSmallBannerComponent } from './types/skeleton-small-banner/skel
        SkeletonProviderComponent,
        SkeletonCasinoFilterBarComponent,
        SkeletonBannerComponent,
+       SkeletonGameCasinoComponent,
        SkeletonSmallBannerComponent
     ],
     imports: [

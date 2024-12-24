@@ -1,3 +1,12 @@
+<div class="skeleton-container" *ngIf="showLoadingIndicator">
+    <ng-container>
+        <div class="skeleton-group">
+            <app-skeleton type="game-casino"/>
+            <app-skeleton type="casino"/>
+            <app-skeleton type="provider"/>
+        </div>
+    </ng-container>
+</div>
 <div class="bloco bloco-container-gameview" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
     <app-back-page *ngIf="!isLoggedIn && gameMode == 'REAL'">
     </app-back-page>
@@ -40,7 +49,6 @@
         <ng-container>
             <div class="game-view-mobile" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }" *ngIf="isLoggedIn || gameMode != 'REAL'" >
                 <div class="game-frame" >
-                    <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                     <ng-container *ngIf="mobileScreen">
                         <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
                     </ng-container>
@@ -128,7 +136,6 @@
         </div>
         <ng-container>
             <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame in-game" [ngClass]="{ 'is-tablet': isTablet, desktopIsloggedIn: isLoggedIn } " >
-                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                 <ng-container *ngIf="mobileScreen">
                     <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
                 </ng-container>
