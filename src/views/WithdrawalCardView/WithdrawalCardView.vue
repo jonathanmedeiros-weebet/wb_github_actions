@@ -135,7 +135,6 @@ export default {
     ModalCalendar,
     Toast,
     ModalConfirmPayment,
-    WSelect,
     SelectFake,
     ModalStatus
   },
