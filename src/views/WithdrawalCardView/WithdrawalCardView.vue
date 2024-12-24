@@ -12,14 +12,15 @@
         v-model="dateFilterView"
         :readonly="true"
       />
-      <w-select
-        label="Status"
-        name="status"
-        :options="statusOptions"
-        :selectedOption="selectedOption"
-        @change="handleSelectStatus"
-      >
-      </w-select>
+      <div class="withdrawal-card__status">
+        <label class="withdrawal-card__status-label">Status</label>
+        <SelectFake
+         titleSize="medium"
+         @click="handleOpenStatusModal"
+        >
+          {{ status.name }}
+        </SelectFake>
+      </div>
       <w-button
         id="btn-filter"
         text="Filtrar"
@@ -89,6 +90,15 @@
         @close="handleCloseModalConfirmPayment"
         @consult="handleConfirmPayment" 
       />
+
+      <ModalStatus
+        v-if="showModalStatus"
+        @closeModal="handleCloseStatusModal"
+        @click="handleModality"
+        :isBetsModality="true"
+        :modalityId="status?.id"
+        :statusModalityList="statusModalityList"
+      />
     </div>
   </div>
 </template>
@@ -109,6 +119,8 @@ import { requestWithdrawal, withdrawalPayment } from '@/services'
 import { ToastType } from '@/enums';
 import scrollMixin from '@/mixins/scroll.mixin'
 import ModalConfirmPayment from './parts/ModalConfirmPayment.vue' 
+import ModalStatus from './parts/ModalStatus.vue' 
+import SelectFake from '../HomeView/parts/SelectFake.vue'
 
 export default {
   name: 'withdrawal-card',
@@ -123,7 +135,9 @@ export default {
     ModalCalendar,
     Toast,
     ModalConfirmPayment,
-    WSelect
+    WSelect,
+    SelectFake,
+    ModalStatus
   },
   data() {
     return {
@@ -135,6 +149,7 @@ export default {
       modalItemId: '', 
       modalItemVersion: '', 
       selectedOption: '1',
+      showModalStatus: false,
       info: {
         cartao_aposta: [], 
       },        
@@ -145,10 +160,16 @@ export default {
       },
       toastStore: useToastStore(),
       configClientStore: useConfigClient(),
+      statusModalityList: [
+        { name: 'Aprovado', id: 1 },
+        { name: 'Não Aprovado', id: 2 }
+      ],
+      status: null
     }
   },
   created() {
     this.dateFilter = this.configClientStore.firstDayOfTheWeek;
+    this.status = this.statusModalityList[0];
   },
   computed: {
     statusOptions() {
@@ -164,8 +185,19 @@ export default {
     }
   },
   methods: {
+    handleOpenStatusModal() {
+      this.showModalStatus = !this.showModalStatus;
+    },
+    handleCloseStatusModal() {
+      this.showModalStatus = false;
+    },
     handleSelectStatus(value) {
       this.selectedOption = value;
+    },
+    handleModality(modalityId) {
+      this.status = this.statusModalityList.find(modality => modality.id === modalityId);
+      this.selectedOption = this.status.id;
+      this.handleCloseStatusModal();
     },
     handleOpenWithdrawalCardModal() {
       this.isWithdrawalModalVisible = true;
@@ -192,7 +224,7 @@ export default {
       return formatDateTimeBR(data);
     },
     getResults() {
-      this.params.status = this.selectedOption;
+      this.params.status = this.selectedOption; 
       this.params.initialDate = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
       this.params.endDate = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.parametros.dataInicial;
       this.getWithdrawals();
@@ -260,6 +292,19 @@ export default {
   }
   &___content-filters { 
     margin-top: 15px;
+  }
+  &__status {
+    display:  flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #181818;
+    border: 0.5px solid var(--foreground-inputs-odds);
+    margin-bottom: 15px;
+    &-label {
+      color: #ffffff;
+      color: var(--foreground-header);
+    }
   }
 }
 
