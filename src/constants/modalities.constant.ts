@@ -98,7 +98,7 @@ export const modalityList = (): ModalityOption[] => {
             hasLive: false
         },
         {
-            name: 'Loterias',
+            name: 'Loteria',
             id: Modalities.LOTTERY,
             show: Boolean(options.loterias),
             hasLive: false
