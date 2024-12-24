@@ -108,7 +108,12 @@ import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/ad
 import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accounts.component';
 import { LastAccessesModalComponent } from './modals/last-accesses-modal/last-accesses-modal.component';
 import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.module';
-
+import { RegisterModalComponentComponent } from './modals/register-modal/register-modal-component/register-modal-component.component';
+import { AddressDataComponent } from './modals/register-modal/parts/address-data/address-data.component';
+import { LoginDataComponent } from './modals/register-modal/parts/login-data/login-data.component';
+import { StepBarComponent } from './modals/register-modal/parts/step-bar/step-bar.component';
+import { NavigationBarComponent } from './modals/register-modal/parts/navigation-bar/navigation-bar.component';
+import { OnboardingModalComponent } from './modals/onboarding-modal/onboarding-modal.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -215,6 +220,12 @@ import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.mo
         AddBankAccountModalComponent,
         ListBankAccountsComponent,
         LastAccessesModalComponent,
+        RegisterModalComponentComponent,
+        AddressDataComponent,
+        LoginDataComponent,
+        StepBarComponent,
+        NavigationBarComponent,
+        OnboardingModalComponent,
     ],
     exports: [
         MainLayoutComponent,
