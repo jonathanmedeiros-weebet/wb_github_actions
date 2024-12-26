@@ -131,12 +131,12 @@ export default {
     margin-top: 10px;
 
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__description {
     color: #ffffff80;
-    color: var(--foreground-header);
+    color: var(--foreground);
     font-size: 16px;
     font-weight: 400;
     line-height: 18.75px;

@@ -66,12 +66,15 @@ export default {
     padding: 15px 8px;
     align-items: center;
     text-align: center;
-    color: #ffffff80;
-    color: var(--foreground-league);
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
+    opacity: 0.8;
   }
 
   &__team {
     display: flex;
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
     flex-direction: row;
     align-items: center;
     justify-content: space-between; 
@@ -79,6 +82,8 @@ export default {
 
   &__team-left,
   &__team-right {
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
     font-size: 14px;
     flex: 1;
   }
@@ -105,8 +110,9 @@ export default {
 
   &__scores--secondary {
     font-size: 12px;
-    color: #ffffff80;
-    color: var(--foreground-league);
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
+    opacity: 0.8;
     padding-top: 0;
   }
 
@@ -123,13 +129,14 @@ export default {
     margin-top: 8px; 
     text-align: center;
     font-size: 14px;
-    color: #ffffff80;
-    color: var(--foreground-league);
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
   }
 
   &__scores-half {
-    color: #ffffff80;
-    color: var(--foreground-league);
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
+    opacity: 0.8;
   }
 
   &__team-image-left {

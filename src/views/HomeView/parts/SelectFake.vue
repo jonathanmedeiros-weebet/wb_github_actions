@@ -6,7 +6,7 @@
         >
             <slot/>
         </span>
-        <IconArrowDown />
+        <IconArrowDown :color="iconColor" />
     </div>
 </template>
 
@@ -20,6 +20,10 @@ export default {
         titleSize: {
             type: String,
             default: 'large'
+        },
+        iconColor: {
+            type: String,
+            default: 'var(--foreground-header)'
         }
     },
     methods: {

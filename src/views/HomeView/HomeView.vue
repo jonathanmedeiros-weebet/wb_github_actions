@@ -6,7 +6,7 @@
       @calendarClick="handleOpenCalendarModal"
       @searchClick="handleOpenSearchModal"
     >
-      <SelectFake @click="handleOpenModalitiesModal"> {{ modality.name }} </SelectFake>
+      <SelectFake :iconColor="'var(--foreground-header)'" @click="handleOpenModalitiesModal"> {{ modality.name }} </SelectFake>
 
       <template #actions> 
         <LiveButton

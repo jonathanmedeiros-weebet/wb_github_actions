@@ -214,7 +214,7 @@ export default {
       background: #35cd96;
       background: var(--highlight);
       color: #181818;
-      color: var(--background);
+      color: var(--foreground-highlight);
       border-radius: 50px;
     }
   }

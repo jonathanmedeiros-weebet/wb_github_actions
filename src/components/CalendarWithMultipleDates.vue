@@ -174,8 +174,8 @@ export default {
     font-size: 16px;
     font-weight: 500;
     padding: 10px;
-    color: #35cd96;
-    color: var(--highlight);
+    color: #ffffff;
+    color: var(--foreground-header);
   }
 
   &__body {
@@ -225,13 +225,13 @@ export default {
     font-size: 14px;
     font-weight: 500;
     color: #35cd96;
-    color: var(--highlight);
+    color: var(--foreground-header);
 
     &--selected {
       background: #35cd96;
       background: var(--highlight);
       color: #ffffff;
-      color: var(--foreground-inputs-odds);
+      color: var(--foreground-highlight);
       border-radius: 50px;
     }
   }

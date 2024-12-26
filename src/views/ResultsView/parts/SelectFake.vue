@@ -6,7 +6,7 @@
         >
             <slot/>
         </span>
-        <IconArrowDown />
+        <IconArrowDown :color="iconColor" />
     </div>
 </template>
 
@@ -20,6 +20,10 @@ export default {
         titleSize: {
             type: String,
             default: 'large'
+        },
+        iconColor: {
+            type: String,
+            default: 'var(--foreground-inputs-odds)'
         }
     },
     methods: {
@@ -48,7 +52,7 @@ export default {
         font-weight: 400;
         line-height: 23.44px;
         color: #ffffff80;
-        color: var(--foreground-league);
+        color: var(--foreground-inputs-odds);
 
         &--large {
             font-size: 20px;

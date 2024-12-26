@@ -316,13 +316,11 @@ export default {
         justify-content: flex-start;
         gap: 10px;
         padding: 0 10px;
-
         width: 100%;
         overflow-y: auto;
         -ms-overflow-style: none;  
         scrollbar-width: none;  
-
-        border-bottom: 1px solid #ffffff1a;
+        border-bottom: 1px solid #0000001a;
         background: #0a0a09;
         background: var(--game);
         color: #ffffff;
@@ -338,11 +336,9 @@ export default {
         font-size: 16px;
         font-weight: 400;
         line-height: normal;
-
         background: transparent;
         border: none;
         white-space: nowrap;
-
         color: #ffffff80;
         color: var(--foreground-game);
         border-bottom: 3px solid transparent;
@@ -359,6 +355,10 @@ export default {
         &--paddintTop {
             padding-top: 155px;
         }
+    }
+
+    &__header {
+        border-bottom: solid #0a0a0a 1px;
     }
 }
 </style>

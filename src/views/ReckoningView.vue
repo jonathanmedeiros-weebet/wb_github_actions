@@ -17,11 +17,11 @@
     <div class="reckoning__container">
       <span class="date">
         {{ dateFormatedWithYear}}
-        <IconClose class="date__close" @click.native="resetDateToCurrent" />
+        <IconClose class="date__close" color="var(--foreground)" @click.native="resetDateToCurrent" />
       </span>
       <div class="collapse" @click="toggleCollapse('input', $event)">
         <div class="collapse__item">
-          <component :is="iconArrowDinamicInputs" />
+          <component :is="iconArrowDinamicInputs" color="var(--foreground)" />
           <span class="collapse__title">Entradas</span>
           <div class="collapse__value">
             <IconAdd class="collapse__icon" />
@@ -56,7 +56,7 @@
       </div>
       <div class="collapse" @click="toggleCollapse('exit')">
         <div class="collapse__item">
-          <component :is="iconArrowDinamicExits" />
+          <component :is="iconArrowDinamicExits" color="var(--foreground)" />
           <span class="collapse__title">Saídas</span>
           <div class="collapse__value">
             <IconRemove class="collapse__icon-remove" />
@@ -274,7 +274,7 @@ export default {
   border-radius: 50px;
   width: 185px;
   height: 30px;
-  opacity: 0.5;
+  opacity: 0.6;
   color: #ffffff;
   color: var(--foreground);
   background-color: #FFFFFF0D;

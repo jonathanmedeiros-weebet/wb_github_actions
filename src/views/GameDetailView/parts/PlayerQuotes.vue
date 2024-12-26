@@ -166,6 +166,7 @@ export default {
         align-items: flex-start;
         gap: 5px;
         padding: 5px;
+        border-bottom: var(--background) 1px solid;
         
         &--three-column {
             width: 200px;
@@ -252,6 +253,8 @@ export default {
     background: #0a0a09;
     background: var(--game);
     padding: 13px 24px;
+    border-bottom: var(--background) 1px solid;
+    border-top: var(--background) 1px solid;
 }
 ::v-deep .collapse__title {
     color: var(--foreground-game);

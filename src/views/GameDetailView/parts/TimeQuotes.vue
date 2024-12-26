@@ -150,6 +150,7 @@ export default {
         padding: 13px 16px;
         background: #0a0a09;
         background: var(--game);
+        border-bottom: var(--background) 1px solid;
 
         &--grid {
             display: flex;
@@ -250,6 +251,8 @@ export default {
     background: #0a0a09;
     background: var(--game);
     padding: 13px 24px;
+    border-bottom: var(--background) 1px solid;
+    border-top: var(--background) 1px solid;
 }
 ::v-deep .collapse__title {
     color: #ffffff;

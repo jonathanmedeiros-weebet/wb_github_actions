@@ -85,7 +85,7 @@ export default {
     &__date {
         font-size: 14px;
         color: #ffffff80;        
-        color: var(--foreground-input-odds);        
+        color: var(--foreground-inputs-odds);        
     }
 
     &__subtitle {

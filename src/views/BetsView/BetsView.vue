@@ -620,7 +620,12 @@ export default {
 .button-space {
   margin-top: 5px;
 }
-
+.bets__card-footer--inline .button--secondary {
+  background-color: #ffffff;
+  background-color: var(--background);
+  color: #1d1d1d;
+  color: var(--foreground);
+}
 .table {
   width: 100%;
 
@@ -648,11 +653,6 @@ export default {
 }
 .button-spacer {
   width: 10px; 
-}
-#btn-view,
-#btn-cancel {
-  color: #ffffff;
-  color: var(--foreground-header);
 }
 
 </style>

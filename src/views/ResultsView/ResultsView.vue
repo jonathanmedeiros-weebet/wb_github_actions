@@ -23,6 +23,7 @@
       <div class="results__modalities">
         <label class="results__modalities-label">Modalidade</label>
         <SelectFake
+          :iconColor="'var(--foreground-inputs-odds)'"
           class="results__selectfake"
           titleSize="medium"
           @click="handleOpenModalitiesModal"
@@ -45,6 +46,7 @@
           {{ championshipList.length }} Resultados encontrados
         </p>
         <Collapse 
+          :iconColor="'var(--foreground-header)'"
           :leftIcon="true" 
           :initCollapsed="true" 
           v-for="(championship, championshipListIndex) in championshipList" 
@@ -254,8 +256,6 @@ export default {
 
   }
 
-
-
   &__count-modalities {
     margin: 5px 20px;
     color: #ffffff80;
@@ -272,6 +272,16 @@ export default {
 
   &__total_results-skeleton {
     margin-bottom: 10px;
+  }
+
+  &__selectfake {
+    background-color: #141414;
+    background-color: var(--inputs-odds);
+  }
+
+  &__selectfake ::v-deep .select-fake__title{
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
   }
 }
 </style>
