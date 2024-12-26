@@ -61,7 +61,7 @@
     width: 58px;
 }
 
-@media only screen and (min-width: 425px) {
+@media only screen and (min-width: 360px) {
     .loading-listagem .slider .itens {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -76,5 +76,17 @@
 @media only screen and (min-width: 1024px) {
     .loading-listagem .slider .itens {
         grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .loading-listagem .slider .itens {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    .loading-listagem .slider .itens {
+        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
     }
 }
