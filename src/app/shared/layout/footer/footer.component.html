@@ -114,6 +114,9 @@
             <a [routerLink]="['/informacoes/termos-condicoes']" *ngIf="hasTermosCondicoes">
                 {{'footer.termosECondicoes' | translate}}
             </a>
+            <a *ngIf="this.slug == 'puskasbet.com.br'" href="https://ouvidoria.puskasbet.com.br" target="_blank">
+                {{'footer.feedback' | translate}}
+            </a>
         </div>
 
         <div class="links" *ngIf="cartaoApostaHabilitado">
