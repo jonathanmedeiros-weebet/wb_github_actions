@@ -96,7 +96,7 @@
                 </p>
                 <p v-if="bet?.passador?.percentualPremio > 0" class="bet-shared__values-item">
                     <strong>CAMBISTA PAGA:</strong>
-                    <strong>{{ formatCurrency(cambistaPaga ?? 0) }}</strong>
+                    <strong>{{ formatCurrency(cambistaPay ?? 0) }}</strong>
                 </p>
                 <hr>
                 <hr>
@@ -125,7 +125,6 @@
         },
         data() {
             return {
-                cambistaPaga: 0,
                 logo: null
             }
         },
@@ -144,9 +143,9 @@
         computed: {
             cambistaPay() {
                 if (this.bet?.resultado) {
-                    return this.cambistaPaga = this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100);
+                    return this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100);
                 } else {
-                    return this.cambistaPaga = this.bet?.possibilidade_ganho * ((100 - this.bet?.passador?.percentualPremio) / 100);
+                    return this.bet?.possibilidade_ganho * ((100 - this.bet?.passador?.percentualPremio) / 100);
                 }
             },
             betCode() {
