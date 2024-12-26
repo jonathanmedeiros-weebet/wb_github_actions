@@ -27,7 +27,7 @@
         height: min-content;
         border-radius: 10px;
         object-fit: cover;
-        min-height: 90px;
+        aspect-ratio: 1 / 1;
     }
 
     &__info {
@@ -155,10 +155,6 @@
 
 .game-card--inline > .game-card__image{
     min-height: 90px;
-}
-
-.game-card__image {
-    min-height: 146px;
 }
 
 @media only screen and (min-width: 336px){
