@@ -119,15 +119,17 @@ export const useTicketStore = defineStore('ticket', {
             ten,
             type,
             lotteryId,
+            lotteryTitle,
             value
         }: any) {
             const items = { ...this.items };
             const timeStamp = Math.floor(Date.now() / 1000);
             items[timeStamp] = {
                 id: timeStamp,
-                ten,
+                tens: ten,
                 type,
                 lotteryId,
+                lotteryTitle,
                 value
             }
 

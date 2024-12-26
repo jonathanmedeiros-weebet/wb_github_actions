@@ -47,7 +47,7 @@
 
 <script>
 import { modalityList, getModalitiesEnum } from '@/constants'
-import { useConfigClient, useHomeStore, useToastStore } from '@/stores'
+import { useConfigClient, useHomeStore, useToastStore, useTicketStore } from '@/stores'
 
 import Header from '@/components/layouts/Header.vue'
 import SelectFake from './parts/SelectFake.vue'
@@ -85,6 +85,7 @@ export default {
       modalityList: modalityList(),
       homeStore: useHomeStore(),
       toastStore: useToastStore(),
+      ticketStore: useTicketStore()
     }
   },
   activated() {
@@ -148,6 +149,7 @@ export default {
       if(!Boolean(this.modality)) {
         const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
         this.homeStore.setModality(modality);
+        this.ticketStore.setModalityId(modality.id);
       }
     },
 
@@ -160,6 +162,7 @@ export default {
     async handleModality(modalityId) {
       const modality = this.modalityList.find(modality => modality.id === modalityId);
       this.homeStore.setModality(modality);
+      this.ticketStore.setModalityId(modality.id);
 
       if(this.isPopularLotteryModality){
         setTimeout(() => this.$refs['popular-lottery-modality'].loadPage(), 500);

@@ -17,27 +17,53 @@
           v-for="(item, index) in items" 
           :key="index" 
         >
-          <div class="bet__header">
-            <span class="bet__team">
-              <IconLive v-if="item.live" class="bet__icon-live"/>
-              <component :is="item.icon" :size="14" class="bet__icon-ball"/>
-              {{ item.gameName }}
+          <template v-if="!isModalityLottery">
+            <div class="bet__header">
+              <span class="bet__team">
+                <IconLive v-if="item.live" class="bet__icon-live"/>
+                <component :is="item.icon" :size="14" class="bet__icon-ball"/>
+                {{ item.gameName }}
+              </span>
+              <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
+            </div>
+            <div class="bet__info">
+              <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
+            </div>
+            <div class="bet__text">
+              <span>{{ item.quoteGroupName }}</span>
+            </div>
+            <div class="bet__result" :class="{ 'bet__result--border': item.hasChanges }">
+              <span>{{ item.quoteName }}</span>
+              <span>
+                {{ item.quoteValue }}
+                <span v-if="item.previousQuoteValue" class="bet__previous-quote">({{ item.previousQuoteValue }})</span>
+              </span>
+            </div>
+          </template>
+
+          <template v-if="isModalityLottery">
+            <div class="lottery__header">
+              <span class="lottery__title">{{ item.lotteryTitle }}</span>
+              <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.id)"/>
+            </div>
+            <span class="lottery__info">
+              Valor do palpite: R$ {{ formatCurrency(item.value) }}
             </span>
-            <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
-          </div>
-          <div class="bet__info">
-            <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
-          </div>
-          <div class="bet__text">
-            <span>{{ item.quoteGroupName }}</span>
-          </div>
-          <div class="bet__result" :class="{ 'bet__result--border': item.hasChanges }">
-            <span>{{ item.quoteName }}</span>
-            <span>
-              {{ item.quoteValue }}
-              <span v-if="item.previousQuoteValue" class="bet__previous-quote">({{ item.previousQuoteValue }})</span>
+            <span class="lottery__info">
+              Retorno 5: R$ {{ formatCurrency(item.value) }}
             </span>
-          </div>
+
+            <span class="lottery__tens">
+              Dezenas: 
+              <span
+                class="lottery__ten"
+                v-for="(ten, index) of tens"
+                :key="index"
+              >
+                {{ ten }}
+              </span>
+            </span>
+          </template>
         </div>
       </template>
       <div class="finish">
@@ -66,45 +92,53 @@
         </div>
       </div>
       <div class="value">
-        <div class="value__label">
-          <span class="value__balance-text">Valor</span>
-        </div>
-        <div class="value__balance">
-          <button class="value__add" @click="handleBetValueClick(10)">+10</button>
-          <button class="value__add" @click="handleBetValueClick(20)">+20</button>
-          <button class="value__add" @click="handleBetValueClick(50)">+50</button>
-          <w-input
-            class="value__balance-input"
-            name="bet-value"
-            type="number"
-            v-model="betValue"
-            :value="betValue"
-            @focus="handleInitializeBetValue"
-          >
-            <template #icon>
-              <span style="color: var(--foreground-inputs-odds);">R$</span>
-            </template>
-          </w-input>
-        </div>
+        <template v-if="!isModalityLottery">
+          <div class="value__label">
+            <span class="value__balance-text">Valor</span>
+          </div>
+          <div class="value__balance">
+            <button class="value__add" @click="handleBetValueClick(10)">+10</button>
+            <button class="value__add" @click="handleBetValueClick(20)">+20</button>
+            <button class="value__add" @click="handleBetValueClick(50)">+50</button>
+            <w-input
+              class="value__balance-input"
+              name="bet-value"
+              type="number"
+              v-model="betValue"
+              :value="betValue"
+              @focus="handleInitializeBetValue"
+            >
+              <template #icon>
+                <span style="color: var(--foreground-inputs-odds);">R$</span>
+              </template>
+            </w-input>
+          </div>
+        </template>
+
+        <template v-if="isModalityLottery">
+
+        </template>
       </div>
       <div class="cotacao">
-        <div class="cotacao__value">
-          <span>Cotação:</span>
-          <span>{{ quoteValue.toFixed(2) }}</span>
-        </div>
-        <div class="cotacao__ganhos">
-          <span>Possíveis ganhos:</span>
-          <span>R$ {{ possibilityAward }}</span>
-        </div>
-        <div class="cotacao__alteracao">
-          <input
-            class="cotacao__checkbox"
-            type="checkbox"
-            id="accept-changes"
-            v-model="acceptChanges"
-          />
-          <label for="accept-changes">Aceitar alterações de odds</label>
-        </div>
+        <template v-if="!isModalityLottery">
+          <div class="cotacao__value">
+            <span>Cotação:</span>
+            <span>{{ quoteValue.toFixed(2) }}</span>
+          </div>
+          <div class="cotacao__ganhos">
+            <span>Possíveis ganhos:</span>
+            <span>R$ {{ possibilityAward }}</span>
+          </div>
+          <div class="cotacao__alteracao">
+            <input
+              class="cotacao__checkbox"
+              type="checkbox"
+              id="accept-changes"
+              v-model="acceptChanges"
+            />
+            <label for="accept-changes">Aceitar alterações de odds</label>
+          </div>
+        </template>
         <div class="cotacao__finalizar" v-if="!hasChanges">
           <w-button
             id="btn-entrar"
@@ -155,6 +189,7 @@ import IconBasketball from '@/components/icons/IconBasketball.vue';
 import IconFutsal from '@/components/icons/IconFutsal.vue';
 import IconVoleiball from '@/components/icons/IconVoleiball.vue';
 import IconESport from '@/components/icons/IconESport.vue';
+import { getModalitiesEnum } from '@/constants';
 
 export default {
   name: 'tickets',
@@ -230,19 +265,27 @@ export default {
       return formatCurrency(possibilityAward);
     },
     items() {
-      return Object.values(this.ticketStore.items).map(item => ({
-        ...item,
-        icon: this.icons[item.modalityId],
-        quoteValue: item.quoteValue.toFixed(2),
-        previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
-        hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
-      }));
+      if(!this.isModalityLottery) {
+        return Object.values(this.ticketStore.items).map(item => ({
+          ...item,
+          icon: this.icons[item.modalityId],
+          quoteValue: item.quoteValue.toFixed(2),
+          previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
+          hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
+        }));
+      } else {
+        return Object.values(this.ticketStore.items);
+      }
     },
     hasLiveBet() {
       return this.items.some(item => item.live);
     },
     hasItems() {
       return Boolean(this.items.length)
+    },
+    isModalityLottery() {
+      const Modalities = getModalitiesEnum();
+      return this.ticketStore.modalityId == Modalities.LOTTERY
     },
 
     bettorName: {
@@ -321,7 +364,13 @@ export default {
     },
     async handleFinalizeBet() {
       this.submitting = true;
+      if (!this.isModalityLottery) {
+        this.finalizeSportBet();
+      } else {
 
+      }
+    },
+    async finalizeSportBet() {
       const { options, delayLiveBet } = useConfigClient();
 
       if (this.items.length < options.quantidade_min_jogos_bilhete) {
@@ -370,7 +419,7 @@ export default {
       if(this.hasLiveBet) {
         const liveToken = await createLiveToken(data);
         data.token_aovivo = liveToken;
-      
+
         const timeDelay = delayLiveBet;
         await delay(timeDelay * 1000);
       }
