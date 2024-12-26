@@ -111,9 +111,9 @@ import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.mo
 import { RegisterModalComponentComponent } from './modals/register-modal/register-modal-component/register-modal-component.component';
 import { AddressDataComponent } from './modals/register-modal/parts/address-data/address-data.component';
 import { LoginDataComponent } from './modals/register-modal/parts/login-data/login-data.component';
-import { StepBarComponent } from './modals/register-modal/parts/step-bar/step-bar.component';
 import { NavigationBarComponent } from './modals/register-modal/parts/navigation-bar/navigation-bar.component';
 import { OnboardingModalComponent } from './modals/onboarding-modal/onboarding-modal.component';
+import { StepperProgressBarComponent } from './modals/register-modal/parts/stepper-progress-bar/stepper-progress-bar.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -223,9 +223,9 @@ import { OnboardingModalComponent } from './modals/onboarding-modal/onboarding-m
         RegisterModalComponentComponent,
         AddressDataComponent,
         LoginDataComponent,
-        StepBarComponent,
         NavigationBarComponent,
         OnboardingModalComponent,
+        StepperProgressBarComponent,
     ],
     exports: [
         MainLayoutComponent,
