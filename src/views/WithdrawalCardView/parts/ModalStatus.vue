@@ -25,32 +25,23 @@
 <script>
 import WModal from '@/components/Modal.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
-import { modalitiesBetList, modalityList } from '@/constants';
 
 export default {
-    name: 'modal-modalities',
+    name: 'modal-status',
     components: { WModal, IconCheck },
     props: {
-        modalityId: {
+        statusId: {
             type: Number | String,
             default: 1
-        },
-        isLive: {
-            type: Boolean,
-            default: false
-        },
-        isBetsModality: {
-            type: Boolean,
-            default: false
         }
     },
     data() {
         return {
             options: [
-            { id: 1, name: 'Aprovado', checked: this.modalityId === 1 },
-            { id: 2, name: 'Não Aprovado', checked: this.modalityId === 2 }
-        ]
-    }
+                { id: 1, name: 'Aprovado', checked: this.statusId === 1 },
+                { id: 2, name: 'Não Aprovado', checked: this.statusId === 2 }
+            ]
+        }
     },
     computed: {
         items() {
@@ -64,9 +55,9 @@ export default {
         handleCloseModal() {
             this.$emit('closeModal');
         },
-        handleSelect(modalityId) {
+        handleSelect(statusId) {
             this.$refs['wmodal'].handleClose();
-            this.$emit('click', modalityId);
+            this.$emit('click', statusId);
         }
     }
 }
