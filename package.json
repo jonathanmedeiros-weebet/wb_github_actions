@@ -250,7 +250,9 @@
     "pintou.bet": "gulp pintou.bet",
     "boaaposta.com": "gulp boaaposta.com",
     "jack77bet.com": "gulp jack77bet.com",
-    "copasbet.bet": "gulp copasbet.bet"
+    "copasbet.bet": "gulp copasbet.bet",
+    "boasorte.bet": "gulp boasorte.bet",
+    "eliteesportes.vip": "gulp eliteesportes.vip"
   },
   "private": true,
   "dependencies": {
