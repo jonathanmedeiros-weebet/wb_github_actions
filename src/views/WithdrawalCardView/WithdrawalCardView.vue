@@ -148,7 +148,7 @@ export default {
       modalItemId: '', 
       modalItemVersion: '', 
       selectedOption: '1',
-      showModalStatus: true,
+      showModalStatus: false,
       info: {
         cartao_aposta: [], 
       },        
