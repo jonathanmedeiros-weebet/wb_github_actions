@@ -5,6 +5,7 @@ import { ToastType } from "@/enums";
 
 export const useTicketStore = defineStore('ticket', {
     state: () => ({
+        modalityId: null,
         bettor: '',
         bettorDocumentNumber: '',
         value: 0,
@@ -14,6 +15,16 @@ export const useTicketStore = defineStore('ticket', {
         error: ''
     }),
     actions: {
+        setModalityId(modalityId: any) {
+            this.modalityId = modalityId;
+
+            this.value = 0;
+            this.items = {};
+            this.accepted = false;
+            this.error = '';
+            this.bettor = '';
+            this.bettorDocumentNumber = '';
+        },
         setError(error: string) {
             this.error = error
         },
@@ -91,6 +102,7 @@ export const useTicketStore = defineStore('ticket', {
 
             this.prepareChampionshipOpenedIds();
         },
+
         clear() {
             this.items = {};
             this.bettor = '';
@@ -101,6 +113,30 @@ export const useTicketStore = defineStore('ticket', {
         },
         prepareChampionshipOpenedIds() {
             this.championshipOpened = Object.values(this.items).map((item: any) => item.championshipId);
+        },
+
+        addTen({
+            ten,
+            type,
+            lotteryId,
+            value
+        }: any) {
+            const items = { ...this.items };
+            const timeStamp = Math.floor(Date.now() / 1000);
+            items[timeStamp] = {
+                id: timeStamp,
+                ten,
+                type,
+                lotteryId,
+                value
+            }
+
+            this.items = { ...items };
+        },
+        removeTen(tenId: number) {
+            const items = { ...this.items };
+            delete items[tenId];
+            this.items = { ...items };
         }
     },
 })

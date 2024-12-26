@@ -26,8 +26,8 @@ export const getLotteryBetsByType = async (parameters: any) => {
     let params = new URLSearchParams();
 
     if (parameters) {
-        parameters.type ? params.append('tipo', parameters.type) : '';
-        parameters.sort ? params.append('sort', parameters.sort) : '';
+        parameters?.type ? params.append('tipo', parameters.type) : '';
+        parameters?.sort ? params.append('sort', parameters.sort) : '';
     }
 
     const response: any = await axiosInstance().get(url, { params });

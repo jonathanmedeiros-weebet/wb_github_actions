@@ -197,14 +197,6 @@ const router = new VueRouter({
       props: true
     },
     {
-      path: '/popular-lottery',
-      name: 'popular-lottery',
-      component: PopularLotteryView,
-      meta: {
-        auth: production
-      }
-    },
-    {
       path: '/table',
       name: 'table',
       component: TableView,

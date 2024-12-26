@@ -1,20 +1,20 @@
 <template>
     <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
       <template #title>
-        <span class="modal-lottery-numbers__title">Selecione o tipo</span>
+        <span class="modal-lottery-options__title">Selecione o sorteio</span>
       </template>
 
       <template #body>
-        <div class="modal-lottery-numbers__items">
+        <div class="modal-lottery-options__items">
             <a
-                v-for="({name, id, selected}) of types"
+                v-for="({label, id, selected}) of options"
                 type="button"
-                class="modal-lottery-numbers__item"
+                class="modal-lottery-options__item"
                 :key="id"
                 @click="handleSelect(id)"
             >
-                {{ name }}
-                <IconCheck v-if="selected" class="modal-lottery-numbers__icon"/>
+                {{ label }}
+                <IconCheck v-if="selected" class="modal-lottery-options__icon"/>
             </a>
         </div>
       </template>
@@ -24,11 +24,10 @@
 <script>
 import IconCheck from '@/components/icons/IconCheck.vue';
 import WModal from '@/components/Modal.vue'
-import { lotteryTypeList } from '@/constants';
 import { useLotteryStore } from '@/stores';
 
 export default {
-    name: 'modal-lottery-types',
+    name: 'modal-lottery-options',
     components: {
         WModal,
         IconCheck
@@ -39,11 +38,12 @@ export default {
         }
     },
     computed: {
-        types() {
-            let types = lotteryTypeList();
-            return types.map((type) => ({
-                ...type,
-                selected: this.lotteryStore.lotteryTypeSelected == type.id
+        options() {
+            const options = [...this.lotteryStore.options.lotteries];
+            return options.map((option) => ({
+                id: option.id,
+                label: option.nome,
+                selected: this.lotteryStore.loteryOptionsSelected == option.id
             }))
         }
     },
@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-lottery-numbers {
+.modal-lottery-options {
     &__title {
         color: #FFFFFF80;
         color: var(--foreground-inputs-odds);

@@ -7,8 +7,11 @@ export const useLotteryStore = defineStore('lottery', {
         tensSelected: [] as number[],
         lotteryTypeSelected: LotteryTypes.QUININHA,
         loteryNumbersSelected: 5,
+        loteryOptionsSelected: null,
+        lotteryValue: 0,
         options: {
             types: lotteryTypeList(),
+            lotteries: []
         },
     }),
     getters: {
@@ -27,10 +30,19 @@ export const useLotteryStore = defineStore('lottery', {
         setLotteryNumbersSelected(numbersSelected: any) {
             this.loteryNumbersSelected = numbersSelected;
         },
+        setLotteryOptionsSelected(lotteryOption: any) {
+            this.loteryOptionsSelected = lotteryOption;
+        },
+        setLotteryValue(value: any) {
+            this.lotteryValue = value;
+        },
+
+        setLotteryOptions(options: any) {
+            this.options.lotteries = options;
+        },
 
         addTens(number: number) {
             this.tensSelected.push(number);
-            console.log(this.tensSelected)
         },
         removeTens(number: Number) {
             this.tensSelected = this.tensSelected.filter(tensNumber => tensNumber != number);
