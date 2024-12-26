@@ -43,6 +43,7 @@ import {CarteiraComponent} from "../../../clientes/carteira/carteira.component";
 import { CashbackComponent } from 'src/app/clientes/cashback/cashback.component';
 import { ListBankAccountsComponent } from '../list-bank-accounts/list-bank-accounts.component';
 import { LastAccessesModalComponent } from '../modals/last-accesses-modal/last-accesses-modal.component';
+import { OnboardingModalComponent } from '../modals/onboarding-modal/onboarding-modal.component';
 
 declare var xtremepush: any;
 
@@ -456,7 +457,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirCadastro() {
         this.modalRef = this.modalService.open(
-            CadastroModalComponent,
+            OnboardingModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',

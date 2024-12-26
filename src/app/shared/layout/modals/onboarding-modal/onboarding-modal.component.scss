@@ -1,0 +1,46 @@
+.modal-header2{
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+
+.title{
+    font-family: Open Sans;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.text{
+    font-family: Open Sans;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19.07px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
+}
+
+.button-register{
+    width: 100%;
+    background: #181818;
+    border-radius: 4px;
+}
+
+.button-text{
+    color: #FFFFFF;
+}
+
+.body-button{
+    display: flex;
+    flex-direction: column;
+}
+
+.body-text{
+    display: flex;
+    justify-content: center;
+}
