@@ -96,7 +96,7 @@
                 </p>
                 <p v-if="bet?.passador?.percentualPremio > 0" class="bet-shared__values-item">
                     <strong>CAMBISTA PAGA:</strong>
-                    <strong>{{ formatCurrency(cambistaPay ?? 0) }}</strong>
+                    <strong>R$ {{ formatCurrency(cambistaPay ?? 0) }}</strong>
                 </p>
                 <hr>
                 <hr>
