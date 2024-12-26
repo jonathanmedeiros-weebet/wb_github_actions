@@ -1,3 +1,5 @@
+import { useConfigClient } from "@/stores";
+
 declare var WeebetMessage: any;
 
 export const delay = async (time: number) => {
@@ -44,4 +46,86 @@ export const capitalizeFirstLetter = (str: string) => {
     }else{
         return str;
     }
+}
+
+export const calculateTotalValueLottery = (bet: any) => {
+    return bet.itens.reduce((total: any, i: any) => {
+        return total + i.valor;
+    }, 0);
+}
+
+export const calculateLotteryWinnings = (valor: any, cotacao: any) => {
+    const { maxLotteryValue } = useConfigClient();
+
+    let result = valor * cotacao;
+
+    if (result > maxLotteryValue) {
+        result = maxLotteryValue;
+    }
+
+    return result;
+}
+
+export const calculateNetLotteryWinnings = (valor: any, cotacao: any, percentualPremio: any) => {
+    const { maxLotteryValue } = useConfigClient();
+
+    let result = valor * cotacao;
+
+    if (result > maxLotteryValue) {
+        result = maxLotteryValue;
+    }
+
+    result = result * (100 - percentualPremio) / 100;
+
+    return result;
+}
+
+export const getNameModalityLottery = (modalidade:any) => {
+    const { getSenaName, getQuinaName } = useConfigClient();
+
+    if (modalidade === 'seninha') {
+        return getSenaName;
+    } else {
+        return getQuinaName;
+    }
+}
+
+export const getOddAcronym = (key:any) => {
+    const { betOptions } = useConfigClient();
+
+    if (key) {
+        const betsOption = betOptions;
+        const sigla = `${betsOption[key].sigla}     `;
+        return sigla.substr(0, 5);
+    }
+    return '    ';
+}
+
+export const getOddValue = (key: any, odds: any) => {
+    const odd = odds.find((k: { chave: any; }) => k.chave == key);
+    if (odd) {
+        let res = odd.valor.toFixed(2);
+        if (odd.valor < 10) {
+            res = `${res} `;
+        }
+        return res;
+    }
+    return '     ';
+}
+
+export const getOddsToPrint = async() => {
+    const { betOptions } = useConfigClient();
+    const betTypes = betOptions;
+
+    const printOdds = [];
+    for (const key in betTypes) {
+        if (betTypes.hasOwnProperty(key)) {
+            const betType = betTypes[key];
+            if (parseInt(betType.exibirImpressao, 10)) {
+                printOdds.push(key);
+            }
+        }
+    }
+    
+    return printOdds;
 }

@@ -13,8 +13,10 @@
             <span class="info__text" v-if="bet.apostador">Apostador: {{ bet.apostador }}</span>
             <span class="info__text" v-if="bet.bettor_document_number">CPF do apostador: {{ bet.bettor_document_number }}</span>
             <span class="info__text">Status: {{ bet.ativo === true ? 'Ativo' : 'Inativo' }}</span>
+            <span v-if="bet.tipo === 'loteria'" class="info__text">Valor total: R$ {{ formatCurrencyMoney(calculateTotalValueLottery(bet)) }}</span>
+            <span v-if="bet.tipo === 'loteria'" class="info__text lottery">Modalidade: {{ bet.modalidade }}</span>
           </div>
-          <div class="gain">
+          <div v-if="bet.tipo !== 'loteria'" class="gain">
             <div class="gain__item">
               <span>Quantidade de Jogos:</span>
               <span class="gain__value">{{ bet.itens_ativos }}</span>
@@ -63,8 +65,52 @@
                 <template v-else-if="betItem.sport === MODALITY_SPORT_E_SPORTS">
                   <IconGame :size="16"/>
                 </template>
-                <div class="bet__team-name">
+                <div v-if="bet.tipo !== 'loteria'" class="bet__team-name">
                   <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
+                </div>
+                <div v-if="bet.tipo === 'loteria'">
+                  <span>Valor: R${{ formatCurrencyMoney(betItem.valor) }}</span>
+                  <br>
+                  <span v-if="betItem.tipo == 'seninha'">
+                    <span>Retorno 6: R${{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao6)) }}</span>
+                    <br>
+                    <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
+                        Retorno líquido 6: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao6, bet.passador.percentualPremio)) }}
+                    </span>
+                    <br>
+                  </span>
+                  <span v-if="betItem.cotacao5 > 0">
+                      Retorno 5: R$ {{ calculateLotteryWinnings(betItem.valor, betItem.cotacao5) }}
+                      <br>
+                      <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
+                          Retorno líquido 5: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao5, bet.passador.percentualPremio)) }}
+                      </span>
+                      <br>
+                  </span>
+                  <span class="informacoes-item" v-if="betItem.cotacao4 > 0">
+                      Retorno 4: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao4)) }}
+                      <br>
+                      <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
+                          Retorno líquido 4: R${{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao4, bet.passador.percentualPremio)) }}
+                      </span>
+                      <br>
+                  </span>
+                  <span class="informacoes-item" v-if="betItem.cotacao3 > 0">
+                      Retorno 3: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao3))}}
+                      <br>
+                      <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
+                          Retorno líquido 3: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao3, bet.passador.percentualPremio)) }}
+                      </span>
+                      <br>
+                  </span>
+                  <span>Dezenas: {{ betItem.numeros.join(', ') }}</span>
+                  <br>
+                  <span>
+                    <strong v-if="betItem.status !== 'ganhou'">Resultado: {{ betItem.status }}</strong>
+                    <template v-else>
+                      <strong>Resultado: {{ betItem.status }} {{ betItem.tipo_premio }}</strong>
+                    </template>
+                  </span>
                 </div>
               </span>
               <template>
@@ -76,10 +122,10 @@
                 >{{ capitalizeFirstLetter(betItem.resultado) }}</p>
               </template>
             </div>
-            <div class="bet__info">
+            <div v-if="bet.tipo !== 'loteria'" class="bet__info">
               <span class="bet__date" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ formateDateTime(betItem.jogo_horario) }}</span>
             </div>
-            <div class="bet__text">
+            <div class="bet__text" v-if="bet.tipo !== 'loteria'">
               <span class="bet__select" :class="{'gain__strikethrough': newEarningPossibility !== null}">
                 {{ betItem.categoria_nome }} : {{ betItem.aposta_tipo.nome }}
               </span>
@@ -170,8 +216,8 @@ import IconFootball from '@/components/icons/IconFootball.vue';
 import IconShare from '@/components/icons/IconShare.vue';
 import IconPrinter from '@/components/icons/IconPrinter.vue';
 import WButton from '@/components/Button.vue';   
-import { checkLive, closeBet, getBetById, printTicket, sharedTicket, simulateBetClosure, tokenLiveClosing } from '@/services'
-import { formatDateTimeBR, formatDateBR, formatCurrency, delay, capitalizeFirstLetter } from '@/utilities'
+import { checkLive, closeBet, getBetById, printLottery, printTicket, sharedTicket, simulateBetClosure, tokenLiveClosing } from '@/services'
+import { formatDateTimeBR, formatDateBR, formatCurrency, delay, capitalizeFirstLetter, calculateLotteryWinnings, calculateNetLotteryWinnings, calculateTotalValueLottery } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
@@ -259,6 +305,15 @@ export default {
     formatDate(date) {
       return formatDateBR(date);
     },
+    calculateLotteryWinnings(value, odd) {
+      return calculateLotteryWinnings(value, odd);
+    },
+    calculateNetLotteryWinnings(value, odd, percentageReward) {
+      return calculateNetLotteryWinnings(value, odd, percentageReward);
+    },
+    calculateTotalValueLottery(bet) {
+      return calculateTotalValueLottery(bet);
+    },
     async closeBet() {
       this.submitting = true;
       this.textButtonCloseBet = 'Processando...';
@@ -337,6 +392,7 @@ export default {
     async fetchBetDetails() {
       getBetById(this.id)
       .then(resp => {
+        console.log(resp.results);
         this.bet = resp.results;
       })
       .catch(({errors}) => {
@@ -389,10 +445,19 @@ export default {
       }
     },
     handlePrint() {
-      printTicket(this.bet)
+      if (this.bet.tipo !== 'loteria') {
+        printTicket(this.bet);
+        return;
+      }
+
+      printLottery(this.bet)
     },
     handleOpenModalSharedBet() {
-      this.showModalShared = true;
+      if(this.bet.tipo == 'loteria') {
+        this.handleShared('link');
+      } else {
+        this.showModalShared = true;
+      }
     },
     handleCloseModalSharedBet() {
       this.showModalShared = false;
@@ -463,6 +528,10 @@ export default {
 
   &__text {
     font-size: 14px;
+
+    &.lottery {
+      margin-bottom: 1.6rem;
+    }
   }
 }
 
@@ -572,6 +641,10 @@ export default {
 
 .finish {
   margin-top: 20px;
+}
+
+strong {
+  font-weight: bold;
 }
 </style>
 

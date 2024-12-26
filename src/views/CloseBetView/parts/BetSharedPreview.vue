@@ -69,7 +69,7 @@
                     </p>
                     <p class="bet-shared__result">
                         <span v-if="item?.removido">cancelado</span>
-                        <span v-if="!tem?.removido">{{ item.resultado }}</span>
+                        <span v-if="!item?.removido">{{ item.resultado }}</span>
                     </p>
                 </div>
             </div>

@@ -128,3 +128,22 @@ export const modalityOdds = () => {
         [Modalities.CHALLENGE]: [],
     }
 }
+
+export const modalitiesBetList = () => {
+    const { lotteryEnabled, sportEnabled } = useConfigClient();
+
+    const Modalities = [
+        {
+            name: 'Esporte',
+            id: 1,
+            active: sportEnabled
+        },
+        {
+            name: 'Loteria',
+            id: 2,
+            active: lotteryEnabled
+        }
+    ]
+
+    return Modalities.filter(modality => modality.active);
+}

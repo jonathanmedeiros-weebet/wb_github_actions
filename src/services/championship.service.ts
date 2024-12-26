@@ -26,7 +26,8 @@ export const getChampionshipBySportId = async (
     sportId: string = '',
     regionName: string = '',
     startDate: string = '',
-    isPopularLeagues: boolean = false
+    isPopularLeagues: boolean = false,
+    oddsToPrint: any = []
 ) => {
     const configClientStore = useConfigClient(); 
     const {
@@ -35,6 +36,8 @@ export const getChampionshipBySportId = async (
       blockedGames, 
       popularLeagues,
     } = configClientStore;
+
+    oddsToPrint = oddsToPrint.slice(0, 24).map((odd: any) => encodeURIComponent(odd)).join(',');
 
     const popularLeagueIds = isPopularLeagues
       ? popularLeagues
@@ -50,11 +53,11 @@ export const getChampionshipBySportId = async (
         : '',
       data: startDate,
       data_final: startDate,
-      odds: getOddsBySportId(sportId).join(','),
+      odds: oddsToPrint.length ? oddsToPrint : getOddsBySportId(sportId).join(','),
       regiao_nome: regionName ?? '',
       ligas_populares: popularLeagueIds
     };
-  
+
     const url = `${centerUrl}/campeonatos`;
     const response: any = await axiosInstance().get(url, { params });
   
