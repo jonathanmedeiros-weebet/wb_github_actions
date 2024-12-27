@@ -235,7 +235,7 @@
                             <br>
                             <b>{{ 'jogo_responsavel.exclusao_conta.descricao_2' | translate }}</b>
                         </p>
-                        <form [formGroup]="formExclusaoConta" (ngSubmit)="handleSubmit('onSubmitExclusaoConta')">
+                        <form [formGroup]="formExclusaoConta">
                             <div class="field w-500">
                                 <label for="">{{ 'jogo_responsavel.exclusao_conta.exclusionPeriodLabel' | translate }}</label>
                                 <select class="form-control inverted-out" formControlName="exclusionPeriod">
@@ -325,7 +325,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <button [disabled]="!faceMatchAccountDeletionValidated" type="submit" class="btn btn-custom" [ngStyle]="{'margin-top': faceMatchEnabled ? '15px' : '0px'}">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
+                            <button (click)="handleSubmit('onSubmitExclusaoConta')" [disabled]="!faceMatchAccountDeletionValidated" type="submit" class="btn btn-custom" [ngStyle]="{'margin-top': faceMatchEnabled ? '15px' : '0px'}">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
                         </form>
                     </div>
                 </section>
