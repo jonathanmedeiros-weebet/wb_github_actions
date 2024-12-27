@@ -39,7 +39,7 @@ export default {
         return {
             options: [
                 { id: 1, name: 'Aprovado', checked: this.statusId === 1 },
-                { id: 2, name: 'Não Aprovado', checked: this.statusId === 2 }
+                { id: 0, name: 'Não Aprovado', checked: this.statusId === 0 }
             ]
         }
     },

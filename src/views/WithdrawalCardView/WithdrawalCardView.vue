@@ -96,7 +96,7 @@
         @closeModal="handleCloseStatusModal"
         @click="handleModality"
         :isBetsModality="true"
-        :modalityId="status?.id"
+        :modalityId="status.id"
         :statusModalityList="statusModalityList"
       />
     </div>
@@ -147,7 +147,7 @@ export default {
       isModalConfirmPaymentVisible: false, 
       modalItemId: '', 
       modalItemVersion: '', 
-      selectedOption: '1',
+      selectedOption: '0',
       showModalStatus: false,
       info: {
         cartao_aposta: [], 
@@ -161,7 +161,7 @@ export default {
       configClientStore: useConfigClient(),
       statusModalityList: [
         { name: 'Aprovado', id: 1 },
-        { name: 'Não Aprovado', id: 2 }
+        { name: 'Não Aprovado', id: 0 }
       ],
       status: null
     }
