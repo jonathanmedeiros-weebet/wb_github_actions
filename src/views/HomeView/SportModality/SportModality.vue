@@ -1,34 +1,34 @@
 <template>
-    <div class="sport-modality-view">
-      <section class="sport-modality-view__body">
-        <GameListSkeleton v-if="loading"/>
+  <div class="sport-modality-view">
+    <section class="sport-modality-view__body">
+      <GameListSkeleton v-if="loading"/>
+
+      <template v-else>
+        <SelectFake
+          class="sport-modality-view__league-select"
+          titleSize="medium"
+          v-if="!liveActived"
+          @click="handleOpenLeaguesModal"
+        >
+          <img v-if="league.image" :src="league.image"  @error="changeSrcWhenImageError">
+          <component v-if="league.icon" :is="league.icon" color="var(--highlight)" />
+
+          <span>{{ league.label }}</span>
+        </SelectFake>
+
+        <GameList :infiniteScroll="true" @gameClick="handleGameDetailClick" />
+      </template>
+    </section>
+
+    <ModalLeagues
+      v-if="showModalLeagues"
+      @closeModal="handleCloseLeaguesModal"
+      @click="handleLeague"
+    />
+  </div>
+</template>
   
-        <template v-else>
-          <SelectFake
-            class="sport-modality-view__league-select"
-            titleSize="medium"
-            v-if="!liveActived"
-            @click="handleOpenLeaguesModal"
-          >
-            <img v-if="league.image" :src="league.image"  @error="changeSrcWhenImageError">
-            <component v-if="league.icon" :is="league.icon" color="var(--highlight)" />
-  
-            <span>{{ league.label }}</span>
-          </SelectFake>
-  
-          <GameList :infiniteScroll="true" @gameClick="handleGameDetailClick" />
-        </template>
-      </section>
-  
-      <ModalLeagues
-        v-if="showModalLeagues"
-        @closeModal="handleCloseLeaguesModal"
-        @click="handleLeague"
-      />
-    </div>
-  </template>
-  
-  <script>
+<script>
   import { modalityList, countriesWithFemaleNames, getModalitiesEnum } from '@/constants'
   import { getChampionship, getChampionshipBySportId, getChampionshipRegionBySportId, getLiveChampionship, prepareLiveQuote, SocketService } from '@/services'
   import { useConfigClient, useHomeStore, useToastStore } from '@/stores'
@@ -51,7 +51,7 @@
   import LiveButton from '../parts/LiveButton.vue'
   import Toast from '@/components/Toast.vue'
   import scrollMixin from '@/mixins/scroll.mixin'
-import SelectFake from '../parts/SelectFake.vue'
+  import SelectFake from '../parts/SelectFake.vue'
   
   export default {
     name: 'sport-modality-view',
@@ -402,9 +402,9 @@ import SelectFake from '../parts/SelectFake.vue'
       this.eventSocketDisconnect();
     }
   }
-  </script>
+</script>
   
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
   .sport-modality-view {
     overflow: hidden;
     &__body {
@@ -431,4 +431,4 @@ import SelectFake from '../parts/SelectFake.vue'
       margin-left: -1px;
     }
   }
-  </style>
+</style>
