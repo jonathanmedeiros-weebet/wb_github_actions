@@ -11,13 +11,11 @@ export const useLotteryStore = defineStore('lottery', {
         lotteryValue: 0,
         options: {
             types: lotteryTypeList(),
-            lotteries: []
+            lotteries: [],
+            sizes: []
         },
     }),
     getters: {
-        sizes: ({lotteryTypeSelected}) => {
-            return lotteryTypeSelected == LotteryTypes.QUININHA ? 70 : 50;
-        },
         minSize: ({lotteryTypeSelected}) => {
             return lotteryTypeSelected == LotteryTypes.QUININHA ? 5 : 6;
         },
@@ -39,6 +37,9 @@ export const useLotteryStore = defineStore('lottery', {
 
         setLotteryOptions(options: any) {
             this.options.lotteries = options;
+        },
+        setLotterySizes(sizes: any) {
+            this.options.sizes = sizes;
         },
 
         addTens(number: number) {

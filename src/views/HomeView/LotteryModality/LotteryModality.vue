@@ -12,7 +12,7 @@
             <SelectFake
                 @click="handleOpenLotteryNumbers"
             >
-                <span>{{ sizeSelected }}</span>
+                <span>{{ `${sizeSelected} números` }}</span>
             </SelectFake>
         </div>
           
@@ -126,7 +126,7 @@ import { random } from 'lodash';
 import ModalLotteryOptions from './parts/ModalLotteryOptions.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
-import { getLotteryDraw } from '@/services/lottery.service';
+import { getLotteryBetsByType, getLotteryDraw } from '@/services/lottery.service';
 
 export default {
     name: 'lottery-modality',
@@ -152,7 +152,7 @@ export default {
         }
     },
     activated() {
-        this.getLotteryOptions();
+        this.loadPage();
     },
     mounted() {
         this.loadPage();
@@ -169,7 +169,7 @@ export default {
     },
     computed: {
         tensInfo() {
-            return `${this.lotteryStore.tensSelected.length}/${this.lotteryStore.loteryNumbersSelected} Dezenas selecionadas`;
+            return `${this.lotteryStore.tensSelected.length}/${this.sizeSelected} Dezenas selecionadas`;
         },
         typeSelected() {
             const type = (this.lotteryStore.options.types ?? []).find(
@@ -185,14 +185,16 @@ export default {
         },
         sizeSelected() {
             const defaultNumbers = this.lotteryStore.lotteryTypeSelected == LotteryTypes.QUININHA ? 5 : 6;
-            const numbers = this.lotteryStore.loteryNumbersSelected ?? defaultNumbers;
-            return `${numbers} números`;
+            const numbers = Boolean(this.lotteryStore.loteryNumbersSelected.qtdNumeros) ? 
+                this.lotteryStore.loteryNumbersSelected.qtdNumeros
+                : defaultNumbers;
+            return numbers;
         },
         items() {
             return this.lotteryStore.lotteryTypeSelected == LotteryTypes.QUININHA ? 80 : 60;
         },
         reachedTotalTens() {
-            return this.lotteryStore.tensSelected.length >= this.lotteryStore.loteryNumbersSelected;
+            return this.lotteryStore.tensSelected.length >= this.sizeSelected;
         },
         lotteryValue: {
             get() {
@@ -207,7 +209,7 @@ export default {
                 !Boolean(this.lotteryStore.lotteryValue)
                 || !this.reachedTotalTens
                 || !Boolean(this.lotteryStore.loteryOptionsSelected)
-                || !Boolean(this.lotteryStore.loteryNumbersSelected)
+                || !Boolean(this.sizeSelected)
                 || !Boolean(this.lotteryStore.lotteryTypeSelected)
             )
         }
@@ -226,6 +228,7 @@ export default {
         },
         loadPage() {
            this.getLotteryOptions();
+           this.getLotteryNumbers();
         },
         getLotteryOptions() {
             this.lotteryStore.setLotteryOptions([]);
@@ -242,9 +245,27 @@ export default {
                     this.lotteryStore.setLotteryOptions([]);
                 });
         },
+        getLotteryNumbers() {
+            this.lotteryStore.setLotterySizes([]);
+
+            const params = {
+                type: this.lotteryStore.lotteryTypeSelected,
+                sort: 'data'
+            };
+
+            getLotteryBetsByType(params)
+                .then((res) => {
+                    this.lotteryStore.setLotterySizes(res);
+                    this.lotteryStore.setLotteryNumbersSelected(res.length ? res[0] : null);
+                })
+                .catch((err) => {
+                    console.error(err);
+                    this.lotteryStore.setLotterySizes([]);
+                });
+        },
         handleSurprise() {
-            const max = this.lotteryStore.sizes;
-            const endIndex = this.lotteryStore.loteryNumbersSelected;
+            const max = this.lotteryStore.lotteryTypeSelected == LotteryTypes.QUININHA ? 70 : 50;
+            const endIndex = this.sizeSelected;
             this.lotteryStore.removeAlltens();
 
             for (let index = 0; index < endIndex; index++) {
@@ -277,8 +298,9 @@ export default {
             this.lotteryStore.setLotteryNumbersSelected(null);
             this.lotteryStore.setLotteryTypeSelected(type);
             this.lotteryStore.removeAlltens();
+            this.ticketStore.clear();
 
-           this.getLotteryOptions();
+           this.loadPage();
         },
 
         handleOpenLotteryNumbers() {
@@ -287,8 +309,8 @@ export default {
         handleCloseLotteryNumbers() {
             this.showModalLotteryNumbers = false;
         },
-        handleLotteryNumbers(numbers) {
-            this.lotteryStore.setLotteryNumbersSelected(numbers);
+        handleLotteryNumbers(number) {
+            this.lotteryStore.setLotteryNumbersSelected(number);
         },
 
         handleOpenLotteryOptions() {

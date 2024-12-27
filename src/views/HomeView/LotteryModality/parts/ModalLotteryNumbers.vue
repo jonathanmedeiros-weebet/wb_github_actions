@@ -7,15 +7,15 @@
       <template #body>
         <div class="modal-lottery-numbers__items">
             <a
-                v-for="({label, value, selected}) of numbers"
+                v-for="number of numbers"
                 type="button"
                 class="modal-lottery-numbers__item"
-                :class="{'modal-lottery-numbers__item--disabled': isDisabled(value)}"
-                :key="value"
-                @click="handleSelect(value)"
+                :class="{'modal-lottery-numbers__item--disabled': isDisabled(number.value)}"
+                :key="number.value"
+                @click="handleSelect(number)"
             >
-                {{ label }}
-                <IconCheck v-if="selected" class="modal-lottery-numbers__icon"/>
+                {{ number.label }}
+                <IconCheck v-if="number.selected" class="modal-lottery-numbers__icon"/>
             </a>
         </div>
       </template>
@@ -40,24 +40,23 @@ export default {
     },
     computed: {
         numbers() {
-            const min = this.lotteryStore.minSize;
-            const max = (this.lotteryStore.sizes - min) + 1;
             const sizeSelected = this.lotteryStore.loteryNumbersSelected;
-            return Array.from({ length: max }, (_, i) => ({
-                label: `${min + i}`,
-                value: min + i,
-                selected: sizeSelected == (min + i),
-            }));
+            return this.lotteryStore.options.sizes.map((size) => ({
+                ...size,
+                label: size.qtdNumeros,
+                value: size.qtdNumeros,
+                selected: sizeSelected == size.qtdNumeros
+            }))
         }
     },
     methods: {
         handleCloseModal() {
             this.$emit('closeModal');
         },
-        handleSelect(number) {
-            if(this.isDisabled(number)) return
+        handleSelect(item) {
+            if(this.isDisabled(item.value)) return
             this.$refs['wmodal'].handleClose();
-            this.$emit('click', number);
+            this.$emit('click', item);
         },
         isDisabled(number) {
             const tensSelected = this.lotteryStore.tensSelected.length;
