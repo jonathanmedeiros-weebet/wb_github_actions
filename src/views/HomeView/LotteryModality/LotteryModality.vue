@@ -324,7 +324,7 @@ export default {
         },
 
         handleLotteryValueClick(valueAditional) {
-            const lotteryValue = parseFloat(this.lotteryValue ?? 0) + Number(valueAditional);
+            const lotteryValue = parseFloat(Boolean(this.lotteryValue) ? this.lotteryValue : 0) + Number(valueAditional);
             this.lotteryValue = lotteryValue;
         },
         handleInitializeLotteryValue() {
