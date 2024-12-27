@@ -119,17 +119,15 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.getRollovers();
 
         this.currentLanguage = this.translate.currentLang;
-
-        this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
+        this.faceMatchWithdraw = this.paramsLocais.getOpcoes().faceMatchFirstWithdraw || this.paramsLocais.getOpcoes().faceMatchAllWithdraw;
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-                this.faceMatchWithdraw = this.paramsLocais.getOpcoes().faceMatchFirstWithdraw || this.paramsLocais.getOpcoes().faceMatchAllWithdraw;
                 this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw); 
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw);
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.faceMatchWithdraw);
                 this.docCheckService.iframeMessage$.subscribe(message => {
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
@@ -139,7 +137,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 break;
             default:
                 break;            
-        }  
+        }
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
         } else {
