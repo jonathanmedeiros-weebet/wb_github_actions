@@ -147,7 +147,7 @@ export default {
       isModalConfirmPaymentVisible: false, 
       modalItemId: '', 
       modalItemVersion: '', 
-      selectedOption: '0',
+      selectedOption: '1',
       showModalStatus: false,
       info: {
         cartao_aposta: [], 
