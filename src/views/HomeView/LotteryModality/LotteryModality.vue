@@ -499,7 +499,7 @@ export default {
 .surprise-button {
     position: absolute;
     right: 17px;
-    top: 536px;
+    bottom: 100px;
 }
 
 ::v-deep .select-fake__title {
