@@ -172,6 +172,7 @@
                     <fieldset>
                         <div *ngIf="faceMatchEnabled">
                             <h5 id="faceMatch">{{'face_match.label' | translate}}</h5>
+                            <div *ngIf="faceMatchType == 'legitimuz'">
                             <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !verifiedIdentity">
                                 <div id="legitimuz">
                                     <div id="verify-identity-text">
@@ -197,6 +198,22 @@
                                     </button>
                                 </div>
                                 <div id="legitimuz-root"></div>
+                            </div>
+                            </div>
+                            <div *ngIf="faceMatchType == 'docCheck'">
+                                <div #docCheck id="docCheck"
+                                *ngIf="!faceMatchProfileEditValidated">
+                                    <div id="verify-identity-text">
+                                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                                        ('saques.identityVerifyNeeded' | translate)}}
+                                    </div>
+                                    <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
+                                        [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                                        >
+                                        <i class="fa-solid fa-id-card"></i>
+                                        {{'saques.identityVerify' | translate}}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="buttons">

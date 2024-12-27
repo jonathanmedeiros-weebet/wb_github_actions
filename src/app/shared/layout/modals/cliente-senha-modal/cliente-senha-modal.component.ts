@@ -59,7 +59,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
         private cd : ChangeDetectorRef,
         private translate : TranslateService,
         private legitimuzService : LegitimuzService,
-        private LegitimuzFacialService: LegitimuzFacialService,
+        private legitimuzFacialService: LegitimuzFacialService,
         private faceMatchService: FaceMatchService,
         private docCheckService: DocCheckService
     ) {
@@ -85,7 +85,6 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
     ngOnInit() {
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
         this.currentLanguage = this.translate.currentLang;
-        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
@@ -143,7 +142,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
                         if (this.verifiedIdentity) {
                             this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
                                 next: (res) => {
-                                    this.LegitimuzFacialService.closeModal();
+                                    this.legitimuzFacialService.closeModal();
                                     this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                     this.faceMatchChangePasswordValidated = true;
                                     this.cd.detectChanges();
@@ -154,13 +153,13 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
                             })
                         }
                     });
-                this.LegitimuzFacialService.faceIndex
+                this.legitimuzFacialService.faceIndex
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(faceIndex => {
                         if (faceIndex) {
                             this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
                                 next: (res) => {
-                                    this.LegitimuzFacialService.closeModal();
+                                    this.legitimuzFacialService.closeModal();
                                     this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                     this.faceMatchChangePasswordValidated = true;
                                     this.cd.detectChanges();
@@ -184,8 +183,8 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
                 });
                 this.legitimuzLiveness.changes
                 .subscribe(() => {
-                    this.LegitimuzFacialService.init();
-                    this.LegitimuzFacialService.mount();
+                    this.legitimuzFacialService.init();
+                    this.legitimuzFacialService.mount();
                 });
             } else {
                 this.docCheck.changes

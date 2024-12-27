@@ -99,7 +99,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private renderer: Renderer2,
         private legitimuzService: LegitimuzService,
         private ga4Service: Ga4Service,
-        private LegitimuzFacialService : LegitimuzFacialService,
+        private legitimuzFacialService : LegitimuzFacialService,
         private faceMatchService : FaceMatchService,
         private docCheckService: DocCheckService
     ) {
@@ -245,13 +245,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.faceMatchFirstWithdrawValidated = false;
                     }
                 });
-            this.LegitimuzFacialService.faceIndex
+            this.legitimuzFacialService.faceIndex
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(faceIndex => {
                     if (faceIndex && this.cliente != null) {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
                             next: (res) => {
-                                this.LegitimuzFacialService.closeModal();
+                                this.legitimuzFacialService.closeModal();
                                 this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                 this.faceMatchFirstWithdrawValidated = true;
                             }, error: (error) => {
@@ -274,8 +274,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     });
                 this.legitimuzLiveness.changes
                     .subscribe(() => {
-                        this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();
+                        this.legitimuzFacialService.init();
+                        this.legitimuzFacialService.mount();
                     });
                 } else {
                     this.docCheck.changes

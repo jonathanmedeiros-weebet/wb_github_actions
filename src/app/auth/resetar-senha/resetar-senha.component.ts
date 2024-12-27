@@ -70,7 +70,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
         private legitimuzService: LegitimuzService,
-        private LegitimuzFacialService: LegitimuzFacialService,
+        private legitimuzFacialService: LegitimuzFacialService,
         private faceMatchService: FaceMatchService,
         private docCheckService: DocCheckService
     ) {
@@ -191,13 +191,13 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.faceMatchChangePasswordValidated = false;
                     }
                 });
-            this.LegitimuzFacialService.faceIndex
+            this.legitimuzFacialService.faceIndex
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(faceIndex => {
                     if (faceIndex) {
                         this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, last_reset_password: true }).subscribe({
                             next: (res) => {
-                                this.LegitimuzFacialService.closeModal();
+                                this.legitimuzFacialService.closeModal();
                                 this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                 this.faceMatchChangePasswordValidated = true;
                             }, error: (error) => {
@@ -290,8 +290,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                     });
                 this.legitimuzLiveness.changes
                     .subscribe(() => {
-                        this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();
+                        this.legitimuzFacialService.init();
+                        this.legitimuzFacialService.mount();
                     });
                 } else {
                     this.docCheck.changes
