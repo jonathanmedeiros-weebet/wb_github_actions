@@ -1,5 +1,4 @@
 .game-card {
-    border-radius: 10px;
     overflow: hidden;
     min-height: 125px;
 
@@ -23,9 +22,7 @@
         max-height: calc((100vw / 2) - 16px);
         max-width: 200px;
         height: auto !important;
-        background-color: #00000050;
         height: min-content;
-        border-radius: 10px;
         object-fit: cover;
         min-height: 90px;
     }
@@ -189,6 +186,12 @@
     }
 }
 
+@media only screen and (min-width: 258px) and (max-width: 446px){
+    .game-card__image-container {
+        aspect-ratio: 1/1;
+    }
+}
+
 @media only screen and (min-width: 412px){
     .game-card--inline{
         width: 120px;
@@ -255,4 +258,7 @@
 .game-card__image-container {
     position: relative;
     max-width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #00000050;
 }

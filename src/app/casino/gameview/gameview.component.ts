@@ -38,6 +38,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     fullscreen;
     elem: any;
     showLoadingIndicator = true;
+    showGameListLoadingIndicator = true;
     isCliente;
     sessionId = '';
     removerBotaoFullscreen = false;
@@ -956,6 +957,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const response = await this.casinoApi.getGamesList(live).toPromise();
 
         this.gameList = await this.filterDestaques(response.populares, category);
+        this.showGameListLoadingIndicator = false;
     }
 
     private async getProviders() {

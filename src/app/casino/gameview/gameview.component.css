@@ -13,7 +13,6 @@
     margin: 0 auto;
 }
 
-
 .aviso{
     display: flex;
     justify-content: center;
@@ -29,6 +28,10 @@
 
 a.opacity50:hover {
     opacity: 1;
+}
+
+.btn-cassino svg {
+    fill: var(--foreground-game);
 }
 
 .bonus {
@@ -76,10 +79,12 @@ iframe{
 
 .header-game-view {
     display: flex;
+    margin: 0 20px;
     justify-content: center;
     width: 100%;
     padding: 8.5px 16px;
-    border: 1px solid #1B1B1B;
+    border: 1px solid var(--game);
+    background-color: var(--game);
 }
 
 .header-game-view > div {
@@ -90,6 +95,7 @@ iframe{
 
 .header-game-view .game-name {
     justify-content: left;
+    color: var(--foreground-game);
 }
 
 .header-game-view .buttons-game-view {
@@ -297,7 +303,6 @@ iframe{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #000;
         color: #fff;
         margin: 0;
     }
@@ -360,12 +365,10 @@ iframe{
 @media (max-width: 482px) {
 
     .header-game-view {
-        display: flex;
+        display: none;
         justify-content: space-between;
         align-items: center;
         padding: 8.5px 16px;
-        background-color: #000;
-        color: #fff;
     }
 
     .game-view {
@@ -400,7 +403,6 @@ iframe{
     .game-name {
         flex-grow: 1;
         font-size: 18px;
-        color: #fff;
         margin: 0;
     }
 
@@ -418,7 +420,6 @@ iframe{
         cursor: pointer;
         background-color: transparent;
         border: none;
-        color: #fff;
         font-size: 16px;
     }
 
@@ -463,11 +464,15 @@ iframe{
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 4px 8px #00000033;
-        background: #0A0A0A;
+        background: var(--header);
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 20px 15px;
+    }
+
+    .card-info-game-name {
+        color: var(--foreground-header);
     }
 
     .card-content {
@@ -508,7 +513,8 @@ iframe{
     .game-provider {
         font-size: 14px;
         margin-bottom: 5px;
-        color: #888888;
+        color: var(--foreground-header);
+        opacity: 0.65;
     }
 
     .card-buttons {
@@ -520,17 +526,6 @@ iframe{
         margin-top: 10px;
     }
 
-    .register-btn {
-        border: 1px solid #0BF197;
-        background: #35CC95;
-        color: rgb(0, 0, 0);
-    }
-
-    .login-btn {
-        border: 1px solid #0BF197;
-        background: none;
-        color: #35CC95;
-    }
     .main-footer {
         margin-top: 20px;
     }
@@ -547,17 +542,18 @@ iframe{
     }
 
     .register-btn {
-        border: 1px solid #0BF197;
-        background: var(--10, #35CC95);
-        color: rgb(0, 0, 0);
+        border: 1px solid var(--highlight);
+        background: var(--highlight);
+        color: var(--foreground-highlight);
     }
 
     .login-btn {
-        border: 1px solid #0BF197;
+        border: 1px solid var(--highlight);;
         background: none;
-        color: #35CC96;
+        color: var(--highlight);
         gap: 20px;
     }
+
     .inline-button {
         display: inline-block;
         margin: 5px;
@@ -628,7 +624,7 @@ iframe{
 
     .card-centered {
         border-radius: 4px;
-        background: #181818;
+        background: var(--background);
         padding: 30px 45px;
         max-width: 400px;
         text-align: center;
@@ -727,9 +723,9 @@ iframe{
         justify-content: center;
         width: 100%;
         border-radius: 4px 4px 0px 0px;
-        background-color: #0A0A0A;
+        background-color: var(--game);
         border: none;
-        border: 1px solid #1B1B1B;
+        border: 1px solid var(--game);
         max-height: 45px;
     }
     .header-game-view > div {
@@ -758,7 +754,7 @@ iframe{
         height: 20px;
         text-decoration: none;
         cursor: pointer;
-        color: var(--foreground-inputs-odds);
+        color: var(--foreground-game);
         background: transparent;
         transition: 500ms;
     }
@@ -827,7 +823,7 @@ iframe{
     }
 
     .overlay-content__title {
-        color: #FFF;
+        color: var(--foreground-header);
         text-align: center;
         font-family: "Open Sans";
         font-size: 20px;
@@ -838,7 +834,8 @@ iframe{
     }
 
     .overlay-content__text {
-        color: rgba(255, 255, 255, 0.50);
+        color: var(--foreground-header);
+        opacity: 0.5;
         text-align: center;
         font-family: "Open Sans";
         font-size: 14px;
@@ -857,8 +854,8 @@ iframe{
 
     .register-btn {
         border-radius: 5px;
-        border: 1px solid #0BF197;
-        background: var(--10, #35CC95);
+        border: 1px solid var(--highlight);
+        background: var(--highlight);
         display: flex;
         width: 137px;
         height: 40px;
@@ -866,14 +863,14 @@ iframe{
         justify-content: center;
         align-items: center;
         gap: 20px;
-        color: black;
+        color: var(--foreground-highlight);
         cursor: pointer;
         transition: background 0.3s ease;
         text-transform: uppercase;
     }
 
     .register-btn:hover {
-        background: #0BF197;
+        background: var(--foreground-highlight);
     }
 
     .login-btn {
@@ -885,9 +882,9 @@ iframe{
         align-items: center;
         gap: 20px;
         border-radius: 5px;
-        border: 1px solid #0BF197;
+        border: 1px solid var(--highlight);
         background: transparent;
-        color: #0BF197;
+        color: var(--highlight);
         cursor: pointer;
         transition: background 0.3s ease, color 0.3s ease;
         text-transform: uppercase;
