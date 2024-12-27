@@ -124,7 +124,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                                             this.showLoading = false;
                                             this.disapprovedIdentity = false
                                         } else if (res.verifiedIdentity) {
-                                            this.dataUserCPF = res.cpf;
+                                            this.dataUserCPF = String(res.cpf).replace(/[.\-]/g, '');
+                                            this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash);
                                             this.verifiedIdentity = true
                                             this.showLoading = false;
                                         } else {
@@ -145,7 +146,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 }
             });
 
-        this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
