@@ -1,46 +1,98 @@
-.modal-header2{
-    background-color: var(--background);
-    color: var(--foreground);
-}
-
-
-.title{
-    font-family: Open Sans;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-}
-
-.text{
-    font-family: Open Sans;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 19.07px;
-    text-align: left;
-    text-underline-position: from-font;
-    text-decoration-skip-ink: none;
-
-}
-
-.button-register{
-    width: 100%;
-    background: #181818;
-    border-radius: 4px;
-}
-
-.button-text{
-    color: #FFFFFF;
-}
-
-.body-button{
+.container{
     display: flex;
     flex-direction: column;
+    padding: 0 22px;
+    background-color: var(--header);
+    height: 100%;
 }
 
-.body-text{
+.modal-content {
+    border: 0;
+    height: inherit;
+    background: var(--header) !important;
+    color: var(--foreground) !important;
+}
+
+.modal-header-onboarding{
+    color: var(--foreground);
     display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+    margin-top: 3%;
+}
+
+.modal-header-onboarding-item{
+    height: 40px;
+    background: var(--background);
+    width: 10%;
+    display: flex;
+    align-items: center;
     justify-content: center;
+}
+
+.btn-close-onboarding i {
+    font-size: 22px;
+    color: var(--highlight);
+}
+
+.btn-close-onboarding{
+    box-sizing: content-box;
+    color: #000;
+    border: 0;
+    border-radius: 0.375rem;
+    opacity: 0.5;
+}
+
+.title-onboarding{
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.tes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 46px;
+}
+
+.text-paragraph{
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button-onboarding{
+    display: flex;
+    height: 40px;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: 1px solid #0BE68D;
+    background: #181818;
+    text-decoration: none;
+    color: white;
+}
+
+.item-hr{
+    width: 45%;
+}
+
+.item-text-or{
+    width: 10%;
+    text-align: center;
+}
+
+.container-text-or{
+    display: flex;
+    align-items: center;
+    margin: 26px 0;
 }
