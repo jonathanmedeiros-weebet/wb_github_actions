@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
-import { Router} from '@angular/router';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ClienteService, MessageService, ParametrosLocaisService } from './../../../../services';
+import { AuthService, ClienteService, MessageService, ParametrosLocaisService, SecurityService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
@@ -16,6 +16,7 @@ import { Geolocation, GeolocationService } from 'src/app/shared/services/geoloca
 import { FormValidations } from 'src/app/shared/utils';
 import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/block-peer-attemps-modal.component';
 import { LoginService } from 'src/app/shared/services/login.service';
+import { FaceMatchModalComponent } from '../face-match-modal/face-match-modal/face-match-modal.component';
 
 declare var xtremepush: any;
 
@@ -53,6 +54,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     inputFocused: boolean;
     inputLoginValue: string;
 
+    public isVPN = false;
+
     constructor(
         public activeModal: NgbActiveModal,
         private fb: UntypedFormBuilder,
@@ -64,12 +67,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private modalService: NgbModal,
         private geolocationService: GeolocationService,
         private loginService: LoginService,
-        private clienteService: ClienteService
+        private clienteService: ClienteService,
+        private security: SecurityService,
     ) {
         super();
     }
 
-    ngOnInit() {
+    async ngOnInit() {
+
         this.appMobile = this.auth.isAppMobile();
 
         if (window.innerWidth > 1025) {
@@ -81,7 +86,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.authDoisFatoresHabilitado = this.paramsLocais.getOpcoes().habilitar_auth_dois_fatores;
         this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
         this.modoCambistaHabilitado = this.paramsLocais.getOpcoes().modo_cambista;
-        
+
         this.createForm();
 
         this.auth.logado
@@ -101,40 +106,40 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 isCliente => this.isCliente = isCliente
             );
 
-        if(this.paramsLocais.getOpcoes().habilitar_login_google) {
+        if (this.paramsLocais.getOpcoes().habilitar_login_google) {
             this.loginGoogle = true;
             this.socialAuth.authState
                 .pipe(takeUntil(this.unsub$))
                 .subscribe((user) => {
-                        if (user) {
-                            this.form.patchValue({
-                                googleId: user.id,
-                                googleIdToken: user.idToken
-                            });
-                            this.submit();
-                        }
-
-                        this.googleUser = user;
+                    if (user) {
+                        this.form.patchValue({
+                            googleId: user.id,
+                            googleIdToken: user.idToken
+                        });
+                        this.submit();
                     }
+
+                    this.googleUser = user;
+                }
                 );
         }
 
         this.geolocationService
-            .getGeolocation(false)
+            .getGeolocation()
             .then((geolocation) => this.geolocation = geolocation)
     }
 
-    registerCancel(){
+    registerCancel() {
         this.resgister_cancel = true;
     }
 
     createForm() {
         let loginMode = 'email';
 
-        if(this.modoCambistaHabilitado && !this.modoClienteHabilitado){
+        if (this.modoCambistaHabilitado && !this.modoClienteHabilitado) {
             this.loginMode = 'agent';
         }
-        
+
         this.form = this.fb.group({
             username: [''],
             password: [''],
@@ -157,7 +162,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.unsub$.complete();
     }
 
-    submit() {
+    async submit() {
         const formData = this.form.value;
 
         if (this.loginMode === 'phone') {
@@ -167,9 +172,19 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.auth.verificaDadosLogin(formData)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                (res) => {
+                async (res) => {
+                    const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.paramsLocais.getOpcoes().legitimuz_token);
                     let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
                     this.getUsuario();
+                    if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
+                        const holdUser = this.usuario;
+                        localStorage.removeItem('user');
+                        const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
+                        if (!faceMatchResult) {
+                            return;
+                        }
+                        localStorage.setItem('user', JSON.stringify(holdUser));
+                    }
 
                     if (
                         Boolean(res) &&
@@ -194,7 +209,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
                     this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
                     this.handleLogin();
-                    this.clienteService.checkPasswordExpirationDays(this.usuario.id)
+                    if (this.paramsLocais.getOpcoes().enableForceChangePassword) {
+                        this.clienteService.checkPasswordExpirationDays(this.usuario.id)
+                    }
                 },
                 (error) => {
                     if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
@@ -283,14 +300,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 () => {
                     this.getUsuario();
                     if (this.usuario.tipo_usuario === 'cliente') {
-                        if(this.xtremepushHabilitado()){
+                        if (this.xtremepushHabilitado()) {
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
                     } else {
                         location.reload();
                     }
-                    this.activeModal.dismiss();
+                    this.activeModal.close();
                     this.xtremepushBackgroundRemove();
                 },
                 error => this.handleError(error)
@@ -318,6 +335,31 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         );
     }
 
+    async abrirModalFaceMatch(user) {
+        this.activeModal.dismiss();
+        this.modalRef = this.modalService.open(
+            FaceMatchModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+                backdrop: 'static',
+                windowClass: 'modal-600'
+            }
+        );
+
+        this.modalRef.componentInstance.user = user;
+
+        return await this.modalRef.result
+            .then(
+                result => {
+                    return true;
+                },
+                reason => {
+                    return false;
+                }
+            );
+    }
+
     abrirModalAuthDoisFatores() {
         this.activeModal.dismiss();
         this.modalRef = this.modalService.open(
@@ -343,12 +385,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.mostrarSenha = !this.mostrarSenha;
     }
 
-    onBeforeInput(e, inputName){
+    onBeforeInput(e, inputName) {
         FormValidations.blockInvalidCharacters(e, inputName);
     }
 
     public toClose() {
-        this.activeModal.dismiss('Cross click')
+        this.activeModal.close();
     }
 
     xtremepushHabilitado() {
@@ -384,7 +426,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.inputLoginValue = inputElement.value;
     }
 
-    clearInputLoginValue(){
+    clearInputLoginValue() {
         this.inputLoginValue = '';
     }
+
+    refreshPage(): void {
+        window.location.reload();
+    }
 }
+

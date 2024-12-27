@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {ClienteService} from '../../shared/services/clientes/cliente.service';
@@ -10,11 +10,16 @@ import {Endereco} from '../../shared/models/endereco/endereco';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import * as moment from 'moment';
 import { AuthService, ParametrosLocaisService, SidebarService } from 'src/app/services';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { MultifactorConfirmationModalComponent } from 'src/app/shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
+import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
+import { Subject } from 'rxjs';
+import { Cliente } from 'src/app/shared/models/clientes/cliente';
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -22,6 +27,9 @@ import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.servic
     styleUrls: ['./cliente-perfil.component.css']
 })
 export class ClientePerfilComponent extends BaseFormComponent implements OnInit, OnDestroy {
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
+    
     public estados: Array<Estado>;
     public cidades: Array<Cidade>;
     private estadoSelecionado: number;
@@ -29,9 +37,20 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     public showLoading = true;
     public mostrarSenha = false;
     public googleLogin = false;
+    public isMandatoryPhoneValidation = false;
+    public userPhoneValidated = false;
+    unsub$ = new Subject();
 
     private tokenMultifator: string;
     private codigoMultifator: string;
+
+    faceMatchEnabled = false;
+    faceMatchProfileEdit = false;
+    faceMatchProfileEditValidated = false;
+    legitimuzToken = "";
+    verifiedIdentity = false;
+    disapprovedIdentity = false;
+    cliente : Cliente;
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -45,6 +64,10 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         private translate: TranslateService,
         private paramsLocais: ParametrosLocaisService,
         private ga4Service: Ga4Service,
+        private legitimuzService: LegitimuzService,
+        private legitimuzFacialService : LegitimuzFacialService,
+        private faceMatchService : FaceMatchService,
+        private cd: ChangeDetectorRef
     ) {
         super();
         this.cidades = [];
@@ -67,6 +90,52 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.loadCliente();
 
         this.menuFooterService.setIsPagina(true);
+
+        this.isMandatoryPhoneValidation = this.paramsLocais.isMandatoryPhoneValidation();
+        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
+
+        if (!this.faceMatchEnabled) {
+            this.faceMatchProfileEditValidated = true;
+        }
+
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    this.cd.detectChanges();
+                    if (this.verifiedIdentity) {
+                        this.legitimuzService.closeModal();
+                        this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, profile_edit: true }).subscribe()
+                        this.faceMatchProfileEditValidated = true;
+                        this.faceMatchProfileEdit = true;
+                    } else if (!this.verifiedIdentity && this.verifiedIdentity !== null) {
+                        this.legitimuzService.closeModal();
+                        this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                        this.faceMatchProfileEditValidated = false;
+                    }
+                });
+
+            this.legitimuzFacialService.faceIndex
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(faceIndex => {
+                    if (faceIndex) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, profile_edit: true }).subscribe({
+                            next: (res) => {
+                                this.legitimuzFacialService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchProfileEditValidated = true;
+                                this.faceMatchProfileEdit = true;
+                            }, error: (error) => {
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchProfileEditValidated = false;
+                            }
+                        })
+                    }
+                })
+        }
     }
 
     async loadCliente() {
@@ -77,6 +146,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                 .getCliente(user.id)
                 .toPromise();
 
+            this.userPhoneValidated = cliente.is_phone_validated;              
+            this.cliente = cliente;
             this.form.patchValue({
                 nome: cliente.nome.toUpperCase(),
                 sobrenome: cliente.sobrenome.toUpperCase(),
@@ -117,6 +188,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
 
     ngOnDestroy() {
         this.menuFooterService.setIsPagina(false);
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -125,7 +198,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             sobrenome: [''],
             nascimento: [''],
             cpf: [''],
-            telefone: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
+            telefone: [''],
             email: [''],
             logradouro: ['', Validators.required],
             numero: ['', Validators.required],
@@ -180,22 +253,33 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                             }
                         }
                         this.estadoSelecionado = estadoLocal.id;
-                        this.form.get('estado').patchValue(this.estadoSelecionado);
-                        this.utilsService.getCidades(estadoLocal.id).subscribe(
-                            cidades => {
-                                this.cidades = cidades;
-                                for (let cidade of this.cidades) {
-                                    if (cidade.nome == endereco.localidade.toUpperCase()) {
-                                        this.cidadeSelecionada = cidade.id;
-                                        this.form.get('cidade').patchValue(this.cidadeSelecionada);
+                        if (this.estadoSelecionado != this.form.get('estado').value) {
+                            this.utilsService.getCidades(estadoLocal.id).subscribe(
+                                cidades => {
+                                    this.cidades = cidades;
+                                    for (let cidade of cidades) {
+                                        if (cidade.nome == endereco.localidade.toUpperCase()) {
+                                            this.cidadeSelecionada = cidade.id;
+                                            this.form.get('cidade').patchValue(this.cidadeSelecionada);
+                                        }
                                     }
+                                },
+                                error => this.handleError(error));
+                        } else {
+                            for (let cidade of this.cidades) {
+                                if (cidade.nome == endereco.localidade.toUpperCase()) {
+                                    this.cidadeSelecionada = cidade.id;
+                                    this.form.get('cidade').patchValue(this.cidadeSelecionada);
                                 }
-                            },
-                            error => this.handleError(error));
-                        this.form.patchValue({
-                            logradouro: endereco.logradouro,
-                            bairro: endereco.bairro,
-                        });
+                            }
+                        }
+                        this.form.get('estado').patchValue(this.estadoSelecionado);
+                        if (endereco.bairro) {
+                            this.form.get('bairro').patchValue(endereco.bairro);
+                        }
+                        if (endereco.logradouro) {
+                            this.form.get('logradouro').patchValue(endereco.logradouro);
+                        } 
                     } else {
                         this.handleError(this.translate.instant('geral.enderecoNaoEncontrado'));
                     }
@@ -231,7 +315,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.clienteService
             .atualizarDadosCadastrais(values)
             .subscribe(
-                () => this.messageService.success(this.translate.instant('geral.alteracoesSucesso')),
+                () => {this.messageService.success(this.translate.instant('geral.alteracoesSucesso')); this.faceMatchProfileEdit = false},
                 error => this.handleError(error)
             );
     }
@@ -261,5 +345,20 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
 
     handleError(mensagem: string) {
         this.messageService.error(mensagem);
+    }
+    
+    ngAfterViewInit() {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuz.changes
+                .subscribe(() => {
+                        this.legitimuzService.init();
+                        this.legitimuzService.mount();
+                });
+            this.legitimuzLiveness.changes
+                .subscribe(() => {
+                        this.legitimuzFacialService.init();
+                        this.legitimuzFacialService.mount();
+                });
+        }
     }
 }

@@ -1,0 +1,41 @@
+<div id="default-content">
+    <div class="internal-container-out">
+        <div class="mobile-modal-header" *ngIf="showHeaderMobile">
+            <a (click)="toBack()" class="botao-esquerdo">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <div class="titulo">{{'bankAccounts.title' | translate}}</div>
+            <div class="botao-direito"></div>
+        </div>
+
+        <div class="content-header hide-mobile">
+            <h2>{{ 'bankAccounts.title' | translate }}</h2>
+        </div>
+
+        <div class="content-body">
+            <div class="row list-accounts">
+                <div class="col-12 col-md-4" *ngFor="let accountItem of accounts">
+                    <div class="account__card">
+                        <div class="d-flex justify-content-between">
+                            <div class="name-bank-account">
+                                <span class="account__bank-name"> {{ accountItem.nomeBanco }} </span>
+                            </div>
+                            <div class="">
+                                <a href="javascript:void(0)" (click)="openConfirmModal(accountItem)"><i class="fa fa-trash" style="text-decoration: none; color: var(--foreground-sidebars);"></i></a>
+                            </div>
+                        </div>
+                        <span class="account__bank-agency">Agência: {{ accountItem.numeroAgencia }}</span>
+                        <span class="account__bank-account">Conta: {{ accountItem.numeroConta }}</span>
+                        <span class="account__account-type">Conta {{ accountItem.tipoConta }}</span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4" *ngIf="accounts.length < 3">
+                    <div class="new-account__card" (click)="openAddBankAccount()">
+                        <i class="fa fa-plus-circle new-account__icon"></i>
+                        <span class="new-account__label">Nova conta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

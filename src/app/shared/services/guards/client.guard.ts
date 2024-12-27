@@ -12,7 +12,8 @@ export class ClientGuard implements CanActivate {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (!this.auth.isCliente() && !exceptionRouteAuthGuard.includes(state.url)) {
+        const cleanUrl = state.url.split('?')[0];
+        if (!this.auth.isCliente() && !exceptionRouteAuthGuard.includes(cleanUrl)) {
             this.router.navigate(['/']);
             return false;
         }

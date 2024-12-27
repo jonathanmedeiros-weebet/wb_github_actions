@@ -6,9 +6,11 @@ import {MessageService} from '../../../shared/services/utils/message.service';
 import {DepositoPix} from '../../../models';
 import {ParametrosLocaisService} from '../../../shared/services/parametros-locais.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HelperService } from 'src/app/services';
+import { AuthService, HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+
+declare var WeebetMessage: any;
 
 @Component({
     selector: 'ngbd-modal-content',
@@ -58,6 +60,7 @@ export class NgbdModalContent {
     second = 0;
     secondShow = '00';
     copyButtonText; 
+    isAppMobile;
 
     constructor(
         public modal: NgbActiveModal,
@@ -65,7 +68,9 @@ export class NgbdModalContent {
         private _helper: HelperService,
         private paramsLocais: ParametrosLocaisService,
         private domSanitizer: DomSanitizer,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private authService: AuthService,
+        private messageService: MessageService
     ) {}
 
     ngOnInit() {
@@ -87,7 +92,9 @@ export class NgbdModalContent {
                 clearInterval(timer)
             }
         }, 1000);
+        
         this.copyButtonText = this.translate.instant('deposito.copyCode');
+        this.isAppMobile = this.authService.isAppMobile();
     }
 
     copyCode() {
@@ -102,8 +109,39 @@ export class NgbdModalContent {
 
     compartilhar() {
         const imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + this.qrCodeBase64);
-        this._helper.sharedDepositoPix(imagePath);
-    }
+        const dataToSend = {
+            message: `Deposito PIX`,
+            file: imagePath,
+            data: `Qrcode para deposito PIX`,
+            action: 'shareURL'
+        };
+    
+        const base64ToBlob = (base64: string, contentType: string): Blob => {
+            const byteCharacters = atob(base64); 
+            const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
+            const byteArray = new Uint8Array(byteNumbers);
+            return new Blob([byteArray], { type: contentType });
+        };
+
+        const contentType = "image/png";
+        const base64Data = this.qrCodeBase64.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+        const blob = base64ToBlob(base64Data, contentType);
+        const file = new File([blob], "shared-image.png", { type: contentType });
+
+        if (this.isAppMobile) {
+            WeebetMessage.postMessage(JSON.stringify(dataToSend));
+        } else {
+            if (window.navigator.share) {
+                window.navigator.share({
+                    files: [file],
+                    title: dataToSend.message,
+                    text: `${this.qrCode}\n\n`
+                })
+            } else {
+                this.messageService.error('Compartilhamento não suportado pelo seu navegador');
+            }
+        }
+    } 
 }
 @Component({
     selector: 'app-deposito-pix',

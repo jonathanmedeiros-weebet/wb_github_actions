@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CadastroModalComponent, LoginModalComponent } from '../shared/layout/modals';
 import { AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
@@ -36,6 +37,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         private renderer: Renderer2,
         private elementRef: ElementRef,
         private loginService: LoginService,
+        @Inject(DOCUMENT) private document: any
     ) { }
 
     ngOnInit() {
@@ -50,6 +52,11 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             if (window.innerWidth <= 1280) {
                 this.heightHeader = 140;
             }
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'none');
         }
 
         this.helper.injectBetbyScript(this.params.getOpcoes().betby_script).then(() => {
@@ -141,6 +148,11 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
+
         if (this.bt) {
             this.bt.kill();
         }

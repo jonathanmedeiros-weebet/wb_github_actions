@@ -19,7 +19,8 @@ import {
     ClienteSenhaModalComponent,
     LoginModalComponent,
     PesquisarCartaoMobileModalComponent,
-    RecargaCartaoModalComponent
+    RecargaCartaoModalComponent,
+    ValidatePhoneModalComponent
 } from '../modals';
 import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
 import {SolicitacaoSaqueClienteComponent} from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
@@ -40,6 +41,8 @@ import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component'
 import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
 import {CarteiraComponent} from "../../../clientes/carteira/carteira.component";
 import { CashbackComponent } from 'src/app/clientes/cashback/cashback.component';
+import { ListBankAccountsComponent } from '../list-bank-accounts/list-bank-accounts.component';
+import { LastAccessesModalComponent } from '../modals/last-accesses-modal/last-accesses-modal.component';
 
 declare var xtremepush: any;
 
@@ -62,7 +65,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         credito: 0,
         bonus: 0,
         saldoMaisBonus: 0,
-        bonusModalidade: 'nenhum'
+        bonusModalidade: 'nenhum',
+        phone_validated: false
     };
     myMatchOptions: IsActiveMatchOptions = {
         matrixParams: 'ignored',
@@ -123,6 +127,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     private currentRoute: string;
     showIndiqueGanhe: boolean = true;
     isIndiqueGanheVisible: boolean;
+
+    userPhoneValidated = false;
+    isMandatoryPhoneValidation = false;
 
     sportsIsActive = false;
     sportsLiveIsActive = false;
@@ -192,6 +199,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     ngOnInit() {
         this.currentRoute = this.router.url;
         this.sportsActive();
+        this.isMandatoryPhoneValidation = this.paramsService.isMandatoryPhoneValidation();
 
         this.headerService.fullScreenCasinoGameState$.subscribe(isFullScreen => {
             this.isCasinoGameFullScreen = isFullScreen;
@@ -231,6 +239,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     if (isLoggedIn) {
                         this.getUsuario();
                         this.getPosicaoFinanceira();
+                        this.userPhoneValidated = this.usuario.phone_validated;
                     }
                 }
             );
@@ -422,6 +431,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     this.posicaoFinanceira.saldoMaisBonus = posicaoFinanceira.saldo;
                     if (this.isCliente) {
                         this.posicaoFinanceira.saldoMaisBonus = Number(posicaoFinanceira.saldo) + Number(posicaoFinanceira.bonus);
+
+                        if (this.posicaoFinanceira.phone_validated != this.usuario.phone_validated) {
+                            this.auth.updatePhoneValidationStatus(this.posicaoFinanceira.phone_validated);
+                        }
                     }
                 },
                 error => {
@@ -488,6 +501,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ClienteSenhaModalComponent);
     }
 
+    openLastAccesses() {
+        this.modalService.open(LastAccessesModalComponent);
+    }
+
+    openBankAccount() {
+        const modalRef = this.modalService.open(ListBankAccountsComponent);
+        modalRef.componentInstance.showHeaderMobile = true;
+    }
+
     abrirPix() {
         this.modalService.open(ClientePixModalComponent);
     }
@@ -511,6 +533,21 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     abrirCarteira() {
         this.modalService.open(CarteiraComponent);
+    }
+
+    openValidatePhoneModal() {
+        const modalRef = this.modalService.open(ValidatePhoneModalComponent, {
+            ariaLabelledBy: "modal-basic-title",
+            windowClass: "modal-550 modal-h-350",
+            centered: true,
+        });
+
+        modalRef.result.then(
+            (result) => {
+                this.userPhoneValidated = this.auth.getUser().phone_validated;
+                this.cd.detectChanges();
+            }
+        );
     }
 
     abrirDepositos() {

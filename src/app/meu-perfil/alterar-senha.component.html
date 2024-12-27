@@ -109,19 +109,19 @@
                             label="{{'senhas.confirmarSenha' | translate}}"
                         ></app-error-msg>
                     </div>
-                <div class="buttons">
-                    <button
-                        class="btn btn-custom2 w-150 mr-4"
-                        type="button"
-                        (click)="resetarForm()"
-                        [disabled]="loading"
-                    >
-                        {{'geral.cancelar' | translate}}
-                    </button>
-                    <button class="btn btn-custom w-150" type="submit" [disabled]="loading">
-                        {{(loading ? 'geral.salvando' : 'geral.salvar') | translate}}
-                    </button>
-                </div>
+                    <div class="buttons">
+                        <button
+                            class="btn btn-custom2 w-150 mr-4"
+                            type="button"
+                            (click)="resetarForm()"
+                            [disabled]="loading"
+                        >
+                            {{'geral.cancelar' | translate}}
+                        </button>
+                        <button class="btn btn-custom w-150" type="submit" [disabled]="loading">
+                            {{(loading ? 'geral.salvando' : 'geral.salvar') | translate}}
+                        </button>
+                    </div>
                 </form>
                 <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
                 <div #legitimuz id="legitimuz-container"

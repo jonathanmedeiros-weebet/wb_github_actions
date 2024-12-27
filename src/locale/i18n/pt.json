@@ -272,7 +272,25 @@
         "session_alert": "Alerta de Sessão",
         "session_alert_message": "Atualmente, existe uma sessão ativa em outro dispositivo. Para continuar o acesso, gostaria de encerrar a outra sessão?",
         "jogoResponsavel": "Jogo responsável",
-        "tax": "Imposto"
+        "tax": "Imposto",
+        "validatePhone": "Verificação de Telefone",
+        "savedSuccessfully":  "Salvo com sucesso!",
+        "successfullyDeleted": "Excluído com sucesso!",
+        "vpn": "Detectamos que você está acessando nosso site por meio de uma VPN. Para garantir a segurança e a integridade da plataforma, pedimos que você desative a VPN ou utilize uma conexão padrão para continuar. Se você acredita que isso é um erro, entre em contato com o suporte.",
+        "logoutGeolocationErrorMessage": "Você foi desconectado por motivos de segurança. Detectamos uma mudança abrupta na sua localização que seria fisicamente impossível de ocorrer no intervalo de tempo registrado. Caso isso não tenha sido causado por você, recomendamos verificar sua conta.",
+        "logoutGeolocationErrorTitle": "Acesso Interrompido: Localização Inconsistente",
+        "logoutGeolocationErrorButtonLabel": "Fechar"
+    },
+    "bankAccounts": {
+        "title" : "Contas Bancárias",
+        "Bank": "Banco",
+        "OptionBank": "Selecione o banco",
+        "AgencyNumber": "Número da agência",
+        "AccountNumber": "Número da conta",
+        "AccountType": "Tipo de conta",
+        "CurrentAccount": "Conta corrente",
+        "SavingsAccount": "Conta poupança",
+        "optionAccountType":"Selecione o tipo de conta"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -452,9 +470,9 @@
         "soliciteEntrandoEmContatoCom": "Solicite deposito entrando em contato através do Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Depósitos recentes",
         "depositDetails": "Detalhes do depósito",
-        "depositText": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, selecione se deseja receber o {{bonusType}}, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
-        "depositTextWithoutBonus": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
-        "depositTextWithoutBonusAndPromocode": "Para realizar um depósito via {{paymentMethod}}, insira o valor que deseja depositar no campo abaixo e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
+        "depositText": "Para realizar um depósito via PIX, insira o valor que deseja depositar no campo abaixo, selecione se deseja receber o {{bonusType}}, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
+        "depositTextWithoutBonus": "Para realizar um depósito via PIX, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
+        "depositTextWithoutBonusAndPromocode": "Para realizar um depósito via PIX, insira o valor que deseja depositar no campo abaixo e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
         "copyCode": "Copiar código",
         "copied": "Copiado!"
     },
@@ -466,12 +484,14 @@
         "metodosDePagamento": "Metódos de pagamento",
         "quemSomos": "Quem Somos",
         "downloadApp": "Download app",
+        "installPwa": "Instalar APP Cliente",
         "regras": "Regras",
         "resultados": "Resultados",
         "politicaDePrivacidade": "Política de privacidade",
         "politicaAml": "Política AML",
         "jogoResponsavel": "Jogo responsável",
         "termosECondicoes": "Termos e condições",
+        "feedback": "Ouvidoria",
         "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. Todos os direitos reservados."
     },
     "paginas": {
@@ -680,18 +700,29 @@
         },
         "exclusao_conta": {
             "titulo": "Exclusão de conta",
-            "descricao": "Excluir permanentemente a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta permanentemente, você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro.",
-            "descricao_2": "Além disso, ressaltamos que essa ação também implicará na impossibilidade de criar uma nova conta na plataforma.",
-            "informe_motivo": "Informe por qual motivo você deseja excluir sua conta permanentemente:",
+            "descricao": "Excluir a conta é uma ação que resulta na remoção completa da conta e de todas as informações associadas a ela, de forma irreversível. Isso inclui dados pessoais, histórico de apostas e acesso à plataforma. Ao excluir a conta, você encerrará sua participação no site de forma definitiva, sem a possibilidade de recuperar a conta ou suas informações no futuro.",
+            "descricao_2": "Além disso, ressaltamos que essa ação também implicará na impossibilidade de criar uma nova conta na plataforma, caso o período permanente seja escolhido.",
+            "exclusionPeriodLabel": "Informe por quanto tempo você deseja excluir sua conta:",
+            "3months": "3 meses",
+            "6months": "6 meses",
+            "12months": "12 meses",
+            "24months": "24 meses",
+            "36months": "36 meses",
+            "48months": "48 meses",
+            "60months": "60 meses",
+            "permanently": "Permanentemente",
+            "periodIsMissing": "O período de exclusão não foi selecionado.",
+            "informe_motivo": "Informe por qual motivo você deseja excluir sua conta:",
             "motivo_1": "Uma segunda conta foi criada",
             "motivo_2": "Ocupa muito meu tempo/desvia muito minha atenção",
             "motivo_3": "Não tenho mais interesse em realizar apostas neste site",
             "motivo_4": "Não estou mais usando esta conta",
             "motivo_5": "Problemas ao utilizar o sistema",
             "motivo_6": "Outros motivos",
-            "digite_para_continuar": "Digite \"<b>EXCLUIR PERMANENTEMENTE</b>\" para confirmar a ação de exclusão.",
+            "digite_para_continuar": "Digite \"<b>EXCLUIR CONTA</b>\" para confirmar a ação de exclusão.",
+            "exclusionConfirmationError": "Digite exatamente a frase \"EXCLUIR CONTA\" para confirmar a exclusão da conta.",
             "explique_motivo": "Explique sobre quais motivos você está excluindo a conta...",
-            "excluir_conta": "Excluir conta permanentemente"
+            "excluir_conta": "Excluir conta"
         },
         "temporizador_sessao": {
             "titulo": "Temporizador de sessão",
@@ -731,6 +762,7 @@
         "redeem": "Resgatar"
     },
     "face_match": {
+        "label": "Reconhecimento Facial",
         "verified_identity": "Identidade verificada!",
         "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte."
     },
@@ -742,7 +774,8 @@
         "protectedByReCaptchaPart2": "Política de Privacidade",
         "protectedByReCaptchaPart3": "do Google e os",
         "protectedByReCaptchaPart4": "Termos de Serviço",
-        "protectedByReCaptchaPart5": "se aplicam."
+        "protectedByReCaptchaPart5": "se aplicam.",
+        "registrationBeneficiariesSocialPrograms": "Os beneficiários de programas sociais não podem se registrar."
     },
     "registerCancel": {
         "titleCancelRegister": "Tem certeza que deseja cancelar seu registro?",

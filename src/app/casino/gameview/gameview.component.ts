@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild, RendererStyleFlags2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
@@ -72,6 +72,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     tawakChatClicked: boolean = false;
     gameProviderName: string = '';
+    private inGame : boolean = false
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -126,7 +127,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (window.innerWidth > 482 && window.innerWidth <= 1024) {
             this.isTablet = true;
-        } 
+        }
 
         this.getGameList();
         this.isLoggedIn = this.auth.isLoggedIn();
@@ -161,6 +162,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
         }
 
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'none');
+        }
+
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
         }
@@ -193,6 +199,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 return;
             }
 
+            this.checkIfMobileOrDesktopOrTablet();
+
             this.auth.logado
                 .subscribe(
                     isLoggedIn => {
@@ -200,9 +208,26 @@ export class GameviewComponent implements OnInit, OnDestroy {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
                                 this.loadGame();
+
+                                if (this.isMobile && this.gameMode === 'REAL') {
+                                    this.disableHeader();
+                                    this.fixMobileHeader();
+                                }
+
+                                if (this.isTablet && this.gameMode === 'REAL') {
+                                    this.disableHeader();
+                                    this.fixTabletHeader();
+                                }
+
+                                if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
+                                    this.fixTabletAndDesktopScreen();
+                                }
                             }
                         }
-
+                        if (isLoggedIn || this.gameMode !== 'REAL') {
+                            this.inGame = true;
+                            this.fixInGameSpacings();
+                        }
                         this.loadGame();
                     }
                 );
@@ -223,8 +248,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.showLoadingIndicator = false;
                 });
         });
-
-        this.checkIfMobileOrDesktopOrTablet();
 
         if (this.gameFornecedor === 'galaxsys') {
             this.appendScriptGalaxsys();
@@ -296,6 +319,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.isTablet || this.isDesktop) {
             this.fixTabletAndDesktopScreen();
+        }
+
+        if (this.inGame || (this.isLoggedIn || this.gameMode !== 'REAL')) {
+            this.fixInGameSpacings();
         }
     }
 
@@ -392,7 +419,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
                         this.gameProviderName = response.gameFornecedorExibicao;
-                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
@@ -476,6 +503,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (liveChatBtn) {
                 this.renderer.setStyle(liveChatBtn, 'display', 'block');
             }
+
+            const zendeskChat = this.document.querySelector('iframe#launcher');
+            if (zendeskChat) {
+                this.renderer.setStyle(zendeskChat, 'display', 'block');
+            }
         }
 
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
@@ -493,6 +525,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
 
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
+
         const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
         if (TawkChat) {
             this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
@@ -502,9 +539,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             });
         }
 
-        if (this.isMobile && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
+        if (this.headerService.getIsHeaderDisabled) {
             this.disableHeaderOptions();
             this.enableHeader();
+        } else {
+            this.disableHeaderOptions();
         }
     }
 
@@ -650,6 +689,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
     }
 
     openFullscreen() {
@@ -703,7 +747,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (blocoRelatedGames) {
             this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
         }
-        
+
         if (backButton) {
             this.renderer.setStyle(backButton, 'display', 'none');
         }
@@ -744,7 +788,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if (gameFrame.classList.contains('in-game')) {
-            this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 170px)');
+            this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 140px)');
         }
 
         const footer = this.el.nativeElement.querySelector('.main-footer');
@@ -878,6 +922,36 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     }
 
+    private fixMobileHeader() {
+        const gameViewHeader = this.el.nativeElement.querySelector('.header-game-view');
+
+        if (gameViewHeader) {
+            this.renderer.setStyle(gameViewHeader, 'display', 'flex');
+        }
+    }
+
+    private fixTabletHeader() {
+        const gameViewHeader = this.el.nativeElement.querySelector('.header-game-view');
+        const gameView = this.el.nativeElement.querySelector('.game-view');
+
+        if (gameViewHeader) {
+            this.renderer.setStyle(gameViewHeader, 'display', 'flex');
+        }
+
+        if (gameView) {
+            this.renderer.setStyle(gameView, 'padding-top', '50px');
+            this.renderer.setStyle(gameView, 'position', 'fixed');
+        }
+    }
+
+    private fixInGameSpacings() {
+        const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
+
+        if (blocoContainer && (this.inGame || this.gameMode !== 'REAL')) {
+            this.renderer.setStyle(blocoContainer, 'padding', '0');
+        }
+    }
+
     private async getRelatedAndPopularGames(category: string, live: boolean = false) {
         const response = await this.casinoApi.getGamesList(live).toPromise();
 
@@ -891,7 +965,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
             ...fornecedor,
-            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+            imagem: `https://wb-assets.com/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
         }));
     }
 
@@ -902,7 +976,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
             ...fornecedor,
-            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+            imagem: `https://wb-assets.com/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
         }));
     }
 
@@ -958,13 +1032,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                     return false;
                 });
-    
+
             if (filteredGames.length < this.casinoRelatedGamesQuantity) {
                 if (!this.popularGamesIds.includes(this.gameId)) {
                     this.popularGamesIds.push(this.gameId);
                 }
                 let missingGamesCalc = this.casinoRelatedGamesQuantity - filteredGames.length;
-    
+
                 this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
                     response => {
                         filteredGames = filteredGames.concat(response);
@@ -1009,6 +1083,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private fixTabletAndDesktopScreen() {
         const gameView = this.el.nativeElement.querySelector('.game-view');
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
+        const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
 
         if (this.isTablet) {
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
@@ -1017,11 +1092,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && this.isDesktop) && (gameView.classList.contains('in-game'))) {
+        if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '50px');
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 180px)');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 140px)');
+            }
+        }
+
+        if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
+            if (headerOptions) {
+                this.renderer.setStyle(headerOptions, 'margin', '0 18px');
             }
         }
     }

@@ -48,6 +48,10 @@ export class HeadersService {
         };
     }
 
+    getIsHeaderDisabled() {
+        return this.fullScreenCasinoGame.value;
+    }
+
     openCasinoFullScreen() {
         this.fullScreenCasinoGame.next(true);
     }

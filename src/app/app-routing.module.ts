@@ -11,9 +11,9 @@ import { WelcomeGuard } from './shared/services/guards/welcome.guard';
 import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
-import { HomeComponent } from './home/home.component';
 import { BetbyComponent } from './betby/betby.component';
 import {RifaGuard} from './shared/services/guards/rifa.guard';
+import { RedirectBetGuardGuard } from './shared/services/guards/redirect-bet-guard.guard';
 
 const appRoutes: Routes = [
     {
@@ -108,6 +108,11 @@ const appRoutes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'bank-accounts',
+                loadChildren: () => import('./bank-accounts/bank-accounts.module').then(m => m.BankAccountsModule),
+                canActivate: [AuthGuard, ClientGuard]
+            },
+            {
                 path: 'validar-aposta',
                 loadChildren: () => import('./validar-aposta/validar-aposta.module').then(m => m.ValidarApostaModule),
                 canActivate: [AuthGuard, CambistaGuard]
@@ -147,6 +152,11 @@ const appRoutes: Routes = [
     {
         path: 'bilhete/:codigo',
         component: CupomComponent
+    },
+    {
+        path: 'aposta/:codigo',
+        component: CupomComponent,
+        canActivate: [RedirectBetGuardGuard]
     },
     {
         path: 'welcome',

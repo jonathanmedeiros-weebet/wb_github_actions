@@ -56,7 +56,7 @@ export class SolicitacaoSaqueComponent implements OnInit {
         let queryParams: any = {
             'data-inicial': this.formatDate(this.fromDate, 'us'),
             'data-final': this.formatDate(this.toDate, 'us'),
-            'aprovado': 1
+            'aprovado': this.status
         };
 
         if (params) {
@@ -117,7 +117,7 @@ export class SolicitacaoSaqueComponent implements OnInit {
     setPagamento(solicitacao) {
         this.modalRef = this.modalService.open(ConfirmModalComponent, { centered: true });
         this.modalRef.componentInstance.title = 'Pagamento';
-        this.modalRef.componentInstance.msg = 'Tem certeza que deseja confirma o pagamento?';
+        this.modalRef.componentInstance.msg = 'Tem certeza que deseja confirmar o pagamento?';
 
         this.modalRef.result.then(
             (result) => {
@@ -151,6 +151,6 @@ export class SolicitacaoSaqueComponent implements OnInit {
     }
 
     handleError(error) {
-        console.log(error)
+        this.messageService.error(error);
     }
 }

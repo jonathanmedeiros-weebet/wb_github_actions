@@ -8,6 +8,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#1976d2">
+
     <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
@@ -22,13 +25,10 @@
 
     <!-- End Google Tag Manager -->
 
-    
 
-    
-
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="https://wb-assets.com/fonts/remix-icon/remixicon.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link rel="stylesheet" href="https://wb-assets.com/fonts/remix-icon/remixicon.css"/>
 
     <link rel="apple-touch-icon" href="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png">
     <link rel="shortcut icon" type="image/png" href="https://weebet.s3.amazonaws.com/demo.wee.bet/logos/icone_app.png">
@@ -142,13 +142,6 @@
 
             return match ? match[1] : undefined;
         }
-
-
-        if (parseInt(getAndroidVersion()) <= Number(7)) {
-            if (location.search.indexOf('app') >= 0) {
-                window.location.href = 'https://demo.wee.bet/client-light/?config=true&host=central.demo.wee.bet&slug=demo.wee.bet&nome=DEMO'
-            }
-        }
     </script>
 </head>
 
@@ -160,7 +153,7 @@
         </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    
+
 
     <app-root>
         <div style="position: absolute;left: 50%;top: 50%; transform: translate(-50%, -50%);color: #fff;">
@@ -178,7 +171,7 @@
         </div>
     </app-root>
 
-    <script type='text/javascript' src='  https://webchat.voll360.com/voll-webchat.umd.cjs'></script>
+    <script type="text/javascript" src="  https://webchat.voll360.com/voll-webchat.umd.cjs"></script>
     <script>
             if (location.host === 'demo.wee.bet') {
                 VollWebChat.init({    subdomain: 'sportive',    width: 300,    height: 400,    token: 'YjhjNDQwNjktYTQ1MC00MDg0LWEyYjItZDNjNmM4MTcxYWViOmRiYmFkMDFk\nZDYwYjkwODE1YTM5MTNkMjQ4ZjllMWJmNmNjMDc2MzY1NUJQazRrdTR6S0I4\ndnBURGh1MkhTRThiOUlPdURPSVpROXdGUGlPS3Q=',  });
@@ -186,7 +179,7 @@
     </script>
 
     <style>
-        
+
     </style>
 </body>
 

@@ -69,7 +69,7 @@
             </p>
             <p class="resultado">
                 <span *ngIf="!(aposta.tipo == 'esportes' && aposta.rollover_status == 'cancelado')">
-                    <b>Resultados:</b>
+                    <b>Resultado:</b>
                     <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
                     <span *ngIf="!aposta.resultado">{{'geral.aguardando' | translate}}</span>
                 </span>

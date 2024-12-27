@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService, ClienteService } from './services';
+import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService, ClienteService, SecurityService } from './services';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
@@ -14,6 +14,7 @@ import { ConfiguracaoLimiteTempoModalComponent } from './shared/layout/modals/co
 import { ActivityDetectService } from './shared/services/activity-detect.service';
 import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
+import { CronService } from './shared/services/timer.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -61,7 +62,9 @@ export class AppComponent implements OnInit {
         private utilsService: UtilsService,
         private activityDetectService: ActivityDetectService,
         private clienteService: ClienteService,
-        private navigationHistoryService: NavigationHistoryService
+        private navigationHistoryService: NavigationHistoryService,
+        private cron: CronService,
+        private security: SecurityService,
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -146,6 +149,11 @@ export class AppComponent implements OnInit {
                     }
                 });
             }
+
+            const enableAnalyzeGeolocation = this.paramsLocais.getOpcoes().enable_analyze_geolocation;
+            if (isLogged && enableAnalyzeGeolocation) {
+                this.cron.startTime(() => this.security.analyzeGeoLocation(), 1000 * 60 * 30);
+            }
         });
 
         this.idleDetectService
@@ -161,14 +169,14 @@ export class AppComponent implements OnInit {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
 
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
+            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
+
             this.modalService.open(CadastroModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
                 windowClass: 'modal-500 modal-cadastro-cliente'
             });
-
-            this.router.navigate(['/']);
         }
 
         if (this.router.url.includes('/login')) {
@@ -313,22 +321,22 @@ export class AppComponent implements OnInit {
         if (this.paramLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
-        
+
         this.subscription = this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                if (event.url !== '/alterar-senha') { 
+                if (event.url !== '/alterar-senha') {
                     this.verifyForceChangePassword();
                 }
             }
         });
     }
 
-    ngOnDestroy(): void {        
+    ngOnDestroy(): void {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
     }
-    
+
     private verifyForceChangePassword() {
         const user = JSON.parse(localStorage.getItem('user'))
 

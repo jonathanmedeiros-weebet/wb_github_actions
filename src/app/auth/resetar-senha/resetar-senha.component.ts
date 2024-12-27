@@ -106,7 +106,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             if (this.faceMatchEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
-        });   
+        });
         this.route
         .params
             .subscribe((params) => {
@@ -166,6 +166,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         }  
         if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
+            this.showLoading = false;
         }
         this.layout
             .verificaRemocaoIndiqueGanhe
@@ -206,7 +207,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                         })
                     }
                 })
-        }         
+        }
     }
 
     createForm() {
@@ -229,7 +230,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             this.onSubmit();
             return;
         }
-        
+
         this.form.get('verificacao2').setValidators([Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
         this.form.get('verificacao2').markAsUntouched();
         this.step = RecoveryStep.TWO_STEP;

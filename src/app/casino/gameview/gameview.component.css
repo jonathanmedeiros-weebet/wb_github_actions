@@ -97,7 +97,6 @@ iframe{
 }
 
 .game-name span {
-    font-size: 16px;
     font-weight: 600;
     margin-top: 6px;
     margin-bottom: 0;
@@ -202,7 +201,7 @@ iframe{
     fill: #24CC63;
     margin-left: 0;
     background-color: rgba(36, 204, 99, 0.20);;
-    background-image: url('https://cdn.wee.bet/img/icons/whatsapp.svg');
+    background-image: url('https://wb-assets.com/img/icons/whatsapp.svg');
     background-size: 58%;
     background-repeat: no-repeat;
     background-position: center;
@@ -211,7 +210,7 @@ iframe{
 .facebook {
     fill: #395694;
     background-color: rgba(57, 86, 148, 0.20);
-    background-image: url('https://cdn.wee.bet/img/icons/facebook.svg');
+    background-image: url('https://wb-assets.com/img/icons/facebook.svg');
     background-size: 36%;
     background-repeat: no-repeat;
     background-position: center;
@@ -220,7 +219,7 @@ iframe{
 .telegram {
     fill: #2FA3D4;
     background-color: rgba(47, 163, 212, 0.20);;
-    background-image: url('https://cdn.wee.bet/img/icons/telegram.svg');
+    background-image: url('https://wb-assets.com/img/icons/telegram.svg');
     background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
@@ -229,7 +228,7 @@ iframe{
 .copy {
     fill: #FFF;
     background-color: rgba(255, 255, 255, 0.20);
-    background-image: url('https://cdn.wee.bet/img/icons/copy.svg');
+    background-image: url('https://wb-assets.com/img/icons/copy.svg');
     background-size: 50%;
     background-repeat: no-repeat;
     background-position: center;
@@ -316,8 +315,8 @@ iframe{
     }
 
     .game-view-mobile.in-game {
-       position: fixed;
-       top: 57px;
+        top: 57px;
+        position: fixed;
     }
 
     .game-frame {
@@ -337,6 +336,10 @@ iframe{
 
     .bloco-relatedGames {
         margin-top: 40px;
+    }
+
+    app-back-page {
+        padding: 0 !important;
     }
 }
 
@@ -644,7 +647,7 @@ iframe{
 
     .game-frame {
         width: 100%;
-        margin: 0;
+        margin: 0 20px;
         margin-bottom: 30px;
         height: 780px;
     }
@@ -738,7 +741,7 @@ iframe{
 
     .game-name span {
         font-size: 16px;
-        margin-left: 16px;
+        margin-top: 0;
     }
 
     .btn-cassino {
@@ -923,7 +926,7 @@ iframe{
     }
 
     app-back-page {
-        padding: 0 32px 0 0;
+        padding: 0 20px;
         display: flex;
         margin-top: 16px;
         align-items: center;
@@ -982,4 +985,8 @@ iframe{
     padding: 0 50px 50px 50px;
 }
 
-
+.desktopIsloggedIn {
+    position: fixed;
+    margin-top: 43px !important;
+    height: calc(100% - 140px);
+}

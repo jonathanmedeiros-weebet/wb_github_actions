@@ -81,11 +81,21 @@
             <a [routerLink]="['/informacoes/quem-somos']" *ngIf="hasQuemSomos">
                 {{'footer.quemSomos' | translate}}
             </a>
-            <a href="https://afiliados.{{sharedUrl}}" target="_blank" *ngIf="exibirLinkAfiliado">
-                {{'footer.afiliados' | translate}}
-            </a>
+            <ng-container *ngIf="this.slug != 'bet10.bet'; else elseUrlAfiliadoBet10"> 
+                <a href="https://afiliados.{{sharedUrl}}" target="_blank" *ngIf="exibirLinkAfiliado">
+                    {{'footer.afiliados' | translate}}
+                </a>
+            </ng-container>
+            <ng-template #elseUrlAfiliadoBet10>
+                <a href="https://afiliados{{sharedUrl}}" target="_blank" *ngIf="exibirLinkAfiliado">
+                    {{'footer.afiliados' | translate}}
+                </a>
+            </ng-template>
             <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="hasApk && !isAppMobile">
                 {{'footer.downloadApp' | translate}}
+            </a>
+            <a *ngIf="displayPwaInstallButton" (click)="installPwa()">
+                {{ 'footer.installPwa' | translate }}
             </a>
             <a [routerLink]="['/informacoes/regras']" *ngIf="hasRegras">
                 {{'footer.regras' | translate}}
@@ -104,6 +114,9 @@
             </a>
             <a [routerLink]="['/informacoes/termos-condicoes']" *ngIf="hasTermosCondicoes">
                 {{'footer.termosECondicoes' | translate}}
+            </a>
+            <a *ngIf="this.slug == 'puskasbet.com.br'" href="https://ouvidoria.puskasbet.com.br" target="_blank">
+                {{'footer.feedback' | translate}}
             </a>
         </div>
 

@@ -1,6 +1,7 @@
 import { DocCheckService } from './../../../services/doc-check.service';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 import { Subject } from 'rxjs';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,8 +18,8 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
-import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 
 declare global {
     interface Window {
@@ -34,7 +35,7 @@ declare global {
     styleUrls: ['./cadastro-modal.component.css'],
 })
 export class CadastroModalComponent extends BaseFormComponent implements OnInit, OnDestroy {
-    @ViewChild('ativacaoCadastroModal', {static: true}) ativacaoCadastroModal;
+    @ViewChild('ativacaoCadastroModal', { static: true }) ativacaoCadastroModal;
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
 
     appMobile;
@@ -55,6 +56,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     provedorCaptcha;
     validacaoEmailObrigatoria;
     autoPreenchimento = true;
+    validarBeneficioProgramaSocial = '';
+    beneficiarioProgramaSocial = null;
     cpfValidado = false;
     menorDeIdade = false;
     possuiCodigoAfiliado = false;
@@ -73,7 +76,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     promocaoAtiva = false;
     valorPromocao: number | null = null;
     bonusModalidade: string | null = null;
-
     verifiedIdentity = false;
     faceMatchEnabled = false;
     faceMatchRegister = false;
@@ -96,9 +98,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         specialChar: false,
     };
 
+    fullRegistration = true;
+
     public countries: any = [];
     public states: any = [];
     public cities: any = [];
+    private previousUrl: string;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -118,12 +123,41 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private legitimuzService: LegitimuzService,
         private docCheck: DocCheckService,
         private ga4Service: Ga4Service,
-        private utilitiesService: UtilsService
+        private utilitiesService: UtilsService,
+        private location: Location
     ) {
         super();
     }
 
     ngOnInit() {
+        let queryString = '';
+        if (this.router.url.includes('/cadastro')) {
+            const pages = {
+                esporte: 'esportes',
+                cassino: 'casino',
+                virtual: 'vitual-sports',
+                desafio: 'desafios',
+                acumuladao: 'acumuladao',
+                loteria: 'loterias',
+                cassino_ao_vivo: 'live-casino',
+                rifas: 'rifas/wall'
+            }
+
+            const queryParams = this.route.snapshot.queryParams;
+            queryString = "?" + new URLSearchParams(queryParams).toString();
+
+            const { pagina_inicial, betby } = this.paramsService.getOpcoes();
+
+            if (betby) {
+                pages.esporte = 'sports';
+            }
+
+            this.previousUrl = '/' + (pages[pagina_inicial] ?? '');
+        } else {
+            this.previousUrl = this.router.url;
+        }
+        this.location.replaceState(`/cadastro${queryString}`);
+
         this.getAddressOptions();
         this.faceMatchType = this.paramsService.getOpcoes().faceMatchType;
         this.currentLanguage = this.translate.currentLang;
@@ -165,6 +199,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
+        this.fullRegistration = this.paramsService.getOpcoes().enable_full_registration;
 
         if (this.isLoterj) {
             this.aplicarCssTermo = true;
@@ -184,6 +219,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
 
+        this.validarBeneficioProgramaSocial = this.paramsService.getOpcoes().social_programs;
+
         this.translate.onLangChange.subscribe(res => {
             this.hCaptchaLanguage = res.lang;
             this.cd.detectChanges();
@@ -194,82 +231,82 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.route.queryParams
             .subscribe((params) => {
 
-            if (params.ref || params.afiliado) {
-                const codigoAfiliado = params.ref ?? params.afiliado;
+                if (params.ref || params.afiliado) {
+                    const codigoAfiliado = params.ref ?? params.afiliado;
 
-                this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
-                localStorage.setItem('codigoAfiliado', codigoAfiliado);
-            } else {
-                const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
-                if (storagedCodigoAfiliado) {
-                    this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
+                    this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
+                    localStorage.setItem('codigoAfiliado', codigoAfiliado);
+                } else {
+                    const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
+                    if (storagedCodigoAfiliado) {
+                        this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
+                    }
                 }
-            }
 
-            if (params.btag) {
-                localStorage.setItem('btag', params.btag);
-            } else {
-                const storagedBtag = localStorage.getItem('btag');
-                if (storagedBtag) {
-                    this.form.patchValue({btag: storagedBtag});
+                if (params.btag) {
+                    localStorage.setItem('btag', params.btag);
+                } else {
+                    const storagedBtag = localStorage.getItem('btag');
+                    if (storagedBtag) {
+                        this.form.patchValue({ btag: storagedBtag });
+                    }
                 }
-            }
 
-            if (params.refId) {
-                localStorage.setItem('refId', params.refId);
-            } else {
-                const storagedRefId = localStorage.getItem('refId');
-                if (storagedRefId) {
-                    this.form.patchValue({refId: storagedRefId});
+                if (params.refId) {
+                    localStorage.setItem('refId', params.refId);
+                } else {
+                    const storagedRefId = localStorage.getItem('refId');
+                    if (storagedRefId) {
+                        this.form.patchValue({ refId: storagedRefId });
+                    }
                 }
-            }
 
-            if (params.c) {
-                this.campanhaService.computarAcesso({campRef: params.c, fonte: params.s}).subscribe();
+                if (params.c) {
+                    this.campanhaService.computarAcesso({ campRef: params.c, fonte: params.s }).subscribe();
 
-                localStorage.setItem('campRef', params.c);
-                localStorage.setItem('campFonte', params.s);
-            } else {
-                const campRef = localStorage.getItem('campRef');
-                const campFonte = localStorage.getItem('campFonte');
+                    localStorage.setItem('campRef', params.c);
+                    localStorage.setItem('campFonte', params.s);
+                } else {
+                    const campRef = localStorage.getItem('campRef');
+                    const campFonte = localStorage.getItem('campFonte');
 
-                if (campRef) {
-                    this.form.patchValue({campRef: campRef, campFonte: campFonte});
+                    if (campRef) {
+                        this.form.patchValue({ campRef: campRef, campFonte: campFonte });
+                    }
                 }
-            }
 
-            if (this.clientesService.codigoFiliacaoCadastroTemp) {
-                this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
-                this.possuiCodigoAfiliado = true;
-            }
-
-            this.parametersList.forEach(param => {
-                if (params[param]) {
-                    this.parameters[param] = params[param];
+                if (this.clientesService.codigoFiliacaoCadastroTemp) {
+                    this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
+                    this.possuiCodigoAfiliado = true;
                 }
+
+                this.parametersList.forEach(param => {
+                    if (params[param]) {
+                        this.parameters[param] = params[param];
+                    }
+                });
             });
-        });
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
             this.loginGoogleAtivo = true;
             this.socialAuth.authState
                 .pipe(takeUntil(this.unsub$))
                 .subscribe((user) => {
-                        if (user) {
-                            this.formSocial = true;
-                            this.form.patchValue({
-                                nome: user.name,
-                                email: user.email,
-                                confirmarEmail: user.email,
-                                googleId: user.id,
-                                googleIdToken: user.idToken,
-                            });
+                    if (user) {
+                        this.formSocial = true;
+                        this.form.patchValue({
+                            nome: user.name,
+                            email: user.email,
+                            confirmarEmail: user.email,
+                            googleId: user.id,
+                            googleIdToken: user.idToken,
+                        });
 
-                            this.clearValidators();
-                        }
-
-                        this.user = user;
+                        this.clearValidators();
                     }
+
+                    this.user = user;
+                }
                 );
         }
         if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
@@ -342,23 +379,24 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             if (promocaoCassino) {
                 this.promocaoAtiva = promocaoCassino.ativo;
                 this.valorPromocao = parseFloat(promocaoCassino.valorBonus);
-            } else if(promocaoEsportivo){
+            } else if (promocaoEsportivo) {
                 this.promocaoAtiva = promocaoEsportivo.ativo;
                 this.valorPromocao = parseFloat(promocaoEsportivo.valorBonus);
             }
         }
     }
 
-    closeModal(){
+    closeModal() {
         this.modalClose = false;
         this.registerCancel = true;
+        this.faceMatchRequested = false;
     }
 
     cancelModal() {
         this.activeModal.dismiss();
     }
 
-    registerOpen(){
+    registerOpen() {
         this.registerCancel = false;
         this.modalClose = true;
     }
@@ -373,9 +411,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             telefone: [null, [Validators.required]],
             email: [null, [Validators.required, Validators.email]],
-            genero: ['', [Validators.required]],
-            nationality: ['Brasil', [Validators.required]],
-            documentNumber: ['', [Validators.required]],
+            genero: ['', this.fullRegistration ? Validators.required : null],
+            nationality: ['Brasil', this.fullRegistration ? Validators.required : null],
+            documentNumber: ['', this.fullRegistration ? Validators.required : null],
             afiliado: [null, [Validators.maxLength(50)]],
             captcha: [null, this.provedorCaptcha ? Validators.required : null],
             check_1: [''],
@@ -388,12 +426,12 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null],
 
-            logradouro: ['', Validators.required],
-            numero: ['', Validators.required],
-            bairro: ['', Validators.required],
-            cidade: ['', Validators.required],
-            estado: ['', Validators.required],
-            cep: ['', [Validators.required]],
+            logradouro: ['', this.fullRegistration ? Validators.required : null],
+            numero: ['', this.fullRegistration ? Validators.required : null],
+            bairro: ['', this.fullRegistration ? Validators.required : null],
+            cidade: ['', this.fullRegistration ? Validators.required : null],
+            estado: ['', this.fullRegistration ? Validators.required : null],
+            cep: ['', this.fullRegistration ? Validators.required : null],
         });
 
         if (this.isStrengthPassword) {
@@ -418,8 +456,9 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
     }
 
-
     ngOnDestroy() {
+        this.location.replaceState(this.previousUrl);
+
         this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();
@@ -446,6 +485,15 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     private async prepareSubmitData() {
+        if (this.menorDeIdade) {
+            this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
+            return;
+        }
+        if (this.validarBeneficioProgramaSocial && this.beneficiarioProgramaSocial) {
+            this.messageService.error(this.translate.instant('register.registrationBeneficiariesSocialPrograms'));
+            return;
+        }
+
         let values = this.form.value;
 
         values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
@@ -475,7 +523,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         delete values.cidade;
         delete values.estado;
         delete values.cep;
-        
+
         return values;
     }
 
@@ -498,14 +546,15 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
                     localStorage.removeItem('codigoAfiliado');
 
-                    if(this.validacaoEmailObrigatoria) {
+                    if (this.validacaoEmailObrigatoria) {
                         localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
                         this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
                         let nome = values.nome.split(" ")[0];
                         this.router.navigate(
                             ['/welcome'],
-                            { queryParams: { nomeCliente: nome, valid: true }
-                        });
+                            {
+                                queryParams: { nomeCliente: nome, valid: true }
+                            });
                     } else {
                         this.auth.setIsCliente(true);
 
@@ -514,17 +563,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                         let nome = values.nome.split(" ")[0];
                         this.router.navigate(
                             ['/welcome'],
-                            { queryParams: { nomeCliente: nome, valid: false }
-                        });
+                            {
+                                queryParams: { nomeCliente: nome, valid: false }
+                            });
                     }
 
-                    if(this.errorMessage && res.success){
+                    if (this.errorMessage && res.success) {
                         this.clearErrorMessage();
                     }
                 },
                 error => {
                     this.handleError(error);
-                    this.form.patchValue({captcha: null});
+                    this.form.patchValue({ captcha: null });
                     this.submitting = false;
                 }
             );
@@ -568,14 +618,17 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     validarCpf() {
         const { cpf } = this.form.value;
 
-        if (this.autoPreenchimento) {
+        if (this.validarBeneficioProgramaSocial || this.autoPreenchimento) {
             if (this.form.get('cpf').valid) {
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
                         if (res.validarCpfAtivado) {
+                            const dataTresMesesAntes = new Date();
+                            dataTresMesesAntes.setMonth(dataTresMesesAntes.getMonth() - 3);
                             this.autoPreenchimento = true;
                             this.cpfValidado = true;
                             this.menorDeIdade = res.menorDeIdade;
+                            this.beneficiarioProgramaSocial = res.beneficios.DataRecebimentoMaisRecente >= dataTresMesesAntes.toISOString();
                             this.form.controls['nascimento'].clearValidators();
                             this.form.controls['nascimento'].updateValueAndValidity();
                             this.form.patchValue({
@@ -584,7 +637,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             });
                         } else {
                             if (!this.formSocial) {
-                                this.form.patchValue({nome: ''});
+                                this.form.patchValue({ nome: '' });
                             }
                             this.autoPreenchimento = false;
                             this.form.controls['nascimento'].setValidators([Validators.required, FormValidations.birthdayValidator]);
@@ -594,7 +647,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     },
                     error => {
                         this.cpfValidado = false;
-                        this.form.patchValue({nome: ''});
+                        this.form.patchValue({ nome: '' });
                         if (error?.code === 'cpfInformadoNaoExiste') {
                             this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
                             this.form.controls['cpf'].updateValueAndValidity();
@@ -615,7 +668,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     }
 
-    onBeforeInput(e : InputEvent, inputName){
+    onBeforeInput(e: InputEvent, inputName) {
         FormValidations.blockInvalidCharacters(e, inputName);
     }
 
@@ -631,10 +684,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
 
         this.requirements = {
-          minimumCharacters: lengthCheck,
-          uppercaseLetter: hasUpperCase,
-          lowercaseLetter: hasLowerCase,
-          specialChar: hasSpecialChar,
+            minimumCharacters: lengthCheck,
+            uppercaseLetter: hasUpperCase,
+            lowercaseLetter: hasLowerCase,
+            specialChar: hasSpecialChar,
         };
 
         this.validPassword = Object.values(this.requirements).every(Boolean);
@@ -642,7 +695,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     onBlurGa4Name(event: any): void {
         const value = event.target.value;
-        if(value){
+        if (value) {
             this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
         }
     }

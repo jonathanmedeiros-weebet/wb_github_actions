@@ -288,4 +288,8 @@ export class ParametrosLocaisService {
     getAllowOnlyOneSessionPerLogin() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.allow_single_session : null;
     }
+
+    isMandatoryPhoneValidation() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.mandatory_phone_validation : false;
+    }
 }

@@ -26,7 +26,7 @@
                 <b>HORÁRIO: </b><span>{{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
             </p>
             <p class="resultado">
-                <b>RESULTADO: </b>
+                <b>{{ 'geral.resultado' | translate }}: </b>
                 <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
                 <span *ngIf="!aposta.resultado">aguardando</span>
             </p>
