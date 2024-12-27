@@ -137,16 +137,14 @@
                 })
                 .catch(() => this.logo = null);
         },
-        activated() {
-            this.cambistaPay()
-        },
         computed: {
             cambistaPay() {
-                if (this.bet?.resultado) {
-                    return this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100);
-                } else {
-                    return this.bet?.possibilidade_ganho * ((100 - this.bet?.passador?.percentualPremio) / 100);
+                if (this.bet?.passador?.percentualPremio > 0) {
+                    return this.bet?.resultado 
+                        ? this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100)
+                        : this.bet?.possibilidade_ganho * ((100 - this.bet?.passador?.percentualPremio) / 100);
                 }
+                return 0;
             },
             betCode() {
                 return this.bet?.codigo ?? '';
