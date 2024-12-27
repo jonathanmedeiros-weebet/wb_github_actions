@@ -2500,3 +2500,21 @@ gulp.task('copasbet.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('boasorte.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "boasorte.bet",
+        banca: "BOA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('eliteesportes.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "eliteesportes.vip",
+        banca: "ELITE ESPORTES",
+        styles: "",
+    });
+});
