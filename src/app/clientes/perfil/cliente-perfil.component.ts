@@ -121,6 +121,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe()
                         this.faceMatchProfileEditValidated = true;
+                        this.faceMatchProfileEdit = true;
                     }
                 })
                 break;
