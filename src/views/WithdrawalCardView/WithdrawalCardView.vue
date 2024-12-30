@@ -105,11 +105,9 @@
 <script>
 import Header from '@/components/layouts/Header.vue'
 import WInput from '@/components/Input.vue'
-import WSelect from '@/components/Select.vue'
 import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
-import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 import { convertInMomentInstance, formatCurrency, now, formatDateTimeBR } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores'
@@ -130,7 +128,6 @@ export default {
     WButton,
     WModal,
     CardBets,
-    TagButton,
     ModalCalendar,
     Toast,
     ModalConfirmPayment,
@@ -146,7 +143,6 @@ export default {
       isModalConfirmPaymentVisible: false, 
       modalItemId: '', 
       modalItemVersion: '', 
-      selectedOption: '1',
       showModalStatus: false,
       info: {
         cartao_aposta: [], 
@@ -170,12 +166,6 @@ export default {
     this.status = this.statusList[0];
   },
   computed: {
-    statusOptions() {
-      return [
-        { value: '1', text: 'Aprovado' },
-        { value: '0', text: 'Não Aprovado' }
-      ];
-    },
     dateFilterView() {
       const initialDate = convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY");
       const finalDate = convertInMomentInstance(this.finalDateFilter).format("DD/MM/YYYY");
@@ -189,12 +179,8 @@ export default {
     handleCloseStatusModal() {
       this.showModalStatus = false;
     },
-    handleSelectStatus(value) {
-      this.selectedOption = value;
-    },
     handleStatus(statusId) {
       this.status = this.statusList.find(status => status.id === statusId);
-      this.selectedOption = this.status.id;
       this.handleCloseStatusModal();
     },
     handleOpenWithdrawalCardModal() {
@@ -222,7 +208,7 @@ export default {
       return formatDateTimeBR(data);
     },
     getResults() {
-      this.params.status = this.selectedOption; 
+      this.params.status = this.status.id;
       this.params.initialDate = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
       this.params.endDate = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.parametros.dataInicial;
       this.getWithdrawals();

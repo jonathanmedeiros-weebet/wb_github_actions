@@ -1,73 +1,65 @@
 <template>
-    <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
-      <template #title>
-        <span class="modal-status__title">Selecione o status</span>
-      </template>
+  <WModal ref="wmodal" :backdropClick="true" @close="closeModal">
+    <template #title>
+      <span class="modal-status__title">Selecione o status</span>
+    </template>
 
-      <template #body>
-        <div class="modal-status__items">
-            <template v-for="(item, index) in items">
-                <a
-                    type="button"
-                    class="modal-status__item"
-                    :key="index"
-                    @click="handleSelect(item.id)"
-                >
-                    {{ item.name }}
-                    <IconCheck v-if="item.checked" class="modal-status__icon"/>
-                </a>
-            </template>
-        </div>
-      </template>
-    </WModal>
+    <template #body>
+      <div class="modal-status__items">
+        <a
+          v-for="item in filteredItems"
+          :key="item.id"
+          class="modal-status__item"
+          @click="selectStatus(item.id)"
+        >
+          {{ item.name }}
+          <IconCheck v-if="item.checked" class="modal-status__icon" />
+        </a>
+      </div>
+    </template>
+  </WModal>
 </template>
 
 <script>
-import WModal from '@/components/Modal.vue'
-import IconCheck from '@/components/icons/IconCheck.vue'
+import WModal from '@/components/Modal.vue';
+import IconCheck from '@/components/icons/IconCheck.vue';
 
 export default {
-    name: 'modal-status',
-    components: { WModal, IconCheck },
-    props: {
-        statusId: {
-            type: Number | String,
-            default: 1
-        }
-    },
-    data() {
-        return {
-            options: [
-                { id: 1, name: 'Aprovado', checked: this.statusId === 1 },
-                { id: 0, name: 'Não Aprovado', checked: this.statusId === 0 }
-            ]
-        }
-    },
-    computed: {
-        items() {
-            if(this.isStatus){
-                return this.options.filter(option => Boolean(option.status));
-            }
-            return this.options;
-        }
-    },
-    methods: {
-        handleCloseModal() {
-            this.$emit('closeModal');
-        },
-        handleSelect(statusId) {
-            this.$refs['wmodal'].handleClose();
-            this.$emit('click', statusId);
-        }
+  name: 'modal-status',
+  components: { WModal, IconCheck },
+  props: {
+    statusId: {
+      type: [Number],
+      default: 1
     }
-}
+  },
+  computed: {
+    filteredItems() {
+        const options = [
+            { id: 1, name: 'Aprovado', checked: this.statusId === 1 },
+            { id: 0, name: 'Não Aprovado', checked: this.statusId === 0 }
+        ];
+        return options.filter(option => option.id !== undefined); 
+    }
+  },
+  methods: {
+    closeModal() {
+        this.$emit('closeModal');
+    },
+    selectStatus(statusId) {
+        this.$refs.wmodal.handleClose();
+        this.$emit('click', statusId);
+    }
+  }
+};
 </script>
+
 
 <style lang="scss" scoped>
 .modal-status {
     &__title {
         color: #FFFFFF80;
-        color: var(--foreground-league-input);
+        color: var(--foreground-inputs-odds);
         font-size: 16px;
         font-weight: 500;
     }
@@ -86,9 +78,8 @@ export default {
         justify-content: center;
         line-height: 30px;
         margin-top: 20px;
-
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground-header);
         font-size: 16px;
         font-weight: 400;
     }
