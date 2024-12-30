@@ -96,7 +96,7 @@
         @closeModal="handleCloseStatusModal"
         @click="handleStatus"
         :statusId="status.id"
-        :statusList="statusList"
+        :statusList="statusList" 
       />
     </div>
   </div>

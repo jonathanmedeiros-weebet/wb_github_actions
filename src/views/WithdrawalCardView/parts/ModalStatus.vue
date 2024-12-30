@@ -25,30 +25,33 @@ import WModal from '@/components/Modal.vue';
 import IconCheck from '@/components/icons/IconCheck.vue';
 
 export default {
-  name: 'modal-status',
+  name: 'ModalStatus',
   components: { WModal, IconCheck },
   props: {
     statusId: {
-      type: [Number],
-      default: 1
+      type: Number,
+      required: true
+    },
+    statusList: {
+      type: Array,
+      required: true
     }
   },
   computed: {
     filteredItems() {
-        const options = [
-            { id: 1, name: 'Aprovado', checked: this.statusId === 1 },
-            { id: 0, name: 'Não Aprovado', checked: this.statusId === 0 }
-        ];
-        return options.filter(option => option.id !== undefined); 
+      return this.statusList.map(option => ({
+        ...option,
+        checked: option.id === this.statusId
+      }));
     }
   },
   methods: {
     closeModal() {
-        this.$emit('closeModal');
+      this.$emit('closeModal');
     },
     selectStatus(statusId) {
-        this.$refs.wmodal.handleClose();
-        this.$emit('click', statusId);
+      this.$refs.wmodal.handleClose();
+      this.$emit('click', statusId);
     }
   }
 };
