@@ -96,7 +96,7 @@
                 </p>
                 <p v-if="bet?.passador?.percentualPremio > 0" class="bet-shared__values-item">
                     <strong>CAMBISTA PAGA:</strong>
-                    <strong>{{ formatCurrency(cambistaPaga ?? 0) }}</strong>
+                    <strong>R$ {{ formatCurrency(cambistaPay ?? 0) }}</strong>
                 </p>
                 <hr>
                 <hr>
@@ -125,7 +125,6 @@
         },
         data() {
             return {
-                cambistaPaga: 0,
                 logo: null
             }
         },
@@ -138,16 +137,15 @@
                 })
                 .catch(() => this.logo = null);
         },
-        activated() {
-            if (this.bet?.passador?.percentualPremio > 0) {
-                if (this.bet?.resultado) {
-                    this.cambistaPaga = this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100);
-                } else {
-                    this.cambistaPaga = this.bet?.possibilidade_ganho * ((100 - this.bet?.passador?.percentualPremio) / 100);
-                }
-            }
-        },
         computed: {
+            cambistaPay() {
+                if (this.bet?.passador?.percentualPremio > 0) {
+                    return this.bet?.resultado 
+                        ? this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100)
+                        : this.bet?.possibilidade_ganho * ((100 - this.bet?.passador?.percentualPremio) / 100);
+                }
+                return 0;
+            },
             betCode() {
                 return this.bet?.codigo ?? '';
             },

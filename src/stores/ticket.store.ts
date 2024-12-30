@@ -89,7 +89,8 @@ export const useTicketStore = defineStore('ticket', {
                 quoteGroupName,
                 favorite,
                 modalityId,
-                championshipId
+                championshipId,
+                timestamp: Date.now()
             };
 
             this.items = { ...items };

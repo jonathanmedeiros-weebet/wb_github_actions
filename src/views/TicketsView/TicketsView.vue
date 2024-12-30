@@ -14,8 +14,8 @@
 
         <div
           class="bet"
-          v-for="(item, index) in items" 
-          :key="index" 
+          v-for="(item, index) in items"
+          :key="index"
         >
           <template v-if="!isModalityLottery">
             <div class="bet__header">
@@ -199,8 +199,8 @@ import { createLotteryBet } from '@/services/lottery.service';
 
 export default {
   name: 'tickets',
-  components: { 
-    Header, 
+  components: {
+    Header,
     IconDelete,
     IconLive,
     IconBall,
@@ -219,7 +219,7 @@ export default {
     IconESport
   },
   data() {
-    return {  
+    return {
       ticketStore: useTicketStore(),
       toastStore: useToastStore(),
       configClientStore: useConfigClient(),
@@ -272,13 +272,15 @@ export default {
     },
     items() {
       if(!this.isModalityLottery) {
-        return Object.values(this.ticketStore.items).map(item => ({
-          ...item,
-          icon: this.icons[item.modalityId],
-          quoteValue: item.quoteValue.toFixed(2),
-          previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
-          hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
-        }));
+        return Object.values(this.ticketStore.items)
+          .sort((a, b) => a.timestamp - b.timestamp)
+          .map(item => ({
+            ...item,
+            icon: this.icons[item.modalityId],
+            quoteValue: item.quoteValue.toFixed(2),
+            previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
+            hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
+          }));
       } else {
         return Object.values(this.ticketStore.items);
       }
@@ -333,7 +335,7 @@ export default {
       const bettorField = this.showBettorName
         ? this.bettorName
         : this.bettorDocumentNumber;
-        
+
       return (
         !Boolean(bettorField)
         || !Boolean(this.betValue)
@@ -355,7 +357,7 @@ export default {
     handleNotAllowLyrics(event) {
       const char = String.fromCharCode(event.charCode);
       if (!/\d/.test(char)) {
-        event.preventDefault(); 
+        event.preventDefault();
       }
     },
     formatDateTimeBR,
@@ -577,8 +579,8 @@ export default {
   }
 
   &__delete {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -593,22 +595,22 @@ export default {
 }
 
 .bet {
-  padding: 8px;  
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  position: relative; 
+  position: relative;
   color: #ffff;
   color: var(--foreground-header);
 
-  &::after { 
+  &::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100vw; 
+    width: 100vw;
     height: 1px;
     background-color: #7e7b7b1a;
-    transform: translateX(-20px); 
+    transform: translateX(-20px);
   }
 
   &__header {
@@ -703,7 +705,7 @@ export default {
     width: 50%;
     margin-top: 10px;
   }
-  
+
   &__balance-input ::v-deep .input__field {
     height: 50px;
   }

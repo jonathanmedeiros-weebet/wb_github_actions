@@ -8,7 +8,7 @@ export const getModalitiesEnum = () => {
     switch (sportbook) {
         case 'betsapi':
             return ModalitiesBetsApi;
-        case 'lsport':
+        case 'lsports':
             return ModalitiesLSport;
         default:
             return ModalitiesBetsApi;
