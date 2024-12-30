@@ -61,7 +61,9 @@ export class ParametrosLocaisService {
                         LegitimuzScripSDKFaceIndex.src = 'https://cdn.legitimuz.com/js/sdk/faceindex.js';
 
                         head.appendChild(LegitimuzScripSDK);
+                        head.appendChild(LegitimuzScripSDKFaceIndex);
                     }
+
                     const DOCK_CHECK_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.dockCheck_token && response?.opcoes?.faceMatchType == 'docCheck');
                     if (DOCK_CHECK_ENABLED) {
                         const DockCheckScripSDK = this.document.createElement('script');
