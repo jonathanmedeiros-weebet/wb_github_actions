@@ -229,7 +229,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                 }
                             }
                         }
-                        if (this.gameMode !== 'REAL') {
+                        if (isLoggedIn || this.gameMode !== 'REAL') {
                             this.inGame = true;
                         }
                     }
