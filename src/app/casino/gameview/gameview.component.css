@@ -987,6 +987,6 @@ iframe{
 
 .desktopIsloggedIn {
     position: fixed;
-    margin-top: 43px !important;
+    margin-top: 43px;
     height: calc(100% - 140px);
 }

@@ -215,8 +215,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         if (isLoggedIn) {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
-                                this.loadGame();
-
                                 if (this.isMobile && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixMobileHeader();
@@ -231,10 +229,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                                 }
                             }
                         }
-                        if (isLoggedIn || this.gameMode !== 'REAL') {
+                        if (this.gameMode !== 'REAL') {
                             this.inGame = true;
-                            this.fixInGameSpacings();
                         }
+                        this.fixInGameSpacings(); 
                         this.loadGame();
                     }
                 );
@@ -245,10 +243,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.isCliente = isCliente;
                     }
                 );
-
-            if (this.avisoCancelarBonus === false) {
-                this.loadGame();
-            }
 
             interval(3000)
                 .subscribe(() => {
@@ -441,14 +435,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
-                    if(response.loss_limit.loss_hit && response.loss_limit.error){
+                    if(response?.loss_limit?.loss_hit && response?.loss_limit?.error){
                         this.showModal(response.loss_limit.message);
                         this.router.navigate(['/']);
                     }
-                    if (!response.loss_limit.loss_hit && response.loss_limit.error ) {
+                    if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error ) {
                         this.showModalPercentage(response.loss_limit.message);
                     }
-
 
                     if (typeof response.gameUrl !== 'undefined') {
                         this.gameCategory = response.category;
@@ -981,7 +974,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private fixInGameSpacings() {
         const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
 
-        if (blocoContainer && (this.inGame || this.gameMode !== 'REAL')) {
+        if (blocoContainer) {
             this.renderer.setStyle(blocoContainer, 'padding', '0');
         }
     }
@@ -1115,6 +1108,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     private fixTabletAndDesktopScreen() {
+        console.log('chamou')
         const gameView = this.el.nativeElement.querySelector('.game-view');
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
         const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
@@ -1123,6 +1117,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
                 this.renderer.setStyle(gameView, 'padding-top', '50px');
                 this.renderer.setStyle(gameView, 'position', 'fixed');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
+                this.renderer.setStyle(gameFrame, 'style', 'margin-top: 0');
             }
         }
 
