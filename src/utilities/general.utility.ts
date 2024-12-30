@@ -40,6 +40,13 @@ export const isAndroid5 = () => {
     return version <= 5;
 }
 
+export const isAndroid6 = () => {
+    const androidVersion = getAndroidVersion();
+    if (!androidVersion) return false;
+    const version = parseInt(androidVersion.split('.')[0], 10);
+    return version <= 6;
+}
+
 export const capitalizeFirstLetter = (str: string) => {
     if(str){
         return str.charAt(0).toUpperCase() + str.slice(1);

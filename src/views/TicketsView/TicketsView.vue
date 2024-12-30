@@ -432,11 +432,20 @@ export default {
       }
 
       if(this.hasLiveBet) {
-        const liveToken = await createLiveToken(data);
-        data.token_aovivo = liveToken;
+        try {
+          const liveToken = await createLiveToken(data);
+          data.token_aovivo = liveToken;
 
-        const timeDelay = delayLiveBet;
-        await delay(timeDelay * 1000);
+          const timeDelay = delayLiveBet;
+          await delay(timeDelay * 1000);
+        } catch ({errors}) {
+          this.toastStore.setToastConfig({
+            message: errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+          return;
+        }
       }
 
       createBetSport(data)

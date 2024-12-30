@@ -1,92 +1,100 @@
 <template>
     <div class="lottery" ref="lotteryScroll">
-      <!-- <LotterySkeleton /> -->
-       
-        <div class="lottery__header">
-            <SelectFake
-                @click="handleOpenLotteryType"
-            >
-                <span>{{ typeSelected }}</span>
-            </SelectFake>
-
-            <SelectFake
-                @click="handleOpenLotteryNumbers"
-            >
-                <span>{{ `${sizeSelected} números` }}</span>
-            </SelectFake>
-        </div>
-          
-        <div class="lottery__body">
-            <span class="lottery__message">Escolha suas dezenas </span>
-
-            <div class="lottery__items">
-                <button
-                    v-for="item of items"
-                    :key="item"
-                    class="lottery__item"
-                    :class="{
-                        'lottery__item--selected': isSelected(item),
-                        'lottery__item--disabled': isDisabled(item),
-                    }"
-                    @click="handleSelected(item)"
-                    :disabled="isDisabled(item)"
-                >
-                    {{ item }}
-                </button>
-            </div>
-            <span class="lottery__info"> {{ tensInfo }} </span>
-        </div>
-
-        <div class="lottery__footer" ref="footer">
-            <div class="lottery__options">
-                <span class="lottery__options-label"> Sorteio </span>
+        <LotterySkeleton v-if="loading"/>
+        <template v-if="!loading">
+            <div class="lottery__header">
                 <SelectFake
-                    class="lottery__options-select"
-                    @click="handleOpenLotteryOptions"
+                    @click="handleOpenLotteryType"
                 >
-                    <span>{{ optionSelected }}</span>
+                    <span>{{ typeSelected }}</span>
+                </SelectFake>
+
+                <SelectFake
+                    @click="handleOpenLotteryNumbers"
+                >
+                    <span>{{ `${sizeSelected} números` }}</span>
                 </SelectFake>
             </div>
+            
+            <div class="lottery__body">
+                <span class="lottery__message">Escolha suas dezenas </span>
 
-            <div class="lottery__values value">
-                <span class="value__balance-text">Valor do palpite</span>
-                <div class="value__balance">
-                    <button class="value__add" @click="handleLotteryValueClick(10)">+10</button>
-                    <button class="value__add" @click="handleLotteryValueClick(20)">+20</button>
-                    <button class="value__add" @click="handleLotteryValueClick(50)">+50</button>
-                    <WInput
-                        class="value__balance-input"
-                        name="lottery-value"
-                        type="number"
-                        v-model="lotteryValue"
-                        :value="lotteryValue"
-                        @focus="handleInitializeLotteryValue"
+                <div
+                    class="lottery__items"
+                    :class="{
+                        'lottery__items--android6': isAndroid6Version,
+                        'lottery__items--grid': !isAndroid6Version,
+                    }"
+                >
+                    <button
+                        v-for="item of items"
+                        :key="item"
+                        class="lottery__item"
+                        :class="{
+                            'lottery__item--android6': isAndroid6Version,
+                            'lottery__item--selected': isSelected(item),
+                            'lottery__item--disabled': isDisabled(item),
+                        }"
+                        @click="handleSelected(item)"
+                        :disabled="isDisabled(item)"
                     >
-                        <template #icon>
-                            <span style="color: var(--foreground-inputs-odds);">R$</span>
-                        </template>
-                    </WInput>
+                        {{ item }}
+                    </button>
+                </div>
+                <span class="lottery__info"> {{ tensInfo }} </span>
+            </div>
+
+            <div class="lottery__footer" ref="footer">
+                <div class="lottery__options">
+                    <span class="lottery__options-label"> Sorteio </span>
+                    <SelectFake
+                        class="lottery__options-select"
+                        @click="handleOpenLotteryOptions"
+                    >
+                        <span>{{ optionSelected }}</span>
+                    </SelectFake>
+                </div>
+
+                <div class="lottery__values value">
+                    <span class="value__balance-text">Valor do palpite</span>
+                    <div class="value__balance">
+                        <button class="value__add" @click="handleLotteryValueClick(10)">+10</button>
+                        <button class="value__add" @click="handleLotteryValueClick(20)">+20</button>
+                        <button class="value__add" @click="handleLotteryValueClick(50)">+50</button>
+                        <WInput
+                            class="value__balance-input"
+                            name="lottery-value"
+                            type="number"
+                            v-model="lotteryValue"
+                            :value="lotteryValue"
+                            @focus="handleInitializeLotteryValue"
+                        >
+                            <template #icon>
+                                <span style="color: var(--foreground-inputs-odds);">R$</span>
+                            </template>
+                        </WInput>
+                    </div>
+                </div>
+                <div class="lottery__actions">
+                    <WButton
+                        id="lottery-clear"
+                        text="Limpar"
+                        class="lottery__clear"
+                        name="lottery-clear"
+                        color="secondary"
+                        @click="handleClearLottery"
+                    />
+                    <WButton
+                        id="lottery-submit"
+                        text="Incluir palpite"
+                        class="lottery__submit"
+                        name="lottery-submit"
+                        :disabled="submitButtonDisable"
+                        @click="handleSubmitLottery"
+                    />
                 </div>
             </div>
-            <div class="lottery__actions">
-                <WButton
-                    id="lottery-clear"
-                    text="Limpar"
-                    class="lottery__clear"
-                    name="lottery-clear"
-                    color="secondary"
-                    @click="handleClearLottery"
-                />
-                <WButton
-                    id="lottery-submit"
-                    text="Incluir palpite"
-                    class="lottery__submit"
-                    name="lottery-submit"
-                    :disabled="submitButtonDisable"
-                    @click="handleSubmitLottery"
-                />
-            </div>
-        </div>
+        </template>
 
         <SurpriseButton
             class="surprise-button"
@@ -127,6 +135,7 @@ import ModalLotteryOptions from './parts/ModalLotteryOptions.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 import { getLotteryBetsByType, getLotteryDraw } from '@/services/lottery.service';
+import { isAndroid6 } from '@/utilities';
 
 export default {
     name: 'lottery-modality',
@@ -148,7 +157,8 @@ export default {
             showModalLotteryNumbers: false,
             showModalLotteryTypes: false,
             showModalLotteryOptions: false,
-            showSurpriseButton: true
+            showSurpriseButton: true,
+            loading: false
         }
     },
     activated() {
@@ -168,6 +178,9 @@ export default {
         }
     },
     computed: {
+        isAndroid6Version() {
+            return isAndroid6();
+        },
         tensInfo() {
             return `${this.lotteryStore.tensSelected.length}/${this.sizeSelected} Dezenas selecionadas`;
         },
@@ -226,11 +239,13 @@ export default {
         isDisabled(number) {
             return !this.isSelected(number) && this.reachedTotalTens;
         },
-        loadPage() {
-           this.getLotteryOptions();
-           this.getLotteryNumbers();
+        async loadPage() {
+            this.loading = true;
+            await this.getLotteryOptions();
+            await this.getLotteryNumbers();
+            this.loading = false;
         },
-        getLotteryOptions() {
+        async getLotteryOptions() {
             this.lotteryStore.setLotteryOptions([]);
             this.lotteryStore.setLotteryOptionsSelected(null);
 
@@ -238,20 +253,30 @@ export default {
                 type: this.lotteryStore.lotteryTypeSelected,
             };
 
-            getLotteryDraw(params)
-                .then((res) => this.lotteryStore.setLotteryOptions(res))
-                .catch((err) => {
-                    console.error(err);
-                    this.lotteryStore.setLotteryOptions([]);
-                });
+            try {
+                const response = await getLotteryDraw(params);
+                this.lotteryStore.setLotteryOptions(response);
+            } catch (error) {
+                console.error(error);
+                this.lotteryStore.setLotteryOptions([]);
+            }
         },
-        getLotteryNumbers() {
+        async getLotteryNumbers() {
             this.lotteryStore.setLotterySizes([]);
 
             const params = {
                 type: this.lotteryStore.lotteryTypeSelected,
                 sort: 'data'
             };
+
+            try {
+                const response = await getLotteryBetsByType(params);
+                this.lotteryStore.setLotterySizes(response);
+                this.lotteryStore.setLotteryNumbersSelected(response.length ? res[0] : null);
+            } catch (error) {
+                console.error(error);
+                this.lotteryStore.setLotterySizes([]);
+            }
 
             getLotteryBetsByType(params)
                 .then((res) => {
@@ -364,35 +389,44 @@ export default {
     height: 90vh;
     width: 100vw;
     overflow-y: auto;
+    background: var(--header);
+    padding-bottom: 200px;
 
     &__header {
         display: flex;
         justify-content: space-between;
         width: 100%;
         padding: 18px 16px;
+        background: var(--background);
     }
 
     &__body {
         overflow-y: none;
         width: 100%;
         padding: 16px;
-        background: var(--header);
     }
 
     &__footer {
         overflow-y: none;
         width: 100%;
         padding: 16px;
-        padding-bottom: 150px;
-        background: var(--header);
     }
 
     &__items {
         margin-top: 16px;
         margin-bottom: 16px;
-        display: grid;
-        grid-template-columns: repeat(5, auto);
-        gap: 24px;
+        
+        &--grid {
+            display: grid;
+            grid-template-columns: repeat(5, auto);
+            gap: 24px;
+        }
+
+        &--android6 {
+            margin-left: 16px;
+            display: flex;
+            flex-wrap: wrap;
+        }
     }
 
     &__item {
@@ -405,17 +439,58 @@ export default {
         color:#ffffff;
         color: var(--foreground-inputs-odds);
         background: var(--inputs-odds);
+
+        &--android6 {
+            margin: 0;
+            margin-left: 20px;
+            margin-top: 24px;
+        }
+
+        &--selected {
+            background: var(--highlight);
+            color: var(--foreground-highlight);
+        }
+
+        &--disabled {
+            opacity: 0.5;
+        }
     }
 
-    &__item--selected {
-        background: var(--highlight);
-        color: var(--foreground-highlight);
+    &__item--android6:nth-child(1),
+    &__item--android6:nth-child(6),
+    &__item--android6:nth-child(11),
+    &__item--android6:nth-child(16),
+    &__item--android6:nth-child(21),
+    &__item--android6:nth-child(26),
+    &__item--android6:nth-child(31),
+    &__item--android6:nth-child(36),
+    &__item--android6:nth-child(41),
+    &__item--android6:nth-child(46),
+    &__item--android6:nth-child(51),
+    &__item--android6:nth-child(56),
+    &__item--android6:nth-child(61),
+    &__item--android6:nth-child(66),
+    &__item--android6:nth-child(71),
+    &__item--android6:nth-child(76),
+    &__item--android6:nth-child(81),
+    &__item--android6:nth-child(86),
+    &__item--android6:nth-child(91),
+    &__item--android6:nth-child(96),
+    &__item--android6:nth-child(101),
+    &__item--android6:nth-child(106),
+    &__item--android6:nth-child(111),
+    &__item--android6:nth-child(116),
+    &__item--android6:nth-child(121),
+    &__item--android6:nth-child(126),
+    &__item--android6:nth-child(131),
+    &__item--android6:nth-child(136),
+    &__item--android6:nth-child(141),
+    &__item--android6:nth-child(146),
+    &__item--android6:nth-child(151)
+    {
+        margin-left: 0;
     }
-
-    &__item--disabled {
-        opacity: 0.5;
-    }
-
+   
     &__options {
         display: flex;
         flex-direction: column;
