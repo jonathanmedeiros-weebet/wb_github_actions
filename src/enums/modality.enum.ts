@@ -21,7 +21,7 @@ export enum ModalitiesBetsApi {
     AMERICAN_FOOTBALL = 12,
     TENNIS = 13,
     ICE_HOCKEY = 17,
-    BASKETBALL = 18,
+    BASKETBALL = 154830, // lsports
     FUTSAL = 83,
     VOLLEYBALL = 91,
     TABLE_TENNIS = 92,
