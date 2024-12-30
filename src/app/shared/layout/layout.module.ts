@@ -102,6 +102,7 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
 import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
+import { ConfiguracaoLimitePerdasModalComponent } from './modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
 import { BackPageComponent } from './back-page/back-page/back-page.component';
 import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-modal/face-match-modal.component';
 import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/add-bank-account-modal.component';
@@ -209,6 +210,7 @@ import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.mo
         MultifactorConfirmationModalComponent,
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
+        ConfiguracaoLimitePerdasModalComponent,
         BackPageComponent,
         FaceMatchModalComponent,
         ValidatePhoneModalComponent,
