@@ -1108,7 +1108,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     private fixTabletAndDesktopScreen() {
-        console.log('chamou')
         const gameView = this.el.nativeElement.querySelector('.game-view');
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
         const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
