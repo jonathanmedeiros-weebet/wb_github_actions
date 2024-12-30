@@ -148,7 +148,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                     this.dataUserCPF = String(this.cliente.cpf).replace(/[.\-]/g, '');
                     if(this.faceMatchType == 'docCheck') {
                         this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
-                        this.docCheckService.init();
                     }
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
