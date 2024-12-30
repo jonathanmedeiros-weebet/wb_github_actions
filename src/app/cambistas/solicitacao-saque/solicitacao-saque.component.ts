@@ -56,7 +56,7 @@ export class SolicitacaoSaqueComponent implements OnInit {
         let queryParams: any = {
             'data-inicial': this.formatDate(this.fromDate, 'us'),
             'data-final': this.formatDate(this.toDate, 'us'),
-            'aprovado': 1
+            'aprovado': this.status
         };
 
         if (params) {

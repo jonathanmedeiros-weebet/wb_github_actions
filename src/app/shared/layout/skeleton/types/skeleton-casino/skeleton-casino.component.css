@@ -8,15 +8,15 @@
     display: flex;
     justify-content: space-between;
     height: 27px;
-    margin: 10px 0;
+    margin: 18px 0;
 }
 
-.loading-listagem .slider .title .left {
-    height: 27px;
-    width: 200px;
+.loading-listagem .slider > .title .left {
+    height: 32px;
+    width: 304px;
 }
 
-.loading-listagem .slider .title .right {
+.loading-listagem .slider > .title .right {
     height: 27px;
     width: 70px;
 }
@@ -24,41 +24,93 @@
 .loading-listagem .slider .itens {
     display: flex;
     overflow: hidden;
-    gap: 20px;
+    gap: 15px;
 }
 
-.loading-listagem .slider .itens div {
-    min-width: 216px;
-    height: 155px;
+.square-container {
+    min-width: 182px;
+    height: auto;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.square-container .ssc-square.content{
+    border-radius: 5px;
+    height: 182px;
+}
+
+.square-container .title {
+    gap: 8px;
+    display: flex;
+    margin: 12px 0;
+    padding-left: 4px;
+    flex-direction: column;
+}
+
+.square-container .title-square,
+.square-container .sub-title-square {
+    height: 10px;
+    border-radius: 3px;
+}
+
+.title-square {
+    width: 172px;
+}
+
+.sub-title-square {
+    width: 58px;
 }
 
 @media only screen and (max-width: 1024px) {
     .loading-listagem .slider .itens {
         gap: 10px;
     }
-    
-    .loading-listagem .slider .itens div {
-        min-width: 200px;
-        height: 144px;
-        border-radius: 5px;
-    }
 
     .loading-listagem .slider .title .left {
         height: 27px;
-        width: 130px;
+        width: 304px;
     }
     
     .loading-listagem .slider .title .right {
         height: 27px;
         width: 50px;
     }
+
+    .square-container {
+        min-width: 165px;
+    }
+    
+    .square-container .ssc-square.content {
+        height: 165px;
+    }
 }
 
-@media only screen and (max-width: 400px) {
-    .loading-listagem .slider .itens div {
+@media only screen and (max-width: 768px) {
+    .square-container {
         min-width: 140px;
-        height: 100px;
+    }
+
+    .square-container .ssc-square.content {
+        height: 140px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .square-container {
+        min-width: 112px;
+    }
+
+    .loading-listagem .slider .title .left {
+        width: 140px;
+    }
+    
+    .square-container .ssc-square.content{
         border-radius: 5px;
+        height: 112px;
+    }
+
+    .title-square {
+        width: 104px;
     }
 }

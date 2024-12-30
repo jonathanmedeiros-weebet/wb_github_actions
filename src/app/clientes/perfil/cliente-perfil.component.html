@@ -7,7 +7,7 @@
         </div>
         <div class="content-body">
             <div class="content">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <form [formGroup]="form">
                     <fieldset>
                         <div class="row">
                             <div class="col-md-2">
@@ -170,21 +170,47 @@
                         </div>
                     </fieldset>
                     <fieldset>
-                        <div class="row">
-                            <div class="col col-md-12">
-                                <div class="form-group text-right">
-                                    <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
-                                        {{'geral.cancelar' | translate}}
-                                    </button>
-                                    <button
-                                        class="btn btn-custom w-150"
-                                        type="submit"
-                                        [disabled]="form.invalid"
-                                    >
-                                        {{'geral.atualizar' | translate}}
+                        <div *ngIf="faceMatchEnabled">
+                            <h5 id="faceMatch">{{'face_match.label' | translate}}</h5>
+                            <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !verifiedIdentity">
+                                <div id="legitimuz">
+                                    <div id="verify-identity-text">
+                                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                                    </div>
+                                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                                    <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
+                                        <i class="fa-solid fa-id-card"></i>
+                                        {{'saques.identityVerify' | translate}}
                                     </button>
                                 </div>
+                                <div id="legitimuz-root"></div>
                             </div>
+                            <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && verifiedIdentity">
+                                <div id="legitimuz">
+                                    <div id="verify-identity-text">
+                                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                                    </div>
+                                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                                    <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
+                                        <i class="fa-solid fa-id-card"></i>
+                                        {{'saques.identityVerify' | translate}}
+                                    </button>
+                                </div>
+                                <div id="legitimuz-root"></div>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="resetarForm()">
+                                {{'geral.cancelar' | translate}}
+                            </button>
+                            <button
+                                class="btn btn-custom w-150"
+                                type="submit"
+                                (click)="onSubmit()"
+                                [disabled]="form.invalid || (faceMatchEnabled && !faceMatchProfileEdit)"
+                            >
+                                {{'geral.atualizar' | translate}}
+                            </button>
                         </div>
                     </fieldset>
                 </form>

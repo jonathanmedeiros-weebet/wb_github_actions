@@ -11,7 +11,9 @@ import {
     CadastroModalComponent,
     JogosLiberadosBonusModalComponent,
     LoginModalComponent,
+
 } from "../../shared/layout/modals";
+import { ConfiguracaoLimitePerdasModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
 import { takeUntil } from "rxjs/operators";
 import { Fornecedor } from '../wall/wall.component';
 import { GameCasino } from 'src/app/shared/models/casino/game-casino';
@@ -19,6 +21,9 @@ import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component'
 import { WallProviderFilterModalComponent } from '../wall/components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
+import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
+import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
+
 
 @Component({
     selector: 'app-gameview',
@@ -66,6 +71,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public qtdProviders: number = 10;
     public popularGamesIds: string[] = [];
     private casinoRelatedGamesQuantity: number = 15;
+    showModalFlag: boolean = false;
+    modalMessage: string = '';
     posicaoFinanceira;
     avisoCancelarBonus = false;
     modalRef;
@@ -92,6 +99,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private el: ElementRef,
         private financeiroService: FinanceiroService,
         private headerService: HeadersService,
+        private clienteService: ClienteService,
         private translate: TranslateService,
         @Inject(DOCUMENT) private document: any
     ) {
@@ -127,7 +135,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (window.innerWidth > 482 && window.innerWidth <= 1024) {
             this.isTablet = true;
-        } 
+        }
 
         this.getGameList();
         this.isLoggedIn = this.auth.isLoggedIn();
@@ -160,6 +168,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.tawakChatClicked = tawakIframes[1].style.display == 'block'
 
             tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'none');
         }
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
@@ -203,17 +216,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
                                 this.loadGame();
-                                
+
                                 if (this.isMobile && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixMobileHeader();
                                 }
-                                
                                 if (this.isTablet && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixTabletHeader();
                                 }
-                                
+
                                 if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
                                     this.fixTabletAndDesktopScreen();
                                 }
@@ -400,6 +412,27 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
+    showModal(message: string) {
+        const modalRef = this.modalService.open(ConfiguracaoLimitePerdasModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+
+        modalRef.componentInstance.message = message;
+    }
+
+    showModalPercentage(message_percentage: string) {
+        const modalRef = this.modalService.open(ConfiguracaoLimitePerdasPorcentagemModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+        modalRef.componentInstance.message = message_percentage;
+    }
+
     loadGame() {
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
@@ -408,13 +441,21 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
+                    if(response.loss_limit.loss_hit && response.loss_limit.error){
+                        this.showModal(response.loss_limit.message);
+                        this.router.navigate(['/']);
+                    }
+                    if (!response.loss_limit.loss_hit && response.loss_limit.error ) {
+                        this.showModalPercentage(response.loss_limit.message);
+                    }
+
 
                     if (typeof response.gameUrl !== 'undefined') {
                         this.gameCategory = response.category;
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
                         this.gameProviderName = response.gameFornecedorExibicao;
-                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
@@ -498,6 +539,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (liveChatBtn) {
                 this.renderer.setStyle(liveChatBtn, 'display', 'block');
             }
+
+            const zendeskChat = this.document.querySelector('iframe#launcher');
+            if (zendeskChat) {
+                this.renderer.setStyle(zendeskChat, 'display', 'block');
+            }
         }
 
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
@@ -515,6 +561,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
 
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
+
         const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
         if (TawkChat) {
             this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
@@ -523,7 +574,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 }
             });
         }
-        
         if (this.headerService.getIsHeaderDisabled) {
             this.disableHeaderOptions();
             this.enableHeader();
@@ -674,6 +724,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (liveChatBtn) {
             this.renderer.setStyle(liveChatBtn, 'display', 'block');
         }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
     }
 
     openFullscreen() {
@@ -727,7 +782,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (blocoRelatedGames) {
             this.renderer.setStyle(blocoRelatedGames, 'display', 'none');
         }
-        
+
         if (backButton) {
             this.renderer.setStyle(backButton, 'display', 'none');
         }
@@ -906,7 +961,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const gameViewHeader = this.el.nativeElement.querySelector('.header-game-view');
 
         if (gameViewHeader) {
-            this.renderer.setStyle(gameViewHeader, 'display', 'flex');      
+            this.renderer.setStyle(gameViewHeader, 'display', 'flex');
         }
     }
 
@@ -917,7 +972,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (gameViewHeader) {
             this.renderer.setStyle(gameViewHeader, 'display', 'flex');
         }
-        
         if (gameView) {
             this.renderer.setStyle(gameView, 'padding-top', '50px');
             this.renderer.setStyle(gameView, 'position', 'fixed');
@@ -945,7 +999,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
             ...fornecedor,
-            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+            imagem: `https://wb-assets.com/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
         }));
     }
 
@@ -956,7 +1010,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         this.cassinoFornecedores = fornecedores.map((fornecedor: Fornecedor) => ({
             ...fornecedor,
-            imagem: `https://cdn.wee.bet/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
+            imagem: `https://wb-assets.com/img/cassino/logos/providers/${fornecedor.gameFornecedor}.png`
         }));
     }
 
@@ -1012,13 +1066,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                     return false;
                 });
-    
+
             if (filteredGames.length < this.casinoRelatedGamesQuantity) {
                 if (!this.popularGamesIds.includes(this.gameId)) {
                     this.popularGamesIds.push(this.gameId);
                 }
                 let missingGamesCalc = this.casinoRelatedGamesQuantity - filteredGames.length;
-    
+
                 this.casinoApi.getCasinoGamesRelated(category, this.popularGamesIds, missingGamesCalc).subscribe(
                     response => {
                         filteredGames = filteredGames.concat(response);

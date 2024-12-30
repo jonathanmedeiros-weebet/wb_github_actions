@@ -102,10 +102,13 @@ import { ExibirBilheteRifaComponent } from './exibir-bilhete/rifa/exibir-bilhete
 import { FreeSpinService } from '../services/clientes/free-spin.service';
 import { CashbackService } from '../services/clientes/cashback.service';
 import { PasswordExpiredModalComponent } from './modals/password-expired-modal/password-expired-modal.component';
+import { ConfiguracaoLimitePerdasModalComponent } from './modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
 import { BackPageComponent } from './back-page/back-page/back-page.component';
 import { FaceMatchModalComponent } from './modals/face-match-modal/face-match-modal/face-match-modal.component';
 import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/add-bank-account-modal.component';
 import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accounts.component';
+import { LastAccessesModalComponent } from './modals/last-accesses-modal/last-accesses-modal.component';
+import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.module';
 
 import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 
@@ -136,7 +139,8 @@ import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-b
         TranslateModule,
         RecaptchaModule,
         RecaptchaFormsModule,
-        SkeletonModule
+        SkeletonModule,
+        WeePaginationModule
     ],
     declarations: [
         MainLayoutComponent,
@@ -208,12 +212,14 @@ import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-b
         MultifactorConfirmationModalComponent,
         ExibirBilheteRifaComponent,
         PasswordExpiredModalComponent,
+        ConfiguracaoLimitePerdasModalComponent,
         BackPageComponent,
         ExibirBilheteCassinoComponent,
         FaceMatchModalComponent,
         ValidatePhoneModalComponent,
         AddBankAccountModalComponent,
-        ListBankAccountsComponent
+        ListBankAccountsComponent,
+        LastAccessesModalComponent,
     ],
     exports: [
         MainLayoutComponent,

@@ -119,7 +119,7 @@
         "jogo": "Game",
         "dataDeEncerramento": "Closing date",
         "configuracoes": "Settings",
-        "versao": "Version",
+            "versao": "Version",
         "solicitarDeposidto": "Request Deposit",
         "liberarCredito": "Release Credit",
         "bonus": "Bonus",
@@ -270,7 +270,12 @@
         "action": "Action",
         "tax": "Tax",
         "validatePhone": "Phone Verification",
-        "savedSuccessfully":  "Saved successfully!"
+        "savedSuccessfully":  "Saved successfully!",
+        "successfullyDeleted": "Successfully deleted!",
+        "vpn": "We have detected that you are accessing our website through a VPN. To ensure the security and integrity of the platform, we kindly ask you to disable the VPN or use a standard connection to proceed. If you believe this is an error, please contact support.",
+        "logoutGeolocationErrorMessage": "You have been logged out for security reasons. We detected an abrupt change in your location that would be physically impossible to occur within the recorded time frame. If this was not caused by you, we recommend verifying your account.",
+        "logoutGeolocationErrorTitle": "Access Interrupted: Inconsistent Location",
+        "logoutGeolocationErrorButtonLabel": "Close"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -482,6 +487,7 @@
         "politicaAml": "AML Policy",
         "jogoResponsavel": "Responsible Gaming",
         "termosECondicoes": "Terms and conditions",
+        "feedback": "Feedback",
         "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. All rights reserved."
     },
     "paginas": {
@@ -752,6 +758,7 @@
         "redeem": "Redeem"
     },
     "face_match": {
+        "label": "Face Match",
         "verified_identity": "Verified identity!",
         "Identity_not_verified": "Identity not verified, please contact support."
     },

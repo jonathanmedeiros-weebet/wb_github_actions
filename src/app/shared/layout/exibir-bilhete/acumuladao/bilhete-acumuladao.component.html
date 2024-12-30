@@ -1,5 +1,58 @@
 <div id="cupom" #cupom>
     <div class="conteudo">
+        <div style="text-align: center;">
+            <img [src]="LOGO">
+        </div>
+        <h1 class="numero">
+            {{aposta.codigo}}
+        </h1>
+        <hr>
+        <hr>
+        <div class="informacoes">
+            <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
+                <p>
+                    <b>CLIENTE: </b><span>{{aposta.apostador}}</span>
+                </p>
+            </div>
+            <ng-template #exibicaoPadrao>
+                <p>
+                    <b>CAMBISTA:</b> {{aposta.passador.nome}}
+                </p>
+                <p>
+                    <b>APOSTADOR: </b><span>{{aposta.apostador}}</span>
+                </p>
+            </ng-template>
+            <p>
+                <b>HORÁRIO: </b><span>{{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
+            </p>
+            <p class="resultado">
+                <b>{{ 'geral.resultado' | translate }}: </b>
+                <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
+                <span *ngIf="!aposta.resultado">aguardando</span>
+            </p>
+        </div>
+        <hr>
+        <hr>
+        <div class="acumuladao">
+            <div class="nome">
+                <b>{{aposta.acumuladao.nome}}</b>
+            </div>
+            <ng-container *ngIf="aposta.resultado; else resultadoPendente">
+                <div>
+                    <b>Total Acertos:</b> {{aposta.quantidade_acertos}}
+                </div>
+                <div>
+                    <b> Prêmio Recebido:</b> {{aposta.premio | currency}}
+                </div>
+            </ng-container>
+            <ng-template #resultadoPendente>
+                <div class="premio" *ngFor="let premio of aposta.acumuladao.premios">
+                    <b>Possível Prêmio {{premio.quantidade_acertos}} acertos:</b>
+                    {{premio.valor | currency}}
+                </div>
+            </ng-template>
+        </div>
+        <hr>
         <ng-container *ngFor="let item of aposta.itens; let i=index;">
             <div class="item">
                 <div *ngIf="i == 0" class="nome">

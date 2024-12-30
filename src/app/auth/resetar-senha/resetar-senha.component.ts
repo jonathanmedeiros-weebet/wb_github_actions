@@ -90,7 +90,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             if (this.faceMatchEnabled) {
                 this.legitimuzService.changeLang(change.lang);
             }
-        });   
+        });
         this.route
         .params
             .subscribe((params) => {
@@ -132,6 +132,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramLocais.getOpcoes().faceMatchResetPassword);
         if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
+            this.showLoading = false;
         }
         this.layout
             .verificaRemocaoIndiqueGanhe
@@ -172,7 +173,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                         })
                     }
                 })
-        }         
+        }
     }
 
     createForm() {
@@ -195,7 +196,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             this.onSubmit();
             return;
         }
-        
+
         this.form.get('verificacao2').setValidators([Validators.required, Validators.minLength(5), Validators.maxLength(5)]);
         this.form.get('verificacao2').markAsUntouched();
         this.step = RecoveryStep.TWO_STEP;
@@ -250,12 +251,12 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             this.legitimuz.changes
                 .subscribe(() => {
                         this.legitimuzService.init();
-                        this.legitimuzService.mount();                  
+                        this.legitimuzService.mount();
                 });
             this.legitimuzLiveness.changes
                 .subscribe(() => {
                         this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();                  
+                        this.LegitimuzFacialService.mount();
                 });
         }
     }

@@ -270,7 +270,12 @@
         "jogoResponsavel": "Juego responsable",
         "tax": "Impuesto",
         "validatePhone": "Verificación telefónica",
-        "savedSuccessfully":  "Guardado exitosamente!"
+        "savedSuccessfully":  "Guardado exitosamente!",
+        "successfullyDeleted": "Eliminado con éxito!",
+        "vpn": "Hemos detectado que estás accediendo a nuestro sitio web a través de una VPN. Para garantizar la seguridad e integridad de la plataforma, te pedimos que desactives la VPN o utilices una conexión estándar para continuar. Si crees que esto es un error, por favor contacta al soporte.",
+        "logoutGeolocationErrorMessage": "Has sido desconectado por razones de seguridad. Detectamos un cambio abrupto en tu ubicación que sería físicamente imposible de ocurrir en el intervalo de tiempo registrado. Si esto no fue causado por ti, te recomendamos verificar tu cuenta.",
+        "logoutGeolocationErrorTitle": "Acceso Interrumpido: Ubicación Inconsistente",
+        "logoutGeolocationErrorButtonLabel": "Cerrar"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",
@@ -477,6 +482,7 @@
         "politicaAml": "Política AML",
         "jogoResponsavel": "Juego responsable",
         "termosECondicoes": "Términos y condiciones",
+        "feedback": "Ouvidoria",
         "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. Todos los derechos reservados."
     },
     "paginas": {
@@ -747,6 +753,7 @@
         "redeem": "Canjear"
     },
     "face_match": {
+        "label": "Reconocimiento facial",
         "verified_identity": "Identidad verificada!",
         "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
     },

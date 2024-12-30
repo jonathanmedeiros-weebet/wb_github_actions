@@ -212,7 +212,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.LegitimuzFacialService.faceIndex
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(faceIndex => {
-                    if (faceIndex) {
+                    if (faceIndex && this.cliente != null) {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
                             next: (res) => {
                                 this.LegitimuzFacialService.closeModal();
