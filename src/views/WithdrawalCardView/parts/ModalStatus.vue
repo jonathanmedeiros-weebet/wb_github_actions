@@ -25,8 +25,11 @@ import WModal from '@/components/Modal.vue';
 import IconCheck from '@/components/icons/IconCheck.vue';
 
 export default {
-  name: 'ModalStatus',
-  components: { WModal, IconCheck },
+  name: 'modal-status',
+  components: { 
+    WModal, 
+    IconCheck 
+  },
   props: {
     statusId: {
       type: Number,
@@ -56,7 +59,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 .modal-status {
