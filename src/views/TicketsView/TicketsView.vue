@@ -17,27 +17,55 @@
           v-for="(item, index) in items"
           :key="index"
         >
-          <div class="bet__header">
-            <span class="bet__team">
-              <IconLive v-if="item.live" class="bet__icon-live"/>
-              <component :is="item.icon" :size="14" class="bet__icon-ball"/>
-              {{ item.gameName }}
+          <template v-if="!isModalityLottery">
+            <div class="bet__header">
+              <span class="bet__team">
+                <IconLive v-if="item.live" class="bet__icon-live"/>
+                <component :is="item.icon" :size="14" class="bet__icon-ball"/>
+                {{ item.gameName }}
+              </span>
+              <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
+            </div>
+            <div class="bet__info">
+              <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
+            </div>
+            <div class="bet__text">
+              <span>{{ item.quoteGroupName }}</span>
+            </div>
+            <div class="bet__result" :class="{ 'bet__result--border': item.hasChanges }">
+              <span>{{ item.quoteName }}</span>
+              <span>
+                {{ item.quoteValue }}
+                <span v-if="item.previousQuoteValue" class="bet__previous-quote">({{ item.previousQuoteValue }})</span>
+              </span>
+            </div>
+          </template>
+
+          <template v-if="isModalityLottery">
+            <div class="lottery__header">
+              <span class="lottery__title">{{ item.lotteryTitle }}</span>
+              <IconClose class="lottery__info" @click.native="handleItemRemove(item.id)"/>
+            </div>
+            <span class="lottery__info">
+              Valor do palpite: R$ {{ formatCurrency(item.value) }}
             </span>
-            <IconClose class="bet__icon-close" @click.native="handleItemRemove(item.gameId)"/>
-          </div>
-          <div class="bet__info">
-            <span class="bet__date">{{ formatDateTimeBR(item.gameDate) }}</span>
-          </div>
-          <div class="bet__text">
-            <span>{{ item.quoteGroupName }}</span>
-          </div>
-          <div class="bet__result" :class="{ 'bet__result--border': item.hasChanges }">
-            <span>{{ item.quoteName }}</span>
-            <span>
-              {{ item.quoteValue }}
-              <span v-if="item.previousQuoteValue" class="bet__previous-quote">({{ item.previousQuoteValue }})</span>
+            <span class="lottery__info">
+              Retorno 5: R$ {{ formatCurrency(item.value) }}
             </span>
-          </div>
+
+            <span class="lottery__tens">
+              <span class="lottery__info">Dezenas:</span> 
+              <div class="lottery__group-tens">
+                <span
+                  class="lottery__ten"
+                  v-for="(ten, index) of item.tens"
+                  :key="index"
+                >
+                  {{ ten }}
+                </span>
+              </div>
+            </span>
+          </template>
         </div>
       </template>
       <div class="finish">
@@ -66,45 +94,56 @@
         </div>
       </div>
       <div class="value">
-        <div class="value__label">
-          <span class="value__balance-text">Valor</span>
-        </div>
-        <div class="value__balance">
-          <button class="value__add" @click="handleBetValueClick(10)">+10</button>
-          <button class="value__add" @click="handleBetValueClick(20)">+20</button>
-          <button class="value__add" @click="handleBetValueClick(50)">+50</button>
-          <w-input
-            class="value__balance-input"
-            name="bet-value"
-            type="number"
-            v-model="betValue"
-            :value="betValue"
-            @focus="handleInitializeBetValue"
-          >
-            <template #icon>
-              <span style="color: var(--foreground-inputs-odds);">R$</span>
-            </template>
-          </w-input>
-        </div>
+        <template v-if="!isModalityLottery">
+          <div class="value__label">
+            <span class="value__balance-text">Valor</span>
+          </div>
+          <div class="value__balance">
+            <button class="value__add" @click="handleBetValueClick(10)">+10</button>
+            <button class="value__add" @click="handleBetValueClick(20)">+20</button>
+            <button class="value__add" @click="handleBetValueClick(50)">+50</button>
+            <w-input
+              class="value__balance-input"
+              name="bet-value"
+              type="number"
+              v-model="betValue"
+              :value="betValue"
+              @focus="handleInitializeBetValue"
+            >
+              <template #icon>
+                <span style="color: var(--foreground-inputs-odds);">R$</span>
+              </template>
+            </w-input>
+          </div>
+        </template>
+
+        <template v-if="isModalityLottery">
+          <div class="lottery__values">
+            <span class="lottery__value-descriptiom">Valor da aposta:</span>
+            <span class="lottery__value">R$ {{ formatCurrency(betValue) }}</span>
+          </div>
+        </template>
       </div>
       <div class="cotacao">
-        <div class="cotacao__value">
-          <span>Cotação:</span>
-          <span>{{ quoteValue.toFixed(2) }}</span>
-        </div>
-        <div class="cotacao__ganhos">
-          <span>Possíveis ganhos:</span>
-          <span>R$ {{ possibilityAward }}</span>
-        </div>
-        <div class="cotacao__alteracao">
-          <input
-            class="cotacao__checkbox"
-            type="checkbox"
-            id="accept-changes"
-            v-model="acceptChanges"
-          />
-          <label for="accept-changes">Aceitar alterações de odds</label>
-        </div>
+        <template v-if="!isModalityLottery">
+          <div class="cotacao__value">
+            <span>Cotação:</span>
+            <span>{{ quoteValue.toFixed(2) }}</span>
+          </div>
+          <div class="cotacao__ganhos">
+            <span>Possíveis ganhos:</span>
+            <span>R$ {{ possibilityAward }}</span>
+          </div>
+          <div class="cotacao__alteracao">
+            <input
+              class="cotacao__checkbox"
+              type="checkbox"
+              id="accept-changes"
+              v-model="acceptChanges"
+            />
+            <label for="accept-changes">Aceitar alterações de odds</label>
+          </div>
+        </template>
         <div class="cotacao__finalizar" v-if="!hasChanges">
           <w-button
             id="btn-entrar"
@@ -142,7 +181,7 @@ import IconClose from '@/components/icons/IconClose.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 import { useConfigClient, useTicketStore, useToastStore } from '@/stores';
-import { delay, formatCurrency, formatDateTimeBR } from '@/utilities';
+import { delay, formatCurrency, formatDateTimeBR, generateLotteryKey } from '@/utilities';
 import { calculateQuota, createLiveToken, createBetSport } from '@/services';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
@@ -155,6 +194,8 @@ import IconBasketball from '@/components/icons/IconBasketball.vue';
 import IconFutsal from '@/components/icons/IconFutsal.vue';
 import IconVoleiball from '@/components/icons/IconVoleiball.vue';
 import IconESport from '@/components/icons/IconESport.vue';
+import { getModalitiesEnum } from '@/constants';
+import { createLotteryBet } from '@/services/lottery.service';
 
 export default {
   name: 'tickets',
@@ -230,21 +271,29 @@ export default {
       return formatCurrency(possibilityAward);
     },
     items() {
-      return Object.values(this.ticketStore.items)
-        .sort((a, b) => a.timestamp - b.timestamp)
-        .map(item => ({
-        ...item,
-        icon: this.icons[item.modalityId],
-        quoteValue: item.quoteValue.toFixed(2),
-        previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
-        hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
-      }));
+      if(!this.isModalityLottery) {
+        return Object.values(this.ticketStore.items)
+          .sort((a, b) => a.timestamp - b.timestamp)
+          .map(item => ({
+            ...item,
+            icon: this.icons[item.modalityId],
+            quoteValue: item.quoteValue.toFixed(2),
+            previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
+            hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
+          }));
+      } else {
+        return Object.values(this.ticketStore.items);
+      }
     },
     hasLiveBet() {
       return this.items.some(item => item.live);
     },
     hasItems() {
       return Boolean(this.items.length)
+    },
+    isModalityLottery() {
+      const Modalities = getModalitiesEnum();
+      return this.ticketStore.modalityId == Modalities.LOTTERY
     },
 
     bettorName: {
@@ -270,6 +319,9 @@ export default {
       set(value) {
         this.ticketStore.setValue(value);
       }
+    },
+    betAward() {
+      return this.ticketStore.award;
     },
     acceptChanges: {
       get() {
@@ -318,12 +370,22 @@ export default {
     handleAllRemove() {
       this.ticketStore.clear();
     },
-    handleItemRemove(gameId) {
-      this.ticketStore.removeQuote(gameId)
+    handleItemRemove(itemId) {
+      if(!this.isModalityLottery) {
+        this.ticketStore.removeQuote(itemId);
+      } else {
+        this.ticketStore.removeTen(itemId);
+      }
     },
     async handleFinalizeBet() {
       this.submitting = true;
-
+      if (!this.isModalityLottery) {
+        this.finalizeSportBet();
+      } else {
+        this.finalizeLotteryBet();
+      }
+    },
+    async finalizeSportBet() {
       const { options, delayLiveBet } = useConfigClient();
 
       if (this.items.length < options.quantidade_min_jogos_bilhete) {
@@ -418,6 +480,53 @@ export default {
         })
         .finally(() => this.submitting = false)
     },
+    async finalizeLotteryBet() {
+      const itens = this.items.map(item => ({
+        numeros: item.tens,
+        premio3: item.award03,
+        premio4: item.award04,
+        premio5: item.award05,
+        sorteio_id: item.lotteryId,
+        valor: item.value
+      }))
+
+      const payload = {
+        apostador: this.bettorName,
+        valor: this.betValue,
+        versao_app: '2.0',
+        telefone: '',
+        chave: generateLotteryKey(),
+        premio: this.betAward,
+        itens
+      }
+
+      createLotteryBet(payload)
+        .then(({id}) => {
+          this.toastStore.setToastConfig({
+            message: 'Aposta realizada com sucesso!',
+            type: ToastType.SUCCESS,
+            duration: 5000
+          })
+          this.handleAllRemove();
+          this.$router.push({
+            name: 'close-bet',
+            params: {
+              id,
+              action: 'view'
+            }
+          });
+        })
+        .catch(({errors}) => {
+          console.error({errors})
+          this.toastStore.setToastConfig({
+            message: errors.message,
+            type: ToastType.DANGER,
+            duration: 5000
+          })
+        })
+        .finally(() => this.submitting = false)
+
+    },  
     formatCurrency(value) {
       return formatCurrency(value);
     },
@@ -679,6 +788,69 @@ export default {
     padding: 15px;
     color:#ffff;
     color: var(--foreground-header);
+  }
+}
+
+.lottery {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__info {
+    opacity: 0.8;
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
+  }
+
+  &__tens {
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+  }
+
+  &__group-tens {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    gap: 8px;
+  }
+
+  &__ten {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #181818;
+    background-color: var(--inputs-odds);
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
+  }
+
+  &__values {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__value {
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  &__value-description {
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 }
 </style>

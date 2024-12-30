@@ -19,6 +19,14 @@ export const findLotteryBets = async (parameters: any) => {
     return response.results;
 }
 
+export const createLotteryBet = async (data: any) => {
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/lottery/bets`;
+
+    const response: any = await axiosInstance().post(url, data);
+    return response.results;
+}
+
 export const getLotteryBetsByType = async (parameters: any) => {
     //paramsEx = tipo:seninha sort:sort
     const { lokiUrl } = useConfigClient();
@@ -26,8 +34,8 @@ export const getLotteryBetsByType = async (parameters: any) => {
     let params = new URLSearchParams();
 
     if (parameters) {
-        parameters.type ? params.append('tipo', parameters.type) : '';
-        parameters.sort ? params.append('sort', parameters.sort) : '';
+        parameters?.type ? params.append('tipo', parameters.type) : '';
+        parameters?.sort ? params.append('sort', parameters.sort) : '';
     }
 
     const response: any = await axiosInstance().get(url, { params });
