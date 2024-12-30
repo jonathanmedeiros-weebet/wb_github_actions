@@ -12,14 +12,15 @@
         v-model="dateFilterView"
         :readonly="true"
       />
-      <w-select
-        label="Status"
-        name="status"
-        :options="statusOptions"
-        :selectedOption="selectedOption"
-        @change="handleSelectStatus"
-      >
-      </w-select>
+      <div class="withdrawal-card__status">
+        <label class="withdrawal-card__status-label">Status</label>
+        <SelectFake
+         titleSize="medium"
+         @click="handleOpenStatusModal"
+        >
+          {{ status.name }}
+        </SelectFake>
+      </div>
       <w-button
         id="btn-filter"
         text="Filtrar"
@@ -89,6 +90,14 @@
         @close="handleCloseModalConfirmPayment"
         @consult="handleConfirmPayment" 
       />
+
+      <ModalStatus
+        v-if="showModalStatus"
+        @closeModal="handleCloseStatusModal"
+        @click="handleStatus"
+        :statusId="status.id"
+        :statusList="statusList" 
+      />
     </div>
   </div>
 </template>
@@ -96,11 +105,9 @@
 <script>
 import Header from '@/components/layouts/Header.vue'
 import WInput from '@/components/Input.vue'
-import WSelect from '@/components/Select.vue'
 import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
-import TagButton from '@/components/TagButton.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
 import { convertInMomentInstance, formatCurrency, now, formatDateTimeBR } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores'
@@ -109,6 +116,8 @@ import { requestWithdrawal, withdrawalPayment } from '@/services'
 import { ToastType } from '@/enums';
 import scrollMixin from '@/mixins/scroll.mixin'
 import ModalConfirmPayment from './parts/ModalConfirmPayment.vue' 
+import ModalStatus from './parts/ModalStatus.vue' 
+import SelectFake from '../HomeView/parts/SelectFake.vue'
 
 export default {
   name: 'withdrawal-card',
@@ -119,11 +128,11 @@ export default {
     WButton,
     WModal,
     CardBets,
-    TagButton,
     ModalCalendar,
     Toast,
     ModalConfirmPayment,
-    WSelect
+    SelectFake,
+    ModalStatus
   },
   data() {
     return {
@@ -134,7 +143,7 @@ export default {
       isModalConfirmPaymentVisible: false, 
       modalItemId: '', 
       modalItemVersion: '', 
-      selectedOption: '1',
+      showModalStatus: false,
       info: {
         cartao_aposta: [], 
       },        
@@ -145,18 +154,18 @@ export default {
       },
       toastStore: useToastStore(),
       configClientStore: useConfigClient(),
+      statusList: [
+        { name: 'Aprovado', id: 1 },
+        { name: 'Não Aprovado', id: 0 }
+      ],
+      status: null
     }
   },
   created() {
     this.dateFilter = this.configClientStore.firstDayOfTheWeek;
+    this.status = this.statusList[0];
   },
   computed: {
-    statusOptions() {
-      return [
-        { value: '1', text: 'Aprovado' },
-        { value: '0', text: 'Não Aprovado' }
-      ];
-    },
     dateFilterView() {
       const initialDate = convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY");
       const finalDate = convertInMomentInstance(this.finalDateFilter).format("DD/MM/YYYY");
@@ -164,8 +173,15 @@ export default {
     }
   },
   methods: {
-    handleSelectStatus(value) {
-      this.selectedOption = value;
+    handleOpenStatusModal() {
+      this.showModalStatus = !this.showModalStatus;
+    },
+    handleCloseStatusModal() {
+      this.showModalStatus = false;
+    },
+    handleStatus(statusId) {
+      this.status = this.statusList.find(status => status.id === statusId);
+      this.handleCloseStatusModal();
     },
     handleOpenWithdrawalCardModal() {
       this.isWithdrawalModalVisible = true;
@@ -192,7 +208,7 @@ export default {
       return formatDateTimeBR(data);
     },
     getResults() {
-      this.params.status = this.selectedOption;
+      this.params.status = this.status.id;
       this.params.initialDate = this.dateFilter ? convertInMomentInstance(this.dateFilter).format("YYYY-MM-DD") : now().format("YYYY-MM-DD");
       this.params.endDate = this.finalDateFilter ? convertInMomentInstance(this.finalDateFilter).format("YYYY-MM-DD") : this.parametros.dataInicial;
       this.getWithdrawals();
@@ -260,6 +276,19 @@ export default {
   }
   &___content-filters { 
     margin-top: 15px;
+  }
+  &__status {
+    display:  flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #181818;
+    border: 0.5px solid var(--foreground-inputs-odds);
+    margin-bottom: 15px;
+    &-label {
+      color: #ffffff;
+      color: var(--foreground-header);
+    }
   }
 }
 
