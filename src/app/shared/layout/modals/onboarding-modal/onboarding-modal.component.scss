@@ -1,9 +1,10 @@
 .container{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding: 0 22px;
     background-color: var(--header);
-    height: 100%;
+    min-height: 100vh;
 }
 
 .modal-content {
@@ -17,8 +18,7 @@
     color: var(--foreground);
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 14px;
-    margin-top: 3%;
+    margin-top: 16px;
 }
 
 .modal-header-onboarding-item{
@@ -28,6 +28,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.modal-footer-onboarding{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 7%;
+}
+
+.btn-footer{
+    text-decoration: none;
+    color: #0BE68D;
+}
+
+.body-button{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.title-onboarding-container{
+    width: 260px;
 }
 
 .btn-close-onboarding i {
@@ -51,12 +76,24 @@
     line-height: 120%;
 }
 
-.tes{
+.modal-body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 46px;
+    background-color: #0A0A0A;
+    padding: 0 0;
+}
+
+.body-text{
+    display: flex;
+    flex-direction: column;
     gap: 18px;
-    margin-bottom: 46px;
+}
+.article-onboarding{
+    gap: 14px;
+    display: flex;
+    flex-direction: column;
 }
 
 .text-paragraph{
@@ -94,5 +131,24 @@
 .container-text-or{
     display: flex;
     align-items: center;
-    margin: 26px 0;
+}
+
+
+@media only screen and (min-width: 1025px) {
+    .container{
+        min-height: 50vh;
+        min-width: 55vh;
+    }
+
+    .modal-footer-onboarding{
+        margin-bottom: 6%;
+        margin-top: 25%;
+    }
+}
+
+@media only screen and (min-width: 2056px) {
+    .container{
+        min-height: 50vh;
+        min-width: 45vh;
+    }
 }
