@@ -94,10 +94,9 @@
       <ModalStatus
         v-if="showModalStatus"
         @closeModal="handleCloseStatusModal"
-        @click="handleModality"
-        :isBetsModality="true"
-        :modalityId="status.id"
-        :statusModalityList="statusModalityList"
+        @click="handleStatus"
+        :statusId="status.id"
+        :statusList="statusList"
       />
     </div>
   </div>
@@ -159,7 +158,7 @@ export default {
       },
       toastStore: useToastStore(),
       configClientStore: useConfigClient(),
-      statusModalityList: [
+      statusList: [
         { name: 'Aprovado', id: 1 },
         { name: 'Não Aprovado', id: 0 }
       ],
@@ -168,7 +167,7 @@ export default {
   },
   created() {
     this.dateFilter = this.configClientStore.firstDayOfTheWeek;
-    this.status = this.statusModalityList[0];
+    this.status = this.statusList[0];
   },
   computed: {
     statusOptions() {
@@ -193,8 +192,8 @@ export default {
     handleSelectStatus(value) {
       this.selectedOption = value;
     },
-    handleModality(modalityId) {
-      this.status = this.statusModalityList.find(modality => modality.id === modalityId);
+    handleStatus(statusId) {
+      this.status = this.statusList.find(status => status.id === statusId);
       this.selectedOption = this.status.id;
       this.handleCloseStatusModal();
     },

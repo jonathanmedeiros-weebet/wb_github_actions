@@ -1,20 +1,20 @@
 <template>
     <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
       <template #title>
-        <span class="modal-modalities__title">Selecione o status</span>
+        <span class="modal-status__title">Selecione o status</span>
       </template>
 
       <template #body>
-        <div class="modal-modalities__items">
+        <div class="modal-status__items">
             <template v-for="(item, index) in items">
                 <a
                     type="button"
-                    class="modal-modalities__item"
+                    class="modal-status__item"
                     :key="index"
                     @click="handleSelect(item.id)"
                 >
                     {{ item.name }}
-                    <IconCheck v-if="item.checked" class="modal-modalities__icon"/>
+                    <IconCheck v-if="item.checked" class="modal-status__icon"/>
                 </a>
             </template>
         </div>
@@ -45,8 +45,8 @@ export default {
     },
     computed: {
         items() {
-            if(this.isLive){
-                return this.options.filter(option => Boolean(option.hasLive));
+            if(this.isStatus){
+                return this.options.filter(option => Boolean(option.status));
             }
             return this.options;
         }
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-modalities {
+.modal-status {
     &__title {
         color: #FFFFFF80;
         color: var(--foreground-league-input);
