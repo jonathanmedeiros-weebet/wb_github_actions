@@ -2322,6 +2322,7 @@ gulp.task('fortunaplay.bet', function (done) {
         host: "fortunaplay.bet",
         banca: "FortunaPlay",
         styles: "",
+        xtremepush_sdk: "2ZwnVnh2kNB62WUkOAM2PSEMvRWf8Zhp"
     });
 });
 
