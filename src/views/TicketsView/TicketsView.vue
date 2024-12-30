@@ -55,9 +55,16 @@
 
             <span class="lottery__tens">
               <span class="lottery__info">Dezenas:</span> 
-              <div class="lottery__group-tens">
+              <div
+                class="lottery__group-tens"
+                :class="{
+                  'lottery__group-tens--grid': !isAndroid6Version,
+                  'lottery__group-tens--android6': isAndroid6Version
+                }"
+              >
                 <span
                   class="lottery__ten"
+                  :class="{'lottery__ten--android6': isAndroid6Version}"
                   v-for="(ten, index) of item.tens"
                   :key="index"
                 >
@@ -240,6 +247,10 @@ export default {
     };
   },
   computed: {
+    isAndroid6Version() {
+      // return isAndroid6();
+      return true;
+    },
     quoteValue() {
       if(!Boolean(this.items.length)) return 0;
 
@@ -820,9 +831,16 @@ export default {
   }
 
   &__group-tens {
-    display: grid;
-    grid-template-columns: repeat(7, auto);
-    gap: 8px;
+    &--grid {
+      display: grid;
+      grid-template-columns: repeat(7, auto);
+      gap: 8px;
+    }
+
+    &--android6 {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 
   &__ten {
@@ -835,6 +853,11 @@ export default {
     background-color: var(--inputs-odds);
     color: #ffffff;
     color: var(--foreground-inputs-odds);
+
+    &--android6 {
+      margin-left: 8px;
+      margin-top: 8px;
+    }
   }
 
   &__values {
