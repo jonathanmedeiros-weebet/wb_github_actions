@@ -139,7 +139,6 @@
 </template>
 
 <script>
-import SelectFake from './HomeView/parts/SelectFake.vue'
 import Header from '@/components/layouts/Header.vue'
 import IconClose from '@/components/icons/IconClose.vue'
 import IconAdd from '@/components/icons/IconAdd.vue'
@@ -150,6 +149,7 @@ import { getCalculationValue } from '@/services'
 import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR, convertInMomentInstance } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
 import { useConfigClient, useToastStore } from '@/stores'
+import SelectFake from './HomeView/parts/SelectFake.vue'
 
 export default {
   name: 'reckoning',

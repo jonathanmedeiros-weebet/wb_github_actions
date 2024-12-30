@@ -57,7 +57,6 @@ export default {
   computed: {
     selectedOptionObserve: {
       get() {
-        console.log(this.selectedOption);
         return this.selectedOption;
       },
       set() {

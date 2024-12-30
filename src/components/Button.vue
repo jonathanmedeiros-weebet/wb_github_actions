@@ -76,15 +76,15 @@ export default {
 
   &--secondary {
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-inputs-odds);
     background: #0a0a0a;
-    background: var(--background);
+    background: var(--inputs-odds);
   }
   &--secondary-light {
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground-inputs-odds);
     background: #181818;
-    background: var(--game);
+    background: var(--inputs-odds);
   }
 }
 

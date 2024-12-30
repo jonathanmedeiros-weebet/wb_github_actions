@@ -19,10 +19,10 @@
 <script>
 import IconClose from '@/components/icons/IconClose.vue'
 import InputSearch from '@/components/InputSearch.vue'
-import GameList from './GameList.vue'
+import GameList from '../SportModality/parts/GameList.vue'
 import { modalityList } from '@/constants'
 import ModalModalities from './ModalModalities.vue'
-import GameListSkeleton from './GameListSkeleton.vue'
+import GameListSkeleton from '../SportModality/parts/GameListSkeleton.vue'
 import { useHomeStore } from '@/stores'
 import _ from 'lodash'
 
@@ -50,6 +50,9 @@ export default {
     this.championshipList = this.homeStore.championshipList;
     setTimeout(() => this.loading = false, 1000);
     this.$refs.InputSerachComponent.forcusInInput();
+  },
+  activated() {
+    this.$refs.InputSerachComponent.handleInput();
   },
   methods: {
     handleClick(game) {

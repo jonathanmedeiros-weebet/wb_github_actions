@@ -15,7 +15,6 @@ import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 import { LocalStorageKey, localStorageService, prepareConfigClient } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
 import CloseBetView from '@/views/CloseBetView/CloseBetView.vue'
-import PopularLotteryView from '@/views/PopularLotteryView.vue'
 import RechargeCardView from '@/views/RechargeCardView.vue'
 import RechargeReceiptView from '@/views/RechargeReceiptView.vue'
 import TableView from '@/views/TableView.vue'
@@ -196,14 +195,6 @@ const router = new VueRouter({
         auth: production
       },
       props: true
-    },
-    {
-      path: '/popular-lottery',
-      name: 'popular-lottery',
-      component: PopularLotteryView,
-      meta: {
-        auth: production
-      }
     },
     {
       path: '/table',

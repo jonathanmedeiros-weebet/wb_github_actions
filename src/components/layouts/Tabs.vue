@@ -78,7 +78,7 @@ export default {
       ]
     },
     itemCount() {
-      return Object.keys(useTicketStore().items).length;
+      return Object.keys(this.ticketStore.items).length;
     },
     useHexColors() {
       return isAndroid5() ? '#ffffff' : 'var(--highlight)';

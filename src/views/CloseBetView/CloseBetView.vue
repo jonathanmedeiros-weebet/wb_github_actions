@@ -392,7 +392,6 @@ export default {
     async fetchBetDetails() {
       getBetById(this.id)
       .then(resp => {
-        console.log(resp.results);
         this.bet = resp.results;
       })
       .catch(({errors}) => {

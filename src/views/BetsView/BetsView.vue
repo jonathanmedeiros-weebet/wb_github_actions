@@ -184,7 +184,7 @@
                   value="finish"
                   name="finish"
                   class="button--secondary"
-                  v-if="bet.pago === false && ['cambista', 'todos'].includes(options.permitir_encerrar_aposta) && canClose(bet)"
+                  v-if="bet.pago === false && ['cambista', 'todos'].includes(options.permitir_encerrar_aposta) && canClose(bet) && bet.tipo !== 'loteria'"
                   @click="goToTickets(bet, 'close')"
                 />
               </div>
