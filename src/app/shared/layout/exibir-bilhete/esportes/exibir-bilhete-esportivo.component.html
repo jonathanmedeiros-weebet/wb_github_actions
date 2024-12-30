@@ -39,12 +39,15 @@
             Possível retorno: <span>{{aposta.possibilidade_ganho | currency}}</span>
         </p>
         <p class="resultado">
-            <b>Resultados: </b>
+            <b>{{ 'geral.resultado' | translate }}: </b>
             <span *ngIf="aposta.resultado">{{aposta.resultado || titlecase}}</span>
             <span *ngIf="!aposta.resultado">Aguardando</span>
         </p>
         <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
             {{'geral.premio' | translate}}: <span>{{aposta.premio | currency}}</span>
+        </p>
+        <p class="income-tax">
+            {{'bet.incomeTaxOnPrize' | translate}}:<span>{{aposta.incomeTaxOnPrize | currency}}</span>
         </p>
         <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
             Cambista paga: <span>{{cambistaPaga | currency}}</span>
@@ -156,7 +159,7 @@
                                     </p>
                                 </ng-template>
                             </div>
-                        </div>                    
+                        </div>
                     </div>
                 </div>
             </div>

@@ -65,7 +65,7 @@
                     <span class="chave">#{{solicitacao.id}}</span>
                     <span><label>{{'geral.apostador' | translate}} : </label> {{solicitacao.cartao_aposta.apostador}}</span>
                     <span><label>Chave: </label> {{solicitacao.cartao_aposta_chave}}</span>
-                    <span><label>{{'geral.saldoAtual' | translate}}<: </label> {{solicitacao.cartao_aposta.saldo | currency}}</span>
+                    <span><label>{{'geral.saldoAtual' | translate}} : </label> {{solicitacao.cartao_aposta.saldo | currency}}</span>
                     <span><label>Data solicitação: </label> {{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</span>
                     <span><label>Valor: </label> {{solicitacao.valor | currency}}</span>
                     <span class="buttons" *ngIf="solicitacao.aprovado && !solicitacao.pago">
@@ -97,19 +97,18 @@
                     </tr>
                     <tbody *ngIf="!loading">
                         <tr *ngFor="let solicitacao of solicitacoes">
-                            <td class="text-right">{{solicitacao.id}}</td>
-                            <td class="text-right">{{solicitacao.cartao_aposta_chave}}</td>
-                            <td class="text-right">
-                                {{solicitacao.cartao_aposta.saldo | currency}}</td>
+                            <td>{{solicitacao.id}}</td>
+                            <td>{{solicitacao.cartao_aposta_chave}}</td>
+                            <td>{{solicitacao.cartao_aposta.saldo | currency}}</td>
                             <td>{{solicitacao.cartao_aposta.apostador}}</td>
-                            <td>{{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</td>
-                            <td class="text-right">{{solicitacao.valor | currency}}</td>
+                            <td >{{solicitacao.data | moment:'DD/MM/YYYY HH:mm'}}</td>
+                            <td>{{solicitacao.valor | currency}}</td>
                             <td>{{solicitacao.aprovado ? 'SIM' : 'NÃO'}}</td>
                             <td>{{solicitacao.pago ? 'PAGO' : ''}}</td>
                             <td>
                                 <button *ngIf="solicitacao.aprovado && !solicitacao.pago" type="button"
-                                    class="btn btn-primary" (click)="setPagamento(solicitacao)">
-                                    <i class="fa fa-money"></i>
+                                    class="btn btn-success" (click)="setPagamento(solicitacao)">
+                                    <i class="fa fa-check" style="color: white;"></i>
                                 </button>
                             </td>
                         </tr>

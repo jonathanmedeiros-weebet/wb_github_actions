@@ -182,6 +182,18 @@
     gap: 24px;
 }
 
+a.toTop {
+    right: 20px !important;
+}
+
+app-back-page {
+    padding-bottom: 2px;
+}
+
+.titulo {
+    padding-bottom: 16px;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 768px){
     .blocoGameList{
         padding: 0 0 24px 10px !important;
@@ -380,4 +392,4 @@
     .game-grid {
         padding-right: 18px;
     }
-}
+} 

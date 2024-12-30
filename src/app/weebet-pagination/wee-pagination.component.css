@@ -1,0 +1,77 @@
+.wee-pagination {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wee-pagination__group-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.wee-pagination__content {
+    width: auto;
+    display: flex;
+    gap: 8px;
+}
+
+.wee-pagination__dots,
+.wee-pagination__button {
+    color: var(--foreground-game);;
+    background: transparent;
+    font-size: 13px;
+    font-style: normal;
+    line-height: 13px;
+    border: 0;
+    border-radius: 8px;
+    display: flex;
+    width: 28px;
+    height: 28px;
+    padding: 8px 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s, color 0.3s;
+}
+
+.wee-pagination__button--active {
+    background: var(--highlight);
+    color: var(--game);
+}
+
+.wee-pagination__button--active:hover {
+    background: var(--highlight);
+    color: var(--foreground-game);
+}
+
+.wee-pagination__group-buttons .wee-pagination__button:not(.wee-pagination__button--active):hover {
+    color: var(--foreground-game);
+    background: rgba(var(--highlight-rgb), 0.3);
+}
+
+.wee-pagination__button--back,
+.wee-pagination__button--advance {
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.wee-pagination__button--back:hover,
+.wee-pagination__button--advance:hover {
+    color: var(--highlight);
+    background: transparent;
+}
+
+.wee-pagination__button--back:disabled,
+.wee-pagination__button--advance:disabled {
+    color: rgba(255, 255, 255, 0.4);
+    cursor: not-allowed;
+}
+
+.wee-pagination__button--back:disabled:hover,
+.wee-pagination__button--advance:disabled:hover {
+    color: rgba(255, 255, 255, 0.4);
+}

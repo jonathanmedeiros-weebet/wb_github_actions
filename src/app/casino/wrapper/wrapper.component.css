@@ -2,6 +2,7 @@
     flex-grow: 1;
     height: 100%;
     overflow: hidden;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -15,7 +16,6 @@
         height: calc(100vh - 101px);
         padding: 0;
     }
-
     .casino-content.virtual {
         height: calc(100vh - 101px);
         padding: 0;

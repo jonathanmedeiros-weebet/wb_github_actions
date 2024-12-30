@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, 
 import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs';
+import {Subject, BehaviorSubject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {ApostaModalComponent, LoginModalComponent, PreApostaModalComponent} from '../../shared/layout/modals';
@@ -14,7 +14,9 @@ import {
     MessageService,
     ParametrosLocaisService
 } from '../../services';
+import { GeolocationService, Geolocation} from 'src/app/shared/services/geolocation.service';
 import * as clone from 'clone';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-desafios-bilhete',
@@ -41,6 +43,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
     modoCambista = false;
     mobileScreen;
     headerHeight = 92;
+    private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
         private apostaService: DesafioApostaService,
@@ -55,7 +58,9 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private modalService: NgbModal,
         private menuFooterService: MenuFooterService,
         private layoutService: LayoutService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private geolocationService: GeolocationService,
+        private translate: TranslateService
     ) {
         super();
     }
@@ -188,7 +193,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         this.possibilidadeGanho = premio < this.opcoes.valor_max_premio_desafio ? premio : this.opcoes.valor_max_premio_desafio;
     }
 
-    submit() {
+    async submit() {
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
@@ -212,6 +217,11 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
+            if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
+                valido = false;
+                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
+            }
+
             if (valido) {
                 if (this.isLoggedIn) {
                     const values = clone(this.form.value);
@@ -219,6 +229,14 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                         delete item.desafio;
                         delete item.odd;
                     });
+
+                    const location = await this.geolocationService.getGeolocation();
+                    this.geolocation.next(location);
+                    values['geolocation'] = this.geolocation.value
+
+                    values['ibge_code'] = sessionStorage.getItem('ibge_code');
+                    values['locale_city'] = sessionStorage.getItem('locale_city');
+                    values['locale_state'] = sessionStorage.getItem('locale_state');                 
 
                     this.salvarAposta(values);
                 } else {

@@ -26,11 +26,13 @@ export class FormatPaymentMethodPipe implements PipeTransform {
             case 'pay2m':
                 return 'Pay2m';
             case 'okto':
-                return 'Okto';
+                return 'OKTO';
             case 'pixs':
                 return 'Pixs';
             case 'bigpagv3':
                 return "BigPagV3";
+            case 'lisboapay':
+                return 'LisboaPAY';
 		}
 
         return "";

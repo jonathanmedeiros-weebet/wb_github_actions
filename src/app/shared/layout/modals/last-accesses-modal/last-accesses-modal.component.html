@@ -1,0 +1,103 @@
+<div class="mobile-modal-header margin-10">
+    <a (click)="activeModal.dismiss('Cross click')" class="botao-esquerdo">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <h2>{{ 'geral.lastAccesses' | translate }}</h2>
+    <div class="botao-direito"></div>
+</div>
+
+<div id="default-content">
+    <div class="internal-container-out">
+        <div class="content-header hide-mobile">
+            <h2>{{ 'geral.lastAccesses' | translate }}</h2>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <div class="filtros">
+                <input
+                    name="datepicker"
+                    class="dp-hidden"
+                    ngbDatepicker
+                    #datepicker="ngbDatepicker"
+                    [autoClose]="'outside'"
+                    (dateSelect)="onDateSelection($event, datepicker)"
+                    [displayMonths]="2"
+                    [dayTemplate]="t"
+                    outsideDays="hidden"
+                    [startDate]="fromDate!"
+                    tabindex="-1"
+                    value=""
+                >
+                <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day"
+                          [class.focused]="focused"
+                          [class.range]="isRange(date)"
+                          [class.faded]="isHovered(date) || isInside(date)"
+                          (mouseenter)="hoveredDate = date"
+                          (mouseleave)="hoveredDate = null">
+                        {{ date.day }}
+                    </span>
+                </ng-template>
+
+                <div class="input-group datepicker-group">
+                    <i class="fa fa-calendar" (click)="datepicker.toggle()"></i>
+                    <input
+                        type="text"
+                        class="form-control inverted-out"
+                        [(ngModel)]="selectedDate"
+                        (click)="datepicker.toggle()"
+                        [ngModelOptions]="{standalone: true}"
+                        placeholder="{{'geral.selecionePeriodo' | translate}}"
+                        style="border-radius: 5px"
+                    >
+                </div>
+
+                <select class="form-control inverted-out" formControlName="type">
+                    <option value="">{{ 'geral.todos' | translate }}</option>
+                    <option value="login">{{ 'Login' }}</option>
+                    <option value="logout">{{ 'Logout' }}</option>
+                </select>
+                <button class="btn btn-custom" type="submit">{{ 'geral.filtrar' | translate }}</button>
+            </div>
+        </form>
+
+        <app-spinner *ngIf="showLoading"></app-spinner>
+
+        <ng-container *ngIf="!showLoading">
+            <div class="content-body">
+                <div class="table-responsive">
+                    <label class="label">
+                        <span *ngIf="qttAccessesFound < 1">{{ 'geral.resultWereNotFound' | translate }}</span>
+                        <span *ngIf="qttAccessesFound == 1">{{ 'geral.resultWereFound' | translate }}</span>
+                        <span
+                            *ngIf="qttAccessesFound > 1">{{ 'geral.resultsWereFound' | translate: {'quantity': qttAccessesFound} }}</span>
+                    </label>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{{ 'geral.action' | translate }}</th>
+                            <th>{{ 'geral.data' | translate }}</th>
+                            <th>{{ 'IP' }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let access of accesses">
+                            <td>{{ access.type | titlecase }}</td>
+                            <td>{{ access.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                            <td>{{ access.ip }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination-container">
+                    <app-wee-pagination
+                        [totalPages]="totalPages"
+                        [currentPage]="currentPage"
+                        (pageChange)="onPageChange($event)">
+                    </app-wee-pagination>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

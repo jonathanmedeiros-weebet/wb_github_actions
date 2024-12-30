@@ -78,8 +78,7 @@ iframe{
     display: flex;
     justify-content: center;
     width: 100%;
-    /* height: 51px; */
-    /* margin-bottom: 12px; */
+    padding: 8.5px 16px;
     border: 1px solid #1B1B1B;
 }
 
@@ -98,53 +97,142 @@ iframe{
 }
 
 .game-name span {
-    font-size: 16px;
-    margin-left: 16px;
+    font-weight: 600;
+    margin-top: 6px;
+    margin-bottom: 0;
 }
 
-.buttons-game-view a {
-    margin-right: 2px;
+.provider-container {
+    position: relative;
 }
 
-.btn-cassino {
+.empty-game-list {
+    color: var(--foreground-header);
+    opacity: 0.5;
+}
+
+.game-list {
     display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-left: 18px;
+    margin-left: -18px;
+}
+
+.game-list::-webkit-scrollbar {
+    display: none;
+}
+
+.game-list-inline {
+    flex-wrap: nowrap;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.provider-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.provider-list::-webkit-scrollbar {
+    display: none;
+}
+
+.provider-list-inline {
+    flex-wrap: nowrap;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.provider-list-inline {
+    flex-wrap: nowrap;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.more-games-fade {
+    position: absolute;
+    width: 50px;
+    height: calc(100% + 20px);
+    top: -10px;
+    transition: opacity 0.5s;
+}
+
+.more-games-fade-right {
+    background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
+    right: 0;
+    opacity: 1;
+}
+
+.more-games-fade-left {
+    background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 25%, rgba(var(--background-rgb), 0.01));
+    left: 0;
+    opacity: 0;
+}
+
+.social-buttons-container {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 90%;
+}
+
+.social-buttons{
+    width: 24px;
+    height: 24px;
+    margin-top: 8px;
+    border-radius: 50%;
+    display: flex;
     justify-content: center;
-    width: 45px;
-    height: 45px;
-    text-decoration: none;
+    align-items: center;
     cursor: pointer;
-    color: var(--foreground-inputs-odds);
-    background: var(--inputs-odds);
-    transition: 500ms;
 }
 
-.btn-cassino:hover {
-    background-color: var(--highlight);
-    color: var(--foreground-highlight);
-    transition: 500ms;
+.social-buttons:hover {
+    opacity: 0.7;
 }
 
-.game-close {
-    font-size: 26px;
+.whatsapp {
+    fill: #24CC63;
+    margin-left: 0;
+    background-color: rgba(36, 204, 99, 0.20);;
+    background-image: url('https://wb-assets.com/img/icons/whatsapp.svg');
+    background-size: 58%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+.facebook {
+    fill: #395694;
+    background-color: rgba(57, 86, 148, 0.20);
+    background-image: url('https://wb-assets.com/img/icons/facebook.svg');
+    background-size: 36%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.screen-adjust {
-    font-size: 20px;
+.telegram {
+    fill: #2FA3D4;
+    background-color: rgba(47, 163, 212, 0.20);;
+    background-image: url('https://wb-assets.com/img/icons/telegram.svg');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.desktop-fullscreen {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: auto !important;
-    background-color: black;
-}
-
-.desktop-fullscreen .game-frame {
-    width:100%;
-    height: calc(100vh - 46px) !important;
-    margin: 0;
+.copy {
+    fill: #FFF;
+    background-color: rgba(255, 255, 255, 0.20);
+    background-image: url('https://wb-assets.com/img/icons/copy.svg');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 0;
 }
 
 .close-modal-continuar-jogando i{
@@ -153,151 +241,734 @@ iframe{
     padding-right: 8px;
 }
 
-.btn-custom, .btn-custom2 {
-    margin: 10px 0;
-    padding: 0 10px;
-    height: 38px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    white-space: nowrap;
-    min-width: 260px;
+#expanded-btn-game-opened, #expanded-btn-game-closed, #close-btn-game {
+    display: flex;
 }
 
 @media only screen and (max-width: 1024px) {
     .game-view {
-        position: fixed;
-        background-color: #000;
-        width: 100%;
-        height: 100%;
         z-index: 10000;
+    }
+}
+
+@media only screen and (min-width: 482px) and (max-width: 1024px) {
+    .provider-list {
+        flex-wrap: nowrap;
+        overflow: scroll;
+        scroll-behavior: smooth;
+    }
+
+    .game-list {
+        flex-wrap: nowrap;
+        overflow: scroll;
+        scroll-behavior: smooth;
+        padding-left: 16px;
+        margin-left: -16px;
+    }
+
+    .internal .game-list {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .more-games-fade-right {
+        background-image: linear-gradient(to left, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
+        right: -2px;
+    }
+
+    .more-games-fade-left {
+        background-image: linear-gradient(to right, rgba(var(--background-rgb), 1) 10%, rgba(var(--background-rgb), 0.01));
+    }
+
+    .more-games-fade {
+        height: calc(100% + 10px);
         top: 0;
     }
- 
-    .game-view .header-game-view {
-        /* margin: 2% 0 0 0 ; */
+
+    .header-game-view {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+    }
+
+    .game-view {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .game-view-mobile {
+        width: 100%;
+        height: 100%;
+    }
+
+    .header-game-view.in-game {
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    .game-view-mobile.in-game {
+        top: 57px;
+        position: fixed;
     }
 
     .game-frame {
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        position: relative;
         width: 100%;
-        height: calc(100% - 50px);
+        height: 100%;
     }
 
     .game-frame iframe {
-        position: relative !important;
+        width: 100%;
         height: 100%;
+        border: none;
+    }
+
+    .bloco-relatedGames {
+        margin-top: 40px;
+    }
+
+    app-back-page {
+        padding: 0 !important;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .game-list,
+    .provider-list {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 482px) {
+
+    .header-game-view {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8.5px 16px;
+        background-color: #000;
+        color: #fff;
+    }
+
+    .game-view {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .game-view-mobile {
+        width: 100%;
+        height: 100%;
+    }
+
+    .header-game-view.in-game {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 57px;
+    }
+
+    .game-view-mobile.in-game {
+       position: fixed;
+       top: 57px;
+    }
+
+    .game-list app-wall-game-card {
+        width: 120px;
+    }
+
+    .game-name {
+        flex-grow: 1;
+        font-size: 18px;
+        color: #fff;
+        margin: 0;
+    }
+
+    .game-name span {
+        margin: 0;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .buttons-game-view {
+        display: flex;
     }
 
     .btn-cassino {
-        padding: 5px;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        font-size: 16px;
     }
 
-    .overlay {
-        height: calc(100% - 45px);
-        margin-top: 45px;
+    #expanded-btn-game-opened, #expanded-btn-game-closed {
+        margin: 0 20px;
     }
 
-    .modal-body {
-        padding: 0 30px 50px 30px !important;
+    #expanded-btn-game-opened, #expanded-btn-game-closed, #close-btn-game {
+        display: flex;
     }
-}
 
-@media (min-width: 1025px) {
+    .btn-cassino .game-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #close-btn-game{
+        font-size: 18.555px !important;
+    }
+
     .game-frame {
-        height: calc(100vh - 175px);
-    }
-
-    iframe {
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100%;
         height: 100%;
     }
 
-    .overlay {
-        height: calc(100% - 11em);
-        margin-top: 11em;
+    .game-frame iframe {
+        width: 100%;
+        height: calc(100% - 57px);
+        border: none;
+    }
+
+    .card-small {
+        width: 100%;
+        height: auto;
+        margin: 24px auto;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px #00000033;
+        background: #0A0A0A;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 15px;
+    }
+
+    .card-content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .overlay-background {
+        width: 114px;
+        height: 114px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-right: 25px;
+        flex-shrink: 0;
+        border-radius: 3.83px;
+    }
+
+    .card-info {
+        flex-grow: 1;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .game-title {
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: white;
+    }
+
+    .game-provider {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #888888;
+    }
+
+    .card-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .register-btn {
+        border: 1px solid #0BF197;
+        background: #35CC95;
+        color: rgb(0, 0, 0);
+    }
+
+    .login-btn {
+        border: 1px solid #0BF197;
+        background: none;
+        color: #35CC95;
+    }
+    .main-footer {
+        margin-top: 20px;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 170px;
+        height: 40px;
+    }
+
+    .register-btn {
+        border: 1px solid #0BF197;
+        background: var(--10, #35CC95);
+        color: rgb(0, 0, 0);
+    }
+
+    .login-btn {
+        border: 1px solid #0BF197;
+        background: none;
+        color: #35CC96;
+        gap: 20px;
+    }
+    .inline-button {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .bloco {
+        padding: 0px 30px 24px 30px;
+    }
+
+    .bloco-relatedGames{
+        padding: 0 0 22px 16px;
+        padding-top: 12px;
+    }
+
+    .bloco-container-gameview{
+        padding: 0 12px;
+    }
+
+    .bloco-providers{
+        padding: 0 0 22px 16px;
+    }
+
+    #deposit-btn{
+        display: flex;
+        max-height: 23px;
+        background-color: var(--highlight);
+        color: var(--foreground-highlight);
+        width: 82px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        border-radius: 2px;
+        font-size: 12px;
+    }
+
+    #deposit-btn p {
+        margin: 0;
+    }
+
+    .btn-custom, .btn-custom2 {
+        min-width: 230px;
+    }
+
+    .btn-custom2 {
+        margin-top: 1rem;
+    }
+
+    app-back-page {
+        display: flex;
+        height: auto;
+        margin: 16px auto -16px auto;
+        position: relative;
+        align-items: center;
     }
 }
 
+@media (min-width: 483px){
 
-.overlay {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    width: 100%;
+    .game-view {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: auto;
+        padding: 12px 0 0 0;
+    }
+
+    .card-centered {
+        border-radius: 4px;
+        background: #181818;
+        padding: 30px 45px;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 0 auto;
+    }
+
+    .social-buttons-container {
+        width: 80%;
+    }
+
+    .inline-button {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+
+    .aviso h4{
+        margin: 40px !important;
+    }
+
+    .game-frame {
+        width: 100%;
+        margin: 0 20px;
+        margin-bottom: 30px;
+        height: 780px;
+    }
+
+    .game-view.in-game {
+        padding: 0;
+        height: 100%;
+    }
+
+    .header-game-view.in-game {
+        width: 100%;
+        margin: 0;
+        background-color: var(--background);
+    }
+
+    .game-frame.in-game {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .aviso{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+    }
+
+    .aviso h4{
+        margin: 20px;
+    }
+
+    .acoes{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .ver-bonus {
+        margin: 20px;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        color: var(--header);
+        background-color: var(--highlight);
+        width: 150px;
+        height: 42px;
+    }
+
+    .ver-jogos {
+        margin: 20px;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        border: var(--highlight);
+        color: var(--highlight);
+        border-style: solid;
+        border-width: 1px;
+        width: 150px;
+        height: 42px;
+    }
+
+    iframe{
+        width: 100%;
+        height: 100%;
+        border:none;
+    }
+
+    .header-game-view {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        border-radius: 4px 4px 0px 0px;
+        background-color: #0A0A0A;
+        border: none;
+        border: 1px solid #1B1B1B;
+        max-height: 45px;
+    }
+    .header-game-view > div {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-game-view .game-name {
+        justify-content: left;
+    }
+
+    .header-game-view .buttons-game-view {
+        justify-content: right;
+    }
+
+    .game-name span {
+        font-size: 16px;
+        margin-top: 0;
+    }
+
+    .btn-cassino {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+        text-decoration: none;
+        cursor: pointer;
+        color: var(--foreground-inputs-odds);
+        background: transparent;
+        transition: 500ms;
+    }
+
+    .game-close {
+        font-size: 26px;
+    }
+
+    .screen-adjust {
+        font-size: 20px;
+    }
+
+    .desktop-fullscreen {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: auto !important;
+        background-color: var(--background-rgb);
+    }
+
+    .desktop-fullscreen .game-frame {
+        width:100%;
+        height: calc(100vh - 23px);
+        margin: 0;
+    }
+
+    .close-modal-continuar-jogando i{
+        color: var(--highlight);
+        font-size: medium;
+    }
+
+    .btn-custom, .btn-custom2 {
+        margin: 10px 0;
+        padding: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        white-space: nowrap;
+        min-width: 260px;
+    }
+    .overlay {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+    .overlay-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: blur(60px);
+    }
+
+    .overlay-content {
+        position: relative;
+    }
+
+    .overlay-content__title {
+        color: #FFF;
+        text-align: center;
+        font-family: "Open Sans";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 20px;
+    }
+
+    .overlay-content__text {
+        color: rgba(255, 255, 255, 0.50);
+        text-align: center;
+        font-family: "Open Sans";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .inline-button {
+        display: flex;
+        height: 40px;
+        align-items: flex-start;
+        gap: 32px;
+        margin-top: 30px;
+    }
+
+    .register-btn {
+        border-radius: 5px;
+        border: 1px solid #0BF197;
+        background: var(--10, #35CC95);
+        display: flex;
+        width: 137px;
+        height: 40px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        color: black;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        text-transform: uppercase;
+    }
+
+    .register-btn:hover {
+        background: #0BF197;
+    }
+
+    .login-btn {
+        display: flex;
+        width: 137px;
+        height: 40px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        border-radius: 5px;
+        border: 1px solid #0BF197;
+        background: transparent;
+        color: #0BF197;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+        text-transform: uppercase;
+    }
+
+    .bloco {
+        position: relative;
+        padding: 0 0 24px 14px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .bloco-container-gameview {
+        padding: 0 14px 24px 14px;
+    }
+
+    .bloco .titulo {
+        text-align: left;
+        font-size: 18px;
+        color: var(--foreground-header);
+        flex-grow: 1;
+    }
+
+    .game-view.is-tablet {
+        height: 100%;
+    }
+
+    .game-view.desktop-fullscreen.is-tablet {
+        height: 100% !important;
+    }
+
+    .header-game-view.is-tablet {
+        margin: 0 !important;
+    }
+
+    .game-frame.is-tablet {
+        margin: 0;
+        height: 600px;
+    }
+
+    .game-frame.in-game-is-tablet .game-view.in-game {
+        padding: 0;
+    }
+
+    app-back-page {
+        padding: 0 20px;
+        display: flex;
+        margin-top: 16px;
+        align-items: center;
+    }
+    #expanded-btn-game-opened-desktop, #expanded-btn-game-closed-desktop, 
+    #expanded-btn-game-opened-tablet, #expanded-btn-game-closed-tablet
+    {
+        margin: 0 16px;
+    }
+
+    #expanded-btn-game-opened-desktop, #expanded-btn-game-closed-desktop, #close-btn-game-desktop,
+    #expanded-btn-game-opened-tablet, #expanded-btn-game-closed-tablet, #close-btn-game-tablet
+    {
+        display: flex;
+    }
+
 }
 
-.overlay .overlay-background {
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: auto 100%;
-    height: calc(100% - 80px);
-    position: absolute;
-    top: 40px;
-    width: 100%
+@media (min-width: 1024px) {
+    .bloco-relatedGames, .bloco-providers{
+        padding: 0 0 24px 30px;
+    }
 }
 
-.overlay .overlay-content {
+@media only screen and (min-width: 350px) {
+    .social-buttons-container {
+        width: 70%;
+    }
 
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background: rgba(0,0,0,.7) radial-gradient(38.32% 50% at 50% 50%,transparent 0,#000 100%);
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    z-index: 1
+    .bloco-relatedGames{
+        padding-top: 12px;
+    }
+
+    .card-info{
+        margin-bottom: 5px;
+    }
 }
 
-.overlay .overlay-content__title {
-    -webkit-text-fill-color: #35cd96;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-    background: -webkit-gradient(linear,left top,left bottom,from(#35cd96),to(#35cd96));
-    background: linear-gradient(180deg,#35cd96,#35cd96);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: #35cd96;
-
-    font-size: 40px;
-    line-height: 40px;
-    margin: 0;
-    text-transform: uppercase
-}
-
-.overlay .overlay-content__text {
-    -webkit-text-fill-color: #fff;
-    color: #fff;
-    font-family: roboto-regular-webfont,sans-serif;
-    font-size: 18px;
-    line-height: 25px;
-    margin: 5px 0 0;
-    padding-left: 10px;
-    padding-right: 10px
-}
-
-.inline-button {
-    display: inline-block;
-    margin: 5px; /* Espaço entre os botões */
-    padding: 10px 20px;
-    font-size: 16px;
+@media screen and (min-width: 400px) {
+    .social-buttons-container {
+        width: 60%;
+    }
 }
 
 .modal-header{
@@ -314,9 +985,8 @@ iframe{
     padding: 0 50px 50px 50px;
 }
 
-.modal-body h4 {
-    margin-top: 0;
-    font-size: 20px;
-    font-weight: 600;
+.desktopIsloggedIn {
+    position: fixed;
+    margin-top: 43px !important;
+    height: calc(100% - 140px);
 }
-

@@ -49,6 +49,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
     slug: string;
     sharedUrl: string;
     linkYoutube;
+    isToTopBtnVisible;
     displayPwaInstallButton = false;
 
     constructor(
@@ -131,6 +132,28 @@ export class FooterComponent implements OnInit, AfterViewInit {
         if (appendReclameAqui) {
             this.appendReclameAqui(reclameAquiDataId);
         }
+
+        this.container.addEventListener('scroll', this.onScroll.bind(this));
+        const observer = new MutationObserver(() => {
+            const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
+            if (bilheteContainer && !this.isMobile) {
+                const toTopElement = document.querySelector('.toTop') as HTMLElement;
+                if (toTopElement) {
+                    toTopElement.style.right = `calc(20px + ${bilheteContainer.clientWidth}px)`;
+                }
+            }
+        });
+    
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+    
+    onScroll() {
+        const target = this.container;
+        this.isToTopBtnVisible = target.scrollTop > 50;
+    }
+    
+    scrollToTop() {
+        this.container.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     appendReclameAqui(dataId: string) {

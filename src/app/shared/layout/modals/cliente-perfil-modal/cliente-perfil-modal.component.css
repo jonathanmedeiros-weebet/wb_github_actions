@@ -17,14 +17,6 @@ h5 {
     margin-bottom: 25px;
 }
 
-
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
 .btnClose {
     font-size: 32px;
     line-height: 22px;
@@ -35,17 +27,78 @@ h5 {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 1024px) {
-    .modal-body {
-        padding: 20px;
+
+#legitimuz-container{
+    padding-bottom: 56px;
+}
+
+#verify-identity-text{
+    padding-bottom: 12px;
+    opacity: 0.8;
+}
+#faceMatch {
+    margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 480px) {
+    input {
+        min-height: 50px;
     }
 
-    .buttons {
-        gap: 20px;
+    .input-md.placeholder-active label {
+        top: 12px;
     }
 
+    .input-md select {
+        padding-top: 17px;
+    }
+
+    .input-md .showPassword {
+        position: absolute;
+        top: 10px;
+    }
+
+    .input-md label {
+        transform: translateY(-45%);
+        transition: all 0.2s ease-out;
+        pointer-events: none;
+    }
+
+    .input-md input:focus + label,
+    .input-md input:not(:placeholder-shown) + label {
+        top: 12px;
+        font-size: 12px;
+    }
     .buttons button {
         flex: 1;
         margin: 0 !important;
     }
+    
+    .buttons {
+        gap: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
+
+@media only screen and (min-width: 481px) {
+    .buttons {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .buttons {
+        gap: 20px;
+    }
+}
+
+
+

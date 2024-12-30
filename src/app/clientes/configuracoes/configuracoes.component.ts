@@ -1,5 +1,6 @@
-import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Injectable, OnDestroy, OnInit, QueryList, ViewChildren, AfterViewInit } from '@angular/core';
 import {FormControl, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import {MessageService} from '../../shared/services/utils/message.service';
 import {ParametrosLocaisService} from '../../shared/services/parametros-locais.service';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
@@ -8,6 +9,13 @@ import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct, NgbModal} from '@
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { MultifactorConfirmationModalComponent } from 'src/app/shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { IdleDetectService } from 'src/app/shared/services/idle-detect.service';
+import { ActivityDetectService } from '../../shared/services/activity-detect.service';
+import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
+import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
+import { takeUntil } from 'rxjs/operators';
+import { Cliente } from 'src/app/shared/models/clientes/cliente';
 
 /**
  * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
@@ -41,17 +49,21 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 		{ provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
 	],
 })
-export class ConfiguracoesComponent implements OnInit, OnDestroy {
+export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit {
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
     queryParams: any;
     showLoading = true;
     blocked = false;
     opcaoExclusao = '';
-
+    cliente: Cliente;
     sectionLimiteApostas = false;
     sectionLimiteDeposito = false;
+    sectionLimitePerdas = false;
     sectionTemporizadorSessao = false;
     sectionPeriodoPausa = false;
     sectionExclusaoConta = false;
+    sectionLimiteTempoAtividade = false;
 
     showConfirmarExclusao = false;
     showMotivoExclusaoConta = false;
@@ -59,11 +71,20 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     formLimiteApostas: UntypedFormGroup;
     formLimiteDeposito: UntypedFormGroup;
+    formLimitePerda: UntypedFormGroup;
     formPeriodoPausa: UntypedFormGroup;
     formExclusaoConta: UntypedFormGroup;
+    formLimiteTempoAtividade: UntypedFormGroup;
 
     infoPeriodoPausa = '';
     configuracoes: any;
+
+    faceMatchEnabled = false;
+    faceMatchAccountDeletion = false;
+    faceMatchAccountDeletionValidated = false;
+    legitimuzToken = "";
+    verifiedIdentity = null;
+    disapprovedIdentity = false;
 
     public mostrarSenha: boolean = false;
     private tokenMultifator: string;
@@ -80,6 +101,12 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         private sidebarService: SidebarService,
         private activeModal: NgbActiveModal,
         private modalService: NgbModal,
+        private activityDetectService: ActivityDetectService,
+        private translate: TranslateService,
+        private legitimuzService: LegitimuzService,
+        private legitimuzFacialService: LegitimuzFacialService,
+        private faceMatchService: FaceMatchService,
+        private cd : ChangeDetectorRef
     ) {}
 
     get twoFactorInProfileChangeEnabled(): boolean {
@@ -98,6 +125,60 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
         this.getClientConfigs();
         this.createForms();
+        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchAccountDeletion);
+        if (!this.faceMatchEnabled) {
+            this.faceMatchAccountDeletionValidated = true;
+        }
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.clienteService.getCliente(user.id)
+            .subscribe(
+                res => {
+                    this.cliente = res;
+                    this.verifiedIdentity = res.verifiedIdentity;
+                    this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+                    this.showLoading = false;
+                    this.cd.detectChanges();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    if (this.verifiedIdentity) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, account_deletion: true }).subscribe({
+                            next: (res) => {
+                                this.legitimuzService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchAccountDeletionValidated = true;
+                                this.cd.detectChanges();
+                            }, error: (error) => {
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchAccountDeletionValidated = false;
+                            }
+                        })
+                    }
+                });
+            this.legitimuzFacialService.faceIndex
+                .subscribe(faceIndex => {
+                    if (faceIndex) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, account_deletion: true }).subscribe({
+                            next: (res) => {
+                                this.legitimuzFacialService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchAccountDeletionValidated = true;
+                                this.cd.detectChanges();
+                            }, error: (error) => {
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchAccountDeletionValidated = false;
+                            }
+                        })
+                    }
+                })
+        }
     }
 
     private getClientConfigs() {
@@ -113,6 +194,16 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                     limiteDiario: resp.limiteDepositoDiario ?? 0,
                     limiteSemanal: resp.limiteDepositoSemanal ?? 0,
                     limiteMensal: resp.limiteDepositoMensal ?? 0,
+                });
+
+                this.formLimitePerda.setValue({
+                    limiteDiario: resp.limitePerdaDiario ?? 0,
+                    limiteSemanal: resp.limitePerdaSemanal ?? 0,
+                    limiteMensal: resp.limitePerdaMensal ?? 0,
+                });
+
+                this.formLimiteTempoAtividade.setValue({
+                    limiteTempoAtividade: this.formatterLimiteTempoAtividade(resp.limiteTempoAtividade) ?? ''
                 });
 
                 if(resp.infoPeriodoPausa) {
@@ -144,12 +235,23 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             limiteMensal: [''],
         });
 
+        this.formLimitePerda = this.fb.group({
+            limiteDiario: [''],
+            limiteSemanal: [''],
+            limiteMensal: [''],
+        });
+
+        this.formLimiteTempoAtividade = this.fb.group({
+            limiteTempoAtividade: ['']
+        });
+
         this.formPeriodoPausa = this.fb.group({
             opcaoPausa: [''],
             dataFinalPausa: [''],
         });
 
         this.formExclusaoConta = this.fb.group({
+            exclusionPeriod: [''],
             motivoExclusao: [''],
             opcao: [''],
             confirmarExclusao: [''],
@@ -174,7 +276,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 backdrop: 'static'
             }
         );
-         
+
         modalRef.componentInstance.senha = this.senhaAtual.value;
 
         modalRef.result.then(
@@ -228,6 +330,50 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             error => this.handleError(error)
         )
     }
+    onSubmitLimitePerda() {
+        let data = this.formLimitePerda.value;
+        if(this.twoFactorInProfileChangeEnabled){
+            data = {
+                ...data,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+        this.clienteService.configLimitePerda(data).subscribe(
+            result => {
+                this.messageService.success(result.message);
+                this.senhaAtual.patchValue('');
+            },
+            error => this.handleError(error)
+        )
+    }
+
+
+    onSubmitLimiteTempoAtividade() {
+        let data = this.formLimiteTempoAtividade.value;
+
+        if (this.twoFactorInProfileChangeEnabled) {
+            data = {
+                ...data,
+                token: this.tokenMultifator,
+                codigo: this.codigoMultifator
+            }
+        }
+
+        this.clienteService.configLimiteTempoAtividade(data).subscribe(
+            result => {
+                this.activityDetectService.resetActivity();
+
+                this.activityDetectService.loadDailyActivityTime();
+                this.activityDetectService.initializeActivityConfig();
+
+                this.messageService.success(result.message);
+            },
+            error => {
+                this.handleError(error)
+            }
+        )
+    }
 
     onSubmitPeriodoPausa() {
         let data = this.formPeriodoPausa.value;
@@ -251,14 +397,19 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     onSubmitExclusaoConta() {
-        const { motivoExclusao, confirmarExclusao, opcao} = this.formExclusaoConta.value;
-        
+        const { exclusionPeriod, motivoExclusao, confirmarExclusao, opcao } = this.formExclusaoConta.value;
+
         const multifator = this.twoFactorInProfileChangeEnabled
             ? {codigo: this.codigoMultifator, token: this.tokenMultifator}
             : {};
 
+        if (exclusionPeriod == '') {
+            this.handleError(this.translate.instant('jogo_responsavel.exclusao_conta.periodIsMissing'));
+            return;
+        }
+
         if (this.validarExclusao(confirmarExclusao) || opcao == '') {
-            this.clienteService.excluirConta(motivoExclusao, confirmarExclusao, multifator).subscribe(
+            this.clienteService.excluirConta(exclusionPeriod, motivoExclusao, confirmarExclusao, multifator).subscribe(
                 result => {
                     this.messageService.success(result.message);
                     this.authService.logout();
@@ -268,7 +419,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 }
             )
         } else {
-            this.handleError('Digite exatamente a frase "EXCLUIR PERMANENTEMENTE" para confirmar a exclusão da conta.');
+            this.handleError(this.translate.instant('jogo_responsavel.exclusao_conta.exclusionConfirmationError'));
+            return;
         }
     }
 
@@ -279,6 +431,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
         if(this.sectionLimiteDeposito && section != 'limiteDeposito') {
             this.sectionLimiteDeposito = false;
         }
+        if(this.sectionLimitePerdas && section != 'limitePerdas') {
+            this.sectionLimitePerdas = false;
+        }
         if(this.sectionTemporizadorSessao && section != 'temporizadorSessao') {
             this.sectionTemporizadorSessao = false;
         }
@@ -286,7 +441,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             this.sectionPeriodoPausa = false;
         }
         if(this.sectionExclusaoConta && section != 'exclusaoConta') {
-             this.sectionExclusaoConta = false;
+            this.sectionExclusaoConta = false;
+        }
+        if(this.sectionLimiteTempoAtividade && section != 'limiteTempoAtividade') {
+            this.sectionLimiteTempoAtividade = false;
         }
 
         switch (section) {
@@ -296,6 +454,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
             case 'limiteDeposito':
                 this.sectionLimiteDeposito = !this.sectionLimiteDeposito;
                 break;
+            case 'limitePerdas':
+                    this.sectionLimitePerdas = !this.sectionLimitePerdas;
+                    break;
             case 'temporizadorSessao':
                 this.sectionTemporizadorSessao = !this.sectionTemporizadorSessao;
                 break;
@@ -304,6 +465,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
                 break;
             case 'exclusaoConta':
                 this.sectionExclusaoConta = !this.sectionExclusaoConta;
+                break;
+            case 'limiteTempoAtividade':
+                this.sectionLimiteTempoAtividade = !this.sectionLimiteTempoAtividade;
                 break;
             default:
                 break;
@@ -321,29 +485,29 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     changeOpcaoExclusao() {
-        const { opcao } = this.formExclusaoConta.value;
+        const { exclusionPeriod, opcao } = this.formExclusaoConta.value;
         this.showConfirmarExclusao = true;
 
         if(opcao == '6') {
-            this.formExclusaoConta.setValue({ motivoExclusao: "", opcao: opcao, confirmarExclusao: ""});
+            this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "", opcao: opcao, confirmarExclusao: ""});
             this.showMotivoExclusaoConta = true;
         } else {
             this.showMotivoExclusaoConta = false;
             switch (opcao) {
                 case '1':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Uma segunda conta foi criada", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Uma segunda conta foi criada", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '2':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Ocupa muito meu tempo/desvia muito minha atenção", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Ocupa muito meu tempo/desvia muito minha atenção", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '3':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Não tenho mais interesse em realizar apostas neste site", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Não tenho mais interesse em realizar apostas neste site", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '4':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Não estou mais usando está conta", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Não estou mais usando está conta", opcao: opcao, confirmarExclusao: ""});
                     break;
                 case '5':
-                    this.formExclusaoConta.setValue({ motivoExclusao: "Problemas ao utilizar o sistema", opcao: opcao, confirmarExclusao: ""});
+                    this.formExclusaoConta.setValue({ exclusionPeriod: exclusionPeriod, motivoExclusao: "Problemas ao utilizar o sistema", opcao: opcao, confirmarExclusao: ""});
                     break;
                 default:
                     this.showConfirmarExclusao = false;
@@ -353,7 +517,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
     }
 
     validarExclusao(input: string): boolean {
-        const textoEsperado = ['EXCLUIR PERMANENTEMENTE', 'PERMANENTLY DELETE', 'ELIMINAR PERMANENTEMENTE'];
+        const textoEsperado = ['EXCLUIR CONTA', 'DELETE ACCOUNT', 'ELIMINAR CUENTA'];
         return textoEsperado.includes(input);
     }
 
@@ -363,5 +527,37 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy {
 
     toClose() {
         this.activeModal.dismiss('Cross click');
+    }
+
+    formatterLimiteTempoAtividade = (input: string) => {
+        switch(input){
+            case '00:30':
+                return '30minutos';
+            case '00:45':
+                return '45minutos';
+            case '01:00':
+                return '1hora';
+            case '02:00':
+                return '2horas';
+            case '03:00':
+                return '3horas';
+            case '04:00':
+                return '4horas';
+        }
+    }
+    
+    ngAfterViewInit() {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuz.changes
+                .subscribe(() => {
+                    this.legitimuzService.init();
+                    this.legitimuzService.mount();
+                });
+            this.legitimuzLiveness.changes
+                .subscribe(() => {
+                    this.legitimuzFacialService.init();
+                    this.legitimuzFacialService.mount();
+                });
+        }
     }
 }

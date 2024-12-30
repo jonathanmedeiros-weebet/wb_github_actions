@@ -1,91 +1,238 @@
-<div class="game-view" [ngClass]="{'desktop-fullscreen':fullscreen && !mobileScreen}">
-    <div class="header-game-view">
-        <div class="game-name">
-            <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
-                <span> {{ customCasinoName }} Galaxsys </span>
-            </ng-container>
-            <ng-template #nomeOficialGame>
-                <span>{{ gameName }}</span>
-            </ng-template>
-        </div>
-        <div class="buttons-game-view">
-            <ng-container *ngIf="!isAppMobile() && !removerBotaoFullscreen">
-                <a *ngIf="!fullscreen" class="btn-cassino screen-adjust" (click)="openFullscreen()"><i class="fa fa-expand"></i></a>
-                <a *ngIf="fullscreen" class="btn-cassino screen-adjust" (click)="closeFullscreen()"><i class="fa fa-compress"></i></a>
-            </ng-container>
-            <a (click)="back()" class="btn-cassino game-close"><i class="fa fa-times"></i></a>
-        </div>
-    </div>
-    <ng-container>
-        <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame">
-            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-            <ng-container *ngIf="mobileScreen">
-                <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
-            </ng-container>
-            <ng-container *ngIf="!mobileScreen">
-                <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
-            </ng-container>
-        </div>
+<div class="bloco bloco-container-gameview" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
+    <app-back-page *ngIf="!isLoggedIn && gameMode == 'REAL'">
+    </app-back-page>
 
-        <div *ngIf="!isLoggedIn && gameMode == 'REAL'" class="game-frame">
-            <div class="overlay overlay--unauthorized">
-                <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'">
+    <div class="game-view" *ngIf="isMobile">
+        <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }">
+            <div class="game-name">
+                <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
+                    <span>{{ customCasinoName }} Galaxsys</span>
+                </ng-container>
+                <ng-template #nomeOficialGame>
+                    <span>{{ gameName }}</span>
+                </ng-template>
+            </div>
+            <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="buttons-game-view">
+                <ng-container *ngIf="isLoggedIn && gameMode === 'REAL'">
+                    <button class="btn" id="deposit-btn" (click)="openDeposit()">
+                        <p>Depositar</p>
+                    </button> 
+                </ng-container>
+                <ng-container>
+                    <a *ngIf="!fullscreen" id="expanded-btn-game-opened" class="btn-cassino screen-adjust" (click)="openFullscreenMob()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                        <path d="M4.16667 16.1322H5.83333C6.06944 16.1322 6.2675 16.2122 6.4275 16.3722C6.5875 16.5322 6.66722 16.7299 6.66667 16.9655C6.66611 17.2011 6.58611 17.3991 6.42667 17.5597C6.26722 17.7202 6.06944 17.7999 5.83333 17.7988H3.33333C3.09722 17.7988 2.89944 17.7188 2.74 17.5588C2.58056 17.3988 2.50056 17.2011 2.5 16.9655V14.4655C2.5 14.2294 2.58 14.0316 2.74 13.8722C2.9 13.7127 3.09778 13.6327 3.33333 13.6322C3.56889 13.6316 3.76694 13.7116 3.9275 13.8722C4.08806 14.0327 4.16778 14.2305 4.16667 14.4655V16.1322ZM15.8333 16.1322V14.4655C15.8333 14.2294 15.9133 14.0316 16.0733 13.8722C16.2333 13.7127 16.4311 13.6327 16.6667 13.6322C16.9022 13.6316 17.1003 13.7116 17.2608 13.8722C17.4214 14.0327 17.5011 14.2305 17.5 14.4655V16.9655C17.5 17.2016 17.42 17.3997 17.26 17.5597C17.1 17.7197 16.9022 17.7994 16.6667 17.7988H14.1667C13.9306 17.7988 13.7328 17.7188 13.5733 17.5588C13.4139 17.3988 13.3339 17.2011 13.3333 16.9655C13.3328 16.7299 13.4128 16.5322 13.5733 16.3722C13.7339 16.2122 13.9317 16.1322 14.1667 16.1322H15.8333ZM4.16667 4.46549V6.13216C4.16667 6.36827 4.08667 6.56633 3.92667 6.72633C3.76667 6.88633 3.56889 6.96605 3.33333 6.9655C3.09778 6.96494 2.9 6.88494 2.74 6.72549C2.58 6.56605 2.5 6.36827 2.5 6.13216V3.63216C2.5 3.39605 2.58 3.19827 2.74 3.03883C2.9 2.87938 3.09778 2.79938 3.33333 2.79883H5.83333C6.06944 2.79883 6.2675 2.87883 6.4275 3.03883C6.5875 3.19883 6.66722 3.39661 6.66667 3.63216C6.66611 3.86772 6.58611 4.06577 6.42667 4.22633C6.26722 4.38688 6.06944 4.46661 5.83333 4.46549H4.16667ZM15.8333 4.46549H14.1667C13.9306 4.46549 13.7328 4.38549 13.5733 4.22549C13.4139 4.06549 13.3339 3.86772 13.3333 3.63216C13.3328 3.39661 13.4128 3.19883 13.5733 3.03883C13.7339 2.87883 13.9317 2.79883 14.1667 2.79883H16.6667C16.9028 2.79883 17.1008 2.87883 17.2608 3.03883C17.4208 3.19883 17.5006 3.39661 17.5 3.63216V6.13216C17.5 6.36827 17.42 6.56633 17.26 6.72633C17.1 6.88633 16.9022 6.96605 16.6667 6.9655C16.4311 6.96494 16.2333 6.88494 16.0733 6.72549C15.9133 6.56605 15.8333 6.36827 15.8333 6.13216V4.46549Z" fill="#FBFBFB"/>
+                        </svg>
+                    </a>
+                    <a *ngIf="fullscreen" id="expanded-btn-game-closed" class="btn-cassino screen-adjust" (click)="exitFullscreenMob()">
+                        <span class="material-symbols-outlined">
+                            fullscreen_exit
+                        </span>
+                    </a>
+                </ng-container>
+                <a (click)="back()" id="close-btn-game" class="btn-cassino game-close screen-adjust">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                    <path d="M9.99967 11.4655L5.91634 15.5489C5.76356 15.7016 5.56912 15.778 5.33301 15.778C5.0969 15.778 4.90245 15.7016 4.74967 15.5489C4.5969 15.3961 4.52051 15.2016 4.52051 14.9655C4.52051 14.7294 4.5969 14.535 4.74967 14.3822L8.83301 10.2989L4.74967 6.21554C4.5969 6.06276 4.52051 5.86831 4.52051 5.6322C4.52051 5.39609 4.5969 5.20165 4.74967 5.04887C4.90245 4.89609 5.0969 4.8197 5.33301 4.8197C5.56912 4.8197 5.76356 4.89609 5.91634 5.04887L9.99967 9.1322L14.083 5.04887C14.2358 4.89609 14.4302 4.8197 14.6663 4.8197C14.9025 4.8197 15.0969 4.89609 15.2497 5.04887C15.4025 5.20165 15.4788 5.39609 15.4788 5.6322C15.4788 5.86831 15.4025 6.06276 15.2497 6.21554L11.1663 10.2989L15.2497 14.3822C15.4025 14.535 15.4788 14.7294 15.4788 14.9655C15.4788 15.2016 15.4025 15.3961 15.2497 15.5489C15.0969 15.7016 14.9025 15.778 14.6663 15.778C14.4302 15.778 14.2358 15.7016 14.083 15.5489L9.99967 11.4655Z" fill="#FBFBFB"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <ng-container>
+            <div class="game-view-mobile" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL' }" *ngIf="isLoggedIn || gameMode != 'REAL'" >
+                <div class="game-frame" >
+                    <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+                    <ng-container *ngIf="mobileScreen">
+                        <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+                    </ng-container>
+                    <ng-container *ngIf="!mobileScreen">
+                        <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allow="fullscreen"></iframe>
+                    </ng-container>
                 </div>
-                <div class="overlay-content -mt-4 p-5">
-                    <p class="overlay-content__title">registre-se ou faça login</p>
-                    <p class="overlay-content__text">Por favor, registre-se ou faça login para fazer seu primeiro depósito e começar a jogar.</p>
-                    <div class="inline-button">
+            </div>
 
-                        <a class="btn btn-custom w-130 mr-4" (click)="abrirCadastro()">
-                            {{'geral.registreSe' | translate | uppercase}}
-                        </a>
-                        <a (click)="abriModalLogin()" class="botao-entrar btn btn-custom2 w-130" role="button">
-                            {{'geral.entrar' | translate | uppercase}}
-                        </a>
+            <div *ngIf="!isLoggedIn && gameMode == 'REAL'" class="game-frame">
+                <div class="overlay overlay--unauthorized">
+                    <div class="card-small">
+                        <div class="card-content">
+                            <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'"></div>
+                            <div class="card-info">
+                                <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
+                                    <h2 class="card-info-game-name">{{ customCasinoName }} Galaxsys</h2>
+                                </ng-container>
+                                <ng-template #nomeOficialGame>
+                                    <h2 class="card-info-game-name">{{ gameName }}</h2>
+                                </ng-template>
+                                <p class="game-provider">{{ gameProviderName }}</p>
+                                <div class="social-buttons-container">
+                                    <a href="{{linkWhatsapp}}" target="_blank" rel="noopener noreferrer" class="social-buttons whatsapp"></a>
+                                    <a href="{{linkFacebook}}" target="_blank" rel="noopener noreferrer" class="social-buttons facebook"></a>
+                                    <a href="{{linkTelegram}}" target="_blank" rel="noopener noreferrer" class="social-buttons telegram"></a>
+                                    <a target="_blank" class="social-buttons copy" (click)="copyLink()"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-buttons">
+                            <button class="btn register-btn" (click)="abrirCadastro()">Registrar-se</button>
+                            <button class="btn login-btn" (click)="abrirLogin()">Entrar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </ng-container>
+        </ng-container>
+    </div>
 
-    <ng-container>
-        <div *ngIf="avisoCancelarBonus" class="game-frame">
-            <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
-            <ng-container *ngIf="mobileScreen">
-                <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+    <div class="game-view"
+        *ngIf="isDesktop || isTablet"
+        [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }"
+    >
+        <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }">
+            <div class="game-name">
+                <ng-container *ngIf="gameFornecedor == 'galaxsys'; else nomeOficialGame">
+                    <span> {{ customCasinoName }} Galaxsys </span>
+                </ng-container>
+                <ng-template #nomeOficialGame>
+                    <span>{{ gameName }}</span>
+                </ng-template>
+            </div>
+            <div class="buttons-game-view">
+                <ng-container *ngIf="!isTablet">
+                    <a *ngIf="!fullscreen" id="expanded-btn-game-opened-desktop" class="btn-cassino screen-adjust" (click)="openFullscreen()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                        <path d="M4.16667 16.1322H5.83333C6.06944 16.1322 6.2675 16.2122 6.4275 16.3722C6.5875 16.5322 6.66722 16.7299 6.66667 16.9655C6.66611 17.2011 6.58611 17.3991 6.42667 17.5597C6.26722 17.7202 6.06944 17.7999 5.83333 17.7988H3.33333C3.09722 17.7988 2.89944 17.7188 2.74 17.5588C2.58056 17.3988 2.50056 17.2011 2.5 16.9655V14.4655C2.5 14.2294 2.58 14.0316 2.74 13.8722C2.9 13.7127 3.09778 13.6327 3.33333 13.6322C3.56889 13.6316 3.76694 13.7116 3.9275 13.8722C4.08806 14.0327 4.16778 14.2305 4.16667 14.4655V16.1322ZM15.8333 16.1322V14.4655C15.8333 14.2294 15.9133 14.0316 16.0733 13.8722C16.2333 13.7127 16.4311 13.6327 16.6667 13.6322C16.9022 13.6316 17.1003 13.7116 17.2608 13.8722C17.4214 14.0327 17.5011 14.2305 17.5 14.4655V16.9655C17.5 17.2016 17.42 17.3997 17.26 17.5597C17.1 17.7197 16.9022 17.7994 16.6667 17.7988H14.1667C13.9306 17.7988 13.7328 17.7188 13.5733 17.5588C13.4139 17.3988 13.3339 17.2011 13.3333 16.9655C13.3328 16.7299 13.4128 16.5322 13.5733 16.3722C13.7339 16.2122 13.9317 16.1322 14.1667 16.1322H15.8333ZM4.16667 4.46549V6.13216C4.16667 6.36827 4.08667 6.56633 3.92667 6.72633C3.76667 6.88633 3.56889 6.96605 3.33333 6.9655C3.09778 6.96494 2.9 6.88494 2.74 6.72549C2.58 6.56605 2.5 6.36827 2.5 6.13216V3.63216C2.5 3.39605 2.58 3.19827 2.74 3.03883C2.9 2.87938 3.09778 2.79938 3.33333 2.79883H5.83333C6.06944 2.79883 6.2675 2.87883 6.4275 3.03883C6.5875 3.19883 6.66722 3.39661 6.66667 3.63216C6.66611 3.86772 6.58611 4.06577 6.42667 4.22633C6.26722 4.38688 6.06944 4.46661 5.83333 4.46549H4.16667ZM15.8333 4.46549H14.1667C13.9306 4.46549 13.7328 4.38549 13.5733 4.22549C13.4139 4.06549 13.3339 3.86772 13.3333 3.63216C13.3328 3.39661 13.4128 3.19883 13.5733 3.03883C13.7339 2.87883 13.9317 2.79883 14.1667 2.79883H16.6667C16.9028 2.79883 17.1008 2.87883 17.2608 3.03883C17.4208 3.19883 17.5006 3.39661 17.5 3.63216V6.13216C17.5 6.36827 17.42 6.56633 17.26 6.72633C17.1 6.88633 16.9022 6.96605 16.6667 6.9655C16.4311 6.96494 16.2333 6.88494 16.0733 6.72549C15.9133 6.56605 15.8333 6.36827 15.8333 6.13216V4.46549Z" fill="#FBFBFB"/>
+                        </svg>
+                    </a>
+                    <a *ngIf="fullscreen" id="expanded-btn-game-closed-desktop" class="btn-cassino screen-adjust" (click)="closeFullscreen()">
+                        <span class="material-symbols-outlined">
+                            fullscreen_exit
+                        </span>
+                    </a>
+                </ng-container>
+                <ng-container *ngIf="isTablet">
+                    <a *ngIf="!fullscreen" id="expanded-btn-game-opened-tablet" class="btn-cassino screen-adjust" (click)="openFullscreenTablet()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                        <path d="M4.16667 16.1322H5.83333C6.06944 16.1322 6.2675 16.2122 6.4275 16.3722C6.5875 16.5322 6.66722 16.7299 6.66667 16.9655C6.66611 17.2011 6.58611 17.3991 6.42667 17.5597C6.26722 17.7202 6.06944 17.7999 5.83333 17.7988H3.33333C3.09722 17.7988 2.89944 17.7188 2.74 17.5588C2.58056 17.3988 2.50056 17.2011 2.5 16.9655V14.4655C2.5 14.2294 2.58 14.0316 2.74 13.8722C2.9 13.7127 3.09778 13.6327 3.33333 13.6322C3.56889 13.6316 3.76694 13.7116 3.9275 13.8722C4.08806 14.0327 4.16778 14.2305 4.16667 14.4655V16.1322ZM15.8333 16.1322V14.4655C15.8333 14.2294 15.9133 14.0316 16.0733 13.8722C16.2333 13.7127 16.4311 13.6327 16.6667 13.6322C16.9022 13.6316 17.1003 13.7116 17.2608 13.8722C17.4214 14.0327 17.5011 14.2305 17.5 14.4655V16.9655C17.5 17.2016 17.42 17.3997 17.26 17.5597C17.1 17.7197 16.9022 17.7994 16.6667 17.7988H14.1667C13.9306 17.7988 13.7328 17.7188 13.5733 17.5588C13.4139 17.3988 13.3339 17.2011 13.3333 16.9655C13.3328 16.7299 13.4128 16.5322 13.5733 16.3722C13.7339 16.2122 13.9317 16.1322 14.1667 16.1322H15.8333ZM4.16667 4.46549V6.13216C4.16667 6.36827 4.08667 6.56633 3.92667 6.72633C3.76667 6.88633 3.56889 6.96605 3.33333 6.9655C3.09778 6.96494 2.9 6.88494 2.74 6.72549C2.58 6.56605 2.5 6.36827 2.5 6.13216V3.63216C2.5 3.39605 2.58 3.19827 2.74 3.03883C2.9 2.87938 3.09778 2.79938 3.33333 2.79883H5.83333C6.06944 2.79883 6.2675 2.87883 6.4275 3.03883C6.5875 3.19883 6.66722 3.39661 6.66667 3.63216C6.66611 3.86772 6.58611 4.06577 6.42667 4.22633C6.26722 4.38688 6.06944 4.46661 5.83333 4.46549H4.16667ZM15.8333 4.46549H14.1667C13.9306 4.46549 13.7328 4.38549 13.5733 4.22549C13.4139 4.06549 13.3339 3.86772 13.3333 3.63216C13.3328 3.39661 13.4128 3.19883 13.5733 3.03883C13.7339 2.87883 13.9317 2.79883 14.1667 2.79883H16.6667C16.9028 2.79883 17.1008 2.87883 17.2608 3.03883C17.4208 3.19883 17.5006 3.39661 17.5 3.63216V6.13216C17.5 6.36827 17.42 6.56633 17.26 6.72633C17.1 6.88633 16.9022 6.96605 16.6667 6.9655C16.4311 6.96494 16.2333 6.88494 16.0733 6.72549C15.9133 6.56605 15.8333 6.36827 15.8333 6.13216V4.46549Z" fill="#FBFBFB"/>
+                        </svg>
+                    </a>
+                    <a *ngIf="fullscreen" id="expanded-btn-game-closed-tablet" class="btn-cassino screen-adjust" (click)="closeFullscreenTablet()">
+                        <span class="material-symbols-outlined">
+                            fullscreen_exit
+                        </span>
+                    </a>
             </ng-container>
-            <ng-container *ngIf="!mobileScreen">
-                <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
-            </ng-container>
+                <a (click)="back()" id="close-btn-game_desktop" class="btn-cassino game-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                    <path d="M9.99967 11.4655L5.91634 15.5489C5.76356 15.7016 5.56912 15.778 5.33301 15.778C5.0969 15.778 4.90245 15.7016 4.74967 15.5489C4.5969 15.3961 4.52051 15.2016 4.52051 14.9655C4.52051 14.7294 4.5969 14.535 4.74967 14.3822L8.83301 10.2989L4.74967 6.21554C4.5969 6.06276 4.52051 5.86831 4.52051 5.6322C4.52051 5.39609 4.5969 5.20165 4.74967 5.04887C4.90245 4.89609 5.0969 4.8197 5.33301 4.8197C5.56912 4.8197 5.76356 4.89609 5.91634 5.04887L9.99967 9.1322L14.083 5.04887C14.2358 4.89609 14.4302 4.8197 14.6663 4.8197C14.9025 4.8197 15.0969 4.89609 15.2497 5.04887C15.4025 5.20165 15.4788 5.39609 15.4788 5.6322C15.4788 5.86831 15.4025 6.06276 15.2497 6.21554L11.1663 10.2989L15.2497 14.3822C15.4025 14.535 15.4788 14.7294 15.4788 14.9655C15.4788 15.2016 15.4025 15.3961 15.2497 15.5489C15.0969 15.7016 14.9025 15.778 14.6663 15.778C14.4302 15.778 14.2358 15.7016 14.083 15.5489L9.99967 11.4655Z" fill="#FBFBFB"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <ng-container>
+            <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame in-game" [ngClass]="{ 'is-tablet': isTablet, desktopIsloggedIn: isLoggedIn } " >
+                <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
+                <ng-container *ngIf="mobileScreen">
+                    <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+                </ng-container>
+                <ng-container *ngIf="!mobileScreen">
+                    <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
+                </ng-container>
+            </div>
 
-        </div>
-        <div *ngIf="avisoCancelarBonus" class="game-frame" style="overflow: hidden">
-            <div class="overlay overlay--unauthorized">
-                <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'">
+            <div *ngIf="!isLoggedIn && gameMode == 'REAL'" class="game-frame" [ngClass]="{ 'is-tablet': isTablet }">
+                <div class="overlay overlay--unauthorized">
+                    <div class="overlay-background" [style.backgroundImage]="'url(' + backgroundImageUrl + ')'"></div>
+                    <div class="overlay-content -mt-4 p-5">
+                        <div class="card-centered">
+                            <h2 class="overlay-content__title">Continuar jogando...</h2>
+                            <p class="overlay-content__text">
+                                Para continuar jogando você precisa se registrar ou fazer login na sua conta
+                            </p>
+                            <div class="inline-button">
+                                <button class="btn register-btn" (click)="abrirCadastro()">Registre-se</button>
+                                <button class="btn login-btn" (click)="abrirLogin()">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="overlay-content -mt-4 p-5">
-                </div>
             </div>
+        </ng-container>
+    </div>
+</div>
+
+<ng-container>
+    <ng-template #continuarJogandoModal let-modal>
+        <div class="modal-header">
+            <a class="close-modal-continuar-jogando" aria-label="Close" (click)="back()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
         </div>
-        <ng-template #continuarJogandoModal let-modal>
-            <div class="modal-header">
-                <a class="close-modal-continuar-jogando" aria-label="Close" (click)="back()">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </a>
+        <div class="modal-body">
+            <h4>Continuar Jogando...</h4>
+            <p>
+                Seu bônus está quase acabando! Deseja cancelar seu saldo bônus e trocar para o seu saldo real para continuar jogando?
+            </p>
+            <a class="btn btn-custom" (click)="continuarSaldoReal()">
+              Sim, cancelar bônus e usar saldo real
+            </a>
+            <a class="btn btn-custom2 " (click)="continuarBonus()">
+              Continuar com bônus
+            </a>
+        </div>
+    </ng-template>
+</ng-container>
+
+<div class="bloco bloco-relatedGames" *ngIf="(isDesktop || isMobile || isTablet) && !isLoggedIn && gameMode == 'REAL'">
+    <app-wall-section
+        sectionId="cassino"
+        [title]="'cassino.jogosRelacionados' | translate"
+        [itemsQty]="gameList.length"
+        (onSeeAll)="handleSeeAllGames()"
+        (onLeft)="scrollLeft('cassino')"
+        (onRight)="scrollRight('cassino')"
+    />
+
+    <div class="games-container">
+        <ng-container *ngIf="gameList.length; else elseWithoutGames">
+            <div class="game-list game-list-inline" #scrollGames id="cassino-scroll" (scroll)="onScroll('cassino')">
+                <app-wall-game-card
+                    *ngFor="let game of gameList"
+                    [game]="game"
+                    [blink]="blink"
+                    [isLoggedIn]="isLoggedIn"
+                    [isDemo]="isDemo"
+                    [isCliente]="isCliente"
+                    cardType="inline"
+                />
             </div>
-            <div class="modal-body">
-                <h4 class="titulo-modal">Continuar Jogando...</h4>
-                <p class="bonus">Saldo bônus: {{posicaoFinanceira | currency:'BRL':'symbol':'1.2-2'}}</p>
-                <p class="opacity50">
-                    Seu bônus está quase acabando! Deseja cancelar seu saldo bônus e trocar para o seu saldo real para continuar jogando?
-                </p>
-                <a class="btn btn-custom" (click)="continuarSaldoReal()">
-                  Sim, cancelar bônus e usar saldo real
-                </a>
-                <a class="btn opacity50" (click)="continuarBonus()">
-                  Continuar com bônus
-                </a>
-            </div>
+        </ng-container>
+
+        <ng-template #elseWithoutGames>
+            <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
         </ng-template>
-    </ng-container>
+    </div>
+</div>
+
+<div class="bloco bloco-providers" *ngIf="(isDesktop || isMobile || isTablet) && !isLoggedIn && gameMode == 'REAL'">
+    <app-wall-section
+        sectionId="providers"
+        [title]="'geral.provedores' | translate"
+        [itemsQty]="cassinoFornecedores.length"
+        (onSeeAll)="openFiltroFornecedores()"
+        (onLeft)="scrollLeft('providers')"
+        (onRight)="scrollRight('providers')"
+    />
+
+    <div class="provider-container">
+        <div class="provider-list provider-list-inline" #scrollGames id="providers-scroll" (scroll)="onScroll('providers')">
+            <app-wall-provider-card
+                [container]="listagem"
+                *ngFor="let fornecedor of cassinoFornecedores"
+                [data]="fornecedor"
+                (click)="redirectToFilteredProviders(fornecedor)"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="main-footer" *ngIf="(isDesktop || isMobile || isTablet) && !isLoggedIn && gameMode == 'REAL'">
+    <app-footer></app-footer>
 </div>

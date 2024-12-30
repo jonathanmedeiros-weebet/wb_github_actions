@@ -2,7 +2,7 @@ import { NgModule, LOCALE_ID, APP_INITIALIZER, DEFAULT_CURRENCY_CODE, isDevMode 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from './shared/shared.module';
@@ -35,6 +35,9 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
 import { BetbyModule } from './betby/betby.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+// Interceptors
+import { AuthInterceptor } from './auth/auth-interceptor.service';
+
 export function paramsServiceFactory(service: ParametrosLocaisService) {
     return () => service.load();
 }
@@ -53,7 +56,12 @@ export const APP_TOKENS = [
     {
         provide: DEFAULT_CURRENCY_CODE,
         useValue: environment.currencyCode
-    }
+    },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    },
 ];
 
 export function googleFactory(service: ParametrosLocaisService) {
@@ -72,7 +80,7 @@ export function googleFactory(service: ParametrosLocaisService) {
         onError: (err) => {
             console.error(err);
         }
-    } as SocialAuthServiceConfig
+    } as SocialAuthServiceConfig;
 }
 
 @NgModule({
