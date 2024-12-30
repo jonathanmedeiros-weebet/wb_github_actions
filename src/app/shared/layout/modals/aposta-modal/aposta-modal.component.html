@@ -1,8 +1,5 @@
 <div class="modal-header" style="border-bottom: 0; background: var(--game)" [ngClass]="{'classe-esportes': aposta.tipo === 'esportes'}">
     <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
-    <div>
-        <h5 class="modal-title-mobile" id="modal-basic-title">Aposta</h5>
-    </div>
     <div class="action-buttons">
         <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
             <i class="fa fa-external-link"></i>

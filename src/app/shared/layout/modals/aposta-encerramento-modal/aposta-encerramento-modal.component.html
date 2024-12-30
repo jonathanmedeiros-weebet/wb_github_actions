@@ -30,15 +30,15 @@
         </p>
         <ng-container *ngIf="isShared">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-                <p class="aposta">
+                <p>
                     <b>Apostador: </b><span>{{aposta.apostador}}</span>
                 </p>
             </div>
             <ng-template #exibicaoPadrao>
-                <p class="aposta">
+                <p>
                     <b>Cambista:</b> {{aposta.passador.nome}}
                 </p>
-                <p class="aposta">
+                <p>
                     <b>Apostador: </b><span>{{aposta.apostador}}</span>
                 </p>
             </ng-template>
@@ -168,18 +168,18 @@
                     <div class="item">
                         <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                             <div>
-                                <p class="horario info-cupom">
-                                    {{item.jogo_horario | moment: 'DD/MM HH:mm'}}
-                                </p>
                                 <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                                     <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                                 </p>
-                                <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}" style="font-weight: bolder;">
                                     {{item.time_a_nome}}
                                     {{item.time_a_resultado}} x {{item.time_b_resultado}}
                                     {{item.time_b_nome}}
                                 </p>
-                                <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                <p class="horario info-cupom">
+                                    {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
+                                </p>
+                                <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}" style="font-weight: bolder;">
                                     <span class="info-cupom">
                                         {{item.categoria_nome}}:
                                     </span>
@@ -189,6 +189,8 @@
                                     </span>
                                     <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                                 </p>
+                            </div>
+                            <div>
                                 <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO
                                     <span [ngClass]="resultadoClass(item)">
@@ -213,7 +215,7 @@
         </div>
     </ng-container>
     <div class="footer-container">
-        <div class="cupom" style="padding: 10px; margin-top: 10px; display: flex; justify-content: space-between;">
+        <div class="cupom" style="padding: 10px; display: flex; justify-content: space-between;">
             <div class="item" style="flex: 1;">
                 <p class="resultado">Resultado:</p>
                 <p class="aposta">Valor apostado:</p>
@@ -259,7 +261,7 @@
             <span class="dados-simulacao">{{ 'compartilhar_aposta.apostaNaoPodeSerEncerrada' | translate }}</span>
         </p>
     </div>
-    <div class="button-container" style="display: flex; flex-direction: row; justify-content: space-around;">
+    <div class="button-container">
         <ng-container *ngIf="!isShared">
             <button *ngIf="podeReutilizar(aposta)" class="secondary-btn btn" (click)="repetirAposta(aposta)"
                 [disabled]="simulando || repeating">
