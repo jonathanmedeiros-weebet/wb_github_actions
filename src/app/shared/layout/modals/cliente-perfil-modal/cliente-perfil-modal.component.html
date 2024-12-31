@@ -6,7 +6,7 @@
     <div class="botao-direito"></div>
 </div>
 <div class="modal-body">
-    <ng-container>
+    <ng-container *ngIf="!showLoading">
         <div class="content-body">
             <div class="content">
                 <form [formGroup]="form">
