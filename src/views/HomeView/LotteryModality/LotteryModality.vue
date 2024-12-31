@@ -162,7 +162,7 @@ export default {
         }
     },
     activated() {
-        this.loadPage();
+        this.loadPage(false);
     },
     mounted() {
         this.loadPage();
@@ -239,8 +239,8 @@ export default {
         isDisabled(number) {
             return !this.isSelected(number) && this.reachedTotalTens;
         },
-        async loadPage() {
-            this.loading = true;
+        async loadPage(loading = true) {
+            this.loading = loading;
             await this.getLotteryOptions();
             await this.getLotteryNumbers();
             this.loading = false;
