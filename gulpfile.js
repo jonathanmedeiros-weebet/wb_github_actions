@@ -284,10 +284,10 @@ gulp.task('bet4.wee.bet', function (done) {
     });
 });
 
-gulp.task('bet5.wee.bet', function (done) {
+gulp.task('totalsorte.com.br', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "bet5.wee.bet",
+        host: "totalsorte.com.br",
         banca: "Total Sorte",
         styles: ""
     });
@@ -1216,15 +1216,6 @@ gulp.task('81betpix.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "81betpix.wee.bet",
         banca: "81 BET PIX",
-        styles: "",
-    });
-});
-
-gulp.task('sportpix.vip', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "sportpix.vip",
-        banca: "SPORTPIX",
         styles: "",
     });
 });
@@ -2331,6 +2322,7 @@ gulp.task('fortunaplay.bet', function (done) {
         host: "fortunaplay.bet",
         banca: "FortunaPlay",
         styles: "",
+        xtremepush_sdk: "2ZwnVnh2kNB62WUkOAM2PSEMvRWf8Zhp"
     });
 });
 
@@ -2422,7 +2414,8 @@ gulp.task('apostefacil.bet', function (done) {
         host: "apostefacil.bet",
         banca: "APOSTE FÁCIL",
         styles: "",
-        xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS"
+        xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS",
+        scripts: "<script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key=198ddc72-f816-4130-b077-3e3bd265be1c'> </script>"
     });
 });
 
@@ -2505,6 +2498,24 @@ gulp.task('copasbet.bet', function (done) {
         server: "front3.wee.bet",
         host: "copasbet.bet",
         banca: "COPAS BET",
+        styles: "",
+    });
+});
+
+gulp.task('boasorte.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "boasorte.bet",
+        banca: "BOA SORTE",
+        styles: "",
+    });
+});
+
+gulp.task('eliteesportes.vip', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "eliteesportes.vip",
+        banca: "ELITE ESPORTES",
         styles: "",
     });
 });
