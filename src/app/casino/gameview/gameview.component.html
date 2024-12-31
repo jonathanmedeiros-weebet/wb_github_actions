@@ -43,11 +43,11 @@
                     <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                     <ng-container *ngIf="mobileScreen">
                         <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
-                        <iframe *ngIf="htmlGame != ''" #iframe [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)"></iframe>
+                        <iframe *ngIf="htmlGame != ''" [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)"></iframe>
                     </ng-container>
                     <ng-container *ngIf="!mobileScreen">
                         <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allow="fullscreen"></iframe>
-                        <iframe *ngIf="htmlGame != ''" #iframe [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)" allow="fullscreen"></iframe>
+                        <iframe *ngIf="htmlGame != ''" [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)" allow="fullscreen"></iframe>
                     </ng-container>
                 </div>
             </div>
@@ -133,11 +133,11 @@
                 <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
                 <ng-container *ngIf="mobileScreen">
                     <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
-                    <iframe *ngIf="htmlGameUrl != ''" #iframe [srcdoc]="htmlGameUrl" (load)="onIframeLoad(iframe)"></iframe>
+                    <iframe *ngIf="htmlGame != ''" [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)"></iframe>
                 </ng-container>
                 <ng-container *ngIf="!mobileScreen">
                     <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
-                    <iframe *ngIf="htmlGameUrl != ''" #iframe [srcdoc]="htmlGameUrl" (load)="onIframeLoad(iframe)" allowfullscreen></iframe>
+                    <iframe *ngIf="htmlGame != ''" [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)" allowfullscreen></iframe>
                 </ng-container>
             </div>
 
