@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { config } from '../config';
 import { HttpClient } from '@angular/common/http';
 import { HeadersService } from './utils/headers.service';
+
 export interface Geolocation {
     error: boolean;
     lat: number;
@@ -10,16 +11,17 @@ export interface Geolocation {
 
 export interface ReverseGeolocation {
     error: boolean;
-    ibge_code: string;
-    city: string;
-    state: string;
-    country: string;
+    codigo_ibge: string;
+    cidade: string;
+    estado: string;
+    pais: string;
 }
 
 @Injectable({
     providedIn: 'root'
 })
 export class GeolocationService {
+
     private Estados = [
         { nome: 'Acre', codigo: 12 },
         { nome: 'Alagoas', codigo: 27 },
@@ -60,10 +62,17 @@ export class GeolocationService {
 
     constructor(private http: HttpClient, private header: HeadersService) { }
 
-    async getGeolocation(): Promise<Geolocation> {
+    async getGeolocation(isReverse = true): Promise<Geolocation> {
         try {
-            return await this.getCurrentPosition() as Geolocation;
+            if (this.requestOnGoing) return; // Avoid multiple requests
+            this.requestOnGoing = isReverse ? true : false;
+            let currentPosition = await this.getCurrentPosition() as Geolocation;
+
+            if (isReverse) this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
+
+            return currentPosition;
         } catch (error) {
+            this.requestOnGoing = false;
             return {
                 error: true,
                 lat: 0,
@@ -77,24 +86,22 @@ export class GeolocationService {
             let latlng = {
                 latlng: `${lat},${lng}`
             }
-
             this.http.post(`${this.central_url}/reverseGeolocation`, latlng, this.header.getRequestOptions(true)).subscribe({
                 next: (res: ReverseGeolocation) => {
                     this.requestOnGoing = false;
-                    sessionStorage.setItem('ibge_code', res.ibge_code ?? null);
-                    sessionStorage.setItem('locale_city', res.city ?? null);
-                    sessionStorage.setItem('locale_state', res.state ?? null);
-                    sessionStorage.setItem('locale_country', res.country == 'Brasil' || res.country == 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
+                    sessionStorage.setItem('codigo_ibge', res.codigo_ibge ?? null);
+                    sessionStorage.setItem('cidade', res.cidade ?? null);
+                    sessionStorage.setItem('estado', res.estado ?? null);
+                    sessionStorage.setItem('pais', res.pais == 'Brasil' || res.pais == 'Brazil' ? 'Brasil' : `Internacional - ${res.pais}`);
                     return res;
                 },
                 error: () => {
                     this.requestOnGoing = false;
                     return {
                         error: true,
-                        ibge_code: '',
-                        city: '',
-                        state: '',
-                        country: ''
+                        codigo_ibge: '',
+                        cidade: '',
+                        estado: ''
                     };
                 }
             });
@@ -102,23 +109,23 @@ export class GeolocationService {
             this.requestOnGoing = false;
             return {
                 error: true,
-                ibge_code: '',
-                city: '',
-                state: '',
-                country: ''
+                codigo_ibge: '',
+                cidade: '',
+                estado: '',
+                pais: ''
             }
         }
     }
 
-    public getCurrentPosition(): Promise<Geolocation> {
+    private getCurrentPosition() {
         return new Promise((resolve, reject) => {
             try {
                 if (!navigator.geolocation) throw new Error('Geolocation not allowed.');
 
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        if (!position) throw new Error('Unable to find current position');
-
+                        if (!position) throw new Error('Unable to find current position')
+    
                         resolve({
                             error: false,
                             lat: position.coords.latitude,
@@ -126,8 +133,9 @@ export class GeolocationService {
                         });
                     },
                     (error) => {
-                        reject(error);
-                    }
+                        throw error
+                    },
+                    this.options
                 );
             } catch (error) {
                 reject(error)
@@ -136,30 +144,30 @@ export class GeolocationService {
     }
 
     public checkGeolocation(): Boolean {
-        const ibgeCode = (sessionStorage.getItem('ibge_code') === 'null' || sessionStorage.getItem('ibge_code') === 'undefined') ? null : sessionStorage.getItem('ibge_code');
-        const localeCity = (sessionStorage.getItem('locale_city') === 'null' || sessionStorage.getItem('locale_city') === 'undefined') ? null : sessionStorage.getItem('locale_city');
-        const localeState = (sessionStorage.getItem('locale_state') === 'null' || sessionStorage.getItem('locale_state') === 'undefined') ? null : sessionStorage.getItem('locale_state');
-        const localeCountry = (sessionStorage.getItem('locale_country') === 'null' || sessionStorage.getItem('locale_country') === 'undefined') ? null : sessionStorage.getItem('locale_country');
+        const codigoIbge = (sessionStorage.getItem('codigo_ibge') === 'null' || sessionStorage.getItem('codigo_ibge') === 'undefined') ? null : sessionStorage.getItem('codigo_ibge');
+        const cidade = (sessionStorage.getItem('cidade') === 'null' || sessionStorage.getItem('cidade') === 'undefined') ? null : sessionStorage.getItem('cidade');
+        const estado = (sessionStorage.getItem('estado') === 'null' || sessionStorage.getItem('estado') === 'undefined') ? null : sessionStorage.getItem('estado');
+        const pais = (sessionStorage.getItem('pais') === 'null' || sessionStorage.getItem('pais') === 'undefined') ? null : sessionStorage.getItem('pais');
 
-        if (localeCountry != 'Brasil' && localeCountry != 'Brazil') {
+        if (pais != 'Brasil' && pais != 'Brazil') {
             return false;
         }
 
-        if (!ibgeCode || !localeCity || !localeState) {
+        if (!codigoIbge || !cidade || !estado) {
             return false;
         }
         // Check if the IBGE code is valid. Ref: https://medium.com/@salibi/como-validar-o-c%C3%B3digo-de-munic%C3%ADpio-do-ibge-90dc545cc533;
-        const digito1 = parseInt(ibgeCode[0]);
-        const digito2 = (parseInt(ibgeCode[1]) * 2) % 10 + Math.floor((parseInt(ibgeCode[1]) * 2) / 10);
-        const digito3 = parseInt(ibgeCode[2]);
-        const digito4 = (parseInt(ibgeCode[3]) * 2) % 10 + Math.floor((parseInt(ibgeCode[3]) * 2) / 10);
-        const digito5 = parseInt(ibgeCode[4]);
-        const digito6 = (parseInt(ibgeCode[5]) * 2) % 10 + Math.floor((parseInt(ibgeCode[5]) * 2) / 10);
-        const digitoVerificador = parseInt(ibgeCode[6]);
+        const digito1 = parseInt(codigoIbge[0]);
+        const digito2 = (parseInt(codigoIbge[1]) * 2) % 10 + Math.floor((parseInt(codigoIbge[1]) * 2) / 10);
+        const digito3 = parseInt(codigoIbge[2]);
+        const digito4 = (parseInt(codigoIbge[3]) * 2) % 10 + Math.floor((parseInt(codigoIbge[3]) * 2) / 10);
+        const digito5 = parseInt(codigoIbge[4]);
+        const digito6 = (parseInt(codigoIbge[5]) * 2) % 10 + Math.floor((parseInt(codigoIbge[5]) * 2) / 10);
+        const digitoVerificador = parseInt(codigoIbge[6]);
         const digit = (10 - (digito1 + digito2 + digito3 + digito4 + digito5 + digito6) % 10) % 10;
-        const estadoValido = this.Estados.find((e) => e.codigo === parseInt(ibgeCode.substring(0, 2)));
+        const estadoValido = this.Estados.find((e) => e.codigo === parseInt(codigoIbge.substring(0, 2)));
 
-        if (digitoVerificador == digit && estadoValido.nome == localeState) {
+        if (digitoVerificador == digit && estadoValido.nome == estado) {
             return true;
         } else {
             return false;
@@ -167,11 +175,11 @@ export class GeolocationService {
     }
 
     public isInternational(): Boolean {
-        const localeCountry = (sessionStorage.getItem('locale_country') === 'null' || sessionStorage.getItem('locale_country') === 'undefined') ? null : sessionStorage.getItem('locale_country');
+        const pais = (sessionStorage.getItem('pais') === 'null' || sessionStorage.getItem('pais') === 'undefined') ? null : sessionStorage.getItem('pais');
 
-        if (localeCountry == null || localeCountry == 'Brasil' || localeCountry == 'Brazil') {
+        if (pais == null || pais == 'Brasil' || pais == 'Brazil') {
             return false;
-        }
+        } 
         return true;
     }
 }
