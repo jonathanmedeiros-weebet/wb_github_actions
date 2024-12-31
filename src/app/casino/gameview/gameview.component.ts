@@ -443,12 +443,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
-                    if(response.loss_limit.loss_hit && response.loss_limit.error){
-                        this.showModal(response.loss_limit.message);
+                    if(response.loss_limit?.loss_hit && response.loss_limit?.error){
+                        this.showModal(response.loss_limit?.message);
                         this.router.navigate(['/']);
                     }
-                    if (!response.loss_limit.loss_hit && response.loss_limit.error ) {
-                        this.showModalPercentage(response.loss_limit.message);
+                    if (!response.loss_limit?.loss_hit && response.loss_limit?.error ) {
+                        this.showModalPercentage(response.loss_limit?.message);
                     }
 
 
@@ -463,6 +463,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                             this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         } else {
                             this.htmlGame = response.htmlGame;
+                            console.log(this.htmlGame)
                         }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
