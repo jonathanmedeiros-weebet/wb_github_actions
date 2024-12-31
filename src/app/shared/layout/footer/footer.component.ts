@@ -8,6 +8,7 @@ import {ParametrosLocaisService} from '../../services/parametros-locais.service'
 import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { CartaoCadastroModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../modals';
+import { pwaInstallHandler } from 'pwa-install-handler';
 
 declare let anj_cd823ed6_bffb_4764_9e1b_05566f369c8c: any;
 
@@ -48,6 +49,8 @@ export class FooterComponent implements OnInit, AfterViewInit {
     slug: string;
     sharedUrl: string;
     linkYoutube;
+    isToTopBtnVisible;
+    displayPwaInstallButton = false;
 
     constructor(
         private authService: AuthService,
@@ -57,6 +60,8 @@ export class FooterComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit() {
+        pwaInstallHandler.addListener((canInstall) => this.displayPwaInstallButton = canInstall);
+
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
         this.hasApiPagamentos = Boolean(this.paramsLocais.getOpcoes().available_payment_methods.length);
@@ -73,7 +78,6 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.exibirLinkAfiliado = this.paramsLocais.getOpcoes().exibir_link_afiliado;
         this.slug = config.SLUG;
         this.sharedUrl = config.SHARED_URL;
-
         this.linkTwitter = this.paramsLocais.getOpcoes().linkTwitter;
         this.linkTikTok = this.paramsLocais.getOpcoes().linkTikTok;
         this.linkTelegram = this.paramsLocais.getOpcoes().linkTelegram;
@@ -128,6 +132,28 @@ export class FooterComponent implements OnInit, AfterViewInit {
         if (appendReclameAqui) {
             this.appendReclameAqui(reclameAquiDataId);
         }
+
+        this.container.addEventListener('scroll', this.onScroll.bind(this));
+        const observer = new MutationObserver(() => {
+            const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
+            if (bilheteContainer && !this.isMobile) {
+                const toTopElement = document.querySelector('.toTop') as HTMLElement;
+                if (toTopElement) {
+                    toTopElement.style.right = `calc(20px + ${bilheteContainer.clientWidth}px)`;
+                }
+            }
+        });
+    
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+    
+    onScroll() {
+        const target = this.container;
+        this.isToTopBtnVisible = target.scrollTop > 50;
+    }
+    
+    scrollToTop() {
+        this.container.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     appendReclameAqui(dataId: string) {
@@ -233,5 +259,9 @@ export class FooterComponent implements OnInit, AfterViewInit {
         }
 
         return cssClass;
+    }
+
+    installPwa() {
+        pwaInstallHandler.install();
     }
 }

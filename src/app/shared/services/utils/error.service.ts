@@ -44,7 +44,7 @@ export class ErrorService {
         array['code'] = error.error.errors.code;
         array['message'] = error.error.errors.message;
 
-        if (error.error.errors.user) {
+        if (error.error.errors.user){
             array['user'] = error.error.errors.user;
         } else {
             array['user'] = null;

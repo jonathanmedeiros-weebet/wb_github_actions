@@ -1,0 +1,16 @@
+.actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#legitimuz-action-verify {
+    margin-top: 15px;
+}
+
+#legitimuz {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}

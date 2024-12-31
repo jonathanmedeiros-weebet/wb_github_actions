@@ -107,3 +107,7 @@
     cursor: pointer;
     padding: 10px;
 }
+
+#verify-identity-text{
+    margin-bottom: 15px;
+}

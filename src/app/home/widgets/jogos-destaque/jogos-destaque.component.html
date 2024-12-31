@@ -37,7 +37,7 @@
         <owl-carousel-o [options]="customOptions" (dragging)="isDragging = $event.dragging;" #owlCar>
             <ng-container *ngFor="let jogoDestaque of jogosDestaque">
                 <ng-template carouselSlide [id]="jogoDestaque.fi" [width]="widthCard">
-                    <div class="jogo-destaque">
+                    <div class="jogo-destaque" style="cursor: pointer;" (click)="maisCotacoes(jogoDestaque._id)">
                         <div class="header">
                             <span class="campeonato-nome" [title]="jogoDestaque.campeonato?.nome">
                                 <span *ngIf="jogoDestaque.campeonato?.regiao && sportbook == 'lsports'">

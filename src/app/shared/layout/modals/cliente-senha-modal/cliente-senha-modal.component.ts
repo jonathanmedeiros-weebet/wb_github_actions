@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService, ClienteService, MessageService, ParametrosLocaisService} from 'src/app/services';
@@ -7,13 +7,21 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {PasswordValidation} from 'src/app/shared/utils';
 import { MultifactorConfirmationModalComponent } from '../multifactor-confirmation-modal/multifactor-confirmation-modal.component';
+import { Cliente } from 'src/app/shared/models/clientes/cliente';
+import { TranslateService } from '@ngx-translate/core';
+import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
+import { FaceMatchService } from 'src/app/shared/services/face-match.service';
+import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
 
 @Component({
     selector: 'app-cliente-senha-modal',
     templateUrl: './cliente-senha-modal.component.html',
     styleUrls: ['./cliente-senha-modal.component.css']
 })
-export class ClienteSenhaModalComponent extends BaseFormComponent implements OnInit {
+export class ClienteSenhaModalComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentChecked {
+    @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
+    @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
+
     public isCollapsed: boolean = false;
     private unsub$ = new Subject();
 
@@ -24,6 +32,16 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
     private tokenMultifator: string;
     private codigoMultifator: string;
 
+    currentLanguage = 'pt';
+    cliente: Cliente;
+    faceMatchEnabled = false;
+    faceMatchChangePassword = false;
+    faceMatchChangePasswordValidated = false;
+    legitimuzToken = "";
+    verifiedIdentity = null;
+    disapprovedIdentity = false;
+    showLoading = true;
+
     constructor(
         private fb: UntypedFormBuilder,
         private clienteService: ClienteService,
@@ -31,7 +49,12 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
         private auth: AuthService,
         private activeModal: NgbActiveModal,
         private modalService: NgbModal,
-        private paramsLocais: ParametrosLocaisService
+        private paramsLocais: ParametrosLocaisService,
+        private cd : ChangeDetectorRef,
+        private translate : TranslateService,
+        private legitimuzService : LegitimuzService,
+        private LegitimuzFacialService: LegitimuzFacialService,
+        private faceMatchService: FaceMatchService
     ) {
         super();
     }
@@ -48,8 +71,96 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
         return Boolean(this.paramsLocais.getOpcoes()?.enable_two_factor_in_profile_change);
     }
 
+    ngAfterContentChecked(): void {
+        this.cd.detectChanges();
+    }
+
     ngOnInit() {
+        this.currentLanguage = this.translate.currentLang;
+        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+        if (!this.faceMatchEnabled) {
+            this.faceMatchChangePasswordValidated = true;
+        }
+        this.translate.onLangChange.subscribe(change => {
+            this.currentLanguage = change.lang;
+            if (this.faceMatchEnabled) {
+                this.legitimuzService.changeLang(change.lang);
+            }
+        });
         this.createForm();
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.clienteService.getCliente(user.id)
+            .subscribe(
+                res => {
+                    this.cliente = res;
+                    this.verifiedIdentity = res.verifiedIdentity;
+                    this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+                    this.showLoading = false;
+                    this.cd.detectChanges();
+                },
+                error => {
+                    this.handleError(error);
+                }
+
+            );
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuzService.curCustomerIsVerified
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(curCustomerIsVerified => {
+                    this.verifiedIdentity = curCustomerIsVerified;
+                    if (this.verifiedIdentity) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
+                            next: (res) => {
+                                this.LegitimuzFacialService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchChangePasswordValidated = true;
+                                this.cd.detectChanges();
+                            }, error: (error) => {
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchChangePasswordValidated = false;
+                            }
+                        })
+                    }
+                });
+            this.LegitimuzFacialService.faceIndex
+                .pipe(takeUntil(this.unsub$))
+                .subscribe(faceIndex => {
+                    if (faceIndex) {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
+                            next: (res) => {
+                                this.LegitimuzFacialService.closeModal();
+                                this.messageService.success(this.translate.instant('face_match.verified_identity'));
+                                this.faceMatchChangePasswordValidated = true;
+                                this.cd.detectChanges();
+                            }, error: (error) => {
+                                this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
+                                this.faceMatchChangePasswordValidated = false;
+                            }
+                        })
+                    }
+                })
+        }
+    }
+
+    ngAfterViewInit() {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+            this.legitimuz.changes
+                .subscribe(() => {
+                    this.legitimuzService.init();
+                    this.legitimuzService.mount();
+                });
+            this.legitimuzLiveness.changes
+                .subscribe(() => {
+                    this.LegitimuzFacialService.init();
+                    this.LegitimuzFacialService.mount();
+                });
+        }
+    }
+
+    ngOnDestroy() {
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     createForm() {
@@ -89,6 +200,7 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
                 .subscribe(
                     res => {
                         this.form.reset();
+                        this.activeModal.dismiss();
                         this.handleSuccess();
                     },
                     error => this.handleError(error)

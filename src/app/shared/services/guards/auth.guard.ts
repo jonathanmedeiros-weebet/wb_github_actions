@@ -19,9 +19,16 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-        if(!this.auth.isLoggedIn() && exceptionRouteAuthGuard.includes(state.url)) {
+        if (this.auth.isExpired()) {
+            this.auth.performLogout('expired session').subscribe();
+            return false;
+        }
+
+        const cleanUrl = state.url.split('?')[0];
+
+        if (!this.auth.isLoggedIn() && exceptionRouteAuthGuard.includes(cleanUrl)) {
             const isLogged = await this.requestLogin();
-            if(isLogged) {
+            if (isLogged) {
                 location.reload();
                 return true;
             }
@@ -44,8 +51,7 @@ export class AuthGuard implements CanActivate {
                 centered: true,
                 windowClass: 'modal-550 modal-h-350 modal-login',
             });
-
-            modalRef.result.then((isLogged: boolean) => resolve(isLogged));
+            modalRef.result.then((isLogged: boolean) => resolve(isLogged))
         });
     }
 }

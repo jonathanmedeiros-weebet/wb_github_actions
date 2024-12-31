@@ -1,0 +1,30 @@
+<div class="wee-pagination">
+    <button
+        class="wee-pagination__button wee-pagination__button--back"
+        [disabled]="currentPage === 1"
+        (click)="goToPrevious()">
+        &#8592;
+        {{ prevText }}
+    </button>
+
+    <div class="wee-pagination__group-buttons">
+        <ng-container *ngFor="let page of pages">
+            <button
+                *ngIf="page !== '...'"
+                class="wee-pagination__button"
+                [ngClass]="{'wee-pagination__button--active': page === currentPage}"
+                (click)="changePage(page)">
+                {{ page }}
+            </button>
+            <span *ngIf="page === '...'" class="wee-pagination__dots">...</span>
+        </ng-container>
+    </div>
+
+    <button
+        class="wee-pagination__button wee-pagination__button--advance"
+        [disabled]="currentPage === totalPages"
+        (click)="goToNext()">
+        {{ nextText }}
+        &#8594;
+    </button>
+</div>

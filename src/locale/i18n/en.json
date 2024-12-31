@@ -47,6 +47,7 @@
         "saldo": "Balance",
         "minhaConta": "My Account",
         "salvar": "Save",
+        "salvando": "Saving",
         "cancelar": "Cancel",
         "fechar": "Close",
         "todos": "All",
@@ -118,7 +119,7 @@
         "jogo": "Game",
         "dataDeEncerramento": "Closing date",
         "configuracoes": "Settings",
-        "versao": "Version",
+            "versao": "Version",
         "solicitarDeposidto": "Request Deposit",
         "liberarCredito": "Release Credit",
         "bonus": "Bonus",
@@ -142,6 +143,10 @@
         "bairro": "Neighborhood",
         "estado": "State",
         "cidade": "City",
+        "numero": "Number",
+        "genero": "Gender",
+        "nacionalidade": "Nationality",
+        "documentoIdentificacao": "Identification document (Nacional ID or passport)",
         "selecione": "Select",
         "selecioneACidade": "Select the city",
         "atualizar": "Update",
@@ -196,7 +201,7 @@
         "resultadosFutebol": "Football Results",
         "resultadosLoterias": "Lottery Results",
         "contato": "Contact",
-        "requisitosSenha": "Password must have at least 6 characters.",
+        "requisitosSenha": "Password must have at least 8 characters.",
         "nomeJogoCassino": "Game",
         "apostouEmAs": "{{apostador}} bet on {{data}} at {{hora}}",
         "historicoDeApostas": "Betting History",
@@ -250,15 +255,42 @@
         "alteracoesSucesso": "Changes made successfully!",
         "erroInesperado": "Something unexpected happened. Please try again later.",
         "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
+        "bonusCancelado": "Bonus canceled",
+        "aguardando": "Pending",
+        "resetarSenha": "Password reset",
         "loginEmail": "Email",
         "loginPhone": "Phone",
         "loginUsername": "Username",
         "field": "Field",
-        "or": "OR"
+        "or": "OR",
+        "geolocationError": "Please check your browser's location settings and try again.",
+        "restricaoDeLocalizacao": "This feature is available only to users in Brazil.",
+        "lastAccesses": "Last accesses",
+        "action": "Action",
+        "tax": "Tax",
+        "validatePhone": "Phone Verification",
+        "savedSuccessfully":  "Saved successfully!",
+        "successfullyDeleted": "Successfully deleted!",
+        "vpn": "We have detected that you are accessing our website through a VPN. To ensure the security and integrity of the platform, we kindly ask you to disable the VPN or use a standard connection to proceed. If you believe this is an error, please contact support.",
+        "logoutGeolocationErrorMessage": "You have been logged out for security reasons. We detected an abrupt change in your location that would be physically impossible to occur within the recorded time frame. If this was not caused by you, we recommend verifying your account.",
+        "logoutGeolocationErrorTitle": "Access Interrupted: Inconsistent Location",
+        "logoutGeolocationErrorButtonLabel": "Close"
+    },
+    "bankAccounts": {
+        "title" : "Cuentas bancarias",
+        "Bank":"Bank",
+        "OptionBank": "Select the bank",
+        "AgencyNumber": "Agency number",
+        "AccountNumber": "Account number",
+        "AccountType": "Account type",
+        "CurrentAccount": "Current account",
+        "SavingsAccount": "Savings account",
+        "optionAccountType":"Select account type"
     },
     "bet": {
         "sportsBetting": "Sports betting",
-        "casinoBetting": "Casino betting"
+        "casinoBetting": "Casino betting",
+        "incomeTaxOnPrize": "Income tax on prize"
     },
     "dias": {
         "ontem": "Yesterday",
@@ -351,7 +383,8 @@
         "virtuais": "Virtuals",
         "aoVivo": "Live Casino",
         "bingo": "Bingo",
-        "news": "News"
+        "news": "News",
+        "jogosRelacionados": "Related games"
     },
     "cartoes": {
         "titulo": "Cards",
@@ -377,7 +410,11 @@
         "reenviaCodigoDeVerificacao": "Resend Verification Code",
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
-        "digiteSuaSenha": "Type your password"
+        "digiteSuaSenha": "Type your password",
+        "minimumCharactersPassword": "Minimum 8 characters",
+        "lowercaseLetter": "Minimum of one lowercase letter",
+        "uppercaseLetter": "Minimum of one uppercase letter",
+        "specialChar": "Minimum of one special character (!, @, #, $, %, &, *)"
     },
     "saques": {
         "enterAmountWithdrawal": "Enter the amount for the withdrawal",
@@ -400,7 +437,7 @@
         "dailyMaximum": "Daily maximum",
         "monthlyMaximum": "Monthly maximum",
         "identityVerify": "Verify identity",
-        "identityVerifyNeeded": "To proceed with the withdrawal, it will be necessary to perform identity verification beforehand.",
+        "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
         "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support."
     },
     "ativacaoEmail": {
@@ -428,9 +465,11 @@
         "soliciteEntrandoEmContatoCom": "Request a deposit by contacting us via Whatsapp: {{whatsapp}}",
         "depositosRecentes": "Recent deposits",
         "depositDetails": "Deposit details",
-        "depositText": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, select whether you want to receive the {{bonusType}}, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
-        "depositTextWithoutBonus": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
-        "depositTextWithoutBonusAndPromocode": "To make a deposit via {{paymentMethod}}, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment."
+        "depositText": "To make a deposit via PIX, enter the desired deposit amount in the field below, select whether you want to receive the {{bonusType}}, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
+        "depositTextWithoutBonus": "To make a deposit via PIX, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
+        "depositTextWithoutBonusAndPromocode": "To make a deposit via PIX, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
+        "copyCode": "Copy code",
+        "copied": "Copied!"
     },
     "footer": {
         "afiliados": "Partnership",
@@ -440,12 +479,14 @@
         "metodosDePagamento": "Payment methods",
         "quemSomos": "Who we are",
         "downloadApp": "Download app",
+        "installPwa": "Install Client APP",
         "regras": "Rules",
         "resultados": "Results",
         "politicaDePrivacidade": "Privacy Policy",
         "politicaAml": "AML Policy",
         "jogoResponsavel": "Responsible Gaming",
         "termosECondicoes": "Terms and conditions",
+        "feedback": "Feedback",
         "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. All rights reserved."
     },
     "paginas": {
@@ -508,7 +549,10 @@
         "valorMaximoSaqueMensal" : "Maximum monthly withdrawal amount",
         "receberBonusCassino": "Receive Bonus - Casino",
         "transactions": "Transactions",
-        "paymentGateway": "Payment gateway"
+        "paymentGateway": "Payment gateway",
+        "balance": "Balance",
+        "previousBalance": "Previous balance",
+        "subsequentBalance": "Subsequent balance"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
@@ -598,13 +642,16 @@
         "dezembro": "December"
     },
     "placeholders": {
-        "selecione_uma_opcao": "Select an option"
+        "selecione_uma_opcao": "Select an option",
+        "opcao_desabilitado": "Disabled"
     },
     "botoes": {
         "aceitar": "Accept",
         "entendi": "Got it",
         "salvar_alteracoes": "Save Changes",
-        "voltar": "Back"
+        "voltar": "Back",
+        "logout_continue_login": "Yes, I would like to close the session",
+        "remain_active_session": "No, keep the other session active"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -618,6 +665,13 @@
             "definir_limite_diario": "Set daily betting limit",
             "definir_limite_semanal": "Set weekly betting limit",
             "definir_limite_mensal": "Set monthly betting limit"
+        },
+        "limite_perdas": {
+            "titulo": "Loss limit",
+            "descricao": "The loss limit setting is a feature that allows you to set a maximum amount of losses you can have during a given period of time (daily, weekly and monthly). This setting is an important tool in promoting responsible gambling, helping control how much you are willing to lose, preventing excessive losses from affecting your budget and financial well-being. Once the established loss limit is reached, you will not be able to continue playing until the next defined period counted as a termination loss.",
+            "definir_limite_diario": "Set daily loss limit",
+            "definir_limite_semanal": "Set weekly loss limit",
+            "definir_limite_mensal": "Set monthly loss limit"
         },
         "limite_depositos": {
             "titulo": "Deposit Limit",
@@ -641,24 +695,46 @@
         },
         "exclusao_conta": {
             "titulo": "Account Exclusion",
-            "descricao": "Permanently deleting the account is an action that results in the complete removal of the account and all associated information, irreversibly. This includes personal data, betting history, and access to the platform. By permanently deleting the account, you will end your participation on the site definitively, with no possibility of recovering the account or its information in the future.",
-            "descricao_2": "Additionally, we emphasize that this action will also result in the impossibility of creating a new account on the platform.",
-            "informe_motivo": "Inform the reason why you want to permanently delete your account:",
+            "descricao": "Deleting the account is an action that results in the complete removal of the account and all information associated with it, irreversibly. This includes personal data, betting history, and access to the platform. By deleting the account, you will terminate your participation on the site permanently, with no possibility of recovering the account or its information in the future.",
+            "descricao_2": "Additionally, we emphasize that this action will also make it impossible to create a new account on the platform if the permanent period is chosen.",
+            "exclusionPeriodLabel": "Inform how long you want to delete your account for:",
+            "3months": "3 months",
+            "6months": "6 months",
+            "12months": "12 months",
+            "24months": "24 months",
+            "36months": "36 months",
+            "48months": "48 months",
+            "60months": "60 months",
+            "permanently": "Permanently",
+            "periodIsMissing": "The deletion period has not been selected.",
+            "informe_motivo": "Inform the reason why you want to delete your account:",
             "motivo_1": "A second account was created",
             "motivo_2": "It takes up too much of my time/attention",
             "motivo_3": "I am no longer interested in betting on this site",
             "motivo_4": "I am no longer using this account",
             "motivo_5": "Issues using the system",
             "motivo_6": "Other reasons",
-            "digite_para_continuar": "Type \"<b>PERMANENTLY DELETE</b>\" to confirm the deletion action.",
+            "digite_para_continuar": "Type \"<b>DELETE ACCOUNT</b>\" to confirm the deletion action.",
+            "exclusionConfirmationError": "Type exactly the phrase \"DELETE ACCOUNT\" to confirm the account deletion.",
             "explique_motivo": "Explain why you are deleting the account...",
-            "excluir_conta": "Permanently delete account"
+            "excluir_conta": "Delete account"
         },
         "temporizador_sessao": {
             "titulo": "Session Timer",
             "descricao": "The session timer is a setting that allows you to set a time limit for platform usage. It helps control the time spent, alerting you when the limit is reached and automatically ending your session, promoting balanced and conscious use. For example, you can choose to limit your sessions to 30 minutes, 1 hour, or any other suitable interval for you, and also disable this feature as desired. When the session time limit is reached, our system will automatically end your session and log you out of your account. This helps ensure that you respect your predefined time limits.",
             "definir_tempo": "Set session time",
             "desativado": "Disabled"
+        },
+        "limite_tempo_atividade": {
+            "titulo": "Time limit",
+            "descricao": "The time limit setting allows you to set a maximum time to play. This setting helps you control the time you spend, preventing overuse and promoting a healthy gaming experience. You can set a daily limit. When the stipulated time is reached, a warning will appear informing you that the limit has been reached, helping to ensure breaks and avoid prolonged use.",
+            "definir_limite_diario": "Set a daily time limit",
+            "30minutos": "30 minutes",
+            "45minutos": "45 minutes",
+            "1hora": "1 hour",
+            "2horas": "2 hours",
+            "3horas": "3 hours",
+            "4horas": "4 hours"
         }
     },
     "rodada_gratis":{
@@ -680,6 +756,11 @@
         "redeemed": "Redeemed",
         "redeem": "Redeem"
     },
+    "face_match": {
+        "label": "Face Match",
+        "verified_identity": "Verified identity!",
+        "Identity_not_verified": "Identity not verified, please contact support."
+    },
     "register": {
         "signupWith": "Sign up with Google",
         "registerGoogleAccount": "Sign up with your google account",
@@ -697,5 +778,10 @@
         "youreAlmostThere": "You're almost there! Register and deposit now and experience the best of entertainment in the palm of your hand.",
         "continue": "Continue",
         "cancel": "Yes, I want to cancel"
+    },
+    "genero": {
+        "masculino": "Masculine",
+        "feminino": "Feminine",
+        "outros": "Others"
     }
 }

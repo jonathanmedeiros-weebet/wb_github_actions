@@ -6,7 +6,7 @@
 
 .modal-dialog {
     max-width: 600px;
-  }
+}
 
 .modal-header {
     border-bottom-color: var(--foreground);
@@ -83,7 +83,7 @@ asl-google-signin-button {
 
 .showPassword {
     position: absolute;
-    top: calc(50% - 16px);;
+    top: calc(50% - 16px);
     right: 0;
     color: var(--foreground-inputs-odds);
     cursor: pointer;
@@ -141,11 +141,11 @@ asl-google-signin-button {
     opacity: 0;
 }
 
-.login-mode input[type="radio"]:checked + .radio-custom {
+.login-mode input[type="radio"]:checked+.radio-custom {
     border-color: var(--highlight);
 }
 
-.login-mode input[type="radio"]:checked + .radio-custom::after {
+.login-mode input[type="radio"]:checked+.radio-custom::after {
     opacity: 1;
 }
 
@@ -168,5 +168,145 @@ asl-google-signin-button {
 
     .modal-body .modal-body-content {
         flex: 1;
+    }
+}
+
+
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-header {
+    border-bottom-color: var(--foreground);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.modal-title {
+    color: #ffff;
+    font-family: 'Open Sans', 'sans-serif';
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.modal-content {
+    background-color: var(--background);
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.modal-dialog {
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-body-custom {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Open Sans';
+    font-weight: 400;
+    font-size: 13px;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-footer-he {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100%;
+}
+
+button {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.btn-custom {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.5);
+    border: none;
+    margin-top: 20px;
+    width: 80%;
+}
+
+.btn-terminate {
+    width: 80%;
+}
+
+.close-modal {
+    border-radius: 100%;
+    position: absolute;
+    display: flex;
+    top: 4px;
+    right: 5px;
+    cursor: pointer;
+    padding-top: 3px;
+    padding-right: 5px;
+}
+
+.close-modal i {
+    margin: 10px;
+    color: var(--highlight);
+    font-size: 22px;
+}
+
+.modal-body {
+    min-height: fit-content;
+    transition: height 1s ease-out;
+}
+
+.container-loader {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+        radial-gradient(farthest-side, var(--foreground) 94%, #0000) top/8px 8px no-repeat,
+        conic-gradient(#0000 30%, var(--foreground));
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+    animation: l13 1s infinite linear;
+}
+
+@keyframes l13 {
+    100% {
+        transform: rotate(1turn)
     }
 }

@@ -17,6 +17,8 @@ export class BilheteEsportivoService {
     openBilhete = this.openBilheteSource.asObservable();
     private idJogoSource = new BehaviorSubject(0);
     idJogo = this.idJogoSource.asObservable();
+    private sportIdSource = new BehaviorSubject(0);
+    sportId = this.sportIdSource.asObservable();
 
     constructor(
         private menuFooterService: MenuFooterService,
@@ -59,5 +61,9 @@ export class BilheteEsportivoService {
 
     sendId(idJogo) {
         this.idJogoSource.next(idJogo)
+    }
+
+    setSportId(id:number) {
+        this.sportIdSource.next(id);
     }
 }

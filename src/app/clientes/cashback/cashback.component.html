@@ -57,48 +57,53 @@
                     <button class="btn btn-custom" type="submit">{{'geral.filtrar' | translate}}</button>
                 </div>
             </form>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="200">{{'cashback.description' | translate}}</th>
-                            <th width="200">{{'cashback.registrationDate' | translate}}</th>
-                            <th width="200">{{'geral.status' | translate}} </th>
-                            <th width="80" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
-                            <th width="30"></th>
-                        </tr>
-                    </thead>
-                    <tr *ngIf="loading">
-                        <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
-                            {{'geral.carregando' | translate}}
-                        </td>
-                    </tr>
-                    <tbody *ngIf="!loading">
-                        <tr *ngFor="let cashback of cashbacks">
-                            <td>Cashback ({{cashback.accrual}})</td>
-                            <td>{{cashback.registrationDate}}</td>
-                            <td>
-                                {{translateStatus(cashback.status)}}
-                            </td>
-                            <td
-                                [ngStyle]="{
-                                    'text-align': 'right',
-                                    'color': setAmountColor(cashback.status)
-                                }"
-                            >{{ cashback.value | currency }}<br><span [ngStyle]="{'color': '#6A6868'}">({{ translateType(cashback.cashback_type) }})</span></td>
-                            <td id="td-btn-redeem" [ngStyle]="{'text-align': 'center'}">
-                                <button
-                                    id="btn-redeem"
-                                    class="btn btn-custom"
-                                    type="button"
-                                    [disabled]="cashback.status != 'pending'"
-                                    (click)="cashback.status == 'pending' ? redeemCashback(cashback.id) : false"
-                                    >{{'cashback.redeem' | translate}}</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div *ngIf="!cashbacks.length" class="alert alert-warning text-center margin-top-15" role="alert">
+                Nenhum cashback foi encontrado nesse período.
             </div>
+            <div *ngIf="cashbacks.length > 0">
+                <div class="table-responsive only-desktop">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="200">{{'cashback.description' | translate}}</th>
+                                <th width="200">{{'cashback.registrationDate' | translate}}</th>
+                                <th width="200">{{'geral.status' | translate}} </th>
+                                <th width="80" [ngStyle]="{'text-align': 'right'}">{{'geral.valor' | translate}} </th>
+                                <th width="30"></th>
+                            </tr>
+                        </thead>
+                        <tr *ngIf="loading">
+                            <td colspan="8" class="no-border" align="center"><i class="fa fa-spinner fa-spin"></i>
+                                {{'geral.carregando' | translate}}
+                            </td>
+                        </tr>
+                        <tbody *ngIf="!loading">
+                            <tr *ngFor="let cashback of cashbacks">
+                                <td>Cashback ({{cashback.accrual}})</td>
+                                <td>{{cashback.registrationDate}}</td>
+                                <td>
+                                    {{translateStatus(cashback.status)}}
+                                </td>
+                                <td
+                                    [ngStyle]="{
+                                        'text-align': 'right',
+                                        'color': setAmountColor(cashback.status)
+                                    }"
+                                >{{ cashback.value | currency }}<br><span [ngStyle]="{'color': '#6A6868'}">({{ translateType(cashback.cashback_type) }})</span></td>
+                                <td id="td-btn-redeem" [ngStyle]="{'text-align': 'center'}">
+                                    <button
+                                        id="btn-redeem"
+                                        class="btn btn-custom"
+                                        type="button"
+                                        [disabled]="cashback.status != 'pending'"
+                                        (click)="cashback.status == 'pending' ? redeemCashback(cashback.id) : false"
+                                        >{{'cashback.redeem' | translate}}</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>            
         </div>
     </div>
 </div>

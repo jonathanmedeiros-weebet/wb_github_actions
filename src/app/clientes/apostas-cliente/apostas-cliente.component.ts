@@ -13,6 +13,7 @@ import { AuthService } from '../../services'
 import { config } from '../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
 import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
+import {Ga4Service, EventGa4Types} from '../../shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-apostas-cliente',
@@ -32,11 +33,14 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     loteriaPopularHabilitada;
     rifaHabilitada;
     activeId = 'esporte';
+    tabs;
     paginaPrincipal: string;
 
     showLoading = true;
     showLoadingModal = true;
     encerramentoPermitido;
+
+    hasBonus = true;
 
     modalRef;
     unsub$ = new Subject();
@@ -44,6 +48,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
     totais = {
         valor: 0,
         premio: 0,
+        valorBonus: 0,
+        premioBonus: 0,
     };
 
     loading = false;
@@ -85,7 +91,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         public activeModal: NgbActiveModal,
         private auth: AuthService,
         private translate: TranslateService,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private ga4Service: Ga4Service
     ) {
         super();
 
@@ -124,6 +131,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             this.tabSelected = this.paginaPrincipal;
         }
+        this.tabs = this.getTabs();
 
         this.getApostas();
 
@@ -247,19 +255,33 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
 
         this.totais.valor = 0;
         this.totais.premio = 0;
+        this.totais.valorBonus = 0;
+        this.totais.premioBonus = 0;
 
         response.forEach(aposta => {
+           
             if (!aposta.cartao_aposta) {
-                this.totais.valor += aposta.valor;
-                if (aposta.tipo === 'loteria') {
-                    aposta.itens.forEach(lotteryItem => {
-                        if (lotteryItem.status === 'ganhou') {
-                            this.totais.premio += lotteryItem.premio;
+                if(aposta.rollover_status != 'cancelado'){
+                    if (aposta.is_bonus == 0) { 
+                        this.totais.valor += parseFloat(aposta.valor);
+                    } else {
+                        this.totais.valorBonus += parseFloat(aposta.valor);
+                    }
+                    
+                    if (aposta.tipo === 'loteria') {
+                        aposta.itens.forEach(lotteryItem => {
+                            if (lotteryItem.status === 'ganhou') {
+                                this.totais.premio += lotteryItem.premio;
+                            }
+                        });
+                    } else {
+                        if (aposta.resultado === 'ganhou') {
+                            if (aposta.is_bonus == 0){
+                                this.totais.premio += aposta.premio;
+                            } else {
+                                this.totais.premioBonus += aposta.premio;
+                            }
                         }
-                    });
-                } else {
-                    if (aposta.resultado === 'ganhou') {
-                        this.totais.premio += aposta.premio;
                     }
                 }
             }
@@ -302,15 +324,19 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             resultado = aposta.resultado;
         }
-
-        switch (resultado) {
-            case 'ganhou':
-                return 'green';
-            case 'perdeu':
-                return 'red';
-            default:
-                return 'default';
+        if (aposta.rollover_status != 'cancelado') {
+            switch (resultado) {
+                case 'ganhou':
+                    return 'green';
+                case 'perdeu':
+                    return 'red';
+                default:
+                    return 'default';
+            }
+        } else {
+            return 'red';
         }
+        
     }
 
     onDateSelection(date: NgbDate, datepicker: any) {
@@ -403,6 +429,8 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                 },
                 error => this.handleError(error)
             );
+
+            this.ga4Service.triggerGa4Event(EventGa4Types.VIEW_CART);
     }
 
     formateDate(data) {
