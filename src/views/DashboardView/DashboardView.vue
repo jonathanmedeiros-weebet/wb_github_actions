@@ -62,7 +62,7 @@ import IconCalendar from '@/components/icons/IconCalendar.vue'
 import CardMovementDashboard from './parts/CardMovementDashboard.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
 import ModalFilterDate from './parts/ModalFilterDate.vue'
-import { getCashFlow, getFinancial, listMovements } from '@/services'
+import { getCashFlow, listMovements, detailedReport } from '@/services'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums'
 import { useConfigClient, useToastStore } from '@/stores'
@@ -146,8 +146,8 @@ export default {
         handleFluxo() {
             this.showModalChart = false;
         },
-        handleReloadEntry() {
-            this.fetchFinancial();
+        async handleReloadEntry() {
+            this.fetchDetailedReport();
         },
         handleOpenModalFilterDate() {
             this.showModalFilterDate = true;
@@ -183,25 +183,61 @@ export default {
                     })
                 });
         },
-        async fetchFinancial(){ 
-            getFinancial()
+        async fetchDetailedReport(){ 
+            const { firstDayOfTheWeek } = useConfigClient();
+            const params = {
+                periodoDe: firstDayOfTheWeek.format('YYYY-MM-DD'),
+                periodoAte: now().format('YYYY-MM-DD')
+            }
+            detailedReport(params)
                 .then(resp => {
-                    this.entryData.categories = [];
-                    for (let [title, value] of Object.entries(resp)) {
-                        if(title !== 'saldo') {
-                            this.entryData.categories.push({
-                                title: title,
-                                value: parseFloat(value ?? 0)
-                            });
-                        }else{
-                            this.entryData.balance = parseFloat(value);
-                        }
-                        
+                    const { options } = useConfigClient();
+                    const dataCategorias = [];
+
+                    if (options.esporte) {
+                        dataCategorias.push({
+                            title: "esporte",
+                            value: parseFloat(resp?.esporte.apostado_normal ?? 0)
+                        });
                     }
+                    if (options.aovivo) {
+                        dataCategorias.push({
+                            title: "aovivo",
+                            value: parseFloat(resp?.esporte.aovivo ?? 0)
+                        });
+                    }
+                    if (options.desafio) {
+                        dataCategorias.push({
+                            title: "desafio",
+                            value: parseFloat(resp?.desafio.apostado ?? 0)
+                        });
+                    }
+                    if (options.acumuladao) {
+                        dataCategorias.push({
+                            title: "acumuladao",
+                            value: parseFloat(resp?.acumuladao.apostado ?? 0)
+                        });
+                    }
+                    if (options.loterias) {
+                        dataCategorias.push({
+                            title: "loteria",
+                            value: parseFloat(resp?.loteria.apostado ?? 0)
+                        });
+                    }
+                    if (options.cartao_aposta) {
+                        dataCategorias.push({
+                            title: "cartao_aposta",
+                            value: parseFloat(resp?.cartao ?? 0)
+                        });
+                    }
+
+                    this.entryData.categories = [];
+                    this.entryData.categories = dataCategorias;
+                    this.entryData.balance = parseFloat(resp?.total_entradas ?? 0)
                 })
                 .catch(error => {
                     this.toastStore.setToastConfig({
-                        message: error.errors.message,
+                        message: error.errors?.message ?? 'Erro inesperado',
                         type: ToastType.DANGER,
                         duration: 5000
                     })
@@ -252,8 +288,8 @@ export default {
     },
     activated() {
         this.fetchDataCashFlow();
-        this.fetchFinancial();
         this.fetchhMoviments();
+        this.fetchDetailedReport();
     }
 }
 </script>
