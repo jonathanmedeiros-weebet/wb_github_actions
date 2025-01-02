@@ -500,7 +500,8 @@
         "politica-privacidade": "Política de privacidade",
         "politica-aml": "Política AML",
         "jogo-responsavel": "Jogo responsável",
-        "termos-condicoes": "Termos e condições"
+        "termos-condicoes": "Termos e condições",
+        "termos-afiliados": "Termos de Uso (Afiliados)"
     },
     "jogos": {
         "tempoCompleto": "Tempo Completo",
@@ -656,7 +657,8 @@
         "salvar_alteracoes": "Salvar Alterações",
         "voltar": "Voltar",
         "logout_continue_login": "Sim, gostaria de encerrar a sessão",
-        "remain_active_session": "Não, continuar com a outra sessão"
+        "remain_active_session": "Não, continuar com a outra sessão",
+         "save_pdf": "Baixar PDF"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
