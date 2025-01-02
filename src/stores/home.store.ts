@@ -32,6 +32,12 @@ export const useHomeStore = defineStore('home', {
         },
         setDate(date: any) {
             this.date = date;
+        },
+        setSelectedSearch(selectedSearch: any) {
+            this.selectedSearch = selectedSearch;
+        },
+        setInSearch(inSearch: any) {
+            this.inSearch = inSearch;
         }
     },
 })

@@ -8,7 +8,7 @@ export const getModalitiesEnum = () => {
     switch (sportbook) {
         case 'betsapi':
             return ModalitiesBetsApi;
-        case 'lsport':
+        case 'lsports':
             return ModalitiesLSport;
         default:
             return ModalitiesBetsApi;
@@ -97,6 +97,12 @@ export const modalityList = (): ModalityOption[] => {
             show: Boolean(options.loteriaPopular) && !popularLotteryDeprecatedByAndroidVersion,
             hasLive: false
         },
+        {
+            name: 'Loteria',
+            id: Modalities.LOTTERY,
+            show: Boolean(options.loterias),
+            hasLive: false
+        }
     ];
 
     return modalities.filter(modality => modality.show);
@@ -121,4 +127,23 @@ export const modalityOdds = () => {
         [Modalities.ACCUMULATION]: [],
         [Modalities.CHALLENGE]: [],
     }
+}
+
+export const modalitiesBetList = () => {
+    const { lotteryEnabled, sportEnabled } = useConfigClient();
+
+    const Modalities = [
+        {
+            name: 'Esporte',
+            id: 1,
+            active: sportEnabled
+        },
+        {
+            name: 'Loteria',
+            id: 2,
+            active: lotteryEnabled
+        }
+    ]
+
+    return Modalities.filter(modality => modality.active);
 }
