@@ -44,6 +44,7 @@ import { CashbackComponent } from 'src/app/clientes/cashback/cashback.component'
 import { ListBankAccountsComponent } from '../list-bank-accounts/list-bank-accounts.component';
 import { LastAccessesModalComponent } from '../modals/last-accesses-modal/last-accesses-modal.component';
 import { OnboardingModalComponent } from '../modals/onboarding-modal/onboarding-modal.component';
+import { RegisterModalComponentComponent } from '../modals/register-modal/register-modal-component/register-modal-component.component';
 
 declare var xtremepush: any;
 
@@ -134,6 +135,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     sportsIsActive = false;
     sportsLiveIsActive = false;
+
+    registerGoogleAccount = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -456,16 +459,29 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirCadastro() {
-        this.modalRef = this.modalService.open(
-            OnboardingModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente',
-                backdrop: 'static'
-            }
-        );
+        if (this.registerGoogleAccount) {
+            this.modalRef = this.modalService.open(
+                OnboardingModalComponent,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    size: 'md',
+                    centered: true,
+                    windowClass: 'modal-500 modal-cadastro-cliente',
+                    backdrop: 'static'
+                }
+            );
+        } else {
+            this.modalRef = this.modalService.open(
+                RegisterModalComponentComponent,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    size: 'md',
+                    centered: true,
+                    windowClass: 'modal-500 modal-cadastro-cliente',
+                    backdrop: 'static'
+                }
+            );
+        }
     }
 
     abrirLogin() {

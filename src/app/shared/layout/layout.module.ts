@@ -114,6 +114,7 @@ import { LoginDataComponent } from './modals/register-modal/parts/login-data/log
 import { NavigationBarComponent } from './modals/register-modal/parts/navigation-bar/navigation-bar.component';
 import { OnboardingModalComponent } from './modals/onboarding-modal/onboarding-modal.component';
 import { StepperProgressBarComponent } from './modals/register-modal/parts/stepper-progress-bar/stepper-progress-bar.component';
+import { PersonalDataComponent } from './modals/register-modal/parts/personal-data/personal-data.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -223,6 +224,7 @@ import { StepperProgressBarComponent } from './modals/register-modal/parts/stepp
         RegisterModalComponentComponent,
         AddressDataComponent,
         LoginDataComponent,
+        PersonalDataComponent,
         NavigationBarComponent,
         OnboardingModalComponent,
         StepperProgressBarComponent,

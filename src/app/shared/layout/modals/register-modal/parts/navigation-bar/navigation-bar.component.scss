@@ -1,0 +1,33 @@
+.footer-register{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 108px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #0BE68D;
+    background: #181818;
+    color: #0BE68D;
+    outline: none;;
+}
+
+.active-button {
+    border-radius: 4px;
+    border: 1px solid #0BE68D;
+    background: #181818;
+    color: #0BE68D;
+}
+
+button:disabled {
+    background: var(--header);
+    color: rgba(255, 255, 255, 0.70);
+    border: none;
+    cursor: not-allowed;
+}

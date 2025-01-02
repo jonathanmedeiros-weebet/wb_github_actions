@@ -1,1 +1,12 @@
-<p>navigation-bar works!</p>
+<div class="footer-register">
+    <button [ngClass]="{'active-button': currentIndex === 0}"
+        [disabled]="currentIndex === 0"
+        (click)="previous()">
+        Anterior
+    </button>
+    <button [ngClass]="{'active-button': currentIndex ===  totalSteps - 1}"
+        [disabled]="currentIndex === totalSteps - 1"
+        (click)="next()">
+        Próximo
+    </button>
+</div>
