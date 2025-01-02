@@ -131,17 +131,25 @@ export default {
         },
     },
     methods: {
+        async initSocket() {
+            try {
+                await this.socket.connect();
+            } catch (error) {
+                console.error(error);
+            }
+        },
         async prepareGameDetail() {
             try {
                 const gameId = String(this.$route.params.id);
                 this.game = await getGame(gameId);
 
                 if(this.game.ao_vivo) {
-                    await this.socket.connect();
+                    await this.initSocket();
                     this.socket.enterEventRoom(this.game._id);
                     this.behaviorLiveEvent(this.game._id);
                 }
             } catch (error) {
+                console.error(error);
                 this.$router.back();
             }
         },
@@ -151,8 +159,6 @@ export default {
                 ? this.game.cotacoes_aovivo ?? []
                 : this.game.cotacoes ?? [];
             
-                console.log(quotes)
-
             const markets = {
                 [MarketTime.FULL_TIME]: {},
                 [MarketTime.FIRST_TIME]: {},
@@ -294,11 +300,10 @@ export default {
             this.toastStore.setToastConfig({ message: '' });
         }
     },
-    destroyed() {
-        if(this.socket.connected()) {
-            this.socket.exitEventRoom(this.game._id);
-            this.socket.disconnect();
-        }
+    
+    deactivated() {
+        this.socket.exitEventRoom(this.game._id);
+        this.socket.disconnect();
     }
 }
 </script>

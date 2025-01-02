@@ -21,22 +21,19 @@
             <IconClose class="bet__icon-close" @click="removeItem(item.id)"/>
           </div>
           <div class="bet__info">
-            <span class="bet__date">{{ item.jogo_horario }}</span>
+            <span class="bet__date">{{ formatDateTimeBR(item.jogo_horario) }}</span>
           </div>
           <div class="bet__text">
-            <span>{{ item.ao_vivo ? 'Resultado Final' : 'Para ganhar' }}</span>
+            <span>{{ item.categoria_nome }}</span>
           </div>
-          <div class="bet__result">
-            <span>{{ item.categoria_nome }} : {{ getNameTypeBet(item.aposta_tipo.chave) }}</span>
-            <template v-if="!item.mensagem">
-              <span v-if="item.cotacao_antiga == item.cotacao_atual">{{ item.cotacao_antiga }}</span>
-              <template v-else>
-                <span>{{ item.cotacao_atual }}<span class="bet__text--danger"> {{ item.cotacao_antiga }}</span> </span>
-              </template>
+          <div class="bet__result" :class="{ 'bet__result--border': (item.cotacao_antiga != item.cotacao_atual)}">
+            <span>{{ getNameTypeBet(item.aposta_tipo.chave) }}</span>
+           
+            <span v-if="item.cotacao_antiga == item.cotacao_atual">{{ item.cotacao_antiga.toFixed(2) }}</span>
+            <template v-else>
+              <span>{{ item.cotacao_atual.toFixed(2) }}<span class="bet__text--previous-quote"> ({{ item.cotacao_antiga.toFixed(2) }})</span> </span>
             </template>
-          </div>
-          <div class="bet__text--danger" v-if="item.mensagem">
-            <span>{{ item.mensagem }}</span>
+ 
           </div>
         </div>
         <div class="finish">
@@ -127,7 +124,7 @@ import WButton from '@/components/Button.vue';
 import IconUserLine from '@/components/icons/IconUserLine.vue'
 import { getPreBetByCode } from '@/services/preBet.service';
 import { useConfigClient, useToastStore } from '@/stores';
-import { delay, formatCurrency } from '@/utilities';
+import { delay, formatCurrency, formatDateTimeBR } from '@/utilities';
 import IconWarning from '@/components/icons/IconWarning.vue';
 import { createBetSport } from '@/services';
 import Toast from '@/components/Toast.vue';
@@ -177,6 +174,7 @@ export default {
     this.fetchData();
   },
   methods: {
+    formatDateTimeBR,
     getNameTypeBet(key){
       return this.betOptions[key] ? this.betOptions[key].nome : '';
     },
@@ -192,8 +190,6 @@ export default {
 
           this.betItems.forEach(item => {
               if (item.ao_vivo) live = true;
-
-              if (item.mensagem) this.buttonDisabled = true;
 
               if (item.cotacao_antiga != item.cotacao_atual) {
                 this.hasDifferentOdds = true;
@@ -451,12 +447,22 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
+
+    &--border {
+      border: 1px solid var(--highlight);
+      padding: 5px;
+    }
   }
 
   &__text {
     &--danger {
       color: #ff0000;
       color: var(--color-danger);
+    }
+
+    &--previous-quote {
+      text-decoration: line-through;
+      padding-left: 5px;
     }
   }
 }

@@ -1,5 +1,5 @@
 import { LocalStorageKey, localStorageService } from "@/services";
-import { getAndroidVersion } from "@/utilities";
+import { getAndroidVersion, now } from "@/utilities";
 import { defineStore } from "pinia"
 
 interface ConfigClient {
@@ -63,6 +63,11 @@ export const useConfigClient = defineStore('configClient', {
       return Boolean(configClient) ? configClient.host : _host
     },
     options: (state) => state.params?.opcoes ?? null,
+    sportEnabled: (state) => state.params?.opcoes?.esporte ?? false,
+    lotteryEnabled: (state) => state.params?.opcoes?.loterias ?? false,
+    maxLotteryValue: (state) => state.params?.opcoes?.valor_max_premio_loterias,
+    getSenaName: (state) => state.params?.opcoes?.seninha_nome ?? null,
+    getQuinaName: (state) => state.params?.opcoes?.quininha_nome ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
     mainOdds: (state) => state.params?.odds_principais ?? [],
     popularLeagues: (state) => state.params?.ligas_populares ?? [],
@@ -94,6 +99,20 @@ export const useConfigClient = defineStore('configClient', {
       } catch (error) {
         void error;
         return false; 
+      }
+    },
+    firstDayOfTheWeek: () => {
+      const currentDate = now();
+      const isSunday = currentDate.day() == 0;
+      if(isSunday) {
+        return currentDate
+          .startOf('week')
+          .subtract(1, 'week')
+          .add(1, 'days');
+      } else {
+        return currentDate
+          .startOf('week')
+          .add(1, 'days');
       }
     }
   },

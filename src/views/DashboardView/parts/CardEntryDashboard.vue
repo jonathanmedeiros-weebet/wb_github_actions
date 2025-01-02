@@ -108,7 +108,6 @@ export default {
             };
 
             if(!this.data.categories.length) return [];
-            console.log(this.data.categories)
             return this.data.categories.map((category) => ({
                 ...category,
                 label: labelTransformed[category.title]

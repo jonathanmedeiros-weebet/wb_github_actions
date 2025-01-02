@@ -117,8 +117,6 @@ export default {
         const weekday = date.format('ddd').toLowerCase();
         const weekIndex = weekdays[weekday];
         
-        console.log(maxDate.format('YYYY-MM-DD'))
-        console.log(date.format('YYYY-MM-DD'))
         const disabled = maxDate && maxDate.format('YYYY-MM-DD') < date.format('YYYY-MM-DD') ? true : false; 
         week[weekIndex] = { day: dateNumber, disabled };
 

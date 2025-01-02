@@ -4,6 +4,16 @@
     <div class="bets__container">
       
       <div class="bets__contente">
+        <div class="bets__modalities">
+        <label class="bet__modalities-label">Modalidade</label>
+        <SelectFake
+         titleSize="medium"
+         @click="handleOpenModalitiesModal"
+        >
+          {{ modality.name }}
+        </SelectFake>
+      </div>
+
         <w-input
           id="inputApostador"
           label="Apostador"
@@ -116,11 +126,11 @@
                     <td class="table__line--left">Comissão:</td>
                     <td class="table__line--right">R$ {{ formatCurrencyMoney(bet.comissao) }}</td>
                   </tr>
-                  <tr>
+                  <tr v-if="bet.tipo !== 'loteria'">
                     <td class="table__line--left">Prêmio:</td>
                     <td class="table__line--right">R$ {{ formatCurrencyMoney(bet.premio) }}</td>
                   </tr>
-                  <tr>
+                  <tr v-if="bet.tipo !== 'loteria'">
                     <td class="table__line--left">Status:</td>
                     <td 
                       class="table__line--right"
@@ -129,7 +139,7 @@
                       {{ capitalizeFirstLetter(bet.resultado) }}
                     </td>
                   </tr>
-                  <tr>
+                  <tr v-if="bet.tipo !== 'loteria'">
                     <td class="table__line--left">Pagamento:</td>
                     <td class="table__line--right">
                       <span v-if="Boolean(bet.status_pagamento)">{{ capitalizeFirstLetter(bet.status_pagamento) }}</span>
@@ -174,7 +184,7 @@
                   value="finish"
                   name="finish"
                   class="button--secondary"
-                  v-if="bet.pago === false && ['cambista', 'todos'].includes(options.permitir_encerrar_aposta) && canClose(bet)"
+                  v-if="bet.pago === false && ['cambista', 'todos'].includes(options.permitir_encerrar_aposta) && canClose(bet) && bet.tipo !== 'loteria'"
                   @click="goToTickets(bet, 'close')"
                 />
               </div>
@@ -258,6 +268,14 @@
         @change="handleCalendar"
       />
 
+      <ModalModalities
+        v-if="showModalModalities"
+        :modalityId="modality.id"
+        @closeModal="handleCloseModalitiesModal"
+        @click="handleModality"
+        :isBetsModality="true"
+      /> 
+
     </div>
   </div>
 </template>
@@ -276,6 +294,9 @@ import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums';
 import scrollMixin from '@/mixins/scroll.mixin'
+import SelectFake from '../HomeView/parts/SelectFake.vue'
+import { findLotteryBets, getLotteryBetsByType, getLotteryDraw } from '@/services/lottery.service'
+import ModalModalities from '../HomeView/parts/ModalModalities.vue'
 
 export default {
   name: 'bets',
@@ -288,7 +309,9 @@ export default {
     CardBets,
     TagButton,
     ModalCalendar,
-    Toast
+    Toast,
+    SelectFake,
+    ModalModalities
   },
   data() {
     return {
@@ -297,7 +320,7 @@ export default {
       showModalPay: false,
       showResults: false,
       showModalCalendar: false,
-      dateFilter: now().startOf('week').add(1, 'days'),
+      dateFilter: null,
       finalDateFilter: now(),
       activeButton: 'todos',
       apostador: '',
@@ -319,8 +342,18 @@ export default {
       configClientStore: useConfigClient(),
       isLastBet: false,
       amountBets: 0,
-      rewardBets: 0
+      rewardBets: 0,
+      showModalModalities: false,
+      betModalityList: [
+        { name: 'Esporte', id: 1 },
+        { name: 'Loteria', id: 2 }
+      ],
+      modality: null
     }
+  },
+  created() {
+    this.dateFilter = this.configClientStore.firstDayOfTheWeek;
+    this.modality = this.betModalityList[0];
   },
   mounted() {
     this.options = this.configClientStore.options;
@@ -343,8 +376,26 @@ export default {
     showBettorName() {
       return !this.configClientStore.bettorDocumentNumberEnabled;
     },
+    betTypeOptions() {
+      const { sportEnabled, lotteryEnabled } = useConfigClient();
+
+      return [
+        sportEnabled ? { value: 'sport', text: 'Esporte' } : null,
+        lotteryEnabled ? { value: 'lottery', text: 'Loteria' } : null
+      ].filter(option => option !== null);
+    }
   },
   methods: {
+    handleOpenModalitiesModal() {
+      this.showModalModalities = !this.showModalModalities;
+    },
+    handleCloseModalitiesModal() {
+      this.showModalModalities = false;
+    },
+    handleModality(modalityId) {
+      this.modality = this.betModalityList.find(modality => modality.id === modalityId);
+      this.handleCloseModalitiesModal();
+    },
     capitalizeFirstLetter,
     handleOpenPayModal(bet){
       this.betSelected = bet;
@@ -411,15 +462,34 @@ export default {
       this.showResults = false;
 
       const params = { ...this.parametros };
-      findBet(params)
+
+      if (this.modality.name === 'Esporte') {
+        findBet(params)
+          .then(async (resp) => {
+            this.bets = resp.results;
+            await this.calculateBetInfo();
+            this.showResults = true;
+          })
+          .catch(error => {
+            this.toastStore.setToastConfig({
+              message: error.errors.message,
+              type: ToastType.DANGER,
+              duration: 5000
+            })
+          })
+
+          return;
+      }
+
+      findLotteryBets(params)
         .then(async (resp) => {
-          this.bets = resp.results;
+          this.bets = resp;
           await this.calculateBetInfo();
           this.showResults = true;
         })
         .catch(error => {
           this.toastStore.setToastConfig({
-            message: error.errors.message,
+            message: error.errors.message | 'Erro ao buscar apostas',
             type: ToastType.DANGER,
             duration: 5000
           })
@@ -557,6 +627,28 @@ export default {
   height: 100;
   padding-bottom: 100px;
   overflow-y: auto;
+
+  &__modalities {
+    display:  flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #181818;
+    border: 0.5px solid var(--foreground-inputs-odds);
+
+    &-label {
+      color: #ffffff;
+      color: var(--foreground-header);
+    }
+  }
+
+  &__modalities-modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 32px;
+    font-size: 16px;
+  }
 
   &__container {
     display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login__container">
-      <img class="login__image" :src="imageClient">
+      <img class="login__image" :src="imageClient" @error="changeSrcWhenImageError">
       <div class="login__header">
         <h1 class="login__title">Bem-vindo <img class="login__emogi" src="@/assets/images/hand.png"></h1>
         <p class="login__description">Insira seus dados para acessar o aplicativo </p>
@@ -99,6 +99,9 @@ export default {
           duration: 3000
         })
       }
+    },
+    changeSrcWhenImageError (event) {
+      event.target.src = 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png';
     }
   },
 }

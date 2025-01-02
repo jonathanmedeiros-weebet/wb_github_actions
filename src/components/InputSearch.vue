@@ -55,8 +55,8 @@ export default {
       this.forcusInInput();
     },
     handleInput(event) {
-      this.inputValue = event.target.value;  
-      this.$emit('input', event.target.value);  
+      this.inputValue = event?.target?.value ?? this.inputValue;  
+      this.$emit('input', this.inputValue);  
     },
     handleFocus() {
       this.isFocused = true;

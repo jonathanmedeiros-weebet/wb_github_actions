@@ -40,6 +40,33 @@
           </button>
         </div>
       </div>
+
+      <div class="more-options" v-if="showBetCardMenu">
+        <span class="more-options__text">Cartão</span>
+        <div class="more-options__card">
+          <button class="more-options__item" @click="handleOpenConsultCardModal">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Consultar</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/create-card')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Criar</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/list-cards')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Listagem</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/withdrawal')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Solicitações de saque</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/recharge-card')">
+            <IconCreditCard class="more-options__icon" />
+            <span class="more-options__text-icon">Recarga</span>
+          </button>
+        </div>
+      </div> 
+
       <div class="more-options">
         <span class="more-options__text">Mais opções</span>
         <div class="more-options__card">
@@ -59,6 +86,10 @@
             <IconFactCheck class="more-options__icon" />
             <span class="more-options__text-icon">Resultados</span>
           </button>
+          <button class="more-options__item" @click="handleNavigate('/table')">
+            <IconPrinter class="more-options__icon" color="var(--foreground-inputs-odds)" />
+            <span class="more-options__text-icon">Tabela</span>
+          </button>
           <button class="more-options__item" @click="handleLogout">
             <IconLogout class="more-options__icon" />
             <span class="more-options__text-icon">Sair</span>
@@ -71,6 +102,12 @@
       v-if="isConsultTicketModalVisible" 
       @close="handleCloseConsultTicketModal" 
       @consult="handleConsultTicket"
+    />
+    <ModalConsultCard
+      ref="modalConsultCard"
+      v-if="isConsultCardModalVisible" 
+      @close="handleCloseConsultCardModal" 
+      @consult="handleConsultCard"
     />
   </div>
 </template>
@@ -86,12 +123,15 @@ import IconFactCheck from '@/components/icons/IconFactCheck.vue';
 import IconManageSearch from '@/components/icons/IconManageSearch.vue';
 import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
-import { logout, getBetByCode, getFinancial, LocalStorageKey } from '@/services';
+import ModalConsultCard from './ModalConsultCard.vue';
+import { logout, getBetByCode, getFinancial, LocalStorageKey, consultCard } from '@/services';
 import { formatCurrency, wbPostMessage } from '@/utilities';
 import { localStorageService } from "@/services";
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
-import { useToastStore } from '@/stores';
+import { useConfigClient, useToastStore } from '@/stores';
+import IconCreditCard from '@/components/icons/IconCreditCard.vue';
+import IconPrinter from '@/components/icons/IconPrinter.vue';
 
 export default {
   name: 'userMenu',
@@ -105,7 +145,10 @@ export default {
     IconFactCheck,
     IconManageSearch,
     IconInsertChart,
+    IconCreditCard,
+    IconPrinter,
     ModalConsultTicket,
+    ModalConsultCard,
     Toast
   },
   data() {
@@ -115,11 +158,17 @@ export default {
       isCreditoVisible: false,
       isSaldoVisible: false,
       isConsultTicketModalVisible: false,
-      toastStore: useToastStore()
+      isConsultCardModalVisible: false,
+      configClientStore: useConfigClient(),
+      toastStore: useToastStore(),
+      userName: null
     };
   },
   activated() {
     this.getData();
+
+    const user = localStorageService.get(LocalStorageKey.USER);
+    this.userName = user ? user.nome : '';
   },
   computed: {
     balance() {
@@ -128,9 +177,8 @@ export default {
     credit() {
       return formatCurrency(Number(this.balanceData?.credito ?? 0));
     },
-    userName() {
-      const user = localStorageService.get(LocalStorageKey.USER);
-      return user ? user.nome : '';
+    showBetCardMenu() {
+      return this.configClientStore?.options?.cartao_aposta ?? false
     }
   },
   methods: {
@@ -152,6 +200,12 @@ export default {
     },
     handleCloseConsultTicketModal() {
       this.isConsultTicketModalVisible = false;
+    },
+    handleOpenConsultCardModal() {
+      this.isConsultCardModalVisible = true;
+    },
+    handleCloseConsultCardModal() {
+      this.isConsultCardModalVisible = false;
     },
     handlePrinterSetting() {
       wbPostMessage('listPrinters')
@@ -178,6 +232,27 @@ export default {
         }
       } catch (error) {
         this.handleCloseConsultTicketModal();
+        this.toastStore.setToastConfig({
+          message: error.errors.message,
+          type: ToastType.DANGER,
+          duration: 5000
+        });
+      }
+    },
+    async handleConsultCard(code,pin) {
+      try {
+        const resp = await consultCard(code,pin);
+        if(resp){
+          this.handleCloseConsultCardModal();
+          this.$router.push({ 
+            name: 'detailed-card',
+            params: {
+              code: code,
+              pin: pin,
+            }
+          });
+        }
+      } catch (error) {
         this.toastStore.setToastConfig({
           message: error.errors.message,
           type: ToastType.DANGER,
@@ -309,6 +384,7 @@ export default {
 .more-options {
   display: flex;
   flex-direction: column;
+  margin-top: 16px;
 
   &__text {
     color: #ffffff;

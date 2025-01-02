@@ -10,11 +10,10 @@ export const createLiveToken = async(payload: any) => {
 }
 
 export const sharedTicket = (aposta: any, file: any = null) => {
-    const { apiUrl, slug, options } = useConfigClient();
-    const host = apiUrl.replace('api/', '');
+    const { clientCenterUrl, slug, options } = useConfigClient();
 
     const url = (aposta.tipo === 'loteria')
-        ? `${host}/aposta/${aposta.codigo}`
+        ? `${clientCenterUrl}/aposta/${aposta.codigo}`
         : `https://${slug}/bilhete/${aposta.codigo}`;
 
     let message = `\r${options.banca_nome} \n\nSeu Bilhete: \n${url} \n`;
@@ -23,4 +22,11 @@ export const sharedTicket = (aposta: any, file: any = null) => {
     }
 
     wbPostMessage('shareURL', url, message, file)
+}
+
+export const getLogoTicket = async () => {
+    const { lokiUrl } = useConfigClient();
+    const url = `${lokiUrl}/ticket-logo`
+    const response: any = await axiosInstance().get(url);
+    return response.results;
 }

@@ -2,7 +2,7 @@
     <div class="bet-shared" ref="ticket">
         <div class="bet-shared__container">
             <div class="bet-shared__logo">
-                <!-- <img :src="logoImage" @error="changeSrcWhenImageError"> -->
+                <img v-if="logo" :src="logo">
             </div>
             <h1 class="bet-shared__code">
                 {{ betCode }}
@@ -69,7 +69,7 @@
                     </p>
                     <p class="bet-shared__result">
                         <span v-if="item?.removido">cancelado</span>
-                        <span v-if="!tem?.removido">{{ item.resultado }}</span>
+                        <span v-if="!item?.removido">{{ item.resultado }}</span>
                     </p>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 </p>
                 <p v-if="bet?.passador?.percentualPremio > 0" class="bet-shared__values-item">
                     <strong>CAMBISTA PAGA:</strong>
-                    <strong>{{ formatCurrency(cambistaPaga ?? 0) }}</strong>
+                    <strong>R$ {{ formatCurrency(cambistaPay ?? 0) }}</strong>
                 </p>
                 <hr>
                 <hr>
@@ -109,6 +109,7 @@
 </template>
   
 <script>
+    import { getLogoTicket } from '@/services';
     import { useConfigClient } from '@/stores';
     import { formatCurrency, formatDateTimeBR } from '@/utilities';
   
@@ -124,19 +125,27 @@
         },
         data() {
             return {
-                cambistaPaga: false
+                logo: null
             }
         },
-        activated() {
-            if (this.bet?.passador?.percentualPremio > 0) {
-                if (this.bet?.resultado) {
-                    this.cambistaPaga = this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100);
-                } else {
-                    this.cambistaPaga = this.bet?.possibilidade_ganho * ((100 - this.bet?.passador?.percentualPremio) / 100);
-                }
-            }
+        async created() {
+            getLogoTicket()
+                .then((imageBase64) => {
+                    if(imageBase64) {
+                        this.logo = `data:image/png;base64,${imageBase64}`
+                    }
+                })
+                .catch(() => this.logo = null);
         },
         computed: {
+            cambistaPay() {
+                if (this.bet?.passador?.percentualPremio > 0) {
+                    return this.bet?.resultado 
+                        ? this.bet?.premio * ((100 - this.bet?.passador?.percentualPremio) / 100)
+                        : this.bet?.possibilidade_ganho * ((100 - this.bet?.passador?.percentualPremio) / 100);
+                }
+                return 0;
+            },
             betCode() {
                 return this.bet?.codigo ?? '';
             },
@@ -154,10 +163,6 @@
             },
             betResult() {
                 return this.bet?.resultado ?? '';
-            },
-            logoImage() {
-                const { logo } = useConfigClient();
-                return logo ?? 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png';
             },
             betItens() {
                 return this.bet?.itens ?? [];
@@ -187,9 +192,6 @@
                     minimumFractionDigits: minFractionDigits,
                     maximumFractionDigits: maxFractionDigits
                 }).format(value);
-            },
-            changeSrcWhenImageError (event) {
-                event.target.src = 'https://weebet.s3.amazonaws.com/demo.wee.bet/logos/logo_banca.png';
             }
         }
     }

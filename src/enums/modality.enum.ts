@@ -12,6 +12,7 @@ export enum ModalitiesLSport {
     CHALLENGE = 'null1',
     ACCUMULATION = 'null2',
     POPULAR_LOTTERY = 'null3',
+    LOTTERY = 'nulll4'
 };
 
 export enum ModalitiesBetsApi {
@@ -20,7 +21,7 @@ export enum ModalitiesBetsApi {
     AMERICAN_FOOTBALL = 12,
     TENNIS = 13,
     ICE_HOCKEY = 17,
-    BASKETBALL = 18,
+    BASKETBALL = 48242, // lsports
     FUTSAL = 83,
     VOLLEYBALL = 91,
     TABLE_TENNIS = 92,
@@ -28,6 +29,7 @@ export enum ModalitiesBetsApi {
     CHALLENGE = 'null1',
     ACCUMULATION = 'null2',
     POPULAR_LOTTERY = 'null3',
+    LOTTERY = 'nulll4'
 };
 
 export type Modalities = ModalitiesBetsApi | ModalitiesLSport;

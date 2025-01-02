@@ -1,6 +1,5 @@
 <template>
     <div class="lottery">
-        <Header :title="title" :showBackButton="true" />
         <div class="lottery__fullscreen" >
             <icon-fullscreen @click="toggleFullscreen"/>
         </div>
@@ -17,7 +16,6 @@
 </template>
 
 <script>
-import Header from '@/components/layouts/Header.vue';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import { getGameUrlPopularLottery } from '@/services';
@@ -25,9 +23,8 @@ import { useConfigClient, useToastStore } from '@/stores';
 import IconFullscreen from '@/components/icons/IconFullscreen.vue';
 
 export default {
-    name: 'popular-lottery',
+    name: 'popular-lottery-modality',
     components: { 
-        Header,
         Toast,
         IconFullscreen
     },
@@ -41,27 +38,29 @@ export default {
         }
     },
     activated() {
-        if(this.options.loteriaPopular){
-            this.getGameUrl();
-            document.addEventListener('fullscreenchange', this.onFullScreenChange);
-        }else{
-            this.toastStore.setToastConfig({
-                message: 'Você não tem acesso a Loteria Popular',
-                type: ToastType.DANGER,
-                duration: 3000
-            })
-
-            this.$router.push({ name: 'home' });
-        }
+        this.loadPage();
     },
     beforeDestroy() {
         document.removeEventListener('fullscreenchange', this.onFullScreenChange);
     },
     methods: {
+        loadPage() {
+            if(this.options.loteriaPopular){
+                this.getGameUrl();
+                document.addEventListener('fullscreenchange', this.onFullScreenChange);
+            }else{
+                this.toastStore.setToastConfig({
+                    message: 'Você não tem acesso a Loteria Popular',
+                    type: ToastType.DANGER,
+                    duration: 3000
+                })
+
+                this.$router.push({ name: 'home' });
+            }
+        },
         async getGameUrl(){
             getGameUrlPopularLottery()
                 .then(resp => {
-                    console.log(resp);
                     this.gameUrl = resp.gameUrl;
                 })
                 .catch(error => {
@@ -128,7 +127,5 @@ export default {
     &__container {
         padding: 8px 1px;
     }
-
-   
 }
 </style>

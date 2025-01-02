@@ -25,7 +25,7 @@
 <script>
 import WModal from '@/components/Modal.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
-import { modalityList } from '@/constants';
+import { modalitiesBetList, modalityList } from '@/constants';
 
 export default {
     name: 'modal-modalities',
@@ -38,11 +38,18 @@ export default {
         isLive: {
             type: Boolean,
             default: false
+        },
+        isBetsModality: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
         return {
-            options: modalityList().map((modalitiy) => ({
+            options: !this.isBetsModality ? modalityList().map((modalitiy) => ({
+                ...modalitiy,
+                checked: modalitiy.id === this.modalityId
+            })) : modalitiesBetList().map((modalitiy) => ({
                 ...modalitiy,
                 checked: modalitiy.id === this.modalityId
             }))

@@ -76,7 +76,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 24px;
+    padding: 0 16px;
 
     width: 100%;
     height: 58px;
