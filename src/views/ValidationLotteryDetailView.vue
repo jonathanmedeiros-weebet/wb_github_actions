@@ -182,6 +182,7 @@ export default {
         async submit() {
             this.buttonDisabled = true;
             this.textButtonFinalizeBet = "Processando...";
+            
             const values = {};
             values.preaposta_codigo = this.bet.codigo;
             values.apostador = this.bettorName;
@@ -220,13 +221,15 @@ export default {
                     });
                 })
                 .catch(error => {
-                    this.buttonDisabled = false;
-                    this.textButtonFinalizeBet = "Finalizar aposta";
                     this.toastStore.setToastConfig({
                         message: error.errors?.message ?? 'Erro inesperado',
                         type: ToastType.DANGER,
                         duration: 5000
                     });
+                })
+                .finally(() => {
+                    this.buttonDisabled = false;
+                    this.textButtonFinalizeBet = "Finalizar aposta";
                 })
                 
             } else {
