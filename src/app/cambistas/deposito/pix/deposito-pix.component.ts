@@ -8,6 +8,7 @@ import {ParametrosLocaisService} from '../../../shared/services/parametros-locai
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var WeebetMessage: any;
 
@@ -44,7 +45,7 @@ declare var WeebetMessage: any;
 
         <div class="buttons">
             <button class="btn btn-custom2 btn-w-100" (click)="compartilhar()"><i class="fa fa-share"></i> Compartilhar QR Code</button>
-            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
+            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode" (click)="copyCode()"><i class="fa fa-copy"></i>{{ copyButtonText }}</button>
         </div>
     </div>
     `
@@ -58,6 +59,7 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
+    copyButtonText; 
     isAppMobile;
 
     constructor(
@@ -66,6 +68,7 @@ export class NgbdModalContent {
         private _helper: HelperService,
         private paramsLocais: ParametrosLocaisService,
         private domSanitizer: DomSanitizer,
+        private translate: TranslateService,
         private authService: AuthService,
         private messageService: MessageService
     ) {}
@@ -89,11 +92,19 @@ export class NgbdModalContent {
                 clearInterval(timer)
             }
         }, 1000);
+        
+        this.copyButtonText = this.translate.instant('deposito.copyCode');
         this.isAppMobile = this.authService.isAppMobile();
     }
 
-    copyCode(code) {
-        console.log('Copiado: ', code);
+    copyCode() {
+        this.translate.get('deposito.copied').subscribe((translatedText) => {
+            this.copyButtonText = translatedText; 
+
+            setTimeout(() => {
+                this.copyButtonText = this.translate.instant('deposito.copyCode');
+            }, 1000);
+        }); 
     }
 
     compartilhar() {

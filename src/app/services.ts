@@ -15,6 +15,7 @@ export * from './shared/services/parametros-locais.service';
 export * from './shared/services/relatorio.service';
 export * from './shared/services/financeiro.service';
 export * from './shared/services/home.service';
+export * from './shared/services/security.service';
 
 export * from './shared/services/loteria/aposta-loteria.service';
 export * from './shared/services/loteria/preaposta-loteria.service';

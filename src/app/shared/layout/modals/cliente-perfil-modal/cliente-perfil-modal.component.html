@@ -9,45 +9,36 @@
     <ng-container>
         <div class="content-body">
             <div class="content">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <form [formGroup]="form">
                     <div class="form-group input-md">
-                        <input id="nome" type="text" placeholder=" " formControlName="nome" class="form-control inverted-out" readonly>
-                        <label class="disabled" for="nome">{{'geral.nome' | translate}}</label>
+                        <input type="text" placeholder=" " formControlName="nome" class="form-control inverted-out" readonly>
+                        <label class="disabled">{{'geral.nome' | translate}}</label>
                     </div>
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="sobrenome" class="form-control inverted-out" readonly>
-                        <label class="disabled" for="nome">{{'geral.sobrenome' | translate}}</label>
+                        <label class="disabled">{{'geral.sobrenome' | translate}}</label>
                     </div>
 
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="cpf" mask="000.000.000-00" class="form-control inverted-out" readonly>
-                        <label class="disabled" for="nome">{{'geral.cpf' | translate}}</label>
+                        <label class="disabled">{{'geral.cpf' | translate}}</label>
                     </div>
 
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " class="form-control inverted-out" formControlName="nascimento" readonly>
-                        <label class="disabled" for="nome">{{'geral.dataDeNascimento' | translate}}</label>
+                        <label class="disabled">{{'geral.dataDeNascimento' | translate}}</label>
                     </div>
 
                     <h5>{{'geral.informacoesDeContato' | translate}}</h5>
-
+                    
                     <div class="form-group input-md">
-                        <input
-                            type="text"
-                            formControlName="telefone"
-                            placeholder="(00)00000-0000"
-                            mask="(00)00000-0000"
-                            class="form-control inverted-out"
-                            [dropSpecialCharacters]="false"
-                            [validation]="false"
-                        >
-                        <label for="nome">{{'geral.telefone' | translate}}</label>
-                        <app-error-msg [control]="form.get('telefone')"></app-error-msg>
+                        <input type="text" placeholder="(00)00000-0000" mask="(00) 00000-0000" formControlName="telefone" class="form-control inverted-out" readonly>
+                        <label class="disabled">{{'geral.telefone' | translate}}</label>
                     </div>
 
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="email" class="form-control inverted-out" readonly>
-                        <label class="disabled" for="nome">{{'geral.email' | translate}}</label>
+                        <label class="disabled">{{'geral.email' | translate}}</label>
                     </div>
 
                     <h5>{{'geral.endereco' | translate}}</h5>
@@ -61,56 +52,84 @@
                             class="form-control inverted-out"
                             [validation]="false"
                         >
-                        <label for="nome">{{'geral.cep' | translate}}</label>
+                        <label>{{'geral.cep' | translate}}</label>
                         <app-error-msg [control]="form.get('cep')"></app-error-msg>
                     </div>
 
-                    <div class="form-group input-md">
+                    <div class="form-group input-md placeholder-active">
                         <input type="text" placeholder="{{'geral.exLogradouro' | translate}}" formControlName="logradouro" class="form-control inverted-out">
-                        <label for="nome">{{'geral.logradouro' | translate}}</label>
+                        <label>{{'geral.logradouro' | translate}}</label>
                         <app-error-msg [control]="form.get('logradouro')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="numero" class="form-control inverted-out">
-                        <label for="nome">Nª</label>
+                        <label>Nª</label>
                         <app-error-msg [control]="form.get('numero')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
                         <input type="text" placeholder=" " formControlName="bairro" class="form-control inverted-out">
-                        <label for="nome">{{'geral.bairro' | translate}}</label>
+                        <label>{{'geral.bairro' | translate}}</label>
                         <app-error-msg [control]="form.get('bairro')"></app-error-msg>
                     </div>
 
-                    <div class="form-group input-md">
+                    <div class="form-group input-md placeholder-active">
                         <select formControlName="estado" type="text" class="form-control inverted-out"
                             (change)="getCidades($event)">
                             <option value="">{{'geral.selecione' | translate}}</option>
                             <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}
                             </option>
                         </select>
-                        <label for="nome">{{'geral.estado' | translate}}</label>
+                        <label>{{'geral.estado' | translate}}</label>
                         <app-error-msg [control]="form.get('estado')"></app-error-msg>
                     </div>
 
-                    <div class="form-group input-md">
+                    <div class="form-group input-md placeholder-active">
                         <select formControlName="cidade" class="form-control inverted-out">
                             <option value="">{{'geral.selecioneACidade' | translate}}</option>
                             <option *ngFor="let cidade of cidades" [value]="cidade.id"
                                 [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
                         </select>
-                        <label for="nome">{{'geral.cidade' | translate}}</label>
+                        <label>{{'geral.cidade' | translate}}</label>
                         <app-error-msg [control]="form.get('cidade')"></app-error-msg>
                     </div>
 
                     <div class="form-group input-md">
                         <input [type]="mostrarSenha ? 'text' : 'password'" placeholder=" " formControlName="senha_atual" class="form-control inverted-out">
-                        <label for="nome">{{'senhas.senhaAtual' | translate}}</label>
+                        <label>{{'senhas.senhaAtual' | translate}}</label>
                         <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'" (click)="mostrarSenha = !mostrarSenha"></i>
                         <app-error-msg [control]="form.get('senha_atual')"></app-error-msg>
                     </div>
-
+                    <div *ngIf="faceMatchEnabled">
+                        <h5 id="faceMatch">{{'face_match.label' | translate}}</h5>
+                        <div #legitimuz id="legitimuz-container" *ngIf="faceMatchEnabled && !verifiedIdentity">
+                            <div id="legitimuz">
+                                <div id="verify-identity-text">
+                                    {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                                </div>
+                                <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                                <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
+                                    <i class="fa-solid fa-id-card"></i>
+                                    {{'saques.identityVerify' | translate}}
+                                </button>
+                            </div>
+                            <div id="legitimuz-root"></div>
+                        </div>
+                        <div #legitimuzLiveness id="legitimuz-container" *ngIf="faceMatchEnabled && verifiedIdentity">
+                            <div id="legitimuz">
+                                <div id="verify-identity-text">
+                                    {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                                </div>
+                                <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="cliente.cpf"/>
+                                <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity" [disabled]="faceMatchProfileEdit">
+                                    <i class="fa-solid fa-id-card"></i>
+                                    {{'saques.identityVerify' | translate}}
+                                </button>
+                            </div>
+                            <div id="legitimuz-root"></div>
+                        </div>
+                    </div>
                     <div class="buttons">
                         <button class="btn btn-custom2 w-150 mr-4" type="button" (click)="activeModal.dismiss('Cross click')">
                             {{'geral.cancelar' | translate}}
@@ -118,7 +137,8 @@
                         <button
                             class="btn btn-custom w-150"
                             type="submit"
-                            [disabled]="form.invalid"
+                            (click)="onSubmit()"
+                            [disabled]="form.invalid || (faceMatchEnabled && !faceMatchProfileEdit)"
                         >
                             {{'geral.atualizar' | translate}}
                         </button>

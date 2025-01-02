@@ -21,15 +21,10 @@
 </div>
 
 <div class="indique-ganhe-card" #indiqueGanheCard
-    *ngIf="indiqueGanheHabilitado && (!isLoggedIn || isCliente) && !activeGameCassinoMobile()">
+    *ngIf="isIndiqueGanheVisible">
     <div class="indique-ganhe-card-content">
         <div>
-            {{
-            'indique_ganhe.indiqueGanheCard' | translate:{
-            'valorGanhoPorIndicacao': valorGanhoPorIndicacao,
-            'bonusBalance': bonusBalanceReferAndEarn ? (bonusBalanceReferAndEarn | translate).toLowerCase() : ""
-            }
-            }}
+            {{ barraIndiqueGanhe }}
         </div>
         <a (click)="isConnected && redirectIndiqueGanhe()" class="btn btn-indique-ganhe-card">
             {{ 'indique_ganhe.indicar' | translate }}
@@ -41,7 +36,7 @@
     </div>
 </div>
 
-<div class="header">
+<div class="header" [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
     <div class="side side-left">
         <a class="" [routerLink]="['/esportes/futebol/jogos']">
             <img [src]="LOGO" class="logo">
@@ -374,7 +369,7 @@
                                     <span>
                                         <i class="fa fa-solid fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -449,6 +444,15 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
+                                <a (click)="openValidatePhoneModal()" *ngIf="isMandatoryPhoneValidation && !userPhoneValidated">
+                                    <span>
+                                        <i class="fa fa-solid fa-phone"></i>
+                                    </span>
+                                    {{ 'geral.validatePhone' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
                                 <a (click)="abrirAlterarSenha()">
                                     <span>
                                         <i class="fa fa-key"></i>
@@ -458,11 +462,29 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
+                                <a (click)="openLastAccesses()">
+                                    <span>
+                                        <i class="fa fa-clock-rotate-left"></i>
+                                    </span>
+                                    {{ 'geral.lastAccesses' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
                                 <a (click)="abrirConfiguracoes()">
                                     <span>
                                         <i class="fa fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="openBankAccount()">
+                                    <span>
+                                        <i class="fa fa-bank"></i>
+                                    </span>
+                                    {{ 'bankAccounts.title' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -487,20 +509,29 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirSaques()">
+                                <a (click)="abrirApostas()">
                                     <span>
-                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                        <i class="fa fa-solid fa-table-columns"></i>
                                     </span>
-                                    {{ 'geral.saque' | translate }}
+                                    {{ 'geral.apostas' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
-                                </a>
+                                </a>                                
                                 <a (click)="abrirDepositos()">
                                     <span>
                                         <i class="fa fa-solid fa-money-bill-transfer"></i>
                                     </span>
                                     {{ 'geral.deposito' | translate }}
+                                    <span class="arrow-nav">
+                                        <i class="fa-solid fa-angle-right"></i>
+                                    </span>
+                                </a>
+                                <a (click)="abrirSaques()">
+                                    <span>
+                                        <i class="fa fa-solid fa-money-bill-transfer"></i>
+                                    </span>
+                                    {{ 'geral.saque' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -513,16 +544,7 @@
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
-                                </a>
-                                <a (click)="abrirApostas()">
-                                    <span>
-                                        <i class="fa fa-solid fa-table-columns"></i>
-                                    </span>
-                                    {{ 'geral.apostas' | translate }}
-                                    <span class="arrow-nav">
-                                        <i class="fa-solid fa-angle-right"></i>
-                                    </span>
-                                </a>
+                                </a>                                
                                 <a (click)="abrirRollovers()">
                                     <span>
                                         <i class="fa fa-solid fa-gift"></i>
@@ -554,7 +576,7 @@
                                     <span>
                                         <i class="fa fa-solid fa-cogs"></i>
                                     </span>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                     <span class="arrow-nav">
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
@@ -657,14 +679,14 @@
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/rodada-gratis']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
-                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">{{
-                                        'rodada_gratis.rodadaGratis' | translate }}</span>
+                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
+                                    {{ 'rodada_gratis.rodadaGratis' | translate }}</span>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/indique-ganhe']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente && indiqueGanheHabilitado">
                                     <i class="fa fa-solid fa-gift mb-2"></i>
-                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{
-                                        'indique_ganhe.indiqueGanhe' | translate }}</span>
+                                    <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
+                                    {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/cashback']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente && cashbackEnabled">
@@ -675,7 +697,7 @@
                                 <a class="dropdown-btn-filled" [routerLink]="['/clientes/configuracoes']"
                                     routerLinkActive="router-link-active" *ngIf="isCliente">
                                     <i class="fa fa-solid fa-cogs mb-2"></i>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    <div [innerHTML]="'geral.jogoResponsavel' | translate | breakLineWithSpacing"></div>
                                 </a>
                                 <a class="dropdown-btn-filled" [routerLink]="['/alterar-senha']"
                                     routerLinkActive="router-link-active" *ngIf="!isCliente">
@@ -719,10 +741,10 @@
                                                             </a>-->
                                 <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
                                     <i class="fa fa-solid fa-cogs"></i>
-                                    {{ 'geral.configuracoes' | translate }}
+                                    {{ 'geral.jogoResponsavel' | translate }}
                                 </a>
                             </div>
-                            <a (click)="logout()" href="#" class="dropdown-btn btn-sair">
+                            <a (click)="logout()" class="dropdown-btn btn-sair">
                                 <i class="fa fa-sign-out mr-2"></i>
                                 <span class="dados">{{ 'geral.sair' | translate }}</span>
                             </a>
@@ -769,12 +791,15 @@
     </div>
 </div>
 
-<nav class="mobile" *ngIf="showHeaderMobile" [ngClass]="{'centered': centered}" #scrollMenu>
-    <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
-</nav>
+<div [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
+    <nav class="mobile" *ngIf="showHeaderMobile" [ngClass]="{'centered': centered}" #scrollMenu>
+        <ng-container *ngTemplateOutlet="menuTemplate"></ng-container>
+    </nav>
+</div>
 
+<div [ngClass]="{'hidden-header': isCasinoGameFullScreen}">
 <ng-template #menuTemplate>
-    <div #menu class="d-flex">
+    <div #menu [ngClass]="{'hidden-header': isCasinoGameFullScreen, 'd-flex': !isCasinoGameFullScreen}">
         <div class="category" *ngIf="aoVivoAtivo && !betbyAtivo">
             <a [routerLink]="['/live']" routerLinkActive="active">
                 <span>{{ 'menu.aoVivo' | translate }}</span>

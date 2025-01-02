@@ -12,10 +12,10 @@ import {
     Output,
     Renderer2
 } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 
 import {Jogo} from './../../../../models';
-import {BilheteEsportivoService, HelperService, JogoService, MessageService, ParametrosLocaisService, SportIdService} from './../../../../services';
+import {BilheteEsportivoService, CampeonatoService, HelperService, JogoService, MessageService, ParametrosLocaisService, SidebarService, SportIdService} from './../../../../services';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +31,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     jogo: Jogo;
     @Input() jogoId;
-    @Input() exibindoMaisCotacoes: boolean;
+    @Input() exibindoMaisCotacoes: boolean = false;
     @Output() exibirMaisCotacoes = new EventEmitter();
     isMobile = false;
     mercados90: any = {};
@@ -60,6 +60,8 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     theSportUrl: SafeResourceUrl;
     loadedFrame: boolean;
+    footballId;
+    cameFromHome: boolean = false;
 
     teamShieldsFolder;
 
@@ -81,13 +83,18 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
         private route: ActivatedRoute,
         private cd: ChangeDetectorRef,
         private activeModal: NgbActiveModal,
+        private sidebarService: SidebarService,
+        private campeonatoService : CampeonatoService,
+        private router: Router,
         private sportIdService: SportIdService,
         private translate: TranslateService
     ) {
+        this.footballId = this.sportIdService.footballId;
         this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
     }
 
     ngOnInit() {
+        this.setSportId(this.footballId);
         const { habilitar_live_tracker } = this.paramsService.getOpcoes();
         if (window.innerWidth <= 1024) {
             this.isMobile = true;
@@ -125,11 +132,29 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
                 this.cd.markForCheck();
             });
 
+        this.sidebarService.itens
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                dados => {
+                    if (dados.esporte !== 'futebol') {
+                        this.getCampeonatos2Sidebar();
+                    }
+                }
+        );
+
         this.route.queryParams
             .pipe(takeUntil(this.unsub$))
             .subscribe((params: any) => {
                 this.contentSportsEl.scrollTop = 0;
             });
+
+        this.route.paramMap.subscribe(params => {
+            if (!this.jogoId) {
+                const jogoDestaqueId = params.get('jogoDestaqueId')
+                this.jogoId = jogoDestaqueId
+                this.cameFromHome = jogoDestaqueId ? true : false;
+            }
+        });
 
         if (this.jogoId) {
             this.jogoService.getJogo(this.jogoId)
@@ -188,9 +213,33 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.setSportId(null);
         this.bilheteService.sendId(null);
         this.unsub$.next();
         this.unsub$.complete();
+    }
+
+    getCampeonatos2Sidebar() {
+        const campeonatosBloqueados = this.paramsService.getCampeonatosBloqueados(this.footballId);
+        const opcoes = this.paramsService.getOpcoes();
+        const params = {
+            'sport_id': this.footballId,
+            'campeonatos_bloqueados': campeonatosBloqueados,
+            'data_final': opcoes.data_limite_tabela,
+        };
+        this.campeonatoService.getCampeonatosPorRegioes(params)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                campeonatos => {
+                    const dados = {
+                        itens: campeonatos,
+                        contexto: 'esportes',
+                        esporte: 'futebol'
+                    };
+                    this.sidebarService.changeItens(dados);
+                },
+                error => this.messageService.error(error)
+            );
     }
 
     definirAltura() {
@@ -208,6 +257,10 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     back() {
+        if(this.cameFromHome){
+            this.router.navigate(['/'])
+        }
+
         if (this.isMobile) {
             this.activeModal.close();
         } else {
@@ -610,5 +663,9 @@ export class FutebolJogoComponent implements OnInit, OnChanges, OnDestroy {
 
     handleError(msg: any) {
         this.messageService.error(msg);
+    }
+
+    setSportId(id: number) {
+        this.bilheteService.setSportId(id);
     }
 }

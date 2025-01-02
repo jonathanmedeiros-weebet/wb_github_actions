@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService, ParametrosLocaisService, SportIdService } from 'src/app/services';
 
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'app-jogos-destaque',
     templateUrl: './jogos-destaque.component.html',
@@ -11,6 +13,7 @@ import { BilheteEsportivoService, CampeonatoService, HelperService, JogoService,
 })
 export class JogosDestaqueComponent implements OnInit, OnChanges {
     @Input() displayLabel = true;
+    @Input() isHome = false;
     @Output() maisCotacoesDestaque = new EventEmitter();
     @Output() hasFeaturedMatches = new EventEmitter<boolean>();
     jogosDestaque = [];
@@ -24,6 +27,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     jogosDestaquesIds = [];
     widthCard = 300;
     showLoadingIndicator = true;
+    public sportbook;
 
     teamShieldsFolder;
 
@@ -46,8 +50,10 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         private bilheteService: BilheteEsportivoService,
         private paramsService: ParametrosLocaisService,
         private campeonatoService: CampeonatoService,
+        private router: Router,
         private sportIdService: SportIdService,
     ) {
+        this.sportbook = this.paramsService.getOpcoes().sportbook;
         this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
     }
 
@@ -61,6 +67,14 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         }
 
         this.getJogosDestaques();
+    }
+
+    maisCotacoes(jogoId){
+        if (this.isHome) {
+            this.router.navigate([`/esportes/futebol/highlight-game/${jogoId}`])
+        } else {
+            this.maisCotacoesDestaque.emit(jogoId)
+        }
     }
 
     getJogosDestaques() {

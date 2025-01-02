@@ -12,6 +12,7 @@ import { ConfirmModalComponent, RegrasBonusModalComponent } from '../../../share
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 declare var WeebetMessage: any;
 
@@ -50,7 +51,7 @@ declare var WeebetMessage: any;
 
         <div class="buttons">
             <button class="btn btn-custom2 btn-w-100" (click)="compartilhar()"><i class="fa fa-share"></i> Compartilhar QR Code</button>
-            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode"><i class="fa fa-copy"></i> Copiar código</button>
+            <button class="btn btn-custom2 btn-w-100" ngxClipboard [cbContent]="qrCode" (click)="copyCode()"><i class="fa fa-copy"></i>{{ copyButtonText }}</button>
         </div>
     </div>
     `
@@ -64,6 +65,7 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
+    copyButtonText; 
     isAppMobile;
 
     constructor(
@@ -103,11 +105,19 @@ export class NgbdModalContent {
                 clearInterval(timer);
             }
         }, 1000);
+        
+        this.copyButtonText = this.translate.instant('deposito.copyCode');
         this.isAppMobile = this.authService.isAppMobile();
     }
 
-    copyCode(code) {
-        console.log('Copiado: ', code);
+    copyCode() {
+        this.translate.get('deposito.copied').subscribe((translatedText) => {
+            this.copyButtonText = translatedText; 
+
+            setTimeout(() => {
+                this.copyButtonText = this.translate.instant('deposito.copyCode');
+            }, 1000);
+        }); 
     }
 
     compartilhar() {
@@ -203,7 +213,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private renderer: Renderer2,
         private route: ActivatedRoute,
         private router: Router,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private ga4Service: Ga4Service,
     ) {
         super();
     }
@@ -366,6 +377,17 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         this.pix = res;
                         this.openPixModal();
                         this.submitting = false;
+                        if(detalhesPagamento.promoCode !== ''){
+                            this.ga4Service.triggerGa4Event(
+                                EventGa4Types.EARN_VIRTUAL_CURRENCY,
+                                {couponCode: detalhesPagamento.promoCode}
+                            );
+                        }
+
+                        this.ga4Service.triggerGa4Event(
+                            EventGa4Types.GENERATE_PIX,
+                            {username: res.cliente}
+                        );
                     },
                     error => {
                         this.handleError(error);

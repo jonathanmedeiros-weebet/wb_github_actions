@@ -29,6 +29,7 @@ import 'moment/min/locales';
 
 import { TranslateService } from '@ngx-translate/core';
 import { has } from 'lodash';
+import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
     selector: 'app-futebol-listagem',
@@ -120,6 +121,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         private translate: TranslateService,
         public layoutService: LayoutService,
         private sportIdService: SportIdService,
+        private ga4Service: Ga4Service,
     ) {
         this.sportbook = this.paramsService.getOpcoes().sportbook;
         this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
@@ -511,6 +513,15 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         if (modificado) {
             this.bilheteService.atualizarItens(this.itens);
         }
+
+        this.ga4Service.triggerGa4Event(
+            EventGa4Types.ADD_TO_CART,
+            {
+                game: item.jogo_nome,
+                team_bet: cotacao.chave,
+                value: cotacao.valorFinal
+            }
+        );
     }
 
     // Coloca as cotações faltando nos jogos
@@ -632,6 +643,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
         this.jogoIdAtual = jogoId;
         this.jogoSelecionadoId.emit(jogoId);
         this.exibirMaisCotacoes.emit(true);
+        this.ga4Service.triggerGa4Event(EventGa4Types.VIEW_ITEM);
     }
 
     mudarData(dia = 'hoje') {
@@ -750,5 +762,16 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
         this.hasFeaturedMatches = hasFeaturedMatches;
+    }
+
+    eventoSearch(e){
+        if(e.target.value){
+            this.ga4Service.triggerGa4Event(
+                EventGa4Types.SEARCH,
+                {
+                    search_term: e.target.value,
+                }
+            );
+        }
     }
 }

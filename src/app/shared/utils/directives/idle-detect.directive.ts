@@ -1,12 +1,13 @@
 import { Directive, HostListener } from '@angular/core';
 import { IdleDetectService } from '../../services/idle-detect.service';
+import { ActivityDetectService } from '../../services/activity-detect.service';
 
 @Directive({
     selector: 'div[idleDetect]'
 })
 export class IdleDetectDirective {
 
-    constructor(private idleDetectService: IdleDetectService) {}
+    constructor(private idleDetectService: IdleDetectService, private activityDetectService: ActivityDetectService) {}
 
     @HostListener('keydown', ['$event'])
     onKeydown(event: any) {
@@ -36,5 +37,14 @@ export class IdleDetectDirective {
     onWheelClick(event: any) {
         void event;
         this.idleDetectService.resetTimer();
+    }
+
+    @HostListener('document:visibilitychange', ['$event'])
+    onVisibilityChange() {
+        if (document.hidden) {
+            this.activityDetectService.stopActivityTimer();
+        } else {
+            this.activityDetectService.resumeActivityTimer();
+        }
     }
 }

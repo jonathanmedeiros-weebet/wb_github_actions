@@ -3,11 +3,15 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { CustomEncoder } from '../../utils';
 import {TranslateService} from '@ngx-translate/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class HeadersService {
+    private fullScreenCasinoGame = new BehaviorSubject<boolean>(false);
+    fullScreenCasinoGameState$ = this.fullScreenCasinoGame.asObservable();
+
     currentLanguage = 'pt';
     
     constructor(private translate: TranslateService) {
@@ -42,5 +46,17 @@ export class HeadersService {
             headers: headers,
             params: params
         };
+    }
+
+    getIsHeaderDisabled() {
+        return this.fullScreenCasinoGame.value;
+    }
+
+    openCasinoFullScreen() {
+        this.fullScreenCasinoGame.next(true);
+    }
+
+    closeCasinoFullScreen() {
+        this.fullScreenCasinoGame.next(false);
     }
 }

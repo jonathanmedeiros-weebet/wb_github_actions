@@ -123,7 +123,11 @@
         <ng-template #cassinoGameList>
             <div class="bloco">
                 <div class="titulo" *ngIf="gameList && gameList.length">
-                    {{gameTitle | titlecase}}
+                    <app-back-page 
+                        [text]="gameTitle | titlecase"
+                        [category]="categorySelected"
+                        [provider]="gameFornecedor"
+                    ></app-back-page>
                 </div>
                 <div class="sem-evento empty-game-list" *ngIf="gameList && !gameList.length">
                     {{'geral.nenhumJogoEncontrado' | translate}}!

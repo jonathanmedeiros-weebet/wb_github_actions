@@ -78,6 +78,7 @@
                         <th *ngIf="!mobileScreen">{{'geral.horario' | translate}}</th>
                         <th>{{'geral.valor' | translate}}</th>
                         <th *ngIf="tabSelected === 'cassino'">{{'geral.premio' | translate}} </th>
+                        <th *ngIf="tabSelected === 'cassino'">{{'geral.tax' | translate}} </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -91,6 +92,7 @@
                             <td *ngIf="tabSelected === 'cassino'">{{ aposta.game}}</td>
                             <td>{{ aposta.valor | currency}}</td>
                             <td *ngIf="tabSelected === 'cassino'">{{ aposta.premio | currency }}</td>
+                            <td *ngIf="tabSelected === 'cassino'">{{ aposta.incomeTaxOnPrize | currency }}</td>
                             <td *ngIf="tabSelected !== 'cassino'" class="acoes-aposta">
                                 <a *ngIf="aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}{{origin}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
                                     <i class="fa fa-external-link"></i>

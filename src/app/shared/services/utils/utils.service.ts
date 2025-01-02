@@ -30,7 +30,7 @@ export class UtilsService {
         return this.http.get(`${this.utilsUrl}/getEstados`, this.headers.getRequestOptions())
             .pipe(
                 map((res: any) => res.results),
-                catchError(this.errorService.handleError)
+                catchError(() => [])
             );
     }
 
@@ -38,7 +38,15 @@ export class UtilsService {
         return this.http.get(`${this.utilsUrl}/getCidades/${estado}`, this.headers.getRequestOptions())
             .pipe(
                 map((res: any) => res.results),
-                catchError(this.errorService.handleError)
+                catchError(() => [])
+            );
+    }
+
+    getCountries() {
+        return this.http.get('https://weebet.s3.us-east-1.amazonaws.com/cdn/json/countries.json')
+            .pipe(
+                map((response: any) => response),
+                catchError(() => [])
             );
     }
 
@@ -64,5 +72,33 @@ export class UtilsService {
         }
 
         return 'unknown';
+    }
+
+    isToday(dateString: string | null): boolean {
+        if (!dateString) return false;
+        const date = new Date(dateString);
+        const today = new Date();
+        return date.getFullYear() === today.getFullYear() &&
+               date.getMonth() === today.getMonth() &&
+               date.getDate() === today.getDate();
+    }
+
+    timeStringToMilliseconds(time: string): number {
+        const [hours, minutes] = time.split(':').map(Number);
+        return (hours * 60 + minutes) * 60 * 1000;
+    }
+
+    isValidDate(dateString: string | null): boolean {
+        if (!dateString) return false;
+        const date = new Date(dateString);
+        return date instanceof Date && !isNaN(date.getTime());
+    }
+
+    getBanks() {
+        return this.http.get(`${this.utilsUrl}/getBanks`, this.headers.getRequestOptions())
+            .pipe(
+                map((res: any) => res.results),
+                catchError(() => [])
+            );
     }
 }
