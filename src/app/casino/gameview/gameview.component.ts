@@ -9,7 +9,6 @@ import { interval, Subject } from 'rxjs';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
     CadastroModalComponent,
-    JogosLiberadosBonusModalComponent,
     LoginModalComponent,
 
 } from "../../shared/layout/modals";
@@ -861,14 +860,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     closeSessionGameTomHorn() {
         this.casinoApi.closeSessionTomHorn(this.sessionId).subscribe(response => {
         }, error => {
-        });
-    }
-
-    exibirJogosLiberadosBonus() {
-        this.location.back();
-        this.modalService.open(JogosLiberadosBonusModalComponent, {
-            centered: true,
-            size: 'xl',
         });
     }
 
