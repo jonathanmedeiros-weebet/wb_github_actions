@@ -3,9 +3,7 @@
         <div class="card__body">
 
             <div class="card__body-title">
-                <!-- TODO: BUSCAR NA API O TOTAL DE ENTRADAS -->
-                <!-- <p class="card__body-title">Total de Entrada</p> -->
-                <p class="card__body-title">Saldo</p>
+                <p class="card__body-title">Total de entradas</p>
                 <p class="card__body-title-value">R$ {{ formatCurrencyMoney(data.balance) }}</p>
             </div>
             <div class="card__body-icon" @click="handleClick">
@@ -77,7 +75,7 @@ export default {
     },
     data(){
         return {
-            colors: ['#3879EB', '#7BCDFC', '#79C8CC', '#A65AE5', '#5256D4']
+            colors: ['#3879EB', '#7BCDFC', '#7960CC', '#A65AE5', '#F1A923', '#A1A925' ]
         }
     },
     methods: {
@@ -101,10 +99,12 @@ export default {
     computed: {
         categories() {
             const labelTransformed = {
-                'credito': 'Crédito',
-                'saldo': 'Saldo',
-                'comissao': 'Comissão',
-                'saida': 'Saída'
+                'esporte': 'Esporte',
+                'aovivo': 'Ao vivo',
+                'desafio': 'Desafio',
+                'acumuladao': 'Acumuladão',
+                'loteria': 'Loteria',
+                'cartao_aposta': 'Vendas Cartões'
             };
 
             if(!this.data.categories.length) return [];

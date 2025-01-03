@@ -22,6 +22,7 @@ import WithdrawalCardView from '@/views/WithdrawalCardView/WithdrawalCardView.vu
 import CardListView from '@/views/CardListView.vue'
 import CreateCardView from '@/views/CreateCardView.vue'
 import DetailedCardView from '@/views/DetailedCardView.vue'
+import ValidationLotteryDetailView from '@/views/ValidationLotteryDetailView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -45,6 +46,15 @@ const router = new VueRouter({
       path: '/validation-detail/:id',
       name: 'validation-detail',
       component: ValidationDetailView,
+      meta: {
+        auth: production
+      },
+      props: true
+    },
+    {
+      path: '/validation-lottery-detail/:id',
+      name: 'validation-lottery-detail',
+      component: ValidationLotteryDetailView,
       meta: {
         auth: production
       },

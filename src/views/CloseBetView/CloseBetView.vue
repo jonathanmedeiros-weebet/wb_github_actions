@@ -80,7 +80,7 @@
                     <br>
                   </span>
                   <span v-if="betItem.cotacao5 > 0">
-                      Retorno 5: R$ {{ calculateLotteryWinnings(betItem.valor, betItem.cotacao5) }}
+                      Retorno 5: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao5)) }}
                       <br>
                       <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
                           Retorno líquido 5: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao5, bet.passador.percentualPremio)) }}
