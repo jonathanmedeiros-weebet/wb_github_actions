@@ -77,7 +77,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
         this.exibirLinkAfiliado = this.paramsLocais.getOpcoes().exibir_link_afiliado;
         this.slug = config.SLUG;
-        this.sharedUrl = config.SHARED_URL;
+        this.sharedUrl = this.paramsLocais.sharedURL()?.trim() !== '' ? this.paramsLocais.sharedURL() : config.SLUG;
         this.linkTwitter = this.paramsLocais.getOpcoes().linkTwitter;
         this.linkTikTok = this.paramsLocais.getOpcoes().linkTikTok;
         this.linkTelegram = this.paramsLocais.getOpcoes().linkTelegram;
@@ -143,15 +143,15 @@ export class FooterComponent implements OnInit, AfterViewInit {
                 }
             }
         });
-    
+
         observer.observe(document.body, { childList: true, subtree: true });
     }
-    
+
     onScroll() {
         const target = this.container;
         this.isToTopBtnVisible = target.scrollTop > 50;
     }
-    
+
     scrollToTop() {
         this.container.scrollTo({ top: 0, behavior: 'smooth' });
     }
