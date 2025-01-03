@@ -58,12 +58,21 @@ export default {
       this.textButtonConfirm = 'Processando...';
       getPreBetByCode(this.code)
       .then(resp => {
-        this.$router.push({ 
-          name: 'validation-detail',
-          params: {
-            id: resp.results.id
-          }
-        });
+        if (resp.results.tipo === 'esportes') {
+          this.$router.push({ 
+            name: 'validation-detail',
+            params: {
+              id: resp.results.id
+            }
+          });
+        } else if (resp.results.tipo === 'loteria') {
+          this.$router.push({ 
+            name: 'validation-lottery-detail',
+            params: {
+              id: resp.results.id
+            }
+          });
+        }
       })
       .catch(error => {
         this.toastStore.setToastConfig({
