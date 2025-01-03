@@ -90,8 +90,8 @@ export class GeolocationService {
                 next: (res: ReverseGeolocation) => {
                     this.requestOnGoing = false;
                     sessionStorage.setItem('ibge_code', res.ibge_code ?? null);
-                    sessionStorage.setItem('city', res.city ?? null);
-                    sessionStorage.setItem('state', res.state ?? null);
+                    sessionStorage.setItem('locale_city', res.city ?? null);
+                    sessionStorage.setItem('locale_state', res.state ?? null);
                     sessionStorage.setItem('country', res.country == 'Brasil' || res.country == 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
                     return res;
                 },
@@ -125,7 +125,7 @@ export class GeolocationService {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         if (!position) throw new Error('Unable to find current position')
-    
+
                         resolve({
                             error: false,
                             lat: position.coords.latitude,
@@ -145,8 +145,8 @@ export class GeolocationService {
 
     public checkGeolocation(): Boolean {
         const codigoIbge = (sessionStorage.getItem('ibge_code') === 'null' || sessionStorage.getItem('ibge_code') === 'undefined') ? null : sessionStorage.getItem('ibge_code');
-        const city = (sessionStorage.getItem('city') === 'null' || sessionStorage.getItem('city') === 'undefined') ? null : sessionStorage.getItem('city');
-        const state = (sessionStorage.getItem('state') === 'null' || sessionStorage.getItem('state') === 'undefined') ? null : sessionStorage.getItem('state');
+        const city = (sessionStorage.getItem('locale_city') === 'null' || sessionStorage.getItem('locale_city') === 'undefined') ? null : sessionStorage.getItem('locale_city');
+        const state = (sessionStorage.getItem('locale_state') === 'null' || sessionStorage.getItem('locale_state') === 'undefined') ? null : sessionStorage.getItem('locale_state');
         const country = (sessionStorage.getItem('country') === 'null' || sessionStorage.getItem('country') === 'undefined') ? null : sessionStorage.getItem('country');
 
         if (country != 'Brasil' && country != 'Brazil') {
@@ -179,7 +179,7 @@ export class GeolocationService {
 
         if (country == null || country == 'Brasil' || country == 'Brazil') {
             return false;
-        } 
+        }
         return true;
     }
 }
