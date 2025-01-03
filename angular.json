@@ -37,7 +37,12 @@
                           "src/bilhete",
                           "src/apple-touch-icon.png",
                           "src/apple-touch-icon-precomposed.png",
-                          "src/manifest.webmanifest"
+                          "src/manifest.webmanifest",
+                          {
+                            "glob": "**/*",
+                            "input": "/src/bilhete/",
+                            "output": "/bilhete/"
+                          }
                         ],
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.css",
