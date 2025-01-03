@@ -2418,3 +2418,12 @@ gulp.task('eliteesportes.vip', function (done) {
         styles: "",
     });
 });
+
+gulp.task('pixmaster.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "pixmaster.bet",
+        banca: "PIX MASTER",
+        styles: "",
+    });
+});
