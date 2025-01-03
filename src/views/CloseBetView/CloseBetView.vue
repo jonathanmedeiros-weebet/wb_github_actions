@@ -68,43 +68,37 @@
                 <div v-if="bet.tipo !== 'loteria'" class="bet__team-name">
                   <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
                 </div>
-                <div v-if="bet.tipo === 'loteria'">
+                <div class="bet-lottery" v-if="bet.tipo === 'loteria'">
                   <span>Valor: R${{ formatCurrencyMoney(betItem.valor) }}</span>
-                  <br>
                   <span v-if="betItem.tipo == 'seninha'">
                     <span>Retorno 6: R${{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao6)) }}</span>
-                    <br>
                     <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
-                        Retorno líquido 6: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao6, bet.passador.percentualPremio)) }}
+                      <br>
+                      Retorno líquido 6: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao6, bet.passador.percentualPremio)) }}
                     </span>
-                    <br>
                   </span>
                   <span v-if="betItem.cotacao5 > 0">
-                      Retorno 5: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao5)) }}
+                    Retorno 5: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao5)) }}
+                    <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
                       <br>
-                      <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
-                          Retorno líquido 5: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao5, bet.passador.percentualPremio)) }}
-                      </span>
-                      <br>
+                      Retorno líquido 5: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao5, bet.passador.percentualPremio)) }}
+                    </span>
                   </span>
                   <span class="informacoes-item" v-if="betItem.cotacao4 > 0">
-                      Retorno 4: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao4)) }}
+                    Retorno 4: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao4)) }}
+                    <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
                       <br>
-                      <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
-                          Retorno líquido 4: R${{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao4, bet.passador.percentualPremio)) }}
-                      </span>
-                      <br>
+                      Retorno líquido 4: R${{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao4, bet.passador.percentualPremio)) }}
+                    </span>
                   </span>
                   <span class="informacoes-item" v-if="betItem.cotacao3 > 0">
-                      Retorno 3: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao3))}}
+                    Retorno 3: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao3))}}
+                    <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
                       <br>
-                      <span v-if="!bet.is_cliente && bet.passador.percentualPremio > 0">
-                          Retorno líquido 3: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao3, bet.passador.percentualPremio)) }}
-                      </span>
-                      <br>
+                      Retorno líquido 3: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao3, bet.passador.percentualPremio)) }}
+                    </span>
                   </span>
                   <span>Dezenas: {{ betItem.numeros.join(', ') }}</span>
-                  <br>
                   <span>
                     <strong v-if="betItem.status !== 'ganhou'">Resultado: {{ betItem.status }}</strong>
                     <template v-else>
@@ -644,6 +638,11 @@ export default {
 
 strong {
   font-weight: bold;
+}
+
+.bet-lottery {
+  display: flex;
+  flex-direction: column;
 }
 </style>
 
