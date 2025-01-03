@@ -224,7 +224,7 @@ iframe{
 
 .telegram {
     fill: #2FA3D4;
-    background-color: rgba(47, 163, 212, 0.20);;
+    background-color: rgba(47, 163, 212, 0.20);
     background-image: url('https://wb-assets.com/img/icons/telegram.svg');
     background-size: 60%;
     background-repeat: no-repeat;
@@ -233,12 +233,11 @@ iframe{
 
 .copy {
     fill: #FFF;
-    background-color: rgba(255, 255, 255, 0.20);
+    background-color: rgba(119, 119, 119, 0.3);
     background-image: url('https://wb-assets.com/img/icons/copy.svg');
-    background-size: 50%;
+    background-size: 55%;
     background-repeat: no-repeat;
     background-position: center;
-    margin-right: 0;
 }
 
 .close-modal-continuar-jogando i{
@@ -459,7 +458,7 @@ iframe{
     .card-small {
         width: 100%;
         height: auto;
-        margin: 24px auto;
+        margin: 16px auto;
         position: relative;
         border-radius: 8px;
         overflow: hidden;
@@ -606,8 +605,7 @@ iframe{
     app-back-page {
         display: flex;
         height: auto;
-        margin: 16px auto -16px auto;
-        position: relative;
+        margin-top: 16px;
         align-items: center;
     }
 }
