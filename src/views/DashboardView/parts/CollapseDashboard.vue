@@ -68,13 +68,12 @@ export default {
         font-size: 14px;
         font-weight: 400;
         color: #ffffff80;
-        color: var(--foreground-inputs-odds);
+        color: rgba(var(--foreground-header-rgb), .5);
     }
 
     &__title img {
         max-width: 16px;
         max-height: 16px;
-        
     }
 
     &__icon {

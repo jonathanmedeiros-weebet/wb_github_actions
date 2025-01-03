@@ -5,24 +5,26 @@
     </template>
     <template #body>
       <div class="modal-consult-ticket__items">
-            <w-input
-              label="Chave do cartão"
-              placeholder="Informe a chave do cartão"
-              type="text"
-              name="code"
-              mask="XXX-XXX-XXX"
-              v-model="code"
-            >
-            </w-input>
+        <w-input
+          class="modal-consult-ticket__input"
+          label="Chave do cartão"
+          placeholder="Informe a chave do cartão"
+          type="text"
+          name="code"
+          mask="XXX-XXX-XXX"
+          v-model="code"
+        >
+        </w-input>
 
-            <w-input
-              label="PIN"
-              placeholder="Informe o pin do cartão"
-              type="password"
-              name="pin"
-              v-model="pin"
-            >
-            </w-input>
+        <w-input
+          class="modal-consult-ticket__input"
+          label="PIN"
+          placeholder="Informe o pin do cartão"
+          type="password"
+          name="pin"
+          v-model="pin"
+        >
+        </w-input>
         <w-button
           id="btn-salvar"
           text="Consultar"
@@ -46,13 +48,13 @@ export default {
   components: { WModal, WInput, WButton },
   data() {
     return {
-        code: '',
-        pin: '',
+      code: '',
+      pin: '',
     };
   },
   computed: {
     formValid() {
-        return Boolean(this.code) && Boolean(this.pin);
+      return Boolean(this.code) && Boolean(this.pin);
     },
   },
   methods: {
@@ -69,6 +71,7 @@ export default {
 <style lang="scss" scoped>
 .modal-consult-ticket {
   &__title {
+    color: #ffffff;
     color: var(--foreground-header);
     font-size: 16px;
     font-weight: 500;
@@ -82,8 +85,14 @@ export default {
   }
 
   &__text {
-    color: var(--foreground-league-input);
+    color: #ffffff80;
+    color: rgba(var(--foreground-header-rgb), 0.5);
     font-size: 14px;
+  }
+
+  &__input ::v-deep .input__group,
+  &__input ::v-deep .input__field {
+    background-color: var(--header) !important;
   }
 }
 

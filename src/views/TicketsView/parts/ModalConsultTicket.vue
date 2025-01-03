@@ -21,6 +21,7 @@
           text="Consultar"
           value="salvar"
           name="btn-salvar"
+          :disabled="!Boolean(ticketCode)"
           @click="handleConsult"
         />
       </div>
@@ -43,12 +44,10 @@ export default {
   },
   methods: {
     handleCloseModal() {
-      
       this.$emit('close');
     },
     handleConsult() {
       this.$emit('consult', this.ticketCode);
-      this.$refs['wmodal'].handleClose();
     }
   }
 };
@@ -71,9 +70,14 @@ export default {
   }
 
   &__text {
-    color: #ffffff;
-    color: var(--foreground-header);
+    color: #ffffff80;
+    color: rgba(var(--foreground-header-rgb), 0.5);
     font-size: 14px;
+  }
+
+  &__input ::v-deep .input__group,
+  &__input ::v-deep .input__field {
+    background-color: var(--header) !important;
   }
 }
 

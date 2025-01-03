@@ -866,6 +866,7 @@ export default {
     background-color: var(--inputs-odds);
     color: #ffffff;
     color: var(--foreground-inputs-odds);
+    border-radius: 120px;
 
     &--android6 {
       margin-left: 8px;

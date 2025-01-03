@@ -98,7 +98,7 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #0a0a09;
-  background: var(--header);
+  background: var(--background);
   border-radius: 24px 24px 0px 0px;
   width: 100%;
   height: auto;
@@ -116,7 +116,7 @@ export default {
     margin-right: auto;
     margin-top: 18px;
     background-color: #ffffff;
-    background-color: var(--foreground-header);
+    background-color: rgba(var(--foreground-header-rgb), 0.5);
     width: 49px;
     height: 5px;
     border-radius: 10px;

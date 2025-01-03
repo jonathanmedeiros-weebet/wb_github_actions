@@ -319,7 +319,7 @@ export default {
         font-size: 16px;
         width: 80%;
         color: #ffffff;
-        color: var(--foreground);
+        color: var(--foreground-header);
     }
 
     &__movements {
@@ -333,13 +333,13 @@ export default {
     &__movements-title {
         font-size: 16px;
         color: #ffffff;
-        color: var(--foreground);
+        color: var(--foreground-header);
     }
 
     &__movements-filter {
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground);
+        color: var(--foreground-header);
         opacity: 0.8;
     }
 
@@ -350,7 +350,7 @@ export default {
         padding: 8px 0px;
         font-size: 14px;
         color: #ffffff80;
-        color: var(--foreground);
+        color: var(--foreground-header);
     }
 
     &__movements-icon-calendar {
@@ -367,9 +367,9 @@ export default {
         padding: 8px 14px;
         border-radius: 6px;
         color: #ffffff80;
-        color: var(--foreground-game);
+        color: var(--foreground-header);
         background: #0a0a09;
-        background: var(--game);
+        background: var(--background);
     }
 }
 </style>

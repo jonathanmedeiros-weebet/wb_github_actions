@@ -222,6 +222,8 @@ export default {
       try {
         const resp = await getBetByCode(ticketCode);
         if(resp.results){
+          this.handleCloseConsultTicketModal();
+
           this.$router.push({ 
             name: 'close-bet',
             params: {
@@ -231,7 +233,6 @@ export default {
           });
         }
       } catch (error) {
-        this.handleCloseConsultTicketModal();
         this.toastStore.setToastConfig({
           message: error.errors.message,
           type: ToastType.DANGER,

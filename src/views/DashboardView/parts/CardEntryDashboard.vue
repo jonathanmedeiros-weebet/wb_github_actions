@@ -129,7 +129,7 @@ export default {
     padding: 25px 12px;
     border-radius: 8px;
     background: #0a0a09;
-    background: var(--game);
+    background: var(--background);
     
     &__body {
         display: flex;
@@ -144,20 +144,20 @@ export default {
         align-items: start;
         font-size: 14px;
         color: #ffffff80;
-        color: var(--foreground-game);
+        color: rgba(var(--foreground-header-rgb), .5);
     }
 
     &__body-title-value {
         font-size: 24px;
         color: #ffffff;
-        color: var(--foreground-game);
+        color: var(--foreground-header);
         padding-bottom: 20px;
         margin-top: 12px;
     }
 
     &__body-icon {
         color: #ffffff80;
-        color: var(--foreground-game);
+        color: var(--foreground-header);
     }
 
     &__bars {
@@ -209,7 +209,7 @@ export default {
     &__categories-value {
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-game);
+        color: rgba(var(--foreground-header-rgb), .5);
         margin: 0px 0px 0px 15px;
     }
 

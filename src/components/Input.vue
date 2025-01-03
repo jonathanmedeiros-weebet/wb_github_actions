@@ -148,8 +148,7 @@ export default {
 <style lang="scss" scoped>
 
 input {
-  background-color: #181818;
-  background-color: var(--inputs-odds);
+  background-color: transparent;
   box-sizing: border-box;
   border: 0;
   border-radius: 5px;

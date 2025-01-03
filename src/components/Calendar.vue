@@ -85,7 +85,7 @@ export default {
       return dateFormatInMonthAndYear(this.dateSelected) === this.currentMonthAndYear
     },
     useHexColors() {
-      return isAndroid5() ? '#ffffff' : 'var(--foreground-header)';
+      return isAndroid5() ? '#35cd96' : 'var(--highlight)';
     }
   },
   methods: {
@@ -173,9 +173,9 @@ export default {
     justify-content: space-between;
     padding: 10px 24px;
     color: #ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
     background: #181818;
-    background: var(--background);
+    background: var(--header);
   }
 
   &__weeks {

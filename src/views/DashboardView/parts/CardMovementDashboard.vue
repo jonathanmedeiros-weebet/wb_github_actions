@@ -49,7 +49,7 @@ export default {
     border-radius: 8px;
     padding: 18px 15px;
     background: #181818;
-    background: var(--inputs-odds);
+    background: var(--background);
     margin: 4px 0px 4px 0px;
 
     &__description {

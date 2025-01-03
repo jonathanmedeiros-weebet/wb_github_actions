@@ -198,9 +198,9 @@ export default {
     padding: 10px 24px;
 
     color: #ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
     background: #181818;
-    background: var(--background);
+    background: var(--header);
   }
 
   &__weeks {
@@ -224,13 +224,13 @@ export default {
     align-items: center;
     font-size: 14px;
     font-weight: 500;
-    color: #35cd96;
+    color: #ffffff;
     color: var(--foreground-header);
 
     &--selected {
       background: #35cd96;
       background: var(--highlight);
-      color: #ffffff;
+      color: #181818;
       color: var(--foreground-highlight);
       border-radius: 50px;
     }

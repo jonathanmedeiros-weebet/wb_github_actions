@@ -146,7 +146,7 @@ import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 import { getCalculationValue } from '@/services'
-import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR, convertInMomentInstance } from '@/utilities'
+import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR, convertInMomentInstance, isAndroid5 } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
 import { useConfigClient, useToastStore } from '@/stores'
 import SelectFake from './HomeView/parts/SelectFake.vue'
@@ -218,6 +218,9 @@ export default {
     },
     previousBalanceDate() {
       return convertInMomentInstance(this.startDate).subtract(1, 'days').format('DD/MM');
+    },
+    closeButtonColor() {
+      return isAndroid5() ? '#ffffff80' : 'rgba(var(--foreground-header-rgb), 0.5)';
     }
   },
   created() {
@@ -299,7 +302,7 @@ export default {
 
 .reckoning {
   color: #ffffff;
-  color: var(--foreground);
+  color: var(--foreground-header);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -319,8 +322,8 @@ export default {
   height: 30px;
   opacity: 0.6;
   color: #ffffff;
-  color: var(--foreground);
-  background-color: #FFFFFF0D;
+  color: rgba(var(--foreground-header-rgb), 0.5);
+  background-color: var(--background);
   padding: 10px;
   display: flex;
   align-items: center;
@@ -367,7 +370,7 @@ export default {
 
   &__title {
     color: #ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
     font-size: 14px;
     font-style: normal;
     display: flex;
@@ -449,7 +452,7 @@ export default {
     width: 100%;
     height: 1px;
     background: #ffffff;
-    background: var(--foreground);
+    background: var(--foreground-header);
     opacity: 0.1;
     margin-top: 5px;
   }
