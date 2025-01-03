@@ -151,7 +151,7 @@ input {
   background-color: #181818;
   background-color: var(--inputs-odds);
   box-sizing: border-box;
-  border: none;
+  border: 0;
   border-radius: 5px;
   transition: 0.5s;
   outline: none;
@@ -188,11 +188,14 @@ input::placeholder {
     display: flex;
     align-items: center;
     padding-left: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
     background-color: #181818;
     background-color: var(--inputs-odds);
     border-radius: 5px;
-    border: 2px solid #ffffff;
-    border: 0.5px solid var(--foreground-inputs-odds);
+    border: 0;
+    color: #ffffff;
+    color: var(--foreground-inputs-odds);
     transition: 0.5s;
     
     &--focused {
@@ -204,7 +207,6 @@ input::placeholder {
   &__icon {
     display: flex;
     align-items: center;
-
   }
 
   &__icon__right {

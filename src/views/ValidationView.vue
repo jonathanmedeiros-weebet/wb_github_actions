@@ -49,7 +49,7 @@ export default {
       code: '',
       toastStore: useToastStore(),
       submitting: false,
-      textButtonConfirm: 'Confirmar'
+      textButtonConfirm: 'Consultar'
     }
   },
   methods: {
@@ -74,7 +74,7 @@ export default {
       })
       .finally(() => {
         this.submitting = false,
-        this.textButtonConfirm = 'Confirmar';
+        this.textButtonConfirm = 'Consultar';
       })
     }
   },
@@ -96,7 +96,7 @@ export default {
 
   &__text {
     color: #ffffff80;
-    color: var(--foreground); 
+    color: rgb(var(--foreground-header-rgb), 0.5); 
     font-size: 14px;
     text-align: center;
   }

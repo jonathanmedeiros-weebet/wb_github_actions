@@ -267,7 +267,7 @@ export default {
 <style lang="scss" scoped>
 .menu {
   color: #ffffff;
-  color: var(--foreground-game);
+  color: var(--foreground-header);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -302,16 +302,16 @@ export default {
     font-size: 24px;
     font-weight: 500;
     line-height: 24px;
-    color: #ffffff80;
-    color: var(--foreground);
+    color: #ffffff;
+    color: var(--foreground-header);  
   }
 
   &__greeting {
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
-    color: #ffffff80;
-    color: var(--foreground);  
+    color: #ffffff50;
+    color: rgba(var(--foreground-header-rgb), 0.8)
   }
 }
 
@@ -319,8 +319,8 @@ export default {
   width: 100%;
   height: auto;
   margin-top: 18px;
-  background-color: #0a0a09;
-  background-color: var(--game);
+  background-color: #181818;
+  background-color: var(--background);
   border-radius: 10px;
   padding: 22px 18px;
   padding-top: 16px;
@@ -332,7 +332,7 @@ export default {
   &__label {
     display: flex;
     color: #ffffff;
-    color: var(--foreground-game);
+    color: var(--foreground-header);
     opacity: 0.5;
     font-size: 13px; 
   }
@@ -341,15 +341,15 @@ export default {
     display: flex;
     align-items: center;
     color: #ffffff;
-    color: var(--foreground-game);
+    color: var(--foreground-header);
     font-size: 20px; 
   }
 
   &__eye {
     margin-left: 15px;
     cursor: pointer;
-    color: #ffffff80;
-    color: var(--foreground-game);
+    color: #ffffff;
+    color: var(--foreground-header);
     opacity: 0.5;
   }
 
@@ -362,12 +362,12 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #181818;
-    background-color: var(--background);
+    background-color: #ffffff;
+    background-color: var(--foreground-header);
     border: none;
     border-radius: 18px;
-    color: #ffffff;
-    color: var(--foreground); 
+    color: #181818;
+    color: var(--background); 
     padding: 7px;
     white-space: nowrap;
     font-size: 10px;
@@ -375,8 +375,8 @@ export default {
   }
 
   &__icon {
-    fill: #ffffff;
-    fill: var(--foreground);
+    fill: #181818;
+    fill: var(--background);
     align-items: center;
   }
 }
@@ -388,15 +388,15 @@ export default {
 
   &__text {
     color: #ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
     font-size: 16px;
     padding-bottom: 10px;
   }
 
   &__card {
     width: 100%;
-    background-color: #0a0a09;
-    background-color: var(--game);
+    background-color: #181818;
+    background-color: var(--background);
     padding: 18px 8px;
     padding-top: 8px;
     border-radius: 10px;
@@ -416,7 +416,7 @@ export default {
 
   &__icon { 
     fill: #ffffff;
-    fill: var(--foreground-game);
+    fill: var(--foreground-header);
     align-items: center;
   }
 

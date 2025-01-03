@@ -97,11 +97,11 @@
           </div>
           <div class="cotacao__finalizar">
             <w-button
-              id="btn-entrar"
+              id="btn-validar"
               :text="textButtonFinalizeBet"
-              value="entrar"
+              value="validar"
               class="cotacao__finalizar-button"
-              name="btn-entrar"
+              name="btn-validar"
               :disabled="buttonDisabled"
               @click="submit"
             />
@@ -167,7 +167,7 @@ export default {
       acceptChangesOdds: false,
       toastStore: useToastStore(),
       configClientStore: useConfigClient(),
-      textButtonFinalizeBet: "Finalizar aposta"
+      textButtonFinalizeBet: "Validar aposta"
     };
   },
   activated() {
@@ -222,7 +222,7 @@ export default {
       }
     },
     addValue(value){
-      this.valueBet += value;
+      this.valueBet = Number(this.valueBet) + Number(value);
     },
     formatCurrencyMoney(value) {
       return formatCurrency(value);
@@ -300,7 +300,7 @@ export default {
           })
           .catch(error => {
             this.buttonDisabled = false;
-            this.textButtonFinalizeBet = "Finalizar aposta";
+            this.textButtonFinalizeBet = "Validar aposta";
             this.toastStore.setToastConfig({
               message: error.errors?.message ?? 'Erro inesperado',
               type: ToastType.DANGER,
@@ -310,7 +310,7 @@ export default {
         
       } else {
         this.buttonDisabled = false;
-        this.textButtonFinalizeBet = "Finalizar aposta";
+        this.textButtonFinalizeBet = "Validar aposta";
         this.toastStore.setToastConfig({
           message: 'Nenhum jogo na aposta!',
           type: ToastType.WARNING,
@@ -367,8 +367,8 @@ export default {
 }
 .code {
   border-radius: 4px;
-  background: #0a0a09;
-  background-color: var(--header);
+  background: #181818;
+  background-color: var(--background);
   color: #ffffff;
   color: var(--foreground-header);
   display: flex;
@@ -437,6 +437,8 @@ export default {
 
   &__date {
     opacity: 0.5;
+    color: var(--foreground-header);
+    color: #ffffff;
   }
 
   &__result {
@@ -489,11 +491,12 @@ export default {
     padding: 18px;
     justify-content: center;
     align-items: center;
+    border: 0;
     border-radius: 8px;
     background: #181818;
     background: var(--inputs-odds);
-    color: rgba(255, 255, 255, 0.5019607843);
-    color: var(--foreground-inputs-odds);
+    color: rgba(255, 255, 255, 0.50);
+    color: rgba(var(--foreground-header-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px
   }
@@ -539,7 +542,7 @@ export default {
     width: 15px;
     height: 15px;
     border: 1px solid #ffffff80;
-    border: 1px solid var(--foreground);
+    border: 1px solid rgba(var(--foreground-header-rgb), 0.5);
     background-color: transparent;
     cursor: pointer;
     border-radius: 3px;
@@ -584,7 +587,5 @@ export default {
     display: flex;
     padding-bottom: 10px;
   }
-
-  
 }
 </style>

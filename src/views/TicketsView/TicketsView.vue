@@ -573,7 +573,7 @@ export default {
     margin-top: 10px;
     font-size: 12px;
     color:#ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
   }
 }
 
@@ -590,12 +590,12 @@ export default {
     font-weight: 400;
     line-height: normal;
     color: #ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
   }
 
   &__text {
     color: #ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
   }
 
   &__delete {
@@ -620,7 +620,7 @@ export default {
   flex-direction: column;
   position: relative; 
   color: #ffffff;
-  color: var(--foreground);
+  color: var(--foreground-header);
 
   &::after {
     content: '';
@@ -666,6 +666,8 @@ export default {
 
   &__date {
     opacity: 0.5;
+    color: var(--foreground-header);
+    color: #ffffff;
   }
 
   &__result {
@@ -699,7 +701,7 @@ export default {
   &__balance-text {
     font-size: 14px;
     color:#ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
   }
 
   &__balance {
@@ -713,11 +715,12 @@ export default {
     padding: 18px;
     justify-content: center;
     align-items: center;
+    border: 0;
     border-radius: 8px;
     background: #181818;
     background: var(--inputs-odds);
-    color: #ffffff80;
-    color: var(--foreground-inputs-odds);
+    color: rgba(255, 255, 255, 0.50);
+    color: rgba(var(--foreground-header-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px;
   }
@@ -742,7 +745,7 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color:#ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
   }
 
   &__ganhos {
@@ -750,16 +753,15 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color:#ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
   }
 
   &__checkbox {
     appearance: none;
     width: 15px;
     height: 15px;
-    border: 1px solid #ffffff;
-    border: 1px solid var(--foreground);
-    background-color: transparent;
+    border: 1px solid #ffffff80;
+    border: 1px solid rgba(var(--foreground-header-rgb), 0.5);
     cursor: pointer;
     border-radius: 3px;
     position: relative;
@@ -779,14 +781,14 @@ export default {
     width: 5px;
     height: 9px;
     color:#ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
   }
 
   &__alteracao {
     display: flex;
     align-items: center;
     color:#ffffff;
-    color: var(--foreground);
+    color: var(--foreground-header);
   }
 
   &__finalizar {

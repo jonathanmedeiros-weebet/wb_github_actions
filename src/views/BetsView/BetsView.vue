@@ -5,10 +5,11 @@
       
       <div class="bets__contente">
         <div class="bets__modalities">
-        <label class="bet__modalities-label">Modalidade</label>
+        <label class="bets__modalities-label">Modalidade</label>
         <SelectFake
-         titleSize="medium"
-         @click="handleOpenModalitiesModal"
+          class="bets__modalities-select"
+          titleSize="medium"
+          @click="handleOpenModalitiesModal"
         >
           {{ modality.name }}
         </SelectFake>
@@ -707,6 +708,9 @@ export default {
     color: var(--foreground);
   }
   
+  &__modalities-select {
+    background: var(--inputs-odds);
+  }
 }
 
 .button-space {
