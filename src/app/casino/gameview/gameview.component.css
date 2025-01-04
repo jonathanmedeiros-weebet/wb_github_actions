@@ -364,10 +364,10 @@ iframe{
 @media (max-width: 482px) {
 
     .header-game-view {
-        display: none;
         justify-content: space-between;
         align-items: center;
         padding: 8.5px 16px;
+        margin: 0;
     }
 
     .game-view {
@@ -933,7 +933,7 @@ iframe{
         margin-top: 16px;
         align-items: center;
     }
-    #expanded-btn-game-opened-desktop, #expanded-btn-game-closed-desktop, 
+    #expanded-btn-game-opened-desktop, #expanded-btn-game-closed-desktop,
     #expanded-btn-game-opened-tablet, #expanded-btn-game-closed-tablet
     {
         margin: 0 16px;
