@@ -1119,8 +1119,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
-                this.renderer.setStyle(gameFrame, 'margin-top', '50px');
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 140px)');
+                this.renderer.setStyle(gameFrame, 'margin-top', '43px');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 135px)');
             }
         }
 
