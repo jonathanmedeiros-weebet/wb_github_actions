@@ -2427,3 +2427,13 @@ gulp.task('pixmaster.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('joguefacil.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "joguefacil.bet",
+        banca: "JOGUE FÁCIL",
+        styles: "",
+        dominioTemp: "joguefacil.wee.bet"
+    });
+});

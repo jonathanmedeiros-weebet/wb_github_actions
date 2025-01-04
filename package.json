@@ -242,7 +242,8 @@
     "copasbet.bet": "gulp copasbet.bet",
     "boasorte.bet": "gulp boasorte.bet",
     "eliteesportes.vip": "gulp eliteesportes.vip",
-    "pixmaster.bet": "gulp pixmaster.bet"
+    "pixmaster.bet": "gulp pixmaster.bet",
+    "joguefacil.bet": "gulp joguefacil.bet"
   },
   "private": true,
   "dependencies": {
