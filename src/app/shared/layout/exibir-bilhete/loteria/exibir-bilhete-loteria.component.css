@@ -13,11 +13,9 @@
 }
 #cupom .informacoes-item{
     margin: 1px;
-    text-transform: uppercase;
 }
 #cupom .valor-aposta{
     margin: 1px;
-    font-weight: bold;
 }
 #cupom .mensagem-rodape{
     margin: 15px 1px 1px 1px;
@@ -53,7 +51,6 @@
 #modalidade {
     font-size: 12px;
     font-weight: bolder;
-    text-transform: uppercase;
 }
 
 .dezenas-apostadas > div {

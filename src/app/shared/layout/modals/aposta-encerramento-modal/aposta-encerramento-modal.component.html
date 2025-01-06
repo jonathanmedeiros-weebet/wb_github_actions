@@ -263,14 +263,16 @@
     </div>
     <div class="button-container">
         <ng-container *ngIf="!isShared">
-            <button *ngIf="podeReutilizar(aposta)" class="secondary-btn btn" (click)="repetirAposta(aposta)"
-                [disabled]="simulando || repeating">
-                {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate }}
-            </button>
-            <button *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
-                [disabled]="simulando || repeating">
-                {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' | translate) + (valorEncerramento | currency) }}
-            </button>
+            <div style="display: flex; flex-direction: column;">
+                <button *ngIf="podeReutilizar(aposta)" class="secondary-btn btn" style="margin-bottom: 5px" (click)="repetirAposta(aposta)"
+                    [disabled]="simulando || repeating">
+                    {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate }}
+                </button>
+                <button *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
+                    [disabled]="simulando || repeating">
+                    {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' | translate) + (valorEncerramento | currency) }}
+                </button>
+            </div>
             <button class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
                 (click)="descartar()">
                 {{ 'geral.cancelar' | translate }}

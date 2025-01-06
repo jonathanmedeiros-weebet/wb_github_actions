@@ -1,13 +1,5 @@
 <div id="cupom" #cupom>
     <div class="conteudo">
-        <div style="text-align: center;">
-            <img [src]="LOGO">
-        </div>
-        <h1 class="numero">
-            {{aposta.codigo}}
-        </h1>
-        <hr>
-        <hr>
         <div class="informacoes">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
@@ -31,8 +23,6 @@
                 <span *ngIf="!aposta.resultado">aguardando</span>
             </p>
         </div>
-        <hr>
-        <hr>
         <div class="acumuladao">
             <div class="nome">
                 <b>{{aposta.acumuladao.nome}}</b>
@@ -52,7 +42,6 @@
                 </div>
             </ng-template>
         </div>
-        <hr>
         <ng-container *ngFor="let item of aposta.itens; let i=index;">
             <div class="item">
                 <div *ngIf="i == 0" class="nome">

@@ -1,13 +1,5 @@
 <div id="cupom" #cupom>
     <div class="conteudo">
-        <div style="text-align: center;">
-            <img [src]="LOGO">
-        </div>
-        <h1 class="numero">
-            {{aposta.codigo}}
-        </h1>
-        <hr>
-        <hr>
         <div class="informacoes">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
