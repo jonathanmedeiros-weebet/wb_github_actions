@@ -5,14 +5,12 @@
             <div class="content">
                 <div class="container-left">
                     <div class="content-header">
-                        <h2 class="title">{{tituloPagina}}
-                        </h2>
+                        <h2 class="title">{{tituloPagina}}</h2>
                         <div class="buttons">
                             <button id='button-print' class="btn float-right" printSectionId="print-section" [printTitle]="tituloPagina" ngxPrint><i
                                     class="fa fa-solid fa-print"></i><span>{{'geral.imprimir' | translate}}</span></button>
                             <button id="button-download" class="btn float-right" (click)="savePDF()"><i class="fa fa-solid fa-file-pdf"></i><span>{{'botoes.save_pdf' | translate}}</span></button>
                         </div>
-            
                     </div>
                     <div class="content-body" #content id="print-section">
                         <div class="content-page" [innerHTML]="pagina.conteudo | safeHTML">
@@ -40,7 +38,7 @@
                             {{'paginas.jogo-responsavel' | translate}}
                         </a>
                         <a routerLinkActive="active" [routerLink]="['/informacoes/termos-afiliados']" *ngIf="hasAfiliados">
-                            {{'paginas.termos-afiliados' | translate}}
+                            {{'paginas.partnership-terms' | translate}}
                         </a>
                     </div>
                 </div>
