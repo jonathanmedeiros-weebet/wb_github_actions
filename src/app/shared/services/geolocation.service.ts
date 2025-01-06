@@ -68,7 +68,7 @@ export class GeolocationService {
             this.requestOnGoing = isReverse ? true : false;
             let currentPosition = await this.getCurrentPosition() as Geolocation;
 
-            if (isReverse) this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
+            if (isReverse) await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng) ;
 
             return currentPosition;
         } catch (error) {

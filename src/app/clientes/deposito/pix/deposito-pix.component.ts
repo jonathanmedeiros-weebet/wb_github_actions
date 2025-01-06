@@ -8,7 +8,7 @@ import {ParametrosLocaisService} from '../../../shared/services/parametros-locai
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ConfirmModalComponent, RegrasBonusModalComponent } from '../../../shared/layout/modals';
+import { ConfirmModalComponent } from '../../../shared/layout/modals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -466,13 +466,6 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 );
             this.verificacoes++;
         }
-    }
-
-    abrirRegrasBonus() {
-        this.modalService.open(RegrasBonusModalComponent, {
-            centered: true,
-            size: 'xl',
-        });
     }
 
     getRollovers() {
