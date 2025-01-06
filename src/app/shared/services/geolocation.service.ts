@@ -53,7 +53,6 @@ export class GeolocationService {
     ];
     private options = {
         enableHighAccuracy: false,
-        timeout: 3000,
         // Cache time = 10min
         maximumAge: 1000 * 60 * 10,
     };
@@ -81,30 +80,23 @@ export class GeolocationService {
         }
     }
 
-    private async getReverseGeolocation(lat: number, lng: number): Promise<ReverseGeolocation> {
+    public async getReverseGeolocation(lat: number, lng: number): Promise<ReverseGeolocation> {
         try {
             let latlng = {
                 latlng: `${lat},${lng}`
-            }
-            this.http.post(`${this.central_url}/reverseGeolocation`, latlng, this.header.getRequestOptions(true)).subscribe({
-                next: (res: ReverseGeolocation) => {
-                    this.requestOnGoing = false;
-                    sessionStorage.setItem('ibge_code', res.ibge_code ?? null);
-                    sessionStorage.setItem('locale_city', res.city ?? null);
-                    sessionStorage.setItem('locale_state', res.state ?? null);
-                    sessionStorage.setItem('country', res.country == 'Brasil' || res.country == 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
-                    return res;
-                },
-                error: () => {
-                    this.requestOnGoing = false;
-                    return {
-                        error: true,
-                        ibge_code: '',
-                        city: '',
-                        state: ''
-                    };
-                }
-            });
+            };
+            const res: ReverseGeolocation = await this.http.post<ReverseGeolocation>(
+                `${this.central_url}/reverseGeolocation`,
+                latlng,
+                this.header.getRequestOptions(true)
+            ).toPromise();
+
+            this.requestOnGoing = false;
+            sessionStorage.setItem('ibge_code', res.ibge_code ?? '');
+            sessionStorage.setItem('locale_city', res.city ?? '');
+            sessionStorage.setItem('locale_state', res.state ?? '');
+            sessionStorage.setItem('country', res.country === 'Brasil' || res.country === 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
+            return res;
         } catch (error) {
             this.requestOnGoing = false;
             return {
@@ -113,7 +105,7 @@ export class GeolocationService {
                 city: '',
                 state: '',
                 country: ''
-            }
+            };
         }
     }
 
