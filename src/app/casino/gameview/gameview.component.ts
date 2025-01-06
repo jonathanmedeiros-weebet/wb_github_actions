@@ -460,8 +460,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     let location = sessionStorage.getItem('locale_state');
                     // console.log(location && response.location.location_settings != 'Todos');
                     if(location == null && response.location.location_settings != 'Todos'){
-                        await this.geolocationService.getGeolocation();
-                        let location = sessionStorage.getItem('locale_state');
+                        const geolocation = await this.geolocationService.getGeolocation(false);
+                        const reverseGeolocation = await this.geolocationService.getReverseGeolocation(geolocation.lat, geolocation.lng);
+                        location = reverseGeolocation.state;
                     }
                     if(response.location.location_settings != 'Todos' && response.location.location_settings != location ){
                         this.showModalState();
