@@ -157,6 +157,10 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                 email: cliente.email
             });
 
+            this.verifiedIdentity = cliente.verifiedIdentity;
+            this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+            this.cd.detectChanges();
+            
             if (Boolean(cliente.endereco)) {
                 const endereco: Endereco = cliente.endereco;
                 if (Boolean(endereco.estado) && Boolean(endereco.cidade)) {
