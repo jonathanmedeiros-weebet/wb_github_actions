@@ -150,10 +150,6 @@ const appRoutes: Routes = [
         ]
     },
     {
-        path: 'bilhete/:codigo',
-        component: CupomComponent
-    },
-    {
         path: 'aposta/:codigo',
         component: CupomComponent,
         canActivate: [RedirectBetGuardGuard]

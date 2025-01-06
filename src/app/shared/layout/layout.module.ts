@@ -68,8 +68,6 @@ import {
     TabelaModalComponent,
     CarregamentoModalComponent,
     CompatilhamentoBilheteModal,
-    RegrasBonusModalComponent,
-    JogosLiberadosBonusModalComponent,
     CanceledBonusConfirmComponent,
     ValidatePhoneModalComponent
 } from './modals';
@@ -166,8 +164,6 @@ import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.mo
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
-        RegrasBonusModalComponent,
-        JogosLiberadosBonusModalComponent,
         BilheteCompartilhamentoComponent,
         AtivarCartaoModalComponent,
         ApostaEncerramentoModalComponent,

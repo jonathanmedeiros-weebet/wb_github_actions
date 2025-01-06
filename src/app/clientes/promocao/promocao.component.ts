@@ -6,7 +6,6 @@ import { Rollover, RodadaGratis } from '../../models';
 import { Router } from '@angular/router';
 import { ConfirmModalComponent, CanceledBonusConfirmComponent } from 'src/app/shared/layout/modals';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RegrasBonusModalComponent } from './../../shared/layout/modals/regras-bonus-modal/regras-bonus-modal.component';
 import { ParametrosLocaisService } from '../../shared/services/parametros-locais.service';
 import { MenuFooterService } from '../../shared/services/utils/menu-footer.service';
 import { FreeSpinService } from '../../shared/services/clientes/free-spin.service';
@@ -99,13 +98,6 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
 
     handleError(error: string) {
         this.messageService.error(error);
-    }
-
-    abrirRegrasBonus() {
-        this.modalService.open(RegrasBonusModalComponent, {
-            centered: true,
-            size: 'xl',
-        });
     }
 
     getRollovers(queryParams?: any) {
