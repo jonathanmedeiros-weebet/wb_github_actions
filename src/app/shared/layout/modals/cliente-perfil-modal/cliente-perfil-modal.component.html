@@ -5,8 +5,8 @@
     <div class="titulo">{{'geral.perfil' | translate}}</div>
     <div class="botao-direito"></div>
 </div>
-<div class="modal-body">
-    <ng-container *ngIf="!showLoading">
+<div class="modal-body" *ngIf="!showLoading">  
+    <ng-container>
         <div class="content-body">
             <div class="content">
                 <form [formGroup]="form">

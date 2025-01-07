@@ -248,6 +248,10 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                 telefone: cliente.telefone,
                 email: cliente.email
             });
+            
+            this.verifiedIdentity = cliente.verifiedIdentity;
+            this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+            this.cd.detectChanges();
 
             if (Boolean(cliente.endereco)) {
                 const endereco: Endereco = cliente.endereco;
