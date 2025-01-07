@@ -23,6 +23,7 @@ import CardListView from '@/views/CardListView.vue'
 import CreateCardView from '@/views/CreateCardView.vue'
 import DetailedCardView from '@/views/DetailedCardView.vue'
 import ValidationLotteryDetailView from '@/views/ValidationLotteryDetailView.vue'
+import ReplicateLotteryBetView from '@/views/ReplicateLotteryBetView/ReplicateLotteryBetView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -210,6 +211,14 @@ const router = new VueRouter({
       path: '/table',
       name: 'table',
       component: TableView,
+      meta: {
+        auth: production
+      }
+    },
+    {
+      path: '/replicate-lottery-bet/:betId',
+      name: 'replicate-lottery-bet',
+      component: ReplicateLotteryBetView,
       meta: {
         auth: production
       }

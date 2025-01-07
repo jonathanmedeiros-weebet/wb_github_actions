@@ -85,6 +85,14 @@
                         @click="handleClearLottery"
                     />
                     <WButton
+                        id="lottery-copy"
+                        text="Copiar aspota"
+                        class="lottery__copy"
+                        name="lottery-copy"
+                        color="secondary"
+                        @click="handleOpenModalCopyLottery"
+                    />
+                    <WButton
                         id="lottery-submit"
                         text="Incluir palpite"
                         class="lottery__submit"
@@ -113,11 +121,19 @@
             @click="handleLotteryType"
             @closeModal="handleCloseLotteryType"
         />
-
+        
         <ModalLotteryOptions
             v-if="showModalLotteryOptions"
+            :lotteryList="lotteryOptions"
+            :lotterySelected="lotteryOptionSelected"
             @click="handleLotteryOptions"
             @closeModal="handleCloseLotteryOptions"
+        />
+
+        <ModalSearchLotteryBet
+            v-if="showModalCopyLottery" 
+            @close="handleCloseModalCopyLottery" 
+            @consult="handleCopyLottery"
         />
     </div>
 </template>
@@ -136,6 +152,8 @@ import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 import { getLotteryBetsByType, getLotteryDraw } from '@/services/lottery.service';
 import { isAndroid6 } from '@/utilities';
+import ModalSearchLotteryBet from './parts/ModalSearchLotteryBet.vue';
+import { getBetByCode } from '@/services';
 
 export default {
     name: 'lottery-modality',
@@ -147,7 +165,8 @@ export default {
         ModalLotteryTypes,
         ModalLotteryOptions,
         WInput,
-        WButton
+        WButton,
+        ModalSearchLotteryBet
     },
     data() {
         return {
@@ -157,6 +176,7 @@ export default {
             showModalLotteryNumbers: false,
             showModalLotteryTypes: false,
             showModalLotteryOptions: false,
+            showModalCopyLottery: false,
             showSurpriseButton: true,
             loading: false
         }
@@ -225,6 +245,12 @@ export default {
                 || !Boolean(this.sizeSelected)
                 || !Boolean(this.lotteryStore.lotteryTypeSelected)
             )
+        },
+        lotteryOptions() {
+            return this.lotteryStore.options.lotteries;
+        },
+        lotteryOptionSelected() {
+            return this.lotteryStore.loteryOptionsSelected;
         }
     },
     methods: {
@@ -346,6 +372,31 @@ export default {
         },
         handleLotteryOptions(option) {
             this.lotteryStore.setLotteryOptionsSelected(option);
+        },
+
+        handleOpenModalCopyLottery() {
+            this.showModalCopyLottery = true;
+        },
+        handleCloseModalCopyLottery() {
+            this.showModalCopyLottery = false;
+        },
+        async handleCopyLottery(ticketCode) {
+            getBetByCode(ticketCode)
+                .then((resp) => {
+                    console.log(resp.results.id)
+                    this.$router.push({ 
+                        name: 'replicate-lottery-bet',
+                        params: { betId: resp.results.id }
+                    });
+                })
+                .catch((error) => {
+                    this.handleCloseModalCopyLottery();
+                    this.toastStore.setToastConfig({
+                        message: error.errors.message,
+                        type: ToastType.DANGER,
+                        duration: 5000
+                    });
+                })
         },
 
         handleLotteryValueClick(valueAditional) {
@@ -518,13 +569,15 @@ export default {
         justify-content: space-between;
     }
 
-    &__submit {
-        width: 64%;
+    &__submit,
+    &__copy {
+        width: 34%;
     }
 
     &__clear {
-        width: 32%;
+        width: 28%;
     }
+
 }
 
 .value {
