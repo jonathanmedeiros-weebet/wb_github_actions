@@ -13,19 +13,36 @@
         </div>
 
         <div class="actions">
-            <div #legitimuz id="legitimuz-container">
-                <div id="legitimuz">
-                    <div id="verify-identity-text">
-                        {{'saques.identityVerifyNeeded' | translate}}
-                    </div>
-                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+            <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
+
+                <div #legitimuz id="legitimuz-container">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                            {{'saques.identityVerifyNeeded' | translate}}
+                        </div>
+                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
                         [value]="user.cpf" />
-                    <button id="legitimuz-action-verify" class="btn btn-custom">
+                        <button id="legitimuz-action-verify" class="btn btn-custom">
+                            <i class="fa-solid fa-id-card"></i>
+                            {{'saques.identityVerify' | translate}}
+                        </button>
+                    </div>
+                    <div id="legitimuz-root"></div>
+                </div>
+            </div>
+            <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+                <div #docCheck id="docCheck">
+                    <div id="verify-identity-text">
+                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                        ('saques.identityVerifyNeeded' | translate)}}
+                    </div>
+                    <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
+                        [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                        [attr.data-ex-doccheck-force-enrollment]="false">
                         <i class="fa-solid fa-id-card"></i>
                         {{'saques.identityVerify' | translate}}
                     </button>
                 </div>
-                <div id="legitimuz-root"></div>
             </div>
         </div>
     </div>

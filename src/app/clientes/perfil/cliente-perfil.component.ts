@@ -20,6 +20,15 @@ import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { Subject } from 'rxjs';
 import { Cliente } from 'src/app/shared/models/clientes/cliente';
+import { DocCheckService } from 'src/app/shared/services/doc-check.service';
+
+declare global {
+    interface Window {
+      ex_partner: any;
+      exDocCheck: any;
+      exDocCheckAction: any;
+    }
+  }
 
 @Component({
     selector: 'app-cliente-perfil',
@@ -29,7 +38,8 @@ import { Cliente } from 'src/app/shared/models/clientes/cliente';
 export class ClientePerfilComponent extends BaseFormComponent implements OnInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
-    
+    @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
+
     public estados: Array<Estado>;
     public cidades: Array<Cidade>;
     private estadoSelecionado: number;
@@ -51,6 +61,10 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     verifiedIdentity = false;
     disapprovedIdentity = false;
     cliente : Cliente;
+    docCheckToken = "";
+    secretHash = "";
+    faceMatchType = null;
+    dataUserCPF = "";
 
     constructor(
         private fb: UntypedFormBuilder,
@@ -67,7 +81,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         private legitimuzService: LegitimuzService,
         private legitimuzFacialService : LegitimuzFacialService,
         private faceMatchService : FaceMatchService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private docCheckService: DocCheckService
     ) {
         super();
         this.cidades = [];
@@ -80,6 +95,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     }
 
     ngOnInit() {
+        this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
+        this.cd.detectChanges();
         const user = this.auth.getUser();
         this.googleLogin = user?.google_login ?? false;
 
@@ -92,9 +109,25 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
         this.menuFooterService.setIsPagina(true);
 
         this.isMandatoryPhoneValidation = this.paramsLocais.isMandatoryPhoneValidation();
-        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
-
+        switch(this.faceMatchType) {
+            case 'legitimuz':
+                this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
+                break;
+            case 'docCheck':
+                this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchProfileEdit);
+                this.docCheckService.iframeMessage$.subscribe(message => {
+                    if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe()
+                        this.faceMatchProfileEditValidated = true;
+                        this.faceMatchProfileEdit = true;
+                    }
+                })
+                break;
+            default:
+                break;            
+        }  
         if (!this.faceMatchEnabled) {
             this.faceMatchProfileEditValidated = true;
         }
@@ -148,6 +181,11 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
 
             this.userPhoneValidated = cliente.is_phone_validated;              
             this.cliente = cliente;
+            this.dataUserCPF = String(this.cliente.cpf).replace(/[.\-]/g, '');
+            if(this.faceMatchType == 'docCheck') {
+                this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
+                this.docCheckService.init();
+            }
             this.form.patchValue({
                 nome: cliente.nome.toUpperCase(),
                 sobrenome: cliente.sobrenome.toUpperCase(),
@@ -349,16 +387,23 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            this.legitimuz.changes
+            if (this.faceMatchType == 'legitimuz') {
+                this.legitimuz.changes
                 .subscribe(() => {
-                        this.legitimuzService.init();
-                        this.legitimuzService.mount();
+                    this.legitimuzService.init();
+                    this.legitimuzService.mount();
                 });
-            this.legitimuzLiveness.changes
+                this.legitimuzLiveness.changes
                 .subscribe(() => {
-                        this.legitimuzFacialService.init();
-                        this.legitimuzFacialService.mount();
+                    this.legitimuzFacialService.init();
+                    this.legitimuzFacialService.mount();
                 });
+            } else {
+                this.docCheck.changes
+                .subscribe(() => {
+                    this.docCheckService.init();
+                });
+            }
         }
     }
 }
