@@ -192,47 +192,14 @@ iframe{
     align-items: center;
     cursor: pointer;
 }
+.social-buttons svg{
+    width: 24px;
+    height: 24px;
+    color: var(--foreground-header);
+}
 
 .social-buttons:hover {
     opacity: 0.7;
-}
-
-.whatsapp {
-    fill: #24CC63;
-    margin-left: 0;
-    background-color: rgba(36, 204, 99, 0.20);;
-    background-image: url('https://wb-assets.com/img/icons/whatsapp.svg');
-    background-size: 58%;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-.facebook {
-    fill: #395694;
-    background-color: rgba(57, 86, 148, 0.20);
-    background-image: url('https://wb-assets.com/img/icons/facebook.svg');
-    background-size: 36%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.telegram {
-    fill: #2FA3D4;
-    background-color: rgba(47, 163, 212, 0.20);;
-    background-image: url('https://wb-assets.com/img/icons/telegram.svg');
-    background-size: 60%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.copy {
-    fill: #FFF;
-    background-color: rgba(255, 255, 255, 0.20);
-    background-image: url('https://wb-assets.com/img/icons/copy.svg');
-    background-size: 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 0;
 }
 
 .close-modal-continuar-jogando i{
