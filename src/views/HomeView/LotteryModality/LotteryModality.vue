@@ -298,21 +298,11 @@ export default {
             try {
                 const response = await getLotteryBetsByType(params);
                 this.lotteryStore.setLotterySizes(response);
-                this.lotteryStore.setLotteryNumbersSelected(response.length ? res[0] : null);
+                this.lotteryStore.setLotteryNumbersSelected(response.length ? response[0] : null);
             } catch (error) {
                 console.error(error);
                 this.lotteryStore.setLotterySizes([]);
             }
-
-            getLotteryBetsByType(params)
-                .then((res) => {
-                    this.lotteryStore.setLotterySizes(res);
-                    this.lotteryStore.setLotteryNumbersSelected(res.length ? res[0] : null);
-                })
-                .catch((err) => {
-                    console.error(err);
-                    this.lotteryStore.setLotterySizes([]);
-                });
         },
         handleSurprise() {
             const max = this.lotteryStore.lotteryTypeSelected == LotteryTypes.QUININHA ? 70 : 50;
@@ -408,12 +398,20 @@ export default {
         },
 
         handleSubmitLottery() {
+            const { cotacao3, cotacao4, cotacao5, cotacao6 } = (this.lotteryStore.options.sizes ?? []).find(
+                ({qtdNumeros}) => Number(qtdNumeros) == Number(this.lotteryStore.loteryNumbersSelected?.qtdNumeros)
+            );
+
             this.ticketStore.addTen({
                 value: this.lotteryValue,
                 ten: this.lotteryStore.tensSelected,
                 type: this.lotteryStore.lotteryTypeSelected,
                 lotteryId: this.lotteryStore.loteryOptionsSelected,
-                lotteryTitle: this.optionSelected
+                lotteryTitle: this.optionSelected,
+                quote06: cotacao6,
+                quote05: cotacao5,
+                quote04: cotacao4,
+                quote03: cotacao3
             });
 
             this.toastStore.setToastConfig({
