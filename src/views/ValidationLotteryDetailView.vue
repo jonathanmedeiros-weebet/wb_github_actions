@@ -15,27 +15,15 @@
                                 <div class="bet__odd-text">Valor do palpite: R${{ formatCurrencyMoney(betItem.valor) }}</div>
                                 <div class="bet__odd-text" v-if="betItem.cotacao6 > 0">
                                     <div>Retorno 6: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao6)) }}</div>
-                                    <div v-if="!bet.is_cliente && bet.passador?.percentualPremio > 0">
-                                        Retorno líquido 6: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor, betItem.cotacao6, bet.passador?.percentualPremio)) }}
-                                    </div>
                                 </div>
-                                <div class="bet__odd-text">
-                                Retorno 5: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao5)) }}
-                                <div v-if="!bet.is_cliente && bet.passador?.percentualPremio > 0">
-                                    Retorno líquido 5: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor,betItem.cotacao5, bet.passador.percentualPremio)) }}
+                                <div class="bet__odd-text" v-if="betItem.cotacao5 > 0">
+                                    Retorno 5: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao5)) }}
                                 </div>
-                                </div>
-                                <div class="bet__odd-text">
+                                <div class="bet__odd-text" v-if="betItem.cotacao4 > 0">
                                     Retorno 4: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao4)) }}
-                                    <div v-if="!bet.is_cliente && bet.passador?.percentualPremio > 0">
-                                        Retorno líquido 4: R${{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor,betItem.cotacao4, bet.passador?.percentualPremio)) }}
-                                    </div>
                                 </div>
-                                <div class="bet__odd-text">
+                                <div class="bet__odd-text" v-if="betItem.cotacao3 > 0">
                                     Retorno 3: R$ {{ formatCurrencyMoney(calculateLotteryWinnings(betItem.valor, betItem.cotacao3)) }}
-                                    <div v-if="!bet.is_cliente && bet.passador?.percentualPremio > 0">
-                                        Retorno líquido 3: R$ {{ formatCurrencyMoney(calculateNetLotteryWinnings(betItem.valor,betItem.cotacao3, bet.passador?.percentualPremio)) }}
-                                    </div>
                                 </div>
                             </div>
                             <div class="value">
@@ -89,7 +77,7 @@ import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 import { getPreBetByCode } from '@/services/preBet.service';
 import { useConfigClient, useToastStore } from '@/stores';
-import { formatDateTimeBR, formatCurrency, calculateLotteryWinnings, calculateNetLotteryWinnings, calculateTotalValueLottery } from '@/utilities';
+import { formatDateTimeBR, formatCurrency, calculateLotteryWinnings } from '@/utilities';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
 import IconWarning from '@/components/icons/IconWarning.vue';
@@ -242,15 +230,7 @@ export default {
                 });
             }
         },
-        calculateLotteryWinnings(value, odd) {
-            return calculateLotteryWinnings(value, odd);
-        },
-        calculateNetLotteryWinnings(value, odd, percentageReward) {
-            return calculateNetLotteryWinnings(value, odd, percentageReward);
-        },
-        calculateTotalValueLottery(bet) {
-            return calculateTotalValueLottery(bet);
-        },
+        calculateLotteryWinnings,
     },
     computed: {
         showBettorName() {

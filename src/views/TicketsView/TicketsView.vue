@@ -49,8 +49,18 @@
             <span class="lottery__info">
               Valor do palpite: R$ {{ formatCurrency(item.value) }}
             </span>
-            <span class="lottery__info">
-              Retorno 5: R$ {{ formatCurrency(item.value) }}
+
+            <span class="lottery__info" v-if="Boolean(item.award06)">
+              Retorno 6: R$ {{ formatCurrency(item.award06) }}
+            </span>
+            <span class="lottery__info" v-if="Boolean(item.award05)">
+              Retorno 5: R$ {{ formatCurrency(item.award05) }}
+            </span>
+            <span class="lottery__info" v-if="Boolean(item.award04)">
+              Retorno 4: R$ {{ formatCurrency(item.award04) }}
+            </span>
+            <span class="lottery__info" v-if="Boolean(item.award03)">
+              Retorno 3: R$ {{ formatCurrency(item.award03) }}
             </span>
 
             <span class="lottery__tens">
@@ -188,7 +198,7 @@ import IconClose from '@/components/icons/IconClose.vue';
 import WInput from '@/components/Input.vue';
 import WButton from '@/components/Button.vue';
 import { useConfigClient, useTicketStore, useToastStore } from '@/stores';
-import { delay, formatCurrency, formatDateTimeBR, generateLotteryKey } from '@/utilities';
+import { delay, formatCurrency, formatDateTimeBR, generateLotteryKey, isAndroid6 } from '@/utilities';
 import { calculateQuota, createLiveToken, createBetSport } from '@/services';
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
@@ -248,8 +258,7 @@ export default {
   },
   computed: {
     isAndroid6Version() {
-      // return isAndroid6();
-      return true;
+      return isAndroid6();
     },
     quoteValue() {
       if(!Boolean(this.items.length)) return 0;
