@@ -11,6 +11,7 @@
         <div><p>{{msg}}</p></div>
 
         <div class="actions" *ngIf="faceMatchEnabled && faceMatchAccountDeletion && !showLoading">
+            <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
             <div #legitimuz id="legitimuz-container"
                 *ngIf="faceMatchEnabled && faceMatchAccountDeletion && !verifiedIdentity">
                 <div id="legitimuz">
@@ -47,6 +48,21 @@
                     </div>
                 </div>
                 <div id="legitimuz-root"></div>
+            </div>
+            </div>
+            <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+                <div #docCheck id="docCheck" *ngIf="!faceMatchChangePasswordValidated">
+                    <div id="verify-identity-text">
+                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                        ('saques.identityVerifyNeeded' | translate)}}
+                    </div>
+                    <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
+                        [attr.data-ex-doccheck-document-hmac-hash]="secretHash" [disabled]="faceMatchActive"  class="btn btn-custom"
+                        [attr.data-ex-doccheck-force-enrollment]="false">
+                        <i class="fa-solid fa-id-card"></i>
+                        {{'saques.identityVerify' | translate}}
+                    </button>
+                </div>
             </div>
         </div>
         <div class="actions">
