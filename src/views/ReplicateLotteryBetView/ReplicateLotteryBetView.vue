@@ -104,7 +104,7 @@
                     value="entrar"
                     class="replicate-lottery-bet__button"
                     name="btn-entrar"
-                    :disabled="buttonDisabled"
+                    :disabled="buttonDisabled || formInvalid"
                     @click="submit"
                 />
             </div>
@@ -152,7 +152,7 @@ export default {
         return {
             title: 'Replicar aposta',
             bet: null,
-            betItems: null,
+            betItems: [],
             buttonDisabled: false,
             bettorName: '',
             toastStore: useToastStore(),
@@ -218,37 +218,31 @@ export default {
                 .reduce((acumulador, valorAtual) => acumulador * valorAtual, 1); 
 
             this.buttonDisabled = disabled;
-
-            this.calculateEstimatedWinnings();
         },
 
         async submit() {
             this.buttonDisabled = true;
             this.textButtonFinalizeBet = "Processando...";
             
-            const values = {};
-            values.preaposta_codigo = this.bet.codigo;
-            values.apostador = this.bettorName;
-            values.valor = parseFloat(this.valueBet);
-            values.versao_app = 'app cambista';
-
-            values.itens = this.betItems.map(betItem => {  
+            const itens = this.betItems.map(betItem => {  
                 return {
-                    aposta_id: betItem.aposta_id,
                     sorteio_id: betItem.sorteio_id,
-                    cotacao3: betItem.cotacao3,
-                    cotacao4: betItem.cotacao4,
-                    cotacao5: betItem.cotacao5,
-                    cotacao6: betItem.cotacao6,
+                    cotacao3: Number(betItem.cotacao3),
+                    cotacao4: Number(betItem.cotacao4),
+                    cotacao5: Number(betItem.cotacao5),
+                    cotacao6: Number(betItem.cotacao6),
                     numeros: betItem.numeros,
-                    horario: betItem.horario,
                     valor: betItem.valor,
-                    versao_app: betItem.versao_app
                 }
             });
 
-            if (values.itens.length) {
-                createLotteryBet(values)
+            const payload = {
+                versao_app: '2.0',
+                apostador: this.bettorName,
+                itens
+            };
+
+            createLotteryBet(payload)
                 .then(response => {
                     this.toastStore.setToastConfig({
                         message: response.message ?? 'Validado com sucesso!',
@@ -274,16 +268,6 @@ export default {
                     this.buttonDisabled = false;
                     this.textButtonFinalizeBet = "Finalizar aposta";
                 })
-                
-            } else {
-                this.buttonDisabled = false;
-                this.textButtonFinalizeBet = "Finalizar aposta";
-                this.toastStore.setToastConfig({
-                    message: 'Nenhum jogo na aposta!',
-                    type: ToastType.WARNING,
-                    duration: 5000
-                });
-            }
         },
 
         calculateLotteryWinnings(value, odd) {
@@ -319,7 +303,13 @@ export default {
     },
     computed: {
         totalBetValue() {
-            return this.bet.itens.reduce((total, item) => total + item.valor, 0);
+            return this.betItems.reduce((total, item) => Number(total) + Number(item.valor ?? 0), 0);
+        },
+        formInvalid() {
+            return (
+                this.betItems.some((item) => !Boolean(item.sorteio_id) || !Boolean(item.valor))
+                || !Boolean(this.bettorName)
+            );
         }
     }
 
@@ -329,7 +319,6 @@ export default {
 <style lang="scss" scoped>
 .replicate-lottery-bet {
     background: var(--header);
-    height: 100vh;
 
     &__container {
         display: flex;
