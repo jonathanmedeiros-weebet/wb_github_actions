@@ -1544,15 +1544,6 @@ gulp.task('rc.wee.bet', function (done) {
     });
 });
 
-gulp.task('jogateka.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "jogateka.com",
-        banca: "JOGATEKA",
-        styles: "",
-    });
-});
-
 gulp.task('amazonsport.io', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1993,56 +1984,11 @@ gulp.task('sortegol.com', function (done) {
     });
 });
 
-gulp.task('curitiba.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "curitiba.bet",
-        banca: "CURITIBA BET",
-        styles: ""
-    });
-});
-
-gulp.task('portoalegre.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "portoalegre.bet",
-        banca: "PORTO ALEGRE BET",
-        styles: ""
-    });
-});
-
 gulp.task('gli.wee.bet', function (done) {
     tasks(done, {
         server: "54.147.182.240",
         host: "gli.wee.bet",
         banca: "GLI - Sandbox",
-        styles: ""
-    });
-});
-
-gulp.task('balneario.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "balneario.bet",
-        banca: "BALNEÁRIO BET",
-        styles: ""
-    });
-});
-
-gulp.task('caxias.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "caxias.bet",
-        banca: "CAXIAS BET",
-        styles: ""
-    });
-});
-
-gulp.task('floripa.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "floripa.bet",
-        banca: "FLORIPA BET",
         styles: ""
     });
 });
@@ -2103,15 +2049,6 @@ gulp.task('betagora.io', function (done) {
         styles: "",
         scripts: "<script>function initEmbeddedMessaging(){try{embeddedservice_bootstrap.settings.language='pt_BR',embeddedservice_bootstrap.init('00DKd0000052tg8','CA_ChatBotBetAgora','https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106',{scrt2URL:'https://lemagroup.my.salesforce-scrt.com'})}catch(e){console.error('Error loading Embedded Messaging: ',e)}}</script><script onload=initEmbeddedMessaging() src=https://lemagroup.my.site.com/ESWCAChatBotBetAgora1730925033106/assets/js/bootstrap.min.js></script>",
         xtremepush_sdk: "E5ilOYbc5X95iSCWM5gf_0K-_turnLxj"
-    });
-});
-
-gulp.task('sortte.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "sortte.bet",
-        banca: "SORTTE.BET",
-        styles: "",
     });
 });
 
