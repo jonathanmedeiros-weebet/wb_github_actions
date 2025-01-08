@@ -427,16 +427,6 @@ gulp.task('alfasports.net', function (done) {
     });
 });
 
-// Old esportebets.bet
-gulp.task('esporte.fit', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "esporte.fit",
-        banca: "ESPORTE BETS",
-        styles: ""
-    });
-});
-
 gulp.task('sportbets7.net', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1391,15 +1381,6 @@ gulp.task('kwbet.net', function (done) {
     });
 });
 
-gulp.task('vitoriasports.vip', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "vitoriasports.vip",
-        banca: "VITÓRIA SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('favoritao.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1764,15 +1745,6 @@ gulp.task('bosscassino.bet', function (done) {
     });
 });
 
-gulp.task('brotanabet.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "brotanabet.com",
-        banca: "BrotaNaBet",
-        styles: "",
-    });
-});
-
 gulp.task('mdsports.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1888,17 +1860,6 @@ gulp.task('unibets.com.br', function (done) {
         host: "unibets.com.br",
         banca: "UNI BETS",
         styles: ""
-    });
-});
-
-gulp.task('zilionz.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "zilionz.com",
-        banca: "ZILIONZ",
-        styles: "",
-        scripts: "<script type='text/javascript' src='https://cd823ed6-bffb-4764-9e1b-05566f369c8c.snippet.anjouangaming.org/anj-seal.js'></script><script></script>",
-        xtremepush_sdk: "oZQxbVqAu8kYxv_ElwCFWxaevtLjzMi_"
     });
 });
 
