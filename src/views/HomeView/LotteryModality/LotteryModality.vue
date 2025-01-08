@@ -373,7 +373,6 @@ export default {
         async handleCopyLottery(ticketCode) {
             getBetByCode(ticketCode)
                 .then((resp) => {
-                    console.log(resp.results.id)
                     this.$router.push({ 
                         name: 'replicate-lottery-bet',
                         params: { betId: resp.results.id }
