@@ -101,12 +101,6 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.faceMatchType = this.paramLocais.getOpcoes().faceMatchType;
         this.currentLanguage = this.translate.currentLang;
         this.createForm();
-        this.translate.onLangChange.subscribe(change => {
-            this.currentLanguage = change.lang;
-            if (this.faceMatchEnabled) {
-                this.legitimuzService.changeLang(change.lang);
-            }
-        });
         this.route
         .params
             .subscribe((params) => {
@@ -162,12 +156,21 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 })
                 break;
             default:
-                break;            
-        }  
+                this.faceMatchEnabled = false;
+                break;
+        }
         if (!this.faceMatchEnabled) {
             this.faceMatchChangePasswordValidated = true;
             this.showLoading = false;
         }
+
+        this.translate.onLangChange.subscribe(change => {
+            this.currentLanguage = change.lang;
+            if (this.faceMatchEnabled) {
+                this.legitimuzService.changeLang(change.lang);
+            }
+        });
+
         this.layout
             .verificaRemocaoIndiqueGanhe
             .pipe(takeUntil(this.unsub$))
