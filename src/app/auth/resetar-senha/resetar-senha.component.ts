@@ -156,6 +156,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 })
                 break;
             default:
+                this.faceMatchEnabled = false;
                 break;
         }
         if (!this.faceMatchEnabled) {
