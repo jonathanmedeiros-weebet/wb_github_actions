@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-type skeletonType = 'casino' | 'provider' | 'casino-filter-bar' | 'banner' | 'small-banner';
+type skeletonType = 'casino' | 'provider' | 'casino-filter-bar' | 'banner' | 'small-banner' | 'virtuals';
 
 @Component({
   selector: 'app-skeleton',
@@ -28,5 +28,9 @@ export class SkeletonComponent {
 
   get showSkeletonSmallBanner(): boolean {
     return this.type === 'small-banner';
+  }
+
+  get showSkeletonCasinoVirtuals(): boolean {
+    return this.type === 'virtuals';
   }
 }
