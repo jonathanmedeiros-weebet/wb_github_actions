@@ -24,7 +24,6 @@
 <script>
 import IconCheck from '@/components/icons/IconCheck.vue';
 import WModal from '@/components/Modal.vue'
-import { useLotteryStore } from '@/stores';
 
 export default {
     name: 'modal-lottery-options',
@@ -32,18 +31,23 @@ export default {
         WModal,
         IconCheck
     },
-    data() {
-        return {
-            lotteryStore: useLotteryStore()
+    props: {
+        lotteryList: {
+            type: Array,
+            required: true
+        },
+        lotterySelected: {
+            type: String | Number,
+            required: true
         }
     },
     computed: {
         options() {
-            const options = [...this.lotteryStore.options.lotteries];
+            const options = [...this.lotteryList];
             return options.map((option) => ({
                 id: option.id,
                 label: option.nome,
-                selected: this.lotteryStore.loteryOptionsSelected == option.id
+                selected: this.lotterySelected == option.id
             }))
         }
     },
