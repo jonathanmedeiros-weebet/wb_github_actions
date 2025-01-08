@@ -81,7 +81,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     tawakChatClicked: boolean = false;
     gameProviderName: string = '';
-    private inGame : boolean = false
+    private inGame: boolean = false
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -442,54 +442,59 @@ export class GameviewComponent implements OnInit, OnDestroy {
         });
     }
 
-    loadGame() {
-        this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
-            .subscribe(
-                async response => {
-                    if (response['error'] == 1) {
+    async loadGame() {
+        const restrictionStateBet = this.paramsService.getOpcoes().restriction_state_bet;
+
+        let location = sessionStorage.getItem('locale_state');
+
+        if (location == null) {
+            const geolocation = await this.geolocationService.getGeolocation(false);
+            const reverseGeolocation = await this.geolocationService.getReverseGeolocation(geolocation.lat, geolocation.lng);
+            location = reverseGeolocation.state;
+        }
+
+        if (restrictionStateBet != 'Todos' && restrictionStateBet != location) {
+            this.showModalState();
+            this.router.navigate(['/']);
+        } else {
+            this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
+                .subscribe(
+                    async response => {
+                        if (response['error'] == 1) {
+                            this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
+                            this.router.navigate(['/']);
+                        };
+                        if (response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
+                            this.showModal(response.loss_limit.message);
+                            this.router.navigate(['/']);
+                        }
+                        if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
+                            this.showModalPercentage(response.loss_limit.message);
+                        }
+
+                        if (typeof response.gameUrl !== 'undefined') {
+                            this.gameCategory = response.category;
+                            this.gameFornecedor = response.fornecedor;
+                            this.gameName = response.gameName;
+                            this.gameProviderName = response.gameFornecedorExibicao;
+                            this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
+                        } else {
+                            this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                            this.sessionId = response.sessionId;
+                            if ((this.gameFornecedor == 'tomhorn')) {
+                                this.gameName = response.gameName.split("- 9", 1) || "";
+                            } else {
+                                this.gameName = response.gameName || "";
+                            }
+                        }
+
+                        this.getRelatedAndPopularGames(response.category, this.isCassinoAoVivoPage ? true : false);
+                    },
+                    error => {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
-                    };
-                    if(response?.loss_limit?.loss_hit && response?.loss_limit?.error){
-                        this.showModal(response.loss_limit.message);
-                        this.router.navigate(['/']);
-                    }
-                    if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error ) {
-                        this.showModalPercentage(response.loss_limit.message);
-                    }
-                    let location = sessionStorage.getItem('locale_state');
-                    if(location == null && response.location.location_settings != 'Todos'){
-                        const geolocation = await this.geolocationService.getGeolocation(false);
-                        const reverseGeolocation = await this.geolocationService.getReverseGeolocation(geolocation.lat, geolocation.lng);
-                        location = reverseGeolocation.state;
-                    }
-                    if(response.location.location_settings != 'Todos' && response.location.location_settings != location ){
-                        this.showModalState();
-                        this.router.navigate(['/']);
-                    }
-
-                    if (typeof response.gameUrl !== 'undefined') {
-                        this.gameCategory = response.category;
-                        this.gameFornecedor = response.fornecedor;
-                        this.gameName = response.gameName;
-                        this.gameProviderName = response.gameFornecedorExibicao;
-                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
-                    } else {
-                        this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
-                        this.sessionId = response.sessionId;
-                        if ((this.gameFornecedor == 'tomhorn')) {
-                            this.gameName = response.gameName.split("- 9", 1) || "";
-                        } else {
-                            this.gameName = response.gameName || "";
-                        }
-                    }
-
-                    this.getRelatedAndPopularGames(response.category, this.isCassinoAoVivoPage ? true : false);
-                },
-                error => {
-                    this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
-                    this.router.navigate(['/']);
-                });
+                    });
+        }
     }
 
     handleError(error: string) {
@@ -1159,7 +1164,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.getProviders();
         }
 
-        if(this.isCassinoAoVivoPage) {
+        if (this.isCassinoAoVivoPage) {
             this.getLiveProviders();
         }
     }
