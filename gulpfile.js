@@ -2331,7 +2331,6 @@ gulp.task('joguefacil.bet', function (done) {
         server: "front2.wee.bet",
         host: "joguefacil.bet",
         banca: "JOGUE FÁCIL",
-        styles: "",
-        dominioTemp: "joguefacil.wee.bet"
+        styles: ""
     });
 });
