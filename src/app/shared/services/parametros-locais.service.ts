@@ -53,7 +53,7 @@ export class ParametrosLocaisService {
                         body.prepend(GTMScriptBody);
                     }
 
-                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.legitimuz_token);
+                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.legitimuz_token && response?.opcoes?.faceMatchType == 'legitimuz');
                     if (LEGITIMUZ_ENABLED) {
                         const LegitimuzScripSDK = this.document.createElement('script');
                         LegitimuzScripSDK.src = 'https://cdn.legitimuz.com/js/sdk/legitimuz-sdk.js';
@@ -62,6 +62,19 @@ export class ParametrosLocaisService {
 
                         head.appendChild(LegitimuzScripSDK);
                         head.appendChild(LegitimuzScripSDKFaceIndex);
+                    }
+
+                    const DOCK_CHECK_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.dockCheck_token && response?.opcoes?.faceMatchType == 'docCheck');
+                    if (DOCK_CHECK_ENABLED) {
+                        const DockCheckScripSDK = this.document.createElement('script');
+                        DockCheckScripSDK.innerHTML = `window.ex_partner = {ex_doccheck_identity_key_id: "${response?.opcoes?.dockCheck_key_id}",};
+                            (function (w, d, src){var h = d.getElementsByTagName("head")[0];
+                                var s=d.createElement("script"); s.src = src;
+                                if (!w.exDocCheck) h.appendChild(s);
+                                
+                            })(window, document, "https://doccheck.exato.digital/doccheck.js");
+                        `;
+                        head.appendChild(DockCheckScripSDK);
                     }
 
                     const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key

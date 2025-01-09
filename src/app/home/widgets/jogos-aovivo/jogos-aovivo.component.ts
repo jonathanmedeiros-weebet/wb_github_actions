@@ -156,7 +156,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
 
                     this.showLoadingIndicator = false;
 
-                    this.live();
+                    // this.live();
                 }
             );
     }

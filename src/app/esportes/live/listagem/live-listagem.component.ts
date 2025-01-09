@@ -204,7 +204,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     }, 2000);
 
                     this.showLoadingIndicator = false;
-                    this.live();
+                    // this.live();
                 },
                 error => this.handleError(error)
             );
