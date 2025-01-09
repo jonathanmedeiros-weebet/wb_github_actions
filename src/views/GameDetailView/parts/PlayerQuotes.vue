@@ -107,7 +107,7 @@ export default {
 
             if(gameExist && quoteExist) {
                 removeQuote(this.game._id);
-            } else {
+            } else {  
                 addQuote({
                     gameId: this.game._id,
                     gameName: this.game.nome,
@@ -115,7 +115,7 @@ export default {
                     eventId: this.game.event_id,
                     live: this.game.ao_vivo,
                     quoteKey: odd.key,
-                    quoteValue: odd.value,
+                    quoteValue: Number(odd.finalValue),
                     quoteName: playerName,
                     quoteGroupName: odd.label,
                     favorite: this.game.favorito,

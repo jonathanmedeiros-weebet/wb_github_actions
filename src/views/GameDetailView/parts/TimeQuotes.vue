@@ -101,7 +101,7 @@ export default {
                     eventId: this.game.event_id,
                     live: this.game.ao_vivo,
                     quoteKey: odd.key,
-                    quoteValue: odd.value,
+                    quoteValue: Number(odd.finalValue),
                     quoteName: odd.label,
                     quoteGroupName: groupName,
                     favorite: this.game.favorito,
