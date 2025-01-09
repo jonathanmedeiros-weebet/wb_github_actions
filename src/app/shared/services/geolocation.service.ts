@@ -96,7 +96,7 @@ export class GeolocationService {
         }
     }
 
-    public async getReverseGeolocation(lat: number, lng: number): Promise<ReverseGeolocation> {
+    async getReverseGeolocation(lat: number, lng: number): Promise<ReverseGeolocation> {
         try {
             let latlng = {
                 latlng: `${lat},${lng}`
