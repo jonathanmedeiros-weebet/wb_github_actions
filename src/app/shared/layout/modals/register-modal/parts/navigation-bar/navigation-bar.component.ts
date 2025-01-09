@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StepService } from 'src/app/shared/services/step.service';
 
 @Component({
     selector: 'app-navigation-bar',
@@ -9,15 +10,17 @@ export class NavigationBarComponent {
     currentIndex = 0;
     totalSteps = 3;
 
+    constructor(private stepService: StepService) {
+        this.stepService.currentIndex$.subscribe((index) => {
+            this.currentIndex = index;
+        });
+    }
+
     previous() {
-        if (this.currentIndex > 0) {
-            this.currentIndex--;
-        }
+        this.stepService.previous();
     }
 
     next() {
-        if (this.currentIndex < this.totalSteps - 1) {
-            this.currentIndex++;
-        }
+        this.stepService.next();
     }
 }

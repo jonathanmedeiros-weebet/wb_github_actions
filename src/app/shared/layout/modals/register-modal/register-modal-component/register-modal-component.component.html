@@ -10,13 +10,15 @@
                 </a>
             </div>
         </div>
-        <div class="body-form-register">
-            <app-stepper-progress-bar></app-stepper-progress-bar>
-        </div>
-        <div class="body-register">
-            <app-personal-data></app-personal-data>
-            <app-address-data></app-address-data>
-            <app-login-data></app-login-data>
+        <div class="body">
+            <div class="body-form-register">
+                <app-stepper-progress-bar></app-stepper-progress-bar>
+            </div>
+            <div class="body-register">
+                <app-personal-data *ngIf="currentIndex == 0"></app-personal-data>
+                <app-address-data *ngIf="currentIndex == 1"></app-address-data>
+                <app-login-data *ngIf="currentIndex == 2"></app-login-data>
+            </div>
         </div>
     </div>
     <app-navigation-bar></app-navigation-bar>

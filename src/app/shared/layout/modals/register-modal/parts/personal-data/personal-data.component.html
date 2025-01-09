@@ -1,1 +1,50 @@
-<p>personal-data works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input
+                                type="text"
+                                id="cpf"
+                                class="form-control inverted-out"
+                                mask="000.000.000-00"
+                                (change)="validarCpf()"
+                                formControlName="cpf"
+                                [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
+                                inputmode="numeric"
+                                [readonly]="faceMatchRequested"
+                            >
+                            <label for="cpf">{{'geral.cpf' | translate}}</label>
+                        </div>
+
+                        <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial) || (validarBeneficioProgramaSocial && !cpfValidado)">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input
+                                type="text"
+                                id="nome"
+                                class="form-control inverted-out"
+                                (blur)="onBlurGa4Name($event)"
+                                (beforeinput)="onBeforeInput($event, 'name')"
+                                formControlName="nome"
+                                [ngClass]="applyCssInputError('nome')"
+                                placeholder=" "
+                                [readonly]="autoPreenchimento || validarBeneficioProgramaSocial"
+                            >
+                            <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
+                        </div>
+                        <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
+                    </div>
+                </div>
+                <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">
+            </div>
+        </div>
+    </div>
+</form>
