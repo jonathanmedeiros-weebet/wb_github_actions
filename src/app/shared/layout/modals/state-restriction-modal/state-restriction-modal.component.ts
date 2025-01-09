@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-configuracao-restricao-estado',
-  templateUrl: './configuracao-restricao-estado.component.html',
-  styleUrls: ['./configuracao-restricao-estado.component.css']
+  selector: 'app-state-restriction-modal',
+  templateUrl: './state-restriction-modal.component.html',
+  styleUrls: ['./state-restriction-modal.component.css']
 })
-export class ConfiguracaoRestricaoEstadoComponent {
-    // @Input() message: string = '';
+export class StateRestrictionModalComponent {
     constructor(
         public activeModal: NgbActiveModal,
         private router: Router

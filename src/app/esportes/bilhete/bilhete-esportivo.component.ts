@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { Component, ChangeDetectorRef, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { Subject, Observable, of, BehaviorSubject } from 'rxjs';
@@ -16,13 +16,14 @@ import {
     ParametrosLocaisService,
     PreApostaEsportivaService,
     SportIdService,
+    GeolocationService
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { Geolocation } from 'src/app/shared/services/geolocation.service';
 import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 
 @Component({
@@ -74,8 +75,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     footballId;
     currentLanguage = 'pt';
     basketballId;
-    sportId:number;
-    liveUrl:string;
+    sportId: number;
+    liveUrl: string;
     private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
 
     constructor(
@@ -399,22 +400,26 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
-            let ibgeCode = sessionStorage.getItem('ibge_code');
-            let localeCity = sessionStorage.getItem('locale_city');
-            let localeState = sessionStorage.getItem('locale_state');
-    
-            if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
+            if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
                 valido = false;
-                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
-                this.geolocationService.getGeolocation();
+                msg = this.translate.instant('geral.geolocationError');
+                await this.geolocationService.getGeolocation();
+            }
+
+            const restrictionStateBet = this.paramsService.getRestrictionStateBet();
+
+            if (restrictionStateBet != 'Todos') {
+                let localeState = localStorage.getItem('locale_state');
+
+                if (restrictionStateBet != localeState) {
+                    valido = false;
+                    msg = this.translate.instant('geral.stateRestriction');
+                }
             }
 
             if (valido) {
                 if (this.isLoggedIn) {
                     let values = await this.ajustarDadosParaEnvio();
-                    values['ibge_code'] = ibgeCode;
-                    values['locale_city'] = localeCity;
-                    values['locale_state'] = localeState;
                     this.salvarAposta(values);
                 } else {
                     this.enableSubmit();
@@ -529,9 +534,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             }
             if (error.code === 18) {
                 this.messageService.error(error.message);
-                    setInterval(() => {
-                        window.location.reload();
-                    }, 2000);
+                setInterval(() => {
+                    window.location.reload();
+                }, 2000);
             }
 
         }
@@ -607,13 +612,10 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
             this.geolocationService.getGeolocation();
             this.enableSubmit();
-            return this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
+            return this.handleError(this.translate.instant('geral.geolocationError'));
         }
 
         let values = await this.ajustarDadosParaEnvio();
-        values['ibge_code'] = sessionStorage.getItem('ibge_code');
-        values['locale_city'] = sessionStorage.getItem('locale_city');
-        values['locale_state'] = sessionStorage.getItem('locale_state');
 
         if (this.tipoApostaDeslogado === 'preaposta') {
             this.preApostaService.create(values)
@@ -664,11 +666,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     async ajustarDadosParaEnvio() {
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
 
-        const location = await this.geolocationService.getGeolocation();
-        this.geolocation.next(location);
-
         const values = clone(this.form.value);
         values['geolocation'] = this.geolocation.value;
+        values['ibge_code'] = localStorage.getItem('ibge_code');
+        values['locale_city'] = localStorage.getItem('locale_city');
+        values['locale_state'] = localStorage.getItem('locale_state');
+
         values.itens.map(item => {
             // Cotacação Local
             if (cotacoesLocais[item.jogo_event_id] && cotacoesLocais[item.jogo_event_id][item.cotacao.chave]) {
@@ -699,9 +702,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     checkBlockedGame() {
         const bloqueados = this.paramsService.getJogosBloqueados();
         const campeonadosBloqueados = this.paramsService.getCampeonatosBloqueados(this.sportIdService.footballId);
-        this.itens.value.forEach((element, index) =>{
-            if(bloqueados.includes(element.jogo_id) || campeonadosBloqueados.includes(element.jogo.campeonato._id) ){
-               this.itens.removeAt(index)
+        this.itens.value.forEach((element, index) => {
+            if (bloqueados.includes(element.jogo_id) || campeonadosBloqueados.includes(element.jogo.campeonato._id)) {
+                this.itens.removeAt(index)
             }
         })
         this.bilheteService.atualizarItens(this.itens.value);

@@ -63,20 +63,28 @@ export class GeolocationService {
 
     async getGeolocation(isReverse = true): Promise<Geolocation> {
         try {
-            if (this.requestOnGoing) return; // Avoid multiple requests
+            if (this.requestOnGoing) {
+                return; // Avoid multiple requests
+            }
+
             this.requestOnGoing = isReverse ? true : false;
             let currentPosition = await this.getCurrentPosition() as Geolocation;
 
-            if (isReverse) await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng) ;
+            if (currentPosition) {
+                localStorage.setItem('lat', String(currentPosition.lat));
+                localStorage.setItem('lng', String(currentPosition.lng));
 
-            return currentPosition;
+                if (isReverse) {
+                    await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
+                }
+
+                return currentPosition;
+            } else {
+                return null;
+            }
         } catch (error) {
             this.requestOnGoing = false;
-            return {
-                error: true,
-                lat: 0,
-                lng: 0
-            }
+            return null;
         }
     }
 
@@ -92,10 +100,11 @@ export class GeolocationService {
             ).toPromise();
 
             this.requestOnGoing = false;
-            sessionStorage.setItem('ibge_code', res.ibge_code ?? '');
-            sessionStorage.setItem('locale_city', res.city ?? '');
-            sessionStorage.setItem('locale_state', res.state ?? '');
-            sessionStorage.setItem('country', res.country === 'Brasil' || res.country === 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
+            localStorage.setItem('ibge_code', res.ibge_code ?? '');
+            localStorage.setItem('locale_city', res.city ?? '');
+            localStorage.setItem('locale_state', res.state ?? '');
+            localStorage.setItem('country', res.country === 'Brasil' || res.country === 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
+            
             return res;
         } catch (error) {
             this.requestOnGoing = false;
@@ -136,10 +145,10 @@ export class GeolocationService {
     }
 
     public checkGeolocation(): Boolean {
-        const codigoIbge = (sessionStorage.getItem('ibge_code') === 'null' || sessionStorage.getItem('ibge_code') === 'undefined') ? null : sessionStorage.getItem('ibge_code');
-        const city = (sessionStorage.getItem('locale_city') === 'null' || sessionStorage.getItem('locale_city') === 'undefined') ? null : sessionStorage.getItem('locale_city');
-        const state = (sessionStorage.getItem('locale_state') === 'null' || sessionStorage.getItem('locale_state') === 'undefined') ? null : sessionStorage.getItem('locale_state');
-        const country = (sessionStorage.getItem('country') === 'null' || sessionStorage.getItem('country') === 'undefined') ? null : sessionStorage.getItem('country');
+        const codigoIbge = (localStorage.getItem('ibge_code') === 'null' || localStorage.getItem('ibge_code') === 'undefined') ? null : localStorage.getItem('ibge_code');
+        const city = (localStorage.getItem('locale_city') === 'null' || localStorage.getItem('locale_city') === 'undefined') ? null : localStorage.getItem('locale_city');
+        const state = (localStorage.getItem('locale_state') === 'null' || localStorage.getItem('locale_state') === 'undefined') ? null : localStorage.getItem('locale_state');
+        const country = (localStorage.getItem('country') === 'null' || localStorage.getItem('country') === 'undefined') ? null : localStorage.getItem('country');
 
         if (country != 'Brasil' && country != 'Brazil') {
             return false;
@@ -167,7 +176,7 @@ export class GeolocationService {
     }
 
     public isInternational(): Boolean {
-        const country = (sessionStorage.getItem('country') === 'null' || sessionStorage.getItem('country') === 'undefined') ? null : sessionStorage.getItem('country');
+        const country = (localStorage.getItem('country') === 'null' || localStorage.getItem('country') === 'undefined') ? null : localStorage.getItem('country');
 
         if (country == null || country == 'Brasil' || country == 'Brazil') {
             return false;
