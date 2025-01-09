@@ -58,6 +58,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     currentLocationPermission = null;
     lastLocationPermission = null
     restrictionStateBet;
+    btnDisabled = false;
     public isVPN = false;
 
     constructor(
@@ -94,6 +95,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.modoClienteHabilitado = this.paramsLocais.getOpcoes().modo_cliente;
         this.modoCambistaHabilitado = this.paramsLocais.getOpcoes().modo_cambista;
         this.restrictionStateBet = this.paramsLocais.getRestrictionStateBet();
+        this.btnDisabled = false;
 
         this.createForm();
 
@@ -168,7 +170,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     async submit() {
-        let allowed = false;
+        this.btnDisabled = true;
+        let allowed = true;
 
         if (this.restrictionStateBet != 'Todos') {
             this.lastLocationPermission = this.currentLocationPermission;
@@ -176,20 +179,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
             if (this.currentLocationPermission == 'granted') {
                 if (this.lastLocationPermission == 'denied') {
+                    allowed = false;
                     location.reload();
-                } else {
-                    if (!this.geolocationService.checkGeolocation()) {
-                        await this.geolocationService.saveLocalStorageLocation();
-                    }
-
-                    allowed = true;
+                } else if (!this.geolocationService.checkGeolocation()) {
+                    allowed = await this.geolocationService.saveLocalStorageLocation();
                 }
             } else {
-                this.handleError(this.translate.instant('geral.locationPermission'));
-                await this.geolocationService.saveLocalStorageLocation();
+                allowed = await this.geolocationService.saveLocalStorageLocation();
             }
-        } else {
-            allowed = true;
         }
 
         if (allowed) {
@@ -262,6 +259,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         this.handleError(error.message);
                     }
                 );
+        } else {
+            this.handleError(this.translate.instant('geral.locationPermission'));
         }
     }
 
@@ -298,6 +297,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     }
 
     handleError(error: string) {
+        this.btnDisabled = false;
         this.messageService.error(error);
     }
 
@@ -340,6 +340,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     } else {
                         location.reload();
                     }
+                    this.btnDisabled = true;
                     this.activeModal.close();
                     this.xtremepushBackgroundRemove();
                 },

@@ -65,8 +65,10 @@ export class GeolocationService {
     async saveLocalStorageLocation() {
         try {
             if (this.requestOnGoing) {
-                return; // Avoid multiple requests
+                return false; // Avoid multiple requests
             }
+
+            this.requestOnGoing = true;
 
             let currentPosition = await this.getCurrentPosition() as Geolocation;
 
@@ -75,12 +77,16 @@ export class GeolocationService {
                 localStorage.setItem('lng', String(currentPosition.lng));
 
                 await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
+                
+                this.requestOnGoing = false;
+                return true;
             } else {
-                return null;
+                this.requestOnGoing = false;
+                return false;
             }
         } catch (error) {
             this.requestOnGoing = false;
-            return null;
+            return false;
         }
     }
 
