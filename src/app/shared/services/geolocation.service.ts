@@ -53,6 +53,7 @@ export class GeolocationService {
     ];
     private options = {
         enableHighAccuracy: false,
+        timeout: 3000,
         // Cache time = 10min
         maximumAge: 1000 * 60 * 10,
     };
@@ -61,30 +62,37 @@ export class GeolocationService {
 
     constructor(private http: HttpClient, private header: HeadersService) { }
 
-    async getGeolocation(isReverse = true): Promise<Geolocation> {
+    async saveLocalStorageLocation() {
         try {
             if (this.requestOnGoing) {
                 return; // Avoid multiple requests
             }
 
-            this.requestOnGoing = isReverse ? true : false;
             let currentPosition = await this.getCurrentPosition() as Geolocation;
 
             if (currentPosition) {
                 localStorage.setItem('lat', String(currentPosition.lat));
                 localStorage.setItem('lng', String(currentPosition.lng));
 
-                if (isReverse) {
-                    await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
-                }
-
-                return currentPosition;
+                await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
             } else {
                 return null;
             }
         } catch (error) {
             this.requestOnGoing = false;
             return null;
+        }
+    }
+
+    async getGeolocation(): Promise<Geolocation> {
+        try {
+            return await this.getCurrentPosition() as Geolocation;
+        } catch (error) {
+            return {
+                error: true,
+                lat: 0,
+                lng: 0
+            };
         }
     }
 
@@ -104,7 +112,7 @@ export class GeolocationService {
             localStorage.setItem('locale_city', res.city ?? '');
             localStorage.setItem('locale_state', res.state ?? '');
             localStorage.setItem('country', res.country === 'Brasil' || res.country === 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
-            
+
             return res;
         } catch (error) {
             this.requestOnGoing = false;

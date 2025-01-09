@@ -403,7 +403,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
                 valido = false;
                 msg = this.translate.instant('geral.geolocationError');
-                await this.geolocationService.getGeolocation();
+                await this.geolocationService.saveLocalStorageLocation();
             }
 
             const restrictionStateBet = this.paramsService.getRestrictionStateBet();
@@ -609,8 +609,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     async finalizarApostaDeslogado() {
         this.disabledSubmit();
 
-        if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
-            this.geolocationService.getGeolocation();
+        if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
+            this.geolocationService.saveLocalStorageLocation();
             this.enableSubmit();
             return this.handleError(this.translate.instant('geral.geolocationError'));
         }

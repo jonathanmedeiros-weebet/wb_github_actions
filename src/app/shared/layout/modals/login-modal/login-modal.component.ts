@@ -180,14 +180,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                     location.reload();
                 } else {
                     if (!this.geolocationService.checkGeolocation()) {
-                        await this.geolocationService.getGeolocation();
+                        await this.geolocationService.saveLocalStorageLocation();
                     }
 
                     allowed = true;
                 }
             } else {
                 this.handleError(this.translate.instant('geral.locationPermission'));
-                await this.geolocationService.getGeolocation();
+                await this.geolocationService.saveLocalStorageLocation();
             }
         } else {
             allowed = true;

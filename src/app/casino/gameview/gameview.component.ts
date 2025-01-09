@@ -101,7 +101,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private clienteService: ClienteService,
         private translate: TranslateService,
         private geolocationService: GeolocationService,
-        @Inject(DOCUMENT) private document: any,
+        @Inject(DOCUMENT) private document: any
 
     ) {
         this.currentUrl = window.location.href;
@@ -442,7 +442,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     async loadGame() {
         if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
             this.handleError(this.translate.instant('geral.geolocationError'));
-            await this.geolocationService.getGeolocation();
+            await this.geolocationService.saveLocalStorageLocation();
             this.router.navigate(['/']);
             return;
         }
@@ -461,7 +461,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
-                async response => {
+                response => {
                     if (response['error'] == 1) {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);

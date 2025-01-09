@@ -40,10 +40,6 @@ export class AuthDoisFatoresModalComponent extends BaseFormComponent implements 
         this.createForm();
         this.enviarEmail();
         this.contagem();
-
-        this.geolocationService
-            .getGeolocation(false)
-            .then((geolocation) => this.geolocation = geolocation)
     }
 
     createForm() {
