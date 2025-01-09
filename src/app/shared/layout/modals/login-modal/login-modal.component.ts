@@ -58,6 +58,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     currentLocationPermission = null;
     lastLocationPermission = null
     restrictionStateBet;
+    public isVPN = false;
 
     constructor(
         public activeModal: NgbActiveModal,
