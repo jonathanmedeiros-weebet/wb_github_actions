@@ -171,95 +171,103 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     async submit() {
         this.btnDisabled = true;
-        let allowed = true;
 
-        if (this.restrictionStateBet != 'Todos') {
-            this.lastLocationPermission = this.currentLocationPermission;
-            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+        try {
+            let allowed = true;
 
-            if (this.currentLocationPermission == 'granted') {
-                if (this.lastLocationPermission == 'denied') {
+            if (this.restrictionStateBet != 'Todos') {
+                this.lastLocationPermission = this.currentLocationPermission;
+                this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+
+                if (this.currentLocationPermission == 'granted') {
+                    if (this.lastLocationPermission == 'denied') {
+                        allowed = false;
+                        location.reload();
+                    } else if (!this.geolocationService.checkGeolocation()) {
+                        allowed = await this.geolocationService.saveLocalStorageLocation();
+                    }
+                } else if (this.currentLocationPermission == 'denied') {
                     allowed = false;
-                    location.reload();
-                } else if (!this.geolocationService.checkGeolocation()) {
+                } else if (this.currentLocationPermission == 'prompt') {
                     allowed = await this.geolocationService.saveLocalStorageLocation();
                 }
-            } else {
-                allowed = await this.geolocationService.saveLocalStorageLocation();
-            }
-        }
-
-        if (allowed) {
-            const formData = this.form.value;
-
-            if (this.loginMode === 'phone') {
-                formData.username = formData.username.replace(/\s+/g, '');
             }
 
-            this.auth.verificaDadosLogin(formData)
-                .pipe(takeUntil(this.unsub$))
-                .subscribe(
-                    async (res) => {
-                        const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && (this.paramsLocais.getOpcoes().legitimuz_token || this.paramsLocais.getOpcoes().dockCheck_token));
-                        let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
+            if (allowed) {
+                const formData = this.form.value;
 
-                        this.getUsuario();
+                if (this.loginMode === 'phone') {
+                    formData.username = formData.username.replace(/\s+/g, '');
+                }
 
-                        if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
-                            const holdUser = this.usuario;
-                            localStorage.removeItem('user');
-                            const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
-                            if (!faceMatchResult) {
+                this.auth.verificaDadosLogin(formData)
+                    .pipe(takeUntil(this.unsub$))
+                    .subscribe(
+                        async (res) => {
+                            const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && (this.paramsLocais.getOpcoes().legitimuz_token || this.paramsLocais.getOpcoes().dockCheck_token));
+                            let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
+
+                            this.getUsuario();
+
+                            if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
+                                const holdUser = this.usuario;
+                                localStorage.removeItem('user');
+                                const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
+                                if (!faceMatchResult) {
+                                    return;
+                                }
+                                localStorage.setItem('user', JSON.stringify(holdUser));
+                            }
+
+                            if (
+                                Boolean(res) &&
+                                Boolean(res.results) &&
+                                Boolean(res.results.migracao)
+                            ) {
+                                this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
+                                this.activeModal.dismiss();
                                 return;
                             }
-                            localStorage.setItem('user', JSON.stringify(holdUser));
-                        }
 
-                        if (
-                            Boolean(res) &&
-                            Boolean(res.results) &&
-                            Boolean(res.results.migracao)
-                        ) {
-                            this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
-                            this.activeModal.dismiss();
-                            return;
-                        }
+                            if (
+                                Boolean(this.usuario) &&
+                                this.usuario.tipo_usuario === 'cliente' &&
+                                this.authDoisFatoresHabilitado &&
+                                (!Boolean(this.auth.getCookie(this.usuario.cookie)) || isLastAuthOlderThan7Days) &&
+                                this.usuario.login !== 'suporte@wee.bet'
+                            ) {
+                                this.abrirModalAuthDoisFatores();
+                                return;
+                            }
 
-                        if (
-                            Boolean(this.usuario) &&
-                            this.usuario.tipo_usuario === 'cliente' &&
-                            this.authDoisFatoresHabilitado &&
-                            (!Boolean(this.auth.getCookie(this.usuario.cookie)) || isLastAuthOlderThan7Days) &&
-                            this.usuario.login !== 'suporte@wee.bet'
-                        ) {
-                            this.abrirModalAuthDoisFatores();
-                            return;
-                        }
+                            this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
+                            this.handleLogin();
+                            if (this.paramsLocais.getOpcoes().enableForceChangePassword) {
+                                this.clienteService.checkPasswordExpirationDays(this.usuario.id)
+                            }
+                        },
+                        (error) => {
+                            if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
+                                sessionStorage.setItem('user', JSON.stringify(error.user));
+                                this.openModalInactiveRegister();
+                            }
 
-                        this.form.value.cookie = this.auth.getCookie(this.usuario.cookie);
-                        this.handleLogin();
-                        if (this.paramsLocais.getOpcoes().enableForceChangePassword) {
-                            this.clienteService.checkPasswordExpirationDays(this.usuario.id)
-                        }
-                    },
-                    (error) => {
-                        if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
-                            sessionStorage.setItem('user', JSON.stringify(error.user));
-                            this.openModalInactiveRegister();
-                        }
+                            if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
+                                this.openModalBlockPeerAttemps();
+                            }
 
-                        if (error.code === LoginErrorCode.CUSTOMER_BLOCKED) {
-                            this.openModalBlockPeerAttemps();
+                            if (error.code === LoginErrorCode.ACTIVE_SESSION) {
+                                this.openModalSessionAlert();
+                                return
+                            }
+                            this.handleError(error.message);
                         }
-
-                        if (error.code === LoginErrorCode.ACTIVE_SESSION) {
-                            this.openModalSessionAlert();
-                            return
-                        }
-                        this.handleError(error.message);
-                    }
-                );
-        } else {
+                    );
+            } else {
+                this.handleError(this.translate.instant('geral.locationPermission'));
+            }
+        } catch (error) {
+            this.btnDisabled = false;
             this.handleError(this.translate.instant('geral.locationPermission'));
         }
     }

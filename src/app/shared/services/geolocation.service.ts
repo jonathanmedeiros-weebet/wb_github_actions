@@ -69,21 +69,24 @@ export class GeolocationService {
             }
 
             this.requestOnGoing = true;
-
             let currentPosition = await this.getCurrentPosition() as Geolocation;
 
-            if (currentPosition) {
-                localStorage.setItem('lat', String(currentPosition.lat));
-                localStorage.setItem('lng', String(currentPosition.lng));
 
-                await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
-                
-                this.requestOnGoing = false;
-                return true;
-            } else {
-                this.requestOnGoing = false;
-                return false;
+            if (currentPosition.error) {
+                throw new Error();
             }
+
+            localStorage.setItem('lat', String(currentPosition.lat));
+            localStorage.setItem('lng', String(currentPosition.lng));
+
+            let reverseGeolocation = await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
+
+            if (reverseGeolocation.error) {
+                throw new Error();
+            }
+
+            this.requestOnGoing = false;
+            return true;
         } catch (error) {
             this.requestOnGoing = false;
             return false;
@@ -135,11 +138,16 @@ export class GeolocationService {
     public getCurrentPosition(): Promise<Geolocation> {
         return new Promise((resolve, reject) => {
             try {
-                if (!navigator.geolocation) throw new Error('Geolocation not allowed.');
+                if (!navigator.geolocation) {
+
+                    throw new Error('Geolocation not allowed.');
+                };
 
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        if (!position) throw new Error('Unable to find current position')
+                        if (!position) {
+                            reject('Unable to find current position');
+                        }
 
                         resolve({
                             error: false,
@@ -148,7 +156,7 @@ export class GeolocationService {
                         });
                     },
                     (error) => {
-                        throw error
+                        reject(error)
                     },
                     this.options
                 );
