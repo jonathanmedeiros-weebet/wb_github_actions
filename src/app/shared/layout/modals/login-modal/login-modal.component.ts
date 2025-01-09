@@ -59,8 +59,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
     lastLocationPermission = null
     restrictionStateBet;
 
-    public isVPN = false;
-
     constructor(
         public activeModal: NgbActiveModal,
         private fb: UntypedFormBuilder,
@@ -192,8 +190,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         } else {
             allowed = true;
         }
-
-        console.log(allowed + ' allowed');
 
         if (allowed) {
             const formData = this.form.value;
