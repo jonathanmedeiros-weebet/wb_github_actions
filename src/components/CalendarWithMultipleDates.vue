@@ -175,7 +175,7 @@ export default {
     font-weight: 500;
     padding: 10px;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__body {
@@ -198,9 +198,9 @@ export default {
     padding: 10px 24px;
 
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     background: #181818;
-    background: var(--header);
+    background: var(--background);
   }
 
   &__weeks {
@@ -225,13 +225,13 @@ export default {
     font-size: 14px;
     font-weight: 500;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
 
     &--selected {
       background: #35cd96;
       background: var(--highlight);
       color: #181818;
-      color: var(--foreground-highlight);
+      color: var(--highlight-foreground);
       border-radius: 50px;
     }
   }

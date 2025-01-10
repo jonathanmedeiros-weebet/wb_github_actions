@@ -13,16 +13,16 @@
           <p class="wallet__label">Crédito</p>
           <span class="wallet__value">
             R$ {{ isCreditoVisible ? '*******' : credit }}
-            <IconEye v-if="!isCreditoVisible" :color="'var(--foreground-inputs-odds)'" class="wallet__eye" @click.native="toggleCreditoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleCreditoVisibility" />
+            <IconEye v-if="!isCreditoVisible" :color="'var(--input-foreground)'" class="wallet__eye" @click.native="toggleCreditoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" :color="'var(--input-foreground)'" @click.native="toggleCreditoVisibility" />
           </span>
         </div>
         <div class="wallet__item">
           <p class="wallet__label">Saldo</p>
           <span class="wallet__value">
             R$ {{  isSaldoVisible ? '*******' : balance }}
-            <IconEye v-if="!isSaldoVisible" class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleSaldoVisibility" />
-            <IconEyeClose v-else class="wallet__eye" :color="'var(--foreground-inputs-odds)'" @click.native="toggleSaldoVisibility" />
+            <IconEye v-if="!isSaldoVisible" class="wallet__eye" :color="'var(--input-foreground)'" @click.native="toggleSaldoVisibility" />
+            <IconEyeClose v-else class="wallet__eye" :color="'var(--input-foreground)'" @click.native="toggleSaldoVisibility" />
           </span>
         </div>
         <div class="wallet__shortcuts">
@@ -45,23 +45,23 @@
         <span class="more-options__text">Cartão</span>
         <div class="more-options__card">
           <button class="more-options__item" @click="handleOpenConsultCardModal">
-            <IconCreditCard class="more-options__icon" />
+            <IconCreditCard class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Consultar</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/create-card')">
-            <IconCreditCard class="more-options__icon" />
+            <IconCreditCard class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Criar</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/list-cards')">
-            <IconCreditCard class="more-options__icon" />
+            <IconCreditCard class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Listagem</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/withdrawal')">
-            <IconCreditCard class="more-options__icon" />
+            <IconCreditCard class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Solicitações de saque</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/recharge-card')">
-            <IconCreditCard class="more-options__icon" />
+            <IconCreditCard class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Recarga</span>
           </button>
         </div>
@@ -71,27 +71,27 @@
         <span class="more-options__text">Mais opções</span>
         <div class="more-options__card">
           <button class="more-options__item" @click="handleNavigate('/movements')">
-            <IconMoney class="more-options__icon" />
+            <IconMoney class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Movimentações</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/change-password')">
-            <IconPassKey class="more-options__icon" />
+            <IconPassKey class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Alterar senha</span>
           </button>
           <button class="more-options__item" @click="handlePrinterSetting">
-            <IconSettings class="more-options__icon" />
+            <IconSettings class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Configurações</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/results')">
-            <IconFactCheck class="more-options__icon" />
+            <IconFactCheck class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Resultados</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/table')">
-            <IconPrinter class="more-options__icon" color="var(--foreground-inputs-odds)" />
+            <IconPrinter class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Tabela</span>
           </button>
           <button class="more-options__item" @click="handleLogout">
-            <IconLogout class="more-options__icon" />
+            <IconLogout class="more-options__icon" :color="useHexColors" />
             <span class="more-options__text-icon">Sair</span>
           </button>
         </div>
@@ -125,7 +125,7 @@ import IconInsertChart from '@/components/icons/IconInsertChart.vue';
 import ModalConsultTicket from './TicketsView/parts/ModalConsultTicket.vue';
 import ModalConsultCard from './ModalConsultCard.vue';
 import { logout, getBetByCode, getFinancial, LocalStorageKey, consultCard } from '@/services';
-import { formatCurrency, wbPostMessage } from '@/utilities';
+import { formatCurrency, isAndroid5, wbPostMessage } from '@/utilities';
 import { localStorageService } from "@/services";
 import Toast from '@/components/Toast.vue';
 import { ToastType } from '@/enums';
@@ -179,6 +179,9 @@ export default {
     },
     showBetCardMenu() {
       return this.configClientStore?.options?.cartao_aposta ?? false
+    },
+    useHexColors() {
+      return isAndroid5() ? '#ffffff' : 'var(--game-foreground)';
     }
   },
   methods: {
@@ -268,7 +271,7 @@ export default {
 <style lang="scss" scoped>
 .menu {
   color: #ffffff;
-  color: var(--foreground-header);
+  color: var(--foreground);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -304,15 +307,15 @@ export default {
     font-weight: 500;
     line-height: 24px;
     color: #ffffff;
-    color: var(--foreground-header);  
+    color: var(--foreground);  
   }
 
   &__greeting {
     font-size: 16px;
     font-weight: 400;
     line-height: 16px;
-    color: #ffffff50;
-    color: rgba(var(--foreground-header-rgb), 0.8)
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), 0.5)
   }
 }
 
@@ -321,7 +324,7 @@ export default {
   height: auto;
   margin-top: 18px;
   background-color: #181818;
-  background-color: var(--background);
+  background-color: var(--game);
   border-radius: 10px;
   padding: 22px 18px;
   padding-top: 16px;
@@ -333,7 +336,7 @@ export default {
   &__label {
     display: flex;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--game-foreground);
     opacity: 0.5;
     font-size: 13px; 
   }
@@ -342,7 +345,7 @@ export default {
     display: flex;
     align-items: center;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--game-foreground);
     font-size: 20px; 
   }
 
@@ -350,7 +353,7 @@ export default {
     margin-left: 15px;
     cursor: pointer;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--game-foreground);
     opacity: 0.5;
   }
 
@@ -364,11 +367,11 @@ export default {
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    background-color: var(--foreground-header);
+    background-color: var(--button-foreground);
     border: none;
     border-radius: 18px;
-    color: #181818;
-    color: var(--background); 
+    color: #0a0a0a;
+    color: var(--button); 
     padding: 7px;
     white-space: nowrap;
     font-size: 10px;
@@ -376,8 +379,8 @@ export default {
   }
 
   &__icon {
-    fill: #181818;
-    fill: var(--background);
+    fill: #0a0a0a;
+    fill: var(--button);
     align-items: center;
   }
 }
@@ -389,7 +392,7 @@ export default {
 
   &__text {
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     font-size: 16px;
     padding-bottom: 10px;
   }
@@ -397,7 +400,7 @@ export default {
   &__card {
     width: 100%;
     background-color: #181818;
-    background-color: var(--background);
+    background-color: var(--game);
     padding: 18px 8px;
     padding-top: 8px;
     border-radius: 10px;
@@ -417,7 +420,7 @@ export default {
 
   &__icon { 
     fill: #ffffff;
-    fill: var(--foreground-header);
+    fill: var(--game-foreground);
     align-items: center;
   }
 

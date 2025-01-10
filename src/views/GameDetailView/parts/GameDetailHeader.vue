@@ -178,8 +178,8 @@ export default {
 
         max-width: 250px;
         text-align: center;
-        color: #FFFFFF80;
-        color: var(--foreground);
+        color: rgba(255, 255, 255, 0.5);
+        color: rgba(var(--foreground-rgb), .5);
         opacity: 0.8;
     }
 

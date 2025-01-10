@@ -92,7 +92,7 @@ export default {
 <style lang="scss" scoped>
 .recharge-card {
   color: #ffffff;
-  color: var(--foreground-game);
+  color: var(--game-foreground);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -112,6 +112,8 @@ export default {
     width: 100%;
     background: #181818;
     background: var(--game);
+    color: #ffffff;
+    color: var(--game-foreground);
 
     border-radius: 2px;
   }
@@ -124,11 +126,14 @@ export default {
     margin-top: 10px; 
     font-size: 14px; 
     color: #ffffff;
+    color: var(--game-foreground);
 
     &__text {
         display: flex;
         justify-content: center;
-        font-size: 14px
+        font-size: 14px;
+        color: #ffffff;
+        color: var(--game-foreground);
     }
 }
 

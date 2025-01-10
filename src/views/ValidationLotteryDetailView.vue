@@ -296,7 +296,7 @@ export default {
         width: 100%;
         height: 1px;
         background: #ffffff;
-        background: var(--foreground-league);
+        background: var(--championship-foreground);
         opacity: 0.1;
         position: absolute;
         left: 0;
@@ -327,8 +327,8 @@ export default {
             height: 25px;
             width: 25px;
             font-size: 11px;
-            background-color: var(--sub-nav);
-            color: var(--foreground-header); 
+            background-color: var(--input);
+            color: var(--input-foreground); 
             clip-path: circle(50%);
             text-align: center;
         }

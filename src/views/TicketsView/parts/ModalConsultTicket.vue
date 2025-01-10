@@ -57,7 +57,7 @@ export default {
 .modal-consult-ticket {
   &__title {
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--game-foreground);
     font-size: 16px;
     font-weight: 500;
   }
@@ -70,14 +70,14 @@ export default {
   }
 
   &__text {
-    color: #ffffff80;
-    color: rgba(var(--foreground-header-rgb), 0.5);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), 0.5);
     font-size: 14px;
   }
 
   &__input ::v-deep .input__group,
   &__input ::v-deep .input__field {
-    background-color: var(--header) !important;
+    background-color: var(--background) !important;
   }
 }
 

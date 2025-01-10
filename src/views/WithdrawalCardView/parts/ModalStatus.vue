@@ -62,42 +62,44 @@ export default {
 
 <style lang="scss" scoped>
 .modal-status {
-    &__title {
-        color: #FFFFFF80;
-        color: var(--foreground-inputs-odds);
-        font-size: 16px;
-        font-weight: 500;
-    }
+  &__title {
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--input-foreground-rgb), .5);
+    font-size: 16px;
+    font-weight: 500;
+  }
 
-    &__items {
-        padding: 0 20px 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  &__items {
+    padding: 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    &__item {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 30px;
-        margin-top: 20px;
-        color: #ffffff;
-        color: var(--foreground-header);
-        font-size: 16px;
-        font-weight: 400;
-    }
+  &__item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 30px;
+    margin-top: 20px;
+    color: #ffffff;
+    color: var(--game-foreground);
+    font-size: 16px;
+    font-weight: 400;
+  }
 
-    &__item img {
-        width: 18px;
-        height: 18px;
-        margin-left: 10px;
-    }
+  &__item img {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
 
-    &__icon {
-        margin-bottom: 10px;
-        margin-left: 10px;
-    }
+  &__icon {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    fill: #ffffff;
+    fill: var(--game-foreground);
+  }
 }
 </style>

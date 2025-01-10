@@ -77,9 +77,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   background-color: #181818;
-  background-color: var(--inputs-odds);
-  border: 2px solid #ffffff;
-  border: 2px solid var(--foreground-inputs-odds);
+  background-color: var(--input);
 
   box-sizing: border-box;
   border-radius: 50px;
@@ -93,7 +91,6 @@ export default {
 
   &__icon {
     &--right {
-      background: #FFFFFF1A;
       border-radius: 50px;
       height: 16px;
       width: 16px;
@@ -109,8 +106,8 @@ export default {
     height: 40px;
     font-size: 16px;
     font-weight: 400;
-    color: #ffffff80;
-    color: var(--foreground-league);
+    color: rgba(255, 255, 255, .6);
+    color: rgba(var(--input-foreground-rgb), .6);
     background: transparent;
     border: 0;
     outline: none;

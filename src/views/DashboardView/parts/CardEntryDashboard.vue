@@ -128,14 +128,15 @@ export default {
     flex-direction: column;
     padding: 25px 12px;
     border-radius: 8px;
-    background: #0a0a09;
-    background: var(--background);
+    background: #181818;
+    background: var(--game);
+    color: #ffffff;
+    color: var(--game-foreground);
     
     &__body {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        
     }
 
     &__body-title {
@@ -143,21 +144,21 @@ export default {
         flex-direction: column;
         align-items: start;
         font-size: 14px;
-        color: #ffffff80;
-        color: rgba(var(--foreground-header-rgb), .5);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
     }
 
     &__body-title-value {
         font-size: 24px;
         color: #ffffff;
-        color: var(--foreground-header);
+        color: var(--game-foreground);
         padding-bottom: 20px;
         margin-top: 12px;
     }
 
     &__body-icon {
-        color: #ffffff80;
-        color: var(--foreground-header);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
     }
 
     &__bars {
@@ -208,8 +209,8 @@ export default {
     }
     &__categories-value {
         font-size: 12px;
-        color: #ffffff80;
-        color: rgba(var(--foreground-header-rgb), .5);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
         margin: 0px 0px 0px 15px;
     }
 

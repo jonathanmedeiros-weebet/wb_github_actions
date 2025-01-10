@@ -134,12 +134,12 @@ export default {
     margin-top: 10px;
 
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__description {
     color: #ffffff80;
-    color: rgb(var(--foreground-header-rgb), 0.6);
+    color: rgb(var(--foreground-rgb), 0.6);
     font-size: 16px;
     font-weight: 400;
     line-height: 18.75px;

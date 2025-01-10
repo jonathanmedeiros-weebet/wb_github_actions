@@ -62,8 +62,8 @@ export default {
 <style lang="scss" scoped>
 .modal-lottery-numbers {
     &__title {
-        color: #FFFFFF80;
-        color: var(--foreground-inputs-odds);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
         font-size: 16px;
         font-weight: 500;
         min-height: 26px;
@@ -85,7 +85,7 @@ export default {
         min-height: 30px;
 
         color: #ffffff;
-        color: var(--foreground-inputs-odds);
+        color: var(--game-foreground);
         font-size: 16px;
         font-weight: 400;
         text-align: left;

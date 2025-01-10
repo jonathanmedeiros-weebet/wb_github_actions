@@ -1,63 +1,63 @@
 <template>
     <div class="player-quotes">
         <span v-if="!hasQuotes" class="player-quotes__message">Nenhuma cotação disponível no momento</span>
+        <template v-if="hasQuotes">
+            <Collapse
+                :iconColor="'var(--game-foreground)'"
+                :initCollapsed="true"
+                v-for="(option, index) in options"
+                :key="index" 
+                ref="collapse"
+            > 
+                <template #title>{{ option.title }}</template>
 
-        <Collapse
-            v-else
-            :iconColor="'var(--foreground-game)'"
-            :initCollapsed="true"
-            v-for="(option, index) in options"
-            :key="index" 
-            ref="collapse"
-        > 
-            <template #title>{{ option.title }}</template>
-
-            <div class="collapse__items">
-                <div
-                    class="collapse__item"
-                    v-for="(player, playerIndex) in option.players"
-                    :key="`${playerIndex}-${index}`"
-                >
-                    <span class="collapse__label">{{ player.name }}</span>
+                <div class="collapse__items">
                     <div
-                        class="collapse__options"
-                        :class="{
-                            'collapse__options--three-column': player.odds.length == 3,
-                            'collapse__options--two-column': player.odds.length == 2,
-                        }"
+                        class="collapse__item"
+                        v-for="(player, playerIndex) in option.players"
+                        :key="`${playerIndex}-${index}`"
                     >
-                        <button
-                            class="collapse__option"
-                            v-for="odd in player.odds"
-                            :key="odd.id"
+                        <span class="collapse__label">{{ player.name }}</span>
+                        <div
+                            class="collapse__options"
                             :class="{
-                                'collapse__option--selected': odd.key === quoteSelected,
-                                'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd)
+                                'collapse__options--three-column': player.odds.length == 3,
+                                'collapse__options--two-column': player.odds.length == 2,
                             }"
-                            @click="handleItemClick(odd, player.name)"
                         >
-                            <template v-if="odd.hasPermission">
-                                <IconArrowFillUp
-                                    class="collapse__icon-option"
-                                    v-if="isIncreasedOdd(odd)"
-                                    :size="14"
-                                    color="var(--color-success)"
-                                />
-                                <span class="collapse__value">{{ odd.finalValue }}</span>
-                                <IconArrowFillDown
-                                    class="collapse__icon-option"
-                                    v-if="isDecreasedOdd(odd)"
-                                    :size="14"
-                                    color="var(--color-danger)"
-                                />
-                            </template>
-                        
-                            <IconLock v-else :size="14" color="var(--foreground-league)"/>
-                        </button>
+                            <button
+                                class="collapse__option"
+                                v-for="odd in player.odds"
+                                :key="odd.id"
+                                :class="{
+                                    'collapse__option--selected': odd.key === quoteSelected,
+                                    'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd)
+                                }"
+                                @click="handleItemClick(odd, player.name)"
+                            >
+                                <template v-if="odd.hasPermission">
+                                    <IconArrowFillUp
+                                        class="collapse__icon-option"
+                                        v-if="isIncreasedOdd(odd)"
+                                        :size="14"
+                                        color="var(--success)"
+                                    />
+                                    <span class="collapse__value">{{ odd.finalValue }}</span>
+                                    <IconArrowFillDown
+                                        class="collapse__icon-option"
+                                        v-if="isDecreasedOdd(odd)"
+                                        :size="14"
+                                        color="var(--danger)"
+                                    />
+                                </template>
+                            
+                                <IconLock v-else :size="14" color="var(--championship-foreground)"/>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Collapse>
+            </Collapse>
+        </template>
     </div>
 </template>
 
@@ -89,7 +89,6 @@ export default {
     },
     created() {
         this.$refs["collapse"].iconColor = '#ffffff';
-        console.log(this.$refs["collapse"].iconColor)
     },
     computed: {
         hasQuotes() {
@@ -145,7 +144,7 @@ export default {
     position: relative;
     z-index: 1;
     height: calc(100vh - 100px);
-    background: #181818;
+    background: #0a0a0a;
     background: var(--background);
 
     &__message {
@@ -153,8 +152,8 @@ export default {
         width: 100%;
         padding: 8px 16px;
         font-size: 12px;
-        color: #ffffff80;
-        color: var(--foreground);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--foreground-rgb), .5);
     }
 }
 
@@ -166,8 +165,9 @@ export default {
         align-items: flex-start;
         gap: 5px;
         padding: 5px;
-        border-bottom: var(--background) 1px solid;
-        
+        background: #181818;
+        background: var(--game);
+
         &--three-column {
             width: 200px;
         }
@@ -185,8 +185,10 @@ export default {
 
     &__option {
         min-width: calc(150px / 3);
-        background: #181818;
-        background: var(--inputs-odds);
+        background: #0a0a0a;
+        background: var(--button);
+        color: #ffffff;
+        color: var(--button-foreground);
         border: none;
         border-radius: 4px;
         padding-top: 5px;
@@ -208,8 +210,8 @@ export default {
 
     &__option--selected &__label,
     &__option--selected &__value {
-        color: #000;
-        color: var(--background);
+        color: #0a0a0a;
+        color: var(--highlight-foreground);
     }
 
     &__icon-option {
@@ -218,7 +220,6 @@ export default {
 
     &__label {
         overflow: hidden;
-        color: #f2f2f280;
         text-overflow: ellipsis;
         font-size: 12px;
         font-style: normal;
@@ -226,13 +227,13 @@ export default {
         line-height: normal;
         max-width: 100px;
         margin-bottom: 7px;
-        color: #ffffff;
-        color: var(--foreground-game);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--button-foreground-rgb), .5);
     }
 
     &__value {
         color: #ffffff;
-        color: var(--foreground-game);
+        color: var(--button-foreground);
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
@@ -250,13 +251,12 @@ export default {
 }
 
 ::v-deep .collapse__item {
-    background: #0a0a09;
-    background: var(--game);
+    background: #0a0a0a;
+    background: var(--champioship);
     padding: 13px 24px;
-    border-bottom: var(--background) 1px solid;
-    border-top: var(--background) 1px solid;
 }
 ::v-deep .collapse__title {
-    color: var(--foreground-game);
+    color: #ffffff;
+    color: var(--champioship-foreground);
 }
 </style>

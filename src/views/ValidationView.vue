@@ -105,9 +105,9 @@ export default {
 
   &__text {
     color: #ffffff80;
-    color: rgb(var(--foreground-header-rgb), 0.5); 
+    color: rgb(var(--foreground-rgb), 0.5); 
     font-size: 14px;
-    text-align: center;
+    text-align: left;
   }
 
   &__input {

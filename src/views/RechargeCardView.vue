@@ -10,7 +10,7 @@
                 v-model="cardValue"
             >
                 <template #icon>
-                    <span style="color: var(--foreground-inputs-odds);">R$</span>
+                    <span style="color: var(--input-foreground);">R$</span>
                 </template>
             </w-input>
             
@@ -115,7 +115,7 @@ export default {
 <style lang="scss" scoped>
 .recharge-card {
   color: #ffffff;
-  color: var(--foreground-game);
+  color: var(--foreground);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -126,12 +126,6 @@ export default {
     margin: 0;
     padding: 0 20px;
     padding-top: 20px;
-  }
-
-  &__text {
-    color: #ffffff80;
-    color: var(--foreground-header); 
-    font-size: 14px;
   }
 }
 

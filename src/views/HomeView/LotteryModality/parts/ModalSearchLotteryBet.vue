@@ -53,7 +53,8 @@
   <style lang="scss" scoped>
   .modal-search-lottery-bet {
     &__title {
-      color: var(--foreground-header);
+      color: rgba(255, 255, 255, .5);
+      color: rgba(var(--game-foreground-rgb), .5);
       font-size: 16px;
       font-weight: 500;
     }
@@ -64,5 +65,11 @@
       gap: 10px;
       padding-bottom: 20px;
     }
+  }
+
+  ::v-deep .input__group,
+  ::v-deep .input__field {
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
   }
   </style>

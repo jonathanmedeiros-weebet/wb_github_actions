@@ -97,8 +97,8 @@ export default {
 .modal {
   display: flex;
   flex-direction: column;
-  background-color: #0a0a09;
-  background: var(--background);
+  background-color: #181818;
+  background: var(--game);
   border-radius: 24px 24px 0px 0px;
   width: 100%;
   height: auto;
@@ -115,27 +115,11 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-top: 18px;
-    background-color: #ffffff;
-    background-color: rgba(var(--foreground-header-rgb), 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(var(--game-foreground-rgb), 0.5);
     width: 49px;
     height: 5px;
     border-radius: 10px;
-  }
-
-  &__btnclose {
-    display: flex;
-    align-items: center;  
-    justify-content: center; 
-    background-color: #0a0a09;
-    background-color: var(--header);
-    color: #ffffff80;
-    color: var(--foreground-header);
-    border: none;
-    font-size: 15px;
-    margin-left: auto;
-    margin-bottom: -10px;
-    padding-top: 7px; 
-    padding-right: 7px; 
   }
 
   &__header {

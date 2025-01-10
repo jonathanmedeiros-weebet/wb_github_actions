@@ -23,7 +23,7 @@ export default {
         },
         iconColor: {
             type: String,
-            default: 'var(--foreground-header)'
+            default: 'var(--foreground)'
         }
     },
     methods: {
@@ -39,8 +39,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #0a0a09;
-    background-color: var(--header);
+    background-color: #0a0a0a;
+    background-color: var(--championship);
 
     &__title {
         display: flex;
@@ -50,7 +50,7 @@ export default {
         line-height: 23.44px;
         
         color: #ffffff;
-        color: var(--foreground-header);
+        color: var(--championship-foreground);
 
         &--large {
             font-size: 20px;

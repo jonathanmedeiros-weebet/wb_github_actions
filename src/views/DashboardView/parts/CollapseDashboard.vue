@@ -53,22 +53,20 @@ export default {
         height: 40px;
         padding: 8px 14px;
         background: #181818;
-        background: var(--inputs-odds);
+        background: var(--input);
         border-radius: 6px;
-        color: #ffffff80;
-        color: var(--foreground-inputs-odds);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--input-foreground-rgb), .5);
     }
 
     &__title {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-
-        color: #ffffff;
         font-size: 14px;
         font-weight: 400;
-        color: #ffffff80;
-        color: rgba(var(--foreground-header-rgb), .5);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--input-foreground-rgb), .5);
     }
 
     &__title img {
@@ -77,8 +75,8 @@ export default {
     }
 
     &__icon {
-        color: #ffffff80;
-        color: var(--foreground-inputs-odds);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--input-foreground-rgb), .5);
     }
 }
 </style>

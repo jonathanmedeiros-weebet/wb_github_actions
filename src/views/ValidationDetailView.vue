@@ -367,10 +367,10 @@ export default {
 }
 .code {
   border-radius: 4px;
-  background: #181818;
+  background: #0a0a0a;
   background-color: var(--background);
   color: #ffffff;
-  color: var(--foreground-header);
+  color: var(--foreground);
   display: flex;
   width: 100%;
   padding: 13px;
@@ -437,7 +437,7 @@ export default {
 
   &__date {
     opacity: 0.5;
-    color: var(--foreground-header);
+    color: var(--foreground);
     color: #ffffff;
   }
 
@@ -459,7 +459,7 @@ export default {
   &__text {
     &--danger {
       color: #ff0000;
-      color: var(--color-danger);
+      color: var(--danger);
     }
 
     &--previous-quote {
@@ -494,9 +494,9 @@ export default {
     border: 0;
     border-radius: 8px;
     background: #181818;
-    background: var(--inputs-odds);
-    color: rgba(255, 255, 255, 0.50);
-    color: rgba(var(--foreground-header-rgb), 0.5);
+    background: var(--input);
+    color: rgba(255, 255, 255, 0.5);
+    color: rgba(var(--input-foreground-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px
   }
@@ -541,8 +541,8 @@ export default {
     appearance: none;
     width: 15px;
     height: 15px;
-    border: 1px solid #ffffff80;
-    border: 1px solid rgba(var(--foreground-header-rgb), 0.5);
+    border: 1px solid rgba(255, 255, 255, .5);
+    border: 1px solid rgba(var(--foreground-rgb), .5);
     background-color: transparent;
     cursor: pointer;
     border-radius: 3px;
@@ -572,9 +572,10 @@ export default {
 
   &__alerta {
     margin-top: 8px;
-    background-color: #fff3cd;
+    background-color: #c09516;
+    background-color: var(--warning);
     border-radius: 6px;
-    color: #664d03;
+    color: #000000;
     padding: 12px;
     font-size: 12px;
 

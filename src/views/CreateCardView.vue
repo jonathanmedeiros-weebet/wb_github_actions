@@ -17,7 +17,7 @@
                 v-model="cardValue"
             >
                 <template #icon>
-                    <span style="color: var(--foreground-inputs-odds);">R$</span>
+                    <span style="color: var(--input-foreground);">R$</span>
                 </template>
             </w-input>
             <w-input
@@ -156,7 +156,7 @@ export default {
 <style lang="scss" scoped>
     .create-card {
         color: #ffffff;
-        color: var(--foreground-game);
+        color: var(--foreground);
         height: auto;
         width: 100%;
         padding-bottom: 100px;
@@ -170,8 +170,8 @@ export default {
         }
 
         &__text {
-            color: #ffffff80;
-            color: var(--foreground-header); 
+            color: rgba(255, 255, 255, .5);
+            color: rgba(var(--foreground-rgb), .5); 
             font-size: 14px;
         }
     }
@@ -184,5 +184,10 @@ export default {
 
     .button-spacer {
         width: 20px; 
+    }
+
+    ::v-deep .input__icon__right svg {
+        fill: rgba(255, 255, 255, .5) !important;
+        fill: rgba(var(--input-foreground-rgb), .5) !important; 
     }
 </style>

@@ -59,7 +59,7 @@ export default {
         justify-content: flex-start;
         padding: 0 16px;
         background: #181818;
-        background: var(--inputs-odds);
+        background: var(--game);
     }
 
     &__collapse {

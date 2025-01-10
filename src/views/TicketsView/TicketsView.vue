@@ -128,7 +128,7 @@
               @focus="handleInitializeBetValue"
             >
               <template #icon>
-                <span style="color: var(--foreground-inputs-odds);">R$</span>
+                <span style="color: var(--input-foreground);">R$</span>
               </template>
             </w-input>
           </div>
@@ -579,10 +579,11 @@ export default {
   }
 
   &__message {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
     font-size: 12px;
-    color:#ffffff;
-    color: var(--foreground-header);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
   }
 }
 
@@ -599,12 +600,12 @@ export default {
     font-weight: 400;
     line-height: normal;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__text {
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__delete {
@@ -629,7 +630,7 @@ export default {
   flex-direction: column;
   position: relative; 
   color: #ffffff;
-  color: var(--foreground-header);
+  color: var(--foreground);
 
   &::after {
     content: '';
@@ -675,7 +676,7 @@ export default {
 
   &__date {
     opacity: 0.5;
-    color: var(--foreground-header);
+    color: var(--foreground);
     color: #ffffff;
   }
 
@@ -710,7 +711,7 @@ export default {
   &__balance-text {
     font-size: 14px;
     color:#ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__balance {
@@ -727,9 +728,9 @@ export default {
     border: 0;
     border-radius: 8px;
     background: #181818;
-    background: var(--inputs-odds);
+    background: var(--input);
     color: rgba(255, 255, 255, 0.50);
-    color: rgba(var(--foreground-header-rgb), 0.5);
+    color: rgba(var(--foreground-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px;
   }
@@ -754,7 +755,7 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color:#ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__ganhos {
@@ -762,15 +763,15 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color:#ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__checkbox {
     appearance: none;
     width: 15px;
     height: 15px;
-    border: 1px solid #ffffff80;
-    border: 1px solid rgba(var(--foreground-header-rgb), 0.5);
+    border: 1px solid rgba(255, 255, 255, .5);
+    border: 1px solid rgba(var(--foreground-rgb), 0.5);
     cursor: pointer;
     border-radius: 3px;
     position: relative;
@@ -790,14 +791,14 @@ export default {
     width: 5px;
     height: 9px;
     color:#ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__alteracao {
     display: flex;
     align-items: center;
     color:#ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__finalizar {
@@ -820,7 +821,7 @@ export default {
     margin-top: 15px;
     padding: 15px;
     color:#ffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 }
 
@@ -834,7 +835,7 @@ export default {
   &__info {
     opacity: 0.8;
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--foreground);
   }
 
   &__tens {
@@ -863,9 +864,9 @@ export default {
     justify-content: center;
     align-items: center;
     background-color: #181818;
-    background-color: var(--inputs-odds);
+    background-color: var(--input);
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
     border-radius: 120px;
 
     &--android6 {
@@ -883,7 +884,7 @@ export default {
 
   &__value {
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -892,7 +893,7 @@ export default {
 
   &__value-description {
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

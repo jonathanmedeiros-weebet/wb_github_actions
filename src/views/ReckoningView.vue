@@ -220,7 +220,7 @@ export default {
       return convertInMomentInstance(this.startDate).subtract(1, 'days').format('DD/MM');
     },
     closeButtonColor() {
-      return isAndroid5() ? '#ffffff80' : 'rgba(var(--foreground-header-rgb), 0.5)';
+      return isAndroid5() ? '#ffffff80' : 'rgba(var(--foreground-rgb), 0.5)';
     }
   },
   created() {
@@ -302,7 +302,7 @@ export default {
 
 .reckoning {
   color: #ffffff;
-  color: var(--foreground-header);
+  color: var(--foreground);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -321,9 +321,10 @@ export default {
   width: 185px;
   height: 30px;
   opacity: 0.6;
-  color: #ffffff;
-  color: rgba(var(--foreground-header-rgb), 0.5);
-  background-color: var(--background);
+  color: rgba(255, 255, 255, .5);
+  color: rgba(var(--input-foreground-rgb), .5);
+  background-color: #181818;
+  background-color: var(--input);
   padding: 10px;
   display: flex;
   align-items: center;
@@ -344,7 +345,7 @@ export default {
   &__title {
     width: 100%;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     display: flex;
@@ -356,6 +357,8 @@ export default {
     display: flex;
     align-items: center; 
     margin-left: 25px;
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__icon {
@@ -370,7 +373,7 @@ export default {
 
   &__title {
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     display: flex;
@@ -390,7 +393,9 @@ export default {
     display: flex;
     align-items: center; 
     justify-content: flex-end; 
-    width: 100%; 
+    width: 100%;
+    color: #ffffff;
+    color: var(--foreground); 
   }
 
   &__section-sports {
@@ -413,7 +418,9 @@ export default {
   &__value-right {
     display: flex;
     justify-content: flex-end;
-    width: 100px; 
+    width: 100px;
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__content {
@@ -444,7 +451,7 @@ export default {
 
   &__icon-remove {
     fill: #f61a1a;
-    fill: var(--color-danger);
+    fill: var(--danger);
     margin-right: 5px;
   }
 
@@ -452,7 +459,7 @@ export default {
     width: 100%;
     height: 1px;
     background: #ffffff;
-    background: var(--foreground-header);
+    background: var(--foreground);
     opacity: 0.1;
     margin-top: 5px;
   }
@@ -471,12 +478,12 @@ export default {
     align-items: center;
     &--positive {
       color: #6da544;
-      color: var(--color-success);
+      color: var(--success);
     }
 
     &--negative {
       color: #f61a1a;
-      color: var(--color-danger);
+      color: var(--danger);
     }
   }
 }
@@ -520,7 +527,7 @@ export default {
 
   &__icon {
     fill: #f61a1a;
-    fill: var(--color-danger);
+    fill: var(--danger);
     margin-right: 5px;
   }
 }
@@ -537,12 +544,12 @@ export default {
   &__value {
     &--positive {
       color: #6da544;
-      color: var(--color-success);
+      color: var(--success);
     }
 
     &--negative {
       color: #f61a1a;
-      color: var(--color-danger);
+      color: var(--danger);
     }
   }
 }

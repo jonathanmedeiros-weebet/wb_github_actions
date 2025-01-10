@@ -36,7 +36,6 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,9 +60,9 @@ export default {
 
     &--secondary {
         color: #ffffff;
-        color: var(--foreground-header);
-        background: #0a0a09;
-        background: var(--header);
+        color: var(--input-foreground);
+        background: #181818;
+        background: var(--input);
     }
 }
 </style>

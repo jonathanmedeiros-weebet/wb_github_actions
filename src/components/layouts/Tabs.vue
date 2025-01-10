@@ -9,7 +9,7 @@
     >
       <component
         :is="tab.icon"
-        :color="tab.actived ? useHexColors : 'var(--foreground-bottom-bar)'"
+        :color="tab.actived ? useHexColors : 'rgba(var(--foreground-rgb), 0.6)'"
         :count="itemCount"
       />
       {{ tab.name }} 
@@ -98,9 +98,10 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 16px 24px;
-  border-top: 1px solid #FFFFFF1A;
+  border-top: 1px solid #ffffff1f;
+  border-top: 1px solid rgba(var(--foreground-rgb), 0.1);
   background: #282828;
-  background: var(--bottom-bar);
+  background: var(--background);
 
   &__item {
     display: flex;
@@ -111,7 +112,7 @@ export default {
 
     height: 41px;
     color: #ffffff;
-    color: var(--foreground-bottom-bar);
+    color: rgba(var(--foreground-rgb), 0.6);
     font-size: 12px;
     font-weight: 400;
     line-height: 14.06px;

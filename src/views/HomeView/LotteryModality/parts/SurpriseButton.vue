@@ -16,7 +16,7 @@ export default {
     name: 'w-surprise-button',
     computed: {
         buttonColor() {
-            return isAndroid5() ? '#181818' : 'var(--foreground-highlight)';
+            return isAndroid5() ? '#181818' : 'var(--highlight-foreground)';
         },
         buttonBackgroundColor() {
             return isAndroid5() ? '#0BE58E' : 'var(--highlight)';

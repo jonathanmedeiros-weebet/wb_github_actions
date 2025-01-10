@@ -78,8 +78,8 @@ export default {
 <style lang="scss" scoped>
 .modal-modalities {
     &__title {
-        color: #FFFFFF80;
-        color: var(--foreground-header);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
         font-size: 16px;
         font-weight: 500;
     }
@@ -100,7 +100,7 @@ export default {
         margin-top: 20px;
 
         color: #ffffff;
-        color: var(--foreground-header);
+        color: var(--game-foreground);
         font-size: 16px;
         font-weight: 400;
     }

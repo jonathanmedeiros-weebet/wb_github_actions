@@ -74,17 +74,17 @@ export default {
 
     &--success {
         background-color: #6da544;
-        background-color: var(--color-success);
+        background-color: var(--success);
     }
 
     &--warning {
         background-color: #c09516;
-        background-color: var(--color-warning);
+        background-color: var(--warning);
     }
 
     &--danger {
         background-color: #f61a1a;
-        background-color: var(--color-danger);
+        background-color: var(--danger);
     }
 
     &__close_icon {

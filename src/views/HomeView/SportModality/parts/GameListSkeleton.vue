@@ -66,10 +66,10 @@ export default {
         justify-content: space-between;
         align-items: center;
         &--primary {
-            background: #0a0a09;
-            background: var(--league);
+            background: #0a0a0a;
+            background: var(--championship);
             color: #ffffff;
-            color: var(--foreground-league);
+            color: var(--championship-foreground);
         }
 
         &--secondary {
@@ -104,8 +104,8 @@ export default {
     &__game-item {
         display: flex;
         justify-content: space-between;
-        background: #0a0a09;
-        background: var(--league);
+        background: #0a0a0a;
+        background: var(--championship);
         width: 100%;
         padding: 16px 13px;
         

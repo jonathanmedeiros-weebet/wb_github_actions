@@ -23,7 +23,7 @@
       <div class="results__modalities">
         <label class="results__modalities-label">Modalidade</label>
         <SelectFake
-          :iconColor="'var(--foreground-inputs-odds)'"
+          :iconColor="'var(--input-foreground)'"
           class="results__selectfake"
           titleSize="medium"
           @click="handleOpenModalitiesModal"
@@ -45,8 +45,9 @@
         <p class="results__count-modalities">
           {{ championshipList.length }} Resultados encontrados
         </p>
+
         <Collapse 
-          :iconColor="'var(--foreground-header)'"
+          :iconColor="'var(--championship-foreground)'"
           :leftIcon="true" 
           :initCollapsed="true" 
           v-for="(championship, championshipListIndex) in championshipList" 
@@ -239,8 +240,15 @@ export default {
   }
 
   &__dates-buttons {
-    color: #ffffff80;
-    color: var(--foreground-header);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
+
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    border-bottom: 1px solid rgba(var(--foreground-rgb), .1);
+
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    border-top: 1px solid rgba(var(--foreground-rgb), .1);
+
     display: inline-block;
   }
 
@@ -249,17 +257,18 @@ export default {
     flex-direction: column;
     padding: 10px 20px;
     
-    &-label {
-      color: #ffffff;
-      color: var(--foreground-header);
-    }
+    
+  }
 
+  &__modalities-label {
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__count-modalities {
     margin: 5px 20px;
-    color: #ffffff80;
-    color: var(--foreground-header);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
   }
 
   &__modalities-modal {
@@ -274,14 +283,18 @@ export default {
     margin-bottom: 10px;
   }
 
-  &__selectfake {
-    background-color: #141414;
-    background-color: var(--inputs-odds);
-  }
-
-  &__selectfake ::v-deep .select-fake__title{
+  &__selectfake ::v-deep .select-fake__title {
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
   }
 }
+
+::v-deep .collapse__item {
+  background: #0a0a0a;
+  background: var(--championship);
+  color: #ffffff;
+  color: var(--championship-foreground);
+  border-bottom: 1px solid rgba(var(--championship-foreground-rgb), 0.1);
+}
+
 </style>

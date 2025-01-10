@@ -156,7 +156,7 @@
               class="button-share"
             >
               <template #icon-left>
-                <IconShare :size="20" color="var(--foreground-header)"/>
+                <IconShare :size="20" color="var(--foreground)"/>
               </template>
             </w-button>
             <div class="button-spacer"></div>
@@ -167,7 +167,7 @@
               :disabled="buttonDisable"
             >
               <template #icon-left>
-                <IconPrinter :size="20" color="var(--foreground-highlight)"/>
+                <IconPrinter :size="20" color="var(--highlight-foreground)"/>
               </template>
             </w-button>
           </template>
@@ -478,7 +478,7 @@ export default {
     flex-direction: column;
     margin: 0;
     padding: 0 10px;
-    min-height: 100%;
+    min-height: calc(100vh - 80px);
     padding-top: 15px;
   }
 
@@ -487,8 +487,10 @@ export default {
     flex-direction: column;
     padding: 19px 15px;
     width: 100%;
-    background: #0a0a09;
+    background: #181818;
     background: var(--game);
+    color: #ffffff;
+    color: var(--game-foreground);
     border-radius: 2px;
   }
 }
@@ -500,11 +502,11 @@ export default {
   &__text {
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-game);
+    color: var(--game-foreground);
   }
   &__date {
-    color: #ffffff80;
-    color: var(--foreground-game)
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), .5);
   }
 }
 
@@ -521,6 +523,8 @@ export default {
 
   &__text {
     font-size: 14px;
+    color: #ffffff;
+    color: var(--game-foreground);
 
     &.lottery {
       margin-bottom: 1.6rem;
@@ -539,7 +543,7 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-game);
+    color: var(--game-foreground);
   }
 
   &__strikethrough {
@@ -548,7 +552,7 @@ export default {
 
   &--danger {
     color: #f61a1a;
-    color: var(--color-danger);
+    color: var(--danger);
   }
 
 }
@@ -557,10 +561,10 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  background: #181818;
+  background: #0a0a0a;
   background: var(--background);
   border-radius: 4px;
-  margin-bottom: -9px;
+  margin-bottom: 5px;
 
   &__header, &__info, &__text, &__result {
     display: flex;
@@ -589,6 +593,11 @@ export default {
     font-weight: 500;
   }
 
+  &__date {
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
+  }
+
   &__select {
     font-size: 14px;
     color: #ffffff;
@@ -605,12 +614,12 @@ export default {
 
   &__status--success {
     color: #4CAF50;
-    color: var(--color-success);
+    color: var(--success);
   }
 
   &__status--danger {
     color: #f61a1a;
-    color: var(--color-danger);
+    color: var(--danger);
   }
 
   &__message {
@@ -621,16 +630,11 @@ export default {
 .buttons {
   display: flex;
   align-items: center;
-  padding-top: 25px;
+  margin-top: auto;
 }
 
 .button-spacer {
   width: 20px; 
-}
-
-.button-share {
-  border: 1px solid #0a0a09;
-  border: 1px solid var(--header);
 }
 
 .finish {
@@ -644,6 +648,8 @@ strong {
 .bet-lottery {
   display: flex;
   flex-direction: column;
+  color: #ffffff;
+  color: var(--foreground);
 }
 </style>
 

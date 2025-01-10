@@ -206,11 +206,11 @@
         font-size: 12px;
 
         &--ganhou {
-            color: var(--color-success)
+            color: var(--success)
         }
 
         &--perdeu {
-            color: var(--color-danger)
+            color: var(--danger)
         }
 
         &--cancelado {

@@ -137,7 +137,7 @@ export default {
       return !['email', 'number', 'date', 'password'].includes(this.initType);
     },
     useHexColors() {
-      const color = isAndroid5() ? '#ffffff80' : 'var(--foreground-inputs-odds)';
+      const color = isAndroid5() ? '#ffffff80' : 'var(--input-foreground)';
       return color;
       
     }
@@ -161,12 +161,12 @@ input {
   font-size: 14px;
   font-weight: 400;
   color: #ffffff80;
-  color: var(--foreground-inputs-odds);
+  color: var(--input-foreground);
 }
 
 input::placeholder {
   color: #ffffff80;
-  color: var(--foreground-inputs-odds);
+  color: var(--input-foreground);
   opacity: 0.55;
 }
 
@@ -190,11 +190,11 @@ input::placeholder {
     padding-top: 1px;
     padding-bottom: 1px;
     background-color: #181818;
-    background-color: var(--inputs-odds);
+    background-color: var(--input);
     border-radius: 5px;
     border: 0;
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
     transition: 0.5s;
     
     &--focused {
@@ -217,14 +217,14 @@ input::placeholder {
 
   &__field {
     width: 100%;
-    height: 56px;
+    height: 48px;
     font-size: 14px;
     font-weight: 400;
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
     padding-left: 10px;
     background: #181818;
-    background: var(--inputs-odds);
+    background: var(--input);
   }
 }
 </style>
