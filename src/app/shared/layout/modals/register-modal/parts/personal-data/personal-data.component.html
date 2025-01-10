@@ -45,6 +45,42 @@
                 </div>
                 <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <div class="date-of-birth">
+                                <div class="label-date-of-birth">
+                                    <span>{{'geral.dataDeNascimento' | translate}}</span>
+                                </div>
+                                <div class="group-date-of-birth">
+                                    <div class="select-date-of-birth">
+                                        <div class="division-date-of-birth">
+                                            <select class="form-control style-select" formControlName="day"  (change)="onDateChange()">
+                                                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="select-date-of-birth">
+                                        <div class="division-date-of-birth">
+                                            <select class="form-control style-select" formControlName="day"  (change)="onDateChange()">
+                                                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="select-date-of-birth">
+                                        <div class="division-date-of-birth">
+                                            <select class="form-control style-select" formControlName="day"  (change)="onDateChange()">
+                                                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

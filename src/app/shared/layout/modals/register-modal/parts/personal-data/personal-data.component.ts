@@ -22,6 +22,8 @@ import { FormValidations } from 'src/app/shared/utils';
     autoPreenchimento = true;
     errorMessage = '';
 
+    days: number[] = [];
+
     constructor(
         private fb: UntypedFormBuilder,
         private cd: ChangeDetectorRef,
@@ -33,6 +35,7 @@ import { FormValidations } from 'src/app/shared/utils';
 
     ngOnInit() {
         this.createForm();
+        this.initializeDays();
         this.form.valueChanges.subscribe(form => {
             if ((form.cpf != null && form.cpf.length == 14)) {
                 this.showLoading = false;
@@ -53,8 +56,14 @@ import { FormValidations } from 'src/app/shared/utils';
         this.form = this.fb.group({
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
+            nomeCompleto: [null],
+            day:[new Date().getDate()],
         })
     };
+
+    initializeDays() {
+        this.days = Array.from({length: 31}, (_, i ) => i + 1 )
+    }
 
     validarCpf(){
 
@@ -80,5 +89,9 @@ import { FormValidations } from 'src/app/shared/utils';
         if (value) {
             this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
         }
+    }
+
+    onDateChange() {
+        console.log('Data selecionada: ${this.selectedDay}')
     }
 }
