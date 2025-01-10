@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="cotacoes">
-                                    <ng-container *ngFor="let cotacao of cotacoesPorTipo(jogo.value.cotacoes)">
+                                    <ng-container *ngFor="let cotacao of cotacoesPorTipo(jogo.value.cotacoes); trackBy: trackByIndex">
                                         <div class="cotacao disabled" *ngIf="cotacao.lock || !cotacaoPermitida(cotacao.valorFinal); else noLock">
                                             <label>{{ cotacao.nome }}</label>
                                             <span><i class="fa fa-lock"></i></span>
