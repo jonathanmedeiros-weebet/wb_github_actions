@@ -21,6 +21,7 @@ declare var xtremepush: any;
 })
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
+    private apiUrl = `${config.LOKI_URL}/customers`;
     codigoFiliacaoCadastroTemp;
     logadoSource;
     logado;
@@ -365,9 +366,15 @@ export class ClienteService {
     }
 
     initiatePhoneValidation() {
+        let baseUrl = `${this.clienteUrl}/initiate-phone-validation`
+
+        if (this.paramsService.getCellPhoneVerificationApi() == 'twilio') {
+            baseUrl = `${this.apiUrl}/phone-verification`
+        }
+
         return this.http
             .post(
-                `${this.clienteUrl}/initiate-phone-validation`,
+                baseUrl,
                 {},
                 this.headers.getRequestOptions(true)
             )
@@ -380,9 +387,15 @@ export class ClienteService {
     }
 
     validatePhone(validationCode: number) {
+        let baseUrl = `${this.clienteUrl}/validate-phone`;
+
+        if (this.paramsService.getCellPhoneVerificationApi() == 'twilio') {
+            baseUrl = `${this.apiUrl}/phone-verification-check`;
+        }
+
         return this.http
             .post(
-                `${this.clienteUrl}/validate-phone`,
+                baseUrl,
                 { validation_code: validationCode },
                 this.headers.getRequestOptions(true)
             )
@@ -392,6 +405,8 @@ export class ClienteService {
                 }),
                 catchError(this.errorService.handleError)
             );
+
+
     }
 
     public allBankAccounts() {
