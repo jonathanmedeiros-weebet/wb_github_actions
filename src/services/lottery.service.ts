@@ -23,6 +23,12 @@ export const createLotteryBet = async (data: any) => {
     const { lokiUrl } = useConfigClient();
     const url = `${lokiUrl}/lottery/bets`;
 
+    data = {
+        ...data,
+        ibge_code: null,
+        locale_state: null
+    }
+
     const response: any = await axiosInstance().post(url, data);
     return response.results;
 }

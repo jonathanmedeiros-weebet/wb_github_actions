@@ -79,6 +79,11 @@ export const closeBet = async (payload: any) => {
 }
 
 export const createBetSport = async (payload: {}) => {
+    payload = {
+        ...payload,
+        ibge_code: null,
+        locale_state: null
+    }
     const { lokiUrl } = useConfigClient();
     const url = `${lokiUrl}/sport/bets`;
     const response: any = await axiosInstance().post(url, payload);
