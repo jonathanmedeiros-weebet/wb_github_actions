@@ -230,7 +230,8 @@
     "boasorte.bet": "gulp boasorte.bet",
     "eliteesportes.vip": "gulp eliteesportes.vip",
     "pixmaster.bet": "gulp pixmaster.bet",
-    "joguefacil.bet": "gulp joguefacil.bet"
+    "joguefacil.bet": "gulp joguefacil.bet",
+    "sportvips.bet": "gulp sportvips.bet"
   },
   "private": true,
   "dependencies": {
