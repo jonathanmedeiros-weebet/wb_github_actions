@@ -204,7 +204,7 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
                     }, 2000);
 
                     this.showLoadingIndicator = false;
-                    // this.live();
+                    this.live();
                 },
                 error => this.handleError(error)
             );
@@ -480,5 +480,9 @@ export class LiveListagemComponent implements OnInit, OnDestroy, DoCheck {
 
     teamShield(sportId?) {
         return this.sportIdService.teamShieldsFolder(sportId);
+    }
+
+    trackByIndex(index: number, cotacao: any): any {
+        return index;
     }
 }
