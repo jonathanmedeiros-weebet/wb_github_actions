@@ -368,7 +368,7 @@ export class ClienteService {
     initiatePhoneValidation() {
         let baseUrl = `${this.clienteUrl}/initiate-phone-validation`
 
-        if (this.paramsService.getCellPhoneVerificationApi() == 'twilio') {
+        if (this.paramsService.getPhoneVerificationService() == 'twilio') {
             baseUrl = `${this.apiUrl}/phone-verification`
         }
 
@@ -389,7 +389,7 @@ export class ClienteService {
     validatePhone(validationCode: number) {
         let baseUrl = `${this.clienteUrl}/validate-phone`;
 
-        if (this.paramsService.getCellPhoneVerificationApi() == 'twilio') {
+        if (this.paramsService.getPhoneVerificationService() == 'twilio') {
             baseUrl = `${this.apiUrl}/phone-verification-check`;
         }
 
