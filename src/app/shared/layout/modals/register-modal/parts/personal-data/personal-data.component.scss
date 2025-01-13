@@ -28,6 +28,10 @@
     -moz-appearance: menulist;
     outline: none;
     max-height: 22px;
+    color: rgba(255, 255, 255, 0.30);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
 }
 
 select:focus {
@@ -42,4 +46,9 @@ select:focus {
 .label-date-of-birth {
     max-height: 10px;
     padding-left: 14px;
+    color: rgba(255, 255, 255, 0.30);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }

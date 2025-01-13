@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { ParametrosLocaisService } from 'src/app/services';
+import { ParametrosLocaisService} from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
+import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { FormValidations } from 'src/app/shared/utils';
 
     @Component({
@@ -23,12 +24,33 @@ import { FormValidations } from 'src/app/shared/utils';
     errorMessage = '';
 
     days: number[] = [];
+    years: number[] = [];
+    selectedNationality: string = '';
+
+    months = [
+        { value: 1, name: 'Janeiro' },
+        { value: 2, name: 'Fevereiro' },
+        { value: 3, name: 'Março' },
+        { value: 4, name: 'Abril' },
+        { value: 5, name: 'Maio' },
+        { value: 6, name: 'Junho' },
+        { value: 7, name: 'Julho' },
+        { value: 8, name: 'Agosto' },
+        { value: 9, name: 'Setembro' },
+        { value: 10, name: 'Outubro' },
+        { value: 11, name: 'Novembro' },
+        { value: 12, name: 'Dezembro' },
+    ];
+
+    nationalities = this.CountriesService.getCountries();
+    
 
     constructor(
         private fb: UntypedFormBuilder,
         private cd: ChangeDetectorRef,
         private ga4Service: Ga4Service,
         private paramsService: ParametrosLocaisService,
+        private CountriesService: CountriesService,
     ) {
         super();
     }
@@ -36,6 +58,8 @@ import { FormValidations } from 'src/app/shared/utils';
     ngOnInit() {
         this.createForm();
         this.initializeDays();
+        this.initializeYears();
+
         this.form.valueChanges.subscribe(form => {
             if ((form.cpf != null && form.cpf.length == 14)) {
                 this.showLoading = false;
@@ -57,12 +81,20 @@ import { FormValidations } from 'src/app/shared/utils';
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             nomeCompleto: [null],
-            day:[new Date().getDate()],
+            day:['dia'],
+            month:['mes'],
+            year:['ano'],
+            nationality:['Brasil']
         })
     };
 
     initializeDays() {
         this.days = Array.from({length: 31}, (_, i ) => i + 1 )
+    }
+
+    initializeYears() {
+        const currentYear =  new Date().getFullYear();
+        this.years = Array.from({length: 101 }, (_, i) => currentYear - i);
     }
 
     validarCpf(){
@@ -93,5 +125,8 @@ import { FormValidations } from 'src/app/shared/utils';
 
     onDateChange() {
         console.log('Data selecionada: ${this.selectedDay}')
+    }
+
+    onNationalityChange(){
     }
 }

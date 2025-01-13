@@ -57,21 +57,47 @@
                                     <div class="select-date-of-birth">
                                         <div class="division-date-of-birth">
                                             <select class="form-control style-select" formControlName="day"  (change)="onDateChange()">
+                                                <option value="dia">{{'register.day' | translate}}</option>
                                                 <option *ngFor="let day of days" [value]="day">{{ day }}</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="select-date-of-birth">
                                         <div class="division-date-of-birth">
-                                            <select class="form-control style-select" formControlName="day"  (change)="onDateChange()">
-                                                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                                            <select class="form-control style-select" formControlName="month"  (change)="onDateChange()">
+                                                <option value="mes">{{'register.month' | translate}}</option>
+                                                <option *ngFor="let month of months" [value]="month">{{ month.name }}</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="select-date-of-birth">
                                         <div class="division-date-of-birth">
-                                            <select class="form-control style-select" formControlName="day"  (change)="onDateChange()">
-                                                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                                            <select class="form-control style-select" formControlName="year"  (change)="onDateChange()">
+                                                <option value="ano">{{'register.year' | translate}}</option>
+                                                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <div class="date-of-birth">
+                                <div class="label-date-of-birth">
+                                    <span>{{'geral.nacionalidade' | translate}}</span>
+                                </div>
+                                <div class="group-nationality">
+                                    <div class="select-nationality">
+                                        <div class="division-nationality">
+                                            <select class="form-control style-select" formControlName="nationality" (change)="onNationalityChange()">
+                                                <option value="Brasil">{{'register.brasil' | translate}}</option>
+                                                <option *ngFor="let nationality of nationalities" [value]="nationality.value">{{ nationality.name }}</option>
                                             </select>
                                         </div>
                                     </div>
