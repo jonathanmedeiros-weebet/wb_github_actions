@@ -68,7 +68,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     permitirQualquerChavePix = false;
     submitting;
     faceMatchEnabled = false;
-    faceMatchFirstWithdrawValidated = false;
+    faceMatchFirstWithdrawValidated = true;
     faceMatchType = null;
     legitimuzToken = "";
     docCheckToken = "";
@@ -120,6 +120,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.currentLanguage = this.translate.currentLang;
         this.faceMatchWithdraw = this.paramsLocais.getOpcoes().faceMatchFirstWithdraw || this.paramsLocais.getOpcoes().faceMatchAllWithdraw;
+        if (this.paramsLocais.getOpcoes().faceMatchAllWithdraw) {
+            this.faceMatchFirstWithdrawValidated = false;
+        }
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
@@ -201,8 +204,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (this.faceMatchEnabled) {
                         this.faceMatchService.getFaceMatch({ document: this.cliente.cpf }).subscribe({
                             next: (res) => {
-                                if (res.first_withdraw != null && this.cliente.verifiedIdentity && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw) {
-                                    this.faceMatchFirstWithdrawValidated = true;
+                                if ((typeof res.first_withdraw === 'undefined' || !this.cliente.verifiedIdentity) && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw) {
+                                    this.faceMatchFirstWithdrawValidated = false;
+                                    this.cd.detectChanges();
                                 }
                             }, error: (error) => {}
                         })
