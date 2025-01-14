@@ -765,7 +765,11 @@
         "protectedByReCaptchaPart3": "y las",
         "protectedByReCaptchaPart4": "Condiciones del servicio",
         "protectedByReCaptchaPart5": "de Google.",
-        "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse."
+        "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse.",
+        "day":"Día",
+        "month":"Mes",
+        "year":"Año",
+        "brasil": "Brasil"
     },
     "registerCancel": {
         "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",

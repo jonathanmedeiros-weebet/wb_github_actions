@@ -770,7 +770,11 @@
         "protectedByReCaptchaPart3": "and the",
         "protectedByReCaptchaPart4": "Terms of Service",
         "protectedByReCaptchaPart5": "apply.",
-        "registrationBeneficiariesSocialPrograms": "Beneficiaries of social programs cannot register."
+        "registrationBeneficiariesSocialPrograms": "Beneficiaries of social programs cannot register.",
+        "day":"Day",
+        "month":"Month",
+        "year":"Year",
+        "brasil": "Brazil"
     },
     "registerCancel": {
         "titleCancelRegister": "Are you sure you want to cancel your registration?",

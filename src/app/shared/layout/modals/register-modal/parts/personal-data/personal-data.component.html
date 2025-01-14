@@ -8,7 +8,7 @@
                             <input
                                 type="text"
                                 id="cpf"
-                                class="form-control inverted-out"
+                                class="form-control inverted-out input-style label-personalized"
                                 mask="000.000.000-00"
                                 (change)="validarCpf()"
                                 formControlName="cpf"
@@ -16,7 +16,7 @@
                                 inputmode="numeric"
                                 [readonly]="faceMatchRequested"
                             >
-                            <label for="cpf">{{'geral.cpf' | translate}}</label>
+                            <label for="cpf" class="text-input">{{'geral.cpf' | translate}}</label>
                         </div>
 
                         <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
@@ -30,7 +30,7 @@
                             <input
                                 type="text"
                                 id="nome"
-                                class="form-control inverted-out"
+                                class="form-control inverted-out input-style"
                                 (blur)="onBlurGa4Name($event)"
                                 (beforeinput)="onBeforeInput($event, 'name')"
                                 formControlName="nome"
@@ -38,19 +38,19 @@
                                 placeholder=" "
                                 [readonly]="autoPreenchimento || validarBeneficioProgramaSocial"
                             >
-                            <label for="nome">{{'geral.nomeCompleto' | translate}}</label>
+                            <label for="nome" class="text-input">{{'geral.nomeCompleto' | translate}}</label>
                         </div>
                         <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
                     </div>
                 </div>
-                <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto">
+                <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto" class="label-personalized">
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">
-                            <div class="date-of-birth">
-                                <div class="label-date-of-birth">
+                            <div class="div-button-personalized">
+                                <div class="label-personalized">
                                     <span>{{'geral.dataDeNascimento' | translate}}</span>
                                 </div>
                                 <div class="group-date-of-birth">
@@ -88,15 +88,15 @@
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">
-                            <div class="date-of-birth">
-                                <div class="label-date-of-birth">
+                            <div class="div-button-personalized">
+                                <div class="label-personalized">
                                     <span>{{'geral.nacionalidade' | translate}}</span>
                                 </div>
-                                <div class="group-nationality">
-                                    <div class="select-nationality">
-                                        <div class="division-nationality">
+                                <div>
+                                    <div>
+                                        <div class="select-nationality">
                                             <select class="form-control style-select" formControlName="nationality" (change)="onNationalityChange()">
-                                                <option value="Brasil">{{'register.brasil' | translate}}</option>
+                                                <option value="26">{{'register.brasil' | translate}}</option>
                                                 <option *ngFor="let nationality of nationalities" [value]="nationality.value">{{ nationality.name }}</option>
                                             </select>
                                         </div>
