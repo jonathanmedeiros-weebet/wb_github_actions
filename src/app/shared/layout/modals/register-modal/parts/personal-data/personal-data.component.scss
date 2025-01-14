@@ -64,3 +64,35 @@ select:focus {
 .select-nationality{
     padding-right: 14px;
 }
+
+.div-button-gender{
+    display: flex;
+    gap:7px;
+}
+
+.gender-style{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.individual-genre{
+    flex: 1;
+}
+
+.label-personalized-gender {
+    max-height: 10px;
+    padding-left: 14px;
+    color: rgba(var(--foreground-inputs-odds-rgb), .3);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    gap: 8px;
+}
+
+.gender{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
