@@ -73,7 +73,7 @@
                     Nenhuma aposta realizada no período.
                 </div>
                 <div *ngIf="apostas.length > 0">
-                    <ng-container *ngIf="!totais.valorBonus || totais.premioBonus else showInfoWithBonus;">
+                    <ng-container *ngIf="!totais.valorBonus else showInfoWithBonus;">
                         <div class="info-resultado">
                             <div class="item">
                                 <label>{{'geral.qtdApostas' | translate}}:</label> {{ apostas.length }}
