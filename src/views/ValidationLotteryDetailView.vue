@@ -134,7 +134,7 @@ export default {
                 }).catch(error => {
                     this.toastStore.useToastStore({
                         message: error.errors?.message ?? 'Erro inesperado',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     });
                 });
@@ -211,7 +211,7 @@ export default {
                 .catch(error => {
                     this.toastStore.setToastConfig({
                         message: error.errors?.message ?? 'Erro inesperado',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     });
                 })
@@ -296,7 +296,7 @@ export default {
         width: 100%;
         height: 1px;
         background: #ffffff;
-        background: var(--championship-foreground);
+        background: var(--league-foreground);
         opacity: 0.1;
         position: absolute;
         left: 0;

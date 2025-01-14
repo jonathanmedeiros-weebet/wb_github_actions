@@ -411,7 +411,7 @@ export default {
       if (this.items.length < options.quantidade_min_jogos_bilhete) {
         this.toastStore.setToastConfig({
           message: `Por favor, inclua no MÍNIMO ${options.quantidade_min_jogos_bilhete} evento(s).`,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
         this.submitting = false;
@@ -420,7 +420,7 @@ export default {
       if (this.items.length > options.quantidade_max_jogos_bilhete) {
         this.toastStore.setToastConfig({
           message: `Por favor, inclua no MÁXIMO ${options.quantidade_max_jogos_bilhete} evento(s).`,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
         this.submitting = false;
@@ -461,7 +461,7 @@ export default {
         } catch ({errors}) {
           this.toastStore.setToastConfig({
             message: errors.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
           return;
@@ -503,7 +503,7 @@ export default {
 
           this.toastStore.setToastConfig({
             message: errors.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         })
@@ -549,7 +549,7 @@ export default {
           console.error({errors})
           this.toastStore.setToastConfig({
             message: errors.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         })
@@ -730,7 +730,7 @@ export default {
     background: #181818;
     background: var(--input);
     color: rgba(255, 255, 255, 0.50);
-    color: rgba(var(--foreground-rgb), 0.5);
+    color: rgba(var(--input-foreground-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px;
   }
@@ -884,7 +884,7 @@ export default {
 
   &__value {
     color: #ffffff;
-    color: var(--input-foreground);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -893,7 +893,7 @@ export default {
 
   &__value-description {
     color: #ffffff;
-    color: var(--input-foreground);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

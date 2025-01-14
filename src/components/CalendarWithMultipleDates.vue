@@ -175,7 +175,7 @@ export default {
     font-weight: 500;
     padding: 10px;
     color: #ffffff;
-    color: var(--foreground);
+    color: var(--game-foreground);
   }
 
   &__body {
@@ -225,7 +225,7 @@ export default {
     font-size: 14px;
     font-weight: 500;
     color: #ffffff;
-    color: var(--foreground);
+    color: var(--game-foreground);
 
     &--selected {
       background: #35cd96;

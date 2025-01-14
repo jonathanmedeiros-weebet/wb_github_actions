@@ -414,7 +414,7 @@
   
     &__league-select {
       padding: 8px 16px;
-      border-bottom: 1px solid rgba(var(--championship-foreground-rgb), 0.1)
+      border-bottom: 1px solid rgba(var(--league-foreground-rgb), 0.1)
     }
   
     &__league-select img {

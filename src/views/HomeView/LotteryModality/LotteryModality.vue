@@ -384,7 +384,7 @@ export default {
                     this.handleCloseModalCopyLottery();
                     this.toastStore.setToastConfig({
                         message: error.errors.message,
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     });
                 })
@@ -553,7 +553,7 @@ export default {
 
     &__options-label {
         color:#ffffff;
-        color: var(--input-foreground);
+        color: var(--foreground);
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -593,7 +593,7 @@ export default {
   &__balance-text {
     font-size: 14px;
     color:#ffff;
-    color: var(--input-foreground);
+    color: var(--foreground);
   }
 
   &__balance {
@@ -609,9 +609,10 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
+    background: #181818;
     background: var(--input);
-    color: #ffffff80;
-    color: var(--input-foreground);
+    color: rgba(255, 255, 255, 0.50);
+    color: rgba(var(--input-foreground-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px;
   }

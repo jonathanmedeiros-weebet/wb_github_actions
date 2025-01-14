@@ -88,14 +88,14 @@ export default {
         }else{
           this.toastStore.setToastConfig({
             message: 'Usuário ou senha inválida',
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 3000
           })
         }
       } catch ({ errors }) {
         this.toastStore.setToastConfig({
           message: errors?.message ?? 'Usuário ou Senha inválido',
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 3000
         })
       }

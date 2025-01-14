@@ -40,7 +40,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     background-color: #0a0a0a;
-    background-color: var(--championship);
+    background-color: var(--league);
 
     &__title {
         display: flex;
@@ -50,7 +50,7 @@ export default {
         line-height: 23.44px;
         
         color: #ffffff;
-        color: var(--championship-foreground);
+        color: var(--league-foreground);
 
         &--large {
             font-size: 20px;

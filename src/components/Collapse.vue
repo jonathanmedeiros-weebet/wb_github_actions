@@ -22,7 +22,7 @@ export default {
         },
         iconColor: {
             type: String,
-            default: 'var(--championship-foreground)'
+            default: 'var(--league-foreground)'
         }
     },
     data() {
@@ -61,10 +61,10 @@ export default {
         height: 40px;
         padding: 8px 16px;
         background: #0a0a0a;
-        background: var(--championship);
+        background: var(--league);
         color: #ffffff;
-        color: var(--championship-foreground);
-        border-bottom: 1px solid rgba(var(--championship-foreground-rgb), .1);
+        color: var(--league-foreground);
+        border-bottom: 1px solid rgba(var(--league-foreground-rgb), .1);
     }
 
     &__title {
@@ -72,7 +72,7 @@ export default {
         align-items: center;
         justify-content: flex-start;
         color: #ffffff;
-        color: var(--championship-foreground);
+        color: var(--league-foreground);
         font-size: 14px;
         font-weight: 400;
         overflow: hidden;

@@ -67,9 +67,9 @@ export default {
         align-items: center;
         &--primary {
             background: #0a0a0a;
-            background: var(--championship);
+            background: var(--league);
             color: #ffffff;
-            color: var(--championship-foreground);
+            color: var(--league-foreground);
         }
 
         &--secondary {
@@ -105,7 +105,7 @@ export default {
         display: flex;
         justify-content: space-between;
         background: #0a0a0a;
-        background: var(--championship);
+        background: var(--league);
         width: 100%;
         padding: 16px 13px;
         

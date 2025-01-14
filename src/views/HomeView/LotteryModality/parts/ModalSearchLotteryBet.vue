@@ -72,4 +72,8 @@
     background-color: var(--background) !important;
     color: var(--foreground) !important;
   }
+
+  ::v-deep .input__group input::placeholder {
+    color: var(--foreground) !important;
+  }
   </style>

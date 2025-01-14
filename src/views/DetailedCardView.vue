@@ -58,7 +58,7 @@
                     @click="handleShared"
                     >
                     <template #icon-left>
-                        <IconShare :size="20" color="var(--championship-foreground)"/>
+                        <IconShare :size="20" color="var(--league-foreground)"/>
                     </template>
                 </w-button>
                     <div class="button-spacer"></div>
@@ -123,7 +123,7 @@ export default {
             if (!isValidPin) {
                 this.toastStore.setToastConfig({
                     message: 'PIN inválido.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -133,7 +133,7 @@ export default {
             if (!isValidCode) {
                 this.toastStore.setToastConfig({
                     message: 'Chave inválida.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -146,7 +146,7 @@ export default {
             .catch((errors) => {
                 this.toastStore.setToastConfig({
                     message: errors?.message ?? 'Ocorreu algum erro inesperado.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
             })

@@ -32,7 +32,7 @@ export default {
             return convertInMomentInstance(date).format('DD/MM/YYYY');
         },
         typeColor(type) {
-            return type == 'Débito' ? 'card__value--danger' : 'card__value--success'
+            return type == 'Débito' ? 'card__value--warning' : 'card__value--success'
         },
         formatCurrencyMoney(value) {
             return formatCurrency(value);
@@ -68,9 +68,9 @@ export default {
             color: var(--success);
         }
 
-        &--danger {
+        &--warning {
             color: #f61a1a;
-            color: var(--danger);
+            color: var(--warning);
         }
     }
 

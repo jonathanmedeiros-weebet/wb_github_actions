@@ -41,7 +41,7 @@ export default {
   flex-direction: column;
   height: 100%;
   background: #0a0a0a;
-  background: var(--championship);
+  background: var(--league);
   
   &__items {
     align-items: center;
@@ -92,7 +92,7 @@ export default {
   &__scores--secondary {
     font-size: 12px;
     color: #ffffff80;
-    color: var(--championship-foreground);
+    color: var(--league-foreground);
     padding-top: 0;
   }
 

@@ -251,4 +251,19 @@ export default {
     margin-left: -1px;
   }
 }
+
+::v-deep .select-fake {
+  background: #0a0a0a;
+  background: var(--background);
+}
+
+::v-deep .select-fake__title {
+  color: #ffffff;
+  color: var(--foreground);
+}
+
+::v-deep .select-fake svg {
+  fill: #ffffff;
+  fill: var(--foreground);
+}
 </style>

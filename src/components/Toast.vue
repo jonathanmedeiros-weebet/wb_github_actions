@@ -77,14 +77,14 @@ export default {
         background-color: var(--success);
     }
 
-    &--warning {
+    &--alert {
         background-color: #c09516;
-        background-color: var(--warning);
+        background-color: var(--alert);
     }
 
-    &--danger {
+    &--warning {
         background-color: #f61a1a;
-        background-color: var(--danger);
+        background-color: var(--warning);
     }
 
     &__close_icon {

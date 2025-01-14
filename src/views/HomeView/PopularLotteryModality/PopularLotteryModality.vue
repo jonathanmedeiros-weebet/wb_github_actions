@@ -51,7 +51,7 @@ export default {
             }else{
                 this.toastStore.setToastConfig({
                     message: 'Você não tem acesso a Loteria Popular',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 3000
                 })
 
@@ -67,7 +67,7 @@ export default {
                     console.error(error);
                     this.toastStore.setToastConfig({
                         message: error.errors?.message,
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 3000
                     })
                 })

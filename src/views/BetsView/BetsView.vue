@@ -155,7 +155,7 @@
                     <td class="table__line--left">Status:</td>
                     <td 
                       class="table__line--right"
-                      :class="{ 'table__status--success': bet.resultado === 'ganhou', 'table__status--danger': bet.resultado === 'perdeu' }"
+                      :class="{ 'table__status--success': bet.resultado === 'ganhou', 'table__status--warning': bet.resultado === 'perdeu' }"
                     >
                       {{ capitalizeFirstLetter(bet.resultado) }}
                     </td>
@@ -500,7 +500,7 @@ export default {
           .catch(error => {
             this.toastStore.setToastConfig({
               message: error.errors.message,
-              type: ToastType.DANGER,
+              type: ToastType.WARNING,
               duration: 5000
             });
           });
@@ -518,7 +518,7 @@ export default {
           .catch(error => {
             this.toastStore.setToastConfig({
               message: error.errors.message | 'Erro ao buscar apostas',
-              type: ToastType.DANGER,
+              type: ToastType.WARNING,
               duration: 5000
             });
           });
@@ -558,7 +558,7 @@ export default {
         }else{
           this.toastStore.setToastConfig({
             message: 'Não foi possível realizar o pagamento. Se o erro persistir, entre em contato com o suporte',
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         }
@@ -567,7 +567,7 @@ export default {
       .catch(error => {
         this.toastStore.setToastConfig({
           message: error.errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })
@@ -612,7 +612,7 @@ export default {
       .catch(error => {
         this.toastStore.setToastConfig({
           message: error.errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })
@@ -638,7 +638,7 @@ export default {
       .catch(error => {
         this.toastStore.setToastConfig({
           message: error.errors?.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })
@@ -676,7 +676,7 @@ export default {
     font-size: 16px;
     margin-bottom: 8px;
     color: #ffffff;
-    color: var(--input-foreground);
+    color: var(--foreground);
   }
 
   &__modalities-modal {
@@ -795,15 +795,19 @@ export default {
       color: #6da544;
       color: var(--success);
     }
-    &--danger {
+    &--warning {
       color: #f61a1a;
-      color: var(--danger);
+      color: var(--warning);
     }
   }
 }
 
 .button-spacer {
   width: 10px; 
+}
+
+::v-deep .select-fake__title {
+  color: var(--input-foreground);
 }
 
 </style>

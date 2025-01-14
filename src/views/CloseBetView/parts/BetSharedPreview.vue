@@ -210,7 +210,7 @@
         }
 
         &--perdeu {
-            color: var(--danger)
+            color: var(--warning)
         }
 
         &--cancelado {

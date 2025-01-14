@@ -174,7 +174,7 @@ export default {
         .catch(error => {
           this.toastStore.setToastConfig({
             message: error.errors.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         })

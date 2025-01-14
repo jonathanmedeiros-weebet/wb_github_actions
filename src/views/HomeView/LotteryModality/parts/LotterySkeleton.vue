@@ -48,7 +48,7 @@ export default {
             background: #0a0a0a;
             background: var(--background);
             color: #ffffff;
-            color: var(--championship-foreground);
+            color: var(--league-foreground);
         }
         
         &__message,

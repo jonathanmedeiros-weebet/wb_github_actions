@@ -201,7 +201,7 @@ export default {
         .catch(error => {
           this.toastStore.setToastConfig({
             message: error.errors?.message ?? 'Erro inesperado',
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         })
@@ -303,7 +303,7 @@ export default {
             this.textButtonFinalizeBet = "Validar aposta";
             this.toastStore.setToastConfig({
               message: error.errors?.message ?? 'Erro inesperado',
-              type: ToastType.DANGER,
+              type: ToastType.WARNING,
               duration: 5000
             })
         })
@@ -457,9 +457,9 @@ export default {
   }
 
   &__text {
-    &--danger {
+    &--warning {
       color: #ff0000;
-      color: var(--danger);
+      color: var(--warning);
     }
 
     &--previous-quote {
@@ -573,7 +573,7 @@ export default {
   &__alerta {
     margin-top: 8px;
     background-color: #c09516;
-    background-color: var(--warning);
+    background-color: var(--alert);
     border-radius: 6px;
     color: #000000;
     padding: 12px;

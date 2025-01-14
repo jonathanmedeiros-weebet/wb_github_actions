@@ -72,6 +72,11 @@ export default {
     color: var(--highlight-foreground);
     background: #35cd96;
     background: var(--highlight);
+
+    svg {
+      fill: #181818;
+      fill: var(--highlight-foreground);
+    }
   }
 
   &--secondary {
@@ -79,12 +84,22 @@ export default {
     color: var(--button-foreground);
     background: #0a0a0a;
     background: var(--button);
+
+    svg {
+      fill: #ffffff;
+      fill: var(--button-foreground);
+    }
   }
   &--secondary-light {
     color: #ffffff;
     color: var(--input-foreground);
     background: #181818;
     background: var(--input);
+
+    svg {
+      fill: #ffffff;
+      fill: var(--input-foreground);
+    }
   }
 }
 

@@ -78,6 +78,11 @@ export default {
   &__input ::v-deep .input__group,
   &__input ::v-deep .input__field {
     background-color: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+
+  &__input ::v-deep .input__group input::placeholder {
+    color: var(--foreground) !important;
   }
 }
 

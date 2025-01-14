@@ -125,7 +125,7 @@ export default {
                     console.error(error)
                     this.toastStore.setToastConfig({
                         message: 'Ocorreu algum erro ao buscar os campeonatos.',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     })
                 })
@@ -135,7 +135,7 @@ export default {
             if (!this.selectedChampionships.length) {
                 this.toastStore.setToastConfig({
                     message: 'Por favor, selecione ao menos um campeonato.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
                 return;

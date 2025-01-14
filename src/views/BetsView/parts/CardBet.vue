@@ -43,6 +43,11 @@ export default {
         color: var(--game-foreground);
     }
 
+    &__body {
+        color: #ffffff;
+        color: var(--game-foreground);
+    }
+
     &__subtitle {
         color: rgba(255, 255, 255, .5);
         color: rgba(var(--game-foreground-rgb), .5);

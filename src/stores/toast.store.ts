@@ -5,7 +5,7 @@ import { defineStore } from "pinia"
 export const useToastStore = defineStore('toast', {
     state: (): ToastParams => ({
         message: '',
-        type: ToastType.DANGER,
+        type: ToastType.WARNING,
         duration: 3000,
     }),
     actions: {

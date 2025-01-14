@@ -47,7 +47,7 @@
         </p>
 
         <Collapse 
-          :iconColor="'var(--championship-foreground)'"
+          :iconColor="'var(--league-foreground)'"
           :leftIcon="true" 
           :initCollapsed="true" 
           v-for="(championship, championshipListIndex) in championshipList" 
@@ -291,10 +291,10 @@ export default {
 
 ::v-deep .collapse__item {
   background: #0a0a0a;
-  background: var(--championship);
+  background: var(--league);
   color: #ffffff;
-  color: var(--championship-foreground);
-  border-bottom: 1px solid rgba(var(--championship-foreground-rgb), 0.1);
+  color: var(--league-foreground);
+  border-bottom: 1px solid rgba(var(--league-foreground-rgb), 0.1);
 }
 
 </style>

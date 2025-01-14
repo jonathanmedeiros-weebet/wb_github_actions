@@ -34,7 +34,7 @@
               <span v-if="newEarningPossibility == null" class="gain__value">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
               <span v-else class="gain__value">
                 <span class="gain__strikethrough" v-if="bet.possibilidade_ganho">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
-                <span class="gain--danger" v-if="newEarningPossibility">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
+                <span class="gain--warning" v-if="newEarningPossibility">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
               </span>
             </div>
             <div class="gain__item">
@@ -110,7 +110,7 @@
               <template>
                 <p :class="{ 
                   'bet__status--success': betItem.resultado === 'ganhou', 
-                  'bet__status--danger': betItem.resultado === 'perdeu',
+                  'bet__status--warning': betItem.resultado === 'perdeu',
                   'gain__strikethrough': newEarningPossibility !== null
                 }"
                 >{{ capitalizeFirstLetter(betItem.resultado) }}</p>
@@ -347,7 +347,7 @@ export default {
             .catch(error => {
               this.toastStore.setToastConfig({
                 message: error.errors?.message,
-                type: ToastType.DANGER,
+                type: ToastType.WARNING,
                 duration: 5000
               })
             });
@@ -373,7 +373,7 @@ export default {
           .catch(error => {
             this.toastStore.setToastConfig({
               message: error.errors?.message,
-              type: ToastType.DANGER,
+              type: ToastType.WARNING,
               duration: 5000
             })
           })
@@ -391,7 +391,7 @@ export default {
       .catch(({errors}) => {
         this.toastStore.setToastConfig({
           message: errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })
@@ -550,9 +550,9 @@ export default {
     text-decoration: line-through;
   }
 
-  &--danger {
+  &--warning {
     color: #f61a1a;
-    color: var(--danger);
+    color: var(--warning);
   }
 
 }
@@ -617,9 +617,9 @@ export default {
     color: var(--success);
   }
 
-  &__status--danger {
+  &__status--warning {
     color: #f61a1a;
-    color: var(--danger);
+    color: var(--warning);
   }
 
   &__message {

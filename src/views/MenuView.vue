@@ -238,7 +238,7 @@ export default {
       } catch (error) {
         this.toastStore.setToastConfig({
           message: error.errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         });
       }
@@ -259,7 +259,7 @@ export default {
       } catch (error) {
         this.toastStore.setToastConfig({
           message: error.errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         });
       }
@@ -366,12 +366,16 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
-    background-color: var(--button-foreground);
+
+    background-color: #0a0a0a;
+    background-color: var(--button);
+
+    color: #ffffff;
+    color: var(--button-foreground); 
+
     border: none;
     border-radius: 18px;
-    color: #0a0a0a;
-    color: var(--button); 
+
     padding: 7px;
     white-space: nowrap;
     font-size: 10px;
@@ -379,8 +383,8 @@ export default {
   }
 
   &__icon {
-    fill: #0a0a0a;
-    fill: var(--button);
+    fill: #ffffff;
+    fill: var(--button-foreground); 
     align-items: center;
   }
 }
@@ -401,6 +405,10 @@ export default {
     width: 100%;
     background-color: #181818;
     background-color: var(--game);
+
+    color: #ffffff;
+    color: var(--game-foreground);
+
     padding: 18px 8px;
     padding-top: 8px;
     border-radius: 10px;

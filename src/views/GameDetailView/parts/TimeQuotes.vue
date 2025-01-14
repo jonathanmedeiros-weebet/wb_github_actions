@@ -33,12 +33,12 @@
                                 class="collapse__icon-option"
                                 v-if="isDecreasedOdd(odd)"
                                 :size="14"
-                                color="var(--danger)"
+                                color="var(--warning)"
                             />
                         </template>
                         <template v-else>
                             <span class="collapse__label">{{ odd.label }}</span>
-                            <IconLock :size="14" color="var(--championship-foreground)"/>
+                            <IconLock :size="14" color="var(--league-foreground)"/>
                         </template>
                     </button>
                 </div>
@@ -140,7 +140,7 @@ export default {
 
 .collapse {
     background: #0a0a0a;
-    background: var(--championship);
+    background: var(--league);
 
     &__title {
         color: red;
@@ -252,11 +252,11 @@ export default {
 
 ::v-deep .collapse__item {
     background: #0a0a0a;
-    background: var(--champioship);
+    background: var(--league);
     padding: 13px 24px;
 }
 ::v-deep .collapse__title {
     color: #ffffff;
-    color: var(--champioship-foreground);
+    color: var(--league-foreground);
 }
 </style>

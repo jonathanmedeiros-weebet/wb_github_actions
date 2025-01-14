@@ -296,7 +296,7 @@ export default {
 
     &__live {
         color: #f61a1a;
-        color: var(--danger);
+        color: var(--warning);
         font-size: 12px;
         font-style: normal;
         font-weight: 300;

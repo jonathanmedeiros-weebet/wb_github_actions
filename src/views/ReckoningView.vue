@@ -282,7 +282,7 @@ export default {
       } catch ({ errors }) {
         this.tostStore.setToastConfig({
           message: errors?.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
         this.resetDateToCurrent();
@@ -451,7 +451,7 @@ export default {
 
   &__icon-remove {
     fill: #f61a1a;
-    fill: var(--danger);
+    fill: var(--warning);
     margin-right: 5px;
   }
 
@@ -483,7 +483,7 @@ export default {
 
     &--negative {
       color: #f61a1a;
-      color: var(--danger);
+      color: var(--warning);
     }
   }
 }
@@ -527,7 +527,7 @@ export default {
 
   &__icon {
     fill: #f61a1a;
-    fill: var(--danger);
+    fill: var(--warning);
     margin-right: 5px;
   }
 }
@@ -549,7 +549,7 @@ export default {
 
     &--negative {
       color: #f61a1a;
-      color: var(--danger);
+      color: var(--warning);
     }
   }
 }

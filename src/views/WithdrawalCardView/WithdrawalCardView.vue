@@ -224,7 +224,7 @@ export default {
       } catch (error) {
         this.toastStore.setToastConfig({
           message: error.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000,
         });
       }
@@ -243,7 +243,7 @@ export default {
         const errorMessage = error.errors.debug; 
         this.toastStore.setToastConfig({
           message: errorMessage,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000,
         });
       }

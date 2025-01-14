@@ -67,7 +67,7 @@ export default {
             if (!this.formValid) {
                 this.toastStore.setToastConfig({
                     message: 'Por favor, preencha todos os campos.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
                 return;
@@ -77,7 +77,7 @@ export default {
             if (isNaN(cardValueNumber) || cardValueNumber <= 0) {
                 this.toastStore.setToastConfig({
                     message: 'Por favor, insira um valor válido.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -102,7 +102,7 @@ export default {
                 .catch(({ errors }) => {
                     this.toastStore.setToastConfig({
                         message: errors.message,
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     })
                 })

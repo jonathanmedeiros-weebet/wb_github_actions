@@ -82,7 +82,7 @@ export default {
             if (!this.formValid) {
                 this.toastStore.setToastConfig({
                     message: 'Por favor, preencha todos os campos corretamente.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
                 return;
@@ -92,7 +92,7 @@ export default {
             if (isNaN(cardValueNumber) || cardValueNumber <= 0) {
                 this.toastStore.setToastConfig({
                     message: 'Por favor, insira um valor válido.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -102,7 +102,7 @@ export default {
             if (!isValidPins) {
                 this.toastStore.setToastConfig({
                     message: 'Os PINs devem ter no mínimo 3 caracteres.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -112,7 +112,7 @@ export default {
             if (!isEqualPins) {
                 this.toastStore.setToastConfig({
                     message: 'Os PINs informados devem ser iguais.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -144,7 +144,7 @@ export default {
             .catch(({ errors }) => {
                 this.toastStore.setToastConfig({
                     message: errors.message || 'Ocorreu algum erro inesperado.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
             })
