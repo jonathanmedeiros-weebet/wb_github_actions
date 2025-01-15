@@ -255,6 +255,19 @@
             dateSelected,
             isPopularLeague
           );
+
+          if (!championships || championships.length === 0) {
+            const nextDateEvents = this.dateSelected.add(1, 'day').format('YYYY-MM-DD');
+
+            const nextDayChampionshipsEvents = this.liveActived
+              ? await getLiveChampionship(modalityId)
+              : await getChampionshipBySportId(modalityId, regionName, nextDateEvents, isPopularLeague);
+
+            if (nextDayChampionshipsEvents && nextDayChampionshipsEvents.length > 0) {
+              this.homeStore.setChampionshipList(nextDayChampionshipsEvents);
+            } 
+            return;
+          }
   
         this.homeStore.setChampionshipList(championships);
       },
