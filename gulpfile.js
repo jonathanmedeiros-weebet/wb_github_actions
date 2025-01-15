@@ -1032,15 +1032,6 @@ gulp.task('ritsbet.wee.bet', function (done) {
     });
 });
 
-gulp.task('brsports.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "brsports.bet",
-        banca: "BR SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('santissports.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1611,15 +1602,6 @@ gulp.task('jetbet365.com', function (done) {
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P65H9KK8');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-P65H9KK8'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
         xtremepush_sdk: "eevBAQ-IGn6GrAGzjOBRlWA7_q37u3Pa"
-    });
-});
-
-gulp.task('betbetix.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "betbetix.com",
-        banca: "BET BETIX",
-        styles: ""
     });
 });
 
@@ -2331,6 +2313,15 @@ gulp.task('joguefacil.bet', function (done) {
         server: "front2.wee.bet",
         host: "joguefacil.bet",
         banca: "JOGUE FÁCIL",
+        styles: ""
+    });
+});
+
+gulp.task('sportvips.bet', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "sportvips.bet",
+        banca: "SPORT VIPS",
         styles: ""
     });
 });
