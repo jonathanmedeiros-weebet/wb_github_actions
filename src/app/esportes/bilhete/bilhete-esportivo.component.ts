@@ -399,8 +399,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 valido = false;
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
-
-            if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
+            
+            if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
                 valido = false;
                 msg = this.translate.instant('geral.geolocationError');
                 await this.geolocationService.saveLocalStorageLocation();
@@ -416,7 +416,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                     msg = this.translate.instant('geral.stateRestriction');
                 }
             }
-
+            
             if (valido) {
                 if (this.isLoggedIn) {
                     let values = await this.ajustarDadosParaEnvio();
@@ -609,7 +609,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     async finalizarApostaDeslogado() {
         this.disabledSubmit();
 
-        if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
             this.geolocationService.saveLocalStorageLocation();
             this.enableSubmit();
             return this.handleError(this.translate.instant('geral.geolocationError'));
@@ -667,7 +667,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
 
         const values = clone(this.form.value);
-        values['geolocation'] = this.geolocation.value;
+        values['geolocation'] = this.geolocation;
         values['ibge_code'] = localStorage.getItem('ibge_code');
         values['locale_city'] = localStorage.getItem('locale_city');
         values['locale_state'] = localStorage.getItem('locale_state');

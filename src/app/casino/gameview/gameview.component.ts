@@ -440,7 +440,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     async loadGame() {
-        if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
             this.handleError(this.translate.instant('geral.geolocationError'));
             await this.geolocationService.saveLocalStorageLocation();
             this.router.navigate(['/']);

@@ -217,7 +217,7 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
-            if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
+            if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
                 valido = false;
                 msg = this.translate.instant('geral.geolocationError');
             }
