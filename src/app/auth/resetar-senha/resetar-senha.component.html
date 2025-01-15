@@ -83,37 +83,57 @@
                         </div>
                     </form>
                 </div>
-                <div #legitimuz id="legitimuz-container"
-                    *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && !verifiedIdentity">
-                    <div id="legitimuz">
+                <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
+                    <div #legitimuz id="legitimuz-container"
+                        *ngIf="!faceMatchChangePasswordValidated && !verifiedIdentity">
+                        <div id="legitimuz">
+                            <div id="verify-identity-text">
+                                {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                                ('saques.identityVerifyNeeded' | translate)}}
+                            </div>
+                            <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                                [value]="dataUserCPF" />
+                            <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                            <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                                <i class="fa-solid fa-id-card"></i>
+                                {{'saques.identityVerify' | translate}}
+                            </button>
+                        </div>
+                        <div id="legitimuz-root"></div>
+                    </div>
+                    <div #legitimuzLiveness id="legitimuz-container"
+                        *ngIf="!faceMatchChangePasswordValidated && verifiedIdentity">
+                        <div id="legitimuz">
+                            <div id="verify-identity-text">
+                                {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                                ('saques.identityVerifyNeeded' | translate)}}
+                            </div>
+                            <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                                [value]="dataUserCPF" />
+                            <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                            <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                                <i class="fa-solid fa-id-card"></i>
+                                {{'saques.identityVerify' | translate}}
+                            </button>
+                        </div>
+                        <div id="legitimuz-root"></div>
+                    </div>
+                    </div>
+
+                <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+                    <div #docCheck id="docCheck"
+                            *ngIf="!faceMatchChangePasswordValidated">
                         <div id="verify-identity-text">
                             {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
                             ('saques.identityVerifyNeeded' | translate)}}
                         </div>
-                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
-                            [value]="dataUserCPF" />
-                        <button id="legitimuz-action-verify" class="btn btn-custom" *ngIf="!disapprovedIdentity">
+                        <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
+                            [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                            [attr.data-ex-doccheck-force-enrollment]="false">
                             <i class="fa-solid fa-id-card"></i>
                             {{'saques.identityVerify' | translate}}
                         </button>
                     </div>
-                    <div id="legitimuz-root"></div>
-                </div>
-                <div #legitimuzLiveness id="legitimuz-container"
-                    *ngIf="faceMatchEnabled && !faceMatchChangePasswordValidated && verifiedIdentity">
-                    <div id="legitimuz">
-                        <div id="verify-identity-text">
-                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
-                            ('saques.identityVerifyNeeded' | translate)}}
-                        </div>
-                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
-                            [value]="dataUserCPF" />
-                        <button id="legitimuz-action-faceindex" class="btn btn-custom" *ngIf="!disapprovedIdentity">
-                            <i class="fa-solid fa-id-card"></i>
-                            {{'saques.identityVerify' | translate}}
-                        </button>
-                    </div>
-                    <div id="legitimuz-root"></div>
                 </div>
             </div>
         </div>

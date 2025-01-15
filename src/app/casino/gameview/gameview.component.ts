@@ -9,7 +9,6 @@ import { interval, Subject } from 'rxjs';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
     CadastroModalComponent,
-    JogosLiberadosBonusModalComponent,
     LoginModalComponent,
 
 } from "../../shared/layout/modals";
@@ -43,6 +42,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     fullscreen;
     elem: any;
     showLoadingIndicator = true;
+    showGameListLoadingIndicator = true;
     isCliente;
     sessionId = '';
     removerBotaoFullscreen = false;
@@ -215,8 +215,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         if (isLoggedIn) {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
-                                this.loadGame();
-
                                 if (this.isMobile && this.gameMode === 'REAL') {
                                     this.disableHeader();
                                     this.fixMobileHeader();
@@ -233,12 +231,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         }
                         if (isLoggedIn || this.gameMode !== 'REAL') {
                             this.inGame = true;
-                            this.fixInGameSpacings();
                         }
-                        this.loadGame();
                     }
                 );
-
+                
             this.auth.cliente
                 .subscribe(
                     isCliente => {
@@ -441,14 +437,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
-                    if(response.loss_limit.loss_hit && response.loss_limit.error){
+                    if(response?.loss_limit?.loss_hit && response?.loss_limit?.error){
                         this.showModal(response.loss_limit.message);
                         this.router.navigate(['/']);
                     }
-                    if (!response.loss_limit.loss_hit && response.loss_limit.error ) {
+                    if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error ) {
                         this.showModalPercentage(response.loss_limit.message);
                     }
-
 
                     if (typeof response.gameUrl !== 'undefined') {
                         this.gameCategory = response.category;
@@ -869,14 +864,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         });
     }
 
-    exibirJogosLiberadosBonus() {
-        this.location.back();
-        this.modalService.open(JogosLiberadosBonusModalComponent, {
-            centered: true,
-            size: 'xl',
-        });
-    }
-
     appendScriptGalaxsys() {
         let body = document.getElementsByTagName('body')[0];
         let bodyScript = document.createElement('script');
@@ -981,7 +968,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private fixInGameSpacings() {
         const blocoContainer = this.el.nativeElement.querySelector('.bloco-container-gameview');
 
-        if (blocoContainer && (this.inGame || this.gameMode !== 'REAL')) {
+        if (blocoContainer) {
             this.renderer.setStyle(blocoContainer, 'padding', '0');
         }
     }
@@ -990,6 +977,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const response = await this.casinoApi.getGamesList(live).toPromise();
 
         this.gameList = await this.filterDestaques(response.populares, category);
+        this.showGameListLoadingIndicator = false;
     }
 
     private async getProviders() {
@@ -1123,14 +1111,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
                 this.renderer.setStyle(gameView, 'padding-top', '50px');
                 this.renderer.setStyle(gameView, 'position', 'fixed');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
+                this.renderer.setStyle(gameFrame, 'style', 'margin-top: 0');
             }
         }
 
         if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
-                this.renderer.setStyle(gameFrame, 'margin-top', '50px');
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 140px)');
+                this.renderer.setStyle(gameFrame, 'margin-top', '43px');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 135px)');
             }
         }
 

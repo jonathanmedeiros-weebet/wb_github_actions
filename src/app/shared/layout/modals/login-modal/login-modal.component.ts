@@ -173,7 +173,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 async (res) => {
-                    const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.paramsLocais.getOpcoes().legitimuz_token);
+                    const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && (this.paramsLocais.getOpcoes().legitimuz_token || this.paramsLocais.getOpcoes().dockCheck_token));
                     let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
                     this.getUsuario();
                     if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {

@@ -16,13 +16,12 @@
         </div>
 
         <div class="info-jogo">
-            <div *ngIf="this.slug == 'zilionz.com' || slug == 'saqbet.tv'" class="icons" style="margin-bottom: 30px; gap: 0">
+            <div *ngIf="this.slug == 'zilionz.com'" class="icons" style="margin-bottom: 30px; gap: 0">
                 <ng-container *ngIf="slug == 'zilionz.com'">
                     <img src="https://wb-assets.com/img/curacao.png" width="150" height="50" border="0" alt="Gaming Curacao">
                     <div id="anj-cd823ed6-bffb-4764-9e1b-05566f369c8c" data-anj-seal-id="cd823ed6-bffb-4764-9e1b-05566f369c8c"
                          data-anj-image-size="128" data-anj-image-type="basic-small" style="width: 50px"></div>
                 </ng-container>
-                <div *ngIf="this.slug == 'saqbet.tv'" style="margin-left: 10px" id="ra-verified-seal"></div>
             </div>
             <h4 class="title">{{'footer.jogueComResponsabilidade' | translate}}</h4>
             <div class="icons" *ngIf="slug == 'ragnar.bet'">
@@ -94,9 +93,9 @@
             <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="hasApk && !isAppMobile">
                 {{'footer.downloadApp' | translate}}
             </a>
-            <a *ngIf="displayPwaInstallButton" (click)="installPwa()">
+            <!-- <a *ngIf="displayPwaInstallButton" (click)="installPwa()">
                 {{ 'footer.installPwa' | translate }}
-            </a>
+            </a> -->
             <a [routerLink]="['/informacoes/regras']" *ngIf="hasRegras">
                 {{'footer.regras' | translate}}
             </a>
