@@ -5,17 +5,19 @@
       
       <div class="bets__contente">
         <div class="bets__modalities">
-        <label class="bet__modalities-label">Modalidade</label>
-        <SelectFake
-         titleSize="medium"
-         @click="handleOpenModalitiesModal"
-        >
-          {{ modality.name }}
-        </SelectFake>
-      </div>
+          <label class="bets__modalities-label">Modalidade</label>
+          <SelectFake
+            class="bets__modalities-select"
+            titleSize="medium"
+            @click="handleOpenModalitiesModal"
+          >
+            {{ modality.name }}
+          </SelectFake>
+        </div>
 
         <w-input
           id="inputApostador"
+          class="bets__input"
           label="Apostador"
           name="apostador"
           placeholder="Apostador"
@@ -26,6 +28,7 @@
 
         <w-input
           id="inputBettorDocumentNumber"
+          class="bets__input"
           label="CPF do apostador"
           name="bettorDocumentNumber"
           placeholder="XXX.XXX.XXX-XX"
@@ -37,6 +40,7 @@
 
         <w-input
           id="inputCode"
+          class="bets__input"
           label="Código"
           name="code"
           placeholder="XXXX-XXXX"
@@ -47,6 +51,7 @@
         />
         <w-input
           id="inputDate"
+          class="bets__input"
           name="inputDate"
           label="Data"
           type="text"
@@ -73,34 +78,50 @@
         <div class="bets__buttons-filters">
           <tag-button
             id="btn-all"
+            class="bets__tag-button"
             text="Todas"
             value="todos"
             name="btn-all"
-            :class="{ 'button--primary': activeButton === 'todos', 'button--secondary': activeButton !== 'todos'}"
+            :class="{
+              'button--primary': activeButton === 'todos',
+              'button--secondary': activeButton !== 'todos'
+            }"
             @click="setActive('todos')"
           />
           <tag-button
             id="btn-pendent"
+            class="bets__tag-button"
             text="Pendente"
             value="pendente"
             name="btn-pendent"
-            :class="{ 'button--primary': activeButton === 'pendente', 'button--secondary': activeButton !== 'pendente'}"
+            :class="{
+              'button--primary': activeButton === 'pendente',
+              'button--secondary': activeButton !== 'pendente'
+            }"
             @click="setActive('pendente')"
           />
           <tag-button
             id="btn-win"
+            class="bets__tag-button"
             text="Ganhou"
             value="ganhou"
             name="btn-win"
-            :class="{ 'button--primary': activeButton === 'ganhou', 'button--secondary': activeButton !== 'ganhou'}"
+            :class="{
+              'button--primary': activeButton === 'ganhou',
+              'button--secondary': activeButton !== 'ganhou'
+            }"
             @click="setActive('ganhou')"
           />
           <tag-button
             id="btn-lose"
+            class="bets__tag-button"
             text="Perdeu"
             value="perdeu"
             name="btn-lose"
-            :class="{ 'button--primary': activeButton === 'perdeu', 'button--secondary': activeButton !== 'perdeu'}"
+            :class="{
+              'button--primary': activeButton === 'perdeu',
+              'button--secondary': activeButton !== 'perdeu'
+            }"
             @click="setActive('perdeu')"
           />
         </div>
@@ -134,7 +155,7 @@
                     <td class="table__line--left">Status:</td>
                     <td 
                       class="table__line--right"
-                      :class="{ 'table__status--success': bet.resultado === 'ganhou', 'table__status--danger': bet.resultado === 'perdeu' }"
+                      :class="{ 'table__status--success': bet.resultado === 'ganhou', 'table__status--warning': bet.resultado === 'perdeu' }"
                     >
                       {{ capitalizeFirstLetter(bet.resultado) }}
                     </td>
@@ -159,6 +180,7 @@
                   class="button--secondary"
                   @click="goToTickets(bet, 'view')"
                 />
+                
                 <div class="button-spacer"></div>
                 <w-button
                   id="btn-cancel"
@@ -168,25 +190,30 @@
                   class="button--secondary"
                   @click="handleOpenCancelModal(bet)"
                 />
-
-                <w-button
-                  id="btn-payer"
-                  text="Pagar"
-                  value="payer"
-                  name="btn-payer"
-                  class="button--secondary"
-                  @click="handleOpenPayModal(bet)"
-                  v-if="bet.pago === false && bet.resultado === 'ganhou' && !bet.cartao_aposta"
-                />
-                <w-button
-                  id="btn-finish"
-                  text="Encerrar aposta"
-                  value="finish"
-                  name="finish"
-                  class="button--secondary"
-                  v-if="bet.pago === false && ['cambista', 'todos'].includes(options.permitir_encerrar_aposta) && canClose(bet) && bet.tipo !== 'loteria'"
-                  @click="goToTickets(bet, 'close')"
-                />
+                    
+                <template v-if="bet.pago === false && bet.resultado === 'ganhou' && !bet.cartao_aposta">
+                  <div class="button-spacer"></div>
+                  <w-button
+                    id="btn-payer"
+                    text="Pagar"
+                    value="payer"
+                    name="btn-payer"
+                    class="button--secondary"
+                    @click="handleOpenPayModal(bet)"
+                  />
+                </template> 
+                <template v-if="bet.pago === false && ['cambista', 'todos'].includes(options.permitir_encerrar_aposta) && canClose(bet) && bet.tipo !== 'loteria'">
+                  <div class="button-spacer"></div>
+                  <w-button
+                    id="btn-finish"
+                    text="Encerrar aposta"
+                    value="finish"
+                    name="finish"
+                    class="button--secondary"
+                    @click="goToTickets(bet, 'close')"
+                  />
+                </template>
+                
               </div>
             </template>
           </card-bets>
@@ -200,8 +227,8 @@
       >
         
         <template #title>
-          <p>Pagar aposta</p>
-          <p class="bets__text-light">Tem certeza que deseja pagar a aposta?</p>
+          <p class="modal__title">Pagar aposta</p>
+          <p class="modal__subtitle">Tem certeza que deseja pagar a aposta?</p>
         </template>
 
         <template #body>             
@@ -233,8 +260,8 @@
       >
         
         <template #title>
-          <p>Cancelar aposta</p>
-          <p class="bets__text-light">Tem certeza que deseja cancelar a aposta?</p>
+          <p class="modal__title">Cancelar aposta</p>
+          <p class="modal__subtitle">Tem certeza que deseja cancelar a aposta?</p>
         </template>
 
         <template #body>             
@@ -295,7 +322,7 @@ import Toast from '@/components/Toast.vue'
 import { ToastType } from '@/enums';
 import scrollMixin from '@/mixins/scroll.mixin'
 import SelectFake from '../HomeView/parts/SelectFake.vue'
-import { findLotteryBets, getLotteryBetsByType, getLotteryDraw } from '@/services/lottery.service'
+import { findLotteryBets } from '@/services/lottery.service'
 import ModalModalities from '../HomeView/parts/ModalModalities.vue'
 
 export default {
@@ -473,27 +500,29 @@ export default {
           .catch(error => {
             this.toastStore.setToastConfig({
               message: error.errors.message,
-              type: ToastType.DANGER,
+              type: ToastType.WARNING,
               duration: 5000
-            })
-          })
+            });
+          });
 
-          return;
+        return;
       }
 
-      findLotteryBets(params)
-        .then(async (resp) => {
-          this.bets = resp;
-          await this.calculateBetInfo();
-          this.showResults = true;
-        })
-        .catch(error => {
-          this.toastStore.setToastConfig({
-            message: error.errors.message | 'Erro ao buscar apostas',
-            type: ToastType.DANGER,
-            duration: 5000
+      if(this.modality.name === 'Loteria') {
+        findLotteryBets(params)
+          .then(async (resp) => {
+            this.bets = resp;
+            await this.calculateBetInfo();
+            this.showResults = true;
           })
-        })
+          .catch(error => {
+            this.toastStore.setToastConfig({
+              message: error.errors.message | 'Erro ao buscar apostas',
+              type: ToastType.WARNING,
+              duration: 5000
+            });
+          });
+      }
     },
     async calculateBetInfo() {
       this.amountBets = 0;
@@ -529,7 +558,7 @@ export default {
         }else{
           this.toastStore.setToastConfig({
             message: 'Não foi possível realizar o pagamento. Se o erro persistir, entre em contato com o suporte',
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         }
@@ -538,7 +567,7 @@ export default {
       .catch(error => {
         this.toastStore.setToastConfig({
           message: error.errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })
@@ -583,7 +612,7 @@ export default {
       .catch(error => {
         this.toastStore.setToastConfig({
           message: error.errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })
@@ -609,7 +638,7 @@ export default {
       .catch(error => {
         this.toastStore.setToastConfig({
           message: error.errors?.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })
@@ -628,18 +657,26 @@ export default {
   padding-bottom: 100px;
   overflow-y: auto;
 
+  &__tag-button {
+    margin-right: 8px;
+  }
+
+  &__input {
+    margin-bottom: 20px;
+  }
+
   &__modalities {
     display:  flex;
     flex-direction: column;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: 2px solid #181818;
-    border: 0.5px solid var(--foreground-inputs-odds);
+    margin-bottom: 20px;
+  }
 
-    &-label {
-      color: #ffffff;
-      color: var(--foreground-header);
-    }
+  &__modalities-label {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__modalities-modal {
@@ -664,12 +701,13 @@ export default {
   }
 
   &__results {
+    margin-top: 20px;
     padding-bottom: 80px;
   }
 
   &__count-results {
-    color: #ffffff80;
-    color: var(--foreground-header);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
   }
 
   &__buttons-filters {
@@ -678,7 +716,6 @@ export default {
     padding-top: 20px;
     overflow-x: auto;
     white-space: nowrap;
-    
   }
 
   &__buttons-filters::-webkit-scrollbar {
@@ -699,22 +736,48 @@ export default {
       flex-direction: row;
       justify-content: space-between;
     }
-    
   }
 
   &__text-light {
-    color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
   }
   
+  &__modalities-select {
+    height: 48px;
+    display: flex;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: var(--input);
+  }
+}
+
+.modal {
+  &__title {
+    color: #ffffff;
+    color: var(--game-foreground);
+  }
+
+  &__subtitle {
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), .5);
+  }
 }
 
 .button-space {
   margin-top: 5px;
 }
 
+.bets__card-footer--inline .button--secondary {
+  background-color: #0a0a0a;
+  background-color: var(--button);
+  color: #ffffff;
+  color: var(--button-foreground);
+}
+
 .table {
   width: 100%;
+  margin-left: -2px;
 
   &__line {   
     
@@ -730,20 +793,26 @@ export default {
   &__status {
     &--success {
       color: #6da544;
-      color: var(--color-success);
+      color: var(--success);
     }
-    &--danger {
+    &--warning {
       color: #f61a1a;
-      color: var(--color-danger);
+      color: var(--warning);
     }
   }
 }
+
 .button-spacer {
   width: 10px; 
 }
-#btn-view,
-#btn-cancel {
-  color: var(--foreground-header);
+
+::v-deep .select-fake__title {
+  color: var(--input-foreground);
+}
+
+::v-deep .select-fake svg {
+  fill: #ffffff;
+  fill: var(--input-foreground);
 }
 
 </style>

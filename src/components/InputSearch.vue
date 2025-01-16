@@ -1,6 +1,6 @@
 <template>
   <div class="input-search" :class="{ 'input-search--focused': isFocused }">
-    <IconSearch :size="24" />
+    <IconSearch :size="24" class="input-search__icon--left"/>
     <input
       class="input-search__field"
       type="text"
@@ -11,9 +11,12 @@
       @blur="handleBlur"
       ref="myInput" 
     />
-    <div class="input-search__icon--right" v-if="inputValue">
-      <IconClose :size="14" @click="handleClear"/>
-    </div>
+    <IconClose
+      :size="14"
+      class="input-search__icon--right"
+      v-if="inputValue"
+      @click="handleClear"
+    />
   </div>
 </template>
 
@@ -77,9 +80,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   background-color: #181818;
-  background-color: var(--inputs-odds);
-  border: 2px solid #181818;
-  border: 2px solid var(--foreground-inputs-odds);
+  background-color: var(--input);
 
   box-sizing: border-box;
   border-radius: 50px;
@@ -87,13 +88,12 @@ export default {
   width: 100%;
   
   &--focused {
-    border-color: #0be58e;
+    border-color: #35cd96;
     border-color: var(--highlight);
   }
 
   &__icon {
     &--right {
-      background: #FFFFFF1A;
       border-radius: 50px;
       height: 16px;
       width: 16px;
@@ -101,6 +101,14 @@ export default {
       justify-content: center;
       align-items: center;
       cursor: pointer;
+
+      fill: rgba(255, 255, 255, .6);
+      fill: rgba(var(--input-foreground-rgb), .6);
+    }
+
+    &--left {
+      fill: rgba(255, 255, 255, .6);
+      fill: rgba(var(--input-foreground-rgb), .6);
     }
   }
 
@@ -109,8 +117,8 @@ export default {
     height: 40px;
     font-size: 16px;
     font-weight: 400;
-    color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: rgba(255, 255, 255, .6);
+    color: rgba(var(--input-foreground-rgb), .6);
     background: transparent;
     border: 0;
     outline: none;

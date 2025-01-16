@@ -17,7 +17,7 @@
                 v-model="cardValue"
             >
                 <template #icon>
-                    <span style="color: var(--foreground-inputs-odds);">R$</span>
+                    <span style="color: var(--input-foreground);">R$</span>
                 </template>
             </w-input>
             <w-input
@@ -82,7 +82,7 @@ export default {
             if (!this.formValid) {
                 this.toastStore.setToastConfig({
                     message: 'Por favor, preencha todos os campos corretamente.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
                 return;
@@ -92,7 +92,7 @@ export default {
             if (isNaN(cardValueNumber) || cardValueNumber <= 0) {
                 this.toastStore.setToastConfig({
                     message: 'Por favor, insira um valor válido.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -102,7 +102,7 @@ export default {
             if (!isValidPins) {
                 this.toastStore.setToastConfig({
                     message: 'Os PINs devem ter no mínimo 3 caracteres.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -112,7 +112,7 @@ export default {
             if (!isEqualPins) {
                 this.toastStore.setToastConfig({
                     message: 'Os PINs informados devem ser iguais.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -144,7 +144,7 @@ export default {
             .catch(({ errors }) => {
                 this.toastStore.setToastConfig({
                     message: errors.message || 'Ocorreu algum erro inesperado.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
             })
@@ -156,7 +156,7 @@ export default {
 <style lang="scss" scoped>
     .create-card {
         color: #ffffff;
-        color: var(--foreground-game);
+        color: var(--foreground);
         height: auto;
         width: 100%;
         padding-bottom: 100px;
@@ -170,8 +170,8 @@ export default {
         }
 
         &__text {
-            color: #ffffff80;
-            color: var(--foreground-header); 
+            color: rgba(255, 255, 255, .5);
+            color: rgba(var(--foreground-rgb), .5); 
             font-size: 14px;
         }
     }
@@ -184,5 +184,10 @@ export default {
 
     .button-spacer {
         width: 20px; 
+    }
+
+    ::v-deep .input__icon__right svg {
+        fill: rgba(255, 255, 255, .5) !important;
+        fill: rgba(var(--input-foreground-rgb), .5) !important; 
     }
 </style>

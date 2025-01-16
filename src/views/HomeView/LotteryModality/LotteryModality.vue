@@ -4,12 +4,14 @@
         <template v-if="!loading">
             <div class="lottery__header">
                 <SelectFake
+                    class="lottery__type"
                     @click="handleOpenLotteryType"
                 >
                     <span>{{ typeSelected }}</span>
                 </SelectFake>
 
                 <SelectFake
+                    class="lottery__numbers"
                     @click="handleOpenLotteryNumbers"
                 >
                     <span>{{ `${sizeSelected} números` }}</span>
@@ -70,7 +72,7 @@
                             @focus="handleInitializeLotteryValue"
                         >
                             <template #icon>
-                                <span style="color: var(--foreground-inputs-odds);">R$</span>
+                                <span style="color: var(--input-foreground);">R$</span>
                             </template>
                         </WInput>
                     </div>
@@ -81,15 +83,15 @@
                         text="Limpar"
                         class="lottery__clear"
                         name="lottery-clear"
-                        color="secondary"
+                        color="secondary-light"
                         @click="handleClearLottery"
                     />
                     <WButton
                         id="lottery-copy"
-                        text="Copiar aspota"
+                        text="Copiar aposta"
                         class="lottery__copy"
                         name="lottery-copy"
-                        color="secondary"
+                        color="secondary-light"
                         @click="handleOpenModalCopyLottery"
                     />
                     <WButton
@@ -383,7 +385,7 @@ export default {
                     this.handleCloseModalCopyLottery();
                     this.toastStore.setToastConfig({
                         message: error.errors.message,
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     });
                 })
@@ -438,7 +440,8 @@ export default {
     height: 90vh;
     width: 100vw;
     overflow-y: auto;
-    background: var(--header);
+    background: #0a0a0a;
+    background: var(--background);
     padding-bottom: 200px;
 
     &__header {
@@ -446,6 +449,7 @@ export default {
         justify-content: space-between;
         width: 100%;
         padding: 18px 16px;
+        background: #0a0a0a;
         background: var(--background);
     }
 
@@ -486,8 +490,9 @@ export default {
         border: 0;
         border-radius: 50px;
         color:#ffffff;
-        color: var(--foreground-inputs-odds);
-        background: var(--inputs-odds);
+        color: var(--input-foreground);
+        background: #181818;
+        background: var(--input);
 
         &--android6 {
             margin: 0;
@@ -496,8 +501,10 @@ export default {
         }
 
         &--selected {
+            background: #35cd96;
             background: var(--highlight);
-            color: var(--foreground-highlight);
+            color: #0a0a0a;
+            color: var(--highlight-foreground);
         }
 
         &--disabled {
@@ -547,7 +554,7 @@ export default {
 
     &__options-label {
         color:#ffffff;
-        color: var(--foreground-inputs-odds);
+        color: var(--foreground);
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -556,9 +563,8 @@ export default {
     }
 
     &__options-select {
-        padding: 18px 16px;
+        padding: 13px 16px;
         border-radius: 8px;
-        background: #181818;
     }
 
     &__actions {
@@ -576,6 +582,10 @@ export default {
         width: 28%;
     }
 
+    &__info {
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--foreground-rgb), .5);
+    }
 }
 
 .value {
@@ -584,7 +594,7 @@ export default {
   &__balance-text {
     font-size: 14px;
     color:#ffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--foreground);
   }
 
   &__balance {
@@ -600,9 +610,10 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: var(--inputs-odds);
-    color: #ffffff80;
-    color: var(--foreground-inputs-odds);
+    background: #181818;
+    background: var(--input);
+    color: rgba(255, 255, 255, 0.50);
+    color: rgba(var(--input-foreground-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px;
   }
@@ -628,7 +639,32 @@ export default {
     bottom: 100px;
 }
 
+::v-deep .select-fake__title,
 ::v-deep .select-fake__title {
     font-size: 14px;
+    color: #ffffff;
+    color: var(--foreground);
 }
+
+::v-deep .select-fake,
+::v-deep .select-fake {
+    background: #0a0a0a;
+    background: var(--background);
+}
+
+
+
+.lottery__options ::v-deep .select-fake {
+    background: #181818 !important;
+    background: var(--input) !important;
+}
+
+.lottery__options ::v-deep .select-fake__title {
+    color: #ffffff !important;
+    color: var(--input-foreground) !important;
+}
+.lottery__options ::v-deep .select-fake svg {
+    fill: var(--input-foreground) !important;
+}
+
 </style>

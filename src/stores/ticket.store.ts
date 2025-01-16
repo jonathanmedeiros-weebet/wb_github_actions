@@ -70,7 +70,7 @@ export const useTicketStore = defineStore('ticket', {
                     const { setToastConfig } = useToastStore();
                     setToastConfig({
                         message: 'Desculpe, você atingiu a quantidade MÁXIMA de apostas.',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 3000
                     });
                     return;

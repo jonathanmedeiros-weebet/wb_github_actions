@@ -174,7 +174,7 @@ export default {
         .catch(error => {
           this.toastStore.setToastConfig({
             message: error.errors.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         })
@@ -188,7 +188,7 @@ export default {
 
 <style lang="scss" scoped>
 .bets-cards {  
-  height: 100;
+  height: 100%;
   padding-bottom: 100px;
   overflow-y: auto;
 
@@ -210,49 +210,13 @@ export default {
   }
 
   &__count-results {
-    color: #ffffff80;
-    color: var(--foreground-header);
-  }
-
-  &__buttons-filters {
-    display: flex;
-    flex-direction: row;
-    padding-top: 20px;
-    overflow-x: auto;
-    white-space: nowrap;
-    
-  }
-
-  &__buttons-filters::-webkit-scrollbar {
-    display: none;  
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
   }
 
   &__content-filters {
     margin-top: 24px;
   }
-
-  &__card-footer {
-    display: flex;
-    flex-direction: column;
-   
-
-    &--inline {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    
-  }
-
-  &__text-light {
-    color: #ffffff80;
-    color: var(--foreground-league-input);
-  }
-  
-}
-
-.button-space {
-  margin-top: 5px;
 }
 
 .table {
@@ -262,10 +226,14 @@ export default {
     
     &--left {
       text-align: left;
+      color: #ffffff;
+      color: var(--game-foreground);
     }
 
     &--right {
       text-align: right;
+      color: #ffffff;
+      color: var(--game-foreground);
     }
   }
 }

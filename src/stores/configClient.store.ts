@@ -76,7 +76,7 @@ export const useConfigClient = defineStore('configClient', {
     blockedChampionships: (state) => state.params?.campeonatos_bloqueados ?? null,
     localQuotes: (state) => state.params?.cotacoes_local ?? [],
     deadlineTable: (state) => state.params?.data_limite_tabela ?? null,
-    sportbook: (state) => state.params?.sportbook ?? 'betsapi',
+    sportbook: (state) => state.params?.opcoes?.sportbook ?? 'betsapi',
     delayLiveBet: (state) => {
       const delay = Number(state.params?.opcoes?.delay_aposta_aovivo ?? 10);
       return delay < 10 ? 10 : delay;

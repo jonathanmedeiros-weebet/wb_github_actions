@@ -19,12 +19,15 @@ export default {
         initCollapsed: {
             type: Boolean,
             default: false
+        },
+        iconColor: {
+            type: String,
+            default: 'var(--league-foreground)'
         }
     },
     data() {
         return {
             collapsed: this.initCollapsed,
-            iconColor: 'var(--foreground-sidebars)'
         }
     },
     computed: {
@@ -57,22 +60,21 @@ export default {
         align-items: center;
         height: 40px;
         padding: 8px 16px;
-        background: #181818;
+        background: #0a0a0a;
         background: var(--league);
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--league-foreground);
+        border-bottom: 1px solid rgba(var(--league-foreground-rgb), .1);
     }
 
     &__title {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--league-foreground);
         font-size: 14px;
         font-weight: 400;
-
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;

@@ -1,8 +1,6 @@
 <template>
     <div class="card">
-        <div class="card__icon">
-            <icon-money/>
-        </div>
+        <icon-money class="card__icon"/>
         <div class="card__description">
             <p class="card__title">{{ movement.title }}</p>
             <p class="card__subtitle">{{ movement.type}}</p>
@@ -32,7 +30,7 @@ export default {
             return convertInMomentInstance(date).format('DD/MM/YYYY');
         },
         typeColor(type) {
-            return type == 'Débito' ? 'card__value--danger' : 'card__value--success'
+            return type == 'Débito' ? 'card__value--warning' : 'card__value--success'
         },
         formatCurrencyMoney(value) {
             return formatCurrency(value);
@@ -49,7 +47,9 @@ export default {
     border-radius: 8px;
     padding: 18px 15px;
     background: #181818;
-    background: var(--inputs-odds);
+    background: var(--game);
+    color: #ffffff;
+    color: var(--game-foreground);
     margin: 4px 0px 4px 0px;
 
     &__description {
@@ -63,12 +63,12 @@ export default {
 
         &--success {
             color: #6da544;
-            color: var(--color-success);
+            color: var(--success);
         }
 
-        &--danger {
+        &--warning {
             color: #f61a1a;
-            color: var(--color-danger);
+            color: var(--warning);
         }
     }
 
@@ -79,13 +79,15 @@ export default {
         font-size: 16px;
         margin-bottom: 8;
         margin-top: -1px;
+        color: #ffffff;
+        color: var(--game-foreground);
     }
 
     &__subtitle,
     &__date {
         font-size: 14px;
-        color: #ffffff80;        
-        color: var(--foreground-league-input);        
+        color: rgba(255, 255, 255, .5);        
+        color: rgba(var(--game-foreground-rgb), .5);        
     }
 
     &__subtitle {
@@ -99,6 +101,8 @@ export default {
         margin-right: 13px;
         background-color: #0a0a0a;
         background-color: var(--background);
+        fill: #ffffff;
+        fill: var(--foreground);
         width: 24px;
         height: 24px;
         border-radius: 100%;

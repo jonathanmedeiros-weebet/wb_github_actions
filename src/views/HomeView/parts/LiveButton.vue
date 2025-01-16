@@ -44,7 +44,7 @@ export default {
 
     &--actived {
         background: #f61a1a;
-        background: var(--color-danger);
+        background: var(--warning);
         color: #ffffff;
         
     }
