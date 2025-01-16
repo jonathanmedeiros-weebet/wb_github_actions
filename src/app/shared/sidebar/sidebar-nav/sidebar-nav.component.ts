@@ -46,6 +46,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     indiqueGanheHabilitado = false;
     cashbackEnabled = false;
     permitirQualquerChavePix = false;
+    allowAgentChangePassword = false;
     desafioNome: string;
 
     subCartao = false;
@@ -109,6 +110,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
 
     ngOnInit() {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
+        this.allowAgentChangePassword = this.paramsLocais.getOpcoes().permitir_alterar_senha;
         this.enabledBettorPix = Boolean(this.paramsLocais.getOpcoes().payment_methods_available_for_bettors.length);
         this.modoCambista = this.paramsLocais.getOpcoes().modo_cambista;
         this.indiqueGanheHabilitado = this.paramsLocais.indiqueGanheHabilitado();
