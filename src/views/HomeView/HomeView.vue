@@ -61,6 +61,7 @@ import scrollMixin from '@/mixins/scroll.mixin'
 import SportModality from './SportModality/SportModality.vue'
 import PopularLotteryModality from './PopularLotteryModality/PopularLotteryModality.vue'
 import LotteryModality from './LotteryModality/LotteryModality.vue'
+import { now } from '@/utilities'
 
 export default {
   name: 'home',
@@ -163,7 +164,8 @@ export default {
       const modality = this.modalityList.find(modality => modality.id === modalityId);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
-
+      this.homeStore.setDate(now());
+      
       if(this.isPopularLotteryModality){
         setTimeout(() => this.$refs['popular-lottery-modality'].loadPage(), 500);
       }
