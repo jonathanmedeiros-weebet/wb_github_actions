@@ -425,6 +425,10 @@ export default {
     height: 18px;
     fill: #ffffff;
     fill: var(--foreground);
+    path {
+      fill: #ffffff;
+      fill: var(--foreground);
+    }
   }
 
   &__icon-ball {
@@ -433,12 +437,21 @@ export default {
     margin-right: 4px;
     fill: #ffffff;
     fill: var(--foreground);
+    path {
+      fill: #ffffff;
+      fill: var(--foreground);
+    }
   }
+
+  &__icon-ball path {
+      fill: #ffffff;
+      fill: var(--foreground);
+    }
 
   &__icon-close {
     opacity: 0.5;
-    color: #ffffff;
-    color: var(--foreground);
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__date {

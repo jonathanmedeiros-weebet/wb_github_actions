@@ -41,11 +41,13 @@ export default {
     computed: {
         numbers() {
             const sizeSelected = this.lotteryStore.loteryNumbersSelected;
+            console.log(sizeSelected);
+            console.log(this.lotteryStore.options.sizes);
             return this.lotteryStore.options.sizes.map((size) => ({
                 ...size,
                 label: size.qtdNumeros,
                 value: size.qtdNumeros,
-                selected: sizeSelected == size.qtdNumeros
+                selected: sizeSelected.qtdNumeros == size.qtdNumeros
             }))
         }
     },
