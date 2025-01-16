@@ -81,7 +81,7 @@ export default {
       this.tostStore.setToastConfig({ message: '' })
       changePassword(this.currentPassword,this.newPassword, this.confirmPassword)
       .then(resp => {
-        let typeToast = ToastType.WARNING;
+        let typeToast = ToastType.ALERT;
         if(resp.success) {
           typeToast = ToastType.SUCCESS;
           this.clearInputs();
@@ -96,7 +96,7 @@ export default {
       .catch(({ errors }) => {
         this.tostStore.setToastConfig({
           message: errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })

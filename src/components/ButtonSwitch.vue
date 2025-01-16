@@ -74,8 +74,8 @@ export default {
   }
 
   &__checkbox:checked + &__switch {
-    background: #6da544;
-    background: var(--color-success);
+    background: #35cd96;
+    background: var(--highlight);
   }
 
   &__checkbox:checked + &__switch:before {

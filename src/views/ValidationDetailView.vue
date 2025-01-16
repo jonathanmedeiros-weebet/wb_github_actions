@@ -75,7 +75,7 @@
               v-model="valueBet" 
             >
               <template #icon>
-                <span style="color: #ffffff80;">R$</span>
+                <span style="color: var(--input-foreground);">R$</span>
               </template>
             </w-input>
           </div>
@@ -97,11 +97,11 @@
           </div>
           <div class="cotacao__finalizar">
             <w-button
-              id="btn-entrar"
+              id="btn-validar"
               :text="textButtonFinalizeBet"
-              value="entrar"
+              value="validar"
               class="cotacao__finalizar-button"
-              name="btn-entrar"
+              name="btn-validar"
               :disabled="buttonDisabled"
               @click="submit"
             />
@@ -167,7 +167,7 @@ export default {
       acceptChangesOdds: false,
       toastStore: useToastStore(),
       configClientStore: useConfigClient(),
-      textButtonFinalizeBet: "Finalizar aposta"
+      textButtonFinalizeBet: "Validar aposta"
     };
   },
   activated() {
@@ -201,7 +201,7 @@ export default {
         .catch(error => {
           this.toastStore.setToastConfig({
             message: error.errors?.message ?? 'Erro inesperado',
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         })
@@ -222,7 +222,7 @@ export default {
       }
     },
     addValue(value){
-      this.valueBet += value;
+      this.valueBet = Number(this.valueBet) + Number(value);
     },
     formatCurrencyMoney(value) {
       return formatCurrency(value);
@@ -300,17 +300,17 @@ export default {
           })
           .catch(error => {
             this.buttonDisabled = false;
-            this.textButtonFinalizeBet = "Finalizar aposta";
+            this.textButtonFinalizeBet = "Validar aposta";
             this.toastStore.setToastConfig({
               message: error.errors?.message ?? 'Erro inesperado',
-              type: ToastType.DANGER,
+              type: ToastType.WARNING,
               duration: 5000
             })
         })
         
       } else {
         this.buttonDisabled = false;
-        this.textButtonFinalizeBet = "Finalizar aposta";
+        this.textButtonFinalizeBet = "Validar aposta";
         this.toastStore.setToastConfig({
           message: 'Nenhum jogo na aposta!',
           type: ToastType.WARNING,
@@ -367,7 +367,10 @@ export default {
 }
 .code {
   border-radius: 4px;
-  background: #181818;
+  background: #0a0a0a;
+  background-color: var(--background);
+  color: #ffffff;
+  color: var(--foreground);
   display: flex;
   width: 100%;
   padding: 13px;
@@ -382,9 +385,7 @@ export default {
   &__number {
     font-size: 20px;
   }
-  
 }
-
 
 .bet {
   padding: 8px;
@@ -422,20 +423,41 @@ export default {
   &__icon-live {
     width: 18px;
     height: 18px;
+    fill: #ffffff;
+    fill: var(--foreground);
+    path {
+      fill: #ffffff;
+      fill: var(--foreground);
+    }
   }
 
   &__icon-ball {
     width: 14px;
     height: 14px;
     margin-right: 4px;
+    fill: #ffffff;
+    fill: var(--foreground);
+    path {
+      fill: #ffffff;
+      fill: var(--foreground);
+    }
   }
+
+  &__icon-ball path {
+      fill: #ffffff;
+      fill: var(--foreground);
+    }
 
   &__icon-close {
     opacity: 0.5;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__date {
     opacity: 0.5;
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__result {
@@ -454,9 +476,9 @@ export default {
   }
 
   &__text {
-    &--danger {
+    &--warning {
       color: #ff0000;
-      color: var(--color-danger);
+      color: var(--warning);
     }
 
     &--previous-quote {
@@ -488,10 +510,12 @@ export default {
     padding: 18px;
     justify-content: center;
     align-items: center;
+    border: 0;
     border-radius: 8px;
-    background: var(--inputs-odds);
-    color: rgba(255, 255, 255, 0.5019607843);
-    color: var(--foreground-inputs-odds);
+    background: #181818;
+    background: var(--input);
+    color: rgba(255, 255, 255, 0.5);
+    color: rgba(var(--input-foreground-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px
   }
@@ -536,8 +560,8 @@ export default {
     appearance: none;
     width: 15px;
     height: 15px;
-    border: 1px solid #ffffff80;
-    border: 1px solid var(--foreground-league-input);
+    border: 1px solid rgba(255, 255, 255, .5);
+    border: 1px solid rgba(var(--foreground-rgb), .5);
     background-color: transparent;
     cursor: pointer;
     border-radius: 3px;
@@ -545,7 +569,7 @@ export default {
   }
   
   &__checkbox:checked {
-    background-color: #0be58e;
+    background-color: #35cd96;
     background-color: var(--highlight);
   }
   &__checkbox::after {
@@ -567,9 +591,10 @@ export default {
 
   &__alerta {
     margin-top: 8px;
-    background-color: #fff3cd;
+    background-color: #c09516;
+    background-color: var(--alert);
     border-radius: 6px;
-    color: #664d03;
+    color: #000000;
     padding: 12px;
     font-size: 12px;
 
@@ -582,7 +607,5 @@ export default {
     display: flex;
     padding-bottom: 10px;
   }
-
-  
 }
 </style>

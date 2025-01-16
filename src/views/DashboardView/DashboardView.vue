@@ -178,7 +178,7 @@ export default {
                 .catch(error => {
                     this.toastStore.setToastConfig({
                         message: error.errors.message,
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     })
                 });
@@ -238,7 +238,7 @@ export default {
                 .catch(error => {
                     this.toastStore.setToastConfig({
                         message: error.errors?.message ?? 'Erro inesperado',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     })
                 });
@@ -263,7 +263,7 @@ export default {
                 .catch(error => {
                     this.toastStore.setToastConfig({
                         message: error.errors.message,
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     })
                 });
@@ -283,7 +283,7 @@ export default {
             return !this.configClientStore.chartDeprecatedByAndroidVersion;
         },
         useHexColors() {
-            return isAndroid5() ? '#ffffff80' : 'var(--foreground-header)';
+            return isAndroid5() ? 'rgba(255, 255, 255, .5)' : 'rgba(var(--input-foreground-rgb), .5)';
         }
     },
     activated() {
@@ -318,8 +318,8 @@ export default {
     &__chart-header-title {
         font-size: 16px;
         width: 80%;
-        color: #ffff;
-        color: var(--foreground-header);
+        color: #ffffff;
+        color: var(--foreground);
     }
 
     &__movements {
@@ -332,14 +332,15 @@ export default {
 
     &__movements-title {
         font-size: 16px;
-        color: #ffff;
-        color: var(--foreground-header);
+        color: #ffffff;
+        color: var(--foreground);
     }
 
     &__movements-filter {
         font-size: 12px;
-        color: #ffffff80;
-        color: var(--foreground-header);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--foreground-rgb), .5);
+        opacity: 0.8;
     }
 
     &__movements-dates {
@@ -348,8 +349,8 @@ export default {
         justify-content: flex-start;
         padding: 8px 0px;
         font-size: 14px;
-        color: #ffffff80;
-        color: var(--foreground-header);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--foreground-rgb), .5);
     }
 
     &__movements-icon-calendar {
@@ -365,9 +366,10 @@ export default {
         width: fit-content;
         padding: 8px 14px;
         border-radius: 6px;
-        color: #ffffff80;
-        color: var(--foreground-header);
-        background: var(--input-odds);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--input-foreground-rgb), .5);
+        background: #181818;
+        background: var(--input);
     }
 }
 </style>

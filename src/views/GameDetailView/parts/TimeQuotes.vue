@@ -1,48 +1,49 @@
 <template>
     <div class="time-quotes">
         <span v-if="!hasQuotes" class="time-quotes__message">Nenhuma cotação disponível no momento</span>
-        
-        <Collapse
-            v-else
-            :initCollapsed="true"
-            v-for="(option, groupIndex) in options"
-            :key="groupIndex"
-        > 
-            <template #title>{{ option.name }}</template>
-            <div class="collapse__options" :class="{'collapse__options--grid': option.odds.length > 3}">
-                <button
-                    class="collapse__option"
-                    v-for="(odd, oddIndex) in option.odds"
-                    :key="`${oddIndex}-${groupIndex}`"
-                    :class="{
-                        'collapse__option--selected': odd.key === quoteSelected,
-                        'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
-                    }"
-                    @click="handleItemClick(odd, option.name)"
-                >
-                    <template v-if="odd.hasPermission">
-                        <IconArrowFillUp
-                            class="collapse__icon-option"
-                            v-if="isIncreasedOdd(odd)"
-                            :size="14"
-                            color="var(--color-success)"
-                        />
-                        <span class="collapse__label">{{ odd.label }}</span>
-                        <span class="collapse__value">{{ odd.finalValue }}</span>
-                        <IconArrowFillDown
-                            class="collapse__icon-option"
-                            v-if="isDecreasedOdd(odd)"
-                            :size="14"
-                            color="var(--color-danger)"
-                        />
-                    </template>
-                    <template v-else>
-                        <span class="collapse__label">{{ odd.label }}</span>
-                        <IconLock :size="14" color="var(--foreground-league-input)"/>
-                    </template>
-                </button>
-            </div>
-        </Collapse>
+        <template v-if="hasQuotes">
+            <Collapse
+                :iconColor="'var(--game-foreground)'"
+                :initCollapsed="true"
+                v-for="(option, groupIndex) in options"
+                :key="groupIndex"
+            > 
+                <template #title>{{ option.name }}</template>
+                <div class="collapse__options" :class="{'collapse__options--grid': option.odds.length > 3}">
+                    <button
+                        class="collapse__option"
+                        v-for="(odd, oddIndex) in option.odds"
+                        :key="`${oddIndex}-${groupIndex}`"
+                        :class="{
+                            'collapse__option--selected': odd.key === quoteSelected,
+                            'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
+                        }"
+                        @click="handleItemClick(odd, option.name)"
+                    >
+                        <template v-if="odd.hasPermission">
+                            <IconArrowFillUp
+                                class="collapse__icon-option"
+                                v-if="isIncreasedOdd(odd)"
+                                :size="14"
+                                color="var(--success)"
+                            />
+                            <span class="collapse__label">{{ odd.label }}</span>
+                            <span class="collapse__value">{{ odd.finalValue }}</span>
+                            <IconArrowFillDown
+                                class="collapse__icon-option"
+                                v-if="isDecreasedOdd(odd)"
+                                :size="14"
+                                color="var(--warning)"
+                            />
+                        </template>
+                        <template v-else>
+                            <span class="collapse__label">{{ odd.label }}</span>
+                            <IconLock :size="14" color="var(--league-foreground)"/>
+                        </template>
+                    </button>
+                </div>
+            </Collapse>
+        </template>
     </div>
 </template>
 
@@ -132,12 +133,18 @@ export default {
         width: 100%;
         padding: 8px 16px;
         font-size: 12px;
-        color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--foreground-rgb), .5);
     }
 }
 
 .collapse {
+    background: #0a0a0a;
+    background: var(--league);
+
+    &__title {
+        color: red;
+    }
     &__options {
         display: flex;
         justify-content: space-between;
@@ -157,7 +164,7 @@ export default {
         height: 54px;
         width: 100%;
         background: #0a0a0a;
-        background-color: var(--inputs-odds);
+        background-color: var(--button);
         border: none;
         border-radius: 4px;
 
@@ -176,7 +183,7 @@ export default {
         }
 
         &--selected {
-            background: #0be58e;
+            background: #35cd96;
             background: var(--highlight);
         }
     }
@@ -214,7 +221,7 @@ export default {
     &__option--selected &__label,
     &__option--selected &__value {
         color: #0a0a0a;
-        color: var(--background);
+        color: var(--highlight-foreground);
     }
 
     &__icon-option {
@@ -223,8 +230,9 @@ export default {
 
     &__label {
         overflow: hidden;
-        color: #f2f2f280;
-        color: var(--foreground-inputs-odds);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--button-foreground-rgb), .5);
+        
         text-overflow: ellipsis;
         font-size: 12px;
         font-style: normal;
@@ -234,7 +242,7 @@ export default {
 
     &__value {
         color: #ffffff;
-        color: var(--foreground-inputs-odds);
+        color: var(--button-foreground);
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -243,7 +251,12 @@ export default {
 }
 
 ::v-deep .collapse__item {
-    background: var(--game);
+    background: #0a0a0a;
+    background: var(--league);
     padding: 13px 24px;
+}
+::v-deep .collapse__title {
+    color: #ffffff;
+    color: var(--league-foreground);
 }
 </style>

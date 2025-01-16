@@ -134,7 +134,7 @@ export default {
                 }).catch(error => {
                     this.toastStore.useToastStore({
                         message: error.errors?.message ?? 'Erro inesperado',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     });
                 });
@@ -211,7 +211,7 @@ export default {
                 .catch(error => {
                     this.toastStore.setToastConfig({
                         message: error.errors?.message ?? 'Erro inesperado',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     });
                 })
@@ -266,7 +266,7 @@ export default {
         display: flex;
         flex-direction: column;
         gap: 10px; 
-        padding: 10px; 
+        padding: 10px 0; 
     }
 
     &__button {
@@ -296,10 +296,17 @@ export default {
         width: 100%;
         height: 1px;
         background: #ffffff;
-        background: var(--foreground-league);
+        background: var(--league-foreground);
         opacity: 0.1;
         position: absolute;
         left: 0;
+    }
+
+    
+    &__icon-close {
+        opacity: 0.5;
+        color: #ffffff;
+        color: var(--foreground);
     }
 }
 
@@ -327,8 +334,8 @@ export default {
             height: 25px;
             width: 25px;
             font-size: 11px;
-            background-color: var(--sub-nav);
-            color: var(--foreground-header); 
+            background-color: var(--input);
+            color: var(--input-foreground); 
             clip-path: circle(50%);
             text-align: center;
         }

@@ -3,7 +3,7 @@
       <div class="modal-game-search__header">
         <InputSearch ref="InputSerachComponent" @input="handleSearch" @clear="handleSearch"/>
         <button class="modal-game-search__close" @click="handleClose">
-          <IconClose color="#ffffff"/>
+          <IconClose class="modal-game-search__icon-close"/>
         </button>
       </div>
       <div class="modal-game-search__body">
@@ -114,8 +114,8 @@ export default {
   flex-direction: column;
 
   color: #ffffff;
-  color: var(--foreground-league);
-  background: #0a0a0a;
+  color: var(--foreground);
+  background: #181818;
   background: var(--background);
 
   &__header {
@@ -144,6 +144,11 @@ export default {
     margin: 0;
     padding: 0;
     margin-left: 8px;
+  }
+
+  &__icon-close {
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 }
 </style>

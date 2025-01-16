@@ -150,7 +150,7 @@ export default {
         position: fixed;
         z-index: 2;
         width: 100%;
-        background: #0a0a0a;
+        background: #181818;
         background: var(--background);
     }
 
@@ -178,7 +178,9 @@ export default {
 
         max-width: 250px;
         text-align: center;
-        color: #FFFFFF80
+        color: rgba(255, 255, 255, 0.5);
+        color: rgba(var(--foreground-rgb), .5);
+        opacity: 0.8;
     }
 
     &__teams {
@@ -226,7 +228,7 @@ export default {
 
     &__name {
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground);
         text-align: center;
         font-size: 14px;
         font-style: normal;
@@ -239,7 +241,7 @@ export default {
         font-weight: 400;
         margin-top: 16px;
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground);
 
         display: flex;
         flex-direction: column;
@@ -250,7 +252,7 @@ export default {
 
     &__time {
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground);
         font-size: 12px;
         font-style: normal;
         font-weight: 400;
@@ -259,7 +261,7 @@ export default {
 
     &__score {
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--foreground);
         font-size: 20px;
         font-style: normal;
         font-weight: 400;

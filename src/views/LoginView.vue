@@ -15,7 +15,7 @@
         v-model="username"
       >
         <template #icon>
-          <icon-user-line/>
+          <icon-user-line class="login__icon"/>
         </template>
       </w-input> 
       <w-input
@@ -27,7 +27,7 @@
         v-model="password" 
       >
         <template #icon>
-          <icon-password/>
+          <icon-password class="login__icon"/>
         </template>
 
       </w-input>
@@ -88,14 +88,14 @@ export default {
         }else{
           this.toastStore.setToastConfig({
             message: 'Usuário ou senha inválida',
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 3000
           })
         }
       } catch ({ errors }) {
         this.toastStore.setToastConfig({
           message: errors?.message ?? 'Usuário ou Senha inválido',
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 3000
         })
       }
@@ -134,12 +134,12 @@ export default {
     margin-top: 10px;
 
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 
   &__description {
     color: #ffffff80;
-    color: var(--foreground-header);
+    color: rgb(var(--foreground-rgb), 0.6);
     font-size: 16px;
     font-weight: 400;
     line-height: 18.75px;
@@ -156,6 +156,10 @@ export default {
   &__button {
     margin-top: 10px
   }
-
+ 
+  &__icon {
+    fill: #ffffff;
+    fill: var(--input-foreground);
+  }
 } 
 </style>

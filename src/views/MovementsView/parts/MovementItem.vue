@@ -64,7 +64,10 @@ export default {
     align-self: stretch;
     align-items: flex-start;
     border-radius: 8px;
-    background: #171717;   
+    background: #181818;   
+    background: var(--game);
+    color: #ffffff;
+    color: var(--game-foreground);
     padding-bottom: 14px;
   }
   
@@ -88,7 +91,7 @@ export default {
   
   &__text {
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--game-foreground);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -97,18 +100,11 @@ export default {
     margin-left: 10px;
   }
 
-  &__debit {
-    color: #ffffff80;
-    color: var(--foreground-league-input);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    margin-left: 10px;
-  }
-
+  &__debit,
   &__date { 
-    color: #ffffff80;
-    color: var(--foreground-league-input);
+
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), .5);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -119,6 +115,8 @@ export default {
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
+    color: #ffffff;
+    color: var(--game-foreground);
   }
 }
 </style>

@@ -92,7 +92,7 @@ export default {
       return dateFormatInMonthAndYear(this.finalDateSelected) === this.finalMonthAndYear
     },
     useHexColors() {
-      return isAndroid5() ? '#0be58e' : 'var(--highlight)';
+      return isAndroid5() ? '#35cd96' : 'var(--highlight)';
     }
   },
   methods: {
@@ -175,7 +175,7 @@ export default {
     font-weight: 500;
     padding: 10px;
     color: #ffffff;
-    color: var(--highlight);
+    color: var(--game-foreground);
   }
 
   &__body {
@@ -198,9 +198,9 @@ export default {
     padding: 10px 24px;
 
     color: #ffffff;
-    color: var(--foreground-header);
-    background: #0a0a0a;
-    background: var(--color-background);
+    color: var(--foreground);
+    background: #181818;
+    background: var(--background);
   }
 
   &__weeks {
@@ -225,13 +225,13 @@ export default {
     font-size: 14px;
     font-weight: 500;
     color: #ffffff;
-    color: var(--highlight);
+    color: var(--game-foreground);
 
     &--selected {
-      background: #0be58e;
+      background: #35cd96;
       background: var(--highlight);
       color: #181818;
-      color: var(--foreground-inputs-odds);
+      color: var(--highlight-foreground);
       border-radius: 50px;
     }
   }

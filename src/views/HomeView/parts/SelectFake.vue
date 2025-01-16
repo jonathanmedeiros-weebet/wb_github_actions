@@ -6,7 +6,7 @@
         >
             <slot/>
         </span>
-        <IconArrowDown />
+        <IconArrowDown :color="iconColor" />
     </div>
 </template>
 
@@ -20,6 +20,10 @@ export default {
         titleSize: {
             type: String,
             default: 'large'
+        },
+        iconColor: {
+            type: String,
+            default: 'var(--foreground)'
         }
     },
     methods: {
@@ -35,6 +39,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #0a0a0a;
+    background-color: var(--league);
 
     &__title {
         display: flex;
@@ -42,8 +48,9 @@ export default {
         margin-right: 10px;
         font-weight: 400;
         line-height: 23.44px;
+        
         color: #ffffff;
-        color: var(--foreground-header);
+        color: var(--league-foreground);
 
         &--large {
             font-size: 20px;

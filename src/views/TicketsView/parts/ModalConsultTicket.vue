@@ -21,6 +21,7 @@
           text="Consultar"
           value="salvar"
           name="btn-salvar"
+          :disabled="!Boolean(ticketCode)"
           @click="handleConsult"
         />
       </div>
@@ -43,12 +44,10 @@ export default {
   },
   methods: {
     handleCloseModal() {
-      
       this.$emit('close');
     },
     handleConsult() {
       this.$emit('consult', this.ticketCode);
-      this.$refs['wmodal'].handleClose();
     }
   }
 };
@@ -57,7 +56,8 @@ export default {
 <style lang="scss" scoped>
 .modal-consult-ticket {
   &__title {
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--game-foreground);
     font-size: 16px;
     font-weight: 500;
   }
@@ -70,8 +70,19 @@ export default {
   }
 
   &__text {
-    color: var(--foreground-league-input);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), 0.5);
     font-size: 14px;
+  }
+
+  &__input ::v-deep .input__group,
+  &__input ::v-deep .input__field {
+    background-color: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+
+  &__input ::v-deep .input__group input::placeholder {
+    color: var(--foreground) !important;
   }
 }
 
