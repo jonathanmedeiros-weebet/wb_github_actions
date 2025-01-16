@@ -1,8 +1,6 @@
 <template>
     <div class="card">
-        <div class="card__icon">
-            <icon-money/>
-        </div>
+        <icon-money class="card__icon"/>
         <div class="card__description">
             <p class="card__title">{{ movement.title }}</p>
             <p class="card__subtitle">{{ movement.type}}</p>
@@ -103,8 +101,8 @@ export default {
         margin-right: 13px;
         background-color: #0a0a0a;
         background-color: var(--background);
-        color: #ffffff;
-        color: var(--foreground);
+        fill: #ffffff;
+        fill: var(--foreground);
         width: 24px;
         height: 24px;
         border-radius: 100%;

@@ -628,8 +628,7 @@ export default {
 
   &__icon {
     fill: #ffffff;
-    color: #ffffff;
-    color: var(--foreground);
+    fill: var(--foreground);
   }
 }
 

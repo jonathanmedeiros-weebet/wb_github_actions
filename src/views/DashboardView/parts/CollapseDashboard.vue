@@ -75,8 +75,8 @@ export default {
     }
 
     &__icon {
-        color: rgba(255, 255, 255, .5);
-        color: rgba(var(--input-foreground-rgb), .5);
+        fill: rgba(255, 255, 255, .5);
+        fill: rgba(var(--input-foreground-rgb), .5);
     }
 }
 </style>
