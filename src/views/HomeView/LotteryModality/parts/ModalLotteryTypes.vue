@@ -97,6 +97,8 @@ export default {
     &__icon {
         margin-bottom: 10px;
         margin-left: 10px;
+        fill: #ffffff;
+        fill: var(--game-foreground);
     }
 }
 </style>

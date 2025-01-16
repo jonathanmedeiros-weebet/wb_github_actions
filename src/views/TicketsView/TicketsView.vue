@@ -668,6 +668,8 @@ export default {
     min-width: 14px;
     height: 14px;
     margin-right: 4px;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__icon-close {
