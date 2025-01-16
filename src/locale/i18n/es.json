@@ -261,6 +261,8 @@
         "or": "O",
         "geolocationError": "Por favor, verifique la configuración de ubicación de su navegador y intente nuevamente.",
         "restricaoDeLocalizacao": "Este recurso está disponible solo para usuarios en Brasil.",
+        "stateRestriction": "Esta función no está disponible en su estado.",
+        "locationPermission": "Para utilizar esta función, debe habilitar la ubicación en su navegador.",
         "lastAccesses": "Últimos accesos",
         "action": "Acción",
         "jogosRelacionados": "juegos relacionados",

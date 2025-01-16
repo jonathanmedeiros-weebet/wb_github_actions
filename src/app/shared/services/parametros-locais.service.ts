@@ -294,4 +294,8 @@ export class ParametrosLocaisService {
     isMandatoryPhoneValidation() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.mandatory_phone_validation : false;
     }
+
+    getRestrictionStateBet() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.restriction_state_bet : false;
+    }
 }
