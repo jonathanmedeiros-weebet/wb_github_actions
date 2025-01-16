@@ -143,14 +143,48 @@ export default {
       const { options } = useConfigClient();
       return options?.data_limite_tabela ?? 1
     }
+
   },
   methods: {
     onInit() {
-      if(!Boolean(this.modality)) {
-        const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
-        this.homeStore.setModality(modality);
-        this.ticketStore.setModalityId(modality.id);
+      const { homePage } = useConfigClient();
+
+      switch (homePage) {
+        case 'sport':
+        case 'home':
+          this.setSportModality();
+          break;
+        case 'lottery':
+          this.setLotteryModality();
+          break;
+        case 'popular-lottery':
+          this.setPopularLotteryModality();
+          break;
+        default:
+          this.setSportModality();
+          break;
       }
+    },
+
+    setSportModality() {
+      const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
+      this.homeStore.setModality(modality);
+      this.ticketStore.setModalityId(modality.id);
+      this.$refs['sport-modality']?.onInit(true);
+    },
+
+    setLotteryModality() {
+      const modality = this.modalityList.find(modality => modality.id === this.Modalities.LOTTERY);
+      this.homeStore.setModality(modality);
+      this.ticketStore.setModalityId(modality.id);
+      this.$refs['lottery-modality'].loadPage();
+    },
+
+    setPopularLotteryModality() {
+      const modality = this.modalityList.find(modality => modality.id === this.Modalities.LOTTERY);
+      this.homeStore.setModality(modality);
+      this.ticketStore.setModalityId(modality.id);
+      this.$refs['popular-lottery-modality'].loadPage();
     },
 
     handleOpenModalitiesModal() {

@@ -68,6 +68,7 @@ export const useConfigClient = defineStore('configClient', {
     maxLotteryValue: (state) => state.params?.opcoes?.valor_max_premio_loterias,
     getSenaName: (state) => state.params?.opcoes?.seninha_nome ?? null,
     getQuinaName: (state) => state.params?.opcoes?.quininha_nome ?? null,
+    homePage: (state) => state.params?.opcoes?.home_page_agent_app ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
     mainOdds: (state) => state.params?.odds_principais ?? [],
     popularLeagues: (state) => state.params?.ligas_populares ?? [],
