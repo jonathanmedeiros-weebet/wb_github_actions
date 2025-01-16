@@ -151,7 +151,6 @@ export default {
 
       switch (homePage) {
         case 'sport':
-        case 'home':
           this.setSportModality();
           break;
         case 'lottery':
