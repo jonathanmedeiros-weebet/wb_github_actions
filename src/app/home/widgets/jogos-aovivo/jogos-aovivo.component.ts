@@ -261,6 +261,10 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
         return campeonato._id;
     }
 
+    trackByIndex(index: number, cotacao: any): any {
+        return index;
+    }
+
     cotacaoPermitida(cotacao) {
         return this.helperService.cotacaoPermitida(cotacao);
     }

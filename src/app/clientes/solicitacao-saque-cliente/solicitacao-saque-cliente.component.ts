@@ -18,6 +18,15 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
+import { DocCheckService } from 'src/app/shared/services/doc-check.service';
+
+declare global {
+    interface Window {
+      ex_partner: any;
+      exDocCheck: any;
+      exDocCheckAction: any;
+    }
+  }
 
 @Component({
     selector: 'app-solicitacao-saque-cliente',
@@ -27,6 +36,7 @@ import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.servic
 export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
+    @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
 
     unsub$ = new Subject();
     cliente: Cliente;
@@ -58,8 +68,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     permitirQualquerChavePix = false;
     submitting;
     faceMatchEnabled = false;
-    faceMatchFirstWithdrawValidated = false;
+    faceMatchFirstWithdrawValidated = true;
+    faceMatchType = null;
     legitimuzToken = "";
+    docCheckToken = "";
+    secretHash = ""
+    dataUserCPF = "";
     verifiedIdentity = false;
     disapprovedIdentity = false;
     faceMatchWithdraw = false;
@@ -84,9 +98,10 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         private layoutService: LayoutService,
         private renderer: Renderer2,
         private legitimuzService: LegitimuzService,
-        private LegitimuzFacialService : LegitimuzFacialService,
-        private faceMatchService : FaceMatchService,
         private ga4Service: Ga4Service,
+        private legitimuzFacialService : LegitimuzFacialService,
+        private faceMatchService : FaceMatchService,
+        private docCheckService: DocCheckService
     ) {
         super();
     }
@@ -99,13 +114,33 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.menuFooterService.setIsPagina(true);
         }
 
+        this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
+
         this.getRollovers();
 
         this.currentLanguage = this.translate.currentLang;
-
-        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
         this.faceMatchWithdraw = this.paramsLocais.getOpcoes().faceMatchFirstWithdraw || this.paramsLocais.getOpcoes().faceMatchAllWithdraw;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw);
+        if (this.paramsLocais.getOpcoes().faceMatchAllWithdraw) {
+            this.faceMatchFirstWithdrawValidated = false;
+        }
+        switch(this.faceMatchType) {
+            case 'legitimuz':
+                this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw); 
+                break;
+            case 'docCheck':
+                this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.faceMatchWithdraw);
+                this.docCheckService.iframeMessage$.subscribe(message => {
+                    if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
+                        this.faceMatchFirstWithdrawValidated = true;
+                    }
+                })
+                break;
+            default:
+                break;            
+        }
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
         } else {
@@ -149,6 +184,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
+                    this.dataUserCPF = String(this.cliente.cpf).replace(/[.\-]/g, '');
+                    this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
                     this.cd.detectChanges();
 
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
@@ -167,8 +204,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (this.faceMatchEnabled) {
                         this.faceMatchService.getFaceMatch({ document: this.cliente.cpf }).subscribe({
                             next: (res) => {
-                                if (res.first_withdraw != null && this.cliente.verifiedIdentity && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw) {
-                                    this.faceMatchFirstWithdrawValidated = true;
+                                if ((typeof res.first_withdraw === 'undefined' || !this.cliente.verifiedIdentity) && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw) {
+                                    this.faceMatchFirstWithdrawValidated = false;
+                                    this.cd.detectChanges();
                                 }
                             }, error: (error) => {}
                         })
@@ -192,7 +230,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 });
         }
 
-        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -209,13 +247,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                         this.faceMatchFirstWithdrawValidated = false;
                     }
                 });
-            this.LegitimuzFacialService.faceIndex
+            this.legitimuzFacialService.faceIndex
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(faceIndex => {
                     if (faceIndex && this.cliente != null) {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe({
                             next: (res) => {
-                                this.LegitimuzFacialService.closeModal();
+                                this.legitimuzFacialService.closeModal();
                                 this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                 this.faceMatchFirstWithdrawValidated = true;
                             }, error: (error) => {
@@ -230,16 +268,23 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            this.legitimuz.changes
-                .subscribe(() => {
+            if (this.faceMatchType == 'legitimuz') {
+                this.legitimuz.changes
+                    .subscribe(() => {
                         this.legitimuzService.init();
                         this.legitimuzService.mount();
-                });
-            this.legitimuzLiveness.changes
-                .subscribe(() => {
-                        this.LegitimuzFacialService.init();
-                        this.LegitimuzFacialService.mount();
-                });
+                    });
+                this.legitimuzLiveness.changes
+                    .subscribe(() => {
+                        this.legitimuzFacialService.init();
+                        this.legitimuzFacialService.mount();
+                    });
+                } else {
+                    this.docCheck.changes
+                    .subscribe(() => {
+                        this.docCheckService.init();
+                    });
+                }
         }
     }
 

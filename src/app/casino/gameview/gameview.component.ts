@@ -9,7 +9,6 @@ import { interval, Subject } from 'rxjs';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
     CadastroModalComponent,
-    JogosLiberadosBonusModalComponent,
     LoginModalComponent,
 
 } from "../../shared/layout/modals";
@@ -43,6 +42,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     fullscreen;
     elem: any;
     showLoadingIndicator = true;
+    showGameListLoadingIndicator = true;
     isCliente;
     sessionId = '';
     removerBotaoFullscreen = false;
@@ -864,14 +864,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         });
     }
 
-    exibirJogosLiberadosBonus() {
-        this.location.back();
-        this.modalService.open(JogosLiberadosBonusModalComponent, {
-            centered: true,
-            size: 'xl',
-        });
-    }
-
     appendScriptGalaxsys() {
         let body = document.getElementsByTagName('body')[0];
         let bodyScript = document.createElement('script');
@@ -985,6 +977,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const response = await this.casinoApi.getGamesList(live).toPromise();
 
         this.gameList = await this.filterDestaques(response.populares, category);
+        this.showGameListLoadingIndicator = false;
     }
 
     private async getProviders() {
@@ -1126,8 +1119,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
-                this.renderer.setStyle(gameFrame, 'margin-top', '50px');
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 140px)');
+                this.renderer.setStyle(gameFrame, 'margin-top', '43px');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 135px)');
             }
         }
 
