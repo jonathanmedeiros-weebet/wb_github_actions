@@ -307,8 +307,9 @@ export default {
             }
         },
         handleSurprise() {
-            const max = this.lotteryStore.lotteryTypeSelected == LotteryTypes.QUININHA ? 70 : 50;
+            const max = this.items;
             const endIndex = this.sizeSelected;
+
             this.lotteryStore.removeAlltens();
 
             for (let index = 0; index < endIndex; index++) {
