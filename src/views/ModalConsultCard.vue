@@ -100,6 +100,10 @@ export default {
   &__input ::v-deep .input__label {
     color: var(--game-foreground) !important;
   }
+
+  &__input ::v-deep .input__group input::placeholder {
+    color: var(--foreground) !important;
+  }
 }
 
 .modal__body {
