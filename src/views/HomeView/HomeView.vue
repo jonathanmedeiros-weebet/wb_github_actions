@@ -180,10 +180,10 @@ export default {
     },
 
     setPopularLotteryModality() {
-      const modality = this.modalityList.find(modality => modality.id === this.Modalities.LOTTERY);
+      const modality = this.modalityList.find(modality => modality.id === this.Modalities.POPULAR_LOTTERY);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
-      this.$refs['popular-lottery-modality'].loadPage();
+      setTimeout(() => this.$refs['popular-lottery-modality'].loadPage(), 500);
     },
 
     handleOpenModalitiesModal() {
