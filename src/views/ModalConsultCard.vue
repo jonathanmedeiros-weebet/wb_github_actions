@@ -98,12 +98,20 @@ export default {
   }
 
   &__input ::v-deep .input__label {
+    fill: #ffffff;
     color: var(--game-foreground) !important;
   }
 
   &__input ::v-deep .input__group input::placeholder {
+    fill: #ffffff;
     color: var(--foreground) !important;
   }
+
+  &__input ::v-deep .input__icon__right svg {
+    fill: rgba(255, 255, 255, .5);
+    fill: rgba(var(--foreground-rgb), .5) !important;
+  }
+  
 }
 
 .modal__body {
