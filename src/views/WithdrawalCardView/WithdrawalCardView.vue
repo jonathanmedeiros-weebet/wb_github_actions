@@ -15,8 +15,10 @@
       <div class="withdrawal-card__status">
         <label class="withdrawal-card__status-label">Status</label>
         <SelectFake
-         titleSize="medium"
-         @click="handleOpenStatusModal"
+          class="withdrawal-card__status-select"
+          titleSize="medium"
+          :iconColor="useHexColor"
+          @click="handleOpenStatusModal"
         >
           {{ status.name }}
         </SelectFake>
@@ -60,12 +62,12 @@
                     <tr>
                       <td class="table__line--left">Valor: R${{ formatCurrencyMoney(item.valor) }}</td>
                     </tr>
-                    <tr v-if="item.pago">
+                    <!-- <tr v-if="item.pago">
                       <td class="table__line--right">
                         <span class="badge__success">Pago</span>
                       </td>
-                    </tr>
-                    <div class="table__line--payament" v-if="(!item.pago && Boolean(item.aprovado))">
+                    </tr> -->
+                    <div class="table__line--payament">
                       <w-button
                         id="btn-filter"
                         text="Confirmar Pagamento"
@@ -109,7 +111,7 @@ import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
-import { convertInMomentInstance, formatCurrency, now, formatDateTimeBR } from '@/utilities'
+import { convertInMomentInstance, formatCurrency, now, formatDateTimeBR, isAndroid5 } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { requestWithdrawal, withdrawalPayment } from '@/services'
@@ -170,7 +172,10 @@ export default {
       const initialDate = convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY");
       const finalDate = convertInMomentInstance(this.finalDateFilter).format("DD/MM/YYYY");
       return `${initialDate} - ${finalDate}`;
-    }
+    },
+    useHexColor() {
+      return isAndroid5() ? '#ffffff' : 'var(--input-foreground)';
+    },
   },
   methods: {
     handleOpenStatusModal() {
@@ -223,7 +228,7 @@ export default {
       } catch (error) {
         this.toastStore.setToastConfig({
           message: error.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000,
         });
       }
@@ -242,7 +247,7 @@ export default {
         const errorMessage = error.errors.debug; 
         this.toastStore.setToastConfig({
           message: errorMessage,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000,
         });
       }
@@ -264,7 +269,7 @@ export default {
 
 <style lang="scss" scoped>
 .withdrawal-card {  
-  height: 100;
+  height: 100%;
   padding-bottom: 100px;
   overflow-y: auto;
 
@@ -274,21 +279,36 @@ export default {
     height: 100%;
     padding: 24px;
   }
+
   &___content-filters { 
     margin-top: 15px;
   }
+
   &__status {
     display:  flex;
     flex-direction: column;
+    margin-bottom: 15px;
+  }
+
+  &__status-label {
+    color: #ffffff;
+    color: var(--foreground);
+
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  &__status-select {
+    height: 48px;
     padding: 10px 20px;
     border-radius: 5px;
-    border: 2px solid #181818;
-    border: 0.5px solid var(--foreground-inputs-odds);
-    margin-bottom: 15px;
-    &-label {
-      color: #ffffff;
-      color: var(--foreground-header);
-    }
+
+    color: #ffffff;
+    color: var(--input-foreground);
+
+    background: #181818;
+    background: var(--input);
   }
 }
 
@@ -297,9 +317,13 @@ export default {
   &__line {   
     &--left {
       text-align: left;
+      color: #ffffff;
+      color: var(--game-foreground);
     }
     &--right {
       text-align: right;
+      color: #ffffff;
+      color: var(--game-foreground);
     }
     &--payament  {
       margin-top: 20px;
@@ -311,6 +335,11 @@ export default {
   border-radius: 20px;
   padding: 5px 10px;
   background: var(--highlight);
-  color: var(--foreground-highlight);
+  color: var(--highlight-foreground);
+}
+
+::v-deep .select-fake__title {
+  color: #ffffff !important;
+  color: var(--input-foreground) !important;
 }
 </style>

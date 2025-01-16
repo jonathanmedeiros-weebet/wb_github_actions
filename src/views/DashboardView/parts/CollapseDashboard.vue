@@ -2,7 +2,7 @@
   <div class="collapse" @click="handleClick">
     <div class="collapse__item">
         <span class="collapse__title"><slot name="title"/></span>
-        <component fill="rgba(255, 255, 255, 0.5)" :is="iconArrowDinamic"/>
+        <component class="collapse__icon" :is="iconArrowDinamic"/>
     </div>
     <slot v-if="collapsed" />
   </div>
@@ -53,34 +53,30 @@ export default {
         height: 40px;
         padding: 8px 14px;
         background: #181818;
-        background: var(--inputs-odds);
+        background: var(--input);
         border-radius: 6px;
-        color: #ffffff80;
-        color: var(--foreground-inputs-odds);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--input-foreground-rgb), .5);
     }
 
     &__title {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-
-        color: #ffffff;
-        color: var(--foreground-league);
         font-size: 14px;
         font-weight: 400;
-        color: #ffffff80;
-        color: var(--foreground-inputs-odds);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--input-foreground-rgb), .5);
     }
 
     &__title img {
         max-width: 16px;
         max-height: 16px;
-        
     }
 
     &__icon {
-        color: #ffffff80;
-        color: var(--foreground-header);
+        fill: rgba(255, 255, 255, .5);
+        fill: rgba(var(--input-foreground-rgb), .5);
     }
 }
 </style>

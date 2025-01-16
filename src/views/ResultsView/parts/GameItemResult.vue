@@ -54,24 +54,27 @@ export default {
   flex-direction: column;
   height: 100%;
   background: #181818;
-  background: var(--inputs-odds);
+  background: var(--game);
   
   &__items {
     align-items: center;
     padding: 16px 24px;
-    border-bottom: 1px solid #ffffff1a;  
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    border-bottom: 1px solid rgba(var(--game-foreground-rgb), .1);  
   }
 
   &__datetime {
     padding: 15px 8px;
     align-items: center;
     text-align: center;
-    color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), .5);
   }
 
   &__team {
     display: flex;
+    color: #ffffff;
+    color: var(--game-foreground);
     flex-direction: row;
     align-items: center;
     justify-content: space-between; 
@@ -79,6 +82,8 @@ export default {
 
   &__team-left,
   &__team-right {
+    color: #ffffff;
+    color: var(--game-foreground);
     font-size: 14px;
     flex: 1;
   }
@@ -105,8 +110,8 @@ export default {
 
   &__scores--secondary {
     font-size: 12px;
-    color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), .5);
     padding-top: 0;
   }
 
@@ -123,13 +128,13 @@ export default {
     margin-top: 8px; 
     text-align: center;
     font-size: 14px;
-    color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: #ffffff;
+    color: var(--game-foreground);
   }
 
   &__scores-half {
-    color: #ffffff80;
-    color: var(--foreground-league-input);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), .5);
   }
 
   &__team-image-left {

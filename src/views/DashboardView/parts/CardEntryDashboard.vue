@@ -6,13 +6,12 @@
                 <p class="card__body-title">Total de entradas</p>
                 <p class="card__body-title-value">R$ {{ formatCurrencyMoney(data.balance) }}</p>
             </div>
-            <div class="card__body-icon" @click="handleClick">
-                <icon-restart
-                    width="24px" 
-                    height="24px"
-                    fill="#ffffff80"
-                />
-            </div>
+            <icon-restart
+                class="card__body-icon"
+                :width="24" 
+                :height="24"
+                @click="handleClick"
+            />
         </div>
         <div class="card__bars">
             <div 
@@ -130,12 +129,13 @@ export default {
     border-radius: 8px;
     background: #181818;
     background: var(--game);
+    color: #ffffff;
+    color: var(--game-foreground);
     
     &__body {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        
     }
 
     &__body-title {
@@ -143,21 +143,21 @@ export default {
         flex-direction: column;
         align-items: start;
         font-size: 14px;
-        color: #ffffff80;
-        color: var(--foreground-game);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
     }
 
     &__body-title-value {
         font-size: 24px;
         color: #ffffff;
-        color: var(--foreground-game);
+        color: var(--game-foreground);
         padding-bottom: 20px;
         margin-top: 12px;
     }
 
     &__body-icon {
-        color: #ffffff80;
-        color: var(--foreground-game);
+        fill: rgba(255, 255, 255, .5);
+        fill: rgba(var(--game-foreground-rgb), .5);
     }
 
     &__bars {
@@ -208,8 +208,8 @@ export default {
     }
     &__categories-value {
         font-size: 12px;
-        color: #ffffff80;
-        color: var(--foreground-game);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
         margin: 0px 0px 0px 15px;
     }
 

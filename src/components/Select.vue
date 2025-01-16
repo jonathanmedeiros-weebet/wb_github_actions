@@ -82,7 +82,7 @@ export default {
     font-weight: 400;
     font-size: 16px;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     margin-bottom: 8px;
   }
 
@@ -91,10 +91,10 @@ export default {
     align-items: center;
     padding-left: 10px;
     background-color: #181818;
-    background-color: var(--inputs-odds);
+    background-color: var(--input);
     border-radius: 5px;
     border: 2px solid #181818;
-    border: 0.5px solid var(--foreground-inputs-odds);
+    border: 0.5px solid var(--input-foreground);
     transition: 0.5s;
   }
 
@@ -126,9 +126,9 @@ export default {
     font-size: 14px;
     font-weight: 400;
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
     padding-left: 10px;
-    background: var(--inputs-odds);
+    background: var(--input);
     border: none;
     border-radius: 5px;
     font-size: 14px;
@@ -146,7 +146,7 @@ export default {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid var(--foreground-inputs-odds);
+    border-top: 5px solid var(--input-foreground);
     pointer-events: none; 
   }
 

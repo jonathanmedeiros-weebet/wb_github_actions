@@ -6,7 +6,7 @@
       @calendarClick="handleOpenCalendarModal"
       @searchClick="handleOpenSearchModal"
     >
-      <SelectFake @click="handleOpenModalitiesModal"> {{ modality?.name }} </SelectFake>
+      <SelectFake :iconColor="'var(--foreground)'" @click="handleOpenModalitiesModal"> {{ modality.name }} </SelectFake>
 
       <template #actions> 
         <LiveButton
@@ -250,5 +250,20 @@ export default {
     margin-right: 8px;
     margin-left: -1px;
   }
+}
+
+::v-deep .select-fake {
+  background: #0a0a0a;
+  background: var(--background);
+}
+
+::v-deep .select-fake__title {
+  color: #ffffff;
+  color: var(--foreground);
+}
+
+::v-deep .select-fake svg {
+  fill: #ffffff;
+  fill: var(--foreground);
 }
 </style>

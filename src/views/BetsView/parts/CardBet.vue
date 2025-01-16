@@ -26,7 +26,6 @@ export default {
 <style lang="scss" scoped>
 
 .card {
-
     background-color: #181818;
     background-color: var(--game);
     font-size: 14px;
@@ -40,12 +39,18 @@ export default {
 
     &__title {
         text-align: left;
-        color: var(--foreground-game);
+        color: #ffffff;
+        color: var(--game-foreground);
+    }
+
+    &__body {
+        color: #ffffff;
+        color: var(--game-foreground);
     }
 
     &__subtitle {
-        color: #ffffff80;
-        color: var(--foreground-game);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
         margin-bottom: 10px;
     }
 

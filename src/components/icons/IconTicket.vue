@@ -40,7 +40,7 @@ export default {
         position: absolute;
         top: -5px;
         right: -5px;
-        background-color: #0be58e;
+        background-color: #35cd96;
         background-color: var(--highlight);
         color: #181818;
         padding: 2px 6px;

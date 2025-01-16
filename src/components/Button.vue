@@ -62,29 +62,44 @@ export default {
   font-weight: 400;
   line-height: 14px;
 
-  color: #0a0a0a;
-  color: var(--foreground-highlight);
-  background: #0be58e;
+  color: #181818;
+  color: var(--highlight-foreground);
+  background: #35cd96;
   background: var(--highlight);
   
   &--primary {
-    color: #0a0a0a;
-    color: var(--foreground-highlight);
-    background: #0be58e;
+    color: #181818;
+    color: var(--highlight-foreground);
+    background: #35cd96;
     background: var(--highlight);
+
+    svg {
+      fill: #181818;
+      fill: var(--highlight-foreground);
+    }
   }
 
   &--secondary {
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--button-foreground);
     background: #0a0a0a;
-    background: var(--inputs-odds);
+    background: var(--button);
+
+    svg {
+      fill: #ffffff;
+      fill: var(--button-foreground);
+    }
   }
   &--secondary-light {
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
     background: #181818;
-    background: var(--inputs-odds);
+    background: var(--input);
+
+    svg {
+      fill: #ffffff;
+      fill: var(--input-foreground);
+    }
   }
 }
 

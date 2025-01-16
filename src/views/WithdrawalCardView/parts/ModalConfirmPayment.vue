@@ -1,10 +1,10 @@
 <template>
   <WModal ref="wmodal" :backdropClick="true" @close="handleCloseModal">
     <template #title>
-      <span class="modal-consult-ticket__title">Deseja confirmar o pagamento?</span>
+      <span class="modal-confirm-payment__title">Deseja confirmar o pagamento?</span>
     </template>
     <template #body>
-      <div class="modal-consult-ticket__items">
+      <div class="modal-confirm-payment__items">
         <w-button
           id="btn-confirmar"
           text="Confirmar pagamento"
@@ -16,7 +16,7 @@
           id="btn-fechar"
           text="Fechar"
           value="fechar"
-          class="button--secondary"
+          class="button--secondary-light"
           name="btn-fechar"
           @click="handleCloseModal"
         />
@@ -30,7 +30,7 @@ import WModal from '@/components/Modal.vue';
 import WButton from '@/components/Button.vue';
 
 export default {
-  name: 'ModalConsultCard',
+  name: 'ModalConfirmPayment',
   components: { WModal, WButton },
   props: {
     id: { type: [String, Number], required: true }, 
@@ -47,27 +47,32 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.modal-consult-ticket {
+.modal-confirm-payment {
   &__title {
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--game-foreground);
     font-size: 16px;
     font-weight: 500;
   }
+  
   &__items {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding-bottom: 20px;
   }
+
   &__text {
-    color: var(--foreground-league-input);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), .5);
     font-size: 14px;
   }
 }
 .modal__body {
   text-align: initial;
-  .modal-consult-ticket__items {
-    text-align: left;
-  }
+}
+
+.modal-confirm-payment__items {
+  text-align: left;
 }
 </style>

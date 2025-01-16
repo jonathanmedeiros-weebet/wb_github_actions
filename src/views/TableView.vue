@@ -10,7 +10,7 @@
                 placeholder="Pesquisar"
             >
                 <template #icon>
-                    <IconSearch :size="20"/>
+                    <IconSearch :size="20" :color="useHexColors"/>
                 </template>
             </w-input>
 
@@ -69,7 +69,7 @@ import { ToastType } from '@/enums';
 import { useHomeStore, useToastStore } from '@/stores';
 import { getChampionshipBySportId, printTable } from '@/services';
 import IconSearch from '@/components/icons/IconSearch.vue';
-import { getOddsToPrint } from '../utilities/general.utility';
+import { getOddsToPrint, isAndroid5 } from '../utilities/general.utility';
 import { getModalitiesEnum } from '@/constants';
 
 export default {
@@ -100,6 +100,9 @@ export default {
             const date = dateFormatInDayAndMonthAndYearBR(this.today);
             return date;
         },
+        useHexColors() {
+            return isAndroid5() ? 'rgba(255, 255, 255, .5)' : 'rgba(var(--input-foreground-rgb), .5)';
+        }
     }, 
     methods: {
         async fetchOddsToPrint() {
@@ -122,7 +125,7 @@ export default {
                     console.error(error)
                     this.toastStore.setToastConfig({
                         message: 'Ocorreu algum erro ao buscar os campeonatos.',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     })
                 })
@@ -132,7 +135,7 @@ export default {
             if (!this.selectedChampionships.length) {
                 this.toastStore.setToastConfig({
                     message: 'Por favor, selecione ao menos um campeonato.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
                 return;
@@ -178,7 +181,7 @@ export default {
 
 <style lang="scss" scoped>
 .table {
-    color: var(--foreground-game);
+    color: var(--foreground);
     height: auto;
     width: 100%;
     padding-bottom: 100px;
@@ -250,7 +253,7 @@ export default {
     }
 
     &__text {
-        color: var(--foreground-header); 
+        color: var(--foreground); 
         font-size: 14px;
     }
 }

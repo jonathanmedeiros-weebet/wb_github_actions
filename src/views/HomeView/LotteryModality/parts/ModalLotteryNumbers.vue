@@ -41,11 +41,13 @@ export default {
     computed: {
         numbers() {
             const sizeSelected = this.lotteryStore.loteryNumbersSelected;
+            console.log(sizeSelected);
+            console.log(this.lotteryStore.options.sizes);
             return this.lotteryStore.options.sizes.map((size) => ({
                 ...size,
                 label: size.qtdNumeros,
                 value: size.qtdNumeros,
-                selected: sizeSelected == size.qtdNumeros
+                selected: sizeSelected.qtdNumeros == size.qtdNumeros
             }))
         }
     },
@@ -69,8 +71,8 @@ export default {
 <style lang="scss" scoped>
 .modal-lottery-numbers {
     &__title {
-        color: #FFFFFF80;
-        color: var(--foreground-inputs-odds);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
         font-size: 16px;
         font-weight: 500;
         min-height: 26px;
@@ -93,7 +95,7 @@ export default {
         min-height: 30px;
 
         color: #ffffff;
-        color: var(--foreground-inputs-odds);
+        color: var(--game-foreground);
         font-size: 16px;
         font-weight: 400;
         text-align: left;
@@ -109,6 +111,8 @@ export default {
     &__icon {
         margin-bottom: 10px;
         margin-left: 10px;
+        fill: #ffffff;
+        fill: var(--game-foreground);
     }
 }
 </style>

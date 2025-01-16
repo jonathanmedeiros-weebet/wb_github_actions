@@ -48,7 +48,7 @@ export default {
             background: #0a0a0a;
             background: var(--background);
             color: #ffffff;
-            color: var(--foreground-league);
+            color: var(--league-foreground);
         }
         
         &__message,
@@ -61,7 +61,7 @@ export default {
             width: 100vw;
             padding: 16px;
 
-            background: var(--header);
+            background: var(--background);
         }
 
         &__options {

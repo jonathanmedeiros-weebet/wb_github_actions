@@ -321,15 +321,15 @@ export default {
         justify-content: flex-start;
         gap: 10px;
         padding: 0 10px;
-
         width: 100%;
         overflow-y: auto;
         -ms-overflow-style: none;  
         scrollbar-width: none;  
-
-        border-bottom: 1px solid #ffffff1a;
-        background: #181818;
+        border-bottom: 1px solid #0000001a;
+        background: #0a0a0a;
         background: var(--game);
+        color: #ffffff;
+        color: var(--game-foreground);
     }
 
     &__filters::-webkit-scrollbar {
@@ -341,18 +341,16 @@ export default {
         font-size: 16px;
         font-weight: 400;
         line-height: normal;
-
         background: transparent;
         border: none;
         white-space: nowrap;
-
-        color: #ffffff80;
-        color: var(--foreground-game);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
         border-bottom: 3px solid transparent;
         &--selected {
-            color: #0AAF6D;
+            color: #35cd96;
             color: var(--highlight);
-            border-color: #0AAF6D;
+            border-color: #35cd96;
             border-color: var(--highlight);
         }
     }
@@ -362,6 +360,10 @@ export default {
         &--paddintTop {
             padding-top: 155px;
         }
+    }
+
+    &__header {
+        border-bottom: solid #0a0a0a 1px;
     }
 }
 </style>
