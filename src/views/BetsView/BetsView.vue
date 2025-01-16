@@ -810,4 +810,9 @@ export default {
   color: var(--input-foreground);
 }
 
+::v-deep .select-fake svg {
+  fill: #ffffff;
+  fill: var(--input-foreground);
+}
+
 </style>

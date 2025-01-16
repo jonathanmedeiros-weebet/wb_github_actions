@@ -1,7 +1,7 @@
 <template>
     <button
         @click="handleClick"
-        :style="{backgroundColor: buttonBackgroundColor, color: buttonColor}"
+        :style="{ backgroundColor: buttonBackgroundColor, color: buttonColor}"
     >
         <IconSurprise :color="buttonColor"/>
         Surpresinha

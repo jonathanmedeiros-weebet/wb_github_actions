@@ -17,6 +17,7 @@
         <SelectFake
           class="withdrawal-card__status-select"
           titleSize="medium"
+          :iconColor="useHexColor"
           @click="handleOpenStatusModal"
         >
           {{ status.name }}
@@ -110,7 +111,7 @@ import WButton from '@/components/Button.vue'
 import WModal from '@/components/Modal.vue'
 import CardBets from '@/views/BetsView/parts/CardBet.vue'
 import ModalCalendar from '@/views/HomeView/parts/ModalCalendar.vue'
-import { convertInMomentInstance, formatCurrency, now, formatDateTimeBR } from '@/utilities'
+import { convertInMomentInstance, formatCurrency, now, formatDateTimeBR, isAndroid5 } from '@/utilities'
 import { useConfigClient, useToastStore } from '@/stores'
 import Toast from '@/components/Toast.vue'
 import { requestWithdrawal, withdrawalPayment } from '@/services'
@@ -171,7 +172,10 @@ export default {
       const initialDate = convertInMomentInstance(this.dateFilter).format("DD/MM/YYYY");
       const finalDate = convertInMomentInstance(this.finalDateFilter).format("DD/MM/YYYY");
       return `${initialDate} - ${finalDate}`;
-    }
+    },
+    useHexColor() {
+      return isAndroid5() ? '#ffffff' : 'var(--input-foreground)';
+    },
   },
   methods: {
     handleOpenStatusModal() {

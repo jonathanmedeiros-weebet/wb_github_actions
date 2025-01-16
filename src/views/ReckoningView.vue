@@ -17,7 +17,7 @@
     <div class="reckoning__container">
       <span class="date">
         {{ dateFormatedWithYear}}
-        <IconClose class="date__close" color="var(--foreground)" @click.native="resetDateToCurrent" />
+        <IconClose class="date__close" @click.native="resetDateToCurrent" />
       </span>
 
       <div class="previous-balance" v-if="currentAccountModeIsEnabled">
@@ -332,6 +332,8 @@ export default {
   
   &__close {
     cursor: pointer;
+    fill: rgba(255, 255, 255, .5);
+    fill: rgba(var(--input-foreground-rgb), .5);
   }
 }
 
