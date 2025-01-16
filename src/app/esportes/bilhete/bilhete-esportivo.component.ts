@@ -667,7 +667,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
         const values = clone(this.form.value);
         const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
-        console.log(geolocation);
 
         values['geolocation'] = geolocation;
         values['ibge_code'] = localStorage.getItem('ibge_code');
