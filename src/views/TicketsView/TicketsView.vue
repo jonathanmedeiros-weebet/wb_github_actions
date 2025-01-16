@@ -262,15 +262,9 @@ export default {
     },
     quoteValue() {
       if(!Boolean(this.items.length)) return 0;
-
       let quote = this.items.reduce((total, item) => {
-        const finalValue = calculateQuota({
-          value: Number(item.quoteValue),
-          key: item.quoteKey,
-          gameEventId: item.eventId,
-          favorite: item.favorite,
-          isLive: item.live
-        });
+        const finalValue = Number(item.quoteValue); 
+
         return Number(total) * Number(finalValue)
       }, 1)
 
@@ -443,7 +437,7 @@ export default {
             jogo_event_id: item.eventId,
             cotacao: {
               chave: quoteKey,
-              valor: item.quoteValue,
+              valor: Number(item.quoteValue),
               nome: isQuotePlayer ? item.quoteName : null
             },
             cotacao_antiga_valor: null,

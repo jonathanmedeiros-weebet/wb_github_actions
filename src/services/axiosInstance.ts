@@ -23,6 +23,7 @@ export const axiosInstance = () => {
       const clientOriginException = config.url.includes('center7') || config.url.includes('hermes');
       if (!clientOriginException) {
         config.headers['Client-Origin'] = clientCenterUrl;
+        config.headers['Accept-Language'] = 'pt-BR';
       }
 
       return config;

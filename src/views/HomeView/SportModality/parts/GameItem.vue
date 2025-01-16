@@ -157,7 +157,7 @@ export default {
                     eventId: this.game.event_id,
                     live: this.game.ao_vivo,
                     quoteKey: quota.chave,
-                    quoteValue: quota.valor,
+                    quoteValue: Number(quota.finalValue),
                     quoteName: quoteLabel,
                     quoteGroupName: 'Resultado final',
                     favorite: this.game.favorito,
