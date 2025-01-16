@@ -21,6 +21,44 @@
                     </div>
                 </div>
             </div>
+            <div class="detailed-card__card">
+                <div class="detailed-card__key">
+                    <h4>Chave cartão</h4>
+                    <span>{{ cardKey }}</span>
+                </div>
+                <div class="detailed-card__infos">
+                    <div>
+                        <span><b> Apostador: </b> {{ bettorName }}</span>
+                        <span><b> Recargas: </b> R$ {{ formatCurrencyMoney(recharges) }}</span>
+                        <span><b> Prêmios: </b> R$ {{ formatCurrencyMoney(prizes) }} </span>
+                        <span><b> Criação: </b>{{ formatDate(creationDate) }}</span>
+                    </div>
+                    <div>
+                        <span><b> Cambista: </b>{{ moneyChangerName }}</span>
+                        <span><b> Saques: </b> R$ {{ formatCurrencyMoney(withdraws) }}</span>
+                        <span><b> Saldo atual: </b> R$ {{ formatCurrencyMoney(balance) }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="detailed-card__card">
+                <div class="detailed-card__key">
+                    <h4>Chave cartão</h4>
+                    <span>{{ cardKey }}</span>
+                </div>
+                <div class="detailed-card__infos">
+                    <div>
+                        <span><b> Apostador: </b> {{ bettorName }}</span>
+                        <span><b> Recargas: </b> R$ {{ formatCurrencyMoney(recharges) }}</span>
+                        <span><b> Prêmios: </b> R$ {{ formatCurrencyMoney(prizes) }} </span>
+                        <span><b> Criação: </b>{{ formatDate(creationDate) }}</span>
+                    </div>
+                    <div>
+                        <span><b> Cambista: </b>{{ moneyChangerName }}</span>
+                        <span><b> Saques: </b> R$ {{ formatCurrencyMoney(withdraws) }}</span>
+                        <span><b> Saldo atual: </b> R$ {{ formatCurrencyMoney(balance) }}</span>
+                    </div>
+                </div>
+            </div>
             <span class="detailed-card__content-text">Histórico de apostas</span>
             <div v-if="Boolean(cardBet.apostas.length)">
                 <div class="detailed-card__content-filters" v-for="(bet, index) in cardBet.apostas" :key="index">
@@ -199,7 +237,7 @@ export default {
     color: var(--foreground);
     height: auto;
     width: 100%;
-    padding-bottom: 100px;
+    padding-bottom: 200px;
 
     &__container {
         display: flex;
