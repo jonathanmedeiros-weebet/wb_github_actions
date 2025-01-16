@@ -665,9 +665,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
 
     async ajustarDadosParaEnvio() {
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
-
         const values = clone(this.form.value);
-        values['geolocation'] = this.geolocation;
+        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+        console.log(geolocation);
+
+        values['geolocation'] = geolocation;
         values['ibge_code'] = localStorage.getItem('ibge_code');
         values['locale_city'] = localStorage.getItem('locale_city');
         values['locale_state'] = localStorage.getItem('locale_state');
