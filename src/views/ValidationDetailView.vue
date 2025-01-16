@@ -75,7 +75,7 @@
               v-model="valueBet" 
             >
               <template #icon>
-                <span style="color: #ffffff80;">R$</span>
+                <span style="color: var(--input-foreground);">R$</span>
               </template>
             </w-input>
           </div>
@@ -423,22 +423,28 @@ export default {
   &__icon-live {
     width: 18px;
     height: 18px;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__icon-ball {
     width: 14px;
     height: 14px;
     margin-right: 4px;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__icon-close {
     opacity: 0.5;
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__date {
     opacity: 0.5;
-    color: var(--foreground);
     color: #ffffff;
+    color: var(--foreground);
   }
 
   &__result {

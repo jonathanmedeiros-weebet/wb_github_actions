@@ -15,7 +15,7 @@
         v-model="username"
       >
         <template #icon>
-          <icon-user-line/>
+          <icon-user-line class="login__icon"/>
         </template>
       </w-input> 
       <w-input
@@ -27,7 +27,7 @@
         v-model="password" 
       >
         <template #icon>
-          <icon-password/>
+          <icon-password class="login__icon"/>
         </template>
 
       </w-input>
@@ -156,6 +156,10 @@ export default {
   &__button {
     margin-top: 10px
   }
-
+ 
+  &__icon {
+    fill: #ffffff;
+    fill: var(--input-foreground);
+  }
 } 
 </style>

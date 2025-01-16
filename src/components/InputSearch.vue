@@ -1,6 +1,6 @@
 <template>
   <div class="input-search" :class="{ 'input-search--focused': isFocused }">
-    <IconSearch :size="24" />
+    <IconSearch :size="24" class="input-search__icon--left"/>
     <input
       class="input-search__field"
       type="text"
@@ -11,9 +11,12 @@
       @blur="handleBlur"
       ref="myInput" 
     />
-    <div class="input-search__icon--right" v-if="inputValue">
-      <IconClose :size="14" @click="handleClear"/>
-    </div>
+    <IconClose
+      :size="14"
+      class="input-search__icon--right"
+      v-if="inputValue"
+      @click="handleClear"
+    />
   </div>
 </template>
 
@@ -98,6 +101,14 @@ export default {
       justify-content: center;
       align-items: center;
       cursor: pointer;
+
+      fill: rgba(255, 255, 255, .6);
+      fill: rgba(var(--input-foreground-rgb), .6);
+    }
+
+    &--left {
+      fill: rgba(255, 255, 255, .6);
+      fill: rgba(var(--input-foreground-rgb), .6);
     }
   }
 

@@ -54,16 +54,16 @@
             <div class="bet__header">
               <span class="bet__team">
                 <template v-if="betItem.ao_vivo">
-                  <IconLive :size="16"/>
+                  <IconLive :size="16" class="bet__icon"/>
                 </template>
                 <template v-if="betItem.sport === MODALITY_SPORT_FUTEBOL">
-                  <IconFootball :size="16"/>
+                  <IconFootball :size="16" class="bet__icon"/>
                 </template>
                 <template v-else-if="betItem.sport === MODALITY_SPORT_VOLEI">
-                  <IconVolleyball :size="16"/>
+                  <IconVolleyball :size="16" class="bet__icon"/>
                 </template>
                 <template v-else-if="betItem.sport === MODALITY_SPORT_E_SPORTS">
-                  <IconGame :size="16"/>
+                  <IconGame :size="16" class="bet__icon"/>
                 </template>
                 <div v-if="bet.tipo !== 'loteria'" class="bet__team-name">
                   <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
@@ -624,6 +624,12 @@ export default {
 
   &__message {
     margin-top: 20px;
+  }
+
+  &__icon {
+    fill: #ffffff;
+    color: #ffffff;
+    color: var(--foreground);
   }
 }
 

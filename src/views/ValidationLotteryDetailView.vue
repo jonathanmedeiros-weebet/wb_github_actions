@@ -301,6 +301,13 @@ export default {
         position: absolute;
         left: 0;
     }
+
+    
+    &__icon-close {
+        opacity: 0.5;
+        color: #ffffff;
+        color: var(--foreground);
+    }
 }
 
 .value {

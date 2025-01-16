@@ -6,13 +6,12 @@
                 <p class="card__body-title">Total de entradas</p>
                 <p class="card__body-title-value">R$ {{ formatCurrencyMoney(data.balance) }}</p>
             </div>
-            <div class="card__body-icon" @click="handleClick">
-                <icon-restart
-                    width="24px" 
-                    height="24px"
-                    fill="#ffffff80"
-                />
-            </div>
+            <icon-restart
+                class="card__body-icon"
+                :width="24" 
+                :height="24"
+                @click="handleClick"
+            />
         </div>
         <div class="card__bars">
             <div 
@@ -157,8 +156,8 @@ export default {
     }
 
     &__body-icon {
-        color: rgba(255, 255, 255, .5);
-        color: rgba(var(--game-foreground-rgb), .5);
+        fill: rgba(255, 255, 255, .5);
+        fill: rgba(var(--game-foreground-rgb), .5);
     }
 
     &__bars {

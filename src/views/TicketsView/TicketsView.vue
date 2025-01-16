@@ -662,6 +662,8 @@ export default {
   &__icon-live {
     width: 18px;
     height: 18px;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__icon-ball {
@@ -674,6 +676,8 @@ export default {
 
   &__icon-close {
     opacity: 0.5;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__date {

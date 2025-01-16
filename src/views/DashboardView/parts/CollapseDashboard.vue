@@ -2,7 +2,7 @@
   <div class="collapse" @click="handleClick">
     <div class="collapse__item">
         <span class="collapse__title"><slot name="title"/></span>
-        <component fill="rgba(255, 255, 255, 0.5)" :is="iconArrowDinamic"/>
+        <component class="collapse__icon" :is="iconArrowDinamic"/>
     </div>
     <slot v-if="collapsed" />
   </div>
