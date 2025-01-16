@@ -52,6 +52,7 @@
   import Toast from '@/components/Toast.vue'
   import scrollMixin from '@/mixins/scroll.mixin'
   import SelectFake from '../parts/SelectFake.vue'
+  import { convertInMomentInstance } from '@/utilities'
   
   export default {
     name: 'sport-modality-view',
@@ -245,7 +246,6 @@
         dateSelected= null
       ) {
         const { options } = useConfigClient();
-        
         const isPopularLeague = options?.ordem_exibicao_campeonatos == 'populares';
         const championships = this.liveActived
           ? await getLiveChampionship(modalityId)
@@ -256,17 +256,14 @@
             isPopularLeague
           );
 
-          if (!championships || championships.length === 0) {
-            const nextDateEvents = this.dateSelected.add(1, 'day').format('YYYY-MM-DD');
+          if (!championships || championships.length === 0 && !this.liveActived) {
+            const nextDateEvents = this.dateSelected.add(1, 'day');
+            this.homeStore.setDate(nextDateEvents);
 
-            const nextDayChampionshipsEvents = this.liveActived
-              ? await getLiveChampionship(modalityId)
-              : await getChampionshipBySportId(modalityId, regionName, nextDateEvents, isPopularLeague);
-
-            if (nextDayChampionshipsEvents && nextDayChampionshipsEvents.length > 0) {
-              this.homeStore.setChampionshipList(nextDayChampionshipsEvents);
-            } 
-            return;
+            if (nextDateEvents <= convertInMomentInstance(this.tablelimiteDate)) {
+              await this.prepareChampionshipList(modalityId, regionName, nextDateEvents.format('YYYY-MM-DD'))
+              return  
+            }
           }
   
         this.homeStore.setChampionshipList(championships);
@@ -322,7 +319,6 @@
   
       async handleModality(modalityId) {
         this.loading = true;
-  
         if(modalityId === this.Modalities.POPULAR_LOTTERY){
           this.$router.push({ name: 'popular-lottery' });
           return; 
