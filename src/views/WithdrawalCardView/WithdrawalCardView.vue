@@ -337,4 +337,9 @@ export default {
   background: var(--highlight);
   color: var(--highlight-foreground);
 }
+
+::v-deep .select-fake__title {
+  color: #ffffff !important;
+  color: var(--input-foreground) !important;
+}
 </style>

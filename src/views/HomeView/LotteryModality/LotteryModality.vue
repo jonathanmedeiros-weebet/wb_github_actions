@@ -651,6 +651,8 @@ export default {
     background: var(--background);
 }
 
+
+
 .lottery__options ::v-deep .select-fake {
     background: #181818 !important;
     background: var(--input) !important;
@@ -660,4 +662,8 @@ export default {
     color: #ffffff !important;
     color: var(--input-foreground) !important;
 }
+.lottery__options ::v-deep .select-fake svg {
+    fill: var(--input-foreground) !important;
+}
+
 </style>
