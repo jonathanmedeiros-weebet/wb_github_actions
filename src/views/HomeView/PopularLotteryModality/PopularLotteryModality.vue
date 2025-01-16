@@ -127,7 +127,7 @@ export default {
     &__container {
         padding: 8px 1px;
         width: 100vw;
-        height: calc(100vh -100px);
+        height: calc(100vh - 100px);
     }
 }
 </style>
