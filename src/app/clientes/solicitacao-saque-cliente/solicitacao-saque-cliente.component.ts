@@ -195,6 +195,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
 
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
+                    this.onChavePixChange();
 
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
@@ -208,12 +209,13 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                                     this.faceMatchFirstWithdrawValidated = false;
                                     this.cd.detectChanges();
                                 }
+                                this.showLoading = false;
                             }, error: (error) => {}
                         })
+                    } else {
+                        this.showLoading = false;
                     }
 
-                    this.onChavePixChange();
-                    this.showLoading = false;
                 },
                 error: (error) => {
                     this.handleError(error);
