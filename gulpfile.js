@@ -1589,6 +1589,7 @@ gulp.task('jetbet365.com', function (done) {
         server: "front1.wee.bet",
         host: "jetbet365.com",
         banca: "JetBet: Apostas Esportivas Online | A gente junto dá jogo!",
+        dominioTemp: "jetbet.net.br",
         styles: "",
         google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P65H9KK8');</script><!-- End Google Tag Manager -->",
         google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-P65H9KK8'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
@@ -2306,3 +2307,13 @@ gulp.task('sportvips.bet', function (done) {
         styles: ""
     });
 });
+
+
+gulp.task('condutaesp.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "condutaesp.com",
+        banca: "CONDUTA ESPORTIVA",
+        styles: ""
+    });
+});     

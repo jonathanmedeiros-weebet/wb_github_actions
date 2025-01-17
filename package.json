@@ -229,7 +229,8 @@
     "eliteesportes.vip": "gulp eliteesportes.vip",
     "pixmaster.bet": "gulp pixmaster.bet",
     "joguefacil.bet": "gulp joguefacil.bet",
-    "sportvips.bet": "gulp sportvips.bet"
+    "sportvips.bet": "gulp sportvips.bet",
+    "condutaesp.com": "gulp condutaesp.com"
   },
   "private": true,
   "dependencies": {
