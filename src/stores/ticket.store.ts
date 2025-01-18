@@ -52,6 +52,7 @@ export const useTicketStore = defineStore('ticket', {
             live,
             quoteKey,
             quoteValue,
+            finalQuoteValue,
             quoteName,
             quoteGroupName,
             favorite,
@@ -60,7 +61,7 @@ export const useTicketStore = defineStore('ticket', {
             previousQuoteValue = null
         }: any) {
             const items = { ...this.items };
-
+            
             if(!Boolean(items[gameId])) {
                 const { options } = useConfigClient();
                 const { quantidade_max_jogos_bilhete } = options;
@@ -85,6 +86,7 @@ export const useTicketStore = defineStore('ticket', {
                 live,
                 quoteKey,
                 quoteValue,
+                finalQuoteValue,
                 previousQuoteValue,
                 quoteName,
                 quoteGroupName,
