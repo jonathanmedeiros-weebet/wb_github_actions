@@ -1584,10 +1584,10 @@ gulp.task('jbnacional.bet', function (done) {
     });
 });
 
-gulp.task('jetbet365.com', function (done) {
+gulp.task('jetbet.net.br', function (done) {
     tasks(done, {
         server: "front1.wee.bet",
-        host: "jetbet365.com",
+        host: "jetbet.net.br",
         banca: "JetBet: Apostas Esportivas Online | A gente junto dá jogo!",
         dominioTemp: "jetbet.net.br",
         styles: "",
