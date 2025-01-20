@@ -401,9 +401,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             }
             
             if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
-                valido = false;
-                msg = this.translate.instant('geral.geolocationError');
-                await this.geolocationService.saveLocalStorageLocation();
+                const saveLocation = await this.geolocationService.saveLocalStorageLocation();
+
+                if (!saveLocation) {
+                    valido = false;
+                    msg = this.translate.instant('geral.geolocationError');
+                }
             }
 
             const restrictionStateBet = this.paramsService.getRestrictionStateBet();

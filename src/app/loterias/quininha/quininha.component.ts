@@ -234,10 +234,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Finalizar aposta */
     async create() {
         this.disabledSubmit();
+        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
-                this.apostaService.create(this.aposta)
+                const values = {...this.aposta, geolocation: geolocation };
+
+                this.apostaService.create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         aposta => this.apostaSuccess(aposta),
@@ -387,4 +390,16 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
             return this.generateRandomNumber(numbers);
         }
     }
+
+    // async ajustarDadosParaEnvio() {
+    //     const values = clone(this.form.value);
+    //     const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+
+    //     values['geolocation'] = geolocation;
+    //     values['ibge_code'] = localStorage.getItem('ibge_code');
+    //     values['locale_city'] = localStorage.getItem('locale_city');
+    //     values['locale_state'] = localStorage.getItem('locale_state');
+
+    //     return values;
+    // }
 }
