@@ -176,6 +176,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(zendeskChat, 'display', 'none');
         }
 
+        const intercomChat = this.document.querySelector('#intercom-container');
+        if (intercomChat) {
+            this.renderer.setStyle(intercomChat, 'display', 'none');
+        }
+
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
         }
@@ -598,6 +603,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 }
             });
         }
+
+        const intercomChat = this.document.querySelector('#intercom-container');
+        if (intercomChat) {
+            this.renderer.setStyle(intercomChat, 'display', 'block');
+        }
+
         if (this.headerService.getIsHeaderDisabled) {
             this.disableHeaderOptions();
             this.enableHeader();
