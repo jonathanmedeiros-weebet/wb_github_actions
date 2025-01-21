@@ -230,7 +230,8 @@
     "pixmaster.bet": "gulp pixmaster.bet",
     "joguefacil.bet": "gulp joguefacil.bet",
     "sportvips.bet": "gulp sportvips.bet",
-    "condutaesp.com": "gulp condutaesp.com"
+    "condutaesp.com": "gulp condutaesp.com",
+    "betfortuna.com.br": "gulp betfortuna.com.br"
   },
   "private": true,
   "dependencies": {

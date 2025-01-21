@@ -2308,12 +2308,20 @@ gulp.task('sportvips.bet', function (done) {
     });
 });
 
-
 gulp.task('condutaesp.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "condutaesp.com",
         banca: "CONDUTA ESPORTIVA",
+        styles: ""
+    });
+});     
+
+gulp.task('betfortuna.com.br', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betfortuna.com.br",
+        banca: "BET FORTUNA",
         styles: ""
     });
 });     
