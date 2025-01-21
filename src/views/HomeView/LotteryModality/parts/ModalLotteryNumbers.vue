@@ -41,8 +41,6 @@ export default {
     computed: {
         numbers() {
             const sizeSelected = this.lotteryStore.loteryNumbersSelected;
-            console.log(sizeSelected);
-            console.log(this.lotteryStore.options.sizes);
             return this.lotteryStore.options.sizes.map((size) => ({
                 ...size,
                 label: size.qtdNumeros,

@@ -3,6 +3,7 @@ import { axiosInstance } from "./axiosInstance"
 import { modalityOdds } from "@/constants";
 import { QuotaStatus } from "@/enums";
 import { convertInMomentInstance, now } from "@/utilities";
+import { LocalStorageKey, localStorageService } from "./storage.service";
 interface CalculateQuotaParams {
     key: string;
     value: number;
@@ -140,7 +141,13 @@ export const calculateQuota = ({
     const FAVORITE_QUOTE_HOME = 'casa'
     const FAVORITE_QUOTE_OUTSIDE = 'fora'
     const { betOptions, localQuotes, options } = useConfigClient();
-    const betType = betOptions[key] ?? undefined;
+
+    let betTypes = localStorageService.get(LocalStorageKey.BET_TYPES);
+    if(!Boolean(betTypes)) {
+        betTypes = betOptions;
+    }
+    
+    const betType = betTypes[key] ?? undefined;
 
     if (localQuotes[gameEventId] && localQuotes[gameEventId][key]) {
         value = parseFloat(localQuotes[gameEventId][key].valor);

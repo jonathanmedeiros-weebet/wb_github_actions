@@ -35,7 +35,7 @@
             <div class="bet__result" :class="{ 'bet__result--border': item.hasChanges }">
               <span>{{ item.quoteName }}</span>
               <span>
-                {{ item.quoteValue }}
+                {{ item.finalQuoteValue }}
                 <span v-if="item.previousQuoteValue" class="bet__previous-quote">({{ item.previousQuoteValue }})</span>
               </span>
             </div>
@@ -262,15 +262,16 @@ export default {
     },
     quoteValue() {
       if(!Boolean(this.items.length)) return 0;
-      let quote = this.items.reduce((total, item) => {
-        const finalValue = Number(item.quoteValue); 
 
+      let quote = this.items.reduce((total, item) => {
+        const finalValue = Number(item.finalQuoteValue); 
         return Number(total) * Number(finalValue)
       }, 1)
 
       const { options } = useConfigClient();
+
       if (quote > options.fator_max) {
-          quote = options.fator_max;
+        quote = options.fator_max;
       }
 
       return quote;
@@ -293,6 +294,7 @@ export default {
             icon: this.icons[item.modalityId],
             quoteValue: item.quoteValue.toFixed(2),
             previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
+            finalQuoteValue: Boolean(item.finalQuoteValue) ? item.finalQuoteValue.toFixed(2) : null,
             hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
           }));
       } else {
@@ -421,6 +423,7 @@ export default {
       }
 
       const {items, bettor, bettorDocumentNumber, value, accepted} = this.ticketStore;
+
       const data = {
         apostador: bettor,
         bettorDocumentNumber,
@@ -486,8 +489,9 @@ export default {
               if(ticketItem) {
                 this.ticketStore.addQuote({
                   ...ticketItem,
-                  previousQuoteValue: ticketItem.quoteValue,
+                  previousQuoteValue: ticketItem.finalValue,
                   quoteValue: valor,
+                  finalValue: valor,
                 });
 
                 this.hasChanges = true;

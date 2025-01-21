@@ -17,6 +17,7 @@ export const authUser = async (
         const resp: any = await axiosInstance().post(url, user); 
         if(resp.success){
             if(resp.results.user.tipo_usuario == 'cambista'){
+                localStorageService.set(LocalStorageKey.BET_TYPES, resp.results.tipos_aposta);
                 localStorageService.set(LocalStorageKey.TOKEN, resp.results.token);
                 localStorageService.set(LocalStorageKey.USER, resp.results.user);
                 return true;   
