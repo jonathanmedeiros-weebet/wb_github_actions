@@ -68,8 +68,6 @@ import {
     TabelaModalComponent,
     CarregamentoModalComponent,
     CompatilhamentoBilheteModal,
-    RegrasBonusModalComponent,
-    JogosLiberadosBonusModalComponent,
     CanceledBonusConfirmComponent,
     ValidatePhoneModalComponent
 } from './modals';
@@ -168,8 +166,6 @@ import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-b
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
-        RegrasBonusModalComponent,
-        JogosLiberadosBonusModalComponent,
         BilheteCompartilhamentoComponent,
         AtivarCartaoModalComponent,
         ApostaEncerramentoModalComponent,

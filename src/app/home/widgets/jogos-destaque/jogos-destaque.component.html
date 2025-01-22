@@ -40,7 +40,10 @@
                     <div class="jogo-destaque" style="cursor: pointer;" (click)="maisCotacoes(jogoDestaque._id)">
                         <div class="header">
                             <span class="campeonato-nome" [title]="jogoDestaque.campeonato?.nome">
-                                {{ jogoDestaque.campeonato?.nome }}
+                                <span *ngIf="jogoDestaque.campeonato?.regiao && sportbook == 'lsports'">
+                                    {{ jogoDestaque.campeonato?.regiao | uppercase }}:
+                                </span>
+                                {{ (jogoDestaque.campeonato?.alias ? jogoDestaque.campeonato?.alias : jogoDestaque.campeonato?.nome) | uppercase }}
                             </span>
                             <span>
                                 {{ jogoDestaque.horario | moment: '' : true}}{{ jogoDestaque.horario | moment:"/ H:mm"}}

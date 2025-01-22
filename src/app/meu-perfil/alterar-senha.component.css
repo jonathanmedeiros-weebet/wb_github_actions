@@ -68,13 +68,13 @@ label {
     padding: 30px 20px;
 }
 
-#legitimuz {
+#legitimuz, #docCheck {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-#legitimuz-action-faceindex, #legitimuz-action-verify {
+#legitimuz-action-faceindex, #legitimuz-action-verify, #exDocCheckAction {
     flex: 1;
     width: 25%;
 }

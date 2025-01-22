@@ -151,10 +151,6 @@ const appRoutes: Routes = [
         ]
     },
     {
-        path: 'bilhete/:codigo',
-        component: CupomComponent
-    },
-    {
         path: 'compartilhar-bilhete/:codigo',
         component: CompartilharBilheteComponent
     },
