@@ -1,3 +1,6 @@
+.modal-header {
+    background-color: var(--header);
+}
 .classe-esportes {
     font-family: 'Open Sans', sans-serif;
     border: none;
@@ -17,7 +20,7 @@
 
 .cupom-header {
     color: var(--foreground);
-    background: var(--game);
+    background: var(--header);
     font-size: 14px !important;
 }
 
