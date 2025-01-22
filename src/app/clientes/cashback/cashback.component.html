@@ -95,7 +95,7 @@
                                         id="btn-redeem"
                                         class="btn btn-custom"
                                         type="button"
-                                        [disabled]="cashback.status != 'pending'"
+                                        [disabled]="cashback.status != 'pending' || cashback.cashback_type != 'bonus'"
                                         (click)="cashback.status == 'pending' ? redeemCashback(cashback.id) : false"
                                         >{{'cashback.redeem' | translate}}</button>
                                 </td>
