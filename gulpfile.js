@@ -2303,7 +2303,7 @@ gulp.task('sportvips.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
         host: "sportvips.bet",
-        banca: "SPORT VIPS",
+        banca: "SportVip",
         styles: ""
     });
 });
