@@ -220,8 +220,8 @@ export default {
         },
         sizeSelected() {
             const defaultNumbers = this.lotteryStore.lotteryTypeSelected == LotteryTypes.QUININHA ? 5 : 6;
-            const numbers = Boolean(this.lotteryStore.loteryNumbersSelected.qtdNumeros) ? 
-                this.lotteryStore.loteryNumbersSelected.qtdNumeros
+            const numbers = Boolean(this.lotteryStore.loteryNumbersSelected?.qtdNumeros) ?
+                this.lotteryStore.loteryNumbersSelected?.qtdNumeros
                 : defaultNumbers;
             return numbers;
         },

@@ -151,15 +151,15 @@ export const useTicketStore = defineStore('ticket', {
                 type,
                 lotteryId,
                 lotteryTitle,
-                value,
+                value: Number(value),
                 award06,
                 award05,
                 award04,
                 award03
-            }
+            };
 
             this.items = { ...items };
-            this.value += value;
+            this.value += Number(value);
 
             this.award += type == LotteryTypes.QUININHA
                 ? award05
@@ -167,7 +167,7 @@ export const useTicketStore = defineStore('ticket', {
         },
         removeTen(tenId: number) {
             const items = { ...this.items };
-            this.value -= items[tenId].value;
+            this.value -= Number(items[tenId]?.value || 0);
             
             this.award -= items[tenId].type == LotteryTypes.QUININHA
                 ? items[tenId].award05
