@@ -24,7 +24,7 @@
 <div class="cupom-header">
     <div style="display: flex; flex-direction: column; justify-items: center; text-align: center;">
         <p>{{aposta.tipo | titlecase}}</p>
-        <p style="font-size: 1.5rem">{{aposta.codigo}}
+        <p style="font-size: 1.5rem; font-weight: 800;">{{aposta.codigo}}
             <i style="cursor: pointer; margin-left: 0.25rem;" (click)="copyToClipboard(aposta.codigo)"
                 class="far fa-copy"></i>
         </p>
@@ -263,8 +263,8 @@
     </div>
     <div class="button-container">
         <ng-container *ngIf="!isShared">
-            <div style="display: flex; flex-direction: column;">
-                <button *ngIf="podeReutilizar(aposta)" class="secondary-btn btn" style="margin-bottom: 5px" (click)="repetirAposta(aposta)"
+            <div id="buttons-container">
+                <button *ngIf="podeReutilizar(aposta)" class="secondary-btn btn" style="margin-bottom: 5px; margin-right: 10px;" (click)="repetirAposta(aposta)"
                     [disabled]="simulando || repeating">
                     {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate }}
                 </button>

@@ -50,8 +50,8 @@
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
-    background-color: var(--game);
-    color: var(--foreground);
+    background-color: var(--header);
+    color: var(--foreground-header);
     font-size: 12px;
     padding: 10px;
 }
@@ -159,6 +159,12 @@ hr {
     background-color: var(--highlight);
     border-color: var(--foreground-highlight);
 }
+#buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
 .btn-outline-custom {
     border-color: var(--highlight);
     color: var(--highlight);
@@ -217,7 +223,6 @@ tbody tr:last-child td:first-child {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    gap: 5px;
     width: 100%;
     justify-content: center;
 }
@@ -234,6 +239,10 @@ tbody tr:last-child td:first-child {
     display: none;
 }
  @media only screen and (max-width: 532px) {
+    #buttons-container {
+        display: flex;
+        flex-direction: column;
+    }
     .footer-container {
         background-color: var(--game);
         display: block;
@@ -276,6 +285,10 @@ tbody tr:last-child td:first-child {
     }
  }
  @media only screen and (max-width: 1024px) {
+    #buttons-container {
+        display: flex;
+        flex-direction: column;
+    }
     .button-container {
         display: flex;
         flex-direction: column;
