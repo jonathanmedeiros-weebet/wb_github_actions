@@ -1,28 +1,5 @@
 <div id="cupom" #cupom>
     <div class="conteudo">
-        <div class="informacoes">
-            <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
-                <p>
-                    <b>CLIENTE: </b><span>{{aposta.apostador}}</span>
-                </p>
-            </div>
-            <ng-template #exibicaoPadrao>
-                <p>
-                    <b>CAMBISTA:</b> {{aposta.passador.nome}}
-                </p>
-                <p>
-                    <b>APOSTADOR: </b><span>{{aposta.apostador}}</span>
-                </p>
-            </ng-template>
-            <p>
-                <b>HORÁRIO: </b><span>{{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</span>
-            </p>
-            <p class="resultado">
-                <b>{{ 'geral.resultado' | translate }}: </b>
-                <span *ngIf="aposta.resultado">{{aposta.resultado}}</span>
-                <span *ngIf="!aposta.resultado">aguardando</span>
-            </p>
-        </div>
         <div class="acumuladao">
             <div class="nome">
                 <b>{{aposta.acumuladao.nome}}</b>
@@ -37,7 +14,7 @@
             </ng-container>
             <ng-template #resultadoPendente>
                 <div class="premio" *ngFor="let premio of aposta.acumuladao.premios">
-                    <b>Possível Prêmio {{premio.quantidade_acertos}} acertos:</b>
+                    <b>Possível Prêmio {{premio.quantidade_acertos}} acerto(s):</b>
                     {{premio.valor | currency}}
                 </div>
             </ng-template>
@@ -66,26 +43,6 @@
                 </p>
             </div>
         </ng-container>
-        <div class="acumuladao">
-            <ng-container *ngIf="aposta.resultado; else resultadoPendente">
-                <div>
-                    <p>Total Acertos:</p> {{aposta.quantidade_acertos}}
-                </div>
-                <div>
-                    <p> Prêmio Recebido:</p> {{aposta.premio | currency}}
-                </div>
-            </ng-container>
-            <ng-template #resultadoPendente>
-                <div class="footer-info">
-                    <p>Resultado: </p>
-                    <p>{{aposta.resultado ?? "Aguardando" }}</p>
-                </div>
-                <div class="premio footer-info" *ngFor="let premio of aposta.acumuladao.premios">
-                    <p>Possível prêmio {{premio.quantidade_acertos}} acerto(s):</p>
-                    <p>{{premio.valor | currency}}</p>
-                </div>
-            </ng-template>
-        </div>
         <p class="rodape">
             Caso o ACUMULADÃO tenha mais de um ganhador, o prêmio será dividido em partes iguais entre todos os
             vencedores.
