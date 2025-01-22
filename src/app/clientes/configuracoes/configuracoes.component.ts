@@ -559,7 +559,6 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
 
     validarExclusao(input: string): boolean {
         const textoEsperado = ['EXCLUIR CONTA', 'DELETE ACCOUNT', 'ELIMINAR CUENTA'];
-        console.log('textoEsperado includes:', textoEsperado.includes(input));
         return textoEsperado.includes(input);
     }
 
