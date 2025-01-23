@@ -193,7 +193,8 @@
     
     <div style="position: absolute; top: -9999px; left: -9999px;">
       <div v-if="bet" ref="bet-shared" >
-        <BetSharedPreview :bet="bet" />
+        <BetSharedPreview v-if="bet?.tipo !== 'loteria'" :bet="bet" />
+        <BetSharedLotteryPreview v-else :bet="bet" />
       </div>
     </div>
 
@@ -219,6 +220,8 @@ import { getModalitiesEnum } from '@/constants';
 import ModalSharedOptions from './parts/ModalSharedOptions.vue';
 import { toPng } from 'html-to-image';
 import BetSharedPreview from './parts/BetSharedPreview.vue';
+import BetSharedLotteryPreview from "@/views/CloseBetView/parts/BetSharedLotteryPreview.vue";
+
 
 export default {
   name: 'close-bet',
@@ -234,7 +237,8 @@ export default {
     IconPrinter,
     Toast,
     ModalSharedOptions,
-    BetSharedPreview
+    BetSharedPreview,
+    BetSharedLotteryPreview
   },
   props: {
     id: {
