@@ -29,7 +29,7 @@
             <i style="cursor: pointer; margin-left: 0.25rem;" (click)="copyToClipboard(aposta.codigo)"
                 class="far fa-copy"></i>
         </p>
-        <ng-container *ngIf="isShared">
+        <ng-container *ngIf="isShared || !aposta.is_cliente">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
                     <b>Apostador: </b><span>{{aposta.apostador}}</span>
@@ -56,7 +56,7 @@
         <table class="table">
             <tbody>
                 <ng-container *ngFor="let item of aposta.itens">
-                    <tr class="cupom" style="border-bottom: 2px dotted black;">
+                    <tr class="cupom">
                         <td class="item" style="min-width: 3rem; width: 7rem; position: relative">
                             <div style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                 <p class="info-cupom" style="margin-bottom: 0">
@@ -109,10 +109,10 @@
                         </td>
                     </tr>
                 </ng-container>
-                <tr *ngIf="!isShared" class="cupom" style="margin-top: 10px">
+                <tr *ngIf="!isShared" class="cupom">
                     <td colspan="2" class="item" style="margin-left: 10px;">
                         <p class="resultado">
-                            Resultados:
+                            Resultado:
                         </p>
                         <p>
                             {{'geral.status' | translate}}:
@@ -164,31 +164,19 @@
     </div>
     <ng-container *ngFor="let item of aposta.itens">
         <div class="cupom-container">
-            <div id="cupom" style="margin-top: 10px;">
+            <div id="cupom">
                 <div class="conteudo">
                     <div class="item">
-                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                        <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                            <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
+                        </p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-height: 2em;">
                             <div>
-                                <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
-                                    <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
-                                </p>
-                                <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}" style="font-weight: bolder;">
+                                <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
+                                    style="font-weight: bolder;">
                                     {{item.time_a_nome}}
                                     {{item.time_a_resultado}} x {{item.time_b_resultado}}
                                     {{item.time_b_nome}}
-                                </p>
-                                <p class="horario info-cupom">
-                                    {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
-                                </p>
-                                <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}" style="font-weight: bolder;">
-                                    <span class="info-cupom">
-                                        {{item.categoria_nome}}:
-                                    </span>
-                                    <span class="">
-                                        {{item.odd_nome}}
-                                        ({{item.cotacao}})
-                                    </span>
-                                    <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                                 </p>
                             </div>
                             <div>
@@ -210,15 +198,30 @@
                                 </ng-template>
                             </div>
                         </div>
+                        <p class="horario info-cupom">
+                            {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
+                        </p>
+                        <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                            <span class="info-cupom">
+                                {{item.categoria_nome}}:
+                            </span>
+                            <span class="">
+                                {{item.odd_nome}}
+                                ({{item.cotacao}})
+                                <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+                            </span>
+                        </p>
+            
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
     </ng-container>
     <div class="footer-container">
         <div class="cupom" style="padding: 10px; display: flex; justify-content: space-between;">
             <div class="item" style="flex: 1;">
                 <p class="resultado">Resultado:</p>
+                <p class="status">Status:</p>
                 <p class="aposta">Valor apostado:</p>
                 <p class="ganho">Possível retorno:</p>
                 <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">{{'geral.premio' |
@@ -230,6 +233,7 @@
                     <span *ngIf="aposta.resultado">{{aposta.resultado | titlecase}}</span>
                     <span *ngIf="!aposta.resultado">Aguardando</span>
                 </p>
+                <p class="status">{{aposta.ativo ? 'Ativo' : 'Cancelado'}}</p>
                 <p class="aposta" style="justify-content: right;">
                     <span><span *ngIf="aposta.is_bonus"> ({{'geral.bonus' | translate | lowercase}})</span>{{aposta.valor |
                         currency}}</span>
@@ -271,7 +275,7 @@
                     {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate
                     }}
                 </button>
-                <button *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
+                <button id="encerrar-aposta" *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
                     [disabled]="simulando || repeating">
                     {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' |
                     translate) + (valorEncerramento | currency) }}

@@ -8,6 +8,9 @@
     font-weight: 600;
     margin-bottom: 4px;
 }
+#encerrar-aposta {
+    font-size: 11px;
+}
 .modal-body {
     max-height: 450px;
     overflow: auto;
@@ -48,6 +51,7 @@
     font-size: 12px;
     border-radius: 5px;
     padding: 7px 1em 7px 1em;
+    border-bottom: 2px dotted var(--bottom-bar);
 }
 .cupom-header {
     background-color: var(--header);
@@ -59,6 +63,9 @@
     background: var(--background);
     margin-bottom: 0;
     color: var(--foreground-game);
+}
+tr.cupom {
+    border-bottom: 2px dotted var(--bottom-bar);
 }
 img{
     max-height: 90px;
@@ -72,7 +79,8 @@ img{
     color: #E9283B;
     text-transform: uppercase;
 }
-.cancelado{
+.cancelado {
+    margin-right: 20px;
     text-decoration: line-through
 }
 .jogo-resultado{
@@ -125,6 +133,9 @@ hr {
 .item .cotacao{
     margin: 1px;
     font-size: 12px;
+    font-weight: bolder;
+    display: flex;
+    justify-content: space-between;
 }
 .item p {
     margin-left: 20px;
@@ -247,24 +258,16 @@ tbody tr:last-child td:first-child {
         display: flex;
         flex-direction: column;
     }
-    .footer-container {
-        background-color: var(--game);
-        display: block;
-        margin: 3px;
-        margin-top: 0px;
-        font-size: 12px;
-    }
     .cupom-header {
         margin: 0 5px;
         max-height: none;
         column-count: 1;
-        /* margin-bottom: 15px; */
     }
     .modal-body {
         max-height: 65dvh;
         height: 65dvh;
     }
-    .total-jogos, .aposta, .ganho, .cambista-paga, .resultado {
+    .total-jogos, .aposta, .ganho, .cambista-paga, .resultado, .status {
         display: flex;
         justify-content: space-between;
     }
@@ -283,9 +286,6 @@ tbody tr:last-child td:first-child {
     .modal-header {
         padding-top: 10px;
         padding-bottom: 10px;
-    }
-    #cupom {
-        background-color: var(--game);
     }
  }
  @media only screen and (max-width: 1024px) {
@@ -310,7 +310,18 @@ tbody tr:last-child td:first-child {
     .modal-header .info-horario {
         display: none;
     }
+    .footer-container {
+        background-color: var(--game);
+        display: block;
+        margin: 3px;
+        margin-top: 0px;
+        font-size: 12px;
+    }
+    #cupom {
+        background-color: var(--game);
+    }
     .cupom-container{
+        margin-top: 0px;
         display: block;
     }
     .horario {
