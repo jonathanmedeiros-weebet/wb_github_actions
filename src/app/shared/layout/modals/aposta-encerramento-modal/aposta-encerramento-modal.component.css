@@ -295,8 +295,8 @@ tbody tr:last-child td:first-child {
         gap: 5px;
     }
     .modal-body {
-        min-height: 65dvh;
-        height: 65dvh;
+        min-height: 55dvh;
+        height: 60dvh;
     }
     .table-container,
     .modal-header .info-horario {

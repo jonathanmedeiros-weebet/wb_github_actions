@@ -1,4 +1,5 @@
 <app-bilhete-compartilhamento #bilheteCompartilhamento [aposta]="aposta"></app-bilhete-compartilhamento>
+<span style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; overflow: auto;">
 <div class="modal-header">
     <div>
         <h5 id="modal-basic-title">Aposta</h5>
@@ -264,34 +265,37 @@
     <div class="button-container">
         <ng-container *ngIf="!isShared">
             <div id="buttons-container">
-                <button *ngIf="podeReutilizar(aposta)" class="secondary-btn btn" style="margin-bottom: 5px; margin-right: 10px;" (click)="repetirAposta(aposta)"
+                <button *ngIf="podeReutilizar(aposta)" class="secondary-btn btn"
+                    style="margin-right: 10px;" (click)="repetirAposta(aposta)"
                     [disabled]="simulando || repeating">
-                    {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate }}
+                    {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate
+                    }}
                 </button>
                 <button *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
                     [disabled]="simulando || repeating">
-                    {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' | translate) + (valorEncerramento | currency) }}
+                    {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' |
+                    translate) + (valorEncerramento | currency) }}
+                </button>
+                <button style="margin-right: 10px;" class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
+                    (click)="descartar()">
+                    {{ 'geral.cancelar' | translate }}
+                </button>
+                <button class="btn btn-custom" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
+                    (click)="confirmarEncerramento()">
+                    {{ 'geral.confirmar' | translate }}
+                </button>
+                <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && encerrando;">
+                    {{ 'compartilhar_aposta.encerrando' | translate }}
+                    <i class="fa fa-spinner fa-spin"></i>
+                </button>
+                <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && process;">
+                    {{ 'geral.processando' | translate }}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
+                    <i class="fa fa-spinner fa-spin"></i>
                 </button>
             </div>
-            <button class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
-                (click)="descartar()">
-                {{ 'geral.cancelar' | translate }}
-            </button>
-            <button class="btn btn-custom" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
-                (click)="confirmarEncerramento()">
-                {{ 'geral.confirmar' | translate }}
-            </button>
-            <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && encerrando;">
-                {{ 'compartilhar_aposta.encerrando' | translate }}
-                <i class="fa fa-spinner fa-spin"></i>
-            </button>
-            <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && process;">
-                {{ 'geral.processando' | translate }}... <span *ngIf="apostaAoVivo">({{delay}}) </span>
-                <i class="fa fa-spinner fa-spin"></i>
-            </button>
         </ng-container>
         <ng-container *ngIf="isShared">
-            <button class="btn btn-custom btn-block" (click)="repetirAposta(aposta)" *ngIf="podeReutilizar(aposta); else cantRepeat"
+            <button class="btn secondary-btn btn-block" (click)="repetirAposta(aposta)" *ngIf="podeReutilizar(aposta); else cantRepeat"
                 [disabled]="simulando || repeating">
                 {{ (repeating ? 'compartilhar_aposta.reutilizandoAposta' : 'compartilhar_aposta.reutilizarAposta') | translate }}
             </button>
@@ -301,3 +305,4 @@
         </ng-container>
     </div>
 </div>
+</span>
