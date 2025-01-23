@@ -1928,15 +1928,6 @@ gulp.task('gli.wee.bet', function (done) {
     });
 });
 
-gulp.task('appjetbet365.com', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "appjetbet365.com",
-        banca: "APP JETBET365",
-        styles: ""
-    });
-});
-
 gulp.task('priv8bet.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -2324,4 +2315,13 @@ gulp.task('betfortuna.com.br', function (done) {
         banca: "BET FORTUNA",
         styles: ""
     });
-});     
+});
+
+gulp.task('paraisobet.net', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "paraisobet.net",
+        banca: "PARAISO BET",
+        styles: ""
+    });
+});

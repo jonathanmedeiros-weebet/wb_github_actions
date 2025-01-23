@@ -191,7 +191,6 @@
     "goalb.net": "gulp goalb.net",
     "sortegol.com": "gulp sortegol.com",
     "gli.wee.bet": "gulp gli.wee.bet",
-    "appjetbet365.com": "gulp appjetbet365.com",
     "priv8bet.com": "gulp priv8bet.com",
     "betinha.com": "gulp betinha.com",
     "goldeplaca.online": "gulp goldeplaca.online",
@@ -231,7 +230,8 @@
     "joguefacil.bet": "gulp joguefacil.bet",
     "sportvips.bet": "gulp sportvips.bet",
     "condutaesp.com": "gulp condutaesp.com",
-    "betfortuna.com.br": "gulp betfortuna.com.br"
+    "betfortuna.com.br": "gulp betfortuna.com.br",
+    "paraisobet.net": "gulp paraisobet.net"
   },
   "private": true,
   "dependencies": {
