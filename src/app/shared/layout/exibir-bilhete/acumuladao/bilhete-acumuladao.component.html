@@ -1,24 +1,5 @@
 <div id="cupom" #cupom>
     <div class="conteudo">
-        <div class="acumuladao">
-            <div class="nome">
-                <b>{{aposta.acumuladao.nome}}</b>
-            </div>
-            <ng-container *ngIf="aposta.resultado; else resultadoPendente">
-                <div>
-                    <b>Total Acertos:</b> {{aposta.quantidade_acertos}}
-                </div>
-                <div>
-                    <b> Prêmio Recebido:</b> {{aposta.premio | currency}}
-                </div>
-            </ng-container>
-            <ng-template #resultadoPendente>
-                <div class="premio" *ngFor="let premio of aposta.acumuladao.premios">
-                    <b>Possível Prêmio {{premio.quantidade_acertos}} acerto(s):</b>
-                    {{premio.valor | currency}}
-                </div>
-            </ng-template>
-        </div>
         <ng-container *ngFor="let item of aposta.itens; let i=index;">
             <div class="item">
                 <div *ngIf="i == 0" class="nome">
@@ -43,6 +24,22 @@
                 </p>
             </div>
         </ng-container>
+        <div class="acumuladao">
+            <ng-container *ngIf="aposta.resultado; else resultadoPendente">
+                <div>
+                    <p>Total Acertos:</p> {{aposta.quantidade_acertos}}
+                </div>
+                <div>
+                    <p> Prêmio Recebido:</p> {{aposta.premio | currency}}
+                </div>
+            </ng-container>
+            <ng-template #resultadoPendente>
+                <div class="premio" *ngFor="let premio of aposta.acumuladao.premios">
+                    <p>Possível Prêmio {{premio.quantidade_acertos}} acerto(s):</p>
+                    {{premio.valor | currency}}
+                </div>
+            </ng-template>
+        </div>
         <p class="rodape">
             Caso o ACUMULADÃO tenha mais de um ganhador, o prêmio será dividido em partes iguais entre todos os
             vencedores.
