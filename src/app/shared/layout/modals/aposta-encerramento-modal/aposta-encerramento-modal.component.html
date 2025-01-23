@@ -294,6 +294,7 @@
                 </button>
             </div>
         </ng-container>
+    </div>
         <ng-container *ngIf="isShared">
             <button class="btn secondary-btn btn-block" (click)="repetirAposta(aposta)" *ngIf="podeReutilizar(aposta); else cantRepeat"
                 [disabled]="simulando || repeating">
@@ -303,6 +304,5 @@
                 <p style="text-align: center;">{{ 'compartilhar_aposta.apostaNaoPodeSerRepetida' | translate }}</p>
             </ng-template>
         </ng-container>
-    </div>
 </div>
 </span>
