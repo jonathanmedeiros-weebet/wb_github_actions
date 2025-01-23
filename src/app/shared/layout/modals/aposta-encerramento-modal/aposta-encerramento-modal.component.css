@@ -178,6 +178,10 @@ hr {
     font-size: 12px;
     color: var(--foreground-game);
 }
+.sec {
+    margin-right: 5px;
+    margin-bottom: 0px;
+}
 
 .info-priority-cupom {
     color: var(--highlight);
@@ -285,6 +289,10 @@ tbody tr:last-child td:first-child {
     }
  }
  @media only screen and (max-width: 1024px) {
+    .sec {
+        margin-bottom: 10px;
+        margin-right: 0px;
+    }
     #buttons-container {
         display: flex;
         flex-direction: column;

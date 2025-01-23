@@ -265,7 +265,7 @@
     <div class="button-container">
         <ng-container *ngIf="!isShared">
             <div id="buttons-container">
-                <button *ngIf="podeReutilizar(aposta)" class="secondary-btn btn"
+                <button *ngIf="podeReutilizar(aposta)" class="secondary-btn sec btn"
                     style="margin-right: 10px;" (click)="repetirAposta(aposta)"
                     [disabled]="simulando || repeating">
                     {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate
@@ -276,7 +276,7 @@
                     {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' |
                     translate) + (valorEncerramento | currency) }}
                 </button>
-                <button style="margin-right: 10px;" class="btn btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
+                <button style="margin-right: 10px;" class="btn sec btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
                     (click)="descartar()">
                     {{ 'geral.cancelar' | translate }}
                 </button>
@@ -284,7 +284,7 @@
                     (click)="confirmarEncerramento()">
                     {{ 'geral.confirmar' | translate }}
                 </button>
-                <button disabled class="btn btn-custom btn-block" *ngIf="!falhaSimulacao && encerrando;">
+                <button disabled class="btn btn-custom sec btn-block" *ngIf="!falhaSimulacao && encerrando;">
                     {{ 'compartilhar_aposta.encerrando' | translate }}
                     <i class="fa fa-spinner fa-spin"></i>
                 </button>
