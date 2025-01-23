@@ -82,7 +82,7 @@
                                 <td>Cashback ({{cashback.accrual}})</td>
                                 <td>{{cashback.registrationDate}}</td>
                                 <td>
-                                    {{translateStatus(cashback.status)}}
+                                    {{cashback.cashback_type !== 'bonus' ? translateStatus('redeemed') : translateStatus(cashback.status)}}
                                 </td>
                                 <td
                                     [ngStyle]="{
