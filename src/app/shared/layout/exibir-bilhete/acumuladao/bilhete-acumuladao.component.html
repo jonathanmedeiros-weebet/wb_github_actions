@@ -25,18 +25,22 @@
             </div>
         </ng-container>
         <div class="acumuladao">
+            <div class="resultado">
+                <p>{{'geral.resultado' | translate}}:</p>
+                <p>{{aposta.resultado ?? 'geral.aguardando' | translate}}</p>
+            </div>
             <ng-container *ngIf="aposta.resultado; else resultadoPendente">
-                <div>
+                <div class="total-acertos">
                     <p>Total Acertos:</p> {{aposta.quantidade_acertos}}
                 </div>
-                <div>
+                <div class="premio">
                     <p> Prêmio Recebido:</p> {{aposta.premio | currency}}
                 </div>
             </ng-container>
             <ng-template #resultadoPendente>
                 <div class="premio" *ngFor="let premio of aposta.acumuladao.premios">
                     <p>Possível Prêmio {{premio.quantidade_acertos}} acerto(s):</p>
-                    {{premio.valor | currency}}
+                    <p>{{premio.valor | currency}}</p>
                 </div>
             </ng-template>
         </div>

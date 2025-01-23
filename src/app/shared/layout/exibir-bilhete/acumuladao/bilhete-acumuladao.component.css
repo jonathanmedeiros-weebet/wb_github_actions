@@ -92,3 +92,9 @@
     font-size: 12px;
     text-align: center;
 }
+
+.resultado, .premio, .valor, .total-acertos {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+}
