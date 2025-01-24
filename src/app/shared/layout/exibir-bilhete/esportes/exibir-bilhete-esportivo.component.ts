@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { ApostaEsportiva, ItemApostaEsportiva} from '../../../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompatilhamentoBilheteModal } from '../../modals';
+import * as sportsIds from '../../../constants/sports-ids';
 let newNavigator: any;
 newNavigator = window.navigator;
 
@@ -116,6 +117,57 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
             }
         );
     }
+
+    sportIcon(sportId) {
+            let className = 'icon-futebol wbicon';
+    
+            switch (sportId) {
+                case sportsIds.BETSAPI_FOOTBALL_ID:
+                case sportsIds.LSPORTS_FOOTBALL_ID: {
+                    className = 'wbicon icon-futebol';
+                    break;
+                }
+                case sportsIds.BETSAPI_BOXING_ID:
+                case sportsIds.LSPORTS_BOXING_ID: {
+                    className = 'wbicon icon-luta';
+                    break;
+                }
+                case sportsIds.BETSAPI_AMERICAN_FOOTBALL_ID: {
+                    className = 'wbicon icon-futebol-americano';
+                    break;
+                }
+                case sportsIds.BETSAPI_TABLE_TENNIS_ID:
+                case sportsIds.BETSAPI_TENNIS_ID:
+                case sportsIds.LSPORTS_TENNIS_ID: {
+                    className = 'wbicon icon-tenis';
+                    break;
+                }
+                case sportsIds.BETSAPI_ICE_HOCKEY_ID: {
+                    className = 'wbicon icon-hoquei-no-gelo';
+                    break;
+                }
+                case sportsIds.BETSAPI_BASKETBALL_ID:
+                case sportsIds.LSPORTS_BASKETBALL_ID: {
+                    className = 'wbicon icon-basquete';
+                    break;
+                }
+                case sportsIds.BETSAPI_FUTSAL_ID: {
+                    className = 'wbicon icon-futsal';
+                    break;
+                }
+                case sportsIds.BETSAPI_VOLLEYBALL_ID:
+                case sportsIds.LSPORTS_VOLLEYBALL_ID: {
+                    className = 'wbicon icon-volei';
+                    break;
+                }
+                case sportsIds.BETSAPI_E_SPORTS_ID: {
+                    className = 'wbicon icon-e-sports';
+                    break;
+                }
+            }
+    
+            return className;
+        }
 
     handleError(msg) {
         this.messageService.error(msg);
