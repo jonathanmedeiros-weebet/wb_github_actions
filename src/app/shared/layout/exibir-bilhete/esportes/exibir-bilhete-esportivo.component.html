@@ -14,7 +14,7 @@
                         <td class="item">
                             <div style="max-width: 97%;">
                                 <p class="campeonato info-cupom">
-                                    {{item.campeonato_nome}}
+                                    <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome}}
                                 </p>
                                 <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                                     {{item.time_a_nome}}
