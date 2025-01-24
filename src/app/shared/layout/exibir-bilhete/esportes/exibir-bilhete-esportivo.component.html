@@ -75,14 +75,13 @@
                                     {{item.time_b_nome}}
                                 </p>
                                 <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
-                                    <span class="info-cupom">
-                                        {{item.categoria_nome}}:
+                                    <span class="info-cupom odd-container">
+                                        <div>{{item.categoria_nome}}:</div>
+                                        <div>
+                                            {{item.odd_nome}}
+                                            <span style="float:right">{{item.cotacao}}<span class="" *ngIf="item.ao_vivo"> | AO VIVO</span></span>
+                                        </div>
                                     </span>
-                                    <span class="">
-                                        {{item.odd_nome}}
-                                        ({{item.cotacao}})
-                                    </span>
-                                    <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                                 </p>
                                 <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
                                     Encerrado

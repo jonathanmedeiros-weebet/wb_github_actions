@@ -288,6 +288,12 @@ table tr td:nth-child(3) {
     }
  }
 @media only screen and (min-width: 532px) and (max-width: 1024px) {
+    .odd-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 5px;
+    }
     .modal-body {
         max-height: calc(100svh - 245px);
         height: 100vh;

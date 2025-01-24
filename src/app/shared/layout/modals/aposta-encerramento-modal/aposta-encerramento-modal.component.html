@@ -26,7 +26,7 @@
     <div style="display: flex; flex-direction: column; justify-items: center; text-align: center;">
         <p>{{aposta.tipo | titlecase}}</p>
         <p style="font-size: 1.5rem; font-weight: 800;">{{aposta.codigo}}
-            <i style="cursor: pointer; margin-left: 0.25rem;" (click)="copyToClipboard(aposta.codigo)"
+            <i style="cursor: pointer; margin-left: 0.25rem; margin-bottom: 15px;" (click)="copyToClipboard(aposta.codigo)"
                 class="far fa-copy"></i>
         </p>
         <ng-container *ngIf="isShared || !aposta.is_cliente">
@@ -44,11 +44,11 @@
                 </p>
             </ng-template>
         </ng-container>
-        <p>Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
         <p *ngIf="aposta?.data_liquidacao">
             <b>{{'geral.liquidadoEm' | translate}}</b>
             <span> {{aposta.data_liquidacao | moment: 'DD/MM/YYYY [às] HH:mm'}}</span>
         </p>
+        <p>Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
     </div>
 </div>
 <div class="modal-body cupom-ativo">
@@ -90,22 +90,24 @@
                             </div>
                         </td>
                         <td class="item">
-                            <p class="jogo-resultado" style="float:right" *ngIf="item.encerrado && !item.removido; else resultado">
-                                ENCERRADO <br />
-                                <span [ngClass]="resultadoClass(item)">
-                                    <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
-                                        ( {{item.resultado}} )
-                                    </ng-container>
-                                </span>
-                            </p>
-                            <ng-template #resultado>
-                                <p class="jogo-resultado" style="float:right">
-                                    <span *ngIf="item.removido" style="text-transform: uppercase;">Cancelado</span>
-                                    <span *ngIf="!item.removido && !item.encerrado" [ngClass]="resultadoClass(item)">
-                                        {{item.resultado}}
+                            <div style="display: flex; justify-content: center;">
+                                <p class="jogo-resultado" style="float:right" *ngIf="item.encerrado && !item.removido; else resultado">
+                                    ENCERRADO <br />
+                                    <span [ngClass]="resultadoClass(item)">
+                                        <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
+                                            ( {{item.resultado}} )
+                                        </ng-container>
                                     </span>
                                 </p>
-                            </ng-template>
+                                <ng-template #resultado>
+                                    <p class="jogo-resultado" style="float:right">
+                                        <span *ngIf="item.removido" style="text-transform: uppercase;">Cancelado</span>
+                                        <span *ngIf="!item.removido && !item.encerrado" [ngClass]="resultadoClass(item)">
+                                            {{item.resultado}}
+                                        </span>
+                                    </p>
+                                </ng-template>
+                            </div>
                         </td>
                     </tr>
                 </ng-container>
@@ -202,23 +204,21 @@
                             {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
                         </p>
                         <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
-                            <span class="info-cupom">
-                                {{item.categoria_nome}}:
+                            <span class="info-cupom odd-container">
+                                <div>{{item.categoria_nome}}:</div>
+                                <div>
+                                    {{item.odd_nome}}
+                                    <span style="float:right">{{item.cotacao}}<span class="" *ngIf="item.ao_vivo"> | AO VIVO</span></span>
+                                </div>
                             </span>
-                            <span class="">
-                                {{item.odd_nome}}
-                                ({{item.cotacao}})
-                                <span *ngIf="item.ao_vivo"> | AO VIVO</span>
-                            </span>
-                        </p>
-            
+                        </p>            
                     </div>
                 </div>
             </div>
             </div>
     </ng-container>
     <div class="footer-container">
-        <div class="cupom" style="padding: 10px; display: flex; justify-content: space-between;">
+        <div *ngIf="!isShared" class="cupom" style="padding: 10px; display: flex; justify-content: space-between;">
             <div class="item" style="flex: 1;">
                 <p class="resultado">Resultado:</p>
                 <p class="status">Status:</p>
@@ -269,7 +269,7 @@
     <div class="button-container">
         <ng-container *ngIf="!isShared">
             <div id="buttons-container">
-                <button *ngIf="podeReutilizar(aposta)" class="secondary-btn sec btn"
+                <button *ngIf="podeReutilizar(aposta)" class="btn-outline-custom sec btn"
                     style="margin-right: 10px;" (click)="repetirAposta(aposta)"
                     [disabled]="simulando || repeating">
                     {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate

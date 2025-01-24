@@ -86,9 +86,6 @@ img{
 .jogo-resultado{
     font-size: 12px;
     font-weight: bold;
-    margin: 20px;
-    display: flex;
-    justify-content: center;
 }
 hr {
     margin-top: 5px;
@@ -257,7 +254,6 @@ tbody tr:last-child td:first-child {
         flex-direction: column;
     }
     .cupom-header {
-        margin: 0 5px;
         max-height: none;
         column-count: 1;
     }
@@ -287,6 +283,16 @@ tbody tr:last-child td:first-child {
     }
  }
  @media only screen and (max-width: 1024px) {
+    .jogo-resultado {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .odd-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }    
     .item .cotacao {
         display: flex;
         justify-content: space-between;    
