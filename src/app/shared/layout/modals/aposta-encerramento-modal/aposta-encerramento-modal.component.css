@@ -33,7 +33,7 @@
     color: var(--foreground);
     font-size: 12px;
     margin-bottom: 13px;
-    max-height: 91px;
+    max-height: 120px;
     column-count: 3;
 }
 .cupom-ativo{
