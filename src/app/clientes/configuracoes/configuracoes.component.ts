@@ -438,6 +438,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
     onSubmitExclusaoConta() {
         const { exclusionPeriod, motivoExclusao, confirmarExclusao, opcao } = this.formExclusaoConta.value;
 
+        const sanitizedExclusionConfirmation = confirmarExclusao.trim();
+
         const multifator = this.twoFactorInProfileChangeEnabled
             ? {codigo: this.codigoMultifator, token: this.tokenMultifator}
             : {};
@@ -447,8 +449,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
             return;
         }
 
-        if (this.validarExclusao(confirmarExclusao) || opcao == '') {
-            this.clienteService.excluirConta(exclusionPeriod, motivoExclusao, confirmarExclusao, multifator).subscribe(
+        if (this.validarExclusao(sanitizedExclusionConfirmation) || opcao == '') {
+            this.clienteService.excluirConta(exclusionPeriod, motivoExclusao, sanitizedExclusionConfirmation, multifator).subscribe(
                 result => {
                     this.messageService.success(result.message);
                     this.authService.logout();
