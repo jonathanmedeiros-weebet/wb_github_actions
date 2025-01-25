@@ -245,13 +245,13 @@
                 <b>{{'regras_indique_ganhe.lista_como_indicar' | translate}}:</b> {{'regras_indique_ganhe.lista_como_indicar_text' | translate:{'limiteIndicacoes': limiteIndicacoes} }}
             </li>
             <li>
-                <b>{{'regras_indique_ganhe.lista_bonus_indicador' | translate}}:</b> {{'regras_indique_ganhe.lista_bonus_indicador_text' | translate:{'valorMinDepositado': valorMinDepositado, 'valorMinApostado': valorMinApostado, 'qtdDiasRequisitos': qtdDiasRequisitos, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao, 'tipoSaldoGanho': tipoSaldoGanhoModalRegras(true), 'modalidadePromocao': modalidadePromocao, 'prazoResgateSaldo': prazoResgateSaldo} }}
+                <b>{{'regras_indique_ganhe.lista_bonus_indicador' | translate}}:</b> {{'regras_indique_ganhe.lista_bonus_indicador_text' | translate:{'valorMinDepositado': valorMinDepositado, 'numberBets': numberBets, 'valorMinApostado': valorMinApostado, 'qtdDiasRequisitos': qtdDiasRequisitos, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao, 'tipoSaldoGanho': tipoSaldoGanhoModalRegras(true), 'modalidadePromocao': modalidadePromocao, 'prazoResgateSaldo': prazoResgateSaldo} }}
                 <ng-container *ngIf="tipoSaldoGanho == 'bonus'">
                     <a (click)="abrirModalRegrasBonus()" class="link-highlight">{{'regras_indique_ganhe.checkBonusRules' | translate}}.</a>
                 </ng-container>
             </li>
             <li>
-                <b>{{'regras_indique_ganhe.lista_deposito_indicado' | translate}}:</b> {{'regras_indique_ganhe.lista_deposito_indicado_text' | translate:{'valorMinDepositado': valorMinDepositado, 'valorMinApostado': valorMinApostado, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
+                <b>{{'regras_indique_ganhe.lista_deposito_indicado' | translate}}:</b> {{'regras_indique_ganhe.lista_deposito_indicado_text' | translate:{'valorMinDepositado': valorMinDepositado, 'numberBets': numberBets, 'valorMinApostado': valorMinApostado, 'valorGanhoPorIndicacao': valorGanhoPorIndicacao} }}
             </li>
             <li>
                 <b>{{'regras_indique_ganhe.lista_prevencao_fraudes' | translate}}:</b> {{'regras_indique_ganhe.lista_prevencao_fraudes_text' | translate:{'nomeBanca': nomeBanca} }}

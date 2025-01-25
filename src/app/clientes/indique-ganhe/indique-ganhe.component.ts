@@ -25,6 +25,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     linkIndicacao: string = "";
     valorGanhoPorIndicacao;
     limiteIndicacoes;
+    numberBets;
     valorMinDepositado;
     valorMinApostado;
     qtdDiasRequisitos;
@@ -101,6 +102,7 @@ export class IndiqueGanheComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.numberBets = this.paramsLocaisService.getOpcoes().indique_ganhe_quantidade_min_apostado == 0 ? 1 : this.paramsLocaisService.getOpcoes().indique_ganhe_quantidade_min_apostado;
         this.valorGanhoPorIndicacao = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_por_indicacao;
         this.limiteIndicacoes = this.paramsLocaisService.getOpcoes().indique_ganhe_limite;
         this.valorMinDepositado = this.paramsLocaisService.getOpcoes().indique_ganhe_valor_min_depositado;
