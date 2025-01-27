@@ -68,7 +68,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     permitirQualquerChavePix = false;
     submitting;
     faceMatchEnabled = false;
-    faceMatchFirstWithdrawValidated = true;
+    faceMatchFirstWithdrawValidated = false;
     faceMatchType = null;
     legitimuzToken = "";
     docCheckToken = "";
@@ -120,9 +120,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
         this.currentLanguage = this.translate.currentLang;
         this.faceMatchWithdraw = this.paramsLocais.getOpcoes().faceMatchFirstWithdraw || this.paramsLocais.getOpcoes().faceMatchAllWithdraw;
-        if (this.paramsLocais.getOpcoes().faceMatchAllWithdraw) {
-            this.faceMatchFirstWithdrawValidated = false;
-        }
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
@@ -195,6 +192,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
 
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
+                    this.onChavePixChange();
 
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
@@ -204,16 +202,19 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (this.faceMatchEnabled) {
                         this.faceMatchService.getFaceMatch({ document: this.cliente.cpf }).subscribe({
                             next: (res) => {
-                                if ((typeof res.first_withdraw === 'undefined' || !this.cliente.verifiedIdentity) && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw) {
-                                    this.faceMatchFirstWithdrawValidated = false;
+                                if (res.first_withdraw != null && this.cliente.verifiedIdentity && this.paramsLocais.getOpcoes().faceMatchFirstWithdraw) {
+                                    this.faceMatchFirstWithdrawValidated = true;
                                     this.cd.detectChanges();
                                 }
-                            }, error: (error) => {}
+                                this.showLoading = false;
+                            }, error: (error) => {
+                                this.showLoading = false;
+                            }
                         })
+                    } else {
+                        this.showLoading = false;
                     }
 
-                    this.onChavePixChange();
-                    this.showLoading = false;
                 },
                 error: (error) => {
                     this.handleError(error);

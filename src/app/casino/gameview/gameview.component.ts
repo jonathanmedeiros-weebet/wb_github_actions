@@ -1,17 +1,17 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild, RendererStyleFlags2 } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, Renderer2, QueryList, ViewChildren, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Location } from '@angular/common';
-import { AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService, HeadersService } from '../../services';
+
+import {
+    AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService, HeadersService,
+    GeolocationService
+} from '../../services';
 import { interval, Subject } from 'rxjs';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import {
-    CadastroModalComponent,
-    LoginModalComponent,
-
-} from "../../shared/layout/modals";
+import { CadastroModalComponent, LoginModalComponent, StateRestrictionModalComponent } from "../../shared/layout/modals";
 import { ConfiguracaoLimitePerdasModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-modal/configuracao-limite-perdas-modal.component';
 import { takeUntil } from "rxjs/operators";
 import { Fornecedor } from '../wall/wall.component';
@@ -22,7 +22,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
-
 
 @Component({
     selector: 'app-gameview',
@@ -79,7 +78,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     unsub$ = new Subject();
     tawakChatClicked: boolean = false;
     gameProviderName: string = '';
-    private inGame : boolean = false
+    private inGame: boolean = false
 
     constructor(
         private casinoApi: CasinoApiService,
@@ -101,7 +100,9 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private headerService: HeadersService,
         private clienteService: ClienteService,
         private translate: TranslateService,
+        private geolocationService: GeolocationService,
         @Inject(DOCUMENT) private document: any
+
     ) {
         this.currentUrl = window.location.href;
     }
@@ -234,7 +235,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         }
                     }
                 );
-                
+
             this.auth.cliente
                 .subscribe(
                     isCliente => {
@@ -429,7 +430,35 @@ export class GameviewComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.message = message_percentage;
     }
 
-    loadGame() {
+    showModalState() {
+        const modalRef = this.modalService.open(StateRestrictionModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+    }
+
+    async loadGame() {
+        if (this.paramsService.getSIGAPHabilitado() && !this.geolocationService.checkGeolocation()) {
+            this.handleError(this.translate.instant('geral.geolocationError'));
+            await this.geolocationService.saveLocalStorageLocation();
+            this.router.navigate(['/']);
+            return;
+        }
+
+        const restrictionStateBet = this.paramsService.getRestrictionStateBet();
+
+        if (restrictionStateBet != 'Todos') {
+            let localeState = localStorage.getItem('locale_state');
+
+            if (restrictionStateBet != localeState) {
+                this.showModalState();
+                this.router.navigate(['/']);
+                return;
+            }
+        }
+
         this.casinoApi.getGameUrl(this.gameId, this.gameMode, this.gameFornecedor, this.isMobile)
             .subscribe(
                 response => {
@@ -437,11 +466,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
-                    if(response?.loss_limit?.loss_hit && response?.loss_limit?.error){
+                    if (response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
                         this.showModal(response.loss_limit.message);
                         this.router.navigate(['/']);
                     }
-                    if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error ) {
+                    if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
                         this.showModalPercentage(response.loss_limit.message);
                     }
 
@@ -450,7 +479,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
                         this.gameProviderName = response.gameFornecedorExibicao;
-                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/'+ config.SLUG +'/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
@@ -1136,7 +1165,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.getProviders();
         }
 
-        if(this.isCassinoAoVivoPage) {
+        if (this.isCassinoAoVivoPage) {
             this.getLiveProviders();
         }
     }

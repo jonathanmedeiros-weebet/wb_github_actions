@@ -40,7 +40,6 @@ export class FooterComponent implements OnInit, AfterViewInit {
     esporteHabilitado: boolean;
     cartaoApostaHabilitado: boolean;
     isCliente;
-    hasApk;
     linkTwitter;
     linkTelegram;
     linkTikTok;
@@ -76,7 +75,6 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.isAppMobile = this.authService.isAppMobile();
         this.BANCA_NOME = config.BANCA_NOME;
         this.hasApiPagamentos = Boolean(this.paramsLocais.getOpcoes().available_payment_methods.length);
-        this.hasApk = this.paramsLocais.getOpcoes().has_aplicativo;
         this.hasRegras = this.paramsLocais.getOpcoes().has_regras;
         this.hasTermosCondicoes = this.paramsLocais.getOpcoes().has_termos_condicoes;
         this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
@@ -168,15 +166,15 @@ export class FooterComponent implements OnInit, AfterViewInit {
                 this.fullPage = false;
             }
         });
-    
+
         observer.observe(document.body, { childList: true, subtree: true });
     }
-    
+
     onScroll() {
         const target = this.container;
         this.isToTopBtnVisible = target.scrollTop > 50;
     }
-    
+
     scrollToTop() {
         this.container.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -281,6 +279,14 @@ export class FooterComponent implements OnInit, AfterViewInit {
 
     installPwa() {
         pwaInstallHandler.install();
+    }
+
+    get displayAgentApp(): boolean {
+        const hasApk = this.paramsLocais.getOpcoes().has_aplicativo;
+        const isAppMobile = this.isAppMobile;
+        const agentMode = this.paramsLocais.getOpcoes().modo_cambista;
+
+        return hasApk && !isAppMobile && agentMode;
     }
 
     removeOverflow(element: HTMLElement): void {

@@ -371,6 +371,13 @@ export class HelperService {
 
     injectBetbyScript(fileUrl: string) {
         return new Promise((resolve, reject) => {
+
+            const existingScript = document.querySelector(`script[src="${fileUrl}"]`);
+            if (existingScript) {
+                resolve(true);
+                return;
+            }
+
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = fileUrl;

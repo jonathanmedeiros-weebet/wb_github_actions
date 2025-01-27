@@ -399,10 +399,13 @@ export class AuthService {
         localStorage.removeItem('expires');
         localStorage.removeItem('tipos_aposta');
         localStorage.removeItem('exibirSaldo');
-        sessionStorage.removeItem('ibge_code');
-        sessionStorage.removeItem('locale_city');
-        sessionStorage.removeItem('locale_state');
-        sessionStorage.removeItem('locale_country');
+        localStorage.removeItem('ibge_code');
+        localStorage.removeItem('locale_city');
+        localStorage.removeItem('locale_state');
+        localStorage.removeItem('locale_country');
+        localStorage.removeItem('lat');
+        localStorage.removeItem('lng');
+
     }
 
     isCliente(): boolean {
