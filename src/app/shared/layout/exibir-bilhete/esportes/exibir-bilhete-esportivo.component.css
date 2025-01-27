@@ -231,13 +231,14 @@ table tr td:nth-child(3) {
     display: flex;
     align-items: flex-start;
     margin: 3px;
+    margin-bottom: 0px;
 }
 .cupom-container{
     display: none;
 }
  @media only screen and (max-width: 532px) {
-    .cupom-container:last-of-type #cupom {
-        margin-bottom: 115px;
+    .modal-body {
+        max-height: 55vh;
     }
     .cupom-header {
         margin: 0 5px;
@@ -250,6 +251,7 @@ table tr td:nth-child(3) {
         display: none;
     }
     .cupom-container{
+        margin-top: 0px;
         display: block;
     }
     .modal-body {
@@ -288,6 +290,9 @@ table tr td:nth-child(3) {
     }
  }
 @media only screen and (min-width: 532px) and (max-width: 1024px) {
+    .modal-body {
+        max-height: 55vh;
+    }
     .odd-container {
         display: flex;
         flex-direction: column;

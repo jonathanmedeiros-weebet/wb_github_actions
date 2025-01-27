@@ -61,30 +61,21 @@
             <div id="cupom">
                 <div class="conteudo">
                     <div class="item">
-                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                        <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                            <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
+                        </p>
+                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-height: 2em;">
                             <div>
-                                <p class="horario info-cupom">
-                                    {{item.jogo_horario | moment: 'DD/MM HH:mm'}}
-                                </p>
-                                <p class="campeonato info-cupom">
-                                    {{item.campeonato_nome}}
-                                </p>
-                                <p class="nome  {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
+                                    style="font-weight: bolder;">
                                     {{item.time_a_nome}}
                                     {{item.time_a_resultado}} x {{item.time_b_resultado}}
                                     {{item.time_b_nome}}
                                 </p>
-                                <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
-                                    <span class="info-cupom odd-container">
-                                        <div>{{item.categoria_nome}}:</div>
-                                        <div>
-                                            {{item.odd_nome}}
-                                            <span style="float:right">{{item.cotacao}}<span class="" *ngIf="item.ao_vivo"> | AO VIVO</span></span>
-                                        </div>
-                                    </span>
-                                </p>
+                            </div>
+                            <div>
                                 <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
-                                    Encerrado
+                                    ENCERRADO
                                     <span [ngClass]="resultadoClass(item)">
                                         <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
                                             ( {{item.resultado}} )
@@ -101,10 +92,22 @@
                                 </ng-template>
                             </div>
                         </div>
+                        <p class="horario info-cupom">
+                            {{item.jogo_horario | moment: 'DD/MM/YYYY HH:mm'}}
+                        </p>
+                        <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                            <span class="info-cupom odd-container">
+                                <div>{{item.categoria_nome}}:</div>
+                                <div>
+                                    {{item.odd_nome}}
+                                    <span style="float:right">{{item.cotacao}}<span class="" *ngIf="item.ao_vivo"> | AO VIVO</span></span>
+                                </div>
+                            </span>
+                        </p>            
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
     </ng-container>
     <div class="cupom-header">
         <p class="resultado">
