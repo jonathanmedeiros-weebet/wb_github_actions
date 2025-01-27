@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<div class="modal-body cupom-header" style="overflow: auto; min-height: 20vh;" *ngIf="aposta.tipo != 'casino'">
+<div class="modal-body cupom-header" style="min-height: 15vh;" *ngIf="aposta.tipo != 'casino'">
     <div style="display: flex; flex-direction: column; justify-items: center; text-align: center;">
         <p style="font-weight: 400;">{{(aposta.tipo == 'casino' ? aposta.modalidade : aposta.tipo) | titlecase}}</p>
         <p style="font-size: 16px">{{aposta.codigo}} <i (click)="copyToClipboard(aposta.codigo)" style="cursor: pointer; margin-left: 0.25rem;" class="far fa-copy"></i></p>

@@ -9,6 +9,7 @@
     margin-bottom: 4px;
 }
 .modal-body {
+    max-height: 65vh;
     padding: 10px;
     overflow: auto;
 }
