@@ -2256,3 +2256,12 @@ gulp.task('paraisobet.net', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betmania.casino', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "betmania.casino",
+        banca: "BET MANIA",
+        styles: ""
+    });
+});

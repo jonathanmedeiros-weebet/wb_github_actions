@@ -224,7 +224,8 @@
     "sportvips.bet": "gulp sportvips.bet",
     "condutaesp.com": "gulp condutaesp.com",
     "betfortuna.com.br": "gulp betfortuna.com.br",
-    "paraisobet.net": "gulp paraisobet.net"
+    "paraisobet.net": "gulp paraisobet.net",
+    "betmania.casino": "gulp betmania.casino"
   },
   "private": true,
   "dependencies": {
