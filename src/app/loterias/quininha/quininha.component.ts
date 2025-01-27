@@ -234,10 +234,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Finalizar aposta */
     async create() {
         this.disabledSubmit();
+        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
-                this.apostaService.create(this.aposta)
+                const values = {...this.aposta, geolocation: geolocation };
+
+                this.apostaService.create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         aposta => this.apostaSuccess(aposta),

@@ -237,10 +237,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     /* Finalizar aposta */
     async create() {
         this.disabledSubmit();
-    
+        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
-                this.apostaService.create(this.aposta)
+                const values = {...this.aposta, geolocation: geolocation };
+
+                this.apostaService.create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         aposta => this.apostaSuccess(aposta),
