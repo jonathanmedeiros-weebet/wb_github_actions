@@ -40,6 +40,8 @@
                     />
                 </div>
             </Collapse>
+            <spinner-loading v-if="isLoading" />
+            <div ref="scrollEnd" style="height: 1px;"></div>
         </template>
     </div>
 </template>
@@ -52,20 +54,43 @@ import IconGlobal from '@/components/icons/IconGlobal.vue';
 import { hasQuotaPermission, calculateQuota } from '@/services';
 
 export default {
-  components: { Collapse, GameItem, IconGlobal },
+  components: {
+        Collapse,
+        GameItem,
+        IconGlobal
+    },
     name: 'game-list',
     data() {
         return {
             homeStore: useHomeStore(),
             ticketStore: useTicketStore(),
+            isLoading: false
         }
+    },
+    mounted() {
+        const options = {
+            root: this.$root.$refs.appElement,
+            rootMargin: '0px',
+            threshold: 1.0,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            this.isLoading = true;
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    this.infiniteHandler();
+                }
+            });
+        }, options);
+
+        observer.observe(this.$refs.scrollEnd);
     },
     computed: {
         hasChampionshipList() {
             return Boolean(this.championshipList.length);
         },
         championshipList() {
-            return this.homeStore.championshipList.map((championship) => {
+            const championshipList = this.homeStore.championshipList.slice(0, this.homeStore.paginate).map((championship) => {
                 const newChampionship = { ...championship };
                 if(newChampionship.regiao_sigla !== 'ww') {
                     newChampionship.image = `https://cdn.wee.bet/flags/1x1/${newChampionship.regiao_sigla}.svg`;
@@ -97,6 +122,8 @@ export default {
                 
                 return newChampionship;
             });
+            this.isLoading = false;
+            return championshipList;
         },
         allCollapsed() {
             // return Boolean(this.homeStore.inSearch); TODO: Apagar posteriormente
@@ -112,6 +139,14 @@ export default {
         },
         championshipWasOpened(championshipId) {
             return (this.ticketStore.championshipOpened ?? []).includes(championshipId);
+        },
+        infiniteHandler() {
+            if (this.homeStore.paginate >= this.homeStore.championshipList.length) {
+                this.isLoading = false;
+                return;
+            }
+
+            this.homeStore.setPaginate(this.homeStore.paginate + 10);
         }
     }
 }
@@ -122,12 +157,10 @@ export default {
     width: 100%;
     min-height: calc(100vh - 100px);
     overflow-y: auto;
-
     display: flex;
     flex-direction: column; 
     overflow-y: auto;
     padding-bottom: 100px;
-
     &__items {
         margin-top: 1px;
         margin-bottom: 1px;
@@ -188,5 +221,13 @@ export default {
         color: #ffffff80;
         color: var(--foreground);
     }
+}
+
+::v-deep .spinner-loading {
+    height: 25px;
+    width: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 }
 </style>
