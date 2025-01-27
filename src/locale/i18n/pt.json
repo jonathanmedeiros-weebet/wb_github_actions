@@ -279,7 +279,8 @@
         "vpn": "Detectamos que você está acessando nosso site por meio de uma VPN. Para garantir a segurança e a integridade da plataforma, pedimos que você desative a VPN ou utilize uma conexão padrão para continuar. Se você acredita que isso é um erro, entre em contato com o suporte.",
         "logoutGeolocationErrorMessage": "Você foi desconectado por motivos de segurança. Detectamos uma mudança abrupta na sua localização que seria fisicamente impossível de ocorrer no intervalo de tempo registrado. Caso isso não tenha sido causado por você, recomendamos verificar sua conta.",
         "logoutGeolocationErrorTitle": "Acesso Interrompido: Localização Inconsistente",
-        "logoutGeolocationErrorButtonLabel": "Fechar"
+        "logoutGeolocationErrorButtonLabel": "Fechar",
+        "clickHere": "Clique aqui"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -455,7 +456,8 @@
     },
     "aplicativo": {
         "versaoDoAplicativoNaoSuportada": "A versão do aplicativo instalado não é mais suportada, acesse o nosso site e baixe a nova versão.",
-        "baixarNovaVersao": "Baixar nova versão"
+        "baixarNovaVersao": "Baixar nova versão",
+        "downloadApp": "Baixe o aplicativo"
     },
     "deposito": {
         "depositoERegistrado": "Depósito - Registrado",
@@ -492,7 +494,13 @@
         "jogoResponsavel": "Jogo responsável",
         "termosECondicoes": "Termos e condições",
         "feedback": "Ouvidoria",
-        "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. Todos os direitos reservados."
+        "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. Todos os direitos reservados.",
+        "restrictedToAdults": "Proibido para menores de 18 anos",
+        "knowYourLimits": "Conheça seus limites",
+        "ourApp": "Nosso Aplicativo",
+        "institutional": "Institucional",
+        "licences": "Licenças",
+        "folowUp": "Siga nossas redes sociais"
     },
     "paginas": {
         "quem-somos": "Quem somos",
@@ -658,7 +666,9 @@
         "voltar": "Voltar",
         "logout_continue_login": "Sim, gostaria de encerrar a sessão",
         "remain_active_session": "Não, continuar com a outra sessão",
-        "save_pdf": "Baixar PDF"
+        "save_pdf": "Baixar PDF",
+        "seeMore": "Ver mais",
+        "seeLess": "Ver menos"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",

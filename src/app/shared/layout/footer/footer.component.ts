@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, QueryList, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { ResultadosModalComponent } from '../modals/resultados-modal/resultados-
 import { TranslateService } from '@ngx-translate/core';
 import { CartaoCadastroModalComponent, PesquisarCartaoModalComponent, RecargaCartaoModalComponent, SolicitarSaqueModalComponent } from '../modals';
 import { pwaInstallHandler } from 'pwa-install-handler';
+import { ActivatedRoute, Router } from '@angular/router';
 
 declare let anj_cd823ed6_bffb_4764_9e1b_05566f369c8c: any;
 
@@ -19,6 +20,7 @@ declare let anj_cd823ed6_bffb_4764_9e1b_05566f369c8c: any;
 })
 export class FooterComponent implements OnInit, AfterViewInit {
     @Input() container;
+    @ViewChild('lineClamp') contentElement!: ElementRef;
     BANCA_NOME = '';
     LOGO = config.LOGO;
     isAppMobile;
@@ -51,6 +53,15 @@ export class FooterComponent implements OnInit, AfterViewInit {
     linkYoutube;
     isToTopBtnVisible;
     displayPwaInstallButton = false;
+    hasCuracao = false;
+    hasAnjouan = false;
+    hasBodo = false;
+    hasLoterj = false;
+    hasLicence = false
+    seeMoreElement : HTMLElement;
+    seeLess = false;
+    fullPage = true;
+    computedStyle;
 
     constructor(
         private authService: AuthService,
@@ -85,6 +96,13 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.linkInstagram = this.paramsLocais.getOpcoes().linkInstagram;
         this.linkLinkedin = this.paramsLocais.getOpcoes().linkLinkedin;
         this.linkYoutube = this.paramsLocais.getOpcoes().linkYoutube;
+
+        this.hasCuracao = this.paramsLocais.getOpcoes().enable_licence_curacao;
+        this.hasAnjouan = this.paramsLocais.getOpcoes().enable_licence_anjouan;
+        this.hasBodo = this.paramsLocais.getOpcoes().enable_licence_bodo;
+        this.hasLoterj = this.paramsLocais.getOpcoes().enable_licence_Loterj;
+            
+        this.hasLicence = this.hasCuracao || this.hasAnjouan || this.hasBodo || this.hasLoterj;
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => {
@@ -133,7 +151,11 @@ export class FooterComponent implements OnInit, AfterViewInit {
             this.appendReclameAqui(reclameAquiDataId);
         }
 
-        this.container.addEventListener('scroll', this.onScroll.bind(this));
+        if(this.container) {
+
+            this.container.addEventListener('scroll', this.onScroll.bind(this));
+        }
+        
         const observer = new MutationObserver(() => {
             const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
             if (bilheteContainer && !this.isMobile) {
@@ -141,6 +163,9 @@ export class FooterComponent implements OnInit, AfterViewInit {
                 if (toTopElement) {
                     toTopElement.style.right = `calc(20px + ${bilheteContainer.clientWidth}px)`;
                 }
+            }
+            if (bilheteContainer) {
+                this.fullPage = false;
             }
         });
     
@@ -227,16 +252,9 @@ export class FooterComponent implements OnInit, AfterViewInit {
     }
 
     svgStyleMaiorIdade() {
-        if (this.isMobile) {
-            return {
-                width: '30px',
-                fill: 'var(--foreground-header)',
-                stroke: 'var(--foreground-header)',
-            }
-        }
-
         return {
-            width: '45px',
+            width: '33px',
+            height: '33px',
             fill: 'var(--foreground-header)',
             stroke: 'var(--foreground-header)',
         }
@@ -264,4 +282,21 @@ export class FooterComponent implements OnInit, AfterViewInit {
     installPwa() {
         pwaInstallHandler.install();
     }
+
+    removeOverflow(element: HTMLElement): void {
+        if (element.clientHeight < element.scrollHeight) {
+            element.classList.remove('custom-lineclamp');
+            this.seeLess = true;
+        } else {
+            element.classList.add('custom-lineclamp');
+            this.seeLess = false;
+        }
+      }
+    
+    hasOverflow(element: HTMLElement): boolean {        
+        if (element) {
+          return element.scrollHeight > element.clientHeight;
+        }
+      }
+
 }
