@@ -24,6 +24,7 @@
     font-size: 12px;
     border-radius: 5px;
     padding: 7px 1em 7px 1em;
+    border-bottom: 2px dotted var(--bottom-bar);
 }
 .cupom-header {
     margin-top: 12px;
@@ -33,9 +34,6 @@
     color: var(--foreground);
     font-size: 12px;
     padding-top: 25px;
-}
-.cupom {
-    border-bottom: 2px dotted var(--bottom-bar);
 }
 .cupom-header p {
     font-size: 13px;
