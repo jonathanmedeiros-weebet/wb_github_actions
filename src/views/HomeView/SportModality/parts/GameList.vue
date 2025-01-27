@@ -12,7 +12,7 @@
                     <img
                         class="game-list__collapse-icon"
                         v-if="championship.image"
-                        :src="championship.image"
+                        v-lazy="championship.image"
                         @error="changeSrcWhenImageError"
                     />
                     <component
