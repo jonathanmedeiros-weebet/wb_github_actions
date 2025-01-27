@@ -26,12 +26,16 @@
     padding: 7px 1em 7px 1em;
 }
 .cupom-header {
+    margin-top: 12px;
     border-bottom: 2px dotted var(--bottom-bar);
     background-color: var(--game);
     padding: 10px;
     color: var(--foreground);
     font-size: 12px;
     padding-top: 25px;
+}
+.cupom {
+    border-bottom: 2px dotted var(--bottom-bar);
 }
 .cupom-header p {
     font-size: 13px;
