@@ -25,6 +25,7 @@
     border-radius: 5px;
     padding: 7px 1em 7px 1em;
     border-bottom: 2px dotted var(--bottom-bar);
+    border-radius: 5px;
 }
 .cupom-header {
     margin-top: 12px;

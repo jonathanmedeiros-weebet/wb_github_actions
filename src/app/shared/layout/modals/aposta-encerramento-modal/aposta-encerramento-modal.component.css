@@ -248,6 +248,9 @@ tbody tr:last-child td:first-child {
 .cupom-container{
     display: none;
 }
+.footer-container > div.cupom {
+    border-bottom: 2px dotted var(--bottom-bar);
+}
  @media only screen and (max-width: 532px) {
     #buttons-container {
         display: flex;
