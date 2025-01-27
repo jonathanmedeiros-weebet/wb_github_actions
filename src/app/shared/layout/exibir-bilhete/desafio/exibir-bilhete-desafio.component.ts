@@ -24,6 +24,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
     LOGO;
     opcoes;
     cambistaPaga;
+    enabledBookie;
     appMobile;
     isCliente;
     isLoggedIn;
@@ -44,6 +45,7 @@ export class ExibirBilheteDesafioComponent implements OnInit {
         this.LOGO = this.imagensService.logo;
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
+        this.enabledBookie = this.opcoes.modo_cambista;
         this.auth.logado
             .subscribe(
                 isLoggedIn => {

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { config } from '../../shared/config';
+import { ParametrosLocaisService } from 'src/app/services';
 
 @Component({
     selector: 'app-cupom-desafio',
@@ -11,12 +12,14 @@ import { config } from '../../shared/config';
 export class CupomDesafioComponent implements OnInit, OnDestroy {
     @Input() aposta;
     cambistaPaga;
+    enabledBookie;
     LOGO = config.LOGO;
     unsub$ = new Subject();
 
-    constructor() { }
+    constructor( private paramsLocais: ParametrosLocaisService ) { }
 
     ngOnInit() {
+        this.enabledBookie = this.paramsLocais.getOpcoes().modo_cambista;
         if (this.aposta.passador.percentualPremio > 0) {
             if (this.aposta.resultado) {
                 this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);
