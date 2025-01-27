@@ -49,6 +49,7 @@
 }
 
 .footer-cupom {
+    border-bottom: 2px dotted var(--bottom-bar);
     padding: 15px 10px;
 }
 

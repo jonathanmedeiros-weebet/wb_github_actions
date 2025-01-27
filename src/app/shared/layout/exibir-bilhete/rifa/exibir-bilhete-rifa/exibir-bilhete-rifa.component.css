@@ -160,6 +160,7 @@ hr {
     padding: 10px;
 }
 .cupom-footer {
+    border-bottom: 2px dotted var(--bottom-bar);
     font-size: 12px;
     padding: 10px;
     background: var(--game);
