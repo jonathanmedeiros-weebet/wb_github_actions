@@ -2265,3 +2265,12 @@ gulp.task('betmania.casino', function (done) {
         styles: ""
     });
 });
+
+gulp.task('buda-bet.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "buda-bet.com",
+        banca: "BUDA BET",
+        styles: ""
+    });
+});

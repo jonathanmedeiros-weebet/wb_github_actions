@@ -225,7 +225,8 @@
     "condutaesp.com": "gulp condutaesp.com",
     "betfortuna.com.br": "gulp betfortuna.com.br",
     "paraisobet.net": "gulp paraisobet.net",
-    "betmania.casino": "gulp betmania.casino"
+    "betmania.casino": "gulp betmania.casino",
+    "buda-bet.com": "gulp buda-bet.com"
   },
   "private": true,
   "dependencies": {
