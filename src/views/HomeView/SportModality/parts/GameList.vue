@@ -52,25 +52,28 @@ import GameItem from './GameItem.vue';
 import { useHomeStore, useTicketStore } from '@/stores';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
 import { hasQuotaPermission, calculateQuota } from '@/services';
+import SpinnerLoading from '@/components/SpinnerLoading.vue';
 
 export default {
-  components: {
+    components: {
         Collapse,
         GameItem,
-        IconGlobal
+        IconGlobal,
+        SpinnerLoading
     },
     name: 'game-list',
     data() {
         return {
             homeStore: useHomeStore(),
             ticketStore: useTicketStore(),
-            isLoading: false
+            isLoading: false,
+            championshipListSecondary: []
         }
     },
     mounted() {
         const options = {
             root: this.$root.$refs.appElement,
-            rootMargin: '0px',
+            rootMargin: '10px',
             threshold: 1.0,
         };
 
@@ -90,40 +93,14 @@ export default {
             return Boolean(this.championshipList.length);
         },
         championshipList() {
-            const championshipList = this.homeStore.championshipList.slice(0, this.homeStore.paginate).map((championship) => {
-                const newChampionship = { ...championship };
-                if(newChampionship.regiao_sigla !== 'ww') {
-                    newChampionship.image = `https://cdn.wee.bet/flags/1x1/${newChampionship.regiao_sigla}.svg`;
-                } else {
-                    newChampionship.icon = IconGlobal;
-                }
-
-                newChampionship.jogos = championship.jogos.map((game) => {
-                    const newGame = { ...game };
-                    newGame.cotacoes = newGame.cotacoes.map(quota => {
-                        const finalValue = calculateQuota({
-                            value: quota.valor,
-                            key: quota.chave,
-                            gameEventId: newGame.event_id,
-                            favorite: newGame.favorito,
-                            isLive: newGame.ao_vivo
-                        });
-
-                        const hasPermission = hasQuotaPermission(finalValue)
-
-                        return {
-                            ...quota,
-                            hasPermission,
-                            finalValue,
-                        };
-                    })
-                    return newGame;
-                })
-                
-                return newChampionship;
-            });
+            if(this.homeStore.isLive){
+                this.championshipListSecondary = this.homeStore.championshipList.slice(0, this.homeStore.paginate).map(this.transformChampionshipList);
+            } else {
+                const championshipList = this.homeStore.championshipList.slice(this.championshipListSecondary.length, this.homeStore.paginate).map(this.transformChampionshipList);
+                this.championshipListSecondary.push(...championshipList);
+            }
             this.isLoading = false;
-            return championshipList;
+            return this.championshipListSecondary;
         },
         allCollapsed() {
             // return Boolean(this.homeStore.inSearch); TODO: Apagar posteriormente
@@ -131,6 +108,38 @@ export default {
         }
     },
     methods: {
+        transformChampionshipList(championship) {
+            const newChampionship = { ...championship };
+            if(newChampionship.regiao_sigla !== 'ww') {
+                newChampionship.image = `https://cdn.wee.bet/flags/1x1/${newChampionship.regiao_sigla}.svg`;
+            } else {
+                newChampionship.icon = IconGlobal;
+            }
+
+            newChampionship.jogos = championship.jogos.map((game) => {
+                const newGame = { ...game };
+                newGame.cotacoes = newGame.cotacoes.map(quota => {
+                    const finalValue = calculateQuota({
+                        value: quota.valor,
+                        key: quota.chave,
+                        gameEventId: newGame.event_id,
+                        favorite: newGame.favorito,
+                        isLive: newGame.ao_vivo
+                    });
+
+                    const hasPermission = hasQuotaPermission(finalValue)
+
+                    return {
+                        ...quota,
+                        hasPermission,
+                        finalValue,
+                    };
+                })
+                return newGame;
+            })
+            
+            return newChampionship;
+        },
         handleClick(gameId) {
             this.$emit('gameClick', gameId);
         },
@@ -146,7 +155,7 @@ export default {
                 return;
             }
 
-            this.homeStore.setPaginate(this.homeStore.paginate + 10);
+            this.homeStore.setPaginate(this.homeStore.paginate + 5);
         }
     }
 }
@@ -159,8 +168,9 @@ export default {
     overflow-y: auto;
     display: flex;
     flex-direction: column; 
-    overflow-y: auto;
-    padding-bottom: 100px;
+    overflow-y: hidden;
+    margin-bottom: 200px;
+
     &__items {
         margin-top: 1px;
         margin-bottom: 1px;
