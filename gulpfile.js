@@ -2132,7 +2132,7 @@ gulp.task('playnabet.com', function (done) {
 
 gulp.task('poc.wee.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "54.147.182.240",
         host: "poc.wee.bet",
         banca: "POC LOTEP",
         styles: "",
