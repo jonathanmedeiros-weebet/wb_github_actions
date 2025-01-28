@@ -49,7 +49,7 @@
 <script>
 import Collapse from '@/components/Collapse.vue';
 import GameItem from './GameItem.vue';
-import { useHomeStore, useTicketStore } from '@/stores';
+import { useConfigClient, useHomeStore, useTicketStore } from '@/stores';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
 import { hasQuotaPermission, calculateQuota } from '@/services';
 import SpinnerLoading from '@/components/SpinnerLoading.vue';
@@ -66,6 +66,7 @@ export default {
         return {
             homeStore: useHomeStore(),
             ticketStore: useTicketStore(),
+            configClientStore: useConfigClient(),
             isLoading: false,
             championshipListSecondary: []
         }
@@ -103,8 +104,7 @@ export default {
             return this.championshipListSecondary;
         },
         allCollapsed() {
-            // return Boolean(this.homeStore.inSearch); TODO: Apagar posteriormente
-            return true;
+            return this.configClientStore.settings.championshipExpanded;;
         }
     },
     methods: {

@@ -80,7 +80,11 @@
           </button>
           <button class="more-options__item" @click="handlePrinterSetting">
             <IconSettings class="more-options__icon" :color="useHexColors" />
-            <span class="more-options__text-icon">Configurações</span>
+            <span class="more-options__text-icon">Configurações de impressão</span>
+          </button>
+          <button class="more-options__item" @click="handleNavigate('/settings')">
+            <IconSettings class="more-options__icon" :color="useHexColors" />
+            <span class="more-options__text-icon">Configurações gerais</span>
           </button>
           <button class="more-options__item" @click="handleNavigate('/results')">
             <IconFactCheck class="more-options__icon" :color="useHexColors" />

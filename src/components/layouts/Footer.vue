@@ -50,7 +50,8 @@ export default {
         'list-cards',
         'withdrawal-card',
         'movements',
-        'results'
+        'results',
+        'settings'
       ].includes(this.$route.name)
     },
     showCopyright() {
