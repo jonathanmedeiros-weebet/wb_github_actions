@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { ParametrosLocaisService} from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
+import { StepService } from 'src/app/shared/services/step.service';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { FormValidations } from 'src/app/shared/utils';
 
@@ -12,6 +13,8 @@ import { FormValidations } from 'src/app/shared/utils';
     styleUrls: ['./personal-data.component.scss']
     })
     export class PersonalDataComponent extends BaseFormComponent implements OnInit, OnDestroy{
+    @Output() dataPersonal = new EventEmitter<any>;
+    @Input() data:any;
 
     form: FormGroup;
     dataUserCPF = '';
@@ -51,6 +54,7 @@ import { FormValidations } from 'src/app/shared/utils';
         private ga4Service: Ga4Service,
         private paramsService: ParametrosLocaisService,
         private CountriesService: CountriesService,
+        private stepService: StepService
     ) {
         super();
     }
@@ -68,8 +72,21 @@ import { FormValidations } from 'src/app/shared/utils';
                 this.showLoading = true;
             }
         })
+        this.form.valueChanges.subscribe(() => {
+            if(this.form.valid){
+                this.stepService.changeFormValid(true);
+                this.dataPersonal.emit(this.form.value);
+            } else {
+                this.stepService.changeFormValid(false);
+            }
+            
+          })   
+          ;
 
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
+        if (this.data.cpf) {
+            this.form.patchValue(this.data);
+        }
     }
 
     onSubmit() {
@@ -84,7 +101,8 @@ import { FormValidations } from 'src/app/shared/utils';
             day:['dia'],
             month:['mes'],
             year:['ano'],
-            nationality:['Brasil']
+            nationality:['Brasil'],
+            gender:[null]
         })
     };
 

@@ -7,7 +7,7 @@
     color: var(--foreground-inputs-odds);
     background: var(--inputs-odds);
     max-height: 44px;
-    gap: 6px;
+    gap: 4px;
 }
 
 .input-style {
@@ -22,7 +22,7 @@
 
 .select-date-of-birth {
     flex: 1;
-    border-right: 1px solid rgba(255, 255, 255, 0.10);
+    border-right: 1px solid rgba(var(--foreground-inputs-odds-rgb), .1);
 }
 
 .style-select {
@@ -31,8 +31,8 @@
     -webkit-appearance: menulist;
     -moz-appearance: menulist;
     outline: none;
-    max-height: 22px;
-    color: rgba(255, 255, 255, 0.30);
+    max-height: 26px;
+    color: rgba(var(--foreground-inputs-odds-rgb), .3);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -68,6 +68,7 @@ select:focus {
 .div-button-gender{
     display: flex;
     gap:7px;
+    cursor: pointer;
 }
 
 .gender-style{
@@ -95,4 +96,27 @@ select:focus {
     display: flex;
     gap: 10px;
     flex-direction: column;
+}
+
+input[type=radio] {
+    appearance: none;
+    border: 1px solid rgba(var(--foreground-inputs-odds-rgb), .3);
+    border-radius: 100%;
+    padding: 8px;
+}
+
+input[type=radio]:checked{
+    background-color: var(--highlight);
+}
+
+
+@media screen and (max-width: 320px) {
+    .radio-custom {
+        font-size: 10px;
+    }
+
+    .input-md label {
+        padding: 0px;
+    }
+
 }
