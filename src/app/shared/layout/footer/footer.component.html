@@ -11,11 +11,8 @@
                 </a>
             </p>
         </div>
-
         <div class="separator">
         </div>
-
-
 <!--        <div class="info">-->
 <!--            <h4 class="title">Patrocinador oficial</h4>-->
 <!--            <p>-->
@@ -49,12 +46,8 @@
                                 <path d="M1 5L5 1L9 5" [svgStyle]="{fill: 'var(--highlight)'}" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-        
                         </span>
-        
-        
                     </button>
-        
                 </div>
             </div>
             <div class="container-bottom">
@@ -136,8 +129,8 @@
                                         [svgStyle]="{height: '20px', fill: 'var(--highlight)' }"></svg-icon>
                                 </a>
                                 <a [href]="linkYoutube" target="_blank" *ngIf="linkYoutube">
-                                    <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/youtube.svg'"
-                                        [svgStyle]="{height: '20px', fill: 'var(--highlight)' }"></svg-icon>
+                                    <svg-icon [src]="'https://wb-assets.com/img/redes-sociais/youtube.svg'"
+                                        [svgStyle]="{height: '28px', fill: 'var(--highlight)' }"></svg-icon>
                                 </a>
                                 <a [href]="linkTikTok" target="_blank" *ngIf="linkTikTok">
                                     <svg-icon [src]="'https://weebet.s3.amazonaws.com/cdn/img/redes-sociais/tiktok.svg'"
@@ -165,13 +158,12 @@
                     <div class="licences" *ngIf="hasLicence">
                         <h2>{{"footer.licences" | translate}}</h2>
                         <div class="licences-images">
-                            <img class="licence" src="https://weebet.s3.amazonaws.com/cdn/img/curacao.png" alt=""
-                                *ngIf="hasCuracao">
-                            <img class="licence" style="width: 60px;" src="https://weebet.s3.amazonaws.com/cdn/img/curacao.png"
-                                alt="" *ngIf="hasAnjouan">
-                            <img class="licence" src="https://weebet.s3.amazonaws.com/cdn/img/curacao.png" alt="" *ngIf="hasBodo">
-                            <img class="licence" style="width: 60px;" src="https://weebet.s3.amazonaws.com/cdn/img/curacao.png"
-                                alt="" *ngIf="hasLoterj">
+                            <img class="licence" src="https://cdn.wee.bet/img/accreditors/gcb-orange.svg" alt="" *ngIf="hasCuracaoTemporary">
+                            <img class="licence" src="https://wb-assets.com/img/accreditors/gcb-green.svg" alt="" *ngIf="hasCuracao">
+                            <img class="licence" src="https://cdn.wee.bet/img/accreditors/lotserido.svg" alt="" *ngIf="hasBodo">
+                            <img class="licence" src="https://cdn.wee.bet/img/accreditors/loterj.svg" alt="" *ngIf="hasLoterj">
+                            <img class="licence" src="https://cdn.wee.bet/img/accreditors/lotep.svg" alt="" *ngIf="hasLotep">
+                            <img class="licence" src="https://cdn.wee.bet/img/accreditors/anjouan.svg" alt="" *ngIf="hasAnjouan">
                         </div>
                     </div>
                 </div>
@@ -205,7 +197,6 @@
                                 <path id="Ellipse 8" d="M18.4746 33.9482C27.5561 33.9482 34.9746 26.8155 34.9746 17.9482C34.9746 9.08103 27.5561 1.94824 18.4746 1.94824C9.39307 1.94824 1.97461 9.08103 1.97461 17.9482C1.97461 26.8155 9.39307 33.9482 18.4746 33.9482Z" stroke="white" stroke-opacity="0.7" stroke-width="2"/>
                                 </g>
                                 </svg>
-                                
                             <h4 class="title">{{'footer.restrictedToAdults' | translate}}</h4>
                         </div>
                     </a>

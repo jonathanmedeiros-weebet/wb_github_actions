@@ -56,6 +56,8 @@ export class FooterComponent implements OnInit, AfterViewInit {
     hasAnjouan = false;
     hasBodo = false;
     hasLoterj = false;
+    hasCuracaoTemporary = false;
+    hasLotep = false
     hasLicence = false
     seeMoreElement : HTMLElement;
     seeLess = false;
@@ -96,11 +98,13 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.linkYoutube = this.paramsLocais.getOpcoes().linkYoutube;
 
         this.hasCuracao = this.paramsLocais.getOpcoes().enable_licence_curacao;
+        this.hasCuracaoTemporary = this.paramsLocais.getOpcoes().enable_licence_curacao_temporary;
         this.hasAnjouan = this.paramsLocais.getOpcoes().enable_licence_anjouan;
         this.hasBodo = this.paramsLocais.getOpcoes().enable_licence_bodo;
-        this.hasLoterj = this.paramsLocais.getOpcoes().enable_licence_Loterj;
+        this.hasLoterj = this.paramsLocais.getOpcoes().enable_licence_loterj;
+        this.hasLotep = this.paramsLocais.getOpcoes().enable_licence_lotep;
             
-        this.hasLicence = this.hasCuracao || this.hasAnjouan || this.hasBodo || this.hasLoterj;
+        this.hasLicence =this.hasCuracaoTemporary || this.hasCuracao || this.hasAnjouan || this.hasBodo || this.hasLoterj || this.hasLotep;
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => {

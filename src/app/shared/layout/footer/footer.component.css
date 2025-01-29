@@ -53,9 +53,10 @@ h2{
 }
 
 .licences-images{
-    display: flex;
-    align-items: flex-start;
-    gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 32px;
 }
 
 .licences img{
@@ -64,7 +65,6 @@ h2{
     justify-content: center;
     align-items: center;
     width: 107px;
-    height: 60px;
 }
 
 .container {
@@ -229,16 +229,7 @@ footer {
     padding-right: 8px;
 }
 
-.licences-images {
-    display: flex;
-    flex-wrap: wrap;
-}
 
-.licence {
-    flex: 0 0 1;
-    box-sizing: border-box;
-    padding: 10px
-}
 
 .links a:hover {
     color: var(--highlight);
@@ -370,6 +361,7 @@ footer {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
+    align-items: center;
   }
 
 .custom-lineclamp {
