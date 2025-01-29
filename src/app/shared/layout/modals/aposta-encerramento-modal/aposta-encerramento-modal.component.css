@@ -49,7 +49,7 @@
     padding: 0 1em;
     background: #363636;
     font-size: 12px;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 7px 1em 7px 1em;
     border-bottom: 2px dotted var(--bottom-bar);
 }
@@ -66,6 +66,12 @@
 }
 tr.cupom {
     border-bottom: 2px dotted var(--bottom-bar);
+}
+.border-left {
+    border-radius: 10px 0 0 10px;
+}
+.border-right {
+    border-radius: 0 10px 10px 0;
 }
 img{
     max-height: 90px;
@@ -217,12 +223,6 @@ hr {
     background-color: var(--game);
     border-radius: 10px 10px 0 0;
     overflow: hidden;
-}
-tbody tr:last-child td:last-child {
-    border-radius: 0 0 6px 0;
-}
-tbody tr:last-child td:first-child {
-    border-radius: 0 0 0 3px;
 }
 .modal-footer {
     justify-content: center;

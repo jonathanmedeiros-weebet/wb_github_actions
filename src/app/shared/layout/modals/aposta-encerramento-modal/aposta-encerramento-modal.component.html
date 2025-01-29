@@ -57,7 +57,7 @@
             <tbody>
                 <ng-container *ngFor="let item of aposta.itens">
                     <tr class="cupom">
-                        <td class="item" style="min-width: 3rem; width: 7rem; position: relative">
+                        <td class="item border-left" style="min-width: 3rem; width: 7rem; position: relative">
                             <div style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                 <p class="info-cupom" style="margin-bottom: 0">
                                     {{item.jogo_horario | moment: 'DD/MM'}}
@@ -89,7 +89,7 @@
                                 </p>
                             </div>
                         </td>
-                        <td class="item">
+                        <td class="item border-right">
                             <div style="display: flex; justify-content: center;">
                                 <p class="jogo-resultado" style="float:right" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO <br />

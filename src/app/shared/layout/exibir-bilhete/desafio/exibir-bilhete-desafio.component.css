@@ -59,6 +59,7 @@ hr {
 #jogo-table {
     display: flex;
     flex-direction: row;
+    border-radius: 10px;
     background-color: var(--game);
     border-bottom: 2px dotted var(--bottom-bar);
 }

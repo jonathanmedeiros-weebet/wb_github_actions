@@ -47,6 +47,7 @@
 .cupom-ativo{
     font-size: 12px;
     margin-bottom: 0;
+    border-radius: 10px;
     color: var(--foreground-game);
 }
 .ganhou{
@@ -163,6 +164,7 @@ hr {
     border-bottom: 2px dotted var(--bottom-bar);
     font-size: 12px;
     padding: 10px;
+    border-radius: 10px;
     background: var(--game);
     border-bottom: 2px dotted var(--bottom-bar);
 }
@@ -231,8 +233,6 @@ hr {
 }
 @media only screen and (min-width: 532px) and (max-width: 1024px) {
     .modal-body {
-        max-height: 100vh;
-        height: 100vh;
         overflow: auto;
     }
 }
