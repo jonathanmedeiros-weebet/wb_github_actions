@@ -16,12 +16,12 @@
                                 <p class="campeonato info-cupom">
                                     <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome}}
                                 </p>
-                                <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                <p style="margin-left: 12px" class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                                     {{item.time_a_nome}}
                                     {{item.time_a_resultado}} x {{item.time_b_resultado}}
                                     {{item.time_b_nome}}
                                 </p>
-                                <p class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                                <p style="margin-left: 12px" class="cotacao {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                                     <span class="info-cupom">
                                         {{item.categoria_nome}}:
                                     </span>
@@ -64,7 +64,7 @@
                         <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                             <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                         </p>
-                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-height: 2em;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-height: 2em; margin-left: 12px">
                             <div>
                                 <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
                                     style="font-weight: bolder;">
