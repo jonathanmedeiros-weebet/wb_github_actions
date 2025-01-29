@@ -1,26 +1,34 @@
 <div class="container-stepper">
-    <div class="stepper">
+    <div class="stepper active">
         <div class="circle">
-            <span class="circle-number">1</span>
+            <span *ngIf="currentIndex === 0 else done" class="circle-number">1</span>
         </div>
         <div style="line-height: 95%;">
-            <span class="circle-text" style="color: #FFF;">Dados pessoais</span>
+            <span class="circle-text">Dados pessoais</span>
         </div>
     </div>
-    <div class="stepper" style="border-bottom: 1px solid rgba(255, 255, 255, 0.20);">
-        <div class="circle-disabled">
-            <span class="circle-number">2</span>
+    <div class="stepper" [ngClass]="currentIndex != 0 ? 'active': 'deactived'">
+        <div class="circle">
+            <span *ngIf="currentIndex <= 1 else done" class="circle-number">2</span>
+           
         </div>
         <div>
             <span class="circle-text">Endereço</span>
         </div>
     </div>
-    <div class="stepper" style="border-bottom: 1px solid rgba(255, 255, 255, 0.20);">
-        <div class="circle-disabled">
+    <div class="stepper" [ngClass]="currentIndex === 2 ? 'active': 'deactived'">
+        <div class="circle">
             <span class="circle-number">3</span>
         </div>
         <div>
             <span class="circle-text">Login</span>
         </div>
     </div>
+    <ng-template #done>
+        <span class="circle-number">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" fill="none">
+                <path d="M4.28584 9.00006L0.48584 5.20007L1.43584 4.25007L4.28584 7.10006L10.4025 0.983398L11.3525 1.9334L4.28584 9.00006Z" fill="black"/>
+              </svg>
+        </span>
+    </ng-template>
 </div>

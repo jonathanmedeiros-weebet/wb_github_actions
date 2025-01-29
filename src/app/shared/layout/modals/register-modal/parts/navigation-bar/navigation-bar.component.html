@@ -4,9 +4,9 @@
         (click)="previous()">
         Anterior
     </button>
-    <button [ngClass]="{'active-button': currentIndex ===  totalSteps - 1}"
-        [disabled]="currentIndex === totalSteps - 1"
+    <button
+        [disabled]="!formValid"
         (click)="next()">
-        Próximo
+        {{currentIndex === 2 ? 'Criar conta' : 'Próximo'}}
     </button>
 </div>

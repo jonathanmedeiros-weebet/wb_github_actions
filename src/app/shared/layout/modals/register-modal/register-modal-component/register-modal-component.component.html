@@ -2,7 +2,7 @@
     <div class="container-header">
         <div class="header-register">
             <div class="header-register-item">
-                <a type="button" class="btn-close-register">
+                <a type="button" class="btn-close-register" (click)="onClose()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                         <rect width="32" height="32" rx="2" fill="#181818"/>
                         <path d="M15.9999 17.8667L12.1332 21.7333C11.8888 21.9778 11.5777 22.1 11.1999 22.1C10.8221 22.1 10.511 21.9778 10.2666 21.7333C10.0221 21.4889 9.8999 21.1778 9.8999 20.8C9.8999 20.4222 10.0221 20.1111 10.2666 19.8667L14.1332 16L10.2666 12.1667C10.0221 11.9222 9.8999 11.6111 9.8999 11.2334C9.8999 10.8556 10.0221 10.5445 10.2666 10.3C10.511 10.0556 10.8221 9.93335 11.1999 9.93335C11.5777 9.93335 11.8888 10.0556 12.1332 10.3L15.9999 14.1667L19.8332 10.3C20.0777 10.0556 20.3888 9.93335 20.7666 9.93335C21.1443 9.93335 21.4555 10.0556 21.6999 10.3C21.9666 10.5667 22.0999 10.8836 22.0999 11.2507C22.0999 11.6178 21.9666 11.9231 21.6999 12.1667L17.8332 16L21.6999 19.8667C21.9443 20.1111 22.0666 20.4222 22.0666 20.8C22.0666 21.1778 21.9443 21.4889 21.6999 21.7333C21.4332 22 21.1168 22.1333 20.7506 22.1333C20.3843 22.1333 20.0786 22 19.8332 21.7333L15.9999 17.8667Z" fill="white" fill-opacity="0.5"/>
@@ -12,10 +12,13 @@
         </div>
         <div class="body">
             <div class="body-form-register">
-                <app-stepper-progress-bar></app-stepper-progress-bar>
+                <app-stepper-progress-bar [currentIndex] = "currentIndex"></app-stepper-progress-bar>
             </div>
             <div class="body-register">
-                <app-personal-data *ngIf="currentIndex == 0"></app-personal-data>
+                <app-personal-data *ngIf="currentIndex == 0"
+                (dataPersonal) = "dataChange($event)"
+                [data]= "data">
+                </app-personal-data>
                 <app-address-data *ngIf="currentIndex == 1"></app-address-data>
                 <app-login-data *ngIf="currentIndex == 2"></app-login-data>
             </div>

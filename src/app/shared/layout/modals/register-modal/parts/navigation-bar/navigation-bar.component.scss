@@ -12,17 +12,17 @@ button {
     width: 108px;
     height: 40px;
     border-radius: 4px;
-    border: 1px solid #0BE68D;
+    border: 1px solid var(--highlight);
     background: #181818;
-    color: #0BE68D;
+    color: var(--highlight);
     outline: none;;
 }
 
 .active-button {
     border-radius: 4px;
-    border: 1px solid #0BE68D;
+    border: 1px solid var(--highlight);
     background: #181818;
-    color: #0BE68D;
+    color: var(--highlight);
 }
 
 button:disabled {

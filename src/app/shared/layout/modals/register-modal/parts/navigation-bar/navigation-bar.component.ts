@@ -9,18 +9,26 @@ import { StepService } from 'src/app/shared/services/step.service';
 export class NavigationBarComponent {
     currentIndex = 0;
     totalSteps = 3;
+    formValid = false;
 
     constructor(private stepService: StepService) {
         this.stepService.currentIndex$.subscribe((index) => {
             this.currentIndex = index;
         });
-    }
+        this.stepService.formValid$.subscribe((valid) => {
+            this.formValid = valid;
+        });
+    }   
 
     previous() {
         this.stepService.previous();
     }
 
     next() {
+        if (this.currentIndex === this.totalSteps - 1) {
+            console.log('finalizado');
+        } else {
         this.stepService.next();
+        }
     }
 }
