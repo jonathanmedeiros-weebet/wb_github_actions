@@ -167,7 +167,8 @@ export default {
                 [MarketTime.TOTAL]: {}
             }
 
-            for await (let quote of quotes) {
+            for (let index = 0; index < quotes.length; index++) {
+                const quote = quotes[index];
                 const betType = betOptions[quote.chave];
                 const isPlayerTime = betType?.tempo === MarketTime.PLAYERS;
                 if(!Object.keys(markets).includes(betType?.tempo)) continue; // verifica os tipos de apostas permitidos

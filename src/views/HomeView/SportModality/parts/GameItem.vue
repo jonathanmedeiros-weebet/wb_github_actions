@@ -7,7 +7,7 @@
                 :class="{'game__team--first': index == 0}"
                 :key="index"
             >
-                <img :src="team.image" @error="changeSrcWhenImageError" />
+                <img v-lazy="team.image" @error="changeSrcWhenImageError" />
                 {{ team.name }}
             </span>
             
