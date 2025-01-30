@@ -72,8 +72,8 @@
                     POSSÍVEL RETORNO: <span style="float:right">{{aposta.possibilidade_ganho | currency}}</span>
                 </p>
             </ng-template>
-            <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-                CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
+            <p *ngIf="enabledBookie" class="cambista-paga">
+                CAMBISTA PAGA: <span style="float:right">{{cambistaPaga ?? 0 | currency}}</span>
             </p>
             <hr>
             <hr>

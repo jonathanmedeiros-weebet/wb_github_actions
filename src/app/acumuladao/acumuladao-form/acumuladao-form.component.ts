@@ -142,18 +142,12 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
-            const location = await this.geolocationService.getGeolocation();
-            this.geolocation.next(location);
             let msg = '';
             let valid = true;
             this.dados = {
-                geolocation: this.geolocation.value,
                 apostador: this.form.value.apostador,
                 acumuladao_id: this.acumuladao.id,
                 jogos: [],
-                ibge_code: sessionStorage.getItem('ibge_code'),
-                locale_city: sessionStorage.getItem('locale_city'),
-                locale_state: sessionStorage.getItem('locale_state')
             };
 
             this.acumuladao.jogos.forEach(j => {

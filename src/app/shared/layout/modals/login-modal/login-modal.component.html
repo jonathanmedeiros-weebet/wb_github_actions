@@ -67,7 +67,15 @@
                     <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
                 </div>
 
-                <button type="submit" class="btn btn-custom btn-block">{{'geral.entrar' | translate}}</button>
+                <button *ngIf="!btnDisabled; else btnProcessando"  type="submit" class="btn btn-custom btn-block">
+                    {{'geral.entrar' | translate}}
+                </button>
+                <ng-template #btnProcessando>
+                    <button disabled class="btn btn-custom btn-block">
+                        {{'geral.processando' | translate}}...
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </button>
+                </ng-template>
             </form>
 
             <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">

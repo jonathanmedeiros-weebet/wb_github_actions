@@ -156,7 +156,7 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
 
                     this.showLoadingIndicator = false;
 
-                    // this.live();
+                    this.live();
                 }
             );
     }
@@ -259,6 +259,10 @@ export class JogosAovivoComponent implements OnInit, OnDestroy, DoCheck {
 
     trackById(index: number, campeonato: any): string {
         return campeonato._id;
+    }
+
+    trackByIndex(index: number, cotacao: any): any {
+        return index;
     }
 
     cotacaoPermitida(cotacao) {

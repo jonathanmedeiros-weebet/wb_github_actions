@@ -16,6 +16,7 @@ export * from './shared/services/relatorio.service';
 export * from './shared/services/financeiro.service';
 export * from './shared/services/home.service';
 export * from './shared/services/security.service';
+export * from './shared/services/geolocation.service';
 
 export * from './shared/services/loteria/aposta-loteria.service';
 export * from './shared/services/loteria/preaposta-loteria.service';
@@ -52,6 +53,7 @@ export * from './shared/services/utils/utils.service';
 export * from './shared/services/utils/menu-footer.service';
 export * from './shared/services/utils/layout.service';
 export * from './shared/services/utils/sport-id.service';
+export * from './shared/services/utils/navigator-permissions.service';
 
 /* Authentication Services */
 export * from './shared/services/auth/auth.service';

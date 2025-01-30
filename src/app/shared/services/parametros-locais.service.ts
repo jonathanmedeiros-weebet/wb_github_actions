@@ -298,4 +298,12 @@ export class ParametrosLocaisService {
     getPhoneVerificationService() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.phoneVerificationService : 'amazon';
     }
+    
+    getRestrictionStateBet() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.restriction_state_bet : false;
+    }
+
+    getEnableRequirementPermissionRetrieveLocation() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.enable_requirement_of_permission_to_retrieve_location : false;
+    }
 }
