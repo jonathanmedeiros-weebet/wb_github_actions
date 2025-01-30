@@ -450,11 +450,7 @@ export default {
       printLottery(this.bet)
     },
     handleOpenModalSharedBet() {
-      if(this.bet.tipo == 'loteria') {
-        this.handleShared('link');
-      } else {
-        this.showModalShared = true;
-      }
+      this.showModalShared = true;
     },
     handleCloseModalSharedBet() {
       this.showModalShared = false;
