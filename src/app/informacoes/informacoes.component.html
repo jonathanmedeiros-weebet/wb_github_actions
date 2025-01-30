@@ -2,18 +2,45 @@
     <div class="wrap-stick">
         <app-spinner *ngIf="showLoadingIndicator"></app-spinner>
         <div *ngIf="!showLoadingIndicator">
-            <div class="content-header">
-                <h2>{{tituloPagina}}
-                    <button class="btn float-right" (click)="savePDF()"><i class="fa fa-solid fa-file-pdf"></i></button>
-                    <button class="btn float-right"
-                            printSectionId="print-section"
-                            [printTitle]="tituloPagina"
-                            ngxPrint><i class="fa fa-solid fa-print"></i></button>
-                </h2>
-
-            </div>
-            <div class="content-body" #content id="print-section">
-                <div class="content" [innerHTML]="pagina.conteudo | safeHTML">
+            <div class="content">
+                <div class="container-left">
+                    <div class="content-header">
+                        <h2 class="title">{{tituloPagina}}</h2>
+                        <div class="buttons">
+                            <button id='button-print' class="btn float-right" printSectionId="print-section" [printTitle]="tituloPagina" ngxPrint><i
+                                    class="fa fa-solid fa-print"></i><span>{{'geral.imprimir' | translate}}</span></button>
+                            <button id="button-download" class="btn float-right" (click)="savePDF()"><i class="fa fa-solid fa-file-pdf"></i><span>{{'botoes.save_pdf' | translate}}</span></button>
+                        </div>
+                    </div>
+                    <div class="content-body" #content id="print-section">
+                        <div class="content-page" [innerHTML]="pagina.conteudo | safeHTML">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-rigth">
+                    <div class="links">
+                        <a routerLinkActive="active" [routerLink]="['/informacoes/quem-somos']">
+                            {{'paginas.quem-somos' | translate}}
+                        </a>
+                        <a [routerLink]="['/informacoes/regras']" routerLinkActive="active" *ngIf="hasRegras">
+                            {{'paginas.regras' | translate}}
+                        </a>
+                        <a routerLinkActive="active" [routerLink]="['/informacoes/politica-privacidade']" *ngIf="hasPoliticaPrivacidade">
+                            {{'paginas.politica-privacidade' | translate}}
+                        </a>
+                        <a routerLinkActive="active" [routerLink]="['/informacoes/politica-aml']" *ngIf="hasPoliticaAml">
+                            {{'paginas.politica-aml' | translate}}
+                        </a>
+                        <a routerLinkActive="active" [routerLink]="['/informacoes/termos-condicoes']" *ngIf="hasTermosCondicoes">
+                            {{'paginas.termos-condicoes' | translate}}
+                        </a>
+                        <a routerLinkActive="active" [routerLink]="['/informacoes/jogo-responsavel']" *ngIf="hasJogoResponsavel">
+                            {{'paginas.jogo-responsavel' | translate}}
+                        </a>
+                        <a routerLinkActive="active" [routerLink]="['/informacoes/termos-afiliados']" *ngIf="hasAfiliados">
+                            {{'paginas.partnership-terms' | translate}}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
