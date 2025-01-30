@@ -10,7 +10,7 @@
             > 
                 <template #title>{{ option.name }}</template>
                 <div class="collapse__options" :class="{'collapse__options--grid placar-exato-grid': option.odds.length > 3}">
-                    <div v-if="option.key === 'placar_exato'" class="exact-score-grid">
+                    <div v-if="option.key.includes('placar_exato')" class="exact-score-grid">
                         <div 
                             v-for="(column, colIndex) in option.odds"
                             :key="colIndex"
@@ -119,7 +119,11 @@ export default {
             return Boolean(this.quotes.length)
         },
         options() {
-            const scoreIndex = this.quotes.findIndex(quotes => quotes.key === "placar_exato");
+            const scoreIndex = this.quotes.findIndex(quotes => quotes.key.includes("placar_exato"));
+
+            console.log('cotações',this.quotes);
+
+            console.log('placar',scoreIndex);
 
             if (scoreIndex !== -1) {
                 this.quotes[scoreIndex].odds.sort((a, b) => Number(a.position) - Number(b.position));
