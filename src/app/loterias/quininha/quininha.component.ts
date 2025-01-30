@@ -20,6 +20,7 @@ import * as range from 'lodash.range';
 import { random } from 'lodash';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
+import { HelperService } from '../../services';
 
 @Component({
     selector: 'app-quininha',
@@ -65,7 +66,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         public layoutService: LayoutService,
         private cd: ChangeDetectorRef,
         private geolocationService: GeolocationService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private helperService: HelperService
     ) {
         super();
     }
@@ -101,7 +103,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.sorteioService.getSorteios({tipo: 'quininha', sort: 'data'})
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                sorteios => this.sorteios = sorteios,
+                sorteios => {
+                    sorteios.forEach(element => {
+                        element.formatDate = this.helperService.dateFormat(element.data, "DD/MM/YYYY HH:mm");
+                    });
+                    this.sorteios = sorteios;
+                },
                 error => this.messageService.error(error)
             );
 
