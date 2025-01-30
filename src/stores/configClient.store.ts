@@ -77,6 +77,10 @@ export const useConfigClient = defineStore('configClient', {
     getSenaName: (state) => state.params?.opcoes?.seninha_nome ?? null,
     getQuinaName: (state) => state.params?.opcoes?.quininha_nome ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
+    myBetOptions: (state) => {
+      const betOptions = localStorageService.get(LocalStorageKey.CONFIG_CLIENT);
+      return Boolean(betOptions) ? betOptions : (state.params?.tipos_aposta ?? null)
+    },
     mainOdds: (state) => state.params?.odds_principais ?? [],
     popularLeagues: (state) => state.params?.ligas_populares ?? [],
     blockedGames: (state) => state.params?.jogos_bloqueados ?? [],
