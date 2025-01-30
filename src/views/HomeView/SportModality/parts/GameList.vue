@@ -27,9 +27,9 @@
                 <div class="game-list__items"> 
                     <div class="game-list__item-empty">
                         <div class="game-list__columns">
-                        <span class="game-list__column">1</span>
-                        <span class="game-list__column game-list__column--second">x</span>
-                        <span class="game-list__column">2</span>
+                            <span class="game-list__column">1</span>
+                            <span class="game-list__column game-list__column--second">x</span>
+                            <span class="game-list__column">2</span>
                         </div>
                     </div>
                     <GameItem
@@ -40,7 +40,7 @@
                     />
                 </div>
             </Collapse>
-            <spinner-loading v-if="isLoading" />
+            <SpinnerLoading v-show="isLoading" />
             <div ref="scrollEnd" style="height: 1px;"></div>
         </template>
     </div>
@@ -53,6 +53,7 @@ import { useConfigClient, useHomeStore, useTicketStore } from '@/stores';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
 import { hasQuotaPermission, calculateQuota } from '@/services';
 import SpinnerLoading from '@/components/SpinnerLoading.vue';
+import _ from 'lodash';
 
 export default {
     components: {
@@ -72,39 +73,41 @@ export default {
         }
     },
     mounted() {
-        const options = {
-            root: this.$root.$refs.appElement,
-            rootMargin: '10px',
-            threshold: 1.0,
-        };
+        // Preservar código por algum tempo afim de implementarmos o infinite scroll caso tenhamos necessidade
+        // const options = {
+        //     root: this.$root.$refs.appElement,
+        //     rootMargin: '10px',
+        //     threshold: 1.0,
+        // };
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            this.isLoading = true;
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    this.infiniteHandler();
-                }
-            });
-        }, options);
+        // const observer = new IntersectionObserver((entries, observer) => {
+        //     this.isLoading = true;
+        //     entries.forEach((entry) => {
+        //         if (entry.isIntersecting) {
+        //             this.infiniteHandler();
+        //         }
+        //     });
+        // }, options);
 
-        observer.observe(this.$refs.scrollEnd);
+        // observer.observe(this.$refs.scrollEnd);
     },
     computed: {
         hasChampionshipList() {
             return Boolean(this.championshipList.length);
         },
         championshipList() {
-            if(this.homeStore.isLive){
-                this.championshipListSecondary = this.homeStore.championshipList.slice(0, this.homeStore.paginate).map(this.transformChampionshipList);
-            } else {
-                const championshipList = this.homeStore.championshipList.slice(this.championshipListSecondary.length, this.homeStore.paginate).map(this.transformChampionshipList);
-                this.championshipListSecondary.push(...championshipList);
-            }
-            this.isLoading = false;
-            return this.championshipListSecondary;
+            // Preservar código por algum tempo afim de implementarmos o infinite scroll caso tenhamos necessidade
+            // if(this.homeStore.isLive){
+            //     this.championshipListSecondary = this.homeStore.championshipList.slice(0, this.homeStore.paginate).map(this.transformChampionshipList);
+            // } else {
+            //     const championshipList = this.homeStore.championshipList.slice(this.championshipListSecondary.length, this.homeStore.paginate).map(this.transformChampionshipList);
+            //     this.championshipListSecondary.push(...championshipList);
+            // }
+            // this.isLoading = false;
+            return this.homeStore.championshipList.map(this.transformChampionshipList);
         },
         allCollapsed() {
-            return this.configClientStore.settings.championshipExpanded;;
+            return this.configClientStore.settings.championshipExpanded;
         }
     },
     methods: {
@@ -149,14 +152,15 @@ export default {
         championshipWasOpened(championshipId) {
             return (this.ticketStore.championshipOpened ?? []).includes(championshipId);
         },
-        infiniteHandler() {
+        infiniteHandler: _.debounce(function() {
             if (this.homeStore.paginate >= this.homeStore.championshipList.length) {
                 this.isLoading = false;
                 return;
             }
 
-            this.homeStore.setPaginate(this.homeStore.paginate + 5);
-        }
+            const qty = this.configClientStore.settings.championshipExpanded ? 5 : 10;
+            this.homeStore.setPaginate(this.homeStore.paginate + qty);
+        })
     }
 }
 </script>

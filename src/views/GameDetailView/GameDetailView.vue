@@ -73,7 +73,6 @@ export default {
     async activated() {
         this.loading = true;
         await this.prepareGameDetail();
-        console.log('iniciar preparacap')
         await this.prepareQuotes();
 
         if(!this.isFutebolModality) {
