@@ -13,12 +13,6 @@
         </div>
         <div class="separator">
         </div>
-<!--        <div class="info">-->
-<!--            <h4 class="title">Patrocinador oficial</h4>-->
-<!--            <p>-->
-<!--                <img src="https://wb-assets.com/img/logo-sportivedata.png" class="image">-->
-<!--            </p>-->
-<!--        </div>-->
         <div class="container-center" [ngClass]="{'container-center-full-screen': fullPage}">
             <div #clampParent class="container-footer">
                 <p #lineClamp class="see-more custom-lineclamp" [innerHTML]="rodape | safeHTML" [ngClass]="{'full-screen': fullPage}">
@@ -179,10 +173,6 @@
                         data-anj-image-size="128" data-anj-image-type="basic-small" style="width: 50px"></div>
                 </ng-container>
             </div>
-            
-            <!-- <div class="icons" *ngIf="slug == 'ragnar.bet'">
-                <img src="https://wb-assets.com/img/curacao.png" width="150" height="50" border="0" alt="Gaming Curacao">
-            </div> -->
             <div class="icons">
                 <div class="restricted-adults-container">
                     <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
