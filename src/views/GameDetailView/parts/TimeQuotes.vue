@@ -17,14 +17,14 @@
                             class="exact-column"
                         >
                             <button
-                            class="collapse__option collapse__option--no-flex"
-                            v-for="(odd, oddIndex) in column"
-                            :key="oddIndex"
-                            :class="{
-                                'collapse__option--selected': odd.key === quoteSelected,
-                                'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
-                            }"
-                            @click="handleItemClick(odd, option.name)"
+                                class="collapse__option collapse__option--no-flex"
+                                v-for="(odd, oddIndex) in column"
+                                :key="oddIndex"
+                                :class="{
+                                    'collapse__option--selected': odd.key === quoteSelected,
+                                    'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
+                                }"
+                                @click="handleItemClick(odd, option.name)"
                             >
                             <template v-if="odd.hasPermission">
                                 <IconArrowFillUp
