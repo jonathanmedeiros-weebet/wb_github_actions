@@ -121,10 +121,6 @@ export default {
         options() {
             const scoreIndex = this.quotes.findIndex(quotes => quotes.key.includes("placar_exato"));
 
-            console.log('cotações',this.quotes);
-
-            console.log('placar',scoreIndex);
-
             if (scoreIndex !== -1) {
                 this.quotes[scoreIndex].odds.sort((a, b) => Number(a.position) - Number(b.position));
                 
@@ -132,6 +128,8 @@ export default {
     
                 const columns = Array.from({ length: numColumns }, () => []);
     
+                /*ordenação e organização das odds em 3 colunas */
+
                 this.quotes[scoreIndex].odds.forEach(odd => {
                     const columnIndex = Number(odd.position); 
                     if (columnIndex >= 0 && columnIndex < numColumns) {
