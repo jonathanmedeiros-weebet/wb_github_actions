@@ -8,10 +8,18 @@ import VueMask from 'vue-the-mask'
 import App from './App.vue'
 import router from './router'
 import { useConfigClient } from './stores'
+import VueLazyload from 'vue-lazyload'
 
 Vue.use(VueMask);
 Vue.use(PiniaVuePlugin)
 Vue.use(VueRouter)
+Vue.use(VueLazyload, {
+    preLoad: 1.3, // Distância antes de carregar
+    error: 'https://cdn.wee.bet/img/times/m/default.png', // Imagem de erro
+    loading: 'https://cdn.wee.bet/img/times/m/default.png', // Imagem enquanto carrega
+    attempt: 1, // Tentativas de carregamento
+});
+
 declare var WeebetMessage: any;
 
 new Vue({

@@ -10,6 +10,50 @@
                 ref="collapse"
             > 
                 <template #title>{{ option.title }}</template>
+              <div class="collapse__items">
+                <div
+                    class="collapse__headers"
+                >
+                  <div class="collapse__columns" v-if="option.title === 'Marcadores de gols'"
+                  >
+                      <span class="collapse__column">Primeiro</span>
+                      <span class="collapse__column collapse__column--second">Último</span>
+                      <span class="collapse__column">Partida</span>
+
+                  </div>
+
+                  <div class="collapse__columns" v-if="option.title === 'Multi marcadores'"
+                  >
+                    <span class="collapse__column"></span>
+                    <span class="collapse__column collapse__column--second" style="padding-right: 20px">2 ou +</span>
+                    <span class="collapse__column">3 ou +</span>
+
+                  </div>
+
+                  <div class="collapse__columns" v-if="option.title === 'Cartões'"
+                  >
+                    <span class="collapse__column">1º Cartão</span>
+                    <span class="collapse__column collapse__column--second" >Recebe</span>
+                    <span class="collapse__column">Expulso</span>
+
+                  </div>
+
+                  <div class="collapse__columns" v-if="option.title === `Gols casa - ${game?.time_a_nome}`"
+                  >
+                    <span class="collapse__column"></span>
+                    <span class="collapse__column collapse__column--second" style="padding-right: 20px">Primeiro</span>
+                    <span class="collapse__column">Último</span>
+
+                  </div>
+
+                  <div class="collapse__columns" v-if="option.title === `Gols fora - ${game?.time_b_nome}`"
+                  >
+                    <span class="collapse__column"></span>
+                    <span class="collapse__column collapse__column--second" style="padding-right: 20px">Primeiro</span>
+                    <span class="collapse__column">Último</span>
+
+                  </div>
+                </div>
 
                 <div class="collapse__items">
                     <div
@@ -50,12 +94,13 @@
                                         color="var(--warning)"
                                     />
                                 </template>
-                            
+
                                 <IconLock v-else :size="14" color="var(--league-foreground)"/>
                             </button>
                         </div>
                     </div>
                 </div>
+              </div>
             </Collapse>
         </template>
     </div>
@@ -159,6 +204,38 @@ export default {
 }
 
 .collapse {
+    &__items {
+      flex-direction: column;
+      background: var(--game);
+    }
+
+    &__headers {
+      width: 100%;
+      height: 20px;
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 22px;
+    }
+
+    &__columns {
+      width: 200px;
+      display: flex;
+    }
+
+    &__column {
+      width: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 10px;
+
+
+      &--second {
+        margin: 0 8px;
+      }
+    }
+
     &__options {
         width: 100%;
         display: flex;
