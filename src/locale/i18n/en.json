@@ -497,7 +497,8 @@
         "politica-privacidade": "Privacy Policy",
         "politica-aml": "AML Policy",
         "jogo-responsavel": "Responsible Gaming",
-        "termos-condicoes": "Terms and conditions"
+        "termos-condicoes": "Terms and conditions",
+        "partnership-terms": "Terms of use(Partnership)"
     },
     "jogos": {
         "tempoCompleto": "Full Time",
@@ -653,7 +654,8 @@
         "salvar_alteracoes": "Save Changes",
         "voltar": "Back",
         "logout_continue_login": "Yes, I would like to close the session",
-        "remain_active_session": "No, keep the other session active"
+        "remain_active_session": "No, keep the other session active",
+        "save_pdf": "Save PDF"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",

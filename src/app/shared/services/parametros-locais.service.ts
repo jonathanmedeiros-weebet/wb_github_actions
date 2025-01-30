@@ -272,6 +272,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.barra_indique_ganhe : null;
     }
 
+    sharedURL() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.shared_url : null;
+    }
+
     getCustomCasinoName(wordToReplace: string = '', casinoDefault: string = this.translate.instant('geral.cassino')) {
         const currentLang = this.translate.currentLang;
 
