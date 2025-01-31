@@ -18,15 +18,17 @@ export const useTicketStore = defineStore('ticket', {
         error: ''
     }),
     actions: {
-        setModalityId(modalityId: any) {
+        setModalityId(modalityId: any, clearTicket = false) {
             this.modalityId = modalityId;
 
-            this.value = 0;
-            this.items = {};
-            this.accepted = false;
-            this.error = '';
-            this.bettor = '';
-            this.bettorDocumentNumber = '';
+            if (clearTicket) {
+                this.value = 0;
+                this.items = {};
+                this.accepted = false;
+                this.error = '';
+                this.bettor = '';
+                this.bettorDocumentNumber = '';
+            }
         },
         setError(error: string) {
             this.error = error
