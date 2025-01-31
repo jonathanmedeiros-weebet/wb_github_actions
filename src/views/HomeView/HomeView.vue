@@ -163,7 +163,18 @@ export default {
     async handleModality(modalityId) {
       const modality = this.modalityList.find(modality => modality.id === modalityId);
       this.homeStore.setModality(modality);
-      this.ticketStore.setModalityId(modality.id);
+      
+      const modalitysSelected = [
+        this.Modalities.LOTTERY,
+        this.Modalities.POPULAR_LOTTERY,
+        this.Modalities.ACCUMULATION,
+        this.Modalities.CHALLENGE
+      ].includes(modalityId);
+
+      if (modalitysSelected) {
+        this.ticketStore.setModalityId(modality.id);
+      }
+
       this.homeStore.setDate(now());
       
       if(this.isPopularLotteryModality){
