@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     @ViewChild('demoModal', { static: true }) demoModal;
     @ViewChild('inicialModal', { static: true }) inicialModal;
     @ViewChild('ativacaoCadastroModal', { static: true }) ativacaoCadastroModal;
+    @ViewChild('over18MessageModal', { static: true }) over18MessageModal;
     @ViewChild('wrongVersionModal', { static: true }) wrongVersionModal;
     appUrl = 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/app/app.apk?v=' + (new Date()).getTime();
     imagemInicial;
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit {
     passwordExpired: Boolean;
     modalRef: NgbModalRef;
     subscription: Subscription;
+    under18Confirmed = false;
 
     constructor(
         private auth: AuthService,
@@ -87,6 +89,18 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        if(!localStorage.getItem('+18')) {
+            this.modalRef = this.modalService.open(
+                this.over18MessageModal,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    windowClass: 'modal-lg-custom',
+                    centered: true,
+                    backdrop: 'static',
+                    keyboard: false
+                }
+            );
+        }
         this.route.queryParams
             .subscribe((params) => {
                 if (params.token) {
@@ -386,5 +400,14 @@ export class AppComponent implements OnInit {
             centered: true,
             backdrop: 'static',
         });
+    }
+
+    over18Confirm(){
+        localStorage.setItem('+18', 'true');
+        this.modalRef.close();
+    }
+
+    under18Confirm(){
+        this.under18Confirmed = true;
     }
 }
