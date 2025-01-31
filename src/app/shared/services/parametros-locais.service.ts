@@ -71,7 +71,7 @@ export class ParametrosLocaisService {
                             (function (w, d, src){var h = d.getElementsByTagName("head")[0];
                                 var s=d.createElement("script"); s.src = src;
                                 if (!w.exDocCheck) h.appendChild(s);
-                                
+
                             })(window, document, "https://doccheck.exato.digital/doccheck.js");
                         `;
                         head.appendChild(DockCheckScripSDK);
@@ -272,6 +272,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.barra_indique_ganhe : null;
     }
 
+    sharedURL() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.shared_url : null;
+    }
+
     getCustomCasinoName(wordToReplace: string = '', casinoDefault: string = this.translate.instant('geral.cassino')) {
         const currentLang = this.translate.currentLang;
 
@@ -286,12 +290,24 @@ export class ParametrosLocaisService {
     getSIGAPHabilitado() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.SIGAP_habilitado : null;
     }
-    
+
     getAllowOnlyOneSessionPerLogin() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.allow_single_session : null;
     }
 
     isMandatoryPhoneValidation() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.mandatory_phone_validation : false;
+    }
+
+    getPhoneVerificationService() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.phoneVerificationService : 'amazon';
+    }
+    
+    getRestrictionStateBet() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.restriction_state_bet : false;
+    }
+
+    getEnableRequirementPermissionRetrieveLocation() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.enable_requirement_of_permission_to_retrieve_location : false;
     }
 }

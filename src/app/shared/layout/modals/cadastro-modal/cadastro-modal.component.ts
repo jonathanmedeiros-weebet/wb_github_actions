@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 
 import { Subject } from 'rxjs';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ClienteService, FinanceiroService, MessageService, ParametrosLocaisService, UtilsService } from './../../../../services';
+import { AuthService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService, UtilsService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario';
@@ -23,11 +23,11 @@ import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.servi
 
 declare global {
     interface Window {
-      ex_partner: any;
-      exDocCheck: any;
-      exDocCheckAction: any;
+        ex_partner: any;
+        exDocCheck: any;
+        exDocCheckAction: any;
     }
-  }
+}
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -84,7 +84,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     legitimuzToken = "";
     currentLanguage = 'pt';
     disapprovedIdentity = false;
-    dataUserCPF ='';
+    dataUserCPF = '';
     docCheckToken = '';
     secretHash = '';
     showLoading = true;
@@ -99,6 +99,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     };
 
     fullRegistration = true;
+    currentLocationPermission = null;
+    lastLocationPermission = null;
 
     public countries: any = [];
     public states: any = [];
@@ -124,7 +126,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private docCheck: DocCheckService,
         private ga4Service: Ga4Service,
         private utilitiesService: UtilsService,
-        private location: Location
+        private location: Location,
+        private geolocationService: GeolocationService,
+        private navigatorPermissionsService: NavigatorPermissionsService
+
     ) {
         super();
     }
@@ -161,7 +166,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.getAddressOptions();
         this.faceMatchType = this.paramsService.getOpcoes().faceMatchType;
         this.currentLanguage = this.translate.currentLang;
-        switch(this.faceMatchType) {
+        switch (this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
                 this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchRegister);
@@ -177,8 +182,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 })
                 break;
             default:
-                break;            
-        }  
+                break;
+        }
 
         if (!this.faceMatchEnabled) {
             this.faceMatchRegisterValidated = true;
@@ -528,6 +533,39 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     async submit() {
+        const restrictionStateBet = this.paramsService.getRestrictionStateBet();
+
+        if (restrictionStateBet != 'Todos') {
+            let allowed = true;
+            this.lastLocationPermission = this.currentLocationPermission;
+            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+
+            if (this.currentLocationPermission == 'granted') {
+                if (this.lastLocationPermission == 'denied') {
+                    allowed = false;
+                    location.reload();
+                } else if (!this.geolocationService.checkGeolocation()) {
+                    allowed = await this.geolocationService.saveLocalStorageLocation();
+                }
+            } else if (this.currentLocationPermission == 'denied') {
+                allowed = false;
+            } else if (this.currentLocationPermission == 'prompt') {
+                allowed = await this.geolocationService.saveLocalStorageLocation();
+            }
+
+            if (allowed) {
+                let localeState = localStorage.getItem('locale_state');
+
+                if (restrictionStateBet != localeState) {
+                    this.messageService.error(this.translate.instant('geral.stateRestriction'));
+                    return;
+                }
+            } else {
+                this.messageService.error(this.translate.instant('geral.locationPermission'));
+                return;
+            }
+        }
+
         if (this.menorDeIdade) {
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
             return;

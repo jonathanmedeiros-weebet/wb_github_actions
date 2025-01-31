@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { StatsService } from './../../services';
+import { StatsService, ParametrosLocaisService } from './../../services';
 import { Estatistica } from './../../models';
 import { config } from './../../shared/config';
 import * as moment from 'moment';
@@ -10,7 +10,7 @@ import { ApostaEsportiva, ItemApostaEsportiva } from '../../models';
 
 @Component({
     selector: 'app-cupom-esportes',
-    templateUrl: 'cupom-esportes.component.html',
+    templateUrl: 'cupom-esportes.component.html', 
     styleUrls: ['cupom-esportes.component.css']
 })
 export class CupomEsportesComponent implements OnInit, OnDestroy {
@@ -19,16 +19,18 @@ export class CupomEsportesComponent implements OnInit, OnDestroy {
     stats = {};
     chaves = {};
     cambistaPaga;
+    enabledBookie;
     LOGO = config.LOGO_IMPRESSAO ?? config.LOGO;
     unsub$ = new Subject();
 
     constructor(
-        private statsService: StatsService
+        private statsService: StatsService,
+        private paramsLocais: ParametrosLocaisService
     ) { }
 
     ngOnInit() {
         this.ativarAoVivo();
-
+        this.enabledBookie = this.paramsLocais.getOpcoes().modo_cambista;
         if (this.aposta.passador.percentualPremio > 0) {
             if (this.aposta.resultado) {
                 this.cambistaPaga = this.aposta.premio * ((100 - this.aposta.passador.percentualPremio) / 100);

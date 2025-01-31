@@ -799,4 +799,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     closeNotifications() {
         this.notificationsXtremepushOpen = false;
     }
+
+    allowAgentChangePassword() {
+        let result = true;
+
+        if (this.usuario.tipo_usuario == 'cambista') {
+            result = this.paramsService.getOpcoes().permitir_alterar_senha;
+        }
+
+        return result;
+    }
 }

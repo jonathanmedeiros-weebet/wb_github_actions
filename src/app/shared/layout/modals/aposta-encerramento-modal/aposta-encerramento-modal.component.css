@@ -57,6 +57,7 @@
     background-color: var(--header);
     color: var(--foreground-header);
     font-size: 12px;
+    max-height: 120px;
     padding: 10px;
 }
 .cupom-ativo{

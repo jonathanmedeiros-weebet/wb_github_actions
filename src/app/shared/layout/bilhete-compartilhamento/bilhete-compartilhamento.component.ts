@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { config } from './../../config';
 import {
     ParametrosLocaisService, HelperService,
-    AuthService, MessageService, ImagensService
+    AuthService, MessageService, ImagensService,
 } from '../../../services';
 
 import { toPng } from 'html-to-image';
@@ -24,6 +24,7 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     @Input() aposta: any;
     opcoes;
     cambistaPaga;
+    enabledBookie;
     appMobile;
     LOGO;
     modalCarregamentoRef;
@@ -42,6 +43,7 @@ export class BilheteCompartilhamentoComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
+        this.enabledBookie = this.opcoes.modo_cambista;
 
         if (this.aposta.passador.percentualPremio > 0) {
             if (this.aposta.resultado) {

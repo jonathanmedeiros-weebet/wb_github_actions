@@ -266,6 +266,8 @@
         "or": "OR",
         "geolocationError": "Please check your browser's location settings and try again.",
         "restricaoDeLocalizacao": "This feature is available only to users in Brazil.",
+        "stateRestriction": "This feature is not available in your state.",
+        "locationPermission": "To use this feature, you need to enable location in your browser.",
         "lastAccesses": "Last accesses",
         "action": "Action",
         "tax": "Tax",
@@ -488,7 +490,7 @@
         "jogoResponsavel": "Responsible Gaming",
         "termosECondicoes": "Terms and conditions",
         "feedback": "Feedback",
-        "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. All rights reserved."
+        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. All rights reserved."
     },
     "paginas": {
         "quem-somos": "Who we are",
@@ -496,7 +498,8 @@
         "politica-privacidade": "Privacy Policy",
         "politica-aml": "AML Policy",
         "jogo-responsavel": "Responsible Gaming",
-        "termos-condicoes": "Terms and conditions"
+        "termos-condicoes": "Terms and conditions",
+        "partnership-terms": "Terms of use(Partnership)"
     },
     "jogos": {
         "tempoCompleto": "Full Time",
@@ -609,10 +612,10 @@
         "lista_como_indicar": "How to refer",
         "lista_como_indicar_text": "To refer a new user, you should share the referral link in the 'Refer and Earn' section of your account, located in the Promotions menu. The referred user must register using your referral link. The referrer will have a total of {{limiteIndicacoes}} eligible referrals for commissioning; any referrals exceeding this quantity will not be eligible for commission.",
         "lista_bonus_indicador": "Referrer Bonus",
-        "lista_bonus_indicador_text": "For each user you refer who registers, makes a deposit of at least R${{valorMinDepositado}}, and places bets totaling at least R${{valorMinApostado}} within {{qtdDiasRequisitos}} day(s), you will earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance. This balance will be released for withdrawal in the 'My Referrals' section within 24 hours after the REFERRED user fulfills the promotion rules. You will have a period of {{prazoResgateSaldo}} days to redeem.",
+        "lista_bonus_indicador_text": "For each user you refer who registers, makes a deposit of at least R${{valorMinDepositado}}, and place {{numberBets}} bet(s) that total at least R${{valorMinApostado}} within {{qtdDiasRequisitos}} day(s), you will earn R${{valorGanhoPorIndicacao}} in {{tipoSaldoGanho}} balance. This balance will be released for withdrawal in the 'My Referrals' section within 24 hours after the REFERRED user fulfills the promotion rules. You will have a period of {{prazoResgateSaldo}} days to redeem.",
         "real_sacavel": "real (withdrawable)",
         "lista_deposito_indicado": "Referee's Deposit",
-        "lista_deposito_indicado_text": "The referred user must make a minimum deposit of R${{valorMinDepositado}} into their account and place a minimum bet of R${{valorMinApostado}} for the balance of R${{valorGanhoPorIndicacao}} to be credited to the referrer's account.",
+        "lista_deposito_indicado_text": "The referred user must make a minimum deposit of R${{valorMinDepositado}} into their account and place {{numberBets}} bet(s) that total at least R${{valorMinApostado}} for the balance of R${{valorGanhoPorIndicacao}} to be credited to the referrer's account.",
         "lista_prevencao_fraudes": "Fraud Prevention",
         "lista_prevencao_fraudes_text": "{{nomeBanca}} actively monitors the use of the Refer and Earn system to prevent fraud. Any attempt at fraud, such as creating multiple accounts from the same IP address, will only consider the first eligible registration for balance gain; any subsequent ones will be disregarded.",
         "ultimo_paragrafo": "By participating in the Refer and Earn system, you agree that you have read, understood, and agreed to comply with these rules. It is the referrer's responsibility to ensure that the referred users are aware of and agree to these rules before registering with {{nomeBanca}}.",
@@ -652,7 +655,8 @@
         "salvar_alteracoes": "Save Changes",
         "voltar": "Back",
         "logout_continue_login": "Yes, I would like to close the session",
-        "remain_active_session": "No, keep the other session active"
+        "remain_active_session": "No, keep the other session active",
+        "save_pdf": "Save PDF"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",

@@ -94,8 +94,8 @@
             <div *ngIf="aposta.resultado && aposta.resultado != 'a confirmar'">
                 <b>{{'geral.premio' | translate}} :</b> {{aposta.premio | currency}}
             </div>
-            <div *ngIf="aposta.passador.percentualPremio > 0">
-                <b>Cambista Paga:</b> {{cambistaPaga | currency}}
+            <div *ngIf="enabledBookie">
+                <b>Cambista Paga:</b> {{cambistaPaga ?? 0 | currency}}
             </div>
             <div>
                 <b>Status do Bilhete:</b> {{aposta.ativo ? 'ATIVO' : 'CANCELADO'}}

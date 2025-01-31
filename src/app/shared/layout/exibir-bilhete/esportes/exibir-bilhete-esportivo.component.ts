@@ -25,6 +25,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     LOGO = config.LOGO;
     opcoes;
     cambistaPaga;
+    enabledBookie;
     appMobile;
     isCliente;
     isLoggedIn;
@@ -42,6 +43,7 @@ export class ExibirBilheteEsportivoComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
+        this.enabledBookie = this.opcoes.modo_cambista;
         this.auth.logado
             .subscribe(
                 isLoggedIn => {

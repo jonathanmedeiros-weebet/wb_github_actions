@@ -262,6 +262,8 @@
         "or": "O",
         "geolocationError": "Por favor, verifique la configuración de ubicación de su navegador y intente nuevamente.",
         "restricaoDeLocalizacao": "Este recurso está disponible solo para usuarios en Brasil.",
+        "stateRestriction": "Esta función no está disponible en su estado.",
+        "locationPermission": "Para utilizar esta función, debe habilitar la ubicación en su navegador.",
         "lastAccesses": "Últimos accesos",
         "action": "Acción",
         "jogosRelacionados": "juegos relacionados",
@@ -483,7 +485,7 @@
         "jogoResponsavel": "Juego responsable",
         "termosECondicoes": "Términos y condiciones",
         "feedback": "Ouvidoria",
-        "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. Todos los derechos reservados."
+        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. Todos los derechos reservados."
     },
     "paginas": {
         "quem-somos": "Quiénes somos",
@@ -491,7 +493,8 @@
         "politica-privacidade": "Política de privacidad",
         "politica-aml": "Política AML",
         "jogo-responsavel": "Juego responsable",
-        "termos-condicoes": "Términos y condiciones"
+        "termos-condicoes": "Términos y condiciones",
+        "partnership-terms": "Términos de uso (Asociaciones)"
     },
     "jogos": {
         "tempoCompleto": "Tiempo completo",
@@ -604,10 +607,10 @@
         "lista_como_indicar": "Cómo referir",
         "lista_como_indicar_text": "Para referir a un nuevo usuario, debes compartir el enlace de referencia en la sección 'Recomienda y Gana' de tu cuenta, ubicada en el menú de Promociones. El usuario referido debe registrarse utilizando tu enlace de referencia. El recomendador tendrá un total de {{limiteIndicacoes}} referencias elegibles para la comisión; cualquier referencia que exceda esta cantidad no será elegible para la comisión.",
         "lista_bonus_indicador": "Bono para el recomendador",
-        "lista_bonus_indicador_text": "Por cada usuario que refieras que se registre, haga un depósito de al menos R${{valorMinDepositado}} y coloque apuestas que sumen al menos R${{valorMinApostado}} dentro de los {{qtdDiasRequisitos}} día(s), ganarás R${{valorGanhoPorIndicacao}} en saldo {{tipoSaldoGanho}}. Este saldo se liberará para su retiro en la sección 'Mis Referencias' dentro de las 24 horas después de que el USUARIO REFERIDO cumpla con las reglas de la promoción. Tendrás un período de {{prazoResgateSaldo}} días para canjear.",
+        "lista_bonus_indicador_text": "Por cada usuario que refieras que se registre, haga un depósito de al menos R${{valorMinDepositado}} y realizar {{numberBets}} apuesta(s) que sumen un valor total de al menos R${{valorMinApostado}} dentro de los {{qtdDiasRequisitos}} día(s), ganarás R${{valorGanhoPorIndicacao}} en saldo {{tipoSaldoGanho}}. Este saldo se liberará para su retiro en la sección 'Mis Referencias' dentro de las 24 horas después de que el USUARIO REFERIDO cumpla con las reglas de la promoción. Tendrás un período de {{prazoResgateSaldo}} días para canjear.",
         "real_sacavel": "real (retirable)",
         "lista_deposito_indicado": "Depósito del referido",
-        "lista_deposito_indicado_text": "El usuario referido debe realizar un depósito mínimo de R${{valorMinDepositado}} en su cuenta y colocar una apuesta mínima de R${{valorMinApostado}} para que el saldo de R${{valorGanhoPorIndicacao}} se acredite en la cuenta del recomendador.",
+        "lista_deposito_indicado_text": "El usuario referido debe realizar un depósito mínimo de R${{valorMinDepositado}} en su cuenta y realizar {{numberBets}} apuesta(s) que sumen un valor total de al menos R${{valorMinApostado}} para que el saldo de R${{valorGanhoPorIndicacao}} se acredite en la cuenta del recomendador.",
         "lista_prevencao_fraudes": "Prevención de fraudes",
         "lista_prevencao_fraudes_text": "{{nomeBanca}} supervisa activamente el uso del sistema Recomienda y Gana para prevenir fraudes. Cualquier intento de fraude, como la creación de múltiples cuentas desde la misma dirección IP, solo considerará el primer registro elegible para la ganancia de saldo; cualquier registro posterior será descartado.",
         "ultimo_paragrafo": "Al participar en el sistema Recomienda y Gana, aceptas que has leído, entendido y aceptado cumplir con estas reglas. Es responsabilidad del recomendador asegurarse de que los usuarios referidos estén al tanto de y acepten estas reglas antes de registrarse en {{nomeBanca}}.",
@@ -647,7 +650,8 @@
         "salvar_alteracoes": "Guardar Cambios",
         "voltar": "Volver",
         "logout_continue_login": "Sí, me gustaría cerrar la sesión.",
-        "remain_active_session": "No, seguir con la otra sesión activa"
+        "remain_active_session": "No, seguir con la otra sesión activa",
+        "save_pdf": "Guardar PDF"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",

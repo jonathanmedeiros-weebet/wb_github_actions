@@ -51,6 +51,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     encerrando = false;
     isCliente;
     isMobile;
+    enabledBookie;
     urlBilheteAoVivo;
     origin;
     process = false;
@@ -90,6 +91,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         this.urlBilheteAoVivo = `https://${config.SLUG}/bilhete/${this.aposta.codigo}${this.origin}`;
 
         this.opcoes = this.paramsLocais.getOpcoes();
+        this.enabledBookie = this.opcoes.modo_cambista;
 
         if (this.aposta.passador.percentualPremio > 0) {
             if (this.aposta.resultado) {

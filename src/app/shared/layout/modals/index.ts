@@ -26,3 +26,4 @@ export { CarregamentoModalComponent } from './carregamento-modal/carregamento-mo
 export { CompatilhamentoBilheteModal } from './compartilhamento-bilhete-modal/compartilhamento-bilhete-modal.component';
 export { CanceledBonusConfirmComponent } from './canceled-bonus-confirm/canceled-bonus-confirm.component';
 export { ValidatePhoneModalComponent } from './validate-phone-modal/validate-phone-modal.component';
+export { StateRestrictionModalComponent } from './state-restriction-modal/state-restriction-modal.component';
