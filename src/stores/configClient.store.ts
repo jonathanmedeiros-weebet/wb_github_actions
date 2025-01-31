@@ -78,7 +78,7 @@ export const useConfigClient = defineStore('configClient', {
     getQuinaName: (state) => state.params?.opcoes?.quininha_nome ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
     myBetOptions: (state) => {
-      const betOptions = localStorageService.get(LocalStorageKey.CONFIG_CLIENT);
+      const betOptions = localStorageService.get(LocalStorageKey.BET_TYPES);
       return Boolean(betOptions) ? betOptions : (state.params?.tipos_aposta ?? null)
     },
     mainOdds: (state) => state.params?.odds_principais ?? [],
