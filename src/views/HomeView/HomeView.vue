@@ -162,6 +162,7 @@ export default {
     },
     async handleModality(modalityId) {
       const modality = this.modalityList.find(modality => modality.id === modalityId);
+      const previousModality = this.homeStore.modality;  
       this.homeStore.setModality(modality);
 
       const modalitysSelected = [
@@ -170,9 +171,18 @@ export default {
         this.Modalities.ACCUMULATION,
         this.Modalities.CHALLENGE
       ].includes(modalityId);
-      
-      this.ticketStore.setModalityId(modality.id, modalitysSelected);
 
+      const previousModalitysSelected = [
+        this.Modalities.LOTTERY,
+        this.Modalities.POPULAR_LOTTERY,
+        this.Modalities.ACCUMULATION,
+        this.Modalities.CHALLENGE
+      ].includes(previousModality.id);
+
+      if (previousModalitysSelected && !modalitysSelected || !previousModalitysSelected && modalitysSelected) {
+        this.ticketStore.setModalityId(modality.id, true);
+      }
+      
       this.homeStore.setDate(now());
       this.homeStore.setPaginate(10);
       
