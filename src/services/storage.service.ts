@@ -2,7 +2,8 @@ export enum LocalStorageKey {
     CONFIG_CLIENT = 'config_client',
     TOKEN = 'cToken',
     USER = 'user',
-    BET_TYPES = 'bet_types'
+    BET_TYPES = 'bet_types',
+    SETTINGS = 'settings'
 }
 
 export const localStorageService = {

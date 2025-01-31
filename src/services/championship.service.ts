@@ -140,15 +140,9 @@ export const calculateQuota = ({
 }: CalculateQuotaParams) => {
     const FAVORITE_QUOTE_HOME = 'casa'
     const FAVORITE_QUOTE_OUTSIDE = 'fora'
-    const { betOptions, localQuotes, options } = useConfigClient();
-
-    let betTypes = localStorageService.get(LocalStorageKey.BET_TYPES);
-    if(!Boolean(betTypes)) {
-        betTypes = betOptions;
-    }
+    const { myBetOptions, localQuotes, options } = useConfigClient();
     
-    const betType = betTypes[key] ?? undefined;
-
+    const betType = myBetOptions[key] ?? undefined;
     if (localQuotes[gameEventId] && localQuotes[gameEventId][key]) {
         value = parseFloat(localQuotes[gameEventId][key].valor);
     }

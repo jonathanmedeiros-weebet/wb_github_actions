@@ -37,6 +37,11 @@ const prepareClientHost = () => {
   return Boolean(configClient) ? `${configClient.host}/api` : `${_host}/api`
 }
 
+const prepareChampionshipExpanded = () => {
+  const settings = localStorageService.get(LocalStorageKey.SETTINGS);
+  return Boolean(settings) ? settings?.championshipExpanded : true;
+}
+
 export const useConfigClient = defineStore('configClient', {
   state: () => ({
     name: prepareClientName(),
@@ -53,6 +58,9 @@ export const useConfigClient = defineStore('configClient', {
       apkVersion: 0,
       printerWidth: 58
     },
+    settings: {
+      championshipExpanded: prepareChampionshipExpanded(),
+    }
   }),
   getters: {
     config: (state) => state,
@@ -69,6 +77,10 @@ export const useConfigClient = defineStore('configClient', {
     getSenaName: (state) => state.params?.opcoes?.seninha_nome ?? null,
     getQuinaName: (state) => state.params?.opcoes?.quininha_nome ?? null,
     betOptions: (state) => state.params?.tipos_aposta ?? null,
+    myBetOptions: (state) => {
+      const betOptions = localStorageService.get(LocalStorageKey.CONFIG_CLIENT);
+      return Boolean(betOptions) ? betOptions : (state.params?.tipos_aposta ?? null)
+    },
     mainOdds: (state) => state.params?.odds_principais ?? [],
     popularLeagues: (state) => state.params?.ligas_populares ?? [],
     blockedGames: (state) => state.params?.jogos_bloqueados ?? [],
@@ -138,6 +150,14 @@ export const useConfigClient = defineStore('configClient', {
         ...this.printerSetting,
         ...setting
       }
+    },
+    setSettings(settings: any) {
+      this.settings = {
+        ...this.settings,
+        ...settings
+      }
+
+      localStorageService.set(LocalStorageKey.SETTINGS, this.settings);
     },
     setBlockedChampionships(sportId: string, ids: string[]) {
       if (!this.params.campeonatos_bloqueados) {
