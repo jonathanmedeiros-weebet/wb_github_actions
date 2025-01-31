@@ -165,21 +165,21 @@ export default {
       const previousModality = this.homeStore.modality;  
       this.homeStore.setModality(modality);
 
-      const modalitysSelected = [
+      const previousModalitySelectedIsNotSport = [
         this.Modalities.LOTTERY,
         this.Modalities.POPULAR_LOTTERY,
         this.Modalities.ACCUMULATION,
         this.Modalities.CHALLENGE
       ].includes(modalityId);
 
-      const previousModalitysSelected = [
+      const newModalitySelectedIsNotSport = [
         this.Modalities.LOTTERY,
         this.Modalities.POPULAR_LOTTERY,
         this.Modalities.ACCUMULATION,
         this.Modalities.CHALLENGE
       ].includes(previousModality.id);
 
-      const clearTicket = previousModalitysSelected && !modalitysSelected || !previousModalitysSelected && modalitysSelected;
+      const clearTicket = newModalitySelectedIsNotSport && !previousModalitySelectedIsNotSport || !newModalitySelectedIsNotSport && previousModalitySelectedIsNotSport;
 
       this.ticketStore.setModalityId(modality.id, clearTicket);
       
