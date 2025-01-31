@@ -148,9 +148,14 @@ export default {
   methods: {
     onInit() {
       if(!Boolean(this.modality)) {
-        const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
+        const hasTicketModalityId = Boolean(this.ticketStore.modalityId);
+        const modalityId = hasTicketModalityId ? this.ticketStore.modalityId : this.Modalities.FOOTBALL;
+        const modality = this.modalityList.find(modality => modality.id === modalityId);
         this.homeStore.setModality(modality);
-        this.ticketStore.setModalityId(modality.id);
+
+        if(!hasTicketModalityId) {
+          this.ticketStore.setModalityId(modalityId);
+        }
       }
     },
 
