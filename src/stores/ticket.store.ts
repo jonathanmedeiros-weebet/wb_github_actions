@@ -18,7 +18,7 @@ export const useTicketStore = defineStore('ticket', {
         error: ''
     }),
     actions: {
-        setModalityId(modalityId: any, clearTicket = false) {
+        setModalityId(modalityId: any, clearTicket = true) {
             this.modalityId = modalityId;
 
             if (clearTicket) {
