@@ -9,38 +9,79 @@
                 :key="groupIndex"
             > 
                 <template #title>{{ option.name }}</template>
-                <div class="collapse__options" :class="{'collapse__options--grid': option.odds.length > 3}">
-                    <button
-                        class="collapse__option"
-                        v-for="(odd, oddIndex) in option.odds"
-                        :key="`${oddIndex}-${groupIndex}`"
-                        :class="{
-                            'collapse__option--selected': odd.key === quoteSelected,
-                            'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
-                        }"
-                        @click="handleItemClick(odd, option.name)"
-                    >
-                        <template v-if="odd.hasPermission">
-                            <IconArrowFillUp
-                                class="collapse__icon-option"
-                                v-if="isIncreasedOdd(odd)"
-                                :size="14"
-                                color="var(--success)"
-                            />
-                            <span class="collapse__label">{{ odd.label }}</span>
-                            <span class="collapse__value">{{ odd.finalValue }}</span>
-                            <IconArrowFillDown
-                                class="collapse__icon-option"
-                                v-if="isDecreasedOdd(odd)"
-                                :size="14"
-                                color="var(--warning)"
-                            />
-                        </template>
-                        <template v-else>
-                            <span class="collapse__label">{{ odd.label }}</span>
-                            <IconLock :size="14" color="var(--league-foreground)"/>
-                        </template>
-                    </button>
+                <div class="collapse__options" :class="{'collapse__options--grid placar-exato-grid': option.odds.length > 3}">
+                    <div v-if="option.key.includes('placar_exato')" class="exact-score-grid">
+                        <div 
+                            v-for="(column, colIndex) in option.odds"
+                            :key="colIndex"
+                            class="exact-column"
+                        >
+                            <button
+                                class="collapse__option collapse__option--no-flex"
+                                v-for="(odd, oddIndex) in column"
+                                :key="oddIndex"
+                                :class="{
+                                    'collapse__option--selected': odd.key === quoteSelected,
+                                    'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
+                                }"
+                                @click="handleItemClick(odd, option.name)"
+                            >
+                            <template v-if="odd.hasPermission">
+                                <IconArrowFillUp
+                                    class="collapse__icon-option"
+                                    v-if="isIncreasedOdd(odd)"
+                                    :size="14"
+                                    color="var(--success)"
+                                />
+                                <span class="collapse__label">{{ odd.label }}</span>
+                                <span class="collapse__value">{{ odd.finalValue }}</span>
+                                <IconArrowFillDown
+                                    class="collapse__icon-option"
+                                    v-if="isDecreasedOdd(odd)"
+                                    :size="14"
+                                    color="var(--warning)"
+                                />
+                            </template>
+                            <template v-else>
+                                <span class="collapse__label">{{ odd.label }}</span>
+                                <IconLock :size="14" color="var(--league-foreground)"/>
+                            </template>
+                            </button>
+                        </div>
+                    </div>
+                    <template v-else>
+                        <button 
+                            class="collapse__option"
+                            v-for="(odd, oddIndex) in option.odds"
+                            :key="`${oddIndex}-${groupIndex}`"
+                            :class="{
+                                'collapse__option--selected': odd.key === quoteSelected,
+                                'collapse__option--live': isDecreasedOdd(odd) || isIncreasedOdd(odd),
+                            }"
+                            @click="handleItemClick(odd, option.name)"
+                        >
+                            <template v-if="odd.hasPermission">
+                                <IconArrowFillUp
+                                    class="collapse__icon-option"
+                                    v-if="isIncreasedOdd(odd)"
+                                    :size="14"
+                                    color="var(--success)"
+                                />
+                                <span class="collapse__label">{{ odd.label }}</span>
+                                <span class="collapse__value">{{ odd.finalValue }}</span>
+                                <IconArrowFillDown
+                                    class="collapse__icon-option"
+                                    v-if="isDecreasedOdd(odd)"
+                                    :size="14"
+                                    color="var(--warning)"
+                                />
+                            </template>
+                            <template v-else>
+                                <span class="collapse__label">{{ odd.label }}</span>
+                                <IconLock :size="14" color="var(--league-foreground)"/>
+                            </template>
+                        </button>
+                    </template>
                 </div>
             </Collapse>
         </template>
@@ -78,7 +119,31 @@ export default {
             return Boolean(this.quotes.length)
         },
         options() {
-            return this.quotes;
+            const scoreIndex = this.quotes.findIndex(quotes => quotes.key.includes("placar_exato"));
+
+            if (scoreIndex !== -1) {
+                this.quotes[scoreIndex].odds.sort((a, b) => Number(a.position) - Number(b.position));
+                
+                const numColumns = 3; 
+    
+                const columns = Array.from({ length: numColumns }, () => []);
+    
+                /*ordenação e organização das odds em 3 colunas */
+
+                this.quotes[scoreIndex].odds.forEach(odd => {
+                    const columnIndex = Number(odd.position); 
+                    if (columnIndex >= 0 && columnIndex < numColumns) {
+                        columns[columnIndex].push(odd);
+                    }
+                });
+                
+                this.quotes[scoreIndex].odds = columns;
+
+                return this.quotes;
+            } else {
+                return this.quotes;
+            }
+            
         },
         quoteSelected() {
             return this.ticketStore.items[this.game._id]?.quoteKey ?? null;
@@ -187,6 +252,10 @@ export default {
             background: #35cd96;
             background: var(--highlight);
         }
+        
+        &--no-flex {
+            flex: none;
+        }
     }
 
     &__option:nth-child(1),
@@ -259,5 +328,22 @@ export default {
 ::v-deep .collapse__title {
     color: #ffffff;
     color: var(--league-foreground);
+}
+
+.exact-score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  
+  .collapse__option {
+    margin: 0 !important;
+  }
+}
+
+.exact-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 </style>
