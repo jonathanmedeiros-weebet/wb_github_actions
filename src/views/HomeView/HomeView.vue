@@ -179,9 +179,9 @@ export default {
         this.Modalities.CHALLENGE
       ].includes(previousModality.id);
 
-      if (previousModalitysSelected && !modalitysSelected || !previousModalitysSelected && modalitysSelected) {
-        this.ticketStore.setModalityId(modality.id, true);
-      }
+      const clearTicket = previousModalitysSelected && !modalitysSelected || !previousModalitysSelected && modalitysSelected;
+
+      this.ticketStore.setModalityId(modality.id, clearTicket);
       
       this.homeStore.setDate(now());
       this.homeStore.setPaginate(10);
