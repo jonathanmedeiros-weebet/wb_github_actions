@@ -176,7 +176,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(zendeskChat, 'display', 'none');
         }
 
-        const intercomChat = this.document.querySelector('#intercom-container');
+        const intercomChat = this.document.querySelector('.intercom-launcher');
         if (intercomChat) {
             this.renderer.setStyle(intercomChat, 'display', 'none');
         }
@@ -604,7 +604,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             });
         }
 
-        const intercomChat = this.document.querySelector('#intercom-container');
+        const intercomChat = this.document.querySelector('.intercom-launcher');
         if (intercomChat) {
             this.renderer.setStyle(intercomChat, 'display', 'block');
         }
