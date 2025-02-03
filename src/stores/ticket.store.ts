@@ -29,16 +29,18 @@ export const useTicketStore = defineStore('ticket', {
         error: ''
     }),
     actions: {
-        setModalityId(modalityId: any) {
+        setModalityId(modalityId: any, clearTicket = true) {
             this.modalityId = modalityId;
 
-            this.value = 0;
-            this.items = {};
-            this.accepted = false;
-            this.error = '';
-            this.bettor = '';
-            this.bettorDocumentNumber = '';
-            localStorageService.set(LocalStorageKey.TICKET_ITEMS, this.items);
+            if (clearTicket) {
+                this.value = 0;
+                this.items = {};
+                this.accepted = false;
+                this.error = '';
+                this.bettor = '';
+                this.bettorDocumentNumber = '';
+                localStorageService.set(LocalStorageKey.TICKET_ITEMS, this.items);
+            }
             localStorageService.set(LocalStorageKey.TICKET_MODALITY_ID, this.modalityId);
         },
         setError(error: string) {
