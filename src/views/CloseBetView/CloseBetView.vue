@@ -23,7 +23,7 @@
             </div>
             <div class="gain__item">
               <span>Cotação:</span>
-              <span class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 3) }}</span>
+              <span class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 2) }}</span>
             </div>
             <div class="gain__item">
               <span>Valor Apostado:</span>
