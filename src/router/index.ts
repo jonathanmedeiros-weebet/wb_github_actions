@@ -242,6 +242,7 @@ router.beforeEach(async (to, from, next) => {
     if (hasToken) {
       next();
     } else {
+      localStorageService.removeAuth();
       next({ name: 'login' });
     }
   } else if ((to.name === 'login') && hasToken) {
