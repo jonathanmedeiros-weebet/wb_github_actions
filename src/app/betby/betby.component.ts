@@ -115,6 +115,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         const elementChat = document.querySelector('#chat-widget-container');
         const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
         const elementChatJivo = document.querySelector('#jivo_custom_widget');
+        const elementChatIntercom = document.querySelector('#intercom-container');
 
         if (elementChat) {
             this.renderer.setStyle(elementChat, 'display', 'none');
@@ -126,6 +127,10 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
         if (elementChatJivo) {
             this.renderer.setStyle(elementChatJivo, 'display', 'none');
+        }
+
+        if (elementChatIntercom) {
+            this.renderer.setStyle(elementChatIntercom, 'display', 'none');
         }
     }
 
