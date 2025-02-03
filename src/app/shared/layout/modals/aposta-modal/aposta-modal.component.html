@@ -1,14 +1,5 @@
-<div class="modal-header" [ngClass]="{'classe-esportes': aposta.tipo === 'esportes'}">
-    <h4 class="modal-title" id="modal-basic-title" *ngIf="aposta.tipo != 'esportes'">Aposta</h4>
-    <div>
-        <h5 class="modal-title-mobile" id="modal-basic-title">Aposta</h5>
-        <h5 class="modal-esportes-title" id="modal-basic-title">Código da aposta: {{aposta.codigo}}</h5>
-        <h6 class="info-horario"><b>Horário:</b> {{aposta.horario | moment: 'DD/MM/YYYY HH:mm'}}</h6>
-        <h6 class="computado" *ngIf="aposta?.data_liquidacao">
-            <b>{{'geral.computadoEm' | translate}}</b>
-            <span> {{aposta.data_liquidacao | moment: 'DD/MM/YYYY HH:mm'}}</span>
-        </h6>
-    </div>
+<div class="modal-header" style="border-bottom: 0;" [ngClass]="{'classe-esportes': aposta.tipo === 'esportes'}">
+    <h4 class="modal-title" id="modal-basic-title">Aposta</h4>
     <div class="action-buttons">
         <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="{{urlBilheteAoVivo}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
             <i class="fa fa-external-link"></i>
@@ -19,7 +10,7 @@
         <button type="button" *ngIf="pagamentoPermitido()" (click)="setPagamento()" title="PAGAMENTO DA APOSTA">
             <i class="fa fa-money"></i>
         </button>
-        <button type="button" *ngIf="compartilhamentoPermitido()" (click)="shareTicket()" class="shared-ticket" title="COMPARTILHAR">
+        <button type="button" (click)="compartilhamentoPermitido() ? shareTicket() : shareBetLink(aposta)" class="shared-ticket" title="COMPARTILHAR">
             <i class="fa fa-share-alt"></i>
         </button>
         <button type="button" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -28,17 +19,27 @@
     </div>
 </div>
 
-<div class="modal-body cupom-ativo" *ngIf="aposta.tipo != 'esportes'; else bilheteEsporte">
-    <app-exibir-bilhete-esportivo [aposta]="aposta" *ngIf="aposta.tipo == 'esportes'">
-    </app-exibir-bilhete-esportivo>
-    <app-exibir-bilhete-loteria [aposta]="aposta" *ngIf="aposta.tipo == 'loteria'">
-    </app-exibir-bilhete-loteria>
+<div class="modal-body cupom-header" style="min-height: 15vh;" *ngIf="aposta.tipo != 'casino'">
+    <div style="display: flex; flex-direction: column; justify-items: center; text-align: center;">
+        <p style="font-weight: 400;">{{(aposta.tipo == 'casino' ? aposta.modalidade : aposta.tipo) | titlecase}}</p>
+        <p style="font-size: 16px">{{aposta.codigo}} <i (click)="copyToClipboard(aposta.codigo)" style="cursor: pointer; margin-left: 0.25rem;" class="far fa-copy"></i></p>
+        <p style="font-weight: 400;">Em {{aposta.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
+        <p *ngIf="aposta?.data_liquidacao">
+            <span>{{'geral.liquidadoEm' | translate}}</span>
+            <span> {{convertDate(aposta.data_liquidacao)}}</span>
+        </p>
+    </div>
+</div>
+
+<div class="modal-body" [ngStyle]="{'background-color': aposta.tipo == 'casino' ? 'var(--game)' : ''}" *ngIf="aposta.tipo != 'esportes'; else bilheteEsporte">
+    <app-exibir-bilhete-loteria [aposta]="aposta" *ngIf="aposta.tipo == 'loteria'"></app-exibir-bilhete-loteria>
     <app-bilhete-acumuladao [aposta]="aposta" *ngIf="aposta.tipo == 'acumuladao'">
     </app-bilhete-acumuladao>
     <app-exibir-bilhete-desafio [aposta]="aposta" *ngIf="aposta.tipo == 'desafio'">
     </app-exibir-bilhete-desafio>
     <app-exibir-bilhete-rifa [aposta]="aposta" *ngIf="aposta.tipo == 'rifa'">
     </app-exibir-bilhete-rifa>
+    <app-exibir-bilhete-cassino [aposta]="aposta" *ngIf="aposta.tipo == 'casino'"></app-exibir-bilhete-cassino>
 </div>
 <ng-template #bilheteEsporte>
     <app-exibir-bilhete-esportivo [aposta]="aposta"></app-exibir-bilhete-esportivo>

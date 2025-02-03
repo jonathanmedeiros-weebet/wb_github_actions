@@ -9,7 +9,8 @@
     margin-bottom: 4px;
 }
 .modal-body {
-    max-height: 400px;
+    max-height: 65vh;
+    padding: 10px;
     overflow: auto;
 }
 .modal-header {
@@ -23,19 +24,27 @@
     font-size: 12px;
     border-radius: 5px;
     padding: 7px 1em 7px 1em;
+    border-bottom: 2px dotted var(--bottom-bar);
+    border-radius: 5px;
 }
 .cupom-header {
+    margin-top: 11px;
+    border-bottom: 2px dotted var(--bottom-bar);
+    background-color: var(--game);
+    padding: 10px;
     color: var(--foreground);
     font-size: 12px;
     margin-bottom: 13px;
     max-height: 120px;
-    column-count: 3;
+    padding-top: 25px;
+    border-radius: 5px;
 }
 .cupom-header p {
-    font-size: 12px;
+    font-size: 13px;
+    padding-right: 10px;
+    padding-left: 10px;
     width: 100%;
-    margin-bottom: 4px;
-    font-weight: 600;
+    margin-bottom: 10px;
 }
 .cupom-header span {
     margin-left: 3px;
@@ -61,7 +70,16 @@
     font-size: 12px;
     font-weight: bold;
     margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
+.cupom-header > p > span {
+    float: right;
+}
+
 hr {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -73,6 +91,11 @@ hr {
     margin-bottom: 5px;
     margin-top:15px;
 }
+
+.item:has(.jogo-resultado) {
+    position: relative;
+}
+
 .item .campeonato{
     margin: 1px;
     font-size: 12px;
@@ -149,6 +172,7 @@ hr {
     opacity: 0.7;
 }
 .info-cupom {
+    position: relative;
     font-size: 12px;
     color: var(--foreground-game);
 }
@@ -181,13 +205,15 @@ hr {
     border-radius: 10px 10px 0 0;
     overflow: hidden;
 }
-tbody tr:last-child td:last-child {
-    border-radius: 0 0 6px 0;
+td.info-cupom {
+    border-radius: 5px 0 0 5px;
 }
-tbody tr:last-child td:first-child {
-    border-radius: 0 0 0 3px;
+td.resultado {
+    border-radius: 0 5px 5px 0;
 }
-
+tr.cupom {
+    border-bottom: 2px dotted var(--bottom-bar);
+}
 table th:first-child,
 table tr td:first-child {
     max-width: 45px;
@@ -215,25 +241,28 @@ table tr td:nth-child(3) {
     display: flex;
     align-items: flex-start;
     margin: 3px;
+    margin-bottom: 0px;
 }
 .cupom-container{
     display: none;
 }
  @media only screen and (max-width: 532px) {
-    .cupom-container:last-of-type #cupom {
-        margin-bottom: 115px;
+    .modal-body {
+        max-height: 55vh;
     }
     .cupom-header {
-        margin: 0 5px;
+        margin: 0 3px;
         max-height: none;
         column-count: 1;
         margin-bottom: 15px;
+        border-radius: 10px;
     }
     .table-container,
     .modal-header .info-horario {
         display: none;
     }
     .cupom-container{
+        margin-top: 0px;
         display: block;
     }
     .modal-body {
@@ -272,6 +301,15 @@ table tr td:nth-child(3) {
     }
  }
 @media only screen and (min-width: 532px) and (max-width: 1024px) {
+    .modal-body {
+        max-height: 55vh;
+    }
+    .odd-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 5px;
+    }
     .modal-body {
         max-height: calc(100svh - 245px);
         height: 100vh;

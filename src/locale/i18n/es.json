@@ -247,7 +247,8 @@
         "jogosEmAlta": "Juegos de tendencia",
         "nenhumJogoDisponivel": "No hay juegos disponibles en este momento",
         "loginGoogle" : "Inicia sesión con la cuenta de Google.",
-        "computadoEm": "Calculado en:",
+        "computadoEm": "Calculado el:",
+        "liquidadoEm": "Liquidado el:",
         "alteracoesSucesso": "¡Cambios realizados con éxito!",
         "erroInesperado": "Algo inesperado ocurrió. Inténtalo de nuevo más tarde.",
         "enderecoNaoEncontrado": "Dirección no encontrada, por favor complétala manualmente.",
@@ -782,5 +783,25 @@
         "masculino": "Masculino",
         "feminino": "Femenino",
         "outros": "Otros"
+    },
+    "compartilhar_aposta": {
+        "linkCopiado": "¡Enlace copiado al portapapeles!",
+        "bilheteCompartilhado": "¡Boleto compartido con éxito!",
+        "apostaRepetida": "¡Apuesta repetida con éxito!",
+        "apostaRepetidaErro": "Error al repetir la apuesta, intente nuevamente más tarde.",
+        "codigoCopiado": "¡Código copiado al portapapeles!",
+        "codigoCopiadoErro": "Error al copiar el código.",
+        "mensagemTitle": "Boleto de Apuesta",
+        "mensagemBody": "Acceda al enlace para ver el boleto de apuesta.",
+        "repetindoAposta": "Repitiendo apuesta...",
+        "repetirAposta": "Repetir apuesta",
+        "reutilizarAposta": "Reutilizar apuesta",
+        "reutilizandoAposta": "Reutilizando apuesta...",
+        "aguardando": "Esperando",
+        "calculando": "Calculando...",
+        "encerrarAposta": "Finalizar apuesta al monto de ",
+        "encerrando": "Finalizando...",
+        "apostaNaoPodeSerEncerrada": "La apuesta no se puede finalizar.",
+        "apostaNaoPodeSerReutilizada": "No es posible reutilizar la apuesta en este momento. Inténtelo de nuevo más tarde o verifique el progreso de los partidos."
     }
 }

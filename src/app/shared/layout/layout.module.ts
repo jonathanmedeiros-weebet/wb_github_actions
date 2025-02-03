@@ -108,6 +108,8 @@ import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accoun
 import { LastAccessesModalComponent } from './modals/last-accesses-modal/last-accesses-modal.component';
 import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.module';
 
+import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -208,6 +210,7 @@ import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.mo
         PasswordExpiredModalComponent,
         ConfiguracaoLimitePerdasModalComponent,
         BackPageComponent,
+        ExibirBilheteCassinoComponent,
         FaceMatchModalComponent,
         ValidatePhoneModalComponent,
         AddBankAccountModalComponent,
@@ -236,7 +239,8 @@ import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.mo
         MenuFooterComponent,
         BackPageComponent,
         ValidatePhoneModalComponent,
-        ListBankAccountsComponent
+        ListBankAccountsComponent,
+        ExibirBilheteCassinoComponent
     ],
     providers: [
         ApostaEsportivaService,
