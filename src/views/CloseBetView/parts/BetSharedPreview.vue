@@ -80,7 +80,7 @@
                 </p>
                 <p class="bet-shared__values-item">
                     <strong>COTAÇÃO:</strong>
-                    <strong >{{ formatNumber(betQuote, 1, 3) }}</strong>
+                    <strong >{{ formatNumber(betQuote, 1, 2) }}</strong>
                 </p>
                 <p class="bet-shared__values-item">
                     <strong>VALOR APOSTADO:</strong>
