@@ -85,6 +85,22 @@
                         <a *ngIf="this.slug == 'puskasbet.com.br'" href="https://ouvidoria.puskasbet.com.br" target="_blank">
                             {{'footer.feedback' | translate}}
                         </a>
+                        <div class="links" *ngIf="cartaoApostaHabilitado">
+                            <ng-container *ngIf="isLoggedIn && !isCliente">
+                                <a (click)="abrirCriarCartao()">
+                                    Criar Cartão de Aposta
+                                </a>
+                                <a (click)="abrirRecargaCartao()">
+                                    Recarregar Cartão de Aposta
+                                </a>
+                            </ng-container>
+                            <a (click)="abrirConsultarCartao()">
+                                Consultar Cartão de Aposta
+                            </a>
+                            <a (click)="abrirSolicitarSaque()">
+                                Solicitar Saque Cartão de Aposta
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="center-container">
@@ -148,6 +164,8 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                    <div class="separator separetor-mobile">
                     </div>
                     <div class="licences" *ngIf="hasLicence">
                         <h2>{{"footer.licences" | translate}}</h2>
@@ -227,23 +245,8 @@
                 </div>    
             </div>
         </div>
-        <div class="links" *ngIf="cartaoApostaHabilitado">
-            <ng-container *ngIf="isLoggedIn && !isCliente">
-                <a (click)="abrirCriarCartao()">
-                    Criar Cartão de Aposta
-                </a>
-                <a (click)="abrirRecargaCartao()">
-                    Recarregar Cartão de Aposta
-                </a>
-            </ng-container>
-            <a (click)="abrirConsultarCartao()">
-                Consultar Cartão de Aposta
-            </a>
-            <a (click)="abrirSolicitarSaque()">
-                Solicitar Saque Cartão de Aposta
-            </a>
+        <div class="separator separetor-mobile">
         </div>
-
         <div class="btn-group language-dropdown hide-desktop" ngbDropdown>
             <button class="btn" type="button" id="dropdownLanguage" ngbDropdownToggle>
                 <span class="flag-icon {{getLanguageIconClass()}} flag-icon-squared"></span>
