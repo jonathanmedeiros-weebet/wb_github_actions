@@ -265,8 +265,8 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 localStorage.removeItem('promoCodeExpiredDate');
             }
         }
+        
         const promoCode = localStorage.getItem('promoCode');
-
         this.form.patchValue({ promoCode: promoCode});
     }
 
