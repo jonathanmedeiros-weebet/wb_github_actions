@@ -253,25 +253,16 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
         const existingPromoCode = localStorage.getItem('promoCode');
         const promoCodeExpiredDate = localStorage.getItem('promoCodeExpiredDate');
-        const isPromoCodeExpired = promoCodeExpiredDate 
-        ? new Date() > new Date(new Date(promoCodeExpiredDate).getTime() + 10 * 1000) 
-        : false;
-
-        console.log(isPromoCodeExpired)
+        const isPromoCodeExpired = promoCodeExpiredDate ? new Date() > new Date(promoCodeExpiredDate) : false;
 
         if (!existingPromoCode || isPromoCodeExpired) {
             const newPromoCode = this.route.snapshot.queryParams['promo'] || null;
-            console.log('teste');
             
             if (newPromoCode) {
-            console.log('teste2');
-
                 localStorage.setItem('promoCode', newPromoCode);
                 const expirationDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
                 localStorage.setItem('promoCodeExpiredDate', expirationDate.toISOString());
             } else {
-            console.log('teste3');
-
                 localStorage.removeItem('promoCode');
                 localStorage.removeItem('promoCodeExpiredDate');
             }
