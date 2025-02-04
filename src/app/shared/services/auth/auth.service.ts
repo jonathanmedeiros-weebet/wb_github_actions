@@ -12,6 +12,7 @@ import { config } from './../../config';
 import * as moment from 'moment';
 import { GeolocationService } from '../geolocation.service';
 import { Ga4Service, EventGa4Types } from '../ga4/ga4.service';
+import { isNull } from 'lodash';
 
 declare var xtremepush: any;
 
@@ -366,6 +367,9 @@ export class AuthService {
     isExpired() {
         const expires = localStorage.getItem('expires');
         // +expired converte a string para inteiro
+        if (isNull(expires)) {
+            return false;
+        }
         return moment(+expires).isBefore(new Date());
     }
 
