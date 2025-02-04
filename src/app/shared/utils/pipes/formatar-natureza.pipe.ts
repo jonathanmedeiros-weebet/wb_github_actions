@@ -56,6 +56,9 @@ export class FormatarNaturezaPipe implements PipeTransform {
             case 'CREDITO_INDICACAO':
                 naturezaFormatada = 'Comissão do indique e ganhe';
                 break;
+            case 'CASHBACK':
+                naturezaFormatada = 'Cashback';
+                break;
             default:
                 naturezaFormatada = 'Movimentação';
                 break;
