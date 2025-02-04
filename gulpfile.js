@@ -1369,6 +1369,7 @@ gulp.task('apostenasorte.bet', function (done) {
         host: "apostenasorte.bet",
         banca: "APOSTE NA SORTE",
         styles: "",
+        scripts: "<script src='//code.jivosite.com/widget/Gd7zoqmar6' async></script>"
     });
 });
 
