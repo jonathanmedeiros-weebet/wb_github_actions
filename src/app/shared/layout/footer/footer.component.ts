@@ -63,6 +63,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
     seeLess = false;
     fullPage = true;
     computedStyle;
+    licences = [];
 
     constructor(
         private authService: AuthService,
@@ -103,8 +104,10 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.hasBodo = this.paramsLocais.getOpcoes().enable_licence_bodo;
         this.hasLoterj = this.paramsLocais.getOpcoes().enable_licence_loterj;
         this.hasLotep = this.paramsLocais.getOpcoes().enable_licence_lotep;
+
+        this.loadLicences();
             
-        this.hasLicence =this.hasCuracaoTemporary || this.hasCuracao || this.hasAnjouan || this.hasBodo || this.hasLoterj || this.hasLotep;
+        this.hasLicence = this.licences.length > 0;
 
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => {
@@ -308,5 +311,26 @@ export class FooterComponent implements OnInit, AfterViewInit {
           return element.scrollHeight > element.clientHeight;
         }
       }
+
+    loadLicences(){
+        if (this.hasAnjouan) {
+            this.licences.push('anjouan');
+        }
+        if (this.hasBodo) {
+            this.licences.push('bodo');
+        }
+        if (this.hasCuracao) {
+            this.licences.push('curacao');
+        }
+        if (this.hasCuracaoTemporary) {
+            this.licences.push('curacao-temporary');
+        }
+        if (this.hasLoterj) {
+            this.licences.push('loterj');
+        }
+        if (this.hasLotep) {
+            this.licences.push('lotep');
+        }
+    }
 
 }

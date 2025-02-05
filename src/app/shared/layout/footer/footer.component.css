@@ -54,8 +54,8 @@ h2{
 
 .licences-images{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     align-items: center;
+    justify-items: center;
     gap: 16px;
 }
 
@@ -423,7 +423,7 @@ footer {
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 600px) {
     @supports (-webkit-touch-callout: none) {
         .info.copyright {
             margin-bottom: 35px !important;
@@ -563,11 +563,49 @@ footer {
         margin-bottom: 4px;
     }
 }
+@media only screen and (min-width: 1025px) and (max-width: 1365px) {
 
-@media only screen and (min-width: 1025px) {
+    .container-bottom{
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1 1 100%;
+        gap: 24px;
+    }
+
+    .licences {
+        padding-top: 24px;
+        justify-content: center;
+    }
+
+    #right-container {
+        width: 100%;
+        align-items: center;
+    }
+
+    .redes-sociais, .licences {
+        align-items: center;
+    } 
+
+    .container-center-full-screen .container-bottom {
+        flex-wrap: nowrap !important; 
+    }
+
+    .container-center-full-screen #right-container, .container-center-full-screen .redes-sociais, .container-center-full-screen .licences{
+        align-items: flex-start !important;
+    }
+
+    .container-center-full-screen #right-container {
+        width: auto !important;
+    }
+}
+
+
+@media only screen and (min-width: 1280px) {
+
     .container-center-full-screen .container-footer, .container-center-full-screen .container-bottom {
         width: 50%;
     }
+
     .container-footer {
         width: 90%;
     }
@@ -586,6 +624,36 @@ footer {
         padding: 24px 54px !important;
     }
 }
+
+@media only screen and (min-width: 540px) and (max-width: 600px) {
+
+    .container-bottom{
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1 1 100%;
+        gap: 16px;
+    }
+
+    .licences {
+        padding-top: 24px;
+        justify-content: center;
+    }
+
+    #right-container {
+        width: 100%;
+        align-items: center;
+    }
+
+    .redes-sociais, .licences {
+        align-items: center;
+    } 
+
+    .redes-sociais {
+        padding: 24px 0px;
+    }
+}
+
+
 
 
 
