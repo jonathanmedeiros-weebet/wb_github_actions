@@ -176,9 +176,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(zendeskChat, 'display', 'none');
         }
 
-        const intercomChat = this.document.querySelector('.intercom-launcher');
-        if (intercomChat) {
-            this.renderer.setStyle(intercomChat, 'display', 'none');
+        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
+        if (intercomBtnChat) {
+            this.renderer.setStyle(intercomBtnChat, 'display', 'none');
+        }
+        
+        const intercomContainer = this.document.querySelector('#intercom-container');
+        if (intercomContainer) {
+            this.renderer.setStyle(intercomContainer, 'display', 'none');
         }
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
@@ -604,9 +609,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
             });
         }
 
-        const intercomChat = this.document.querySelector('.intercom-launcher');
-        if (intercomChat) {
-            this.renderer.setStyle(intercomChat, 'display', 'block');
+        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
+        if (intercomBtnChat) {
+            this.renderer.setStyle(intercomBtnChat, 'display', 'block');
+        }
+
+        const intercomContainer = this.document.querySelector('#intercom-container');
+        if (intercomContainer) {
+            this.renderer.setStyle(intercomContainer, 'display', 'block');
         }
 
         if (this.headerService.getIsHeaderDisabled) {
