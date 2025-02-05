@@ -58,6 +58,38 @@
     </div>
 </ng-template>
 
+<ng-template #over18MessageModal>
+    <div class="modal-over18Message">
+        <div class="modal-dialog-over18Message">
+            <div class="modal-content-over18Message">
+                <ng-container *ngIf="!under18Confirmed">
+                    <div class="modal-header-over18Message">
+                        <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png" alt="Logo" class="modal-logo">
+                        <h3 class="modal-title">Você tem mais de 18 anos?</h3>
+                    </div>
+                    <div class="modal-body-over18Message">
+                        <h4></h4>
+                    </div>
+                    <div class="modal-footer-over18Message">
+                        <button type="button" (click)="over18Confirm()" class="btn btn-custom btn-yes">
+                            Sim
+                        </button>
+                        <button type="button" (click)="under18Confirm()" class="btn btn-secondary btn-no">
+                            Não
+                        </button>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="under18Confirmed">
+                    <div class="modal-header-over18Message">
+                        <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png" alt="Logo" class="modal-logo">
+                        <h3 class="modal-title">Desculpe. Você não tem idade suficiente para acessar esse conteúdo.</h3>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
 <div class="botao-contato-flutuante" *ngIf="!mobileScreen && (isDemo || whatsapp)">
     <a *ngIf="isDemo" class="btn btn-custom rounded-circle contato" target="_blank"
        href="https://materiais.wee.bet/demo-weebet">
