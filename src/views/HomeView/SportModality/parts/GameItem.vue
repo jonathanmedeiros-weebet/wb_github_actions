@@ -7,7 +7,7 @@
                 :class="{'game__team--first': index == 0}"
                 :key="index"
             >
-                <img :src="team.image" @error="changeSrcWhenImageError" />
+                <img v-lazy="team.image" @error="changeSrcWhenImageError" />
                 {{ team.name }}
             </span>
             
@@ -22,7 +22,7 @@
             </span>
         </div>
         <div class="game__score" v-if="isLive">
-            <span><strong>{{ teamScoreA }}</strong></span>
+            <span class="game__score-number"><strong>{{ teamScoreA }}</strong></span>
             <span class="game__score-number"><strong>{{ teamScoreB }}</strong></span>
         </div>
         <div class="game__quotes">
@@ -157,7 +157,8 @@ export default {
                     eventId: this.game.event_id,
                     live: this.game.ao_vivo,
                     quoteKey: quota.chave,
-                    quoteValue: Number(quota.finalValue),
+                    quoteValue: Number(quota.valor),
+                    finalQuoteValue: Number(quota.finalValue),
                     quoteName: quoteLabel,
                     quoteGroupName: 'Resultado final',
                     favorite: this.game.favorito,
@@ -184,12 +185,12 @@ export default {
     justify-content: space-between;
     align-items: flex-start;
     padding: 13px 16px;
-    background: #181818;
+    background: #0a0a0a;
     background: var(--game);
     margin-top: 1px;
 
     color: #ffffff;
-    color: var(--foreground-game);
+    color: var(--game-foreground);
 
     &__teams {
         display: flex;
@@ -200,7 +201,7 @@ export default {
         display: flex;
         align-items: center;
         color: #ffffff;
-        color: var(--foreground-game);
+        color: var(--game-foreground);
         font-size: 14px;
         font-weight: 400;
         line-height: 14px;
@@ -226,18 +227,24 @@ export default {
         font-size: 12px;
         line-height: 12px;
         font-weight: 400;
-        color: #666666;
+        color: #ffffff;
+        color: var(--game-foreground);
         margin-top: 8px;
+    }
+
+    &__info span {
+        color: rgba(255, 255, 255, 0.6);
+        color: rgba(var(--game-foreground-rgb), 0.6);
     }
 
     &__pontuation {
         font-size: 10px;
         line-height: 10px;
         font-weight: 400;
-        color: #0be58e;
-        color: var(--highlight);
+        color: #35cd96 !important;
+        color: var(--highlight) !important;
 
-        border: 0.5px solid #0be58e;
+        border: 0.5px solid #35cd96;
         border: 0.5px solid var(--highlight);
         border-radius: 2px;
         padding: 0 5px;
@@ -265,15 +272,15 @@ export default {
         width: 58px;
         height: 54px;
         border-radius: 4px;
-        background: #0a0a0a;
-        background: var(--inputs-odds);
-        color: #ffff;
-        color: var(--foreground-inputs-odds);
+        background: #181818;
+        background: var(--button);
+        color: #ffffff;
+        color: var(--button-foreground);
         &--selected {
-            background: #0be58e;
+            background: #35cd96;
             background: var(--highlight);
-            color: #0a0a0a;
-            color: var(--background);
+            color: #181818;
+            color: var(--highlight-foreground);
         }
     }
 
@@ -290,7 +297,7 @@ export default {
 
     &__live {
         color: #f61a1a;
-        color: var(--color-danger);
+        color: var(--warning);
         font-size: 12px;
         font-style: normal;
         font-weight: 300;
@@ -298,8 +305,8 @@ export default {
     }
 
     &__time {
-        color: #ffffff80;
-        color: var(--foreground-game);
+        color: rgba(255, 255, 255, 0.6);
+        color: rgba(var(--game-foreground-rgb), 0.6);
         font-size: 12px;
         font-style: normal;
         font-weight: 300;
@@ -318,6 +325,8 @@ export default {
 
     &__score-number {
         margin-top: 4px;
+        color: #ffffff;
+        color: var(--game-foreground);
     }
     
 }

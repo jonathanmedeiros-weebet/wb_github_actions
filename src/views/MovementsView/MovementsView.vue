@@ -17,7 +17,7 @@
     <div class="movements__container">
       <span class="date">
         {{ dateFormatedWithYear }}
-        <IconClose class="date__close" @click.native="resetDateToCurrent" />
+        <IconClose class="date__close" :color="useHexColors" @click.native="resetDateToCurrent"/>
       </span>
       <div v-if="isBalanceDataEmpty" class="no-data">
         Nenhuma informação nesse período
@@ -51,7 +51,7 @@ import Header from '@/components/layouts/Header.vue';
 import IconClose from '@/components/icons/IconClose.vue';
 import IconAttachMoney from '@/components/icons/IconAttachMoney.vue';
 import { listMovements } from '@/services';
-import { formatCurrency, now, formatDateBR } from '@/utilities';
+import { formatCurrency, now, formatDateBR, isAndroid5 } from '@/utilities';
 import ModalCalendar from './../HomeView/parts/ModalCalendar.vue';
 import { useConfigClient, useToastStore } from '@/stores';
 import { ToastType } from '@/enums';
@@ -94,6 +94,9 @@ export default {
     },
     isBalanceDataEmpty() {
       return Object.keys(this.balanceData).length === 0;
+    },
+    useHexColors() {
+      return isAndroid5() ? 'rgba(255, 255, 255, .5)' : 'rgba(var(--input-foreground-rgb), .5)';
     }
   },
   created() {
@@ -128,7 +131,7 @@ export default {
         .catch(({ errors }) => {
           this.tostStore.setToastConfig({
             message: errors?.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
 
@@ -175,8 +178,9 @@ export default {
 }
 
 .no-data {
-  color: #ffffff80;
-  color: var(--foreground-header);
+  margin-top: 8px;
+  color: rgba(255, 255, 255, .5);
+  color: rgba(var(--foreground-rgb), .5);
 }
 
 .date {
@@ -184,16 +188,23 @@ export default {
   width: 185px;
   margin-top: 5px;
   height: 30px;
-  opacity: 0.5;
-  color: #ffffff;
-  color: var(--foreground-header);
   padding: 0px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  color: rgba(255, 255, 255, .5);
+  color: rgba(var(--input-foreground-rgb), .5);
+  background: #181818;
+  background: var(--input);
+
   &__close {
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--input-foreground-rgb), .5);
   }
 }
 
@@ -208,7 +219,7 @@ export default {
 
   &__date {
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--foreground);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

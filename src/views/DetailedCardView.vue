@@ -21,9 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="detailed-card__text">
-                <span class="detailed-card__content-text">Histórico de apostas</span>
-            </div>
+            <span class="detailed-card__content-text">Histórico de apostas</span>
             <div v-if="Boolean(cardBet.apostas.length)">
                 <div class="detailed-card__content-filters" v-for="(bet, index) in cardBet.apostas" :key="index">
                     <card-bets>
@@ -52,9 +50,7 @@
                     </card-bets>
                 </div>
             </div>
-            <div v-else>
-                <span>Nenhuma aposta encontrada</span>
-            </div>
+            <span class="detailed-card__no-data" v-else>Nenhuma aposta encontrada</span>
             <div class="buttons">
                 <w-button
                     text="Compartilhar"
@@ -62,7 +58,7 @@
                     @click="handleShared"
                     >
                     <template #icon-left>
-                        <IconShare :size="20" color="var(--foreground-league)"/>
+                        <IconShare :size="20" color="var(--league-foreground)"/>
                     </template>
                 </w-button>
                     <div class="button-spacer"></div>
@@ -72,7 +68,7 @@
                     @click="handlePrint"
                     >
                     <template #icon-left>
-                        <IconPrinter :size="20" color="var(--foreground-highlight)"/>
+                        <IconPrinter :size="20" color="var(--highlight-foreground)"/>
                     </template>
                 </w-button>
             </div>
@@ -127,7 +123,7 @@ export default {
             if (!isValidPin) {
                 this.toastStore.setToastConfig({
                     message: 'PIN inválido.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -137,7 +133,7 @@ export default {
             if (!isValidCode) {
                 this.toastStore.setToastConfig({
                     message: 'Chave inválida.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 });
                 return;
@@ -150,7 +146,7 @@ export default {
             .catch((errors) => {
                 this.toastStore.setToastConfig({
                     message: errors?.message ?? 'Ocorreu algum erro inesperado.',
-                    type: ToastType.DANGER,
+                    type: ToastType.WARNING,
                     duration: 5000
                 })
             })
@@ -200,10 +196,10 @@ export default {
 <style lang="scss" scoped>
 .detailed-card {
     color: #ffffff;
-    color: var(--foreground-game);
+    color: var(--foreground);
     height: auto;
     width: 100%;
-    padding-bottom: 100px;
+    padding-bottom: 200px;
 
     &__container {
         display: flex;
@@ -213,14 +209,19 @@ export default {
         padding-top: 20px;
     }
 
-    &__text {
-        color: #ffffff80;
-        color: var(--foreground-header); 
-        font-size: 14px;
+    &__no-data {
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--foreground-rgb), .5); 
+        font-size: 12px;
     }
 
     &__card {
+        background: #181818;
         background: var(--game);
+
+        color: #ffffff;
+        color: var(--game-foreground);
+
         border-radius: 8px;
         margin-bottom: 20px;
         padding: 16px;

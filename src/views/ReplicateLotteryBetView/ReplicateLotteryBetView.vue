@@ -34,7 +34,7 @@
                                     @focus="handleInitializeBetValue(betItem.valor, betIndex)"
                                 >
                                     <template #icon>
-                                        <span style="color: var(--foreground-inputs-odds);">R$</span>
+                                        <span style="color: var(--input-foreground);">R$</span>
                                     </template>
                                 </w-input>
                             </div>
@@ -190,7 +190,7 @@ export default {
                 }).catch(error => {
                     this.toastStore.useToastStore({
                         message: error.errors?.message ?? 'Erro inesperado',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     });
                 });
@@ -260,7 +260,7 @@ export default {
                 .catch(error => {
                     this.toastStore.setToastConfig({
                         message: error.errors?.message ?? 'Erro inesperado',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 5000
                     });
                 })
@@ -318,7 +318,7 @@ export default {
 
 <style lang="scss" scoped>
 .replicate-lottery-bet {
-    background: var(--header);
+    background: var(--background);
 
     &__container {
         display: flex;
@@ -367,7 +367,7 @@ export default {
         width: 100%;
         height: 1px;
         background: #ffffff;
-        background: var(--foreground-league);
+        background: var(--league-foreground);
         opacity: 0.1;
         position: absolute;
         left: 0;
@@ -386,7 +386,7 @@ export default {
     }
 
     &__option-label {
-        color: var(--foreground-inputs-odds);
+        color: var(--input-foreground);
     }
 
     &__option-select {
@@ -394,8 +394,8 @@ export default {
         padding: 10px 20px;
         border-radius: 5px;
         border: 2px solid #181818;
-        border: 0.5px solid var(--foreground-inputs-odds);
-        background: var(--inputs-odds);
+        border: 0.5px solid var(--input-foreground);
+        background: var(--input);
     }
 
     &__option-input {
@@ -427,8 +427,8 @@ export default {
             height: 25px;
             width: 25px;
             font-size: 11px;
-            background-color: var(--sub-nav);
-            color: var(--foreground-header); 
+            background-color: var(--input);
+            color: var(--input-foreground); 
             clip-path: circle(50%);
             text-align: center;
         }

@@ -6,7 +6,7 @@
       @calendarClick="handleOpenCalendarModal"
       @searchClick="handleOpenSearchModal"
     >
-      <SelectFake @click="handleOpenModalitiesModal"> {{ modality?.name }} </SelectFake>
+      <SelectFake :iconColor="'var(--foreground)'" @click="handleOpenModalitiesModal"> {{ modality?.name }} </SelectFake>
 
       <template #actions> 
         <LiveButton
@@ -61,6 +61,7 @@ import scrollMixin from '@/mixins/scroll.mixin'
 import SportModality from './SportModality/SportModality.vue'
 import PopularLotteryModality from './PopularLotteryModality/PopularLotteryModality.vue'
 import LotteryModality from './LotteryModality/LotteryModality.vue'
+import { now } from '@/utilities'
 
 export default {
   name: 'home',
@@ -143,10 +144,19 @@ export default {
       const { options } = useConfigClient();
       return options?.data_limite_tabela ?? 1
     }
-
   },
   methods: {
     onInit() {
+      if(!Boolean(this.modality)) {
+        const hasTicketModalityId = Boolean(this.ticketStore.modalityId);
+        const modalityId = hasTicketModalityId ? this.ticketStore.modalityId : this.Modalities.FOOTBALL;
+        const modality = this.modalityList.find(modality => modality.id === modalityId);
+        this.homeStore.setModality(modality);
+
+        if(!hasTicketModalityId) {
+          this.ticketStore.setModalityId(modalityId);
+        }
+      }
       const { homePage } = useConfigClient();
 
       switch (homePage) {
@@ -194,8 +204,30 @@ export default {
     },
     async handleModality(modalityId) {
       const modality = this.modalityList.find(modality => modality.id === modalityId);
+      const previousModality = this.homeStore.modality;
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
+
+      const previousModalitySelectedIsNotSport = [
+        this.Modalities.LOTTERY,
+        this.Modalities.POPULAR_LOTTERY,
+        this.Modalities.ACCUMULATION,
+        this.Modalities.CHALLENGE
+      ].includes(modalityId);
+
+      const newModalitySelectedIsNotSport = [
+        this.Modalities.LOTTERY,
+        this.Modalities.POPULAR_LOTTERY,
+        this.Modalities.ACCUMULATION,
+        this.Modalities.CHALLENGE
+      ].includes(previousModality.id);
+
+      const clearTicket = newModalitySelectedIsNotSport && !previousModalitySelectedIsNotSport || !newModalitySelectedIsNotSport && previousModalitySelectedIsNotSport;
+
+      this.ticketStore.setModalityId(modality.id, clearTicket);
+
+      this.homeStore.setDate(now());
+      this.homeStore.setPaginate(10);
 
       if(this.isPopularLotteryModality){
         setTimeout(() => this.$refs['popular-lottery-modality'].loadPage(), 500);
@@ -222,6 +254,7 @@ export default {
     async handleCalendar(dateTime) {
       this.loading = true;
       this.homeStore.setDate(dateTime);
+      this.homeStore.setPaginate(10);
       this.handleCloseCalendarModal();
       
       if(this.isSportModality) {
@@ -246,6 +279,7 @@ export default {
       this.homeStore.setIsLive(!this.liveActived);
       this.homeStore.setInSearch(!this.homeStore.inSearch);
       this.homeStore.setLeague(null);
+      this.homeStore.setPaginate(10);
       this.$refs['sport-modality'].prepareSocket();
       this.$refs['sport-modality'].pageLoad();
     },
@@ -283,5 +317,20 @@ export default {
     margin-right: 8px;
     margin-left: -1px;
   }
+}
+
+::v-deep .select-fake {
+  background: #0a0a0a;
+  background: var(--background);
+}
+
+::v-deep .select-fake__title {
+  color: #ffffff;
+  color: var(--foreground);
+}
+
+::v-deep .select-fake svg {
+  fill: #ffffff;
+  fill: var(--foreground);
 }
 </style>

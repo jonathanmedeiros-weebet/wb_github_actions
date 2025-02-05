@@ -10,7 +10,6 @@ import ChangePasswordView from '@/views/ChangePasswordView.vue'
 import MovementsView from '@/views/MovementsView/MovementsView.vue'
 import ReckoningView from '@/views/ReckoningView.vue'
 import ResultsView from '@/views/ResultsView/ResultsView.vue'
-import ConfigView from '@/views/ConfigView.vue'
 import GameDetailView from '@/views/GameDetailView/GameDetailView.vue'
 import { LocalStorageKey, localStorageService, prepareConfigClient } from "@/services";
 import DashboardView from '@/views/DashboardView/DashboardView.vue'
@@ -24,6 +23,7 @@ import CreateCardView from '@/views/CreateCardView.vue'
 import DetailedCardView from '@/views/DetailedCardView.vue'
 import ValidationLotteryDetailView from '@/views/ValidationLotteryDetailView.vue'
 import ReplicateLotteryBetView from '@/views/ReplicateLotteryBetView/ReplicateLotteryBetView.vue'
+import SettingsView from '@/views/SettingsView/SettingsView.vue'
 
 const production = !import.meta.env.VITE_MODE_DEVELOPMENT;
 
@@ -144,14 +144,6 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/config',
-      name: 'config',
-      component: ConfigView,
-      meta: {
-        auth: production
-      }
-    },
-    {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
@@ -224,6 +216,14 @@ const router = new VueRouter({
       }
     },
     {
+      path: '/settings',
+      name: 'settings',
+      component: SettingsView,
+      meta: {
+        auth: production
+      }
+    },
+    {
       path: '*',
       redirect: '/'
     }
@@ -242,6 +242,7 @@ router.beforeEach(async (to, from, next) => {
     if (hasToken) {
       next();
     } else {
+      localStorageService.removeAuth();
       next({ name: 'login' });
     }
   } else if ((to.name === 'login') && hasToken) {

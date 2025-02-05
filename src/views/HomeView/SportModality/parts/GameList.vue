@@ -12,7 +12,7 @@
                     <img
                         class="game-list__collapse-icon"
                         v-if="championship.image"
-                        :src="championship.image"
+                        v-lazy="championship.image"
                         @error="changeSrcWhenImageError"
                     />
                     <component
@@ -27,9 +27,9 @@
                 <div class="game-list__items"> 
                     <div class="game-list__item-empty">
                         <div class="game-list__columns">
-                        <span class="game-list__column">1</span>
-                        <span class="game-list__column game-list__column--second">x</span>
-                        <span class="game-list__column">2</span>
+                            <span class="game-list__column">1</span>
+                            <span class="game-list__column game-list__column--second">x</span>
+                            <span class="game-list__column">2</span>
                         </div>
                     </div>
                     <GameItem
@@ -40,6 +40,8 @@
                     />
                 </div>
             </Collapse>
+            <SpinnerLoading v-show="isLoading" />
+            <div ref="scrollEnd" style="height: 1px;"></div>
         </template>
     </div>
 </template>
@@ -47,63 +49,100 @@
 <script>
 import Collapse from '@/components/Collapse.vue';
 import GameItem from './GameItem.vue';
-import { useHomeStore, useTicketStore } from '@/stores';
+import { useConfigClient, useHomeStore, useTicketStore } from '@/stores';
 import IconGlobal from '@/components/icons/IconGlobal.vue';
 import { hasQuotaPermission, calculateQuota } from '@/services';
+import SpinnerLoading from '@/components/SpinnerLoading.vue';
+import _ from 'lodash';
 
 export default {
-  components: { Collapse, GameItem, IconGlobal },
+    components: {
+        Collapse,
+        GameItem,
+        IconGlobal,
+        SpinnerLoading
+    },
     name: 'game-list',
     data() {
         return {
             homeStore: useHomeStore(),
             ticketStore: useTicketStore(),
+            configClientStore: useConfigClient(),
+            isLoading: false,
+            championshipListSecondary: []
         }
+    },
+    mounted() {
+        // Preservar código por algum tempo afim de implementarmos o infinite scroll caso tenhamos necessidade
+        // const options = {
+        //     root: this.$root.$refs.appElement,
+        //     rootMargin: '10px',
+        //     threshold: 1.0,
+        // };
+
+        // const observer = new IntersectionObserver((entries, observer) => {
+        //     this.isLoading = true;
+        //     entries.forEach((entry) => {
+        //         if (entry.isIntersecting) {
+        //             this.infiniteHandler();
+        //         }
+        //     });
+        // }, options);
+
+        // observer.observe(this.$refs.scrollEnd);
     },
     computed: {
         hasChampionshipList() {
             return Boolean(this.championshipList.length);
         },
         championshipList() {
-            return this.homeStore.championshipList.map((championship) => {
-                const newChampionship = { ...championship };
-                if(newChampionship.regiao_sigla !== 'ww') {
-                    newChampionship.image = `https://cdn.wee.bet/flags/1x1/${newChampionship.regiao_sigla}.svg`;
-                } else {
-                    newChampionship.icon = IconGlobal;
-                }
-
-                newChampionship.jogos = championship.jogos.map((game) => {
-                    const newGame = { ...game };
-                    newGame.cotacoes = newGame.cotacoes.map(quota => {
-                        const finalValue = calculateQuota({
-                            value: quota.valor,
-                            key: quota.chave,
-                            gameEventId: newGame.event_id,
-                            favorite: newGame.favorito,
-                            isLive: newGame.ao_vivo
-                        });
-
-                        const hasPermission = hasQuotaPermission(finalValue)
-
-                        return {
-                            ...quota,
-                            hasPermission,
-                            finalValue,
-                        };
-                    })
-                    return newGame;
-                })
-                
-                return newChampionship;
-            });
+            // Preservar código por algum tempo afim de implementarmos o infinite scroll caso tenhamos necessidade
+            // if(this.homeStore.isLive){
+            //     this.championshipListSecondary = this.homeStore.championshipList.slice(0, this.homeStore.paginate).map(this.transformChampionshipList);
+            // } else {
+            //     const championshipList = this.homeStore.championshipList.slice(this.championshipListSecondary.length, this.homeStore.paginate).map(this.transformChampionshipList);
+            //     this.championshipListSecondary.push(...championshipList);
+            // }
+            // this.isLoading = false;
+            return this.homeStore.championshipList.map(this.transformChampionshipList);
         },
         allCollapsed() {
-            // return Boolean(this.homeStore.inSearch); TODO: Apagar posteriormente
-            return true;
+            return this.configClientStore.settings.championshipExpanded;
         }
     },
     methods: {
+        transformChampionshipList(championship) {
+            const newChampionship = { ...championship };
+            if(newChampionship.regiao_sigla !== 'ww') {
+                newChampionship.image = `https://cdn.wee.bet/flags/1x1/${newChampionship.regiao_sigla}.svg`;
+            } else {
+                newChampionship.icon = IconGlobal;
+            }
+
+            newChampionship.jogos = championship.jogos.map((game) => {
+                const newGame = { ...game };
+                newGame.cotacoes = newGame.cotacoes.map(quota => {
+                    const finalValue = calculateQuota({
+                        value: quota.valor,
+                        key: quota.chave,
+                        gameEventId: newGame.event_id,
+                        favorite: newGame.favorito,
+                        isLive: newGame.ao_vivo
+                    });
+
+                    const hasPermission = hasQuotaPermission(finalValue)
+
+                    return {
+                        ...quota,
+                        hasPermission,
+                        finalValue,
+                    };
+                })
+                return newGame;
+            })
+            
+            return newChampionship;
+        },
         handleClick(gameId) {
             this.$emit('gameClick', gameId);
         },
@@ -112,7 +151,16 @@ export default {
         },
         championshipWasOpened(championshipId) {
             return (this.ticketStore.championshipOpened ?? []).includes(championshipId);
-        }
+        },
+        infiniteHandler: _.debounce(function() {
+            if (this.homeStore.paginate >= this.homeStore.championshipList.length) {
+                this.isLoading = false;
+                return;
+            }
+
+            const qty = this.configClientStore.settings.championshipExpanded ? 5 : 10;
+            this.homeStore.setPaginate(this.homeStore.paginate + qty);
+        })
     }
 }
 </script>
@@ -122,11 +170,10 @@ export default {
     width: 100%;
     min-height: calc(100vh - 100px);
     overflow-y: auto;
-
     display: flex;
     flex-direction: column; 
-    overflow-y: auto;
-    padding-bottom: 100px;
+    overflow-y: hidden;
+    margin-bottom: 200px;
 
     &__items {
         margin-top: 1px;
@@ -142,6 +189,8 @@ export default {
         justify-content: flex-end;
         align-items: center;
         padding: 0 16px;
+        color: #ffffff;
+        color: var(--foreground);
     }
 
     &__columns {
@@ -156,7 +205,7 @@ export default {
         align-items: center;
         justify-content: center;
         color: #FFFFFF80;
-        color: var(--foreground-league-input);
+        color: var(--foreground);
 
         &--second {
             margin: 0 8px;
@@ -184,7 +233,15 @@ export default {
         padding: 8px 16px;
         font-size: 12px;
         color: #ffffff80;
-        color: var(--foreground-league-input);
+        color: var(--foreground);
     }
+}
+
+::v-deep .spinner-loading {
+    height: 25px;
+    width: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
 }
 </style>

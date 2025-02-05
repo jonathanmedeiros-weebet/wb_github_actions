@@ -33,7 +33,7 @@
 
       <div class="collapse" @click="toggleCollapse('input', $event)">
         <div class="collapse__item">
-          <component :is="iconArrowDinamicInputs" />
+          <component :is="iconArrowDinamicInputs" color="var(--foreground)" />
           <span class="collapse__title">Entradas</span>
           <div class="collapse__value">
             <IconAdd class="collapse__icon" />
@@ -80,7 +80,7 @@
       </div>
       <div class="collapse" @click="toggleCollapse('exit')">
         <div class="collapse__item">
-          <component :is="iconArrowDinamicExits" />
+          <component :is="iconArrowDinamicExits" color="var(--foreground)" />
           <span class="collapse__title">Saídas</span>
           <div class="collapse__value">
             <IconRemove class="collapse__icon-remove" />
@@ -146,7 +146,7 @@ import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 import IconRemove from '@/components/icons/IconRemove.vue'
 import { getCalculationValue } from '@/services'
-import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR, convertInMomentInstance } from '@/utilities'
+import { formatCurrency, now , dateFormatInDayAndMonth,formatDateBR, convertInMomentInstance, isAndroid5 } from '@/utilities'
 import ModalCalendar from './HomeView/parts/ModalCalendar.vue'
 import { useConfigClient, useToastStore } from '@/stores'
 import SelectFake from './HomeView/parts/SelectFake.vue'
@@ -218,6 +218,9 @@ export default {
     },
     previousBalanceDate() {
       return convertInMomentInstance(this.startDate).subtract(1, 'days').format('DD/MM');
+    },
+    closeButtonColor() {
+      return isAndroid5() ? '#ffffff80' : 'rgba(var(--foreground-rgb), 0.5)';
     }
   },
   created() {
@@ -279,7 +282,7 @@ export default {
       } catch ({ errors }) {
         this.tostStore.setToastConfig({
           message: errors?.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
         this.resetDateToCurrent();
@@ -299,7 +302,7 @@ export default {
 
 .reckoning {
   color: #ffffff;
-  color: var(--foreground-header);
+  color: var(--foreground);
   height: auto;
   width: 100%;
   padding-bottom: 100px;
@@ -317,10 +320,11 @@ export default {
   border-radius: 50px;
   width: 185px;
   height: 30px;
-  opacity: 0.5;
-  color: #ffffff;
-  color: var(--foreground-header);
-  background-color: #FFFFFF0D;
+  opacity: 0.6;
+  color: rgba(255, 255, 255, .5);
+  color: rgba(var(--input-foreground-rgb), .5);
+  background-color: #181818;
+  background-color: var(--input);
   padding: 10px;
   display: flex;
   align-items: center;
@@ -328,6 +332,8 @@ export default {
   
   &__close {
     cursor: pointer;
+    fill: rgba(255, 255, 255, .5);
+    fill: rgba(var(--input-foreground-rgb), .5);
   }
 }
 
@@ -341,7 +347,7 @@ export default {
   &__title {
     width: 100%;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     display: flex;
@@ -353,6 +359,8 @@ export default {
     display: flex;
     align-items: center; 
     margin-left: 25px;
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__icon {
@@ -367,7 +375,7 @@ export default {
 
   &__title {
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     display: flex;
@@ -387,7 +395,9 @@ export default {
     display: flex;
     align-items: center; 
     justify-content: flex-end; 
-    width: 100%; 
+    width: 100%;
+    color: #ffffff;
+    color: var(--foreground); 
   }
 
   &__section-sports {
@@ -403,14 +413,16 @@ export default {
 
   &__icon-add {
     padding: 1px;
-    fill: #0be58e;;
+    fill: #35cd96;
     fill: var(--highlight);
   }
 
   &__value-right {
     display: flex;
     justify-content: flex-end;
-    width: 100px; 
+    width: 100px;
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__content {
@@ -434,14 +446,14 @@ export default {
   }
 
   &__icon {
-    fill: #0be58e;
+    fill: #35cd96;
     fill: var(--highlight);
     margin-right: 5px;
   }
 
   &__icon-remove {
     fill: #f61a1a;
-    fill: var(--color-danger);
+    fill: var(--warning);
     margin-right: 5px;
   }
 
@@ -449,7 +461,7 @@ export default {
     width: 100%;
     height: 1px;
     background: #ffffff;
-    background: var(--foreground-league);
+    background: var(--foreground);
     opacity: 0.1;
     margin-top: 5px;
   }
@@ -468,12 +480,12 @@ export default {
     align-items: center;
     &--positive {
       color: #6da544;
-      color: var(--color-success);
+      color: var(--success);
     }
 
     &--negative {
       color: #f61a1a;
-      color: var(--color-danger);
+      color: var(--warning);
     }
   }
 }
@@ -494,7 +506,7 @@ export default {
   }
 
   &__icon {
-    fill: #0be58e;
+    fill: #35cd96;
     fill: var(--highlight);
     margin-right: 5px;
   }
@@ -517,7 +529,7 @@ export default {
 
   &__icon {
     fill: #f61a1a;
-    fill: var(--color-danger);
+    fill: var(--warning);
     margin-right: 5px;
   }
 }
@@ -534,12 +546,12 @@ export default {
   &__value {
     &--positive {
       color: #6da544;
-      color: var(--color-success);
+      color: var(--success);
     }
 
     &--negative {
       color: #f61a1a;
-      color: var(--color-danger);
+      color: var(--warning);
     }
   }
 }

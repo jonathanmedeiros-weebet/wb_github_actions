@@ -96,8 +96,8 @@ export default {
 <style lang="scss" scoped>
 .modal-leagues {
     &__title {
-        color: #FFFFFF80;
-        color: var(--foreground-league);
+        color: rgba(255, 255, 255, .5);
+        color: rgba(var(--game-foreground-rgb), .5);
         font-size: 16px;
         font-weight: 500;
         min-height: 26px;
@@ -120,7 +120,7 @@ export default {
         min-height: 30px;
 
         color: #ffffff;
-        color: var(--foreground-league);
+        color: var(--game-foreground);
         font-size: 16px;
         font-weight: 400;
         text-align: left;
@@ -135,9 +135,8 @@ export default {
         align-items: center;
         
         min-height: 30px;
-
-        color: #FFFFFF99;
-        color: var(--foreground-league);
+        color: #ffffff;
+        color: var(--game-foreground);
         font-size: 14px;
         font-weight: 400;
         text-align: left;
@@ -155,7 +154,8 @@ export default {
         background-size: contain;
         background-position: 50%;
         background-repeat: no-repeat;
-        background-color: #0be58e;
+        
+        background-color: #35cd96;
         background-color: var(--highlight);
 
         clip-path: circle();

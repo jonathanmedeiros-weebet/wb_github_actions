@@ -23,7 +23,7 @@
             </div>
             <div class="gain__item">
               <span>Cotação:</span>
-              <span class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 3) }}</span>
+              <span class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 2) }}</span>
             </div>
             <div class="gain__item">
               <span>Valor Apostado:</span>
@@ -34,7 +34,7 @@
               <span v-if="newEarningPossibility == null" class="gain__value">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
               <span v-else class="gain__value">
                 <span class="gain__strikethrough" v-if="bet.possibilidade_ganho">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
-                <span class="gain--danger" v-if="newEarningPossibility">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
+                <span class="gain--warning" v-if="newEarningPossibility">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
               </span>
             </div>
             <div class="gain__item">
@@ -54,16 +54,16 @@
             <div class="bet__header">
               <span class="bet__team">
                 <template v-if="betItem.ao_vivo">
-                  <IconLive :size="16"/>
+                  <IconLive :size="16" class="bet__icon"/>
                 </template>
                 <template v-if="betItem.sport === MODALITY_SPORT_FUTEBOL">
-                  <IconFootball :size="16"/>
+                  <IconFootball :size="16" class="bet__icon"/>
                 </template>
                 <template v-else-if="betItem.sport === MODALITY_SPORT_VOLEI">
-                  <IconVolleyball :size="16"/>
+                  <IconVolleyball :size="16" class="bet__icon"/>
                 </template>
                 <template v-else-if="betItem.sport === MODALITY_SPORT_E_SPORTS">
-                  <IconGame :size="16"/>
+                  <IconGame :size="16" class="bet__icon"/>
                 </template>
                 <div v-if="bet.tipo !== 'loteria'" class="bet__team-name">
                   <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
@@ -110,7 +110,7 @@
               <template>
                 <p :class="{ 
                   'bet__status--success': betItem.resultado === 'ganhou', 
-                  'bet__status--danger': betItem.resultado === 'perdeu',
+                  'bet__status--warning': betItem.resultado === 'perdeu',
                   'gain__strikethrough': newEarningPossibility !== null
                 }"
                 >{{ capitalizeFirstLetter(betItem.resultado) }}</p>
@@ -156,7 +156,7 @@
               class="button-share"
             >
               <template #icon-left>
-                <IconShare :size="20" color="var(--foreground-league)"/>
+                <IconShare :size="20" color="var(--foreground)"/>
               </template>
             </w-button>
             <div class="button-spacer"></div>
@@ -167,7 +167,7 @@
               :disabled="buttonDisable"
             >
               <template #icon-left>
-                <IconPrinter :size="20" color="var(--foreground-highlight)"/>
+                <IconPrinter :size="20" color="var(--highlight-foreground)"/>
               </template>
             </w-button>
           </template>
@@ -193,7 +193,8 @@
     
     <div style="position: absolute; top: -9999px; left: -9999px;">
       <div v-if="bet" ref="bet-shared" >
-        <BetSharedPreview :bet="bet" />
+        <BetSharedPreview v-if="bet?.tipo !== 'loteria'" :bet="bet" />
+        <BetSharedLotteryPreview v-else :bet="bet" />
       </div>
     </div>
 
@@ -219,6 +220,8 @@ import { getModalitiesEnum } from '@/constants';
 import ModalSharedOptions from './parts/ModalSharedOptions.vue';
 import { toPng } from 'html-to-image';
 import BetSharedPreview from './parts/BetSharedPreview.vue';
+import BetSharedLotteryPreview from "@/views/CloseBetView/parts/BetSharedLotteryPreview.vue";
+
 
 export default {
   name: 'close-bet',
@@ -234,7 +237,8 @@ export default {
     IconPrinter,
     Toast,
     ModalSharedOptions,
-    BetSharedPreview
+    BetSharedPreview,
+    BetSharedLotteryPreview
   },
   props: {
     id: {
@@ -347,7 +351,7 @@ export default {
             .catch(error => {
               this.toastStore.setToastConfig({
                 message: error.errors?.message,
-                type: ToastType.DANGER,
+                type: ToastType.WARNING,
                 duration: 5000
               })
             });
@@ -373,7 +377,7 @@ export default {
           .catch(error => {
             this.toastStore.setToastConfig({
               message: error.errors?.message,
-              type: ToastType.DANGER,
+              type: ToastType.WARNING,
               duration: 5000
             })
           })
@@ -391,7 +395,7 @@ export default {
       .catch(({errors}) => {
         this.toastStore.setToastConfig({
           message: errors.message,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
       })
@@ -446,11 +450,7 @@ export default {
       printLottery(this.bet)
     },
     handleOpenModalSharedBet() {
-      if(this.bet.tipo == 'loteria') {
-        this.handleShared('link');
-      } else {
-        this.showModalShared = true;
-      }
+      this.showModalShared = true;
     },
     handleCloseModalSharedBet() {
       this.showModalShared = false;
@@ -478,7 +478,7 @@ export default {
     flex-direction: column;
     margin: 0;
     padding: 0 10px;
-    min-height: 100%;
+    min-height: calc(100vh - 80px);
     padding-top: 15px;
   }
 
@@ -489,6 +489,8 @@ export default {
     width: 100%;
     background: #181818;
     background: var(--game);
+    color: #ffffff;
+    color: var(--game-foreground);
     border-radius: 2px;
   }
 }
@@ -500,11 +502,11 @@ export default {
   &__text {
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--game-foreground);
   }
   &__date {
-    color: #ffffff80;
-    color: var(--foreground-league-input)
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--game-foreground-rgb), .5);
   }
 }
 
@@ -521,6 +523,8 @@ export default {
 
   &__text {
     font-size: 14px;
+    color: #ffffff;
+    color: var(--game-foreground);
 
     &.lottery {
       margin-bottom: 1.6rem;
@@ -539,16 +543,16 @@ export default {
     justify-content: space-between;
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-league);
+    color: var(--game-foreground);
   }
 
   &__strikethrough {
     text-decoration: line-through;
   }
 
-  &--danger {
+  &--warning {
     color: #f61a1a;
-    color: var(--color-danger);
+    color: var(--warning);
   }
 
 }
@@ -560,7 +564,7 @@ export default {
   background: #0a0a0a;
   background: var(--background);
   border-radius: 4px;
-  margin-bottom: -9px;
+  margin-bottom: 5px;
 
   &__header, &__info, &__text, &__result {
     display: flex;
@@ -572,7 +576,7 @@ export default {
   &__team {
     font-size: 14px;
     color: #ffffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
     display: flex;          
     align-items: center;   
   }
@@ -583,53 +587,59 @@ export default {
 
   &__date, &__text, &__result {
     font-size: 14px;
-    color: #bbbbbb;
+    color: #ffffff;
+    color: var(--foreground);
     justify-content: space-between;
-    color: var(--foreground-header);
     font-weight: 500;
+  }
+
+  &__date {
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
   }
 
   &__select {
     font-size: 14px;
-    color: #bbbbbb;
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--foreground);
     font-weight: 500;
   }
 
   &__odd {
     font-size: 14px;
-    color: #cccccc;
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--foreground);
     font-weight: 500;
   }
 
   &__status--success {
     color: #4CAF50;
-    color: var(--color-success);
+    color: var(--success);
   }
 
-  &__status--danger {
+  &__status--warning {
     color: #f61a1a;
-    color: var(--color-danger);
+    color: var(--warning);
   }
 
   &__message {
     margin-top: 20px;
+  }
+
+  &__icon {
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 }
 
 .buttons {
   display: flex;
   align-items: center;
-  padding-top: 25px;
+  margin-top: auto;
 }
 
 .button-spacer {
   width: 20px; 
-}
-
-.button-share {
-  border: 1px solid white;
 }
 
 .finish {
@@ -643,6 +653,8 @@ strong {
 .bet-lottery {
   display: flex;
   flex-direction: column;
+  color: #ffffff;
+  color: var(--foreground);
 }
 </style>
 

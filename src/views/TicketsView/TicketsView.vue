@@ -7,7 +7,7 @@
         <div class="game">
           <span class="game__select">Jogos selecionados</span>
           <div class="game__delete" @click="handleAllRemove">
-            <IconDelete class="game__icon" />
+            <IconDelete color="var(--foreground)" class="game__icon" />
             <span class="game__text">Excluir todos</span>
           </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="bet__result" :class="{ 'bet__result--border': item.hasChanges }">
               <span>{{ item.quoteName }}</span>
               <span>
-                {{ item.quoteValue }}
+                {{ item.finalQuoteValue }}
                 <span v-if="item.previousQuoteValue" class="bet__previous-quote">({{ item.previousQuoteValue }})</span>
               </span>
             </div>
@@ -128,7 +128,7 @@
               @focus="handleInitializeBetValue"
             >
               <template #icon>
-                <span style="color: var(--foreground-inputs-odds);">R$</span>
+                <span style="color: var(--input-foreground);">R$</span>
               </template>
             </w-input>
           </div>
@@ -262,15 +262,16 @@ export default {
     },
     quoteValue() {
       if(!Boolean(this.items.length)) return 0;
-      let quote = this.items.reduce((total, item) => {
-        const finalValue = Number(item.quoteValue); 
 
+      let quote = this.items.reduce((total, item) => {
+        const finalValue = Number(item.finalQuoteValue); 
         return Number(total) * Number(finalValue)
       }, 1)
 
       const { options } = useConfigClient();
+
       if (quote > options.fator_max) {
-          quote = options.fator_max;
+        quote = options.fator_max;
       }
 
       return quote;
@@ -293,6 +294,7 @@ export default {
             icon: this.icons[item.modalityId],
             quoteValue: item.quoteValue.toFixed(2),
             previousQuoteValue: Boolean(item.previousQuoteValue) ? item.previousQuoteValue.toFixed(2) : null,
+            finalQuoteValue: Boolean(item.finalQuoteValue) ? item.finalQuoteValue.toFixed(2) : null,
             hasChanges: Boolean(item.quoteValue) && Boolean(item.previousQuoteValue)
           }));
       } else {
@@ -405,7 +407,7 @@ export default {
       if (this.items.length < options.quantidade_min_jogos_bilhete) {
         this.toastStore.setToastConfig({
           message: `Por favor, inclua no MÍNIMO ${options.quantidade_min_jogos_bilhete} evento(s).`,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
         this.submitting = false;
@@ -414,13 +416,14 @@ export default {
       if (this.items.length > options.quantidade_max_jogos_bilhete) {
         this.toastStore.setToastConfig({
           message: `Por favor, inclua no MÁXIMO ${options.quantidade_max_jogos_bilhete} evento(s).`,
-          type: ToastType.DANGER,
+          type: ToastType.WARNING,
           duration: 5000
         })
         this.submitting = false;
       }
 
       const {items, bettor, bettorDocumentNumber, value, accepted} = this.ticketStore;
+
       const data = {
         apostador: bettor,
         bettorDocumentNumber,
@@ -455,7 +458,7 @@ export default {
         } catch ({errors}) {
           this.toastStore.setToastConfig({
             message: errors.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
           return;
@@ -486,8 +489,9 @@ export default {
               if(ticketItem) {
                 this.ticketStore.addQuote({
                   ...ticketItem,
-                  previousQuoteValue: ticketItem.quoteValue,
+                  previousQuoteValue: ticketItem.finalValue,
                   quoteValue: valor,
+                  finalValue: valor,
                 });
 
                 this.hasChanges = true;
@@ -497,7 +501,7 @@ export default {
 
           this.toastStore.setToastConfig({
             message: errors.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         })
@@ -543,7 +547,7 @@ export default {
           console.error({errors})
           this.toastStore.setToastConfig({
             message: errors.message,
-            type: ToastType.DANGER,
+            type: ToastType.WARNING,
             duration: 5000
           })
         })
@@ -573,10 +577,11 @@ export default {
   }
 
   &__message {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
     font-size: 12px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color: rgba(255, 255, 255, .5);
+    color: rgba(var(--foreground-rgb), .5);
   }
 }
 
@@ -592,13 +597,13 @@ export default {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: #ffff;
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__text {
-    color: #ffff;
-    color: var(--foreground-header);
+    color: #ffffff;
+    color: var(--foreground);
   }
 
   &__delete {
@@ -621,9 +626,9 @@ export default {
   padding: 8px;
   display: flex;
   flex-direction: column;
-  position: relative;
-  color: #ffff;
-  color: var(--foreground-header);
+  position: relative; 
+  color: #ffffff;
+  color: var(--foreground);
 
   &::after {
     content: '';
@@ -655,20 +660,28 @@ export default {
   &__icon-live {
     width: 18px;
     height: 18px;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__icon-ball {
     min-width: 14px;
     height: 14px;
     margin-right: 4px;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__icon-close {
     opacity: 0.5;
+    fill: #ffffff;
+    fill: var(--foreground);
   }
 
   &__date {
     opacity: 0.5;
+    color: var(--foreground);
+    color: #ffffff;
   }
 
   &__result {
@@ -701,8 +714,8 @@ export default {
 
   &__balance-text {
     font-size: 14px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__balance {
@@ -716,10 +729,12 @@ export default {
     padding: 18px;
     justify-content: center;
     align-items: center;
+    border: 0;
     border-radius: 8px;
-    background: var(--inputs-odds);
-    color: #ffffff80;
-    color: var(--foreground-inputs-odds);
+    background: #181818;
+    background: var(--input);
+    color: rgba(255, 255, 255, 0.50);
+    color: rgba(var(--input-foreground-rgb), 0.5);
     font-size: 14px;
     margin-right: 8px;
   }
@@ -743,24 +758,24 @@ export default {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__ganhos {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__checkbox {
     appearance: none;
     width: 15px;
     height: 15px;
-    border: 1px solid #ffffff80;
-    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border: 1px solid rgba(var(--foreground-rgb), 0.5);
     cursor: pointer;
     border-radius: 3px;
     position: relative;
@@ -768,7 +783,7 @@ export default {
   }
 
   &__checkbox:checked {
-    background-color: #0be58e;
+    background-color: #35cd96;
     background-color: var(--highlight);
   }
 
@@ -779,15 +794,15 @@ export default {
     left: 4px;
     width: 5px;
     height: 9px;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__alteracao {
     display: flex;
     align-items: center;
-    color:#ffff;
-    color: var(--foreground-header);
+    color:#ffffff;
+    color: var(--foreground);
   }
 
   &__finalizar {
@@ -810,7 +825,7 @@ export default {
     margin-top: 15px;
     padding: 15px;
     color:#ffff;
-    color: var(--foreground-header);
+    color: var(--foreground);
   }
 }
 
@@ -824,7 +839,7 @@ export default {
   &__info {
     opacity: 0.8;
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--foreground);
   }
 
   &__tens {
@@ -853,9 +868,10 @@ export default {
     justify-content: center;
     align-items: center;
     background-color: #181818;
-    background-color: var(--inputs-odds);
+    background-color: var(--input);
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--input-foreground);
+    border-radius: 120px;
 
     &--android6 {
       margin-left: 8px;
@@ -872,7 +888,7 @@ export default {
 
   &__value {
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -881,7 +897,7 @@ export default {
 
   &__value-description {
     color: #ffffff;
-    color: var(--foreground-inputs-odds);
+    color: var(--foreground);
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

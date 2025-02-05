@@ -50,16 +50,16 @@ export default {
   font-size: 16px;
   font-weight: 500;
   padding: 16px 10px;
-  color: #ffffff80;
-  color: var(--foreground-league-input);
+
+  color: rgba(255, 255, 255, .5);
+  color: rgba(var(--foreground-rgb), .5);
   outline: none;
 
   &--active {
-    color: #0be58e;
+    color: #35cd96;
     color: var(--highlight);
-    border-bottom: 1px solid #0be58e;
+    border-bottom: 1px solid #35cd96;
     border-bottom: 1px solid var(--highlight);
-
   }
 
   &:focus {

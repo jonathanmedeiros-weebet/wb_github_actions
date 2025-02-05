@@ -1,7 +1,13 @@
+import { useTicketStore } from "@/stores";
+
 export enum LocalStorageKey {
     CONFIG_CLIENT = 'config_client',
     TOKEN = 'cToken',
-    USER = 'user'
+    USER = 'user',
+    BET_TYPES = 'bet_types',
+    SETTINGS = 'settings',
+    TICKET_ITEMS = 'ticket_items',
+    TICKET_MODALITY_ID = 'ticket_modality_id'
 }
 
 export const localStorageService = {
@@ -18,7 +24,13 @@ export const localStorageService = {
     removeAll: () => localStorage.clear()
     ,
     removeAuth: () => {
+        const { clear: clearTicket } = useTicketStore();
+        clearTicket();
+
         localStorage.removeItem(LocalStorageKey.TOKEN);
         localStorage.removeItem(LocalStorageKey.USER);
+        localStorage.removeItem(LocalStorageKey.BET_TYPES);
+        localStorage.removeItem(LocalStorageKey.TICKET_ITEMS);
+        localStorage.removeItem(LocalStorageKey.TICKET_MODALITY_ID);
     }
 }

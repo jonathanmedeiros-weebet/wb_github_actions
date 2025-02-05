@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" ref="appElement">
     <SplashScreen v-if="showSplashScreen"/>
     <template v-else>
       <Toast />
@@ -37,14 +37,14 @@ export default {
     },
   },
   mounted() {
-      // const clientName = this.configClientStore.name;
-      // const slugName = this.configClientStore.slug;
-      // const link = document.createElement('link');
-      // link.id = `${clientName}-css`;
-      // link.rel = 'stylesheet';
-      // const timestamp = Math.floor(Date.now() / 1000);
-      // link.href = `https://weebet.s3.amazonaws.com/${slugName}/param/cores.css?v=${timestamp}`;
-      // document.head.appendChild(link);
+    const clientName = this.configClientStore.name;
+    const slugName = this.configClientStore.slug;
+    const link = document.createElement('link');
+    link.id = `${clientName}-css`;
+    link.rel = 'stylesheet';
+    const timestamp = Math.floor(Date.now() / 1000);
+    link.href = `https://weebet.s3.amazonaws.com/${slugName}/param/agent-colors.css?v=${timestamp}`;
+    document.head.appendChild(link);
   },
 }
 </script>

@@ -4,29 +4,44 @@ import { useToastStore } from "./toast.store";
 import { LotteryTypes, ToastType } from "@/enums";
 import { getModalitiesEnum } from "@/constants";
 import { calculateLotteryWinnings } from "@/utilities";
+import { LocalStorageKey, localStorageService } from "@/services";
+
+const prepareTicketItems = () => {
+    const tickets = localStorageService.get(LocalStorageKey.TICKET_ITEMS);
+    return Boolean(tickets) ? tickets : {};
+}
+
+const prepareModalityId = () => {
+    const modalityId = localStorageService.get(LocalStorageKey.TICKET_MODALITY_ID);
+    return Boolean(modalityId) ? modalityId : null;
+}
 
 export const useTicketStore = defineStore('ticket', {
     state: () => ({
-        modalityId: null,
+        modalityId: prepareModalityId(),
         bettor: '',
         bettorDocumentNumber: '',
         value: 0,
         award: 0,
-        items: {} as any,
+        items: prepareTicketItems() as any,
         championshipOpened: [] as any[],
         accepted: false,
         error: ''
     }),
     actions: {
-        setModalityId(modalityId: any) {
+        setModalityId(modalityId: any, clearTicket = true) {
             this.modalityId = modalityId;
 
-            this.value = 0;
-            this.items = {};
-            this.accepted = false;
-            this.error = '';
-            this.bettor = '';
-            this.bettorDocumentNumber = '';
+            if (clearTicket) {
+                this.value = 0;
+                this.items = {};
+                this.accepted = false;
+                this.error = '';
+                this.bettor = '';
+                this.bettorDocumentNumber = '';
+                localStorageService.set(LocalStorageKey.TICKET_ITEMS, this.items);
+            }
+            localStorageService.set(LocalStorageKey.TICKET_MODALITY_ID, this.modalityId);
         },
         setError(error: string) {
             this.error = error
@@ -52,6 +67,7 @@ export const useTicketStore = defineStore('ticket', {
             live,
             quoteKey,
             quoteValue,
+            finalQuoteValue,
             quoteName,
             quoteGroupName,
             favorite,
@@ -60,7 +76,7 @@ export const useTicketStore = defineStore('ticket', {
             previousQuoteValue = null
         }: any) {
             const items = { ...this.items };
-
+            
             if(!Boolean(items[gameId])) {
                 const { options } = useConfigClient();
                 const { quantidade_max_jogos_bilhete } = options;
@@ -70,7 +86,7 @@ export const useTicketStore = defineStore('ticket', {
                     const { setToastConfig } = useToastStore();
                     setToastConfig({
                         message: 'Desculpe, você atingiu a quantidade MÁXIMA de apostas.',
-                        type: ToastType.DANGER,
+                        type: ToastType.WARNING,
                         duration: 3000
                     });
                     return;
@@ -85,6 +101,7 @@ export const useTicketStore = defineStore('ticket', {
                 live,
                 quoteKey,
                 quoteValue,
+                finalQuoteValue,
                 previousQuoteValue,
                 quoteName,
                 quoteGroupName,
@@ -95,6 +112,7 @@ export const useTicketStore = defineStore('ticket', {
             };
 
             this.items = { ...items };
+            localStorageService.set(LocalStorageKey.TICKET_ITEMS, this.items);
 
             this.prepareChampionshipOpenedIds();
         },
@@ -103,6 +121,7 @@ export const useTicketStore = defineStore('ticket', {
             delete items[gameId];
             
             this.items = { ...items };
+            localStorageService.set(LocalStorageKey.TICKET_ITEMS, this.items);
 
             this.prepareChampionshipOpenedIds();
         },
@@ -112,6 +131,8 @@ export const useTicketStore = defineStore('ticket', {
             this.value = 0;
             this.award = 0;
             this.accepted = false;
+
+            localStorageService.set(LocalStorageKey.TICKET_ITEMS, this.items);
 
             const Modalities = getModalitiesEnum();
             const isModalityLottery = this.modalityId == Modalities.LOTTERY
@@ -149,23 +170,25 @@ export const useTicketStore = defineStore('ticket', {
                 type,
                 lotteryId,
                 lotteryTitle,
-                value,
+                value: Number(value),
                 award06,
                 award05,
                 award04,
                 award03
-            }
+            };
 
             this.items = { ...items };
-            this.value += value;
+            this.value += Number(value);
 
             this.award += type == LotteryTypes.QUININHA
                 ? award05
                 : award06;
+
+            localStorageService.set(LocalStorageKey.TICKET_ITEMS, this.items);
         },
         removeTen(tenId: number) {
             const items = { ...this.items };
-            this.value -= items[tenId].value;
+            this.value -= Number(items[tenId]?.value || 0);
             
             this.award -= items[tenId].type == LotteryTypes.QUININHA
                 ? items[tenId].award05
@@ -173,6 +196,7 @@ export const useTicketStore = defineStore('ticket', {
             
             delete items[tenId];
             this.items = { ...items };
+            localStorageService.set(LocalStorageKey.TICKET_ITEMS, this.items);
         }
     },
 })
