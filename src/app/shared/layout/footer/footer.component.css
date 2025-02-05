@@ -653,6 +653,26 @@ footer {
     }
 }
 
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
+
+    .info-jogo h4,
+    .play-responsibly,
+    .know-your-limits {
+        display: none;
+    }
+
+    .info-jogo h4,
+    .play-responsibly,
+    .know-your-limits {
+        display: none;
+    }
+    .info-jogo h4,
+    .info-jogo-full-screen .play-responsibly,
+    .info-jogo-full-screen .know-your-limits {
+        display: flex;
+    }
+}
+
 
 
 

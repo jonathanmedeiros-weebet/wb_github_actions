@@ -183,7 +183,7 @@
         </div>
         <div class="separator" *ngIf="hasLicence">
         </div>
-        <div class="info-jogo">
+        <div class="info-jogo" [ngClass]="{'info-jogo-full-screen': fullPage}">
             <div *ngIf="this.slug == 'zilionz.com'" class="icons" style="margin-bottom: 30px; gap: 0">
                 <ng-container *ngIf="slug == 'zilionz.com'">
                     <img src="https://wb-assets.com/img/curacao.png" width="150" height="50" border="0" alt="Gaming Curacao">
@@ -191,7 +191,7 @@
                         data-anj-image-size="128" data-anj-image-type="basic-small" style="width: 50px"></div>
                 </ng-container>
             </div>
-            <div class="icons">
+            <div class="icons" >
                 <div class="restricted-adults-container">
                     <a [routerLink]="hasJogoResponsavel ? ['/informacoes/jogo-responsavel'] : null">
                         <div class="restricted-adults">
