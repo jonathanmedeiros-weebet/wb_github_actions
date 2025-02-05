@@ -1860,15 +1860,6 @@ gulp.task('gli.wee.bet', function (done) {
     });
 });
 
-gulp.task('priv8bet.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "priv8bet.com",
-        banca: "PRIV8BET: Apostas Esportivas Online & Casino | Aposte com total segurança",
-        styles: "",
-    });
-});
-
 gulp.task('betinha.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1938,15 +1929,6 @@ gulp.task('emirates365.bet', function (done) {
     });
 });
 
-gulp.task('bettotal.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "bettotal.bet",
-        banca: "BET TOTAL",
-        styles: "",
-    });
-});
-
 gulp.task('topbets.site', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
@@ -1970,33 +1952,6 @@ gulp.task('jjsports.vip', function (done) {
         server: "front3.wee.bet",
         host: "jjsports.vip",
         banca: "JJ SPORTS",
-        styles: "",
-    });
-});
-
-gulp.task('footbet.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "footbet.bet",
-        banca: "FOOTBET",
-        styles: "",
-    });
-});
-
-gulp.task('shelbybet.com.br', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "shelbybet.com.br",
-        banca: "SHEBLBY BET",
-        styles: "",
-    });
-});
-
-gulp.task('lostigre.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "lostigre.com",
-        banca: "LOS TIGRE",
         styles: "",
     });
 });
