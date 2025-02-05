@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(!localStorage.getItem('+18')) {
+        if(this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {
             this.modalRef = this.modalService.open(
                 this.over18MessageModal,
                 {
