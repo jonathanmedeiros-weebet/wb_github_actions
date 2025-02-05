@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(!localStorage.getItem('+18')) {
+        if(this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {
             this.modalRef = this.modalService.open(
                 this.over18MessageModal,
                 {
@@ -100,6 +100,8 @@ export class AppComponent implements OnInit {
                     keyboard: false
                 }
             );
+        } else {
+            this.displayInitialModal();
         }
         this.route.queryParams
             .subscribe((params) => {
@@ -239,59 +241,6 @@ export class AppComponent implements OnInit {
 
         this.SLUG = config.SLUG;
         this.TIMESTAMP = new Date().getTime();
-
-        this.imagemInicialService.getImagens().subscribe(
-            imagem => {
-                if (imagem && imagem['src']) {
-                    this.imagemInicial = imagem;
-                } else {
-                    this.isEmpty = true;
-                }
-
-                this.cd.markForCheck();
-
-                if (this.isDemo) {
-                    this.modalService.open(
-                        this.demoModal,
-                        {
-                            ariaLabelledBy: 'modal-basic-title',
-                            windowClass: 'modal-pop-up',
-                            centered: true
-                        }
-                    );
-                } else if (!this.isEmpty && this.ativacaoCadastro === false && !this.isCadastro) {
-                    let exibirImagemInicial = false;
-                    const variavel = localStorage.getItem('imagemInicialData');
-                    if (!variavel) {
-                        exibirImagemInicial = true;
-                        const horario = new Date();
-                        localStorage.setItem('imagemInicialData', String(horario));
-                    } else {
-                        // @ts-ignore
-                        const data1 = new Date(variavel);
-                        const data2 = new Date();
-                        // const data2 = new Date('2022-07-30T03:24:00');
-                        const diffTime = dateDiffInDays(data1, data2);
-                        if (diffTime > 0) {
-                            exibirImagemInicial = true;
-                            const horario = Date();
-                            localStorage.setItem('imagemInicialData', String(horario));
-                        }
-                    }
-
-                    if (exibirImagemInicial) {
-                        this.modalService.open(
-                            this.inicialModal,
-                            {
-                                centered: true,
-                                windowClass: 'modal-pop-up'
-                            }
-                        );
-                    }
-                }
-            },
-            error => this.handleError(error)
-        );
         this.mobileScreen = window.innerWidth <= 1024;
 
         if (this.auth.isLoggedIn()) {
@@ -307,15 +256,6 @@ export class AppComponent implements OnInit {
                         this.auth.logout();
                     }
                 );
-        }
-
-        function dateDiffInDays(a, b) {
-            const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-            // Discard the time and time-zone information.
-            const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-            const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-            return Math.floor((utc2 - utc1) / _MS_PER_DAY);
         }
 
         this.router.events
@@ -343,6 +283,56 @@ export class AppComponent implements OnInit {
                 }
             }
         });
+    }
+
+    displayInitialModal() {
+        this.imagemInicialService.getImagens().subscribe(
+            imagem => {
+                if (imagem && imagem['src']) {
+                    this.imagemInicial = imagem;
+                } else {
+                    this.isEmpty = true;
+                }
+
+                this.cd.markForCheck();
+
+                if (!this.isEmpty && this.ativacaoCadastro === false && !this.isCadastro) {
+                    let exibirImagemInicial = false;
+                    const variavel = localStorage.getItem('imagemInicialData');
+
+                    if (!variavel) {
+                        exibirImagemInicial = true;
+                        localStorage.setItem('imagemInicialData', String(new Date()));
+                    } else {
+                        const data1 = new Date(variavel);
+                        const data2 = new Date();
+                        const diffTime = dateDiffInDays(data1, data2);
+
+                        if (diffTime > 0) {
+                            exibirImagemInicial = true;
+                            localStorage.setItem('imagemInicialData', String(new Date()));
+                        }
+                    }
+
+                    if (exibirImagemInicial) {
+                        this.modalService.open(this.inicialModal, {
+                            centered: true,
+                            windowClass: 'modal-pop-up'
+                        });
+                    }
+                }
+            },
+            error => this.handleError(error)
+        );
+
+        function dateDiffInDays(a, b) {
+            const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+            // Discard the time and time-zone information.
+            const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+            const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+            return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+        }
     }
 
     ngOnDestroy(): void {
@@ -405,6 +395,7 @@ export class AppComponent implements OnInit {
     over18Confirm(){
         localStorage.setItem('+18', 'true');
         this.modalRef.close();
+        this.displayInitialModal();
     }
 
     under18Confirm(){
