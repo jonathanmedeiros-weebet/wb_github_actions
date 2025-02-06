@@ -37,6 +37,7 @@
                           "src/bilhete",
                           "src/apple-touch-icon.png",
                           "src/apple-touch-icon-precomposed.png",
+                          "src/manifest.webmanifest",
                           {
                             "glob": "**/*",
                             "input": "/src/bilhete/",
@@ -56,6 +57,8 @@
                             "node_modules/bootstrap-icons/font/bootstrap-icons.css",
                             "node_modules/remixicon/fonts/remixicon.css"
                         ],
+                        "serviceWorker": true,
+                        "ngswConfigPath": "ngsw-config.json",
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",
                             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
