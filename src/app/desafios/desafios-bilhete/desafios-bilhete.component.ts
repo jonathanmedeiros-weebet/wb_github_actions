@@ -217,9 +217,9 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
 
-            if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
+            if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
                 valido = false;
-                msg = this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError');
+                msg = this.translate.instant('geral.geolocationError');
             }
 
             if (valido) {
@@ -230,13 +230,10 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                         delete item.odd;
                     });
 
-                    const location = await this.geolocationService.getGeolocation();
-                    this.geolocation.next(location);
                     values['geolocation'] = this.geolocation.value
-
-                    values['ibge_code'] = sessionStorage.getItem('ibge_code');
-                    values['locale_city'] = sessionStorage.getItem('locale_city');
-                    values['locale_state'] = sessionStorage.getItem('locale_state');                 
+                    values['ibge_code'] = localStorage.getItem('ibge_code');
+                    values['locale_city'] = localStorage.getItem('locale_city');
+                    values['locale_state'] = localStorage.getItem('locale_state');                 
 
                     this.salvarAposta(values);
                 } else {

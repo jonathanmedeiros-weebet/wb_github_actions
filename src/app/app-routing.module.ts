@@ -13,6 +13,7 @@ import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
 import { BetbyComponent } from './betby/betby.component';
 import {RifaGuard} from './shared/services/guards/rifa.guard';
+import { CompartilharBilheteComponent } from './cupom/compartilhar-bilhete/compartilhar-bilhete.component';
 import { RedirectBetGuardGuard } from './shared/services/guards/redirect-bet-guard.guard';
 
 const appRoutes: Routes = [
@@ -150,8 +151,8 @@ const appRoutes: Routes = [
         ]
     },
     {
-        path: 'bilhete/:codigo',
-        component: CupomComponent
+        path: 'compartilhar-bilhete/:codigo',
+        component: CompartilharBilheteComponent
     },
     {
         path: 'aposta/:codigo',

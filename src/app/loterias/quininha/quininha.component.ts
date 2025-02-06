@@ -20,6 +20,7 @@ import * as range from 'lodash.range';
 import { random } from 'lodash';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
+import { HelperService } from '../../services';
 
 @Component({
     selector: 'app-quininha',
@@ -65,7 +66,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         public layoutService: LayoutService,
         private cd: ChangeDetectorRef,
         private geolocationService: GeolocationService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private helperService: HelperService
     ) {
         super();
     }
@@ -101,7 +103,12 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         this.sorteioService.getSorteios({tipo: 'quininha', sort: 'data'})
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                sorteios => this.sorteios = sorteios,
+                sorteios => {
+                    sorteios.forEach(element => {
+                        element.formatDate = this.helperService.dateFormat(element.data, "DD/MM/YYYY HH:mm");
+                    });
+                    this.sorteios = sorteios;
+                },
                 error => this.messageService.error(error)
             );
 
@@ -234,24 +241,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Finalizar aposta */
     async create() {
         this.disabledSubmit();
-
-        const location = await this.geolocationService.getGeolocation();
-        this.geolocation.next(location);
-        this.aposta['geolocation'] = this.geolocation.value       
-
-        if (!this.geolocationService.checkGeolocation() && this.paramsService.getSIGAPHabilitado()) {
-            this.enableSubmit();
-            this.handleError(this.geolocationService.isInternational() ? this.translate.instant('geral.restricaoDeLocalizacao') : this.translate.instant('geral.geolocationError'));
-            return;
-        }
-
-        this.aposta['ibge_code'] = sessionStorage.getItem('ibge_code');
-        this.aposta['locale_city'] = sessionStorage.getItem('locale_city');
-        this.aposta['locale_state'] = sessionStorage.getItem('locale_state');
+        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
-                this.apostaService.create(this.aposta)
+                const values = {...this.aposta, geolocation: geolocation };
+
+                this.apostaService.create(values)
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(
                         aposta => this.apostaSuccess(aposta),

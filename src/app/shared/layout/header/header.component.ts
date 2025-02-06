@@ -1,14 +1,14 @@
-import {AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router} from '@angular/router';
-import {UntypedFormBuilder} from '@angular/forms';
+import { AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
+import { UntypedFormBuilder } from '@angular/forms';
 
-import {Subject} from 'rxjs';
-import {filter, takeUntil} from 'rxjs/operators';
-import {BaseFormComponent} from '../base-form/base-form.component';
-import {AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService} from './../../../services';
-import {Usuario} from './../../../models';
-import {config} from '../../config';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+import { BaseFormComponent } from '../base-form/base-form.component';
+import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService } from './../../../services';
+import { Usuario } from './../../../models';
+import { config } from '../../config';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     AuthDoisFatoresModalComponent,
     CadastroModalComponent,
@@ -22,24 +22,24 @@ import {
     RecargaCartaoModalComponent,
     ValidatePhoneModalComponent
 } from '../modals';
-import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
-import {SolicitacaoSaqueClienteComponent} from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
-import {DashboardComponent} from 'src/app/cambistas/dashboard/dashboard.component';
-import {ApuracaoComponent} from 'src/app/cambistas/apuracao/apuracao.component';
-import {ValidarApostaWrapperComponent} from 'src/app/validar-aposta/wrapper/validar-aposta-wrapper.component';
-import {TabelaComponent} from 'src/app/cambistas/tabela/tabela.component';
-import {SolicitacaoSaqueComponent} from 'src/app/cambistas/solicitacao-saque/solicitacao-saque.component';
-import {CartaoComponent} from 'src/app/cambistas/cartao/cartao.component';
-import {ApostaComponent} from 'src/app/cambistas/aposta/aposta.component';
-import {TranslateService} from '@ngx-translate/core';
-import {FinanceiroComponent} from '../../../clientes/financeiro/financeiro.component';
-import {ConfiguracoesComponent} from '../../../clientes/configuracoes/configuracoes.component';
-import {MovimentacaoComponent} from '../../../cambistas/movimentacao/movimentacao.component';
-import {DepositoCambistaComponent} from '../../../cambistas/deposito/deposito-cambista.component';
+import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
+import { SolicitacaoSaqueClienteComponent } from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
+import { DashboardComponent } from 'src/app/cambistas/dashboard/dashboard.component';
+import { ApuracaoComponent } from 'src/app/cambistas/apuracao/apuracao.component';
+import { ValidarApostaWrapperComponent } from 'src/app/validar-aposta/wrapper/validar-aposta-wrapper.component';
+import { TabelaComponent } from 'src/app/cambistas/tabela/tabela.component';
+import { SolicitacaoSaqueComponent } from 'src/app/cambistas/solicitacao-saque/solicitacao-saque.component';
+import { CartaoComponent } from 'src/app/cambistas/cartao/cartao.component';
+import { ApostaComponent } from 'src/app/cambistas/aposta/aposta.component';
+import { TranslateService } from '@ngx-translate/core';
+import { FinanceiroComponent } from '../../../clientes/financeiro/financeiro.component';
+import { ConfiguracoesComponent } from '../../../clientes/configuracoes/configuracoes.component';
+import { MovimentacaoComponent } from '../../../cambistas/movimentacao/movimentacao.component';
+import { DepositoCambistaComponent } from '../../../cambistas/deposito/deposito-cambista.component';
 import { IndiqueGanheComponent } from 'src/app/clientes/indique-ganhe/indique-ganhe.component';
 import { PromocaoComponent } from 'src/app/clientes/promocao/promocao.component';
 import { TransacoesHistoricoComponent } from 'src/app/clientes/transacoes-historico/transacoes-historico.component';
-import {CarteiraComponent} from "../../../clientes/carteira/carteira.component";
+import { CarteiraComponent } from "../../../clientes/carteira/carteira.component";
 import { CashbackComponent } from 'src/app/clientes/cashback/cashback.component';
 import { ListBankAccountsComponent } from '../list-bank-accounts/list-bank-accounts.component';
 import { LastAccessesModalComponent } from '../modals/last-accesses-modal/last-accesses-modal.component';
@@ -56,7 +56,7 @@ declare var xtremepush: any;
 export class HeaderComponent extends BaseFormComponent implements OnInit, OnDestroy, AfterViewChecked {
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
-    @ViewChild('indiqueGanheCard', {read: ElementRef}) indiqueGanheCard: ElementRef;
+    @ViewChild('indiqueGanheCard', { read: ElementRef }) indiqueGanheCard: ElementRef;
 
     usuario = new Usuario();
     unsub$ = new Subject();
@@ -178,7 +178,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     sportsActive(): void {
         if (this.currentRoute.startsWith('/sports') && !this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
             this.sportsIsActive = true;
-        } else if(this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
+        } else if (this.currentRoute.startsWith('/sports?bt-path=%2Flive')) {
             this.sportsLiveIsActive = true;
         } else {
             this.sportsLiveIsActive = false;
@@ -207,7 +207,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.headerService.fullScreenCasinoGameState$.subscribe(isFullScreen => {
             this.isCasinoGameFullScreen = isFullScreen;
-          });
+        });
 
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
@@ -217,7 +217,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         });
 
         this.xtremepushHabilitado = this.paramsService.getOpcoes().xtremepush_habilitado;
-        if(this.xtremepushHabilitado) {
+        if (this.xtremepushHabilitado) {
             this.verificarNotificacoes();
         }
         this.BANCA_NOME = config.BANCA_NOME;
@@ -322,9 +322,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.onShowHeaderMobile();
         this.linguagemSelecionada = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => this.linguagemSelecionada = res.lang);
-        this.mostrarSaldo =  JSON.parse(localStorage.getItem('exibirSaldo'));
+        this.mostrarSaldo = JSON.parse(localStorage.getItem('exibirSaldo'));
 
-        if(this.mostrarSaldo == null){
+        if (this.mostrarSaldo == null) {
             localStorage.setItem('exibirSaldo', 'true');
             this.mostrarSaldo = 'true';
         }
@@ -358,19 +358,17 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             }
         });
 
-        if (this.indiqueGanheHabilitado && (!this.isLoggedIn || this.isCliente) && !this.activeGameCassinoMobile()) {
-            this.layoutService.changeIndiqueGanheCardHeight(37);
-        }
+        this.isIndiqueGanheVisible = this.verifyIndiqueGanheVisible();
 
-        if(!this.indiqueGanheHabilitado){
+        if (this.isIndiqueGanheVisible) {
+            this.layoutService.changeIndiqueGanheCardHeight(37);
+        } else {
             this.layoutService.indiqueGanheRemovido(true);
         }
-
-        this.isIndiqueGanheVisible = this.verifyIndiqueGanheVisible();
     }
 
-    verificarNotificacoes(){
-       setInterval(() => {
+    verificarNotificacoes() {
+        setInterval(() => {
             xtremepush('inbox', 'message.list', {
                 limit: 1,
                 opened: 0
@@ -378,7 +376,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 if (result.items.length > 0) {
                     this.atualizarBadge(true);
                 }
-            }, function(err) {
+            }, function (err) {
                 console.log(err);
             });
         }, 50000);
@@ -540,7 +538,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     }
 
-    abrirCambistaMovimentacao(){
+    abrirCambistaMovimentacao() {
         this.modalService.open(MovimentacaoComponent);
     }
 
@@ -692,7 +690,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         }
 
         const now = new Date().getTime();
-        const oneDayInMs = 24 * 60 * 60 * 1000; 
+        const oneDayInMs = 24 * 60 * 60 * 1000;
         const timeDifference = now - parseInt(indiqueGanheClosed, 10);
 
         return timeDifference < oneDayInMs;
@@ -700,9 +698,9 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     verifyIndiqueGanheVisible(): boolean {
         return this.indiqueGanheHabilitado &&
-               (!this.isLoggedIn || this.isCliente) &&
-               !this.activeGameCassinoMobile() &&
-               !this.verifyIndiqueGanheWasClosed();
+            (!this.isLoggedIn || this.isCliente) &&
+            !this.activeGameCassinoMobile() &&
+            !this.verifyIndiqueGanheWasClosed();
     }
 
     removerIndiqueGanheCard() {
@@ -817,5 +815,15 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
     closeNotifications() {
         this.notificationsXtremepushOpen = false;
+    }
+
+    allowAgentChangePassword() {
+        let result = true;
+
+        if (this.usuario.tipo_usuario == 'cambista') {
+            result = this.paramsService.getOpcoes().permitir_alterar_senha;
+        }
+
+        return result;
     }
 }

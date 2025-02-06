@@ -262,7 +262,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
            
             if (!aposta.cartao_aposta) {
                 if(aposta.rollover_status != 'cancelado'){
-                    if (aposta.is_bonus == 0) { 
+                    if (!aposta?.is_bonus) { 
                         this.totais.valor += parseFloat(aposta.valor);
                     } else {
                         this.totais.valorBonus += parseFloat(aposta.valor);
@@ -276,7 +276,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
                         });
                     } else {
                         if (aposta.resultado === 'ganhou') {
-                            if (aposta.is_bonus == 0){
+                            if (!aposta?.is_bonus) {
                                 this.totais.premio += aposta.premio;
                             } else {
                                 this.totais.premioBonus += aposta.premio;

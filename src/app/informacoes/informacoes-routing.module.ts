@@ -15,6 +15,7 @@ const routes: Routes = [
             { path: 'termos-condicoes', component: InformacoesComponent, data: { pagina: 'termos-condicoes' } },
             { path: 'politica-privacidade', component: InformacoesComponent, data: { pagina: 'politica-privacidade' } },
             { path: 'politica-aml', component: InformacoesComponent, data: { pagina: 'politica-aml' } },
+            { path: 'termos-afiliados', component: InformacoesComponent, data: { pagina: 'termos-afiliados' } },
         ]
     }
 ];

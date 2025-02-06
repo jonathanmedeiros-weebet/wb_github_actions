@@ -24,6 +24,7 @@ export class ExibirBilheteRifaComponent implements OnInit {
     opcoes;
     cambistaPaga;
     appMobile;
+    enabledBookie;
     isCliente;
     isLoggedIn;
     modalCompartilhamentoRef;
@@ -40,6 +41,7 @@ export class ExibirBilheteRifaComponent implements OnInit {
     ngOnInit() {
         this.appMobile = this.auth.isAppMobile();
         this.opcoes = this.paramsService.getOpcoes();
+        this.enabledBookie = this.opcoes.modo_cambista;
         this.auth.logado
             .subscribe(
                 isLoggedIn => {

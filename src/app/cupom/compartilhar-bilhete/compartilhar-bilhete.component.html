@@ -1,0 +1,8 @@
+<div class="container" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Aguarde...</p>
+    <p>O bilhete compartilhado está sendo preparado para você.</p>
+</div>
+<div class="cassino-body" *ngIf="!loading">
+    <app-exibir-bilhete-cassino id="bilhete-cassino" *ngIf="!loading && aposta" [aposta]="aposta" [playButton]="true"></app-exibir-bilhete-cassino>
+</div>

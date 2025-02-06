@@ -16,6 +16,7 @@ import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
 import { takeUntil } from 'rxjs/operators';
 import { Cliente } from 'src/app/shared/models/clientes/cliente';
+import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 
 /**
  * This Service handles how the date is rendered and parsed from keyboard i.e. in the bound input field.
@@ -41,6 +42,14 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 	}
 }
 
+declare global {
+    interface Window {
+      ex_partner: any;
+      exDocCheck: any;
+      exDocCheckAction: any;
+    }
+  }
+
 @Component({
     selector: 'app-configuracoes',
     templateUrl: './configuracoes.component.html',
@@ -52,6 +61,8 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
+    @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
+
     queryParams: any;
     showLoading = true;
     blocked = false;
@@ -85,6 +96,10 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
     legitimuzToken = "";
     verifiedIdentity = null;
     disapprovedIdentity = false;
+    docCheckToken = "";
+    secretHash = "";
+    faceMatchType = null;
+    dataUserCPF = "";
 
     public mostrarSenha: boolean = false;
     private tokenMultifator: string;
@@ -106,7 +121,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
         private legitimuzService: LegitimuzService,
         private legitimuzFacialService: LegitimuzFacialService,
         private faceMatchService: FaceMatchService,
-        private cd : ChangeDetectorRef
+        private cd : ChangeDetectorRef,
+        private docCheckService: DocCheckService
     ) {}
 
     get twoFactorInProfileChangeEnabled(): boolean {
@@ -118,6 +134,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
     }
 
     ngOnInit(): void {
+        this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
+        this.cd.detectChanges();
         if (!this.mobileScreen) {
             this.sidebarService.changeItens({contexto: 'cliente'});
             this.menuFooterService.setIsPagina(true);
@@ -125,8 +143,24 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
 
         this.getClientConfigs();
         this.createForms();
-        this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchAccountDeletion);
+        switch(this.faceMatchType) {
+            case 'legitimuz':
+                this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchAccountDeletion);
+                break;
+            case 'docCheck':
+                this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchAccountDeletion);
+                this.docCheckService.iframeMessage$.subscribe(message => {
+                    if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
+                        this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe()
+                        this.faceMatchAccountDeletionValidated = true;
+                    }
+                })
+                break;
+            default:
+                break;            
+        }  
         if (!this.faceMatchEnabled) {
             this.faceMatchAccountDeletionValidated = true;
         }
@@ -135,6 +169,11 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
             .subscribe(
                 res => {
                     this.cliente = res;
+                    this.dataUserCPF = String(this.cliente.cpf).replace(/[.\-]/g, '');
+                    if(this.faceMatchType == 'docCheck') {
+                        this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
+                        this.docCheckService.init();
+                    }
                     this.verifiedIdentity = res.verifiedIdentity;
                     this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
                     this.showLoading = false;
@@ -399,6 +438,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
     onSubmitExclusaoConta() {
         const { exclusionPeriod, motivoExclusao, confirmarExclusao, opcao } = this.formExclusaoConta.value;
 
+        const sanitizedExclusionConfirmation = confirmarExclusao.trim();
+
         const multifator = this.twoFactorInProfileChangeEnabled
             ? {codigo: this.codigoMultifator, token: this.tokenMultifator}
             : {};
@@ -408,8 +449,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
             return;
         }
 
-        if (this.validarExclusao(confirmarExclusao) || opcao == '') {
-            this.clienteService.excluirConta(exclusionPeriod, motivoExclusao, confirmarExclusao, multifator).subscribe(
+        if (this.validarExclusao(sanitizedExclusionConfirmation) || opcao == '') {
+            this.clienteService.excluirConta(exclusionPeriod, motivoExclusao, sanitizedExclusionConfirmation, multifator).subscribe(
                 result => {
                     this.messageService.success(result.message);
                     this.authService.logout();
@@ -548,16 +589,23 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
     
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
-            this.legitimuz.changes
+            if (this.faceMatchType == 'legitimuz') {
+                this.legitimuz.changes
                 .subscribe(() => {
                     this.legitimuzService.init();
                     this.legitimuzService.mount();
                 });
-            this.legitimuzLiveness.changes
+                this.legitimuzLiveness.changes
                 .subscribe(() => {
                     this.legitimuzFacialService.init();
                     this.legitimuzFacialService.mount();
                 });
+            } else {
+                this.docCheck.changes
+                .subscribe(() => {
+                    this.docCheckService.init();
+                });
+            }
         }
     }
 }

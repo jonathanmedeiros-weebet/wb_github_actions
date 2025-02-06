@@ -8,15 +8,19 @@ import {
     MessageService,
     ApostaService,
     UtilsService,
-    PrintService
+    PrintService,
+    BilheteEsportivoService
 } from '../../../../services';
 import { config } from '../../../config';
 import * as moment from 'moment';
 import { ApostaEsportivaService } from 'src/app/shared/services/aposta-esportiva/aposta-esportiva.service';
-import { switchMap, takeUntil, delay, tap } from 'rxjs/operators';
+import { switchMap, takeUntil, delay, tap, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CompatilhamentoBilheteModal } from '../compartilhamento-bilhete-modal/compartilhamento-bilhete-modal.component';
 import { JogoService } from 'src/app/shared/services/aposta-esportiva/jogo.service';
+import * as sportsIds from '../../../constants/sports-ids';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-aposta-encerramento-modal',
@@ -30,6 +34,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     @Input() showCancel = false;
     @ViewChild('bilheteCompartilhamento', { static: false }) bilheteCompartilhamento;
     @Input() aposta;
+    @Input() isShared = false;
     appMobile;
     casaDasApostasId;
     isLoggedIn;
@@ -42,10 +47,12 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     apostaVersion;
     showLoading = false;
     simulando = false;
+    repeating = false;
     encerrando = false;
     isCliente;
     isMobile;
-    urlBilheteAoVivo ;
+    enabledBookie;
+    urlBilheteAoVivo;
     origin;
     process = false;
     delay = 0;
@@ -67,20 +74,24 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         private printService: PrintService,
         private auth: AuthService,
         private jogoService: JogoService,
-        private modalService: NgbModal
+        private router: Router,
+        private bilheteEsportivo: BilheteEsportivoService,
+        private modalService: NgbModal,
+        private translate: TranslateService
     ) {
     }
 
     ngOnInit() {
-        this.isMobile = window.innerWidth <=1024;
+        this.isMobile = window.innerWidth <= 1024;
         this.appMobile = this.auth.isAppMobile();
         this.isLoggedIn = this.auth.isLoggedIn();
         this.casaDasApostasId = this.paramsLocais.getOpcoes().casa_das_apostas_id;
         this.isCliente = this.auth.isCliente();
-        this.origin = this.appMobile ? '?origin=app':'';
+        this.origin = this.appMobile ? '?origin=app' : '';
         this.urlBilheteAoVivo = `https://${config.SLUG}/bilhete/${this.aposta.codigo}${this.origin}`;
 
         this.opcoes = this.paramsLocais.getOpcoes();
+        this.enabledBookie = this.opcoes.modo_cambista;
 
         if (this.aposta.passador.percentualPremio > 0) {
             if (this.aposta.resultado) {
@@ -164,7 +175,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     async confirmarEncerramento() {
         if (this.itemSelecionado != null) {
             const aovivo = await this.temAoVivo(this.itemSelecionado);
-            if(aovivo) {
+            if (aovivo) {
                 this.setDelay();
 
                 let token_aovivo = null;
@@ -185,7 +196,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
                         }),
                         delay(this.delayReal * 1000),
                         switchMap(() => {
-                            return this.apostaService.encerrarAposta({token: token_aovivo, apostaId: aposta.id, version: version});
+                            return this.apostaService.encerrarAposta({ token: token_aovivo, apostaId: aposta.id, version: version });
                         }),
                         takeUntil(this.unsub$)
                     )
@@ -227,7 +238,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         let result = false;
 
         const found = aposta.itens.find((item: any) => item.ao_vivo);
-        if(found) {
+        if (found) {
             return true;
         }
 
@@ -237,7 +248,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
 
         const retorno = await this.jogoService.verficarAoVivo(itensID).toPromise();
 
-        if(retorno) {
+        if (retorno) {
             result = true;
         }
 
@@ -303,7 +314,7 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
 
     shared() {
         if (this.appMobile) {
-            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal,{
+            this.modalCompartilhamentoRef = this.modalService.open(CompatilhamentoBilheteModal, {
                 ariaLabelledBy: 'modal-basic-title',
                 windowClass: 'modal-pop-up',
                 centered: true,
@@ -362,6 +373,107 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         return result;
     }
 
+    async shareBetLink(aposta) {
+        if (navigator.share) {
+            navigator.share({
+                title: this.translate.instant('compartilhar_aposta.mensagemTitle'),
+                text: this.translate.instant('compartilhar_aposta.mensagemBody'),
+                url: `https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`
+            }).then(() => {
+                this.messageService.success(this.translate.instant('compartilhar_aposta.bilheteCompartilhado'));
+            });
+        } else {
+            this.copyToClipboard(`https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`, false);
+            this.messageService.success(this.translate.instant('compartilhar_aposta.linkCopiado'));
+        }
+    }
+
+    public async convertItemToBet(itens) {
+        try {
+            return await this.jogoService.convertItemToBet(itens);
+        } catch (error) {
+            this.handleError(error.message);
+            return [];
+        }
+    }
+
+
+    async repetirAposta(aposta) {
+        this.repeating = true;
+        let convertedItemToBet = await this.convertItemToBet(aposta.itens);
+        if (convertedItemToBet.length) {
+            this.bilheteEsportivo.atualizarItens(convertedItemToBet);
+            this.activeModal.close();
+            this.router.navigate(['/esportes']);
+            this.messageService.success(this.translate.instant('compartilhar_aposta.apostaRepetida'));
+            return;
+        }
+        this.messageService.warning(this.translate.instant('compartilhar_aposta.apostaRepetidaErro'));
+        this.repeating = false;
+    }
+
+    async copyToClipboard(codigo: string, message = true) {
+        try {
+            await navigator.clipboard.writeText(codigo);
+            if (message) {
+                this.messageService.success(this.translate.instant('compartilhar_aposta.codigoCopiado'));
+            }
+        } catch (err) {
+            this.messageService.error(this.translate.instant('compartilhar_aposta.codigoCopiadoErro'));
+        }
+    }
+
+    sportIcon(sportId) {
+        let className = 'icon-futebol wbicon';
+
+        switch (sportId) {
+            case sportsIds.BETSAPI_FOOTBALL_ID:
+            case sportsIds.LSPORTS_FOOTBALL_ID: {
+                className = 'wbicon icon-futebol';
+                break;
+            }
+            case sportsIds.BETSAPI_BOXING_ID:
+            case sportsIds.LSPORTS_BOXING_ID: {
+                className = 'wbicon icon-luta';
+                break;
+            }
+            case sportsIds.BETSAPI_AMERICAN_FOOTBALL_ID: {
+                className = 'wbicon icon-futebol-americano';
+                break;
+            }
+            case sportsIds.BETSAPI_TABLE_TENNIS_ID:
+            case sportsIds.BETSAPI_TENNIS_ID:
+            case sportsIds.LSPORTS_TENNIS_ID: {
+                className = 'wbicon icon-tenis';
+                break;
+            }
+            case sportsIds.BETSAPI_ICE_HOCKEY_ID: {
+                className = 'wbicon icon-hoquei-no-gelo';
+                break;
+            }
+            case sportsIds.BETSAPI_BASKETBALL_ID:
+            case sportsIds.LSPORTS_BASKETBALL_ID: {
+                className = 'wbicon icon-basquete';
+                break;
+            }
+            case sportsIds.BETSAPI_FUTSAL_ID: {
+                className = 'wbicon icon-futsal';
+                break;
+            }
+            case sportsIds.BETSAPI_VOLLEYBALL_ID:
+            case sportsIds.LSPORTS_VOLLEYBALL_ID: {
+                className = 'wbicon icon-volei';
+                break;
+            }
+            case sportsIds.BETSAPI_E_SPORTS_ID: {
+                className = 'wbicon icon-e-sports';
+                break;
+            }
+        }
+
+        return className;
+    }
+
     podeEncerrar(aposta) {
         const strategy = this.paramsLocais.getOpcoes().closure_strategy;
 
@@ -374,23 +486,43 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         }
 
         const found = aposta.itens.find((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
-        if(!found) {
+        if (!found) {
             return false;
         }
 
-        if(aposta.resultado) {
+        if (aposta.resultado) {
             return false;
         }
 
-        if(this.encerrando) {
+        if (this.encerrando) {
             return false;
         }
 
-        if(this.itemSelecionado && !this.simulando) {
+        if (this.itemSelecionado && !this.simulando) {
             return false;
         }
 
-        if(this.process) {
+        if (this.process) {
+            return false;
+        }
+
+        return true;
+    }
+
+    podeReutilizar(aposta) {
+        const strategy = this.paramsLocais.getOpcoes().closure_strategy;
+
+        if (strategy === 'probability') {
+            const itemSemProbabilidade = aposta.itens.find((item: any) => item.probabilidade == null);
+
+            if (itemSemProbabilidade || (new Date(aposta.horario) < new Date('2024-05-08 13:00:00'))) {
+                return false;
+            }
+        }
+
+        const podeReutilizarItem = aposta.itens.some((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
+
+        if (!podeReutilizarItem || aposta.resultado || this.encerrando || (this.itemSelecionado && !this.simulando) || this.process) {
             return false;
         }
 

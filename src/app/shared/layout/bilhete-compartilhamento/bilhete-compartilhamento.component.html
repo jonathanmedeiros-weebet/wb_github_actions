@@ -55,8 +55,8 @@
                             ( {{item.cotacao}} )
                             <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                         </p>
-                        <p class="jogo-resultado">
-                            <span *ngIf="item.removido; else resultado">cancelado</span>
+                        <p class="jogo-resultado" style="float:right">
+                            <span *ngIf="item.removido; else resultado">Cancelado</span>
                             <ng-template #resultado>{{item.resultado}}</ng-template>
                         </p>
                     </div>
@@ -81,8 +81,8 @@
                 <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
                     {{'geral.premio' | translate | uppercase}}: <span style="float:right">{{aposta.premio | currency}}</span>
                 </p>
-                <p *ngIf="aposta.passador.percentualPremio > 0" class="cambista-paga">
-                    CAMBISTA PAGA: <span style="float:right">{{cambistaPaga | currency}}</span>
+                <p *ngIf="enabledBookie" class="cambista-paga">
+                    CAMBISTA PAGA: <span style="float:right">{{cambistaPaga ?? 0 | currency}}</span>
                 </p>
                 <hr>
                 <hr>

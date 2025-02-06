@@ -254,6 +254,7 @@
         "nenhumJogoDisponivel": "Nenhum jogo disponível no momento",
         "loginGoogle" : "Realize o login com a conta do google",
         "computadoEm": "Computado em:",
+        "liquidadoEm": "Liquidado em:",
         "alteracoesSucesso": "Alterações realizadas com sucesso!",
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
@@ -267,6 +268,8 @@
         "or": "OU",
         "geolocationError": "Por favor, verifique a configuração de localização do seu navegador e tente novamente.",
         "restricaoDeLocalizacao": "Este recurso está disponível apenas para usuários no Brasil.",
+        "stateRestriction": "Este recurso não está disponivel para o seu estado.",
+        "locationPermission": "Para utilizar este recurso, é necessário ativar a localização no navegador.",
         "lastAccesses": "Últimos acessos",
         "action": "Ação",
         "session_alert": "Alerta de Sessão",
@@ -482,7 +485,7 @@
         "mensagem2": "Ao acessar, continuar a utilizar ou navegar no website {{BANCA_NOME}}, você aceita que utilizemos certos cookies de navegador com o objetivo de melhorar a sua experiência enquanto utiliza nosso site. {{BANCA_NOME}} apenas usa cookies para melhorar a sua experiência e não interferem com sua privacidade.",
         "jogueComResponsabilidade": "Jogue com responsabilidade.",
         "metodosDePagamento": "Metódos de pagamento",
-        "quemSomos": "Quem Somos",
+        "quemSomos": "Quem somos",
         "downloadApp": "Download app",
         "installPwa": "Instalar APP Cliente",
         "regras": "Regras",
@@ -492,15 +495,16 @@
         "jogoResponsavel": "Jogo responsável",
         "termosECondicoes": "Termos e condições",
         "feedback": "Ouvidoria",
-        "todosOsDireitosReservados": "2024 © {{BANCA_NOME}}. Todos os direitos reservados."
+        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. Todos os direitos reservados."
     },
     "paginas": {
-        "quem-somos": "Quem Somos",
+        "quem-somos": "Quem somos",
         "regras": "Regras",
         "politica-privacidade": "Política de privacidade",
         "politica-aml": "Política AML",
         "jogo-responsavel": "Jogo responsável",
-        "termos-condicoes": "Termos e condições"
+        "termos-condicoes": "Termos e condições",
+        "partnership-terms": "Termos de Uso (Afiliados)"
     },
     "jogos": {
         "tempoCompleto": "Tempo Completo",
@@ -613,10 +617,10 @@
         "lista_como_indicar": "Como indicar",
         "lista_como_indicar_text": "Para indicar um novo usuário, você deverá compartilhar o link de indicação na seção \"Indique e ganhe\" da sua conta, localizada no menu Promoções. O usuário indicado deverá se registrar usando seu link de indicação. O indicador terá um total de {{limiteIndicacoes}} indicações ao qual serão elegíveis de comissionamento; as demais que ultrapassarem essa quantidade não serão comissionadas.",
         "lista_bonus_indicador": "Bônus para o Indicador",
-        "lista_bonus_indicador_text": "A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar apostas de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dia(s), você ganhará R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho}}. Este saldo será liberado para resgate na aba minhas indicações em até 24 horas após o INDICADO cumprir as regras da promoção, você terá um prazo de {{prazoResgateSaldo}} dias para resgatar.",
+        "lista_bonus_indicador_text": "A cada usuário que você indicar, que se registre e faça um depósito de no mínimo R${{valorMinDepositado}} e realizar a quantidade de {{numberBets}} aposta(s) que somem o valor total de no mínimo R${{valorMinApostado}} em um prazo de {{qtdDiasRequisitos}} dia(s), você ganhará R${{valorGanhoPorIndicacao}} em saldo {{tipoSaldoGanho}}. Este saldo será liberado para resgate na aba minhas indicações em até 24 horas após o INDICADO cumprir as regras da promoção, você terá um prazo de {{prazoResgateSaldo}} dias para resgatar.",
         "real_sacavel": "real (sacável)",
         "lista_deposito_indicado": "Depósito do Indicado",
-        "lista_deposito_indicado_text": "O usuário indicado deve realizar um depósito de no mínimo R${{valorMinDepositado}} na sua conta e fazer uma aposta de no mínimo R${{valorMinApostado}} para que o saldo de R${{valorGanhoPorIndicacao}} seja creditado na conta do indicador.",
+        "lista_deposito_indicado_text": "O usuário indicado deve realizar um depósito de no mínimo R${{valorMinDepositado}} na sua conta e realizar a quantidade de {{numberBets}} aposta(s) que somem o valor total de no mínimo R${{valorMinApostado}} para que o saldo de R${{valorGanhoPorIndicacao}} seja creditado na conta do indicador.",
         "lista_prevencao_fraudes": "Prevenção de fraudes",
         "lista_prevencao_fraudes_text": "A {{nomeBanca}} monitora ativamente o uso do sistema de Indique e Ganhe para prevenir fraudes. Qualquer tentativa de fraude, como a criação de múltiplas contas a partir do mesmo endereço IP, será considerada apenas o primeiro cadastro legível para ganho do saldo as demais serão desconsideradas.",
         "ultimo_paragrafo": "Ao participar do sistema de Indique e Ganhe, você concorda que leu, entendeu e concorda em cumprir estas regras. É responsabilidade do indicador garantir que os usuários indicados estejam cientes e concordem com estas regras antes de se registrarem na {{nomeBanca}}.",
@@ -656,7 +660,8 @@
         "salvar_alteracoes": "Salvar Alterações",
         "voltar": "Voltar",
         "logout_continue_login": "Sim, gostaria de encerrar a sessão",
-        "remain_active_session": "Não, continuar com a outra sessão"
+        "remain_active_session": "Não, continuar com a outra sessão",
+        "save_pdf": "Baixar PDF"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -792,5 +797,26 @@
         "masculino": "Masculino",
         "feminino": "Feminino",
         "outros": "Outros"
+    },
+    "compartilhar_aposta": {
+        "linkCopiado": "Link copiado para a área de transferência!",
+        "bilheteCompartilhado": "Bilhete compartilhado com sucesso!",
+        "apostaRepetida": "Aposta repetida com sucesso!",
+        "apostaRepetidaErro": "Erro ao repetir a aposta, tente novamente mais tarde.",
+        "codigoCopiado": "Código copiado para a área de transferência!",
+        "codigoCopiadoErro": "Erro ao copiar o código.",
+        "mensagemTitle": "Bilhete de Aposta",
+        "mensagemBody": "Acesse o link para visualizar o bilhete de aposta.",
+        "repetindoAposta": "Repetindo aposta...",
+        "repetirAposta": "Repetir aposta",
+        "reutilizarAposta": "Reutilizar aposta",
+        "reutilizandoAposta": "Reutilizando aposta...",
+        "aguardando": "Aguardando",
+        "calculando": "Calculando...",
+        "encerrarAposta": "Encerrar aposta no valor de ",
+        "encerrando": "Encerrando...",
+        "apostaNaoPodeSerEncerrada": "A aposta não pode ser encerrada.",
+        "apostaNaoPodeSerReutilizada": "Não é possível reutilizar a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas.",
+        "apostaNaoPodeSerRepetida": "Não é possível repetir a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas."
     }
 }

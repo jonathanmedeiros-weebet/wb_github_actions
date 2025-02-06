@@ -5,10 +5,12 @@ import { BilheteAcumuladaoComponent } from '../../exibir-bilhete/acumuladao/bilh
 import { ExibirBilheteDesafioComponent } from '../../exibir-bilhete/desafio/exibir-bilhete-desafio.component';
 import { ExibirBilheteLoteriaComponent } from '../../exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { ExibirBilheteRifaComponent} from '../../exibir-bilhete/rifa/exibir-bilhete-rifa/exibir-bilhete-rifa.component';
+import { ExibirBilheteCassinoComponent } from '../../exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { HelperService, AuthService, ParametrosLocaisService } from '../../../../services';
+import { HelperService, AuthService, ParametrosLocaisService, MessageService } from '../../../../services';
 import { config } from '../../../config';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -21,6 +23,7 @@ export class ApostaModalComponent implements OnInit {
     @ViewChild(ExibirBilheteDesafioComponent) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
     @ViewChild(BilheteAcumuladaoComponent) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     @ViewChild(ExibirBilheteRifaComponent) bilheteRifaComponent: ExibirBilheteRifaComponent;
+    @ViewChild(ExibirBilheteCassinoComponent) bilheteCassinoComponent: ExibirBilheteCassinoComponent;
     @Input() aposta;
     @Input() showCancel = false;
     @Input() primeiraImpressao = false;
@@ -39,6 +42,8 @@ export class ApostaModalComponent implements OnInit {
         private helperService: HelperService,
         private paramsLocais: ParametrosLocaisService,
         private auth: AuthService,
+        private messageService: MessageService,
+        private translate: TranslateService,
         private ga4Service: Ga4Service,
     ) { }
 
@@ -84,6 +89,22 @@ export class ApostaModalComponent implements OnInit {
         this.ga4Service.triggerGa4Event(EventGa4Types.SHARE);
     }
 
+    async shareBetLink(aposta) {
+        if (navigator.share) {
+            navigator.share({
+                title: this.translate.instant('compartilhar_aposta.mensagemTitle'),
+                text: this.translate.instant('compartilhar_aposta.mensagemBody'),
+                url: `https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`
+            }).then(() => {
+                this.messageService.success(this.translate.instant('compartilhar_aposta.bilheteCompartilhado'));
+            });
+        } else {
+            this.copyToClipboard(`https://${config.SLUG}/compartilhar-bilhete/${aposta.codigo}`, false);
+            this.messageService.success(this.translate.instant('compartilhar_aposta.linkCopiado'));
+        }
+    }
+
+
     cancel() {
         this.activeModal.close('cancel');
     }
@@ -115,6 +136,36 @@ export class ApostaModalComponent implements OnInit {
         const opcoes = this.paramsLocais.getOpcoes();
 
         return opcoes.habilitar_compartilhamento_comprovante;
+    }
+    
+    async copyToClipboard(codigo: string, message = true) {
+        try {
+            await navigator.clipboard.writeText(codigo);
+            if(message) {
+                this.messageService.success(this.translate.instant('compartilhar_aposta.codigoCopiado'));
+            }
+        } catch (err) {
+            this.messageService.error(this.translate.instant('compartilhar_aposta.codigoCopiadoErro'));
+        }
+    }
+
+    convertDate(date: string) {
+        const [day, month, year, hour, minute, second] = date.split(/[/\s:]/);
+        const formattedDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
+
+        if (isNaN(formattedDate.getTime())) {
+            console.error('Invalid date:', date);
+            return 'Invalid date';
+        }
+
+        return formattedDate.toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }).replace(',', ' às');
     }
 
     impressaoPermitida() {

@@ -26,6 +26,7 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     @Input() aposta: any;
     LOGO;
     informativoRodape;
+    modalidade;
     sorteios = [];
     unsub$ = new Subject();
     isCliente;
@@ -49,7 +50,8 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.LOGO = this.imagensService.logo;
         const opcoes = this.paramsService.getOpcoes();
-        this.informativoRodape = opcoes.informativoRodape;
+        this.modalidade = this.paramsService.getSeninhaNome();
+        this.informativoRodape = this.paramsService.getInformativoRodape();
         this.appMobile = this.authService.isAppMobile();
         this.isCliente = this.authService.isCliente();
         this.isLoggedIn = this.authService.isLoggedIn();
@@ -67,9 +69,8 @@ export class ExibirBilheteLoteriaComponent implements OnInit, OnDestroy {
         this.unsub$.complete();
     }
 
-    sorteioNome(sorteioId) {
-        const sorteio = this.sorteios.find(s => s.id === sorteioId);
-        return sorteio ? sorteio.nome : '';
+    sorteioNome(tipo) {
+        return tipo == 'seninha' ? this.paramsService.getSeninhaNome() : this.paramsService.getQuininhaNome();
     }
 
     verificarStatus(apostaItem, tipo) {

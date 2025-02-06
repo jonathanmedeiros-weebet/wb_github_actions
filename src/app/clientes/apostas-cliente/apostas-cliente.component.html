@@ -73,7 +73,7 @@
                     Nenhuma aposta realizada no período.
                 </div>
                 <div *ngIf="apostas.length > 0">
-                    <ng-container *ngIf="!totais.valorBonus || totais.premioBonus else showInfoWithBonus;">
+                    <ng-container *ngIf="!totais.valorBonus else showInfoWithBonus;">
                         <div class="info-resultado">
                             <div class="item">
                                 <label>{{'geral.qtdApostas' | translate}}:</label> {{ apostas.length }}
@@ -126,7 +126,7 @@
                                 <th>{{'geral.premio' | translate}} </th>
                                 <th>{{'bet.incomeTaxOnPrize' | translate}} </th>
                                 <th>{{'geral.resultado' | translate}}</th>
-                                <th *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'"></th>
+                                <th *ngIf="tabSelected !== 'loteria-popular'"></th>
                             </tr>
                             </thead>
                             <tr *ngIf="loading">
@@ -148,7 +148,7 @@
                                     <div *ngIf="aposta.resultado == null && aposta.rollover_status != 'cancelado'"><th>{{'geral.aguardando' | translate}}</th></div>
                                     <div *ngIf="aposta.rollover_status != 'cancelado' && aposta.resultado != null">{{aposta.resultado}}</div>
                                 </td>
-                                <td class="acoes-aposta" *ngIf="tabSelected !== 'cassino' && tabSelected !== 'loteria-popular'">
+                                <td class="acoes-aposta" *ngIf="tabSelected !== 'loteria-popular'">
                                     <a *ngIf="isCliente && aposta.tipo === 'esportes'" href="https://{{slug}}/bilhete/{{aposta.codigo}}{{origin}}" target="_blank" title="ACOMPANHAR BILHETE AO-VIVO" >
                                         <i class="fa fa-external-link"></i>
                                     </a>

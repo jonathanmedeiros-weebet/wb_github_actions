@@ -1,18 +1,18 @@
-import {Component, OnInit, ViewChild, Renderer2, ElementRef} from '@angular/core';
-import {BaseFormComponent} from '../../../shared/layout/base-form/base-form.component';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
-import {FinanceiroService} from '../../../shared/services/financeiro.service';
-import {MessageService} from '../../../shared/services/utils/message.service';
-import {DepositoPix, Rollover} from '../../../models';
-import {ParametrosLocaisService} from '../../../shared/services/parametros-locais.service';
+import { Component, OnInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
+import { BaseFormComponent } from '../../../shared/layout/base-form/base-form.component';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FinanceiroService } from '../../../shared/services/financeiro.service';
+import { MessageService } from '../../../shared/services/utils/message.service';
+import { DepositoPix, Rollover } from '../../../models';
+import { ParametrosLocaisService } from '../../../shared/services/parametros-locais.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ConfirmModalComponent, RegrasBonusModalComponent } from '../../../shared/layout/modals';
+import { ConfirmModalComponent } from '../../../shared/layout/modals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransacoesHistoricoComponent } from '../../transacoes-historico/transacoes-historico.component';
 import { TranslateService } from '@ngx-translate/core';
-import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
+import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
 
 declare var WeebetMessage: any;
 
@@ -65,7 +65,7 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
-    copyButtonText; 
+    copyButtonText;
     isAppMobile;
 
     constructor(
@@ -77,7 +77,7 @@ export class NgbdModalContent {
         private translate: TranslateService,
         private authService: AuthService,
         private messageService: MessageService
-    ) {}
+    ) { }
 
     get customCasinoBetting(): string {
         return this.paramsService.getCustomCasinoName(
@@ -105,19 +105,19 @@ export class NgbdModalContent {
                 clearInterval(timer);
             }
         }, 1000);
-        
+
         this.copyButtonText = this.translate.instant('deposito.copyCode');
         this.isAppMobile = this.authService.isAppMobile();
     }
 
     copyCode() {
         this.translate.get('deposito.copied').subscribe((translatedText) => {
-            this.copyButtonText = translatedText; 
+            this.copyButtonText = translatedText;
 
             setTimeout(() => {
                 this.copyButtonText = this.translate.instant('deposito.copyCode');
             }, 1000);
-        }); 
+        });
     }
 
     compartilhar() {
@@ -130,12 +130,12 @@ export class NgbdModalContent {
         };
 
         const base64ToBlob = (base64: string, contentType: string): Blob => {
-            const byteCharacters = atob(base64); 
+            const byteCharacters = atob(base64);
             const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
             const byteArray = new Uint8Array(byteNumbers);
             return new Blob([byteArray], { type: contentType });
         };
-        
+
         const contentType = "image/png";
         const base64Data = this.qrCodeBase64.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
         const blob = base64ToBlob(base64Data, contentType);
@@ -162,7 +162,7 @@ export class NgbdModalContent {
     styleUrls: ['./deposito-pix.component.css']
 })
 export class DepositoPixComponent extends BaseFormComponent implements OnInit {
-    @ViewChild('verificarPromocaoModal', {static: true}) verificarPromocaoModal;
+    @ViewChild('verificarPromocaoModal', { static: true }) verificarPromocaoModal;
 
     modalPromocao;
     pixModal;
@@ -215,6 +215,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         private router: Router,
         public activeModal: NgbActiveModal,
         private ga4Service: Ga4Service,
+        private translate: TranslateService,
     ) {
         super();
     }
@@ -272,7 +273,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             this.modalRef.result.then(
                 (result) => {
                     this.financeiroService.acceptOktoTerms().subscribe(
-                        res =>{
+                        res => {
                             this.messageService.success('Você aceitou os termos de uso. Agora, você pode realizar movimentações financeiras.');
                         },
                         error => {
@@ -296,7 +297,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
     changeAmount(amount) {
         const newAmount = this.form.value.valor + amount;
-        this.form.patchValue({ 'valor': newAmount});
+        this.form.patchValue({ 'valor': newAmount });
         this.calculateBonusAmount();
     }
 
@@ -305,8 +306,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.form.get('bonus').patchValue(bonusOption);
     }
 
-    calculateBonusAmount()
-    {
+    calculateBonusAmount() {
         let enteredAmount = this.form.value.valor;
 
         this.amountSportsBonus = enteredAmount;
@@ -340,6 +340,17 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     solicitarDeposito() {
+        const restrictionStateBet = this.paramsLocais.getRestrictionStateBet();
+
+        if (restrictionStateBet != 'Todos') {
+            let localeState = localStorage.getItem('locale_state');
+
+            if (restrictionStateBet != localeState) {
+                this.handleError(this.translate.instant('geral.stateRestriction'));
+                return;
+            }
+        }
+
         if (this.rolloverAtivo.length > 0 && this.bonusOption !== 'nenhum') {
             this.avisoPromocao();
         } else {
@@ -366,34 +377,34 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     submit() {
-            this.submitting = true;
-            this.novoSaldo = 0;
-            this.exibirMensagemPagamento = false;
-            const detalhesPagamento = this.form.value;
-            detalhesPagamento.metodo = 'pix';
-            this.financeiroService.processarPagamento(detalhesPagamento)
-                .subscribe(
-                    res => {
-                        this.pix = res;
-                        this.openPixModal();
-                        this.submitting = false;
-                        if(detalhesPagamento.promoCode !== ''){
-                            this.ga4Service.triggerGa4Event(
-                                EventGa4Types.EARN_VIRTUAL_CURRENCY,
-                                {couponCode: detalhesPagamento.promoCode}
-                            );
-                        }
-
+        this.submitting = true;
+        this.novoSaldo = 0;
+        this.exibirMensagemPagamento = false;
+        const detalhesPagamento = this.form.value;
+        detalhesPagamento.metodo = 'pix';
+        this.financeiroService.processarPagamento(detalhesPagamento)
+            .subscribe(
+                res => {
+                    this.pix = res;
+                    this.openPixModal();
+                    this.submitting = false;
+                    if (detalhesPagamento.promoCode !== '') {
                         this.ga4Service.triggerGa4Event(
-                            EventGa4Types.GENERATE_PIX,
-                            {username: res.cliente}
+                            EventGa4Types.EARN_VIRTUAL_CURRENCY,
+                            { couponCode: detalhesPagamento.promoCode }
                         );
-                    },
-                    error => {
-                        this.handleError(error);
-                        this.submitting = false;
                     }
-                );
+
+                    this.ga4Service.triggerGa4Event(
+                        EventGa4Types.GENERATE_PIX,
+                        { username: res.cliente }
+                    );
+                },
+                error => {
+                    this.handleError(error);
+                    this.submitting = false;
+                }
+            );
     }
 
     openPixModal() {
@@ -417,7 +428,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }, 10000);
 
         this.pixModal.result.then(
-            (result) => {},
+            (result) => { },
             (reason) => {
                 if (reason == 'pix-modal-closed') {
                     this.novoPix();
@@ -435,7 +446,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
     novoPix() {
         this.pix = null;
-        this.form.patchValue({'valor': 0, 'bonus': '', 'promoCode': ''});
+        this.form.patchValue({ 'valor': 0, 'bonus': '', 'promoCode': '' });
         this.submitting = false;
         clearInterval(this.clearSetInterval);
         this.verificacoes = 0;
@@ -446,7 +457,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             clearInterval(this.clearSetInterval);
             this.verificacoes = 0;
         } else {
-            this.financeiroService.verificarPagamento({'pagamento_id': pix.pagamento_id})
+            this.financeiroService.verificarPagamento({ 'pagamento_id': pix.pagamento_id })
                 .subscribe(
                     res => {
                         if (res.deposito_status === 'approved') {
@@ -466,13 +477,6 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 );
             this.verificacoes++;
         }
-    }
-
-    abrirRegrasBonus() {
-        this.modalService.open(RegrasBonusModalComponent, {
-            centered: true,
-            size: 'xl',
-        });
     }
 
     getRollovers() {

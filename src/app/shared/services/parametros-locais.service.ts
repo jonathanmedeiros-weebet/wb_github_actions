@@ -53,7 +53,7 @@ export class ParametrosLocaisService {
                         body.prepend(GTMScriptBody);
                     }
 
-                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.legitimuz_token);
+                    const LEGITIMUZ_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.legitimuz_token && response?.opcoes?.faceMatchType == 'legitimuz');
                     if (LEGITIMUZ_ENABLED) {
                         const LegitimuzScripSDK = this.document.createElement('script');
                         LegitimuzScripSDK.src = 'https://cdn.legitimuz.com/js/sdk/legitimuz-sdk.js';
@@ -62,6 +62,19 @@ export class ParametrosLocaisService {
 
                         head.appendChild(LegitimuzScripSDK);
                         head.appendChild(LegitimuzScripSDKFaceIndex);
+                    }
+
+                    const DOCK_CHECK_ENABLED = Boolean(response?.opcoes?.faceMatch && response?.opcoes?.dockCheck_token && response?.opcoes?.faceMatchType == 'docCheck');
+                    if (DOCK_CHECK_ENABLED) {
+                        const DockCheckScripSDK = this.document.createElement('script');
+                        DockCheckScripSDK.innerHTML = `window.ex_partner = {ex_doccheck_identity_key_id: "${response?.opcoes?.dockCheck_key_id}",};
+                            (function (w, d, src){var h = d.getElementsByTagName("head")[0];
+                                var s=d.createElement("script"); s.src = src;
+                                if (!w.exDocCheck) h.appendChild(s);
+
+                            })(window, document, "https://doccheck.exato.digital/doccheck.js");
+                        `;
+                        head.appendChild(DockCheckScripSDK);
                     }
 
                     const XTREMEPUSH_SDK_KEY = response?.opcoes?.xtreme_push_sdk_key
@@ -259,6 +272,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.barra_indique_ganhe : null;
     }
 
+    sharedURL() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.shared_url : null;
+    }
+
     getCustomCasinoName(wordToReplace: string = '', casinoDefault: string = this.translate.instant('geral.cassino')) {
         const currentLang = this.translate.currentLang;
 
@@ -273,12 +290,24 @@ export class ParametrosLocaisService {
     getSIGAPHabilitado() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.SIGAP_habilitado : null;
     }
-    
+
     getAllowOnlyOneSessionPerLogin() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.allow_single_session : null;
     }
 
     isMandatoryPhoneValidation() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.mandatory_phone_validation : false;
+    }
+
+    getPhoneVerificationService() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.phoneVerificationService : 'amazon';
+    }
+    
+    getRestrictionStateBet() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.restriction_state_bet : false;
+    }
+
+    getEnableRequirementPermissionRetrieveLocation() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.enable_requirement_of_permission_to_retrieve_location : false;
     }
 }

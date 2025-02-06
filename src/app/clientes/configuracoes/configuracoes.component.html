@@ -235,7 +235,7 @@
                             <br>
                             <b>{{ 'jogo_responsavel.exclusao_conta.descricao_2' | translate }}</b>
                         </p>
-                        <form [formGroup]="formExclusaoConta" (ngSubmit)="handleSubmit('onSubmitExclusaoConta')">
+                        <form [formGroup]="formExclusaoConta">
                             <div class="field w-500">
                                 <label for="">{{ 'jogo_responsavel.exclusao_conta.exclusionPeriodLabel' | translate }}</label>
                                 <select class="form-control inverted-out" formControlName="exclusionPeriod">
@@ -278,6 +278,7 @@
                             <div class="field w-full" *ngIf="showMotivoExclusaoConta">
                                 <textarea rows="3" class="inverted-out" placeholder="{{ 'jogo_responsavel.exclusao_conta.explique_motivo' | translate }}" formControlName="motivoExclusao"></textarea>
                             </div>
+                            <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
                             <div #legitimuz id="legitimuz-container"
                                 *ngIf="faceMatchEnabled && !faceMatchDeletedAccountValidated && !verifiedIdentity">
                                 <div id="legitimuz">
@@ -308,7 +309,23 @@
                                 </div>
                                 <div id="legitimuz-root"></div>
                             </div>
-                            <button [disabled]="!faceMatchAccountDeletionValidated" type="submit" class="btn btn-custom" [ngStyle]="{'margin-top': faceMatchEnabled ? '15px' : '0px'}">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
+                            </div>
+                            <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+                                <div #docCheck id="docCheck"
+                                *ngIf="!faceMatchAccountDeletionValidated">
+                                    <div id="verify-identity-text">
+                                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                                        ('saques.identityVerifyNeeded' | translate)}}
+                                    </div>
+                                    <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
+                                        [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                                        [attr.data-ex-doccheck-force-enrollment]="false">
+                                        <i class="fa-solid fa-id-card"></i>
+                                        {{'saques.identityVerify' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+                            <button (click)="handleSubmit('onSubmitExclusaoConta')" [disabled]="!faceMatchAccountDeletionValidated" type="submit" class="btn btn-custom" [ngStyle]="{'margin-top': faceMatchEnabled ? '15px' : '0px'}">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
                         </form>
                     </div>
                 </section>

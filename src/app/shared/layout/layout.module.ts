@@ -68,8 +68,6 @@ import {
     TabelaModalComponent,
     CarregamentoModalComponent,
     CompatilhamentoBilheteModal,
-    RegrasBonusModalComponent,
-    JogosLiberadosBonusModalComponent,
     CanceledBonusConfirmComponent,
     ValidatePhoneModalComponent
 } from './modals';
@@ -109,6 +107,8 @@ import { AddBankAccountModalComponent } from './modals/add-bank-account-modal/ad
 import { ListBankAccountsComponent } from './list-bank-accounts/list-bank-accounts.component';
 import { LastAccessesModalComponent } from './modals/last-accesses-modal/last-accesses-modal.component';
 import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.module';
+
+import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 import { RegisterModalComponentComponent } from './modals/register-modal/register-modal-component/register-modal-component.component';
 import { AddressDataComponent } from './modals/register-modal/parts/address-data/address-data.component';
 import { LoginDataComponent } from './modals/register-modal/parts/login-data/login-data.component';
@@ -172,8 +172,6 @@ import { PersonalDataComponent } from './modals/register-modal/parts/personal-da
         SolicitarSaqueModalComponent,
         RecargaCartaoModalComponent,
         RecargaSuccessModalComponent,
-        RegrasBonusModalComponent,
-        JogosLiberadosBonusModalComponent,
         BilheteCompartilhamentoComponent,
         AtivarCartaoModalComponent,
         ApostaEncerramentoModalComponent,
@@ -218,6 +216,7 @@ import { PersonalDataComponent } from './modals/register-modal/parts/personal-da
         PasswordExpiredModalComponent,
         ConfiguracaoLimitePerdasModalComponent,
         BackPageComponent,
+        ExibirBilheteCassinoComponent,
         FaceMatchModalComponent,
         ValidatePhoneModalComponent,
         AddBankAccountModalComponent,
@@ -253,7 +252,8 @@ import { PersonalDataComponent } from './modals/register-modal/parts/personal-da
         MenuFooterComponent,
         BackPageComponent,
         ValidatePhoneModalComponent,
-        ListBankAccountsComponent
+        ListBankAccountsComponent,
+        ExibirBilheteCassinoComponent
     ],
     providers: [
         ApostaEsportivaService,

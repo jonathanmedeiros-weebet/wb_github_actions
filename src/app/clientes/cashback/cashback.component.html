@@ -61,7 +61,7 @@
                 Nenhum cashback foi encontrado nesse período.
             </div>
             <div *ngIf="cashbacks.length > 0">
-                <div class="table-responsive only-desktop">
+                <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
@@ -82,7 +82,7 @@
                                 <td>Cashback ({{cashback.accrual}})</td>
                                 <td>{{cashback.registrationDate}}</td>
                                 <td>
-                                    {{translateStatus(cashback.status)}}
+                                    {{cashback.cashback_type !== 'bonus' ? translateStatus('redeemed') : translateStatus(cashback.status)}}
                                 </td>
                                 <td
                                     [ngStyle]="{
@@ -95,7 +95,7 @@
                                         id="btn-redeem"
                                         class="btn btn-custom"
                                         type="button"
-                                        [disabled]="cashback.status != 'pending'"
+                                        [disabled]="cashback.status != 'pending' || cashback.cashback_type != 'bonus'"
                                         (click)="cashback.status == 'pending' ? redeemCashback(cashback.id) : false"
                                         >{{'cashback.redeem' | translate}}</button>
                                 </td>
@@ -103,7 +103,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 </div>

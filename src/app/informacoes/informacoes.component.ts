@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {MenuFooterService, PaginaService} from './../services';
+import {MenuFooterService, PaginaService, ParametrosLocaisService} from './../services';
 import {Pagina} from './../models';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -27,6 +27,13 @@ export class InformacoesComponent implements OnInit, OnDestroy {
     tituloPagina = '';
     private linguagemSelecionada: string = 'pt';
     private paginas;
+    hasRegras = false;
+    hasTermosCondicoes = false;
+    hasPoliticaPrivacidade = false;
+    hasQuemSomos = false;
+    hasJogoResponsavel = false;
+    hasPoliticaAml = false;
+    hasAfiliados = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -35,11 +42,19 @@ export class InformacoesComponent implements OnInit, OnDestroy {
         private renderer: Renderer2,
         private el: ElementRef,
         private translate: TranslateService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private paramsLocais: ParametrosLocaisService
     ) {
     }
 
     ngOnInit() {
+        this.hasRegras = this.paramsLocais.getOpcoes().has_regras;
+        this.hasTermosCondicoes = this.paramsLocais.getOpcoes().has_termos_condicoes;
+        this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
+        this.hasQuemSomos = this.paramsLocais.getOpcoes().has_quem_somos;
+        this.hasJogoResponsavel = this.paramsLocais.getOpcoes().has_jogo_responsavel;
+        this.hasPoliticaAml = this.paramsLocais.getOpcoes().has_politica_aml;
+        this.hasAfiliados = Boolean(this.paramsLocais.getOpcoes().has_afiliados && this.paramsLocais.getOpcoes().exibir_link_afiliado);
         this.mobileScreen = window.innerWidth <= 1024;
         this.linguagemSelecionada = this.translate.currentLang;
 
