@@ -133,7 +133,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 }
                 );
         }
-
     }
 
     registerCancel() {
