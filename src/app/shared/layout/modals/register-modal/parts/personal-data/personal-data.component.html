@@ -66,7 +66,7 @@
                                         <div class="division-date-of-birth">
                                             <select class="form-control style-select" formControlName="month"  (change)="onDateChange()">
                                                 <option value="mes">{{'register.month' | translate}}</option>
-                                                <option *ngFor="let month of months" [value]="month">{{ month.name }}</option>
+                                                <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -119,11 +119,12 @@
                                     <label>
                                         <div>
                                             <div class="div-button-gender">
-                                                <div>
-                                                    <input type="radio" formControlName="gender" value="masculino">
+                                                <div class="custom-radio">
+                                                    <input type="radio" formControlName="gender" value="masculino">   
+                                                    <span class="radio-custom"></span>
                                                 </div>
                                                 <div>
-                                                    <span class="radio-custom">{{'genero.masculino' | translate}}</span>
+                                                    <span>{{'genero.masculino' | translate}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,11 +138,12 @@
                                     <label>
                                         <div>
                                             <div class="div-button-gender">
-                                                <div>
+                                                <div class="custom-radio">
                                                     <input type="radio" formControlName="gender" value="feminino">
+                                                    <span class="radio-custom"></span>
                                                 </div>
                                                 <div>
-                                                    <span class="radio-custom">{{'genero.feminino' | translate}}</span>
+                                                    <span>{{'genero.feminino' | translate}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -155,11 +157,12 @@
                                     <label>
                                         <div>
                                             <div class="div-button-gender">
-                                                <div>
+                                                <div class="custom-radio">
                                                     <input type="radio" formControlName="gender" value="outros">
+                                                    <span class="radio-custom"></span>
                                                 </div>
                                                 <div>
-                                                    <span class="radio-custom">{{'genero.outros' | translate}}</span>
+                                                    <span>{{'genero.outros' | translate}}</span>
                                                 </div>
                                             </div>
                                         </div>

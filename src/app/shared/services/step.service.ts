@@ -11,7 +11,10 @@ export class StepService {
     private formValidSource = new BehaviorSubject<boolean>(false);
     formValid$ = this.formValidSource.asObservable();
 
-    totalSteps = 3;
+    private submitForm = new BehaviorSubject<boolean>(undefined);
+    submitForm$ = this.submitForm.asObservable();
+
+    totalSteps = 2;
 
     get currentIndex() {
         return this.currentIndexSource.value;
@@ -19,6 +22,10 @@ export class StepService {
 
     get formValid() {
         return this.formValidSource.value;
+    }
+
+    get formSubmit() {
+        return this.submitForm.value;
     }
 
     previous() {
@@ -30,9 +37,12 @@ export class StepService {
 
     next() {
         this.formValidSource.next(false);
-        if (this.currentIndex < this.totalSteps - 1) {
+        if (this.currentIndex <= this.totalSteps - 1) {
             this.currentIndexSource.next(this.currentIndex + 1);
+        } else {
+            this.submitForm.next(true)
         }
+        
     }
 
     reset() {

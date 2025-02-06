@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ParametrosLocaisService} from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
@@ -13,7 +14,8 @@ import { FormValidations } from 'src/app/shared/utils';
     styleUrls: ['./personal-data.component.scss']
     })
     export class PersonalDataComponent extends BaseFormComponent implements OnInit, OnDestroy{
-    @Output() dataPersonal = new EventEmitter<any>;
+
+    @Output() personalData = new EventEmitter<any>;
     @Input() data:any;
 
     form: FormGroup;
@@ -46,10 +48,13 @@ import { FormValidations } from 'src/app/shared/utils';
     ];
 
     nationalities = this.CountriesService.getCountries();
-    
+
+    dropdownList = [];
+    selectedItems = [];
+    dropdownSettings : IDropdownSettings = {};
 
     constructor(
-        private fb: UntypedFormBuilder,
+        private fb: FormBuilder,
         private cd: ChangeDetectorRef,
         private ga4Service: Ga4Service,
         private paramsService: ParametrosLocaisService,
@@ -60,6 +65,27 @@ import { FormValidations } from 'src/app/shared/utils';
     }
 
     ngOnInit() {
+
+        this.dropdownSettings = {
+            singleSelection: false,
+            idField: 'value',
+            textField: 'name',
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            itemsShowLimit: 3,
+            allowSearchFilter: true
+          };
+
+        this.selectedItems = [
+            { value: 1, name: 'Afeganistão' },
+            { value: 2, name: 'África do Sul' },
+            { value: 3, name: '"Albânia"' },
+
+
+
+            
+        ];
+
         this.createForm();
         this.initializeDays();
         this.initializeYears();
@@ -75,7 +101,7 @@ import { FormValidations } from 'src/app/shared/utils';
         this.form.valueChanges.subscribe(() => {
             if(this.form.valid){
                 this.stepService.changeFormValid(true);
-                this.dataPersonal.emit(this.form.value);
+                this.personalData.emit(this.form.value);
             } else {
                 this.stepService.changeFormValid(false);
             }
@@ -97,12 +123,13 @@ import { FormValidations } from 'src/app/shared/utils';
         this.form = this.fb.group({
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
-            nomeCompleto: [null],
-            day:['dia'],
-            month:['mes'],
-            year:['ano'],
+            nomeCompleto: ['teste da silva'],
+            day:[null],
+            month:[null],
+            year:[null],
             nationality:['Brasil'],
-            gender:[null]
+            gender:[null],
+            nascimento:[null]
         })
     };
 
@@ -142,9 +169,21 @@ import { FormValidations } from 'src/app/shared/utils';
     }
 
     onDateChange() {
-        console.log('Data selecionada: ${this.selectedDay}')
+      
+        if(this.form.value.day && this.form.value.month && this.form.value.year) {
+            const data = new Date(this.form.value.day,this.form.value.month)
+            let dataFormatada = `${data.getFullYear()}-${(data.getMonth() + 1).toString().padStart(2, '0')}-${data.getDate().toString().padStart(2, '0')}`;
+            this.form.get('nascimento').patchValue(dataFormatada)
+        }
     }
 
     onNationalityChange(){
+    }
+
+    onSelectAll($event: any) {
+        this.selectedItems = this.nationalities
+    }
+    onItemSelect($event: any) {
+        this.selectedItems.push($event)
     }
 }

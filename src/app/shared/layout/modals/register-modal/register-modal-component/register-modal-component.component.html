@@ -16,11 +16,18 @@
             </div>
             <div class="body-register">
                 <app-personal-data *ngIf="currentIndex == 0"
-                (dataPersonal) = "dataChange($event)"
+                (personalData) = "dataChange($event)"
                 [data]= "data">
                 </app-personal-data>
-                <app-address-data *ngIf="currentIndex == 1"></app-address-data>
-                <app-login-data *ngIf="currentIndex == 2"></app-login-data>
+                <app-address-data *ngIf="currentIndex == 1"
+                (addressData) = "dataChange($event)"
+                [data]= "data"
+                >
+                </app-address-data>
+                <app-login-data *ngIf="currentIndex == 2"
+                (loginData) = "dataChange($event)"
+                [data]= "data">
+            </app-login-data>
             </div>
         </div>
     </div>

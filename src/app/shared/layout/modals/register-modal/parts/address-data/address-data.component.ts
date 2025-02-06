@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -14,6 +14,8 @@ import { StepService } from 'src/app/shared/services/step.service';
   styleUrls: ['./address-data.component.scss']
 })
 export class AddressDataComponent extends BaseFormComponent implements OnInit {
+   @Output() addressData = new EventEmitter<any>;
+   @Input() data:any;
 
   formInvalid = true
   form: FormGroup;
@@ -41,6 +43,7 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
     this.form.valueChanges.subscribe(() => {
       if (this.form.valid) {
         this.stepService.changeFormValid(true);
+        this.addressData.emit(this.form.value);
       } else {
         this.stepService.changeFormValid(false);
       }
@@ -55,29 +58,46 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
       bairro: ['', Validators.required],
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
+      pais:['Brasil', Validators.required],
       complemento: [''],
       cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     });
     this.form.controls['cep']
-      .valueChanges
-      .pipe(
-        debounceTime(600),
-        distinctUntilChanged()
-      )
-      .subscribe((cep) => { this.buscarPorCep(cep); console.log(cep) });
-
+    .valueChanges
+    .pipe(
+      debounceTime(600),
+      distinctUntilChanged()
+    )
+    .subscribe((cep) => { this.buscarPorCep(cep)});
+    
+    if (this.data.logradouro) {
+      this.getCidades(undefined,this.data.estado)
+      this.form.patchValue(this.data);
+      this.cidadeSelecionada = this.data.cidade;
+      this.form.get('cidade').patchValue(this.cidadeSelecionada);
+    }
+        
+    
     this.form.markAllAsTouched();
   }
 
-  getCidades(event: any) {
-    let estadoId = event.target.value;
+  getCidades(event?: any, parametro?: number) {
+    let estadoId = 0 ;
+    
+    if (event) {
+      estadoId = event.target.value;
+    } else {
+      estadoId = parametro;
+    }
+
     if (estadoId > 0) {
-      this.utilsService.getCidades(event.target.value).subscribe(
+      this.utilsService.getCidades(estadoId).subscribe(
         cidades => this.cidades = cidades,
         error => this.handleError(error)
       );
     }
   }
+
 
   buscarPorCep(cep: string) {
     if (cep.length == 8) {
@@ -118,7 +138,6 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
             if (endereco.logradouro) {
               this.form.get('logradouro').patchValue(endereco.logradouro);
             }
-            console.log(this.cidades)
           } else {
             this.handleError(this.translate.instant('geral.enderecoNaoEncontrado'));
           }

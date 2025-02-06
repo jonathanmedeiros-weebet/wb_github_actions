@@ -59,7 +59,7 @@
                     <div class="form-group mb-4 col-md-4">
                         <div class="input-md div-button-personalized">
                             <input type="text" id="numero"
-                                class="form-control inverted-out input-style label-personalized"
+                                class="form-control input-style label-personalized"
                                 formControlName="numero" [ngClass]="applyCssInputError('numero')" placeholder=""
                                 inputmode="numeric">
                             <label for="numero" class="text-input">{{'geral.numero' | translate}}</label>
@@ -71,11 +71,10 @@
             <div class="row">
                 <div class="col-md-12 flex-row">
                     <div class="form-group mb-4 col-md-4">
-                        <div class="input-md div-button-personalized">
+                        <div class="input-md div-button-personalized input-style">
                             <div class="label-personalized">
                                 <span>{{'geral.estado' | translate}}</span>
                             </div>
-                            <!-- <label for="estado" class="text-input">{{'geral.estado' | translate}}</label> -->
                             <select formControlName="estado" type="text" class="form-control style-select"
                                 (change)="getCidades($event)">
                                 <option value="">{{'geral.selecione' | translate}}</option>
@@ -87,7 +86,7 @@
                         <app-error-msg [control]="form.get('estado')" label="estado" class="text-left"></app-error-msg>
                     </div>
                     <div class="form-group mb-4 col-md-8">
-                        <div class="input-md div-button-personalized">
+                        <div class="input-md div-button-personalized input-style">
                             <div class="label-personalized">
                                 <span>{{'geral.cidade' | translate}}</span>
                             </div>

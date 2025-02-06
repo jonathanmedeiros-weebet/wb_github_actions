@@ -24,6 +24,11 @@ button {
     background: #181818;
     color: var(--highlight);
 }
+.deactive-button {
+    background: var(--header);
+    color: rgba(255, 255, 255, 0.70);
+    border: none;
+}
 
 button:disabled {
     background: var(--header);

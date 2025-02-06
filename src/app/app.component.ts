@@ -15,6 +15,7 @@ import { ActivityDetectService } from './shared/services/activity-detect.service
 import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from './shared/services/timer.service';
+import { RegisterModalComponentComponent } from './shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -171,7 +172,7 @@ export class AppComponent implements OnInit {
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
 
-            this.modalService.open(CadastroModalComponent, {
+            this.modalService.open(RegisterModalComponentComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,

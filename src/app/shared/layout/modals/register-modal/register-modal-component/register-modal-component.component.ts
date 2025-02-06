@@ -9,44 +9,37 @@ import { StepService } from 'src/app/shared/services/step.service';
 })
 export class RegisterModalComponentComponent {
 
-        currentIndex = 0;
-        totalSteps = 3;
-        formInvalid = true;
-        data = {cpf:null,
-            day:"dia",
-            gender:null,
-            month:"mes",
-            nationality:"Brasil",
-            nome:"",
-            nomeCompleto:null,
-            year:"ano"};
+    currentIndex = 0;
+    totalSteps = 2;
+    formInvalid = true;
+    data = {};
 
-        constructor(private stepService: StepService,
-            public activeModal: NgbActiveModal
-        ) {
-            this.stepService.currentIndex$.subscribe((index) => {
-                this.currentIndex = index;
-            });
-            this.stepService.formValid$.subscribe((valid) => {
-                this.formInvalid = !valid;
-            })
-        }
-  
-        previous() {
-            this.stepService.previous();
-        }
-    
-        next() {
-            this.stepService.next();
-        }
+    constructor(private stepService: StepService,
+        public activeModal: NgbActiveModal
+    ) {
+        this.stepService.currentIndex$.subscribe((index) => {
+            this.currentIndex = index;
+        });
+        this.stepService.formValid$.subscribe((valid) => {
+            this.formInvalid = !valid;
+        })
+       
+    }
 
-        dataChange(event: any) {
-            this.data = event;
-            console.log(this.data);
-        }
+    previous() {
+        this.stepService.previous();
+    }
 
-        onClose() {
-            this.stepService.reset();
-            this.activeModal.close();
-        }
+    next() {
+        this.stepService.next();
+    }
+
+    dataChange(event: { [key: string]: any }) {
+        this.data = { ...this.data,...event}
+    }
+
+    onClose() {
+        this.stepService.reset();
+        this.activeModal.close();
+    }
 }
