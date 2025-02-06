@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,25 +19,26 @@ class HomePage extends StatefulWidget {
   final String name;
   final String slug;
   final String centralUrl;
-
-  const HomePage(
-      {super.key,
-      required this.title,
-      required this.host,
-      required this.name,
-      required this.slug,
-      required this.centralUrl,
-      required this.bgColor});
+  
+  const HomePage({
+    super.key,
+    required this.title,
+    required this.host,
+    required this.name,
+    required this.slug,
+    required this.centralUrl,
+    required this.bgColor
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   final StorageService _storageService = StorageService();
   final PrinterService _printerService = PrinterService();
   final UtilitiesService _utilitiesService = UtilitiesService();
-
+  
   late final WebViewController _webViewController;
 
   String? printerName;
@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
 
     const params = PlatformWebViewControllerCreationParams();
 
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
 
     webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse('${widget.host}?host=${widget.centralUrl}&name=${widget.name}&slug=${widget.slug}'))
+      ..loadRequest(Uri.parse(_getAppUrl()))
       ..setNavigationDelegate(NavigationDelegate(
         onNavigationRequest: (NavigationRequest request) {
           final sanitizedHost =
@@ -90,6 +91,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state == AppLifecycleState.resumed) {
+      String? currentUrl = await _webViewController.currentUrl();
+      if (currentUrl == null || currentUrl.isEmpty) {
+        currentUrl = _getAppUrl();
+      }
+      _webViewController.loadRequest(Uri.parse(currentUrl));
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
     return Scaffold(
@@ -97,6 +115,10 @@ class _HomePageState extends State<HomePage> {
       appBar: const EmptyAppBar(),
       body: WebViewWidget(controller: _webViewController),
     );
+  }
+
+  String _getAppUrl() {
+    return '${widget.host}?host=${widget.centralUrl}&name=${widget.name}&slug=${widget.slug}';
   }
 
   _executePostMessageAction(postMessage) async {

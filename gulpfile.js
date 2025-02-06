@@ -110,6 +110,18 @@ gulp.task('bet9.wee.bet', function (done) {
     });
 });
 
+gulp.task('bet2.wee.bet', function (done) {
+    return prepare({
+        app_id: "bet.wee.bet2",
+        url: "https://app.weebet.tech",
+        nome: "APP BET2",
+        slug: "bet2.wee.bet",
+        centralUrl: 'https://central.bet2.wee.bet',
+        splash_color: "#002458",
+        pkg_folder: ('bet.wee.bet2').split('.').join('/')
+    });
+});
+
 gulp.task('ragnar.bet', function (done) {
     return prepare({
         app_id: "bet.ragnar",
