@@ -115,6 +115,8 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         const elementChat = document.querySelector('#chat-widget-container');
         const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
         const elementChatJivo = document.querySelector('#jivo_custom_widget');
+        const elementChatIntercom = document.querySelector('#intercom-container');
+        const elementChatIntercomLight = document.querySelector('.intercom-lightweight-app');
 
         if (elementChat) {
             this.renderer.setStyle(elementChat, 'display', 'none');
@@ -127,12 +129,22 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         if (elementChatJivo) {
             this.renderer.setStyle(elementChatJivo, 'display', 'none');
         }
+
+        if (elementChatIntercom) {
+            this.renderer.setStyle(elementChatIntercom, 'display', 'none');
+        }
+
+        if (elementChatIntercomLight) {
+            this.renderer.setStyle(elementChatIntercomLight, 'display', 'none');
+        }
     }
 
     showGtmElements() {
         const elementChat = document.querySelector('#chat-widget-container');
         const elementChatWeebet = document.querySelector('.botao-contato-flutuante');
         const elementChatJivo = document.querySelector('#jivo_custom_widget');
+        const elementChatIntercom = document.querySelector('#intercom-container');
+        const elementChatIntercomLight = document.querySelector('.intercom-lightweight-app');
 
         if (elementChat) {
             this.renderer.removeStyle(elementChat, 'display');
@@ -144,6 +156,14 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
         if (elementChatJivo) {
             this.renderer.removeStyle(elementChatJivo, 'display');
+        }
+
+        if (elementChatIntercom) {
+            this.renderer.removeStyle(elementChatIntercom, 'display');
+        }
+
+        if (elementChatIntercomLight) {
+            this.renderer.removeStyle(elementChatIntercomLight, 'display');
         }
     }
 

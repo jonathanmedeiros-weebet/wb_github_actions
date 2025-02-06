@@ -1,10 +1,11 @@
+import { DocCheckService } from './../../../services/doc-check.service';
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 
 import { Subject } from 'rxjs';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ClienteService, FinanceiroService, MessageService, ParametrosLocaisService, UtilsService } from './../../../../services';
+import { AuthService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService, UtilsService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario';
@@ -19,6 +20,14 @@ import { takeUntil } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
+
+declare global {
+    interface Window {
+        ex_partner: any;
+        exDocCheck: any;
+        exDocCheckAction: any;
+    }
+}
 
 @Component({
     selector: 'app-cadastro-modal',
@@ -71,10 +80,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     faceMatchEnabled = false;
     faceMatchRegister = false;
     faceMatchRegisterValidated = false;
+    faceMatchType = null;
     legitimuzToken = "";
     currentLanguage = 'pt';
     disapprovedIdentity = false;
     dataUserCPF = '';
+    docCheckToken = '';
+    secretHash = '';
     showLoading = true;
     faceMatchRequested = false;
     isStrengthPassword: boolean | null;
@@ -87,6 +99,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     };
 
     fullRegistration = true;
+    currentLocationPermission = null;
+    lastLocationPermission = null;
 
     public countries: any = [];
     public states: any = [];
@@ -109,9 +123,13 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
         private legitimuzService: LegitimuzService,
+        private docCheck: DocCheckService,
         private ga4Service: Ga4Service,
         private utilitiesService: UtilsService,
-        private location: Location
+        private location: Location,
+        private geolocationService: GeolocationService,
+        private navigatorPermissionsService: NavigatorPermissionsService
+
     ) {
         super();
     }
@@ -146,9 +164,26 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         this.location.replaceState(`/cadastro${queryString}`);
 
         this.getAddressOptions();
+        this.faceMatchType = this.paramsService.getOpcoes().faceMatchType;
         this.currentLanguage = this.translate.currentLang;
-        this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
-        this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchRegister);
+        switch (this.faceMatchType) {
+            case 'legitimuz':
+                this.legitimuzToken = this.paramsService.getOpcoes().legitimuz_token;
+                this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.legitimuzToken && this.paramsService.getOpcoes().faceMatchRegister);
+                break;
+            case 'docCheck':
+                this.docCheckToken = this.paramsService.getOpcoes().dockCheck_token;
+                this.faceMatchEnabled = Boolean(this.paramsService.getOpcoes().faceMatch && this.docCheckToken && this.paramsService.getOpcoes().faceMatchRegister);
+                this.docCheck.iframeMessage$.subscribe(message => {
+                    if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
+                        this.faceMatchRequested = true;
+                        this.showLoading = false
+                    }
+                })
+                break;
+            default:
+                break;
+        }
 
         if (!this.faceMatchEnabled) {
             this.faceMatchRegisterValidated = true;
@@ -279,7 +314,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 }
                 );
         }
-        if (this.faceMatchEnabled && !this.disapprovedIdentity) {
+        if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
@@ -296,8 +331,18 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.form.get('cpf')?.valueChanges.subscribe(cpf => {
                 this.dataUserCPF = cpf;
-                this.legitimuzService.init();
-                this.legitimuzService.mount();
+                switch (this.faceMatchType) {
+                    case 'legitimuz':
+                        this.legitimuzService.init();
+                        this.legitimuzService.mount();
+                        break;
+                    case 'docCheck':
+                        this.secretHash = this.docCheck.hmacHash(this.dataUserCPF, this.paramsService.getOpcoes().dockCheck_secret_hash);
+                        this.docCheck.init();
+                        break;
+                    default:
+                        break;
+                }
             })
         }
     }
@@ -488,6 +533,39 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
     }
 
     async submit() {
+        const restrictionStateBet = this.paramsService.getRestrictionStateBet();
+
+        if (restrictionStateBet != 'Todos') {
+            let allowed = true;
+            this.lastLocationPermission = this.currentLocationPermission;
+            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+
+            if (this.currentLocationPermission == 'granted') {
+                if (this.lastLocationPermission == 'denied') {
+                    allowed = false;
+                    location.reload();
+                } else if (!this.geolocationService.checkGeolocation()) {
+                    allowed = await this.geolocationService.saveLocalStorageLocation();
+                }
+            } else if (this.currentLocationPermission == 'denied') {
+                allowed = false;
+            } else if (this.currentLocationPermission == 'prompt') {
+                allowed = await this.geolocationService.saveLocalStorageLocation();
+            }
+
+            if (allowed) {
+                let localeState = localStorage.getItem('locale_state');
+
+                if (restrictionStateBet != localeState) {
+                    this.messageService.error(this.translate.instant('geral.stateRestriction'));
+                    return;
+                }
+            } else {
+                this.messageService.error(this.translate.instant('geral.locationPermission'));
+                return;
+            }
+        }
+
         if (this.menorDeIdade) {
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
             return;

@@ -377,18 +377,34 @@
                     </div>
                 </div>
             </div>
-            <div #legitimuz id="legitimuz-container" *ngIf="!faceMatchRegisterValidated">
-                <div id="legitimuz">
-                    <div id="verify-identity-text">
-                            {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+            <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
+                <div #legitimuz id="legitimuz-container" *ngIf="!faceMatchRegisterValidated">
+                    <div id="legitimuz">
+                        <div id="verify-identity-text">
+                                {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) : ('saques.identityVerifyNeeded' | translate)}}
+                        </div>
+                        <button id="legitimuz-action-verify" class="btn btn-custom btn-legitimuz" *ngIf="!disapprovedIdentity" [disabled]="faceMatchRequested || this.showLoading">
+                            <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
+                            <i class="fa-solid fa-id-card"></i>
+                                {{'saques.identityVerify' | translate}}
+                        </button>
                     </div>
-                    <button id="legitimuz-action-verify" class="btn btn-custom btn-legitimuz" *ngIf="!disapprovedIdentity" [disabled]="faceMatchRequested || this.showLoading">
-                        <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out" [value]="dataUserCPF"/>
+                    <div id="legitimuz-root"></div>
+                </div>
+            </div>
+            <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+                <div id="docCheck">
+                    <div id="verify-identity-text">
+                        {{disapprovedIdentity ? ('saques.disapprovedIdentity' | translate) :
+                        ('saques.identityVerifyNeeded' | translate)}}
+                    </div>
+                    <button id="exDocCheckAction" *ngIf="!disapprovedIdentity" [attr.data-ex-doccheck-document]="dataUserCPF"
+                        [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                        [attr.data-ex-doccheck-force-enrollment]="true" [disabled]="faceMatchRequested || this.showLoading">
                         <i class="fa-solid fa-id-card"></i>
-                            {{'saques.identityVerify' | translate}}
+                        {{'saques.identityVerify' | translate}}
                     </button>
                 </div>
-                <div id="legitimuz-root"></div>
             </div>
             <div class="row">
                 <div class="col-12">

@@ -27,6 +27,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
     jogosDestaquesIds = [];
     widthCard = 300;
     showLoadingIndicator = true;
+    public sportbook;
 
     teamShieldsFolder;
 
@@ -52,6 +53,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         private router: Router,
         private sportIdService: SportIdService,
     ) {
+        this.sportbook = this.paramsService.getOpcoes().sportbook;
         this.teamShieldsFolder = this.sportIdService.teamShieldsFolder();
     }
 

@@ -121,7 +121,7 @@
 <ng-container *ngIf="contexto == 'cambista'">
     <div class="cambista-menu" [ngClass]="{'collapsed': collapsed}" >
         <ul>
-            <li class="cambista-item">
+            <li class="cambista-item" *ngIf="allowAgentChangePassword">
                 <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
                     <i class="fa fa-key icone-generico"></i>
                     <span class="regiao-nome">{{'geral.alterarSenha' | translate}}</span>

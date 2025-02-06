@@ -37,7 +37,11 @@
                           "src/bilhete",
                           "src/apple-touch-icon.png",
                           "src/apple-touch-icon-precomposed.png",
-                          "src/manifest.webmanifest"
+                          {
+                            "glob": "**/*",
+                            "input": "/src/bilhete/",
+                            "output": "/bilhete/"
+                          }
                         ],
                         "styles": [
                             "node_modules/bootstrap/dist/css/bootstrap.css",
@@ -56,9 +60,7 @@
                             "node_modules/jquery/dist/jquery.min.js",
                             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                             "node_modules/jstree/dist/jstree.min.js"
-                        ],
-                        "serviceWorker": true,
-                        "ngswConfigPath": "ngsw-config.json"
+                        ]
                     },
                     "configurations": {
                         "production": {
