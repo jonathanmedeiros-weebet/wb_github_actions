@@ -9,7 +9,7 @@ import { AuthService, ClienteService, MessageService, ParametrosLocaisService, S
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
-import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
+import { RegisterModalComponentComponent } from '../register-modal/register-modal-component/register-modal-component.component';
 import { config } from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
@@ -272,7 +272,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.activeModal.dismiss();
 
         this.modalRef = this.modalService.open(
-            CadastroModalComponent,
+            RegisterModalComponentComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',

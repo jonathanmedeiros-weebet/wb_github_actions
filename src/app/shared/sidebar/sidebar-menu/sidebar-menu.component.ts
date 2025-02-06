@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {
-    CadastroModalComponent,
     LoginModalComponent,
     PesquisarApostaModalComponent,
     PesquisarCartaoMobileModalComponent,
@@ -18,6 +17,7 @@ import {PrintService} from '../../services/utils/print.service';
 import {ParametrosLocaisService} from '../../services/parametros-locais.service';
 import {TranslateService} from '@ngx-translate/core';
 import {TabelaComponent} from '../../../cambistas/tabela/tabela.component';
+import { RegisterModalComponentComponent } from '../../layout/modals/register-modal/register-modal-component/register-modal-component.component';
 
 @Component({
     selector: 'app-sidebar-menu',
@@ -114,7 +114,7 @@ export class SidebarMenuComponent implements OnInit {
 
     abrirCadastro() {
         this.modalRef = this.modalService.open(
-            CadastroModalComponent,
+            RegisterModalComponentComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'lg',

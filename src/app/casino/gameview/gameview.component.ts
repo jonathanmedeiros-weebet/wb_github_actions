@@ -8,7 +8,6 @@ import { AuthService, LayoutService, MenuFooterService, MessageService, Parametr
 import { interval, Subject } from 'rxjs';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {
-    CadastroModalComponent,
     JogosLiberadosBonusModalComponent,
     LoginModalComponent,
 
@@ -23,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
+import { RegisterModalComponentComponent } from 'src/app/shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
 
 
 @Component({
@@ -888,7 +888,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     abrirCadastro() {
         this.modalService.open(
-            CadastroModalComponent,
+            RegisterModalComponentComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',

@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CadastroModalComponent, LoginModalComponent } from '../shared/layout/modals';
+import { LoginModalComponent } from '../shared/layout/modals';
 import { AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepositoComponent } from '../clientes/deposito/deposito.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from '../shared/services/login.service';
 import { Subscription } from 'rxjs';
+import { RegisterModalComponentComponent } from '../shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
 
 declare function BTRenderer(): void;
 
@@ -232,7 +233,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
     openRegister() {
         this.modalService.open(
-            CadastroModalComponent,
+            RegisterModalComponentComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
