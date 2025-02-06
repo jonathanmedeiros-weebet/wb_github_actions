@@ -2235,7 +2235,7 @@ gulp.task('zedocash.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "zedocash.com",
-        banca: "BUDA BET",
+        banca: "ZÉ DO CASH",
         styles: ""
     });
 });
