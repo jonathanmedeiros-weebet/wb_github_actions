@@ -2230,3 +2230,12 @@ gulp.task('buda-bet.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('zedocash.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "zedocash.com",
+        banca: "BUDA BET",
+        styles: ""
+    });
+});
