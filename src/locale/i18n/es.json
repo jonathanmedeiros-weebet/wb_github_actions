@@ -277,7 +277,8 @@
         "vpn": "Hemos detectado que estás accediendo a nuestro sitio web a través de una VPN. Para garantizar la seguridad e integridad de la plataforma, te pedimos que desactives la VPN o utilices una conexión estándar para continuar. Si crees que esto es un error, por favor contacta al soporte.",
         "logoutGeolocationErrorMessage": "Has sido desconectado por razones de seguridad. Detectamos un cambio abrupto en tu ubicación que sería físicamente imposible de ocurrir en el intervalo de tiempo registrado. Si esto no fue causado por ti, te recomendamos verificar tu cuenta.",
         "logoutGeolocationErrorTitle": "Acceso Interrumpido: Ubicación Inconsistente",
-        "logoutGeolocationErrorButtonLabel": "Cerrar"
+        "logoutGeolocationErrorButtonLabel": "Cerrar",
+        "clickHere": "Clic aqui"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",
@@ -448,7 +449,8 @@
     },
     "aplicativo": {
         "versaoDoAplicativoNaoSuportada": "La versión de la aplicación instalada ya no es compatible, por favor vaya a nuestro sitio web y descargue la nueva versión.",
-        "baixarNovaVersao": "Descargar nueva versión"
+        "baixarNovaVersao": "Descargar nueva versión",
+        "downloadApp": "Descargar aplicación"
     },
     "deposito": {
         "titulo": "Depósito",
@@ -485,7 +487,13 @@
         "jogoResponsavel": "Juego responsable",
         "termosECondicoes": "Términos y condiciones",
         "feedback": "Ouvidoria",
-        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. Todos los derechos reservados."
+        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. Todos los derechos reservados.",
+        "restrictedToAdults": "Prohibido para menores de 18 años",
+        "knowYourLimits": "Conoce tus límites",
+        "ourApp": "Nuestra aplicación",
+        "institutional": "Institucional",
+        "licences": "Licencias",
+        "folowUp": "Sigue nuestras redes sociales"
     },
     "paginas": {
         "quem-somos": "Quiénes somos",
@@ -494,7 +502,7 @@
         "politica-aml": "Política AML",
         "jogo-responsavel": "Juego responsable",
         "termos-condicoes": "Términos y condiciones",
-        "partnership-terms": "Términos de uso (Asociaciones)"
+        "termos-afiliados": "Términos de uso (Asociaciones)"
     },
     "jogos": {
         "tempoCompleto": "Tiempo completo",
@@ -651,7 +659,9 @@
         "voltar": "Volver",
         "logout_continue_login": "Sí, me gustaría cerrar la sesión.",
         "remain_active_session": "No, seguir con la otra sesión activa",
-        "save_pdf": "Guardar PDF"
+        "save_pdf": "Guardar PDF",
+        "seeMore": "Ver más",
+        "seeLess": "Ver menos"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",

@@ -277,7 +277,8 @@
         "vpn": "We have detected that you are accessing our website through a VPN. To ensure the security and integrity of the platform, we kindly ask you to disable the VPN or use a standard connection to proceed. If you believe this is an error, please contact support.",
         "logoutGeolocationErrorMessage": "You have been logged out for security reasons. We detected an abrupt change in your location that would be physically impossible to occur within the recorded time frame. If this was not caused by you, we recommend verifying your account.",
         "logoutGeolocationErrorTitle": "Access Interrupted: Inconsistent Location",
-        "logoutGeolocationErrorButtonLabel": "Close"
+        "logoutGeolocationErrorButtonLabel": "Close",
+        "clickHere": "Click here"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -453,7 +454,8 @@
     },
     "aplicativo": {
         "versaoDoAplicativoNaoSuportada": "The installed app version is no longer supported, please go to our website and download the new version.",
-        "baixarNovaVersao": "Download new version"
+        "baixarNovaVersao": "Download new version",
+        "downloadApp": "Download app"
     },
     "deposito": {
         "titulo": "Deposit",
@@ -490,7 +492,13 @@
         "jogoResponsavel": "Responsible Gaming",
         "termosECondicoes": "Terms and conditions",
         "feedback": "Feedback",
-        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. All rights reserved."
+        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. All rights reserved.",
+        "restrictedToAdults": "Restricted to individuals over 18 years old.",
+        "knowYourLimits": "Know your limits",
+        "ourApp": "Our App",
+        "institutional": "Institutional",
+        "licences": "Licenses",
+        "folowUp": "Follow us on social networks"
     },
     "paginas": {
         "quem-somos": "Who we are",
@@ -499,7 +507,7 @@
         "politica-aml": "AML Policy",
         "jogo-responsavel": "Responsible Gaming",
         "termos-condicoes": "Terms and conditions",
-        "partnership-terms": "Terms of use(Partnership)"
+        "termos-afiliados": "Terms of use(Partnership)"
     },
     "jogos": {
         "tempoCompleto": "Full Time",
@@ -656,7 +664,9 @@
         "voltar": "Back",
         "logout_continue_login": "Yes, I would like to close the session",
         "remain_active_session": "No, keep the other session active",
-        "save_pdf": "Save PDF"
+        "save_pdf": "Save PDF",
+        "seeMore": "See more",
+        "seeLess": "See less"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
