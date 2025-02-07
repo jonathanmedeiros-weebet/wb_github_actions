@@ -93,9 +93,9 @@
             <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="displayAgentApp">
                 {{'footer.downloadApp' | translate}}
             </a>
-            <!-- <a *ngIf="displayPwaInstallButton" (click)="installPwa()">
+            <a *ngIf="displayPwaInstallButton" (click)="installPwa()">
                 {{ 'footer.installPwa' | translate }}
-            </a> -->
+            </a>
             <a [routerLink]="['/informacoes/regras']" *ngIf="hasRegras">
                 {{'footer.regras' | translate}}
             </a>
