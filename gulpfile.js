@@ -1131,17 +1131,6 @@ gulp.task('cassinomania.com', function (done) {
     });
 });
 
-gulp.task('mzsports.pro', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "mzsports.pro",
-        banca: "MZ SPORTS",
-        styles: "",
-        pixel: "",
-        scripts: ""
-    });
-});
-
 gulp.task('betsmilionaria.com.br', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
