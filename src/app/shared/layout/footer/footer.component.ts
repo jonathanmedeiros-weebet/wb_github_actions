@@ -157,7 +157,6 @@ export class FooterComponent implements OnInit, AfterViewInit {
         }
 
         if(this.container) {
-
             this.container.addEventListener('scroll', this.onScroll.bind(this));
         }
         
