@@ -221,7 +221,8 @@
     "paraisobet.net": "gulp paraisobet.net",
     "betmania.casino": "gulp betmania.casino",
     "buda-bet.com": "gulp buda-bet.com",
-    "zedocash.com": "gulp zedocash.com"
+    "zedocash.com": "gulp zedocash.com",
+    "sortte.bet": "gulp sortte.bet"
   },
   "private": true,
   "dependencies": {

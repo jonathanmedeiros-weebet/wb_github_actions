@@ -1933,6 +1933,7 @@ gulp.task('amabet.bet', function (done) {
         host: "amabet.bet",
         banca: "AMA BET",
         styles: "",
+        dominioTemp: "amabet.store"
     });
 });
 
@@ -1960,7 +1961,8 @@ gulp.task('fortunaplay.bet', function (done) {
         host: "fortunaplay.bet",
         banca: "FortunaPlay",
         styles: "",
-        xtremepush_sdk: "2ZwnVnh2kNB62WUkOAM2PSEMvRWf8Zhp"
+        xtremepush_sdk: "2ZwnVnh2kNB62WUkOAM2PSEMvRWf8Zhp",
+        dominioTemp: "fortunaplay.club"
     });
 });
 
@@ -2225,6 +2227,15 @@ gulp.task('zedocash.com', function (done) {
         server: "front2.wee.bet",
         host: "zedocash.com",
         banca: "ZÉ DO CASH",
+        styles: ""
+    });
+});
+
+gulp.task('sortte.bet', function (done) {
+    tasks(done, {
+        server: "front5.wee.bet",
+        host: "sortte.bet",
+        banca: "SORTE BET",
         styles: ""
     });
 });
