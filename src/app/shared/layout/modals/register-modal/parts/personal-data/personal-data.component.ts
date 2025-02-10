@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
