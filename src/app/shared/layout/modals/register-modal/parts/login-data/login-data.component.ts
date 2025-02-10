@@ -318,7 +318,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             telefone: [null, [Validators.required]],
             countryCode: ['55', [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
-            captcha: [null],
+            captcha: [null, this.provedorCaptcha ? Validators.required : null],
             check_1: [''],
             check_2: [''],
             googleId: [''],
