@@ -2222,10 +2222,10 @@ gulp.task('buda-bet.com', function (done) {
     });
 });
 
-gulp.task('zedocash.com', function (done) {
+gulp.task('zedocash.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "zedocash.com",
+        host: "zedocash.bet",
         banca: "ZÉ DO CASH",
         styles: ""
     });
