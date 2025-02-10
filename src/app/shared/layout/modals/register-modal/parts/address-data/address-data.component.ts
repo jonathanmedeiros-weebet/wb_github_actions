@@ -77,8 +77,6 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
       this.form.get('cidade').patchValue(this.cidadeSelecionada);
     }
         
-    
-    this.form.markAllAsTouched();
   }
 
   getCidades(event?: any, parametro?: number) {

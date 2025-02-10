@@ -18,6 +18,7 @@ import { Location } from '@angular/common';
 import { FormValidations } from 'src/app/shared/utils';
 import { LoginModalComponent } from '../../../login-modal/login-modal.component';
 import * as moment from 'moment';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @Component({
     selector: 'app-login-data',
@@ -28,10 +29,16 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
 
     @ViewChild('ativacaoCadastroModal', { static: true }) ativacaoCadastroModal;
     @Input() data: any;
+    @ViewChild('btnCadastrar', { static: false }) btnCadastrar!: ElementRef;
+    tooltipPassword = false;
+    
 
     currentIndex = 0;
     totalSteps = 3;
     formInvalid = true;
+
+    captchaResponse 
+    captchaResolved
 
 
     appMobile;
@@ -102,7 +109,8 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
         private ga4Service: Ga4Service,
-        private location: Location
+        private location: Location,
+        
     ) {
         super();
         this.stepService.currentIndex$.subscribe((index) => {
@@ -113,10 +121,9 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         })
         this.stepService.submitForm$.pipe(skip(1)).subscribe((submit) => {
             if (submit) {
-                this.onSubmit()
+                this.btnCadastrar.nativeElement.click();
             }
-        }
-        )
+        });
     }
     ngOnInit(): void {
 
@@ -309,9 +316,9 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
 
             email: [null, [Validators.required, Validators.email]],
             telefone: [null, [Validators.required]],
-            countryCode: [null, [Validators.required]],
+            countryCode: ['55', [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
-            captcha: [null, this.provedorCaptcha ? Validators.required : null],
+            captcha: [null],
             check_1: [''],
             check_2: [''],
             googleId: [''],
@@ -321,17 +328,13 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null],
-
             nome: [null],
             nascimento: [null],
-
             nomeCompleto: [null],
             cpf: [null],
-
             genero: [''],
             nationality: ['Brasil'],
             documentNumber: [''],
-
             logradouro: [''],
             numero: [''],
             bairro: [''],
@@ -340,13 +343,18 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             cep: [''],
 
         });
+        this.form.get('senha')?.valueChanges.subscribe((value) => {
+            console.log(this.form)
+          
+        });
+
 
         this.form.patchValue(this.data)
-        //  if (this.isStrengthPassword) {
-        //      this.form.controls.senha.clearValidators();
-        this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
-        this.form.controls.senha.updateValueAndValidity();
-        //  }
+        if (this.isStrengthPassword) {
+            this.form.controls.senha.clearValidators();
+            this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
+            this.form.controls.senha.updateValueAndValidity();
+        }
 
         if (this.isLoterj) {
             this.form.addControl('termosUso', this.fb.control(null, [
@@ -363,11 +371,11 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             this.form.controls['senha_confirmacao'].updateValueAndValidity();
         }
         this.form.get('password')?.valueChanges.subscribe((value) => {
+            console.log(this.form)
 
-            this.updatePasswordRequirements();
         });
 
-        this.updatePasswordRequirements();
+        
     }
 
     ngOnDestroy() {
@@ -394,10 +402,15 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         this.form.updateValueAndValidity();
     }
 
+    onCaptchaResolved(response: string) {
+        this.captchaResponse = response;
+        this.captchaResolved = true;  // O reCAPTCHA foi resolvido
+      }
+
 
     private async prepareSubmitData() {
         let values = this.form.value;
-
+        this.form.get('captcha').patchValue(this.captchaResponse)
         if (Object.keys(this.parameters).length) {
             values.parameters = this.parameters;
         }
@@ -531,32 +544,17 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         }
     }
 
-    updatePasswordRequirements() {
-        this.passwordRequirements = [];
+    resolved(event: any) {
+        console.log(event)
+        this.form.get('captcha').patchValue(event);
+    }
 
-        if (this.form.get('password')?.hasError('required')) {
-            this.passwordRequirements.push('Senha é obrigatória');
-        }
-        if (this.form.get('password')?.hasError('minlength')) {
-            this.passwordRequirements.push('A senha deve ter no mínimo 8 caracteres');
-        }
-        if (this.form.get('password')?.hasError('strongPasswordValidator')) {
-            this.passwordRequirements.push('A senha deve atender todos os requisitos');
-        }
+    showTooltip() {
+        this.tooltipPassword = !this.tooltipPassword
+    }
 
-        if (this.form.get('password')?.hasError('strongPasswordValidator')) {
-            if (!/[0-9]/.test(this.form.get('password')?.value)) {
-                this.passwordRequirements.push('A senha deve conter pelo menos um número');
-            }
-            if (!/[A-Z]/.test(this.form.get('password')?.value)) {
-                this.passwordRequirements.push('A senha deve conter pelo menos uma letra maiúscula');
-            }
-            if (!/[a-z]/.test(this.form.get('password')?.value)) {
-                this.passwordRequirements.push('A senha deve conter pelo menos uma letra minúscula');
-            }
-            if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.form.get('password')?.value)) {
-                this.passwordRequirements.push('A senha deve conter pelo menos um caractere especial');
-            }
-        }
+    returnRequirementsValue(){
+        
+        return Object.values(this.requirements).filter(value => value).length;
     }
 }

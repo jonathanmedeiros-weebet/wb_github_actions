@@ -19,6 +19,7 @@ import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/bloc
 import { LoginService } from 'src/app/shared/services/login.service';
 import { FaceMatchModalComponent } from '../face-match-modal/face-match-modal/face-match-modal.component';
 import { TranslateService } from '@ngx-translate/core';
+import { RegisterFaceMatchComponent } from '../register-face-match/register-face-match.component';
 
 declare var xtremepush: any;
 
@@ -213,14 +214,20 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 .subscribe(
                     async (res) => {
                         const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && (this.paramsLocais.getOpcoes().legitimuz_token || this.paramsLocais.getOpcoes().dockCheck_token));
+                        const faceMatchRegisterEnabled = this.paramsLocais.getOpcoes().faceMatchRegister;
                         let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
 
                         this.getUsuario();
 
-                        if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
+                        if (faceMatchEnabled && this.usuario.tipo_usuario == 'cliente' && (faceMatchRegisterEnabled || res.results.user.pendingVerification)) {
                             const holdUser = this.usuario;
                             localStorage.removeItem('user');
-                            const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
+                            let faceMatchResult
+                            if ( faceMatchRegisterEnabled) {
+                                faceMatchResult = await this.abrirModalFaceMatch(holdUser, true);
+                            } else { 
+                                faceMatchResult = await this.abrirModalFaceMatch(holdUser);
+                            }
                             if (!faceMatchResult) {
                                 return;
                             }
@@ -381,17 +388,30 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         );
     }
 
-    async abrirModalFaceMatch(user) {
+    async abrirModalFaceMatch(user, register?) {
         this.activeModal.dismiss();
-        this.modalRef = this.modalService.open(
-            FaceMatchModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                centered: true,
-                backdrop: 'static',
-                windowClass: 'modal-600'
-            }
-        );
+        
+        if (register) {
+            this.modalRef = this.modalService.open(
+                RegisterFaceMatchComponent,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    centered: true,
+                    backdrop: 'static',
+                    windowClass: 'modal-500'
+                }
+            );
+        } else {
+            this.modalRef = this.modalService.open(
+                FaceMatchModalComponent,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    centered: true,
+                    backdrop: 'static',
+                    windowClass: 'modal-500'
+                }
+            );
+        }
 
         this.modalRef.componentInstance.user = user;
 

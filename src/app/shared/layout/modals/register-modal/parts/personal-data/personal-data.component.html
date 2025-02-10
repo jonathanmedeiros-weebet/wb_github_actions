@@ -56,7 +56,7 @@
                                 <div class="group-date-of-birth">
                                     <div class="select-date-of-birth">
                                         <div class="division-date-of-birth">
-                                            <select class="form-control style-select" formControlName="day"  (change)="onDateChange()">
+                                            <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial" class="form-control style-select" formControlName="day"  (change)="onDateChange()">
                                                 <option value="dia">{{'register.day' | translate}}</option>
                                                 <option *ngFor="let day of days" [value]="day">{{ day }}</option>
                                             </select>
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="select-date-of-birth">
                                         <div class="division-date-of-birth">
-                                            <select class="form-control style-select" formControlName="month"  (change)="onDateChange()">
+                                            <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial" class="form-control style-select" formControlName="month"  (change)="onDateChange()">
                                                 <option value="mes">{{'register.month' | translate}}</option>
                                                 <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
                                             </select>
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="select-date-of-birth">
                                         <div class="division-date-of-birth">
-                                            <select class="form-control style-select" formControlName="year"  (change)="onDateChange()">
+                                            <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial" class="form-control style-select" formControlName="year"  (change)="onDateChange()">
                                                 <option value="ano">{{'register.year' | translate}}</option>
                                                 <option *ngFor="let year of years" [value]="year">{{ year }}</option>
                                             </select>

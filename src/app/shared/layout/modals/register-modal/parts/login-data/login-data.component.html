@@ -20,7 +20,7 @@
                     <input
                         type="text"
                         id="countryCode"
-                        mask="00"
+                        mask="0*"
                         class="form-control inverted-out"
                         formControlName="countryCode"
                         [ngClass]="applyCssInputError('countryCode')"
@@ -28,6 +28,7 @@
                         [dropSpecialCharacters]="false"
                         prefix="+"
                         inputmode="numeric"
+                        maxlength="4"
                     >
                     <label for="countryCode">{{'geral.countryCode' | translate}}</label>
                 </div>
@@ -138,48 +139,72 @@
                     <input [type]="mostrarSenha ? 'text' : 'password'" id="password" class="form-control inverted-out"
                         [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')"
-                        (input)="isStrengthPassword ? checkPassword() : null">
+                        (input)="isStrengthPassword ? checkPassword() : null"
+                        (blur)="showTooltip()">
                     <label for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarSenha = !mostrarSenha"></i>
                 </div>
 
-                <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}"
-                    class="text-left"></app-error-msg>
-                    <!-- <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
-                        <ul class="tooltip">
-                          <li *ngFor="let requirement of passwordRequirements">{{ requirement }}</li>
-                        </ul>
-                      </div> -->
+                <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
 
-                <ul class="requirements-password" *ngIf="isStrengthPassword">
-                    <li
-                        [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
-                        <i
-                            [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
-                        {{'senhas.minimumCharactersPassword' | translate}}
-                    </li>
-                    <li
-                        [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
-                        <i
-                            [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
-                        {{'senhas.lowercaseLetter' | translate}}
-                    </li>
-                    <li
-                        [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
-                        <i
-                            [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
-                        {{'senhas.uppercaseLetter' | translate}}
-                    </li>
-                    <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
-                        <i
-                            [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
-                        {{'senhas.specialChar' | translate}}
-                    </li>
+                <ul class="requirements-password" *ngIf="isStrengthPassword && !tooltipPassword">
+                    <div id="container-tooltip">
+                        <li [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
+                            <i
+                                [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
+                            {{'senhas.minimumCharactersPassword' | translate}}
+                        </li>
+                        <li [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
+                            <i
+                                [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
+                            {{'senhas.lowercaseLetter' | translate}}
+                        </li>
+                        <li [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
+                            <i
+                                [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
+                            {{'senhas.uppercaseLetter' | translate}}
+                        </li>
+                        <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
+                            <i
+                                [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
+                            {{'senhas.specialChar' | translate}}
+                        </li>
+                    </div>
+                    <div style="width: 100%;">
+                        <span>
+                
+                        </span>
+                
+                        <div style="width: 100%;">
+                            <div *ngIf="returnRequirementsValue() == 0 "> Nivel da senha: </div>
+                            <div *ngIf="returnRequirementsValue() == 1 "> Nivel da senha: <span id="weak">Fraca</span></div>
+                            <div *ngIf="returnRequirementsValue() == 2 || returnRequirementsValue() == 3"> Nivel da senha: <span
+                                    id="medium">Media</span></div>
+                            <div *ngIf="returnRequirementsValue() > 3 "> Nivel da senha: <span id="strong">Forte</span></div>
+                        </div>
+                
+                        <div class="bars" [ngClass]="{
+                                        'weak': returnRequirementsValue() == 1,
+                                        'medium': returnRequirementsValue() == 2 || returnRequirementsValue() == 3,
+                                        'strong': returnRequirementsValue() > 3
+                                    }">
+                            <div class="strong-bar-one">
+                
+                            </div>
+                            <div class="strong-bar-two">
+                
+                            </div>
+                            <div class="strong-bar-three">
+                
+                            </div>
+                
+                        </div>
+                    </div>
                 </ul>
 
-                <!-- <small *ngIf="!isStrengthPassword" class="form-text text-muted">{{'geral.requisitosSenha' |
-                    translate}}</small> -->
+                <small *ngIf="!isStrengthPassword" class="form-text text-muted">{{'geral.requisitosSenha' |
+                    translate}}</small>
             </div>
         </div>
     </div>
@@ -274,11 +299,7 @@
         </div>
         <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
         <div class="col-12">
-            <button type="submit" (click)="captchaRef.execute()" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting || (faceMatchEnabled && !faceMatchRequested)">{{'geral.cadastrar' | translate}}</button>
-        </div>
-        <div class="login">
-            {{'geral.jaPossuiUmaConta' | translate}}
-            <a (click)="abrirLogin()">{{'geral.entrarNaConta' | translate}}</a>
+            <button #btnCadastrar (click)="captchaRef.execute()" [disabled]="submitting || (faceMatchEnabled && !faceMatchRequested)">Validar Captcha</button>
         </div>
     </div>
 
@@ -289,14 +310,6 @@
         </div>
 
         <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
-
-        <div class="col-12">
-            <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting">{{'geral.cadastrar' | translate}}</button>
-        </div>
-        <div class="login">
-            {{'geral.jaPossuiUmaConta' | translate}}
-            <a (click)="abrirLogin()">{{'geral.entrarNaConta' | translate}}</a>
-        </div>
     </div>
 
 </form>

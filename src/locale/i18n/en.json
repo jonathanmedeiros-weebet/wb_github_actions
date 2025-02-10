@@ -277,7 +277,9 @@
         "vpn": "We have detected that you are accessing our website through a VPN. To ensure the security and integrity of the platform, we kindly ask you to disable the VPN or use a standard connection to proceed. If you believe this is an error, please contact support.",
         "logoutGeolocationErrorMessage": "You have been logged out for security reasons. We detected an abrupt change in your location that would be physically impossible to occur within the recorded time frame. If this was not caused by you, we recommend verifying your account.",
         "logoutGeolocationErrorTitle": "Access Interrupted: Inconsistent Location",
-        "logoutGeolocationErrorButtonLabel": "Close"
+        "logoutGeolocationErrorButtonLabel": "Close",
+        "countryCode": "Country Code",
+        "complement": "Complement"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -656,7 +658,8 @@
         "voltar": "Back",
         "logout_continue_login": "Yes, I would like to close the session",
         "remain_active_session": "No, keep the other session active",
-        "save_pdf": "Save PDF"
+        "save_pdf": "Save PDF",
+        "continue": "Continue"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -763,8 +766,11 @@
     },
     "face_match": {
         "label": "Face Match",
+        "face_match": "Face validation",
         "verified_identity": "Verified identity!",
-        "Identity_not_verified": "Identity not verified, please contact support."
+        "Identity_not_verified": "Identity not verified, please contact support.",
+        "account_protected": "Your account protected!",
+        "register_description": "To access all site functions, you will have to register your security photo. Your image is confidential and will not be shared."
     },
     "register": {
         "signupWith": "Sign up with Google",

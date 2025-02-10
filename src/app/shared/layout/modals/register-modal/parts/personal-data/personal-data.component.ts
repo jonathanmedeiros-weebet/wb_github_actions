@@ -1,22 +1,23 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { ParametrosLocaisService} from 'src/app/services';
+import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
 import { StepService } from 'src/app/shared/services/step.service';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { FormValidations } from 'src/app/shared/utils';
 
-    @Component({
+@Component({
     selector: 'app-personal-data',
     templateUrl: './personal-data.component.html',
     styleUrls: ['./personal-data.component.scss']
-    })
-    export class PersonalDataComponent extends BaseFormComponent implements OnInit, OnDestroy{
+})
+export class PersonalDataComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
     @Output() personalData = new EventEmitter<any>;
-    @Input() data:any;
+    @Input() data: any;
 
     form: FormGroup;
     dataUserCPF = '';
@@ -27,6 +28,7 @@ import { FormValidations } from 'src/app/shared/utils';
     validarBeneficioProgramaSocial = '';
     autoPreenchimento = true;
     errorMessage = '';
+    dateOfBirth;
 
     days: number[] = [];
     years: number[] = [];
@@ -51,7 +53,6 @@ import { FormValidations } from 'src/app/shared/utils';
 
     dropdownList = [];
     selectedItems = [];
-    dropdownSettings : IDropdownSettings = {};
 
     constructor(
         private fb: FormBuilder,
@@ -59,22 +60,16 @@ import { FormValidations } from 'src/app/shared/utils';
         private ga4Service: Ga4Service,
         private paramsService: ParametrosLocaisService,
         private CountriesService: CountriesService,
-        private stepService: StepService
+        private stepService: StepService,
+        private clientesService: ClienteService,
+        private messageService: MessageService,
+        private translate: TranslateService
     ) {
         super();
     }
 
     ngOnInit() {
 
-        this.dropdownSettings = {
-            singleSelection: false,
-            idField: 'value',
-            textField: 'name',
-            selectAllText: 'Select All',
-            unSelectAllText: 'UnSelect All',
-            itemsShowLimit: 3,
-            allowSearchFilter: true
-          };
 
         this.selectedItems = [
             { value: 1, name: 'Afeganistão' },
@@ -83,7 +78,7 @@ import { FormValidations } from 'src/app/shared/utils';
 
 
 
-            
+
         ];
 
         this.createForm();
@@ -99,20 +94,18 @@ import { FormValidations } from 'src/app/shared/utils';
             }
         })
         this.form.valueChanges.subscribe(() => {
-            if(this.form.valid){
+            if (this.form.valid) {
                 this.stepService.changeFormValid(true);
                 this.personalData.emit(this.form.value);
             } else {
                 this.stepService.changeFormValid(false);
             }
-            
-          })   
-          ;
+        });
 
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
         if (this.data.cpf) {
             this.form.patchValue(this.data);
-        }
+        };
     }
 
     onSubmit() {
@@ -123,26 +116,82 @@ import { FormValidations } from 'src/app/shared/utils';
         this.form = this.fb.group({
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
-            nomeCompleto: ['teste da silva'],
-            day:[null],
-            month:[null],
-            year:[null],
-            nationality:['Brasil'],
-            gender:[null],
-            nascimento:[null]
+            nomeCompleto: [null],
+            dadosCriptografados: [null],
+            day: [null, [Validators.required]],
+            month: [null, [Validators.required]],
+            year: [null, [Validators.required]],
+            nationality: ['Brasil', [Validators.required]],
+            gender: [null, [Validators.required]],
+            nascimento: [null, [Validators.required]]
         })
+
+        // this.form.valueChanges.subscribe((change) => {
+        //   this.form.get('nomeCompleto').patchValue(this.form.get('nome').value)
+        // })
     };
 
     initializeDays() {
-        this.days = Array.from({length: 31}, (_, i ) => i + 1 )
+        this.days = Array.from({ length: 31 }, (_, i) => i + 1)
     }
 
     initializeYears() {
-        const currentYear =  new Date().getFullYear();
-        this.years = Array.from({length: 101 }, (_, i) => currentYear - i);
+        const currentYear = new Date().getFullYear();
+        this.years = Array.from({ length: 101 }, (_, i) => currentYear - i);
     }
 
-    validarCpf(){
+    validarCpf() {
+        const { cpf } = this.form.value;
+        if (this.validarBeneficioProgramaSocial || this.autoPreenchimento) {
+            if (this.form.get('cpf').valid) {
+                this.clientesService.validarCpf(cpf).subscribe(
+                    res => {
+                        if (res.validarCpfAtivado) {
+                            console.log(res)
+                            const threeMonthsAgo = new Date();
+                            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+                            if (res.menorDeIdade) {
+                                this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
+                                return;
+                            }
+                            if (res.beneficios.DataRecebimentoMaisRecente >= threeMonthsAgo.toISOString()) {
+                                this.messageService.error(this.translate.instant('register.registrationBeneficiariesSocialPrograms'));
+                                return;
+                            }
+                            this.autoPreenchimento = true;
+                            this.cpfValidado = true;
+                            this.form.patchValue({
+                                nome: res.nome,
+                                nomeCompleto: res.nomeCompleto,
+                                dadosCriptografados: res.dados
+                            });
+                        } else {
+                            if (!this.formSocial) {
+                                this.form.patchValue({ nome: '' });
+                            }
+                            this.autoPreenchimento = false;
+                            this.cpfValidado = false;
+                        }
+                    },
+                    error => {
+                        this.cpfValidado = false;
+                        this.form.patchValue({ nome: '' });
+                        if (error?.code === 'cpfInformadoNaoExiste') {
+                            this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
+                            this.form.controls['cpf'].updateValueAndValidity();
+                        } else {
+                            this.messageService.error(error);
+                        }
+                    }
+                );
+            } else {
+                this.cpfValidado = false;
+                this.form.patchValue({
+                    nome: '',
+                    dadosCriptografados: null
+                });
+            }
+        }
 
     }
 
@@ -169,21 +218,19 @@ import { FormValidations } from 'src/app/shared/utils';
     }
 
     onDateChange() {
-      
-        if(this.form.value.day && this.form.value.month && this.form.value.year) {
-            const data = new Date(this.form.value.day,this.form.value.month)
+        if (this.form.value.day && this.form.value.month && this.form.value.year) {
+            const firstDate = `${this.form.value.year}/${this.form.value.month}/${this.form.value.day}`
+            const data = new Date(firstDate);
+            console.log(data.getFullYear())
+            console.log(data.getMonth() + 1)
+            console.log(data.getDate().toString().padStart(2, '0'))
             let dataFormatada = `${data.getFullYear()}-${(data.getMonth() + 1).toString().padStart(2, '0')}-${data.getDate().toString().padStart(2, '0')}`;
+            console.log(data)
+            console.log(dataFormatada)
             this.form.get('nascimento').patchValue(dataFormatada)
         }
     }
 
-    onNationalityChange(){
-    }
-
-    onSelectAll($event: any) {
-        this.selectedItems = this.nationalities
-    }
-    onItemSelect($event: any) {
-        this.selectedItems.push($event)
+    onNationalityChange() {
     }
 }

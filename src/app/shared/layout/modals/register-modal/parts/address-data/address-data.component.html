@@ -5,8 +5,8 @@
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">
-                            <input type="text" id="cep" class="form-control inverted-out input-style label-personalized"
-                                formControlName="cep" [ngClass]="applyCssInputError('cep')" placeholder=" "
+                            <input type="text" id="cep" class="form-control inverted-out input-style label-personalized" formControlName="cep"
+                                mask="00000-000" [ngClass]="applyCssInputError('cep')" placeholder=" "
                                 inputmode="numeric">
                             <label for="cep" class="text-input">{{'geral.cep' | translate}}</label>
                         </div>

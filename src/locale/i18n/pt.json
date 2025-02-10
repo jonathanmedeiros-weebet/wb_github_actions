@@ -282,7 +282,9 @@
         "vpn": "Detectamos que você está acessando nosso site por meio de uma VPN. Para garantir a segurança e a integridade da plataforma, pedimos que você desative a VPN ou utilize uma conexão padrão para continuar. Se você acredita que isso é um erro, entre em contato com o suporte.",
         "logoutGeolocationErrorMessage": "Você foi desconectado por motivos de segurança. Detectamos uma mudança abrupta na sua localização que seria fisicamente impossível de ocorrer no intervalo de tempo registrado. Caso isso não tenha sido causado por você, recomendamos verificar sua conta.",
         "logoutGeolocationErrorTitle": "Acesso Interrompido: Localização Inconsistente",
-        "logoutGeolocationErrorButtonLabel": "Fechar"
+        "logoutGeolocationErrorButtonLabel": "Fechar",
+        "countryCode": "Código do País",
+        "complement": "Complemento"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -661,7 +663,8 @@
         "voltar": "Voltar",
         "logout_continue_login": "Sim, gostaria de encerrar a sessão",
         "remain_active_session": "Não, continuar com a outra sessão",
-        "save_pdf": "Baixar PDF"
+        "save_pdf": "Baixar PDF",
+        "continue": "Continuar"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -768,8 +771,11 @@
     },
     "face_match": {
         "label": "Reconhecimento Facial",
+        "face_match": "Validação facial",
         "verified_identity": "Identidade verificada!",
-        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte."
+        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte.",
+        "account_protected": "Sua conta protegida!",
+        "register_description": "Para ter acesso a todas as funcionalidades do site você deverá cadastrar sua foto de segurança. Sua imagem é confidencial não será compartilhada."
     },
     "register": {
         "signupWith": "Inscrever-se com Google",

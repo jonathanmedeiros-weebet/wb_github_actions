@@ -116,6 +116,7 @@ import { NavigationBarComponent } from './modals/register-modal/parts/navigation
 import { OnboardingModalComponent } from './modals/onboarding-modal/onboarding-modal.component';
 import { StepperProgressBarComponent } from './modals/register-modal/parts/stepper-progress-bar/stepper-progress-bar.component';
 import { PersonalDataComponent } from './modals/register-modal/parts/personal-data/personal-data.component';
+import { RegisterFaceMatchComponent } from './modals/register-face-match/register-face-match.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -229,6 +230,7 @@ import { PersonalDataComponent } from './modals/register-modal/parts/personal-da
         NavigationBarComponent,
         OnboardingModalComponent,
         StepperProgressBarComponent,
+        RegisterFaceMatchComponent,
     ],
     exports: [
         MainLayoutComponent,

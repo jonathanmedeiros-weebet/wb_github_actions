@@ -277,7 +277,9 @@
         "vpn": "Hemos detectado que estás accediendo a nuestro sitio web a través de una VPN. Para garantizar la seguridad e integridad de la plataforma, te pedimos que desactives la VPN o utilices una conexión estándar para continuar. Si crees que esto es un error, por favor contacta al soporte.",
         "logoutGeolocationErrorMessage": "Has sido desconectado por razones de seguridad. Detectamos un cambio abrupto en tu ubicación que sería físicamente imposible de ocurrir en el intervalo de tiempo registrado. Si esto no fue causado por ti, te recomendamos verificar tu cuenta.",
         "logoutGeolocationErrorTitle": "Acceso Interrumpido: Ubicación Inconsistente",
-        "logoutGeolocationErrorButtonLabel": "Cerrar"
+        "logoutGeolocationErrorButtonLabel": "Cerrar",
+        "countryCode": "Código de País",
+        "complement": "Complemento"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",
@@ -651,7 +653,8 @@
         "voltar": "Volver",
         "logout_continue_login": "Sí, me gustaría cerrar la sesión.",
         "remain_active_session": "No, seguir con la otra sesión activa",
-        "save_pdf": "Guardar PDF"
+        "save_pdf": "Guardar PDF",
+        "continue": "Continuar"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",
@@ -758,8 +761,11 @@
     },
     "face_match": {
         "label": "Reconocimiento facial",
+        "face_match": "Validación facial",
         "verified_identity": "Identidad verificada!",
-        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
+        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia.",
+        "account_protected": "Su cuenta protegida!",
+        "register_description": "Para tener acceso a todas las funciones del sitio, tendrá que registrar su foto de seguridad. Su imagen es confidencial y no será compartida."
     },
     "register": {
         "signupWith": "Regístrate en Google",
