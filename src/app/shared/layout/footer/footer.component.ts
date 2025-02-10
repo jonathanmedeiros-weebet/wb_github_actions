@@ -18,7 +18,7 @@ declare let anj_cd823ed6_bffb_4764_9e1b_05566f369c8c: any;
     styleUrls: ['footer.component.css']
 })
 export class FooterComponent implements OnInit, AfterViewInit {
-    @Input() container;
+    @Input() container = null;
     BANCA_NOME = '';
     LOGO = config.LOGO;
     isAppMobile;
@@ -131,7 +131,10 @@ export class FooterComponent implements OnInit, AfterViewInit {
             this.appendReclameAqui(reclameAquiDataId);
         }
 
-        this.container.addEventListener('scroll', this.onScroll.bind(this));
+        if (this.container) {
+            this.container.addEventListener('scroll', this.onScroll.bind(this));
+        }
+
         const observer = new MutationObserver(() => {
             const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
             if (bilheteContainer && !this.isMobile) {
