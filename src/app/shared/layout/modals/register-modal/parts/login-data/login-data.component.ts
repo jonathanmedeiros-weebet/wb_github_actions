@@ -5,7 +5,7 @@ import { StepService } from 'src/app/shared/services/step.service';
 import { config } from 'src/app/shared/config';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, ClienteService, ConnectionCheckService, FinanceiroService, MessageService, ParametrosLocaisService, UtilsService } from 'src/app/services';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, UntypedFormBuilder, Validators } from '@angular/forms';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,7 +18,7 @@ import { Location } from '@angular/common';
 import { FormValidations } from 'src/app/shared/utils';
 import { LoginModalComponent } from '../../../login-modal/login-modal.component';
 import * as moment from 'moment';
-import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaComponent, RecaptchaModule } from 'ng-recaptcha';
 
 @Component({
     selector: 'app-login-data',
@@ -30,6 +30,8 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     @ViewChild('ativacaoCadastroModal', { static: true }) ativacaoCadastroModal;
     @Input() data: any;
     @ViewChild('btnCadastrar', { static: false }) btnCadastrar!: ElementRef;
+
+    @ViewChild('captchaRef') captcha: RecaptchaComponent;
     tooltipPassword = false;
     
 
@@ -96,7 +98,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     constructor(private stepService: StepService,
         public activeModal: NgbActiveModal,
         private clientesService: ClienteService,
-        private fb: UntypedFormBuilder,
+        private fb: FormBuilder,
         private campanhaService: CampanhaAfiliadoService,
         private messageService: MessageService,
         private auth: AuthService,
@@ -121,10 +123,12 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         })
         this.stepService.submitForm$.pipe(skip(1)).subscribe((submit) => {
             if (submit) {
-                this.btnCadastrar.nativeElement.click();
+                this.onSubmit();
             }
         });
     }
+
+  
     ngOnInit(): void {
 
         this.createForm();
@@ -318,7 +322,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             telefone: [null, [Validators.required]],
             countryCode: ['55', [Validators.required]],
             afiliado: [null, [Validators.maxLength(50)]],
-            captcha: [null, this.provedorCaptcha ? Validators.required : null],
+            captcha: [null],
             check_1: [''],
             check_2: [''],
             googleId: [''],
@@ -341,6 +345,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             cidade: [''],
             estado: [''],
             cep: [''],
+            termosUso: [true]
 
         });
         this.form.get('senha')?.valueChanges.subscribe((value) => {
@@ -356,23 +361,28 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             this.form.controls.senha.updateValueAndValidity();
         }
 
-        if (this.isLoterj) {
-            this.form.addControl('termosUso', this.fb.control(null, [
-                Validators.requiredTrue,
-            ]));
+        // if (this.isLoterj) {
+        //     this.form.addControl('termosUso', this.fb.control(null, [
+        //         Validators.requiredTrue,
+        //     ]));
 
-            this.form.controls['nome'].clearValidators();
-            this.form.controls['nome'].updateValueAndValidity();
+        //     this.form.controls['nome'].clearValidators();
+        //     this.form.controls['nome'].updateValueAndValidity();
 
-            this.form.controls['nascimento'].clearValidators();
-            this.form.controls['nascimento'].updateValueAndValidity();
+        //     this.form.controls['nascimento'].clearValidators();
+        //     this.form.controls['nascimento'].updateValueAndValidity();
 
-            this.form.controls['senha_confirmacao'].clearValidators();
-            this.form.controls['senha_confirmacao'].updateValueAndValidity();
-        }
+        //     this.form.controls['senha_confirmacao'].clearValidators();
+        //     this.form.controls['senha_confirmacao'].updateValueAndValidity();
+        // }
         this.form.get('password')?.valueChanges.subscribe((value) => {
             console.log(this.form)
 
+        });
+        this.form.valueChanges.subscribe((value) => {
+            if (this.form.valid && !this.submitting) {
+                this.captcha.execute();
+            }
         });
 
         
@@ -402,15 +412,13 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         this.form.updateValueAndValidity();
     }
 
-    onCaptchaResolved(response: string) {
-        this.captchaResponse = response;
-        this.captchaResolved = true;  // O reCAPTCHA foi resolvido
+      executeCaptcha() {
+        this.captcha.execute();
       }
 
 
     private async prepareSubmitData() {
         let values = this.form.value;
-        this.form.get('captcha').patchValue(this.captchaResponse)
         if (Object.keys(this.parameters).length) {
             values.parameters = this.parameters;
         }
@@ -546,7 +554,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
 
     resolved(event: any) {
         console.log(event)
-        this.form.get('captcha').patchValue(event);
+        console.log(this.form.value.captcha)
     }
 
     showTooltip() {

@@ -4,8 +4,8 @@
             <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
                 <div class="input-md">
                     <input type="text" id="email" class="form-control inverted-out"
-                        [ngClass]="applyCssInputError('email')" formControlName="email"
-                        placeholder=" " (beforeinput)="onBeforeInput($event, 'email')">
+                        [ngClass]="applyCssInputError('email')" formControlName="email" placeholder=" "
+                        (beforeinput)="onBeforeInput($event, 'email')">
                     <label for="email">{{'geral.email' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
@@ -17,43 +17,25 @@
         <div class="col-md-4">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input
-                        type="text"
-                        id="countryCode"
-                        mask="0*"
-                        class="form-control inverted-out"
-                        formControlName="countryCode"
-                        [ngClass]="applyCssInputError('countryCode')"
-                        placeholder=" "
-                        [dropSpecialCharacters]="false"
-                        prefix="+"
-                        inputmode="numeric"
-                        maxlength="4"
-                    >
+                    <input type="text" id="countryCode" mask="0*" class="form-control inverted-out"
+                        formControlName="countryCode" [ngClass]="applyCssInputError('countryCode')" placeholder=" "
+                        [dropSpecialCharacters]="false" prefix="+" inputmode="numeric" maxlength="4">
                     <label for="countryCode">{{'geral.countryCode' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('countryCode')" label="{{'geral.countryCode' | translate}}"
-                               class="text-left"></app-error-msg>
+                    class="text-left"></app-error-msg>
             </div>
         </div>
         <div class="col-md-8">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input
-                        type="text"
-                        id="telefone"
-                        mask="(00)00000-0000"
-                        class="form-control inverted-out"
-                        formControlName="telefone"
-                        [ngClass]="applyCssInputError('telefone')"
-                        placeholder=" "
-                        [dropSpecialCharacters]="false"
-                        inputmode="numeric"
-                    >
+                    <input type="text" id="telefone" mask="(00)00000-0000" class="form-control inverted-out"
+                        formControlName="telefone" [ngClass]="applyCssInputError('telefone')" placeholder=" "
+                        [dropSpecialCharacters]="false" inputmode="numeric">
                     <label for="telefone">{{'geral.telefone' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('telefone')" label="{{'geral.telefone' | translate}}"
-                               class="text-left"></app-error-msg>
+                    class="text-left"></app-error-msg>
             </div>
         </div>
     </div>
@@ -131,41 +113,45 @@
     </div>
 
     <!-- <div class="row" *ngIf="!formSocial"> -->
-       
-        <div class="row">
+
+    <div class="row">
         <div class="col-md-12">
             <div class="form-group" [ngClass]="applyCssDivError('senha')">
                 <div class="input-md">
                     <input [type]="mostrarSenha ? 'text' : 'password'" id="password" class="form-control inverted-out"
                         [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')"
-                        (input)="isStrengthPassword ? checkPassword() : null"
-                        (blur)="showTooltip()">
+                        (input)="isStrengthPassword ? checkPassword() : null" (blur)="showTooltip()">
                     <label for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarSenha = !mostrarSenha"></i>
                 </div>
 
-                <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
+                <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}"
+                    class="text-left"></app-error-msg>
 
                 <ul class="requirements-password" *ngIf="isStrengthPassword && !tooltipPassword">
                     <div id="container-tooltip">
-                        <li [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
+                        <li
+                            [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
                             <i
                                 [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
                             {{'senhas.minimumCharactersPassword' | translate}}
                         </li>
-                        <li [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
+                        <li
+                            [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
                             <i
                                 [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
                             {{'senhas.lowercaseLetter' | translate}}
                         </li>
-                        <li [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
+                        <li
+                            [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
                             <i
                                 [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
                             {{'senhas.uppercaseLetter' | translate}}
                         </li>
-                        <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
+                        <li
+                            [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
                             <i
                                 [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
                             {{'senhas.specialChar' | translate}}
@@ -173,32 +159,34 @@
                     </div>
                     <div style="width: 100%;">
                         <span>
-                
+
                         </span>
-                
+
                         <div style="width: 100%;">
                             <div *ngIf="returnRequirementsValue() == 0 "> Nivel da senha: </div>
-                            <div *ngIf="returnRequirementsValue() == 1 "> Nivel da senha: <span id="weak">Fraca</span></div>
-                            <div *ngIf="returnRequirementsValue() == 2 || returnRequirementsValue() == 3"> Nivel da senha: <span
-                                    id="medium">Media</span></div>
-                            <div *ngIf="returnRequirementsValue() > 3 "> Nivel da senha: <span id="strong">Forte</span></div>
+                            <div *ngIf="returnRequirementsValue() == 1 "> Nivel da senha: <span id="weak">Fraca</span>
+                            </div>
+                            <div *ngIf="returnRequirementsValue() == 2 || returnRequirementsValue() == 3"> Nivel da
+                                senha: <span id="medium">Media</span></div>
+                            <div *ngIf="returnRequirementsValue() > 3 "> Nivel da senha: <span id="strong">Forte</span>
+                            </div>
                         </div>
-                
+
                         <div class="bars" [ngClass]="{
                                         'weak': returnRequirementsValue() == 1,
                                         'medium': returnRequirementsValue() == 2 || returnRequirementsValue() == 3,
                                         'strong': returnRequirementsValue() > 3
                                     }">
                             <div class="strong-bar-one">
-                
+
                             </div>
                             <div class="strong-bar-two">
-                
+
                             </div>
                             <div class="strong-bar-three">
-                
+
                             </div>
-                
+
                         </div>
                     </div>
                 </ul>
@@ -209,8 +197,8 @@
         </div>
     </div>
     <!-- <div class="row" *ngIf="!formSocial && !isLoterj"> -->
-        <div class="row">
-            
+    <div class="row">
+
         <div class="col-md-12">
             <div class="form-group mb-4">
                 <div class="input-md">
@@ -224,9 +212,9 @@
                 </div>
                 <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
                     <ul class="tooltip">
-                      <li *ngFor="let requirement of passwordRequirements">{{ requirement }}</li>
+                        <li *ngFor="let requirement of passwordRequirements">{{ requirement }}</li>
                     </ul>
-                  </div>
+                </div>
                 <app-error-msg [control]="form.get('senha_confirmacao')" label="{{'senhas.confirmarSenha' | translate}}"
                     class="text-left"></app-error-msg>
             </div>
@@ -249,26 +237,14 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <label *ngIf="!isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
-                {{'geral.deAcordoComOsTermos1' | translate}}
+            <div>
+                {{'geral.certificoQueTenhoMais' | translate}}
                 <a id="linkTermos" target="_blank" [routerLink]="['/informacoes/termos-condicoes']"
                     class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
                 {{'geral.deAcordoComOsTermos2' | translate}}
                 <a id="linkPolitica" target="_blank" [routerLink]="['/informacoes/politica-privacidade']"
                     class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
-            </label>
-            <label *ngIf="isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
-                <input type="checkbox" id="termosUso" formControlName="termosUso">
-                <div>
-                    {{'geral.certificoQueTenhoMais' | translate}}
-                    <a id="linkTermos" target="_blank" [routerLink]="['/informacoes/termos-condicoes']"
-                        class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
-                    {{'geral.deAcordoComOsTermos2' | translate}}
-                    <a id="linkPolitica" target="_blank" [routerLink]="['/informacoes/politica-privacidade']"
-                        class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
-                </div>
-                <app-error-msg [control]="form.get('termosUso')" class="text-left"></app-error-msg>
-            </label>
+            </div>
         </div>
     </div>
 
@@ -283,33 +259,39 @@
             <app-error-msg [control]="form.get('captcha')"></app-error-msg>
         </div>
 
-        <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
-
-            <div class="col-12">
-                <button type="submit" class="btn btn-custom btn-block btn-cadastrar" [disabled]="submitting || (faceMatchEnabled && !faceMatchRequested)">{{'geral.cadastrar' | translate}}</button>
-            </div>
-        </div>
+        <ng-container *ngTemplateOutlet="registerErrorTemplate" />
+    </div>
 
     <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
         <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px'}">
-            <re-captcha  class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha" (resolved)="onSubmit()" errorMode="handled" size="invisible" ></re-captcha>
+            <re-captcha class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha"
+                (resolved)="resolved()" errorMode="handled" size="invisible"></re-captcha>
             {{ 'register.protectedByReCaptchaPart1' | translate }}
-            <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">{{ 'register.protectedByReCaptchaPart2' | translate }}</a> {{ 'register.protectedByReCaptchaPart3' | translate }}
-            <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">{{ 'register.protectedByReCaptchaPart4' | translate }}</a> {{ 'register.protectedByReCaptchaPart5' | translate }}
+            <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">{{
+                'register.protectedByReCaptchaPart2' | translate }}</a> {{ 'register.protectedByReCaptchaPart3' |
+            translate }}
+            <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">{{
+                'register.protectedByReCaptchaPart4' | translate }}</a> {{ 'register.protectedByReCaptchaPart5' |
+            translate }}
         </div>
-        <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
-        <div class="col-12">
-            <button #btnCadastrar (click)="captchaRef.execute()" [disabled]="submitting || (faceMatchEnabled && !faceMatchRequested)">Validar Captcha</button>
-        </div>
+        <ng-container *ngTemplateOutlet="registerErrorTemplate" />
     </div>
 
     <div class="row" *ngIf="!provedorCaptcha">
         <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px'}">
-            <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de Privacidade</a> do Google e os
-            <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de Serviço</a> se aplicam.
+            <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de
+                Privacidade</a> do Google e os
+            <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de
+                Serviço</a> se aplicam.
         </div>
 
-        <ng-container *ngTemplateOutlet="registerErrorTemplate"/>
+        <ng-container *ngTemplateOutlet="registerErrorTemplate" />
     </div>
-
+    <ng-template #registerErrorTemplate>
+        <div class="col-12" *ngIf="errorMessage" style="margin-top: 10px;">
+            <div class="alert alert-danger">
+                {{errorMessage}}
+            </div>
+        </div>
+    </ng-template>
 </form>

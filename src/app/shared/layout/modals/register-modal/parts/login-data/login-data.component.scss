@@ -268,3 +268,38 @@ a.link-termos-politica {
 .grecaptcha-badge {
     visibility: hidden;
 }
+
+.label-termo-uso {
+    display: flex;
+    align-items: center;
+}
+
+.label-termo-uso input[type="checkbox"] {
+    width: 31px;
+    height: 16px;
+    margin-right: 10px;
+}
+
+.radio-custom {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 50%);
+    background: var(--background);
+    margin-right: 10px;
+    position: relative;
+    display: flex;
+}
+
+.radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--highlight);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}

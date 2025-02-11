@@ -68,22 +68,19 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
     }
 
     ngOnInit() {
-
+        this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
 
         this.selectedItems = [
             { value: 1, name: 'Afeganistão' },
             { value: 2, name: 'África do Sul' },
             { value: 3, name: '"Albânia"' },
-
-
-
-
         ];
 
         this.createForm();
+        if (!this.autoPreenchimento) {
         this.initializeDays();
         this.initializeYears();
-
+        }
         this.form.valueChanges.subscribe(form => {
             if ((form.cpf != null && form.cpf.length == 14)) {
                 this.showLoading = false;
@@ -101,7 +98,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
             }
         });
 
-        this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
+        
         if (this.data.cpf) {
             this.form.patchValue(this.data);
         };
@@ -117,17 +114,13 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             nomeCompleto: [null],
             dadosCriptografados: [null],
-            day: [null, [Validators.required]],
-            month: [null, [Validators.required]],
-            year: [null, [Validators.required]],
+            day: [null, !this.autoPreenchimento ? Validators.required : null],
+            month: [null, !this.autoPreenchimento ? Validators.required : null],
+            year: [null, !this.autoPreenchimento ? Validators.required : null],
             nationality: ['Brasil', [Validators.required]],
             gender: [null, [Validators.required]],
-            nascimento: [null, [Validators.required]]
+            nascimento: [null, !this.autoPreenchimento ? Validators.required : null]
         })
-
-        // this.form.valueChanges.subscribe((change) => {
-        //   this.form.get('nomeCompleto').patchValue(this.form.get('nome').value)
-        // })
     };
 
     initializeDays() {
@@ -220,12 +213,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
         if (this.form.value.day && this.form.value.month && this.form.value.year) {
             const firstDate = `${this.form.value.year}/${this.form.value.month}/${this.form.value.day}`
             const data = new Date(firstDate);
-            console.log(data.getFullYear())
-            console.log(data.getMonth() + 1)
-            console.log(data.getDate().toString().padStart(2, '0'))
             let dataFormatada = `${data.getFullYear()}-${(data.getMonth() + 1).toString().padStart(2, '0')}-${data.getDate().toString().padStart(2, '0')}`;
-            console.log(data)
-            console.log(dataFormatada)
             this.form.get('nascimento').patchValue(dataFormatada)
         }
     }

@@ -45,7 +45,7 @@
                 </div>
                 <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto" class="label-personalized">
             </div>
-            <div class="row">
+            <div class="row" *ngIf="!autoPreenchimento">
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">

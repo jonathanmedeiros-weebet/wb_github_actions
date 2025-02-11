@@ -36,13 +36,12 @@ export class StepService {
     }
 
     next() {
-        this.formValidSource.next(false);
         if (this.currentIndex <= this.totalSteps - 1) {
+            this.formValidSource.next(false);
             this.currentIndexSource.next(this.currentIndex + 1);
         } else {
             this.submitForm.next(true)
-        }
-        
+        } 
     }
 
     reset() {
