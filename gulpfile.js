@@ -1976,15 +1976,6 @@ gulp.task('apostoubrasil.vip', function (done) {
     });
 });
 
-gulp.task('clazebet.net', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "clazebet.net",
-        banca: "CLAZEBET",
-        styles: "",
-    });
-});
-
 gulp.task('bocamafra.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
