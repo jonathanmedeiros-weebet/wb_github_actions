@@ -475,7 +475,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     ariaLabelledBy: 'modal-basic-title',
                     size: 'md',
                     centered: true,
-                    windowClass: 'modal-500 modal-cadastro-cliente',
+                    windowClass: 'modal-400 modal-cadastro-cliente',
                     backdrop: 'static'
                 }
             );

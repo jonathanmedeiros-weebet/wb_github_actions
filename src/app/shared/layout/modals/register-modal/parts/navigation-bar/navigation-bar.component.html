@@ -2,11 +2,11 @@
     <button class='deactive-button'
         [disabled]="currentIndex === 0"
         (click)="previous()">
-        Anterior
+        {{"botoes.previous" | translate}}
     </button>
     <button
         [disabled]="!formValid"
         (click)="next()">
-        {{currentIndex === 2 ? 'Criar conta' : 'Próximo'}}
+        {{currentIndex === 2 ? ('geral.createAccount' | translate) : ('botoes.next' | translate)}}
     </button>
 </div>

@@ -278,8 +278,15 @@
         "logoutGeolocationErrorMessage": "Has sido desconectado por razones de seguridad. Detectamos un cambio abrupto en tu ubicación que sería físicamente imposible de ocurrir en el intervalo de tiempo registrado. Si esto no fue causado por ti, te recomendamos verificar tu cuenta.",
         "logoutGeolocationErrorTitle": "Acceso Interrumpido: Ubicación Inconsistente",
         "logoutGeolocationErrorButtonLabel": "Cerrar",
-        "countryCode": "Código de País",
-        "complement": "Complemento"
+        "countryCode": "Código",
+        "complement": "Complemento",
+        "login": "Sesión",
+        "createAccount": "Crear cuenta",
+        "passwordRequirements": "Requisitos para una contraseña segura:",
+        "passwordLevel": "Nivel de la contraseña:",
+        "weak": "Debil",
+        "medium": "Medio",  
+        "strong": "Fuerte"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",
@@ -654,7 +661,9 @@
         "logout_continue_login": "Sí, me gustaría cerrar la sesión.",
         "remain_active_session": "No, seguir con la otra sesión activa",
         "save_pdf": "Guardar PDF",
-        "continue": "Continuar"
+        "continue": "Continuar",
+        "next": "Siguiente",
+        "previous": "Anterior"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",

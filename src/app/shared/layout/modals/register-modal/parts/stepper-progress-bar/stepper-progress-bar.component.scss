@@ -25,39 +25,33 @@
     
 }
 
+
+
 .active{
  
     border-bottom: 1px solid var(--highlight);
 
     .circle {
         background: var(--highlight);
-        color: #000;
     }
-
-    .circle-text {
-        color: #FFF;
-    }
+    
 }
 
 .deactived {
     border-bottom: 1px solid rgba(255, 255, 255, 0.20);
     .circle {
         background: rgba(255, 255, 255, 0.50);
-        color: #FFF;
     }
-    .circle-text {
-        color: #FFF;
-    }
+    
 }
 
-
-.circle-number {
-    color: #000;
-    font-weight: 600;
-}
 
 .circle-text {
-    color: rgba(255, 255, 255, 0.50);
+    color: rgba(var(--foreground),0.7);
+}
+
+.circle-number {
+    color: var(--background);
 }
 
 

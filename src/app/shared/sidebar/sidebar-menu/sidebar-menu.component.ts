@@ -119,7 +119,7 @@ export class SidebarMenuComponent implements OnInit {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'lg',
                 centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente'
+                windowClass: 'modal-cadastro-cliente'
             }
         );
     }

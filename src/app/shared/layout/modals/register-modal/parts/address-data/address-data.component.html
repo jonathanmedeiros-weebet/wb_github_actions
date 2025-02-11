@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group mb-4">
-                        <div class="input-md div-button-personalized">
+                        <div class="input-md">
                             <input type="text" id="logradouro"
                                 class="form-control inverted-out input-style label-personalized"
                                 formControlName="logradouro" [ngClass]="applyCssInputError('logradouro')" placeholder=""
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group mb-4">
-                        <div class="input-md div-button-personalized">
+                        <div class="input-md">
                             <input type="text" id="bairro"
                                 class="form-control inverted-out input-style label-personalized"
                                 formControlName="bairro" [ngClass]="applyCssInputError('bairro')" placeholder=""
@@ -44,9 +44,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 flex-row">
                     <div class="form-group mb-4 col-md-8">
-                        <div class="input-md div-button-personalized">
+                        <div class="input-md">
                             <input type="text" id="complemento"
                                 class="form-control inverted-out input-style label-personalized"
                                 formControlName="complemento" [ngClass]="applyCssInputError('complemento')"
@@ -57,7 +56,7 @@
                             class="text-left"></app-error-msg>
                     </div>
                     <div class="form-group mb-4 col-md-4">
-                        <div class="input-md div-button-personalized">
+                        <div class="input-md">
                             <input type="text" id="numero"
                                 class="form-control input-style label-personalized"
                                 formControlName="numero" [ngClass]="applyCssInputError('numero')" placeholder=""
@@ -67,9 +66,7 @@
                         <app-error-msg [control]="form.get('numero')" label="Número" class="text-left"></app-error-msg>
                     </div>
                 </div>
-            </div>
             <div class="row">
-                <div class="col-md-12 flex-row">
                     <div class="form-group mb-4 col-md-4">
                         <div class="input-md div-button-personalized input-style">
                             <div class="label-personalized">
@@ -98,7 +95,6 @@
                         </div>
                         <app-error-msg [control]="form.get('cidade')" label="Cidade" class="text-left"></app-error-msg>
                     </div>
-                </div>
             </div>
         </div>
     </div>

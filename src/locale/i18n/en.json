@@ -278,8 +278,15 @@
         "logoutGeolocationErrorMessage": "You have been logged out for security reasons. We detected an abrupt change in your location that would be physically impossible to occur within the recorded time frame. If this was not caused by you, we recommend verifying your account.",
         "logoutGeolocationErrorTitle": "Access Interrupted: Inconsistent Location",
         "logoutGeolocationErrorButtonLabel": "Close",
-        "countryCode": "Country Code",
-        "complement": "Complement"
+        "countryCode": "Code",
+        "complement": "Complement",
+        "login": "Login",
+        "createAccount": "Create Account",
+        "passwordRequirements": "Requirements for a secure password:",
+        "passwordLevel": "Password level:",
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -659,7 +666,9 @@
         "logout_continue_login": "Yes, I would like to close the session",
         "remain_active_session": "No, keep the other session active",
         "save_pdf": "Save PDF",
-        "continue": "Continue"
+        "continue": "Continue",
+        "next": "Next",
+        "previous": "Previous"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",

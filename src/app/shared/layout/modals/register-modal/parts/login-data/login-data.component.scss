@@ -237,7 +237,7 @@ a.link-termos-politica {
 .strong .strong-bar-one,
 .strong .strong-bar-two,
 .strong .strong-bar-three {
-    border:  1px solid green;
+    border:  2px solid green;
     background-color: green;
     color: green;
 
@@ -302,4 +302,8 @@ a.link-termos-politica {
     background: var(--highlight);
     transform: translate(-50%, -50%);
     opacity: 0;
+}
+
+.captcha {
+    padding-top: 8px;
 }

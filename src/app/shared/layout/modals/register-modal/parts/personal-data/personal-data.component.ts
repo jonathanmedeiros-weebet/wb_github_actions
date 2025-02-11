@@ -69,7 +69,9 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
 
     ngOnInit() {
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
-
+        if (this.data.cpf && this.data.nome) {
+            this.cpfValidado = true;
+        }
         this.selectedItems = [
             { value: 1, name: 'Afeganistão' },
             { value: 2, name: 'África do Sul' },
@@ -139,7 +141,6 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
                         if (res.validarCpfAtivado) {
-                            console.log(res)
                             const threeMonthsAgo = new Date();
                             threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
                             if (res.menorDeIdade) {
@@ -154,7 +155,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                             this.cpfValidado = true;
                             this.form.patchValue({
                                 nome: res.nome,
-                                nomeCompleto: res.nomeCompleto,
+                                nomeCompleto: res.nome,
                                 dadosCriptografados: res.dados
                             });
                         } else {
@@ -216,8 +217,5 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
             let dataFormatada = `${data.getFullYear()}-${(data.getMonth() + 1).toString().padStart(2, '0')}-${data.getDate().toString().padStart(2, '0')}`;
             this.form.get('nascimento').patchValue(dataFormatada)
         }
-    }
-
-    onNationalityChange() {
     }
 }

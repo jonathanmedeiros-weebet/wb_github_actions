@@ -348,11 +348,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             termosUso: [true]
 
         });
-        this.form.get('senha')?.valueChanges.subscribe((value) => {
-            console.log(this.form)
-          
-        });
-
 
         this.form.patchValue(this.data)
         if (this.isStrengthPassword) {
@@ -361,36 +356,18 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             this.form.controls.senha.updateValueAndValidity();
         }
 
-        // if (this.isLoterj) {
-        //     this.form.addControl('termosUso', this.fb.control(null, [
-        //         Validators.requiredTrue,
-        //     ]));
+        if (this.provedorCaptcha == 'recaptcha') {
+            this.form.valueChanges.subscribe((value) => {
+                if (this.form.valid && !this.submitting) {
+                    this.captcha.execute();
+                }
+            });
 
-        //     this.form.controls['nome'].clearValidators();
-        //     this.form.controls['nome'].updateValueAndValidity();
-
-        //     this.form.controls['nascimento'].clearValidators();
-        //     this.form.controls['nascimento'].updateValueAndValidity();
-
-        //     this.form.controls['senha_confirmacao'].clearValidators();
-        //     this.form.controls['senha_confirmacao'].updateValueAndValidity();
-        // }
-        this.form.get('password')?.valueChanges.subscribe((value) => {
-            console.log(this.form)
-
-        });
-        this.form.valueChanges.subscribe((value) => {
-            if (this.form.valid && !this.submitting) {
-                this.captcha.execute();
-            }
-        });
-
-        
+        }   
     }
 
     ngOnDestroy() {
         this.location.replaceState(this.previousUrl);
-
         this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();
@@ -408,14 +385,8 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     restoreValidators() {
         this.form.controls['senha'].setValidators([Validators.required, Validators.minLength(6)]);
         this.form.controls['senha_confirmacao'].setValidators([Validators.required, Validators.minLength(6), FormValidations.equalsTo('senha')]);
-
         this.form.updateValueAndValidity();
     }
-
-      executeCaptcha() {
-        this.captcha.execute();
-      }
-
 
     private async prepareSubmitData() {
         let values = this.form.value;
@@ -550,11 +521,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         if (value) {
             this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
         }
-    }
-
-    resolved(event: any) {
-        console.log(event)
-        console.log(this.form.value.captcha)
     }
 
     showTooltip() {

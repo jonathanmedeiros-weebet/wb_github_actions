@@ -8,7 +8,7 @@
                             <input
                                 type="text"
                                 id="cpf"
-                                class="form-control inverted-out input-style label-personalized"
+                                class="form-control inverted-out input-style"
                                 mask="000.000.000-00"
                                 (change)="validarCpf()"
                                 formControlName="cpf"
@@ -43,7 +43,7 @@
                         <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}" class="text-left"></app-error-msg>
                     </div>
                 </div>
-                <input type="hidden" id="nomeCompleto" formControlName="nomeCompleto" class="label-personalized">
+                <input type="hidden" id="nomeCompleto" [value]="form.get('nome')" formControlName="nomeCompleto" class="label-personalized">
             </div>
             <div class="row" *ngIf="!autoPreenchimento">
                 <div class="col-md-12">
@@ -95,7 +95,7 @@
                                 <div>
                                     <div>
                                         <div class="select-nationality">
-                                            <select class="form-control style-select" formControlName="nationality" (change)="onNationalityChange()">
+                                            <select class="form-control style-select" formControlName="nationality">
                                                 <option value="26">{{'register.brasil' | translate}}</option>
                                                 <option *ngFor="let nationality of nationalities" [value]="nationality.value">{{ nationality.name }}</option>
                                             </select>

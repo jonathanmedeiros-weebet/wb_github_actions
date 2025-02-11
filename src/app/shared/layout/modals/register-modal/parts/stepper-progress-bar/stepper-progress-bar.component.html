@@ -4,7 +4,7 @@
             <span *ngIf="currentIndex === 0 else done" class="circle-number">1</span>
         </div>
         <div style="line-height: 95%;">
-            <span class="circle-text">Dados pessoais</span>
+            <span class="circle-text">{{"geral.dadosPessoais" | translate}}</span>
         </div>
     </div>
     <div class="stepper" [ngClass]="currentIndex != 0 ? 'active': 'deactived'">
@@ -13,7 +13,7 @@
            
         </div>
         <div>
-            <span class="circle-text">Endereço</span>
+            <span class="circle-text">{{"geral.endereco" | translate}}</span>
         </div>
     </div>
     <div class="stepper" [ngClass]="currentIndex === 2 ? 'active': 'deactived'">
@@ -21,13 +21,13 @@
             <span class="circle-number">3</span>
         </div>
         <div>
-            <span class="circle-text">Login</span>
+            <span class="circle-text">{{"geral.login" | translate}}</span>
         </div>
     </div>
     <ng-template #done>
         <span class="circle-number">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" fill="none">
-                <path d="M4.28584 9.00006L0.48584 5.20007L1.43584 4.25007L4.28584 7.10006L10.4025 0.983398L11.3525 1.9334L4.28584 9.00006Z" fill="black"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" >
+                <path d="M4.28584 9.00006L0.48584 5.20007L1.43584 4.25007L4.28584 7.10006L10.4025 0.983398L11.3525 1.9334L4.28584 9.00006Z" />
               </svg>
         </span>
     </ng-template>
