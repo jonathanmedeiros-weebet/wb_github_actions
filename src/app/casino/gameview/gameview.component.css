@@ -83,7 +83,6 @@ iframe{
     justify-content: center;
     width: 100%;
     padding: 8.5px 16px;
-    border: 1px solid var(--game);
     background-color: var(--game);
 }
 
@@ -334,7 +333,7 @@ iframe{
     .header-game-view {
         justify-content: space-between;
         align-items: center;
-        padding: 8.5px 16px;
+        padding: 8px 16px;
         margin: 0;
     }
 
@@ -957,6 +956,6 @@ iframe{
 
 .desktopIsloggedIn {
     position: fixed;
-    margin-top: 43px;
+    margin-top: 40px;
     height: calc(100% - 140px);
 }
