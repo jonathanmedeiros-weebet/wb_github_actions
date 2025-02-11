@@ -57,7 +57,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     valorMinSaque;
     valorMaxSaqueDiario;
     valorMaxSaqueMensal;
-    maximumWithdrawal;
+    maximumWithdrawalAmount;
     qtdRolloverAtivos = 0;
     saldo = 0;
     headerHeight = 92;
@@ -189,9 +189,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
                     this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
-                    this.maximumWithdrawal = res.nivelCliente?.maximum_withdrawal_amount ?? '-';
+                    this.maximumWithdrawalAmount = res.nivelCliente?.maximum_withdrawal_amount ?? '-';
 
-                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario), Validators.max(this.maximumWithdrawal)]);
+                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario), Validators.max(this.maximumWithdrawalAmount)]);
 
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
                     this.onChavePixChange();
@@ -340,7 +340,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.respostaSolicitacao = res;
-                    console.log('GOGO',this.respostaSolicitacao);
                     this.submitting = false;
 
                     this.ga4Service.triggerGa4Event(

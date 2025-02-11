@@ -438,7 +438,7 @@
         "minimumWithdrawal": "Retiro mínimo",
         "dailyMaximum": "Máximo diario",
         "monthlyMaximum": "Máximo mensual",
-        "maximumWithdrawal": "Retiro máximo"
+        "maximumWithdrawalAmount": "Retiro máximo"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Activación de registro",

@@ -443,7 +443,7 @@
         "identityVerify": "Verify identity",
         "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
         "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
-        "maximumWithdrawal": "Maximum withdrawal"
+        "maximumWithdrawalAmount": "Maximum withdrawal"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
