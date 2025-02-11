@@ -57,6 +57,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     valorMinSaque;
     valorMaxSaqueDiario;
     valorMaxSaqueMensal;
+    maximumWithdrawal;
     qtdRolloverAtivos = 0;
     saldo = 0;
     headerHeight = 92;
@@ -123,7 +124,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw); 
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw);
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
@@ -136,7 +137,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 })
                 break;
             default:
-                break;            
+                break;
         }
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
@@ -188,8 +189,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
                     this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
+                    this.maximumWithdrawal = res.nivelCliente?.maximum_withdrawal_amount ?? '-';
 
-                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
+                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario), Validators.max(this.maximumWithdrawal)]);
 
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
                     this.onChavePixChange();
@@ -338,6 +340,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             .subscribe(
                 res => {
                     this.respostaSolicitacao = res;
+                    console.log('GOGO',this.respostaSolicitacao);
                     this.submitting = false;
 
                     this.ga4Service.triggerGa4Event(

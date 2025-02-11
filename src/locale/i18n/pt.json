@@ -447,7 +447,8 @@
         "monthlyMaximum": "Máximo mensal",
         "identityVerify": "Verificar identidade",
         "identityVerifyNeeded": "Para prosseguir será necessário realizar a verificação de identidade antes.",
-        "disapprovedIdentity": "Sua verificação de identidade foi reprovada. Para a realização de uma análise manual, por favor, entre em contato com o suporte."
+        "disapprovedIdentity": "Sua verificação de identidade foi reprovada. Para a realização de uma análise manual, por favor, entre em contato com o suporte.",
+        "maximumWithdrawal": "Saque máximo"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",
