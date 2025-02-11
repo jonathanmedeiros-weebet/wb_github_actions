@@ -1856,7 +1856,8 @@ gulp.task('betinha.com', function (done) {
         banca: "betinha.com",
         styles: "",
         xtremepush_sdk: "0F-o4hhQ-HQJhCjSdyAHUcYutoxcrqYB",
-        scripts: "<script> window.$chatwoot.toggle(); </script>"
+        scripts: "<script> window.$chatwoot.toggle(); </script>",
+        dominioTemp: "betinha.bet"
     });
 });
 
@@ -2222,10 +2223,10 @@ gulp.task('buda-bet.com', function (done) {
     });
 });
 
-gulp.task('zedocash.com', function (done) {
+gulp.task('zedocash.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "zedocash.com",
+        host: "zedocash.bet",
         banca: "ZÉ DO CASH",
         styles: ""
     });
