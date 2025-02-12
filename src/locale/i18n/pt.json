@@ -479,7 +479,8 @@
         "depositTextWithoutBonus": "Para realizar um depósito via PIX, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
         "depositTextWithoutBonusAndPromocode": "Para realizar um depósito via PIX, insira o valor que deseja depositar no campo abaixo e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
         "copyCode": "Copiar código",
-        "copied": "Copiado!"
+        "copied": "Copiado!",
+        "maximumDepositAmount": "Valor máximo"
     },
     "footer": {
         "afiliados": "Afiliados",

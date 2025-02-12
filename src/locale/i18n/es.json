@@ -437,7 +437,8 @@
         "enterPixKey": "Seleccione el tipo de clave PIX",
         "minimumWithdrawal": "Retiro mínimo",
         "dailyMaximum": "Máximo diario",
-        "monthlyMaximum": "Máximo mensual"
+        "monthlyMaximum": "Máximo mensual",
+        "maximumDepositAmount": "Valor máximo"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Activación de registro",
