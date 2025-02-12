@@ -127,7 +127,7 @@
     <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
         <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px'}">
             <re-captcha class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha"
-                (resolved)="resolved()" errorMode="handled" size="invisible"></re-captcha>
+                errorMode="handled" size="invisible"></re-captcha>
             {{ 'register.protectedByReCaptchaPart1' | translate }}
             <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">{{
                 'register.protectedByReCaptchaPart2' | translate }}</a> {{ 'register.protectedByReCaptchaPart3' |
