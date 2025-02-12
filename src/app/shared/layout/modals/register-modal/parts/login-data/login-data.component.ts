@@ -353,6 +353,10 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         this.unsub$.complete();
     }
 
+    resolved(token: string) {
+        token ? true : false ;
+    }
+
     clearValidators() {
         this.form.controls['senha'].patchValue('');
         this.form.controls['senha'].clearValidators();
