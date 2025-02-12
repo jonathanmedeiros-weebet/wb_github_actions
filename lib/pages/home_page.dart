@@ -34,7 +34,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+class _HomePageState extends State<HomePage> {
   final StorageService _storageService = StorageService();
   final PrinterService _printerService = PrinterService();
   final UtilitiesService _utilitiesService = UtilitiesService();
@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
 
     const params = PlatformWebViewControllerCreationParams();
 
@@ -60,7 +59,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
     webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(_getAppUrl()))
+      ..loadRequest(Uri.parse('${widget.host}?host=${widget.centralUrl}&name=${widget.name}&slug=${widget.slug}'))
       ..setNavigationDelegate(NavigationDelegate(
         onNavigationRequest: (NavigationRequest request) {
           final sanitizedHost =
@@ -91,23 +90,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    if (state == AppLifecycleState.resumed) {
-      String? currentUrl = await _webViewController.currentUrl();
-      if (currentUrl == null || currentUrl.isEmpty) {
-        currentUrl = _getAppUrl();
-      }
-      _webViewController.loadRequest(Uri.parse(currentUrl));
-    }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
     return Scaffold(
@@ -115,10 +97,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       appBar: const EmptyAppBar(),
       body: WebViewWidget(controller: _webViewController),
     );
-  }
-
-  String _getAppUrl() {
-    return '${widget.host}?host=${widget.centralUrl}&name=${widget.name}&slug=${widget.slug}';
   }
 
   _executePostMessageAction(postMessage) async {
