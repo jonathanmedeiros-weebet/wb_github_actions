@@ -60,7 +60,6 @@ p {
 }
 
 .btn-custom {
-    
     background-color: var(--background);
     width: 100%;
     color: var(--highlight);
@@ -74,7 +73,6 @@ p {
     color: var(--background);
     border-color: 1px solid var(--highlight);
 }
-
 
 #legitimuz-container {
     width: 100%;

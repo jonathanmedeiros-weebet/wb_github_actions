@@ -28,7 +28,7 @@
     line-height: normal;
 }
 
-.text-input{
+.text-input {
     color: rgba(var(--foreground-inputs-odds-rgb), .3);
     padding-left: 5px;
 }
@@ -343,15 +343,6 @@ a.link-termos-politica {
 ::ng-deep .tooltip-password {
     --bs-tooltip-max-width: 346px !important;
 }
-
-
-
-
-
-
-
-
-
 
 .style-select {
     border: none;

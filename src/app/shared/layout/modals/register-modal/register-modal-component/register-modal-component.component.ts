@@ -23,7 +23,7 @@ export class RegisterModalComponentComponent {
         this.stepService.formValid$.subscribe((valid) => {
             this.formInvalid = !valid;
         })
-       
+
     }
 
     previous() {
@@ -35,7 +35,7 @@ export class RegisterModalComponentComponent {
     }
 
     dataChange(event: { [key: string]: any }) {
-        this.data = { ...this.data,...event}
+        this.data = { ...this.data, ...event }
     }
 
     onClose() {

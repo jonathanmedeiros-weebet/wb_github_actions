@@ -10,14 +10,13 @@
     width: 400px !important;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 0 16px;
     background-color: var(--background);
     min-height: 100vh;
-    
 }
 
 .my-custom-svg {
@@ -30,14 +29,14 @@
     gap: 14px;
 }
 
-.header-register{
+.header-register {
     color: var(--foreground);
     display: flex;
     justify-content: flex-end;
     margin-top: 16px;
 }
 
-.header-register-item{
+.header-register-item {
     background: var(--background);
     display: flex;
     align-items: center;
@@ -49,7 +48,7 @@
     color: var(--highlight);
 }
 
-.btn-close-register{
+.btn-close-register {
     box-sizing: content-box;
     background-color: var(--background);
     border: 0;
@@ -57,14 +56,14 @@
     opacity: 0.5;
 }
 
-.body{
+.body {
     display: flex;
     flex-direction: column;
     gap: 21px;
 }
 
 @media only screen and (min-width: 1025px) {
-    .container{
+    .container {
         min-height: 572px;
         padding: 0 33px;
     }

@@ -17,9 +17,10 @@
         <div class="col-md-4">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input type="text" id="countryCode" mask="0*" class="form-control inverted-out input-style label-personalized"
-                        formControlName="countryCode" [ngClass]="applyCssInputError('countryCode')" placeholder=" "
-                        [dropSpecialCharacters]="false" prefix="+" inputmode="numeric" maxlength="4">
+                    <input type="text" id="countryCode" mask="0*"
+                        class="form-control inverted-out input-style label-personalized" formControlName="countryCode"
+                        [ngClass]="applyCssInputError('countryCode')" placeholder=" " [dropSpecialCharacters]="false"
+                        prefix="+" inputmode="numeric" maxlength="4">
                     <label class="text-input" for="countryCode">{{'geral.countryCode' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('countryCode')" label="{{'geral.countryCode' | translate}}"
@@ -29,9 +30,10 @@
         <div class="col-md-8">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input type="text" id="telefone" mask="(00)00000-0000" class="form-control inverted-out input-style label-personalized"
-                        formControlName="telefone" [ngClass]="applyCssInputError('telefone')" placeholder=" "
-                        [dropSpecialCharacters]="false" inputmode="numeric">
+                    <input type="text" id="telefone" mask="(00)00000-0000"
+                        class="form-control inverted-out input-style label-personalized" formControlName="telefone"
+                        [ngClass]="applyCssInputError('telefone')" placeholder=" " [dropSpecialCharacters]="false"
+                        inputmode="numeric">
                     <label class="text-input" for="telefone">{{'geral.telefone' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('telefone')" label="{{'geral.telefone' | translate}}"
@@ -39,13 +41,12 @@
             </div>
         </div>
     </div>
-
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group" [ngClass]="applyCssDivError('senha')">
                 <div class="input-md">
-                    <input [type]="mostrarSenha ? 'text' : 'password'" id="password" class="form-control inverted-out input-style label-personalized"
+                    <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
+                        class="form-control inverted-out input-style label-personalized"
                         [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')"
                         (input)="isStrengthPassword ? checkPassword() : null" [ngbTooltip]="tooltipTemplate"
@@ -54,24 +55,21 @@
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarSenha = !mostrarSenha"></i>
                 </div>
-
                 <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}"
                     class="text-left"></app-error-msg>
-
                 <small *ngIf="!isStrengthPassword" class="form-text text-muted">{{'geral.requisitosSenha' |
                     translate}}</small>
             </div>
         </div>
     </div>
     <div class="row">
-
         <div class="col-md-12">
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
-                        class="form-control inverted-out input-style label-personalized" formControlName="senha_confirmacao"
-                        [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" "
-                        (beforeinput)="onBeforeInput($event, 'password')">
+                        class="form-control inverted-out input-style label-personalized"
+                        formControlName="senha_confirmacao" [ngClass]="applyCssInputError('senha_confirmacao')"
+                        placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
                     <label class="text-input" for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
@@ -95,7 +93,6 @@
                         [readonly]="possuiCodigoAfiliado">
                     <label class="text-input" for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
                 </div>
-
                 <app-error-msg [control]="form.get('afiliado')" label="Código de afiliação(Opcional)"
                     class="text-left"></app-error-msg>
             </div>
@@ -124,7 +121,6 @@
             <ng-hcaptcha formControlName="captcha" [languageCode]="hCaptchaLanguage"></ng-hcaptcha>
             <app-error-msg [control]="form.get('captcha')"></app-error-msg>
         </div>
-
         <ng-container *ngTemplateOutlet="registerErrorTemplate" />
     </div>
 
@@ -150,9 +146,9 @@
             <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de
                 Serviço</a> se aplicam.
         </div>
-
         <ng-container *ngTemplateOutlet="registerErrorTemplate" />
     </div>
+
     <ng-template #registerErrorTemplate>
         <div class="col-12" *ngIf="errorMessage" style="margin-top: 10px;">
             <div class="alert alert-danger">
@@ -189,10 +185,6 @@
                 </li>
             </div>
             <div style="width: 100%;">
-                <span>
-
-                </span>
-
                 <div style="width: 100%;">
                     <div *ngIf="returnRequirementsValue() == 0 "> {{"geral.passwordLevel" | translate}} </div>
                     <div *ngIf="returnRequirementsValue() == 1 ">{{"geral.passwordLevel" | translate}} <span
@@ -204,22 +196,17 @@
                             id="strong">{{"geral.strong" | translate}}</span>
                     </div>
                 </div>
-
                 <div class="bars" [ngClass]="{
                                 'weak': returnRequirementsValue() == 1,
                                 'medium': returnRequirementsValue() == 2 || returnRequirementsValue() == 3,
                                 'strong': returnRequirementsValue() > 3
                             }">
                     <div class="strong-bar-one">
-
                     </div>
                     <div class="strong-bar-two">
-
                     </div>
                     <div class="strong-bar-three">
-
                     </div>
-
                 </div>
             </div>
         </ul>

@@ -14,8 +14,8 @@ import { StepService } from 'src/app/shared/services/step.service';
   styleUrls: ['./address-data.component.scss']
 })
 export class AddressDataComponent extends BaseFormComponent implements OnInit {
-   @Output() addressData = new EventEmitter<any>;
-   @Input() data:any;
+  @Output() addressData = new EventEmitter<any>;
+  @Input() data: any;
 
   formInvalid = true
   form: FormGroup;
@@ -23,7 +23,7 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
   public cidades: Array<Cidade>;
   private estadoSelecionado: number;
   public cidadeSelecionada: number;
-  
+
   constructor(
     private fb: FormBuilder,
     private utilsService: UtilsService,
@@ -47,8 +47,7 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
       } else {
         this.stepService.changeFormValid(false);
       }
-    })
-      ;
+    });
   }
 
   createForm() {
@@ -58,30 +57,30 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
       bairro: ['', Validators.required],
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
-      pais:['Brasil', Validators.required],
+      pais: ['Brasil', Validators.required],
       complemento: [''],
       cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     });
     this.form.controls['cep']
-    .valueChanges
-    .pipe(
-      debounceTime(600),
-      distinctUntilChanged()
-    )
-    .subscribe((cep) => { this.buscarPorCep(cep)});
-    
+      .valueChanges
+      .pipe(
+        debounceTime(600),
+        distinctUntilChanged()
+      )
+      .subscribe((cep) => { this.buscarPorCep(cep) });
+
     if (this.data.logradouro) {
-      this.getCidades(undefined,this.data.estado)
+      this.getCidades(undefined, this.data.estado)
       this.form.patchValue(this.data);
       this.cidadeSelecionada = this.data.cidade;
       this.form.get('cidade').patchValue(this.cidadeSelecionada);
     }
-        
+
   }
 
   getCidades(event?: any, parametro?: number) {
-    let estadoId = 0 ;
-    
+    let estadoId = 0;
+
     if (event) {
       estadoId = event.target.value;
     } else {
@@ -95,7 +94,6 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
       );
     }
   }
-
 
   buscarPorCep(cep: string) {
     if (cep.length == 8) {

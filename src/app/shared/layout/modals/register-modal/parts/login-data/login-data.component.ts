@@ -1,24 +1,22 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild, QueryList, ViewChildren, ElementRef, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Usuario } from 'src/app/models';
 import { StepService } from 'src/app/shared/services/step.service';
 import { config } from 'src/app/shared/config';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ClienteService, ConnectionCheckService, FinanceiroService, MessageService, ParametrosLocaisService, UtilsService } from 'src/app/services';
-import { FormBuilder, UntypedFormBuilder, Validators } from '@angular/forms';
+import { AuthService, ClienteService, FinanceiroService, MessageService, ParametrosLocaisService} from 'src/app/services';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
-import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
-import { takeUntil, skip } from 'rxjs/operators';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
 import { Location } from '@angular/common';
 import { FormValidations } from 'src/app/shared/utils';
 import { LoginModalComponent } from '../../../login-modal/login-modal.component';
-import * as moment from 'moment';
-import { RecaptchaComponent, RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaComponent} from 'ng-recaptcha';
+import { skip } from 'rxjs/operators';
 
 @Component({
     selector: 'app-login-data',
@@ -29,8 +27,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
 
     @ViewChild('ativacaoCadastroModal', { static: true }) ativacaoCadastroModal;
     @Input() data: any;
-    @ViewChild('btnCadastrar', { static: false }) btnCadastrar!: ElementRef;
-
     @ViewChild('captchaRef') captcha: RecaptchaComponent;
 
     currentIndex = 0;
@@ -98,7 +94,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         private modalService: NgbModal,
         private translate: TranslateService,
         private cd: ChangeDetectorRef,
-        private socialAuth: SocialAuthService,
         private financeiroService: FinanceiroService,
         private ga4Service: Ga4Service,
         private location: Location,
@@ -177,7 +172,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             } else {
                 this.stepService.changeFormValid(false);
             }
-
         })
 
         this.hCaptchaLanguage = this.translate.currentLang;
@@ -335,7 +329,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             estado: [''],
             cep: [''],
             termosUso: [true]
-
         });
 
         this.form.patchValue(this.data)
@@ -351,13 +344,11 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
                     this.captcha.execute();
                 }
             });
-
         }
     }
 
     ngOnDestroy() {
         this.location.replaceState(this.previousUrl);
-        this.clearSocialForm();
         this.unsub$.next();
         this.unsub$.complete();
     }
@@ -474,18 +465,8 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         );
     }
 
-    clearSocialForm() {
-        this.form.patchValue({
-            googleId: '',
-            googleIdToken: '',
-        });
-    }
     onBeforeInput(e: InputEvent, inputName) {
         FormValidations.blockInvalidCharacters(e, inputName);
-    }
-
-    blockPaste(event: ClipboardEvent): void {
-        event.preventDefault();
     }
 
     checkPassword() {
@@ -512,7 +493,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         }
     }
     returnRequirementsValue() {
-
         return Object.values(this.requirements).filter(value => value).length;
     }
 }

@@ -5,9 +5,9 @@
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">
-                            <input type="text" id="cep" class="form-control inverted-out input-style label-personalized" formControlName="cep"
-                                mask="00000-000" [ngClass]="applyCssInputError('cep')" placeholder=" "
-                                inputmode="numeric">
+                            <input type="text" id="cep" class="form-control inverted-out input-style label-personalized"
+                                formControlName="cep" mask="00000-000" [ngClass]="applyCssInputError('cep')"
+                                placeholder=" " inputmode="numeric">
                             <label for="cep" class="text-input">{{'geral.cep' | translate}}</label>
                         </div>
                         <app-error-msg [control]="form.get('cep')" label="CEP" class="text-left"></app-error-msg>
@@ -44,57 +44,55 @@
                 </div>
             </div>
             <div class="row">
-                    <div class="form-group mb-4 col-md-8">
-                        <div class="input-md">
-                            <input type="text" id="complemento"
-                                class="form-control inverted-out input-style label-personalized"
-                                formControlName="complemento" [ngClass]="applyCssInputError('complemento')"
-                                placeholder="" inputmode="text">
-                            <label for="complemento" class="text-input">{{'geral.complement' | translate}}</label>
-                        </div>
-                        <app-error-msg [control]="form.get('complemento')" label="Complemento"
-                            class="text-left"></app-error-msg>
+                <div class="form-group mb-4 col-md-8">
+                    <div class="input-md">
+                        <input type="text" id="complemento"
+                            class="form-control inverted-out input-style label-personalized"
+                            formControlName="complemento" [ngClass]="applyCssInputError('complemento')" placeholder=""
+                            inputmode="text">
+                        <label for="complemento" class="text-input">{{'geral.complement' | translate}}</label>
                     </div>
-                    <div class="form-group mb-4 col-md-4">
-                        <div class="input-md">
-                            <input type="text" id="numero"
-                                class="form-control input-style label-personalized"
-                                formControlName="numero" [ngClass]="applyCssInputError('numero')" placeholder=""
-                                inputmode="numeric">
-                            <label for="numero" class="text-input">{{'geral.numero' | translate}}</label>
-                        </div>
-                        <app-error-msg [control]="form.get('numero')" label="Número" class="text-left"></app-error-msg>
-                    </div>
+                    <app-error-msg [control]="form.get('complemento')" label="Complemento"
+                        class="text-left"></app-error-msg>
                 </div>
+                <div class="form-group mb-4 col-md-4">
+                    <div class="input-md">
+                        <input type="text" id="numero" class="form-control input-style label-personalized"
+                            formControlName="numero" [ngClass]="applyCssInputError('numero')" placeholder=""
+                            inputmode="numeric">
+                        <label for="numero" class="text-input">{{'geral.numero' | translate}}</label>
+                    </div>
+                    <app-error-msg [control]="form.get('numero')" label="Número" class="text-left"></app-error-msg>
+                </div>
+            </div>
             <div class="row">
-                    <div class="form-group mb-4 col-md-4">
-                        <div class="input-md div-button-personalized input-style">
-                            <div class="label-personalized">
-                                <span>{{'geral.estado' | translate}}</span>
-                            </div>
-                            <select formControlName="estado" type="text" class="form-control style-select"
-                                (change)="getCidades($event)">
-                                <option value="">{{'geral.selecione' | translate}}</option>
-                                <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}
-                                </option>
-                            </select>
-                            
+                <div class="form-group mb-4 col-md-4">
+                    <div class="input-md div-button-personalized input-style">
+                        <div class="label-personalized">
+                            <span>{{'geral.estado' | translate}}</span>
                         </div>
-                        <app-error-msg [control]="form.get('estado')" label="estado" class="text-left"></app-error-msg>
+                        <select formControlName="estado" type="text" class="form-control style-select"
+                            (change)="getCidades($event)">
+                            <option value="">{{'geral.selecione' | translate}}</option>
+                            <option *ngFor="let estado of estados" [value]="estado.id">{{estado.nome}}
+                            </option>
+                        </select>
                     </div>
-                    <div class="form-group mb-4 col-md-8">
-                        <div class="input-md div-button-personalized input-style">
-                            <div class="label-personalized">
-                                <span>{{'geral.cidade' | translate}}</span>
-                            </div>
-                            <select formControlName="cidade" class="form-control style-select">
-                                <option value="">{{'geral.selecioneACidade' | translate}}</option>
-                                <option *ngFor="let cidade of cidades" [value]="cidade.id"
-                                    [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
-                            </select>
+                    <app-error-msg [control]="form.get('estado')" label="estado" class="text-left"></app-error-msg>
+                </div>
+                <div class="form-group mb-4 col-md-8">
+                    <div class="input-md div-button-personalized input-style">
+                        <div class="label-personalized">
+                            <span>{{'geral.cidade' | translate}}</span>
                         </div>
-                        <app-error-msg [control]="form.get('cidade')" label="Cidade" class="text-left"></app-error-msg>
+                        <select formControlName="cidade" class="form-control style-select">
+                            <option value="">{{'geral.selecioneACidade' | translate}}</option>
+                            <option *ngFor="let cidade of cidades" [value]="cidade.id"
+                                [selected]="cidade.id === cidadeSelecionada">{{cidade.nome}}</option>
+                        </select>
                     </div>
+                    <app-error-msg [control]="form.get('cidade')" label="Cidade" class="text-left"></app-error-msg>
+                </div>
             </div>
         </div>
     </div>

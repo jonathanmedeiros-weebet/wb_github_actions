@@ -80,8 +80,8 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
 
         this.createForm();
         if (!this.autoPreenchimento) {
-        this.initializeDays();
-        this.initializeYears();
+            this.initializeDays();
+            this.initializeYears();
         }
         this.form.valueChanges.subscribe(form => {
             if ((form.cpf != null && form.cpf.length == 14)) {
@@ -100,7 +100,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
             }
         });
 
-        
+
         if (this.data.cpf) {
             this.form.patchValue(this.data);
         };

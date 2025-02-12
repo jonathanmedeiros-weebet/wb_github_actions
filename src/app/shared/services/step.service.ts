@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class StepService {
             this.currentIndexSource.next(this.currentIndex + 1);
         } else {
             this.submitForm.next(true)
-        } 
+        }
     }
 
     reset() {
@@ -52,5 +52,4 @@ export class StepService {
     changeFormValid(valid: boolean) {
         this.formValidSource.next(valid);
     }
-
 }
