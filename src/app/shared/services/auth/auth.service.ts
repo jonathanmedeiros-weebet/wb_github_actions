@@ -366,6 +366,9 @@ export class AuthService {
     isExpired() {
         const expires = localStorage.getItem('expires');
         // +expired converte a string para inteiro
+        if (!expires) {
+            return false;
+        }
         return moment(+expires).isBefore(new Date());
     }
 

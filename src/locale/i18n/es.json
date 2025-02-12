@@ -278,6 +278,7 @@
         "logoutGeolocationErrorMessage": "Has sido desconectado por razones de seguridad. Detectamos un cambio abrupto en tu ubicación que sería físicamente imposible de ocurrir en el intervalo de tiempo registrado. Si esto no fue causado por ti, te recomendamos verificar tu cuenta.",
         "logoutGeolocationErrorTitle": "Acceso Interrumpido: Ubicación Inconsistente",
         "logoutGeolocationErrorButtonLabel": "Cerrar",
+        "clickHere": "Clic aqui",
         "countryCode": "Código",
         "complement": "Complemento",
         "login": "Sesión",
@@ -457,7 +458,8 @@
     },
     "aplicativo": {
         "versaoDoAplicativoNaoSuportada": "La versión de la aplicación instalada ya no es compatible, por favor vaya a nuestro sitio web y descargue la nueva versión.",
-        "baixarNovaVersao": "Descargar nueva versión"
+        "baixarNovaVersao": "Descargar nueva versión",
+        "downloadApp": "Descargar aplicación"
     },
     "deposito": {
         "titulo": "Depósito",
@@ -494,7 +496,13 @@
         "jogoResponsavel": "Juego responsable",
         "termosECondicoes": "Términos y condiciones",
         "feedback": "Ouvidoria",
-        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. Todos los derechos reservados."
+        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. Todos los derechos reservados.",
+        "restrictedToAdults": "Prohibido para menores de 18 años",
+        "knowYourLimits": "Conoce tus límites",
+        "ourApp": "Nuestra aplicación",
+        "institutional": "Institucional",
+        "licences": "Licencias",
+        "folowUp": "Sigue nuestras redes sociales"
     },
     "paginas": {
         "quem-somos": "Quiénes somos",
@@ -503,7 +511,7 @@
         "politica-aml": "Política AML",
         "jogo-responsavel": "Juego responsable",
         "termos-condicoes": "Términos y condiciones",
-        "partnership-terms": "Términos de uso (Asociaciones)"
+        "termos-afiliados": "Términos de uso (Asociaciones)"
     },
     "jogos": {
         "tempoCompleto": "Tiempo completo",
@@ -661,6 +669,8 @@
         "logout_continue_login": "Sí, me gustaría cerrar la sesión.",
         "remain_active_session": "No, seguir con la otra sesión activa",
         "save_pdf": "Guardar PDF",
+        "seeMore": "Ver más",
+        "seeLess": "Ver menos",
         "continue": "Continuar",
         "next": "Siguiente",
         "previous": "Anterior"

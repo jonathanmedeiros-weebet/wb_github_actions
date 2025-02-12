@@ -251,7 +251,24 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 error => this.handleError(error)
             );
 
-        const promoCode = this.route.snapshot.queryParams['promo'] || null;
+        const existingPromoCode = localStorage.getItem('promoCode');
+        const promoCodeExpiredDate = localStorage.getItem('promoCodeExpiredDate');
+        const isPromoCodeExpired = promoCodeExpiredDate ? new Date() > new Date(promoCodeExpiredDate) : false;
+
+        if (!existingPromoCode || isPromoCodeExpired) {
+            const newPromoCode = this.route.snapshot.queryParams['promo'] || null;
+            
+            if (newPromoCode) {
+                localStorage.setItem('promoCode', newPromoCode);
+                const expirationDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+                localStorage.setItem('promoCodeExpiredDate', expirationDate.toISOString());
+            } else {
+                localStorage.removeItem('promoCode');
+                localStorage.removeItem('promoCodeExpiredDate');
+            }
+        }
+        
+        const promoCode = localStorage.getItem('promoCode');
         this.form.patchValue({ promoCode: promoCode });
     }
 
@@ -399,6 +416,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         EventGa4Types.GENERATE_PIX,
                         { username: res.cliente }
                     );
+
+                    localStorage.removeItem('promoCode');
+                    localStorage.removeItem('promoCodeExpiredDate');
                 },
                 error => {
                     this.handleError(error);

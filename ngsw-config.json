@@ -26,5 +26,18 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {   "name": "bilhete",
+        "urls": [
+            "/bilhete/**"
+        ],
+        "cacheConfig": {
+            "strategy": "freshness",
+            "maxSize": 100,
+            "maxAge": "1h",
+            "timeout": "30s"
+        }
+    }
   ]
 }
