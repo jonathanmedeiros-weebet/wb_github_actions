@@ -73,7 +73,7 @@ import {
 } from './modals';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import {NgxMaskModule} from 'ngx-mask';
-import {NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterComponent} from './menu-footer/menu-footer.component';
 import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
 import {BilheteRifaComponent} from '../../rifas/bilhete/bilhete-rifa.component';
@@ -145,7 +145,8 @@ import { RegisterFaceMatchComponent } from './modals/register-face-match/registe
         RecaptchaModule,
         RecaptchaFormsModule,
         SkeletonModule,
-        WeePaginationModule
+        WeePaginationModule,
+        NgbTooltipModule
     ],
     declarations: [
         MainLayoutComponent,

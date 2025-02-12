@@ -32,17 +32,10 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     @ViewChild('btnCadastrar', { static: false }) btnCadastrar!: ElementRef;
 
     @ViewChild('captchaRef') captcha: RecaptchaComponent;
-    tooltipPassword = false;
-    
 
     currentIndex = 0;
     totalSteps = 3;
     formInvalid = true;
-
-    captchaResponse 
-    captchaResolved
-
-
     appMobile;
     isMobile = false;
     unsub$ = new Subject();
@@ -80,8 +73,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     isStrengthPassword: boolean | null;
     validPassword: boolean = false;
 
-
-
     requirements = {
         minimumCharacters: false,
         uppercaseLetter: false,
@@ -93,7 +84,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     private previousUrl: string;
 
     passwordRequirements: string[] = [];
-
 
     constructor(private stepService: StepService,
         public activeModal: NgbActiveModal,
@@ -112,7 +102,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         private financeiroService: FinanceiroService,
         private ga4Service: Ga4Service,
         private location: Location,
-        
+
     ) {
         super();
         this.stepService.currentIndex$.subscribe((index) => {
@@ -128,7 +118,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         });
     }
 
-  
     ngOnInit(): void {
 
         this.createForm();
@@ -363,7 +352,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
                 }
             });
 
-        }   
+        }
     }
 
     ngOnDestroy() {
@@ -522,13 +511,8 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
         }
     }
+    returnRequirementsValue() {
 
-    showTooltip() {
-        this.tooltipPassword = !this.tooltipPassword
-    }
-
-    returnRequirementsValue(){
-        
         return Object.values(this.requirements).filter(value => value).length;
     }
 }

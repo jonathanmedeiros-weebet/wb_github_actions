@@ -8,7 +8,7 @@
                             <input
                                 type="text"
                                 id="cpf"
-                                class="form-control inverted-out input-style"
+                                class="form-control inverted-out input-style label-personalized"
                                 mask="000.000.000-00"
                                 (change)="validarCpf()"
                                 formControlName="cpf"
@@ -96,7 +96,7 @@
                                     <div>
                                         <div class="select-nationality">
                                             <select class="form-control style-select" formControlName="nationality">
-                                                <option value="26">{{'register.brasil' | translate}}</option>
+                                                <option selected [value]="26">{{'register.brasil' | translate}}</option>
                                                 <option *ngFor="let nationality of nationalities" [value]="nationality.value">{{ nationality.name }}</option>
                                             </select>
                                         </div>
@@ -116,7 +116,7 @@
                         <div class="form-group mb-4 individual-genre">
                             <div class="input-md">
                                 <div class="div-button-personalized">
-                                    <label>
+                                    <label style="padding: 0px;">
                                         <div>
                                             <div class="div-button-gender">
                                                 <div class="custom-radio">
@@ -135,7 +135,7 @@
                         <div class="form-group mb-4 individual-genre">
                             <div class="input-md">
                                 <div class="div-button-personalized">
-                                    <label>
+                                    <label style="padding: 0px;">
                                         <div>
                                             <div class="div-button-gender">
                                                 <div class="custom-radio">
@@ -154,7 +154,7 @@
                         <div class="form-group mb-4 individual-genre">
                             <div class="input-md">
                                 <div class="div-button-personalized">
-                                    <label>
+                                    <label style="padding: 0px;">
                                         <div>
                                             <div class="div-button-gender">
                                                 <div class="custom-radio">

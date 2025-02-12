@@ -136,6 +136,9 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
             if (endereco.logradouro) {
               this.form.get('logradouro').patchValue(endereco.logradouro);
             }
+            if (!endereco.numero) {
+              this.form.get('numero').markAsTouched();
+            }
           } else {
             this.handleError(this.translate.instant('geral.enderecoNaoEncontrado'));
           }

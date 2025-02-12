@@ -1,12 +1,12 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
     <div class="row">
         <div class="col-md-12">
-            <div class="form-group mb-4" [ngClass]="applyCssDivError('email')">
+            <div class="form-group mb-4">
                 <div class="input-md">
-                    <input type="text" id="email" class="form-control inverted-out"
+                    <input type="text" id="email" class="form-control inverted-out input-style label-personalized"
                         [ngClass]="applyCssInputError('email')" formControlName="email" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'email')">
-                    <label for="email">{{'geral.email' | translate}}</label>
+                    <label class="text-input" for="email">{{'geral.email' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
                     class="text-left"></app-error-msg>
@@ -17,10 +17,10 @@
         <div class="col-md-4">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input type="text" id="countryCode" mask="0*" class="form-control inverted-out"
+                    <input type="text" id="countryCode" mask="0*" class="form-control inverted-out input-style label-personalized"
                         formControlName="countryCode" [ngClass]="applyCssInputError('countryCode')" placeholder=" "
                         [dropSpecialCharacters]="false" prefix="+" inputmode="numeric" maxlength="4">
-                    <label for="countryCode">{{'geral.countryCode' | translate}}</label>
+                    <label class="text-input" for="countryCode">{{'geral.countryCode' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('countryCode')" label="{{'geral.countryCode' | translate}}"
                     class="text-left"></app-error-msg>
@@ -29,10 +29,10 @@
         <div class="col-md-8">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input type="text" id="telefone" mask="(00)00000-0000" class="form-control inverted-out"
+                    <input type="text" id="telefone" mask="(00)00000-0000" class="form-control inverted-out input-style label-personalized"
                         formControlName="telefone" [ngClass]="applyCssInputError('telefone')" placeholder=" "
                         [dropSpecialCharacters]="false" inputmode="numeric">
-                    <label for="telefone">{{'geral.telefone' | translate}}</label>
+                    <label class="text-input" for="telefone">{{'geral.telefone' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('telefone')" label="{{'geral.telefone' | translate}}"
                     class="text-left"></app-error-msg>
@@ -41,91 +41,16 @@
     </div>
 
 
-    <div class="row my-5" *ngIf="fullRegistration">
-        <div class="col-md-9">
-            <div class="form-group mb-4">
-                <div class="input-md">
-                    <input type="text" id="logradouro" class="form-control inverted-out" formControlName="logradouro"
-                        [ngClass]="applyCssInputError('logradouro')" placeholder=" " [dropSpecialCharacters]="false">
-                    <label for="cpf">{{'geral.logradouro' | translate}}</label>
-                </div>
-
-                <app-error-msg [control]="form.get('logradouro')" label="{{'geral.logradouro' | translate}}"
-                    class="text-left"></app-error-msg>
-            </div>
-        </div>
-
-        <div class="col-md-3" *ngIf="fullRegistration">
-            <div class="form-group mb-4">
-                <div class="input-md">
-                    <input type="number" id="numero" class="form-control inverted-out" formControlName="numero"
-                        [ngClass]="applyCssInputError('numero')" placeholder=" " [dropSpecialCharacters]="false"
-                        inputmode="numeric">
-                    <label for="cpf">{{'geral.numero' | translate}}</label>
-                </div>
-
-                <app-error-msg [control]="form.get('numero')" label="{{'geral.numero' | translate}}"
-                    class="text-left"></app-error-msg>
-            </div>
-        </div>
-
-        <div class="col-md-6" *ngIf="fullRegistration">
-            <div class="form-group mb-4">
-                <div class="input-md">
-                    <input type="text" id="cep" class="form-control inverted-out" formControlName="cep"
-                        mask="00.000-000" [ngClass]="applyCssInputError('cep')" placeholder=" "
-                        [dropSpecialCharacters]="false" inputmode="numeric">
-                    <label for="cpf">{{'geral.cep' | translate}}</label>
-                </div>
-
-                <app-error-msg [control]="form.get('cep')" label="{{'geral.cep' | translate}}"
-                    class="text-left"></app-error-msg>
-            </div>
-        </div>
-
-        <div class="col-md-6" *ngIf="fullRegistration">
-            <div class="form-group mb-4">
-                <div class="input-md">
-                    <input type="text" id="bairro" class="form-control inverted-out" formControlName="bairro"
-                        [ngClass]="applyCssInputError('bairro')" placeholder=" " [dropSpecialCharacters]="false">
-                    <label for="cpf">{{'geral.bairro' | translate}}</label>
-                </div>
-
-                <app-error-msg [control]="form.get('bairro')" label="{{'geral.bairro' | translate}}"
-                    class="text-left"></app-error-msg>
-            </div>
-        </div>
-
-        <div class="col-md-6" *ngIf="fullRegistration">
-            <div class="form-group input-md placeholder-active">
-                <select formControlName="estado" type="text" class="form-control inverted-out"
-                    (change)="getCities($event)">
-                    <option value="">{{'geral.selecione' | translate}}</option>
-                    <option *ngFor="let state of states" [value]="state.id">
-                        {{ state.nome }}
-                    </option>
-                </select>
-                <label for="nome">{{'geral.estado' | translate}}</label>
-                <app-error-msg [control]="form.get('estado')"></app-error-msg>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- <div class="row" *ngIf="!formSocial"> -->
-
     <div class="row">
         <div class="col-md-12">
             <div class="form-group" [ngClass]="applyCssDivError('senha')">
                 <div class="input-md">
-                    <input [type]="mostrarSenha ? 'text' : 'password'" id="password" class="form-control inverted-out"
+                    <input [type]="mostrarSenha ? 'text' : 'password'" id="password" class="form-control inverted-out input-style label-personalized"
                         [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')"
-                        (input)="isStrengthPassword ? checkPassword() : null"
-                        (focus)="showTooltip()"
-                        (focusout)="showTooltip()"
-                        >
-                    <label for="password">{{'geral.senha' | translate}}</label>
+                        (input)="isStrengthPassword ? checkPassword() : null" [ngbTooltip]="tooltipTemplate"
+                        placement="bottom" tooltipClass="tooltip-password">
+                    <label class="text-input" for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarSenha = !mostrarSenha"></i>
                 </div>
@@ -133,82 +58,21 @@
                 <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}"
                     class="text-left"></app-error-msg>
 
-                <ul class="requirements-password" *ngIf="isStrengthPassword && tooltipPassword">
-                    <div id="container-tooltip">
-                        <p>{{'geral.passwordRequirements' | translate}}</p>
-                        <li
-                            [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
-                            <i
-                                [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
-                            {{'senhas.minimumCharactersPassword' | translate}}
-                        </li>
-                        <li
-                            [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
-                            <i
-                                [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
-                            {{'senhas.lowercaseLetter' | translate}}
-                        </li>
-                        <li
-                            [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
-                            <i
-                                [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
-                            {{'senhas.uppercaseLetter' | translate}}
-                        </li>
-                        <li
-                            [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
-                            <i
-                                [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
-                            {{'senhas.specialChar' | translate}}
-                        </li>
-                    </div>
-                    <div style="width: 100%;">
-                        <span>
-
-                        </span>
-
-                        <div style="width: 100%;">
-                            <div *ngIf="returnRequirementsValue() == 0 "> {{"geral.passwordLevel" | translate}} </div>
-                            <div *ngIf="returnRequirementsValue() == 1 ">{{"geral.passwordLevel" | translate}} <span id="weak">{{"geral.weak" | translate}}</span></div>
-                            <div *ngIf="returnRequirementsValue() == 2 || returnRequirementsValue() == 3"> {{"geral.passwordLevel" | translate}} <span id="medium">{{"geral.medium" | translate}}</span></div>
-                            <div *ngIf="returnRequirementsValue() > 3 ">{{"geral.passwordLevel" | translate}} <span id="strong">{{"geral.strong" | translate}}</span>
-                            </div>
-                        </div>
-
-                        <div class="bars" [ngClass]="{
-                                        'weak': returnRequirementsValue() == 1,
-                                        'medium': returnRequirementsValue() == 2 || returnRequirementsValue() == 3,
-                                        'strong': returnRequirementsValue() > 3
-                                    }">
-                            <div class="strong-bar-one">
-
-                            </div>
-                            <div class="strong-bar-two">
-
-                            </div>
-                            <div class="strong-bar-three">
-
-                            </div>
-
-                        </div>
-                    </div>
-                </ul>
-
                 <small *ngIf="!isStrengthPassword" class="form-text text-muted">{{'geral.requisitosSenha' |
                     translate}}</small>
             </div>
         </div>
     </div>
-    <!-- <div class="row" *ngIf="!formSocial && !isLoterj"> -->
     <div class="row">
 
         <div class="col-md-12">
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
-                        class="form-control inverted-out" formControlName="senha_confirmacao"
+                        class="form-control inverted-out input-style label-personalized" formControlName="senha_confirmacao"
                         [ngClass]="applyCssInputError('senha_confirmacao')" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')">
-                    <label for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
+                    <label class="text-input" for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
                 </div>
@@ -226,10 +90,10 @@
         <div class="col-md-12">
             <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
                 <div class="input-md">
-                    <input type="text" id="afiliado" class="form-control inverted-out"
+                    <input type="text" id="afiliado" class="form-control inverted-out input-style label-personalized"
                         [ngClass]="applyCssInputError('afiliado')" formControlName="afiliado" placeholder=" "
                         [readonly]="possuiCodigoAfiliado">
-                    <label for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
+                    <label class="text-input" for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
                 </div>
 
                 <app-error-msg [control]="form.get('afiliado')" label="Código de afiliação(Opcional)"
@@ -295,5 +159,69 @@
                 {{errorMessage}}
             </div>
         </div>
+    </ng-template>
+    <ng-template #tooltipTemplate>
+        <ul class="requirements-password">
+            <div id="container-tooltip">
+                <p>{{'geral.passwordRequirements' | translate}}</p>
+                <li
+                    [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
+                    <i
+                        [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
+                    {{'senhas.minimumCharactersPassword' | translate}}
+                </li>
+                <li
+                    [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
+                    <i
+                        [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
+                    {{'senhas.lowercaseLetter' | translate}}
+                </li>
+                <li
+                    [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
+                    <i
+                        [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
+                    {{'senhas.uppercaseLetter' | translate}}
+                </li>
+                <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
+                    <i
+                        [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
+                    {{'senhas.specialChar' | translate}}
+                </li>
+            </div>
+            <div style="width: 100%;">
+                <span>
+
+                </span>
+
+                <div style="width: 100%;">
+                    <div *ngIf="returnRequirementsValue() == 0 "> {{"geral.passwordLevel" | translate}} </div>
+                    <div *ngIf="returnRequirementsValue() == 1 ">{{"geral.passwordLevel" | translate}} <span
+                            id="weak">{{"geral.weak" | translate}}</span></div>
+                    <div *ngIf="returnRequirementsValue() == 2 || returnRequirementsValue() == 3">
+                        {{"geral.passwordLevel" |
+                        translate}} <span id="medium">{{"geral.medium" | translate}}</span></div>
+                    <div *ngIf="returnRequirementsValue() > 3 ">{{"geral.passwordLevel" | translate}} <span
+                            id="strong">{{"geral.strong" | translate}}</span>
+                    </div>
+                </div>
+
+                <div class="bars" [ngClass]="{
+                                'weak': returnRequirementsValue() == 1,
+                                'medium': returnRequirementsValue() == 2 || returnRequirementsValue() == 3,
+                                'strong': returnRequirementsValue() > 3
+                            }">
+                    <div class="strong-bar-one">
+
+                    </div>
+                    <div class="strong-bar-two">
+
+                    </div>
+                    <div class="strong-bar-three">
+
+                    </div>
+
+                </div>
+            </div>
+        </ul>
     </ng-template>
 </form>

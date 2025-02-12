@@ -97,13 +97,16 @@ select:focus {
 
 .label-personalized-gender {
     max-height: 10px;
-    padding-left: 14px;
-    color: rgba(var(--foreground-inputs-odds-rgb), .3);
+    color: var(--foreground);
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     gap: 8px;
+}
+
+.individual-genre + .input-md label {
+    padding: 0px !important;
 }
 
 .gender{

@@ -1,7 +1,37 @@
 .tooltip {
- z-index: 9999999999;
+    z-index: 9999999999;
 }
 
+.div-button-personalized {
+    display: flex;
+    height: 44px;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid rgba(var(--foreground-inputs-odds-rgb), .3);
+    color: var(--foreground-inputs-odds);
+    background: var(--inputs-odds);
+    max-height: 44px;
+    gap: 4px;
+}
+
+.input-style {
+    border: 1px solid rgba(var(--foreground-inputs-odds-rgb), .3);
+}
+
+.label-personalized {
+    max-height: 10px;
+    padding-left: 14px;
+    color: rgba(var(--foreground-inputs-odds-rgb), .3);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.text-input{
+    color: rgba(var(--foreground-inputs-odds-rgb), .3);
+    padding-left: 5px;
+}
 
 h3 {
     font-size: 16px;
@@ -26,7 +56,7 @@ h3 {
     background: none;
 }
 
-.close-modal-ativacao{
+.close-modal-ativacao {
     border-radius: 100%;
     position: absolute;
     display: flex;
@@ -37,7 +67,7 @@ h3 {
     padding-right: 5px;
 }
 
-.close-modal-ativacao i{
+.close-modal-ativacao i {
     margin: 10px;
     color: var(--highlight);
     font-size: 22px;
@@ -77,23 +107,10 @@ button {
     padding: 0 10px;
 }
 
-asl-google-signin-button {
-    display: flex;
-    justify-content: center;
-}
-
-.limpar-social-form {
-    cursor: pointer;
-    display: block;
-    margin-top: 20px;
-    text-align: center;
-    text-decoration: none;
-    color: var(--highlight);
-}
-
 .showPassword {
     position: absolute;
-    top: calc(50% - 16px);;
+    top: calc(50% - 16px);
+    ;
     right: 0;
     color: var(--foreground-inputs-odds);
     cursor: pointer;
@@ -111,14 +128,14 @@ a.link-termos-politica {
     opacity: 65%;
 }
 
-.content-modal-ativacao{
+.content-modal-ativacao {
     display: flex;
     flex-direction: column;
     margin: 25px;
     text-align: center;
 }
 
-.content-modal-ativacao img{
+.content-modal-ativacao img {
     width: 100px;
     height: auto;
     align-self: center;
@@ -175,8 +192,10 @@ a.link-termos-politica {
     align-self: stretch;
 }
 
-.strong-bar-one, .strong-bar-two, .strong-bar-three {
-    border:  1px solid gray;
+.strong-bar-one,
+.strong-bar-two,
+.strong-bar-three {
+    border: 1px solid gray;
     width: 33%;
     background-color: gray;
     border-radius: 29;
@@ -210,26 +229,38 @@ a.link-termos-politica {
 
 .weak .strong-bar-two,
 .weak .strong-bar-three {
-    border:  1px solid gray;
+    border: 1px solid gray;
     background-color: gray;
     color: gray;
 }
 
+#weak {
+    color: red;
+}
+
+#medium {
+    color: yellow;
+}
+
+#strong {
+    color: green;
+}
+
 .weak .strong-bar-one {
-    border:  1px solid red;
+    border: 1px solid red;
     background-color: red;
     color: red;
 }
 
 .medium .strong-bar-three {
-    border:  1px solid gray;
+    border: 1px solid gray;
     background-color: gray;
     color: gray;
 }
 
 .medium .strong-bar-one,
 .medium .strong-bar-two {
-    border:  1px solid yellow;
+    border: 1px solid yellow;
     background-color: yellow;
     color: yellow;
 }
@@ -237,7 +268,7 @@ a.link-termos-politica {
 .strong .strong-bar-one,
 .strong .strong-bar-two,
 .strong .strong-bar-three {
-    border:  2px solid green;
+    border: 2px solid green;
     background-color: green;
     color: green;
 
@@ -274,11 +305,6 @@ a.link-termos-politica {
     align-items: center;
 }
 
-.label-termo-uso input[type="checkbox"] {
-    width: 31px;
-    height: 16px;
-    margin-right: 10px;
-}
 
 .radio-custom {
     width: 18px;
@@ -306,4 +332,40 @@ a.link-termos-politica {
 
 .captcha {
     padding-top: 8px;
+}
+
+.tooltip {
+    --bs-tooltip-max-width: 346px !important;
+    max-width: 346px !important;
+    width: 346px !important;
+}
+
+::ng-deep .tooltip-password {
+    --bs-tooltip-max-width: 346px !important;
+}
+
+
+
+
+
+
+
+
+
+
+.style-select {
+    border: none;
+    appearance: menulist;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    outline: none;
+    max-height: 26px;
+    color: rgba(var(--foreground-inputs-odds-rgb), .3);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+select:focus {
+    border: none;
 }
