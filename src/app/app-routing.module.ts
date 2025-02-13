@@ -15,6 +15,7 @@ import { BetbyComponent } from './betby/betby.component';
 import {RifaGuard} from './shared/services/guards/rifa.guard';
 import { CompartilharBilheteComponent } from './cupom/compartilhar-bilhete/compartilhar-bilhete.component';
 import { RedirectBetGuardGuard } from './shared/services/guards/redirect-bet-guard.guard';
+import { RegisterFacematchGuard } from './shared/services/guards/register-facematch.guard';
 
 const appRoutes: Routes = [
     {
@@ -111,7 +112,7 @@ const appRoutes: Routes = [
             {
                 path: 'bank-accounts',
                 loadChildren: () => import('./bank-accounts/bank-accounts.module').then(m => m.BankAccountsModule),
-                canActivate: [AuthGuard, ClientGuard]
+                canActivate: [AuthGuard, ClientGuard,RegisterFacematchGuard]
             },
             {
                 path: 'validar-aposta',
@@ -130,7 +131,7 @@ const appRoutes: Routes = [
             },
             {
                 path: 'clientes',
-                canActivate: [AuthGuard, ClientGuard],
+                canActivate: [AuthGuard, ClientGuard,RegisterFacematchGuard],
                 loadChildren: () => import('./clientes/clientes.module').then(c => c.ClientesModule)
             },
             {

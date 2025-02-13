@@ -1,5 +1,5 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren, AfterViewInit, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { skip } from 'rxjs/operators';
 import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
@@ -7,12 +7,20 @@ import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 
+declare global {
+  interface Window {
+    ex_partner: any;
+    exDocCheck: any;
+    exDocCheckAction: any;
+  }
+}
+
 @Component({
   selector: 'app-register-face-match',
   templateUrl: './register-face-match.component.html',
   styleUrls: ['./register-face-match.component.css']
 })
-export class RegisterFaceMatchComponent implements OnInit {
+export class RegisterFaceMatchComponent implements OnInit, AfterViewInit {
 
   verifiedIdentity = null;
   legitimuzToken = '';
@@ -20,6 +28,7 @@ export class RegisterFaceMatchComponent implements OnInit {
   faceMatchType = null;
   docCheckToken = "";
   secretHash = ""
+  dataUserCPF = ''
   @Input() user;
   @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
   @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
@@ -32,16 +41,10 @@ export class RegisterFaceMatchComponent implements OnInit {
     public translate: TranslateService,
     public paramLocais: ParametrosLocaisService,
     public activeModal: NgbActiveModal,
-    private docCheckService: DocCheckService
+    private docCheckService: DocCheckService,
+    private cd: ChangeDetectorRef
   ) { }
-
   ngOnInit() {
-
-    this.clientService.getFaceMatchClient(this.user.id).subscribe((facematch) => {
-      if (facematch.facematch.register) {
-        this.activeModal.close('success');
-      }
-    })
 
     this.faceMatchType = this.paramLocais.getOpcoes().faceMatchType;
     this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
@@ -68,6 +71,9 @@ export class RegisterFaceMatchComponent implements OnInit {
       default:
         break;
     }
+    this.dataUserCPF = String(this.user.cpf).replace(/[.\-]/g, '');
+    this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash);
+    this.cd.detectChanges(); 
     this.legitimuzService.curCustomerIsVerified
       .pipe(skip(1))
       .subscribe(curCustomerIsVerified => {
@@ -90,12 +96,15 @@ export class RegisterFaceMatchComponent implements OnInit {
   ngAfterViewInit() {
     if (this.faceMatchEnabled) {
       if (this.faceMatchType == 'legitimuz') {
+        this.legitimuzService.init();
+        this.legitimuzService.mount();
         this.legitimuz.changes
           .subscribe(() => {
             this.legitimuzService.init();
             this.legitimuzService.mount();
           });
       } else {
+        this.docCheckService.init();
         this.docCheck.changes
           .subscribe(() => {
             this.docCheckService.init();

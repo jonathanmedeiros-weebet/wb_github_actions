@@ -219,15 +219,10 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
                         this.getUsuario();
 
-                        if (faceMatchEnabled && this.usuario.tipo_usuario == 'cliente' && (faceMatchRegisterEnabled || res.results.user.pendingVerification)) {
+                        if (faceMatchEnabled && res.results.user.pendingVerification && this.usuario.tipo_usuario == 'cliente') {
                             const holdUser = this.usuario;
                             localStorage.removeItem('user');
-                            let faceMatchResult
-                            if ( faceMatchRegisterEnabled) {
-                                faceMatchResult = await this.abrirModalFaceMatch(holdUser, true);
-                            } else { 
-                                faceMatchResult = await this.abrirModalFaceMatch(holdUser);
-                            }
+                            const faceMatchResult = await this.abrirModalFaceMatch(holdUser);
                             if (!faceMatchResult) {
                                 return;
                             }
@@ -388,30 +383,17 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         );
     }
 
-    async abrirModalFaceMatch(user, register?) {
+     async abrirModalFaceMatch(user) {
         this.activeModal.dismiss();
-        
-        if (register) {
-            this.modalRef = this.modalService.open(
-                RegisterFaceMatchComponent,
-                {
-                    ariaLabelledBy: 'modal-basic-title',
-                    centered: true,
-                    backdrop: 'static',
-                    windowClass: 'modal-500'
-                }
-            );
-        } else {
-            this.modalRef = this.modalService.open(
-                FaceMatchModalComponent,
-                {
-                    ariaLabelledBy: 'modal-basic-title',
-                    centered: true,
-                    backdrop: 'static',
-                    windowClass: 'modal-500'
-                }
-            );
-        }
+        this.modalRef = this.modalService.open(
+            FaceMatchModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                centered: true,
+                backdrop: 'static',
+                windowClass: 'modal-600'
+            }
+        );
 
         this.modalRef.componentInstance.user = user;
 

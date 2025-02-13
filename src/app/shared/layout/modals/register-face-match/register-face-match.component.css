@@ -33,7 +33,7 @@ p {
    color: rgba(var(--foreground-rgb), 0.7);
 }
 
-#legitimuz {
+#legitimuz, #docCheck {
     display: flex;
     flex-direction: column;
     padding: 20px;
