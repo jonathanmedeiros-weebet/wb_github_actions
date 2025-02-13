@@ -191,7 +191,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
                     this.maximumWithdrawalAmount = res.nivelCliente?.maximum_withdrawal_amount ?? '-';
 
-                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario), Validators.max(this.maximumWithdrawalAmount)]);
+                    const checkMaximumWithdrawalAmount = this.valorMaxSaqueDiario < this.maximumWithdrawalAmount ? this.valorMaxSaqueDiario : this.maximumWithdrawalAmount;
+
+                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), ...(this.maximumWithdrawalAmount > 0 ? [Validators.max(checkMaximumWithdrawalAmount)] : [])]);
 
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
                     this.onChavePixChange();
