@@ -51,16 +51,18 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
   }
 
   createForm() {
+    const safePattern = /^[^<>"'`]+$/;
     this.form = this.fb.group({
-      logradouro: ['', Validators.required],
-      numero: ['', Validators.required],
-      bairro: ['', Validators.required],
-      cidade: ['', Validators.required],
-      estado: ['', Validators.required],
-      pais: ['Brasil', Validators.required],
-      complemento: [''],
-      cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      logradouro: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(safePattern)]],
+      numero: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(safePattern)]],
+      bairro: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(safePattern)]],
+      cidade: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(safePattern)]],
+      estado: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(safePattern)]],
+      pais: ['Brasil', [Validators.required, Validators.maxLength(60), Validators.pattern(safePattern)]],
+      complemento: ['',[Validators.maxLength(60), Validators.pattern(safePattern)]],
+      cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8),Validators.pattern(safePattern)]],
     });
+
     this.form.controls['cep']
       .valueChanges
       .pipe(
@@ -75,7 +77,6 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
       this.cidadeSelecionada = this.data.cidade;
       this.form.get('cidade').patchValue(this.cidadeSelecionada);
     }
-
   }
 
   getCidades(event?: any, parametro?: number) {
@@ -106,6 +107,7 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
                 estadoLocal = estado;
               }
             }
+
             this.estadoSelecionado = estadoLocal.id;
             if (this.estadoSelecionado != this.form.get('estado').value) {
               this.utilsService.getCidades(estadoLocal.id).subscribe(
@@ -127,6 +129,7 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
                 }
               }
             }
+
             this.form.get('estado').patchValue(this.estadoSelecionado);
             if (endereco.bairro) {
               this.form.get('bairro').patchValue(endereco.bairro);
@@ -151,5 +154,4 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
 
   async submit() {
   }
-
 }

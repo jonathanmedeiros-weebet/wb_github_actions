@@ -188,7 +188,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
 
                 if (params.ref || params.afiliado) {
                     const codigoAfiliado = params.ref ?? params.afiliado;
-
                     this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
                     localStorage.setItem('codigoAfiliado', codigoAfiliado);
                 } else {
@@ -218,7 +217,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
 
                 if (params.c) {
                     this.campanhaService.computarAcesso({ campRef: params.c, fonte: params.s }).subscribe();
-
                     localStorage.setItem('campRef', params.c);
                     localStorage.setItem('campFonte', params.s);
                 } else {
@@ -300,7 +298,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         this.form = this.fb.group({
             senha: [null, [Validators.required, Validators.minLength(8)]],
             senha_confirmacao: [null, [Validators.required, Validators.minLength(8), FormValidations.equalsTo('senha')]],
-
             email: [null, [Validators.required, Validators.email]],
             telefone: [null, [Validators.required]],
             countryCode: ['55', [Validators.required]],
