@@ -145,7 +145,7 @@
                                             <div class="min-amount">
                                                 <i class="fa-solid fa-circle-exclamation"></i>&nbsp;
                                                 {{'saques.minimumWithdrawal' | translate}}: {{valorMinSaque | currency}}
-                                                <span *ngIf="maximumWithdrawalAmount !== null && maximumWithdrawalAmount > 0">
+                                                <span *ngIf="maximumWithdrawalAmount !== null">
                                                     / {{'saques.maximumWithdrawalAmount' | translate}}: {{maximumWithdrawalAmount | currency}}
                                                 </span>
                                                 / {{'saques.dailyMaximum' | translate}}: {{valorMaxSaqueDiario | currency}}

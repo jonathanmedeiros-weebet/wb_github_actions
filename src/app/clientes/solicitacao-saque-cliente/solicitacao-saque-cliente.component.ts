@@ -189,11 +189,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
                     this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
-                    this.maximumWithdrawalAmount = res.nivelCliente?.maximum_withdrawal_amount ?? '-';
+                    this.maximumWithdrawalAmount = res.nivelCliente?.maximum_withdrawal_amount ?? null;
 
-                    const checkMaximumWithdrawalAmount = this.valorMaxSaqueDiario < this.maximumWithdrawalAmount ? this.valorMaxSaqueDiario : this.maximumWithdrawalAmount;
+                    const checkMaximumWithdrawalAmount = this.maximumWithdrawalAmount !== null ? (this.valorMaxSaqueDiario < this.maximumWithdrawalAmount ? this.valorMaxSaqueDiario : this.maximumWithdrawalAmount) : this.valorMaxSaqueDiario;
 
-                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), ...(this.maximumWithdrawalAmount !== null && this.maximumWithdrawalAmount > 0 ? [Validators.max(checkMaximumWithdrawalAmount)] : [])]);
+                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), ...(this.maximumWithdrawalAmount !== null ? [Validators.max(checkMaximumWithdrawalAmount)] : [])]);
 
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
                     this.onChavePixChange();
