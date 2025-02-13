@@ -21,7 +21,6 @@ declare global {
   styleUrls: ['./register-face-match.component.css']
 })
 export class RegisterFaceMatchComponent implements OnInit, AfterViewInit {
-
   verifiedIdentity = null;
   legitimuzToken = '';
   faceMatchEnabled = true;
@@ -45,7 +44,6 @@ export class RegisterFaceMatchComponent implements OnInit, AfterViewInit {
     private cd: ChangeDetectorRef
   ) { }
   ngOnInit() {
-
     this.faceMatchType = this.paramLocais.getOpcoes().faceMatchType;
     this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
 
@@ -71,6 +69,7 @@ export class RegisterFaceMatchComponent implements OnInit, AfterViewInit {
       default:
         break;
     }
+
     this.dataUserCPF = String(this.user.cpf).replace(/[.\-]/g, '');
     this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash);
     this.cd.detectChanges(); 
