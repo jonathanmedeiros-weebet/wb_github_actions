@@ -21,7 +21,7 @@
 </ng-template>
 <div class="jogos-destaque" [ngClass]="{'mb-1': !displayLabel, 'mt-3': !displayLabel}">
     <div class="slider-header" *ngIf="displayLabel">
-        {{ 'geral.jogosDestaques' | translate }}
+        {{ title }}
         <nav *ngIf="jogosDestaque.length">
             <div class="scroll-button scroll-left disabled-scroll-button" id="cassino-left"
                 (click)="owlCar.prev()">

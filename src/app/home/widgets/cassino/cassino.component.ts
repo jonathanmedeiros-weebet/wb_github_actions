@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChildr
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, ParametrosLocaisService } from 'src/app/services';
 import { LoginModalComponent } from 'src/app/shared/layout/modals';
+import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 
 @Component({
     selector: 'app-cassino',
@@ -16,6 +17,7 @@ export class CassinoComponent implements OnInit {
     @Input() showLoadingIndicator: boolean;
     @Input() showLoginModal: boolean = true;
 
+    gameList = [];
     isMobile = false;
     modalRef: NgbModalRef;
     isLoggedIn = false;
@@ -28,7 +30,8 @@ export class CassinoComponent implements OnInit {
         private renderer: Renderer2,
         private el: ElementRef,
         private cd: ChangeDetectorRef,
-        private paramsService: ParametrosLocaisService
+        private paramsService: ParametrosLocaisService,
+        private casinoService: CasinoApiService,
     ) { }
 
     get customCasinoName(): string {
@@ -38,6 +41,12 @@ export class CassinoComponent implements OnInit {
     ngOnInit(): void {
         this.isMobile = window.innerWidth < 1025;
 
+        this.casinoService.getCasinoGamesByIds(this.games)
+            .subscribe((result) => {
+                this.gameList = result.games;
+            }
+        );
+
         if (this.isMobile) {
             this.scrollStep = 200;
         }
@@ -46,13 +55,13 @@ export class CassinoComponent implements OnInit {
             .subscribe((isLoggedIn: any) => {
                 this.isLoggedIn = isLoggedIn;
             }
-            );
+        );
 
         this.auth.cliente
             .subscribe((isCliente: any) => {
                 this.isCliente = isCliente;
             }
-            );
+        );
     }
 
     scrollLeft(scrollId: string) {

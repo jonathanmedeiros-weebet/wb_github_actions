@@ -6,17 +6,17 @@
         <app-wall-section
             sectionId="cassino"
             [title]="customCasinoName"
-            [itemsQty]="games.length"
+            [itemsQty]="gameList.length"
             [seeAllRouterLink]="linkAll"
             (onLeft)="scrollLeft('cassino')"
             (onRight)="scrollRight('cassino')"
         />
-    
+
         <div class="games-container">
-            <ng-container *ngIf="games.length; else elseWithoutGames">
+            <ng-container *ngIf="gameList.length; else elseWithoutGames">
                 <div class="game-list game-list-inline" #scrollGames id="cassino-scroll" (scroll)="onScroll('cassino')">
                     <app-wall-game-card
-                        *ngFor="let game of games"
+                        *ngFor="let game of gameList"
                         [game]="game"
                         [blink]="linkAll"
                         [isLoggedIn]="isLoggedIn"

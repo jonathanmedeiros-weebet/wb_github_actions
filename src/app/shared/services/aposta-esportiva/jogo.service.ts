@@ -123,6 +123,16 @@ export class JogoService {
             );
     }
 
+    getGamesById(ids: Array<any>) {
+        const url = `${this.JogosLokiUrl}/games-by-id`;
+
+        return this.http.post(url, { ids }, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getCotacao(id: number, chave: string): Observable<Cotacao[]> {
         const url = `${this.JogoUrl}/${id}/cotacoes/${chave}`;
 
