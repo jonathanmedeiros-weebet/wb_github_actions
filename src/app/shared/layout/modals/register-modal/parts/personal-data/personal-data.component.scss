@@ -89,7 +89,6 @@ select:focus {
     border-radius: 5px;
 }
 
-
 .input-md:has(input[type="radio"]:checked) {
     border: 1px solid var(--highlight);
     border-radius: 5px;
@@ -168,5 +167,4 @@ input[type=radio] {
     .input-md label {
         padding: 0px;
     }
-
 }

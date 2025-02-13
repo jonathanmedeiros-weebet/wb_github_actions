@@ -114,7 +114,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
         this.createForm();
         let queryString = '';
         if (this.router.url.includes('/cadastro')) {
@@ -142,8 +141,8 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         } else {
             this.previousUrl = this.router.url;
         }
-        this.location.replaceState(`/cadastro${queryString}`);
 
+        this.location.replaceState(`/cadastro${queryString}`);
         this.currentLanguage = this.translate.currentLang;
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.getPromocoes();
@@ -494,6 +493,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
         }
     }
+    
     returnRequirementsValue() {
         return Object.values(this.requirements).filter(value => value).length;
     }

@@ -9,7 +9,6 @@ import { StepService } from 'src/app/shared/services/step.service';
     styleUrls: ['./register-modal-component.component.scss']
 })
 export class RegisterModalComponentComponent {
-
     currentIndex = 0;
     totalSteps = 2;
     formInvalid = true;
@@ -32,7 +31,6 @@ export class RegisterModalComponentComponent {
         this.stepService.formValid$.subscribe((valid) => {
             this.formInvalid = !valid;
         })
-
     }
 
     previous() {
@@ -51,6 +49,7 @@ export class RegisterModalComponentComponent {
         this.registerCancel = true;
         this.modalClose = false;
     }
+
     getPromocoes(queryParams?: any) {
         this.financeiroService.getPromocoes(queryParams)
             .subscribe(
@@ -102,5 +101,4 @@ export class RegisterModalComponentComponent {
         this.registerCancel = false;
         this.modalClose = true;
     }
-
 }

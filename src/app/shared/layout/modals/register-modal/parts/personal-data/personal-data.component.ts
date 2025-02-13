@@ -14,7 +14,6 @@ import { FormValidations } from 'src/app/shared/utils';
     styleUrls: ['./personal-data.component.scss']
 })
 export class PersonalDataComponent extends BaseFormComponent implements OnInit, OnDestroy {
-
     @Output() personalData = new EventEmitter<any>;
     @Input() data: any;
 
@@ -72,6 +71,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
         if (this.data.cpf && this.data.nome) {
             this.cpfValidado = true;
         }
+
         this.selectedItems = [
             { value: 1, name: 'Afeganistão' },
             { value: 2, name: 'África do Sul' },
@@ -83,6 +83,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
             this.initializeDays();
             this.initializeYears();
         }
+
         this.form.valueChanges.subscribe(form => {
             if ((form.cpf != null && form.cpf.length == 14)) {
                 this.showLoading = false;
@@ -91,6 +92,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                 this.showLoading = true;
             }
         })
+
         this.form.valueChanges.subscribe(() => {
             if (this.form.valid) {
                 this.stepService.changeFormValid(true);
@@ -99,7 +101,6 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                 this.stepService.changeFormValid(false);
             }
         });
-
 
         if (this.data.cpf) {
             this.form.patchValue(this.data);
