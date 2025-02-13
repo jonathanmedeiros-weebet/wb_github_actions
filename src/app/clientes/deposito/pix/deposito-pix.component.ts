@@ -276,7 +276,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
     createForm() {
         this.form = this.fb.group({
-            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito), Validators.max(this.maximumDepositAmount)]],
+            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito), ...(this.maximumDepositAmount > 0 ? [Validators.max(this.maximumDepositAmount)] : [])]],
             bonus: [this.bonusOption, Validators.required],
             paymentMethod: [this.paymentMethodSelected, Validators.required],
             promoCode: [""]

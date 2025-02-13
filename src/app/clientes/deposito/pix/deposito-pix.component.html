@@ -63,7 +63,9 @@
                             <app-error-msg [control]="form.get('valor')"></app-error-msg>
                             <div class="min-amount">
                                 {{'deposito.valorMinimo' | translate}} {{ valorMinDeposito | currency }}
-                                / {{'deposito.maximumDepositAmount' | translate}} {{ maximumDepositAmount | currency }}
+                                <span *ngIf="maximumDepositAmount > 0">
+                                    / {{'deposito.maximumDepositAmount' | translate}} {{ maximumDepositAmount | currency }}
+                                </span>
                             </div>
                             <div class="shortcut-amounts">
                                 <button
