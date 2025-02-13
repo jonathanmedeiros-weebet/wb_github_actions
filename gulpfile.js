@@ -205,3 +205,40 @@ gulp.task('arena-esportiva.com', function (done) {
         pkg_folder: ('com.arenaesportiva').split('.').join('/')
     });
 });
+
+gulp.task('boasorte.bet', function (done) {
+    return prepare({
+        app_id: "bet.boasorte",
+        url: "https://app.weebet.tech",
+        nome: "APP Boa Sorte",
+        slug: "boasorte.bet",
+        centralUrl: 'https://central.boasorte.bet',
+        splash_color: "#181818",
+        pkg_folder: ('bet.boasorte').split('.').join('/')
+    });
+});
+
+gulp.task('jrsports.io', function (done) {
+    return prepare({
+        app_id: "io.jrsports",
+        url: "https://app.weebet.tech",
+        nome: "APP JRSPORTS",
+        slug: "jrsports.io",
+        centralUrl: 'https://central.jrsports.io',
+        splash_color: "#181818",
+        pkg_folder: ('io.jrsports').split('.').join('/')
+    });
+});
+
+gulp.task('pointbet.wee.bet', function (done) {
+    return prepare({
+        app_id: "bet.wee.pointbet",
+        url: "https://app.weebet.tech",
+        nome: "APP POINTBET",
+        slug: "pointbet.wee.bet",
+        centralUrl: 'https://central.pointbet.wee.bet',
+        splash_color: "#181818",
+        pkg_folder: ('bet.wee.pointbet').split('.').join('/')
+    });
+});
+

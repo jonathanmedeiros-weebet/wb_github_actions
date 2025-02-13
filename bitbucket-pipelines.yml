@@ -1,5 +1,4 @@
-image: dolalti/flutter-android-build:31
-
+image: dolalti/flutter-build-android:android-33.1
 pipelines:
   custom:
     custom-api-deploy: #name of this pipeline
