@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { FinanceiroService } from 'src/app/shared/services/financeiro.service';
 import { StepService } from 'src/app/shared/services/step.service';
 
 @Component({
@@ -13,9 +14,17 @@ export class RegisterModalComponentComponent {
     totalSteps = 2;
     formInvalid = true;
     data = {};
+    registerCancel = false;
+    modalClose = true;
+    promocoes: any;
+    promocaoAtiva = false;
+    valorPromocao: number | null = null;
+    bonusModalidade: string | null = null;
+    errorMessage = '';
 
     constructor(private stepService: StepService,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private financeiroService: FinanceiroService
     ) {
         this.stepService.currentIndex$.subscribe((index) => {
             this.currentIndex = index;
@@ -39,7 +48,59 @@ export class RegisterModalComponentComponent {
     }
 
     onClose() {
-        this.stepService.reset();
-        this.activeModal.close();
+        this.registerCancel = true;
+        this.modalClose = false;
     }
+    getPromocoes(queryParams?: any) {
+        this.financeiroService.getPromocoes(queryParams)
+            .subscribe(
+                response => {
+                    this.promocoes = response;
+                    this.verificarPromocaoAtiva();
+                },
+                error => {
+                    this.handleError(error);
+                }
+            );
+    }
+
+    verificarPromocaoAtiva(): void {
+        if (this.promocoes && this.promocoes.length > 0) {
+            const promocaoCassino = this.promocoes.find(promocao =>
+                promocao.ativo &&
+                promocao.tipo === 'primeiro_deposito_bonus' &&
+                promocao.valorBonus > 0.00 &&
+                promocao.bonusModalidade === 'cassino'
+            );
+
+            const promocaoEsportivo = this.promocoes.find(promocao =>
+                promocao.ativo &&
+                promocao.tipo === 'primeiro_deposito_bonus' &&
+                promocao.valorBonus > 0.00 &&
+                promocao.bonusModalidade === 'esportivo'
+            );
+
+            if (promocaoCassino) {
+                this.promocaoAtiva = promocaoCassino.ativo;
+                this.valorPromocao = parseFloat(promocaoCassino.valorBonus);
+            } else if (promocaoEsportivo) {
+                this.promocaoAtiva = promocaoEsportivo.ativo;
+                this.valorPromocao = parseFloat(promocaoEsportivo.valorBonus);
+            }
+        }
+    }
+    handleError(error: string) {
+        this.errorMessage = error;
+    }
+
+    cancelModal() {
+        this.stepService.reset();
+        this.activeModal.dismiss();
+    }
+
+    registerOpen() {
+        this.registerCancel = false;
+        this.modalClose = true;
+    }
+
 }

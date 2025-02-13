@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="modalClose">
     <div class="container-header">
         <div class="header-register">
             <div class="header-register-item">
@@ -27,4 +27,30 @@
         </div>
     </div>
     <app-navigation-bar></app-navigation-bar>
+
+</div>
+<div class ="container" *ngIf="registerCancel">
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header-he">
+                <h3 class="modal-title">{{ 'registerCancel.titleCancelRegister' | translate}}</h3>
+                <a class="close-modal-ativacao" aria-label="Close" (click)="registerOpen()">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <div class="modal-body-custom">
+                <ng-container *ngIf="promocaoAtiva && valorPromocao; else noPromotion">
+                    <p>{{ 'registerCancel.dontMissOut' | translate}} {{this.valorPromocao | currency}}</p>
+                </ng-container>
+                <ng-template #noPromotion>
+                    <p>{{ 'registerCancel.youreAlmostThere' | translate}}</p>
+                </ng-template>
+            </div>
+            <div class="modal-footer-he">
+                <button type="button" class="btn btn-custom btn-block btn-cadastrar" (click)="registerOpen()">{{ 'registerCancel.continue' | translate }}</button>
+                <button type="button" class="btn btn-secondary btn-cancel" (click)="cancelModal()">{{ 'registerCancel.cancel' | translate }}</button>
+            </div>
+        </div>
+    </div>
 </div>

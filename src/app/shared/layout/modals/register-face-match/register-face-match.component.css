@@ -67,6 +67,11 @@ p {
     cursor: pointer;
 }
 
+.btn-close {
+    padding-right: 16px;
+    color: rgba(var(--foreground-rgb), 0.7)
+}
+
 .btn-custom:hover{
     background-color: var(--highlight);
     width: 100%;
