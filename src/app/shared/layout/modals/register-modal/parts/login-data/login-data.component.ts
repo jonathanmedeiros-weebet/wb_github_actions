@@ -373,6 +373,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     }
 
     private async prepareSubmitData() {
+        this.form.get('nomeCompleto').patchValue(this.form.get('nome').value);
         let values = this.form.value;
         if (Object.keys(this.parameters).length) {
             values.parameters = this.parameters;
@@ -403,7 +404,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     async submit() {
         const values = await this.prepareSubmitData();
         this.submitting = true;
-
+        this.stepService.changeFormValid(false);
         this.clientesService
             .cadastrarCliente(values)
             .subscribe(
