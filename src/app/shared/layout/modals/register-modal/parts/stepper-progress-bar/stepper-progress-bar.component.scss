@@ -26,7 +26,6 @@
 
 .active {
     border-bottom: 1px solid var(--highlight);
-
     .circle {
         background: var(--highlight);
     }
@@ -34,7 +33,6 @@
 
 .deactived {
     border-bottom: 1px solid rgba(255, 255, 255, 0.20);
-
     .circle {
         background: rgba(255, 255, 255, 0.50);
     }

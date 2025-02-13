@@ -24,7 +24,6 @@ import { skip } from 'rxjs/operators';
     styleUrls: ['./login-data.component.scss']
 })
 export class LoginDataComponent extends BaseFormComponent implements OnInit {
-
     @ViewChild('ativacaoCadastroModal', { static: true }) ativacaoCadastroModal;
     @Input() data: any;
     @ViewChild('captchaRef') captcha: RecaptchaComponent;
@@ -68,6 +67,9 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     showLoading = true;
     isStrengthPassword: boolean | null;
     validPassword: boolean = false;
+    fullRegistration = true;
+    private previousUrl: string;
+    passwordRequirements: string[] = [];
 
     requirements = {
         minimumCharacters: false,
@@ -75,11 +77,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         lowercaseLetter: false,
         specialChar: false,
     };
-
-    fullRegistration = true;
-    private previousUrl: string;
-
-    passwordRequirements: string[] = [];
 
     constructor(private stepService: StepService,
         public activeModal: NgbActiveModal,
@@ -166,6 +163,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             } else {
                 this.showLoading = true;
             }
+            
             if (this.form.valid) {
                 this.stepService.changeFormValid(true);
             } else {
@@ -184,7 +182,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
 
         this.route.queryParams
             .subscribe((params) => {
-
                 if (params.ref || params.afiliado) {
                     const codigoAfiliado = params.ref ?? params.afiliado;
                     this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
@@ -493,7 +490,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
         }
     }
-    
+
     returnRequirementsValue() {
         return Object.values(this.requirements).filter(value => value).length;
     }

@@ -186,7 +186,6 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                 });
             }
         }
-
     }
 
     async submit() {
