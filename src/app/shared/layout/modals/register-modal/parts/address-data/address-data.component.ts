@@ -58,6 +58,7 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
       bairro: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(safePattern)]],
       cidade: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(safePattern)]],
       estado: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(safePattern)]],
+      uf: [''],
       pais: ['Brasil', [Validators.required, Validators.maxLength(60), Validators.pattern(safePattern)]],
       complemento: ['',[Validators.maxLength(60), Validators.pattern(safePattern)]],
       cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8),Validators.pattern(safePattern)]],
@@ -103,6 +104,7 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
           if (!endereco.erro) {
             let estadoLocal: Estado;
             for (let estado of this.estados) {
+              console.log(estado)
               if (estado.uf == endereco.uf) {
                 estadoLocal = estado;
               }
