@@ -121,7 +121,7 @@
         <ng-container *ngTemplateOutlet="registerErrorTemplate" />
     </div>
     <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
-        <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px'}">
+        <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px','padding-bottom': '24px'}">
             <re-captcha class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha"
                 (resolved)="resolved($event)" errorMode="handled" size="invisible"></re-captcha>
             {{ 'register.protectedByReCaptchaPart1' | translate }}
@@ -135,7 +135,7 @@
         <ng-container *ngTemplateOutlet="registerErrorTemplate" />
     </div>
     <div class="row" *ngIf="!provedorCaptcha">
-        <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px'}">
+        <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px','padding-bottom': '24px'}">
             <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de
                 Privacidade</a> do Google e os
             <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de
