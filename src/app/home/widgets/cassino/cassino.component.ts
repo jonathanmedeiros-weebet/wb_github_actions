@@ -13,6 +13,7 @@ export class CassinoComponent implements OnInit {
     @ViewChildren('scrollGames') gamesScroll: QueryList<ElementRef>;
     @Input() games = [];
     @Input() title: string;
+    @Input() icon: string;
     @Input() linkAll: string;
     @Input() showLoadingIndicator: boolean;
     @Input() showLoginModal: boolean = true;

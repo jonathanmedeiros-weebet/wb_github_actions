@@ -40,7 +40,7 @@
         <!---->
         <ng-container *ngFor="let widget of widgets">
             <ng-container [ngSwitch]="widget.type">
-                <app-banners pagina="cassino" *ngSwitchCase="'banners'"></app-banners>
+                <app-banners pagina="cassino" *ngSwitchCase="'banner'"></app-banners>
 
                 <ng-container *ngSwitchCase="'search'">
                     <div class="bloco filters" *ngIf="showFilterBox">
@@ -74,6 +74,7 @@
                                 [container]="listagem"
                                 [sectionId]="widget.id"
                                 [title]="widget.name"
+                                [icon]="widget.icon"
                                 [itemsQty]="widget.items.length"
                                 (onSeeAll)="filterGames($event, widget.id, true)"
                                 (onLeft)="scrollLeft(widget.id)"

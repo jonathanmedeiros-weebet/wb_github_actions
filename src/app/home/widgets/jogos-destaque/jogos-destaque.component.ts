@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class JogosDestaqueComponent implements OnInit, OnChanges {
     @Input() title = '';
+    @Input() icon = '';
     @Input() displayLabel = true;
     @Input() isHome = false;
     @Input() games = [];
