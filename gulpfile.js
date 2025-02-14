@@ -1904,15 +1904,6 @@ gulp.task('jjsports.vip', function (done) {
     });
 });
 
-gulp.task('brabet.club', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "brabet.club",
-        banca: "BRABET",
-        styles: "",
-    });
-});
-
 gulp.task('fortunaplay.bet', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
