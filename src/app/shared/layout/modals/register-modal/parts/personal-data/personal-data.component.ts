@@ -212,7 +212,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
 
     onDateChange() {
         if (this.form.value.day && this.form.value.month && this.form.value.year) {
-            const firstDate = `${this.form.value.year}/${this.form.value.month}/${this.form.value.day}`
+            const firstDate = `${this.form.value.year}/${this.form.value.month}/${this.form.value.day}`;
             const data = new Date(firstDate);
             let dataFormatada = `${data.getFullYear()}-${(data.getMonth() + 1).toString().padStart(2, '0')}-${data.getDate().toString().padStart(2, '0')}`;
             this.form.get('nascimento').patchValue(dataFormatada)
