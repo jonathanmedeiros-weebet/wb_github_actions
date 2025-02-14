@@ -17,7 +17,7 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
   @Output() addressData = new EventEmitter<any>;
   @Input() data: any;
 
-  formInvalid = true
+  formInvalid = true;
   form: FormGroup;
   public estados: Array<Estado>;
   public cidades: Array<Cidade>;
