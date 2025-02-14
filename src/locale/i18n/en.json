@@ -282,7 +282,7 @@
         "countryCode": "Code",
         "complement": "Complement",
         "login": "Login",
-        "createAccount": "Create Account",
+        "createAccount": "Create account",
         "passwordRequirements": "Requirements for a secure password:",
         "passwordLevel": "Password level:",
         "weak": "Weak",
