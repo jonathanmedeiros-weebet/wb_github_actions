@@ -120,7 +120,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
             day: [null, !this.autoPreenchimento ? Validators.required : null],
             month: [null, !this.autoPreenchimento ? Validators.required : null],
             year: [null, !this.autoPreenchimento ? Validators.required : null],
-            nationality: ['Brasil', [Validators.required]],
+            nationality: [26, [Validators.required]],
             gender: [null, [Validators.required]],
             nascimento: [null, !this.autoPreenchimento ? Validators.required : null]
         })

@@ -47,7 +47,7 @@
                                             <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial"
                                                 class="form-control style-select" formControlName="day"
                                                 (change)="onDateChange()">
-                                                <option value="dia">{{'register.day' | translate}}</option>
+                                                <option [ngValue]="null">{{'register.day' | translate}}</option>
                                                 <option *ngFor="let day of days" [value]="day">{{ day }}</option>
                                             </select>
                                         </div>
@@ -57,7 +57,7 @@
                                             <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial"
                                                 class="form-control style-select" formControlName="month"
                                                 (change)="onDateChange()">
-                                                <option value="mes">{{'register.month' | translate}}</option>
+                                                <option [ngValue]="null">{{'register.month' | translate}}</option>
                                                 <option *ngFor="let month of months" [value]="month.value">{{ month.name
                                                     }}</option>
                                             </select>
@@ -68,7 +68,7 @@
                                             <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial"
                                                 class="form-control style-select" formControlName="year"
                                                 (change)="onDateChange()">
-                                                <option value="ano">{{'register.year' | translate}}</option>
+                                                <option [ngValue]="null">{{'register.year' | translate}}</option>
                                                 <option *ngFor="let year of years" [value]="year">{{ year }}</option>
                                             </select>
                                         </div>
