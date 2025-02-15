@@ -22,6 +22,7 @@ type iBilheteEsportivo = {
     jogo: {
         _id: string;
         event_id: string;
+        sport_id: number;
         nome: string;
         time_a_nome: string;
         time_a_img: string | null;
@@ -142,7 +143,7 @@ export class JogoService {
                 if (res.cotacao) {
                     convertedItemToBet.push({
                         ao_vivo: item.ao_vivo,
-                        jogo_id: item.jogo_api_id,
+                        jogo_id: item.jogo_fi,
                         jogo_event_id: item.jogo_api_id,
                         jogo_nome: `${item.time_a_nome} x ${item.time_b_nome}`,
                         cotacao: {
@@ -150,8 +151,9 @@ export class JogoService {
                             valor: res.cotacao
                         },
                         jogo: {
-                            _id: item.jogo_api_id,
+                            _id: item.jogo_fi,
                             event_id: item.jogo_api_id,
+                            sport_id: item.sport,
                             nome: `${item.time_a_nome} x ${item.time_b_nome}`,
                             time_a_nome: item.time_a_nome,
                             time_a_img: null,
