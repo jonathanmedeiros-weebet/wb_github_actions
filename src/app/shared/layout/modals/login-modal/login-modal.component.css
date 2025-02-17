@@ -8,21 +8,39 @@
     max-width: 600px;
 }
 
-.modal-header {
-    border-bottom-color: transparent !important;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.container-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 24px;
+    background-color: var(--background);
+    gap:14px
 }
 
-.btn-close {
-    margin-right: 10px;
-    background: none;
+.content-body {
+    display: flex;
+    flex-direction: column;
+    gap: 69px;
+    align-items: center;
 }
 
-.btn-close i {
-    fill: rgb(var(--foreground-inputs-odds-rgb),0.5);
-    color: rgb(var(--foreground-inputs-odds-rgb),0.5);
+.container-modal-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
 }
+
+.header-login {
+    color: var(--foreground);
+    height: 35px;
+    display: flex;
+    justify-items: flex-end;
+    justify-content: end;
+    margin-top: 16px;
+}
+
 
 .modal-body {
     padding: 0px 33px;
@@ -79,8 +97,7 @@ asl-google-signin-button {
 
 .registrar {
     font-size: 12px;
-    margin-top: 69px;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .registrar a {
@@ -116,7 +133,7 @@ asl-google-signin-button {
     border-radius: 4px;
     border: 1px solid rgba(var(--foreground-inputs-odds-rgb), 30%);
     color: 1px solid rgba(var(--foreground-inputs-odds-rgb), 30%);
-    font-size: 14px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -214,17 +231,6 @@ asl-google-signin-button {
 
 .label-login {
     color: rgba(var(--foreground-inputs-odds-rgb),30%);
-}
-
-.label-kindLogin {
-    text-align: start;
-    display: flex;
-    color: rgba(var(--foreground-inputs-odds-rgb), 30%);
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    padding-bottom: 8px;
 }
 
 .form-group input {
@@ -365,5 +371,31 @@ button {
 @keyframes l13 {
     100% {
         transform: rotate(1turn)
+    }
+}
+
+@media only screen and (min-width: 375px) {
+    .login-mode label {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (min-width:768px) {
+    .container-modal-login {
+        gap: 69px;
+        background-color: var(--background) !important;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .container {
+        min-height: 572px;
+        padding: 0 24px;
+    }
+}
+
+@media only screen and (min-width:1440px) {
+    .container-modal-login {
+        background-color: var(--background) !important;
     }
 }
