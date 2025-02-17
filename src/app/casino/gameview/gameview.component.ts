@@ -497,7 +497,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                             this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         } else {
                             this.htmlGame = response.htmlGame;
-                            console.log(this.htmlGame)
                         }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
@@ -517,9 +516,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     onIframeLoad(iframe: HTMLIFrameElement) {
         var doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.open();
-        doc.write(this.htmlGame);
-        doc.close();
+        if (this.htmlGame) {
+            doc.open();
+            doc.write(this.htmlGame);
+            doc.close();
+        }
     }
 
     handleError(error: string) {
