@@ -84,11 +84,6 @@ select:focus {
     flex: 1;
 }
 
-.input-md:hover {
-    border: 1px solid var(--highlight);
-    border-radius: 5px;
-}
-
 .input-md:has(input[type="radio"]:checked) {
     border: 1px solid var(--highlight);
     border-radius: 5px;
