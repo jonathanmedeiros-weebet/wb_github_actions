@@ -159,6 +159,10 @@ input[type=radio] {
     opacity: 1;
 }
 
+.label-gender {
+    color: rgba(var(--foreground-inputs-odds-rgb), .3);
+}
+
 @media screen and (max-width: 320px) {
     .radio-custom {
         font-size: 10px;

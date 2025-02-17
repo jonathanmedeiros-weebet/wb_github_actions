@@ -1,11 +1,10 @@
 <div class="modal-header">
-    <img class="logo-modal" [src]="LOGO" alt="">
     <a type="button" class="btn-close" aria-label="Close" (click)="toClose()">
         <i class="fa fa-times"></i>
     </a>
 </div>
 
-<div class="modal-body" [ngStyle]="{'padding-top': loginGoogle ? '10px' : '40px'}">
+<div class="modal-body" [ngStyle]="{'padding-top': loginGoogle ? '10px' : '0px'}">
     <div *ngIf="isVPN; else normalView">
         <p style="margin-bottom: 30px">
             {{ 'geral.vpn' | translate }}
@@ -14,28 +13,47 @@
 
     <ng-template #normalView>
         <div class="modal-body-content" *ngIf="!isOpening">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <form [formGroup]="form" class="form-login" (ngSubmit)="onSubmit()" novalidate>
                 <span class="space-buttons" *ngIf="loginGoogle">{{'geral.loginGoogle' | translate}}</span>
                 <asl-google-signin-button type='standard' size='large' text='signin_with' logo_alignment='center' *ngIf="loginGoogle"></asl-google-signin-button>
                 <div class="text-line" *ngIf="loginGoogle">
                     <span>OU</span>
                 </div>
-                <div class="login-mode" *ngIf="modoClienteHabilitado">
-                    <label *ngIf="modoClienteHabilitado">
-                        <input type="radio" formControlName="loginMode" value="email" (change)="setLoginMode('email')">
-                        <span class="radio-custom"></span>
-                        {{ 'geral.loginEmail' | translate }}
-                    </label>
-                    <label *ngIf="modoClienteHabilitado">
-                        <input type="radio" formControlName="loginMode" value="phone" (change)="setLoginMode('phone')">
-                        <span class="radio-custom"></span>
-                        {{ 'geral.loginPhone' | translate }}
-                    </label>
-                    <label *ngIf="modoCambistaHabilitado">
-                        <input type="radio" formControlName="loginMode" value="agent" (change)="setLoginMode('agent')">
-                        <span class="radio-custom"></span>
-                        {{ 'geral.loginUsername' | translate }}
-                    </label>
+                <div  *ngIf="modoClienteHabilitado">
+                    <div>
+                        <div class="label-doLogin">
+                           <span>
+                            Faça login para acessar suas apostas e jogos favoritos!
+                           </span>
+                        </div>
+                        <span class="label-kindLogin">
+                            {{ 'geral.kindLogin' |translate }}
+                        </span>
+                        <div class="login-mode">
+                        <label *ngIf="modoClienteHabilitado">
+                            <input type="radio" formControlName="loginMode" value="phone" (change)="setLoginMode('phone')">
+                            <span class="radio-custom"></span>
+                            <span class="label-login">
+                                {{ 'geral.loginPhone' | translate }}
+                            </span>
+                        </label>
+                        <label *ngIf="modoClienteHabilitado">
+                            <input type="radio" formControlName="loginMode" value="email" (change)="setLoginMode('email')">
+                            <span class="radio-custom"></span>
+                            <span class="label-login">
+                                {{ 'geral.loginEmail' | translate }}
+                            </span>
+                        </label>
+                        <label *ngIf="modoCambistaHabilitado">
+                            <input type="radio" formControlName="loginMode" value="agent" (change)="setLoginMode('agent')">
+                            <span class="radio-custom"></span>
+                            <span class="label-login">
+                                {{ 'geral.loginUsername' | translate }}
+                            </span>
+                
+                        </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group mb-4">
@@ -67,6 +85,10 @@
                     <app-error-msg [control]="form.get('password')" label="{{'geral.senha' | translate}}" class="text-left"></app-error-msg>
                 </div>
 
+                <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">
+                    {{'geral.esqueceuASenha' | translate}}
+                </a>
+
                 <button *ngIf="!btnDisabled; else btnProcessando"  type="submit" class="btn btn-custom btn-block">
                     {{'geral.entrar' | translate}}
                 </button>
@@ -78,9 +100,6 @@
                 </ng-template>
             </form>
 
-            <a (click)="abrirRecuperarSenha()" style="cursor: pointer" class="esqueceu-senha" *ngIf="modoClienteHabilitado">
-                {{'geral.esqueceuASenha' | translate}}
-            </a>
         </div>
 
         <div class="registrar" *ngIf="modoClienteHabilitado">

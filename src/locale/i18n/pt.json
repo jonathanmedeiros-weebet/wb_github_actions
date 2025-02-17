@@ -263,7 +263,7 @@
         "resetarSenha": "Resetar senha",
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
-        "loginUsername": "Nome de usuário",
+        "loginUsername": "Usuário",
         "field": "Campo",
         "or": "OU",
         "geolocationError": "Por favor, verifique a configuração de localização do seu navegador e tente novamente.",
@@ -292,7 +292,8 @@
         "passwordLevel": "Nivel da senha:",
         "weak": "Fraco",
         "medium": "Médio",
-        "strong": "Forte"
+        "strong": "Forte",
+        "kindLogin": "Tipo de login"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",

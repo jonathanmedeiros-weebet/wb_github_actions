@@ -287,7 +287,8 @@
         "passwordLevel": "Password level:",
         "weak": "Weak",
         "medium": "Medium",
-        "strong": "Strong"
+        "strong": "Strong",
+        "kindLogin": "Login with"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",

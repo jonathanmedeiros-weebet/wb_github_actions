@@ -2,12 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, MessageService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Router } from '@angular/router';
 
 import {config} from '../../../config';
+import { RegisterModalComponentComponent } from '../register-modal/register-modal-component/register-modal-component.component';
 
 @Component({
     selector: 'app-esqueceu-senha-modal',
@@ -19,6 +20,7 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
     unsub$ = new Subject();
     submitting = false;
     LOGO = config.LOGO;
+    modalRef;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -26,6 +28,7 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
         private messageService: MessageService,
         private auth: AuthService,
         private router: Router,
+        private modalService: NgbModal,
     ) {
         super();
     }
@@ -68,4 +71,18 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
     handleError(error: string) {
         this.messageService.error(error);
     }
+
+    abrirCadastro() {
+            this.activeModal.dismiss();
+    
+            this.modalRef = this.modalService.open(
+                RegisterModalComponentComponent,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    size: 'md',
+                    centered: true,
+                    windowClass: 'modal-400 modal-cadastro-cliente'
+                }
+            );
+        }
 }

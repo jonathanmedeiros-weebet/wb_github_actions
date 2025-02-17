@@ -10,6 +10,10 @@
     width: 400px !important;
 }
 
+.background-modal {
+    background-color: var(--background);
+}
+
 .container {
     display: flex;
     flex-direction: column;

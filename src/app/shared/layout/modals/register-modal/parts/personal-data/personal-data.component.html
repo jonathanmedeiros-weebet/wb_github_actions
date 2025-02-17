@@ -90,9 +90,9 @@
                                 <div>
                                     <div>
                                         <div class="select-nationality">
-                                            <select class="form-control style-select" formControlName="nationality">
+                                            <select class="form-control style-select" formControlName="nationality" style="font-size: 12px;">
                                                 <option selected [value]="26">{{'register.brasil' | translate}}</option>
-                                                <option *ngFor="let nationality of nationalities"
+                                                <option *ngFor="let nationality of nationalities" 
                                                     [value]="nationality.value">{{ nationality.name }}</option>
                                             </select>
                                         </div>
@@ -120,7 +120,7 @@
                                                     <span class="radio-custom"></span>
                                                 </div>
                                                 <div>
-                                                    <span>{{'genero.masculino' | translate}}</span>
+                                                    <span class="label-gender">{{'genero.masculino' | translate}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,7 +139,7 @@
                                                     <span class="radio-custom"></span>
                                                 </div>
                                                 <div>
-                                                    <span>{{'genero.feminino' | translate}}</span>
+                                                    <span class="label-gender">{{'genero.feminino' | translate}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,7 +158,7 @@
                                                     <span class="radio-custom"></span>
                                                 </div>
                                                 <div>
-                                                    <span>{{'genero.outros' | translate}}</span>
+                                                    <span class="label-gender">{{'genero.outros' | translate}}</span>
                                                 </div>
                                             </div>
                                         </div>

@@ -111,7 +111,7 @@ button {
     position: absolute;
     top: calc(50% - 16px);
     right: 0;
-    color: var(--foreground-inputs-odds);
+    color: rgba(var(--foreground-inputs-odds-rgb),0.3);
     cursor: pointer;
     padding: 10px;
 }
@@ -275,6 +275,7 @@ a.link-termos-politica {
 .unfulfilled {
     opacity: 0.6;
 }
+
 
 @media only screen and (max-width: 1024px) {
     .modal-body {

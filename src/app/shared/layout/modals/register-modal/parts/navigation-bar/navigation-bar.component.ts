@@ -25,6 +25,8 @@ export class NavigationBarComponent {
     }
 
     next() {
-        this.stepService.next();
+        if (this.formValid) {
+            this.stepService.next();
+        }
     }
 }

@@ -26,7 +26,7 @@ export class BlockPeerAttempsModalComponent {
       ? { windowClass: 'modal-fullscreen' }
       : {
         ariaLabelledBy: 'modal-basic-title',
-        windowClass: 'modal-550 modal-h-350',
+        windowClass: 'modal-400',
         centered: true,
       };
 

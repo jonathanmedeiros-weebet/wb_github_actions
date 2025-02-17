@@ -373,7 +373,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         } else {
             options = {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
+                windowClass: 'modal-400',
                 centered: true,
             };
         }

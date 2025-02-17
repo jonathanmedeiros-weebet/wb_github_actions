@@ -1,5 +1,4 @@
 <div class="modal-header">
-    <img [src]="LOGO" class="logo-modal" alt="">
     <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <i class="fa fa-times"></i>
     </a>
@@ -7,13 +6,22 @@
 <div class="modal-body">
     <h2>{{'senhas.redefinirSenha' | translate}}</h2>
     <p>{{'senhas.informeSeuEmail' | translate}}</p>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-        <div class="form-group mb-4">
-            <input type="text" class="form-control inverted-out" formControlName="email"
-                   [ngClass]="applyCssInputError('email')" placeholder="{{'geral.email' | translate}}">
-            <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}" class="text-left"></app-error-msg>
+    <div class="form-forgot-password">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="form-forgot">
+            <div class="input-md">
+                <input type="text" class="form-control inverted-out" formControlName="email" id="email"
+                    [ngClass]="applyCssInputError('email')">
+                <label for="email">{{'geral.email' | translate}}</label>
+                <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
+                    class="text-left"></app-error-msg>
+            </div>
+            <button type="submit" class="btn btn-custom btn-block"
+                [disabled]="submitting">{{'senhas.solicitarCodigoRedefinicao' | translate}}</button>
+        </form>
+        <div class="registrar">
+            {{'geral.naoPossuiUmaConta' | translate}}
+            <a (click)="abrirCadastro()" style="cursor: pointer" class="">{{'geral.registreSe' | translate}}</a>
         </div>
-        <button type="submit" class="btn btn-custom btn-block" [disabled]="submitting">{{'senhas.solicitarCodigoRedefinicao' | translate}}</button>
-    </form>
+    </div>
 </div>
 

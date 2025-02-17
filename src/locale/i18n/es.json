@@ -287,7 +287,8 @@
         "passwordLevel": "Nivel de la contraseña:",
         "weak": "Debil",
         "medium": "Medio",  
-        "strong": "Fuerte"
+        "strong": "Fuerte",
+        "kindLogin": "Iniciar sesión con"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",

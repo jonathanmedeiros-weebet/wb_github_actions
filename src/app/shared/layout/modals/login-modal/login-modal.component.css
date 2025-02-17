@@ -9,7 +9,7 @@
 }
 
 .modal-header {
-    border-bottom-color: var(--foreground);
+    border-bottom-color: transparent !important;
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -19,9 +19,16 @@
     background: none;
 }
 
+.btn-close i {
+    fill: rgb(var(--foreground-inputs-odds-rgb),0.5);
+    color: rgb(var(--foreground-inputs-odds-rgb),0.5);
+}
+
 .modal-body {
+    padding: 0px 33px;
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    padding: 10px 80px 15px;
     height: auto;
 }
 
@@ -66,14 +73,13 @@ asl-google-signin-button {
 .esqueceu-senha {
     color: var(--highlight);
     font-size: 12px;
-    display: block;
-    margin: 26px 0 20px;
+    text-align: end;
     text-decoration: none;
 }
 
 .registrar {
     font-size: 12px;
-    margin-top: 25px;
+    margin-top: 69px;
     margin-bottom: 10px;
 }
 
@@ -85,27 +91,64 @@ asl-google-signin-button {
     position: absolute;
     top: calc(50% - 16px);
     right: 0;
-    color: var(--foreground-inputs-odds);
+    color: rgb(var(--foreground-inputs-odds-rgb),0.3);
     cursor: pointer;
     padding: 10px;
 }
 
 .login-mode {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 24px;
-    margin-bottom: 18px;
+    gap: 6px;
+    flex: 1 0 0;
+    align-self: stretch;
+    color: 1px solid rgba(var(--foreground-inputs-odds-rgb),30%);
 }
 
 .login-mode label {
     display: flex;
+    flex: 1;
+    padding: 14px 10px;
+    justify-content: center;
     align-items: center;
-    cursor: pointer;
+    gap: 7px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid rgba(var(--foreground-inputs-odds-rgb), 30%);
+    color: 1px solid rgba(var(--foreground-inputs-odds-rgb), 30%);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
+
+.label-doLogin span {
+    padding-bottom: 28px;
+    display: flex;
+    color: (var(--foreground-inputs-odds-rgb)) !important;
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: 120% !important;
+    text-align: start !important;
+    align-self: stretch;
+
+}
+
+.login-mode label:has(input[type="radio"]:checked) {
+    border: 1px solid var(--highlight);
+    color: var(--foreground-inputs-odds-rgb);
+}
+
 
 .login-mode input[type="radio"] {
     display: none;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .radio-custom {
@@ -145,6 +188,10 @@ asl-google-signin-button {
     border-color: var(--highlight);
 }
 
+.login-mode input[type="radio"]:checked+.input-md label {
+    color: var(--foreground-inputs-odds-rgb) !important;
+}
+
 .login-mode input[type="radio"]:checked+.radio-custom::after {
     opacity: 1;
 }
@@ -157,20 +204,37 @@ asl-google-signin-button {
     color: #aaa;
 }
 
-@media only screen and (max-width: 1024px) {
-    .modal-body {
-        text-align: center;
-        padding: 40px 25px 15px;
-
-        display: flex;
-        flex-direction: column;
-    }
-
-    .modal-body .modal-body-content {
-        flex: 1;
-    }
+.input-md input {
+    color: rgba(var(--foreground-inputs-odds-rgb),30%);
+    border: 1px solid rgba(var(--foreground-inputs-odds-rgb),30%);
+}
+.input-md label {
+    color: rgba(var(--foreground-inputs-odds-rgb),30%);
 }
 
+.label-login {
+    color: rgba(var(--foreground-inputs-odds-rgb),30%);
+}
+
+.label-kindLogin {
+    text-align: start;
+    display: flex;
+    color: rgba(var(--foreground-inputs-odds-rgb), 30%);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 8px;
+}
+
+.form-group input {
+    color: rgba(var(--foreground-inputs-odds-rgb),30%);
+}
+
+
+.modal-body .modal-body-content {
+    flex: 1;
+} 
 
 h3 {
     font-size: 16px;
@@ -188,12 +252,6 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.modal-header {
-    border-bottom-color: var(--foreground);
-    padding-top: 20px;
-    padding-bottom: 20px;
 }
 
 .modal-title {
@@ -247,7 +305,6 @@ button {
 }
 
 .btn-custom {
-    margin-top: 10px;
     width: 100%;
 }
 
