@@ -1167,7 +1167,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '43px');
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100% - 132px)');
+
+                this.layoutService.currentIndiqueGanheCardHeight.subscribe(indiqueGanheHeight => {
+                    const newHeight = 132 + indiqueGanheHeight;
+                    this.renderer.setStyle(gameFrame, 'height', `calc(100% - ${newHeight}px)`);
+                });
             }
         }
 
