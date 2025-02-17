@@ -216,7 +216,8 @@
     "betmania.casino": "gulp betmania.casino",
     "buda-bet.com": "gulp buda-bet.com",
     "zedocash.bet": "gulp zedocash.bet",
-    "sortte.bet": "gulp sortte.bet"
+    "sortte.bet": "gulp sortte.bet",
+    "timedasorte.com": "gulp timedasorte.com"
   },
   "private": true,
   "dependencies": {

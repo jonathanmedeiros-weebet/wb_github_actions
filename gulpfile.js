@@ -2170,3 +2170,12 @@ gulp.task('sortte.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('timedasorte.com', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "timedasorte.com",
+        banca: "TIME DA SORTE",
+        styles: ""
+    });
+});
