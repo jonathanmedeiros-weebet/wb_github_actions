@@ -72,7 +72,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     private casinoRelatedGamesQuantity: number = 15;
     showModalFlag: boolean = false;
     modalMessage: string = '';
-    posicaoFinanceira;
     avisoCancelarBonus = false;
     modalRef;
     unsub$ = new Subject();
@@ -141,7 +140,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.getGameList();
         this.isLoggedIn = this.auth.isLoggedIn();
         if (this.isLoggedIn) {
-            this.getPosicaoFinanceira()
+            this.getPosicaoFinanceiraBonus()
         }
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://wb-assets.com/img/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
@@ -180,7 +179,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (intercomBtnChat) {
             this.renderer.setStyle(intercomBtnChat, 'display', 'none');
         }
-        
+
         const intercomContainer = this.document.querySelector('#intercom-container');
         if (intercomContainer) {
             this.renderer.setStyle(intercomContainer, 'display', 'none');
@@ -253,7 +252,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
 
-            if (this.avisoCancelarBonus === false) {
+            if (this.avisoCancelarBonus == false) {
                 this.loadGame();
             }
 
@@ -939,13 +938,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.modalService.open(DepositoComponent);
     }
 
-    getPosicaoFinanceira() {
+    getPosicaoFinanceiraBonus() {
         this.auth.getPosicaoFinanceira()
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 posicaoFinanceira => {
-                    this.posicaoFinanceira = posicaoFinanceira.bonus;
-                    if (this.posicaoFinanceira > 0 && this.posicaoFinanceira < 1) {
+                    if (posicaoFinanceira.bonus > 0 && posicaoFinanceira.bonus < 1) {
                         this.avisoCancelarBonus = true;
                         if (this.gameMode === 'REAL') {
                             this.abriModalContinuarJogando();
@@ -976,7 +974,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     continuarBonus() {
-        this.avisoCancelarBonus = false;
         this.modalRef.close();
     }
 
@@ -984,8 +981,8 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.financeiroService.cancelarBonusAtivos()
             .subscribe(
                 response => {
-                    this.avisoCancelarBonus = false;
                     this.modalRef.close();
+                    this.loadGame();
                 },
                 error => {
                     this.handleError(error);
@@ -1172,7 +1169,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 this.renderer.setStyle(gameFrame, 'margin-top', '43px');
 
                 this.layoutService.currentIndiqueGanheCardHeight.subscribe(indiqueGanheHeight => {
-                    const newHeight = 135 + indiqueGanheHeight;
+                    const newHeight = 132 + indiqueGanheHeight;
                     this.renderer.setStyle(gameFrame, 'height', `calc(100% - ${newHeight}px)`);
                 });
             }
