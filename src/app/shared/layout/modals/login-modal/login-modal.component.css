@@ -314,10 +314,6 @@ button {
     width: 100%;
 }
 
-input {
-    caret-color: transparent;
-}
-
 .btn-cancel {
     background-color: transparent;
     margin-top: 5px;

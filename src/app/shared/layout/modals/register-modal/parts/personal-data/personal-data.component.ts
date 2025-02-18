@@ -184,9 +184,6 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                         if (error?.code === 'cpfInformadoNaoExiste') {
                             this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
                             this.form.controls['cpf'].updateValueAndValidity();
-                        } else if (error?.code === 'cpfInformadoJaExiste'){
-                            this.messageService.error(error.message);
-                            this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
                         } else {
                             this.messageService.error(error);
                         }
@@ -200,6 +197,21 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                 });
             }
         }
+
+        this.clientesService.validateCpfAlreadyExists(cpf).subscribe(
+            res => {
+            },
+            error => {
+                this.cpfValidado = false;
+                this.form.patchValue({ nome: '' });
+                if (error?.code === 'cpfInformadoJaExiste'){
+                    this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
+                    this.form.controls['cpf'].updateValueAndValidity();
+                } else {
+                    this.messageService.error(error);
+                }
+            }
+        );
     }
 
     async submit() {
