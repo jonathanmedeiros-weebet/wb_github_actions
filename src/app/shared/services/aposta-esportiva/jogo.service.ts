@@ -134,12 +134,24 @@ export class JogoService {
             );
     }
 
+    getLiveOdd(id: number, chave: string): Observable<Cotacao[]> {
+        const url = `${this.JogoUrl}/ao-vivo/${id}/cotacoes/${chave}`;
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     public async convertItemToBet(itens) {
         let convertedItemToBet: iBilheteEsportivo[] = [];
 
         const promises = itens.map(async (item) => {
             try {
-                const res: any = await this.getCotacao(item.jogo_api_id, item.aposta_tipo.chave).toPromise();
+                const res: any = item.ao_vivo ?
+                await this.getLiveOdd(item.jogo_api_id, item.aposta_tipo.chave).toPromise()
+                : await this.getCotacao(item.jogo_api_id, item.aposta_tipo.chave).toPromise();
                 if (res.cotacao) {
                     convertedItemToBet.push({
                         ao_vivo: item.ao_vivo,

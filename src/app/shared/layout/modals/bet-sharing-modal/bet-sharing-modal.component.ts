@@ -17,7 +17,6 @@ export class BetSharingModalComponent implements OnInit, OnDestroy {
     LOGO = config.LOGO;
     SLUG = config.SLUG;
 
-    @ViewChild('bilheteCompartilhamento', { static: false }) bilheteCompartilhamento;
     @Input() bet;
 
     unsub$ = new Subject();
@@ -104,7 +103,7 @@ export class BetSharingModalComponent implements OnInit, OnDestroy {
     canRepeatBet(bet) {
         const hasItemWithResult = bet.itens.some((item: any) => item.resultado);
 
-        if (hasItemWithResult || bet.resultado) {
+        if (hasItemWithResult || bet.resultado || bet.data_liquidacao) {
             return false;
         }
 
