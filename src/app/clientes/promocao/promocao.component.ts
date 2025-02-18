@@ -165,30 +165,30 @@ export class PromocaoComponent extends BaseFormComponent implements OnInit {
         );
     }
 
-    cancelarBonus(rolloverId) {
-        this.modalRef = this.modalService.open(CanceledBonusConfirmComponent, {
-            ariaLabelledBy: 'modal-basic-title',
-            size: 'md',
-            centered: true,
-            windowClass: 'modal-537 modal-cadastro-cliente'
-        });
-
-        this.modalRef.result.then(
-            () => {
-                this.financeiroService.cancelarBonus(rolloverId)
-                    .subscribe(
-                        response => {
-                            this.messageService.success('Bônus Cancelado');
-                            this.submit();
-                            this.getRollovers();
-                        },
-                        error => {
-                            this.handleError(error);
-                        }
-                    );
-            }
-        );
-    }
+    // cancelarBonus(rolloverId) {
+    //     this.modalRef = this.modalService.open(CanceledBonusConfirmComponent, {
+    //         ariaLabelledBy: 'modal-basic-title',
+    //         size: 'md',
+    //         centered: true,
+    //         windowClass: 'modal-537 modal-cadastro-cliente'
+    //     });
+    //
+    //     this.modalRef.result.then(
+    //         () => {
+    //             this.financeiroService.cancelarBonus(rolloverId)
+    //                 .subscribe(
+    //                     response => {
+    //                         this.messageService.success('Bônus Cancelado');
+    //                         this.submit();
+    //                         this.getRollovers();
+    //                     },
+    //                     error => {
+    //                         this.handleError(error);
+    //                     }
+    //                 );
+    //         }
+    //     );
+    // }
 
     filtrarPorStatus() {
         let statusSelecionado = this.form.get('status').value.toLowerCase();

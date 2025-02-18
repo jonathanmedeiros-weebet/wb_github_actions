@@ -193,13 +193,13 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
             if (allowed) {
                 let localeState = localStorage.getItem('locale_state');
-    
+
                 if (this.restrictionStateBet != localeState) {
                     msg = this.translate.instant('geral.stateRestriction');
                     allowed = false;
                 }
             }
-        }       
+        }
 
         if (allowed) {
             const formData = this.form.value;
@@ -212,6 +212,16 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(
                     async (res) => {
+                        if (
+                            Boolean(res) &&
+                            Boolean(res.results) &&
+                            Boolean(res.results.migracao)
+                        ) {
+                            this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
+                            this.activeModal.dismiss();
+                            return;
+                        }
+
                         const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && (this.paramsLocais.getOpcoes().legitimuz_token || this.paramsLocais.getOpcoes().dockCheck_token));
                         let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
 
@@ -225,16 +235,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                                 return;
                             }
                             localStorage.setItem('user', JSON.stringify(holdUser));
-                        }
-
-                        if (
-                            Boolean(res) &&
-                            Boolean(res.results) &&
-                            Boolean(res.results.migracao)
-                        ) {
-                            this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
-                            this.activeModal.dismiss();
-                            return;
                         }
 
                         if (

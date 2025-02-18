@@ -46,7 +46,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     modoCambista = false;
     headerHeight = 92;
     private geolocation: BehaviorSubject<Geolocation> = new BehaviorSubject<Geolocation>(undefined);
-    
+
     constructor(
         private sidebarService: SidebarService,
         private auth: AuthService,
@@ -234,7 +234,11 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Finalizar aposta */
     async create() {
         this.disabledSubmit();
-        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+
+        let geolocation = null;
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+            geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+        }
 
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {

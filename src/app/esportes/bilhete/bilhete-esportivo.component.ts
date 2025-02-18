@@ -399,7 +399,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 valido = false;
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
-            
+
             if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
                 const saveLocation = await this.geolocationService.saveLocalStorageLocation();
 
@@ -419,7 +419,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                     msg = this.translate.instant('geral.stateRestriction');
                 }
             }
-            
+
             if (valido) {
                 if (this.isLoggedIn) {
                     let values = await this.ajustarDadosParaEnvio();
@@ -669,9 +669,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     async ajustarDadosParaEnvio() {
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
         const values = clone(this.form.value);
-        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
 
-        values['geolocation'] = geolocation;
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+            const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+            values['geolocation'] = geolocation;
+        }
+
         values['ibge_code'] = localStorage.getItem('ibge_code');
         values['locale_city'] = localStorage.getItem('locale_city');
         values['locale_state'] = localStorage.getItem('locale_state');
