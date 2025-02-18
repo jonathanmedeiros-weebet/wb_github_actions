@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { DefaultUrlSerializer } from '@angular/router';
@@ -10,7 +10,7 @@ import { AuthService } from './../auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class WelcomeGuard implements CanActivate {
+export class WelcomeGuard  {
 
     constructor(private router: Router) {}
       

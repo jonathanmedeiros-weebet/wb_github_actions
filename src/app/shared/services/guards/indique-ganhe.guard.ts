@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 import { ParametrosLocaisService } from '../parametros-locais.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IndiqueGanheGuard implements CanActivate {
+export class IndiqueGanheGuard  {
     constructor(
         private paramsService: ParametrosLocaisService,
         private router: Router
