@@ -320,6 +320,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
     }
 
     success() {
+        this.loading = false;
         this.messageService.success('Alterações realizadas com sucesso!');
     }
 

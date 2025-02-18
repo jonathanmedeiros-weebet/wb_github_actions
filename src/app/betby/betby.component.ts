@@ -117,6 +117,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         const elementChatJivo = document.querySelector('#jivo_custom_widget');
         const elementChatIntercom = document.querySelector('#intercom-container');
         const elementChatIntercomLight = document.querySelector('.intercom-lightweight-app');
+        const elementChatWidget = document.querySelector('#chat-widget-container');
 
         if (elementChat) {
             this.renderer.setStyle(elementChat, 'display', 'none');
@@ -137,6 +138,10 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         if (elementChatIntercomLight) {
             this.renderer.setStyle(elementChatIntercomLight, 'display', 'none');
         }
+
+        if (elementChatWidget) {
+            this.renderer.setStyle(elementChatWidget, 'display', 'none');
+        }
     }
 
     showGtmElements() {
@@ -145,6 +150,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         const elementChatJivo = document.querySelector('#jivo_custom_widget');
         const elementChatIntercom = document.querySelector('#intercom-container');
         const elementChatIntercomLight = document.querySelector('.intercom-lightweight-app');
+        const elementChatWidget = document.querySelector('#chat-widget-container');
 
         if (elementChat) {
             this.renderer.removeStyle(elementChat, 'display');
@@ -164,6 +170,10 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
         if (elementChatIntercomLight) {
             this.renderer.removeStyle(elementChatIntercomLight, 'display');
+        }
+
+        if (elementChatWidget) {
+            this.renderer.removeStyle(elementChatWidget, 'display');
         }
     }
 
