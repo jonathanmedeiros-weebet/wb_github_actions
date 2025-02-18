@@ -173,6 +173,9 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                         if (error?.code === 'cpfInformadoNaoExiste') {
                             this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
                             this.form.controls['cpf'].updateValueAndValidity();
+                        } else if (error?.code === 'cpfInformadoJaExiste'){
+                            this.messageService.error(error.message);
+                            this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
                         } else {
                             this.messageService.error(error);
                         }
