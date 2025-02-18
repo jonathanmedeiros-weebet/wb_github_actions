@@ -57,7 +57,18 @@
     background-color: var(--background);
     border: 0;
     border-radius: 4px;
-    opacity: 0.5;
+}
+
+input {
+    caret-color: transparent;
+}
+
+button{
+    caret-color: transparent;
+}
+
+radio{
+    caret-color: transparent;
 }
 
 .body {
@@ -70,7 +81,7 @@
     min-height: 100svh;
 }
 
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 500px) {
     .container {
         min-height: 572px;
         padding: 0 24px;
@@ -226,7 +237,7 @@ button {
     font-family: 'Open Sans';
     font-weight: 400;
     font-size: 13px;
-    text-align: center;
+    text-align: justify;
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
@@ -249,4 +260,30 @@ button {
     border: none;
     margin-top: 20px;
     width: 80%;
+}
+
+.register-cancel-modal {
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.text-body-register-cancel {
+    padding: 0px !important;
+}
+
+.text-register-cancel {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.modal-title-register {
+    color: white;
+    font-family: "Open Sans", "sans-serif";
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 42px;
+    margin-bottom: 5px;
 }
