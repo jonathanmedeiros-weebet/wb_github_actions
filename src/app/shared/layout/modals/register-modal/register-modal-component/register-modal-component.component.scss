@@ -100,7 +100,6 @@
 h3 {
     font-size: 16px;
     font-weight: 600;
-    margin-bottom: 25px;
 }
 
 .modal-dialog {
@@ -122,13 +121,8 @@ h3 {
 
 .close-modal-ativacao{
     border-radius: 100%;
-    position: absolute;
     display: flex;
-    top: 4px;
-    right: 5px;
     cursor: pointer;
-    padding-top: 3px;
-    padding-right: 5px;
 }
 
 .close-modal-ativacao i{
@@ -136,6 +130,13 @@ h3 {
     color: var(--highlight);
     font-size: 22px;
 }
+
+.close-register-cancel-header {
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+}
+
 
 .modal-body {
     padding: 16px 60px;
@@ -259,6 +260,9 @@ button {
 
 .text-body-register-cancel {
     padding: 0px !important;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
 }
 
 .text-register-cancel {
@@ -268,17 +272,21 @@ button {
 }
 
 .modal-title-register {
-    color: white;
-    font-family: "Open Sans", "sans-serif";
+    color: #fff;
+    font-family: Open Sans, "sans-serif";
     font-weight: 600;
-    font-size: 25px;
-    margin-top: 42px;
-    margin-bottom: 5px;
+    font-size: 20px;
     text-align: center;
 }
 
 .p-cancel-register {
     text-align: center;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
+    color: #ffffff80;
+    font-family: Open Sans;
+    font-weight: 400;
+    font-size: 13px;
+    text-align: center;
+    padding: 0px 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
