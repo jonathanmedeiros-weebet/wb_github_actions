@@ -140,7 +140,9 @@
                                             <input currencyMask
                                                 class="form-control inverted-out"
                                                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                                formControlName="valor">
+                                                formControlName="valor"
+                                                (ngModelChange)="isAvaliableWithdrawalValue($event)"
+                                                >
                                             <app-error-msg [control]="form.get('valor')"></app-error-msg>
                                             <div class="min-amount">
                                                 <i class="fa-solid fa-circle-exclamation"></i>&nbsp;
@@ -162,7 +164,7 @@
                                         <div class="details-submit">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-custom solicitar-saque"
-                                                        [disabled]="submitting"  [disabled]="disableButton">
+                                                        [disabled]="submitting" [disabled]="disableButton">
                                                     {{'geral.sacar' | translate}}
                                                 </button>
                                             </div>
