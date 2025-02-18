@@ -132,7 +132,9 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
         const currentYear = new Date().getFullYear();
         const age = currentYear - selectedYear;
 
-        return age < 18 ? this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists) : null ;
+        if (age < 18) {
+            this.messageService.error('');
+        }
     }
 
     initializeDays() {
