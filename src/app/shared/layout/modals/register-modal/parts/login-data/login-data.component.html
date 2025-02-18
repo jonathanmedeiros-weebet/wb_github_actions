@@ -50,7 +50,7 @@
                         [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')"
                         (input)="isStrengthPassword ? checkPassword() : null" [ngbTooltip]="tooltipTemplate" [disableTooltip]="!isStrengthPassword"
-                        placement="bottom" tooltipClass="tooltip-password">
+                        placement="bottom" tooltipClass="tooltip-password" triggers="click">
                     <label class="text-input" for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarSenha = !mostrarSenha"></i>
