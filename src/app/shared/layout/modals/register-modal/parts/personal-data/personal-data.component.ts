@@ -198,20 +198,20 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
             }
         }
 
-        this.clientesService.validateCpfAlreadyExists(cpf).subscribe(
-            res => {
-            },
-            error => {
-                this.cpfValidado = false;
-                this.form.patchValue({ nome: '' });
-                if (error?.code === 'cpfInformadoJaExiste'){
-                    this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
-                    this.form.controls['cpf'].updateValueAndValidity();
-                } else {
-                    this.messageService.error(error);
+        if (cpf) {
+            this.clientesService.validateCpfAlreadyExists(cpf).subscribe(
+                res => {
+                },
+                error => {
+                    this.cpfValidado = false;
+                    this.form.patchValue({ nome: '' });
+                    if (error?.code === 'cpfInformadoJaExiste'){
+                        this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
+                        this.form.controls['cpf'].updateValueAndValidity();
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     async submit() {
