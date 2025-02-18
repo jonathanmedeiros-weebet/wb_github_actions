@@ -25,6 +25,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Geolocation } from 'src/app/shared/services/geolocation.service';
 import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
+import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -99,6 +100,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private geolocationService: GeolocationService,
         private sportIdService: SportIdService,
         private ga4Service: Ga4Service,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
 
@@ -380,6 +382,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
+
+            if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.accountVerified.getValue()) {
+                    this.accountVerificationService.openModalAccountVerificationAlert();
+                    return;
+                }
+            }
+
             this.disabledSubmit();
 
             let valido = true;
@@ -422,6 +432,8 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             
             if (valido) {
                 if (this.isLoggedIn) {
+
+
                     let values = await this.ajustarDadosParaEnvio();
                     this.salvarAposta(values);
                 } else {
