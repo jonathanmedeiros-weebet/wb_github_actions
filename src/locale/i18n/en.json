@@ -288,7 +288,8 @@
         "weak": "Weak",
         "medium": "Medium",
         "strong": "Strong",
-        "kindLogin": "Login with"
+        "kindLogin": "Login with",
+        "errorMinorAge": "underage."
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",

@@ -72,6 +72,8 @@
                                                 <option *ngFor="let year of years" [value]="year">{{ year }}</option>
                                             </select>
                                         </div>
+                                        <app-error-msg [control]="form.get('year')" label="{{'geral.errorMinorAge' | translate}}"
+                                            class="text-left"></app-error-msg>
                                     </div>
                                 </div>
                             </div>
