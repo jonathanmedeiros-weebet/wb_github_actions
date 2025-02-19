@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input type="text" id="email" class="form-control inverted-out input-style label-personalized"
+                    <input type="text" id="email" class="form-control inverted-out  label-personalized"
                         [ngClass]="applyCssInputError('email')" formControlName="email" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'email')">
                     <label class="text-input" for="email">{{'geral.email' | translate}}</label>
@@ -18,7 +18,7 @@
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input type="text" id="countryCode" mask="0*"
-                        class="form-control inverted-out input-style label-personalized" formControlName="countryCode"
+                        class="form-control inverted-out  label-personalized" formControlName="countryCode"
                         [ngClass]="applyCssInputError('countryCode')" placeholder=" " [dropSpecialCharacters]="false"
                         prefix="+" inputmode="numeric" maxlength="4">
                     <label class="text-input" for="countryCode">{{'geral.countryCode' | translate}}</label>
@@ -31,7 +31,7 @@
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input type="text" id="telefone" mask="(00) 00000-0000"
-                        class="form-control inverted-out input-style label-personalized" formControlName="telefone"
+                        class="form-control inverted-out  label-personalized" formControlName="telefone"
                         [ngClass]="applyCssInputError('telefone')" placeholder=" " [dropSpecialCharacters]="false"
                         inputmode="numeric">
                     <label class="text-input" for="telefone">{{'geral.telefone' | translate}}</label>
@@ -46,7 +46,7 @@
             <div class="form-group" [ngClass]="applyCssDivError('senha')">
                 <div class="input-md">
                     <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
-                        class="form-control inverted-out input-style label-personalized"
+                        class="form-control inverted-out  label-personalized"
                         [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')"
                         (input)="isStrengthPassword ? checkPassword() : null" [ngbTooltip]="tooltipTemplate" [disableTooltip]="!isStrengthPassword"
@@ -67,7 +67,7 @@
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
-                        class="form-control inverted-out input-style label-personalized"
+                        class="form-control inverted-out  label-personalized"
                         formControlName="senha_confirmacao" [ngClass]="applyCssInputError('senha_confirmacao')"
                         placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
                     <label class="text-input" for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
@@ -88,7 +88,7 @@
         <div class="col-md-12">
             <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
                 <div class="input-md">
-                    <input type="text" id="afiliado" class="form-control inverted-out input-style label-personalized"
+                    <input type="text" id="afiliado" class="form-control inverted-out  label-personalized"
                         [ngClass]="applyCssInputError('afiliado')" formControlName="afiliado" placeholder=" "
                         [readonly]="possuiCodigoAfiliado">
                     <label class="text-input" for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>

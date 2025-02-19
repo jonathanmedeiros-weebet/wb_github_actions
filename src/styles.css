@@ -1285,7 +1285,8 @@ input.inverted {
 select.inverted-out,
 textarea.inverted-out,
 input.inverted-out {
-    border: 0.5px solid var(--foreground-inputs-odds);
+    border: 0.1px solid var(--foreground-inputs-odds);
+    opacity: 0.3;
     color: var(--foreground-inputs-odds);
     background-color: var(--inputs-odds);
     border-radius: 5px;

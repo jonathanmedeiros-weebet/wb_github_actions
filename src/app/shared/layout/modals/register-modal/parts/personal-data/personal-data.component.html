@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">
-                            <input type="text" id="cpf" class="form-control inverted-out input-style label-personalized"
+                            <input type="text" id="cpf" class="form-control inverted-out"
                                 mask="000.000.000-00" (change)="validarCpf()" formControlName="cpf"
                                 [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
                                 inputmode="numeric" [readonly]="faceMatchRequested">
@@ -20,7 +20,7 @@
                     [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial) || (validarBeneficioProgramaSocial && !cpfValidado)">
                     <div class="form-group mb-4">
                         <div class="input-md">
-                            <input type="text" id="nome" class="form-control inverted-out input-style"
+                            <input type="text" id="nome" class="form-control inverted-out"
                                 (blur)="onBlurGa4Name($event)" (beforeinput)="onBeforeInput($event, 'name')"
                                 formControlName="nome" [ngClass]="applyCssInputError('nome')" placeholder=" "
                                 [readonly]="autoPreenchimento || validarBeneficioProgramaSocial">
