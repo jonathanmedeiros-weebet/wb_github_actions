@@ -356,6 +356,10 @@ button {
     justify-content: center;
 }
 
+.label-inputs {
+    margin-bottom: 0px !important;
+}
+
 /* HTML: <div class="loader"></div> */
 .loader {
     width: 50px;
@@ -371,6 +375,13 @@ button {
 @keyframes l13 {
     100% {
         transform: rotate(1turn)
+    }
+}
+
+@media only screen and (min-width: 320px) {
+    .login-mode label {
+        font-size: 10px;
+        gap: 0px;
     }
 }
 

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { BaseFormComponent } from 'src/app/shared/layout/base-form/base-form.component';
@@ -51,6 +51,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
 
     dropdownList = [];
     selectedItems = [];
+    currentYear = new Date().getFullYear();
 
     constructor(
         private fb: FormBuilder,
@@ -119,12 +120,22 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
             dadosCriptografados: [null],
             day: [null, !this.autoPreenchimento ? Validators.required : null],
             month: [null, !this.autoPreenchimento ? Validators.required : null],
-            year: [null, !this.autoPreenchimento ? Validators.required : null],
+            year: [null, !this.autoPreenchimento ? [Validators.required, this.ageValidator] : []],
             nationality: [26, [Validators.required]],
             gender: [null, [Validators.required]],
             nascimento: [null, !this.autoPreenchimento ? Validators.required : null]
         })
     };
+
+    ageValidator(control: FormControl){
+        const selectedYear = Number(control.value);
+        const currentYear = new Date().getFullYear();
+        const age = currentYear - selectedYear;
+
+        if (age < 18) {
+            this.messageService.error('');
+        }
+    }
 
     initializeDays() {
         this.days = Array.from({ length: 31 }, (_, i) => i + 1)
@@ -185,6 +196,21 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                     dadosCriptografados: null
                 });
             }
+        }
+
+        if (cpf) {
+            this.clientesService.validateCpfAlreadyExists(cpf).subscribe(
+                res => {
+                },
+                error => {
+                    this.cpfValidado = false;
+                    this.form.patchValue({ nome: '' });
+                    if (error?.code === 'cpfInformadoJaExiste'){
+                        this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
+                        this.form.controls['cpf'].updateValueAndValidity();
+                    }
+                }
+            );
         }
     }
 

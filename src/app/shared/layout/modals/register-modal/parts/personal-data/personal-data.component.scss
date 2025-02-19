@@ -62,7 +62,7 @@ select:focus {
 
 .text-input {
     color: rgba(var(--foreground-inputs-odds-rgb), .3);
-    padding-left: 5px;
+    padding-left: 6px;
 }
 
 .select-nationality {
@@ -161,9 +161,14 @@ input[type=radio] {
 @media screen and (max-width: 320px) {
     .radio-custom {
         font-size: 10px;
+        margin-right: 4px;
     }
 
     .input-md label {
         padding: 0px;
+    }
+
+    .label-gender {
+        font-size: 11px;
     }
 }

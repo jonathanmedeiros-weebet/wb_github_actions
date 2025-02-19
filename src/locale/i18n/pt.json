@@ -293,7 +293,8 @@
         "weak": "Fraco",
         "medium": "Médio",
         "strong": "Forte",
-        "kindLogin": "Tipo de login"
+        "kindLogin": "Tipo de login",
+        "errorMinorAge": "Menor de idade."
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",

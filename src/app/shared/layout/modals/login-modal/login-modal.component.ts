@@ -368,12 +368,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
         if (this.isMobile) {
             options = {
-                windowClass: 'modal-fullscreen',
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-400 modal-h-350 modal-login',
+                centered: true,
             };
         } else {
             options = {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-400',
+                windowClass: 'modal-400 modal-h-350 modal-login',
                 centered: true,
             };
         }

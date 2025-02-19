@@ -15,6 +15,9 @@
 
 .modal-body {
     padding: 0 33px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 h2 {
@@ -81,9 +84,16 @@ input {
     gap: 16px
 }
 
+.modal-conteiner{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--background) !important;
+}
+
 @media only screen and (max-width: 768px) {
     .registrar{
         bottom: 0;
     }
-    }
-
+}

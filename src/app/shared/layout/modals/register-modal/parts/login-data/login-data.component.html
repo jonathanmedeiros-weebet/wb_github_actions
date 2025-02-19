@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input type="text" id="email" class="form-control inverted-out input-style label-personalized"
+                    <input type="text" id="email" class="form-control inverted-out  label-personalized"
                         [ngClass]="applyCssInputError('email')" formControlName="email" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'email')">
                     <label class="text-input" for="email">{{'geral.email' | translate}}</label>
@@ -18,7 +18,7 @@
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input type="text" id="countryCode" mask="0*"
-                        class="form-control inverted-out input-style label-personalized" formControlName="countryCode"
+                        class="form-control inverted-out  label-personalized" formControlName="countryCode"
                         [ngClass]="applyCssInputError('countryCode')" placeholder=" " [dropSpecialCharacters]="false"
                         prefix="+" inputmode="numeric" maxlength="4">
                     <label class="text-input" for="countryCode">{{'geral.countryCode' | translate}}</label>
@@ -31,7 +31,7 @@
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input type="text" id="telefone" mask="(00) 00000-0000"
-                        class="form-control inverted-out input-style label-personalized" formControlName="telefone"
+                        class="form-control inverted-out  label-personalized" formControlName="telefone"
                         [ngClass]="applyCssInputError('telefone')" placeholder=" " [dropSpecialCharacters]="false"
                         inputmode="numeric">
                     <label class="text-input" for="telefone">{{'geral.telefone' | translate}}</label>
@@ -46,11 +46,11 @@
             <div class="form-group" [ngClass]="applyCssDivError('senha')">
                 <div class="input-md">
                     <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
-                        class="form-control inverted-out input-style label-personalized"
+                        class="form-control inverted-out  label-personalized"
                         [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')"
                         (input)="isStrengthPassword ? checkPassword() : null" [ngbTooltip]="tooltipTemplate" [disableTooltip]="!isStrengthPassword"
-                        placement="bottom" tooltipClass="tooltip-password">
+                        placement="bottom" tooltipClass="tooltip-password" triggers="click">
                     <label class="text-input" for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarSenha = !mostrarSenha"></i>
@@ -67,7 +67,7 @@
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
-                        class="form-control inverted-out input-style label-personalized"
+                        class="form-control inverted-out  label-personalized"
                         formControlName="senha_confirmacao" [ngClass]="applyCssInputError('senha_confirmacao')"
                         placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
                     <label class="text-input" for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
@@ -88,7 +88,7 @@
         <div class="col-md-12">
             <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
                 <div class="input-md">
-                    <input type="text" id="afiliado" class="form-control inverted-out input-style label-personalized"
+                    <input type="text" id="afiliado" class="form-control inverted-out  label-personalized"
                         [ngClass]="applyCssInputError('afiliado')" formControlName="afiliado" placeholder=" "
                         [readonly]="possuiCodigoAfiliado">
                     <label class="text-input" for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
@@ -158,24 +158,24 @@
                     [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
                     <i
                         [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
-                    {{'senhas.minimumCharactersPassword' | translate}}
+                        <span>{{'senhas.minimumCharactersPassword' | translate}}</span>
                 </li>
                 <li
                     [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
                     <i
                         [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
-                    {{'senhas.lowercaseLetter' | translate}}
+                        <span>{{'senhas.lowercaseLetter' | translate}}</span>
                 </li>
                 <li
                     [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
                     <i
                         [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
-                    {{'senhas.uppercaseLetter' | translate}}
+                        <span>{{'senhas.uppercaseLetter' | translate}}</span>
                 </li>
                 <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
                     <i
                         [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
-                    {{'senhas.specialChar' | translate}}
+                        <span>{{'senhas.specialChar' | translate}}</span>
                 </li>
             </div>
             <div style="width: 100%;">

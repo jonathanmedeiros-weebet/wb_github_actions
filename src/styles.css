@@ -1285,7 +1285,8 @@ input.inverted {
 select.inverted-out,
 textarea.inverted-out,
 input.inverted-out {
-    border: 0.5px solid var(--foreground-inputs-odds);
+    border: 0.1px solid var(--foreground-inputs-odds);
+    opacity: 0.3;
     color: var(--foreground-inputs-odds);
     background-color: var(--inputs-odds);
     border-radius: 5px;
@@ -1982,7 +1983,6 @@ label {
     z-index: 90003 !important;
 }
 
-
 .color-primary {
     color: var(--highlight);
     font-weight: 700;
@@ -1992,4 +1992,16 @@ label {
     pointer-events: none; 
     text-decoration: none;
     opacity: 0.5;
+}
+
+.icon-hover {
+    box-sizing: content-box;
+    fill: var(--background);
+    border: 0;
+    border-radius: 4px;
+    transition: fill 0.3s ease;
+}
+
+.icon-hover:hover path{
+    fill: var(--highlight);
 }

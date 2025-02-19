@@ -21,7 +21,6 @@
 .label-personalized {
     max-height: 10px;
     padding-left: 14px;
-    color: rgba(var(--foreground-inputs-odds-rgb), .3);
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -218,7 +217,14 @@ a.link-termos-politica {
     align-items: flex-start;
     gap: 16px;
     width: 100%;
+    padding: 0px 0px !important;
 }
+
+.requirements-password li span {
+    font-size: 14px;
+    padding: 5px;
+}
+
 
 .fulfilled {
     color: green;
@@ -276,6 +282,12 @@ a.link-termos-politica {
     opacity: 0.6;
 }
 
+@media only screen and (max-width: 500px) {
+    .requirements-password li span {
+        font-size: 12px;
+        padding: 5px;
+    }
+}
 
 @media only screen and (max-width: 1024px) {
     .modal-body {

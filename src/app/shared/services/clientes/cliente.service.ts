@@ -124,6 +124,18 @@ export class ClienteService {
             );
     }
 
+    validateCpfAlreadyExists(cpf: any) {
+        return this.http.get(`${this.clienteUrl}/consult-cpf-already-exists`, this.headers.getRequestOptions(true, { cpf }))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     atualizarDadosCadastrais(dadosCadastrais) {
         return this.http.post(`${this.clienteUrl}/atualizarDadosCadastrais`, JSON.stringify(dadosCadastrais),
             this.headers.getRequestOptions(true))
