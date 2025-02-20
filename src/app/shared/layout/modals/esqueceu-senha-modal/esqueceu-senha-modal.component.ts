@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 import {config} from '../../../config';
 import { RegisterModalComponentComponent } from '../register-modal/register-modal-component/register-modal-component.component';
+import { RegisterV3ModalComponent } from '../register-v3-modal/register-v3-modal.component';
 
 @Component({
     selector: 'app-esqueceu-senha-modal',
@@ -76,7 +77,7 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
             this.activeModal.dismiss();
     
             this.modalRef = this.modalService.open(
-                RegisterModalComponentComponent,
+                RegisterV3ModalComponent,
                 {
                     ariaLabelledBy: 'modal-basic-title',
                     size: 'md',

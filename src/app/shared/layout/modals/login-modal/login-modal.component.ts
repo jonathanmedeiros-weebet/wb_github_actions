@@ -20,6 +20,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
 import { FaceMatchModalComponent } from '../face-match-modal/face-match-modal/face-match-modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { RegisterFaceMatchComponent } from '../register-face-match/register-face-match.component';
+import { RegisterV3ModalComponent } from '../register-v3-modal/register-v3-modal.component';
 
 declare var xtremepush: any;
 
@@ -319,7 +320,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.activeModal.dismiss();
 
         this.modalRef = this.modalService.open(
-            RegisterModalComponentComponent,
+            RegisterV3ModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',

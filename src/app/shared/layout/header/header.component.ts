@@ -45,6 +45,7 @@ import { ListBankAccountsComponent } from '../list-bank-accounts/list-bank-accou
 import { LastAccessesModalComponent } from '../modals/last-accesses-modal/last-accesses-modal.component';
 import { OnboardingModalComponent } from '../modals/onboarding-modal/onboarding-modal.component';
 import { RegisterModalComponentComponent } from '../modals/register-modal/register-modal-component/register-modal-component.component';
+import { RegisterV3ModalComponent } from '../modals/register-v3-modal/register-v3-modal.component';
 
 declare var xtremepush: any;
 
@@ -470,7 +471,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             );
         } else {
             this.modalRef = this.modalService.open(
-                RegisterModalComponentComponent,
+                RegisterV3ModalComponent,
                 {
                     ariaLabelledBy: 'modal-basic-title',
                     size: 'md',
