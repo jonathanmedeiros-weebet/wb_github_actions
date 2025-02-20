@@ -14,6 +14,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
+import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
+import { LoginService } from 'src/app/shared/services/login.service';
+import { Usuario } from 'src/app/shared/models/usuario';
 
 enum RecoveryStep {
     ONE_STEP = 1,
@@ -46,6 +49,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     public mostrarSenhaConfirmar: boolean = false;
     public indiqueGanheRemovido: boolean = false;
     private unsub$: Subject<any> = new Subject();
+    private geolocationService: GeolocationService;
     verifiedIdentity = false;
     faceMatchEnabled = true;
     faceMatchChangePasswordValidated = false;
@@ -57,7 +61,13 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     faceMatchType = null;
     docCheckToken = "";
     secretHash = ""
-
+    usuario = new Usuario();
+    private geolocation: Geolocation;
+    modoClienteHabilitado;
+    modoCambistaHabilitado;
+    loginMode = 'email';
+    user: any;
+    
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -72,7 +82,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         private legitimuzService: LegitimuzService,
         private legitimuzFacialService: LegitimuzFacialService,
         private faceMatchService: FaceMatchService,
-        private docCheckService: DocCheckService
+        private docCheckService: DocCheckService,
+        private loginService: LoginService
     ) {
         super();
     }
@@ -100,6 +111,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     ngOnInit() {
         this.faceMatchType = this.paramLocais.getOpcoes().faceMatchType;
         this.currentLanguage = this.translate.currentLang;
+        this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
+        this.modoCambistaHabilitado = this.paramLocais.getOpcoes().modo_cambista;
         this.createForm();
         this.route
         .params
@@ -110,6 +123,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                         this.form.get('verificacao').patchValue(params.codigo);
                         this.authService.getUserResetPassword({ verificacao: params.codigo, token: params.token }).subscribe({
                             next: (res) => {
+                                this.user = res.results;
                                 this.clienteService.getFaceMatchClient(res.results.id).subscribe({
                                     next: (res) => {
                                         if (res.verifiedIdentity == null) {
@@ -269,8 +283,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
 
         this.authService.resetPassword(values).toPromise()
             .then(() => {
-                this.router.navigate(['esportes/futebol/jogos']);
-                this.messageService.success('Senha alterada com sucesso!');
+                this.handleLogin();
                 this.submitting = false;
             })
             .catch((error) => {
@@ -303,5 +316,38 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                     });
                 }
         }
+    }
+
+    getUsuario() {
+        this.usuario = this.authService.getUser();
+    }
+
+    xtremepushHabilitado() {
+        return Boolean(this.paramLocais.getOpcoes()?.xtremepush_habilitado);
+    }
+    
+    handleLogin() {
+        const data = {
+            username: this.user.email,
+            password: this.form.value.nova_senha,
+            loginMode: 'email',
+            cookie: this.authService.getCookie(this.usuario.cookie),
+            geolocation: this.geolocation
+        };
+        this.authService.login(data)
+            .pipe(takeUntil(this.unsub$))
+            .subscribe(
+                () => {
+                    this.getUsuario();
+                    if (this.usuario.tipo_usuario === 'cliente') {
+                        this.loginService.triggerEvent();
+                    } else {
+                        location.reload();
+                    }
+                    this.router.navigate(['esportes/futebol/jogos']);
+                    this.messageService.success('Senha alterada com sucesso!');
+                },
+                error => this.handleError(error)
+            );
     }
 }
