@@ -1,6 +1,6 @@
 <div class="wall-section">
     <div class="wall-section__group">
-        <div class="wall-section__title">{{title}}</div>
+        <div class="wall-section__title"><i class="fa" [ngClass]="icon"></i> {{title}}</div>
 
         <div class="scroll-buttons" *ngIf="showScroolButton">
             <div
@@ -26,6 +26,6 @@
         *ngIf="showSeeAllButton"
         (click)="handleSeeAll()"
     >
-        {{'geral.verTodos' | translate}} 
+        {{'geral.verTodos' | translate}}
     </a>
 </div>

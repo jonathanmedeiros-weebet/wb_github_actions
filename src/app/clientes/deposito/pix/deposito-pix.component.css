@@ -230,6 +230,13 @@
     padding-right: 12px;
 }
 
+.promo-code::placeholder {
+    opacity: 0.4;
+}
+.promo-code:focus::placeholder {
+    opacity: 0;
+}
+
 #bonus-wrapper {
     transition: 1s;
     margin-top: 24px;

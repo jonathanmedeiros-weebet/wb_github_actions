@@ -154,7 +154,7 @@ export class CasinoApiService {
     getCasinoGamesRelated(category: string, currentGameIds: string[], missingGames: number) {
         const queryParams = { category, currentGameIds, missingGames };
         const requestOptions = this.header.getRequestOptions(false, queryParams);
-    
+
         return this.http.get(`${this.central_url}/games/relatedGames`, requestOptions).pipe(
             map((res: any) => res),
             catchError(this.errorService.handleError)
@@ -176,6 +176,20 @@ export class CasinoApiService {
             map((res: any) => {
                 return res;
             }),
+            catchError(this.errorService.handleError)
+        );
+    }
+
+    getCasinoGamesByIds(ids: Array<any>) {
+
+        var endpoint = this.loki_url + "/games-by-ids";
+        return this.http.post(String(endpoint), { ids }, this.header.getRequestOptions(true))
+        .pipe(
+            map(
+                (response: any) => {
+                    return response;
+                }
+            ),
             catchError(this.errorService.handleError)
         );
     }
