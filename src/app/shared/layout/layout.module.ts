@@ -117,6 +117,8 @@ import { OnboardingModalComponent } from './modals/onboarding-modal/onboarding-m
 import { StepperProgressBarComponent } from './modals/register-modal/parts/stepper-progress-bar/stepper-progress-bar.component';
 import { PersonalDataComponent } from './modals/register-modal/parts/personal-data/personal-data.component';
 import { RegisterFaceMatchComponent } from './modals/register-face-match/register-face-match.component';
+import { CardVerificationPendingComponent } from './header/parts/card-verification-pending/card-verification-pending.component';
+import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -232,6 +234,8 @@ import { RegisterFaceMatchComponent } from './modals/register-face-match/registe
         OnboardingModalComponent,
         StepperProgressBarComponent,
         RegisterFaceMatchComponent,
+        CardVerificationPendingComponent,
+        AccountVerificationAlertComponent,
     ],
     exports: [
         MainLayoutComponent,

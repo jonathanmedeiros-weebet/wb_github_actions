@@ -185,10 +185,11 @@
                         </a>
                     </ng-template>
                     <ng-template #depositShortCutMobile>
-                        <a class="btn btn-custom mr-4" (click)="abrirDepositos()" [ngStyle]="{'height': '32px'}">
+                        <a class="btn btn-custom mr-4 px-2" (click)="abrirDepositos()" [ngStyle]="{'height': '32px'}">
                             {{'geral.depositar' | translate | uppercase}}
                         </a>
                     </ng-template>
+                    <span class="badge__verification-pending" *ngIf="accountVerificationPending">!</span>
                 </div>
                 <div class="menu-conta" ngbDropdown #dropDownConta="ngbDropdown">
                     <a (click)="getPosicaoFinanceira()" class="nav-link menu-perfil" id="navbarDropdown" role="button"
@@ -217,6 +218,7 @@
                                 <img src="https://wb-assets.com/img/blank-profile-picture.png" width="40">
                                 <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                             </div>
+
                             <div class="saldos-container">
                                 <div class="saldos-item">
                                     <span class="">{{ 'geral.credito' | translate }}</span>
@@ -398,6 +400,8 @@
                                 <img src="https://wb-assets.com/img/blank-profile-picture.png" width="40">
                                 <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                             </div>
+                            <app-card-verification-pending />
+
                             <div class="saldos-container">
                                 <div class="saldos-item">
                                     <span class="">{{ 'geral.saldo' | translate }}</span>
@@ -444,7 +448,11 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="openValidatePhoneModal()" *ngIf="isMandatoryPhoneValidation && !userPhoneValidated">
+                                <a
+                                    (click)="openValidatePhoneModal()"
+                                    *ngIf="isMandatoryPhoneValidation && !userPhoneValidated"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-phone"></i>
                                     </span>
@@ -453,7 +461,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirAlterarSenha()">
+                                <a
+                                    (click)="abrirAlterarSenha()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-key"></i>
                                     </span>
@@ -462,7 +473,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="openLastAccesses()">
+                                <a
+                                    (click)="openLastAccesses()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-clock-rotate-left"></i>
                                     </span>
@@ -471,7 +485,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirConfiguracoes()">
+                                <a
+                                    (click)="abrirConfiguracoes()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-cogs"></i>
                                     </span>
@@ -480,7 +497,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="openBankAccount()">
+                                <a
+                                    (click)="openBankAccount()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-bank"></i>
                                     </span>
@@ -491,7 +511,10 @@
                                 </a>
                                 <hr />
                                 <label>{{ 'geral.maisOpcoes' | translate }}</label>
-                                <a (click)="abrirCarteira()">
+                                <a
+                                    (click)="abrirCarteira()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-wallet"></i>
                                     </span>
@@ -500,7 +523,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirFinanceiro()">
+                                <a
+                                    (click)="abrirFinanceiro()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-dollar"></i>
                                     </span>
@@ -509,7 +535,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirApostas()">
+                                <a
+                                    (click)="abrirApostas()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-table-columns"></i>
                                     </span>
@@ -518,7 +547,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>                                
-                                <a (click)="abrirDepositos()">
+                                <a
+                                    (click)="abrirDepositos()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-money-bill-transfer"></i>
                                     </span>
@@ -527,7 +559,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirSaques()">
+                                <a
+                                    (click)="abrirSaques()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-money-bill-transfer"></i>
                                     </span>
@@ -536,7 +571,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="openTransactionHistory()">
+                                <a
+                                    (click)="openTransactionHistory()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-money-bill-transfer"></i>
                                     </span>
@@ -545,7 +583,10 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>                                
-                                <a (click)="abrirRollovers()">
+                                <a
+                                    (click)="abrirRollovers()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-gift"></i>
                                     </span>
@@ -554,7 +595,11 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="abrirIndiqueGanhe()" *ngIf="isCliente && indiqueGanheHabilitado">
+                                <a
+                                    (click)="abrirIndiqueGanhe()"
+                                    *ngIf="isCliente && indiqueGanheHabilitado"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-gift"></i>
                                     </span>
@@ -563,7 +608,11 @@
                                         <i class="fa-solid fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <a (click)="openCashback()" *ngIf="isCliente && cashbackEnabled">
+                                <a
+                                    (click)="openCashback()"
+                                    *ngIf="isCliente && cashbackEnabled"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <span>
                                         <i class="fa fa-solid fa-gift"></i>
                                     </span>
@@ -609,6 +658,9 @@
                                 <img src="https://wb-assets.com/img/blank-profile-picture.png" width="40">
                                 <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                             </div>
+
+                            <app-card-verification-pending *ngIf="accountVerificationPending"/>
+
                             <div class="saldos-container">
                                 <div class="saldos-item" *ngIf="!isCliente">
                                     <span class="">{{ 'geral.credito' | translate }}</span>
@@ -637,109 +689,193 @@
                                     <ng-template #elseSaldoOculto> R$ &bull; &bull; &bull; &bull;</ng-template>
                                 </div>
                             </div>
+                           
                             <div class="d-flex justify-content-around">
-                                <a class="dropdown-btn w-130" [routerLink]="['/clientes/deposito']" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn w-130"
+                                    [routerLink]="['/clientes/deposito']"
+                                    *ngIf="isCliente"
+                                >
                                     {{ 'geral.depositar' | translate }}
                                 </a>
-                                <a class="dropdown-btn w-130" [routerLink]="['/clientes/saque']" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn w-130"
+                                    [routerLink]="['/clientes/saque']"
+                                    *ngIf="isCliente"
+                                >
                                     {{ 'geral.sacar' | translate }}
                                 </a>
-                                <a class="dropdown-btn w-130" [routerLink]="['/cambistas/deposito']"
-                                    *ngIf="!isCliente && enabledBettorPix">
+                                <a
+                                    class="dropdown-btn w-130"
+                                    [routerLink]="['/cambistas/deposito']"
+                                    *ngIf="!isCliente && enabledBettorPix"
+                                >
                                     {{ 'geral.liberarCredito' | translate }}
                                 </a>
                             </div>
                             <div class="menu-divider mt-4"></div>
                             <div class="d-flex flex-wrap container-menu">
-                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/perfil']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/clientes/perfil']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente"
+                                >
                                     <i class="fa fa-user mb-2"></i>
                                     {{ 'geral.minhaConta' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['clientes/carteira']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['clientes/carteira']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-wallet mb-2"></i>
                                     {{ 'geral.carteira' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/financeiro']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/clientes/financeiro']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-dollar mb-2"></i>
                                     {{ 'geral.financeiro' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/apostas']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/clientes/apostas']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-table-columns mb-2"></i>
                                     {{ 'geral.apostas' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/rollover']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/clientes/rollover']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-gift mb-2"></i>
                                     {{ 'geral.bonus' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/rodada-gratis']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/clientes/rodada-gratis']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-gift mb-2"></i>
                                     <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
                                     {{ 'rodada_gratis.rodadaGratis' | translate }}</span>
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/indique-ganhe']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente && indiqueGanheHabilitado">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/clientes/indique-ganhe']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente && indiqueGanheHabilitado"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-gift mb-2"></i>
                                     <span style="text-align: center; white-space: break-spaces; line-height: 14px;">
                                     {{ 'indique_ganhe.indiqueGanhe' | translate }}</span>
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/cashback']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente && cashbackEnabled">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/clientes/cashback']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente && cashbackEnabled"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-gift mb-2"></i>
                                     <span style="text-align: center; white-space: break-spaces; line-height: 14px;"> {{
                                         'cashback.cashback' | translate }}</span>
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/clientes/configuracoes']"
-                                    routerLinkActive="router-link-active" *ngIf="isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/clientes/configuracoes']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="isCliente"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-cogs mb-2"></i>
                                     <div [innerHTML]="'geral.jogoResponsavel' | translate | breakLineWithSpacing"></div>
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/alterar-senha']"
-                                    routerLinkActive="router-link-active" *ngIf="allowAgentChangePassword()">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/alterar-senha']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="allowAgentChangePassword()"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-key mb-2"></i> {{ 'geral.alterarSenha' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/dashboard']"
-                                    routerLinkActive="router-link-active" *ngIf="!isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/cambistas/dashboard']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="!isCliente"
+                                >
                                     <i class="fa fa-dashboard mb-2"></i>
                                     {{ 'geral.dashboard' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/validar-aposta']"
-                                    routerLinkActive="router-link-active" *ngIf="!isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/validar-aposta']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="!isCliente"
+                                >
                                     <i class="fa fa-solid fa-check mb-2"></i>
                                     {{ 'geral.validacao' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/apuracao']"
-                                    routerLinkActive="router-link-active" *ngIf="!isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/cambistas/apuracao']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="!isCliente"
+                                >
                                     <i class="fa fa-solid fa-table-columns mb-2"></i>
                                     {{ 'geral.apuracao' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/apostas']"
-                                    routerLinkActive="router-link-active" *ngIf="!isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/cambistas/apostas']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="!isCliente"
+                                >
                                     <i class="fa fa-solid fa-table-columns mb-2"></i>
                                     {{ 'geral.apostas' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/tabela']"
-                                    routerLinkActive="router-link-active" *ngIf="!isCliente">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/cambistas/tabela']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="!isCliente"
+                                >
                                     <i class="fa fa-solid fa-print mb-2"></i>
                                     {{ 'geral.tabela' | translate }}
                                 </a>
-                                <a class="dropdown-btn-filled" [routerLink]="['/cambistas/cartoes']"
-                                    routerLinkActive="router-link-active" *ngIf="!isCliente && cartaoApostaHabilitado">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    [routerLink]="['/cambistas/cartoes']"
+                                    routerLinkActive="router-link-active"
+                                    *ngIf="!isCliente && cartaoApostaHabilitado"
+                                >
                                     <i class="fa fa-solid fa-credit-card mb-2"></i>
                                     {{ 'cartoes.cartao' | translate }}
                                 </a>
-                                <!--                            <a class="dropdown-btn-filled" [routerLink]="['cambistas/financeiro']"
-                                                            routerLinkActive="router-link-active"
-                                                            *ngIf="!isCliente">
-                                                                <i class="fa fa-solid fa-dollar mb-2"></i>
-                                                                {{'geral.financeiro' | translate}}
-                                                            </a>-->
-                                <a class="dropdown-btn-filled" (click)="listPrinters()" *ngIf="appMobile">
+                                <a
+                                    class="dropdown-btn-filled"
+                                    (click)="listPrinters()"
+                                    *ngIf="appMobile"
+                                    [class.disabled]="accountVerificationPending"
+                                >
                                     <i class="fa fa-solid fa-cogs"></i>
                                     {{ 'geral.jogoResponsavel' | translate }}
                                 </a>

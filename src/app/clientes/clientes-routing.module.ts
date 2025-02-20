@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PagesLayoutComponent} from '../shared/layout/app-layouts';
 import { IndiqueGanheGuard } from './../services';
+import { AccountVerificationGuard } from '../shared/services/guards/account-verification.guard';
 
 const routes: Routes = [{
     path: '',
@@ -18,52 +19,64 @@ const routes: Routes = [{
         },
         {
             path: 'configuracoes',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./configuracoes/configuracoes.module').then(f => f.ConfiguracoesModule)
         },
         {
             path: 'financeiro',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./financeiro/financeiro.module').then(f => f.FinanceiroModule)
         },
         {
             path: 'carteira',
+            canActivate: [AccountVerificationGuard],
+
             loadChildren: () => import('./carteira/carteira.module').then(f => f.Carteira)
         },
         {
             path: 'apostas',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./apostas-cliente/apostas-cliente.module').then(a => a.ApostasClienteModule)
         },
         {
             path: 'deposito',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./deposito/deposito.module').then(a => a.DepositoModule)
         },
         {
             path: 'saque',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./solicitacao-saque-cliente/solicitacao-saque-cliente.module')
                 .then(s => s.SolicitacaoSaqueClienteModule)
         },
         {
             path: 'transacoes-historico',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./transacoes-historico/transacoes-historico.module').then(h => h.TransacoesHistoricoModule)
         },
         {
             path: 'depositos-saques',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./depositos-saques/depositos-saques.module').then(m => m.DepositosSaquesModule)
         },
         {
             path: 'rollover',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
         {
             path: 'indique-ganhe',
             loadChildren: () => import('./indique-ganhe/indique-ganhe.module').then(i => i.IndiqueGanheModule),
-            canActivate: [IndiqueGanheGuard]
+            canActivate: [IndiqueGanheGuard, AccountVerificationGuard]
         },
         {
             path: 'cashback',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./cashback/cashback.module').then(i => i.CashbackModule)
         },
         {
             path: 'rodada-gratis',
+            canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
     ]
