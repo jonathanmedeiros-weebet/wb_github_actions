@@ -432,8 +432,6 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             
             if (valido) {
                 if (this.isLoggedIn) {
-
-
                     let values = await this.ajustarDadosParaEnvio();
                     this.salvarAposta(values);
                 } else {

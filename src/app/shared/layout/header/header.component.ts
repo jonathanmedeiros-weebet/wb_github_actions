@@ -890,5 +890,4 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         return result;
     }
-
 }
