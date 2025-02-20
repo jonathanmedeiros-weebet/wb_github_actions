@@ -25,7 +25,7 @@ export class RegisterFacematchGuard implements CanActivate {
     return this.cliente.getFaceMatchClient(user.id).pipe(
       take(1),
       switchMap((facematch) => {
-        if (!facematch.facematch.register) {
+        if (!facematch?.facematch?.register) {
           const modalRef = this.modalService.open(RegisterFaceMatchComponent);
           modalRef.componentInstance.user = facematch;
           return new Observable<boolean>((observer) => {

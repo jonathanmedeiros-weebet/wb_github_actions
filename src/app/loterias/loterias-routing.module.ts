@@ -6,6 +6,7 @@ import { QuininhaComponent } from './quininha/quininha.component';
 import { LoteriaPopularGuard, QuininhaGuard, SeninhaGuard } from './../services';
 import { LoteriaLayoutComponent } from '../shared/layout/app-layouts';
 import { LoteriaPopularComponent } from './loteria-popular/loteria-popular.component';
+import { AccountVerificationGuard } from '../shared/services/guards/account-verification.guard';
 
 export const routes: Routes = [
     {
@@ -30,7 +31,7 @@ export const routes: Routes = [
             {
                 path: 'loteria-popular',
                 component: LoteriaPopularComponent,
-                canActivate: [LoteriaPopularGuard]
+                canActivate: [LoteriaPopularGuard, AccountVerificationGuard]
             }
         ]
     }

@@ -12,6 +12,7 @@ import {takeUntil} from 'rxjs/operators';
 import {BehaviorSubject, Subject} from 'rxjs';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 
 @Component({
     selector: 'app-acumuladao-form',
@@ -53,7 +54,8 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         private cd: ChangeDetectorRef,
         private renderer: Renderer2,
         private el: ElementRef,
-        private geolocationService: GeolocationService
+        private geolocationService: GeolocationService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
@@ -142,6 +144,13 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
+            if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.accountVerified.getValue()) {
+                    this.accountVerificationService.openModalAccountVerificationAlert();
+                    return;
+                }
+            }
+
             let msg = '';
             let valid = true;
             this.dados = {
