@@ -1,11 +1,46 @@
 <div #topHome class="home-container" [ngStyle]="{'max-height': 'calc(100vh - ' +headerHeight+'px)'}">
-    <app-banners class="banner" pagina="home"/>
     <ng-container *ngFor="let widget of widgets">
-        <app-cassino class="widgets" linkAll="/casino" [games]="gamesPopulares" [showLoginModal]="false" *ngIf="widget.nome == 'Cassino'" [showLoadingIndicator]="loadingCassino"/>
-        <app-cassino class="widgets" linkAll="/live-casino" [games]="gamesPopularesAoVivo" [showLoginModal]="false" [title]="'geral.cassinoAoVivo' | translate" *ngIf="widget.nome == 'Cassino Ao Vivo'" [showLoadingIndicator]="loadingCassinoAoVivo"/>
-        <app-jogos-aovivo class="widgets" *ngIf="!betby && liveFootballIsActive && widget.nome == 'Jogos Ao Vivo'"/>
-        <app-jogos-destaque class="widgets" *ngIf="!betby && widget.nome == 'Jogos Destaque' && hasFeaturedMatches" (hasFeaturedMatches)="changeDisplayFeaturedMatches($event)" [isHome]="true"/>
-        <div class="widgets" id="betby" *ngIf="betby && widget.nome == 'Jogos Destaque'"></div>
+        <ng-container [ngSwitch]="widget.type">
+            <app-banners
+                *ngSwitchCase="'banner'"
+                class="banner"
+                pagina="home"
+            />
+            <app-cassino
+                *ngSwitchCase="'casino'"
+                class="widgets"
+                linkAll="/casino"
+                [title]="widget.name"
+                [icon]="widget.icon"
+                [games]="getGameIds(widget.items)"
+                [showLoginModal]="false"
+                [showLoadingIndicator]="false"
+            />
+            <ng-container *ngSwitchCase="'sports_live'">
+                <app-jogos-aovivo
+                    class="widgets"
+                    *ngIf="!betby && liveFootballIsActive"
+                />
+            </ng-container>
+            <ng-container *ngSwitchCase="'sports'">
+                <app-jogos-destaque
+                    *ngIf="!betby"
+                    class="widgets"
+                    [title]="widget.name"
+                    [icon]="widget.icon"
+                    [games]="getGameIds(widget.items)"
+                    (hasFeaturedMatches)="changeDisplayFeaturedMatches($event)"
+                    [isHome]="true"
+                />
+            </ng-container>
+            <ng-container *ngSwitchCase="'betby'">
+                <div
+                    class="widgets"
+                    id="betby"
+                    *ngIf="betby"
+                ></div>
+            </ng-container>
+        </ng-container>
     </ng-container>
     <app-footer [container]="topHome"/>
 </div>
