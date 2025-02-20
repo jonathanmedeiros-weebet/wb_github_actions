@@ -1,0 +1,119 @@
+<div class="verify-email-or-phone" *ngIf="!showModalSuccess">
+    <div class="verify-email-or-phone__header">
+        <button class="verify-email-or-phone__btn-close" (click)="handleClose('close')">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+    <div class="verify-email-or-phone__body">
+        <span class="verify-email-or-phone__icon">
+            <ng-container *ngIf="verificationTypeIsEmail">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="27" viewBox="0 0 30 27" fill="none">
+                    <path d="M14.2957 12.7926L2.97789 5.71896V19.8662H15.7104V22.6957H2.97789C2.19979 22.6957 1.53369 22.4186 0.979588 21.8645C0.425488 21.3104 0.148438 20.6443 0.148438 19.8662V2.88951C0.148438 2.11141 0.425488 1.44531 0.979588 0.89121C1.53369 0.337109 2.19979 0.0600586 2.97789 0.0600586H25.6135C26.3916 0.0600586 27.0577 0.337109 27.6118 0.89121C28.1659 1.44531 28.4429 2.11141 28.4429 2.88951V12.7926H25.6135V5.71896L14.2957 12.7926ZM14.2957 9.96313L25.6135 2.88951H2.97789L14.2957 9.96313ZM24.1988 26.9398L22.2181 24.9592L24.4463 22.6957H18.5399V19.8662H24.4463L22.1828 17.6027L24.1988 15.622L29.8577 21.2809L24.1988 26.9398ZM2.97789 5.71896V21.2809V12.7926V12.8987V2.88951V5.71896Z"/>
+                </svg>
+            </ng-container>
+
+            <ng-container *ngIf="!verificationTypeIsEmail">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 45 45" fill="none">
+                    <path d="M31.6964 29.8529L29.1232 27.2798L31.9721 24.339H22.5065V20.663H31.9721L29.1232 17.7223L31.6964 15.1491L39.0483 22.501L31.6964 29.8529ZM13.3166 42.7188C12.3057 42.7188 11.4403 42.3589 10.7204 41.639C10.0006 40.9191 9.64062 40.0537 9.64062 39.0429V5.95917C9.64062 4.94828 10.0006 4.08289 10.7204 3.36302C11.4403 2.64314 12.3057 2.2832 13.3166 2.2832H31.6964C32.7073 2.2832 33.5727 2.64314 34.2926 3.36302C35.0124 4.08289 35.3724 4.94828 35.3724 5.95917V13.3111H31.6964V11.4731H13.3166V33.5289H31.6964V31.6909H35.3724V39.0429C35.3724 40.0537 35.0124 40.9191 34.2926 41.639C33.5727 42.3589 32.7073 42.7188 31.6964 42.7188H13.3166ZM13.3166 37.2049V39.0429H31.6964V37.2049H13.3166ZM13.3166 7.79715H31.6964V5.95917H13.3166V7.79715Z"/>
+                </svg>
+            </ng-container>
+        </span>
+        <span class="verify-email-or-phone__title">{{ title }}</span>
+        <span class="verify-email-or-phone__description" [innerHTML]="description"></span>
+        <form [formGroup]="confirmCodeForm" class="verify-email-or-phone__group-code">
+            <input
+                #codeInputs
+                type="text"
+                class="verify-email-or-phone__code"
+                formControlName="code1"
+                maxlength="1"
+                (input)="onInput($event, 0)"
+            >
+            <input
+                #codeInputs
+                type="text"
+                class="verify-email-or-phone__code"
+                formControlName="code2"
+                maxlength="1"
+                (input)="onInput($event, 1)"
+            >
+            <input
+                #codeInputs
+                type="text"
+                class="verify-email-or-phone__code"
+                formControlName="code3"
+                maxlength="1"
+                (input)="onInput($event, 2)"
+            >
+            <input
+                #codeInputs
+                type="text"
+                class="verify-email-or-phone__code"
+                formControlName="code4"
+                maxlength="1"
+                (input)="onInput($event, 3)"
+            >
+            <input
+                #codeInputs
+                type="text"
+                class="verify-email-or-phone__code"
+                formControlName="code5"
+                maxlength="1"
+                (input)="onInput($event, 4)"
+            >
+        </form>
+
+        <div class="resend-code">
+            <span class="resend-code__label">{{ resendCodeTitle }}</span>
+            <a
+                type="button"
+                class="resend-code__btn resend-code__btn--disabled"
+                (click)="handleResendCode()"
+            >
+                Reenviar código em 30s
+            </a>
+        </div>
+
+        <div class="support">
+            <span class="support__label">{{ supportTitle }}</span>
+            <span class="support__description">
+                Se você precisar de ajuda,
+                <a
+                    target="_blank"
+                    [routerLink]="['/']"
+                    routerLinkActive="router-link-active"
+                    class="support__link"
+                >
+                    fale com o nosso suporte
+                </a>.
+            </span>
+        </div>
+    </div>
+    <div class="verify-email-or-phone__footer">
+        <button
+            class="verify-email-or-phone__btn-confirm"
+            (click)="handleConfirmCode()"
+            [disabled]="confirmCodeForm.invalid"
+        >
+            Confirmar código
+        </button>
+    </div>
+</div>
+
+<div class="verify-email-or-phone-success" *ngIf="showModalSuccess">
+    <div class="verify-email-or-phone-success__header">
+        <button class="verify-email-or-phone-success__btn-close" (click)="handleClose('success')">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+    <div class="verify-email-or-phone-success__body">
+        <span class="verify-email-or-phone-success__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 40 41" fill="none">
+                <path d="M16.8083 28.0852L9.09375 20.3688L11.6647 17.7979L16.8083 22.9398L27.0919 12.6543L29.6647 15.227L16.8083 28.0852Z"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 20.2437C0 9.1982 8.95455 0.243652 20 0.243652C31.0455 0.243652 40 9.1982 40 20.2437C40 31.2891 31.0455 40.2437 20 40.2437C8.95455 40.2437 0 31.2891 0 20.2437ZM20 36.6073C17.8511 36.6073 15.7232 36.184 13.7379 35.3617C11.7526 34.5393 9.94867 33.334 8.42916 31.8145C6.90966 30.295 5.70432 28.4911 4.88197 26.5057C4.05962 24.5204 3.63636 22.3926 3.63636 20.2437C3.63636 18.0947 4.05962 15.9669 4.88197 13.9816C5.70432 11.9962 6.90966 10.1923 8.42916 8.67281C9.94867 7.15331 11.7526 5.94797 13.7379 5.12562C15.7232 4.30327 17.8511 3.88002 20 3.88002C24.3399 3.88002 28.5021 5.60404 31.5708 8.67281C34.6396 11.7416 36.3636 15.9037 36.3636 20.2437C36.3636 24.5836 34.6396 28.7457 31.5708 31.8145C28.5021 34.8833 24.3399 36.6073 20 36.6073Z"/>
+            </svg>
+        </span>
+        <span class="verify-email-or-phone-success__title">{{ successTitle }}</span>
+        <span class="verify-email-or-phone-success__description" [innerHTML]="successDescription"></span>
+    </div>
+</div>

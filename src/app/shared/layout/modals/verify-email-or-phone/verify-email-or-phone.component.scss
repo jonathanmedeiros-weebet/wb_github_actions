@@ -1,0 +1,209 @@
+.verify-email-or-phone,
+.verify-email-or-phone-success {
+    background-color: var(--background);
+    color: var(--foreground);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    position: fixed;
+    overflow-x: hidden;
+    border-radius: 4px;
+
+    &__footer {
+        margin-top: 50px;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__body {
+        margin-bottom: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+    }
+   
+    &__btn-close {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        
+        background-color: var(--header);
+        color: var(--highlight);
+        height: 29px;
+        width: 29px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    &__title {
+        color: var(--foreground);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+    }
+
+    &__description {
+        color: rgba(var(--foreground-rgb), .7);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__btn-confirm {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 100%;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        border-radius: 4px;
+        background: var(--highlight);
+        color: var(--foreground-highlight);
+    }
+    &__btn-confirm:disabled {
+        pointer-events: none; 
+        text-decoration: none;
+        opacity: 0.5;
+    }
+
+    &__group-code {
+        display: flex;
+        justify-content: space-between;
+        gap: auto;
+        width: 100%;
+    }
+
+    &__code {
+        width: 53px;
+        height: 61px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 8px;
+        border: 2px solid rgba(var(--foreground-rgb), .3);
+        background: var(--background);
+        color: rgba(var(--foreground-rgb), .8);
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 20px;
+
+        &:focus {
+            border: 2px solid var(--highlight);
+        }
+    }
+
+    &__icon {
+        display: flex;
+        width: 70px;
+        height: 70px;
+        padding: 2px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 70px;
+        border: 7px solid rgba(var(--highlight-rgb), .1);
+        background: rgba(var(--highlight-rgb), .3);
+    }
+
+    &__icon svg path {
+        fill: var(--highlight);
+    }
+}
+
+.resend-code {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    &__label {
+        color: var(--foreground);
+        text-align: center;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 12px;
+    }
+
+    &__btn {
+        color: var(--highlight);
+        text-align: center;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 12px;
+
+        &--disabled {
+            color: rgba(var(--highlight-rgb), 0.30);
+            pointer-events: none; 
+            text-decoration: none;
+        }
+    }
+}
+
+.support {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    &__label {
+        color: var(--foreground);
+        text-align: center;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 12px;
+    }
+
+    &__description {
+        color: rgba(var(--foreground-rgb), .7);
+        text-align: center;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 12px;
+    }
+
+    &__link {
+        color: var(--highlight);
+        text-align: center;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 12px;
+    }
+}
+
+@media screen and (min-width: 667px) {
+    .verify-email-or-phone,
+    .verify-email-or-phone-success {
+        height: auto;
+        max-width: 400px;
+        position: relative;
+    }
+
+    .verify-email-or-phone-success {
+        padding-bottom: 50px;
+    }
+}
