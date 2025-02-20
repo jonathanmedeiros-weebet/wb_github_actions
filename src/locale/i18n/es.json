@@ -439,6 +439,8 @@
         "dailyMaximum": "Máximo diario",
         "monthlyMaximum": "Máximo mensual",
         "maximumWithdrawalAmount": "Retiro máximo"
+        "monthlyMaximum": "Máximo mensual",
+        "maximumDepositAmount": "Valor máximo"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Activación de registro",
