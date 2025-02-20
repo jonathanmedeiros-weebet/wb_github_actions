@@ -62,7 +62,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     saldo = 0;
     headerHeight = 92;
 
-    disableButton = false;
+    disableButton = true;
     showLoading = true;
     cadastroCompleto = true;
     isMobile = false;
@@ -485,4 +485,18 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             );
         }
     }
+
+    isAvaliableWithdrawalValue(value: number) {
+        const isValueLowerOrEqualThanBalance =  value <= this.saldo;
+        const isValueBiggerOrEqualThanMinDeposit = value >= this.valorMinSaque;
+        const isValueLowerOrEqualThanDailyLimit = value <= this.valorMaxSaqueDiario;
+        const isValidWithDrawValue = isValueLowerOrEqualThanBalance && isValueBiggerOrEqualThanMinDeposit && isValueLowerOrEqualThanDailyLimit;
+        
+        if (isValidWithDrawValue) {
+            this.disableButton = false;
+            return;
+        }
+
+        this.disableButton = true;
+    } 
 }
