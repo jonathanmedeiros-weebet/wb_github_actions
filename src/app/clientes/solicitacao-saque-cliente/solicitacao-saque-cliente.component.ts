@@ -57,6 +57,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     valorMinSaque;
     valorMaxSaqueDiario;
     valorMaxSaqueMensal;
+    maximumWithdrawalAmount;
     qtdRolloverAtivos = 0;
     saldo = 0;
     headerHeight = 92;
@@ -123,7 +124,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw); 
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw);
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
@@ -136,7 +137,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 })
                 break;
             default:
-                break;            
+                break;
         }
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
@@ -188,8 +189,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
                     this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
+                    this.maximumWithdrawalAmount = res.nivelCliente?.maximum_withdrawal_amount ?? null;
 
-                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
+                    const checkMaximumWithdrawalAmount = this.maximumWithdrawalAmount !== null ? (this.valorMaxSaqueDiario < this.maximumWithdrawalAmount ? this.valorMaxSaqueDiario : this.maximumWithdrawalAmount) : this.valorMaxSaqueDiario;
+
+                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), ...(this.maximumWithdrawalAmount !== null ? [Validators.max(checkMaximumWithdrawalAmount)] : [])]);
 
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
                     this.onChavePixChange();
