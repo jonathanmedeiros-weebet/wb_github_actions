@@ -5,6 +5,7 @@
         </div>
         <div class="lottery__container">
             <iframe
+                class="lottery__iframe"
                 ref="lotteryIframe"
                 :src="gameUrl"
                 width="auto"
@@ -126,6 +127,13 @@ export default {
 
     &__container {
         padding: 8px 1px;
+        width: 100vw;
+        height: calc(100vh - 100px);
+    }
+
+    &__iframe {
+        height: 100%;
+        width: 100%;
     }
 }
 </style>
