@@ -24,42 +24,63 @@
             <input
                 #codeInputs
                 type="text"
+                inputmode="numeric"
                 class="verify-email-or-phone__code"
                 formControlName="code1"
                 maxlength="1"
                 (input)="onInput($event, 0)"
+                (keyup)="onKeyup($event, 0)"
+                (paste)="onPaste($event)"
             >
             <input
                 #codeInputs
                 type="text"
+                inputmode="numeric"
                 class="verify-email-or-phone__code"
                 formControlName="code2"
                 maxlength="1"
+                (keyup)="onKeyup($event, 1)"
                 (input)="onInput($event, 1)"
             >
             <input
                 #codeInputs
                 type="text"
+                inputmode="numeric"
                 class="verify-email-or-phone__code"
                 formControlName="code3"
                 maxlength="1"
+                (keyup)="onKeyup($event, 2)"
                 (input)="onInput($event, 2)"
             >
             <input
                 #codeInputs
                 type="text"
+                inputmode="numeric"
                 class="verify-email-or-phone__code"
                 formControlName="code4"
                 maxlength="1"
+                (keyup)="onKeyup($event, 3)"
                 (input)="onInput($event, 3)"
             >
             <input
                 #codeInputs
                 type="text"
+                inputmode="numeric"
                 class="verify-email-or-phone__code"
                 formControlName="code5"
                 maxlength="1"
+                (keyup)="onKeyup($event, 4)"
                 (input)="onInput($event, 4)"
+            >
+            <input
+                #codeInputs
+                type="text"
+                inputmode="numeric"
+                class="verify-email-or-phone__code"
+                formControlName="code6"
+                maxlength="1"
+                (keyup)="onKeyup($event, 5)"
+                (input)="onInput($event, 5)"
             >
         </form>
 
@@ -67,14 +88,15 @@
             <span class="resend-code__label">{{ resendCodeTitle }}</span>
             <a
                 type="button"
-                class="resend-code__btn resend-code__btn--disabled"
+                class="resend-code__btn"
+                [ngClass]="{'resend-code__btn--disabled': disableResendCodeButton}"
                 (click)="handleResendCode()"
             >
-                Reenviar código em 30s
+                Reenviar código <span *ngIf="disableResendCodeButton">em {{time}}s</span> 
             </a>
         </div>
 
-        <div class="support">
+        <div class="support" *ngIf="showSupportSection">
             <span class="support__label">{{ supportTitle }}</span>
             <span class="support__description">
                 Se você precisar de ajuda,
