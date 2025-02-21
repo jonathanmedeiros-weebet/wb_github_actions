@@ -34,7 +34,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     @Input() showCancel = false;
     @ViewChild('bilheteCompartilhamento', { static: false }) bilheteCompartilhamento;
     @Input() aposta;
-    @Input() isShared = false;
     appMobile;
     casaDasApostasId;
     isLoggedIn;
@@ -47,7 +46,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
     apostaVersion;
     showLoading = false;
     simulando = false;
-    repeating = false;
     encerrando = false;
     isCliente;
     isMobile;
@@ -388,30 +386,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         }
     }
 
-    public async convertItemToBet(itens) {
-        try {
-            return await this.jogoService.convertItemToBet(itens);
-        } catch (error) {
-            this.handleError(error.message);
-            return [];
-        }
-    }
-
-
-    async repetirAposta(aposta) {
-        this.repeating = true;
-        let convertedItemToBet = await this.convertItemToBet(aposta.itens);
-        if (convertedItemToBet.length) {
-            this.bilheteEsportivo.atualizarItens(convertedItemToBet);
-            this.activeModal.close();
-            this.router.navigate(['/esportes']);
-            this.messageService.success(this.translate.instant('compartilhar_aposta.apostaRepetida'));
-            return;
-        }
-        this.messageService.warning(this.translate.instant('compartilhar_aposta.apostaRepetidaErro'));
-        this.repeating = false;
-    }
-
     async copyToClipboard(codigo: string, message = true) {
         try {
             await navigator.clipboard.writeText(codigo);
@@ -503,26 +477,6 @@ export class ApostaEncerramentoModalComponent implements OnInit, OnDestroy {
         }
 
         if (this.process) {
-            return false;
-        }
-
-        return true;
-    }
-
-    podeReutilizar(aposta) {
-        const strategy = this.paramsLocais.getOpcoes().closure_strategy;
-
-        if (strategy === 'probability') {
-            const itemSemProbabilidade = aposta.itens.find((item: any) => item.probabilidade == null);
-
-            if (itemSemProbabilidade || (new Date(aposta.horario) < new Date('2024-05-08 13:00:00'))) {
-                return false;
-            }
-        }
-
-        const podeReutilizarItem = aposta.itens.some((item: any) => !item.encerrado && !item.resultado && !item.cancelado);
-
-        if (!podeReutilizarItem || aposta.resultado || this.encerrando || (this.itemSelecionado && !this.simulando) || this.process) {
             return false;
         }
 

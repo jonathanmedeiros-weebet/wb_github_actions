@@ -6,7 +6,7 @@ import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.serv
 import { LayoutModule } from 'src/app/shared/layout/layout.module';
 import { TitleCasePipe } from '@angular/common';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApostaEncerramentoModalComponent } from 'src/app/shared/layout/modals';
+import { BetSharingModalComponent } from 'src/app/shared/layout/modals/bet-sharing-modal/bet-sharing-modal.component';
 
 @Component({
   selector: 'app-compartilhar-bilhete',
@@ -79,14 +79,12 @@ export class CompartilharBilheteComponent implements OnInit {
         this.messageService.error('Aposta não encontrada');
         return;
       }
-      let modal = ApostaEncerramentoModalComponent;
+      let modal = BetSharingModalComponent;
       this.modalRef = this.modalService.open(modal, {
         ariaLabelledBy: 'modal-basic-title',
         centered: true
       });
-      this.modalRef.componentInstance.aposta = aposta;
-      this.modalRef.componentInstance.showCancel = false;
-      this.modalRef.componentInstance.isShared = true;
+      this.modalRef.componentInstance.bet = aposta;
 
       this.router.navigate(['/esportes']);
     } catch (error) {
@@ -120,7 +118,7 @@ export class CompartilharBilheteComponent implements OnInit {
     this.messageService.success('Desafio encontrado com sucesso!');
     return;
   }
-  
+
   loteriaBet(aposta) {
     if (!aposta.itens) {
       this.router.navigate(['/loterias/' + aposta.modalidade]);
