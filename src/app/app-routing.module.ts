@@ -113,7 +113,7 @@ const appRoutes: Routes = [
             {
                 path: 'bank-accounts',
                 loadChildren: () => import('./bank-accounts/bank-accounts.module').then(m => m.BankAccountsModule),
-                canActivate: [AuthGuard, ClientGuard, RegisterFacematchGuard, AccountVerificationGuard]
+                canActivate: [AuthGuard, ClientGuard, AccountVerificationGuard]
             },
             {
                 path: 'validar-aposta',
@@ -132,7 +132,7 @@ const appRoutes: Routes = [
             },
             {
                 path: 'clientes',
-                canActivate: [AuthGuard, ClientGuard, RegisterFacematchGuard],
+                canActivate: [AuthGuard, ClientGuard],
                 loadChildren: () => import('./clientes/clientes.module').then(c => c.ClientesModule)
             },
             {

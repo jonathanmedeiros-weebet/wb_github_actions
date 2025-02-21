@@ -791,7 +791,8 @@
         "verified_identity": "Verified identity!",
         "Identity_not_verified": "Identity not verified, please contact support.",
         "account_protected": "Your account protected!",
-        "register_description": "To access all site functions, you will have to register your security photo. Your image is confidential and will not be shared."
+        "register_description": "To access all site functions, you will have to register your security photo. Your image is confidential and will not be shared.",
+        "checkNow": "Check now"
     },
     "register": {
         "signupWith": "Sign up with Google",
