@@ -73,7 +73,6 @@ export class EmailComponent implements OnInit {
 
     private verifyAccountVerificationStep() {
         this.accountVerificationService.verifiedSteps.subscribe(({email}) => {
-            console.log(email)
             if(email != undefined) {
                 this.verificationRequired = !Boolean(email);
             }
