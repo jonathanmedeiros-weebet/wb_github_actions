@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AccountVerificationAlertComponent } from '../layout/modals/account-verification-alert/account-verification-alert.component';
-import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../config';
 import { HttpClient } from '@angular/common/http';
 import { ErrorService } from './utils/error.service';
 import { HeadersService } from './utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
+import { ClienteService } from './clientes/cliente.service';
+import { VerificationTypes } from '../enums';
 
 interface VerifiedSteps {
   phone: boolean;
@@ -43,7 +45,8 @@ export class AccountVerificationService {
     private modalService: NgbModal,
     private http: HttpClient,
     private headerService: HeadersService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private clienteService: ClienteService
   ) {}
 
   public getAccountVerificationDetail(): Observable<VerificationAccountResponse> {
@@ -68,5 +71,41 @@ export class AccountVerificationService {
     });
 
     return modalref;
+  }
+
+  public requestConfirmationCode(requestType: string = VerificationTypes.EMAIL) {
+    return requestType == VerificationTypes.EMAIL
+      ? this.requestConfirmationCodePerEmail()
+      : this.requestConfirmationCodePerPhone();
+  }
+
+  public confirmateCode(requestType: string = VerificationTypes.EMAIL, code: string = '') {
+    return requestType == VerificationTypes.EMAIL
+      ? this.confirmateCodePerEmail(code)
+      : this.confirmateCodePerPhone(code);
+  }
+
+  private requestConfirmationCodePerEmail() {
+    return this.http.get(`${config.BASE_URL}/clientes/request-email-confirmation-code`, this.headerService.getRequestOptions(true))
+      .pipe(
+        map((response) => response),
+        catchError(this.errorService.handleError)
+      );
+  }
+
+  private requestConfirmationCodePerPhone() {
+    return this.clienteService.initiatePhoneValidation();
+  }
+
+  private confirmateCodePerEmail(code: string) {
+    return this.http.post(`${config.BASE_URL}/clientes/verify-email-confirmation-code`, {code}, this.headerService.getRequestOptions(true))
+      .pipe(
+        map((response) => response),
+        catchError(this.errorService.handleError)
+      );
+  }
+
+  private confirmateCodePerPhone(code: string) {
+    return this.clienteService.validatePhone(Number(code));
   }
 }
