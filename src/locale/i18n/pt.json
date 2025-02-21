@@ -796,7 +796,8 @@
         "verified_identity": "Identidade verificada!",
         "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte.",
         "account_protected": "Sua conta protegida!",
-        "register_description": "Para ter acesso a todas as funcionalidades do site você deverá cadastrar sua foto de segurança. Sua imagem é confidencial não será compartilhada."
+        "register_description": "Para ter acesso a todas as funcionalidades do site você deverá cadastrar sua foto de segurança. Sua imagem é confidencial não será compartilhada.",
+        "checkNow": "Verificar agora"
     },
     "register": {
         "signupWith": "Inscrever-se com Google",

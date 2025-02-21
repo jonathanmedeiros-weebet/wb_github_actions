@@ -21,5 +21,29 @@
             <span>{{ customer.genero }}</span>
         </div>
     </div>
-    <button type="button" class="btn btn-custom">Verificar agora</button>
+    <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
+        <div #legitimuz id="legitimuz-container"
+            *ngIf="!faceMatchChangePasswordValidated && !verifiedIdentity">
+            <div id="legitimuz">
+                <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                    [value]="dataUserCPF" />
+                <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                <button id="legitimuz-action-verify" class="btn btn-custom">
+                     {{'face_match.checkNow' | translate}}
+                </button>
+            </div>
+            <div id="legitimuz-root"></div>
+        </div>
+    </div>
+    <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+        <div #docCheck id="docCheck" *ngIf="!faceMatchChangePasswordValidated && !verifiedIdentity">
+            <button id="exDocCheckAction"
+                [attr.data-ex-doccheck-document]="dataUserCPF"
+                [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                [attr.data-ex-doccheck-force-enrollment]="true"
+                [attr.data-ex-doccheck-onboarding]="true">
+                {{'face_match.checkNow' | translate}}
+            </button>
+        </div>
+    </div>
 </div>
