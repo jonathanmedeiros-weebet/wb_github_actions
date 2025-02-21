@@ -17,6 +17,7 @@ import { TermsComponent } from './terms/terms.component';
 export class PersonalDataComponent implements OnInit {
     accordionItems: AccordionItem[] = [
         {
+            key: "documents",
             title: "Verificação de documentos",
             description: "Visão geral dos seus dados pessoais.",
             component: DocumentComponent,
@@ -24,20 +25,23 @@ export class PersonalDataComponent implements OnInit {
             isVisible: false
         },
         {
+            key: "address",
             title: "Endereço",
             description: "Confira e edite as informações referente ao seu endereço se necessário. Lembrando que todos os campos são obrigatórios e devem ser preenchidos para ser considerado completo.",
             component: AddressComponent,
             isVerified: true,
-            isVisible: false
+            isVisible: true
         },
         {
+            key: "email",
             title: "E-mail",
             description: "Confira e atualize o seu e-mail se necessário. Lembrando que o e-mail você deverá ter acesso para que seja enviado o código de verificação.",
             component: EmailComponent,
             isVerified: false,
-            isVisible: true
+            isVisible: false
         },
         {
+            key: "phone",
             title: "Telefone",
             description: "Confira e atualize o seu número de telefone se necessário. Lembrando que o número de telefone deverá ser valido para que seja enviado o código de verificação.",
             component: PhoneComponent,
@@ -45,6 +49,7 @@ export class PersonalDataComponent implements OnInit {
             isVisible: false
         },
         {
+            key: "terms",
             title: "Termos e aceites",
             description: "Termos de uso, política de privacidade e termos de serviço.",
             component: TermsComponent,
