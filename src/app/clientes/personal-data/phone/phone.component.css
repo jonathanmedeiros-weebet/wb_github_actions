@@ -1,0 +1,77 @@
+#personal-data-phone {
+    padding: 20px;
+    border-top: 1px solid #222;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 65px 1fr;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.field {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--input-foreground);
+    background: var(--input);
+    color: var(--input-foreground);
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    opacity: 0.4;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.field.flag {
+    width: 65px;
+}
+
+.field.editing {
+    opacity: 1;
+}
+
+.field .input {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.field .input .input-flag {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.field .input input {
+    border: 0;
+    background: transparent;
+    color: var(--input-foreground);
+    width: 100%;
+}
+
+.field .input input:focus {
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.field .input label {
+    margin: 0px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+    }
+}

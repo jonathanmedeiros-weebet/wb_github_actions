@@ -79,6 +79,10 @@ const routes: Routes = [{
             canActivate: [AccountVerificationGuard],
             loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
+        {
+            path: 'personal-data',
+            loadChildren: () => import('./personal-data/personal-data.module').then(p => p.PersonalDataModule)
+        },
     ]
 }];
 
