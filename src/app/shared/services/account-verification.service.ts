@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ErrorService } from './utils/error.service';
 import { HeadersService } from './utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
+import { VerifyEmailOrPhoneComponent } from '../layout/modals/verify-email-or-phone/verify-email-or-phone.component';
 import { ClienteService } from './clientes/cliente.service';
 import { VerificationTypes } from '../enums';
 
@@ -22,6 +23,11 @@ interface VerificationAccountResponse {
   verified_steps: VerifiedSteps;
   balance: string;
   new_customer: boolean;
+}
+
+interface EmailOrPhoneVerificationStepParams {
+  type: VerificationTypes,
+  value: string
 }
 
 const verifiedStepsDefault: VerifiedSteps = {
@@ -72,6 +78,20 @@ export class AccountVerificationService {
 
     return modalref;
   }
+
+  public openModalPhoneOrEmailVerificationStep(params: EmailOrPhoneVerificationStepParams): NgbModalRef {
+    const modalref: NgbModalRef = this.modalService.open(VerifyEmailOrPhoneComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      centered: true,
+      windowClass: 'modal-400 modal-cadastro-cliente',
+    });
+
+    modalref.componentInstance.verificationType = params.type;
+    modalref.componentInstance.verificationValue = params.value;
+
+    return modalref;
+  }
+
 
   public requestConfirmationCode(requestType: string = VerificationTypes.EMAIL) {
     return requestType == VerificationTypes.EMAIL

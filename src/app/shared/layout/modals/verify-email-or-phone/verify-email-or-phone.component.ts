@@ -87,6 +87,7 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
   }
 
   private requestConfirmationCode() {
+    this.initResendCodeTime();
     this.accountVerificationService
       .requestConfirmationCode(this.verificationType)
       .toPromise()
@@ -95,11 +96,9 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
           ? 'senhas.codigoDeVerificacaoPorEmail'
           : 'senhas.codigoDeVerificacaoPorSms'
         this.messageService.success(this.translate.instant(translateKey));
-        this.initResendCodeTime();
       })
       .catch((error) => {
         this.messageService.error(error);
-        this.initResendCodeTime();
       });
   }
 
@@ -153,7 +152,10 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
     this.accountVerificationService
       .confirmateCode(this.verificationType, code)
       .toPromise()
-      .then(() => this.showModalSuccess = true)
+      .then(() => {
+        this.showModalSuccess = true;
+        this.accountVerificationService.getAccountVerificationDetail().toPromise();
+      })
       .catch((error) => this.messageService.error(error))
   }
 

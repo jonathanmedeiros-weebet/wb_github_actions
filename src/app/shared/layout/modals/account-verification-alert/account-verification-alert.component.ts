@@ -47,22 +47,22 @@ export class AccountVerificationAlertComponent implements OnInit {
       {
         title: 'Validação KYC',
         verified: verifiedSteps?.document,
-        show: verifiedSteps?.document !== undefined, //todo: verificar no paramentros json as permissões;
+        show: verifiedSteps?.document !== undefined
       },
       {
         title: 'Validação do e-mail cadastrado',
         verified: verifiedSteps?.email,
-        show: verifiedSteps?.email !== undefined, //todo: verificar no paramentros json as permissões;
+        show: verifiedSteps?.email !== undefined
       },
       {
         title: 'Validação de telefone informado',
         verified: verifiedSteps?.phone,
-        show: verifiedSteps?.phone !== undefined, //todo: verificar no paramentros json as permissões;
+        show: verifiedSteps?.phone !== undefined
       },
       {
         title: 'Validação de endereço',
         verified: verifiedSteps?.address,
-        show: verifiedSteps?.address !== undefined, //todo: verificar no paramentros json as permissões;
+        show: verifiedSteps?.address !== undefined
       },
     ];
     this.stepStatus = steps.filter(step => step.show);
@@ -81,8 +81,8 @@ export class AccountVerificationAlertComponent implements OnInit {
   }
 
   public goToAccountVerification() {
-    //todo: Adicionar rota da página de verificação
-    // this.router.navigate([''])
+    this.activeModal.close(true);
+    this.router.navigate(['clientes/personal-data']);
   };
 
   private formatCurrencyBRL(value: number) {

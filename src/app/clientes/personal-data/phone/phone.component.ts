@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ClienteService, MessageService } from 'src/app/services';
+import { VerificationTypes } from 'src/app/shared/enums';
+import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 
 export interface CustomerResponse {
     telefone: string;
@@ -15,15 +17,18 @@ export class PhoneComponent implements OnInit  {
     @ViewChild('emailInput') emailInput!: ElementRef;
     phone: string;
     isEditingPhone: boolean;
+    public verificationRequired: boolean = false;
 
     constructor(
         private clienteService: ClienteService,
         private messageService: MessageService,
         private translate: TranslateService,
+        private accountVerificationService: AccountVerificationService,
     ) {}
 
     ngOnInit(): void {
         this.loadCustomerPhone();
+        this.verifyAccountVerificationStep();
     }
 
     loadCustomerPhone() {
@@ -64,5 +69,20 @@ export class PhoneComponent implements OnInit  {
 
     handleError(mensagem: string) {
         this.messageService.error(mensagem);
+    }
+
+    private verifyAccountVerificationStep() {
+        this.accountVerificationService.verifiedSteps.subscribe(({phone}) => {
+            if(phone != undefined) {
+                this.verificationRequired = !Boolean(phone);
+            }
+        })
+    }
+
+    public handleVerification() {
+        this.accountVerificationService.openModalPhoneOrEmailVerificationStep({
+            type: VerificationTypes.PHONE,
+            value: this.phone
+        });
     }
 }

@@ -10,7 +10,11 @@
                 <div class="title">
                     <h2>
                         {{ item.title }}
-                        <span class="wb-badge" [ngClass]="{ 'verified': item.isVerified }">
+                        <span
+                            class="wb-badge"
+                            [ngClass]="{ 'verified': item.isVerified }"
+                            *ngIf="item.showVerificationStatus"
+                        >
                             {{ item.isVerified ? 'Concluido' : 'Pendente' }}
                             <i class="fa" [ngClass]="{ 'fa-check': item.isVerified, 'fa-times': !item.isVerified }"></i>
                         </span>
