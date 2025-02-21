@@ -118,6 +118,7 @@ import { StepperProgressBarComponent } from './modals/register-modal/parts/stepp
 import { PersonalDataComponent } from './modals/register-modal/parts/personal-data/personal-data.component';
 import { RegisterFaceMatchComponent } from './modals/register-face-match/register-face-match.component';
 import { AccountVerifiedSuccessComponent } from './modals/account-verified-success/account-verified-success.component';
+import { VerifyEmailOrPhoneComponent } from './modals/verify-email-or-phone/verify-email-or-phone.component';
 import { CardVerificationPendingComponent } from './header/parts/card-verification-pending/card-verification-pending.component';
 import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
 @NgModule({
@@ -236,6 +237,7 @@ import { AccountVerificationAlertComponent } from './modals/account-verification
         StepperProgressBarComponent,
         RegisterFaceMatchComponent,
         AccountVerifiedSuccessComponent,
+        VerifyEmailOrPhoneComponent,
         CardVerificationPendingComponent,
         AccountVerificationAlertComponent,
     ],

@@ -37,8 +37,8 @@ export * from './shared/services/connection-check.service';
 export * from './shared/services/promocoes.service';
 
 export * from './shared/services/cambistas/cambista.service';
-
 export * from './shared/services/clientes/cliente.service';
+export * from './shared/services/account-verification.service';
 
 /* Utils Services */
 export * from './shared/services/utils/error.service';
@@ -80,3 +80,4 @@ export * from './shared/services/guards/hoquei-gelo.guard';
 export * from './shared/services/guards/modulo-cliente.guard';
 export * from './shared/services/guards/indique-ganhe.guard';
 export * from './shared/services/guards/loteria-popular.guard';
+export * from './shared/services/guards/account-verification.guard';
