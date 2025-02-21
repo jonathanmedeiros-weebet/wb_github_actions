@@ -19,6 +19,7 @@
     padding: 5px 10px;
     border-radius: 5px;
     opacity: 0.4;
+    min-height: 48px;
 
     display: flex;
     flex-direction: column;
