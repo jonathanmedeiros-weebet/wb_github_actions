@@ -196,7 +196,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
 
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
-                        this.rotaCompletarCadastro = '/clientes/perfil';
+                        this.rotaCompletarCadastro = '/clientes/personal-data';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
                     if (this.faceMatchEnabled) {
@@ -388,8 +388,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             if (this.rotaCompletarCadastro === '/clientes/perfil-pix') {
                 this.modalService.open(ClientePixModalComponent);
             }
-            if (this.rotaCompletarCadastro === '/clientes/perfil') {
-                this.modalService.open(ClientePerfilModalComponent);
+            if (this.rotaCompletarCadastro === '/clientes/personal-data') {
+                this.router.navigate(['/clientes/personal-data'])
             }
             this.activeModal.close();
         } else {

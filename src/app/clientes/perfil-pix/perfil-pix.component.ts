@@ -58,7 +58,7 @@ export class PerfilPixComponent extends BaseFormComponent implements OnInit {
         this.menuFooterService.setIsPagina(true);
 
         if (!this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix) {
-            this.router.navigate(['clientes/perfil']);
+            this.router.navigate(['/clientes/personal-data']);
         }
     }
 

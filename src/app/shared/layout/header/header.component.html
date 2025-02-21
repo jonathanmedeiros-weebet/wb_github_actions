@@ -400,7 +400,7 @@
                                 <img src="https://wb-assets.com/img/blank-profile-picture.png" width="40">
                                 <h4 class="menu-conta-header">{{ usuario.nome | titlecase }}</h4>
                             </div>
-                            <app-card-verification-pending />
+                            <app-card-verification-pending *ngIf="accountVerificationPending"/>
 
                             <div class="saldos-container">
                                 <div class="saldos-item">
@@ -717,7 +717,7 @@
                             <div class="d-flex flex-wrap container-menu">
                                 <a
                                     class="dropdown-btn-filled"
-                                    [routerLink]="['/clientes/perfil']"
+                                    [routerLink]="['/clientes/personal-data']"
                                     routerLinkActive="router-link-active"
                                     *ngIf="isCliente"
                                 >
