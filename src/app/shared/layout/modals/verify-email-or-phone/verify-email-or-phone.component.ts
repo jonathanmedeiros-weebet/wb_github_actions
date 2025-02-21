@@ -2,13 +2,8 @@ import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { MessageService } from 'src/app/services';
-import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
-
-enum VerificationTypes {
-  EMAIL = 'email',
-  PHONE = 'phone'
-}
+import { AccountVerificationService, MessageService } from './../../../../services';
+import { VerificationTypes } from './../../../enums';
 
 @Component({
   selector: 'app-verify-email-or-phone',

@@ -8,17 +8,13 @@ import { ErrorService } from './utils/error.service';
 import { HeadersService } from './utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
 import { ClienteService } from './clientes/cliente.service';
+import { VerificationTypes } from '../enums';
 
 interface VerifiedSteps {
   phone: boolean;
   email: boolean;
   document: boolean;
   address: boolean;
-}
-
-enum VerificationTypes {
-  EMAIL = 'email',
-  PHONE = 'phone'
 }
 
 interface VerificationAccountResponse {

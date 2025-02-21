@@ -13,7 +13,7 @@ import * as clone from 'clone';
 import {ApostaModalComponent, LoginModalComponent} from '../../shared/layout/modals';
 import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
 import {RifaBilheteService} from '../../shared/services/rifa/rifa-bilhete.service';
-import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
+import { AccountVerificationService } from '../../shared/services/account-verification.service';
 
 @Component({
     selector: 'app-bilhete-rifa',
