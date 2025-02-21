@@ -21,6 +21,7 @@ import { random } from 'lodash';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from '../../services';
+import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 @Component({
     selector: 'app-seninha',
     templateUrl: 'seninha.component.html',
@@ -66,7 +67,8 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         private cd: ChangeDetectorRef,
         private geolocationService: GeolocationService,
         private helperService: HelperService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
@@ -242,6 +244,13 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     /* Finalizar aposta */
     async create() {
+        if (this.isCliente && this.isLoggedIn) {
+            if (!this.accountVerificationService.accountVerified.getValue()) {
+                this.accountVerificationService.openModalAccountVerificationAlert();
+                return;
+            }
+        }
+
         this.disabledSubmit();
         const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
         if (this.aposta.itens.length) {

@@ -13,6 +13,7 @@ import { MenuFooterService } from '../../services/utils/menu-footer.service';
 import { MessageService } from '../../services/utils/message.service';
 import { SidebarService } from '../../services/utils/sidebar.service';
 import { ClienteApostasModalComponent, LoginModalComponent, PesquisarApostaModalComponent } from '../modals';
+import { AccountVerificationService } from '../../services/account-verification.service';
 
 @Component({
     selector: 'app-menu-footer',
@@ -35,6 +36,7 @@ export class MenuFooterComponent implements OnInit {
     isOpen = false;
     contexto = '';
     nomeBotaoExtras = 'Campeonatos';
+    private accountVerified: boolean = false;
 
     constructor(
         private auth: AuthService,
@@ -44,7 +46,8 @@ export class MenuFooterComponent implements OnInit {
         private menuFooterService: MenuFooterService,
         private messageService: MessageService,
         private modalService: NgbModal,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private accountVerificationService: AccountVerificationService
     ) {
     }
 
@@ -118,6 +121,10 @@ export class MenuFooterComponent implements OnInit {
 
     toggleApostas() {
         if (this.isLoggedIn) {
+            if(this.isCliente && !this.accountVerificationService.accountVerified.getValue()) {
+                this.accountVerificationService.openModalAccountVerificationAlert();
+                return;
+            }
             this.abrirApostas();
         } else {
             if (this.modoCambistaHabilitado) {

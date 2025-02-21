@@ -1983,6 +1983,17 @@ label {
     z-index: 90003 !important;
 }
 
+.color-primary {
+    color: var(--highlight);
+    font-weight: 700;
+}
+
+.disabled {
+    pointer-events: none; 
+    text-decoration: none;
+    opacity: 0.5;
+}
+
 .icon-hover {
     box-sizing: content-box;
     fill: var(--background);
