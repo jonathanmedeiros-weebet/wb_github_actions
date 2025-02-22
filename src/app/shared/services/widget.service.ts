@@ -10,8 +10,8 @@ import { config } from '../config';
 @Injectable({
     providedIn: 'root'
 })
-export class HomeService {
-    private HomeUrl = `${config.BASE_URL}/home`;
+export class WidgetService {
+    private WidgetUrl = `${config.LOKI_URL}/widgets`;
 
     constructor(
         private http: HttpClient,
@@ -19,12 +19,12 @@ export class HomeService {
     ) { }
 
 
-    getPosicaoWidgets(): Observable<any> {
-        const url = `${this.HomeUrl}/posicaoWidgets`;
+    byPage(page: string): Observable<any> {
+        const url = `${this.WidgetUrl}?page=${page}`;
 
         return this.http.get(url)
             .pipe(
-                map((res: any) => res.data),
+                map((res: any) => res.results),
                 catchError(this.errorService.handleError)
             );
     }

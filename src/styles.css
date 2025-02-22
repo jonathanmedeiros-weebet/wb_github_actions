@@ -1793,7 +1793,9 @@ ngb-datepicker-month {
     }
 
     .modal-cadastro-cliente .modal-dialog,
-    .modal-login .modal-dialog {
+    .modal-login .modal-dialog,
+    .modal-account-verification .modal-dialog,
+    .modal-account-verified-success .modal-dialog {
         margin: 0 auto;
         height: auto;
     }
@@ -1966,9 +1968,19 @@ label {
     width: 100%;
 }
 
+.modal-account-verification {
+    z-index: 90002;
+}
+
+.modal-account-verified-success {
+    z-index: 90001;
+}
+
 @media only screen and (max-width: 480px) {
     .modal-cadastro-cliente .modal-dialog,
-    .modal-login .modal-dialog {
+    .modal-login .modal-dialog,
+    .modal-account-verification .modal-dialog,
+    .modal-account-verified-success .modal-dialog {
         max-width: 100%;
         height: 100%;
         margin: 0;
@@ -1981,6 +1993,17 @@ label {
 
 #ex-doccheck-dialog {
     z-index: 90003 !important;
+}
+
+.color-primary {
+    color: var(--highlight);
+    font-weight: 700;
+}
+
+.disabled {
+    pointer-events: none; 
+    text-decoration: none;
+    opacity: 0.5;
 }
 
 .icon-hover {

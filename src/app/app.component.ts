@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from './shared/services/timer.service';
 import { RegisterModalComponentComponent } from './shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
+import { AccountVerificationService } from './shared/services/account-verification.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -68,6 +69,7 @@ export class AppComponent implements OnInit {
         private navigationHistoryService: NavigationHistoryService,
         private cron: CronService,
         private security: SecurityService,
+        private accountVerificationService: AccountVerificationService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -148,6 +150,8 @@ export class AppComponent implements OnInit {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {
                     this.openModalTimeLimit();
                 });
+
+                this.accountVerificationService.getAccountVerificationDetail().toPromise();
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {

@@ -467,4 +467,37 @@ export class ClienteService {
                 catchError(() => [])
             );
     }
+
+    updateEmail(email: string) {
+        return this.http.post(`${this.clienteUrl}/update-email`, { email },
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results.result;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    updatePhone(phone: string) {
+        return this.http.post(`${this.clienteUrl}/update-phone`, { phone },
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results.result;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    updateAddress(address: any) {
+        return this.http.post(`${this.clienteUrl}/update-address`, { address },
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results.result;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
 }

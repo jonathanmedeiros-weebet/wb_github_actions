@@ -44,6 +44,12 @@ export class AuthService {
     }
 
     verificaDadosLogin(data: any): Observable<any> {
+        // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
+        data = {
+            ...data,
+            ignorarValidacaoEmailObrigatoria: true
+        }
+
         return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
@@ -131,6 +137,11 @@ export class AuthService {
     }
 
     login(data: any): Observable<any> {
+        // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
+        data = {
+            ...data,
+            ignorarValidacaoEmailObrigatoria: true
+        }
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {

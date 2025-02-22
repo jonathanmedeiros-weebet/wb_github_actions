@@ -1,0 +1,47 @@
+#personal-data-terms {
+    padding: 20px;
+    border-top: 1px solid #222;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+     display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    border-radius: 4px;
+}
+
+
+ul li span{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+ul li a {
+    color: var(--highlight);
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}

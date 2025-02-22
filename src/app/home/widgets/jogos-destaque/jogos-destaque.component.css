@@ -29,6 +29,7 @@ owl-carousel-o {
     font-size: 18px;
     color: var(--foreground-header);
     flex-grow: 1;
+    gap: 5px;
 }
 
 .slider-header nav {

@@ -449,7 +449,10 @@
         "enterPixKey": "Seleccione el tipo de clave PIX",
         "minimumWithdrawal": "Retiro mínimo",
         "dailyMaximum": "Máximo diario",
-        "monthlyMaximum": "Máximo mensual"
+        "monthlyMaximum": "Máximo mensual",
+        "maximumWithdrawalAmount": "Retiro máximo"
+        "monthlyMaximum": "Máximo mensual",
+        "maximumDepositAmount": "Valor máximo"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Activación de registro",
@@ -787,7 +790,8 @@
         "verified_identity": "Identidad verificada!",
         "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia.",
         "account_protected": "Su cuenta protegida!",
-        "register_description": "Para tener acceso a todas las funciones del sitio, tendrá que registrar su foto de seguridad. Su imagen es confidencial y no será compartida."
+        "register_description": "Para tener acceso a todas las funciones del sitio, tendrá que registrar su foto de seguridad. Su imagen es confidencial y no será compartida.",
+        "checkNow": "Verificar ahora"
     },
     "register": {
         "signupWith": "Regístrate en Google",

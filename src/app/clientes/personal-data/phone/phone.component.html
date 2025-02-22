@@ -1,0 +1,53 @@
+<div id="personal-data-phone">
+    <div class="grid">
+        <div class="field flag" [ngClass]="{ 'editing': isEditingPhone }">
+            <div class="input">
+                <label>Código</label>
+                <div class="input-flag">
+                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_790_15254)">
+                            <path d="M16.0625 12.5004C16.0625 12.9719 15.8752 13.4241 15.5418 13.7575C15.2084 14.0909 14.7562 14.2782 14.2847 14.2782H1.84028C1.36878 14.2782 0.916597 14.0909 0.583199 13.7575C0.249801 13.4241 0.0625 12.9719 0.0625 12.5004V4.50043C0.0625 4.02894 0.249801 3.57675 0.583199 3.24336C0.916597 2.90996 1.36878 2.72266 1.84028 2.72266H14.2847C14.7562 2.72266 15.2084 2.90996 15.5418 3.24336C15.8752 3.57675 16.0625 4.02894 16.0625 4.50043V12.5004Z" fill="#009B3A"/>
+                            <path d="M14.6072 8.50011L8.0614 13.4441L1.51562 8.50011L8.0614 3.55566L14.6072 8.50011Z" fill="#FEDF01"/>
+                            <path d="M8.04991 11.3361C9.63509 11.3361 10.9201 10.0511 10.9201 8.46593C10.9201 6.88075 9.63509 5.5957 8.04991 5.5957C6.46473 5.5957 5.17969 6.88075 5.17969 8.46593C5.17969 10.0511 6.46473 11.3361 8.04991 11.3361Z" fill="#002776"/>
+                            <path d="M5.51742 7.11626C5.3683 7.39716 5.26734 7.70108 5.21875 8.01537C6.99431 7.88648 9.40408 8.85581 10.4383 10.0576C10.617 9.78915 10.7494 9.4887 10.8308 9.16692C9.55431 7.91892 7.31208 7.10915 5.51742 7.11626Z" fill="#CBE9D4"/>
+                            <path d="M5.39453 8.60352H5.83898V9.04796H5.39453V8.60352ZM5.83898 9.4924H6.28342V9.93685H5.83898V9.4924Z" fill="#88C9F9"/>
+                            <path d="M6.73047 8.60373H7.17491V9.04818H6.73047V8.60373ZM7.61936 9.04818H8.0638V9.49262H7.61936V9.04818ZM9.39714 9.93707H9.84158V10.3815H9.39714V9.93707ZM8.0638 10.3815H8.50825V10.826H8.0638V10.3815ZM9.39714 7.71484H9.84158V8.15929H9.39714V7.71484Z" fill="#55ACEE"/>
+                            <path d="M8.50781 9.49219H8.95226V9.93663H8.50781V9.49219Z" fill="#3B88C3"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_790_15254">
+                                <rect width="16" height="16" fill="white" transform="translate(0.0625 0.5)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    +55
+                </div>
+            </div>
+        </div>
+        <div class="field" [ngClass]="{ 'editing': isEditingPhone }">
+            <div class="input">
+                <label>Telefone</label>
+                <input #emailInput [(ngModel)]="phone" [readOnly]="!isEditingPhone" mask="(00)00000-0000" />
+            </div>
+            <a class="btn-change-phone" (click)="handleActiveEditingPhone()">{{ isEditingPhone ? 'Cancelar' : 'Alterar Telefone' }}</a>
+        </div>
+    </div>
+    <div class="actions">
+        <button
+            type="button"
+            class="btn btn-custom"
+            *ngIf="verificationRequired"
+            (click)="handleVerification()"
+        >
+            Verificar agora
+        </button>
+        <button
+            *ngIf="isEditingPhone"
+            type="button"
+            class="btn btn-custom2"
+            (click)="handleUpdatePhone()"
+        >
+            Salvar alteração
+        </button>
+    </div>
+</div>

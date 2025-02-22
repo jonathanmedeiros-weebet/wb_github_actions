@@ -17,6 +17,7 @@ import {
 import { GeolocationService, Geolocation} from 'src/app/shared/services/geolocation.service';
 import * as clone from 'clone';
 import { TranslateService } from '@ngx-translate/core';
+import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 
 @Component({
     selector: 'app-desafios-bilhete',
@@ -60,7 +61,8 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         private layoutService: LayoutService,
         private cd: ChangeDetectorRef,
         private geolocationService: GeolocationService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
@@ -197,8 +199,14 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
-            this.disabledSubmit();
+            if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.accountVerified.getValue()) {
+                    this.accountVerificationService.openModalAccountVerificationAlert();
+                    return;
+                }
+            }
 
+            this.disabledSubmit();
             let valido = true;
             let msg = '';
 
@@ -230,7 +238,10 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                         delete item.odd;
                     });
 
-                    values['geolocation'] = this.geolocation.value
+                    if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+                        values['geolocation'] = await this.geolocationService.getCurrentPosition();
+                    }
+                    
                     values['ibge_code'] = localStorage.getItem('ibge_code');
                     values['locale_city'] = localStorage.getItem('locale_city');
                     values['locale_state'] = localStorage.getItem('locale_state');                 

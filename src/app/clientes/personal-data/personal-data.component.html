@@ -1,0 +1,31 @@
+<div id="personal-data-page" [ngStyle]="{'height': currentHeight + 'px'}">
+    <div class="page-title">
+        <h1>Dados pessoais</h1>
+        <p>Descrição, vê o texto para inserir aqui.</p>
+    </div>
+
+    <div class="wb-accordion">
+        <div class="wb-accordion-item" *ngFor="let item of accordionItems">
+            <div class="wb-accordion-title" (click)="toggleVisibilityItem(item)">
+                <div class="title">
+                    <h2>
+                        {{ item.title }}
+                        <span
+                            class="wb-badge"
+                            [ngClass]="{ 'verified': item.isVerified }"
+                            *ngIf="item.showVerificationStatus"
+                        >
+                            {{ item.isVerified ? 'Concluido' : 'Pendente' }}
+                            <i class="fa" [ngClass]="{ 'fa-check': item.isVerified, 'fa-times': !item.isVerified }"></i>
+                        </span>
+                    </h2>
+                    <p>{{ item.description }}</p>
+                </div>
+                <i class="fa" [ngClass]="{ 'fa-chevron-up': item.isVisible, 'fa-chevron-down': !item.isVisible }"></i>
+            </div>
+            <div class="wb-accordion-content" *ngIf="item.isVisible">
+                <ng-container *ngComponentOutlet="item.component"></ng-container>
+            </div>
+        </div>
+    </div>
+</div>
