@@ -7,8 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { ErrorService } from './utils/error.service';
 import { HeadersService } from './utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
+import { VerifyEmailOrPhoneComponent } from '../layout/modals/verify-email-or-phone/verify-email-or-phone.component';
 import { ClienteService } from './clientes/cliente.service';
 import { VerificationTypes } from '../enums';
+import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verified-success/account-verified-success.component';
 
 interface VerifiedSteps {
   phone: boolean;
@@ -24,12 +26,19 @@ interface VerificationAccountResponse {
   new_customer: boolean;
 }
 
+interface EmailOrPhoneVerificationStepParams {
+  type: VerificationTypes,
+  value: string
+}
+
 const verifiedStepsDefault: VerifiedSteps = {
   phone: false,
   email: false,
   document: false,
   address: false
 }
+
+const ACCOUNT_VERIFIED = 'accountVerified';
 
 @Injectable({
   providedIn: 'root'
@@ -57,18 +66,58 @@ export class AccountVerificationService {
             this.verifiedSteps.next(response.verified_steps);
             this.newCustomer.next(response.new_customer);
             this.balance.next(parseFloat(response.balance));
+            this.showMessageAccountVerified();
             return response;
           }),
           catchError(this.errorService.handleError)
       );
   }
 
+  private showMessageAccountVerified() {
+    const accountVerifiedLocalStorage = JSON.parse(localStorage.getItem(ACCOUNT_VERIFIED));
+    const accountVerified = this.accountVerified.getValue();
+    if(
+      accountVerifiedLocalStorage != null
+      && !accountVerifiedLocalStorage
+      && accountVerified
+    ) {
+      this.openModalAccountVerifiedWithSuccess();
+    }
+    localStorage.setItem(ACCOUNT_VERIFIED, JSON.stringify(accountVerified))
+  }
+
   public openModalAccountVerificationAlert(): NgbModalRef {
     const modalref: NgbModalRef = this.modalService.open(AccountVerificationAlertComponent, {
       ariaLabelledBy: 'modal-basic-title',
       centered: true,
-      windowClass: 'modal-500 modal-cadastro-cliente',
+      windowClass: 'modal-500 modal-account-verification',
+      backdrop: 'static',
     });
+
+    return modalref;
+  }
+
+  public openModalAccountVerifiedWithSuccess(): NgbModalRef {
+    const modalref: NgbModalRef = this.modalService.open(AccountVerifiedSuccessComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      centered: true,
+      windowClass: 'modal-400 modal-account-verified-success',
+      backdrop: 'static',
+    });
+
+    return modalref;
+  }
+
+  public openModalPhoneOrEmailVerificationStep(params: EmailOrPhoneVerificationStepParams): NgbModalRef {
+    const modalref: NgbModalRef = this.modalService.open(VerifyEmailOrPhoneComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      centered: true,
+      windowClass: 'modal-400 modal-account-verification',
+      backdrop: 'static',
+    });
+
+    modalref.componentInstance.verificationType = params.type;
+    modalref.componentInstance.verificationValue = params.value;
 
     return modalref;
   }

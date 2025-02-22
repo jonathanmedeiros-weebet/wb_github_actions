@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
+import { AccountVerificationService, ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
@@ -41,6 +41,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     faceMatchChangePasswordValidated = false;
     disapprovedIdentity = false;
     verifiedIdentity = false;
+    public verificationRequired: boolean = false;
 
     constructor(
         private clienteService: ClienteService,
@@ -50,12 +51,14 @@ export class DocumentComponent implements OnInit, AfterViewInit {
         private docCheckService: DocCheckService,
         private legitimuzService: LegitimuzService,
         private faceMatchService: FaceMatchService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private accountVerificationService: AccountVerificationService
     ) {}
    
     ngOnInit() {
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
         this.loadCustomer();
+        this.verifyAccountVerificationStep();
 
         switch (this.faceMatchType) {
             case 'legitimuz':
@@ -65,10 +68,11 @@ export class DocumentComponent implements OnInit, AfterViewInit {
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
-                this.docCheckService.iframeMessage$.subscribe(message => {
+                this.docCheckService.iframeMessage$.subscribe(async (message) => {
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
-                        this.faceMatchService.updadeFacematch({ document: this.customer.cpf, register: true }).subscribe()
+                        await this.faceMatchService.updadeFacematch({ document: this.customer.cpf, register: true }).toPromise()
                         this.faceMatchChangePasswordValidated = true;
+                        this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     }
                 });
                 break;
@@ -78,21 +82,31 @@ export class DocumentComponent implements OnInit, AfterViewInit {
 
         if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
-                .subscribe(curCustomerIsVerified => {
+                .subscribe(async (curCustomerIsVerified) => {
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
                         this.legitimuzService.closeModal();
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                        this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).subscribe()
+                        await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise()
                         this.faceMatchChangePasswordValidated = true;
+                        this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     } else {
                         this.legitimuzService.closeModal();
                         this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                         this.faceMatchChangePasswordValidated = false;
+                        this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     }
                 });
         }
+    }
+
+    private verifyAccountVerificationStep() {
+        this.accountVerificationService.verifiedSteps.subscribe(({document}) => {
+            if(document != undefined) {
+                this.verificationRequired = !Boolean(document);
+            }
+        })
     }
 
     loadCustomer() {

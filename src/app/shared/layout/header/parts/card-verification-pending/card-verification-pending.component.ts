@@ -17,7 +17,6 @@ export class CardVerificationPendingComponent {
   }
 
   public goToMyProfile() {
-    //todo: redirecionar para pagina do pefil
-    // this.router.navigate[''];
+    this.router.navigate(['clientes/personal-data']);
   }
 }

@@ -10,5 +10,6 @@ export interface AccordionItem {
     description: string;
     component: Type<EmailComponent | PhoneComponent | DocumentComponent | TermsComponent>;
     isVerified: boolean;
+    showVerificationStatus: boolean;
     isVisible: boolean;
 }

@@ -9,7 +9,21 @@
         </div>
     </div>
     <div class="actions">
-        <button type="button" class="btn btn-custom">Verificar agora</button>
-        <button *ngIf="isEditingEmail" type="button" class="btn btn-custom2" (click)="handleUpdateEmail()">Salvar alteração</button>
+        <button
+            type="button"
+            class="btn btn-custom"
+            *ngIf="verificationRequired"
+            (click)="handleVerification()"
+        >
+            Verificar agora
+        </button>
+        <button
+            *ngIf="isEditingEmail"
+            type="button"
+            class="btn btn-custom2"
+            (click)="handleUpdateEmail()"
+        >
+            Salvar alteração
+        </button>
     </div>
 </div>

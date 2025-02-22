@@ -7,12 +7,11 @@ import { BaseFormComponent } from '../base-form/base-form.component';
 import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from '../../config';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     AuthDoisFatoresModalComponent,
     CartaoCadastroModalComponent,
     ClienteApostasModalComponent,
-    ClientePerfilModalComponent,
     ClientePixModalComponent,
     ClienteSenhaModalComponent,
     LoginModalComponent,
@@ -56,7 +55,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
     @ViewChild('indiqueGanheCard', { read: ElementRef }) indiqueGanheCard: ElementRef;
-
+    @ViewChild('dropDownConta') dropDownConta: NgbDropdown;
     usuario = new Usuario();
     unsub$ = new Subject();
     modalRef;
@@ -526,7 +525,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirEditarPerfil() {
-        this.modalService.open(ClientePerfilModalComponent);
+        this.router.navigate(['/clientes/personal-data']);
+        this.dropDownConta.close();
     }
 
     abrirAlterarSenha() {
