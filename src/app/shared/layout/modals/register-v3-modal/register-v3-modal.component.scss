@@ -20,7 +20,6 @@
     justify-content: space-between;
     padding: 0 16px;
     background-color: var(--background);
-    min-height: 100vh;
 }
 
 .my-custom-svg {
@@ -63,10 +62,6 @@
     display: flex;
     flex-direction: column;
     gap: 21px;
-}
-
-.container{
-    min-height: 100svh;
 }
 
 .modal-body-custom {
@@ -299,27 +294,107 @@ button {
 .label-personalized {
     max-height: 10px;
     padding-left: 14px;
-    color: rgba(var(--foreground-inputs-odds-rgb), .3);
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
+.style-phone-country-code {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.input-phone{
+    width: 72%;
+}
+
+.modal-footer-onboarding{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.content-body section .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+    cursor: pointer;
+}
+
+.span-afiliado{
+    color:rgba(var(--foreground-inputs-odds-rgb), 0.3);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.contents-afiliado{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.contents-afiliado i{
+    color:rgba(var(--foreground-inputs-odds-rgb), 0.3);
+}
+
+.section-header {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.content-body section .section-header h3 {
+    margin: 0;
+    font-size: 12px;
+}
+
+.div-country{
+    width: 100%;
+}
+
+.div-option-register-or-login{
+    display: flex;
+    flex-direction: column;
+}
+
+.select-nationality {
+    padding-right: 14px;
+}
+.country-personalized{
+    width: 27%;
+}
+
+.style-select {
+    border: none;
+    appearance: menulist;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    outline: none;
+    max-height: 26px;
+    color: rgba(var(--foreground-inputs-odds-rgb), .3);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    border: none !important;
+    background-color: transparent;
+}
+
+.select-country-code{
+    width: 30%;
+}
+
 .text-input {
     color: rgba(var(--foreground-inputs-odds-rgb), .3);
     padding-left: 6px;
-}
-
-
-
-.dropdown-btn[_ngcontent-gni-c119] {
-    display: flex !important;
-    border: none !important;
-}
-
-.dropdown-list .item2 {
-    background-color: var(--background) !important;
 }
 
 .tooltip {
@@ -328,7 +403,7 @@ button {
 
 .div-button-personalized {
     display: flex;
-    height: 44px;
+    height: 42px;
     flex-direction: column;
     border-radius: 4px;
     border: 1px solid rgba(var(--foreground-inputs-odds-rgb), .3);
@@ -338,14 +413,8 @@ button {
     gap: 4px;
 }
 
-
-.label-personalized {
-    max-height: 10px;
-    padding-left: 14px;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.label-country-code{
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.3);
 }
 
 .text-input {
@@ -376,7 +445,11 @@ h3 {
     background: none;
 }
 
-.close-modal-ativacao {
+.btn-footer{
+    color: var(--highlight);
+}
+
+.close-modal-activation {
     border-radius: 100%;
     position: absolute;
     display: flex;
@@ -387,7 +460,7 @@ h3 {
     padding-right: 5px;
 }
 
-.close-modal-ativacao i {
+.close-modal-activation i {
     margin: 10px;
     color: var(--highlight);
     font-size: 22px;
@@ -615,6 +688,37 @@ a.link-termos-politica {
     padding-top: 8px;
 }
 
+.container-cpf {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -17px;
+}
+
+.border-input-cpf{
+    border: none;
+}
+
+.label-cpf{
+    padding-left: 15px;
+}
+
+.input-cpf{
+    width: 78%;
+}
+
+.input-change-cpf{
+    background-color: black;
+    color: #fff;
+    font-size: 8px;
+}
+
+.button-change-cpf{
+    width: 22%;
+    display: flex;
+    align-items: center;
+}
+
 .tooltip {
     --bs-tooltip-max-width: 346px !important;
     max-width: 346px !important;
@@ -630,9 +734,140 @@ a.link-termos-politica {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+    padding: 0 18px;
+}
+
+.container-footer{
+    background-color: var(--background);
+}
+
+
+.contents-register{
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    justify-content: space-between !important;
+}
+
+.container-full{
+    display: flex;
+}
+
+.banner{
+    outline: none;
+}
+
+.banner-desktop{
+    height: 100%;
+}
+
+.carousel-inner{
+    max-height: 145px !important;
+}
+
+.body-form{
+    margin-top: 10%;
+}
+
+img{
+    width: 100%;
+    max-height: 145px;
+}
+
+.field {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--input-foreground);
+    background: var(--input);
+    color: var(--input-foreground);
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+    opacity: 0.4;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.field.is-invalid {
+    border-color: #dc3545;
+}
+
+.input-focused {
+    border-color: var(--highlight);
+}
+
+.field.editing {
+    opacity: 1;
+}
+
+.field .input {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.field .input input {
+    border: 0;
+    padding: 0;
+    margin:0;
+    background: transparent;
+    color: var(--input-foreground);
+    width: 100%;
+    height: 22px !important;
+}
+
+.field .input input:focus {
+    outline: none;
+    border: 1px;
+    border-color: rgb(0, 255, 21);
+    background-color: transparent;
+}
+
+.field label {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-change-cpf {
+    cursor: pointer;
+    color: var(--foreground);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    padding: 5px 6px;
+    border-radius: 2px;
+    background: var(--background);
+}
+
+.row-cpf {
+    margin-bottom: 16px;
+}
+
+.btn-cadastrar{
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
 }
 
 @media screen and (max-width: 320px) {
+    .country-personalized{
+        width: 33%;
+    }
+
+    .input-phone{
+        width: 65%;
+    }
+
     .requirements-password li span {
         font-size: 10px;
         padding: 4px;
@@ -661,6 +896,12 @@ a.link-termos-politica {
     .requirements-password li span {
         font-size: 12px;
         padding: 5px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .contents-register{
+        min-height: 0svh !important;
     }
 }
 
