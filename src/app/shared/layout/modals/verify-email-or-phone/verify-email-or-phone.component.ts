@@ -139,10 +139,12 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
   public onPaste(event: any) {
     event.preventDefault();
     const pastedData = event.clipboardData.getData('text/plain');
-    this.codeInputs.forEach((input, index) => {
-      input.nativeElement.value = pastedData[index];
+    
+    Object.keys(this.confirmCodeForm.controls).forEach((controlKey, index) => {
+      this.confirmCodeForm.controls[controlKey].setValue(pastedData[index]);
     });
     this.codeInputs.last.nativeElement.focus();
+    this.confirmCodeForm.updateValueAndValidity();
   }
 
   public handleConfirmCode() {

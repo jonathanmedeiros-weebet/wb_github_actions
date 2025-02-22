@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ClienteService, MessageService, UtilsService } from 'src/app/services';
+import { AccountVerificationService, ClienteService, MessageService, UtilsService } from 'src/app/services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
 import { Cidade } from 'src/app/shared/models/endereco/cidade';
@@ -35,6 +35,7 @@ export class AddressComponent {
         private messageService: MessageService,
         private utilsService: UtilsService,
         private translate: TranslateService,
+        private accountVerificationService: AccountVerificationService
     ) {}
 
     ngOnInit(): void {
@@ -155,6 +156,7 @@ export class AddressComponent {
             .subscribe({
                 next: () => {
                     this.messageService.success(this.translate.instant('geral.alteracoesSucesso'));
+                    this.accountVerificationService.getAccountVerificationDetail().toPromise();
                 },
                 error: (err) => {
                     this.messageService.error(err);

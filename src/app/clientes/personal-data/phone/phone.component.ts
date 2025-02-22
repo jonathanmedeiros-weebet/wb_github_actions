@@ -49,7 +49,8 @@ export class PhoneComponent implements OnInit  {
         .subscribe({
                 next: () => {
                     this.isEditingPhone = false;
-                    this.messageService.success(this.translate.instant('geral.savedSuccessfully'))
+                    this.messageService.success(this.translate.instant('geral.alteracoesSucesso'));
+                    this.accountVerificationService.getAccountVerificationDetail().toPromise();
                 },
                 error: (error) => this.handleError(error)
             });

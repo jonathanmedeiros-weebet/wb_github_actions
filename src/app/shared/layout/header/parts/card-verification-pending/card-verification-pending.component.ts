@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services';
 
 @Component({
@@ -11,12 +10,7 @@ export class CardVerificationPendingComponent {
   public elementId: string;
   constructor(
     private helperService: HelperService,
-    private router: Router
   ) {
     this.elementId = this.helperService.guidGenerate();
-  }
-
-  public goToMyProfile() {
-    this.router.navigate(['clientes/personal-data']);
   }
 }

@@ -48,7 +48,8 @@ export class EmailComponent implements OnInit {
         .subscribe({
                 next: (res) => {
                     this.isEditingEmail = false;
-                    this.messageService.success(this.translate.instant('geral.savedSuccessfully'))
+                    this.messageService.success(this.translate.instant('geral.alteracoesSucesso'));
+                    this.accountVerificationService.getAccountVerificationDetail().toPromise();
                 },
                 error: (error) => this.handleError(error)
             });

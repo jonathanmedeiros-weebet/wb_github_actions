@@ -50,12 +50,16 @@
     flex-direction: column;
 }
 
+.input-select:focus-within {
+    border-color: var(--highlight);
+}
 
 .input-select select {
     background-color: transparent;
     border: 0;
     color: var(--input-foreground);
     padding: 0 0 10px;
+    outline: none;
 }
 
 .input-select label {
