@@ -28,7 +28,7 @@ export class AccountVerificationAlertComponent implements OnInit {
   }
 
   private prepareInfo() {
-    const isNewCustomer = !this.accountVerificationService.newCustomer.getValue();
+    const isNewCustomer = this.accountVerificationService.newCustomer.getValue();
     const balance = this.accountVerificationService.balance.getValue();
     const verifiedSteps = this.accountVerificationService.verifiedSteps.getValue();
 

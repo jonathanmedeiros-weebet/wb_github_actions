@@ -32,8 +32,8 @@ export class PersonalDataComponent implements OnInit {
             description: "Confira e edite as informações referente ao seu endereço se necessário. Lembrando que todos os campos são obrigatórios e devem ser preenchidos para ser considerado completo.",
             component: AddressComponent,
             showVerificationStatus: false,
-            isVerified: true,
-            isVisible: true
+            isVerified: false,
+            isVisible: false
         },
         {
             key: "email",
