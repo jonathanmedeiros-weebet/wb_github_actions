@@ -29,7 +29,7 @@
             <i style="cursor: pointer; margin-left: 0.25rem; margin-bottom: 15px;" (click)="copyToClipboard(aposta.codigo)"
                 class="far fa-copy"></i>
         </p>
-        <ng-container *ngIf="isShared || !aposta.is_cliente">
+        <ng-container *ngIf="!aposta.is_cliente">
             <div *ngIf="aposta.is_cliente; else exibicaoPadrao">
                 <p>
                     <b>Apostador: </b><span>{{aposta.apostador}}</span>
@@ -64,7 +64,7 @@
                                 </p>
                                 <p class="info-cupom" style="margin-bottom: 0">
                                     {{item.jogo_horario | moment: 'HH:mm'}}
-                                </p>    
+                                </p>
                             </div>
                         </td>
                         <td class="item">
@@ -111,7 +111,7 @@
                         </td>
                     </tr>
                 </ng-container>
-                <tr *ngIf="!isShared" class="cupom">
+                <tr class="cupom">
                     <td colspan="2" class="item" style="margin-left: 10px; border-radius: 10px 0 0 10px;">
                         <p class="resultado">
                             Resultado:
@@ -211,14 +211,14 @@
                                     <span style="float:right">{{item.cotacao}}<span class="" *ngIf="item.ao_vivo"> | AO VIVO</span></span>
                                 </div>
                             </span>
-                        </p>            
+                        </p>
                     </div>
                 </div>
             </div>
             </div>
     </ng-container>
     <div class="footer-container">
-        <div *ngIf="!isShared" class="cupom" style="padding: 10px; display: flex; justify-content: space-between;">
+        <div class="cupom" style="padding: 10px; display: flex; justify-content: space-between;">
             <div class="item" style="flex: 1;">
                 <p class="resultado">Resultado:</p>
                 <p class="status">Status:</p>
@@ -254,7 +254,7 @@
                 </p>
             </div>
         </div>
-    
+
     </div>
 </div>
 <div class="modal-footer">
@@ -267,16 +267,10 @@
         </p>
     </div>
     <div class="button-container">
-        <ng-container *ngIf="!isShared">
+        <ng-container>
             <div id="buttons-container">
-                <button *ngIf="podeReutilizar(aposta)" class="btn-outline-custom sec btn"
-                    style="margin-right: 10px;" (click)="repetirAposta(aposta)"
-                    [disabled]="simulando || repeating">
-                    {{ (repeating ? 'compartilhar_aposta.repetindoAposta' : 'compartilhar_aposta.repetirAposta') | translate
-                    }}
-                </button>
                 <button id="encerrar-aposta" *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
-                    [disabled]="simulando || repeating">
+                    [disabled]="simulando">
                     {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' |
                     translate) + (valorEncerramento | currency) }}
                 </button>
@@ -299,14 +293,5 @@
             </div>
         </ng-container>
     </div>
-        <ng-container *ngIf="isShared">
-            <button class="btn secondary-btn btn-block" (click)="repetirAposta(aposta)" *ngIf="podeReutilizar(aposta); else cantRepeat"
-                [disabled]="simulando || repeating">
-                {{ (repeating ? 'compartilhar_aposta.reutilizandoAposta' : 'compartilhar_aposta.reutilizarAposta') | translate }}
-            </button>
-            <ng-template #cantRepeat>
-                <p style="text-align: center;">{{ 'compartilhar_aposta.apostaNaoPodeSerRepetida' | translate }}</p>
-            </ng-template>
-        </ng-container>
 </div>
 </span>

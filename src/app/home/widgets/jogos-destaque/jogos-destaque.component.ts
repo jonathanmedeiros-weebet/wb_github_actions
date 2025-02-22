@@ -12,8 +12,11 @@ import { Router } from '@angular/router';
     styleUrls: ['./jogos-destaque.component.css']
 })
 export class JogosDestaqueComponent implements OnInit, OnChanges {
+    @Input() title = '';
+    @Input() icon = '';
     @Input() displayLabel = true;
     @Input() isHome = false;
+    @Input() games = [];
     @Output() maisCotacoesDestaque = new EventEmitter();
     @Output() hasFeaturedMatches = new EventEmitter<boolean>();
     jogosDestaque = [];
@@ -66,7 +69,7 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
             this.widthCard = 300;
         }
 
-        this.getJogosDestaques();
+        this.getGames();
     }
 
     maisCotacoes(jogoId){
@@ -77,8 +80,8 @@ export class JogosDestaqueComponent implements OnInit, OnChanges {
         }
     }
 
-    getJogosDestaques() {
-        this.jogoService.getJogosDestaque()
+    getGames() {
+        this.jogoService.getGamesById(this.games)
             .subscribe(jogos => {
                 this.jogosDestaquesIds = jogos.results.map(jogo => jogo.fi + '');
 

@@ -238,7 +238,10 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
                         delete item.odd;
                     });
 
-                    values['geolocation'] = this.geolocation.value
+                    if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+                        values['geolocation'] = await this.geolocationService.getCurrentPosition();
+                    }
+                    
                     values['ibge_code'] = localStorage.getItem('ibge_code');
                     values['locale_city'] = localStorage.getItem('locale_city');
                     values['locale_state'] = localStorage.getItem('locale_state');                 

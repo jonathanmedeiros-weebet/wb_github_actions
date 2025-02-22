@@ -252,7 +252,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         }
 
         this.disabledSubmit();
-        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+
+        let geolocation = null;
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+            geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+        }
+
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
                 const values = {...this.aposta, geolocation: geolocation };

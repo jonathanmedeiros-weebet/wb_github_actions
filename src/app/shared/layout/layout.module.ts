@@ -121,6 +121,8 @@ import { AccountVerifiedSuccessComponent } from './modals/account-verified-succe
 import { VerifyEmailOrPhoneComponent } from './modals/verify-email-or-phone/verify-email-or-phone.component';
 import { CardVerificationPendingComponent } from './header/parts/card-verification-pending/card-verification-pending.component';
 import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
+import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -240,6 +242,7 @@ import { AccountVerificationAlertComponent } from './modals/account-verification
         VerifyEmailOrPhoneComponent,
         CardVerificationPendingComponent,
         AccountVerificationAlertComponent,
+        BetSharingModalComponent,
     ],
     exports: [
         MainLayoutComponent,
