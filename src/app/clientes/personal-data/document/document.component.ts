@@ -55,7 +55,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
    
     ngOnInit() {
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
-        this.loadCustomerEmail();
+        this.loadCustomer();
 
         switch (this.faceMatchType) {
             case 'legitimuz':
@@ -95,7 +95,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
         }
     }
 
-    loadCustomerEmail() {
+    loadCustomer() {
         const user = JSON.parse(localStorage.getItem('user'));
         this.clienteService.getCliente(user.id)
             .subscribe({

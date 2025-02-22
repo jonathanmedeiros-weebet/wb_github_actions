@@ -1,0 +1,74 @@
+<div id="personal-data-address">
+    <form [formGroup]="formAddress" (ngSubmit)="onSubmit()">
+        <div class="grid">
+            <div class="input-md">
+                <input
+                    id="addressZipCode"
+                    formControlName="zipcode"
+                    type="text"
+                    class="form-control inverted-out"
+                    placeholder=" "
+                    mask="00000-000"
+                    inputmode="numeric"
+                />
+                <label for="addressZipCode" class="text-input">{{'geral.cepss' | translate}}</label>
+            </div>
+            <div class="input-md">
+                <input
+                    id="addressStreet"
+                    formControlName="street"
+                    type="text"
+                    class="form-control inverted-out"
+                    placeholder=" "
+                />
+                <label for="addressStreet" class="text-input">{{'geral.endereco' | translate}}</label>
+            </div>
+            <div class="input-md">
+                <input
+                    id="addressNumber"
+                    formControlName="number"
+                    type="text"
+                    class="form-control inverted-out"
+                    placeholder=" "
+                />
+                <label for="addressNumber" class="text-input">{{'geral.numero' | translate}}</label>
+            </div>
+            <div class="input-md">
+                <input
+                    id="addressComplement"
+                    formControlName="complement"
+                    type="text"
+                    class="form-control inverted-out"
+                    placeholder=" "
+                />
+                <label for="addressComplement" class="text-input">{{'geral.complement' | translate}}</label>
+            </div>
+            <div class="input-md">
+                <input
+                    id="addressDistrict"
+                    formControlName="district"
+                    type="text"
+                    class="form-control inverted-out"
+                    placeholder=" "
+                />
+                <label for="addressDistrict" class="text-input">{{'geral.bairro' | translate}}</label>
+            </div>
+            <div class="input-select">
+                <label for="addressState" class="text-input">{{'geral.estado' | translate}}</label>
+                <select id="addressState" formControlName="state" (change)="getCities($event)" tabindex="0">
+                    <option *ngFor="let state of states" [value]="state.id">{{ state.uf }}</option>
+                </select>
+            </div>
+            <div class="input-select">
+                <label for="addressCity" class="text-input">{{'geral.cidade' | translate}}</label>
+                <select id="addressCity" formControlName="city" tabindex="0">
+                    <option *ngFor="let city of cities" [value]="city.id">{{ city.nome }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-custom">Verificar agora</button>
+            <button type="submit" class="btn btn-custom2">Salvar Alterações</button>
+        </div>
+    </form>
+</div>

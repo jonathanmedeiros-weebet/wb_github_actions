@@ -27,7 +27,7 @@
         <div class="field" [ngClass]="{ 'editing': isEditingPhone }">
             <div class="input">
                 <label>Telefone</label>
-                <input #emailInput [(ngModel)]="phone" [readOnly]="!isEditingPhone" />
+                <input #emailInput [(ngModel)]="phone" [readOnly]="!isEditingPhone" mask="(00)00000-0000" />
             </div>
             <a class="btn-change-email" (click)="handleActiveEditingPhone()">{{ isEditingPhone ? 'Cancelar' : 'Alterar Telefone' }}</a>
         </div>

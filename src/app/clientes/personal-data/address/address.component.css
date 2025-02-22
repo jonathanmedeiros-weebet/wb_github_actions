@@ -1,0 +1,75 @@
+#personal-data-address {
+    padding: 20px;
+    border-top: 1px solid #222;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.input-md input {
+    height: 48px !important;
+}
+
+.field {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--input-foreground);
+    background: var(--input);
+    color: var(--input-foreground);
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0.4;
+    min-height: 48px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.field label {
+    margin: 0px;
+}
+
+.input-md input {
+    opacity: 1;
+}
+
+.input-select {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--foreground-inputs-odds);
+    background: var(--inputs-odds);
+    color: var(--foreground-inputs-odds);
+    padding: 0px 15px;
+    border-radius: 5px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.input-select select {
+    background-color: transparent;
+    border: 0;
+    color: var(--input-foreground);
+    padding: 0 0 10px;
+}
+
+.input-select label {
+    margin-bottom: 0;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+    }
+}
