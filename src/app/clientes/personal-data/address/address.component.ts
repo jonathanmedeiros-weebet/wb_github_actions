@@ -74,39 +74,39 @@ export class AddressComponent {
     searchForZipcode(zipcode: string) {
         if (zipcode.length == 8) {
             this.utilsService.getEnderecoPorCep(zipcode).subscribe(
-                (endereco: any) => {
-                    if (!endereco.erro) {
-                        let estadoLocal: Estado;
-                        for (let estado of this.states) {
-                            if (estado.uf == endereco.uf) {
-                                estadoLocal = estado;
+                (address: any) => {
+                    if (!address.erro) {
+                        let currentState: Estado;
+                        for (let state of this.states) {
+                            if (state.uf == address.uf) {
+                                currentState = state;
                             }
                         }
-                        const stateCurrent = estadoLocal.id;
-                        if (stateCurrent != this.formAddress.get('state').value) {
-                            this.formAddress.get('state').patchValue(stateCurrent);
-                            this.utilsService.getCidades(stateCurrent).subscribe(
-                                cidades => {
-                                    this.cities = cidades;
-                                    for (let cidade of cidades) {
-                                        if (cidade.nome == endereco.localidade.toUpperCase()) {
-                                            this.formAddress.get('cidade').patchValue(cidade.id);
+
+                        if (currentState.id != this.formAddress.get('state').value) {
+                            this.formAddress.get('state').patchValue(currentState.id);
+                            this.utilsService.getCidades(currentState.id).subscribe(
+                                cities => {
+                                    this.cities = cities;
+                                    for (let city of cities) {
+                                        if (city.nome == address.localidade.toUpperCase()) {
+                                            this.formAddress.get('city').patchValue(city.id);
                                         }
                                     }
                                 },
                                 error => this.messageService.error(error));
                         } else {
-                            for (let cidade of this.cities) {
-                                if (cidade.nome == endereco.localidade.toUpperCase()) {
-                                    this.formAddress.get('cidade').patchValue(cidade.id);
+                            for (let city of this.cities) {
+                                if (city.nome == address.localidade.toUpperCase()) {
+                                    this.formAddress.get('city').patchValue(city.id);
                                 }
                             }
                         }
-                        if (endereco.bairro) {
-                            this.formAddress.get('district').patchValue(endereco.bairro);
+                        if (address.bairro) {
+                            this.formAddress.get('district').patchValue(address.bairro);
                         }
-                        if (endereco.logradouro) {
-                            this.formAddress.get('street').patchValue(endereco.logradouro);
+                        if (address.logradouro) {
+                            this.formAddress.get('street').patchValue(address.logradouro);
                         }
                     } else {
                         this.messageService.error(this.translate.instant('geral.enderecoNaoEncontrado'));
