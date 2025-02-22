@@ -47,13 +47,10 @@ export class EmailComponent implements OnInit {
         this.clienteService.updateEmail(this.email)
         .subscribe({
                 next: (res) => {
-                    console.log(res);
                     this.isEditingEmail = false;
-                    this.messageService.success("Email atualizado com sucesso!")
+                    this.messageService.success(this.translate.instant('geral.savedSuccessfully'))
                 },
-                error: () => {
-                    this.handleError(this.translate.instant('erroInesperado'));
-                }
+                error: (error) => this.handleError(error)
             });
     }
 

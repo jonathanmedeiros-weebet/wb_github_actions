@@ -47,13 +47,11 @@ export class PhoneComponent implements OnInit  {
     handleUpdatePhone() {
         this.clienteService.updatePhone(this.phone)
         .subscribe({
-                next: (res) => {
-                    console.log(res);
+                next: () => {
                     this.isEditingPhone = false;
+                    this.messageService.success(this.translate.instant('geral.savedSuccessfully'))
                 },
-                error: () => {
-                    this.handleError(this.translate.instant('erroInesperado'));
-                }
+                error: (error) => this.handleError(error)
             });
     }
 
