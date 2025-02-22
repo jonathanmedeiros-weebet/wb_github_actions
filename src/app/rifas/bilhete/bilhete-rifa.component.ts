@@ -13,6 +13,7 @@ import * as clone from 'clone';
 import {ApostaModalComponent, LoginModalComponent} from '../../shared/layout/modals';
 import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
 import {RifaBilheteService} from '../../shared/services/rifa/rifa-bilhete.service';
+import { AccountVerificationService } from '../../shared/services/account-verification.service';
 
 @Component({
     selector: 'app-bilhete-rifa',
@@ -55,7 +56,8 @@ export class BilheteRifaComponent extends BaseFormComponent implements OnInit, O
         private modalService: NgbModal,
         private menuFooterService: MenuFooterService,
         private layoutService: LayoutService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
@@ -181,6 +183,13 @@ export class BilheteRifaComponent extends BaseFormComponent implements OnInit, O
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
+            if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.accountVerified.getValue()) {
+                    this.accountVerificationService.openModalAccountVerificationAlert();
+                    return;
+                }
+            }
+
             this.disabledSubmit();
 
             let valido: boolean = true;
