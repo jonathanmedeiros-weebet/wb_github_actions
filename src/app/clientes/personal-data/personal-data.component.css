@@ -1,5 +1,6 @@
 #personal-data-page {
     padding: 40px 65px;
+    overflow: auto;
 }
 
 #personal-data-page .page-title {

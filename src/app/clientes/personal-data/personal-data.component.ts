@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService, SidebarService } from 'src/app/services';
+import { ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
+import { LayoutService, MessageService, SidebarService } from 'src/app/services';
 import { AccordionItem } from 'src/app/shared/interfaces/accordion-item';
 import { AddressComponent } from './address/address.component';
 import { DocumentComponent } from './document/document.component';
@@ -7,6 +7,8 @@ import { EmailComponent } from './email/email.component';
 import { PhoneComponent } from './phone/phone.component';
 import { TermsComponent } from './terms/terms.component';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration-validation',
@@ -15,7 +17,6 @@ import { AccountVerificationService } from 'src/app/shared/services/account-veri
 })
 
 export class PersonalDataComponent implements OnInit {
-    
     public accordionItems: AccordionItem[] = [
         {
             key: "document",
@@ -63,17 +64,28 @@ export class PersonalDataComponent implements OnInit {
             isVisible: false
         }
     ];
-    public customer: any;
+    headerHeight: number = 92;
+    currentHeight: number = window.innerHeight - this.headerHeight;
+    unsub$ = new Subject();
 
     constructor(
-        private messageService: MessageService,
+        private accountVerificationService: AccountVerificationService,
+        private cd: ChangeDetectorRef,
+        private layoutService: LayoutService,
         private sidebarService: SidebarService,
-        private accountVerificationService: AccountVerificationService
     ) {}
 
     ngOnInit(): void {
         this.sidebarService.changeItens({contexto: 'cliente'});
         this.verifyAccountVerificationSteps();
+
+        this.layoutService.currentHeaderHeight
+            .pipe(takeUntil(this.unsub$))
+            .subscribe((curHeaderHeight: number) => {
+                this.headerHeight = curHeaderHeight;
+                this.currentHeight = window.innerHeight - this.headerHeight;
+                this.cd.detectChanges();
+            });
     }
 
     private verifyAccountVerificationSteps() {
@@ -96,9 +108,5 @@ export class PersonalDataComponent implements OnInit {
         })
 
         item.isVisible = !item.isVisible;
-    }
-
-    handleError(mensagem: string) {
-        this.messageService.error(mensagem);
     }
 }
