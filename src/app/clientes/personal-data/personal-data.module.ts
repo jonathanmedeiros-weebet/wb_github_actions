@@ -7,6 +7,7 @@ import { DocumentComponent } from './document/document.component';
 import { PersonalDataRoutingModule } from './personal-data-routing.module';
 import { PersonalDataComponent } from './personal-data.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ],
     imports: [
         PersonalDataRoutingModule,
-        SharedModule
+        SharedModule,
+        NgxMaskModule.forRoot()
     ],
 })
 export class PersonalDataModule { }

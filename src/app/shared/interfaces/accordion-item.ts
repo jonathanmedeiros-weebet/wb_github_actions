@@ -5,7 +5,7 @@ import { PhoneComponent } from "src/app/clientes/personal-data/phone/phone.compo
 import { TermsComponent } from "src/app/clientes/personal-data/terms/terms.component";
 
 export interface AccordionItem {
-    slug: string;
+    key: string;
     title: string;
     description: string;
     component: Type<EmailComponent | PhoneComponent | DocumentComponent | TermsComponent>;

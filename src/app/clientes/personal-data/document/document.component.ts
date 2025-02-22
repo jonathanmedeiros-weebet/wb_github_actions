@@ -57,7 +57,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
    
     ngOnInit() {
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
-        this.loadCustomerEmail();
+        this.loadCustomer();
         this.verifyAccountVerificationStep();
 
         switch (this.faceMatchType) {
@@ -109,7 +109,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
         })
     }
 
-    loadCustomerEmail() {
+    loadCustomer() {
         const user = JSON.parse(localStorage.getItem('user'));
         this.clienteService.getCliente(user.id)
             .subscribe({
