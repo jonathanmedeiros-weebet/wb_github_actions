@@ -1,0 +1,84 @@
+#personal-data-page {
+    padding: 40px 65px;
+}
+
+#personal-data-page .page-title {
+    margin-bottom: 25px;
+}
+
+#personal-data-page .page-title h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+#personal-data-page .page-title p {
+    font-size: 13px;
+    color: #9C9C9C;
+}
+
+.wb-accordion {
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.wb-accordion-item {
+    background-color: var(--league);
+}
+
+.wb-accordion-item .wb-accordion-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 22px;
+    cursor: pointer;
+}
+
+.wb-accordion-item .wb-accordion-title .title {
+    color: var(--league-foreground);
+}
+
+.wb-accordion-item .wb-accordion-title .title h2 {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    gap: 10px;
+}
+
+.wb-accordion-item .wb-accordion-title .title p {
+    font-size: 12px;
+    margin: 0;
+    opacity: 0.5;
+    margin-right: 50px;
+}
+
+.wb-badge {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    font-size: 10px;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 20px;
+    color: #D90505;
+    background-color: #D905051A;
+}
+
+.wb-badge.verified {
+    color: #3DBF3B;
+    background-color: #3DBF3B14;
+}
+
+@media (max-width: 1025px) {
+    #personal-data-page {
+        padding: 40px 25px;
+    }
+}

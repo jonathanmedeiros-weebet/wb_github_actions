@@ -1,0 +1,15 @@
+<div id="personal-data-email">
+    <div class="grid">
+        <div class="field" [ngClass]="{ 'editing': isEditingEmail }">
+            <div class="input">
+                <label>Email</label>
+                <input #emailInput [(ngModel)]="email" [readOnly]="!isEditingEmail" />
+            </div>
+            <a class="btn-change-email" (click)="handleActiveEditingEmail()">{{ isEditingEmail ? 'Cancelar' : 'Alterar Email' }}</a>
+        </div>
+    </div>
+    <div class="actions">
+        <button type="button" class="btn btn-custom">Verificar agora</button>
+        <button *ngIf="isEditingEmail" type="button" class="btn btn-custom2" (click)="handleUpdateEmail()">Salvar alteração</button>
+    </div>
+</div>
