@@ -1,7 +1,16 @@
 
 <div class="contents-register">
     <div class="banner">
-        <app-banners pagina="cadastro"></app-banners>
+        <div
+            class="banner__mobile"
+            *ngIf="registerBannerMobile"
+            [ngStyle]="{'background-image': 'url(' + registerBannerMobile + ')' }"
+        ></div>
+        <div
+            class="banner__desktop"
+            *ngIf="registerBannerDesktop"
+            [ngStyle]="{'background-image': 'url(' + registerBannerDesktop + ')' }"
+        ></div>
     </div>
     
     <div class="container" *ngIf="modalClose">
@@ -44,7 +53,6 @@
                                 >
                                 <label for="cpf" class="text-input">{{LabelCpf}}</label>
                                 <a class="btn-change-cpf" (click)="handleActiveEditingCPF()">{{ 'Alterar CPF' }}</a>
-                                <input type="hidden" [value]="form.get('nome')" formControlName="nomeCompleto">
                             </div>
                             <app-error-msg 
                                 [control]="form.get('cpf')"
@@ -281,6 +289,7 @@
                         </label>
                     </div>
                 </div>
+
                 <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
                     <div class="col-12" [ngStyle]="{'text-align': 'left'}">
                         <re-captcha
@@ -311,6 +320,7 @@
                     </div>
                     <ng-container *ngTemplateOutlet="registerErrorTemplate" />
                 </div>
+
                 <div class="row" *ngIf="!provedorCaptcha">
                     <div
                         class="col-12"
@@ -340,10 +350,12 @@
                         </div>
                     </div>
                 </ng-template>
+
                 <ng-template #tooltipTemplate>
                     <ul class="requirements-password">
+                        <p>{{'geral.passwordRequirements' | translate}}</p>
+
                         <div id="container-tooltip">
-                            <p>{{'geral.passwordRequirements' | translate}}</p>
                             <li [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
                                 <i [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
                                 <span>{{'senhas.minimumCharactersPassword' | translate}}</span>
@@ -361,19 +373,17 @@
                                 <span>{{'senhas.specialChar' | translate}}</span>
                             </li>
                         </div>
-                        <div style="width: 100%;">
-                            <div style="width: 100%;">
-                                <div *ngIf="returnRequirementsValue == 0 "> {{"geral.passwordLevel" | translate}} </div>
+
+                        <div class="password-level">
+                            <div class="password-level__container">
+                                {{"geral.passwordLevel" | translate}}
                                 <div *ngIf="returnRequirementsValue == 1 ">
-                                    {{"geral.passwordLevel" | translate}} 
                                     <span id="weak">{{"geral.weak" | translate}}</span>
                                 </div>
                                 <div *ngIf="returnRequirementsValue == 2 || returnRequirementsValue == 3">
-                                    {{"geral.passwordLevel" | translate}}
                                     <span id="medium">{{"geral.medium" | translate}}</span>
                                 </div>
                                 <div *ngIf="returnRequirementsValue > 3 ">
-                                    {{"geral.passwordLevel" | translate}}
                                     <span id="strong">{{"geral.strong" | translate}}</span>
                                 </div>
                             </div>

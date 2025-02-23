@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService } from 'src/app/services';
+import { AuthService, BannerService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService } from 'src/app/services';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
 import { FormValidations } from 'src/app/shared/utils';
 import { BaseFormComponent } from '../../base-form/base-form.component';
@@ -51,6 +51,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         specialChar: false,
     };
     public countryCodes: any[] = [];
+    private registerBanner: any;
 
     constructor(
         private fb: FormBuilder,
@@ -69,6 +70,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         private router: Router,
         private countriesService: CountriesService,
         private modalService: NgbModal,
+        private bannerService: BannerService
     ) {
         super();
     }
@@ -77,9 +79,18 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         return Object.values(this.requirements ).filter(value => value).length;
     }
 
+    get registerBannerDesktop() {
+        return Boolean(this.registerBanner) ? this.registerBanner?.src : null;
+    }
+
+    get registerBannerMobile() {
+        return Boolean(this.registerBanner) ? this.registerBanner?.src_mobile : null;
+    }
+
     ngOnInit() {
         this.createForm();
         this.getPromocoes();
+        this.prepareBanner();
 
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
@@ -97,6 +108,18 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.hCaptchaLanguage = res.lang;
             this.cd.detectChanges();
         });
+    }
+
+    private prepareBanner() {
+        const page = 'cadastro';
+        this.bannerService
+            .requestBanners()
+            .toPromise()
+            .then((banners) => {
+                if(Boolean(banners)) {
+                    this.registerBanner = banners.find(banner => banner.pagina == page);
+                }
+            })
     }
 
     private getPromocoes(queryParams?: any) {
