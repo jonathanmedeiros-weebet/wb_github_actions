@@ -432,12 +432,12 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         const lengthCheck = passwordValue.length >= 8;
         const hasUpperCase = /[A-Z]/.test(passwordValue);
         const hasLowerCase = /[a-z]/.test(passwordValue);
+        const hasmustContainOneUppercaseAndOneLowercaseLetter = hasUpperCase && hasLowerCase;
         const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
 
         this.requirements  = {
             minimumCharacters: lengthCheck,
-            uppercaseLetter: hasUpperCase,
-            lowercaseLetter: hasLowerCase,
+            mustContainOneUppercaseAndOneLowercaseLetter: hasmustContainOneUppercaseAndOneLowercaseLetter,
             specialChar: hasSpecialChar,
         };
     }

@@ -360,13 +360,9 @@
                                 <i [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
                                 <span>{{'senhas.minimumCharactersPassword' | translate}}</span>
                             </li>
-                            <li [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
-                                <i [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
-                                <span>{{'senhas.lowercaseLetter' | translate}}</span>
-                            </li>
-                            <li [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
-                                <i [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
-                                <span>{{'senhas.uppercaseLetter' | translate}}</span>
+                            <li [ngClass]="{'fulfilled': requirements.mustContainOneUppercaseAndOneLowercaseLetter, 'unfulfilled': !requirements.mustContainOneUppercaseAndOneLowercaseLetter}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.mustContainOneUppercaseAndOneLowercaseLetter, 'bi bi-x-circle': !requirements.mustContainOneUppercaseAndOneLowercaseLetter}"></i>
+                                <span>{{'senhas.mustContainOneUppercaseAndOneLowercaseLetter' | translate}}</span>
                             </li>
                             <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
                                 <i [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
@@ -380,10 +376,10 @@
                                 <div *ngIf="returnRequirementsValue == 1 ">
                                     <span id="weak">{{"geral.weak" | translate}}</span>
                                 </div>
-                                <div *ngIf="returnRequirementsValue == 2 || returnRequirementsValue == 3">
+                                <div *ngIf="returnRequirementsValue == 2">
                                     <span id="medium">{{"geral.medium" | translate}}</span>
                                 </div>
-                                <div *ngIf="returnRequirementsValue > 3 ">
+                                <div *ngIf="returnRequirementsValue === 3 ">
                                     <span id="strong">{{"geral.strong" | translate}}</span>
                                 </div>
                             </div>
@@ -391,8 +387,8 @@
                                 class="bars"
                                 [ngClass]="{
                                     'weak': returnRequirementsValue == 1,
-                                    'medium': returnRequirementsValue == 2 || returnRequirementsValue == 3,
-                                    'strong': returnRequirementsValue > 3
+                                    'medium': returnRequirementsValue == 2,
+                                    'strong': returnRequirementsValue == 3
                                 }"
                             >
                                 <div class="strong-bar-one">
