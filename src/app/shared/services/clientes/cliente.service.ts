@@ -90,45 +90,6 @@ export class ClienteService {
             );
     }
 
-    createRegistrationV3(values: any) {
-        return this.http.post(`${this.clienteUrl}/createRegistrationV3`, JSON.stringify(values), this.headers.getRequestOptions())
-            .pipe(
-                map((response: any) => {
-                    const dataUser = response.results.dataUser;
-
-                    if (dataUser && Object.keys(dataUser).length > 0) {
-                        this.setCookie(dataUser.user.cookie);
-                        const expires = moment().add(1, 'd').valueOf();
-                        localStorage.setItem('expires', `${expires}`);
-                        localStorage.setItem('token', dataUser.token);
-                        localStorage.setItem('user', JSON.stringify(dataUser.user));
-                        this.setIsCliente(true);
-                        localStorage.setItem('tokenCassino', dataUser.tokenCassino);
-                        this.logadoSource.next(true);
-                        if (this.xtremepushHabilitado()) {
-                            xtremepush('set', 'user_id', dataUser.user.id);
-                            setTimeout(function() {
-                                xtremepush('event', 'login');
-                            }, 100);
-                            this.xtremepushBackgroundRemove();
-                        }
-
-                        this.ga4Service.triggerGa4Event(EventGa4Types.PRE_SIGN_UP);
-
-                        this.ga4Service.triggerGa4Event(
-                            EventGa4Types.SIGN_UP,
-                            {
-                                method : dataUser.user.registrationMethod
-                            }
-                        );
-                    }
-
-                    return response.results;
-                }),
-                catchError(this.errorService.handleError)
-            );
-    }
-
     getCliente(id) {
         return this.http.get(`${this.clienteUrl}/getCliente/${id}`, this.headers.getRequestOptions(true))
             .pipe(

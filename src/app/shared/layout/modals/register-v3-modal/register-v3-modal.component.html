@@ -31,14 +31,14 @@
                     </div>
                 </div>
             </div>
-            <form id="form-register" class="body" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form class="body" [formGroup]="form" autocomplete="off">
                 <div class="row">
                     <div class="col-md-12" >
                         <div class="form-group">
                             <div class="input-md">
                                 <input
+                                    #documentNumberElement
                                     type="text"
-                                    (focus)="isFocused = true"
                                     (blur)="isFocused = false; validarCpf(autoPreenchimento = true)"
                                     id="cpf"
                                     class="form-control inverted-out"
@@ -47,12 +47,18 @@
                                     placeholder=""
                                     [dropSpecialCharacters]="false"
                                     inputmode="numeric"
-                                    [readonly]="activeEditingCPF"
+                                    [readonly]="!activeEditingCPF"
                                     [ngClass]="applyCssInputError('cpf')"
                                     [class.input-focused]="isFocused"
                                 >
-                                <label for="cpf" class="text-input">{{LabelCpf}}</label>
-                                <a class="btn-change-cpf" (click)="handleActiveEditingCPF()">{{ 'Alterar CPF' }}</a>
+                                <label for="cpf" class="text-input">{{ LabelCpf }}</label>
+                                <a
+                                    class="btn-change-cpf"
+                                    *ngIf="!activeEditingCPF"
+                                    (click)="handleActiveEditingCPF()"
+                                >
+                                    {{ 'Alterar CPF' }}
+                                </a>
                             </div>
                             <app-error-msg 
                                 [control]="form.get('cpf')"
@@ -63,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" *ngIf="!autoPreenchimento">
+                <div class="row" *ngIf="dataNascimento">
                     <div class="col-md-12" >
                         <div class="form-group">
                             <div class="input-md">
@@ -71,19 +77,14 @@
                                     type="text"
                                     id="dataNascimento"
                                     class="form-control inverted-out"
-                                    formControlName="nascimento"
-                                    [ngClass]="applyCssInputError('nascimento')"
+                                    name="dataNascimento"
+                                    [(ngModel)]="dataNascimento"
+                                    [ngModelOptions]="{standalone: true}"
                                     placeholder=" "
-                                    [ngModel]="dataNascimento"
                                     [readonly]="true"
                                 >
                                 <label class="text-input" for="dataNascimento">{{'geral.dataDeNascimento' | translate}}</label>
                             </div>
-                            <app-error-msg 
-                                [control]="form.get('nascimento')"
-                                label="{{'geral.dataDeNascimento' | translate}}"
-                                class="text-left">
-                            </app-error-msg>
                         </div>
                     </div>
                 </div>
@@ -174,7 +175,7 @@
                                     [disableTooltip]="!isStrengthPassword"
                                     placement="bottom"
                                     tooltipClass="tooltip-password"
-                                    triggers="click"
+                                    triggers="focus"
                                 >
                                 <label class="text-input" for="password">{{'geral.senha' | translate}}</label>
                                 <i
@@ -412,7 +413,7 @@
                 <button
                     type="submit"
                     class="btn btn-custom btn-block btn-cadastrar"
-                    [attr.form]="'form-register'"
+                    (click)="onSubmit()"
                     [disabled]="submitting"
                 >
                     {{'geral.cadastrar' | translate}}

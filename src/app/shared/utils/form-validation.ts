@@ -63,8 +63,7 @@ export class FormValidations {
         const rawBirthday = control.value;
         const actualDate = moment();
 
-        const birthday = moment(rawBirthday, 'DDMMYYYY', true);
-
+        const birthday = moment(rawBirthday, 'YYYY-MM-DD', true);
         if (birthday.isValid()) {
             if (actualDate.diff(birthday, 'years') < 18) {
                 return { menorDeIdade: true };

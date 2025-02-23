@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService, BannerService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService } from 'src/app/services';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
@@ -17,18 +17,20 @@ import { LoginModalComponent } from '../login-modal/login-modal.component';
   templateUrl: './register-v3-modal.component.html',
   styleUrls: ['./register-v3-modal.component.scss']
 })
-export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit{
+export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit {
+    @ViewChild('documentNumberElement') documentNumberElement: ElementRef<HTMLInputElement>;
+
     public modalClose = true;
     public registerCancel = false;
     public form: FormGroup;
     private validacaoEmailObrigatoria: boolean = false;
     public errorMessage: string = '';
+    public dataNascimento: string = '';
     public submitting: boolean = false;
     public hCaptchaLanguage: string;
     private provedorCaptcha: boolean = false;
     public aplicarCssTermo: boolean = false;
     private menorDeIdade: boolean = false;
-    public dataNascimento: string;
     public possuiCodigoAfiliado = false;
     public isLoterj: boolean = false;
     private parameters: any = {};
@@ -40,9 +42,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private currentLocationPermission = null;
     public mostrarSenha: boolean = false;
     public autoPreenchimento: boolean = true;
-    public showAfiliateSection: boolean = false; // verificar pra que serve?
-    public isFocused: boolean = false;
-    public activeEditingCPF: boolean = false;
+    public showAfiliateSection: boolean = false;
+    public isFocused: boolean = true;
+    public activeEditingCPF: boolean = true;
     public LabelCpf: string = 'CPF';
     public requirements: any = {
         minimumCharacters: false,
@@ -108,6 +110,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.hCaptchaLanguage = res.lang;
             this.cd.detectChanges();
         });
+
+        setTimeout(() => this.documentNumberElement.nativeElement.focus(), 500);
     }
 
     private prepareBanner() {
@@ -170,7 +174,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             country: ['+55', [Validators.required]],
             telefone: [null, [Validators.required]],
             senha: [null, [Validators.required, Validators.minLength(8)]],
-            genero: ['', Validators.required],
+            genero: ['Homem', Validators.required],
             nationality: ['Brasil', Validators.required],
 
             captcha: [null, this.provedorCaptcha  ? Validators.required : null],
@@ -179,7 +183,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             googleId: [''],
             googleIdToken: [''],
 
-            documentNumber: ['', Validators.required],
             afiliado: [null, [Validators.maxLength(50)]],
 
             btag: [this.route.snapshot.queryParams.btag],
@@ -187,12 +190,12 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
 
-            logradouro: ['', Validators.required],
-            numero: ['', Validators.required],
-            bairro: ['', Validators.required],
-            cidade: ['', Validators.required],
-            estado: ['', Validators.required],
-            cep: ['', Validators.required],
+            logradouro: ['Travessa da rua do fulano', Validators.required],
+            numero: ['123', Validators.required],
+            bairro: ['Universitário', Validators.required],
+            cidade: ['Vitória de Santo Antão', Validators.required],
+            estado: ['Pernambuco', Validators.required],
+            cep: ['55612271', Validators.required],
 
             dadosCriptografados: [null],
             termosUso: [true],
@@ -239,7 +242,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         }
 
         values = {
+            registerV3: true,
             ...values,
+            senha_confirmacao: values.senha,
             endereco: {
                 logradouro: values.logradouro,
                 numero: values.numero,
@@ -303,7 +308,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.submitting = true;
 
         this.clientesService
-            .createRegistrationV3(values)
+            .cadastrarCliente(values)
             .subscribe(
                 (res) => {
                     sessionStorage.setItem('user', JSON.stringify(res.result.user));
@@ -363,23 +368,20 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                                 this.messageService.error(this.translate.instant('register.registrationBeneficiariesSocialPrograms'));
                                 return;
                             }
-                            this.autoPreenchimento = true;
-                            this.form.patchValue({
-                                nome: res.nome,
-                                nomeCompleto: res.nome,
-                                dadosCriptografados: res.dados
-                            });
-                            this.autoPreenchimento = false;
+
                             this.LabelCpf = res.nome;
-
                             this.onBlurGa4Name(res.nome);
-
                             const dadosDescriptografados: any = jwtDecode(res.dados);
+
+                            this.form.patchValue({
+                                nome: dadosDescriptografados.nome,
+                                dadosCriptografados: res.dados,
+                                nascimento: dadosDescriptografados.nascimento
+                            });
+
                             this.dataNascimento = this.formatarDataComAsterisco(dadosDescriptografados.nascimento);
-                            this.activeEditingCPF = true
-                        } else {
-                            this.autoPreenchimento = false;
-                        }
+                            this.activeEditingCPF = false;
+                        } 
                     },
                     error => {
                         this.form.patchValue({ nome: '' });
@@ -421,6 +423,21 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public handleActiveEditingCPF(){
         this.LabelCpf = 'CPF';
         this.activeEditingCPF = !this.activeEditingCPF;
+
+        this.form.patchValue({
+            nome: '',
+            nomeCompleto: '',
+            dadosCriptografados: null,
+            nascimento: ''
+        });
+
+        this.dataNascimento = '';
+
+        if(this.activeEditingCPF) {
+            console.log('entrou')
+            this.isFocused = true;
+            setTimeout(() => this.documentNumberElement.nativeElement.focus(), 500);
+        }
     }
 
     public onBeforeInput(e: InputEvent, inputName) {
