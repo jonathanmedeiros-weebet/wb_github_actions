@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService, BannerService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService } from 'src/app/services';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { jwtDecode } from 'jwt-decode';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { RecaptchaComponent } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-register-v3-modal',
@@ -19,7 +20,8 @@ import { LoginModalComponent } from '../login-modal/login-modal.component';
 })
 export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit {
     @ViewChild('documentNumberElement') documentNumberElement: ElementRef<HTMLInputElement>;
-
+    @ViewChild('captchaRef') captchaRef: RecaptchaComponent;
+    
     public modalClose = true;
     public registerCancel = false;
     public form: FormGroup;
@@ -28,7 +30,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public dataNascimento: string = '';
     public submitting: boolean = false;
     public hCaptchaLanguage: string;
-    private provedorCaptcha: boolean = false;
+    public provedorCaptcha: string;
     public aplicarCssTermo: boolean = false;
     private menorDeIdade: boolean = false;
     public possuiCodigoAfiliado = false;
@@ -90,16 +92,17 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnInit() {
-        this.createForm();
         this.getPromocoes();
         this.prepareBanner();
 
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
-        this.provedorCaptcha  = this.paramsService.getOpcoes().provedor_captcha;
+        this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
         this.countryCodes = this.countriesService.getDialcodes();
+
+        this.createForm();
 
         if (this.isLoterj) {
             this.aplicarCssTermo = true;
@@ -174,7 +177,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             country: ['+55', [Validators.required]],
             telefone: [null, [Validators.required]],
             senha: [null, [Validators.required, Validators.minLength(8)]],
-            genero: ['Homem', Validators.required],
+            genero: [''],
             nationality: ['Brasil', Validators.required],
 
             captcha: [null, this.provedorCaptcha  ? Validators.required : null],
@@ -190,12 +193,12 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
 
-            logradouro: ['Travessa da rua do fulano', Validators.required],
-            numero: ['123', Validators.required],
-            bairro: ['Universitário', Validators.required],
-            cidade: ['Vitória de Santo Antão', Validators.required],
-            estado: ['Pernambuco', Validators.required],
-            cep: ['55612271', Validators.required],
+            logradouro: [''],
+            numero: [''],
+            bairro: [''],
+            cidade: [''],
+            estado: [''],
+            cep: [''],
 
             dadosCriptografados: [null],
             termosUso: [true],
@@ -218,6 +221,18 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.controls['nascimento'].clearValidators();
             this.form.controls['nascimento'].updateValueAndValidity();
         }
+
+        if (this.provedorCaptcha == 'recaptcha') {
+            this.form.valueChanges.subscribe(() => {
+                if (this.form.controls.senha.valid && !this.submitting) {
+                    this.captchaRef.execute();
+                }
+            });
+        }
+    }
+
+    resolved(token: string) {
+        token ? true : false ;
     }
 
     public onSubmit() {
@@ -242,7 +257,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         }
 
         values = {
-            registerV3: true,
             ...values,
             senha_confirmacao: values.senha,
             endereco: {
@@ -342,6 +356,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     if (this.errorMessage  && res.success) {
                         this.errorMessage  = '';
                     }
+                    this.submitting = false;
+
                 },
                 error => {
                     this.handleError(error);
