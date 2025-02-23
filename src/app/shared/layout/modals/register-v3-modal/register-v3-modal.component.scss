@@ -1,42 +1,48 @@
-.modal-500 .modal-dialog {
-    width: 400px !important;
+.row,
+.row > *,
+.col,
+.form-group,
+label {
+    padding: 0;
+    margin: 0;
 }
 
-.modal-cadastro-cliente .modal-dialog {
-    width: 400px !important;
+button,
+a {
+    outline: none;
 }
 
-.modal-content {
-    width: 400px !important;
-}
-
-.background-modal {
-    background-color: var(--background);
+.form-group input {
+    height: 44px !important;
 }
 
 .container {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0 16px;
-    background-color: var(--background);
-}
+    gap: 40px;
+    padding: 24px 16px 16px 16px;
 
-.my-custom-svg {
-    fill: var(--foreground);
+    background-color: var(--background);
+    max-width: 100%;
 }
 
 .container-header {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    margin-bottom: auto;
 }
 
 .header-register {
     color: var(--foreground);
     display: flex;
-    justify-content: flex-end;
-    margin-top: 16px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 16px;
 }
 
 .header-register-item {
@@ -61,7 +67,7 @@
 .body {
     display: flex;
     flex-direction: column;
-    gap: 21px;
+    gap: 16px;
 }
 
 .modal-body-custom {
@@ -91,7 +97,6 @@ h3 {
 }
 
 .modal-dialog {
-    max-width: 600px;
     display: flex;
     justify-content: center;
 }
@@ -124,7 +129,6 @@ h3 {
     justify-content: end;
     margin-top: 10px;
 }
-
 
 .modal-body {
     padding: 16px 60px;
@@ -196,7 +200,6 @@ button {
     padding: 20px;
     border-radius: 4px;
     width: 100%;
-    max-width: 450px;
     text-align: center;
 }
 
@@ -284,11 +287,13 @@ button {
     height: 44px;
     flex-direction: column;
     border-radius: 4px;
-    border: 1px solid rgba(var(--foreground-inputs-odds-rgb), .3);
+    border-color: var(--foreground-inputs-odds);
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), .4);
     color: var(--foreground-inputs-odds);
-    background: var(--inputs-odds);
+    background: var(--input);
     max-height: 44px;
     gap: 4px;
+
 }
 
 .label-personalized {
@@ -311,13 +316,11 @@ button {
 }
 
 .modal-footer-onboarding{
-    display: inline-flex;
-    justify-content: center;
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
     gap: 6px;
-    margin-bottom: 3%;
     width: 100%;
-    justify-content: space-between;
 }
 
 .content-body section .section-header {
@@ -338,7 +341,6 @@ button {
 .contents-afiliado{
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
     gap: 8px;
 }
 
@@ -349,6 +351,7 @@ button {
 .section-header {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 8px;
 }
 
@@ -361,9 +364,8 @@ button {
     width: 100%;
 }
 
-.div-option-register-or-login{
-    display: flex;
-    flex-direction: column;
+.div-option-register-or-login {
+    display: none;
 }
 
 .select-nationality {
@@ -401,18 +403,6 @@ button {
     z-index: 9999999999;
 }
 
-.div-button-personalized {
-    display: flex;
-    height: 42px;
-    flex-direction: column;
-    border-radius: 4px;
-    border: 1px solid rgba(var(--foreground-inputs-odds-rgb), .3);
-    color: var(--foreground-inputs-odds);
-    background: var(--inputs-odds);
-    max-height: 44px;
-    gap: 4px;
-}
-
 .label-country-code{
     color: rgba(var(--foreground-inputs-odds-rgb), 0.3);
 }
@@ -429,7 +419,6 @@ h3 {
 }
 
 .modal-dialog {
-    max-width: 600px;
     display: flex;
     justify-content: center;
 }
@@ -564,7 +553,6 @@ a.link-termos-politica {
     padding: 20px;
     border-radius: 4px;
     width: 100%;
-    max-width: 450px;
     text-align: center;
 }
 
@@ -733,20 +721,16 @@ a.link-termos-politica {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    padding: 0 18px;
 }
 
 .container-footer{
     background-color: var(--background);
 }
 
-
 .contents-register{
     display: flex;
     flex-direction: column;
-    min-height: 100svh;
-    justify-content: space-between !important;
+    height: 100svh;
 }
 
 .container-full{
@@ -755,45 +739,24 @@ a.link-termos-politica {
 
 .banner{
     outline: none;
-}
-
-.banner-desktop{
-    height: 100%;
-}
-
-.carousel-inner{
-    max-height: 145px !important;
-}
-
-.body-form{
-    margin-top: 10%;
-}
-
-img{
-    width: 100%;
-    max-height: 145px;
-}
-
-.field {
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--input-foreground);
-    background: var(--input);
-    color: var(--input-foreground);
-    padding: 5px 10px;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 400px;
-    opacity: 0.4;
-    height: 48px;
+    height: 175px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+}
+
+input.inverted-out:disabled, input.inverted-out:read-only {
+    border-color: var(--foreground-inputs-odds);
+    opacity: 0.4;
+}
+
+.field input {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background-color: transparent;
 }
 
 .field.is-invalid {
-    border-color: #dc3545;
+    border: 0.1px solid #dc3545;
 }
 
 .input-focused {
@@ -815,7 +778,7 @@ img{
     padding: 0;
     margin:0;
     background: transparent;
-    color: var(--input-foreground);
+    color: var(--foreground-inputs-odds);
     width: 100%;
     height: 22px !important;
 }
@@ -838,25 +801,27 @@ img{
 }
 
 .btn-change-cpf {
+
     cursor: pointer;
-    color: var(--foreground);
-    font-size: 10px;
+    color: var(--foreground-header);
+    font-size: 8px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 
     padding: 5px 6px;
     border-radius: 2px;
-    background: var(--background);
+    background: var(--header);
+
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
-.row-cpf {
-    margin-bottom: 16px;
-}
-
-.btn-cadastrar{
+.btn-cadastrar {
     background-color: var(--highlight);
     color: var(--foreground-highlight);
+    width: 100%;
 }
 
 @media screen and (max-width: 320px) {
@@ -888,10 +853,7 @@ img{
 }
 
 @media only screen and (min-width: 500px) {
-    .container {
-        min-height: 572px;
-        padding: 0 24px;
-    }
+    
 
     .requirements-password li span {
         font-size: 12px;
@@ -901,7 +863,34 @@ img{
 
 @media screen and (min-width: 768px) {
     .contents-register{
-        min-height: 0svh !important;
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        height: auto;
+    }
+
+    .container {
+        width: 450px;
+        padding: 16px 24px 26px 24px;
+    }
+
+    .banner {
+        width: 300px;
+        height: 100%;
+    }
+
+    .header-register {
+        position: relative;
+        padding: 0;
+    }
+
+    .div-option-register-or-login {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal-footer-onboarding{
+        justify-content: space-between;
     }
 }
 
