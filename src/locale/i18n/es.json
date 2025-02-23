@@ -425,10 +425,9 @@
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
         "digiteSuaSenha": "Ingrese su contraseña",
-        "minimumCharactersPassword": "Mínimo 8 caracteres",
-        "lowercaseLetter": "Mínimo una letra minúscula",
-        "uppercaseLetter": "Mínimo una letra mayúscula",
-        "specialChar": "Mínimo un carácter especial (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "La contraseña debe tener al menos 8 caracteres.",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Debe contener una letra mayúscula y una minúscula.",
+        "specialChar": "Debe contener un carácter especial (Ej.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Ingrese el monto para el retiro",
