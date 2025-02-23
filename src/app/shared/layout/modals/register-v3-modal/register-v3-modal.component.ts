@@ -174,7 +174,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             country: ['+55', [Validators.required]],
             telefone: [null, [Validators.required]],
             senha: [null, [Validators.required, Validators.minLength(8)]],
-            genero: ['Homem', Validators.required],
+            genero: ['', Validators.required],
             nationality: ['Brasil', Validators.required],
 
             captcha: [null, this.provedorCaptcha  ? Validators.required : null],
@@ -190,12 +190,12 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
 
-            logradouro: ['Travessa da rua do fulano', Validators.required],
-            numero: ['123', Validators.required],
-            bairro: ['Universitário', Validators.required],
-            cidade: ['Vitória de Santo Antão', Validators.required],
-            estado: ['Pernambuco', Validators.required],
-            cep: ['55612271', Validators.required],
+            logradouro: ['', Validators.required],
+            numero: ['', Validators.required],
+            bairro: ['', Validators.required],
+            cidade: ['', Validators.required],
+            estado: ['', Validators.required],
+            cep: ['', Validators.required],
 
             dadosCriptografados: [null],
             termosUso: [true],
