@@ -72,7 +72,7 @@
                                     [ngModel]="dataNascimento"
                                     [readonly]="true"
                                 >
-                                <label class="text-input"  for="dataNascimento">{{'geral.dataDeNascimento' | translate}}</label>
+                                <label class="text-input" for="dataNascimento">{{'geral.dataDeNascimento' | translate}}</label>
                             </div>
                             <app-error-msg 
                                 [control]="form.get('nascimento')"
@@ -86,13 +86,22 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="input-md">
-                                <input type="text" id="email" class="form-control inverted-out"
-                                    [ngClass]="applyCssInputError('email')" formControlName="email" placeholder=" "
-                                    (beforeinput)="onBeforeInput($event, 'email')">
+                                <input
+                                    type="text"
+                                    id="email"
+                                    class="form-control inverted-out"
+                                    [ngClass]="applyCssInputError('email')"
+                                    formControlName="email"
+                                    placeholder=""
+                                    (beforeinput)="onBeforeInput($event, 'email')"
+                                >
                                 <label class="text-input" for="email">{{'geral.email' | translate}}</label>
                             </div>
-                            <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
-                                class="text-left"></app-error-msg>
+                            <app-error-msg
+                                [control]="form.get('email')"
+                                label="{{'geral.email' | translate}}"
+                                class="text-left"
+                            ></app-error-msg>
                         </div>
                     </div>
                 </div>
@@ -105,22 +114,40 @@
                                         <span class="label-country-code">{{'geral.codigo' | translate}}</span>
                                     </div>
                                     <div class="select-nationality">
-                                        <select class="form-control style-select" formControlName="country" style="font-size: 12px;">
+                                        <select
+                                            class="form-control style-select"
+                                            formControlName="country"
+                                            style="font-size: 12px;"
+                                        >
                                             <option [value]="'+55'" selected>🇧🇷 +55 </option>
-                                            <option *ngFor="let countryCode of countryCodes" 
-                                                [value]="countryCode.value">{{countryCode.emoji + '  ' + countryCode.dial_code}}</option>
+                                            <option
+                                                *ngFor="let countryCode of countryCodes" 
+                                                [value]="countryCode.value"
+                                            >
+                                                {{countryCode.emoji + '  ' + countryCode.dial_code}}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-md input-phone">
-                                <input type="text" id="telefone" mask="(00) 00000-0000"
-                                    class="form-control inverted-out" formControlName="telefone"
-                                    [ngClass]="applyCssInputError('telefone')" placeholder=" " [dropSpecialCharacters]="false"
-                                    inputmode="numeric">
+                                <input
+                                    type="text"
+                                    id="telefone"
+                                    mask="(00) 00000-0000"
+                                    class="form-control inverted-out"
+                                    formControlName="telefone"
+                                    [ngClass]="applyCssInputError('telefone')"
+                                    placeholder=""
+                                    [dropSpecialCharacters]="false"
+                                    inputmode="numeric"
+                                >
                                 <label class="text-input" for="telefone">{{'geral.telefone' | translate}}</label>
-                                <app-error-msg [control]="form.get('telefone')" label="{{'geral.telefone' | translate}}"
-                                class="text-left"></app-error-msg>
+                                <app-error-msg
+                                    [control]="form.get('telefone')"
+                                    label="{{'geral.telefone' | translate}}"
+                                    class="text-left"
+                                ></app-error-msg>
                             </div>
                         </div>
                     </div>
@@ -129,39 +156,67 @@
                     <div class="col-md-12">
                         <div class="form-group" [ngClass]="applyCssDivError('senha')">
                             <div class="input-md">
-                                <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
+                                <input
+                                    [type]="mostrarSenha ? 'text' : 'password'"
+                                    id="password"
                                     class="form-control inverted-out"
-                                    [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
+                                    [ngClass]="applyCssInputError('senha')"
+                                    formControlName="senha"
+                                    placeholder=" "
                                     (beforeinput)="onBeforeInput($event, 'password')"
-                                    (input)="isStrengthPassword ? checkPassword() : null" [ngbTooltip]="tooltipTemplate" [disableTooltip]="!isStrengthPassword"
-                                    placement="bottom" tooltipClass="tooltip-password" triggers="click">
+                                    (input)="isStrengthPassword ? checkPassword() : null"
+                                    [ngbTooltip]="tooltipTemplate"
+                                    [disableTooltip]="!isStrengthPassword"
+                                    placement="bottom"
+                                    tooltipClass="tooltip-password"
+                                    triggers="click"
+                                >
                                 <label class="text-input" for="password">{{'geral.senha' | translate}}</label>
-                                <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
-                                    (click)="mostrarSenha = !mostrarSenha"></i>
+                                <i
+                                    class="fa showPassword"
+                                    [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
+                                    (click)="mostrarSenha = !mostrarSenha"
+                                ></i>
                             </div>
-                            <app-error-msg [control]="form.get('senha')" label="{{'geral.senha' | translate}}"
-                                class="text-left"></app-error-msg>
-                            <small *ngIf="!isStrengthPassword" class="form-text text-muted">{{'geral.requisitosSenha' |
-                                translate}}</small>
+                            <app-error-msg
+                                [control]="form.get('senha')"
+                                label="{{'geral.senha' | translate}}"
+                                class="text-left"
+                            ></app-error-msg>
+                            <small
+                                *ngIf="!isStrengthPassword"
+                                class="form-text text-muted"
+                            >
+                                {{'geral.requisitosSenha' | translate}}
+                            </small>
                         </div>
                     </div>
                 </div>
                 <div class="contents-afiliado">
-                    <div class="section-header" (click)="toggleSections('limiteApostas')">
-                        <i class="fa {{sectionLimiteApostas ? 'fa-chevron-down' : 'fa-chevron-right' }}" ></i>
+                    <div class="section-header" (click)="showAfiliateSection = !showAfiliateSection">
+                        <i class="fa {{showAfiliateSection ? 'fa-chevron-down' : 'fa-chevron-right' }}" ></i>
                         <span class="span-afiliado">Tenho código de afiliação</span>
                     </div>
-                    <div class="section-body" *ngIf="sectionLimiteApostas">
+                    <div class="section-body" *ngIf="showAfiliateSection">
                         <div class="col-md-12">
                             <div class="form-group" [ngClass]="applyCssDivError('afiliado')">
                                 <div class="input-md">
-                                    <input type="text" id="afiliado" class="form-control inverted-out"
-                                        [ngClass]="applyCssInputError('afiliado')" formControlName="afiliado" placeholder=" "
-                                        [readonly]="possuiCodigoAfiliado">
+                                    <input
+                                        type="text"
+                                        id="afiliado"
+                                        class="form-control inverted-out"
+                                        [ngClass]="applyCssInputError('afiliado')"
+                                        formControlName="afiliado"
+                                        placeholder=" "
+                                        [readonly]="possuiCodigoAfiliado"
+                                    >
                                     <label class="text-input" for="afiliado">{{'geral.codigo' | translate}}</label>
                                 </div>
-                                <app-error-msg [control]="form.get('afiliado')" label="Código"
-                                    class="text-left"></app-error-msg>
+                                <app-error-msg
+                                    [control]="form.get('afiliado')"
+                                    label="Código"
+                                    class="text-left"
+                                ></app-error-msg>
                             </div>
                         </div>
                     </div>
@@ -178,59 +233,106 @@
                     </div>
                     <ng-container *ngTemplateOutlet="registerErrorTemplate" />
                 </div>
+
                 <div class="row">
                     <div class="col-12">
                         <label *ngIf="!isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
                             {{'geral.deAcordoComOsTermos1' | translate}}
-                            <a id="linkTermos"
+                            <a
+                                id="linkTermos"
                                 target="_blank"
                                 [routerLink]="['/informacoes/termos-condicoes']"
-                                class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
+                                class="link-termos-politica"
+                            > 
+                                {{'geral.termosDeUso' | translate | lowercase}}
+                            </a>
+
                             {{'geral.deAcordoComOsTermos2' | translate}}
-                            <a id="linkPolitica"
+                            <a 
+                                d="linkPolitica"
                                 target="_blank"
                                 [routerLink]="['/informacoes/politica-privacidade']"
-                                class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
+                                class="link-termos-politica"
+                            >
+                                {{'footer.politicaDePrivacidade' | translate | lowercase}}
+                            </a>.
                         </label>
                         <label *ngIf="isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
                             <input type="checkbox" id="termosUso" formControlName="termosUso">
                             <div>
                                 {{'geral.certificoQueTenhoMais' | translate}}
-                                <a id="linkTermos"
+                                <a
+                                    id="linkTermos"
                                     target="_blank"
                                     [routerLink]="['/informacoes/termos-condicoes']"
-                                    class="link-termos-politica"> {{'geral.termosDeUso' | translate | lowercase}}</a>
+                                    class="link-termos-politica"
+                                >
+                                    {{'geral.termosDeUso' | translate | lowercase}}
+                                </a>
+
                                 {{'geral.deAcordoComOsTermos2' | translate}}
-                                <a id="linkPolitica"
+                                <a
+                                    id="linkPolitica"
                                     target="_blank"
                                     [routerLink]="['/informacoes/politica-privacidade']"
-                                    class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
+                                    class="link-termos-politica"
+                                >
+                                    {{'footer.politicaDePrivacidade' | translate | lowercase}}
+                                </a>.
                             </div>
-                            <app-error-msg [control]="form.get('termosUso')"
-                                            class="text-left"></app-error-msg>
+                            <app-error-msg [control]="form.get('termosUso')" class="text-left"></app-error-msg>
                         </label>
                     </div>
                 </div>
                 <div class="row" *ngIf="provedorCaptcha == 'recaptcha'">
                     <div class="col-12" [ngStyle]="{'text-align': 'left'}">
-                        <re-captcha class="grecaptcha-badge" formControlName="captcha" #captchaRef="reCaptcha"
-                            (resolved)="resolved($event)" errorMode="handled" size="invisible"></re-captcha>
+                        <re-captcha
+                            class="grecaptcha-badge"
+                            formControlName="captcha"
+                            #captchaRef="reCaptcha"
+                            (resolved)="resolved($event)"
+                            errorMode="handled"
+                            size="invisible"
+                        ></re-captcha>
                         {{ 'register.protectedByReCaptchaPart1' | translate }}
-                        <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">{{
-                            'register.protectedByReCaptchaPart2' | translate }}</a> {{ 'register.protectedByReCaptchaPart3' |
-                        translate }}
-                        <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">{{
-                            'register.protectedByReCaptchaPart4' | translate }}</a> {{ 'register.protectedByReCaptchaPart5' |
-                        translate }}
+                        <a
+                            href="https://policies.google.com/privacy"
+                            target="_blank"
+                            class="link-termos-politica"
+                        >
+                            {{ 'register.protectedByReCaptchaPart2' | translate }}
+                        </a> 
+                        {{ 'register.protectedByReCaptchaPart3' | translate }}
+                        <a
+                            href="https://policies.google.com/terms"
+                            target="_blank"
+                            class="link-termos-politica"
+                        >
+                            {{ 'register.protectedByReCaptchaPart4' | translate }}
+                        </a> 
+                        {{ 'register.protectedByReCaptchaPart5' | translate }}
                     </div>
                     <ng-container *ngTemplateOutlet="registerErrorTemplate" />
                 </div>
                 <div class="row" *ngIf="!provedorCaptcha">
-                    <div class="col-12" [ngStyle]="{'text-align': 'left', 'margin-top': '10px','padding-bottom': '24px'}">
-                        <a href="https://policies.google.com/privacy" target="_blank" class="link-termos-politica">Política de
-                            Privacidade</a> do Google e os
-                        <a href="https://policies.google.com/terms" target="_blank" class="link-termos-politica">Termos de
-                            Serviço</a> se aplicam.
+                    <div
+                        class="col-12"
+                        [ngStyle]="{'text-align': 'left', 'margin-top': '10px','padding-bottom': '24px'}"
+                    >
+                        <a
+                            href="https://policies.google.com/privacy"
+                            target="_blank"
+                            class="link-termos-politica"
+                        >
+                            Política de Privacidade</a> do Google e os
+                        <a
+                            href="https://policies.google.com/terms"
+                            target="_blank"
+                            class="link-termos-politica"
+                        >
+                            Termos de Serviço
+                        </a>
+                        se aplicam.
                     </div>
                     <ng-container *ngTemplateOutlet="registerErrorTemplate" />
                 </div>
@@ -245,47 +347,47 @@
                     <ul class="requirements-password">
                         <div id="container-tooltip">
                             <p>{{'geral.passwordRequirements' | translate}}</p>
-                            <li
-                                [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
-                                <i
-                                    [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
-                                    <span>{{'senhas.minimumCharactersPassword' | translate}}</span>
+                            <li [ngClass]="{'fulfilled': requirements.minimumCharacters, 'unfulfilled': !requirements.minimumCharacters}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.minimumCharacters, 'bi bi-x-circle': !requirements.minimumCharacters}"></i>
+                                <span>{{'senhas.minimumCharactersPassword' | translate}}</span>
                             </li>
-                            <li
-                                [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
-                                <i
-                                    [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
-                                    <span>{{'senhas.lowercaseLetter' | translate}}</span>
+                            <li [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
+                                <span>{{'senhas.lowercaseLetter' | translate}}</span>
                             </li>
-                            <li
-                                [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
-                                <i
-                                    [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
-                                    <span>{{'senhas.uppercaseLetter' | translate}}</span>
+                            <li [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
+                                <i [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
+                                <span>{{'senhas.uppercaseLetter' | translate}}</span>
                             </li>
                             <li [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
-                                <i
-                                    [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
-                                    <span>{{'senhas.specialChar' | translate}}</span>
+                                <i [ngClass]="{'bi bi-check-circle': requirements.specialChar, 'bi bi-x-circle': !requirements.specialChar}"></i>
+                                <span>{{'senhas.specialChar' | translate}}</span>
                             </li>
                         </div>
                         <div style="width: 100%;">
                             <div style="width: 100%;">
-                                <div *ngIf="returnRequirementsValue() == 0 "> {{"geral.passwordLevel" | translate}} </div>
-                                <div *ngIf="returnRequirementsValue() == 1 ">{{"geral.passwordLevel" | translate}} <span
-                                        id="weak">{{"geral.weak" | translate}}</span></div>
-                                <div *ngIf="returnRequirementsValue() == 2 || returnRequirementsValue() == 3">
-                                    {{"geral.passwordLevel" |
-                                    translate}} <span id="medium">{{"geral.medium" | translate}}</span></div>
-                                <div *ngIf="returnRequirementsValue() > 3 ">{{"geral.passwordLevel" | translate}} <span
-                                        id="strong">{{"geral.strong" | translate}}</span>
+                                <div *ngIf="returnRequirementsValue == 0 "> {{"geral.passwordLevel" | translate}} </div>
+                                <div *ngIf="returnRequirementsValue == 1 ">
+                                    {{"geral.passwordLevel" | translate}} 
+                                    <span id="weak">{{"geral.weak" | translate}}</span>
+                                </div>
+                                <div *ngIf="returnRequirementsValue == 2 || returnRequirementsValue == 3">
+                                    {{"geral.passwordLevel" | translate}}
+                                    <span id="medium">{{"geral.medium" | translate}}</span>
+                                </div>
+                                <div *ngIf="returnRequirementsValue > 3 ">
+                                    {{"geral.passwordLevel" | translate}}
+                                    <span id="strong">{{"geral.strong" | translate}}</span>
                                 </div>
                             </div>
-                            <div class="bars" [ngClass]="{
-                                            'weak': returnRequirementsValue() == 1,
-                                            'medium': returnRequirementsValue() == 2 || returnRequirementsValue() == 3,
-                                            'strong': returnRequirementsValue() > 3
-                                        }">
+                            <div
+                                class="bars"
+                                [ngClass]="{
+                                    'weak': returnRequirementsValue == 1,
+                                    'medium': returnRequirementsValue == 2 || returnRequirementsValue == 3,
+                                    'strong': returnRequirementsValue > 3
+                                }"
+                            >
                                 <div class="strong-bar-one">
                                 </div>
                                 <div class="strong-bar-two">
@@ -311,10 +413,8 @@
             </div>
         </div>
     </div>
-</div>
 
-<div *ngIf="registerCancel" style=" background-color: var(--background) !important;">
-    <div class="register-cancel-modal">
+    <div class="register-cancel-modal" *ngIf="registerCancel">
         <div class="container-register-cancel">
             <div class="text-register-cancel">
                 <div class="close-register-cancel-header">
@@ -343,8 +443,21 @@
             </div>
         </div>
         <div class="modal-footer-he">
-            <button type="button" class="btn btn-custom btn-block btn-cadastrar" (click)="registerOpen()">{{ 'registerCancel.continue' | translate }}</button>
-            <button type="button" class="btn btn-secondary btn-cancel" (click)="cancelModal()">{{ 'registerCancel.cancel' | translate }}</button>
+            <button
+                type="button"
+                class="btn btn-custom btn-block btn-cadastrar"
+                (click)="registerOpen()"
+            >
+                {{ 'registerCancel.continue' | translate }}
+            </button>
+            <button
+                type="button"
+                class="btn btn-secondary btn-cancel"
+                (click)="cancelModal()"
+            >
+                {{ 'registerCancel.cancel' | translate }}
+            </button>
         </div>
     </div>
 </div>
+

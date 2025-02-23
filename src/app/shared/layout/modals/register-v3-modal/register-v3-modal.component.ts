@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService } from 'src/app/services';
@@ -6,12 +6,7 @@ import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.servi
 import { FormValidations } from 'src/app/shared/utils';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RecaptchaComponent } from 'ng-recaptcha';
-import { Subject } from 'rxjs';
-import { Usuario } from 'src/app/models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
-import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { jwtDecode } from 'jwt-decode';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
@@ -22,77 +17,40 @@ import { LoginModalComponent } from '../login-modal/login-modal.component';
   templateUrl: './register-v3-modal.component.html',
   styleUrls: ['./register-v3-modal.component.scss']
 })
-export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit, OnDestroy{
-    @Input() data: any;
-    @ViewChild('captchaRef') captcha: RecaptchaComponent;
-
-    cpfValidado = false;
-    modalClose = true;
-    registerCancel = false;
-    form: FormGroup;
-    formSocial = false;
-    validacaoEmailObrigatoria;
-    validPassword: boolean = false;
-    faceMatchRequested = false;
-    errorMessage = '';
-    formInvalid = true;
-    unsub$ = new Subject();
-    debouncer: any;
-    submitting = false;
-    afiliadoHabilitado;
-    isCliente;
-    isLoggedIn;
-    modalRef;
-    hCaptchaLanguage;
-    provedorCaptcha;
-    modalTermosRef;
-    loginGoogleAtivo = false;
-    aplicarCssTermo = false;
-    currentLanguage = 'pt';
-
-    user: any;
-    usuario = new Usuario();
-    dataUserCPF = '';
-    beneficiarioProgramaSocial = null;
-    validarBeneficioProgramaSocial = '';
-    menorDeIdade = false;
-    dataNascimento: string;
-    
-    possuiCodigoAfiliado = false;
-    isLoterj;
-    
-    parameters = {};
-    parametersList;
-    postbacks = {};
-    promocoes: any;
-    promocaoAtiva = false;
-    valorPromocao: number | null = null;
-    bonusModalidade: string | null = null;
-
-    isStrengthPassword: boolean | null;
-    lastLocationPermission = null;
-    currentLocationPermission = null;
-
-    appMobile;
-    isMobile: boolean = false;
-    mostrarSenha;
-    autoPreenchimento = true;
-    showLoading = true;
-    sectionLimiteApostas = false;
-    isFocused: boolean = false;
-    activeEditingCPF: boolean = false;
-    LabelCpf = 'CPF';
-    passwordRequirements: string[] = [];
-    fullRegistration = true;
-
-    requirements = {
+export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit{
+    public modalClose = true;
+    public registerCancel = false;
+    public form: FormGroup;
+    private validacaoEmailObrigatoria: boolean = false;
+    public errorMessage: string = '';
+    public submitting: boolean = false;
+    public hCaptchaLanguage: string;
+    private provedorCaptcha: boolean = false;
+    public aplicarCssTermo: boolean = false;
+    private menorDeIdade: boolean = false;
+    public dataNascimento: string;
+    public possuiCodigoAfiliado = false;
+    public isLoterj: boolean = false;
+    private parameters: any = {};
+    private promocoes: any;
+    public promocaoAtiva: boolean = false;
+    public valorPromocao: number | null = null;
+    public isStrengthPassword: boolean | null;
+    private lastLocationPermission = null;
+    private currentLocationPermission = null;
+    public mostrarSenha: boolean = false;
+    public autoPreenchimento: boolean = true;
+    public showAfiliateSection: boolean = false; // verificar pra que serve?
+    public isFocused: boolean = false;
+    public activeEditingCPF: boolean = false;
+    public LabelCpf: string = 'CPF';
+    public requirements: any = {
         minimumCharacters: false,
         uppercaseLetter: false,
         lowercaseLetter: false,
         specialChar: false,
     };
-
-    countryCodes = this.CountriesService.getDialcodes();
+    public countryCodes: any[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -106,57 +64,42 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         public activeModal: NgbActiveModal,
         private auth: AuthService,
         private financeiroService: FinanceiroService,
-        private location: Location,
         private navigatorPermissionsService: NavigatorPermissionsService,
         private geolocationService: GeolocationService,
         private router: Router,
-        private CountriesService: CountriesService,
+        private countriesService: CountriesService,
         private modalService: NgbModal,
     ) {
         super();
     }
 
-    ngOnInit() {
-        if (window.innerWidth <= 767) {
-            this.isMobile = true;
-        }
+    get returnRequirementsValue() {
+        return Object.values(this.requirements ).filter(value => value).length;
+    }
 
+    ngOnInit() {
         this.createForm();
         this.getPromocoes();
 
-        this.currentLanguage = this.translate.currentLang;
-        this.parametersList = this.paramsService.getOpcoes().enabledParameters;
-        this.appMobile = this.auth.isAppMobile();
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
-        this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
-        this.fullRegistration = this.paramsService.getOpcoes().enable_full_registration;
+        this.provedorCaptcha  = this.paramsService.getOpcoes().provedor_captcha;
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
-
-        if (this.data.cpf && this.data.nome) {
-            this.cpfValidado = true;
-        }
-
-        this.form.valueChanges.subscribe(form => {
-            if ((form.cpf != null && form.cpf.length == 14)) {
-                this.showLoading = false;
-                this.cd.detectChanges();
-            } else {
-                this.showLoading = true;
-            }
-        })
-
-        if (this.data.cpf) {
-            this.form.patchValue(this.data);
-        };
+        this.countryCodes = this.countriesService.getDialcodes();
 
         if (this.isLoterj) {
             this.aplicarCssTermo = true;
         }
+
+        this.hCaptchaLanguage = this.translate.currentLang;
+        this.translate.onLangChange.subscribe(res => {
+            this.hCaptchaLanguage = res.lang;
+            this.cd.detectChanges();
+        });
     }
 
-    getPromocoes(queryParams?: any) {
+    private getPromocoes(queryParams?: any) {
         this.financeiroService.getPromocoes(queryParams)
             .subscribe(
                 response => {
@@ -169,7 +112,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             );
     }
 
-    verificarPromocaoAtiva(): void {
+    private verificarPromocaoAtiva(): void {
         if (this.promocoes && this.promocoes.length > 0) {
             const promocaoCassino = this.promocoes.find(promocao =>
                 promocao.ativo &&
@@ -199,22 +142,21 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
             nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
-            nomeCompleto: [null],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             email: [null, [Validators.required, Validators.email]],
             country: ['+55', [Validators.required]],
             telefone: [null, [Validators.required]],
             senha: [null, [Validators.required, Validators.minLength(8)]],
-            // genero: ['', this.fullRegistration ? Validators.required : null],
-            // nationality: ['Brasil', this.fullRegistration ? Validators.required : null],
+            genero: ['', Validators.required],
+            nationality: ['Brasil', Validators.required],
 
-            captcha: [null, this.provedorCaptcha ? Validators.required : null],
+            captcha: [null, this.provedorCaptcha  ? Validators.required : null],
             check_1: [''],
             check_2: [''],
             googleId: [''],
             googleIdToken: [''],
 
-            documentNumber: ['', this.fullRegistration ? Validators.required : null],
+            documentNumber: ['', Validators.required],
             afiliado: [null, [Validators.maxLength(50)]],
 
             btag: [this.route.snapshot.queryParams.btag],
@@ -222,15 +164,15 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
 
-            // logradouro: ['', this.fullRegistration ? Validators.required : null],
-            // numero: ['', this.fullRegistration ? Validators.required : null],
-            // bairro: ['', this.fullRegistration ? Validators.required : null],
-            // cidade: ['', this.fullRegistration ? Validators.required : null],
-            // estado: ['', this.fullRegistration ? Validators.required : null],
-            // cep: ['', this.fullRegistration ? Validators.required : null],
+            logradouro: ['', Validators.required],
+            numero: ['', Validators.required],
+            bairro: ['', Validators.required],
+            cidade: ['', Validators.required],
+            estado: ['', Validators.required],
+            cep: ['', Validators.required],
 
-            // dadosCriptografados: [null],
-            // termosUso: [true],
+            dadosCriptografados: [null],
+            termosUso: [true],
         });
 
         if (this.isStrengthPassword) {
@@ -239,30 +181,26 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.controls.senha.updateValueAndValidity();
         }
 
-        // if (this.isLoterj) {
-        //     this.form.addControl('termosUso', this.fb.control(null, [
-        //         Validators.requiredTrue,
-        //     ]));
+        if (this.isLoterj) {
+            this.form.addControl('termosUso', this.fb.control(null, [
+                Validators.requiredTrue,
+            ]));
 
-        //     this.form.controls['nome'].clearValidators();
-        //     this.form.controls['nome'].updateValueAndValidity();
+            this.form.controls['nome'].clearValidators();
+            this.form.controls['nome'].updateValueAndValidity();
 
-        //     this.form.controls['nascimento'].clearValidators();
-        //     this.form.controls['nascimento'].updateValueAndValidity();
-        // }
+            this.form.controls['nascimento'].clearValidators();
+            this.form.controls['nascimento'].updateValueAndValidity();
+        }
     }
 
-    onSubmit() {
+    public onSubmit() {
         super.onSubmit();
     }
 
     private async prepareSubmitData() {
         if (this.menorDeIdade) {
             this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
-            return;
-        }
-        if (this.validarBeneficioProgramaSocial && this.beneficiarioProgramaSocial) {
-            this.messageService.error(this.translate.instant('register.registrationBeneficiariesSocialPrograms'));
             return;
         }
 
@@ -299,7 +237,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         return values;
     }
 
-    async submit() {
+    public async submit() {
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
 
         if (restrictionStateBet != 'Todos') {
@@ -373,8 +311,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                             });
                     }
 
-                    if (this.errorMessage && res.success) {
-                        this.clearErrorMessage();
+                    if (this.errorMessage  && res.success) {
+                        this.errorMessage  = '';
                     }
                 },
                 error => {
@@ -385,13 +323,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             );
     }
 
-    clearErrorMessage() {
-        this.errorMessage = '';
-    }
-
-    validarCpf() {
+    public validarCpf() {
         const { cpf } = this.form.value;
-        if (this.validarBeneficioProgramaSocial || this.autoPreenchimento) {
+        if (this.autoPreenchimento) {
             if (this.form.get('cpf').valid) {
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
@@ -407,7 +341,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                                 return;
                             }
                             this.autoPreenchimento = true;
-                            this.cpfValidado = true;
                             this.form.patchValue({
                                 nome: res.nome,
                                 nomeCompleto: res.nome,
@@ -416,19 +349,16 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                             this.autoPreenchimento = false;
                             this.LabelCpf = res.nome;
 
+                            this.onBlurGa4Name(res.nome);
+
                             const dadosDescriptografados: any = jwtDecode(res.dados);
                             this.dataNascimento = this.formatarDataComAsterisco(dadosDescriptografados.nascimento);
                             this.activeEditingCPF = true
                         } else {
-                            if (!this.formSocial) {
-                                this.form.patchValue({ nome: '' });
-                            }
                             this.autoPreenchimento = false;
-                            this.cpfValidado = false;
                         }
                     },
                     error => {
-                        this.cpfValidado = false;
                         this.form.patchValue({ nome: '' });
                         if (error?.code === 'cpfInformadoNaoExiste') {
                             this.form.controls['cpf'].addValidators(FormValidations.cpfNotExists(cpf));
@@ -439,7 +369,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     }
                 );
             } else {
-                this.cpfValidado = false;
                 this.form.patchValue({
                     nome: '',
                     dadosCriptografados: null
@@ -452,7 +381,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                 res => {
                 },
                 error => {
-                    this.cpfValidado = false;
                     this.form.patchValue({ nome: '' });
                     if (error?.code === 'cpfInformadoJaExiste'){
                         this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
@@ -464,67 +392,56 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     }
 
     handleError(error: string) {
-        this.errorMessage = error;
+        this.errorMessage  = error;
     }
 
-    handleActiveEditingCPF(){
+    public handleActiveEditingCPF(){
         this.LabelCpf = 'CPF';
         this.activeEditingCPF = !this.activeEditingCPF;
     }
 
-    ngOnDestroy() {
-    }
-
-    onBeforeInput(e: InputEvent, inputName) {
+    public onBeforeInput(e: InputEvent, inputName) {
         FormValidations.blockInvalidCharacters(e, inputName);
     }
 
-    checkPassword() {
+    public checkPassword() {
         const passwordValue = this.form.controls.senha.value;
         const lengthCheck = passwordValue.length >= 8;
         const hasUpperCase = /[A-Z]/.test(passwordValue);
         const hasLowerCase = /[a-z]/.test(passwordValue);
         const hasSpecialChar = /[!@#$%^&*]/.test(passwordValue);
 
-        this.requirements = {
+        this.requirements  = {
             minimumCharacters: lengthCheck,
             uppercaseLetter: hasUpperCase,
             lowercaseLetter: hasLowerCase,
             specialChar: hasSpecialChar,
         };
-
-        this.validPassword = Object.values(this.requirements).every(Boolean);
     }
 
-    onBlurGa4Name(event: any): void {
-        const value = event.target.value;
+    private onBlurGa4Name(value: any): void {
         if (value) {
             this.ga4Service.triggerGa4Event(EventGa4Types.START_REGISTRATION);
         }
     }
 
-    returnRequirementsValue() {
-        return Object.values(this.requirements).filter(value => value).length;
-    }
-
-    registerOpen() {
+    public registerOpen() {
         this.registerCancel = false;
         this.modalClose = true;
     }
 
-    onClose() {
+    public onClose() {
         this.registerCancel = true;
         this.modalClose = false;
     }
 
-    cancelModal() {
+    public cancelModal() {
         this.activeModal.dismiss();
     }
 
-    openLogin() {
+    public openLogin() {
         this.activeModal.dismiss();
-
-        this.modalRef = this.modalService.open(
+        this.modalService.open(
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
@@ -534,23 +451,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         );
     }
 
-    formatarDataComAsterisco (data: string) {
+    private formatarDataComAsterisco (data: string) {
         const [ano, mes, dia] = data.split('-');
-
         return `${dia[0]}*/${mes[0]}*/${ano[0]}***`;
-    }
-
-    toggleSections(section: string) {
-        if(this.sectionLimiteApostas && section != 'limiteApostas') {
-            this.sectionLimiteApostas = false;
-        }
-
-        switch (section) {
-            case 'limiteApostas':
-                this.sectionLimiteApostas = !this.sectionLimiteApostas;
-                break;
-            default:
-                break;
-        }
     }
 }

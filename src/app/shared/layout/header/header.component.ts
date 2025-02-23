@@ -371,6 +371,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         if (this.isCliente) {
             this.initAccountVerification();
         }
+
+        this.abrirCadastro();
     }
 
     private initAccountVerification() {
