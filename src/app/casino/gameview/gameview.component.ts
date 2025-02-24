@@ -6,7 +6,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import {
     AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService, HeadersService,
-    GeolocationService
+    GeolocationService,
+    AccountVerificationService
 } from '../../services';
 import { interval, Subject } from 'rxjs';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -100,6 +101,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private clienteService: ClienteService,
         private translate: TranslateService,
         private geolocationService: GeolocationService,
+        private accountVerificationService: AccountVerificationService,
         @Inject(DOCUMENT) private document: any
 
     ) {
@@ -935,6 +937,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     openDeposit() {
+        if (!this.accountVerificationService.accountVerified.getValue()) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
+
         this.modalService.open(DepositoComponent);
     }
 
