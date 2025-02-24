@@ -63,11 +63,11 @@ export class DocumentComponent implements OnInit, AfterViewInit {
         switch (this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken);
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken);
                 this.docCheckService.iframeMessage$.subscribe(async (message) => {
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         await this.faceMatchService.updadeFacematch({ document: this.customer.cpf, register: true }).toPromise()
