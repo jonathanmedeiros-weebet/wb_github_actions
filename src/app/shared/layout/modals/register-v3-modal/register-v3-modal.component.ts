@@ -34,7 +34,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public aplicarCssTermo: boolean = false;
     private menorDeIdade: boolean = false;
     public possuiCodigoAfiliado = false;
-    public isLoterj: boolean = false;
     private parameters: any = {};
     private promocoes: any;
     public promocaoAtiva: boolean = false;
@@ -96,17 +95,12 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.prepareBanner();
 
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
-        this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
         this.countryCodes = this.countriesService.getDialcodes();
 
         this.createForm();
-
-        if (this.isLoterj) {
-            this.aplicarCssTermo = true;
-        }
 
         this.hCaptchaLanguage = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => {
@@ -207,18 +201,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.controls.senha.clearValidators();
             this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
             this.form.controls.senha.updateValueAndValidity();
-        }
-
-        if (this.isLoterj) {
-            this.form.addControl('termosUso', this.fb.control(null, [
-                Validators.requiredTrue,
-            ]));
-
-            this.form.controls['nome'].clearValidators();
-            this.form.controls['nome'].updateValueAndValidity();
-
-            this.form.controls['nascimento'].clearValidators();
-            this.form.controls['nascimento'].updateValueAndValidity();
         }
 
         if (this.provedorCaptcha == 'recaptcha') {
