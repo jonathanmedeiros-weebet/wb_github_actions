@@ -368,12 +368,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
     public validarCpf() {
         const { cpf } = this.form.value;
-        console.log('cpf', cpf)
         if (this.autoPreenchimento) {
-        console.log('autoPreenchimento', this.autoPreenchimento)
-        console.log('valid', this.form.get('cpf').valid)
             if (this.form.get('cpf').valid) {
-
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
                         if (res.validarCpfAtivado) {
@@ -395,7 +391,13 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                             this.form.patchValue({
                                 nome: dadosDescriptografados.nome,
                                 dadosCriptografados: res.dados,
-                                nascimento: dadosDescriptografados.nascimento
+                                nascimento: dadosDescriptografados?.nascimento ?? '',
+                                logradouro: dadosDescriptografados?.logradouro ?? '',
+                                numero: dadosDescriptografados?.endereco?.numero ?? '',
+                                bairro: dadosDescriptografados?.endereco?.bairro ?? '',
+                                cidade: dadosDescriptografados?.endereco?.cidade ?? '',
+                                estado: dadosDescriptografados?.endereco?.estado ?? '',
+                                cep: dadosDescriptografados?.endereco?.cep ?? '',
                             });
 
                             this.dataNascimento = this.formatarDataComAsterisco(dadosDescriptografados.nascimento);
