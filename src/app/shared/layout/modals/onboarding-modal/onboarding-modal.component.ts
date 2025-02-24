@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RegisterV3ModalComponent } from '../register-v3-modal/register-v3-modal.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
   selector: 'app-onboarding-modal',
@@ -11,20 +11,20 @@ export class OnboardingModalComponent {
     public modalRef;
 
     constructor(
+            public activeModal: NgbActiveModal,
             private modalService: NgbModal,
         ) {
         }
 
     register(){
-        this.modalRef = this.modalService.open(
-            RegisterV3ModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-750 modal-cadastro-cliente',
-                backdrop: 'static'
-            }
-        );
+        this.activeModal.dismiss();
+            this.modalService.open(
+                LoginModalComponent,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    windowClass: 'modal-400 modal-h-350 modal-login',
+                    centered: true,
+                }
+            );
     }
 }
