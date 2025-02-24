@@ -76,14 +76,14 @@ export class DocumentComponent implements OnInit, AfterViewInit {
                 break;
         }
 
-        if (this.faceMatchEnabled && this.verificationRequired && this.faceMatchType == 'legitimuz') {
+        if (this.faceMatchEnabled && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
                 .subscribe(async (curCustomerIsVerified) => {
                     this.cd.detectChanges();
                     if (curCustomerIsVerified) {
                         this.legitimuzService.closeModal();
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                        await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise()
+                        await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise();
                         this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     } else {
                         this.legitimuzService.closeModal();
