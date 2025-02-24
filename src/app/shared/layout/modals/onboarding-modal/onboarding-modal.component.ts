@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
   selector: 'app-onboarding-modal',
@@ -6,9 +8,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./onboarding-modal.component.scss']
 })
 export class OnboardingModalComponent {
+    public modalRef;
 
+    constructor(
+            public activeModal: NgbActiveModal,
+            private modalService: NgbModal,
+        ) {
+        }
 
-
-  register(){
-  }
+    register(){
+        this.activeModal.dismiss();
+            this.modalService.open(
+                LoginModalComponent,
+                {
+                    ariaLabelledBy: 'modal-basic-title',
+                    windowClass: 'modal-400 modal-h-350 modal-login',
+                    centered: true,
+                }
+            );
+    }
 }
