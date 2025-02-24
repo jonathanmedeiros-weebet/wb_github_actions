@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from './shared/services/timer.service';
 import { RegisterModalComponentComponent } from './shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
-import { AccountVerificationService } from './shared/services/account-verification.service';
+import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -146,6 +146,10 @@ export class AppComponent implements OnInit {
             const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity);
             const activityUserConfig = Boolean(this.activityDetectService.getActivityTimeConfig());
             const isCliente = this.auth.isCliente();
+
+            if (!isLogged) {
+                localStorage.removeItem(ACCOUNT_VERIFIED)
+            }
 
             if (isLogged && isCliente) {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {

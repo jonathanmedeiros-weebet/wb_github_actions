@@ -34,7 +34,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public aplicarCssTermo: boolean = false;
     private menorDeIdade: boolean = false;
     public possuiCodigoAfiliado = false;
-    public isLoterj: boolean = false;
     private parameters: any = {};
     private promocoes: any;
     public promocaoAtiva: boolean = false;
@@ -96,17 +95,12 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.prepareBanner();
 
         this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
-        this.isLoterj = this.paramsService.getOpcoes().casaLoterj;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
         this.countryCodes = this.countriesService.getDialcodes();
 
         this.createForm();
-
-        if (this.isLoterj) {
-            this.aplicarCssTermo = true;
-        }
 
         this.hCaptchaLanguage = this.translate.currentLang;
         this.translate.onLangChange.subscribe(res => {
@@ -170,13 +164,11 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
-            nascimento: [null, [Validators.required, FormValidations.birthdayValidator]],
             cpf: [null, [Validators.required, FormValidations.cpfValidator]],
             email: [null, [Validators.required, Validators.email]],
             country: ['+55', [Validators.required]],
             telefone: [null, [Validators.required]],
             senha: [null, [Validators.required, Validators.minLength(8)]],
-            genero: [''],
             nationality: ['Brasil', Validators.required],
 
             captcha: [null, this.provedorCaptcha  ? Validators.required : null],
@@ -191,14 +183,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             refId: [this.route.snapshot.queryParams.refId],
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
-
-            logradouro: [''],
-            numero: [''],
-            bairro: [''],
-            cidade: [''],
-            estado: [''],
-            cep: [''],
-
             dadosCriptografados: [null],
             termosUso: [true],
         });
@@ -207,18 +191,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.controls.senha.clearValidators();
             this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
             this.form.controls.senha.updateValueAndValidity();
-        }
-
-        if (this.isLoterj) {
-            this.form.addControl('termosUso', this.fb.control(null, [
-                Validators.requiredTrue,
-            ]));
-
-            this.form.controls['nome'].clearValidators();
-            this.form.controls['nome'].updateValueAndValidity();
-
-            this.form.controls['nascimento'].clearValidators();
-            this.form.controls['nascimento'].updateValueAndValidity();
         }
 
         if (this.provedorCaptcha == 'recaptcha') {
@@ -245,8 +217,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         }
 
         let values = this.form.value;
-
-        values.nascimento = moment(values.nascimento, 'DDMMYYYY', true).format('YYYY-MM-DD');
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
         }
@@ -258,22 +228,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         values = {
             ...values,
             senha_confirmacao: values.senha,
-            endereco: {
-                logradouro: values.logradouro,
-                numero: values.numero,
-                bairro: values.bairro,
-                cidadeId: values.cidade,
-                estadoId: values.estado,
-                cep: values.cep
-            }
         }
-
-        delete values.logradouro;
-        delete values.numero;
-        delete values.bairro;
-        delete values.cidade;
-        delete values.estado;
-        delete values.cep;
 
         return values;
     }
@@ -391,14 +346,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                             this.form.patchValue({
                                 nome: dadosDescriptografados.nome,
                                 dadosCriptografados: res.dados,
-                                nascimento: dadosDescriptografados?.nascimento ?? '',
-                                genero: dadosDescriptografados?.genero ?? '',
-                                logradouro: dadosDescriptografados?.logradouro ?? '',
-                                numero: dadosDescriptografados?.endereco?.numero ?? '',
-                                bairro: dadosDescriptografados?.endereco?.bairro ?? '',
-                                cidade: dadosDescriptografados?.endereco?.cidade ?? '',
-                                estado: dadosDescriptografados?.endereco?.estado ?? '',
-                                cep: dadosDescriptografados?.endereco?.cep ?? '',
                             });
 
                             this.dataNascimento = this.formatarDataComAsterisco(dadosDescriptografados.nascimento);
