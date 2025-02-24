@@ -368,8 +368,12 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
     public validarCpf() {
         const { cpf } = this.form.value;
+        console.log('cpf', cpf)
         if (this.autoPreenchimento) {
+        console.log('autoPreenchimento', this.autoPreenchimento)
+        console.log('valid', this.form.get('cpf').valid)
             if (this.form.get('cpf').valid) {
+
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
                         if (res.validarCpfAtivado) {
@@ -449,9 +453,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.dataNascimento = '';
 
         if(this.activeEditingCPF) {
-            console.log('entrou')
             this.isFocused = true;
             setTimeout(() => this.documentNumberElement.nativeElement.focus(), 500);
+            this.form.controls.cpf.removeValidators(FormValidations.cpfAlreadyExists)
         }
     }
 
