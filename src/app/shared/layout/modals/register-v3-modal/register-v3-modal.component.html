@@ -296,10 +296,10 @@
                         <re-captcha
                             class="grecaptcha-badge"
                             formControlName="captcha"
-                            #captchaRef="reCaptcha"
-                            (resolved)="resolved($event)"
                             errorMode="handled"
                             size="invisible"
+                            #captchaRef="reCaptcha"
+                            (resolved)="resolved($event)"
                         ></re-captcha>
                         {{ 'register.protectedByReCaptchaPart1' | translate }}
                         <a
@@ -410,7 +410,7 @@
                     type="submit"
                     class="btn btn-custom btn-block btn-cadastrar"
                     (click)="onSubmit()"
-                    [disabled]="submitting"
+                    [disabled]="form.invalid || submitting"
                 >
                     {{'geral.cadastrar' | translate}}
                 </button>
