@@ -392,6 +392,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                                 nome: dadosDescriptografados.nome,
                                 dadosCriptografados: res.dados,
                                 nascimento: dadosDescriptografados?.nascimento ?? '',
+                                genero: dadosDescriptografados?.genero ?? '',
                                 logradouro: dadosDescriptografados?.logradouro ?? '',
                                 numero: dadosDescriptografados?.endereco?.numero ?? '',
                                 bairro: dadosDescriptografados?.endereco?.bairro ?? '',
