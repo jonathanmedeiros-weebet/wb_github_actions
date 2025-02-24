@@ -121,8 +121,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         const page = 'cadastro';
         this.bannerService
             .requestBanners()
-            .toPromise()
-            .then((banners) => {
+            .subscribe((banners) => {
                 if(Boolean(banners)) {
                     this.registerBanner = banners.find(banner => banner.pagina == page);
                 }

@@ -82,7 +82,7 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
                     ariaLabelledBy: 'modal-basic-title',
                     size: 'md',
                     centered: true,
-                    windowClass: 'modal-400 modal-cadastro-cliente'
+                    windowClass: 'modal-750 modal-cadastro-cliente'
                 }
             );
         }
