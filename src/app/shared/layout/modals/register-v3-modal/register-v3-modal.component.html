@@ -158,6 +158,40 @@
                         </div>
                     </div>
                 </div>
+                <div class="contents-nationality">
+                    <div class="row">
+                        <div class="col-md-8 div-country">
+                            <div class="form-group style-phone-country-code">
+                                <div class="input-md nationality-personalized">
+                                    <div class="div-button-personalized">
+                                        <div class="select-nationality">
+                                            <div class="label-personalized">
+                                                <span class="label-country-code">{{'geral.nacionalidade' | translate}}</span>
+                                            </div>
+                                            <select
+                                                class="form-control style-select style-select-nationality"
+                                                formControlName="nationality"
+                                                style="font-size: 12px;"
+                                            >
+                                                <option selected [value]="26">{{'register.brasil' | translate}}</option>
+                                                <option
+                                                    *ngFor="let nationality of nationalities"
+                                                    [value]="nationality.name"
+                                                >
+                                                    {{ nationality.name }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <app-error-msg
+                            [control]="form.get('nationality')"
+                            label="Nacionalidade"
+                            class="text-left"
+                        ></app-error-msg>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group" [ngClass]="applyCssDivError('senha')">
