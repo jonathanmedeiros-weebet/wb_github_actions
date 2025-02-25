@@ -167,7 +167,7 @@
         "deAcordoComOsTermos2": "and our",
         "termosDeUso": "terms of use",
         "cadastrar": "Register",
-        "cadastroSucedido": "Registration completed successfully! Check your email to activate it.",
+        "cadastroSucedido": "Registration completed successfully.",
         "informacoesPessoais": "Personal Information",
         "criarLogin": "Create Login",
         "sucesso": "Success",
@@ -453,8 +453,7 @@
         "monthlyMaximum": "Monthly maximum",
         "identityVerify": "Verify identity",
         "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
-        "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
-        "maximumWithdrawalAmount": "Maximum withdrawal"
+        "maximumWithdrawalAmount": "Maximum withdrawal",
         "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
         "maximumDepositAmount": "Maximum value"
     },

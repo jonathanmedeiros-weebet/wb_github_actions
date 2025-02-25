@@ -164,7 +164,7 @@
         "deAcordoComOsTermos2": "y nuestros",
         "termosDeUso": "términos de uso",
         "cadastrar": "Registrarse",
-        "cadastroSucedido": "¡Registro completado con éxito! Verifica tu correo electrónico para activarlo.",
+        "cadastroSucedido": "¡Registro completado con éxito.",
         "informacoesPessoais": "Información personal",
         "criarLogin": "Crear inicio de sesión",
         "sucesso": "Éxito",
@@ -448,8 +448,7 @@
         "enterPixKey": "Seleccione el tipo de clave PIX",
         "minimumWithdrawal": "Retiro mínimo",
         "dailyMaximum": "Máximo diario",
-        "monthlyMaximum": "Máximo mensual",
-        "maximumWithdrawalAmount": "Retiro máximo"
+        "maximumWithdrawalAmount": "Retiro máximo",
         "monthlyMaximum": "Máximo mensual",
         "maximumDepositAmount": "Valor máximo"
     },
