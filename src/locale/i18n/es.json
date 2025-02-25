@@ -438,9 +438,9 @@
         "minimumWithdrawal": "Retiro mínimo",
         "dailyMaximum": "Máximo diario",
         "monthlyMaximum": "Máximo mensual",
-        "maximumWithdrawalAmount": "Retiro máximo"
-        "monthlyMaximum": "Máximo mensual",
+        "maximumWithdrawalAmount": "Retiro máximo",
         "maximumDepositAmount": "Valor máximo"
+
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Activación de registro",
@@ -562,7 +562,8 @@
         "paymentGateway": "Pasarela de pago",
         "balance": "Saldo",
         "previousBalance": "Saldo anterior",
-        "subsequentBalance": "Saldo posterior"
+        "subsequentBalance": "Saldo posterior",
+        "defaultPaymentMethod": "Predeterminado"
     },
     "rollover": {
         "nenhumRollover": "Sin rollover.",

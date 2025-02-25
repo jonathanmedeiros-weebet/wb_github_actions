@@ -571,7 +571,8 @@
         "paymentGateway": "Gateway de pagamento",
         "balance": "Saldo",
         "previousBalance": "Saldo anterior",
-        "subsequentBalance": "Saldo posterior"
+        "subsequentBalance": "Saldo posterior",
+        "defaultPaymentMethod": "Padrão"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
