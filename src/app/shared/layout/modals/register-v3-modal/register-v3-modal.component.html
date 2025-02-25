@@ -446,7 +446,7 @@
                     </div>
                     <div>
                         <ng-container *ngIf="promocaoAtiva && valorPromocao; else noPromotion">
-                            <p>{{ 'registerCancel.dontMissOut' | translate}} {{this.valorPromocao | currency}}</p>
+                            <p class="p-cancel-register">{{ 'registerCancel.dontMissOut' | translate}} {{this.valorPromocao | currency}}</p>
                         </ng-container>
                         <ng-template #noPromotion>
                             <p class="p-cancel-register">{{ 'registerCancel.youreAlmostThere' | translate}}</p>

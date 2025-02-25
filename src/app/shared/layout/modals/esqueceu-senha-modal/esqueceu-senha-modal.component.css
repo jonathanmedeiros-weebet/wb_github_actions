@@ -34,19 +34,48 @@ p {
     margin-bottom: 25px;
 }
 
-input {
-    border: 1px solid rgba(var(--foreground-inputs-odds-rgb),30%);
-    color: rgba(var(--foreground-inputs-odds-rgb),30%);
-    font-size: 14px;
-}
-
 .input-md label {
-    color: rgba(var(--foreground-inputs-odds-rgb),30%);
+    color: rgba(var(--foreground-inputs-odds-rgb),0.5);
 }
 
 .btn-close {
     margin-right: 10px;
     background: none;
+    opacity: 1;
+}
+
+input.inverted-out {
+    opacity: 1;
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+}
+
+input.inverted-out:focus {
+    color: var(--foreground-inputs-odds);
+    border: 1px solid var(--highlight);
+}
+
+input.inverted-out:focus label{
+    color: var(--foreground-inputs-odds);
+}
+
+.form-control.is-invalid:focus {
+    -webkit-box-shadow: none;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+}
+
+.btn-reset {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+    width: 100%;
+}
+
+.icon-hover {
+    fill: var(--header);
 }
 
 .btn-close i {

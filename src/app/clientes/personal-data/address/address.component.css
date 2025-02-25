@@ -5,9 +5,43 @@
 
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin-bottom: 20px;
+}
+
+option {
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    background-color: var(--background);
+}
+
+select.inverted-out,
+input.inverted-out {
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+}
+
+
+.input-md label {
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+}
+
+input.inverted-out:focus {
+    color: var(--foreground-inputs-odds);
+    border: 1px solid var(--highlight);
+}
+
+input.inverted-out:focus label{
+    color: var(--foreground-inputs-odds);
+}
+
+.form-control.is-invalid:focus {
+    -webkit-box-shadow: none;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
 }
 
 .input-md input {
@@ -40,9 +74,9 @@
 .input-select {
     border-width: 1px;
     border-style: solid;
-    border-color: var(--foreground-inputs-odds);
     background: var(--inputs-odds);
-    color: var(--foreground-inputs-odds);
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
     padding: 0px 15px;
     border-radius: 5px;
     height: 48px;
