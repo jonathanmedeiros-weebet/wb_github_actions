@@ -5,7 +5,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { CadastroModalComponent, EsqueceuSenhaModalComponent } from './shared/layout/modals';
+import { EsqueceuSenhaModalComponent } from './shared/layout/modals';
 import { LoginModalComponent } from './shared/layout/modals';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +15,6 @@ import { ActivityDetectService } from './shared/services/activity-detect.service
 import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from './shared/services/timer.service';
-import { RegisterModalComponentComponent } from './shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
 import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
 declare var xtremepush;
 @Component({
@@ -198,12 +197,7 @@ export class AppComponent implements OnInit {
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
 
-            this.modalService.open(RegisterModalComponentComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-400 modal-cadastro-cliente'
-            });
+            this.auth.openRegisterV3Modal();
         }
 
         if (this.router.url.includes('/login')) {

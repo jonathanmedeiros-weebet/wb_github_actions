@@ -1,6 +1,6 @@
 
 <div class="contents-register" [ngClass]="{'registerCancelActive' : registerCancel}">
-    <div class="banner">
+    <div class="banner" *ngIf="hasRegisterBanner">
         <div
             class="banner__mobile"
             *ngIf="registerBannerMobile"

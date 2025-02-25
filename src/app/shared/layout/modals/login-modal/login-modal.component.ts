@@ -1,16 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, ClienteService, MessageService, ParametrosLocaisService, SecurityService, NavigatorPermissionsService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
-import { RegisterModalComponentComponent } from '../register-modal/register-modal-component/register-modal-component.component';
 import { config } from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
@@ -19,8 +18,6 @@ import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/bloc
 import { LoginService } from 'src/app/shared/services/login.service';
 import { FaceMatchModalComponent } from '../face-match-modal/face-match-modal/face-match-modal.component';
 import { TranslateService } from '@ngx-translate/core';
-import { RegisterFaceMatchComponent } from '../register-face-match/register-face-match.component';
-import { RegisterV3ModalComponent } from '../register-v3-modal/register-v3-modal.component';
 
 declare var xtremepush: any;
 
@@ -317,16 +314,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     abrirCadastro() {
         this.activeModal.dismiss();
-
-        this.modalRef = this.modalService.open(
-            RegisterV3ModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-750 modal-cadastro-cliente'
-            }
-        );
+        this.auth.openRegisterV3Modal();
     }
 
     cancelTerminateSession() {

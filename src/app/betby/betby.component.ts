@@ -8,7 +8,6 @@ import { DepositoComponent } from '../clientes/deposito/deposito.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from '../shared/services/login.service';
 import { Subscription } from 'rxjs';
-import { RegisterModalComponentComponent } from '../shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
 
 declare function BTRenderer(): void;
 
@@ -263,15 +262,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     openRegister() {
-        this.modalService.open(
-            RegisterModalComponentComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-400 modal-cadastro-cliente'
-            }
-        );
+        this.authService.openRegisterV3Modal();
     }
 
     openLogin() {
