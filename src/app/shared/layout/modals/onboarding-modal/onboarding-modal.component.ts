@@ -11,20 +11,20 @@ export class OnboardingModalComponent {
     public modalRef;
 
     constructor(
-            public activeModal: NgbActiveModal,
-            private modalService: NgbModal,
-        ) {
-        }
+        public activeModal: NgbActiveModal,
+        private modalService: NgbModal,
+    ) {
+    }
 
     register(){
         this.activeModal.dismiss();
-            this.modalService.open(
-                LoginModalComponent,
-                {
-                    ariaLabelledBy: 'modal-basic-title',
-                    windowClass: 'modal-400 modal-h-350 modal-login',
-                    centered: true,
-                }
-            );
+        this.modalService.open(
+            LoginModalComponent,
+            {
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-400 modal-h-350 modal-login',
+                centered: true,
+            }
+        );
     }
 }
