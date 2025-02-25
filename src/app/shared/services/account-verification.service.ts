@@ -38,7 +38,7 @@ const verifiedStepsDefault: VerifiedSteps = {
   address: false
 }
 
-const ACCOUNT_VERIFIED = 'accountVerified';
+export const ACCOUNT_VERIFIED = 'accountVerified';
 
 @Injectable({
   providedIn: 'root'

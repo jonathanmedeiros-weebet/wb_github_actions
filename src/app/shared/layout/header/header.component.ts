@@ -41,7 +41,7 @@ import { CashbackComponent } from 'src/app/clientes/cashback/cashback.component'
 import { ListBankAccountsComponent } from '../list-bank-accounts/list-bank-accounts.component';
 import { LastAccessesModalComponent } from '../modals/last-accesses-modal/last-accesses-modal.component';
 import { OnboardingModalComponent } from '../modals/onboarding-modal/onboarding-modal.component';
-import { RegisterModalComponentComponent } from '../modals/register-modal/register-modal-component/register-modal-component.component';
+import { RegisterV3ModalComponent } from '../modals/register-v3-modal/register-v3-modal.component';
 import { AccountVerificationService } from '../../services/account-verification.service';
 
 declare var xtremepush: any;
@@ -486,12 +486,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             );
         } else {
             this.modalRef = this.modalService.open(
-                RegisterModalComponentComponent,
+                RegisterV3ModalComponent,
                 {
                     ariaLabelledBy: 'modal-basic-title',
                     size: 'md',
                     centered: true,
-                    windowClass: 'modal-400 modal-cadastro-cliente',
+                    windowClass: 'modal-750 modal-cadastro-cliente',
                     backdrop: 'static'
                 }
             );

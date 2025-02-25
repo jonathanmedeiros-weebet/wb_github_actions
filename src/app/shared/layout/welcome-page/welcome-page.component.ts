@@ -4,6 +4,7 @@ import { ParametrosLocaisService } from './../../services/parametros-locais.serv
 import { config } from './../../../shared/config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
+import { AccountVerificationService } from 'src/app/services';
 
 @Component({
   selector: 'app-welcome-page',
@@ -23,7 +24,9 @@ export class WelcomePageComponent {
         private route: ActivatedRoute,
         private router: Router,
         private modalService: NgbModal,
-        private params: ParametrosLocaisService) {}
+        private params: ParametrosLocaisService,
+        private accountVerificationService: AccountVerificationService
+    ) {}
 
     ngOnInit() {
         this.SLUG = config.SLUG;
@@ -47,12 +50,15 @@ export class WelcomePageComponent {
 
     depositeAgora() {
         if (window.innerWidth < 1025) {
+            if (!this.accountVerificationService.accountVerified.getValue()) {
+                this.accountVerificationService.openModalAccountVerificationAlert();
+                return;
+            }
+
             this.modalService.open(DepositoComponent);
             this.router.navigate(['/']);
         } else {
-            this.router.navigate(['/clientes/deposito']).then(() => {
-                window.location.reload();
-            });
+            this.router.navigate(['/clientes/deposito']);
         }        
     }
 }

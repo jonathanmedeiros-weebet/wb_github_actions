@@ -117,6 +117,7 @@ import { OnboardingModalComponent } from './modals/onboarding-modal/onboarding-m
 import { StepperProgressBarComponent } from './modals/register-modal/parts/stepper-progress-bar/stepper-progress-bar.component';
 import { PersonalDataComponent } from './modals/register-modal/parts/personal-data/personal-data.component';
 import { RegisterFaceMatchComponent } from './modals/register-face-match/register-face-match.component';
+import { RegisterV3ModalComponent } from './modals/register-v3-modal/register-v3-modal.component';
 import { AccountVerifiedSuccessComponent } from './modals/account-verified-success/account-verified-success.component';
 import { VerifyEmailOrPhoneComponent } from './modals/verify-email-or-phone/verify-email-or-phone.component';
 import { CardVerificationPendingComponent } from './header/parts/card-verification-pending/card-verification-pending.component';
@@ -238,6 +239,7 @@ import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing
         OnboardingModalComponent,
         StepperProgressBarComponent,
         RegisterFaceMatchComponent,
+        RegisterV3ModalComponent,
         AccountVerifiedSuccessComponent,
         VerifyEmailOrPhoneComponent,
         CardVerificationPendingComponent,

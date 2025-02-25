@@ -153,6 +153,7 @@
         "esqueceuASenha": "¿Olvidaste tu contraseña?",
         "naoPossuiUmaConta": "¿No tienes una cuenta?",
         "jaPossuiUmaConta": "¿Ya tienes una cuenta?",
+        "logIn": "Iniciar sesión",
         "usuario": "Usuario",
         "senha": "Contraseña",
         "masculino": "Masculino",
@@ -424,10 +425,9 @@
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
         "digiteSuaSenha": "Ingrese su contraseña",
-        "minimumCharactersPassword": "Mínimo 8 caracteres",
-        "lowercaseLetter": "Mínimo una letra minúscula",
-        "uppercaseLetter": "Mínimo una letra mayúscula",
-        "specialChar": "Mínimo un carácter especial (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "La contraseña debe tener al menos 8 caracteres.",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Debe contener una letra mayúscula y una minúscula.",
+        "specialChar": "Debe contener un carácter especial (Ej.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Ingrese el monto para el retiro",
@@ -797,9 +797,9 @@
         "registerGoogleAccount": "Regístrate con tu cuenta de google",
         "fillToRegister": "Rellene los campos para completar su registro",
         "protectedByReCaptchaPart1": "Este sitio está protegido por reCAPTCHA se aplican la",
-        "protectedByReCaptchaPart2": "Política de privacidad",
+        "protectedByReCaptchaPart2": "política de privacidad",
         "protectedByReCaptchaPart3": "y las",
-        "protectedByReCaptchaPart4": "Condiciones del servicio",
+        "protectedByReCaptchaPart4": "condiciones del servicio",
         "protectedByReCaptchaPart5": "de Google.",
         "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse.",
         "day":"Día",

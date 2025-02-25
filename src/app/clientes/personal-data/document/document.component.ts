@@ -38,9 +38,6 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     legitimuzToken = '';
     docCheckToken = '';
     secretHash = '';
-    faceMatchChangePasswordValidated = false;
-    disapprovedIdentity = false;
-    verifiedIdentity = false;
     public verificationRequired: boolean = false;
 
     constructor(
@@ -63,15 +60,14 @@ export class DocumentComponent implements OnInit, AfterViewInit {
         switch (this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken);
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.paramsLocais.getOpcoes().faceMatchChangePassword);
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken);
                 this.docCheckService.iframeMessage$.subscribe(async (message) => {
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         await this.faceMatchService.updadeFacematch({ document: this.customer.cpf, register: true }).toPromise()
-                        this.faceMatchChangePasswordValidated = true;
                         this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     }
                 });
@@ -80,21 +76,18 @@ export class DocumentComponent implements OnInit, AfterViewInit {
                 break;
         }
 
-        if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
+        if (this.faceMatchEnabled && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
                 .subscribe(async (curCustomerIsVerified) => {
-                    this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
-                    if (this.verifiedIdentity) {
+                    if (curCustomerIsVerified) {
                         this.legitimuzService.closeModal();
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                        await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise()
-                        this.faceMatchChangePasswordValidated = true;
+                        await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise();
                         this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     } else {
                         this.legitimuzService.closeModal();
                         this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
-                        this.faceMatchChangePasswordValidated = false;
                         this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     }
                 });
@@ -119,8 +112,6 @@ export class DocumentComponent implements OnInit, AfterViewInit {
                     if (this.faceMatchType == 'docCheck') {
                         this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
                     }
-                    this.verifiedIdentity = res.verifiedIdentity;
-                    this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
                 },
                 error: () => {
                     this.messageService.error(this.translate.instant('erroInesperado'));

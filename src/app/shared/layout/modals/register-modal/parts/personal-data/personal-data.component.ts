@@ -159,7 +159,7 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
                                 this.messageService.error(this.translate.instant('geral.cadastroMenorDeIdade'));
                                 return;
                             }
-                            if (res.beneficios.DataRecebimentoMaisRecente >= threeMonthsAgo.toISOString()) {
+                            if (Boolean(res.beneficios) && res.beneficios.DataRecebimentoMaisRecente >= threeMonthsAgo.toISOString()) {
                                 this.messageService.error(this.translate.instant('register.registrationBeneficiariesSocialPrograms'));
                                 return;
                             }

@@ -273,7 +273,6 @@ export class BilheteRifaComponent extends BaseFormComponent implements OnInit, O
     }
 
     salvarAposta(dados) {
-        console.log(dados);
         dados.versao_app = this.versao_app;
         this.apostaService.create(dados)
             .subscribe(

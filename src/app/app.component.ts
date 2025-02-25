@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService, ClienteService, SecurityService } from './services';
+import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService, ClienteService, SecurityService, BannerService } from './services';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from './shared/services/timer.service';
 import { RegisterModalComponentComponent } from './shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
-import { AccountVerificationService } from './shared/services/account-verification.service';
+import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -69,7 +69,8 @@ export class AppComponent implements OnInit {
         private navigationHistoryService: NavigationHistoryService,
         private cron: CronService,
         private security: SecurityService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private bannerService: BannerService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -145,6 +146,10 @@ export class AppComponent implements OnInit {
             const logoutByInactivityIsEnabled = Boolean(this.paramsLocais.getOpcoes()?.logout_by_inactivity);
             const activityUserConfig = Boolean(this.activityDetectService.getActivityTimeConfig());
             const isCliente = this.auth.isCliente();
+
+            if (!isLogged) {
+                localStorage.removeItem(ACCOUNT_VERIFIED)
+            }
 
             if (isLogged && isCliente) {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {
@@ -288,6 +293,8 @@ export class AppComponent implements OnInit {
                 }
             }
         });
+
+        this.bannerService.requestBanners().toPromise()
     }
 
     displayInitialModal() {

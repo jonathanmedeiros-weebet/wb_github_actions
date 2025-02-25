@@ -156,6 +156,7 @@
         "esqueceuASenha": "Forgot password?",
         "naoPossuiUmaConta": "Don't have an account?",
         "jaPossuiUmaConta": "Already have an account?",
+        "logIn": "Log in",
         "usuario": "User",
         "senha": "Password",
         "masculino": "Male",
@@ -426,10 +427,9 @@
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
         "digiteSuaSenha": "Type your password",
-        "minimumCharactersPassword": "Minimum 8 characters",
-        "lowercaseLetter": "Minimum of one lowercase letter",
-        "uppercaseLetter": "Minimum of one uppercase letter",
-        "specialChar": "Minimum of one special character (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "Password must be at least 8 characters long",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Must contain one uppercase and one lowercase letter",
+        "specialChar": "Must contain a special character (Ex.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Enter the amount for the withdrawal",
@@ -802,9 +802,9 @@
         "registerGoogleAccount": "Sign up with your google account",
         "fillToRegister": "Fill in the fields to register",
         "protectedByReCaptchaPart1": "This site is protected by reCAPTCHA and the Goggle",
-        "protectedByReCaptchaPart2": "Privacy Policy",
+        "protectedByReCaptchaPart2": "privacy policy",
         "protectedByReCaptchaPart3": "and the",
-        "protectedByReCaptchaPart4": "Terms of Service",
+        "protectedByReCaptchaPart4": "terms of service",
         "protectedByReCaptchaPart5": "apply.",
         "registrationBeneficiariesSocialPrograms": "Beneficiaries of social programs cannot register.",
         "day":"Day",
