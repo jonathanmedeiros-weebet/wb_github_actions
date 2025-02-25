@@ -146,8 +146,10 @@ export class WallComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         const page = this.isCassinoPage ? 'casino' : 'live_casino'
         this.widgetService.byPage(page).subscribe(response => {
-            this.widgets = response;
-            this.getGamesCasino();
+            if (response) {
+                this.widgets = response.map((i) => ({ ...i, selector: 'w' + i.id}));
+                this.getGamesCasino();
+            }
         });
 
         this.navigationHistoryService.limparFiltro$.subscribe(() => {
@@ -172,11 +174,12 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     getGamesCasino() {
         this.widgets.forEach(widget => {
-            this.casinoService.getCasinoGamesByIds(widget.items.map(i => i.item_id))
-                .subscribe((result) => {
-                    widget.items = result.games;
-                }
-            );
+            if (widget.items && widget.items.length > 0) {
+                this.casinoService.getCasinoGamesByIds(widget.items.map(i => i.item_id))
+                    .subscribe((result) => {
+                        widget.items = result.games;
+                    });
+            }
         });
     }
 

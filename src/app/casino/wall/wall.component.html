@@ -68,59 +68,61 @@
                     </div>
                 </ng-container>
 
-                <div class="wall-inner" *ngSwitchCase="'betpilot'">
-                    <div class="bloco blocoGameList">
-                        <app-wall-section
-                            [container]="listagem"
-                            [sectionId]="widget.id"
-                            [title]="'cassino.recommendedToYou' | translate"
-                            [icon]="widget.icon"
-                            [itemsQty]="gamesRecommended.length"
-                            (onSeeAll)="filterGames($event, widget.id, true)"
-                            (onLeft)="scrollLeft(widget.id)"
-                            (onRight)="scrollRight(widget.id)"
-                        />
+                <ng-container *ngIf="isHomeCassino">
+                    <div class="wall-inner" *ngSwitchCase="'betpilot'">
+                        <div class="bloco blocoGameList">
+                            <app-wall-section
+                                [container]="listagem"
+                                [sectionId]="widget.selector"
+                                [title]="'cassino.recommendedToYou' | translate"
+                                [icon]="widget.icon"
+                                [itemsQty]="gamesRecommended.length"
+                                (onSeeAll)="filterGames($event, widget.selector, true)"
+                                (onLeft)="scrollLeft(widget.selector)"
+                                (onRight)="scrollRight(widget.selector)"
+                            />
 
-                        <div class="games-container">
-                            <ng-container *ngIf="gamesRecommended.length; else elseWithoutGames">
-                                <div class="game-list game-list-inline" #scrollGames id="{{ widget.id }}-scroll" (scroll)="onScroll(widget.id)">
-                                    <app-wall-game-card
-                                        *ngFor="let game of gamesRecommended"
-                                        [game]="game"
-                                        [blink]="blink"
-                                        [isLoggedIn]="isLoggedIn"
-                                        [isDemo]="isDemo"
-                                        [isCliente]="isCliente"
-                                        [icon]="widget.icon"
-                                        cardType="inline"
+                            <div class="games-container">
+                                <ng-container *ngIf="gamesRecommended.length; else elseWithoutGames">
+                                    <div class="game-list game-list-inline" #scrollGames id="{{ widget.selector }}-scroll" (scroll)="onScroll(widget.selector)">
+                                        <app-wall-game-card
+                                            *ngFor="let game of gamesRecommended"
+                                            [game]="game"
+                                            [blink]="blink"
+                                            [isLoggedIn]="isLoggedIn"
+                                            [isDemo]="isDemo"
+                                            [isCliente]="isCliente"
+                                            [icon]="widget.icon"
+                                            cardType="inline"
 
-                                    />
-                                </div>
-                            </ng-container>
-                            <ng-template #elseWithoutGames>
-                                <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
-                            </ng-template>
+                                        />
+                                    </div>
+                                </ng-container>
+                                <ng-template #elseWithoutGames>
+                                    <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+                                </ng-template>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </ng-container>
 
                 <ng-container *ngIf="isHomeCassino; else cassinoGameList">
                     <div class="wall-inner" *ngSwitchCase="'casino'">
                         <div class="bloco blocoGameList">
                             <app-wall-section
                                 [container]="listagem"
-                                [sectionId]="widget.id"
+                                [sectionId]="widget.selector"
                                 [title]="widget.name"
                                 [icon]="widget.icon"
                                 [itemsQty]="widget.items.length"
-                                (onSeeAll)="filterGames($event, widget.id, true)"
-                                (onLeft)="scrollLeft(widget.id)"
-                                (onRight)="scrollRight(widget.id)"
+                                (onSeeAll)="filterGames($event, widget.selector, true)"
+                                (onLeft)="scrollLeft(widget.selector)"
+                                (onRight)="scrollRight(widget.selector)"
                             />
 
                             <div class="games-container">
                                 <ng-container *ngIf="widget.items.length; else elseWithoutGames">
-                                    <div class="game-list game-list-inline" #scrollGames id="{{ widget.id }}-scroll" (scroll)="onScroll(widget.id)">
+                                    <div class="game-list game-list-inline" #scrollGames id="{{ widget.selector }}-scroll" (scroll)="onScroll(widget.selector)">
                                         <app-wall-game-card
                                             *ngFor="let game of widget.items"
                                             [game]="game"
