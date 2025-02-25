@@ -104,7 +104,6 @@ export class AddressDataComponent extends BaseFormComponent implements OnInit {
           if (!endereco.erro) {
             let estadoLocal: Estado;
             for (let estado of this.estados) {
-              console.log(estado)
               if (estado.uf == endereco.uf) {
                 estadoLocal = estado;
               }
