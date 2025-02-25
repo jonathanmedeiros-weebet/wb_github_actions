@@ -19,6 +19,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() active: boolean = true;
     @Input() version: string = 'v1';
     @Input() category: string = 'esporte';
+    @Input() hasRecommendations: boolean = false;
 
     @Input() menuItemSelected: string;
     @Output() onClick = new EventEmitter();
@@ -325,7 +326,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
                 link: '/casino/c/wall/recommendedToYou',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
-                active: this.paramsService.getOpcoes().casino && this.isLoggedIn
+                active: this.paramsService.getOpcoes().casino && this.isLoggedIn && this.hasRecommendations
             },
             {
                 id: 'news', //TODO: Procurar saber url para categorias novidades

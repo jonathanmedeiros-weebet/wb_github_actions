@@ -61,11 +61,48 @@
                         <app-submenu
                             [category]="subMenuCategory"
                             version="v2"
+                            [hasRecommendations]="gamesRecommended.length > 0"
                             [menuItemSelected]="categorySelected"
                             (onClick)="filterGames(gameFornecedor, $event, false)"
                         />
                     </div>
                 </ng-container>
+
+                <div class="wall-inner" *ngSwitchCase="'betpilot'">
+                    <div class="bloco blocoGameList">
+                        <app-wall-section
+                            [container]="listagem"
+                            [sectionId]="widget.id"
+                            [title]="'cassino.recommendedToYou' | translate"
+                            [icon]="widget.icon"
+                            [itemsQty]="gamesRecommended.length"
+                            (onSeeAll)="filterGames($event, widget.id, true)"
+                            (onLeft)="scrollLeft(widget.id)"
+                            (onRight)="scrollRight(widget.id)"
+                        />
+
+                        <div class="games-container">
+                            <ng-container *ngIf="gamesRecommended.length; else elseWithoutGames">
+                                <div class="game-list game-list-inline" #scrollGames id="{{ widget.id }}-scroll" (scroll)="onScroll(widget.id)">
+                                    <app-wall-game-card
+                                        *ngFor="let game of gamesRecommended"
+                                        [game]="game"
+                                        [blink]="blink"
+                                        [isLoggedIn]="isLoggedIn"
+                                        [isDemo]="isDemo"
+                                        [isCliente]="isCliente"
+                                        [icon]="widget.icon"
+                                        cardType="inline"
+
+                                    />
+                                </div>
+                            </ng-container>
+                            <ng-template #elseWithoutGames>
+                                <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
 
                 <ng-container *ngIf="isHomeCassino; else cassinoGameList">
                     <div class="wall-inner" *ngSwitchCase="'casino'">
