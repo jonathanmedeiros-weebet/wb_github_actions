@@ -437,7 +437,7 @@
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória",
         "pagamentoExclusivoChaveCPF": "Informamos que ao solicitar o saque ele será realizado exclusivamente para a chave pix CPF do titular da conta.",
         "solicitacoesRecentes": "Solicitações de saque recentes",
-        "avisoBonus": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente.",
+        "avisoRollover": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente.",
         "withdrawalDetails": "Detalhes do saque",
         "availableBalanceForWithdrawal": "Saldo disponível para saque",
         "safeWithdrawalAlert": "Por motivos de segurança, os saques só serão efetivados para contas pertencentes ao CPF cadastrado.",

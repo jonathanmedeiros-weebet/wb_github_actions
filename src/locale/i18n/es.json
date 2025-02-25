@@ -438,9 +438,10 @@
         "minimumWithdrawal": "Retiro mínimo",
         "dailyMaximum": "Máximo diario",
         "monthlyMaximum": "Máximo mensual",
+        "identityVerify": "Verificar identidad",
+        "identityVerifyNeeded": "Para continuar, será necesario realizar la verificación de identidad antes.",
+        "disapprovedIdentity": "Su verificación de identidad fue rechazada. Para realizar un análisis manual, por favor, póngase en contacto con el soporte.",
         "maximumWithdrawalAmount": "Retiro máximo"
-        "monthlyMaximum": "Máximo mensual",
-        "maximumDepositAmount": "Valor máximo"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Activación de registro",
@@ -472,7 +473,8 @@
         "depositTextWithoutBonus": "Para hacer un depósito a través de PIX, ingrese el monto deseado en el campo a continuación, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
         "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de PIX, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
         "copyCode": "Copiar código",
-        "copied": "Copiado!"
+        "copied": "Copiado!",
+        "maximumDepositAmount": "Valor máximo"
     },
     "footer": {
         "afiliados": "Asociaciones",

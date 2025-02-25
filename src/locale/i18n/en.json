@@ -444,8 +444,6 @@
         "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
         "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
         "maximumWithdrawalAmount": "Maximum withdrawal"
-        "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
-        "maximumDepositAmount": "Maximum value"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -477,7 +475,8 @@
         "depositTextWithoutBonus": "To make a deposit via PIX, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "depositTextWithoutBonusAndPromocode": "To make a deposit via PIX, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "copyCode": "Copy code",
-        "copied": "Copied!"
+        "copied": "Copied!",
+        "maximumDepositAmount": "Maximum amount"
     },
     "footer": {
         "afiliados": "Partnership",
