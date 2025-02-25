@@ -1,7 +1,7 @@
 import { GameCasino } from './../../shared/models/casino/game-casino';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, Input, ViewChild } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
-import { AuthService, ParametrosLocaisService, SidebarService } from './../../services';
+import { AuthService, ParametrosLocaisService, SidebarService, WidgetService } from './../../services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginModalComponent } from '../../shared/layout/modals';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { WallProviderFilterModalComponent } from './components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from 'src/app/shared/services/timer.service';
+import { forEach } from 'lodash';
 
 export interface Fornecedor {
     gameFornecedor: string;
@@ -70,9 +71,11 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gameTitle: string;
 
     public filteredCategory: string;
+    public widgets = [];
 
     constructor(
         private casinoApi: CasinoApiService,
+        private widgetService: WidgetService,
         private auth: AuthService,
         private router: Router,
         private route: ActivatedRoute,
@@ -84,6 +87,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         private translate: TranslateService,
         private paramsService: ParametrosLocaisService,
         private navigationHistoryService: NavigationHistoryService,
+        private casinoService: CasinoApiService,
         private cron: CronService
     ) {
     }
@@ -139,6 +143,12 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        const page = this.isCassinoPage ? 'casino' : 'live_casino'
+        this.widgetService.byPage(page).subscribe(response => {
+            this.widgets = response;
+            this.getGamesCasino();
+        });
+
         this.navigationHistoryService.limparFiltro$.subscribe(() => {
             this.clearFilters();
         });
@@ -153,6 +163,16 @@ export class WallComponent implements OnInit, AfterViewInit {
 
         this.auth.logado.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
         this.auth.cliente.subscribe(isCliente => this.isCliente = isCliente);
+    }
+
+    getGamesCasino() {
+        this.widgets.forEach(widget => {
+            this.casinoService.getCasinoGamesByIds(widget.items.map(i => i.item_id))
+                .subscribe((result) => {
+                    widget.items = result.games;
+                }
+            );
+        });
     }
 
     private onTranslateChange() {

@@ -109,6 +109,7 @@ import { LastAccessesModalComponent } from './modals/last-accesses-modal/last-ac
 import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.module';
 
 import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
+import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
 import { RegisterModalComponentComponent } from './modals/register-modal/register-modal-component/register-modal-component.component';
 import { AddressDataComponent } from './modals/register-modal/parts/address-data/address-data.component';
 import { LoginDataComponent } from './modals/register-modal/parts/login-data/login-data.component';
@@ -224,6 +225,7 @@ import { RegisterFaceMatchComponent } from './modals/register-face-match/registe
         AddBankAccountModalComponent,
         ListBankAccountsComponent,
         LastAccessesModalComponent,
+        BetSharingModalComponent,
         RegisterModalComponentComponent,
         AddressDataComponent,
         LoginDataComponent,

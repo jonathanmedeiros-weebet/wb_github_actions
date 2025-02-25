@@ -185,6 +185,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     maxAmountSportsBonus = 0;
     amountCasinoBonus = 0;
     maxAmountCasinoBonus = 0;
+    maximumDepositAmount;
 
     bonusCassino = false;
     bonusEsportivo = false;
@@ -226,6 +227,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }
 
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
+        this.maximumDepositAmount = this.paramsLocais.getOpcoes().maximum_deposit_amount;
         this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
         this.paymentMethodSelected = this.availablePaymentMethods[0];
         this.createForm();
@@ -257,7 +259,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
 
         if (!existingPromoCode || isPromoCodeExpired) {
             const newPromoCode = this.route.snapshot.queryParams['promo'] || null;
-            
+
             if (newPromoCode) {
                 localStorage.setItem('promoCode', newPromoCode);
                 const expirationDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
@@ -267,14 +269,14 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 localStorage.removeItem('promoCodeExpiredDate');
             }
         }
-        
+
         const promoCode = localStorage.getItem('promoCode');
         this.form.patchValue({ promoCode: promoCode });
     }
 
     createForm() {
         this.form = this.fb.group({
-            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito)]],
+            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito), ...(this.maximumDepositAmount !== "" ? [Validators.max(this.maximumDepositAmount)] : [])]],
             bonus: [this.bonusOption, Validators.required],
             paymentMethod: [this.paymentMethodSelected, Validators.required],
             promoCode: [""]

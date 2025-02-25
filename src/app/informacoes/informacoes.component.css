@@ -12,6 +12,11 @@
     margin-top: 40px;
 }
 
+.content-body {
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
 .content-page {
     line-height: 2rem
 }
@@ -146,7 +151,6 @@ a.active {
         padding: 24px 16px;
         margin-top: 0px;
     }
-    
     .content-page p {
         font-size: 12px !important;
         font-style: normal !important;

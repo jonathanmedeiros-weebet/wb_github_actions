@@ -1,0 +1,242 @@
+.modal-header,
+.modal-body,
+.modal-footer {
+   font-family: 'Open Sans', sans-serif;
+}
+.modal-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.modal-body {
+    max-height: 450px;
+    overflow: auto;
+}
+.modal-header {
+    border: none;
+    background: var(--header);
+    color: var(--foreground-header);
+}
+
+.modal-header i{
+    color: var(--foreground-header) !important;
+}
+
+.secondary-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    height: 40px;
+    text-decoration: none;
+    border: 1px solid var(--highlight);
+    font-size: 12px;
+    border-radius: 5px;
+    color: var(--foreground-header);
+    white-space: nowrap;
+}
+
+.secondary-btn:hover {
+    background-color: var(--highlight);
+    color: var(--header);
+    transition: 300ms;
+}
+
+#cupom{
+    padding: 0 1em;
+    background: #363636;
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 7px 1em 7px 1em;
+    border-bottom: 2px dotted var(--bottom-bar);
+}
+.cupom-header {
+    background-color: var(--header);
+    color: var(--foreground-header);
+    font-size: 12px;
+    max-height: 120px;
+    padding: 10px;
+}
+.cupom-ativo{
+    background: var(--background);
+    margin-bottom: 0;
+    color: var(--foreground-game);
+}
+tr.cupom {
+    border-bottom: 2px dotted var(--bottom-bar);
+}
+.border-left {
+    border-radius: 10px 0 0 10px;
+}
+.border-right {
+    border-radius: 0 10px 10px 0;
+}
+img{
+    max-height: 90px;
+    max-width: 150px;
+}
+.ganhou{
+    color: #0C9F19;
+    text-transform: uppercase;
+}
+.perdeu{
+    color: #E9283B;
+    text-transform: uppercase;
+}
+.cancelado {
+    margin-right: 20px;
+    text-decoration: line-through
+}
+.jogo-resultado{
+    font-size: 12px;
+    font-weight: bold;
+}
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px dashed black;
+}
+.cupom-header p {
+    font-size: 12px;
+    width: 100%;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+.cupom-header span {
+    font-weight: normal;
+}
+.item .campeonato{
+    margin: 1px;
+    font-size: 14px;
+}
+.item .horario{
+    margin: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+.item .jogo{
+    margin: 1px;
+    font-weight: bold;
+    font-size: 12px;
+}
+.item .nome{
+    margin: 1px;
+}
+.item .cotacao{
+    margin: 1px;
+    font-size: 12px;
+    font-weight: bolder;
+}
+.item p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.cupom-header span {
+    margin-left: 3px;
+}
+.encerrado {
+    text-decoration-line: line-through;
+}
+.info-cupom {
+    font-size: 12px;
+    color: var(--foreground-game);
+}
+.table {
+    color: var(--foreground-game);
+    margin-top: 10px;
+    margin-bottom: -11px;
+    border-collapse: collapse;
+    width: 100%;
+ }
+ .table thead th {
+    background-color: var(--game);
+    color: var(--foreground-game);
+    border-top: 0;
+    border-bottom: 3px solid var(--background);
+    padding: 8px;
+ }
+.table tbody td {
+    background: var(--game);
+    border-top: 0;
+    border-bottom: 1px solid var(--background);
+}
+.table thead {
+    background-color: var(--game);
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+.modal-footer {
+    justify-content: center;
+    background: var(--background);
+    border-top: none;
+}
+.modal-footer button {
+    width: 100%;
+}
+ .cupom-container {
+    display: flex;
+    align-items: flex-start;
+    margin: 3px;
+    margin-bottom: 0px;
+}
+.cupom-container{
+    display: none;
+}
+ @media only screen and (max-width: 532px) {
+    .cupom-header {
+        max-height: none;
+        column-count: 1;
+    }
+    .modal-body {
+        max-height: 65dvh;
+        height: 65dvh;
+    }
+    .modal-title {
+        display: none;
+    }
+    .action-buttons button, .action-buttons a {
+        padding: 12px;
+    }
+    .modal-header {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+ }
+ @media only screen and (max-width: 1024px) {
+    .jogo-resultado {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .odd-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .item .cotacao {
+        display: flex;
+        justify-content: space-between;
+    }
+    .modal-body {
+        min-height: 55dvh;
+        height: 60dvh;
+    }
+    .table-container,
+    .modal-header .info-horario {
+        display: none;
+    }
+    #cupom {
+        background-color: var(--game);
+    }
+    .cupom-container{
+        margin-top: 0px;
+        display: block;
+    }
+    .horario {
+        font-size: 12px !important;
+    }
+    .campeonato .info-cupom {
+        font-size: 12px;
+    }
+ }
+

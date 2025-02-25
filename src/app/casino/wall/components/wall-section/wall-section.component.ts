@@ -10,6 +10,7 @@ export class WallSectionComponent {
   @Input() container: any;
   @Input() sectionId: string = '';
   @Input() title: string = '';
+  @Input() icon: string = '';
   @Input() itemsQty: number = 0;
   @Input() seeAllRouterLink: string = '';
   @Output() onSeeAll = new EventEmitter();
