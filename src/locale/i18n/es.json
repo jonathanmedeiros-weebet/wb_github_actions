@@ -153,6 +153,7 @@
         "esqueceuASenha": "¿Olvidaste tu contraseña?",
         "naoPossuiUmaConta": "¿No tienes una cuenta?",
         "jaPossuiUmaConta": "¿Ya tienes una cuenta?",
+        "logIn": "Iniciar sesión",
         "usuario": "Usuario",
         "senha": "Contraseña",
         "masculino": "Masculino",
@@ -163,7 +164,7 @@
         "deAcordoComOsTermos2": "y nuestros",
         "termosDeUso": "términos de uso",
         "cadastrar": "Registrarse",
-        "cadastroSucedido": "¡Registro completado con éxito! Verifica tu correo electrónico para activarlo.",
+        "cadastroSucedido": "¡Registro completado con éxito.",
         "informacoesPessoais": "Información personal",
         "criarLogin": "Crear inicio de sesión",
         "sucesso": "Éxito",
@@ -278,7 +279,18 @@
         "logoutGeolocationErrorMessage": "Has sido desconectado por razones de seguridad. Detectamos un cambio abrupto en tu ubicación que sería físicamente imposible de ocurrir en el intervalo de tiempo registrado. Si esto no fue causado por ti, te recomendamos verificar tu cuenta.",
         "logoutGeolocationErrorTitle": "Acceso Interrumpido: Ubicación Inconsistente",
         "logoutGeolocationErrorButtonLabel": "Cerrar",
-        "clickHere": "Clic aqui"
+        "clickHere": "Clic aqui",
+        "countryCode": "Código",
+        "complement": "Complemento",
+        "login": "Sesión",
+        "createAccount": "Crear cuenta",
+        "passwordRequirements": "Requisitos para una contraseña segura:",
+        "passwordLevel": "Nivel de la contraseña:",
+        "weak": "Debil",
+        "medium": "Medio",  
+        "strong": "Fuerte",
+        "kindLogin": "Iniciar sesión con",
+        "errorMinorAge": "menor de edad."
     },
     "bankAccounts": {
         "title" : "Bank Accounts",
@@ -413,10 +425,9 @@
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
         "digiteSuaSenha": "Ingrese su contraseña",
-        "minimumCharactersPassword": "Mínimo 8 caracteres",
-        "lowercaseLetter": "Mínimo una letra minúscula",
-        "uppercaseLetter": "Mínimo una letra mayúscula",
-        "specialChar": "Mínimo un carácter especial (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "La contraseña debe tener al menos 8 caracteres.",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Debe contener una letra mayúscula y una minúscula.",
+        "specialChar": "Debe contener un carácter especial (Ej.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Ingrese el monto para el retiro",
@@ -441,7 +452,8 @@
         "identityVerify": "Verificar identidad",
         "identityVerifyNeeded": "Para continuar, será necesario realizar la verificación de identidad antes.",
         "disapprovedIdentity": "Su verificación de identidad fue rechazada. Para realizar un análisis manual, por favor, póngase en contacto con el soporte.",
-        "maximumWithdrawalAmount": "Retiro máximo"
+        "maximumWithdrawalAmount": "Retiro máximo",
+        "maximumDepositAmount": "Valor máximo"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Activación de registro",
@@ -666,7 +678,10 @@
         "remain_active_session": "No, seguir con la otra sesión activa",
         "save_pdf": "Guardar PDF",
         "seeMore": "Ver más",
-        "seeLess": "Ver menos"
+        "seeLess": "Ver menos",
+        "continue": "Continuar",
+        "next": "Siguiente",
+        "previous": "Anterior"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",
@@ -773,19 +788,27 @@
     },
     "face_match": {
         "label": "Reconocimiento facial",
+        "face_match": "Validación facial",
         "verified_identity": "Identidad verificada!",
-        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia."
+        "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia.",
+        "account_protected": "Su cuenta protegida!",
+        "register_description": "Para tener acceso a todas las funciones del sitio, tendrá que registrar su foto de seguridad. Su imagen es confidencial y no será compartida.",
+        "checkNow": "Verificar ahora"
     },
     "register": {
         "signupWith": "Regístrate en Google",
         "registerGoogleAccount": "Regístrate con tu cuenta de google",
         "fillToRegister": "Rellene los campos para completar su registro",
         "protectedByReCaptchaPart1": "Este sitio está protegido por reCAPTCHA se aplican la",
-        "protectedByReCaptchaPart2": "Política de privacidad",
+        "protectedByReCaptchaPart2": "política de privacidad",
         "protectedByReCaptchaPart3": "y las",
-        "protectedByReCaptchaPart4": "Condiciones del servicio",
+        "protectedByReCaptchaPart4": "condiciones del servicio",
         "protectedByReCaptchaPart5": "de Google.",
-        "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse."
+        "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse.",
+        "day":"Día",
+        "month":"Mes",
+        "year":"Año",
+        "brasil": "Brasil"
     },
     "registerCancel": {
         "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",

@@ -4,6 +4,7 @@ import { ParametrosLocaisService } from './../../services/parametros-locais.serv
 import { config } from './../../../shared/config';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
+import { AccountVerificationService } from 'src/app/services';
 
 @Component({
   selector: 'app-welcome-page',
@@ -12,47 +13,57 @@ import {DepositoComponent} from 'src/app/clientes/deposito/deposito.component';
 })
 
 export class WelcomePageComponent {
-    nomeCliente = '';
-    SLUG;
-    soCassino = false;
-    validEmail;
-    bancaNome;
-    booleanPromoPrimeiroDepositoAtivo;
-
+    public accountVerified: boolean = false;
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private modalService: NgbModal,
-        private params: ParametrosLocaisService) {}
+        private params: ParametrosLocaisService,
+        private accountVerificationService: AccountVerificationService
+    ) {}
+
+    get clientName() {
+        const user = JSON.parse(localStorage.getItem('user') ?? '')
+        return (Boolean(user) && Boolean(user?.nome)) ? user?.nome.split(" ")[0] : '';
+    }
+
+    get merchantName() {
+        return this.params.getOpcoes().banca_nome;
+    }
+
+    get merchantLogo() {
+        return `https://weebet.s3.amazonaws.com/${config.SLUG}/logos/logo_banca.png`;
+    }
+
+    get booleanPromoPrimeiroDepositoAtivo() {
+        let promo = localStorage.getItem('promocaoPrimeiroDepositoAtivo');
+        if(!Boolean(promo)) return false;
+        return Boolean(JSON.parse(promo));
+    }
+
+    get isCasinoModule() {
+        return this.params.getOpcoes().casino && !this.params.getOpcoes().esporte;
+    }
 
     ngOnInit() {
-        this.SLUG = config.SLUG;
-        this.bancaNome = this.params.getOpcoes().banca_nome;
-        this.route.queryParams.subscribe(params => {
-            this.nomeCliente = params['nomeCliente'];
-            this.validEmail = params['valid'] === 'true';
-        });
-
         if (localStorage.getItem('permissionWelcomePage') !== null ) {
             localStorage.removeItem('permissionWelcomePage');
         }
 
-        let promoPrimeiroDepositoAtivo = localStorage.getItem('promocaoPrimeiroDepositoAtivo'); 
-        this.booleanPromoPrimeiroDepositoAtivo = JSON.parse(promoPrimeiroDepositoAtivo);
-
-        if (this.params.getOpcoes().casino && !this.params.getOpcoes().esporte) {
-            this.soCassino = true;
-        }
+        this.accountVerificationService.accountVerified.subscribe((accountVerified) => {
+            this.accountVerified = accountVerified;
+        });
     }
 
     depositeAgora() {
         if (window.innerWidth < 1025) {
+            if (!this.accountVerified) {
+                this.accountVerificationService.openModalAccountVerificationAlert();
+            }
             this.modalService.open(DepositoComponent);
             this.router.navigate(['/']);
         } else {
-            this.router.navigate(['/clientes/deposito']).then(() => {
-                window.location.reload();
-            });
+            this.router.navigate(['/clientes/deposito']);
         }        
     }
 }

@@ -633,7 +633,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350 modal-login',
+                windowClass: 'modal-400 modal-h-350 modal-login',
                 centered: true,
             }
         );
@@ -666,7 +666,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                             this.autoPreenchimento = true;
                             this.cpfValidado = true;
                             this.menorDeIdade = res.menorDeIdade;
-                            this.beneficiarioProgramaSocial = res.beneficios.DataRecebimentoMaisRecente >= dataTresMesesAntes.toISOString();
+                            this.beneficiarioProgramaSocial = Boolean(res.beneficios) && res.beneficios.DataRecebimentoMaisRecente >= dataTresMesesAntes.toISOString();
                             this.form.controls['nascimento'].clearValidators();
                             this.form.controls['nascimento'].updateValueAndValidity();
                             this.form.patchValue({

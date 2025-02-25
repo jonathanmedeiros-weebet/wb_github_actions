@@ -44,7 +44,7 @@ export class BannersComponent implements OnInit {
     loadBanner() {
         this.banners = [];
         this.showLoadingIndicator = true;
-        this.bannerService.requestBanners(this.pagina);
+        this.bannerService.requestBanners();
         this.bannerService.banners
         .pipe(filter(banners => typeof banners != 'undefined'),take(1))
         .subscribe((banners: []) => {
@@ -58,11 +58,12 @@ export class BannersComponent implements OnInit {
             if (this.mobileScreen) {
                 source = 'src_mobile';
             }
+
             for (const banner of banners) { 
                 if (banner[source]) {
                     if (this.pagina === 'deposito' && banner['pagina'] === 'deposito') {
                         this.banners.push(banner);
-                    } else if (banner['pagina'] === this.pagina || (banner['pagina'] === 'todas' && this.pagina != 'deposito')) {
+                    } else if (banner['pagina'] === this.pagina || (banner['pagina'] === 'todas' && !['deposito', 'cadastro'].includes(this.pagina))) {
                         this.banners.push(banner);
                     }
                 }

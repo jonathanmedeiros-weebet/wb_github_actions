@@ -22,6 +22,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/auth/auth.service';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 import { SportIdService } from 'src/app/services';
+import { AccountVerificationService } from '../../services/account-verification.service';
 
 @Component({
     selector: 'app-sidebar-nav',
@@ -79,6 +80,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
     };
 
+    public accountVerified: boolean = false;
+
     constructor(
         private router: Router,
         private fb: UntypedFormBuilder,
@@ -93,6 +96,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService,
         private sportIdService: SportIdService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
 
@@ -106,6 +110,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.futsalId = this.sportIdService.futsalId;
         this.iceHockeyId = this.sportIdService.iceHockeyId;
         this.eSportsId = this.sportIdService.eSportsId;
+    }
+
+    get accountVerificationPending(): boolean {
+        return this.isNotCambista && !this.accountVerified;
     }
 
     ngOnInit() {
@@ -124,6 +132,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
             case '/cambistas/solicitacoes-saque':
                 this.subCartao = true;
                 break;
+            case '/clientes/personal-data':
             case '/clientes/perfil':
             case '/clientes/perfil-pix':
             case '/alterar-senha':
@@ -175,6 +184,16 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+
+        if (this.isNotCambista) {
+            this.initAccountVerification();
+        }
+    }
+
+    private initAccountVerification() {
+        this.accountVerificationService
+            .accountVerified
+            .subscribe((accountVerified) => this.accountVerified = accountVerified)
     }
 
     private getLigasPopulares() {

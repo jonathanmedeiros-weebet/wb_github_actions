@@ -20,7 +20,6 @@ export class CampanhaAfiliadoService {
     ) { }
 
     computarAcesso(dados: any): Observable<any> {
-        console.log(dados);
         const url = `${this.CampanhaAfiliadoUrl}/computarAcesso`;
 
         return this.http.post(url, dados, this.header.getRequestOptions(true))

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService, MessageService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Router } from '@angular/router';
@@ -26,6 +26,7 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
         private messageService: MessageService,
         private auth: AuthService,
         private router: Router,
+        private modalService: NgbModal,
     ) {
         super();
     }
@@ -68,4 +69,10 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
     handleError(error: string) {
         this.messageService.error(error);
     }
+
+    abrirCadastro() {
+            this.activeModal.dismiss();
+
+            this.auth.openRegisterV3Modal();
+        }
 }

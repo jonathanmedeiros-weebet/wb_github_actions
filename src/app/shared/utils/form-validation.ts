@@ -63,8 +63,7 @@ export class FormValidations {
         const rawBirthday = control.value;
         const actualDate = moment();
 
-        const birthday = moment(rawBirthday, 'DDMMYYYY', true);
-
+        const birthday = moment(rawBirthday, 'YYYY-MM-DD', true);
         if (birthday.isValid()) {
             if (actualDate.diff(birthday, 'years') < 18) {
                 return { menorDeIdade: true };
@@ -127,6 +126,10 @@ export class FormValidations {
         return validator;
     }
 
+    static cpfAlreadyExists () {
+        return { cpfAlreadyExists: true };
+    }
+
     static getErrorMsg(fieldName: string, validatorName: string, validatorValue?: any) {
         if (!fieldName) {
             fieldName = 'Campo';
@@ -150,6 +153,7 @@ export class FormValidations {
             'menorDeIdade': 'Cadastro permitido apenas para maiores de 18 anos.',
             'cpfInvalido': 'CPF Inválido!',
             'cpfNotExists': 'CPF informado não existe.',
+            'cpfAlreadyExists': 'CPF já está cadastrado.',
             'nomeDeUsuarioInvalido': 'Nome de usuário só pode conter letras, números e sublinhado (_)',
             'strongPassword': 'A senha deve atender todos os requisitos'
         };

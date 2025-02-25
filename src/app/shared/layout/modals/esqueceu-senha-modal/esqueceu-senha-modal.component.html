@@ -1,19 +1,38 @@
-<div class="modal-header">
-    <img [src]="LOGO" class="logo-modal" alt="">
-    <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <i class="fa fa-times"></i>
-    </a>
-</div>
-<div class="modal-body">
-    <h2>{{'senhas.redefinirSenha' | translate}}</h2>
-    <p>{{'senhas.informeSeuEmail' | translate}}</p>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-        <div class="form-group mb-4">
-            <input type="text" class="form-control inverted-out" formControlName="email"
-                   [ngClass]="applyCssInputError('email')" placeholder="{{'geral.email' | translate}}">
-            <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}" class="text-left"></app-error-msg>
-        </div>
-        <button type="submit" class="btn btn-custom btn-block" [disabled]="submitting">{{'senhas.solicitarCodigoRedefinicao' | translate}}</button>
-    </form>
-</div>
 
+<div class="modal-conteiner">
+    <div>
+        <div class="modal-header">
+            <a type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                <svg class="icon-hover" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="0.00195312" width="32" height="32" rx="2"/>
+                    <path d="M16.0019 17.8669L12.1352 21.7336C11.8907 21.978 11.5796 22.1003 11.2019 22.1003C10.8241 22.1003 10.513 21.978 10.2685 21.7336C10.0241 21.4891 9.90186 21.178 9.90186 20.8003C9.90186 20.4225 10.0241 20.1114 10.2685 19.8669L14.1352 16.0003L10.2685 12.1669C10.0241 11.9225 9.90186 11.6114 9.90186 11.2336C9.90186 10.8558 10.0241 10.5447 10.2685 10.3003C10.513 10.0558 10.8241 9.93359 11.2019 9.93359C11.5796 9.93359 11.8907 10.0558 12.1352 10.3003L16.0019 14.1669L19.8352 10.3003C20.0796 10.0558 20.3907 9.93359 20.7685 9.93359C21.1463 9.93359 21.4574 10.0558 21.7019 10.3003C21.9685 10.5669 22.1019 10.8838 22.1019 11.2509C22.1019 11.618 21.9685 11.9234 21.7019 12.1669L17.8352 16.0003L21.7019 19.8669C21.9463 20.1114 22.0685 20.4225 22.0685 20.8003C22.0685 21.178 21.9463 21.4891 21.7019 21.7336C21.4352 22.0003 21.1187 22.1336 20.7525 22.1336C20.3863 22.1336 20.0805 22.0003 19.8352 21.7336L16.0019 17.8669Z" fill="rgba(var(--foreground-inputs-odds-rgb),0.3)" />
+                </svg>
+            </a>
+        </div>
+        <div class="modal-body">
+            <div class="content-form">
+                <div class="text-container">
+                    <h2>{{'senhas.redefinirSenha' | translate}}</h2>
+                    <p>{{'senhas.informeSeuEmail' | translate}}</p>
+                </div>
+                <div class="form-forgot-password">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="form-forgot">
+                        <div class="input-md">
+                            <input type="text" class="form-control inverted-out" formControlName="email" id="email"
+                                [ngClass]="applyCssInputError('email')">
+                            <label for="email">{{'geral.email' | translate}}</label>
+                            <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
+                                class="text-left"></app-error-msg>
+                        </div>
+                        <button type="submit" class="btn btn-custom btn-block"
+                            [disabled]="submitting">{{'senhas.solicitarCodigoRedefinicao' | translate}}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="registrar">
+        {{'geral.naoPossuiUmaConta' | translate}}
+        <a (click)="abrirCadastro()" style="cursor: pointer" class="">{{'geral.registreSe' | translate}}</a>
+    </div>
+</div>
