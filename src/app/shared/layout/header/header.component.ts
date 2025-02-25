@@ -484,7 +484,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 }
             );
         } else {
-            console.log('chegou')
             this.auth.openRegisterV3Modal();
         }
     }

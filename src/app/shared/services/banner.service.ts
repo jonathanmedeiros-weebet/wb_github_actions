@@ -40,7 +40,7 @@ export class BannerService {
                 );
         } else {
             this.bannersSource.next(this.cachedBanners);
-            return this.banners;
+            return this.banners.pipe(take(1));
         }
     }
 }

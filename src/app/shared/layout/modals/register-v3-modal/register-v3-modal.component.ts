@@ -54,6 +54,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     };
     public countryCodes: any[] = [];
     private registerBanner: any;
+    public showNationalitySection: boolean = false;
+    public showNationalityOptions: boolean = false;
+    public nationalities = this.countriesService.getCountries();
 
     constructor(
         private fb: FormBuilder,
@@ -172,7 +175,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             country: ['+55', [Validators.required]],
             telefone: [null, [Validators.required]],
             senha: [null, [Validators.required, Validators.minLength(8)]],
-            nationality: ['Brasil', Validators.required],
+            nationality: [26, Validators.required],
 
             captcha: [null, this.provedorCaptcha  ? Validators.required : null],
             check_1: [''],

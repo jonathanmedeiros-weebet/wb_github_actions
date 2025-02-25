@@ -554,6 +554,69 @@ a.link-termos-politica {
     width: 100%;
 }
 
+.style-select-nationality{
+    padding-left: 11px;
+    padding-top: 6px;
+}
+
+.div-nationality-personalized {
+    display: flex;
+    height: 44px;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    background: var(--input);
+    max-height: 44px;
+    gap: 4px;
+    justify-content: center;
+}
+
+
+.span-nationality{
+    color:rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.contents-nationality{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contents-nationality i{
+    color:rgba(var(--foreground-inputs-odds-rgb), 0.5);
+}
+
+.style-select-nationality {
+    appearance: menulist;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    outline: none;
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    background-color: transparent;
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.5);
+}
+
+
+.nationality-personalized{
+    width: 100%
+}
+
+.show-nationality {
+    position: absolute;
+    top: calc(50% - 16px);
+    right: 0;
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    cursor: pointer;
+    padding: 10px;
+}
+
 @media screen and (max-width: 320px) {
     .country-personalized{
         width: 33%;
