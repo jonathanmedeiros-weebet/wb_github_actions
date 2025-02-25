@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService, BannerService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService } from 'src/app/services';
+import { AccountVerificationService, AuthService, BannerService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService } from 'src/app/services';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
 import { FormValidations } from 'src/app/shared/utils';
 import { BaseFormComponent } from '../../base-form/base-form.component';
@@ -25,7 +25,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public modalClose = true;
     public registerCancel = false;
     public form: FormGroup;
-    private validacaoEmailObrigatoria: boolean = false;
     public errorMessage: string = '';
     public dataNascimento: string = '';
     public submitting: boolean = false;
@@ -73,7 +72,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         private router: Router,
         private countriesService: CountriesService,
         private modalService: NgbModal,
-        private bannerService: BannerService
+        private bannerService: BannerService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
@@ -94,7 +94,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.getPromocoes();
         this.prepareBanner();
 
-        this.validacaoEmailObrigatoria = this.paramsService.getOpcoes().validacao_email_obrigatoria;
         this.isStrengthPassword = this.paramsService.getOpcoes().isStrengthPassword;
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
@@ -279,39 +278,27 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             .cadastrarCliente(values)
             .subscribe(
                 (res) => {
-                    sessionStorage.setItem('user', JSON.stringify(res.result.user));
-
                     this.activeModal.dismiss();
 
+                    this.auth.setIsCliente(true);
+                    
+                    const user = res.result.user;
+                    sessionStorage.setItem('user', JSON.stringify(user));
                     localStorage.removeItem('codigoAfiliado');
+                    localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
 
-                    if (this.validacaoEmailObrigatoria) {
-                        localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
-                        this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
-                        let nome = values.nome.split(" ")[0];
-                        this.router.navigate(
-                            ['/welcome'],
-                            {
-                                queryParams: { nomeCliente: nome, valid: true }
-                            });
-                    } else {
-                        this.auth.setIsCliente(true);
-
-                        localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
+                    if (Boolean(res.dataUser.promocao_primeiro_deposito_ativa)) {
                         localStorage.setItem('promocaoPrimeiroDepositoAtivo', res.dataUser.promocao_primeiro_deposito_ativa);
-                        let nome = values.nome.split(" ")[0];
-                        this.router.navigate(
-                            ['/welcome'],
-                            {
-                                queryParams: { nomeCliente: nome, valid: false }
-                            });
                     }
+
+                    this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
+                    this.accountVerificationService.getAccountVerificationDetail().toPromise();
+                    this.router.navigate(['/welcome']);
 
                     if (this.errorMessage  && res.success) {
                         this.errorMessage  = '';
                     }
                     this.submitting = false;
-
                 },
                 error => {
                     this.handleError(error);

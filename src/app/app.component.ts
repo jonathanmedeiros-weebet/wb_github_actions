@@ -156,6 +156,7 @@ export class AppComponent implements OnInit {
                     this.openModalTimeLimit();
                 });
 
+                localStorage.removeItem(ACCOUNT_VERIFIED)
                 this.accountVerificationService.getAccountVerificationDetail().toPromise();
             }
 

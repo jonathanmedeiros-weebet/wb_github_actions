@@ -13,7 +13,6 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
 import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
 
-
 declare var xtremepush: any;
 
 @Injectable({
@@ -35,7 +34,7 @@ export class ClienteService {
         private router: Router,
         private paramsService: ParametrosLocaisService,
         private ga4Service: Ga4Service,
-        private modalService: NgbModal
+        private modalService: NgbModal,
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());

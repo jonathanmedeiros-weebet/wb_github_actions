@@ -13,13 +13,7 @@ import { AccountVerificationService } from 'src/app/services';
 })
 
 export class WelcomePageComponent {
-    nomeCliente = '';
-    SLUG;
-    soCassino = false;
-    validEmail;
-    bancaNome;
-    booleanPromoPrimeiroDepositoAtivo;
-
+    public accountVerified: boolean = false;
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -28,33 +22,44 @@ export class WelcomePageComponent {
         private accountVerificationService: AccountVerificationService
     ) {}
 
-    ngOnInit() {
-        this.SLUG = config.SLUG;
-        this.bancaNome = this.params.getOpcoes().banca_nome;
-        this.route.queryParams.subscribe(params => {
-            this.nomeCliente = params['nomeCliente'];
-            this.validEmail = params['valid'] === 'true';
-        });
+    get clientName() {
+        const user = JSON.parse(localStorage.getItem('user') ?? '')
+        return (Boolean(user) && Boolean(user?.nome)) ? user?.nome.split(" ")[0] : '';
+    }
 
+    get merchantName() {
+        return this.params.getOpcoes().banca_nome;
+    }
+
+    get merchantLogo() {
+        return `https://weebet.s3.amazonaws.com/${config.SLUG}/logos/logo_banca.png`;
+    }
+
+    get booleanPromoPrimeiroDepositoAtivo() {
+        let promo = localStorage.getItem('promocaoPrimeiroDepositoAtivo');
+        if(!Boolean(promo)) return false;
+        return Boolean(JSON.parse(promo));
+    }
+
+    get isCasinoModule() {
+        return this.params.getOpcoes().casino && !this.params.getOpcoes().esporte;
+    }
+
+    ngOnInit() {
         if (localStorage.getItem('permissionWelcomePage') !== null ) {
             localStorage.removeItem('permissionWelcomePage');
         }
 
-        let promoPrimeiroDepositoAtivo = localStorage.getItem('promocaoPrimeiroDepositoAtivo'); 
-        this.booleanPromoPrimeiroDepositoAtivo = JSON.parse(promoPrimeiroDepositoAtivo);
-
-        if (this.params.getOpcoes().casino && !this.params.getOpcoes().esporte) {
-            this.soCassino = true;
-        }
+        this.accountVerificationService.accountVerified.subscribe((accountVerified) => {
+            this.accountVerified = accountVerified;
+        });
     }
 
     depositeAgora() {
         if (window.innerWidth < 1025) {
-            if (!this.accountVerificationService.accountVerified.getValue()) {
+            if (!this.accountVerified) {
                 this.accountVerificationService.openModalAccountVerificationAlert();
-                return;
             }
-
             this.modalService.open(DepositoComponent);
             this.router.navigate(['/']);
         } else {
