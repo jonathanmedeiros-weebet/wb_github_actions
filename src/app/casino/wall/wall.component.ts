@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { WallProviderFilterModalComponent } from './components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from 'src/app/shared/services/timer.service';
-import { forEach } from 'lodash';
+import { isUndefined } from 'lodash';
 
 export interface Fornecedor {
     gameFornecedor: string;
@@ -46,6 +46,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gameList: GameCasino[];
     public gamesCassino: GameCasino[];
     public gamesDestaque: GameCasino[];
+    public gamesRecommended: GameCasino[];
     private newGamesCassino: GameCasino[];
     public cassinoFornecedores: Fornecedor[] = [];
 
@@ -161,7 +162,11 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.scrollStep = 200;
         }
 
-        this.auth.logado.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+        this.auth.logado.subscribe(isLoggedIn => {
+            this.isLoggedIn = isLoggedIn
+            this.getGameList();
+        });
+
         this.auth.cliente.subscribe(isCliente => this.isCliente = isCliente);
     }
 
@@ -216,8 +221,15 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
+            await this.getGamesRecommendations();
 
             this.gamesSection = [
+                {
+                    id: 'recommendedToYou',
+                    title: this.translate.instant('cassino.recommendedToYou'),
+                    gameList: this.gamesRecommended,
+                    show: !isUndefined(this.gamesRecommended) && this.isLoggedIn
+                },
                 {
                     id: 'destaques',
                     title: this.translate.instant('cassino.maisPopulares'),
@@ -494,6 +506,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                     return gameCategory.includes(categoryName.toUpperCase());
                 }
             });
+
+            if (categoryName == 'recommendedToYou') {
+                this.gameList = this.gamesRecommended;
+            }
         }
 
         this.gameTitle = this.getGameTitle(category);
@@ -502,6 +518,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     private getGameTitle(category: string) {
         const gameTitles = {
             // Cassino
+            recommendedToYou: this.translate.instant('cassino.recommendedToYou'),
             slot: this.translate.instant('cassino.slot'),
             crash: this.translate.instant('cassino.crash'),
             roleta: this.translate.instant('cassino.roleta'),
@@ -531,6 +548,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     private getCategorySlug(category: string) {
         const categories = {
+            recommendedToYou: "recommendedToYou",
             slot: 'slot',
             crash: 'crash',
             roleta: 'roulette',
@@ -581,5 +599,21 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameFornecedor = null;
         this.navigationHistoryService.setCategory(null);
         this.navigationHistoryService.setProvider(null);
+    }
+
+    private async getGamesRecommendations() {
+        if (this.isLoggedIn) {
+            const userId = this.auth.getUser().id;
+
+            try {
+                const res = await this.casinoApi.getCasinoRecommendations(userId).toPromise();
+
+                if (res.success) {
+                    this.gamesRecommended = res.results ?? [];
+                }
+            } catch (error) {
+                console.error('Erro ao obter recomendações:', error);
+            }
+        }
     }
 }
