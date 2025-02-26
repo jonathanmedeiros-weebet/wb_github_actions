@@ -93,6 +93,7 @@ input.inverted-out:focus label{
     flex-direction: column;
     gap: 14px;
     margin-bottom: auto;
+    padding-top: 40px;
 }
 
 .header-register {
@@ -420,7 +421,7 @@ a.link-termos-politica {
     display: flex;
     gap: 6px;
 }
- 
+
 .requirements-password li span {
     font-size: 12px;
 }
@@ -683,7 +684,7 @@ a.link-termos-politica {
     .banner {
         width: 300px;
         height: auto;
-    
+
         &__desktop {
             display: block;
         }

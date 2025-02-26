@@ -46,7 +46,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gameList: GameCasino[];
     public gamesCassino: GameCasino[];
     public gamesDestaque: GameCasino[];
-    public gamesRecommended: GameCasino[];
+    public gamesRecommended = [];
     private newGamesCassino: GameCasino[];
     public cassinoFornecedores: Fornecedor[] = [];
 
