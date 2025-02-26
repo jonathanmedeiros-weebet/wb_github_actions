@@ -349,6 +349,7 @@
         "tenis": "Tenis",
         "quininha": "Quininha",
         "seninha": "Seninha",
+        "lobby": "Lobby",
         "todos": "Todos",
         "slot": "Tragamonedas",
         "crash": "Crash",
@@ -358,7 +359,8 @@
         "cassinoAoVivo": "Casino en vivo",
         "loteriaPopular": "Lotería popular",
         "maisPopulares": "Populares",
-        "news": "Noticias"
+        "news": "Noticias",
+        "recommendedToYou" : "Recomendado para ti"
     },
     "bilhete": {
         "titulo": "BOLETO",
@@ -398,7 +400,9 @@
         "virtuais": "Virtuales",
         "aoVivo": "Casino en vivo",
         "bingo": "Bingo",
-        "news": "Noticias"
+        "news": "Noticias",
+        "jogosRelacionados": "Juegos relacionados",
+        "recommendedToYou" : "Recomendado para ti"
     },
     "cartoes": {
         "titulo": "Tarjetas",

@@ -354,6 +354,7 @@
         "tenis": "Tênis",
         "quininha": "Quininha",
         "seninha": "Seninha",
+        "lobby": "Lobby",
         "todos": "Todos",
         "slot": "Slot",
         "crash": "Crash",
@@ -363,7 +364,8 @@
         "cassinoAoVivo": "Cassino Ao Vivo",
         "loteriaPopular": "Loteria Popular",
         "maisPopulares": "Populares",
-        "news": "Novidades"
+        "news": "Novidades",
+        "recommendedToYou": "Recomendados para você"
     },
     "bilhete": {
         "titulo": "BILHETE",
@@ -405,7 +407,8 @@
         "aoVivo": "Ao Vivo",
         "bingo": "Bingo",
         "news": "Novidades",
-        "jogosRelacionados": "Jogos relacionados"
+        "jogosRelacionados": "Jogos relacionados",
+        "recommendedToYou": "Recomendados para você"
     },
     "cartoes": {
         "titulo": "Cartões",
