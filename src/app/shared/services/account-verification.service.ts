@@ -39,6 +39,7 @@ const verifiedStepsDefault: VerifiedSteps = {
 }
 
 export const ACCOUNT_VERIFIED = 'accountVerified';
+export const ACCOUNT_VERIFICATION_SESSION = 'av';
 
 @Injectable({
   providedIn: 'root'
@@ -56,12 +57,22 @@ export class AccountVerificationService {
     private headerService: HeadersService,
     private errorService: ErrorService,
     private clienteService: ClienteService
-  ) {}
+  ) {
+    let accountVerificationStorage: VerificationAccountResponse | string | null = sessionStorage.getItem(ACCOUNT_VERIFICATION_SESSION);
+    if (Boolean(accountVerificationStorage)) {
+      accountVerificationStorage = JSON.parse(accountVerificationStorage) as VerificationAccountResponse;
+      this.accountVerified.next(accountVerificationStorage.account_verified);
+      this.verifiedSteps.next(accountVerificationStorage.verified_steps);
+      this.newCustomer.next(accountVerificationStorage.new_customer);
+      this.balance.next(parseFloat(accountVerificationStorage.balance));
+    }
+  }
 
   public getAccountVerificationDetail(): Observable<VerificationAccountResponse> {
     return this.http.get(`${config.LOKI_URL}/user/account-verification`, this.headerService.getRequestOptions(true))
       .pipe(
           map((response: VerificationAccountResponse) => {
+            sessionStorage.setItem(ACCOUNT_VERIFICATION_SESSION, JSON.stringify(response));
             this.accountVerified.next(response.account_verified);
             this.verifiedSteps.next(response.verified_steps);
             this.newCustomer.next(response.new_customer);
