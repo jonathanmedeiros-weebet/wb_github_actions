@@ -173,7 +173,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             country: ['+55', [Validators.required]],
             telefone: [null, [Validators.required]],
             senha: [null, [Validators.required, Validators.minLength(8)]],
-            nationality: [26, Validators.required],
+            nationality: ['Brasil', Validators.required],
 
             captcha: [null, this.provedorCaptcha  ? Validators.required : null],
             check_1: [''],
