@@ -367,9 +367,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             this.layoutService.indiqueGanheRemovido(true);
         }
 
-        if (this.isCliente) {
-            this.initAccountVerification();
-        }
+        this.initAccountVerification();
     }
 
     private initAccountVerification() {
