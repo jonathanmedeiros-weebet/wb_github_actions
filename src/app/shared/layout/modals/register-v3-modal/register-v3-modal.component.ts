@@ -54,6 +54,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     };
     public countryCodes: any[] = [];
     private registerBanner: any;
+    public hasRegisterBanner: boolean = false;
     public showNationalitySection: boolean = false;
     public showNationalityOptions: boolean = false;
     public nationalities = this.countriesService.getCountries();
@@ -93,10 +94,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         return Boolean(this.registerBanner) ? this.registerBanner?.src_mobile : null;
     }
 
-    get hasRegisterBanner() {
-        return Boolean(this.registerBanner);
-    }
-
     ngOnInit() {
         this.getPromocoes();
         this.prepareBanner();
@@ -124,6 +121,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             .subscribe((banners) => {
                 if(Boolean(banners) && Boolean(banners.length)) {
                     this.registerBanner = banners.find(banner => banner.pagina == page);
+                    this.hasRegisterBanner = Boolean(this.registerBanner);
                 }
             })
     }
