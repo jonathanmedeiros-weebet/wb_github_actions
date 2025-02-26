@@ -319,6 +319,20 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         const { cpf } = this.form.value;
         if (this.autoPreenchimento) {
             if (this.form.get('cpf').valid) {
+                if (cpf) {
+                    this.clientesService.validateCpfAlreadyExists(cpf).subscribe(
+                        res => {
+                        },
+                        error => {
+                            this.form.patchValue({ nome: '' });
+                            if (error?.code === 'cpfInformadoJaExiste'){
+                                this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
+                                this.form.controls['cpf'].updateValueAndValidity();
+                            }
+                        }
+                    );
+                }
+
                 this.clientesService.validarCpf(cpf).subscribe(
                     res => {
                         if (res.validarCpfAtivado) {
@@ -362,20 +376,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     dadosCriptografados: null
                 });
             }
-        }
-
-        if (cpf) {
-            this.clientesService.validateCpfAlreadyExists(cpf).subscribe(
-                res => {
-                },
-                error => {
-                    this.form.patchValue({ nome: '' });
-                    if (error?.code === 'cpfInformadoJaExiste'){
-                        this.form.controls['cpf'].addValidators(FormValidations.cpfAlreadyExists);
-                        this.form.controls['cpf'].updateValueAndValidity();
-                    }
-                }
-            );
         }
     }
 
