@@ -6,6 +6,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { ErrorService } from './utils/error.service';
 import { config } from '../config';
+import { HeadersService } from './utils/headers.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +16,7 @@ export class WidgetService {
 
     constructor(
         private http: HttpClient,
+        private header: HeadersService,
         private errorService: ErrorService
     ) { }
 
@@ -22,7 +24,7 @@ export class WidgetService {
     byPage(page: string): Observable<any> {
         const url = `${this.WidgetUrl}?page=${page}`;
 
-        return this.http.get(url)
+        return this.http.get(url, this.header.getRequestOptions(false))
             .pipe(
                 map((res: any) => res.results),
                 catchError(this.errorService.handleError)
