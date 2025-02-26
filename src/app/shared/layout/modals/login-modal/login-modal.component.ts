@@ -255,6 +255,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         }
                     },
                     (error) => {
+                        this.btnDisabled = false;
                         if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
                             sessionStorage.setItem('user', JSON.stringify(error.user));
                             this.openModalInactiveRegister();
