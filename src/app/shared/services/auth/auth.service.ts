@@ -538,6 +538,16 @@ export class AuthService {
                     windowClass: `${hasRegisterBanner ? 'modal-750' : 'modal-400'} modal-cadastro-cliente`,
                     backdrop: 'static'
                 });
+            })
+            .catch(() => {
+                const modalRef = this.modalService.open(RegisterV3ModalComponent, {
+                    ariaLabelledBy: 'modal-basic-title',
+                    size: 'md',
+                    centered: true,
+                    windowClass: `modal-400 modal-cadastro-cliente`,
+                    backdrop: 'static'
+                });
+                modalRef.componentInstance.hasRegisterBanner = false;
             });
         
     }

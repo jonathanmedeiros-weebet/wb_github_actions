@@ -15,7 +15,7 @@
     
     <div class="container" *ngIf="modalClose">
         <div class="container-header">
-            <div class="header-register">
+            <div class="header-register" [ngClass]="{'header-register--with-banner': hasRegisterBanner}">
                 <div class="modal-footer-onboarding">
                     <div class="div-option-register-or-login">
                         <span>{{'geral.jaPossuiUmaConta' | translate}}</span>
