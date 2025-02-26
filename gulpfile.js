@@ -2159,3 +2159,12 @@ gulp.task('timedasorte.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('bet1000.net.br', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "bet1000.net.br",
+        banca: "BET 1000",
+        styles: ""
+    });
+});
