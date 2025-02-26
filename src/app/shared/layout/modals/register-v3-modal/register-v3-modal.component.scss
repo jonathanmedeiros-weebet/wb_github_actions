@@ -58,7 +58,6 @@ input.inverted-out {
 }
 
 .container {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -528,7 +527,7 @@ a.link-termos-politica {
     background-color: var(--background);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100svh;
 }
 
 .registerCancelActive{
