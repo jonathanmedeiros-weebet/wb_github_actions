@@ -47,6 +47,12 @@ input.inverted-out {
     color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
 }
 
+.p-cancel-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .form-group input {
     height: 44px !important;
 }
@@ -62,6 +68,25 @@ input.inverted-out {
     background-color: var(--background);
     max-width: 100%;
 }
+
+input.inverted-out:focus {
+    color: var(--foreground-inputs-odds);
+    border: 1px solid var(--highlight);
+}
+
+input.inverted-out:focus label{
+    color: var(--foreground-inputs-odds);
+}
+
+.form-control.is-invalid:focus {
+    -webkit-box-shadow: none;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+}
+
 
 .container-header {
     display: flex;
@@ -242,7 +267,7 @@ button {
 
 .span-afiliado{
     color:rgba(var(--foreground-inputs-odds-rgb), 0.5);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     line-height: normal;
 }
@@ -394,7 +419,6 @@ a.link-termos-politica {
 .requirements-password li {
     display: flex;
     gap: 6px;
-    align-items: center;
 }
  
 .requirements-password li span {
@@ -534,15 +558,13 @@ a.link-termos-politica {
 .btn-change-cpf {
     cursor: pointer;
     color: var(--foreground-header);
-    font-size: 8px;
+    font-size: 10px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-
-    padding: 5px 6px;
+    padding: 5px 8px;
     border-radius: 2px;
     background: var(--header);
-
     position: absolute;
     right: 10px;
     top: 10px;
@@ -615,6 +637,10 @@ a.link-termos-politica {
     color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
     cursor: pointer;
     padding: 10px;
+}
+
+.icon-hover {
+    fill: var(--header);
 }
 
 @media screen and (max-width: 320px) {

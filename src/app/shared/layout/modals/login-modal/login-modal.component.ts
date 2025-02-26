@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
@@ -146,11 +146,11 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         }
 
         this.form = this.fb.group({
-            username: [''],
-            password: [''],
+            username: ['',Validators.required],
+            password: ['', Validators.required],
             googleId: [''],
             googleIdToken: [''],
-            loginMode: [loginMode]
+            loginMode: [loginMode,Validators.required]
         });
     }
 
