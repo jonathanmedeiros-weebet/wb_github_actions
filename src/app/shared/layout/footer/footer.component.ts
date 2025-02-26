@@ -64,6 +64,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
     fullPage = true;
     computedStyle;
     licences = [];
+    allowDownloadCustomerApp;
 
     constructor(
         private authService: AuthService,
@@ -105,8 +106,10 @@ export class FooterComponent implements OnInit, AfterViewInit {
         this.hasLoterj = this.paramsLocais.getOpcoes().enable_licence_loterj;
         this.hasLotep = this.paramsLocais.getOpcoes().enable_licence_lotep;
 
+        this.allowDownloadCustomerApp = this.paramsLocais.getOpcoes().allow_download_customer_app;
+
         this.loadLicences();
-            
+
         this.hasLicence = this.licences.length > 0;
 
         this.linguagemSelecionada = this.translate.currentLang;
@@ -159,7 +162,7 @@ export class FooterComponent implements OnInit, AfterViewInit {
         if(this.container) {
             this.container.addEventListener('scroll', this.onScroll.bind(this));
         }
-        
+
         const observer = new MutationObserver(() => {
             const bilheteContainer = document.querySelector('.bilhete-container') as HTMLElement;
             if (bilheteContainer && !this.isMobile) {
@@ -304,8 +307,8 @@ export class FooterComponent implements OnInit, AfterViewInit {
             this.seeLess = false;
         }
       }
-    
-    hasOverflow(element: HTMLElement): boolean {        
+
+    hasOverflow(element: HTMLElement): boolean {
         if (element) {
           return element.scrollHeight > element.clientHeight;
         }
