@@ -6,7 +6,7 @@ import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../..
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ClienteService, MessageService, ParametrosLocaisService, SecurityService, NavigatorPermissionsService } from './../../../../services';
+import { AuthService, ClienteService, MessageService, ParametrosLocaisService, SecurityService, NavigatorPermissionsService, AccountVerificationService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
@@ -75,6 +75,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private clienteService: ClienteService,
         private security: SecurityService,
         private translate: TranslateService,
+        private accountVerificationService: AccountVerificationService
 
     ) {
         super();
@@ -339,6 +340,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
+                        this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     } else {
                         location.reload();
                     }
