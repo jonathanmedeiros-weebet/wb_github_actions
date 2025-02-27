@@ -444,8 +444,7 @@
         "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
         "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
         "maximumWithdrawalAmount": "Maximum withdrawal",
-        "maximumDepositAmount": "Maximum value",
-        "defaultPaymentMethod": "Default"
+        "maximumDepositAmount": "Maximum value"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -567,7 +566,8 @@
         "paymentGateway": "Payment gateway",
         "balance": "Balance",
         "previousBalance": "Previous balance",
-        "subsequentBalance": "Subsequent balance"
+        "subsequentBalance": "Subsequent balance",
+        "defaultPaymentMethod": "Default"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
