@@ -337,6 +337,7 @@
         "tenis": "Tennis",
         "quininha": "Quininha",
         "seninha": "Seninha",
+        "lobby": "Lobby",
         "todos": "All",
         "slot": "Slot",
         "crash": "Crash",
@@ -346,7 +347,8 @@
         "cassinoAoVivo": "Live Casino",
         "loteriaPopular": "Popular Lottery",
         "maisPopulares": "Popular",
-        "news": "News"
+        "news": "News",
+        "recommendedToYou" : "Recommended for you"
     },
     "bilhete": {
         "titulo": "TICKET",
@@ -388,7 +390,8 @@
         "aoVivo": "Live Casino",
         "bingo": "Bingo",
         "news": "News",
-        "jogosRelacionados": "Related games"
+        "jogosRelacionados": "Related games",
+        "recommendedToYou" : "Recommended for you"
     },
     "cartoes": {
         "titulo": "Cards",
@@ -443,8 +446,7 @@
         "identityVerify": "Verify identity",
         "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
         "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
-        "maximumWithdrawalAmount": "Maximum withdrawal",
-        "maximumDepositAmount": "Maximum value"
+        "maximumWithdrawalAmount": "Maximum withdrawal"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -476,7 +478,8 @@
         "depositTextWithoutBonus": "To make a deposit via PIX, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "depositTextWithoutBonusAndPromocode": "To make a deposit via PIX, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "copyCode": "Copy code",
-        "copied": "Copied!"
+        "copied": "Copied!",
+        "maximumDepositAmount": "Maximum amount"
     },
     "footer": {
         "afiliados": "Partnership",
