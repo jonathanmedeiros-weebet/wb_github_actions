@@ -1871,6 +1871,7 @@ gulp.task('amabet.bet', function (done) {
         host: "amabet.bet",
         banca: "AMA BET",
         styles: "",
+        xtremepush_sdk: "IjvG8zgsO8FKX_Sck5DfQHbGKybQvTDS",
         dominioTemp: "amabet.store"
     });
 });
