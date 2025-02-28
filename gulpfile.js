@@ -2103,7 +2103,8 @@ gulp.task('betfortuna.com.br', function (done) {
         server: "front2.wee.bet",
         host: "betfortuna.com.br",
         banca: "BET FORTUNA",
-        styles: ""
+        styles: "",
+        xtremepush_sdk: "N3siSnW649_uVpLFi26444jgM5AKKNuJ"
     });
 });
 
