@@ -449,19 +449,6 @@
                                     </span>
                                 </a>
                                 <a
-                                    (click)="openValidatePhoneModal()"
-                                    *ngIf="isMandatoryPhoneValidation && !userPhoneValidated"
-                                    [class.disabled]="accountVerificationPending"
-                                >
-                                    <span>
-                                        <i class="fa fa-solid fa-phone"></i>
-                                    </span>
-                                    {{ 'geral.validatePhone' | translate }}
-                                    <span class="arrow-nav">
-                                        <i class="fa-solid fa-angle-right"></i>
-                                    </span>
-                                </a>
-                                <a
                                     (click)="abrirAlterarSenha()"
                                     [class.disabled]="accountVerificationPending"
                                 >

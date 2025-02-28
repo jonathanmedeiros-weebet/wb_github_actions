@@ -17,7 +17,6 @@ import {
     LoginModalComponent,
     PesquisarCartaoMobileModalComponent,
     RecargaCartaoModalComponent,
-    ValidatePhoneModalComponent
 } from '../modals';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { SolicitacaoSaqueClienteComponent } from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
@@ -127,9 +126,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     showIndiqueGanhe: boolean = true;
     isIndiqueGanheVisible: boolean;
 
-    userPhoneValidated = false;
-    isMandatoryPhoneValidation = false;
-
     sportsIsActive = false;
     sportsLiveIsActive = false;
 
@@ -204,7 +200,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     ngOnInit() {
         this.currentRoute = this.router.url;
         this.sportsActive();
-        this.isMandatoryPhoneValidation = this.paramsService.isMandatoryPhoneValidation();
 
         this.headerService.fullScreenCasinoGameState$.subscribe(isFullScreen => {
             this.isCasinoGameFullScreen = isFullScreen;
@@ -244,7 +239,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     if (isLoggedIn) {
                         this.getUsuario();
                         this.getPosicaoFinanceira();
-                        this.userPhoneValidated = this.usuario.phone_validated;
                     }
                 }
             );
@@ -576,21 +570,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             return;
         }
         this.modalService.open(CarteiraComponent);
-    }
-
-    openValidatePhoneModal() {
-        const modalRef = this.modalService.open(ValidatePhoneModalComponent, {
-            ariaLabelledBy: "modal-basic-title",
-            windowClass: "modal-550 modal-h-350",
-            centered: true,
-        });
-
-        modalRef.result.then(
-            (result) => {
-                this.userPhoneValidated = this.auth.getUser().phone_validated;
-                this.cd.detectChanges();
-            }
-        );
     }
 
     abrirDepositos() {

@@ -272,11 +272,6 @@
                                 <span class="regiao-nome">{{'geral.lastAccesses' | translate}}</span>
                             </a>
                         </li>
-                        <li class="cambista-subitem" *ngIf="isMandatoryPhoneValidation && !userPhoneValidated">
-                            <a (click)="openValidatePhoneModal()" [class.disabled]="accountVerificationPending">
-                                <span class="regiao-nome">{{'geral.validatePhone' | translate}}</span>
-                            </a>
-                        </li>
                         <li class="cambista-subitem">
                             <a
                                 [routerLink]="['/bank-accounts']"
