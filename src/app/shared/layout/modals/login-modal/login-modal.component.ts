@@ -81,6 +81,13 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         super();
     }
 
+    get isCassinoPage(): boolean {
+        const urlTree = this.router.parseUrl(this.router.url);
+        const pathSegments = urlTree.root.children['primary'].segments;
+        const path = Boolean(pathSegments.length) ? pathSegments[0].path : 'casino';
+        return path === 'casino';
+    }
+
     async ngOnInit() {
 
         this.appMobile = this.auth.isAppMobile();
@@ -349,6 +356,9 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
+                        if (this.isCassinoPage) {
+                            location.reload();
+                        }
                     } else {
                         location.reload();
                     }
