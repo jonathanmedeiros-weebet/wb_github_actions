@@ -371,17 +371,6 @@ gulp.task('footbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('imperiosportve.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "imperiosportve.com",
-        banca: "imperio sportve",
-        styles: "--header: #42050a; --foreground-header: #fff; --sidebar-right:#42050a; --foreground-sidebar-right: #fff; --sidebar-left: #42050a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#d91c16; --foreground-odds: #fff; --event-time: #d91c16",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T7XRTDXQ');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-T7XRTDXQ'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('rubinhosports.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2058,15 +2047,6 @@ gulp.task('eliteesportes.vip', function (done) {
         server: "front3.wee.bet",
         host: "eliteesportes.vip",
         banca: "ELITE ESPORTES",
-        styles: "",
-    });
-});
-
-gulp.task('pixmaster.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "pixmaster.bet",
-        banca: "PIX MASTER",
         styles: "",
     });
 });
