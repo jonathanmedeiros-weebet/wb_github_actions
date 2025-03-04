@@ -2124,15 +2124,6 @@ gulp.task('zedocash.bet', function (done) {
     });
 });
 
-gulp.task('sortte.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "sortte.bet",
-        banca: "SORTE BET",
-        styles: ""
-    });
-});
-
 gulp.task('timedasorte.com', function (done) {
     tasks(done, {
         server: "front3.wee.bet",
