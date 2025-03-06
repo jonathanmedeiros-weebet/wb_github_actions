@@ -1390,15 +1390,6 @@ gulp.task('betsnordeste.bet', function (done) {
     });
 });
 
-gulp.task('suasortebet.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "suasortebet.com",
-        banca: "SUA SORTE BET",
-        styles: "",
-    });
-});
-
 gulp.task('rc.wee.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
