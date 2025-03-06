@@ -25,6 +25,7 @@
                         ></div>
                         <div>
                             <span class="payment-method-name">{{paymentMethod | formatPaymentMethod}}</span>
+                            <span class="default-payment-method" *ngIf="paymentMethod === availablePaymentMethods[0]">{{ 'financeiro.defaultPaymentMethod' | translate }}</span>
                         </div>
                         <i class="fa-solid fa-caret-right"></i>
                     </a>

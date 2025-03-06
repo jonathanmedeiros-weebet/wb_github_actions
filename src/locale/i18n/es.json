@@ -568,7 +568,8 @@
         "paymentGateway": "Pasarela de pago",
         "balance": "Saldo",
         "previousBalance": "Saldo anterior",
-        "subsequentBalance": "Saldo posterior"
+        "subsequentBalance": "Saldo posterior",
+        "defaultPaymentMethod": "Predeterminado"
     },
     "rollover": {
         "nenhumRollover": "Sin rollover.",

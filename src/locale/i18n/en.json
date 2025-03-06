@@ -569,7 +569,8 @@
         "paymentGateway": "Payment gateway",
         "balance": "Balance",
         "previousBalance": "Previous balance",
-        "subsequentBalance": "Subsequent balance"
+        "subsequentBalance": "Subsequent balance",
+        "defaultPaymentMethod": "Default"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
