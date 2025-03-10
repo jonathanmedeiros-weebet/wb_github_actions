@@ -274,7 +274,6 @@ export class FormComponent extends BaseFormComponent implements OnInit, OnDestro
     }
 
     salvarAposta(dados) {
-        console.log(dados);
         dados.versao_app = this.versao_app;
         this.apostaService.create(dados)
             .subscribe(
@@ -286,7 +285,7 @@ export class FormComponent extends BaseFormComponent implements OnInit, OnDestro
     abrirLogin() {
         const options = {
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350 modal-login',
+            windowClass: 'modal-400 modal-h-350 modal-login',
             centered: true,
         };
 

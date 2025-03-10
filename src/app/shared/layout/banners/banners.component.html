@@ -1,4 +1,13 @@
-<div class="banners banner-container" [ngClass]="{'resolution16x2':pagina === 'deposito','resolution16x4':pagina != 'deposito'}" [hidden]="hideBanner">
+<div
+    class="banners banner-container"
+    [ngClass]="{
+        'resolution16x2':pagina === 'deposito',
+        'resolution16x4':pagina != 'deposito' && pagina != 'cadastro',
+        'resolutionCadastro':pagina === 'cadastro',
+        'resolutionCadastroMobile':pagina === 'cadastro'
+    }"
+    [hidden]="hideBanner"
+>
     <ngb-carousel [showNavigationArrows]="showNavigationArrows">
         <ng-template *ngFor="let banner of banners" ngbSlide>
             <div class="picsum-img-wrapper">

@@ -13,7 +13,6 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
 import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
 
-
 declare var xtremepush: any;
 
 @Injectable({
@@ -35,7 +34,7 @@ export class ClienteService {
         private router: Router,
         private paramsService: ParametrosLocaisService,
         private ga4Service: Ga4Service,
-        private modalService: NgbModal
+        private modalService: NgbModal,
     ) {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -114,6 +113,18 @@ export class ClienteService {
 
     validarCpf(cpf: any) {
         return this.http.get(`${this.clienteUrl}/consultar-cpf`, this.headers.getRequestOptions(true, { cpf }))
+            .pipe(
+                map(
+                    (response: any) => {
+                        return response.results;
+                    }
+                ),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    validateCpfAlreadyExists(cpf: any) {
+        return this.http.get(`${this.clienteUrl}/consult-cpf-already-exists`, this.headers.getRequestOptions(true, { cpf }))
             .pipe(
                 map(
                     (response: any) => {
@@ -414,6 +425,39 @@ export class ClienteService {
             .pipe(
                 map((res: any) => res.results),
                 catchError(() => [])
+            );
+    }
+
+    updateEmail(email: string) {
+        return this.http.post(`${this.clienteUrl}/update-email`, { email },
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results.result;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    updatePhone(phone: string) {
+        return this.http.post(`${this.clienteUrl}/update-phone`, { phone },
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results.result;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    updateAddress(address: any) {
+        return this.http.post(`${this.clienteUrl}/update-address`, { address },
+            this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results.result;
+                }),
+                catchError(this.errorService.handleError)
             );
     }
 }

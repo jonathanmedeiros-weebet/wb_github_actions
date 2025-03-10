@@ -1,8 +1,8 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { HeadersService } from './../utils/headers.service';
 import { ErrorService } from './../utils/error.service';
@@ -12,6 +12,9 @@ import { config } from './../../config';
 import * as moment from 'moment';
 import { GeolocationService } from '../geolocation.service';
 import { Ga4Service, EventGa4Types } from '../ga4/ga4.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterV3ModalComponent } from '../../layout/modals/register-v3-modal/register-v3-modal.component';
+import { BannerService } from '../banner.service';
 
 declare var xtremepush: any;
 
@@ -36,14 +39,22 @@ export class AuthService {
         private router: Router,
         private geolocation: GeolocationService,
         private ga4Service: Ga4Service,
+        private modalService: NgbModal,
+        private bannerService: BannerService
     ) {
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.cliente = this.clienteSource.asObservable();
-    }
+    } 
 
     verificaDadosLogin(data: any): Observable<any> {
+        // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
+        data = {
+            ...data,
+            ignorarValidacaoEmailObrigatoria: true
+        }
+
         return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
@@ -131,6 +142,11 @@ export class AuthService {
     }
 
     login(data: any): Observable<any> {
+        // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
+        data = {
+            ...data,
+            ignorarValidacaoEmailObrigatoria: true
+        }
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
@@ -502,5 +518,37 @@ export class AuthService {
         user.phone_validated = status;
 
         localStorage.setItem('user', JSON.stringify(user));
+    }
+
+    async openRegisterV3Modal() {
+        this.bannerService
+            .requestBanners()
+            .toPromise()
+            .then((banners) => {
+                let hasRegisterBanner = false;
+
+                if(Boolean(banners) && Boolean(banners.length)) {
+                    hasRegisterBanner = banners.some(banner => banner.pagina == 'cadastro')
+                }
+
+                this.modalService.open(RegisterV3ModalComponent, {
+                    ariaLabelledBy: 'modal-basic-title',
+                    size: 'md',
+                    centered: true,
+                    windowClass: `${hasRegisterBanner ? 'modal-750' : 'modal-400'} modal-cadastro-cliente`,
+                    backdrop: 'static'
+                });
+            })
+            .catch(() => {
+                const modalRef = this.modalService.open(RegisterV3ModalComponent, {
+                    ariaLabelledBy: 'modal-basic-title',
+                    size: 'md',
+                    centered: true,
+                    windowClass: `modal-400 modal-cadastro-cliente`,
+                    backdrop: 'static'
+                });
+                modalRef.componentInstance.hasRegisterBanner = false;
+            });
+        
     }
 }

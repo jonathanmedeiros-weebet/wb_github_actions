@@ -26,7 +26,6 @@ export class ViewComponent implements OnInit {
     ngOnInit() {
         const self = this;
         this.rifaservice.getSorteio(this.route.snapshot.params['id']).subscribe(res => {
-            console.log(res);
             this.rifaBilheteService.selecionarSorteio(res);
             self.sorteio = res;
             self.loading = false;

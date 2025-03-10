@@ -68,7 +68,7 @@
                     </div>
                 </ng-container>
 
-                <ng-container *ngIf="isHomeCassino">
+                <ng-container *ngIf="isHomeCassino && gamesRecommended.length">
                     <div class="wall-inner" *ngSwitchCase="'betpilot'">
                         <div class="bloco blocoGameList">
                             <app-wall-section

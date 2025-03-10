@@ -46,7 +46,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gameList: GameCasino[];
     public gamesCassino: GameCasino[];
     public gamesDestaque: GameCasino[];
-    public gamesRecommended: GameCasino[];
+    public gamesRecommended = [];
     private newGamesCassino: GameCasino[];
     public cassinoFornecedores: Fornecedor[] = [];
 
@@ -145,6 +145,19 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         const page = this.isCassinoPage ? 'casino' : 'live_casino'
+
+        if (this.isVirtualPage) {
+            this.sideBarService.changeItens({
+                contexto: 'virtuais',
+                dados: {}
+            });
+        } else {
+            this.sideBarService.changeItens({
+                contexto: 'casino',
+                dados: {}
+            });
+        }
+
         this.widgetService.byPage(page).subscribe(response => {
             if (response) {
                 this.widgets = response.map((i) => ({ ...i, selector: 'w' + i.id}));
@@ -214,10 +227,6 @@ export class WallComponent implements OnInit, AfterViewInit {
         }));
 
         if (this.isVirtualPage) {
-            this.sideBarService.changeItens({
-                contexto: 'virtuais',
-                dados: {}
-            });
             this.gamesCassino = gameList.filter((game: GameCasino) => game.category === 'virtual');
             this.categorySelected = 'virtual';
         } else {
@@ -279,10 +288,6 @@ export class WallComponent implements OnInit, AfterViewInit {
 
             this.gamesLive = this.filterDestaques(this.gamesCassino, 'live');
 
-            this.sideBarService.changeItens({
-                contexto: 'casino',
-                dados: {}
-            });
         }
 
         this.gameList = this.gamesCassino;
@@ -367,11 +372,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             }
         ]
 
-        this.sideBarService.changeItens({
-            contexto: 'casino',
-            dados: {}
-        });
-
         this.gameList = this.gamesCassino;
         this.gameTitle = this.translate.instant('geral.todos');
 
@@ -453,7 +453,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350 modal-login',
+                windowClass: 'modal-400 modal-h-350 modal-login',
                 centered: true,
             }
         );

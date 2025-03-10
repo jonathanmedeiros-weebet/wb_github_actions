@@ -247,6 +247,7 @@
     "html-to-pdfmake": "^2.4.9",
     "jquery": "^3.3.1",
     "jstree": "^3.3.7",
+    "jwt-decode": "^4.0.0",
     "lodash.isempty": "^4.4.0",
     "lodash.random": "^3.2.0",
     "lodash.range": "^3.2.0",

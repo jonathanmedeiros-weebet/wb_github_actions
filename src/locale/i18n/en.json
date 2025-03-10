@@ -32,7 +32,7 @@
         "ajuda": "Help",
         "sair": "Logout",
         "perfil": "Profile",
-        "dadosPessoais": "Personal Data",
+        "dadosPessoais": "Personal data",
         "pix": "PIX",
         "saque": "Withdrawal",
         "saques": "Withdrawals",
@@ -156,6 +156,7 @@
         "esqueceuASenha": "Forgot password?",
         "naoPossuiUmaConta": "Don't have an account?",
         "jaPossuiUmaConta": "Already have an account?",
+        "logIn": "Log in",
         "usuario": "User",
         "senha": "Password",
         "masculino": "Male",
@@ -166,7 +167,7 @@
         "deAcordoComOsTermos2": "and our",
         "termosDeUso": "terms of use",
         "cadastrar": "Register",
-        "cadastroSucedido": "Registration completed successfully! Check your email to activate it.",
+        "cadastroSucedido": "Registration completed successfully.",
         "informacoesPessoais": "Personal Information",
         "criarLogin": "Create Login",
         "sucesso": "Success",
@@ -278,7 +279,18 @@
         "logoutGeolocationErrorMessage": "You have been logged out for security reasons. We detected an abrupt change in your location that would be physically impossible to occur within the recorded time frame. If this was not caused by you, we recommend verifying your account.",
         "logoutGeolocationErrorTitle": "Access Interrupted: Inconsistent Location",
         "logoutGeolocationErrorButtonLabel": "Close",
-        "clickHere": "Click here"
+        "clickHere": "Click here",
+        "countryCode": "Code",
+        "complement": "Complement",
+        "login": "Login",
+        "createAccount": "Create account",
+        "passwordRequirements": "Requirements for a secure password:",
+        "passwordLevel": "Password level:",
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong",
+        "kindLogin": "Login with",
+        "errorMinorAge": "underage."
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -418,10 +430,9 @@
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
         "digiteSuaSenha": "Type your password",
-        "minimumCharactersPassword": "Minimum 8 characters",
-        "lowercaseLetter": "Minimum of one lowercase letter",
-        "uppercaseLetter": "Minimum of one uppercase letter",
-        "specialChar": "Minimum of one special character (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "Password must be at least 8 characters long",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Must contain one uppercase and one lowercase letter",
+        "specialChar": "Must contain a special character (Ex.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Enter the amount for the withdrawal",
@@ -445,8 +456,9 @@
         "monthlyMaximum": "Monthly maximum",
         "identityVerify": "Verify identity",
         "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
+        "maximumWithdrawalAmount": "Maximum withdrawal",
         "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
-        "maximumWithdrawalAmount": "Maximum withdrawal"
+        "maximumDepositAmount": "Maximum value"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -672,7 +684,10 @@
         "remain_active_session": "No, keep the other session active",
         "save_pdf": "Save PDF",
         "seeMore": "See more",
-        "seeLess": "See less"
+        "seeLess": "See less",
+        "continue": "Continue",
+        "next": "Next",
+        "previous": "Previous"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -779,19 +794,27 @@
     },
     "face_match": {
         "label": "Face Match",
+        "face_match": "Face validation",
         "verified_identity": "Verified identity!",
-        "Identity_not_verified": "Identity not verified, please contact support."
+        "Identity_not_verified": "Identity not verified, please contact support.",
+        "account_protected": "Your account protected!",
+        "register_description": "To access all site functions, you will have to register your security photo. Your image is confidential and will not be shared.",
+        "checkNow": "Check now"
     },
     "register": {
         "signupWith": "Sign up with Google",
         "registerGoogleAccount": "Sign up with your google account",
         "fillToRegister": "Fill in the fields to register",
         "protectedByReCaptchaPart1": "This site is protected by reCAPTCHA and the Goggle",
-        "protectedByReCaptchaPart2": "Privacy Policy",
+        "protectedByReCaptchaPart2": "privacy policy",
         "protectedByReCaptchaPart3": "and the",
-        "protectedByReCaptchaPart4": "Terms of Service",
+        "protectedByReCaptchaPart4": "terms of service",
         "protectedByReCaptchaPart5": "apply.",
-        "registrationBeneficiariesSocialPrograms": "Beneficiaries of social programs cannot register."
+        "registrationBeneficiariesSocialPrograms": "Beneficiaries of social programs cannot register.",
+        "day":"Day",
+        "month":"Month",
+        "year":"Year",
+        "brasil": "Brazil"
     },
     "registerCancel": {
         "titleCancelRegister": "Are you sure you want to cancel your registration?",

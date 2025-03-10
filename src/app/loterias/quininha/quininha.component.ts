@@ -21,6 +21,7 @@ import { random } from 'lodash';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from '../../services';
+import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 
 @Component({
     selector: 'app-quininha',
@@ -67,7 +68,8 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
         private cd: ChangeDetectorRef,
         private geolocationService: GeolocationService,
         private translate: TranslateService,
-        private helperService: HelperService
+        private helperService: HelperService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
@@ -216,7 +218,7 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     abrirLogin() {
         const options = {
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350 modal-login',
+            windowClass: 'modal-400 modal-h-350 modal-login',
             centered: true,
         };
 
@@ -240,6 +242,13 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
 
     /* Finalizar aposta */
     async create() {
+        if (this.isCliente && this.isLoggedIn) {
+            if (!this.accountVerificationService.accountVerified.getValue()) {
+                this.accountVerificationService.openModalAccountVerificationAlert();
+                return;
+            }
+        }
+
         this.disabledSubmit();
 
         let geolocation = null;
