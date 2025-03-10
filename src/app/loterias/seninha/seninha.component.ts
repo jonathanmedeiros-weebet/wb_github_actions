@@ -20,7 +20,8 @@ import * as range from 'lodash.range';
 import { random } from 'lodash';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
-
+import { HelperService } from '../../services';
+import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 @Component({
     selector: 'app-seninha',
     templateUrl: 'seninha.component.html',
@@ -65,7 +66,9 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         public layoutService: LayoutService,
         private cd: ChangeDetectorRef,
         private geolocationService: GeolocationService,
-        private translate: TranslateService
+        private helperService: HelperService,
+        private translate: TranslateService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
@@ -99,7 +102,12 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
         );
 
         this.sorteioService.getSorteios({tipo: 'seninha', sort: 'data'}).subscribe(
-            sorteios => this.sorteios = sorteios,
+            sorteios => {
+                sorteios.forEach(element => {
+                    element.formatDate = this.helperService.dateFormat(element.data, "DD/MM/YYYY HH:mm");
+                });
+                this.sorteios = sorteios;
+            },
             error => this.messageService.error(error)
         );
 
@@ -212,7 +220,7 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
     abrirLogin() {
         const options = {
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350 modal-login',
+            windowClass: 'modal-400 modal-h-350 modal-login',
             centered: true,
         };
 
@@ -236,8 +244,20 @@ export class SeninhaComponent extends BaseFormComponent implements OnInit, OnDes
 
     /* Finalizar aposta */
     async create() {
+        if (this.isCliente && this.isLoggedIn) {
+            if (!this.accountVerificationService.accountVerified.getValue()) {
+                this.accountVerificationService.openModalAccountVerificationAlert();
+                return;
+            }
+        }
+
         this.disabledSubmit();
-        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+
+        let geolocation = null;
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+            geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+        }
+
         if (this.aposta.itens.length) {
             if (this.auth.isLoggedIn()) {
                 const values = {...this.aposta, geolocation: geolocation };

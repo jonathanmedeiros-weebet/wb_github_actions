@@ -52,8 +52,8 @@ export class GeolocationService {
         { nome: 'Tocantins', codigo: 17 }
     ];
     private options = {
-        enableHighAccuracy: false,
-        timeout: 3000,
+        enableHighAccuracy: true,
+        timeout: 10000,
         // Cache time = 10min
         maximumAge: 1000 * 60 * 10,
     };

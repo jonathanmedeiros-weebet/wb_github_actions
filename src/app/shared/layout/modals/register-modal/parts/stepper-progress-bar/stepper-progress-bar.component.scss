@@ -1,0 +1,47 @@
+.container-stepper {
+    display: flex;
+    flex-direction: row;
+}
+
+.stepper {
+    display: flex;
+    width: 100%;
+    padding: 10px 8px;
+    align-items: center;
+    gap: 6px;
+}
+
+.circle {
+    display: flex;
+    width: 22px;
+    height: 22px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 88px;
+}
+
+.active {
+    border-bottom: 1px solid var(--highlight);
+    .circle {
+        background: var(--highlight);
+    }
+}
+
+.deactived {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+    .circle {
+        background: rgba(255, 255, 255, 0.50);
+    }
+}
+
+.circle-text {
+    color: rgba(var(--foreground), 0.7);
+}
+
+.circle-number {
+    color: var(--background);
+}

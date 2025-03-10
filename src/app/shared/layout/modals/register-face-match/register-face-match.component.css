@@ -1,0 +1,89 @@
+.actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    margin-top: 20px;
+    gap: 32px;
+    width: 328px;
+}
+
+p {
+    margin: 0;
+}
+
+.modal-500 .modal-dialog {
+    max-width: 414px !important;
+    max-height: 397px !important;
+}
+
+#face-match-label {
+    color: #FFF;
+        text-align: center;
+        leading-trim: both;
+        text-edge: cap;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+}
+
+.face-match-description {
+   color: rgba(var(--foreground-rgb), 0.7);
+}
+
+#legitimuz, #docCheck {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#face-match-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    align-self: stretch;
+    width: 100%;
+}
+
+.btn-custom {
+    background-color: var(--background);
+    width: 100%;
+    color: var(--highlight);
+    border-color: 1px solid var(--highlight);
+    cursor: pointer;
+}
+
+.btn-close {
+    padding-right: 16px;
+    color: rgba(var(--foreground-rgb), 0.7)
+}
+
+.btn-custom:hover{
+    background-color: var(--highlight);
+    width: 100%;
+    color: var(--background);
+    border-color: 1px solid var(--highlight);
+}
+
+#legitimuz-container {
+    width: 100%;
+}
+
+#legitimuz-action-verify {
+    width: 100%;
+}
+

@@ -1,7 +1,7 @@
 import { GameCasino } from './../../shared/models/casino/game-casino';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, Renderer2, ViewChildren, Input, ViewChild } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
-import { AuthService, ParametrosLocaisService, SidebarService } from './../../services';
+import { AuthService, ParametrosLocaisService, SidebarService, WidgetService } from './../../services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginModalComponent } from '../../shared/layout/modals';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { WallProviderFilterModalComponent } from './components/wall-provider-filter-modal/wall-provider-filter-modal.component';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from 'src/app/shared/services/timer.service';
+import { isUndefined } from 'lodash';
 
 export interface Fornecedor {
     gameFornecedor: string;
@@ -45,6 +46,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gameList: GameCasino[];
     public gamesCassino: GameCasino[];
     public gamesDestaque: GameCasino[];
+    public gamesRecommended = [];
     private newGamesCassino: GameCasino[];
     public cassinoFornecedores: Fornecedor[] = [];
 
@@ -70,9 +72,11 @@ export class WallComponent implements OnInit, AfterViewInit {
     public gameTitle: string;
 
     public filteredCategory: string;
+    public widgets = [];
 
     constructor(
         private casinoApi: CasinoApiService,
+        private widgetService: WidgetService,
         private auth: AuthService,
         private router: Router,
         private route: ActivatedRoute,
@@ -84,6 +88,7 @@ export class WallComponent implements OnInit, AfterViewInit {
         private translate: TranslateService,
         private paramsService: ParametrosLocaisService,
         private navigationHistoryService: NavigationHistoryService,
+        private casinoService: CasinoApiService,
         private cron: CronService
     ) {
     }
@@ -139,6 +144,27 @@ export class WallComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        const page = this.isCassinoPage ? 'casino' : 'live_casino'
+
+        if (this.isVirtualPage) {
+            this.sideBarService.changeItens({
+                contexto: 'virtuais',
+                dados: {}
+            });
+        } else {
+            this.sideBarService.changeItens({
+                contexto: 'casino',
+                dados: {}
+            });
+        }
+
+        this.widgetService.byPage(page).subscribe(response => {
+            if (response) {
+                this.widgets = response.map((i) => ({ ...i, selector: 'w' + i.id}));
+                this.getGamesCasino();
+            }
+        });
+
         this.navigationHistoryService.limparFiltro$.subscribe(() => {
             this.clearFilters();
         });
@@ -151,8 +177,23 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.scrollStep = 200;
         }
 
-        this.auth.logado.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+        this.auth.logado.subscribe(isLoggedIn => {
+            this.isLoggedIn = isLoggedIn
+            this.getGameList();
+        });
+
         this.auth.cliente.subscribe(isCliente => this.isCliente = isCliente);
+    }
+
+    getGamesCasino() {
+        this.widgets.forEach(widget => {
+            if (widget.items && widget.items.length > 0) {
+                this.casinoService.getCasinoGamesByIds(widget.items.map(i => i.item_id))
+                    .subscribe((result) => {
+                        widget.items = result.games;
+                    });
+            }
+        });
     }
 
     private onTranslateChange() {
@@ -186,18 +227,21 @@ export class WallComponent implements OnInit, AfterViewInit {
         }));
 
         if (this.isVirtualPage) {
-            this.sideBarService.changeItens({
-                contexto: 'virtuais',
-                dados: {}
-            });
             this.gamesCassino = gameList.filter((game: GameCasino) => game.category === 'virtual');
             this.categorySelected = 'virtual';
         } else {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
+            await this.getGamesRecommendations();
 
             this.gamesSection = [
+                {
+                    id: 'recommendedToYou',
+                    title: this.translate.instant('cassino.recommendedToYou'),
+                    gameList: this.gamesRecommended,
+                    show: !isUndefined(this.gamesRecommended) && this.isLoggedIn
+                },
                 {
                     id: 'destaques',
                     title: this.translate.instant('cassino.maisPopulares'),
@@ -244,10 +288,6 @@ export class WallComponent implements OnInit, AfterViewInit {
 
             this.gamesLive = this.filterDestaques(this.gamesCassino, 'live');
 
-            this.sideBarService.changeItens({
-                contexto: 'casino',
-                dados: {}
-            });
         }
 
         this.gameList = this.gamesCassino;
@@ -332,11 +372,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             }
         ]
 
-        this.sideBarService.changeItens({
-            contexto: 'casino',
-            dados: {}
-        });
-
         this.gameList = this.gamesCassino;
         this.gameTitle = this.translate.instant('geral.todos');
 
@@ -418,7 +453,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             LoginModalComponent,
             {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350 modal-login',
+                windowClass: 'modal-400 modal-h-350 modal-login',
                 centered: true,
             }
         );
@@ -474,6 +509,10 @@ export class WallComponent implements OnInit, AfterViewInit {
                     return gameCategory.includes(categoryName.toUpperCase());
                 }
             });
+
+            if (categoryName == 'recommendedToYou') {
+                this.gameList = this.gamesRecommended;
+            }
         }
 
         this.gameTitle = this.getGameTitle(category);
@@ -482,6 +521,7 @@ export class WallComponent implements OnInit, AfterViewInit {
     private getGameTitle(category: string) {
         const gameTitles = {
             // Cassino
+            recommendedToYou: this.translate.instant('cassino.recommendedToYou'),
             slot: this.translate.instant('cassino.slot'),
             crash: this.translate.instant('cassino.crash'),
             roleta: this.translate.instant('cassino.roleta'),
@@ -511,6 +551,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     private getCategorySlug(category: string) {
         const categories = {
+            recommendedToYou: "recommendedToYou",
             slot: 'slot',
             crash: 'crash',
             roleta: 'roulette',
@@ -561,5 +602,21 @@ export class WallComponent implements OnInit, AfterViewInit {
         this.gameFornecedor = null;
         this.navigationHistoryService.setCategory(null);
         this.navigationHistoryService.setProvider(null);
+    }
+
+    private async getGamesRecommendations() {
+        if (this.isLoggedIn) {
+            const userId = this.auth.getUser().id;
+
+            try {
+                const res = await this.casinoApi.getCasinoRecommendations(userId).toPromise();
+
+                if (res.success) {
+                    this.gamesRecommended = res.results ?? [];
+                }
+            } catch (error) {
+                console.error('Erro ao obter recomendações:', error);
+            }
+        }
     }
 }

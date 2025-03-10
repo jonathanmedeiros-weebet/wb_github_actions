@@ -13,7 +13,10 @@ import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
 import { BetbyComponent } from './betby/betby.component';
 import {RifaGuard} from './shared/services/guards/rifa.guard';
+import { CompartilharBilheteComponent } from './cupom/compartilhar-bilhete/compartilhar-bilhete.component';
 import { RedirectBetGuardGuard } from './shared/services/guards/redirect-bet-guard.guard';
+import { RegisterFacematchGuard } from './shared/services/guards/register-facematch.guard';
+import { AccountVerificationGuard } from './shared/services/guards/account-verification.guard';
 
 const appRoutes: Routes = [
     {
@@ -100,17 +103,17 @@ const appRoutes: Routes = [
             {
                 path: 'alterar-senha',
                 loadChildren: () => import('./meu-perfil/alterar-senha.module').then(m => m.AlterarSenhaModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, AccountVerificationGuard]
             },
             {
                 path: 'ultimos-acessos',
                 loadChildren: () => import('./acessos-clientes/last-accesses.module').then(m => m.LastAccessesModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, AccountVerificationGuard]
             },
             {
                 path: 'bank-accounts',
                 loadChildren: () => import('./bank-accounts/bank-accounts.module').then(m => m.BankAccountsModule),
-                canActivate: [AuthGuard, ClientGuard]
+                canActivate: [AuthGuard, ClientGuard, AccountVerificationGuard]
             },
             {
                 path: 'validar-aposta',
@@ -148,6 +151,10 @@ const appRoutes: Routes = [
                 component: BetbyComponent
             }
         ]
+    },
+    {
+        path: 'compartilhar-bilhete/:codigo',
+        component: CompartilharBilheteComponent
     },
     {
         path: 'aposta/:codigo',

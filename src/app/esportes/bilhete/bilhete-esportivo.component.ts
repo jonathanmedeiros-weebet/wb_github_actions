@@ -25,6 +25,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Geolocation } from 'src/app/shared/services/geolocation.service';
 import { Ga4Service, EventGa4Types } from 'src/app/shared/services/ga4/ga4.service';
+import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 
 @Component({
     selector: 'app-bilhete-esportivo',
@@ -99,6 +100,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         private geolocationService: GeolocationService,
         private sportIdService: SportIdService,
         private ga4Service: Ga4Service,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
 
@@ -367,7 +369,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     abrirLogin() {
         const options = {
             ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350 modal-login',
+            windowClass: 'modal-400 modal-h-350 modal-login',
             centered: true,
         };
 
@@ -380,6 +382,14 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
+
+            if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.accountVerified.getValue()) {
+                    this.accountVerificationService.openModalAccountVerificationAlert();
+                    return;
+                }
+            }
+
             this.disabledSubmit();
 
             let valido = true;
@@ -399,7 +409,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                 valido = false;
                 msg = `Por favor, inclua no MÁXIMO ${this.paramsService.quantidadeMaxEventosBilhete()} eventos.`;
             }
-            
+
             if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
                 const saveLocation = await this.geolocationService.saveLocalStorageLocation();
 
@@ -419,7 +429,7 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
                     msg = this.translate.instant('geral.stateRestriction');
                 }
             }
-            
+
             if (valido) {
                 if (this.isLoggedIn) {
                     let values = await this.ajustarDadosParaEnvio();
@@ -669,9 +679,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
     async ajustarDadosParaEnvio() {
         const cotacoesLocais = this.paramsService.getCotacoesLocais();
         const values = clone(this.form.value);
-        const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
 
-        values['geolocation'] = geolocation;
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
+            const geolocation = this.geolocation.value ?? await this.geolocationService.getCurrentPosition();
+            values['geolocation'] = geolocation;
+        }
+
         values['ibge_code'] = localStorage.getItem('ibge_code');
         values['locale_city'] = localStorage.getItem('locale_city');
         values['locale_state'] = localStorage.getItem('locale_state');

@@ -1,0 +1,12 @@
+<div class="footer-register">
+    <button class='deactive-button' [ngStyle]="{'visibility': currentIndex === 0 ? 'hidden' : 'visible'}"
+        [disabled]="currentIndex === 0"
+        (click)="previous()">
+        {{"botoes.previous" | translate}}
+    </button>
+    <button
+        [ngClass]="formValid ? 'active-button' : ''"
+        (click)="next()">
+        {{currentIndex === 2 ? ('geral.createAccount' | translate) : ('botoes.next' | translate)}}
+    </button>
+</div>

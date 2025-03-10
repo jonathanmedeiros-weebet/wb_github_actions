@@ -1285,7 +1285,8 @@ input.inverted {
 select.inverted-out,
 textarea.inverted-out,
 input.inverted-out {
-    border: 0.5px solid var(--foreground-inputs-odds);
+    border: 0.1px solid var(--foreground-inputs-odds);
+    opacity: 0.3;
     color: var(--foreground-inputs-odds);
     background-color: var(--inputs-odds);
     border-radius: 5px;
@@ -1629,6 +1630,10 @@ input[type=number]::-webkit-outer-spin-button {
     max-width: 550px;
 }
 
+.modal-400 .modal-dialog {
+    max-width: 400px;
+}
+
 .modal-600 .modal-dialog {
     max-width: 600px;
 }
@@ -1788,7 +1793,9 @@ ngb-datepicker-month {
     }
 
     .modal-cadastro-cliente .modal-dialog,
-    .modal-login .modal-dialog {
+    .modal-login .modal-dialog,
+    .modal-account-verification .modal-dialog,
+    .modal-account-verified-success .modal-dialog {
         margin: 0 auto;
         height: auto;
     }
@@ -1961,9 +1968,19 @@ label {
     width: 100%;
 }
 
+.modal-account-verification {
+    z-index: 90002;
+}
+
+.modal-account-verified-success {
+    z-index: 90001;
+}
+
 @media only screen and (max-width: 480px) {
     .modal-cadastro-cliente .modal-dialog,
-    .modal-login .modal-dialog {
+    .modal-login .modal-dialog,
+    .modal-account-verification .modal-dialog,
+    .modal-account-verified-success .modal-dialog {
         max-width: 100%;
         height: 100%;
         margin: 0;
@@ -1976,4 +1993,27 @@ label {
 
 #ex-doccheck-dialog {
     z-index: 90003 !important;
+}
+
+.color-primary {
+    color: var(--highlight);
+    font-weight: 700;
+}
+
+.disabled {
+    pointer-events: none; 
+    text-decoration: none;
+    opacity: 0.5;
+}
+
+.icon-hover {
+    box-sizing: content-box;
+    fill: var(--background);
+    border: 0;
+    border-radius: 4px;
+    transition: fill 0.3s ease;
+}
+
+.icon-hover:hover path{
+    fill: var(--highlight);
 }

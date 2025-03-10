@@ -71,7 +71,7 @@ export class ParametrosLocaisService {
                             (function (w, d, src){var h = d.getElementsByTagName("head")[0];
                                 var s=d.createElement("script"); s.src = src;
                                 if (!w.exDocCheck) h.appendChild(s);
-                                
+
                             })(window, document, "https://doccheck.exato.digital/doccheck.js");
                         `;
                         head.appendChild(DockCheckScripSDK);
@@ -299,6 +299,10 @@ export class ParametrosLocaisService {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.mandatory_phone_validation : false;
     }
 
+    getPhoneVerificationService() {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.phoneVerificationService : 'amazon';
+    }
+    
     getRestrictionStateBet() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.restriction_state_bet : false;
     }

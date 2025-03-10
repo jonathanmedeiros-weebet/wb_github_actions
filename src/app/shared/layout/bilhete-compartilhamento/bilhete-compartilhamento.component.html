@@ -55,8 +55,8 @@
                             ( {{item.cotacao}} )
                             <span *ngIf="item.ao_vivo"> | AO VIVO</span>
                         </p>
-                        <p class="jogo-resultado">
-                            <span *ngIf="item.removido; else resultado">cancelado</span>
+                        <p class="jogo-resultado" style="float:right">
+                            <span *ngIf="item.removido; else resultado">Cancelado</span>
                             <ng-template #resultado>{{item.resultado}}</ng-template>
                         </p>
                     </div>

@@ -1,3 +1,6 @@
+.modal-header {
+    background-color: var(--header);
+}
 .classe-esportes {
     font-family: 'Open Sans', sans-serif;
     border: none;
@@ -9,10 +12,20 @@
     color: var(--foreground-header) !important;
 }
 .modal-title-mobile {
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 4px;
-    font-size: 16px;
+    font-size: 14px;
     display: none;
+}
+
+.cupom-header {
+    color: var(--foreground);
+    background: var(--header);
+    font-size: 14px !important;
+}
+
+.cupom-header .modal-body .cupom-header {
+    font-size: 14px;
 }
 
 @media only screen and (max-width: 532px) {

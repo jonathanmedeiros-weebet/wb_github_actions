@@ -207,7 +207,7 @@ export class LiveComponent implements OnInit, OnDestroy {
             {
                 ariaLabelledBy: 'modal-basic-title',
                 centered: true,
-                windowClass: 'modal-550 modal-h-350 modal-login',
+                windowClass: 'modal-400 modal-h-350 modal-login',
             }
         );
 
