@@ -201,14 +201,14 @@ export class AppComponent implements OnInit {
         }
 
         if (this.router.url.includes('/login')) {
+            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
+
             this.modalService.open(LoginModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
                 windowClass: 'modal-400 modal-cadastro-cliente'
             });
-
-            this.router.navigate(['esportes/futebol']);
         }
 
         if (this.router.url.includes('/esqueceu-senha')) {
