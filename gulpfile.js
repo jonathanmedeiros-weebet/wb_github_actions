@@ -157,7 +157,6 @@ gulp.task('major.wee.bet', function (done) {
     });
 });
 
-
 gulp.task('mjrsports.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -257,10 +256,10 @@ gulp.task('apostapremiada.bet', function (done) {
 
 
 // Old bet1.wee.bet
-gulp.task('bet1.wee.bet', function (done) {
+gulp.task('mrsportsdigital.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "bet1.wee.bet",
+        host: "mrsportsdigital.com",
         banca: "MR SPORTS",
         styles: ""
     });
@@ -371,17 +370,6 @@ gulp.task('footbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('imperiosportve.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "imperiosportve.com",
-        banca: "imperio sportve",
-        styles: "--header: #42050a; --foreground-header: #fff; --sidebar-right:#42050a; --foreground-sidebar-right: #fff; --sidebar-left: #42050a; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:#d91c16; --foreground-odds: #fff; --event-time: #d91c16",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T7XRTDXQ');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-T7XRTDXQ'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-    });
-});
-
 gulp.task('rubinhosports.wee.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -433,18 +421,6 @@ gulp.task('sportbets7.net', function (done) {
         host: "sportbets7.net",
         banca: "SPORT BETS 7",
         styles: "",
-    });
-});
-
-gulp.task('jrsports.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "jrsports.bet",
-        banca: "JR SPORTS",
-        styles: "--header:#631508;--foreground-header:#fff;--sidebar-right:#631508;--sidebar-left:#631508;--odds:#a07417; --foreground-highlight: #fff;",
-        scripts: "<!-- Start of LiveChat (www.livechat.com) code --> <script> window.__lc = window.__lc || {}; window.__lc.license = 14896188; ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:'2.0',on:function(){i(['on',c.call(arguments)])},once:function(){i(['once',c.call(arguments)])},off:function(){i(['off',c.call(arguments)])},get:function(){if(!e._h)throw new Error('[LiveChatWidget] You cant use getters before load.');return i(['get',c.call(arguments)])},call:function(){i(['call',c.call(arguments)])},init:function(){var n=t.createElement('script');n.async=!0,n.type='text/javascript',n.src='https://cdn.livechatinc.com/tracking.js',t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice)) </script> <noscript><a href='https://www.livechat.com/chat-with/14896188/' rel='nofollow'>Chat with us</a>, powered by <a href='https://www.livechat.com/?welcome' rel='noopener nofollow' target='_blank'>LiveChat</a></noscript> <!-- End of LiveChat code -->",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5NR33QW');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-5NR33QW'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->"
     });
 });
 
@@ -1084,11 +1060,12 @@ gulp.task('realsport.wee.bet', function (done) {
     });
 });
 
-gulp.task('pointbet.wee.bet', function (done) {
+// old pointbet.wee.bet
+gulp.task('pimplay.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "pointbet.wee.bet",
-        banca: "POINT BET",
+        host: "pimplay.com",
+        banca: "PIMPLAY",
         styles: "",
     });
 });
@@ -1401,15 +1378,6 @@ gulp.task('betsnordeste.bet', function (done) {
     });
 });
 
-gulp.task('suasortebet.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "suasortebet.com",
-        banca: "SUA SORTE BET",
-        styles: "",
-    });
-});
-
 gulp.task('rc.wee.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
@@ -1474,15 +1442,6 @@ gulp.task('lottomaster.bet', function (done) {
         server: "front5.wee.bet",
         host: "lottomaster.bet",
         banca: "LOTTO MASTER",
-        styles: "",
-    });
-});
-
-gulp.task('jbnacional.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "jbnacional.bet",
-        banca: "JB NACIONAL",
         styles: "",
     });
 });
@@ -1871,6 +1830,7 @@ gulp.task('amabet.bet', function (done) {
         host: "amabet.bet",
         banca: "AMA BET",
         styles: "",
+        xtremepush_sdk: "IjvG8zgsO8FKX_Sck5DfQHbGKybQvTDS",
         dominioTemp: "amabet.store"
     });
 });
@@ -2061,15 +2021,6 @@ gulp.task('eliteesportes.vip', function (done) {
     });
 });
 
-gulp.task('pixmaster.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "pixmaster.bet",
-        banca: "PIX MASTER",
-        styles: "",
-    });
-});
-
 gulp.task('joguefacil.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
@@ -2102,7 +2053,8 @@ gulp.task('betfortuna.com.br', function (done) {
         server: "front2.wee.bet",
         host: "betfortuna.com.br",
         banca: "BET FORTUNA",
-        styles: ""
+        styles: "",
+        xtremepush_sdk: "N3siSnW649_uVpLFi26444jgM5AKKNuJ"
     });
 });
 
@@ -2138,15 +2090,6 @@ gulp.task('zedocash.bet', function (done) {
         server: "front2.wee.bet",
         host: "zedocash.bet",
         banca: "ZÉ DO CASH",
-        styles: ""
-    });
-});
-
-gulp.task('sortte.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "sortte.bet",
-        banca: "SORTE BET",
         styles: ""
     });
 });

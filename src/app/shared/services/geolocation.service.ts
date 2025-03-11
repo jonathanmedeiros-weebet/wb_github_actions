@@ -52,10 +52,10 @@ export class GeolocationService {
         { nome: 'Tocantins', codigo: 17 }
     ];
     private options = {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        // Cache time = 10min
-        maximumAge: 1000 * 60 * 10,
+        enableHighAccuracy: false,
+        timeout: 5000,
+        // Cache time = 100min
+        maximumAge: 10000 * 60 * 10,
     };
     private central_url = `${config.HOST}/api/geolocation`;
     private requestOnGoing = false;
@@ -74,6 +74,14 @@ export class GeolocationService {
 
             if (currentPosition.error) {
                 throw new Error();
+            }
+
+            const storedLat = localStorage.getItem('lat');
+            const storedLng = localStorage.getItem('lng');
+
+            if (storedLat == String(currentPosition.lat) && storedLng == String(currentPosition.lng)) {
+                this.requestOnGoing = false;
+                return true;
             }
 
             localStorage.setItem('lat', String(currentPosition.lat));
