@@ -1916,7 +1916,7 @@ gulp.task('apostefacil.bet', function (done) {
         banca: "APOSTE FÁCIL",
         styles: "",
         xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS",
-        scripts: "<script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key=198ddc72-f816-4130-b077-3e3bd265be1c'> </script>"
+        scripts: "<!-- NotificaMe Chat --><script>window.chatCompany = '5781121c-cf76-11ef-961a-0efa6ad28f4f'; window.chatChannel = 'b875c688-536d-4615-895f-925c84841343'; window.chatNotificationSound = '3'; window.chatHeaderColor = '#ffa517'; window.chatHeaderIcon = 'Aposta Fácil'; window.chatTitle = 'Aposta Fácil'; window.chatFooterText = 'Aposta Fácil'; window.chatOfferHelp = '0'; window.chatHelpMessage = ''; window.chatAutoMaximize = '0'; window.chatNotificaConectar = '1'; window.chatNotificaDesconectar = '1'; window.chatNotificaEncerrar = '1';</script> <script src='https://hub.notificame.com.br/schedule/webchat.js'></script>"
     });
 });
 
@@ -2046,7 +2046,7 @@ gulp.task('condutaesp.com', function (done) {
         banca: "CONDUTA ESPORTIVA",
         styles: ""
     });
-});     
+});
 
 gulp.task('betfortuna.com.br', function (done) {
     tasks(done, {
