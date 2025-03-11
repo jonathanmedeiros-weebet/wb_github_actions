@@ -256,10 +256,10 @@ gulp.task('apostapremiada.bet', function (done) {
 
 
 // Old bet1.wee.bet
-gulp.task('bet1.wee.bet', function (done) {
+gulp.task('mrsportsdigital.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "bet1.wee.bet",
+        host: "mrsportsdigital.com",
         banca: "MR SPORTS",
         styles: ""
     });
@@ -1060,10 +1060,11 @@ gulp.task('realsport.wee.bet', function (done) {
     });
 });
 
-gulp.task('pointbet.wee.bet', function (done) {
+// old pointbet.wee.bet
+gulp.task('pimplay.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "pointbet.wee.bet",
+        host: "pimplay.com",
         banca: "POINT BET",
         styles: "",
     });
