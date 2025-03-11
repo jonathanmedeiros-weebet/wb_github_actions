@@ -1065,7 +1065,7 @@ gulp.task('pimplay.com', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
         host: "pimplay.com",
-        banca: "POINT BET",
+        banca: "PIMPLAY",
         styles: "",
     });
 });
