@@ -2111,3 +2111,21 @@ gulp.task('bet1000.net.br', function (done) {
         styles: ""
     });
 });
+
+gulp.task('26sports.bet', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "26sports.bet",
+        banca: "26SPORTS",
+        styles: ""
+    });
+});
+
+gulp.task('vitoriasports.vip', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "vitoriasports.vip",
+        banca: "VITÓRIA SPORTS",
+        styles: ""
+    });
+});
