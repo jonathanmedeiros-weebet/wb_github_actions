@@ -886,7 +886,7 @@ iframe{
 
     .game-frame.is-tablet {
         margin: 0;
-        height: 600px;
+        height: 100%;
     }
 
     .game-frame.in-game-is-tablet .game-view.in-game {
