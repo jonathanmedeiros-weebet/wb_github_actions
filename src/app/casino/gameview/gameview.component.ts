@@ -52,6 +52,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public isMobile: boolean = false;
     public isDesktop: boolean = false;
     public isTablet: boolean = false;
+    public isHorizontalMobile: boolean = false;
     public isFullScreen: boolean = false;
     public cassinoFornecedores: Fornecedor[] = [];
     public scrollStep = 700;
@@ -145,7 +146,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://wb-assets.com/img/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
-        window.addEventListener('resize', () => this.checkIfMobileOrDesktopOrTablet());
+        window.addEventListener('resize', () => {
+            this.checkIfMobileOrDesktopOrTablet();
+            this.resolveGameScreen();
+        });
         const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
 
         if (botaoContatoFlutuante) {
@@ -225,18 +229,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         if (isLoggedIn) {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
-                                if (this.isMobile && this.gameMode === 'REAL') {
-                                    this.disableHeader();
-                                    this.fixMobileHeader();
-                                }
-                                if (this.isTablet && this.gameMode === 'REAL') {
-                                    this.disableHeader();
-                                    this.fixTabletHeader();
-                                }
-
-                                if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
-                                    this.fixTabletAndDesktopScreen();
-                                }
+                                this.resolveGameScreen();
                             }
                         }
                         if (isLoggedIn || this.gameMode !== 'REAL') {
@@ -294,9 +287,19 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.isDesktop = false;
         this.isTablet = false;
         this.isMobile = false;
+        this.isHorizontalMobile = false;
 
         if (window.innerWidth > 1024) {
             return this.isDesktop = true;
+        }
+
+        if (
+            window.innerWidth > 482 
+            && (window.innerHeight > 320 
+                && window.innerHeight < window.innerWidth)
+        ) {
+            this.isDesktop = true;
+            return this.isHorizontalMobile = true;
         }
 
         if (window.innerWidth > 482) {
@@ -1163,7 +1166,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
+        if ((!this.isTablet && !this.isHorizontalMobile && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '43px');
@@ -1175,9 +1178,20 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
+        if ((!this.isTablet && !this.isHorizontalMobile && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
             if (headerOptions) {
                 this.renderer.setStyle(headerOptions, 'margin', '0 18px');
+            }
+        }
+
+        if (this.isHorizontalMobile && this.isDesktop) {
+            if (gameView) {
+                this.renderer.setStyle(gameView, 'padding-top', '50px');
+                this.renderer.setStyle(gameView, 'position', 'fixed');
+            }
+
+            if (gameFrame) {
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
             }
         }
     }
@@ -1189,6 +1203,27 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.isCassinoAoVivoPage) {
             this.getLiveProviders();
+        }
+    }
+
+    private resolveGameScreen() {
+        if (this.isMobile && this.gameMode === 'REAL') {
+            this.disableHeader();
+            this.fixMobileHeader();
+        }
+
+        if (this.isHorizontalMobile && this.gameMode === 'REAL') {
+            this.disableHeader();
+            this.fixTabletAndDesktopScreen();
+        }
+        
+        if (this.isTablet && this.gameMode === 'REAL') {
+            this.disableHeader();
+            this.fixTabletHeader();
+        }
+
+        if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
+            this.fixTabletAndDesktopScreen();
         }
     }
 }
