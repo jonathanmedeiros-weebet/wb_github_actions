@@ -1916,7 +1916,7 @@ gulp.task('apostefacil.bet', function (done) {
         banca: "APOSTE FÁCIL",
         styles: "",
         xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS",
-        scripts: "<!-- NotificaMe Chat --><script>window.chatCompany = '5781121c-cf76-11ef-961a-0efa6ad28f4f'; window.chatChannel = 'b875c688-536d-4615-895f-925c84841343'; window.chatNotificationSound = '3'; window.chatHeaderColor = '#ffa517'; window.chatHeaderIcon = 'Aposta Fácil'; window.chatTitle = 'Aposta Fácil'; window.chatFooterText = 'Aposta Fácil'; window.chatOfferHelp = '0'; window.chatHelpMessage = ''; window.chatAutoMaximize = '0'; window.chatNotificaConectar = '1'; window.chatNotificaDesconectar = '1'; window.chatNotificaEncerrar = '1';</script> <script src='https://hub.notificame.com.br/schedule/webchat.js'></script>"
+        scripts: "<!-- NotificaMe Chat --><script>window.chatCompany = '5781121c-cf76-11ef-961a-0efa6ad28f4f'; window.chatChannel = 'b875c688-536d-4615-895f-925c84841343'; window.chatNotificationSound = '3'; window.chatHeaderColor = '#ffa517'; window.chatHeaderIcon = 'https://weebet.s3.amazonaws.com/apostefacil.bet/logos/logo_banca.png'; window.chatTitle = 'Aposte Fácil'; window.chatFooterText = 'Aposte Fácil'; window.chatOfferHelp = '0'; window.chatHelpMessage = ''; window.chatAutoMaximize = '0'; window.chatNotificaConectar = '0'; window.chatNotificaDesconectar = '0'; window.chatNotificaEncerrar = '0';</script> <script src='https://hub.notificame.com.br/schedule/webchat.js'></script>"
     });
 });
 
