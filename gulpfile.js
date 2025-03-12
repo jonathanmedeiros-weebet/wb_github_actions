@@ -711,15 +711,6 @@ gulp.task('betsnordeste.wee.bet', function (done) {
     });
 });
 
-gulp.task('betson.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betson.wee.bet",
-        banca: "BETSON",
-        styles: "",
-    });
-});
-
 gulp.task('esportebet.wee.bet', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1076,27 +1067,6 @@ gulp.task('3tbet.com.br', function (done) {
         host: "3tbet.com.br",
         banca: "3T BET",
         styles: "",
-    });
-});
-
-gulp.task('cassinomania.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "cassinomania.com",
-        banca: "CASSINO MANIA",
-        styles: "",
-    });
-});
-
-gulp.task('betsmilionaria.com.br', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "betsmilionaria.com.br",
-        banca: "BETS MILIONÁRIA",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://wb-assets.com/jivosite/jivosite.css'>",
-        scripts: "<script src='https://wb-assets.com/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/ZJxAw9E4Ei' async></script>",
-        dominioTemp: "betsmilionaria.com"
     });
 });
 
@@ -1614,15 +1584,6 @@ gulp.task('betbastet.com', function (done) {
         server: "front3.wee.bet",
         host: "betbastet.com",
         banca: "BET BASTET",
-        styles: ""
-    });
-});
-
-gulp.task('probetx1.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "probetx1.com",
-        banca: "PROBET X1",
         styles: ""
     });
 });
