@@ -12,6 +12,7 @@ import { jwtDecode } from 'jwt-decode';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-v3-modal',
@@ -58,6 +59,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public showNationalitySection: boolean = false;
     public showNationalityOptions: boolean = false;
     public nationalities = this.countriesService.getCountries();
+    public cpfSpinner = false;
 
     constructor(
         private fb: FormBuilder,
@@ -314,7 +316,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     }
 
     public validarCpf() {
+        this.cpfSpinner = true;
         const { cpf } = this.form.value;
+        
         if (this.autoPreenchimento) {
             if (this.form.get('cpf').valid) {
                 if (cpf) {
@@ -331,7 +335,11 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     );
                 }
 
-                this.clientesService.validarCpf(cpf).subscribe(
+                this.clientesService.validarCpf(cpf).pipe(
+                    finalize(() => {
+                        this.cpfSpinner = false;
+                    })
+                ).subscribe( 
                     res => {
                         if (res.validarCpfAtivado) {
                             const threeMonthsAgo = new Date();
@@ -356,7 +364,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
                             this.dataNascimento = this.formatarDataComAsterisco(dadosDescriptografados.nascimento);
                             this.activeEditingCPF = false;
-                        } 
+                        }
                     },
                     error => {
                         this.form.patchValue({ nome: '' });
@@ -373,6 +381,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     nome: '',
                     dadosCriptografados: null
                 });
+                this.cpfSpinner = false;
             }
         }
     }

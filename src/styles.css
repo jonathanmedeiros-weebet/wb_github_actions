@@ -2017,3 +2017,22 @@ label {
 .icon-hover:hover path{
     fill: var(--highlight);
 }
+
+.custom-spinner {
+    position: absolute;
+    left: auto;
+    right: 16px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    bottom: 0;
+    margin: 0;
+}
+
+.custom-spinner div {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    border-width: 1.5px;
+    top: 0;
+}
