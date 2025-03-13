@@ -71,7 +71,6 @@
     "goldeplaca.wee.bet": "gulp goldeplaca.wee.bet",
     "xbetsports.net": "gulp xbetsports.net",
     "betsnordeste.wee.bet": "gulp betsnordeste.wee.bet",
-    "betson.wee.bet": "gulp betson.wee.bet",
     "esportebet.wee.bet": "gulp esportebet.wee.bet",
     "i2bets.com": "gulp i2bets.com",
     "lancesports.wee.bet": "gulp lancesports.wee.bet",
@@ -110,8 +109,6 @@
     "realsport.wee.bet": "gulp realsport.wee.bet",
     "pimplay.com": "gulp pimplay.com",
     "3tbet.com.br": "gulp 3tbet.com.br",
-    "cassinomania.com": "gulp cassinomania.com",
-    "betsmilionaria.com.br": "gulp betsmilionaria.com.br",
     "megasports.bet": "gulp megasports.bet",
     "81betpix.wee.bet": "gulp 81betpix.wee.bet",
     "alfasports.online": "gulp alfasports.online",
@@ -159,7 +156,6 @@
     "multisports.bet": "gulp multisports.bet",
     "brinksbet.com": "gulp brinksbet.com",
     "betbastet.com": "gulp betbastet.com",
-    "probetx1.com": "gulp probetx1.com",
     "asortebets.com": "gulp asortebets.com",
     "proesporte.net": "gulp proesporte.net",
     "unibets.com.br": "gulp unibets.com.br",
@@ -210,7 +206,9 @@
     "buda-bet.com": "gulp buda-bet.com",
     "zedocash.bet": "gulp zedocash.bet",
     "timedasorte.com": "gulp timedasorte.com",
-    "bet1000.net.br": "gulp bet1000.net.br"
+    "bet1000.net.br": "gulp bet1000.net.br",
+    "26sports.bet": "gulp 26sports.bet",
+    "vitoriasports.vip": "gulp vitoriasports.vip"
   },
   "private": true,
   "dependencies": {
