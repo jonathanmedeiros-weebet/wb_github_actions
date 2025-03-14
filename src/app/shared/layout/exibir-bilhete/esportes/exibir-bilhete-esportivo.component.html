@@ -128,7 +128,7 @@
             {{'bet.incomeTaxOnPrize' | translate}}:<span>{{aposta.incomeTaxOnPrize | currency}}</span>
         </p>
 
-        <p *ngIf="enabledBookie" class="cambista-paga">
+        <p *ngIf="enabledBookie && cambistaPaga > 0" class="cambista-paga">
             Cambista paga: <span>{{cambistaPaga | currency}}</span>
         </p>
     </div>
