@@ -35,7 +35,6 @@
     color: var(--foreground);
     font-size: 12px;
     margin-bottom: 13px;
-    max-height: 120px;
     padding-top: 25px;
     border-radius: 5px;
 }
