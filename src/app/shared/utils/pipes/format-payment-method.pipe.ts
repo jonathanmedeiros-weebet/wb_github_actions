@@ -33,6 +33,8 @@ export class FormatPaymentMethodPipe implements PipeTransform {
                 return "BigPagV3";
             case 'lisboapay':
                 return 'LisboaPAY';
+            case 'paybrokers':
+                return 'Paybrokers'
 		}
 
         return "";
