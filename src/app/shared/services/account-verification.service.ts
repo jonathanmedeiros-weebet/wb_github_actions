@@ -166,6 +166,6 @@ export class AccountVerificationService {
   }
 
   private confirmateCodePerPhone(code: string) {
-    return this.clienteService.validatePhone(Number(code));
+    return this.clienteService.validatePhone(code);
   }
 }
