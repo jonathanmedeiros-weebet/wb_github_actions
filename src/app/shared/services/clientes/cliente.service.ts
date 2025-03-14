@@ -397,7 +397,7 @@ export class ClienteService {
             );
     }
 
-    validatePhone(validationCode: number) {
+    validatePhone(validationCode: string) {
         let baseUrl = `${this.clienteUrl}/validate-phone`;
 
         if (this.paramsService.getPhoneVerificationService() == 'twilio') {
@@ -416,8 +416,6 @@ export class ClienteService {
                 }),
                 catchError(this.errorService.handleError)
             );
-
-
     }
 
     public allBankAccounts() {
