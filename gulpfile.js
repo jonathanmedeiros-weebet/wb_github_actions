@@ -370,11 +370,11 @@ gulp.task('footbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('rubinhosports.wee.bet', function (done) {
+gulp.task('rblt.me', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "rubinhosports.wee.bet",
-        banca: "Rubinho Sports",
+        host: "rblt.me",
+        banca: "RBLT",
         styles: "",
     });
 });
