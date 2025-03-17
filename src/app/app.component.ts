@@ -1,6 +1,18 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService, ClienteService, SecurityService, BannerService } from './services';
+import {
+    AuthService,
+    HelperService,
+    ParametroService,
+    ImagemInicialService,
+    MessageService,
+    ParametrosLocaisService,
+    UtilsService,
+    ClienteService,
+    SecurityService,
+    BannerService,
+    GeolocationService
+} from './services';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
@@ -69,7 +81,8 @@ export class AppComponent implements OnInit {
         private cron: CronService,
         private security: SecurityService,
         private accountVerificationService: AccountVerificationService,
-        private bannerService: BannerService
+        private bannerService: BannerService,
+        private geolocationService: GeolocationService,
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -92,6 +105,8 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.geolocationService.saveLocalStorageLocation();
+
         if(this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {
             this.modalRef = this.modalService.open(
                 this.over18MessageModal,
