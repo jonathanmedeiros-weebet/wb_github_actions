@@ -115,7 +115,7 @@ export const getLiveChampionship = async (sportId: number | string) => {
                 );
                 return championship;
             })
-            .filter((championship: any) => championship.sport_id == sportId && liveChampionships.includes(championship._id));
+            .filter((championship: any) => Boolean(championship.jogos.length) && championship.sport_id == sportId && liveChampionships.includes(championship._id));
     } catch {
         return [];
     }
