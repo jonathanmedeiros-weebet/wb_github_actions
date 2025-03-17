@@ -114,8 +114,6 @@ export const getLiveChampionship = async (sportId: number | string) => {
                 championship.jogos = championship.jogos.filter((game: any) => 
                     !game.finalizado && game.info.minutos > options.minuto_encerramento_aovivo
                 );
-                console.log('championship', championship);
-                
                 return championship;
             });
     } catch {
