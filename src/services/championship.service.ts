@@ -107,13 +107,15 @@ export const getLiveChampionship = async (sportId: number | string) => {
         const { centerUrl, liveChampionships, options} = useConfigClient();
         const url = `${centerUrl}/jogos/ao-vivo`;
         const response: any = await axiosInstance().get(url)     
-        return response.result.filter((championship: any) => championship.sport_id == sportId && liveChampionships.includes(championship._id))
+        return response
+            .result
             .map((championship: any) => {
                 championship.jogos = championship.jogos.filter((game: any) => 
                     !game.finalizado && game.info.minutos > options.minuto_encerramento_aovivo
                 );
                 return championship;
-            });
+            })
+            .filter((championship: any) => championship.sport_id == sportId && liveChampionships.includes(championship._id));
     } catch {
         return [];
     }
