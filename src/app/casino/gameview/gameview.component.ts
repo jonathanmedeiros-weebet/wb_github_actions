@@ -325,14 +325,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(gameView, 'max-height', '260px');
         }
 
-        this.layoutService.currentHeaderHeight
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(curHeaderHeight => {
-                this.headerHeight = curHeaderHeight;
-                this.changeGameviewHeight();
-                this.cd.detectChanges();
-            });
-
         if (this.isTablet || this.isDesktop) {
             this.fixTabletAndDesktopScreen();
         }
@@ -409,15 +401,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         } else {
             this.renderer.addClass(scrollRightTemp, 'enabled-scroll-button');
             this.renderer.removeClass(scrollRightTemp, 'disabled-scroll-button');
-        }
-    }
-
-    changeGameviewHeight() {
-        if (!this.isMobile) {
-            const headerHeight = this.headerHeight;
-            const contentEl = this.el.nativeElement.querySelector('.game-frame');
-            const headerGameView = this.el.nativeElement.querySelector('.header-game-view').getBoundingClientRect().height;
-            const height = window.innerHeight - headerHeight - headerGameView;
         }
     }
 
