@@ -111,7 +111,7 @@ export const getLiveChampionship = async (sportId: number | string) => {
             .result
             .map((championship: any) => {
                 championship.jogos = championship.jogos.filter((game: any) => 
-                    !game.finalizado && game.info.minutos > options.minuto_encerramento_aovivo
+                    !game.finalizado && game.info.minutos <= options.minuto_encerramento_aovivo && game.total_cotacoes != 0
                 );
                 return championship;
             })
