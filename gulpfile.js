@@ -2090,3 +2090,12 @@ gulp.task('vitoriasports.vip', function (done) {
         styles: ""
     });
 });
+
+gulp.task('dentrodaaposta.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dentrodaaposta.com",
+        banca: "DENTRO DA APOSTA",
+        styles: ""
+    });
+});
