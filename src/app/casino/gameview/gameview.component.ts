@@ -223,6 +223,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
             this.checkIfMobileOrDesktopOrTablet();
 
+            if (this.avisoCancelarBonus == false) {
+                this.loadGame();
+            }
+
             this.auth.logado
                 .subscribe(
                     isLoggedIn => {
@@ -244,10 +248,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.isCliente = isCliente;
                     }
                 );
-
-            if (this.avisoCancelarBonus == false) {
-                this.loadGame();
-            }
 
             interval(3000)
                 .subscribe(() => {
@@ -325,7 +325,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(gameView, 'max-height', '260px');
         }
 
-        if (this.isTablet || this.isDesktop) {
+        if (this.isTablet || this.isDesktop || this.isHorizontalMobile) {
             this.fixTabletAndDesktopScreen();
         }
 
