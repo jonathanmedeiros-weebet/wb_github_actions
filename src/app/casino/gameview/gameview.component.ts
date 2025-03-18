@@ -450,13 +450,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     async loadGame() {
-        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
-            this.handleError(this.translate.instant('geral.geolocationError'));
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
             await this.geolocationService.saveLocalStorageLocation();
-            this.router.navigate(['/']);
-            return;
+            
+            if (!this.geolocationService.checkGeolocation()) {
+                this.handleError(this.translate.instant('geral.geolocationError'));
+                this.router.navigate(['/']);
+                return;
+            }
         }
-
+        
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
 
         if (restrictionStateBet != 'Todos') {

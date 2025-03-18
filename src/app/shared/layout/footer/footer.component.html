@@ -107,12 +107,11 @@
                             <img id="image-pix" src="https://www.bcb.gov.br/content/estabilidadefinanceira/piximg/logo_pix.png">
                         </p>
                     </div>
-                    <div class="download-apk">
+                    <div class="download-apk" *ngIf="displayAgentApp">
                         <h2>{{"footer.ourApp" | translate}}</h2>
                         <div>
-                            <a target="_blank" download="app.apk" [href]="appUrl" *ngIf="displayAgentApp">
+                            <a target="_blank" download="app.apk" [href]="appUrl" >
                                 <div class="download-container">
-
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 20 32" fill="none">
                                         <path id="img-cellphone"
                                             d="M3.21429 31.5C2.46786 31.5 1.82909 31.2243 1.298 30.6729C0.766904 30.1214 0.500905 29.4578 0.5 28.6818V3.31818C0.5 2.54318 0.766 1.87997 1.298 1.32855C1.83 0.777121 2.46876 0.500939 3.21429 0.5H16.7857C17.5321 0.5 18.1714 0.776182 18.7034 1.32855C19.2354 1.88091 19.5009 2.54412 19.5 3.31818V28.6818C19.5 29.4568 19.2344 30.1205 18.7034 30.6729C18.1723 31.2252 17.533 31.5009 16.7857 31.5H3.21429ZM1.85714 27.2727H17.9827L18.1429 5.66667H1.85714V27.2727ZM3.21429 4.72727H16.7857V3.31818H3.21429V4.72727Z"/>
