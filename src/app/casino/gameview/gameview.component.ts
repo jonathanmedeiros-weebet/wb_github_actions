@@ -1143,6 +1143,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
         const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
 
+        if (!gameFrame || !gameView) {
+            console.error("Game frame or gameView not found");
+            return false;
+        }
+
         if (this.isTablet) {
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
                 this.renderer.setStyle(gameView, 'padding-top', '50px');
@@ -1200,7 +1205,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.isHorizontalMobile && this.gameMode === 'REAL') {
             this.disableHeader();
-            this.fixTabletAndDesktopScreen();
         }
         
         if (this.isTablet && this.gameMode === 'REAL') {
@@ -1208,7 +1212,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.fixTabletHeader();
         }
 
-        if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
+        if ((this.isDesktop || this.isHorizontalMobile) && this.gameMode === 'REAL') {
             this.fixTabletAndDesktopScreen();
         }
     }
