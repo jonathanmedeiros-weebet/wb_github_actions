@@ -107,7 +107,7 @@
     "imperiopix.bet": "gulp imperiopix.bet",
     "primoos.bet": "gulp primoos.bet",
     "realsport.wee.bet": "gulp realsport.wee.bet",
-    "pimplay.com": "gulp pimplay.com",
+    "pinplay.bet": "gulp pinplay.bet",
     "3tbet.com.br": "gulp 3tbet.com.br",
     "megasports.bet": "gulp megasports.bet",
     "81betpix.wee.bet": "gulp 81betpix.wee.bet",
@@ -208,7 +208,8 @@
     "timedasorte.com": "gulp timedasorte.com",
     "bet1000.net.br": "gulp bet1000.net.br",
     "26sports.bet": "gulp 26sports.bet",
-    "vitoriasports.vip": "gulp vitoriasports.vip"
+    "vitoriasports.vip": "gulp vitoriasports.vip",
+    "dentrodaaposta.com": "gulp dentrodaaposta.com"
   },
   "private": true,
   "dependencies": {

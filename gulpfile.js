@@ -1051,12 +1051,12 @@ gulp.task('realsport.wee.bet', function (done) {
     });
 });
 
-// old pointbet.wee.bet
-gulp.task('pimplay.com', function (done) {
+// old pimplay.com
+gulp.task('pinplay.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "pimplay.com",
-        banca: "PIMPLAY",
+        host: "pinplay.bet",
+        banca: "PINPLAY",
         styles: "",
     });
 });
@@ -2087,6 +2087,15 @@ gulp.task('vitoriasports.vip', function (done) {
         server: "front2.wee.bet",
         host: "vitoriasports.vip",
         banca: "VITÓRIA SPORTS",
+        styles: ""
+    });
+});
+
+gulp.task('dentrodaaposta.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dentrodaaposta.com",
+        banca: "DENTRO DA APOSTA",
         styles: ""
     });
 });
