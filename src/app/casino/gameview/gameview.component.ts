@@ -500,6 +500,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
                     if (response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
                         this.showModalBetLimit(response.bet_limit?.message);
+                        this.router.navigate(['/']);
                     }
                     
                     if (!response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
