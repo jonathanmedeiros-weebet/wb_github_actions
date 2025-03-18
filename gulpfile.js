@@ -2099,3 +2099,12 @@ gulp.task('dentrodaaposta.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('deubet.io', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "deubet.io",
+        banca: "DEU BET",
+        styles: ""
+    });
+});
