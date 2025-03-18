@@ -110,6 +110,7 @@ import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.mo
 
 import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
 import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
+import { ConfigurationBetLimitModalComponent } from './modals/configuration-bet-limit-modal/configuration-bet-limit-modal.component';
 
 @NgModule({
     imports: [
@@ -218,6 +219,7 @@ import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing
         ListBankAccountsComponent,
         LastAccessesModalComponent,
         BetSharingModalComponent,
+        ConfigurationBetLimitModalComponent
     ],
     exports: [
         MainLayoutComponent,
