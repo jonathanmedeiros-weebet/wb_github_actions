@@ -272,7 +272,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             }
         });
 
-        this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
     }
 
@@ -359,7 +358,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             }
         });
 
-        this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
     }
 

@@ -370,11 +370,11 @@ gulp.task('footbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('rubinhosports.wee.bet', function (done) {
+gulp.task('rblt.me', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "rubinhosports.wee.bet",
-        banca: "Rubinho Sports",
+        host: "rblt.me",
+        banca: "RBLT",
         styles: "",
     });
 });
@@ -707,15 +707,6 @@ gulp.task('betsnordeste.wee.bet', function (done) {
         server: "front3.wee.bet",
         host: "betsnordeste.wee.bet",
         banca: "BETS NORDESTE",
-        styles: "",
-    });
-});
-
-gulp.task('betson.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "betson.wee.bet",
-        banca: "BETSON",
         styles: "",
     });
 });
@@ -1060,12 +1051,12 @@ gulp.task('realsport.wee.bet', function (done) {
     });
 });
 
-// old pointbet.wee.bet
-gulp.task('pimplay.com', function (done) {
+// old pimplay.com
+gulp.task('pinplay.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "pimplay.com",
-        banca: "PIMPLAY",
+        host: "pinplay.bet",
+        banca: "PINPLAY",
         styles: "",
     });
 });
@@ -1076,27 +1067,6 @@ gulp.task('3tbet.com.br', function (done) {
         host: "3tbet.com.br",
         banca: "3T BET",
         styles: "",
-    });
-});
-
-gulp.task('cassinomania.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "cassinomania.com",
-        banca: "CASSINO MANIA",
-        styles: "",
-    });
-});
-
-gulp.task('betsmilionaria.com.br', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "betsmilionaria.com.br",
-        banca: "BETS MILIONÁRIA",
-        styles: "",
-        pixel: "<link rel='stylesheet' href='https://wb-assets.com/jivosite/jivosite.css'>",
-        scripts: "<script src='https://wb-assets.com/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/ZJxAw9E4Ei' async></script>",
-        dominioTemp: "betsmilionaria.com"
     });
 });
 
@@ -1618,15 +1588,6 @@ gulp.task('betbastet.com', function (done) {
     });
 });
 
-gulp.task('probetx1.com', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "probetx1.com",
-        banca: "PROBET X1",
-        styles: ""
-    });
-});
-
 gulp.task('asortebets.com', function (done) {
     tasks(done, {
         server: "front4.wee.bet",
@@ -1916,7 +1877,7 @@ gulp.task('apostefacil.bet', function (done) {
         banca: "APOSTE FÁCIL",
         styles: "",
         xtremepush_sdk: "PIa6MusAsTj45EIQIPK8FealyxT2fbYS",
-        scripts: "<!-- NotificaMe Chat --><script>window.chatCompany = '5781121c-cf76-11ef-961a-0efa6ad28f4f'; window.chatChannel = 'b875c688-536d-4615-895f-925c84841343'; window.chatNotificationSound = '3'; window.chatHeaderColor = '#ffa517'; window.chatHeaderIcon = 'Aposta Fácil'; window.chatTitle = 'Aposta Fácil'; window.chatFooterText = 'Aposta Fácil'; window.chatOfferHelp = '0'; window.chatHelpMessage = ''; window.chatAutoMaximize = '0'; window.chatNotificaConectar = '1'; window.chatNotificaDesconectar = '1'; window.chatNotificaEncerrar = '1';</script> <script src='https://hub.notificame.com.br/schedule/webchat.js'></script>"
+        scripts: "<!-- NotificaMe Chat --><script>window.chatCompany = '5781121c-cf76-11ef-961a-0efa6ad28f4f'; window.chatChannel = 'b875c688-536d-4615-895f-925c84841343'; window.chatNotificationSound = '3'; window.chatHeaderColor = '#ffa517'; window.chatHeaderIcon = 'https://weebet.s3.amazonaws.com/apostefacil.bet/logos/logo_banca.png'; window.chatTitle = 'Aposte Fácil'; window.chatFooterText = 'Aposte Fácil'; window.chatOfferHelp = '0'; window.chatHelpMessage = ''; window.chatAutoMaximize = '0'; window.chatNotificaConectar = '0'; window.chatNotificaDesconectar = '0'; window.chatNotificaEncerrar = '0';</script> <script src='https://hub.notificame.com.br/schedule/webchat.js'></script>"
     });
 });
 
@@ -2126,6 +2087,15 @@ gulp.task('vitoriasports.vip', function (done) {
         server: "front2.wee.bet",
         host: "vitoriasports.vip",
         banca: "VITÓRIA SPORTS",
+        styles: ""
+    });
+});
+
+gulp.task('dentrodaaposta.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dentrodaaposta.com",
+        banca: "DENTRO DA APOSTA",
         styles: ""
     });
 });

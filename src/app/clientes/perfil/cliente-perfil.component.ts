@@ -126,8 +126,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                 })
                 break;
             default:
-                break;            
-        }  
+                break;
+        }
         if (!this.faceMatchEnabled) {
             this.faceMatchProfileEditValidated = true;
         }
@@ -179,13 +179,17 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                 .getCliente(user.id)
                 .toPromise();
 
-            this.userPhoneValidated = cliente.is_phone_validated;              
+            this.userPhoneValidated = cliente.is_phone_validated;
             this.cliente = cliente;
             this.dataUserCPF = String(this.cliente.cpf).replace(/[.\-]/g, '');
-            if(this.faceMatchType == 'docCheck') {
-                this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
-                this.docCheckService.init();
+
+            if (this.faceMatchEnabled) {
+                if (this.faceMatchType == 'docCheck') {
+                    this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramsLocais.getOpcoes().dockCheck_secret_hash);
+                    this.docCheckService.init();
+                }
             }
+
             this.form.patchValue({
                 nome: cliente.nome.toUpperCase(),
                 sobrenome: cliente.sobrenome.toUpperCase(),
@@ -198,7 +202,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             this.verifiedIdentity = cliente.verifiedIdentity;
             this.disapprovedIdentity = typeof this.verifiedIdentity === 'boolean' && !this.verifiedIdentity;
             this.cd.detectChanges();
-            
+
             if (Boolean(cliente.endereco)) {
                 const endereco: Endereco = cliente.endereco;
                 if (Boolean(endereco.estado) && Boolean(endereco.cidade)) {
@@ -321,7 +325,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
                         }
                         if (endereco.logradouro) {
                             this.form.get('logradouro').patchValue(endereco.logradouro);
-                        } 
+                        }
                     } else {
                         this.handleError(this.translate.instant('geral.enderecoNaoEncontrado'));
                     }
@@ -388,7 +392,7 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
     handleError(mensagem: string) {
         this.messageService.error(mensagem);
     }
-    
+
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             if (this.faceMatchType == 'legitimuz') {
