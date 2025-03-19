@@ -157,6 +157,43 @@ export default {
           this.ticketStore.setModalityId(modalityId);
         }
       }
+      const { homePage } = useConfigClient();
+
+      switch (homePage) {
+        case 'sport':
+          this.setSportModality();
+          break;
+        case 'lottery':
+          this.setLotteryModality();
+          break;
+        case 'popular-lottery':
+          this.setPopularLotteryModality();
+          break;
+        default:
+          this.setSportModality();
+          break;
+      }
+    },
+
+    setSportModality() {
+      const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
+      this.homeStore.setModality(modality);
+      this.ticketStore.setModalityId(modality.id);
+      this.$refs['sport-modality']?.onInit(true);
+    },
+
+    setLotteryModality() {
+      const modality = this.modalityList.find(modality => modality.id === this.Modalities.LOTTERY);
+      this.homeStore.setModality(modality);
+      this.ticketStore.setModalityId(modality.id);
+      this.$refs['lottery-modality'].loadPage();
+    },
+
+    setPopularLotteryModality() {
+      const modality = this.modalityList.find(modality => modality.id === this.Modalities.POPULAR_LOTTERY);
+      this.homeStore.setModality(modality);
+      this.ticketStore.setModalityId(modality.id);
+      setTimeout(() => this.$refs['popular-lottery-modality'].loadPage(), 500);
     },
 
     handleOpenModalitiesModal() {
@@ -167,8 +204,9 @@ export default {
     },
     async handleModality(modalityId) {
       const modality = this.modalityList.find(modality => modality.id === modalityId);
-      const previousModality = this.homeStore.modality;  
+      const previousModality = this.homeStore.modality;
       this.homeStore.setModality(modality);
+      this.ticketStore.setModalityId(modality.id);
 
       const previousModalitySelectedIsNotSport = [
         this.Modalities.LOTTERY,
@@ -187,10 +225,10 @@ export default {
       const clearTicket = newModalitySelectedIsNotSport && !previousModalitySelectedIsNotSport || !newModalitySelectedIsNotSport && previousModalitySelectedIsNotSport;
 
       this.ticketStore.setModalityId(modality.id, clearTicket);
-      
+
       this.homeStore.setDate(now());
       this.homeStore.setPaginate(10);
-      
+
       if(this.isPopularLotteryModality){
         setTimeout(() => this.$refs['popular-lottery-modality'].loadPage(), 500);
       }

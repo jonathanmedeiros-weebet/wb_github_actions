@@ -227,7 +227,6 @@ export default {
     Toast,
     IconFootball,
     IconCombat,
-    IconTennis,
     IconHockey,
     IconBasketball,
     IconFutsal,
@@ -485,13 +484,13 @@ export default {
           if(errors.code == 17) { // Código de cotação alterada.
             errors.data.forEach(({jogo_event_id, valor}) => {
               const items = { ...this.ticketStore.items};
-              const ticketItem = Object.values(items).find(({eventId}) => eventId == jogo_event_id);
+              const ticketItem = Object.values(items).find(({eventId}) => eventId === jogo_event_id);
               if(ticketItem) {
                 this.ticketStore.addQuote({
                   ...ticketItem,
-                  previousQuoteValue: ticketItem.finalValue,
+                  previousQuoteValue: ticketItem.finalQuoteValue,
                   quoteValue: valor,
-                  finalValue: valor,
+                  finalQuoteValue: valor,
                 });
 
                 this.hasChanges = true;
