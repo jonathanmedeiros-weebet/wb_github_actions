@@ -146,10 +146,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://wb-assets.com/img/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
-        window.addEventListener('resize', () => {
+
+        const handleWindowChange = () => {
             this.checkIfMobileOrDesktopOrTablet();
             this.resolveGameScreen();
-        });
+        };
+
+        window.addEventListener('resize', handleWindowChange);
+        window.addEventListener('orientationchange', handleWindowChange);
         
         this.hideLiveChats();
 
