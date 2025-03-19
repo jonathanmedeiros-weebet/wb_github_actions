@@ -5,6 +5,7 @@ import { WallComponent } from './wall/wall.component';
 import { CasinoWrapperComponent } from './wrapper/wrapper.component';
 import { CasinoGuard } from '../shared/services/guards/casino.guard';
 import { CassinoLayoutComponent, CassinoLiveLayoutComponent, VirtuaisLayoutComponent } from '../shared/layout/app-layouts';
+import { AccountVerificationGuard } from '../shared/services/guards/account-verification.guard';
 
 const routes: Routes = [
     {
@@ -29,12 +30,12 @@ const routes: Routes = [
                     {
                         path: ':game_fornecedor/:game_id',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard]
+                        canActivate: [CasinoGuard, AccountVerificationGuard]
                     },
                     {
                         path: ':game_fornecedor/:game_id/:game_mode',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard]
+                        canActivate: [CasinoGuard, AccountVerificationGuard]
                     },
                     {
                         path: 'wallFiltered',
@@ -67,12 +68,12 @@ const routes: Routes = [
                     {
                         path: ':game_fornecedor/:game_id',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard]
+                        canActivate: [CasinoGuard, AccountVerificationGuard]
                     },
                     {
                         path: ':game_fornecedor/:game_id/:game_mode',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard]
+                        canActivate: [CasinoGuard, AccountVerificationGuard]
                     }
                 ]
             }
@@ -96,12 +97,12 @@ const routes: Routes = [
                     {
                         path: ':game_fornecedor/:game_id',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard]
+                        canActivate: [CasinoGuard, AccountVerificationGuard]
                     },
                     {
                         path: ':game_fornecedor/:game_id/:game_mode',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard]
+                        canActivate: [CasinoGuard, AccountVerificationGuard]
                     }
                 ]
             }
@@ -118,7 +119,7 @@ const routes: Routes = [
                     {
                         path: '',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard]
+                        canActivate: [CasinoGuard, AccountVerificationGuard]
                     }
                 ]
             }

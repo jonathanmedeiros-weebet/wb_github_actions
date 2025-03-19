@@ -32,7 +32,7 @@
         "ajuda": "Ajuda",
         "sair": "Sair",
         "perfil": "Perfil",
-        "dadosPessoais": "Dados Pessoais",
+        "dadosPessoais": "Dados pessoais",
         "pix": "PIX",
         "saque": "Saque",
         "saques": "Saques",
@@ -156,6 +156,7 @@
         "esqueceuASenha": "Esqueceu a senha?",
         "naoPossuiUmaConta": "Não possui uma conta?",
         "jaPossuiUmaConta": "Já possui uma conta?",
+        "logIn": "Faça o login",
         "usuario": "Usuário",
         "senha": "Senha",
         "masculino": "Masculino",
@@ -166,7 +167,7 @@
         "deAcordoComOsTermos2": "e nossa",
         "termosDeUso": "termos de uso",
         "cadastrar": "Cadastrar",
-        "cadastroSucedido": "Cadastro realizado com sucesso! Verifique seu email para ativá-lo.",
+        "cadastroSucedido": "Cadastro realizado com sucesso.",
         "informacoesPessoais": "Informações Pessoais",
         "criarLogin": "Criar Login",
         "sucesso": "Sucesso",
@@ -263,7 +264,7 @@
         "resetarSenha": "Resetar senha",
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
-        "loginUsername": "Nome de usuário",
+        "loginUsername": "Usuário",
         "field": "Campo",
         "or": "OU",
         "geolocationError": "Por favor, verifique a configuração de localização do seu navegador e tente novamente.",
@@ -283,7 +284,18 @@
         "logoutGeolocationErrorMessage": "Você foi desconectado por motivos de segurança. Detectamos uma mudança abrupta na sua localização que seria fisicamente impossível de ocorrer no intervalo de tempo registrado. Caso isso não tenha sido causado por você, recomendamos verificar sua conta.",
         "logoutGeolocationErrorTitle": "Acesso Interrompido: Localização Inconsistente",
         "logoutGeolocationErrorButtonLabel": "Fechar",
-        "clickHere": "Clique aqui"
+        "clickHere": "Clique aqui",
+        "countryCode": "Código",
+        "complement": "Complemento",
+        "login": "Login",
+        "createAccount": "Criar conta",
+        "passwordRequirements": "Requisitos para uma senha segura:",
+        "passwordLevel": "Nivel da senha:",
+        "weak": "Fraco",
+        "medium": "Médio",
+        "strong": "Forte",
+        "kindLogin": "Tipo de login",
+        "errorMinorAge": "Menor de idade."
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -342,6 +354,7 @@
         "tenis": "Tênis",
         "quininha": "Quininha",
         "seninha": "Seninha",
+        "lobby": "Lobby",
         "todos": "Todos",
         "slot": "Slot",
         "crash": "Crash",
@@ -351,7 +364,8 @@
         "cassinoAoVivo": "Cassino Ao Vivo",
         "loteriaPopular": "Loteria Popular",
         "maisPopulares": "Populares",
-        "news": "Novidades"
+        "news": "Novidades",
+        "recommendedToYou": "Recomendados para você"
     },
     "bilhete": {
         "titulo": "BILHETE",
@@ -393,7 +407,8 @@
         "aoVivo": "Ao Vivo",
         "bingo": "Bingo",
         "news": "Novidades",
-        "jogosRelacionados": "Jogos relacionados"
+        "jogosRelacionados": "Jogos relacionados",
+        "recommendedToYou": "Recomendados para você"
     },
     "cartoes": {
         "titulo": "Cartões",
@@ -420,10 +435,9 @@
         "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
         "solicitarCodigoRedefinicao": "Solicitar código de redefinição",
         "digiteSuaSenha": "Digite sua senha",
-        "minimumCharactersPassword": "Mínimo de 8 caracteres",
-        "lowercaseLetter": "Mínimo de uma letra minúscula",
-        "uppercaseLetter": "Mínimo de uma letra maiúscula",
-        "specialChar": "Mínimo de um caractere especial (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "A senha deve possuir no mínimo 8 caracteres",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Deve conter uma letra maiúscula e uma minúscula",
+        "specialChar": "Deve conter um caractere especial (Ex.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",
@@ -571,7 +585,8 @@
         "paymentGateway": "Gateway de pagamento",
         "balance": "Saldo",
         "previousBalance": "Saldo anterior",
-        "subsequentBalance": "Saldo posterior"
+        "subsequentBalance": "Saldo posterior",
+        "defaultPaymentMethod": "Padrão"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
@@ -673,7 +688,10 @@
         "remain_active_session": "Não, continuar com a outra sessão",
         "save_pdf": "Baixar PDF",
         "seeMore": "Ver mais",
-        "seeLess": "Ver menos"
+        "seeLess": "Ver menos",
+        "continue": "Continuar",
+        "next": "Próximo",
+        "previous": "Anterior"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -780,19 +798,27 @@
     },
     "face_match": {
         "label": "Reconhecimento Facial",
+        "face_match": "Validação facial",
         "verified_identity": "Identidade verificada!",
-        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte."
+        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte.",
+        "account_protected": "Sua conta protegida!",
+        "register_description": "Para ter acesso a todas as funcionalidades do site você deverá cadastrar sua foto de segurança. Sua imagem é confidencial não será compartilhada.",
+        "checkNow": "Verificar agora"
     },
     "register": {
         "signupWith": "Inscrever-se com Google",
         "registerGoogleAccount": "Cadastre-se com sua conta do google",
         "fillToRegister": "Preencha os campos para realizar o seu cadastro",
         "protectedByReCaptchaPart1": "Este site é protegido por reCAPTCHA e a",
-        "protectedByReCaptchaPart2": "Política de Privacidade",
+        "protectedByReCaptchaPart2": "política de privacidade",
         "protectedByReCaptchaPart3": "do Google e os",
-        "protectedByReCaptchaPart4": "Termos de Serviço",
+        "protectedByReCaptchaPart4": "termos de serviço",
         "protectedByReCaptchaPart5": "se aplicam.",
-        "registrationBeneficiariesSocialPrograms": "Os beneficiários de programas sociais não podem se registrar."
+        "registrationBeneficiariesSocialPrograms": "Os beneficiários de programas sociais não podem se registrar.",
+        "day":"Dia",
+        "month":"Mês",
+        "year":"Ano",
+        "brasil": "Brasil"
     },
     "registerCancel": {
         "titleCancelRegister": "Tem certeza que deseja cancelar seu registro?",

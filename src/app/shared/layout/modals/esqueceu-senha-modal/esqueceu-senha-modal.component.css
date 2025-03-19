@@ -9,35 +9,78 @@
   }
 
 .modal-header {
-    border-bottom-color: var(--foreground);
     padding: 20px 25px;
+    border-bottom: transparent;
 }
 
 .modal-body {
-    text-align: center;
-    padding: 40px 130px 40px;
+    padding: 0 33px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 h2 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
+    color: var(--foreground-inputs-odds-rgb);
+    font-family: "Open Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
 }
 
 p {
-    color: var(--foreground);
+    color: rgb(var(--foreground-inputs-odds-rgb),0.5);
     margin-bottom: 25px;
 }
 
-
-input {
-    border: 1px solid var(--foreground-inputs-odds);
-    color: var(--foreground-inputs-odds);
-    font-size: 14px;
+.input-md label {
+    color: rgba(var(--foreground-inputs-odds-rgb),0.5);
 }
 
-button {
-    margin-top: 30px;
+.btn-close {
+    margin-right: 10px;
+    background: none;
+    opacity: 1;
+}
+
+input.inverted-out {
+    opacity: 1;
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+}
+
+input.inverted-out:focus {
+    color: var(--foreground-inputs-odds);
+    border: 1px solid var(--highlight);
+}
+
+input.inverted-out:focus label{
+    color: var(--foreground-inputs-odds);
+}
+
+.form-control.is-invalid:focus {
+    -webkit-box-shadow: none;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+}
+
+.btn-reset {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
+    width: 100%;
+}
+
+.icon-hover {
+    fill: var(--header);
+}
+
+.btn-close i {
+    fill: rgb(var(--foreground-inputs-odds-rgb),0.5);
+    color: rgb(var(--foreground-inputs-odds-rgb),0.5);
 }
 
 .esqueceu-senha {
@@ -50,30 +93,36 @@ button {
 
 .registrar {
     font-size: 12px;
-    margin-bottom: 30px;
+    text-align: center;
+    padding-bottom: 25px;
 }
 
 .registrar a {
     color: var(--highlight);
 }
 
-@media only screen and (max-width: 1024px) {
-    .modal-body {
-        text-align: center;
-        padding: 40px 25px;
-
-        display: flex;
-        flex-direction: column;
-    }
-
-    .modal-body form {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-    }
-
-    .modal-body form > div {
-        flex: 1;
-    }
+.form-forgot-password {
+    display: flex;
+    flex-direction: column;
+    gap: 203px;
 }
 
+.form-forgot {
+    display: flex;
+    flex-direction: column;
+    gap: 16px
+}
+
+.modal-conteiner{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--background) !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .registrar{
+        bottom: 0;
+    }
+}

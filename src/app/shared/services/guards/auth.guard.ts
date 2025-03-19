@@ -49,7 +49,7 @@ export class AuthGuard implements CanActivate {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
-                windowClass: 'modal-550 modal-h-350 modal-login',
+                windowClass: 'modal-400 modal-h-350 modal-login',
             });
             modalRef.result.then((isLogged: boolean) => resolve(isLogged))
         });

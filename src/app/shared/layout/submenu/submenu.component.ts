@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { Router } from '@angular/router';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 import { TranslateService } from '@ngx-translate/core';
-import { LayoutService } from './../../../services';
+import { AuthService, LayoutService } from './../../../services';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Ga4Service , EventGa4Types} from '../../services/ga4/ga4.service';
@@ -19,6 +19,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() active: boolean = true;
     @Input() version: string = 'v1';
     @Input() category: string = 'esporte';
+    @Input() hasRecommendations: boolean = false;
 
     @Input() menuItemSelected: string;
     @Output() onClick = new EventEmitter();
@@ -33,6 +34,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     submenuItems = [];
     submenu = [];
+    isLoggedIn: boolean;
 
     @HostListener('window:resize', ['$event'])
     onResize() {
@@ -40,15 +42,16 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     constructor(
-        private paramsService: ParametrosLocaisService,
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private el: ElementRef,
+        private ga4Service: Ga4Service,
+        private layoutService: LayoutService,
         public location: Location,
+        private paramsService: ParametrosLocaisService,
+        private renderer: Renderer2,
         private router: Router,
         private translate: TranslateService,
-        private el: ElementRef,
-        private layoutService: LayoutService,
-        private renderer: Renderer2,
-        private ga4Service: Ga4Service
     ) {
     }
 
@@ -67,7 +70,10 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
             this.isMobile = true;
         }
 
-        this.atualizarSubmenu();
+        this.authService.logado.subscribe((status) => {
+            this.isLoggedIn = status;
+            this.atualizarSubmenu();
+        })
 
         this.translate.onLangChange.subscribe(() => {
             this.atualizarSubmenu();
@@ -305,7 +311,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
             },
             {
                 id: 'cassino',
-                name: this.translate.instant('submenu.todos'),
+                name: this.translate.instant('submenu.lobby'),
                 link: '/casino/c/wall/todos',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino',
@@ -313,6 +319,14 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
                 svgStroke: true,
                 svgSrc: 'https://weebet.s3.amazonaws.com/cdn/img/icons/todos.svg',
                 active: this.paramsService.getOpcoes().casino
+            },
+            {
+                id: 'recommendedToYou',
+                name: this.translate.instant('submenu.recommendedToYou'),
+                link: '/casino/c/wall/recommendedToYou',
+                icon_class: 'fa-solid fa-dice',
+                category: 'cassino',
+                active: this.paramsService.getOpcoes().casino && this.isLoggedIn && this.hasRecommendations
             },
             {
                 id: 'news', //TODO: Procurar saber url para categorias novidades
@@ -392,7 +406,7 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
             },
             {
                 id: 'cassino-live',
-                name: this.translate.instant('submenu.todos'),
+                name: this.translate.instant('submenu.lobby'),
                 link: '/casino/cl/wall-live/todos',
                 icon_class: 'fa-solid fa-dice',
                 category: 'cassino-live',

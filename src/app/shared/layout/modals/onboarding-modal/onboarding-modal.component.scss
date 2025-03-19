@@ -1,0 +1,154 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 22px;
+    background-color: var(--header);
+    min-height: 100vh;
+}
+
+.modal-content {
+    border: 0;
+    height: inherit;
+    background: var(--header) !important;
+    color: var(--foreground) !important;
+}
+
+.modal-header-onboarding{
+    color: var(--foreground);
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.modal-header-onboarding-item{
+    height: 40px;
+    background: var(--background);
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-footer-onboarding{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 7%;
+}
+
+.btn-footer{
+    text-decoration: none;
+    color: #0BE68D;
+}
+
+.body-button{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.title-onboarding-container{
+    width: 260px;
+}
+
+.btn-close-onboarding i {
+    font-size: 22px;
+    color: var(--highlight);
+}
+
+.btn-close-onboarding{
+    box-sizing: content-box;
+    color: #000;
+    border: 0;
+    border-radius: 0.375rem;
+    opacity: 0.5;
+}
+
+.title-onboarding{
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 46px;
+    background-color: #0A0A0A;
+    padding: 0 0;
+}
+
+.body-text{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.article-onboarding{
+    gap: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-paragraph{
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button-onboarding{
+    display: flex;
+    height: 40px;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: 1px solid #0BE68D;
+    background: #181818;
+    text-decoration: none;
+    color: white;
+}
+
+.item-hr{
+    width: 45%;
+}
+
+.item-text-or{
+    width: 10%;
+    text-align: center;
+}
+
+.container-text-or{
+    display: flex;
+    align-items: center;
+}
+
+
+@media only screen and (min-width: 1025px) {
+    .container{
+        min-height: 50vh;
+        min-width: 55vh;
+    }
+
+    .modal-footer-onboarding{
+        margin-bottom: 6%;
+        margin-top: 25%;
+    }
+}
+
+@media only screen and (min-width: 2056px) {
+    .container{
+        min-height: 50vh;
+        min-width: 45vh;
+    }
+}

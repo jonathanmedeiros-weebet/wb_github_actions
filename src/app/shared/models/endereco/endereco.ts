@@ -8,4 +8,5 @@ export class Endereco {
     numero: number;
     cidade: Cidade;
     estado: Estado;
+    complement?: string;
 }

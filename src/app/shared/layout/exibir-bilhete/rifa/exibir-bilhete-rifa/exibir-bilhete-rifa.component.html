@@ -46,7 +46,7 @@
     <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
         {{'geral.premio' | translate}}: <span style="float: right;">{{aposta.premio | currency}}</span>
     </p>
-    <p *ngIf="enabledBookie" class="cambista-paga">
+    <p *ngIf="enabledBookie && cambistaPaga > 0" class="cambista-paga">
         Cambista paga: <span style="float: right;">{{cambistaPaga ?? 0 | currency}}</span>
     </p>
 </div>
