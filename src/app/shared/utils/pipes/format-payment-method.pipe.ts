@@ -34,7 +34,7 @@ export class FormatPaymentMethodPipe implements PipeTransform {
             case 'lisboapay':
                 return 'LisboaPAY';
             case 'paybrokers':
-                return 'Paybrokers'
+                return 'Paybrokers';
 		}
 
         return "";
