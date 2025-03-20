@@ -173,7 +173,7 @@
             id: _id,
             name: nome.replace(`${region._id}: `, '').toUpperCase(),
             label: nome.toUpperCase(),
-            image: !isIcon ? `https://cdn.wee.bet/flags/1x1/${region.sigla}.svg` : null,
+            image: !isIcon ? `https://wb-assets.com/flags/1x1/${region.sigla}.svg` : null,
             icon: isIcon ? iconComponent : null
           }));
   
@@ -182,7 +182,7 @@
             name: region._id.toUpperCase(),
             label: region._id.toUpperCase(),
             slug: region.sigla,
-            image: !isIcon ? `https://cdn.wee.bet/flags/1x1/${region.sigla}.svg` : null,
+            image: !isIcon ? `https://wb-assets.com/flags/1x1/${region.sigla}.svg` : null,
             icon: isIcon ? iconComponent : null,
             championships
           };
@@ -368,7 +368,7 @@
       },
   
       changeSrcWhenImageError (event) {
-        event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+        event.target.src = 'https://wb-assets.com/img/times/m/default.png';
       },
   
       handleLive() {

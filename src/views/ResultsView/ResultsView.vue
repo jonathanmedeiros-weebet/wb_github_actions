@@ -150,7 +150,7 @@ export default {
       return day.format('YYYY-MM-DD') === this.activeDay;
     },
     changeSrcWhenImageError(event) {
-      event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+      event.target.src = 'https://wb-assets.com/img/times/m/default.png';
     },
     async getSports() {
       try {

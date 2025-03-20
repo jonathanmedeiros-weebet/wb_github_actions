@@ -114,7 +114,7 @@ export default {
         transformChampionshipList(championship) {
             const newChampionship = { ...championship };
             if(newChampionship.regiao_sigla !== 'ww') {
-                newChampionship.image = `https://cdn.wee.bet/flags/1x1/${newChampionship.regiao_sigla}.svg`;
+                newChampionship.image = `https://wb-assets.com/flags/1x1/${newChampionship.regiao_sigla}.svg`;
             } else {
                 newChampionship.icon = IconGlobal;
             }
@@ -147,7 +147,7 @@ export default {
             this.$emit('gameClick', gameId);
         },
         changeSrcWhenImageError (event) {
-            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+            event.target.src = 'https://wb-assets.com/img/times/m/default.png';
         },
         championshipWasOpened(championshipId) {
             return (this.ticketStore.championshipOpened ?? []).includes(championshipId);

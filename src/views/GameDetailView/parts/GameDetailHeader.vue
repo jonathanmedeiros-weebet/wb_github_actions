@@ -104,13 +104,13 @@ export default {
         teamA() {
             return {
                 name: this.game.time_a_nome,
-                image: `https://cdn.wee.bet/img/times/m/${this.game.time_a_img ?? 'default'}.png`
+                image: `https://wb-assets.com/img/times/m/${this.game.time_a_img ?? 'default'}.png`
             }
         },
         teamB() {
             return {
                 name: this.game.time_b_nome,
-                image: `https://cdn.wee.bet/img/times/m/${this.game.time_b_img ?? 'default'}.png`
+                image: `https://wb-assets.com/img/times/m/${this.game.time_b_img ?? 'default'}.png`
             }
         },
         teamScoreA() {
@@ -122,7 +122,7 @@ export default {
     },
     methods: {
         changeSrcWhenImageError (event) {
-            event.target.src = 'https://cdn.wee.bet/img/times/m/default.png';
+            event.target.src = 'https://wb-assets.com/img/times/m/default.png';
         }
     }
 }
