@@ -170,6 +170,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                                     this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                     this.faceMatchChangePasswordValidated = true;
                                     this.cd.detectChanges();
+                                    this.unsub$.next();
+                                    this.unsub$.complete();
                                 }, error: (error) => {
                                     this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                                     this.faceMatchChangePasswordValidated = false;
@@ -188,6 +190,8 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                                     this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                     this.faceMatchChangePasswordValidated = true;
                                     this.cd.detectChanges();
+                                    this.unsub$.next();
+                                    this.unsub$.complete();
                                 },
                                 error: (error) => {
                                     this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
