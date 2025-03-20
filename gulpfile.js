@@ -139,10 +139,10 @@ gulp.task('sandbox.wee.bet', function (done) {
     });
 });
 
-gulp.task('esportivatop.wee.bet', function (done) {
+gulp.task('esportivatop.com', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "esportivatop.wee.bet",
+        host: "esportivatop.com",
         banca: "Esportiva Top",
         styles: ""
     });
@@ -592,10 +592,10 @@ gulp.task('tubaraobet.wee.bet', function (done) {
     });
 });
 
-gulp.task('rrbets.wee.bet', function (done) {
+gulp.task('rrbets.site', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "rrbets.wee.bet",
+        host: "rrbets.site",
         banca: "RR BETS",
         styles: "",
     });
@@ -702,10 +702,10 @@ gulp.task('xbetsports.net', function (done) {
     });
 });
 
-gulp.task('betsnordeste.wee.bet', function (done) {
+gulp.task('betsnordeste.site', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "betsnordeste.wee.bet",
+        host: "betsnordeste.site",
         banca: "BETS NORDESTE",
         styles: "",
     });
@@ -793,10 +793,10 @@ gulp.task('topbetgames.wee.bet', function (done) {
     });
 });
 
-gulp.task('sm7.wee.bet', function (done) {
+gulp.task('sm7.site', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "sm7.wee.bet",
+        host: "sm7.site",
         banca: "SM7",
         styles: "",
     });
@@ -812,10 +812,10 @@ gulp.task('futpix.wee.bet', function (done) {
     });
 });
 
-gulp.task('betminas.wee.bet', function (done) {
+gulp.task('betminas.club', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "betminas.wee.bet",
+        host: "betminas.club",
         banca: "BET MINAS",
         styles: "",
     });
