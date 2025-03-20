@@ -12,6 +12,7 @@ import { jwtDecode } from 'jwt-decode';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
+import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
 
 @Component({
   selector: 'app-register-v3-modal',
@@ -21,7 +22,7 @@ import { RecaptchaComponent } from 'ng-recaptcha';
 export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit {
     @ViewChild('documentNumberElement') documentNumberElement: ElementRef<HTMLInputElement>;
     @ViewChild('captchaRef') captchaRef: RecaptchaComponent;
-    
+
     public modalClose = true;
     public registerCancel = false;
     public form: FormGroup;
@@ -34,6 +35,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private menorDeIdade: boolean = false;
     public possuiCodigoAfiliado = false;
     private parameters: any = {};
+    private parametersList;
     private promocoes: any;
     public promocaoAtiva: boolean = false;
     public valorPromocao: number | null = null;
@@ -77,7 +79,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         private countriesService: CountriesService,
         private modalService: NgbModal,
         private bannerService: BannerService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private campanhaService: CampanhaAfiliadoService
     ) {
         super();
     }
@@ -102,6 +105,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.provedorCaptcha = this.paramsService.getOpcoes().provedor_captcha;
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
         this.countryCodes = this.countriesService.getDialcodes();
+        this.parametersList = this.paramsService.getOpcoes().enabledParameters;
 
         this.createForm();
 
@@ -110,6 +114,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.hCaptchaLanguage = res.lang;
             this.cd.detectChanges();
         });
+
+        this.handleQueryParams();
 
         setTimeout(() => this.documentNumberElement.nativeElement.focus(), 500);
     }
@@ -165,6 +171,68 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         }
     }
 
+    private handleQueryParams(): void {
+        this.route.queryParams
+            .subscribe((params) => {
+
+                if (params.ref || params.afiliado) {
+                    const codigoAfiliado = params.ref ?? params.afiliado;
+
+                    this.clientesService.codigoFiliacaoCadastroTemp = codigoAfiliado;
+                    localStorage.setItem('codigoAfiliado', codigoAfiliado);
+                } else {
+                    const storagedCodigoAfiliado = localStorage.getItem('codigoAfiliado');
+                    if (storagedCodigoAfiliado) {
+                        this.clientesService.codigoFiliacaoCadastroTemp = storagedCodigoAfiliado;
+                    }
+                }
+
+                if (params.btag) {
+                    localStorage.setItem('btag', params.btag);
+                } else {
+                    const storagedBtag = localStorage.getItem('btag');
+                    if (storagedBtag) {
+                        this.form.patchValue({ btag: storagedBtag });
+                    }
+                }
+
+                if (params.refId) {
+                    localStorage.setItem('refId', params.refId);
+                } else {
+                    const storagedRefId = localStorage.getItem('refId');
+                    if (storagedRefId) {
+                        this.form.patchValue({ refId: storagedRefId });
+                    }
+                }
+
+                if (params.c) {
+                    this.campanhaService.computarAcesso({ campRef: params.c, fonte: params.s }).subscribe();
+
+                    localStorage.setItem('campRef', params.c);
+                    localStorage.setItem('campFonte', params.s);
+                } else {
+                    const campRef = localStorage.getItem('campRef');
+                    const campFonte = localStorage.getItem('campFonte');
+
+                    if (campRef) {
+                        this.form.patchValue({ campRef: campRef, campFonte: campFonte });
+                    }
+                }
+
+                if (this.clientesService.codigoFiliacaoCadastroTemp) {
+                    this.form.get('afiliado').patchValue(this.clientesService.codigoFiliacaoCadastroTemp);
+                    this.possuiCodigoAfiliado = true;
+                    this.showAfiliateSection = true;
+                }
+
+                this.parametersList.forEach(param => {
+                    if (params[param]) {
+                        this.parameters[param] = params[param];
+                    }
+                });
+            });
+    }
+
     createForm() {
         this.form = this.fb.group({
             nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100), Validators.pattern(/[a-zA-Z]/)]],
@@ -184,7 +252,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             afiliado: [null, [Validators.maxLength(50)]],
 
             btag: [this.route.snapshot.queryParams.btag],
-            refId: [this.route.snapshot.queryParams.refId],
+            refId: [this.route.snapshot.queryParams.ref],
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null],
@@ -286,7 +354,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     this.activeModal.dismiss();
 
                     this.auth.setIsCliente(true);
-                    
+
                     const user = res.result.user;
                     sessionStorage.setItem('user', JSON.stringify(user));
                     localStorage.removeItem('codigoAfiliado');
@@ -356,7 +424,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
                             this.dataNascimento = this.formatarDataComAsterisco(dadosDescriptografados.nascimento);
                             this.activeEditingCPF = false;
-                        } 
+                        }
                     },
                     error => {
                         this.form.patchValue({ nome: '' });
