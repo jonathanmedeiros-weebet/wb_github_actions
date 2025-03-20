@@ -37,10 +37,15 @@ export const getBetTypes = async () => {
     const { lokiUrl } = useConfigClient();
 
     const betTypeUrl = `${lokiUrl}/parameters/bet-type`;
-    const resp: any = await axiosInstance().get(betTypeUrl);
-    
-    localStorageService.remove(LocalStorageKey.BET_TYPES);
-    localStorageService.set(LocalStorageKey.BET_TYPES, resp.results);
+    try {
+        const resp: any = await axiosInstance().get(betTypeUrl);
+        
+        localStorageService.remove(LocalStorageKey.BET_TYPES);
+        localStorageService.set(LocalStorageKey.BET_TYPES, resp.results);
 
-    return resp.results;
+        return resp.results;
+    }
+    catch (error) {
+        console.error('Error getting quotes:', error);
+    }
 }
