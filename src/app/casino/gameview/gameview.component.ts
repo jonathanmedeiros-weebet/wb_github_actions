@@ -149,11 +149,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         const handleWindowChange = () => {
             this.checkIfMobileOrDesktopOrTablet();
-            this.resolveGameScreen();
+            
+            setTimeout(() => {
+                this.resolveGameScreen();
+                this.cd.detectChanges();
+            }, 200)
         };
 
-        window.addEventListener('resize', handleWindowChange);
-        window.addEventListener('orientationchange', handleWindowChange);
+        window.addEventListener("resize", handleWindowChange);
         
         this.hideLiveChats();
 
@@ -227,7 +230,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.appendScriptGalaxsys();
         }
 
-        if ((this.isMobile || this.isTablet) && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
+        if ((this.isMobile || this.isTablet || this.isHorizontalMobile) && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
             this.disableHeader();
         }
 
@@ -275,11 +278,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         return this.isMobile = true;
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize(event: any) {
-        this.checkIfMobileOrDesktopOrTablet();
     }
 
     ngAfterViewInit() {
@@ -562,7 +560,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
 
         if (gameFrame.classList.contains('in-game')) {
-            this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
+            this.renderer.setStyle(gameFrame, 'height', 'calc(100dvh - 50px)');
         }
 
         this.fullscreen = true;
@@ -1083,11 +1081,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (this.isHorizontalMobile && this.isDesktop) {
             if (gameView) {
                 this.renderer.setStyle(gameView, 'padding-top', '50px');
+                this.renderer.setStyle(gameView, 'width', '100dvw');
+                this.renderer.setStyle(gameView, 'height', '100dvh');
                 this.renderer.setStyle(gameView, 'position', 'fixed');
+                this.renderer.setStyle(gameView, 'top', '0');
             }
 
             if (gameFrame) {
-                this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100dvh - 50px)');
             }
         }
     }
@@ -1107,10 +1108,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.disableHeader();
             this.fixMobileHeader();
         }
-
-        if (this.isHorizontalMobile && this.gameMode === 'REAL') {
-            this.disableHeader();
-        }
         
         if (this.isTablet && this.gameMode === 'REAL') {
             this.disableHeader();
@@ -1118,6 +1115,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if ((this.isDesktop || this.isHorizontalMobile) && this.gameMode === 'REAL') {
+            this.disableHeader();
             this.fixTabletAndDesktopScreen();
         }
     }
