@@ -15,8 +15,8 @@ Vue.use(PiniaVuePlugin)
 Vue.use(VueRouter)
 Vue.use(VueLazyload, {
     preLoad: 1.3, // Distância antes de carregar
-    error: 'https://cdn.wee.bet/img/times/m/default.png', // Imagem de erro
-    loading: 'https://cdn.wee.bet/img/times/m/default.png', // Imagem enquanto carrega
+    error: 'https://wb-assets.com/img/times/m/default.png', // Imagem de erro
+    loading: 'https://wb-assets.com/img/times/m/default.png', // Imagem enquanto carrega
     attempt: 1, // Tentativas de carregamento
 });
 
