@@ -1757,10 +1757,10 @@ gulp.task('megapix.bet', function (done) {
     });
 });
 
-gulp.task('pinbet.io', function (done) {
+gulp.task('pinbet.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
-        host: "pinbet.io",
+        host: "pinbet.bet",
         banca: "PINBET",
         styles: "",
         xtremepush_sdk: "l5zlJi7majbIVZTxwtIgEYppdmK4KazO"
