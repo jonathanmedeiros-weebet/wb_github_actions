@@ -370,11 +370,11 @@ gulp.task('footbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('rubinhosports.wee.bet', function (done) {
+gulp.task('rblt.me', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "rubinhosports.wee.bet",
-        banca: "Rubinho Sports",
+        host: "rblt.me",
+        banca: "RBLT",
         styles: "",
     });
 });
@@ -1051,12 +1051,12 @@ gulp.task('realsport.wee.bet', function (done) {
     });
 });
 
-// old pointbet.wee.bet
-gulp.task('pimplay.com', function (done) {
+// old pimplay.com
+gulp.task('pinplay.bet', function (done) {
     tasks(done, {
         server: "front2.wee.bet",
-        host: "pimplay.com",
-        banca: "PIMPLAY",
+        host: "pinplay.bet",
+        banca: "PINPLAY",
         styles: "",
     });
 });
@@ -1757,10 +1757,10 @@ gulp.task('megapix.bet', function (done) {
     });
 });
 
-gulp.task('pinbet.io', function (done) {
+gulp.task('pinbet.bet', function (done) {
     tasks(done, {
         server: "front5.wee.bet",
-        host: "pinbet.io",
+        host: "pinbet.bet",
         banca: "PINBET",
         styles: "",
         xtremepush_sdk: "l5zlJi7majbIVZTxwtIgEYppdmK4KazO"
@@ -2087,6 +2087,24 @@ gulp.task('vitoriasports.vip', function (done) {
         server: "front2.wee.bet",
         host: "vitoriasports.vip",
         banca: "VITÓRIA SPORTS",
+        styles: ""
+    });
+});
+
+gulp.task('dentrodaaposta.com', function (done) {
+    tasks(done, {
+        server: "front2.wee.bet",
+        host: "dentrodaaposta.com",
+        banca: "DENTRO DA APOSTA",
+        styles: ""
+    });
+});
+
+gulp.task('deubet.io', function (done) {
+    tasks(done, {
+        server: "front3.wee.bet",
+        host: "deubet.io",
+        banca: "DEU BET",
         styles: ""
     });
 });
