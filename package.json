@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --port 7000",
-    "build": "run-p type-check build-only",
+    "build": "VITE_BASE_PATH=/ run-p type-check build-only",
+    "build:fronts": "VITE_BASE_PATH=/app-cambista/ run-p type-check build-only",
+    "build:s3": "VITE_BASE_PATH=/ run-p type-check build-only",
+    "deploy": "./deploy.sh",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit"
