@@ -6,8 +6,7 @@ export const prepareConfigClient = async (route: any) => {
     const {
         setConfig,
         setReadyForUse,
-        setParams,
-        setBetyTypes
+        setParams
     } = useConfigClient();
 
     setReadyForUse(false);
@@ -22,9 +21,7 @@ export const prepareConfigClient = async (route: any) => {
         });
     }
 
-    const betTypes = await getBetTypes();
-    setBetyTypes(betTypes);
-    
+    getBetTypes();
 
     const params = await getParams();
     setParams(params);
