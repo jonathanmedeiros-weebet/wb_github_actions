@@ -574,10 +574,10 @@ gulp.task('garanhunsbet.site', function (done) {
     });
 });
 
-gulp.task('cearabetsplacardarodada.wee.bet', function (done) {
+gulp.task('cearabetsplacardarodada.site', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "cearabetsplacardarodada.wee.bet",
+        host: "cearabetsplacardarodada.site",
         banca: "CEARÁ BETS",
         styles: "",
     });
