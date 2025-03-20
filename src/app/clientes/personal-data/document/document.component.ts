@@ -77,7 +77,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
         }
 
         if (this.faceMatchEnabled && this.faceMatchType == 'legitimuz') {
-            this.legitimuzService.curCustomerIsVerified
+            this.legitimuzService.curCustomerIsVerified.take(1)
                 .subscribe(async (curCustomerIsVerified) => {
                     this.cd.detectChanges();
                     if (curCustomerIsVerified) {
