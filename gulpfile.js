@@ -148,10 +148,10 @@ gulp.task('esportivatop.com', function (done) {
     });
 });
 
-gulp.task('major.wee.bet', function (done) {
+gulp.task('majorsport.vip', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "major.wee.bet",
+        host: "majorsport.vip",
         banca: "Major",
         styles: ""
     });
@@ -619,10 +619,10 @@ gulp.task('maranhaobets.net', function (done) {
     });
 });
 
-gulp.task('ligabet.wee.bet', function (done) {
+gulp.task('ligabet.click', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "ligabet.wee.bet",
+        host: "ligabet.click",
         banca: "LIGA BET",
         styles: "",
     });
@@ -784,10 +784,10 @@ gulp.task('aposta99.wee.bet', function (done) {
     });
 });
 
-gulp.task('topbetgames.wee.bet', function (done) {
+gulp.task('topbetgames.net', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "topbetgames.wee.bet",
+        host: "topbetgames.net",
         banca: "TOP BET GAMES",
         styles: "",
     });
@@ -802,10 +802,10 @@ gulp.task('sm7.site', function (done) {
     });
 });
 
-gulp.task('futpix.wee.bet', function (done) {
+gulp.task('futpix.online', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "futpix.wee.bet",
+        host: "futpix.online",
         shared_url: "futpix.com.br",
         banca: "FUTPIX",
         styles: "",
@@ -906,10 +906,10 @@ gulp.task('ricardo.wee.bet', function (done) {
     });
 });
 
-gulp.task('nautsports.wee.bet', function (done) {
+gulp.task('nautsports.club', function (done) {
     tasks(done, {
         server: "front1.weebet.tech",
-        host: "nautsports.wee.bet",
+        host: "nautsports.club",
         banca: "NAUTSPORTS",
         styles: "",
     });
@@ -1079,10 +1079,10 @@ gulp.task('megasports.bet', function (done) {
     });
 });
 
-gulp.task('81betpix.wee.bet', function (done) {
+gulp.task('81br.net', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "81betpix.wee.bet",
+        host: "81br.net",
         banca: "81 BET PIX",
         styles: "",
     });
