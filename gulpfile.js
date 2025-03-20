@@ -1565,8 +1565,7 @@ gulp.task('multisports.bet', function (done) {
         server: "front4.weebet.tech",
         host: "multisports.bet",
         banca: "MULTISPORTS",
-        styles: "",
-        dominioTemp: "multisports.wee.bet"
+        styles: ""
     });
 });
 
