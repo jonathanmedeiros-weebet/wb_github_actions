@@ -289,7 +289,7 @@
   
           const championshipList = [ ...this.homeStore.championshipList ];
           let championshipIndex = championshipList.findIndex((championship) => championship._id == campeonato._id);
-          const hasChampionship = championshipIndex =! -1;
+          const hasChampionship = championshipIndex != -1;
   
           if(hasChampionship) {
             const gameIndex = championshipList[championshipIndex].jogos.findIndex(game => game._id == id);
