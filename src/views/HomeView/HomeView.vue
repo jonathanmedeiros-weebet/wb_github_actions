@@ -161,7 +161,7 @@ export default {
 
       switch (homePage) {
         case 'sport':
-          this.setSportModality();
+          this.setSportModality(false);
           break;
         case 'lottery':
           this.setLotteryModality();
@@ -170,16 +170,16 @@ export default {
           this.setPopularLotteryModality();
           break;
         default:
-          this.setSportModality();
+          this.setSportModality(false);
           break;
       }
     },
 
-    setSportModality() {
+    setSportModality(forceLoading = true) {
       const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
-      this.$refs['sport-modality']?.onInit(true);
+      this.$refs['sport-modality']?.onInit(forceLoading);
     },
 
     setLotteryModality() {
