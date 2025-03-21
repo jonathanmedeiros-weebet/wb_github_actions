@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {DepositoRoutingModule} from './deposito-routing.module';
-import {SharedModule} from '../../shared/shared.module';
-import {DepositoComponent} from './deposito.component';
-import {DepositoPixComponent, NgbdModalContent} from './pix/deposito-pix.component';
-import {DepositoWhatsappComponent} from './whatsapp/deposito-whatsapp.component';
-import {NgxCurrencyModule} from 'ngx-currency';
+import { DepositoRoutingModule } from './deposito-routing.module';
+import { SharedModule } from '../../shared/shared.module';
+import { DepositoComponent } from './deposito.component';
+import { DepositoPixComponent, NgbdModalContent } from './pix/deposito-pix.component';
+import { DepositoWhatsappComponent } from './whatsapp/deposito-whatsapp.component';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { ClipboardModule } from 'ngx-clipboard';
 import { DepositoOpenModalComponent } from './deposito-open-modal.component';
 import { QrCodeModule } from 'ng-qrcode';
@@ -24,7 +24,7 @@ import { QrCodeModule } from 'ng-qrcode';
         SharedModule,
         CommonModule,
         DepositoRoutingModule,
-        NgxCurrencyModule,
+        NgxCurrencyDirective,
         ClipboardModule,
         QrCodeModule
     ]

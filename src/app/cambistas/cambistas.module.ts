@@ -14,9 +14,8 @@ import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CartaoComponent } from './cartao/cartao.component';
 import { SolicitacaoSaqueComponent } from './solicitacao-saque/solicitacao-saque.component';
-import {TranslateModule} from '@ngx-translate/core';
 import { JogoService } from '../shared/services/aposta-esportiva/jogo.service';
-import {NgxMaskModule} from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
     declarations: [
@@ -26,16 +25,16 @@ import {NgxMaskModule} from 'ngx-mask';
         TabelaComponent,
         MovimentacaoComponent,
         CartaoComponent,
-        SolicitacaoSaqueComponent
+        SolicitacaoSaqueComponent,
     ],
     imports: [
         SharedModule,
         CambistasRoutingModule,
         NgChartsModule,
         NgbModule,
+        NgxMaskDirective,
+        NgxMaskPipe,
         NgxSkeletonLoaderModule.forRoot({loadingText: 'This item is actually loading...'}),
-        TranslateModule,
-        NgxMaskModule
     ],
     providers: [
         RelatorioService,
@@ -43,7 +42,8 @@ import {NgxMaskModule} from 'ngx-mask';
         DesafioApostaService,
         AcumuladaoService,
         NgbActiveModal,
-        JogoService
+        JogoService,
+        provideNgxMask()
     ]
 })
 export class CambistasModule {
