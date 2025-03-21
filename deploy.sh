@@ -112,7 +112,7 @@ if [[ "$resposta" =~ ^[Yy]$ ]]; then
 
     npm run build:s3
 
-    aws s3 sync ./dist s3://$BUCKET_NAME --delete
+    aws s3 sync ./dist s3://$BUCKET_NAME --delete --acl public-read
    
 elif [[ "$resposta" =~ ^[Nn]$ ]]; then
     echo "Você escolheu NÃO! Os fronts não serão atualizados."
