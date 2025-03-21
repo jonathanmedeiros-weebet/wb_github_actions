@@ -680,10 +680,10 @@ gulp.task('i2bets.com', function (done) {
     });
 });
 
-gulp.task('lancesports.wee.bet', function (done) {
+gulp.task('lancesports.site', function (done) {
     tasks(done, {
         server: "front1.weebet.tech",
-        host: "lancesports.wee.bet",
+        host: "lancesports.site",
         banca: "LANCE SPORTS",
         styles: "",
     });
