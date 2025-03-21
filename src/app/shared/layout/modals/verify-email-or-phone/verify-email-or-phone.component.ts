@@ -92,10 +92,9 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
       .requestConfirmationCode(this.verificationType)
       .toPromise()
       .then(() => {
-        const translateKey = this.verificationType == VerificationTypes.EMAIL
-          ? 'senhas.codigoDeVerificacaoPorEmail'
-          : 'senhas.codigoDeVerificacaoPorSms'
-        this.messageService.success(this.translate.instant(translateKey));
+        if (this.verificationType == VerificationTypes.EMAIL) {
+          this.messageService.success(this.translate.instant('senhas.codigoDeVerificacaoPorEmail'));
+        }
       })
       .catch((error) => {
         this.messageService.error(error);
