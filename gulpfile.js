@@ -729,10 +729,10 @@ gulp.task('lancesports.wee.bet', function (done) {
     });
 });
 
-gulp.task('betimperativo.wee.bet', function (done) {
+gulp.task('betimperativoo.com.br', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "betimperativo.wee.bet",
+        host: "betimperativoo.com.br",
         shared_url: "betimperativo.com.br",
         banca: "Bet Imperativo",
         styles: "",
