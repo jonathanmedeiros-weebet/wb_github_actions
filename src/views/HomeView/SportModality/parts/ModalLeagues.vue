@@ -87,7 +87,7 @@ export default {
         },
         handleSelect(item) {
             this.$refs['wmodal'].handleClose();
-            this.$emit('click', {...item});
+            this.$emit('click', {...item}, true);
         }
     }
 }

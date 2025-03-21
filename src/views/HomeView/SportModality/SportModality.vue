@@ -16,7 +16,7 @@
           <span>{{ league.label }}</span>
         </SelectFake>
 
-        <GameList :infiniteScroll="true" @gameClick="handleGameDetailClick" />
+        <GameList ref="game-list" @gameClick="handleGameDetailClick" />
       </template>
     </section>
 
@@ -256,7 +256,7 @@
             isPopularLeague
           );
 
-          if (!championships || championships.length === 0 && !this.liveActived) {
+          if ((!championships || championships.length === 0) && !this.liveActived) {
             const nextDateEvents = this.dateSelected.add(1, 'day');
             this.homeStore.setDate(nextDateEvents);
 
@@ -348,6 +348,10 @@
         delete regionOrChampionship?.championships;
         this.homeStore.setLeague(regionOrChampionship);
   
+        this.homeStore.setPaginate(10);
+        this.homeStore.setChampionshipList([]);
+        this.$refs['game-list'].championshipListSecondary = [];
+
         await this.prepareChampionshipListByLeague();
   
         this.loading = false;
