@@ -28,6 +28,7 @@ import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from './shared/services/timer.service';
 import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
+import { RegisterV3ModalComponent } from './shared/layout/modals/register-v3-modal/register-v3-modal.component';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -212,7 +213,15 @@ export class AppComponent implements OnInit {
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
 
-            this.auth.openRegisterV3Modal();
+            // this.auth.openRegisterV3Modal();
+            const modalRef = this.modalService.open(RegisterV3ModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: `modal-400 modal-cadastro-cliente`,
+                backdrop: 'static'
+            });
+            modalRef.componentInstance.hasRegisterBanner = false;
         }
 
         if (this.router.url.includes('/login')) {

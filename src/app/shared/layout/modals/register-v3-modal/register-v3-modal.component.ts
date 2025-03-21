@@ -13,6 +13,8 @@ import { CountriesService } from 'src/app/shared/services/utils/countries.servic
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
+import { Location } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-register-v3-modal',
@@ -23,6 +25,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     @ViewChild('documentNumberElement') documentNumberElement: ElementRef<HTMLInputElement>;
     @ViewChild('captchaRef') captchaRef: RecaptchaComponent;
 
+    unsub$ = new Subject();
     public modalClose = true;
     public registerCancel = false;
     public form: FormGroup;
@@ -60,6 +63,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public showNationalitySection: boolean = false;
     public showNationalityOptions: boolean = false;
     public nationalities = this.countriesService.getCountries();
+    private previousUrl: string;
 
     constructor(
         private fb: FormBuilder,
@@ -80,7 +84,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         private modalService: NgbModal,
         private bannerService: BannerService,
         private accountVerificationService: AccountVerificationService,
-        private campanhaService: CampanhaAfiliadoService
+        private campanhaService: CampanhaAfiliadoService,
+        private location: Location
     ) {
         super();
     }
@@ -98,6 +103,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     }
 
     ngOnInit() {
+        this.handleRoute();
         this.getPromocoes();
         this.prepareBanner();
 
@@ -118,6 +124,13 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.handleQueryParams();
 
         setTimeout(() => this.documentNumberElement.nativeElement.focus(), 500);
+    }
+
+    ngOnDestroy() {
+        this.location.replaceState(this.previousUrl);
+
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     private prepareBanner() {
@@ -171,10 +184,41 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         }
     }
 
+    private handleRoute(): void {
+        let queryString = '';
+
+        if (this.router.url.includes('/cadastro')) {
+            const pages = {
+                esporte: 'esportes/futebol',
+                cassino: 'casino',
+                virtual: 'vitual-sports',
+                desafio: 'desafios',
+                acumuladao: 'acumuladao',
+                loteria: 'loterias',
+                cassino_ao_vivo: 'live-casino',
+                rifas: 'rifas/wall'
+            }
+
+            const queryParams = this.route.snapshot.queryParams;
+            queryString = "?" + new URLSearchParams(queryParams).toString();
+
+            const { pagina_inicial, betby } = this.paramsService.getOpcoes();
+
+            if (betby) {
+                pages.esporte = 'sports';
+            }
+
+            this.previousUrl = '/' + (pages[pagina_inicial] ?? '');
+        } else {
+            this.previousUrl = this.router.url;
+        }
+
+        this.location.replaceState(`/cadastro${queryString}`);
+    }
+
     private handleQueryParams(): void {
         this.route.queryParams
             .subscribe((params) => {
-
                 if (params.ref || params.afiliado) {
                     const codigoAfiliado = params.ref ?? params.afiliado;
 
