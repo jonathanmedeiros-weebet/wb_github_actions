@@ -592,15 +592,6 @@ gulp.task('rrbets.site', function (done) {
     });
 });
 
-gulp.task('techbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "techbet.wee.bet",
-        banca: "TECH BET",
-        styles: "",
-    });
-});
-
 gulp.task('maranhaobets.net', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
@@ -1936,15 +1927,6 @@ gulp.task('boaaposta.com', function (done) {
     });
 });
 
-gulp.task('jack77bet.com', function (done) {
-    tasks(done, {
-        server: "front1.weebet.tech",
-        host: "jack77bet.com",
-        banca: "JACK77 ",
-        styles: "",
-    });
-});
-
 gulp.task('copasbet.bet', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
@@ -2023,15 +2005,6 @@ gulp.task('betmania.casino', function (done) {
         server: "front2.weebet.tech",
         host: "betmania.casino",
         banca: "BET MANIA",
-        styles: ""
-    });
-});
-
-gulp.task('buda-bet.com', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "buda-bet.com",
-        banca: "BUDA BET",
         styles: ""
     });
 });
