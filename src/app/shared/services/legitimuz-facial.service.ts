@@ -43,7 +43,7 @@ export class LegitimuzFacialService {
       this.options.onSuccess = (eventName) => {
         if (eventName.name == 'faceindex' && eventName.status == 'success') {
           this.faceIndexSub.next(true)
-          }
+        }
       }
 
       this.options.eventHandler = (eventName) => {
@@ -54,7 +54,8 @@ export class LegitimuzFacialService {
   }
 
   init() {
-    this.sdk = LegitimuzFaceIndex(this.options);    
+    if(this.faceIndexSub.getValue()) this.faceIndexSub.next(false);
+    this.sdk = LegitimuzFaceIndex(this.options);  
   }
 
   mount() {          
@@ -76,6 +77,4 @@ export class LegitimuzFacialService {
   closeModal() {
     this.sdk.closeModal();
   }
-
 }
-
