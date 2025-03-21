@@ -29,7 +29,7 @@
                         </label>
                         <ul>
                             <i></i>
-                            <li *ngFor="let campeonato of campeonatosImpressao | filter:term">
+                            <li *ngFor="let campeonato of campeonatosImpressao">
                                 <label>
                                     <input type="checkbox" [(ngModel)]="campeonato.isSelected"> {{campeonato.nome  }}
                                 </label>

@@ -10,7 +10,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApostaComponent } from './aposta/aposta.component';
 import { TabelaComponent } from './tabela/tabela.component';
 import { DesafioApostaService, AcumuladaoService } from '../services';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MovimentacaoComponent } from './movimentacao/movimentacao.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CartaoComponent } from './cartao/cartao.component';
@@ -35,7 +34,6 @@ import {NgxMaskModule} from 'ngx-mask';
         NgChartsModule,
         NgbModule,
         NgxSkeletonLoaderModule.forRoot({loadingText: 'This item is actually loading...'}),
-        Ng2SearchPipeModule,
         TranslateModule,
         NgxMaskModule
     ],

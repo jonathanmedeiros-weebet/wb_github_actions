@@ -7,14 +7,12 @@ import { LiveWrapperComponent } from './wrapper/live-wrapper.component';
 import { LiveJogoComponent } from './jogo/live-jogo.component';
 import { JogoService, LiveService } from '../../services';
 import { NgbActiveModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
     imports: [
         SharedModule,
         LiveRoutingModule,
         NgbNavModule,
-        Ng2SearchPipeModule
     ],
     declarations: [
         LiveWrapperComponent,
