@@ -146,7 +146,7 @@
       async pageLoad(forceLoading = true) {
         this.loading = forceLoading;
   
-        if(Boolean(this.league)) {
+        if(Boolean(this.league) && this.league.id !== "region_ALL") {
           await this.handleLeague(this.league, forceLoading)
         } else {
           await this.prepareChampionshipList(this.modality.id, null, this.dateSelected.format('YYYY-MM-DD'))
@@ -340,7 +340,7 @@
       handleCloseLeaguesModal() {
         this.showModalLeagues = false;
       },
-      async handleLeague(regionOrChampionship, forceLoading) {
+      async handleLeague(regionOrChampionship, forceLoading = false) {
         this.loading = forceLoading;
         this.regionSelected = '';
         this.handleCloseLeaguesModal();
@@ -348,9 +348,11 @@
         delete regionOrChampionship?.championships;
         this.homeStore.setLeague(regionOrChampionship);
   
-        this.homeStore.setPaginate(10);
-        this.homeStore.setChampionshipList([]);
-        this.$refs['game-list'].championshipListSecondary = [];
+        if(forceLoading) {
+          this.homeStore.setPaginate(10);
+          this.homeStore.setChampionshipList([]);
+          this.$refs['game-list'].championshipListSecondary = [];
+        }
 
         await this.prepareChampionshipListByLeague();
   
