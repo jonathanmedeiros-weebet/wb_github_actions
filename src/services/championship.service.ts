@@ -104,10 +104,18 @@ export const getChampionshipRegionBySportId = async (sportId: string, dateSelect
 
 export const getLiveChampionship = async (sportId: number | string) => {
     try {
-        const { centerUrl, liveChampionships } = useConfigClient();
+        const { centerUrl, liveChampionships, options} = useConfigClient();
         const url = `${centerUrl}/jogos/ao-vivo`;
-        const response: any = await axiosInstance().get(url)
-        return response.result.filter((championship: any) => championship.sport_id == sportId && liveChampionships.includes(championship._id))
+        const response: any = await axiosInstance().get(url)     
+        return response
+            .result
+            .map((championship: any) => {
+                championship.jogos = championship.jogos.filter((game: any) => 
+                    !game.finalizado && game.info.minutos <= options.minuto_encerramento_aovivo && game.total_cotacoes != 0
+                );
+                return championship;
+            })
+            .filter((championship: any) => Boolean(championship.jogos.length) && championship.sport_id == sportId && liveChampionships.includes(championship._id));
     } catch {
         return [];
     }
