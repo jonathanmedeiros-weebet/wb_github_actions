@@ -243,7 +243,6 @@ gulp.task('apostapremiada.bet', function (done) {
     });
 });
 
-
 // Old bet1.wee.bet
 gulp.task('mrsportsdigital.com', function (done) {
     tasks(done, {
@@ -307,7 +306,6 @@ gulp.task('qa1.wee.bet', function (done) {
         styles: ""
     });
 });
-
 
 gulp.task('qa2.wee.bet', function (done) {
     tasks(done, {
