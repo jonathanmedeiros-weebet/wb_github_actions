@@ -8,7 +8,7 @@ import {DepositoPixComponent} from './pix/deposito-pix.component';
 import {NgxCurrencyModule} from 'ngx-currency';
 import {ClipboardModule} from 'ngx-clipboard';
 import {NgbdModalContent} from './pix/deposito-pix.component';
-import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { QrCodeModule } from 'ng-qrcode';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
         DepositoRoutingModule,
         NgxCurrencyModule,
         ClipboardModule,
-        NgxQRCodeModule
+        QrCodeModule
     ]
 })
 export class DepositoModule {
