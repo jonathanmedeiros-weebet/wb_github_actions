@@ -438,10 +438,10 @@ gulp.task('citybets.online', function (done) {
     });
 });
 
-gulp.task('lancebet.wee.bet', function (done) {
+gulp.task('lancet.club', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "lancebet.wee.bet",
+        host: "lancet.club",
         banca: "LANCE BET",
         styles: ""
     });
@@ -615,10 +615,10 @@ gulp.task('starbets.online', function (done) {
     });
 });
 
-gulp.task('dfsportsbet.wee.bet', function (done) {
+gulp.task('dfsgoo.com', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "dfsportsbet.wee.bet",
+        host: "dfsgoo.com",
         banca: "DF SPORTS BET",
         styles: "",
     });
@@ -726,10 +726,10 @@ gulp.task('finasport.wee.bet', function (done) {
     });
 });
 
-gulp.task('aposta99.wee.bet', function (done) {
+gulp.task('aposta99.com.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "aposta99.wee.bet",
+        host: "aposta99.com.br",
         banca: "APOSTA 99",
         styles: "",
     });
@@ -848,10 +848,10 @@ gulp.task('nautsports.club', function (done) {
     });
 });
 
-gulp.task('bet73.wee.bet', function (done) {
+gulp.task('bet73.site', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "bet73.wee.bet",
+        host: "bet73.site",
         banca: "BET 73",
         styles: "",
     });
@@ -948,10 +948,10 @@ gulp.task('primoos.bet', function (done) {
     });
 });
 
-gulp.task('realsport.wee.bet', function (done) {
+gulp.task('realgol.net', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "realsport.wee.bet",
+        host: "realgol.net",
         banca: "REAL SPORT",
         styles: "",
     });
