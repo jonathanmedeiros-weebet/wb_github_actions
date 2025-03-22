@@ -420,10 +420,10 @@ gulp.task('apremiada.bet', function (done) {
     });
 });
 
-gulp.task('betsports.wee.bet', function (done) {
+gulp.task('sportss.vip', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "betsports.wee.bet",
+        host: "sportss.vip",
         banca: "BET SPORTS",
         styles: ""
     });
