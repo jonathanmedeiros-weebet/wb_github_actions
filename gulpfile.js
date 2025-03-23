@@ -93,10 +93,10 @@ function tasks(done, config) {
     done();
 }
 
-gulp.task('vipsports.wee.bet', function (done) {
+gulp.task('vipsports.digital', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "vipsports.wee.bet",
+        host: "vipsports.digital",
         banca: "Vip Sports",
         styles: "--header: #222d32; --foreground-header: #e50d1b; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #e50d1b; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
@@ -662,10 +662,10 @@ gulp.task('betsnordeste.site', function (done) {
     });
 });
 
-gulp.task('esportebet.wee.bet', function (done) {
+gulp.task('monteirosports.com', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "esportebet.wee.bet",
+        host: "monteirosports.com",
         banca: "ESPORTE BET",
         styles: "",
     });
@@ -884,10 +884,10 @@ gulp.task('apostasmax.com', function (done) {
     });
 });
 
-gulp.task('ritsbet.wee.bet', function (done) {
+gulp.task('expressinhofc.com.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "ritsbet.wee.bet",
+        host: "expressinhofc.com.br",
         banca: "RITS BET",
         styles: "",
     });
