@@ -94,6 +94,7 @@ echo ""
 if [[ "$resposta" =~ ^[Yy]$ ]]; then
     echo "Você escolheu SIM! Executando ação..."
     export BUCKET_NAME="weebet-cambista-app"
+    export DISTRIBUTION_ID="E25X60X8U0HK9K"
 
     if ! command -v aws &> /dev/null; then
         echo "❌ AWS CLI não está instalado! Instale antes de continuar."
@@ -110,9 +111,54 @@ if [[ "$resposta" =~ ^[Yy]$ ]]; then
         exit 1  # Sai do script com erro
     fi
 
+    echo ""
+    echo ""
+    echo ""
+    echo "Executando build..."
+
     npm run build:s3
 
+    echo ""
+    echo ""
+    echo ""
+    echo "Iniciando transferência..."
+
     aws s3 sync ./dist s3://$BUCKET_NAME --delete --acl public-read
+
+    echo ""
+    echo ""
+    echo ""
+    echo "Invalidando distribuição..."
+
+    echo "🚀 Iniciando invalidação de cache do CloudFront..."
+    invalidation_response=$(aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*")
+
+    # Verifica se a invalidação foi bem-sucedida
+    if [ $? -eq 0 ]; then
+
+        export INVALIDATION_ID=$(echo "$invalidation_response" | jq -r '.Invalidation.Id')
+        echo "✅ Invalidação enviada com sucesso! ID da Invalidação: $INVALIDATION_ID"
+
+        # Função para verificar o status da invalidação
+        check_invalidation_status() {
+            aws cloudfront get-invalidation --distribution-id "$DISTRIBUTION_ID" --id "$INVALIDATION_ID" --query "Invalidation.Status" --output text
+        }
+
+        while true; do
+            invalidation_status=$(check_invalidation_status)
+
+            if [ "$invalidation_status" == "Completed" ]; then
+                echo "✅ A invalidação foi COMPLETA!"
+                break
+            else
+                echo "🔄 Status da Invalidação: $invalidation_status. Aguardando..."
+                sleep 5  # Espera 30 segundos antes de verificar novamente
+            fi
+        done
+    else
+        echo "❌ Erro ao enviar invalidação."
+        exit 1
+    fi
    
 elif [[ "$resposta" =~ ^[Nn]$ ]]; then
     echo "Você escolheu NÃO! Os fronts não serão atualizados."
