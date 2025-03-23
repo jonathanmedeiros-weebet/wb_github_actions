@@ -176,6 +176,7 @@ export default {
     },
 
     setSportModality(forceLoading = true) {
+      document.getElementById('app').style.overlay = "scroll";
       const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
@@ -183,6 +184,7 @@ export default {
     },
 
     setLotteryModality() {
+      document.getElementById('app').style.overlay = "hiden";
       const modality = this.modalityList.find(modality => modality.id === this.Modalities.LOTTERY);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
@@ -190,6 +192,7 @@ export default {
     },
 
     setPopularLotteryModality() {
+      document.getElementById('app').style.overlay = "hiden";
       const modality = this.modalityList.find(modality => modality.id === this.Modalities.POPULAR_LOTTERY);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
