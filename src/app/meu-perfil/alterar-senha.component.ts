@@ -6,7 +6,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { AuthService, ClienteService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService } from './../services';
 import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {first, takeUntil} from 'rxjs/operators';
 import { FormValidations, PasswordValidation } from '../shared/utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
@@ -160,7 +160,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
             if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
                 this.legitimuzService.curCustomerIsVerified
-                    .pipe(takeUntil(this.unsub$))
+                    .pipe(takeUntil(this.unsub$), first())
                     .subscribe(curCustomerIsVerified => {
                         this.verifiedIdentity = curCustomerIsVerified;
                         if (this.verifiedIdentity) {
@@ -170,8 +170,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                                     this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                     this.faceMatchChangePasswordValidated = true;
                                     this.cd.detectChanges();
-                                    this.unsub$.next();
-                                    this.unsub$.complete();
                                 }, error: (error) => {
                                     this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
                                     this.faceMatchChangePasswordValidated = false;
@@ -181,7 +179,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                     });
 
                 this.legitimuzFacialService.faceIndex
-                    .pipe(takeUntil(this.unsub$))
+                    .pipe(takeUntil(this.unsub$), first())
                     .subscribe(faceIndex => {
                         if (faceIndex) {
                             this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
@@ -190,8 +188,6 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                                     this.messageService.success(this.translate.instant('face_match.verified_identity'));
                                     this.faceMatchChangePasswordValidated = true;
                                     this.cd.detectChanges();
-                                    this.unsub$.next();
-                                    this.unsub$.complete();
                                 },
                                 error: (error) => {
                                     this.messageService.error(this.translate.instant('face_match.Identity_not_verified'));
