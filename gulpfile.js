@@ -1881,3 +1881,12 @@ gulp.task('deubet.io', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betcapital.com', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "betcapital.com",
+        banca: "BET CAPITAL",
+        styles: ""
+    });
+});
