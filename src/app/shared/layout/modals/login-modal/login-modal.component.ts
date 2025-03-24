@@ -83,6 +83,10 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     get isCassinoPage(): boolean {
         const urlTree = this.router.parseUrl(this.router.url);
+        const primaryChild = urlTree.root.children['primary'];
+        if (!primaryChild) {
+            return false;
+        }
         const pathSegments = urlTree.root.children['primary'].segments;
         const path = Boolean(pathSegments.length) ? pathSegments[0].path : 'casino';
         return path === 'casino';
