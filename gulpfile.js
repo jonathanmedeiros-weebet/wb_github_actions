@@ -635,10 +635,10 @@ gulp.task('betfacil123.app', function (done) {
     });
 });
 
-gulp.task('goldeplaca.wee.bet', function (done) {
+gulp.task('goldeplaca.net.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "goldeplaca.wee.bet",
+        host: "goldeplaca.net.br",
         banca: "GOL DE PLACA",
         styles: "",
     });
