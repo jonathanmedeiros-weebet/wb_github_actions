@@ -13,7 +13,6 @@ export const useHomeStore = defineStore('home', {
         date: now(),
         selectedSearch: false,
         inSearch: false,
-        paginate: 10
     }),
     actions: {
         setChampionshipPerRegionList(championships: any) {
@@ -40,8 +39,5 @@ export const useHomeStore = defineStore('home', {
         setInSearch(inSearch: any) {
             this.inSearch = inSearch;
         },
-        setPaginate(paginate: any) {
-            this.paginate = paginate;
-        }
     },
 })

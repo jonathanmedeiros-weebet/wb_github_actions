@@ -349,7 +349,6 @@
         this.homeStore.setLeague(regionOrChampionship);
   
         if(forceLoading) {
-          this.homeStore.setPaginate(10);
           this.homeStore.setChampionshipList([]);
           this.$refs['game-list'].championshipListSecondary = [];
         }

@@ -93,42 +93,14 @@ export default {
             ticketStore: useTicketStore(),
             configClientStore: useConfigClient(),
             isLoading: false,
-            championshipListSecondary: [],
             isCollapsed: {},
         }
-    },
-    mounted() {
-        // Preservar código por algum tempo afim de implementarmos o infinite scroll caso tenhamos necessidade
-        // const options = {
-        //     root: this.$root.$refs.appElement,
-        //     rootMargin: '10px',
-        //     threshold: 1.0,
-        // };
-
-        // const observer = new IntersectionObserver((entries, observer) => {
-        //     this.isLoading = true;
-        //     entries.forEach((entry) => {
-        //         if (entry.isIntersecting) {
-        //             this.infiniteHandler();
-        //         }
-        //     });
-        // }, options);
-
-        // observer.observe(this.$refs.scrollEnd);
     },
     computed: {
         hasChampionshipList() {
             return Boolean(this.championshipList.length);
         },
         championshipList() {
-            // Preservar código por algum tempo afim de implementarmos o infinite scroll caso tenhamos necessidade
-            // if(this.homeStore.isLive){
-            //     this.championshipListSecondary = this.homeStore.championshipList.slice(0, this.homeStore.paginate).map(this.transformChampionshipList);
-            // } else {
-            //     const championshipList = this.homeStore.championshipList.slice(this.championshipListSecondary.length, this.homeStore.paginate).map(this.transformChampionshipList);
-            //     this.championshipListSecondary.push(...championshipList);
-            // }
-            // this.isLoading = false;
             return this.homeStore.championshipList.map(this.transformChampionshipList);
         },
         allCollapsed() {
@@ -193,15 +165,6 @@ export default {
         championshipWasOpened(championshipId) {
             return (this.ticketStore.championshipOpened ?? []).includes(championshipId);
         },
-        infiniteHandler: _.debounce(function() {
-            if (this.homeStore.paginate >= this.homeStore.championshipList.length) {
-                this.isLoading = false;
-                return;
-            }
-
-            const qty = this.configClientStore.settings.championshipExpanded ? 5 : 10;
-            this.homeStore.setPaginate(this.homeStore.paginate + qty);
-        })
     }
 }
 </script>
