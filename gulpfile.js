@@ -93,10 +93,10 @@ function tasks(done, config) {
     done();
 }
 
-gulp.task('vipsports.wee.bet', function (done) {
+gulp.task('vipsports.digital', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
-        host: "vipsports.wee.bet",
+        server: "front2.weebet.tech",
+        host: "vipsports.digital",
         banca: "Vip Sports",
         styles: "--header: #222d32; --foreground-header: #e50d1b; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #e50d1b; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
@@ -104,7 +104,7 @@ gulp.task('vipsports.wee.bet', function (done) {
 
 gulp.task('betsbr.club', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "betsbr.club",
         banca: "Bets BR",
         styles: "--header: #666666; --foreground-header: #000; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #aec3d8; --odds: #e1b01e; --foreground-odds: #fff;",
@@ -113,7 +113,7 @@ gulp.task('betsbr.club', function (done) {
 
 gulp.task('casadinha.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "casadinha.bet",
         banca: "CASADINHA.BET",
         styles: "",
@@ -122,7 +122,7 @@ gulp.task('casadinha.bet', function (done) {
 
 gulp.task('demo.wee.bet', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "demo.wee.bet",
         banca: "DEMO",
         styles: "--header: #222d32; --foreground-header: #35cc96; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #35cc96; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
@@ -132,26 +132,26 @@ gulp.task('demo.wee.bet', function (done) {
 
 gulp.task('sandbox.wee.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "sandbox.wee.bet",
         banca: "SANDBOX",
         styles: "",
     });
 });
 
-gulp.task('esportivatop.wee.bet', function (done) {
+gulp.task('esportivatop.com', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "esportivatop.wee.bet",
+        server: "front4.weebet.tech",
+        host: "esportivatop.com",
         banca: "Esportiva Top",
         styles: ""
     });
 });
 
-gulp.task('major.wee.bet', function (done) {
+gulp.task('majorsport.vip', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "major.wee.bet",
+        server: "front4.weebet.tech",
+        host: "majorsport.vip",
         banca: "Major",
         styles: ""
     });
@@ -159,7 +159,7 @@ gulp.task('major.wee.bet', function (done) {
 
 gulp.task('mjrsports.com', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "mjrsports.com",
         banca: "MJR SPORTS",
         styles: "--header: #3F6826; --foreground-header: #b1c5e0; --sidebar-right: #3B5323; --foreground-sidebar-right: #fff; --sidebar-left: #3B5323; --foreground-sidebar-left: #fff; --highlight: #ff0000; --foreground-highlight: #fff; --odds: #dab600; --foreground-odds: #fff; --selected-event: #000;",
@@ -169,27 +169,16 @@ gulp.task('mjrsports.com', function (done) {
 
 gulp.task('sertaobets.com', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "sertaobets.com",
         banca: "Sertão Bets",
         styles: "--header: #666666; --foreground-header: #000; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #aec3d8; --odds: #e1b01e; --foreground-odds: #fff;",
     });
 });
 
-gulp.task('sportsshow.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "sportsshow.wee.bet",
-        banca: "Sports Show",
-        styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: yellow; --odds: red; --foreground-odds: #fff; --event-time: red; --league: #333; --foreground-league: #fff;",
-        aditional_styles: ".sem-evento{color: #fff;} #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
-            " .inside-event .indentificacao, .inside-event .campeonato-nome, .inside-event .indentificacao-mobile{ background-color: #cb151c; color: white; } .inside-event .tipo-apostas{ background-color: #555!important; color: white!important; } .tipo-aposta { border-top: 1px solid #777!important; } #esportes-footer{ color:white; } "
-    });
-});
-
 gulp.task('superbets.bet', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "superbets.bet",
         banca: "SUPERBETS",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --sidebar-left: #000;"
@@ -198,7 +187,7 @@ gulp.task('superbets.bet', function (done) {
 
 gulp.task('superbetsport.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "superbetsport.com",
         banca: "SUPER BET SPORT",
         styles: "--highlight:#ff0a0b;--league: yellow;",
@@ -207,17 +196,17 @@ gulp.task('superbetsport.com', function (done) {
 
 gulp.task('trevodasorte.me', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "trevodasorte.me",
         banca: "Trevo da Sorte",
         styles: "--header: #4caf50; --foreground-header: #cce2ff; --sidebar-right:#123153; --foreground-sidebar-right: #fff; --sidebar-left: #123153; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #aec3d8; --odds: #4caf50; --foreground-odds: #fff;",
     });
 });
 
-gulp.task('esportbets.wee.bet', function (done) {
+gulp.task('esportbets.biz', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
-        host: "esportbets.wee.bet",
+        server: "front2.weebet.tech",
+        host: "esportbets.biz",
         banca: "Esport Bets",
         styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#14805e; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #ffdf1b; --foreground-highlight: #ffdf1b; --odds: #999; --foreground-odds: #333; --event-time: #14805e; --league: #14805e; --foreground-league: #fff;",
         aditional_styles: ".sem-evento{color: #fff;}  #futebol-default-wrapper, #futebol-live-wrapper, #basquete-default-wrapper, #combate-default-wrapper{ background: #555!important } .jogos, .eventos{ background: #555!important; color: #fff!important; } .jogo{ border-top: none!important; } .campeonato-header{ border-bottom-color: #555!important; } .footer{ background-color:#555!important; }" +
@@ -225,10 +214,10 @@ gulp.task('esportbets.wee.bet', function (done) {
     });
 });
 
-gulp.task('redblue.wee.bet', function (done) {
+gulp.task('redblue.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "redblue.wee.bet",
+        server: "front4.weebet.tech",
+        host: "redblue.bet",
         banca: "Red Blue",
         styles: ""
     });
@@ -236,7 +225,7 @@ gulp.task('redblue.wee.bet', function (done) {
 
 gulp.task('onbets.club', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "onbets.club",
         banca: "On Bets",
         styles: "--header: #333; --foreground-header: #fff; --sidebar-right:#777; --foreground-sidebar-right: #fff; --sidebar-left: #333; --foreground-sidebar-left: #fff; --highlight: #f0c027; --foreground-highlight: #f0c027; --odds: #999; --foreground-odds: #fff; --event-time: #777; --league: #777; --foreground-league: #f0c027;",
@@ -247,18 +236,16 @@ gulp.task('onbets.club', function (done) {
 
 gulp.task('apostapremiada.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "apostapremiada.bet",
         banca: "Aposta Premiada",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #fc6402; --foreground-highlight: #fff; --odds: #9a9a9a; --foreground-odds: #fff; --event-time: #777; --league: #fc6402; --foreground-league: #fff;"
     });
 });
 
-
-// Old bet1.wee.bet
 gulp.task('mrsportsdigital.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "mrsportsdigital.com",
         banca: "MR SPORTS",
         styles: ""
@@ -267,7 +254,7 @@ gulp.task('mrsportsdigital.com', function (done) {
 
 gulp.task('bet2.wee.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "bet2.wee.bet",
         banca: "WEEBET",
         styles: ""
@@ -276,7 +263,7 @@ gulp.task('bet2.wee.bet', function (done) {
 
 gulp.task('bet4.wee.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "bet4.wee.bet",
         banca: "BET",
         styles: ""
@@ -285,7 +272,7 @@ gulp.task('bet4.wee.bet', function (done) {
 
 gulp.task('totalsorte.com.br', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "totalsorte.com.br",
         banca: "Total Sorte",
         styles: ""
@@ -294,7 +281,7 @@ gulp.task('totalsorte.com.br', function (done) {
 
 gulp.task('bet7.wee.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "bet7.wee.bet",
         banca: "WEEBET",
         styles: ""
@@ -303,7 +290,7 @@ gulp.task('bet7.wee.bet', function (done) {
 
 gulp.task('bet9.wee.bet', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "bet9.wee.bet",
         banca: "WEEBET",
         styles: ""
@@ -312,17 +299,16 @@ gulp.task('bet9.wee.bet', function (done) {
 
 gulp.task('qa1.wee.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "qa1.wee.bet",
         banca: "WEEBET",
         styles: ""
     });
 });
 
-
 gulp.task('qa2.wee.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "qa2.wee.bet",
         banca: "WEEBET",
         styles: ""
@@ -331,7 +317,7 @@ gulp.task('qa2.wee.bet', function (done) {
 
 gulp.task('topbets.me', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "topbets.me",
         banca: "Top Bets",
         styles: "--header: #33546f; --foreground-header: #ffffff; --sidebar-right: #33546f; --foreground-sidebar-right: #fff; --sidebar-left: #33546f; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #ffffff; --odds: #eba314;",
@@ -344,7 +330,7 @@ gulp.task('topbets.me', function (done) {
 
 gulp.task('masterbet.wee.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "masterbet.wee.bet",
         banca: "MasterBet",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #ffdf1b; --odds: #000; --foreground-odds: #fff; --event-time: #cb151c; --league: #333; --foreground-league: #fff;",
@@ -353,17 +339,17 @@ gulp.task('masterbet.wee.bet', function (done) {
 
 gulp.task('vitoriasports.bet', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "vitoriasports.bet",
         banca: "Vitória Sports",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: yellow; --odds: #292b75; --foreground-odds: #fff; --event-time: red; --league: #333; --foreground-league: #fff;",
     });
 });
 
-gulp.task('footbets.wee.bet', function (done) {
+gulp.task('footbets.net', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
-        host: "footbets.wee.bet",
+        server: "front1.weebet.tech",
+        host: "footbets.net",
         banca: "footbets",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: yellow; --foreground-highlight: #fff; --odds:red; --foreground-odds: #fff; --event-time: #312782",
         aditional_styles: ".mais-opcoes{ color: var(--event-time)!important; }",
@@ -372,7 +358,7 @@ gulp.task('footbets.wee.bet', function (done) {
 
 gulp.task('rblt.me', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "rblt.me",
         banca: "RBLT",
         styles: "",
@@ -381,17 +367,17 @@ gulp.task('rblt.me', function (done) {
 
 gulp.task('esportebetsvip.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "esportebets.io",
         banca: "Esporte Bets",
         styles: "--header:#000; --foreground-header:#fff; --sidebar-left: #000; --sidebar-right: #000; --odds: #003ae6; --foreground-highlight: #fff;"
     });
 });
 
-gulp.task('mastersports.wee.bet', function (done) {
+gulp.task('mastersports.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "mastersports.wee.bet",
+        server: "front4.weebet.tech",
+        host: "mastersports.bet",
         banca: "MASTER SPORTS",
         styles: "",
     });
@@ -399,7 +385,7 @@ gulp.task('mastersports.wee.bet', function (done) {
 
 gulp.task('megasports.club', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "megasports.club",
         banca: "MEGA SPORTS",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight:yellow; --foreground-highlight: #fff; --odds: #008000; --foreground-odds: #fff;--highlight:red;"
@@ -408,7 +394,7 @@ gulp.task('megasports.club', function (done) {
 
 gulp.task('alfasports.net', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "alfasports.net",
         banca: "ALFA SPORTS",
         styles: "--header:#000;--foreground-header:#fff;--sidebar-right:#000;--sidebar-left:#000;--odds:#dab600;--highlight:red;"
@@ -417,7 +403,7 @@ gulp.task('alfasports.net', function (done) {
 
 gulp.task('sportbets7.net', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "sportbets7.net",
         banca: "SPORT BETS 7",
         styles: "",
@@ -426,35 +412,34 @@ gulp.task('sportbets7.net', function (done) {
 
 gulp.task('apremiada.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "apremiada.bet",
         banca: "APREMIADA",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: #fc6402; --foreground-highlight: #fff; --odds: #9a9a9a; --foreground-odds: #fff; --event-time: #777; --league: #fc6402; --foreground-league: #fff;"
     });
 });
 
-gulp.task('betsports.wee.bet', function (done) {
+gulp.task('sportss.vip', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "betsports.wee.bet",
+        server: "front3.weebet.tech",
+        host: "sportss.vip",
         banca: "BET SPORTS",
         styles: ""
     });
 });
 
-// Database Name = citybets.wee.bet
 gulp.task('citybets.online', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "citybets.online",
         banca: "CITY BETS",
     });
 });
 
-gulp.task('lancebet.wee.bet', function (done) {
+gulp.task('lancet.club', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "lancebet.wee.bet",
+        server: "front3.weebet.tech",
+        host: "lancet.club",
         banca: "LANCE BET",
         styles: ""
     });
@@ -462,17 +447,17 @@ gulp.task('lancebet.wee.bet', function (done) {
 
 gulp.task('betsgol.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "betsgol.bet",
         banca: "BETS GOL",
         styles: "--header:#000; --foreground-header: #fff; --sidebar-left: #000; --sidebar-right: #000; --odds:#4d4d4d;"
     });
 });
 
-gulp.task('dolarbets.wee.bet', function (done) {
+gulp.task('dolarbets.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "dolarbets.wee.bet",
+        server: "front3.weebet.tech",
+        host: "dolarbets.com",
         banca: "DOLAR BETS",
         styles: "--header:#005801; --foreground-header:#fff; --sidebar-left: #005801; --sidebar-right: #005801;--odds:#000;--foreground-highlight:#fff;--league: #ffcc28;",
     });
@@ -480,7 +465,7 @@ gulp.task('dolarbets.wee.bet', function (done) {
 
 gulp.task('slsports.bet', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "slsports.bet",
         banca: "SL SPORTS",
         styles: "--header: #006600; --foreground-header: #fff; --sidebar-right:#7fb96a; --foreground-sidebar-right: #fff; --sidebar-left: #7fb96a; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #4cbca3; --event-time: yellow; --fg-event-time: #000;",
@@ -490,7 +475,7 @@ gulp.task('slsports.bet', function (done) {
 
 gulp.task('betdez.net', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "betdez.net",
         banca: "BetDez",
         styles: "--header: #fff; --foreground-header: #000; --sidebar-right: #fff; --foreground-sidebar-right: #000; --sidebar-left: #fff; --foreground-sidebar-left: #000; --highlight: #232d40; --foreground-highlight: #232d40; --odds: #71b04c; --foreground-odds: #fff; --event-time: #232d40;--foreground-selected-odds:#fff;",
@@ -501,7 +486,7 @@ gulp.task('betdez.net', function (done) {
 
 gulp.task('topbets.website', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "topbets.website",
         banca: "TOP BETS",
         styles: "",
@@ -510,7 +495,7 @@ gulp.task('topbets.website', function (done) {
 
 gulp.task('superbet365.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "superbet365.bet",
         banca: "SUPER BET 365",
         styles: "",
@@ -519,7 +504,7 @@ gulp.task('superbet365.bet', function (done) {
 
 gulp.task('moralbets.com', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "moralbets.com",
         banca: "MORAL BETS",
         styles: "--header: #a9a9a9; --foreground-header: #000; --sidebar-right: #a9a9a9; --foreground-sidebar-right: #000; --sidebar-left: #a9a9a9; --foreground-sidebar-left: #000;--highlight:#68eb5a;--foreground-highlight: #000;--odds:#000;",
@@ -530,17 +515,17 @@ gulp.task('moralbets.com', function (done) {
 
 gulp.task('globoesporte.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "globoesporte.bet",
         banca: "GLOBO ESPORTE",
         styles: "--header: #505050; --foreground-header: #fff; --sidebar-right:#505050; --foreground-sidebar-right: #fff; --sidebar-left: #505050; --foreground-sidebar-left: #fff; --odds: #e32636;",
     });
 });
 
-gulp.task('chutebets.wee.bet', function (done) {
+gulp.task('chutebets.com.br', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "chutebets.wee.bet",
+        server: "front3.weebet.tech",
+        host: "chutebets.com.br",
         banca: "CHUTE BETS",
         styles: "",
     });
@@ -548,17 +533,17 @@ gulp.task('chutebets.wee.bet', function (done) {
 
 gulp.task('ingamesport.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "ingamesport.com",
         banca: "INGAME SPORT",
         styles: ""
     });
 });
 
-gulp.task('lbbet.wee.bet', function (done) {
+gulp.task('lbbet.com.br', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
-        host: "lbbet.wee.bet",
+        server: "front1.weebet.tech",
+        host: "lbbet.com.br",
         shared_url: "lbbet.com.br",
         banca: "LBBET",
         styles: "--header: #3aaa35; --foreground-header: #fff; --sidebar-right:#3aaa35; --foreground-sidebar-right: #fff; --sidebar-left: #3aaa35; --foreground-sidebar-left: #fff; --odds: #5e5e5e;--foreground-highlight:#fff;",
@@ -567,107 +552,71 @@ gulp.task('lbbet.wee.bet', function (done) {
 
 gulp.task('garanhunsbet.site', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "garanhunsbet.site",
         banca: "GARANHUNS BET",
         styles: "--header: #000; --foreground-header: #fff; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --foreground-highlight: #fff; --odds: #00008B;",
     });
 });
 
-gulp.task('cearabetsplacardarodada.wee.bet', function (done) {
+gulp.task('cearabetsplacardarodada.site', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "cearabetsplacardarodada.wee.bet",
+        server: "front4.weebet.tech",
+        host: "cearabetsplacardarodada.site",
         banca: "CEARÁ BETS",
         styles: "",
     });
 });
 
-gulp.task('tubaraobet.wee.bet', function (done) {
+gulp.task('rrbets.site', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "tubaraobet.wee.bet",
-        banca: "TUBARÃO BET",
-        styles: "--header: #111111; --foreground-header: #fff; --sidebar-right:#000000; --foreground-sidebar-right: #fff; --sidebar-left: #000000; --foreground-sidebar-left: #fff;--highlight: #f5d328; --foreground-highlight: #fff; --odds: #191970;",
-    });
-});
-
-gulp.task('rrbets.wee.bet', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "rrbets.wee.bet",
+        server: "front2.weebet.tech",
+        host: "rrbets.site",
         banca: "RR BETS",
-        styles: "",
-    });
-});
-
-gulp.task('techbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "techbet.wee.bet",
-        banca: "TECH BET",
         styles: "",
     });
 });
 
 gulp.task('maranhaobets.net', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "maranhaobets.net",
         banca: "MARANHÃO BETS",
         styles: "",
     });
 });
 
-gulp.task('ligabet.wee.bet', function (done) {
+gulp.task('ligabet.click', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "ligabet.wee.bet",
+        server: "front4.weebet.tech",
+        host: "ligabet.click",
         banca: "LIGA BET",
-        styles: "",
-    });
-});
-
-gulp.task('trandbets.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "trandbets.com",
-        banca: "TRAND BETS",
         styles: "",
     });
 });
 
 gulp.task('ilhabet.net', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "ilhabet.net",
         banca: "ILHA BET",
         styles: "",
     });
 });
 
-gulp.task('jmxbet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "jmxbet.com",
-        banca: "JMX BET",
-        styles: "",
-    });
-});
-
 gulp.task('starbets.online', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "starbets.online",
         banca: "STAR BETS",
         styles: "",
     });
 });
 
-gulp.task('dfsportsbet.wee.bet', function (done) {
+gulp.task('dfsgoo.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
-        host: "dfsportsbet.wee.bet",
+        server: "front2.weebet.tech",
+        host: "dfsgoo.com",
         banca: "DF SPORTS BET",
         styles: "",
     });
@@ -675,7 +624,7 @@ gulp.task('dfsportsbet.wee.bet', function (done) {
 
 gulp.task('betfacil123.app', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "betfacil123.app",
         banca: "BET FÁCIL 123",
         styles: "",
@@ -684,10 +633,10 @@ gulp.task('betfacil123.app', function (done) {
     });
 });
 
-gulp.task('goldeplaca.wee.bet', function (done) {
+gulp.task('goldeplaca.net.br', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "goldeplaca.wee.bet",
+        server: "front3.weebet.tech",
+        host: "goldeplaca.net.br",
         banca: "GOL DE PLACA",
         styles: "",
     });
@@ -695,26 +644,26 @@ gulp.task('goldeplaca.wee.bet', function (done) {
 
 gulp.task('xbetsports.net', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "xbetsports.net",
         banca: "XBETSPORTS",
         styles: "",
     });
 });
 
-gulp.task('betsnordeste.wee.bet', function (done) {
+gulp.task('betsnordeste.site', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "betsnordeste.wee.bet",
+        server: "front3.weebet.tech",
+        host: "betsnordeste.site",
         banca: "BETS NORDESTE",
         styles: "",
     });
 });
 
-gulp.task('esportebet.wee.bet', function (done) {
+gulp.task('monteirosports.com', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "esportebet.wee.bet",
+        server: "front4.weebet.tech",
+        host: "monteirosports.com",
         banca: "ESPORTE BET",
         styles: "",
     });
@@ -722,26 +671,26 @@ gulp.task('esportebet.wee.bet', function (done) {
 
 gulp.task('i2bets.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "i2bets.com",
         banca: "I2 BETS",
         styles: "",
     });
 });
 
-gulp.task('lancesports.wee.bet', function (done) {
+gulp.task('lancesports.site', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
-        host: "lancesports.wee.bet",
+        server: "front1.weebet.tech",
+        host: "lancesports.site",
         banca: "LANCE SPORTS",
         styles: "",
     });
 });
 
-gulp.task('betimperativo.wee.bet', function (done) {
+gulp.task('betimperativoo.com.br', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
-        host: "betimperativo.wee.bet",
+        server: "front2.weebet.tech",
+        host: "betimperativoo.com.br",
         shared_url: "betimperativo.com.br",
         banca: "Bet Imperativo",
         styles: "",
@@ -750,7 +699,7 @@ gulp.task('betimperativo.wee.bet', function (done) {
 
 gulp.task('rondobet.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "rondobet.com",
         banca: "RONDO BET",
         styles: "",
@@ -759,7 +708,7 @@ gulp.task('rondobet.com', function (done) {
 
 gulp.task('bets60.wee.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "bets60.wee.bet",
         banca: "BETS 60",
         styles: "",
@@ -768,54 +717,54 @@ gulp.task('bets60.wee.bet', function (done) {
 
 gulp.task('finasport.wee.bet', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "finasport.wee.bet",
         banca: "FINA SPORT",
         styles: "",
     });
 });
 
-gulp.task('aposta99.wee.bet', function (done) {
+gulp.task('aposta99.com.br', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "aposta99.wee.bet",
+        server: "front3.weebet.tech",
+        host: "aposta99.com.br",
         banca: "APOSTA 99",
         styles: "",
     });
 });
 
-gulp.task('topbetgames.wee.bet', function (done) {
+gulp.task('topbetgames.net', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "topbetgames.wee.bet",
+        server: "front4.weebet.tech",
+        host: "topbetgames.net",
         banca: "TOP BET GAMES",
         styles: "",
     });
 });
 
-gulp.task('sm7.wee.bet', function (done) {
+gulp.task('sm7.site', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "sm7.wee.bet",
+        server: "front4.weebet.tech",
+        host: "sm7.site",
         banca: "SM7",
         styles: "",
     });
 });
 
-gulp.task('futpix.wee.bet', function (done) {
+gulp.task('futpix.online', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "futpix.wee.bet",
+        server: "front3.weebet.tech",
+        host: "futpix.online",
         shared_url: "futpix.com.br",
         banca: "FUTPIX",
         styles: "",
     });
 });
 
-gulp.task('betminas.wee.bet', function (done) {
+gulp.task('betminas.club', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
-        host: "betminas.wee.bet",
+        server: "front4.weebet.tech",
+        host: "betminas.club",
         banca: "BET MINAS",
         styles: "",
     });
@@ -823,7 +772,7 @@ gulp.task('betminas.wee.bet', function (done) {
 
 gulp.task('bet83.wee.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "bet83.wee.bet",
         banca: "BET83",
         styles: "",
@@ -832,7 +781,7 @@ gulp.task('bet83.wee.bet', function (done) {
 
 gulp.task('betnordeste.net', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "betnordeste.net",
         banca: "BET NORDESTE SPORTS",
         styles: "",
@@ -841,7 +790,7 @@ gulp.task('betnordeste.net', function (done) {
 
 gulp.task('iconebet.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "iconebet.com",
         banca: "ÍconeBet",
         styles: "",
@@ -852,25 +801,16 @@ gulp.task('iconebet.com', function (done) {
 
 gulp.task('sportingol.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "sportingol.bet",
         banca: "SPORTINGOL",
         styles: "",
     });
 });
 
-gulp.task('betsesporte.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "betsesporte.com",
-        banca: "LASVEGAS SPORT",
-        styles: "",
-    });
-});
-
 gulp.task('eshowdebola.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "eshowdebola.bet",
         banca: "É SHOW DE BOLA",
         styles: "",
@@ -881,53 +821,35 @@ gulp.task('eshowdebola.bet', function (done) {
 
 gulp.task('betsmania.live', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "betsmania.live",
         banca: "BETS MANIA",
         styles: "",
     });
 });
 
-gulp.task('ster.wee.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "ster.wee.bet",
-        banca: "STER.WEE.BET",
-        styles: "",
-    });
-});
-
 gulp.task('ricardo.wee.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "ricardo.wee.bet",
-        banca: "RICARDO.WEE.BET",
+        banca: "RICARDO",
         styles: "",
     });
 });
 
-gulp.task('nautsports.wee.bet', function (done) {
+gulp.task('nautsports.club', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
-        host: "nautsports.wee.bet",
+        server: "front1.weebet.tech",
+        host: "nautsports.club",
         banca: "NAUTSPORTS",
         styles: "",
     });
 });
 
-gulp.task('soumaisbet.com', function (done) {
+gulp.task('bet73.site', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
-        host: "soumaisbet.com",
-        banca: "SOU MAIS BET",
-        styles: "",
-    });
-});
-
-gulp.task('bet73.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "bet73.wee.bet",
+        server: "front3.weebet.tech",
+        host: "bet73.site",
         banca: "BET 73",
         styles: "",
     });
@@ -935,25 +857,16 @@ gulp.task('bet73.wee.bet', function (done) {
 
 gulp.task('cr7bet.online', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "cr7bet.online",
         banca: "CR7 BET",
         styles: "",
     });
 });
 
-gulp.task('supremodasorte.wee.bet', function (done) {
-    tasks(done, {
-        server: "front3.wee.bet",
-        host: "supremodasorte.wee.bet",
-        banca: "SUPREMO DA SORTE",
-        styles: "",
-    });
-});
-
 gulp.task('easybets.club', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "easybets.club",
         banca: "EASY BETS",
         styles: "",
@@ -962,17 +875,17 @@ gulp.task('easybets.club', function (done) {
 
 gulp.task('apostasmax.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "apostasmax.com",
         banca: "APOSTAS MAX",
         styles: "",
     });
 });
 
-gulp.task('ritsbet.wee.bet', function (done) {
+gulp.task('expressinhofc.com.br', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "ritsbet.wee.bet",
+        server: "front3.weebet.tech",
+        host: "expressinhofc.com.br",
         banca: "RITS BET",
         styles: "",
     });
@@ -980,7 +893,7 @@ gulp.task('ritsbet.wee.bet', function (done) {
 
 gulp.task('santissports.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "santissports.com",
         banca: "SANTIS SPORTS",
         styles: "",
@@ -989,7 +902,7 @@ gulp.task('santissports.com', function (done) {
 
 gulp.task('bomba.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "bomba.bet",
         banca: "BOMBA.BET",
         styles: "",
@@ -998,7 +911,7 @@ gulp.task('bomba.bet', function (done) {
 
 gulp.task('pointbet.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "pointbet.bet",
         banca: "POINTBET",
         styles: "",
@@ -1007,25 +920,16 @@ gulp.task('pointbet.bet', function (done) {
 
 gulp.task('megasporte.com', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "megasporte.com",
         banca: "MEGASPORTE",
         styles: "",
     });
 });
 
-gulp.task('openbets.vip', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "openbets.vip",
-        banca: "OPEN BETS",
-        styles: "",
-    });
-});
-
 gulp.task('imperiopix.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "imperiopix.bet",
         banca: "IMPÉRIO PIX",
         styles: "",
@@ -1034,7 +938,7 @@ gulp.task('imperiopix.bet', function (done) {
 
 gulp.task('primoos.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "primoos.bet",
         banca: "PRIMOOS.BET",
         pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '3466718803573085');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=3466718803573085&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
@@ -1042,10 +946,10 @@ gulp.task('primoos.bet', function (done) {
     });
 });
 
-gulp.task('realsport.wee.bet', function (done) {
+gulp.task('realgol.net', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "realsport.wee.bet",
+        server: "front3.weebet.tech",
+        host: "realgol.net",
         banca: "REAL SPORT",
         styles: "",
     });
@@ -1054,7 +958,7 @@ gulp.task('realsport.wee.bet', function (done) {
 // old pimplay.com
 gulp.task('pinplay.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "pinplay.bet",
         banca: "PINPLAY",
         styles: "",
@@ -1063,7 +967,7 @@ gulp.task('pinplay.bet', function (done) {
 
 gulp.task('3tbet.com.br', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "3tbet.com.br",
         banca: "3T BET",
         styles: "",
@@ -1072,17 +976,17 @@ gulp.task('3tbet.com.br', function (done) {
 
 gulp.task('megasports.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "megasports.bet",
         banca: "MEGA SPORTS",
         styles: "",
     });
 });
 
-gulp.task('81betpix.wee.bet', function (done) {
+gulp.task('81br.net', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
-        host: "81betpix.wee.bet",
+        server: "front3.weebet.tech",
+        host: "81br.net",
         banca: "81 BET PIX",
         styles: "",
     });
@@ -1090,7 +994,7 @@ gulp.task('81betpix.wee.bet', function (done) {
 
 gulp.task('alfasports.online', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "alfasports.online",
         banca: "ALFA SPORTS",
         styles: "",
@@ -1099,7 +1003,7 @@ gulp.task('alfasports.online', function (done) {
 
 gulp.task('novabet.site', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "novabet.site",
         banca: "NOVA BET",
         styles: "",
@@ -1110,22 +1014,9 @@ gulp.task('novabet.site', function (done) {
     });
 });
 
-gulp.task('vemprabet.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "vemprabet.com",
-        banca: "VEM PRA BET",
-        styles: "",
-        pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '267162419017327');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=267162419017327&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
-            "<!-- Meta Pixel Code --> <script> !function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '3428785817374794'); fbq('track', 'PageView'); </script> <noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=3428785817374794&ev=PageView&noscript=1' /></noscript> <!-- End Meta Pixel Code -->" +
-            "<link rel='stylesheet' href='https://wb-assets.com/jivosite/jivosite.css'>",
-        scripts: "<script src='https://wb-assets.com/jivosite/jivosite.js' type='text/javascript'></script><script src='//code.jivosite.com/widget/3TMdCRtVsW' async></script>",
-    });
-});
-
 gulp.task('esportenetreipele.com', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "esportenetreipele.com",
         banca: "ESPORTE NET REI PELÉ",
         styles: "",
@@ -1134,7 +1025,7 @@ gulp.task('esportenetreipele.com', function (done) {
 
 gulp.task('powerbets.vip', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "powerbets.vip",
         banca: "POWER BETS",
         styles: "",
@@ -1143,7 +1034,7 @@ gulp.task('powerbets.vip', function (done) {
 
 gulp.task('ragnar.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "ragnar.bet",
         banca: "RAGNAR.BET",
         styles: "",
@@ -1153,7 +1044,7 @@ gulp.task('ragnar.bet', function (done) {
 
 gulp.task('fizabet.com', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "fizabet.com",
         banca: "FIZ A BET",
         styles: "",
@@ -1165,7 +1056,7 @@ gulp.task('fizabet.com', function (done) {
 
 gulp.task('betplusbr.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "betplusbr.com",
         banca: "BET PLUS BR",
         styles: "",
@@ -1174,7 +1065,7 @@ gulp.task('betplusbr.com', function (done) {
 
 gulp.task('futvale.net', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "futvale.net",
         banca: "FUTVALE",
         styles: "",
@@ -1183,7 +1074,7 @@ gulp.task('futvale.net', function (done) {
 
 gulp.task('treinamento.wee.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "treinamento.wee.bet",
         banca: "Treinamento Weebet",
         styles: "",
@@ -1195,7 +1086,7 @@ gulp.task('treinamento.wee.bet', function (done) {
 
 gulp.task('faithbets.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "faithbets.bet",
         banca: "FAITH BETS",
         styles: "",
@@ -1204,7 +1095,7 @@ gulp.task('faithbets.bet', function (done) {
 
 gulp.task('ccaesportes.club', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "ccaesportes.club",
         banca: "totalbet.win",
         styles: "",
@@ -1213,7 +1104,7 @@ gulp.task('ccaesportes.club', function (done) {
 
 gulp.task('favelabett.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "favelabett.com",
         banca: "FAVELA BET",
         styles: "",
@@ -1224,7 +1115,7 @@ gulp.task('favelabett.com', function (done) {
 
 gulp.task('kwbet.net', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "kwbet.net",
         banca: "KW BET",
         styles: "",
@@ -1233,30 +1124,9 @@ gulp.task('kwbet.net', function (done) {
     });
 });
 
-gulp.task('085.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "085.bet",
-        banca: "085.BET",
-        styles: "",
-        pixel: "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '243787891795745');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=243787891795745&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
-            "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '241367635506168');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=241367635506168&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->" +
-            "<!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '301526292376433');fbq('track', 'PageView');</script><noscript><img height='1' width='1' style='display:none'src='https://www.facebook.com/tr?id=301526292376433&ev=PageView&noscript=1'/></noscript><!-- End Meta Pixel Code -->",
-    });
-});
-
-gulp.task('apostacerta.bet', function (done) {
-    tasks(done, {
-        server: "front4.wee.bet",
-        host: "apostacerta.bet",
-        banca: "APOSTA CERTA",
-        styles: "",
-    });
-});
-
 gulp.task('apostenasorte.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "apostenasorte.bet",
         banca: "APOSTE NA SORTE",
         styles: "",
@@ -1266,7 +1136,7 @@ gulp.task('apostenasorte.bet', function (done) {
 
 gulp.task('ultrabetss.com', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "ultrabetss.com",
         banca: "ULTRA BETSS",
         styles: "",
@@ -1275,25 +1145,16 @@ gulp.task('ultrabetss.com', function (done) {
 
 gulp.task('vegasbrasilbet.com', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "vegasbrasilbet.com",
         banca: "VEGAS BRASIL BET",
         styles: "",
     });
 });
 
-gulp.task('palpitei.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "palpitei.bet",
-        banca: "PALPITEI.BET",
-        styles: "",
-    });
-});
-
 gulp.task('betbras.com', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "betbras.com",
         banca: "BET BRAS",
         styles: "",
@@ -1302,7 +1163,7 @@ gulp.task('betbras.com', function (done) {
 
 gulp.task('capitalbets.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "capitalbets.bet",
         banca: "CAPITAL BETS",
         styles: "",
@@ -1311,28 +1172,16 @@ gulp.task('capitalbets.bet', function (done) {
 
 gulp.task('betinvestidor.com', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "betinvestidor.com",
         banca: "BET INVESTIDOR",
         styles: "",
     });
-});
-
-gulp.task('winvegas.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "winvegas.bet",
-        banca: "WIN VEGAS",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-PZG7KV79');</script> <!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --> <noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-PZG7KV79 ' height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript> <!-- End Google Tag Manager (noscript) -->",
-        scripts: "<script>        !function(e,t){'object'==typeof exports&&'object'==typeof module?module.exports=t():'function'==typeof define&&define.amd?define([],t):'object'==typeof exports?exports.install=t():e.install=t()}(window,(function(){return function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){'undefined'!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:'Module'}),Object.defineProperty(e,'__esModule',{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&'object'==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,'default',{enumerable:!0,value:e}),2&t&&'string'!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,'a',t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p='',n(n.s=0)}([function(e,t,n){'use strict';var r=this&&this.__spreadArray||function(e,t,n){if(n||2===arguments.length)for(var r,o=0,i=t.length;o<i;o++)!r&&o in t||(r||(r=Array.prototype.slice.call(t,0,o)),r[o]=t[o]);return e.concat(r||Array.prototype.slice.call(t))};!function(e){var t=window;t.KwaiAnalyticsObject=e,t[e]=t[e]||[];var n=t[e];n.methods=['page','track','identify','instances','debug','on','off','once','ready','alias','group','enableCookie','disableCookie'];var o=function(e,t){e[t]=function(){var n=Array.from(arguments),o=r([t],n,!0);e.push(o)}};n.methods.forEach((function(e){o(n,e)})),n.instance=function(e){var t=n._i[e]||[];return n.methods.forEach((function(e){o(t,e)})),t},n.load=function(t,r){n._i=n._i||{},n._i[t]=[],n._i[t]._u='https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js',n._t=n._t||{},n._t[t]=+new Date,n._o=n._o||{},n._o[t]=r||{};var o=document.createElement('script');o.type='text/javascript',o.async=!0,o.src='https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js?sdkid='+t+'&lib='+e;var i=document.getElementsByTagName('script')[0];i.parentNode.insertBefore(o,i)}}('kwaiq')}])}));        </script>        <script>        kwaiq.load('524043992565809187');        kwaiq.page();        </script>",
-    });
-});
+}); 
 
 gulp.task('pixcassino999.com', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "pixcassino999.com",
         banca: "PIX CASSINO 99",
         styles: "",
@@ -1341,7 +1190,7 @@ gulp.task('pixcassino999.com', function (done) {
 
 gulp.task('betsnordeste.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "betsnordeste.bet",
         banca: "BETS NORDESTE",
         styles: "",
@@ -1350,7 +1199,7 @@ gulp.task('betsnordeste.bet', function (done) {
 
 gulp.task('rc.wee.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "rc.wee.bet",
         banca: "Weebet RC",
         styles: "",
@@ -1359,7 +1208,7 @@ gulp.task('rc.wee.bet', function (done) {
 
 gulp.task('amazonsport.io', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "amazonsport.io",
         banca: "AMAZON SPORT",
         styles: "",
@@ -1372,44 +1221,25 @@ gulp.task('amazonsport.io', function (done) {
 
 gulp.task('federalsports.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "federalsports.bet",
         banca: "FEDERAL SPORTS",
         styles: "",
     });
 });
 
-gulp.task('eskybet.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "eskybet.com",
-        banca: "Casa de Apostas Eskybet | Os Melhores Jogos de Cassino Online com Bônus de Cadastro",
-        styles: "",
-        description: "Cadastre-se e Jogue os Melhores Jogos de Cassino Online, realize sua Aposta Online na Eskybet a Melhor Plataforma com Pagamento via Pix",
-    });
-});
-
 gulp.task('fortalezabets.online', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "fortalezabets.online",
         banca: "FORTALEZA BETS",
         styles: "",
     });
 });
 
-gulp.task('apostabrasil.com', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "apostabrasil.com",
-        banca: "APOSTA BRASIL",
-        styles: "",
-    });
-});
-
 gulp.task('lottomaster.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "lottomaster.bet",
         banca: "LOTTO MASTER",
         styles: "",
@@ -1418,7 +1248,7 @@ gulp.task('lottomaster.bet', function (done) {
 
 gulp.task('jetbet.net.br', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "jetbet.net.br",
         banca: "JetBet: Apostas Esportivas Online | A gente junto dá jogo!",
         dominioTemp: "jetbet.net.br",
@@ -1431,7 +1261,7 @@ gulp.task('jetbet.net.br', function (done) {
 
 gulp.task('moneybets.net', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "moneybets.net",
         banca: "MONEY BETS",
         styles: "",
@@ -1440,7 +1270,7 @@ gulp.task('moneybets.net', function (done) {
 
 gulp.task('bnrbet.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "bnrbet.com",
         banca: "BNR BET",
         styles: "",
@@ -1449,7 +1279,7 @@ gulp.task('bnrbet.com', function (done) {
 
 gulp.task('xico.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "xico.bet",
         banca: "XICO.BET",
         styles: "",
@@ -1460,7 +1290,7 @@ gulp.task('xico.bet', function (done) {
 
 gulp.task('faturabet.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "faturabet.com",
         banca: "FATURA BET",
         styles: "",
@@ -1471,7 +1301,7 @@ gulp.task('faturabet.com', function (done) {
 
 gulp.task('supertop3.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "supertop3.bet",
         banca: "SUPERTOP3.BET",
         styles: "",
@@ -1480,7 +1310,7 @@ gulp.task('supertop3.bet', function (done) {
 
 gulp.task('bullbets.com.br', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "bullbets.com.br",
         banca: "BULL BETS",
         styles: "",
@@ -1489,26 +1319,16 @@ gulp.task('bullbets.com.br', function (done) {
 
 gulp.task('trevocassino.vip', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "trevocassino.vip",
         banca: "TREVO CASSINO",
         styles: "",
     });
 });
 
-gulp.task('maxbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "maxbet.wee.bet",
-        shared_url: "maxbetbrasil.com",
-        banca: "MAX BET",
-        styles: "",
-    });
-});
-
 gulp.task('bosscassino.bet', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "bosscassino.bet",
         banca: "BOSS CASSINO",
         styles: "",
@@ -1517,7 +1337,7 @@ gulp.task('bosscassino.bet', function (done) {
 
 gulp.task('mdsports.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "mdsports.bet",
         banca: "MD SPORTS",
         styles: "",
@@ -1526,25 +1346,16 @@ gulp.task('mdsports.bet', function (done) {
 
 gulp.task('sortepix.tv', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "sortepix.tv",
         banca: "SORTE PIX",
         styles: "",
     });
 });
 
-gulp.task('lovebetz.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "lovebetz.com",
-        banca: "LOVE BETZ",
-        styles: "",
-    });
-});
-
 gulp.task('superesportiva.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "superesportiva.com",
         banca: "SUPER ESPORTIVA",
         styles: "",
@@ -1553,7 +1364,7 @@ gulp.task('superesportiva.com', function (done) {
 
 gulp.task('betstar.vip', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "betstar.vip",
         banca: "BETSTAR",
         styles: "",
@@ -1562,17 +1373,16 @@ gulp.task('betstar.vip', function (done) {
 
 gulp.task('multisports.bet', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "multisports.bet",
         banca: "MULTISPORTS",
-        styles: "",
-        dominioTemp: "multisports.wee.bet"
+        styles: ""
     });
 });
 
 gulp.task('brinksbet.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "brinksbet.com",
         banca: "BRINKS BET",
         styles: ""
@@ -1581,7 +1391,7 @@ gulp.task('brinksbet.com', function (done) {
 
 gulp.task('betbastet.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "betbastet.com",
         banca: "BET BASTET",
         styles: ""
@@ -1590,7 +1400,7 @@ gulp.task('betbastet.com', function (done) {
 
 gulp.task('asortebets.com', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "asortebets.com",
         banca: "A SORTE BETS",
         styles: ""
@@ -1599,7 +1409,7 @@ gulp.task('asortebets.com', function (done) {
 
 gulp.task('proesporte.net', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "proesporte.net",
         banca: "PRO ESPORTE",
         styles: ""
@@ -1608,7 +1418,7 @@ gulp.task('proesporte.net', function (done) {
 
 gulp.task('unibets.com.br', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "unibets.com.br",
         banca: "UNI BETS",
         styles: ""
@@ -1617,7 +1427,7 @@ gulp.task('unibets.com.br', function (done) {
 
 gulp.task('newbets.com.br', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "newbets.com.br",
         banca: "NEW BETS",
         styles: ""
@@ -1626,7 +1436,7 @@ gulp.task('newbets.com.br', function (done) {
 
 gulp.task('jrsports.io', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "jrsports.io",
         banca: "JR SPORTS",
         styles: ""
@@ -1635,7 +1445,7 @@ gulp.task('jrsports.io', function (done) {
 
 gulp.task('miamipix.net', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "miamipix.net",
         banca: "MIAMI PIX",
         styles: ""
@@ -1644,7 +1454,7 @@ gulp.task('miamipix.net', function (done) {
 
 gulp.task('pixplay.io', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "pixplay.io",
         banca: "PIX PLAY",
         styles: ""
@@ -1653,7 +1463,7 @@ gulp.task('pixplay.io', function (done) {
 
 gulp.task('sortegol.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "sortegol.bet",
         banca: "SORTE GOL",
         styles: ""
@@ -1662,7 +1472,7 @@ gulp.task('sortegol.bet', function (done) {
 
 gulp.task('betcombinada.net', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "betcombinada.net",
         banca: "BET COMBINADA",
         styles: ""
@@ -1671,7 +1481,7 @@ gulp.task('betcombinada.net', function (done) {
 
 gulp.task('gramado.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "gramado.bet",
         banca: "GRAMADO.BET",
         styles: ""
@@ -1681,7 +1491,7 @@ gulp.task('gramado.bet', function (done) {
 // Old goalbet.com.br
 gulp.task('goalb.net', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "goalb.net",
         banca: "GOAL BET",
         styles: ""
@@ -1690,7 +1500,7 @@ gulp.task('goalb.net', function (done) {
 
 gulp.task('sortegol.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "sortegol.com",
         banca: "SORTE GOL",
         styles: ""
@@ -1708,7 +1518,7 @@ gulp.task('gli.wee.bet', function (done) {
 
 gulp.task('betinha.com', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "betinha.com",
         banca: "betinha.com",
         styles: "",
@@ -1720,26 +1530,16 @@ gulp.task('betinha.com', function (done) {
 
 gulp.task('goldeplaca.online', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "goldeplaca.online",
         banca: "GOL DE PLACA",
         styles: "",
     });
 });
 
-gulp.task('puskasbet.com.br', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "puskasbet.com.br",
-        banca: "PUSKAS BET",
-        styles: "",
-        xtremepush_sdk: "U4khpg3OiiSAmb15QwVyVUFFXzvEv20k"
-    });
-});
-
 gulp.task('betagora.io', function (done) {
     tasks(done, {
-        server: "front4.wee.bet",
+        server: "front4.weebet.tech",
         host: "betagora.io",
         banca: "BET AGORA",
         styles: "",
@@ -1750,17 +1550,17 @@ gulp.task('betagora.io', function (done) {
 
 gulp.task('megapix.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "megapix.bet",
         banca: "Apostas Esportivas | Cassino | Bônus de 100% | MEGAPIX.bet",
         styles: "",
     });
 });
 
-gulp.task('pinbet.io', function (done) {
+gulp.task('pinbet.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
-        host: "pinbet.io",
+        server: "front5.weebet.tech",
+        host: "pinbet.bet",
         banca: "PINBET",
         styles: "",
         xtremepush_sdk: "l5zlJi7majbIVZTxwtIgEYppdmK4KazO"
@@ -1769,7 +1569,7 @@ gulp.task('pinbet.io', function (done) {
 
 gulp.task('emirates365.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "emirates365.bet",
         banca: "EMIRATES 365",
         styles: "",
@@ -1778,7 +1578,7 @@ gulp.task('emirates365.bet', function (done) {
 
 gulp.task('topbets.site', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "topbets.site",
         banca: "TOP BETS",
         styles: "",
@@ -1787,7 +1587,7 @@ gulp.task('topbets.site', function (done) {
 
 gulp.task('amabet.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "amabet.bet",
         banca: "AMA BET",
         styles: "",
@@ -1798,7 +1598,7 @@ gulp.task('amabet.bet', function (done) {
 
 gulp.task('jjsports.vip', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "jjsports.vip",
         banca: "JJ SPORTS",
         styles: "",
@@ -1807,7 +1607,7 @@ gulp.task('jjsports.vip', function (done) {
 
 gulp.task('fortunaplay.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "fortunaplay.bet",
         banca: "FortunaPlay",
         styles: "",
@@ -1818,25 +1618,16 @@ gulp.task('fortunaplay.bet', function (done) {
 
 gulp.task('apostoubrasil.vip', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "apostoubrasil.vip",
         banca: "APOSTOU BRASIL",
         styles: "",
     });
 });
 
-gulp.task('bocamafra.bet', function (done) {
-    tasks(done, {
-        server: "front5.wee.bet",
-        host: "bocamafra.bet",
-        banca: "BOCAMAFRA.BET",
-        styles: ""
-    });
-});
-
 gulp.task('lidersports.vip', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "lidersports.vip",
         banca: "LÍDER SPORTS",
         styles: ""
@@ -1845,7 +1636,7 @@ gulp.task('lidersports.vip', function (done) {
 
 gulp.task('newbet.one', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "newbet.one",
         banca: "NEW BET",
         styles: ""
@@ -1854,7 +1645,7 @@ gulp.task('newbet.one', function (done) {
 
 gulp.task('sts13.vip', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "sts13.vip",
         banca: "STS 13",
         styles: ""
@@ -1863,7 +1654,7 @@ gulp.task('sts13.vip', function (done) {
 
 gulp.task('maxbetbrasil.net', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "maxbetbrasil.net",
         banca: "MAX BET BRASIL",
         styles: ""
@@ -1872,7 +1663,7 @@ gulp.task('maxbetbrasil.net', function (done) {
 
 gulp.task('apostefacil.bet', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "apostefacil.bet",
         banca: "APOSTE FÁCIL",
         styles: "",
@@ -1883,7 +1674,7 @@ gulp.task('apostefacil.bet', function (done) {
 
 gulp.task('viabet.com.br', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "viabet.com.br",
         banca: "VIA BET",
         styles: "",
@@ -1893,7 +1684,7 @@ gulp.task('viabet.com.br', function (done) {
 
 gulp.task('majovip.net', function (done) {
     tasks(done, {
-        server: "front5.wee.bet",
+        server: "front5.weebet.tech",
         host: "majovip.net",
         banca: "MAJO VIP",
         styles: "",
@@ -1902,7 +1693,7 @@ gulp.task('majovip.net', function (done) {
 
 gulp.task('playnabet.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "playnabet.com",
         banca: "PLAY NA BET",
         styles: "",
@@ -1920,7 +1711,7 @@ gulp.task('poc.wee.bet', function (done) {
 
 gulp.task('bet10.bet', function (done) {
     tasks(done, {
-        server: "front1.wee.bet",
+        server: "front1.weebet.tech",
         host: "bet10.bet",
         banca: "BET10",
         styles: "",
@@ -1929,7 +1720,7 @@ gulp.task('bet10.bet', function (done) {
 
 gulp.task('pintou.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "pintou.bet",
         banca: "PINTOU.BET",
         styles: "",
@@ -1938,7 +1729,7 @@ gulp.task('pintou.bet', function (done) {
 
 gulp.task('boaaposta.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "boaaposta.com",
         banca: "Boa aposta: A sua melhor escolha | Apostas esportivas e Jogos ao vivo ",
         styles: "",
@@ -1946,18 +1737,9 @@ gulp.task('boaaposta.com', function (done) {
     });
 });
 
-gulp.task('jack77bet.com', function (done) {
-    tasks(done, {
-        server: "front1.wee.bet",
-        host: "jack77bet.com",
-        banca: "JACK77 ",
-        styles: "",
-    });
-});
-
 gulp.task('copasbet.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "copasbet.bet",
         banca: "COPAS BET",
         styles: "",
@@ -1966,7 +1748,7 @@ gulp.task('copasbet.bet', function (done) {
 
 gulp.task('boasorte.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "boasorte.bet",
         banca: "BOA SORTE",
         styles: "",
@@ -1975,7 +1757,7 @@ gulp.task('boasorte.bet', function (done) {
 
 gulp.task('eliteesportes.vip', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "eliteesportes.vip",
         banca: "ELITE ESPORTES",
         styles: "",
@@ -1984,7 +1766,7 @@ gulp.task('eliteesportes.vip', function (done) {
 
 gulp.task('joguefacil.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "joguefacil.bet",
         banca: "JOGUE FÁCIL",
         styles: ""
@@ -1993,7 +1775,7 @@ gulp.task('joguefacil.bet', function (done) {
 
 gulp.task('sportvips.bet', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "sportvips.bet",
         banca: "SportVip",
         styles: ""
@@ -2002,7 +1784,7 @@ gulp.task('sportvips.bet', function (done) {
 
 gulp.task('condutaesp.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "condutaesp.com",
         banca: "CONDUTA ESPORTIVA",
         styles: ""
@@ -2011,7 +1793,7 @@ gulp.task('condutaesp.com', function (done) {
 
 gulp.task('betfortuna.com.br', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "betfortuna.com.br",
         banca: "BET FORTUNA",
         styles: "",
@@ -2021,7 +1803,7 @@ gulp.task('betfortuna.com.br', function (done) {
 
 gulp.task('paraisobet.net', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "paraisobet.net",
         banca: "PARAISO BET",
         styles: ""
@@ -2030,25 +1812,16 @@ gulp.task('paraisobet.net', function (done) {
 
 gulp.task('betmania.casino', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "betmania.casino",
         banca: "BET MANIA",
         styles: ""
     });
 });
 
-gulp.task('buda-bet.com', function (done) {
-    tasks(done, {
-        server: "front2.wee.bet",
-        host: "buda-bet.com",
-        banca: "BUDA BET",
-        styles: ""
-    });
-});
-
 gulp.task('zedocash.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "zedocash.bet",
         banca: "ZÉ DO CASH",
         styles: ""
@@ -2057,7 +1830,7 @@ gulp.task('zedocash.bet', function (done) {
 
 gulp.task('timedasorte.com', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "timedasorte.com",
         banca: "TIME DA SORTE",
         styles: ""
@@ -2066,7 +1839,7 @@ gulp.task('timedasorte.com', function (done) {
 
 gulp.task('bet1000.net.br', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "bet1000.net.br",
         banca: "BET 1000",
         styles: ""
@@ -2075,7 +1848,7 @@ gulp.task('bet1000.net.br', function (done) {
 
 gulp.task('26sports.bet', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "26sports.bet",
         banca: "26SPORTS",
         styles: ""
@@ -2084,7 +1857,7 @@ gulp.task('26sports.bet', function (done) {
 
 gulp.task('vitoriasports.vip', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "vitoriasports.vip",
         banca: "VITÓRIA SPORTS",
         styles: ""
@@ -2093,7 +1866,7 @@ gulp.task('vitoriasports.vip', function (done) {
 
 gulp.task('dentrodaaposta.com', function (done) {
     tasks(done, {
-        server: "front2.wee.bet",
+        server: "front2.weebet.tech",
         host: "dentrodaaposta.com",
         banca: "DENTRO DA APOSTA",
         styles: ""
@@ -2102,7 +1875,7 @@ gulp.task('dentrodaaposta.com', function (done) {
 
 gulp.task('deubet.io', function (done) {
     tasks(done, {
-        server: "front3.wee.bet",
+        server: "front3.weebet.tech",
         host: "deubet.io",
         banca: "DEU BET",
         styles: ""
