@@ -243,7 +243,6 @@ gulp.task('apostapremiada.bet', function (done) {
     });
 });
 
-// Old bet1.wee.bet
 gulp.task('mrsportsdigital.com', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
@@ -429,7 +428,6 @@ gulp.task('sportss.vip', function (done) {
     });
 });
 
-// Database Name = citybets.wee.bet
 gulp.task('citybets.online', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
@@ -834,7 +832,7 @@ gulp.task('ricardo.wee.bet', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
         host: "ricardo.wee.bet",
-        banca: "RICARDO.WEE.BET",
+        banca: "RICARDO",
         styles: "",
     });
 });
@@ -1324,16 +1322,6 @@ gulp.task('trevocassino.vip', function (done) {
         server: "front3.weebet.tech",
         host: "trevocassino.vip",
         banca: "TREVO CASSINO",
-        styles: "",
-    });
-});
-
-gulp.task('maxbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.weebet.tech",
-        host: "maxbet.wee.bet",
-        shared_url: "maxbetbrasil.com",
-        banca: "MAX BET",
         styles: "",
     });
 });
