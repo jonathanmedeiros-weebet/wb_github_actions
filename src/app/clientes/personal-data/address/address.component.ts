@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
 import { Cidade } from 'src/app/shared/models/endereco/cidade';
 import { Estado } from 'src/app/shared/models/endereco/estado';
-import { debounceTime, distinctUntilChanged, pairwise } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, pairwise, skip} from 'rxjs/operators';
 
 export interface CustomerResponse {
     cpf: string;
@@ -54,12 +54,10 @@ export class AddressComponent {
             .pipe(
                 debounceTime(1000),
                 distinctUntilChanged(),
-                pairwise()
+                skip(1)
             )
-            .subscribe(([previusZipcode, currentZipcode]) => {
-                if (previusZipcode != currentZipcode) {
-                    this.searchForZipcode(currentZipcode)
-                }
+            .subscribe((currentZipcode) => {
+                this.searchForZipcode(currentZipcode)
             });
 
         this.utilsService.getEstados().subscribe(states => this.states = states);
