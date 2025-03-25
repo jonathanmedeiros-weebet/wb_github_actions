@@ -17,8 +17,10 @@ declare function BTRenderer(): void;
 })
 export class HomeComponent implements OnInit, OnDestroy{
     @ViewChildren('scrollGames') gamesScroll: QueryList<ElementRef>;
+    
     gamesPopulares = [];
     gamesPopularesAoVivo = [];
+    public gamesRecommended = [];
 
     isMobile = false;
     qtdItens = 0;
@@ -35,6 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 
     private bt: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
+    private isLoggedIn: boolean = false;
 
     constructor(
         private messageService: MessageService,
@@ -53,8 +56,23 @@ export class HomeComponent implements OnInit, OnDestroy{
         let currentLang = this.translate.currentLang;
 
         this.betby = this.paramsService.getOpcoes().betby;
+        this.authService.logado.subscribe(
+            (res) => {
+                this.isLoggedIn = res;
+            }
+        );
 
-        this.widgetService.byPage('home').subscribe(response => {
+        this.widgetService.byPage('home').subscribe(async response => {
+            if (this.isLoggedIn) {
+                await this.getGamesRecommendations();
+
+                response = response.map(widget => {
+                    if (widget.type == 'betpilot') {
+                        widget.items = this.gamesRecommended
+                    }
+                    return widget
+                });
+            }
             this.widgets = response;
         });
 
@@ -135,5 +153,23 @@ export class HomeComponent implements OnInit, OnDestroy{
 
     getGameIds(items: Array<any>) {
         return items.map(i => i.item_id)
+    }
+
+    getGames() {
+        return this.gamesRecommended;
+    }
+
+    private async getGamesRecommendations() {
+        const userId = this.authService.getUser().id;
+    
+        try {
+            const res = await this.casinoApi.getCasinoRecommendations(userId).toPromise();
+    
+            if (res.success) {
+                this.gamesRecommended = res.results ?? [];
+            }
+        } catch (error) {
+          console.error('Erro ao obter recomendações:', error);
+        }
     }
 }

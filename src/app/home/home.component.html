@@ -1,6 +1,14 @@
 <div #topHome class="home-container" [ngStyle]="{'max-height': 'calc(100vh - ' +headerHeight+'px)'}">
     <ng-container *ngFor="let widget of widgets">
         <ng-container [ngSwitch]="widget.type">
+            <app-recommended-to-you
+                *ngSwitchCase="'betpilot'"
+                class="widgets"
+                linkAll="/casino"
+                [games]="getGames()"
+                [title]="widget.name"
+                [icon]="widget.icon"
+            />
             <app-banners
                 *ngSwitchCase="'banner'"
                 class="banner"
