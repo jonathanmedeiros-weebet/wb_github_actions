@@ -1479,11 +1479,11 @@ gulp.task('betcombinada.net', function (done) {
     });
 });
 
-gulp.task('gramado.bet', function (done) {
+gulp.task('gramadobet.net.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "gramado.bet",
-        banca: "GRAMADO.BET",
+        host: "gramadobet.net.br",
+        banca: "GRAMADO BET",
         styles: ""
     });
 });
