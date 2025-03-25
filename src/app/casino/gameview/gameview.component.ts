@@ -443,7 +443,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
                         this.gameProviderName = response.gameFornecedorExibicao;
-                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
