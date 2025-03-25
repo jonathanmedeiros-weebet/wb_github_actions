@@ -1727,10 +1727,10 @@ gulp.task('pintou.bet', function (done) {
     });
 });
 
-gulp.task('boaaposta.com', function (done) {
+gulp.task('boaaposta.net', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "boaaposta.com",
+        host: "boaaposta.net",
         banca: "Boa aposta: A sua melhor escolha | Apostas esportivas e Jogos ao vivo ",
         styles: "",
         description: "Descubra o site de apostas ideal para quem busca diversão e grandes oportunidades! Apostas esportivas, cassino online, bônus exclusivos e muito mais. Jogue com segurança e emoção. Cadastre-se agora!"
