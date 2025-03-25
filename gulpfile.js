@@ -1890,3 +1890,12 @@ gulp.task('betcapital.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sporte.vip', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "sporte.vip",
+        banca: "SPORTE VIP",
+        styles: ""
+    });
+});
