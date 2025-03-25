@@ -176,6 +176,7 @@ export default {
     },
 
     setSportModality(forceLoading = true) {
+      document.getElementById('app').style.overlay = "scroll";
       const modality = this.modalityList.find(modality => modality.id === this.Modalities.FOOTBALL);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
@@ -183,6 +184,7 @@ export default {
     },
 
     setLotteryModality() {
+      document.getElementById('app').style.overlay = "hiden";
       const modality = this.modalityList.find(modality => modality.id === this.Modalities.LOTTERY);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
@@ -190,6 +192,7 @@ export default {
     },
 
     setPopularLotteryModality() {
+      document.getElementById('app').style.overlay = "hiden";
       const modality = this.modalityList.find(modality => modality.id === this.Modalities.POPULAR_LOTTERY);
       this.homeStore.setModality(modality);
       this.ticketStore.setModalityId(modality.id);
@@ -227,7 +230,6 @@ export default {
       this.ticketStore.setModalityId(modality.id, clearTicket);
 
       this.homeStore.setDate(now());
-      this.homeStore.setPaginate(10);
 
       if(this.isPopularLotteryModality){
         setTimeout(() => this.$refs['popular-lottery-modality'].loadPage(), 500);
@@ -254,7 +256,6 @@ export default {
     async handleCalendar(dateTime) {
       this.loading = true;
       this.homeStore.setDate(dateTime);
-      this.homeStore.setPaginate(10);
       this.handleCloseCalendarModal();
       
       if(this.isSportModality) {
@@ -279,7 +280,6 @@ export default {
       this.homeStore.setIsLive(!this.liveActived);
       this.homeStore.setInSearch(!this.homeStore.inSearch);
       this.homeStore.setLeague(null);
-      this.homeStore.setPaginate(10);
       this.$refs['sport-modality'].prepareSocket();
       this.$refs['sport-modality'].pageLoad();
     },

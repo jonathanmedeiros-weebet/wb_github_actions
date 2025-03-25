@@ -9,7 +9,10 @@ import App from './App.vue'
 import router from './router'
 import { useConfigClient } from './stores'
 import VueLazyload from 'vue-lazyload'
+import VueVirtualScroller from 'vue-virtual-scroller'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
+Vue.use(VueVirtualScroller)
 Vue.use(VueMask);
 Vue.use(PiniaVuePlugin)
 Vue.use(VueRouter)
