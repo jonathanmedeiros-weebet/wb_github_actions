@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
 import { Cidade } from 'src/app/shared/models/endereco/cidade';
 import { Estado } from 'src/app/shared/models/endereco/estado';
-import { debounceTime, distinctUntilChanged, pairwise, skip} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, skip} from 'rxjs/operators';
 
 export interface CustomerResponse {
     cpf: string;
