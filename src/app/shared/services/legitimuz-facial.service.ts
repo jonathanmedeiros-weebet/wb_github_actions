@@ -41,13 +41,13 @@ export class LegitimuzFacialService {
       this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
       this.faceIndex = this.faceIndexSub.asObservable();
       this.options.onSuccess = (eventName) => {
-        if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndex.next()) {
+        if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndexSub.getValue()) {
           this.faceIndexSub.next(true)
         }
       }
 
       this.options.eventHandler = (eventName) => {
-        if (eventName.name == 'faceindex' && eventName.status == 'success') {
+        if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndexSub.getValue()) {
           this.faceIndexSub.next(true)
         }
       };
