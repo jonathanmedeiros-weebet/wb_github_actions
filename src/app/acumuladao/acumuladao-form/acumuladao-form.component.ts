@@ -7,7 +7,7 @@ import {Acumuladao} from './../../models';
 import {PreApostaModalComponent, ApostaModalComponent, LoginModalComponent} from '../../shared/layout/modals';
 import {BaseFormComponent} from '../../shared/layout/base-form/base-form.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import {takeUntil} from 'rxjs/operators';
 import {BehaviorSubject, Subject} from 'rxjs';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ParametrosLocaisService, HelperService, CampeonatoService, PrintService, SportIdService } from './../../../../services';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 
 declare var $;
 

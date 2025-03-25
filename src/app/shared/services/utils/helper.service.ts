@@ -3,7 +3,7 @@ import { getCurrencySymbol } from '@angular/common';
 
 import { environment } from './../../../../environments/environment';
 import { config } from './../../config';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import { ParametrosLocaisService } from '../parametros-locais.service';
 import { SportIdService } from './sport-id.service';

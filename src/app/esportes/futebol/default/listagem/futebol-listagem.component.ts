@@ -24,7 +24,7 @@ import { BilheteEsportivoService, HelperService, ParametrosLocaisService, Sideba
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/min/locales';
 
 import { TranslateService } from '@ngx-translate/core';

@@ -4,7 +4,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {MessageService, CartaoService, MenuFooterService} from './../../services';
 import { CartaoAposta } from './../../models';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     selector: 'app-cartao-listagem',

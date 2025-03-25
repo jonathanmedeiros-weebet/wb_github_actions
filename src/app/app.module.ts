@@ -8,11 +8,7 @@ import {
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { registerLocaleData } from "@angular/common";
-import {
-    HttpClient,
-    HttpClientModule,
-    HTTP_INTERCEPTORS,
-} from "@angular/common/http";
+import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { environment } from "../environments/environment";
 import { NgxPaginationModule } from "ngx-pagination";
 import { SharedModule } from "./shared/shared.module";
@@ -21,7 +17,7 @@ import ptBr from "@angular/common/locales/pt";
 
 registerLocaleData(ptBr);
 
-import * as moment from "moment";
+import moment from "moment";
 moment.updateLocale("pt-bt", { parentLocale: "pt-br" });
 
 // App routing
@@ -95,12 +91,9 @@ export function googleFactory(service: ParametrosLocaisService) {
     } as SocialAuthServiceConfig;
 }
 
-@NgModule({
-    declarations: [AppComponent],
-    imports: [
-        BrowserModule,
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
-        HttpClientModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -126,18 +119,15 @@ export function googleFactory(service: ParametrosLocaisService) {
             // Register the ServiceWorker as soon as the application is stable
             // or after 30 seconds (whichever comes first).
             registrationStrategy: "registerWhenStable:30000",
-        }),
-    ],
-    providers: [
+        })], providers: [
         APP_TOKENS,
         {
             provide: "SocialAuthServiceConfig",
             useFactory: googleFactory,
             deps: [ParametrosLocaisService],
         },
-    ],
-    bootstrap: [AppComponent],
-})
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {

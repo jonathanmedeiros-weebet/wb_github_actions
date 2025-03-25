@@ -8,7 +8,7 @@ import {
     SportIdService
 } from 'src/app/services';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-tabela',

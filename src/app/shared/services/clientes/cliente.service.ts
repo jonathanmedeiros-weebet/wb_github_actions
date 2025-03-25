@@ -6,7 +6,7 @@ import { ErrorService } from '../utils/error.service';
 import { HeadersService } from '../utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Router } from '@angular/router';
 import { ParametrosLocaisService } from "../parametros-locais.service";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';

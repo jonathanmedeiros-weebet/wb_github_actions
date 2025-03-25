@@ -8,7 +8,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {config} from '../../../../config';
 import {ItemApostaRifa} from '../../../../models/rifa/item-aposta-rifa';
 import {CompatilhamentoBilheteModal} from '../../../modals';
-import * as moment from 'moment';
+import moment from 'moment';
 let newNavigator: any;
 newNavigator = window.navigator;
 

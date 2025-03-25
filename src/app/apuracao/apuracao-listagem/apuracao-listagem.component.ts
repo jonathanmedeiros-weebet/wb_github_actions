@@ -3,7 +3,7 @@ import { Validators, UntypedFormBuilder } from '@angular/forms';
 
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import {MenuFooterService, MessageService, ParametrosLocaisService} from './../../services';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     selector: 'app-apuracao-listagem',

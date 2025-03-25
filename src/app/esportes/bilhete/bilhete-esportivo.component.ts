@@ -20,7 +20,7 @@ import {
 } from '../../services';
 import { ItemBilheteEsportivo } from '../../models';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as clone from 'clone';
+import clone from 'clone';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Geolocation } from 'src/app/shared/services/geolocation.service';

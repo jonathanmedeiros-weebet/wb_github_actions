@@ -18,17 +18,20 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:application",
                     "options": {
                         "allowedCommonJsDependencies": [
                             "socket.io-client",
                             "esc-pos-encoder"
                         ],
-                        "outputPath": "dist",
+                        "outputPath": {
+                          "base": "dist"
+                        },
                         "index": "src/index.html",
-                        "main": "src/main.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "polyfills": "src/polyfills.ts",
+                        "polyfills": [
+                          "src/polyfills.ts"
+                        ],
                         "assets": [
                           "src/assets",
                           "src/locale",
@@ -57,13 +60,13 @@
                             "node_modules/bootstrap-icons/font/bootstrap-icons.css",
                             "node_modules/remixicon/fonts/remixicon.css"
                         ],
-                        "serviceWorker": true,
-                        "ngswConfigPath": "ngsw-config.json",
+                        "serviceWorker": "ngsw-config.json",
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",
                             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                             "node_modules/jstree/dist/jstree.min.js"
-                        ]
+                        ],
+                        "browser": "src/main.ts"
                     },
                     "configurations": {
                         "production": {
@@ -83,9 +86,7 @@
                             "outputHashing": "all"
                         },
                         "development": {
-                            "buildOptimizer": false,
-                            "optimization": false,
-                            "vendorChunk": true,
+                          "optimization": false,
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
