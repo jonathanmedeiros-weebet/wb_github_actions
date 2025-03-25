@@ -200,7 +200,8 @@
     "vitoriasports.vip": "gulp vitoriasports.vip",
     "dentrodaaposta.com": "gulp dentrodaaposta.com",
     "deubet.io": "gulp deubet.io",
-    "betcapital.com": "gulp betcapital.com"
+    "betcapital.com": "gulp betcapital.com",
+    "sporte.vip": "gulp sporte.vip"
   },
   "private": true,
   "dependencies": {
