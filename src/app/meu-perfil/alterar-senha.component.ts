@@ -6,7 +6,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { AuthService, ClienteService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService } from './../services';
 import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
 import { Observable, Subject } from 'rxjs';
-import {first, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import { FormValidations, PasswordValidation } from '../shared/utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
@@ -160,7 +160,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
             if (this.faceMatchEnabled && !this.disapprovedIdentity && this.faceMatchType == 'legitimuz') {
                 this.legitimuzService.curCustomerIsVerified
-                    .pipe(takeUntil(this.unsub$), first())
+                    .pipe(takeUntil(this.unsub$))
                     .subscribe(curCustomerIsVerified => {
                         this.verifiedIdentity = curCustomerIsVerified;
                         if (this.verifiedIdentity) {
@@ -179,7 +179,7 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
                     });
 
                 this.legitimuzFacialService.faceIndex
-                    .pipe(takeUntil(this.unsub$), first())
+                    .pipe(takeUntil(this.unsub$))
                     .subscribe(faceIndex => {
                         if (faceIndex) {
                             this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({
