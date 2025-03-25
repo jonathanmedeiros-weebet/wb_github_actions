@@ -449,14 +449,10 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
             this.verificarPagamento(this.pix);
         }, 10000);
 
-        this.pixModal.result.then(
-            (result) => { },
-            (reason) => {
-                if (reason == 'pix-modal-closed') {
-                    this.novoPix();
-                }
-            }
-        );
+        this.pixModal.result.finally(() => {
+            this.novoPix(); 
+        });
+        
     }
 
     copyInputMessage(inputElement) {
@@ -472,6 +468,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         this.submitting = false;
         clearInterval(this.clearSetInterval);
         this.verificacoes = 0;
+        this.createForm();
     }
 
     verificarPagamento(pix) {
