@@ -770,10 +770,10 @@ gulp.task('betminas.club', function (done) {
     });
 });
 
-gulp.task('bet83.wee.bet', function (done) {
+gulp.task('bet83.com.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "bet83.wee.bet",
+        host: "bet83.com.br",
         banca: "BET83",
         styles: "",
     });
