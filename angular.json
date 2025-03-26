@@ -30,7 +30,8 @@
                         "index": "src/index.html",
                         "tsConfig": "tsconfig.app.json",
                         "polyfills": [
-                          "src/polyfills.ts"
+                          "src/polyfills.ts",
+                          "@angular/localize/init"
                         ],
                         "assets": [
                           "src/assets",
