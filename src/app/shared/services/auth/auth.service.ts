@@ -50,9 +50,12 @@ export class AuthService {
 
     verificaDadosLogin(data: any): Observable<any> {
         // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
+        const bettingShopId = localStorage.getItem('bettingShopId');
+
         data = {
             ...data,
-            ignorarValidacaoEmailObrigatoria: true
+            ignorarValidacaoEmailObrigatoria: true,
+            betting_shop_id: (bettingShopId && this.enableTotemModule) ? Number(bettingShopId) : null
         }
 
         return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
@@ -143,10 +146,14 @@ export class AuthService {
 
     login(data: any): Observable<any> {
         // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
+        const bettingShopId = localStorage.getItem('bettingShopId');
+
         data = {
             ...data,
-            ignorarValidacaoEmailObrigatoria: true
+            ignorarValidacaoEmailObrigatoria: true,
+            betting_shop_id: (bettingShopId && this.enableTotemModule) ? Number(bettingShopId) : null
         }
+        
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
@@ -550,5 +557,9 @@ export class AuthService {
                 modalRef.componentInstance.hasRegisterBanner = false;
             });
         
+    }
+
+    get enableTotemModule(): boolean {
+        return Boolean(this.paramsService.getOpcoes()?.enable_totem_module);
     }
 }

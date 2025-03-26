@@ -29,6 +29,7 @@ import { NavigationHistoryService } from 'src/app/shared/services/navigation-his
 import { CronService } from './shared/services/timer.service';
 import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
 import { RegisterV3ModalComponent } from './shared/layout/modals/register-v3-modal/register-v3-modal.component';
+import { BettingShopService } from './shared/services/betting-shop.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -84,6 +85,7 @@ export class AppComponent implements OnInit {
         private accountVerificationService: AccountVerificationService,
         private bannerService: BannerService,
         private geolocationService: GeolocationService,
+        private bettingShopService: BettingShopService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -149,6 +151,28 @@ export class AppComponent implements OnInit {
                     this.isCadastro = true;
                 } else {
                     this.ativacaoCadastro = false;
+                }
+                console.log('teste1');
+                console.log('totemModule', this.enableTotemModule);
+                console.log('betting_shop_id', params.betting_shop_id);
+
+                if (this.enableTotemModule && params.betting_shop_id) {
+                    const bettingShopId = params.betting_shop_id;
+                    console.log('teste2');
+                
+                    this.bettingShopService.getBettingShop(bettingShopId).subscribe({
+                        next: (res) => {
+                            if (res) {
+                                console.log(bettingShopId);
+                                localStorage.setItem('bettingShopId', bettingShopId);
+                                // this.router.navigate(['betting-shop']);
+                            }
+                        },
+                        error: (err) => {
+                            const errorMessage = err?.error?.errors?.message || 'Erro desconhecido';
+                            this.handleError(errorMessage);
+                        },
+                    });
                 }
             });
 
@@ -431,5 +455,9 @@ export class AppComponent implements OnInit {
 
     under18Confirm(){
         this.under18Confirmed = true;
+    }
+
+    get enableTotemModule(): boolean {
+        return Boolean(this.paramLocais.getOpcoes()?.enable_totem_module);
     }
 }
