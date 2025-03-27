@@ -1,19 +1,20 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { TranslateService } from '@ngx-translate/core';
 import { AccountVerificationService, AuthService, BannerService, ClienteService, FinanceiroService, GeolocationService, MessageService, NavigatorPermissionsService, ParametrosLocaisService } from 'src/app/services';
 import { EventGa4Types, Ga4Service } from 'src/app/shared/services/ga4/ga4.service';
 import { FormValidations } from 'src/app/shared/utils';
 import { BaseFormComponent } from '../../base-form/base-form.component';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
 import { jwtDecode } from 'jwt-decode';
 import { CountriesService } from 'src/app/shared/services/utils/countries.service';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { RecaptchaComponent } from 'ng-recaptcha';
+import { finalize } from 'rxjs/operators';
 import { CampanhaAfiliadoService } from 'src/app/shared/services/campanha-afiliado.service';
-import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -63,6 +64,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public showNationalitySection: boolean = false;
     public showNationalityOptions: boolean = false;
     public nationalities = this.countriesService.getCountries();
+    public cpfSpinner = false;
     private previousUrl: string;
 
     constructor(
@@ -426,7 +428,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     }
 
     public validarCpf() {
+        this.cpfSpinner = true;
         const { cpf } = this.form.value;
+        
         if (this.autoPreenchimento) {
             if (this.form.get('cpf').valid) {
                 if (cpf) {
@@ -443,7 +447,11 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     );
                 }
 
-                this.clientesService.validarCpf(cpf).subscribe(
+                this.clientesService.validarCpf(cpf).pipe(
+                    finalize(() => {
+                        this.cpfSpinner = false;
+                    })
+                ).subscribe( 
                     res => {
                         if (res.validarCpfAtivado) {
                             const threeMonthsAgo = new Date();
@@ -485,6 +493,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     nome: '',
                     dadosCriptografados: null
                 });
+                this.cpfSpinner = false;
             }
         }
     }

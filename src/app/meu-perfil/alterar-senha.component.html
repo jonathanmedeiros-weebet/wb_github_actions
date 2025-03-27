@@ -55,16 +55,10 @@
                                     {{'senhas.minimumCharactersPassword' | translate}}
                                 </li>
                                 <li
-                                    [ngClass]="{'fulfilled': requirements.lowercaseLetter, 'unfulfilled': !requirements.lowercaseLetter}">
+                                    [ngClass]="{'fulfilled': requirements.lowercaseLetter && requirements.uppercaseLetter, 'unfulfilled': !(requirements.lowercaseLetter && requirements.uppercaseLetter)}">
                                     <i
-                                        [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter, 'bi bi-x-circle': !requirements.lowercaseLetter}"></i>
-                                    {{'senhas.lowercaseLetter' | translate}}
-                                </li>
-                                <li
-                                    [ngClass]="{'fulfilled': requirements.uppercaseLetter, 'unfulfilled': !requirements.uppercaseLetter}">
-                                    <i
-                                        [ngClass]="{'bi bi-check-circle': requirements.uppercaseLetter, 'bi bi-x-circle': !requirements.uppercaseLetter}"></i>
-                                    {{'senhas.uppercaseLetter' | translate}}
+                                        [ngClass]="{'bi bi-check-circle': requirements.lowercaseLetter && requirements.uppercaseLetter, 'bi bi-x-circle': !(requirements.lowercaseLetter && requirements.uppercaseLetter)}"></i>
+                                    {{'senhas.mustContainOneUppercaseAndOneLowercaseLetter' | translate}}
                                 </li>
                                 <li
                                     [ngClass]="{'fulfilled': requirements.specialChar, 'unfulfilled': !requirements.specialChar}">
