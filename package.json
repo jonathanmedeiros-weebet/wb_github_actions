@@ -202,7 +202,7 @@
     "deubet.io": "gulp deubet.io",
     "betcapital.com": "gulp betcapital.com",
     "sporte.vip": "gulp sporte.vip",
-    "vaibet360.com": "vaibet360.com"
+    "vaibet360.com": "gulp vaibet360.com"
   },
   "private": true,
   "dependencies": {
