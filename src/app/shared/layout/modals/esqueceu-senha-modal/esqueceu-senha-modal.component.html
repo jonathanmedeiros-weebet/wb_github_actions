@@ -24,8 +24,8 @@
                             <app-error-msg [control]="form.get('email')" label="{{'geral.email' | translate}}"
                                 class="text-left"></app-error-msg>
                         </div>
-                        <button type="submit" class="btn btn-custom btn-block"
-                            [disabled]="submitting">{{'senhas.solicitarCodigoRedefinicao' | translate}}</button>
+                        <button type="submit" class="btn btn-custom btn-block btn-reset"
+                            [disabled]="submitting || form.invalid">{{'senhas.solicitarCodigoRedefinicao' | translate}}</button>
                     </form>
                 </div>
             </div>

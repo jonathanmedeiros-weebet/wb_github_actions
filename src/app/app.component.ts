@@ -1,11 +1,23 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 
-import { AuthService, HelperService, ParametroService, ImagemInicialService, MessageService, ParametrosLocaisService, UtilsService, ClienteService, SecurityService } from './services';
+import {
+    AuthService,
+    HelperService,
+    ParametroService,
+    ImagemInicialService,
+    MessageService,
+    ParametrosLocaisService,
+    UtilsService,
+    ClienteService,
+    SecurityService,
+    BannerService,
+    GeolocationService
+} from './services';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { CadastroModalComponent, EsqueceuSenhaModalComponent } from './shared/layout/modals';
+import { EsqueceuSenhaModalComponent } from './shared/layout/modals';
 import { LoginModalComponent } from './shared/layout/modals';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +27,8 @@ import { ActivityDetectService } from './shared/services/activity-detect.service
 import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from './shared/services/timer.service';
-import { RegisterModalComponentComponent } from './shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
+import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
+import { RegisterV3ModalComponent } from './shared/layout/modals/register-v3-modal/register-v3-modal.component';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -68,6 +81,9 @@ export class AppComponent implements OnInit {
         private navigationHistoryService: NavigationHistoryService,
         private cron: CronService,
         private security: SecurityService,
+        private accountVerificationService: AccountVerificationService,
+        private bannerService: BannerService,
+        private geolocationService: GeolocationService,
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -90,6 +106,8 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.geolocationService.saveLocalStorageLocation();
+
         if(this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {
             this.modalRef = this.modalService.open(
                 this.over18MessageModal,
@@ -144,10 +162,17 @@ export class AppComponent implements OnInit {
             const activityUserConfig = Boolean(this.activityDetectService.getActivityTimeConfig());
             const isCliente = this.auth.isCliente();
 
+            if (!isLogged) {
+                localStorage.removeItem(ACCOUNT_VERIFIED)
+            }
+
             if (isLogged && isCliente) {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {
                     this.openModalTimeLimit();
                 });
+
+                localStorage.removeItem(ACCOUNT_VERIFIED)
+                this.accountVerificationService.getAccountVerificationDetail().toPromise();
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
@@ -188,23 +213,26 @@ export class AppComponent implements OnInit {
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
 
-            this.modalService.open(RegisterModalComponentComponent, {
+            // this.auth.openRegisterV3Modal();
+            const modalRef = this.modalService.open(RegisterV3ModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
-                windowClass: 'modal-400 modal-cadastro-cliente'
+                windowClass: `modal-400 modal-cadastro-cliente`,
+                backdrop: 'static'
             });
+            modalRef.componentInstance.hasRegisterBanner = false;
         }
 
         if (this.router.url.includes('/login')) {
+            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
+
             this.modalService.open(LoginModalComponent, {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
                 centered: true,
                 windowClass: 'modal-400 modal-cadastro-cliente'
             });
-
-            this.router.navigate(['esportes/futebol']);
         }
 
         if (this.router.url.includes('/esqueceu-senha')) {
@@ -284,6 +312,8 @@ export class AppComponent implements OnInit {
                 }
             }
         });
+
+        this.bannerService.requestBanners().toPromise()
     }
 
     displayInitialModal() {

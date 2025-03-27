@@ -109,7 +109,6 @@ import { LastAccessesModalComponent } from './modals/last-accesses-modal/last-ac
 import { WeePaginationModule } from 'src/app/weebet-pagination/wee-pagination.module';
 
 import { ExibirBilheteCassinoComponent } from './exibir-bilhete/cassino/exibir-bilhete-cassino/exibir-bilhete-cassino.component';
-import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
 import { RegisterModalComponentComponent } from './modals/register-modal/register-modal-component/register-modal-component.component';
 import { AddressDataComponent } from './modals/register-modal/parts/address-data/address-data.component';
 import { LoginDataComponent } from './modals/register-modal/parts/login-data/login-data.component';
@@ -118,6 +117,13 @@ import { OnboardingModalComponent } from './modals/onboarding-modal/onboarding-m
 import { StepperProgressBarComponent } from './modals/register-modal/parts/stepper-progress-bar/stepper-progress-bar.component';
 import { PersonalDataComponent } from './modals/register-modal/parts/personal-data/personal-data.component';
 import { RegisterFaceMatchComponent } from './modals/register-face-match/register-face-match.component';
+import { RegisterV3ModalComponent } from './modals/register-v3-modal/register-v3-modal.component';
+import { AccountVerifiedSuccessComponent } from './modals/account-verified-success/account-verified-success.component';
+import { VerifyEmailOrPhoneComponent } from './modals/verify-email-or-phone/verify-email-or-phone.component';
+import { CardVerificationPendingComponent } from './header/parts/card-verification-pending/card-verification-pending.component';
+import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
+import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -225,7 +231,6 @@ import { RegisterFaceMatchComponent } from './modals/register-face-match/registe
         AddBankAccountModalComponent,
         ListBankAccountsComponent,
         LastAccessesModalComponent,
-        BetSharingModalComponent,
         RegisterModalComponentComponent,
         AddressDataComponent,
         LoginDataComponent,
@@ -234,6 +239,12 @@ import { RegisterFaceMatchComponent } from './modals/register-face-match/registe
         OnboardingModalComponent,
         StepperProgressBarComponent,
         RegisterFaceMatchComponent,
+        RegisterV3ModalComponent,
+        AccountVerifiedSuccessComponent,
+        VerifyEmailOrPhoneComponent,
+        CardVerificationPendingComponent,
+        AccountVerificationAlertComponent,
+        BetSharingModalComponent,
     ],
     exports: [
         MainLayoutComponent,

@@ -1,0 +1,81 @@
+.account-verified-success {
+    background-color: var(--background);
+    color: var(--foreground);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px;
+    position: fixed;
+    overflow-x: hidden;
+    border-radius: 4px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__body {
+        margin-bottom: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+   
+    &__btn-close {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        
+        background-color: var(--header);
+        color: var(--highlight);
+        height: 29px;
+        width: 29px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    &__title {
+        color: var(--foreground);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+    }
+
+    &__description {
+        color: rgba(var(--foreground-rgb), .7);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__icon {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        padding: 2px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 70px;
+        border: 5px solid rgba(var(--highlight-rgb), .1);
+        background: rgba(var(--highlight-rgb), .3);
+    }
+
+    &__icon svg path {
+        fill: var(--highlight);
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .account-verified-success{
+        height: auto;
+        max-width: 400px;
+        position: relative;
+    }
+}

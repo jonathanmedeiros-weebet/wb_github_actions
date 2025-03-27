@@ -247,27 +247,37 @@
                 <div class="sub-nav-container" *ngIf="subPerfil">
                     <ul>
                         <li class="cambista-subitem">
-                            <a [routerLink]="['/clientes/perfil']" routerLinkActive="router-link-active">
+                            <a
+                                [routerLink]="['/clientes/personal-data']"
+                                routerLinkActive="router-link-active"
+                            >
                                 <span class="regiao-nome">{{'geral.dadosPessoais' | translate}}</span>
                             </a>
                         </li>
                         <li class="cambista-subitem">
-                            <a [routerLink]="['/alterar-senha']" routerLinkActive="router-link-active">
+                            <a
+                                [routerLink]="['/alterar-senha']"
+                                routerLinkActive="router-link-active"
+                                [class.disabled]="accountVerificationPending"
+                            >
                                 <span class="regiao-nome">{{'geral.alterarSenha' | translate}}</span>
                             </a>
                         </li>
                         <li class="cambista-subitem">
-                            <a [routerLink]="['/ultimos-acessos']" routerLinkActive="router-link-active">
+                            <a
+                                [routerLink]="['/ultimos-acessos']"
+                                routerLinkActive="router-link-active"
+                                [class.disabled]="accountVerificationPending"
+                            >
                                 <span class="regiao-nome">{{'geral.lastAccesses' | translate}}</span>
                             </a>
                         </li>
-                        <li class="cambista-subitem" *ngIf="isMandatoryPhoneValidation && !userPhoneValidated">
-                            <a (click)="openValidatePhoneModal()">
-                                <span class="regiao-nome">{{'geral.validatePhone' | translate}}</span>
-                            </a>
-                        </li>
                         <li class="cambista-subitem">
-                            <a [routerLink]="['/bank-accounts']" routerLinkActive="router-link-active">
+                            <a
+                                [routerLink]="['/bank-accounts']"
+                                routerLinkActive="router-link-active"
+                                [class.disabled]="accountVerificationPending"
+                            >
                                 <span class="regiao-nome">{{'bankAccounts.title' | translate}}</span>
                             </a>
                         </li>
@@ -276,7 +286,11 @@
             </li>
 
              <li class="cambista-item">
-                <a [routerLink]="['/clientes/configuracoes']" routerLinkActive="router-link-active">
+                <a
+                    [routerLink]="['/clientes/configuracoes']"
+                    routerLinkActive="router-link-active"
+                    [class.disabled]="accountVerificationPending"
+                >
                     <i class="fa fa-cogs icone-generico"></i>
                     <span class="regiao-nome">{{'geral.jogoResponsavel' | translate}}</span>
                 </a>
@@ -284,49 +298,73 @@
 
 
             <li class="cambista-item">
-                <a [routerLink]="['/clientes/carteira']" routerLinkActive="router-link-active">
+                <a
+                    [routerLink]="['/clientes/carteira']"
+                    routerLinkActive="router-link-active"
+                    [class.disabled]="accountVerificationPending"
+                >
                     <i class="material-symbols-outlined">account_balance_wallet</i>
                     <span class="regiao-nome">{{'geral.carteira' | translate}}</span>
                 </a>
             </li>
 
              <li class="cambista-item">
-                <a [routerLink]="['/clientes/financeiro']" routerLinkActive="router-link-active">
+                <a
+                    [routerLink]="['/clientes/financeiro']"
+                    routerLinkActive="router-link-active"
+                    [class.disabled]="accountVerificationPending"
+                >
                     <i class="fa fa-dollar icone-generico"></i>
                     <span class="regiao-nome">{{'geral.financeiro' | translate}}</span>
                 </a>
             </li>
 
             <li class="cambista-item">
-                <a [routerLink]="['/clientes/apostas']" routerLinkActive="router-link-active">
+                <a
+                    [routerLink]="['/clientes/apostas']"
+                    routerLinkActive="router-link-active"
+                    [class.disabled]="accountVerificationPending"
+                >
                     <i class="fa fa-check-square icone-generico"></i>
                     <span class="regiao-nome">{{'geral.apostas' | translate}}</span>
                 </a>
             </li>
 
             <li class="cambista-item" routerLinkActive="router-link-active">
-                <a (click)="toggleSubTransacoes()">
+                <a (click)="toggleSubTransacoes()" [class.disabled]="accountVerificationPending">
                     <i class="fa fa-dollar icone-generico"></i>
                     <span class="regiao-nome">{{'financeiro.transactions' | translate}}</span>
                     <i class="fa m-0" [ngClass]="{'fa-angle-down': !subTransacoes, 'fa-angle-up': subTransacoes}"></i>
                 </a>
 
                 <div class="sub-nav-container" *ngIf="subTransacoes">
-                    <ul>                      
+                    <ul>
                         <li class="cambista-subitem">
-                            <a [routerLink]="['/clientes/deposito']" routerLinkActive="router-link-active">
+                            <a
+                                [routerLink]="['/clientes/deposito']"
+                                routerLinkActive="router-link-active"
+                                [class.disabled]="accountVerificationPending"
+                            >
                                 <span class="regiao-nome">{{'geral.deposito' | translate}}</span>
                             </a>
                         </li>
 
                         <li class="cambista-subitem">
-                            <a [routerLink]="['/clientes/saque']" routerLinkActive="router-link-active">
+                            <a
+                                [routerLink]="['/clientes/saque']"
+                                routerLinkActive="router-link-active"
+                                [class.disabled]="accountVerificationPending"
+                            >
                                 <span class="regiao-nome">{{'geral.saque' | translate}}</span>
                             </a>
                         </li>
 
                         <li class="cambista-subitem">
-                            <a [routerLink]="['/clientes/transacoes-historico']" routerLinkActive="router-link-active">
+                            <a
+                                [routerLink]="['/clientes/transacoes-historico']"
+                                routerLinkActive="router-link-active"
+                                [class.disabled]="accountVerificationPending"
+                            >
                                 <span class="regiao-nome">{{'geral.history' | translate}}</span>
                             </a>
                         </li>
@@ -335,19 +373,32 @@
             </li>
 
             <li class="cambista-item">
-                <a [routerLink]="['/clientes/rollover']" routerLinkActive="router-link-active" [ngClass]="rotaRodadaGratis ? 'router-link-active' : ''">
+                <a
+                    [routerLink]="['/clientes/rollover']"
+                    routerLinkActive="router-link-active"
+                    [ngClass]="rotaRodadaGratis ? 'router-link-active' : ''"
+                    [class.disabled]="accountVerificationPending"
+                >
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'geral.promocoes' | translate}}</span>
                 </a>
             </li>
             <li class="cambista-item" *ngIf="indiqueGanheHabilitado">
-                <a [routerLink]="['/clientes/indique-ganhe']" routerLinkActive="router-link-active">
+                <a
+                    [routerLink]="['/clientes/indique-ganhe']"
+                    routerLinkActive="router-link-active"
+                    [class.disabled]="accountVerificationPending"
+                >
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'indique_ganhe.indiqueGanhe' | translate}}</span>
                 </a>
             </li>
             <li class="cambista-item" *ngIf="cashbackEnabled">
-                <a [routerLink]="['/clientes/cashback']" routerLinkActive="router-link-active">
+                <a
+                    [routerLink]="['/clientes/cashback']"
+                    routerLinkActive="router-link-active"
+                    [class.disabled]="accountVerificationPending"
+                >
                     <i class="fa fa-gift icone-generico"></i>
                     <span class="regiao-nome">{{'cashback.cashback' | translate}}</span>
                 </a>

@@ -1,7 +1,7 @@
 
 const _host = '//[HOST]';
-const _center = 'https://center7.wee.bet';
-const _live = 'https://streaming.wee.bet';
+const _center = 'https://center.weebet.tech';
+const _live = 'https://streaming.weebet.tech';
 const _stats = 'https://stats.wee.bet';
 
 export const config: any = {

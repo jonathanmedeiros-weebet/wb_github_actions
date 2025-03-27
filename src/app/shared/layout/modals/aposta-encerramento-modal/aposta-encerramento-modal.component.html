@@ -156,7 +156,7 @@
                         <p class="ganho" *ngIf="aposta.resultado || aposta.resultado == 'a confirmar'">
                             <span>{{aposta.premio | currency}}</span>
                         </p>
-                        <p *ngIf="enabledBookie" class="cambista-paga">
+                        <p *ngIf="enabledBookie && cambistaPaga > 0" class="cambista-paga">
                             <span>{{cambistaPaga|currency}}</span>
                         </p>
                     </td>

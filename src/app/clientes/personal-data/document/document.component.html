@@ -1,0 +1,50 @@
+<div id="personal-data-documents">
+    <div class="grid">
+        <div class="field">
+            <label>CPF</label>
+            <span>{{ customer.cpf }}</span>
+        </div>
+        <div class="field">
+            <label>Nome</label>
+            <span>{{ customer.nome }} {{ customer.sobrenome }}</span>
+        </div>
+        <div class="field">
+            <label>Data de nascimento</label>
+            <span>{{ customer.data_nascimento }}</span>
+        </div>
+        <div class="field">
+            <label>Nacionalidade</label>
+            <span>{{ customer.nationality }}</span>
+        </div>
+        <div class="field">
+            <label>Gênero</label>
+            <span>{{ customer.genero }}</span>
+        </div>
+    </div>
+    <ng-container *ngIf="verificationRequired">
+        <div *ngIf="faceMatchType == 'legitimuz' && faceMatchEnabled">
+            <div #legitimuz id="legitimuz-container">
+                <div id="legitimuz">
+                    <input id="legitimuz-hydrate-cpf" type="hidden" class="form-control inverted-out"
+                        [value]="dataUserCPF" />
+                    <input type="hidden" id="legitimuz-ref-id" [value]="token">
+                    <button id="legitimuz-action-verify" class="btn btn-custom">
+                        {{'face_match.checkNow' | translate}}
+                    </button>
+                </div>
+                <div id="legitimuz-root"></div>
+            </div>
+        </div>
+        <div *ngIf="faceMatchType == 'docCheck' && faceMatchEnabled">
+            <div #docCheck id="docCheck">
+                <button id="exDocCheckAction"
+                    [attr.data-ex-doccheck-document]="dataUserCPF"
+                    [attr.data-ex-doccheck-document-hmac-hash]="secretHash" class="btn btn-custom"
+                    [attr.data-ex-doccheck-force-enrollment]="true"
+                    [attr.data-ex-doccheck-onboarding]="true">
+                    {{'face_match.checkNow' | translate}}
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>

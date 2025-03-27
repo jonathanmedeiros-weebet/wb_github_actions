@@ -274,7 +274,6 @@ export class FormComponent extends BaseFormComponent implements OnInit, OnDestro
     }
 
     salvarAposta(dados) {
-        console.log(dados);
         dados.versao_app = this.versao_app;
         this.apostaService.create(dados)
             .subscribe(

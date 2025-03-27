@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidebarService } from '../../services/utils/sidebar.service';
 
@@ -16,12 +16,12 @@ import {
     PesquisarCartaoModalComponent,
     RecargaCartaoModalComponent,
     SolicitarSaqueModalComponent,
-    ValidatePhoneModalComponent
 } from '../../layout/modals';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../services/auth/auth.service';
 import { ParametrosLocaisService } from '../../services/parametros-locais.service';
 import { SportIdService } from 'src/app/services';
+import { AccountVerificationService } from '../../services/account-verification.service';
 
 @Component({
     selector: 'app-sidebar-nav',
@@ -54,9 +54,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     subPromocoes = false;
     subTransacoes = false;
 
-    public isMandatoryPhoneValidation = false;
-    public userPhoneValidated = false;
-
     footballId: Number;
     boxingId: Number;
     volleyballId: Number;
@@ -79,6 +76,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         'hoquei-gelo': 'wbicon icon-hoquei-no-gelo',
     };
 
+    public accountVerified: boolean = false;
+
     constructor(
         private router: Router,
         private fb: UntypedFormBuilder,
@@ -87,12 +86,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         private supresinhaService: SupresinhaService,
         private messageService: MessageService,
         private modalService: NgbModal,
-        private el: ElementRef,
-        private cd: ChangeDetectorRef,
-        private renderer: Renderer2,
         private auth: AuthService,
         private paramsLocais: ParametrosLocaisService,
         private sportIdService: SportIdService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
 
@@ -108,6 +105,10 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.eSportsId = this.sportIdService.eSportsId;
     }
 
+    get accountVerificationPending(): boolean {
+        return this.isNotCambista && !this.accountVerified;
+    }
+
     ngOnInit() {
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
         this.allowAgentChangePassword = this.paramsLocais.getOpcoes().permitir_alterar_senha;
@@ -117,13 +118,13 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         this.cashbackEnabled = this.paramsLocais.cashbackEnabled();
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
         this.desafioNome = this.paramsLocais.getOpcoes().desafio_nome;
-        this.isMandatoryPhoneValidation = this.paramsLocais.isMandatoryPhoneValidation();
 
         switch (this.router.url) {
             case '/cambistas/cartoes':
             case '/cambistas/solicitacoes-saque':
                 this.subCartao = true;
                 break;
+            case '/clientes/personal-data':
             case '/clientes/perfil':
             case '/clientes/perfil-pix':
             case '/alterar-senha':
@@ -149,8 +150,6 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
                                     this.isNotCambista = isCliente;
                                 }
                             );
-
-                        this.userPhoneValidated = this.auth.getUser().phone_validated;
                     } else {
                         this.isNotCambista = false;
                     }
@@ -175,6 +174,16 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         if (this.paramsLocais.getOpcoes().whatsapp) {
             this.whatsapp = this.paramsLocais.getOpcoes().whatsapp.replace(/\D/g, '');
         }
+
+        if (this.isNotCambista) {
+            this.initAccountVerification();
+        }
+    }
+
+    private initAccountVerification() {
+        this.accountVerificationService
+            .accountVerified
+            .subscribe((accountVerified) => this.accountVerified = accountVerified)
     }
 
     private getLigasPopulares() {
@@ -283,28 +292,28 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     abrirConsultarCartao() {
-        const modalConsultarCartao = this.modalService.open(PesquisarCartaoModalComponent, {
+        this.modalService.open(PesquisarCartaoModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
     }
 
     abrirSolicitarSaque() {
-        const modalConsultarCartao = this.modalService.open(SolicitarSaqueModalComponent, {
+        this.modalService.open(SolicitarSaqueModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
     }
 
     abrirRecargaCartao() {
-        const modalConsultarCartao = this.modalService.open(RecargaCartaoModalComponent, {
+        this.modalService.open(RecargaCartaoModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
     }
 
     abrirCriarCartao() {
-        const modalConsultarCartao = this.modalService.open(CartaoCadastroModalComponent, {
+        this.modalService.open(CartaoCadastroModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true
         });
@@ -389,22 +398,5 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
         routeBySportId[String(this.eSportsId)] = '/esportes/esports';
 
         return routeBySportId[sportId] ?? '/esportes/futebol';
-    }
-
-    openValidatePhoneModal() {
-        const modalRef = this.modalService.open(ValidatePhoneModalComponent, {
-            ariaLabelledBy: "modal-basic-title",
-            windowClass: "modal-550 modal-h-350",
-            centered: true,
-        });
-
-        modalRef.result.then(
-            (result) => {
-                this.userPhoneValidated = this.auth.getUser().phone_validated;
-                this.cd.detectChanges();
-            },
-            (reason) => {console.log(reason);
-            }
-        );
     }
 }

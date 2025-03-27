@@ -6,7 +6,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import {
     AuthService, LayoutService, MenuFooterService, MessageService, ParametrosLocaisService, UtilsService, FinanceiroService, HeadersService,
-    GeolocationService
+    GeolocationService,
+    AccountVerificationService
 } from '../../services';
 import { interval, Subject } from 'rxjs';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -21,7 +22,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
-import { RegisterModalComponentComponent } from 'src/app/shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
 
 @Component({
     selector: 'app-gameview',
@@ -100,6 +100,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         private clienteService: ClienteService,
         private translate: TranslateService,
         private geolocationService: GeolocationService,
+        private accountVerificationService: AccountVerificationService,
         @Inject(DOCUMENT) private document: any
 
     ) {
@@ -449,13 +450,16 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     async loadGame() {
-        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
-            this.handleError(this.translate.instant('geral.geolocationError'));
+        if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
             await this.geolocationService.saveLocalStorageLocation();
-            this.router.navigate(['/']);
-            return;
+            
+            if (!this.geolocationService.checkGeolocation()) {
+                this.handleError(this.translate.instant('geral.geolocationError'));
+                this.router.navigate(['/']);
+                return;
+            }
         }
-
+        
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
 
         if (restrictionStateBet != 'Todos') {
@@ -923,18 +927,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
     }
 
     abrirCadastro() {
-        this.modalService.open(
-            RegisterModalComponentComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-400 modal-cadastro-cliente'
-            }
-        );
+        this.auth.openRegisterV3Modal();
     }
 
     openDeposit() {
+        if (!this.accountVerificationService.accountVerified.getValue()) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
+
         this.modalService.open(DepositoComponent);
     }
 

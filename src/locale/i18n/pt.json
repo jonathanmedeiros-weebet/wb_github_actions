@@ -156,6 +156,7 @@
         "esqueceuASenha": "Esqueceu a senha?",
         "naoPossuiUmaConta": "Não possui uma conta?",
         "jaPossuiUmaConta": "Já possui uma conta?",
+        "logIn": "Faça o login",
         "usuario": "Usuário",
         "senha": "Senha",
         "masculino": "Masculino",
@@ -166,7 +167,7 @@
         "deAcordoComOsTermos2": "e nossa",
         "termosDeUso": "termos de uso",
         "cadastrar": "Cadastrar",
-        "cadastroSucedido": "Cadastro realizado com sucesso! Verifique seu email para ativá-lo.",
+        "cadastroSucedido": "Cadastro realizado com sucesso.",
         "informacoesPessoais": "Informações Pessoais",
         "criarLogin": "Criar Login",
         "sucesso": "Sucesso",
@@ -353,6 +354,7 @@
         "tenis": "Tênis",
         "quininha": "Quininha",
         "seninha": "Seninha",
+        "lobby": "Lobby",
         "todos": "Todos",
         "slot": "Slot",
         "crash": "Crash",
@@ -362,7 +364,8 @@
         "cassinoAoVivo": "Cassino Ao Vivo",
         "loteriaPopular": "Loteria Popular",
         "maisPopulares": "Populares",
-        "news": "Novidades"
+        "news": "Novidades",
+        "recommendedToYou": "Recomendados para você"
     },
     "bilhete": {
         "titulo": "BILHETE",
@@ -404,7 +407,8 @@
         "aoVivo": "Ao Vivo",
         "bingo": "Bingo",
         "news": "Novidades",
-        "jogosRelacionados": "Jogos relacionados"
+        "jogosRelacionados": "Jogos relacionados",
+        "recommendedToYou": "Recomendados para você"
     },
     "cartoes": {
         "titulo": "Cartões",
@@ -431,10 +435,9 @@
         "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
         "solicitarCodigoRedefinicao": "Solicitar código de redefinição",
         "digiteSuaSenha": "Digite sua senha",
-        "minimumCharactersPassword": "Mínimo de 8 caracteres",
-        "lowercaseLetter": "Mínimo de uma letra minúscula",
-        "uppercaseLetter": "Mínimo de uma letra maiúscula",
-        "specialChar": "Mínimo de um caractere especial (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "A senha deve possuir no mínimo 8 caracteres",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Deve conter uma letra maiúscula e uma minúscula",
+        "specialChar": "Deve conter um caractere especial (Ex.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",
@@ -448,7 +451,7 @@
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória",
         "pagamentoExclusivoChaveCPF": "Informamos que ao solicitar o saque ele será realizado exclusivamente para a chave pix CPF do titular da conta.",
         "solicitacoesRecentes": "Solicitações de saque recentes",
-        "avisoBonus": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente.",
+        "avisoRollover": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente.",
         "withdrawalDetails": "Detalhes do saque",
         "availableBalanceForWithdrawal": "Saldo disponível para saque",
         "safeWithdrawalAlert": "Por motivos de segurança, os saques só serão efetivados para contas pertencentes ao CPF cadastrado.",
@@ -582,7 +585,8 @@
         "paymentGateway": "Gateway de pagamento",
         "balance": "Saldo",
         "previousBalance": "Saldo anterior",
-        "subsequentBalance": "Saldo posterior"
+        "subsequentBalance": "Saldo posterior",
+        "defaultPaymentMethod": "Padrão"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
@@ -798,16 +802,17 @@
         "verified_identity": "Identidade verificada!",
         "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte.",
         "account_protected": "Sua conta protegida!",
-        "register_description": "Para ter acesso a todas as funcionalidades do site você deverá cadastrar sua foto de segurança. Sua imagem é confidencial não será compartilhada."
+        "register_description": "Para ter acesso a todas as funcionalidades do site você deverá cadastrar sua foto de segurança. Sua imagem é confidencial não será compartilhada.",
+        "checkNow": "Verificar agora"
     },
     "register": {
         "signupWith": "Inscrever-se com Google",
         "registerGoogleAccount": "Cadastre-se com sua conta do google",
         "fillToRegister": "Preencha os campos para realizar o seu cadastro",
         "protectedByReCaptchaPart1": "Este site é protegido por reCAPTCHA e a",
-        "protectedByReCaptchaPart2": "Política de Privacidade",
+        "protectedByReCaptchaPart2": "política de privacidade",
         "protectedByReCaptchaPart3": "do Google e os",
-        "protectedByReCaptchaPart4": "Termos de Serviço",
+        "protectedByReCaptchaPart4": "termos de serviço",
         "protectedByReCaptchaPart5": "se aplicam.",
         "registrationBeneficiariesSocialPrograms": "Os beneficiários de programas sociais não podem se registrar.",
         "day":"Dia",

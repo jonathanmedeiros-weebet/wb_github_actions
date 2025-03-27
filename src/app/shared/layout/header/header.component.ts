@@ -1,26 +1,22 @@
-import { AfterContentInit, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute, IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
-import { UntypedFormBuilder } from '@angular/forms';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../base-form/base-form.component';
 import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from '../../config';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     AuthDoisFatoresModalComponent,
-    CadastroModalComponent,
     CartaoCadastroModalComponent,
     ClienteApostasModalComponent,
-    ClientePerfilModalComponent,
     ClientePixModalComponent,
     ClienteSenhaModalComponent,
     LoginModalComponent,
     PesquisarCartaoMobileModalComponent,
     RecargaCartaoModalComponent,
-    ValidatePhoneModalComponent
 } from '../modals';
 import { DepositoComponent } from 'src/app/clientes/deposito/deposito.component';
 import { SolicitacaoSaqueClienteComponent } from 'src/app/clientes/solicitacao-saque-cliente/solicitacao-saque-cliente.component';
@@ -44,7 +40,7 @@ import { CashbackComponent } from 'src/app/clientes/cashback/cashback.component'
 import { ListBankAccountsComponent } from '../list-bank-accounts/list-bank-accounts.component';
 import { LastAccessesModalComponent } from '../modals/last-accesses-modal/last-accesses-modal.component';
 import { OnboardingModalComponent } from '../modals/onboarding-modal/onboarding-modal.component';
-import { RegisterModalComponentComponent } from '../modals/register-modal/register-modal-component/register-modal-component.component';
+import { AccountVerificationService } from '../../services/account-verification.service';
 
 declare var xtremepush: any;
 
@@ -57,7 +53,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     @ViewChild('scrollMenu') scrollMenu: ElementRef;
     @ViewChild('menu') menu: ElementRef;
     @ViewChild('indiqueGanheCard', { read: ElementRef }) indiqueGanheCard: ElementRef;
-
+    @ViewChild('dropDownConta') dropDownConta: NgbDropdown;
     usuario = new Usuario();
     unsub$ = new Subject();
     modalRef;
@@ -130,13 +126,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     showIndiqueGanhe: boolean = true;
     isIndiqueGanheVisible: boolean;
 
-    userPhoneValidated = false;
-    isMandatoryPhoneValidation = false;
-
     sportsIsActive = false;
     sportsLiveIsActive = false;
 
     registerGoogleAccount = false;
+    public accountVerified = false;
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {
@@ -154,7 +148,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     constructor(
-        private fb: UntypedFormBuilder,
         private messageService: MessageService,
         private auth: AuthService,
         private sidebarService: SidebarService,
@@ -164,13 +157,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private modalService: NgbModal,
         private translate: TranslateService,
         private router: Router,
-        private route: ActivatedRoute,
         private connectionCheck: ConnectionCheckService,
         private renderer: Renderer2,
         private host: ElementRef,
         private clienteService: ClienteService,
         private layoutService: LayoutService,
-        private headerService: HeadersService
+        private headerService: HeadersService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
@@ -200,10 +193,13 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         );
     }
 
+    get accountVerificationPending(): boolean {
+        return this.isCliente && !this.accountVerified;
+    }
+
     ngOnInit() {
         this.currentRoute = this.router.url;
         this.sportsActive();
-        this.isMandatoryPhoneValidation = this.paramsService.isMandatoryPhoneValidation();
 
         this.headerService.fullScreenCasinoGameState$.subscribe(isFullScreen => {
             this.isCasinoGameFullScreen = isFullScreen;
@@ -243,7 +239,6 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     if (isLoggedIn) {
                         this.getUsuario();
                         this.getPosicaoFinanceira();
-                        this.userPhoneValidated = this.usuario.phone_validated;
                     }
                 }
             );
@@ -365,6 +360,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         } else {
             this.layoutService.indiqueGanheRemovido(true);
         }
+
+        this.initAccountVerification();
+    }
+
+    private initAccountVerification() {
+        this.accountVerificationService
+            .accountVerified
+            .subscribe((accountVerified) => this.accountVerified = accountVerified)
     }
 
     verificarNotificacoes() {
@@ -447,6 +450,10 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                     }
                 }
             );
+
+        if(this.isCliente) {
+            this.accountVerificationService.getAccountVerificationDetail().toPromise();
+        }
     }
 
     svgCss() {
@@ -469,16 +476,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 }
             );
         } else {
-            this.modalRef = this.modalService.open(
-                RegisterModalComponentComponent,
-                {
-                    ariaLabelledBy: 'modal-basic-title',
-                    size: 'md',
-                    centered: true,
-                    windowClass: 'modal-400 modal-cadastro-cliente',
-                    backdrop: 'static'
-                }
-            );
+            this.auth.openRegisterV3Modal();
         }
     }
 
@@ -509,18 +507,31 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirEditarPerfil() {
-        this.modalService.open(ClientePerfilModalComponent);
+        this.router.navigate(['/clientes/personal-data']);
+        this.dropDownConta.close();
     }
 
     abrirAlterarSenha() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(ClienteSenhaModalComponent);
     }
 
     openLastAccesses() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(LastAccessesModalComponent);
     }
 
     openBankAccount() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         const modalRef = this.modalService.open(ListBankAccountsComponent);
         modalRef.componentInstance.showHeaderMobile = true;
     }
@@ -534,8 +545,11 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirFinanceiro() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(FinanceiroComponent);
-
     }
 
     abrirCambistaMovimentacao() {
@@ -543,33 +557,34 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirSaques() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(SolicitacaoSaqueClienteComponent);
     }
 
     abrirCarteira() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(CarteiraComponent);
     }
 
-    openValidatePhoneModal() {
-        const modalRef = this.modalService.open(ValidatePhoneModalComponent, {
-            ariaLabelledBy: "modal-basic-title",
-            windowClass: "modal-550 modal-h-350",
-            centered: true,
-        });
-
-        modalRef.result.then(
-            (result) => {
-                this.userPhoneValidated = this.auth.getUser().phone_validated;
-                this.cd.detectChanges();
-            }
-        );
-    }
-
     abrirDepositos() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(DepositoComponent);
     }
 
     openTransactionHistory() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(TransacoesHistoricoComponent);
     }
 
@@ -578,18 +593,34 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     abrirApostas() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(ClienteApostasModalComponent);
     }
 
     abrirRollovers() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(PromocaoComponent);
     }
 
     abrirIndiqueGanhe() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(IndiqueGanheComponent);
     }
 
     openCashback() {
+        if (!this.accountVerified) {
+            this.accountVerificationService.openModalAccountVerificationAlert();
+            return;
+        }
         this.modalService.open(CashbackComponent);
     }
 

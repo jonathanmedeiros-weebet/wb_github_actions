@@ -2,13 +2,12 @@ import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, Render
 import { DOCUMENT } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../shared/layout/modals';
-import { AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
+import { AccountVerificationService, AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepositoComponent } from '../clientes/deposito/deposito.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from '../shared/services/login.service';
 import { Subscription } from 'rxjs';
-import { RegisterModalComponentComponent } from '../shared/layout/modals/register-modal/register-modal-component/register-modal-component.component';
 
 declare function BTRenderer(): void;
 
@@ -38,6 +37,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         private renderer: Renderer2,
         private elementRef: ElementRef,
         private loginService: LoginService,
+        private accountVerificationService: AccountVerificationService,
         @Inject(DOCUMENT) private document: any
     ) { }
 
@@ -262,15 +262,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     openRegister() {
-        this.modalService.open(
-            RegisterModalComponentComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-400 modal-cadastro-cliente'
-            }
-        );
+        this.authService.openRegisterV3Modal();
     }
 
     openLogin() {
@@ -286,6 +278,10 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
     openDeposit() {
         if (window.innerWidth < 1025) {
+            if (!this.accountVerificationService.accountVerified.getValue()) {
+                this.accountVerificationService.openModalAccountVerificationAlert();
+                return;
+            }
             this.modalService.open(DepositoComponent);
             this.router.navigate(['/']);
         } else {

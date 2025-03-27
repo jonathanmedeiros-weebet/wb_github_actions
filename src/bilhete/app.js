@@ -99,7 +99,6 @@ document.onreadystatechange = async function () {
 
                     this.getElementById('ticket-id').append(ticketData.codigo);
                     this.getElementById('panter').append(ticketData.apostador.toUpperCase());
-                    this.getElementById('money-changer').append(ticketData.passador.nome.toUpperCase());
                     this.getElementById('date').append(getFormatedDate(new Date(ticketData.horario.replace(/-/g, '/'))));
                     this.getElementsByClassName('itens-number')[0].append(ticketData.itens_ativos || ticketData.itens.length);
                     this.getElementsByClassName('itens-number')[1].append(ticketData.itens_ativos || ticketData.itens.length);
@@ -109,6 +108,14 @@ document.onreadystatechange = async function () {
                     }));
                     this.getElementById('bet-amount').append(ticketData.is_bonus ? ' (bônus)' : '');
                     this.getElementById('status').append(ticketData.ativo ? 'ATIVO' : 'CANCELADO')
+
+                    const moneyChangerElement = this.getElementById('money-changer');
+                    if (ticketData.is_cliente) {
+                        moneyChangerElement.parentNode.hidden = true;
+                    } else {
+                        const passadorNome = ticketData.passador?.nome?.toUpperCase() || '';
+                        moneyChangerElement.append(passadorNome);
+                    }
 
                     const mapEsportes = new Map()
                     var isExpired = false;

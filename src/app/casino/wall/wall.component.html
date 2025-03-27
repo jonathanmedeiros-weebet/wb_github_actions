@@ -61,9 +61,48 @@
                         <app-submenu
                             [category]="subMenuCategory"
                             version="v2"
+                            [hasRecommendations]="gamesRecommended.length > 0"
                             [menuItemSelected]="categorySelected"
                             (onClick)="filterGames(gameFornecedor, $event, false)"
                         />
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="isHomeCassino && gamesRecommended.length">
+                    <div class="wall-inner" *ngSwitchCase="'betpilot'">
+                        <div class="bloco blocoGameList">
+                            <app-wall-section
+                                [container]="listagem"
+                                [sectionId]="widget.selector"
+                                [title]="'cassino.recommendedToYou' | translate"
+                                [icon]="widget.icon"
+                                [itemsQty]="gamesRecommended.length"
+                                (onSeeAll)="filterGames($event, widget.selector, true)"
+                                (onLeft)="scrollLeft(widget.selector)"
+                                (onRight)="scrollRight(widget.selector)"
+                            />
+
+                            <div class="games-container">
+                                <ng-container *ngIf="gamesRecommended.length; else elseWithoutGames">
+                                    <div class="game-list game-list-inline" #scrollGames id="{{ widget.selector }}-scroll" (scroll)="onScroll(widget.selector)">
+                                        <app-wall-game-card
+                                            *ngFor="let game of gamesRecommended"
+                                            [game]="game"
+                                            [blink]="blink"
+                                            [isLoggedIn]="isLoggedIn"
+                                            [isDemo]="isDemo"
+                                            [isCliente]="isCliente"
+                                            [icon]="widget.icon"
+                                            cardType="inline"
+
+                                        />
+                                    </div>
+                                </ng-container>
+                                <ng-template #elseWithoutGames>
+                                    <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+                                </ng-template>
+                            </div>
+                        </div>
                     </div>
                 </ng-container>
 
@@ -72,18 +111,18 @@
                         <div class="bloco blocoGameList">
                             <app-wall-section
                                 [container]="listagem"
-                                [sectionId]="widget.id"
+                                [sectionId]="widget.selector"
                                 [title]="widget.name"
                                 [icon]="widget.icon"
                                 [itemsQty]="widget.items.length"
-                                (onSeeAll)="filterGames($event, widget.id, true)"
-                                (onLeft)="scrollLeft(widget.id)"
-                                (onRight)="scrollRight(widget.id)"
+                                (onSeeAll)="filterGames($event, widget.selector, true)"
+                                (onLeft)="scrollLeft(widget.selector)"
+                                (onRight)="scrollRight(widget.selector)"
                             />
 
                             <div class="games-container">
                                 <ng-container *ngIf="widget.items.length; else elseWithoutGames">
-                                    <div class="game-list game-list-inline" #scrollGames id="{{ widget.id }}-scroll" (scroll)="onScroll(widget.id)">
+                                    <div class="game-list game-list-inline" #scrollGames id="{{ widget.selector }}-scroll" (scroll)="onScroll(widget.selector)">
                                         <app-wall-game-card
                                             *ngFor="let game of widget.items"
                                             [game]="game"

@@ -8,7 +8,6 @@ import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Router } from '@angular/router';
 
 import {config} from '../../../config';
-import { RegisterModalComponentComponent } from '../register-modal/register-modal-component/register-modal-component.component';
 
 @Component({
     selector: 'app-esqueceu-senha-modal',
@@ -20,7 +19,6 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
     unsub$ = new Subject();
     submitting = false;
     LOGO = config.LOGO;
-    modalRef;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -74,15 +72,7 @@ export class EsqueceuSenhaModalComponent extends BaseFormComponent implements On
 
     abrirCadastro() {
             this.activeModal.dismiss();
-    
-            this.modalRef = this.modalService.open(
-                RegisterModalComponentComponent,
-                {
-                    ariaLabelledBy: 'modal-basic-title',
-                    size: 'md',
-                    centered: true,
-                    windowClass: 'modal-400 modal-cadastro-cliente'
-                }
-            );
+
+            this.auth.openRegisterV3Modal();
         }
 }

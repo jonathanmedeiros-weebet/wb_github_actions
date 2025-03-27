@@ -193,4 +193,14 @@ export class CasinoApiService {
             catchError(this.errorService.handleError)
         );
     }
+
+    getCasinoRecommendations(userId: string) {
+        const queryParams = { userId };
+        const requestOptions = this.header.getRequestOptions(false, queryParams);
+
+        return this.http.get(`${this.central_url}/games/recommendedGames`, requestOptions).pipe(
+            map((res: any) => res),
+            catchError(this.errorService.handleError)
+        );
+    }
 }

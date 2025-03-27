@@ -113,15 +113,7 @@ export class SidebarMenuComponent implements OnInit {
     }
 
     abrirCadastro() {
-        this.modalRef = this.modalService.open(
-            RegisterModalComponentComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
-                centered: true,
-                windowClass: 'modal-400 modal-cadastro-cliente'
-            }
-        );
+        this.auth.openRegisterV3Modal();
     }
 
     pesquisarTicket() {

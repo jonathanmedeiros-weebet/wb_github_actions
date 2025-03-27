@@ -4,6 +4,34 @@
     flex-direction: column;
 }
 
+input.inverted-out {
+    opacity: 1;
+    border: 0.1px solid rgba(var(--foreground-inputs-odds-rgb), 0.5);
+    color: rgba(var(--foreground-inputs-odds-rgb), 0.5);
+}
+
+input.inverted-out:focus {
+    color: var(--foreground-inputs-odds);
+    border: 1px solid var(--highlight);
+}
+
+input.inverted-out:focus label{
+    color: var(--foreground-inputs-odds);
+}
+
+.form-control.is-invalid:focus {
+    -webkit-box-shadow: none;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+}
+
+.input-md label {
+    color: rgba(var(--foreground-inputs-odds-rgb),0.5);
+}
+
 .modal-dialog {
     max-width: 600px;
 }
@@ -30,6 +58,7 @@
     justify-content: space-between;
     height: 100%;
     align-items: center;
+    background-color: var(--background);
 }
 
 .header-login {
@@ -221,7 +250,7 @@ asl-google-signin-button {
     color: #aaa;
 }
 
-.input-md input {
+/* .input-md input {
     color: rgba(var(--foreground-inputs-odds-rgb),30%);
     border: 1px solid rgba(var(--foreground-inputs-odds-rgb),30%);
 }
@@ -235,7 +264,7 @@ asl-google-signin-button {
 
 .form-group input {
     color: rgba(var(--foreground-inputs-odds-rgb),30%);
-}
+} */
 
 
 .modal-body .modal-body-content {
@@ -270,7 +299,7 @@ h3 {
 }
 
 .modal-content {
-    background-color: var(--background);
+    background-color: var(--background) !important;
     padding: 20px;
     border-radius: 4px;
     width: 100%;
@@ -305,8 +334,9 @@ h3 {
     height: 100%;
 }
 
-button {
-    margin: 0 auto;
+.btn-login {
+    background-color: var(--highlight);
+    color: var(--foreground-highlight);
     width: 100%;
 }
 
@@ -370,6 +400,10 @@ button {
         conic-gradient(#0000 30%, var(--foreground));
     -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
     animation: l13 1s infinite linear;
+}
+
+.icon-hover {
+    fill: var(--header);
 }
 
 @keyframes l13 {

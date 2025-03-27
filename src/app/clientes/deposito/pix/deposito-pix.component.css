@@ -137,6 +137,19 @@
     font-size: 13px;
 }
 
+.default-payment-method {
+    background: #3276b133;
+    border-radius: 4px;
+    color: var(--foreground-bottom-bar);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 8px;
+    padding: 4px 8px;
+    width: fit-content;
+}
+
 .active {
     background-color: rgba(var(--highlight-rgb), 0.1) !important;
     border-color: var(--highlight) !important;
@@ -198,7 +211,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 0 0 auto; 
+    flex: 0 0 auto;
 }
 
 .shortcut-amounts button:active,
@@ -400,7 +413,7 @@ label.label-tempo {
 
 .modal-body > div.buttons > button:nth-child(1) {
     margin-right: 8px;
-} 
+}
 
 @media only screen and (max-width: 1024px) {
     .modal-body {
@@ -484,5 +497,5 @@ label.label-tempo {
 
     .modal-body > div.buttons > button:nth-child(1) {
         margin-right: 0;
-    } 
+    }
 }

@@ -153,6 +153,7 @@
         "esqueceuASenha": "¿Olvidaste tu contraseña?",
         "naoPossuiUmaConta": "¿No tienes una cuenta?",
         "jaPossuiUmaConta": "¿Ya tienes una cuenta?",
+        "logIn": "Iniciar sesión",
         "usuario": "Usuario",
         "senha": "Contraseña",
         "masculino": "Masculino",
@@ -163,7 +164,7 @@
         "deAcordoComOsTermos2": "y nuestros",
         "termosDeUso": "términos de uso",
         "cadastrar": "Registrarse",
-        "cadastroSucedido": "¡Registro completado con éxito! Verifica tu correo electrónico para activarlo.",
+        "cadastroSucedido": "¡Registro completado con éxito.",
         "informacoesPessoais": "Información personal",
         "criarLogin": "Crear inicio de sesión",
         "sucesso": "Éxito",
@@ -348,6 +349,7 @@
         "tenis": "Tenis",
         "quininha": "Quininha",
         "seninha": "Seninha",
+        "lobby": "Lobby",
         "todos": "Todos",
         "slot": "Tragamonedas",
         "crash": "Crash",
@@ -357,7 +359,8 @@
         "cassinoAoVivo": "Casino en vivo",
         "loteriaPopular": "Lotería popular",
         "maisPopulares": "Populares",
-        "news": "Noticias"
+        "news": "Noticias",
+        "recommendedToYou" : "Recomendado para ti"
     },
     "bilhete": {
         "titulo": "BOLETO",
@@ -397,7 +400,9 @@
         "virtuais": "Virtuales",
         "aoVivo": "Casino en vivo",
         "bingo": "Bingo",
-        "news": "Noticias"
+        "news": "Noticias",
+        "jogosRelacionados": "Juegos relacionados",
+        "recommendedToYou" : "Recomendado para ti"
     },
     "cartoes": {
         "titulo": "Tarjetas",
@@ -424,10 +429,9 @@
         "informeSeuEmail": "Ingrese su correo electrónico para recibir el enlace de restablecimiento de contraseña.",
         "solicitarCodigoRedefinicao": "Solicitar código de restablecimiento",
         "digiteSuaSenha": "Ingrese su contraseña",
-        "minimumCharactersPassword": "Mínimo 8 caracteres",
-        "lowercaseLetter": "Mínimo una letra minúscula",
-        "uppercaseLetter": "Mínimo una letra mayúscula",
-        "specialChar": "Mínimo un carácter especial (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "La contraseña debe tener al menos 8 caracteres.",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Debe contener una letra mayúscula y una minúscula.",
+        "specialChar": "Debe contener un carácter especial (Ej.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Ingrese el monto para el retiro",
@@ -449,8 +453,10 @@
         "minimumWithdrawal": "Retiro mínimo",
         "dailyMaximum": "Máximo diario",
         "monthlyMaximum": "Máximo mensual",
-        "maximumWithdrawalAmount": "Retiro máximo"
-        "monthlyMaximum": "Máximo mensual",
+        "identityVerify": "Verificar identidad",
+        "identityVerifyNeeded": "Para continuar, será necesario realizar la verificación de identidad antes.",
+        "disapprovedIdentity": "Su verificación de identidad fue rechazada. Para realizar un análisis manual, por favor, póngase en contacto con el soporte.",
+        "maximumWithdrawalAmount": "Retiro máximo",
         "maximumDepositAmount": "Valor máximo"
     },
     "ativacaoEmail": {
@@ -483,7 +489,8 @@
         "depositTextWithoutBonus": "Para hacer un depósito a través de PIX, ingrese el monto deseado en el campo a continuación, proporcione el código promocional si está disponible y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
         "depositTextWithoutBonusAndPromocode": "Para hacer un depósito a través de PIX, ingrese el monto deseado en el campo a continuación y haga clic en el botón “Depósito“. Se generará un código QR y se mostrará en la pantalla para que realice el pago.",
         "copyCode": "Copiar código",
-        "copied": "Copiado!"
+        "copied": "Copiado!",
+        "maximumDepositAmount": "Valor máximo"
     },
     "footer": {
         "afiliados": "Asociaciones",
@@ -573,7 +580,8 @@
         "paymentGateway": "Pasarela de pago",
         "balance": "Saldo",
         "previousBalance": "Saldo anterior",
-        "subsequentBalance": "Saldo posterior"
+        "subsequentBalance": "Saldo posterior",
+        "defaultPaymentMethod": "Predeterminado"
     },
     "rollover": {
         "nenhumRollover": "Sin rollover.",
@@ -789,16 +797,17 @@
         "verified_identity": "Identidad verificada!",
         "Identity_not_verified": "Identidad no verificada, póngase en contacto con el servicio de asistencia.",
         "account_protected": "Su cuenta protegida!",
-        "register_description": "Para tener acceso a todas las funciones del sitio, tendrá que registrar su foto de seguridad. Su imagen es confidencial y no será compartida."
+        "register_description": "Para tener acceso a todas las funciones del sitio, tendrá que registrar su foto de seguridad. Su imagen es confidencial y no será compartida.",
+        "checkNow": "Verificar ahora"
     },
     "register": {
         "signupWith": "Regístrate en Google",
         "registerGoogleAccount": "Regístrate con tu cuenta de google",
         "fillToRegister": "Rellene los campos para completar su registro",
         "protectedByReCaptchaPart1": "Este sitio está protegido por reCAPTCHA se aplican la",
-        "protectedByReCaptchaPart2": "Política de privacidad",
+        "protectedByReCaptchaPart2": "política de privacidad",
         "protectedByReCaptchaPart3": "y las",
-        "protectedByReCaptchaPart4": "Condiciones del servicio",
+        "protectedByReCaptchaPart4": "condiciones del servicio",
         "protectedByReCaptchaPart5": "de Google.",
         "registrationBeneficiariesSocialPrograms": "Los beneficiarios de programas sociales no pueden registrarse.",
         "day":"Día",
