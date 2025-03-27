@@ -152,18 +152,13 @@ export class AppComponent implements OnInit {
                 } else {
                     this.ativacaoCadastro = false;
                 }
-                console.log('teste1');
-                console.log('totemModule', this.enableTotemModule);
-                console.log('betting_shop_id', params.betting_shop_id);
 
                 if (this.enableTotemModule && params.betting_shop_id) {
                     const bettingShopId = params.betting_shop_id;
-                    console.log('teste2');
                 
                     this.bettingShopService.getBettingShop(bettingShopId).subscribe({
                         next: (res) => {
                             if (res) {
-                                console.log(bettingShopId);
                                 localStorage.setItem('bettingShopId', bettingShopId);
                                 // this.router.navigate(['betting-shop']);
                             }
