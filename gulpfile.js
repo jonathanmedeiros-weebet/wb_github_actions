@@ -1899,3 +1899,12 @@ gulp.task('sporte.vip', function (done) {
         styles: ""
     });
 });
+
+gulp.task('vaibet360.com', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "vaibet360.com",
+        banca: "VAI BET 360",
+        styles: ""
+    });
+});
