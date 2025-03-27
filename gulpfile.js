@@ -93,10 +93,10 @@ function tasks(done, config) {
     done();
 }
 
-gulp.task('vipsports.wee.bet', function (done) {
+gulp.task('vipsports.digital', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "vipsports.wee.bet",
+        host: "vipsports.digital",
         banca: "Vip Sports",
         styles: "--header: #222d32; --foreground-header: #e50d1b; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #e50d1b; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
     });
@@ -243,7 +243,6 @@ gulp.task('apostapremiada.bet', function (done) {
     });
 });
 
-// Old bet1.wee.bet
 gulp.task('mrsportsdigital.com', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
@@ -420,16 +419,15 @@ gulp.task('apremiada.bet', function (done) {
     });
 });
 
-gulp.task('betsports.wee.bet', function (done) {
+gulp.task('sportss.vip', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "betsports.wee.bet",
+        host: "sportss.vip",
         banca: "BET SPORTS",
         styles: ""
     });
 });
 
-// Database Name = citybets.wee.bet
 gulp.task('citybets.online', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
@@ -438,10 +436,10 @@ gulp.task('citybets.online', function (done) {
     });
 });
 
-gulp.task('lancebet.wee.bet', function (done) {
+gulp.task('lancet.club', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "lancebet.wee.bet",
+        host: "lancet.club",
         banca: "LANCE BET",
         styles: ""
     });
@@ -615,10 +613,10 @@ gulp.task('starbets.online', function (done) {
     });
 });
 
-gulp.task('dfsportsbet.wee.bet', function (done) {
+gulp.task('dfsgoo.com', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "dfsportsbet.wee.bet",
+        host: "dfsgoo.com",
         banca: "DF SPORTS BET",
         styles: "",
     });
@@ -635,10 +633,10 @@ gulp.task('betfacil123.app', function (done) {
     });
 });
 
-gulp.task('goldeplaca.wee.bet', function (done) {
+gulp.task('goldeplaca.net.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "goldeplaca.wee.bet",
+        host: "goldeplaca.net.br",
         banca: "GOL DE PLACA",
         styles: "",
     });
@@ -662,10 +660,10 @@ gulp.task('betsnordeste.site', function (done) {
     });
 });
 
-gulp.task('esportebet.wee.bet', function (done) {
+gulp.task('monteirosports.com', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
-        host: "esportebet.wee.bet",
+        host: "monteirosports.com",
         banca: "ESPORTE BET",
         styles: "",
     });
@@ -726,10 +724,10 @@ gulp.task('finasport.wee.bet', function (done) {
     });
 });
 
-gulp.task('aposta99.wee.bet', function (done) {
+gulp.task('aposta99.com.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "aposta99.wee.bet",
+        host: "aposta99.com.br",
         banca: "APOSTA 99",
         styles: "",
     });
@@ -772,10 +770,10 @@ gulp.task('betminas.club', function (done) {
     });
 });
 
-gulp.task('bet83.wee.bet', function (done) {
+gulp.task('bet83.com.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "bet83.wee.bet",
+        host: "bet83.com.br",
         banca: "BET83",
         styles: "",
     });
@@ -834,7 +832,7 @@ gulp.task('ricardo.wee.bet', function (done) {
     tasks(done, {
         server: "front4.weebet.tech",
         host: "ricardo.wee.bet",
-        banca: "RICARDO.WEE.BET",
+        banca: "RICARDO",
         styles: "",
     });
 });
@@ -848,10 +846,10 @@ gulp.task('nautsports.club', function (done) {
     });
 });
 
-gulp.task('bet73.wee.bet', function (done) {
+gulp.task('bet73.site', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "bet73.wee.bet",
+        host: "bet73.site",
         banca: "BET 73",
         styles: "",
     });
@@ -884,10 +882,10 @@ gulp.task('apostasmax.com', function (done) {
     });
 });
 
-gulp.task('ritsbet.wee.bet', function (done) {
+gulp.task('expressinhofc.com.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "ritsbet.wee.bet",
+        host: "expressinhofc.com.br",
         banca: "RITS BET",
         styles: "",
     });
@@ -948,10 +946,10 @@ gulp.task('primoos.bet', function (done) {
     });
 });
 
-gulp.task('realsport.wee.bet', function (done) {
+gulp.task('realgol.net', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "realsport.wee.bet",
+        host: "realgol.net",
         banca: "REAL SPORT",
         styles: "",
     });
@@ -1328,16 +1326,6 @@ gulp.task('trevocassino.vip', function (done) {
     });
 });
 
-gulp.task('maxbet.wee.bet', function (done) {
-    tasks(done, {
-        server: "front1.weebet.tech",
-        host: "maxbet.wee.bet",
-        shared_url: "maxbetbrasil.com",
-        banca: "MAX BET",
-        styles: "",
-    });
-});
-
 gulp.task('bosscassino.bet', function (done) {
     tasks(done, {
         server: "front1.weebet.tech",
@@ -1491,11 +1479,11 @@ gulp.task('betcombinada.net', function (done) {
     });
 });
 
-gulp.task('gramado.bet', function (done) {
+gulp.task('gramadobet.net.br', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "gramado.bet",
-        banca: "GRAMADO.BET",
+        host: "gramadobet.net.br",
+        banca: "GRAMADO BET",
         styles: ""
     });
 });
@@ -1739,10 +1727,10 @@ gulp.task('pintou.bet', function (done) {
     });
 });
 
-gulp.task('boaaposta.com', function (done) {
+gulp.task('boaaposta.net', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "boaaposta.com",
+        host: "boaaposta.net",
         banca: "Boa aposta: A sua melhor escolha | Apostas esportivas e Jogos ao vivo ",
         styles: "",
         description: "Descubra o site de apostas ideal para quem busca diversão e grandes oportunidades! Apostas esportivas, cassino online, bônus exclusivos e muito mais. Jogue com segurança e emoção. Cadastre-se agora!"
@@ -1890,6 +1878,24 @@ gulp.task('deubet.io', function (done) {
         server: "front3.weebet.tech",
         host: "deubet.io",
         banca: "DEU BET",
+        styles: ""
+    });
+});
+
+gulp.task('betcapital.com', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "betcapital.com",
+        banca: "BET CAPITAL",
+        styles: ""
+    });
+});
+
+gulp.task('sporte.vip', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "sporte.vip",
+        banca: "SPORTE VIP",
         styles: ""
     });
 });
