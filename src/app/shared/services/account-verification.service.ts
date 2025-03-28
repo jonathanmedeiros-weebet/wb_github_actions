@@ -11,6 +11,7 @@ import { VerifyEmailOrPhoneComponent } from '../layout/modals/verify-email-or-ph
 import { ClienteService } from './clientes/cliente.service';
 import { VerificationTypes } from '../enums';
 import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verified-success/account-verified-success.component';
+import { TermsAcceptedComponent } from '../layout/modals/terms-accepted/terms-accepted.component';
 
 interface VerifiedSteps {
   phone: boolean;
@@ -98,7 +99,7 @@ export class AccountVerificationService {
   }
 
   public openModalAccountVerificationAlert(): NgbModalRef {
-    const modalref: NgbModalRef = this.modalService.open(AccountVerificationAlertComponent, {
+    const modalref: NgbModalRef = this.modalService.open(TermsAcceptedComponent, {
       ariaLabelledBy: 'modal-basic-title',
       centered: true,
       windowClass: 'modal-500 modal-account-verification',

@@ -1,0 +1,183 @@
+.account-verification-alert {
+    background-color: var(--background);
+    color: var(--foreground);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 32px;
+
+    height: 100%;
+    position: fixed;
+    overflow-x: hidden;
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+        gap: 16px;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__body {
+        margin-bottom: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__icon {
+        &--left {
+            display: flex;
+            width: 48px;
+            height: 48px;
+            padding: 2px;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 70px;
+            border: 5px solid rgba(var(--highlight-rgb), .1);
+            background: rgba(var(--highlight-rgb), .3);
+        }
+        &--left i {
+            color: var(--highlight);
+            border: 2px solid var(--highlight);
+            padding: 10px;
+            height: 10px;
+            width: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50px;
+        }
+    }
+
+    &__btn-close {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        
+        background-color: var(--header);
+        color: var(--highlight);
+        height: 32px;
+        width: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    &__title {
+        color: var(--foreground);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+    }
+
+    &__description {
+        color: rgba(var(--foreground-rgb), .7);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__btn-to-verify {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        width: 100%;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        border-radius: 4px;
+        background: var(--highlight);
+        color: var(--foreground-highlight);
+    }
+
+    &__btn-to-cancel {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        width: 100%;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        border-radius: 4px;
+        background-color: var(--background);
+        color: rgba(var(--foreground-rgb), .7);
+    }
+
+}
+
+.verification-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(var(--foreground-rgb), .7);
+
+        &--verified {
+            color: var(--highlight)
+        }
+
+        &--verified svg g path {
+            fill: var(--highlight);
+        }
+    }
+    &__item svg path {
+        fill: rgba(var(--foreground-rgb), .7);
+    }
+    
+}
+
+a {
+    text-decoration: none;
+    color: var(--highlight);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: rgb(var(--highlight-rgb), .7);
+}
+
+@media screen and (min-width: 667px) {
+    .account-verification-alert {
+        height: auto;
+        max-width: 500px;
+        position: relative;
+    }
+}

@@ -458,4 +458,25 @@ export class ClienteService {
                 catchError(this.errorService.handleError)
             );
     }
+
+    acceptTerms() {
+        const data = {
+            acceptTerms: true
+        };
+        return this.http.post(`${this.clienteUrl}/acceptTerms`, {data},this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError));
+    }
+
+    getTerms() {
+        return this.http.get(`${config.LOKI_URL}/user/account-verification`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError));
+    }
 }
