@@ -53,6 +53,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
     public isMobile: boolean = false;
     public isDesktop: boolean = false;
     public isTablet: boolean = false;
+    public isHorizontalMobile: boolean = false;
     public isFullScreen: boolean = false;
     public cassinoFornecedores: Fornecedor[] = [];
     public scrollStep = 700;
@@ -147,45 +148,19 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const routeParams = this.route.snapshot.params;
         this.backgroundImageUrl = `https://wb-assets.com/img/thumbnails/${routeParams.game_fornecedor}/${routeParams.game_id}.png`;
         this.elem = this.el.nativeElement.querySelector('.game-frame');
-        window.addEventListener('resize', () => this.checkIfMobileOrDesktopOrTablet());
-        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
 
-        if (botaoContatoFlutuante) {
-            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
-        }
+        const handleWindowChange = () => {
+            this.checkIfMobileOrDesktopOrTablet();
+            
+            setTimeout(() => {
+                this.resolveGameScreen();
+                this.cd.detectChanges();
+            }, 200)
+        };
 
-        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
-        if (jivoChatBtn) {
-            this.renderer.setStyle(jivoChatBtn, 'display', 'none');
-        }
-
-        const liveChatBtn = this.document.getElementById('chat-widget-container');
-        if (liveChatBtn) {
-            this.renderer.setStyle(liveChatBtn, 'display', 'none');
-        }
-
-        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
-        if (TawkChat) {
-            const tawakIframes = this.document.querySelectorAll('[title="chat widget"]')
-            this.tawakChatClicked = tawakIframes[1].style.display == 'block'
-
-            tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
-        }
-
-        const zendeskChat = this.document.querySelector('iframe#launcher');
-        if (zendeskChat) {
-            this.renderer.setStyle(zendeskChat, 'display', 'none');
-        }
-
-        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
-        if (intercomBtnChat) {
-            this.renderer.setStyle(intercomBtnChat, 'display', 'none');
-        }
-
-        const intercomContainer = this.document.querySelector('#intercom-container');
-        if (intercomContainer) {
-            this.renderer.setStyle(intercomContainer, 'display', 'none');
-        }
+        window.addEventListener("resize", handleWindowChange);
+        
+        this.hideLiveChats();
 
         if (this.utilsService.getMobileOperatingSystem() == 'ios') {
             this.removerBotaoFullscreen = true;
@@ -221,24 +196,17 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
             this.checkIfMobileOrDesktopOrTablet();
 
+            if (this.avisoCancelarBonus == false) {
+                this.loadGame();
+            }
+
             this.auth.logado
                 .subscribe(
                     isLoggedIn => {
                         if (isLoggedIn) {
                             this.isLoggedIn = this.auth.isLoggedIn();
                             if (this.avisoCancelarBonus === false) {
-                                if (this.isMobile && this.gameMode === 'REAL') {
-                                    this.disableHeader();
-                                    this.fixMobileHeader();
-                                }
-                                if (this.isTablet && this.gameMode === 'REAL') {
-                                    this.disableHeader();
-                                    this.fixTabletHeader();
-                                }
-
-                                if (this.isDesktop && !this.isDesktop && this.gameMode === 'REAL') {
-                                    this.fixTabletAndDesktopScreen();
-                                }
+                                this.resolveGameScreen();
                             }
                         }
                         if (isLoggedIn || this.gameMode !== 'REAL') {
@@ -254,10 +222,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     }
                 );
 
-            if (this.avisoCancelarBonus == false) {
-                this.loadGame();
-            }
-
             interval(3000)
                 .subscribe(() => {
                     this.showLoadingIndicator = false;
@@ -268,7 +232,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.appendScriptGalaxsys();
         }
 
-        if ((this.isMobile || this.isTablet) && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
+        if ((this.isMobile || this.isTablet || this.isHorizontalMobile) && ((this.gameMode === 'REAL' && this.isLoggedIn) || this.gameMode !== 'REAL')) {
             this.disableHeader();
         }
 
@@ -296,9 +260,19 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.isDesktop = false;
         this.isTablet = false;
         this.isMobile = false;
+        this.isHorizontalMobile = false;
 
         if (window.innerWidth > 1024) {
             return this.isDesktop = true;
+        }
+
+        if (
+            window.innerWidth > 482 
+            && (window.innerHeight > 320 
+                && window.innerHeight < window.innerWidth)
+        ) {
+            this.isDesktop = true;
+            return this.isHorizontalMobile = true;
         }
 
         if (window.innerWidth > 482) {
@@ -306,11 +280,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         return this.isMobile = true;
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize(event: any) {
-        this.checkIfMobileOrDesktopOrTablet();
     }
 
     ngAfterViewInit() {
@@ -324,15 +293,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.renderer.setStyle(gameView, 'max-height', '260px');
         }
 
-        this.layoutService.currentHeaderHeight
-            .pipe(takeUntil(this.unsub$))
-            .subscribe(curHeaderHeight => {
-                this.headerHeight = curHeaderHeight;
-                this.changeGameviewHeight();
-                this.cd.detectChanges();
-            });
-
-        if (this.isTablet || this.isDesktop) {
+        if (this.isTablet || this.isDesktop || this.isHorizontalMobile) {
             this.fixTabletAndDesktopScreen();
         }
 
@@ -516,7 +477,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameFornecedor = response.fornecedor;
                         this.gameName = response.gameName;
                         this.gameProviderName = response.gameFornecedorExibicao;
-                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/casino/thumbnails/${response.fornecedor}/${response.gameId}.png`;
+                        this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
                         this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
                         this.sessionId = response.sessionId;
@@ -581,70 +542,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.menuFooterService.setIsPagina(true);
         }
 
-        let scriptGalaxsys = document.getElementById("galaxsysScript");
-
-        if (scriptGalaxsys) {
-            scriptGalaxsys.remove();
-
-            const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
-            if (botaoContatoFlutuante) {
-                this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
-            }
-
-            const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
-            if (jivoChatBtn) {
-                this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
-            }
-
-            const liveChatBtn = this.document.getElementById('chat-widget-container');
-            if (liveChatBtn) {
-                this.renderer.setStyle(liveChatBtn, 'display', 'block');
-            }
-
-            const zendeskChat = this.document.querySelector('iframe#launcher');
-            if (zendeskChat) {
-                this.renderer.setStyle(zendeskChat, 'display', 'block');
-            }
-        }
-
-        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
-        if (botaoContatoFlutuante) {
-            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
-        }
-
-        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
-        if (jivoChatBtn) {
-            this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
-        }
-
-        const liveChatBtn = this.document.getElementById('chat-widget-container');
-        if (liveChatBtn) {
-            this.renderer.setStyle(liveChatBtn, 'display', 'block');
-        }
-
-        const zendeskChat = this.document.querySelector('iframe#launcher');
-        if (zendeskChat) {
-            this.renderer.setStyle(zendeskChat, 'display', 'block');
-        }
-
-        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
-        if (TawkChat) {
-            this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
-                if (key != 1 || this.tawakChatClicked) {
-                    this.renderer.setStyle(iframeChat, 'display', 'block');
-                }
-            });
-        }
-
-        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
-        if (intercomBtnChat) {
-            this.renderer.setStyle(intercomBtnChat, 'display', 'block');
-        }
-
-        const intercomContainer = this.document.querySelector('#intercom-container');
-        if (intercomContainer) {
-            this.renderer.setStyle(intercomContainer, 'display', 'block');
-        }
+        this.restoreLiveChats();
 
         if (this.headerService.getIsHeaderDisabled) {
             this.disableHeaderOptions();
@@ -696,7 +594,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
 
         if (gameFrame.classList.contains('in-game')) {
-            this.renderer.setStyle(gameFrame, 'height', 'calc(100vh - 50px)');
+            this.renderer.setStyle(gameFrame, 'height', 'calc(100dvh - 50px)');
         }
 
         this.fullscreen = true;
@@ -1179,6 +1077,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
         const gameFrame = this.el.nativeElement.querySelector('.game-frame');
         const headerOptions = this.el.nativeElement.querySelector('.header-game-view');
 
+        if (!gameFrame || !gameView) {
+            console.error("Game frame or gameView not found");
+            return false;
+        }
+
         if (this.isTablet) {
             if (gameView.classList.contains('is-tablet') && (gameFrame.classList.contains('in-game') && gameFrame.classList.contains('is-tablet'))) {
                 this.renderer.setStyle(gameView, 'padding-top', '50px');
@@ -1188,7 +1091,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
+        if ((!this.isTablet && !this.isHorizontalMobile && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '43px');
@@ -1200,9 +1103,23 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
+        if ((!this.isTablet && !this.isHorizontalMobile && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
             if (headerOptions) {
                 this.renderer.setStyle(headerOptions, 'margin', '0 18px');
+            }
+        }
+
+        if (this.isHorizontalMobile && this.isDesktop) {
+            if (gameView) {
+                this.renderer.setStyle(gameView, 'padding-top', '50px');
+                this.renderer.setStyle(gameView, 'width', '100dvw');
+                this.renderer.setStyle(gameView, 'height', '100dvh');
+                this.renderer.setStyle(gameView, 'position', 'fixed');
+                this.renderer.setStyle(gameView, 'top', '0');
+            }
+
+            if (gameFrame) {
+                this.renderer.setStyle(gameFrame, 'height', 'calc(100dvh - 50px)');
             }
         }
     }
@@ -1214,6 +1131,131 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
         if (this.isCassinoAoVivoPage) {
             this.getLiveProviders();
+        }
+    }
+
+    private resolveGameScreen() {
+        if (this.isMobile && this.gameMode === 'REAL') {
+            this.disableHeader();
+            this.fixMobileHeader();
+        }
+        
+        if (this.isTablet && this.gameMode === 'REAL') {
+            this.disableHeader();
+            this.fixTabletHeader();
+        }
+
+        if ((this.isDesktop || this.isHorizontalMobile) && this.gameMode === 'REAL') {
+            this.disableHeader();
+            this.fixTabletAndDesktopScreen();
+        }
+    }
+
+    private hideLiveChats() {
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+
+        if (botaoContatoFlutuante) {
+            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '-1');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'none');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'none');
+        }
+
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            const tawakIframes = this.document.querySelectorAll('[title="chat widget"]')
+            this.tawakChatClicked = tawakIframes[1].style.display == 'block'
+
+            tawakIframes.forEach(iframeChat => this.renderer.setStyle(iframeChat, 'display', 'none'));
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'none');
+        }
+
+        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
+        if (intercomBtnChat) {
+            this.renderer.setStyle(intercomBtnChat, 'display', 'none');
+        }
+
+        const intercomContainer = this.document.querySelector('#intercom-container');
+        if (intercomContainer) {
+            this.renderer.setStyle(intercomContainer, 'display', 'none');
+        }
+    }
+
+    private restoreLiveChats() {
+        let scriptGalaxsys = document.getElementById("galaxsysScript");
+
+        if (scriptGalaxsys) {
+            scriptGalaxsys.remove();
+
+            const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+            if (botaoContatoFlutuante) {
+                this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+            }
+
+            const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+            if (jivoChatBtn) {
+                this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
+            }
+
+            const liveChatBtn = this.document.getElementById('chat-widget-container');
+            if (liveChatBtn) {
+                this.renderer.setStyle(liveChatBtn, 'display', 'block');
+            }
+
+            const zendeskChat = this.document.querySelector('iframe#launcher');
+            if (zendeskChat) {
+                this.renderer.setStyle(zendeskChat, 'display', 'block');
+            }
+        }
+
+        const botaoContatoFlutuante = this.document.getElementsByClassName('botao-contato-flutuante')[0];
+        if (botaoContatoFlutuante) {
+            this.renderer.setStyle(botaoContatoFlutuante, 'z-index', '1000');
+        }
+
+        const jivoChatBtn = this.document.getElementsByTagName('jdiv')[0];
+        if (jivoChatBtn) {
+            this.renderer.setStyle(jivoChatBtn, 'display', 'inline');
+        }
+
+        const liveChatBtn = this.document.getElementById('chat-widget-container');
+        if (liveChatBtn) {
+            this.renderer.setStyle(liveChatBtn, 'display', 'block');
+        }
+
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
+
+        const TawkChat = this.document.querySelector('.widget-visible') as HTMLElement;
+        if (TawkChat) {
+            this.document.querySelectorAll('[title="chat widget"]').forEach((iframeChat, key) => {
+                if (key != 1 || this.tawakChatClicked) {
+                    this.renderer.setStyle(iframeChat, 'display', 'block');
+                }
+            });
+        }
+
+        const intercomBtnChat = this.document.querySelector('.intercom-launcher');
+        if (intercomBtnChat) {
+            this.renderer.setStyle(intercomBtnChat, 'display', 'block');
+        }
+
+        const intercomContainer = this.document.querySelector('#intercom-container');
+        if (intercomContainer) {
+            this.renderer.setStyle(intercomContainer, 'display', 'block');
         }
     }
 }

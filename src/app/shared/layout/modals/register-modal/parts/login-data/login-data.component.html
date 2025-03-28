@@ -17,10 +17,18 @@
         <div class="col-md-4">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input type="text" id="countryCode" mask="0*"
-                        class="form-control inverted-out  label-personalized" formControlName="countryCode"
-                        [ngClass]="applyCssInputError('countryCode')" placeholder=" " [dropSpecialCharacters]="false"
-                        prefix="+" inputmode="numeric" maxlength="4">
+                    <input 
+                        type="text" 
+                        id="countryCode" 
+                        mask="0*" 
+                        class="form-control inverted-out  label-personalized"
+                        formControlName="countryCode" 
+                        [ngClass]="applyCssInputError('countryCode')" 
+                        placeholder=" "
+                        [dropSpecialCharacters]="false" 
+                        prefix="+" 
+                        inputmode="numeric" 
+                        maxlength="4">
                     <label class="text-input" for="countryCode">{{'geral.countryCode' | translate}}</label>
                 </div>
                 <app-error-msg [control]="form.get('countryCode')" label="{{'geral.countryCode' | translate}}"
@@ -31,8 +39,10 @@
             <div class="form-group mb-4">
                 <div class="input-md">
                     <input type="text" id="telefone" mask="(00) 00000-0000"
-                        class="form-control inverted-out  label-personalized" formControlName="telefone"
-                        [ngClass]="applyCssInputError('telefone')" placeholder=" " [dropSpecialCharacters]="false"
+                        class="form-control inverted-out  label-personalized" 
+                        formControlName="telefone"
+                        [ngClass]="applyCssInputError('telefone')" 
+                        placeholder=" " [dropSpecialCharacters]="false"
                         inputmode="numeric">
                     <label class="text-input" for="telefone">{{'geral.telefone' | translate}}</label>
                 </div>
@@ -45,12 +55,20 @@
         <div class="col-md-12">
             <div class="form-group" [ngClass]="applyCssDivError('senha')">
                 <div class="input-md">
-                    <input [type]="mostrarSenha ? 'text' : 'password'" id="password"
+                    <input [
+                        type]="mostrarSenha ? 'text' : 'password'" 
+                        id="password"
                         class="form-control inverted-out  label-personalized"
-                        [ngClass]="applyCssInputError('senha')" formControlName="senha" placeholder=" "
+                        [ngClass]="applyCssInputError('senha')" 
+                        formControlName="senha" 
+                        placeholder=" "
                         (beforeinput)="onBeforeInput($event, 'password')"
-                        (input)="isStrengthPassword ? checkPassword() : null" [ngbTooltip]="tooltipTemplate" [disableTooltip]="!isStrengthPassword"
-                        placement="bottom" tooltipClass="tooltip-password" triggers="click">
+                        (input)="isStrengthPassword ? checkPassword() : null" 
+                        [ngbTooltip]="tooltipTemplate" 
+                        [disableTooltip]="!isStrengthPassword"
+                        placement="bottom" 
+                        tooltipClass="tooltip-password" 
+                        triggers="click">
                     <label class="text-input" for="password">{{'geral.senha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarSenha = !mostrarSenha"></i>
@@ -66,10 +84,14 @@
         <div class="col-md-12">
             <div class="form-group mb-4">
                 <div class="input-md">
-                    <input [type]="mostrarConfirmarSenha ? 'text' : 'password'" id="confirmarSenha"
+                    <input 
+                        [type]="mostrarConfirmarSenha ? 'text' : 'password'" 
+                        id="confirmarSenha"
                         class="form-control inverted-out  label-personalized"
-                        formControlName="senha_confirmacao" [ngClass]="applyCssInputError('senha_confirmacao')"
-                        placeholder=" " (beforeinput)="onBeforeInput($event, 'password')">
+                        formControlName="senha_confirmacao" 
+                        [ngClass]="applyCssInputError('senha_confirmacao')"
+                        placeholder=" " 
+                        (beforeinput)="onBeforeInput($event, 'password')">
                     <label class="text-input" for="confirmarSenha">{{'senhas.confirmarSenha' | translate}}</label>
                     <i class="fa showPassword" [ngClass]="mostrarConfirmarSenha ? 'fa-eye-slash' : 'fa-eye'"
                         (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"></i>
@@ -89,7 +111,9 @@
             <div class="form-group mb-4" [ngClass]="applyCssDivError('afiliado')">
                 <div class="input-md">
                     <input type="text" id="afiliado" class="form-control inverted-out  label-personalized"
-                        [ngClass]="applyCssInputError('afiliado')" formControlName="afiliado" placeholder=" "
+                        [ngClass]="applyCssInputError('afiliado')" 
+                        formControlName="afiliado" 
+                        placeholder=" "
                         [readonly]="possuiCodigoAfiliado">
                     <label class="text-input" for="afiliado">{{'geral.codigoDeAfiliacao' | translate}}</label>
                 </div>
