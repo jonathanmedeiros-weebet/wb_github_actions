@@ -451,6 +451,7 @@
         "availableBalanceForWithdrawal": "Available balance for withdrawal",
         "safeWithdrawalAlert": "For security reasons, withdrawals will only be made to accounts belonging to the registered CPF.",
         "enterPixKey": "Select the type of PIX key",
+        "selectBankAccount": "Select the bank account",
         "minimumWithdrawal": "Minimum withdrawal",
         "dailyMaximum": "Daily maximum",
         "monthlyMaximum": "Monthly maximum",
