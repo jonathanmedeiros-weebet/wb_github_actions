@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { AccountVerificationService, MessageService } from './../../../../services';
+import { AccountVerificationService, ClienteService, MessageService } from './../../../../services';
 import { VerificationTypes } from './../../../enums';
 
 @Component({
@@ -18,13 +18,16 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
   public confirmCodeForm: FormGroup;
   public showModalSuccess: boolean = false;
   public time: number = 30;
+  public twoFactorAuth: boolean = false;
+  public customerId: number = 0;
 
   constructor(
     private activeModal: NgbActiveModal,
     private fb: FormBuilder,
     private accountVerificationService: AccountVerificationService,
     private messageService: MessageService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private clienteService: ClienteService
   ) {}
 
   get verificationTypeIsEmail() {
@@ -53,12 +56,16 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
 
   get successTitle() {
     const verificationTypeName = this.verificationTypeIsEmail ? 'E-mail' : 'Telefone';
-    return `${verificationTypeName} verificado com sucesso!`;
+    return this.twoFactorAuth
+        ? `Autenticação bem-sucedida!`
+        : `${verificationTypeName} verificado com sucesso!`;
   }
 
   get successDescription() {
     const verificationTypeName = this.verificationTypeIsEmail ? 'e-mail' : 'telefone';
-    return `Seu ${verificationTypeName} foi verificado com sucesso! Agora, você pode usá-lo para recuperar sua senha com facilidade sempre que precisar.`;
+    return this.twoFactorAuth
+        ? `Sua identidade foi verificada com sucesso. Agora você pode prosseguir com segurança.`
+        : `Seu ${verificationTypeName} foi verificado com sucesso! Agora, você pode usá-lo para recuperar sua senha com facilidade sempre que precisar.`;
   }
 
   get showSupportSection() {
@@ -88,17 +95,32 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
 
   private requestConfirmationCode() {
     this.initResendCodeTime();
-    this.accountVerificationService
-      .requestConfirmationCode(this.verificationType)
-      .toPromise()
-      .then(() => {
-        if (this.verificationType == VerificationTypes.EMAIL) {
-          this.messageService.success(this.translate.instant('senhas.codigoDeVerificacaoPorEmail'));
-        }
-      })
-      .catch((error) => {
-        this.messageService.error(error);
-      });
+
+    if (this.twoFactorAuth) {
+        this.clienteService
+            .sendTwoFactorAuthCode(this.verificationType, this.customerId, this.verificationValue)
+            .toPromise()
+            .then(() => {
+                if (this.verificationType == VerificationTypes.EMAIL) {
+                    this.messageService.success(this.translate.instant('senhas.codigoDeVerificacaoPorEmail'));
+                }
+            })
+            .catch((error) => {
+                this.messageService.error(error);
+            });
+    } else {
+        this.accountVerificationService
+          .requestConfirmationCode(this.verificationType)
+          .toPromise()
+          .then(() => {
+            if (this.verificationType == VerificationTypes.EMAIL) {
+              this.messageService.success(this.translate.instant('senhas.codigoDeVerificacaoPorEmail'));
+            }
+          })
+          .catch((error) => {
+            this.messageService.error(error);
+          });
+    }
   }
 
   public onInput(event: InputEvent, index: number) {
@@ -110,7 +132,7 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
     if (isNumber && index < 5) {
       this.codeInputs.get(index + 1).nativeElement.focus();
     }
-    
+
     if(!isNumber && !isEmpty) {
       this.codeInputs.get(index).nativeElement.value = '';
     }
@@ -138,7 +160,7 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
   public onPaste(event: any) {
     event.preventDefault();
     const pastedData = event.clipboardData.getData('text/plain');
-    
+
     Object.keys(this.confirmCodeForm.controls).forEach((controlKey, index) => {
       this.confirmCodeForm.controls[controlKey].setValue(pastedData[index]);
     });
@@ -150,14 +172,25 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
     if (!this.confirmCodeForm.valid) return;
 
     const code = this.prepareCode();
-    this.accountVerificationService
-      .confirmateCode(this.verificationType, code)
-      .toPromise()
-      .then(() => {
-        this.showModalSuccess = true;
-        this.accountVerificationService.getAccountVerificationDetail().toPromise();
-      })
-      .catch((error) => this.messageService.error(error))
+
+    if (this.twoFactorAuth) {
+        this.clienteService
+            .confirmTwoFactorAuthCode(this.verificationType, this.customerId, this.verificationValue, code)
+            .toPromise()
+            .then(() => {
+                this.showModalSuccess = true;
+            })
+            .catch((error) => this.messageService.error(error));
+    } else {
+        this.accountVerificationService
+          .confirmateCode(this.verificationType, code)
+          .toPromise()
+          .then(() => {
+            this.showModalSuccess = true;
+            this.accountVerificationService.getAccountVerificationDetail().toPromise();
+          })
+          .catch((error) => this.messageService.error(error))
+    }
   }
 
   public handleResendCode() {
@@ -176,11 +209,11 @@ export class VerifyEmailOrPhoneComponent implements OnInit {
     const duration = 30;
     const startTime = performance.now();
     const endTime = startTime + duration * 1000;
-    
+
     const updateCountdown = () => {
       const now = performance.now();
       this.time = Math.max(0, Math.ceil((endTime - now) / 1000));
-      
+
       if (this.time > 0) {
         requestAnimationFrame(updateCountdown);
       }
