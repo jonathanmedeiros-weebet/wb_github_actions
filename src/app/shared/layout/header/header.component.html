@@ -487,6 +487,7 @@
                                 <a
                                     (click)="openBankAccount()"
                                     [class.disabled]="accountVerificationPending"
+                                    *ngIf="useBankAccount"
                                 >
                                     <span>
                                         <i class="fa fa-bank"></i>

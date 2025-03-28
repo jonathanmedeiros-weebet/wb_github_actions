@@ -65,6 +65,8 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     iceHockeyId: Number;
     eSportsId: Number;
 
+    useBankAccount:boolean = false;
+
     iconesGenericos = {
         'basquete': 'wbicon icon-basquete',
         'volei': 'wbicon icon-volei',
@@ -110,6 +112,7 @@ export class SidebarNavComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.useBankAccount = this.paramsLocais.getOpcoes().use_bank_account;
         this.cartaoApostaHabilitado = this.paramsLocais.getOpcoes().cartao_aposta;
         this.allowAgentChangePassword = this.paramsLocais.getOpcoes().permitir_alterar_senha;
         this.enabledBettorPix = Boolean(this.paramsLocais.getOpcoes().payment_methods_available_for_bettors.length);
