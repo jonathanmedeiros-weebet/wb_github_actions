@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, QueryList, Renderer2, 
 @Component({
   selector: 'app-recommended-to-you',
   templateUrl: './recommended-to-you.component.html',
-  styleUrls: ['./recommended-to-you.component.css']
+  styleUrls: ['./recommended-to-you.component.scss']
 })
 export class RecommendedToYouComponent {
   @ViewChildren('scrollGames') gamesScroll: QueryList<ElementRef>;

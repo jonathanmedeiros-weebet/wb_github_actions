@@ -64,14 +64,13 @@ export class HomeComponent implements OnInit, OnDestroy{
 
         this.widgetService.byPage('home').subscribe(async response => {
             if (this.isLoggedIn) {
-                await this.getGamesRecommendations();
-
-                response = response.map(widget => {
+                response = await Promise.all(response.map(async widget => {
                     if (widget.type == 'betpilot') {
+                        await this.getGamesRecommendations();
                         widget.items = this.gamesRecommended
                     }
                     return widget
-                });
+                }));
             }
             this.widgets = response;
         });
@@ -155,10 +154,6 @@ export class HomeComponent implements OnInit, OnDestroy{
         return items.map(i => i.item_id)
     }
 
-    getGames() {
-        return this.gamesRecommended;
-    }
-
     private async getGamesRecommendations() {
         const userId = this.authService.getUser().id;
     
@@ -166,10 +161,11 @@ export class HomeComponent implements OnInit, OnDestroy{
             const res = await this.casinoApi.getCasinoRecommendations(userId).toPromise();
     
             if (res.success) {
-                this.gamesRecommended = res.results ?? [];
+                return this.gamesRecommended = res.results ?? [];
             }
         } catch (error) {
-          console.error('Erro ao obter recomendações:', error);
+            console.error('Erro ao obter recomendações:', error);
+            return [];
         }
     }
 }

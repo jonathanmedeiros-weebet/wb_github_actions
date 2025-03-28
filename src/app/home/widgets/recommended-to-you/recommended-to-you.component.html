@@ -7,11 +7,16 @@
         [seeAllRouterLink]="linkAll"
         (onLeft)="scrollLeft('betpilot')"
         (onRight)="scrollRight('betpilot')"
-    />
+    ></app-wall-section>
 
-    <div class="games-container">
+    <div class="bloco__games-container">
         <ng-container *ngIf="games.length; else elseWithoutGames">
-            <div class="game-list game-list-inline" #scrollGames id="betpilot-scroll" (scroll)="onScroll('betpilot')">
+            <div 
+                class="bloco__game-list bloco__game-list--inline" 
+                #scrollGames 
+                id="betpilot-scroll" 
+                (scroll)="onScroll('betpilot')"
+            >
                 <app-wall-game-card
                     *ngFor="let game of games"
                     [game]="game"
@@ -20,12 +25,14 @@
                     [isDemo]="isDemo"
                     [isCliente]="isCliente"
                     cardType="inline"
-                />
+                ></app-wall-game-card>
             </div>
         </ng-container>
 
         <ng-template #elseWithoutGames>
-            <span class="empty-game-list">{{ 'geral.nenhumJogoDisponivel' | translate }}</span>
+            <span class="bloco__empty-game-list">
+                {{ 'geral.nenhumJogoDisponivel' | translate }}
+            </span>
         </ng-template>
     </div>
 </div>
