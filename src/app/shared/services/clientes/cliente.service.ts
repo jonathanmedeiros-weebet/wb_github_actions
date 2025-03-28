@@ -463,7 +463,7 @@ export class ClienteService {
         const data = {
             acceptTerms: true
         };
-        return this.http.post(`${this.clienteUrl}/acceptTerms`, {data},this.headers.getRequestOptions(true))
+        return this.http.get(`${this.clienteUrl}/acceptTerms`, this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
                     return response.results;

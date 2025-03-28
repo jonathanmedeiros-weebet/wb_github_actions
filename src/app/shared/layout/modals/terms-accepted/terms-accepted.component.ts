@@ -42,7 +42,6 @@ export class TermsAcceptedComponent  implements OnInit {
 
   public logout() {
     this.activeModal.close(true);
-    this.auth.logout();
   };
 
   changeButton(){
@@ -54,10 +53,8 @@ export class TermsAcceptedComponent  implements OnInit {
   acceptedTerms() {
     this.activeModal.close(true);
     this.clientService.acceptTerms().subscribe((res) => {
-      console.log(res);
-      
-    
   });
   }
+
 }
 

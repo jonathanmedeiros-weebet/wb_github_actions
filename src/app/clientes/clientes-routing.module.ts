@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {PagesLayoutComponent} from '../shared/layout/app-layouts';
 import { IndiqueGanheGuard } from './../services';
 import { AccountVerificationGuard } from '../shared/services/guards/account-verification.guard';
+import { TermsAcceptGuard } from '../shared/services/guards/terms-accept.guard';
 
 const routes: Routes = [{
     path: '',
@@ -19,64 +20,64 @@ const routes: Routes = [{
         },
         {
             path: 'configuracoes',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./configuracoes/configuracoes.module').then(f => f.ConfiguracoesModule)
         },
         {
             path: 'financeiro',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./financeiro/financeiro.module').then(f => f.FinanceiroModule)
         },
         {
             path: 'carteira',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
 
             loadChildren: () => import('./carteira/carteira.module').then(f => f.Carteira)
         },
         {
             path: 'apostas',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./apostas-cliente/apostas-cliente.module').then(a => a.ApostasClienteModule)
         },
         {
             path: 'deposito',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./deposito/deposito.module').then(a => a.DepositoModule)
         },
         {
             path: 'saque',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./solicitacao-saque-cliente/solicitacao-saque-cliente.module')
                 .then(s => s.SolicitacaoSaqueClienteModule)
         },
         {
             path: 'transacoes-historico',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./transacoes-historico/transacoes-historico.module').then(h => h.TransacoesHistoricoModule)
         },
         {
             path: 'depositos-saques',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./depositos-saques/depositos-saques.module').then(m => m.DepositosSaquesModule)
         },
         {
             path: 'rollover',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
         {
             path: 'indique-ganhe',
             loadChildren: () => import('./indique-ganhe/indique-ganhe.module').then(i => i.IndiqueGanheModule),
-            canActivate: [IndiqueGanheGuard, AccountVerificationGuard]
+            canActivate: [IndiqueGanheGuard, TermsAcceptGuard, AccountVerificationGuard]
         },
         {
             path: 'cashback',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./cashback/cashback.module').then(i => i.CashbackModule)
         },
         {
             path: 'rodada-gratis',
-            canActivate: [AccountVerificationGuard],
+            canActivate: [TermsAcceptGuard, AccountVerificationGuard],
             loadChildren: () => import('./promocao/promocao.module').then(p => p.PromocaoModule)
         },
         {

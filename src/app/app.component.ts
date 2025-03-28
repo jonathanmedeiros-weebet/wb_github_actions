@@ -15,7 +15,7 @@ import {
 } from './services';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
-import { filter } from 'rxjs/operators';
+import { filter, first } from 'rxjs/operators';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { EsqueceuSenhaModalComponent } from './shared/layout/modals';
 import { LoginModalComponent } from './shared/layout/modals';
@@ -173,6 +173,11 @@ export class AppComponent implements OnInit {
 
                 localStorage.removeItem(ACCOUNT_VERIFIED)
                 this.accountVerificationService.getAccountVerificationDetail().toPromise();
+                this.accountVerificationService.terms_accepted.pipe(first()).subscribe((termsAccepted) => {  
+                    if(!termsAccepted) {         
+                    this.accountVerificationService.openModalTermsAccepd();
+                    }
+                })
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {

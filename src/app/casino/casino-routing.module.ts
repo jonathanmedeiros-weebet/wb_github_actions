@@ -1,3 +1,4 @@
+import { TermsAcceptGuard } from '../shared/services/guards/terms-accept.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GameviewComponent } from './gameview/gameview.component';
@@ -30,12 +31,12 @@ const routes: Routes = [
                     {
                         path: ':game_fornecedor/:game_id',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard, AccountVerificationGuard]
+                        canActivate: [CasinoGuard, TermsAcceptGuard,AccountVerificationGuard]
                     },
                     {
                         path: ':game_fornecedor/:game_id/:game_mode',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard, AccountVerificationGuard]
+                        canActivate: [CasinoGuard, TermsAcceptGuard,AccountVerificationGuard]
                     },
                     {
                         path: 'wallFiltered',
@@ -68,12 +69,12 @@ const routes: Routes = [
                     {
                         path: ':game_fornecedor/:game_id',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard, AccountVerificationGuard]
+                        canActivate: [CasinoGuard, TermsAcceptGuard,AccountVerificationGuard]
                     },
                     {
                         path: ':game_fornecedor/:game_id/:game_mode',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard, AccountVerificationGuard]
+                        canActivate: [CasinoGuard, TermsAcceptGuard,AccountVerificationGuard]
                     }
                 ]
             }
@@ -97,12 +98,12 @@ const routes: Routes = [
                     {
                         path: ':game_fornecedor/:game_id',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard, AccountVerificationGuard]
+                        canActivate: [CasinoGuard, TermsAcceptGuard, AccountVerificationGuard]
                     },
                     {
                         path: ':game_fornecedor/:game_id/:game_mode',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard, AccountVerificationGuard]
+                        canActivate: [CasinoGuard, TermsAcceptGuard, AccountVerificationGuard]
                     }
                 ]
             }
@@ -119,7 +120,7 @@ const routes: Routes = [
                     {
                         path: '',
                         component: GameviewComponent,
-                        canActivate: [CasinoGuard, AccountVerificationGuard]
+                        canActivate: [CasinoGuard, TermsAcceptGuard, AccountVerificationGuard]
                     }
                 ]
             }
