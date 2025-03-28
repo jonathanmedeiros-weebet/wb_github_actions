@@ -2,7 +2,7 @@
   "name": "weebet-cambista",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --port 7000",
+    "dev": "vite --port 7010",
     "build": "VITE_BASE_PATH=/ run-p type-check build-only",
     "build:fronts": "VITE_BASE_PATH=/app-cambista/ run-p type-check build-only",
     "build:s3": "VITE_BASE_PATH=/ run-p type-check build-only",
@@ -25,7 +25,8 @@
     "vue-chartjs": "^5.3.1",
     "vue-lazyload": "^1.3.5",
     "vue-router": "^3.5.4",
-    "vue-the-mask": "^0.11.1"
+    "vue-the-mask": "^0.11.1",
+    "vue-virtual-scroller": "^1.1.2"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

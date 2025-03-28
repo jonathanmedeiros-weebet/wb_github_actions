@@ -110,9 +110,12 @@ export const getLiveChampionship = async (sportId: number | string) => {
         return response
             .result
             .map((championship: any) => {
-                championship.jogos = championship.jogos.filter((game: any) => 
-                    !game.finalizado && game.info.minutos <= options.minuto_encerramento_aovivo && game.total_cotacoes != 0
-                );
+                championship.jogos = championship.jogos.filter((game: any) => {
+                    const hasQuotes = game.total_cotacoes > 0;
+                    const gameInProgress = !game.finalizado;
+                    const betsInProgress = options.minuto_encerramento_aovivo > 0 ? game.info.minutos <= options.minuto_encerramento_aovivo : true;
+                    return hasQuotes && gameInProgress && betsInProgress;
+                });
                 return championship;
             })
             .filter((championship: any) => Boolean(championship.jogos.length) && championship.sport_id == sportId && liveChampionships.includes(championship._id));

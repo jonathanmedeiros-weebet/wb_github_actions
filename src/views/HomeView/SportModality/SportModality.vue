@@ -16,7 +16,7 @@
           <span>{{ league.label }}</span>
         </SelectFake>
 
-        <GameList :infiniteScroll="true" @gameClick="handleGameDetailClick" />
+        <GameList ref="game-list" @gameClick="handleGameDetailClick" />
       </template>
     </section>
 
@@ -146,7 +146,7 @@
       async pageLoad(forceLoading = true) {
         this.loading = forceLoading;
   
-        if(Boolean(this.league)) {
+        if(Boolean(this.league) && this.league.id !== "region_ALL") {
           await this.handleLeague(this.league, forceLoading)
         } else {
           await this.prepareChampionshipList(this.modality.id, null, this.dateSelected.format('YYYY-MM-DD'))
@@ -256,7 +256,7 @@
             isPopularLeague
           );
 
-          if (!championships || championships.length === 0 && !this.liveActived) {
+          if ((!championships || championships.length === 0) && !this.liveActived) {
             const nextDateEvents = this.dateSelected.add(1, 'day');
             this.homeStore.setDate(nextDateEvents);
 
@@ -340,7 +340,7 @@
       handleCloseLeaguesModal() {
         this.showModalLeagues = false;
       },
-      async handleLeague(regionOrChampionship, forceLoading) {
+      async handleLeague(regionOrChampionship, forceLoading = false) {
         this.loading = forceLoading;
         this.regionSelected = '';
         this.handleCloseLeaguesModal();
@@ -348,6 +348,11 @@
         delete regionOrChampionship?.championships;
         this.homeStore.setLeague(regionOrChampionship);
   
+        if(forceLoading) {
+          this.homeStore.setChampionshipList([]);
+          this.$refs['game-list'].championshipListSecondary = [];
+        }
+
         await this.prepareChampionshipListByLeague();
   
         this.loading = false;
