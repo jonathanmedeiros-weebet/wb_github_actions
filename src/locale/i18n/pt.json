@@ -456,6 +456,7 @@
         "availableBalanceForWithdrawal": "Saldo disponível para saque",
         "safeWithdrawalAlert": "Por motivos de segurança, os saques só serão efetivados para contas pertencentes ao CPF cadastrado.",
         "enterPixKey": "Informe o tipo de chave PIX",
+        "selectBankAccount": "Informe a conta bancária",
         "minimumWithdrawal": "Saque mínimo",
         "dailyMaximum": "Máximo diário",
         "monthlyMaximum": "Máximo mensal",
