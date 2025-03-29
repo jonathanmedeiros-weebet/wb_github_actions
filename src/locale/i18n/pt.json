@@ -306,7 +306,8 @@
         "AccountType": "Tipo de conta",
         "CurrentAccount": "Conta corrente",
         "SavingsAccount": "Conta poupança",
-        "optionAccountType":"Selecione o tipo de conta"
+        "optionAccountType":"Selecione o tipo de conta",
+        "AccountDigit": "Digito da conta"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -456,6 +457,7 @@
         "availableBalanceForWithdrawal": "Saldo disponível para saque",
         "safeWithdrawalAlert": "Por motivos de segurança, os saques só serão efetivados para contas pertencentes ao CPF cadastrado.",
         "enterPixKey": "Informe o tipo de chave PIX",
+        "selectBankAccount": "Informe a conta bancária",
         "minimumWithdrawal": "Saque mínimo",
         "dailyMaximum": "Máximo diário",
         "monthlyMaximum": "Máximo mensal",
