@@ -8,7 +8,7 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 import { MessageService } from '../../shared/services/utils/message.service';
 import { LayoutService } from '../../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { AccountVerificationService, ClienteService, ParametrosLocaisService } from 'src/app/services';
 import { TranslateService } from '@ngx-translate/core';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
@@ -71,6 +71,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     user: any;
     private phoneVerificationService: string = '';
     private verifyPhoneOrEmailModal: NgbModalRef;
+    private twoFactorAuthVerifiedSubscription: Subscription;
 
     constructor(
         private route: ActivatedRoute,
@@ -95,6 +96,10 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     ngOnDestroy(): void {
         this.unsub$.next();
         this.unsub$.complete();
+
+        if (this.enableTwoFactorPasswordRecovery && this.phoneVerificationService === 'twilio') {
+            this.twoFactorAuthVerifiedSubscription.unsubscribe();
+        }
     }
 
     get enableTwoFactorPasswordRecovery(): boolean {
@@ -232,8 +237,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 })
         }
 
-        if (this.phoneVerificationService === 'twilio') {
-            this.clienteService.twoFactorAuthVerified$.subscribe(verified => {
+        if (this.enableTwoFactorPasswordRecovery && this.phoneVerificationService === 'twilio') {
+            this.twoFactorAuthVerifiedSubscription = this.clienteService.twoFactorAuthVerified$.subscribe(verified => {
                 if (verified) {
                     this.verifyPhoneOrEmailModal.close();
                     this.onSubmit();
