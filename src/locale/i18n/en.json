@@ -301,7 +301,8 @@
         "AccountType": "Account type",
         "CurrentAccount": "Current account",
         "SavingsAccount": "Savings account",
-        "optionAccountType":"Select account type"
+        "optionAccountType":"Select account type",
+        "AccountDigit": "Account digit"
     },
     "bet": {
         "sportsBetting": "Sports betting",

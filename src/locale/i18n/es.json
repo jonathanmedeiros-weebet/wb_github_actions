@@ -301,7 +301,8 @@
         "AccountType": "Tipo de cuenta",
         "CurrentAccount": "Cuenta corriente",
         "SavingsAccount": "Cuenta de ahorros",
-        "optionAccountType":"Seleccione el tipo de cuenta"
+        "optionAccountType":"Seleccione el tipo de cuenta",
+        "AccountDigit": "Dígito de la cuenta"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
