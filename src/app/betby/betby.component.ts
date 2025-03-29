@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from '../shared/layout/modals';
 import { AccountVerificationService, AuthService, HelperService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,6 +24,12 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     private queryParamsSubscription: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
     public heightHeader = 92;
+
+    private loggedSubscription: Subscription;
+    private accountVerifiedSubscription: Subscription;
+
+    private hasCustomerLoggedIn: boolean = false;
+    private accountVerified: boolean = false;
 
     constructor(
         private helper: HelperService,
@@ -60,6 +66,15 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             this.renderer.setStyle(zendeskChat, 'display', 'none');
         }
 
+        this.checkIfHasCustomerLoggedIn();
+        this.initAccountVerification();
+
+        if (this.hasCustomerLoggedIn && !this.accountVerified) {
+            const accountVerificationAlert: NgbModalRef = this.accountVerificationService.openModalAccountVerificationAlert();
+            accountVerificationAlert.componentInstance.redirectEvenWhenClosing = true;
+            return;
+        }
+
         this.helper.injectBetbyScript(this.params.getOpcoes().betby_script).then(() => {
             this.authService.getTokenBetby(currentLang).subscribe(
                 (res) => {
@@ -86,11 +101,26 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         );
 
         this.loginSubscription = this.loginService.event$.subscribe(() => {
+            this.checkIfHasCustomerLoggedIn();
+            this.initAccountVerification();
+
+            if (this.hasCustomerLoggedIn && !this.accountVerified) {
+                this.destroyBetbyIFrame();
+
+                const accountVerificationAlert: NgbModalRef = this.accountVerificationService.openModalAccountVerificationAlert();
+                accountVerificationAlert.componentInstance.redirectEvenWhenClosing = true;
+                return;
+            }
+
             this.refreshBetby();
         })
     }
 
     ngAfterViewInit() {
+        if (this.hasCustomerLoggedIn && !this.accountVerified) {
+            return;
+        }
+
         const divElement = this.elementRef.nativeElement.querySelector('app-header');
 
         this.resizeObserver = new ResizeObserver((entries) => {
@@ -110,6 +140,18 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         setTimeout(() => {
             this.hideGtmElements();
         }, 1200);
+    }
+
+    private initAccountVerification() {
+        this.accountVerifiedSubscription = this.accountVerificationService
+            .accountVerified
+            .subscribe((accountVerified) => this.accountVerified = accountVerified);
+    }
+
+    private checkIfHasCustomerLoggedIn() {
+        this.loggedSubscription = this.authService
+            .logado
+            .subscribe((hasCustomerLoggedIn) => this.hasCustomerLoggedIn = hasCustomerLoggedIn);
     }
 
     hideGtmElements() {
@@ -179,22 +221,11 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        const zendeskChat = this.document.querySelector('iframe#launcher');
-        if (zendeskChat) {
-            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        if (this.hasCustomerLoggedIn && !this.accountVerified) {
+            return;
         }
 
-        if (this.bt) {
-            this.bt.kill();
-        }
-        if (this.queryParamsSubscription) {
-            this.queryParamsSubscription.unsubscribe();
-        }
-        if (this.resizeObserver) {
-            this.resizeObserver.disconnect();
-        }
-        this.showGtmElements();
-        this.loginSubscription.unsubscribe();
+        this.destroyBetbyIFrame();
     }
 
     refreshBetby(lang: string = null) {
@@ -287,5 +318,30 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         } else {
             this.router.navigate(['/clientes/deposito']);
         }
+    }
+
+    destroyBetbyIFrame() {
+        const zendeskChat = this.document.querySelector('iframe#launcher');
+        if (zendeskChat) {
+            this.renderer.setStyle(zendeskChat, 'display', 'block');
+        }
+
+        if (this.bt) {
+            this.bt.kill();
+        }
+
+        if (this.queryParamsSubscription) {
+            this.queryParamsSubscription.unsubscribe();
+        }
+
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+        }
+
+        this.showGtmElements();
+
+        this.loginSubscription.unsubscribe();
+        this.loggedSubscription.unsubscribe();
+        this.accountVerifiedSubscription.unsubscribe();
     }
 }
