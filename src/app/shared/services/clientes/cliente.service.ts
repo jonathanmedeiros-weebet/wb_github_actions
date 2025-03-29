@@ -7,7 +7,6 @@ import { HeadersService } from '../utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import * as moment from 'moment';
-import { Router } from '@angular/router';
 import { ParametrosLocaisService } from "../parametros-locais.service";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
@@ -31,7 +30,6 @@ export class ClienteService {
         private http: HttpClient,
         private errorService: ErrorService,
         private headers: HeadersService,
-        private router: Router,
         private paramsService: ParametrosLocaisService,
         private ga4Service: Ga4Service,
         private modalService: NgbModal,
@@ -460,19 +458,7 @@ export class ClienteService {
     }
 
     acceptTerms() {
-        const data = {
-            acceptTerms: true
-        };
         return this.http.get(`${this.clienteUrl}/acceptTerms`, this.headers.getRequestOptions(true))
-            .pipe(
-                map((response: any) => {
-                    return response.results;
-                }),
-                catchError(this.errorService.handleError));
-    }
-
-    getTerms() {
-        return this.http.get(`${config.LOKI_URL}/user/account-verification`, this.headers.getRequestOptions(true))
             .pipe(
                 map((response: any) => {
                     return response.results;

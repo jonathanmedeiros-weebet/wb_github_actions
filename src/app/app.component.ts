@@ -172,12 +172,19 @@ export class AppComponent implements OnInit {
                 });
 
                 localStorage.removeItem(ACCOUNT_VERIFIED)
-                this.accountVerificationService.getAccountVerificationDetail().toPromise();
-                this.accountVerificationService.terms_accepted.pipe(first()).subscribe((termsAccepted) => {  
-                    if(!termsAccepted) {         
-                    this.accountVerificationService.openModalTermsAccepd();
-                    }
-                })
+
+                if(!window.location.href.includes('/clientes')) {
+                    this.accountVerificationService
+                        .getAccountVerificationDetail()
+                        .toPromise()
+                        .then(({terms_accepted: termsAccepted}) => {
+                            if(!termsAccepted) {         
+                                this.accountVerificationService.openModalTermsAccepd();
+                            }
+                        });
+                } else {
+                    this.accountVerificationService.getAccountVerificationDetail().toPromise()
+                }
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
