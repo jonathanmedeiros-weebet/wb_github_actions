@@ -216,7 +216,8 @@
     
             padding: 0 0 20px 0;
             width: auto;
-            height: 600px;
+            height: auto;
+            max-height: 600px;
     
             background-color: var(--header);
             border-radius: 5px;
