@@ -15,7 +15,7 @@ import {
 } from './services';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from './shared/config';
-import { filter, first } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { EsqueceuSenhaModalComponent } from './shared/layout/modals';
 import { LoginModalComponent } from './shared/layout/modals';
@@ -170,21 +170,25 @@ export class AppComponent implements OnInit {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {
                     this.openModalTimeLimit();
                 });
+               
+                this.navigationHistoryService
+                    .verifyIfCurrentRouteUseAccountVerificationGuard()
+                    .then((useAccountVerificationGuard) => {
+                        localStorage.removeItem(ACCOUNT_VERIFIED)
 
-                localStorage.removeItem(ACCOUNT_VERIFIED)
-
-                if(!window.location.href.includes('/clientes')) {
-                    this.accountVerificationService
-                        .getAccountVerificationDetail()
-                        .toPromise()
-                        .then(({terms_accepted: termsAccepted}) => {
-                            if(!termsAccepted) {         
-                                this.accountVerificationService.openModalTermsAccepd();
-                            }
-                        });
-                } else {
-                    this.accountVerificationService.getAccountVerificationDetail().toPromise()
-                }
+                        if(useAccountVerificationGuard) {
+                            this.accountVerificationService.getAccountVerificationDetail().toPromise();
+                        } else {
+                            this.accountVerificationService
+                                .getAccountVerificationDetail()
+                                .toPromise()
+                                .then(({terms_accepted: termsAccepted}) => {
+                                    if(!termsAccepted) {         
+                                        this.accountVerificationService.openModalTermsAccepd();
+                                    }
+                                });
+                        }
+                    })
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
