@@ -345,14 +345,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.auth.login(data)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                () => {
+                async () => {
                     this.getUsuario();
                     if (this.usuario.tipo_usuario === 'cliente') {
                         if (this.xtremepushHabilitado()) {
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
-                        this.accountVerificationService.getAccountVerificationDetail().toPromise();
+                        await this.accountVerificationService.getAccountVerificationDetail().toPromise();
                         if (this.isCassinoPage) {
                             location.reload();
                         }
