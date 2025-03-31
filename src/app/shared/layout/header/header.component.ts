@@ -132,6 +132,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     registerGoogleAccount = false;
     public accountVerified = false;
 
+    useBankAccount: boolean = false;
+
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         if (window.innerWidth > 1025) {
@@ -272,6 +274,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isCliente => this.isCliente = isCliente
             );
 
+        this.useBankAccount = this.paramsService.getOpcoes().use_bank_account;
         this.aoVivoAtivo = this.paramsService.aoVivoAtivo();
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.desafioNome = this.paramsService.getOpcoes().desafio_nome;

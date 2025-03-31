@@ -302,7 +302,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
             dadosCriptografados: [null],
-            termosUso: [true],
+            termsAccepted: [true],
         });
 
         if (this.isStrengthPassword) {

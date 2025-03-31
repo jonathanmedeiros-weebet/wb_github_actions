@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList,
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { LayoutService } from '../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
+import { Subject, Subscription } from 'rxjs';
+import { AccountVerificationService, AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { WidgetService } from '../shared/services/widget.service';
@@ -37,7 +37,12 @@ export class HomeComponent implements OnInit, OnDestroy{
 
     private bt: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
-    private isLoggedIn: boolean = false;
+
+    private loggedSubscription: Subscription;
+    private accountVerifiedSubscription: Subscription;
+
+    private hasCustomerLoggedIn: boolean = false;
+    private accountVerified: boolean = false;
 
     constructor(
         private messageService: MessageService,
@@ -49,21 +54,24 @@ export class HomeComponent implements OnInit, OnDestroy{
         private translate: TranslateService,
         private authService: AuthService,
         private paramsService: ParametrosLocaisService,
-        private router: Router
+        private router: Router,
+        private accountVerificationService: AccountVerificationService
     ) { }
 
     ngOnInit(): void {
         let currentLang = this.translate.currentLang;
 
         this.betby = this.paramsService.getOpcoes().betby;
-        this.authService.logado.subscribe(
-            (res) => {
-                this.isLoggedIn = res;
-            }
-        );
+
+        this.checkIfHasCustomerLoggedIn();
+        this.initAccountVerification();
+
+        if (this.hasCustomerLoggedIn && !this.accountVerified) {
+            this.betby = false;
+        }
 
         this.widgetService.byPage('home').subscribe(async response => {
-            if (this.isLoggedIn) {
+            if (this.hasCustomerLoggedIn) {
                 response = await Promise.all(response.map(async widget => {
                     if (widget.type == 'betpilot') {
                         await this.getGamesRecommendations();
@@ -110,6 +118,21 @@ export class HomeComponent implements OnInit, OnDestroy{
         if (this.bt) {
             this.bt.kill();
         }
+
+        this.loggedSubscription.unsubscribe();
+        this.accountVerifiedSubscription.unsubscribe();
+    }
+
+    private initAccountVerification() {
+        this.accountVerifiedSubscription = this.accountVerificationService
+            .accountVerified
+            .subscribe((accountVerified) => this.accountVerified = accountVerified);
+    }
+
+    private checkIfHasCustomerLoggedIn() {
+        this.loggedSubscription = this.authService
+            .logado
+            .subscribe((hasCustomerLoggedIn) => this.hasCustomerLoggedIn = hasCustomerLoggedIn);
     }
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
