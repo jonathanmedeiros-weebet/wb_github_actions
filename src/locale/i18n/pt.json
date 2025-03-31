@@ -32,7 +32,7 @@
         "ajuda": "Ajuda",
         "sair": "Sair",
         "perfil": "Perfil",
-        "dadosPessoais": "Dados Pessoais",
+        "dadosPessoais": "Dados pessoais",
         "pix": "PIX",
         "saque": "Saque",
         "saques": "Saques",
@@ -156,6 +156,7 @@
         "esqueceuASenha": "Esqueceu a senha?",
         "naoPossuiUmaConta": "Não possui uma conta?",
         "jaPossuiUmaConta": "Já possui uma conta?",
+        "logIn": "Faça o login",
         "usuario": "Usuário",
         "senha": "Senha",
         "masculino": "Masculino",
@@ -166,7 +167,7 @@
         "deAcordoComOsTermos2": "e nossa",
         "termosDeUso": "termos de uso",
         "cadastrar": "Cadastrar",
-        "cadastroSucedido": "Cadastro realizado com sucesso! Verifique seu email para ativá-lo.",
+        "cadastroSucedido": "Cadastro realizado com sucesso.",
         "informacoesPessoais": "Informações Pessoais",
         "criarLogin": "Criar Login",
         "sucesso": "Sucesso",
@@ -254,6 +255,7 @@
         "nenhumJogoDisponivel": "Nenhum jogo disponível no momento",
         "loginGoogle" : "Realize o login com a conta do google",
         "computadoEm": "Computado em:",
+        "liquidadoEm": "Liquidado em:",
         "alteracoesSucesso": "Alterações realizadas com sucesso!",
         "erroInesperado": "Algo inesperado aconteceu. Tente novamente mais tarde.",
         "enderecoNaoEncontrado": "Endereço não encontrado, por favor preencha manualmente.",
@@ -262,7 +264,7 @@
         "resetarSenha": "Resetar senha",
         "loginEmail": "E-mail",
         "loginPhone": "Telefone",
-        "loginUsername": "Nome de usuário",
+        "loginUsername": "Usuário",
         "field": "Campo",
         "or": "OU",
         "geolocationError": "Por favor, verifique a configuração de localização do seu navegador e tente novamente.",
@@ -281,7 +283,19 @@
         "vpn": "Detectamos que você está acessando nosso site por meio de uma VPN. Para garantir a segurança e a integridade da plataforma, pedimos que você desative a VPN ou utilize uma conexão padrão para continuar. Se você acredita que isso é um erro, entre em contato com o suporte.",
         "logoutGeolocationErrorMessage": "Você foi desconectado por motivos de segurança. Detectamos uma mudança abrupta na sua localização que seria fisicamente impossível de ocorrer no intervalo de tempo registrado. Caso isso não tenha sido causado por você, recomendamos verificar sua conta.",
         "logoutGeolocationErrorTitle": "Acesso Interrompido: Localização Inconsistente",
-        "logoutGeolocationErrorButtonLabel": "Fechar"
+        "logoutGeolocationErrorButtonLabel": "Fechar",
+        "clickHere": "Clique aqui",
+        "countryCode": "Código",
+        "complement": "Complemento",
+        "login": "Login",
+        "createAccount": "Criar conta",
+        "passwordRequirements": "Requisitos para uma senha segura:",
+        "passwordLevel": "Nivel da senha:",
+        "weak": "Fraco",
+        "medium": "Médio",
+        "strong": "Forte",
+        "kindLogin": "Tipo de login",
+        "errorMinorAge": "Menor de idade."
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -292,7 +306,8 @@
         "AccountType": "Tipo de conta",
         "CurrentAccount": "Conta corrente",
         "SavingsAccount": "Conta poupança",
-        "optionAccountType":"Selecione o tipo de conta"
+        "optionAccountType":"Selecione o tipo de conta",
+        "AccountDigit": "Digito da conta"
     },
     "bet": {
         "sportsBetting": "Apostas esportivas",
@@ -340,6 +355,7 @@
         "tenis": "Tênis",
         "quininha": "Quininha",
         "seninha": "Seninha",
+        "lobby": "Lobby",
         "todos": "Todos",
         "slot": "Slot",
         "crash": "Crash",
@@ -349,7 +365,8 @@
         "cassinoAoVivo": "Cassino Ao Vivo",
         "loteriaPopular": "Loteria Popular",
         "maisPopulares": "Populares",
-        "news": "Novidades"
+        "news": "Novidades",
+        "recommendedToYou": "Recomendados para você"
     },
     "bilhete": {
         "titulo": "BILHETE",
@@ -391,7 +408,8 @@
         "aoVivo": "Ao Vivo",
         "bingo": "Bingo",
         "news": "Novidades",
-        "jogosRelacionados": "Jogos relacionados"
+        "jogosRelacionados": "Jogos relacionados",
+        "recommendedToYou": "Recomendados para você"
     },
     "cartoes": {
         "titulo": "Cartões",
@@ -418,10 +436,9 @@
         "informeSeuEmail": "Informe seu e-mail para receber o link de redefinição de senha.",
         "solicitarCodigoRedefinicao": "Solicitar código de redefinição",
         "digiteSuaSenha": "Digite sua senha",
-        "minimumCharactersPassword": "Mínimo de 8 caracteres",
-        "lowercaseLetter": "Mínimo de uma letra minúscula",
-        "uppercaseLetter": "Mínimo de uma letra maiúscula",
-        "specialChar": "Mínimo de um caractere especial (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "A senha deve possuir no mínimo 8 caracteres",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Deve conter uma letra maiúscula e uma minúscula",
+        "specialChar": "Deve conter um caractere especial (Ex.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",
@@ -435,17 +452,19 @@
         "cpfEmailTelefoneAleatoria": "CPF, E-mail, Telefone ou Aleatória",
         "pagamentoExclusivoChaveCPF": "Informamos que ao solicitar o saque ele será realizado exclusivamente para a chave pix CPF do titular da conta.",
         "solicitacoesRecentes": "Solicitações de saque recentes",
-        "avisoBonus": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente.",
+        "avisoRollover": "Informamos que ao solicitar saque, todo o bônus ativo será zerado e perdido definitivamente.",
         "withdrawalDetails": "Detalhes do saque",
         "availableBalanceForWithdrawal": "Saldo disponível para saque",
         "safeWithdrawalAlert": "Por motivos de segurança, os saques só serão efetivados para contas pertencentes ao CPF cadastrado.",
         "enterPixKey": "Informe o tipo de chave PIX",
+        "selectBankAccount": "Informe a conta bancária",
         "minimumWithdrawal": "Saque mínimo",
         "dailyMaximum": "Máximo diário",
         "monthlyMaximum": "Máximo mensal",
         "identityVerify": "Verificar identidade",
         "identityVerifyNeeded": "Para prosseguir será necessário realizar a verificação de identidade antes.",
-        "disapprovedIdentity": "Sua verificação de identidade foi reprovada. Para a realização de uma análise manual, por favor, entre em contato com o suporte."
+        "disapprovedIdentity": "Sua verificação de identidade foi reprovada. Para a realização de uma análise manual, por favor, entre em contato com o suporte.",
+        "maximumWithdrawalAmount": "Saque máximo"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Ativação de Cadastro",
@@ -457,7 +476,8 @@
     },
     "aplicativo": {
         "versaoDoAplicativoNaoSuportada": "A versão do aplicativo instalado não é mais suportada, acesse o nosso site e baixe a nova versão.",
-        "baixarNovaVersao": "Baixar nova versão"
+        "baixarNovaVersao": "Baixar nova versão",
+        "downloadApp": "Baixe o aplicativo"
     },
     "deposito": {
         "depositoERegistrado": "Depósito - Registrado",
@@ -476,7 +496,8 @@
         "depositTextWithoutBonus": "Para realizar um depósito via PIX, insira o valor que deseja depositar no campo abaixo, informe o código promocional se houver, e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
         "depositTextWithoutBonusAndPromocode": "Para realizar um depósito via PIX, insira o valor que deseja depositar no campo abaixo e clique no botão “Depositar”. Um QR Code será criado e aparecerá na tela para que possa realizar o pagamento.",
         "copyCode": "Copiar código",
-        "copied": "Copiado!"
+        "copied": "Copiado!",
+        "maximumDepositAmount": "Valor máximo"
     },
     "footer": {
         "afiliados": "Afiliados",
@@ -494,7 +515,13 @@
         "jogoResponsavel": "Jogo responsável",
         "termosECondicoes": "Termos e condições",
         "feedback": "Ouvidoria",
-        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. Todos os direitos reservados."
+        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. Todos os direitos reservados.",
+        "restrictedToAdults": "Proibido para menores de 18 anos",
+        "knowYourLimits": "Conheça seus limites",
+        "ourApp": "Nosso Aplicativo",
+        "institutional": "Institucional",
+        "licences": "Licenças",
+        "folowUp": "Siga nossas redes sociais"
     },
     "paginas": {
         "quem-somos": "Quem somos",
@@ -503,7 +530,7 @@
         "politica-aml": "Política AML",
         "jogo-responsavel": "Jogo responsável",
         "termos-condicoes": "Termos e condições",
-        "partnership-terms": "Termos de Uso (Afiliados)"
+        "termos-afiliados": "Termos de Uso (Afiliados)"
     },
     "jogos": {
         "tempoCompleto": "Tempo Completo",
@@ -560,7 +587,8 @@
         "paymentGateway": "Gateway de pagamento",
         "balance": "Saldo",
         "previousBalance": "Saldo anterior",
-        "subsequentBalance": "Saldo posterior"
+        "subsequentBalance": "Saldo posterior",
+        "defaultPaymentMethod": "Padrão"
     },
     "rollover":{
         "nenhumBonus": "Nenhum bônus.",
@@ -660,7 +688,12 @@
         "voltar": "Voltar",
         "logout_continue_login": "Sim, gostaria de encerrar a sessão",
         "remain_active_session": "Não, continuar com a outra sessão",
-        "save_pdf": "Baixar PDF"
+        "save_pdf": "Baixar PDF",
+        "seeMore": "Ver mais",
+        "seeLess": "Ver menos",
+        "continue": "Continuar",
+        "next": "Próximo",
+        "previous": "Anterior"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -767,19 +800,27 @@
     },
     "face_match": {
         "label": "Reconhecimento Facial",
+        "face_match": "Validação facial",
         "verified_identity": "Identidade verificada!",
-        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte."
+        "Identity_not_verified": "Identidade não verificada, entre em contato como o suporte.",
+        "account_protected": "Sua conta protegida!",
+        "register_description": "Para ter acesso a todas as funcionalidades do site você deverá cadastrar sua foto de segurança. Sua imagem é confidencial não será compartilhada.",
+        "checkNow": "Verificar agora"
     },
     "register": {
         "signupWith": "Inscrever-se com Google",
         "registerGoogleAccount": "Cadastre-se com sua conta do google",
         "fillToRegister": "Preencha os campos para realizar o seu cadastro",
         "protectedByReCaptchaPart1": "Este site é protegido por reCAPTCHA e a",
-        "protectedByReCaptchaPart2": "Política de Privacidade",
+        "protectedByReCaptchaPart2": "política de privacidade",
         "protectedByReCaptchaPart3": "do Google e os",
-        "protectedByReCaptchaPart4": "Termos de Serviço",
+        "protectedByReCaptchaPart4": "termos de serviço",
         "protectedByReCaptchaPart5": "se aplicam.",
-        "registrationBeneficiariesSocialPrograms": "Os beneficiários de programas sociais não podem se registrar."
+        "registrationBeneficiariesSocialPrograms": "Os beneficiários de programas sociais não podem se registrar.",
+        "day":"Dia",
+        "month":"Mês",
+        "year":"Ano",
+        "brasil": "Brasil"
     },
     "registerCancel": {
         "titleCancelRegister": "Tem certeza que deseja cancelar seu registro?",
@@ -792,5 +833,26 @@
         "masculino": "Masculino",
         "feminino": "Feminino",
         "outros": "Outros"
+    },
+    "compartilhar_aposta": {
+        "linkCopiado": "Link copiado para a área de transferência!",
+        "bilheteCompartilhado": "Bilhete compartilhado com sucesso!",
+        "apostaRepetida": "Aposta repetida com sucesso!",
+        "apostaRepetidaErro": "Erro ao repetir a aposta, tente novamente mais tarde.",
+        "codigoCopiado": "Código copiado para a área de transferência!",
+        "codigoCopiadoErro": "Erro ao copiar o código.",
+        "mensagemTitle": "Bilhete de Aposta",
+        "mensagemBody": "Acesse o link para visualizar o bilhete de aposta.",
+        "repetindoAposta": "Repetindo aposta...",
+        "repetirAposta": "Repetir aposta",
+        "reutilizarAposta": "Reutilizar aposta",
+        "reutilizandoAposta": "Reutilizando aposta...",
+        "aguardando": "Aguardando",
+        "calculando": "Calculando...",
+        "encerrarAposta": "Encerrar aposta no valor de ",
+        "encerrando": "Encerrando...",
+        "apostaNaoPodeSerEncerrada": "A aposta não pode ser encerrada.",
+        "apostaNaoPodeSerReutilizada": "Não é possível reutilizar a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas.",
+        "apostaNaoPodeSerRepetida": "Não é possível repetir a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas."
     }
 }

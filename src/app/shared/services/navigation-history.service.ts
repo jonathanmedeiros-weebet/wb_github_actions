@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { AccountVerificationGuard } from './guards/account-verification.guard';
 
 @Injectable({
   providedIn: 'root'
@@ -48,4 +50,33 @@ export class NavigationHistoryService {
   emitClearFilters() {
     this.limparFiltroSource.next();
   }
+
+  verifyIfCurrentRouteUseAccountVerificationGuard(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.router.events
+      .pipe(
+        filter(() => !!this.router.routerState.snapshot.root),
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+        const hasGuard = this.hasTesteGuard(this.router.routerState.snapshot.root);
+        resolve(hasGuard)
+      });
+    })
+  }
+
+  private hasTesteGuard(routeSnapshot: ActivatedRouteSnapshot): boolean {
+    if (routeSnapshot.routeConfig?.canActivate?.includes(AccountVerificationGuard)) {
+      return true;
+    }
+
+    for (const child of routeSnapshot.children) {
+      if (this.hasTesteGuard(child)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
+

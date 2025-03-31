@@ -12,8 +12,6 @@ footer {
     background-color: var(--header);
     min-height: 0;
     max-height: 0;
-    /*padding: 25px 0 35px 0;*/
-    /*font-size: 14px;*/
 }
 
 .title {
@@ -34,28 +32,59 @@ footer {
     max-height: 40px;
 }
 
-.container {
-    text-align: center;
-    color: var(--foreground-header);
+.logo img {
+    height: 53px
 }
 
-.info {
-    margin: 15px 0;
+.licences {
+    display: flex;
+    width: 260px;
+    padding-right: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+h2{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.licences-images{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 16px;
+}
+
+.licences img{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 107px;
+}
+
+.container {
+    color: var(--foreground-header);
+    max-width: 100% !important;
+    display: flex;
+    padding: 24px 54px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
 }
 
 .logo {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.logo img {
-    max-height: 100px;
-    max-width: 150px;
-}
-
-.info-jogo {
-    margin-top: 20px;
-    margin-bottom: 0;
+    display: flex;
+    height: 53px;
+    align-items: center;
+    align-content: center;
+    gap: 24px;
+    align-self: stretch;
+    flex-wrap: wrap;
 }
 
 .info-jogo h4 {
@@ -64,49 +93,49 @@ footer {
 }
 
 .info-jogo .icons {
-    margin-top: 10px;
     display: flex;
-    gap: 50px;
     align-items: center;
     justify-content: center;
+    gap: 48px;
+}
+
+p {
+    margin-bottom: 0;
 }
 
 .redes-sociais {
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-.redes-sociais .links-redes {
     display: flex;
-    gap: 15px;
-    align-items: center;
-    justify-content: center;
-}
+    flex-direction: column;
+    display: flex;
+    padding: 0px;
+    align-items: flex-start;
+    gap: 16px;
 
-.redes-sociais .links-redes svg {
-    height: 20px;
 }
 
 .links {
-    margin-top: 20px;
-    width: 100%;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+    width: 30%;
 }
+
 
 .links a {
     font-weight: 400;
-    color: var(--highlight);
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
+    color: var(--foreground-header);
+    opacity: 0.7;
 }
 
 footer {
     position: relative;
 }
+
 
 .toTop {
     position: fixed;
@@ -141,6 +170,7 @@ footer {
     margin: 8px auto;
     color: var(--foreground-sidebars);
     width: 50%;
+    justify-content: center;
 }
 
 .language-dropdown .btn {
@@ -157,7 +187,243 @@ footer {
     margin-bottom: 4px;
 }
 
-@media only screen and (max-width: 480px) {
+.container-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+    row-gap: 36px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.container-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-container {
+    display: flex;
+    padding: 0px 8px 0px 0px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-right: 8px;
+}
+
+#right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-right: 8px;
+}
+
+
+
+.links a:hover {
+    color: var(--highlight);
+}
+
+#image-pix{
+    width: 91.15px;
+    height: 32.358px;
+}
+
+.pagamento {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.download-container {
+    background-color: var(--background);
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+}
+
+.download-container:hover {
+    filter: brightness(1.4);
+}
+
+.download-text{
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+#download-click-here {
+    font-weight: 400;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    color: var(--foreground-header);
+    opacity: 0.7;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 100%;
+    padding: 0 !important;
+}
+
+#download-link{
+    color: var(--highlight);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    padding: 0 !important;
+}
+
+#img-cellphone {
+    width: 19px;
+    height: 31px;
+    fill: var(--highlight);
+}
+
+.download-apk {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.play-responsibly, .know-your-limits, .restricted-adults{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 48px;
+    justify-content: center;
+    align-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    text-wrap: wrap;
+}
+
+.restricted-adults-container a {
+    text-decoration: none !important;
+    white-space: nowrap;
+    cursor: pointer;
+    color: var(--foreground-header) !important;
+    text-wrap: wrap;
+}
+
+.container-full-screen {
+    max-width: 100% !important;
+}
+
+.see-more {
+    text-overflow: clip;
+
+}
+
+.see-more p {
+    margin-bottom: 0px !important;
+}
+
+.btn-see-more {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    color: var(--highlight);
+    background-color: var(--header);
+    border: 3px solid rgba(var(--header-rgb), 0.5);
+}
+
+.btn-see-more svg {
+    fill: var(--highlight);
+}
+
+.btn-see-more:hover {
+    filter: brightness(1.4);
+}
+
+.links-redes {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    align-items: center;
+  }
+
+.custom-lineclamp {
+      display: -webkit-box;
+      -webkit-line-clamp: 15;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: clip;
+  }
+
+.play-responsibly svg {
+    height: 33px !important;
+}
+
+.separator {
+    display: flex;
+    border-top: 1px solid var(--foreground-header);
+    width: 100%;
+    opacity: 0.2;
+}
+
+@media only screen and (max-width: 360px){
+    .info-pagamento {
+        padding-right: 16px;
+    }
+
+    .center-container{
+        gap: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .center-container {  
+        gap: 24px;
+        justify-items: center;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .container {
+        padding: 24px;
+    }
+}
+
+@media only screen and (min-width: 425px){
+
+    .links-redes {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container { 
+        padding: 0 24px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
     @supports (-webkit-touch-callout: none) {
         .info.copyright {
             margin-bottom: 35px !important;
@@ -166,19 +432,113 @@ footer {
             margin-bottom: 38px;
         }
     }
+
+    .info-jogo h4, .play-responsibly, .know-your-limits{
+        display: none;
+    }
+
+    .container-bottom {
+        padding-top: 0px;
+        gap: 24px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .licences {
+        align-items: center;
+        width: 100%;
+    }
+
+    .restricted-adults-container { order: 2; }
+    .game-therapy { order: 1; }
+    .left-container { order: 1; }
+    .center-container { order: 3; }
+    #right-container { order: 2; }
+
+    .center-container {
+        display: flex;
+        flex-direction: row;
+        padding-right: 8px !important;
+        align-items: center;
+        justify-content:center;
+        gap: 16px;
+    }
+
+    #right-container h2 {
+        display: none;
+    }
+    .center-container h2 {
+        display: none;
+    }
+
+    #right-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        align-self: stretch;
+    }
+
+    .left-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        align-self: stretch;
+    }
+
+    .links{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .container-center-full-screen {
+        row-gap: 36px;
+        justify-content: space-between;
+        align-self: stretch;
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: wrap !important;
+    }
+
+    .custom-lineclamp {
+        -webkit-line-clamp: 8 !important; 
+    }   
+}
+
+@media only screen and (min-width: 768px) {
+    .links {
+        gap: 20px !important;
+    }
+    .separetor-mobile {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .know-your-limits {
+        display: none;
+    }   
+
+    .container {
+        padding: 24px;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
-    footer {
-        padding-bottom: 60px;
+    .container-center-full-screen {
+        width: 100%;
     }
+
 
     .info.copyright {
         margin-top: 5px !important;
     }
 
     .container{
-        font-size: 11px; /* ajuste fonte */
+        font-size: 11px;
     }
 
     .title {
@@ -189,7 +549,6 @@ footer {
         flex-direction: column;
         font-size: 12px;
         gap: 15px;
-        margin-top: 10px;
     }
 
     .info {
@@ -197,11 +556,126 @@ footer {
     }
 
     .info-jogo .icons {
-        gap: 25px;
-        margin-top: 15px;
+        gap: 24px;
     }
 
     .info.pagamento h4 {
         margin-bottom: 4px;
     }
 }
+@media only screen and (min-width: 1025px) and (max-width: 1365px) {
+
+    .container-bottom{
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1 1 100%;
+        gap: 24px;
+    }
+
+    .licences {
+        padding-top: 24px;
+        justify-content: center;
+    }
+
+    #right-container {
+        width: 100%;
+        align-items: center;
+    }
+
+    .redes-sociais, .licences {
+        align-items: center;
+    } 
+
+    .container-center-full-screen .container-bottom {
+        flex-wrap: nowrap !important; 
+    }
+
+    .container-center-full-screen #right-container, .container-center-full-screen .redes-sociais, .container-center-full-screen .licences{
+        align-items: flex-start !important;
+    }
+
+    .container-center-full-screen #right-container {
+        width: auto !important;
+    }
+}
+
+
+@media only screen and (min-width: 1280px) {
+
+    .container-center-full-screen .container-footer, .container-center-full-screen .container-bottom {
+        width: 50%;
+    }
+
+    .container-footer {
+        width: 90%;
+    }
+
+    .container-footer .full-screen {
+        width: 85%;
+    }
+
+    .container-center-full-screen {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .container {
+        padding: 24px 54px !important;
+    }
+}
+
+@media only screen and (min-width: 540px) and (max-width: 600px) {
+
+    .container-bottom{
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1 1 100%;
+        gap: 16px;
+    }
+
+    .licences {
+        padding-top: 24px;
+        justify-content: center;
+    }
+
+    #right-container {
+        width: 100%;
+        align-items: center;
+    }
+
+    .redes-sociais, .licences {
+        align-items: center;
+    } 
+
+    .redes-sociais {
+        padding: 24px 0px;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
+
+    .info-jogo h4,
+    .play-responsibly,
+    .know-your-limits {
+        display: none;
+    }
+
+    .info-jogo h4,
+    .play-responsibly,
+    .know-your-limits {
+        display: none;
+    }
+    .info-jogo h4,
+    .info-jogo-full-screen .play-responsibly,
+    .info-jogo-full-screen .know-your-limits {
+        display: flex;
+    }
+}
+
+
+
+
+
+
+

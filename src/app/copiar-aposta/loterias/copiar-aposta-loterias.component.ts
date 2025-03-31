@@ -121,7 +121,6 @@ export class CopiarApostaLoteriasComponent extends BaseFormComponent implements 
         this.disabledSubmit();
         const values = this.form.value;
         if (values.itens.length) {
-            console.log(values)
             this.apostaLoteriaService.create(values)
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(

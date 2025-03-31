@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
-import { HomeService } from '../shared/services/home.service';
 import { LayoutService } from '../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
+import { Subject, Subscription } from 'rxjs';
+import { AccountVerificationService, AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { WidgetService } from '../shared/services/widget.service';
 
 declare function BTRenderer(): void;
 
@@ -26,9 +26,6 @@ export class HomeComponent implements OnInit, OnDestroy{
     headerHeight = 92;
     liveFootballIsActive: boolean;
 
-    loadingCassino = true;
-    loadingCassinoAoVivo = true;
-
     hasFeaturedMatches = true;
     betby = false;
 
@@ -39,17 +36,24 @@ export class HomeComponent implements OnInit, OnDestroy{
     private bt: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
 
+    private loggedSubscription: Subscription;
+    private accountVerifiedSubscription: Subscription;
+
+    private hasCustomerLoggedIn: boolean = false;
+    private accountVerified: boolean = false;
+
     constructor(
         private messageService: MessageService,
         private helper: HelperService,
         private layoutService: LayoutService,
         private casinoApi: CasinoApiService,
-        private homeService: HomeService,
+        private widgetService: WidgetService,
         private cd: ChangeDetectorRef,
         private translate: TranslateService,
         private authService: AuthService,
         private paramsService: ParametrosLocaisService,
-        private router: Router
+        private router: Router,
+        private accountVerificationService: AccountVerificationService
     ) { }
 
     ngOnInit(): void {
@@ -57,7 +61,14 @@ export class HomeComponent implements OnInit, OnDestroy{
 
         this.betby = this.paramsService.getOpcoes().betby;
 
-        this.homeService.getPosicaoWidgets().subscribe(response => {
+        this.checkIfHasCustomerLoggedIn();
+        this.initAccountVerification();
+
+        if (this.hasCustomerLoggedIn && !this.accountVerified) {
+            this.betby = false;
+        }
+
+        this.widgetService.byPage('home').subscribe(response => {
             this.widgets = response;
         });
 
@@ -82,13 +93,6 @@ export class HomeComponent implements OnInit, OnDestroy{
             }
         );
 
-        this.casinoApi.getGamesHome().subscribe(response => {
-            this.gamesPopulares = response.populares;
-            this.loadingCassino = false;
-            this.gamesPopularesAoVivo = response.popularesAoVivo;
-            this.loadingCassinoAoVivo = false;
-        });
-
         this.layoutService.currentHeaderHeight
             .pipe(takeUntil(this.unsub$))
             .subscribe(curHeaderHeight => {
@@ -103,6 +107,21 @@ export class HomeComponent implements OnInit, OnDestroy{
         if (this.bt) {
             this.bt.kill();
         }
+
+        this.loggedSubscription.unsubscribe();
+        this.accountVerifiedSubscription.unsubscribe();
+    }
+
+    private initAccountVerification() {
+        this.accountVerifiedSubscription = this.accountVerificationService
+            .accountVerified
+            .subscribe((accountVerified) => this.accountVerified = accountVerified);
+    }
+
+    private checkIfHasCustomerLoggedIn() {
+        this.loggedSubscription = this.authService
+            .logado
+            .subscribe((hasCustomerLoggedIn) => this.hasCustomerLoggedIn = hasCustomerLoggedIn);
     }
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
@@ -141,5 +160,9 @@ export class HomeComponent implements OnInit, OnDestroy{
         this.router.navigate(['/sports'], {
             queryParams: { "bt-path": args.url }
         });
+    }
+
+    getGameIds(items: Array<any>) {
+        return items.map(i => i.item_id)
     }
 }

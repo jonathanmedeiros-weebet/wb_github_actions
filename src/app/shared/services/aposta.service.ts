@@ -54,6 +54,18 @@ export class ApostaService {
             );
     }
 
+    getApostaByCodigoCassino(codigo: string): Observable<any> {
+        const url = `${config.BASE_URL}/apostas-cassino-por-codigo/${codigo}`;
+        let requestOptions = this.header.getRequestOptions(true);
+
+        return this.http.get(url, requestOptions)
+            .pipe(
+                map((res: any) => res.results),
+                catchError(this.errorService.handleError)
+            );
+
+    }
+
     cancelar(dados): Observable<any> {
         const url = `${this.ApostaUrl}/${dados.id}/cancelar`;
 

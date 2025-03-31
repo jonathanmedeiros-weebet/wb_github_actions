@@ -1,0 +1,176 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input type="text" id="cpf" class="form-control inverted-out"
+                                mask="000.000.000-00" (change)="validarCpf()" formControlName="cpf"
+                                [ngClass]="applyCssInputError('cpf')" placeholder=" " [dropSpecialCharacters]="false"
+                                inputmode="numeric" [readonly]="faceMatchRequested">
+                            <label for="cpf" class="text-input">{{'geral.cpf' | translate}}</label>
+                        </div>
+                        <app-error-msg [control]="form.get('cpf')" label="CPF" class="text-left"></app-error-msg>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"
+                    [hidden]="(autoPreenchimento && !cpfValidado) || (!autoPreenchimento && formSocial) || (validarBeneficioProgramaSocial && !cpfValidado)">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <input type="text" id="nome" class="form-control inverted-out"
+                                (blur)="onBlurGa4Name($event)" (beforeinput)="onBeforeInput($event, 'name')"
+                                formControlName="nome" [ngClass]="applyCssInputError('nome')" placeholder=" "
+                                [readonly]="autoPreenchimento || validarBeneficioProgramaSocial">
+                            <label for="nome" class="text-input">{{'geral.nomeCompleto' | translate}}</label>
+                        </div>
+                        <app-error-msg [control]="form.get('nome')" label="{{'geral.nome' | translate}}"
+                            class="text-left"></app-error-msg>
+                    </div>
+                </div>
+                <input type="hidden" id="nomeCompleto" [value]="form.get('nome')" formControlName="nomeCompleto"
+                    class="label-personalized">
+            </div>
+            <div class="row" *ngIf="!autoPreenchimento">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <div class="div-button-personalized">
+                                <div class="label-personalized">
+                                    <span>{{'geral.dataDeNascimento' | translate}}</span>
+                                </div>
+                                <div class="group-date-of-birth">
+                                    <div class="select-date-of-birth">
+                                        <div class="division-date-of-birth">
+                                            <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial"
+                                                class="form-control style-select" formControlName="day"
+                                                (change)="onDateChange()">
+                                                <option [ngValue]="null">{{'register.day' | translate}}</option>
+                                                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="select-date-of-birth">
+                                        <div class="division-date-of-birth">
+                                            <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial"
+                                                class="form-control style-select" formControlName="month"
+                                                (change)="onDateChange()">
+                                                <option [ngValue]="null">{{'register.month' | translate}}</option>
+                                                <option *ngFor="let month of months" [value]="month.value">{{ month.name
+                                                    }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="select-date-of-birth">
+                                        <div class="division-date-of-birth">
+                                            <select [disabled]="autoPreenchimento || validarBeneficioProgramaSocial"
+                                                class="form-control style-select" formControlName="year"
+                                                (change)="onDateChange()">
+                                                <option [ngValue]="null">{{'register.year' | translate}}</option>
+                                                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                                            </select>
+                                        </div>
+                                        <app-error-msg [control]="form.get('year')" label="{{'geral.errorMinorAge' | translate}}"
+                                            class="text-left"></app-error-msg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group mb-4">
+                        <div class="input-md">
+                            <div class="div-button-personalized">
+                                <div class="label-personalized">
+                                    <span>{{'geral.nacionalidade' | translate}}</span>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div class="select-nationality">
+                                            <select class="form-control style-select" formControlName="nationality" style="font-size: 12px;">
+                                                <option selected [value]="26">{{'register.brasil' | translate}}</option>
+                                                <option *ngFor="let nationality of nationalities" 
+                                                    [value]="nationality.value">{{ nationality.name }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="gender">
+                    <div class="label-personalized-gender">
+                        <span>{{'geral.genero' | translate}}</span>
+                    </div>
+                    <div class="gender-style">
+                        <div class="form-group mb-4 individual-genre">
+                            <div class="input-md">
+                                <div class="div-button-personalized">
+                                    <label style="padding: 0px;">
+                                        <div>
+                                            <div class="div-button-gender">
+                                                <div class="custom-radio">
+                                                    <input type="radio" formControlName="gender" value="masculino">
+                                                    <span class="radio-custom"></span>
+                                                </div>
+                                                <div>
+                                                    <span class="label-gender">{{'genero.masculino' | translate}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4 individual-genre">
+                            <div class="input-md">
+                                <div class="div-button-personalized">
+                                    <label style="padding: 0px;">
+                                        <div>
+                                            <div class="div-button-gender">
+                                                <div class="custom-radio">
+                                                    <input type="radio" formControlName="gender" value="feminino">
+                                                    <span class="radio-custom"></span>
+                                                </div>
+                                                <div>
+                                                    <span class="label-gender">{{'genero.feminino' | translate}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4 individual-genre">
+                            <div class="input-md">
+                                <div class="div-button-personalized">
+                                    <label style="padding: 0px;">
+                                        <div>
+                                            <div class="div-button-gender">
+                                                <div class="custom-radio">
+                                                    <input type="radio" formControlName="gender" value="outros">
+                                                    <span class="radio-custom"></span>
+                                                </div>
+                                                <div>
+                                                    <span class="label-gender">{{'genero.outros' | translate}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

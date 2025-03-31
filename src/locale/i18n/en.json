@@ -32,7 +32,7 @@
         "ajuda": "Help",
         "sair": "Logout",
         "perfil": "Profile",
-        "dadosPessoais": "Personal Data",
+        "dadosPessoais": "Personal data",
         "pix": "PIX",
         "saque": "Withdrawal",
         "saques": "Withdrawals",
@@ -156,6 +156,7 @@
         "esqueceuASenha": "Forgot password?",
         "naoPossuiUmaConta": "Don't have an account?",
         "jaPossuiUmaConta": "Already have an account?",
+        "logIn": "Log in",
         "usuario": "User",
         "senha": "Password",
         "masculino": "Male",
@@ -166,7 +167,7 @@
         "deAcordoComOsTermos2": "and our",
         "termosDeUso": "terms of use",
         "cadastrar": "Register",
-        "cadastroSucedido": "Registration completed successfully! Check your email to activate it.",
+        "cadastroSucedido": "Registration completed successfully.",
         "informacoesPessoais": "Personal Information",
         "criarLogin": "Create Login",
         "sucesso": "Success",
@@ -251,7 +252,8 @@
         "jogosEmAlta": "Trending games",
         "nenhumJogoDisponivel": "No games available at the moment",
         "loginGoogle" : "Sign in with Google account.",
-        "computadoEm": "Computed in:",
+        "computadoEm": "Computed on:",
+        "liquidadoEm": "Settled on:",
         "alteracoesSucesso": "Changes made successfully!",
         "erroInesperado": "Something unexpected happened. Please try again later.",
         "enderecoNaoEncontrado": "Address not found, please fill it in manually.",
@@ -276,7 +278,19 @@
         "vpn": "We have detected that you are accessing our website through a VPN. To ensure the security and integrity of the platform, we kindly ask you to disable the VPN or use a standard connection to proceed. If you believe this is an error, please contact support.",
         "logoutGeolocationErrorMessage": "You have been logged out for security reasons. We detected an abrupt change in your location that would be physically impossible to occur within the recorded time frame. If this was not caused by you, we recommend verifying your account.",
         "logoutGeolocationErrorTitle": "Access Interrupted: Inconsistent Location",
-        "logoutGeolocationErrorButtonLabel": "Close"
+        "logoutGeolocationErrorButtonLabel": "Close",
+        "clickHere": "Click here",
+        "countryCode": "Code",
+        "complement": "Complement",
+        "login": "Login",
+        "createAccount": "Create account",
+        "passwordRequirements": "Requirements for a secure password:",
+        "passwordLevel": "Password level:",
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong",
+        "kindLogin": "Login with",
+        "errorMinorAge": "underage."
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -287,7 +301,8 @@
         "AccountType": "Account type",
         "CurrentAccount": "Current account",
         "SavingsAccount": "Savings account",
-        "optionAccountType":"Select account type"
+        "optionAccountType":"Select account type",
+        "AccountDigit": "Account digit"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -335,6 +350,7 @@
         "tenis": "Tennis",
         "quininha": "Quininha",
         "seninha": "Seninha",
+        "lobby": "Lobby",
         "todos": "All",
         "slot": "Slot",
         "crash": "Crash",
@@ -344,7 +360,8 @@
         "cassinoAoVivo": "Live Casino",
         "loteriaPopular": "Popular Lottery",
         "maisPopulares": "Popular",
-        "news": "News"
+        "news": "News",
+        "recommendedToYou" : "Recommended for you"
     },
     "bilhete": {
         "titulo": "TICKET",
@@ -386,7 +403,8 @@
         "aoVivo": "Live Casino",
         "bingo": "Bingo",
         "news": "News",
-        "jogosRelacionados": "Related games"
+        "jogosRelacionados": "Related games",
+        "recommendedToYou" : "Recommended for you"
     },
     "cartoes": {
         "titulo": "Cards",
@@ -413,10 +431,9 @@
         "informeSeuEmail": "Enter your email to receive the password reset link.",
         "solicitarCodigoRedefinicao": "Request reset code",
         "digiteSuaSenha": "Type your password",
-        "minimumCharactersPassword": "Minimum 8 characters",
-        "lowercaseLetter": "Minimum of one lowercase letter",
-        "uppercaseLetter": "Minimum of one uppercase letter",
-        "specialChar": "Minimum of one special character (!, @, #, $, %, &, *)"
+        "minimumCharactersPassword": "Password must be at least 8 characters long",
+        "mustContainOneUppercaseAndOneLowercaseLetter": "Must contain one uppercase and one lowercase letter",
+        "specialChar": "Must contain a special character (Ex.: @, !, $, #...)"
     },
     "saques": {
         "enterAmountWithdrawal": "Enter the amount for the withdrawal",
@@ -435,12 +452,15 @@
         "availableBalanceForWithdrawal": "Available balance for withdrawal",
         "safeWithdrawalAlert": "For security reasons, withdrawals will only be made to accounts belonging to the registered CPF.",
         "enterPixKey": "Select the type of PIX key",
+        "selectBankAccount": "Select the bank account",
         "minimumWithdrawal": "Minimum withdrawal",
         "dailyMaximum": "Daily maximum",
         "monthlyMaximum": "Monthly maximum",
         "identityVerify": "Verify identity",
         "identityVerifyNeeded": "To proceed, it will be necessary to perform identity verification beforehand.",
-        "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support."
+        "maximumWithdrawalAmount": "Maximum withdrawal",
+        "disapprovedIdentity": "Your identity verification has failed. For a manual review, please contact support.",
+        "maximumDepositAmount": "Maximum value"
     },
     "ativacaoEmail": {
         "ativacaoDeCadastro": "Registration Activation",
@@ -452,7 +472,8 @@
     },
     "aplicativo": {
         "versaoDoAplicativoNaoSuportada": "The installed app version is no longer supported, please go to our website and download the new version.",
-        "baixarNovaVersao": "Download new version"
+        "baixarNovaVersao": "Download new version",
+        "downloadApp": "Download app"
     },
     "deposito": {
         "titulo": "Deposit",
@@ -471,7 +492,8 @@
         "depositTextWithoutBonus": "To make a deposit via PIX, enter the desired deposit amount in the field below, provide the promotional code if available, and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "depositTextWithoutBonusAndPromocode": "To make a deposit via PIX, enter the desired deposit amount in the field below and click on the “Deposit“ button. A QR Code will be generated and displayed on the screen for you to make the payment.",
         "copyCode": "Copy code",
-        "copied": "Copied!"
+        "copied": "Copied!",
+        "maximumDepositAmount": "Maximum amount"
     },
     "footer": {
         "afiliados": "Partnership",
@@ -489,7 +511,13 @@
         "jogoResponsavel": "Responsible Gaming",
         "termosECondicoes": "Terms and conditions",
         "feedback": "Feedback",
-        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. All rights reserved."
+        "todosOsDireitosReservados": "2025 © {{BANCA_NOME}}. All rights reserved.",
+        "restrictedToAdults": "Restricted to individuals over 18 years old.",
+        "knowYourLimits": "Know your limits",
+        "ourApp": "Our App",
+        "institutional": "Institutional",
+        "licences": "Licenses",
+        "folowUp": "Follow us on social networks"
     },
     "paginas": {
         "quem-somos": "Who we are",
@@ -498,7 +526,7 @@
         "politica-aml": "AML Policy",
         "jogo-responsavel": "Responsible Gaming",
         "termos-condicoes": "Terms and conditions",
-        "partnership-terms": "Terms of use(Partnership)"
+        "termos-afiliados": "Terms of use(Partnership)"
     },
     "jogos": {
         "tempoCompleto": "Full Time",
@@ -555,7 +583,8 @@
         "paymentGateway": "Payment gateway",
         "balance": "Balance",
         "previousBalance": "Previous balance",
-        "subsequentBalance": "Subsequent balance"
+        "subsequentBalance": "Subsequent balance",
+        "defaultPaymentMethod": "Default"
     },
     "rollover":{
         "nenhumRollover": "No rollover.",
@@ -655,7 +684,12 @@
         "voltar": "Back",
         "logout_continue_login": "Yes, I would like to close the session",
         "remain_active_session": "No, keep the other session active",
-        "save_pdf": "Save PDF"
+        "save_pdf": "Save PDF",
+        "seeMore": "See more",
+        "seeLess": "See less",
+        "continue": "Continue",
+        "next": "Next",
+        "previous": "Previous"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -762,19 +796,27 @@
     },
     "face_match": {
         "label": "Face Match",
+        "face_match": "Face validation",
         "verified_identity": "Verified identity!",
-        "Identity_not_verified": "Identity not verified, please contact support."
+        "Identity_not_verified": "Identity not verified, please contact support.",
+        "account_protected": "Your account protected!",
+        "register_description": "To access all site functions, you will have to register your security photo. Your image is confidential and will not be shared.",
+        "checkNow": "Check now"
     },
     "register": {
         "signupWith": "Sign up with Google",
         "registerGoogleAccount": "Sign up with your google account",
         "fillToRegister": "Fill in the fields to register",
         "protectedByReCaptchaPart1": "This site is protected by reCAPTCHA and the Goggle",
-        "protectedByReCaptchaPart2": "Privacy Policy",
+        "protectedByReCaptchaPart2": "privacy policy",
         "protectedByReCaptchaPart3": "and the",
-        "protectedByReCaptchaPart4": "Terms of Service",
+        "protectedByReCaptchaPart4": "terms of service",
         "protectedByReCaptchaPart5": "apply.",
-        "registrationBeneficiariesSocialPrograms": "Beneficiaries of social programs cannot register."
+        "registrationBeneficiariesSocialPrograms": "Beneficiaries of social programs cannot register.",
+        "day":"Day",
+        "month":"Month",
+        "year":"Year",
+        "brasil": "Brazil"
     },
     "registerCancel": {
         "titleCancelRegister": "Are you sure you want to cancel your registration?",
@@ -787,5 +829,25 @@
         "masculino": "Masculine",
         "feminino": "Feminine",
         "outros": "Others"
+    },
+    "compartilhar_aposta": {
+        "linkCopiado": "Link copied to clipboard!",
+        "bilheteCompartilhado": "Ticket shared successfully!",
+        "apostaRepetida": "Bet repeated successfully!",
+        "apostaRepetidaErro": "Error repeating the bet, please try again later.",
+        "codigoCopiado": "Code copied to clipboard!",
+        "codigoCopiadoErro": "Error copying the code.",
+        "mensagemTitle": "Bet Ticket",
+        "mensagemBody": "Access the link to view the bet ticket.",
+        "repetindoAposta": "Repeating bet...",
+        "repetirAposta": "Repeat bet",
+        "reutilizarAposta": "Reuse bet",
+        "reutilizandoAposta": "Reusing bet...",
+        "aguardando": "Waiting",
+        "calculando": "Calculating...",
+        "encerrarAposta": "End bet at the amount of ",
+        "encerrando": "Ending...",
+        "apostaNaoPodeSerEncerrada": "The bet cannot be ended.",
+        "apostaNaoPodeSerReutilizada": "The bet cannot be reused at the moment. Please try again later or check the status of the matches."
     }
 }

@@ -185,6 +185,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     maxAmountSportsBonus = 0;
     amountCasinoBonus = 0;
     maxAmountCasinoBonus = 0;
+    maximumDepositAmount;
 
     bonusCassino = false;
     bonusEsportivo = false;
@@ -226,6 +227,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }
 
         this.valorMinDeposito = this.paramsLocais.getOpcoes().valor_min_deposito_cliente;
+        this.maximumDepositAmount = this.paramsLocais.getOpcoes().maximum_deposit_amount;
         this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
         this.paymentMethodSelected = this.availablePaymentMethods[0];
         this.createForm();
@@ -251,13 +253,30 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                 error => this.handleError(error)
             );
 
-        const promoCode = this.route.snapshot.queryParams['promo'] || null;
+        const existingPromoCode = localStorage.getItem('promoCode');
+        const promoCodeExpiredDate = localStorage.getItem('promoCodeExpiredDate');
+        const isPromoCodeExpired = promoCodeExpiredDate ? new Date() > new Date(promoCodeExpiredDate) : false;
+
+        if (!existingPromoCode || isPromoCodeExpired) {
+            const newPromoCode = this.route.snapshot.queryParams['promo'] || null;
+
+            if (newPromoCode) {
+                localStorage.setItem('promoCode', newPromoCode);
+                const expirationDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+                localStorage.setItem('promoCodeExpiredDate', expirationDate.toISOString());
+            } else {
+                localStorage.removeItem('promoCode');
+                localStorage.removeItem('promoCodeExpiredDate');
+            }
+        }
+
+        const promoCode = localStorage.getItem('promoCode');
         this.form.patchValue({ promoCode: promoCode });
     }
 
     createForm() {
         this.form = this.fb.group({
-            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito)]],
+            valor: [0, [Validators.required, Validators.min(this.valorMinDeposito), ...(this.maximumDepositAmount !== "" ? [Validators.max(this.maximumDepositAmount)] : [])]],
             bonus: [this.bonusOption, Validators.required],
             paymentMethod: [this.paymentMethodSelected, Validators.required],
             promoCode: [""]
@@ -399,6 +418,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
                         EventGa4Types.GENERATE_PIX,
                         { username: res.cliente }
                     );
+
+                    localStorage.removeItem('promoCode');
+                    localStorage.removeItem('promoCodeExpiredDate');
                 },
                 error => {
                     this.handleError(error);

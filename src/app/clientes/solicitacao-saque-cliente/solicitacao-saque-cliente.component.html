@@ -62,69 +62,82 @@
                                         <div class="details-safe-withdrawal-alert">
                                             {{'saques.safeWithdrawalAlert' | translate}}
                                         </div>
-                                        <div class="details-key-type">
-                                            <div>{{'saques.enterPixKey' | translate}}</div>
-                                            <div class="options-container key-type-options hide-mobile">
-                                                <a class="key-type-option"
-                                                    (click)="changePixKey('cpf')"
-                                                    [ngClass]="{'active':selectedKeyType === 'cpf'}"
-                                                >
-                                                    <div class="key-type">
-                                                        <i class="radio"></i>
-                                                    </div>{{'geral.cpf' | translate}}
-                                                </a>
-                                                <ng-container *ngIf="permitirQualquerChavePix">
-                                                    <a class="key-type-option"
-                                                        (click)="changePixKey('phone')"
-                                                        [ngClass]="{'active':selectedKeyType === 'phone'}"
-                                                    >
-                                                        <div class="key-type">
-                                                            <i class="radio"></i>
-                                                        </div>{{'geral.telefone' | translate}}
-                                                    </a>
-                                                    <a class="key-type-option"
-                                                        (click)="changePixKey('email')"
-                                                        [ngClass]="{'active':selectedKeyType === 'email'}"
-                                                    >
-                                                        <div class="key-type">
-                                                            <i class="radio"></i>
-                                                        </div>{{'geral.email' | translate}}
-                                                    </a>
-                                                    <a class="key-type-option"
-                                                        (click)="changePixKey('random')"
-                                                        [ngClass]="{'active':selectedKeyType === 'random'}"
-                                                    >
-                                                        <div class="key-type">
-                                                            <i class="radio"></i>
-                                                        </div>{{'geral.chaveAleatoria' | translate}}
-                                                    </a>
-                                                </ng-container>
-                                            </div>
-                                            <div class="key-type-select hide-desktop">
-                                                <div class="form-group">
-                                                    <select class="form-control inverted-out" formControlName="tipoChavePix" (change)="onChavePixChange()">
-                                                        <option value="cpf" selected>{{'geral.cpf' | translate}}</option>
-                                                        <ng-container *ngIf="permitirQualquerChavePix">
-                                                            <option value="email">{{'geral.email' | translate}}</option>
-                                                            <option value="phone">{{'geral.telefone' | translate}}</option>
-                                                            <option value="random">{{'geral.chaveAleatoria' | translate}}</option>
-                                                        </ng-container>
+                                        <ng-container *ngIf="useBankAccount; else withPix">
+                                            <div class="details-key-type">
+                                                <div>{{'saques.selectBankAccount' | translate}}</div>
+                                                <div class="options-container key-type-options">
+                                                    <select class="form-control inverted-out" formControlName="bankAccount">
+                                                        <option *ngFor="let bankAccount of bankAccounts" [value]="bankAccount.id">Ag. {{bankAccount.numeroAgencia}} | C. {{bankAccount.numeroConta}}</option>
                                                     </select>
-                                                    <app-error-msg [control]="form.get('tipoChavePix')"></app-error-msg>
                                                 </div>
+                                                <app-error-msg [control]="form.get('bankAccount')"></app-error-msg>
                                             </div>
-                                            <div class="key-type-input">
-                                                <div>
+                                        </ng-container>
+                                        <ng-template #withPix>
+                                            <div class="details-key-type">
+                                                <div>{{'saques.enterPixKey' | translate}}</div>
+                                                <div class="options-container key-type-options hide-mobile">
+                                                    <a class="key-type-option"
+                                                        (click)="changePixKey('cpf')"
+                                                        [ngClass]="{'active':selectedKeyType === 'cpf'}"
+                                                    >
+                                                        <div class="key-type">
+                                                            <i class="radio"></i>
+                                                        </div>{{'geral.cpf' | translate}}
+                                                    </a>
+                                                    <ng-container *ngIf="permitirQualquerChavePix">
+                                                        <a class="key-type-option"
+                                                            (click)="changePixKey('phone')"
+                                                            [ngClass]="{'active':selectedKeyType === 'phone'}"
+                                                        >
+                                                            <div class="key-type">
+                                                                <i class="radio"></i>
+                                                            </div>{{'geral.telefone' | translate}}
+                                                        </a>
+                                                        <a class="key-type-option"
+                                                            (click)="changePixKey('email')"
+                                                            [ngClass]="{'active':selectedKeyType === 'email'}"
+                                                        >
+                                                            <div class="key-type">
+                                                                <i class="radio"></i>
+                                                            </div>{{'geral.email' | translate}}
+                                                        </a>
+                                                        <a class="key-type-option"
+                                                            (click)="changePixKey('random')"
+                                                            [ngClass]="{'active':selectedKeyType === 'random'}"
+                                                        >
+                                                            <div class="key-type">
+                                                                <i class="radio"></i>
+                                                            </div>{{'geral.chaveAleatoria' | translate}}
+                                                        </a>
+                                                    </ng-container>
+                                                </div>
+                                                <div class="key-type-select hide-desktop">
                                                     <div class="form-group">
-                                                        <input type="text" id="clienteChavePix" class="form-control inverted-out"
-                                                                formControlName="clienteChavePix"
-                                                                [mask]="getMask()"
-                                                                [readonly]="form.get('tipoChavePix').value == 'cpf'">
-                                                        <app-error-msg [control]="form.get('clienteChavePix')"></app-error-msg>
+                                                        <select class="form-control inverted-out" formControlName="tipoChavePix" (change)="onChavePixChange()">
+                                                            <option value="cpf" selected>{{'geral.cpf' | translate}}</option>
+                                                            <ng-container *ngIf="permitirQualquerChavePix">
+                                                                <option value="email">{{'geral.email' | translate}}</option>
+                                                                <option value="phone">{{'geral.telefone' | translate}}</option>
+                                                                <option value="random">{{'geral.chaveAleatoria' | translate}}</option>
+                                                            </ng-container>
+                                                        </select>
+                                                        <app-error-msg [control]="form.get('tipoChavePix')"></app-error-msg>
+                                                    </div>
+                                                </div>
+                                                <div class="key-type-input">
+                                                    <div>
+                                                        <div class="form-group">
+                                                            <input type="text" id="clienteChavePix" class="form-control inverted-out"
+                                                                    formControlName="clienteChavePix"
+                                                                    [mask]="getMask()"
+                                                                    [readonly]="form.get('tipoChavePix').value == 'cpf'">
+                                                            <app-error-msg [control]="form.get('clienteChavePix')"></app-error-msg>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </ng-template>
                                         <div class="hide-desktop details-payment-method" *ngIf="availablePaymentMethods.length > 1">
                                             <h3>{{'financeiro.paymentGateway' | translate}}</h3>
                                             <div class="form-group">
@@ -140,11 +153,16 @@
                                             <input currencyMask
                                                 class="form-control inverted-out"
                                                 [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
-                                                formControlName="valor">
+                                                formControlName="valor"
+                                                (ngModelChange)="isAvaliableWithdrawalValue($event)"
+                                                >
                                             <app-error-msg [control]="form.get('valor')"></app-error-msg>
                                             <div class="min-amount">
                                                 <i class="fa-solid fa-circle-exclamation"></i>&nbsp;
                                                 {{'saques.minimumWithdrawal' | translate}}: {{valorMinSaque | currency}}
+                                                <span *ngIf="maximumWithdrawalAmount !== null">
+                                                    / {{'saques.maximumWithdrawalAmount' | translate}}: {{maximumWithdrawalAmount | currency}}
+                                                </span>
                                                 / {{'saques.dailyMaximum' | translate}}: {{valorMaxSaqueDiario | currency}}
                                                 / {{'saques.monthlyMaximum' | translate}}: {{valorMaxSaqueMensal | currency}}
                                             </div>
@@ -162,7 +180,7 @@
                                         <div class="details-submit">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-custom solicitar-saque"
-                                                        [disabled]="submitting"  [disabled]="disableButton">
+                                                        [disabled]="submitting" [disabled]="disableButton">
                                                     {{'geral.sacar' | translate}}
                                                 </button>
                                             </div>

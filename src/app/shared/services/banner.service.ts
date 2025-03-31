@@ -26,19 +26,21 @@ export class BannerService {
         private errorService: ErrorService
     ) {}
 
-    requestBanners(pagina = 'futebol') {
+    requestBanners() {
         if (!this.synchronized) {
-            this.http.get(`${this.BannerUrl}`, this.header.getRequestOptions(false))
-                .subscribe((res: any) => {
+            return this.http.get(`${this.BannerUrl}`, this.header.getRequestOptions(false))
+                .pipe(
+                    map((res: any) => {
                         this.cachedBanners = res.results;
                         this.bannersSource.next(this.cachedBanners);
                         this.synchronized = true;
-                    },
-                    error => {
-                        catchError(this.errorService.handleError);
-                    });
+                        return res.results
+                    }),
+                    catchError((error) => this.errorService.handleError(error))
+                );
         } else {
             this.bannersSource.next(this.cachedBanners);
+            return this.banners.pipe(take(1));
         }
     }
 }

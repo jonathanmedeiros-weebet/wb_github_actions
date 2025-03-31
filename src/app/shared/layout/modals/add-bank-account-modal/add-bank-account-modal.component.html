@@ -40,6 +40,12 @@
                     <app-error-msg [control]="form.get('accountNumber')"></app-error-msg>
                 </div>
 
+                <div class="form-group input-md">
+                    <input type="text" formControlName="accountDigit" class="form-control inverted-out" maxlength="1" required pattern="^\S*$">
+                    <label class="label">{{'bankAccounts.AccountDigit' | translate}}</label>
+                    <app-error-msg [control]="form.get('accountDigit')"></app-error-msg>
+                </div>
+
                 <div class="form-group input-md placeholder-active">
                     <select formControlName="accountType" class="form-control inverted-out">
                         <option value="">{{'bankAccounts.optionAccountType' | translate}}</option>
@@ -51,7 +57,7 @@
                 </div>
                
                 <div class="buttons">
-                    <button class="btn btn-custom2 w-150 mr-4 btn-cancell" type="button" (click)="resetForm()">
+                    <button class="btn btn-custom2 w-150 mr-4 btn-cancell" type="button" (click)="toBack()">
                         {{'geral.cancelar' | translate}}
                     </button>
                     <button

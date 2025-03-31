@@ -385,6 +385,10 @@ body .change-theme {
     color: var(--highlight);
 }
 
+.deposit-shortcut {
+    display: flex;
+}
+
 .deposit-shortcut a {
     padding: 0px 11px;
 }
@@ -521,6 +525,20 @@ body .change-theme {
     text-align: center;
 }
 
+.badge__verification-pending {
+    height: 18px;
+    width: 18px;
+    background-color: #E97E05;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+
+    margin-left: -30px;
+    margin-top: -6px;
+}
+
 @media only screen and (min-width: 1025px) {
     .btn-indique-ganhe-card:hover {
         padding: 0 15px !important;
@@ -609,6 +627,11 @@ body .change-theme {
 
     .btn.mr-4 {
         margin-right: 8px !important;
+    }
+
+    .badge__verification-pending {
+        margin-left: -17px;
+        margin-top: -6px;
     }
 }
 
@@ -1064,4 +1087,8 @@ body .change-theme {
 
 .hidden-header .header-submenu {
     display: none !important;
+}
+
+.dropdown-btn {
+    cursor: pointer;
 }

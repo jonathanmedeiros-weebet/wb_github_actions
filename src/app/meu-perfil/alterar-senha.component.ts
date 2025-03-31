@@ -6,7 +6,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { AuthService, ClienteService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService } from './../services';
 import { BaseFormComponent } from '../shared/layout/base-form/base-form.component';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import { FormValidations, PasswordValidation } from '../shared/utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MultifactorConfirmationModalComponent } from '../shared/layout/modals/multifactor-confirmation-modal/multifactor-confirmation-modal.component';
@@ -331,25 +331,42 @@ export class AlterarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     private validacaoMultifator() {
         this.loading = true;
-        const modalref = this.modalService.open(
-            MultifactorConfirmationModalComponent, {
-            ariaLabelledBy: 'modal-basic-title',
-            windowClass: 'modal-550 modal-h-350',
-            centered: true,
-            backdrop: 'static'
-        }
-        );
-
-        modalref.componentInstance.senha = this.form.get('senha_atual').value;
-        modalref.result.then(
-            (result) => {
-                this.tokenMultifator = result.token;
-                this.codigoMultifator = result.codigo;
-
-                if (result.checked) {
-                    return this.submit();
-                }
+        this.auth.requestEmailMultifator(this.form.get('senha_atual').value)
+            .subscribe(res => {
+            if (res && res.success === false && res.errors && res.errors.message === "Senha atual inválida") {
                 this.loading = false;
+            } else {
+                const modalref = this.modalService.open(
+                    MultifactorConfirmationModalComponent, {
+                        ariaLabelledBy: 'modal-basic-title',
+                        windowClass: 'modal-550 modal-h-350',
+                        centered: true,
+                        backdrop: 'static'
+                    });
+
+                modalref.componentInstance.senha = this.form.get('senha_atual').value;
+                modalref.result.then(
+                    (result) => {
+                        this.tokenMultifator = result.token;
+                        this.codigoMultifator = result.codigo;
+
+                        if (result.checked) {
+                            return this.submit();
+                        }
+                        this.loading = false;
+                    },
+                    (dismissReason) => {
+                        this.loading = false;
+                        if (dismissReason === 'success') {
+                            window.location.reload();
+                        }
+                    }
+                );
+            }
+        },
+        error => {
+            this.loading = false;
+            this.messageService.error(error.error?.errors?.message || "Senha atual inválida");
             }
         );
     }

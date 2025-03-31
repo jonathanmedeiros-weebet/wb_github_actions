@@ -1,0 +1,23 @@
+#cupom {
+    background-color: var(--game);
+    padding: 10px;
+    font-size: 12px;
+}
+
+.cupom-body {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#game-image > img {
+    width: 150px;
+    border-radius: 10px;
+}
+
+#cupom-info {
+    margin-left: 20px;
+}
+
+#play-button {
+    width: 100%;
+}

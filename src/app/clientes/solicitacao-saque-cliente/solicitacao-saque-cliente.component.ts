@@ -42,7 +42,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     cliente: Cliente;
     modalRef;
 
-    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M', 'OKTO', 'PIXS', 'BIGPAGV3'];
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M', 'OKTO', 'PIXS', 'BIGPAGV3', 'PAYBROKERS'];
     respostaSolicitacao;
 
     rotaCompletarCadastro: string;
@@ -57,11 +57,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     valorMinSaque;
     valorMaxSaqueDiario;
     valorMaxSaqueMensal;
+    maximumWithdrawalAmount;
     qtdRolloverAtivos = 0;
     saldo = 0;
     headerHeight = 92;
 
-    disableButton = false;
+    disableButton = true;
     showLoading = true;
     cadastroCompleto = true;
     isMobile = false;
@@ -77,6 +78,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     verifiedIdentity = false;
     disapprovedIdentity = false;
     faceMatchWithdraw = false;
+
+    useBankAccount = false;
+    bankAccounts = [];
 
     public valuesShortcuts: number[] = [10, 20, 50, 75, 100, 200];
 
@@ -114,6 +118,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.menuFooterService.setIsPagina(true);
         }
 
+        this.clienteService
+        .allBankAccounts()
+        .toPromise()
+        .then((allBanks) => this.bankAccounts = allBanks);
+
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
 
         this.getRollovers();
@@ -123,7 +132,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw); 
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw);
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
@@ -136,7 +145,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 })
                 break;
             default:
-                break;            
+                break;
         }
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
@@ -151,6 +160,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             }
         });
 
+        this.useBankAccount = this.paramsLocais.getOpcoes().use_bank_account;
         this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
         this.paymentMethodSelected = this.availablePaymentMethods[0];
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
@@ -188,15 +198,18 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     this.valorMinSaque = res.nivelCliente?.valor_min_saque ?? '-';
                     this.valorMaxSaqueDiario = res.nivelCliente?.valor_max_saque_dia ?? '-';
                     this.valorMaxSaqueMensal = res.nivelCliente?.valor_max_saque_mes ?? '-';
+                    this.maximumWithdrawalAmount = res.nivelCliente?.maximum_withdrawal_amount ?? null;
 
-                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), Validators.max(this.valorMaxSaqueDiario)]);
+                    const checkMaximumWithdrawalAmount = this.maximumWithdrawalAmount !== null ? (this.valorMaxSaqueDiario < this.maximumWithdrawalAmount ? this.valorMaxSaqueDiario : this.maximumWithdrawalAmount) : this.valorMaxSaqueDiario;
+
+                    this.form.controls["valor"].setValidators([Validators.min(this.valorMinSaque), ...(this.maximumWithdrawalAmount !== null ? [Validators.max(checkMaximumWithdrawalAmount)] : [])]);
 
                     this.checkOktoTermsAcceptance(res.accepted_okto_terms);
                     this.onChavePixChange();
 
                     if (!this.cliente.endereco) {
                         this.cadastroCompleto = false;
-                        this.rotaCompletarCadastro = '/clientes/perfil';
+                        this.rotaCompletarCadastro = '/clientes/personal-data';
                         this.errorMessage = this.translate.instant('saques.preenchaCadastroCompleto');
                     }
                     if (this.faceMatchEnabled) {
@@ -309,10 +322,20 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     createForm() {
         let paymentMethodToForm = Boolean(this.availablePaymentMethods.length) ? [this.paymentMethodSelected, Validators.required] : [null];
 
+        let bankAccountValidators = [];
+        let pixValidators = [];
+
+        if (this.useBankAccount) {
+            bankAccountValidators.push(Validators.required);
+        } else {
+            pixValidators.push(Validators.required);
+        }
+
         this.form = this.fb.group({
             valor: [0, [Validators.required]],
-            tipoChavePix: ['cpf', Validators.required],
-            clienteChavePix: ['', Validators.required],
+            tipoChavePix: ['cpf', pixValidators],
+            bankAccount: ['', bankAccountValidators],
+            clienteChavePix: ['', pixValidators],
             paymentMethod: paymentMethodToForm
         });
     }
@@ -388,8 +411,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             if (this.rotaCompletarCadastro === '/clientes/perfil-pix') {
                 this.modalService.open(ClientePixModalComponent);
             }
-            if (this.rotaCompletarCadastro === '/clientes/perfil') {
-                this.modalService.open(ClientePerfilModalComponent);
+            if (this.rotaCompletarCadastro === '/clientes/personal-data') {
+                this.router.navigate(['/clientes/personal-data'])
             }
             this.activeModal.close();
         } else {
@@ -480,5 +503,19 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 }
             );
         }
+    }
+
+    isAvaliableWithdrawalValue(value: number) {
+        const isValueLowerOrEqualThanBalance =  value <= this.saldo;
+        const isValueBiggerOrEqualThanMinDeposit = value >= this.valorMinSaque;
+        const isValueLowerOrEqualThanDailyLimit = value <= this.valorMaxSaqueDiario;
+        const isValidWithDrawValue = isValueLowerOrEqualThanBalance && isValueBiggerOrEqualThanMinDeposit && isValueLowerOrEqualThanDailyLimit;
+
+        if (isValidWithDrawValue) {
+            this.disableButton = false;
+            return;
+        }
+
+        this.disableButton = true;
     }
 }

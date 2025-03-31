@@ -5,12 +5,11 @@ import { Router } from '@angular/router';
 import { AuthDoisFatoresModalComponent, ValidarEmailModalComponent } from '../../modals';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, ClienteService, MessageService, ParametrosLocaisService, SecurityService, NavigatorPermissionsService } from './../../../../services';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService, ClienteService, MessageService, ParametrosLocaisService, SecurityService, NavigatorPermissionsService, AccountVerificationService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { Usuario } from '../../../models/usuario';
 import { EsqueceuSenhaModalComponent } from '../esqueceu-senha-modal/esqueceu-senha-modal.component';
-import { CadastroModalComponent } from '../cadastro-modal/cadastro-modal.component';
 import { config } from '../../../config';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
@@ -76,6 +75,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private clienteService: ClienteService,
         private security: SecurityService,
         private translate: TranslateService,
+        private accountVerificationService: AccountVerificationService
 
     ) {
         super();
@@ -144,7 +144,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                 }
                 );
         }
-
     }
 
     registerCancel() {
@@ -159,11 +158,11 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         }
 
         this.form = this.fb.group({
-            username: [''],
-            password: [''],
+            username: ['',Validators.required],
+            password: ['', Validators.required],
             googleId: [''],
             googleIdToken: [''],
-            loginMode: [loginMode]
+            loginMode: [loginMode,Validators.required]
         });
     }
 
@@ -234,6 +233,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         }
 
                         const faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && (this.paramsLocais.getOpcoes().legitimuz_token || this.paramsLocais.getOpcoes().dockCheck_token));
+                        const faceMatchRegisterEnabled = this.paramsLocais.getOpcoes().faceMatchRegister;
                         let isLastAuthOlderThan7Days = res.results.user.multifactorNeeded;
 
                         this.getUsuario();
@@ -266,6 +266,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         }
                     },
                     (error) => {
+                        this.btnDisabled = false;
                         if (error.code === LoginErrorCode.INACTIVE_REGISTER) {
                             sessionStorage.setItem('user', JSON.stringify(error.user));
                             this.openModalInactiveRegister();
@@ -326,16 +327,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
     abrirCadastro() {
         this.activeModal.dismiss();
-
-        this.modalRef = this.modalService.open(
-            CadastroModalComponent,
-            {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: 'modal-500 modal-cadastro-cliente'
-            }
-        );
+        this.auth.openRegisterV3Modal();
     }
 
     cancelTerminateSession() {
@@ -353,13 +345,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         this.auth.login(data)
             .pipe(takeUntil(this.unsub$))
             .subscribe(
-                () => {
+                async () => {
                     this.getUsuario();
                     if (this.usuario.tipo_usuario === 'cliente') {
                         if (this.xtremepushHabilitado()) {
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
+                        await this.accountVerificationService.getAccountVerificationDetail().toPromise();
                         if (this.isCassinoPage) {
                             location.reload();
                         }
@@ -380,12 +373,14 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
 
         if (this.isMobile) {
             options = {
-                windowClass: 'modal-fullscreen',
+                ariaLabelledBy: 'modal-basic-title',
+                windowClass: 'modal-400 modal-h-350 modal-login',
+                centered: true,
             };
         } else {
             options = {
                 ariaLabelledBy: 'modal-basic-title',
-                windowClass: 'modal-550 modal-h-350',
+                windowClass: 'modal-400 modal-h-350 modal-login',
                 centered: true,
             };
         }
@@ -395,7 +390,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         );
     }
 
-    async abrirModalFaceMatch(user) {
+     async abrirModalFaceMatch(user) {
         this.activeModal.dismiss();
         this.modalRef = this.modalService.open(
             FaceMatchModalComponent,

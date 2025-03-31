@@ -1,14 +1,14 @@
-<div class="welcome-container" [ngClass]="{'background-cassino':soCassino, 'background-esporte':!soCassino}">
+<div class="welcome-container" [ngClass]="{'background-cassino': isCasinoModule, 'background-esporte': !isCasinoModule}">
     <section class="overlay">
         <div class="logo">
-            <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png">
+            <img [src]="merchantLogo">
         </div>
         <div class="info-emphasis">
-            <p>Olá, {{ nomeCliente }} <span style="transform: scaleX(-1); display: inline-block;">👋</span>
-            <br />Seja bem-vindo(a) à {{ bancaNome }}!</p>
+            <p>Olá, {{ clientName }} <span style="transform: scaleX(-1); display: inline-block;">👋</span>
+            <br />Seja bem-vindo(a) à {{ merchantName }}!</p>
         </div>
         <div style="font-size: 14px; font-weight: 400; margin-top: 32px;">
-            <div *ngIf="!validEmail; else textValid">
+            <div *ngIf="accountVerified">
                 <p>Seu cadastro foi realizado com sucesso! <span class="emoji-icon">🎉🎉</span></p>
                 <ng-container *ngIf="booleanPromoPrimeiroDepositoAtivo">
                     <p style="display: inline-block; max-width: 440px; padding: 0 16px;">Faça seu depósito agora mesmo e não perca a oportunidade
@@ -19,23 +19,20 @@
                         e comece a desfrutar do que a nossa plataforma tem de melhor a oferecer.</p>
                 </ng-container>
             </div>
-            <ng-template #textValid>
-                <div>
-                    <p style="display: inline-block; max-width: 500px; padding: 0 16px; text-align: center;">Agora falta pouco para ativar sua conta. Para concluir, basta acessar seu e-mail informado no cadastro e validar sua conta.</p>
-                </div>
-            </ng-template>
+            <div *ngIf="!accountVerified">
+                <p style="display: inline-block; max-width: 500px; padding: 0 16px; text-align: center;">
+                    Agora falta pouco para ativar sua conta. Para concluir, basta realizar as validações pendentes no seu perfil.</p>
+            </div>
         </div>
         <div class="container-redirect" style="margin-top: 32px; margin-bottom: 45px;">
-            <a *ngIf="!validEmail; else buttonValid" (click)="depositeAgora()" class="btn btn-custom">Deposite agora</a>
-            <ng-template #buttonValid>
-                <a class="btn btn-custom" [routerLink]="['/login']">Ir para a página de login</a>
-            </ng-template>
+            <a *ngIf="accountVerified" (click)="depositeAgora()" class="btn btn-custom">Deposite agora</a>
+            <a *ngIf="!accountVerified" class="btn btn-custom" [routerLink]="['/clientes/personal-data']">Realizar validações</a>
         </div>
         <div class="tutorial-title" style="margin-bottom: 32px;">
             <p>Comece a apostar em apenas 3 passos</p>
         </div>
         <div class="container-instructions">
-            <div class="box" *ngIf="!validEmail; else validacao">
+            <div class="box" *ngIf="accountVerified">
                 <div class="circle">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25">
                       <path d="M12 21.9258V19.9258H19V5.92578H12V3.92578H19C19.55 3.92578 20.021 4.12178 20.413 4.51378C20.805 4.90578 21.0007 5.37645 21 5.92578V19.9258C21 20.4758 20.804 20.9468 20.412 21.3388C20.02 21.7308 19.5493 21.9264 19 21.9258H12ZM10 17.9258L8.625 16.4758L11.175 13.9258H3V11.9258H11.175L8.625 9.37578L10 7.92578L15 12.9258L10 17.9258Z" class="my-custom-svg"/>
@@ -44,17 +41,17 @@
                 <p class="tutorial-title">1. Login</p>
                 <p class="tutorial-body">Acesse a nossa plataforma e realize seu login para ter acesso</p>
             </div>
-            <ng-template #validacao>
-                <div class="box">
-                    <div class="circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17" fill="none">
-                            <path d="M9.86157 13.5301C9.86157 13.2373 9.89602 12.953 9.93909 12.6688H2.10942V4.05526L9.00022 8.36201L15.891 4.05526V8.43954C16.5112 8.5429 17.0883 8.75824 17.6137 9.05971V2.33256C17.6137 1.38508 16.8385 0.609863 15.891 0.609863H2.10942C1.16193 0.609863 0.386719 1.38508 0.386719 2.33256V12.6688C0.386719 13.6163 1.16193 14.3915 2.10942 14.3915H9.93909C9.89602 14.1072 9.86157 13.823 9.86157 13.5301ZM15.891 2.33256L9.00022 6.63931L2.10942 2.33256H15.891ZM13.953 16.252L11.5843 13.6679L12.5834 12.6688L13.953 14.0383L17.0452 10.9461L18.0444 12.1606L13.953 16.252Z" class="my-custom-svg"/>
-                        </svg>
-                    </div>
-                    <p class="tutorial-title">1. Valide seu e-mail</p>
-                    <p class="tutorial-body">Verifique sua caixa de e-mail e realize a validação para ativar a sua conta</p>
+
+            <div class="box" *ngIf="!accountVerified">
+                <div class="circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17" fill="none">
+                        <path d="M9.86157 13.5301C9.86157 13.2373 9.89602 12.953 9.93909 12.6688H2.10942V4.05526L9.00022 8.36201L15.891 4.05526V8.43954C16.5112 8.5429 17.0883 8.75824 17.6137 9.05971V2.33256C17.6137 1.38508 16.8385 0.609863 15.891 0.609863H2.10942C1.16193 0.609863 0.386719 1.38508 0.386719 2.33256V12.6688C0.386719 13.6163 1.16193 14.3915 2.10942 14.3915H9.93909C9.89602 14.1072 9.86157 13.823 9.86157 13.5301ZM15.891 2.33256L9.00022 6.63931L2.10942 2.33256H15.891ZM13.953 16.252L11.5843 13.6679L12.5834 12.6688L13.953 14.0383L17.0452 10.9461L18.0444 12.1606L13.953 16.252Z" class="my-custom-svg"/>
+                    </svg>
                 </div>
-            </ng-template>
+                <p class="tutorial-title">1. Valide sua conta</p>
+                <p class="tutorial-body">Verifique as validações pendentes e realize-as para ativar a sua conta</p>
+            </div>
+
             <div class="box">
                 <div class="circle">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -62,7 +59,7 @@
                     </svg>
                 </div>
                 <p class="tutorial-title">2. Primeiro depósito</p>
-                <p class="tutorial-body">Faça seu login, vá em depositar e informe o valor desejado para depósito</p>
+                <p class="tutorial-body">Clique em depositar e informe o valor desejado para depósito</p>
             </div>
             <div class="box">
                 <div class="circle">

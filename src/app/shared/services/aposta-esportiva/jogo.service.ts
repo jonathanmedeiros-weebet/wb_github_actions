@@ -10,6 +10,47 @@ import { Jogo, Cotacao, Campeonato } from './../../../models';
 import { config } from '../../config';
 import { ParametrosLocaisService } from '../parametros-locais.service';
 
+type iBilheteEsportivo = {
+    ao_vivo: boolean;
+    jogo_id: string;
+    jogo_event_id: string;
+    jogo_nome: string;
+    cotacao: {
+        chave: string;
+        valor: number;
+    };
+    jogo: {
+        _id: string;
+        event_id: string;
+        sport_id: number;
+        nome: string;
+        time_a_nome: string;
+        time_a_img: string | null;
+        time_b_nome: string;
+        time_b_img: string | null;
+        horario: string;
+        ao_vivo: boolean;
+        cancelado: boolean;
+        finalizado: boolean;
+    };
+    campeonato: {
+        _id: string;
+        nome: string;
+        alias: string | null;
+        regiao: string;
+        regiao_sigla: string;
+        sport_id: string;
+    };
+    cotacoes: Array<{
+        chave: string;
+        valor: number;
+        last_update: string;
+        valorfinal: number;
+        label: string;
+    }>;
+    mudanca: boolean;
+    cotacao_antiga_valor: number | null;
+};
 @Injectable()
 export class JogoService {
     private JogoUrl = `${config.CENTER_API}/jogos`;
@@ -83,6 +124,16 @@ export class JogoService {
             );
     }
 
+    getGamesById(ids: Array<any>) {
+        const url = `${this.JogosLokiUrl}/games-by-id`;
+
+        return this.http.post(url, { ids }, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res),
+                catchError(this.errorService.handleError)
+            );
+    }
+
     getCotacao(id: number, chave: string): Observable<Cotacao[]> {
         const url = `${this.JogoUrl}/${id}/cotacoes/${chave}`;
 
@@ -91,5 +142,77 @@ export class JogoService {
                 map((res: any) => res.result),
                 catchError(this.errorService.handleError)
             );
+    }
+
+    getLiveOdd(id: number, chave: string): Observable<Cotacao[]> {
+        const url = `${this.JogoUrl}/ao-vivo/${id}/cotacoes/${chave}`;
+
+        return this.http.get(url, this.header.getRequestOptions(true))
+            .pipe(
+                map((res: any) => res.result),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    public async convertItemToBet(itens) {
+        let convertedItemToBet: iBilheteEsportivo[] = [];
+
+        const promises = itens.map(async (item) => {
+            try {
+                const res: any = item.ao_vivo ?
+                await this.getLiveOdd(item.jogo_api_id, item.aposta_tipo.chave).toPromise()
+                : await this.getCotacao(item.jogo_api_id, item.aposta_tipo.chave).toPromise();
+                if (res.cotacao) {
+                    convertedItemToBet.push({
+                        ao_vivo: item.ao_vivo,
+                        jogo_id: item.jogo_fi,
+                        jogo_event_id: item.jogo_api_id,
+                        jogo_nome: `${item.time_a_nome} x ${item.time_b_nome}`,
+                        cotacao: {
+                            chave: item.aposta_tipo.chave,
+                            valor: res.cotacao
+                        },
+                        jogo: {
+                            _id: item.jogo_fi,
+                            event_id: item.jogo_api_id,
+                            sport_id: item.sport,
+                            nome: `${item.time_a_nome} x ${item.time_b_nome}`,
+                            time_a_nome: item.time_a_nome,
+                            time_a_img: null,
+                            time_b_nome: item.time_b_nome,
+                            time_b_img: null,
+                            horario: item.jogo_horario,
+                            ao_vivo: item.ao_vivo,
+                            cancelado: item.cancelado,
+                            finalizado: item.finalizado
+                        },
+                        campeonato: {
+                            _id: res.jogo.campeonato._id,
+                            nome: res.jogo.campeonato.nome,
+                            alias: null,
+                            regiao: null,
+                            regiao_sigla: null,
+                            sport_id: item.sport
+                        },
+                        cotacoes: [
+                            {
+                                chave: item.aposta_tipo.chave,
+                                valor: item.aposta_tipo.valor,
+                                last_update: item.aposta_tipo.last_update,
+                                valorfinal: item.aposta_tipo.valorfinal,
+                                label: item.aposta_tipo.label
+                            }
+                        ],
+                        mudanca: false,
+                        cotacao_antiga_valor: null
+                    });
+                }
+            } catch (err) {
+                throw new Error('Falha ao converter item para aposta.');
+            }
+        });
+
+        await Promise.all(promises);
+        return convertedItemToBet;
     }
 }

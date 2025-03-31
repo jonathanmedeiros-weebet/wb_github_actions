@@ -1,16 +1,7 @@
 #cupom {
-    /* width: 19.27em; */
-    background: #f3f5d3;
-    color: #1e282c;
-    /* margin: 2em auto; */
     font-size: 12px;
     border-radius: 10px;
-    padding: 20px;
-}
-
-#cupom img{
-    max-height: 90px;
-    max-width: 150px;
+    padding: 10px;
 }
 
 #cupom .ganhou{
@@ -33,12 +24,7 @@
 
 .acumuladao-nome{
     font-weight: bolder;
-}
-
-hr {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border: 1px dashed black;
+    border-radius: 5px;
 }
 
 .numero{
@@ -53,6 +39,13 @@ hr {
     font-size: 12px;
 }
 
+.item {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: var(--game);
+    border-bottom: 2px dotted var(--bottom-bar);
+}
+
 .item .horario{
     margin: 1px;
     font-size: 12px;
@@ -65,7 +58,7 @@ hr {
     font-size: 12px;
 }
 
-.item .nome{
+.nome{
     margin: 1px;
 }
 
@@ -74,16 +67,34 @@ hr {
     font-size: 12px;
 }
 
+.acumuladao {
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--game);
+    border-bottom: 2px dotted var(--bottom-bar);
+}
+
+.footer-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .acumuladao > div{
     text-align: left;
     margin: 3px 1px 1px 1px;
     font-size: 12px;
-    text-transform: uppercase;
 }
 
 .rodape{
-    margin: 5px 1px 1px 1px;
+    margin: 10px 1px 1px 1px;
     font-weight: normal;
     font-size: 12px;
     text-align: center;
+}
+
+.resultado, .premio, .valor, .total-acertos {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
 }
