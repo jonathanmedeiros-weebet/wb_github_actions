@@ -18,7 +18,7 @@ export class LegitimuzFacialService {
   private options:any = {
       host: LegitimuzFacialService.API_LEGITIMUZ,
       apiURL: LegitimuzFacialService.API_LEGITIMUZ,
-      appURL :LegitimuzFacialService.API_LEGITIMUZ_LIVENESS, 
+      appURL :LegitimuzFacialService.API_LEGITIMUZ_LIVENESS,
       token: '',
       lang: 'pt',
       enableRedirect: false,
@@ -37,29 +37,30 @@ export class LegitimuzFacialService {
       private clienteService: ClienteService,
       private paramsService: ParametrosLocaisService
   ) {
-      this.options.token = this.paramsService.getOpcoes().legitimuz_token; 
+      this.options.token = this.paramsService.getOpcoes().legitimuz_token;
       this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
       this.faceIndex = this.faceIndexSub.asObservable();
       this.options.onSuccess = (eventName) => {
-        if (eventName.name == 'faceindex' && eventName.status == 'success') {
+        if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndexSub.getValue()) {
           this.faceIndexSub.next(true)
-          }
+        }
       }
 
       this.options.eventHandler = (eventName) => {
-        if (eventName.name == 'faceindex' && eventName.status == 'success') {
+        if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndexSub.getValue()) {
           this.faceIndexSub.next(true)
         }
       };
   }
 
   init() {
-    this.sdk = LegitimuzFaceIndex(this.options);    
+    if(this.faceIndexSub.getValue()) this.faceIndexSub.next(false);
+    this.sdk = LegitimuzFaceIndex(this.options);
   }
 
-  mount() {          
+  mount() {
     this.sdk.mount();
-  }     
+  }
 
   changeLang(lang: string) {
     this.sdk.setLang(lang);
@@ -76,6 +77,4 @@ export class LegitimuzFacialService {
   closeModal() {
     this.sdk.closeModal();
   }
-
 }
-

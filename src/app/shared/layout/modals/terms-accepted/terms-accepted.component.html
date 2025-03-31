@@ -1,0 +1,24 @@
+<div class="terms-accepted" id="terms-accepted">
+    <div class="terms-accepted__header">
+        <span class="terms-accepted__icon--left">
+            <i class="fa fa-exclamation" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div class="terms-accepted__body">
+        <span class="terms-accepted__title">{{ title }}</span>
+        <span class="terms-accepted__description" [innerHTML]="description"></span>
+    </div>
+    <div class="terms-accepted__footer">
+        <button class="terms-accepted__btn-to-verify" (click)="acceptedTerms()">
+            Aceitar os novos termos
+        </button>
+        <button *ngIf="!cancelTerms; else confirmLogout" class="terms-accepted__btn-to-cancel" (click)="changeButton()">
+            Recusar termos
+        </button>
+    </div>
+    <ng-template #confirmLogout>
+        <button class="terms-accepted__btn-to-cancel" (click)="logout()">
+            Desejo recusar os termos
+        </button>
+    </ng-template>
+</div>

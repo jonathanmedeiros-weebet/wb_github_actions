@@ -170,9 +170,25 @@ export class AppComponent implements OnInit {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {
                     this.openModalTimeLimit();
                 });
+               
+                this.navigationHistoryService
+                    .verifyIfCurrentRouteUseAccountVerificationGuard()
+                    .then((useAccountVerificationGuard) => {
+                        localStorage.removeItem(ACCOUNT_VERIFIED)
 
-                localStorage.removeItem(ACCOUNT_VERIFIED)
-                this.accountVerificationService.getAccountVerificationDetail().toPromise();
+                        if(useAccountVerificationGuard) {
+                            this.accountVerificationService.getAccountVerificationDetail().toPromise();
+                        } else {
+                            this.accountVerificationService
+                                .getAccountVerificationDetail()
+                                .toPromise()
+                                .then(({terms_accepted: termsAccepted}) => {
+                                    if(!termsAccepted) {         
+                                        this.accountVerificationService.openModalTermsAccepd();
+                                    }
+                                });
+                        }
+                    })
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
