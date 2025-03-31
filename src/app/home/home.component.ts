@@ -70,6 +70,8 @@ export class HomeComponent implements OnInit, OnDestroy{
             this.betby = false;
         }
 
+        this.getWidgets();
+
         if (this.betby) {
             this.helper.injectBetbyScript(this.paramsService.getOpcoes().betby_script).then(() => {
                 this.authService.getTokenBetby(currentLang).subscribe(
@@ -121,7 +123,13 @@ export class HomeComponent implements OnInit, OnDestroy{
             .logado
             .subscribe((hasCustomerLoggedIn) => {
                 this.hasCustomerLoggedIn = hasCustomerLoggedIn
-                this.getWidgets();
+                this.widgets.filter(widget => widget.type == 'betpilot').forEach(widget => {
+                    if (hasCustomerLoggedIn) {
+                        this.getGamesRecommendations().then(() => {
+                            widget.items = this.gamesRecommended;
+                        });
+                    }
+                });
                 this.cd.detectChanges();
             });
     }
