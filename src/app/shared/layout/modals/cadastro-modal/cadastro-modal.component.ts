@@ -97,6 +97,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         lowercaseLetter: false,
         specialChar: false,
     };
+    storagedBtag: string | null = localStorage.getItem('btag');
 
     fullRegistration = true;
     currentLocationPermission = null;
@@ -248,15 +249,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 }
 
-                if (params.btag) {
-                    localStorage.setItem('btag', params.btag);
-                } else {
-                    const storagedBtag = localStorage.getItem('btag');
-                    if (storagedBtag) {
-                        this.form.patchValue({ btag: storagedBtag });
-                    }
-                }
-
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {
@@ -291,6 +283,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 });
             });
+
+        if (this.storagedBtag) {
+            this.form.patchValue({ btag: this.storagedBtag });
+        }
 
         if (this.paramsService.getOpcoes().habilitar_login_google) {
             this.loginGoogleAtivo = true;
@@ -425,7 +421,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             check_2: [''],
             googleId: [''],
             googleIdToken: [''],
-            btag: [this.route.snapshot.queryParams.btag],
+            btag: [this.storagedBtag],
             refId: [this.route.snapshot.queryParams.refId],
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],

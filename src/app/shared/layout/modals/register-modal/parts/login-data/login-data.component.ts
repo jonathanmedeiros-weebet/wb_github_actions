@@ -77,6 +77,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         lowercaseLetter: false,
         specialChar: false,
     };
+    storagedBtag: string | null = localStorage.getItem('btag');
 
     constructor(private stepService: StepService,
         public activeModal: NgbActiveModal,
@@ -193,15 +194,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
                     }
                 }
 
-                if (params.btag) {
-                    localStorage.setItem('btag', params.btag);
-                } else {
-                    const storagedBtag = localStorage.getItem('btag');
-                    if (storagedBtag) {
-                        this.form.patchValue({ btag: storagedBtag });
-                    }
-                }
-
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {
@@ -235,6 +227,12 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
                     }
                 });
             });
+
+        this.storagedBtag = localStorage.getItem('btag');
+        if (this.storagedBtag) {
+            this.form.patchValue({ btag: this.storagedBtag });
+        }
+
     }
 
     getPromocoes(queryParams?: any) {
@@ -303,7 +301,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             check_2: [''],
             googleId: [''],
             googleIdToken: [''],
-            btag: [this.route.snapshot.queryParams.btag],
+            btag: [this.storagedBtag],
             refId: [this.route.snapshot.queryParams.refId],
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],

@@ -124,6 +124,11 @@ export class AppComponent implements OnInit {
         }
         this.route.queryParams
             .subscribe((params) => {
+                if (params.btag) {
+                    console.log('btag: ', params.btag);
+                    localStorage.setItem('btag', params.btag);
+                }
+
                 if (params.token) {
                     this.ativacaoCadastro = true;
 
