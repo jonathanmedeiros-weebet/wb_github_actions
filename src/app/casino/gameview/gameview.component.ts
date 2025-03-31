@@ -288,7 +288,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMobile) {
             this.disableHeaderOptions();
             const gameView = this.el.nativeElement.querySelector('.game-view');
-            this.renderer.setStyle(gameView, 'max-height', '260px');
+            this.renderer.setStyle(gameView, 'max-height', '280px');
         }
 
         if (this.isTablet || this.isDesktop || this.isHorizontalMobile) {
