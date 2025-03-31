@@ -11,7 +11,7 @@ import { HeadersService } from './utils/headers.service';
 })
 
 export class BettingShopService {
-    private bettingShopUrl = `${config.LOKI_URL}/betting-shop,`;
+    private bettingShopUrl = `${config.LOKI_URL}/betting-shop`;
 
     constructor(
         private http: HttpClient,
