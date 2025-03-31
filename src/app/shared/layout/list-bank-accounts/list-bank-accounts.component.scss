@@ -21,9 +21,10 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     background-color: var(--sidebars);
     border-radius: 10px;
+    min-height: 170px;
+    gap: 10px;
 }
 
 .new-account__card {

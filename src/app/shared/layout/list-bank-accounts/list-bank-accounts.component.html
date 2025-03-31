@@ -26,8 +26,8 @@
                         </div>
                         <span class="account__bank-agency">Agência: {{ accountItem.numeroAgencia }}</span>
                         <span class="account__bank-account">Conta: {{ accountItem.numeroConta }}</span>
-                        <span class="account__account-type">Digito: {{ accountItem.digito }}</span>
-                        <span class="account__account-type">Conta {{ accountItem.tipoConta }}</span>
+                        <span *ngIf="accountItem.digito" class="account__account-type">Digito: {{ accountItem.digito }}</span>
+                        <span *ngIf="accountItem.tipoConta" class="account__account-type">Conta {{ accountItem.tipoConta }}</span>
                     </div>
                 </div>
                 <div class="col-12 col-md-4" *ngIf="accounts.length < 3">
