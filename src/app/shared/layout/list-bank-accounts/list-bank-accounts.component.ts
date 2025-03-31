@@ -18,6 +18,7 @@ export class ListBankAccountsComponent {
     public accounts: any[] = []
     unsub$ = new Subject();
     public banks: Array<Bank> = [];
+    public showLoading = true;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -29,6 +30,7 @@ export class ListBankAccountsComponent {
     ) {}
 
     ngOnInit() {
+        this.showLoading = true;
         this.loadPage();
         this.getBanks();
     }
@@ -80,7 +82,10 @@ export class ListBankAccountsComponent {
 
     getBanks() {
         this.utilsService.getBanks().subscribe(
-            banks => this.banks = banks,
+            banks => {
+                this.banks = banks;
+                this.showLoading = false;
+            },
             error => this.handleError(error)
         );
     }
