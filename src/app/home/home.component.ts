@@ -70,19 +70,6 @@ export class HomeComponent implements OnInit, OnDestroy{
             this.betby = false;
         }
 
-        this.widgetService.byPage('home').subscribe(async response => {
-            if (this.hasCustomerLoggedIn) {
-                response = await Promise.all(response.map(async widget => {
-                    if (widget.type == 'betpilot') {
-                        await this.getGamesRecommendations();
-                        widget.items = this.gamesRecommended
-                    }
-                    return widget
-                }));
-            }
-            this.widgets = response;
-        });
-
         if (this.betby) {
             this.helper.injectBetbyScript(this.paramsService.getOpcoes().betby_script).then(() => {
                 this.authService.getTokenBetby(currentLang).subscribe(
@@ -132,7 +119,11 @@ export class HomeComponent implements OnInit, OnDestroy{
     private checkIfHasCustomerLoggedIn() {
         this.loggedSubscription = this.authService
             .logado
-            .subscribe((hasCustomerLoggedIn) => this.hasCustomerLoggedIn = hasCustomerLoggedIn);
+            .subscribe((hasCustomerLoggedIn) => {
+                this.hasCustomerLoggedIn = hasCustomerLoggedIn
+                this.getWidgets();
+                this.cd.detectChanges();
+            });
     }
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
@@ -175,6 +166,21 @@ export class HomeComponent implements OnInit, OnDestroy{
 
     getGameIds(items: Array<any>) {
         return items.map(i => i.item_id)
+    }
+
+    private getWidgets() {
+        this.widgetService.byPage('home').subscribe(async response => {
+            if (this.hasCustomerLoggedIn) {
+                response = await Promise.all(response.map(async widget => {
+                    if (widget.type == 'betpilot') {
+                        await this.getGamesRecommendations();
+                        widget.items = this.gamesRecommended
+                    }
+                    return widget
+                }));
+            }
+            this.widgets = response;
+        });
     }
 
     private async getGamesRecommendations() {
