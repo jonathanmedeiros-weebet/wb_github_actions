@@ -8,6 +8,7 @@ import { PersonalDataRoutingModule } from './personal-data-routing.module';
 import { PersonalDataComponent } from './personal-data.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { TermsComponent } from './terms/terms.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { NgxMaskModule } from 'ngx-mask';
         EmailComponent,
         PhoneComponent,
         AddressComponent,
-        DocumentComponent
+        DocumentComponent,
+        TermsComponent
     ],
     imports: [
         PersonalDataRoutingModule,
