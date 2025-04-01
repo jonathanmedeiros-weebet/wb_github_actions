@@ -18,6 +18,7 @@ import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/bloc
 import { LoginService } from 'src/app/shared/services/login.service';
 import { FaceMatchModalComponent } from '../face-match-modal/face-match-modal/face-match-modal.component';
 import { TranslateService } from '@ngx-translate/core';
+import { MigrationInformationModalComponent } from '../migration-information-modal/migration-information-modal.component';
 
 declare var xtremepush: any;
 
@@ -227,8 +228,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             Boolean(res.results) &&
                             Boolean(res.results.migracao)
                         ) {
-                            this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
                             this.activeModal.dismiss();
+                            this.modalService.open(MigrationInformationModalComponent);
                             return;
                         }
 
