@@ -76,7 +76,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private clienteService: ClienteService,
         private security: SecurityService,
         private translate: TranslateService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private authService: AuthService
 
     ) {
         super();
@@ -228,8 +229,17 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             Boolean(res.results) &&
                             Boolean(res.results.migracao)
                         ) {
-                            this.activeModal.dismiss();
-                            this.modalService.open(MigrationInformationModalComponent);
+                            this.authService.forgot({
+                                "email": formData.username
+                            }).subscribe(
+                                () => {
+                                    this.activeModal.dismiss();
+                                    this.modalService.open(MigrationInformationModalComponent);
+                                },
+                                error => {
+                                    this.handleError(error);
+                                }
+                            );
                             return;
                         }
 
