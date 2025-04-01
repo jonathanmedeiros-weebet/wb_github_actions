@@ -1,20 +1,20 @@
 <div id="personal-data-terms">
     <ul>
-        <li>
+        <li *ngIf="showTermsAndConditions">
             <span>
                 <i class="fa fa-file"></i>
                 Termos de uso
             </span>
             <a [routerLink]="termsAndConditionsLink" target="_blank">Visualizar <i class="fa fa-external-link"></i></a>
         </li>
-        <li>
+        <li *ngIf="showPrivacyPolicy">
             <span>
                 <i class="fa fa-file"></i>
                 Política de privacidade
             </span>
             <a [routerLink]="privacyPolicyLink" target="_blank">Visualizar <i class="fa fa-external-link"></i></a>
         </li>
-        <li>
+        <li *ngIf="showTermsOfService">
             <span>
                 <i class="fa fa-file"></i>
                 Termos de serviço
