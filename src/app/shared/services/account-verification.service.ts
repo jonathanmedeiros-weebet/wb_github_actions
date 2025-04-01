@@ -11,6 +11,7 @@ import { VerifyEmailOrPhoneComponent } from '../layout/modals/verify-email-or-ph
 import { ClienteService } from './clientes/cliente.service';
 import { VerificationTypes } from '../enums';
 import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verified-success/account-verified-success.component';
+import { TermsAcceptedComponent } from '../layout/modals/terms-accepted/terms-accepted.component';
 
 interface VerifiedSteps {
   phone: boolean;
@@ -24,6 +25,7 @@ interface VerificationAccountResponse {
   verified_steps: VerifiedSteps;
   balance: string;
   new_customer: boolean;
+  terms_accepted: boolean
 }
 
 interface EmailOrPhoneVerificationStepParams {
@@ -50,6 +52,7 @@ export class AccountVerificationService {
   public balance = new BehaviorSubject<number>(0);
   public accountVerified = new BehaviorSubject<boolean>(false);
   public verifiedSteps: BehaviorSubject<VerifiedSteps> = new BehaviorSubject<VerifiedSteps>(verifiedStepsDefault);
+  public terms_accepted = new BehaviorSubject<boolean>(false);
 
   constructor(
     private modalService: NgbModal,
@@ -64,6 +67,7 @@ export class AccountVerificationService {
       this.accountVerified.next(accountVerificationStorage.account_verified);
       this.verifiedSteps.next(accountVerificationStorage.verified_steps);
       this.newCustomer.next(accountVerificationStorage.new_customer);
+      this.terms_accepted.next(accountVerificationStorage.terms_accepted);
       this.balance.next(parseFloat(accountVerificationStorage.balance));
     }
   }
@@ -77,6 +81,7 @@ export class AccountVerificationService {
             this.verifiedSteps.next(response.verified_steps);
             this.newCustomer.next(response.new_customer);
             this.balance.next(parseFloat(response.balance));
+            this.terms_accepted.next(response.terms_accepted);
             this.showMessageAccountVerified();
             return response;
           }),
@@ -113,6 +118,17 @@ export class AccountVerificationService {
       ariaLabelledBy: 'modal-basic-title',
       centered: true,
       windowClass: 'modal-400 modal-account-verified-success',
+      backdrop: 'static',
+    });
+
+    return modalref;
+  }
+
+  public openModalTermsAccepd(): NgbModalRef {
+    const modalref: NgbModalRef = this.modalService.open(TermsAcceptedComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      centered: true,
+      windowClass: 'modal-500 modal-account-verification',
       backdrop: 'static',
     });
 

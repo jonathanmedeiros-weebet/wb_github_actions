@@ -272,7 +272,7 @@
                                 <span class="regiao-nome">{{'geral.lastAccesses' | translate}}</span>
                             </a>
                         </li>
-                        <li class="cambista-subitem">
+                        <li class="cambista-subitem" *ngIf="useBankAccount">
                             <a
                                 [routerLink]="['/bank-accounts']"
                                 routerLinkActive="router-link-active"
