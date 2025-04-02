@@ -65,10 +65,17 @@
                                         <ng-container *ngIf="useBankAccount; else withPix">
                                             <div class="details-key-type">
                                                 <div>{{'saques.selectBankAccount' | translate}}</div>
-                                                <div class="options-container key-type-options">
-                                                    <select class="form-control inverted-out" formControlName="bankAccount">
+                                                <div class="options-container key-type-options" *ngIf="bankAccounts && bankAccounts.length > 0">
+                                                    <select class="form-control inverted-out select-account" formControlName="bankAccount">
+                                                        <option selected value="">Selecione uma conta</option>
                                                         <option *ngFor="let bankAccount of bankAccounts" [value]="bankAccount.id">Ag. {{bankAccount.numeroAgencia}} | C. {{bankAccount.numeroConta}}</option>
                                                     </select>
+                                                </div>
+                                                <div class="details-safe-withdrawal-alert ">
+                                                    <p *ngIf="!bankAccounts || bankAccounts.length == 0" class="no-bank-accounts">
+                                                        Você não possui nenhuma conta cadastrada. <a href="bank-accounts">Clique aqui para cadastrar</a>
+                                                    </p>
+                                                        
                                                 </div>
                                                 <app-error-msg [control]="form.get('bankAccount')"></app-error-msg>
                                             </div>

@@ -373,3 +373,27 @@
 .btn-custom i {
     margin-right: 8px;
 }
+
+.select-account {
+    display: flex;
+    padding: 10px 16px;
+    max-width: 328px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: var(--highlight);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.no-bank-accounts {
+    max-width: 440px;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(255, 255, 255, 0.1);
+}
