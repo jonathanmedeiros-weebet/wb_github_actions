@@ -125,7 +125,7 @@ export class AppComponent implements OnInit {
         this.route.queryParams
             .subscribe((params) => {
                 if (params.btag) {
-                    localStorage.setItem('btag', params.btag);
+                    this.setWithExpiry('btag', params.btag, 1000 * 60 * 60 * 24); // 1 dia
                 }
 
                 if (params.token) {
@@ -334,6 +334,15 @@ export class AppComponent implements OnInit {
         });
 
         this.bannerService.requestBanners().toPromise()
+    }
+
+    setWithExpiry(key, value, ttl) {
+        const now = new Date()
+        const item = {
+            value: value,
+            expiry: now.getTime() + ttl,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
     }
 
     displayInitialModal() {
