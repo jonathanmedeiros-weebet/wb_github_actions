@@ -66,7 +66,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public nationalities = this.countriesService.getCountries();
     public cpfSpinner = false;
     private previousUrl: string;
-    public storagedBtag: string | null = localStorage.getItem('btag');
+    public storagedBtag: string | null = null;
 
     constructor(
         private fb: FormBuilder,
@@ -115,6 +115,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
         this.countryCodes = this.countriesService.getDialcodes();
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
+        this.storagedBtag = this.auth.getLocalstorageWithExpiry('btag');
 
         this.createForm();
 

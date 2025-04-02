@@ -97,7 +97,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         lowercaseLetter: false,
         specialChar: false,
     };
-    storagedBtag: string | null = localStorage.getItem('btag');
+    storagedBtag: string | null = null;
 
     fullRegistration = true;
     currentLocationPermission = null;
@@ -137,6 +137,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         let queryString = '';
+        this.storagedBtag = this.auth.getLocalstorageWithExpiry('btag');
         if (this.router.url.includes('/cadastro')) {
             const pages = {
                 esporte: 'esportes',

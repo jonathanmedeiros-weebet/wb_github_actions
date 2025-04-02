@@ -77,7 +77,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
         lowercaseLetter: false,
         specialChar: false,
     };
-    storagedBtag: string | null = localStorage.getItem('btag');
+    storagedBtag: string | null = null;
 
     constructor(private stepService: StepService,
         public activeModal: NgbActiveModal,
@@ -112,6 +112,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.storagedBtag = this.auth.getLocalstorageWithExpiry('btag');
         this.createForm();
         let queryString = '';
         if (this.router.url.includes('/cadastro')) {
@@ -228,7 +229,6 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
                 });
             });
 
-        this.storagedBtag = localStorage.getItem('btag');
         if (this.storagedBtag) {
             this.form.patchValue({ btag: this.storagedBtag });
         }
