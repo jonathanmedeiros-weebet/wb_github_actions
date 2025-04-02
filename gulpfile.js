@@ -1914,3 +1914,12 @@ gulp.task('sortebet777.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('3betco.com.br', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "3betco.com.br",
+        banca: "3BETCO",
+        styles: ""
+    });
+});
