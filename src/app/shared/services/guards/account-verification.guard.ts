@@ -14,10 +14,10 @@ export class AccountVerificationGuard implements CanActivate {
     private authService: AuthService
   ) {}
 
-  canActivate(
+  async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean | UrlTree {
+  ): Promise<boolean> {
     void next;
 
     if(this.authService.isLoggedIn() && this.authService.isCliente()) {
@@ -25,23 +25,75 @@ export class AccountVerificationGuard implements CanActivate {
       const nextUrl = state.url;
       const previousUrl = window.location.pathname;
 
-      const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
-      if (accountVerified) {
-        return true;
-      }
+      const termsAccepted: boolean = this.accountVerificationService.terms_accepted.getValue();
+      if (!termsAccepted) {
+        const hasModalOpen = document.getElementById('terms-accepted');
+        if (hasModalOpen) {
+          return true;
+        } else {
+          await this.openModalTerms();
 
-      const modalRef = this.accountVerificationService.openModalAccountVerificationAlert();
-      modalRef.result.then((isClosed) => {
-        if (isClosed) {
-          if (previousUrl == nextUrl) {
-            return this.router.navigate(['/']);
+          const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
+          if (accountVerified) {
+            return true;
+          } else {
+            const isClosed = await this.openModalAccountVerifications();
+            if(isClosed) {
+              if (previousUrl == nextUrl) {
+                return this.router.navigate(['/']);
+              }
+            }
           }
-        } 
-      });
+        }
+      } else {
+        const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
+        if (accountVerified) {
+          return true;
+        } else {
+          const isClosed = await this.openModalAccountVerifications();
+          if(isClosed) {
+            if (previousUrl == nextUrl) {
+              return this.router.navigate(['/']);
+            }
+          }
+        }
+      }
 
       return false;
     } else {
       return true;
     }
   }
+
+  private async openModalTerms() {
+    return new Promise((resolve) => {
+      const modalRef = this.accountVerificationService.openModalTermsAccepd();
+      modalRef.result.then((resp) => resolve(resp));
+    });
+  }
+
+  private async openModalAccountVerifications() {
+    return new Promise((resolve) => {
+      const modalRef = this.accountVerificationService.openModalAccountVerificationAlert();
+      modalRef.result.then((resp) => resolve(resp));
+    });
+  }
+          // modalRef.result.then(() => {
+
+          //   const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
+          //   if (accountVerified) {
+          //     return true;
+          //   }
+
+          //   const modalRef = this.accountVerificationService.openModalAccountVerificationAlert();
+          //   modalRef.result.then((isClosed) => {
+          //     if (isClosed) {
+          //       if (previousUrl == nextUrl) {
+          //         return this.router.navigate(['/']);
+          //       }
+          //     } 
+          //   });
+
+          // });
+  // }
 }

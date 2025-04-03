@@ -35,7 +35,8 @@ export class AddBankAccountModalComponent {
           bank: ['', [Validators.required]],
           agencyNumber: ['', [Validators.required]],
           accountNumber: ['', [Validators.required]],
-          accountType: ['', [Validators.required]]
+          accountType: ['', [Validators.required]],
+          accountDigit: ['', [Validators.required]]
       });
   }
 

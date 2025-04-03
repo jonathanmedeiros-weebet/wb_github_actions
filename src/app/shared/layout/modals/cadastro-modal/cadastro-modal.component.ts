@@ -446,7 +446,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         }
 
         if (this.isLoterj) {
-            this.form.addControl('termosUso', this.fb.control(null, [
+            this.form.addControl('termsAccepted', this.fb.control(null, [
                 Validators.requiredTrue,
             ]));
 
