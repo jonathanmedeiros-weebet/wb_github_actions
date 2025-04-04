@@ -11,7 +11,7 @@ import { HeadersService } from './utils/headers.service';
 })
 
 export class BettingShopService {
-    private bettingShopUrl = `${config.LOKI_URL}/betting-shop,`;
+    private bettingShopUrl = `${config.LOKI_URL}/betting-shop`;
 
     constructor(
         private http: HttpClient,
@@ -21,7 +21,7 @@ export class BettingShopService {
 
     getBettingShop(id: number): Observable<any> {
         const url = `${this.bettingShopUrl}/${id}`;
-    
+
         return this.http.get<any>(url, this.headerService.getRequestOptions(true))
             .pipe(
                 map((res) => res.results),
