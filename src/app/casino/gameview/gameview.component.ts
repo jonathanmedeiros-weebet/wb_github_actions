@@ -270,7 +270,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
             && (window.innerHeight > 320 
                 && window.innerHeight < window.innerWidth)
         ) {
-            this.isDesktop = true;
             return this.isHorizontalMobile = true;
         }
 
@@ -1058,7 +1057,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && !this.isHorizontalMobile && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
+        if ((!this.isTablet && this.isDesktop) && ((gameView.classList.contains('in-game') || this.inGame))) {
             if (gameFrame) {
                 this.renderer.setStyle(gameFrame, 'position', 'fixed');
                 this.renderer.setStyle(gameFrame, 'margin-top', '43px');
@@ -1070,13 +1069,14 @@ export class GameviewComponent implements OnInit, OnDestroy {
             }
         }
 
-        if ((!this.isTablet && !this.isHorizontalMobile && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
+        if ((!this.isTablet && this.isDesktop) && (!gameView.classList.contains('in-game'))) {
             if (headerOptions) {
                 this.renderer.setStyle(headerOptions, 'margin', '0 18px');
             }
         }
 
-        if (this.isHorizontalMobile && this.isDesktop) {
+        if (this.isHorizontalMobile) {
+            this.disableHeader();
             if (gameView) {
                 this.renderer.setStyle(gameView, 'padding-top', '50px');
                 this.renderer.setStyle(gameView, 'width', '100dvw');
@@ -1113,7 +1113,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if ((this.isDesktop || this.isHorizontalMobile) && this.gameMode === 'REAL') {
-            this.disableHeader();
             this.fixTabletAndDesktopScreen();
         }
     }
