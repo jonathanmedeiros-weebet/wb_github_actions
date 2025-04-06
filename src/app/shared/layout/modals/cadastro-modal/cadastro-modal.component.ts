@@ -536,34 +536,34 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
 
         if (restrictionStateBet != 'Todos') {
-            let allowed = true;
-            this.lastLocationPermission = this.currentLocationPermission;
-            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+            // let allowed = true;
+            // this.lastLocationPermission = this.currentLocationPermission;
+            // this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
 
-            if (this.currentLocationPermission == 'granted') {
-                if (this.lastLocationPermission == 'denied') {
-                    allowed = false;
-                    location.reload();
-                } else if (!this.geolocationService.checkGeolocation()) {
-                    allowed = await this.geolocationService.saveLocalStorageLocation();
-                }
-            } else if (this.currentLocationPermission == 'denied') {
-                allowed = false;
-            } else if (this.currentLocationPermission == 'prompt') {
-                allowed = await this.geolocationService.saveLocalStorageLocation();
-            }
+            // if (this.currentLocationPermission == 'granted') {
+            //     if (this.lastLocationPermission == 'denied') {
+            //         allowed = false;
+            //         location.reload();
+            //     } else if (!this.geolocationService.checkGeolocation()) {
+            //         allowed = await this.geolocationService.saveLocalStorageLocation();
+            //     }
+            // } else if (this.currentLocationPermission == 'denied') {
+            //     allowed = false;
+            // } else if (this.currentLocationPermission == 'prompt') {
+            //     allowed = await this.geolocationService.saveLocalStorageLocation();
+            // }
 
-            if (allowed) {
-                let localeState = localStorage.getItem('locale_state');
+            // if (allowed) {
+            //     let localeState = localStorage.getItem('locale_state');
 
-                if (restrictionStateBet != localeState) {
-                    this.messageService.error(this.translate.instant('geral.stateRestriction'));
-                    return;
-                }
-            } else {
-                this.messageService.error(this.translate.instant('geral.locationPermission'));
-                return;
-            }
+            //     if (restrictionStateBet != localeState) {
+            //         this.messageService.error(this.translate.instant('geral.stateRestriction'));
+            //         return;
+            //     }
+            // } else {
+            //     this.messageService.error(this.translate.instant('geral.locationPermission'));
+            //     return;
+            // }
         }
 
         if (this.menorDeIdade) {
