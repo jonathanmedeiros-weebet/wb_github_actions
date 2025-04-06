@@ -411,12 +411,12 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
             }
 
             if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
-                const saveLocation = await this.geolocationService.saveLocalStorageLocation();
+                // const saveLocation = await this.geolocationService.saveLocalStorageLocation();
 
-                if (!saveLocation) {
-                    valido = false;
-                    msg = this.translate.instant('geral.geolocationError');
-                }
+                // if (!saveLocation) {
+                //     valido = false;
+                //     msg = this.translate.instant('geral.geolocationError');
+                // }
             }
 
             const restrictionStateBet = this.paramsService.getRestrictionStateBet();
@@ -623,9 +623,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.disabledSubmit();
 
         if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
-            this.geolocationService.saveLocalStorageLocation();
-            this.enableSubmit();
-            return this.handleError(this.translate.instant('geral.geolocationError'));
+            // this.geolocationService.saveLocalStorageLocation();
+            // this.enableSubmit();
+            // return this.handleError(this.translate.instant('geral.geolocationError'));
         }
 
         let values = await this.ajustarDadosParaEnvio();
