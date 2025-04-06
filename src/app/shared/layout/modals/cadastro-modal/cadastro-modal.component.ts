@@ -449,15 +449,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.form.addControl('termosUso', this.fb.control(null, [
                 Validators.requiredTrue,
             ]));
-
-            this.form.controls['nome'].clearValidators();
-            this.form.controls['nome'].updateValueAndValidity();
-
-            this.form.controls['nascimento'].clearValidators();
-            this.form.controls['nascimento'].updateValueAndValidity();
-
-            this.form.controls['senha_confirmacao'].clearValidators();
-            this.form.controls['senha_confirmacao'].updateValueAndValidity();
         }
     }
 
