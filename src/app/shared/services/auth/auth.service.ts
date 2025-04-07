@@ -149,7 +149,7 @@ export class AuthService {
     login(data: any): Observable<any> {
         // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
         const bettingShopId = localStorage.getItem('bettingShopId');
-        const bettingShopCode = localStorage.getItem('bettingShopeCode');
+        const bettingShopCode = localStorage.getItem('bettingShopCode');
 
         data = {
             ...data,

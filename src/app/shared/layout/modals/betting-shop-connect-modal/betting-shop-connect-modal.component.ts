@@ -57,13 +57,14 @@ export class BettingShopConnectModalComponent extends BaseFormComponent implemen
     private validateBettingShop(id, code) {
         this.bettingShopService.verifyAndGetBettingShop(id, code).subscribe({
             next: (res) => {
-                if (res) {
+                if (res.bettingShop) {
                     localStorage.setItem('bettingShopId', id);
-                    localStorage.setItem('bettingShopeCode', code);
-                }
+                    localStorage.setItem('bettingShopCode', code);
 
-                this.submitting = false;
-                this.activeModal.close();
+                    this.messageService.success('Conectado ao ponto de venda com sucesso!');
+                    this.submitting = false;
+                    this.activeModal.close();
+                }
             },
             error: (err) => {
                 const errorMessage = err?.error?.errors?.message || 'Erro desconhecido';
