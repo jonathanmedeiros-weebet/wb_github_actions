@@ -124,6 +124,9 @@ import { CardVerificationPendingComponent } from './header/parts/card-verificati
 import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
 import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
 import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.component';
+import { SuperoddLayoutComponent } from './app-layouts/superodd-layout.component';
+import { SuperoddService } from '../services/superodd.service';
+import { SuperoddsBetslipComponent } from 'src/app/superodds/superodds-betslip/superodds-betslip.component';
 
 @NgModule({
     imports: [
@@ -246,7 +249,9 @@ import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.c
         CardVerificationPendingComponent,
         AccountVerificationAlertComponent,
         BetSharingModalComponent,
-        TermsAcceptedComponent
+        TermsAcceptedComponent,
+        SuperoddLayoutComponent,
+        SuperoddsBetslipComponent
     ],
     exports: [
         MainLayoutComponent,
@@ -288,6 +293,7 @@ import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.c
         IndiqueGanheService,
         CashbackService,
         FreeSpinService,
+        SuperoddService,
         {
             provide: RECAPTCHA_SETTINGS,
 

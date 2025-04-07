@@ -110,6 +110,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     betbyAtivo;
     loteriasHabilitado = false;
     acumuladaoHabilitado = false;
+    superoddHabilitado = false;
+    superoddNome: string;
     desafioHabilitado = false;
     desafioNome: string;
     paginaPromocaoHabilitado = false;
@@ -276,6 +278,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         this.useBankAccount = this.paramsService.getOpcoes().use_bank_account;
         this.aoVivoAtivo = this.paramsService.aoVivoAtivo();
+        this.superoddHabilitado = this.paramsService.getOpcoes().superodd;
+        this.superoddNome = this.paramsService.getOpcoes().superodd_nome;
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.desafioNome = this.paramsService.getOpcoes().desafio_nome;
         this.acumuladaoHabilitado = this.paramsService.getOpcoes().acumuladao;

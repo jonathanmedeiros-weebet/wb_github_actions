@@ -1,0 +1,202 @@
+.categoria-header {
+    padding: 0 15px;
+    height: 40px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    margin-bottom: 3px;
+}
+
+.content-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap-sticky {
+    padding: 5px;
+    flex: 1;
+}
+
+.categoria-header > span {
+    line-height: 29px;
+}
+
+.superodd {
+    padding-bottom: 4px;
+}
+
+.superodd {
+    padding: 0 10px;
+    background-color: var(--game);
+    margin-top: 3px;
+    color: var(--foreground-game);
+}
+
+.superodd:first-of-type {
+    margin-top: 0;
+}
+
+.indentificacao {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.indentificacao .nome {
+    justify-content: center;
+    flex-grow: 1;
+    font-size: 12px;
+    padding-left: 20px;
+}
+
+.css-hack {
+    display: none;
+    padding: 0;
+}
+
+.odds {
+    text-align: center;
+    flex-grow: 1;
+    justify-content: start;
+    padding: 8px 0;
+    max-width: calc(100vw - 540px);
+}
+
+.scroll-buttons-ativos {
+    max-width: calc(100vw - 590px);
+}
+
+.odd {
+    flex-grow: 1;
+    min-width: 100px;
+}
+
+.scroll-button {
+    min-width: 25px;
+    height: 60px;
+    cursor: pointer;
+    background-color: var(--game);
+    color: var(--foreground-game);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.scroll-button i {
+    padding: 0;
+    margin: 0;
+}
+
+.enabled-scroll-button {
+    color: var(--foreground-game);
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.disabled-scroll-button {
+    color: var(--game);
+    cursor: auto;
+    transition: 500ms;
+}
+
+.loading-listagem {
+    padding: 5px;
+}
+
+.loading-listagem .banner{
+    height: 273px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.loading-listagem .superodd-loading {
+    margin-bottom: 5px;
+}
+
+.loading-listagem .superodd-loading .titulo {
+    background: var(--game);
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.loading-listagem .superodd-loading .info {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background: var(--game);
+}
+
+.loading-listagem .superodd-loading .info .header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.loading-listagem .superodd-loading .info .opcoes {
+    display: flex;
+    gap: 5px;
+}
+
+/* Large devices (desktops, 1025px and up) */
+@media (min-width: 1025px) {
+    /*.odds .odd {*/
+    /*    width: 50%;*/
+    /*}*/
+}
+
+@media only screen and (max-width: 1024px) {
+    .scroll-button {
+        display: none;
+    }
+
+    .css-hack {
+        display: block;
+        padding-bottom: 98px;
+    }
+
+    .wrap-sticky {
+        padding-bottom: 98px;
+    }
+
+    .odds {
+        flex-direction: column;
+        padding: 0;
+        height: auto;
+        max-width: none;
+        overflow: scroll;
+    }
+
+    .odds .odd {
+        flex: 1;
+        max-width: none;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .odds .odd .inner-odd {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        border-radius: 4px;
+    }
+
+    .superodd {
+        padding: 0 10px 10px;
+    }
+
+    .loading-listagem .banner {
+        height: 180px;
+    }
+
+    .loading-listagem .superodd-loading .info .opcoes {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
