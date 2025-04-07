@@ -1381,7 +1381,7 @@ gulp.task('brinksbet.com', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
         host: "brinksbet.com",
-        banca: "BRINKS BET",
+        banca: "RONDO CASSINO",
         styles: ""
     });
 });
