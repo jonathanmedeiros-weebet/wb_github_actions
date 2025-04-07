@@ -7,7 +7,7 @@ import { config } from '../config';
 import { HeadersService } from './utils/headers.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class BettingShopService {
@@ -19,10 +19,10 @@ export class BettingShopService {
         private headerService: HeadersService
     ) { }
 
-    getBettingShop(id: number): Observable<any> {
-        const url = `${this.bettingShopUrl}/${id}`;
-    
-        return this.http.get<any>(url, this.headerService.getRequestOptions(true))
+    verifyAndGetBettingShop(id: number, code: string): Observable<any> {
+        const url = `${this.bettingShopUrl}/verify`;
+
+        return this.http.post<any>(url, { id, code }, this.headerService.getRequestOptions(true))
             .pipe(
                 map((res) => res.results),
                 catchError((error) => {

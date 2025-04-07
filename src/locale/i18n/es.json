@@ -290,7 +290,13 @@
         "medium": "Medio",
         "strong": "Fuerte",
         "kindLogin": "Iniciar sesión con",
-        "errorMinorAge": "menor de edad."
+        "errorMinorAge": "menor de edad.",
+        "bettingShop": "Conectar con el punto de venta",
+        "enterTheBettingShopCodeAndId": "Introduzca el código y el identificador del punto de venta a conectar",
+        "connectToBettingShop": "Conectar con el punto de venta",
+        "bettingShopId": "ID",
+        "bettingShopCode": "Código",
+        "bettingShopSwitch": "Ya estás conectado a un punto de venta. ¿Deseas continuar o conectarte a uno nuevo?"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",

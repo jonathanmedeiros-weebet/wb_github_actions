@@ -51,11 +51,13 @@ export class AuthService {
     verificaDadosLogin(data: any): Observable<any> {
         // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
         const bettingShopId = localStorage.getItem('bettingShopId');
+        const bettingShopCode = localStorage.getItem('bettingShopCode');
 
         data = {
             ...data,
             ignorarValidacaoEmailObrigatoria: true,
-            betting_shop_id: (bettingShopId && this.enableTotemModule) ? Number(bettingShopId) : null
+            betting_shop_id: (bettingShopId && this.enableTotemModule) ? Number(bettingShopId) : null,
+            betting_shop_code: (bettingShopCode && this.enableTotemModule) ? bettingShopCode : null
         }
 
         return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
@@ -147,11 +149,13 @@ export class AuthService {
     login(data: any): Observable<any> {
         // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
         const bettingShopId = localStorage.getItem('bettingShopId');
+        const bettingShopCode = localStorage.getItem('bettingShopeCode');
 
         data = {
             ...data,
             ignorarValidacaoEmailObrigatoria: true,
-            betting_shop_id: (bettingShopId && this.enableTotemModule) ? Number(bettingShopId) : null
+            betting_shop_id: (bettingShopId && this.enableTotemModule) ? Number(bettingShopId) : null,
+            betting_shop_code: (bettingShopCode && this.enableTotemModule) ? bettingShopCode : null
         }
         
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())

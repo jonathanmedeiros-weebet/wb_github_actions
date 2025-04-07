@@ -30,6 +30,8 @@ import { CronService } from './shared/services/timer.service';
 import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
 import { RegisterV3ModalComponent } from './shared/layout/modals/register-v3-modal/register-v3-modal.component';
 import { BettingShopService } from './shared/services/betting-shop.service';
+import { BettingShopConnectModalComponent } from './shared/layout/modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
+import { BettingShopSwitchModalComponent } from './shared/layout/modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -110,7 +112,7 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.geolocationService.saveLocalStorageLocation();
 
-        if(this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {
+        if (this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {
             this.modalRef = this.modalService.open(
                 this.over18MessageModal,
                 {
@@ -124,6 +126,36 @@ export class AppComponent implements OnInit {
         } else {
             this.displayInitialModal();
         }
+
+        const conditionToShowConnectToBettingShop = this.enableTotemModule && this.router.url.includes('/conectar-ponto-venda') && !this.auth.isLoggedIn();
+
+        if (conditionToShowConnectToBettingShop) {
+            const bettingShopId = localStorage.getItem('bettingShopId');
+            const bettingShopCode = localStorage.getItem('bettingShopCode');
+
+            if (!bettingShopId || !bettingShopCode) {
+                this.modalService.open(
+                    BettingShopConnectModalComponent,
+                    {
+                        ariaLabelledBy: 'modal-basic-title',
+                        windowClass: 'modal-lg-custom',
+                        centered: true,
+                        backdrop: 'static',
+                    }
+                )
+            } else {
+                this.modalService.open(
+                    BettingShopSwitchModalComponent,
+                    {
+                        ariaLabelledBy: 'modal-basic-title',
+                        windowClass: 'modal-lg-custom',
+                        centered: true,
+                        backdrop: 'static',
+                    }
+                )
+            }
+        }
+
         this.route.queryParams
             .subscribe((params) => {
                 if (params.token) {
@@ -152,23 +184,6 @@ export class AppComponent implements OnInit {
                 } else {
                     this.ativacaoCadastro = false;
                 }
-
-                if (this.enableTotemModule && params.betting_shop_id) {
-                    const bettingShopId = params.betting_shop_id;
-                
-                    this.bettingShopService.getBettingShop(bettingShopId).subscribe({
-                        next: (res) => {
-                            if (res) {
-                                localStorage.setItem('bettingShopId', bettingShopId);
-                                // this.router.navigate(['betting-shop']);
-                            }
-                        },
-                        error: (err) => {
-                            const errorMessage = err?.error?.errors?.message || 'Erro desconhecido';
-                            this.handleError(errorMessage);
-                        },
-                    });
-                }
             });
 
         this.hasPoliticaPrivacidade = this.paramsLocais.getOpcoes().has_politica_privacidade;
@@ -189,20 +204,20 @@ export class AppComponent implements OnInit {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {
                     this.openModalTimeLimit();
                 });
-               
+
                 this.navigationHistoryService
                     .verifyIfCurrentRouteUseAccountVerificationGuard()
                     .then((useAccountVerificationGuard) => {
                         localStorage.removeItem(ACCOUNT_VERIFIED)
 
-                        if(useAccountVerificationGuard) {
+                        if (useAccountVerificationGuard) {
                             this.accountVerificationService.getAccountVerificationDetail().toPromise();
                         } else {
                             this.accountVerificationService
                                 .getAccountVerificationDetail()
                                 .toPromise()
-                                .then(({terms_accepted: termsAccepted}) => {
-                                    if(!termsAccepted) {         
+                                .then(({ terms_accepted: termsAccepted }) => {
+                                    if (!termsAccepted) {
                                         this.accountVerificationService.openModalTermsAccepd();
                                     }
                                 });
@@ -458,13 +473,13 @@ export class AppComponent implements OnInit {
         });
     }
 
-    over18Confirm(){
+    over18Confirm() {
         localStorage.setItem('+18', 'true');
         this.modalRef.close();
         this.displayInitialModal();
     }
 
-    under18Confirm(){
+    under18Confirm() {
         this.under18Confirmed = true;
     }
 
