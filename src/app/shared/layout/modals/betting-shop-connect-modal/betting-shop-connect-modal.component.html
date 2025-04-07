@@ -20,14 +20,6 @@
                 <div class="form-betting-shop-connect">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="form-betting-shop">
                         <div class="input-md">
-                            <input type="text" class="form-control inverted-out" formControlName="bettingShopId"
-                                id="bettingShopId" [ngClass]="applyCssInputError('bettingShopId')">
-                            <label for="bettingShopId">{{'geral.bettingShopId' | translate}}</label>
-                            <app-error-msg [control]="form.get('bettingShopId')"
-                                label="{{ 'geral.bettingShopId' | translate }}">
-                            </app-error-msg>
-                        </div>
-                        <div class="input-md">
                             <input type="text" class="form-control inverted-out" formControlName="bettingShopCode"
                                 id="bettingShopCode" [ngClass]="applyCssInputError('bettingShopCode')">
                             <label for="bettingShopCode">{{'geral.bettingShopCode' | translate}}</label>

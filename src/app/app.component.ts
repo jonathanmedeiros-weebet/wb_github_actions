@@ -130,10 +130,9 @@ export class AppComponent implements OnInit {
         const conditionToShowConnectToBettingShop = this.enableTotemModule && this.router.url.includes('/conectar-ponto-venda') && !this.auth.isLoggedIn();
 
         if (conditionToShowConnectToBettingShop) {
-            const bettingShopId = localStorage.getItem('bettingShopId');
             const bettingShopCode = localStorage.getItem('bettingShopCode');
 
-            if (!bettingShopId || !bettingShopCode) {
+            if (!bettingShopCode) {
                 this.modalService.open(
                     BettingShopConnectModalComponent,
                     {

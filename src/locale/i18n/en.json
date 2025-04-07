@@ -292,11 +292,13 @@
         "kindLogin": "Login with",
         "errorMinorAge": "underage.",
         "bettingShop": "Connect to the point of sale",
-        "enterTheBettingShopCodeAndId": "Enter the code and ID of the point of sale to connect",
+        "enterTheBettingShopCodeAndId": "Enter the code of the point of sale to connect",
         "connectToBettingShop":  "Connecting to the point of sale",
         "bettingShopId": "ID",
         "bettingShopCode": "code",
-        "bettingShopSwitch": "You are already connected to a point of sale. Would you like to continue or connect to a new one?"
+        "bettingShopSwitch": "You are already connected to a point of sale. Would you like to continue or connect to a new one?",
+        "disconnect": "Disconnect",
+        "continue": "Continue"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",

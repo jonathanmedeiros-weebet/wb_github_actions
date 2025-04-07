@@ -297,11 +297,13 @@
         "kindLogin": "Tipo de login",
         "errorMinorAge": "Menor de idade.",
         "bettingShop": "Ponto de Venda",
-        "enterTheBettingShopCodeAndId": "Digite o código e o ID do ponto de venda para conectar",
+        "enterTheBettingShopCodeAndId": "Digite o código do ponto de venda para conectar",
         "connectToBettingShop": "Conectar ao ponto de venda",
         "bettingShopId": "ID",
         "bettingShopCode": "Código",
-        "bettingShopSwitch": "Você já está conectado a um ponto de venda. Deseja continuar ou se conectar a um novo?"
+        "bettingShopSwitch": "Você já está conectado a um ponto de venda. Deseja continuar ou se conectar a um novo?",
+        "disconnect": "Desconectar",
+        "continue": "Continuar"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",

@@ -19,10 +19,10 @@ export class BettingShopService {
         private headerService: HeadersService
     ) { }
 
-    verifyAndGetBettingShop(id: number, code: string): Observable<any> {
+    verifyAndGetBettingShop(code: string): Observable<any> {
         const url = `${this.bettingShopUrl}/verify`;
 
-        return this.http.post<any>(url, { id, code }, this.headerService.getRequestOptions(true))
+        return this.http.post<any>(url, { code }, this.headerService.getRequestOptions(true))
             .pipe(
                 map((res) => res.results),
                 catchError((error) => {

@@ -32,7 +32,6 @@ export class BettingShopConnectModalComponent extends BaseFormComponent implemen
 
     createForm() {
         this.form = this.fb.group({
-            bettingShopId: [null, [Validators.required, Validators.pattern('^[0-9]+$')]],
             bettingShopCode: [null, [Validators.required]]
         });
     }
@@ -44,26 +43,25 @@ export class BettingShopConnectModalComponent extends BaseFormComponent implemen
 
     submit() {
         this.submitting = true;
-        const bettingShopId = this.form.get('bettingShopId').value;
         const bettingShopCode = this.form.get('bettingShopCode').value;
 
-        this.validateBettingShop(bettingShopId, bettingShopCode);
+        this.validateBettingShop(bettingShopCode);
     }
 
     handleError(error: string) {
         this.messageService.error(error);
     }
 
-    private validateBettingShop(id, code) {
-        this.bettingShopService.verifyAndGetBettingShop(id, code).subscribe({
+    private validateBettingShop(code) {
+        this.bettingShopService.verifyAndGetBettingShop(code).subscribe({
             next: (res) => {
-                if (res.bettingShop) {
-                    localStorage.setItem('bettingShopId', id);
+                if (res) {
                     localStorage.setItem('bettingShopCode', code);
 
                     this.messageService.success('Conectado ao ponto de venda com sucesso!');
                     this.submitting = false;
                     this.activeModal.close();
+                    this.router.navigate(['']);
                 }
             },
             error: (err) => {
