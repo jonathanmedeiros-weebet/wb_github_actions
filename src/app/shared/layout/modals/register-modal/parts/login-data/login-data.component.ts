@@ -321,7 +321,7 @@ export class LoginDataComponent extends BaseFormComponent implements OnInit {
             cidade: [''],
             estado: [''],
             cep: [''],
-            termosUso: [true]
+            termsAccepted: [true]
         });
 
         this.form.patchValue(this.data)
