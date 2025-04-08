@@ -124,9 +124,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         .then((allBanks) => {
             if (allBanks) {
                 this.bankAccounts = allBanks
-                console.log(this.bankAccounts.length)
                 if(this.bankAccounts.length === 1) {
-                    console.log(this.bankAccounts[0])
                     this.form.get('bankAccount').setValue(this.bankAccounts[0].id);
                 }
             };
