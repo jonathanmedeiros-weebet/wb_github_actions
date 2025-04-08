@@ -74,8 +74,7 @@
                                                 <div class="details-safe-withdrawal-alert ">
                                                     <p *ngIf="!bankAccounts || bankAccounts.length == 0" class="no-bank-accounts">
                                                         Você não possui nenhuma conta cadastrada. <a href="bank-accounts">Clique aqui para cadastrar</a>
-                                                    </p>
-                                                        
+                                                    </p> 
                                                 </div>
                                                 <app-error-msg [control]="form.get('bankAccount')"></app-error-msg>
                                             </div>
