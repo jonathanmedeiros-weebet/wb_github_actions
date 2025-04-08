@@ -287,7 +287,7 @@
         "passwordRequirements": "Requisitos para una contraseña segura:",
         "passwordLevel": "Nivel de la contraseña:",
         "weak": "Debil",
-        "medium": "Medio",  
+        "medium": "Medio",
         "strong": "Fuerte",
         "kindLogin": "Iniciar sesión con",
         "errorMinorAge": "menor de edad."
@@ -301,7 +301,8 @@
         "AccountType": "Tipo de cuenta",
         "CurrentAccount": "Cuenta corriente",
         "SavingsAccount": "Cuenta de ahorros",
-        "optionAccountType":"Seleccione el tipo de cuenta"
+        "optionAccountType":"Seleccione el tipo de cuenta",
+        "AccountDigit": "Dígito de la cuenta"
     },
     "bet": {
         "sportsBetting": "Apuestas deportivas",
@@ -450,6 +451,7 @@
         "availableBalanceForWithdrawal": "Saldo disponible para retiro",
         "safeWithdrawalAlert": "Por razones de seguridad, los retiros solo se realizarán en cuentas pertenecientes al CPF registrado.",
         "enterPixKey": "Seleccione el tipo de clave PIX",
+        "selectBankAccount": "Seleccione la cuenta bancaria",
         "minimumWithdrawal": "Retiro mínimo",
         "dailyMaximum": "Máximo diario",
         "monthlyMaximum": "Máximo mensual",

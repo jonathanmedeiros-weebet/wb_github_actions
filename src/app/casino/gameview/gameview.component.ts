@@ -289,7 +289,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         if (!this.isLoggedIn && this.gameMode === 'REAL' && this.isMobile) {
             this.disableHeaderOptions();
             const gameView = this.el.nativeElement.querySelector('.game-view');
-            this.renderer.setStyle(gameView, 'max-height', '260px');
+            this.renderer.setStyle(gameView, 'max-height', '280px');
         }
 
         if (this.isTablet || this.isDesktop || this.isHorizontalMobile) {
@@ -424,13 +424,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     async loadGame() {
         if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
-            await this.geolocationService.saveLocalStorageLocation();
+            // await this.geolocationService.saveLocalStorageLocation();
             
-            if (!this.geolocationService.checkGeolocation()) {
-                this.handleError(this.translate.instant('geral.geolocationError'));
-                this.router.navigate(['/']);
-                return;
-            }
+            // if (!this.geolocationService.checkGeolocation()) {
+            //     this.handleError(this.translate.instant('geral.geolocationError'));
+            //     this.router.navigate(['/']);
+            //     return;
+            // }
         }
         
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();

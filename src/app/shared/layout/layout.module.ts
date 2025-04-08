@@ -124,6 +124,8 @@ import { CardVerificationPendingComponent } from './header/parts/card-verificati
 import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
 import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
 import { ConfigurationBetLimitModalComponent } from './modals/configuration-bet-limit-modal/configuration-bet-limit-modal.component';
+import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.component';
+import { MigrationInformationModalComponent } from './modals/migration-information-modal/migration-information-modal.component';
 
 @NgModule({
     imports: [
@@ -247,6 +249,8 @@ import { ConfigurationBetLimitModalComponent } from './modals/configuration-bet-
         AccountVerificationAlertComponent,
         BetSharingModalComponent,
         ConfigurationBetLimitModalComponent
+        TermsAcceptedComponent,
+        MigrationInformationModalComponent
     ],
     exports: [
         MainLayoutComponent,
