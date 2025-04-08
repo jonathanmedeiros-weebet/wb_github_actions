@@ -397,3 +397,7 @@ a {
     gap: 10px;
     background-color: rgb(255, 255, 255, 0.1);
 }
+
+.select.inverted-out, .select-account , input.inverted-out{
+    opacity: 0.7 !important;
+}
