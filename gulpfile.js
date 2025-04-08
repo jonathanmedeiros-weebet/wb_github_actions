@@ -1899,3 +1899,30 @@ gulp.task('sporte.vip', function (done) {
         styles: ""
     });
 });
+
+gulp.task('vaibet360.com', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "vaibet360.com",
+        banca: "VAI BET 360",
+        styles: ""
+    });
+});
+
+gulp.task('sortebet777.com', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "sortebet777.com",
+        banca: "SORTE BET 777",
+        styles: ""
+    });
+});
+
+gulp.task('3betco.com.br', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "3betco.com.br",
+        banca: "3BETCO",
+        styles: ""
+    });
+});
