@@ -252,7 +252,7 @@ import { MigrationInformationModalComponent } from './modals/migration-informati
         BetSharingModalComponent,
         TermsAcceptedComponent,
         SuperoddLayoutComponent,
-        SuperoddsBetslipComponent
+        SuperoddsBetslipComponent,
         MigrationInformationModalComponent
     ],
     exports: [

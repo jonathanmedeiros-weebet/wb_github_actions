@@ -38,7 +38,7 @@ export class SuperoddService {
     }
 
     getBets(queryParams?): Observable<any[]> {
-        const url = `${this.SuperoddUrl}/apostas`;
+        const url = `${this.SuperoddUrl}/bets`;
         let requestOptions;
 
         if (queryParams) {
@@ -55,7 +55,7 @@ export class SuperoddService {
     }
 
     getBet(id: number, queryParams?): Observable<ApostaEsportiva> {
-        const url = `${this.SuperoddUrl}/apostas/${id}`;
+        const url = `${this.SuperoddUrl}/bets/${id}`;
         let requestOptions;
 
         if (queryParams) {
@@ -72,7 +72,7 @@ export class SuperoddService {
     }
 
     createBet(data): Observable<any> {
-        const url = `${this.SuperoddUrl}/apostas`;
+        const url = `${this.SuperoddUrl}/bets`;
 
         return this.http.post(url, data, this.header.getRequestOptions(true))
             .pipe(
