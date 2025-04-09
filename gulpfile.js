@@ -1923,3 +1923,12 @@ gulp.task('3betco.com.br', function (done) {
         styles: ""
     });
 });
+
+gulp.task('apostacerta.bet', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "apostacerta.bet",
+        banca: "APOSTA CERTA",
+        styles: ""
+    });
+});

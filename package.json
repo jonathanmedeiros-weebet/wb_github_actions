@@ -204,7 +204,8 @@
     "sporte.vip": "gulp sporte.vip",
     "vaibet360.com": "gulp vaibet360.com",
     "sortebet777.com": "gulp sortebet777.com",
-    "3betco.com.br": "gulp 3betco.com.br"
+    "3betco.com.br": "gulp 3betco.com.br",
+    "apostacerta.bet": "gulp apostacerta.bet"
   },
   "private": true,
   "dependencies": {
