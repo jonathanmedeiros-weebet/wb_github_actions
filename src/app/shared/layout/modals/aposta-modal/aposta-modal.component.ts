@@ -11,6 +11,7 @@ import { HelperService, AuthService, ParametrosLocaisService, MessageService } f
 import { config } from '../../../config';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ExibirBilheteSuperoddComponent } from '../../exibir-bilhete/superodd/exibir-bilhete-superodd.component';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -21,6 +22,7 @@ export class ApostaModalComponent implements OnInit {
     @ViewChild(ExibirBilheteEsportivoComponent) bilheteEsportivoComponent: ExibirBilheteEsportivoComponent;
     @ViewChild(ExibirBilheteLoteriaComponent) bilheteLoteriaComponent: ExibirBilheteLoteriaComponent;
     @ViewChild(ExibirBilheteDesafioComponent) bilheteDesafioComponent: ExibirBilheteDesafioComponent;
+    @ViewChild(ExibirBilheteSuperoddComponent) bilheteSuperoddComponent: ExibirBilheteSuperoddComponent;
     @ViewChild(BilheteAcumuladaoComponent) bilheteAcumuladaoComponent: BilheteAcumuladaoComponent;
     @ViewChild(ExibirBilheteRifaComponent) bilheteRifaComponent: ExibirBilheteRifaComponent;
     @ViewChild(ExibirBilheteCassinoComponent) bilheteCassinoComponent: ExibirBilheteCassinoComponent;
@@ -137,7 +139,7 @@ export class ApostaModalComponent implements OnInit {
 
         return opcoes.habilitar_compartilhamento_comprovante;
     }
-    
+
     async copyToClipboard(codigo: string, message = true) {
         try {
             await navigator.clipboard.writeText(codigo);

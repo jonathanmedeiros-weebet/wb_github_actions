@@ -1,0 +1,47 @@
+<div id="cupom" #cupom>
+    <div class="conteudo">
+        <ng-container *ngIf="aposta.item">
+            <div id="jogo-table">
+                <div class="jogo-horario">
+                    <p style="margin: 0">{{aposta.horario | moment: 'DD/MM'}}</p>
+                    <p style="margin: 0">{{aposta.horario | moment: 'HH:mm'}}</p>
+                </div>
+                <div class="item">
+                    <p class="nome" class="{{aposta.resultado}}">
+                        {{aposta.item.name}}
+                    </p>
+                    <p class="cotacao" class="{{aposta.resultado}}">
+                        ({{aposta.item.value}})
+                    </p>
+                </div>
+            </div>
+        </ng-container>
+        <div class="valores">
+            <p id="resultado-final">
+                <span>Resultado: </span>
+                <span style="float:right" *ngIf="aposta.resultado" class="{{aposta.resultado}}">{{aposta.resultado}}</span>
+                <span style="float:right" *ngIf="!aposta.resultado">Aguardando</span>
+            </p>
+            <p class="aposta">
+                Cotação: <span style="float:right">{{aposta.possibilidade_ganho / aposta.valor | number:'1.0-3' }}</span>
+            </p>
+            <p class="aposta">
+                Valor apostado: <span style="float:right">{{aposta.valor | currency}}</span>
+            </p>
+            <p class="ganho" *ngIf="aposta.resultado; else possibilidadeGanho">
+                {{'geral.premio' | translate | uppercase}}: <span style="float:right">{{aposta.premio | currency}}</span>
+            </p>
+            <ng-template #possibilidadeGanho>
+                <p class="ganho">
+                    Possível retorno: <span style="float:right">{{aposta.possibilidade_ganho | currency}}</span>
+                </p>
+            </ng-template>
+            <p *ngIf="enabledBookie && cambistaPaga > 0" class="cambista-paga">
+                Cambista paga: <span style="float:right">{{cambistaPaga ?? 0 | currency}}</span>
+            </p>
+        </div>
+        <p class="rodape">
+            {{opcoes.informativo_rodape}}
+        </p>
+    </div>
+</div>

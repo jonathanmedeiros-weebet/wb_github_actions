@@ -26,6 +26,7 @@ import {FooterComponent} from './footer/footer.component';
 import {ErrorMsgComponent} from './error-msg/error-msg.component';
 import {ExibirBilheteDesafioComponent} from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
 import {ExibirBilheteEsportivoComponent} from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
+import {ExibirBilheteSuperoddComponent} from './exibir-bilhete/superodd/exibir-bilhete-superodd.component';
 import {ExibirBilheteLoteriaComponent} from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import {BilheteAcumuladaoComponent} from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
 import {BilheteCompartilhamentoComponent} from './bilhete-compartilhamento/bilhete-compartilhamento.component';
@@ -172,6 +173,7 @@ import { MigrationInformationModalComponent } from './modals/migration-informati
         ExibirBilheteDesafioComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
+        ExibirBilheteSuperoddComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
         PesquisaModalComponent,
@@ -266,6 +268,7 @@ import { MigrationInformationModalComponent } from './modals/migration-informati
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
         ExibirBilheteRifaComponent,
+        ExibirBilheteSuperoddComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
         BilheteEsportivoComponent,

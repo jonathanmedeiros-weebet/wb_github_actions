@@ -24,6 +24,7 @@ import { config } from '../../../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
 import {RifaBilheteService} from '../../../services/rifa/rifa-bilhete.service';
 import {RifaApostaService} from '../../../services/rifa/rifa-aposta.service';
+import { SuperoddService } from 'src/app/shared/services/superodd.service';
 
 @Component({
     selector: 'app-cliente-apostas-modal',
@@ -38,6 +39,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
     acumuladaoHabilitado;
     desafioHabilitado;
     desafioNome: string;
+    superoddHabilitado;
+    superoddNome: string;
     casinoHabilitado;
     esporteHabilitado;
     loteriaPopularHabilitada;
@@ -99,7 +102,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         private loteriaPopularService: LoteriaPopularService,
         private rifaService: RifaApostaService,
         private translate: TranslateService,
-        private auth: AuthService
+        private auth: AuthService,
+        private superoddService: SuperoddService,
     ) {
         super();
 
@@ -126,6 +130,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
         this.acumuladaoHabilitado = this.params.getOpcoes().acumuladao;
         this.desafioHabilitado = this.params.getOpcoes().desafio;
         this.desafioNome = this.params.getOpcoes().desafio_nome;
+        this.superoddHabilitado = this.params.getOpcoes().superodd;
+        this.superoddNome = this.params.getOpcoes().superodd_nome;
         this.esporteHabilitado = this.params.getOpcoes().esporte;
         this.loteriaPopularHabilitada = this.params.getOpcoes().loteriaPopular;
         this.casinoHabilitado = this.params.getOpcoes().casino;
@@ -160,6 +166,7 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             cassino: this.casinoHabilitado,
             acumuladao: this.acumuladaoHabilitado,
             desafio: this.desafioHabilitado,
+            superodd: this.superoddHabilitado,
             loteria: this.loteriasHabilitada,
             loteriaPopular: this.loteriaPopularHabilitada,
             rifa: this.rifaHabilitada
@@ -177,6 +184,8 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
             if (habilitados[key]) {
                 if (key == 'desafio') {
                     this.options.push({ value: key, label: this.desafioNome });
+                } else if (key == 'superodd') {
+                    this.options.push({ value: key, label: this.superoddNome });
                 } else {
                     this.options.push({ value: key, label: `geral.${key}` });
                 }
@@ -212,6 +221,13 @@ export class ClienteApostasModalComponent extends BaseFormComponent implements O
                 break;
             case 'desafio':
                 this.desafioApostaService.getApostas(queryParams)
+                    .subscribe(
+                        apostas => this.handleResponse(apostas),
+                        error => this.handleError(error)
+                    );
+                break;
+            case 'superodd':
+                this.superoddService.getBets(queryParams)
                     .subscribe(
                         apostas => this.handleResponse(apostas),
                         error => this.handleError(error)
