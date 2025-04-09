@@ -438,7 +438,8 @@
         "digiteSuaSenha": "Digite sua senha",
         "minimumCharactersPassword": "A senha deve possuir no mínimo 8 caracteres",
         "mustContainOneUppercaseAndOneLowercaseLetter": "Deve conter uma letra maiúscula e uma minúscula",
-        "specialChar": "Deve conter um caractere especial (Ex.: @, !, $, #...)"
+        "specialChar": "Deve conter um caractere especial (Ex.: @, !, $, #...)",
+        "passwordMigration": "Um email foi enviado para a sua conta com um link para redefinição de senha, siga as instruções para redefinir sua senha."
     },
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",

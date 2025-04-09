@@ -127,6 +127,7 @@ import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.c
 import { SuperoddLayoutComponent } from './app-layouts/superodd-layout.component';
 import { SuperoddService } from '../services/superodd.service';
 import { SuperoddsBetslipComponent } from 'src/app/superodds/superodds-betslip/superodds-betslip.component';
+import { MigrationInformationModalComponent } from './modals/migration-information-modal/migration-information-modal.component';
 
 @NgModule({
     imports: [
@@ -252,6 +253,7 @@ import { SuperoddsBetslipComponent } from 'src/app/superodds/superodds-betslip/s
         TermsAcceptedComponent,
         SuperoddLayoutComponent,
         SuperoddsBetslipComponent
+        MigrationInformationModalComponent
     ],
     exports: [
         MainLayoutComponent,

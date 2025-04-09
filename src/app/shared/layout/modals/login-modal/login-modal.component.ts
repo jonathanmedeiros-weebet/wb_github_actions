@@ -18,6 +18,7 @@ import { BlockPeerAttempsModalComponent } from '../block-peer-attemps-modal/bloc
 import { LoginService } from 'src/app/shared/services/login.service';
 import { FaceMatchModalComponent } from '../face-match-modal/face-match-modal/face-match-modal.component';
 import { TranslateService } from '@ngx-translate/core';
+import { MigrationInformationModalComponent } from '../migration-information-modal/migration-information-modal.component';
 
 declare var xtremepush: any;
 
@@ -75,7 +76,8 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         private clienteService: ClienteService,
         private security: SecurityService,
         private translate: TranslateService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private authService: AuthService
 
     ) {
         super();
@@ -185,30 +187,30 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         let msg = this.translate.instant('geral.locationPermission');
 
         if (this.restrictionStateBet != 'Todos') {
-            this.lastLocationPermission = this.currentLocationPermission;
-            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+            // this.lastLocationPermission = this.currentLocationPermission;
+            // this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
 
-            if (this.currentLocationPermission == 'granted') {
-                if (this.lastLocationPermission == 'denied') {
-                    allowed = false;
-                    location.reload();
-                } else if (!this.geolocationService.checkGeolocation()) {
-                    allowed = await this.geolocationService.saveLocalStorageLocation();
-                }
-            } else if (this.currentLocationPermission == 'denied') {
-                allowed = false;
-            } else if (this.currentLocationPermission == 'prompt') {
-                allowed = await this.geolocationService.saveLocalStorageLocation();
-            }
+            // if (this.currentLocationPermission == 'granted') {
+            //     if (this.lastLocationPermission == 'denied') {
+            //         allowed = false;
+            //         location.reload();
+            //     } else if (!this.geolocationService.checkGeolocation()) {
+            //         allowed = await this.geolocationService.saveLocalStorageLocation();
+            //     }
+            // } else if (this.currentLocationPermission == 'denied') {
+            //     allowed = false;
+            // } else if (this.currentLocationPermission == 'prompt') {
+            //     allowed = await this.geolocationService.saveLocalStorageLocation();
+            // }
 
-            if (allowed) {
-                let localeState = localStorage.getItem('locale_state');
+            // if (allowed) {
+            //     let localeState = localStorage.getItem('locale_state');
 
-                if (this.restrictionStateBet != localeState) {
-                    msg = this.translate.instant('geral.stateRestriction');
-                    allowed = false;
-                }
-            }
+            //     if (this.restrictionStateBet != localeState) {
+            //         msg = this.translate.instant('geral.stateRestriction');
+            //         allowed = false;
+            //     }
+            // }
         }
 
         if (allowed) {
@@ -227,8 +229,17 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             Boolean(res.results) &&
                             Boolean(res.results.migracao)
                         ) {
-                            this.router.navigate([`/auth/resetar-senha/${res.results.migracao.token}/${res.results.migracao.codigo}`]);
-                            this.activeModal.dismiss();
+                            this.authService.forgot({
+                                "email": formData.username
+                            }).subscribe(
+                                () => {
+                                    this.activeModal.dismiss();
+                                    this.modalService.open(MigrationInformationModalComponent);
+                                },
+                                error => {
+                                    this.handleError(error);
+                                }
+                            );
                             return;
                         }
 
