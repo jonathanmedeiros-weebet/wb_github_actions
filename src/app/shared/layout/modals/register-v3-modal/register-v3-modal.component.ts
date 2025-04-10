@@ -337,7 +337,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         let values = this.form.value;
 
         if (values.telefone) {
-            values.telefone = values.telefone.replace(/\)\s/, ')');
+            values.telefone = values.telefone.replace(/\s+/g, '');
         }
 
         if (!this.autoPreenchimento) {
