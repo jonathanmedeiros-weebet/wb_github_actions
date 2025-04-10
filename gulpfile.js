@@ -1821,7 +1821,8 @@ gulp.task('zedocash.bet', function (done) {
         server: "front2.weebet.tech",
         host: "zedocash.bet",
         banca: "ZÉ DO CASH",
-        styles: ""
+        styles: "",
+        scripts: "<script src='https://s3.crmseven.online/scripts/start.js'></script>"
     });
 });
 
