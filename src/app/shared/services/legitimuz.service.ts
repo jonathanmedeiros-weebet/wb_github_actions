@@ -40,9 +40,10 @@ export class LegitimuzService {
         this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
         this.faceIndex = this.faceIndexSub.asObservable();
         this.options.onSuccess = (eventName) => {
-            if (eventName === 'facematch'  && !this.curCustomerIsVerifiedSub.getValue()) {
+            if (eventName === 'facematch') {
                 setTimeout(() => {
                     this.curCustomerIsVerifiedSub.next(true);
+                    this.closeModal();
 
                 }, 1000);
             }
@@ -50,7 +51,6 @@ export class LegitimuzService {
     }
 
     init() {
-        if(this.curCustomerIsVerifiedSub.getValue()) this.curCustomerIsVerifiedSub.next(false);
         this.sdk = Legitimuz(this.options);
     }
 
