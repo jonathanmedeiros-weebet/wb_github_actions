@@ -1933,3 +1933,12 @@ gulp.task('apostacerta.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('sportingnet.bet', function (done) {
+    tasks(done, {
+        server: "front5.weebet.tech",
+        host: "sportingnet.bet",
+        banca: "SPORTING NET",
+        styles: ""
+    });
+});
