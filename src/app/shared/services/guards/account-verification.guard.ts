@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AccountVerificationService } from '../account-verification.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -77,14 +76,14 @@ export class AccountVerificationGuard implements CanActivate {
   private async openModalTerms() {
     return new Promise((resolve) => {
       const modalRef = this.accountVerificationService.openModalTermsAccepd();
-        modalRef.result.then((accepted) => resolve(accepted));
+      modalRef.result.then((accepted) => resolve(accepted));
     });
   }
 
   private async openModalAccountVerifications() {
     return new Promise((resolve) => {
       const modalRef = this.accountVerificationService.openModalAccountVerificationAlert();
-        modalRef.result.then((closed) => resolve(closed));
+      modalRef.result.then((closed) => resolve(closed));
     });
   }
 }

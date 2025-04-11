@@ -55,8 +55,13 @@ export class WelcomePageComponent {
         });
     }
 
-    depositeAgora() {
+    async depositeAgora() {
         if (window.innerWidth < 1025) {
+            if (!this.accountVerificationService.terms_accepted.getValue()) {
+                const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                if (!termsResult) return;
+            }
+            
             if (!this.accountVerified) {
                 this.accountVerificationService.openModalAccountVerificationAlert();
             }

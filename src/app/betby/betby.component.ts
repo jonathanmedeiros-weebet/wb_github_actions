@@ -307,8 +307,13 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         );
     }
 
-    openDeposit() {
+    async openDeposit() {
         if (window.innerWidth < 1025) {
+            if (!this.accountVerificationService.terms_accepted.getValue()) {
+                const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                if (!termsResult) return;
+            }
+
             if (!this.accountVerificationService.accountVerified.getValue()) {
                 this.accountVerificationService.openModalAccountVerificationAlert();
                 return;

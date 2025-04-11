@@ -119,12 +119,20 @@ export class MenuFooterComponent implements OnInit {
         this.sidebarService.toggle();
     }
 
-    toggleApostas() {
+    async toggleApostas() {
         if (this.isLoggedIn) {
-            if(this.isCliente && !this.accountVerificationService.accountVerified.getValue()) {
-                this.accountVerificationService.openModalAccountVerificationAlert();
-                return;
+            if(this.isCliente) {
+                if (!this.accountVerificationService.terms_accepted.getValue()) {
+                    const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                    if (!termsResult) return;
+                }
+
+                if(!this.accountVerificationService.accountVerified.getValue()) {
+                    this.accountVerificationService.openModalAccountVerificationAlert();
+                    return;
+                }
             }
+
             this.abrirApostas();
         } else {
             if (this.modoCambistaHabilitado) {

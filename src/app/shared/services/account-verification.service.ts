@@ -184,4 +184,11 @@ export class AccountVerificationService {
   private confirmateCodePerPhone(code: string) {
     return this.clienteService.validatePhone(code);
   }
+
+  public async openModalTermsPromise(): Promise<boolean> {
+    return new Promise((resolve) => {
+      const modalRef = this.openModalTermsAccepd();
+      modalRef.result.then((accepted: boolean) => resolve(accepted));
+    });
+  }
 }
