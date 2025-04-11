@@ -30,7 +30,7 @@ export class TermsAcceptedComponent  implements OnInit {
   }
 
   public logout() {
-    this.activeModal.close(true);
+    this.activeModal.close(false);
   };
 
   changeButton(){
@@ -40,10 +40,11 @@ export class TermsAcceptedComponent  implements OnInit {
   }
 
   acceptedTerms() {
-    this.activeModal.close();
     this.clientService.acceptTerms()
       .toPromise()
-      .then(() => this.accountVerificationService.getAccountVerificationDetail().toPromise());
+      .then(() => {this.accountVerificationService.getAccountVerificationDetail().toPromise();
+          this.activeModal.close(true);
+      });
   }
 
 }
