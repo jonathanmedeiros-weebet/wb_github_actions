@@ -1934,11 +1934,11 @@ gulp.task('apostacerta.bet', function (done) {
     });
 });
 
-gulp.task('sportingnet.bet', function (done) {
+gulp.task('brasavipcassino.net', function (done) {
     tasks(done, {
         server: "front5.weebet.tech",
-        host: "sportingnet.bet",
-        banca: "SPORTING NET",
+        host: "brasavipcassino.net",
+        banca: "BRASA VIP CASSINO",
         styles: ""
     });
 });
