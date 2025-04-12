@@ -927,15 +927,6 @@ gulp.task('megasporte.com', function (done) {
     });
 });
 
-gulp.task('imperiopix.bet', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "imperiopix.bet",
-        banca: "IMPÉRIO PIX",
-        styles: "",
-    });
-});
-
 gulp.task('primoos.bet', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
