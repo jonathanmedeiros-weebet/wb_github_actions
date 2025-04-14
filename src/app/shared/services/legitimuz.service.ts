@@ -1,8 +1,5 @@
 import { Injectable } from "@angular/core";
-
 import { BehaviorSubject } from "rxjs";
-
-import { ClienteService } from "./clientes/cliente.service";
 import { ParametrosLocaisService } from "./parametros-locais.service";
 
 declare var Legitimuz: any;
@@ -26,21 +23,18 @@ export class LegitimuzService {
         onSuccess: (eventName) => console.log(eventName)
     };
 
-    private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(null);
+    private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
     curCustomerIsVerified;
-    private faceIndexSub = new BehaviorSubject<boolean>(null);
-    faceIndex;
 
     constructor (
-        private clienteService: ClienteService,
         private paramsService: ParametrosLocaisService
     ) {
         this.options.token = this.paramsService.getOpcoes().legitimuz_token;
 
         this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
-        this.faceIndex = this.faceIndexSub.asObservable();
+
         this.options.onSuccess = (eventName) => {
-            if (eventName === 'facematch') {
+            if (eventName === 'facematch' && !this.curCustomerIsVerifiedSub.getValue()) {
                 setTimeout(() => {
                     this.curCustomerIsVerifiedSub.next(true);
                     this.closeModal();
@@ -51,6 +45,7 @@ export class LegitimuzService {
     }
 
     init() {
+        if(this.curCustomerIsVerifiedSub.getValue()) this.curCustomerIsVerifiedSub.next(false);
         this.sdk = Legitimuz(this.options);
     }
 
