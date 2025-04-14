@@ -83,7 +83,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
                     if (curCustomerIsVerified) {
                         this.legitimuzService.closeModal();
                         this.messageService.success(this.translate.instant('face_match.verified_identity'));
-                        await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise();
+                        await this.faceMatchService.updadeFacematch({ document: this.customer.cpf, register: true }).toPromise();
                         this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     } else {
                         this.legitimuzService.closeModal();
