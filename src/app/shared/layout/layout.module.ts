@@ -248,7 +248,7 @@ import { MigrationInformationModalComponent } from './modals/migration-informati
         CardVerificationPendingComponent,
         AccountVerificationAlertComponent,
         BetSharingModalComponent,
-        ConfigurationBetLimitModalComponent
+        ConfigurationBetLimitModalComponent,
         TermsAcceptedComponent,
         MigrationInformationModalComponent
     ],
