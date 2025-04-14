@@ -39,28 +39,13 @@ export class LegitimuzService {
 
         this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
         this.faceIndex = this.faceIndexSub.asObservable();
-        if (JSON.parse(localStorage.getItem('user'))) {
-
-            const user = JSON.parse(localStorage.getItem('user'));
-
-            this.options.onSuccess = (eventName) => {
-                if (eventName === 'facematch') {
-                    setTimeout(() => {
-                        if (user.id) {
-                            this.clienteService.getCliente(user.id)
-                                .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
-                        } else {
-                            this.curCustomerIsVerifiedSub.next(false);
-                        }
-                    }, 1000);
-                }
-            };
-        } else {
-            this.options.onSuccess = (eventName) => {
-                if (eventName === 'facematch') {
+        this.options.onSuccess = (eventName) => {
+            if (eventName === 'facematch') {
+                setTimeout(() => {
                     this.curCustomerIsVerifiedSub.next(true);
                     this.closeModal();
-                }
+
+                }, 1000);
             }
         }
     }
