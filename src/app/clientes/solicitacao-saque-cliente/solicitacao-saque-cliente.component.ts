@@ -42,7 +42,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     cliente: Cliente;
     modalRef;
 
-    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M', 'OKTO', 'PIXS', 'BIGPAGV3'];
+    pspsSaqueAutomatico = ['SAUTOPAY', 'PRIMEPAG', 'PAGFAST', 'BIGPAG', 'LETMEPAY', 'PAAG', 'PAY2M', 'OKTO', 'PIXS', 'BIGPAGV3', 'PAYBROKERS'];
     respostaSolicitacao;
 
     rotaCompletarCadastro: string;
@@ -79,6 +79,9 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     disapprovedIdentity = false;
     faceMatchWithdraw = false;
 
+    useBankAccount = false;
+    bankAccounts = [];
+
     public valuesShortcuts: number[] = [10, 20, 50, 75, 100, 200];
 
     constructor(
@@ -114,6 +117,11 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.sidebarService.changeItens({ contexto: 'cliente' });
             this.menuFooterService.setIsPagina(true);
         }
+
+        this.clienteService
+        .allBankAccounts()
+        .toPromise()
+        .then((allBanks) => this.bankAccounts = allBanks);
 
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
 
@@ -152,6 +160,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             }
         });
 
+        this.useBankAccount = this.paramsLocais.getOpcoes().use_bank_account;
         this.availablePaymentMethods = this.paramsLocais.getOpcoes().available_payment_methods;
         this.paymentMethodSelected = this.availablePaymentMethods[0];
         this.permitirQualquerChavePix = this.paramsLocais.getOpcoes().permitir_qualquer_chave_pix;
@@ -313,10 +322,20 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
     createForm() {
         let paymentMethodToForm = Boolean(this.availablePaymentMethods.length) ? [this.paymentMethodSelected, Validators.required] : [null];
 
+        let bankAccountValidators = [];
+        let pixValidators = [];
+
+        if (this.useBankAccount) {
+            bankAccountValidators.push(Validators.required);
+        } else {
+            pixValidators.push(Validators.required);
+        }
+
         this.form = this.fb.group({
             valor: [0, [Validators.required]],
-            tipoChavePix: ['cpf', Validators.required],
-            clienteChavePix: ['', Validators.required],
+            tipoChavePix: ['cpf', pixValidators],
+            bankAccount: ['', bankAccountValidators],
+            clienteChavePix: ['', pixValidators],
             paymentMethod: paymentMethodToForm
         });
     }
@@ -491,12 +510,12 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         const isValueBiggerOrEqualThanMinDeposit = value >= this.valorMinSaque;
         const isValueLowerOrEqualThanDailyLimit = value <= this.valorMaxSaqueDiario;
         const isValidWithDrawValue = isValueLowerOrEqualThanBalance && isValueBiggerOrEqualThanMinDeposit && isValueLowerOrEqualThanDailyLimit;
-        
+
         if (isValidWithDrawValue) {
             this.disableButton = false;
             return;
         }
 
         this.disableButton = true;
-    } 
+    }
 }

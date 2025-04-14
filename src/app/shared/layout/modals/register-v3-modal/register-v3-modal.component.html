@@ -51,6 +51,7 @@
                                     [ngClass]="applyCssInputError('cpf')"
                                     [class.input-focused]="isFocused"
                                 >
+                                <app-spinner customClass="custom-spinner" custom *ngIf="cpfSpinner"></app-spinner>
                                 <label for="cpf" class="text-input">{{ LabelCpf }}</label>
                                 <a
                                     class="btn-change-cpf"

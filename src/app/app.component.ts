@@ -28,6 +28,7 @@ import { Subscription } from 'rxjs';
 import { NavigationHistoryService } from 'src/app/shared/services/navigation-history.service';
 import { CronService } from './shared/services/timer.service';
 import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
+import { RegisterV3ModalComponent } from './shared/layout/modals/register-v3-modal/register-v3-modal.component';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -105,7 +106,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.geolocationService.saveLocalStorageLocation();
+        // this.geolocationService.saveLocalStorageLocation();
 
         if(this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {
             this.modalRef = this.modalService.open(
@@ -169,9 +170,25 @@ export class AppComponent implements OnInit {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {
                     this.openModalTimeLimit();
                 });
+               
+                this.navigationHistoryService
+                    .verifyIfCurrentRouteUseAccountVerificationGuard()
+                    .then((useAccountVerificationGuard) => {
+                        localStorage.removeItem(ACCOUNT_VERIFIED)
 
-                localStorage.removeItem(ACCOUNT_VERIFIED)
-                this.accountVerificationService.getAccountVerificationDetail().toPromise();
+                        if(useAccountVerificationGuard) {
+                            this.accountVerificationService.getAccountVerificationDetail().toPromise();
+                        } else {
+                            this.accountVerificationService
+                                .getAccountVerificationDetail()
+                                .toPromise()
+                                .then(({terms_accepted: termsAccepted}) => {
+                                    if(!termsAccepted) {         
+                                        this.accountVerificationService.openModalTermsAccepd();
+                                    }
+                                });
+                        }
+                    })
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
@@ -212,7 +229,15 @@ export class AppComponent implements OnInit {
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
             this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
 
-            this.auth.openRegisterV3Modal();
+            // this.auth.openRegisterV3Modal();
+            const modalRef = this.modalService.open(RegisterV3ModalComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+                centered: true,
+                windowClass: `modal-400 modal-cadastro-cliente`,
+                backdrop: 'static'
+            });
+            modalRef.componentInstance.hasRegisterBanner = false;
         }
 
         if (this.router.url.includes('/login')) {
