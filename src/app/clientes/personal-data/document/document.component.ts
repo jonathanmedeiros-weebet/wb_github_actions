@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { distinctUntilChanged, filter, first, take} from 'rxjs/operators';
 import { AccountVerificationService, ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
@@ -78,6 +79,10 @@ export class DocumentComponent implements OnInit, AfterViewInit {
 
         if (this.faceMatchEnabled && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
+                .pipe(
+                    distinctUntilChanged(),
+                    filter(curCustomerIsVerified => curCustomerIsVerified === true),
+                )
                 .subscribe(async (curCustomerIsVerified) => {
                     this.cd.detectChanges();
                     if (curCustomerIsVerified) {
