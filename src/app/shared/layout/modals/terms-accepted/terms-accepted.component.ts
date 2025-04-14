@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClienteService } from 'src/app/services';
+import { AuthService, ClienteService } from 'src/app/services';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 
 @Component({
@@ -9,16 +10,23 @@ import { AccountVerificationService } from 'src/app/shared/services/account-veri
   styleUrls: ['./terms-accepted.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TermsAcceptedComponent  implements OnInit {
+export class TermsAcceptedComponent implements OnInit {
   public title: string;
   public description: string;
   public cancelTerms: boolean = false;
+  private shouldUserLogout: boolean = false;
 
   constructor(
     private accountVerificationService: AccountVerificationService,
     private activeModal: NgbActiveModal,
     private clientService: ClienteService,
+    private authService: AuthService,
+    private router: Router
   ) {}
+
+  get confirmLogoutText() {
+    return this.shouldUserLogout ? 'Sair da minha conta' : 'Desejo recusar os termos'
+  }
 
   ngOnInit(): void {
     this.prepareInfo();
@@ -30,7 +38,12 @@ export class TermsAcceptedComponent  implements OnInit {
   }
 
   public logout() {
-    this.activeModal.close(false);
+    if (this.shouldUserLogout) {
+      this.router.navigate(['/']);
+      this.authService.logout();
+    } else {
+      this.activeModal.close();
+    }
   };
 
   changeButton(){

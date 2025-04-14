@@ -47,7 +47,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         @Inject(DOCUMENT) private document: any
     ) { }
 
-    ngOnInit() {
+    async ngOnInit() {
         let currentLang = this.translate.currentLang;
 
         if (window.innerWidth <= 1280) {
@@ -69,10 +69,20 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         this.checkIfHasCustomerLoggedIn();
         this.initAccountVerification();
 
-        if (this.hasCustomerLoggedIn && !this.accountVerified) {
-            const accountVerificationAlert: NgbModalRef = this.accountVerificationService.openModalAccountVerificationAlert();
-            accountVerificationAlert.componentInstance.redirectEvenWhenClosing = true;
-            return;
+        if (this.hasCustomerLoggedIn) {
+            if (!this.accountVerificationService.terms_accepted.getValue()) {
+                const result = await this.accountVerificationService.openModalTermsPromise();
+                if (!result && this.accountVerified) {
+                    this.termAcceptRedirectDefault('/clientes/personal-data');
+                    return;
+                }
+            }
+
+            if (!this.accountVerified) {
+                const accountVerificationAlert: NgbModalRef = this.accountVerificationService.openModalAccountVerificationAlert();
+                accountVerificationAlert.componentInstance.redirectEvenWhenClosing = true;
+                return;
+            }
         }
 
         this.helper.injectBetbyScript(this.params.getOpcoes().betby_script).then(() => {
@@ -100,16 +110,28 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             }
         );
 
-        this.loginSubscription = this.loginService.event$.subscribe(() => {
+        this.loginSubscription = this.loginService.event$.subscribe(async () => {
             this.checkIfHasCustomerLoggedIn();
             this.initAccountVerification();
 
-            if (this.hasCustomerLoggedIn && !this.accountVerified) {
-                this.destroyBetbyIFrame();
+            if (this.hasCustomerLoggedIn) {
+                if (!this.accountVerificationService.terms_accepted.getValue()) {
+                    this.destroyBetbyIFrame();
 
-                const accountVerificationAlert: NgbModalRef = this.accountVerificationService.openModalAccountVerificationAlert();
-                accountVerificationAlert.componentInstance.redirectEvenWhenClosing = true;
-                return;
+                    const result = await this.accountVerificationService.openModalTermsPromise();
+                    if (!result && this.accountVerified) {
+                        this.termAcceptRedirectDefault('/clientes/personal-data');
+                        return;
+                    }
+                }
+
+                if (!this.accountVerified) {
+                    this.destroyBetbyIFrame();
+    
+                    const accountVerificationAlert: NgbModalRef = this.accountVerificationService.openModalAccountVerificationAlert();
+                    accountVerificationAlert.componentInstance.redirectEvenWhenClosing = true;
+                    return;
+                }
             }
 
             this.refreshBetby();
@@ -282,14 +304,12 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     refreshSession() {
-        this.authService.refreshTokenBetby(this.translate.currentLang).subscribe(
-            (response) => {
-                location.reload();
-            },
-            (error) => {
-                console.log('ERROR', error);
-            }
-        )
+        this.authService
+            .refreshTokenBetby(this.translate.currentLang)
+            .subscribe(
+                () => location.reload(),
+                (error) => console.error('ERROR', error)
+            )
     }
 
     openRegister() {
@@ -310,11 +330,14 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
     async openDeposit() {
         if (window.innerWidth < 1025) {
             if (!this.accountVerificationService.terms_accepted.getValue()) {
-                const termsResult = await this.accountVerificationService.openModalTermsPromise();
-                if (!termsResult) return;
+                const result = await this.accountVerificationService.openModalTermsPromise();
+                if (!result && this.accountVerified) {
+                    this.termAcceptRedirectDefault('/');
+                    return;
+                }
             }
 
-            if (!this.accountVerificationService.accountVerified.getValue()) {
+            if (!this.accountVerified) {
                 this.accountVerificationService.openModalAccountVerificationAlert();
                 return;
             }
@@ -345,8 +368,34 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.showGtmElements();
 
-        this.loginSubscription.unsubscribe();
-        this.loggedSubscription.unsubscribe();
-        this.accountVerifiedSubscription.unsubscribe();
+        if (this.loginSubscription) {
+            this.loginSubscription.unsubscribe();
+        }
+        if (this.loggedSubscription) {
+            this.loggedSubscription.unsubscribe();
+        }
+        if (this.accountVerifiedSubscription) {
+            this.accountVerifiedSubscription.unsubscribe();
+        }
+    }
+
+    private termAcceptRedirectDefault(routerDefault) {
+        const initialPage = this.params.getOpcoes().pagina_inicial;
+
+        if(initialPage != 'esporte') {
+            const pages = {
+                esporte: 'esportes/futebol',
+                cassino: 'casino',
+                virtual: 'vitual-sports',
+                desafio: 'desafios',
+                acumuladao: 'acumuladao',
+                loteria: 'loterias',
+                cassino_ao_vivo: 'live-casino',
+                rifas: 'rifas/wall'
+            }
+            routerDefault = pages[initialPage];
+        }
+        
+        this.router.navigate([routerDefault]);
     }
 }
