@@ -79,11 +79,11 @@ export class DocumentComponent implements OnInit, AfterViewInit {
 
         if (this.faceMatchEnabled && this.faceMatchType == 'legitimuz') {
             this.legitimuzService.curCustomerIsVerified
-            .pipe(
-                filter(curCustomerIsVerified => curCustomerIsVerified === true),
-                take(1)
-              )
-            .subscribe(async (curCustomerIsVerified) => {
+                .pipe(
+                    filter(curCustomerIsVerified => curCustomerIsVerified === true),
+                    take(1)
+                )
+                .subscribe(async (curCustomerIsVerified) => {
                     this.cd.detectChanges();
                     if (curCustomerIsVerified) {
                         this.legitimuzService.closeModal();
