@@ -121,7 +121,7 @@
             </div>
             <div class="bet__text" v-if="bet.tipo !== 'loteria'">
               <span class="bet__select" :class="{'gain__strikethrough': newEarningPossibility !== null}">
-                {{ betItem.categoria_nome }} : {{ betItem.aposta_tipo.nome }}
+                {{ betItem.categoria_nome }} : {{ betItem.odd_nome}}
               </span>
               <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
             </div>
