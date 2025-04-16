@@ -170,8 +170,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.auth.getPosicaoFinanceira()
             .subscribe(
                 posicaoFinanceira => {
-                    this.saldo = posicaoFinanceira.saldo - posicaoFinanceira.saldoBloqueado;
-                    if (posicaoFinanceira.saldo == 0) {
+                    this.saldo = posicaoFinanceira.saldoLiberado;
+                    if (posicaoFinanceira.saldo <= 0) {
                         this.disableButton = true;
                     }
                 },
