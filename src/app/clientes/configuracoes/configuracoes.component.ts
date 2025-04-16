@@ -159,8 +159,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
                 })
                 break;
             default:
-                break;            
-        }  
+                break;
+        }
         if (!this.faceMatchEnabled) {
             this.faceMatchAccountDeletionValidated = true;
         }
@@ -453,7 +453,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
             this.clienteService.excluirConta(exclusionPeriod, motivoExclusao, sanitizedExclusionConfirmation, multifator).subscribe(
                 result => {
                     this.messageService.success(result.message);
-                    this.authService.logout();
+                    setTimeout(() => {
+                        this.authService.logout();
+                    }, 3000);
                 },
                 error => {
                     this.handleError(error);
@@ -586,7 +588,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
                 return '4horas';
         }
     }
-    
+
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             if (this.faceMatchType == 'legitimuz') {
