@@ -276,13 +276,6 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             this.clienteService.checkPasswordExpirationDays(this.usuario.id)
                         }
                         
-                        if (!this.accountVerificationService.terms_accepted.getValue()) {
-                            const result = await this.accountVerificationService.openModalTermsPromise();
-                            if (!result) {
-                                this.accountVerificationService.termAcceptRedirectDefault('/');
-                                return;
-                            }
-                        }
                     },
                     (error) => {
                         this.btnDisabled = false;
@@ -371,6 +364,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
+
+                        if (!this.accountVerificationService.terms_accepted.getValue()) {
+                            const result = await this.accountVerificationService.openModalTermsPromise();
+                            if (!result) {
+                                this.accountVerificationService.termAcceptRedirectDefault('/');
+                                return;
+                            }
+                        }
+                        
                         await this.accountVerificationService.getAccountVerificationDetail().toPromise();
                         if (this.isCassinoPage) {
                             location.reload();
