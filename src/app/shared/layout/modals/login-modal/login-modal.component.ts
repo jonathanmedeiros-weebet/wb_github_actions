@@ -368,7 +368,10 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         await this.accountVerificationService.getAccountVerificationDetail().toPromise();
 
                         if (!this.accountVerificationService.terms_accepted.getValue()) {
-                            await this.accountVerificationService.openModalTermsPromise();
+                            const result = await this.accountVerificationService.openModalTermsPromise();
+                            if (!result && !this.isCassinoPage) {
+                                this.accountVerificationService.termAcceptRedirectDefault('/');
+                            }
                         }
                         if (this.isCassinoPage) {
                             location.reload();
