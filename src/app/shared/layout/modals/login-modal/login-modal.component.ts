@@ -364,16 +364,12 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
-
-                        if (!this.accountVerificationService.terms_accepted.getValue()) {
-                            const result = await this.accountVerificationService.openModalTermsPromise();
-                            if (!result) {
-                                this.accountVerificationService.termAcceptRedirectDefault('/');
-                                return;
-                            }
-                        }
                         
                         await this.accountVerificationService.getAccountVerificationDetail().toPromise();
+
+                        if (!this.accountVerificationService.terms_accepted.getValue()) {
+                            await this.accountVerificationService.openModalTermsPromise();
+                        }
                         if (this.isCassinoPage) {
                             location.reload();
                         }
