@@ -1794,10 +1794,10 @@ gulp.task('betmania.casino', function (done) {
     });
 });
 
-gulp.task('zedocash.bet', function (done) {
+gulp.task('zedocash.cash', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "zedocash.bet",
+        host: "zedocash.cash",
         banca: "ZÉ DO CASH",
         styles: "",
         scripts: "<script src='https://s3.crmseven.online/scripts/start.js'></script>"
