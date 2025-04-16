@@ -186,6 +186,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     if (this.verifiedIdentity) {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, account_deletion: true }).subscribe({

@@ -114,6 +114,8 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                     this.legitimuzService.curCustomerIsVerified
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(curCustomerIsVerified => {
+                            if(curCustomerIsVerified == null) return;
+                            
                             this.verifiedIdentity = curCustomerIsVerified;
                             this.cd.detectChanges();
                             if (this.verifiedIdentity) {

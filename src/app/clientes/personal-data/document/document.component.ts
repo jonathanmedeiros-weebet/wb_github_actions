@@ -1,6 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { distinctUntilChanged} from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { AccountVerificationService, ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
@@ -29,7 +30,7 @@ declare global {
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.css']
 })
-export class DocumentComponent implements OnInit, AfterViewInit {
+export class DocumentComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
     customer: any;
@@ -40,6 +41,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
     docCheckToken = '';
     secretHash = '';
     public verificationRequired: boolean = false;
+    private unsub$ = new Subject();
 
     constructor(
         private clienteService: ClienteService,
@@ -53,7 +55,7 @@ export class DocumentComponent implements OnInit, AfterViewInit {
         private accountVerificationService: AccountVerificationService
     ) {}
    
-    ngOnInit() {
+    async ngOnInit() {
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
         this.loadCustomer();
         this.verifyAccountVerificationStep();
@@ -78,11 +80,14 @@ export class DocumentComponent implements OnInit, AfterViewInit {
         }
 
         if (this.faceMatchEnabled && this.faceMatchType == 'legitimuz') {
-            this.legitimuzService.curCustomerIsVerified
+            this.legitimuzService
+                .curCustomerIsVerified
                 .pipe(
-                    distinctUntilChanged()
+                    debounceTime(300),
+                    takeUntil(this.unsub$)
                 )
                 .subscribe(async (curCustomerIsVerified) => {
+                    if (curCustomerIsVerified == null) return;
                     this.cd.detectChanges();
                     if (curCustomerIsVerified) {
                         this.legitimuzService.closeModal();
@@ -141,5 +146,9 @@ export class DocumentComponent implements OnInit, AfterViewInit {
                     });
             }
         }
+    }
+
+    ngOnDestroy() {
+        if(this.unsub$) this.unsub$.unsubscribe();
     }
 }

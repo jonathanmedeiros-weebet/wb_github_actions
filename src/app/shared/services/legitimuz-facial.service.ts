@@ -1,60 +1,56 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ClienteService } from './clientes/cliente.service';
 import { ParametrosLocaisService } from './parametros-locais.service';
 
 declare var LegitimuzFaceIndex: any;
+const API_LEGITIMUZ: string = "https://api.legitimuz.com";
+const API_LEGITIMUZ_LIVENESS: string = "https://widget.legitimuz.com";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LegitimuzFacialService {
-
   private sdk;
-
-  private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
-  private static API_LEGITIMUZ_LIVENESS: String = "https://widget.legitimuz.com";
-
   private options:any = {
-      host: LegitimuzFacialService.API_LEGITIMUZ,
-      apiURL: LegitimuzFacialService.API_LEGITIMUZ,
-      appURL :LegitimuzFacialService.API_LEGITIMUZ_LIVENESS,
+      host: API_LEGITIMUZ,
+      apiURL: API_LEGITIMUZ,
+      appURL :API_LEGITIMUZ_LIVENESS,
       token: '',
       lang: 'pt',
       enableRedirect: false,
       autoOpenValidation: false,
       onlyLiveness : true,
-      onSuccess: (eventName) => console.log(eventName),
-      eventHandler:(eventName) => console.log(eventName)
+      onSuccess: (eventName: string) => console.log(eventName),
+      eventHandler:(eventName: string) => console.log(eventName)
   };
 
-  private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(false);
-  curCustomerIsVerified;
   private faceIndexSub = new BehaviorSubject<boolean>(false);
-  faceIndex;
+  public faceIndex: any;
 
   constructor (
-      private clienteService: ClienteService,
       private paramsService: ParametrosLocaisService
   ) {
-      this.options.token = this.paramsService.getOpcoes().legitimuz_token;
-      this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
-      this.faceIndex = this.faceIndexSub.asObservable();
-      this.options.onSuccess = (eventName) => {
-        if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndexSub.getValue()) {
-          this.faceIndexSub.next(true)
-        }
+    this.options.token = this.paramsService.getOpcoes().legitimuz_token;
+    this.faceIndex = this.faceIndexSub.asObservable();
+    this.options.onSuccess = (eventName) => {
+      if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndexVerified) {
+        this.faceIndexSub.next(true)
       }
+    }
 
-      this.options.eventHandler = (eventName) => {
-        if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndexSub.getValue()) {
-          this.faceIndexSub.next(true)
-        }
-      };
+    this.options.eventHandler = (eventName) => {
+      if (eventName.name == 'faceindex' && eventName.status == 'success' && !this.faceIndexVerified) {
+        this.faceIndexSub.next(true)
+      }
+    };
+  }
+
+  get faceIndexVerified() : boolean {
+    return this.faceIndexSub.getValue();
   }
 
   init() {
-    if(this.faceIndexSub.getValue()) this.faceIndexSub.next(false);
+    if(this.faceIndexVerified) this.faceIndexSub.next(false);
     this.sdk = LegitimuzFaceIndex(this.options);
   }
 
@@ -64,14 +60,6 @@ export class LegitimuzFacialService {
 
   changeLang(lang: string) {
     this.sdk.setLang(lang);
-  }
-
-  toggleEnableRedirect(enable: boolean) {
-    this.options.enableRedirect = enable;
-  }
-
-  toggleAutoOpenValidation(enable: boolean) {
-    this.options.autoOpenValidation = enable;
   }
 
   closeModal() {
