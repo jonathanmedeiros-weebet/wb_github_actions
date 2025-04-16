@@ -12,6 +12,8 @@ import { ClienteService } from './clientes/cliente.service';
 import { VerificationTypes } from '../enums';
 import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verified-success/account-verified-success.component';
 import { TermsAcceptedComponent } from '../layout/modals/terms-accepted/terms-accepted.component';
+import { ParametrosLocaisService } from './parametros-locais.service';
+import { Router } from '@angular/router';
 
 interface VerifiedSteps {
   phone: boolean;
@@ -59,7 +61,9 @@ export class AccountVerificationService {
     private http: HttpClient,
     private headerService: HeadersService,
     private errorService: ErrorService,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private params : ParametrosLocaisService,
+    private router : Router
   ) {
     let accountVerificationStorage: VerificationAccountResponse | string | null = sessionStorage.getItem(ACCOUNT_VERIFICATION_SESSION);
     if (Boolean(accountVerificationStorage)) {
@@ -190,5 +194,25 @@ export class AccountVerificationService {
       const modalRef = this.openModalTermsAccepd();
       modalRef.result.then((accepted: boolean) => resolve(accepted));
     });
+  }
+
+  termAcceptRedirectDefault(routerDefault) {
+    const initialPage = this.params.getOpcoes().pagina_inicial;
+
+    if (initialPage != 'esporte') {
+      const pages = {
+        esporte: 'esportes/futebol',
+        cassino: 'casino',
+        virtual: 'vitual-sports',
+        desafio: 'desafios',
+        acumuladao: 'acumuladao',
+        loteria: 'loterias',
+        cassino_ao_vivo: 'live-casino',
+        rifas: 'rifas/wall'
+      }
+      routerDefault = pages[initialPage];
+    }
+
+    this.router.navigate([routerDefault]);
   }
 }

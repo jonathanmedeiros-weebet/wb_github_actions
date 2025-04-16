@@ -73,7 +73,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             if (!this.accountVerificationService.terms_accepted.getValue()) {
                 const result = await this.accountVerificationService.openModalTermsPromise();
                 if (!result && this.accountVerified) {
-                    this.termAcceptRedirectDefault('/clientes/personal-data');
+                    this.accountVerificationService.termAcceptRedirectDefault('/clientes/personal-data');
                     return;
                 }
             }
@@ -120,7 +120,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
 
                     const result = await this.accountVerificationService.openModalTermsPromise();
                     if (!result && this.accountVerified) {
-                        this.termAcceptRedirectDefault('/clientes/personal-data');
+                        this.accountVerificationService.termAcceptRedirectDefault('/clientes/personal-data');
                         return;
                     }
                 }
@@ -332,7 +332,7 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
             if (!this.accountVerificationService.terms_accepted.getValue()) {
                 const result = await this.accountVerificationService.openModalTermsPromise();
                 if (!result && this.accountVerified) {
-                    this.termAcceptRedirectDefault('/');
+                    this.accountVerificationService.termAcceptRedirectDefault('/');
                     return;
                 }
             }
@@ -379,23 +379,4 @@ export class BetbyComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    private termAcceptRedirectDefault(routerDefault) {
-        const initialPage = this.params.getOpcoes().pagina_inicial;
-
-        if(initialPage != 'esporte') {
-            const pages = {
-                esporte: 'esportes/futebol',
-                cassino: 'casino',
-                virtual: 'vitual-sports',
-                desafio: 'desafios',
-                acumuladao: 'acumuladao',
-                loteria: 'loterias',
-                cassino_ao_vivo: 'live-casino',
-                rifas: 'rifas/wall'
-            }
-            routerDefault = pages[initialPage];
-        }
-        
-        this.router.navigate([routerDefault]);
-    }
 }
