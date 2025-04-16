@@ -99,7 +99,6 @@
     "bomba.bet": "gulp bomba.bet",
     "pointbet.bet": "gulp pointbet.bet",
     "megasporte.com": "gulp megasporte.com",
-    "imperiopix.bet": "gulp imperiopix.bet",
     "primoos.bet": "gulp primoos.bet",
     "realgol.net": "gulp realgol.net",
     "pinplay.bet": "gulp pinplay.bet",
@@ -132,7 +131,6 @@
     "federalsports.bet": "gulp federalsports.bet",
     "fortalezabets.online": "gulp fortalezabets.online",
     "lottomaster.bet": "gulp lottomaster.bet",
-    "jetbet.net.br": "gulp jetbet.net.br",
     "moneybets.net": "gulp moneybets.net",
     "bnrbet.com": "gulp bnrbet.com",
     "xico.bet": "gulp xico.bet",
@@ -204,7 +202,9 @@
     "sporte.vip": "gulp sporte.vip",
     "vaibet360.com": "gulp vaibet360.com",
     "sortebet777.com": "gulp sortebet777.com",
-    "3betco.com.br": "gulp 3betco.com.br"
+    "3betco.com.br": "gulp 3betco.com.br",
+    "apostacerta.bet": "gulp apostacerta.bet",
+    "brasavipcassino.net": "gulp brasavipcassino.net"
   },
   "private": true,
   "dependencies": {
