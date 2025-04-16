@@ -275,6 +275,10 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         if (this.paramsLocais.getOpcoes().enableForceChangePassword) {
                             this.clienteService.checkPasswordExpirationDays(this.usuario.id)
                         }
+                        if (!this.accountVerificationService.terms_accepted.getValue()) {
+                            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                            if (!termsResult) return;
+                        }
                     },
                     (error) => {
                         this.btnDisabled = false;
