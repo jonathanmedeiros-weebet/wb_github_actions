@@ -123,7 +123,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         switch(this.faceMatchType) {
             case 'legitimuz':
                 this.legitimuzToken = this.paramsLocais.getOpcoes().legitimuz_token;
-                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw); 
+                this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.legitimuzToken && this.faceMatchWithdraw);
                 break;
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
@@ -136,7 +136,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 })
                 break;
             default:
-                break;            
+                break;
         }
         if (!this.faceMatchEnabled) {
             this.faceMatchFirstWithdrawValidated = true;
@@ -160,8 +160,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.auth.getPosicaoFinanceira()
             .subscribe(
                 posicaoFinanceira => {
-                    this.saldo = posicaoFinanceira.saldo - posicaoFinanceira.saldoBloqueado;
-                    if (posicaoFinanceira.saldo == 0) {
+                    this.saldo = posicaoFinanceira.saldoLiberado;
+                    if (posicaoFinanceira.saldo <= 0) {
                         this.disableButton = true;
                     }
                 },
