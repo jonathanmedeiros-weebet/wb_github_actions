@@ -100,6 +100,8 @@ export class ConfirmModalComponent implements OnInit {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     if (this.verifiedIdentity) {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, account_bank_delete: true }).subscribe({

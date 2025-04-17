@@ -16,6 +16,7 @@ export class AccountVerificationAlertComponent implements OnInit {
   public description: string;
   public stepStatus: any[];
   public showStepStatus: boolean = false;
+  public redirectEvenWhenClosing: boolean = false;
 
   constructor(
     private accountVerificationService: AccountVerificationService,
@@ -77,7 +78,11 @@ export class AccountVerificationAlertComponent implements OnInit {
       return;
     }
 
-    this.activeModal.close(true);
+    if (this.redirectEvenWhenClosing) {
+        this.goToAccountVerification();
+    } else {
+        this.activeModal.close(true);
+    }
   }
 
   public goToAccountVerification() {

@@ -35,7 +35,8 @@ export class WallGamesSearchComponent implements OnInit, OnDestroy {
   }
 
   get showFeasturedGames(): boolean {
-    return this.searchItemLength <= 0;
+    return false; // Desativar temporáriamente até uma solução definitiva referente aos jogos mais populares
+    // return this.searchItemLength <= 0;
   }
 
   get showSearchResults(): boolean {

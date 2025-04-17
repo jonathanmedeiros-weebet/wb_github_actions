@@ -1,4 +1,4 @@
-const CENTER = 'https://center7.wee.bet/v1';
+const CENTER = 'https://center.weebet.tech/v1';
 
 async function getParams() {
     var url = window.location.pathname;

@@ -622,7 +622,7 @@ iframe{
 
     .game-view.in-game {
         padding: 0;
-        height: 100%;
+        height: 100dvh;
     }
 
     .header-game-view.in-game {
@@ -886,7 +886,7 @@ iframe{
 
     .game-frame.is-tablet {
         margin: 0;
-        height: 600px;
+        height: 100dvh;
     }
 
     .game-frame.in-game-is-tablet .game-view.in-game {

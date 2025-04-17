@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList,
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { LayoutService } from '../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
+import { Subject, Subscription } from 'rxjs';
+import { AccountVerificationService, AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { WidgetService } from '../shared/services/widget.service';
@@ -36,6 +36,9 @@ export class HomeComponent implements OnInit, OnDestroy{
     private bt: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
 
+    private loggedSubscription: Subscription;
+    private hasCustomerLoggedIn: boolean = false;
+
     constructor(
         private messageService: MessageService,
         private helper: HelperService,
@@ -46,13 +49,20 @@ export class HomeComponent implements OnInit, OnDestroy{
         private translate: TranslateService,
         private authService: AuthService,
         private paramsService: ParametrosLocaisService,
-        private router: Router
+        private router: Router,
+        private accountVerificationService: AccountVerificationService
     ) { }
 
     ngOnInit(): void {
         let currentLang = this.translate.currentLang;
 
         this.betby = this.paramsService.getOpcoes().betby;
+
+        this.checkIfHasCustomerLoggedIn();
+
+        if (this.hasCustomerLoggedIn) {
+            this.betby = false;
+        }
 
         this.widgetService.byPage('home').subscribe(response => {
             this.widgets = response;
@@ -93,6 +103,14 @@ export class HomeComponent implements OnInit, OnDestroy{
         if (this.bt) {
             this.bt.kill();
         }
+
+        this.loggedSubscription.unsubscribe();
+    }
+
+    private checkIfHasCustomerLoggedIn() {
+        this.loggedSubscription = this.authService
+            .logado
+            .subscribe((hasCustomerLoggedIn) => this.hasCustomerLoggedIn = hasCustomerLoggedIn);
     }
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {

@@ -7,7 +7,6 @@ import { HeadersService } from '../utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import * as moment from 'moment';
-import { Router } from '@angular/router';
 import { ParametrosLocaisService } from "../parametros-locais.service";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
@@ -31,7 +30,6 @@ export class ClienteService {
         private http: HttpClient,
         private errorService: ErrorService,
         private headers: HeadersService,
-        private router: Router,
         private paramsService: ParametrosLocaisService,
         private ga4Service: Ga4Service,
         private modalService: NgbModal,
@@ -397,7 +395,7 @@ export class ClienteService {
             );
     }
 
-    validatePhone(validationCode: number) {
+    validatePhone(validationCode: string) {
         let baseUrl = `${this.clienteUrl}/validate-phone`;
 
         if (this.paramsService.getPhoneVerificationService() == 'twilio') {
@@ -416,8 +414,6 @@ export class ClienteService {
                 }),
                 catchError(this.errorService.handleError)
             );
-
-
     }
 
     public allBankAccounts() {
@@ -459,5 +455,14 @@ export class ClienteService {
                 }),
                 catchError(this.errorService.handleError)
             );
+    }
+
+    acceptTerms() {
+        return this.http.get(`${this.clienteUrl}/acceptTerms`, this.headers.getRequestOptions(true))
+            .pipe(
+                map((response: any) => {
+                    return response.results;
+                }),
+                catchError(this.errorService.handleError));
     }
 }

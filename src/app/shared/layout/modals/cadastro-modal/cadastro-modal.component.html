@@ -346,7 +346,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="!formSocial && !isLoterj">
+            <div class="row" *ngIf="!formSocial">
                 <div class="col-md-12">
                     <div class="form-group mb-4">
                         <div class="input-md">
@@ -421,7 +421,7 @@
                             class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
                     </label>
                     <label *ngIf="isLoterj" [ngClass]="{ 'label-termo-uso': aplicarCssTermo }">
-                        <input type="checkbox" id="termosUso" formControlName="termosUso">
+                        <input type="checkbox" id="termsAccepted" formControlName="termsAccepted">
                         <div>
                             {{'geral.certificoQueTenhoMais' | translate}}
                             <a id="linkTermos"
@@ -434,7 +434,7 @@
                                [routerLink]="['/informacoes/politica-privacidade']"
                                class="link-termos-politica"> {{'footer.politicaDePrivacidade' | translate | lowercase}}</a>.
                         </div>
-                        <app-error-msg [control]="form.get('termosUso')"
+                        <app-error-msg [control]="form.get('termsAccepted')"
                                        class="text-left"></app-error-msg>
                     </label>
                 </div>

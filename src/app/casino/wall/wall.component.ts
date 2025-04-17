@@ -233,7 +233,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
-            await this.getGamesRecommendations();
+            // await this.getGamesRecommendations();
 
             this.gamesSection = [
                 {
@@ -312,7 +312,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             }
         });
 
-        this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
     }
 
@@ -394,7 +393,6 @@ export class WallComponent implements OnInit, AfterViewInit {
             }
         });
 
-        this.listagemJogos.nativeElement.scrollTo(0, 0);
         this.showLoadingIndicator = false;
     }
 
