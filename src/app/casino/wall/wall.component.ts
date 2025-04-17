@@ -233,10 +233,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
-            if (this.isHomeCassino) {
-                console.log('aa')
-                await this.getGamesRecommendations();
-            }
+            await this.getGamesRecommendations();
 
             this.gamesSection = [
                 {
@@ -607,7 +604,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     private async getGamesRecommendations() {
         if (this.isLoggedIn) {
-            const userId = JSON.parse(localStorage.getItem('user')).id;
+            const userId = this.auth.getUser().id;
 
             try {
                 const res = await this.casinoApi.getCasinoRecommendations(userId).toPromise();
@@ -617,6 +614,7 @@ export class WallComponent implements OnInit, AfterViewInit {
                 }
             } catch (error) {
                 console.error('Erro ao obter recomendações:', error);
+                return [];
             }
         }
     }
