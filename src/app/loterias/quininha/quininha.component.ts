@@ -243,6 +243,11 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Finalizar aposta */
     async create() {
         if (this.isCliente && this.isLoggedIn) {
+            if (!this.accountVerificationService.terms_accepted.getValue()) {
+                const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                if (!termsResult) return;
+            }
+            
             if (!this.accountVerificationService.accountVerified.getValue()) {
                 this.accountVerificationService.openModalAccountVerificationAlert();
                 return;

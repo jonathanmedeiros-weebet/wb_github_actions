@@ -132,6 +132,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     registerGoogleAccount = false;
     public accountVerified = false;
 
+    useBankAccount: boolean = false;
+
     @HostListener('window:resize', ['$event'])
     onResize(event) {
         if (window.innerWidth > 1025) {
@@ -272,6 +274,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
                 isCliente => this.isCliente = isCliente
             );
 
+        this.useBankAccount = this.paramsService.getOpcoes().use_bank_account;
         this.aoVivoAtivo = this.paramsService.aoVivoAtivo();
         this.desafioHabilitado = this.paramsService.getOpcoes().desafio;
         this.desafioNome = this.paramsService.getOpcoes().desafio_nome;
@@ -511,7 +514,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.dropDownConta.close();
     }
 
-    abrirAlterarSenha() {
+    async abrirAlterarSenha() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -519,7 +527,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ClienteSenhaModalComponent);
     }
 
-    openLastAccesses() {
+    async openLastAccesses() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -527,7 +540,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(LastAccessesModalComponent);
     }
 
-    openBankAccount() {
+    async openBankAccount() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -544,7 +562,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ConfiguracoesComponent);
     }
 
-    abrirFinanceiro() {
+    async abrirFinanceiro() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -556,7 +579,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(MovimentacaoComponent);
     }
 
-    abrirSaques() {
+    async abrirSaques() {
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -564,7 +587,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(SolicitacaoSaqueClienteComponent);
     }
 
-    abrirCarteira() {
+    async abrirCarteira() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -572,7 +600,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(CarteiraComponent);
     }
 
-    abrirDepositos() {
+    async abrirDepositos() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -580,7 +613,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(DepositoComponent);
     }
 
-    openTransactionHistory() {
+    async openTransactionHistory() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -592,7 +630,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(DepositoCambistaComponent);
     }
 
-    abrirApostas() {
+    async abrirApostas() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -600,7 +643,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ClienteApostasModalComponent);
     }
 
-    abrirRollovers() {
+    async abrirRollovers() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -608,7 +656,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(PromocaoComponent);
     }
 
-    abrirIndiqueGanhe() {
+    async abrirIndiqueGanhe() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -616,7 +669,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(IndiqueGanheComponent);
     }
 
-    openCashback() {
+    async openCashback() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;

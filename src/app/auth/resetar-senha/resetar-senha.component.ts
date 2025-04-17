@@ -126,14 +126,12 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                                 this.user = res.results;
                                 this.clienteService.getFaceMatchClient(res.results.id).subscribe({
                                     next: (res) => {
+                                        this.dataUserCPF = res.cpf
+                                        this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF.replace(/[.\-]/g, ''), this.paramLocais.getOpcoes().dockCheck_secret_hash);
                                         if (res.verifiedIdentity == null) {
-                                            this.dataUserCPF = String(res.cpf).replace(/[.\-]/g, '');
-                                            this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash);
                                             this.showLoading = false;
                                             this.disapprovedIdentity = false
                                         } else if (res.verifiedIdentity) {
-                                            this.dataUserCPF = String(res.cpf).replace(/[.\-]/g, '');
-                                            this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF, this.paramLocais.getOpcoes().dockCheck_secret_hash);
                                             this.verifiedIdentity = true
                                             this.showLoading = false;
                                         } else {
@@ -195,6 +193,8 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {

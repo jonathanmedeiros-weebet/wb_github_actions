@@ -12,7 +12,7 @@
             <h2>{{ 'bankAccounts.title' | translate }}</h2>
         </div>
 
-        <div class="content-body">
+        <div class="content-body" *ngIf="!showLoading">
             <div class="row list-accounts">
                 <div class="col-12 col-md-4" *ngFor="let accountItem of accounts">
                     <div class="account__card">
@@ -24,9 +24,18 @@
                                 <a href="javascript:void(0)" (click)="openConfirmModal(accountItem)"><i class="fa fa-trash" style="text-decoration: none; color: var(--foreground-sidebars);"></i></a>
                             </div>
                         </div>
-                        <span class="account__bank-agency">Agência: {{ accountItem.numeroAgencia }}</span>
-                        <span class="account__bank-account">Conta: {{ accountItem.numeroConta }}</span>
-                        <span class="account__account-type">Conta {{ accountItem.tipoConta }}</span>
+                        <div>
+                            <span class="account__bank-agency">Agência: {{ accountItem.numeroAgencia }}</span>
+                        </div>
+                        <div>
+                            <span class="account__bank-account">Conta: {{ accountItem.numeroConta }}</span>
+                        </div>
+                        <div>
+                            <span *ngIf="accountItem.digito" class="account__account-type">Digito: {{ accountItem.digito }}</span>
+                        </div>
+                        <div>
+                            <span *ngIf="accountItem.tipoConta" class="account__account-type">Conta {{ accountItem.tipoConta }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-4" *ngIf="accounts.length < 3">
@@ -37,5 +46,7 @@
                 </div>
             </div>
         </div>
+
+        <app-spinner *ngIf="showLoading"></app-spinner>
     </div>
 </div>

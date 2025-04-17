@@ -5,10 +5,6 @@ import {Injectable} from '@angular/core';
 })
 export class CountriesService {
 
-    constructor(
-    ) {
-    }
-
     getCountries() {
         return [
             { value: 1, name: 'Afeganistão' },
