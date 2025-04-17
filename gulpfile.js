@@ -1920,3 +1920,12 @@ gulp.task('brasavipcassino.net', function (done) {
         styles: ""
     });
 });
+
+gulp.task('betsplay.club', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "betsplay.club",
+        banca: "BETSPLAY",
+        styles: ""
+    });
+});
