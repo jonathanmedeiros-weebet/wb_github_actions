@@ -233,7 +233,10 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
-            await this.getGamesRecommendations();
+            if (this.isHomeCassino) {
+                console.log('aa')
+                await this.getGamesRecommendations();
+            }
 
             this.gamesSection = [
                 {
@@ -604,7 +607,7 @@ export class WallComponent implements OnInit, AfterViewInit {
 
     private async getGamesRecommendations() {
         if (this.isLoggedIn) {
-            const userId = this.auth.getUser().id;
+            const userId = JSON.parse(localStorage.getItem('user')).id;
 
             try {
                 const res = await this.casinoApi.getCasinoRecommendations(userId).toPromise();
