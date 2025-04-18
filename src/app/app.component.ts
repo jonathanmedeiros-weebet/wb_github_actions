@@ -206,6 +206,9 @@ export class AppComponent implements OnInit {
                     this.openModalTimeLimit();
                 });
 
+                localStorage.removeItem(ACCOUNT_VERIFIED)
+                this.accountVerificationService.getAccountVerificationDetail().toPromise();
+
                 this.navigationHistoryService
                     .verifyIfCurrentRouteUseAccountVerificationGuard()
                     .then((useAccountVerificationGuard) => {
@@ -223,7 +226,7 @@ export class AppComponent implements OnInit {
                                     }
                                 });
                         }
-                    })
+                    });
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {

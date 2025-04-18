@@ -275,6 +275,7 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                         if (this.paramsLocais.getOpcoes().enableForceChangePassword) {
                             this.clienteService.checkPasswordExpirationDays(this.usuario.id)
                         }
+                        
                     },
                     (error) => {
                         this.btnDisabled = false;
@@ -363,7 +364,15 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
                             xtremepush('event', 'login');
                         }
                         this.loginService.triggerEvent();
+                        
                         await this.accountVerificationService.getAccountVerificationDetail().toPromise();
+
+                        if (!this.accountVerificationService.terms_accepted.getValue()) {
+                            const result = await this.accountVerificationService.openModalTermsPromise();
+                            if (!result && !this.isCassinoPage) {
+                                this.accountVerificationService.termAcceptRedirectDefault('/');
+                            }
+                        }
                         if (this.isCassinoPage) {
                             location.reload();
                         }

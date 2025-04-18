@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AccountVerificationService } from '../account-verification.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -30,19 +29,30 @@ export class AccountVerificationGuard implements CanActivate {
         const hasModalOpen = document.getElementById('terms-accepted');
         if (hasModalOpen) {
           return true;
-        } else {
-          await this.openModalTerms();
+        }
 
-          const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
-          if (accountVerified) {
-            return true;
-          } else {
-            const isClosed = await this.openModalAccountVerifications();
-            if(isClosed) {
-              if (previousUrl == nextUrl) {
-                return this.router.navigate(['/']);
-              }
+        const termExceptions = [
+          '/clientes/saque'
+        ];
+        
+        if(!termExceptions.includes(nextUrl)) {
+          const termsResult = await this.openModalTerms();
+          if (!termsResult) {
+            if (previousUrl === nextUrl) {
+              return this.router.navigate(['/']);
+            } else {
+              return false;
             }
+          }
+        }
+
+        const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
+        if (accountVerified) {
+          return true;
+        } else {
+          const isClosed = await this.openModalAccountVerifications();
+          if(isClosed && previousUrl == nextUrl) {
+            return this.router.navigate(['/']);
           }
         }
       } else {
@@ -51,10 +61,8 @@ export class AccountVerificationGuard implements CanActivate {
           return true;
         } else {
           const isClosed = await this.openModalAccountVerifications();
-          if(isClosed) {
-            if (previousUrl == nextUrl) {
-              return this.router.navigate(['/']);
-            }
+          if(isClosed && previousUrl == nextUrl) {
+            return this.router.navigate(['/']);
           }
         }
       }
@@ -68,32 +76,14 @@ export class AccountVerificationGuard implements CanActivate {
   private async openModalTerms() {
     return new Promise((resolve) => {
       const modalRef = this.accountVerificationService.openModalTermsAccepd();
-      modalRef.result.then((resp) => resolve(resp));
+      modalRef.result.then((accepted) => resolve(accepted));
     });
   }
 
   private async openModalAccountVerifications() {
     return new Promise((resolve) => {
       const modalRef = this.accountVerificationService.openModalAccountVerificationAlert();
-      modalRef.result.then((resp) => resolve(resp));
+      modalRef.result.then((closed) => resolve(closed));
     });
   }
-          // modalRef.result.then(() => {
-
-          //   const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
-          //   if (accountVerified) {
-          //     return true;
-          //   }
-
-          //   const modalRef = this.accountVerificationService.openModalAccountVerificationAlert();
-          //   modalRef.result.then((isClosed) => {
-          //     if (isClosed) {
-          //       if (previousUrl == nextUrl) {
-          //         return this.router.navigate(['/']);
-          //       }
-          //     } 
-          //   });
-
-          // });
-  // }
 }
