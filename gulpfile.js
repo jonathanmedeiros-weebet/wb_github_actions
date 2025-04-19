@@ -1748,10 +1748,10 @@ gulp.task('joguefacil.bet', function (done) {
     });
 });
 
-gulp.task('sportvips.bet', function (done) {
+gulp.task('sportvip.bet', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "sportvips.bet",
+        host: "sportvip.bet",
         banca: "SportVip",
         styles: ""
     });
