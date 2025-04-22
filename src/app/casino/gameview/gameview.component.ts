@@ -818,7 +818,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.auth.openRegisterV3Modal();
     }
 
-    openDeposit() {
+    async openDeposit() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerificationService.accountVerified.getValue()) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;

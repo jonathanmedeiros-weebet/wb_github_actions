@@ -233,7 +233,7 @@ export class WallComponent implements OnInit, AfterViewInit {
             this.gamesCassino = gameList.filter((game: GameCasino) => game.dataType !== 'VSB');
             this.newGamesCassino = news;
             this.gamesDestaque = populares;
-            await this.getGamesRecommendations();
+            // await this.getGamesRecommendations();
 
             this.gamesSection = [
                 {
