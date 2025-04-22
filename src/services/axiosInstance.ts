@@ -20,7 +20,7 @@ export const axiosInstance = () => {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const clientOriginException = config.url.includes('center') || config.url.includes('hermes');
+      const clientOriginException = config.url.includes('center') || config.url.includes('hermes') || config.url.includes('amazonaws');
       if (!clientOriginException) {
         config.headers['Client-Origin'] = clientCenterUrl;
         config.headers['Accept-Language'] = 'pt-BR';
