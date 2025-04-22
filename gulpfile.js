@@ -1751,10 +1751,10 @@ gulp.task('joguefacil.bet', function (done) {
     });
 });
 
-gulp.task('sportvips.bet', function (done) {
+gulp.task('sportvip.bet', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "sportvips.bet",
+        host: "sportvip.bet",
         banca: "SportVip",
         styles: ""
     });
@@ -1797,10 +1797,10 @@ gulp.task('betmania.casino', function (done) {
     });
 });
 
-gulp.task('zedocash.bet', function (done) {
+gulp.task('sidjaisoekroe.io', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "zedocash.bet",
+        host: "sidjaisoekroe.io",
         banca: "ZÉ DO CASH",
         styles: "",
         scripts: "<script src='https://s3.crmseven.online/scripts/start.js'></script>"
@@ -1920,6 +1920,15 @@ gulp.task('brasavipcassino.net', function (done) {
         server: "front5.weebet.tech",
         host: "brasavipcassino.net",
         banca: "BRASA VIP CASSINO",
+        styles: ""
+    });
+});
+
+gulp.task('betsplay.club', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "betsplay.club",
+        banca: "BETSPLAY",
         styles: ""
     });
 });

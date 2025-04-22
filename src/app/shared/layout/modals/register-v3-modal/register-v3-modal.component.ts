@@ -66,6 +66,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public nationalities = this.countriesService.getCountries();
     public cpfSpinner = false;
     private previousUrl: string;
+    public storagedBtag: string | null = null;
 
     constructor(
         private fb: FormBuilder,
@@ -114,6 +115,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.autoPreenchimento = this.paramsService.getOpcoes().validar_cpf_receita_federal;
         this.countryCodes = this.countriesService.getDialcodes();
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
+        this.storagedBtag = this.auth.getLocalstorageWithExpiry('btag');
 
         this.createForm();
 
@@ -122,6 +124,10 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.hCaptchaLanguage = res.lang;
             this.cd.detectChanges();
         });
+
+        if (this.storagedBtag) {
+            this.form.patchValue({ btag: this.storagedBtag });
+        }
 
         this.handleQueryParams();
 
@@ -233,15 +239,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     }
                 }
 
-                if (params.btag) {
-                    localStorage.setItem('btag', params.btag);
-                } else {
-                    const storagedBtag = localStorage.getItem('btag');
-                    if (storagedBtag) {
-                        this.form.patchValue({ btag: storagedBtag });
-                    }
-                }
-
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {
@@ -297,7 +294,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
             afiliado: [null, [Validators.maxLength(50)]],
 
-            btag: [this.route.snapshot.queryParams.btag],
+            btag: [this.storagedBtag],
             refId: [this.route.snapshot.queryParams.ref],
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
