@@ -391,6 +391,7 @@ body .change-theme {
 
 .deposit-shortcut a {
     padding: 0px 11px;
+    text-decoration: none;
 }
 
 .menu-perfil {

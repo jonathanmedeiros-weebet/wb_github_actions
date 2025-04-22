@@ -332,6 +332,11 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         }
 
         let values = this.form.value;
+
+        if (values.telefone) {
+            values.telefone = values.telefone.replace(/\s+/g, '');
+        }
+
         if (!this.autoPreenchimento) {
             values.nomeCompleto = values.nome;
         }
@@ -427,7 +432,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public validarCpf() {
         this.cpfSpinner = true;
         const { cpf } = this.form.value;
-        
+
         if (this.autoPreenchimento) {
             if (this.form.get('cpf').valid) {
                 if (cpf) {
@@ -448,7 +453,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     finalize(() => {
                         this.cpfSpinner = false;
                     })
-                ).subscribe( 
+                ).subscribe(
                     res => {
                         if (res.validarCpfAtivado) {
                             const threeMonthsAgo = new Date();

@@ -310,4 +310,8 @@ export class ParametrosLocaisService {
     getEnableRequirementPermissionRetrieveLocation() {
         return this.parametrosLocais ? this.parametrosLocais.opcoes.enable_requirement_of_permission_to_retrieve_location : false;
     }
+
+    isBetPilotEnabled(): boolean {
+        return this.parametrosLocais ? this.parametrosLocais.opcoes.bet_pilot_enabled : false;
+    }
 }

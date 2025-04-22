@@ -170,8 +170,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.auth.getPosicaoFinanceira()
             .subscribe(
                 posicaoFinanceira => {
-                    this.saldo = posicaoFinanceira.saldo - posicaoFinanceira.saldoBloqueado;
-                    if (posicaoFinanceira.saldo == 0) {
+                    this.saldo = posicaoFinanceira.saldoLiberado;
+                    if (posicaoFinanceira.saldo <= 0) {
                         this.disableButton = true;
                     }
                 },
@@ -248,6 +248,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {

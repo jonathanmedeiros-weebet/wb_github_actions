@@ -37,10 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
 
     private loggedSubscription: Subscription;
-    private accountVerifiedSubscription: Subscription;
-
     private hasCustomerLoggedIn: boolean = false;
-    private accountVerified: boolean = false;
 
     constructor(
         private messageService: MessageService,
@@ -62,9 +59,8 @@ export class HomeComponent implements OnInit, OnDestroy{
         this.betby = this.paramsService.getOpcoes().betby;
 
         this.checkIfHasCustomerLoggedIn();
-        this.initAccountVerification();
 
-        if (this.hasCustomerLoggedIn && !this.accountVerified) {
+        if (this.hasCustomerLoggedIn) {
             this.betby = false;
         }
 
@@ -109,13 +105,6 @@ export class HomeComponent implements OnInit, OnDestroy{
         }
 
         this.loggedSubscription.unsubscribe();
-        this.accountVerifiedSubscription.unsubscribe();
-    }
-
-    private initAccountVerification() {
-        this.accountVerifiedSubscription = this.accountVerificationService
-            .accountVerified
-            .subscribe((accountVerified) => this.accountVerified = accountVerified);
     }
 
     private checkIfHasCustomerLoggedIn() {

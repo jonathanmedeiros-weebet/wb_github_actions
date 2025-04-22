@@ -106,7 +106,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.geolocationService.saveLocalStorageLocation();
+        // this.geolocationService.saveLocalStorageLocation();
 
         if(this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {
             this.modalRef = this.modalService.open(
@@ -174,25 +174,9 @@ export class AppComponent implements OnInit {
                 this.activityDetectService.getActivityGoalReached().subscribe(() => {
                     this.openModalTimeLimit();
                 });
-               
-                this.navigationHistoryService
-                    .verifyIfCurrentRouteUseAccountVerificationGuard()
-                    .then((useAccountVerificationGuard) => {
-                        localStorage.removeItem(ACCOUNT_VERIFIED)
 
-                        if(useAccountVerificationGuard) {
-                            this.accountVerificationService.getAccountVerificationDetail().toPromise();
-                        } else {
-                            this.accountVerificationService
-                                .getAccountVerificationDetail()
-                                .toPromise()
-                                .then(({terms_accepted: termsAccepted}) => {
-                                    if(!termsAccepted) {         
-                                        this.accountVerificationService.openModalTermsAccepd();
-                                    }
-                                });
-                        }
-                    })
+                localStorage.removeItem(ACCOUNT_VERIFIED)
+                this.accountVerificationService.getAccountVerificationDetail().toPromise();
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {

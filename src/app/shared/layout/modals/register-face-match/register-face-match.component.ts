@@ -76,6 +76,8 @@ export class RegisterFaceMatchComponent implements OnInit, AfterViewInit {
     this.legitimuzService.curCustomerIsVerified
       .pipe(skip(1))
       .subscribe(curCustomerIsVerified => {
+        if(curCustomerIsVerified == null) return;
+        
         this.verifiedIdentity = curCustomerIsVerified;
         if (this.verifiedIdentity) {
           this.faceMatchService.updadeFacematch({ document: this.user.cpf, register: true }).subscribe({
