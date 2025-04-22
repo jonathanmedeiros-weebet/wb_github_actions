@@ -186,12 +186,12 @@
     "boasorte.bet": "gulp boasorte.bet",
     "eliteesportes.vip": "gulp eliteesportes.vip",
     "joguefacil.bet": "gulp joguefacil.bet",
-    "sportvips.bet": "gulp sportvips.bet",
+    "sportvip.bet": "gulp sportvip.bet",
     "condutaesp.com": "gulp condutaesp.com",
     "betfortuna.com.br": "gulp betfortuna.com.br",
     "paraisobet.net": "gulp paraisobet.net",
     "betmania.casino": "gulp betmania.casino",
-    "zedocash.bet": "gulp zedocash.bet",
+    "sidjaisoekroe.io": "gulp sidjaisoekroe.io",
     "timedasorte.com": "gulp timedasorte.com",
     "bet1000.net.br": "gulp bet1000.net.br",
     "26sports.bet": "gulp 26sports.bet",
@@ -204,7 +204,8 @@
     "sortebet777.com": "gulp sortebet777.com",
     "3betco.com.br": "gulp 3betco.com.br",
     "apostacerta.bet": "gulp apostacerta.bet",
-    "brasavipcassino.net": "gulp brasavipcassino.net"
+    "brasavipcassino.net": "gulp brasavipcassino.net",
+    "betsplay.club": "gulp betsplay.club"
   },
   "private": true,
   "dependencies": {
