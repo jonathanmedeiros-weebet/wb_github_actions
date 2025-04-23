@@ -8,8 +8,8 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 import { MessageService } from '../../shared/services/utils/message.service';
 import { LayoutService } from '../../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { ClienteService, ParametrosLocaisService } from 'src/app/services';
+import { Subject, Subscription } from 'rxjs';
+import { AccountVerificationService, ClienteService, ParametrosLocaisService } from 'src/app/services';
 import { TranslateService } from '@ngx-translate/core';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
 import { LegitimuzFacialService } from 'src/app/shared/services/legitimuz-facial.service';
@@ -17,6 +17,8 @@ import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Usuario } from 'src/app/shared/models/usuario';
+import { VerificationTypes } from 'src/app/shared/enums';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 enum RecoveryStep {
     ONE_STEP = 1,
@@ -67,7 +69,10 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     modoCambistaHabilitado;
     loginMode = 'email';
     user: any;
-    
+    private phoneVerificationService: string = '';
+    private verifyPhoneOrEmailModal: NgbModalRef;
+    private twoFactorAuthVerifiedSubscription: Subscription;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -83,13 +88,18 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         private legitimuzFacialService: LegitimuzFacialService,
         private faceMatchService: FaceMatchService,
         private docCheckService: DocCheckService,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private accountVerificationService: AccountVerificationService
     ) {
         super();
     }
     ngOnDestroy(): void {
         this.unsub$.next();
         this.unsub$.complete();
+
+        if (this.enableTwoFactorPasswordRecovery && this.phoneVerificationService === 'twilio') {
+            this.twoFactorAuthVerifiedSubscription.unsubscribe();
+        }
     }
 
     get enableTwoFactorPasswordRecovery(): boolean {
@@ -113,6 +123,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
         this.currentLanguage = this.translate.currentLang;
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
         this.modoCambistaHabilitado = this.paramLocais.getOpcoes().modo_cambista;
+        this.phoneVerificationService = this.paramLocais.getOpcoes().phoneVerificationService;
         this.createForm();
         this.route
         .params
@@ -225,6 +236,15 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                     }
                 })
         }
+
+        if (this.enableTwoFactorPasswordRecovery && this.phoneVerificationService === 'twilio') {
+            this.twoFactorAuthVerifiedSubscription = this.clienteService.twoFactorAuthVerified$.subscribe(verified => {
+                if (verified) {
+                    this.verifyPhoneOrEmailModal.close();
+                    this.onSubmit();
+                }
+            });
+        }
     }
 
     createForm() {
@@ -239,6 +259,11 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     nextStep() {
         this.checkFormValidations(this.form);
         if (this.form.invalid) return;
+
+        if (this.enableTwoFactorPasswordRecovery && this.phoneVerificationService === 'twilio') {
+            this.openTwoFactorAuthModal();
+            return;
+        }
 
         if (
             (!this.enableTwoFactorPasswordRecovery && this.stepIsOne) ||
@@ -325,7 +350,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
     xtremepushHabilitado() {
         return Boolean(this.paramLocais.getOpcoes()?.xtremepush_habilitado);
     }
-    
+
     handleLogin() {
         const data = {
             username: this.user.email,
@@ -349,5 +374,15 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
                 },
                 error => this.handleError(error)
             );
+    }
+
+    private openTwoFactorAuthModal() {
+        this.verifyPhoneOrEmailModal = this.accountVerificationService.openModalPhoneOrEmailVerificationStep({
+            type: VerificationTypes.PHONE,
+            value: this.user.phone
+        });
+
+        this.verifyPhoneOrEmailModal.componentInstance.twoFactorAuth = true;
+        this.verifyPhoneOrEmailModal.componentInstance.customerId = this.user.id;
     }
 }
