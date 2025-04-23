@@ -362,7 +362,7 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     async solicitarDeposito() {
         if (this.paramsLocais.getEnableRequirementPermissionRetrieveLocation()) {
             await this.geolocationService.saveLocalStorageLocation();
-            
+
             if (!this.geolocationService.checkGeolocation()) {
                 this.handleError(this.translate.instant('geral.geolocationError'));
                 return;
@@ -460,9 +460,9 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
         }, 10000);
 
         this.pixModal.result.finally(() => {
-            this.novoPix(); 
+            this.novoPix();
         });
-        
+
     }
 
     copyInputMessage(inputElement) {
