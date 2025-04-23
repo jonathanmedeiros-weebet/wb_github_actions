@@ -6,7 +6,7 @@ import { ClienteService, MessageService, ParametrosLocaisService, UtilsService }
 import { Cidade } from 'src/app/shared/models/endereco/cidade';
 import { Estado } from 'src/app/shared/models/endereco/estado';
 import { BaseFormComponent } from '../../base-form/base-form.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Endereco } from 'src/app/shared/models/endereco/endereco';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MultifactorConfirmationModalComponent } from '../multifactor-confirmation-modal/multifactor-confirmation-modal.component';
@@ -114,6 +114,8 @@ export class ClientePerfilModalComponent extends BaseFormComponent implements On
                     this.legitimuzService.curCustomerIsVerified
                         .pipe(takeUntil(this.unsub$))
                         .subscribe(curCustomerIsVerified => {
+                            if(curCustomerIsVerified == null) return;
+                            
                             this.verifiedIdentity = curCustomerIsVerified;
                             this.cd.detectChanges();
                             if (this.verifiedIdentity) {

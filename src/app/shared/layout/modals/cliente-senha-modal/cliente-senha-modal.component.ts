@@ -144,6 +144,8 @@ export class ClienteSenhaModalComponent extends BaseFormComponent implements OnI
                 this.legitimuzService.curCustomerIsVerified
                     .pipe(takeUntil(this.unsub$))
                     .subscribe(curCustomerIsVerified => {
+                        if(curCustomerIsVerified == null) return;
+                        
                         this.verifiedIdentity = curCustomerIsVerified;
                         if (this.verifiedIdentity) {
                             this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, last_change_password: true }).subscribe({

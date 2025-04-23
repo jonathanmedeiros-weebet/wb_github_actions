@@ -60,7 +60,7 @@
 .odds {
     text-align: center;
     flex-grow: 1;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 8px 0;
     max-width: calc(100vw - 540px);
 }

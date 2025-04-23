@@ -15,7 +15,7 @@ import {
     ParametrosLocaisService
 } from '../../services';
 import { GeolocationService, Geolocation} from 'src/app/shared/services/geolocation.service';
-import * as clone from 'clone';
+import clone from 'clone';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 
@@ -200,6 +200,11 @@ export class DesafiosBilheteComponent extends BaseFormComponent implements OnIni
             this.abrirLogin();
         } else {
             if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.terms_accepted.getValue()) {
+                    const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                    if (!termsResult) return;
+                }
+                
                 if (!this.accountVerificationService.accountVerified.getValue()) {
                     this.accountVerificationService.openModalAccountVerificationAlert();
                     return;

@@ -19,7 +19,7 @@ import { ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalCom
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { BaseFormComponent } from '../../base-form/base-form.component';
-import * as moment from 'moment/moment';
+import moment from 'moment/moment';
 import { config } from '../../../../shared/config';
 import { TranslateService } from '@ngx-translate/core';
 import {RifaBilheteService} from '../../../services/rifa/rifa-bilhete.service';

@@ -11,7 +11,7 @@ import {
     MenuFooterService,
     SportIdService
 } from '../../../services';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     selector: 'app-generico-wrapper',

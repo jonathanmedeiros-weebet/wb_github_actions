@@ -14,7 +14,7 @@ import {
 } from 'src/app/services';
 import {ApostaEncerramentoModalComponent, ApostaModalComponent, ConfirmModalComponent} from 'src/app/shared/layout/modals';
 import {CasinoApiService} from 'src/app/shared/services/casino/casino-api.service';
-import * as moment from 'moment/moment';
+import moment from 'moment/moment';
 
 @Component({
   selector: 'app-aposta',

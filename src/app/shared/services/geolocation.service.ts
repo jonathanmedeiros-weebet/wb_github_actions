@@ -115,12 +115,12 @@ export class GeolocationService {
 
     async getReverseGeolocation(lat: number, lng: number): Promise<ReverseGeolocation> {
         try {
-            let latlng = {
-                latlng: `${lat},${lng}`
-            };
             const res: ReverseGeolocation = await this.http.post<ReverseGeolocation>(
                 `${this.central_url}/reverseGeolocation`,
-                latlng,
+                {
+                    lat: lat,
+                    lng: lng
+                },
                 this.header.getRequestOptions(true)
             ).toPromise();
 

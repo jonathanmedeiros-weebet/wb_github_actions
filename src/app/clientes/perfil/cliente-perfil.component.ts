@@ -8,7 +8,7 @@ import {Cidade} from '../../shared/models/endereco/cidade';
 import {UtilsService} from '../../shared/services/utils/utils.service';
 import {Endereco} from '../../shared/models/endereco/endereco';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { AuthService, ParametrosLocaisService, SidebarService } from 'src/app/services';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -136,6 +136,8 @@ export class ClientePerfilComponent extends BaseFormComponent implements OnInit,
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {

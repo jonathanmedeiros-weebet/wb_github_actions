@@ -79,6 +79,7 @@ iframe{
 
 .header-game-view {
     display: flex;
+    overflow: hidden;
     margin: 0 20px;
     justify-content: center;
     width: 100%;
@@ -374,7 +375,7 @@ iframe{
 
     .game-name span {
         margin: 0;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
     }
 
@@ -941,7 +942,7 @@ iframe{
 
 .modal-header{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     border: none;
     z-index: 9001 !important;
 }

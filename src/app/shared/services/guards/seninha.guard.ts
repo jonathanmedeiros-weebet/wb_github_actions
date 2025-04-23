@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 // Import our authentication service
 import { ParametrosLocaisService } from '../parametros-locais.service';
@@ -7,7 +7,7 @@ import { ParametrosLocaisService } from '../parametros-locais.service';
 @Injectable({
     providedIn: 'root'
 })
-export class SeninhaGuard implements CanActivate {
+export class SeninhaGuard  {
     constructor(
         private paramsService: ParametrosLocaisService,
         private router: Router

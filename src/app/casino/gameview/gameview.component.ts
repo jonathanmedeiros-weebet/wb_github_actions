@@ -30,7 +30,9 @@ import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/share
 })
 export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
+    @ViewChild('iframeElement', { static: false }) iframe: ElementRef<HTMLIFrameElement>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
+    htmlGame;
     gameUrl: SafeUrl = '';
     gameId: string = '';
     gameMode: string = '';
@@ -402,13 +404,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     async loadGame() {
         if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
-            // await this.geolocationService.saveLocalStorageLocation();
+            await this.geolocationService.saveLocalStorageLocation();
             
-            // if (!this.geolocationService.checkGeolocation()) {
-            //     this.handleError(this.translate.instant('geral.geolocationError'));
-            //     this.router.navigate(['/']);
-            //     return;
-            // }
+            if (!this.geolocationService.checkGeolocation()) {
+                this.handleError(this.translate.instant('geral.geolocationError'));
+                this.router.navigate(['/']);
+                return;
+            }
         }
         
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
@@ -445,7 +447,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameProviderName = response.gameFornecedorExibicao;
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
-                        this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        if(this.gameFornecedor !== 'pgsoft') {
+                            this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        } else {
+                            this.htmlGame = response.htmlGame;
+                        }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
                             this.gameName = response.gameName.split("- 9", 1) || "";
@@ -460,6 +466,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                     this.router.navigate(['/']);
                 });
+    }
+
+    onIframeLoad(iframe: HTMLIFrameElement) {
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        if (this.htmlGame) {
+            doc.open();
+            doc.write(this.htmlGame);
+            doc.close();
+        }
     }
 
     handleError(error: string) {
@@ -818,7 +833,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.auth.openRegisterV3Modal();
     }
 
-    openDeposit() {
+    async openDeposit() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerificationService.accountVerified.getValue()) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;

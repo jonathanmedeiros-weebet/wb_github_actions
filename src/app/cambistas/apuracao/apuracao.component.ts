@@ -7,7 +7,7 @@ import {UntypedFormBuilder} from '@angular/forms';
 import {SidebarService} from 'src/app/services';
 import {NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/min/locales';
 
 @Component({

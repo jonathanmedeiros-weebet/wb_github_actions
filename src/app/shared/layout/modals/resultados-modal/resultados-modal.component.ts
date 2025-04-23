@@ -9,7 +9,7 @@ import {BaseFormComponent} from '../../base-form/base-form.component';
 import {Router} from '@angular/router';
 import {Usuario} from '../../../models/usuario';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { Campeonato } from 'src/app/models';
 import {config} from '../../../config';
 

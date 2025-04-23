@@ -927,15 +927,6 @@ gulp.task('megasporte.com', function (done) {
     });
 });
 
-gulp.task('imperiopix.bet', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "imperiopix.bet",
-        banca: "IMPÉRIO PIX",
-        styles: "",
-    });
-});
-
 gulp.task('primoos.bet', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
@@ -1246,19 +1237,6 @@ gulp.task('lottomaster.bet', function (done) {
     });
 });
 
-gulp.task('jetbet.net.br', function (done) {
-    tasks(done, {
-        server: "front1.weebet.tech",
-        host: "jetbet.net.br",
-        banca: "JetBet: Apostas Esportivas Online | A gente junto dá jogo!",
-        dominioTemp: "jetbet.net.br",
-        styles: "",
-        google_tag_part_1: "<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P65H9KK8');</script><!-- End Google Tag Manager -->",
-        google_tag_part_2: "<!-- Google Tag Manager (noscript) --><noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-P65H9KK8'height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript><!-- End Google Tag Manager (noscript) -->",
-        xtremepush_sdk: "eevBAQ-IGn6GrAGzjOBRlWA7_q37u3Pa"
-    });
-});
-
 gulp.task('moneybets.net', function (done) {
     tasks(done, {
         server: "front5.weebet.tech",
@@ -1384,7 +1362,7 @@ gulp.task('brinksbet.com', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
         host: "brinksbet.com",
-        banca: "BRINKS BET",
+        banca: "RONDO CASSINO",
         styles: ""
     });
 });
@@ -1773,10 +1751,10 @@ gulp.task('joguefacil.bet', function (done) {
     });
 });
 
-gulp.task('sportvips.bet', function (done) {
+gulp.task('sportvip.bet', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
-        host: "sportvips.bet",
+        host: "sportvip.bet",
         banca: "SportVip",
         styles: ""
     });
@@ -1819,12 +1797,13 @@ gulp.task('betmania.casino', function (done) {
     });
 });
 
-gulp.task('zedocash.bet', function (done) {
+gulp.task('sidjaisoekroe.io', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
-        host: "zedocash.bet",
+        host: "sidjaisoekroe.io",
         banca: "ZÉ DO CASH",
-        styles: ""
+        styles: "",
+        scripts: "<script src='https://s3.crmseven.online/scripts/start.js'></script>"
     });
 });
 
@@ -1923,6 +1902,33 @@ gulp.task('3betco.com.br', function (done) {
         server: "front4.weebet.tech",
         host: "3betco.com.br",
         banca: "3BETCO",
+        styles: ""
+    });
+});
+
+gulp.task('apostacerta.bet', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "apostacerta.bet",
+        banca: "APOSTA CERTA",
+        styles: ""
+    });
+});
+
+gulp.task('brasavipcassino.net', function (done) {
+    tasks(done, {
+        server: "front5.weebet.tech",
+        host: "brasavipcassino.net",
+        banca: "BRASA VIP CASSINO",
+        styles: ""
+    });
+});
+
+gulp.task('betsplay.club', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "betsplay.club",
+        banca: "BETSPLAY",
         styles: ""
     });
 });

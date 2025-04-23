@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { ConfirmModalComponent } from '../../shared/layout/modals';
 import {MessageService, CartaoService, MenuFooterService} from './../../services';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     selector: 'app-cartao-solicitacoes-saque',

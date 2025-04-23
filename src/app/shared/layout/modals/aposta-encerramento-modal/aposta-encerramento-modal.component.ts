@@ -12,7 +12,7 @@ import {
     BilheteEsportivoService
 } from '../../../../services';
 import { config } from '../../../config';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ApostaEsportivaService } from 'src/app/shared/services/aposta-esportiva/aposta-esportiva.service';
 import { switchMap, takeUntil, delay, tap, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs';

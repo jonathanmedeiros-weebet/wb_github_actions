@@ -159,8 +159,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
                 })
                 break;
             default:
-                break;            
-        }  
+                break;
+        }
         if (!this.faceMatchEnabled) {
             this.faceMatchAccountDeletionValidated = true;
         }
@@ -186,6 +186,8 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             this.legitimuzService.curCustomerIsVerified
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     if (this.verifiedIdentity) {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, account_deletion: true }).subscribe({
@@ -453,7 +455,9 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
             this.clienteService.excluirConta(exclusionPeriod, motivoExclusao, sanitizedExclusionConfirmation, multifator).subscribe(
                 result => {
                     this.messageService.success(result.message);
-                    this.authService.logout();
+                    setTimeout(() => {
+                        this.authService.logout();
+                    }, 3000);
                 },
                 error => {
                     this.handleError(error);
@@ -586,7 +590,7 @@ export class ConfiguracoesComponent implements OnInit, OnDestroy, AfterViewInit 
                 return '4horas';
         }
     }
-    
+
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             if (this.faceMatchType == 'legitimuz') {

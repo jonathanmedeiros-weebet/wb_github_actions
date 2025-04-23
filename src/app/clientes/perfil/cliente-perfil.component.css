@@ -81,7 +81,7 @@ label {
 @media only screen and (min-width: 481px ) {
     .buttons {
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
         align-items: center;
     }
 }
@@ -91,7 +91,7 @@ label {
         flex: 1;
         margin: 0 !important;
     }
-    
+
     .buttons {
         gap: 20px;
         display: flex;

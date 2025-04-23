@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ParametrosLocaisService } from '../parametros-locais.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class HomeGuard implements CanActivate {
+export class HomeGuard  {
 
     pages = {
         esporte: 'esportes',

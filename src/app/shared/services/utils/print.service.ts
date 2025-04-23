@@ -5,7 +5,7 @@ import { HelperService } from './helper.service';
 import { ParametrosLocaisService } from './../parametros-locais.service';
 
 import { config } from './../../config';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import EscPosEncoder from 'node_modules/esc-pos-encoder/dist/esc-pos-encoder.esm.js';
 import { ImagensService } from './imagens.service';

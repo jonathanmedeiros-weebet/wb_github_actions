@@ -7,7 +7,6 @@ import {FutebolListagemComponent} from './listagem/futebol-listagem.component';
 import {FutebolJogoComponent} from './jogo/futebol-jogo.component';
 import {NgbActiveModal, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import {EsportesModule} from '../../esportes.module';
-import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {TranslateModule} from '@ngx-translate/core';
 import { HomeModule } from '../../../home/home.module';
@@ -19,7 +18,6 @@ import { HomeModule } from '../../../home/home.module';
         CarouselModule,
         NgbNavModule,
         EsportesModule,
-        Ng2SearchPipeModule,
         TranslateModule,
         HomeModule
     ],

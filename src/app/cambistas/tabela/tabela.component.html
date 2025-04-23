@@ -16,8 +16,13 @@
             <div class="pesquisa">
                 <div class="search-input">
                     <i class="fa fa-search"></i>
-                    <input type="text" [(ngModel)]="term" placeholder="{{'geral.pesquisar' | translate}}"
-                           class="form-control inverted-out input-search">
+                    <input 
+                        type="text" 
+                        [(ngModel)]="term"
+                        (input)="filtrarCampeonatos()"
+                        placeholder="{{'geral.pesquisar' | translate}}"
+                        class="form-control inverted-out input-search"
+                    />
                 </div>
             </div>
 
@@ -29,7 +34,7 @@
                         </label>
                         <ul>
                             <i></i>
-                            <li *ngFor="let campeonato of campeonatosImpressao | filter:term">
+                            <li *ngFor="let campeonato of campeonatosImpressao">
                                 <label>
                                     <input type="checkbox" [(ngModel)]="campeonato.isSelected"> {{campeonato.nome  }}
                                 </label>

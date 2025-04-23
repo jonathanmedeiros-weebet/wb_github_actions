@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {SharedModule} from '../shared/shared.module';
-import {EsportesRoutingModule} from './esportes-routing.module';
-import {EsportesFooterComponent} from './footer/esportes-footer.component';
-import {EsportesWrapperComponent} from './wrapper/esportes-wrapper.component';
-import {PreApostaEsportivaService} from '../services';
-import {NgxMaskModule} from 'ngx-mask';
+import { SharedModule } from '../shared/shared.module';
+import { EsportesRoutingModule } from './esportes-routing.module';
+import { EsportesFooterComponent } from './footer/esportes-footer.component';
+import { EsportesWrapperComponent } from './wrapper/esportes-wrapper.component';
+import { PreApostaEsportivaService } from '../services';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { DestaquesComponent } from './destaques/destaques.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
@@ -14,7 +14,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
         SharedModule,
         CarouselModule,
         EsportesRoutingModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
+        NgxMaskPipe
     ],
     declarations: [
         EsportesFooterComponent,
@@ -27,7 +28,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
         DestaquesComponent,
     ],
     providers: [
-        PreApostaEsportivaService
+        PreApostaEsportivaService,
+        provideNgxMask()
     ]
 })
 export class EsportesModule { }

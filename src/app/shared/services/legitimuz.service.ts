@@ -1,71 +1,50 @@
 import { Injectable } from "@angular/core";
-
 import { BehaviorSubject } from "rxjs";
-
-import { ClienteService } from "./clientes/cliente.service";
 import { ParametrosLocaisService } from "./parametros-locais.service";
 
 declare var Legitimuz: any;
+const API_LEGITIMUZ: string = "https://api.legitimuz.com";
 
 @Injectable({
     providedIn: 'root'
 })
 export class LegitimuzService {
 
-    private sdk;
-
-    private static API_LEGITIMUZ: String = "https://api.legitimuz.com";
-
+    private sdk: any;
     private options: any = {
-        host: LegitimuzService.API_LEGITIMUZ,
+        host: API_LEGITIMUZ,
         token: '',
         lang: 'pt',
         enableRedirect: false,
         autoOpenValidation: false,
         onlyLiveness: false,
-        onSuccess: (eventName) => console.log(eventName)
+        onSuccess: (eventName: string) => console.log(eventName)
     };
 
-    private curCustomerIsVerifiedSub = new BehaviorSubject<boolean>(null);
-    curCustomerIsVerified;
-    private faceIndexSub = new BehaviorSubject<boolean>(null);
-    faceIndex;
+    private curCustomerIsVerifiedSub: BehaviorSubject<boolean | null> = new BehaviorSubject(null);
+    public curCustomerIsVerified: any;
 
     constructor (
-        private clienteService: ClienteService,
         private paramsService: ParametrosLocaisService
     ) {
         this.options.token = this.paramsService.getOpcoes().legitimuz_token;
-
         this.curCustomerIsVerified = this.curCustomerIsVerifiedSub.asObservable();
-        this.faceIndex = this.faceIndexSub.asObservable();
-        if (JSON.parse(localStorage.getItem('user'))) {
-
-            const user = JSON.parse(localStorage.getItem('user'));
-
-            this.options.onSuccess = (eventName) => {
-                if (eventName === 'facematch') {
-                    setTimeout(() => {
-                        if (user.id) {
-                            this.clienteService.getCliente(user.id)
-                                .subscribe(customer => this.curCustomerIsVerifiedSub.next(customer.verifiedIdentity));
-                        } else {
-                            this.curCustomerIsVerifiedSub.next(false);
-                        }
-                    }, 1000);
-                }
-            };
-        } else {
-            this.options.onSuccess = (eventName) => {
-                if (eventName === 'facematch') {
-                    this.curCustomerIsVerifiedSub.next(true);
-                    this.closeModal();
-                }
+        this.options.onSuccess = (eventName) => {
+            if (eventName === 'facematch' && !Boolean(this.isVerified)) {
+                this.curCustomerIsVerifiedSub.next(true);
+                this.closeModal();
             }
         }
     }
 
+    get isVerified(): boolean | null {
+        return this.curCustomerIsVerifiedSub.getValue();
+    }
+
     init() {
+        if(this.isVerified != null) {
+            this.curCustomerIsVerifiedSub.next(null);
+        }
         this.sdk = Legitimuz(this.options);
     }
 
@@ -77,16 +56,7 @@ export class LegitimuzService {
         this.sdk.setLang(lang);
     }
 
-    toggleEnableRedirect(enable: boolean) {
-        this.options.enableRedirect = enable;
-    }
-
-    toggleAutoOpenValidation(enable: boolean) {
-        this.options.autoOpenValidation = enable;
-    }
-
     closeModal() {
         this.sdk.closeModal();
     }
-
 }

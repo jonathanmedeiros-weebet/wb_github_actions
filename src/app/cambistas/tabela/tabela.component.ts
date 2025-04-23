@@ -8,7 +8,7 @@ import {
     SportIdService
 } from 'src/app/services';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-tabela',
@@ -16,7 +16,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./tabela.component.css']
 })
 export class TabelaComponent implements OnInit {
-    campeonatosImpressao;
+    campeonatosImpressao = [];
+    campeonatosOriginal = [];
     dataCampeonatos;
     term = '';
     mobileScreen = false;
@@ -58,17 +59,33 @@ export class TabelaComponent implements OnInit {
 
         this.campeonatoService.getCampeonatos(queryParams).subscribe(
             campeonatos => {
-                campeonatos.map(campeonato => {
+                campeonatos.forEach(campeonato => {
                     campeonato.isSelected = false;
-                    return campeonato;
                 });
 
-                this.campeonatosImpressao = campeonatos;
+                this.campeonatosOriginal = [...campeonatos];
+                this.filtrarCampeonatos();
             },
             err => {
                 // console.log(err);
             }
         );
+    }
+
+    removerAcentos(texto: string): string {
+        return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    filtrarCampeonatos() {
+        if (!this.term) {
+            this.campeonatosImpressao = [...this.campeonatosOriginal];
+        } else {
+            const termoSemAcento = this.removerAcentos(this.term.toLowerCase());
+            this.campeonatosImpressao = this.campeonatosOriginal.filter(campeonato => {
+                const nomeSemAcento = this.removerAcentos(campeonato.nome.toLowerCase());
+                return nomeSemAcento.includes(termoSemAcento);
+            });
+        }
     }
 
     selecionarTodos(event: any) {

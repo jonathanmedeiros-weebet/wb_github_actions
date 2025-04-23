@@ -226,7 +226,7 @@
 .odds-coluna {
     padding: 0;
     display: flex;
-    align-self: start;
+    align-self: flex-start;
     flex-direction: column;
     justify-content: center;
     align-items: center;

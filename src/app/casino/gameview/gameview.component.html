@@ -51,9 +51,11 @@
                 <div class="game-frame" >
                     <ng-container *ngIf="mobileScreen">
                         <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+                        <iframe *ngIf="htmlGame != ''" #iframe [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)"></iframe>
                     </ng-container>
                     <ng-container *ngIf="!mobileScreen">
                         <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allow="fullscreen"></iframe>
+                        <iframe *ngIf="htmlGame != ''" #iframe [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)" allow="fullscreen"></iframe>
                     </ng-container>
                 </div>
             </div>
@@ -158,9 +160,11 @@
             <div *ngIf="isLoggedIn || gameMode != 'REAL'" class="game-frame in-game" [ngClass]="{ 'is-tablet': isTablet, desktopIsloggedIn: isLoggedIn } " >
                 <ng-container *ngIf="mobileScreen">
                     <iframe *ngIf="gameUrl!=''"  [src]="gameUrl"></iframe>
+                    <iframe *ngIf="htmlGame != ''" #iframe [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)"></iframe>
                 </ng-container>
                 <ng-container *ngIf="!mobileScreen">
                     <iframe *ngIf="gameUrl!=''"  [src]="gameUrl" allowfullscreen></iframe>
+                    <iframe *ngIf="htmlGame != ''" #iframe [srcdoc]="htmlGame" (load)="onIframeLoad(iframe)" allowfullscreen></iframe>
                 </ng-container>
             </div>
 
