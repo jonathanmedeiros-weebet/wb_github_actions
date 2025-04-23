@@ -6,7 +6,7 @@ import { MessageService } from '../../../shared/services/utils/message.service';
 import { DepositoPix, Rollover } from '../../../models';
 import { ParametrosLocaisService } from '../../../shared/services/parametros-locais.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, HelperService, GeolocationService } from 'src/app/services';
+import { AuthService, GeolocationService, HelperService } from 'src/app/services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ConfirmModalComponent } from '../../../shared/layout/modals';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -360,17 +360,18 @@ export class DepositoPixComponent extends BaseFormComponent implements OnInit {
     }
 
     async solicitarDeposito() {
-        const restrictionStateBet = this.paramsLocais.getRestrictionStateBet();
-
-        if (restrictionStateBet != 'Todos') {
+        if (this.paramsLocais.getEnableRequirementPermissionRetrieveLocation()) {
             await this.geolocationService.saveLocalStorageLocation();
 
             if (!this.geolocationService.checkGeolocation()) {
                 this.handleError(this.translate.instant('geral.geolocationError'));
-                this.router.navigate(['/']);
                 return;
             }
+        }
 
+        const restrictionStateBet = this.paramsLocais.getRestrictionStateBet();
+
+        if (restrictionStateBet != 'Todos') {
             let localeState = localStorage.getItem('locale_state');
 
             if (restrictionStateBet != localeState) {

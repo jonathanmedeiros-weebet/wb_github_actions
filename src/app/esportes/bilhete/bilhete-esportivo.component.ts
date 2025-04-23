@@ -628,9 +628,9 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         this.disabledSubmit();
 
         if (this.paramsService.getEnableRequirementPermissionRetrieveLocation() && !this.geolocationService.checkGeolocation()) {
-            // this.geolocationService.saveLocalStorageLocation();
-            // this.enableSubmit();
-            // return this.handleError(this.translate.instant('geral.geolocationError'));
+            this.geolocationService.saveLocalStorageLocation();
+            this.enableSubmit();
+            return this.handleError(this.translate.instant('geral.geolocationError'));
         }
 
         let values = await this.ajustarDadosParaEnvio();
