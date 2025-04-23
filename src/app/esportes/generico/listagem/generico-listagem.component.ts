@@ -10,7 +10,7 @@ import { ParametrosLocaisService, BilheteEsportivoService, HelperService, Layout
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/min/locales';
 
 import { BasqueteJogoComponent } from '../basquete-jogo/basquete-jogo.component';

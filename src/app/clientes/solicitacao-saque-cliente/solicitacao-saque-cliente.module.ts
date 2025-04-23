@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import {SolicitacaoSaqueClienteRoutingModule} from './solicitacao-saque-cliente-routing.module';
-import {SolicitacaoSaqueClienteComponent} from './solicitacao-saque-cliente.component';
-import {SharedModule} from '../../shared/shared.module';
-import {NgxCurrencyModule} from 'ngx-currency';
-import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { NgxMaskModule } from 'ngx-mask';
+import { SolicitacaoSaqueClienteRoutingModule } from './solicitacao-saque-cliente-routing.module';
+import { SolicitacaoSaqueClienteComponent } from './solicitacao-saque-cliente.component';
+import { SharedModule } from '../../shared/shared.module';
+import { NgxCurrencyDirective } from 'ngx-currency';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
@@ -15,10 +15,12 @@ import { NgxMaskModule } from 'ngx-mask';
         SharedModule,
         CommonModule,
         SolicitacaoSaqueClienteRoutingModule,
-        NgxCurrencyModule,
+        NgxCurrencyDirective,
         NgbModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
+        NgxMaskPipe
     ],
+    providers: [provideNgxMask()]
 })
 export class SolicitacaoSaqueClienteModule {
 }

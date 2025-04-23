@@ -8,7 +8,6 @@ import { BasqueteJogoComponent } from './basquete-jogo/basquete-jogo.component';
 import {NgbActiveModal, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { JogoService } from '../../services';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
@@ -17,7 +16,6 @@ import {TranslateModule} from '@ngx-translate/core';
         GenericoRoutingModule,
         NgbNavModule,
         NgbCarouselModule,
-        Ng2SearchPipeModule,
         TranslateModule
     ],
     declarations: [

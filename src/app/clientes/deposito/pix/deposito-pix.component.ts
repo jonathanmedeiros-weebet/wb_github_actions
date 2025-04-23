@@ -41,11 +41,11 @@ declare var WeebetMessage: any;
             <img [ngStyle]="{'width': '170px'}" *ngIf="selectedPaymentMethod === 'pixs'" src="{{ qrCodeBase64 }}"/>
         </div>
         <div class="qr-code" *ngIf="!qrCodeBase64">
-            <ngx-qrcode
+            <qr-code
                 [value]="qrCode"
                 cssClass="aclass"
                 errorCorrectionLevel="L">
-            </ngx-qrcode>
+            </qr-code>
         </div>
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 

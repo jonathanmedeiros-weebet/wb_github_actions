@@ -5,7 +5,7 @@ import {Observable, Subject} from 'rxjs';
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {CampeonatoService, MenuFooterService, MessageService, ParametrosLocaisService, SidebarService, SportIdService} from './../../../../services';
 import {Campeonato} from '../../../../models';
-import * as moment from 'moment';
+import moment from 'moment';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FutebolJogoComponent} from '../jogo/futebol-jogo.component';
 

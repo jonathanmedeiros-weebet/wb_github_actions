@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { StatsService, ParametrosLocaisService } from './../../services';
 import { Estatistica } from './../../models';
 import { config } from './../../shared/config';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ApostaEsportiva, ItemApostaEsportiva } from '../../models';
 
 @Component({

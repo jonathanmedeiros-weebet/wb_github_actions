@@ -5,7 +5,7 @@ import {CambistaService} from '../../shared/services/cambistas/cambista.service'
 import {MessageService} from '../../shared/services/utils/message.service';
 import {NgbActiveModal, NgbModal, NgbCalendar, NgbDate} from '@ng-bootstrap/ng-bootstrap';
 import {InformativoModalComponent } from '../../shared/layout/modals/informativo-modal/informativo-modal.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/min/locales';
 @Component({
   selector: 'app-movimentacao',

@@ -5,7 +5,7 @@ import {
     ParametrosLocaisService, PrintService,
     AuthService, UtilsService, MessageService
 } from '../../../../services';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ApostaEsportiva, ItemApostaEsportiva} from '../../../../models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompatilhamentoBilheteModal } from '../../modals';

@@ -7,7 +7,7 @@ import { Sorteio } from './../../models';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     selector: 'app-resultados-loterias',

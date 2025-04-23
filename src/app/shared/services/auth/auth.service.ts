@@ -9,7 +9,7 @@ import { ErrorService } from './../utils/error.service';
 import { ParametrosLocaisService } from './../parametros-locais.service';
 import { config } from './../../config';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { GeolocationService } from '../geolocation.service';
 import { Ga4Service, EventGa4Types } from '../ga4/ga4.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

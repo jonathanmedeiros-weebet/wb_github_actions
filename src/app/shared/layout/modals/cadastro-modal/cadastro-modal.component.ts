@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario';
 import { FormValidations } from 'src/app/shared/utils';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { config } from '../../../config';
 import { TranslateService } from '@ngx-translate/core';
 import { SocialAuthService } from '@abacritt/angularx-social-login';

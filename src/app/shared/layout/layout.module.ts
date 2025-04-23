@@ -72,15 +72,15 @@ import {
     ValidatePhoneModalComponent
 } from './modals';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { NgxMaskModule } from 'ngx-mask';
-import { NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import { MenuFooterComponent } from './menu-footer/menu-footer.component';
 import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esportivo.component';
 import { BilheteRifaComponent } from '../../rifas/bilhete/bilhete-rifa.component';
 import { SubmenuComponent } from './submenu/submenu.component';
 import { SidebarMenuComponent, SidebarNavComponent } from '../sidebar';
 
-import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { BannersComponent } from './banners/banners.component';
 import { ResultadosModalComponent } from './modals/resultados-modal/resultados-modal.component';
 import { CodeInputModule } from 'angular-code-input';
@@ -137,9 +137,10 @@ import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-mo
         GoogleSigninButtonModule,
 
         UtilsModule,
-        AngularSvgIconModule,
-        NgxMaskModule.forRoot(),
-        NgxCurrencyModule,
+        AngularSvgIconModule.forRoot(),
+        NgxMaskDirective,
+        NgxMaskPipe,
+        NgxCurrencyDirective,
         NgbModalModule,
         NgbAlertModule,
         NgbCarouselModule,
@@ -294,6 +295,7 @@ import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-mo
         IndiqueGanheService,
         CashbackService,
         FreeSpinService,
+        provideNgxMask(),
         {
             provide: RECAPTCHA_SETTINGS,
 

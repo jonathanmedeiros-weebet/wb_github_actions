@@ -11,7 +11,7 @@ import { JogosDestaqueComponent } from './widgets/jogos-destaque/jogos-destaque.
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BilheteComponent } from './bilhete/bilhete.component';
 import { CasinoModule } from '../casino/casino.module';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { RecommendedToYouComponent } from './widgets/recommended-to-you/recommended-to-you.component';
 
 @NgModule({
@@ -30,14 +30,16 @@ import { RecommendedToYouComponent } from './widgets/recommended-to-you/recommen
         NgbModule,
         HomeRoutingModule,
         CarouselModule,
-        NgxMaskModule,
+        NgxMaskDirective,
+        NgxMaskPipe
     ],
     exports: [
         JogosDestaqueComponent
     ],
     providers: [
         NgbActiveModal,
-        JogoService
+        JogoService,
+        provideNgxMask()
     ]
 })
 export class HomeModule {

@@ -16,7 +16,7 @@ import {
 } from '../../services';
 import {TipoAposta, Aposta, Sorteio} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import * as range from 'lodash.range';
+import range from 'lodash.range';
 import { random } from 'lodash';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';

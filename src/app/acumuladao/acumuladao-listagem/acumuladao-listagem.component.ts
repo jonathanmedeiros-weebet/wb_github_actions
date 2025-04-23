@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Acumuladao } from './../../models';
 import { AcumuladaoService, HeadersService, LayoutService, MessageService } from './../../services';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

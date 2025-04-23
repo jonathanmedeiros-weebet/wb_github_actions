@@ -5,18 +5,19 @@ import { SharedModule } from '../shared/shared.module';
 import { AcumuladaoListagemComponent } from './acumuladao-listagem/acumuladao-listagem.component';
 import { AcumuladaoFormComponent } from './acumuladao-form/acumuladao-form.component';
 import { AcumuladaoService } from '../services';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
     imports: [
         SharedModule,
         AcumuladaoRoutingModule,
-        NgxMaskModule.forRoot()
+        NgxMaskDirective,
+        NgxMaskPipe,
     ],
     declarations: [
         AcumuladaoListagemComponent,
         AcumuladaoFormComponent
     ],
-    providers: [AcumuladaoService]
+    providers: [AcumuladaoService, provideNgxMask()]
 })
 export class AcumuladaoModule { }

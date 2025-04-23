@@ -26,8 +26,8 @@ import {
 import {config} from '../../config';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import * as random from 'lodash.random';
-import * as moment from 'moment';
+import random from 'lodash.random';
+import moment from 'moment';
 import {BaseFormComponent} from '../base-form/base-form.component';
 
 @Component({
