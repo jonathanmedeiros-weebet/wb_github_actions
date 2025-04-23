@@ -97,6 +97,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         lowercaseLetter: false,
         specialChar: false,
     };
+    storagedBtag: string | null = null;
 
     fullRegistration = true;
     currentLocationPermission = null;
@@ -136,6 +137,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         let queryString = '';
+        this.storagedBtag = this.auth.getLocalstorageWithExpiry('btag');
         if (this.router.url.includes('/cadastro')) {
             const pages = {
                 esporte: 'esportes',
@@ -248,15 +250,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 }
 
-                if (params.btag) {
-                    localStorage.setItem('btag', params.btag);
-                } else {
-                    const storagedBtag = localStorage.getItem('btag');
-                    if (storagedBtag) {
-                        this.form.patchValue({ btag: storagedBtag });
-                    }
-                }
-
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {
@@ -292,6 +285,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 });
             });
 
+        if (this.storagedBtag) {
+            this.form.patchValue({ btag: this.storagedBtag });
+        }
+
         if (this.paramsService.getOpcoes().habilitar_login_google) {
             this.loginGoogleAtivo = true;
             this.socialAuth.authState
@@ -318,6 +315,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
@@ -425,7 +424,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             check_2: [''],
             googleId: [''],
             googleIdToken: [''],
-            btag: [this.route.snapshot.queryParams.btag],
+            btag: [this.storagedBtag],
             refId: [this.route.snapshot.queryParams.refId],
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
@@ -449,15 +448,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.form.addControl('termsAccepted', this.fb.control(null, [
                 Validators.requiredTrue,
             ]));
-
-            this.form.controls['nome'].clearValidators();
-            this.form.controls['nome'].updateValueAndValidity();
-
-            this.form.controls['nascimento'].clearValidators();
-            this.form.controls['nascimento'].updateValueAndValidity();
-
-            this.form.controls['senha_confirmacao'].clearValidators();
-            this.form.controls['senha_confirmacao'].updateValueAndValidity();
         }
     }
 

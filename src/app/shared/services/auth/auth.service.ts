@@ -46,13 +46,16 @@ export class AuthService {
         this.logado = this.logadoSource.asObservable();
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.cliente = this.clienteSource.asObservable();
-    } 
+    }
 
     verificaDadosLogin(data: any): Observable<any> {
         // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
+        const bettingShopCode = localStorage.getItem('bettingShopCode');
+
         data = {
             ...data,
-            ignorarValidacaoEmailObrigatoria: true
+            ignorarValidacaoEmailObrigatoria: true,
+            betting_shop_code: (bettingShopCode && this.enableTotemModule) ? bettingShopCode : null
         }
 
         return this.http.post<any>(`${this.authLokiUrl}/verify-login-data`, JSON.stringify(data), this.header.getRequestOptions())
@@ -143,10 +146,14 @@ export class AuthService {
 
     login(data: any): Observable<any> {
         // todo: remover após atualizar todos Clientes; parametro, ignorarValidacaoEmailObrigatoria, serve para não desativar a validacao de email do login no loki;
+        const bettingShopCode = localStorage.getItem('bettingShopCode');
+
         data = {
             ...data,
-            ignorarValidacaoEmailObrigatoria: true
+            ignorarValidacaoEmailObrigatoria: true,
+            betting_shop_code: (bettingShopCode && this.enableTotemModule) ? bettingShopCode : null
         }
+
         return this.http.post<any>(`${this.authLokiUrl}/login`, JSON.stringify(data), this.header.getRequestOptions())
             .pipe(
                 map(res => {
@@ -549,6 +556,25 @@ export class AuthService {
                 });
                 modalRef.componentInstance.hasRegisterBanner = false;
             });
-        
+
+    }
+
+    get enableTotemModule(): boolean {
+        return Boolean(this.paramsService.getOpcoes()?.enable_totem_module);
+    }
+
+    getLocalstorageWithExpiry(key) {
+        const itemStr = localStorage.getItem(key);
+        if (!itemStr) {
+            return null;
+        }
+        const item = JSON.parse(itemStr);
+        const now = new Date();
+
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        return item.value;
     }
 }

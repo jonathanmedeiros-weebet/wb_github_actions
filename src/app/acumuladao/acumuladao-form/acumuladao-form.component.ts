@@ -145,6 +145,11 @@ export class AcumuladaoFormComponent extends BaseFormComponent implements OnInit
             this.abrirLogin();
         } else {
             if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.terms_accepted.getValue()) {
+                    const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                    if (!termsResult) return;
+                }
+
                 if (!this.accountVerificationService.accountVerified.getValue()) {
                     this.accountVerificationService.openModalAccountVerificationAlert();
                     return;

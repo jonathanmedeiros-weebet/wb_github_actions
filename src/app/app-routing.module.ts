@@ -138,6 +138,10 @@ const appRoutes: Routes = [
                 path: 'cambistas',
                 canActivate: [AuthGuard, CambistaGuard],
                 loadChildren: () => import('./cambistas/cambistas.module').then(c => c.CambistasModule)
+            },
+            {
+                path: 'conectar-ponto-venda',
+                component: AppComponent
             }
         ]
     },

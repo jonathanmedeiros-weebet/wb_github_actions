@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import {
     AcumuladaoLayoutComponent,
@@ -20,17 +20,17 @@ import {
     RifaLayoutComponent,
     BetbyLayoutComponent
 } from './app-layouts';
-import {HeaderComponent} from './header/header.component';
-import {NavigationComponent} from './navigation/navigation.component';
-import {FooterComponent} from './footer/footer.component';
-import {ErrorMsgComponent} from './error-msg/error-msg.component';
-import {ExibirBilheteDesafioComponent} from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
-import {ExibirBilheteEsportivoComponent} from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
-import {ExibirBilheteLoteriaComponent} from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
-import {BilheteAcumuladaoComponent} from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
-import {BilheteCompartilhamentoComponent} from './bilhete-compartilhamento/bilhete-compartilhamento.component';
-import {SpinnerComponent} from './spinner/spinner.component';
-import {UtilsModule} from '../utils/utils.module';
+import { HeaderComponent } from './header/header.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { FooterComponent } from './footer/footer.component';
+import { ErrorMsgComponent } from './error-msg/error-msg.component';
+import { ExibirBilheteDesafioComponent } from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
+import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
+import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
+import { BilheteAcumuladaoComponent } from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
+import { BilheteCompartilhamentoComponent } from './bilhete-compartilhamento/bilhete-compartilhamento.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { UtilsModule } from '../utils/utils.module';
 import {
     AcumuladaoService,
     ApostaEsportivaService,
@@ -71,23 +71,23 @@ import {
     CanceledBonusConfirmComponent,
     ValidatePhoneModalComponent
 } from './modals';
-import {AngularSvgIconModule} from 'angular-svg-icon';
-import {NgxMaskModule} from 'ngx-mask';
-import {NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
-import {MenuFooterComponent} from './menu-footer/menu-footer.component';
-import {BilheteEsportivoComponent} from '../../esportes/bilhete/bilhete-esportivo.component';
-import {BilheteRifaComponent} from '../../rifas/bilhete/bilhete-rifa.component';
-import {SubmenuComponent} from './submenu/submenu.component';
-import {SidebarMenuComponent, SidebarNavComponent} from '../sidebar';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { NgxMaskModule } from 'ngx-mask';
+import { NgbAlertModule, NgbCarouselModule, NgbDropdownModule, NgbModalModule, NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { MenuFooterComponent } from './menu-footer/menu-footer.component';
+import { BilheteEsportivoComponent } from '../../esportes/bilhete/bilhete-esportivo.component';
+import { BilheteRifaComponent } from '../../rifas/bilhete/bilhete-rifa.component';
+import { SubmenuComponent } from './submenu/submenu.component';
+import { SidebarMenuComponent, SidebarNavComponent } from '../sidebar';
 
-import {NgxCurrencyModule} from 'ngx-currency';
-import {BannersComponent} from './banners/banners.component';
-import {ResultadosModalComponent} from './modals/resultados-modal/resultados-modal.component';
-import {CodeInputModule} from 'angular-code-input';
-import {NgHcaptchaModule} from 'ng-hcaptcha';
-import {TranslateModule} from '@ngx-translate/core';
-import {DesafiosBilheteComponent} from '../../desafios/desafios-bilhete/desafios-bilhete.component';
-import {ValidarEmailModalComponent} from './modals/validar-email-modal/validar-email-modal.component';
+import { NgxCurrencyModule } from 'ngx-currency';
+import { BannersComponent } from './banners/banners.component';
+import { ResultadosModalComponent } from './modals/resultados-modal/resultados-modal.component';
+import { CodeInputModule } from 'angular-code-input';
+import { NgHcaptchaModule } from 'ng-hcaptcha';
+import { TranslateModule } from '@ngx-translate/core';
+import { DesafiosBilheteComponent } from '../../desafios/desafios-bilhete/desafios-bilhete.component';
+import { ValidarEmailModalComponent } from './modals/validar-email-modal/validar-email-modal.component';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { InformativoModalComponent } from './modals/informativo-modal/informativo-modal.component';
 import { JogoService } from '../services/aposta-esportiva/jogo.service';
@@ -124,6 +124,9 @@ import { CardVerificationPendingComponent } from './header/parts/card-verificati
 import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
 import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
 import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.component';
+import { MigrationInformationModalComponent } from './modals/migration-information-modal/migration-information-modal.component';
+import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
+import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 
 @NgModule({
     imports: [
@@ -246,7 +249,10 @@ import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.c
         CardVerificationPendingComponent,
         AccountVerificationAlertComponent,
         BetSharingModalComponent,
-        TermsAcceptedComponent
+        TermsAcceptedComponent,
+        MigrationInformationModalComponent,
+        BettingShopConnectModalComponent,
+        BettingShopSwitchModalComponent
     ],
     exports: [
         MainLayoutComponent,

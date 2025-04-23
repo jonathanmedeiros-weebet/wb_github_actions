@@ -110,7 +110,7 @@
     </div>
 
     <div class="game-view"
-        *ngIf="isDesktop || isTablet"
+        *ngIf="isDesktop || isTablet || isHorizontalMobile"
         [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }"
     >
         <div class="header-game-view" [ngClass]="{ 'in-game': isLoggedIn || gameMode !== 'REAL', 'is-tablet': isTablet }">

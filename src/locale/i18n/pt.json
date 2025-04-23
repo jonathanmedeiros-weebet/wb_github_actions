@@ -295,7 +295,15 @@
         "medium": "Médio",
         "strong": "Forte",
         "kindLogin": "Tipo de login",
-        "errorMinorAge": "Menor de idade."
+        "errorMinorAge": "Menor de idade.",
+        "bettingShop": "Ponto de Venda",
+        "enterTheBettingShopCodeAndId": "Digite o código do ponto de venda para conectar",
+        "connectToBettingShop": "Conectar ao ponto de venda",
+        "bettingShopId": "ID",
+        "bettingShopCode": "Código",
+        "bettingShopSwitch": "Você já está conectado a um ponto de venda. Deseja continuar ou se conectar a um novo?",
+        "disconnect": "Desconectar",
+        "continue": "Continuar"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -438,7 +446,8 @@
         "digiteSuaSenha": "Digite sua senha",
         "minimumCharactersPassword": "A senha deve possuir no mínimo 8 caracteres",
         "mustContainOneUppercaseAndOneLowercaseLetter": "Deve conter uma letra maiúscula e uma minúscula",
-        "specialChar": "Deve conter um caractere especial (Ex.: @, !, $, #...)"
+        "specialChar": "Deve conter um caractere especial (Ex.: @, !, $, #...)",
+        "passwordMigration": "Um email foi enviado para a sua conta com um link para redefinição de senha, siga as instruções para redefinir sua senha."
     },
     "saques": {
         "enterAmountWithdrawal": "Informe o valor para saque",
