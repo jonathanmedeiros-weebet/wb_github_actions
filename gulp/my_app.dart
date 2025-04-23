@@ -13,6 +13,9 @@ class MyApp extends StatelessWidget {
       home: const HomePage(
         title: '[NOME_BANCA]',
         host: '[HOST]',
+        slug: '[SLUG]',
+        name: '[NOME_BANCA]',
+        centralUrl: '[CENTRAL_URL]',
         bgColor: 0xFF[SPLASH_COLOR],
       ),
       debugShowCheckedModeBanner: false,

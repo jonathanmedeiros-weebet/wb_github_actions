@@ -31,6 +31,8 @@ async function prepare(config) {
         gulp.src(['gulp/my_app.dart'])
             .pipe(replace('[HOST]', config.url))
             .pipe(replace('[NOME_BANCA]', config.nome))
+            .pipe(replace('[SLUG]', config.slug))
+            .pipe(replace('[CENTRAL_URL]', config.centralUrl))
             .pipe(replace('[SPLASH_COLOR]', config.splash_color.replace('#', '')))
             .pipe(gulp.dest('lib/'));
 
@@ -87,7 +89,8 @@ async function prepare(config) {
 gulp.task('prepare-build', function () {
     return prepare({
         app_id: process.env.APP_ID,
-        url: process.env.CLIENT_URL,
+        url: "https://app.weebet.tech",
+        centralUrl: process.env.CLIENT_CENTER_URL,
         nome: process.env.CLIENT_NAME,
         slug: process.env.APP_SLUG,
         splash_color: process.env.APP_SPLASH_COLOR,
@@ -95,57 +98,147 @@ gulp.task('prepare-build', function () {
     });
 });
 
-gulp.task('debug-build', function (done) {
+gulp.task('bet9.wee.bet', function (done) {
     return prepare({
-        app_id: "bet.wee.debug.app",
-        url: "http://192.168.0.87:4200",
-        nome: "DEBUG WEEBET",
-        slug: "weebet.local",
-        splash_color: "#000000",
-        pkg_folder: ('bet.wee.debug.app').split('.').join('/')
-    });
-});
-
-gulp.task('build-betnazebra', function (done) {
-    return prepare({
-        app_id: "br.com.betnazebra.app",
-        url: "https://betnazebra.com.br",
-        nome: "BetNaZebra",
-        slug: "betnazebra.com.br",
-        splash_color: "#000000",
-        pkg_folder: ('br.com.betnazebra.app').split('.').join('/')
-    });
-});
-
-gulp.task('build-a7bet.fun', function (done) {
-    return prepare({
-        app_id: "com.a7bet.app",
-        url: "https://a7bet.fun",
-        nome: "A7bet",
-        slug: "a7bet.fun",
-        splash_color: "#222d32",
-        pkg_folder: ('com.a7bet.app').split('.').join('/')
-    });
-});
-
-gulp.task('build-lite-alfa', function (done) {
-    return prepare({
-        app_id: "net.alfasports.app.lite",
-        url: "https://alfasports.net",
-        nome: "Alfa Sports Lite",
-        slug: "alfasports.net",
+        app_id: "bet.wee.bet9",
+        url: "https://app.weebet.tech",
+        nome: "APP BET9",
+        slug: "bet9.wee.bet",
+        centralUrl: 'https://central.bet9.wee.bet',
         splash_color: "#002458",
-        pkg_folder: ('net.alfasports.app.lite').split('.').join('/')
+        pkg_folder: ('bet.wee.bet9').split('.').join('/')
     });
 });
 
-gulp.task('build-appjetbet365.com', function (done) {
+gulp.task('bet2.wee.bet', function (done) {
     return prepare({
-        app_id: "com.appjetbet365.app",
-        url: "https://appjetbet365.com",
-        nome: "APP JETBET365",
-        slug: "appjetbet365.com",
+        app_id: "bet.wee.bet2",
+        url: "https://app.weebet.tech",
+        nome: "APP BET2",
+        slug: "bet2.wee.bet",
+        centralUrl: 'https://central.bet2.wee.bet',
         splash_color: "#002458",
-        pkg_folder: ('com.appjetbet365.app').split('.').join('/')
+        pkg_folder: ('bet.wee.bet2').split('.').join('/')
     });
 });
+
+gulp.task('ragnar.bet', function (done) {
+    return prepare({
+        app_id: "bet.ragnar",
+        url: "https://app.weebet.tech",
+        nome: "APP ragnar",
+        slug: "ragnar.bet",
+        centralUrl: 'https://central.ragnar.bet',
+        splash_color: "#002458",
+        pkg_folder: ('bet.ragnar').split('.').join('/')
+    });
+});
+
+gulp.task('betboladavez.wee.bet', function (done) {
+    return prepare({
+        app_id: "bet.wee.betboladavez",
+        url: "https://app.weebet.tech",
+        nome: "APP Betboladavez",
+        slug: "betboladavez.wee.bet",
+        centralUrl: 'https://central.betboladavez.online',
+        splash_color: "#002458",
+        pkg_folder: ('bet.wee.betboladavez').split('.').join('/')
+    });
+});
+
+gulp.task('redblue.bet', function (done) {
+    return prepare({
+        app_id: "bet.wee.redblue",
+        url: "https://app.weebet.tech",
+        nome: "Red Blue",
+        slug: "redblue.wee.bet",
+        centralUrl: 'https://central.redblue.bet',
+        splash_color: "#002458",
+        pkg_folder: ('bet.wee.redblue').split('.').join('/')
+    });
+});
+
+gulp.task('majovip.net', function (done) {
+    return prepare({
+        app_id: "net.majovip",
+        url: "https://app.weebet.tech",
+        nome: "Majo Vip",
+        slug: "majovip.net",
+        centralUrl: 'https://central.majovip.net',
+        splash_color: "#002458",
+        pkg_folder: ('net.majovip').split('.').join('/')
+    });
+});
+
+gulp.task('kwbet.net', function (done) {
+    return prepare({
+        app_id: "net.kwbet.app",
+        url: "https://app.weebet.tech",
+        nome: "KW Bet",
+        slug: "kwbet.net",
+        centralUrl: 'https://central.kwbet.net',
+        splash_color: "#000000",
+        pkg_folder: ('net.kwbet.app').split('.').join('/')
+    });
+});
+
+gulp.task('asortebets.com', function (done) {
+    return prepare({
+        app_id: "com.asortebets",
+        url: "https://app.weebet.tech",
+        nome: "A Sorte Bets",
+        slug: "asortebets.com",
+        centralUrl: 'https://central.asortebets.com',
+        splash_color: "#002458",
+        pkg_folder: ('com.asortebets').split('.').join('/')
+    });
+});
+
+gulp.task('arena-esportiva.com', function (done) {
+    return prepare({
+        app_id: "com.arenaesportiva",
+        url: "https://app.weebet.tech",
+        nome: "Arena Esportiva",
+        slug: "arena-esportiva.com",
+        centralUrl: 'https://central.arena-esportiva.com',
+        splash_color: "#002458",
+        pkg_folder: ('com.arenaesportiva').split('.').join('/')
+    });
+});
+
+gulp.task('boasorte.bet', function (done) {
+    return prepare({
+        app_id: "bet.boasorte",
+        url: "https://app.weebet.tech",
+        nome: "APP Boa Sorte",
+        slug: "boasorte.bet",
+        centralUrl: 'https://central.boasorte.bet',
+        splash_color: "#181818",
+        pkg_folder: ('bet.boasorte').split('.').join('/')
+    });
+});
+
+gulp.task('jrsports.io', function (done) {
+    return prepare({
+        app_id: "io.jrsports",
+        url: "https://app.weebet.tech",
+        nome: "APP JRSPORTS",
+        slug: "jrsports.io",
+        centralUrl: 'https://central.jrsports.io',
+        splash_color: "#181818",
+        pkg_folder: ('io.jrsports').split('.').join('/')
+    });
+});
+
+gulp.task('pointbet.wee.bet', function (done) {
+    return prepare({
+        app_id: "bet.wee.pointbet",
+        url: "https://app.weebet.tech",
+        nome: "APP POINTBET",
+        slug: "pointbet.wee.bet",
+        centralUrl: 'https://central.pointbet.wee.bet',
+        splash_color: "#181818",
+        pkg_folder: ('bet.wee.pointbet').split('.').join('/')
+    });
+});
+
