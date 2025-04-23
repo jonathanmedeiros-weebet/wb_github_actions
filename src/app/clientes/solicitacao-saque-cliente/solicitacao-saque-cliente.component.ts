@@ -121,7 +121,14 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.clienteService
         .allBankAccounts()
         .toPromise()
-        .then((allBanks) => this.bankAccounts = allBanks);
+        .then((allBanks) => {
+            if (allBanks) {
+                this.bankAccounts = allBanks
+                if(this.bankAccounts.length === 1) {
+                    this.form.get('bankAccount').setValue(this.bankAccounts[0].id);
+                }
+            };
+        });
 
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
 
