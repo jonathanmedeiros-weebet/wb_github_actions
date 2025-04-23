@@ -17,8 +17,10 @@ declare function BTRenderer(): void;
 })
 export class HomeComponent implements OnInit, OnDestroy{
     @ViewChildren('scrollGames') gamesScroll: QueryList<ElementRef>;
+    
     gamesPopulares = [];
     gamesPopularesAoVivo = [];
+    public gamesRecommended = [];
 
     isMobile = false;
     qtdItens = 0;
@@ -64,9 +66,7 @@ export class HomeComponent implements OnInit, OnDestroy{
             this.betby = false;
         }
 
-        this.widgetService.byPage('home').subscribe(response => {
-            this.widgets = response;
-        });
+        this.getWidgets();
 
         if (this.betby) {
             this.helper.injectBetbyScript(this.paramsService.getOpcoes().betby_script).then(() => {
@@ -110,7 +110,17 @@ export class HomeComponent implements OnInit, OnDestroy{
     private checkIfHasCustomerLoggedIn() {
         this.loggedSubscription = this.authService
             .logado
-            .subscribe((hasCustomerLoggedIn) => this.hasCustomerLoggedIn = hasCustomerLoggedIn);
+            .subscribe((hasCustomerLoggedIn) => {
+                this.hasCustomerLoggedIn = hasCustomerLoggedIn
+                this.widgets.filter(widget => widget.type == 'betpilot').forEach(widget => {
+                    if (hasCustomerLoggedIn) {
+                        this.getGamesRecommendations().then(() => {
+                            widget.items = this.gamesRecommended;
+                        });
+                    }
+                });
+                this.cd.detectChanges();
+            });
     }
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
@@ -153,5 +163,35 @@ export class HomeComponent implements OnInit, OnDestroy{
 
     getGameIds(items: Array<any>) {
         return items.map(i => i.item_id)
+    }
+
+    private getWidgets() {
+        this.widgetService.byPage('home').subscribe(async response => {
+            if (this.hasCustomerLoggedIn) {
+                response = await Promise.all(response.map(async widget => {
+                    if (widget.type == 'betpilot') {
+                        await this.getGamesRecommendations();
+                        widget.items = this.gamesRecommended
+                    }
+                    return widget
+                }));
+            }
+            this.widgets = response;
+        });
+    }
+
+    private async getGamesRecommendations() {
+        const userId = this.authService.getUser().id;
+    
+        try {
+            const res = await this.casinoApi.getCasinoRecommendations(userId).toPromise();
+    
+            if (res.success) {
+                return this.gamesRecommended = res.results ?? [];
+            }
+        } catch (error) {
+            console.error('Erro ao obter recomendações:', error);
+            return [];
+        }
     }
 }

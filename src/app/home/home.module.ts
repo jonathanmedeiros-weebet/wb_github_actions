@@ -12,6 +12,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BilheteComponent } from './bilhete/bilhete.component';
 import { CasinoModule } from '../casino/casino.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { RecommendedToYouComponent } from './widgets/recommended-to-you/recommended-to-you.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { NgxMaskModule } from 'ngx-mask';
         JogosAovivoComponent,
         JogosDestaqueComponent,
         BilheteComponent,
+        RecommendedToYouComponent
     ],
     imports: [
         CasinoModule,
