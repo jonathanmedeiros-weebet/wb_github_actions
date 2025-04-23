@@ -290,7 +290,15 @@
         "medium": "Medium",
         "strong": "Strong",
         "kindLogin": "Login with",
-        "errorMinorAge": "underage."
+        "errorMinorAge": "underage.",
+        "bettingShop": "Connect to the point of sale",
+        "enterTheBettingShopCodeAndId": "Enter the code of the point of sale to connect",
+        "connectToBettingShop":  "Connecting to the point of sale",
+        "bettingShopId": "ID",
+        "bettingShopCode": "code",
+        "bettingShopSwitch": "You are already connected to a point of sale. Would you like to continue or connect to a new one?",
+        "disconnect": "Disconnect",
+        "continue": "Continue"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -301,7 +309,8 @@
         "AccountType": "Account type",
         "CurrentAccount": "Current account",
         "SavingsAccount": "Savings account",
-        "optionAccountType":"Select account type"
+        "optionAccountType":"Select account type",
+        "AccountDigit": "Account digit"
     },
     "bet": {
         "sportsBetting": "Sports betting",
@@ -451,6 +460,7 @@
         "availableBalanceForWithdrawal": "Available balance for withdrawal",
         "safeWithdrawalAlert": "For security reasons, withdrawals will only be made to accounts belonging to the registered CPF.",
         "enterPixKey": "Select the type of PIX key",
+        "selectBankAccount": "Select the bank account",
         "minimumWithdrawal": "Minimum withdrawal",
         "dailyMaximum": "Daily maximum",
         "monthlyMaximum": "Monthly maximum",

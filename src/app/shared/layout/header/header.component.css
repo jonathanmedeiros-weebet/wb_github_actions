@@ -20,7 +20,7 @@
 
 .indique-ganhe-card-content:not(button) {
     font-weight: 600;
-    color: var(--header);
+    color: var(--foreground-highlight);
 }
 
 .indique-ganhe-card-content .btn-close {
@@ -30,7 +30,7 @@
 
 .btn-indique-ganhe-card {
     background-color: var(--header);
-    color: var(--highlight);
+    color: var(--foreground-header);
     height: 25px!important;
     margin-left: 10px;
     transition: width 0.3s, height 0.3s, font-size 0.3s;
@@ -391,6 +391,7 @@ body .change-theme {
 
 .deposit-shortcut a {
     padding: 0px 11px;
+    text-decoration: none;
 }
 
 .menu-perfil {

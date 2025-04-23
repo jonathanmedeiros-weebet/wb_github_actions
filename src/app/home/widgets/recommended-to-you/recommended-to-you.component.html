@@ -1,0 +1,38 @@
+<div class="bloco">
+    <app-wall-section
+        sectionId="betpilot"
+        [title]="title"
+        [icon]="icon"
+        [itemsQty]="games.length"
+        [seeAllRouterLink]="linkAll"
+        (onLeft)="scrollLeft('betpilot')"
+        (onRight)="scrollRight('betpilot')"
+    ></app-wall-section>
+
+    <div class="bloco__games-container">
+        <ng-container *ngIf="games.length; else elseWithoutGames">
+            <div 
+                class="bloco__game-list bloco__game-list--inline" 
+                #scrollGames 
+                id="betpilot-scroll" 
+                (scroll)="onScroll('betpilot')"
+            >
+                <app-wall-game-card
+                    *ngFor="let game of games"
+                    [game]="game"
+                    [blink]="linkAll"
+                    [isLoggedIn]="isLoggedIn"
+                    [isDemo]="isDemo"
+                    [isCliente]="isCliente"
+                    cardType="inline"
+                ></app-wall-game-card>
+            </div>
+        </ng-container>
+
+        <ng-template #elseWithoutGames>
+            <span class="bloco__empty-game-list">
+                {{ 'geral.nenhumJogoDisponivel' | translate }}
+            </span>
+        </ng-template>
+    </div>
+</div>

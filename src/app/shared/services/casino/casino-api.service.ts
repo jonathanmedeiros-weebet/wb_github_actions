@@ -196,7 +196,7 @@ export class CasinoApiService {
 
     getCasinoRecommendations(userId: string) {
         const queryParams = { userId };
-        const requestOptions = this.header.getRequestOptions(false, queryParams);
+        const requestOptions = this.header.getRequestOptions(true, queryParams);
 
         return this.http.get(`${this.central_url}/games/recommendedGames`, requestOptions).pipe(
             map((res: any) => res),

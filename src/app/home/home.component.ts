@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList,
 import { CasinoApiService } from 'src/app/shared/services/casino/casino-api.service';
 import { LayoutService } from '../shared/services/utils/layout.service';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
+import { Subject, Subscription } from 'rxjs';
+import { AccountVerificationService, AuthService, HelperService, MessageService, ParametrosLocaisService } from '../services';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { WidgetService } from '../shared/services/widget.service';
@@ -17,8 +17,10 @@ declare function BTRenderer(): void;
 })
 export class HomeComponent implements OnInit, OnDestroy{
     @ViewChildren('scrollGames') gamesScroll: QueryList<ElementRef>;
+    
     gamesPopulares = [];
     gamesPopularesAoVivo = [];
+    public gamesRecommended = [];
 
     isMobile = false;
     qtdItens = 0;
@@ -36,6 +38,9 @@ export class HomeComponent implements OnInit, OnDestroy{
     private bt: any;
     private langs = { pt: 'pt-br', en: 'en', es: 'es' };
 
+    private loggedSubscription: Subscription;
+    private hasCustomerLoggedIn: boolean = false;
+
     constructor(
         private messageService: MessageService,
         private helper: HelperService,
@@ -46,7 +51,8 @@ export class HomeComponent implements OnInit, OnDestroy{
         private translate: TranslateService,
         private authService: AuthService,
         private paramsService: ParametrosLocaisService,
-        private router: Router
+        private router: Router,
+        private accountVerificationService: AccountVerificationService
     ) { }
 
     ngOnInit(): void {
@@ -54,9 +60,13 @@ export class HomeComponent implements OnInit, OnDestroy{
 
         this.betby = this.paramsService.getOpcoes().betby;
 
-        this.widgetService.byPage('home').subscribe(response => {
-            this.widgets = response;
-        });
+        this.checkIfHasCustomerLoggedIn();
+
+        if (this.hasCustomerLoggedIn) {
+            this.betby = false;
+        }
+
+        this.getWidgets();
 
         if (this.betby) {
             this.helper.injectBetbyScript(this.paramsService.getOpcoes().betby_script).then(() => {
@@ -93,6 +103,24 @@ export class HomeComponent implements OnInit, OnDestroy{
         if (this.bt) {
             this.bt.kill();
         }
+
+        this.loggedSubscription.unsubscribe();
+    }
+
+    private checkIfHasCustomerLoggedIn() {
+        this.loggedSubscription = this.authService
+            .logado
+            .subscribe((hasCustomerLoggedIn) => {
+                this.hasCustomerLoggedIn = hasCustomerLoggedIn
+                this.widgets.filter(widget => widget.type == 'betpilot').forEach(widget => {
+                    if (hasCustomerLoggedIn) {
+                        this.getGamesRecommendations().then(() => {
+                            widget.items = this.gamesRecommended;
+                        });
+                    }
+                });
+                this.cd.detectChanges();
+            });
     }
 
     changeDisplayFeaturedMatches(hasFeaturedMatches: boolean) {
@@ -135,5 +163,35 @@ export class HomeComponent implements OnInit, OnDestroy{
 
     getGameIds(items: Array<any>) {
         return items.map(i => i.item_id)
+    }
+
+    private getWidgets() {
+        this.widgetService.byPage('home').subscribe(async response => {
+            if (this.hasCustomerLoggedIn) {
+                response = await Promise.all(response.map(async widget => {
+                    if (widget.type == 'betpilot') {
+                        await this.getGamesRecommendations();
+                        widget.items = this.gamesRecommended
+                    }
+                    return widget
+                }));
+            }
+            this.widgets = response;
+        });
+    }
+
+    private async getGamesRecommendations() {
+        const userId = this.authService.getUser().id;
+    
+        try {
+            const res = await this.casinoApi.getCasinoRecommendations(userId).toPromise();
+    
+            if (res.success) {
+                return this.gamesRecommended = res.results ?? [];
+            }
+        } catch (error) {
+            console.error('Erro ao obter recomendações:', error);
+            return [];
+        }
     }
 }

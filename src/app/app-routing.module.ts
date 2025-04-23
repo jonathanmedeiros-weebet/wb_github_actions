@@ -15,7 +15,6 @@ import { BetbyComponent } from './betby/betby.component';
 import {RifaGuard} from './shared/services/guards/rifa.guard';
 import { CompartilharBilheteComponent } from './cupom/compartilhar-bilhete/compartilhar-bilhete.component';
 import { RedirectBetGuardGuard } from './shared/services/guards/redirect-bet-guard.guard';
-import { RegisterFacematchGuard } from './shared/services/guards/register-facematch.guard';
 import { AccountVerificationGuard } from './shared/services/guards/account-verification.guard';
 
 const appRoutes: Routes = [
@@ -139,6 +138,10 @@ const appRoutes: Routes = [
                 path: 'cambistas',
                 canActivate: [AuthGuard, CambistaGuard],
                 loadChildren: () => import('./cambistas/cambistas.module').then(c => c.CambistasModule)
+            },
+            {
+                path: 'conectar-ponto-venda',
+                component: AppComponent
             }
         ]
     },

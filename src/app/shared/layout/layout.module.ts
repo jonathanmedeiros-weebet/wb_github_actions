@@ -123,6 +123,10 @@ import { VerifyEmailOrPhoneComponent } from './modals/verify-email-or-phone/veri
 import { CardVerificationPendingComponent } from './header/parts/card-verification-pending/card-verification-pending.component';
 import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
 import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
+import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.component';
+import { MigrationInformationModalComponent } from './modals/migration-information-modal/migration-information-modal.component';
+import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
+import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 
 @NgModule({
     imports: [
@@ -246,6 +250,10 @@ import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing
         CardVerificationPendingComponent,
         AccountVerificationAlertComponent,
         BetSharingModalComponent,
+        TermsAcceptedComponent,
+        MigrationInformationModalComponent,
+        BettingShopConnectModalComponent,
+        BettingShopSwitchModalComponent
     ],
     exports: [
         MainLayoutComponent,

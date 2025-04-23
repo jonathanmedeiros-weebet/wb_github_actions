@@ -384,6 +384,11 @@ export class BilheteEsportivoComponent extends BaseFormComponent implements OnIn
         } else {
 
             if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.terms_accepted.getValue()) {
+                    const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                    if (!termsResult) return;
+                }
+                
                 if (!this.accountVerificationService.accountVerified.getValue()) {
                     this.accountVerificationService.openModalAccountVerificationAlert();
                     return;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
@@ -13,7 +13,7 @@ import { FormValidations } from 'src/app/shared/utils';
     templateUrl: './personal-data.component.html',
     styleUrls: ['./personal-data.component.scss']
 })
-export class PersonalDataComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class PersonalDataComponent extends BaseFormComponent implements OnInit{
     @Output() personalData = new EventEmitter<any>;
     @Input() data: any;
 
@@ -106,10 +106,6 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
         if (this.data.cpf) {
             this.form.patchValue(this.data);
         };
-    }
-
-    onSubmit() {
-
     }
 
     createForm() {
@@ -219,10 +215,6 @@ export class PersonalDataComponent extends BaseFormComponent implements OnInit, 
 
     handleError(error: string) {
         this.errorMessage = error;
-    }
-
-    ngOnDestroy() {
-
     }
 
     onBeforeInput(e: InputEvent, inputName) {
