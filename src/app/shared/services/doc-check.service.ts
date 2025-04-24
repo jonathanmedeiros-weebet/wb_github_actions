@@ -21,7 +21,7 @@ export class DocCheckService {
 
   observer(hash, date) {
     const interval = setInterval(async () => {
-      const response = await this.httpClient.get(`https://api.exato.digital/doccheck/validation-identity/status?hash=${hash}&ex_doccheck_session_start_timestamp${date}`)
+      const response = await this.httpClient.get(`https://api.exato.digital/doccheck/validation-identity/status?hash=${hash}&ex_doccheck_session_start_timestamp=${date}`)
       .pipe(
         take(1),
         map((res: any) => {
@@ -38,7 +38,7 @@ export class DocCheckService {
   hmacHash(cpf, secret_key) {
     let hash = CryptoJS.HmacSHA256(cpf , secret_key);
     hash = hash.toString(CryptoJS.enc.Hex);
-    this.observer(hash, new Date());
+    this.observer(hash, new Date().toISOString());
     return hash;
   }
   
