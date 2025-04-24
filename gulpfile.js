@@ -1929,3 +1929,12 @@ gulp.task('betsplay.club', function (done) {
         styles: ""
     });
 });
+
+gulp.task('arretadobet.com', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "arretadobet.com",
+        banca: "ARRETADO BET",
+        styles: ""
+    });
+});
