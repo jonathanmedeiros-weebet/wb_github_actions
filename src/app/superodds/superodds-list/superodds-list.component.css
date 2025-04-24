@@ -143,6 +143,10 @@
     gap: 5px;
 }
 
+.categoria .superodds {
+    margin-bottom: 5px;
+}
+
 /* Large devices (desktops, 1025px and up) */
 @media only screen and (max-width: 1024px) {
     .scroll-button {

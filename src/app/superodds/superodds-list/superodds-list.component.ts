@@ -10,6 +10,7 @@ import {
     QueryList, AfterViewInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -46,7 +47,8 @@ export class SuperoddsListComponent implements OnInit, OnDestroy, AfterViewInit 
         private superoddService: SuperoddService,
         private messageService: MessageService,
         private sidebarService: SidebarService,
-        private layoutService: LayoutService
+        private layoutService: LayoutService,
+        private translateService: TranslateService,
     ) { }
 
     ngOnInit() {
@@ -147,6 +149,8 @@ export class SuperoddsListComponent implements OnInit, OnDestroy, AfterViewInit 
 
                 this.itensSelecionados[`${odd.id}`] = true;
                 modificado = true;
+            } else {
+                this.messageService.error(this.translateService.instant("bet.onlyOneEvent"))
             }
         }
 
