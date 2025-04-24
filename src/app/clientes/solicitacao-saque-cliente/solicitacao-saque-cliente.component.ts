@@ -1,5 +1,5 @@
 import { LegitimuzFacialService } from './../../shared/services/legitimuz-facial.service';
-import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2, AfterViewInit, ViewChildren, QueryList} from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ClienteService } from '../../shared/services/clientes/cliente.service';
@@ -128,11 +128,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             case 'docCheck':
                 this.docCheckToken = this.paramsLocais.getOpcoes().dockCheck_token;
                 this.faceMatchEnabled = Boolean(this.paramsLocais.getOpcoes().faceMatch && this.docCheckToken && this.faceMatchWithdraw);
-                console.log('iniciou dockcheck =>')
-                
                 this.docCheckService.iframeMessage$.subscribe(message => {
-                    console.log('iframeMessage => ', message)
-
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
                         this.faceMatchFirstWithdrawValidated = true;
