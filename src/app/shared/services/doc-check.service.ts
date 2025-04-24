@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 import { Subject } from 'rxjs';
-import { catchError, map, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 declare var exDocCheck: any;
 
@@ -19,33 +19,26 @@ export class DocCheckService {
   constructor(private httpClient: HttpClient) {
   }
 
-  observer(hash) {
-    console.log('iniciou observer')
-
+  observer(hash, date) {
     const interval = setInterval(async () => {
-    console.log('iniciou request')
-      
-      const response = await this.httpClient.get(`https://api.exato.digital/doccheck/validation-identity/status?hash=${hash}`)
+      const response = await this.httpClient.get(`https://api.exato.digital/doccheck/validation-identity/status?hash=${hash}&ex_doccheck_session_start_timestamp${date}`)
       .pipe(
         take(1),
-        map((res) => {
-          console.log(' observer', res)
+        map((res: any) => {
+          if (!Boolean(res.Status == 'EM_VALIDACAO' || res.Status == 'REQUER_VALIDACAO_MANUAL')) {
+            clearInterval(interval);
+          }
           this.iframeMessageSubject.next({StatusPostMessage: res});
           return res;
         })
       ).toPromise()
-
-    console.log('terminou request')
-    console.log('terminou request', response)
-
     }, 3000);
   }
 
   hmacHash(cpf, secret_key) {
     let hash = CryptoJS.HmacSHA256(cpf , secret_key);
     hash = hash.toString(CryptoJS.enc.Hex);
-
-    this.observer(hash)
+    this.observer(hash, new Date());
     return hash;
   }
   
@@ -53,8 +46,11 @@ export class DocCheckService {
     exDocCheck.init();
   }
 
+  closeModal() {
+    document.getElementById('ex-doccheck-close').click();
+  }
+
   private handleMessage(event: MessageEvent) {
-    console.log('handleMessage => ', event)
     if (event.origin !== 'https://doccheck.exato.digital') {
       return; 
     }

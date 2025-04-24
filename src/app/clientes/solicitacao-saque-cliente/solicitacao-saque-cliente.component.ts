@@ -1,5 +1,5 @@
 import { LegitimuzFacialService } from './../../shared/services/legitimuz-facial.service';
-import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2, AfterViewInit, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, ElementRef, Renderer2, AfterViewInit, ViewChildren, QueryList} from '@angular/core';
 import { BaseFormComponent } from '../../shared/layout/base-form/base-form.component';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ClienteService } from '../../shared/services/clientes/cliente.service';
@@ -33,7 +33,7 @@ declare global {
     templateUrl: './solicitacao-saque-cliente.component.html',
     styleUrls: ['./solicitacao-saque-cliente.component.css']
 })
-export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
     @ViewChildren('legitimuzLiveness') private legitimuzLiveness: QueryList<ElementRef>;
     @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
@@ -136,7 +136,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
                         this.faceMatchFirstWithdrawValidated = true;
-                        document.getElementById('ex-doccheck-close').click();
+                        this.docCheckService.closeModal();
                     }
                 })
                 break;
@@ -272,10 +272,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         }
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log('ngOnChanges => ', changes)
-    }
-
     ngAfterViewInit() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             if (this.faceMatchType == 'legitimuz') {
@@ -292,7 +288,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                 } else {
                     this.docCheck.changes
                     .subscribe(() => {
-                        console.log('changes')
                         this.docCheckService.init();
                     });
                 }
