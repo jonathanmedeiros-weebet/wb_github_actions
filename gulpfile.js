@@ -1938,3 +1938,12 @@ gulp.task('arretadobet.com', function (done) {
         styles: ""
     });
 });
+
+gulp.task('avante.bet', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "avante.bet",
+        banca: "AVANTE.BET",
+        styles: ""
+    });
+});
