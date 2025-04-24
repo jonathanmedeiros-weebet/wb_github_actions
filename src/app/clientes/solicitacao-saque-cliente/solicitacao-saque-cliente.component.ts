@@ -132,6 +132,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
                         this.faceMatchFirstWithdrawValidated = true;
+                        this.docCheckService.closeModal();
                     }
                 })
                 break;
