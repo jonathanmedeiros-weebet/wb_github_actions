@@ -27,7 +27,7 @@ export class ExibirBilheteCassinoComponent implements OnInit {
   ngOnInit(): void { }
 
   get gameImageUrl(): string {
-    return Boolean(this.aposta.gameImageExt) ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + this.aposta.gameID + this.aposta.gameImageExt : `https://cdn.wee.bet/img/casino/thumbnails/${this.aposta.fornecedor}/${this.aposta.gameID}.png`;
+    return Boolean(this.aposta.gameImageExt) ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + this.aposta.gameID + this.aposta.gameImageExt : `https://wb-assets.com/img/thumbnails/${this.aposta.fornecedor}/${this.aposta.gameID}.png`;
   }
 
   async copyToClipboard(codigo: string) {
