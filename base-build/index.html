@@ -139,7 +139,10 @@
     <meta name="description" content="[DESCRIPTION]">
 
     <script>
-        const isApp = () => location.search.includes('app');
+        const isApp = () => {
+            const params = new URLSearchParams(window.location.search);
+            return params.has('APP') && params.get('APP') === 'TRUE';
+        };
         const verifyAppForce = (appVersion = 'v3') => {
             return location.search.includes(`force=${appVersion}`);
         }
