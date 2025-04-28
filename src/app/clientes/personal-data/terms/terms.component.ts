@@ -7,9 +7,9 @@ import {config} from '../../../shared/config';
   styleUrls: ['./terms.component.css']
 })
 export class TermsComponent {
-    public termsAndConditionsLink: string[] = [`/${config.SLUG}/informacoes/termos-condicoes`];
-    public privacyPolicyLink: string[] = [`/${config.SLUG}/informacoes/politica-privacidade`];
-    public termsOfServiceLink: string[] = [`/${config.SLUG}/informacoes/termos-servico`];
+    public termsAndConditionsLink: string[] = [`/informacoes/termos-condicoes`];
+    public privacyPolicyLink: string[] = [`/informacoes/politica-privacidade`];
+    public termsOfServiceLink: string[] = [`/informacoes/termos-servico`];
     public showTermsAndConditions: boolean = true;
     public showPrivacyPolicy: boolean = true;
     public showTermsOfService: boolean = false;
