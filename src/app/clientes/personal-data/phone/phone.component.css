@@ -82,9 +82,3 @@
     border-radius: 2px;
     background: var(--background);
 }
-
-@media (max-width: 768px) {
-    .grid {
-        grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
-    }
-}
