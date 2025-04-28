@@ -4,7 +4,7 @@ import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../base-form/base-form.component';
-import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService } from './../../../services';
+import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService, PromocoesService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from '../../config';
 import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -125,6 +125,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     private currentRoute: string;
     showIndiqueGanhe: boolean = true;
     isIndiqueGanheVisible: boolean;
+    promoteActive: boolean = false;
 
     sportsIsActive = false;
     sportsLiveIsActive = false;
@@ -165,7 +166,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private clienteService: ClienteService,
         private layoutService: LayoutService,
         private headerService: HeadersService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private promotionService: PromocoesService
     ) {
         super();
     }
@@ -200,6 +202,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngOnInit() {
+        this.getInfoPromotion();
         this.currentRoute = this.router.url;
         this.sportsActive();
 
@@ -915,4 +918,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         return result;
     }
+
+    getInfoPromotion() {
+        this.promotionService.getPromocoes().subscribe((result) => {
+            if (result.length > 0) {
+                this.promoteActive = true;
+                return;
+            }
+        })
+    }
+    
 }
