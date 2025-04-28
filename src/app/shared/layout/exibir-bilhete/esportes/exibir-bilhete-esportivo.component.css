@@ -199,6 +199,9 @@ hr {
     border-top: 0;
     border-bottom: 1px solid var(--background);
 }
+.table tbody tr td {
+    color: var(--foreground-game);
+}
 .table thead {
     background-color: var(--game);
     border-radius: 10px 10px 0 0;
