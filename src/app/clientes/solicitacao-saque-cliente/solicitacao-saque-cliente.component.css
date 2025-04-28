@@ -385,7 +385,6 @@
 a {
     text-decoration: none;
     color: var(--highlight);
-    text-decoration: underline;
     cursor: pointer;
 }
 
