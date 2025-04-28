@@ -125,7 +125,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     private currentRoute: string;
     showIndiqueGanhe: boolean = true;
     isIndiqueGanheVisible: boolean;
-    promoteActive: boolean = false;
+    promotionActive: boolean = false;
 
     sportsIsActive = false;
     sportsLiveIsActive = false;
@@ -922,7 +922,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     getInfoPromotion() {
         this.promotionService.getPromocoes().subscribe((result) => {
             if (result.length > 0) {
-                this.promoteActive = true;
+                this.promotionActive = true;
                 return;
             }
         })
