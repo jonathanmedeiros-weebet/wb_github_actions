@@ -876,7 +876,7 @@
         },
         "address": {
             "title": "Endereço",
-            "description": "Verifique y edite la información correspondiente a su dirección si es necesario. Recuerde que todos los campos son obligatorios y deben ser completados para que se considere completo."
+            "description": "Confira e edite as informações referente ao seu endereço se necessário. Lembrando que todos os campos são obrigatórios e devem ser preenchidos para ser considerado completo."
         },
         "email": {
             "title": "E-mail",
