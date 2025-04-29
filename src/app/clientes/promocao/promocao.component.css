@@ -71,6 +71,12 @@
     padding: 15px 10px;
 }
 
+.table tbody tr td {
+    background-color: var(--bottom-bar);
+    color: var(--foreground-game);
+    border-bottom: 1px solid var(--game);
+}
+
 .table thead th:first-child {
     border-left: 10px solid var(--game);
 }

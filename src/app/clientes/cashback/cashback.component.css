@@ -71,6 +71,12 @@
     border-radius: 4px;
 }
 
+.table tbody tr td {
+    background-color: var(--bottom-bar);
+    color: var(--foreground-game);
+    border-bottom: 1px solid var(--game);
+}
+
 .table tbody div.progress-container.fill-one span:first-of-type {
     background-color: #1773EA;
 }
