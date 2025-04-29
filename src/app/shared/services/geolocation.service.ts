@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { config } from '../config';
 import { HttpClient } from '@angular/common/http';
 import { HeadersService } from './utils/headers.service';
-import { has } from 'lodash';
 
 export interface Geolocation {
     error: boolean;
