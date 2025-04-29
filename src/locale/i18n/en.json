@@ -165,7 +165,7 @@
         "certificoQueTenhoMais": "I certify that I am over 18 years of age and declare that I have read and agree to the",
         "deAcordoComOsTermos1": "By registering, you agree to our",
         "deAcordoComOsTermos2": "and our",
-        "termosDeUso": "terms of use",
+        "termosDeUso": "Terms of use",
         "cadastrar": "Register",
         "cadastroSucedido": "Registration completed successfully.",
         "informacoesPessoais": "Personal Information",
@@ -298,7 +298,10 @@
         "bettingShopCode": "code",
         "bettingShopSwitch": "You are already connected to a point of sale. Would you like to continue or connect to a new one?",
         "disconnect": "Disconnect",
-        "continue": "Continue"
+        "continue": "Continue",
+        "updateInformationPersonalData": "Update and manage your information, such as name, email and phone number, to ensure a personalized and secure experience in the system.",
+        "change_email": "Change email",
+        "change_phone": "Change phone"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
@@ -697,7 +700,9 @@
         "seeLess": "See less",
         "continue": "Continue",
         "next": "Next",
-        "previous": "Previous"
+        "previous": "Previous",
+        "save_change": "Save change",
+        "view": "View"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -857,5 +862,27 @@
         "encerrando": "Ending...",
         "apostaNaoPodeSerEncerrada": "The bet cannot be ended.",
         "apostaNaoPodeSerReutilizada": "The bet cannot be reused at the moment. Please try again later or check the status of the matches."
+    },
+    "personalData": {
+        "document": {
+            "title": "Document verification",
+            "description": "Overview of your personal data."
+        },
+        "address": {
+            "title": "Address",
+            "description": "Review and edit your address information if necessary. Please note that all fields are required and must be filled out to be considered complete."
+        },
+        "email": {
+            "title": "E-mail",
+            "description": "Review and update your email address if necessary. Please note that you must have access to the email in order to receive the verification code."
+        },
+        "phone": {
+            "title": "Phone",
+            "description": "Review and update your phone number if necessary. Please note that the phone number must be valid in order to receive the verification code."
+        },
+        "terms": {
+            "title": "Terms and Agreements",
+            "description": "Terms of Use, Privacy Policy, and Terms of Service."
+        }
     }
 }
