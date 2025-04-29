@@ -299,6 +299,7 @@
         "bettingShopSwitch": "You are already connected to a point of sale. Would you like to continue or connect to a new one?",
         "disconnect": "Disconnect",
         "continue": "Continue",
+        "jogoResponsavel": "Responsible Gaming",
         "updateInformationPersonalData": "Update and manage your information, such as name, email and phone number, to ensure a personalized and secure experience in the system.",
         "change_email": "Change email",
         "change_phone": "Change phone"
