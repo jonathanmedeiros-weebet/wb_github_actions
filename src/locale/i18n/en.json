@@ -298,7 +298,8 @@
         "bettingShopCode": "code",
         "bettingShopSwitch": "You are already connected to a point of sale. Would you like to continue or connect to a new one?",
         "disconnect": "Disconnect",
-        "continue": "Continue"
+        "continue": "Continue",
+        "jogoResponsavel": "Responsible Gaming"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
