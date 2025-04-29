@@ -2,10 +2,10 @@
     <div class="grid">
         <div class="field" [ngClass]="{ 'editing': isEditingEmail }">
             <div class="input">
-                <label>Email</label>
+                <label>{{ 'geral.email' | translate }}</label>
                 <input #emailInput [(ngModel)]="email" [readOnly]="!isEditingEmail" />
             </div>
-            <a class="btn-change-email" (click)="handleActiveEditingEmail()">{{ isEditingEmail ? 'Cancelar' : 'Alterar Email' }}</a>
+            <a class="btn-change-email" (click)="handleActiveEditingEmail()">{{ isEditingEmail ? ('geral.cancelar' | translate) : ('geral.change_email' | translate) }}</a>
         </div>
     </div>
     <div class="actions">
@@ -15,7 +15,7 @@
             *ngIf="verificationRequired"
             (click)="handleVerification()"
         >
-            Verificar agora
+            {{ 'face_match.checkNow' | translate }}
         </button>
         <button
             *ngIf="isEditingEmail"
@@ -23,7 +23,7 @@
             class="btn btn-custom2"
             (click)="handleUpdateEmail()"
         >
-            Salvar alteração
+            {{ 'botoes.save_change' | translate}}
         </button>
     </div>
 </div>
