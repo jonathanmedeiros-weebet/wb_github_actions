@@ -408,14 +408,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         );
     }
 
-    exibirCancelarSolicitacaoSaque(depositoSaque) {
-        if (this.pspsSaqueAutomatico.includes(depositoSaque.psp)) {
-            return false;
-        }
-
-        return !depositoSaque.data_pagamento && depositoSaque.status == 'PENDENTE';
-    }
-
     completarCadatro() {
         if (this.isMobile) {
             if (this.rotaCompletarCadastro === '/clientes/perfil-pix') {

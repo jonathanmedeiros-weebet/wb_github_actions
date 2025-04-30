@@ -16,7 +16,7 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-group group-valor">
                 <label>{{'saques.informeOValor' | translate}}</label>
-                <input type="text" prefix="R$ " mask="dot_separator.2" class="input-valor" formControlName="valor"
+                <input type="text" [currencyMask]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'center' }" class="input-valor" formControlName="valor"
                     placeholder="RS 0,00" [ngClass]="applyCssInputError('valor')">
                 <app-error-msg [control]="form.get('valor')"></app-error-msg>
             </div>

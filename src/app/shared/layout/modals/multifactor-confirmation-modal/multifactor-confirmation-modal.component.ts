@@ -11,9 +11,8 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./multifactor-confirmation-modal.component.css']
 })
 export class MultifactorConfirmationModalComponent extends BaseFormComponent implements OnInit {
-  @Input() senha: string;
+  @Input() tokenMultifator: string;
   public logo: string = config.LOGO;
-  private tokenMultifator: string;
   public submitting = false;
 
   constructor(
@@ -31,7 +30,6 @@ export class MultifactorConfirmationModalComponent extends BaseFormComponent imp
 
   ngOnInit() {
     this.createForm();
-    this.requestMultifator();
   }
 
   createForm() {
@@ -57,19 +55,6 @@ export class MultifactorConfirmationModalComponent extends BaseFormComponent imp
       }, error => {
         this.handleError(error);
       });
-  }
-
-  requestMultifator() {
-      this.submitting = true;
-      this.auth.requestEmailMultifator(this.senha)
-          .subscribe(res => {
-                  this.tokenMultifator = res.token;
-                  this.submitting = false;
-              },
-              error => {
-                  this.handleError(error);
-                  this.activeModal.dismiss('error');
-              });
   }
 
   cancelar() {

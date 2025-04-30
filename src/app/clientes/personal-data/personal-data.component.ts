@@ -20,8 +20,8 @@ export class PersonalDataComponent implements OnInit {
     public accordionItems: AccordionItem[] = [
         {
             key: "document",
-            title: "Verificação de documentos",
-            description: "Visão geral dos seus dados pessoais.",
+            title: "personalData.document.title",
+            description: "personalData.document.description",
             component: DocumentComponent,
             showVerificationStatus: false,
             isVerified: false,
@@ -29,8 +29,8 @@ export class PersonalDataComponent implements OnInit {
         },
         {
             key: "address",
-            title: "Endereço",
-            description: "Confira e edite as informações referente ao seu endereço se necessário. Lembrando que todos os campos são obrigatórios e devem ser preenchidos para ser considerado completo.",
+            title: "personalData.address.title",
+            description: "personalData.address.description",
             component: AddressComponent,
             showVerificationStatus: false,
             isVerified: false,
@@ -38,8 +38,8 @@ export class PersonalDataComponent implements OnInit {
         },
         {
             key: "email",
-            title: "E-mail",
-            description: "Confira e atualize o seu e-mail se necessário. Lembrando que o e-mail você deverá ter acesso para que seja enviado o código de verificação.",
+            title: "personalData.email.title",
+            description: "personalData.email.description",
             component: EmailComponent,
             showVerificationStatus: false,
             isVerified: false,
@@ -47,8 +47,8 @@ export class PersonalDataComponent implements OnInit {
         },
         {
             key: "phone",
-            title: "Telefone",
-            description: "Confira e atualize o seu número de telefone se necessário. Lembrando que o número de telefone deverá ser valido para que seja enviado o código de verificação.",
+            title: "personalData.phone.title",
+            description: "personalData.phone.description",
             component: PhoneComponent,
             showVerificationStatus: false,
             isVerified: false,
@@ -56,8 +56,8 @@ export class PersonalDataComponent implements OnInit {
         },
         {
             key: "terms",
-            title: "Termos e aceites",
-            description: "Termos de uso, política de privacidade e termos de serviço.",
+            title: "personalData.terms.title",
+            description: "personalData.terms.description",
             component: TermsComponent,
             showVerificationStatus: false,
             isVerified: false,

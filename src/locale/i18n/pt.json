@@ -165,7 +165,7 @@
         "certificoQueTenhoMais": "Certifico que tenho mais de 18 anos de idade e declaro que li e concordo com os",
         "deAcordoComOsTermos1": "Ao cadastrar-se você estará de acordo com os nossos",
         "deAcordoComOsTermos2": "e nossa",
-        "termosDeUso": "termos de uso",
+        "termosDeUso": "Termos de uso",
         "cadastrar": "Cadastrar",
         "cadastroSucedido": "Cadastro realizado com sucesso.",
         "informacoesPessoais": "Informações Pessoais",
@@ -303,7 +303,10 @@
         "bettingShopCode": "Código",
         "bettingShopSwitch": "Você já está conectado a um ponto de venda. Deseja continuar ou se conectar a um novo?",
         "disconnect": "Desconectar",
-        "continue": "Continuar"
+        "continue": "Continuar",
+        "updateInformationPersonalData": "Atualize e gerencie suas informações, como nome, e-mail e telefone, para garantir uma experiência personalizada e segura no sistema.",
+        "change_email": "Alterar e-mail",
+        "change_phone": "Alterar telefone"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -702,7 +705,9 @@
         "seeLess": "Ver menos",
         "continue": "Continuar",
         "next": "Próximo",
-        "previous": "Anterior"
+        "previous": "Anterior",
+        "save_change": "Salvar Alteração",
+        "view": "Visualizar"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -863,5 +868,27 @@
         "apostaNaoPodeSerEncerrada": "A aposta não pode ser encerrada.",
         "apostaNaoPodeSerReutilizada": "Não é possível reutilizar a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas.",
         "apostaNaoPodeSerRepetida": "Não é possível repetir a aposta no momento. Tente novamente mais tarde ou verifique o andamento das partidas."
+    },
+    "personalData": {
+        "document": {
+            "title": "Verificação de documentos",
+            "description": "Visão geral dos seus dados pessoais."
+        },
+        "address": {
+            "title": "Endereço",
+            "description": "Confira e edite as informações referente ao seu endereço se necessário. Lembrando que todos os campos são obrigatórios e devem ser preenchidos para ser considerado completo."
+        },
+        "email": {
+            "title": "E-mail",
+            "description": "Confira e atualize o seu e-mail se necessário. Lembrando que o e-mail você deverá ter acesso para que seja enviado o código de verificação."
+        },
+        "phone": {
+            "title": "Telefone",
+            "description": "Confira e atualize o seu número de telefone se necessário. Lembrando que o número de telefone deverá ser valido para que seja enviado o código de verificação."
+        },
+        "terms": {
+            "title": "Termos e aceites",
+            "description": "Termos de uso, política de privacidade e termos de serviço."
+        }
     }
 }

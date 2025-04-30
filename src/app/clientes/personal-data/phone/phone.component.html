@@ -2,7 +2,7 @@
     <div class="grid">
         <div class="field flag" [ngClass]="{ 'editing': isEditingPhone }">
             <div class="input">
-                <label>Código</label>
+                <label>{{ 'geral.codigo' | translate }}</label>
                 <div class="input-flag">
                     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_790_15254)">
@@ -26,10 +26,10 @@
         </div>
         <div class="field" [ngClass]="{ 'editing': isEditingPhone }">
             <div class="input">
-                <label>Telefone</label>
+                <label>{{ 'geral.telefone' | translate }}</label>
                 <input #emailInput [(ngModel)]="phone" [readOnly]="!isEditingPhone" mask="(00)00000-0000" />
             </div>
-            <a class="btn-change-phone" (click)="handleActiveEditingPhone()">{{ isEditingPhone ? 'Cancelar' : 'Alterar Telefone' }}</a>
+            <a class="btn-change-phone" (click)="handleActiveEditingPhone()">{{ isEditingPhone ? ('geral.cancelar' | translate) : ('geral.change_phone' | translate) }}</a>
         </div>
     </div>
     <div class="actions">
@@ -39,7 +39,7 @@
             *ngIf="verificationRequired"
             (click)="handleVerification()"
         >
-            Verificar agora
+        {{ 'face_match.checkNow' | translate }}
         </button>
         <button
             *ngIf="isEditingPhone"
@@ -47,7 +47,7 @@
             class="btn btn-custom2"
             (click)="handleUpdatePhone()"
         >
-            Salvar alteração
+        {{ 'botoes.save_change' | translate}}
         </button>
     </div>
 </div>
