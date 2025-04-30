@@ -54,9 +54,7 @@
     border-bottom: 1px solid var(--game);
 }
 
-.table td.no-border i{
-    background-color: transparent;
-    color: var(--highlight);
+.table td.no-border{
     border-left: 0 !important;
 }
 
