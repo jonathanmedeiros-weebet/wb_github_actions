@@ -1175,7 +1175,6 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
 
         if ((this.isDesktop || this.isHorizontalMobile) && this.gameMode === 'REAL') {
-            // if(disableHeaderForced) this.disableHeader();
             this.fixTabletAndDesktopScreen();
         }
     }
