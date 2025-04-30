@@ -1117,8 +1117,7 @@ gulp.task('apostenasorte.bet', function (done) {
         server: "front2.weebet.tech",
         host: "apostenasorte.bet",
         banca: "APOSTE NA SORTE",
-        styles: "",
-        scripts: "<script src='//code.jivosite.com/widget/Gd7zoqmar6' async></script>"
+        styles: ""
     });
 });
 
