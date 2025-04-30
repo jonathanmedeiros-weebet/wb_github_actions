@@ -155,8 +155,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
             this.checkIfMobileOrDesktopOrTablet();
             
             setTimeout(() => {
-                this.resolveGameScreen();
-                this.cd.detectChanges();
+                if (this.isLandscape() && (this.isMobile || this.isHorizontalMobile)) {
+                    this.resolveGameScreen(true);
+                    this.cd.detectChanges();
+                }
             }, 200)
         };
 
@@ -256,6 +258,10 @@ export class GameviewComponent implements OnInit, OnDestroy {
                 centered: true,
             }
         );
+    }
+
+    isLandscape(): boolean {
+        return window.innerWidth > window.innerHeight;
     }
 
     checkIfMobileOrDesktopOrTablet() {
@@ -522,6 +528,7 @@ export class GameviewComponent implements OnInit, OnDestroy {
         switch (this.gameFornecedor) {
             case 'tomhorn':
                 this.closeSessionGameTomHorn();
+                this.location.back();
                 break;
             case 'parlaybay':
                 this.router.navigate(['pb']);
@@ -1154,18 +1161,21 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
-    private resolveGameScreen() {
+    private resolveGameScreen(disableHeaderForced = false) {
         if (this.isMobile && this.gameMode === 'REAL') {
             this.disableHeader();
+            if(disableHeaderForced) this.disableHeader();
             this.fixMobileHeader();
         }
-        
+
         if (this.isTablet && this.gameMode === 'REAL') {
             this.disableHeader();
+            if(disableHeaderForced) this.disableHeader();
             this.fixTabletHeader();
         }
 
         if ((this.isDesktop || this.isHorizontalMobile) && this.gameMode === 'REAL') {
+            // if(disableHeaderForced) this.disableHeader();
             this.fixTabletAndDesktopScreen();
         }
     }
