@@ -3,23 +3,23 @@
         <li *ngIf="showTermsAndConditions">
             <span>
                 <i class="fa fa-file"></i>
-                Termos de uso
+                {{ 'geral.termosDeUso' | translate }}
             </span>
-            <a [routerLink]="termsAndConditionsLink" target="_blank">Visualizar <i class="fa fa-external-link"></i></a>
+            <a [routerLink]="termsAndConditionsLink" target="_blank">{{ 'botoes.view' | translate }} <i class="fa fa-external-link"></i></a>
         </li>
         <li *ngIf="showPrivacyPolicy">
             <span>
                 <i class="fa fa-file"></i>
-                Política de privacidade
+                {{ 'footer.politicaDePrivacidade' | translate}}
             </span>
-            <a [routerLink]="privacyPolicyLink" target="_blank">Visualizar <i class="fa fa-external-link"></i></a>
+            <a [routerLink]="privacyPolicyLink" target="_blank">{{ 'botoes.view' | translate }} <i class="fa fa-external-link"></i></a>
         </li>
         <li *ngIf="showTermsOfService">
             <span>
                 <i class="fa fa-file"></i>
-                Termos de serviço
+                {{ 'register.protectedByReCaptchaPart4' | translate }}
             </span>
-            <a [routerLink]="termsOfServiceLink" target="_blank">Visualizar <i class="fa fa-external-link"></i></a>
+            <a [routerLink]="termsOfServiceLink" target="_blank">{{ 'botoes.view' | translate }} <i class="fa fa-external-link"></i></a>
         </li>
     </ul>
 </div>
