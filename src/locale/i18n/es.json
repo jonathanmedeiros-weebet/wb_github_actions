@@ -162,7 +162,7 @@
         "certificoQueTenhoMais": "Certifico que tengo más de 18 años y declaro que he leído y acepto los",
         "deAcordoComOsTermos1": "Al registrarte, aceptas nuestros",
         "deAcordoComOsTermos2": "y nuestros",
-        "termosDeUso": "términos de uso",
+        "termosDeUso": "Términos de uso",
         "cadastrar": "Registrarse",
         "cadastroSucedido": "¡Registro completado con éxito.",
         "informacoesPessoais": "Información personal",
@@ -298,7 +298,10 @@
         "bettingShopCode": "Código",
         "bettingShopSwitch": "Ya estás conectado a un punto de venta. ¿Deseas continuar o conectarte a uno nuevo?",
         "disconnect": "Desconectar",
-        "continue": "Continuar"
+        "continue": "Continuar",
+        "updateInformationPersonalData": "Actualice y gestione su información, como nombre, correo electrónico y número de teléfono, para garantizar una experiencia personalizada y segura en el sistema.",
+        "change_email": "Cambiar correo electrónico",
+        "change_phone": "Cambiar teléfono"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",
@@ -696,7 +699,9 @@
         "seeLess": "Ver menos",
         "continue": "Continuar",
         "next": "Siguiente",
-        "previous": "Anterior"
+        "previous": "Anterior",
+        "save_change": "Guardar Cambio",
+        "view": "Ver"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar mi cuenta!",
@@ -856,5 +861,27 @@
         "encerrando": "Finalizando...",
         "apostaNaoPodeSerEncerrada": "La apuesta no se puede finalizar.",
         "apostaNaoPodeSerReutilizada": "No es posible reutilizar la apuesta en este momento. Inténtelo de nuevo más tarde o verifique el progreso de los partidos."
+    },
+    "personalData": {
+        "document": {
+            "title": "Verificación de documentos",
+            "description": "Resumen de sus datos personales."
+        },
+        "address": {
+            "title": "Dirección",
+            "description": "Review and edit your address information if necessary. Please note that all fields are required and must be filled out to be considered complete."
+        },
+        "email": {
+            "title": "Correo electrónico",
+            "description": "Verifique y actualice su correo electrónico si es necesario. Recuerde que deberá tener acceso al correo para que se le envíe el código de verificación."
+        },
+        "phone": {
+            "title": "Teléfono",
+            "description": "Verifique y actualice su número de teléfono si es necesario. Recuerde que el número de teléfono debe ser válido para que se le envíe el código de verificación."
+        },
+        "terms": {
+            "title": "Términos y condiciones",
+            "description": "Términos de uso, política de privacidad y términos de servicio."
+        }
     }
 }

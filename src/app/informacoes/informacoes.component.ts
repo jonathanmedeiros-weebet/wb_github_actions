@@ -10,7 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.vfs = pdfFonts.default;
 import htmlToPdfmake from 'html-to-pdfmake';
 
 @Component({

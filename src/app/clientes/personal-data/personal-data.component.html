@@ -1,7 +1,7 @@
 <div id="personal-data-page" [ngStyle]="{'height': currentHeight + 'px'}">
     <div class="page-title">
         <h1>{{ 'geral.dadosPessoais' | translate }}</h1>
-        <p>Atualize e gerencie suas informações, como nome, e-mail e telefone, para garantir uma experiência personalizada e segura no sistema.</p>
+        <p>{{ 'geral.updateInformationPersonalData' | translate }}</p>
     </div>
 
     <div class="wb-accordion">
@@ -9,7 +9,7 @@
             <div class="wb-accordion-title" (click)="toggleVisibilityItem(item)">
                 <div class="title">
                     <h2>
-                        {{ item.title }}
+                        {{ item.title | translate }}
                         <span
                             class="wb-badge"
                             [ngClass]="{ 'verified': item.isVerified }"
@@ -19,7 +19,7 @@
                             <i class="fa" [ngClass]="{ 'fa-check': item.isVerified, 'fa-times': !item.isVerified }"></i>
                         </span>
                     </h2>
-                    <p>{{ item.description }}</p>
+                    <p>{{ item.description | translate}}</p>
                 </div>
                 <i class="fa" [ngClass]="{ 'fa-chevron-up': item.isVisible, 'fa-chevron-down': !item.isVisible }"></i>
             </div>

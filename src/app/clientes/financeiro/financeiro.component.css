@@ -42,6 +42,12 @@
     border-bottom: 1px solid var(--game);
 }
 
+.table tbody tr td {
+    background-color: var(--bottom-bar);
+    color: var(--foreground-game);
+    border-bottom: 1px solid var(--game);
+}
+
 .table td.no-border{
     border-left: 0 !important;
 }
