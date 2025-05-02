@@ -1946,3 +1946,12 @@ gulp.task('avante.bet', function (done) {
         styles: ""
     });
 });
+
+gulp.task('decolabet.com', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "decolabet.com",
+        banca: "DECOLA BET",
+        styles: ""
+    });
+});
