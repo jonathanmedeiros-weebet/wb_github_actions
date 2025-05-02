@@ -27,7 +27,7 @@ export class WallSectionComponent {
   }
 
   get showSeeAllButton(): boolean {
-    return this.itemsQty > 5
+    return this.itemsQty > 7
   }
 
   public handleLeft() {
