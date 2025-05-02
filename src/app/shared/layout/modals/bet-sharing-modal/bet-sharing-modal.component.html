@@ -82,7 +82,7 @@
                                 </p>
                             </div>
                         </td>
-                        <td class="item border-right">
+                        <td class="item border-right" id="td-result">
                             <div style="display: flex; justify-content: center;">
                                 <p class="jogo-resultado" style="float:right" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO <br />
@@ -115,8 +115,8 @@
                         <p class="campeonato info-cupom">
                             <i [ngClass]="getIconBySport(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                         </p>
-                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-height: 2em; margin-left: 18px">
-                            <div>
+                        <div class="teams-container">
+                            <div id="teams-names">
                                 <p class="nome"
                                     style="font-weight: bolder;">
                                     {{item.time_a_nome}}
@@ -124,7 +124,7 @@
                                     {{item.time_b_nome}}
                                 </p>
                             </div>
-                            <div>
+                            <div id="game-status">
                                 <p class="jogo-resultado" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO
                                     <span [ngClass]="getBetResultClasses(item)">

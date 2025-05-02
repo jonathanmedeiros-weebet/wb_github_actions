@@ -79,6 +79,17 @@ img{
     max-height: 90px;
     max-width: 150px;
 }
+.teams-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-height: 2em;
+    margin-left: 18px;
+}
+#td-result {
+    vertical-align: middle;
+}
 .ganhou{
     color: #0C9F19;
     text-transform: uppercase;
@@ -258,6 +269,12 @@ hr {
     border-bottom: 2px dotted var(--bottom-bar);
 }
  @media only screen and (max-width: 532px) {
+    .teams-container {
+        width: auto;
+    }
+    #game-status {
+        margin-right: 0px !important;
+    }
     #buttons-container {
         display: flex;
         flex-direction: column;
@@ -292,6 +309,15 @@ hr {
     }
  }
  @media only screen and (max-width: 1024px) {
+    #teams-names, #game-status {
+        display: flex;
+        flex: 1;
+    }
+    #game-status {
+        display: flex;
+        justify-content: end;
+        margin-right: 18px;
+    }
     .jogo-resultado {
         margin: 0 !important;
         padding: 0 !important;
