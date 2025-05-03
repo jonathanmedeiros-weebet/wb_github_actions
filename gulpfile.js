@@ -983,15 +983,6 @@ gulp.task('81br.net', function (done) {
     });
 });
 
-gulp.task('alfasports.online', function (done) {
-    tasks(done, {
-        server: "front3.weebet.tech",
-        host: "alfasports.online",
-        banca: "ALFA SPORTS",
-        styles: "",
-    });
-});
-
 gulp.task('novabet.site', function (done) {
     tasks(done, {
         server: "front1.weebet.tech",
