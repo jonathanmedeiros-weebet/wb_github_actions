@@ -205,8 +205,9 @@
     "apostacerta.bet": "gulp apostacerta.bet",
     "brasavipcassino.net": "gulp brasavipcassino.net",
     "betsplay.club": "gulp betsplay.club",
-    "arretadobet.com": "arretadobet.com",
-    "avante.bet": "avante.bet"
+    "arretadobet.com": "gulp arretadobet.com",
+    "avante.bet": "gulp avante.bet",
+    "decolabet.com": "gulp decolabet.com"
   },
   "private": true,
   "dependencies": {

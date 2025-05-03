@@ -1108,8 +1108,7 @@ gulp.task('apostenasorte.bet', function (done) {
         server: "front2.weebet.tech",
         host: "apostenasorte.bet",
         banca: "APOSTE NA SORTE",
-        styles: "",
-        scripts: "<script src='//code.jivosite.com/widget/Gd7zoqmar6' async></script>"
+        styles: ""
     });
 });
 
@@ -1935,6 +1934,15 @@ gulp.task('avante.bet', function (done) {
         server: "front2.weebet.tech",
         host: "avante.bet",
         banca: "AVANTE.BET",
+        styles: ""
+    });
+});
+
+gulp.task('decolabet.com', function (done) {
+    tasks(done, {
+        server: "front4.weebet.tech",
+        host: "decolabet.com",
+        banca: "DECOLA BET",
         styles: ""
     });
 });
