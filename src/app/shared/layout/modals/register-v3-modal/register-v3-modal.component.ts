@@ -67,6 +67,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public cpfSpinner = false;
     private previousUrl: string;
     public storagedBtag: string | null = null;
+    private validateAccount: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -116,6 +117,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.countryCodes = this.countriesService.getDialcodes();
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.storagedBtag = this.auth.getLocalstorageWithExpiry('btag');
+        this.paramsService.getOpcoes().validacao_email_obrigatoria || this.paramsService.getOpcoes().mandatoryPhoneValidation
+                        ? this.validateAccount = true
+                        : this.validateAccount = false;
 
         this.createForm();
 

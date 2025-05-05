@@ -233,6 +233,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="alert-container" *ngIf="validateAccount && form.get('email').value && form.get('telefone').value">
+                    <div class="section-alert">
+                        <span class="material-symbols-outlined">
+                            info
+                        </span>
+                        <p>Como forma de validação, enviaremos um código de segurança para o seu e-mail e telefone cadastrados.</p>
+                    </div>
+                </div>
                 <div class="contents-afiliado">
                     <div class="section-header" (click)="showAfiliateSection = !showAfiliateSection">
                         <i class="fa {{showAfiliateSection ? 'fa-chevron-down' : 'fa-chevron-right' }}" ></i>
