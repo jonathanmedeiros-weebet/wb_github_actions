@@ -1155,7 +1155,7 @@ gulp.task('betinvestidor.com', function (done) {
         banca: "BET INVESTIDOR",
         styles: "",
     });
-}); 
+});
 
 gulp.task('pixcassino999.com', function (done) {
     tasks(done, {
@@ -1943,6 +1943,15 @@ gulp.task('decolabet.com', function (done) {
         server: "front4.weebet.tech",
         host: "decolabet.com",
         banca: "DECOLA BET",
+        styles: ""
+    });
+});
+
+gulp.task('betvem.io', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "betvem.io",
+        banca: "BET VEM",
         styles: ""
     });
 });

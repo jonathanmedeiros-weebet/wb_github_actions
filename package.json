@@ -207,7 +207,8 @@
     "betsplay.club": "gulp betsplay.club",
     "arretadobet.com": "gulp arretadobet.com",
     "avante.bet": "gulp avante.bet",
-    "decolabet.com": "gulp decolabet.com"
+    "decolabet.com": "gulp decolabet.com",
+    "betvem.io": "gulp betvem.io"
   },
   "private": true,
   "dependencies": {
