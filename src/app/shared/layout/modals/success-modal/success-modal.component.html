@@ -1,0 +1,20 @@
+<div class="success-modal">
+    <div class="success-modal__header">
+        <span class="success-modal__icon">
+            <icon-check-circle color="var(--highlight)" [size]="50" />
+        </span>
+    </div>
+    <div class="success-modal__body">
+        <span class="success-modal__title">{{ title }}</span>
+        <span class="success-modal__description">{{ description }}</span>
+    </div>
+    <div class="success-modal__footer">
+        <button
+            *ngIf="hasButton"
+            class="success-modal__button"
+            (click)="handleClick()"
+        >
+            {{ buttonText }}
+        </button>
+    </div>
+</div>
