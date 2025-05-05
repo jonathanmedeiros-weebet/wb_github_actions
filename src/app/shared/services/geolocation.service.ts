@@ -17,6 +17,15 @@ export interface ReverseGeolocation {
     country: string;
 }
 
+interface LocationData {
+    lat: number;
+    lng: number;
+    ibge_code: string;
+    locale_city: string;
+    locale_state: string;
+    country: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -62,42 +71,65 @@ export class GeolocationService {
 
     constructor(private http: HttpClient, private header: HeadersService) { }
 
+    private isLocationCompleteAndUnchanged(stored: LocationData, current: Geolocation): boolean {
+        return (
+            stored.lat === current.lat &&
+            stored.lng === current.lng &&
+            Boolean(stored.ibge_code) &&
+            Boolean(stored.locale_city) &&
+            Boolean(stored.locale_state) &&
+            Boolean(stored.country)
+        );
+    }
+
     async saveLocalStorageLocation() {
+        if (this.requestOnGoing) {
+            return false;
+        }
+        this.requestOnGoing = true;
+        
         try {
-            if (this.requestOnGoing) {
-                return false; // Avoid multiple requests
-            }
-
-            this.requestOnGoing = true;
             let currentPosition = await this.getCurrentPosition() as Geolocation;
-
-
+            
             if (currentPosition.error) {
                 throw new Error();
             }
 
-            const storedLat = localStorage.getItem('lat');
-            const storedLng = localStorage.getItem('lng');
+            const [lat, lng, ibgeCode, city, state, country] = 
+                ['lat','lng','ibge_code','locale_city','locale_state','country']
+                .map(key => localStorage.getItem(key));
 
-            if (storedLat == String(currentPosition.lat) && storedLng == String(currentPosition.lng)) {
-                this.requestOnGoing = false;
-                return true;
+            const storedLocation: LocationData = {
+                lat: Number(lat),
+                lng: Number(lng),
+                ibge_code: ibgeCode,
+                locale_city: city,
+                locale_state: state,
+                country: country
             }
 
-            localStorage.setItem('lat', String(currentPosition.lat));
-            localStorage.setItem('lng', String(currentPosition.lng));
+            if (this.isLocationCompleteAndUnchanged(storedLocation, currentPosition)) {
+                return true;
+            };
 
             let reverseGeolocation = await this.getReverseGeolocation(currentPosition.lat, currentPosition.lng);
-
+            
             if (reverseGeolocation.error) {
                 throw new Error();
             }
 
-            this.requestOnGoing = false;
+            localStorage.setItem('lat', String(currentPosition.lat));
+            localStorage.setItem('lng', String(currentPosition.lng));
+            localStorage.setItem('ibge_code', reverseGeolocation.ibge_code ?? '');
+            localStorage.setItem('locale_city', reverseGeolocation.city ?? '');
+            localStorage.setItem('locale_state', reverseGeolocation.state ?? '');
+            localStorage.setItem('country', reverseGeolocation.country === 'Brasil' || reverseGeolocation.country === 'Brazil' ? 'Brasil' : `Internacional - ${reverseGeolocation.country}`);
+
             return true;
-        } catch (error) {
-            this.requestOnGoing = false;
+        } catch {
             return false;
+        } finally {
+            this.requestOnGoing = false;
         }
     }
 
@@ -124,15 +156,8 @@ export class GeolocationService {
                 this.header.getRequestOptions(true)
             ).toPromise();
 
-            this.requestOnGoing = false;
-            localStorage.setItem('ibge_code', res.ibge_code ?? '');
-            localStorage.setItem('locale_city', res.city ?? '');
-            localStorage.setItem('locale_state', res.state ?? '');
-            localStorage.setItem('country', res.country === 'Brasil' || res.country === 'Brazil' ? 'Brasil' : `Internacional - ${res.country}`);
-
             return res;
         } catch (error) {
-            this.requestOnGoing = false;
             return {
                 error: true,
                 ibge_code: '',
