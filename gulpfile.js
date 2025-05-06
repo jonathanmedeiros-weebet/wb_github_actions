@@ -1775,15 +1775,6 @@ gulp.task('paraisobet.net', function (done) {
     });
 });
 
-gulp.task('betmania.casino', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "betmania.casino",
-        banca: "BET MANIA",
-        styles: ""
-    });
-});
-
 gulp.task('sidjaisoekroe.io', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
