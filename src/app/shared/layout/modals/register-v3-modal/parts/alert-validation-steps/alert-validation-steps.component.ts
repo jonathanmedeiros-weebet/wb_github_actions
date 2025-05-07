@@ -1,4 +1,3 @@
-import { has } from 'lodash';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ParametrosLocaisService } from 'src/app/services';
@@ -11,22 +10,21 @@ import { ParametrosLocaisService } from 'src/app/services';
 export class AlertValidationStepsComponent {
 
   public alertValidationText: string = '';
-  private hasStepValidationEmail: boolean = false;
-  private hasStepValidationPhone: boolean = false;
   public hasStepValidationRequired: boolean = false;
 
-  constructor(private paramsService: ParametrosLocaisService,
+  constructor(
+    private paramsService: ParametrosLocaisService,
     private translateService: TranslateService,
   ) { }
 
   ngOnInit() {
-    this.hasStepValidationEmail = Boolean(this.paramsService.getOpcoes().validacao_email_obrigatoria);
-    this.hasStepValidationPhone = Boolean(this.paramsService.getOpcoes().mandatory_phone_validation);
-    this.hasStepValidationRequired = this.hasStepValidationEmail || this.hasStepValidationPhone;
+    const hasStepValidationEmail = Boolean(this.paramsService.getOpcoes().validacao_email_obrigatoria);
+    const hasStepValidationPhone = Boolean(this.paramsService.getOpcoes().mandatory_phone_validation);
+    this.hasStepValidationRequired = hasStepValidationEmail || hasStepValidationPhone;
 
-    if (this.hasStepValidationEmail && this.hasStepValidationPhone) {
+    if (hasStepValidationEmail && hasStepValidationPhone) {
       this.alertValidationText = this.translateService.instant('accountValidation.alertSteps.alertEmailAndPhoneValidationRequired');
-    } else if (this.hasStepValidationPhone) {
+    } else if (hasStepValidationPhone) {
       this.alertValidationText = this.translateService.instant('accountValidation.alertSteps.alertPhoneValidationRequired');
     } else {
       this.alertValidationText = this.translateService.instant('accountValidation.alertSteps.alertEmailValidationRequired');
