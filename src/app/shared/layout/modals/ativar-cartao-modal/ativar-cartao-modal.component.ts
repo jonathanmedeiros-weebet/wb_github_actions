@@ -6,7 +6,7 @@ import { CartaoService, MessageService } from './../../../../services';
 import { BaseFormComponent } from '../../base-form/base-form.component';
 import { CartaoModalComponent } from '../cartao-modal/cartao-modal.component';
 import { PinValidation } from '../../../utils';
-import * as clone from 'clone';
+import clone from 'clone';
 
 @Component({
     selector: 'app-ativar-cartao-modal',

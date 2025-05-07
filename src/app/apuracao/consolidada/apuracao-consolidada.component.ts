@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy, Input, OnChanges} from '@angular/core';
 
 import {RelatorioService, MessageService, ParametrosLocaisService} from './../../services';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
     selector: 'app-apuracao-consolidada',

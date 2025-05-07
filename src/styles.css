@@ -1,4 +1,4 @@
-@import "skeleton-screen-css";
+@import "skeleton-screen-css/dist/index.min.css";
 
 a {
      text-decoration: none;
@@ -1921,7 +1921,7 @@ ngb-datepicker-month {
 }
 
 .custom-modal-force-password .modal-dialog > .modal-content {
-    height: auto; 
+    height: auto;
 }
 
 .d-none-alterar-senha .botao-esquerdo{
@@ -2009,7 +2009,7 @@ label {
 }
 
 .disabled {
-    pointer-events: none; 
+    pointer-events: none;
     text-decoration: none;
     opacity: 0.5;
 }

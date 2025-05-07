@@ -66,7 +66,7 @@ input.inverted-out:focus label{
     height: 35px;
     display: flex;
     justify-items: flex-end;
-    justify-content: end;
+    justify-content: flex-end;
     margin-top: 16px;
 }
 
@@ -269,7 +269,7 @@ asl-google-signin-button {
 
 .modal-body .modal-body-content {
     flex: 1;
-} 
+}
 
 h3 {
     font-size: 16px;

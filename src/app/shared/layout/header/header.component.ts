@@ -4,7 +4,7 @@ import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BaseFormComponent } from '../base-form/base-form.component';
-import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService } from './../../../services';
+import { AuthService, MessageService, ParametrosLocaisService, PrintService, SidebarService, ConnectionCheckService, ClienteService, LayoutService, HeadersService, PromocoesService } from './../../../services';
 import { Usuario } from './../../../models';
 import { config } from '../../config';
 import { NgbDropdown, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -115,6 +115,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     desafioHabilitado = false;
     desafioNome: string;
     paginaPromocaoHabilitado = false;
+    iconePromocaoHabilitado= false;
     indiqueGanheHabilitado = false;
     cartaoApostaHabilitado;
     isDemo = location.host === 'demo.wee.bet';
@@ -127,6 +128,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     private currentRoute: string;
     showIndiqueGanhe: boolean = true;
     isIndiqueGanheVisible: boolean;
+    promotionActive: boolean = false;
 
     sportsIsActive = false;
     sportsLiveIsActive = false;
@@ -167,7 +169,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         private clienteService: ClienteService,
         private layoutService: LayoutService,
         private headerService: HeadersService,
-        private accountVerificationService: AccountVerificationService
+        private accountVerificationService: AccountVerificationService,
+        private promotionService: PromocoesService
     ) {
         super();
     }
@@ -202,6 +205,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
     }
 
     ngOnInit() {
+        this.getInfoPromotion();
         this.currentRoute = this.router.url;
         this.sportsActive();
 
@@ -295,7 +299,8 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.rifa = this.paramsService.getOpcoes().rifa;
         this.indiqueGanheHabilitado = this.paramsService.indiqueGanheHabilitado();
         this.cashbackEnabled = this.paramsService.cashbackEnabled();
-        this.paginaPromocaoHabilitado = this.paramsService.getOpcoes().habilitar_pagina_promocao;
+        this.paginaPromocaoHabilitado = Boolean(this.paramsService.getOpcoes().habilitar_pagina_promocao == 'both' || this.paramsService.getOpcoes().habilitar_pagina_promocao == 'menu');
+        this.iconePromocaoHabilitado = Boolean(this.paramsService.getOpcoes().habilitar_pagina_promocao == 'both' || this.paramsService.getOpcoes().habilitar_pagina_promocao == 'icone');   
 
         this.valorGanhoPorIndicacao = (parseFloat(this.paramsService.getOpcoes().indique_ganhe_valor_por_indicacao).toFixed(2)).replace('.', ',');
         this.bonusBalanceReferAndEarn = this.paramsService.getOpcoes().indique_ganhe_tipo_saldo_ganho == 'bonus' ? "indique_ganhe.inBonus" : "";
@@ -518,7 +523,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.dropDownConta.close();
     }
 
-    abrirAlterarSenha() {
+    async abrirAlterarSenha() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -526,7 +536,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ClienteSenhaModalComponent);
     }
 
-    openLastAccesses() {
+    async openLastAccesses() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -534,7 +549,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(LastAccessesModalComponent);
     }
 
-    openBankAccount() {
+    async openBankAccount() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -551,7 +571,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ConfiguracoesComponent);
     }
 
-    abrirFinanceiro() {
+    async abrirFinanceiro() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -563,7 +588,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(MovimentacaoComponent);
     }
 
-    abrirSaques() {
+    async abrirSaques() {
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -571,7 +596,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(SolicitacaoSaqueClienteComponent);
     }
 
-    abrirCarteira() {
+    async abrirCarteira() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -579,7 +609,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(CarteiraComponent);
     }
 
-    abrirDepositos() {
+    async abrirDepositos() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -587,7 +622,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(DepositoComponent);
     }
 
-    openTransactionHistory() {
+    async openTransactionHistory() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -599,7 +639,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(DepositoCambistaComponent);
     }
 
-    abrirApostas() {
+    async abrirApostas() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -607,7 +652,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(ClienteApostasModalComponent);
     }
 
-    abrirRollovers() {
+    async abrirRollovers() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -615,7 +665,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(PromocaoComponent);
     }
 
-    abrirIndiqueGanhe() {
+    async abrirIndiqueGanhe() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -623,7 +678,12 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
         this.modalService.open(IndiqueGanheComponent);
     }
 
-    openCashback() {
+    async openCashback() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerified) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;
@@ -864,4 +924,14 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
 
         return result;
     }
+
+    getInfoPromotion() {
+        this.promotionService.getPromocoes().subscribe((result) => {
+            if (result.length > 0) {
+                this.promotionActive = true;
+                return;
+            }
+        })
+    }
+    
 }

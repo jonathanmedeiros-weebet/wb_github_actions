@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import {config} from '../../config';
 import {ErrorService} from '../utils/error.service';

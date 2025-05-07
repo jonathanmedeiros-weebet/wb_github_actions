@@ -22,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { config } from 'src/app/shared/config';
 import { ClienteService } from 'src/app/shared/services/clientes/cliente.service';
 import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/shared/layout/modals/configuracao-limite-perdas-porcentagem-modal/configuracao-limite-perdas-porcentagem-modal.component';
+import { ConfigurationBetLimitModalComponent } from 'src/app/shared/layout/modals/configuration-bet-limit-modal/configuration-bet-limit-modal.component';
 
 @Component({
     selector: 'app-gameview',
@@ -30,7 +31,9 @@ import { ConfiguracaoLimitePerdasPorcentagemModalComponent } from 'src/app/share
 })
 export class GameviewComponent implements OnInit, OnDestroy {
     @ViewChildren('scrollGames') private gamesScrolls: QueryList<ElementRef>;
+    @ViewChild('iframeElement', { static: false }) iframe: ElementRef<HTMLIFrameElement>;
     @ViewChild('continuarJogandoModal', { static: false }) continuarJogandoModal;
+    htmlGame;
     gameUrl: SafeUrl = '';
     gameId: string = '';
     gameMode: string = '';
@@ -370,6 +373,27 @@ export class GameviewComponent implements OnInit, OnDestroy {
         }
     }
 
+    changeGameviewHeight() {
+        if (!this.isMobile) {
+            const headerHeight = this.headerHeight;
+            const contentEl = this.el.nativeElement.querySelector('.game-frame');
+            const headerGameView = this.el.nativeElement.querySelector('.header-game-view').getBoundingClientRect().height;
+            const height = window.innerHeight - headerHeight - headerGameView;
+        }
+    }
+
+    showModalBetLimit(message: string, betLimitHit = true) {
+        const modalRef = this.modalService.open(ConfigurationBetLimitModalComponent, {
+            ariaLabelledBy: 'modal-basic-title',
+            windowClass: 'modal-pop-up',
+            centered: true,
+            backdrop: 'static',
+        });
+
+        modalRef.componentInstance.message = message;
+        modalRef.componentInstance.betLimitHit = betLimitHit;
+    }
+
     showModal(message: string) {
         const modalRef = this.modalService.open(ConfiguracaoLimitePerdasModalComponent, {
             ariaLabelledBy: 'modal-basic-title',
@@ -402,13 +426,13 @@ export class GameviewComponent implements OnInit, OnDestroy {
 
     async loadGame() {
         if (this.paramsService.getEnableRequirementPermissionRetrieveLocation()) {
-            // await this.geolocationService.saveLocalStorageLocation();
+            await this.geolocationService.saveLocalStorageLocation();
             
-            // if (!this.geolocationService.checkGeolocation()) {
-            //     this.handleError(this.translate.instant('geral.geolocationError'));
-            //     this.router.navigate(['/']);
-            //     return;
-            // }
+            if (!this.geolocationService.checkGeolocation()) {
+                this.handleError(this.translate.instant('geral.geolocationError'));
+                this.router.navigate(['/']);
+                return;
+            }
         }
         
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
@@ -430,12 +454,23 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                         this.router.navigate(['/']);
                     };
+
                     if (response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
                         this.showModal(response.loss_limit.message);
                         this.router.navigate(['/']);
                     }
+
                     if (!response?.loss_limit?.loss_hit && response?.loss_limit?.error) {
                         this.showModalPercentage(response.loss_limit.message);
+                    }
+
+                    if (response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
+                        this.showModalBetLimit(response.bet_limit?.message);
+                        this.router.navigate(['/']);
+                    }
+                    
+                    if (!response?.bet_limit?.bet_limit_hit && response?.bet_limit?.error) {
+                        this.showModalBetLimit(response.bet_limit?.message, false);
                     }
 
                     if (typeof response.gameUrl !== 'undefined') {
@@ -445,7 +480,11 @@ export class GameviewComponent implements OnInit, OnDestroy {
                         this.gameProviderName = response.gameFornecedorExibicao;
                         this.backgroundImageUrl = response.gameImageExt ? 'https://weebet.s3.amazonaws.com/' + config.SLUG + '/img/thumbnails/' + response.gameId + response.gameImageExt : `https://wb-assets.com/img/thumbnails/${response.fornecedor}/${response.gameId}.png`;
                     } else {
-                        this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        if(this.gameFornecedor !== 'pgsoft') {
+                            this.gameUrl = this.sanitizer.bypassSecurityTrustResourceUrl(response.gameURL);
+                        } else {
+                            this.htmlGame = response.htmlGame;
+                        }
                         this.sessionId = response.sessionId;
                         if ((this.gameFornecedor == 'tomhorn')) {
                             this.gameName = response.gameName.split("- 9", 1) || "";
@@ -460,6 +499,15 @@ export class GameviewComponent implements OnInit, OnDestroy {
                     this.handleError(this.translate.instant('geral.erroInesperado').toLowerCase());
                     this.router.navigate(['/']);
                 });
+    }
+
+    onIframeLoad(iframe: HTMLIFrameElement) {
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        if (this.htmlGame) {
+            doc.open();
+            doc.write(this.htmlGame);
+            doc.close();
+        }
     }
 
     handleError(error: string) {
@@ -818,7 +866,12 @@ export class GameviewComponent implements OnInit, OnDestroy {
         this.auth.openRegisterV3Modal();
     }
 
-    openDeposit() {
+    async openDeposit() {
+        if (!this.accountVerificationService.terms_accepted.getValue()) {
+            const termsResult = await this.accountVerificationService.openModalTermsPromise();
+            if (!termsResult) return;
+        }
+
         if (!this.accountVerificationService.accountVerified.getValue()) {
             this.accountVerificationService.openModalAccountVerificationAlert();
             return;

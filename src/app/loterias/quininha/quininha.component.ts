@@ -16,7 +16,7 @@ import {
 } from '../../services';
 import {TipoAposta, Aposta, Sorteio} from '../../models';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import * as range from 'lodash.range';
+import range from 'lodash.range';
 import { random } from 'lodash';
 import { GeolocationService, Geolocation } from 'src/app/shared/services/geolocation.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -243,6 +243,11 @@ export class QuininhaComponent extends BaseFormComponent implements OnInit, OnDe
     /* Finalizar aposta */
     async create() {
         if (this.isCliente && this.isLoggedIn) {
+            if (!this.accountVerificationService.terms_accepted.getValue()) {
+                const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                if (!termsResult) return;
+            }
+            
             if (!this.accountVerificationService.accountVerified.getValue()) {
                 this.accountVerificationService.openModalAccountVerificationAlert();
                 return;

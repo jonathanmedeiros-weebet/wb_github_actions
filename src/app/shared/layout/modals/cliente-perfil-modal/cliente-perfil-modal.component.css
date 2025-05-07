@@ -73,7 +73,7 @@ h5 {
         flex: 1;
         margin: 0 !important;
     }
-    
+
     .buttons {
         gap: 20px;
         display: flex;
@@ -85,7 +85,7 @@ h5 {
 @media only screen and (min-width: 481px) {
     .buttons {
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
         align-items: center;
     }
 }
@@ -94,7 +94,7 @@ h5 {
     .modal-body {
         padding: 20px;
     }
-    
+
     .buttons {
         gap: 20px;
     }
@@ -103,7 +103,7 @@ h5 {
 #legitimuz-action-faceindex,
 #legitimuz-action-verify,
 #exDocCheckAction {
-    
+
     margin-bottom: 16px;
 }
 

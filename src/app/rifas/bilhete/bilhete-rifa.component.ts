@@ -9,7 +9,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {MenuFooterService} from '../../shared/services/utils/menu-footer.service';
 import {LayoutService} from '../../shared/services/utils/layout.service';
 import {takeUntil} from 'rxjs/operators';
-import * as clone from 'clone';
+import clone from 'clone';
 import {ApostaModalComponent, LoginModalComponent} from '../../shared/layout/modals';
 import {RifaApostaService} from '../../shared/services/rifa/rifa-aposta.service';
 import {RifaBilheteService} from '../../shared/services/rifa/rifa-bilhete.service';
@@ -179,11 +179,16 @@ export class BilheteRifaComponent extends BaseFormComponent implements OnInit, O
         this.valorFocado = focus;
     }
 
-    submit() {
+    async submit() {
         if (!this.isCliente && !this.modoCambista) {
             this.abrirLogin();
         } else {
             if (this.isCliente && this.isLoggedIn) {
+                if (!this.accountVerificationService.terms_accepted.getValue()) {
+                    const termsResult = await this.accountVerificationService.openModalTermsPromise();
+                    if (!termsResult) return;
+                }
+
                 if (!this.accountVerificationService.accountVerified.getValue()) {
                     this.accountVerificationService.openModalAccountVerificationAlert();
                     return;

@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
+import { AuthService, ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { Cliente } from 'src/app/shared/models/clientes/cliente';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
@@ -36,22 +36,40 @@ export class ConfirmModalComponent implements OnInit {
     secretHash = "";
     docCheckToken = "";
     faceMatchType = null;
-   
 
-  constructor(
-    public activeModal: NgbActiveModal,
-    private legitimuzService: LegitimuzService,
-    private legitimuzFacialService: LegitimuzFacialService,
-    private cd: ChangeDetectorRef,
-    private translate: TranslateService,
-    private faceMatchService: FaceMatchService,
-    private paramsLocais: ParametrosLocaisService,
-    private messageService: MessageService,
-    private clienteService: ClienteService,
-    private docCheckService: DocCheckService
-  ) { }
+    constructor(
+        public activeModal: NgbActiveModal,
+        private legitimuzService: LegitimuzService,
+        private legitimuzFacialService: LegitimuzFacialService,
+        private cd: ChangeDetectorRef,
+        private translate: TranslateService,
+        private faceMatchService: FaceMatchService,
+        private paramsLocais: ParametrosLocaisService,
+        private messageService: MessageService,
+        private clienteService: ClienteService,
+        private docCheckService: DocCheckService,
+        private authService: AuthService
+    ) { }
+
+    get yesButtonIsDisabled() {
+        return this.authService.isCliente()
+            ? !this.faceMatchActive
+            : false;
+    }
 
     ngOnInit() {
+        if (this.authService.isCliente()) {
+            this.initFaceMatchObserver();
+        }
+    }
+
+    ngAfterViewInit() {
+        if (this.authService.isCliente()) {
+            this.initFaceMathProvider();
+        }
+    }
+
+    private initFaceMatchObserver() {
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
         const user = JSON.parse(localStorage.getItem('user'));
         this.clienteService.getCliente(user.id)
@@ -100,6 +118,8 @@ export class ConfirmModalComponent implements OnInit {
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     if (this.verifiedIdentity) {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, account_bank_delete: true }).subscribe({
@@ -135,7 +155,7 @@ export class ConfirmModalComponent implements OnInit {
         }
     }
 
-    ngAfterViewInit() {
+    private initFaceMathProvider() {
         if (this.faceMatchEnabled && !this.disapprovedIdentity) {
             if (this.faceMatchType == 'legitimuz') {
                 this.legitimuz.changes
@@ -160,5 +180,4 @@ export class ConfirmModalComponent implements OnInit {
     handleError(error: string) {
         this.messageService.error(error);
     }
-
 }

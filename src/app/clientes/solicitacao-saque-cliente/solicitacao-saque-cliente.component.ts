@@ -121,7 +121,14 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.clienteService
         .allBankAccounts()
         .toPromise()
-        .then((allBanks) => this.bankAccounts = allBanks);
+        .then((allBanks) => {
+            if (allBanks) {
+                this.bankAccounts = allBanks
+                if(this.bankAccounts.length === 1) {
+                    this.form.get('bankAccount').setValue(this.bankAccounts[0].id);
+                }
+            };
+        });
 
         this.faceMatchType = this.paramsLocais.getOpcoes().faceMatchType;
 
@@ -141,6 +148,7 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
                         this.faceMatchService.updadeFacematch({ document: this.cliente.cpf, first_withdraw: true }).subscribe()
                         this.faceMatchFirstWithdrawValidated = true;
+                        this.docCheckService.closeModal();
                     }
                 })
                 break;
@@ -170,8 +178,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
         this.auth.getPosicaoFinanceira()
             .subscribe(
                 posicaoFinanceira => {
-                    this.saldo = posicaoFinanceira.saldo - posicaoFinanceira.saldoBloqueado;
-                    if (posicaoFinanceira.saldo == 0) {
+                    this.saldo = posicaoFinanceira.saldoLiberado;
+                    if (posicaoFinanceira.saldo <= 0) {
                         this.disableButton = true;
                     }
                 },
@@ -248,6 +256,8 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
@@ -396,14 +406,6 @@ export class SolicitacaoSaqueClienteComponent extends BaseFormComponent implemen
                     );
             }
         );
-    }
-
-    exibirCancelarSolicitacaoSaque(depositoSaque) {
-        if (this.pspsSaqueAutomatico.includes(depositoSaque.psp)) {
-            return false;
-        }
-
-        return !depositoSaque.data_pagamento && depositoSaque.status == 'PENDENTE';
     }
 
     completarCadatro() {

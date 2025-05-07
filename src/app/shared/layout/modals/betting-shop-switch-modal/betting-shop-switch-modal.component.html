@@ -1,0 +1,24 @@
+<div class="modal-betting-shop-switch">
+    <div class="modal-dialog-betting-shop-switch">
+        <div class="modal-content-betting-shop-switch">
+            <ng-container>
+                <div class="modal-header-betting-shop-switch">
+                    <img src="https://weebet.s3.amazonaws.com/{{SLUG}}/logos/logo_banca.png" alt="Logo"
+                        class="modal-logo">
+                    <h3 class="modal-title">{{'geral.bettingShop' | translate}}</h3>
+                </div>
+                <div class="modal-body-betting-shop-switch">
+                    <h4>{{'geral.bettingShopSwitch' | translate}}</h4>
+                </div>
+                <div class="modal-footer-betting-shop-switch">
+                    <button type="button" (click)="continueToReconnect()" class="btn btn-secondary btn-no">
+                        {{'geral.disconnect' | translate}}
+                    </button>
+                    <button type="button" (click)="continueToHome()" class="btn btn-custom btn-yes">
+                        {{'geral.continue' | translate}}
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

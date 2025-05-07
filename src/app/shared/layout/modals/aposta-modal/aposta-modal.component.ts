@@ -12,6 +12,7 @@ import { config } from '../../../config';
 import { Ga4Service, EventGa4Types} from 'src/app/shared/services/ga4/ga4.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ExibirBilheteSuperoddComponent } from '../../exibir-bilhete/superodd/exibir-bilhete-superodd.component';
+import moment from 'moment';
 
 @Component({
     selector: 'app-aposta-modal',
@@ -152,22 +153,15 @@ export class ApostaModalComponent implements OnInit {
     }
 
     convertDate(date: string) {
-        const [day, month, year, hour, minute, second] = date.split(/[/\s:]/);
-        const formattedDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
-
-        if (isNaN(formattedDate.getTime())) {
-            console.error('Invalid date:', date);
+        try {
+            const formattedDate = moment(date, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY [às] HH:mm');
+            if (formattedDate === 'Invalid date') {
+                return 'Invalid date';
+            }
+            return formattedDate;
+        } catch (error) {
             return 'Invalid date';
         }
-
-        return formattedDate.toLocaleString('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false
-        }).replace(',', ' às');
     }
 
     impressaoPermitida() {

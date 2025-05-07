@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidebarService } from '../../services/utils/sidebar.service';
 
-import * as random from 'lodash.random';
+import random from 'lodash.random';
 import { SupresinhaService } from '../../services/utils/surpresinha.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';

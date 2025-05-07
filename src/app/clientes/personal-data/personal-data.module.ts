@@ -7,7 +7,7 @@ import { DocumentComponent } from './document/document.component';
 import { PersonalDataRoutingModule } from './personal-data-routing.module';
 import { PersonalDataComponent } from './personal-data.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { TermsComponent } from './terms/terms.component';
 
 @NgModule({
@@ -22,7 +22,9 @@ import { TermsComponent } from './terms/terms.component';
     imports: [
         PersonalDataRoutingModule,
         SharedModule,
-        NgxMaskModule.forRoot()
+        NgxMaskDirective,
+        NgxMaskPipe,
     ],
+    providers: [provideNgxMask()]
 })
 export class PersonalDataModule { }

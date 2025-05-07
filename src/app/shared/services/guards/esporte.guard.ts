@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 // Import our authentication service
 import { AuthService } from './../auth/auth.service';
@@ -7,7 +7,7 @@ import { AuthService } from './../auth/auth.service';
 @Injectable({
     providedIn: 'root'
 })
-export class EsporteGuard implements CanActivateChild {
+export class EsporteGuard  {
     constructor(private auth: AuthService, private router: Router) { }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

@@ -49,7 +49,7 @@
                                 >
                             </div>
                             <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
-                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
+                            <button [disabled]="disableButton" type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
                 </section>
@@ -86,7 +86,7 @@
                                 >
                             </div>
                             <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
-                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
+                            <button [disabled]="disableButton" type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
                 </section>
@@ -123,7 +123,7 @@
                                 >
                             </div>
                             <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
-                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
+                            <button [disabled]="disableButton" type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
                 </section>
@@ -148,7 +148,7 @@
                                     </select>
                                 <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
                             </div>
-                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
+                            <button [disabled]="disableButton" type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
                 </section>
@@ -167,7 +167,7 @@
                                 </select>
                             </div>
                             <ng-container *ngTemplateOutlet="senhaAtualTemplate"></ng-container>
-                            <button type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
+                            <button [disabled]="disableButton" type="submit" class="btn btn-custom">{{ 'botoes.salvar_alteracoes' | translate }}</button>
                         </form>
                     </div>
                 </section>
@@ -215,6 +215,7 @@
                                 {{ 'jogo_responsavel.periodo_pausa.periodo_pausa_ativado' | translate: {info: infoPeriodoPausa} }}
                             </div>
                             <button
+                                [disabled]="disableButton"
                                 type="submit"
                                 class="btn btn-custom"
                                 *ngIf="!infoPeriodoPausa"
@@ -325,7 +326,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <button (click)="handleSubmit('onSubmitExclusaoConta')" [disabled]="!faceMatchAccountDeletionValidated" type="submit" class="btn btn-custom" [ngStyle]="{'margin-top': faceMatchEnabled ? '15px' : '0px'}">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
+                            <button (click)="handleSubmit('onSubmitExclusaoConta')" [disabled]="!faceMatchAccountDeletionValidated || disableButton" type="submit" class="btn btn-custom" [ngStyle]="{'margin-top': faceMatchEnabled ? '15px' : '0px'}">{{ 'jogo_responsavel.exclusao_conta.excluir_conta' | translate }}</button>
                         </form>
                     </div>
                 </section>

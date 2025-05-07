@@ -35,11 +35,11 @@ declare var WeebetMessage: any;
             <img [ngStyle]="{'width': '170px', 'background-color':'#ffffff'}" *ngIf="selectedPaymentMethod === 'paag'" src="{{ qrCodeBase64 }}"/>
         </div>
         <div class="qr-code" *ngIf="!qrCodeBase64">
-            <ngx-qrcode
+            <qr-code
                 [value]="qrCode"
                 cssClass="aclass"
                 errorCorrectionLevel="L">
-            </ngx-qrcode>
+            </qr-code>
         </div>
         <span class="valor">Valor: <b>{{ valorPix }}</b></span>
 
@@ -59,7 +59,7 @@ export class NgbdModalContent {
     minute = 20;
     second = 0;
     secondShow = '00';
-    copyButtonText; 
+    copyButtonText;
     isAppMobile;
 
     constructor(
@@ -92,19 +92,19 @@ export class NgbdModalContent {
                 clearInterval(timer)
             }
         }, 1000);
-        
+
         this.copyButtonText = this.translate.instant('deposito.copyCode');
         this.isAppMobile = this.authService.isAppMobile();
     }
 
     copyCode() {
         this.translate.get('deposito.copied').subscribe((translatedText) => {
-            this.copyButtonText = translatedText; 
+            this.copyButtonText = translatedText;
 
             setTimeout(() => {
                 this.copyButtonText = this.translate.instant('deposito.copyCode');
             }, 1000);
-        }); 
+        });
     }
 
     compartilhar() {
@@ -115,9 +115,9 @@ export class NgbdModalContent {
             data: `Qrcode para deposito PIX`,
             action: 'shareURL'
         };
-    
+
         const base64ToBlob = (base64: string, contentType: string): Blob => {
-            const byteCharacters = atob(base64); 
+            const byteCharacters = atob(base64);
             const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
             const byteArray = new Uint8Array(byteNumbers);
             return new Blob([byteArray], { type: contentType });
@@ -141,7 +141,7 @@ export class NgbdModalContent {
                 this.messageService.error('Compartilhamento não suportado pelo seu navegador');
             }
         }
-    } 
+    }
 }
 @Component({
     selector: 'app-deposito-pix',

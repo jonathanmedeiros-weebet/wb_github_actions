@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { ParametrosLocaisService } from './../parametros-locais.service';
@@ -7,7 +7,7 @@ import { ParametrosLocaisService } from './../parametros-locais.service';
 @Injectable({
     providedIn: 'root'
 })
-export class ParametrosResolver implements Resolve<any> {
+export class ParametrosResolver  {
 
     constructor(private paramsService: ParametrosLocaisService) { }
 

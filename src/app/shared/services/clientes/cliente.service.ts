@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { config } from '../../config';
 import { ErrorService } from '../utils/error.service';
 import { HeadersService } from '../utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
-import * as moment from 'moment';
+import moment from 'moment';
 import { ParametrosLocaisService } from "../parametros-locais.service";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
 import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
+import { VerificationTypes } from '../../enums';
 
 declare var xtremepush: any;
 
@@ -19,12 +20,16 @@ declare var xtremepush: any;
 })
 export class ClienteService {
     private clienteUrl = `${config.BASE_URL}/clientes`;
-    private apiUrl = `${config.LOKI_URL}/customers`;
+    private apiUrl = `${config.LOKI_URL}`;
+
     codigoFiliacaoCadastroTemp;
     logadoSource;
     logado;
     clienteSource;
     modalRef: NgbModalRef;
+
+    private twoFactorAuthVerifiedSource;
+    twoFactorAuthVerified$;
 
     constructor(
         private http: HttpClient,
@@ -37,6 +42,9 @@ export class ClienteService {
         this.clienteSource = new BehaviorSubject<boolean>(this.isCliente());
         this.logadoSource = new BehaviorSubject<boolean>(this.isLoggedIn());
         this.logado = this.logadoSource.asObservable();
+
+        this.twoFactorAuthVerifiedSource = new BehaviorSubject<boolean>(false);
+        this.twoFactorAuthVerified$ = this.twoFactorAuthVerifiedSource.asObservable();
     }
 
     getTermosDeUso() {
@@ -378,7 +386,7 @@ export class ClienteService {
         let baseUrl = `${this.clienteUrl}/initiate-phone-validation`
 
         if (this.paramsService.getPhoneVerificationService() == 'twilio') {
-            baseUrl = `${this.apiUrl}/phone-verification`
+            baseUrl = `${this.apiUrl}/customers/phone-verification`
         }
 
         return this.http
@@ -399,7 +407,7 @@ export class ClienteService {
         let baseUrl = `${this.clienteUrl}/validate-phone`;
 
         if (this.paramsService.getPhoneVerificationService() == 'twilio') {
-            baseUrl = `${this.apiUrl}/phone-verification-check`;
+            baseUrl = `${this.apiUrl}/customers/phone-verification-check`;
         }
 
         return this.http
@@ -411,6 +419,55 @@ export class ClienteService {
             .pipe(
                 map((response: any) => {
                     return response.results;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    public sendTwoFactorAuthCode(verificationMethod: string, customerId: number, recipient: string) {
+        switch (verificationMethod) {
+            case VerificationTypes.PHONE:
+                return this.sendTwoFactorAuthCodeBySms(customerId, recipient);
+        }
+
+        throw new Error('Verification method not supported');
+    }
+
+    private sendTwoFactorAuthCodeBySms(customerId: number, phone: string) {
+        return this.http
+            .post(
+                `${this.apiUrl}/two-factor-authentication/send/sms`,
+                { customerId: customerId, phone: phone },
+                this.headers.getRequestOptions(true)
+            )
+            .pipe(
+                map((response: any) => {
+                    return response.success;
+                }),
+                catchError(this.errorService.handleError)
+            );
+    }
+
+    public confirmTwoFactorAuthCode(verificationMethod: string, customerId: number, recipient: string, code: string) {
+        switch (verificationMethod) {
+            case VerificationTypes.PHONE:
+                return this.confirmTwoFactorAuthCodeBySms(customerId, recipient, code);
+        }
+
+        throw new Error('Verification method not supported');
+    }
+
+    private confirmTwoFactorAuthCodeBySms(customerId: number, phone: string, code: string) {
+        return this.http
+            .post(
+                `${this.apiUrl}/two-factor-authentication/confirm/sms`,
+                { customerId: customerId, phone: phone, code: code },
+                this.headers.getRequestOptions(true)
+            )
+            .pipe(
+                map((response: any) => {
+                    this.twoFactorAuthVerifiedSource.next(response.success);
+                    return response.success;
                 }),
                 catchError(this.errorService.handleError)
             );

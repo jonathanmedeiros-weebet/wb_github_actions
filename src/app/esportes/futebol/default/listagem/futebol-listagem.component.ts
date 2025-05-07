@@ -24,7 +24,7 @@ import { BilheteEsportivoService, HelperService, ParametrosLocaisService, Sideba
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/min/locales';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -356,7 +356,7 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             }
 
             this.campeonatosFiltrados = this.camps.filter(camp => {
-                if (camp.jogos.some(jogo => jogo.nome.includes(this.term.toUpperCase()))) {
+                if (camp.nome.includes(this.term.toUpperCase())  || camp.jogos.some(jogo => jogo.nome.includes(this.term.toUpperCase()))) {
                     return true;
                 }
                 return false;
@@ -365,7 +365,11 @@ export class FutebolListagemComponent implements OnInit, OnDestroy, OnChanges, A
             if (this.campeonatosFiltrados.length) {
                 this.campeonatosFiltrados.map(camp => {
                     let jogosTemp;
-                    jogosTemp = camp.jogos.filter(jogo => jogo.nome.includes(this.term.toUpperCase()));
+                    if (camp.nome.includes(this.term.toUpperCase())) {
+                        jogosTemp = camp.jogos;
+                    } else {
+                        jogosTemp = camp.jogos.filter(jogo => jogo.nome.includes(this.term.toUpperCase()));
+                    }
 
                     camp.jogos = jogosTemp;
                     return this.calcularCotacoes(camp);

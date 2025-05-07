@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { ParametrosLocaisService } from '../parametros-locais.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoteriaPopularGuard implements CanActivate {
+export class LoteriaPopularGuard  {
     constructor(
         private paramsService: ParametrosLocaisService,
         private router: Router

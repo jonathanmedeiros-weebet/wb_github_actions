@@ -37,10 +37,12 @@
                 </p>
             </ng-template>
         </ng-container>
-        <p *ngIf="bet?.data_liquidacao">
-            <b>{{'geral.liquidadoEm' | translate}}</b>
-            <span> {{bet.data_liquidacao | moment: 'DD/MM/YYYY [às] HH:mm'}}</span>
-        </p>
+        <ng-container *ngIf="bet?.data_liquidacao">
+            <p *ngIf="bet?.data_liquidacao">
+                <b>{{'geral.liquidadoEm' | translate}}</b>
+                <span> {{bet.data_liquidacao | moment: 'DD/MM/YYYY [às] HH:mm'}}</span>
+            </p>
+        </ng-container>
         <p>Em {{bet.horario | moment: 'DD/MM/YYYY [às] HH:mm'}}</p>
     </div>
 </div>

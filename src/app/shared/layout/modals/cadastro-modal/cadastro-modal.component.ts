@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario';
 import { FormValidations } from 'src/app/shared/utils';
 
-import * as moment from 'moment';
+import moment from 'moment';
 import { config } from '../../../config';
 import { TranslateService } from '@ngx-translate/core';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
@@ -97,6 +97,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         lowercaseLetter: false,
         specialChar: false,
     };
+    storagedBtag: string | null = null;
 
     fullRegistration = true;
     currentLocationPermission = null;
@@ -136,6 +137,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
 
     ngOnInit() {
         let queryString = '';
+        this.storagedBtag = this.auth.getLocalstorageWithExpiry('btag');
         if (this.router.url.includes('/cadastro')) {
             const pages = {
                 esporte: 'esportes',
@@ -248,15 +250,6 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                     }
                 }
 
-                if (params.btag) {
-                    localStorage.setItem('btag', params.btag);
-                } else {
-                    const storagedBtag = localStorage.getItem('btag');
-                    if (storagedBtag) {
-                        this.form.patchValue({ btag: storagedBtag });
-                    }
-                }
-
                 if (params.refId) {
                     localStorage.setItem('refId', params.refId);
                 } else {
@@ -292,6 +285,10 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
                 });
             });
 
+        if (this.storagedBtag) {
+            this.form.patchValue({ btag: this.storagedBtag });
+        }
+
         if (this.paramsService.getOpcoes().habilitar_login_google) {
             this.loginGoogleAtivo = true;
             this.socialAuth.authState
@@ -318,6 +315,8 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             this.legitimuzService.curCustomerIsVerified
                 .pipe(takeUntil(this.unsub$))
                 .subscribe(curCustomerIsVerified => {
+                    if(curCustomerIsVerified == null) return;
+                    
                     this.verifiedIdentity = curCustomerIsVerified;
                     this.cd.detectChanges();
                     if (this.verifiedIdentity) {
@@ -425,7 +424,7 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
             check_2: [''],
             googleId: [''],
             googleIdToken: [''],
-            btag: [this.route.snapshot.queryParams.btag],
+            btag: [this.storagedBtag],
             refId: [this.route.snapshot.queryParams.refId],
             campRef: [this.route.snapshot.queryParams.c],
             campFonte: [this.route.snapshot.queryParams.s],
@@ -527,34 +526,34 @@ export class CadastroModalComponent extends BaseFormComponent implements OnInit,
         const restrictionStateBet = this.paramsService.getRestrictionStateBet();
 
         if (restrictionStateBet != 'Todos') {
-            // let allowed = true;
-            // this.lastLocationPermission = this.currentLocationPermission;
-            // this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+            let allowed = true;
+            this.lastLocationPermission = this.currentLocationPermission;
+            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
 
-            // if (this.currentLocationPermission == 'granted') {
-            //     if (this.lastLocationPermission == 'denied') {
-            //         allowed = false;
-            //         location.reload();
-            //     } else if (!this.geolocationService.checkGeolocation()) {
-            //         allowed = await this.geolocationService.saveLocalStorageLocation();
-            //     }
-            // } else if (this.currentLocationPermission == 'denied') {
-            //     allowed = false;
-            // } else if (this.currentLocationPermission == 'prompt') {
-            //     allowed = await this.geolocationService.saveLocalStorageLocation();
-            // }
+            if (this.currentLocationPermission == 'granted') {
+                if (this.lastLocationPermission == 'denied') {
+                    allowed = false;
+                    location.reload();
+                } else if (!this.geolocationService.checkGeolocation()) {
+                    allowed = await this.geolocationService.saveLocalStorageLocation();
+                }
+            } else if (this.currentLocationPermission == 'denied') {
+                allowed = false;
+            } else if (this.currentLocationPermission == 'prompt') {
+                allowed = await this.geolocationService.saveLocalStorageLocation();
+            }
 
-            // if (allowed) {
-            //     let localeState = localStorage.getItem('locale_state');
+            if (allowed) {
+                let localeState = localStorage.getItem('locale_state');
 
-            //     if (restrictionStateBet != localeState) {
-            //         this.messageService.error(this.translate.instant('geral.stateRestriction'));
-            //         return;
-            //     }
-            // } else {
-            //     this.messageService.error(this.translate.instant('geral.locationPermission'));
-            //     return;
-            // }
+                if (restrictionStateBet != localeState) {
+                    this.messageService.error(this.translate.instant('geral.stateRestriction'));
+                    return;
+                }
+            } else {
+                this.messageService.error(this.translate.instant('geral.locationPermission'));
+                return;
+            }
         }
 
         if (this.menorDeIdade) {

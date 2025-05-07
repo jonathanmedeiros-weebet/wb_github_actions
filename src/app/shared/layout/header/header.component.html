@@ -140,7 +140,7 @@
                 </div>
                 <div id="xtremepushNotificationContainer"></div>
             </div>
-            <div class="btn-promocao" *ngIf="paginaPromocaoHabilitado">
+            <div class="btn-promocao" *ngIf="iconePromocaoHabilitado && promotionActive">
                 <a [routerLink]="['/promocao']" style="font-size: 0px; line-height: 0;" routerLinkActive="active">
                     <div class="btn-promocao">
                         <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -1000,7 +1000,7 @@
                 <span>{{ 'menu.loteria' | translate }}</span>
             </a>
         </div>
-        <div class="category" *ngIf="paginaPromocaoHabilitado">
+        <div class="category" *ngIf="paginaPromocaoHabilitado && promotionActive">
             <a [routerLink]="['/promocao']" routerLinkActive="active">
                 <span>{{ 'geral.promocoes' | translate }}</span>
             </a>

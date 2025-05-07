@@ -15,11 +15,16 @@ import {
     AcumuladaoService,
     DesafioApostaService
 } from '../services';
-import {NgxMaskModule} from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    imports: [SharedModule, ValidarApostaRoutingModule, NgxMaskModule],
+    imports: [
+        SharedModule, 
+        ValidarApostaRoutingModule, 
+        NgxMaskDirective, 
+        NgxMaskPipe
+    ],
     exports: [],
     declarations: [
         ValidarApostaWrapperComponent,
@@ -35,7 +40,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
         SorteioService,
         AcumuladaoService,
         DesafioApostaService,
-        NgbActiveModal
+        NgbActiveModal,
+        provideNgxMask()
     ]
 })
 export class ValidarApostaModule { }
