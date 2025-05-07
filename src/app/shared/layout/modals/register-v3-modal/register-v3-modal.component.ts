@@ -67,7 +67,10 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public cpfSpinner = false;
     private previousUrl: string;
     public storagedBtag: string | null = null;
-    private validateAccount: boolean = false;
+    private hasStepsValidationAccount: boolean = false;
+    private hasStepValidationEmail: boolean = false;
+    private hasStepValidationPhone: boolean = false;
+    public showAlertStepsValidationAccount: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -117,9 +120,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
         this.countryCodes = this.countriesService.getDialcodes();
         this.parametersList = this.paramsService.getOpcoes().enabledParameters;
         this.storagedBtag = this.auth.getLocalstorageWithExpiry('btag');
-        this.paramsService.getOpcoes().validacao_email_obrigatoria || this.paramsService.getOpcoes().mandatoryPhoneValidation
-                        ? this.validateAccount = true
-                        : this.validateAccount = false;
+        this.hasStepValidationEmail = this.paramsService.getOpcoes().validacao_email_obrigatoria;
+        this.hasStepValidationPhone = this.paramsService.getOpcoes().mandatory_phone_validation;
+        this.hasStepsValidationAccount = Boolean(this.hasStepValidationEmail || this.hasStepValidationPhone);
 
         this.createForm();
 
@@ -310,6 +313,16 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.controls.senha.clearValidators();
             this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
             this.form.controls.senha.updateValueAndValidity();
+        }
+
+        if (this.hasStepsValidationAccount) {
+            this.form.valueChanges.subscribe(() => {
+                if (this.form.controls.email.valid && this.form.controls.telefone.valid) {
+                    this.showAlertStepsValidationAccount = true;
+                } else {
+                    this.showAlertStepsValidationAccount = false;
+                }
+            });
         }
 
         if (this.provedorCaptcha == 'recaptcha') {

@@ -830,7 +830,12 @@
         "day":"Day",
         "month":"Month",
         "year":"Year",
-        "brasil": "Brazil"
+        "brasil": "Brazil",
+        "stepsEmailValidation": {
+            "emailValidation": "As a form of validation, we will send a security code to your registered e-mail address",
+            "phoneValidation": "As a form of validation, we will send a security code to your registered phone number",
+            "emailAndPhoneValidation": "As a form of validation, we will send a security code to your registered e-mail address and phone number"
+        }
     },
     "registerCancel": {
         "titleCancelRegister": "Are you sure you want to cancel your registration?",

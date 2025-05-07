@@ -828,7 +828,12 @@
         "day":"Día",
         "month":"Mes",
         "year":"Año",
-        "brasil": "Brasil"
+        "brasil": "Brasil",
+        "stepsEmailValidation": {
+            "emailValidation": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
+            "phoneValidation": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
+            "emailAndPhoneValidation": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
+        }
     },
     "registerCancel": {
         "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",

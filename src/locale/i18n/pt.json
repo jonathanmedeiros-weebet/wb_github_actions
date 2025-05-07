@@ -834,7 +834,12 @@
         "day":"Dia",
         "month":"Mês",
         "year":"Ano",
-        "brasil": "Brasil"
+        "brasil": "Brasil",
+        "stepsEmailValidation": {
+            "emailValidation": "Como forma de validação, enviaremos um código de segurança ao seu e-mail cadastrado",
+            "phoneValidation": "Como forma de validação, enviaremos um código de segurança ao seu telefone cadastrado",
+            "emailAndPhoneValidation": "Como forma de validação, enviaremos um código de segurança ao seu e-mail e telefone cadastrados"
+        }
     },
     "registerCancel": {
         "titleCancelRegister": "Tem certeza que deseja cancelar seu registro?",
