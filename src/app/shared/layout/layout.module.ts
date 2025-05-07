@@ -263,7 +263,7 @@ import { AlertValidationStepsComponent } from './modals/register-v3-modal/parts/
         IconCheckCircleComponent,
         IconCircleInfoComponent,
         AlertValidationStepsComponent
-        ],
+    ],
     exports: [
         MainLayoutComponent,
         AuthLayoutComponent,

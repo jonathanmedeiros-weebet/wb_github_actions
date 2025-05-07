@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ParametrosLocaisService } from 'src/app/services';
 
 @Component({
@@ -8,21 +9,23 @@ import { ParametrosLocaisService } from 'src/app/services';
 })
 export class AlertValidationStepsComponent {
 
-  public stepsValidationAccount: string = '';
+  public alertValidationText: string = '';
   private hasStepValidationEmail: boolean = false;
   private hasStepValidationPhone: boolean = false;
 
-  constructor(private paramsService: ParametrosLocaisService) { }
+  constructor(private paramsService: ParametrosLocaisService,
+    private translateService : TranslateService,
+  ) { }
   ngOnInit() {
     this.hasStepValidationEmail = Boolean(this.paramsService.getOpcoes().validacao_email_obrigatoria);
     this.hasStepValidationPhone = Boolean(this.paramsService.getOpcoes().mandatory_phone_validation);
 
     if (this.hasStepValidationEmail && this.hasStepValidationPhone) {
-      this.stepsValidationAccount = 'both';
+      this.alertValidationText = this.translateService.instant('accountValidation.alertSteps.alertEmailAndPhoneValidation');
     } else if (this.hasStepValidationPhone) {
-      this.stepsValidationAccount = 'phone';
+      this.alertValidationText = this.translateService.instant('accountValidation.alertSteps.alertPhoneValidation');
     } else {
-      this.stepsValidationAccount = 'email';
+      this.alertValidationText = this.translateService.instant('accountValidation.alertSteps.alertEmailValidation');
     }
   }
 }

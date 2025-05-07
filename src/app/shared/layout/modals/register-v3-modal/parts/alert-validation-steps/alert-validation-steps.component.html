@@ -1,18 +1,6 @@
-<div class="alert-container">
-    <div class="section-alert">
-        <span class="success-modal__icon">
-            <icon-circle-info color="var(--foreground-inputs-odds)" [size]="12" />
-        </span>
-        @switch (stepsValidationAccount) {
-            @case ('both') {
-            <span>{{'register.stepsEmailValidation.emailAndPhoneValidation' | translate}}</span>
-            }
-            @case ('phone') {
-            <span>{{'register.stepsEmailValidation.phoneValidation' | translate}}</span>
-            }
-            @default {
-            <span>{{'register.stepsEmailValidation.emailValidation' | translate}}</span>
-            }
-        }
+<div class="alert-validation-steps">
+    <div class="alert-validation-steps__body">
+        <icon-circle-info color="var(--foreground-inputs-odds)" [size]="12" />
+        <span>{{alertValidationText}}</span>
     </div>
 </div>

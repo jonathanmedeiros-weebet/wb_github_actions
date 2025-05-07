@@ -828,12 +828,7 @@
         "day":"Día",
         "month":"Mes",
         "year":"Año",
-        "brasil": "Brasil",
-        "stepsEmailValidation": {
-            "emailValidation": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
-            "phoneValidation": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
-            "emailAndPhoneValidation": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
-        }
+        "brasil": "Brasil"
     },
     "registerCancel": {
         "titleCancelRegister": "¿Está seguro de que desea cancelar su inscripción?",
@@ -887,6 +882,13 @@
         "terms": {
             "title": "Términos y condiciones",
             "description": "Términos de uso, política de privacidad y términos de servicio."
+        }
+    },
+    "accountValidation": {
+        "alertSteps": {
+            "alertEmailValidation": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
+            "alertPhoneValidation": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
+            "alertEmailAndPhoneValidation": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
         }
     }
 }
