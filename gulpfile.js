@@ -1946,3 +1946,12 @@ gulp.task('betvem.io', function (done) {
         styles: ""
     });
 });
+
+gulp.task('apostecerto.io', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "apostecerto.io",
+        banca: "APOSTE CERTO",
+        styles: ""
+    });
+});
