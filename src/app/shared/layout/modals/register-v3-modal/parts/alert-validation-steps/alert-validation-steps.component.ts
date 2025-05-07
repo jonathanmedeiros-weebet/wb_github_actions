@@ -16,13 +16,14 @@ export class AlertValidationStepsComponent {
   public hasStepValidation: boolean = false;
 
   constructor(private paramsService: ParametrosLocaisService,
-    private translateService : TranslateService,
+    private translateService: TranslateService,
   ) { }
+  
   ngOnInit() {
     this.hasStepValidationEmail = Boolean(this.paramsService.getOpcoes().validacao_email_obrigatoria);
     this.hasStepValidationPhone = Boolean(this.paramsService.getOpcoes().mandatory_phone_validation);
     this.hasStepValidation = this.hasStepValidationEmail || this.hasStepValidationPhone;
-    
+
     if (this.hasStepValidationEmail && this.hasStepValidationPhone) {
       this.alertValidationText = this.translateService.instant('accountValidation.alertSteps.alertEmailAndPhoneValidationRequired');
     } else if (this.hasStepValidationPhone) {
