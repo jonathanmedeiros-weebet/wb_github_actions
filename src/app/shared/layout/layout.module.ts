@@ -130,6 +130,13 @@ import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-
 import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
+import { 
+    AccountVerificationDocumentStepComponent,
+    AccountVerificationEmailStepComponent,
+    AccountVerificationOnboardingComponent,
+    AccountVerificationStepBarComponent,
+    AccountVerificationPhoneStepComponent
+} from './modals/account-verification-onboarding';
 
 @NgModule({
     imports: [
@@ -260,6 +267,11 @@ import { SuccessModalComponent } from './modals/success-modal/success-modal.comp
         BettingShopSwitchModalComponent,
         SuccessModalComponent,
         IconCheckCircleComponent,
+        AccountVerificationOnboardingComponent,
+        AccountVerificationEmailStepComponent,
+        AccountVerificationPhoneStepComponent,
+        AccountVerificationDocumentStepComponent,
+        AccountVerificationStepBarComponent
     ],
     exports: [
         MainLayoutComponent,

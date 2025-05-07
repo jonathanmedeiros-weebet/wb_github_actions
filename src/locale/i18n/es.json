@@ -301,7 +301,8 @@
         "continue": "Continuar",
         "updateInformationPersonalData": "Actualice y gestione su información, como nombre, correo electrónico y número de teléfono, para garantizar una experiencia personalizada y segura en el sistema.",
         "change_email": "Cambiar correo electrónico",
-        "change_phone": "Cambiar teléfono"
+        "change_phone": "Cambiar teléfono",
+        "logout_account": "Salir de la cuenta"
     },
     "bankAccounts": {
         "title" : "Bank Accounts",
