@@ -888,9 +888,9 @@
     },
     "accountValidation": {
         "alertSteps": {
-            "alertEmailValidation": "As a form of validation, we will send a security code to your registered e-mail address",
-            "alertPhoneValidation": "As a form of validation, we will send a security code to your registered phone number",
-            "alertEmailAndPhoneValidation": "As a form of validation, we will send a security code to your registered e-mail address and phone number"
+            "alertEmailValidationRequired": "As a form of validation, we will send a security code to your registered e-mail address",
+            "alertPhoneValidationRequired": "As a form of validation, we will send a security code to your registered phone number",
+            "alertEmailAndPhoneValidationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number"
         }
     }
 }

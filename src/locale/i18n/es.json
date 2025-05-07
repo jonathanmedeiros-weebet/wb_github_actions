@@ -886,9 +886,9 @@
     },
     "accountValidation": {
         "alertSteps": {
-            "alertEmailValidation": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
-            "alertPhoneValidation": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
-            "alertEmailAndPhoneValidation": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
+            "alertEmailValidationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
+            "alertPhoneValidationRequired": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
+            "alertEmailAndPhoneValidationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
         }
     }
 }
