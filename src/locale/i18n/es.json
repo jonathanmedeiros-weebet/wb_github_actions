@@ -884,11 +884,9 @@
             "description": "Términos de uso, política de privacidad y términos de servicio."
         }
     },
-    "accountValidation": {
-        "alertSteps": {
-            "alertEmailValidationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
-            "alertPhoneValidationRequired": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
-            "alertEmailAndPhoneValidationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
-        }
+    "accountVerification": {
+        "alertEmailVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
+        "alertPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
+        "alertEmailAndPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
     }
 }

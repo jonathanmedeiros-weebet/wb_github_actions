@@ -891,11 +891,9 @@
             "description": "Termos de uso, política de privacidade e termos de serviço."
         }
     },
-    "accountValidation": {
-        "alertSteps": {
-            "alertEmailValidationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail cadastrado",
-            "alertPhoneValidationRequired": "Como forma de validação, enviaremos um código de segurança ao seu telefone cadastrado",
-            "alertEmailAndPhoneValidationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail e telefone cadastrados"
-        }
+    "accountVerification": {
+        "alertEmailVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail cadastrado",
+        "alertPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu telefone cadastrado",
+        "alertEmailAndPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail e telefone cadastrados"
     }
 }

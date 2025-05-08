@@ -886,11 +886,9 @@
             "description": "Terms of Use, Privacy Policy, and Terms of Service."
         }
     },
-    "accountValidation": {
-        "alertSteps": {
-            "alertEmailValidationRequired": "As a form of validation, we will send a security code to your registered e-mail address",
-            "alertPhoneValidationRequired": "As a form of validation, we will send a security code to your registered phone number",
-            "alertEmailAndPhoneValidationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number"
-        }
+    "accountVerification": {
+        "alertEmailVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address",
+        "alertPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered phone number",
+        "alertEmailAndPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number"
     }
 }

@@ -131,7 +131,7 @@ import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-mo
 import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
 import { IconCircleInfoComponent } from './icons/icon-circle-infocomponent';
-import { AlertValidationStepsComponent } from './modals/register-v3-modal/parts/alert-validation-steps/alert-validation-steps.component';
+import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
 
 @NgModule({
     imports: [
@@ -262,7 +262,7 @@ import { AlertValidationStepsComponent } from './modals/register-v3-modal/parts/
         SuccessModalComponent,
         IconCheckCircleComponent,
         IconCircleInfoComponent,
-        AlertValidationStepsComponent
+        AlertVerificationStepsComponent
     ],
     exports: [
         MainLayoutComponent,

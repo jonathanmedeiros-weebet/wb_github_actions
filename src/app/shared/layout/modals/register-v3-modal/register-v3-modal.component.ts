@@ -67,7 +67,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public cpfSpinner = false;
     private previousUrl: string;
     public storagedBtag: string | null = null;
-    public showAlertStepsValidationAccount: boolean = false;
+    public showAlertStepsVerificationAccount: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -311,9 +311,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
 
         this.form.valueChanges.subscribe(() => {
             if (this.form.controls.email.valid && this.form.controls.telefone.valid) {
-                this.showAlertStepsValidationAccount = true;
+                this.showAlertStepsVerificationAccount = true;
             } else {
-                this.showAlertStepsValidationAccount = false;
+                this.showAlertStepsVerificationAccount = false;
             }
         });
 
