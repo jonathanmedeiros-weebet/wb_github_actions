@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from './../shared/shared.module';
 import { DesafioApostaService, DesafioBilheteService, DesafioCategoriaService, DesafioPreApostaService, DesafioService } from '../services';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { TranslateModule } from '@ngx-translate/core';
 import { SuperoddsWrapperComponent } from './superodds-wrapper/superodds-wrapper.component';
 import { SuperoddsListComponent } from './superodds-list/superodds-list.component';
@@ -19,8 +19,9 @@ import { SuperoddService } from '../shared/services/superodd.service';
         CommonModule,
         SuperoddsRoutingModule,
         SharedModule,
-        NgxMaskModule.forRoot(),
-        TranslateModule
+        TranslateModule,
+        NgxMaskDirective,
+        NgxMaskPipe
     ],
     exports: [
     ],
@@ -30,7 +31,8 @@ import { SuperoddService } from '../shared/services/superodd.service';
         DesafioCategoriaService,
         DesafioBilheteService,
         DesafioApostaService,
-        DesafioPreApostaService
+        DesafioPreApostaService,
+        provideNgxMask()
     ]
 })
 export class SuperoddsModule { }

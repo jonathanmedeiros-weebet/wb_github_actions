@@ -15,7 +15,7 @@ import {
     ParametrosLocaisService,
 } from '../../services';
 import { GeolocationService, Geolocation} from 'src/app/shared/services/geolocation.service';
-import * as clone from 'clone';
+import clone from 'clone';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountVerificationService } from 'src/app/shared/services/account-verification.service';
 import { SuperoddService } from 'src/app/shared/services/superodd.service';
