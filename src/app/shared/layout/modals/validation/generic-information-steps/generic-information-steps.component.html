@@ -1,26 +1,25 @@
-<div class="generic-information-steps" id="generic-information-steps">
+<div class="generic-information-steps">
     <div class="generic-information-steps__header">
-        <button class="generic-information-steps__btn-to-cancel btnClose"  aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <button class="generic-information-steps__btn-to-cancel" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-     <div class="body">
-        <div *ngFor="let section of sections">
-            <div class="generic-information-steps__title">
-                <h1>{{section.title}}</h1>
+    <div *ngFor="let section of sections" class="generic-information-steps__body">
+        <div class="generic-information-steps__title">
+            <span>{{section.title}}</span>
+        </div>
+        <div class="generic-information-steps__item" *ngFor="let item of section.items">
+            <div class="generic-information-steps__item-icon">
+                <ng-template #iconContainer></ng-template>
             </div>
-            <div class="generic-information-steps__body" *ngFor="let item of section.items">
-                <div class="generic-information-steps-body__icon">
-                    <ng-template #iconContainer></ng-template>
-                </div>
-                <span class="generic-information-steps-body__text"> {{item.text}}</span>
-            </div>
+            <span class="generic-information-steps-item__text"> {{item.text}}</span>
         </div>
     </div>
-    
-    <ng-template #confirmLogout>
-        <button class="generic-information-steps__btn-to-cancel" (click)="logout()">
-            {{ confirmLogoutText }}
+    <div class="generic-information-steps__footer">
+        <button class="generic-information-steps__action-buton" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')" *ngIf="hasButton">
+            <span aria-hidden="true">{{ textButton }} </span>
         </button>
-    </ng-template>
+    </div>
 </div>
