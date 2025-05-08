@@ -1952,6 +1952,7 @@ gulp.task('apostecerto.io', function (done) {
         server: "front2.weebet.tech",
         host: "apostecerto.io",
         banca: "APOSTE CERTO",
-        styles: ""
+        styles: "",
+        dominioTemp: "apostecerto.site"
     });
 });
