@@ -884,5 +884,10 @@
             "title": "Términos y condiciones",
             "description": "Términos de uso, política de privacidad y términos de servicio."
         }
+    },
+    "accountVerification": {
+        "alertEmailVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
+        "alertPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
+        "alertEmailAndPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
     }
 }

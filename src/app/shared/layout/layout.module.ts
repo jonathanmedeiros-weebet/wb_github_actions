@@ -137,6 +137,8 @@ import {
     AccountVerificationStepBarComponent,
     AccountVerificationPhoneStepComponent
 } from './modals/account-verification-onboarding';
+import { IconCircleInfoComponent } from './icons/icon-circle-infocomponent';
+import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
 
 @NgModule({
     imports: [
@@ -145,7 +147,6 @@ import {
         ReactiveFormsModule,
         RouterModule,
         GoogleSigninButtonModule,
-
         UtilsModule,
         AngularSvgIconModule.forRoot(),
         NgxMaskDirective,
@@ -271,7 +272,9 @@ import {
         AccountVerificationEmailStepComponent,
         AccountVerificationPhoneStepComponent,
         AccountVerificationDocumentStepComponent,
-        AccountVerificationStepBarComponent
+        AccountVerificationStepBarComponent,
+        IconCircleInfoComponent,
+        AlertVerificationStepsComponent
     ],
     exports: [
         MainLayoutComponent,

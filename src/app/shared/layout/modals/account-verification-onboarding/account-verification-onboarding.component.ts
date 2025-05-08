@@ -23,7 +23,7 @@ const ORDERED_STEPS = [ // define order here ;)
 })
 export class AccountVerificationOnboardingComponent implements OnInit {
   public step = AccountVerificationStepsEnums.EMAIL;
-  public verifiedSteps = {};
+  public verifiedSteps = [];
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -45,8 +45,6 @@ export class AccountVerificationOnboardingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit')
-
     this.accountVerificationService
       .verifiedSteps
       .subscribe((verifiedSteps) => {
