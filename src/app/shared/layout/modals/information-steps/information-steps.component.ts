@@ -5,12 +5,13 @@ import { IconAssuredWorkloadComponent } from '../../icons/icon-assured-workload'
 import { IconVerifiedUserComponent } from '../../icons/icon-verified-user';
 import { TranslateService } from '@ngx-translate/core';
 import { IconMailComponent } from '../../icons/icon-mail';
-import { IconSignalCelularComponent } from '../../icons/icon-signal-celular';
+import { IconSignalPhoneComponent } from '../../icons/icon-signal-phone';
+import { ButtonCloseComponent } from "../button-close/button-close.component";
 
 @Component({
   selector: 'app-information-steps',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonCloseComponent],
   templateUrl: './information-steps.component.html',
   styleUrl: './information-steps.component.scss'
 })
@@ -34,7 +35,7 @@ export class InformationStepsComponent implements OnInit {
     return false;
   }
 
-  get hasTitle(): string {
+  get title(): string {
     if (this.informationType === 'rules') {
       return this.translate.instant('accountVerification.playngByTheRules');
     } else if (this.informationType === 'phone' || this.informationType === 'email') {
@@ -54,7 +55,7 @@ export class InformationStepsComponent implements OnInit {
         break;
       case 'phone':
         this.informations = [
-          { description: this.translate.instant('accountVerification.checkPhoneSignal'), icon: IconSignalCelularComponent, iconProps: { size: '20px' } },
+          { description: this.translate.instant('accountVerification.checkPhoneSignal'), icon: IconSignalPhoneComponent, iconProps: { size: '20px' } },
           { description: this.translate.instant('accountVerification.checkPhoneNumberRegistered'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
         ];
         break;
@@ -70,6 +71,10 @@ export class InformationStepsComponent implements OnInit {
   }
 
   public handleClick() {
+    this.activeModal.close('cancel');
+  }
+
+  public handleClose() {
     this.activeModal.close('cancel');
   }
 }

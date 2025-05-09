@@ -1,27 +1,23 @@
 .information-steps {
-    min-height: 358px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     background-color: var(--header);
     gap: 67px;
 
     &__title {
         display: flex;
-        color: var(--foreground);
-        font-family: "Open Sans";
+        color: var(--foreground-header);
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
-        line-height: 120%;
         text-align: start;
     }
 
     &__body {
         display: flex;
-        width: 353px;
+        max-width: 90%;
         flex-direction: column;
         justify-content: center;
         gap: 32px;
@@ -32,12 +28,10 @@
         align-items: flex-start;
         gap: 12px;
         align-self: stretch;
-        color: rgba(var(--foreground-rgb), 0.70);
-        font-family: "Open Sans";
+        color: rgba(var(--foreground-header-rgb), 0.70);
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
-        line-height: normal;
         align-items: center;
     }
 
@@ -54,23 +48,11 @@
 
     &__footer {
         padding-bottom: 24px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
-    &__btn-to-cancel {
-        font-size: 32px;
-        line-height: 32px;
-        position: absolute;
-        top: 21px;
-        right: 24px;
-        color: var(--highlight);
-        cursor: pointer;
-        background-color: var(--header);
-        border: none;
-    }
-
-    &__btn-to-cancel:focus {
-        outline: none;
-    }
 
     &__action-buton {
         background-color: var(--header);
@@ -78,12 +60,19 @@
         color: var(--highlight);
         border-radius: 4px;
         display: flex;
-        width: 353px;
+        width: 90%;
         height: 40px;
         padding: 8px;
         justify-content: center;
         align-items: center;
         gap: 4px;
         flex-shrink: 0;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        :host::ng-deep .modal-dialog {
+            height: auto !important;
+        }
+        
     }
 }

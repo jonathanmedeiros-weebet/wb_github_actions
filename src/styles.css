@@ -1923,6 +1923,11 @@ ngb-datepicker-month {
     .titulo{
         padding: 0;
     }
+
+    .modal-information-steps .modal-dialog {
+        padding: 0 24px;
+        height: auto;
+    }
 }
 
 .custom-modal-force-password .modal-dialog > .modal-content {
