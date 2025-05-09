@@ -1956,3 +1956,12 @@ gulp.task('apostecerto.io', function (done) {
         dominioTemp: "apostecerto.site"
     });
 });
+
+gulp.task('brasavip.bet', function (done) {
+    tasks(done, {
+        server: "front2.weebet.tech",
+        host: "brasavip.bet",
+        banca: "BRASA VIP",
+        styles: "",
+    });
+});

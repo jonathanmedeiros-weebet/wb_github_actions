@@ -208,7 +208,8 @@
     "avante.bet": "gulp avante.bet",
     "decolabet.com": "gulp decolabet.com",
     "betvem.io": "gulp betvem.io",
-    "apostecerto.io": "gulp apostecerto.io"
+    "apostecerto.io": "gulp apostecerto.io",
+    "brasavip.bet": "gulp brasavip.bet"
   },
   "private": true,
   "dependencies": {
