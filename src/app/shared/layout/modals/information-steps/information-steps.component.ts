@@ -8,7 +8,7 @@ import { IconMailComponent } from '../../icons/icon-mail';
 import { IconSignalCelularComponent } from '../../icons/icon-signal-celular';
 
 @Component({
-  selector: 'app-generic-information-steps',
+  selector: 'app-information-steps',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './information-steps.component.html',
