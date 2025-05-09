@@ -16,6 +16,7 @@
     border: none;
     background: var(--header);
     color: var(--foreground-header);
+    justify-content: space-between;
 }
 
 .modal-header i{
@@ -132,6 +133,7 @@ hr {
 }
 .item .nome{
     margin: 1px;
+    color: var(--foreground-game);
 }
 .item .cotacao{
     margin: 1px;

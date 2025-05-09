@@ -76,11 +76,11 @@
                                     <span class="info-cupom">
                                         {{item.categoria_nome}}:
                                     </span>
-                                    <span>
+                                    <span style="color: var(--foreground-game);">
                                         {{item.odd_nome}}
                                         ({{item.cotacao}})
                                     </span>
-                                    <span *ngIf="item.ao_vivo"> | AO VIVO</span>
+                                    <span *ngIf="item.ao_vivo" style="color: var(--foreground-game);"> | AO VIVO</span>
                                 </p>
                             </div>
                         </td>
