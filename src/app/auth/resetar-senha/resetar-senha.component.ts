@@ -17,7 +17,7 @@ import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { Geolocation, GeolocationService } from 'src/app/shared/services/geolocation.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Usuario } from 'src/app/shared/models/usuario';
-import { VerificationTypes } from 'src/app/shared/enums';
+import { AccountVerificationTypes } from 'src/app/shared/enums';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 enum RecoveryStep {
@@ -378,7 +378,7 @@ export class ResetarSenhaComponent extends BaseFormComponent implements OnInit, 
 
     private openTwoFactorAuthModal() {
         this.verifyPhoneOrEmailModal = this.accountVerificationService.openModalPhoneOrEmailVerificationStep({
-            type: VerificationTypes.PHONE,
+            type: AccountVerificationTypes.PHONE,
             value: this.user.phone
         });
 
