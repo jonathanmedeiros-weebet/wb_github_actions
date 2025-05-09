@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, Input, QueryList, Type, ViewChildren, ViewContainerRef, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
-import { IconAssuredWorkloadComponent } from '../../../icons/icon-assured-workload';
-import { IconVerifiedUserComponent } from '../../../icons/icon-verified-user';
+import { IconAssuredWorkloadComponent } from '../../icons/icon-assured-workload';
+import { IconVerifiedUserComponent } from '../../icons/icon-verified-user';
 import { TranslateService } from '@ngx-translate/core';
-import { IconMailComponent } from '../../../icons/icon-mail';
-import { IconSignalCelularComponent } from '../../../icons/icon-signal-celular';
+import { IconMailComponent } from '../../icons/icon-mail';
+import { IconSignalCelularComponent } from '../../icons/icon-signal-celular';
 
 @Component({
   selector: 'app-generic-information-steps',
@@ -59,5 +59,9 @@ export class InformationStepsComponent implements OnInit {
         { text: this.translate.instant('accountVerification.checkEmailRegistered'), icon: IconVerifiedUserComponent, iconProps:{size: '20px'}}
       ];
     }
+  }
+
+  public handleClick() {
+    this.activeModal.close('cancel');
   }
 }

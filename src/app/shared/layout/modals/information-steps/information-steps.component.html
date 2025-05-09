@@ -18,7 +18,7 @@
     </div>
     <div class="information-steps__footer">
         <button class="information-steps__action-buton" aria-label="Close"
-            (click)="activeModal.dismiss('Cross click')" *ngIf="hasButton">
+            (click)="handleClick()" *ngIf="hasButton">
             <span aria-hidden="true">{{ textButton }} </span>
         </button>
     </div>
