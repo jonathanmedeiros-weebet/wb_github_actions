@@ -708,7 +708,8 @@
         "next": "Próximo",
         "previous": "Anterior",
         "save_change": "Salvar Alteração",
-        "view": "Visualizar"
+        "view": "Visualizar",
+        "talkToSupport": "Fale com o suporte"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -904,8 +905,5 @@
         "checkPhoneNumberRegistered": "Verifique se o número cadastrado  recebe ligações e mensagens",
         "checkingLegistation": "Como cumprimento da legislação, precisamos realizar essa etapa de validação.",
         "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!"
-    },
-    "buttons": {
-        "talkToSupport": "Fale com o suporte"
     }
 }

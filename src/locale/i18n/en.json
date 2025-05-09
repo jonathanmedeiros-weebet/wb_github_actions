@@ -704,7 +704,8 @@
         "next": "Next",
         "previous": "Previous",
         "save_change": "Save change",
-        "view": "View"
+        "view": "View",
+        "talkToSupport": "Talk to support"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -899,8 +900,5 @@
         "checkPhoneNumberRegistered": "Check if the registered number receives calls and messages",
         "checkingLegistation": "In order to comply with the legislation, we need to carry out this validation stage.",
         "securePlataform": "This measure guarantees more security for you on our platform!"
-    },
-    "buttons": {
-        "talkToSupport": "Talk to support"
     }
 }
