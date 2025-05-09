@@ -35,29 +35,37 @@ export class InformationStepsComponent implements OnInit {
   }
 
   get hasTitle(): string {
-    if (this.informationType === 'rules')
+    if (this.informationType === 'rules') {
       return this.translate.instant('accountVerification.playByTheRules');
-    else {
+    } else if (this.informationType === 'phone' || this.informationType === 'email') {
       return this.translate.instant('accountVerification.problemsWithCode');
+    } else {
+      return '';
     }
   }
 
   ngOnInit() {
-    if (this.informationType === 'rules') {
-      this.informations = [
-        { text: this.translate.instant('accountVerification.checkingLegistation'), icon: IconAssuredWorkloadComponent, iconProps:{size: '20px'}},
-        { text: this.translate.instant('accountVerification.security'), icon: IconVerifiedUserComponent,iconProps:{size: '20px'}}
-      ];
-    } else if (this.informationType === 'phone') {
-      this.informations = [
-        { text: this.translate.instant('accountVerification.checkPhoneSignal'), icon: IconSignalCelularComponent, iconProps:{size: '20px'}},
-        { text: this.translate.instant('accountVerification.checkPhoneNumberRegistered'), icon: IconVerifiedUserComponent, iconProps:{size: '20px'}}
-      ];
-    } else if (this.informationType === 'mail') {
-      this.informations = [
-        { text: this.translate.instant('accountVerification.checkSpam'), icon: IconMailComponent, iconProps:{size: '20px'}},
-        { text: this.translate.instant('accountVerification.checkEmailRegistered'), icon: IconVerifiedUserComponent, iconProps:{size: '20px'}}
-      ];
+    switch (this.informationType) {
+      case 'rules':
+        this.informations = [
+          { text: this.translate.instant('accountVerification.checkingLegistation'), icon: IconAssuredWorkloadComponent, iconProps: { size: '20px' } },
+          { text: this.translate.instant('accountVerification.security'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
+        ];
+        break;
+      case 'phone':
+        this.informations = [
+          { text: this.translate.instant('accountVerification.checkPhoneSignal'), icon: IconSignalCelularComponent, iconProps: { size: '20px' } },
+          { text: this.translate.instant('accountVerification.checkPhoneNumberRegistered'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
+        ];
+        break;
+      case 'email':
+        this.informations = [
+          { text: this.translate.instant('accountVerification.checkSpam'), icon: IconMailComponent, iconProps: { size: '20px' } },
+          { text: this.translate.instant('accountVerification.checkEmailRegistered'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
+        ];
+        break;
+      default:
+        break;
     }
   }
 
