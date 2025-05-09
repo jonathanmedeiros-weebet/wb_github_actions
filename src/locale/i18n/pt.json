@@ -901,8 +901,8 @@
         "checkEmailRegistered": "Certifique-se de que você tem acesso ao e-mail cadastrado.",
         "checkPhoneSignal": "Verifique se o seu telefone está com sinal telefônico",
         "checkPhoneNumberRegistered": "Verifique se o número cadastrado  recebe ligações e mensagens",
-        "checkSignal": "Verifique se o seu telefone está com sinal telefônico",
-        "checkPhone": "Verifique se o número cadastrado  recebe ligações e mensagens"
+        "checkingLegistation": "Como cumprimento da legislação, precisamos realizar essa etapa de validação.",
+        "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!"
     },
     "buttons": {
         "talkToSupport": "Fale com o suporte"

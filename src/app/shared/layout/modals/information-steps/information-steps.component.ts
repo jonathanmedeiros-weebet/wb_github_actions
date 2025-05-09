@@ -36,7 +36,7 @@ export class InformationStepsComponent implements OnInit {
 
   get hasTitle(): string {
     if (this.informationType === 'rules') {
-      return this.translate.instant('accountVerification.playByTheRules');
+      return this.translate.instant('accountVerification.playngByTheRules');
     } else if (this.informationType === 'phone' || this.informationType === 'email') {
       return this.translate.instant('accountVerification.problemsWithCode');
     } else {
@@ -49,7 +49,7 @@ export class InformationStepsComponent implements OnInit {
       case 'rules':
         this.informations = [
           { description: this.translate.instant('accountVerification.checkingLegistation'), icon: IconAssuredWorkloadComponent, iconProps: { size: '20px' } },
-          { description: this.translate.instant('accountVerification.security'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
+          { description: this.translate.instant('accountVerification.securePlataform'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
         ];
         break;
       case 'phone':
