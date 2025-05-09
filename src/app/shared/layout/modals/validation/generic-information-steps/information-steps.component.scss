@@ -1,4 +1,4 @@
-.generic-information-steps {
+.information-steps {
     min-height: 358px;
     display: flex;
     flex-direction: column;
@@ -7,6 +7,17 @@
     flex-direction: column;
     background-color: var(--header);
     gap: 67px;
+
+    &__title {
+        display: flex;
+        color: var(--foreground);
+        font-family: "Open Sans";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+        text-align: start;
+    }
 
     &__body {
         display: flex;
@@ -21,32 +32,24 @@
         align-items: flex-start;
         gap: 12px;
         align-self: stretch;
-        color: rgba(255, 255, 255, 0.70);
+        color: rgba(var(--foreground-rgb), 0.70);
         font-family: "Open Sans";
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        align-items: center;
     }
 
     &__item-icon {
-        width: 36px;
-        height: 36px;
+        min-width: 28px;
+        height: 28px;
         display: flex;
         align-items: center;
         border-radius: 4px;
-        border: 4px solid rgba(var(--highlight-rgb), 0.05);
-        background: rgba(var(--highlight-rgb) 0.10);
-    }
-
-    &__title {
-        color: #FFF;
-        font-family: "Open Sans";
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 120%;
-        text-align: start;
+        outline: 4px solid rgba(var(--highlight-rgb), 0.05);
+        background: rgba(var(--highlight-rgb), 0.10);
+        justify-content: center;
     }
 
     &__footer {
@@ -63,6 +66,10 @@
         cursor: pointer;
         background-color: var(--header);
         border: none;
+    }
+
+    &__btn-to-cancel:focus {
+        outline: none;
     }
 
     &__action-buton {

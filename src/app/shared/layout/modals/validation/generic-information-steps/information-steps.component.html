@@ -1,0 +1,25 @@
+<div class="information-steps">
+    <div class="information-steps__header">
+        <button class="information-steps__btn-to-cancel" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="information-steps__body">
+        <div class="information-steps__title">
+            <span>{{ hasTitle }}</span>
+        </div>
+        <div class="information-steps__item" *ngFor="let information of informations">
+            <div class="information-steps__item-icon">
+                <ng-container *ngComponentOutlet="information.icon; inputs: information.iconProps"></ng-container>
+            </div>
+            <span class="information-steps-item__text"> {{ information.text }}</span>
+        </div>
+    </div>
+    <div class="information-steps__footer">
+        <button class="information-steps__action-buton" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')" *ngIf="hasButton">
+            <span aria-hidden="true">{{ textButton }} </span>
+        </button>
+    </div>
+</div>

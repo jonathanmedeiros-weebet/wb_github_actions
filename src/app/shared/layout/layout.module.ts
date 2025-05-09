@@ -132,6 +132,7 @@ import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
 import { IconCircleInfoComponent } from './icons/icon-circle-infocomponent';
 import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
+import { IconMailComponent } from './icons/icon-mail';
 
 @NgModule({
     imports: [
@@ -262,7 +263,8 @@ import { AlertVerificationStepsComponent } from './modals/register-v3-modal/part
         SuccessModalComponent,
         IconCheckCircleComponent,
         IconCircleInfoComponent,
-        AlertVerificationStepsComponent
+        AlertVerificationStepsComponent,
+        IconMailComponent
     ],
     exports: [
         MainLayoutComponent,

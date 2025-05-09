@@ -889,6 +889,17 @@
     "accountVerification": {
         "alertEmailVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address",
         "alertPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered phone number",
-        "alertEmailAndPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number"
+        "alertEmailAndPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number",
+        "problemsWithCode": "Problems with the code?",
+        "playngByTheRules": "Playing by the rules",
+        "checkSpam": "Check your spam box.",
+        "checkEmailRegistered": "Make sure you have access to your registered e-mail.",
+        "checkPhoneSignal": "Check if your phone has signal",
+        "checkPhoneNumberRegistered": "Check if the registered number receives calls and messages",        
+        "checkSignal": "Check if your phone has signal",
+        "checkPhone": "Check if the registered number receives calls and messages"
+    },
+    "buttons": {
+        "talkToSupport": "Talk to support"
     }
 }

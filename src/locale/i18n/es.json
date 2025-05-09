@@ -887,6 +887,17 @@
     "accountVerification": {
         "alertEmailVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
         "alertPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
-        "alertEmailAndPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
+        "alertEmailAndPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados",
+        "problemsWithCode": "Problemas con el código?",
+        "playngByTheRules": "Jugando con las reglas",
+        "checkSpam": "Verifique su bandeja de spam.",
+        "checkEmailRegistered": "Asegúrese de tener acceso al correo registrado.",
+        "checkPhoneSignal": "Verifique si su teléfono tiene sinal telefónica",
+        "checkPhoneNumberRegistered": "Verifique si el número registrado recibe llamadas y mensajes",        
+        "checkSignal": "Verifique si su teléfono tiene sinal telefónica",
+        "checkPhone": "Verifique si el número registrado recibe llamadas y mensajes"
+    },
+    "buttons": {
+        "talkToSupport": "Hable con el soporte"
     }
 }
