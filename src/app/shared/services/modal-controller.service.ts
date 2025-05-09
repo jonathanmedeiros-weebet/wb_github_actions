@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { SuccessModalComponent } from "../layout/modals/success-modal/success-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AccountVerificationOnboardingComponent } from "../layout/modals/account-verification-onboarding";
 
 interface SuccessModalOptions {
   title: string;
@@ -46,6 +47,15 @@ export class ModalControllerService {
         resolve();
       })
     })
+  }
+
+  public openAccountVerificationOnboarding() {
+    this.ngbModalService.open(AccountVerificationOnboardingComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      centered: true,
+      windowClass: 'modal-460 modal-generic',
+      backdrop: 'static',
+    });
   }
 }
 

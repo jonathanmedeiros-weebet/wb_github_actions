@@ -302,7 +302,8 @@
         "jogoResponsavel": "Responsible Gaming",
         "updateInformationPersonalData": "Update and manage your information, such as name, email and phone number, to ensure a personalized and secure experience in the system.",
         "change_email": "Change email",
-        "change_phone": "Change phone"
+        "change_phone": "Change phone",
+        "logout_account": "Log out"
     },
     "bankAccounts": {
         "title" : "Cuentas bancarias",
