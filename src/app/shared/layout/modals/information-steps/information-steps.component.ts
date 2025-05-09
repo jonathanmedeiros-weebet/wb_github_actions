@@ -48,20 +48,20 @@ export class InformationStepsComponent implements OnInit {
     switch (this.informationType) {
       case 'rules':
         this.informations = [
-          { text: this.translate.instant('accountVerification.checkingLegistation'), icon: IconAssuredWorkloadComponent, iconProps: { size: '20px' } },
-          { text: this.translate.instant('accountVerification.security'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
+          { description: this.translate.instant('accountVerification.checkingLegistation'), icon: IconAssuredWorkloadComponent, iconProps: { size: '20px' } },
+          { description: this.translate.instant('accountVerification.security'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
         ];
         break;
       case 'phone':
         this.informations = [
-          { text: this.translate.instant('accountVerification.checkPhoneSignal'), icon: IconSignalCelularComponent, iconProps: { size: '20px' } },
-          { text: this.translate.instant('accountVerification.checkPhoneNumberRegistered'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
+          { description: this.translate.instant('accountVerification.checkPhoneSignal'), icon: IconSignalCelularComponent, iconProps: { size: '20px' } },
+          { description: this.translate.instant('accountVerification.checkPhoneNumberRegistered'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
         ];
         break;
       case 'email':
         this.informations = [
-          { text: this.translate.instant('accountVerification.checkSpam'), icon: IconMailComponent, iconProps: { size: '20px' } },
-          { text: this.translate.instant('accountVerification.checkEmailRegistered'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
+          { description: this.translate.instant('accountVerification.checkSpam'), icon: IconMailComponent, iconProps: { size: '20px' } },
+          { description: this.translate.instant('accountVerification.checkEmailRegistered'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
         ];
         break;
       default:
