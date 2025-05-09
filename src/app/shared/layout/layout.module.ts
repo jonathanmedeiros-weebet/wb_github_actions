@@ -130,6 +130,8 @@ import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-
 import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
+import { IconCircleInfoComponent } from './icons/icon-circle-infocomponent';
+import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
 
 @NgModule({
     imports: [
@@ -138,7 +140,6 @@ import { SuccessModalComponent } from './modals/success-modal/success-modal.comp
         ReactiveFormsModule,
         RouterModule,
         GoogleSigninButtonModule,
-
         UtilsModule,
         AngularSvgIconModule.forRoot(),
         NgxMaskDirective,
@@ -260,6 +261,8 @@ import { SuccessModalComponent } from './modals/success-modal/success-modal.comp
         BettingShopSwitchModalComponent,
         SuccessModalComponent,
         IconCheckCircleComponent,
+        IconCircleInfoComponent,
+        AlertVerificationStepsComponent
     ],
     exports: [
         MainLayoutComponent,

@@ -67,6 +67,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     public cpfSpinner = false;
     private previousUrl: string;
     public storagedBtag: string | null = null;
+    public showAlertStepsVerificationAccount: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -307,6 +308,14 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             this.form.controls.senha.addValidators(FormValidations.strongPasswordValidator())
             this.form.controls.senha.updateValueAndValidity();
         }
+
+        this.form.valueChanges.subscribe(() => {
+            if (this.form.controls.email.valid && this.form.controls.telefone.valid) {
+                this.showAlertStepsVerificationAccount = true;
+            } else {
+                this.showAlertStepsVerificationAccount = false;
+            }
+        });
 
         if (this.provedorCaptcha == 'recaptcha') {
             this.form.valueChanges.subscribe(() => {
