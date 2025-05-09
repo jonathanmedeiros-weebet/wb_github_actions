@@ -130,6 +130,13 @@ import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-
 import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
+import { 
+    AccountVerificationDocumentStepComponent,
+    AccountVerificationEmailStepComponent,
+    AccountVerificationOnboardingComponent,
+    AccountVerificationStepBarComponent,
+    AccountVerificationPhoneStepComponent
+} from './modals/account-verification-onboarding';
 import { IconCircleInfoComponent } from './icons/icon-circle-infocomponent';
 import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
 import { IconMailComponent } from './icons/icon-mail';
@@ -262,6 +269,11 @@ import { IconMailComponent } from './icons/icon-mail';
         BettingShopSwitchModalComponent,
         SuccessModalComponent,
         IconCheckCircleComponent,
+        AccountVerificationOnboardingComponent,
+        AccountVerificationEmailStepComponent,
+        AccountVerificationPhoneStepComponent,
+        AccountVerificationDocumentStepComponent,
+        AccountVerificationStepBarComponent,
         IconCircleInfoComponent,
         AlertVerificationStepsComponent,
         IconMailComponent
