@@ -1,0 +1,193 @@
+.account-verification-email-or-phone {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+    height: auto;
+
+    &__footer {
+        margin-top: 50px;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__body {
+        margin-bottom: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+    }
+   
+    &__btn-close {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        
+        background-color: var(--header);
+        color: var(--highlight);
+        height: 29px;
+        width: 29px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    &__title {
+        color: var(--foreground);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: left;
+    }
+
+    &__description {
+        color: rgba(var(--foreground-rgb), .7);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-align: left;
+    }
+
+    &__btn-confirm {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 100%;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        border-radius: 4px;
+        background: var(--highlight);
+        color: var(--foreground-highlight);
+    }
+    &__btn-confirm:disabled {
+        pointer-events: none; 
+        text-decoration: none;
+        opacity: 0.5;
+    }
+
+    &__group-code {
+        display: flex;
+        justify-content: space-between;
+        gap: auto;
+        width: 100%;
+    }
+
+    &__code {
+        width: 45px;
+        height: 61px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 8px;
+        border: 2px solid rgba(var(--foreground-rgb), .3);
+        background: var(--background);
+        color: rgba(var(--foreground-rgb), .8);
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 20px;
+
+        &:focus {
+            border: 2px solid var(--highlight);
+        }
+    }
+
+    &__icon {
+        display: flex;
+        width: 190px;
+        height: 190px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        background: rgba(var(--header-rgb), .3);
+        margin-top: 30px;
+    }
+
+    &__badge {
+        width: 50px;
+        height: 50px;
+
+        color: var(--foreground-header);
+        background: var(--header);
+        border-radius: 100px;
+
+        text-align: center;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+        position: fixed;
+        margin-left: -140px;
+        margin-top: -80px;
+    }
+
+    &__icon svg path {
+        fill: var(--highlight);
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+    }
+}
+
+.resend-code {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+
+    &__label {
+        color: var(--foreground);
+        text-align: center;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 12px;
+
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    &__btn {
+        color: var(--highlight);
+        text-align: center;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 12px;
+
+        &--disabled {
+            color: rgba(var(--highlight-rgb), 0.30);
+            pointer-events: none; 
+            text-decoration: none;
+        }
+    }
+}
+
+@media screen and (min-width: 667px) {
+    .account-verification-email-or-phone {
+        max-width: 400px;
+        position: relative;
+    }
+}

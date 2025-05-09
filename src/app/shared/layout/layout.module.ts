@@ -128,7 +128,6 @@ import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.c
 import { MigrationInformationModalComponent } from './modals/migration-information-modal/migration-information-modal.component';
 import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
 import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
-import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
 import { 
     AccountVerificationDocumentStepComponent,
@@ -137,8 +136,12 @@ import {
     AccountVerificationStepBarComponent,
     AccountVerificationPhoneStepComponent
 } from './modals/account-verification-onboarding';
-import { IconCircleInfoComponent } from './icons/icon-circle-infocomponent';
 import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
+import {
+    IconCheckCircleComponent,
+    IconCircleInfoComponent,
+    IconEnvelopeComponent
+} from './icons';
 
 @NgModule({
     imports: [
@@ -267,14 +270,16 @@ import { AlertVerificationStepsComponent } from './modals/register-v3-modal/part
         BettingShopConnectModalComponent,
         BettingShopSwitchModalComponent,
         SuccessModalComponent,
-        IconCheckCircleComponent,
         AccountVerificationOnboardingComponent,
         AccountVerificationEmailStepComponent,
         AccountVerificationPhoneStepComponent,
         AccountVerificationDocumentStepComponent,
         AccountVerificationStepBarComponent,
+        AlertVerificationStepsComponent,
+
+        IconCheckCircleComponent,
         IconCircleInfoComponent,
-        AlertVerificationStepsComponent
+        IconEnvelopeComponent
     ],
     exports: [
         MainLayoutComponent,
