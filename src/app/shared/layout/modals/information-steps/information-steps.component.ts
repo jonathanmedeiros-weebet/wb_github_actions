@@ -27,7 +27,7 @@ export class InformationStepsComponent implements OnInit {
   ) { }
 
   get hasButton(): boolean {
-    if (this.informationType && this.informationType !== 'rules') {
+    if (this.informationType === 'phone' || this.informationType === 'email') {
       this.textButton = this.translate.instant('buttons.talkToSupport');
       return true;
     }
