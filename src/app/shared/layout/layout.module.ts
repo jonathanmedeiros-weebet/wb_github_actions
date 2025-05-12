@@ -139,6 +139,10 @@ import {
 } from './modals/account-verification-onboarding';
 import { IconCircleInfoComponent } from './icons/icon-circle-infocomponent';
 import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
+import { IconMailComponent } from './icons/icon-mail';
+import { IconCloseComponent } from './icons/icon-close';
+import { ButtonCloseComponent } from './button-close/button-close.component';
+import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
 
 @NgModule({
     imports: [
@@ -274,7 +278,11 @@ import { AlertVerificationStepsComponent } from './modals/register-v3-modal/part
         AccountVerificationDocumentStepComponent,
         AccountVerificationStepBarComponent,
         IconCircleInfoComponent,
-        AlertVerificationStepsComponent
+        AlertVerificationStepsComponent,
+        IconMailComponent,
+        InformationStepsComponent,
+        IconCloseComponent,
+        ButtonCloseComponent
     ],
     exports: [
         MainLayoutComponent,
