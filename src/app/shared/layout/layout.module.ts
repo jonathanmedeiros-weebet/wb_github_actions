@@ -131,17 +131,18 @@ import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-mo
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
 import { 
     AccountVerificationDocumentStepComponent,
-    AccountVerificationEmailStepComponent,
+    AccountVerificationEmailOrPhoneStepComponent,
     AccountVerificationOnboardingComponent,
-    AccountVerificationStepBarComponent,
-    AccountVerificationPhoneStepComponent
+    AccountVerificationStepBarComponent
 } from './modals/account-verification-onboarding';
 import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
 import {
     IconCheckCircleComponent,
     IconCircleInfoComponent,
+    IconCircleQuestionComponent,
     IconCloseComponent,
     IconEnvelopeComponent,
+    IconLoaderComponent,
     IconMailComponent
 } from './icons';
 import { ButtonCloseComponent } from './button-close/button-close.component';
@@ -275,8 +276,7 @@ import { InformationStepsComponent } from './modals/information-steps/informatio
         BettingShopSwitchModalComponent,
         SuccessModalComponent,
         AccountVerificationOnboardingComponent,
-        AccountVerificationEmailStepComponent,
-        AccountVerificationPhoneStepComponent,
+        AccountVerificationEmailOrPhoneStepComponent,
         AccountVerificationDocumentStepComponent,
         AccountVerificationStepBarComponent,
         AlertVerificationStepsComponent,
@@ -287,7 +287,9 @@ import { InformationStepsComponent } from './modals/information-steps/informatio
         IconCircleInfoComponent,
         IconEnvelopeComponent,
         IconMailComponent,
-        IconCloseComponent
+        IconCloseComponent,
+        IconCircleQuestionComponent,
+        IconLoaderComponent
     ],
     exports: [
         MainLayoutComponent,

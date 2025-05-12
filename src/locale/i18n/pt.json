@@ -307,7 +307,11 @@
         "updateInformationPersonalData": "Atualize e gerencie suas informações, como nome, e-mail e telefone, para garantir uma experiência personalizada e segura no sistema.",
         "change_email": "Alterar e-mail",
         "change_phone": "Alterar telefone",
-        "logout_account": "Sair da conta"
+        "logout_account": "Sair da conta",
+        "copy": "Copiar",
+        "paste": "Colar",
+        "codeIn": "código em {{time}}s",
+        "resend": "Reenviar"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -904,6 +908,15 @@
         "checkPhoneSignal": "Verifique se o seu telefone está com sinal telefônico",
         "checkPhoneNumberRegistered": "Verifique se o número cadastrado  recebe ligações e mensagens",
         "checkingLegistation": "Como cumprimento da legislação, precisamos realizar essa etapa de validação.",
-        "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!"
+        "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!",
+        "validationWithSuccess": "Seu {{verificationType}} foi validado com sucesso!",
+        "accessIsAlmostReadyMessage": "Falta pouco para ter acesso ao melhor plataforma! Ainda falta algumas informações a serem validadas.",
+        "almostDoneMessage": "Está quase lá! Ainda falta algumas informações a serem validadas.",
+        "whyNeedValidate": "Por que preciso validar?",
+        "enterTheVerificationCode": "Digite o código do {{verificationType}}",
+        "dontReceiveTheEmail": "Não recebeu o {{verificationType}}?",
+        "verificationCodeHasBeenSentToEmail": "Um e-mail com o código de verificação foi enviada para {{email}}",
+        "verificationCodeHasBeenSentToPhone": "Uma mensagem de texto com o código de verificação foi enviada para {{phone}}",
+        "validatingCode": "Validando código"
     }
 }

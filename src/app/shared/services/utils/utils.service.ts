@@ -5,6 +5,11 @@ import {HeadersService} from './headers.service';
 import {catchError, map, take} from 'rxjs/operators';
 import {ErrorService} from './error.service';
 
+export enum MaskAnonymizationTypes {
+    EMAIL = 'email',
+    PHONE = 'phone'
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -100,5 +105,24 @@ export class UtilsService {
                 map((res: any) => res.results),
                 catchError(() => [])
             );
+    }
+
+    applyMaskAnonymization(value: string, type: MaskAnonymizationTypes = MaskAnonymizationTypes.PHONE) {
+        if(type == MaskAnonymizationTypes.PHONE) {
+            value = value.replace(/\D/g, '');
+            if (value.length < 2) return '(**)*******';
+            const lastTwo = value.slice(-2);
+            return `(**)*******${lastTwo}`;
+        }
+
+        if (type == MaskAnonymizationTypes.EMAIL) {
+            if (value.includes('@')) {
+                const [localPart, domain] = value.split('@');
+                const maskedLocalPart = localPart.slice(0, 2) + '*******';
+                return maskedLocalPart + '@' + domain;
+            }
+        }
+
+        return value;
     }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-button-close',
@@ -8,9 +8,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ButtonCloseComponent {
   constructor(    
-      private modalService: NgbModal,
-      public activeModal: NgbActiveModal
-    ) { }
+    public activeModal: NgbActiveModal
+  ) { }
 
   handleClose() {
     this.activeModal.close();

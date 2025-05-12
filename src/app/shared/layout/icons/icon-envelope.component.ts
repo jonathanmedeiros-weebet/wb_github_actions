@@ -3,9 +3,9 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'icon-envelope',
   template: `
-    <svg xmlns="http://www.w3.org/2000/svg" width="160" height="97" viewBox="0 0 160 97" fill="none">
+    <svg class="icon-envelope" xmlns="http://www.w3.org/2000/svg" [attr.width]="width" [attr.height]="height" viewBox="0 0 160 97" fill="none">
       <g clip-path="url(#clip0_1890_962)">
-        <rect x="0.724121" y="0.526611" width="158.45" height="96.4753" rx="8.94473" [attr.fill]="color"/>
+        <rect x="0.724121" y="0.526611" [attr.width]="width" [attr.height]="height" rx="8.94473" [attr.fill]="color"/>
         <g filter="url(#filter0_d_1890_962)">
           <path d="M79.9496 41.5969L178.513 109.532H-18.6136L79.9496 41.5969Z" [attr.fill]="color"/>
         </g>
@@ -42,6 +42,7 @@ import { Component, Input } from '@angular/core';
   `,
 })
 export class IconEnvelopeComponent {
-  @Input() size: number = 18;
+  @Input() width: number = 160;
+  @Input() height: number = 97;
   @Input() color: string = 'var(--foreground)';
 }

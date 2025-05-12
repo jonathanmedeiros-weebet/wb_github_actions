@@ -17,6 +17,7 @@ const ORDERED_STEPS = [ // define order here ;)
 })
 export class AccountVerificationOnboardingComponent implements OnInit {
   public step = AccountVerificationTypes.EMAIL;
+  public stepPosition: number = 1;
   public verifiedSteps = [];
 
   constructor(
@@ -44,6 +45,7 @@ export class AccountVerificationOnboardingComponent implements OnInit {
       .subscribe((verifiedSteps) => {
         this.step = this.verifyCurrentStep(verifiedSteps);
         this.verifiedSteps = this.reorderSteps(verifiedSteps);
+        this.stepPosition = this.verifyCurrentStepPosition();
 
         if(this.step == AccountVerificationTypes.COMPLETED) {
           this.toAdvance();
@@ -74,6 +76,12 @@ export class AccountVerificationOnboardingComponent implements OnInit {
 
     return currentStep;
   }
+
+  private verifyCurrentStepPosition(): number {
+    const stepPosition = this.verifiedSteps.findIndex(({step}) => step == this.step)
+    return stepPosition + 1;
+  }
+
 
   public async toAdvance() {
     if (AccountVerificationTypes.COMPLETED == this.step) {

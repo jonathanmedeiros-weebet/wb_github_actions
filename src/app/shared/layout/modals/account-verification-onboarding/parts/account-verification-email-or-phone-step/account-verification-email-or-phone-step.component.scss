@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow-x: hidden;
+    overflow: hidden;
     height: auto;
 
     &__footer {
@@ -82,30 +82,88 @@
     }
 
     &__group-code {
-        display: flex;
-        justify-content: space-between;
-        gap: auto;
         width: 100%;
+        border: 1px solid rgba(var(--foreground-rgb), .7);
+        color: var(--foreground);
+
+        display: flex;
+        height: 72px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        padding-right: 16px;
+        padding-left: 8px;
+        border-radius: 4px;
+    }
+
+    &__label-code {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 61px;
+
+        &--no-empty::before {
+            display: none;
+        }
+      
+        &::before {
+          content: "___";
+          position: absolute;
+          top: 38%;
+          left: 0;
+          width: 100%;
+          text-align: center;
+          color: rgba(var(--foreground-rgb), 0.3);
+          font-size: 20px;
+          transform: translateY(-50%);
+          pointer-events: none;
+          transition: opacity 0.2s ease;
+        }
+     
     }
 
     &__code {
-        width: 45px;
-        height: 61px;
         display: flex;
-        align-items: center;
+        width: 100%;
+        height: 100%;
         justify-content: center;
-        text-align: center;
-        border-radius: 8px;
-        border: 2px solid rgba(var(--foreground-rgb), .3);
-        background: var(--background);
-        color: rgba(var(--foreground-rgb), .8);
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 20px;
+        align-items: center;
+        gap: 10px;
+
+        text-align: left;
+        border-radius: 0;
+        border: none;
+        background: transparent;
+
+        color: var(--foreground);
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
 
         &:focus {
-            border: 2px solid var(--highlight);
+            border: none;
         }
+    
+        &:not(:placeholder-shown) {
+            text-align: center;
+        }
+    }
+
+    &__paste {
+        display: flex;
+        width: 56px;
+        height: 32px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        background: var(--header);
+        color: var(--foreground-header);
+        margin-left: auto;
     }
 
     &__icon {
@@ -138,8 +196,9 @@
         margin-top: -80px;
     }
 
-    &__icon svg path {
-        fill: var(--highlight);
+    &__icon svg {
+        width: 118px;
+        height: 72px;
     }
 
     &__section {
@@ -148,6 +207,17 @@
         gap: 16px;
         width: 100%;
     }
+
+    &__help-button {
+        position: relative;
+        margin-left: auto;
+        margin-bottom: -58px;
+        cursor: pointer;
+    }
+}
+
+:host ::ng-deep .account-verification-email-or-phone__help-button:hover .icon-circle-question path {
+    fill: var(--highlight);
 }
 
 .resend-code {
@@ -185,9 +255,75 @@
     }
 }
 
+.loading-verification {
+    color: var(--foreground);
+    background-color: transparent;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    position: fixed;
+    width: 100%;
+    height: inherit;
+
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(var(--background-rgb), .5);
+    cursor: not-allowed;
+
+    &__icon {
+        animation: spin 3s linear infinite;
+        display: inline-block;
+    }
+}
+
 @media screen and (min-width: 667px) {
     .account-verification-email-or-phone {
         max-width: 400px;
         position: relative;
+
+        &__title,
+        &__description {
+            text-align: center;
+        }
+
+        &__icon {
+            width: 140px;
+            height: 140px;
+            margin-top: 20px;
+        }
+
+        &__badge {
+            width: 37px;
+            height: 37px;
+            font-size: 26px;
+            margin-left: -110px;
+            margin-top: -60px;
+        }
+
+        &__group-code {
+            gap: 16px;
+            padding-left: 16px;
+        }
     }
+
+    :host::ng-deep .icon-envelope {
+        width: 118px !important;
+    }
+    
 }
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
