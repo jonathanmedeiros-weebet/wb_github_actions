@@ -708,7 +708,8 @@
         "next": "Próximo",
         "previous": "Anterior",
         "save_change": "Salvar Alteração",
-        "view": "Visualizar"
+        "view": "Visualizar",
+        "talkToSupport": "Fale com o suporte"
     },
     "conta": {
         "recuperarMinhaConta": "Recuperar minha conta!",
@@ -895,6 +896,14 @@
     "accountVerification": {
         "alertEmailVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail cadastrado",
         "alertPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu telefone cadastrado",
-        "alertEmailAndPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail e telefone cadastrados"
+        "alertEmailAndPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail e telefone cadastrados",
+        "problemsWithCode": "Problemas com o código?",
+        "playngByTheRules": "Jogando com a regra",
+        "checkSpam": "Verifique a sua caixa de spam.",
+        "checkEmailRegistered": "Certifique-se de que você tem acesso ao e-mail cadastrado.",
+        "checkPhoneSignal": "Verifique se o seu telefone está com sinal telefônico",
+        "checkPhoneNumberRegistered": "Verifique se o número cadastrado  recebe ligações e mensagens",
+        "checkingLegistation": "Como cumprimento da legislação, precisamos realizar essa etapa de validação.",
+        "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!"
     }
 }
