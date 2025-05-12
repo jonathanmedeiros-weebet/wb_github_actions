@@ -888,6 +888,9 @@
     "accountVerification": {
         "alertEmailVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico registrado",
         "alertPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su teléfono registrado",
-        "alertEmailAndPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados"
+        "alertEmailAndPhoneVerificationRequired": "Como forma de validación, le enviaremos un código de seguridad a su correo electrónico y teléfono registrados",
+        "buttonValidate": "Realizar validaciones",
+        "alertAccountVerificationTitle": "Su diversión con la seguridad garantizada",
+        "alertAccountVerificationDescription": "es una casa de apuestas en línea confiable y comprometida con la seguridad de sus usuarios!<br><br>para cumplir con la legislación vigente, necesitamos verificar algunos de los datos que has proporcionado."
     }
 }

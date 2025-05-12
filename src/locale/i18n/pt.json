@@ -895,6 +895,9 @@
     "accountVerification": {
         "alertEmailVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail cadastrado",
         "alertPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu telefone cadastrado",
-        "alertEmailAndPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail e telefone cadastrados"
+        "alertEmailAndPhoneVerificationRequired": "Como forma de validação, enviaremos um código de segurança ao seu e-mail e telefone cadastrados",
+        "buttonValidate":"Realizar validações",
+        "alertAccountVerificationTitle": "Sua diversão com a segurança garantida",
+        "alertAccountVerificationDescription": "é uma casa de aposta online confiável e comprometida com a segurança dos seus usuários!<br><br>Para atender à legislação vigente, precisamos verificar algumas das informações que você cadastrou."
     }
 }

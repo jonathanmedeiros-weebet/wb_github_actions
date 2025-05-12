@@ -890,6 +890,9 @@
     "accountVerification": {
         "alertEmailVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address",
         "alertPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered phone number",
-        "alertEmailAndPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number"
+        "alertEmailAndPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number",
+        "buttonValidate":"Validate",
+        "alertAccountVerificationTitle": "Your fun with guaranteed security",
+        "alertAccountVerificationDescription": "It is a trustworthy online betting platform committed to the security of its users!<br><br>To comply with current legislation, we need to verify some of the information you provided."  
     }
 }
