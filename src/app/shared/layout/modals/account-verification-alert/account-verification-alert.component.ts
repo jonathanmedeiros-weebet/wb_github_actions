@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService, BannerService, ParametrosLocaisService } from 'src/app/services';
@@ -19,7 +18,6 @@ export class AccountVerificationAlertComponent implements OnInit {
 
   constructor(
     private activeModal: NgbActiveModal,
-    private router: Router,
     private authService: AuthService,
     private paramsLocaisService: ParametrosLocaisService,
     private bannerService: BannerService,
@@ -34,7 +32,6 @@ export class AccountVerificationAlertComponent implements OnInit {
 
   private prepareInfo() {
     this.description = `${this.paramsLocaisService.getOpcoes().banca_nome} ${this.translate.instant('accountVerification.alertAccountVerificationDescription')}`;
-
   }
 
   public goToAccountVerification() {
