@@ -140,8 +140,12 @@ import { AlertVerificationStepsComponent } from './modals/register-v3-modal/part
 import {
     IconCheckCircleComponent,
     IconCircleInfoComponent,
-    IconEnvelopeComponent
+    IconCloseComponent,
+    IconEnvelopeComponent,
+    IconMailComponent
 } from './icons';
+import { ButtonCloseComponent } from './button-close/button-close.component';
+import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
 
 @NgModule({
     imports: [
@@ -276,10 +280,14 @@ import {
         AccountVerificationDocumentStepComponent,
         AccountVerificationStepBarComponent,
         AlertVerificationStepsComponent,
+        InformationStepsComponent,
+        ButtonCloseComponent,
 
         IconCheckCircleComponent,
         IconCircleInfoComponent,
-        IconEnvelopeComponent
+        IconEnvelopeComponent,
+        IconMailComponent,
+        IconCloseComponent
     ],
     exports: [
         MainLayoutComponent,

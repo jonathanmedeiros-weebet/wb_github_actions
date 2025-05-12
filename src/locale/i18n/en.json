@@ -704,7 +704,8 @@
         "next": "Next",
         "previous": "Previous",
         "save_change": "Save change",
-        "view": "View"
+        "view": "View",
+        "talkToSupport": "Talk to support"
     },
     "conta": {
         "recuperarMinhaConta": "Recover my account!",
@@ -890,6 +891,14 @@
     "accountVerification": {
         "alertEmailVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address",
         "alertPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered phone number",
-        "alertEmailAndPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number"
+        "alertEmailAndPhoneVerificationRequired": "As a form of validation, we will send a security code to your registered e-mail address and phone number",
+        "problemsWithCode": "Problems with the code?",
+        "playngByTheRules": "Playing by the rules",
+        "checkSpam": "Check your spam box.",
+        "checkEmailRegistered": "Make sure you have access to your registered e-mail.",
+        "checkPhoneSignal": "Check if your phone has signal",
+        "checkPhoneNumberRegistered": "Check if the registered number receives calls and messages",
+        "checkingLegistation": "In order to comply with the legislation, we need to carry out this validation stage.",
+        "securePlataform": "This measure guarantees more security for you on our platform!"
     }
 }
