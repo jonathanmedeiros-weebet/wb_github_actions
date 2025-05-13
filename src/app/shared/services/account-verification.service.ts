@@ -112,6 +112,7 @@ export class AccountVerificationService {
       centered: true,
       windowClass: 'modal-500 modal-account-verification',
       backdrop: 'static',
+      keyboard: false
     });
 
     return modalref;

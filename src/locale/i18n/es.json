@@ -897,6 +897,9 @@
         "checkPhoneSignal": "Verifique si su teléfono tiene sinal telefónica",
         "checkPhoneNumberRegistered": "Verifique si el número registrado recibe llamadas y mensajes",
         "checkingLegistation": "Para cumplir la legislación, debemos llevar a cabo esta fase de validación.",
-        "securePlataform": "Esta medida le garantiza una mayor seguridad en nuestra plataforma."      
+        "securePlataform": "Esta medida le garantiza una mayor seguridad en nuestra plataforma.",
+        "buttonValidate": "Realizar validaciones",
+        "alertAccountVerificationTitle": "Su diversión con la seguridad garantizada",
+        "alertAccountVerificationDescription": "es una casa de apuestas en línea confiable y comprometida con la seguridad de sus usuarios!<br><br>para cumplir con la legislación vigente, necesitamos verificar algunos de los datos que has proporcionado."
     }
 }

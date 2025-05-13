@@ -904,6 +904,9 @@
         "checkPhoneSignal": "Verifique se o seu telefone está com sinal telefônico",
         "checkPhoneNumberRegistered": "Verifique se o número cadastrado  recebe ligações e mensagens",
         "checkingLegistation": "Como cumprimento da legislação, precisamos realizar essa etapa de validação.",
-        "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!"
+        "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!",
+        "buttonValidate":"Realizar validações",
+        "alertAccountVerificationTitle": "Sua diversão com a segurança garantida",
+        "alertAccountVerificationDescription": "é uma casa de aposta online confiável e comprometida com a segurança dos seus usuários!<br><br>Para atender à legislação vigente, precisamos verificar algumas das informações que você cadastrou."
     }
 }
