@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService, BannerService, ParametrosLocaisService } from 'src/app/services';
 import { ModalControllerService } from 'src/app/shared/services/modal-controller.service';
 
-const page = 'cadastro';
+const PAGE = 'cadastro';
 
 @Component({
   selector: 'app-account-verification-alert',
@@ -54,7 +54,7 @@ export class AccountVerificationAlertComponent implements OnInit {
       .banners
       .subscribe((banners) => {
         if (Boolean(banners) && Boolean(banners.length)) {
-          this.registerBanner = banners.find(banner => banner.pagina == page);
+          this.registerBanner = banners.find(banner => banner.pagina == PAGE);
           this.hasRegisterBanner = Boolean(this.registerBanner);
         }
       })
