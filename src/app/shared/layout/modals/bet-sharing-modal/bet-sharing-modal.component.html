@@ -86,7 +86,7 @@
                         </td>
                         <td class="item border-right" id="td-result">
                             <div style="display: flex; justify-content: center;">
-                                <p class="jogo-resultado" style="float:right" *ngIf="item.encerrado && !item.removido; else resultado">
+                                <p class="jogo-resultado" style="float:right; color: var(--foreground-game);" *ngIf="item.encerrado && !item.removido; else resultado">
                                     ENCERRADO <br />
                                     <span [ngClass]="getBetResultClasses(item)">
                                         <ng-container *ngIf="item.resultado !== null && item.resultado !== undefined">
