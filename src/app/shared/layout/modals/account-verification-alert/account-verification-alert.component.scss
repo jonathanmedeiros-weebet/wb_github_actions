@@ -28,7 +28,8 @@
         gap: 16px;
     }
 
-    &__body, &__footer {
+    &__body,
+    &__footer {
         padding: 0 32px 32px 32px;
     }
 
@@ -83,25 +84,19 @@
         color: var(--foreground-highlight);
     }
 
-    &__banner{
+    &__banner {
+        width: 100%;
+        outline: none;
+        min-height: 175px;
+        display: flex;
+
+        &-mobile {
+            height: 100%;
             width: 100%;
-            outline: none;
-            min-height: 175px;
-            display: flex;
-        
-            &-mobile,
-            &-desktop {
-                height: 100%;
-                width: 100%;
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-            }
-        
-            &-desktop {
-                display: none;
-            }
-        
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
     }
 }
 
