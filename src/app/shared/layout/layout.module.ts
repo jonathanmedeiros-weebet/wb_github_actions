@@ -130,7 +130,7 @@ import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-
 import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
-import { 
+import {
     AccountVerificationDocumentStepComponent,
     AccountVerificationEmailStepComponent,
     AccountVerificationOnboardingComponent,
@@ -143,6 +143,7 @@ import { IconMailComponent } from './icons/icon-mail';
 import { IconCloseComponent } from './icons/icon-close';
 import { ButtonCloseComponent } from './button-close/button-close.component';
 import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
+import {AccountVerifiedAddressComponent} from './modals/account-verified-address/account-verified-address.component';
 
 @NgModule({
     imports: [
@@ -264,6 +265,7 @@ import { InformationStepsComponent } from './modals/information-steps/informatio
         VerifyEmailOrPhoneComponent,
         CardVerificationPendingComponent,
         AccountVerificationAlertComponent,
+        AccountVerifiedAddressComponent,
         BetSharingModalComponent,
         ConfigurationBetLimitModalComponent,
         TermsAcceptedComponent,
