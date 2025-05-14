@@ -53,14 +53,14 @@ export class AccountVerificationDocumentStepComponent {
     this.faceMatchType = this.paramLocais.getOpcoes().faceMatchType;
     this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.paramLocais.getOpcoes().faceMatchRegister);
     this.getUserData();
+    this.cd.detectChanges();
+    this.inicializeFaceMatch();
   }
 
   async getUserData() {
     const user = JSON.parse(localStorage.getItem('user'));
     const dataUser = await this.clientService.getCliente(user.id).toPromise();
     this.dataUserCPF = String(dataUser.cpf.replace(/[.\-]/g, ''));
-    this.cd.detectChanges();
-    this.inicializeFaceMatch();
   }
 
   inicializeFaceMatch() {
