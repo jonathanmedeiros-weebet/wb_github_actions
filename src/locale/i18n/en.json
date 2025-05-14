@@ -915,6 +915,9 @@
         "validatingCode": "Validating code",
         "buttonValidate":"Validate",
         "alertAccountVerificationTitle": "Your fun with guaranteed security",
-        "alertAccountVerificationDescription": "It is a trustworthy online betting platform committed to the security of its users!<br><br>To comply with current legislation, we need to verify some of the information you provided."  
+        "alertAccountVerificationDescription": "It is a trustworthy online betting platform committed to the security of its users!<br><br>To comply with current legislation, we need to verify some of the information you provided.",
+        "verifiedAddressTitle": "Update Your Address",
+        "verifiedAddressBody": "To place bets on our platform, you need to provide your address information. This ensures security and compliance with our policies.",
+        "verifiedAddressBtn": "Update Address"
     }
 }

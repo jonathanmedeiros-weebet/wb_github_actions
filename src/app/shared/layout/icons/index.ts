@@ -8,3 +8,4 @@ export * from './icon-signal-phone.component';
 export * from './icon-verified-user.component';
 export * from './icon-circle-question.component';
 export * from './icon-loader.component';
+export * from './icon-circle-exclamation.component';

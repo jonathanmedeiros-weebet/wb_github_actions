@@ -129,7 +129,7 @@ import { MigrationInformationModalComponent } from './modals/migration-informati
 import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
 import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
-import { 
+import {
     AccountVerificationDocumentStepComponent,
     AccountVerificationEmailOrPhoneStepComponent,
     AccountVerificationOnboardingComponent,
@@ -143,10 +143,12 @@ import {
     IconCloseComponent,
     IconEnvelopeComponent,
     IconLoaderComponent,
-    IconMailComponent
+    IconMailComponent,
+    IconCircleExclamationComponent
 } from './icons';
 import { ButtonCloseComponent } from './button-close/button-close.component';
 import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
+import { AccountVerifiedAddressComponent } from './modals/account-verified-address/account-verified-address.component';
 
 @NgModule({
     imports: [
@@ -282,6 +284,7 @@ import { InformationStepsComponent } from './modals/information-steps/informatio
         AlertVerificationStepsComponent,
         InformationStepsComponent,
         ButtonCloseComponent,
+        AccountVerifiedAddressComponent,
 
         IconCheckCircleComponent,
         IconCircleInfoComponent,
@@ -289,7 +292,8 @@ import { InformationStepsComponent } from './modals/information-steps/informatio
         IconMailComponent,
         IconCloseComponent,
         IconCircleQuestionComponent,
-        IconLoaderComponent
+        IconLoaderComponent,
+        IconCircleExclamationComponent
     ],
     exports: [
         MainLayoutComponent,

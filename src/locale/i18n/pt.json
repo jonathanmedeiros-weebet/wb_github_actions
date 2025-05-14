@@ -920,6 +920,9 @@
         "validatingCode": "Validando código",
         "buttonValidate":"Realizar validações",
         "alertAccountVerificationTitle": "Sua diversão com a segurança garantida",
-        "alertAccountVerificationDescription": "é uma casa de aposta online confiável e comprometida com a segurança dos seus usuários!<br><br>Para atender à legislação vigente, precisamos verificar algumas das informações que você cadastrou."
+        "alertAccountVerificationDescription": "é uma casa de aposta online confiável e comprometida com a segurança dos seus usuários!<br><br>Para atender à legislação vigente, precisamos verificar algumas das informações que você cadastrou.",
+        "verifiedAddressTitle": "Atualize seu Endereço",
+        "verifiedAddressBody": "Para que você possa realizar apostas dentro da nossa plataforma, precisamos que você preencha suas informações de endereço. Isso garante a segurança e a conformidade com as nossas políticas.",
+        "verifiedAddressBtn": "Atualizar Endereço"
     }
 }
