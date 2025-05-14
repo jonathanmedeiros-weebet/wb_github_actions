@@ -1,14 +1,13 @@
-import { AfterViewInit, Component, Input, QueryList, Type, ViewChildren, ViewContainerRef, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
-import { IconAssuredWorkloadComponent } from '../../icons/icon-assured-workload';
-import { IconVerifiedUserComponent } from '../../icons/icon-verified-user';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { IconAssuredWorkloadComponent } from '../../icons/icon-assured-workload.component';
+import { IconVerifiedUserComponent } from '../../icons/icon-verified-user.component';
 import { TranslateService } from '@ngx-translate/core';
-import { IconMailComponent } from '../../icons/icon-mail';
-import { IconSignalPhoneComponent } from '../../icons/icon-signal-phone';
-import { VerificationTypes } from 'src/app/shared/enums';
+import { IconMailComponent } from '../../icons/icon-mail.component';
+import { IconSignalPhoneComponent } from '../../icons/icon-signal-phone.component';
+import { AccountVerificationTypes } from 'src/app/shared/enums';
 
-const RULES = 'rules';
+const RULES_TYPE = 'rules';
 
 @Component({
   selector: 'app-information-steps',
@@ -16,28 +15,27 @@ const RULES = 'rules';
   styleUrl: './information-steps.component.scss'
 })
 export class InformationStepsComponent implements OnInit {
-  @Input() informationType: string;
+  @Input() informationType: AccountVerificationTypes | string = RULES_TYPE;
 
   public informations = [];
   public textButton: string = '';
 
   constructor(
-    private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     private translate: TranslateService,
   ) { }
 
   get hasButton(): boolean {
-    if (this.informationType === VerificationTypes.EMAIL || this.informationType === VerificationTypes.PHONE) {
+    if (this.informationType === AccountVerificationTypes.EMAIL || this.informationType === AccountVerificationTypes.PHONE) {
       return true;
     }
     return false;
   }
 
   get title(): string {
-    if (this.informationType === RULES) {
+    if (this.informationType === RULES_TYPE) {
       return this.translate.instant('accountVerification.playngByTheRules');
-    } else if (this.informationType === VerificationTypes.EMAIL || this.informationType === VerificationTypes.PHONE) {
+    } else if (this.informationType === AccountVerificationTypes.EMAIL || this.informationType === AccountVerificationTypes.PHONE) {
       return this.translate.instant('accountVerification.problemsWithCode');
     } else {
       return '';
@@ -46,20 +44,20 @@ export class InformationStepsComponent implements OnInit {
 
   ngOnInit() {
     switch (this.informationType) {
-      case RULES:
+      case RULES_TYPE:
         this.informations = [
           { description: this.translate.instant('accountVerification.checkingLegistation'), icon: IconAssuredWorkloadComponent, iconProps: { size: '20px' } },
           { description: this.translate.instant('accountVerification.securePlataform'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
         ];
         break;
-      case VerificationTypes.PHONE:
+      case AccountVerificationTypes.PHONE:
         this.textButton = this.translate.instant('botoes.talkToSupport');
         this.informations = [
           { description: this.translate.instant('accountVerification.checkPhoneSignal'), icon: IconSignalPhoneComponent, iconProps: { size: '20px' } },
           { description: this.translate.instant('accountVerification.checkPhoneNumberRegistered'), icon: IconVerifiedUserComponent, iconProps: { size: '20px' } }
         ];
         break;
-      case VerificationTypes.EMAIL:
+      case AccountVerificationTypes.EMAIL:
         this.textButton = this.translate.instant('botoes.talkToSupport');
         this.informations = [
           { description: this.translate.instant('accountVerification.checkSpam'), icon: IconMailComponent, iconProps: { size: '20px' } },
