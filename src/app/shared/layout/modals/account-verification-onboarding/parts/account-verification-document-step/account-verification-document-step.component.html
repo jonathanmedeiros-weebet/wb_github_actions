@@ -1,1 +1,15 @@
-<p>account-verification-document-step works!</p>
+<div class="account-verification-document-step" style="display: none;" *ngIf="dataUserCPF">
+    <div #legitimuz id="legitimuz" *ngIf="showFaceMatchLegitimuz">
+        <input id="legitimuz-hydrate-cpf" [value]="dataUserCPF" />
+        <button id="legitimuz-action-verify"></button>
+        <div id="legitimuz-root"></div>
+    </div>
+    <div #docCheck id="docCheck" *ngIf="showFaceMatchDocCheck">
+        <button 
+            id="exDocCheckAction"
+            [attr.data-ex-doccheck-document]="dataUserCPF"
+            [attr.data-ex-doccheck-document-hmac-hash]="secretHash"
+            [attr.data-ex-doccheck-force-enrollment]="false">
+        </button>
+    </div>
+</div>
