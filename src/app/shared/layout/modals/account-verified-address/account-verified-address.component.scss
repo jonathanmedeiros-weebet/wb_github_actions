@@ -1,19 +1,18 @@
-.success-modal {
-    background-color: var(--header);
-    color: var(--foreground-header);
+.account-verified-address {
+    background-color: var(--background);
+    color: var(--foreground);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 24px;
-    padding: 32px 24px;
+    padding: 24px;
     position: fixed;
     overflow-x: hidden;
     border-radius: 4px;
-    bottom: 0;
 
     &__header {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
     }
 
     &__body {
@@ -23,58 +22,44 @@
         gap: 24px;
     }
 
+    &__footer {
+        margin-top: 16px;
+    }
+
     &__title {
-        text-align: center;
-        color: var(--foreground-header);
-        font-size: 16px;
+        color: var(--foreground);
+        font-size: 20px;
         font-style: normal;
         font-weight: 700;
         line-height: 20px;
     }
 
     &__description {
-        text-align: center;
-        color: rgba(var(--foreground-header-rgb), .7);
+        color: rgba(var(--foreground-rgb), .7);
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
     }
 
-    &__icon{
+    &__icon {
         display: flex;
-        width: 80px;
-        height: 80px;
+        width: 48px;
+        height: 48px;
         padding: 2px;
         justify-content: center;
         align-items: center;
         border-radius: 70px;
-        background: rgba(var(--highlight-rgb), .1);
-    }
-    &__icon::after {
-        content: '';
-        position: absolute;
-        display: flex;
-        width: 100px;
-        height: 100px;
-        justify-content: center;
-        align-items: center;
-        border-radius: 70px;
-        background: transparent;
-        border: 10px solid rgba(var(--highlight-rgb), 0.05);
+        border: 5px solid rgba(var(--highlight-rgb), .1);
+        background: rgba(var(--highlight-rgb), .3);
     }
 
-    &__icon svg path {
-        fill: var(--highlight);
-    }
-
-    &__button {
+    &__btn-to-verify {
         margin: 0;
         padding: 0;
         border: none;
         outline: none;
         cursor: pointer;
-
         width: 100%;
         display: flex;
         height: 40px;
@@ -84,12 +69,16 @@
         border-radius: 4px;
         background: var(--highlight);
         color: var(--foreground-highlight);
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 900;
+        font-size: 14px;
     }
 }
 
 @media screen and (min-width: 769px) {
-    .success-modal {
+    .account-verified-address{
         height: auto;
+        max-width: 400px;
         position: relative;
     }
 }

@@ -3,9 +3,18 @@
         <app-account-verification-step-bar [steps]="verifiedSteps"/>
     </div>
     <div class="account-verification-onboarding__body">
-        <app-account-verification-phone-step *ngIf="showPhoneStep" (toAdvance)="toAdvance()" />
-        <app-account-verification-email-step *ngIf="showEmailStep" (toAdvance)="toAdvance()" />
-        <app-account-verification-document-step *ngIf="showDocumentStep" (toAdvance)="toAdvance()" />
+       
+        <app-account-verification-email-or-phone-step
+            *ngIf="showPhoneStep"
+            verificationType="phone"
+            (onAdvance)="toAdvance()"
+        />
+        <app-account-verification-email-or-phone-step
+            *ngIf="showEmailStep"
+            verificationType="email"
+            (onAdvance)="toAdvance()"
+        />
+        <app-account-verification-document-step *ngIf="showDocumentStep" (onAdvance)="toAdvance()" />
     </div>
     <div class="account-verification-onboarding__footer">
         <button

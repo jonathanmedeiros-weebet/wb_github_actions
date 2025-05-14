@@ -307,7 +307,11 @@
         "updateInformationPersonalData": "Atualize e gerencie suas informações, como nome, e-mail e telefone, para garantir uma experiência personalizada e segura no sistema.",
         "change_email": "Alterar e-mail",
         "change_phone": "Alterar telefone",
-        "logout_account": "Sair da conta"
+        "logout_account": "Sair da conta",
+        "copy": "Copiar",
+        "paste": "Colar",
+        "codeIn": "código em {{time}}s",
+        "resend": "Reenviar"
     },
     "bankAccounts": {
         "title" : "Contas Bancárias",
@@ -905,8 +909,20 @@
         "checkPhoneNumberRegistered": "Verifique se o número cadastrado  recebe ligações e mensagens",
         "checkingLegistation": "Como cumprimento da legislação, precisamos realizar essa etapa de validação.",
         "securePlataform": "Essa medida garante mais segurança para você em nossa plataforma!",
+        "validationWithSuccess": "Seu {{verificationType}} foi validado com sucesso!",
+        "accessIsAlmostReadyMessage": "Falta pouco para ter acesso ao melhor plataforma! Ainda falta algumas informações a serem validadas.",
+        "almostDoneMessage": "Está quase lá! Ainda falta algumas informações a serem validadas.",
+        "whyNeedValidate": "Por que preciso validar?",
+        "enterTheVerificationCode": "Digite o código do {{verificationType}}",
+        "dontReceiveTheEmail": "Não recebeu o {{verificationType}}?",
+        "verificationCodeHasBeenSentToEmail": "Um e-mail com o código de verificação foi enviada para {{email}}",
+        "verificationCodeHasBeenSentToPhone": "Uma mensagem de texto com o código de verificação foi enviada para {{phone}}",
+        "validatingCode": "Validando código",
         "buttonValidate":"Realizar validações",
         "alertAccountVerificationTitle": "Sua diversão com a segurança garantida",
-        "alertAccountVerificationDescription": "é uma casa de aposta online confiável e comprometida com a segurança dos seus usuários!<br><br>Para atender à legislação vigente, precisamos verificar algumas das informações que você cadastrou."
+        "alertAccountVerificationDescription": "é uma casa de aposta online confiável e comprometida com a segurança dos seus usuários!<br><br>Para atender à legislação vigente, precisamos verificar algumas das informações que você cadastrou.",
+        "verifiedAddressTitle": "Atualize seu Endereço",
+        "verifiedAddressBody": "Para que você possa realizar apostas dentro da nossa plataforma, precisamos que você preencha suas informações de endereço. Isso garante a segurança e a conformidade com as nossas políticas.",
+        "verifiedAddressBtn": "Atualizar Endereço"
     }
 }

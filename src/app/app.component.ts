@@ -7,7 +7,6 @@ import {
     ImagemInicialService,
     MessageService,
     ParametrosLocaisService,
-    UtilsService,
     ClienteService,
     SecurityService,
     BannerService,
@@ -29,10 +28,8 @@ import { NavigationHistoryService } from 'src/app/shared/services/navigation-his
 import { CronService } from './shared/services/timer.service';
 import { ACCOUNT_VERIFIED, AccountVerificationService } from './shared/services/account-verification.service';
 import { RegisterV3ModalComponent } from './shared/layout/modals/register-v3-modal/register-v3-modal.component';
-import { BettingShopService } from './shared/services/betting-shop.service';
 import { BettingShopConnectModalComponent } from './shared/layout/modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
 import { BettingShopSwitchModalComponent } from './shared/layout/modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
-import { ModalControllerService } from './shared/services/modal-controller.service';
 declare var xtremepush;
 @Component({
     selector: 'app-root',
@@ -79,7 +76,6 @@ export class AppComponent implements OnInit {
         private paramLocais: ParametrosLocaisService,
         private translate: TranslateService,
         private idleDetectService: IdleDetectService,
-        private utilsService: UtilsService,
         private activityDetectService: ActivityDetectService,
         private clienteService: ClienteService,
         private navigationHistoryService: NavigationHistoryService,
@@ -88,8 +84,6 @@ export class AppComponent implements OnInit {
         private accountVerificationService: AccountVerificationService,
         private bannerService: BannerService,
         private geolocationService: GeolocationService,
-        private bettingShopService: BettingShopService,
-        private modalControllerService: ModalControllerService
     ) {
         const linguaEscolhida = localStorage.getItem('linguagem') ?? 'pt';
         translate.setDefaultLang('pt');
@@ -112,7 +106,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.modalControllerService.openAccountVerificationOnboarding();
         this.geolocationService.saveLocalStorageLocation();
 
         if (this.paramsLocais.getOpcoes().enable_over_18_confirmation_modal && !localStorage.getItem('+18')) {

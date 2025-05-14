@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { SuccessModalComponent } from "../layout/modals/success-modal/success-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AccountVerificationOnboardingComponent } from "../layout/modals/account-verification-onboarding";
+import { InformationStepsComponent } from "../layout/modals/information-steps/information-steps.component";
+import { AccountVerificationTypes } from "../enums";
 
 interface SuccessModalOptions {
   title: string;
@@ -21,7 +23,7 @@ export class ModalControllerService {
     title,
     description,
     buttonText,
-    handleClick,
+    handleClick
   }: SuccessModalOptions): Promise<void> {
     return new Promise((resolve) => {
       const modalref = this.ngbModalService.open(SuccessModalComponent, {
@@ -56,6 +58,19 @@ export class ModalControllerService {
       windowClass: 'modal-460 modal-generic',
       backdrop: 'static',
     });
+  }
+
+  public openAccountVerificationInformationSteps(type?: AccountVerificationTypes) {
+    const modalref = this.ngbModalService.open(InformationStepsComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      centered: true,
+      windowClass: 'modal-400 modal-generic',
+      backdrop: 'static',
+    });
+
+    if (Boolean(type)) {
+      modalref.componentInstance.informationType = type;
+    }
   }
 }
 
