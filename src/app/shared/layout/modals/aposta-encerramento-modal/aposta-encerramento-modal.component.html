@@ -171,11 +171,19 @@
             <div id="cupom">
                 <div class="conteudo">
                     <div class="item">
-                        <p class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
+                        <p ngbTooltip="{{item.campeonato_nome | uppercase}}"
+                        triggers="manual"
+                        #tooltipChampionship="ngbTooltip"
+                        (click)="tooltipChampionship.open()"
+                        class="campeonato info-cupom {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}">
                             <i [ngClass]="sportIcon(item.sport)"></i> {{item.campeonato_nome | uppercase}}
                         </p>
                         <div class="teams-container">
-                            <div id="teams-names">
+                            <div ngbTooltip="{{item.time_a_nome}} {{item.time_a_resultado}} x {{item.time_b_resultado}} {{item.time_b_nome}}"
+                            triggers="manual" 
+                            #tooltipTeams="ngbTooltip"
+                            (click)="tooltipTeams.open()"
+                            id="teams-names">
                                 <p class="nome {{itemSelecionado && !item.resultado && !falhaSimulacao ? 'encerrado' : ''}}"
                                     style="font-weight: bolder;">
                                     {{item.time_a_nome}}
