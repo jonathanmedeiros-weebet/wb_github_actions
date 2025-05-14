@@ -144,6 +144,7 @@ import {
     IconEnvelopeComponent,
     IconLoaderComponent,
     IconMailComponent,
+    IconMessageNotificationComponent,
     IconCircleExclamationComponent
 } from './icons';
 import { ButtonCloseComponent } from './button-close/button-close.component';
@@ -293,6 +294,7 @@ import { AccountVerifiedAddressComponent } from './modals/account-verified-addre
         IconCloseComponent,
         IconCircleQuestionComponent,
         IconLoaderComponent,
+        IconMessageNotificationComponent,
         IconCircleExclamationComponent
     ],
     exports: [

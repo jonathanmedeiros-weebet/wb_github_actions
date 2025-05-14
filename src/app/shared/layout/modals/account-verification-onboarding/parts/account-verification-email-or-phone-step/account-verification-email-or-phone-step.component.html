@@ -13,6 +13,7 @@
             </ng-container>
 
             <ng-container *ngIf="!verificationTypeIsEmail">
+                <icon-message-notification />
             </ng-container>
         </span>
 
@@ -37,6 +38,7 @@
                     class="account-verification-email-or-phone__code"
                     formControlName="code1"
                     maxlength="1"
+                    autocomplete="one-time-code"
                     (input)="onInput($event, 0)"
                     (keyup)="onKeyup($event, 0)"
                     (paste)="onPaste($event)"
