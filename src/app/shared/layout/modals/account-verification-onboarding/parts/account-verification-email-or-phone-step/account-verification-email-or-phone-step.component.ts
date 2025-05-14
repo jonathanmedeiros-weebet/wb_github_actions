@@ -172,9 +172,7 @@ export class AccountVerificationEmailOrPhoneStepComponent {
       .toPromise()
       .then(() => {
         this.showSuccessModal();
-        this.accountVerificationService.getAccountVerificationDetail().toPromise();
         setTimeout(() => this.showLoading = false, 500);
-        
       })
       .catch((error) => {
         this.messageService.error(error);

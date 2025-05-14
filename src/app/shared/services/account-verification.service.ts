@@ -167,7 +167,7 @@ export class AccountVerificationService {
   }
 
   private requestConfirmationCodePerEmail() {
-    return this.http.get(`${config.BASE_URL}/clientes/request-email-confirmation-code`, this.headerService.getRequestOptions(true))
+    return this.http.get(`${config.BASE_URL}/clientes/request-email-confirmation-code?flow=register`, this.headerService.getRequestOptions(true))
       .pipe(
         map((response) => response),
         catchError(this.errorService.handleError)
