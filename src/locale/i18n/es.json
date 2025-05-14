@@ -913,6 +913,9 @@
         "validatingCode": "Validando el código",
         "buttonValidate": "Realizar validaciones",
         "alertAccountVerificationTitle": "Su diversión con la seguridad garantizada",
-        "alertAccountVerificationDescription": "es una casa de apuestas en línea confiable y comprometida con la seguridad de sus usuarios!<br><br>para cumplir con la legislación vigente, necesitamos verificar algunos de los datos que has proporcionado."
+        "alertAccountVerificationDescription": "es una casa de apuestas en línea confiable y comprometida con la seguridad de sus usuarios!<br><br>para cumplir con la legislación vigente, necesitamos verificar algunos de los datos que has proporcionado.",
+        "verifiedAddressTitle": "Actualiza tu Dirección",
+        "verifiedAddressBody": "Para que puedas realizar apuestas en nuestra plataforma, necesitamos que completes tu información de dirección. Esto garantiza la seguridad y el cumplimiento de nuestras políticas.",
+        "verifiedAddressBtn": "Actualizar Dirección"
     }
 }
