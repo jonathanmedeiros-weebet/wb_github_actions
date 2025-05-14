@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
         </svg>
     `
 })
-export class IconCircleErrorComponent {
+export class IconCircleExclamationComponent {
     @Input() size: number = 18;
     @Input() color: string = 'var(--foreground)';
 }
