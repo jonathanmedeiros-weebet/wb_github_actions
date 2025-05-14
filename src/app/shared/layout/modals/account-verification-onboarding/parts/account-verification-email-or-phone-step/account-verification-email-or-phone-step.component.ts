@@ -15,7 +15,6 @@ import { ModalControllerService } from 'src/app/shared/services/modal-controller
 export class AccountVerificationEmailOrPhoneStepComponent {
   @ViewChildren('codeInputs') codeInputs!: QueryList<ElementRef<HTMLInputElement>>;
   @Output() onAdvance = new EventEmitter();
-  @Input() verificationPosition: number = 1;
   @Input() verificationType: AccountVerificationTypes = AccountVerificationTypes.EMAIL;
   @Input() verificationValue: string = '';
 
@@ -173,9 +172,7 @@ export class AccountVerificationEmailOrPhoneStepComponent {
       .toPromise()
       .then(() => {
         this.showSuccessModal();
-        this.accountVerificationService.getAccountVerificationDetail().toPromise();
         setTimeout(() => this.showLoading = false, 500);
-        
       })
       .catch((error) => {
         this.messageService.error(error);

@@ -917,6 +917,9 @@
         "dontReceiveTheEmail": "Não recebeu o {{verificationType}}?",
         "verificationCodeHasBeenSentToEmail": "Um e-mail com o código de verificação foi enviada para {{email}}",
         "verificationCodeHasBeenSentToPhone": "Uma mensagem de texto com o código de verificação foi enviada para {{phone}}",
-        "validatingCode": "Validando código"
+        "validatingCode": "Validando código",
+        "buttonValidate":"Realizar validações",
+        "alertAccountVerificationTitle": "Sua diversão com a segurança garantida",
+        "alertAccountVerificationDescription": "é uma casa de aposta online confiável e comprometida com a segurança dos seus usuários!<br><br>Para atender à legislação vigente, precisamos verificar algumas das informações que você cadastrou."
     }
 }

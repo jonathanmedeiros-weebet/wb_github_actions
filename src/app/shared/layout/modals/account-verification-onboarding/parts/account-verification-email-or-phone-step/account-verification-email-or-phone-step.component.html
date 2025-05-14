@@ -1,5 +1,5 @@
 <div class="account-verification-email-or-phone">
-       <div class="account-verification-email-or-phone__body">
+    <div class="account-verification-email-or-phone__body">
 
         <icon-circle-question
             class="account-verification-email-or-phone__help-button"
@@ -8,8 +8,6 @@
         />
         
         <span class="account-verification-email-or-phone__icon">
-            <span class="account-verification-email-or-phone__badge">{{ verificationPosition }}</span>
-
             <ng-container *ngIf="verificationTypeIsEmail">
                <icon-envelope color="var(--highlight)" />
             </ng-container>
