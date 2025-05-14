@@ -25,16 +25,10 @@ declare global {
 })
 export class AccountVerificationDocumentStepComponent {
 
-  @ViewChildren('legitimuz') private legitimuz: QueryList<ElementRef>;
-  @ViewChildren('docCheck') private docCheck: QueryList<ElementRef>;
-
   private unsub$: Subject<any> = new Subject();
 
-  private verifiedIdentity: boolean = false;
-  private legitimuzToken: string = "";
-  public faceMatchEnabled: boolean = false;
-  public faceMatchType: string = "";
-  public docCheckToken: string = "";
+  private faceMatchEnabled: boolean = false;
+  private faceMatchType: string = "";
   public secretHash: string = "";
   public dataUserCPF: string = "";
   public showFaceMatchLegitimuz: boolean = false;
@@ -72,8 +66,7 @@ export class AccountVerificationDocumentStepComponent {
   inicializeFaceMatch() {
     switch (this.faceMatchType) {
       case 'legitimuz':
-        this.legitimuzToken = this.paramLocais.getOpcoes().legitimuz_token;
-        this.showFaceMatchLegitimuz = Boolean(this.faceMatchEnabled && this.legitimuzToken);
+        this.showFaceMatchLegitimuz = Boolean(this.faceMatchEnabled && this.paramLocais.getOpcoes().legitimuz_token);
         this.cd.detectChanges();
         this.legitimuzService.init();
         this.legitimuzService.mount();
@@ -81,10 +74,9 @@ export class AccountVerificationDocumentStepComponent {
         this.legitimuzService.curCustomerIsVerified
           .pipe(takeUntil(this.unsub$))
           .subscribe(curCustomerIsVerified => {
-            if (curCustomerIsVerified == null) return;
-            this.verifiedIdentity = curCustomerIsVerified;
-            this.cd.detectChanges();
-            if (this.verifiedIdentity) {
+            if (curCustomerIsVerified == null) {
+              return;
+            } else if (curCustomerIsVerified) {
               this.succesValidation();
             } else {
               this.legitimuzService.closeModal();
@@ -94,8 +86,7 @@ export class AccountVerificationDocumentStepComponent {
         break;
       case 'docCheck':
         this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF.replace(/[.\-]/g, ''), this.paramLocais.getOpcoes().dockCheck_secret_hash);
-        this.docCheckToken = this.paramLocais.getOpcoes().dockCheck_token;
-        this.faceMatchEnabled = Boolean(this.faceMatchEnabled && this.docCheckToken);
+        this.faceMatchEnabled = Boolean(this.faceMatchEnabled && this.paramLocais.getOpcoes().dockCheck_token);
         this.showFaceMatchDocCheck = true;
         this.docCheckService.init();
         this.cd.detectChanges();
@@ -134,4 +125,3 @@ export class AccountVerificationDocumentStepComponent {
     this.router.navigate(['/welcome']);
   }
 }
-
