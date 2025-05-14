@@ -144,6 +144,7 @@ import { IconCloseComponent } from './icons/icon-close';
 import { ButtonCloseComponent } from './button-close/button-close.component';
 import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
 import {AccountVerifiedAddressComponent} from './modals/account-verified-address/account-verified-address.component';
+import {IconCircleErrorComponent} from './icons/icon-circle-error.component';
 
 @NgModule({
     imports: [
@@ -284,7 +285,8 @@ import {AccountVerifiedAddressComponent} from './modals/account-verified-address
         IconMailComponent,
         InformationStepsComponent,
         IconCloseComponent,
-        ButtonCloseComponent
+        ButtonCloseComponent,
+        IconCircleErrorComponent
     ],
     exports: [
         MainLayoutComponent,

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {AccountVerificationService} from '../../../services/account-verification.service';
 
 @Component({
     selector: 'app-account-verified-address',
@@ -14,10 +13,6 @@ export class AccountVerifiedAddressComponent {
         private activeModal: NgbActiveModal,
         private router: Router
     ) {}
-
-  public handleClose() {
-    this.activeModal.close();
-  }
 
     public goToAccountVerification() {
         this.activeModal.close(true);
