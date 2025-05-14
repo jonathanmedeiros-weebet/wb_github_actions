@@ -187,30 +187,30 @@ export class LoginModalComponent extends BaseFormComponent implements OnInit, On
         let msg = this.translate.instant('geral.locationPermission');
 
         if (this.restrictionStateBet != 'Todos') {
-            // this.lastLocationPermission = this.currentLocationPermission;
-            // this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
+            this.lastLocationPermission = this.currentLocationPermission;
+            this.currentLocationPermission = await this.navigatorPermissionsService.checkLocationPermission();
 
-            // if (this.currentLocationPermission == 'granted') {
-            //     if (this.lastLocationPermission == 'denied') {
-            //         allowed = false;
-            //         location.reload();
-            //     } else if (!this.geolocationService.checkGeolocation()) {
-            //         allowed = await this.geolocationService.saveLocalStorageLocation();
-            //     }
-            // } else if (this.currentLocationPermission == 'denied') {
-            //     allowed = false;
-            // } else if (this.currentLocationPermission == 'prompt') {
-            //     allowed = await this.geolocationService.saveLocalStorageLocation();
-            // }
+            if (this.currentLocationPermission == 'granted') {
+                if (this.lastLocationPermission == 'denied') {
+                    allowed = false;
+                    location.reload();
+                } else if (!this.geolocationService.checkGeolocation()) {
+                    allowed = await this.geolocationService.saveLocalStorageLocation();
+                }
+            } else if (this.currentLocationPermission == 'denied') {
+                allowed = false;
+            } else if (this.currentLocationPermission == 'prompt') {
+                allowed = await this.geolocationService.saveLocalStorageLocation();
+            }
 
-            // if (allowed) {
-            //     let localeState = localStorage.getItem('locale_state');
+            if (allowed) {
+                let localeState = localStorage.getItem('locale_state');
 
-            //     if (this.restrictionStateBet != localeState) {
-            //         msg = this.translate.instant('geral.stateRestriction');
-            //         allowed = false;
-            //     }
-            // }
+                if (this.restrictionStateBet != localeState) {
+                    msg = this.translate.instant('geral.stateRestriction');
+                    allowed = false;
+                }
+            }
         }
 
         if (allowed) {
