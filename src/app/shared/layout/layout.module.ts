@@ -128,7 +128,6 @@ import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.c
 import { MigrationInformationModalComponent } from './modals/migration-information-modal/migration-information-modal.component';
 import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
 import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
-import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
 import {
     AccountVerificationDocumentStepComponent,
@@ -278,18 +277,23 @@ import { AccountVerifiedAddressComponent } from './modals/account-verified-addre
         BettingShopConnectModalComponent,
         BettingShopSwitchModalComponent,
         SuccessModalComponent,
-        IconCheckCircleComponent,
         AccountVerificationOnboardingComponent,
-        AccountVerificationEmailStepComponent,
-        AccountVerificationPhoneStepComponent,
+        AccountVerificationEmailOrPhoneStepComponent,
         AccountVerificationDocumentStepComponent,
         AccountVerificationStepBarComponent,
-        IconCircleInfoComponent,
         AlertVerificationStepsComponent,
-        IconMailComponent,
         InformationStepsComponent,
+        ButtonCloseComponent,
+        AccountVerifiedAddressComponent,
+
+        IconCheckCircleComponent,
+        IconCircleInfoComponent,
+        IconEnvelopeComponent,
+        IconMailComponent,
         IconCloseComponent,
-        ButtonCloseComponent
+        IconCircleQuestionComponent,
+        IconLoaderComponent,
+        IconCircleExclamationComponent
     ],
     exports: [
         MainLayoutComponent,
