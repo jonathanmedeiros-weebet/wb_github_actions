@@ -143,7 +143,8 @@ import {
     IconCloseComponent,
     IconEnvelopeComponent,
     IconLoaderComponent,
-    IconMailComponent
+    IconMailComponent,
+    IconMessageNotificationComponent
 } from './icons';
 import { ButtonCloseComponent } from './button-close/button-close.component';
 import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
@@ -289,7 +290,8 @@ import { InformationStepsComponent } from './modals/information-steps/informatio
         IconMailComponent,
         IconCloseComponent,
         IconCircleQuestionComponent,
-        IconLoaderComponent
+        IconLoaderComponent,
+        IconMessageNotificationComponent
     ],
     exports: [
         MainLayoutComponent,

@@ -910,6 +910,9 @@
         "dontReceiveTheEmail": "No recibiste el {{verificationType}}?",
         "verificationCodeHasBeenSentToEmail": "Se ha enviado un correo con el código de verificación a {{email}}",
         "verificationCodeHasBeenSentToPhone": "Se ha enviado un mensaje de texto con el código de verificación a {{phone}}",
-        "validatingCode": "Validando el código"
+        "validatingCode": "Validando el código",
+        "buttonValidate": "Realizar validaciones",
+        "alertAccountVerificationTitle": "Su diversión con la seguridad garantizada",
+        "alertAccountVerificationDescription": "es una casa de apuestas en línea confiable y comprometida con la seguridad de sus usuarios!<br><br>para cumplir con la legislación vigente, necesitamos verificar algunos de los datos que has proporcionado."
     }
 }

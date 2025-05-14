@@ -7,13 +7,11 @@
         <app-account-verification-email-or-phone-step
             *ngIf="showPhoneStep"
             verificationType="phone"
-            [verificationPosition]="stepPosition"
             (onAdvance)="toAdvance()"
         />
         <app-account-verification-email-or-phone-step
             *ngIf="showEmailStep"
             verificationType="email"
-            [verificationPosition]="stepPosition"
             (onAdvance)="toAdvance()"
         />
         <app-account-verification-document-step *ngIf="showDocumentStep" (onAdvance)="toAdvance()" />
