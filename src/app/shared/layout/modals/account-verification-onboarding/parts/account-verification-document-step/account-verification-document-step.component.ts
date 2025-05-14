@@ -19,6 +19,7 @@ declare global {
 }
 
 const USER = JSON.parse(localStorage.getItem('user'));
+
 @Component({
   selector: 'app-account-verification-document-step',
   templateUrl: './account-verification-document-step.component.html',
