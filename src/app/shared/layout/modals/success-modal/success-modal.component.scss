@@ -1,6 +1,6 @@
 .success-modal {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--header);
+    color: var(--foreground-header);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -25,7 +25,7 @@
 
     &__title {
         text-align: center;
-        color: var(--foreground);
+        color: var(--foreground-header);
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
@@ -34,7 +34,7 @@
 
     &__description {
         text-align: center;
-        color: rgba(var(--foreground-rgb), .7);
+        color: rgba(var(--foreground-header-rgb), .7);
         font-size: 14px;
         font-style: normal;
         font-weight: 400;

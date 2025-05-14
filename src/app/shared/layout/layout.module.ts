@@ -132,19 +132,24 @@ import { IconCheckCircleComponent } from './icons/icon-check-circle.component';
 import { SuccessModalComponent } from './modals/success-modal/success-modal.component';
 import {
     AccountVerificationDocumentStepComponent,
-    AccountVerificationEmailStepComponent,
+    AccountVerificationEmailOrPhoneStepComponent,
     AccountVerificationOnboardingComponent,
-    AccountVerificationStepBarComponent,
-    AccountVerificationPhoneStepComponent
+    AccountVerificationStepBarComponent
 } from './modals/account-verification-onboarding';
-import { IconCircleInfoComponent } from './icons/icon-circle-infocomponent';
 import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
-import { IconMailComponent } from './icons/icon-mail';
-import { IconCloseComponent } from './icons/icon-close';
+import {
+    IconCheckCircleComponent,
+    IconCircleInfoComponent,
+    IconCircleQuestionComponent,
+    IconCloseComponent,
+    IconEnvelopeComponent,
+    IconLoaderComponent,
+    IconMailComponent,
+    IconCircleExclamationComponent
+} from './icons';
 import { ButtonCloseComponent } from './button-close/button-close.component';
 import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
 import { AccountVerifiedAddressComponent } from './modals/account-verified-address/account-verified-address.component';
-import { IconCircleExclamationComponent } from './icons/icon-circle-exclamation.component';
 
 @NgModule({
     imports: [
@@ -266,7 +271,6 @@ import { IconCircleExclamationComponent } from './icons/icon-circle-exclamation.
         VerifyEmailOrPhoneComponent,
         CardVerificationPendingComponent,
         AccountVerificationAlertComponent,
-        AccountVerifiedAddressComponent,
         BetSharingModalComponent,
         ConfigurationBetLimitModalComponent,
         TermsAcceptedComponent,
@@ -285,8 +289,7 @@ import { IconCircleExclamationComponent } from './icons/icon-circle-exclamation.
         IconMailComponent,
         InformationStepsComponent,
         IconCloseComponent,
-        ButtonCloseComponent,
-        IconCircleExclamationComponent
+        ButtonCloseComponent
     ],
     exports: [
         MainLayoutComponent,

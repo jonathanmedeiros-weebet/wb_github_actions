@@ -2,18 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AccountVerificationService, AuthService } from 'src/app/services';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
-enum AccountVerificationStepsEnums {
-  EMAIL = 'email',
-  PHONE = 'phone',
-  DOCUMENT = 'document',
-  COMPLETED = 'completed'
-}
+import { AccountVerificationTypes } from 'src/app/shared/enums';
 
 const ORDERED_STEPS = [ // define order here ;)
-  AccountVerificationStepsEnums.EMAIL,
-  AccountVerificationStepsEnums.PHONE,
-  AccountVerificationStepsEnums.DOCUMENT
+  AccountVerificationTypes.EMAIL,
+  AccountVerificationTypes.PHONE,
+  AccountVerificationTypes.DOCUMENT
 ];
 
 @Component({
@@ -22,7 +16,7 @@ const ORDERED_STEPS = [ // define order here ;)
   styleUrl: './account-verification-onboarding.component.scss'
 })
 export class AccountVerificationOnboardingComponent implements OnInit {
-  public step = AccountVerificationStepsEnums.EMAIL;
+  public step = AccountVerificationTypes.EMAIL;
   public verifiedSteps = [];
 
   constructor(
@@ -33,15 +27,15 @@ export class AccountVerificationOnboardingComponent implements OnInit {
   ){}
 
   get showPhoneStep(): boolean {
-    return this.step == AccountVerificationStepsEnums.PHONE;
+    return this.step == AccountVerificationTypes.PHONE;
   }
   
   get showDocumentStep(): boolean {
-    return this.step == AccountVerificationStepsEnums.DOCUMENT;
+    return this.step == AccountVerificationTypes.DOCUMENT;
   }
 
   get showEmailStep(): boolean {
-    return this.step == AccountVerificationStepsEnums.EMAIL;
+    return this.step == AccountVerificationTypes.EMAIL;
   }
 
   ngOnInit(): void {
@@ -51,7 +45,7 @@ export class AccountVerificationOnboardingComponent implements OnInit {
         this.step = this.verifyCurrentStep(verifiedSteps);
         this.verifiedSteps = this.reorderSteps(verifiedSteps);
 
-        if(this.step == AccountVerificationStepsEnums.COMPLETED) {
+        if(this.step == AccountVerificationTypes.COMPLETED) {
           this.toAdvance();
         }
       })
@@ -68,21 +62,21 @@ export class AccountVerificationOnboardingComponent implements OnInit {
       .filter(step => step.required);
   }
 
-  private verifyCurrentStep(verifiedSteps: any): AccountVerificationStepsEnums {
+  private verifyCurrentStep(verifiedSteps: any): AccountVerificationTypes {
     const pendingSteps = ORDERED_STEPS.filter(step => {
       return !verifiedSteps[step];
     })
 
-    let currentStep = AccountVerificationStepsEnums.COMPLETED;
+    let currentStep = AccountVerificationTypes.COMPLETED;
     if (Boolean(pendingSteps.length)) {
-      currentStep = pendingSteps[0] as AccountVerificationStepsEnums
+      currentStep = pendingSteps[0] as AccountVerificationTypes
     }
 
     return currentStep;
   }
 
   public async toAdvance() {
-    if (AccountVerificationStepsEnums.COMPLETED == this.step) {
+    if (AccountVerificationTypes.COMPLETED == this.step) {
       const isNewCustomer = this.accountVerificationService.newCustomer.getValue();
       this.activeModal.dismiss();
 

@@ -9,7 +9,7 @@ import { HeadersService } from './utils/headers.service';
 import { catchError, map } from 'rxjs/operators';
 import { VerifyEmailOrPhoneComponent } from '../layout/modals/verify-email-or-phone/verify-email-or-phone.component';
 import { ClienteService } from './clientes/cliente.service';
-import { VerificationTypes } from '../enums';
+import { AccountVerificationTypes } from '../enums';
 import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verified-success/account-verified-success.component';
 import { TermsAcceptedComponent } from '../layout/modals/terms-accepted/terms-accepted.component';
 import { ParametrosLocaisService } from './parametros-locais.service';
@@ -31,7 +31,7 @@ interface VerificationAccountResponse {
 }
 
 interface EmailOrPhoneVerificationStepParams {
-  type: VerificationTypes,
+  type: AccountVerificationTypes,
   value: string
 }
 
@@ -154,20 +154,20 @@ export class AccountVerificationService {
     return modalref;
   }
 
-  public requestConfirmationCode(requestType: string = VerificationTypes.EMAIL) {
-    return requestType == VerificationTypes.EMAIL
+  public requestConfirmationCode(requestType: string = AccountVerificationTypes.EMAIL) {
+    return requestType == AccountVerificationTypes.EMAIL
       ? this.requestConfirmationCodePerEmail()
       : this.requestConfirmationCodePerPhone();
   }
 
-  public confirmateCode(requestType: string = VerificationTypes.EMAIL, code: string = '') {
-    return requestType == VerificationTypes.EMAIL
+  public confirmateCode(requestType: string = AccountVerificationTypes.EMAIL, code: string = '') {
+    return requestType == AccountVerificationTypes.EMAIL
       ? this.confirmateCodePerEmail(code)
       : this.confirmateCodePerPhone(code);
   }
 
   private requestConfirmationCodePerEmail() {
-    return this.http.get(`${config.BASE_URL}/clientes/request-email-confirmation-code`, this.headerService.getRequestOptions(true))
+    return this.http.get(`${config.BASE_URL}/clientes/request-email-confirmation-code?flow=register`, this.headerService.getRequestOptions(true))
       .pipe(
         map((response) => response),
         catchError(this.errorService.handleError)

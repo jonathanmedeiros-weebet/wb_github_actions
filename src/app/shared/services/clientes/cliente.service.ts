@@ -11,7 +11,7 @@ import { ParametrosLocaisService } from "../parametros-locais.service";
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordExpiredModalComponent } from '../../layout/modals/password-expired-modal/password-expired-modal.component';
 import {Ga4Service, EventGa4Types} from '../ga4/ga4.service';
-import { VerificationTypes } from '../../enums';
+import { AccountVerificationTypes } from '../../enums';
 
 declare var xtremepush: any;
 
@@ -426,7 +426,7 @@ export class ClienteService {
 
     public sendTwoFactorAuthCode(verificationMethod: string, customerId: number, recipient: string) {
         switch (verificationMethod) {
-            case VerificationTypes.PHONE:
+            case AccountVerificationTypes.PHONE:
                 return this.sendTwoFactorAuthCodeBySms(customerId, recipient);
         }
 
@@ -450,7 +450,7 @@ export class ClienteService {
 
     public confirmTwoFactorAuthCode(verificationMethod: string, customerId: number, recipient: string, code: string) {
         switch (verificationMethod) {
-            case VerificationTypes.PHONE:
+            case AccountVerificationTypes.PHONE:
                 return this.confirmTwoFactorAuthCodeBySms(customerId, recipient, code);
         }
 
