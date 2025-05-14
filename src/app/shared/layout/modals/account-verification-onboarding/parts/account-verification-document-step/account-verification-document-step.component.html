@@ -1,10 +1,10 @@
-<div class="account-verification-document-step" style="display: none;">
-    <div #legitimuz id="legitimuz" *ngIf="faceMatchType == 'legitimuz'">
-            <input id="legitimuz-hydrate-cpf" [value]="dataUserCPF"/>
-            <button id="legitimuz-action-verify"></button>
-            <div id="legitimuz-root"></div>
+<div class="account-verification-document-step" style="display: none;" *ngIf="dataUserCPF">
+    <div #legitimuz id="legitimuz" *ngIf="showFaceMatchLegitimuz">
+        <input id="legitimuz-hydrate-cpf" [value]="dataUserCPF" />
+        <button id="legitimuz-action-verify"></button>
+        <div id="legitimuz-root"></div>
     </div>
-    <div #docCheck id="docCheck" *ngIf="faceMatchType == 'docCheck'">
+    <div #docCheck id="docCheck" *ngIf="showFaceMatchDocCheck">
         <button 
             id="exDocCheckAction"
             [attr.data-ex-doccheck-document]="dataUserCPF"
