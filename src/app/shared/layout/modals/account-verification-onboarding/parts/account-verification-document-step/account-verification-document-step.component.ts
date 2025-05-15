@@ -1,6 +1,6 @@
 import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, Inject, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Output, QueryList, ViewChildren } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -24,6 +24,8 @@ declare global {
   styleUrl: './account-verification-document-step.component.scss'
 })
 export class AccountVerificationDocumentStepComponent {
+
+  @Output() onAdvance = new EventEmitter();
 
   private unsub$: Subject<any> = new Subject();
 
@@ -119,9 +121,8 @@ export class AccountVerificationDocumentStepComponent {
         this.docCheckService.closeModal();
         break;
     }
-    localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
     this.messageService.success(this.translate.instant('face_match.verified_identity'));
     this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).subscribe(takeUntil(this.unsub$));
-    this.router.navigate(['/welcome']);
+    this.onAdvance.emit()
   }
 }
