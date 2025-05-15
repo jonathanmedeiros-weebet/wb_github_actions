@@ -4,11 +4,10 @@ import { ChangeDetectorRef, Component, EventEmitter, Inject, Output } from '@ang
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
-import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
+import { AccountVerificationService, ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
-import { Router } from '@angular/router';
 
 declare global {
   interface Window {
@@ -30,6 +29,7 @@ export class AccountVerificationDocumentStepComponent {
   private unsub$: Subject<any> = new Subject();
 
   private faceMatchEnabled: boolean = false;
+  private faceMatchVerified: boolean = false;
   private faceMatchType: string = "";
   public secretHash: string = "";
   public dataUserCPF: string = "";
@@ -47,8 +47,7 @@ export class AccountVerificationDocumentStepComponent {
     private docCheckService: DocCheckService,
     @Inject(DOCUMENT) private document: any,
     private cd: ChangeDetectorRef,
-    private router: Router
-
+    private accountVerificationService: AccountVerificationService
   ) { }
   
   async ngOnInit() {
@@ -76,9 +75,12 @@ export class AccountVerificationDocumentStepComponent {
         this.legitimuzService.curCustomerIsVerified
           .pipe(takeUntil(this.unsub$))
           .subscribe(curCustomerIsVerified => {
-            if (curCustomerIsVerified == null) {
+            if (curCustomerIsVerified == null || this.faceMatchVerified) {
               return;
-            } else if (curCustomerIsVerified) {
+            }
+            
+            if (curCustomerIsVerified) {
+              this.faceMatchVerified = true;
               this.succesValidation();
             } else {
               this.legitimuzService.closeModal();
@@ -112,7 +114,13 @@ export class AccountVerificationDocumentStepComponent {
     this.unsub$.complete();
   }
 
-  succesValidation() {  
+  async succesValidation() {  
+    this.messageService.success(this.translate.instant('face_match.verified_identity'));
+    await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise();
+    this.accountVerificationService.getAccountVerificationDetail().toPromise();
+    
+    this.onAdvance.emit();
+
     switch (this.faceMatchType) {
       case 'legitimuz':
         this.legitimuzService.closeModal();
@@ -121,8 +129,5 @@ export class AccountVerificationDocumentStepComponent {
         this.docCheckService.closeModal();
         break;
     }
-    this.messageService.success(this.translate.instant('face_match.verified_identity'));
-    this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).subscribe(takeUntil(this.unsub$));
-    this.onAdvance.emit()
   }
 }
