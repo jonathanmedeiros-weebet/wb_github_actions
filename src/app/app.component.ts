@@ -265,17 +265,7 @@ export class AppComponent implements OnInit {
         this.modoClienteHabilitado = this.paramLocais.getOpcoes().modo_cliente;
 
         if (this.modoClienteHabilitado && this.router.url.includes('/cadastro')) {
-            this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: true } });
-
-            // this.auth.openRegisterV3Modal();
-            const modalRef = this.modalService.open(RegisterV3ModalComponent, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'md',
-                centered: true,
-                windowClass: `modal-400 modal-cadastro-cliente`,
-                backdrop: 'static'
-            });
-            modalRef.componentInstance.hasRegisterBanner = false;
+            this.auth.openRegisterV3Modal(); 
         }
 
         if (this.router.url.includes('/login')) {
