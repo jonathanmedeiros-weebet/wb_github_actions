@@ -18,4 +18,8 @@ export class AccountVerifiedAddressComponent {
         this.activeModal.close(true);
         this.router.navigate(['clientes/personal-data']);
     }
+
+    handleClose() {
+        this.activeModal.close();
+    }
 }
