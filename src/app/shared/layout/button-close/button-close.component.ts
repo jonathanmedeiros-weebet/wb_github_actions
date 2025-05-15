@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ButtonCloseComponent {
 
-  @Output() close = new EventEmitter<void>();
+  @Output() onClick = new EventEmitter<void>();
   constructor(
     public activeModal: NgbActiveModal
   ) { }
@@ -18,6 +18,6 @@ export class ButtonCloseComponent {
   }
 
   handleClick() {
-    this.close.emit();
+    this.onClick.emit();
   }
 }

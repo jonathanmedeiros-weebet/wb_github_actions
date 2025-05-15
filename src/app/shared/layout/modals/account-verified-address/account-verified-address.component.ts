@@ -19,7 +19,7 @@ export class AccountVerifiedAddressComponent {
         this.router.navigate(['clientes/personal-data']);
     }
 
-    handleClose() {
+    onClick() {
         this.activeModal.close();
     }
 }
