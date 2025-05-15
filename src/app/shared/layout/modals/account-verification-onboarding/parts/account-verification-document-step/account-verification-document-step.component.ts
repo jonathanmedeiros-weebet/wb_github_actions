@@ -1,14 +1,13 @@
 import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, Inject, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Inject, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
-import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
+import { AccountVerificationService, ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
-import { Router } from '@angular/router';
 
 declare global {
   interface Window {
@@ -25,9 +24,12 @@ declare global {
 })
 export class AccountVerificationDocumentStepComponent {
 
+  @Output() onAdvance = new EventEmitter();
+
   private unsub$: Subject<any> = new Subject();
 
   private faceMatchEnabled: boolean = false;
+  private faceMatchVerified: boolean = false;
   private faceMatchType: string = "";
   public secretHash: string = "";
   public dataUserCPF: string = "";
@@ -45,14 +47,13 @@ export class AccountVerificationDocumentStepComponent {
     private docCheckService: DocCheckService,
     @Inject(DOCUMENT) private document: any,
     private cd: ChangeDetectorRef,
-    private router: Router
-
+    private accountVerificationService: AccountVerificationService
   ) { }
   
-  ngOnInit() {
+  async ngOnInit() {
     this.faceMatchType = this.paramLocais.getOpcoes().faceMatchType;
     this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.paramLocais.getOpcoes().faceMatchRegister);
-    this.getUserData();
+    await this.getUserData();
     this.cd.detectChanges();
     this.inicializeFaceMatch();
   }
@@ -74,9 +75,12 @@ export class AccountVerificationDocumentStepComponent {
         this.legitimuzService.curCustomerIsVerified
           .pipe(takeUntil(this.unsub$))
           .subscribe(curCustomerIsVerified => {
-            if (curCustomerIsVerified == null) {
+            if (curCustomerIsVerified == null || this.faceMatchVerified) {
               return;
-            } else if (curCustomerIsVerified) {
+            }
+            
+            if (curCustomerIsVerified) {
+              this.faceMatchVerified = true;
               this.succesValidation();
             } else {
               this.legitimuzService.closeModal();
@@ -88,8 +92,8 @@ export class AccountVerificationDocumentStepComponent {
         this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF.replace(/[.\-]/g, ''), this.paramLocais.getOpcoes().dockCheck_secret_hash);
         this.faceMatchEnabled = Boolean(this.faceMatchEnabled && this.paramLocais.getOpcoes().dockCheck_token);
         this.showFaceMatchDocCheck = true;
-        this.docCheckService.init();
         this.cd.detectChanges();
+        this.docCheckService.init();
         this.document.getElementById('exDocCheckAction').click();
         this.docCheckService.iframeMessage$.pipe(takeUntil(this.unsub$)).subscribe(message => {
           if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
@@ -110,7 +114,13 @@ export class AccountVerificationDocumentStepComponent {
     this.unsub$.complete();
   }
 
-  succesValidation() {  
+  async succesValidation() {  
+    this.messageService.success(this.translate.instant('face_match.verified_identity'));
+    await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise();
+    this.accountVerificationService.getAccountVerificationDetail().toPromise();
+    
+    this.onAdvance.emit();
+
     switch (this.faceMatchType) {
       case 'legitimuz':
         this.legitimuzService.closeModal();
@@ -119,9 +129,5 @@ export class AccountVerificationDocumentStepComponent {
         this.docCheckService.closeModal();
         break;
     }
-    localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
-    this.messageService.success(this.translate.instant('face_match.verified_identity'));
-    this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).subscribe(takeUntil(this.unsub$));
-    this.router.navigate(['/welcome']);
   }
 }

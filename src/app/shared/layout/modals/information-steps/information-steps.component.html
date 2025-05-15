@@ -1,6 +1,6 @@
 <div class="information-steps">
     <div class="information-steps__header">
-        <app-button-close></app-button-close>
+        <app-button-close (onClick)="onClick()"></app-button-close>
     </div>
     <div class="information-steps__body">
         <span class="information-steps__title">
@@ -14,10 +14,10 @@
         </div>
     </div>
     <div class="information-steps__footer">
-        <button 
-            class="information-steps__action-buton" 
+        <button
+            class="information-steps__action-buton"
             aria-label="Close"
-            (click)="handleClick()"
+            (click)="onClick()"
             *ngIf="hasButton"
         >
            {{ textButton }}

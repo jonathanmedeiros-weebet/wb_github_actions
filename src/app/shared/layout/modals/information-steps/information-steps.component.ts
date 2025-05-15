@@ -69,7 +69,7 @@ export class InformationStepsComponent implements OnInit {
     }
   }
 
-  public handleClick() {
+  public onClick() {
     this.activeModal.close('cancel');
   }
 
