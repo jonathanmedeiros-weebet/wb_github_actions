@@ -1,6 +1,6 @@
 import { takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, Inject, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -49,10 +49,10 @@ export class AccountVerificationDocumentStepComponent {
 
   ) { }
   
-  ngOnInit() {
+  async ngOnInit() {
     this.faceMatchType = this.paramLocais.getOpcoes().faceMatchType;
     this.faceMatchEnabled = Boolean(this.paramLocais.getOpcoes().faceMatch && this.paramLocais.getOpcoes().faceMatchRegister);
-    this.getUserData();
+    await this.getUserData();
     this.cd.detectChanges();
     this.inicializeFaceMatch();
   }
@@ -88,8 +88,8 @@ export class AccountVerificationDocumentStepComponent {
         this.secretHash = this.docCheckService.hmacHash(this.dataUserCPF.replace(/[.\-]/g, ''), this.paramLocais.getOpcoes().dockCheck_secret_hash);
         this.faceMatchEnabled = Boolean(this.faceMatchEnabled && this.paramLocais.getOpcoes().dockCheck_token);
         this.showFaceMatchDocCheck = true;
-        this.docCheckService.init();
         this.cd.detectChanges();
+        this.docCheckService.init();
         this.document.getElementById('exDocCheckAction').click();
         this.docCheckService.iframeMessage$.pipe(takeUntil(this.unsub$)).subscribe(message => {
           if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
