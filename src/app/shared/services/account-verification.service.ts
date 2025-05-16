@@ -105,6 +105,7 @@ export class AccountVerificationService {
       .pipe(
           map((response: VerificationAccountResponse) => {
             sessionStorage.setItem(ACCOUNT_VERIFICATION_SESSION, JSON.stringify(response));
+            
             this.accountVerified.next(response.account_verified);
             this.verifiedSteps.next(response.verified_steps);
             this.newCustomer.next(response.new_customer);
