@@ -25,7 +25,7 @@ const appRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                canActivate: [HomeGuard, AccountVerificationGuard],
+                canActivate: [AccountVerificationGuard, HomeGuard],
                 loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
             },
             {
@@ -47,6 +47,7 @@ const appRoutes: Routes = [
             {
                 path: 'acumuladao',
                 loadChildren: () => import('./acumuladao/acumuladao.module').then(m => m.AcumuladaoModule),
+                canActivate: [AccountVerificationGuard]
             },
             {
                 path: 'apuracao',

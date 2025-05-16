@@ -27,7 +27,8 @@ interface VerificationAccountResponse {
   verified_steps: VerifiedSteps;
   balance: string;
   new_customer: boolean;
-  terms_accepted: boolean
+  terms_accepted: boolean;
+  address_verified?: boolean
 }
 
 interface EmailOrPhoneVerificationStepParams {
@@ -50,11 +51,13 @@ export const ACCOUNT_VERIFICATION_SESSION = 'av';
 })
 export class AccountVerificationService {
 
-  public newCustomer = new BehaviorSubject<boolean>(false);
-  public balance = new BehaviorSubject<number>(0);
-  public accountVerified = new BehaviorSubject<boolean>(false);
+  public newCustomer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public balance: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public accountVerified: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public verifiedSteps: BehaviorSubject<VerifiedSteps> = new BehaviorSubject<VerifiedSteps>(verifiedStepsDefault);
-  public terms_accepted = new BehaviorSubject<boolean>(false);
+  public terms_accepted: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public addressVerified: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public firstRequestCompleted: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private modalService: NgbModal,
@@ -67,12 +70,33 @@ export class AccountVerificationService {
   ) {
     let accountVerificationStorage: VerificationAccountResponse | string | null = sessionStorage.getItem(ACCOUNT_VERIFICATION_SESSION);
     if (Boolean(accountVerificationStorage)) {
+      this.firstRequestCompleted.next(true);
+
       accountVerificationStorage = JSON.parse(accountVerificationStorage) as VerificationAccountResponse;
       this.accountVerified.next(accountVerificationStorage.account_verified);
       this.verifiedSteps.next(accountVerificationStorage.verified_steps);
       this.newCustomer.next(accountVerificationStorage.new_customer);
       this.terms_accepted.next(accountVerificationStorage.terms_accepted);
       this.balance.next(parseFloat(accountVerificationStorage.balance));
+
+      if (Boolean(accountVerificationStorage?.address_verified)) {
+        this.addressVerified.next(accountVerificationStorage.address_verified);
+      }
+    }
+  }
+
+  public async getForceAccountVerificationDetail() {
+    if (!this.firstRequestCompleted.getValue()) {
+      await this.getAccountVerificationDetail().toPromise();
+    }
+
+    return {
+      termsAccepted: this.terms_accepted.getValue(),
+      addressVerified: this.addressVerified.getValue(),
+      accountVerified: this.accountVerified.getValue(),
+      verifiedSteps: this.verifiedSteps.getValue(),
+      newCustomer: this.newCustomer.getValue(),
+      balance: this.balance.getValue()
     }
   }
 
@@ -86,6 +110,13 @@ export class AccountVerificationService {
             this.newCustomer.next(response.new_customer);
             this.balance.next(parseFloat(response.balance));
             this.terms_accepted.next(response.terms_accepted);
+
+            if (Boolean(response?.address_verified)) {
+              this.addressVerified.next(response.address_verified);
+            }
+            
+            this.firstRequestCompleted.next(true);
+
             this.showMessageAccountVerified();
             return response;
           }),
@@ -112,7 +143,8 @@ export class AccountVerificationService {
       centered: true,
       windowClass: 'modal-500 modal-account-verification',
       backdrop: 'static',
-      keyboard: false
+      keyboard: false,
+      
     });
 
     return modalref;
