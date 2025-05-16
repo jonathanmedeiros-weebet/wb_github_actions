@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
 import { BetbyComponent } from './betby/betby.component';
-import {RifaGuard} from './shared/services/guards/rifa.guard';
+import { RifaGuard } from './shared/services/guards/rifa.guard';
 import { CompartilharBilheteComponent } from './cupom/compartilhar-bilhete/compartilhar-bilhete.component';
 import { RedirectBetGuardGuard } from './shared/services/guards/redirect-bet-guard.guard';
 import { AccountVerificationGuard } from './shared/services/guards/account-verification.guard';
@@ -25,7 +25,7 @@ const appRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                canActivate: [HomeGuard],
+                canActivate: [HomeGuard, AccountVerificationGuard],
                 loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
             },
             {
@@ -61,43 +61,47 @@ const appRoutes: Routes = [
             {
                 path: 'desafios',
                 loadChildren: () => import('./desafios/desafios.module').then(m => m.DesafiosModule),
-                canActivate: [DesafioGuard]
+                canActivate: [DesafioGuard, AccountVerificationGuard]
             },
             {
                 path: '',
-                loadChildren: () => import('./casino/casino.module').then(m => m.CasinoModule)
+                loadChildren: () => import('./casino/casino.module').then(m => m.CasinoModule),
+                canActivate: [AccountVerificationGuard]
             },
             {
                 path: 'esportes',
-                loadChildren: () => import('./esportes/esportes.module').then(m => m.EsportesModule)
+                loadChildren: () => import('./esportes/esportes.module').then(m => m.EsportesModule),
+                canActivate: [AccountVerificationGuard]
             },
             {
                 path: 'live',
                 loadChildren: () => import('./esportes/live/live.module').then(m => m.LiveModule),
-                canActivate: [AoVivoGuard]
+                canActivate: [AoVivoGuard, AccountVerificationGuard]
             },
             {
                 path: 'informacoes',
-                loadChildren: () => import('./informacoes/informacoes.module').then(m => m.InformacoesModule)
+                loadChildren: () => import('./informacoes/informacoes.module').then(m => m.InformacoesModule),
+                canActivate: [AccountVerificationGuard]
             },
             {
                 path: 'promocao',
-                loadChildren: () => import('./promocoes/promocoes.module').then(m => m.PromocoesModule)
+                loadChildren: () => import('./promocoes/promocoes.module').then(m => m.PromocoesModule),
+                canActivate: [AccountVerificationGuard]
             },
             {
                 path: 'loterias',
                 loadChildren: () => import('./loterias/loterias.module').then(m => m.LoteriasModule),
-                canActivate: [LoteriaGuard]
+                canActivate: [LoteriaGuard, AccountVerificationGuard]
             },
             {
                 path: 'rifas',
                 loadChildren: () => import('./rifas/rifas.module').then(m => m.RifasModule),
-                canActivate: [RifaGuard]
+                canActivate: [RifaGuard, AccountVerificationGuard]
             },
             {
                 path: 'resultados',
                 loadChildren: () => import('./resultados/resultados.module').then(m => m.ResultadosModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, AccountVerificationGuard]
             },
             {
                 path: 'alterar-senha',
@@ -131,7 +135,7 @@ const appRoutes: Routes = [
             },
             {
                 path: 'clientes',
-                canActivate: [AuthGuard, ClientGuard],
+                canActivate: [AuthGuard, ClientGuard, AccountVerificationGuard],
                 loadChildren: () => import('./clientes/clientes.module').then(c => c.ClientesModule)
             },
             {
@@ -151,23 +155,25 @@ const appRoutes: Routes = [
         children: [
             {
                 path: '**',
-                component: BetbyComponent
+                component: BetbyComponent,
+                canActivate: [AccountVerificationGuard],
             }
         ]
     },
     {
         path: 'compartilhar-bilhete/:codigo',
-        component: CompartilharBilheteComponent
+        component: CompartilharBilheteComponent,
+        canActivate: [AccountVerificationGuard],
     },
     {
         path: 'aposta/:codigo',
         component: CupomComponent,
-        canActivate: [RedirectBetGuardGuard]
+        canActivate: [RedirectBetGuardGuard, AccountVerificationGuard]
     },
     {
         path: 'welcome',
         component: WelcomePageComponent,
-        canActivate: [WelcomeGuard]
+        canActivate: [WelcomeGuard, AccountVerificationGuard]
     },
     {
         path: '**',
