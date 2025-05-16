@@ -1985,7 +1985,7 @@ label {
 .modal-account-verification,
 .modal-generic {
 
-    z-index: 90002;
+    z-index: 90010;
 }
 
 .modal-account-verified-success {
