@@ -13,7 +13,6 @@ const PAGE = 'cadastro';
   encapsulation: ViewEncapsulation.None
 })
 export class AccountVerificationAlertComponent implements OnInit {
-  public title: string;
   public description: string;
   private registerBanner: any;
   public hasRegisterBanner: boolean = false;
@@ -33,7 +32,10 @@ export class AccountVerificationAlertComponent implements OnInit {
   }
 
   private prepareInfo() {
-    this.description = `${this.paramsLocaisService.getOpcoes().banca_nome} ${this.translate.instant('accountVerification.alertAccountVerificationDescription')}`;
+    setTimeout(() => {
+      const alertDescription = this.translate.instant('accountVerification.alertAccountVerificationDescription')
+      this.description = `${this.paramsLocaisService.getOpcoes().banca_nome} ${alertDescription}`;
+    }, 500);
   }
 
   public goToAccountVerification() {

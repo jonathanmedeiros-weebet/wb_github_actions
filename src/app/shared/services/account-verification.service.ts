@@ -117,25 +117,10 @@ export class AccountVerificationService {
             }
             
             this.firstRequestCompleted.next(true);
-
-            this.showMessageAccountVerified();
             return response;
           }),
           catchError(this.errorService.handleError)
       );
-  }
-
-  private showMessageAccountVerified() {
-    const accountVerifiedLocalStorage = JSON.parse(localStorage.getItem(ACCOUNT_VERIFIED));
-    const accountVerified = this.accountVerified.getValue();
-    if(
-      accountVerifiedLocalStorage != null
-      && !accountVerifiedLocalStorage
-      && accountVerified
-    ) {
-      this.openModalAccountVerifiedWithSuccess();
-    }
-    localStorage.setItem(ACCOUNT_VERIFIED, JSON.stringify(accountVerified))
   }
 
   public openModalAccountVerificationAlert(): NgbModalRef {

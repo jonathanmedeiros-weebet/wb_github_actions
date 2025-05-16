@@ -117,17 +117,18 @@ export class AccountVerificationDocumentStepComponent {
   async succesValidation() {  
     this.messageService.success(this.translate.instant('face_match.verified_identity'));
     await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise();
-    this.accountVerificationService.getAccountVerificationDetail().toPromise();
     
     this.onAdvance.emit();
 
-    switch (this.faceMatchType) {
-      case 'legitimuz':
-        this.legitimuzService.closeModal();
-        break;
-      case 'docCheck':
-        this.docCheckService.closeModal();
-        break;
-    }
+    setTimeout(() => {
+      switch (this.faceMatchType) {
+        case 'legitimuz':
+          this.legitimuzService.closeModal();
+          break;
+        case 'docCheck':
+          this.docCheckService.closeModal();
+          break;
+      }
+    }, 2000);
   }
 }

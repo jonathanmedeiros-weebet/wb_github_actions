@@ -65,7 +65,7 @@ export class ModalControllerService {
     const modalref = this.ngbModalService.open(InformationStepsComponent, {
       ariaLabelledBy: 'modal-basic-title',
       centered: true,
-      windowClass: 'modal-400 modal-generic-centered',
+      windowClass: 'modal-400 modal-generic modal-generic-centered',
       backdrop: 'static',
     });
 
@@ -78,7 +78,7 @@ export class ModalControllerService {
     const modalref = this.ngbModalService.open(AccountVerifiedAddressComponent, {
       ariaLabelledBy: 'modal-basic-title',
       centered: true,
-      windowClass: 'modal-280 modal-generic',
+      windowClass: 'modal-280 modal-generic modal-generic-centered',
       backdrop: 'static',
     });
     return modalref;

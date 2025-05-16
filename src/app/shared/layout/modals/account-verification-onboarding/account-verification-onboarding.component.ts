@@ -46,11 +46,13 @@ export class AccountVerificationOnboardingComponent implements OnInit, OnDestroy
       .subscribe((verifiedSteps) => {
         this.step = this.verifyCurrentStep(verifiedSteps);
         this.verifiedSteps = this.reorderSteps(verifiedSteps);
-
-        if(this.step == AccountVerificationTypes.COMPLETED) {
-          this.toAdvance();
-        }
       })
+
+    const verifiedSteps = this.accountVerificationService.verifiedSteps.getValue();
+    const step = this.verifyCurrentStep(verifiedSteps);
+    if(step == AccountVerificationTypes.COMPLETED) {
+      this.toAdvance();
+    }
   }
 
   private reorderSteps(verifiedSteps) {
@@ -78,6 +80,8 @@ export class AccountVerificationOnboardingComponent implements OnInit, OnDestroy
   }
 
   public async toAdvance() {
+    await this.accountVerificationService.getAccountVerificationDetail().toPromise();
+
     if (AccountVerificationTypes.COMPLETED == this.step) {
       const isNewCustomer = this.accountVerificationService.newCustomer.getValue();
       this.activeModal.dismiss();
@@ -89,8 +93,6 @@ export class AccountVerificationOnboardingComponent implements OnInit, OnDestroy
         this.router.navigate(['/']).then(() => this.accountVerificationService.openModalAccountVerifiedWithSuccess())
       }
       
-    } else {
-      this.accountVerificationService.getAccountVerificationDetail().toPromise();
     }
   }
 
