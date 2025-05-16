@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AccountVerificationService, AuthService } from 'src/app/services';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccountVerificationTypes } from 'src/app/shared/enums';
+import { Subscription } from 'rxjs';
 
 const ORDERED_STEPS = [ // define order here ;)
   AccountVerificationTypes.EMAIL,
@@ -15,9 +16,10 @@ const ORDERED_STEPS = [ // define order here ;)
   templateUrl: './account-verification-onboarding.component.html',
   styleUrl: './account-verification-onboarding.component.scss'
 })
-export class AccountVerificationOnboardingComponent implements OnInit {
+export class AccountVerificationOnboardingComponent implements OnInit, OnDestroy {
   public step = AccountVerificationTypes.EMAIL;
   public verifiedSteps = [];
+  private verifiedStepsSub!: Subscription;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -39,7 +41,7 @@ export class AccountVerificationOnboardingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountVerificationService
+    this.verifiedStepsSub = this.accountVerificationService
       .verifiedSteps
       .subscribe((verifiedSteps) => {
         this.step = this.verifyCurrentStep(verifiedSteps);
@@ -94,5 +96,11 @@ export class AccountVerificationOnboardingComponent implements OnInit {
 
   public handleLogout() {
     this.authService.logout();
+  }
+
+  ngOnDestroy(): void {
+    if (this.verifiedStepsSub) {
+      this.verifiedStepsSub.unsubscribe();
+    }
   }
 }
