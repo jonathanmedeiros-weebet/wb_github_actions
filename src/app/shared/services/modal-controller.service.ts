@@ -65,7 +65,7 @@ export class ModalControllerService {
     const modalref = this.ngbModalService.open(InformationStepsComponent, {
       ariaLabelledBy: 'modal-basic-title',
       centered: true,
-      windowClass: 'modal-400 modal-generic',
+      windowClass: 'modal-400 modal-generic-centered',
       backdrop: 'static',
     });
 
