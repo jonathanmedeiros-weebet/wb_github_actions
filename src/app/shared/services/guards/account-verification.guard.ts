@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AccountVerificationService } from '../account-verification.service';
 import { AuthService } from '../auth/auth.service';
+import { ModalControllerService } from '../modal-controller.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { AuthService } from '../auth/auth.service';
 export class AccountVerificationGuard implements CanActivate {
   constructor(
     private accountVerificationService: AccountVerificationService,
+    private modalControllerService: ModalControllerService,
     private router: Router,
     private authService: AuthService
   ) {}
@@ -25,17 +27,18 @@ export class AccountVerificationGuard implements CanActivate {
     if(this.authService.isLoggedIn() && this.authService.isCliente()) {
       const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
       const hasModalAccountVerificationOpen = document.getElementById('account-verification-alert');
+      const hasModalAddressVerifiedOpen = document.getElementById('account-verified-address');
 
-      if (hasModalTermsAcceptedOpen || hasModalAccountVerificationOpen) {
+      if (hasModalTermsAcceptedOpen || hasModalAccountVerificationOpen || hasModalAddressVerifiedOpen) {
         return true;
       }
 
       if(previousUrl == nextUrl) {
-        this.router.navigate(['/'], { skipLocationChange: true, state: { fromRegistration: false } });
-        this.defineGuardScope(previousUrl, nextUrl);
+        this.router.navigate(['/']);
+        this.defineGuardScope(nextUrl);
         return true;
       } else {
-        const isContinue = await this.defineGuardScope(previousUrl, nextUrl);
+        const isContinue = await this.defineGuardScope(nextUrl);
         return isContinue;
       }
     } else {
@@ -43,8 +46,9 @@ export class AccountVerificationGuard implements CanActivate {
     }
   }
 
-  private async defineGuardScope(previousUrl: string, nextUrl: string) {
-    const termsAccepted: boolean = this.accountVerificationService.terms_accepted.getValue();
+  private async defineGuardScope(nextUrl: string) {
+    const { termsAccepted, addressVerified, accountVerified } = await this.accountVerificationService.getForceAccountVerificationDetail();
+
     if (!termsAccepted) {
       const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
       if (hasModalTermsAcceptedOpen) return false;
@@ -61,12 +65,18 @@ export class AccountVerificationGuard implements CanActivate {
       }
     }
     
-    const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
     if (!accountVerified) {
       const hasModalAccountVerificationOpen = document.getElementById('account-verification-alert');
       if (hasModalAccountVerificationOpen) return false;
 
       await this.openModalAccountVerifications();
+    }
+
+    if (!addressVerified) {
+      const hasModalAddressVerifiedOpen = document.getElementById('account-verified-address');
+      if (hasModalAddressVerifiedOpen) return false;
+
+      await this.openModalAccountVerifiedAddress();
     }
 
     return true;
@@ -82,6 +92,13 @@ export class AccountVerificationGuard implements CanActivate {
   private async openModalAccountVerifications() {
     return new Promise((resolve) => {
       const modalRef = this.accountVerificationService.openModalAccountVerificationAlert();
+      modalRef.result.then((closed) => resolve(closed));
+    });
+  }
+
+  private async openModalAccountVerifiedAddress() {
+    return new Promise((resolve) => {
+      const modalRef = this.modalControllerService.openAccountVerifiedAddressModal();
       modalRef.result.then((closed) => resolve(closed));
     });
   }

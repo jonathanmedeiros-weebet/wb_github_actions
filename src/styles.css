@@ -1622,6 +1622,10 @@ input[type=number]::-webkit-outer-spin-button {
     height: 350px;
 }
 
+.modal-280 .modal-dialog {
+    max-width: 280px;
+}
+
 .modal-375 .modal-dialog {
     max-width: 375px;
 }

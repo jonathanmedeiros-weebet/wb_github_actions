@@ -4,6 +4,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AccountVerificationOnboardingComponent } from "../layout/modals/account-verification-onboarding";
 import { InformationStepsComponent } from "../layout/modals/information-steps/information-steps.component";
 import { AccountVerificationTypes } from "../enums";
+import { AccountVerifiedAddressComponent } from "../layout/modals/account-verified-address/account-verified-address.component";
 
 interface SuccessModalOptions {
   title: string;
@@ -71,6 +72,16 @@ export class ModalControllerService {
     if (Boolean(type)) {
       modalref.componentInstance.informationType = type;
     }
+  }
+
+  public openAccountVerifiedAddressModal() {
+    const modalref = this.ngbModalService.open(AccountVerifiedAddressComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      centered: true,
+      windowClass: 'modal-280 modal-generic',
+      backdrop: 'static',
+    });
+    return modalref;
   }
 }
 
