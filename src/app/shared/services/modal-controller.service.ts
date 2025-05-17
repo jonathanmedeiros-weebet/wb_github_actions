@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { SuccessModalComponent } from "../layout/modals/success-modal/success-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { AccountVerificationOnboardingComponent } from "../layout/modals/account-verification-onboarding";
+import { AccountVerificationOnboardingComponent } from "../layout/modals/account-verification/account-verification-onboarding";
 import { InformationStepsComponent } from "../layout/modals/information-steps/information-steps.component";
 import { AccountVerificationTypes } from "../enums";
-import { AccountVerifiedAddressComponent } from "../layout/modals/account-verified-address/account-verified-address.component";
+import { AccountVerifiedAddressComponent } from "../layout/modals/account-verification/account-verified-address/account-verified-address.component";
 
 interface SuccessModalOptions {
   title: string;
