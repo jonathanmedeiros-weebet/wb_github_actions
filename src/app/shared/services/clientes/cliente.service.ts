@@ -31,6 +31,8 @@ export class ClienteService {
     private twoFactorAuthVerifiedSource;
     twoFactorAuthVerified$;
 
+    public customerData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
     constructor(
         private http: HttpClient,
         private errorService: ErrorService,
@@ -95,11 +97,17 @@ export class ClienteService {
             );
     }
 
-    getCliente(id) {
+    getCliente(id = null) {
+        if (!Boolean(id)) {
+            const user = this.getUser();
+            id = user.id;
+        } 
+
         return this.http.get(`${this.clienteUrl}/getCliente/${id}`, this.headers.getRequestOptions(true))
             .pipe(
                 map(
                     (response: any) => {
+                        this.customerData.next(response?.results)
                         return response.results;
                     }
                 ),

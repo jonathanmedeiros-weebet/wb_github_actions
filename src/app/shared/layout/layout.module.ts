@@ -148,7 +148,7 @@ import {
     IconCircleExclamationComponent
 } from './icons';
 import { ButtonCloseComponent } from './button-close/button-close.component';
-import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
+import { InformationStepsComponent } from './modals/account-verification/information-steps/information-steps.component';
 import { AccountVerifiedAddressComponent } from './modals/account-verification/account-verified-address/account-verified-address.component';
 
 @NgModule({

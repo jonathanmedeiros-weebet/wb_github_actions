@@ -41,18 +41,25 @@ export class AccountVerificationOnboardingComponent implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
+    this.observerVerifiedSteps();
+    this.initVerifiedSteps();
+  }
+
+  private initVerifiedSteps() {
+    const verifiedSteps = this.accountVerificationService.verifiedSteps.getValue();
+    const step = this.verifyCurrentStep(verifiedSteps);
+    if(step == AccountVerificationTypes.COMPLETED) {
+      this.toAdvance();
+    }
+  }
+
+  private observerVerifiedSteps() {
     this.verifiedStepsSub = this.accountVerificationService
       .verifiedSteps
       .subscribe((verifiedSteps) => {
         this.step = this.verifyCurrentStep(verifiedSteps);
         this.verifiedSteps = this.reorderSteps(verifiedSteps);
       })
-
-    const verifiedSteps = this.accountVerificationService.verifiedSteps.getValue();
-    const step = this.verifyCurrentStep(verifiedSteps);
-    if(step == AccountVerificationTypes.COMPLETED) {
-      this.toAdvance();
-    }
   }
 
   private reorderSteps(verifiedSteps) {
@@ -92,7 +99,6 @@ export class AccountVerificationOnboardingComponent implements OnInit, OnDestroy
       } else {
         this.router.navigate(['/']).then(() => this.accountVerificationService.openModalAccountVerifiedWithSuccess())
       }
-      
     }
   }
 

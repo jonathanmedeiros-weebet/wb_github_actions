@@ -207,7 +207,7 @@ export class AppComponent implements OnInit {
                 });
 
                 this.accountVerificationService.getAccountVerificationDetail().toPromise();
-
+                this.clienteService.getCliente().toPromise();
             }
 
             if (isLogged && isCliente && logoutByInactivityIsEnabled) {
