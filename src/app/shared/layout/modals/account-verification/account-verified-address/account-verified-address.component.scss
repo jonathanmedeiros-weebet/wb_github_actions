@@ -6,8 +6,6 @@
     justify-content: space-between;
     gap: 24px;
     padding: 24px;
-    position: fixed;
-    overflow-x: hidden;
     border-radius: 4px;
 
     &__header {
@@ -83,5 +81,12 @@
         height: auto;
         max-width: 400px;
         position: relative;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .account-verified-address {
+        margin: 0 24px;
     }
 }
