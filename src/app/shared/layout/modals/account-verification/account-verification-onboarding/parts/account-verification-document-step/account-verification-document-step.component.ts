@@ -35,6 +35,7 @@ export class AccountVerificationDocumentStepComponent {
   public dataUserCPF: string = "";
   public showFaceMatchLegitimuz: boolean = false;
   public showFaceMatchDocCheck: boolean = false;
+  private closeIframeFaceMatch: HTMLElement;
 
   constructor(
     private faceMatchService: FaceMatchService,
@@ -70,6 +71,7 @@ export class AccountVerificationDocumentStepComponent {
         this.legitimuzService.init();
         this.legitimuzService.mount();
         this.document.getElementById('legitimuz-action-verify').click();
+        this.closeIframeFaceMatch = this.document.getElementById('legitimuz-action-close_dialog');
         this.legitimuzService.curCustomerIsVerified
           .pipe(takeUntil(this.unsub$))
           .subscribe(curCustomerIsVerified => {
@@ -93,6 +95,7 @@ export class AccountVerificationDocumentStepComponent {
         this.cd.detectChanges();
         this.docCheckService.init();
         this.document.getElementById('exDocCheckAction').click();
+        this.closeIframeFaceMatch = this.document.getElementById('ex-doccheck-close');
         this.docCheckService.iframeMessage$.pipe(takeUntil(this.unsub$)).subscribe(message => {
           if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
             this.succesValidation();
@@ -100,6 +103,9 @@ export class AccountVerificationDocumentStepComponent {
         });
         break;
     }
+    this.closeIframeFaceMatch.addEventListener('click', () => {
+      location.reload();
+    });
   }
 
   handleError(error: string) {
