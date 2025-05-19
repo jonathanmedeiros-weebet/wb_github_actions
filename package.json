@@ -10,7 +10,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "vipsports.digital": "gulp vipsports.digital",
     "betsbr.club": "gulp betsbr.club",
     "casadinha.bet": "gulp casadinha.bet",
     "demo.wee.bet": "gulp demo.wee.bet",
@@ -105,7 +104,6 @@
     "3tbet.com.br": "gulp 3tbet.com.br",
     "megasports.bet": "gulp megasports.bet",
     "81br.net": "gulp 81br.net",
-    "alfasports.online": "gulp alfasports.online",
     "novabet.site": "gulp novabet.site",
     "esportenetreipele.com": "gulp esportenetreipele.com",
     "powerbets.vip": "gulp powerbets.vip",
@@ -190,7 +188,6 @@
     "condutaesp.com": "gulp condutaesp.com",
     "betfortuna.com.br": "gulp betfortuna.com.br",
     "paraisobet.net": "gulp paraisobet.net",
-    "betmania.casino": "gulp betmania.casino",
     "sidjaisoekroe.io": "gulp sidjaisoekroe.io",
     "timedasorte.com": "gulp timedasorte.com",
     "bet1000.net.br": "gulp bet1000.net.br",
@@ -206,8 +203,12 @@
     "apostacerta.bet": "gulp apostacerta.bet",
     "brasavipcassino.net": "gulp brasavipcassino.net",
     "betsplay.club": "gulp betsplay.club",
-    "arretadobet.com": "arretadobet.com",
-    "avante.bet": "avante.bet"
+    "arretadobet.com": "gulp arretadobet.com",
+    "avante.bet": "gulp avante.bet",
+    "decolabet.com": "gulp decolabet.com",
+    "betvem.io": "gulp betvem.io",
+    "apostecerto.io": "gulp apostecerto.io",
+    "brasavip.bet": "gulp brasavip.bet"
   },
   "private": true,
   "dependencies": {
