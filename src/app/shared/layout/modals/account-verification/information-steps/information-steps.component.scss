@@ -79,10 +79,6 @@
     }
 
     @media only screen and (max-width: 1024px) {
-        .information-steps {
-            margin: 0 24px;
-        }
-
         :host::ng-deep .modal-dialog {
             height: auto !important;
             margin-top: auto !important;
@@ -91,6 +87,12 @@
             align-items: center;
             min-height: calc(100% - 1rem);
         }
-        
+
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .information-steps {
+        margin: 0 24px;
     }
 }
