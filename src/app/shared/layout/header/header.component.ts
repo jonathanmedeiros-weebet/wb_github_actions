@@ -232,7 +232,7 @@ export class HeaderComponent extends BaseFormComponent implements OnInit, OnDest
             this.whatsapp = this.paramsService.getOpcoes().whatsapp.replace(/\D/g, '');
         }
 
-        this.clienteService.logado
+        this.auth.logado
             .pipe(takeUntil(this.unsub$))
             .subscribe(
                 isLoggedIn => {

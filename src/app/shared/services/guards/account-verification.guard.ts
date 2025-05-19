@@ -69,7 +69,9 @@ export class AccountVerificationGuard implements CanActivate {
       const hasModalAccountVerificationOpen = document.getElementById('account-verification-alert');
       if (hasModalAccountVerificationOpen) return false;
 
-      await this.openModalAccountVerifications();
+      this.openModalAccountVerifications();
+      return false;
+      
     } else if (!addressVerified) {
       const addressExceptions = [
         '/welcome',
