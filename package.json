@@ -10,7 +10,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "vipsports.digital": "gulp vipsports.digital",
     "betsbr.club": "gulp betsbr.club",
     "casadinha.bet": "gulp casadinha.bet",
     "demo.wee.bet": "gulp demo.wee.bet",

@@ -93,15 +93,6 @@ function tasks(done, config) {
     done();
 }
 
-gulp.task('vipsports.digital', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "vipsports.digital",
-        banca: "Vip Sports",
-        styles: "--header: #222d32; --foreground-header: #e50d1b; --sidebar-right:#1a2226; --foreground-sidebar-right: #fff; --sidebar-left: #1a2226; --foreground-sidebar-left: #fff; --highlight: #e50d1b; --foreground-highlight: #d2d6de; --odds: #2c3b41; --foreground-odds: #fff;--foreground-selected-odds: #fff;--selected-event: #1e282c;--event-time: #1e282c;",
-    });
-});
-
 gulp.task('betsbr.club', function (done) {
     tasks(done, {
         server: "front2.weebet.tech",
