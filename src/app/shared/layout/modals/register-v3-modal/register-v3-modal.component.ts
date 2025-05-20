@@ -25,7 +25,7 @@ import { Subject } from 'rxjs';
 export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit {
     @ViewChild('documentNumberElement') documentNumberElement: ElementRef<HTMLInputElement>;
     @ViewChild('captchaRef') captchaRef: RecaptchaComponent;
-    
+
     unsub$ = new Subject();
     public modalClose = true;
     public registerCancel = false;
@@ -60,6 +60,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     };
     public countryCodes: any[] = [];
     private registerBanner: any;
+    public hasRegisterBanner: boolean = false;
     public showNationalitySection: boolean = false;
     public showNationalityOptions: boolean = false;
     public nationalities = this.countriesService.getCountries();
@@ -67,7 +68,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private previousUrl: string;
     public storagedBtag: string | null = null;
     public showAlertStepsVerificationAccount: boolean = false;
-    public hasRegisterBanner: boolean = false;
 
     constructor(
         private fb: FormBuilder,
