@@ -25,7 +25,6 @@ import { Subject } from 'rxjs';
 export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit {
     @ViewChild('documentNumberElement') documentNumberElement: ElementRef<HTMLInputElement>;
     @ViewChild('captchaRef') captchaRef: RecaptchaComponent;
-    @Input() public hasRegisterBanner: boolean;
     
     unsub$ = new Subject();
     public modalClose = true;
@@ -68,6 +67,7 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     private previousUrl: string;
     public storagedBtag: string | null = null;
     public showAlertStepsVerificationAccount: boolean = false;
+    public hasRegisterBanner: boolean = false;
 
     constructor(
         private fb: FormBuilder,
@@ -143,6 +143,9 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     }
 
     private prepareBanner() {
+        if (!this.hasRegisterBanner) {
+            return;
+        }
         const page = 'cadastro';
         this.bannerService
             .banners

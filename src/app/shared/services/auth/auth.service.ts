@@ -526,16 +526,20 @@ export class AuthService {
 
         localStorage.setItem('user', JSON.stringify(user));
     }
+    private hasRegisterBanner(banners):Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            resolve(banners.some(banner => banner.pagina == 'cadastro'))
+        })
+    }
 
     async openRegisterV3Modal() {
         this.bannerService
             .requestBanners()
             .toPromise()
-            .then((banners) => {
+            .then(async (banners) => {
                 let hasRegisterBanner = false;
-
                 if(Boolean(banners) && Boolean(banners.length)) {
-                    hasRegisterBanner = banners.some(banner => banner.pagina == 'cadastro')
+                    hasRegisterBanner = await this.hasRegisterBanner(banners);
                 }
 
                 const modalRef = this.modalService.open(RegisterV3ModalComponent, {
