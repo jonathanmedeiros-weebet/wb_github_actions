@@ -538,13 +538,14 @@ export class AuthService {
                     hasRegisterBanner = banners.some(banner => banner.pagina == 'cadastro')
                 }
 
-                this.modalService.open(RegisterV3ModalComponent, {
+                const modalRef = this.modalService.open(RegisterV3ModalComponent, {
                     ariaLabelledBy: 'modal-basic-title',
                     size: 'md',
                     centered: true,
                     windowClass: `${hasRegisterBanner ? 'modal-750' : 'modal-400'} modal-cadastro-cliente`,
                     backdrop: 'static'
                 });
+                modalRef.componentInstance.hasRegisterBanner = Boolean(hasRegisterBanner);
             })
             .catch(() => {
                 const modalRef = this.modalService.open(RegisterV3ModalComponent, {

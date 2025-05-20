@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -25,7 +25,8 @@ import { Subject } from 'rxjs';
 export class RegisterV3ModalComponent extends BaseFormComponent implements OnInit {
     @ViewChild('documentNumberElement') documentNumberElement: ElementRef<HTMLInputElement>;
     @ViewChild('captchaRef') captchaRef: RecaptchaComponent;
-
+    @Input() public hasRegisterBanner: boolean;
+    
     unsub$ = new Subject();
     public modalClose = true;
     public registerCancel = false;
@@ -60,7 +61,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     };
     public countryCodes: any[] = [];
     private registerBanner: any;
-    public hasRegisterBanner: boolean = false;
     public showNationalitySection: boolean = false;
     public showNationalityOptions: boolean = false;
     public nationalities = this.countriesService.getCountries();
@@ -149,8 +149,8 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             .subscribe((banners) => {
                 if(Boolean(banners) && Boolean(banners.length)) {
                     this.registerBanner = banners.find(banner => banner.pagina == page);
-                    this.hasRegisterBanner = Boolean(this.registerBanner);
                 }
+                this.hasRegisterBanner = Boolean(this.registerBanner);
             })
     }
 
