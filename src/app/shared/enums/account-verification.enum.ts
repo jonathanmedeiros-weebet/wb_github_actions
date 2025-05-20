@@ -2,6 +2,7 @@ export enum AccountVerificationTypes {
   EMAIL = 'email',
   PHONE = 'phone',
   DOCUMENT = 'document',
+  ADDRESS = 'address',
   COMPLETED = 'completed'
 }
 

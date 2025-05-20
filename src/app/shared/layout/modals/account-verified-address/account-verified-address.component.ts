@@ -15,11 +15,11 @@ export class AccountVerifiedAddressComponent {
     ) {}
 
     public goToAccountVerification() {
+        this.router.navigate(['clientes/personal-data'], {queryParams: { openAddressAccordion: true }});
         this.activeModal.close(true);
-        this.router.navigate(['clientes/personal-data']);
     }
 
     onClick() {
-        this.activeModal.close();
+        this.activeModal.close(false);
     }
 }

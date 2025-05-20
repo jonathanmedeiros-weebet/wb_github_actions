@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AccountVerificationService } from '../account-verification.service';
 import { AuthService } from '../auth/auth.service';
+import { ModalControllerService } from '../modal-controller.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { AuthService } from '../auth/auth.service';
 export class AccountVerificationGuard implements CanActivate {
   constructor(
     private accountVerificationService: AccountVerificationService,
+    private modalControllerService: ModalControllerService,
     private router: Router,
     private authService: AuthService
   ) {}
@@ -17,60 +19,67 @@ export class AccountVerificationGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
+
     void next;
+    const nextUrl = state.url;
+    const previousUrl = window.location.pathname;
 
     if(this.authService.isLoggedIn() && this.authService.isCliente()) {
+      const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
+      const hasModalAccountVerificationOpen = document.getElementById('account-verification-alert');
+      const hasModalAddressVerifiedOpen = document.getElementById('account-verified-address');
 
-      const nextUrl = state.url;
-      const previousUrl = window.location.pathname;
-
-      const termsAccepted: boolean = this.accountVerificationService.terms_accepted.getValue();
-      if (!termsAccepted) {
-        const hasModalOpen = document.getElementById('terms-accepted');
-        if (hasModalOpen) {
-          return true;
-        }
-
-        const termExceptions = [
-          '/clientes/saque'
-        ];
-        
-        if(!termExceptions.includes(nextUrl)) {
-          const termsResult = await this.openModalTerms();
-          if (!termsResult) {
-            if (previousUrl === nextUrl) {
-              return this.router.navigate(['/']);
-            } else {
-              return false;
-            }
-          }
-        }
-
-        const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
-        if (accountVerified) {
-          return true;
-        } else {
-          const isClosed = await this.openModalAccountVerifications();
-          if(isClosed && previousUrl == nextUrl) {
-            return this.router.navigate(['/']);
-          }
-        }
-      } else {
-        const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
-        if (accountVerified) {
-          return true;
-        } else {
-          const isClosed = await this.openModalAccountVerifications();
-          if(isClosed && previousUrl == nextUrl) {
-            return this.router.navigate(['/']);
-          }
-        }
+      if (hasModalTermsAcceptedOpen || hasModalAccountVerificationOpen || hasModalAddressVerifiedOpen) {
+        return true;
       }
 
-      return false;
+      if(previousUrl == nextUrl) {
+        this.router.navigate(['/']);
+        this.defineGuardScope(nextUrl);
+        return true;
+      } else {
+        const isContinue = await this.defineGuardScope(nextUrl);
+        return isContinue;
+      }
     } else {
       return true;
     }
+  }
+
+  private async defineGuardScope(nextUrl: string) {
+    const { termsAccepted, addressVerified, accountVerified } = await this.accountVerificationService.getForceAccountVerificationDetail();
+
+    if (!termsAccepted) {
+      const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
+      if (hasModalTermsAcceptedOpen) return false;
+
+      const termExceptions = [
+        '/clientes/saque'
+      ];
+      
+      if(!termExceptions.includes(nextUrl)) {
+        const termsResult = await this.openModalTerms();
+        if (!termsResult) {
+          return false;
+        }
+      }
+    }
+    
+    if (!accountVerified) {
+      const hasModalAccountVerificationOpen = document.getElementById('account-verification-alert');
+      if (hasModalAccountVerificationOpen) return false;
+
+      await this.openModalAccountVerifications();
+    }
+
+    if (!addressVerified) {
+      const hasModalAddressVerifiedOpen = document.getElementById('account-verified-address');
+      if (hasModalAddressVerifiedOpen) return false;
+
+      await this.openModalAccountVerifiedAddress();
+    }
+
+    return true;
   }
 
   private async openModalTerms() {
@@ -83,6 +92,13 @@ export class AccountVerificationGuard implements CanActivate {
   private async openModalAccountVerifications() {
     return new Promise((resolve) => {
       const modalRef = this.accountVerificationService.openModalAccountVerificationAlert();
+      modalRef.result.then((closed) => resolve(closed));
+    });
+  }
+
+  private async openModalAccountVerifiedAddress() {
+    return new Promise((resolve) => {
+      const modalRef = this.modalControllerService.openAccountVerifiedAddressModal();
       modalRef.result.then((closed) => resolve(closed));
     });
   }
