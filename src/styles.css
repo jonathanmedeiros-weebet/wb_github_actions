@@ -940,6 +940,10 @@ button {
     .content-sports {
         padding: 0;
     }
+
+    .modal-information-step-centered .modal-dialog {
+        max-width: max-content !important;
+    }
 }
 
 
