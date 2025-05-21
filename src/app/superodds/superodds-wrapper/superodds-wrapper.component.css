@@ -1,0 +1,20 @@
+#superodds-wrapper {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.superodds-content{
+    flex-grow: 1;
+    padding: 0;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+    .superodds-content{
+        padding: 0;
+        height: -webkit-fill-available;
+        -webkit-overflow-scrolling: touch;
+        height: calc(100vh - 183px);
+    }
+}

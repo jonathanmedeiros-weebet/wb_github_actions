@@ -1,0 +1,8 @@
+<div class="base-container">
+    <app-navigation></app-navigation>
+    <main [ngClass]="{'collapsed': navigationIsCollapsed, 'uncollapsed': !navigationIsCollapsed}">
+        <router-outlet></router-outlet>
+    </main>
+    <app-superodds-betslip></app-superodds-betslip>
+    <app-menu-footer></app-menu-footer>
+</div>

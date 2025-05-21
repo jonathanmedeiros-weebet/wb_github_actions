@@ -319,7 +319,8 @@
     "bet": {
         "sportsBetting": "Sports betting",
         "casinoBetting": "Casino betting",
-        "incomeTaxOnPrize": "Income tax on prize"
+        "incomeTaxOnPrize": "Income tax on prize",
+        "onlyOneEvent": "Only one event can be bet on at a time."
     },
     "dias": {
         "ontem": "Yesterday",
