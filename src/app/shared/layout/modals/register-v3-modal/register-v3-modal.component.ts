@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -143,14 +143,17 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
     }
 
     private prepareBanner() {
+        if (!this.hasRegisterBanner) {
+            return;
+        }
         const page = 'cadastro';
         this.bannerService
             .banners
             .subscribe((banners) => {
                 if(Boolean(banners) && Boolean(banners.length)) {
                     this.registerBanner = banners.find(banner => banner.pagina == page);
-                    this.hasRegisterBanner = Boolean(this.registerBanner);
                 }
+                this.hasRegisterBanner = Boolean(this.registerBanner);
             })
     }
 
