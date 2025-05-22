@@ -26,11 +26,13 @@ import { FooterComponent } from './footer/footer.component';
 import { ErrorMsgComponent } from './error-msg/error-msg.component';
 import { ExibirBilheteDesafioComponent } from './exibir-bilhete/desafio/exibir-bilhete-desafio.component';
 import { ExibirBilheteEsportivoComponent } from './exibir-bilhete/esportes/exibir-bilhete-esportivo.component';
+import { ExibirBilheteSuperoddComponent } from './exibir-bilhete/superodd/exibir-bilhete-superodd.component';
 import { ExibirBilheteLoteriaComponent } from './exibir-bilhete/loteria/exibir-bilhete-loteria.component';
 import { BilheteAcumuladaoComponent } from './exibir-bilhete/acumuladao/bilhete-acumuladao.component';
 import { BilheteCompartilhamentoComponent } from './bilhete-compartilhamento/bilhete-compartilhamento.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UtilsModule } from '../utils/utils.module';
+
 import {
     AcumuladaoService,
     ApostaEsportivaService,
@@ -125,6 +127,9 @@ import { AccountVerificationAlertComponent } from './modals/account-verification
 import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
 import { ConfigurationBetLimitModalComponent } from './modals/configuration-bet-limit-modal/configuration-bet-limit-modal.component';
 import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.component';
+import { SuperoddLayoutComponent } from './app-layouts/superodd-layout.component';
+import { SuperoddService } from '../services/superodd.service';
+import { SuperoddsBetslipComponent } from 'src/app/superodds/superodds-betslip/superodds-betslip.component';
 import { MigrationInformationModalComponent } from './modals/migration-information-modal/migration-information-modal.component';
 import { BettingShopConnectModalComponent } from './modals/betting-shop-connect-modal/betting-shop-connect-modal.component';
 import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-modal/betting-shop-switch-modal.component';
@@ -173,6 +178,7 @@ import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-mo
         ExibirBilheteDesafioComponent,
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
+        ExibirBilheteSuperoddComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
         PesquisaModalComponent,
@@ -253,6 +259,8 @@ import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-mo
         BetSharingModalComponent,
         ConfigurationBetLimitModalComponent,
         TermsAcceptedComponent,
+        SuperoddLayoutComponent,
+        SuperoddsBetslipComponent,
         MigrationInformationModalComponent,
         BettingShopConnectModalComponent,
         BettingShopSwitchModalComponent
@@ -268,6 +276,7 @@ import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-mo
         ExibirBilheteEsportivoComponent,
         ExibirBilheteLoteriaComponent,
         ExibirBilheteRifaComponent,
+        ExibirBilheteSuperoddComponent,
         BilheteAcumuladaoComponent,
         SpinnerComponent,
         BilheteEsportivoComponent,
@@ -297,6 +306,7 @@ import { BettingShopSwitchModalComponent } from './modals/betting-shop-switch-mo
         IndiqueGanheService,
         CashbackService,
         FreeSpinService,
+        SuperoddService,
         provideNgxMask(),
         {
             provide: RECAPTCHA_SETTINGS,

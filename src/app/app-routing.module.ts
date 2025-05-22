@@ -12,10 +12,11 @@ import { AppComponent } from './app.component';
 import { HomeGuard } from './shared/services/guards/home.guard';
 import { WelcomePageComponent } from './shared/layout/welcome-page//welcome-page.component';
 import { BetbyComponent } from './betby/betby.component';
-import {RifaGuard} from './shared/services/guards/rifa.guard';
+import { RifaGuard } from './shared/services/guards/rifa.guard';
 import { CompartilharBilheteComponent } from './cupom/compartilhar-bilhete/compartilhar-bilhete.component';
 import { RedirectBetGuardGuard } from './shared/services/guards/redirect-bet-guard.guard';
 import { AccountVerificationGuard } from './shared/services/guards/account-verification.guard';
+import { SuperoddGuard } from './shared/services/guards/superodd.guard';
 
 const appRoutes: Routes = [
     {
@@ -62,6 +63,11 @@ const appRoutes: Routes = [
                 path: 'desafios',
                 loadChildren: () => import('./desafios/desafios.module').then(m => m.DesafiosModule),
                 canActivate: [DesafioGuard]
+            },
+            {
+                path: 'superodds',
+                loadChildren: () => import('./superodds/superodds.module').then(m => m.SuperoddsModule),
+                canActivate: [SuperoddGuard]
             },
             {
                 path: '',
