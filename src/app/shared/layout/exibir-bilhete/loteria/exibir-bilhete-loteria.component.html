@@ -5,28 +5,28 @@
                 <p class="informacoes-item" id="modalidade">
                     MODALIDADE: {{sorteioNome(item.tipo)}}
                 </p>
-                <p *ngIf="item.tipo == 'seninha'" class="informacoes-item" [ngClass]="verificarStatus(item, 6)">
+                <p *ngIf="item.tipo == 'seninha'" class="informacoes-item">
                     Retorno 6: {{calcularPremioLoteria(item.valor, item.cotacao6) | currency}}
                     <br>
                     <span *ngIf="!aposta.is_cliente && aposta.passador.percentualPremio > 0">
                         Retorno líquido 6: {{calcularPremioLiquidoLoteria(item.valor, item.cotacao6, aposta.passador.percentualPremio) | currency}}
                     </span>
                 </p>
-                <p class="informacoes-item" *ngIf="item.cotacao5 > 0" [ngClass]="verificarStatus(item, 5)">
+                <p class="informacoes-item" *ngIf="item.cotacao5 > 0">
                     Retorno 5: {{calcularPremioLoteria(item.valor, item.cotacao5) | currency}}
                     <br>
                     <span *ngIf="!aposta.is_cliente && aposta.passador.percentualPremio > 0">
                         Retorno líquido 5: {{calcularPremioLiquidoLoteria(item.valor, item.cotacao5, aposta.passador.percentualPremio) | currency}}
                     </span>
                 </p>
-                <p class="informacoes-item" *ngIf="item.cotacao4 > 0" [ngClass]="verificarStatus(item, 4)">
+                <p class="informacoes-item" *ngIf="item.cotacao4 > 0">
                     Retorno 4: {{calcularPremioLoteria(item.valor, item.cotacao4) | currency}}
                     <br>
                     <span *ngIf="!aposta.is_cliente && aposta.passador.percentualPremio > 0">
                         Retorno líquido 4: {{calcularPremioLiquidoLoteria(item.valor, item.cotacao4, aposta.passador.percentualPremio) | currency}}
                     </span>
                 </p>
-                <p class="informacoes-item" *ngIf="item.cotacao3 > 0" [ngClass]="verificarStatus(item, 3)">
+                <p class="informacoes-item" *ngIf="item.cotacao3 > 0">
                     Retorno 3: {{calcularPremioLoteria(item.valor, item.cotacao3) | currency}}
                     <br>
                     <span *ngIf="!aposta.is_cliente && aposta.passador.percentualPremio > 0">
