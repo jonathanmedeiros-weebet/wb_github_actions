@@ -65,6 +65,7 @@
     background: var(--background);
     margin-bottom: 0;
     color: var(--foreground-game);
+    font-size: 12px;
 }
 tr.cupom {
     border-bottom: 2px dotted var(--bottom-bar);
@@ -128,7 +129,7 @@ hr {
 }
 .item .campeonato{
     margin: 1px;
-    font-size: 14px;
+    font-size: 12px;
 }
 .footer-container {
     display: none;
@@ -239,7 +240,6 @@ hr {
     background-color: var(--game);
     border-radius: 10px 10px 0 0;
     overflow: hidden;
-    
 }
 .modal-footer {
     justify-content: center;
@@ -341,10 +341,10 @@ hr {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-    }    
+    }
     .item .cotacao {
         display: flex;
-        justify-content: space-between;    
+        justify-content: space-between;
     }
     .sec {
         margin-bottom: 10px;

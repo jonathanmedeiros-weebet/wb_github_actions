@@ -259,15 +259,15 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         this.totais.premioBonus = 0;
 
         response.forEach(aposta => {
-           
+
             if (!aposta.cartao_aposta) {
                 if(aposta.rollover_status != 'cancelado'){
-                    if (!aposta?.is_bonus) { 
+                    if (!aposta?.is_bonus) {
                         this.totais.valor += parseFloat(aposta.valor);
                     } else {
                         this.totais.valorBonus += parseFloat(aposta.valor);
                     }
-                    
+
                     if (aposta.tipo === 'loteria') {
                         aposta.itens.forEach(lotteryItem => {
                             if (lotteryItem.status === 'ganhou') {
@@ -336,7 +336,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         } else {
             return 'red';
         }
-        
+
     }
 
     onDateSelection(date: NgbDate, datepicker: any) {
@@ -396,7 +396,7 @@ export class ApostasClienteComponent extends BaseFormComponent implements OnInit
         }
 
         let size = aposta.tipo == 'esportes' ? 'lg' : '';
-        let typeWindow = aposta.tipo == 'esportes' ? 'modal-700' : '';
+        let typeWindow = aposta.tipo == 'esportes' ? 'modal-500' : '';
 
         this.apostaService.getAposta(aposta.id, params)
             .subscribe(

@@ -138,7 +138,7 @@ export class ApostaModalComponent implements OnInit {
 
         return opcoes.habilitar_compartilhamento_comprovante;
     }
-    
+
     async copyToClipboard(codigo: string, message = true) {
         try {
             await navigator.clipboard.writeText(codigo);

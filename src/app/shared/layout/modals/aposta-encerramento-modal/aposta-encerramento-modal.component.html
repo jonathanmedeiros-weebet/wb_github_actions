@@ -180,7 +180,7 @@
                         </p>
                         <div class="teams-container">
                             <div ngbTooltip="{{item.time_a_nome}} {{item.time_a_resultado}} x {{item.time_b_resultado}} {{item.time_b_nome}}"
-                            triggers="manual" 
+                            triggers="manual"
                             #tooltipTeams="ngbTooltip"
                             (click)="tooltipTeams.open()"
                             id="teams-names">
@@ -276,7 +276,7 @@
             <span class="dados-simulacao">{{ 'compartilhar_aposta.apostaNaoPodeSerEncerrada' | translate }}</span>
         </p>
     </div>
-    <div class="button-container">
+    <div class="button-container" *ngIf="!falhaSimulacao">
         <ng-container>
             <div id="buttons-container">
                 <button id="encerrar-aposta" *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
