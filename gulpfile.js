@@ -93,15 +93,6 @@ function tasks(done, config) {
     done();
 }
 
-gulp.task('betsbr.club', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "betsbr.club",
-        banca: "Bets BR",
-        styles: "--header: #666666; --foreground-header: #000; --sidebar-right:#000; --foreground-sidebar-right: #fff; --sidebar-left: #000; --foreground-sidebar-left: #fff; --highlight: red; --foreground-highlight: #aec3d8; --odds: #e1b01e; --foreground-odds: #fff;",
-    });
-});
-
 gulp.task('casadinha.bet', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
@@ -528,16 +519,6 @@ gulp.task('ingamesport.com', function (done) {
         host: "ingamesport.com",
         banca: "INGAME SPORT",
         styles: ""
-    });
-});
-
-gulp.task('lbbet.com.br', function (done) {
-    tasks(done, {
-        server: "front1.weebet.tech",
-        host: "lbbet.com.br",
-        shared_url: "lbbet.com.br",
-        banca: "LBBET",
-        styles: "--header: #3aaa35; --foreground-header: #fff; --sidebar-right:#3aaa35; --foreground-sidebar-right: #fff; --sidebar-left: #3aaa35; --foreground-sidebar-left: #fff; --odds: #5e5e5e;--foreground-highlight:#fff;",
     });
 });
 
@@ -1027,24 +1008,6 @@ gulp.task('fizabet.com', function (done) {
     });
 });
 
-gulp.task('betplusbr.com', function (done) {
-    tasks(done, {
-        server: "front2.weebet.tech",
-        host: "betplusbr.com",
-        banca: "BET PLUS BR",
-        styles: "",
-    });
-});
-
-gulp.task('futvale.net', function (done) {
-    tasks(done, {
-        server: "front4.weebet.tech",
-        host: "futvale.net",
-        banca: "FUTVALE",
-        styles: "",
-    });
-});
-
 gulp.task('treinamento.wee.bet', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
@@ -1062,15 +1025,6 @@ gulp.task('faithbets.bet', function (done) {
         server: "front4.weebet.tech",
         host: "faithbets.bet",
         banca: "FAITH BETS",
-        styles: "",
-    });
-});
-
-gulp.task('ccaesportes.club', function (done) {
-    tasks(done, {
-        server: "front3.weebet.tech",
-        host: "ccaesportes.club",
-        banca: "totalbet.win",
         styles: "",
     });
 });
