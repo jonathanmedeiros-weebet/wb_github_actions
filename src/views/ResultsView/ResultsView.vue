@@ -129,9 +129,11 @@ export default {
     handleOpenModalitiesModal() {
       this.showModalModalities = !this.showModalModalities;
       this.$nextTick(() => {
-        this.$refs.modalModalities.options = this.$refs.modalModalities.options.filter(
-          modality => modality.id !== "nulll4"
-        );
+        if (Boolean(this.$refs.modalModalities.options.length)) {
+          this.$refs.modalModalities.options = this.$refs.modalModalities.options.filter(
+            modality => modality.id !== "nulll4"
+          );
+        }
       });
     },
     handleCloseModalitiesModal() {
