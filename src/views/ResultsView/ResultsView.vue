@@ -64,6 +64,7 @@
 
     <ModalModalities
       v-if="showModalModalities"
+      ref="modalModalities"
       :modalityId="modality.id"
       @closeModal="handleCloseModalitiesModal"
       @click="handleModality"
@@ -127,6 +128,12 @@ export default {
     },
     handleOpenModalitiesModal() {
       this.showModalModalities = !this.showModalModalities;
+      this.$nextTick(() => {
+        const modalitie = this.$refs.modalModalities;
+        if (modalitie) {
+          modalitie.options = modalitie.options.filter(modality => modality.id !== "nulll4");
+        }
+      })
     },
     handleCloseModalitiesModal() {
       this.showModalModalities = false;
