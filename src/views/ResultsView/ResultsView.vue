@@ -129,11 +129,10 @@ export default {
     handleOpenModalitiesModal() {
       this.showModalModalities = !this.showModalModalities;
       this.$nextTick(() => {
-        const modalitie = this.$refs.modalModalities;
-        if (modalitie) {
-          modalitie.options = modalitie.options.filter(modality => modality.id !== "nulll4");
-        }
-      })
+        this.$refs.modalModalities.options = this.$refs.modalModalities.options.filter(
+          modality => modality.id !== "nulll4"
+        );
+      });
     },
     handleCloseModalitiesModal() {
       this.showModalModalities = false;
