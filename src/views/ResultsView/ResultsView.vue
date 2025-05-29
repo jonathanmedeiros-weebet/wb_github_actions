@@ -131,7 +131,7 @@ export default {
       this.$nextTick(() => {
         if (Boolean(this.$refs.modalModalities.options.length)) {
           this.$refs.modalModalities.options = this.$refs.modalModalities.options.filter(
-            modality => modality.id !== "nulll4"
+            modality => modality.id !== "null3" && modality.id !== "nulll4"
           );
         }
       });
