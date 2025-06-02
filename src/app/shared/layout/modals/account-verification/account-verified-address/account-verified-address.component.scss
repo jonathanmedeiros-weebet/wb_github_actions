@@ -1,18 +1,18 @@
 .account-verified-address {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--header);
+    color: var(--foreground-header);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 24px;
     padding: 24px;
-    position: fixed;
-    overflow-x: hidden;
     border-radius: 4px;
 
     &__header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        width: 100%;
     }
 
     &__body {
@@ -27,7 +27,7 @@
     }
 
     &__title {
-        color: var(--foreground);
+        color: var(--foreground-header);
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
@@ -35,7 +35,7 @@
     }
 
     &__description {
-        color: rgba(var(--foreground-rgb), .7);
+        color: rgba(var(--foreground-header-rgb), .7);
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
@@ -80,5 +80,12 @@
         height: auto;
         max-width: 400px;
         position: relative;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .account-verified-address {
+        margin: 0 24px;
     }
 }

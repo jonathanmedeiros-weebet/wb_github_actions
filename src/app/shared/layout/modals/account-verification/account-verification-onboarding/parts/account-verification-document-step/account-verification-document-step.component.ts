@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Inject, Output } from '@ang
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
-import { AccountVerificationService, ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
+import { ClienteService, MessageService, ParametrosLocaisService } from 'src/app/services';
 import { DocCheckService } from 'src/app/shared/services/doc-check.service';
 import { FaceMatchService } from 'src/app/shared/services/face-match.service';
 import { LegitimuzService } from 'src/app/shared/services/legitimuz.service';
@@ -35,10 +35,11 @@ export class AccountVerificationDocumentStepComponent {
   public dataUserCPF: string = "";
   public showFaceMatchLegitimuz: boolean = false;
   public showFaceMatchDocCheck: boolean = false;
+  private closeIframeFaceMatch: HTMLElement;
 
   constructor(
     private faceMatchService: FaceMatchService,
-    private clientService: ClienteService,
+    private clienteService: ClienteService,
     private legitimuzService: LegitimuzService,
     private messageService: MessageService,
     private translate: TranslateService,
@@ -47,7 +48,6 @@ export class AccountVerificationDocumentStepComponent {
     private docCheckService: DocCheckService,
     @Inject(DOCUMENT) private document: any,
     private cd: ChangeDetectorRef,
-    private accountVerificationService: AccountVerificationService
   ) { }
   
   async ngOnInit() {
@@ -58,10 +58,9 @@ export class AccountVerificationDocumentStepComponent {
     this.inicializeFaceMatch();
   }
 
-  async getUserData() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const dataUser = await this.clientService.getCliente(user.id).toPromise();
-    this.dataUserCPF = String(dataUser.cpf.replace(/[.\-]/g, ''));
+  getUserData() {
+    const customer = this.clienteService.customerData.getValue();
+    this.dataUserCPF = String(customer.cpf.replace(/[.\-]/g, ''));
   }
 
   inicializeFaceMatch() {
@@ -72,6 +71,7 @@ export class AccountVerificationDocumentStepComponent {
         this.legitimuzService.init();
         this.legitimuzService.mount();
         this.document.getElementById('legitimuz-action-verify').click();
+        this.closeIframeFaceMatch = this.document.getElementById('legitimuz-action-close_dialog');
         this.legitimuzService.curCustomerIsVerified
           .pipe(takeUntil(this.unsub$))
           .subscribe(curCustomerIsVerified => {
@@ -95,6 +95,7 @@ export class AccountVerificationDocumentStepComponent {
         this.cd.detectChanges();
         this.docCheckService.init();
         this.document.getElementById('exDocCheckAction').click();
+        this.closeIframeFaceMatch = this.document.getElementById('ex-doccheck-close');
         this.docCheckService.iframeMessage$.pipe(takeUntil(this.unsub$)).subscribe(message => {
           if (message.StatusPostMessage.Status == 'APROVACAO_AUTOMATICA' || message.StatusPostMessage.Status == 'APROVACAO_MANUAL') {
             this.succesValidation();
@@ -102,6 +103,9 @@ export class AccountVerificationDocumentStepComponent {
         });
         break;
     }
+    this.closeIframeFaceMatch.addEventListener('click', () => {
+      location.reload();
+    });
   }
 
   handleError(error: string) {
@@ -117,17 +121,18 @@ export class AccountVerificationDocumentStepComponent {
   async succesValidation() {  
     this.messageService.success(this.translate.instant('face_match.verified_identity'));
     await this.faceMatchService.updadeFacematch({ document: this.dataUserCPF, register: true }).toPromise();
-    this.accountVerificationService.getAccountVerificationDetail().toPromise();
     
     this.onAdvance.emit();
 
-    switch (this.faceMatchType) {
-      case 'legitimuz':
-        this.legitimuzService.closeModal();
-        break;
-      case 'docCheck':
-        this.docCheckService.closeModal();
-        break;
-    }
+    setTimeout(() => {
+      switch (this.faceMatchType) {
+        case 'legitimuz':
+          this.legitimuzService.closeModal();
+          break;
+        case 'docCheck':
+          this.docCheckService.closeModal();
+          break;
+      }
+    }, 2000);
   }
 }

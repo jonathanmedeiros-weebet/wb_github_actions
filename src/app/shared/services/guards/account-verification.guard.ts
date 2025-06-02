@@ -69,14 +69,21 @@ export class AccountVerificationGuard implements CanActivate {
       const hasModalAccountVerificationOpen = document.getElementById('account-verification-alert');
       if (hasModalAccountVerificationOpen) return false;
 
-      await this.openModalAccountVerifications();
-    }
+      this.openModalAccountVerifications();
+      return false;
+      
+    } else if (!addressVerified) {
+      const addressExceptions = [
+        '/welcome',
+        '/clientes/personal-data',
+        '/clientes/personal-data?openAddressAccordion=true'
+      ];
 
-    if (!addressVerified) {
-      const hasModalAddressVerifiedOpen = document.getElementById('account-verified-address');
-      if (hasModalAddressVerifiedOpen) return false;
-
-      await this.openModalAccountVerifiedAddress();
+      if(!addressExceptions.includes(nextUrl)) {
+        const hasModalAddressVerifiedOpen = document.getElementById('account-verified-address');
+        if (hasModalAddressVerifiedOpen) return false;
+        await this.openModalAccountVerifiedAddress();
+      }
     }
 
     return true;

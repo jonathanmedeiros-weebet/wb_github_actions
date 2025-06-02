@@ -412,11 +412,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
             .subscribe(
                 (res) => {
                     this.activeModal.dismiss();
-
-                    this.auth.setIsCliente(true);
-
-                    const user = res.result.user;
-                    sessionStorage.setItem('user', JSON.stringify(user));
                     localStorage.removeItem('codigoAfiliado');
                     localStorage.setItem('permissionWelcomePage', JSON.stringify(true));
 
@@ -425,7 +420,6 @@ export class RegisterV3ModalComponent extends BaseFormComponent implements OnIni
                     }
 
                     this.messageService.success(this.translate.instant('geral.cadastroSucedido'));
-                    this.accountVerificationService.getAccountVerificationDetail().toPromise();
                     this.router.navigate(['/welcome']);
 
                     if (this.errorMessage  && res.success) {

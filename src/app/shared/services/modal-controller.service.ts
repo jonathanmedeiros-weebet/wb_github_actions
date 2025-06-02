@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { SuccessModalComponent } from "../layout/modals/success-modal/success-modal.component";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { AccountVerificationOnboardingComponent } from "../layout/modals/account-verification-onboarding";
-import { InformationStepsComponent } from "../layout/modals/information-steps/information-steps.component";
+import { AccountVerificationOnboardingComponent } from "../layout/modals/account-verification/account-verification-onboarding";
+import { InformationStepsComponent } from "../layout/modals/account-verification/information-steps/information-steps.component";
 import { AccountVerificationTypes } from "../enums";
-import { AccountVerifiedAddressComponent } from "../layout/modals/account-verified-address/account-verified-address.component";
+import { AccountVerifiedAddressComponent } from "../layout/modals/account-verification/account-verified-address/account-verified-address.component";
 
 interface SuccessModalOptions {
   title: string;
@@ -65,7 +65,7 @@ export class ModalControllerService {
     const modalref = this.ngbModalService.open(InformationStepsComponent, {
       ariaLabelledBy: 'modal-basic-title',
       centered: true,
-      windowClass: 'modal-400 modal-generic',
+      windowClass: 'modal-400 modal-generic modal-generic-centered',
       backdrop: 'static',
     });
 
@@ -78,7 +78,7 @@ export class ModalControllerService {
     const modalref = this.ngbModalService.open(AccountVerifiedAddressComponent, {
       ariaLabelledBy: 'modal-basic-title',
       centered: true,
-      windowClass: 'modal-280 modal-generic',
+      windowClass: 'modal-380 modal-generic modal-generic-centered modal-information-step-centered',
       backdrop: 'static',
     });
     return modalref;

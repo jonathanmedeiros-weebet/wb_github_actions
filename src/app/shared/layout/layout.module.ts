@@ -118,10 +118,10 @@ import { StepperProgressBarComponent } from './modals/register-modal/parts/stepp
 import { PersonalDataComponent } from './modals/register-modal/parts/personal-data/personal-data.component';
 import { RegisterFaceMatchComponent } from './modals/register-face-match/register-face-match.component';
 import { RegisterV3ModalComponent } from './modals/register-v3-modal/register-v3-modal.component';
-import { AccountVerifiedSuccessComponent } from './modals/account-verified-success/account-verified-success.component';
+import { AccountVerifiedSuccessComponent } from './modals/account-verification/account-verified-success/account-verified-success.component';
 import { VerifyEmailOrPhoneComponent } from './modals/verify-email-or-phone/verify-email-or-phone.component';
 import { CardVerificationPendingComponent } from './header/parts/card-verification-pending/card-verification-pending.component';
-import { AccountVerificationAlertComponent } from './modals/account-verification-alert/account-verification-alert.component';
+import { AccountVerificationAlertComponent } from './modals/account-verification/account-verification-alert/account-verification-alert.component';
 import { BetSharingModalComponent } from './modals/bet-sharing-modal/bet-sharing-modal.component';
 import { ConfigurationBetLimitModalComponent } from './modals/configuration-bet-limit-modal/configuration-bet-limit-modal.component';
 import { TermsAcceptedComponent } from './modals/terms-accepted/terms-accepted.component';
@@ -134,7 +134,7 @@ import {
     AccountVerificationEmailOrPhoneStepComponent,
     AccountVerificationOnboardingComponent,
     AccountVerificationStepBarComponent
-} from './modals/account-verification-onboarding';
+} from './modals/account-verification/account-verification-onboarding';
 import { AlertVerificationStepsComponent } from './modals/register-v3-modal/parts/alert-verification-steps/alert-verification-steps.component';
 import {
     IconCheckCircleComponent,
@@ -148,8 +148,8 @@ import {
     IconCircleExclamationComponent
 } from './icons';
 import { ButtonCloseComponent } from './button-close/button-close.component';
-import { InformationStepsComponent } from './modals/information-steps/information-steps.component';
-import { AccountVerifiedAddressComponent } from './modals/account-verified-address/account-verified-address.component';
+import { InformationStepsComponent } from './modals/account-verification/information-steps/information-steps.component';
+import { AccountVerifiedAddressComponent } from './modals/account-verification/account-verified-address/account-verified-address.component';
 
 @NgModule({
     imports: [

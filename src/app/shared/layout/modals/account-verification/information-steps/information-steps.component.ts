@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { IconAssuredWorkloadComponent } from '../../icons/icon-assured-workload.component';
-import { IconVerifiedUserComponent } from '../../icons/icon-verified-user.component';
+import { IconAssuredWorkloadComponent } from '../../../icons/icon-assured-workload.component';
+import { IconVerifiedUserComponent } from '../../../icons/icon-verified-user.component';
 import { TranslateService } from '@ngx-translate/core';
-import { IconMailComponent } from '../../icons/icon-mail.component';
-import { IconSignalPhoneComponent } from '../../icons/icon-signal-phone.component';
+import { IconMailComponent } from '../../../icons/icon-mail.component';
+import { IconSignalPhoneComponent } from '../../../icons/icon-signal-phone.component';
 import { AccountVerificationTypes } from 'src/app/shared/enums';
 
 const RULES_TYPE = 'rules';

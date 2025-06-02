@@ -48,10 +48,8 @@ export class AccountVerificationEmailOrPhoneStepComponent {
     return this.time > 0;
   }
 
-  async ngOnInit(): Promise<void> {
-    // todo: mover para onboarding na task de divida técnica
-    const user = this.clienteService.getUser();
-    const customer = await this.clienteService.getCliente(user.id).toPromise();
+  ngOnInit() {
+    const customer = this.clienteService.customerData.getValue();
     this.verificationValue = this.verificationTypeIsEmail ? customer.email : customer.telefone;
     
     this.initTranslateInfo();

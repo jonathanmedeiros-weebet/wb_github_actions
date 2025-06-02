@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AccountVerificationService, AuthService } from 'src/app/services';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccountVerificationTypes } from 'src/app/shared/enums';
+import { Subscription } from 'rxjs';
 
 const ORDERED_STEPS = [ // define order here ;)
   AccountVerificationTypes.EMAIL,
@@ -15,9 +16,10 @@ const ORDERED_STEPS = [ // define order here ;)
   templateUrl: './account-verification-onboarding.component.html',
   styleUrl: './account-verification-onboarding.component.scss'
 })
-export class AccountVerificationOnboardingComponent implements OnInit {
+export class AccountVerificationOnboardingComponent implements OnInit, OnDestroy {
   public step = AccountVerificationTypes.EMAIL;
   public verifiedSteps = [];
+  private verifiedStepsSub!: Subscription;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -39,15 +41,24 @@ export class AccountVerificationOnboardingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountVerificationService
+    this.observerVerifiedSteps();
+    this.initVerifiedSteps();
+  }
+
+  private initVerifiedSteps() {
+    const verifiedSteps = this.accountVerificationService.verifiedSteps.getValue();
+    const step = this.verifyCurrentStep(verifiedSteps);
+    if(step == AccountVerificationTypes.COMPLETED) {
+      this.toAdvance();
+    }
+  }
+
+  private observerVerifiedSteps() {
+    this.verifiedStepsSub = this.accountVerificationService
       .verifiedSteps
       .subscribe((verifiedSteps) => {
         this.step = this.verifyCurrentStep(verifiedSteps);
         this.verifiedSteps = this.reorderSteps(verifiedSteps);
-
-        if(this.step == AccountVerificationTypes.COMPLETED) {
-          this.toAdvance();
-        }
       })
   }
 
@@ -76,6 +87,8 @@ export class AccountVerificationOnboardingComponent implements OnInit {
   }
 
   public async toAdvance() {
+    await this.accountVerificationService.getAccountVerificationDetail().toPromise();
+
     if (AccountVerificationTypes.COMPLETED == this.step) {
       const isNewCustomer = this.accountVerificationService.newCustomer.getValue();
       this.activeModal.dismiss();
@@ -86,13 +99,16 @@ export class AccountVerificationOnboardingComponent implements OnInit {
       } else {
         this.router.navigate(['/']).then(() => this.accountVerificationService.openModalAccountVerifiedWithSuccess())
       }
-      
-    } else {
-      this.accountVerificationService.getAccountVerificationDetail().toPromise();
     }
   }
 
   public handleLogout() {
     this.authService.logout();
+  }
+
+  ngOnDestroy(): void {
+    if (this.verifiedStepsSub) {
+      this.verifiedStepsSub.unsubscribe();
+    }
   }
 }

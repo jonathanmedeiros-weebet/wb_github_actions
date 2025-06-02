@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AccountVerificationAlertComponent } from '../layout/modals/account-verification-alert/account-verification-alert.component';
+import { AccountVerificationAlertComponent } from '../layout/modals/account-verification/account-verification-alert/account-verification-alert.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { config } from '../config';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 import { VerifyEmailOrPhoneComponent } from '../layout/modals/verify-email-or-phone/verify-email-or-phone.component';
 import { ClienteService } from './clientes/cliente.service';
 import { AccountVerificationTypes } from '../enums';
-import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verified-success/account-verified-success.component';
+import { AccountVerifiedSuccessComponent } from '../layout/modals/account-verification/account-verified-success/account-verified-success.component';
 import { TermsAcceptedComponent } from '../layout/modals/terms-accepted/terms-accepted.component';
 import { ParametrosLocaisService } from './parametros-locais.service';
 import { Router } from '@angular/router';
@@ -117,25 +117,10 @@ export class AccountVerificationService {
             }
             
             this.firstRequestCompleted.next(true);
-
-            this.showMessageAccountVerified();
             return response;
           }),
           catchError(this.errorService.handleError)
       );
-  }
-
-  private showMessageAccountVerified() {
-    const accountVerifiedLocalStorage = JSON.parse(localStorage.getItem(ACCOUNT_VERIFIED));
-    const accountVerified = this.accountVerified.getValue();
-    if(
-      accountVerifiedLocalStorage != null
-      && !accountVerifiedLocalStorage
-      && accountVerified
-    ) {
-      this.openModalAccountVerifiedWithSuccess();
-    }
-    localStorage.setItem(ACCOUNT_VERIFIED, JSON.stringify(accountVerified))
   }
 
   public openModalAccountVerificationAlert(): NgbModalRef {
