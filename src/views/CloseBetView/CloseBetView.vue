@@ -23,7 +23,11 @@
             </div>
             <div class="gain__item">
               <span>Cotação:</span>
-              <span class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 2) }}</span>
+              <span v-if="newQuotation == null" class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 2) }}</span>
+              <span v-else class="gain__value">
+                <span :class="{ 'gain__strikethrough': !simulateFailed }" v-if="bet.possibilidade_ganho"> {{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 2) }}</span>
+                <span class="gain--warning" v-if="newQuotation && !simulateFailed"> {{ formatNumber(newQuotation, 1, 2) }}</span>
+              </span>
             </div>
             <div class="gain__item">
               <span>Valor Apostado:</span>
@@ -33,8 +37,8 @@
               <span>Possível Retorno:</span>
               <span v-if="newEarningPossibility == null" class="gain__value">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span>
               <span v-else class="gain__value">
-                <span class="gain__strikethrough" v-if="bet.possibilidade_ganho">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
-                <span class="gain--warning" v-if="newEarningPossibility">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
+                <span :class="{ 'gain__strikethrough': !simulateFailed }" v-if="bet.possibilidade_ganho">R$ {{ formatCurrencyMoney(bet.possibilidade_ganho) }}</span> 
+                <span class="gain--warning" v-if="newEarningPossibility && !simulateFailed">R$ {{ formatCurrencyMoney(newEarningPossibility) }}</span>
               </span>
             </div>
             <div class="gain__item">
@@ -66,7 +70,7 @@
                   <IconGame :size="16" class="bet__icon"/>
                 </template>
                 <div v-if="bet.tipo !== 'loteria'" class="bet__team-name">
-                  <span :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
+                  <span :class="{ 'gain__strikethrough': newEarningPossibility !== null && !simulateFailed }">{{ truncateText(betItem.time_a_nome + " x " + betItem.time_b_nome) }}</span>
                 </div>
                 <div class="bet-lottery" v-if="bet.tipo === 'loteria'">
                   <span>Valor: R${{ formatCurrencyMoney(betItem.valor) }}</span>
@@ -117,24 +121,29 @@
               </template>
             </div>
             <div v-if="bet.tipo !== 'loteria'" class="bet__info">
-              <span class="bet__date" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ formateDateTime(betItem.jogo_horario) }}</span>
+              <span class="bet__date" :class="{ 'gain__strikethrough': newEarningPossibility !== null && !simulateFailed }">{{ formateDateTime(betItem.jogo_horario) }}</span>
             </div>
             <div class="bet__text" v-if="bet.tipo !== 'loteria'">
-              <span class="bet__select" :class="{'gain__strikethrough': newEarningPossibility !== null}">
+              <span class="bet__select" :class="{ 'gain__strikethrough': newEarningPossibility !== null && !simulateFailed }">
                 {{ betItem.categoria_nome }} : {{ betItem.odd_nome}}
               </span>
-              <span class="bet__odd" :class="{'gain__strikethrough': newEarningPossibility !== null}">{{ betItem.cotacao }}</span>
+              <span class="bet__odd" :class="{ 'gain__strikethrough': newEarningPossibility !== null && !simulateFailed }">{{ betItem.cotacao }}</span>
             </div>
           </div>
-          <div class="bet__message" v-if="showConfirmCancelButtons">
+          <div class="bet__message" v-if="showConfirmCancelButtons && !simulateFailed">
             <p>
               <strong>Atenção:</strong> Confira como ficarão os novos valores. 
               Ao confirmar essa operação, não poderá ser desfeita.
             </p>
           </div>
+          <div v-if="simulateFailed">
+            <p class="gain--warning gain--warning-text">
+              A aposta não pode ser encerrada.
+            </p>
+          </div>
         </div>
-        <div class="buttons">
-          <template v-if="showConfirmCancelButtons">
+          <div class="buttons">
+            <template v-if="showConfirmCancelButtons">
             <w-button
               text="Cancelar"
               color="secondary-light"
@@ -142,6 +151,7 @@
               :disabled="buttonDisable"
             />
             <w-button
+              v-if="!simulateFailed"
               :text="textButtonConfirm"
               @click="confirmAction"
               :disabled="buttonDisable"
@@ -264,7 +274,8 @@ export default {
       configClientStore: useConfigClient(),
       textButtonConfirm: 'Confirmar',
       textButtonCloseBet: 'Encerrar Aposta',
-      showModalShared: false
+      showModalShared: false,
+      simulateFailed: false
     };
   },
   activated() {
@@ -320,6 +331,7 @@ export default {
           this.closeRequesterd = true;
           this.newQuotation = resp.results.nova_cotacao;
           this.newEarningPossibility = resp.results.nova_possibilidade_ganho;
+          this.simulateFailed = resp.results.falha_simulacao;
         })
         .catch(error => {
           this.newQuotation = null;
@@ -335,6 +347,7 @@ export default {
       this.newEarningPossibility = null;
       this.closeRequesterd = false;
       this.submitting = false;
+      this.simulateFailed = false;
     },
     async confirmAction() { 
       if(this.bet) {
@@ -555,6 +568,10 @@ export default {
     color: var(--warning);
   }
 
+  &--warning-text {
+    text-align: center;
+    margin-top: 10px;
+  }
 }
 
 .bet {
