@@ -751,6 +751,15 @@ gulp.task('betnordeste.net', function (done) {
     });
 });
 
+gulp.task('betnordeste.net.br', function (done) {
+    tasks(done, {
+        server: "front3.weebet.tech",
+        host: "betnordeste.net.br",
+        banca: "BET NORDESTE SPORTS",
+        styles: "",
+    });
+});
+
 gulp.task('iconebet.com', function (done) {
     tasks(done, {
         server: "front3.weebet.tech",
