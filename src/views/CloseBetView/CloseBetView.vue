@@ -109,11 +109,11 @@
               </span>
               <template>
                 <p :class="{ 
-                  'bet__status--success': betItem.resultado === 'ganhou', 
-                  'bet__status--warning': betItem.resultado === 'perdeu',
+                  'bet__status--success': betItem.resultado === 'ganhou' && betItem.removido == false, 
+                  'bet__status--warning': betItem.resultado === 'perdeu' && betItem.removido == false,
                   'gain__strikethrough': newEarningPossibility !== null
                 }"
-                >{{ capitalizeFirstLetter(betItem.resultado) }}</p>
+                >{{ capitalizeFirstLetter( betItem.removido ? 'Cancelado' : betItem.resultado) }}</p>
               </template>
             </div>
             <div v-if="bet.tipo !== 'loteria'" class="bet__info">
