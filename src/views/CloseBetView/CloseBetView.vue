@@ -23,7 +23,7 @@
             </div>
             <div class="gain__item">
               <span>Cotação:</span>
-              <span v-if="newQuotation == null" class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 2) }}</span>
+              <span v-if="!Boolean(newQuotation)" class="gain__value">{{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 2) }}</span>
               <span v-else class="gain__value">
                 <span :class="{ 'gain__strikethrough': !simulateFailed }" v-if="bet.possibilidade_ganho"> {{ formatNumber((bet.possibilidade_ganho / bet.valor), 1, 2) }}</span>
                 <span class="gain--warning" v-if="newQuotation && !simulateFailed"> {{ formatNumber(newQuotation, 1, 2) }}</span>
