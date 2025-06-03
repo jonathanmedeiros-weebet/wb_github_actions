@@ -337,14 +337,6 @@ export class SubmenuComponent implements OnInit, AfterViewInit, OnDestroy {
                 active: this.paramsService.getOpcoes().casino
             },
             {
-                id: 'destaques',
-                name: this.translate.instant('submenu.maisPopulares'),
-                link: '/casino/c/wall/destaques',
-                icon_class: 'fa-solid fa-dice',
-                category: 'cassino',
-                active: this.paramsService.getOpcoes().casino
-            },
-            {
                 id: "crash",
                 name: this.translate.instant('submenu.crash'),
                 link: '/casino/c/wall/crash',
