@@ -276,22 +276,24 @@
             <span class="dados-simulacao">{{ 'compartilhar_aposta.apostaNaoPodeSerEncerrada' | translate }}</span>
         </p>
     </div>
-    <div class="button-container" *ngIf="!falhaSimulacao">
+    <div class="button-container">
         <ng-container>
             <div id="buttons-container">
-                <button id="encerrar-aposta" *ngIf="podeEncerrar(aposta)" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
+                <button id="encerrar-aposta" *ngIf="podeEncerrar(aposta) && !falhaSimulacao" class="btn btn-custom btn-block" (click)="encerrarAposta(aposta)"
                     [disabled]="simulando">
                     {{ simulando ? ('compartilhar_aposta.calculando' | translate) : ('compartilhar_aposta.encerrarAposta' |
                     translate) + (valorEncerramento | currency) }}
                 </button>
-                <button style="margin-right: 10px;" class="btn sec btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
-                    (click)="descartar()">
-                    {{ 'geral.cancelar' | translate }}
-                </button>
-                <button class="btn btn-custom" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
-                    (click)="confirmarEncerramento()">
-                    {{ 'geral.confirmar' | translate }}
-                </button>
+                <div class="grp-buttons-encerramentos">
+                    <button style="margin-right: 10px;" class="btn sec btn-outline-custom" *ngIf="itemSelecionado && !simulando && !falhaSimulacao"
+                        (click)="descartar()">
+                        {{ 'geral.cancelar' | translate }}
+                    </button>
+                    <button class="btn btn-custom" *ngIf="itemSelecionado && !falhaSimulacao && !process && !simulando"
+                        (click)="confirmarEncerramento()">
+                        {{ 'geral.confirmar' | translate }}
+                    </button>
+                </div>
                 <button disabled class="btn btn-custom sec btn-block" *ngIf="!falhaSimulacao && encerrando;">
                     {{ 'compartilhar_aposta.encerrando' | translate }}
                     <i class="fa fa-spinner fa-spin"></i>

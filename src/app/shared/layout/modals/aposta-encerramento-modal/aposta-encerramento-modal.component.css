@@ -26,6 +26,11 @@
     color: var(--foreground-header) !important;
 }
 
+.grp-buttons-encerramentos {
+    display: flex;
+    padding-bottom: 25px;
+}
+
 .secondary-btn {
     display: flex;
     justify-content: center;
