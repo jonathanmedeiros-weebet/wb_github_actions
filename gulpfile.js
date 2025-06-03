@@ -1857,3 +1857,12 @@ gulp.task('brasavip.bet', function (done) {
         styles: "",
     });
 });
+
+gulp.task('fadadopirao.bet', function (done) {
+    tasks(done, {
+        server: "front1.weebet.tech",
+        host: "fadadopirao.bet",
+        banca: "FADA DO PIRÃO",
+        styles: "",
+    });
+});
