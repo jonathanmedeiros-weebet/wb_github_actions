@@ -18,59 +18,49 @@ export class AccountVerificationGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<boolean> {
     void next;
+    const nextUrl = state.url;
+    const previousUrl = window.location.pathname;
 
-    if(this.authService.isLoggedIn() && this.authService.isCliente()) {
+    if (this.authService.isLoggedIn() && this.authService.isCliente()) {
+      const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
 
-      const nextUrl = state.url;
-      const previousUrl = window.location.pathname;
-
-      const termsAccepted: boolean = this.accountVerificationService.terms_accepted.getValue();
-      if (!termsAccepted) {
-        const hasModalOpen = document.getElementById('terms-accepted');
-        if (hasModalOpen) {
-          return true;
-        }
-
-        const termExceptions = [
-          '/clientes/saque'
-        ];
-        
-        if(!termExceptions.includes(nextUrl)) {
-          const termsResult = await this.openModalTerms();
-          if (!termsResult) {
-            if (previousUrl === nextUrl) {
-              return this.router.navigate(['/']);
-            } else {
-              return false;
-            }
-          }
-        }
-
-        const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
-        if (accountVerified) {
-          return true;
-        } else {
-          const isClosed = await this.openModalAccountVerifications();
-          if(isClosed && previousUrl == nextUrl) {
-            return this.router.navigate(['/']);
-          }
-        }
-      } else {
-        const accountVerified: boolean = this.accountVerificationService.accountVerified.getValue();
-        if (accountVerified) {
-          return true;
-        } else {
-          const isClosed = await this.openModalAccountVerifications();
-          if(isClosed && previousUrl == nextUrl) {
-            return this.router.navigate(['/']);
-          }
-        }
+      if (hasModalTermsAcceptedOpen) {
+        return true;
       }
 
-      return false;
+      if (previousUrl == nextUrl) {
+        this.router.navigate(['/']);
+        this.defineGuardScope(nextUrl);
+        return true;
+      } else {
+        const isContinue = await this.defineGuardScope(nextUrl);
+        return isContinue;
+      }
     } else {
       return true;
     }
+  }
+
+  private async defineGuardScope(nextUrl: string) {
+    const { termsAccepted } = await this.accountVerificationService.getForceAccountVerificationDetail();
+
+    if (!termsAccepted) {
+      const hasModalTermsAcceptedOpen = document.getElementById('terms-accepted');
+      if (hasModalTermsAcceptedOpen) return false;
+
+      const termExceptions = [
+        '/clientes/saque'
+      ];
+      
+      if (!termExceptions.includes(nextUrl)) {
+        const termsResult = await this.openModalTerms();
+        if (!termsResult) {
+          return false;
+        }
+      }
+    }
+    
+    return true;
   }
 
   private async openModalTerms() {
