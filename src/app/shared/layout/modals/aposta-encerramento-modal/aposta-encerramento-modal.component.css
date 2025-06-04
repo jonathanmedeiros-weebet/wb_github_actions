@@ -29,6 +29,7 @@
 .grp-buttons-encerramentos {
     display: flex;
     padding-bottom: 25px;
+    width: 100%;
 }
 
 .secondary-btn {
