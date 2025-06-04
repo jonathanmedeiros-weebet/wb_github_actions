@@ -1,0 +1,7 @@
+<div class="account-verification-step-bar">
+    <div
+        class="account-verification-step-bar__item"
+        *ngFor="let step of stepBarStatus"
+        [ngClass]="{ 'account-verification-step-bar__item--verified': step?.verified }"
+    ></div>
+</div>

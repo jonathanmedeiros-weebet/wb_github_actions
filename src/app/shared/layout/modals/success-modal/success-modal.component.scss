@@ -1,0 +1,95 @@
+.success-modal {
+    background-color: var(--header);
+    color: var(--foreground-header);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 32px 24px;
+    position: fixed;
+    overflow-x: hidden;
+    border-radius: 4px;
+    bottom: 0;
+
+    &__header {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__body {
+        margin-bottom: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__title {
+        text-align: center;
+        color: var(--foreground-header);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+    }
+
+    &__description {
+        text-align: center;
+        color: rgba(var(--foreground-header-rgb), .7);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &__icon{
+        display: flex;
+        width: 80px;
+        height: 80px;
+        padding: 2px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 70px;
+        background: rgba(var(--highlight-rgb), .1);
+    }
+    &__icon::after {
+        content: '';
+        position: absolute;
+        display: flex;
+        width: 100px;
+        height: 100px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 70px;
+        background: transparent;
+        border: 10px solid rgba(var(--highlight-rgb), 0.05);
+    }
+
+    &__icon svg path {
+        fill: var(--highlight);
+    }
+
+    &__button {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        width: 100%;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        border-radius: 4px;
+        background: var(--highlight);
+        color: var(--foreground-highlight);
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .success-modal {
+        height: auto;
+        position: relative;
+    }
+}
